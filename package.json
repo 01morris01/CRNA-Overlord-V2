@@ -1,0 +1,30 @@
+{
+  "name": "crna-overlord-v2",
+  "version": "2.0.0",
+  "description": "HEMODYNAMIC OVERLORD v4 - Interactive CRNA Training Game",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "echo 'No linter configured'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/01morris01/CRNA-Overlord-V2"
+  },
+  "keywords": [
+    "crna",
+    "medical",
+    "training",
+    "education"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  },
+  "devDependencies": {
+    "vite": "^8.0.3"
+  }
+}
