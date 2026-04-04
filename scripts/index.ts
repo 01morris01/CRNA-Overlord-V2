@@ -14,13 +14,13 @@ async function main() {
     process.stdout.write(textPart)
   }
 
-  // Get final result with usage stats
-  const finalResult = await result
+  // Get usage stats (must await after stream completes)
+  const usage = await result.usage
 
   console.log('\n\n--- Token Usage ---')
-  console.log('Prompt tokens:', finalResult.usage?.promptTokens)
-  console.log('Completion tokens:', finalResult.usage?.completionTokens)
-  console.log('Total tokens:', finalResult.usage?.totalTokens)
+  console.log('Prompt tokens:', usage.promptTokens)
+  console.log('Completion tokens:', usage.completionTokens)
+  console.log('Total tokens:', (usage.promptTokens ?? 0) + (usage.completionTokens ?? 0))
 }
 
 main().catch(console.error)
