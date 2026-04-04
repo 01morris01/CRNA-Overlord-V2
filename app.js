@@ -1,10 +1,14 @@
 import { loadState, saveState } from './core/state.js';
 import { showMap , createSimpleCourseMap } from './ui/menus.js';
 import { updateHUD, renderCurrentQuestion } from './ui/gameUI.js';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 export function initApp() {
   const state = loadState();
   window.crnaState = state;
+
+  // Initialize Vercel Speed Insights
+  injectSpeedInsights();
 
   function initUI() {
     if (state.name) {
