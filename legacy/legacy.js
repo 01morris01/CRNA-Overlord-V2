@@ -2321,9 +2321,26 @@ function startStudySession(){
   const course=getCourseById(selectedCourseId);
   const topic=course.topics.find(t=>t.id===selectedTopicId);
   if(!topic)return;
-  
+
+  // Route Basics of Anesthesia - Opioids (ba-t09) to the new engine + opioid question bank
+  if(selectedCourseId==='basics-anesthesia' && selectedTopicId==='ba-t09'){
+    const opioidQs = window.opioidsQuestions;
+    if(opioidQs && opioidQs.length > 0 && typeof window.startGameWithQuestions === 'function'){
+      console.log('COURSE:', selectedCourseId, '→ routing to basics-of-anesthesia / node-9');
+      console.log('NODE: node-9 (Opioids Chapter 9)');
+      console.log('QUESTION COUNT:', opioidQs.length);
+      console.log('FIRST QUESTION:', opioidQs[0]);
+      const shuffled = opioidQs.slice().sort(()=>Math.random()-0.5);
+      window.currentSession = { courseId:'basics-of-anesthesia', nodeId:'node-9', questions:shuffled };
+      const sel=document.getElementById('course-selector');
+      if(sel)sel.style.display='none';
+      window.startGameWithQuestions(shuffled);
+      return;
+    }
+  }
+
   let qs=[];
-  
+
   if(topic.type==='mastery'){
     // Mastery mode: placeholder for now
     showOV('🧠 Mastery mode coming soon! Keep mastering the topics to unlock.');
@@ -2338,11 +2355,11 @@ function startStudySession(){
     // Regular topic: questions matching this topicId
     qs=getQuestionPool({topicId:selectedTopicId});
   }
-  
+
   if(qs.length===0){
     qs=shuffle(ALL_QS.slice()).slice(0,10);
   }
-  
+
   const label=`${course.title} • ${topic.title}`;
   const sel=document.getElementById('course-selector');
   if(sel)sel.style.display='none';
@@ -2382,6 +2399,8 @@ function startSpecial(mode){
 }
 
 function launchGame(qs,label,lives){
+  // Ensure legacy engine flag is set
+  if(typeof window !== 'undefined') window.usingNewEngine = false;
   document.getElementById('level-map').classList.remove('on');
   document.getElementById('game').style.display='flex';
   G={q:0,score:0,lives:lives,maxLives:lives,streak:0,tmr:100,tid:null,done:false,qs:qs,shieldActive:false,label:label};
@@ -2535,3 +2554,10 @@ function restart(){
   document.getElementById('go').classList.remove('on');document.getElementById('go-t').style.color='';document.getElementById('go-t').style.textShadow='';
   showCourseSelector();
 }
+
+// Allow new engine to cancel legacy #scn canvas animation
+window.stopLegacyScene = function() {
+  if (sceneAnimId) { cancelAnimationFrame(sceneAnimId); sceneAnimId = null; }
+  curScene = null;
+  curSceneCfg = {};
+};
