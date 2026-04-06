@@ -2,6 +2,15 @@ import { getCurrentRun } from '../core/gameEngine.js';
 import { gradeShortAnswer, gradeMultiSelect } from '../core/answerGrading.js';
 import { renderOpioidScene, stopOpioidScene } from './opioidsScene.js';
 
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 // ─── multi-select state ───────────────────────────────────────────────────────
 
 let multiSelectState = { selected: new Set(), requiredCount: 0 };
@@ -197,11 +206,19 @@ function renderMCQUI(q) {
   if (!ansGrid) return;
 
   ansGrid.style.display = 'grid';
-  const n = (q.ans || []).length || 3;
+  
+  // Cache shuffled answers to prevent reshuffling on re-render
+  if (!q._shuffledAns) {
+    q._shuffledAns = shuffleArray([...q.ans]);
+    console.log("MCQ shuffled:", q.id, q._shuffledAns);
+  }
+  const shuffled = q._shuffledAns;
+  
+  const n = shuffled.length || 3;
   ansGrid.style.gridTemplateColumns = n === 4 ? 'repeat(2,1fr)' : `repeat(${Math.min(n, 3)},1fr)`;
   ansGrid.innerHTML = '';
 
-  (q.ans || []).forEach((choice, idx) => {
+  shuffled.forEach((choice, idx) => {
     const btn = document.createElement('button');
     btn.id = `b${idx}`;
     btn.className = 'abtn';
@@ -210,7 +227,7 @@ function renderMCQUI(q) {
       // Disable all buttons immediately
       ansGrid.querySelectorAll('.abtn').forEach((b, i) => {
         b.disabled = true;
-        if (q.ans[i]?.ok) b.classList.add('correct');
+        if (q._shuffledAns[i]?.ok) b.classList.add('correct');
       });
       if (!choice.ok) btn.classList.add('wrong');
       showAnswerFeedback(Boolean(choice.ok), q.rationale || q.ex, choice.t);
@@ -266,7 +283,14 @@ function renderMultiSelectUI(q) {
   grid.style.gridTemplateColumns = 'repeat(2,1fr)';
   multiArea.appendChild(grid);
 
-  q.choices.forEach(choice => {
+  // Cache shuffled choices to prevent reshuffling on re-render
+  if (!q._shuffledChoices) {
+    q._shuffledChoices = shuffleArray([...q.choices]);
+    console.log("MULTI shuffled:", q.id, q._shuffledChoices);
+  }
+  const shuffled = q._shuffledChoices;
+
+  shuffled.forEach(choice => {
     const btn = document.createElement('button');
     btn.className = 'multi-btn';
     btn.textContent = choice;
