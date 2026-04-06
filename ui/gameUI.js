@@ -5,6 +5,25 @@ import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
 
+/**
+ * Returns a safe display string for the correct answer of any question type,
+ * or null if no valid answer string can be found.
+ * Priority: canonicalAnswer → correctAnswers[0] → acceptedAnswers[0] → accepted[0]
+ * Never returns undefined or an empty string.
+ */
+function _getCorrectAnswerDisplay(q) {
+  const candidates = [
+    q.canonicalAnswer,
+    q.correctAnswers?.[0],
+    q.acceptedAnswers?.[0],
+    q.accepted?.[0],
+  ];
+  for (const c of candidates) {
+    if (typeof c === 'string' && c.trim()) return c;
+  }
+  return null;
+}
+
 function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -54,7 +73,8 @@ function startQuestionTimer(q) {
       _timerInterval = null;
       console.log('Timer expired for question:', q.id);
       _disableAllInputs();
-      const msg = q.correctAnswers ? `Correct: ${q.correctAnswers[0]}` : '';
+      const _ans = _getCorrectAnswerDisplay(q);
+      const msg = _ans ? `Correct: ${_ans}` : '';
       showAnswerFeedback(false, (q.rationale || q.ex || '') + (msg ? '\n\n' + msg : ''));
       if (window.submitAnswer) window.submitAnswer(false);
     }
@@ -91,7 +111,8 @@ export function resumeQuestionTimer() {
       clearInterval(_timerInterval);
       _timerInterval = null;
       _disableAllInputs();
-      const msg = q.correctAnswers ? `Correct: ${q.correctAnswers[0]}` : '';
+      const _ans = _getCorrectAnswerDisplay(q);
+      const msg = _ans ? `Correct: ${_ans}` : '';
       showAnswerFeedback(false, (q.rationale || q.ex || '') + (msg ? '\n\n' + msg : ''));
       if (window.submitAnswer) window.submitAnswer(false);
     }
@@ -439,9 +460,9 @@ function _submitShortAnswer(q) {
   if (sub) sub.style.display = 'none';
 
   let feedback = q.rationale || q.ex || '';
-  if (!result.correct && (q.correctAnswers || q.acceptedAnswers)) {
-    const best = (q.correctAnswers || q.acceptedAnswers)[0];
-    feedback = `Correct answer: ${best}\n\n${feedback}`;
+  if (!result.correct) {
+    const best = _getCorrectAnswerDisplay(q);
+    if (best) feedback = `Correct answer: ${best}\n\n${feedback}`;
   }
 
   showAnswerFeedback(result.correct, feedback, userAnswer);

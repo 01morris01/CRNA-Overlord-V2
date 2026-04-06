@@ -108,6 +108,7 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     // For short answer
     accepted: q.acceptedAnswers || q.correctAnswers || [],
     acceptedAnswers: q.acceptedAnswers || [],
+    canonicalAnswer: q.canonicalAnswer || null, // optional human-readable display answer
     answerMatching: q.answerMatching || {
       ignoreCase: true,
       ignoreExtraSpaces: true,
