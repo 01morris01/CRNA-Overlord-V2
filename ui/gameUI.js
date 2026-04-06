@@ -22,12 +22,13 @@ let multiSelectState = { selected: new Set(), requiredCount: 0 };
 
 let _timerInterval = null;
 const QUESTION_TIME_SEC = 35;
+let _remaining = 0;
 
 function startQuestionTimer(q) {
   clearInterval(_timerInterval);
   _timerInterval = null;
 
-  let remaining = QUESTION_TIME_SEC;
+  _remaining = QUESTION_TIME_SEC;
   const fill = document.getElementById('tmr-fill');
   if (fill) {
     fill.style.transition = 'none';
@@ -35,20 +36,18 @@ function startQuestionTimer(q) {
     fill.style.background = 'linear-gradient(90deg,#ff2200,#ff8800)';
   }
 
-  console.log('Timer start:', remaining, 'for', q.id);
+  console.log('Timer start:', _remaining, 'for', q.id);
 
   _timerInterval = setInterval(() => {
-    remaining--;
-    const pct = Math.max(0, (remaining / QUESTION_TIME_SEC) * 100);
+    _remaining--;
+    const pct = Math.max(0, (_remaining / QUESTION_TIME_SEC) * 100);
 
     if (fill) {
       fill.style.width = pct + '%';
       if (pct < 25) fill.style.background = '#ff2200';
     }
 
-    console.log('Timer tick:', remaining);
-
-    if (remaining <= 0) {
+    if (_remaining <= 0) {
       clearInterval(_timerInterval);
       _timerInterval = null;
       console.log('Timer expired for question:', q.id);
@@ -63,6 +62,11 @@ function startQuestionTimer(q) {
 export function stopTimer() {
   clearInterval(_timerInterval);
   _timerInterval = null;
+}
+
+/** Add seconds to the currently running question timer (for +Time powerup). */
+export function addQuestionTime(seconds) {
+  _remaining = Math.min(_remaining + seconds, QUESTION_TIME_SEC);
 }
 
 function _disableAllInputs() {

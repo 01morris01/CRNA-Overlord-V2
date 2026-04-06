@@ -13,6 +13,8 @@ const DEFAULT_STATE = {
   performanceByTopic: {},
   missedQuestionIds: [],
   lastSeen: {course:null,section:null,lesson:null},
+  // Per-node completion: { [nodeId]: { seen, correct, totalInBank } }
+  nodeCompletion: {},
 };
 
 function safeParse(json) {
@@ -30,6 +32,7 @@ export function loadState() {
   merged.performanceByTopic = {...DEFAULT_STATE.performanceByTopic, ...(raw.performanceByTopic||{})};
   merged.missedQuestionIds = Array.isArray(raw.missedQuestionIds)? [...new Set(raw.missedQuestionIds)] : [];
   merged.lastSeen = {...DEFAULT_STATE.lastSeen, ...(raw.lastSeen||{})};
+  merged.nodeCompletion = {...DEFAULT_STATE.nodeCompletion, ...(raw.nodeCompletion||{})};
 
   return merged;
 }

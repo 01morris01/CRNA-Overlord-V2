@@ -68,51 +68,58 @@ export function createSimpleCourseMap() {
   }
 }
 
+// Number of questions per study session (subset of full bank)
+const SESSION_SIZE = 15;
+
 /**
- * Start a study session for a specific course/node
+ * Start a study session for a specific course/node.
+ * Always pulls questions from NODE_CONFIG — never falls back to legacy banks.
  */
 export function startStudySessionForNode(courseId, nodeId) {
+  console.log('Loading node:', nodeId);
+
   const questions = getQuestionsForNode(courseId, nodeId);
-  
+
   if (!questions || questions.length === 0) {
     console.error(`No questions found for ${courseId}/${nodeId}`);
     return;
   }
-  
-  // Shuffle questions for variety
+
+  console.log('Question count (full bank):', questions.length);
+
+  // Shuffle and take a session-sized subset
   const shuffled = [...questions].sort(() => Math.random() - 0.5);
-  
-  // Store session info
+  const sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
+
+  console.log('Session size:', sessionQuestions.length);
+
+  // Store session info — totalInBank used for node completion %
   window.currentSession = {
     courseId,
     nodeId,
-    questions: shuffled
+    questions: sessionQuestions,
+    totalInBank: questions.length,
   };
-  
-  // Start the game with these questions
+
+  // Start the game — startGameWithQuestions handles all display switching
   if (window.startGameWithQuestions) {
-    window.startGameWithQuestions(shuffled);
-  } else if (window.engineStartRun) {
-    window.engineStartRun({ questions: shuffled, lives: 3, mode: 'lesson' });
+    window.startGameWithQuestions(sessionQuestions);
+    return;
   }
-  
-  // Hide map and show game
+
+  // Fallback if shim not loaded yet
+  if (window.engineStartRun) {
+    window.engineStartRun({ questions: sessionQuestions, lives: 3, mode: 'lesson' });
+  }
   hideMap();
   const splash = document.getElementById('splash');
   const game = document.getElementById('game');
   const levelMap = document.getElementById('level-map');
-  
   if (splash) splash.style.display = 'none';
   if (game) game.style.display = 'flex';
   if (levelMap) levelMap.classList.remove('on');
-  
-  // Render first question
-  if (window.renderCurrentQuestion) {
-    window.renderCurrentQuestion();
-  }
-  if (window.updateHUD) {
-    window.updateHUD();
-  }
+  if (window.renderCurrentQuestion) window.renderCurrentQuestion();
+  if (window.updateHUD) window.updateHUD();
 }
 
 export function setLastSeen(course, section, lesson) {

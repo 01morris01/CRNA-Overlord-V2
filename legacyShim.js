@@ -1,13 +1,15 @@
 import { startRun as engineStartRun, submitAnswer as engineSubmitAnswer, getCurrentRun } from './core/gameEngine.js';
 import { showMap, createSimpleCourseMap, startStudySessionForNode } from './ui/menus.js';
-import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback } from './ui/gameUI.js';
+import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback, addQuestionTime } from './ui/gameUI.js';
 import { gradeAnswer } from './core/answerGrading.js';
 import { getQuestionsForNode } from './core/questionEngine.js';
 import { getNodeConfig } from './core/nodeConfig.js';
+import { loadState, saveState } from './core/state.js';
 
 // Track which engine is currently active
 window.usingNewEngine = false;
 
+// Capture legacy functions before any overrides
 const mapRuntime = {
   startGame: window.startGame,
   submitType: window.submitType,
@@ -36,7 +38,8 @@ window.renderCurrentQuestion = renderCurrentQuestion;
 window.updateHUD = updateHUD;
 
 /**
- * Start a game with specific questions (new engine path)
+ * Start a game with specific questions (new engine path).
+ * Called by startStudySessionForNode for all nodes.
  */
 window.startGameWithQuestions = function(questions) {
   if (!questions || questions.length === 0) {
@@ -46,42 +49,38 @@ window.startGameWithQuestions = function(questions) {
 
   window.usingNewEngine = true;
 
-  // Stop any legacy scene animation on the #scn canvas
+  // Stop any running scene / timer from a previous session
   if (typeof window.stopLegacyScene === 'function') window.stopLegacyScene();
-  // Stop any running scene from a previous session
-  if (typeof window.stopOpioidScene === 'function') window.stopOpioidScene();
-  if (typeof window.stopNMBScene    === 'function') window.stopNMBScene();
-  // Stop any running timer
+  if (typeof window.stopOpioidScene  === 'function') window.stopOpioidScene();
+  if (typeof window.stopNMBScene     === 'function') window.stopNMBScene();
+  if (typeof window.stopAnesthesiaMachineScene === 'function') window.stopAnesthesiaMachineScene();
   stopTimer();
 
-  // DEBUG
-  if (window.currentSession) {
-    console.log('COURSE:', window.currentSession.courseId);
-    console.log('NODE:', window.currentSession.nodeId);
-  }
+  console.log('COURSE:', window.currentSession?.courseId);
+  console.log('NODE:',   window.currentSession?.nodeId);
   console.log('QUESTION COUNT:', questions.length);
   console.log('FIRST QUESTION:', questions[0]);
 
-  const run = engineStartRun({ mode: 'lesson', questions: questions, lives: 3 });
+  const run = engineStartRun({ mode: 'lesson', questions, lives: 3 });
 
   // Hide all entry screens, show game
-  const splash        = document.getElementById('splash');
-  const courseSelector= document.getElementById('course-selector');
-  const levelMap      = document.getElementById('level-map');
-  const game          = document.getElementById('game');
+  const splash         = document.getElementById('splash');
+  const courseSelector = document.getElementById('course-selector');
+  const levelMap       = document.getElementById('level-map');
+  const game           = document.getElementById('game');
 
-  if (splash)         splash.style.display         = 'none';
-  if (courseSelector) courseSelector.style.display  = 'none';
+  if (splash)         splash.style.display        = 'none';
+  if (courseSelector) courseSelector.style.display = 'none';
   if (levelMap)       levelMap.classList.remove('on');
-  if (game)           game.style.display            = 'flex';
+  if (game)           game.style.display           = 'flex';
 
   // Init HUD counters
-  const qn      = document.getElementById('qn');
-  const qt      = document.getElementById('qt');
-  const lvlBadge= document.getElementById('lvl-b');
-  const progFill= document.getElementById('prog-fill');
-  if (qn)       qn.textContent       = '1';
-  if (qt)       qt.textContent       = questions.length;
+  const qn       = document.getElementById('qn');
+  const qt       = document.getElementById('qt');
+  const lvlBadge = document.getElementById('lvl-b');
+  const progFill = document.getElementById('prog-fill');
+  if (qn)       qn.textContent  = '1';
+  if (qt)       qt.textContent  = questions.length;
   if (lvlBadge) {
     const nodeId = window.currentSession?.nodeId;
     const cfg    = nodeId ? getNodeConfig(nodeId) : null;
@@ -92,16 +91,33 @@ window.startGameWithQuestions = function(questions) {
   renderCurrentQuestion();
   updateHUD();
 
+  // Sync powerup button counts from state
+  _syncPwrBtns();
+
   return run;
 };
 
 /**
- * Unified nextQ — dispatches to new engine or legacy engine depending on which is active
+ * Sync powerup button UI from state.js (used by new engine path).
+ * The legacy updatePwrBtns() reads its own `inv` closure — this reads state.js instead.
+ */
+function _syncPwrBtns() {
+  const state = loadState();
+  const inv = state.inv || { shield: 0, skip: 0, reveal: 0, time: 0 };
+  ['shield', 'skip', 'reveal', 'time'].forEach(p => {
+    const btn = document.getElementById('pw-' + p);
+    const cnt = document.getElementById('pc-' + p);
+    if (cnt) cnt.textContent = inv[p] || 0;
+    if (btn) btn.classList.toggle('has', (inv[p] || 0) > 0);
+  });
+}
+
+/**
+ * Unified nextQ — dispatches to new engine or legacy engine.
  */
 const _legacyNextQ = window.nextQ;
 window.nextQ = function() {
   if (window.usingNewEngine) {
-    // New engine path
     hideFeedback();
 
     const run = getCurrentRun();
@@ -115,32 +131,34 @@ window.nextQ = function() {
     renderCurrentQuestion();
     updateHUD();
 
-    // DEBUG: log current question type
     const q = run.questions[run.index];
-    if (q) {
-      console.log('QUESTION TYPE:', q.type);
-    }
+    if (q) console.log('QUESTION TYPE:', q.type, '| id:', q.id);
   } else {
-    // Legacy engine path
     if (typeof _legacyNextQ === 'function') _legacyNextQ();
   }
 };
 
 /**
- * Submit answer (called from gameUI.js after grading)
+ * Submit answer — handles shield flag before delegating to engine.
  */
 window.submitAnswer = function(isCorrect) {
+  const run = getCurrentRun();
+
+  // Shield: absorb wrong answer so no life is lost
+  if (!isCorrect && run && run._shieldActive) {
+    run._shieldActive = false;
+    isCorrect = true; // engine counts as correct (no life lost); UI already showed INCORRECT
+    console.log('[SHIELD] activated — wrong answer absorbed');
+  }
+
   const result = engineSubmitAnswer(isCorrect);
   updateHUD();
 
-  // Update progress bar
-  const run = getCurrentRun();
   if (run) {
-    const progress = ((run.index) / run.questions.length) * 100;
+    const progress = (run.index / run.questions.length) * 100;
     const progFill = document.getElementById('prog-fill');
     if (progFill) progFill.style.width = `${progress}%`;
 
-    // Update question counter
     const qn = document.getElementById('qn');
     const qt = document.getElementById('qt');
     if (qn) qn.textContent = run.index + 1;
@@ -165,54 +183,147 @@ maybeAssign('submitType', function() {
 });
 
 /**
- * Show game over screen for new engine run
+ * Show game over + update node completion in state.
  */
 function _showNewEngineGameOver(run) {
-  const go = document.getElementById('go');
-  const goT = document.getElementById('go-t');
-  const goS = document.getElementById('go-s');
+  const go    = document.getElementById('go');
+  const goT   = document.getElementById('go-t');
+  const goS   = document.getElementById('go-s');
   const goPts = document.getElementById('go-pts');
 
-  if (go) {
-    go.classList.add('on');
+  if (!go) return;
+  go.classList.add('on');
 
-    const correctCount = run.results.filter(r => r.correct).length;
-    const totalCount = run.results.length;
-    const percentage = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+  const correctCount = run.results.filter(r => r.correct).length;
+  const totalCount   = run.results.length;
+  const pct          = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
 
-    if (run.lives > 0) {
-      if (goT) goT.textContent = 'PATIENT STABLE';
-      if (goS) goS.textContent = `- ${correctCount}/${totalCount} correct (${percentage}%) -`;
-    } else {
-      if (goT) goT.textContent = 'PATIENT DECEASED';
-      if (goS) goS.textContent = `- ${correctCount}/${totalCount} correct -`;
-    }
+  // Update node completion in state
+  const nodeId      = window.currentSession?.nodeId;
+  const totalInBank = window.currentSession?.totalInBank || totalCount;
+  let nodeCompLine  = '';
 
-    if (goPts) goPts.textContent = run.score.toLocaleString();
+  if (nodeId) {
+    const state = loadState();
+    const nc    = state.nodeCompletion || {};
+    if (!nc[nodeId]) nc[nodeId] = { seen: 0, correct: 0, totalInBank };
+    nc[nodeId].seen      += totalCount;
+    nc[nodeId].correct   += correctCount;
+    nc[nodeId].totalInBank = totalInBank; // update if bank grew
+    state.nodeCompletion  = nc;
+    saveState(state);
+
+    const exposurePct = Math.min(100, Math.round((nc[nodeId].seen / totalInBank) * 100));
+    nodeCompLine = `Node exposure: ${exposurePct}% (${nc[nodeId].seen}/${totalInBank} seen)`;
   }
+
+  if (run.lives > 0) {
+    if (goT) goT.textContent = 'SESSION COMPLETE';
+    if (goS) goS.textContent = `${correctCount}/${totalCount} correct (${pct}%)${nodeCompLine ? ' — ' + nodeCompLine : ''}`;
+  } else {
+    if (goT) goT.textContent = 'PATIENT DECEASED';
+    if (goS) goS.textContent = `${correctCount}/${totalCount} correct${nodeCompLine ? ' — ' + nodeCompLine : ''}`;
+  }
+
+  if (goPts) goPts.textContent = run.score.toLocaleString();
 }
 
-maybeAssign('startGame', function() {
-  // Default to node-9 (opioids) questions
-  const questions = getQuestionsForNode('basics-of-anesthesia', 'node-9');
+// ─── startGame: route splash → level-map (fixes node 10/11 routing) ────────
+//
+// The legacy startGame calls showCourseSelector() which only routes node-9.
+// We call the original startGame first (it loads inv/equip/bankedPts from
+// localStorage into legacy closure vars), then immediately redirect to
+// level-map which correctly routes ALL nodes via startStudySessionForNode.
+//
+window.startGame = function() {
+  // Call legacy startGame to handle name validation and state loading
+  if (typeof mapRuntime.startGame === 'function') {
+    mapRuntime.startGame();
+  }
+  // Redirect: hide course-selector, show level-map instead
+  const courseSelector = document.getElementById('course-selector');
+  const levelMap       = document.getElementById('level-map');
+  if (courseSelector) courseSelector.style.display = 'none';
+  if (levelMap) {
+    levelMap.style.display = ''; // clear any inline 'none' set by legacy
+    levelMap.classList.add('on');
+  }
+};
 
-  if (questions && questions.length > 0) {
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
-    window.currentSession = { courseId: 'basics-of-anesthesia', nodeId: 'node-9', questions: shuffled };
-    return window.startGameWithQuestions(shuffled);
+// ─── usePwr: works for both legacy and new engine ───────────────────────────
+//
+// Legacy usePwr checks G.done but G is null when new engine is active → crash.
+// New engine path reads/writes state.js inv directly.
+//
+const _legacyUsePwr = mapRuntime.usePwr;
+
+window.usePwr = function(type) {
+  if (!window.usingNewEngine) {
+    // Legacy engine path — original function handles everything
+    if (typeof _legacyUsePwr === 'function') _legacyUsePwr(type);
+    return;
   }
 
-  // Fallback to legacy
-  if (typeof engineStartRun === 'function') {
-    const run = engineStartRun({mode:'lesson', questions: undefined, lives:3});
-    document.getElementById('splash').style.display='none';
-    document.getElementById('game').style.display='flex';
-    renderCurrentQuestion();
-    updateHUD();
-    return run;
+  // ── New engine path ──────────────────────────────────────────────────────
+  const run = getCurrentRun();
+  if (!run || run.done) return;
+
+  const state = loadState();
+  const inv   = state.inv || { shield: 0, skip: 0, reveal: 0, time: 0 };
+
+  if ((inv[type] || 0) <= 0) return; // nothing to use
+
+  inv[type]--;
+  state.inv = inv;
+  saveState(state);
+  _syncPwrBtns();
+
+  const q = run.questions[run.index];
+
+  if (type === 'skip') {
+    // Skip advances without penalty — count as correct so no life lost
+    console.log('[POWERUP] Skip used');
+    run.index++;
+    run.results.push({ questionId: q?.id, correct: true, skipped: true, timestamp: Date.now() });
+    if (run.index >= run.questions.length) run.done = true;
+    hideFeedback();
+    if (run.done) {
+      _showNewEngineGameOver(run);
+    } else {
+      renderCurrentQuestion();
+      updateHUD();
+    }
+
+  } else if (type === 'reveal') {
+    // Eliminate one wrong MCQ answer
+    console.log('[POWERUP] Reveal used');
+    if (q && q.type === 'mcq') {
+      const ansGrid = document.getElementById('ans-grid');
+      if (ansGrid) {
+        const btns = Array.from(ansGrid.querySelectorAll('.abtn'));
+        const wrongBtns = btns.filter((b, i) => {
+          return q._shuffledAns && !q._shuffledAns[i]?.ok && !b.disabled && !b.classList.contains('elim');
+        });
+        if (wrongBtns.length > 0) {
+          wrongBtns[0].disabled = true;
+          wrongBtns[0].classList.add('elim');
+        }
+      }
+    }
+
+  } else if (type === 'shield') {
+    // Next wrong answer absorbs — flag checked in submitAnswer
+    console.log('[POWERUP] Shield armed');
+    run._shieldActive = true;
+
+  } else if (type === 'time') {
+    // Add 15 seconds to the running timer
+    console.log('[POWERUP] +Time used');
+    addQuestionTime(15);
   }
-  console.warn('startGame fallback: no engine');
-});
+};
+
+// ─── remaining game management functions ────────────────────────────────────
 
 maybeAssign('openStore', function() {
   const modal = document.getElementById('store-modal');
@@ -227,13 +338,11 @@ maybeAssign('closeStore', function() {
 window.pauseGame = function() {
   if (window.usingNewEngine) {
     stopTimer();
-    // Stop whichever scene is running for the current node
     const nodeId = window.currentSession?.nodeId;
-    const cfg = nodeId ? getNodeConfig(nodeId) : null;
+    const cfg    = nodeId ? getNodeConfig(nodeId) : null;
     if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
       window[cfg.stopSceneName]();
     } else if (typeof window.stopOpioidScene === 'function') {
-      // Fallback for backwards compatibility
       window.stopOpioidScene();
     }
     const overlay = document.getElementById('pause-overlay');
@@ -255,9 +364,8 @@ window.resumeGame = function() {
 
 maybeAssign('quitToMap', function() {
   stopTimer();
-  // Stop whichever scene is running for the current node
   const nodeId = window.currentSession?.nodeId;
-  const cfg = nodeId ? getNodeConfig(nodeId) : null;
+  const cfg    = nodeId ? getNodeConfig(nodeId) : null;
   if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
     window[cfg.stopSceneName]();
   } else if (typeof window.stopOpioidScene === 'function') {
@@ -273,32 +381,40 @@ maybeAssign('quitToMap', function() {
   if (overlay)  overlay.classList.remove('on');
   if (game)     game.style.display = 'none';
   if (go)       go.classList.remove('on');
-  if (levelMap) levelMap.classList.add('on');
-});
-
-maybeAssign('usePwr', function(type) {
-  console.warn('usePwr fallback called - legacy not present', type);
+  if (levelMap) {
+    levelMap.style.display = '';
+    levelMap.classList.add('on');
+  }
 });
 
 maybeAssign('closeLvl', function() {
-  document.getElementById('lvl-screen').classList.remove('on');
+  const s = document.getElementById('lvl-screen');
+  if (s) s.classList.remove('on');
 });
 
 maybeAssign('backToMap', function() {
-  const game = document.getElementById('game');
-  const go = document.getElementById('go');
+  const game     = document.getElementById('game');
+  const go       = document.getElementById('go');
   const levelMap = document.getElementById('level-map');
 
   if (game) game.style.display = 'none';
-  if (go) go.classList.remove('on');
-  if (levelMap) levelMap.classList.add('on');
+  if (go)   go.classList.remove('on');
+  if (levelMap) {
+    levelMap.style.display = '';
+    levelMap.classList.add('on');
+  }
 });
 
 maybeAssign('restart', function() {
   const go = document.getElementById('go');
   if (go) go.classList.remove('on');
   window.usingNewEngine = false;
-  window.startGame();
+  // Return to level-map so user can pick any node
+  const levelMap = document.getElementById('level-map');
+  if (levelMap) {
+    levelMap.style.display = '';
+    levelMap.classList.add('on');
+  }
 });
 
 // Initialize the course map
