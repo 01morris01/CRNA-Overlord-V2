@@ -23,11 +23,13 @@ let multiSelectState = { selected: new Set(), requiredCount: 0 };
 let _timerInterval = null;
 const QUESTION_TIME_SEC = 35;
 let _remaining = 0;
+let _currentTimerQ = null; // current question, used by resumeQuestionTimer
 
 function startQuestionTimer(q) {
   clearInterval(_timerInterval);
   _timerInterval = null;
 
+  _currentTimerQ = q;
   _remaining = QUESTION_TIME_SEC;
   const fill = document.getElementById('tmr-fill');
   if (fill) {
@@ -67,6 +69,33 @@ export function stopTimer() {
 /** Add seconds to the currently running question timer (for +Time powerup). */
 export function addQuestionTime(seconds) {
   _remaining = Math.min(_remaining + seconds, QUESTION_TIME_SEC);
+}
+
+/**
+ * Resume the question timer after stopTimer() was called (e.g. closing the store).
+ * Uses _remaining and _currentTimerQ set by the last startQuestionTimer() call.
+ * No-op if the timer is already running or there's nothing to resume.
+ */
+export function resumeQuestionTimer() {
+  if (_timerInterval || _remaining <= 0 || !_currentTimerQ) return;
+  const q    = _currentTimerQ;
+  const fill = document.getElementById('tmr-fill');
+  _timerInterval = setInterval(() => {
+    _remaining--;
+    const pct = Math.max(0, (_remaining / QUESTION_TIME_SEC) * 100);
+    if (fill) {
+      fill.style.width = pct + '%';
+      if (pct < 25) fill.style.background = '#ff2200';
+    }
+    if (_remaining <= 0) {
+      clearInterval(_timerInterval);
+      _timerInterval = null;
+      _disableAllInputs();
+      const msg = q.correctAnswers ? `Correct: ${q.correctAnswers[0]}` : '';
+      showAnswerFeedback(false, (q.rationale || q.ex || '') + (msg ? '\n\n' + msg : ''));
+      if (window.submitAnswer) window.submitAnswer(false);
+    }
+  }, 1000);
 }
 
 function _disableAllInputs() {

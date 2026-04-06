@@ -69,7 +69,7 @@ export function createSimpleCourseMap() {
 }
 
 // Number of questions per study session (subset of full bank)
-const SESSION_SIZE = 15;
+export const SESSION_SIZE = 15;
 
 /**
  * Start a study session for a specific course/node.

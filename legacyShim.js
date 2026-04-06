@@ -1,6 +1,6 @@
 import { startRun as engineStartRun, submitAnswer as engineSubmitAnswer, getCurrentRun } from './core/gameEngine.js';
-import { showMap, createSimpleCourseMap, startStudySessionForNode } from './ui/menus.js';
-import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback, addQuestionTime } from './ui/gameUI.js';
+import { showMap, createSimpleCourseMap, startStudySessionForNode, SESSION_SIZE } from './ui/menus.js';
+import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback, addQuestionTime, resumeQuestionTimer } from './ui/gameUI.js';
 import { gradeAnswer } from './core/answerGrading.js';
 import { getQuestionsForNode } from './core/questionEngine.js';
 import { getNodeConfig } from './core/nodeConfig.js';
@@ -11,17 +11,18 @@ window.usingNewEngine = false;
 
 // Capture legacy functions before any overrides
 const mapRuntime = {
-  startGame: window.startGame,
-  submitType: window.submitType,
-  openStore: window.openStore,
-  closeStore: window.closeStore,
-  pauseGame: window.pauseGame,
-  resumeGame: window.resumeGame,
-  quitToMap: window.quitToMap,
-  usePwr: window.usePwr,
-  closeLvl: window.closeLvl,
-  backToMap: window.backToMap,
-  restart: window.restart,
+  startGame:        window.startGame,
+  submitType:       window.submitType,
+  openStore:        window.openStore,
+  closeStore:       window.closeStore,
+  pauseGame:        window.pauseGame,
+  resumeGame:       window.resumeGame,
+  quitToMap:        window.quitToMap,
+  usePwr:           window.usePwr,
+  closeLvl:         window.closeLvl,
+  backToMap:        window.backToMap,
+  restart:          window.restart,
+  startStudySession: window.startStudySession, // captured before our override
 };
 
 function maybeAssign(fnName, fnImpl) {
@@ -33,9 +34,80 @@ function maybeAssign(fnName, fnImpl) {
 }
 
 // Expose engine functions globally
-window.engineStartRun = engineStartRun;
+window.engineStartRun        = engineStartRun;
 window.renderCurrentQuestion = renderCurrentQuestion;
-window.updateHUD = updateHUD;
+window.updateHUD             = updateHUD;
+
+// ─── Store item definitions ───────────────────────────────────────────────────
+// Mirrors legacy STORE_ITEMS (which is a const closure, not accessible from module).
+const _STORE_ITEMS = [
+  { id:'shield', name:'Ventilator',        icon:'🫁', cost:800,  desc:'SHIELD — Next wrong answer costs no life. The vent breathes so your patient doesn\'t die from your stupidity.',  equipKey:'vent'   },
+  { id:'skip',   name:'MAC Blade',          icon:'🔪', cost:1200, desc:'SKIP — Skip any question, no penalty. Because sometimes you just gotta intubate and move on.',                   equipKey:'mac'    },
+  { id:'reveal', name:'Video Laryngoscope', icon:'📺', cost:600,  desc:'REVEAL — Eliminates one wrong MCQ answer or shows extra hint. Better view = better decisions.',                  equipKey:'vl'     },
+  { id:'time',   name:'Bougie',             icon:'🔧', cost:400,  desc:'+TIME — Adds 15 seconds. Like a bougie, it buys you time when shit gets tight.',                                  equipKey:'bougie' },
+];
+
+/** Render the store grid using state.js as source of truth (bypasses stale legacy bankedPts). */
+function _renderStoreGrid(state) {
+  const g = document.getElementById('store-grid');
+  if (!g) return;
+  const pts = state.bankedPts || 0;
+  const inv = state.inv || {};
+
+  const ptsEl = document.getElementById('store-pts-val');
+  if (ptsEl) ptsEl.textContent = pts.toLocaleString();
+
+  g.innerHTML = '';
+  _STORE_ITEMS.forEach(item => {
+    const canBuy = pts >= item.cost;
+    const d = document.createElement('div');
+    d.className = 'store-item';
+    d.innerHTML = `<span class="si-icon">${item.icon}</span><div class="si-name">${item.name}</div><div class="si-desc">${item.desc}</div><div class="si-cost">${item.cost} pts</div><button class="si-buy" ${canBuy ? '' : 'disabled'} onclick="buyItem('${item.id}')">BUY</button><div class="si-owned">Owned: ${inv[item.id] || 0}</div>`;
+    g.appendChild(d);
+  });
+}
+
+// ─── Node-to-topic mapping ────────────────────────────────────────────────────
+// Maps legacy topic IDs (used by course map markers) to NODE_CONFIG node IDs.
+const TOPIC_TO_NODE = {
+  'ba-t09': { courseId: 'basics-of-anesthesia', nodeId: 'node-9'  },
+  'ba-t10': { courseId: 'basics-of-anesthesia', nodeId: 'node-10' },
+  'ba-t11': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
+};
+
+// Pending mapping stored by selectTopic, consumed by startStudySession.
+let _pendingNodeMapping = null;
+
+/** Show a node preview panel in #mode-container when a known node is selected. */
+function _renderNodePreview(topicId) {
+  const mapping = TOPIC_TO_NODE[topicId];
+  if (!mapping) return;
+  const cfg = getNodeConfig(mapping.nodeId);
+  if (!cfg) return;
+
+  const container = document.getElementById('mode-container');
+  const grid      = document.getElementById('mode-grid');
+  if (!container || !grid) return;
+
+  grid.style.gridTemplateColumns = '1fr';
+  grid.innerHTML = '';
+
+  const info = document.createElement('div');
+  info.style.cssText = 'background:rgba(255,150,0,.08);border:1px solid rgba(255,150,0,.25);border-radius:6px;padding:.8rem 1rem;color:#ffaa00;font-family:monospace;';
+  info.innerHTML = `
+    <div style="font-size:.95rem;font-weight:900;margin-bottom:.3rem;">${cfg.icon || '📚'} ${cfg.title}</div>
+    <div style="color:#888;font-size:.7rem;">${cfg.chapterLabel} &nbsp;·&nbsp; ${cfg.badgeLabel}</div>
+    <div style="color:#4af;font-size:.75rem;margin-top:.5rem;">📝 Session: ${SESSION_SIZE} questions</div>
+    <div style="color:#666;font-size:.65rem;margin-top:.2rem;">Click ⚡ START STUDY SESSION ⚡ below</div>
+  `;
+  grid.appendChild(info);
+  container.style.display = 'block';
+}
+
+function _hideNodePreview() {
+  const container = document.getElementById('mode-container');
+  if (container) container.style.display = 'none';
+}
 
 /**
  * Start a game with specific questions (new engine path).
@@ -48,6 +120,8 @@ window.startGameWithQuestions = function(questions) {
   }
 
   window.usingNewEngine = true;
+  _pendingNodeMapping   = null;
+  _hideNodePreview();
 
   // Stop any running scene / timer from a previous session
   if (typeof window.stopLegacyScene === 'function') window.stopLegacyScene();
@@ -90,16 +164,14 @@ window.startGameWithQuestions = function(questions) {
 
   renderCurrentQuestion();
   updateHUD();
-
-  // Sync powerup button counts from state
   _syncPwrBtns();
 
   return run;
 };
 
 /**
- * Sync powerup button UI from state.js (used by new engine path).
- * The legacy updatePwrBtns() reads its own `inv` closure — this reads state.js instead.
+ * Sync powerup button UI from state.js.
+ * Legacy updatePwrBtns() reads the legacy `inv` closure; this reads state.js instead.
  */
 function _syncPwrBtns() {
   const state = loadState();
@@ -147,7 +219,7 @@ window.submitAnswer = function(isCorrect) {
   // Shield: absorb wrong answer so no life is lost
   if (!isCorrect && run && run._shieldActive) {
     run._shieldActive = false;
-    isCorrect = true; // engine counts as correct (no life lost); UI already showed INCORRECT
+    isCorrect = true; // UI already showed INCORRECT; engine counts as correct (no life lost)
     console.log('[SHIELD] activated — wrong answer absorbed');
   }
 
@@ -207,10 +279,10 @@ function _showNewEngineGameOver(run) {
     const state = loadState();
     const nc    = state.nodeCompletion || {};
     if (!nc[nodeId]) nc[nodeId] = { seen: 0, correct: 0, totalInBank };
-    nc[nodeId].seen      += totalCount;
-    nc[nodeId].correct   += correctCount;
-    nc[nodeId].totalInBank = totalInBank; // update if bank grew
-    state.nodeCompletion  = nc;
+    nc[nodeId].seen        += totalCount;
+    nc[nodeId].correct     += correctCount;
+    nc[nodeId].totalInBank  = totalInBank;
+    state.nodeCompletion    = nc;
     saveState(state);
 
     const exposurePct = Math.min(100, Math.round((nc[nodeId].seen / totalInBank) * 100));
@@ -228,11 +300,9 @@ function _showNewEngineGameOver(run) {
   if (goPts) goPts.textContent = run.score.toLocaleString();
 }
 
-// ─── startGame: delegate to legacy (loads state → shows Courses screen) ─────
-//
-// Legacy startGame correctly shows #course-selector (Courses screen).
-// It also loads inv/equip/bankedPts from localStorage into legacy closure vars.
-// We just call it directly — no redirect needed.
+// ─── startGame ────────────────────────────────────────────────────────────────
+// Delegate to legacy startGame which loads state (bankedPts, inv, equip) from
+// localStorage and correctly shows the Courses screen (#course-selector).
 //
 window.startGame = function() {
   if (typeof mapRuntime.startGame === 'function') {
@@ -240,61 +310,68 @@ window.startGame = function() {
   }
 };
 
-// ─── selectTopic: route known nodes through startStudySessionForNode ──────────
+// ─── selectTopic ─────────────────────────────────────────────────────────────
+// Map markers call selectTopic(topicId). For known nodes, show a node preview
+// and store the pending mapping — do NOT launch immediately.
+// startStudySession (bound to the Start button) picks up the mapping.
 //
-// Map markers call selectTopic(topicId) on click. Legacy selectTopic only
-// stores the ID and shows a visual selection + Start button. startStudySession()
-// then only special-cases ba-t09 for the new engine; ba-t10/ba-t11 fall back
-// to legacy ALL_QS.
-//
-// This override intercepts clicks on topics that have a question bank in
-// NODE_CONFIG and immediately launches the correct session — same path used
-// by the node-list buttons. Topics without question banks fall through to
-// legacy behavior (visual selection + Start button).
-//
-const TOPIC_TO_NODE = {
-  'ba-t09': { courseId: 'basics-of-anesthesia', nodeId: 'node-9'  },
-  'ba-t10': { courseId: 'basics-of-anesthesia', nodeId: 'node-10' },
-  'ba-t11': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
-};
-
 const _legacySelectTopic = window.selectTopic;
 
 window.selectTopic = function(topicId) {
   const mapping = TOPIC_TO_NODE[topicId];
+
   if (mapping) {
-    console.log('[SHIM] selectTopic', topicId, '→', mapping.nodeId);
-    startStudySessionForNode(mapping.courseId, mapping.nodeId);
+    console.log('[SHIM] selectTopic', topicId, '→', mapping.nodeId, '(preview)');
+    _pendingNodeMapping = mapping;
+    _renderNodePreview(topicId);
+    // Also call legacy so it sets selectedTopicId and shows the Start button
+    if (typeof _legacySelectTopic === 'function') _legacySelectTopic(topicId);
     return;
   }
-  // No question bank for this topic yet — fall through to legacy (shows selection UI)
-  if (typeof _legacySelectTopic === 'function') {
-    _legacySelectTopic(topicId);
+
+  // No question bank yet — standard legacy behavior (visual selection + Start button)
+  _pendingNodeMapping = null;
+  _hideNodePreview();
+  if (typeof _legacySelectTopic === 'function') _legacySelectTopic(topicId);
+};
+
+// ─── startStudySession ───────────────────────────────────────────────────────
+// Called when the user clicks ⚡ START STUDY SESSION ⚡.
+// If a pending node mapping exists (set by selectTopic for known nodes), route
+// to the correct question bank. Otherwise fall through to legacy.
+//
+window.startStudySession = function() {
+  if (_pendingNodeMapping) {
+    const { courseId, nodeId } = _pendingNodeMapping;
+    _pendingNodeMapping = null;
+    _hideNodePreview();
+    console.log('[SHIM] startStudySession →', nodeId);
+    startStudySessionForNode(courseId, nodeId);
+    return;
+  }
+  // No mapping — legacy handles unmapped topics (or falls through to ALL_QS)
+  if (typeof mapRuntime.startStudySession === 'function') {
+    mapRuntime.startStudySession();
   }
 };
 
-// ─── usePwr: works for both legacy and new engine ───────────────────────────
-//
-// Legacy usePwr checks G.done but G is null when new engine is active → crash.
-// New engine path reads/writes state.js inv directly.
+// ─── usePwr ──────────────────────────────────────────────────────────────────
+// Legacy usePwr crashes when G is null (new engine). New engine path uses state.js.
 //
 const _legacyUsePwr = mapRuntime.usePwr;
 
 window.usePwr = function(type) {
   if (!window.usingNewEngine) {
-    // Legacy engine path — original function handles everything
     if (typeof _legacyUsePwr === 'function') _legacyUsePwr(type);
     return;
   }
 
-  // ── New engine path ──────────────────────────────────────────────────────
   const run = getCurrentRun();
   if (!run || run.done) return;
 
   const state = loadState();
   const inv   = state.inv || { shield: 0, skip: 0, reveal: 0, time: 0 };
-
-  if ((inv[type] || 0) <= 0) return; // nothing to use
+  if ((inv[type] || 0) <= 0) return;
 
   inv[type]--;
   state.inv = inv;
@@ -304,8 +381,7 @@ window.usePwr = function(type) {
   const q = run.questions[run.index];
 
   if (type === 'skip') {
-    // Skip advances without penalty — count as correct so no life lost
-    console.log('[POWERUP] Skip used');
+    console.log('[POWERUP] Skip');
     run.index++;
     run.results.push({ questionId: q?.id, correct: true, skipped: true, timestamp: Date.now() });
     if (run.index >= run.questions.length) run.done = true;
@@ -318,15 +394,14 @@ window.usePwr = function(type) {
     }
 
   } else if (type === 'reveal') {
-    // Eliminate one wrong MCQ answer
-    console.log('[POWERUP] Reveal used');
+    console.log('[POWERUP] Reveal');
     if (q && q.type === 'mcq') {
       const ansGrid = document.getElementById('ans-grid');
       if (ansGrid) {
         const btns = Array.from(ansGrid.querySelectorAll('.abtn'));
-        const wrongBtns = btns.filter((b, i) => {
-          return q._shuffledAns && !q._shuffledAns[i]?.ok && !b.disabled && !b.classList.contains('elim');
-        });
+        const wrongBtns = btns.filter((b, i) =>
+          q._shuffledAns && !q._shuffledAns[i]?.ok && !b.disabled && !b.classList.contains('elim')
+        );
         if (wrongBtns.length > 0) {
           wrongBtns[0].disabled = true;
           wrongBtns[0].classList.add('elim');
@@ -335,28 +410,76 @@ window.usePwr = function(type) {
     }
 
   } else if (type === 'shield') {
-    // Next wrong answer absorbs — flag checked in submitAnswer
     console.log('[POWERUP] Shield armed');
     run._shieldActive = true;
 
   } else if (type === 'time') {
-    // Add 15 seconds to the running timer
-    console.log('[POWERUP] +Time used');
+    console.log('[POWERUP] +Time');
     addQuestionTime(15);
   }
 };
 
-// ─── remaining game management functions ────────────────────────────────────
-
-maybeAssign('openStore', function() {
+// ─── openStore ───────────────────────────────────────────────────────────────
+// Direct override so new engine gets state.js bankedPts and timer is stopped.
+// For legacy engine: call legacy openStore (handles G timer pause) then patch display.
+//
+window.openStore = function() {
   const modal = document.getElementById('store-modal');
   if (modal) modal.classList.add('on');
-});
 
-maybeAssign('closeStore', function() {
+  if (window.usingNewEngine) {
+    stopTimer(); // prevent timeout firing while browsing store
+    _renderStoreGrid(loadState());
+  } else {
+    // Legacy: pause legacy timer + render store
+    if (typeof mapRuntime.openStore === 'function') mapRuntime.openStore();
+    // Patch pts display to reflect state.js bankedPts (catches cross-session drift)
+    const state = loadState();
+    const ptsEl = document.getElementById('store-pts-val');
+    if (ptsEl) ptsEl.textContent = (state.bankedPts || 0).toLocaleString();
+  }
+};
+
+// ─── closeStore ──────────────────────────────────────────────────────────────
+// Bug 3 fix: for new engine, close modal only — do NOT navigate.
+// For legacy engine, call legacy closeStore (handles timer resume + navigation).
+//
+window.closeStore = function() {
   const modal = document.getElementById('store-modal');
   if (modal) modal.classList.remove('on');
-});
+
+  if (window.usingNewEngine) {
+    // Resume timer from where it was — game continues underneath
+    resumeQuestionTimer();
+  } else {
+    if (typeof mapRuntime.closeStore === 'function') mapRuntime.closeStore();
+  }
+};
+
+// ─── buyItem ─────────────────────────────────────────────────────────────────
+// Bug 1 fix: use state.js as source of truth so points earned during new engine
+// sessions are immediately spendable, regardless of legacy bankedPts stale state.
+//
+window.buyItem = function(id) {
+  const item = _STORE_ITEMS.find(i => i.id === id);
+  if (!item) return;
+
+  const state = loadState();
+  const pts   = state.bankedPts || 0;
+  if (pts < item.cost) return;
+
+  state.bankedPts -= item.cost;
+  state.inv        = state.inv  || { shield: 0, skip: 0, reveal: 0, time: 0 };
+  state.equip      = state.equip || { vent: false, mac: false, vl: false, bougie: false };
+  state.inv[id]            = (state.inv[id] || 0) + 1;
+  state.equip[item.equipKey] = true;
+  saveState(state);
+
+  _renderStoreGrid(state);
+  _syncPwrBtns();
+};
+
+// ─── pauseGame / resumeGame ──────────────────────────────────────────────────
 
 window.pauseGame = function() {
   if (window.usingNewEngine) {
@@ -379,18 +502,20 @@ window.resumeGame = function() {
   const overlay = document.getElementById('pause-overlay');
   if (overlay) overlay.classList.remove('on');
   if (window.usingNewEngine) {
-    renderCurrentQuestion();
+    renderCurrentQuestion(); // re-renders scene + restarts timer
   } else if (typeof mapRuntime.resumeGame === 'function') {
     mapRuntime.resumeGame();
   }
 };
 
-// Direct override (not maybeAssign) so this runs for both engines.
-// Legacy quitToMap would call showTopicMap/showCombinedStudyScreen which is
-// fine for pure legacy sessions, but for new engine we need proper cleanup.
+// ─── quitToMap ───────────────────────────────────────────────────────────────
+// Bug 4 fix: for new engine, return to the SPECIFIC course map (showTopicMap),
+// not the all-courses screen (showCourseSelector).
+// selectedCourseId is preserved in legacy's closure from when the user selected
+// the course — showTopicMap() uses it to re-render the correct map.
+//
 window.quitToMap = function() {
   if (window.usingNewEngine) {
-    // New engine path: stop timer + scene, then return to course map
     stopTimer();
     const nodeId = window.currentSession?.nodeId;
     const cfg    = nodeId ? getNodeConfig(nodeId) : null;
@@ -400,18 +525,27 @@ window.quitToMap = function() {
       window.stopOpioidScene();
     }
     window.usingNewEngine = false;
+    _pendingNodeMapping   = null;
+
     const overlay = document.getElementById('pause-overlay');
     const game    = document.getElementById('game');
     const go      = document.getElementById('go');
     if (overlay) overlay.classList.remove('on');
     if (game)    game.style.display = 'none';
     if (go)      go.classList.remove('on');
-    if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
+
+    // Return to the specific course map (not all-courses screen)
+    if (typeof window.showTopicMap === 'function') {
+      window.showTopicMap();
+    } else if (typeof window.showCourseSelector === 'function') {
+      window.showCourseSelector(); // fallback
+    }
   } else if (typeof mapRuntime.quitToMap === 'function') {
-    // Legacy engine path: use original (handles save + topic map navigation)
     mapRuntime.quitToMap();
   }
 };
+
+// ─── misc navigation ─────────────────────────────────────────────────────────
 
 maybeAssign('closeLvl', function() {
   const s = document.getElementById('lvl-screen');
@@ -423,7 +557,6 @@ maybeAssign('backToMap', function() {
   const go   = document.getElementById('go');
   if (game) game.style.display = 'none';
   if (go)   go.classList.remove('on');
-  // Show courses screen (restores full Name→Courses→Map→Node flow)
   if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
 });
 
@@ -431,9 +564,8 @@ maybeAssign('restart', function() {
   const go = document.getElementById('go');
   if (go) go.classList.remove('on');
   window.usingNewEngine = false;
-  // Return to courses screen so user can pick any node
   if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
 });
 
-// Initialize the course map
+// Initialize the course map node list (used by #level-map, kept for compat)
 createSimpleCourseMap();
