@@ -1,16 +1,6 @@
 import { loadState, saveState } from '../core/state.js';
 import { filterQuestions, getQuestionsForNode, getQuestionMetadata } from '../core/questionEngine.js';
-
-// Course definitions with their nodes
-const COURSES = {
-  'basics-of-anesthesia': {
-    name: 'Basics of Anesthesia',
-    icon: '💊',
-    nodes: [
-      { id: 'node-9', name: 'Opioids', chapter: 'Chapter 9', icon: '💉', available: true }
-    ]
-  }
-};
+import { getNodesByCourse } from '../core/nodeConfig.js';
 
 export function showMap({course='default'}={}) {
   const map = document.getElementById('level-map');
@@ -44,40 +34,37 @@ export function renderSectionList(sections=[]) {
 }
 
 export function createSimpleCourseMap() {
-  const state = loadState();
-  
-  // Check for opioids questions first
-  const opioidsMetadata = getQuestionMetadata('basics-of-anesthesia', 'node-9');
-  
-  if (opioidsMetadata) {
-    // Create section for Opioids
-    const sections = [{
-      name: 'Opioids - Chapter 9',
-      desc: `${opioidsMetadata.totalQuestions} questions (${opioidsMetadata.questionTypes.mcq} MCQ, ${opioidsMetadata.questionTypes.multi} Multi-Select, ${opioidsMetadata.questionTypes.short} Short Answer)`,
-      status: 'Ready',
-      icon: '💉',
+  // Auto-build sections from NODE_CONFIG — no manual wiring needed per node
+  const nodes = getNodesByCourse('basics-of-anesthesia');
+
+  const sections = nodes.map(({ nodeId, courseId, title, chapterLabel, icon, questionsMeta }) => {
+    const meta = questionsMeta || getQuestionMetadata(courseId, nodeId);
+    const desc = meta
+      ? `${meta.totalQuestions} questions (${meta.questionTypes?.mcq ?? 0} MCQ, ${meta.questionTypes?.multi ?? 0} Multi, ${meta.questionTypes?.short ?? 0} Short)`
+      : 'Questions loading...';
+    return {
+      name:     `${title} — ${chapterLabel}`,
+      desc,
+      status:   'Ready',
+      icon:     icon || '📍',
       available: true,
-      courseId: 'basics-of-anesthesia',
-      nodeId: 'node-9',
-      onClick: (section) => {
-        startStudySessionForNode(section.courseId, section.nodeId);
-      }
-    }];
-    
+      courseId,
+      nodeId,
+      onClick:  (section) => startStudySessionForNode(section.courseId, section.nodeId),
+    };
+  });
+
+  if (sections.length > 0) {
     renderSectionList(sections);
   } else {
-    // Fallback to legacy questions
-    const allQuestions = filterQuestions({mode:'all'});
-    const section = {
-      name:'Hemodynamic Mastery',
-      desc:`${allQuestions.length} questions available`,
-      status:'Ready',
-      icon:'🎯',
-      onClick:()=>{
-        console.debug('Section selected');
-      }
-    };
-    renderSectionList([section]);
+    const allQuestions = filterQuestions({ mode: 'all' });
+    renderSectionList([{
+      name:    'Hemodynamic Mastery',
+      desc:    `${allQuestions.length} questions available`,
+      status:  'Ready',
+      icon:    '🎯',
+      onClick: () => { console.debug('Section selected'); },
+    }]);
   }
 }
 

@@ -1,6 +1,9 @@
 import { getCurrentRun } from '../core/gameEngine.js';
 import { gradeShortAnswer, gradeMultiSelect } from '../core/answerGrading.js';
 import { renderOpioidScene, stopOpioidScene } from './opioidsScene.js';
+import { renderNMBScene, stopNMBScene } from './nmbScene.js';
+import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
+import { getNodeConfig } from '../core/nodeConfig.js';
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -160,11 +163,18 @@ export function renderCurrentQuestion() {
   const chWrap = document.getElementById('ch-wrap');
   if (chWrap) chWrap.classList.add('on');
 
-  // Fill header fields
+  // Fill header fields — dynamic per node
   const chb = document.getElementById('chb');
   const ovs = document.getElementById('ovs');
   const qtxt = document.getElementById('qtxt');
-  if (chb) chb.textContent = `📚 Ch. 9 — ${(q.metadata?.topic || 'Opioids').toUpperCase()}`;
+  {
+    const nodeId = window.currentSession?.nodeId || null;
+    const cfg = nodeId ? getNodeConfig(nodeId) : null;
+    const chapterLabel = cfg?.chapterLabel || 'Ch. ?';
+    const defaultTitle  = cfg?.title || 'Study';
+    const topic = q.metadata?.topic || q.metadata?.topicId || defaultTitle;
+    if (chb) chb.textContent = `📚 ${chapterLabel} — ${topic.toUpperCase()}`;
+  }
   if (ovs) ovs.textContent = q.setup || '';
   if (qtxt) qtxt.textContent = q.q || '';
 
@@ -195,8 +205,17 @@ export function renderCurrentQuestion() {
   // Start countdown timer
   startQuestionTimer(q);
 
-  // Render themed scene
-  renderOpioidScene(q);
+  // Render themed scene — dynamic dispatch based on current node
+  {
+    const nodeId = window.currentSession?.nodeId || null;
+    const cfg = nodeId ? getNodeConfig(nodeId) : null;
+    if (cfg?.sceneRendererName && typeof window[cfg.sceneRendererName] === 'function') {
+      window[cfg.sceneRendererName](q);
+    } else {
+      // Fallback: opioid scene for backwards-compat
+      renderOpioidScene(q);
+    }
+  }
 }
 
 // ─── MCQ ─────────────────────────────────────────────────────────────────────
@@ -429,6 +448,11 @@ export function hideFeedback() {
 
 // ─── expose for legacy compatibility ─────────────────────────────────────────
 
-window.hideFeedback = hideFeedback;
-window.stopTimer    = stopTimer;
+window.hideFeedback    = hideFeedback;
+window.stopTimer       = stopTimer;
 window.stopOpioidScene = stopOpioidScene;
+window.renderOpioidScene = renderOpioidScene;
+window.renderNMBScene  = renderNMBScene;
+window.stopNMBScene    = stopNMBScene;
+window.renderAnesthesiaMachineScene = renderAnesthesiaMachineScene;
+window.stopAnesthesiaMachineScene   = stopAnesthesiaMachineScene;

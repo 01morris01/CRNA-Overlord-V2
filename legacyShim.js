@@ -2,7 +2,8 @@ import { startRun as engineStartRun, submitAnswer as engineSubmitAnswer, getCurr
 import { showMap, createSimpleCourseMap, startStudySessionForNode } from './ui/menus.js';
 import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback } from './ui/gameUI.js';
 import { gradeAnswer } from './core/answerGrading.js';
-import { getOpioidsQuestions } from './core/questionEngine.js';
+import { getQuestionsForNode } from './core/questionEngine.js';
+import { getNodeConfig } from './core/nodeConfig.js';
 
 // Track which engine is currently active
 window.usingNewEngine = false;
@@ -47,8 +48,9 @@ window.startGameWithQuestions = function(questions) {
 
   // Stop any legacy scene animation on the #scn canvas
   if (typeof window.stopLegacyScene === 'function') window.stopLegacyScene();
-  // Stop any running opioid scene from a previous session
+  // Stop any running scene from a previous session
   if (typeof window.stopOpioidScene === 'function') window.stopOpioidScene();
+  if (typeof window.stopNMBScene    === 'function') window.stopNMBScene();
   // Stop any running timer
   stopTimer();
 
@@ -80,7 +82,11 @@ window.startGameWithQuestions = function(questions) {
   const progFill= document.getElementById('prog-fill');
   if (qn)       qn.textContent       = '1';
   if (qt)       qt.textContent       = questions.length;
-  if (lvlBadge) lvlBadge.textContent = 'OPIOIDS Ch.9';
+  if (lvlBadge) {
+    const nodeId = window.currentSession?.nodeId;
+    const cfg    = nodeId ? getNodeConfig(nodeId) : null;
+    lvlBadge.textContent = cfg ? `${cfg.title.toUpperCase()} ${cfg.chapterLabel}` : 'STUDY SESSION';
+  }
   if (progFill) progFill.style.width = '0%';
 
   renderCurrentQuestion();
@@ -187,8 +193,8 @@ function _showNewEngineGameOver(run) {
 }
 
 maybeAssign('startGame', function() {
-  // Default to opioids questions
-  const questions = getOpioidsQuestions();
+  // Default to node-9 (opioids) questions
+  const questions = getQuestionsForNode('basics-of-anesthesia', 'node-9');
 
   if (questions && questions.length > 0) {
     const shuffled = [...questions].sort(() => Math.random() - 0.5);
@@ -221,7 +227,15 @@ maybeAssign('closeStore', function() {
 window.pauseGame = function() {
   if (window.usingNewEngine) {
     stopTimer();
-    if (typeof window.stopOpioidScene === 'function') window.stopOpioidScene();
+    // Stop whichever scene is running for the current node
+    const nodeId = window.currentSession?.nodeId;
+    const cfg = nodeId ? getNodeConfig(nodeId) : null;
+    if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
+      window[cfg.stopSceneName]();
+    } else if (typeof window.stopOpioidScene === 'function') {
+      // Fallback for backwards compatibility
+      window.stopOpioidScene();
+    }
     const overlay = document.getElementById('pause-overlay');
     if (overlay) overlay.classList.add('on');
   } else if (typeof mapRuntime.pauseGame === 'function') {
@@ -241,7 +255,14 @@ window.resumeGame = function() {
 
 maybeAssign('quitToMap', function() {
   stopTimer();
-  if (typeof window.stopOpioidScene === 'function') window.stopOpioidScene();
+  // Stop whichever scene is running for the current node
+  const nodeId = window.currentSession?.nodeId;
+  const cfg = nodeId ? getNodeConfig(nodeId) : null;
+  if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
+    window[cfg.stopSceneName]();
+  } else if (typeof window.stopOpioidScene === 'function') {
+    window.stopOpioidScene();
+  }
   window.usingNewEngine = false;
 
   const overlay  = document.getElementById('pause-overlay');

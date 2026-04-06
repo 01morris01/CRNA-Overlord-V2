@@ -1,57 +1,35 @@
 import { loadState, saveState } from './state.js';
-import { OPIOIDS_QUESTIONS, OPIOIDS_METADATA } from '../data/questions/opioids-chapter9.js';
-
-// Question bank registry for different courses/nodes
-const QUESTION_BANKS = {
-  'basics-of-anesthesia': {
-    'node-9': {
-      questions: OPIOIDS_QUESTIONS,
-      metadata: OPIOIDS_METADATA
-    }
-  }
-};
+import { getNodeConfig } from './nodeConfig.js';
 
 /**
- * Get questions for a specific course and node
- * @param {string} courseId - Course ID
- * @param {string} nodeId - Node ID
- * @returns {Array} Questions for the specified course/node
+ * Get raw questions for a specific node (reads from NODE_CONFIG).
  */
 export function getQuestions(courseId, nodeId) {
-  const course = QUESTION_BANKS[courseId];
-  if (!course) return [];
-  
-  const node = course[nodeId];
-  if (!node) return [];
-  
-  return node.questions || [];
+  const cfg = getNodeConfig(nodeId);
+  if (!cfg || cfg.courseId !== courseId) return [];
+  return cfg.questions || [];
 }
 
 /**
- * Get metadata for a specific course and node
- * @param {string} courseId - Course ID
- * @param {string} nodeId - Node ID
- * @returns {Object|null} Metadata for the specified course/node
+ * Get metadata for a specific node (reads from NODE_CONFIG).
  */
 export function getQuestionMetadata(courseId, nodeId) {
-  const course = QUESTION_BANKS[courseId];
-  if (!course) return null;
-  
-  const node = course[nodeId];
-  if (!node) return null;
-  
-  return node.metadata || null;
+  const cfg = getNodeConfig(nodeId);
+  if (!cfg || cfg.courseId !== courseId) return null;
+  return cfg.questionsMeta || null;
 }
 
 /**
  * Normalize questions from the new format to internal format
  * Supports: mcq, multi, short question types
+ * @param {Array} rawQuestions
+ * @param {string} [nodeId] - optional, e.g. 'node-9' or 'node-10'
  */
-export function normalizeQuestions(rawQuestions = window.ALL_QS || []) {
+export function normalizeQuestions(rawQuestions = window.ALL_QS || [], nodeId = null) {
   return rawQuestions.map((q, i) => {
-    // Handle new question bank format
+    // Handle new question bank format (has .prompt field)
     if (q.prompt !== undefined) {
-      return normalizeNewFormatQuestion(q, i);
+      return normalizeNewFormatQuestion(q, i, nodeId);
     }
     
     // Handle legacy format
@@ -83,30 +61,50 @@ export function normalizeQuestions(rawQuestions = window.ALL_QS || []) {
 }
 
 /**
- * Normalize a question from the new format (opioids bank style)
+ * Normalize a question from the new format (opioids/NMB bank style)
+ * @param {object} q - raw question object
+ * @param {number} index
+ * @param {string|null} nodeId - e.g. 'node-9', 'node-10'
  */
-function normalizeNewFormatQuestion(q, index) {
+function normalizeNewFormatQuestion(q, index, nodeId) {
+  // Determine chapter label and default topic from the node, falling back to metadata
+  const resolvedNodeId = nodeId || q.metadata?.nodeId || 'node-unknown';
+  const resolvedChapter = q.metadata?.chapter || `Node ${resolvedNodeId.replace('node-', '')}`;
+  const resolvedTopic = q.metadata?.topic || resolvedNodeId;
+
+  // Handle both old format (prompt + choices/correctAnswers) and new format (prompt + ans)
+  let ans = [];
+  if (q.type === 'mcq') {
+    if (q.ans && q.ans.length > 0) {
+      // Already in {t, ok} format (new NMB bank style)
+      ans = q.ans;
+    } else if (q.choices && q.correctAnswers) {
+      // Old opioids bank style: choices array + correctAnswers array
+      ans = (q.choices || []).map(choice => ({
+        t: choice,
+        ok: q.correctAnswers.includes(choice)
+      }));
+    }
+  }
+
   const normalized = {
     id: q.id || `q_${index + 1}`,
-    chapter: q.metadata?.chapter || 'Chapter 9',
+    chapter: resolvedChapter,
     scene: 'patient',
     sceneCfg: {},
     type: q.type, // mcq, multi, short
     difficulty: q.metadata?.priority === 'high' ? 3 : (q.metadata?.priority === 'medium' ? 2 : 1),
-    setup: '',
-    q: q.prompt,
-    
-    // For MCQ - convert choices to ans format
-    ans: q.type === 'mcq' ? (q.choices || []).map(choice => ({
-      t: choice,
-      ok: q.correctAnswers.includes(choice)
-    })) : [],
-    
+    setup: q.setup || '',
+    q: q.prompt || q.q || '',
+
+    // For MCQ
+    ans,
+
     // For multi-select
     choices: q.choices || [],
     correctAnswers: q.correctAnswers || [],
     selectCount: q.selectCount || 0,
-    
+
     // For short answer
     accepted: q.acceptedAnswers || q.correctAnswers || [],
     acceptedAnswers: q.acceptedAnswers || [],
@@ -117,7 +115,7 @@ function normalizeNewFormatQuestion(q, index) {
       allowMinorMisspellings: true,
       fuzzyThreshold: 0.8
     },
-    
+
     correctTarget: null,
     hint: '',
     revealHint: '',
@@ -125,15 +123,16 @@ function normalizeNewFormatQuestion(q, index) {
     lose: 'Incorrect.',
     ex: q.rationale || '',
     rationale: q.rationale || '',
-    
+
     metadata: {
       sectionId: 'basics-of-anesthesia',
-      lessonId: 'node-9',
-      topicId: q.metadata?.topic || 'opioids',
+      lessonId: resolvedNodeId,
+      topicId: resolvedTopic,
+      topic: resolvedTopic,
       priority: q.metadata?.priority || 'medium'
     },
   };
-  
+
   return normalized;
 }
 
@@ -142,12 +141,39 @@ export function getAllQuestions() {
 }
 
 /**
+ * Validate a single normalized question — logs warnings, does not throw
+ * @param {object} q - normalized question
+ * @returns {boolean} true if valid
+ */
+function _validateNormalized(q) {
+  let ok = true;
+  if (!q.id)   { console.warn('[QE VALIDATE] missing id', q); ok = false; }
+  if (!q.type) { console.warn('[QE VALIDATE] missing type', q.id); ok = false; }
+  if (q.type === 'mcq'   && (!q.ans || q.ans.length === 0))           { console.warn('[QE VALIDATE]', q.id, 'MCQ missing ans'); ok = false; }
+  if (q.type === 'multi' && (!q.choices || q.choices.length === 0))   { console.warn('[QE VALIDATE]', q.id, 'multi missing choices'); ok = false; }
+  if (q.type === 'multi' && (!q.correctAnswers || !q.correctAnswers.length)) { console.warn('[QE VALIDATE]', q.id, 'multi missing correctAnswers'); ok = false; }
+  if (q.type === 'multi' && !q.selectCount)                           { console.warn('[QE VALIDATE]', q.id, 'multi missing selectCount'); ok = false; }
+  if ((q.type === 'short' || q.type === 'type') && (!q.acceptedAnswers || !q.acceptedAnswers.length)) {
+    console.warn('[QE VALIDATE]', q.id, 'short missing acceptedAnswers'); ok = false;
+  }
+  if (!q.rationale && !q.ex) { console.warn('[QE VALIDATE]', q.id, 'missing rationale (non-fatal)'); }
+  return ok;
+}
+
+/**
  * Get normalized questions for a specific course/node
  * This is the primary API for loading questions for a study session
  */
 export function getQuestionsForNode(courseId, nodeId) {
   const rawQuestions = getQuestions(courseId, nodeId);
-  return normalizeQuestions(rawQuestions);
+  const normalized   = normalizeQuestions(rawQuestions, nodeId);
+
+  // Validate each question and log issues
+  let validCount = 0;
+  normalized.forEach(q => { if (_validateNormalized(q)) validCount++; });
+  console.log(`[QE] ${courseId}/${nodeId}: ${validCount}/${normalized.length} questions valid`);
+
+  return normalized;
 }
 
 /**
