@@ -43,9 +43,9 @@ export const NODE_CONFIG = {
 
   "node-11": {
     courseId:          "basics-of-anesthesia",
-    title:             "Anesthesia Machine",
+    title:             "Anesthesia Delivery Systems",
     chapterLabel:      "Ch. 11",
-    badgeLabel:        "MACHINE Ch.11",
+    badgeLabel:        "DELIVERY SYSTEMS Ch.11",
     icon:              "⚙️",
     questions:         MACHINE_QUESTIONS,
     questionsMeta:     MACHINE_METADATA,

@@ -72,7 +72,7 @@ function _renderStoreGrid(state) {
 const TOPIC_TO_NODE = {
   'ba-t09': { courseId: 'basics-of-anesthesia', nodeId: 'node-9'  },
   'ba-t10': { courseId: 'basics-of-anesthesia', nodeId: 'node-10' },
-  'ba-t11': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
+  'ba-t12': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.

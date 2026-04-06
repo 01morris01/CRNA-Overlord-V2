@@ -1505,13 +1505,11 @@ const COURSES = [
       {id:'ba-t08',title:'Intravenous Anesthetics',chapters:'8',order:8,type:'topic'},
       {id:'ba-t09',title:'Opioids',chapters:'9',order:9,type:'topic'},
       {id:'ba-t10',title:'Neuromuscular Blocking and Reversal Agents / Neurotoxicity',chapters:'11-12',order:10,type:'topic'},
-      {id:'ba-t11',title:'Preanesthetic Evaluation / Postanesthesia Recovery',chapters:'13,39',order:11,type:'topic'},
-      {id:'ba-t12',title:'Anesthesia Delivery Systems',chapters:'15',order:12,type:'topic'},
-      {id:'ba-t13',title:'Positioning',chapters:'19',order:13,type:'topic'},
-      {id:'ba-t14',title:'Monitoring',chapters:'20',order:14,type:'topic'},
-      {id:'ba-t15',title:'Fluid Management / Blood Therapy',chapters:'24-25',order:15,type:'topic'},
-      {id:'ba-synth',title:'Anesthesia Synthesis',chapters:'',order:16,type:'synthesis'},
-      {id:'ba-mastery',title:'🧠 Mastery Challenge',chapters:'',order:17,type:'mastery'},
+      {id:'ba-t12',title:'Anesthesia Delivery Systems',chapters:'15',order:11,type:'topic'},
+      {id:'ba-t13',title:'Positioning',chapters:'19',order:12,type:'topic'},
+      {id:'ba-t14',title:'Monitoring',chapters:'20',order:13,type:'topic'},
+      {id:'ba-t15',title:'Fluid Management / Blood Therapy',chapters:'24-25',order:14,type:'topic'},
+      {id:'ba-synth',title:'Anesthesia Synthesis',chapters:'',order:15,type:'synthesis'},
     ]
   },
   {
