@@ -218,21 +218,26 @@ maybeAssign('closeStore', function() {
   if (modal) modal.classList.remove('on');
 });
 
-maybeAssign('pauseGame', function() {
-  stopTimer();
-  if (typeof window.stopOpioidScene === 'function') window.stopOpioidScene();
-  const overlay = document.getElementById('pause-overlay');
-  if (overlay) overlay.classList.add('on');
-});
+window.pauseGame = function() {
+  if (window.usingNewEngine) {
+    stopTimer();
+    if (typeof window.stopOpioidScene === 'function') window.stopOpioidScene();
+    const overlay = document.getElementById('pause-overlay');
+    if (overlay) overlay.classList.add('on');
+  } else if (typeof mapRuntime.pauseGame === 'function') {
+    mapRuntime.pauseGame();
+  }
+};
 
-maybeAssign('resumeGame', function() {
+window.resumeGame = function() {
   const overlay = document.getElementById('pause-overlay');
   if (overlay) overlay.classList.remove('on');
-  // Re-render current question to restart timer + scene
   if (window.usingNewEngine) {
     renderCurrentQuestion();
+  } else if (typeof mapRuntime.resumeGame === 'function') {
+    mapRuntime.resumeGame();
   }
-});
+};
 
 maybeAssign('quitToMap', function() {
   stopTimer();
