@@ -49,7 +49,11 @@ function save(){const prev=getSave();
     bestScores:prev.bestScores||{},
     missedQuestionIds:missedQuestionIds,
     questionStats:questionStats,
-    weakTopicIds:topicWeakness
+    weakTopicIds:topicWeakness,
+    // Preserve new-engine fields so legacy save() never wipes them
+    nodeCompletion:prev.nodeCompletion||{},
+    performanceByTopic:prev.performanceByTopic||{},
+    lastSeen:prev.lastSeen||{}
   });}
 
 let playerName='';let bankedPts=0;let missedQuestionIds=[];let topicWeakness=[];
@@ -2090,7 +2094,9 @@ function showCourseSelector(){
   // Player info header
   const header=document.createElement('div');
   header.style.cssText='grid-column:1/-1;font-size:0.75rem;color:#4488ff;text-align:center;margin-bottom:0.5rem;font-weight:bold;';
-  header.innerHTML=`${playerName} — Banked: ${bankedPts.toLocaleString()} pts`;
+  // Read bankedPts fresh from localStorage so new-engine session earnings are visible
+  const _freshPts=(loadSave()||{}).bankedPts||bankedPts||0;
+  header.innerHTML=`${playerName} — Banked: ${_freshPts.toLocaleString()} pts`;
   courseContainer.appendChild(header);
   
   // Create course buttons
