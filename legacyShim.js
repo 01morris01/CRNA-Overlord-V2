@@ -228,25 +228,48 @@ function _showNewEngineGameOver(run) {
   if (goPts) goPts.textContent = run.score.toLocaleString();
 }
 
-// ─── startGame: route splash → level-map (fixes node 10/11 routing) ────────
+// ─── startGame: delegate to legacy (loads state → shows Courses screen) ─────
 //
-// The legacy startGame calls showCourseSelector() which only routes node-9.
-// We call the original startGame first (it loads inv/equip/bankedPts from
-// localStorage into legacy closure vars), then immediately redirect to
-// level-map which correctly routes ALL nodes via startStudySessionForNode.
+// Legacy startGame correctly shows #course-selector (Courses screen).
+// It also loads inv/equip/bankedPts from localStorage into legacy closure vars.
+// We just call it directly — no redirect needed.
 //
 window.startGame = function() {
-  // Call legacy startGame to handle name validation and state loading
   if (typeof mapRuntime.startGame === 'function') {
     mapRuntime.startGame();
   }
-  // Redirect: hide course-selector, show level-map instead
-  const courseSelector = document.getElementById('course-selector');
-  const levelMap       = document.getElementById('level-map');
-  if (courseSelector) courseSelector.style.display = 'none';
-  if (levelMap) {
-    levelMap.style.display = ''; // clear any inline 'none' set by legacy
-    levelMap.classList.add('on');
+};
+
+// ─── selectTopic: route known nodes through startStudySessionForNode ──────────
+//
+// Map markers call selectTopic(topicId) on click. Legacy selectTopic only
+// stores the ID and shows a visual selection + Start button. startStudySession()
+// then only special-cases ba-t09 for the new engine; ba-t10/ba-t11 fall back
+// to legacy ALL_QS.
+//
+// This override intercepts clicks on topics that have a question bank in
+// NODE_CONFIG and immediately launches the correct session — same path used
+// by the node-list buttons. Topics without question banks fall through to
+// legacy behavior (visual selection + Start button).
+//
+const TOPIC_TO_NODE = {
+  'ba-t09': { courseId: 'basics-of-anesthesia', nodeId: 'node-9'  },
+  'ba-t10': { courseId: 'basics-of-anesthesia', nodeId: 'node-10' },
+  'ba-t11': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
+};
+
+const _legacySelectTopic = window.selectTopic;
+
+window.selectTopic = function(topicId) {
+  const mapping = TOPIC_TO_NODE[topicId];
+  if (mapping) {
+    console.log('[SHIM] selectTopic', topicId, '→', mapping.nodeId);
+    startStudySessionForNode(mapping.courseId, mapping.nodeId);
+    return;
+  }
+  // No question bank for this topic yet — fall through to legacy (shows selection UI)
+  if (typeof _legacySelectTopic === 'function') {
+    _legacySelectTopic(topicId);
   }
 };
 
@@ -362,30 +385,33 @@ window.resumeGame = function() {
   }
 };
 
-maybeAssign('quitToMap', function() {
-  stopTimer();
-  const nodeId = window.currentSession?.nodeId;
-  const cfg    = nodeId ? getNodeConfig(nodeId) : null;
-  if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
-    window[cfg.stopSceneName]();
-  } else if (typeof window.stopOpioidScene === 'function') {
-    window.stopOpioidScene();
+// Direct override (not maybeAssign) so this runs for both engines.
+// Legacy quitToMap would call showTopicMap/showCombinedStudyScreen which is
+// fine for pure legacy sessions, but for new engine we need proper cleanup.
+window.quitToMap = function() {
+  if (window.usingNewEngine) {
+    // New engine path: stop timer + scene, then return to course map
+    stopTimer();
+    const nodeId = window.currentSession?.nodeId;
+    const cfg    = nodeId ? getNodeConfig(nodeId) : null;
+    if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
+      window[cfg.stopSceneName]();
+    } else if (typeof window.stopOpioidScene === 'function') {
+      window.stopOpioidScene();
+    }
+    window.usingNewEngine = false;
+    const overlay = document.getElementById('pause-overlay');
+    const game    = document.getElementById('game');
+    const go      = document.getElementById('go');
+    if (overlay) overlay.classList.remove('on');
+    if (game)    game.style.display = 'none';
+    if (go)      go.classList.remove('on');
+    if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
+  } else if (typeof mapRuntime.quitToMap === 'function') {
+    // Legacy engine path: use original (handles save + topic map navigation)
+    mapRuntime.quitToMap();
   }
-  window.usingNewEngine = false;
-
-  const overlay  = document.getElementById('pause-overlay');
-  const game     = document.getElementById('game');
-  const go       = document.getElementById('go');
-  const levelMap = document.getElementById('level-map');
-
-  if (overlay)  overlay.classList.remove('on');
-  if (game)     game.style.display = 'none';
-  if (go)       go.classList.remove('on');
-  if (levelMap) {
-    levelMap.style.display = '';
-    levelMap.classList.add('on');
-  }
-});
+};
 
 maybeAssign('closeLvl', function() {
   const s = document.getElementById('lvl-screen');
@@ -393,28 +419,20 @@ maybeAssign('closeLvl', function() {
 });
 
 maybeAssign('backToMap', function() {
-  const game     = document.getElementById('game');
-  const go       = document.getElementById('go');
-  const levelMap = document.getElementById('level-map');
-
+  const game = document.getElementById('game');
+  const go   = document.getElementById('go');
   if (game) game.style.display = 'none';
   if (go)   go.classList.remove('on');
-  if (levelMap) {
-    levelMap.style.display = '';
-    levelMap.classList.add('on');
-  }
+  // Show courses screen (restores full Name→Courses→Map→Node flow)
+  if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
 });
 
 maybeAssign('restart', function() {
   const go = document.getElementById('go');
   if (go) go.classList.remove('on');
   window.usingNewEngine = false;
-  // Return to level-map so user can pick any node
-  const levelMap = document.getElementById('level-map');
-  if (levelMap) {
-    levelMap.style.display = '';
-    levelMap.classList.add('on');
-  }
+  // Return to courses screen so user can pick any node
+  if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
 });
 
 // Initialize the course map

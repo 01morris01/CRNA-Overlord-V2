@@ -3,7 +3,8 @@
  * Renders CRNA course maps as interactive 2D overworlds using Leaflet with custom background
  */
 
-let leafletWorldMap = null;  // Global reference to current Leaflet map
+let leafletWorldMap = null;   // Global reference to current Leaflet map
+let leafletWorldBounds = null; // Bounds of the current map (for re-fitting)
 
 // Course-specific map bounds (height x width in pixels)
 const COURSE_MAP_BOUNDS = {
@@ -46,6 +47,7 @@ function initLeafletWorldMap(courseId, course, layout) {
 
   // Get course-specific bounds
   const bounds = COURSE_MAP_BOUNDS[courseId] || COURSE_MAP_BOUNDS['default'];
+  leafletWorldBounds = bounds;
 
   // Create map with SimpleCoordinateReference (pixel-based, not geographic)
   leafletWorldMap = L.map(mapContainer, {
@@ -93,14 +95,22 @@ function initLeafletWorldMap(courseId, course, layout) {
     marker.addTo(leafletWorldMap);
   });
 
-  // Invalidate size to ensure map renders correctly
-  setTimeout(() => {
+  // Invalidate size after layout has had time to settle.
+  // Multiple calls handle delayed flex/reflow calculations.
+  const _doInvalidate = () => {
+    if (!leafletWorldMap) return;
     leafletWorldMap.invalidateSize();
+    leafletWorldMap.fitBounds(bounds);
+  };
+  setTimeout(_doInvalidate, 100);
+  setTimeout(_doInvalidate, 350);
+  setTimeout(() => {
+    _doInvalidate();
     console.log(`✅ Leaflet world map initialized for course: ${course.title}`);
     console.log(`   Image: ${bgImagePath}`);
     console.log(`   Bounds: ${JSON.stringify(bounds)}`);
     console.log(`   Topics loaded: ${course.topics.length}`);
-  }, 100);
+  }, 650);
 
   // Expose for debugging
   window.worldMap = leafletWorldMap;
@@ -308,7 +318,8 @@ function ensureWorldMapStyles() {
 
     #world-map {
       width: 100%;
-      height: 350px;
+      height: 100%;
+      min-height: 500px;
       background: rgba(5, 10, 30, 0.8) !important;
       border: 1px solid rgba(100, 150, 200, 0.3) !important;
       border-radius: 4px !important;
@@ -323,5 +334,13 @@ function ensureWorldMapStyles() {
 // Ensure styles are loaded when script loads
 ensureWorldMapStyles();
 
+/** Force the active Leaflet map to recalculate its size and re-fit bounds. */
+function invalidateWorldMap() {
+  if (!leafletWorldMap) return;
+  leafletWorldMap.invalidateSize();
+  if (leafletWorldBounds) leafletWorldMap.fitBounds(leafletWorldBounds);
+}
+
 console.log('✅ world-map.js loaded - Leaflet integration ready');
 window.initLeafletWorldMap = initLeafletWorldMap;
+window.invalidateWorldMap  = invalidateWorldMap;
