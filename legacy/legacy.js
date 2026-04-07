@@ -37,6 +37,13 @@ function writeSave(data){try{localStorage.setItem(SAVE_KEY,JSON.stringify(data))
 function getSave(){return loadSave()||{name:'',totalPts:0,bankedPts:0,equip:{vent:false,mac:false,vl:false,bougie:false},inv:{shield:0,skip:0,reveal:0,time:0},highScore:0,gamesPlayed:0,missedQuestionIds:[],questionStats:{},weakTopicIds:[]};}
 function save(){const prev=getSave();
   const questionStats = ALL_QS.reduce((acc,q)=>{acc[q.id]={attempted:q.stats.attempted||0,correct:q.stats.correct||0,lastCorrect:q.stats.lastCorrect||0,repeatStreak:q.stats.repeatStreak||0};return acc;},{ });
+  // Partition missedQuestionIds: legacy closure owns legacy-question IDs;
+  // new-engine IDs (not in ALL_QS) are preserved verbatim from localStorage
+  // so that new-engine correct/wrong answers are never overwritten by the stale closure.
+  const _legacyQIds = new Set(ALL_QS.map(q=>q.id));
+  const _prevMissed = prev.missedQuestionIds||[];
+  const _newEngineMissed = _prevMissed.filter(id=>!_legacyQIds.has(id));
+  const _legacyMissed = missedQuestionIds.filter(id=>_legacyQIds.has(id));
   writeSave({
     name:playerName,
     totalPts:bankedPts,
@@ -47,13 +54,14 @@ function save(){const prev=getSave();
     gamesPlayed:(prev.gamesPlayed||0),
     completed:prev.completed||{},
     bestScores:prev.bestScores||{},
-    missedQuestionIds:missedQuestionIds,
+    missedQuestionIds:[...new Set([..._legacyMissed,..._newEngineMissed])],
     questionStats:questionStats,
     weakTopicIds:topicWeakness,
     // Preserve new-engine fields so legacy save() never wipes them
     nodeCompletion:prev.nodeCompletion||{},
     performanceByTopic:prev.performanceByTopic||{},
-    lastSeen:prev.lastSeen||{}
+    lastSeen:prev.lastSeen||{},
+    savedForLater:prev.savedForLater||[],
   });}
 
 let playerName='';let bankedPts=0;let missedQuestionIds=[];let topicWeakness=[];
