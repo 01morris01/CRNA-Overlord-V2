@@ -65,7 +65,7 @@ export function submitAnswer(isCorrect) {
   const state = loadState();
   state.gamesPlayed = (state.gamesPlayed || 0) + (currentRun.done ? 1 : 0);
   state.bankedPts = (state.bankedPts || 0) + (isCorrect ? 100 : 0);
-  state.totalPts = (state.totalPts || 0) + (isCorrect ? 10 : 0);
+  state.totalPts = (state.totalPts || 0) + (isCorrect ? 100 : 0);
   state.highScore = Math.max(state.highScore || 0, currentRun.score);
   saveState(state);
 
