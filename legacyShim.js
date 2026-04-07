@@ -552,20 +552,55 @@ maybeAssign('closeLvl', function() {
   if (s) s.classList.remove('on');
 });
 
-maybeAssign('backToMap', function() {
+// ─── backToMap ───────────────────────────────────────────────────────────────
+// Called from #lvl-screen "BACK TO MAP" button. For new engine, return to the
+// specific course map; for legacy, delegate to legacy backToMap.
+//
+window.backToMap = function() {
   const game = document.getElementById('game');
   const go   = document.getElementById('go');
+  const lvl  = document.getElementById('lvl-screen');
   if (game) game.style.display = 'none';
   if (go)   go.classList.remove('on');
-  if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
-});
+  if (lvl)  lvl.classList.remove('on');
 
-maybeAssign('restart', function() {
+  if (window.usingNewEngine) {
+    window.usingNewEngine = false;
+    _pendingNodeMapping = null;
+    if (typeof window.showTopicMap === 'function') {
+      window.showTopicMap();
+    } else if (typeof window.showCourseSelector === 'function') {
+      window.showCourseSelector();
+    }
+  } else if (typeof mapRuntime.backToMap === 'function') {
+    mapRuntime.backToMap();
+  } else if (typeof window.showCourseSelector === 'function') {
+    window.showCourseSelector();
+  }
+};
+
+// ─── restart ─────────────────────────────────────────────────────────────────
+// Called from #go "NEW PATIENT" button. For new engine, return to the specific
+// course map so the user can pick a node; for legacy, delegate to legacy restart.
+//
+window.restart = function() {
   const go = document.getElementById('go');
   if (go) go.classList.remove('on');
-  window.usingNewEngine = false;
-  if (typeof window.showCourseSelector === 'function') window.showCourseSelector();
-});
+
+  if (window.usingNewEngine) {
+    window.usingNewEngine = false;
+    _pendingNodeMapping = null;
+    if (typeof window.showTopicMap === 'function') {
+      window.showTopicMap();
+    } else if (typeof window.showCourseSelector === 'function') {
+      window.showCourseSelector();
+    }
+  } else if (typeof mapRuntime.restart === 'function') {
+    mapRuntime.restart();
+  } else if (typeof window.showCourseSelector === 'function') {
+    window.showCourseSelector();
+  }
+};
 
 // Initialize the course map node list (used by #level-map, kept for compat)
 createSimpleCourseMap();
