@@ -110,11 +110,25 @@ function _renderNodePreview(topicId) {
 
   const info = document.createElement('div');
   info.style.cssText = 'background:rgba(255,150,0,.08);border:1px solid rgba(255,150,0,.25);border-radius:6px;padding:.8rem 1rem;color:#ffaa00;font-family:monospace;';
+
+  const recallOn = !!loadState().recallFirstEnabled;
   info.innerHTML = `
     <div style="font-size:.95rem;font-weight:900;margin-bottom:.3rem;">${cfg.icon || '📚'} ${cfg.title}</div>
     <div style="color:#888;font-size:.7rem;">${cfg.chapterLabel} &nbsp;·&nbsp; ${cfg.badgeLabel}</div>
     <div style="color:#4af;font-size:.75rem;margin-top:.5rem;">📝 Session: ${SESSION_SIZE} questions</div>
-    <div style="color:#666;font-size:.65rem;margin-top:.2rem;">Click ⚡ START STUDY SESSION ⚡ below</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;padding-top:.5rem;border-top:1px solid rgba(255,150,0,.15);">
+      <div>
+        <span style="font-size:.68rem;color:#888;letter-spacing:.05em;">Recall First</span>
+        <div style="font-size:.58rem;color:#445;margin-top:.1rem;">See question before choices</div>
+      </div>
+      <button id="recall-toggle-btn" onclick="toggleRecallFirst()"
+        style="font-size:.65rem;padding:.28rem .65rem;border-radius:3px;cursor:pointer;font-family:monospace;letter-spacing:.05em;
+               background:${recallOn ? 'rgba(0,255,136,.15)' : 'rgba(30,30,50,.6)'};
+               border:1px solid ${recallOn ? 'rgba(0,255,136,.5)' : 'rgba(80,80,120,.4)'};
+               color:${recallOn ? '#00ff88' : '#555'};">
+        ${recallOn ? '● ON' : '○ OFF'}
+      </button>
+    </div>
   `;
   grid.appendChild(info);
   container.style.display = 'block';
@@ -549,6 +563,35 @@ window.goReviewWeakest = function() {
   if (go) go.classList.remove('on');
 
   window.startGameWithQuestions(subset);
+};
+
+// ─── Recall First toggle ─────────────────────────────────────────────────────
+
+/**
+ * Toggle Recall First mode on/off. Persists to state.
+ * Updates any visible toggle button (node preview or review panel).
+ */
+window.toggleRecallFirst = function() {
+  const state = loadState();
+  state.recallFirstEnabled = !state.recallFirstEnabled;
+  saveState(state);
+
+  const on = state.recallFirstEnabled;
+  // Update any toggle button currently in the DOM
+  document.querySelectorAll('.recall-toggle-btn').forEach(btn => {
+    btn.textContent = on ? '● ON' : '○ OFF';
+    btn.style.background    = on ? 'rgba(0,255,136,.15)' : 'rgba(30,30,50,.6)';
+    btn.style.borderColor   = on ? 'rgba(0,255,136,.5)'  : 'rgba(80,80,120,.4)';
+    btn.style.color         = on ? '#00ff88' : '#555';
+  });
+  // Also update by ID (node preview button)
+  const byId = document.getElementById('recall-toggle-btn');
+  if (byId) {
+    byId.textContent     = on ? '● ON' : '○ OFF';
+    byId.style.background  = on ? 'rgba(0,255,136,.15)' : 'rgba(30,30,50,.6)';
+    byId.style.borderColor = on ? 'rgba(0,255,136,.5)'  : 'rgba(80,80,120,.4)';
+    byId.style.color       = on ? '#00ff88' : '#555';
+  }
 };
 
 // ─── Smart Review Mode ───────────────────────────────────────────────────────

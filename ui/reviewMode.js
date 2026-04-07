@@ -144,6 +144,15 @@ export function showReviewPanel(courseId) {
   _updateBtn('review-saved-btn',  counts.saved,  '📌 SAVED FOR LATER');
   _updateBtn('review-mixed-btn',  counts.mixed,  '🔀 MIXED REVIEW');
 
+  // Sync Recall First toggle state
+  const recallOn = !!loadState().recallFirstEnabled;
+  panel.querySelectorAll('.recall-toggle-btn').forEach(btn => {
+    btn.textContent    = recallOn ? '● ON' : '○ OFF';
+    btn.style.background    = recallOn ? 'rgba(0,255,136,.15)' : 'rgba(30,30,50,.6)';
+    btn.style.borderColor   = recallOn ? 'rgba(0,255,136,.5)'  : 'rgba(80,80,120,.4)';
+    btn.style.color         = recallOn ? '#00ff88' : '#555';
+  });
+
   panel.style.display = 'flex';
 }
 

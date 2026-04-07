@@ -4,6 +4,7 @@ import { renderOpioidScene, stopOpioidScene } from './opioidsScene.js';
 import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
+import { loadState } from '../core/state.js';
 
 /**
  * Returns a safe display string for the correct answer of any question type,
@@ -196,6 +197,55 @@ export function updateHUD() {
   if (l3) l3.style.opacity = state.lives >= 3 ? '1' : '.2';
 }
 
+// ─── Recall First helpers ─────────────────────────────────────────────────────
+
+/**
+ * Render the correct answer UI for the current question type.
+ * Called immediately on normal flow, or on "Ready" button click in recall mode.
+ */
+function _renderAnswerOptions(q) {
+  const clickInst = document.getElementById('click-inst');
+  if (q.type === 'short' || q.type === 'type') {
+    renderShortAnswerUI(q);
+  } else if (q.type === 'multi') {
+    renderMultiSelectUI(q);
+  } else if (q.type === 'click') {
+    if (clickInst) clickInst.style.display = 'block';
+  } else {
+    renderMCQUI(q);
+  }
+}
+
+/**
+ * Show the recall phase: stem is visible, answers are hidden, timer not started.
+ * A single "Ready for Answer Options" button transitions to normal answer flow.
+ */
+function _showRecallPhase(q) {
+  // Show timer bar in dimmed/waiting state (gray, full width = not counting yet)
+  const fill = document.getElementById('tmr-fill');
+  if (fill) {
+    fill.style.transition = 'none';
+    fill.style.width = '100%';
+    fill.style.background = 'rgba(80,80,100,.35)';
+  }
+
+  // Inject the reveal button into #ans-area
+  const ansArea = document.getElementById('ans-area') || document.getElementById('ch-card');
+  if (!ansArea) return;
+
+  const btn = document.createElement('button');
+  btn.id = 'recall-reveal-btn';
+  btn.className = 'big-btn green';
+  btn.style.cssText = 'width:100%;margin-top:.6rem;font-size:.82rem;padding:.6rem 1rem;animation:none;';
+  btn.textContent = '⚡ Ready for Answer Options';
+  btn.onclick = () => {
+    btn.remove();
+    _renderAnswerOptions(q);
+    startQuestionTimer(q);
+  };
+  ansArea.appendChild(btn);
+}
+
 // ─── main question renderer ───────────────────────────────────────────────────
 
 export function renderCurrentQuestion() {
@@ -232,6 +282,9 @@ export function renderCurrentQuestion() {
   if (ovs) ovs.textContent = q.setup || '';
   if (qtxt) qtxt.textContent = q.q || '';
 
+  // Remove any leftover recall reveal button from previous question
+  document.getElementById('recall-reveal-btn')?.remove();
+
   // Hide all answer areas
   const typeArea  = document.getElementById('type-area');
   const ansGrid   = document.getElementById('ans-grid');
@@ -245,19 +298,14 @@ export function renderCurrentQuestion() {
   console.log('QUESTION TYPE:', q.type, '| id:', q.id);
   if (q.type === 'multi') console.log('Choices:', q.choices);
 
-  // Render by type
-  if (q.type === 'short' || q.type === 'type') {
-    renderShortAnswerUI(q);
-  } else if (q.type === 'multi') {
-    renderMultiSelectUI(q);
-  } else if (q.type === 'click') {
-    if (clickInst) clickInst.style.display = 'block';
+  // Recall First: show stem only, hold timer until user clicks ready
+  if (loadState().recallFirstEnabled) {
+    _showRecallPhase(q);
   } else {
-    renderMCQUI(q);
+    // Normal path: render answers and start timer immediately
+    _renderAnswerOptions(q);
+    startQuestionTimer(q);
   }
-
-  // Start countdown timer
-  startQuestionTimer(q);
 
   // Render themed scene — dynamic dispatch based on current node
   {

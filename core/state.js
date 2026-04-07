@@ -17,6 +17,8 @@ const DEFAULT_STATE = {
   nodeCompletion: {},
   // Question IDs the player has flagged for later review
   savedForLater: [],
+  // Recall First: show stem before answer options, hold timer until user is ready
+  recallFirstEnabled: false,
 };
 
 function safeParse(json) {
