@@ -79,6 +79,21 @@ const TOPIC_TO_NODE = {
 // Pending mapping stored by selectTopic, consumed by startStudySession.
 let _pendingNodeMapping = null;
 
+/**
+ * Public helper for world-map.js (non-module script).
+ * Returns { seen, pct } if this topic maps to a new-engine node with seen > 0,
+ * or null if the topic has no question bank or hasn't been visited yet.
+ */
+window.getNodeCompletionForTopic = function(topicId) {
+  const mapping = TOPIC_TO_NODE[topicId];
+  if (!mapping) return null;
+  const state = loadState();
+  const nc = (state.nodeCompletion || {})[mapping.nodeId];
+  if (!nc || nc.seen <= 0) return null;
+  const pct = nc.totalInBank > 0 ? Math.min(100, Math.round((nc.seen / nc.totalInBank) * 100)) : 0;
+  return { seen: nc.seen, pct };
+};
+
 /** Show a node preview panel in #mode-container when a known node is selected. */
 function _renderNodePreview(topicId) {
   const mapping = TOPIC_TO_NODE[topicId];
@@ -341,6 +356,9 @@ function _showNewEngineGameOver(run) {
   }
 
   if (goPts) goPts.textContent = run.score.toLocaleString();
+
+  // Refresh the #level-map node list so completion status reflects this session
+  createSimpleCourseMap();
 
   // ── Follow-up actions ──────────────────────────────────────────────────────
   const followup   = document.getElementById('go-followup');

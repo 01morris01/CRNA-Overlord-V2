@@ -127,12 +127,28 @@ function createTopicMarker(topic, coords, idx) {
   // Determine marker style based on topic type
   let markerConfig = getMarkerConfig(topic.type);
 
+  // Check node completion state for new-engine topics (ba-t09, ba-t10, ba-t12)
+  const completion = (typeof window.getNodeCompletionForTopic === 'function')
+    ? window.getNodeCompletionForTopic(topic.id)
+    : null;
+
+  // Completion overlay: green checkmark badge + green glow if seen > 0
+  const completionBadge = completion
+    ? `<div style="position:absolute;top:-5px;right:-5px;background:#00ff88;color:#000;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px #00ff88;z-index:2;">✓</div>`
+    : '';
+  const completionGlow = completion
+    ? ';border-color:rgba(0,255,136,0.9)!important;box-shadow:0 0 30px rgba(0,255,136,0.7),inset 0 0 15px rgba(0,255,136,0.2)'
+    : '';
+
   // Create custom div icon
   const icon = L.divIcon({
     className: 'world-map-marker',
     html: `
-      <div class="world-marker-pin" style="${markerConfig.pinStyle}">
-        <div class="world-marker-label">${topic.order}</div>
+      <div style="position:relative;display:inline-block;">
+        <div class="world-marker-pin" style="${markerConfig.pinStyle}${completionGlow}">
+          <div class="world-marker-label">${topic.order}</div>
+        </div>
+        ${completionBadge}
       </div>
     `,
     iconSize: [60, 60],
@@ -154,11 +170,15 @@ function createTopicMarker(topic, coords, idx) {
   });
 
   // Add popup (click to view)
+  const completionLine = completion
+    ? `<div style="color:#00ff88;margin-top:4px;font-size:0.75rem;">✓ ${completion.pct}% explored</div>`
+    : '';
   const popupHtml = `
     <div style="background:rgba(5,10,30,.95);color:#ffaa00;font-family:monospace;padding:8px;border:1px solid rgba(255,150,0,.5);border-radius:4px;font-size:0.8rem;">
       <strong>${topic.order}. ${topic.title}</strong><br>
       ${topic.chapters ? `Ch. ${topic.chapters}<br>` : ''}
       ${markerConfig.label}
+      ${completionLine}
     </div>
   `;
   marker.bindPopup(popupHtml);

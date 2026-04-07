@@ -36,16 +36,28 @@ export function renderSectionList(sections=[]) {
 export function createSimpleCourseMap() {
   // Auto-build sections from NODE_CONFIG — no manual wiring needed per node
   const nodes = getNodesByCourse('basics-of-anesthesia');
+  const state = loadState();
+  const nc = state.nodeCompletion || {};
 
   const sections = nodes.map(({ nodeId, courseId, title, chapterLabel, icon, questionsMeta }) => {
     const meta = questionsMeta || getQuestionMetadata(courseId, nodeId);
     const desc = meta
       ? `${meta.totalQuestions} questions (${meta.questionTypes?.mcq ?? 0} MCQ, ${meta.questionTypes?.multi ?? 0} Multi, ${meta.questionTypes?.short ?? 0} Short)`
       : 'Questions loading...';
+
+    // Derive completion status from saved nodeCompletion
+    const nodeData = nc[nodeId];
+    const seen = nodeData?.seen || 0;
+    const totalInBank = nodeData?.totalInBank || 0;
+    const pct = totalInBank > 0 ? Math.min(100, Math.round((seen / totalInBank) * 100)) : 0;
+    let status = 'Ready';
+    if (pct >= 80)     status = `✅ ${pct}% explored`;
+    else if (pct > 0)  status = `📈 ${pct}% seen`;
+
     return {
       name:     `${title} — ${chapterLabel}`,
       desc,
-      status:   'Ready',
+      status,
       icon:     icon || '📍',
       available: true,
       courseId,
