@@ -5,6 +5,7 @@ import { gradeAnswer } from './core/answerGrading.js';
 import { getQuestionsForNode } from './core/questionEngine.js';
 import { getNodeConfig } from './core/nodeConfig.js';
 import { loadState, saveState } from './core/state.js';
+import { showReviewPanel, hideReviewPanel, buildReviewSession, REVIEW_SESSION_SIZE } from './ui/reviewMode.js';
 
 // Track which engine is currently active
 window.usingNewEngine = false;
@@ -122,6 +123,7 @@ window.startGameWithQuestions = function(questions) {
   window.usingNewEngine = true;
   _pendingNodeMapping   = null;
   _hideNodePreview();
+  hideReviewPanel();
 
   // Stop any running scene / timer from a previous session
   if (typeof window.stopLegacyScene === 'function') window.stopLegacyScene();
@@ -258,10 +260,11 @@ maybeAssign('submitType', function() {
  * Show game over + update node completion in state.
  */
 function _showNewEngineGameOver(run) {
-  const go    = document.getElementById('go');
-  const goT   = document.getElementById('go-t');
-  const goS   = document.getElementById('go-s');
-  const goPts = document.getElementById('go-pts');
+  const go      = document.getElementById('go');
+  const goT     = document.getElementById('go-t');
+  const goS     = document.getElementById('go-s');
+  const goPts   = document.getElementById('go-pts');
+  const bonusEl = document.getElementById('go-bonus');
 
   if (!go) return;
   go.classList.add('on');
@@ -297,8 +300,282 @@ function _showNewEngineGameOver(run) {
     if (goS) goS.textContent = `${correctCount}/${totalCount} correct${nodeCompLine ? ' — ' + nodeCompLine : ''}`;
   }
 
+  // ── XP Improvement Bonus (follow-up sessions only) ────────────────────────
+  if (bonusEl) bonusEl.style.display = 'none';
+  const session = window.currentSession;
+  if (session?.isFollowup && session.targetedConcepts?.length > 0) {
+    const improved = [];
+    const mastered = [];
+
+    for (const concept of session.targetedConcepts) {
+      const conceptQs = run.questions.filter(q => q.concept_tag === concept);
+      if (conceptQs.length === 0) continue;
+      const total   = conceptQs.length;
+      const correct = run.results.filter(r =>
+        r.correct && conceptQs.some(q => q.id === r.questionId)
+      ).length;
+      if (correct >= 2 || correct / total >= 0.7) {
+        mastered.push(concept);
+      } else if (correct >= 1) {
+        improved.push(concept);
+      }
+    }
+
+    const bonusXP = Math.min(100, improved.length * 25 + mastered.length * 50);
+    if (bonusXP > 0) {
+      run.score += bonusXP;
+      const bstate = loadState();
+      bstate.bankedPts = (bstate.bankedPts || 0) + bonusXP;
+      saveState(bstate);
+
+      if (bonusEl) {
+        const lines = [
+          `<div style="font-size:1.1rem;font-weight:900;color:#ffcc00;text-shadow:0 0 12px #ffaa00;">⚡ BONUS +${bonusXP}</div>`,
+          ...mastered.map(c => `<div style="font-size:.7rem;color:#00ff88;letter-spacing:.1em;">👑 MASTERED: ${c}</div>`),
+          ...improved.map(c => `<div style="font-size:.7rem;color:#4af;letter-spacing:.1em;">🧠 IMPROVED: ${c}</div>`),
+        ];
+        bonusEl.innerHTML = lines.join('');
+        bonusEl.style.display = 'flex';
+      }
+    }
+  }
+
   if (goPts) goPts.textContent = run.score.toLocaleString();
+
+  // ── Follow-up actions ──────────────────────────────────────────────────────
+  const followup   = document.getElementById('go-followup');
+  const retryBtn   = document.getElementById('go-retry-btn');
+  const saveBtn    = document.getElementById('go-save-btn');
+  const rematchBtn = document.getElementById('go-rematch-btn');
+
+  if (followup) {
+    const missedCount = run.results.filter(r => !r.correct && !r.skipped).length;
+
+    // Retry Missed — only useful when there are wrong answers
+    if (retryBtn) {
+      if (missedCount > 0) {
+        retryBtn.style.display = '';
+        retryBtn.textContent   = `🔁 RETRY MISSED (${missedCount})`;
+        retryBtn.disabled      = false;
+      } else {
+        retryBtn.style.display = 'none';
+      }
+    }
+
+    // Review Weakest — show when ≥1 missed question has a concept_tag
+    const weakBtn = document.getElementById('go-weak-btn');
+    if (weakBtn) {
+      const conceptsWithMisses = new Set(
+        run.results
+          .filter(r => !r.correct && !r.skipped)
+          .map(r => run.questions.find(q => q.id === r.questionId)?.concept_tag)
+          .filter(Boolean)
+      );
+      if (conceptsWithMisses.size >= 1) {
+        weakBtn.style.display = '';
+        weakBtn.disabled      = false;
+      } else {
+        weakBtn.style.display = 'none';
+      }
+    }
+
+    // Save for Later — only when there are wrong answers
+    if (saveBtn) {
+      if (missedCount > 0) {
+        saveBtn.style.display = '';
+        saveBtn.textContent   = '📌 SAVE FOR LATER';
+        saveBtn.disabled      = false;
+      } else {
+        saveBtn.style.display = 'none';
+      }
+    }
+
+    // Quick Rematch always available
+    if (rematchBtn) rematchBtn.disabled = false;
+
+    followup.style.display = 'flex';
+  }
 }
+
+// ─── Follow-up action handlers ───────────────────────────────────────────────
+
+/** Hide and reset the follow-up panel and bonus block (called before any navigation away from #go). */
+function _resetFollowup() {
+  const followup = document.getElementById('go-followup');
+  if (followup) followup.style.display = 'none';
+  const bonusEl = document.getElementById('go-bonus');
+  if (bonusEl) { bonusEl.style.display = 'none'; bonusEl.innerHTML = ''; }
+}
+
+/**
+ * Retry Missed — launches a short sub-session (up to 5 questions) consisting
+ * of the questions the player answered incorrectly in the just-finished run.
+ */
+window.goRetryMissed = function() {
+  const run = getCurrentRun();
+  if (!run) return;
+
+  const missedIds = new Set(
+    run.results.filter(r => !r.correct && !r.skipped).map(r => r.questionId)
+  );
+  const missedQs = run.questions.filter(q => missedIds.has(q.id));
+  if (missedQs.length === 0) return;
+
+  const subset = [...missedQs].sort(() => Math.random() - 0.5).slice(0, 5);
+
+  // Tag for XP improvement detection
+  const targetedConcepts = [...new Set(missedQs.map(q => q.concept_tag).filter(Boolean))];
+  window.currentSession = {
+    ...window.currentSession,
+    isFollowup:       true,
+    followupType:     'retry-missed',
+    targetedConcepts,
+  };
+
+  _resetFollowup();
+  const go = document.getElementById('go');
+  if (go) go.classList.remove('on');
+
+  window.startGameWithQuestions(subset);
+};
+
+/**
+ * Quick Rematch — reshuffles the same node (or same review bucket) for a fresh run.
+ */
+window.goQuickRematch = function() {
+  _resetFollowup();
+  const go = document.getElementById('go');
+  if (go) go.classList.remove('on');
+
+  const session = window.currentSession;
+  if (!session) return;
+
+  if (session.isReview) {
+    // Re-run the same review bucket
+    window.launchReviewBucket(session.reviewBucket);
+  } else {
+    startStudySessionForNode(session.courseId, session.nodeId);
+  }
+};
+
+/**
+ * Save for Later — persists this session's missed question IDs to
+ * state.savedForLater[] for future Smart Review sessions.
+ */
+window.goSaveForLater = function() {
+  const run = getCurrentRun();
+  if (!run) return;
+
+  const missedIds = run.results
+    .filter(r => !r.correct && !r.skipped)
+    .map(r => r.questionId);
+  if (missedIds.length === 0) return;
+
+  const state = loadState();
+  const saved = new Set(state.savedForLater || []);
+  missedIds.forEach(id => saved.add(id));
+  state.savedForLater = [...saved];
+  saveState(state);
+
+  const btn = document.getElementById('go-save-btn');
+  if (btn) { btn.textContent = `✅ SAVED (${missedIds.length})`; btn.disabled = true; }
+};
+
+/**
+ * Review Weakest — builds a short session (≤5 questions) from the 1-2
+ * most-missed concept tags in the just-finished run.
+ * Only uses questions already in currentRun — never pulls from other nodes.
+ */
+window.goReviewWeakest = function() {
+  const run = getCurrentRun();
+  if (!run) return;
+
+  // 1. Count misses per concept_tag
+  const conceptCounts = {};
+  run.results.forEach(r => {
+    if (!r.correct && !r.skipped) {
+      const q = run.questions.find(q => q.id === r.questionId);
+      if (!q?.concept_tag) return;
+      conceptCounts[q.concept_tag] = (conceptCounts[q.concept_tag] || 0) + 1;
+    }
+  });
+
+  // 2. Sort by most missed, take top 2 concepts
+  const targetConcepts = Object.entries(conceptCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 2)
+    .map(([concept]) => concept);
+
+  if (targetConcepts.length === 0) return;
+
+  // 3. Pool = all run questions matching those concepts
+  const pool = run.questions.filter(q => targetConcepts.includes(q.concept_tag));
+
+  // 4. Shuffle and cap at 5
+  const subset = [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5);
+
+  if (subset.length === 0) return;
+
+  // Tag for XP improvement detection
+  window.currentSession = {
+    ...window.currentSession,
+    isFollowup:       true,
+    followupType:     'review-weakest',
+    targetedConcepts: targetConcepts,
+  };
+
+  _resetFollowup();
+  const go = document.getElementById('go');
+  if (go) go.classList.remove('on');
+
+  window.startGameWithQuestions(subset);
+};
+
+// ─── Smart Review Mode ───────────────────────────────────────────────────────
+
+/**
+ * Open the Smart Review panel.
+ * courseId: prefer active session's course; fall back to 'basics-of-anesthesia'.
+ */
+window.openReviewPanel = function() {
+  const courseId = window.currentSession?.courseId || 'basics-of-anesthesia';
+  showReviewPanel(courseId);
+};
+
+/** Close review panel, restore world-map (called by panel's ← BACK TO MAP button). */
+window.closeReviewPanel = function() {
+  hideReviewPanel();
+};
+
+/**
+ * Launch a review session for the given bucket.
+ * Reads courseId from the panel's dataset (set by showReviewPanel).
+ */
+window.launchReviewBucket = function(bucket) {
+  const panel    = document.getElementById('review-panel');
+  const courseId = panel?.dataset?.courseId || window.currentSession?.courseId || 'basics-of-anesthesia';
+
+  const questions = buildReviewSession(bucket, courseId);
+  if (!questions || questions.length === 0) {
+    console.warn('[REVIEW] No questions for bucket:', bucket);
+    return;
+  }
+
+  // Tag the session so follow-up handlers know this is a review run
+  window.currentSession = {
+    courseId,
+    nodeId:       null,
+    questions,
+    totalInBank:  questions.length,
+    isReview:     true,
+    reviewBucket: bucket,
+  };
+
+  hideReviewPanel();
+  window.startGameWithQuestions(questions);
+};
 
 // ─── startGame ────────────────────────────────────────────────────────────────
 // Delegate to legacy startGame which loads state (bankedPts, inv, equip) from
@@ -527,6 +804,8 @@ window.quitToMap = function() {
     window.usingNewEngine = false;
     _pendingNodeMapping   = null;
 
+    _resetFollowup();
+    hideReviewPanel();
     const overlay = document.getElementById('pause-overlay');
     const game    = document.getElementById('game');
     const go      = document.getElementById('go');
@@ -557,6 +836,7 @@ maybeAssign('closeLvl', function() {
 // specific course map; for legacy, delegate to legacy backToMap.
 //
 window.backToMap = function() {
+  _resetFollowup();
   const game = document.getElementById('game');
   const go   = document.getElementById('go');
   const lvl  = document.getElementById('lvl-screen');
@@ -584,6 +864,7 @@ window.backToMap = function() {
 // course map so the user can pick a node; for legacy, delegate to legacy restart.
 //
 window.restart = function() {
+  _resetFollowup();
   const go = document.getElementById('go');
   if (go) go.classList.remove('on');
 

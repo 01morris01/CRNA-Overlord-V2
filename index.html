@@ -397,7 +397,17 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="go-s" id="go-s">— career over before it started —</div>
 <div class="go-pts" id="go-pts">0</div>
 <div class="go-pl">PHYSIOLOGY POINTS</div>
+<!-- XP Improvement Bonus — populated + shown by new engine for follow-up sessions only -->
+<div id="go-bonus" style="display:none;flex-direction:column;align-items:center;gap:.2rem;margin:.4rem 0 .6rem;text-align:center;"></div>
 <button class="big-btn" onclick="restart()" style="margin-top:.5rem">⚡ NEW PATIENT ⚡</button>
+<!-- Post-completion follow-up actions — populated + shown by new engine only -->
+<div id="go-followup" style="display:none;flex-direction:column;gap:.4rem;width:100%;margin-top:.75rem;">
+  <div style="font-size:.55rem;color:#555;letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:.1rem;">— FOLLOW-UP —</div>
+  <button id="go-retry-btn"  class="big-btn" onclick="goRetryMissed()"      style="font-size:.72rem;padding:.45rem 1rem;background:rgba(255,80,0,.12);border-color:rgba(255,100,0,.45);display:none;">🔁 RETRY MISSED</button>
+  <button id="go-weak-btn"   class="big-btn" onclick="goReviewWeakest()"   style="font-size:.72rem;padding:.45rem 1rem;background:rgba(180,80,255,.1);border-color:rgba(180,80,255,.4);display:none;">🧠 REVIEW WEAKEST</button>
+  <button id="go-rematch-btn" class="big-btn" onclick="goQuickRematch()"   style="font-size:.72rem;padding:.45rem 1rem;background:rgba(0,140,255,.1);border-color:rgba(0,160,255,.4);">⚡ QUICK REMATCH</button>
+  <button id="go-save-btn"   class="big-btn" onclick="goSaveForLater()"  style="font-size:.72rem;padding:.45rem 1rem;background:rgba(200,200,0,.08);border-color:rgba(220,220,0,.35);display:none;">📌 SAVE FOR LATER</button>
+</div>
 </div>
 
 <!-- COURSE SELECTOR -->
@@ -419,7 +429,19 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <!-- Navigation and control buttons -->
 <div class="topic-map-nav-buttons" style="display:none;gap:.5rem;margin-top:.8rem;flex-shrink:0;">
 <button class="big-btn" onclick="openStore(); lastScreen='topic-map';" style="flex:1;font-size:.75rem;padding:.5rem 0.8rem;">🛒 STORE</button>
+<button class="big-btn" onclick="openReviewPanel()" style="flex:1;font-size:.72rem;padding:.5rem 0.8rem;background:rgba(0,180,120,.1);border-color:rgba(0,200,140,.4);">📖 SMART REVIEW</button>
 <button class="big-btn" onclick="showCourseSelector()" style="flex:1;font-size:.75rem;padding:.5rem 0.8rem;">← BACK TO COURSES</button>
+</div>
+
+<!-- Smart Review Panel — shown in place of world-map, new engine only -->
+<div id="review-panel" style="display:none;flex-direction:column;align-items:stretch;flex:1;background:linear-gradient(160deg,rgba(0,30,20,.7) 0%,rgba(0,10,30,.8) 100%);border:1px solid rgba(0,200,140,.2);border-radius:4px;padding:1.2rem 1rem;gap:.6rem;overflow-y:auto;">
+  <div style="font-size:.6rem;color:#00c88a;letter-spacing:.25em;text-transform:uppercase;text-align:center;margin-bottom:.2rem;">⚔ REINFORCEMENT STATION</div>
+  <div style="font-size:.7rem;color:#555;text-align:center;margin-bottom:.6rem;letter-spacing:.05em;">Review content from completed nodes only</div>
+  <button id="review-missed-btn" class="big-btn" onclick="launchReviewBucket('missed')" style="font-size:.78rem;padding:.55rem 1rem;background:rgba(255,60,0,.12);border-color:rgba(255,80,0,.4);">🩸 RETRY MISSED</button>
+  <button id="review-weak-btn"   class="big-btn" onclick="launchReviewBucket('weak')"   style="font-size:.78rem;padding:.55rem 1rem;background:rgba(200,100,255,.1);border-color:rgba(180,80,255,.4);">🧠 WEAK CONCEPTS</button>
+  <button id="review-saved-btn"  class="big-btn" onclick="launchReviewBucket('saved')"  style="font-size:.78rem;padding:.55rem 1rem;background:rgba(200,200,0,.08);border-color:rgba(220,220,0,.35);">📌 SAVED FOR LATER</button>
+  <button id="review-mixed-btn"  class="big-btn" onclick="launchReviewBucket('mixed')"  style="font-size:.78rem;padding:.55rem 1rem;background:rgba(0,140,255,.1);border-color:rgba(0,160,255,.4);">🔀 MIXED REVIEW</button>
+  <button class="big-btn" onclick="closeReviewPanel()" style="margin-top:auto;font-size:.72rem;padding:.45rem 1rem;background:rgba(60,60,60,.2);border-color:rgba(120,120,120,.3);">← BACK TO MAP</button>
 </div>
 </div>
 

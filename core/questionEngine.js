@@ -125,6 +125,9 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     ex: q.rationale || '',
     rationale: q.rationale || '',
 
+    // concept_tag: human-readable topic used by Review Weakest and XP bonus
+    concept_tag: q.metadata?.topic || null,
+
     metadata: {
       sectionId: 'basics-of-anesthesia',
       lessonId: resolvedNodeId,

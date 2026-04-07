@@ -15,6 +15,8 @@ const DEFAULT_STATE = {
   lastSeen: {course:null,section:null,lesson:null},
   // Per-node completion: { [nodeId]: { seen, correct, totalInBank } }
   nodeCompletion: {},
+  // Question IDs the player has flagged for later review
+  savedForLater: [],
 };
 
 function safeParse(json) {
@@ -33,6 +35,7 @@ export function loadState() {
   merged.missedQuestionIds = Array.isArray(raw.missedQuestionIds)? [...new Set(raw.missedQuestionIds)] : [];
   merged.lastSeen = {...DEFAULT_STATE.lastSeen, ...(raw.lastSeen||{})};
   merged.nodeCompletion = {...DEFAULT_STATE.nodeCompletion, ...(raw.nodeCompletion||{})};
+  merged.savedForLater  = Array.isArray(raw.savedForLater) ? [...new Set(raw.savedForLater)] : [];
 
   return merged;
 }
