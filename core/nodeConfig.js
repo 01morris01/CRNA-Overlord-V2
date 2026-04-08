@@ -9,6 +9,7 @@
  * Everything else (menus, routing, header, scene dispatch) resolves automatically.
  */
 
+import { AUTONOMIC_NS_QUESTIONS, AUTONOMIC_NS_METADATA } from '../data/questions/autonomic-ns-chapter6.js';
 import { INHALED_ANESTHETICS_QUESTIONS, INHALED_ANESTHETICS_METADATA } from '../data/questions/inhaled-anesthetics-chapter7.js';
 import { IV_ANESTHETICS_QUESTIONS, IV_ANESTHETICS_METADATA } from '../data/questions/iv-anesthetics-chapter8.js';
 import { OPIOIDS_QUESTIONS, OPIOIDS_METADATA } from '../data/questions/opioids-chapter9.js';
@@ -18,6 +19,18 @@ import { MACHINE_QUESTIONS, MACHINE_METADATA } from '../data/questions/anesthesi
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
+
+  "node-6": {
+    courseId:          "basics-of-anesthesia",
+    title:             "Autonomic Nervous System",
+    chapterLabel:      "Ch. 6",
+    badgeLabel:        "AUTONOMIC NS Ch.6",
+    icon:              "⚡",
+    questions:         AUTONOMIC_NS_QUESTIONS,
+    questionsMeta:     AUTONOMIC_NS_METADATA,
+    sceneRendererName: "renderAutonomicNSScene",
+    stopSceneName:     "stopAutonomicNSScene",
+  },
 
   "node-7": {
     courseId:          "basics-of-anesthesia",
