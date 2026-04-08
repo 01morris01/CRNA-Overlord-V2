@@ -1003,6 +1003,370 @@ export const NMB_QUESTIONS = [
     metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
   },
 
+
+  // ─── PSEUDOCHOLINESTERASE / DRUG INTERACTIONS / CLINICAL PHARMACOLOGY ────────
+
+  {
+    id: "boa-node10-nmb-001",
+    type: "multi",
+    prompt: "Which of the following physiological conditions or disease states are explicitly known to decrease a patient's pseudocholinesterase (plasma ChE) concentration?",
+    setup: "",
+    choices: [
+      "The presence of severe liver disease.",
+      "The physiological state of pregnancy.",
+      "The presence of neoplastic disease.",
+      "The presence of hyperthyroidism.",
+      "The physiological state of hypothermia.",
+    ],
+    correctAnswers: [
+      "The presence of severe liver disease.",
+      "The physiological state of pregnancy.",
+      "The presence of neoplastic disease.",
+    ],
+    selectCount: 3,
+    rationale: "Liver disease, pregnancy, and neoplastic disease are identified as states that decrease pseudocholinesterase concentrations.",
+    metadata: { topic: "Pseudocholinesterase", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pseudocholinesterase", "succinylcholine", "pharmacology", "physiology"] }
+  },
+
+  {
+    id: "boa-node10-nmb-002",
+    type: "multi",
+    prompt: "Which of the following specific classes of oral medications are known to cause a decrease in pseudocholinesterase concentration?",
+    setup: "",
+    choices: [
+      "Monoamine oxidase (MAO) inhibitors.",
+      "Oral contraceptive medications.",
+      "Beta-blocker antihypertensives.",
+      "Calcium channel blockers.",
+    ],
+    correctAnswers: [
+      "Monoamine oxidase (MAO) inhibitors.",
+      "Oral contraceptive medications.",
+    ],
+    selectCount: 2,
+    rationale: "MAO inhibitors and oral contraceptives decrease plasma cholinesterase concentrations.",
+    metadata: { topic: "Pseudocholinesterase", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pseudocholinesterase", "drug effects", "pharmacology"] }
+  },
+
+  {
+    id: "boa-node10-nmb-003",
+    type: "multi",
+    prompt: "Which of the following specific ophthalmic or anticholinesterase agents are associated with a decrease in pseudocholinesterase concentrations?",
+    setup: "",
+    choices: [
+      "The organophosphate pesticide agents.",
+      "The reversal agent neostigmine.",
+      "The glaucoma medication echothiophate.",
+      "The anticholinergic agent atropine.",
+      "The anticholinergic agent glycopyrrolate.",
+    ],
+    correctAnswers: [
+      "The organophosphate pesticide agents.",
+      "The reversal agent neostigmine.",
+      "The glaucoma medication echothiophate.",
+    ],
+    selectCount: 3,
+    rationale: "Anticholinesterases like neostigmine, organophosphates, and echothiophate decrease pseudocholinesterase concentrations.",
+    metadata: { topic: "Pseudocholinesterase", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pseudocholinesterase", "anticholinesterase", "echothiophate"] }
+  },
+
+  {
+    id: "boa-node10-nmb-004",
+    type: "multi",
+    prompt: "Which of the following unique or specific drug therapies actively decrease a patient's pseudocholinesterase levels?",
+    setup: "",
+    choices: [
+      "The administration of cytotoxic drugs.",
+      "The administration of metoclopramide.",
+      "The administration of bambuterol.",
+      "The administration of dexamethasone.",
+      "The administration of ondansetron.",
+    ],
+    correctAnswers: [
+      "The administration of cytotoxic drugs.",
+      "The administration of metoclopramide.",
+      "The administration of bambuterol.",
+    ],
+    selectCount: 3,
+    rationale: "Cytotoxic drugs, metoclopramide, and bambuterol decrease pseudocholinesterase concentrations.",
+    metadata: { topic: "Pseudocholinesterase", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pseudocholinesterase", "drug effects", "metoclopramide", "bambuterol"] }
+  },
+
+  {
+    id: "boa-node10-nmb-005",
+    type: "multi",
+    prompt: "What specific clinical characteristics explicitly describe the mechanism and use of the drug echothiophate?",
+    setup: "",
+    choices: [
+      "It is primarily utilized as a drug for glaucoma.",
+      "It irreversibly inhibits pseudocholinesterase.",
+      "It reversibly inhibits pseudocholinesterase.",
+      "It is primarily utilized as a systemic vasopressor.",
+    ],
+    correctAnswers: [
+      "It is primarily utilized as a drug for glaucoma.",
+      "It irreversibly inhibits pseudocholinesterase.",
+    ],
+    selectCount: 2,
+    rationale: "Echothiophate is used for glaucoma and irreversibly inhibits pseudocholinesterase.",
+    metadata: { topic: "Pseudocholinesterase", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "echothiophate", "pseudocholinesterase", "glaucoma"] }
+  },
+
+  {
+    id: "boa-node10-nmb-006",
+    type: "multi",
+    prompt: "Which of the following statements correctly describe the relationship between specific cardiovascular or respiratory drugs and pseudocholinesterase concentrations?",
+    setup: "",
+    choices: [
+      "Bambuterol acts as a pro-drug of terbutaline to decrease concentrations.",
+      "Esmolol decreases concentrations, although the prolongation is insignificant.",
+      "Esmolol decreases concentrations, causing severely significant prolongation.",
+      "Bambuterol acts as a pro-drug of albuterol to increase concentrations.",
+    ],
+    correctAnswers: [
+      "Bambuterol acts as a pro-drug of terbutaline to decrease concentrations.",
+      "Esmolol decreases concentrations, although the prolongation is insignificant.",
+    ],
+    selectCount: 2,
+    rationale: "Bambuterol is a pro-drug of terbutaline that decreases plasma cholinesterase. Esmolol also decreases it, though the prolongation is noted as insignificant.",
+    metadata: { topic: "Pseudocholinesterase", priority: "medium", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pseudocholinesterase", "esmolol", "bambuterol"] }
+  },
+
+  // ─── SUCCINYLCHOLINE HYPERKALEMIA ─────────────────────────────────────────────
+
+  {
+    id: "boa-node10-nmb-007",
+    type: "multi",
+    prompt: "Administration of succinylcholine can cause a massive 5 to 10 mEq/L increase in serum potassium in patients suffering from which of the following traumatic or neurological conditions?",
+    setup: "",
+    choices: [
+      "Severe burn injuries.",
+      "Severe systemic trauma.",
+      "Direct nerve damage.",
+      "Closed head injuries.",
+      "Uncomplicated appendicitis.",
+      "Minor extremity lacerations.",
+    ],
+    correctAnswers: [
+      "Severe burn injuries.",
+      "Severe systemic trauma.",
+      "Direct nerve damage.",
+      "Closed head injuries.",
+    ],
+    selectCount: 4,
+    rationale: "Potassium can increase by 5 to 10 mEq/L with burns, trauma, nerve damage, and closed head injuries.",
+    metadata: { topic: "Succinylcholine Hyperkalemia", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "succinylcholine", "potassium", "hyperkalemia", "contraindications"] }
+  },
+
+  {
+    id: "boa-node10-nmb-008",
+    type: "multi",
+    prompt: "Which of the following systemic medical conditions explicitly predispose a patient to a dangerous 5 to 10 mEq/L increase in potassium following succinylcholine administration?",
+    setup: "",
+    choices: [
+      "Severe renal failure.",
+      "Severe metabolic acidosis.",
+      "Preexisting neuromuscular disease.",
+      "Severe hepatic failure.",
+      "Preexisting respiratory alkalosis.",
+    ],
+    correctAnswers: [
+      "Severe renal failure.",
+      "Severe metabolic acidosis.",
+      "Preexisting neuromuscular disease.",
+    ],
+    selectCount: 3,
+    rationale: "Neuromuscular disease, renal failure, and metabolic acidosis are associated with a marked potassium rise after succinylcholine.",
+    metadata: { topic: "Succinylcholine Hyperkalemia", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "succinylcholine", "potassium", "hyperkalemia", "neuromuscular disease"] }
+  },
+
+  {
+    id: "boa-node10-nmb-009",
+    type: "multi",
+    prompt: "In addition to trauma and metabolic derangements, which of the following specific conditions will cause a 5 to 10 mEq/L increase in potassium when succinylcholine is administered?",
+    setup: "",
+    choices: [
+      "Intra-abdominal infections.",
+      "Severe burn injuries.",
+      "Minor viral infections.",
+      "Superficial skin abrasions.",
+    ],
+    correctAnswers: [
+      "Intra-abdominal infections.",
+      "Severe burn injuries.",
+    ],
+    selectCount: 2,
+    rationale: "Intra-abdominal infections and burns are listed as causes for a major potassium increase after succinylcholine.",
+    metadata: { topic: "Succinylcholine Hyperkalemia", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "succinylcholine", "potassium", "burns", "infection"] }
+  },
+
+  // ─── PANCURONIUM ─────────────────────────────────────────────────────────────
+
+  {
+    id: "boa-node10-nmb-010",
+    type: "multi",
+    prompt: "What specific cardiovascular side effects are explicitly characteristic of the administration of pancuronium?",
+    setup: "",
+    choices: [
+      "It produces a moderately vagolytic effect causing tachycardia.",
+      "It produces direct systemic sympathetic stimulation.",
+      "It explicitly increases both the heart rate and blood pressure.",
+      "It produces a moderately vagotonic effect causing bradycardia.",
+      "It explicitly decreases both the heart rate and blood pressure.",
+    ],
+    correctAnswers: [
+      "It produces a moderately vagolytic effect causing tachycardia.",
+      "It produces direct systemic sympathetic stimulation.",
+      "It explicitly increases both the heart rate and blood pressure.",
+    ],
+    selectCount: 3,
+    rationale: "Pancuronium is moderately vagolytic, stimulates the sympathetic nervous system, and increases heart rate and blood pressure.",
+    metadata: { topic: "Pancuronium", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pancuronium", "cardiovascular", "tachycardia", "sympathetic"] }
+  },
+
+  {
+    id: "boa-node10-nmb-011",
+    type: "mcq",
+    prompt: "What anatomical organ serves as the primary pathway for the major metabolism and elimination of pancuronium?",
+    setup: "",
+    ans: [
+      { t: "The primary elimination is strictly through the kidney.", ok: true },
+      { t: "The primary elimination is strictly through the liver.", ok: false },
+      { t: "The primary elimination is strictly through plasma esterases.", ok: false },
+      { t: "The primary elimination is strictly through Hofmann elimination.", ok: false },
+    ],
+    rationale: "The major metabolism and elimination pathway for pancuronium is through the kidney.",
+    metadata: { topic: "Pancuronium", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pancuronium", "renal elimination", "pharmacokinetics"] }
+  },
+
+  // ─── HEPATOBILIARY DISEASE EFFECTS ───────────────────────────────────────────
+
+  {
+    id: "boa-node10-nmb-012",
+    type: "multi",
+    prompt: "How does hepatobiliary disease specifically alter the volume of distribution and the subsequent dosing requirements for neuromuscular blockers?",
+    setup: "",
+    choices: [
+      "It explicitly increases the overall volume of distribution.",
+      "It creates an initial resistance to the muscle relaxant.",
+      "It requires the initial doses to be slightly higher.",
+      "It explicitly decreases the overall volume of distribution.",
+      "It requires the initial doses to be slightly lower.",
+    ],
+    correctAnswers: [
+      "It explicitly increases the overall volume of distribution.",
+      "It creates an initial resistance to the muscle relaxant.",
+      "It requires the initial doses to be slightly higher.",
+    ],
+    selectCount: 3,
+    rationale: "Hepatobiliary disease increases the volume of distribution, causing initial resistance and potentially requiring slightly higher initial doses.",
+    metadata: { topic: "Hepatobiliary Disease", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "hepatobiliary disease", "volume of distribution", "dosing"] }
+  },
+
+  {
+    id: "boa-node10-nmb-013",
+    type: "multi",
+    prompt: "Hepatobiliary disease actively alters the elimination of non-depolarizing muscle relaxants through which of the following specific mechanisms?",
+    setup: "",
+    choices: [
+      "By increasing the plasma concentration of bile salts.",
+      "By decreasing the hepatic uptake of pancuronium.",
+      "By decreasing the hepatic uptake of vecuronium.",
+      "By increasing the synthesis of plasma cholinesterase.",
+      "By increasing the hepatic uptake of pancuronium.",
+    ],
+    correctAnswers: [
+      "By increasing the plasma concentration of bile salts.",
+      "By decreasing the hepatic uptake of pancuronium.",
+      "By decreasing the hepatic uptake of vecuronium.",
+    ],
+    selectCount: 3,
+    rationale: "Hepatobiliary disease increases plasma bile salts and decreases the hepatic uptake of pancuronium and vecuronium.",
+    metadata: { topic: "Hepatobiliary Disease", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "hepatobiliary disease", "pancuronium", "vecuronium", "elimination"] }
+  },
+
+  {
+    id: "boa-node10-nmb-014",
+    type: "multi",
+    prompt: "Which of the following specific clinical effects occur to neuromuscular blockers as a direct result of severe liver disease?",
+    setup: "",
+    choices: [
+      "The clinical recovery phase is significantly slower.",
+      "The duration of mivacurium is significantly prolonged.",
+      "The clinical recovery phase is significantly faster.",
+      "The duration of mivacurium is significantly shortened.",
+    ],
+    correctAnswers: [
+      "The clinical recovery phase is significantly slower.",
+      "The duration of mivacurium is significantly prolonged.",
+    ],
+    selectCount: 2,
+    rationale: "Severe liver disease decreases plasma cholinesterase synthesis, prolonging mivacurium and slowing clinical recovery.",
+    metadata: { topic: "Hepatobiliary Disease", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "liver disease", "mivacurium", "pseudocholinesterase", "recovery"] }
+  },
+
+  // ─── ELIMINATION / DURATION PHARMACOKINETICS ─────────────────────────────────
+
+  {
+    id: "boa-node10-nmb-015",
+    type: "multi",
+    prompt: "How does decreased systemic elimination specifically affect the clinical duration of neuromuscular blocking drugs?",
+    setup: "",
+    choices: [
+      "It prolongs the duration especially with prolonged use.",
+      "Repeated doses may be prolonged even if a single dose is not.",
+      "A single dose is always strictly prolonged regardless of repeated use.",
+      "It shortens the duration especially with prolonged use.",
+    ],
+    correctAnswers: [
+      "It prolongs the duration especially with prolonged use.",
+      "Repeated doses may be prolonged even if a single dose is not.",
+    ],
+    selectCount: 2,
+    rationale: "Decreased elimination prolongs duration, especially with prolonged use. Repeated doses may be prolonged even when a single dose is not.",
+    metadata: { topic: "Pharmacokinetics", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "elimination", "duration", "pharmacokinetics"] }
+  },
+
+  {
+    id: "boa-node10-nmb-016",
+    type: "multi",
+    prompt: "A decrease in plasma cholinesterase enzymatic activity will specifically prolong the duration of which of the following neuromuscular blockers?",
+    setup: "",
+    choices: [
+      "The depolarizing agent succinylcholine.",
+      "The non-depolarizing agent mivacurium.",
+      "The non-depolarizing agent atracurium.",
+      "The non-depolarizing agent cisatracurium.",
+    ],
+    correctAnswers: [
+      "The depolarizing agent succinylcholine.",
+      "The non-depolarizing agent mivacurium.",
+    ],
+    selectCount: 2,
+    rationale: "Decreased plasma cholinesterase activity prolongs the duration of succinylcholine and mivacurium.",
+    metadata: { topic: "Pharmacokinetics", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "pseudocholinesterase", "succinylcholine", "mivacurium", "duration"] }
+  },
+
+  {
+    id: "boa-node10-nmb-017",
+    type: "multi",
+    prompt: "Which of the following neuromuscular blocking agents are explicitly NOT prolonged by decreased elimination or decreased enzymatic activity?",
+    setup: "",
+    choices: [
+      "The specific agent atracurium.",
+      "The specific agent cisatracurium.",
+      "The specific agent succinylcholine.",
+      "The specific agent mivacurium.",
+    ],
+    correctAnswers: [
+      "The specific agent atracurium.",
+      "The specific agent cisatracurium.",
+    ],
+    selectCount: 2,
+    rationale: "Atracurium and cisatracurium are not prolonged by decreased elimination or decreased plasma cholinesterase activity.",
+    metadata: { topic: "Pharmacokinetics", priority: "high", category: "nmb", source: "node-10-chapter-10", tags: ["node-10", "chapter-10", "NMB", "atracurium", "cisatracurium", "Hofmann elimination", "duration"] }
+  },
+
 ];
 
 export const NMB_METADATA = {
