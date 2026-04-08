@@ -731,6 +731,278 @@ export const NMB_QUESTIONS = [
     metadata: { topic: "Succinylcholine", priority: "medium" }
   },
 
+  // ─── NMB ADVANCED (ppt-gap) ──────────────────────────────────────────────────
+
+  {
+    id: "nmb-046",
+    type: "mcq",
+    prompt: "What structural feature is hidden within bulky benzene rings in non-depolarizing neuromuscular blockers?",
+    setup: "",
+    ans: [
+      { t: "Single ACh structure", ok: false },
+      { t: "Double ACh structure", ok: true },
+      { t: "Calcium binding site", ok: false },
+      { t: "Sodium channel mimic", ok: false },
+    ],
+    rationale: "Non-depolarizing agents structurally resemble two acetylcholine molecules, allowing receptor binding without activation, producing competitive blockade.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-047",
+    type: "mcq",
+    prompt: "What is the primary renal handling characteristic of highly hydrophilic neuromuscular blockers?",
+    setup: "",
+    ans: [
+      { t: "Tubular reabsorption", ok: false },
+      { t: "Hepatic metabolism first", ok: false },
+      { t: "Filtered without reabsorption", ok: true },
+      { t: "Stored in fat", ok: false },
+    ],
+    rationale: "Their water solubility allows glomerular filtration without tubular reabsorption, contributing to elimination.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-048",
+    type: "mcq",
+    prompt: "Under what condition do steroidal neuromuscular blocker metabolites accumulate to clinically significant levels?",
+    setup: "",
+    ans: [
+      { t: "Single bolus dose", ok: false },
+      { t: "Rapid sequence induction", ok: false },
+      { t: "Continuous infusion over several days", ok: true },
+      { t: "Low protein states", ok: false },
+    ],
+    rationale: "Accumulation becomes significant only with prolonged administration such as multi-day infusions.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-049",
+    type: "mcq",
+    prompt: "Why is mivacurium prolonged in patients with renal insufficiency?",
+    setup: "",
+    ans: [
+      { t: "Reduced renal clearance", ok: false },
+      { t: "Increased hepatic metabolism", ok: false },
+      { t: "Decreased plasma cholinesterase activity", ok: true },
+      { t: "Increased receptor sensitivity", ok: false },
+    ],
+    rationale: "Mivacurium is metabolized by plasma cholinesterase, and renal failure reduces enzyme activity, prolonging drug effect.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-050",
+    type: "mcq",
+    prompt: "Why must induction anesthesia be administered before giving a defasciculating dose of a non-depolarizing neuromuscular blocker?",
+    setup: "",
+    ans: [
+      { t: "Prevent hypertension", ok: false },
+      { t: "Avoid airway edema", ok: false },
+      { t: "Prevent conscious weakness and distress", ok: true },
+      { t: "Improve drug metabolism", ok: false },
+    ],
+    rationale: "A small dose of a non-depolarizer can cause muscle weakness and impaired breathing while the patient is still conscious.",
+    metadata: { topic: "Succinylcholine", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-051",
+    type: "mcq",
+    prompt: "Does the magnitude of hyperkalemia following succinylcholine correlate with the size of a burn injury?",
+    setup: "",
+    ans: [
+      { t: "Yes, directly proportional", ok: false },
+      { t: "Yes, inversely proportional", ok: false },
+      { t: "No correlation", ok: true },
+      { t: "Only in large burns", ok: false },
+    ],
+    rationale: "Even small burns can cause severe hyperkalemia due to receptor upregulation.",
+    metadata: { topic: "Hyperkalemia", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-052",
+    type: "mcq",
+    prompt: "Why were early alternatives to d-tubocurarine not considered clinically advantageous?",
+    setup: "",
+    ans: [
+      { t: "Caused severe arrhythmias", ok: false },
+      { t: "Increased mortality", ok: false },
+      { t: "No meaningful clinical improvement", ok: true },
+      { t: "Too short acting", ok: false },
+    ],
+    rationale: "Although some reduced histamine release, they did not significantly improve clinical outcomes.",
+    metadata: { topic: "NMB Pharmacology", priority: "low", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-053",
+    type: "mcq",
+    prompt: "Why do neuromuscular blockers have minimal placental transfer?",
+    setup: "",
+    ans: [
+      { t: "High protein binding", ok: false },
+      { t: "Rapid metabolism", ok: false },
+      { t: "Poor lipid solubility", ok: true },
+      { t: "Active transport out", ok: false },
+    ],
+    rationale: "Quaternary ammonium structure makes them highly polar, preventing passage across lipid membranes.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-054",
+    type: "mcq",
+    prompt: "Why can repeated doses of non-depolarizing neuromuscular blockers cause prolonged paralysis in renal failure?",
+    setup: "",
+    ans: [
+      { t: "Increased receptor sensitivity", ok: false },
+      { t: "Drug accumulation", ok: true },
+      { t: "Faster metabolism", ok: false },
+      { t: "Increased protein binding", ok: false },
+    ],
+    rationale: "Impaired elimination leads to accumulation with repeated dosing.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-055",
+    type: "mcq",
+    prompt: "Why is maintaining normothermia important when interpreting neuromuscular blockade?",
+    setup: "",
+    ans: [
+      { t: "Prevents bradycardia", ok: false },
+      { t: "Improves oxygenation", ok: false },
+      { t: "Prevents accumulation", ok: false },
+      { t: "Ensures accurate drug effect assessment", ok: true },
+    ],
+    rationale: "Hypothermia prolongs drug action and alters interpretation of blockade.",
+    metadata: { topic: "Monitoring", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-056",
+    type: "multi",
+    prompt: "Select TWO conditions that slow Hoffmann elimination:",
+    setup: "",
+    choices: [
+      "Hypothermia",
+      "Acidosis",
+      "Hyperthermia",
+      "Alkalosis",
+    ],
+    correctAnswers: ["Hypothermia", "Acidosis"],
+    selectCount: 2,
+    rationale: "Hoffmann elimination is dependent on temperature and pH, so hypothermia and acidosis slow the process.",
+    metadata: { topic: "Hofmann", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-057",
+    type: "multi",
+    prompt: "Select TWO characteristics that prevent neuromuscular blockers from crossing the blood-brain barrier:",
+    setup: "",
+    choices: [
+      "High lipid solubility",
+      "Quaternary ammonium structure",
+      "High polarity",
+      "Small molecular size",
+    ],
+    correctAnswers: ["Quaternary ammonium structure", "High polarity"],
+    selectCount: 2,
+    rationale: "Their charged, polar structure prevents passage through lipid membranes like the BBB.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-058",
+    type: "multi",
+    prompt: "Select TWO factors to consider when dosing neuromuscular blockers in obese patients:",
+    setup: "",
+    choices: [
+      "Total body weight",
+      "Lean body mass",
+      "Increased fat mass",
+      "Increased renal clearance",
+    ],
+    correctAnswers: ["Lean body mass", "Increased fat mass"],
+    selectCount: 2,
+    rationale: "Lean body mass is used because fat does not contribute to drug clearance, and obesity decreases elimination efficiency.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-059",
+    type: "multi",
+    prompt: "Select TWO statements that describe dosing considerations in severe hepatobiliary disease:",
+    setup: "",
+    choices: [
+      "Initial dose should be decreased",
+      "Initial dose may need to be increased",
+      "Volume of distribution is increased",
+      "Clearance is unchanged",
+    ],
+    correctAnswers: ["Initial dose may need to be increased", "Volume of distribution is increased"],
+    selectCount: 2,
+    rationale: "Increased volume of distribution causes initial resistance, requiring higher initial dosing.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-060",
+    type: "multi",
+    prompt: "Select THREE changes in elderly patients that affect neuromuscular blocker duration:",
+    setup: "",
+    choices: [
+      "Increased renal blood flow",
+      "Decreased hepatic blood flow",
+      "Decreased cardiac output",
+      "Increased total body water",
+      "Increased body fat",
+    ],
+    correctAnswers: ["Decreased hepatic blood flow", "Decreased cardiac output", "Increased body fat"],
+    selectCount: 3,
+    rationale: "Reduced organ function and increased fat lead to prolonged drug effects.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-061",
+    type: "multi",
+    prompt: "Select TWO true statements regarding neuromuscular blockers in renal failure:",
+    setup: "",
+    choices: [
+      "Single doses are always prolonged",
+      "Repeated doses may accumulate",
+      "Clearance is increased",
+      "Enzymatic activity may be reduced",
+    ],
+    correctAnswers: ["Repeated doses may accumulate", "Enzymatic activity may be reduced"],
+    selectCount: 2,
+    rationale: "Accumulation occurs with repeated dosing and enzymatic activity may be decreased.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
+  {
+    id: "nmb-062",
+    type: "multi",
+    prompt: "Select TWO conditions that prolong drugs dependent on organ elimination:",
+    setup: "",
+    choices: [
+      "Obesity",
+      "Renal failure",
+      "Hyperthermia",
+      "Increased metabolism",
+    ],
+    correctAnswers: ["Obesity", "Renal failure"],
+    selectCount: 2,
+    rationale: "Both reduce effective elimination, prolonging drug action.",
+    metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
+  },
+
 ];
 
 export const NMB_METADATA = {
