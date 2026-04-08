@@ -9,6 +9,7 @@
  * Everything else (menus, routing, header, scene dispatch) resolves automatically.
  */
 
+import { INHALED_ANESTHETICS_QUESTIONS, INHALED_ANESTHETICS_METADATA } from '../data/questions/inhaled-anesthetics-chapter7.js';
 import { IV_ANESTHETICS_QUESTIONS, IV_ANESTHETICS_METADATA } from '../data/questions/iv-anesthetics-chapter8.js';
 import { OPIOIDS_QUESTIONS, OPIOIDS_METADATA } from '../data/questions/opioids-chapter9.js';
 import { NMB_QUESTIONS,    NMB_METADATA    } from '../data/questions/nmb-chapter10.js';
@@ -17,6 +18,18 @@ import { MACHINE_QUESTIONS, MACHINE_METADATA } from '../data/questions/anesthesi
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
+
+  "node-7": {
+    courseId:          "basics-of-anesthesia",
+    title:             "Inhaled Anesthetics",
+    chapterLabel:      "Ch. 7",
+    badgeLabel:        "INHALED ANESTHETICS Ch.7",
+    icon:              "🫁",
+    questions:         INHALED_ANESTHETICS_QUESTIONS,
+    questionsMeta:     INHALED_ANESTHETICS_METADATA,
+    sceneRendererName: "renderInhaledAnestheticsScene",
+    stopSceneName:     "stopInhaledAnestheticsScene",
+  },
 
   "node-8": {
     courseId:          "basics-of-anesthesia",
