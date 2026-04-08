@@ -378,6 +378,16 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <button class="pause-btn resume" onclick="resumeGame()">▶ RESUME</button>
 <button class="pause-btn store" onclick="openStore()">🛒 EQUIPMENT STORE</button>
 <button class="pause-btn quit" onclick="quitToMap()">🗺️ BACK TO MAP</button>
+<div style="display:flex;align-items:center;gap:.5rem;margin-top:.8rem;border-top:1px solid rgba(80,80,120,.3);padding-top:.7rem;">
+  <div style="text-align:left;">
+    <span style="font-size:.65rem;color:#888;letter-spacing:.05em;">Recall First</span>
+    <span style="font-size:.58rem;color:#445;margin-left:.4rem;">see question before choices</span>
+  </div>
+  <button class="recall-toggle-btn" onclick="toggleRecallFirst()"
+    style="font-size:.62rem;padding:.25rem .6rem;border-radius:3px;cursor:pointer;font-family:monospace;background:rgba(30,30,50,.6);border:1px solid rgba(80,80,120,.4);color:#555;">
+    ○ OFF
+  </button>
+</div>
 </div>
 
 <!-- LEVEL TRANSITION -->

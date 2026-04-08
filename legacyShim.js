@@ -758,8 +758,10 @@ window.usePwr = function(type) {
 };
 
 // ─── openStore ───────────────────────────────────────────────────────────────
-// Direct override so new engine gets state.js bankedPts and timer is stopped.
-// For legacy engine: call legacy openStore (handles G timer pause) then patch display.
+// Always renders from state.js so button enabled/disabled state is always correct.
+// Legacy path: still calls mapRuntime.openStore() to handle legacy G timer pause,
+// but immediately re-renders the grid from state.js so stale closure bankedPts
+// never controls button affordability.
 //
 window.openStore = function() {
   const modal = document.getElementById('store-modal');
@@ -767,15 +769,14 @@ window.openStore = function() {
 
   if (window.usingNewEngine) {
     stopTimer(); // prevent timeout firing while browsing store
-    _renderStoreGrid(loadState());
-  } else {
-    // Legacy: pause legacy timer + render store
-    if (typeof mapRuntime.openStore === 'function') mapRuntime.openStore();
-    // Patch pts display to reflect state.js bankedPts (catches cross-session drift)
-    const state = loadState();
-    const ptsEl = document.getElementById('store-pts-val');
-    if (ptsEl) ptsEl.textContent = (state.bankedPts || 0).toLocaleString();
+  } else if (typeof mapRuntime.openStore === 'function') {
+    // Handles legacy G timer pause (no-op when G is null, i.e. from menu)
+    mapRuntime.openStore();
   }
+
+  // Always render from state.js — overwrites any stale legacy renderStore() output.
+  // This is the single source of truth for button enabled/disabled state.
+  _renderStoreGrid(loadState());
 };
 
 // ─── closeStore ──────────────────────────────────────────────────────────────
@@ -834,6 +835,14 @@ window.pauseGame = function() {
   } else if (typeof mapRuntime.pauseGame === 'function') {
     mapRuntime.pauseGame();
   }
+  // Sync recall toggle in pause overlay from saved state
+  const recallOn = !!loadState().recallFirstEnabled;
+  document.querySelectorAll('#pause-overlay .recall-toggle-btn').forEach(btn => {
+    btn.textContent       = recallOn ? '● ON' : '○ OFF';
+    btn.style.background  = recallOn ? 'rgba(0,255,136,.15)' : 'rgba(30,30,50,.6)';
+    btn.style.borderColor = recallOn ? 'rgba(0,255,136,.5)'  : 'rgba(80,80,120,.4)';
+    btn.style.color       = recallOn ? '#00ff88' : '#555';
+  });
 };
 
 window.resumeGame = function() {
