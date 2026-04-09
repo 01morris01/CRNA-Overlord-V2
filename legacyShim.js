@@ -71,6 +71,7 @@ function _renderStoreGrid(state) {
 // ─── Node-to-topic mapping ────────────────────────────────────────────────────
 // Maps legacy topic IDs (used by course map markers) to NODE_CONFIG node IDs.
 const TOPIC_TO_NODE = {
+  'ba-t05': { courseId: 'basics-of-anesthesia', nodeId: 'node-5'  },
   'ba-t06': { courseId: 'basics-of-anesthesia', nodeId: 'node-6'  },
   'ba-t07': { courseId: 'basics-of-anesthesia', nodeId: 'node-7'  },
   'ba-t08': { courseId: 'basics-of-anesthesia', nodeId: 'node-8'  },
@@ -159,6 +160,7 @@ window.startGameWithQuestions = function(questions) {
 
   // Stop any running scene / timer from a previous session
   if (typeof window.stopLegacyScene === 'function') window.stopLegacyScene();
+  if (typeof window.stopPulmonaryPhysiologyScene === 'function') window.stopPulmonaryPhysiologyScene();
   if (typeof window.stopAutonomicNSScene === 'function') window.stopAutonomicNSScene();
   if (typeof window.stopInhaledAnestheticsScene === 'function') window.stopInhaledAnestheticsScene();
   if (typeof window.stopIVAnestheticsScene === 'function') window.stopIVAnestheticsScene();

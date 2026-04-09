@@ -9,6 +9,7 @@
  * Everything else (menus, routing, header, scene dispatch) resolves automatically.
  */
 
+import { PULMONARY_QUESTIONS,    PULMONARY_METADATA    } from '../data/questions/pulmonary-physiology-chapter5.js';
 import { AUTONOMIC_NS_QUESTIONS, AUTONOMIC_NS_METADATA } from '../data/questions/autonomic-ns-chapter6.js';
 import { INHALED_ANESTHETICS_QUESTIONS, INHALED_ANESTHETICS_METADATA } from '../data/questions/inhaled-anesthetics-chapter7.js';
 import { IV_ANESTHETICS_QUESTIONS, IV_ANESTHETICS_METADATA } from '../data/questions/iv-anesthetics-chapter8.js';
@@ -19,6 +20,18 @@ import { MACHINE_QUESTIONS, MACHINE_METADATA } from '../data/questions/anesthesi
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
+
+  "node-5": {
+    courseId:          "basics-of-anesthesia",
+    title:             "Pulmonary Physiology",
+    chapterLabel:      "Ch. 5",
+    badgeLabel:        "PULMONARY PHYSIOLOGY Ch.5",
+    icon:              "🫁",
+    questions:         PULMONARY_QUESTIONS,
+    questionsMeta:     PULMONARY_METADATA,
+    sceneRendererName: "renderPulmonaryPhysiologyScene",
+    stopSceneName:     "stopPulmonaryPhysiologyScene",
+  },
 
   "node-6": {
     courseId:          "basics-of-anesthesia",
