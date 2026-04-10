@@ -9,6 +9,7 @@
  * Everything else (menus, routing, header, scene dispatch) resolves automatically.
  */
 
+import { AIRWAY_QUESTIONS,           AIRWAY_METADATA           } from '../data/questions/airway-management-chapter2.js';
 import { PHARM_PRINCIPLES_QUESTIONS, PHARM_PRINCIPLES_METADATA } from '../data/questions/basic-pharmacologic-principles-chapter3.js';
 import { CARDIAC_QUESTIONS,      CARDIAC_METADATA      } from '../data/questions/cardiac-physiology-chapter4.js';
 import { PULMONARY_QUESTIONS,    PULMONARY_METADATA    } from '../data/questions/pulmonary-physiology-chapter5.js';
@@ -22,6 +23,18 @@ import { MACHINE_QUESTIONS, MACHINE_METADATA } from '../data/questions/anesthesi
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
+
+  "node-2": {
+    courseId:          "basics-of-anesthesia",
+    title:             "Airway Management",
+    chapterLabel:      "Ch. 2",
+    badgeLabel:        "AIRWAY MANAGEMENT Ch.2",
+    icon:              "🫁",
+    questions:         AIRWAY_QUESTIONS,
+    questionsMeta:     AIRWAY_METADATA,
+    sceneRendererName: "renderAirwayManagementScene",
+    stopSceneName:     "stopAirwayManagementScene",
+  },
 
   "node-3": {
     courseId:          "basics-of-anesthesia",

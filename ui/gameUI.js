@@ -1,5 +1,6 @@
 import { getCurrentRun } from '../core/gameEngine.js';
 import { gradeShortAnswer, gradeMultiSelect } from '../core/answerGrading.js';
+import { renderAirwayManagementScene, stopAirwayManagementScene } from './airwayManagementScene.js';
 import { renderBasicPharmacologicPrinciplesScene, stopBasicPharmacologicPrinciplesScene } from './basicPharmacologicPrinciplesScene.js';
 import { renderCardiacPhysiologyScene, stopCardiacPhysiologyScene } from './cardiacPhysiologyScene.js';
 import { renderPulmonaryPhysiologyScene, stopPulmonaryPhysiologyScene } from './pulmonaryPhysiologyScene.js';
