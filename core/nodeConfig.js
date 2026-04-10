@@ -9,6 +9,7 @@
  * Everything else (menus, routing, header, scene dispatch) resolves automatically.
  */
 
+import { PHARM_PRINCIPLES_QUESTIONS, PHARM_PRINCIPLES_METADATA } from '../data/questions/basic-pharmacologic-principles-chapter3.js';
 import { CARDIAC_QUESTIONS,      CARDIAC_METADATA      } from '../data/questions/cardiac-physiology-chapter4.js';
 import { PULMONARY_QUESTIONS,    PULMONARY_METADATA    } from '../data/questions/pulmonary-physiology-chapter5.js';
 import { AUTONOMIC_NS_QUESTIONS, AUTONOMIC_NS_METADATA } from '../data/questions/autonomic-ns-chapter6.js';
@@ -21,6 +22,18 @@ import { MACHINE_QUESTIONS, MACHINE_METADATA } from '../data/questions/anesthesi
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
+
+  "node-3": {
+    courseId:          "basics-of-anesthesia",
+    title:             "Basic Pharmacologic Principles",
+    chapterLabel:      "Ch. 3",
+    badgeLabel:        "PHARMACOLOGIC PRINCIPLES Ch.3",
+    icon:              "💊",
+    questions:         PHARM_PRINCIPLES_QUESTIONS,
+    questionsMeta:     PHARM_PRINCIPLES_METADATA,
+    sceneRendererName: "renderBasicPharmacologicPrinciplesScene",
+    stopSceneName:     "stopBasicPharmacologicPrinciplesScene",
+  },
 
   "node-4": {
     courseId:          "basics-of-anesthesia",
