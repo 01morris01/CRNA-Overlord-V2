@@ -81,6 +81,25 @@ const TOPIC_TO_NODE = {
   'ba-t09': { courseId: 'basics-of-anesthesia', nodeId: 'node-9'  },
   'ba-t10': { courseId: 'basics-of-anesthesia', nodeId: 'node-10' },
   'ba-t12': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
+
+  // Advanced Physiology & Pathophysiology I (Guyton 14e, chapters 1–24).
+  // The legacy COURSES array in legacy/legacy.js exposes 15 topic markers
+  // (adv1-t01..adv1-t15). Only the first 12 have local chapter content in
+  // ~/Documents/crna-pipeline/Content/advanced_physiology_pathophysiology/,
+  // so we wire those through to the new banks. adv1-t13..t15 remain unmapped
+  // (the markers still render; they just fall back to legacy behavior).
+  'adv1-t01': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-1'  },
+  'adv1-t02': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-2'  },
+  'adv1-t03': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-3'  },
+  'adv1-t04': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-4'  },
+  'adv1-t05': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-5'  },
+  'adv1-t06': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-6'  },
+  'adv1-t07': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-7'  },
+  'adv1-t08': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-8'  },
+  'adv1-t09': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-9'  },
+  'adv1-t10': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-10' },
+  'adv1-t11': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-11' },
+  'adv1-t12': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-12' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.

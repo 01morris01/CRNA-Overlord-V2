@@ -10,6 +10,7 @@ import { renderIVAnestheticsScene, stopIVAnestheticsScene } from './ivAnesthetic
 import { renderOpioidScene, stopOpioidScene } from './opioidsScene.js';
 import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
+import { SCENE_REGISTRY, runScene, stopActiveScene } from './sceneRegistry.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
 import { loadState } from '../core/state.js';
 
@@ -314,14 +315,34 @@ export function renderCurrentQuestion() {
     startQuestionTimer(q);
   }
 
-  // Render themed scene — dynamic dispatch based on current node
+  // Render themed scene — three-tier dispatch:
+  //   1. Question-level scene (data-driven, agent-generatable):
+  //        q.scene is a registry kind and q.sceneCfg carries its params.
+  //   2. Node-level scene (legacy, hand-written per-node files):
+  //        NODE_CONFIG[nodeId].sceneRendererName is a global function name.
+  //   3. Final fallback: opioid scene, preserves old behavior.
+  //
+  // Whatever we pick, we first tear down whatever was running so raf loops
+  // don't pile up.
   {
     const nodeId = window.currentSession?.nodeId || null;
     const cfg = nodeId ? getNodeConfig(nodeId) : null;
-    if (cfg?.sceneRendererName && typeof window[cfg.sceneRendererName] === 'function') {
+
+    // Stop prior registry-driven scene (if any).
+    try { stopActiveScene(); } catch (_) {}
+    // Stop prior node-level scene (if any).
+    if (cfg?.stopSceneName && typeof window[cfg.stopSceneName] === 'function') {
+      try { window[cfg.stopSceneName](); } catch (_) {}
+    }
+
+    if (q.scene && SCENE_REGISTRY[q.scene]) {
+      // Tier 1: data-driven registry scene.
+      runScene(q.scene, q.sceneCfg || {});
+    } else if (cfg?.sceneRendererName && typeof window[cfg.sceneRendererName] === 'function') {
+      // Tier 2: legacy per-node renderer.
       window[cfg.sceneRendererName](q);
     } else {
-      // Fallback: opioid scene for backwards-compat
+      // Tier 3: last-resort fallback.
       renderOpioidScene(q);
     }
   }

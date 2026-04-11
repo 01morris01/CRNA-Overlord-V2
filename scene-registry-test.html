@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Scene Registry Test</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #020308;
+    color: #6ef7ff;
+    font-family: "Courier New", monospace;
+  }
+  h1 {
+    font-size: 18px;
+    margin: 16px 20px;
+    color: #6ef7ff;
+    text-shadow: 0 0 10px #6ef7ff;
+    letter-spacing: 2px;
+  }
+  .wrap {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px 20px 20px;
+    align-items: flex-start;
+  }
+  canvas {
+    background: #000;
+    border: 1px solid #6ef7ff;
+    box-shadow: 0 0 20px rgba(110, 247, 255, 0.3);
+  }
+  .panel {
+    flex: 0 0 320px;
+    border: 1px solid #6ef7ff;
+    padding: 12px;
+    box-shadow: 0 0 15px rgba(110, 247, 255, 0.2);
+  }
+  button {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 8px 10px;
+    background: #0a0f1c;
+    color: #6ef7ff;
+    border: 1px solid #6ef7ff;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    text-shadow: 0 0 6px #6ef7ff;
+  }
+  button:hover {
+    background: #102038;
+    box-shadow: 0 0 10px #6ef7ff inset;
+  }
+  .stem {
+    margin-top: 16px;
+    padding: 10px;
+    border: 1px solid #ff6ef7;
+    color: #ff6ef7;
+    text-shadow: 0 0 4px #ff6ef7;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 60px;
+  }
+  pre {
+    font-size: 11px;
+    color: #00ff88;
+    white-space: pre-wrap;
+    max-height: 160px;
+    overflow: auto;
+    border: 1px solid #00ff88;
+    padding: 6px;
+    margin-top: 10px;
+  }
+  .lbl {
+    font-size: 11px;
+    color: #6ef7ff;
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin: 10px 0 4px;
+  }
+</style>
+</head>
+<body>
+  <h1>SCENE REGISTRY — STANDALONE TEST</h1>
+
+  <div class="wrap">
+    <canvas id="scn" width="720" height="460"></canvas>
+
+    <div class="panel">
+      <div class="lbl">Mock questions</div>
+      <button data-q="ecg">ECG waveform — sinus @ 80</button>
+      <button data-q="afib">ECG waveform — afib @ 110</button>
+      <button data-q="starling">Frank-Starling — failure curve</button>
+      <button data-q="starling_ino">Frank-Starling — +inotropy</button>
+      <button data-q="vessel">Vessel cross-section + Poiseuille</button>
+      <button data-q="ap">Action potential — repol phase</button>
+      <button data-q="patient">Patient silhouette + hotspot</button>
+
+      <div class="lbl">Control</div>
+      <button data-q="stop" style="border-color:#ff4466;color:#ff4466;text-shadow:0 0 4px #ff4466">Stop active scene</button>
+
+      <div class="lbl">Stem</div>
+      <div id="stem" class="stem">Click a mock question to load its scene.</div>
+
+      <div class="lbl">Normalized question</div>
+      <pre id="dump">—</pre>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import the registry directly. We intentionally don't import gameUI.js
+    // here so we're testing the registry in isolation.
+    import { runScene, stopActiveScene, SCENE_REGISTRY, SCENE_KINDS } from './ui/sceneRegistry.js';
+    import { normalizeQuestions } from './core/questionEngine.js';
+
+    console.log('[test] scene kinds available:', SCENE_KINDS);
+
+    // Mock questions in the *new* bank format (has .prompt). These carry a
+    // .scene field that the normalizer should preserve end-to-end.
+    const MOCKS = {
+      ecg: {
+        id: 'mock_ecg_001',
+        type: 'mcq',
+        prompt: 'A 62-year-old under general anesthesia develops a regular narrow-complex rhythm at 80/min with clear P waves preceding each QRS. Which rhythm is most consistent with these findings?',
+        ans: [
+          { t: 'Normal sinus rhythm', ok: true },
+          { t: 'Atrial fibrillation',  ok: false },
+          { t: 'Ventricular tachycardia', ok: false },
+          { t: 'Junctional rhythm',    ok: false },
+        ],
+        rationale: 'P before every QRS + regular narrow-complex at a normal rate = normal sinus rhythm.',
+        scene: { kind: 'ecg_waveform', params: { label: 'LEAD II', rhythm: 'sinus', rate: 80 } },
+        metadata: { nodeId: 'node-4', topic: 'ECG rhythms', priority: 'high' },
+      },
+
+      afib: {
+        id: 'mock_ecg_002',
+        type: 'mcq',
+        prompt: 'A patient presents with an irregularly irregular rhythm, no discernible P waves, and a ventricular rate of ~110/min. Which rhythm is this?',
+        ans: [
+          { t: 'Atrial fibrillation',  ok: true },
+          { t: 'Normal sinus rhythm',  ok: false },
+          { t: 'Atrial flutter',       ok: false },
+          { t: 'Sinus tachycardia',    ok: false },
+        ],
+        rationale: 'Irregularly irregular with absent P waves is the pathognomonic pattern of atrial fibrillation.',
+        // Flat form: scene as a string, cfg separate. Normalizer must also handle this.
+        scene: 'ecg_waveform',
+        sceneCfg: { label: 'LEAD II', rhythm: 'afib', rate: 110 },
+        metadata: { nodeId: 'node-4', topic: 'ECG rhythms', priority: 'high' },
+      },
+
+      starling: {
+        id: 'mock_fs_001',
+        type: 'mcq',
+        prompt: 'In systolic heart failure, how does the Frank-Starling curve shift relative to normal?',
+        ans: [
+          { t: 'Down and to the right — more preload for less SV', ok: true },
+          { t: 'Up and to the left — less preload for more SV',     ok: false },
+          { t: 'No change — Starling mechanism is preload-independent', ok: false },
+          { t: 'Becomes linear — loses curvature entirely',         ok: false },
+        ],
+        rationale: 'Failure drops contractility, so at any given LVEDV the ventricle generates less SV, shifting the curve down and right.',
+        scene: { kind: 'frank_starling', params: { label: 'FRANK-STARLING CURVE', shift: 'failure', point: 0.7 } },
+        metadata: { nodeId: 'node-4', topic: 'Frank-Starling', priority: 'high' },
+      },
+
+      starling_ino: {
+        id: 'mock_fs_002',
+        type: 'mcq',
+        prompt: 'A positive inotrope such as epinephrine shifts the Frank-Starling curve in which direction?',
+        ans: [
+          { t: 'Up and to the left',  ok: true },
+          { t: 'Down and to the right', ok: false },
+          { t: 'Flattens it',         ok: false },
+          { t: 'No effect',           ok: false },
+        ],
+        rationale: 'Increased contractility means more stroke volume at any given preload — the curve moves up and left.',
+        scene: { kind: 'frank_starling', params: { label: 'FRANK-STARLING CURVE', shift: 'inotropic', point: 0.45 } },
+        metadata: { nodeId: 'node-4', topic: 'Frank-Starling', priority: 'high' },
+      },
+
+      vessel: {
+        id: 'mock_vessel_001',
+        type: 'mcq',
+        prompt: 'Poiseuille\'s law tells us that vascular resistance is most strongly affected by which variable?',
+        ans: [
+          { t: 'Vessel radius — resistance ∝ 1/r⁴', ok: true },
+          { t: 'Vessel length',     ok: false },
+          { t: 'Blood viscosity',   ok: false },
+          { t: 'Pressure gradient', ok: false },
+        ],
+        rationale: 'Radius enters Poiseuille to the 4th power, so small changes in radius dominate resistance.',
+        scene: {
+          kind: 'vessel_cross_section',
+          params: {
+            radius: 70,
+            wall: 14,
+            label: 'BLOOD VESSEL CROSS-SECTION',
+            eqLines: ['Poiseuille: R ∝ 1/r⁴', 'Flow = ΔP / R'],
+          },
+        },
+        metadata: { nodeId: 'node-4', topic: 'Poiseuille', priority: 'high' },
+      },
+
+      ap: {
+        id: 'mock_ap_001',
+        type: 'mcq',
+        prompt: 'During the repolarization phase of a fast cardiac action potential, which ion movement is primarily responsible for returning Vm toward Ek?',
+        ans: [
+          { t: 'K⁺ efflux through voltage-gated K⁺ channels',  ok: true },
+          { t: 'Na⁺ influx via voltage-gated Na⁺ channels',   ok: false },
+          { t: 'Na⁺/K⁺ ATPase pumping 3 Na⁺ out for 2 K⁺ in', ok: false },
+          { t: 'Ca²⁺ influx through L-type channels',          ok: false },
+        ],
+        rationale: 'Fast repolarization is driven by K⁺ channels opening — the Na/K ATPase is too slow (maintenance pump) to generate millisecond-scale voltage changes.',
+        scene: { kind: 'action_potential', params: { label: 'CARDIAC ACTION POTENTIAL', phase: 'repol', showEk: true, showEna: true } },
+        metadata: { nodeId: 'node-3', topic: 'Action potential', priority: 'high' },
+      },
+
+      patient: {
+        id: 'mock_patient_001',
+        type: 'mcq',
+        prompt: 'A patient presents with acute chest pain radiating to the left arm. Which finding most strongly supports an ischemic cardiac origin?',
+        ans: [
+          { t: 'ST elevation in contiguous leads', ok: true },
+          { t: 'Reproducible tenderness on palpation', ok: false },
+          { t: 'Pain worse with inspiration',      ok: false },
+          { t: 'Tenderness along the sternum',    ok: false },
+        ],
+        rationale: 'ST elevation in contiguous leads is the classic marker of acute transmural ischemia.',
+        scene: {
+          kind: 'patient',
+          params: {
+            label: 'PATIENT — CHEST PAIN',
+            heartRate: 98,
+            hotspots: [{ x: -10, y: -30, r: 18, label: 'CHEST' }],
+          },
+        },
+        metadata: { nodeId: 'node-4', topic: 'ACS', priority: 'high' },
+      },
+    };
+
+    const stemEl = document.getElementById('stem');
+    const dumpEl = document.getElementById('dump');
+
+    function loadMock(key) {
+      const raw = MOCKS[key];
+      if (!raw) return;
+
+      // Run the REAL normalizer so we're testing the full data path.
+      const [norm] = normalizeQuestions([raw], raw.metadata?.nodeId || null);
+
+      stemEl.textContent = norm.q;
+      dumpEl.textContent = JSON.stringify(
+        { id: norm.id, scene: norm.scene, sceneCfg: norm.sceneCfg },
+        null, 2
+      );
+
+      console.log('[test] normalized:', norm);
+
+      if (norm.scene && SCENE_REGISTRY[norm.scene]) {
+        runScene(norm.scene, norm.sceneCfg || {});
+      } else {
+        console.warn('[test] no registry entry for', norm.scene);
+        stopActiveScene();
+      }
+    }
+
+    document.querySelectorAll('button[data-q]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = btn.dataset.q;
+        if (q === 'stop') { stopActiveScene(); return; }
+        loadMock(q);
+      });
+    });
+
+    // Auto-load the first scene so the page isn't empty.
+    loadMock('ecg');
+  </script>
+</body>
+</html>

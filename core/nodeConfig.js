@@ -20,6 +20,20 @@ import { OPIOIDS_QUESTIONS, OPIOIDS_METADATA } from '../data/questions/opioids-c
 import { NMB_QUESTIONS,    NMB_METADATA    } from '../data/questions/nmb-chapter10.js';
 import { MACHINE_QUESTIONS, MACHINE_METADATA } from '../data/questions/anesthesia-machine-chapter11.js';
 
+// ── Advanced Physiology & Pathophysiology I (Guyton & Hall 14e) ──────────────
+import { PATHO_NODE1_QUESTIONS,  PATHO_NODE1_METADATA  } from '../data/questions/patho-node1-cell-organization.js';
+import { PATHO_NODE2_QUESTIONS,  PATHO_NODE2_METADATA  } from '../data/questions/patho-node2-genetics-transport.js';
+import { PATHO_NODE3_QUESTIONS,  PATHO_NODE3_METADATA  } from '../data/questions/patho-node3-membrane-potentials-skeletal-muscle.js';
+import { PATHO_NODE4_QUESTIONS,  PATHO_NODE4_METADATA  } from '../data/questions/patho-node4-muscle-excitation.js';
+import { PATHO_NODE5_QUESTIONS,  PATHO_NODE5_METADATA  } from '../data/questions/patho-node5-cardiac-rhythm.js';
+import { PATHO_NODE6_QUESTIONS,  PATHO_NODE6_METADATA  } from '../data/questions/patho-node6-ecg-vectorial.js';
+import { PATHO_NODE7_QUESTIONS,  PATHO_NODE7_METADATA  } from '../data/questions/patho-node7-arrhythmias-circulation.js';
+import { PATHO_NODE8_QUESTIONS,  PATHO_NODE8_METADATA  } from '../data/questions/patho-node8-distensibility-microcirculation.js';
+import { PATHO_NODE9_QUESTIONS,  PATHO_NODE9_METADATA  } from '../data/questions/patho-node9-local-neural-bp.js';
+import { PATHO_NODE10_QUESTIONS, PATHO_NODE10_METADATA } from '../data/questions/patho-node10-kidney-bp-cardiac-output.js';
+import { PATHO_NODE11_QUESTIONS, PATHO_NODE11_METADATA } from '../data/questions/patho-node11-muscle-coronary-hf.js';
+import { PATHO_NODE12_QUESTIONS, PATHO_NODE12_METADATA } from '../data/questions/patho-node12-valves-shock.js';
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
@@ -142,6 +156,132 @@ export const NODE_CONFIG = {
     questionsMeta:     MACHINE_METADATA,
     sceneRendererName: "renderAnesthesiaMachineScene",
     stopSceneName:     "stopAnesthesiaMachineScene",
+  },
+
+  // ── Advanced Physiology & Pathophysiology I (Guyton & Hall 14e) ───────────
+  //
+  // These nodes use the data-driven SCENE_REGISTRY (tier-1 dispatch in
+  // gameUI.js), so no per-node renderer is required. Every question carries
+  // its own q.scene + q.sceneCfg.
+
+  "patho-node-1": {
+    courseId:      "adv-phys-path-1",
+    title:         "Organization of the Human Body & The Cell",
+    chapterLabel:  "Ch. 1–2",
+    badgeLabel:    "CELL & HOMEOSTASIS Ch.1–2",
+    icon:          "🧬",
+    questions:     PATHO_NODE1_QUESTIONS,
+    questionsMeta: PATHO_NODE1_METADATA,
+  },
+
+  "patho-node-2": {
+    courseId:      "adv-phys-path-1",
+    title:         "Genetic Control & Membrane Transport",
+    chapterLabel:  "Ch. 3–4",
+    badgeLabel:    "DNA / TRANSPORT Ch.3–4",
+    icon:          "🧪",
+    questions:     PATHO_NODE2_QUESTIONS,
+    questionsMeta: PATHO_NODE2_METADATA,
+  },
+
+  "patho-node-3": {
+    courseId:      "adv-phys-path-1",
+    title:         "Membrane Potentials & Skeletal Muscle",
+    chapterLabel:  "Ch. 5–6",
+    badgeLabel:    "AP / SARCOMERE Ch.5–6",
+    icon:          "⚡",
+    questions:     PATHO_NODE3_QUESTIONS,
+    questionsMeta: PATHO_NODE3_METADATA,
+  },
+
+  "patho-node-4": {
+    courseId:      "adv-phys-path-1",
+    title:         "Muscle Excitation — Skeletal & Smooth",
+    chapterLabel:  "Ch. 7–8",
+    badgeLabel:    "NMJ / SMOOTH MUSCLE Ch.7–8",
+    icon:          "💪",
+    questions:     PATHO_NODE4_QUESTIONS,
+    questionsMeta: PATHO_NODE4_METADATA,
+  },
+
+  "patho-node-5": {
+    courseId:      "adv-phys-path-1",
+    title:         "Cardiac Muscle & Rhythmic Excitation",
+    chapterLabel:  "Ch. 9–10",
+    badgeLabel:    "CARDIAC AP / SA NODE Ch.9–10",
+    icon:          "❤️",
+    questions:     PATHO_NODE5_QUESTIONS,
+    questionsMeta: PATHO_NODE5_METADATA,
+  },
+
+  "patho-node-6": {
+    courseId:      "adv-phys-path-1",
+    title:         "Fundamentals of ECG & Vectorial Analysis",
+    chapterLabel:  "Ch. 11–12",
+    badgeLabel:    "ECG / AXIS Ch.11–12",
+    icon:          "📈",
+    questions:     PATHO_NODE6_QUESTIONS,
+    questionsMeta: PATHO_NODE6_METADATA,
+  },
+
+  "patho-node-7": {
+    courseId:      "adv-phys-path-1",
+    title:         "Arrhythmias & Overview of the Circulation",
+    chapterLabel:  "Ch. 13–14",
+    badgeLabel:    "ARRHYTHMIAS / VESSELS Ch.13–14",
+    icon:          "💓",
+    questions:     PATHO_NODE7_QUESTIONS,
+    questionsMeta: PATHO_NODE7_METADATA,
+  },
+
+  "patho-node-8": {
+    courseId:      "adv-phys-path-1",
+    title:         "Vascular Distensibility & Microcirculation",
+    chapterLabel:  "Ch. 15–16",
+    badgeLabel:    "COMPLIANCE / STARLING Ch.15–16",
+    icon:          "🩸",
+    questions:     PATHO_NODE8_QUESTIONS,
+    questionsMeta: PATHO_NODE8_METADATA,
+  },
+
+  "patho-node-9": {
+    courseId:      "adv-phys-path-1",
+    title:         "Local Blood Flow & Nervous Regulation of BP",
+    chapterLabel:  "Ch. 17–18",
+    badgeLabel:    "AUTOREG / BAROREFLEX Ch.17–18",
+    icon:          "🧠",
+    questions:     PATHO_NODE9_QUESTIONS,
+    questionsMeta: PATHO_NODE9_METADATA,
+  },
+
+  "patho-node-10": {
+    courseId:      "adv-phys-path-1",
+    title:         "Renal BP Control & Cardiac Output",
+    chapterLabel:  "Ch. 19–20",
+    badgeLabel:    "RAAS / CO-VR Ch.19–20",
+    icon:          "🫘",
+    questions:     PATHO_NODE10_QUESTIONS,
+    questionsMeta: PATHO_NODE10_METADATA,
+  },
+
+  "patho-node-11": {
+    courseId:      "adv-phys-path-1",
+    title:         "Muscle/Coronary Blood Flow & Cardiac Failure",
+    chapterLabel:  "Ch. 21–22",
+    badgeLabel:    "CORONARY / HF Ch.21–22",
+    icon:          "💔",
+    questions:     PATHO_NODE11_QUESTIONS,
+    questionsMeta: PATHO_NODE11_METADATA,
+  },
+
+  "patho-node-12": {
+    courseId:      "adv-phys-path-1",
+    title:         "Heart Valves & Circulatory Shock",
+    chapterLabel:  "Ch. 23–24",
+    badgeLabel:    "VALVES / SHOCK Ch.23–24",
+    icon:          "⚠️",
+    questions:     PATHO_NODE12_QUESTIONS,
+    questionsMeta: PATHO_NODE12_METADATA,
   },
 
   // ── Add future nodes here ──────────────────────────────────────────────────

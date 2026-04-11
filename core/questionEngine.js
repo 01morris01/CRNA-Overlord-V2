@@ -71,6 +71,13 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
   const resolvedNodeId = nodeId || q.metadata?.nodeId || 'node-unknown';
   const resolvedChapter = q.metadata?.chapter || `Node ${resolvedNodeId.replace('node-', '')}`;
   const resolvedTopic = q.metadata?.topic || resolvedNodeId;
+  // Pull courseId from the node config so metadata.sectionId reflects reality
+  // (basics-of-anesthesia vs adv-phys-path-1 vs future courses). Previously
+  // this was hardcoded to 'basics-of-anesthesia', which broke filterQuestions
+  // and review-mode grouping for any other course.
+  const resolvedCourseId = getNodeConfig(resolvedNodeId)?.courseId
+    || q.metadata?.courseId
+    || 'basics-of-anesthesia';
 
   // Handle both old format (prompt + choices/correctAnswers) and new format (prompt + ans)
   let ans = [];
@@ -87,11 +94,26 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     }
   }
 
+  // Scene passthrough: accept both shapes so an agent can emit either.
+  //   Form A (flat):   q.scene = "ecg_waveform",  q.sceneCfg = { rate: 90 }
+  //   Form B (nested): q.scene = { kind: "ecg_waveform", params: { rate: 90 } }
+  // A missing scene falls through as null so gameUI can use the node-level
+  // renderer as a fallback instead of forcing "patient".
+  let scene = null;
+  let sceneCfg = {};
+  if (q.scene && typeof q.scene === 'object' && q.scene.kind) {
+    scene = q.scene.kind;
+    sceneCfg = q.scene.params || q.sceneCfg || {};
+  } else if (typeof q.scene === 'string') {
+    scene = q.scene;
+    sceneCfg = q.sceneCfg || {};
+  }
+
   const normalized = {
     id: q.id || `q_${index + 1}`,
     chapter: resolvedChapter,
-    scene: 'patient',
-    sceneCfg: {},
+    scene,
+    sceneCfg,
     type: q.type, // mcq, multi, short
     difficulty: q.metadata?.priority === 'high' ? 3 : (q.metadata?.priority === 'medium' ? 2 : 1),
     setup: q.setup || '',
@@ -129,7 +151,7 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     concept_tag: q.metadata?.topic || null,
 
     metadata: {
-      sectionId: 'basics-of-anesthesia',
+      sectionId: resolvedCourseId,
       lessonId: resolvedNodeId,
       topicId: resolvedTopic,
       topic: resolvedTopic,
