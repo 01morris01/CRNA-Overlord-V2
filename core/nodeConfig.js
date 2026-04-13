@@ -34,6 +34,15 @@ import { PATHO_NODE10_QUESTIONS, PATHO_NODE10_METADATA } from '../data/questions
 import { PATHO_NODE11_QUESTIONS, PATHO_NODE11_METADATA } from '../data/questions/patho-node11-muscle-coronary-hf.js';
 import { PATHO_NODE12_QUESTIONS, PATHO_NODE12_METADATA } from '../data/questions/patho-node12-valves-shock.js';
 
+// ── Chemistry & Physics for Anesthesia Practice ─────────────────────────────
+import { CP_NODE1_QUESTIONS, CP_NODE1_METADATA } from '../data/questions/cp-node1-smart-sheets.js';
+import { CP_NODE2_QUESTIONS, CP_NODE2_METADATA } from '../data/questions/cp-node2-med-math.js';
+import { CP_NODE3_QUESTIONS, CP_NODE3_METADATA } from '../data/questions/cp-node3-physics1.js';
+import { CP_NODE4_QUESTIONS, CP_NODE4_METADATA } from '../data/questions/cp-node4-physics2.js';
+import { CP_NODE5_QUESTIONS, CP_NODE5_METADATA } from '../data/questions/cp-node5-fluids.js';
+import { CP_NODE6_QUESTIONS, CP_NODE6_METADATA } from '../data/questions/cp-node6-gas-laws.js';
+import { CP_NODE7_QUESTIONS, CP_NODE7_METADATA } from '../data/questions/cp-node7-states-of-matter.js';
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
@@ -282,6 +291,84 @@ export const NODE_CONFIG = {
     icon:          "⚠️",
     questions:     PATHO_NODE12_QUESTIONS,
     questionsMeta: PATHO_NODE12_METADATA,
+  },
+
+  // ── Chemistry & Physics for Anesthesia Practice ────────────────────────────
+  //
+  // cp-node-2 is the MATH/DRIP node: untimed + adaptive. The untimed flag
+  // tells gameUI.js to skip the 35-sec countdown. All other CP nodes are
+  // timed normally.
+
+  "cp-node-1": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Smart Sheets & Course Foundations",
+    chapterLabel:  "Foundations",
+    badgeLabel:    "SMART SHEETS",
+    icon:          "📐",
+    questions:     CP_NODE1_QUESTIONS,
+    questionsMeta: CP_NODE1_METADATA,
+  },
+
+  "cp-node-2": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Medical Math & Drip Calculations",
+    chapterLabel:  "Math / Drip",
+    badgeLabel:    "MED MATH — UNTIMED",
+    icon:          "🧮",
+    questions:     CP_NODE2_QUESTIONS,
+    questionsMeta: CP_NODE2_METADATA,
+    untimed:       true,   // disables 35-sec timer for the entire node
+    adaptive:      true,   // metadata flag for future adaptive behavior
+  },
+
+  "cp-node-3": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Physics I — Forces, Pressure & Measurement",
+    chapterLabel:  "Physics I",
+    badgeLabel:    "PHYSICS I",
+    icon:          "⚖️",
+    questions:     CP_NODE3_QUESTIONS,
+    questionsMeta: CP_NODE3_METADATA,
+  },
+
+  "cp-node-4": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Physics II — Energy, Work & Ventilation",
+    chapterLabel:  "Physics II",
+    badgeLabel:    "PHYSICS II",
+    icon:          "🔋",
+    questions:     CP_NODE4_QUESTIONS,
+    questionsMeta: CP_NODE4_METADATA,
+  },
+
+  "cp-node-5": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Fluids — Hydrostatics & Hydrodynamics",
+    chapterLabel:  "Fluids",
+    badgeLabel:    "FLUIDS",
+    icon:          "💧",
+    questions:     CP_NODE5_QUESTIONS,
+    questionsMeta: CP_NODE5_METADATA,
+  },
+
+  "cp-node-6": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "The Gas Laws",
+    chapterLabel:  "Gas Laws",
+    badgeLabel:    "GAS LAWS",
+    icon:          "🫁",
+    questions:     CP_NODE6_QUESTIONS,
+    questionsMeta: CP_NODE6_METADATA,
+  },
+
+  "cp-node-7": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "States of Matter & Phase Changes",
+    chapterLabel:  "States",
+    badgeLabel:    "STATES OF MATTER",
+    icon:          "🧊",
+    questions:     CP_NODE7_QUESTIONS,
+    questionsMeta: CP_NODE7_METADATA,
   },
 
   // ── Add future nodes here ──────────────────────────────────────────────────

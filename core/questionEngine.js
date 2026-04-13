@@ -150,12 +150,22 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     // concept_tag: human-readable topic used by Review Weakest and XP bonus
     concept_tag: q.metadata?.topic || null,
 
+    // Adaptive / untimed flags — pass through from question metadata so
+    // gameUI can skip the timer for math/drip nodes and future adaptive
+    // behavior can key off these at session level.
+    untimed:  q.metadata?.untimed  || q.untimed  || false,
+    adaptive: q.metadata?.adaptive || q.adaptive || false,
+    rationale_mode: q.metadata?.rationale_mode || q.rationale_mode || 'standard',
+
     metadata: {
       sectionId: resolvedCourseId,
       lessonId: resolvedNodeId,
       topicId: resolvedTopic,
       topic: resolvedTopic,
-      priority: q.metadata?.priority || 'medium'
+      priority: q.metadata?.priority || 'medium',
+      untimed:  q.metadata?.untimed  || false,
+      adaptive: q.metadata?.adaptive || false,
+      rationale_mode: q.metadata?.rationale_mode || 'standard',
     },
   };
 

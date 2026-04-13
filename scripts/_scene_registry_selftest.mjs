@@ -60,7 +60,14 @@ const pathoKinds = [
   'shock_spiral',
 ];
 
-const expectedKinds = [...originalKinds, ...pathoKinds];
+// Chemistry & Physics additions.
+const chemPhysKinds = [
+  'gas_piston',
+  'iv_drip_calc',
+  'pressure_depth',
+];
+
+const expectedKinds = [...originalKinds, ...pathoKinds, ...chemPhysKinds];
 
 for (const k of expectedKinds) {
   assert.ok(SCENE_REGISTRY[k], `SCENE_REGISTRY missing "${k}"`);

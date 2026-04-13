@@ -1313,6 +1313,230 @@ function drawShockSpiral(ctx, W, H, cfg, t) {
   if (cfg.label) txt(ctx, cfg.label, 20, 30, { color: col, glow: 8, font: '16px "Courier New", monospace' });
 }
 
+// ─── chemistry / physics primitives ─────────────────────────────────────────
+
+/**
+ * Gas law piston — Boyle's / Charles visual. Piston slides left/right.
+ * cfg: { label, law: 'boyle'|'charles', animate: true }
+ */
+function drawGasPiston(ctx, W, H, cfg, t) {
+  bg(ctx, W, H);
+
+  const cy = H / 2;
+  const cylX0 = W * 0.12, cylX1 = W * 0.88;
+  const cylH = 80;
+  const law = cfg.law || 'boyle';
+
+  // piston position oscillates
+  const frac = law === 'charles'
+    ? 0.45 + Math.sin(t * 1.2) * 0.25   // volume grows with T
+    : 0.55 + Math.sin(t * 1.5) * 0.25;  // Boyle inverse
+  const pistonX = cylX0 + (cylX1 - cylX0) * frac;
+
+  // cylinder outline
+  ctx.save();
+  ctx.strokeStyle = '#6ef7ff';
+  ctx.lineWidth = 3;
+  ctx.shadowColor = '#6ef7ff';
+  ctx.shadowBlur = 8;
+  ctx.beginPath();
+  ctx.rect(cylX0, cy - cylH / 2, cylX1 - cylX0, cylH);
+  ctx.stroke();
+  ctx.restore();
+
+  // gas fill (left of piston)
+  const gasGrad = ctx.createLinearGradient(cylX0, 0, pistonX, 0);
+  gasGrad.addColorStop(0, 'rgba(110, 247, 255, 0.25)');
+  gasGrad.addColorStop(1, 'rgba(255, 110, 247, 0.15)');
+  ctx.fillStyle = gasGrad;
+  ctx.fillRect(cylX0 + 2, cy - cylH / 2 + 2, pistonX - cylX0 - 2, cylH - 4);
+
+  // gas particles
+  for (let i = 0; i < 14; i++) {
+    const px = cylX0 + 10 + Math.random() * (pistonX - cylX0 - 20);
+    const py = cy - cylH / 2 + 8 + Math.random() * (cylH - 16);
+    const speed = 1 + Math.sin(t * 4 + i) * 0.5;
+    ctx.fillStyle = `rgba(255, 220, 100, ${0.5 + speed * 0.15})`;
+    ctx.beginPath();
+    ctx.arc(px, py, 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // piston head
+  glow(ctx, '#ff6ef7', 10, () => {
+    ctx.fillStyle = '#ff6ef7';
+    ctx.fillRect(pistonX - 4, cy - cylH / 2 + 2, 8, cylH - 4);
+  });
+  // piston rod
+  ctx.strokeStyle = '#ff6ef7';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(pistonX, cy);
+  ctx.lineTo(cylX1 + 20, cy);
+  ctx.stroke();
+
+  // labels
+  const vol = Math.round(frac * 100);
+  txt(ctx, `V = ${vol}%`, cylX0 + (pistonX - cylX0) / 2, cy + cylH / 2 + 25, {
+    color: '#6ef7ff', align: 'center', glow: 4,
+  });
+
+  if (law === 'boyle') {
+    txt(ctx, `P ∝ 1/V (T const)`, W / 2, cy - cylH / 2 - 18, {
+      color: '#ff6ef7', align: 'center', glow: 6,
+    });
+  } else {
+    txt(ctx, `V ∝ T (P const)`, W / 2, cy - cylH / 2 - 18, {
+      color: '#ffdd00', align: 'center', glow: 6,
+    });
+  }
+
+  if (cfg.label) txt(ctx, cfg.label, 20, 30, { color: '#6ef7ff', glow: 8, font: '16px "Courier New", monospace' });
+}
+
+/**
+ * IV drip / syringe calculator visual — shows bag, rate, concentration.
+ * cfg: { label, drug, concentration, dose, rate, unit }
+ */
+function drawIvDripCalc(ctx, W, H, cfg, t) {
+  bg(ctx, W, H);
+
+  const cx = W / 2, cy = H / 2;
+
+  // IV bag outline (left side)
+  const bagX = W * 0.18, bagY = H * 0.15, bagW = 90, bagH = 120;
+  glow(ctx, '#6ef7ff', 10, () => {
+    ctx.strokeStyle = '#6ef7ff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    // bag shape
+    ctx.moveTo(bagX, bagY + 10);
+    ctx.lineTo(bagX, bagY + bagH);
+    ctx.lineTo(bagX + bagW, bagY + bagH);
+    ctx.lineTo(bagX + bagW, bagY + 10);
+    ctx.quadraticCurveTo(bagX + bagW / 2, bagY - 8, bagX, bagY + 10);
+    ctx.stroke();
+    // tubing
+    ctx.beginPath();
+    ctx.moveTo(bagX + bagW / 2, bagY + bagH);
+    ctx.lineTo(bagX + bagW / 2, bagY + bagH + 60);
+    ctx.stroke();
+  });
+
+  // fluid fill inside bag
+  const fillH = bagH * (0.5 + Math.sin(t * 0.3) * 0.15);
+  ctx.fillStyle = 'rgba(110, 247, 255, 0.2)';
+  ctx.fillRect(bagX + 2, bagY + bagH - fillH, bagW - 4, fillH - 2);
+
+  // drip animation
+  const dripY = bagY + bagH + 10 + ((t * 80) % 50);
+  ctx.fillStyle = '#6ef7ff';
+  ctx.beginPath();
+  ctx.ellipse(bagX + bagW / 2, dripY, 3, 5, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 3-step framework boxes (right side)
+  const steps = [
+    { n: '1', title: 'CONCENTRATION', detail: cfg.concentration || 'drug ÷ volume' },
+    { n: '2', title: 'DOSE', detail: cfg.dose || 'rate × weight' },
+    { n: '3', title: 'RATE (mL/hr)', detail: cfg.rate || 'dose ÷ conc × 60' },
+  ];
+  const stepX = W * 0.42, stepW = W * 0.52;
+  steps.forEach((s, i) => {
+    const sy = H * 0.15 + i * 85;
+    const col = ['#6ef7ff', '#ff6ef7', '#ffdd00'][i];
+    glow(ctx, col, 8, () => {
+      ctx.strokeStyle = col;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.rect(stepX, sy, stepW, 65);
+      ctx.stroke();
+    });
+    txt(ctx, `Step ${s.n}: ${s.title}`, stepX + 10, sy + 20, {
+      color: col, glow: 4, font: 'bold 13px "Courier New", monospace',
+    });
+    txt(ctx, s.detail, stepX + 10, sy + 44, {
+      color: '#ffffff', glow: 2, font: '12px "Courier New", monospace',
+    });
+  });
+
+  // drug label on bag
+  txt(ctx, cfg.drug || 'DRUG', bagX + bagW / 2, bagY + bagH / 2, {
+    color: '#ffdd00', align: 'center', glow: 6, font: 'bold 14px "Courier New", monospace',
+  });
+
+  if (cfg.label) txt(ctx, cfg.label, 20, 30, { color: '#ffdd00', glow: 8, font: '16px "Courier New", monospace' });
+}
+
+/**
+ * Pressure depth diagram — vertical column with depth markers.
+ * cfg: { label, fluid: 'water'|'mercury'|'blood', depths: [{m, label}] }
+ */
+function drawPressureDepth(ctx, W, H, cfg, t) {
+  bg(ctx, W, H);
+
+  const colX = W * 0.35, colW = 100;
+  const topY = 50, botY = H - 50;
+  const colH = botY - topY;
+  const fluid = cfg.fluid || 'water';
+  const col = fluid === 'mercury' ? '#ff6ef7' : fluid === 'blood' ? '#ff4466' : '#6ef7ff';
+
+  // column outline
+  glow(ctx, col, 8, () => {
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.rect(colX, topY, colW, colH);
+    ctx.stroke();
+  });
+
+  // fluid gradient fill
+  const grad = ctx.createLinearGradient(0, topY, 0, botY);
+  grad.addColorStop(0, `${col}15`);
+  grad.addColorStop(1, `${col}55`);
+  ctx.fillStyle = grad;
+  ctx.fillRect(colX + 2, topY + 2, colW - 4, colH - 4);
+
+  // atmospheric arrow at top
+  glow(ctx, '#ffdd00', 6, () => {
+    ctx.strokeStyle = '#ffdd00';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(colX + colW / 2, topY - 30);
+    ctx.lineTo(colX + colW / 2, topY);
+    ctx.moveTo(colX + colW / 2 - 8, topY - 8);
+    ctx.lineTo(colX + colW / 2, topY);
+    ctx.lineTo(colX + colW / 2 + 8, topY - 8);
+    ctx.stroke();
+  });
+  txt(ctx, 'Patm', colX + colW / 2, topY - 36, { color: '#ffdd00', align: 'center', glow: 4 });
+
+  // depth markers
+  const depths = cfg.depths || [
+    { m: 0.25, label: 'P = ρgh (low)' },
+    { m: 0.75, label: 'P = ρgh (high)' },
+  ];
+  depths.forEach(d => {
+    const y = topY + colH * d.m;
+    ctx.save();
+    ctx.strokeStyle = '#ffdd00';
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(colX, y);
+    ctx.lineTo(colX + colW + 100, y);
+    ctx.stroke();
+    ctx.restore();
+    txt(ctx, d.label, colX + colW + 110, y + 4, { color: '#ffdd00', glow: 4 });
+  });
+
+  // P = ρgh equation
+  txt(ctx, 'P = ρ × g × h', W * 0.65, botY - 20, {
+    color: col, align: 'center', glow: 6, font: '16px "Courier New", monospace',
+  });
+
+  if (cfg.label) txt(ctx, cfg.label, 20, 30, { color: col, glow: 8, font: '16px "Courier New", monospace' });
+}
+
 // ─── registry ───────────────────────────────────────────────────────────────
 
 export const SCENE_REGISTRY = {
@@ -1331,6 +1555,10 @@ export const SCENE_REGISTRY = {
   feedback_loop:        drawFeedbackLoop,
   pv_loop:              drawPvLoop,
   shock_spiral:         drawShockSpiral,
+  // chemistry & physics primitives
+  gas_piston:           drawGasPiston,
+  iv_drip_calc:         drawIvDripCalc,
+  pressure_depth:       drawPressureDepth,
 };
 
 export const SCENE_KINDS = Object.keys(SCENE_REGISTRY);

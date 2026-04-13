@@ -249,7 +249,11 @@ function _showRecallPhase(q) {
   btn.onclick = () => {
     btn.remove();
     _renderAnswerOptions(q);
-    startQuestionTimer(q);
+    // Respect untimed flag — math/drip nodes skip the timer even in recall mode
+    const _nodeId = window.currentSession?.nodeId || null;
+    const _nodeCfg = _nodeId ? getNodeConfig(_nodeId) : null;
+    const _untimed = q.metadata?.untimed || q.untimed || _nodeCfg?.untimed || false;
+    if (!_untimed) startQuestionTimer(q);
   };
   ansArea.appendChild(btn);
 }
@@ -306,13 +310,30 @@ export function renderCurrentQuestion() {
   console.log('QUESTION TYPE:', q.type, '| id:', q.id);
   if (q.type === 'multi') console.log('Choices:', q.choices);
 
+  // Determine whether this question/node should skip the timer.
+  // Questions with metadata.untimed === true (e.g. math/drip nodes) run
+  // without a countdown. The timer bar is hidden so the learner can work
+  // through stepwise calculations at their own pace.
+  const nodeId = window.currentSession?.nodeId || null;
+  const nodeCfg = nodeId ? getNodeConfig(nodeId) : null;
+  const isUntimed = q.metadata?.untimed
+    || q.untimed
+    || nodeCfg?.untimed
+    || false;
+
+  if (isUntimed) {
+    // Hide the timer bar entirely for untimed questions
+    const fill = document.getElementById('tmr-fill');
+    if (fill) { fill.style.transition = 'none'; fill.style.width = '0%'; }
+  }
+
   // Recall First: show stem only, hold timer until user clicks ready
   if (loadState().recallFirstEnabled) {
     _showRecallPhase(q);
   } else {
-    // Normal path: render answers and start timer immediately
+    // Normal path: render answers and start timer immediately (unless untimed)
     _renderAnswerOptions(q);
-    startQuestionTimer(q);
+    if (!isUntimed) startQuestionTimer(q);
   }
 
   // Render themed scene — three-tier dispatch:

@@ -100,6 +100,18 @@ const TOPIC_TO_NODE = {
   'adv1-t10': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-10' },
   'adv1-t11': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-11' },
   'adv1-t12': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-12' },
+
+  // Chemistry & Physics for Anesthesia Practice (NAS 510).
+  // Only 7 local content folders exist (Smart Sheets through States of
+  // Matter). Topics cp-t08 through cp-t12 have no local source material
+  // and remain unmapped — their world-map markers fall through to legacy.
+  'cp-t01': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-1' },
+  'cp-t02': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-2' },
+  'cp-t03': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-3' },
+  'cp-t04': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-4' },
+  'cp-t05': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-5' },
+  'cp-t06': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-6' },
+  'cp-t07': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-7' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.
