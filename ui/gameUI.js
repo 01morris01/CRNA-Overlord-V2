@@ -49,7 +49,7 @@ let multiSelectState = { selected: new Set(), requiredCount: 0 };
 // ─── timer ────────────────────────────────────────────────────────────────────
 
 let _timerInterval = null;
-const QUESTION_TIME_SEC = 35;
+const QUESTION_TIME_SEC = 60;
 let _remaining = 0;
 let _currentTimerQ = null; // current question, used by resumeQuestionTimer
 
