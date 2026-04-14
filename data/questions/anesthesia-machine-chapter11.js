@@ -1800,6 +1800,281 @@ export const MACHINE_QUESTIONS = [
     metadata: { topic: "Degradation of Anesthetics", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["desiccated absorbent", "do not use", "Monday morning scenario"] }
   },
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ADDITIONAL — Intermediate & Low Pressure Detail, Vaporizer Mechanism,
+  //              Mapleson A–F Breathing Systems
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  {
+    id: "boa-node11-ads-101",
+    type: "multi",
+    prompt: "Which components are located within the INTERMEDIATE pressure system of the anesthesia machine? (Select FOUR)",
+    setup: "",
+    choices: [
+      "Pipeline inlet connections with DISS fittings and check valves",
+      "Pipeline pressure indicators (gauges) color-coded by gas at 45-55 psi",
+      "Master switch controlling both pneumatic and electrical functions",
+      "Oxygen pressure failure devices (fail-safe valve and alarm at ~30 psi)",
+      "Vaporizers and the common gas outlet delivering agent to the circuit",
+      "Hanger yoke assembly with Pin Index Safety System for E-cylinders",
+    ],
+    correctAnswers: [
+      "Pipeline inlet connections with DISS fittings and check valves",
+      "Pipeline pressure indicators (gauges) color-coded by gas at 45-55 psi",
+      "Master switch controlling both pneumatic and electrical functions",
+      "Oxygen pressure failure devices (fail-safe valve and alarm at ~30 psi)",
+    ],
+    selectCount: 4,
+    rationale: "The intermediate pressure system (40-55 psi) includes pipeline inlets, pipeline pressure indicators, piping, gas power outlet, master switch, O₂ pressure failure devices, O₂ flush, second-stage reducing devices, and flow control valves. Vaporizers and the common gas outlet are in the LOW pressure system (downstream of flow control valves). The hanger yoke is in the HIGH pressure system.",
+    scene: null,
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["intermediate pressure", "components", "pipeline"] }
+  },
+
+  {
+    id: "boa-node11-ads-102",
+    type: "mcq",
+    prompt: "The second-stage reducing device in the intermediate pressure system lowers N₂O to approximately 26 psig and O₂ to approximately 14 psig. What is the primary purpose of this further pressure reduction?",
+    setup: "",
+    ans: [
+      { t: "It eliminates pressure fluctuations in the pipeline supply so that flowmeter readings remain constant and accurate", ok: true  },
+      { t: "It raises the pressure high enough to overcome resistance in the vaporizer wicks and baffles during gas flow",      ok: false },
+      { t: "It converts the gas from a liquid state back to a vapor state before it enters the flowmeter glass tubes",         ok: false },
+      { t: "It prevents the fail-safe valve from activating by keeping all gas pressures above the 30 psi alarm threshold",    ok: false },
+    ],
+    rationale: "Second-stage regulators sit upstream of the N₂O and O₂ flow control valves. They reduce pipeline pressure further (N₂O to ~26 psig, O₂ to ~14 psig) to eliminate supply fluctuations, ensuring stable and accurate flowmeter readings regardless of upstream pressure variations. They do not convert liquid to vapor, do not raise pressure, and are independent of the fail-safe valve.",
+    scene: null,
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["second-stage regulator", "pressure reduction", "flowmeter accuracy"] }
+  },
+
+  {
+    id: "boa-node11-ads-103",
+    type: "mcq",
+    prompt: "The O₂ flush valve delivers 35-75 L/min of oxygen and bypasses which components of the machine?",
+    setup: "",
+    ans: [
+      { t: "It bypasses both the flowmeters and the vaporizers, delivering unmetered oxygen directly to the common gas outlet",  ok: true  },
+      { t: "It bypasses only the vaporizers but still flows through the flowmeter tubes so the provider can see the flow rate",  ok: false },
+      { t: "It bypasses only the flowmeters but still passes through the vaporizer to pick up anesthetic agent before delivery", ok: false },
+      { t: "It does not bypass anything — it simply increases the oxygen flow rate through the normal flowmeter/vaporizer path",  ok: false },
+    ],
+    rationale: "The O₂ flush valve provides direct communication between the high/intermediate pressure system and the low pressure common gas outlet, bypassing BOTH flowmeters AND vaporizers. This means: (1) the flow is unmetered — you cannot see it on the flowmeter, (2) it dilutes any anesthetic agent in the circuit (risk of awareness), and (3) it can cause barotrauma if the circuit is connected to a patient during positive pressure ventilation.",
+    scene: null,
+    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 flush", "bypasses flowmeters", "bypasses vaporizers", "barotrauma"] }
+  },
+
+  {
+    id: "boa-node11-ads-104",
+    type: "multi",
+    prompt: "Which components are located within the LOW pressure system of the anesthesia machine? (Select FOUR)",
+    setup: "",
+    choices: [
+      "Flow indicators (glass Thorpe tubes with bobbin or ball floats)",
+      "Vaporizers with agent-specific variable-bypass design",
+      "Common gas outlet where all gases and vapors exit the machine",
+      "Back pressure safety devices preventing downstream pressure effects",
+      "Pipeline inlet connections with DISS fittings receiving wall gas supply",
+      "Oxygen pressure failure devices including the fail-safe valve mechanism",
+    ],
+    correctAnswers: [
+      "Flow indicators (glass Thorpe tubes with bobbin or ball floats)",
+      "Vaporizers with agent-specific variable-bypass design",
+      "Common gas outlet where all gases and vapors exit the machine",
+      "Back pressure safety devices preventing downstream pressure effects",
+    ],
+    selectCount: 4,
+    rationale: "The low pressure system is DOWNSTREAM of the flow control valves. It includes flow indicators (Thorpe tubes), vaporizer circuit control valves, vaporizers, back pressure safety devices, low-pressure piping, and the common gas outlet. Pipeline inlets and DISS fittings are in the intermediate pressure system. The fail-safe valve is also in the intermediate system.",
+    scene: null,
+    metadata: { topic: "Low Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["low pressure", "components", "vaporizers", "common gas outlet"] }
+  },
+
+  {
+    id: "boa-node11-ads-105",
+    type: "mcq",
+    prompt: "In a variable-bypass vaporizer, how does the concentration control dial regulate the output concentration of anesthetic agent?",
+    setup: "",
+    ans: [
+      { t: "It adjusts a splitting valve that controls what proportion of total FGF enters the vaporizing chamber versus the bypass", ok: true  },
+      { t: "It directly heats the liquid anesthetic to increase its vapor pressure and therefore the output concentration",           ok: false },
+      { t: "It changes the size of the common gas outlet orifice to alter the total flow rate exiting the machine",                   ok: false },
+      { t: "It adjusts the pipeline inlet pressure regulator to increase the driving pressure through the vaporizer",                  ok: false },
+    ],
+    rationale: "The variable-bypass vaporizer splits incoming FGF into two portions: ~20% or less passes through the vaporizing chamber where it flows over liquid agent and becomes saturated with vapor. The remaining ~80% bypasses the chamber. The two portions mix at the outlet. The concentration dial adjusts this split ratio — turning it up sends more gas through the chamber, increasing agent output. It does not heat the agent (that's what the bimetallic temperature compensator does), nor does it change outlet orifice size or pipeline pressure.",
+    scene: null,
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["variable-bypass", "concentration dial", "splitting valve", "vaporizing chamber"] }
+  },
+
+  {
+    id: "boa-node11-ads-106",
+    type: "mcq",
+    prompt: "In the variable-bypass vaporizer, what happens to the fresh gas that passes through the BYPASS chamber?",
+    setup: "",
+    ans: [
+      { t: "It remains free of anesthetic agent and mixes with the saturated gas from the vaporizing chamber at the outlet",  ok: true  },
+      { t: "It picks up a small amount of agent through vapor diffusion across the chamber wall separating the two pathways",  ok: false },
+      { t: "It is warmed by the temperature-compensating valve before being delivered directly to the patient breathing circuit", ok: false },
+      { t: "It is recirculated back to the flowmeters for re-measurement before joining the vaporizing chamber output stream",   ok: false },
+    ],
+    rationale: "In a variable-bypass design, the bypass portion of FGF does NOT contact liquid agent — it passes through a separate channel and remains agent-free. At the vaporizer outlet, this clean gas dilutes the fully saturated gas from the vaporizing chamber to produce the desired clinical concentration. If all gas went through the chamber, the output would be dangerously concentrated (the saturated vapor concentration of sevoflurane is ~21% at 20°C — far above clinical use).",
+    scene: null,
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["bypass chamber", "dilution", "output concentration", "variable-bypass"] }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MAPLESON BREATHING SYSTEMS A–F
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  {
+    id: "boa-node11-ads-107",
+    type: "mcq",
+    prompt: "What defines the Mapleson A breathing system, and what is its clinical name?",
+    setup: "Mnemonic: A = APL at patient's end.",
+    ans: [
+      { t: "APL valve located at the patient's end; clinically known as the Magill or Lack circuit",   ok: true  },
+      { t: "Both APL and FGF located at the patient's end; clinically known as the Bain circuit",       ok: false },
+      { t: "Corrugated tubing absent with no reservoir bag; used primarily for emergency intubations",   ok: false },
+      { t: "APL valve located distal from the patient's end; clinically known as the Jackson-Rees mod", ok: false },
+    ],
+    rationale: "Mapleson A: the APL valve is at the PATIENT'S end. Clinical examples: Magill circuit (original) and Lack circuit (coaxial modification). It is the most efficient Mapleson system for spontaneous ventilation because exhaled dead-space gas is preferentially vented through the APL valve before alveolar gas. Mapleson B is obsolete. Mapleson D is the Bain. Mapleson F is Jackson-Rees.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson A", "Magill", "Lack", "APL at patient end"] }
+  },
+
+  {
+    id: "boa-node11-ads-108",
+    type: "mcq",
+    prompt: "What defines the Mapleson B breathing system, and what is its current clinical status?",
+    setup: "Mnemonic: B = Both APL and FGF at patient's end.",
+    ans: [
+      { t: "Both the APL valve and fresh gas flow inlet are located at the patient's end — now considered obsolete",  ok: true  },
+      { t: "The APL valve alone is at the patient's end with FGF at the machine end — this is the Magill circuit",    ok: false },
+      { t: "Corrugated tubing is absent and the system is used for emergency intubations in the field setting",        ok: false },
+      { t: "The reservoir bag is eliminated and replaced by open tubing — this is the Ayer's T-piece modification",    ok: false },
+    ],
+    rationale: "Mapleson B has BOTH the APL valve AND the fresh gas flow inlet at the patient's end. This configuration is now obsolete because it wastes fresh gas and provides poor CO₂ elimination efficiency compared to other designs. It should not be confused with Mapleson A (APL only at patient end) or Mapleson D/Bain (APL distal from patient).",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson B", "obsolete", "both APL and FGF at patient end"] }
+  },
+
+  {
+    id: "boa-node11-ads-109",
+    type: "mcq",
+    prompt: "What defines the Mapleson C breathing system, and when is it typically used?",
+    setup: "Mnemonic: C = Corrugation absent.",
+    ans: [
+      { t: "Corrugated tubing is absent — used for emergency intubations and short transport with manual ventilation",  ok: true  },
+      { t: "The APL valve is at the patient's end — used for prolonged spontaneous ventilation during maintenance",      ok: false },
+      { t: "The reservoir bag is eliminated — used exclusively for pediatric anesthesia due to minimal dead space",      ok: false },
+      { t: "The APL valve is located distal from the patient — used as the standard Bain coaxial circuit design",         ok: false },
+    ],
+    rationale: "Mapleson C has no corrugated reservoir tubing (C = Corrugation absent). It is a compact system used for emergency situations — resuscitation bags and short manual ventilation during intubation. Its simplicity makes it ideal for brief procedures, but the lack of corrugated tubing limits gas reservoir capacity for sustained ventilation.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson C", "corrugation absent", "emergency intubation"] }
+  },
+
+  {
+    id: "boa-node11-ads-110",
+    type: "mcq",
+    prompt: "What defines the Mapleson D breathing system, and what is its common clinical modification?",
+    setup: "Mnemonic: D = Distal APL.",
+    ans: [
+      { t: "APL valve is located DISTAL from the patient's end; the Bain circuit is a coaxial modification of Mapleson D",  ok: true  },
+      { t: "Both APL and FGF are at the patient's end; the Magill circuit is a modification of Mapleson D design",            ok: false },
+      { t: "The reservoir bag is eliminated; Ayer's T-piece is a modification of the Mapleson D breathing system",             ok: false },
+      { t: "The APL valve is absent entirely; the Jackson-Rees circuit is another name for the Mapleson D system",             ok: false },
+    ],
+    rationale: "Mapleson D: the APL valve is DISTAL from the patient (D = Distal APL). The Bain circuit is a coaxial modification where the FGF tube runs inside the corrugated expiratory limb. Mapleson D is the most efficient system for controlled ventilation. The Bain is popular for its streamlined design but requires an inner-tube integrity test to prevent rebreathing from a disconnected FGF line.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson D", "Bain circuit", "distal APL", "controlled ventilation"] }
+  },
+
+  {
+    id: "boa-node11-ads-111",
+    type: "mcq",
+    prompt: "What defines the Mapleson E breathing system, and what is its clinical name?",
+    setup: "Mnemonic: E = End (reservoir bag) eliminated.",
+    ans: [
+      { t: "The reservoir bag is eliminated from the system; clinically known as Ayer's T-piece",   ok: true  },
+      { t: "The APL valve is eliminated from the system; clinically known as the Jackson-Rees mod", ok: false },
+      { t: "The corrugated tubing is absent from the system; used for emergency intubation only",   ok: false },
+      { t: "Both APL and FGF are at the patient end; this system is now considered obsolete",        ok: false },
+    ],
+    rationale: "Mapleson E: the reservoir bag at the END is eliminated (E = End bag eliminated). This is Ayer's T-piece — a simple open-ended tube with FGF near the patient. It has very low resistance and dead space, making it useful for pediatric patients. However, without a bag, manual ventilation is not possible unless modified (which creates the Mapleson F/Jackson-Rees).",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson E", "Ayer's T-piece", "no reservoir bag", "pediatric"] }
+  },
+
+  {
+    id: "boa-node11-ads-112",
+    type: "mcq",
+    prompt: "What defines the Mapleson F breathing system, and why is it preferred for pediatric anesthesia and transport?",
+    setup: "Mnemonic: F = Free from APL (APL is absent).",
+    ans: [
+      { t: "The APL valve is absent — Jackson-Rees modification; preferred for minimal dead space and very low resistance", ok: true  },
+      { t: "The APL valve is at the patient's end — Magill circuit; preferred for high fresh gas flow efficiency",            ok: false },
+      { t: "The corrugated tubing is absent — used for emergency intubation; preferred for rapid setup in the field",          ok: false },
+      { t: "Both APL and FGF are distal from the patient — Bain circuit; preferred for controlled mechanical ventilation",     ok: false },
+    ],
+    rationale: "Mapleson F: Free from APL (the APL valve is absent). This is the Jackson-Rees modification of Ayer's T-piece — it adds a reservoir bag with an open tail to the Mapleson E. It's the preferred system for pediatric anesthesia and transport of intubated patients because it has minimal dead space, very low resistance, and allows both manual ventilation (by occluding the bag tail) and spontaneous breathing.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson F", "Jackson-Rees", "APL absent", "pediatric", "transport"] }
+  },
+
+  {
+    id: "boa-node11-ads-113",
+    type: "mcq",
+    prompt: "All semi-open (Mapleson) breathing systems are different arrangements of the same basic components. Which statement correctly describes what varies between systems A through F?",
+    setup: "",
+    ans: [
+      { t: "The relative positions of the FGF inlet, APL valve, reservoir bag, and corrugated tubing change between systems",  ok: true  },
+      { t: "The number of unidirectional valves and CO₂ absorbent canisters differs between each Mapleson classification",      ok: false },
+      { t: "The operating pressure range changes — Mapleson A operates at high pressure while Mapleson F is low pressure",      ok: false },
+      { t: "The type of anesthetic agent each system can deliver varies — some are for volatiles only, others for IV agents",    ok: false },
+    ],
+    rationale: "All Mapleson systems use the same components: FGF inlet tubing, corrugated reservoir tubing, facemask/connection, reservoir bag, and APL (expiratory) valve. What differs is the ARRANGEMENT of these components relative to each other and the patient. None contain CO₂ absorbent or unidirectional valves — those are features of the circle (semi-closed) system. CO₂ elimination in Mapleson systems depends entirely on high fresh gas flows to wash out exhaled CO₂.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson systems", "component arrangement", "semi-open", "no CO2 absorber"] }
+  },
+
+  {
+    id: "boa-node11-ads-114",
+    type: "short",
+    prompt: "The Bain circuit is a coaxial modification of which Mapleson breathing system?",
+    setup: "",
+    acceptedAnswers: ["Mapleson D", "mapleson D", "D", "Mapleson d", "mapleson d"],
+    canonicalAnswer: "Mapleson D",
+    rationale: "The Bain circuit is a coaxial modification of Mapleson D where the FGF tube runs concentrically inside the corrugated expiratory limb. This streamlined design is convenient but requires an integrity test — if the inner FGF tube disconnects, the patient rebreathes exhaled gas without fresh gas supplementation, leading to hypoxia and hypercarbia.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Bain circuit", "Mapleson D", "coaxial"] }
+  },
+
+  {
+    id: "boa-node11-ads-115",
+    type: "short",
+    prompt: "The Jackson-Rees circuit (used for pediatric anesthesia and transport) is also known as which Mapleson classification?",
+    setup: "",
+    acceptedAnswers: ["Mapleson F", "mapleson F", "F", "Mapleson f", "mapleson f"],
+    canonicalAnswer: "Mapleson F",
+    rationale: "Jackson-Rees = Mapleson F. It is free from an APL valve (F = Free from APL). It adds an open-tailed reservoir bag to Ayer's T-piece (Mapleson E), allowing manual ventilation while maintaining minimal dead space and resistance — ideal for pediatric patients and intubated patient transport.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Jackson-Rees", "Mapleson F", "pediatric"] }
+  },
+
+  {
+    id: "boa-node11-ads-116",
+    type: "mcq",
+    prompt: "A key difference between semi-open (Mapleson) systems and the semi-closed circle system is how CO₂ is eliminated. How do Mapleson systems remove CO₂?",
+    setup: "",
+    ans: [
+      { t: "By using high fresh gas flows to wash out exhaled CO₂ — there is no chemical CO₂ absorbent in the system",  ok: true  },
+      { t: "By passing exhaled gas through soda lime granules that chemically neutralize CO₂ into carbonates and water",  ok: false },
+      { t: "By using unidirectional valves that trap CO₂ in the expiratory limb and prevent it from reaching the patient", ok: false },
+      { t: "By venting all exhaled gas to the scavenging system and delivering only fresh gas with each subsequent breath", ok: false },
+    ],
+    rationale: "Mapleson (semi-open) systems have NO CO₂ absorbent and NO unidirectional valves. CO₂ is eliminated solely by high fresh gas flows (typically 2-3× minute ventilation) that wash exhaled gas out through the APL valve before the patient rebreathes it. This is wasteful of gas and anesthetic agent compared to the circle system, which uses soda lime to chemically neutralize CO₂ and allows lower fresh gas flows.",
+    scene: null,
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson", "CO2 elimination", "high FGF", "no absorbent"] }
+  },
+
 ];
 
 export const MACHINE_METADATA = {
