@@ -1,6 +1,9 @@
 import { loadState, saveState } from '../core/state.js';
 import { filterQuestions, getQuestionsForNode, getQuestionMetadata } from '../core/questionEngine.js';
-import { getNodesByCourse } from '../core/nodeConfig.js';
+import { getNodesByCourse, getDistinctCourses } from '../core/nodeConfig.js';
+
+/** Currently selected courseId — defaults to last-used or first available. */
+let _activeCourseId = null;
 
 export function showMap({course='default'}={}) {
   const map = document.getElementById('level-map');
@@ -33,19 +36,55 @@ export function renderSectionList(sections=[]) {
   });
 }
 
-export function createSimpleCourseMap() {
-  // Auto-build sections from NODE_CONFIG — no manual wiring needed per node
-  const nodes = getNodesByCourse('basics-of-anesthesia');
+/**
+ * Render the course tab bar into #course-tabs.
+ * Highlights the active course and wires click → switchCourse().
+ */
+function renderCourseTabs() {
+  const container = document.getElementById('course-tabs');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const courses = getDistinctCourses();
+
+  courses.forEach(({ courseId, label, nodeCount }) => {
+    const btn = document.createElement('button');
+    btn.className = 'course-tab';
+    if (courseId === _activeCourseId) btn.classList.add('active');
+    btn.textContent = `${label} (${nodeCount})`;
+    btn.onclick = () => switchCourse(courseId);
+    container.appendChild(btn);
+  });
+}
+
+/**
+ * Switch to a different course — re-renders tabs + node list.
+ */
+export function switchCourse(courseId) {
+  _activeCourseId = courseId;
+  renderCourseTabs();
+  _renderNodesForCourse(courseId);
+
+  // Remember selection.
+  const state = loadState();
+  state.lastSeen = { ...(state.lastSeen || {}), course: courseId };
+  saveState(state);
+}
+
+/**
+ * Render the node list for one course into #map-path.
+ */
+function _renderNodesForCourse(courseId) {
+  const nodes = getNodesByCourse(courseId);
   const state = loadState();
   const nc = state.nodeCompletion || {};
 
-  const sections = nodes.map(({ nodeId, courseId, title, chapterLabel, icon, questionsMeta }) => {
-    const meta = questionsMeta || getQuestionMetadata(courseId, nodeId);
+  const sections = nodes.map(({ nodeId, courseId: cid, title, chapterLabel, icon, questionsMeta }) => {
+    const meta = questionsMeta || getQuestionMetadata(cid, nodeId);
     const desc = meta
       ? `${meta.totalQuestions} questions (${meta.questionTypes?.mcq ?? 0} MCQ, ${meta.questionTypes?.multi ?? 0} Multi, ${meta.questionTypes?.short ?? 0} Short)`
       : 'Questions loading...';
 
-    // Derive completion status from saved nodeCompletion
     const nodeData = nc[nodeId];
     const seen = nodeData?.seen || 0;
     const totalInBank = nodeData?.totalInBank || 0;
@@ -60,7 +99,7 @@ export function createSimpleCourseMap() {
       status,
       icon:     icon || '📍',
       available: true,
-      courseId,
+      courseId: cid,
       nodeId,
       onClick:  (section) => startStudySessionForNode(section.courseId, section.nodeId),
     };
@@ -69,15 +108,31 @@ export function createSimpleCourseMap() {
   if (sections.length > 0) {
     renderSectionList(sections);
   } else {
-    const allQuestions = filterQuestions({ mode: 'all' });
     renderSectionList([{
-      name:    'Hemodynamic Mastery',
-      desc:    `${allQuestions.length} questions available`,
-      status:  'Ready',
-      icon:    '🎯',
-      onClick: () => { console.debug('Section selected'); },
+      name:    'No nodes available',
+      desc:    'This course has no question banks yet.',
+      status:  '—',
+      icon:    '📭',
+      onClick: () => {},
     }]);
   }
+}
+
+export function createSimpleCourseMap() {
+  // Determine initial course: last-used > first available
+  if (!_activeCourseId) {
+    const state = loadState();
+    const lastCourse = state.lastSeen?.course;
+    const courses = getDistinctCourses();
+    if (lastCourse && courses.some(c => c.courseId === lastCourse)) {
+      _activeCourseId = lastCourse;
+    } else {
+      _activeCourseId = courses[0]?.courseId || 'basics-of-anesthesia';
+    }
+  }
+
+  renderCourseTabs();
+  _renderNodesForCourse(_activeCourseId);
 }
 
 // Number of questions per study session (subset of full bank)

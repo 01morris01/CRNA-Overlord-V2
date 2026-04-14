@@ -43,6 +43,18 @@ import { CP_NODE5_QUESTIONS, CP_NODE5_METADATA } from '../data/questions/cp-node
 import { CP_NODE6_QUESTIONS, CP_NODE6_METADATA } from '../data/questions/cp-node6-gas-laws.js';
 import { CP_NODE7_QUESTIONS, CP_NODE7_METADATA } from '../data/questions/cp-node7-states-of-matter.js';
 
+import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
+import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
+import { WEEK_3_QUESTIONS, WEEK_3_METADATA } from '../data/questions/week-3.js';
+import { WEEK_4_QUESTIONS, WEEK_4_METADATA } from '../data/questions/week-4.js';
+import { WEEK_5_QUESTIONS, WEEK_5_METADATA } from '../data/questions/week-5.js';
+import { WEEK_6_QUESTIONS, WEEK_6_METADATA } from '../data/questions/week-6.js';
+import { WEEK_7_SPRING_BREAK_QUESTIONS, WEEK_7_SPRING_BREAK_METADATA } from '../data/questions/week-7-spring-break.js';
+import { WEEK_8_QUESTIONS, WEEK_8_METADATA } from '../data/questions/week-8.js';
+import { WEEK_9_QUESTIONS, WEEK_9_METADATA } from '../data/questions/week-9.js';
+import { WEEK_10_QUESTIONS, WEEK_10_METADATA } from '../data/questions/week-10.js';
+import { WEEK_11_QUESTIONS, WEEK_11_METADATA } from '../data/questions/week-11.js';
+import { WEEK_13_QUESTIONS, WEEK_13_METADATA } from '../data/questions/week-13.js';
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
@@ -371,6 +383,126 @@ export const NODE_CONFIG = {
     questionsMeta: CP_NODE7_METADATA,
   },
 
+    "week-1": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 1",
+    chapterLabel:  "Week 1",
+    badgeLabel:    "HEALTH Week.1",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_1_QUESTIONS,
+    questionsMeta: WEEK_1_METADATA,
+  },
+
+    "week-2": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 2",
+    chapterLabel:  "Week 2",
+    badgeLabel:    "HEALTH Week.2",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_2_QUESTIONS,
+    questionsMeta: WEEK_2_METADATA,
+  },
+
+    "week-3": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 3",
+    chapterLabel:  "Week 3",
+    badgeLabel:    "HEALTH Week.3",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_3_QUESTIONS,
+    questionsMeta: WEEK_3_METADATA,
+  },
+
+    "week-4": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 4",
+    chapterLabel:  "Week 4",
+    badgeLabel:    "HEALTH Week.4",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_4_QUESTIONS,
+    questionsMeta: WEEK_4_METADATA,
+  },
+
+    "week-5": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 5",
+    chapterLabel:  "Week 5",
+    badgeLabel:    "HEALTH Week.5",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_5_QUESTIONS,
+    questionsMeta: WEEK_5_METADATA,
+  },
+
+    "week-6": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 6",
+    chapterLabel:  "Week 6",
+    badgeLabel:    "HEALTH Week.6",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_6_QUESTIONS,
+    questionsMeta: WEEK_6_METADATA,
+  },
+
+    "week-7-spring-break": {
+    courseId:      "adv-health-assessment",
+    title:         "week 7/spring break",
+    chapterLabel:  "Week 7",
+    badgeLabel:    "HEALTH Week.7",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_7_SPRING_BREAK_QUESTIONS,
+    questionsMeta: WEEK_7_SPRING_BREAK_METADATA,
+  },
+
+    "week-8": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 8",
+    chapterLabel:  "Week 8",
+    badgeLabel:    "HEALTH Week.8",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_8_QUESTIONS,
+    questionsMeta: WEEK_8_METADATA,
+  },
+
+    "week-9": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 9",
+    chapterLabel:  "Week 9",
+    badgeLabel:    "HEALTH Week.9",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_9_QUESTIONS,
+    questionsMeta: WEEK_9_METADATA,
+  },
+
+    "week-10": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 10",
+    chapterLabel:  "Week 10",
+    badgeLabel:    "HEALTH Week.10",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_10_QUESTIONS,
+    questionsMeta: WEEK_10_METADATA,
+  },
+
+    "week-11": {
+    courseId:      "adv-health-assessment",
+    title:         "Week 11",
+    chapterLabel:  "Week 11",
+    badgeLabel:    "HEALTH Week.11",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_11_QUESTIONS,
+    questionsMeta: WEEK_11_METADATA,
+  },
+
+    "week-13": {
+    courseId:      "adv-health-assessment",
+    title:         "WEEK 13",
+    chapterLabel:  "Week 13",
+    badgeLabel:    "HEALTH Week.13",
+    icon:          "\ud83e\ude7a",
+    questions:     WEEK_13_QUESTIONS,
+    questionsMeta: WEEK_13_METADATA,
+  },
+
   // ── Add future nodes here ──────────────────────────────────────────────────
 
 };
@@ -390,4 +522,43 @@ export function getNodesByCourse(courseId) {
   return Object.entries(NODE_CONFIG)
     .filter(([, cfg]) => cfg.courseId === courseId)
     .map(([nodeId, cfg]) => ({ nodeId, ...cfg }));
+}
+
+/**
+ * Returns an ordered list of distinct courses found in NODE_CONFIG.
+ * Each entry: { courseId, label, nodeCount }.
+ */
+const COURSE_LABELS = {
+  'basics-of-anesthesia':  'Basics of Anesthesia',
+  'adv-phys-path-1':       'Pathophysiology',
+  'chem-phys-anesthesia':  'Chemistry & Physics',
+  'adv-health-assessment': 'Health Assessment',
+};
+
+const COURSE_ORDER = [
+  'basics-of-anesthesia',
+  'adv-phys-path-1',
+  'adv-health-assessment',
+  'chem-phys-anesthesia',
+];
+
+export function getDistinctCourses() {
+  const seen = new Set();
+  Object.values(NODE_CONFIG).forEach(cfg => seen.add(cfg.courseId));
+
+  // Sort by predefined order, then alphabetical for unknowns.
+  const ordered = [...seen].sort((a, b) => {
+    const ia = COURSE_ORDER.indexOf(a);
+    const ib = COURSE_ORDER.indexOf(b);
+    if (ia !== -1 && ib !== -1) return ia - ib;
+    if (ia !== -1) return -1;
+    if (ib !== -1) return 1;
+    return a.localeCompare(b);
+  });
+
+  return ordered.map(courseId => ({
+    courseId,
+    label: COURSE_LABELS[courseId] || courseId,
+    nodeCount: getNodesByCourse(courseId).length,
+  }));
 }
