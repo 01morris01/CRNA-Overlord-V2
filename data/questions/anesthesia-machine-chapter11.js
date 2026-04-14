@@ -3,6 +3,8 @@
  * Course: Basics of Anesthesia
  * Node: node-11
  *
+ * 100 NBCRNA board-style questions covering anesthesia delivery systems.
+ *
  * Question Types:
  * - mcq:   Single best answer — ans:[{t, ok}]
  * - multi:  Select multiple  — choices + correctAnswers + selectCount
@@ -11,2011 +13,1791 @@
 
 export const MACHINE_QUESTIONS = [
 
-  // ─── DELIVERY SYSTEMS / HIGH PRESSURE ────────────────────────────────────────
-
-  {
-    id: "machine-001",
-    type: "mcq",
-    prompt: "What are the three distinct pneumatic systems found on all anesthesia machines?",
-    setup: "",
-    ans: [
-      { t: "High pressure, intermediate pressure, and low pressure systems", ok: true },
-      { t: "Peak pressure, intermediate pressure, and low pressure systems", ok: false },
-      { t: "Base pressure, intermediate pressure, and low pressure systems", ok: false },
-      { t: "Dual pressure, intermediate pressure, and low pressure systems", ok: false },
-    ],
-    rationale: "The anesthesia machine is mechanically divided into high, intermediate, and low pressure systems based on the varying pressures of gas they handle and reduce for patient use.",
-    metadata: { topic: "Pressure Systems", priority: "high" }
-  },
-
-  {
-    id: "machine-002",
-    type: "mcq",
-    prompt: "Why must cylinder valves strictly be closed when an anesthesia machine is actively using a hospital pipeline supply?",
-    setup: "",
-    ans: [
-      { t: "The machine will always default to pulling gas from the source with the highest total pressure", ok: true },
-      { t: "The machine will always default to pulling gas from the source with the warmest total pressure", ok: false },
-      { t: "The machine will always default to pulling gas from the source with the lowest active pressure", ok: false },
-      { t: "The machine will always default to pulling gas from the source with the coldest active pressure", ok: false },
-    ],
-    rationale: "When pipeline supplies of gases are being used, cylinder valves should be closed because the machine will always use gas from the source that has the highest pressure.",
-    metadata: { topic: "Cylinders", priority: "high" }
-  },
-
-  {
-    id: "machine-003",
-    type: "multi",
-    prompt: "Which of the following are primary functions of the hanger yoke assembly in the high pressure system? (Select THREE)",
-    choices: [
-      "Orients and supports the cylinder",
-      "Provides a gas-tight seal",
-      "Ensures a uni-directional flow of gas into the machine",
-      "Reduces the high pressure down to 40–48 psi",
-      "Provides a connection point for the hospital wall pipelines",
-    ],
-    correctAnswers: [
-      "Orients and supports the cylinder",
-      "Provides a gas-tight seal",
-      "Ensures a uni-directional flow of gas into the machine",
-    ],
-    selectCount: 3,
-    rationale: "The hanger yoke assembly strictly orients and supports the cylinder, provides a gas-tight seal, and ensures a uni-directional flow of gas into the machine via a check valve. Pressure reduction is handled by the regulator, and wall pipelines connect to the intermediate system via DISS.",
-    metadata: { topic: "Cylinders", priority: "high" }
-  },
-
-  {
-    id: "machine-004",
-    type: "mcq",
-    prompt: "A patient is receiving 4 L/min of oxygen from an E-cylinder showing 1500 psi. Using the standard O2 cylinder factor of 0.28, approximately how many minutes remain in the tank?",
-    setup: "E-cylinder O2 factor = 0.28. Remaining time = (PSI × factor) ÷ flow rate.",
-    ans: [
-      { t: "Precisely 105 minutes left", ok: true },
-      { t: "Precisely 210 minutes total", ok: false },
-      { t: "Precisely 52.5 minutes left", ok: false },
-      { t: "Precisely 310 minutes now", ok: false },
-    ],
-    rationale: "To calculate the duration, multiply the remaining pressure (1500 psi) by the cylinder factor (0.28), then divide by the flow rate (4 L/min): 1500 × 0.28 ÷ 4 = 105 minutes remaining.",
-    metadata: { topic: "Cylinders", priority: "high" }
-  },
-
-  {
-    id: "machine-005",
-    type: "mcq",
-    prompt: "Why does the pressure gauge on a nitrous oxide E-cylinder remain at 750 psi even after half of its contents have been used?",
-    setup: "",
-    ans: [
-      { t: "The pressure drops only after all the liquid has vaporized", ok: true },
-      { t: "The pressure drops only after all the casing has compressed", ok: false },
-      { t: "The pressure drops only after all the regulators have opened", ok: false },
-      { t: "The pressure drops only after all the pipelines have drained", ok: false },
-    ],
-    rationale: "Because nitrous oxide exists as a liquid under pressure inside the tank, the pressure gauge will consistently read 750 psi as liquid vaporizes to replace the lost gas. The pressure only drops once all liquid is exhausted, at which point the tank is about 75% empty.",
-    metadata: { topic: "Cylinders", priority: "high" }
-  },
-
-  {
-    id: "machine-006",
-    type: "mcq",
-    prompt: "Which of the following correctly matches the standard medical gas with its designated cylinder and hose color?",
-    setup: "",
-    ans: [
-      { t: "Oxygen is green, nitrous oxide is blue, and air is yellow", ok: true },
-      { t: "Oxygen is blue, nitrous oxide is yellow, and air is green", ok: false },
-      { t: "Oxygen is yellow, nitrous oxide is green, and air is blue", ok: false },
-      { t: "Oxygen is green, nitrous oxide is yellow, and air is blue", ok: false },
-    ],
-    rationale: "Compressed gases and their pressure indicators are color-coded with oxygen as green, nitrous oxide as blue, and air as yellow.",
-    metadata: { topic: "Cylinders", priority: "medium" }
-  },
-
-  {
-    id: "machine-007",
-    type: "mcq",
-    prompt: "What safety system utilizes specific pin configurations to prevent a provider from attaching the wrong gas cylinder to the wrong yoke?",
-    setup: "",
-    ans: [
-      { t: "Pin Index Safety System (PISS)", ok: true },
-      { t: "Diameter Index Safety System (DISS)", ok: false },
-      { t: "Common Gas Outlets System", ok: false },
-      { t: "Fail Safe Valve System", ok: false },
-    ],
-    rationale: "The Pin Index Safety System uses unique pin and hole placements on the cylinder and yoke to ensure that only the correct gas cylinder can be connected to its specific yoke.",
-    metadata: { topic: "PISS/DISS", priority: "high" }
-  },
-
-  {
-    id: "machine-008",
-    type: "short",
-    prompt: "What does PISS stand for in the context of anesthesia machine safety systems?",
-    acceptedAnswers: [
-      "Pin Index Safety System",
-      "pin index safety system",
-      "PISS",
-    ],
-    rationale: "PISS = Pin Index Safety System. It uses specific pin/hole configurations on E-cylinders and yokes to prevent wrong-gas connections at the high pressure system.",
-    metadata: { topic: "PISS/DISS", priority: "high" }
-  },
-
-  // ─── INTERMEDIATE PRESSURE SYSTEM ────────────────────────────────────────────
-
-  {
-    id: "machine-009",
-    type: "mcq",
-    prompt: "What is the primary purpose of the Diameter Index Safety System (DISS) on the anesthesia machine?",
-    setup: "",
-    ans: [
-      { t: "To strictly prevent misconnections to the wall pipelines", ok: true },
-      { t: "To strictly prevent misconnections to the tank cylinders", ok: false },
-      { t: "To strictly prevent misconnections to the vaporizer unit", ok: false },
-      { t: "To strictly prevent misconnections to the scavenger hose", ok: false },
-    ],
-    rationale: "The Diameter Index Safety System (DISS) uses gas-specific diameter fittings to prevent misconnections to the hospital's wall pipeline delivery systems.",
-    metadata: { topic: "PISS/DISS", priority: "high" }
-  },
-
-  {
-    id: "machine-010",
-    type: "short",
-    prompt: "What does DISS stand for?",
-    acceptedAnswers: [
-      "Diameter Index Safety System",
-      "diameter index safety system",
-      "DISS",
-    ],
-    rationale: "DISS = Diameter Index Safety System. It uses gas-specific diameter connectors for wall pipeline supply connections at the intermediate pressure system.",
-    metadata: { topic: "PISS/DISS", priority: "high" }
-  },
-
-  {
-    id: "machine-011",
-    type: "mcq",
-    prompt: "What specific pressure reduction is achieved by the second-stage regulator for nitrous oxide and oxygen, respectively?",
-    setup: "",
-    ans: [
-      { t: "Nitrous oxide to 26 psi and oxygen to 14 psi", ok: true },
-      { t: "Nitrous oxide to 14 psi and oxygen to 26 psi", ok: false },
-      { t: "Nitrous oxide to 40 psi and oxygen to 15 psi", ok: false },
-      { t: "Nitrous oxide to 15 psi and oxygen to 40 psi", ok: false },
-    ],
-    rationale: "The second-stage reducing device eliminates fluctuations in supply by lowering nitrous oxide to 26 psi and oxygen to 14 psi.",
-    metadata: { topic: "Pressure Systems", priority: "medium" }
-  },
-
-  {
-    id: "machine-012",
-    type: "mcq",
-    prompt: "What specific functions remain operational on the anesthesia machine even when the master switch is placed in the STANDBY (OFF) position?",
-    setup: "",
-    ans: [
-      { t: "Only the oxygen flush valve and the oxygen flowmeter remain functional", ok: true },
-      { t: "Only the flow control valves and the vaporizers remain fully functional", ok: false },
-      { t: "Only the fail safe valves and the pipeline inlet connections are active", ok: false },
-      { t: "Only the ascending bellows and the scavenging systems remain functional", ok: false },
-    ],
-    rationale: "When the master switch is in the STANDBY (OFF) position, oxygen flow and electricity are generally blocked, but the oxygen flush valve and the auxiliary oxygen flowmeter remain operational for emergency use.",
-    metadata: { topic: "Pressure Systems", priority: "medium" }
-  },
-
-  {
-    id: "machine-013",
-    type: "multi",
-    prompt: "Which of the following hazards are NOT guarded against by the machine's oxygen failure safety devices (fail-safe valve and alarm)? (Select THREE)",
-    choices: [
-      "A cylinder containing the incorrect type of gas",
-      "A cross-connection occurring in the pipeline supply",
-      "The oxygen flow control valve not being turned on",
-      "A total loss of oxygen pressure from the wall pipeline",
-      "An empty oxygen E-cylinder when pipeline is disconnected",
-    ],
-    correctAnswers: [
-      "A cylinder containing the incorrect type of gas",
-      "A cross-connection occurring in the pipeline supply",
-      "The oxygen flow control valve not being turned on",
-    ],
-    selectCount: 3,
-    rationale: "Oxygen failure devices alert the provider if the supply pressure drops below roughly 30 psi, but they do NOT protect against pipeline crossovers, a cylinder containing the wrong gas, or the provider simply failing to turn on the oxygen flow control valve.",
-    metadata: { topic: "Pressure Systems", priority: "high" }
-  },
-
-  // ─── OXYGEN FLUSH VALVE ───────────────────────────────────────────────────────
-
-  {
-    id: "machine-014",
-    type: "mcq",
-    prompt: "Which of the following correctly describes the flow rate and pressure output characteristics of the oxygen flush valve?",
-    setup: "",
-    ans: [
-      { t: "It delivers 35 to 75 liters per minute at exactly 40 psi", ok: true },
-      { t: "It delivers 15 to 25 liters per minute at exactly 40 psi", ok: false },
-      { t: "It delivers 35 to 75 liters per minute at exactly 60 psi", ok: false },
-      { t: "It delivers 15 to 25 liters per minute at exactly 60 psi", ok: false },
-    ],
-    rationale: "The oxygen flush valve bypasses the flowmeters to deliver a massive unmetered flow of 35 to 75 L/min of oxygen directly to the common gas outlet at a pressure of 40 psi.",
-    metadata: { topic: "Flush Valve", priority: "high" }
-  },
-
-  {
-    id: "machine-015",
-    type: "mcq",
-    prompt: "What is the primary hazard of activating the oxygen flush valve during the inspiration phase of mechanical ventilation?",
-    setup: "",
-    ans: [
-      { t: "It delivers extreme pressure spikes and causes severe barotrauma", ok: true },
-      { t: "It rapidly depletes the emergency E-cylinder backup supplies", ok: false },
-      { t: "It completely dilutes the circuit gases and causes deep awareness", ok: false },
-      { t: "It immediately bypasses all fail-safe safety system gas controls", ok: false },
-    ],
-    rationale: "Because the oxygen flush delivers a massive volume of gas at 40 psi directly to the common gas outlet, activating it while the ventilator is actively delivering a breath can cause an extreme pressure spike and severe barotrauma to the patient's lungs.",
-    metadata: { topic: "Flush Valve", priority: "high" }
-  },
-
-  {
-    id: "machine-016",
-    type: "short",
-    prompt: "Name one dangerous consequence of activating the oxygen flush valve during active mechanical ventilation.",
-    acceptedAnswers: [
-      "barotrauma",
-      "pressure spike",
-      "lung injury",
-      "pneumothorax",
-      "severe barotrauma",
-    ],
-    rationale: "Activating the oxygen flush during inspiration creates a massive pressure spike at 40 psi into the circuit, risking severe pulmonary barotrauma including pneumothorax.",
-    metadata: { topic: "Flush Valve", priority: "high" }
-  },
-
-  // ─── LOW PRESSURE SYSTEM AND VAPORIZERS ──────────────────────────────────────
-
-  {
-    id: "machine-017",
-    type: "multi",
-    prompt: "Which of the following components are considered part of the machine's low pressure system? (Select FOUR)",
-    choices: [
-      "Flow indicators (glass tubes)",
-      "Vaporizers",
-      "Common gas outlet",
-      "Low-pressure piping",
-      "Oxygen flush valve",
-      "Pipeline inlet connections",
-    ],
-    correctAnswers: [
-      "Flow indicators (glass tubes)",
-      "Vaporizers",
-      "Common gas outlet",
-      "Low-pressure piping",
-    ],
-    selectCount: 4,
-    rationale: "The low pressure system is located downstream of the flow control valves and includes the flow indicators, vaporizers, low-pressure piping, and the common gas outlet. The oxygen flush valve and pipeline inlet connections are part of the intermediate pressure system.",
-    metadata: { topic: "Vaporizers", priority: "high" }
-  },
-
-  {
-    id: "machine-018",
-    type: "mcq",
-    prompt: "How should an anesthesia provider physically manipulate the flow control valve to accurately increase the gas flow?",
-    setup: "",
-    ans: [
-      { t: "Rotate the flow valve in a counterclockwise manner", ok: true },
-      { t: "Rotate the flow valve in a strict downwardly manner", ok: false },
-      { t: "Rotate the flow valve in a strict clockwise manner", ok: false },
-      { t: "Rotate the flow valve in a strict upwardly manner", ok: false },
-    ],
-    rationale: "To increase the flow of gas, the provider must use a counterclockwise rotation of the flow control valve. Clockwise rotation actively decreases the flow.",
-    metadata: { topic: "Flowmeter", priority: "medium" }
-  },
-
-  {
-    id: "machine-019",
-    type: "mcq",
-    prompt: "To prevent delivery of a hypoxic gas mixture in the event of a flowmeter leak, where MUST the oxygen flowmeter be mechanically positioned relative to the other gases?",
-    setup: "",
-    ans: [
-      { t: "It must be located in the furthest downstream position", ok: true },
-      { t: "It must be located in the furthest upstream positions", ok: false },
-      { t: "It must be located in the absolute middlemost position", ok: false },
-      { t: "It must be located in the completely isolated position", ok: false },
-    ],
-    rationale: "Oxygen must always be the last gas in the flowmeter sequence (furthest downstream) before the mixed gases enter the manifold, ensuring that a crack in an upstream glass tube leaks nitrous or air rather than oxygen.",
-    metadata: { topic: "Flowmeter", priority: "high" }
-  },
-
-  {
-    id: "machine-020",
-    type: "mcq",
-    prompt: "Which flow control valve knob has a uniquely fluted profile to safely distinguish it from the others by touch?",
-    setup: "",
-    ans: [
-      { t: "Oxygen (O2)", ok: true },
-      { t: "Helium (He)", ok: false },
-      { t: "Nitrous oxide (N2O)", ok: false },
-      { t: "Medical Air", ok: false },
-    ],
-    rationale: "For safety purposes, the oxygen knob has a uniquely fluted profile so it looks and feels completely different from the other gas knobs.",
-    metadata: { topic: "Flowmeter", priority: "medium" }
-  },
-
-  {
-    id: "machine-021",
-    type: "mcq",
-    prompt: "What is the specific function of the manifold within the anesthesia machine's low-pressure pneumatic system?",
-    setup: "",
-    ans: [
-      { t: "It acts as the specific mixing chamber where flowmeter gases combine", ok: true },
-      { t: "It acts as the specific cooling chamber where hot liquids are cooled", ok: false },
-      { t: "It acts as the specific heating chamber where cold oxygen is warmed", ok: false },
-      { t: "It acts as the specific pressure chamber where all gases are stored", ok: false },
-    ],
-    rationale: "The manifold functions as a mixing chamber where gas flow exits the flowmeters and combines before being directed into a vaporizer or the breathing system.",
-    metadata: { topic: "Flowmeter", priority: "medium" }
-  },
-
-  {
-    id: "machine-022",
-    type: "mcq",
-    prompt: "What specific thermodynamic principle explains why a variable-bypass vaporizer cools down over time as it operates?",
-    setup: "",
-    ans: [
-      { t: "It is caused by the latent heat of vaporization", ok: true },
-      { t: "It is caused by the latent heat of condensation", ok: false },
-      { t: "It is caused by the precise heat of sublimation", ok: false },
-      { t: "It is caused by the specific heat of liquefying", ok: false },
-    ],
-    rationale: "The latent heat of vaporization is the energy (heat) required to convert a liquid into a vapor. As the volatile agent vaporizes, it actively absorbs heat from the surrounding liquid and container, causing the vaporizer to cool down.",
-    metadata: { topic: "Vaporizers", priority: "high" }
-  },
-
-  {
-    id: "machine-023",
-    type: "multi",
-    prompt: "Which of the following are distinct safety features specifically integrated into modern variable-bypass vaporizers? (Select THREE)",
-    choices: [
-      "Interlock mechanisms ensuring only one vaporizer can be on",
-      "Agent-specific filler ports to prevent filling the wrong agent",
-      "Viewable windows on the filler ports to prevent overfilling",
-      "Ascending bellows systems to monitor expiratory volumes",
-      "Fail-safe valves to shut off vaporizers if oxygen decreases",
-    ],
-    correctAnswers: [
-      "Interlock mechanisms ensuring only one vaporizer can be on",
-      "Agent-specific filler ports to prevent filling the wrong agent",
-      "Viewable windows on the filler ports to prevent overfilling",
-    ],
-    selectCount: 3,
-    rationale: "Modern vaporizers feature an interlock safety mechanism (allowing only one to be turned on at a time), agent-specific filler ports, and a window to prevent overfilling. Bellows and fail-safe valves are separate pneumatic components of the machine, not the vaporizers.",
-    metadata: { topic: "Vaporizers", priority: "high" }
-  },
-
-  {
-    id: "machine-024",
-    type: "mcq",
-    prompt: "Which volatile anesthetic requires a specialized, heated, and pressurized vaporizer (such as the Tec 6) due to its boiling point being near room temperature?",
-    setup: "",
-    ans: [
-      { t: "Desflurane", ok: true },
-      { t: "Isoflurane", ok: false },
-      { t: "Sevoflurane", ok: false },
-      { t: "Halothane", ok: false },
-    ],
-    rationale: "Desflurane cannot be safely vaporized in a standard variable-bypass vaporizer because its boiling point is near room temperature (22.8°C); it requires a specialized heated and pressurized delivery system such as the Tec 6.",
-    metadata: { topic: "Vaporizers", priority: "high" }
-  },
-
-  {
-    id: "machine-025",
-    type: "short",
-    prompt: "What is the boiling point concern that requires desflurane to use a heated, pressurized vaporizer instead of a standard variable-bypass vaporizer?",
-    acceptedAnswers: [
-      "near room temperature",
-      "boiling point near room temperature",
-      "low boiling point",
-      "boiling point of 22.8",
-      "22.8 degrees",
-      "22.8",
-    ],
-    rationale: "Desflurane has a boiling point of approximately 22.8°C, which is near room temperature. This means it would uncontrollably vaporize in a standard vaporizer, requiring the specialized Tec 6 heated and pressurized system.",
-    metadata: { topic: "Vaporizers", priority: "high" }
-  },
-
-  // ─── BREATHING CIRCUIT / VENTILATOR ──────────────────────────────────────────
-
-  {
-    id: "machine-026",
-    type: "mcq",
-    prompt: "Why is the Mapleson F (Jackson-Rees) semi-open breathing system frequently utilized for pediatric anesthesia and transport?",
-    setup: "",
-    ans: [
-      { t: "It offers minimal dead space and extremely low gas resistance", ok: true },
-      { t: "It offers heavy condensation and extremely warm breathing gas", ok: false },
-      { t: "It offers complete rebreathing and zero atmospheric pollutions", ok: false },
-      { t: "It offers massive dead space and extremely high gas resistance", ok: false },
-    ],
-    rationale: "The Mapleson F (Jackson-Rees) semi-open system is usually used for pediatric anesthesia and transport because it offers minimal dead space and resistance.",
-    metadata: { topic: "Breathing Circuit", priority: "medium" }
-  },
-
-  {
-    id: "machine-027",
-    type: "mcq",
-    prompt: "What critical safety rule governs the proper mechanical operation of the inspiratory and expiratory check valves?",
-    setup: "",
-    ans: [
-      { t: "They must absolutely never be completely open simultaneously", ok: true },
-      { t: "They must absolutely never be completely shut simultaneously", ok: false },
-      { t: "They must absolutely never be fully disconnected from alarms", ok: false },
-      { t: "They must absolutely never be fully attached to scavenging", ok: false },
-    ],
-    rationale: "To properly ensure one-way flow, the inspiratory and expiratory check valves must never be open simultaneously.",
-    metadata: { topic: "Breathing Circuit", priority: "high" }
-  },
-
-  {
-    id: "machine-028",
-    type: "mcq",
-    prompt: "During spontaneous breathing, where should the Adjustable Pressure Limiting (APL) valve be positioned?",
-    setup: "",
-    ans: [
-      { t: "Fully open (minimum pressure)", ok: true },
-      { t: "Fully closed (maximum pressure)", ok: false },
-      { t: "Partially closed", ok: false },
-      { t: "Manually occluded", ok: false },
-    ],
-    rationale: "The APL (pop-off) valve is located on the expiratory side of the circuit. During spontaneous respirations, it must be fully open (min) to prevent resistance against the patient's breathing efforts.",
-    metadata: { topic: "Breathing Circuit", priority: "high" }
-  },
-
-  {
-    id: "machine-029",
-    type: "short",
-    prompt: "What is the name of the pressure-limiting valve on the expiratory limb of the circle circuit that is opened during spontaneous ventilation?",
-    acceptedAnswers: [
-      "APL valve",
-      "APL",
-      "adjustable pressure limiting valve",
-      "pop off valve",
-      "pop-off valve",
-    ],
-    rationale: "The Adjustable Pressure Limiting (APL) valve, also called the pop-off valve, is located on the expiratory limb. It must be fully open during spontaneous ventilation to minimize resistance.",
-    metadata: { topic: "Breathing Circuit", priority: "high" }
-  },
-
-  {
-    id: "machine-030",
-    type: "mcq",
-    prompt: "The highly compliant reservoir bag provides partial protection to the patient by naturally plateauing its pressure below what specific limit?",
-    setup: "",
-    ans: [
-      { t: "Strictly less than 60 cm H2O of pressure", ok: true },
-      { t: "Strictly less than 40 cm H2O of pressure", ok: false },
-      { t: "Strictly less than 20 cm H2O of pressure", ok: false },
-      { t: "Strictly less than 80 cm H2O of pressure", ok: false },
-    ],
-    rationale: "The reservoir bag is the most compliant part of the breathing system and is designed to distend and plateau at a pressure less than 60 cm H2O to partially protect the patient from excessive positive pressure.",
-    metadata: { topic: "Breathing Circuit", priority: "medium" }
-  },
-
-  {
-    id: "machine-031",
-    type: "mcq",
-    prompt: "Why are ascending (standing) bellows considered significantly safer than descending (hanging) bellows during anesthesia?",
-    setup: "",
-    ans: [
-      { t: "They visibly fail to rise if a circuit disconnect has occurred", ok: true },
-      { t: "They visibly fail to fall if a circuit disconnect has occurred", ok: false },
-      { t: "They actively trigger the oxygen failure safety alarm circuits", ok: false },
-      { t: "They actively trigger the specific interlock safety mechanisms", ok: false },
-    ],
-    rationale: "Ascending bellows passively rise during patient exhalation. If a circuit disconnect occurs, they will visibly fail to rise, immediately alerting the provider. Hanging bellows continue to passively fall via gravity during a disconnect, masking the danger.",
-    metadata: { topic: "Ventilator", priority: "high" }
-  },
-
-  {
-    id: "machine-032",
-    type: "short",
-    prompt: "What type of bellows (ascending or descending) is considered safer and why — in one word, what do they fail to do when a disconnect occurs?",
-    acceptedAnswers: [
-      "ascending",
-      "ascending bellows",
-      "rise",
-      "fail to rise",
-    ],
-    rationale: "Ascending (standing) bellows are safer because they visibly fail to RISE when a circuit disconnect occurs, immediately alerting the provider. Descending (hanging) bellows continue to fall by gravity, masking the disconnect.",
-    metadata: { topic: "Ventilator", priority: "high" }
-  },
-
-  {
-    id: "machine-033",
-    type: "mcq",
-    prompt: "Where are filters specifically recommended to be placed in the anesthesia circuit to prevent microbial transmission, and what is their required efficiency?",
-    setup: "",
-    ans: [
-      { t: "Positioned on the expiratory limb with greater than 95% efficiency", ok: true },
-      { t: "Positioned in the inspiratory limb with greater than 95% efficiency", ok: false },
-      { t: "Positioned at the scavenging system with greater than 95% efficiency", ok: false },
-      { t: "Positioned at the common gas outlet with greater than 95% efficiency", ok: false },
-    ],
-    rationale: "Filters should be placed on the expiratory limb (or as an HMEF at the Y-piece) to prevent microbes from the patient from contaminating the machine. They must have an efficiency rating higher than 95% for particle sizes of 0.3 microns.",
-    metadata: { topic: "Breathing Circuit", priority: "medium" }
-  },
-
-  // ─── ELECTRICAL SYSTEMS ───────────────────────────────────────────────────────
-
-  {
-    id: "machine-034",
-    type: "mcq",
-    prompt: "Why must high-frequency surgical devices never be plugged into the electrical outlets on the back of the anesthesia machine?",
-    setup: "",
-    ans: [
-      { t: "They can easily exceed the power limits and blow the circuit breaker", ok: true },
-      { t: "They can easily reverse the power limits and melt the circuit breaker", ok: false },
-      { t: "They can easily deplete the power limits and trip the safety monitors", ok: false },
-      { t: "They can easily corrupt the power limits and shut the safety monitors", ok: false },
-    ],
-    rationale: "The electrical outlets are intended to power monitors, and high-frequency surgical devices should not be connected to them because they can exceed power requirements and activate a circuit breaker.",
-    metadata: { topic: "Electrical Systems", priority: "medium" }
-  },
-
-  // ─── CO2 ELIMINATION / ABSORBERS ─────────────────────────────────────────────
-
-  {
-    id: "machine-035",
-    type: "multi",
-    prompt: "Which of the following compounds are found in standard Soda Lime carbon dioxide absorbent? (Select FOUR)",
-    choices: [
-      "Water (H2O)",
-      "Calcium hydroxide Ca(OH)2",
-      "Sodium hydroxide (NaOH)",
-      "Potassium hydroxide (KOH)",
-      "Calcium chloride (CaCl2)",
-      "Barium hydroxide Ba(OH)2",
-    ],
-    correctAnswers: [
-      "Water (H2O)",
-      "Calcium hydroxide Ca(OH)2",
-      "Sodium hydroxide (NaOH)",
-      "Potassium hydroxide (KOH)",
-    ],
-    selectCount: 4,
-    rationale: "Standard soda lime consists of water, calcium hydroxide, sodium hydroxide, and potassium hydroxide. Amsorb Plus utilizes calcium chloride instead of NaOH/KOH, and Baralyme used barium.",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-036",
-    type: "multi",
-    prompt: "Which of the following chemical compounds are specifically OMITTED from Amsorb Plus to significantly reduce the degradation of inhaled anesthetic agents? (Select TWO)",
-    choices: [
-      "Sodium hydroxide (NaOH)",
-      "Potassium hydroxide (KOH)",
-      "Calcium hydroxide Ca(OH)2",
-      "Calcium chloride (CaCl2)",
-      "Water (H2O)",
-    ],
-    correctAnswers: [
-      "Sodium hydroxide (NaOH)",
-      "Potassium hydroxide (KOH)",
-    ],
-    selectCount: 2,
-    rationale: "Amsorb Plus contains water, calcium hydroxide, and calcium chloride, but it specifically does not contain NaOH or KOH, which decreases the risks associated with the degradation of inhaled gases (Compound A and CO formation).",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-037",
-    type: "mcq",
-    prompt: "What dangerous outcome is explicitly produced when sevoflurane reacts with desiccated Baralyme in the carbon dioxide absorber?",
-    setup: "",
-    ans: [
-      { t: "It reliably generates a massive risk of an OR fire", ok: true },
-      { t: "It reliably generates a massive risk of Compound A", ok: false },
-      { t: "It reliably generates a massive risk of carbon gas", ok: false },
-      { t: "It reliably generates a massive risk of hypoxic O2", ok: false },
-    ],
-    rationale: "While sevoflurane interacting with standard soda lime creates nephrotoxic Compound A, its interaction specifically with desiccated Baralyme carries a severe risk of spontaneous combustion and operating room fires.",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-038",
-    type: "mcq",
-    prompt: "At what specific concentration and exposure duration is Compound A considered toxic to humans?",
-    setup: "",
-    ans: [
-      { t: "At concentrations strictly greater than 8 percent for 4 to 6 hours", ok: true },
-      { t: "At concentrations strictly greater than 4 percent for 2 to 4 hours", ok: false },
-      { t: "At concentrations strictly greater than 2 percent for 6 to 8 hours", ok: false },
-      { t: "At concentrations strictly greater than 6 percent for 8 to 9 hours", ok: false },
-    ],
-    rationale: "Compound A, formed from the degradation of sevoflurane by soda lime, is toxic to humans at maximum concentrations (greater than 8%) for 4 to 6 hours.",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-039",
-    type: "short",
-    prompt: "What nephrotoxic degradation product is produced when sevoflurane reacts with soda lime?",
-    acceptedAnswers: [
-      "Compound A",
-      "compound A",
-      "compound a",
-    ],
-    rationale: "Compound A is the nephrotoxic vinyl ether produced when sevoflurane degrades in the presence of soda lime (especially at low fresh gas flows). It is toxic at concentrations >8% for 4–6 hours.",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-040",
-    type: "mcq",
-    prompt: "What extremely dangerous byproduct can be generated if a patient is ventilated using an exhausted, desiccated carbon dioxide absorber with inhaled anesthetics?",
-    setup: "",
-    ans: [
-      { t: "Carbon monoxide", ok: true },
-      { t: "Sulfur dioxide", ok: false },
-      { t: "Nitrogen dioxide", ok: false },
-      { t: "Hydrogen sulfide", ok: false },
-    ],
-    rationale: "Desiccated absorbent can actively degrade inhaled anesthetics (especially desflurane, enflurane, and isoflurane) into carbon monoxide, leading to lethal carboxyhemoglobinemia in the patient.",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-041",
-    type: "short",
-    prompt: "What form of hemoglobin is produced when a patient is exposed to carbon monoxide generated by desiccated CO2 absorbent?",
-    acceptedAnswers: [
-      "carboxyhemoglobin",
-      "COHb",
-      "carboxyhaemoglobin",
-    ],
-    rationale: "Carbon monoxide binds hemoglobin with 250x greater affinity than oxygen to form carboxyhemoglobin (COHb), causing functional anemia and potentially lethal tissue hypoxia.",
-    metadata: { topic: "Soda Lime", priority: "high" }
-  },
-
-  {
-    id: "machine-042",
-    type: "mcq",
-    prompt: "If the CO2 absorber completely exhausts in the middle of a case and cannot be changed safely, what is the immediate troubleshooting action to buy time?",
-    setup: "",
-    ans: [
-      { t: "Immediately increase the fresh gas flows", ok: true },
-      { t: "Immediately decrease the fresh gas flows", ok: false },
-      { t: "Immediately increase the tidal gas volume", ok: false },
-      { t: "Immediately decrease the tidal gas volume", ok: false },
-    ],
-    rationale: "Increasing the fresh gas flows converts the breathing system into a more semi-open state, washing out the exhaled CO2 and bypassing reliance on the chemical absorber until it can be changed.",
-    metadata: { topic: "Troubleshooting", priority: "high" }
-  },
-
-  // ─── SCAVENGING ───────────────────────────────────────────────────────────────
-
-  {
-    id: "machine-043",
-    type: "mcq",
-    prompt: "What is the strictly recommended OSHA limit regarding the maximum atmospheric concentration of nitrous oxide in the operating room?",
-    setup: "",
-    ans: [
-      { t: "It should absolutely never exceed 25 ppm air", ok: true },
-      { t: "It should absolutely never exceed 50 ppm air", ok: false },
-      { t: "It should absolutely never exceed 2 ppm air", ok: false },
-      { t: "It should absolutely never exceed 15 ppm air", ok: false },
-    ],
-    rationale: "OSHA recommends that atmospheric pollution from nitrous oxide should not exceed 25 parts per million (ppm), while volatile anesthetic agents should not exceed 2 ppm.",
-    metadata: { topic: "Scavenging", priority: "medium" }
-  },
-
-  {
-    id: "machine-044",
-    type: "short",
-    prompt: "What is the OSHA recommended maximum atmospheric concentration limit for volatile anesthetic agents (not nitrous oxide) in the operating room?",
-    acceptedAnswers: [
-      "2 ppm",
-      "2",
-      "two ppm",
-    ],
-    rationale: "OSHA recommends that volatile anesthetic agents (halogenated agents) should not exceed 2 ppm in the OR atmosphere, while nitrous oxide is limited to 25 ppm.",
-    metadata: { topic: "Scavenging", priority: "medium" }
-  },
-
-  {
-    id: "machine-045",
-    type: "mcq",
-    prompt: "What is the minimum recommended number of complete air exchanges per hour for an operating room's ventilation system to control atmospheric pollution?",
-    setup: "",
-    ans: [
-      { t: "A strict minimum of exactly fifteen complete air exchanges", ok: true },
-      { t: "A strict minimum of exactly thirty complete air exchanges", ok: false },
-      { t: "A strict minimum of exactly twenty complete air exchanges", ok: false },
-      { t: "A strict minimum of exactly twelve complete air exchanges", ok: false },
-    ],
-    rationale: "To help control atmospheric pollution, operating rooms should be adequately ventilated and completely exchanged a minimum of 15 times per hour.",
-    metadata: { topic: "Scavenging", priority: "medium" }
-  },
-
-  {
-    id: "machine-046",
-    type: "mcq",
-    prompt: "What is the difference between an active and a passive scavenging system?",
-    setup: "",
-    ans: [
-      { t: "Active systems use hospital vacuums; passive systems use pressure gradients", ok: true },
-      { t: "Passive systems use hospital vacuums; active systems use pressure gradients", ok: false },
-      { t: "Active systems use the machine bellows; passive systems use fresh gas flows", ok: false },
-      { t: "Passive systems use the machine bellows; active systems use fresh gas flows", ok: false },
-    ],
-    rationale: "Active scavenging systems are directly connected to the hospital's vacuum system to pull waste gases away, whereas passive systems rely on a natural pressure gradient to move gas into the hospital ventilation.",
-    metadata: { topic: "Scavenging", priority: "medium" }
-  },
-
-  // ─── MSMAID / MACHINE CHECK ───────────────────────────────────────────────────
-
-  {
-    id: "machine-047",
-    type: "multi",
-    prompt: "What does the machine check mnemonic 'MSMAID' stand for? (Select SIX correct items)",
-    choices: [
-      "Machine",
-      "Suction",
-      "Monitors",
-      "Airway",
-      "IV access",
-      "Drugs",
-      "Defibrillator",
-      "Alarms",
-    ],
-    correctAnswers: [
-      "Machine",
-      "Suction",
-      "Monitors",
-      "Airway",
-      "IV access",
-      "Drugs",
-    ],
-    selectCount: 6,
-    rationale: "The standard machine check mnemonic MSMAID stands for Machine, Suction, Monitors, Airway, IV access, and Drugs.",
-    metadata: { topic: "MSMAID", priority: "high" }
-  },
-
-  {
-    id: "machine-048",
-    type: "short",
-    prompt: "In the MSMAID pre-anesthesia checklist, what does the letter 'A' stand for?",
-    acceptedAnswers: [
-      "Airway",
-      "airway",
-    ],
-    rationale: "MSMAID = Machine, Suction, Monitors, Airway, IV access, Drugs. The 'A' specifically stands for Airway, reminding the provider to verify airway equipment is present and functional.",
-    metadata: { topic: "MSMAID", priority: "high" }
-  },
-
-  {
-    id: "machine-049",
-    type: "short",
-    prompt: "Spell out all six items in the MSMAID pre-anesthesia machine check mnemonic.",
-    acceptedAnswers: [
-      "Machine Suction Monitors Airway IV Drugs",
-      "machine suction monitors airway iv drugs",
-      "machine, suction, monitors, airway, iv access, drugs",
-    ],
-    rationale: "MSMAID = Machine, Suction, Monitors, Airway, IV access, Drugs. This systematic checklist ensures critical safety items are verified before every anesthetic.",
-    metadata: { topic: "MSMAID", priority: "high" }
-  },
-
-  // ─── DISCONNECTS / OBSTRUCTIONS / TROUBLESHOOTING ────────────────────────────
-
-  {
-    id: "machine-050",
-    type: "mcq",
-    prompt: "According to closed claims studies, where does the most common preventable breathing circuit disconnect occur?",
-    setup: "",
-    ans: [
-      { t: "Between the endotracheal tube and the breathing circuit", ok: true },
-      { t: "Between the common gas outlet and the fresh gas tubing", ok: false },
-      { t: "Between the scavenging system and the hospital vacuums", ok: false },
-      { t: "Between the vaporizer outlet and the manifold chambers", ok: false },
-    ],
-    rationale: "Studies show that breathing circuit disconnects are the most common preventable anesthetic mishap, and the most common site is specifically between the endotracheal tube (ETT) and the circuit.",
-    metadata: { topic: "Troubleshooting", priority: "high" }
-  },
-
-  {
-    id: "machine-051",
-    type: "mcq",
-    prompt: "If an anesthesia provider notices that the mechanical ventilator bellows are failing to return to their full height during each cycle, what is the most likely cause?",
-    setup: "",
-    ans: [
-      { t: "A significant gas leakage within the system", ok: true },
-      { t: "A significant gas blockage within the system", ok: false },
-      { t: "A significant gas spillage within the system", ok: false },
-      { t: "A significant gas stalling within the system", ok: false },
-    ],
-    rationale: "Because ascending bellows actively fill using the patient's exhaled volume, a failure of the bellows to return to their full height is the primary visual indicator of a leak or partial disconnect in the breathing circuit.",
-    metadata: { topic: "Troubleshooting", priority: "high" }
-  },
-
-  {
-    id: "machine-052",
-    type: "multi",
-    prompt: "Which of the following are known causes of dangerous obstructions within the anesthesia breathing system? (Select FOUR)",
-    choices: [
-      "The anesthesia machine rolling over a hose",
-      "The bag-ventilator selector in the wrong position",
-      "A severely kinked endotracheal tube or circuit tubing",
-      "Failing to remove the plastic wrapper from the absorbent",
-      "Opening the oxygen flush valve during an expiration",
-      "Disconnecting the wall pipeline from the machine",
-    ],
-    correctAnswers: [
-      "The anesthesia machine rolling over a hose",
-      "The bag-ventilator selector in the wrong position",
-      "A severely kinked endotracheal tube or circuit tubing",
-      "Failing to remove the plastic wrapper from the absorbent",
-    ],
-    selectCount: 4,
-    rationale: "Known causes of obstruction include the machine rolling over a hose, the bag-ventilator selector in the wrong position, a kinked ETT or circuit tubing, a stuck unidirectional valve, or failing to remove the absorbent wrapper before placing it in the canister.",
-    metadata: { topic: "Troubleshooting", priority: "high" }
-  },
-
-  {
-    id: "machine-053",
-    type: "short",
-    prompt: "What is the most common preventable anesthetic mishap identified in closed claims studies related to the breathing circuit?",
-    acceptedAnswers: [
-      "breathing circuit disconnect",
-      "circuit disconnect",
-      "disconnect",
-      "disconnection",
-    ],
-    rationale: "Closed claims studies consistently identify breathing circuit disconnection as the most common preventable anesthetic mishap, most often occurring at the ETT-circuit junction.",
-    metadata: { topic: "Troubleshooting", priority: "high" }
-  },
-
-  {
-    id: "machine-054",
-    type: "short",
-    prompt: "When troubleshooting a CO2 absorber that has been exhausted mid-case, what is the emergency intervention to wash out CO2 without changing the canister?",
-    acceptedAnswers: [
-      "increase fresh gas flow",
-      "increase fresh gas flows",
-      "high fresh gas flow",
-      "turn up fresh gas flow",
-    ],
-    rationale: "Increasing fresh gas flows washes out exhaled CO2 by converting the circle system into a semi-open system, reducing reliance on the chemical absorber.",
-    metadata: { topic: "Troubleshooting", priority: "high" }
-  },
-
+  // ═══════════════════════════════════════════════════════════════════════════
+  // THREE PNEUMATIC SYSTEMS OVERVIEW (5 questions: 001-005)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-001 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-001",
     type: "mcq",
-    prompt: "What is the primary purpose of the anesthesia delivery system?",
+    scene: null,
+    prompt: "An anesthesia machine is mechanically organized into three pneumatic systems based on the pressures each section handles. Which grouping correctly names all three?",
     setup: "",
     ans: [
-      { t: "To provide only oxygen to the patient and eliminate nitrogen.", ok: false },
-      { t: "To deliver known concentrations of oxygen and anesthetic gases while removing carbon dioxide through washout or chemical neutralization.", ok: true },
-      { t: "To monitor cardiac output and blood pressure during anesthesia.", ok: false },
-      { t: "To humidify inspired gases and prevent all airway resistance.", ok: false },
+      { t: "High pressure, intermediate pressure, and low pressure systems", ok: true },
+      { t: "Peak pressure, intermediate pressure, and baseline pressure systems", ok: false },
+      { t: "Source pressure, regulator pressure, and delivery pressure systems", ok: false },
+      { t: "Cylinder pressure, pipeline pressure, and patient-circuit pressure", ok: false },
     ],
-    rationale: "The anesthesia delivery system provides controlled concentrations of oxygen and anesthetic gases and manages carbon dioxide removal either by washout or chemical absorption.",
-    metadata: { topic: "Purpose and Components", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "purpose", "gas delivery", "carbon dioxide"] }
+    rationale: "Every modern anesthesia machine is divided into high pressure (cylinder supply and regulators), intermediate pressure (pipeline inlets, ventilator power, oxygen flush), and low pressure (downstream of flow control valves through the common gas outlet). 'Peak/baseline' and 'source/delivery' are fabricated terms. 'Cylinder/pipeline/patient-circuit' conflates sources with functional pressure zones.",
+    metadata: { topic: "Pneumatic Systems Overview", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pneumatic systems", "machine organization", "pressure zones"] }
   },
 
   // ── boa-node11-ads-002 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-002",
     type: "mcq",
-    prompt: "Which list correctly identifies the four main components of the anesthesia workstation?",
+    scene: null,
+    prompt: "A provider notes gas pressures near 2200 psi at the cylinder, 50 psi at the pipeline inlet, and sub-atmospheric pressures at the vaporizer outlet. Each of these pressures corresponds to which pneumatic system, respectively?",
     setup: "",
     ans: [
-      { t: "Ventilator, suction canister, ECG, and laryngoscope.", ok: false },
-      { t: "The anesthesia machine, vaporizers, breathing circuit, and scavenging system.", ok: true },
-      { t: "Pipeline source, cylinder source, pulse oximeter, and capnograph.", ok: false },
-      { t: "Gas analyzer, absorbent canister, reservoir bag, and APL valve.", ok: false },
+      { t: "High pressure, intermediate pressure, and low pressure", ok: true },
+      { t: "Intermediate pressure, high pressure, and low pressure", ok: false },
+      { t: "High pressure, low pressure, and intermediate pressure", ok: false },
+      { t: "Low pressure, intermediate pressure, and high pressure", ok: false },
     ],
-    rationale: "The anesthesia workstation includes the machine, vaporizers, breathing circuit, and scavenging system.",
-    metadata: { topic: "Purpose and Components", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "workstation", "components"] }
+    rationale: "Cylinders at 2200 psi are the high pressure system. Pipeline gases enter at approximately 50 psi in the intermediate system. Downstream of the flow control valves, including vaporizers and the common gas outlet, constitutes the low pressure system. Reversing the order confuses source pressures with machine architecture.",
+    metadata: { topic: "Pneumatic Systems Overview", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pneumatic systems", "pressure identification", "machine architecture"] }
   },
 
   // ── boa-node11-ads-003 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-003",
-    type: "mcq",
-    prompt: "What are the three pneumatic systems found in all anesthesia machines?",
-    setup: "",
-    ans: [
-      { t: "Primary, secondary, and tertiary pressure systems.", ok: false },
-      { t: "High pressure, intermediate pressure, and low pressure systems.", ok: true },
-      { t: "Cylinder pressure, wall pressure, and patient pressure systems.", ok: false },
-      { t: "Supply pressure, control pressure, and exhaust pressure systems.", ok: false },
+    type: "multi",
+    scene: null,
+    prompt: "Which of the following components are located within the intermediate pressure system? (Select THREE)",
+    choices: [
+      "Pipeline inlet connections via DISS fittings",
+      "Ventilator power inlet for driving gas",
+      "Oxygen flush valve supply pathway",
+      "Hanger yoke assembly and check valve",
+      "Concentration-calibrated vaporizer chamber",
     ],
-    rationale: "The anesthesia machine is organized into high, intermediate, and low pressure systems.",
-    metadata: { topic: "Pressure Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "pressure systems", "machine"] }
+    correctAnswers: [
+      "Pipeline inlet connections via DISS fittings",
+      "Ventilator power inlet for driving gas",
+      "Oxygen flush valve supply pathway",
+    ],
+    selectCount: 3,
+    rationale: "Pipeline inlets, ventilator driving gas, and the oxygen flush valve all operate at intermediate pressures of 40-55 psi. The hanger yoke belongs to the high pressure system. Vaporizers sit in the low pressure system downstream of the flow control valves.",
+    metadata: { topic: "Pneumatic Systems Overview", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pneumatic systems", "intermediate pressure", "component location"] }
   },
 
   // ── boa-node11-ads-004 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-004",
     type: "mcq",
-    prompt: "From which source does the high pressure system receive gas?",
+    scene: null,
+    prompt: "Why is proper understanding of the three pneumatic systems clinically important when troubleshooting an anesthesia machine malfunction?",
     setup: "",
     ans: [
-      { t: "Only from hospital pipeline inlets.", ok: false },
-      { t: "Only from the common gas outlet.", ok: false },
-      { t: "Directly from the high pressure cylinders attached to the machine.", ok: true },
-      { t: "From the scavenging interface.", ok: false },
+      { t: "It allows the provider to localize a fault based on the pressure range where the problem occurs", ok: true },
+      { t: "It ensures the provider can manually increase pipeline supply pressures during a crisis", ok: false },
+      { t: "It enables the provider to bypass the vaporizer and deliver agent through the flush valve", ok: false },
+      { t: "It permits the provider to connect cylinder gas directly to the common gas outlet port", ok: false },
     ],
-    rationale: "The high pressure system receives gas directly from machine-mounted cylinders.",
-    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "high pressure system", "cylinders"] }
+    rationale: "Understanding pressure zones lets the clinician systematically isolate whether a gas delivery problem originates at the cylinder (high), pipeline/regulators (intermediate), or flowmeters/vaporizers (low). Providers cannot manually increase pipeline pressures. The flush valve bypasses vaporizers and cannot deliver agent. Direct cylinder-to-outlet connections are not possible on a properly designed machine.",
+    metadata: { topic: "Pneumatic Systems Overview", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pneumatic systems", "troubleshooting", "clinical reasoning"] }
   },
 
   // ── boa-node11-ads-005 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-005",
-    type: "multi",
-    prompt: "Which are critical functions of the hanger yoke? Select 3.",
-    setup: "",
-    choices: [
-      "It orients and supports the cylinder.",
-      "It provides a gas-tight seal.",
-      "It ensures unidirectional gas flow into the machine.",
-      "It warms the gas before entry into the regulator.",
-      "It measures gas concentration inside the cylinder.",
+    type: "short",
+    scene: null,
+    prompt: "What are the three pneumatic systems of the anesthesia machine, listed from highest to lowest operating pressure?",
+    acceptedAnswers: [
+      "High pressure, intermediate pressure, low pressure",
+      "high pressure, intermediate pressure, low pressure",
+      "High, intermediate, low",
+      "high, intermediate, low",
+      "High pressure system, intermediate pressure system, low pressure system",
     ],
-    correctAnswers: [
-      "It orients and supports the cylinder.",
-      "It provides a gas-tight seal.",
-      "It ensures unidirectional gas flow into the machine.",
-    ],
-    selectCount: 3,
-    rationale: "The hanger yoke supports and orients the cylinder, provides a seal, and helps ensure one-way flow into the machine.",
-    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "hanger yoke", "cylinder safety"] }
+    rationale: "The three pneumatic systems, from highest to lowest operating pressure, are the high pressure system (cylinders, up to 2200 psi), intermediate pressure system (pipeline supply, 40-55 psi), and low pressure system (downstream of flow control valves, near atmospheric).",
+    metadata: { topic: "Pneumatic Systems Overview", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pneumatic systems", "recall", "machine organization"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // HIGH PRESSURE SYSTEM (8 questions: 006-013)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-006 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-006",
-    type: "mcq",
-    prompt: "What is the role of the pressure-reducing device in the high pressure system?",
-    setup: "",
-    ans: [
-      { t: "It increases cylinder pressure to wall pressure.", ok: false },
-      { t: "It reduces high cylinder pressure to a constant usable pressure of about 40 to 48 psi.", ok: true },
-      { t: "It bypasses the flowmeter and directly enters the patient circuit.", ok: false },
-      { t: "It prevents carbon dioxide rebreathing.", ok: false },
+    type: "multi",
+    scene: null,
+    prompt: "Which of the following are primary functions of the hanger yoke assembly? (Select THREE)",
+    choices: [
+      "Orients and supports the E-cylinder on the machine",
+      "Provides a gas-tight seal between cylinder and machine",
+      "Contains a check valve for unidirectional gas flow",
+      "Reduces cylinder pressure from 2200 psi to 45 psi",
+      "Connects the machine to the hospital wall pipeline",
     ],
-    rationale: "The regulator reduces very high cylinder pressure to an intermediate usable pressure.",
-    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "pressure regulator", "high pressure system"] }
+    correctAnswers: [
+      "Orients and supports the E-cylinder on the machine",
+      "Provides a gas-tight seal between cylinder and machine",
+      "Contains a check valve for unidirectional gas flow",
+    ],
+    selectCount: 3,
+    rationale: "The hanger yoke orients/supports the cylinder, provides a gas-tight seal, and houses a check valve ensuring unidirectional flow. Pressure reduction to 40-48 psi is performed by the first-stage regulator, not the yoke. Pipeline connections use DISS fittings, which are separate from the yoke assembly.",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["hanger yoke", "check valve", "cylinder mounting"] }
   },
 
   // ── boa-node11-ads-007 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-007",
     type: "mcq",
-    prompt: "Why should E-cylinder valves be closed when pipeline gas is in use?",
+    scene: null,
+    prompt: "A Bourdon gauge on a full oxygen E-cylinder reads 2200 psi. What physical principle does this gauge use to display pressure?",
     setup: "",
     ans: [
-      { t: "Open cylinders increase vaporizer output.", ok: false },
-      { t: "The machine defaults to the highest pressure source, so open cylinders can be silently drained if pipeline pressure fluctuates.", ok: true },
-      { t: "Open cylinders lower the oxygen concentration in the circuit.", ok: false },
-      { t: "Closed cylinders prevent the fail-safe valve from activating.", ok: false },
+      { t: "A curved hollow tube straightens proportionally as internal pressure rises", ok: true },
+      { t: "A piezoelectric crystal generates voltage proportional to applied pressure", ok: false },
+      { t: "A mercury column rises in a calibrated glass tube as pressure increases", ok: false },
+      { t: "A capacitive membrane deflects and changes electrical capacitance value", ok: false },
     ],
-    rationale: "If the cylinder stays open, the machine may begin drawing from it during pipeline pressure changes and silently drain the backup source.",
-    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen cylinder", "pipeline", "backup supply"] }
+    rationale: "Bourdon gauges contain a curved, hollow metal tube that tends to straighten as internal gas pressure increases, mechanically moving a needle across a calibrated dial. Piezoelectric and capacitive sensors are electronic transducers not used in standard cylinder gauges. Mercury manometers measure much lower pressures and are not used on cylinders.",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Bourdon gauge", "pressure measurement", "cylinder monitoring"] }
   },
 
   // ── boa-node11-ads-008 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-008",
     type: "mcq",
-    prompt: "What are the approximate pressure and volume specifications for a full oxygen E-cylinder?",
+    scene: null,
+    prompt: "The first-stage pressure regulator on the anesthesia machine reduces cylinder pressure to what approximate range before gas enters the intermediate system?",
     setup: "",
     ans: [
-      { t: "750 psig and 1590 L.", ok: false },
-      { t: "500 psig and 660 L.", ok: false },
-      { t: "2000 to 2200 psig and 625 to 660 L.", ok: true },
-      { t: "45 to 55 psig and 660 L.", ok: false },
+      { t: "Approximately 40 to 48 psi for safe downstream handling", ok: true },
+      { t: "Approximately 10 to 15 psi for direct patient delivery", ok: false },
+      { t: "Approximately 100 to 120 psi for ventilator power supply", ok: false },
+      { t: "Approximately 200 to 250 psi for flowmeter calibration", ok: false },
     ],
-    rationale: "A full oxygen E-cylinder contains about 625 to 660 liters at roughly 2000 to 2200 psig.",
-    metadata: { topic: "Cylinders", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen cylinder", "E-cylinder"] }
+    rationale: "First-stage regulators reduce cylinder pressure (up to 2200 psi for O2) to approximately 40-48 psi, matching pipeline pressure so the machine can handle gas from either source. 10-15 psi is too low and corresponds to second-stage reduction. 100-250 psi values are fabricated and dangerously high for intermediate system components.",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pressure regulator", "first-stage reduction", "cylinder pressure"] }
   },
 
   // ── boa-node11-ads-009 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-009",
     type: "mcq",
-    prompt: "If an oxygen E-cylinder gauge reads about 1100 psig, approximately how much oxygen volume is left?",
+    scene: null,
+    prompt: "Why must cylinder valves be closed when the anesthesia machine is actively connected to a functioning hospital pipeline supply?",
     setup: "",
     ans: [
-      { t: "About 110 L.", ok: false },
-      { t: "About 330 L.", ok: true },
-      { t: "About 750 L.", ok: false },
-      { t: "About 1590 L.", ok: false },
+      { t: "The machine preferentially draws from the highest-pressure source, silently depleting cylinders", ok: true },
+      { t: "Open cylinders will force pipeline gas backward into the hospital wall supply manifold", ok: false },
+      { t: "Simultaneous cylinder and pipeline flow will cause vaporizer output to become unpredictable", ok: false },
+      { t: "The check valve cannot distinguish between cylinder gas and pipeline gas compositions", ok: false },
     ],
-    rationale: "Oxygen cylinder pressure roughly tracks remaining volume. About half of 2200 psi corresponds to about half of 660 liters, or about 330 liters.",
-    metadata: { topic: "Cylinders", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen cylinder", "calculations"] }
+    rationale: "Because cylinder pressure after first-stage regulation (45 psi) is slightly below pipeline pressure (50 psi), the machine normally draws from the pipeline. However, if pipeline pressure drops even slightly, the machine silently switches to cylinder supply, depleting emergency reserves. Closing cylinders prevents unnoticed depletion. Gas cannot flow backward through check valves. Vaporizer output is unaffected by the gas source. Check valves function based on pressure differentials, not gas composition.",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["cylinder management", "pipeline priority", "gas depletion"] }
   },
 
   // ── boa-node11-ads-010 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-010",
     type: "mcq",
-    prompt: "What are the pressure and volume of a full nitrous oxide E-cylinder?",
+    scene: null,
+    prompt: "What is the purpose of the check valve located within the hanger yoke assembly?",
     setup: "",
     ans: [
-      { t: "2000 psig and 660 L.", ok: false },
-      { t: "745 to 750 psig and 1590 L.", ok: true },
-      { t: "50 psig and 1590 L.", ok: false },
-      { t: "2200 psig and 625 L.", ok: false },
+      { t: "It ensures gas flows only from the cylinder into the machine, preventing backflow", ok: true },
+      { t: "It reduces cylinder pressure from 2200 psi down to the intermediate pressure range", ok: false },
+      { t: "It filters particulate debris larger than 100 micrometers from cylinder gas", ok: false },
+      { t: "It color-codes the gas stream so the correct pipeline connection can be verified", ok: false },
     ],
-    rationale: "A full nitrous oxide E-cylinder is about 745 to 750 psig and contains about 1590 liters.",
-    metadata: { topic: "Cylinders", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "nitrous oxide", "E-cylinder"] }
+    rationale: "The check valve in the hanger yoke permits unidirectional flow from cylinder to machine and prevents gas from leaking out through an empty yoke. Pressure reduction is the regulator's function. Filtration is performed by a separate 100-micrometer filter. Color coding is a visual identification system, not a valve function.",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["check valve", "hanger yoke", "unidirectional flow"] }
   },
 
   // ── boa-node11-ads-011 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-011",
     type: "mcq",
-    prompt: "Why is the pressure gauge of a nitrous oxide tank an unreliable indicator of volume until the tank is nearly empty?",
+    scene: null,
+    prompt: "A provider notices the Bourdon gauge reads zero on an oxygen E-cylinder that was just delivered. Which explanation is most likely?",
     setup: "",
     ans: [
-      { t: "Nitrous oxide pressure increases as volume decreases.", ok: false },
-      { t: "Nitrous oxide exists as a liquid-vapor equilibrium, so pressure remains near 745 psig until all liquid has vaporized.", ok: true },
-      { t: "The regulator hides the true pressure.", ok: false },
-      { t: "Nitrous oxide has no measurable pressure until the valve is opened.", ok: false },
+      { t: "The cylinder valve is closed, so no pressure is transmitted to the gauge", ok: true },
+      { t: "The cylinder is completely empty and must be replaced immediately now", ok: false },
+      { t: "The Bourdon gauge has been damaged during transport of the cylinder", ok: false },
+      { t: "The first-stage regulator has failed and is blocking all pressure flow", ok: false },
     ],
-    rationale: "As long as liquid nitrous oxide remains, cylinder pressure stays near vapor pressure and does not reflect remaining contents well.",
-    metadata: { topic: "Cylinders", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "nitrous oxide", "liquid-vapor equilibrium"] }
+    rationale: "Bourdon gauges only display pressure when the cylinder valve is open. A newly delivered cylinder reading zero most likely has a closed valve. While an empty cylinder is possible, it is unlikely for a new delivery. Gauge damage and regulator failure are less common explanations for a zero reading on a new cylinder.",
+    metadata: { topic: "High Pressure System", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Bourdon gauge", "cylinder valve", "troubleshooting"] }
   },
 
   // ── boa-node11-ads-012 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-012",
-    type: "mcq",
-    prompt: "What is the oxygen E-cylinder factor used for calculating remaining time?",
-    setup: "",
-    ans: [
-      { t: "0.14", ok: false },
-      { t: "0.28", ok: true },
-      { t: "0.5", ok: false },
-      { t: "2.8", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "What is the oxygen E-cylinder factor used for calculating remaining supply duration?",
+    acceptedAnswers: [
+      "0.28",
+      ".28",
     ],
-    rationale: "The oxygen E-cylinder factor is approximately 0.28.",
-    metadata: { topic: "Cylinders", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen cylinder", "cylinder factor"] }
+    rationale: "The O2 E-cylinder factor is 0.28. This factor converts remaining psi to liters (psi x 0.28 = liters remaining). It is derived from the full cylinder capacity of 625 L at 2200 psi (625/2200 ≈ 0.28).",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["cylinder factor", "oxygen", "supply calculation"] }
   },
 
   // ── boa-node11-ads-013 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-013",
     type: "mcq",
-    prompt: "If an oxygen tank pressure is 1000 psi and the flow rate is 5 L/min, approximately how many minutes of oxygen remain?",
+    scene: null,
+    prompt: "Why is the first-stage regulator output set slightly below normal pipeline pressure?",
     setup: "",
     ans: [
-      { t: "28 minutes.", ok: false },
-      { t: "40 minutes.", ok: false },
-      { t: "56 minutes.", ok: true },
-      { t: "112 minutes.", ok: false },
+      { t: "So the machine preferentially uses pipeline gas and conserves cylinder reserves for emergencies", ok: true },
+      { t: "So the machine preferentially uses cylinder gas and avoids pipeline contamination completely", ok: false },
+      { t: "So the machine can detect pipeline failure by measuring the pressure differential constantly", ok: false },
+      { t: "So the machine can equalize both sources and draw from them simultaneously during operation", ok: false },
     ],
-    rationale: "1000 × 0.28 = 280 liters. 280 ÷ 5 = 56 minutes.",
-    metadata: { topic: "Cylinders", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen cylinder", "calculation", "emergency planning"] }
+    rationale: "Regulators output at ~45 psi, slightly below pipeline pressure (~50 psi). This differential ensures the machine draws from the pipeline when available, preserving cylinder gas for emergencies. The machine does not preferentially use cylinders, does not use the differential for detection, and does not draw from both sources simultaneously under normal conditions.",
+    metadata: { topic: "High Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pressure regulator", "pipeline priority", "gas conservation"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // E-CYLINDERS (8 questions: 014-021)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-014 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-014",
     type: "mcq",
-    prompt: "Which safety system is used to prevent connection of an incorrect gas cylinder to the hanger yoke?",
+    scene: null,
+    prompt: "A full oxygen E-cylinder contains approximately 625 liters at 2200 psi. What physical state is the oxygen inside this cylinder?",
     setup: "",
     ans: [
-      { t: "DISS", ok: false },
-      { t: "Fail-safe valve", ok: false },
-      { t: "PISS", ok: true },
-      { t: "APL valve", ok: false },
+      { t: "Entirely compressed gas, because O2 critical temperature is far below room temperature", ok: true },
+      { t: "A mixture of liquid and gas in vapor-pressure equilibrium at room temperature", ok: false },
+      { t: "Entirely liquid oxygen under high pressure that vaporizes upon valve opening", ok: false },
+      { t: "Supercritical fluid that behaves as both liquid and gas simultaneously", ok: false },
     ],
-    rationale: "The Pin Index Safety System prevents incorrect E-cylinder attachment.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "PISS", "cylinder safety"] }
+    rationale: "Oxygen has a critical temperature of -119°C, well below room temperature, so it exists only as compressed gas in the cylinder. Unlike N2O (critical temp 36.5°C), oxygen cannot exist as a liquid at room temperature regardless of pressure. It is not in liquid-vapor equilibrium, not entirely liquid, and not supercritical at cylinder conditions.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["oxygen", "E-cylinder", "gas physics", "critical temperature"] }
   },
 
   // ── boa-node11-ads-015 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-015",
     type: "mcq",
-    prompt: "Which safety system is used for pipeline inlet connections to prevent wall misconnection?",
+    scene: null,
+    prompt: "A nitrous oxide E-cylinder reads 750 psi on the Bourdon gauge. What can the provider reliably conclude about the remaining contents?",
     setup: "",
     ans: [
-      { t: "PISS", ok: false },
-      { t: "DISS", ok: true },
-      { t: "Oxygen analyzer", ok: false },
-      { t: "Reservoir bag", ok: false },
+      { t: "The tank could be anywhere from full to approximately 25 percent remaining", ok: true },
+      { t: "The tank is exactly full because 750 psi is the maximum fill pressure", ok: false },
+      { t: "The tank is approximately half full based on the proportional pressure", ok: false },
+      { t: "The tank has less than 10 percent remaining and should be replaced now", ok: false },
     ],
-    rationale: "The Diameter Index Safety System is used for pipeline inlet and hose connections.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "DISS", "pipeline safety"] }
+    rationale: "Because N2O exists as a liquid-vapor mixture, pressure remains constant at ~750 psi as long as any liquid remains. Pressure only drops after all liquid has vaporized, which occurs when the tank is about 75% depleted. Therefore, 750 psi could indicate a tank that is full or up to ~75% used. The gauge cannot distinguish between these states. It is not necessarily full, half full, or nearly empty.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["nitrous oxide", "pressure gauge", "liquid-vapor equilibrium"] }
   },
 
   // ── boa-node11-ads-016 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-016",
     type: "mcq",
-    prompt: "In the intermediate pressure system, what is the normal operating pressure for pipeline gases?",
+    scene: null,
+    prompt: "Why does the pressure gauge on a nitrous oxide E-cylinder remain at approximately 750 psi until the tank is nearly empty?",
     setup: "",
     ans: [
-      { t: "2000 psi", ok: false },
-      { t: "745 psi", ok: false },
-      { t: "Approximately 50 psi", ok: true },
-      { t: "Less than 10 psi", ok: false },
+      { t: "N2O exists as liquid-vapor equilibrium, and vapor pressure stays constant until all liquid vaporizes", ok: true },
+      { t: "The Bourdon gauge mechanism cannot detect gradual pressure changes smaller than 100 psi accurately", ok: false },
+      { t: "The first-stage regulator maintains constant backpressure on the gauge regardless of tank contents", ok: false },
+      { t: "N2O molecules are too small for the gauge to accurately measure incremental volume loss over time", ok: false },
     ],
-    rationale: "Pipeline gases typically enter the machine at about 50 psi.",
-    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "intermediate pressure system", "pipeline"] }
+    rationale: "N2O has a critical temperature of 36.5°C, so at room temperature it exists as a liquid-vapor mixture. Vapor pressure depends only on temperature, not on how much liquid remains. As gas is used, liquid vaporizes to maintain equilibrium pressure at ~750 psi. Only after all liquid is gone does pressure begin to fall. The gauge is accurate, the regulator does not affect gauge readings, and molecular size is irrelevant.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["nitrous oxide", "vapor pressure", "liquid-vapor equilibrium"] }
   },
 
   // ── boa-node11-ads-017 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-017",
     type: "mcq",
-    prompt: "Which components usually remain functional even when the master switch of the anesthesia machine is turned off?",
+    scene: null,
+    prompt: "A full nitrous oxide E-cylinder contains approximately 1590 liters of gas. If a provider must determine how much N2O remains, which method is most reliable?",
     setup: "",
     ans: [
-      { t: "The vaporizers and ventilator.", ok: false },
-      { t: "The oxygen flush valve and usually the auxiliary oxygen flowmeter.", ok: true },
-      { t: "The scavenging system and oxygen analyzer.", ok: false },
-      { t: "The bellows and capnograph.", ok: false },
+      { t: "Weighing the cylinder and subtracting the known tare weight of the empty tank", ok: true },
+      { t: "Reading the Bourdon pressure gauge and calculating volume proportionally", ok: false },
+      { t: "Timing how long the tank has been open and estimating total usage from flow", ok: false },
+      { t: "Feeling the temperature of the cylinder wall to estimate the liquid-gas boundary", ok: false },
     ],
-    rationale: "Emergency oxygen access is typically maintained through the oxygen flush valve and often an auxiliary oxygen flowmeter.",
-    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "master switch", "oxygen flush", "auxiliary oxygen"] }
+    rationale: "Because N2O pressure remains constant while liquid is present, the pressure gauge cannot reliably indicate remaining volume. Weighing is the gold standard — the difference between current weight and tare weight reflects remaining liquid mass, which can be converted to gas volume. Timing is imprecise. Temperature palpation is unreliable and non-quantitative.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["nitrous oxide", "cylinder weighing", "volume estimation"] }
   },
 
   // ── boa-node11-ads-018 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-018",
     type: "mcq",
-    prompt: "What is the goal of the Oxygen Failure Safety Device, also called the fail-safe valve?",
+    scene: null,
+    prompt: "How does the relationship between pressure and remaining volume differ between an oxygen E-cylinder and a nitrous oxide E-cylinder?",
     setup: "",
     ans: [
-      { t: "To prevent any loss of oxygen from a full cylinder.", ok: false },
-      { t: "To shut off all machine power during pipeline failure.", ok: false },
-      { t: "To prevent delivery of a hypoxic gas mixture by shutting off or reducing other gas flows if oxygen supply pressure falls.", ok: true },
-      { t: "To analyze inspired oxygen concentration at the patient end.", ok: false },
+      { t: "O2 pressure drops linearly with use; N2O pressure remains constant until liquid is exhausted", ok: true },
+      { t: "Both gases show linear pressure decline proportional to remaining cylinder volume over time", ok: false },
+      { t: "O2 pressure remains constant until empty; N2O pressure drops linearly with volume consumed", ok: false },
+      { t: "Neither gas shows a predictable pressure-volume relationship in standard E-cylinders today", ok: false },
     ],
-    rationale: "The fail-safe valve responds to oxygen supply pressure and reduces or stops the flow of other gases when oxygen pressure falls.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "fail-safe valve", "oxygen safety"] }
+    rationale: "Oxygen is stored only as compressed gas, so pressure directly reflects remaining volume (linear relationship). N2O is stored as liquid-vapor mixture, so pressure reflects only vapor pressure (constant) until all liquid is gone, then drops rapidly. The behaviors are opposite; they are not both linear, not reversed, and both are predictable within their physical constraints.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["oxygen vs nitrous oxide", "pressure-volume relationship", "gas physics"] }
   },
 
   // ── boa-node11-ads-019 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-019",
-    type: "mcq",
-    prompt: "Which hazard is NOT prevented by the fail-safe valve?",
-    setup: "",
-    ans: [
-      { t: "Low oxygen supply pressure.", ok: false },
-      { t: "Pipeline crossover or a cylinder containing the wrong gas.", ok: true },
-      { t: "Shutoff of nitrous oxide when oxygen pressure falls.", ok: false },
-      { t: "Reduction of other gas flow when oxygen source pressure is lost.", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "What is the approximate volume in liters of a full oxygen E-cylinder?",
+    acceptedAnswers: [
+      "625",
+      "625 liters",
+      "625 L",
+      "625L",
     ],
-    rationale: "The fail-safe valve is pressure-based, not concentration-based. It does not detect the wrong gas under pressure.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "fail-safe valve", "pipeline crossover", "oxygen analyzer"] }
+    rationale: "A full oxygen E-cylinder at 2200 psi contains approximately 625 liters of gaseous oxygen. This value, combined with the cylinder factor of 0.28, is essential for calculating remaining supply time during emergencies.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["oxygen", "E-cylinder", "volume", "recall"] }
   },
 
   // ── boa-node11-ads-020 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-020",
-    type: "mcq",
-    prompt: "What is the flow rate range of the oxygen flush valve?",
-    setup: "",
-    ans: [
-      { t: "5 to 10 L/min", ok: false },
-      { t: "10 to 20 L/min", ok: false },
-      { t: "35 to 75 L/min", ok: true },
-      { t: "80 to 120 L/min", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "What is the approximate pressure in psi of a full oxygen E-cylinder?",
+    acceptedAnswers: [
+      "2200",
+      "2200 psi",
+      "2,200",
+      "2,200 psi",
     ],
-    rationale: "The oxygen flush valve delivers a high unmetered flow of oxygen, commonly 35 to 75 L/min.",
-    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen flush valve", "flow"] }
+    rationale: "A full oxygen E-cylinder is pressurized to approximately 2200 psi (pounds per square inch). Because oxygen is stored entirely as compressed gas, this pressure decreases linearly as the cylinder empties.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["oxygen", "E-cylinder", "pressure", "recall"] }
   },
 
   // ── boa-node11-ads-021 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-021",
     type: "mcq",
-    prompt: "Why should the oxygen flush valve be avoided during the inspiratory phase of mechanical ventilation?",
+    scene: null,
+    prompt: "During a case, the N2O Bourdon gauge suddenly begins to drop from 750 psi. What does this indicate about the cylinder contents?",
     setup: "",
     ans: [
-      { t: "It lowers tidal volume.", ok: false },
-      { t: "It can produce an extreme pressure spike and cause barotrauma because the ventilator spill valve is closed during inspiration.", ok: true },
-      { t: "It removes anesthetic from the vaporizer reservoir.", ok: false },
-      { t: "It prevents carbon dioxide absorption in the canister.", ok: false },
+      { t: "All liquid N2O has vaporized and roughly 75 percent of the total supply is already gone", ok: true },
+      { t: "The cylinder has just begun to empty and approximately 75 percent of the supply remains", ok: false },
+      { t: "The first-stage regulator is malfunctioning and should be replaced before continuing", ok: false },
+      { t: "Ambient temperature has dropped below the critical temperature of nitrous oxide gas", ok: false },
     ],
-    rationale: "During inspiration the circuit is already pressurized, so flushing oxygen can sharply increase airway pressure and cause barotrauma.",
-    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen flush valve", "barotrauma", "mechanical ventilation"] }
+    rationale: "N2O pressure drops only after all liquid has vaporized. At that point, approximately 75% of the original contents have been used, leaving only ~25% as compressed gas. This is not the start of emptying, not a regulator malfunction, and temperature dropping below 36.5°C (N2O critical temp) would not cause a sudden gauge drop in clinical settings.",
+    metadata: { topic: "E-Cylinders", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["nitrous oxide", "pressure drop", "clinical monitoring"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // COMPRESSED GAS SAFETY (8 questions: 022-029)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-022 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-022",
     type: "mcq",
-    prompt: "How can use of the oxygen flush valve increase the risk of anesthesia awareness?",
+    scene: null,
+    prompt: "Which answer correctly matches each medical gas to its designated cylinder color in the United States?",
     setup: "",
     ans: [
-      { t: "It decreases oxygen delivery.", ok: false },
-      { t: "It bypasses the vaporizer and dilutes the anesthetic concentration in the circuit.", ok: true },
-      { t: "It activates the scavenger and removes all gas.", ok: false },
-      { t: "It reduces carbon dioxide absorption.", ok: false },
+      { t: "Oxygen is green, nitrous oxide is blue, and medical air is yellow", ok: true },
+      { t: "Oxygen is blue, nitrous oxide is green, and medical air is yellow", ok: false },
+      { t: "Oxygen is green, nitrous oxide is yellow, and medical air is blue", ok: false },
+      { t: "Oxygen is yellow, nitrous oxide is blue, and medical air is green", ok: false },
     ],
-    rationale: "The oxygen flush bypasses the vaporizer, lowering delivered volatile anesthetic concentration and potentially making the patient lighter.",
-    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen flush valve", "awareness", "vaporizers"] }
+    rationale: "US color coding standards designate green for oxygen, blue for nitrous oxide, and yellow for medical air. Confusing these colors could lead to wrong-gas administration. Nitrogen is black, helium is brown, and CO2 is gray — but these are not among the choices.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["color coding", "gas identification", "safety standards"] }
   },
 
   // ── boa-node11-ads-023 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-023",
     type: "mcq",
-    prompt: "The low pressure system is located downstream of which component?",
+    scene: null,
+    prompt: "The Diameter Index Safety System (DISS) prevents misconnection of gas supplies at which location on the anesthesia machine?",
     setup: "",
     ans: [
-      { t: "Pressure regulator", ok: false },
-      { t: "Flow control valves", ok: true },
-      { t: "Check valve in the hanger yoke", ok: false },
-      { t: "Cylinder pressure gauge", ok: false },
+      { t: "At the pipeline inlet where wall hoses connect to the machine", ok: true },
+      { t: "At the hanger yoke where E-cylinders mount to the machine", ok: false },
+      { t: "At the common gas outlet where the circuit attaches to flow", ok: false },
+      { t: "At the vaporizer port where agent-specific filling occurs", ok: false },
     ],
-    rationale: "The low pressure system begins after the flow control valves.",
-    metadata: { topic: "Low Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "low pressure system", "flow control valves"] }
+    rationale: "DISS uses gas-specific diameter fittings for pipeline (wall) connections at the intermediate pressure system. The hanger yoke uses the Pin Index Safety System (PISS). The common gas outlet and vaporizer filling ports use different proprietary connection systems.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["DISS", "pipeline connections", "safety systems"] }
   },
 
   // ── boa-node11-ads-024 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-024",
     type: "mcq",
-    prompt: "Why is the oxygen flowmeter placed in the downstream or last position in the flowmeter sequence?",
+    scene: null,
+    prompt: "The Pin Index Safety System (PISS) prevents incorrect gas connections at which location on the anesthesia machine?",
     setup: "",
     ans: [
-      { t: "To keep oxygen under higher pressure.", ok: false },
-      { t: "To reduce gas viscosity.", ok: false },
-      { t: "To ensure a leak in an upstream flowmeter does not create a hypoxic mixture delivered to the patient.", ok: true },
-      { t: "To improve carbon dioxide elimination.", ok: false },
+      { t: "At the hanger yoke where E-cylinders attach to the machine body", ok: true },
+      { t: "At the pipeline inlet where hospital wall hoses are connected", ok: false },
+      { t: "At the flowmeter bank where individual gas flows are adjusted", ok: false },
+      { t: "At the breathing circuit where inspiratory tubing connects to it", ok: false },
     ],
-    rationale: "Placing oxygen last helps prevent upstream leaks from causing delivery of a hypoxic mixture.",
-    metadata: { topic: "Low Pressure System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "flowmeter", "oxygen safety", "low pressure system"] }
+    rationale: "PISS uses specific pin-and-hole configurations on the cylinder post and yoke to ensure only the correct gas cylinder can be mounted. Each gas has a unique pin position. Pipeline connections use DISS. Flowmeters and breathing circuits use different connection standards.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["PISS", "cylinder safety", "pin configuration"] }
   },
 
   // ── boa-node11-ads-025 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-025",
-    type: "mcq",
-    prompt: "In a flowmeter with a ball float, where should the flow be read?",
-    setup: "",
-    ans: [
-      { t: "At the top of the ball.", ok: false },
-      { t: "At the center of the ball.", ok: true },
-      { t: "At the bottom of the ball.", ok: false },
-      { t: "At the right edge of the tube.", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "What does DISS stand for in the context of anesthesia machine gas safety?",
+    acceptedAnswers: [
+      "Diameter Index Safety System",
+      "diameter index safety system",
     ],
-    rationale: "For a spherical ball float, the flow is read at the center of the ball.",
-    metadata: { topic: "Flowmeters", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "flowmeter", "Thorpe tube"] }
+    rationale: "DISS = Diameter Index Safety System. It uses gas-specific diameter fittings to prevent misconnection of pipeline gas hoses at the intermediate pressure system. Each gas has a unique bore-and-shoulder diameter combination.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["DISS", "safety acronym", "recall"] }
   },
 
   // ── boa-node11-ads-026 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-026",
-    type: "mcq",
-    prompt: "What is the function of the manifold in the low pressure system?",
-    setup: "",
-    ans: [
-      { t: "It absorbs carbon dioxide before the vaporizer.", ok: false },
-      { t: "It acts as a mixing chamber where gases from the flowmeters combine before entering the vaporizer or breathing circuit.", ok: true },
-      { t: "It reduces cylinder pressure to 50 psi.", ok: false },
-      { t: "It stores reserve oxygen for emergencies.", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "What does PISS stand for in the context of anesthesia machine gas safety?",
+    acceptedAnswers: [
+      "Pin Index Safety System",
+      "pin index safety system",
     ],
-    rationale: "The manifold combines the individually metered gases before they proceed to the vaporizer and common gas outlet.",
-    metadata: { topic: "Low Pressure System", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "manifold", "low pressure system"] }
+    rationale: "PISS = Pin Index Safety System. It uses unique pin positions on the cylinder valve and matching holes on the hanger yoke to prevent wrong-gas cylinder attachment. This system operates in the high pressure system.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["PISS", "safety acronym", "recall"] }
   },
 
   // ── boa-node11-ads-027 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-027",
     type: "mcq",
-    prompt: "Which physics principle explains why liquid anesthetic cools as it vaporizes within a vaporizer?",
+    scene: null,
+    prompt: "What is the purpose of the 100-micrometer filter located downstream of the cylinder inlet on the anesthesia machine?",
     setup: "",
     ans: [
-      { t: "Boyle's law", ok: false },
-      { t: "Reynolds number", ok: false },
-      { t: "Latent heat of vaporization", ok: true },
-      { t: "Fick's law", ok: false },
+      { t: "It traps particulate debris such as rust and metal fragments before they enter the machine", ok: true },
+      { t: "It removes bacterial and viral contaminants from the compressed gas before patient delivery", ok: false },
+      { t: "It separates liquid water condensate from the gas stream to prevent corrosion downstream", ok: false },
+      { t: "It filters out trace anesthetic agents that may contaminate the fresh cylinder gas supply", ok: false },
     ],
-    rationale: "Vaporization requires energy, which is taken from the surroundings and cools the remaining liquid and device.",
-    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "vaporizer", "latent heat of vaporization"] }
+    rationale: "The 100-micrometer (0.1 mm) filter captures particulate debris — rust, metal filings, and other contaminants — that may be present in compressed gas cylinders. It is not fine enough for microbial filtration (requires 0.2 micrometer). It is not designed as a water separator or anesthetic agent filter.",
+    metadata: { topic: "Compressed Gas Safety", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["filtration", "particulate filter", "cylinder debris"] }
   },
 
   // ── boa-node11-ads-028 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-028",
     type: "mcq",
-    prompt: "Which option correctly matches the volatile agent with its standard color code?",
+    scene: null,
+    prompt: "A technician discovers that the pins on a cylinder post have been removed or damaged, allowing the cylinder to fit on the wrong yoke. Which safety system has been defeated?",
     setup: "",
     ans: [
-      { t: "Sevoflurane blue, Isoflurane yellow, Desflurane purple", ok: false },
-      { t: "Sevoflurane yellow, Isoflurane purple, Desflurane blue", ok: true },
-      { t: "Sevoflurane purple, Isoflurane blue, Desflurane yellow", ok: false },
-      { t: "Sevoflurane red, Isoflurane green, Desflurane orange", ok: false },
+      { t: "The Pin Index Safety System, which is the only barrier preventing wrong-gas cylinder mounting", ok: true },
+      { t: "The Diameter Index Safety System, which prevents wrong-gas connections at pipeline inlets", ok: false },
+      { t: "The fail-safe valve system, which is designed to shut off N2O when O2 pressure falls low", ok: false },
+      { t: "The oxygen ratio controller, which maintains a minimum fractional oxygen concentration", ok: false },
     ],
-    rationale: "Standard color coding pairs Sevoflurane with yellow, Isoflurane with purple, and Desflurane with blue.",
-    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "vaporizers", "volatile agents", "color coding"] }
+    rationale: "PISS uses specific pin placements to physically prevent wrong-gas cylinder-to-yoke connections. Removing or damaging pins defeats this critical safety layer. DISS protects pipeline connections, not cylinders. The fail-safe valve responds to O2 pressure loss. The O2 ratio controller manages flow ratios, not physical connections.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["PISS", "safety defeat", "equipment tampering"] }
   },
 
   // ── boa-node11-ads-029 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-029",
     type: "mcq",
-    prompt: "What is the function of the interlock safety mechanism on the vaporizer manifold?",
+    scene: null,
+    prompt: "Which statement best describes the relationship between PISS and DISS in the overall gas safety design of the anesthesia machine?",
     setup: "",
     ans: [
-      { t: "It prevents use of oxygen and nitrous oxide together.", ok: false },
-      { t: "It prevents more than one vaporizer from being turned on simultaneously.", ok: true },
-      { t: "It allows simultaneous activation of two vaporizers for balanced anesthesia.", ok: false },
-      { t: "It controls scavenging pressure.", ok: false },
+      { t: "PISS guards high-pressure cylinder connections; DISS guards intermediate-pressure pipeline connections", ok: true },
+      { t: "DISS guards high-pressure cylinder connections; PISS guards intermediate-pressure pipeline connections", ok: false },
+      { t: "Both systems guard pipeline connections but at different stages of pressure reduction in machine", ok: false },
+      { t: "Both systems guard cylinder connections but use different pin configurations for each gas type", ok: false },
     ],
-    rationale: "The interlock prevents simultaneous activation of more than one vaporizer and helps prevent overdose or unpredictable concentrations.",
-    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "vaporizers", "interlock safety"] }
+    rationale: "PISS operates at the high-pressure system (cylinders to yoke). DISS operates at the intermediate-pressure system (pipeline hoses to machine inlets). They are complementary systems protecting different connection points. They are not interchangeable, and neither system covers both locations.",
+    metadata: { topic: "Compressed Gas Safety", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["PISS", "DISS", "complementary safety systems"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INTERMEDIATE PRESSURE SYSTEM (10 questions: 030-039)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-030 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-030",
     type: "mcq",
-    prompt: "Why does Desflurane require a specialized heated and pressurized vaporizer such as the Tec 6?",
+    scene: null,
+    prompt: "Hospital pipeline gases enter the anesthesia machine at what approximate pressure range?",
     setup: "",
     ans: [
-      { t: "Because it is too viscous to pass through a standard flowmeter.", ok: false },
-      { t: "Because its boiling point is near room temperature, so it would vaporize uncontrollably in a standard variable-bypass vaporizer.", ok: true },
-      { t: "Because it reacts with oxygen under room conditions.", ok: false },
-      { t: "Because it cannot be mixed with fresh gas.", ok: false },
+      { t: "40 to 55 psi, which defines the intermediate pressure system operating range", ok: true },
+      { t: "14 to 26 psi, which defines the low pressure system operating range precisely", ok: false },
+      { t: "200 to 750 psi, matching the range of E-cylinder pressures in common use", ok: false },
+      { t: "1 to 5 psi, reflecting near-atmospheric patient breathing circuit pressures", ok: false },
     ],
-    rationale: "Desflurane's boiling point is close to room temperature, so it requires a heated, pressurized vaporizer for controlled delivery.",
-    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "desflurane", "Tec 6", "vaporizers"] }
+    rationale: "Pipeline gases are delivered at 40-55 psi, which is the operating range of the intermediate pressure system. 14-26 psi reflects second-stage regulator outputs (low pressure zone). 200-750 psi is cylinder range (high pressure). 1-5 psi is patient circuit pressure, not a supply pressure.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pipeline pressure", "intermediate system", "gas supply"] }
   },
 
   // ── boa-node11-ads-031 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-031",
     type: "mcq",
-    prompt: "What is the common gas outlet?",
+    scene: null,
+    prompt: "When the master switch is turned to the STANDBY (OFF) position, which functions remain operational?",
     setup: "",
     ans: [
-      { t: "The point where scavenged gases leave the machine.", ok: false },
-      { t: "The point where all machine gases and vapors exit to enter the breathing circuit.", ok: true },
-      { t: "The point where exhaled gas enters the absorber.", ok: false },
-      { t: "The point where wall pipeline gas first enters the machine.", ok: false },
+      { t: "The oxygen flush valve and the auxiliary oxygen flowmeter continue to function normally", ok: true },
+      { t: "The electronic vaporizer heating element and ventilator bellows continue to operate", ok: false },
+      { t: "The flow control valves for all gases and the main flowmeter tubes remain active", ok: false },
+      { t: "The scavenging system suction and the CO2 absorber bypass valve remain engaged", ok: false },
     ],
-    rationale: "The common gas outlet is the final exit point from the machine before gas enters the breathing circuit.",
-    metadata: { topic: "Low Pressure System", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "common gas outlet", "gas flow"] }
+    rationale: "In STANDBY, oxygen flow and electrical power are generally blocked, but the O2 flush valve and auxiliary O2 flowmeter remain functional for emergency use since they connect directly to the pipeline/cylinder supply. Vaporizer heaters, main flowmeters, ventilator bellows, and scavenging suction all require the master switch to be ON.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["master switch", "standby mode", "emergency oxygen"] }
   },
 
   // ── boa-node11-ads-032 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-032",
     type: "mcq",
-    prompt: "What is the primary advantage of a semi-closed circle breathing system?",
+    scene: null,
+    prompt: "What is the primary function of the fail-safe valve in the intermediate pressure system?",
     setup: "",
     ans: [
-      { t: "It prevents all rebreathing.", ok: false },
-      { t: "It allows rebreathing of gases, conserving heat, moisture, and anesthetic while reducing pollution.", ok: true },
-      { t: "It completely eliminates the need for CO2 absorption.", ok: false },
-      { t: "It delivers only room air and oxygen.", ok: false },
+      { t: "It shuts off or proportionally reduces nitrous oxide flow when oxygen supply pressure drops", ok: true },
+      { t: "It prevents delivery of a hypoxic mixture by monitoring the actual oxygen concentration", ok: false },
+      { t: "It stops all gas flow to the patient circuit if the breathing circuit becomes disconnected", ok: false },
+      { t: "It activates an audible alarm when the oxygen concentration falls below 21 percent level", ok: false },
     ],
-    rationale: "The circle system permits safe rebreathing after CO2 removal, conserving heat, moisture, and anesthetic agent.",
-    metadata: { topic: "Circle System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "circle system", "rebreathing"] }
+    rationale: "The fail-safe valve is pressure-sensitive — it responds to falling O2 supply pressure by shutting off or reducing N2O flow. Critically, it does NOT monitor oxygen concentration or ratio. It cannot prevent hypoxic mixtures if O2 pressure is adequate but flow is set too low. It does not detect disconnects or monitor FiO2.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["fail-safe valve", "oxygen pressure", "N2O shutoff"] }
   },
 
   // ── boa-node11-ads-033 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-033",
     type: "mcq",
-    prompt: "Which component in a circle system prevents rebreathing of carbon dioxide?",
+    scene: null,
+    prompt: "A critical limitation of the fail-safe valve is that it cannot prevent a hypoxic mixture under which of the following circumstances?",
     setup: "",
     ans: [
-      { t: "Reservoir bag", ok: false },
-      { t: "APL valve", ok: false },
-      { t: "Carbon dioxide absorbent canister", ok: true },
-      { t: "Oxygen analyzer", ok: false },
+      { t: "When oxygen supply pressure is normal but the oxygen flow control valve is set too low", ok: true },
+      { t: "When both the oxygen pipeline and the oxygen E-cylinder have completely run out of supply", ok: false },
+      { t: "When the nitrous oxide pipeline is delivering gas at a pressure exceeding 55 psi currently", ok: false },
+      { t: "When the patient is connected to a circle breathing system with fresh soda lime canisters", ok: false },
     ],
-    rationale: "In a circle system, carbon dioxide is chemically removed by the absorbent canister.",
-    metadata: { topic: "Circle System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "circle system", "carbon dioxide absorbent"] }
+    rationale: "The fail-safe valve is a pressure-sensing device only. If O2 supply pressure is adequate, the valve stays open even if the provider has set O2 flow dangerously low. It cannot analyze gas composition or flow ratios. Total O2 supply failure would actually trigger the valve. N2O overpressure and circuit type are not relevant to fail-safe function.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["fail-safe limitations", "hypoxic mixture", "clinical safety"] }
   },
 
   // ── boa-node11-ads-034 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-034",
     type: "mcq",
-    prompt: "How should the APL valve be set during spontaneous ventilation?",
+    scene: null,
+    prompt: "At approximately what oxygen supply pressure does the oxygen supply failure alarm activate?",
     setup: "",
     ans: [
-      { t: "Fully closed", ok: false },
-      { t: "Fully open or at minimum", ok: true },
-      { t: "Mid-range between 20 and 30 cmH2O", ok: false },
-      { t: "It should be disconnected from the circuit", ok: false },
+      { t: "Approximately 30 psi, providing early warning before complete oxygen supply loss occurs", ok: true },
+      { t: "Approximately 5 psi, activating only when oxygen supply is nearly completely exhausted", ok: false },
+      { t: "Approximately 55 psi, activating as soon as pipeline pressure drops below normal range", ok: false },
+      { t: "Approximately 100 psi, providing warning well before any clinically significant pressure drop", ok: false },
     ],
-    rationale: "During spontaneous ventilation, the APL valve should be open or at minimum to minimize expiratory resistance.",
-    metadata: { topic: "APL Valve", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "APL valve", "spontaneous ventilation"] }
+    rationale: "The O2 supply failure alarm sounds at approximately 30 psi, below normal pipeline pressure (50 psi) but high enough to give the provider time to act before O2 is completely exhausted. 5 psi would be too late. 55 psi would trigger during normal fluctuations. 100 psi is above normal pipeline operating pressure.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 failure alarm", "alarm threshold", "30 psi"] }
   },
 
   // ── boa-node11-ads-035 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-035",
     type: "mcq",
-    prompt: "What does the APL valve range of 'Min to 70' represent?",
+    scene: null,
+    prompt: "Which characteristic of the oxygen supply failure alarm ensures it can function even during a complete electrical power failure?",
     setup: "",
     ans: [
-      { t: "Oxygen flow in liters per minute", ok: false },
-      { t: "Vaporizer output range in percent", ok: false },
-      { t: "The pressure in cmH2O at which the valve opens and releases gas to the scavenging system", ok: true },
-      { t: "Carbon dioxide absorber capacity", ok: false },
+      { t: "It is powered by the gas pressure itself, requiring no external electrical supply to sound", ok: true },
+      { t: "It contains a dedicated backup battery that lasts at least 72 hours during power outages", ok: false },
+      { t: "It connects to the hospital emergency power generator through a dedicated wired circuit", ok: false },
+      { t: "It uses a piezoelectric crystal that generates electricity from mechanical vibration only", ok: false },
     ],
-    rationale: "The markings correspond to the approximate pressure at which the APL valve opens and vents gas.",
-    metadata: { topic: "APL Valve", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "APL valve", "pressure limiting"] }
+    rationale: "The O2 supply failure alarm is pneumatically powered — it uses stored gas pressure to drive the audible alarm, making it independent of electrical supply. This is a critical safety feature ensuring alarm function even during complete power failure. It does not rely on batteries, generators, or piezoelectric mechanisms.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 failure alarm", "pneumatic alarm", "power independence"] }
   },
 
   // ── boa-node11-ads-036 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-036",
     type: "multi",
-    prompt: "Which are functions of the reservoir bag? Select 3.",
-    setup: "",
+    scene: null,
+    prompt: "Which of the following are true limitations of the fail-safe valve? (Select TWO)",
     choices: [
-      "Acts as a gas reservoir.",
-      "Provides a means for manual ventilation.",
-      "Serves as a tactile and visual monitor of spontaneous breathing.",
-      "Measures anesthetic concentration directly.",
-      "Chemically absorbs carbon dioxide.",
+      "It cannot detect a wrong gas connected to the oxygen pipeline inlet",
+      "It cannot prevent hypoxia when O2 pressure is normal but O2 flow is set low",
+      "It cannot function if the master switch is in the ON position during use",
+      "It cannot activate unless the N2O cylinder is mounted on the machine",
+      "It cannot operate without an intact electrical power supply to the machine",
     ],
     correctAnswers: [
-      "Acts as a gas reservoir.",
-      "Provides a means for manual ventilation.",
-      "Serves as a tactile and visual monitor of spontaneous breathing.",
+      "It cannot detect a wrong gas connected to the oxygen pipeline inlet",
+      "It cannot prevent hypoxia when O2 pressure is normal but O2 flow is set low",
     ],
-    selectCount: 3,
-    rationale: "The reservoir bag stores gas, allows manual ventilation, and provides visual and tactile feedback about ventilation.",
-    metadata: { topic: "Reservoir Bag", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "reservoir bag", "manual ventilation"] }
+    selectCount: 2,
+    rationale: "The fail-safe valve senses only O2 supply pressure. If a wrong gas (e.g., N2) is connected to the O2 pipeline, pressure will be adequate and the valve stays open, passing the wrong gas. Similarly, if O2 pressure is normal but the provider sets O2 flow too low, the valve cannot intervene. It functions regardless of master switch position, does not require N2O to be mounted, and is pneumatic (no electricity needed).",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["fail-safe limitations", "wrong gas", "pressure-only sensing"] }
   },
 
   // ── boa-node11-ads-037 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-037",
     type: "mcq",
-    prompt: "Why are ascending bellows preferred over descending bellows?",
+    scene: null,
+    prompt: "Why is the term 'fail-safe' considered misleading when applied to the oxygen pressure failure device?",
     setup: "",
     ans: [
-      { t: "Ascending bellows generate higher tidal volumes.", ok: false },
-      { t: "Ascending bellows fail to rise during a disconnect, providing a visual warning.", ok: true },
-      { t: "Ascending bellows do not require oxygen to function.", ok: false },
-      { t: "Descending bellows cannot be used with circle systems.", ok: false },
+      { t: "It implies the device prevents all hypoxic mixtures, but it only responds to O2 pressure loss", ok: true },
+      { t: "It implies the device can fail, when in reality it has redundant backup systems in all cases", ok: false },
+      { t: "It implies the device works automatically, but it actually requires manual activation by staff", ok: false },
+      { t: "It implies the device is present on all machines, but only modern machines actually include it", ok: false },
     ],
-    rationale: "Ascending bellows require exhaled gas return to rise, so a disconnect is more visually apparent.",
-    metadata: { topic: "Bellows", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "bellows", "disconnect safety"] }
+    rationale: "The name 'fail-safe' misleadingly suggests complete protection against hypoxic delivery. In reality, the device only responds to oxygen supply pressure loss. It cannot detect improper flow settings, wrong-gas pipeline connections, or actual delivered oxygen concentration. It does have limitations, works automatically, and is present on all modern machines.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["fail-safe misnomer", "safety misconceptions", "critical thinking"] }
   },
 
   // ── boa-node11-ads-038 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-038",
     type: "mcq",
-    prompt: "Which chemical byproduct is formed when Sevoflurane reacts with soda lime?",
+    scene: null,
+    prompt: "During a pipeline crossover incident where nitrogen is mistakenly connected to the oxygen wall outlet, how would the fail-safe valve respond?",
     setup: "",
     ans: [
-      { t: "Carbon monoxide", ok: false },
-      { t: "Compound A", ok: true },
-      { t: "Nitric oxide", ok: false },
-      { t: "Methane", ok: false },
+      { t: "It would remain open because adequate pressure is present at the oxygen inlet port", ok: true },
+      { t: "It would close immediately because it can detect the wrong gas composition flowing", ok: false },
+      { t: "It would trigger the oxygen supply failure alarm at 30 psi to alert the provider", ok: false },
+      { t: "It would shut off nitrous oxide flow because the wrong gas caused a pressure imbalance", ok: false },
     ],
-    rationale: "Sevoflurane can degrade in the presence of absorbent and form Compound A.",
-    metadata: { topic: "CO2 Absorbent", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "sevoflurane", "Compound A", "absorbent"] }
+    rationale: "The fail-safe valve senses only pressure, not gas identity. Nitrogen at adequate pressure (~50 psi) would satisfy the valve's pressure requirement, and it would remain open — allowing N2O to flow alongside nitrogen, potentially delivering a hypoxic mixture. This scenario represents a critical limitation of the fail-safe system. The valve would not detect wrong gas, would not trigger the alarm, and would not shut off N2O.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pipeline crossover", "fail-safe limitation", "wrong gas scenario"] }
   },
 
   // ── boa-node11-ads-039 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-039",
     type: "mcq",
-    prompt: "Under what condition is the risk of Compound A formation increased?",
+    scene: null,
+    prompt: "Which device in the intermediate pressure system is specifically designed to maintain a minimum oxygen-to-nitrous-oxide flow ratio?",
     setup: "",
     ans: [
-      { t: "High concentrations of sevoflurane for long durations at low fresh gas flow rates.", ok: true },
-      { t: "High oxygen concentration with no volatile agent.", ok: false },
-      { t: "Use of nitrous oxide with high fresh gas flow.", ok: false },
-      { t: "Use of desflurane at room temperature.", ok: false },
+      { t: "The oxygen ratio controller, also called the proportioning system on the machine", ok: true },
+      { t: "The fail-safe valve, which shuts off N2O when O2 supply pressure drops low enough", ok: false },
+      { t: "The second-stage regulator, which reduces gas pressure before entering flowmeters", ok: false },
+      { t: "The oxygen supply failure alarm, which sounds when O2 pressure falls below 30 psi", ok: false },
     ],
-    rationale: "Low fresh gas flow, longer duration, and higher sevoflurane concentrations increase contact with absorbent and raise Compound A risk.",
-    metadata: { topic: "CO2 Absorbent", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "sevoflurane", "Compound A", "low flow anesthesia"] }
+    rationale: "The oxygen ratio controller (proportioning system) mechanically links O2 and N2O flow controls to maintain a minimum O2 concentration (usually ~25%). Unlike the fail-safe valve (pressure-only), this device actually monitors flow ratios. The second-stage regulator only reduces pressure. The O2 alarm only alerts to pressure loss.",
+    metadata: { topic: "Intermediate Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["proportioning system", "O2 ratio controller", "hypoxia prevention"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // OXYGEN FLUSH VALVE (5 questions: 040-044)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-040 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-040",
     type: "mcq",
-    prompt: "What dangerous byproduct can be produced if volatile agents pass through desiccated carbon dioxide absorbent?",
+    scene: null,
+    prompt: "The oxygen flush valve delivers pure oxygen at what approximate flow rate, and which components does it bypass?",
     setup: "",
     ans: [
-      { t: "Carbon monoxide", ok: true },
-      { t: "Carbon dioxide", ok: false },
-      { t: "Ozone", ok: false },
-      { t: "Nitrous acid", ok: false },
+      { t: "35 to 75 L/min, bypassing both the flowmeters and the vaporizers completely", ok: true },
+      { t: "10 to 15 L/min, bypassing only the vaporizers but flowing through the flowmeters", ok: false },
+      { t: "35 to 75 L/min, flowing through both the flowmeters and the vaporizers normally", ok: false },
+      { t: "100 to 150 L/min, bypassing the flowmeters but flowing through all the vaporizers", ok: false },
     ],
-    rationale: "Dry absorbent can degrade volatile anesthetics and generate carbon monoxide.",
-    metadata: { topic: "CO2 Absorbent", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "desiccated absorbent", "carbon monoxide"] }
+    rationale: "The O2 flush valve delivers 35-75 L/min of pure oxygen directly to the common gas outlet, completely bypassing both vaporizers and flowmeters. This is critical because it means flush dilutes any anesthetic agent in the circuit. It does not pass through flowmeters or vaporizers. 100-150 L/min is too high; 10-15 L/min is too low.",
+    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 flush", "flow rate", "vaporizer bypass"] }
   },
 
   // ── boa-node11-ads-041 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-041",
     type: "mcq",
-    prompt: "How do active and passive scavenging systems differ?",
+    scene: null,
+    prompt: "Why is the oxygen flush valve button designed with a recessed configuration?",
     setup: "",
     ans: [
-      { t: "Active uses exhaled carbon dioxide absorption while passive uses washout.", ok: false },
-      { t: "Active uses a vacuum to pull waste gas, while passive relies on pressure to push gas out.", ok: true },
-      { t: "Active is only for pediatric circuits, passive is for adults.", ok: false },
-      { t: "Active is used only with wall oxygen, passive only with cylinders.", ok: false },
+      { t: "To prevent accidental activation from objects resting on or bumping the machine", ok: true },
+      { t: "To allow the provider to locate it by touch when wearing surgical gloves easily", ok: false },
+      { t: "To reduce the force needed to activate it during a cardiopulmonary emergency event", ok: false },
+      { t: "To enable one-handed operation while the other hand manages the airway of patient", ok: false },
     ],
-    rationale: "Active scavenging uses suction, while passive scavenging depends on circuit pressure and venting.",
-    metadata: { topic: "Scavenging", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "scavenging", "active scavenging", "passive scavenging"] }
+    rationale: "The recessed design prevents inadvertent activation, which could cause barotrauma from high-flow oxygen or dilute anesthetic concentration. While tactile identification is a secondary benefit, the primary design purpose is preventing accidental engagement. It does not reduce activation force and is not specifically designed for one-handed operation.",
+    metadata: { topic: "Oxygen Flush Valve", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 flush", "recessed button", "safety design"] }
   },
 
   // ── boa-node11-ads-042 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-042",
     type: "mcq",
-    prompt: "What is the first priority step if a pipeline crossover causing hypoxia is suspected during a case?",
+    scene: null,
+    prompt: "During mechanical ventilation, inadvertent activation of the oxygen flush valve poses the greatest risk of which complication?",
     setup: "",
     ans: [
-      { t: "Turn off the vaporizer and continue ventilation.", ok: false },
-      { t: "Disconnect the pipeline hose from the wall and open the backup oxygen cylinder.", ok: true },
-      { t: "Increase nitrous oxide flow to dilute the error.", ok: false },
-      { t: "Close the APL valve and use the oxygen flush valve continuously.", ok: false },
+      { t: "Pulmonary barotrauma from delivering 35-75 L/min into a closed breathing circuit system", ok: true },
+      { t: "Severe bronchospasm from the sudden delivery of cold, dry oxygen gas to the airway", ok: false },
+      { t: "Anesthetic overdose from the flush valve concentrating vaporizer output to the patient", ok: false },
+      { t: "Complete circuit disconnection from the high-pressure surge at the common gas outlet", ok: false },
     ],
-    rationale: "If a pipeline gas source is wrong, isolate it immediately and switch to a known oxygen source from the backup cylinder.",
-    metadata: { topic: "Troubleshooting", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "pipeline crossover", "hypoxia", "crisis management"] }
+    rationale: "During mechanical ventilation, the patient circuit is essentially closed. Flushing 35-75 L/min into a closed circuit can rapidly increase airway pressure, causing pulmonary barotrauma. The flush bypasses (not concentrates) vaporizers, so anesthetic overdose is impossible. Bronchospasm and circuit disconnection are not primary risks of flush activation.",
+    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 flush", "barotrauma", "ventilation hazard"] }
   },
 
   // ── boa-node11-ads-043 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-043",
     type: "mcq",
-    prompt: "Which monitor is considered the true last line of defense against delivery of a hypoxic gas mixture?",
+    scene: null,
+    prompt: "A provider uses the oxygen flush valve during an inhalation anesthetic case. What effect does this have on the anesthetic concentration being delivered?",
     setup: "",
     ans: [
-      { t: "Fail-safe valve", ok: false },
-      { t: "Oxygen pressure gauge", ok: false },
-      { t: "Oxygen analyzer measuring FiO2 in the circuit", ok: true },
-      { t: "Flowmeter bobbin position", ok: false },
+      { t: "It significantly dilutes the anesthetic because flush oxygen bypasses the vaporizer", ok: true },
+      { t: "It has no effect on anesthetic concentration since the vaporizer remains active", ok: false },
+      { t: "It increases anesthetic concentration by forcing more carrier gas through the vaporizer", ok: false },
+      { t: "It converts liquid anesthetic to gas by the high-velocity oxygen flow through chamber", ok: false },
     ],
-    rationale: "Only an oxygen analyzer measures the actual inspired oxygen concentration being delivered to the patient.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen analyzer", "hypoxic mixture safety"] }
+    rationale: "Since the flush valve delivers pure O2 directly to the common gas outlet, bypassing the vaporizer, it dilutes whatever anesthetic concentration was present in the breathing circuit. This can cause unintended lightening of anesthesia. The flush does not pass through the vaporizer, so it cannot increase agent concentration or vaporize liquid agent.",
+    metadata: { topic: "Oxygen Flush Valve", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 flush", "anesthetic dilution", "vaporizer bypass"] }
   },
 
   // ── boa-node11-ads-044 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-044",
     type: "mcq",
-    prompt: "In the MSMAID machine check mnemonic, what does the 'S' stand for?",
+    scene: null,
+    prompt: "Which statement about oxygen flush valve operation is correct regarding the master switch position?",
     setup: "",
     ans: [
-      { t: "Scavenging", ok: false },
-      { t: "Switch", ok: false },
-      { t: "Suction", ok: true },
-      { t: "Soda lime", ok: false },
+      { t: "The flush valve works regardless of whether the master switch is ON or in STANDBY", ok: true },
+      { t: "The flush valve only works when the master switch is turned fully to the ON position", ok: false },
+      { t: "The flush valve only works when the master switch is placed in the STANDBY position", ok: false },
+      { t: "The flush valve requires both the master switch ON and a connected pipeline to work", ok: false },
     ],
-    rationale: "The 'S' stands for suction, a critical part of the pre-case machine check.",
-    metadata: { topic: "Machine Check", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "machine check", "MSMAID", "suction"] }
+    rationale: "The O2 flush valve connects directly to the oxygen supply (pipeline or cylinder) and operates independently of the master switch. This ensures emergency O2 is always available. It does not require the switch to be ON, does not require STANDBY specifically, and does not require both conditions to be met simultaneously.",
+    metadata: { topic: "Oxygen Flush Valve", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 flush", "master switch independence", "emergency oxygen"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FLOW CONTROL VALVES & FLOWMETERS (6 questions: 045-050)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-045 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-045",
     type: "mcq",
-    prompt: "How can a provider troubleshoot carbon dioxide absorbent exhaustion mid-case if the canister cannot be changed immediately?",
+    scene: null,
+    prompt: "The oxygen flow control knob has a unique physical design compared to other gas knobs. Which feature distinguishes it?",
     setup: "",
     ans: [
-      { t: "Lower fresh gas flow to preserve absorbent function.", ok: false },
-      { t: "Increase fresh gas flow to wash out carbon dioxide and convert the system into a nonrebreathing setup.", ok: true },
-      { t: "Turn off oxygen and rely on room air.", ok: false },
-      { t: "Close the APL valve and manually ventilate harder.", ok: false },
+      { t: "It is fluted and projects further than other knobs for tactile identification", ok: true },
+      { t: "It is painted green and has a smaller diameter than all the other gas knobs", ok: false },
+      { t: "It rotates clockwise to increase flow, opposite to all the other gas control knobs", ok: false },
+      { t: "It requires two hands to operate as an additional safety measure against errors", ok: false },
     ],
-    rationale: "High fresh gas flow can wash CO2 out of the circuit and temporarily reduce rebreathing when absorbent is exhausted.",
-    metadata: { topic: "Troubleshooting", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "carbon dioxide absorbent", "troubleshooting", "fresh gas flow"] }
+    rationale: "The O2 flow control knob is physically distinct — it is fluted (ridged) and larger/more prominent than other gas knobs, allowing tactile identification even without looking. All gas knobs turn counterclockwise (CCW) to increase flow. The O2 knob is not distinguished by color alone, rotation direction, or two-handed operation requirements.",
+    metadata: { topic: "Flow Control Valves", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["O2 knob", "fluted design", "tactile identification"] }
   },
 
   // ── boa-node11-ads-046 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-046",
     type: "mcq",
-    prompt: "At approximately what maximum pressure should a reservoir bag plateau to help protect the patient?",
+    scene: null,
+    prompt: "In which direction must a flow control valve be turned to increase gas flow, and in which direction to decrease it?",
     setup: "",
     ans: [
-      { t: "Less than 20 cmH2O", ok: false },
-      { t: "Less than 40 cmH2O", ok: false },
-      { t: "Less than 60 cmH2O", ok: true },
-      { t: "Less than 100 cmH2O", ok: false },
+      { t: "Counterclockwise to increase flow, and clockwise to decrease flow through valve", ok: true },
+      { t: "Clockwise to increase flow, and counterclockwise to decrease flow through valve", ok: false },
+      { t: "Counterclockwise to increase flow, and also counterclockwise to decrease the flow", ok: false },
+      { t: "The direction varies depending on which gas is being controlled on the machine", ok: false },
     ],
-    rationale: "The reservoir bag should plateau below dangerously high pressures, commonly taught as under 60 cmH2O.",
-    metadata: { topic: "Reservoir Bag", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "reservoir bag", "airway pressure"] }
+    rationale: "All flow control valves on the anesthesia machine follow the standard convention: counterclockwise (CCW) opens/increases flow, clockwise (CW) closes/decreases flow. This is consistent across all gases and is the same 'lefty-loosey, righty-tighty' convention used universally. The direction does not vary by gas type.",
+    metadata: { topic: "Flow Control Valves", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["flow control", "CCW increase", "CW decrease"] }
   },
 
   // ── boa-node11-ads-047 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-047",
     type: "mcq",
-    prompt: "What is the OSHA recommendation for maximum occupational exposure to nitrous oxide in the operating room?",
+    scene: null,
+    prompt: "On a standard anesthesia machine with multiple flowmeter tubes, what is the correct left-to-right sequence, and why is this arrangement important?",
     setup: "",
     ans: [
-      { t: "Less than 2 ppm", ok: false },
-      { t: "Less than 10 ppm", ok: false },
-      { t: "Less than 25 ppm", ok: true },
-      { t: "Less than 100 ppm", ok: false },
+      { t: "N2O, then air, then O2 — placing O2 downstream prevents hypoxic dilution from leaks", ok: true },
+      { t: "O2, then air, then N2O — placing O2 upstream maximizes total fresh gas flow delivery", ok: false },
+      { t: "Air, then O2, then N2O — placing air first ensures adequate nitrogen delivery always", ok: false },
+      { t: "The sequence is arbitrary and varies by manufacturer without any safety significance", ok: false },
     ],
-    rationale: "The cited recommendation is to keep nitrous oxide exposure below 25 ppm.",
-    metadata: { topic: "Scavenging", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "nitrous oxide", "OSHA", "occupational safety"] }
+    rationale: "Oxygen is positioned downstream (rightmost) so that if a leak occurs in an upstream flowmeter tube, the leaked gas is a less critical gas (N2O or air), and O2 enters the common manifold last, closest to the outlet. This prevents unintended dilution of O2 by a leaking upstream tube. The sequence is not arbitrary — it is a deliberate safety design.",
+    metadata: { topic: "Flow Control Valves", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["flowmeter sequence", "O2 downstream", "safety design"] }
   },
 
   // ── boa-node11-ads-048 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-048",
     type: "mcq",
-    prompt: "In the intermediate pressure system, at about what pressure is the oxygen failure alarm triggered?",
+    scene: null,
+    prompt: "When reading a Thorpe tube flowmeter, where should the provider read the flow rate for a ball-type float versus a tapered-type float?",
     setup: "",
     ans: [
-      { t: "5 psi", ok: false },
-      { t: "15 psi", ok: false },
-      { t: "About 30 psi", ok: true },
-      { t: "About 50 psi", ok: false },
+      { t: "Read at the center of the ball float and at the top of the tapered float indicator", ok: true },
+      { t: "Read at the top of the ball float and at the center of the tapered float indicator", ok: false },
+      { t: "Read at the bottom of both float types for consistent measurement across all gases", ok: false },
+      { t: "Read at the top of both float types since both floats displace gas in the same way", ok: false },
     ],
-    rationale: "The oxygen failure alarm is typically triggered when oxygen supply pressure falls below about 30 psi.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen failure alarm", "intermediate pressure system"] }
+    rationale: "For ball floats, the reading is taken at the center (equator) of the ball. For tapered (bobbin/skirted) floats, the reading is taken at the top edge of the float. Reading at the wrong position introduces significant measurement error. The reading positions differ because of the different geometries of each float type.",
+    metadata: { topic: "Flow Control Valves", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["flowmeter reading", "ball float", "tapered float"] }
   },
 
   // ── boa-node11-ads-049 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-049",
     type: "mcq",
-    prompt: "Which breathing system is commonly used for pediatric transport because of its minimal dead space?",
+    scene: null,
+    prompt: "The auxiliary (emergency) oxygen flowmeter on the anesthesia machine has which unique operational characteristic?",
     setup: "",
     ans: [
-      { t: "Circle system", ok: false },
-      { t: "Mapleson F or Jackson-Rees", ok: true },
-      { t: "Mapleson D Bain circuit", ok: false },
-      { t: "Closed ether mask system", ok: false },
+      { t: "It functions even when the master switch is in the STANDBY or OFF position", ok: true },
+      { t: "It delivers oxygen at higher flow rates than the main flowmeter can achieve", ok: false },
+      { t: "It connects directly to the vaporizer to maintain anesthetic during emergencies", ok: false },
+      { t: "It bypasses the pressure regulators and delivers gas at full cylinder pressure", ok: false },
     ],
-    rationale: "The Mapleson F, or Jackson-Rees system, is valued in pediatric transport because it has low resistance and minimal dead space.",
-    metadata: { topic: "Mapleson Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "Mapleson F", "Jackson-Rees", "pediatrics"] }
+    rationale: "The auxiliary O2 flowmeter connects directly to the O2 supply, bypassing the master switch, ensuring emergency O2 delivery even when the machine is in STANDBY. It does not deliver higher flows than the main flowmeter, does not connect to vaporizers, and does not bypass pressure regulators (gas is still regulated).",
+    metadata: { topic: "Flow Control Valves", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["auxiliary flowmeter", "emergency oxygen", "master switch bypass"] }
   },
 
   // ── boa-node11-ads-050 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-050",
-    type: "mcq",
-    prompt: "The component that receives gases from the flowmeters and combines them before they enter the vaporizer is the:",
-    setup: "",
-    ans: [
-      { t: "Common gas outlet", ok: false },
-      { t: "Manifold", ok: true },
-      { t: "Hanger yoke", ok: false },
-      { t: "Scavenging interface", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "In which direction do you turn a flow control valve to increase gas flow: clockwise or counterclockwise?",
+    acceptedAnswers: [
+      "counterclockwise",
+      "Counterclockwise",
+      "CCW",
+      "counter-clockwise",
+      "Counter-clockwise",
     ],
-    rationale: "The manifold is the mixing chamber that combines gases from the flowmeters.",
-    metadata: { topic: "Low Pressure System", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "manifold", "flowmeters"] }
+    rationale: "All flow control valves on the anesthesia machine open (increase flow) when turned counterclockwise (CCW). This follows the universal convention of 'lefty-loosey' for opening valves.",
+    metadata: { topic: "Flow Control Valves", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["flow control", "valve direction", "recall"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // LOW PRESSURE SYSTEM (4 questions: 051-054)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-051 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-051",
     type: "mcq",
-    prompt: "A flow-measuring device with a glass tube and a bobbin or float is called a:",
+    scene: null,
+    prompt: "The low pressure system of the anesthesia machine begins at which point and ends where?",
     setup: "",
     ans: [
-      { t: "Vaporizer", ok: false },
-      { t: "Flowmeter or Thorpe tube", ok: true },
-      { t: "Pressure regulator", ok: false },
-      { t: "CO2 absorber", ok: false },
+      { t: "It begins downstream of the flow control valves and ends at the common gas outlet", ok: true },
+      { t: "It begins at the pipeline inlet connections and ends at the second-stage regulators", ok: false },
+      { t: "It begins at the E-cylinder hanger yoke and ends at the first-stage pressure regulator", ok: false },
+      { t: "It begins at the breathing circuit and ends at the patient endotracheal tube connector", ok: false },
     ],
-    rationale: "A Thorpe tube is the variable orifice flowmeter used in anesthesia machines.",
-    metadata: { topic: "Flowmeters", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "flowmeter", "Thorpe tube"] }
+    rationale: "The low pressure system encompasses everything downstream of the flow control valves — including vaporizers, the common manifold, and the common gas outlet (also called the fresh gas supply tube connection). Pipeline inlets and regulators are in the intermediate system. The hanger yoke is in the high pressure system. The breathing circuit is external to the machine's pneumatic systems.",
+    metadata: { topic: "Low Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["low pressure system", "boundaries", "common gas outlet"] }
   },
 
   // ── boa-node11-ads-052 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-052",
-    type: "mcq",
-    prompt: "To increase the flow of a gas, the flow control valve should be rotated:",
-    setup: "",
-    ans: [
-      { t: "Clockwise", ok: false },
-      { t: "Counterclockwise", ok: true },
-      { t: "Inward only", ok: false },
-      { t: "Upward only", ok: false },
+    type: "multi",
+    scene: null,
+    prompt: "Which of the following components are located within the low pressure system? (Select THREE)",
+    choices: [
+      "Concentration-calibrated vaporizers for volatile agents",
+      "Common gas outlet connecting to the breathing circuit",
+      "Fresh gas supply tube delivering mixed gas to circuit",
+      "First-stage pressure regulators for cylinder gas supply",
+      "Pipeline inlet connections with DISS safety fittings",
     ],
-    rationale: "Standard anesthesia flow control valves are opened by rotating them counterclockwise.",
-    metadata: { topic: "Flowmeters", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "flow control valve", "operation"] }
+    correctAnswers: [
+      "Concentration-calibrated vaporizers for volatile agents",
+      "Common gas outlet connecting to the breathing circuit",
+      "Fresh gas supply tube delivering mixed gas to circuit",
+    ],
+    selectCount: 3,
+    rationale: "Vaporizers, the common gas outlet, and the fresh gas supply tube are all downstream of the flow control valves in the low pressure system. First-stage regulators are in the high pressure system. Pipeline inlets with DISS fittings are in the intermediate pressure system.",
+    metadata: { topic: "Low Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["low pressure components", "vaporizers", "common gas outlet"] }
   },
 
   // ── boa-node11-ads-053 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-053",
     type: "mcq",
-    prompt: "Which safety system is specifically designed for E-cylinders to prevent gas cross-connection?",
+    scene: null,
+    prompt: "Why is the low pressure system considered the most vulnerable to leaks during the machine checkout process?",
     setup: "",
     ans: [
-      { t: "DISS", ok: false },
-      { t: "PISS", ok: true },
-      { t: "Oxygen analyzer", ok: false },
-      { t: "Vaporizer interlock", ok: false },
+      { t: "It operates at near-atmospheric pressure where small leaks can entrain room air undetected", ok: true },
+      { t: "It contains the highest pressures on the machine making blowout failures most common", ok: false },
+      { t: "It has the most complex electronic components that are prone to seal degradation rapidly", ok: false },
+      { t: "It is the oldest section of the machine and receives the least maintenance attention now", ok: false },
     ],
-    rationale: "E-cylinders use the Pin Index Safety System.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "PISS", "E-cylinder safety"] }
+    rationale: "The low pressure system operates near atmospheric pressure. At these low pressures, small leaks may not produce audible hissing and can entrain room air, diluting anesthetic and oxygen delivery. High pressures are in the high pressure system. The low pressure system is primarily pneumatic, not electronic. Age and maintenance frequency are not defining characteristics.",
+    metadata: { topic: "Low Pressure System", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["low pressure leaks", "checkout", "vulnerability"] }
   },
 
   // ── boa-node11-ads-054 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-054",
     type: "mcq",
-    prompt: "Which statement correctly describes flow within a flowmeter tube?",
+    scene: null,
+    prompt: "What is the function of the common gas outlet on the anesthesia machine?",
     setup: "",
     ans: [
-      { t: "Turbulent flow occurs at the bottom where the tube is narrow, and laminar flow occurs at the top where it is wider.", ok: false },
-      { t: "Laminar flow occurs at the bottom where the tube is narrow, and turbulent flow occurs at the top where it is wider.", ok: true },
-      { t: "Flow is entirely turbulent throughout the tube.", ok: false },
-      { t: "Flow is entirely laminar throughout the tube.", ok: false },
+      { t: "It is the final exit point where the mixed fresh gas leaves the machine for the circuit", ok: true },
+      { t: "It is the point where pipeline gases first enter the machine from the hospital wall unit", ok: false },
+      { t: "It is the connection where scavenging tubing attaches to remove waste anesthetic gases", ok: false },
+      { t: "It is the port where the oxygen analyzer sensor is mounted for continuous FiO2 readings", ok: false },
     ],
-    rationale: "At lower flow in the narrow lower portion, flow is more laminar. At higher flow in the wider upper portion, turbulence becomes more important.",
-    metadata: { topic: "Flowmeters", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "flowmeter", "laminar flow", "turbulent flow"] }
+    rationale: "The common gas outlet is the final output of the machine's internal gas delivery pathway. Fresh gas (O2, air, N2O, and vaporized anesthetic) exits here and enters the breathing circuit via the fresh gas supply tube. Pipeline inlets, scavenging connections, and O2 analyzer ports are all separate connection points.",
+    metadata: { topic: "Low Pressure System", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["common gas outlet", "fresh gas delivery", "machine output"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // VAPORIZERS (10 questions: 055-064)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-055 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-055",
     type: "mcq",
-    prompt: "What can occur if liquid anesthetic is accidentally tipped into the bypass chamber of a vaporizer?",
+    scene: null,
+    prompt: "Modern variable-bypass vaporizers split incoming fresh gas flow so that a small percentage enters the vaporizing chamber. Approximately what fraction of total flow is directed through the chamber at typical clinical settings?",
     setup: "",
     ans: [
-      { t: "The vaporizer stops delivering agent completely.", ok: false },
-      { t: "The vaporizer may deliver a dangerously high concentration of anesthetic.", ok: true },
-      { t: "The oxygen analyzer will automatically correct the error.", ok: false },
-      { t: "Only nitrous oxide flow is affected.", ok: false },
+      { t: "Approximately 20 percent of total flow passes through the vaporizing chamber", ok: true },
+      { t: "Approximately 80 percent of total flow passes through the vaporizing chamber", ok: false },
+      { t: "Approximately 50 percent of total flow passes through the vaporizing chamber", ok: false },
+      { t: "Approximately 5 percent of total flow passes through the vaporizing chamber", ok: false },
     ],
-    rationale: "Liquid anesthetic in the bypass chamber can cause the vaporizer to deliver an excessively high anesthetic concentration.",
-    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "vaporizer", "safety hazard"] }
+    rationale: "In a variable-bypass vaporizer, the concentration dial adjusts a splitting valve that directs roughly 20% of fresh gas through the vaporizing chamber (where it becomes saturated with agent) and ~80% through the bypass. The two streams rejoin to produce the desired output concentration. 80% through the chamber would produce dangerously high concentrations. 50% and 5% are incorrect ratios.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["variable-bypass", "splitting ratio", "vaporizing chamber"] }
   },
 
   // ── boa-node11-ads-056 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-056",
-    type: "mcq",
-    prompt: "What is the purpose of a check valve in the pipeline inlet?",
-    setup: "",
-    ans: [
-      { t: "It increases the pressure of wall gases.", ok: false },
-      { t: "It prevents reverse flow of gas from the machine or cylinders back into the hospital pipeline.", ok: true },
-      { t: "It measures oxygen concentration.", ok: false },
-      { t: "It removes carbon monoxide from the gas supply.", ok: false },
+    type: "multi",
+    scene: null,
+    prompt: "Which of the following are characteristics of modern variable-bypass vaporizers? (Select FOUR)",
+    choices: [
+      "Agent-specific calibration for a single volatile anesthetic",
+      "Flow-over design where gas passes over liquid agent surface",
+      "Temperature compensation to maintain consistent output",
+      "Heated pressurized chamber requiring electrical power supply",
+      "Keyed filling system to prevent incorrect agent filling",
+      "Universal compatibility with any volatile anesthetic agent",
     ],
-    rationale: "A pipeline inlet check valve prevents reverse gas flow back into the hospital pipeline system.",
-    metadata: { topic: "Intermediate Pressure System", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "pipeline inlet", "check valve"] }
+    correctAnswers: [
+      "Agent-specific calibration for a single volatile anesthetic",
+      "Flow-over design where gas passes over liquid agent surface",
+      "Temperature compensation to maintain consistent output",
+      "Keyed filling system to prevent incorrect agent filling",
+    ],
+    selectCount: 4,
+    rationale: "Modern variable-bypass vaporizers are agent-specific, flow-over, temperature-compensated, and have keyed filling systems. The heated pressurized chamber describes the desflurane Tec 6 vaporizer, which is NOT a variable-bypass design. Universal compatibility would be dangerous given different vapor pressures and potencies of agents.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["vaporizer characteristics", "agent-specific", "temperature compensation"] }
   },
 
   // ── boa-node11-ads-057 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-057",
     type: "mcq",
-    prompt: "How does an HMEF at the Y-piece help the patient?",
+    scene: null,
+    prompt: "Why does desflurane require a specially heated, pressurized vaporizer (Tec 6) rather than a standard variable-bypass design?",
     setup: "",
     ans: [
-      { t: "It adds volatile anesthetic to inspired gas.", ok: false },
-      { t: "It acts as a heat and moisture exchanger filter, conserving exhaled heat and humidity.", ok: true },
-      { t: "It measures end-tidal carbon dioxide directly.", ok: false },
-      { t: "It lowers airway resistance by eliminating all turbulence.", ok: false },
+      { t: "Desflurane has a boiling point near room temperature, making variable-bypass output unpredictable", ok: true },
+      { t: "Desflurane has an extremely high boiling point requiring active heating to vaporize any agent", ok: false },
+      { t: "Desflurane is chemically unstable at room temperature and must be heated to prevent breakdown", ok: false },
+      { t: "Desflurane has a very low MAC value requiring precise metering impossible in bypass designs", ok: false },
     ],
-    rationale: "An HMEF conserves heat and moisture and also functions as a filter.",
-    metadata: { topic: "Breathing Circuit Components", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "HMEF", "Y-piece", "heat and moisture exchange"] }
+    rationale: "Desflurane's boiling point is 22.8°C — near room temperature. In a standard variable-bypass vaporizer, small temperature changes could cause unpredictable boiling and wildly inconsistent output. The Tec 6 heats desflurane to 39°C under 2 atm pressure, creating a controlled vapor that is then precisely metered. Desflurane does not have a high boiling point, is not chemically unstable, and actually has one of the highest MAC values (6.0%).",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["desflurane", "Tec 6", "heated vaporizer", "boiling point"] }
   },
 
   // ── boa-node11-ads-058 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-058",
     type: "mcq",
-    prompt: "In a circle system, why must the inspiratory and expiratory valves never open simultaneously?",
+    scene: null,
+    prompt: "What is the purpose of wicks and baffles inside the vaporizing chamber of a variable-bypass vaporizer?",
     setup: "",
     ans: [
-      { t: "It would reduce oxygen pressure in the cylinders.", ok: false },
-      { t: "It would allow rebreathing of carbon dioxide and ineffective ventilation.", ok: true },
-      { t: "It would overheat the vaporizer.", ok: false },
-      { t: "It would shut down the scavenging system.", ok: false },
+      { t: "They increase the surface area for gas-liquid contact, improving vaporization efficiency", ok: true },
+      { t: "They filter particulate contamination from the liquid anesthetic before it vaporizes", ok: false },
+      { t: "They regulate the temperature inside the chamber by absorbing excess thermal energy", ok: false },
+      { t: "They prevent liquid anesthetic from splashing out through the gas outlet during tipping", ok: false },
     ],
-    rationale: "The circle system depends on one-way flow. Simultaneous opening would disrupt directional flow and promote CO2 rebreathing.",
-    metadata: { topic: "Circle System", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "circle system", "unidirectional valves", "rebreathing"] }
+    rationale: "Wicks draw liquid agent upward by capillary action, and baffles create tortuous gas pathways — both dramatically increase the surface area of gas-liquid contact, ensuring the gas passing through the chamber becomes fully saturated with agent vapor. They do not filter particulates, do not regulate temperature (the bimetallic strip does), and while tipping is a concern, wicks and baffles are not the primary anti-tipping mechanism.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["wicks", "baffles", "vaporization efficiency", "surface area"] }
   },
 
   // ── boa-node11-ads-059 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-059",
     type: "mcq",
-    prompt: "At what FiO2 should the oxygen analyzer alarm as a fail-safe threshold?",
+    scene: null,
+    prompt: "What is the purpose of the vaporizer interlock system on modern anesthesia machines?",
     setup: "",
     ans: [
-      { t: "Below 10%", ok: false },
-      { t: "Below 18%", ok: true },
-      { t: "Below 25%", ok: false },
-      { t: "Below 30%", ok: false },
+      { t: "It prevents more than one vaporizer from being turned on simultaneously on machine", ok: true },
+      { t: "It locks the vaporizer to the machine frame to prevent theft or unauthorized removal", ok: false },
+      { t: "It seals the filling port during operation to prevent agent spills in the operating room", ok: false },
+      { t: "It connects the vaporizer output to the oxygen analyzer for real-time concentration data", ok: false },
     ],
-    rationale: "The source set notes an alarm threshold for FiO2 below 18 percent.",
-    metadata: { topic: "Safety Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen analyzer", "FiO2 alarm"] }
+    rationale: "The interlock system is a mechanical safety device that ensures only one vaporizer can be active at a time, preventing inadvertent delivery of multiple volatile agents simultaneously. It does not secure against theft, does not seal filling ports, and does not interface with the oxygen analyzer.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["interlock system", "vaporizer safety", "multiple agent prevention"] }
   },
 
   // ── boa-node11-ads-060 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-060",
     type: "mcq",
-    prompt: "Why is it critical to check the battery backup of an anesthesia machine?",
+    scene: null,
+    prompt: "What is the function of the keyed filling system on agent-specific vaporizers?",
     setup: "",
     ans: [
-      { t: "To preserve vaporizer calibration.", ok: false },
-      { t: "To ensure the ventilator and monitors continue to function during power failure.", ok: true },
-      { t: "To maintain suction pressure.", ok: false },
-      { t: "To prevent oxygen cylinder depletion.", ok: false },
+      { t: "It uses agent-specific bottle adapters to prevent filling a vaporizer with the wrong agent", ok: true },
+      { t: "It uses a digital key code that must be entered before the vaporizer will accept liquid agent", ok: false },
+      { t: "It locks the concentration dial to prevent accidental changes during filling of the vaporizer", ok: false },
+      { t: "It uses color-coded tubing that matches the flowmeter to ensure correct gas-agent pairing", ok: false },
     ],
-    rationale: "Battery backup is essential to maintain powered functions such as ventilation and monitoring during electrical failure.",
-    metadata: { topic: "Electrical Safety", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "battery backup", "power failure"] }
+    rationale: "Keyed filling systems use physically distinct bottle adapters that only fit the corresponding vaporizer — for example, a sevoflurane bottle adapter cannot physically connect to an isoflurane vaporizer. There are no digital codes involved. The system prevents wrong-agent filling, not dial locking. Color-coded tubing is not part of the filling system.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["keyed filling", "agent-specific", "wrong agent prevention"] }
   },
 
   // ── boa-node11-ads-061 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-061",
     type: "mcq",
-    prompt: "Which gas flow control knob has a unique fluted profile so it can be identified by touch?",
+    scene: null,
+    prompt: "How does the temperature compensation mechanism in a variable-bypass vaporizer maintain consistent anesthetic output?",
     setup: "",
     ans: [
-      { t: "Nitrous oxide", ok: false },
-      { t: "Air", ok: false },
-      { t: "Carbon dioxide", ok: false },
-      { t: "Oxygen", ok: true },
+      { t: "A bimetallic strip adjusts the splitting valve to increase chamber flow as temperature drops", ok: true },
+      { t: "An electric heating element maintains the vaporizing chamber at a constant preset temperature", ok: false },
+      { t: "A thermoelectric cooler prevents the agent from overheating during high fresh gas flow rates", ok: false },
+      { t: "A pressure relief valve opens when temperature-induced vapor pressure exceeds safe limits", ok: false },
     ],
-    rationale: "The oxygen knob is intentionally tactilely distinct for safety.",
-    metadata: { topic: "Machine Safety", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen knob", "machine safety"] }
+    rationale: "Variable-bypass vaporizers use a passive bimetallic strip that expands or contracts with temperature changes. When the chamber cools (from the endothermic vaporization process), the strip adjusts to direct more gas through the chamber, maintaining output. Electric heating is used only in the Tec 6 (desflurane). Thermoelectric coolers and pressure relief valves are not part of temperature compensation.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["temperature compensation", "bimetallic strip", "output consistency"] }
   },
 
   // ── boa-node11-ads-062 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-062",
-    type: "mcq",
-    prompt: "If the oxygen flush is activated and the breathing circuit pressure gauge does not move, where is the most likely problem?",
-    setup: "",
-    ans: [
-      { t: "A disconnected scavenging hose.", ok: false },
-      { t: "A major disconnect between the common gas outlet and the patient.", ok: true },
-      { t: "A depleted vaporizer.", ok: false },
-      { t: "An exhausted CO2 absorbent canister.", ok: false },
+    type: "short",
+    scene: null,
+    prompt: "What type of vaporizer design is used for desflurane because of its near-room-temperature boiling point?",
+    acceptedAnswers: [
+      "Tec 6",
+      "tec 6",
+      "Tec-6",
+      "heated pressurized vaporizer",
+      "heated vaporizer",
+      "Aladin cassette",
     ],
-    rationale: "If oxygen flush flow does not build pressure, a large disconnect between the machine output and patient is likely present.",
-    metadata: { topic: "Troubleshooting", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "oxygen flush valve", "disconnect troubleshooting"] }
+    rationale: "The Tec 6 (or Aladin cassette system in GE machines) is a heated, pressurized vaporizer specifically designed for desflurane. It heats the agent to 39°C and pressurizes it to 2 atm, producing a controlled vapor that can be precisely metered. This design is necessary because desflurane's boiling point (22.8°C) is too close to room temperature for reliable variable-bypass vaporization.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Tec 6", "desflurane", "heated vaporizer", "recall"] }
   },
 
   // ── boa-node11-ads-063 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-063",
     type: "mcq",
-    prompt: "What is the efficiency requirement for filters used in anesthesia breathing circuits?",
+    scene: null,
+    prompt: "If a provider accidentally fills a sevoflurane vaporizer with isoflurane, what is the most likely clinical consequence?",
     setup: "",
     ans: [
-      { t: "Greater than 80% for particles over 1 micron.", ok: false },
-      { t: "Greater than 90% for particles over 0.5 microns.", ok: false },
-      { t: "Greater than 95% for particles at least 0.3 microns.", ok: true },
-      { t: "Greater than 99.9% for all gases and vapors.", ok: false },
+      { t: "The delivered concentration will differ from the dial setting because of different vapor pressures", ok: true },
+      { t: "The vaporizer will immediately malfunction and stop producing any vapor output at all", ok: false },
+      { t: "The machine will detect the error and automatically shut down the vaporizer for safety", ok: false },
+      { t: "There will be no clinical consequence because all volatile agents have identical vapor pressures", ok: false },
     ],
-    rationale: "The cited requirement is greater than 95 percent efficiency for particles 0.3 microns or larger.",
-    metadata: { topic: "Breathing Circuit Components", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "filters", "breathing circuit", "infection control"] }
+    rationale: "Each volatile agent has a unique vapor pressure. A vaporizer calibrated for sevoflurane's vapor pressure (160 mmHg at 20°C) will produce inaccurate output when filled with isoflurane (240 mmHg at 20°C), potentially delivering a higher-than-intended concentration. The vaporizer will still function mechanically. Machines cannot detect wrong-agent filling. Volatile agents absolutely do not share identical vapor pressures.",
+    metadata: { topic: "Vaporizers", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["wrong agent filling", "vapor pressure mismatch", "clinical error"] }
   },
 
   // ── boa-node11-ads-064 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-064",
     type: "mcq",
-    prompt: "How does a second stage reducing device differ from the first stage regulator?",
+    scene: null,
+    prompt: "In a variable-bypass vaporizer, what happens to the gas stream that does NOT enter the vaporizing chamber?",
     setup: "",
     ans: [
-      { t: "It increases pressure back to cylinder levels.", ok: false },
-      { t: "It further reduces pressure to a more precise level to stabilize flowmeter output despite inlet fluctuations.", ok: true },
-      { t: "It measures oxygen concentration in the circuit.", ok: false },
-      { t: "It replaces the fail-safe valve completely.", ok: false },
+      { t: "It flows through the bypass channel and reunites with vaporized gas at the outlet", ok: true },
+      { t: "It is vented to the scavenging system as excess gas that is not needed anymore", ok: false },
+      { t: "It recirculates through the flowmeter tubes to maintain accurate flow measurements", ok: false },
+      { t: "It is stored in the reservoir bag until the vaporizing chamber needs additional flow", ok: false },
     ],
-    rationale: "A second stage reducing device provides more stable and precise pressure for consistent flowmeter performance.",
-    metadata: { topic: "Intermediate Pressure System", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "pressure regulation", "flowmeter accuracy"] }
+    rationale: "In a variable-bypass design, the concentration dial splits fresh gas into two streams: ~20% enters the vaporizing chamber (becoming saturated with agent), and ~80% bypasses the chamber entirely. The two streams rejoin at the vaporizer outlet, producing the desired concentration. Bypass gas is not vented, recirculated, or stored.",
+    metadata: { topic: "Vaporizers", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["bypass channel", "gas splitting", "vaporizer design"] }
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // BREATHING SYSTEMS CLASSIFICATION (8 questions: 065-072)
+  // ═══════════════════════════════════════════════════════════════════════════
 
   // ── boa-node11-ads-065 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-065",
     type: "mcq",
-    prompt: "Which Mapleson system is generally considered most efficient for spontaneous ventilation?",
+    scene: null,
+    prompt: "Which breathing system classification is most commonly used for adult anesthesia in modern operating rooms?",
     setup: "",
     ans: [
-      { t: "Mapleson A", ok: true },
-      { t: "Mapleson B", ok: false },
-      { t: "Mapleson D", ok: false },
-      { t: "Mapleson F", ok: false },
+      { t: "Semi-closed circle system with CO2 absorption and partial rebreathing of gases", ok: true },
+      { t: "Closed circle system with complete rebreathing and no excess gas venting at all", ok: false },
+      { t: "Open system with no reservoir bag and no rebreathing of exhaled gases by patient", ok: false },
+      { t: "Semi-open Mapleson D system with high fresh gas flows preventing all rebreathing", ok: false },
     ],
-    rationale: "Mapleson A is classically the most efficient Mapleson system for spontaneous ventilation.",
-    metadata: { topic: "Mapleson Systems", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "Mapleson", "spontaneous ventilation"] }
+    rationale: "The semi-closed circle system is the standard for adult anesthesia. It allows partial rebreathing with CO2 absorption, conserving anesthetic agent and moisture. A truly closed system (no gas venting) is uncommon and technically demanding because FGF must exactly match uptake. Open systems are historical. Mapleson circuits are used for specific situations, not as the standard adult setup.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["semi-closed circle", "most common", "adult anesthesia"] }
   },
 
   // ── boa-node11-ads-066 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-066",
     type: "mcq",
-    prompt: "What is the primary risk of using Baralyme with Sevoflurane compared with soda lime?",
+    scene: null,
+    prompt: "Why is a truly closed circle breathing system considered uncommon and potentially dangerous in routine clinical practice?",
     setup: "",
     ans: [
-      { t: "More carbon dioxide rebreathing.", ok: false },
-      { t: "Higher risk of spontaneous combustion and operating room fires.", ok: true },
-      { t: "Lower oxygen concentration.", ok: false },
-      { t: "Inability to use low fresh gas flow.", ok: false },
+      { t: "Fresh gas flow must precisely match patient uptake, and any mismatch risks hypoxia or hypercarbia", ok: true },
+      { t: "The CO2 absorbent is not compatible with closed-system flows and fails to remove carbon dioxide", ok: false },
+      { t: "Closed systems generate excessive heat from the absorber that can burn the patient's airway", ok: false },
+      { t: "The unidirectional valves cannot maintain proper gas flow direction at very low flow rates", ok: false },
     ],
-    rationale: "Sevoflurane interacting with Baralyme is associated with more dangerous degradation behavior, including fire risk.",
-    metadata: { topic: "CO2 Absorbent", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "Baralyme", "sevoflurane", "fire risk"] }
+    rationale: "In a closed system, no gas escapes through the APL valve — so fresh gas flow must exactly replace what the patient absorbs (O2 consumption + anesthetic uptake). Any mismatch can cause hypoxia (too little O2) or hypercarbia (inadequate CO2 removal). CO2 absorbent works fine at low flows. Heat generation is minimal and not a burn hazard. Unidirectional valves function at all clinically relevant flow rates.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["closed circuit", "dangers", "FGF matching"] }
   },
 
   // ── boa-node11-ads-067 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-067",
     type: "mcq",
-    prompt: "What visual cue suggests that carbon dioxide absorbent is exhausted?",
+    scene: null,
+    prompt: "The Bain circuit is a modification of which Mapleson breathing system classification?",
     setup: "",
     ans: [
-      { t: "The granules turn bright red.", ok: false },
-      { t: "The pH-sensitive dye, often ethyl violet, turns purple.", ok: true },
-      { t: "The canister pressure rises to 70 cmH2O.", ok: false },
-      { t: "The reservoir bag becomes rigid.", ok: false },
+      { t: "Mapleson D — a coaxial design with fresh gas flowing inside the expiratory tubing", ok: true },
+      { t: "Mapleson A — a Magill design optimized for controlled ventilation during general anesthesia", ok: false },
+      { t: "Mapleson F — a Jackson-Rees modification designed specifically for pediatric patient use", ok: false },
+      { t: "Mapleson C — a simple system with minimal dead space used only for resuscitation situations", ok: false },
     ],
-    rationale: "Many absorbents use a pH-sensitive indicator dye such as ethyl violet that turns purple when exhausted.",
-    metadata: { topic: "CO2 Absorbent", priority: "high", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "carbon dioxide absorbent", "ethyl violet"] }
+    rationale: "The Bain circuit is a coaxial modification of the Mapleson D system, where the fresh gas tube runs inside the corrugated expiratory limb. Mapleson A (Magill) is a different configuration efficient for spontaneous ventilation. Mapleson F (Jackson-Rees) is the pediatric modification. Mapleson C is used for resuscitation, not related to the Bain design.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Bain circuit", "Mapleson D", "coaxial design"] }
   },
 
   // ── boa-node11-ads-068 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-068",
     type: "mcq",
-    prompt: "Which description best matches an open breathing system as used historically?",
+    scene: null,
+    prompt: "The Jackson-Rees modification is a variant of which Mapleson system, and for which patient population is it primarily used?",
     setup: "",
     ans: [
-      { t: "It contains a reservoir bag and no fresh gas flow.", ok: false },
-      { t: "It has no reservoir bag and no rebreathing, such as ether dripped onto a gauze mask.", ok: true },
-      { t: "It uses a circle absorber and low flow anesthesia.", ok: false },
-      { t: "It requires a ventilator with ascending bellows.", ok: false },
+      { t: "Mapleson F, primarily used for pediatric patients due to low resistance and dead space", ok: true },
+      { t: "Mapleson A, primarily used for adult patients requiring spontaneous ventilation support", ok: false },
+      { t: "Mapleson D, primarily used for trauma patients requiring rapid sequence induction setup", ok: false },
+      { t: "Mapleson B, primarily used for geriatric patients with reduced respiratory muscle strength", ok: false },
     ],
-    rationale: "Historically, open systems involved unrestricted atmospheric access, no reservoir bag, and no controlled rebreathing.",
-    metadata: { topic: "Breathing Systems", priority: "low", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "open breathing system", "historical systems"] }
+    rationale: "The Jackson-Rees modification is a Mapleson F system with an open-tailed bag, specifically designed for pediatric patients. Its low resistance and minimal dead space make it ideal for small tidal volumes. Mapleson A is for adults (Magill system). Mapleson D is the basis for the Bain circuit. Mapleson B is not commonly used and is not associated with geriatric-specific applications.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Jackson-Rees", "Mapleson F", "pediatric breathing system"] }
   },
 
   // ── boa-node11-ads-069 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-069",
     type: "mcq",
-    prompt: "How does the machine indicate loss of electrical power?",
+    scene: null,
+    prompt: "Which Mapleson classification is considered most efficient for spontaneous ventilation, and what mnemonic helps remember this?",
     setup: "",
     ans: [
-      { t: "By shutting off all gas flow silently.", ok: false },
-      { t: "By activating a power failure indicator alarm.", ok: true },
-      { t: "By opening the APL valve automatically.", ok: false },
-      { t: "By venting all gases to scavenging.", ok: false },
+      { t: "Mapleson A is best for spontaneous — the mnemonic is 'A for spontaneous, D for controlled'", ok: true },
+      { t: "Mapleson D is best for spontaneous — the mnemonic is 'D for spontaneous, A for controlled'", ok: false },
+      { t: "Mapleson F is best for spontaneous — the mnemonic is 'F for freedom of breathing patterns'", ok: false },
+      { t: "Mapleson C is best for spontaneous — the mnemonic is 'C for comfortable spontaneous flow'", ok: false },
     ],
-    rationale: "The machine alerts the provider to electrical loss using a power failure alarm or indicator.",
-    metadata: { topic: "Electrical Safety", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "electrical safety", "power failure"] }
+    rationale: "Mapleson A (Magill) is the most efficient for spontaneous ventilation, requiring the lowest FGF. The mnemonic pairs A with spontaneous and D with controlled ventilation efficiency. Mapleson D (Bain) is most efficient for controlled ventilation. Mapleson F is pediatric-specific. Mapleson C is not considered most efficient for any mode.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson efficiency", "spontaneous ventilation", "mnemonic"] }
   },
 
   // ── boa-node11-ads-070 ──────────────────────────────────────────────────────
   {
     id: "boa-node11-ads-070",
+    type: "short",
+    scene: null,
+    prompt: "What Mapleson classification is the Bain circuit?",
+    acceptedAnswers: [
+      "Mapleson D",
+      "mapleson D",
+      "D",
+      "Mapleson d",
+    ],
+    rationale: "The Bain circuit is a Mapleson D system. It is a coaxial design where the fresh gas delivery tube runs inside the outer corrugated expiratory limb. It is most efficient for controlled (mechanical) ventilation.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Bain circuit", "Mapleson D", "recall"] }
+  },
+
+  // ── boa-node11-ads-071 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-071",
     type: "mcq",
-    prompt: "Which machine electrical component is specifically NOT intended for high-frequency surgical devices?",
+    scene: null,
+    prompt: "What defines an open breathing system in the historical classification of anesthetic delivery?",
     setup: "",
     ans: [
-      { t: "The oxygen analyzer outlet", ok: false },
-      { t: "The auxiliary electrical outlets", ok: true },
-      { t: "The battery charger", ok: false },
-      { t: "The pressure regulator housing", ok: false },
+      { t: "No reservoir bag, no rebreathing, and unrestricted contact with the atmosphere exists", ok: true },
+      { t: "A reservoir bag is present but all exhaled gas is vented through the APL valve only", ok: false },
+      { t: "A CO2 absorber is used but gas flows are set high enough to prevent any rebreathing", ok: false },
+      { t: "The system is open to the room air but uses a face mask with a one-way valve system", ok: false },
     ],
-    rationale: "The machine's auxiliary outlets are not intended for high-power surgical devices such as electrosurgical units.",
-    metadata: { topic: "Electrical Safety", priority: "medium", category: "anesthesia-machine", source: "node-11-chapter-11", tags: ["anesthesia delivery systems", "electrical safety", "auxiliary outlets"] }
+    rationale: "An open system (e.g., ether dripped onto gauze) has no reservoir bag, no controlled rebreathing, and complete atmospheric exposure. It is the simplest and most historical system. A reservoir bag indicates at least a semi-open system. CO2 absorbers are part of circle systems. One-way valves suggest a more organized circuit design.",
+    metadata: { topic: "Breathing Systems", priority: "medium", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["open system", "historical", "classification"] }
+  },
+
+  // ── boa-node11-ads-072 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-072",
+    type: "mcq",
+    scene: null,
+    prompt: "Semi-open breathing systems (Mapleson A through F) share which common characteristic that distinguishes them from circle systems?",
+    setup: "",
+    ans: [
+      { t: "They lack a CO2 absorber and rely on fresh gas flow to prevent rebreathing of CO2", ok: true },
+      { t: "They lack a reservoir bag and rely entirely on continuous fresh gas flow for breathing", ok: false },
+      { t: "They lack unidirectional valves and allow bidirectional gas flow in all circuit limbs", ok: false },
+      { t: "They lack a scavenging connection and vent all waste gases directly into room air", ok: false },
+    ],
+    rationale: "Mapleson systems (semi-open) do not contain CO2 absorbers. They prevent rebreathing by using adequate fresh gas flow rates to wash CO2-laden gas out of the circuit. Most Mapleson systems have reservoir bags (except open-tailed modifications). They may have valves (APL). They can connect to scavenging. The defining absence is the CO2 absorber.",
+    metadata: { topic: "Breathing Systems", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Mapleson systems", "no absorber", "FGF dependent"] }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CIRCLE SYSTEM COMPONENTS (8 questions: 073-080)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── boa-node11-ads-073 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-073",
+    type: "mcq",
+    scene: null,
+    prompt: "What is the critical function of unidirectional valves in the circle breathing system?",
+    setup: "",
+    ans: [
+      { t: "They ensure gas flows in only one direction through the circuit, preventing rebreathing of CO2", ok: true },
+      { t: "They regulate the total fresh gas flow entering the circuit from the common gas outlet port", ok: false },
+      { t: "They control the pressure inside the breathing circuit by venting excess gas automatically", ok: false },
+      { t: "They filter bacterial contamination from the exhaled gas before it reaches the CO2 absorber", ok: false },
+    ],
+    rationale: "Unidirectional (one-way) valves direct gas flow in a single direction around the circle — exhaled gas passes through the absorber and inspiratory gas flows to the patient. Only one valve opens at a time (inspiration opens the inspiratory valve; expiration opens the expiratory valve). They do not regulate FGF, control pressure (that is the APL valve), or filter bacteria.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["unidirectional valves", "one-way flow", "CO2 prevention"] }
+  },
+
+  // ── boa-node11-ads-074 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-074",
+    type: "mcq",
+    scene: null,
+    prompt: "During normal breathing in a circle system, how do the unidirectional valves coordinate their opening?",
+    setup: "",
+    ans: [
+      { t: "Only one valve is open at any given time — the inspiratory during inhalation, expiratory during exhalation", ok: true },
+      { t: "Both valves are open simultaneously during the transition between inspiration and expiration phases", ok: false },
+      { t: "Both valves remain closed during exhalation to allow complete CO2 absorption before the next breath", ok: false },
+      { t: "The inspiratory valve stays open continuously while the expiratory valve cycles with each breath", ok: false },
+    ],
+    rationale: "In a properly functioning circle system, only one unidirectional valve is open at a time. During inspiration, the inspiratory valve opens (expiratory closes). During expiration, the expiratory valve opens (inspiratory closes). This ensures gas flows in a single direction around the circuit. Simultaneous opening or continuous opening would defeat the purpose of directional flow.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["valve coordination", "inspiration-expiration cycle", "unidirectional flow"] }
+  },
+
+  // ── boa-node11-ads-075 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-075",
+    type: "mcq",
+    scene: null,
+    prompt: "The adjustable pressure-limiting (APL) valve is located on which limb of the circle breathing system, and what is its common alternative name?",
+    setup: "",
+    ans: [
+      { t: "On the expiratory limb, commonly called the pop-off valve for excess gas venting", ok: true },
+      { t: "On the inspiratory limb, commonly called the check valve for unidirectional gas flow", ok: false },
+      { t: "Between the absorber canisters, commonly called the relief valve for pressure safety", ok: false },
+      { t: "At the fresh gas inlet, commonly called the demand valve for flow-triggered delivery", ok: false },
+    ],
+    rationale: "The APL (pop-off) valve sits on the expiratory limb of the circle system. During spontaneous ventilation, it vents excess gas to the scavenging system, preventing excessive circuit pressure. It is not on the inspiratory limb (that would vent fresh gas), not between absorber canisters, and not at the fresh gas inlet. 'Check valve' and 'demand valve' describe different devices.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["APL valve", "pop-off valve", "expiratory limb"] }
+  },
+
+  // ── boa-node11-ads-076 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-076",
+    type: "multi",
+    scene: null,
+    prompt: "Which of the following are recognized functions of the reservoir bag in the circle breathing system? (Select THREE)",
+    choices: [
+      "Serves as a compliant reservoir for fresh and exhaled gas accumulation",
+      "Allows visual and tactile monitoring of spontaneous breathing patterns",
+      "Enables manual positive-pressure ventilation when hand squeezed",
+      "Prevents circuit pressure from exceeding 60 cmH2O under normal use",
+      "Filters carbon dioxide from exhaled gas before it is rebreathed",
+    ],
+    correctAnswers: [
+      "Serves as a compliant reservoir for fresh and exhaled gas accumulation",
+      "Allows visual and tactile monitoring of spontaneous breathing patterns",
+      "Enables manual positive-pressure ventilation when hand squeezed",
+    ],
+    selectCount: 3,
+    rationale: "The reservoir (breathing) bag accumulates gas between breaths, allows the provider to observe spontaneous ventilation (bag movement), and enables manual ventilation. Its compliant design limits pressure to approximately 60 cmH2O, but this is a passive safety feature of its construction rather than an active filtering or pressure-control function. CO2 absorption is performed by the soda lime canister, not the reservoir bag.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["reservoir bag", "breathing bag", "functions"] }
+  },
+
+  // ── boa-node11-ads-077 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-077",
+    type: "mcq",
+    scene: null,
+    prompt: "The compliance of the standard reservoir bag limits circuit pressure to approximately what maximum value?",
+    setup: "",
+    ans: [
+      { t: "Approximately 60 cmH2O, providing a passive pressure safety limit in the circuit", ok: true },
+      { t: "Approximately 120 cmH2O, matching the maximum ventilator pressure setting allowed", ok: false },
+      { t: "Approximately 20 cmH2O, which is the normal peak inspiratory pressure during use", ok: false },
+      { t: "Approximately 200 cmH2O, because the bag material is designed for high-pressure use", ok: false },
+    ],
+    rationale: "The reservoir bag's elastic compliance naturally limits circuit pressure to approximately 60 cmH2O — beyond this, the bag distends rather than allowing further pressure rise. This is a passive safety feature. 120 cmH2O and 200 cmH2O are dangerously high. 20 cmH2O is a typical PIP during normal ventilation, not the bag's pressure limit.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["reservoir bag", "pressure limit", "60 cmH2O"] }
+  },
+
+  // ── boa-node11-ads-078 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-078",
+    type: "mcq",
+    scene: null,
+    prompt: "What does the breathing circuit pressure gauge (airway pressure manometer) display during mechanical ventilation?",
+    setup: "",
+    ans: [
+      { t: "Peak inspiratory pressure (PIP) generated during each mechanical breath delivery cycle", ok: true },
+      { t: "The oxygen concentration percentage of inspired gas being delivered to the patient now", ok: false },
+      { t: "The volume of tidal ventilation in milliliters delivered during each mechanical breath", ok: false },
+      { t: "The end-tidal carbon dioxide concentration in the exhaled gas from the patient circuit", ok: false },
+    ],
+    rationale: "The circuit pressure gauge measures and displays the peak inspiratory pressure (PIP) during mechanical ventilation. Changes in PIP can indicate circuit obstruction, bronchospasm, pneumothorax, or disconnection. Oxygen concentration is measured by the O2 analyzer. Tidal volume is measured by spirometry. ETCO2 is measured by capnography. These are all separate monitoring devices.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pressure gauge", "PIP", "airway pressure"] }
+  },
+
+  // ── boa-node11-ads-079 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-079",
+    type: "mcq",
+    scene: null,
+    prompt: "A stuck (incompetent) unidirectional valve in the circle system would most likely result in which clinical problem?",
+    setup: "",
+    ans: [
+      { t: "Rebreathing of CO2-laden gas because unidirectional flow around the circuit is lost", ok: true },
+      { t: "Delivery of an excessively high concentration of volatile anesthetic to the patient", ok: false },
+      { t: "Complete loss of fresh gas flow from the common gas outlet into the breathing circuit", ok: false },
+      { t: "Inability of the ventilator to generate adequate tidal volumes during controlled breaths", ok: false },
+    ],
+    rationale: "A stuck-open unidirectional valve allows gas to flow in both directions (bidirectional flow), permitting exhaled CO2 to bypass the absorber and be rebreathed. This causes hypercarbia. It would not affect anesthetic concentration from the vaporizer, would not block fresh gas flow, and would not directly impair ventilator volume delivery.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["valve malfunction", "CO2 rebreathing", "hypercarbia"] }
+  },
+
+  // ── boa-node11-ads-080 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-080",
+    type: "short",
+    scene: null,
+    prompt: "What is the common alternative name for the adjustable pressure-limiting (APL) valve?",
+    acceptedAnswers: [
+      "pop-off valve",
+      "Pop-off valve",
+      "pop off valve",
+      "Pop off valve",
+      "pop-off",
+    ],
+    rationale: "The APL valve is commonly called the 'pop-off' valve. It is located on the expiratory limb and vents excess circuit gas to the scavenging system, preventing excessive pressure buildup during spontaneous ventilation.",
+    metadata: { topic: "Circle System Components", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["APL valve", "pop-off valve", "recall"] }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // VENTILATORS AND BELLOWS (5 questions: 081-085)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── boa-node11-ads-081 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-081",
+    type: "mcq",
+    scene: null,
+    prompt: "What is the standard bellows configuration on modern anesthesia ventilators, and what is its defining characteristic?",
+    setup: "",
+    ans: [
+      { t: "Ascending (standing) bellows that rise during exhalation under the force of exhaled gas", ok: true },
+      { t: "Descending (hanging) bellows that fall during exhalation under the force of gravity alone", ok: false },
+      { t: "Ascending (standing) bellows that rise during inspiration driven by the ventilator piston", ok: false },
+      { t: "Descending (hanging) bellows that fall during inspiration driven by a compressed gas source", ok: false },
+    ],
+    rationale: "Modern machines use ascending (standing) bellows as the standard. These bellows rise during exhalation as the patient's exhaled gas refills them. This upward movement during exhalation is the key characteristic. Descending bellows fall with gravity and are older designs. The bellows rise during EXhalation, not INspiration.",
+    metadata: { topic: "Ventilators and Bellows", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["ascending bellows", "standing bellows", "exhalation"] }
+  },
+
+  // ── boa-node11-ads-082 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-082",
+    type: "mcq",
+    scene: null,
+    prompt: "Why are ascending (standing) bellows considered safer than descending (hanging) bellows in anesthesia ventilators?",
+    setup: "",
+    ans: [
+      { t: "A circuit disconnect is immediately visible because ascending bellows will fail to rise on exhalation", ok: true },
+      { t: "Ascending bellows deliver higher tidal volumes and more consistent peak pressures to patients", ok: false },
+      { t: "Ascending bellows do not require driving gas, eliminating the risk of barotrauma from overpressure", ok: false },
+      { t: "Ascending bellows filter exhaled carbon dioxide more effectively than descending bellows designs", ok: false },
+    ],
+    rationale: "If the breathing circuit disconnects from the patient, ascending bellows will not refill (rise) during exhalation because no exhaled gas returns to the bellows. This provides an immediate visual cue of disconnection. Descending bellows continue to fall with gravity even when disconnected, masking the problem. Bellows type does not affect tidal volume consistency, driving gas requirements, or CO2 filtration.",
+    metadata: { topic: "Ventilators and Bellows", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["disconnect detection", "ascending vs descending", "safety advantage"] }
+  },
+
+  // ── boa-node11-ads-083 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-083",
+    type: "mcq",
+    scene: null,
+    prompt: "A patient becomes disconnected from the breathing circuit during mechanical ventilation. How would the bellows behavior differ between ascending and descending bellows designs?",
+    setup: "",
+    ans: [
+      { t: "Ascending bellows stop rising; descending bellows continue falling normally, hiding the disconnect", ok: true },
+      { t: "Both bellows types stop moving immediately, providing equally reliable disconnect detection cues", ok: false },
+      { t: "Ascending bellows continue rising; descending bellows collapse completely and trigger an alarm", ok: false },
+      { t: "Neither bellows type can detect a disconnection since this requires a separate pressure monitor", ok: false },
+    ],
+    rationale: "Ascending bellows require exhaled gas to push them upward. Without a patient connection, no exhaled gas returns, and the bellows fail to rise — an obvious visual indicator. Descending bellows fall by gravity regardless of patient connection, so they continue to move normally even when disconnected, hiding the problem. While separate monitors also detect disconnects, the bellows behavior itself differs between types.",
+    metadata: { topic: "Ventilators and Bellows", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["disconnect comparison", "bellows behavior", "clinical scenario"] }
+  },
+
+  // ── boa-node11-ads-084 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-084",
+    type: "short",
+    scene: null,
+    prompt: "What is the standard type of bellows used on modern anesthesia machines: ascending or descending?",
+    acceptedAnswers: [
+      "ascending",
+      "Ascending",
+      "ascending bellows",
+      "Ascending bellows",
+      "standing",
+      "Standing",
+      "standing bellows",
+    ],
+    rationale: "Ascending (standing) bellows are the standard on modern anesthesia machines. They rise during exhalation and provide an immediate visual indicator of circuit disconnection because they will fail to rise if the patient is not connected.",
+    metadata: { topic: "Ventilators and Bellows", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["ascending bellows", "standard design", "recall"] }
+  },
+
+  // ── boa-node11-ads-085 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-085",
+    type: "mcq",
+    scene: null,
+    prompt: "What is the key clinical danger of descending (hanging) bellows that led to their replacement by ascending designs?",
+    setup: "",
+    ans: [
+      { t: "They cannot reliably detect a circuit disconnection because gravity refills them regardless", ok: true },
+      { t: "They generate dangerously high airway pressures that frequently cause pneumothorax events", ok: false },
+      { t: "They are incompatible with volatile anesthetic agents and degrade circuit tubing material", ok: false },
+      { t: "They require significantly more driving gas than ascending bellows during routine operation", ok: false },
+    ],
+    rationale: "The primary danger of descending bellows is their inability to visually indicate a circuit disconnect. Because gravity pulls them down during exhalation regardless of whether exhaled gas is returning, they appear to function normally even when the patient is disconnected. This can delay recognition of a life-threatening disconnection. They do not generate higher pressures, are compatible with all agents, and driving gas requirements are similar between types.",
+    metadata: { topic: "Ventilators and Bellows", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["descending bellows", "disconnect danger", "obsolete design"] }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CO2 ABSORPTION (6 questions: 086-091)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── boa-node11-ads-086 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-086",
+    type: "mcq",
+    scene: null,
+    prompt: "What is the correct sequence of the chemical reaction by which soda lime absorbs carbon dioxide?",
+    setup: "",
+    ans: [
+      { t: "CO2 + H2O forms carbonic acid, which reacts with hydroxides to form carbonates, water, and heat", ok: true },
+      { t: "CO2 reacts directly with calcium hydroxide to form calcium carbonate and oxygen gas as a byproduct", ok: false },
+      { t: "CO2 combines with sodium chloride in the absorbent to form sodium bicarbonate and hydrochloric acid", ok: false },
+      { t: "CO2 is physically adsorbed onto granule surfaces without chemical change in an exothermic process", ok: false },
+    ],
+    rationale: "The soda lime reaction proceeds in steps: CO2 + H2O → H2CO3 (carbonic acid), then H2CO3 + Ca(OH)2/NaOH/KOH → CaCO3/Na2CO3 + H2O + heat. It is a true chemical reaction (not physical adsorption), requires water, and produces heat as a byproduct. CO2 does not react directly with Ca(OH)2 without water. Sodium chloride and hydrochloric acid are not involved.",
+    metadata: { topic: "CO2 Absorption", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["soda lime chemistry", "carbonic acid", "exothermic reaction"] }
+  },
+
+  // ── boa-node11-ads-087 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-087",
+    type: "mcq",
+    scene: null,
+    prompt: "How can a provider confirm that the CO2 absorber canister is actively functioning during a case?",
+    setup: "",
+    ans: [
+      { t: "The canister should feel warm to the touch because the absorption reaction is exothermic", ok: true },
+      { t: "The canister should feel cold to the touch because the absorption reaction is endothermic", ok: false },
+      { t: "The canister should produce a clicking sound as the granules contract during CO2 binding", ok: false },
+      { t: "The canister should display a constant green color regardless of the absorbent exhaustion", ok: false },
+    ],
+    rationale: "CO2 absorption by soda lime is exothermic — it produces heat. A warm canister indicates active CO2 absorption. A cold canister suggests the absorbent may be exhausted or there is minimal CO2 being absorbed. The reaction is not endothermic, does not produce clicking sounds, and the color change (from white to violet/purple) indicates exhaustion, not normal function.",
+    metadata: { topic: "CO2 Absorption", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["canister warmth", "exothermic confirmation", "clinical assessment"] }
+  },
+
+  // ── boa-node11-ads-088 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-088",
+    type: "mcq",
+    scene: null,
+    prompt: "What visual indicator alerts the provider that the CO2 absorbent is becoming exhausted?",
+    setup: "",
+    ans: [
+      { t: "A pH-sensitive dye causes a color change in the absorbent granules as they are consumed", ok: true },
+      { t: "The absorbent granules physically shrink in size and fall to the bottom of the canister", ok: false },
+      { t: "A digital sensor on the canister displays a numerical reading of remaining absorber capacity", ok: false },
+      { t: "The clear canister housing becomes opaque as chemical byproducts coat the inner walls", ok: false },
+    ],
+    rationale: "CO2 absorbents contain pH-sensitive indicator dyes that change color as the hydroxide bases are consumed and pH drops. For example, ethyl violet changes from white to purple in exhausted soda lime. Granules do not shrink. There are no digital sensors on standard canisters. The canister housing does not become opaque.",
+    metadata: { topic: "CO2 Absorption", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["color change indicator", "absorbent exhaustion", "pH dye"] }
+  },
+
+  // ── boa-node11-ads-089 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-089",
+    type: "mcq",
+    scene: null,
+    prompt: "What is the primary advantage of Amsorb Plus over traditional soda lime as a CO2 absorbent?",
+    setup: "",
+    ans: [
+      { t: "It contains only calcium hydroxide and does not produce carbon monoxide or Compound A", ok: true },
+      { t: "It absorbs CO2 three times faster than soda lime and lasts significantly longer per fill", ok: false },
+      { t: "It eliminates the need for color-change indicators because it never becomes exhausted", ok: false },
+      { t: "It is compatible with all anesthetic agents including the discontinued agent methoxyflurane", ok: false },
+    ],
+    rationale: "Amsorb Plus contains only calcium hydroxide (Ca(OH)2) without the strong bases (NaOH, KOH) found in traditional soda lime. This eliminates the production of carbon monoxide from desiccated absorbent and Compound A from sevoflurane degradation. It does not absorb faster, does become exhausted, and agent compatibility is not its distinguishing feature.",
+    metadata: { topic: "CO2 Absorption", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Amsorb Plus", "calcium hydroxide only", "safer absorbent"] }
+  },
+
+  // ── boa-node11-ads-090 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-090",
+    type: "mcq",
+    scene: null,
+    prompt: "Why is water essential for the CO2 absorption reaction in soda lime?",
+    setup: "",
+    ans: [
+      { t: "Water is needed to convert CO2 to carbonic acid, the necessary first step of the reaction", ok: true },
+      { t: "Water acts as a catalyst that speeds up the reaction without being consumed in process", ok: false },
+      { t: "Water cools the granules and prevents thermal degradation of the calcium hydroxide base", ok: false },
+      { t: "Water dissolves the carbonate end-products so they can drain out of the canister freely", ok: false },
+    ],
+    rationale: "The first step of CO2 absorption requires water: CO2 + H2O → H2CO3 (carbonic acid). Without water, CO2 cannot form carbonic acid and the reaction chain cannot proceed. This is why desiccated absorbent fails to absorb CO2 properly and instead produces dangerous byproducts. Water is consumed (not a catalyst), does not primarily cool granules, and carbonates remain in the granules (they do not drain).",
+    metadata: { topic: "CO2 Absorption", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["water requirement", "carbonic acid formation", "desiccation risk"] }
+  },
+
+  // ── boa-node11-ads-091 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-091",
+    type: "short",
+    scene: null,
+    prompt: "What CO2 absorbent contains only calcium hydroxide and is considered safer than traditional soda lime?",
+    acceptedAnswers: [
+      "Amsorb Plus",
+      "Amsorb",
+      "amsorb plus",
+      "amsorb",
+      "Amsorb+",
+    ],
+    rationale: "Amsorb Plus is a CO2 absorbent that contains only calcium hydroxide (Ca(OH)2), eliminating the strong bases (NaOH, KOH) present in traditional soda lime. This makes it safer because it does not produce carbon monoxide or Compound A when exposed to volatile anesthetics, even when desiccated.",
+    metadata: { topic: "CO2 Absorption", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Amsorb Plus", "safer absorbent", "recall"] }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ATMOSPHERIC POLLUTION (5 questions: 092-096)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── boa-node11-ads-092 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-092",
+    type: "mcq",
+    scene: null,
+    prompt: "According to OSHA standards, what are the maximum permissible workplace exposure limits for waste anesthetic gases in the operating room?",
+    setup: "",
+    ans: [
+      { t: "Nitrous oxide less than 25 ppm and halogenated agents less than 2 ppm during exposure", ok: true },
+      { t: "Nitrous oxide less than 50 ppm and halogenated agents less than 10 ppm during exposure", ok: false },
+      { t: "Nitrous oxide less than 5 ppm and halogenated agents less than 0.5 ppm during exposure", ok: false },
+      { t: "Nitrous oxide less than 100 ppm and halogenated agents less than 25 ppm during exposure", ok: false },
+    ],
+    rationale: "OSHA recommends N2O exposure below 25 ppm (time-weighted average) and halogenated agents below 2 ppm. These limits protect healthcare workers from chronic exposure effects including reproductive toxicity and potential hepatotoxicity. 50/10, 5/0.5, and 100/25 ppm are all incorrect values.",
+    metadata: { topic: "Atmospheric Pollution", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["OSHA limits", "N2O 25 ppm", "agents 2 ppm"] }
+  },
+
+  // ── boa-node11-ads-093 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-093",
+    type: "mcq",
+    scene: null,
+    prompt: "How many times per hour should the operating room air be exchanged to help maintain safe levels of waste anesthetic gases?",
+    setup: "",
+    ans: [
+      { t: "A minimum of 15 air exchanges per hour is the recommended standard for all ORs", ok: true },
+      { t: "A minimum of 5 air exchanges per hour is sufficient for standard-sized operating rooms", ok: false },
+      { t: "A minimum of 30 air exchanges per hour is required only when using nitrous oxide gas", ok: false },
+      { t: "Air exchanges are unnecessary if an active scavenging system is properly functioning now", ok: false },
+    ],
+    rationale: "The standard recommendation is a minimum of 15 air exchanges per hour in the OR. This ventilation rate, combined with scavenging, dilutes and removes waste anesthetic gases. 5 exchanges is insufficient. 30 is not standard. Air exchanges are still necessary even with functioning scavenging because scavenging cannot capture all leaked gases.",
+    metadata: { topic: "Atmospheric Pollution", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["air exchanges", "15 per hour", "OR ventilation"] }
+  },
+
+  // ── boa-node11-ads-094 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-094",
+    type: "mcq",
+    scene: null,
+    prompt: "What is the difference between active and passive scavenging systems for waste anesthetic gas disposal?",
+    setup: "",
+    ans: [
+      { t: "Active systems use wall suction to remove waste gas; passive systems vent gas to the outside by tubing", ok: true },
+      { t: "Active systems filter anesthetic from waste gas; passive systems release unfiltered gas into the room", ok: false },
+      { t: "Active systems recycle waste gas for reuse; passive systems destroy the anesthetic molecules present", ok: false },
+      { t: "Active systems require the provider to manually vent gas; passive systems are fully automated now", ok: false },
+    ],
+    rationale: "Active scavenging uses the hospital's central vacuum (suction) system to actively draw waste gas from the APL and ventilator relief valves. Passive scavenging relies on the slight positive pressure of waste gas to flow through tubing that vents directly to the outside of the building. Neither system filters, recycles, or destroys anesthetic. 'Active' does not mean manual.",
+    metadata: { topic: "Atmospheric Pollution", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["active scavenging", "passive scavenging", "waste gas disposal"] }
+  },
+
+  // ── boa-node11-ads-095 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-095",
+    type: "mcq",
+    scene: null,
+    prompt: "Which of the following is the most common preventable source of operating room atmospheric pollution with anesthetic gases?",
+    setup: "",
+    ans: [
+      { t: "Sloppy anesthetic technique such as poor mask fit and failure to turn off gas flow promptly", ok: true },
+      { t: "Manufacturing defects in the anesthesia machine's internal gas delivery tubing and valves", ok: false },
+      { t: "Normal passive diffusion of volatile agents through the walls of the breathing circuit hoses", ok: false },
+      { t: "Leakage from the CO2 absorber canister during normal operation under standard conditions", ok: false },
+    ],
+    rationale: "The most common source of OR pollution is sloppy technique — poor-fitting masks, leaving gas flowing when not connected to the patient, failure to use scavenging, and inadequate circuit checks. Manufacturing defects are rare. Circuit permeation is minimal. Absorber canister leaks are uncommon with proper assembly.",
+    metadata: { topic: "Atmospheric Pollution", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["pollution sources", "sloppy technique", "prevention"] }
+  },
+
+  // ── boa-node11-ads-096 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-096",
+    type: "short",
+    scene: null,
+    prompt: "What is the OSHA maximum permissible workplace exposure limit for nitrous oxide in ppm?",
+    acceptedAnswers: [
+      "25",
+      "25 ppm",
+      "<25 ppm",
+      "less than 25 ppm",
+    ],
+    rationale: "OSHA recommends that workplace exposure to nitrous oxide not exceed 25 ppm (time-weighted average). This limit helps protect healthcare workers from chronic health effects associated with long-term N2O exposure, including reproductive and neurological toxicity.",
+    metadata: { topic: "Atmospheric Pollution", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["OSHA", "N2O limit", "25 ppm", "recall"] }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // DEGRADATION OF ANESTHETICS (4 questions: 097-100)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── boa-node11-ads-097 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-097",
+    type: "mcq",
+    scene: null,
+    prompt: "What dangerous byproduct is produced when volatile anesthetics interact with desiccated CO2 absorbent?",
+    setup: "",
+    ans: [
+      { t: "Carbon monoxide, which can cause patient carboxyhemoglobinemia and impaired O2 delivery", ok: true },
+      { t: "Hydrogen cyanide, which inhibits cellular respiration by binding cytochrome oxidase enzymes", ok: false },
+      { t: "Nitrogen dioxide, which causes severe chemical pneumonitis and pulmonary edema in patients", ok: false },
+      { t: "Sulfur dioxide, which triggers intense bronchospasm and airway inflammation upon inhalation", ok: false },
+    ],
+    rationale: "Desiccated (dried-out) CO2 absorbent reacts with volatile anesthetics — especially desflurane — to produce carbon monoxide (CO). CO binds hemoglobin with 200x the affinity of O2, forming carboxyhemoglobin and impairing oxygen delivery. Hydrogen cyanide, nitrogen dioxide, and sulfur dioxide are not produced by this reaction.",
+    metadata: { topic: "Degradation of Anesthetics", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["desiccated absorbent", "carbon monoxide", "carboxyhemoglobin"] }
+  },
+
+  // ── boa-node11-ads-098 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-098",
+    type: "mcq",
+    scene: null,
+    prompt: "What toxic byproduct is produced when sevoflurane interacts with soda lime absorbent?",
+    setup: "",
+    ans: [
+      { t: "Compound A (fluoromethyl-2,2-difluoro-1-vinyl ether), which is nephrotoxic in rats", ok: true },
+      { t: "Compound B, a hepatotoxic metabolite that causes acute liver failure in all patients", ok: false },
+      { t: "Carbon monoxide at levels sufficient to cause carboxyhemoglobinemia even with fresh soda lime", ok: false },
+      { t: "Formaldehyde, which is a potent respiratory irritant and known human carcinogen chemical", ok: false },
+    ],
+    rationale: "Sevoflurane reacts with the strong bases (NaOH, KOH) in soda lime to produce Compound A (fluoromethyl-2,2-difluoro-1-[trifluoromethyl]vinyl ether), which is nephrotoxic in rats at high concentrations. Clinical significance in humans remains debated. 'Compound B' is not a recognized degradation product. CO production requires desiccated absorbent. Formaldehyde is not a significant product of this reaction.",
+    metadata: { topic: "Degradation of Anesthetics", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["sevoflurane", "Compound A", "soda lime degradation"] }
+  },
+
+  // ── boa-node11-ads-099 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-099",
+    type: "mcq",
+    scene: null,
+    prompt: "Which CO2 absorbent was associated with an increased risk of fire when used with sevoflurane and has subsequently been removed from the market?",
+    setup: "",
+    ans: [
+      { t: "Baralyme, which contained barium hydroxide that generated extreme heat with sevoflurane", ok: true },
+      { t: "Amsorb Plus, which contained unstable calcium compounds that ignited during normal use", ok: false },
+      { t: "Soda lime, which produced flammable hydrogen gas when exposed to high sevoflurane levels", ok: false },
+      { t: "Lithium hydroxide, which spontaneously combusted when exposed to any volatile anesthetic", ok: false },
+    ],
+    rationale: "Baralyme (barium hydroxide lime) was removed from the market because its interaction with sevoflurane, particularly when desiccated, generated extremely high temperatures — sufficient to cause fires within the CO2 absorber canister. Amsorb Plus is the safer alternative. Soda lime can produce heat but not to the fire-risk level of Baralyme. Lithium hydroxide is not used in clinical CO2 absorbents.",
+    metadata: { topic: "Degradation of Anesthetics", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["Baralyme", "fire risk", "sevoflurane interaction"] }
+  },
+
+  // ── boa-node11-ads-100 ──────────────────────────────────────────────────────
+  {
+    id: "boa-node11-ads-100",
+    type: "mcq",
+    scene: null,
+    prompt: "A provider arrives Monday morning and suspects the CO2 absorbent may have desiccated over the weekend from continuous fresh gas flow. What is the safest course of action?",
+    setup: "",
+    ans: [
+      { t: "Replace the absorbent entirely — desiccated absorbent produces CO and must not be used", ok: true },
+      { t: "Add sterile water to the existing absorbent granules to rehydrate them before the case", ok: false },
+      { t: "Run high fresh gas flows for 10 minutes to flush any degradation products from circuit", ok: false },
+      { t: "Proceed with the case using low fresh gas flows to minimize absorbent degradation rate", ok: false },
+    ],
+    rationale: "Desiccated absorbent must be replaced — it produces carbon monoxide when exposed to volatile agents and cannot be safely rehydrated in situ. Adding water does not uniformly rehydrate granules and may create channels. Flushing does not remove the risk because CO is produced during subsequent agent use. Using low flows does not solve the underlying desiccation problem and still risks CO production.",
+    metadata: { topic: "Degradation of Anesthetics", priority: "high", category: "anesthesia-delivery-systems", source: "node-11-chapter-11", tags: ["desiccated absorbent", "do not use", "Monday morning scenario"] }
   },
 
 ];
@@ -2024,7 +1806,7 @@ export const MACHINE_METADATA = {
   nodeId: "node-11",
   courseId: "basics-of-anesthesia",
   chapter: "Chapter 11",
-  title: "Anesthesia Machine",
+  title: "Anesthesia Delivery Systems",
   totalQuestions: MACHINE_QUESTIONS.length,
   questionTypes: {
     mcq:   MACHINE_QUESTIONS.filter(q => q.type === 'mcq').length,
