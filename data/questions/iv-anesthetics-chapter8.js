@@ -1450,6 +1450,353 @@ export const IV_ANESTHETICS_QUESTIONS = [
     metadata: { topic: "Ketamine", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["node-8", "chapter-8", "iv-anesthetics", "ketamine", "cardiovascular", "high-yield", "single-choice"] }
   },
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ADDITIONAL — Barbiturate MOA/Side Effects, Propofol CV/Resp, Benzo PK,
+  //              Etomidate CV, Dexmedetomidine CV, Ketamine interactions
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── RETICULAR ACTIVATING SYSTEM & BARBITURATE MOA ────────────────────────
+
+  {
+    id: "n8c8-q082", type: "mcq",
+    prompt: "Most IV induction agents produce unconsciousness by acting on the reticular activating system (RAS). Where is the RAS located?",
+    setup: "",
+    ans: [
+      { t: "In the brainstem — a polysynaptic network of neurons controlling consciousness and vital functions", ok: true  },
+      { t: "In the cerebral cortex — the outer layer of gray matter responsible for higher cognitive processing", ok: false },
+      { t: "In the spinal cord dorsal horn — the sensory relay center for nociceptive and proprioceptive input", ok: false },
+      { t: "In the hypothalamus — the autonomic regulatory center for temperature, hunger, and thirst responses", ok: false },
+    ],
+    rationale: "The reticular activating system is a polysynaptic network of neurons and regulatory centers located in the brainstem. It controls consciousness, arousal, sleep-wake cycles, and several vital functions. IV anesthetics produce unconsciousness primarily by depressing RAS activity. The cortex processes higher functions but depends on RAS for arousal. The hypothalamus regulates autonomic function, not consciousness per se.",
+    scene: null, metadata: { topic: "General CNS", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["RAS", "brainstem", "consciousness"] }
+  },
+
+  {
+    id: "n8c8-q083", type: "mcq",
+    prompt: "At standard induction doses, barbiturates enhance GABA activity by binding to the GABA-A receptor. What specific effect do they have on the chloride channel?",
+    setup: "",
+    ans: [
+      { t: "They decrease the rate of GABA dissociation from its receptor, prolonging chloride channel opening duration",  ok: true  },
+      { t: "They increase the frequency of chloride channel opening without changing the duration of each individual opening", ok: false },
+      { t: "They directly open the chloride channel independent of GABA binding at any dose administered clinically",         ok: false },
+      { t: "They block the chloride channel and prevent inhibitory neurotransmission, producing paradoxical CNS excitation",   ok: false },
+    ],
+    rationale: "At clinical induction doses, barbiturates ENHANCE GABA action by decreasing the rate of GABA dissociation from the receptor, which PROLONGS the duration of Cl⁻ channel opening. This produces the sedative/hypnotic effect. Benzodiazepines, by contrast, increase the FREQUENCY of channel opening. At higher (supra-clinical) doses, barbiturates can directly activate GABA receptors even WITHOUT GABA — this produces deeper anesthesia (barbiturate coma) and is distinct from the GABA-enhancing mechanism.",
+    scene: null, metadata: { topic: "Barbiturates", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["GABA", "chloride channel", "duration", "barbiturate MOA"] }
+  },
+
+  {
+    id: "n8c8-q084", type: "mcq",
+    prompt: "At very high doses, barbiturates can directly activate GABA receptors even in the absence of GABA. What clinical state does this produce?",
+    setup: "",
+    ans: [
+      { t: "Deep anesthetic effects including barbiturate coma — a state of profound CNS depression beyond sedation",  ok: true  },
+      { t: "Seizure activity from unopposed excitatory neurotransmission due to complete GABA receptor desensitization", ok: false },
+      { t: "Selective analgesia without loss of consciousness, similar to the dissociative effects of ketamine",        ok: false },
+      { t: "Paradoxical CNS excitation with hypertonicity and tremor from direct stimulation of the motor cortex",       ok: false },
+    ],
+    rationale: "At clinical doses, barbiturates enhance GABA (sedative/hypnotic). At high doses, they DIRECTLY activate GABA receptors independent of GABA — this produces the deep anesthetic effects of barbiturate coma. This is pharmacologically distinct from the enhancing mechanism and explains why barbiturate overdose produces such profound CNS depression compared to benzodiazepines (which can only enhance existing GABA, not mimic it).",
+    scene: null, metadata: { topic: "Barbiturates", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["GABA", "direct activation", "barbiturate coma", "high dose"] }
+  },
+
+  // ── THIOPENTAL PHARMACOKINETICS & PRECIPITATION ──────────────────────────
+
+  {
+    id: "n8c8-q085", type: "mcq",
+    prompt: "Thiopental is a weak acid preserved in an alkaline solution (pH 10-11). Why must it not be mixed with acidic drugs or solutions such as lactated Ringer's?",
+    setup: "",
+    ans: [
+      { t: "Thiopental precipitates out of solution when pH drops below its pKa, forming visible crystals that can occlude IV lines", ok: true  },
+      { t: "Lactated Ringer's chemically deactivates thiopental by breaking its barbituric acid ring structure irreversibly",          ok: false },
+      { t: "The alkaline pH of thiopental neutralizes the lactate buffer in LR, producing dangerous carbon dioxide gas bubbles",        ok: false },
+      { t: "Acidic solutions convert thiopental into its active metabolite too rapidly, causing immediate cardiovascular collapse",      ok: false },
+    ],
+    rationale: "Thiopental is a weak acid that requires alkaline pH (10-11) to remain in solution. When mixed with acidic drugs or solutions, the pH drops below thiopental's pKa and it precipitates — forming visible crystals that can block IV tubing and cause tissue necrosis if injected intra-arterially. Drugs that precipitate with thiopental include: pancuronium, vecuronium, rocuronium, atracurium, alfentanil, sufentanil, and midazolam. Always FLUSH the IV line between administration of thiopental and any other drug.",
+    scene: null, metadata: { topic: "Barbiturates", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["thiopental", "precipitation", "alkaline pH", "flush between drugs"] }
+  },
+
+  {
+    id: "n8c8-q086", type: "multi",
+    prompt: "Which drugs are known to precipitate when mixed with thiopental in the same IV line? (Select THREE)",
+    setup: "",
+    choices: [
+      "Rocuronium — a non-depolarizing NMB that precipitates in alkaline thiopental solutions",
+      "Midazolam — a benzodiazepine that is acidic in solution and incompatible with thiopental",
+      "Sufentanil — an opioid that precipitates when combined with the alkaline pH of thiopental",
+      "Propofol — a lipid emulsion that is physically compatible with most IV solutions at any pH",
+      "Normal saline — an isotonic crystalloid that does not alter thiopental's alkaline pH significantly",
+    ],
+    correctAnswers: [
+      "Rocuronium — a non-depolarizing NMB that precipitates in alkaline thiopental solutions",
+      "Midazolam — a benzodiazepine that is acidic in solution and incompatible with thiopental",
+      "Sufentanil — an opioid that precipitates when combined with the alkaline pH of thiopental",
+    ],
+    selectCount: 3,
+    rationale: "Drugs that precipitate with thiopental (pH 10-11) include: pancuronium, vecuronium, rocuronium, atracurium, alfentanil, sufentanil, and midazolam. Always flush the IV line between thiopental and any other medication. Propofol and NS do not precipitate with thiopental. This incompatibility is a practical clinical concern — precipitation can occlude IV lines and cause harm if injected.",
+    scene: null, metadata: { topic: "Barbiturates", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["thiopental", "drug precipitation", "incompatibility", "IV flush"] }
+  },
+
+  // ── BARBITURATE SIDE EFFECTS ─────────────────────────────────────────────
+
+  {
+    id: "n8c8-q087", type: "multi",
+    prompt: "Which are recognized side effects of barbiturate administration? (Select THREE)",
+    setup: "",
+    choices: [
+      "Garlic or metallic taste reported by awake patients during injection of the drug",
+      "CNS excitation including hypertonus, tremor, or involuntary twitching movements",
+      "Respiratory depression with blunted response to both hypercarbia and hypoxia drives",
+      "Bronchodilation and decreased airway resistance in asthmatic patients under anesthesia",
+      "Bacteriostatic properties that allow the drug to remain sterile indefinitely after mixing",
+    ],
+    correctAnswers: [
+      "Garlic or metallic taste reported by awake patients during injection of the drug",
+      "CNS excitation including hypertonus, tremor, or involuntary twitching movements",
+      "Respiratory depression with blunted response to both hypercarbia and hypoxia drives",
+    ],
+    selectCount: 3,
+    rationale: "Barbiturate side effects include: garlic/metallic taste, CNS excitement (hypertonus, tremor, twitching from some CNS stimulation), respiratory depression (blunted CO₂ and O₂ response, apnea common after induction), pain on injection (possibly pH-related). Barbiturates do NOT bronchodilate — they actually fail to blunt airway reflexes completely, risking bronchospasm in asthmatics and laryngospasm in lightly anesthetized patients. They do NOT have preservatives — must be used within 6 hours and discarded (support bacterial growth).",
+    scene: null, metadata: { topic: "Barbiturates", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["side effects", "garlic taste", "CNS excitement", "respiratory depression"] }
+  },
+
+  {
+    id: "n8c8-q088", type: "mcq",
+    prompt: "A patient with a history of reactive airway disease receives thiopental for induction. During laryngoscopy at a light plane of anesthesia, the patient develops severe bronchospasm. Why?",
+    setup: "",
+    ans: [
+      { t: "Barbiturates do not completely blunt noxious airway reflexes — instrumentation at light depth triggers bronchospasm in asthmatics", ok: true  },
+      { t: "Thiopental directly stimulates muscarinic receptors in bronchial smooth muscle, causing active bronchoconstriction during induction", ok: false },
+      { t: "The alkaline pH of thiopental causes direct chemical irritation of the tracheal mucosa, triggering reflex airway smooth muscle spasm", ok: false },
+      { t: "Barbiturates block beta-2 adrenergic receptors in bronchial smooth muscle, removing the tonic bronchodilatory influence of the SNS",   ok: false },
+    ],
+    rationale: "Barbiturates cause respiratory depression but do NOT completely suppress airway reflexes. Airway instrumentation (laryngoscopy, intubation) at a light plane can trigger bronchospasm in asthmatic patients and laryngospasm in any lightly anesthetized patient. This is why adequate depth of anesthesia must be ensured before instrumenting the airway, and why propofol (which has bronchodilatory properties) is often preferred for asthmatics.",
+    scene: null, metadata: { topic: "Barbiturates", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["bronchospasm", "laryngospasm", "airway reflexes", "asthma"] }
+  },
+
+  {
+    id: "n8c8-q089", type: "mcq",
+    prompt: "Thiopental solutions do not contain preservatives. What is the clinical implication?",
+    setup: "",
+    ans: [
+      { t: "They support bacterial growth — must be prepared with sterile technique and discarded within 6 hours of mixing", ok: true  },
+      { t: "They remain stable indefinitely at room temperature and can be stored for up to 30 days after reconstitution",   ok: false },
+      { t: "They require refrigeration at 4°C to prevent spontaneous degradation of the barbituric acid ring structure",     ok: false },
+      { t: "They are chemically incompatible with normal saline and must only be reconstituted with sterile water for injection", ok: false },
+    ],
+    rationale: "Without preservatives, reconstituted thiopental supports bacterial growth. Clinical protocol requires strict sterile technique during preparation and use within 6 hours, after which the solution must be discarded. This is similar to propofol, which also lacks preservatives in some formulations and supports bacterial growth in its lipid emulsion.",
+    scene: null, metadata: { topic: "Barbiturates", priority: "medium", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["thiopental", "no preservatives", "bacterial growth", "6 hours"] }
+  },
+
+  // ── PROPOFOL — CV, RESPIRATORY, FIRST-PASS ───────────────────────────────
+
+  {
+    id: "n8c8-q090", type: "mcq",
+    prompt: "Approximately 30% of a propofol bolus dose undergoes first-pass uptake in which organ before reaching the systemic circulation?",
+    setup: "",
+    ans: [
+      { t: "The lungs — pulmonary first-pass metabolism removes roughly 30% of the initial bolus dose from circulation",  ok: true  },
+      { t: "The liver — hepatic first-pass extraction removes the majority of propofol before it reaches the brain",       ok: false },
+      { t: "The kidneys — renal filtration clears 30% of propofol directly into the urine during the initial pass",        ok: false },
+      { t: "The spleen — splenic sequestration traps lipophilic drugs like propofol in the reticuloendothelial system",     ok: false },
+    ],
+    rationale: "The lung plays a significant role in propofol's first-pass metabolism, removing approximately 30% of a bolus dose before it reaches the arterial circulation. This pulmonary uptake helps buffer the initial bolus but also means that the effective dose reaching the brain is less than the injected dose. The liver is the primary site of ongoing metabolism (not first-pass for IV drugs), and the kidneys excrete metabolites, not parent drug.",
+    scene: null, metadata: { topic: "Propofol", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["propofol", "first-pass", "pulmonary uptake", "30%"] }
+  },
+
+  {
+    id: "n8c8-q091", type: "multi",
+    prompt: "Propofol reduces cerebral metabolic rate for oxygen (CMRO₂). Which cerebral effects follow from this? (Select THREE)",
+    setup: "",
+    choices: [
+      "Decreased cerebral blood flow (CBF) secondary to reduced metabolic demand in the brain",
+      "Decreased intracranial pressure (ICP) due to reduced cerebral blood volume from vasoconstriction",
+      "Decreased intraocular pressure (IOP) making propofol suitable for ophthalmic procedures",
+      "Increased cerebral perfusion pressure (CPP) in all patients regardless of hemodynamic status",
+      "Increased cerebral blood flow due to direct vasodilation of cerebral arterioles by propofol",
+    ],
+    correctAnswers: [
+      "Decreased cerebral blood flow (CBF) secondary to reduced metabolic demand in the brain",
+      "Decreased intracranial pressure (ICP) due to reduced cerebral blood volume from vasoconstriction",
+      "Decreased intraocular pressure (IOP) making propofol suitable for ophthalmic procedures",
+    ],
+    selectCount: 3,
+    rationale: "Propofol ↓CMRO₂ → ↓CBF → ↓ICP and ↓IOP. However, propofol also ↓MAP via vasodilation, which can DECREASE CPP (CPP = MAP − ICP). In head-injured patients with hypotension, propofol's MAP reduction could dangerously lower CPP even though ICP is decreased. This is why propofol must be used cautiously in traumatic brain injury with hemodynamic instability.",
+    scene: null, metadata: { topic: "Propofol", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["propofol", "CMRO2", "ICP", "IOP", "CBF"] }
+  },
+
+  {
+    id: "n8c8-q092", type: "mcq",
+    prompt: "Propofol decreases blood pressure primarily through which cardiovascular mechanism?",
+    setup: "",
+    ans: [
+      { t: "Both arterial and venous vasodilation — reducing preload (venous) and afterload (arterial) simultaneously",  ok: true  },
+      { t: "Direct myocardial depression reducing contractility and stroke volume without affecting vascular tone at all", ok: false },
+      { t: "Reflex bradycardia from stimulation of carotid baroreceptors by the lipid emulsion vehicle in the solution",   ok: false },
+      { t: "Sympathetic nervous system activation that paradoxically causes hypotension through catecholamine depletion",   ok: false },
+    ],
+    rationale: "Propofol's primary CV effect is vasodilation — both arterial (↓afterload/SVR) and venous (↓preload/venous return). This reduces MAP significantly, especially in patients with diminished compensatory reserve: elderly, hypovolemic, diabetic, hypertensive, obese, and those with cardiovascular disease. While some direct myocardial depression may occur, vasodilation is the dominant mechanism.",
+    scene: null, metadata: { topic: "Propofol", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["propofol", "hypotension", "vasodilation", "preload", "afterload"] }
+  },
+
+  {
+    id: "n8c8-q093", type: "multi",
+    prompt: "Which patient populations are at INCREASED risk of cardiovascular depression from propofol? (Select FOUR)",
+    setup: "",
+    choices: [
+      "Elderly patients with reduced baroreceptor sensitivity and decreased cardiac reserve",
+      "Hypovolemic patients with inadequate circulating volume to maintain venous return",
+      "Patients with diabetes, hypertension, or obesity who have baseline vascular dysfunction",
+      "Patients with pre-existing cardiovascular disease and limited compensatory mechanisms",
+      "Young healthy ASA I patients with robust sympathetic tone and normal blood volume",
+      "Pregnant patients in the second trimester with physiologic volume expansion",
+    ],
+    correctAnswers: [
+      "Elderly patients with reduced baroreceptor sensitivity and decreased cardiac reserve",
+      "Hypovolemic patients with inadequate circulating volume to maintain venous return",
+      "Patients with diabetes, hypertension, or obesity who have baseline vascular dysfunction",
+      "Patients with pre-existing cardiovascular disease and limited compensatory mechanisms",
+    ],
+    selectCount: 4,
+    rationale: "Propofol's vasodilatory effects produce exaggerated hypotension in: elderly (↓baroreceptor response), hypovolemic (↓preload reserve), diabetic/hypertensive/obese (↓vascular compliance), and patients with cardiovascular disease (↓cardiac reserve). Young healthy patients typically compensate via baroreflexes. Dose reduction and slow titration are essential in these high-risk populations.",
+    scene: null, metadata: { topic: "Propofol", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["propofol", "CV risk", "elderly", "hypovolemic", "diabetes", "obesity"] }
+  },
+
+  {
+    id: "n8c8-q094", type: "mcq",
+    prompt: "Propofol affects the respiratory system by decreasing minute ventilation. What are the specific components of this respiratory depression?",
+    setup: "",
+    ans: [
+      { t: "It reduces both tidal volume and respiratory rate, blunts responses to hypoxia and hypercapnia, and increases upper airway collapsibility", ok: true  },
+      { t: "It reduces only respiratory rate while maintaining tidal volume, and it stimulates hypoxic ventilatory drive as a protective mechanism",     ok: false },
+      { t: "It reduces only tidal volume while maintaining respiratory rate, and it has no effect on upper airway muscle tone or reflexes at any dose",  ok: false },
+      { t: "It causes bronchospasm by directly constricting airway smooth muscle, which is the primary mechanism of minute ventilation reduction",        ok: false },
+    ],
+    rationale: "Propofol decreases minute ventilation through BOTH ↓tidal volume AND ↓respiratory rate. It blunts the ventilatory response to both hypoxia and hypercapnia. It also increases upper airway collapsibility (reduces pharyngeal muscle tone), contributing to obstruction. Notably, propofol does NOT cause bronchospasm — it actually has mild bronchodilatory properties, which is one reason it is preferred over thiopental for asthmatic patients.",
+    scene: null, metadata: { topic: "Propofol", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["propofol", "respiratory depression", "tidal volume", "upper airway"] }
+  },
+
+  // ── BENZODIAZEPINES — PK, SPECIAL POPULATIONS, REVERSAL ──────────────────
+
+  {
+    id: "n8c8-q095", type: "mcq",
+    prompt: "Benzodiazepines rely on the liver for biotransformation. How does advancing age affect diazepam and midazolam clearance?",
+    setup: "",
+    ans: [
+      { t: "Increasing age reduces clearance of diazepam significantly, and to a lesser degree midazolam — prolonging their effects", ok: true  },
+      { t: "Increasing age has no effect on benzodiazepine clearance because renal elimination dominates for both drugs at all ages",  ok: false },
+      { t: "Increasing age increases the clearance of both drugs equally because hepatic blood flow rises with age from vasodilation",  ok: false },
+      { t: "Only midazolam clearance is affected by age — diazepam is cleared by plasma esterases independent of hepatic function",    ok: false },
+    ],
+    rationale: "Benzodiazepines depend on hepatic biotransformation into water-soluble metabolites excreted in bile and urine. Advancing age reduces hepatic metabolic capacity, significantly decreasing diazepam clearance (and to a lesser degree midazolam). This means elderly patients may have prolonged sedation and require dose reduction. Diazepam's active metabolite (desmethyldiazepam) further extends its clinical effect in the elderly.",
+    scene: null, metadata: { topic: "Benzodiazepines", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["age", "clearance", "diazepam", "midazolam", "hepatic"] }
+  },
+
+  {
+    id: "n8c8-q096", type: "mcq",
+    prompt: "In an obese patient, the volume of distribution (Vd) of benzodiazepines is increased. How does this affect dosing strategy for induction versus continuous infusion?",
+    setup: "",
+    ans: [
+      { t: "May initially need a larger induction dose (↑Vd), but infusions should be dosed on ideal body weight to avoid accumulation", ok: true  },
+      { t: "Both induction and infusion doses should be based on total body weight because Vd increase applies equally to both phases",    ok: false },
+      { t: "Both induction and infusion doses should be reduced because obesity decreases hepatic clearance of all benzodiazepines",        ok: false },
+      { t: "Obesity has no clinically significant effect on benzodiazepine pharmacokinetics and no dose adjustment is required at all",       ok: false },
+    ],
+    rationale: "In obesity, the increased Vd of lipophilic benzodiazepines means the drug distributes into a larger tissue reservoir. For INDUCTION: a larger initial dose may be needed to achieve target plasma levels. For INFUSION: dosing on total body weight causes drug accumulation in fat stores → prolonged elimination half-life → delayed recovery. Therefore, continuous infusions should be dosed on IDEAL body weight (IBW).",
+    scene: null, metadata: { topic: "Benzodiazepines", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["obesity", "Vd", "IBW", "dosing", "accumulation"] }
+  },
+
+  {
+    id: "n8c8-q097", type: "mcq",
+    prompt: "Flumazenil (Romazicon) reverses benzodiazepine effects. What is unique about this reversal agent compared to reversal agents for other IV anesthetic classes?",
+    setup: "",
+    ans: [
+      { t: "No other class of IV hypnotic drug has a specific pharmacologic antagonist — flumazenil is unique to benzodiazepines",  ok: true  },
+      { t: "Flumazenil also reverses the effects of barbiturates, propofol, and etomidate at the GABA-A receptor complex as well",  ok: false },
+      { t: "Flumazenil is an irreversible antagonist that permanently blocks GABA-A receptors once administered intravenously",       ok: false },
+      { t: "Flumazenil works by enhancing hepatic metabolism of benzodiazepines rather than competing at the GABA-A receptor site",   ok: false },
+    ],
+    rationale: "Flumazenil is a COMPETITIVE antagonist at the benzodiazepine binding site on GABA-A receptors. It is the ONLY specific antagonist available for any IV hypnotic class — barbiturates, propofol, etomidate, and ketamine have no reversal agents. Dose: 0.2 mg every 2-10 minutes up to 1 mg. Caution: duration may be shorter than the benzodiazepine → risk of resedation. Seizure risk in chronic benzodiazepine users.",
+    scene: null, metadata: { topic: "Benzodiazepines", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["flumazenil", "reversal", "competitive antagonist", "unique"] }
+  },
+
+  // ── ETOMIDATE CV STABILITY ───────────────────────────────────────────────
+
+  {
+    id: "n8c8-q098", type: "mcq",
+    prompt: "Etomidate is described as having 'minimal cardiovascular effects.' What specific hemodynamic profile supports this claim?",
+    setup: "",
+    ans: [
+      { t: "Only a mild SVR reduction and slight BP decrease — myocardial contractility and cardiac output remain essentially unchanged", ok: true  },
+      { t: "It increases cardiac output and SVR simultaneously, producing hypertension that requires beta-blocker prophylaxis",            ok: false },
+      { t: "It produces the same degree of vasodilation as propofol but is offset by a reflex tachycardia that maintains MAP",              ok: false },
+      { t: "It has no hemodynamic effects whatsoever — heart rate, BP, SVR, and cardiac output are completely unaffected at any dose",       ok: false },
+    ],
+    rationale: "Etomidate produces only a mild reduction in SVR and a slight decrease in BP. Critically, myocardial contractility and cardiac output remain unchanged — making it the preferred induction agent for hemodynamically unstable patients. It also reduces CMRO₂, CBF, and ICP to a degree equal to thiopental, while CPP is well maintained because of the minimal cardiac effects. It is NOT completely without CV effects (slight BP drop), but the impact is far less than propofol or barbiturates.",
+    scene: null, metadata: { topic: "Etomidate", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["etomidate", "CV stability", "SVR", "contractility", "cardiac output"] }
+  },
+
+  {
+    id: "n8c8-q099", type: "mcq",
+    prompt: "Compared to barbiturates and benzodiazepines, how does etomidate's effect on ventilation differ?",
+    setup: "",
+    ans: [
+      { t: "Ventilation is LESS affected by etomidate than by barbiturates or benzodiazepines at equipotent induction doses",  ok: true  },
+      { t: "Ventilation is MORE affected by etomidate, causing more profound apnea than thiopental at equivalent doses",        ok: false },
+      { t: "Etomidate causes complete respiratory arrest regardless of dose, requiring immediate mechanical ventilation",        ok: false },
+      { t: "Etomidate has identical respiratory depression to propofol and barbiturates — no clinically meaningful difference",   ok: false },
+    ],
+    rationale: "Etomidate produces less respiratory depression than barbiturates or benzodiazepines at equipotent doses. While some respiratory depression occurs, it is milder — making etomidate a good choice when both hemodynamic stability AND preserved ventilatory drive are desired (e.g., rapid sequence induction in a trauma patient with potential full stomach and hemodynamic instability).",
+    scene: null, metadata: { topic: "Etomidate", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["etomidate", "respiratory", "less depression", "ventilation"] }
+  },
+
+  // ── DEXMEDETOMIDINE CV RISKS ─────────────────────────────────────────────
+
+  {
+    id: "n8c8-q100", type: "mcq",
+    prompt: "Dexmedetomidine can produce severe bradycardia, heart block, or even asystole through which mechanism?",
+    setup: "",
+    ans: [
+      { t: "Unopposed vagal stimulation — dex inhibits sympathetic outflow via central α₂ agonism, leaving vagal tone dominant",  ok: true  },
+      { t: "Direct blockade of cardiac sodium channels, slowing conduction through the AV node similar to class Ia antiarrhythmics", ok: false },
+      { t: "Stimulation of cardiac muscarinic M₂ receptors causing direct parasympathetic activation of the SA and AV nodes",        ok: false },
+      { t: "Coronary vasoconstriction reducing myocardial oxygen supply, which triggers reflexive bradycardia as a protective response", ok: false },
+    ],
+    rationale: "Dexmedetomidine is a central α₂ agonist that inhibits sympathetic outflow from the locus coeruleus. This reduces circulating catecholamines, leaving parasympathetic (vagal) tone UNOPPOSED. The result can be bradycardia, heart block, or even asystole — particularly in patients who are hypovolemic or have a MAP <70 mmHg. Risk factors for hemodynamic instability include hypovolemia, pre-existing conduction defects, concurrent use of beta-blockers or calcium channel blockers, and high loading doses.",
+    scene: null, metadata: { topic: "Dexmedetomidine", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["dexmedetomidine", "bradycardia", "asystole", "vagal", "unopposed"] }
+  },
+
+  // ── KETAMINE — LITHIUM INTERACTION ───────────────────────────────────────
+
+  {
+    id: "n8c8-q101", type: "mcq",
+    prompt: "Which psychiatric medication may prolong the duration of ketamine's effects?",
+    setup: "",
+    ans: [
+      { t: "Lithium — it may prolong the duration of ketamine-induced anesthesia and emergence from dissociative state",  ok: true  },
+      { t: "Sertraline (Zoloft) — SSRIs accelerate ketamine metabolism through CYP3A4 enzyme induction in the liver",      ok: false },
+      { t: "Haloperidol — antipsychotics competitively bind NMDA receptors and completely block ketamine's dissociative effect", ok: false },
+      { t: "Bupropion — dopamine-norepinephrine reuptake inhibitors have no interaction with ketamine at any clinical dose",     ok: false },
+    ],
+    rationale: "Lithium may prolong the duration of ketamine. The mechanism is not fully elucidated but may involve altered NMDA receptor function or changes in ketamine redistribution/metabolism. This is clinically relevant because many psychiatric patients take lithium for bipolar disorder, and ketamine is increasingly used for depression treatment and procedural sedation. Providers should be aware of potentially prolonged effects in lithium-treated patients.",
+    scene: null, metadata: { topic: "Ketamine", priority: "medium", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["ketamine", "lithium", "drug interaction", "prolonged duration"] }
+  },
+
+  // ── BENZODIAZEPINES — CNS EFFECTS ────────────────────────────────────────
+
+  {
+    id: "n8c8-q102", type: "mcq",
+    prompt: "Benzodiazepines reduce cerebral blood flow and intracranial pressure. How does this effect compare to barbiturates?",
+    setup: "",
+    ans: [
+      { t: "Benzodiazepines reduce CBF and ICP but NOT to the same extent as barbiturates — the effect is less pronounced",  ok: true  },
+      { t: "Benzodiazepines produce greater CBF and ICP reduction than barbiturates at equipotent sedative doses given IV",    ok: false },
+      { t: "Benzodiazepines have no effect on CBF or ICP whatsoever — only barbiturates and propofol affect cerebral hemodynamics", ok: false },
+      { t: "Benzodiazepines paradoxically increase CBF and ICP, which is why they are contraindicated in neurosurgical patients",   ok: false },
+    ],
+    rationale: "Benzodiazepines do reduce CBF and ICP, but the magnitude is less than barbiturates or propofol. They are also effective in preventing and treating seizures. Despite the lesser cerebral depressant effect, benzodiazepines are useful adjuncts in neuroanesthesia and can be reversed with flumazenil if needed — an advantage over barbiturates which have no specific antagonist.",
+    scene: null, metadata: { topic: "Benzodiazepines", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["benzodiazepines", "CBF", "ICP", "less than barbiturates", "seizures"] }
+  },
+
 ];
 
 export const IV_ANESTHETICS_METADATA = {
