@@ -42,6 +42,7 @@ import { CP_NODE4_QUESTIONS, CP_NODE4_METADATA } from '../data/questions/cp-node
 import { CP_NODE5_QUESTIONS, CP_NODE5_METADATA } from '../data/questions/cp-node5-fluids.js';
 import { CP_NODE6_QUESTIONS, CP_NODE6_METADATA } from '../data/questions/cp-node6-gas-laws.js';
 import { CP_NODE7_QUESTIONS, CP_NODE7_METADATA } from '../data/questions/cp-node7-states-of-matter.js';
+import { CP_NODE9_QUESTIONS, CP_NODE9_METADATA } from '../data/questions/cp-node9-acids-bases-buffers.js';
 
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
@@ -55,6 +56,10 @@ import { WEEK_9_QUESTIONS, WEEK_9_METADATA } from '../data/questions/week-9.js';
 import { WEEK_10_QUESTIONS, WEEK_10_METADATA } from '../data/questions/week-10.js';
 import { WEEK_11_QUESTIONS, WEEK_11_METADATA } from '../data/questions/week-11.js';
 import { WEEK_13_QUESTIONS, WEEK_13_METADATA } from '../data/questions/week-13.js';
+import { MODULE_4_QUESTIONS, MODULE_4_METADATA } from '../data/questions/module-4.js';
+import { MODULE_5_QUESTIONS, MODULE_5_METADATA } from '../data/questions/module-5.js';
+import { MODULE_7_QUESTIONS, MODULE_7_METADATA } from '../data/questions/module-7.js';
+import { MODULE_13_QUESTIONS, MODULE_13_METADATA } from '../data/questions/module-13.js';
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
@@ -383,6 +388,16 @@ export const NODE_CONFIG = {
     questionsMeta: CP_NODE7_METADATA,
   },
 
+  "cp-node-9": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Acids, Bases & Buffers",
+    chapterLabel:  "Ch. 9",
+    badgeLabel:    "ACIDS / BASES / BUFFERS",
+    icon:          "⚗️",
+    questions:     CP_NODE9_QUESTIONS,
+    questionsMeta: CP_NODE9_METADATA,
+  },
+
     "week-1": {
     courseId:      "adv-health-assessment",
     title:         "Week 1",
@@ -501,6 +516,54 @@ export const NODE_CONFIG = {
     icon:          "\ud83e\ude7a",
     questions:     WEEK_13_QUESTIONS,
     questionsMeta: WEEK_13_METADATA,
+  },
+
+    "module-4": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Module 4",
+    chapterLabel:  "Module 4",
+    badgeLabel:    "CHEM/PHYS Module.4",
+    icon:          "\u2697\ufe0f",
+    questions:     MODULE_4_QUESTIONS,
+    questionsMeta: MODULE_4_METADATA,
+    sceneRendererName: "renderModule4Scene",
+    stopSceneName:     "stopModule4Scene",
+  },
+
+    "module-5": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Module 5",
+    chapterLabel:  "Module 5",
+    badgeLabel:    "CHEM/PHYS Module.5",
+    icon:          "\u2697\ufe0f",
+    questions:     MODULE_5_QUESTIONS,
+    questionsMeta: MODULE_5_METADATA,
+    sceneRendererName: "renderModule5Scene",
+    stopSceneName:     "stopModule5Scene",
+  },
+
+    "module-7": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Module 7",
+    chapterLabel:  "Module 7",
+    badgeLabel:    "CHEM/PHYS Module.7",
+    icon:          "\u2697\ufe0f",
+    questions:     MODULE_7_QUESTIONS,
+    questionsMeta: MODULE_7_METADATA,
+    sceneRendererName: "renderModule7Scene",
+    stopSceneName:     "stopModule7Scene",
+  },
+
+    "module-13": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Module 13",
+    chapterLabel:  "Module 13",
+    badgeLabel:    "CHEM/PHYS Module.13",
+    icon:          "\u2697\ufe0f",
+    questions:     MODULE_13_QUESTIONS,
+    questionsMeta: MODULE_13_METADATA,
+    sceneRendererName: "renderModule13Scene",
+    stopSceneName:     "stopModule13Scene",
   },
 
   // ── Add future nodes here ──────────────────────────────────────────────────

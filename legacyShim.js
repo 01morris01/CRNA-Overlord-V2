@@ -112,6 +112,7 @@ const TOPIC_TO_NODE = {
   'cp-t05': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-5' },
   'cp-t06': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-6' },
   'cp-t07': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-7' },
+  'cp-t09': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-9' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.
