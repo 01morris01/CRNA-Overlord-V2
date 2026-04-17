@@ -113,6 +113,22 @@ const TOPIC_TO_NODE = {
   'cp-t06': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-6' },
   'cp-t07': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-7' },
   'cp-t09': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-9' },
+
+  // Advanced Health Assessment (NAS 520).
+  // Legacy world-map topics (ha-t01..t13) → new week-based question banks.
+  'ha-t01': { courseId: 'adv-health-assessment', nodeId: 'week-1'  },
+  'ha-t02': { courseId: 'adv-health-assessment', nodeId: 'week-2'  },
+  'ha-t03': { courseId: 'adv-health-assessment', nodeId: 'week-3'  },
+  'ha-t04': { courseId: 'adv-health-assessment', nodeId: 'week-4'  },
+  'ha-t05': { courseId: 'adv-health-assessment', nodeId: 'week-5'  },
+  'ha-t06': { courseId: 'adv-health-assessment', nodeId: 'week-6'  },
+  'ha-t07': { courseId: 'adv-health-assessment', nodeId: 'week-7-spring-break' },
+  'ha-t08': { courseId: 'adv-health-assessment', nodeId: 'week-8'  },
+  'ha-t09': { courseId: 'adv-health-assessment', nodeId: 'week-9'  },
+  'ha-t10': { courseId: 'adv-health-assessment', nodeId: 'week-10' },
+  'ha-t11': { courseId: 'adv-health-assessment', nodeId: 'week-11' },
+  'ha-t12': { courseId: 'adv-health-assessment', nodeId: 'week-13' },
+  'ha-t13': { courseId: 'adv-health-assessment', nodeId: 'week-13' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.
