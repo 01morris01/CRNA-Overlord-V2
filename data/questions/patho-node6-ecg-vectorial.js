@@ -1697,6 +1697,102 @@ export const PATHO_NODE6_QUESTIONS = [
     metadata: { topic: "Stress Test ECG", priority: "medium" },
   },
 
+  { id: "patho-n6-103", type: "mcq",
+    prompt: "Per Guyton, no potential is recorded on the ECG when the ventricular muscle is in which state?",
+    setup: "",
+    ans: [
+      { t: "Either completely depolarized or completely repolarized — no potential difference exists",  ok: true },
+      { t: "Only when completely depolarized — repolarized muscle always generates a detectable signal",  ok: false },
+      { t: "Only when completely repolarized — depolarized muscle always generates a detectable signal",  ok: false },
+      { t: "During the plateau phase of the action potential when Ca2+ and K+ currents are balanced",  ok: false },
+    ],
+    rationale: "The ECG records DIFFERENCES in electrical charge across the myocardium. When all cells are at the same state (all depolarized or all repolarized), there is no charge gradient and no deflection is recorded. Deflections occur only during the TRANSITION — when part of the heart is depolarized and part is still at rest, creating a dipole.",
+    scene: null, metadata: { topic: "ECG Zero Potential", priority: "medium" } },
+
+  { id: "patho-n6-104", type: "mcq",
+    prompt: "Per Guyton's Chapter 11, ventricular depolarization starts at the septum and endocardial surfaces. What is the average direction of current flow during QRS?",
+    setup: "",
+    ans: [
+      { t: "From the base of the heart toward the apex (top to bottom)",  ok: true },
+      { t: "From the apex toward the base (bottom to top) in all cases",  ok: false },
+      { t: "From left to right across the interventricular septum only",  ok: false },
+      { t: "Circumferentially around the ventricular walls with no net direction",  ok: false },
+    ],
+    rationale: "Per Guyton, the average current flows positively from the base to the apex during ventricular depolarization. At the very end of depolarization, the current briefly reverses for ~1/100 second and flows toward the outer walls near the base (producing the S wave). This base-to-apex main vector is why lead II (axis +60 degrees, roughly aligned with apex direction) usually records the largest QRS.",
+    scene: null, metadata: { topic: "Depolarization Direction", priority: "medium" } },
+
+  { id: "patho-n6-105", type: "mcq",
+    prompt: "Per Guyton's Chapter 12, atrial repolarization produces a wave that is the OPPOSITE polarity of the P wave. Why is the atrial T wave negative in leads I, II, and III?",
+    setup: "",
+    ans: [
+      { t: "In atria, the first area to depolarize is also the first to repolarize, reversing the repolarization vector",  ok: true },
+      { t: "Atrial muscle has a longer APD at the SA node end, so the SA region repolarizes last as expected",  ok: false },
+      { t: "Atrial repolarization is always positive but appears negative due to QRS interference artifact",  ok: false },
+      { t: "Atrial repolarization follows the same path as depolarization, producing an identical P wave shape",  ok: false },
+    ],
+    rationale: "Per Guyton Chapter 12, atrial depolarization is slower than ventricular, so the first area to depolarize (near SA node) is also the first to repolarize (unlike ventricles where endocardium depolarizes first but repolarizes last). This means the atrial repolarization vector points OPPOSITE to the P wave vector, giving a negative atrial T wave. However, this wave is normally buried within the QRS.",
+    scene: null, metadata: { topic: "Atrial Repolarization Direction", priority: "medium" } },
+
+  { id: "patho-n6-106", type: "mcq",
+    prompt: "Per Guyton's Chapter 12, which body position or habitus tends to shift the cardiac electrical axis to the LEFT?",
+    setup: "",
+    ans: [
+      { t: "Expiration, lying down, and excess abdominal fat (pushing the diaphragm up)",  ok: true },
+      { t: "Deep inspiration, standing upright, and tall thin body habitus",  ok: false },
+      { t: "Right lateral decubitus position with the heart hanging toward the right",  ok: false },
+      { t: "Body position has no effect on the cardiac axis under any circumstances",  ok: false },
+    ],
+    rationale: "Per Guyton's Chapter 12 slide on causes of left axis deviation, changes in heart position cause a left shift during expiration, lying down, and with excess abdominal fat — all of which push the diaphragm up and rotate the heart toward a more horizontal position. Conversely, inspiration and tall thin habitus drop the diaphragm and shift the axis rightward.",
+    scene: null, metadata: { topic: "Position and Axis", priority: "medium" } },
+
+  { id: "patho-n6-107", type: "mcq",
+    prompt: "Per Guyton's Chapter 12, right ventricular hypertrophy causing right axis deviation is associated with which conditions?",
+    setup: "",
+    ans: [
+      { t: "Pulmonary hypertension, pulmonary valve stenosis, and interventricular septal defect",  ok: true },
+      { t: "Systemic hypertension, aortic stenosis, and aortic regurgitation only",  ok: false },
+      { t: "Mitral stenosis, mitral regurgitation, and left atrial enlargement alone",  ok: false },
+      { t: "Coronary artery disease affecting the LAD territory with anterior wall infarction",  ok: false },
+    ],
+    rationale: "Per Guyton Chapter 12, RVH with right axis shift is caused by pulmonary hypertension, pulmonary valve stenosis, and VSD (where left-to-right shunting increases RV volume and pressure load). All produce slightly prolonged QRS and high voltage on ECG. Systemic hypertension and aortic valve disease cause LVH with left axis deviation instead.",
+    scene: null, metadata: { topic: "RVH Causes Ch12", priority: "medium" } },
+
+  { id: "patho-n6-108", type: "mcq",
+    prompt: "Per Guyton's Chapter 12, LBBB produces which characteristic morphology in V1 and V6?",
+    setup: "",
+    ans: [
+      { t: "V1 shows a wide negative S wave; V6 shows a broad notched R wave ('rabbit ear' pattern)",  ok: true },
+      { t: "V1 shows a positive rSR' pattern; V6 shows a deep S wave with slurred terminal portion",  ok: false },
+      { t: "V1 and V6 both show narrow normal QRS complexes with no morphologic changes at all",  ok: false },
+      { t: "V1 shows tall peaked R waves; V6 shows deep Q waves followed by small R waves",  ok: false },
+    ],
+    rationale: "Per Guyton Chapter 12, LBBB causes left axis shift with QRS >0.12 sec. V1 shows a wide negative S wave (or QS pattern) because the delayed LV depolarization vector points away from V1. V6 shows a broad, notched monophasic R wave because the late LV vector points toward V6. Absent septal q waves in V6 are also characteristic. RBBB shows the opposite: rSR' in V1 and slurred S in V6.",
+    scene: null, metadata: { topic: "LBBB V1 V6 Ch12", priority: "high" } },
+
+  { id: "patho-n6-109", type: "mcq",
+    prompt: "Per Guyton, the vectorcardiogram traces instantaneous vectors throughout the cardiac cycle. When is the depolarization vector LARGEST?",
+    setup: "",
+    ans: [
+      { t: "When approximately half of the ventricle is depolarized — maximum charge difference exists",  ok: true },
+      { t: "At the very beginning of depolarization when only the septum is activated initially",  ok: false },
+      { t: "At the very end of depolarization when the entire ventricle is fully depolarized now",  ok: false },
+      { t: "During repolarization when the T wave vector reaches its peak amplitude on the ECG",  ok: false },
+    ],
+    rationale: "Per Guyton Figure 12-10, the instantaneous vector is largest when half the ventricle is depolarized and half is still polarized — this creates the maximum dipole (charge separation). At the beginning, only a small area is depolarized (small vector). At the end, almost everything is depolarized, so the remaining dipole is small again. At complete depolarization, the vector is zero.",
+    scene: null, metadata: { topic: "Maximum Vector Size", priority: "medium" } },
+
+  { id: "patho-n6-110", type: "mcq",
+    prompt: "Per Guyton's Chapter 12, the method of determining mean electrical axis involves plotting net QRS voltage from two leads onto Einthoven's triangle and drawing perpendicular lines. Where these perpendicular lines intersect determines:",
+    setup: "",
+    ans: [
+      { t: "The direction and magnitude of the mean electrical axis of the heart",  ok: true },
+      { t: "The heart rate calculated from the R-R interval on the ECG tracing",  ok: false },
+      { t: "The exact location of the SA node within the right atrial wall tissue",  ok: false },
+      { t: "The PR interval duration and whether first-degree AV block is present",  ok: false },
+    ],
+    rationale: "Per Guyton, to determine the mean axis: (1) measure net QRS voltage in two leads (usually I and III), (2) plot these voltages along their respective lead axes on the triangle, (3) draw perpendicular lines from the ends of each plotted vector. The intersection point defines the direction of the mean QRS vector relative to the triangle's center. This is the graphical axis determination method.",
+    scene: null, metadata: { topic: "Graphical Axis Method", priority: "medium" } },
+
 ];
 
 export const PATHO_NODE6_METADATA = {

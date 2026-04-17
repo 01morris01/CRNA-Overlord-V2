@@ -1706,6 +1706,102 @@ export const PATHO_NODE5_QUESTIONS = [
     metadata: { topic: "ECG Deflections", priority: "high" },
   },
 
+  { id: "patho-n5-103", type: "mcq",
+    prompt: "Per Guyton's Figure 9-1, which layer of the heart wall is the thickest and contains the contractile myocytes responsible for generating force?",
+    setup: "",
+    ans: [
+      { t: "Myocardium (the middle muscular layer between endocardium and epicardium)",  ok: true },
+      { t: "Endocardium (the innermost layer lining the chambers and covering the valves)",  ok: false },
+      { t: "Epicardium (the outermost visceral layer of the pericardium on the surface)",  ok: false },
+      { t: "Parietal pericardium (the tough fibrous sac surrounding the entire heart)",  ok: false },
+    ],
+    rationale: "The myocardium is the thick muscular middle layer that performs the pumping work. It is thickest in the left ventricle. The endocardium is a thin endothelial lining; the epicardium (visceral pericardium) covers the outer surface. Between epicardium and parietal pericardium lies the pericardial space containing a small volume of serous fluid for lubrication.",
+    scene: null, metadata: { topic: "Heart Wall Layers", priority: "medium" } },
+
+  { id: "patho-n5-104", type: "mcq",
+    prompt: "The pericardial space normally contains a small amount of serous fluid. What is the primary function of this fluid?",
+    setup: "",
+    ans: [
+      { t: "Lubrication — reducing friction between visceral and parietal pericardium during cardiac motion",  ok: true },
+      { t: "Nutrition — delivering oxygen and glucose to the epicardial surface of the myocardium",  ok: false },
+      { t: "Electrical insulation — preventing cardiac electrical activity from reaching the chest wall",  ok: false },
+      { t: "Pressure regulation — maintaining negative intrathoracic pressure around the heart always",  ok: false },
+    ],
+    rationale: "The pericardial sac contains ~15-50 mL of serous fluid that allows the heart to move freely within the pericardium during each beat. Excessive accumulation (pericardial effusion) can cause tamponade, compressing the heart and impairing filling. For anesthesia, this is critical in trauma, post-cardiac surgery, and uremia.",
+    scene: null, metadata: { topic: "Pericardial Fluid", priority: "medium" } },
+
+  { id: "patho-n5-105", type: "mcq",
+    prompt: "The atrial 'v-wave' on the venous pressure tracing corresponds to what event?",
+    setup: "",
+    ans: [
+      { t: "Passive venous blood flow into the atria during ventricular systole while AV valves are closed",  ok: true },
+      { t: "Active atrial contraction pushing blood into the ventricles before systole begins",  ok: false },
+      { t: "Ventricular contraction causing the AV valves to bulge backward into the atria",  ok: false },
+      { t: "Opening of the aortic valve during ventricular ejection in early systole",  ok: false },
+    ],
+    rationale: "The three atrial pressure waves are: a = atrial contraction, c = AV valve bulging from ventricular contraction, v = passive venous return filling the atria while AV valves are still closed during ventricular systole. The v-wave is exaggerated in mitral or tricuspid regurgitation because blood regurgitates into the atrium during systole.",
+    scene: null, metadata: { topic: "Atrial v Wave", priority: "medium" } },
+
+  { id: "patho-n5-106", type: "mcq",
+    prompt: "Per Guyton, what is the approximate time for the cardiac impulse to travel from the SA node through the internodal pathways to reach the AV node?",
+    setup: "",
+    ans: [
+      { t: "About 0.03 seconds",  ok: true },
+      { t: "About 0.16 seconds",  ok: false },
+      { t: "About 0.09 seconds",  ok: false },
+      { t: "About 0.30 seconds",  ok: false },
+    ],
+    rationale: "Per Guyton's Figure 10-3/10-4, the impulse reaches the AV node in about 0.03 sec after leaving the SA node. The AV node itself delays the impulse for ~0.09 sec, the AV bundle adds ~0.04 sec, and total transmission from AV bundle to the last ventricular fiber takes ~0.06 sec (QRS time). These numbers are frequently tested.",
+    scene: null, metadata: { topic: "Internodal Conduction Time", priority: "medium" } },
+
+  { id: "patho-n5-107", type: "mcq",
+    prompt: "Sympathetic stimulation releases norepinephrine at cardiac nerve endings. Per Guyton, what specific ion permeability changes does norepinephrine produce?",
+    setup: "",
+    ans: [
+      { t: "Increases permeability to Na+ and Ca2+, causing a more positive resting potential and faster self-excitation",  ok: true },
+      { t: "Increases permeability to K+ and Cl-, causing hyperpolarization and slower self-excitation at the SA node",  ok: false },
+      { t: "Decreases permeability to all ions, stabilizing the membrane and preventing spontaneous depolarization",  ok: false },
+      { t: "Opens GIRK channels that carry inward K+ current, flattening the Phase 4 slope at the SA node",  ok: false },
+    ],
+    rationale: "Per Guyton, norepinephrine increases permeability to Na+ and Ca2+, making the resting potential less negative (more positive) and accelerating self-excitation. This steepens the Phase 4 slope in SA and AV nodal cells, increases conduction velocity through AV fibers, and enhances force of contraction in atria and ventricles.",
+    scene: null, metadata: { topic: "NE Ion Permeability", priority: "medium" } },
+
+  { id: "patho-n5-108", type: "mcq",
+    prompt: "Per Guyton's chapter on autonomic effects, why can parasympathetic stimulation temporarily STOP the heart?",
+    setup: "",
+    ans: [
+      { t: "ACh causes such extreme hyperpolarization of SA nodal cells that they cannot reach threshold",  ok: true },
+      { t: "ACh directly blocks L-type Ca2+ channels on ventricular myocytes, stopping all contraction",  ok: false },
+      { t: "ACh causes tetanic contraction of the ventricles by opening Na+ channels continuously",  ok: false },
+      { t: "ACh induces immediate complete AV block by destroying the His bundle fibers permanently",  ok: false },
+    ],
+    rationale: "Strong vagal stimulation releases ACh that increases K+ permeability (GIRK channels), hyperpolarizing SA nodal cells far below threshold. This can temporarily stop SA firing. Simultaneously, ACh decreases AV excitability. After a pause, ventricular escape occurs (at 15-40 bpm). This mechanism underlies vasovagal syncope and is clinically important during airway manipulation in anesthesia.",
+    scene: null, metadata: { topic: "Vagal Cardiac Arrest", priority: "high" } },
+
+  { id: "patho-n5-109", type: "mcq",
+    prompt: "Per Guyton's Figure 10-2, what is the key difference between the sinus nodal fiber action potential and the ventricular muscle fiber action potential?",
+    setup: "",
+    ans: [
+      { t: "SA nodal AP has a less negative RMP (~-55 mV), slower upstroke, no plateau, and gradual Phase 4 drift to threshold",  ok: true },
+      { t: "SA nodal AP has a more negative RMP (~-90 mV), faster upstroke, and a prominent plateau phase",  ok: false },
+      { t: "Both have identical action potential shapes but differ only in their refractory periods",  ok: false },
+      { t: "The ventricular fiber has spontaneous Phase 4 depolarization while the SA node does not",  ok: false },
+    ],
+    rationale: "Figure 10-2 compares SA nodal and ventricular APs. SA node: RMP ~-55 to -60 mV, slow Ca2+-mediated upstroke, no distinct plateau, spontaneous Phase 4 drift. Ventricular muscle: RMP ~-85 to -95 mV, rapid Na+-mediated upstroke, prominent plateau, stable Phase 4. These differences explain why SA node is the pacemaker and ventricles follow.",
+    scene: null, metadata: { topic: "SA vs Ventricular AP", priority: "high" } },
+
+  { id: "patho-n5-110", type: "mcq",
+    prompt: "According to Guyton, ventricular depolarization spreads from endocardium to epicardium. What is the direction of ventricular REPOLARIZATION?",
+    setup: "",
+    ans: [
+      { t: "Epicardium to endocardium — the outer surface repolarizes first because endocardium has longer APD",  ok: true },
+      { t: "Endocardium to epicardium — repolarization follows the same direction as depolarization always",  ok: false },
+      { t: "Base to apex — repolarization always follows the anatomic axis of the heart regardless",  ok: false },
+      { t: "Simultaneous repolarization throughout the entire ventricular wall at the same instant",  ok: false },
+    ],
+    rationale: "Depolarization spreads endocardium-to-epicardium, but the endocardium has longer action potential duration (due to higher pressure, longer mechanical stress). Therefore the epicardium repolarizes FIRST. Since both direction and charge polarity reverse, the T wave vector points the same way as the QRS — explaining why T waves are normally upright in leads with upright QRS.",
+    scene: null, metadata: { topic: "Repolarization Direction", priority: "high" } },
+
 ];
 
 export const PATHO_NODE5_METADATA = {
