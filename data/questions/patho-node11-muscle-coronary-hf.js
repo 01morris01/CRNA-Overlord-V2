@@ -1732,6 +1732,102 @@ export const PATHO_NODE11_QUESTIONS = [
     metadata: { topic: "MVO₂ Determinants", priority: "high" },
   },
 
+  { id: "patho-n11-106", type: "mcq",
+    prompt: "At rest, the heart extracts approximately what percentage of oxygen from coronary arterial blood?",
+    setup: "",
+    ans: [
+      { t: "About 70% — leaving very little O₂ reserve in coronary venous blood",  ok: true },
+      { t: "About 25% — similar to skeletal muscle at rest with large reserve",      ok: false },
+      { t: "About 90% — nearly complete extraction at baseline resting conditions",   ok: false },
+      { t: "About 10% — minimal extraction because resting cardiac work is very low",  ok: false },
+    ],
+    rationale: "The heart extracts ~70% of oxygen from coronary blood at rest (coronary sinus O₂ saturation ~30%), compared to ~25% in most other tissues. This means the heart cannot meaningfully increase O₂ extraction to meet higher demand — it MUST increase coronary blood flow instead. This is why coronary vasodilator reserve is critical, and why coronary artery stenosis causes ischemia during increased demand (exercise, tachycardia).",
+    scene: null, metadata: { topic: "Coronary O₂ Extraction", priority: "high" } },
+
+  { id: "patho-n11-107", type: "mcq",
+    prompt: "The coronary vessels contain both alpha and beta adrenergic receptors. Where are alpha receptors predominantly located?",
+    setup: "",
+    ans: [
+      { t: "On the epicardial (large) coronary arteries — sympathetic stimulation usually causes net coronary constriction",  ok: true },
+      { t: "On the intramuscular (small) coronary arteries — causing constriction that worsens subendocardial ischemia",       ok: false },
+      { t: "Equally distributed throughout all coronary vessels with no regional predominance of receptor subtypes",             ok: false },
+      { t: "Only on coronary veins, not arteries — explaining why sympathetic stimulation does not affect coronary flow",        ok: false },
+    ],
+    rationale: "Epicardial coronary arteries have predominantly alpha receptors (vasoconstriction), while intramuscular arteries may have more beta receptors (vasodilation). The net effect of sympathetic stimulation is usually slight constriction, but metabolic vasodilation from increased cardiac work typically overrides this. In some individuals, alpha-mediated vasoconstriction is disproportionately severe, causing vasospastic (Prinzmetal's) angina during sympathetic surges.",
+    scene: null, metadata: { topic: "Coronary Adrenergic Receptors", priority: "medium" } },
+
+  { id: "patho-n11-108", type: "mcq",
+    prompt: "Under resting conditions, cardiac muscle derives approximately 70% of its energy from:",
+    setup: "",
+    ans: [
+      { t: "Fatty acid oxidation — the heart's preferred aerobic fuel at rest",  ok: true },
+      { t: "Glucose oxidation — the heart's primary substrate under all conditions", ok: false },
+      { t: "Lactate metabolism — the heart consumes lactate produced by skeletal muscle", ok: false },
+      { t: "Ketone body oxidation — the dominant fuel source for cardiac myocytes at rest", ok: false },
+    ],
+    rationale: "At rest, the heart derives ~70% of its ATP from fatty acid beta-oxidation, with the remainder from glucose, lactate, and amino acids. During ischemia, fatty acid oxidation ceases and the heart must rely on anaerobic glycolysis, which is far less efficient and produces lactic acid — a probable contributor to anginal pain. The heart can also metabolize lactate (unlike most tissues), making it a lactate consumer rather than producer under aerobic conditions.",
+    scene: null, metadata: { topic: "Cardiac Fuel Substrate", priority: "medium" } },
+
+  { id: "patho-n11-109", type: "mcq",
+    prompt: "A thrombus that breaks away from an atherosclerotic plaque and travels to occlude a more distal coronary artery branch is called a:",
+    setup: "",
+    ans: [
+      { t: "Coronary embolus — a traveling thrombus that lodges in a downstream vessel",  ok: true },
+      { t: "Coronary thrombus — which by definition forms and stays at the rupture site",   ok: false },
+      { t: "Coronary aneurysm — a dilated segment of artery prone to rupture distally",     ok: false },
+      { t: "Coronary dissection — an intimal tear that propagates along the vessel wall",    ok: false },
+    ],
+    rationale: "An atherosclerotic plaque ruptures through the endothelium, exposing the unsmooth surface to flowing blood. Platelets adhere, fibrin deposits, and a thrombus forms. If the thrombus remains in place, it is a coronary thrombus causing local occlusion. If it breaks free and travels distally, it becomes a coronary embolus. Both can cause acute MI. The distinction matters clinically because emboli may occlude smaller, more distal vessels.",
+    scene: null, metadata: { topic: "Coronary Embolus", priority: "low" } },
+
+  { id: "patho-n11-110", type: "mcq",
+    prompt: "In chronic volume-overload lesions (aortic or mitral regurgitation), the left ventricle develops:",
+    setup: "",
+    ans: [
+      { t: "Eccentric hypertrophy — chamber dilation with proportional wall thickening (sarcomeres added in series)",  ok: true },
+      { t: "Concentric hypertrophy — wall thickening without chamber dilation (sarcomeres added in parallel)",          ok: false },
+      { t: "No hypertrophy — the ventricle simply dilates without any adaptive wall changes over time",                  ok: false },
+      { t: "Asymmetric septal hypertrophy — thickening confined to the interventricular septum only",                     ok: false },
+    ],
+    rationale: "Volume overload (regurgitant lesions, VSD) causes the ventricle to handle larger volumes each cycle. The adaptive response is eccentric LVH: the chamber dilates and new sarcomeres are added in series, maintaining normal wall stress (Laplace law). In contrast, pressure overload (aortic stenosis, chronic HTN) causes concentric LVH: sarcomeres added in parallel thicken the wall without dilation. Eccentric LVH is associated with systolic dysfunction; concentric with diastolic dysfunction.",
+    scene: null, metadata: { topic: "Eccentric vs Concentric LVH", priority: "high" } },
+
+  { id: "patho-n11-111", type: "mcq",
+    prompt: "In decompensated heart failure, there is a 'critical cardiac output level for normal fluid balance.' What happens if cardiac output falls below this level?",
+    setup: "",
+    ans: [
+      { t: "Renal perfusion becomes insufficient to excrete enough Na/H₂O, causing progressive fluid retention and a vicious cycle",  ok: true },
+      { t: "The kidneys increase sodium excretion to compensate, creating a diuretic response that restores fluid balance",              ok: false },
+      { t: "Cardiac output spontaneously recovers as Frank-Starling mechanism compensates for the reduced pumping ability",               ok: false },
+      { t: "Baroreceptors fully restore arterial pressure to normal, preventing any further decline in renal perfusion or GFR",           ok: false },
+    ],
+    rationale: "When cardiac output falls below ~50% of normal, renal perfusion becomes so low that the kidneys cannot excrete enough sodium and water to match intake. This triggers progressive fluid retention → increased filling pressures → further cardiac overstretch → worsening pump function → more fluid retention — the classic vicious cycle of decompensated HF. Unless broken by treatment (diuretics, inotropes, RAAS inhibition), this cycle progresses to death.",
+    scene: null, metadata: { topic: "Critical CO Level HF", priority: "high" } },
+
+  { id: "patho-n11-112", type: "mcq",
+    prompt: "In heart failure, moderate fluid retention is considered beneficial because it:",
+    setup: "",
+    ans: [
+      { t: "Shifts the venous return curve rightward (higher MSFP), restoring cardiac output along the depressed cardiac function curve",  ok: true },
+      { t: "Reduces afterload by diluting plasma protein concentration and lowering blood viscosity substantially",                          ok: false },
+      { t: "Directly strengthens the failing myocardium through stretch-induced gene expression of contractile proteins",                     ok: false },
+      { t: "Increases coronary perfusion pressure, reversing the underlying ischemic cause of the heart failure",                             ok: false },
+    ],
+    rationale: "Guyton emphasizes that moderate fluid retention is the body's natural compensatory mechanism in HF: increased blood volume raises MSFP, shifting the venous return curve rightward. This allows the depressed cardiac function curve to intersect at a higher CO (with higher RAP — the 'cost' of compensation). However, EXCESSIVE fluid retention overstretches the heart, worsens pump function, raises pulmonary pressures, and causes edema — transitioning from compensated to decompensated HF.",
+    scene: null, metadata: { topic: "Moderate vs Excessive Fluid Retention", priority: "high" } },
+
+  { id: "patho-n11-113", type: "mcq",
+    prompt: "According to Guyton's graphical analysis of heart failure recovery, the three stages after a mild/moderate heart attack are (in sequence):",
+    setup: "",
+    ans: [
+      { t: "Instantaneous cardiac damage (A→B), SNS compensation within 30-60 seconds (B→C), chronic compensation via fluid retention and partial heart recovery (C→D)",  ok: true },
+      { t: "Initial fluid overload (A→B), diuretic response (B→C), long-term ventricular remodeling (C→D)",                                                                ok: false },
+      { t: "Baroreceptor reset (A→B), RAAS activation (B→C), pressure natriuresis (C→D)",                                                                                   ok: false },
+      { t: "Coronary vasospasm (A→B), reperfusion injury (B→C), scar formation (C→D)",                                                                                       ok: false },
+    ],
+    rationale: "Guyton's Figure 22-1 shows three distinct stages: (A→B) the acute cardiac damage drops the cardiac function curve downward, immediately reducing CO and raising RAP; (B→C) within 30-60 seconds, sympathetic activation partially restores CO by increasing HR, contractility, and MSFP; (C→D) over days to weeks, partial cardiac recovery and moderate fluid retention (shifting VR curve right) further restore CO — but at a higher RAP. The resulting 'compensated HF' has near-normal CO but reduced cardiac reserve.",
+    scene: null, metadata: { topic: "HF Recovery Stages", priority: "high" } },
+
 ];
 
 export const PATHO_NODE11_METADATA = {

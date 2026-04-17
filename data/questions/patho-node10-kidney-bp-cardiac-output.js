@@ -1729,6 +1729,66 @@ export const PATHO_NODE10_QUESTIONS = [
     metadata: { topic: "Venodilator Effect", priority: "high" },
   },
 
+  { id: "patho-n10-106", type: "mcq",
+    prompt: "Which of the following factors INCREASES renal excretory function and thereby DECREASES long-term blood pressure?",
+    setup: "",
+    ans: [
+      { t: "Nitric oxide (NO) — shifts the renal function curve leftward, promoting natriuresis at lower pressures",  ok: true },
+      { t: "Angiotensin II — shifts the renal function curve rightward, promoting Na retention at higher pressures",   ok: false },
+      { t: "Endothelin — shifts the renal function curve rightward, decreasing sodium excretion at any pressure",       ok: false },
+      { t: "Aldosterone — shifts the renal function curve rightward by enhancing collecting duct Na reabsorption",      ok: false },
+    ],
+    rationale: "Guyton identifies three factors that INCREASE renal excretion and LOWER BP: atrial natriuretic peptide, nitric oxide, and dopamine. These shift the renal function curve LEFTWARD, meaning sodium excretion occurs at lower arterial pressures, reducing the long-term BP equilibrium point. Angiotensin II, aldosterone, sympathetic activity, and endothelin all do the opposite — they shift the curve rightward and raise BP.",
+    scene: null, metadata: { topic: "Nitric Oxide Renal", priority: "medium" } },
+
+  { id: "patho-n10-107", type: "mcq",
+    prompt: "Renal dopamine acts to:",
+    setup: "",
+    ans: [
+      { t: "Increase renal excretory function, shifting the renal function curve leftward and lowering blood pressure",  ok: true },
+      { t: "Decrease renal excretory function, shifting the renal function curve rightward and raising blood pressure",   ok: false },
+      { t: "Constrict the afferent arteriole, reducing GFR and promoting sodium and water retention in the nephron",       ok: false },
+      { t: "Stimulate renin release from juxtaglomerular cells, activating the RAAS cascade and raising blood pressure",   ok: false },
+    ],
+    rationale: "Dopamine produced locally in the proximal tubule promotes natriuresis and diuresis by inhibiting Na/K-ATPase and Na/H exchanger activity. Along with ANP and nitric oxide, dopamine is one of the factors that shift the renal function curve leftward, lowering the long-term BP equilibrium point. Low-dose dopamine infusion was historically used to promote renal perfusion, though this practice has fallen out of favor.",
+    scene: null, metadata: { topic: "Renal Dopamine", priority: "low" } },
+
+  { id: "patho-n10-108", type: "mcq",
+    prompt: "Endothelin acts on the kidney to:",
+    setup: "",
+    ans: [
+      { t: "Decrease renal excretory function, shifting the renal function curve rightward and raising blood pressure",  ok: true },
+      { t: "Increase renal excretory function, shifting the renal function curve leftward and lowering blood pressure",   ok: false },
+      { t: "Directly stimulate ANP release from atrial myocytes, promoting natriuresis and volume reduction",              ok: false },
+      { t: "Inhibit aldosterone secretion from the adrenal cortex, reducing distal tubule sodium reabsorption",            ok: false },
+    ],
+    rationale: "Endothelin is a potent vasoconstrictor peptide released by endothelial cells. In the kidney, it decreases renal excretory function (shifts the renal function curve rightward), joining angiotensin II, aldosterone, and sympathetic nervous activity as factors that raise long-term blood pressure. Endothelin receptor antagonists (e.g., bosentan) are used in pulmonary arterial hypertension.",
+    scene: null, metadata: { topic: "Endothelin Renal", priority: "low" } },
+
+  { id: "patho-n10-109", type: "mcq",
+    prompt: "In volume-loading hypertension, the initial rise in blood pressure is due to increased cardiac output. Over days, what mechanism causes the cardiac output to return toward normal while BP remains elevated?",
+    setup: "",
+    ans: [
+      { t: "Whole-body autoregulation — tissues constrict arterioles in response to excess flow, raising TPR",  ok: true },
+      { t: "Baroreceptor resetting — the brainstem increases vagal tone and reduces heart rate progressively",   ok: false },
+      { t: "Renal pressure natriuresis — the kidneys excrete all excess volume, normalizing both CO and BP",      ok: false },
+      { t: "Cardiac fatigue — the myocardium cannot sustain elevated output and contractility declines over time", ok: false },
+    ],
+    rationale: "Guyton's Figure 19-8 shows the classic volume-loading HTN sequence: initially ECFV rises 33%, blood volume 20%, CO 40%, but over 14 days CO returns to only 5% above normal while TPR rises 33% and MAP stays 40% elevated. The mechanism is whole-body autoregulation: when tissues receive excessive blood flow, local metabolic signals cause arteriolar constriction (autoregulation), converting a high-CO state into a high-TPR state.",
+    scene: null, metadata: { topic: "Autoregulation HTN", priority: "high" } },
+
+  { id: "patho-n10-110", type: "mcq",
+    prompt: "When peripheral tissues dilate their vessels (as during exercise), maintenance of arterial pressure by the nervous system is essential for achieving high cardiac output. Why?",
+    setup: "",
+    ans: [
+      { t: "Without reflex vasoconstriction elsewhere and cardiac stimulation, MAP would fall and the driving pressure gradient for flow would collapse",  ok: true },
+      { t: "Peripheral vasodilation always reduces venous return, so nervous reflexes must reduce cardiac output to match the lower venous return",          ok: false },
+      { t: "The nervous system directly increases coronary blood flow, which is the sole determinant of how much cardiac output can increase",               ok: false },
+      { t: "Nervous system activation inhibits pressure natriuresis, preventing the kidneys from losing volume during exercise-induced vasodilation",        ok: false },
+    ],
+    rationale: "Guyton's Figure 20-6 shows that when dinitrophenol causes peripheral vasodilation, animals with intact nervous control maintain MAP at 100 mmHg and achieve CO of 5 L/min, whereas denervated animals see MAP fall to 50 mmHg and CO rises to only 2.5 L/min. The nervous system maintains the driving pressure (MAP) that allows high flow rates. During exercise, sympathetic activation constricts non-exercising beds, increases HR and contractility, and maintains MAP so that the exercising muscles can receive high flow.",
+    scene: null, metadata: { topic: "Nervous System MAP Maintenance", priority: "medium" } },
+
 ];
 
 export const PATHO_NODE10_METADATA = {

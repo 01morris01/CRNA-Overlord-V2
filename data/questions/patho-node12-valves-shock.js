@@ -1718,6 +1718,126 @@ export const PATHO_NODE12_QUESTIONS = [
     metadata: { topic: "Shock Diagnosis", priority: "high" },
   },
 
+  { id: "patho-n12-106", type: "mcq",
+    prompt: "The auscultation area for the AORTIC valve is located at:",
+    setup: "",
+    ans: [
+      { t: "The right upper sternal border (2nd intercostal space, right parasternal line)",  ok: true },
+      { t: "The cardiac apex (5th intercostal space, midclavicular line)",                      ok: false },
+      { t: "The left lower sternal border (4th intercostal space, left parasternal line)",      ok: false },
+      { t: "The left upper sternal border (2nd intercostal space, left parasternal line)",       ok: false },
+    ],
+    rationale: "The four classic auscultation areas are: Aortic = right upper sternal border (2nd ICS right); Pulmonic = left upper sternal border (2nd ICS left); Tricuspid = left lower sternal border (4th ICS left); Mitral = cardiac apex (5th ICS, MCL). These areas reflect where sounds radiate, not where the valves are anatomically located. Aortic stenosis is best heard at the aortic area with radiation to the carotids.",
+    scene: null, metadata: { topic: "Auscultation Areas", priority: "medium" } },
+
+  { id: "patho-n12-107", type: "mcq",
+    prompt: "On a phonocardiogram, aortic REGURGITATION produces a murmur that is:",
+    setup: "",
+    ans: [
+      { t: "Diastolic, decrescendo, high-pitched — heard best with the diaphragm at the left sternal border",  ok: true },
+      { t: "Systolic, crescendo-decrescendo (diamond-shaped) — heard best at the right upper sternal border",   ok: false },
+      { t: "Holosystolic, blowing — heard best at the cardiac apex with radiation to the axilla",                ok: false },
+      { t: "Diastolic, crescendo — heard best at the cardiac apex with an opening snap preceding it",            ok: false },
+    ],
+    rationale: "Aortic regurgitation produces a diastolic decrescendo murmur because blood leaks back from the high-pressure aorta into the LV during diastole, with flow decelerating as the pressure gradient narrows. It is high-pitched (best with diaphragm) and heard at the left sternal border (Erb's point). Compare: AS = systolic diamond-shaped, MR = holosystolic blowing, MS = diastolic crescendo with opening snap.",
+    scene: null, metadata: { topic: "AR Phonocardiogram", priority: "medium" } },
+
+  { id: "patho-n12-108", type: "mcq",
+    prompt: "Circulatory shock can occur WITHOUT decreased cardiac output. Which scenario illustrates this?",
+    setup: "",
+    ans: [
+      { t: "Excessive whole-body metabolism or abnormal tissue perfusion patterns where CO is normal or high but inadequate for tissue needs",  ok: true },
+      { t: "Massive myocardial infarction causing pump failure with CO falling below 2 L/min",                                                   ok: false },
+      { t: "Hemorrhagic shock with 40% blood volume loss and severely reduced venous return",                                                     ok: false },
+      { t: "Cardiac tamponade restricting ventricular filling and reducing stroke volume to critically low levels",                                ok: false },
+    ],
+    rationale: "Guyton identifies two scenarios of shock without decreased CO: (1) excessive metabolism, where CO is normal or elevated but insufficient to meet tissue demands; (2) abnormal perfusion patterns (e.g., sepsis), where CO may be very high but blood is shunted away from vital organs. Early septic shock is the classic clinical example — CO is often supranormal, yet tissues are hypoperfused due to maldistribution of flow and mitochondrial dysfunction.",
+    scene: null, metadata: { topic: "Shock Without Low CO", priority: "high" } },
+
+  { id: "patho-n12-109", type: "mcq",
+    prompt: "The compensatory mechanisms activated within 30-60 SECONDS of hemorrhagic shock include:",
+    setup: "",
+    ans: [
+      { t: "Baroreceptor reflexes and CNS ischemic response — rapid sympathetic activation of the circulation",  ok: true },
+      { t: "Renin-angiotensin system and ADH release — hormonal responses requiring minutes to activate",          ok: false },
+      { t: "Capillary fluid reabsorption and GI absorption of fluids — slow volume restoration over hours",        ok: false },
+      { t: "Reverse stress relaxation of blood vessels — a vascular response taking 10-60 minutes to develop",     ok: false },
+    ],
+    rationale: "Guyton organizes shock compensation by timeline: (1) Within 30-60 seconds: baroreceptor reflexes and CNS ischemic response trigger massive sympathetic discharge — increasing HR, contractility, venoconstriction, and arteriolar constriction. (2) Within 10-60 minutes: reverse stress relaxation, RAAS activation, ADH release. (3) Within 1-48 hours: capillary fluid reabsorption, GI fluid absorption, salt thirst. Understanding this timeline is critical for anesthesia management of acute hemorrhage.",
+    scene: null, metadata: { topic: "Shock Compensation Timeline", priority: "high" } },
+
+  { id: "patho-n12-110", type: "mcq",
+    prompt: "Hypovolemic shock from NON-hemorrhagic causes includes all of the following EXCEPT:",
+    setup: "",
+    ans: [
+      { t: "Massive pulmonary embolism blocking right ventricular outflow (this is obstructive shock, not hypovolemic)",  ok: true },
+      { t: "Severe vomiting and diarrhea causing GI fluid loss and dehydration",                                            ok: false },
+      { t: "Diabetes insipidus or excessive diuretics causing renal fluid loss",                                             ok: false },
+      { t: "Extensive burns causing cutaneous plasma loss and severe dehydration",                                            ok: false },
+    ],
+    rationale: "Hypovolemic shock results from loss of blood volume (hemorrhagic) or plasma/fluid (non-hemorrhagic). Non-hemorrhagic causes include: GI losses (vomiting, diarrhea), renal losses (diabetes mellitus/insipidus, excessive diuretics), and cutaneous losses (burns, excessive perspiration). Massive PE is obstructive shock — blood volume is normal but flow is blocked. Treatment for non-hemorrhagic hypovolemia is fluid/electrolyte replacement; hemorrhagic requires blood transfusion and source control.",
+    scene: null, metadata: { topic: "Hypovolemic Shock Causes", priority: "medium" } },
+
+  { id: "patho-n12-111", type: "mcq",
+    prompt: "During distributive shock (septic, anaphylactic, neurogenic), the skin is typically:",
+    setup: "",
+    ans: [
+      { t: "Warm and pink/flushed — due to peripheral vasodilation (except in late stages)",  ok: true },
+      { t: "Cool and pale — due to sympathetically mediated peripheral vasoconstriction",      ok: false },
+      { t: "Cyanotic and mottled — due to right-to-left cardiac shunting of blood",             ok: false },
+      { t: "Edematous and tense — due to massive fluid retention and capillary leak",           ok: false },
+    ],
+    rationale: "In distributive shock, vascular tone is lost (vasodilation), so blood pools in dilated peripheral vessels. The skin appears warm, pink, or flushed — in contrast to cardiogenic, hypovolemic, and obstructive shock where compensatory sympathetic vasoconstriction makes the skin cool and pale. This is a key clinical distinction: a hypotensive patient with warm/flushed skin suggests distributive shock (sepsis, anaphylaxis, neurogenic), while cool/clammy skin suggests cardiogenic or hypovolemic shock.",
+    scene: null, metadata: { topic: "Distributive Skin Findings", priority: "high" } },
+
+  { id: "patho-n12-112", type: "mcq",
+    prompt: "Deep general anesthesia can cause neurogenic shock by:",
+    setup: "",
+    ans: [
+      { t: "Depressing the vasomotor center and eliminating sympathetic tone, causing profound vasodilation and hypotension",  ok: true },
+      { t: "Directly damaging the spinal cord, interrupting sympathetic outflow permanently below the level of injury",        ok: false },
+      { t: "Triggering massive histamine release from mast cells, causing anaphylactic-type vasodilation and bronchospasm",     ok: false },
+      { t: "Reducing cardiac contractility to zero, causing complete pump failure and cardiogenic shock",                        ok: false },
+    ],
+    rationale: "Guyton lists deep anesthesia as a cause of neurogenic shock alongside brain damage, spinal cord injury, and drug overdose. Deep anesthesia depresses the brainstem vasomotor center, reducing sympathetic outflow and causing widespread vasodilation. The result is profound hypotension from loss of vascular tone (not pump failure). Treatment is sympathomimetics (vasopressors) to restore vascular tone. This is directly relevant to CRNA practice — excessive anesthetic depth is a common cause of intraoperative hypotension.",
+    scene: null, metadata: { topic: "Anesthesia Neurogenic Shock", priority: "high" } },
+
+  { id: "patho-n12-113", type: "mcq",
+    prompt: "General therapies for circulatory shock include all of the following EXCEPT:",
+    setup: "",
+    ans: [
+      { t: "Aggressive diuresis to reduce blood volume and preload (this worsens most forms of shock)",  ok: true },
+      { t: "Volume expanders (blood, plasma, dextran, saline) for hypovolemic states",                    ok: false },
+      { t: "Sympathomimetic drugs (epinephrine, norepinephrine) to restore vascular tone and cardiac function", ok: false },
+      { t: "Head-down (Trendelenburg) position to promote venous return from lower extremities",           ok: false },
+    ],
+    rationale: "Guyton lists several general shock therapies: volume replacement for hypovolemia, sympathomimetics (epinephrine, norepinephrine), head-down positioning, oxygen therapy, glucocorticoids (for some types), and always treating the underlying cause. Aggressive diuresis would WORSEN most shock states by further reducing intravascular volume and preload. The exception is cardiogenic shock with severe pulmonary edema, where careful diuresis may be indicated — but even then, it is done cautiously.",
+    scene: null, metadata: { topic: "Shock General Therapy", priority: "medium" } },
+
+  { id: "patho-n12-114", type: "mcq",
+    prompt: "Disseminated intravascular coagulation (DIC) is a hallmark complication of which type of shock?",
+    setup: "",
+    ans: [
+      { t: "Septic shock — endotoxins and inflammatory mediators trigger simultaneous widespread clotting and bleeding",  ok: true },
+      { t: "Neurogenic shock — loss of sympathetic tone activates the clotting cascade throughout the vasculature",        ok: false },
+      { t: "Hypovolemic shock — reduced blood volume concentrates clotting factors, causing generalized thrombosis",        ok: false },
+      { t: "Obstructive shock — mechanical obstruction of flow causes stasis and clot formation throughout the circulation", ok: false },
+    ],
+    rationale: "DIC is particularly associated with septic shock. Bacterial endotoxins and inflammatory cytokines activate the coagulation cascade diffusely, causing microvascular thrombosis that blocks small vessels and consumes clotting factors/platelets. The paradoxical result is simultaneous clotting (organ ischemia from microthrombosis) and bleeding (consumptive coagulopathy). Guyton specifically lists 'blood clotting/bleeding (DIC)' as a feature of septic shock. This is one reason sepsis has such high mortality.",
+    scene: null, metadata: { topic: "DIC in Sepsis", priority: "high" } },
+
+  { id: "patho-n12-115", type: "mcq",
+    prompt: "In Guyton's graphical analysis of progressive shock, deterioration of the HEART is described as:",
+    setup: "",
+    ans: [
+      { t: "The most important factor in shock progression — cardiac function curves shift progressively downward over hours",  ok: true },
+      { t: "A minor contributor — peripheral vascular failure is far more important than cardiac depression in shock",           ok: false },
+      { t: "Irrelevant — the heart maintains normal function throughout all stages of hemorrhagic shock",                         ok: false },
+      { t: "Important only in cardiogenic shock — the heart is unaffected in hemorrhagic and septic shock",                       ok: false },
+    ],
+    rationale: "Guyton's Figure 24-4 shows cardiac function curves shifting progressively downward during sustained hemorrhagic shock (from 0 time through 5 hours). He states that 'deterioration of the heart is likely the most important factor in the progression of shock.' Coronary hypoperfusion leads to myocardial ischemia, which weakens the pump, which further reduces coronary flow — a key positive feedback loop driving shock from progressive to irreversible stages.",
+    scene: null, metadata: { topic: "Cardiac Deterioration Shock", priority: "high" } },
+
 ];
 
 export const PATHO_NODE12_METADATA = {
