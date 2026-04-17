@@ -1780,6 +1780,326 @@ export const PATHO_NODE2_QUESTIONS = [
     metadata: { topic: "Cancer Lethality", priority: "low" },
   },
 
+  // ── Transcription steps & regulation ──────────────────────────
+
+  { id: "patho-n2-106", type: "mcq",
+    prompt: "What is the FIRST step of transcription?",
+    setup: "",
+    ans: [
+      { t: "RNA polymerase binds to the promoter sequence on the DNA",                                ok: true },
+      { t: "The ribosome attaches to the 5′ cap of the newly forming mRNA",                           ok: false },
+      { t: "Helicase unwinds the entire chromosome so all genes can be read simultaneously",           ok: false },
+      { t: "Transfer RNA delivers the first amino acid to the start codon on the DNA template",        ok: false },
+    ],
+    rationale: "Transcription begins when RNA polymerase recognizes and binds to the promoter sequence upstream of the gene. Only after binding does the enzyme unwind the DNA double helix locally and begin reading the template strand.",
+    scene: null, metadata: { topic: "Transcription Step 1", priority: "high" } },
+
+  { id: "patho-n2-107", type: "mcq",
+    prompt: "After RNA polymerase binds the promoter, what happens next during transcription?",
+    setup: "",
+    ans: [
+      { t: "RNA polymerase temporarily unwinds the DNA double helix at the transcription site",        ok: true },
+      { t: "DNA ligase seals the helix to prevent unwinding beyond the gene boundary",                 ok: false },
+      { t: "The entire chromosome condenses into chromatin to facilitate polymerase movement",          ok: false },
+      { t: "Ribosomes immediately attach to the forming RNA before it leaves the nucleus",             ok: false },
+    ],
+    rationale: "Step 2: RNA polymerase locally unwinds (melts) the double helix, exposing the template strand. The enzyme reads 3′→5′ on the template and synthesizes the RNA strand 5′→3′, adding activated RNA nucleotides complementary to the DNA template.",
+    scene: null, metadata: { topic: "Transcription Step 2", priority: "high" } },
+
+  { id: "patho-n2-108", type: "mcq",
+    prompt: "During transcription, activated RNA nucleotides are added to the growing RNA strand at which end?",
+    setup: "",
+    ans: [
+      { t: "The 3′ end — RNA is synthesized in the 5′ → 3′ direction",          ok: true },
+      { t: "The 5′ end — RNA is synthesized in the 3′ → 5′ direction",          ok: false },
+      { t: "Both ends simultaneously, meeting in the middle of the strand",       ok: false },
+      { t: "Nucleotides insert randomly and are later rearranged by ligase",      ok: false },
+    ],
+    rationale: "Like DNA replication, RNA synthesis proceeds 5′→3′. Each incoming ribonucleotide is added to the 3′-OH of the growing strand. The DNA template is read 3′→5′. This directionality is universal for nucleic acid polymerases.",
+    scene: null, metadata: { topic: "Transcription Directionality", priority: "high" } },
+
+  { id: "patho-n2-109", type: "mcq",
+    prompt: "Transcription ends when RNA polymerase encounters:",
+    setup: "",
+    ans: [
+      { t: "A chain-terminating sequence on the DNA, causing release of both the polymerase and the RNA strand", ok: true },
+      { t: "A stop codon (UAA, UAG, or UGA) embedded in the DNA template strand",                                ok: false },
+      { t: "The centromere, which physically blocks further polymerase movement along the chromosome",             ok: false },
+      { t: "An anticodon on a nearby tRNA molecule that signals the end of the gene",                              ok: false },
+    ],
+    rationale: "Transcription terminates at specific DNA sequences called terminators (chain-terminating sequences). These cause the RNA polymerase to dissociate from the DNA and release the completed RNA transcript. Stop codons (UAA, UAG, UGA) are translation signals on mRNA, NOT transcription terminators.",
+    scene: null, metadata: { topic: "Transcription Termination", priority: "high" } },
+
+  { id: "patho-n2-110", type: "mcq",
+    prompt: "An enhancer element in transcriptional control functions by:",
+    setup: "",
+    ans: [
+      { t: "Binding transcription factor proteins that increase the rate of transcription, often from a distant chromosomal location", ok: true },
+      { t: "Directly unwinding the DNA helix so RNA polymerase can access the template without any protein assistance",                ok: false },
+      { t: "Serving as the binding site for the ribosome to begin translation of the mRNA being transcribed",                          ok: false },
+      { t: "Blocking repressor proteins from reaching the promoter by sequestering them in the cytoplasm",                              ok: false },
+    ],
+    rationale: "Enhancers are DNA regulatory sequences that can be thousands of base pairs away from the promoter. Transcription factors (activator proteins) bind enhancers and interact with the transcription machinery at the promoter through DNA looping, dramatically increasing transcription rate.",
+    scene: null, metadata: { topic: "Enhancer Elements", priority: "high" } },
+
+  { id: "patho-n2-111", type: "mcq",
+    prompt: "The TATA box is a component of the:",
+    setup: "",
+    ans: [
+      { t: "Basal (core) promoter — it positions RNA polymerase II at the correct transcription start site",   ok: true },
+      { t: "Enhancer element — it amplifies gene expression from a distant location on the chromosome",         ok: false },
+      { t: "Insulator — it prevents enhancers from one gene from affecting neighboring genes",                   ok: false },
+      { t: "Origin of replication — it marks where DNA helicase begins unwinding during S phase",                ok: false },
+    ],
+    rationale: "The TATA box (consensus sequence TATAAA) is located ~25-30 bp upstream of the transcription start site within the basal/core promoter. TATA-binding protein (TBP, part of TFIID) recognizes it, nucleating assembly of the pre-initiation complex and positioning RNA polymerase II correctly.",
+    scene: null, metadata: { topic: "TATA Box", priority: "high" } },
+
+  { id: "patho-n2-112", type: "mcq",
+    prompt: "An insulator sequence in chromatin functions to:",
+    setup: "",
+    ans: [
+      { t: "Block enhancer signals from one gene from inappropriately activating a neighboring gene",     ok: true },
+      { t: "Permanently silence a gene by methylating all CpG islands within the promoter region",        ok: false },
+      { t: "Increase transcription rate by recruiting additional RNA polymerase molecules to the promoter", ok: false },
+      { t: "Protect mRNA from degradation by exonucleases during transport through the nuclear pore",      ok: false },
+    ],
+    rationale: "Insulators are boundary elements that prevent enhancers associated with one gene from activating transcription of adjacent genes. They help compartmentalize the genome into independently regulated domains. CTCF protein is the best-characterized insulator-binding factor.",
+    scene: null, metadata: { topic: "Insulator Sequences", priority: "high" } },
+
+  { id: "patho-n2-113", type: "mcq",
+    prompt: "Negative regulation of transcription occurs when:",
+    setup: "",
+    ans: [
+      { t: "Repressor proteins bind to repressor operator sequences and block RNA polymerase from accessing the promoter", ok: true },
+      { t: "Activator proteins bind to enhancers and increase the rate of RNA polymerase binding to the promoter",          ok: false },
+      { t: "miRNA molecules enter the nucleus and directly inhibit DNA unwinding at the gene of interest",                   ok: false },
+      { t: "Ribosomes stall on the mRNA, sending a retrograde signal to stop transcription of that gene",                    ok: false },
+    ],
+    rationale: "Repressor operators are DNA sequences that bind repressor proteins. When a repressor binds, it physically interferes with RNA polymerase binding to or moving along the promoter, reducing or silencing transcription. This is negative regulation. Positive regulation uses activator proteins at activator operators to facilitate polymerase binding.",
+    scene: null, metadata: { topic: "Negative Transcription Regulation", priority: "high" } },
+
+  { id: "patho-n2-114", type: "mcq",
+    prompt: "Proximal promoter elements are located:",
+    setup: "",
+    ans: [
+      { t: "Near the core promoter, upstream of the gene — they fine-tune transcription rate via transcription factor binding", ok: true },
+      { t: "On a different chromosome from the gene they regulate, connected only by protein bridges",                          ok: false },
+      { t: "Within the coding region of the gene, where they pause RNA polymerase at specific exon boundaries",                 ok: false },
+      { t: "At the 3′ end of the mRNA, where they control polyadenylation and transcript stability",                            ok: false },
+    ],
+    rationale: "Proximal promoter elements are regulatory DNA sequences located within a few hundred base pairs upstream of the core promoter. Specific transcription factors bind these elements to modulate (increase or decrease) the basal transcription rate. They bridge the gap between the core promoter/TATA box and distant enhancers.",
+    scene: null, metadata: { topic: "Proximal Promoter Elements", priority: "medium" } },
+
+  // ── Translation steps (detailed) ──────────────────────────────
+
+  { id: "patho-n2-115", type: "mcq",
+    prompt: "During initiation of translation, the small ribosomal subunit binds to the mRNA and scans until it encounters which codon?",
+    setup: "",
+    ans: [
+      { t: "AUG (the start codon) — where the initiator tRNA carrying methionine binds",        ok: true },
+      { t: "UAA (the first stop codon) — which signals where protein synthesis should begin",     ok: false },
+      { t: "GCC (the most common codon in the human genome) — marking ribosome entry",           ok: false },
+      { t: "Any codon will do — the ribosome randomly picks a starting location on the mRNA",     ok: false },
+    ],
+    rationale: "Initiation: the small (40S) ribosomal subunit + initiator tRNA (carrying Met) binds the 5′ end of mRNA and scans until it finds AUG. Initiation factors facilitate this. Then the large (60S) subunit joins, initiation factors dissociate, and the ribosome is assembled with Met-tRNA in the P-site, ready for elongation.",
+    scene: null, metadata: { topic: "Translation Initiation", priority: "high" } },
+
+  { id: "patho-n2-116", type: "mcq",
+    prompt: "During translation elongation, a new aminoacyl-tRNA enters which ribosomal site?",
+    setup: "",
+    ans: [
+      { t: "The A-site (aminoacyl site) — where the anticodon pairs with the next mRNA codon",   ok: true },
+      { t: "The P-site (peptidyl site) — where all new tRNAs first bind before transferring",      ok: false },
+      { t: "The E-site (exit site) — where incoming tRNAs are screened before entering the ribosome", ok: false },
+      { t: "The S-site (start site) — a special slot reserved for each new tRNA arrival",           ok: false },
+    ],
+    rationale: "During elongation, the incoming aminoacyl-tRNA enters the ribosomal A-site. If its anticodon matches the mRNA codon, it is accepted. Peptidyl transferase then forms a peptide bond between the amino acid at the P-site and the new amino acid at the A-site. The ribosome translocates one codon, moving the peptidyl-tRNA from A-site to P-site and ejecting the empty tRNA from the E-site.",
+    scene: null, metadata: { topic: "A-site and P-site", priority: "high" } },
+
+  { id: "patho-n2-117", type: "mcq",
+    prompt: "Peptidyl transferase catalyzes which specific reaction during translation?",
+    setup: "",
+    ans: [
+      { t: "Formation of a peptide bond between the amino acid at the P-site and the amino acid at the A-site", ok: true },
+      { t: "Hydrolysis of the mRNA codon to release energy for ribosome movement along the strand",              ok: false },
+      { t: "Phosphorylation of the tRNA anticodon to enhance binding specificity to the mRNA codon",              ok: false },
+      { t: "Cleavage of the signal peptide from the growing polypeptide as it enters the ER lumen",                ok: false },
+    ],
+    rationale: "Peptidyl transferase (a ribozyme — catalytic rRNA in the large subunit) forms the peptide bond. It detaches the growing polypeptide from the tRNA at the P-site and joins it to the amino acid on the tRNA at the A-site. The ribosome then translocates one codon (GTP-dependent), moving the new peptidyl-tRNA to the P-site.",
+    scene: null, metadata: { topic: "Peptidyl Transferase", priority: "high" } },
+
+  { id: "patho-n2-118", type: "mcq",
+    prompt: "Translation terminates when:",
+    setup: "",
+    ans: [
+      { t: "A release factor binds to a stop codon (UAA, UAG, or UGA) at the A-site, and the polypeptide and ribosomal subunits dissociate", ok: true },
+      { t: "The ribosome physically reaches the 3′ poly-A tail and falls off the end of the mRNA strand",                                      ok: false },
+      { t: "A special terminator tRNA carrying no amino acid enters the A-site and blocks further elongation",                                   ok: false },
+      { t: "The polypeptide spontaneously folds and pulls itself free from the ribosome once it reaches critical mass",                           ok: false },
+    ],
+    rationale: "Stop codons (UAA, UAG, UGA) do NOT code for any amino acid and no tRNA has a complementary anticodon. Instead, release factors recognize the stop codon in the A-site, triggering hydrolysis of the peptidyl-tRNA bond, releasing the completed polypeptide. The ribosome then dissociates into its two subunits.",
+    scene: null, metadata: { topic: "Translation Termination", priority: "high" } },
+
+  // ── DNA replication enzymes ───────────────────────────────────
+
+  { id: "patho-n2-119", type: "mcq",
+    prompt: "During DNA replication, helicase functions to:",
+    setup: "",
+    ans: [
+      { t: "Unwind and separate the two parental DNA strands at the replication fork",              ok: true },
+      { t: "Synthesize the new complementary strand by adding nucleotides to the 3′ end",           ok: false },
+      { t: "Join Okazaki fragments on the lagging strand by sealing phosphodiester bonds",          ok: false },
+      { t: "Remove supercoiling tension ahead of the replication fork by cutting and rejoining DNA", ok: false },
+    ],
+    rationale: "Helicase uses ATP to break hydrogen bonds between complementary base pairs, separating the double helix into two single strands at the replication fork. Single-strand binding proteins (SSBs) then stabilize the exposed strands and prevent re-annealing.",
+    scene: null, metadata: { topic: "Helicase", priority: "high" } },
+
+  { id: "patho-n2-120", type: "mcq",
+    prompt: "Topoisomerase relieves which problem during DNA replication?",
+    setup: "",
+    ans: [
+      { t: "Supercoiling (overwinding) tension ahead of the replication fork by cutting, swiveling, and resealing the DNA", ok: true },
+      { t: "Mismatched base pairs by excising incorrect nucleotides and replacing them with correct ones",                    ok: false },
+      { t: "RNA primer fragments left on the lagging strand after Okazaki fragment synthesis is complete",                     ok: false },
+      { t: "Tangled chromosomes after replication by physically separating the two daughter helices",                           ok: false },
+    ],
+    rationale: "As helicase unwinds the helix, the DNA ahead becomes overwound (positively supercoiled). Topoisomerase cuts one or both strands, allows the helix to swivel to relieve tension, then reseals the break. Without topoisomerase, the replication fork would stall from excessive supercoiling.",
+    scene: null, metadata: { topic: "Topoisomerase", priority: "high" } },
+
+  { id: "patho-n2-121", type: "mcq",
+    prompt: "On the lagging strand, DNA primase is needed because:",
+    setup: "",
+    ans: [
+      { t: "DNA polymerase cannot initiate synthesis de novo — it needs a short RNA primer to provide a free 3′-OH", ok: true },
+      { t: "DNA polymerase can only synthesize RNA, so primase converts the RNA back into DNA after synthesis",        ok: false },
+      { t: "The lagging strand runs 5′→3′ away from the fork, making it impossible for any polymerase to read it",     ok: false },
+      { t: "Primase degrades the parental strand so the new strand can take its place in the helix",                    ok: false },
+    ],
+    rationale: "DNA polymerase requires a primer with a free 3′-OH group to begin adding nucleotides. Primase synthesizes a short (~10 nt) RNA primer on the lagging strand template, giving DNA polymerase a starting point for each Okazaki fragment. On the leading strand, only one primer is needed at the origin.",
+    scene: null, metadata: { topic: "Primase and RNA Primer", priority: "high" } },
+
+  { id: "patho-n2-122", type: "mcq",
+    prompt: "Okazaki fragments are produced on the lagging strand because:",
+    setup: "",
+    ans: [
+      { t: "DNA polymerase can only add nucleotides 5′→3′, so the lagging strand must be synthesized in short pieces in the direction away from the fork", ok: true },
+      { t: "Helicase cuts the lagging strand into small pieces that must be individually replicated and reassembled",                                        ok: false },
+      { t: "The lagging strand template is degraded by exonucleases, leaving only fragments for polymerase to copy",                                          ok: false },
+      { t: "Both strands produce Okazaki fragments equally — they are not specific to the lagging strand",                                                     ok: false },
+    ],
+    rationale: "The leading strand template runs 3′→5′ toward the fork, so polymerase extends continuously 5′→3′. The lagging strand template runs 5′→3′ toward the fork — polymerase must work AWAY from the fork in short bursts (Okazaki fragments, ~100-200 nt in eukaryotes), each requiring a new RNA primer. DNA ligase then joins the fragments.",
+    scene: null, metadata: { topic: "Okazaki Fragments", priority: "high" } },
+
+  { id: "patho-n2-123", type: "mcq",
+    prompt: "DNA ligase functions in replication by:",
+    setup: "",
+    ans: [
+      { t: "Sealing the phosphodiester bond between adjacent Okazaki fragments after RNA primers are replaced with DNA", ok: true },
+      { t: "Unwinding the double helix ahead of the replication fork so polymerase can access the template",              ok: false },
+      { t: "Adding the RNA primers needed by DNA polymerase to begin each new Okazaki fragment",                           ok: false },
+      { t: "Proofreading newly synthesized DNA and excising mismatched nucleotides for replacement",                        ok: false },
+    ],
+    rationale: "After DNA polymerase removes RNA primers and fills the gaps with DNA, discontinuities (nicks) remain between adjacent Okazaki fragments. DNA ligase seals these nicks by forming phosphodiester bonds, producing a continuous lagging strand. Ligase also functions in DNA repair.",
+    scene: null, metadata: { topic: "DNA Ligase", priority: "high" } },
+
+  { id: "patho-n2-124", type: "mcq",
+    prompt: "The leading strand during DNA replication is synthesized:",
+    setup: "",
+    ans: [
+      { t: "Continuously toward the replication fork, requiring only a single RNA primer",                     ok: true },
+      { t: "Discontinuously in Okazaki fragments, each requiring a separate RNA primer",                        ok: false },
+      { t: "By RNA polymerase rather than DNA polymerase, then converted to DNA by reverse transcriptase",       ok: false },
+      { t: "In the 3′→5′ direction, which is the opposite of the lagging strand synthesis direction",            ok: false },
+    ],
+    rationale: "The leading strand template runs 3′→5′, allowing DNA polymerase to synthesize the new strand continuously in the 5′→3′ direction toward the advancing replication fork. Only one primer is needed at the origin. The lagging strand, by contrast, requires repeated priming and produces Okazaki fragments.",
+    scene: null, metadata: { topic: "Leading Strand", priority: "high" } },
+
+  // ── Cell cycle & mitosis/meiosis ──────────────────────────────
+
+  { id: "patho-n2-125", type: "mcq",
+    prompt: "During prophase of mitosis, the cell:",
+    setup: "",
+    ans: [
+      { t: "Condenses chromatin into visible chromosomes and the mitotic spindle begins to form",                 ok: true },
+      { t: "Aligns all chromosomes along the cell equator (metaphase plate) before separation",                    ok: false },
+      { t: "Separates sister chromatids and pulls them to opposite poles of the cell",                              ok: false },
+      { t: "Reforms nuclear envelopes around each set of chromosomes and the cell begins to divide",                ok: false },
+    ],
+    rationale: "Prophase: chromatin condenses into discrete chromosomes (each consisting of two sister chromatids joined at the centromere), the nuclear envelope begins to break down, and the mitotic spindle forms from centrosomes. This is the first visible stage of mitosis.",
+    scene: null, metadata: { topic: "Prophase", priority: "high" } },
+
+  { id: "patho-n2-126", type: "mcq",
+    prompt: "Metaphase is characterized by:",
+    setup: "",
+    ans: [
+      { t: "Chromosomes aligning along the metaphase plate (cell equator), attached to spindle fibers at their centromeres", ok: true },
+      { t: "Chromatin condensing into visible chromosomes as the nuclear envelope breaks down",                                ok: false },
+      { t: "Sister chromatids separating and migrating to opposite poles of the cell",                                          ok: false },
+      { t: "Cytokinesis beginning as a cleavage furrow forms at the equator of the cell",                                       ok: false },
+    ],
+    rationale: "During metaphase, all chromosomes are aligned at the cell's equator (metaphase plate), with kinetochore microtubules from each pole attached to opposite sides of each centromere. This alignment ensures equal distribution of genetic material. The metaphase checkpoint verifies all chromosomes are properly attached before anaphase proceeds.",
+    scene: null, metadata: { topic: "Metaphase", priority: "high" } },
+
+  { id: "patho-n2-127", type: "mcq",
+    prompt: "During anaphase, the critical event is:",
+    setup: "",
+    ans: [
+      { t: "Sister chromatids separate at the centromere and are pulled to opposite poles by shortening spindle fibers",  ok: true },
+      { t: "Chromosomes line up along the metaphase plate and attach to kinetochore microtubules",                         ok: false },
+      { t: "The nuclear envelope reforms around each group of chromosomes at the cell poles",                               ok: false },
+      { t: "DNA replication occurs so each chromatid becomes a complete chromosome before separation",                       ok: false },
+    ],
+    rationale: "Anaphase: cohesin proteins holding sister chromatids together are cleaved by separase. Kinetochore microtubules shorten, pulling the now-separated chromatids (each a full chromosome) toward opposite poles. This ensures each daughter cell receives an identical set of chromosomes.",
+    scene: null, metadata: { topic: "Anaphase", priority: "high" } },
+
+  { id: "patho-n2-128", type: "mcq",
+    prompt: "Telophase is the mitotic stage where:",
+    setup: "",
+    ans: [
+      { t: "Nuclear envelopes reform around each set of chromosomes, chromosomes decondense, and cytokinesis typically begins", ok: true },
+      { t: "Chromosomes first condense from diffuse chromatin into discrete, visible structures",                                 ok: false },
+      { t: "The metaphase checkpoint verifies that all chromosomes are attached to the spindle before proceeding",                 ok: false },
+      { t: "Centrosomes duplicate and migrate to opposite sides of the cell in preparation for spindle formation",                  ok: false },
+    ],
+    rationale: "Telophase is essentially prophase in reverse. The chromosomes decondense back into chromatin, nuclear envelopes reassemble around each group of chromosomes, and nucleoli reappear. Cytokinesis (physical division of the cytoplasm) usually overlaps with telophase, producing two daughter cells.",
+    scene: null, metadata: { topic: "Telophase", priority: "high" } },
+
+  { id: "patho-n2-129", type: "mcq",
+    prompt: "Interphase encompasses which phases of the cell cycle?",
+    setup: "",
+    ans: [
+      { t: "G1 (growth/gap 1), S phase (DNA synthesis), and G2 (growth/gap 2) — the entire period between mitoses", ok: true },
+      { t: "Only S phase — the rest of the time between mitoses the cell is quiescent",                               ok: false },
+      { t: "Prophase, metaphase, anaphase, and telophase collectively make up interphase",                              ok: false },
+      { t: "G0 exclusively — interphase is defined as the resting state of non-dividing cells",                         ok: false },
+    ],
+    rationale: "Interphase = G1 + S + G2. G1: cell grows, performs normal functions, prepares for DNA replication. S phase: DNA is replicated (switched on by S-phase activator). G2: cell prepares for mitosis (protein synthesis, organelle duplication). Together these phases occupy ~95% of the cell cycle. G0 is a separate quiescent state for non-dividing cells.",
+    scene: null, metadata: { topic: "Interphase and Cell Cycle", priority: "high" } },
+
+  { id: "patho-n2-130", type: "mcq",
+    prompt: "Meiosis differs from mitosis primarily because meiosis:",
+    setup: "",
+    ans: [
+      { t: "Produces four haploid cells from one diploid cell through two successive divisions with crossing over",   ok: true },
+      { t: "Produces two identical diploid cells from one diploid cell through a single division",                      ok: false },
+      { t: "Occurs only in somatic cells while mitosis is restricted to germ cells in the gonads",                      ok: false },
+      { t: "Does not require DNA replication before division, halving chromosome number by random elimination",          ok: false },
+    ],
+    rationale: "Meiosis has two rounds of division (meiosis I and II). Meiosis I separates homologous chromosomes (with crossing over/recombination during prophase I), and meiosis II separates sister chromatids. Result: four genetically unique haploid gametes. Mitosis produces two identical diploid daughter cells in one division. Meiosis occurs only in germ cells.",
+    scene: null, metadata: { topic: "Meiosis vs Mitosis", priority: "high" } },
+
+  { id: "patho-n2-131", type: "mcq",
+    prompt: "DNA replication occurs during which specific phase of the cell cycle?",
+    setup: "",
+    ans: [
+      { t: "S phase (synthesis phase) — activated by the cytoplasmic S-phase activator",       ok: true },
+      { t: "G1 phase — immediately after the previous mitosis while the cell is still growing", ok: false },
+      { t: "G2 phase — just before mitosis begins so the DNA is freshly copied",                ok: false },
+      { t: "M phase — replication and chromosome separation occur simultaneously during mitosis", ok: false },
+    ],
+    rationale: "DNA replication is restricted to S phase by the S-phase activator (cyclin-CDK complexes). Replication begins at multiple origins and proceeds bidirectionally. The entire genome is replicated exactly once — further replication is blocked until the next cell cycle. This ensures each daughter cell gets precisely one copy of the genome.",
+    scene: null, metadata: { topic: "S Phase Replication", priority: "high" } },
+
 ];
 
 export const PATHO_NODE2_METADATA = {
