@@ -1672,6 +1672,138 @@ export const PATHO_NODE8_QUESTIONS = [
     metadata: { topic: "Net Lymph Flow", priority: "low" },
   },
 
+  { id: "patho-n8-103", type: "mcq",
+    prompt: "Vascular distensibility is defined as the fractional increase in volume for each mm Hg rise in pressure. How much more distensible are veins compared to arteries?",
+    setup: "",
+    ans: [
+      { t: "Veins are approximately 8 times more distensible than arteries",              ok: true },
+      { t: "Veins are approximately 2 times more distensible than arteries",               ok: false },
+      { t: "Veins and arteries have equal distensibility but differ in wall thickness",     ok: false },
+      { t: "Veins are approximately 24 times more distensible than arteries",               ok: false },
+    ],
+    rationale: "Per Guyton, veins are 8 times more distensible than arteries. This means that for the same change in transmural pressure, a vein will expand 8 times more in volume than an artery. This high distensibility is what makes veins effective as capacitance vessels storing ~60% of blood volume. Note: vascular capacitance (distensibility x volume) of veins is 24 times that of arteries because veins are both more distensible AND hold more volume. For CRNAs, this explains why venodilators like nitroglycerin dramatically reduce preload.",
+    scene: null, metadata: { topic: "Distensibility Ratio", priority: "high" } },
+
+  { id: "patho-n8-104", type: "mcq",
+    prompt: "Vascular capacitance (compliance) of the venous system is approximately how many times greater than the arterial system?",
+    setup: "",
+    ans: [
+      { t: "24 times greater (because capacitance equals distensibility multiplied by volume)",  ok: true },
+      { t: "8 times greater (the same ratio as distensibility alone)",                            ok: false },
+      { t: "4 times greater (veins are only slightly more compliant than arteries)",                ok: false },
+      { t: "100 times greater (veins are essentially infinitely compliant)",                        ok: false },
+    ],
+    rationale: "Vascular capacitance (compliance) = distensibility x volume. Since veins are 8 times more distensible than arteries AND hold approximately 3 times more volume, the total capacitance of veins is 8 x 3 = 24 times that of arteries. Compliance is defined as the increase in volume divided by the increase in pressure (deltaV/deltaP). For CRNAs, this large venous capacitance explains why sympathetic venoconstriction can mobilize significant blood volume from the venous reservoir to increase preload and cardiac output during hemorrhage.",
+    scene: null, metadata: { topic: "Capacitance Ratio 24x", priority: "high" } },
+
+  { id: "patho-n8-105", type: "mcq",
+    prompt: "Why does a given change in blood volume within the arterial tree result in a larger change in pressure compared to the same volume change in veins?",
+    setup: "",
+    ans: [
+      { t: "Arteries have lower compliance, so the same volume addition causes a greater pressure rise",  ok: true },
+      { t: "Arteries have higher compliance, absorbing volume changes with minimal pressure change",        ok: false },
+      { t: "Veins actively pump blood forward, preventing pressure from rising with added volume",           ok: false },
+      { t: "Arteries are surrounded by bone, which physically limits their expansion",                        ok: false },
+    ],
+    rationale: "Because arteries have much lower compliance (higher stiffness) compared to veins, any addition of blood volume to the arterial tree results in a proportionally larger increase in pressure. Conversely, veins can accommodate large volume changes with minimal pressure increases due to their high compliance. This volume-pressure relationship has clinical significance: sympathetic venoconstriction transfers large quantities of blood from the compliant venous reservoir to the heart, thereby increasing cardiac output. For CRNAs, this explains why fluid resuscitation primarily expands the venous compartment with relatively small effects on arterial pressure until cardiac output increases.",
+    scene: null, metadata: { topic: "Volume-Pressure Relationship", priority: "high" } },
+
+  { id: "patho-n8-106", type: "mcq",
+    prompt: "Patent ductus arteriosus (PDA) produces what characteristic change in arterial pulse pressure?",
+    setup: "",
+    ans: [
+      { t: "Very high pulse pressure with low diastolic and high systolic pressure due to run-off into the pulmonary artery", ok: true },
+      { t: "Very low pulse pressure because diastolic pressure rises while systolic remains unchanged",                        ok: false },
+      { t: "Normal pulse pressure because the shunt is too small to affect systemic hemodynamics",                              ok: false },
+      { t: "Absent pulse pressure because blood bypasses the aorta entirely through the ductus",                                 ok: false },
+    ],
+    rationale: "In PDA, blood flows from the high-pressure aorta into the lower-pressure pulmonary artery during both systole and diastole. This continuous run-off causes the diastolic pressure to fall significantly while the systolic pressure remains high or increases (due to increased venous return from pulmonary over-circulation). The result is a very high (widened) pulse pressure, similar to aortic regurgitation. For CRNAs, a wide pulse pressure in a neonate or infant should raise suspicion for PDA, and these patients may have increased anesthetic risk due to pulmonary overcirculation and potential heart failure.",
+    scene: null, metadata: { topic: "PDA Pulse Pressure", priority: "high" } },
+
+  { id: "patho-n8-107", type: "mcq",
+    prompt: "How does aortic stenosis affect the arterial pulse pressure contour?",
+    setup: "",
+    ans: [
+      { t: "Pulse pressure is decreased because the narrowed valve limits systolic ejection, lowering systolic pressure", ok: true },
+      { t: "Pulse pressure is increased because the stenotic valve creates turbulence that raises systolic pressure",      ok: false },
+      { t: "Pulse pressure is unchanged because the left ventricle compensates by increasing heart rate",                   ok: false },
+      { t: "Pulse pressure is absent because blood cannot flow through the stenotic valve during systole",                   ok: false },
+    ],
+    rationale: "In aortic stenosis, the reduced aortic valve opening limits the rate and volume of blood ejected during systole. This results in a lower systolic pressure while diastolic pressure remains relatively normal, producing a narrowed pulse pressure and a characteristic 'pulsus parvus et tardus' (weak and late pulse). The pressure waveform shows a slow upstroke and delayed peak. For CRNAs, maintaining adequate preload and avoiding tachycardia in aortic stenosis patients is critical because these patients depend on a long diastolic filling time and adequate stroke volume.",
+    scene: null, metadata: { topic: "AS Pulse Contour", priority: "high" } },
+
+  { id: "patho-n8-108", type: "mcq",
+    prompt: "Which organs serve as blood reservoirs, capable of releasing blood into the circulation when needed?",
+    setup: "",
+    ans: [
+      { t: "Spleen, liver, large abdominal veins, and the venous plexus of the skin",    ok: true },
+      { t: "Brain, heart, and kidneys (vital organs always store extra blood)",             ok: false },
+      { t: "Only the spleen serves as a reservoir; no other organ stores significant blood", ok: false },
+      { t: "Lungs and left ventricle (they hold the most oxygenated blood at any time)",     ok: false },
+    ],
+    rationale: "Per Guyton, approximately 60% of blood is in veins, and under various physiological conditions blood is transferred from the venous reservoir into the arterial system to maintain arterial pressure. The spleen, liver, large abdominal veins, and venous plexus all serve as blood reservoirs. The spleen is unique in that it also serves as a reservoir for red blood cells, releasing concentrated RBCs during hemorrhage. For CRNAs, understanding these reservoirs helps explain compensatory responses to hemorrhage and why patients with hepatosplenomegaly may have altered hemodynamic responses.",
+    scene: null, metadata: { topic: "Blood Reservoirs", priority: "medium" } },
+
+  { id: "patho-n8-109", type: "mcq",
+    prompt: "During blood pressure measurement using the auscultatory method, what do Korotkoff sounds represent?",
+    setup: "",
+    ans: [
+      { t: "Turbulent blood flow through a partially compressed artery as cuff pressure is between systolic and diastolic", ok: true },
+      { t: "Normal laminar blood flow in the brachial artery detected by the stethoscope",                                   ok: false },
+      { t: "The sound of the heart valves closing transmitted through the arterial wall to the cuff",                          ok: false },
+      { t: "Vibrations of the blood pressure cuff bladder against the arm during deflation",                                    ok: false },
+    ],
+    rationale: "Korotkoff sounds occur when the cuff pressure is between systolic and diastolic pressure. At cuff pressure above systolic, there is no flow (silence). As cuff pressure drops below systolic, blood spurts through the partially compressed artery during peak systole, creating turbulent flow and audible tapping sounds. When cuff pressure falls below diastolic, the artery is no longer compressed, flow becomes laminar, and sounds disappear. The point where tapping begins is systolic pressure; the point where sounds become muffled and disappear is diastolic pressure.",
+    scene: null, metadata: { topic: "Korotkoff Sounds Mechanism", priority: "medium" } },
+
+  { id: "patho-n8-110", type: "mcq",
+    prompt: "In the microcirculation, what structure controls blood flow into individual true capillaries?",
+    setup: "",
+    ans: [
+      { t: "Precapillary sphincters, which are smooth muscle bands at the entrance of each capillary",  ok: true },
+      { t: "The aortic valve, which determines total cardiac output to all capillaries",                  ok: false },
+      { t: "Venules, which regulate backpressure and thereby control capillary inflow",                    ok: false },
+      { t: "Red blood cells, which physically plug capillary entrances to redirect flow",                   ok: false },
+    ],
+    rationale: "Precapillary sphincters are small smooth muscle bands located at the junction where true capillaries branch from the metarteriole. They intermittently open and close (vasomotion), controlling whether blood flows through individual capillary beds. The metarteriole-preferential channel pathway allows blood to bypass true capillaries when sphincters are closed. For CRNAs, inflammatory mediators (histamine, bradykinin) can open precapillary sphincters widely, dramatically increasing capillary surface area for exchange and contributing to edema formation in anaphylaxis or sepsis.",
+    scene: null, metadata: { topic: "Precapillary Sphincter Control", priority: "medium" } },
+
+  { id: "patho-n8-111", type: "mcq",
+    prompt: "What are the two major solid structural components found in the interstitium?",
+    setup: "",
+    ans: [
+      { t: "Collagen fiber bundles and proteoglycan filaments (composed of hyaluronic acid)",  ok: true },
+      { t: "Elastin fibers and keratin filaments forming the extracellular matrix",              ok: false },
+      { t: "Fibrinogen strands and albumin molecules providing structural support",               ok: false },
+      { t: "Smooth muscle cells and fibroblasts that contract the interstitial space",             ok: false },
+    ],
+    rationale: "Per Guyton, the interstitium contains two major types of solid structures: collagen fiber bundles (providing tensile strength) and proteoglycan filaments (coiled molecules composed of hyaluronic acid). Almost all fluid in the interstitium exists in gel form (fluid-proteoglycan mixtures), with very little free fluid under normal conditions. The gel prevents free fluid flow through tissues and creates a slightly negative interstitial pressure (-3 mm Hg). For CRNAs, understanding this gel structure explains why edema fluid initially accumulates in the gel and why pitting edema requires significant fluid overload to produce free fluid.",
+    scene: null, metadata: { topic: "Interstitial Structure", priority: "medium" } },
+
+  { id: "patho-n8-112", type: "mcq",
+    prompt: "What percentage of filtered fluid at the arteriolar end of capillaries is reabsorbed at the venous end versus returned via lymphatics?",
+    setup: "",
+    ans: [
+      { t: "Approximately 90% is reabsorbed at the venous end; the remaining 10% returns via lymphatics", ok: true },
+      { t: "Approximately 50% is reabsorbed at the venous end; the remaining 50% returns via lymphatics",  ok: false },
+      { t: "All filtered fluid is reabsorbed at the venous end; lymphatics only handle proteins",            ok: false },
+      { t: "No fluid is reabsorbed; all filtered fluid must return via the lymphatic system",                  ok: false },
+    ],
+    rationale: "At the arteriolar end of capillaries, hydrostatic pressure exceeds oncotic pressure, causing net filtration outward. At the venous end, the drop in hydrostatic pressure allows oncotic pressure to dominate, pulling approximately 90% of the filtered fluid back into the capillary (reabsorption). The remaining 10% (approximately 2-3 L/day) is returned to the circulation via the lymphatic system along with leaked proteins. For CRNAs, disruption of this balance (e.g., by massive crystalloid infusion that dilutes plasma proteins) shifts the equilibrium toward filtration and edema.",
+    scene: null, metadata: { topic: "Filtration-Reabsorption Balance", priority: "high" } },
+
+  { id: "patho-n8-113", type: "mcq",
+    prompt: "The negative interstitial fluid pressure in most loose subcutaneous tissues is approximately what value, and what maintains it?",
+    setup: "",
+    ans: [
+      { t: "Approximately -3 mm Hg, maintained by pumping of the lymphatic system",         ok: true },
+      { t: "Approximately +5 mm Hg, maintained by collagen fiber compression of the interstitium", ok: false },
+      { t: "Approximately -20 mm Hg, created by the suction effect of arterial blood flow",   ok: false },
+      { t: "Approximately 0 mm Hg, because interstitial pressure equals atmospheric pressure", ok: false },
+    ],
+    rationale: "In most loose subcutaneous tissues, interstitial fluid pressure is slightly negative (approximately -3 mm Hg) due to the pumping action of the lymphatic system, which continuously removes fluid and proteins from the interstitium. Encapsulated organs (e.g., kidneys, brain) have positive interstitial pressures (+5 to +10 mm Hg). This negative pressure creates a slight suction effect that keeps tissues compact and dry. For CRNAs, positive-pressure ventilation can impair lymphatic return and contribute to pulmonary edema formation, especially in critically ill patients.",
+    scene: null, metadata: { topic: "Negative Interstitial Pressure", priority: "medium" } },
+
 ];
 
 export const PATHO_NODE8_METADATA = {
