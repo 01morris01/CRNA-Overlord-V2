@@ -574,6 +574,11 @@ export function showAnswerFeedback(correct, rationale, userAnswer = null) {
   const result = document.getElementById('result');
   if (!result) return;
 
+  // Clear any inline styles left by the legacy engine (loadQ sets
+  // style.opacity='0' / style.visibility='hidden' which override CSS classes).
+  result.style.opacity = '';
+  result.style.visibility = '';
+
   result.classList.add('on');
   result.classList.remove('win-bg', 'lose-bg');
   result.classList.add(correct ? 'win-bg' : 'lose-bg');
@@ -594,7 +599,11 @@ export function showAnswerFeedback(correct, rationale, userAnswer = null) {
 
 export function hideFeedback() {
   const result = document.getElementById('result');
-  if (result) result.classList.remove('on');
+  if (!result) return;
+  result.classList.remove('on');
+  // Clear inline styles so CSS classes control visibility cleanly
+  result.style.opacity = '';
+  result.style.visibility = '';
 }
 
 // ─── expose for legacy compatibility ─────────────────────────────────────────
