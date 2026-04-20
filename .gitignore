@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# local operational backups from academic-agent node creator
+.backups/
+
+# node
+node_modules/

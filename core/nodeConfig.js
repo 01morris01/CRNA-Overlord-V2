@@ -33,6 +33,7 @@ import { PATHO_NODE9_QUESTIONS,  PATHO_NODE9_METADATA  } from '../data/questions
 import { PATHO_NODE10_QUESTIONS, PATHO_NODE10_METADATA } from '../data/questions/patho-node10-kidney-bp-cardiac-output.js';
 import { PATHO_NODE11_QUESTIONS, PATHO_NODE11_METADATA } from '../data/questions/patho-node11-muscle-coronary-hf.js';
 import { PATHO_NODE12_QUESTIONS, PATHO_NODE12_METADATA } from '../data/questions/patho-node12-valves-shock.js';
+import { PATHO_NODE_13_QUESTIONS as PATHO_NODE13_QUESTIONS, PATHO_NODE_13_METADATA as PATHO_NODE13_METADATA } from '../data/questions/patho-node-13.js';
 
 // ── Chemistry & Physics for Anesthesia Practice ─────────────────────────────
 import { CP_NODE1_QUESTIONS, CP_NODE1_METADATA } from '../data/questions/cp-node1-smart-sheets.js';
@@ -43,6 +44,7 @@ import { CP_NODE5_QUESTIONS, CP_NODE5_METADATA } from '../data/questions/cp-node
 import { CP_NODE6_QUESTIONS, CP_NODE6_METADATA } from '../data/questions/cp-node6-gas-laws.js';
 import { CP_NODE7_QUESTIONS, CP_NODE7_METADATA } from '../data/questions/cp-node7-states-of-matter.js';
 import { CP_NODE9_QUESTIONS, CP_NODE9_METADATA } from '../data/questions/cp-node9-acids-bases-buffers.js';
+import { CP_NODE10_QUESTIONS, CP_NODE10_METADATA } from '../data/questions/cp-node10-electricity-electrical-safety.js';
 
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
@@ -305,6 +307,16 @@ export const NODE_CONFIG = {
     questions:     PATHO_NODE12_QUESTIONS,
     questionsMeta: PATHO_NODE12_METADATA,
   },
+  "patho-node-13": {
+    courseId:      "adv-phys-path-1",
+    title:         "Regulation of Body Fluid Compartments / The Urinary System",
+    chapterLabel:  "Ch. 25–26",
+    badgeLabel:    "BODY FLUID Ch.25–26",
+    icon:          "💧",
+    questions:     PATHO_NODE13_QUESTIONS,
+    questionsMeta: PATHO_NODE13_METADATA,
+  },
+
 
   // ── Chemistry & Physics for Anesthesia Practice ────────────────────────────
   //
@@ -393,6 +405,16 @@ export const NODE_CONFIG = {
     questions:     CP_NODE9_QUESTIONS,
     questionsMeta: CP_NODE9_METADATA,
   },
+  "cp-node-10": {
+    courseId:      "chem-phys-anesthesia",
+    title:         "Electricity & Electrical Safety",
+    chapterLabel:  "Ch. 10",
+    badgeLabel:    "ELECTRICITY Ch.10",
+    icon:          "⚡",
+    questions:     CP_NODE10_QUESTIONS,
+    questionsMeta: CP_NODE10_METADATA,
+  },
+
 
     "week-1": {
     courseId:      "adv-health-assessment",
