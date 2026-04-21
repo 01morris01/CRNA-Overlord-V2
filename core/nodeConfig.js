@@ -33,6 +33,7 @@ import { PATHO_NODE9_QUESTIONS,  PATHO_NODE9_METADATA  } from '../data/questions
 import { PATHO_NODE10_QUESTIONS, PATHO_NODE10_METADATA } from '../data/questions/patho-node10-kidney-bp-cardiac-output.js';
 import { PATHO_NODE11_QUESTIONS, PATHO_NODE11_METADATA } from '../data/questions/patho-node11-muscle-coronary-hf.js';
 import { PATHO_NODE12_QUESTIONS, PATHO_NODE12_METADATA } from '../data/questions/patho-node12-valves-shock.js';
+import { PATHO_NODE14_QUESTIONS, PATHO_NODE14_METADATA } from '../data/questions/patho-node14-glomerular-filtration-renal-tubular-reab.js';
 import { PATHO_NODE_13_QUESTIONS as PATHO_NODE13_QUESTIONS, PATHO_NODE_13_METADATA as PATHO_NODE13_METADATA } from '../data/questions/patho-node-13.js';
 
 // ── Chemistry & Physics for Anesthesia Practice ─────────────────────────────
@@ -307,6 +308,16 @@ export const NODE_CONFIG = {
     questions:     PATHO_NODE12_QUESTIONS,
     questionsMeta: PATHO_NODE12_METADATA,
   },
+  "patho-node-14": {
+    courseId:      "adv-phys-path-1",
+    title:         "Glomerular Filtration / Renal Tubular Reabsorption and Secretion",
+    chapterLabel:  "Ch. 27–28",
+    badgeLabel:    "GLOMERULAR FILTRATIO",
+    icon:          "💧",
+    questions:     PATHO_NODE14_QUESTIONS,
+    questionsMeta: PATHO_NODE14_METADATA,
+  },
+
   "patho-node-13": {
     courseId:      "adv-phys-path-1",
     title:         "Regulation of Body Fluid Compartments / The Urinary System",
