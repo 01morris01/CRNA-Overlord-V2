@@ -59,6 +59,7 @@ import { WEEK_9_QUESTIONS, WEEK_9_METADATA } from '../data/questions/week-9.js';
 import { WEEK_10_QUESTIONS, WEEK_10_METADATA } from '../data/questions/week-10.js';
 import { WEEK_11_QUESTIONS, WEEK_11_METADATA } from '../data/questions/week-11.js';
 import { WEEK_13_QUESTIONS, WEEK_13_METADATA } from '../data/questions/week-13.js';
+import { WEEK_14_SYNTHESIS_QUESTIONS, WEEK_14_SYNTHESIS_METADATA } from '../data/questions/week-14-synthesis.js';
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const NODE_CONFIG = {
@@ -545,6 +546,16 @@ export const NODE_CONFIG = {
     icon:          "\ud83e\ude7a",
     questions:     WEEK_13_QUESTIONS,
     questionsMeta: WEEK_13_METADATA,
+  },
+
+  "week-14-synthesis": {
+    courseId:      "adv-health-assessment",
+    title:         "Comprehensive Assessment Synthesis",
+    chapterLabel:  "Final Exam",
+    badgeLabel:    "HEALTH SYNTHESIS",
+    icon:          "🧠",
+    questions:     WEEK_14_SYNTHESIS_QUESTIONS,
+    questionsMeta: WEEK_14_SYNTHESIS_METADATA,
   },
 
   // ── Add future nodes here ──────────────────────────────────────────────────

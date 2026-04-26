@@ -82,12 +82,12 @@ const TOPIC_TO_NODE = {
   'ba-t10': { courseId: 'basics-of-anesthesia', nodeId: 'node-10' },
   'ba-t12': { courseId: 'basics-of-anesthesia', nodeId: 'node-11' },
 
-  // Advanced Physiology & Pathophysiology I (Guyton 14e, chapters 1–24).
+  // Advanced Physiology & Pathophysiology I (Guyton 14e, chapters 1–30).
   // The legacy COURSES array in legacy/legacy.js exposes 15 topic markers
-  // (adv1-t01..adv1-t15). Only the first 12 have local chapter content in
-  // ~/Documents/crna-pipeline/Content/advanced_physiology_pathophysiology/,
-  // so we wire those through to the new banks. adv1-t13..t15 remain unmapped
-  // (the markers still render; they just fall back to legacy behavior).
+  // (adv1-t01..adv1-t15). adv1-t13 (Ch 25–26 body fluids) and adv1-t14
+  // (Ch 27–28 glomerular filtration) have been populated from the
+  // academic-agent pipeline into the new-engine banks below.
+  // adv1-t15 remains unmapped until Ch 29–30 content is generated.
   'adv1-t01': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-1'  },
   'adv1-t02': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-2'  },
   'adv1-t03': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-3'  },
@@ -100,6 +100,8 @@ const TOPIC_TO_NODE = {
   'adv1-t10': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-10' },
   'adv1-t11': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-11' },
   'adv1-t12': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-12' },
+  'adv1-t13': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-13' },
+  'adv1-t14': { courseId: 'adv-phys-path-1', nodeId: 'patho-node-14' },
 
   // Chemistry & Physics for Anesthesia Practice (NAS 510).
   // Only 7 local content folders exist (Smart Sheets through States of
@@ -113,6 +115,7 @@ const TOPIC_TO_NODE = {
   'cp-t06': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-6' },
   'cp-t07': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-7' },
   'cp-t09': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-9' },
+  'cp-t10': { courseId: 'chem-phys-anesthesia', nodeId: 'cp-node-10' },
 
   // Advanced Health Assessment (NAS 520).
   // Legacy world-map topics (ha-t01..t13) → new week-based question banks.
@@ -129,6 +132,7 @@ const TOPIC_TO_NODE = {
   'ha-t11': { courseId: 'adv-health-assessment', nodeId: 'week-11' },
   'ha-t12': { courseId: 'adv-health-assessment', nodeId: 'week-13' },
   'ha-t13': { courseId: 'adv-health-assessment', nodeId: 'week-13' },
+  'ha-synth': { courseId: 'adv-health-assessment', nodeId: 'week-14-synthesis' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.
