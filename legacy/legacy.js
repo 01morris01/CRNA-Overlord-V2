@@ -31,9 +31,10 @@ let ecgPts=[],ecgPh=0;const ECGW=[0,0,0,0,.04,.09,.04,0,-.12,.75,.35,-.26,0,-.08
 setInterval(()=>{ecgPh++;ecgPts.push(ecgFlat?0:ECGW[Math.floor(ecgPh/3)%ECGW.length]);if(ecgPts.length>150)ecgPts.shift();if(ecgPh%3===0){ectx.clearRect(0,0,160,42);ectx.strokeStyle=ecgFlat?'#f00':'#00ff88';ectx.lineWidth=1.4;ectx.shadowColor=ecgFlat?'#f00':'#00ff88';ectx.shadowBlur=4;ectx.beginPath();ecgPts.forEach((v,i)=>{const x=(i/ecgPts.length)*160,y=21-v*18;i?ectx.lineTo(x,y):ectx.moveTo(x,y);});ectx.stroke();}},40);
 
 // ═══════════ SAVE SYSTEM ═══════════
-const SAVE_KEY='hemodynamic_overlord_save';
-function loadSave(){try{return JSON.parse(localStorage.getItem(SAVE_KEY))||null;}catch(e){return null;}}
-function writeSave(data){try{localStorage.setItem(SAVE_KEY,JSON.stringify(data));}catch(e){}}
+const _LEGACY_SAVE_KEY='hemodynamic_overlord_save';
+function _getKey(){return (typeof window._getUserSaveKey === 'function') ? window._getUserSaveKey() : _LEGACY_SAVE_KEY;}
+function loadSave(){try{return JSON.parse(localStorage.getItem(_getKey()))||null;}catch(e){return null;}}
+function writeSave(data){try{localStorage.setItem(_getKey(),JSON.stringify(data));}catch(e){}}
 function getSave(){return loadSave()||{name:'',totalPts:0,bankedPts:0,equip:{vent:false,mac:false,vl:false,bougie:false},inv:{shield:0,skip:0,reveal:0,time:0},highScore:0,gamesPlayed:0,missedQuestionIds:[],questionStats:{},weakTopicIds:[]};}
 function save(){const prev=getSave();
   const questionStats = ALL_QS.reduce((acc,q)=>{acc[q.id]={attempted:q.stats.attempted||0,correct:q.stats.correct||0,lastCorrect:q.stats.lastCorrect||0,repeatStreak:q.stats.repeatStreak||0};return acc;},{ });
@@ -68,8 +69,13 @@ let playerName='';let bankedPts=0;let missedQuestionIds=[];let topicWeakness=[];
 // Load on startup
 (function initSplash(){
   const s=getSave();
-  if(s.name){document.getElementById('name-input').value=s.name;playerName=s.name;bankedPts=s.bankedPts||0;
-  document.getElementById('saved-info').textContent='Welcome back, '+s.name+'! Banked: '+bankedPts.toLocaleString()+' pts';}
+  if(s.name){
+    const ni=document.getElementById('name-input');
+    if(ni)ni.value=s.name;
+    playerName=s.name;bankedPts=s.bankedPts||0;
+    const si=document.getElementById('saved-info');
+    if(si)si.textContent='Welcome back, '+s.name+'! Banked: '+bankedPts.toLocaleString()+' pts';
+  }
 })();
 
 // ═══════════ SRNA CHARACTER ═══════════
@@ -213,6 +219,12 @@ const STORE_ITEMS=[
   {id:'time',name:'Bougie',icon:'🔧',cost:400,desc:'+TIME — Adds 15 seconds. Like a bougie, it buys you time when shit gets tight.',equipKey:'bougie'},
 ];
 let inv={shield:0,skip:0,reveal:0,time:0};
+
+// Expose sync helpers so legacyShim can keep closures in sync after new-engine
+// buyItem / usePwr updates state.js — prevents legacy save() from reverting them.
+window._syncLegacyInv = function(newInv) { Object.assign(inv, newInv); };
+window._syncLegacyPts = function(pts) { bankedPts = pts; };
+window._syncLegacyEquip = function(newEquip) { Object.assign(equip, newEquip); };
 
 function renderStore(){
   const g=document.getElementById('store-grid');g.innerHTML='';

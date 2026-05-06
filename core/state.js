@@ -1,4 +1,6 @@
-const SAVE_KEY = 'hemodynamic_overlord_save';
+import { getUserSaveKey } from './auth.js';
+
+const LEGACY_SAVE_KEY = 'hemodynamic_overlord_save';
 
 const DEFAULT_STATE = {
   name: '',
@@ -25,8 +27,17 @@ function safeParse(json) {
   try { return JSON.parse(json); } catch (e) { return null; }
 }
 
+function _getSaveKey() {
+  try {
+    return getUserSaveKey();
+  } catch (e) {
+    return LEGACY_SAVE_KEY;
+  }
+}
+
 export function loadState() {
-  const raw = safeParse(localStorage.getItem(SAVE_KEY));
+  const key = _getSaveKey();
+  const raw = safeParse(localStorage.getItem(key));
   if (!raw) return {...DEFAULT_STATE};
 
   const merged = {...DEFAULT_STATE, ...raw};
@@ -43,6 +54,7 @@ export function loadState() {
 }
 
 export function saveState(state) {
+  const key = _getSaveKey();
   try {
     const safe = {
       ...state,
@@ -52,14 +64,15 @@ export function saveState(state) {
       missedQuestionIds: Array.isArray(state.missedQuestionIds) ? [...new Set(state.missedQuestionIds)] : [],
       lastSeen: {...DEFAULT_STATE.lastSeen, ...(state.lastSeen||{})},
     };
-    localStorage.setItem(SAVE_KEY, JSON.stringify(safe));
+    localStorage.setItem(key, JSON.stringify(safe));
   } catch (e) {
     console.warn('Failed to save state', e);
   }
 }
 
 export function clearState() {
-  localStorage.removeItem(SAVE_KEY);
+  const key = _getSaveKey();
+  localStorage.removeItem(key);
 }
 
 export function migrateState(raw) {

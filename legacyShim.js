@@ -709,6 +709,13 @@ window.launchReviewBucket = function(bucket) {
 // localStorage and correctly shows the Courses screen (#course-selector).
 //
 window.startGame = function() {
+  // Save name to the per-user state before legacy startGame reads it
+  const nameInput = document.getElementById('name-input');
+  if (nameInput && nameInput.value.trim()) {
+    const state = loadState();
+    state.name = nameInput.value.trim();
+    saveState(state);
+  }
   if (typeof mapRuntime.startGame === 'function') {
     mapRuntime.startGame();
   }
@@ -773,6 +780,14 @@ window.usePwr = function(type) {
   const run = getCurrentRun();
   if (!run || run.done) return;
 
+  const q = run.questions[run.index];
+
+  // Prevent reveal from being consumed on non-MCQ questions
+  if (type === 'reveal' && (!q || q.type !== 'mcq')) {
+    console.log('[POWERUP] Reveal blocked — not an MCQ question');
+    return;
+  }
+
   const state = loadState();
   const inv   = state.inv || { shield: 0, skip: 0, reveal: 0, time: 0 };
   if ((inv[type] || 0) <= 0) return;
@@ -780,9 +795,12 @@ window.usePwr = function(type) {
   inv[type]--;
   state.inv = inv;
   saveState(state);
-  _syncPwrBtns();
 
-  const q = run.questions[run.index];
+  // Keep legacy closures in sync
+  if (window._syncLegacyInv) window._syncLegacyInv(state.inv);
+  if (window._syncLegacyPts) window._syncLegacyPts(state.bankedPts);
+
+  _syncPwrBtns();
 
   if (type === 'skip') {
     console.log('[POWERUP] Skip');
@@ -799,17 +817,15 @@ window.usePwr = function(type) {
 
   } else if (type === 'reveal') {
     console.log('[POWERUP] Reveal');
-    if (q && q.type === 'mcq') {
-      const ansGrid = document.getElementById('ans-grid');
-      if (ansGrid) {
-        const btns = Array.from(ansGrid.querySelectorAll('.abtn'));
-        const wrongBtns = btns.filter((b, i) =>
-          q._shuffledAns && !q._shuffledAns[i]?.ok && !b.disabled && !b.classList.contains('elim')
-        );
-        if (wrongBtns.length > 0) {
-          wrongBtns[0].disabled = true;
-          wrongBtns[0].classList.add('elim');
-        }
+    const ansGrid = document.getElementById('ans-grid');
+    if (ansGrid) {
+      const btns = Array.from(ansGrid.querySelectorAll('.abtn'));
+      const wrongBtns = btns.filter((b, i) =>
+        q._shuffledAns && !q._shuffledAns[i]?.ok && !b.disabled && !b.classList.contains('elim')
+      );
+      if (wrongBtns.length > 0) {
+        wrongBtns[0].disabled = true;
+        wrongBtns[0].classList.add('elim');
       }
     }
 
@@ -879,6 +895,11 @@ window.buyItem = function(id) {
   state.inv[id]            = (state.inv[id] || 0) + 1;
   state.equip[item.equipKey] = true;
   saveState(state);
+
+  // Keep legacy closures in sync so legacy save() doesn't revert purchases
+  if (window._syncLegacyInv)   window._syncLegacyInv(state.inv);
+  if (window._syncLegacyPts)   window._syncLegacyPts(state.bankedPts);
+  if (window._syncLegacyEquip) window._syncLegacyEquip(state.equip);
 
   _renderStoreGrid(state);
   _syncPwrBtns();

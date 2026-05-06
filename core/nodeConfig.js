@@ -47,6 +47,22 @@ import { CP_NODE7_QUESTIONS, CP_NODE7_METADATA } from '../data/questions/cp-node
 import { CP_NODE9_QUESTIONS, CP_NODE9_METADATA } from '../data/questions/cp-node9-acids-bases-buffers.js';
 import { CP_NODE10_QUESTIONS, CP_NODE10_METADATA } from '../data/questions/cp-node10-electricity-electrical-safety.js';
 
+// ── BIOL-510-A Adv Phys & Pathophys II (Guyton & Hall 14e, Ch. 29+) ────────
+import { PP2_WK1_QUESTIONS,  PP2_WK1_METADATA  } from '../data/questions/pp2-wk1-acid-base-diuretics-kidney.js';
+import { PP2_WK2_QUESTIONS,  PP2_WK2_METADATA  } from '../data/questions/pp2-wk2-rbc-infection-immunity.js';
+import { PP2_WK3_QUESTIONS,  PP2_WK3_METADATA  } from '../data/questions/pp2-wk3-blood-types-hemostasis-ventilation.js';
+import { PP2_WK4_QUESTIONS,  PP2_WK4_METADATA  } from '../data/questions/pp2-wk4-pulmonary-circulation.js';
+import { PP2_WK5_QUESTIONS,  PP2_WK5_METADATA  } from '../data/questions/pp2-wk5-gas-exchange-transport.js';
+import { PP2_WK6_QUESTIONS,  PP2_WK6_METADATA  } from '../data/questions/pp2-wk6-resp-regulation-insufficiency.js';
+import { PP2_WK7_QUESTIONS,  PP2_WK7_METADATA  } from '../data/questions/pp2-wk7-nervous-system-sensory.js';
+import { PP2_WK8_QUESTIONS,  PP2_WK8_METADATA  } from '../data/questions/pp2-wk8-special-senses.js';
+import { PP2_WK9_QUESTIONS,  PP2_WK9_METADATA  } from '../data/questions/pp2-wk9-spinal-motor-cerebellum-cortex.js';
+import { PP2_WK10_QUESTIONS, PP2_WK10_METADATA } from '../data/questions/pp2-wk10-limbic-hypothalamus-brain-activity.js';
+import { PP2_WK11_QUESTIONS, PP2_WK11_METADATA } from '../data/questions/pp2-wk11-ans-adrenal-cbf-csf.js';
+import { PP2_WK12_QUESTIONS, PP2_WK12_METADATA } from '../data/questions/pp2-wk12-endocrine-pituitary-thyroid-adrenal.js';
+import { PP2_WK13_QUESTIONS, PP2_WK13_METADATA } from '../data/questions/pp2-wk13-insulin-diabetes-temp-gi.js';
+import { PP2_WK14_QUESTIONS, PP2_WK14_METADATA } from '../data/questions/pp2-wk14-lipid-protein-liver.js';
+
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
 import { WEEK_3_QUESTIONS, WEEK_3_METADATA } from '../data/questions/week-3.js';
@@ -558,6 +574,148 @@ export const NODE_CONFIG = {
     questionsMeta: WEEK_14_SYNTHESIS_METADATA,
   },
 
+  // ── BIOL-510-A Adv Phys & Pathophys II (Guyton & Hall 14e) ─────────────────
+
+  "pp2-wk-1": {
+    courseId:      "adv-phys-path-2",
+    title:         "Acid-Base Regulation / Diuretics & Kidney Diseases",
+    chapterLabel:  "Ch. 29–32",
+    badgeLabel:    "ACID-BASE / KIDNEY",
+    icon:          "🧪",
+    questions:     PP2_WK1_QUESTIONS,
+    questionsMeta: PP2_WK1_METADATA,
+  },
+
+  "pp2-wk-2": {
+    courseId:      "adv-phys-path-2",
+    title:         "Red Blood Cells / Resistance to Infection I & II",
+    chapterLabel:  "Ch. 33–35",
+    badgeLabel:    "RBC / IMMUNITY",
+    icon:          "🩸",
+    questions:     PP2_WK2_QUESTIONS,
+    questionsMeta: PP2_WK2_METADATA,
+  },
+
+  "pp2-wk-3": {
+    courseId:      "adv-phys-path-2",
+    title:         "Blood Types, Hemostasis & Coagulation, Pulmonary Ventilation",
+    chapterLabel:  "Ch. 36–38",
+    badgeLabel:    "COAG / VENTILATION",
+    icon:          "🫁",
+    questions:     PP2_WK3_QUESTIONS,
+    questionsMeta: PP2_WK3_METADATA,
+  },
+
+  "pp2-wk-4": {
+    courseId:      "adv-phys-path-2",
+    title:         "Pulmonary Circulation",
+    chapterLabel:  "Ch. 39",
+    badgeLabel:    "PULM CIRCULATION",
+    icon:          "💨",
+    questions:     PP2_WK4_QUESTIONS,
+    questionsMeta: PP2_WK4_METADATA,
+  },
+
+  "pp2-wk-5": {
+    courseId:      "adv-phys-path-2",
+    title:         "Principles of Gas Exchange / Transport of O₂ & CO₂",
+    chapterLabel:  "Ch. 40–41",
+    badgeLabel:    "GAS EXCHANGE",
+    icon:          "🌬️",
+    questions:     PP2_WK5_QUESTIONS,
+    questionsMeta: PP2_WK5_METADATA,
+  },
+
+  "pp2-wk-6": {
+    courseId:      "adv-phys-path-2",
+    title:         "Regulation of Respiration / Respiratory Insufficiency",
+    chapterLabel:  "Ch. 42–43",
+    badgeLabel:    "RESP REGULATION",
+    icon:          "🫀",
+    questions:     PP2_WK6_QUESTIONS,
+    questionsMeta: PP2_WK6_METADATA,
+  },
+
+  "pp2-wk-7": {
+    courseId:      "adv-phys-path-2",
+    title:         "Organization of Nervous System / Sensory Receptors / Somatic Sensations",
+    chapterLabel:  "Ch. 46–49",
+    badgeLabel:    "NEURO / SENSORY",
+    icon:          "🧠",
+    questions:     PP2_WK7_QUESTIONS,
+    questionsMeta: PP2_WK7_METADATA,
+  },
+
+  "pp2-wk-8": {
+    courseId:      "adv-phys-path-2",
+    title:         "Special Senses: Vision, Hearing, Taste, Smell",
+    chapterLabel:  "Ch. 50–54",
+    badgeLabel:    "SPECIAL SENSES",
+    icon:          "👁️",
+    questions:     PP2_WK8_QUESTIONS,
+    questionsMeta: PP2_WK8_METADATA,
+  },
+
+  "pp2-wk-9": {
+    courseId:      "adv-phys-path-2",
+    title:         "Spinal Cord / Brain Stem Motor / Cerebellum & Basal Ganglia / Cortex",
+    chapterLabel:  "Ch. 55–58",
+    badgeLabel:    "MOTOR / CEREBELLUM",
+    icon:          "⚡",
+    questions:     PP2_WK9_QUESTIONS,
+    questionsMeta: PP2_WK9_METADATA,
+  },
+
+  "pp2-wk-10": {
+    courseId:      "adv-phys-path-2",
+    title:         "Limbic System & Hypothalamus / States of Brain Activity",
+    chapterLabel:  "Ch. 59–60",
+    badgeLabel:    "LIMBIC / BRAIN",
+    icon:          "💭",
+    questions:     PP2_WK10_QUESTIONS,
+    questionsMeta: PP2_WK10_METADATA,
+  },
+
+  "pp2-wk-11": {
+    courseId:      "adv-phys-path-2",
+    title:         "ANS & Adrenal Medulla / Cerebral Blood Flow & CSF",
+    chapterLabel:  "Ch. 61–62",
+    badgeLabel:    "ANS / CBF",
+    icon:          "🔀",
+    questions:     PP2_WK11_QUESTIONS,
+    questionsMeta: PP2_WK11_METADATA,
+  },
+
+  "pp2-wk-12": {
+    courseId:      "adv-phys-path-2",
+    title:         "Intro to Endocrinology / Pituitary / Thyroid / Adrenocortical Hormones",
+    chapterLabel:  "Ch. 75–78",
+    badgeLabel:    "ENDOCRINE",
+    icon:          "🦋",
+    questions:     PP2_WK12_QUESTIONS,
+    questionsMeta: PP2_WK12_METADATA,
+  },
+
+  "pp2-wk-13": {
+    courseId:      "adv-phys-path-2",
+    title:         "Insulin, Glucagon & Diabetes / Temp Regulation / GI Function & Motility",
+    chapterLabel:  "Ch. 63, 64, 74, 79",
+    badgeLabel:    "DIABETES / TEMP / GI",
+    icon:          "🌡️",
+    questions:     PP2_WK13_QUESTIONS,
+    questionsMeta: PP2_WK13_METADATA,
+  },
+
+  "pp2-wk-14": {
+    courseId:      "adv-phys-path-2",
+    title:         "Lipid Metabolism / Protein Metabolism / The Liver",
+    chapterLabel:  "Ch. 69–71",
+    badgeLabel:    "METABOLISM / LIVER",
+    icon:          "🫘",
+    questions:     PP2_WK14_QUESTIONS,
+    questionsMeta: PP2_WK14_METADATA,
+  },
+
   // ── Add future nodes here ──────────────────────────────────────────────────
 
 };
@@ -585,7 +743,8 @@ export function getNodesByCourse(courseId) {
  */
 const COURSE_LABELS = {
   'basics-of-anesthesia':  'Basics of Anesthesia',
-  'adv-phys-path-1':       'Pathophysiology',
+  'adv-phys-path-1':       'Pathophysiology I',
+  'adv-phys-path-2':       'Pathophysiology II',
   'chem-phys-anesthesia':  'Chemistry & Physics',
   'adv-health-assessment': 'Health Assessment',
 };
@@ -593,6 +752,7 @@ const COURSE_LABELS = {
 const COURSE_ORDER = [
   'basics-of-anesthesia',
   'adv-phys-path-1',
+  'adv-phys-path-2',
   'adv-health-assessment',
   'chem-phys-anesthesia',
 ];
