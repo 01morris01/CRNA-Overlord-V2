@@ -1516,6 +1516,26 @@ const COURSES = [
     ]
   },
   {
+    id:'adv-phys-path-2',
+    title:'BIOL-510-A Adv Phys & Pathophys II',
+    topics:[
+      {id:'pp2-wk-1',title:'Acid-Base Regulation / Diuretics & Kidney Diseases',chapters:'29-32',order:1,type:'topic'},
+      {id:'pp2-wk-2',title:'Red Blood Cells / Resistance to Infection I & II',chapters:'33-35',order:2,type:'topic'},
+      {id:'pp2-wk-3',title:'Blood Types, Hemostasis & Coagulation, Pulmonary Ventilation',chapters:'36-38',order:3,type:'topic'},
+      {id:'pp2-wk-4',title:'Pulmonary Circulation',chapters:'39',order:4,type:'topic'},
+      {id:'pp2-wk-5',title:'Principles of Gas Exchange / Transport of O₂ & CO₂',chapters:'40-41',order:5,type:'topic'},
+      {id:'pp2-wk-6',title:'Regulation of Respiration / Respiratory Insufficiency',chapters:'42-43',order:6,type:'topic'},
+      {id:'pp2-wk-7',title:'Organization of Nervous System / Sensory Receptors / Somatic Sensations',chapters:'46-49',order:7,type:'topic'},
+      {id:'pp2-wk-8',title:'Special Senses: Vision, Hearing, Taste, Smell',chapters:'50-54',order:8,type:'topic'},
+      {id:'pp2-wk-9',title:'Spinal Cord / Brain Stem Motor / Cerebellum & Basal Ganglia / Cortex',chapters:'55-58',order:9,type:'topic'},
+      {id:'pp2-wk-10',title:'Limbic System & Hypothalamus / States of Brain Activity',chapters:'59-60',order:10,type:'topic'},
+      {id:'pp2-wk-11',title:'ANS & Adrenal Medulla / Cerebral Blood Flow & CSF',chapters:'61-62',order:11,type:'topic'},
+      {id:'pp2-wk-12',title:'Intro to Endocrinology / Pituitary / Thyroid / Adrenocortical Hormones',chapters:'75-78',order:12,type:'topic'},
+      {id:'pp2-wk-13',title:'Insulin, Glucagon & Diabetes / Temp Regulation / GI Function & Motility',chapters:'63,64,74,79',order:13,type:'topic'},
+      {id:'pp2-wk-14',title:'Lipid Metabolism / Protein Metabolism / The Liver',chapters:'69-71',order:14,type:'topic'},
+    ]
+  },
+  {
     id:'basics-anesthesia',
     title:'Basics of Anesthesia',
     topics:[

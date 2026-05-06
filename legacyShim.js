@@ -133,6 +133,22 @@ const TOPIC_TO_NODE = {
   'ha-t12': { courseId: 'adv-health-assessment', nodeId: 'week-13' },
   'ha-t13': { courseId: 'adv-health-assessment', nodeId: 'week-13' },
   'ha-synth': { courseId: 'adv-health-assessment', nodeId: 'week-14-synthesis' },
+
+  // BIOL-510-A Adv Phys & Pathophys II (Guyton 14e, chapters 29+).
+  'pp2-wk-1':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-1'  },
+  'pp2-wk-2':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-2'  },
+  'pp2-wk-3':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-3'  },
+  'pp2-wk-4':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-4'  },
+  'pp2-wk-5':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-5'  },
+  'pp2-wk-6':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-6'  },
+  'pp2-wk-7':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-7'  },
+  'pp2-wk-8':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-8'  },
+  'pp2-wk-9':  { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-9'  },
+  'pp2-wk-10': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-10' },
+  'pp2-wk-11': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-11' },
+  'pp2-wk-12': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-12' },
+  'pp2-wk-13': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-13' },
+  'pp2-wk-14': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-14' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.
