@@ -1700,6 +1700,22 @@ const WORLD_LAYOUTS = {
     {order:13, x:1050, y:220},
     {order:14, x:1100, y:150, type:'synthesis'},
     {order:15, x:1100, y:300, type:'mastery'},
+  ],
+  'adv-phys-path-2': [
+    {order:1, x:80, y:280},
+    {order:2, x:160, y:250},
+    {order:3, x:250, y:220},
+    {order:4, x:340, y:200},
+    {order:5, x:430, y:180},
+    {order:6, x:520, y:160},
+    {order:7, x:610, y:150},
+    {order:8, x:700, y:160},
+    {order:9, x:790, y:180},
+    {order:10, x:870, y:210},
+    {order:11, x:940, y:250},
+    {order:12, x:1000, y:220},
+    {order:13, x:1060, y:180},
+    {order:14, x:1120, y:140},
   ]
 };
 
