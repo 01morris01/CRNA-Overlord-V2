@@ -23,7 +23,18 @@ const pa=pMesh.geometry.attributes.position.array;for(let i=0;i<PN;i++){pa[i*3]+
 camRot+=.001;cam.position.x=Math.sin(camRot)*.5;cam.position.y=Math.cos(camRot*.7)*.3;cam.lookAt(0,0,-2);
 if(flashHex!==null){flashT-=.04;hM.emissive.setHex(flashHex);hM.emissiveIntensity=Math.max(0,flashT);if(flashT<=0){flashHex=null;hM.emissive.setHex(0x880010);hM.emissiveIntensity=.5;}}
 R.render(Sc,cam);})();
-addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);});
+addEventListener('resize',()=>{if(R&&R.domElement){cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);}});
+
+// Three.js GPU cleanup: destroy renderer 30s after splash is hidden
+let _threeCleanupTimer=null;
+window._scheduleThreeCleanup=function(){
+  if(_threeCleanupTimer)return;
+  _threeCleanupTimer=setTimeout(()=>{
+    if(document.getElementById('splash')?.style.display==='none'){
+      try{R.dispose();R.forceContextLoss();const cvs=document.getElementById('bg');if(cvs)cvs.style.display='none';console.log('[THREE] GPU resources freed');}catch(e){}
+    }
+  },30000);
+};
 
 // ═══════════ ECG ═══════════
 const ecgCvs=document.getElementById('ecg'),ectx=ecgCvs.getContext('2d');ecgCvs.width=160;ecgCvs.height=42;
@@ -1977,6 +1988,7 @@ function startGame(){
     splashEl.style.opacity='0';
     setTimeout(()=>{
       splashEl.style.display='none';
+      if(typeof window._scheduleThreeCleanup==='function')window._scheduleThreeCleanup();
       splashEl.style.opacity='';
       splashEl.style.transition='';
       document.getElementById('level-map').style.display='none';

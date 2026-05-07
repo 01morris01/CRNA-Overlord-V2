@@ -27,12 +27,17 @@ const COURSE_IMAGE_PATHS = {
 function initLeafletWorldMap(courseId, course, layout) {
   const mapContainer = document.getElementById('world-map');
   if (!mapContainer) {
-    console.warn('❌ world-map container not found');
+    console.warn('world-map container not found');
     return;
   }
 
+  // Lazy-load Leaflet if not yet available
   if (typeof L === 'undefined') {
-    console.warn('❌ Leaflet not loaded');
+    if (typeof window._loadLeaflet === 'function') {
+      window._loadLeaflet().then(() => initLeafletWorldMap(courseId, course, layout));
+    } else {
+      console.warn('Leaflet not loaded and no loader available');
+    }
     return;
   }
 

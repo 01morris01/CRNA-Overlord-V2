@@ -569,7 +569,18 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// Defer Leaflet: only load when user enters a course that needs the world map
+window._loadLeaflet = function() {
+  if (window._leafletLoaded) return Promise.resolve();
+  return new Promise((resolve) => {
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.onload = () => { window._leafletLoaded = true; resolve(); };
+    document.head.appendChild(s);
+  });
+};
+</script>
 <script src="legacy/legacy.js"></script>
 <script src="world-map.js"></script>
 <script type="module" src="legacyShim.js"></script>
