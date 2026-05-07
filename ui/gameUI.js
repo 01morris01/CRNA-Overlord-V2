@@ -275,16 +275,55 @@ export function updateHUD() {
 }
 
 function _showStreakBanner(text) {
-  let banner = document.getElementById('streak-banner');
-  if (!banner) {
-    banner = document.createElement('div');
-    banner.id = 'streak-banner';
-    banner.style.cssText = 'position:fixed;top:20%;left:50%;transform:translateX(-50%);font-size:1.8rem;font-weight:900;color:#ffc400;text-shadow:0 0 30px rgba(255,196,0,.6),0 0 60px rgba(255,196,0,.3);z-index:9999;pointer-events:none;opacity:0;transition:opacity 0.3s ease;letter-spacing:.1em;text-align:center;';
-    document.body.appendChild(banner);
-  }
-  banner.textContent = text;
-  banner.style.opacity = '1';
-  setTimeout(() => { banner.style.opacity = '0'; }, 1500);
+  const run = getCurrentRun();
+  const streak = run?.streak || 0;
+  const mult = run?._lastMult || 1;
+
+  // Determine tier
+  let tier = 'fire';    // orange
+  let tierColor = 'var(--amber,#ffb000)';
+  let tierGlow = 'rgba(255,176,0,.5)';
+  if (streak >= 7) { tier = 'overlord'; tierColor = 'var(--red,#ff2e63)'; tierGlow = 'rgba(255,46,99,.5)'; }
+  else if (streak >= 5) { tier = 'unstoppable'; tierColor = 'var(--amber,#ffb000)'; tierGlow = 'rgba(255,176,0,.5)'; }
+
+  // Build takeover overlay
+  let ov = document.getElementById('streak-overlay');
+  if (ov) ov.remove();
+  ov = document.createElement('div');
+  ov.id = 'streak-overlay';
+  ov.style.cssText = `position:fixed;inset:0;z-index:9999;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;`;
+
+  // Backdrop
+  const bd = document.createElement('div');
+  bd.style.cssText = `position:absolute;inset:0;background:rgba(0,0,0,.75);opacity:0;transition:opacity 180ms var(--ease-out,cubic-bezier(.23,1,.32,1));`;
+  ov.appendChild(bd);
+
+  // Center content
+  const center = document.createElement('div');
+  center.style.cssText = `position:relative;text-align:center;opacity:0;transform:scale(0.7);transition:opacity 260ms var(--ease-out) 180ms,transform 260ms var(--ease-out) 180ms;`;
+  center.innerHTML = `
+    <div style="font-family:var(--fd);font-size:4rem;font-weight:700;color:${tierColor};text-shadow:0 0 40px ${tierGlow},0 0 80px ${tierGlow};line-height:1;">${streak} <span style="font-size:2rem;opacity:.8;">\u00D7${mult}</span></div>
+    <div style="font-family:var(--fd);font-size:1.6rem;font-weight:700;color:${tierColor};letter-spacing:.15em;margin-top:.3rem;text-shadow:0 0 20px ${tierGlow};">${text}</div>
+    <div style="font-family:var(--fm);font-size:.6rem;color:var(--txt-2,#a3b3c9);margin-top:.5rem;letter-spacing:.1em;">KEEP GOING</div>
+  `;
+  ov.appendChild(center);
+
+  document.body.appendChild(ov);
+
+  // Animate in
+  requestAnimationFrame(() => {
+    bd.style.opacity = '1';
+    center.style.opacity = '1';
+    center.style.transform = 'scale(1)';
+  });
+
+  // Auto dismiss after 2s
+  setTimeout(() => {
+    bd.style.opacity = '0';
+    center.style.opacity = '0';
+    center.style.transform = 'scale(0.95)';
+    setTimeout(() => ov.remove(), 300);
+  }, 1700);
 }
 
 // ─── First-run tutorial ──────────────────────────────────────────────────────
@@ -297,6 +336,7 @@ function _showTutorial() {
     { text: "These are your patient's vitals.<br><b>Wrong answers degrade them. Right answers stabilize them.</b>", highlight: '#hud' },
     { text: "This is your timer.<br><b>Don't waste it.</b> Time runs out, the patient loses a life.", highlight: '#tmr-wrap' },
     { text: "Pick the right answer.<br><b>Build a streak.</b> 3 in a row triggers a multiplier.", highlight: '#ans-area' },
+    { text: "Earn points, buy equipment in the store.<br><b>Equipment helps when you are stuck.</b>", highlight: '#pwr-row' },
   ];
 
   let idx = 0;
