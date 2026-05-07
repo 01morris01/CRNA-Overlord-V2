@@ -275,6 +275,48 @@ function _showStreakBanner(text) {
   setTimeout(() => { banner.style.opacity = '0'; }, 1500);
 }
 
+// ─── First-run tutorial ──────────────────────────────────────────────────────
+
+function _showTutorial() {
+  const steps = [
+    { text: "These are your patient's vitals. They react to your answers.", target: '#hud' },
+    { text: "This is your timer. Do not waste it.", target: '#tmr-wrap' },
+    { text: "Pick the right answer. Build a streak for combo points.", target: '#ans-area' },
+  ];
+
+  let idx = 0;
+  const overlay = document.createElement('div');
+  overlay.id = 'tutorial-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:10000;display:flex;align-items:center;justify-content:center;pointer-events:auto;';
+
+  function show() {
+    const step = steps[idx];
+    const isLast = idx === steps.length - 1;
+    overlay.innerHTML = `
+      <div style="background:var(--card,#0c1828);border:2px solid var(--green,#00ffa3);border-radius:12px;padding:1.2rem 1.5rem;max-width:340px;text-align:center;">
+        <div style="font-size:.7rem;color:var(--txt,#dce8f5);margin-bottom:.8rem;line-height:1.5;">${step.text}</div>
+        <div style="font-size:.45rem;color:var(--muted,#4a6282);margin-bottom:.6rem;">Step ${idx+1} of ${steps.length}</div>
+        <button id="tutorial-next" style="background:transparent;border:2px solid var(--green,#00ffa3);color:var(--green,#00ffa3);font-family:var(--fd);font-size:.7rem;font-weight:700;padding:.4rem 1.5rem;cursor:pointer;border-radius:4px;">${isLast ? 'GOT IT' : 'NEXT'}</button>
+      </div>
+    `;
+    document.getElementById('tutorial-next').onclick = () => {
+      idx++;
+      if (idx >= steps.length) {
+        overlay.remove();
+        // Mark tutorial as seen
+        const s = loadState();
+        s.tutorialSeen = true;
+        saveState(s);
+      } else {
+        show();
+      }
+    };
+  }
+
+  document.body.appendChild(overlay);
+  show();
+}
+
 // ─── Recall First helpers ─────────────────────────────────────────────────────
 
 /**
@@ -336,6 +378,15 @@ export function renderCurrentQuestion() {
 
   const q = state.questions[state.index];
   if (!q) return;
+
+  // First-run tutorial coachmarks
+  if (!state._tutorialShown) {
+    const userState = loadState();
+    if (!userState.tutorialSeen) {
+      state._tutorialShown = true;
+      _showTutorial();
+    }
+  }
 
   // Boss case banner
   if (q._isBoss && !state._bossAnnounced) {

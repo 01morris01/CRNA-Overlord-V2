@@ -15,10 +15,13 @@ function _showLoggedIn(displayName) {
   const startBtn     = document.getElementById('start-btn');
   const savedInfo    = document.getElementById('saved-info');
 
+  const backupArea  = document.getElementById('backup-area');
+
   if (authArea)     authArea.style.display     = 'none';
   if (loggedInArea) loggedInArea.style.display  = 'block';
   if (nameArea)     nameArea.style.display      = 'block';
   if (startBtn)     startBtn.style.display      = 'inline-block';
+  if (backupArea)   backupArea.style.display    = 'block';
 
   const state = loadState();
   if (loggedInInfo) {
@@ -139,6 +142,37 @@ function _showRecoveryCard(err) {
   });
 }
 
+// Backup / restore progress
+window._backupProgress = function() {
+  const state = loadState();
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const date = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `overlord-backup-${date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+window._importBackup = function(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!imported || typeof imported !== 'object') throw new Error('Invalid format');
+      saveState(imported);
+      alert('Progress restored. Reloading.');
+      location.reload();
+    } catch (err) {
+      alert('Failed to import: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+};
+
 function _initGameUI() {
   const state = loadState();
   window.crnaState = state;
@@ -191,3 +225,10 @@ export function initApp() {
 }
 
 initApp();
+
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(err => {
+    console.warn('[SW] Registration failed:', err);
+  });
+}
