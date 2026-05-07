@@ -42,12 +42,22 @@ export function submitAnswer(isCorrect) {
   const topicId = q.metadata.topicId || q.metadata.sectionId || 'general';
   recordQuestionOutcome(q.id, topicId, !!isCorrect);
 
+  let pointsEarned = 0;
   if (isCorrect) {
-    currentRun.score += 100;
     currentRun.streak += 1;
     currentRun.bestStreak = Math.max(currentRun.bestStreak, currentRun.streak);
+    const mult = Math.min(1 + Math.floor(currentRun.streak / 2), 5);
+    pointsEarned = 100 * mult;
+    currentRun.score += pointsEarned;
+    currentRun._lastMult = mult;
+
+    // Streak milestone banners
+    if (currentRun.streak === 3 || currentRun.streak === 5 || currentRun.streak === 7) {
+      currentRun._streakMilestone = currentRun.streak;
+    }
   } else {
     currentRun.streak = 0;
+    currentRun._lastMult = 1;
     currentRun.lives -= 1;
   }
 
@@ -64,8 +74,8 @@ export function submitAnswer(isCorrect) {
 
   const state = loadState();
   state.gamesPlayed = (state.gamesPlayed || 0) + (currentRun.done ? 1 : 0);
-  state.bankedPts = (state.bankedPts || 0) + (isCorrect ? 100 : 0);
-  state.totalPts = (state.totalPts || 0) + (isCorrect ? 100 : 0);
+  state.bankedPts = (state.bankedPts || 0) + pointsEarned;
+  state.totalPts = (state.totalPts || 0) + pointsEarned;
   state.highScore = Math.max(state.highScore || 0, currentRun.score);
   saveState(state);
 

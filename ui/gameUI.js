@@ -199,10 +199,43 @@ export function updateHUD() {
   const l3 = document.getElementById('l3');
 
   if (scv) scv.textContent = state.score.toLocaleString();
-  if (skv) skv.textContent = `x${state.streak || 1}`;
+
+  // Show multiplier only when > 1x
+  const mult = state._lastMult || Math.min(1 + Math.floor(state.streak / 2), 5);
+  if (skv) {
+    if (mult > 1) {
+      skv.textContent = `\u{1F525}${mult}x`;
+      skv.style.color = '#ffc400';
+    } else {
+      skv.textContent = `x1`;
+      skv.style.color = '';
+    }
+  }
+
   if (l1) l1.style.opacity = state.lives >= 1 ? '1' : '.2';
   if (l2) l2.style.opacity = state.lives >= 2 ? '1' : '.2';
   if (l3) l3.style.opacity = state.lives >= 3 ? '1' : '.2';
+
+  // Streak milestone banner
+  if (state._streakMilestone) {
+    const labels = { 3: '\u{1F525} ON FIRE', 5: '\u26A1 UNSTOPPABLE', 7: '\u{1F480} OVERLORD MODE' };
+    const label = labels[state._streakMilestone];
+    if (label) _showStreakBanner(label);
+    state._streakMilestone = null;
+  }
+}
+
+function _showStreakBanner(text) {
+  let banner = document.getElementById('streak-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'streak-banner';
+    banner.style.cssText = 'position:fixed;top:20%;left:50%;transform:translateX(-50%);font-size:1.8rem;font-weight:900;color:#ffc400;text-shadow:0 0 30px rgba(255,196,0,.6),0 0 60px rgba(255,196,0,.3);z-index:9999;pointer-events:none;opacity:0;transition:opacity 0.3s ease;letter-spacing:.1em;text-align:center;';
+    document.body.appendChild(banner);
+  }
+  banner.textContent = text;
+  banner.style.opacity = '1';
+  setTimeout(() => { banner.style.opacity = '0'; }, 1500);
 }
 
 // ─── Recall First helpers ─────────────────────────────────────────────────────
