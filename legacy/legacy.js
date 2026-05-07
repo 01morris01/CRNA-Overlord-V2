@@ -2397,12 +2397,31 @@ function showTopicMap(){
   // Get world layout for this course
   const layout = getWorldLayout(selectedCourseId, course.topics.length);
   
-  // Initialize Leaflet world map with background image and markers
-  if(typeof initLeafletWorldMap !== 'undefined' && typeof L !== 'undefined'){
+  // Themed topic map (v6) or Leaflet fallback
+  if(typeof window.renderTopicMap === 'function'){
+    try {
+      window.renderTopicMap(selectedCourseId, course, (topicId) => selectTopic(topicId));
+    } catch(e) {
+      console.error('renderTopicMap failed:', e);
+      // Fallback to simple grid
+      const wm=document.getElementById('world-map');
+      if(wm){
+        wm.innerHTML='';
+        wm.style.cssText='width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem;padding:1rem;overflow-y:auto;max-height:60vh;';
+        course.topics.forEach(topic=>{
+          const b=document.createElement('button');
+          b.className='big-btn';
+          b.style.cssText='font-size:.6rem;padding:.6rem;text-align:center;white-space:normal;line-height:1.3;';
+          b.textContent=topic.order+'. '+topic.title;
+          b.dataset.topicId=topic.id;
+          b.onclick=()=>selectTopic(topic.id);
+          wm.appendChild(b);
+        });
+      }
+    }
+  } else if(typeof initLeafletWorldMap !== 'undefined' && typeof L !== 'undefined'){
     initLeafletWorldMap(selectedCourseId, course, layout);
   } else {
-    // Fallback: render topic nodes as simple clickable buttons
-    console.warn('Leaflet unavailable; rendering fallback topic grid');
     const wm=document.getElementById('world-map');
     if(wm){
       wm.innerHTML='';
