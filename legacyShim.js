@@ -1,6 +1,6 @@
 import { startRun as engineStartRun, submitAnswer as engineSubmitAnswer, getCurrentRun } from './core/gameEngine.js';
 import { showMap, createSimpleCourseMap, startStudySessionForNode, SESSION_SIZE } from './ui/menus.js';
-import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback, addQuestionTime, resumeQuestionTimer } from './ui/gameUI.js';
+import { updateHUD, renderCurrentQuestion, hideFeedback, stopTimer, showAnswerFeedback, addQuestionTime, resumeQuestionTimer, showPointsPopup } from './ui/gameUI.js';
 import { gradeAnswer } from './core/answerGrading.js';
 import { getQuestionsForNode } from './core/questionEngine.js';
 import { getNodeConfig } from './core/nodeConfig.js';
@@ -359,7 +359,18 @@ window.submitAnswer = function(isCorrect) {
     console.log('[SHIELD] activated — wrong answer absorbed');
   }
 
+  const scoreBefore = run ? run.score : 0;
   const result = engineSubmitAnswer(isCorrect);
+  const scoreAfter = run ? run.score : 0;
+  const delta = scoreAfter - scoreBefore;
+
+  if (delta > 0) {
+    const isBig = (run?._lastMult || 1) >= 3;
+    showPointsPopup(`+${delta}`, { big: isBig });
+  } else if (!isCorrect && run) {
+    showPointsPopup('MISS', { miss: true });
+  }
+
   updateHUD();
 
   // Code blue: critical vitals trigger immediate game over

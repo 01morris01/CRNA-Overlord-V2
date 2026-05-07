@@ -759,6 +759,26 @@ export function showAnswerFeedback(correct, rationale, userAnswer = null) {
 
 // ─── HIDE FEEDBACK ────────────────────────────────────────────────────────────
 
+export function showPointsPopup(text, opts = {}) {
+  const popup = document.createElement('div');
+  popup.className = 'pts-pop';
+  if (opts.big) popup.classList.add('big');
+  if (opts.miss) popup.classList.add('miss');
+  popup.textContent = text;
+  const scv = document.getElementById('scv');
+  if (scv) {
+    const rect = scv.getBoundingClientRect();
+    popup.style.left = `${rect.left + rect.width / 2}px`;
+    popup.style.top  = `${rect.top + rect.height / 2}px`;
+  } else {
+    popup.style.left = '50%';
+    popup.style.top  = '20%';
+  }
+  document.body.appendChild(popup);
+  setTimeout(() => popup.remove(), 1300);
+}
+window.showPointsPopup = showPointsPopup;
+
 export function hideFeedback() {
   const result = document.getElementById('result');
   if (!result) return;
