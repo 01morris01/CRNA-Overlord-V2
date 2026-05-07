@@ -109,6 +109,32 @@ function _setupAuthKeyboard() {
   });
 }
 
+function _showRecoveryCard(err) {
+  const app = document.getElementById('app');
+  if (!app) return;
+  const card = document.createElement('div');
+  card.style.cssText = 'position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,14,.95);z-index:10000;padding:2rem;';
+  card.innerHTML = `
+    <div style="max-width:400px;text-align:center;">
+      <div style="font-size:1.2rem;font-weight:900;color:#ff3366;margin-bottom:1rem;">Something went wrong.</div>
+      <div style="font-size:.65rem;color:#7a95b0;margin-bottom:.5rem;">Error: ${(err?.message || 'Unknown error').replace(/</g, '&lt;')}</div>
+      <div style="font-size:.6rem;color:#4a6282;margin-bottom:1.5rem;">Your save data may be corrupted. You can reset to start fresh.</div>
+      <button id="recovery-reset-btn" style="background:transparent;border:2px solid #ff3366;color:#ff3366;font-size:.8rem;font-weight:700;padding:.6rem 2rem;cursor:pointer;border-radius:4px;letter-spacing:.1em;">RESET AND RELOAD</button>
+    </div>
+  `;
+  app.appendChild(card);
+  document.getElementById('recovery-reset-btn')?.addEventListener('click', () => {
+    // Clear the current user's save key
+    try {
+      const key = typeof window._getUserSaveKey === 'function' ? window._getUserSaveKey() : null;
+      if (key) localStorage.removeItem(key);
+    } catch (_) { /* ignore */ }
+    // Fallback: clear all overlord save keys
+    Object.keys(localStorage).filter(k => k.startsWith('hemodynamic_overlord_save')).forEach(k => localStorage.removeItem(k));
+    location.reload();
+  });
+}
+
 function _initGameUI() {
   const state = loadState();
   window.crnaState = state;
@@ -128,7 +154,12 @@ export function initApp() {
     const session = getSession();
     if (session) {
       _showLoggedIn(session.displayName);
-      _initGameUI();
+      try {
+        _initGameUI();
+      } catch (err) {
+        console.error('[INIT] _initGameUI failed:', err);
+        _showRecoveryCard(err);
+      }
     } else {
       _showAuthForm();
     }
