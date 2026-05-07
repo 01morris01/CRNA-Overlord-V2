@@ -17,7 +17,7 @@ pG.setAttribute('position',new THREE.BufferAttribute(pp,3));pG.setAttribute('col
 const pMesh=new THREE.Points(pG,new THREE.PointsMaterial({size:.08,vertexColors:true,transparent:true,opacity:.7,sizeAttenuation:true}));Sc.add(pMesh);
 let beatSpd=1,partSpd=1,flashHex=null,flashT=0,camRot=0,ecgFlat=false;
 const ck=new THREE.Clock();
-(function anim(){requestAnimationFrame(anim);const t=ck.getElapsedTime();
+(function anim(){requestAnimationFrame(anim);if(document.getElementById('splash')?.style.display==='none'){return;}const t=ck.getElapsedTime();
 const b=1+.09*Math.abs(Math.sin(t*1.5*beatSpd))+.04*Math.abs(Math.sin(t*3*beatSpd));hG.scale.setScalar(b);hL.intensity=2+2.2*Math.abs(Math.sin(t*1.5*beatSpd));
 const pa=pMesh.geometry.attributes.position.array;for(let i=0;i<PN;i++){pa[i*3]+=pvel[i].x*partSpd;pa[i*3+1]+=pvel[i].y*partSpd;pa[i*3+2]+=pvel[i].z*.5;if(Math.abs(pa[i*3])>9)pvel[i].x*=-1;if(Math.abs(pa[i*3+1]+1)>7)pvel[i].y*=-1;if(pa[i*3+2]>2)pa[i*3+2]=-4.5;if(pa[i*3+2]<-4.5)pa[i*3+2]=2;}pMesh.geometry.attributes.position.needsUpdate=true;
 camRot+=.001;cam.position.x=Math.sin(camRot)*.5;cam.position.y=Math.cos(camRot*.7)*.3;cam.lookAt(0,0,-2);
