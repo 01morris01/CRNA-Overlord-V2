@@ -1,29 +1,7 @@
-const CACHE_NAME = 'overlord-v5';
-const APP_SHELL = [
-  '/',
-  '/index.html',
-  '/app.js',
-  '/legacyShim.js',
-  '/core/state.js',
-  '/core/auth.js',
-  '/core/gameEngine.js',
-  '/core/questionEngine.js',
-  '/core/answerGrading.js',
-  '/core/nodeConfig.js',
-  '/core/voss.js',
-  '/core/dailyMission.js',
-  '/ui/gameUI.js',
-  '/ui/menus.js',
-  '/ui/reviewMode.js',
-  '/ui/sceneRegistry.js',
-  '/assets/css/tokens.css',
-  '/manifest.json',
-];
+const CACHE_NAME = 'overlord-v5b';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
-  );
+  // Skip precaching; use network-first strategy instead
   self.skipWaiting();
 });
 
@@ -37,15 +15,17 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
-
-  // Do not cache question bank files (data/questions/*); always fetch fresh
-  if (url.pathname.startsWith('/data/questions/')) {
-    event.respondWith(fetch(event.request));
-    return;
-  }
-
+  // Network-first: try network, fall back to cache
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    fetch(event.request)
+      .then((response) => {
+        // Cache successful responses for offline fallback
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });

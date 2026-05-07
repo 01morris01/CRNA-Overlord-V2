@@ -1981,31 +1981,10 @@ function startGame(){
   playerName=document.getElementById('name-input').value.trim()||'ROOKIE';
   const s=getSave();bankedPts=s.bankedPts||0;inv=s.inv||{shield:0,skip:0,reveal:0,time:0};equip=s.equip||{vent:false,mac:false,vl:false,bougie:false};
   save();
-  // Cross-fade splash to course selector (250ms)
-  const splashEl=document.getElementById('splash');
-  if(splashEl){
-    splashEl.style.transition='opacity 250ms ease';
-    splashEl.style.opacity='0';
-    setTimeout(()=>{
-      splashEl.style.display='none';
-      if(typeof window._scheduleThreeCleanup==='function')window._scheduleThreeCleanup();
-      splashEl.style.opacity='';
-      splashEl.style.transition='';
-      document.getElementById('level-map').style.display='none';
-      showCourseSelector();
-      // Fade in course selector
-      const sel=document.getElementById('course-selector');
-      if(sel){
-        sel.style.opacity='0';
-        sel.style.transition='opacity 250ms ease';
-        sel.style.display='flex';
-        requestAnimationFrame(()=>{requestAnimationFrame(()=>{sel.style.opacity='1';});});
-      }
-    },250);
-  } else {
-    document.getElementById('level-map').style.display='none';
-    showCourseSelector();
-  }
+  document.getElementById('splash').style.display='none';
+  document.getElementById('level-map').style.display='none';
+  if(typeof window._scheduleThreeCleanup==='function')window._scheduleThreeCleanup();
+  showCourseSelector();
 }
 
 // === COURSE SELECTOR & STORE STATE ===
