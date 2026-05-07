@@ -1536,6 +1536,25 @@ const COURSES = [
     ]
   },
   {
+    id:'tech-advances-anesthesia',
+    title:'Technological Advances in Anesthesia Practice',
+    topics:[
+      {id:'ta-wk-1',title:'Anesthesia Techniques',chapters:'Pardo 14; Nagelhout 20',order:1,type:'topic'},
+      {id:'ta-wk-2',title:'Drug Doses',chapters:'Pardo 8; Nagelhout 9, 11, 12',order:2,type:'topic'},
+      {id:'ta-wk-3',title:'Clinical Monitoring',chapters:'Pardo 20; Nagelhout 17-19',order:3,type:'topic'},
+      {id:'ta-wk-4',title:'Positioning',chapters:'Pardo 19; Nagelhout 23',order:4,type:'topic'},
+      {id:'ta-wk-5',title:'Positioning / Gas Laws',chapters:'Pardo 19; Nagelhout 15, 23',order:5,type:'topic'},
+      {id:'ta-wk-6',title:'Advanced Airway I',chapters:'Pardo 16; Nagelhout 24',order:6,type:'topic'},
+      {id:'ta-wk-7',title:'Advanced Airway II',chapters:'Pardo 16; Nagelhout 24',order:7,type:'topic'},
+      {id:'ta-wk-8',title:'Anesthesia Machine',chapters:'Pardo 15; Nagelhout 16',order:8,type:'topic'},
+      {id:'ta-wk-9',title:'Fluid / Blood Management',chapters:'Pardo 24-25; Nagelhout 21, 22',order:9,type:'topic'},
+      {id:'ta-wk-10',title:'Environmental Hazards / Infection Control',chapters:'Pardo 46; Nagelhout 61',order:10,type:'topic'},
+      {id:'ta-wk-11',title:'Induction / Emergence I',chapters:'Pardo 14, 39; Nagelhout 8, 9, 11, 12',order:11,type:'topic'},
+      {id:'ta-wk-12',title:'Induction / Emergence II',chapters:'Pardo 14, 39; Nagelhout 8, 9, 11, 12',order:12,type:'topic'},
+      {id:'ta-wk-13',title:'Induction / Emergence III',chapters:'Pardo 14, 39; Nagelhout 8, 9, 11, 12',order:13,type:'topic'},
+    ]
+  },
+  {
     id:'basics-anesthesia',
     title:'Basics of Anesthesia',
     topics:[
@@ -1716,6 +1735,21 @@ const WORLD_LAYOUTS = {
     {order:12, x:1000, y:220},
     {order:13, x:1060, y:180},
     {order:14, x:1120, y:140},
+  ],
+  'tech-advances-anesthesia': [
+    {order:1, x:100, y:270},
+    {order:2, x:190, y:240},
+    {order:3, x:280, y:210},
+    {order:4, x:370, y:190},
+    {order:5, x:460, y:170},
+    {order:6, x:550, y:155},
+    {order:7, x:640, y:155},
+    {order:8, x:730, y:170},
+    {order:9, x:820, y:190},
+    {order:10, x:900, y:220},
+    {order:11, x:970, y:250},
+    {order:12, x:1040, y:220},
+    {order:13, x:1100, y:180},
   ]
 };
 

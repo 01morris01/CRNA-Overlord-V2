@@ -149,6 +149,21 @@ const TOPIC_TO_NODE = {
   'pp2-wk-12': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-12' },
   'pp2-wk-13': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-13' },
   'pp2-wk-14': { courseId: 'adv-phys-path-2', nodeId: 'pp2-wk-14' },
+
+  // Technological Advances in Anesthesia Practice (NAS 560, Summer 2026).
+  'ta-wk-1':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-1'  },
+  'ta-wk-2':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-2'  },
+  'ta-wk-3':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-3'  },
+  'ta-wk-4':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-4'  },
+  'ta-wk-5':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-5'  },
+  'ta-wk-6':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-6'  },
+  'ta-wk-7':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-7'  },
+  'ta-wk-8':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-8'  },
+  'ta-wk-9':  { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-9'  },
+  'ta-wk-10': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-10' },
+  'ta-wk-11': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-11' },
+  'ta-wk-12': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-12' },
+  'ta-wk-13': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-13' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.

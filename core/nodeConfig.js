@@ -63,6 +63,21 @@ import { PP2_WK12_QUESTIONS, PP2_WK12_METADATA } from '../data/questions/pp2-wk1
 import { PP2_WK13_QUESTIONS, PP2_WK13_METADATA } from '../data/questions/pp2-wk13-insulin-diabetes-temp-gi.js';
 import { PP2_WK14_QUESTIONS, PP2_WK14_METADATA } from '../data/questions/pp2-wk14-lipid-protein-liver.js';
 
+// ── Technological Advances in Anesthesia Practice (NAS 560, Summer 2026) ───
+import { TA_WK1_QUESTIONS,  TA_WK1_METADATA  } from '../data/questions/ta-wk1-anesthesia-techniques.js';
+import { TA_WK2_QUESTIONS,  TA_WK2_METADATA  } from '../data/questions/ta-wk2-drug-doses.js';
+import { TA_WK3_QUESTIONS,  TA_WK3_METADATA  } from '../data/questions/ta-wk3-clinical-monitoring.js';
+import { TA_WK4_QUESTIONS,  TA_WK4_METADATA  } from '../data/questions/ta-wk4-positioning.js';
+import { TA_WK5_QUESTIONS,  TA_WK5_METADATA  } from '../data/questions/ta-wk5-positioning-gas-laws.js';
+import { TA_WK6_QUESTIONS,  TA_WK6_METADATA  } from '../data/questions/ta-wk6-advanced-airway.js';
+import { TA_WK7_QUESTIONS,  TA_WK7_METADATA  } from '../data/questions/ta-wk7-advanced-airway.js';
+import { TA_WK8_QUESTIONS,  TA_WK8_METADATA  } from '../data/questions/ta-wk8-anesthesia-machine.js';
+import { TA_WK9_QUESTIONS,  TA_WK9_METADATA  } from '../data/questions/ta-wk9-fluid-blood-management.js';
+import { TA_WK10_QUESTIONS, TA_WK10_METADATA } from '../data/questions/ta-wk10-environmental-hazards.js';
+import { TA_WK11_QUESTIONS, TA_WK11_METADATA } from '../data/questions/ta-wk11-induction-emergence.js';
+import { TA_WK12_QUESTIONS, TA_WK12_METADATA } from '../data/questions/ta-wk12-induction-emergence.js';
+import { TA_WK13_QUESTIONS, TA_WK13_METADATA } from '../data/questions/ta-wk13-induction-emergence.js';
+
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
 import { WEEK_3_QUESTIONS, WEEK_3_METADATA } from '../data/questions/week-3.js';
@@ -716,6 +731,126 @@ export const NODE_CONFIG = {
     questionsMeta: PP2_WK14_METADATA,
   },
 
+  // ── Technological Advances in Anesthesia Practice (NAS 560, Summer 2026) ──
+
+  "ta-wk-1": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Anesthesia Techniques",
+    chapterLabel:  "Pardo 14; Nagelhout 20",
+    badgeLabel:    "ANESTHESIA TECHNIQUES",
+    icon:          "💉",
+    questions:     TA_WK1_QUESTIONS,
+    questionsMeta: TA_WK1_METADATA,
+  },
+  "ta-wk-2": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Drug Doses",
+    chapterLabel:  "Pardo 8; Nagelhout 9, 11, 12",
+    badgeLabel:    "DRUG DOSES",
+    icon:          "💊",
+    questions:     TA_WK2_QUESTIONS,
+    questionsMeta: TA_WK2_METADATA,
+  },
+  "ta-wk-3": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Clinical Monitoring",
+    chapterLabel:  "Pardo 20; Nagelhout 17-19",
+    badgeLabel:    "MONITORING",
+    icon:          "📊",
+    questions:     TA_WK3_QUESTIONS,
+    questionsMeta: TA_WK3_METADATA,
+  },
+  "ta-wk-4": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Positioning",
+    chapterLabel:  "Pardo 19; Nagelhout 23",
+    badgeLabel:    "POSITIONING",
+    icon:          "🛏️",
+    questions:     TA_WK4_QUESTIONS,
+    questionsMeta: TA_WK4_METADATA,
+  },
+  "ta-wk-5": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Positioning / Gas Laws",
+    chapterLabel:  "Pardo 19; Nagelhout 15, 23",
+    badgeLabel:    "POSITION / GAS LAWS",
+    icon:          "🫁",
+    questions:     TA_WK5_QUESTIONS,
+    questionsMeta: TA_WK5_METADATA,
+  },
+  "ta-wk-6": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Advanced Airway",
+    chapterLabel:  "Pardo 16; Nagelhout 24",
+    badgeLabel:    "AIRWAY I",
+    icon:          "🔧",
+    questions:     TA_WK6_QUESTIONS,
+    questionsMeta: TA_WK6_METADATA,
+  },
+  "ta-wk-7": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Advanced Airway",
+    chapterLabel:  "Pardo 16; Nagelhout 24",
+    badgeLabel:    "AIRWAY II",
+    icon:          "🔧",
+    questions:     TA_WK7_QUESTIONS,
+    questionsMeta: TA_WK7_METADATA,
+  },
+  "ta-wk-8": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Anesthesia Machine",
+    chapterLabel:  "Pardo 15; Nagelhout 16",
+    badgeLabel:    "MACHINE",
+    icon:          "⚙️",
+    questions:     TA_WK8_QUESTIONS,
+    questionsMeta: TA_WK8_METADATA,
+  },
+  "ta-wk-9": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Fluid / Blood Management",
+    chapterLabel:  "Pardo 24-25; Nagelhout 21, 22",
+    badgeLabel:    "FLUIDS / BLOOD",
+    icon:          "🩸",
+    questions:     TA_WK9_QUESTIONS,
+    questionsMeta: TA_WK9_METADATA,
+  },
+  "ta-wk-10": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Environmental Hazards / Infection Control",
+    chapterLabel:  "Pardo 46; Nagelhout 61",
+    badgeLabel:    "HAZARDS / INFECTION",
+    icon:          "☣️",
+    questions:     TA_WK10_QUESTIONS,
+    questionsMeta: TA_WK10_METADATA,
+  },
+  "ta-wk-11": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Induction / Emergence I",
+    chapterLabel:  "Pardo 14, 39; Nagelhout 8, 9, 11, 12",
+    badgeLabel:    "INDUCTION I",
+    icon:          "⚡",
+    questions:     TA_WK11_QUESTIONS,
+    questionsMeta: TA_WK11_METADATA,
+  },
+  "ta-wk-12": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Induction / Emergence II",
+    chapterLabel:  "Pardo 14, 39; Nagelhout 8, 9, 11, 12",
+    badgeLabel:    "INDUCTION II",
+    icon:          "⚡",
+    questions:     TA_WK12_QUESTIONS,
+    questionsMeta: TA_WK12_METADATA,
+  },
+  "ta-wk-13": {
+    courseId:      "tech-advances-anesthesia",
+    title:         "Induction / Emergence III",
+    chapterLabel:  "Pardo 14, 39; Nagelhout 8, 9, 11, 12",
+    badgeLabel:    "INDUCTION III",
+    icon:          "⚡",
+    questions:     TA_WK13_QUESTIONS,
+    questionsMeta: TA_WK13_METADATA,
+  },
+
   // ── Add future nodes here ──────────────────────────────────────────────────
 
 };
@@ -742,17 +877,19 @@ export function getNodesByCourse(courseId) {
  * Each entry: { courseId, label, nodeCount }.
  */
 const COURSE_LABELS = {
-  'basics-of-anesthesia':  'Basics of Anesthesia',
-  'adv-phys-path-1':       'Pathophysiology I',
-  'adv-phys-path-2':       'Pathophysiology II',
-  'chem-phys-anesthesia':  'Chemistry & Physics',
-  'adv-health-assessment': 'Health Assessment',
+  'basics-of-anesthesia':     'Basics of Anesthesia',
+  'adv-phys-path-1':          'Pathophysiology I',
+  'adv-phys-path-2':          'Pathophysiology II',
+  'tech-advances-anesthesia': 'Tech Advances',
+  'chem-phys-anesthesia':     'Chemistry & Physics',
+  'adv-health-assessment':    'Health Assessment',
 };
 
 const COURSE_ORDER = [
   'basics-of-anesthesia',
   'adv-phys-path-1',
   'adv-phys-path-2',
+  'tech-advances-anesthesia',
   'adv-health-assessment',
   'chem-phys-anesthesia',
 ];
