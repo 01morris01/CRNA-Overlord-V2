@@ -102,12 +102,14 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 #scn{border:1px solid var(--border,#162035);border-radius:8px;background:rgba(5,2,18,.7);box-shadow:0 0 20px rgba(0,0,0,.5);flex:1;max-height:100%;pointer-events:auto;cursor:default;}
 
 /* OVERLORD */
-#ov-area{position:absolute;top:0;right:6px;width:120px;text-align:center;pointer-events:none;z-index:20;}
+#ov-area{position:absolute;top:8px;right:10px;width:260px;text-align:center;pointer-events:none;z-index:20;}
 .ov-icon{font-size:2rem;display:none;animation:ovf 2s ease-in-out infinite;}
 .ov-icon.critical{display:block;color:var(--red,#ff3366);animation:ovf 2s ease-in-out infinite,skull-pulse 1.5s ease-in-out infinite;}
 @keyframes skull-pulse{0%,100%{opacity:.6;text-shadow:0 0 10px rgba(255,51,102,.3)}50%{opacity:1;text-shadow:0 0 25px rgba(255,51,102,.6)}}
 @keyframes ovf{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.ov-bub{background:rgba(0,4,18,.94);border:1px solid rgba(0,255,163,.2);border-radius:6px;padding:.35rem .45rem;font-size:.48rem;color:var(--muted-2,#7a95b0);line-height:1.5;margin-top:.3rem;opacity:0;transition:opacity .35s;text-align:left;font-family:var(--fb);}
+.ov-bub{background:rgba(0,4,18,.96);border:1px solid rgba(0,255,163,.35);border-radius:8px;padding:.6rem .8rem;font-size:.78rem;color:var(--txt,#dce8f5);line-height:1.45;margin-top:.4rem;opacity:0;transform:translateX(20px);transition:opacity .3s ease,transform .3s ease;text-align:left;font-family:var(--fb);font-style:italic;box-shadow:0 4px 16px rgba(0,0,0,.4);max-width:240px;}
+.ov-bub.show,.ov-bub[style*="opacity: 1"]{opacity:1;transform:translateX(0);}
+.ov-bub::before{content:'DR. VOSS';display:block;font-size:.55rem;font-style:normal;color:var(--green-dim,#00cc80);letter-spacing:.18em;margin-bottom:.2rem;font-family:var(--fm);font-weight:700;}
 .ov-bub.show{opacity:1;}
 
 /* CHALLENGE PANEL */
@@ -286,7 +288,9 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 @media(max-width:640px){
   #ans-grid{grid-template-columns:1fr!important;}
   #hud{gap:.3rem;padding:0 .3rem;height:52px;}
-  #ov-area{display:none;}
+  #ov-area{display:block;width:auto;left:8px;right:8px;top:auto;bottom:calc(50vh + 12px);pointer-events:none;}
+  #ov-area .ov-icon{display:none;}
+  .ov-bub{font-size:.7rem;max-width:100%;padding:.5rem .7rem;}
   .vb{min-width:30px;}
   .vl{font-size:.36rem;}
   .vv{font-size:.78rem;}
