@@ -81,18 +81,36 @@ let playerName='';let bankedPts=0;let missedQuestionIds=[];let topicWeakness=[];
 // ═══════════ SRNA CHARACTER ═══════════
 const srnaCvs=document.getElementById('srna-cvs'),sctx=srnaCvs.getContext('2d');
 let equip={vent:false,mac:false,vl:false,bougie:false};
+// SRNA reactive state: 'idle' | 'confident' | 'wipe_brow'
+let _srnaState='idle';let _srnaStateTimer=0;
+window._setSRNAState=function(state,durationMs){_srnaState=state;clearTimeout(_srnaStateTimer);if(durationMs)_srnaStateTimer=setTimeout(()=>{_srnaState='idle';drawSRNA();},durationMs);drawSRNA();};
+
 function drawSRNA(){
   const W=110,H=260;sctx.clearRect(0,0,W,H);
   sctx.fillStyle='rgba(5,5,20,.5)';sctx.fillRect(0,0,W,H);
   const cx=55,cy=120;
+  // Breathing animation (idle: subtle chest rise)
+  const breathOffset=_srnaState==='idle'?Math.sin(Date.now()/1200)*1.5:0;
+  const armYOffset=_srnaState==='confident'?-8:(_srnaState==='wipe_brow'?-5:0);
+  const armAngle=_srnaState==='wipe_brow'?-0.3:0;
   sctx.fillStyle='#2266aa';sctx.fillRect(cx-14,cy-62,28,10);
   sctx.beginPath();sctx.arc(cx,cy-45,16,0,Math.PI*2);sctx.fillStyle='#ddaa88';sctx.fill();
   sctx.fillStyle='#333';sctx.fillRect(cx-7,cy-48,4,4);sctx.fillRect(cx+3,cy-48,4,4);
   sctx.fillStyle='#88bbdd';sctx.fillRect(cx-10,cy-40,20,8);
-  sctx.fillStyle='#2266aa';sctx.fillRect(cx-18,cy-28,36,45);
+  sctx.fillStyle='#2266aa';sctx.fillRect(cx-18,cy-28+breathOffset,36,45-breathOffset);
   sctx.fillStyle='#1a5588';sctx.fillRect(cx-16,cy+17,14,35);sctx.fillRect(cx+2,cy+17,14,35);
   sctx.fillStyle='#333';sctx.fillRect(cx-16,cy+52,14,6);sctx.fillRect(cx+2,cy+52,14,6);
-  sctx.fillStyle='#ddaa88';sctx.fillRect(cx-26,cy-25,10,30);sctx.fillRect(cx+16,cy-25,10,30);
+  // Arms with state-based positioning
+  if(_srnaState==='wipe_brow'){
+    sctx.fillStyle='#ddaa88';sctx.fillRect(cx-26,cy-25+armYOffset,10,25);
+    sctx.save();sctx.translate(cx+16,cy-25+armYOffset);sctx.rotate(armAngle);sctx.fillStyle='#ddaa88';sctx.fillRect(0,0,10,25);sctx.restore();
+    // Hand near forehead
+    sctx.fillStyle='#ddaa88';sctx.fillRect(cx+10,cy-52,12,8);
+  } else if(_srnaState==='confident'){
+    sctx.fillStyle='#ddaa88';sctx.fillRect(cx-30,cy-30+armYOffset,10,25);sctx.fillRect(cx+20,cy-30+armYOffset,10,25);
+  } else {
+    sctx.fillStyle='#ddaa88';sctx.fillRect(cx-26,cy-25,10,30);sctx.fillRect(cx+16,cy-25,10,30);
+  }
   sctx.strokeStyle='#444';sctx.lineWidth=2;sctx.beginPath();sctx.arc(cx,cy-22,12,.2,Math.PI-.2);sctx.stroke();
   sctx.fillStyle='#666';sctx.beginPath();sctx.arc(cx,cy-10,4,0,Math.PI*2);sctx.fill();
   if(equip.vent){sctx.fillStyle='#334455';sctx.fillRect(78,cy-30,28,40);sctx.strokeStyle='#00ff88';sctx.lineWidth=1;sctx.strokeRect(78,cy-30,28,40);sctx.fillStyle='#00ff88';sctx.font='bold 6px Courier New';sctx.textAlign='center';sctx.fillText('VENT',92,cy-18);sctx.strokeStyle='#88aacc';sctx.lineWidth=1.5;sctx.beginPath();sctx.moveTo(78,cy-20);sctx.lineTo(cx+18,cy-28);sctx.stroke();}

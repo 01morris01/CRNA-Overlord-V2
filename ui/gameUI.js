@@ -218,6 +218,10 @@ export function updateHUD() {
   if (l2) l2.style.opacity = state.lives >= 2 ? '1' : '.2';
   if (l3) l3.style.opacity = state.lives >= 3 ? '1' : '.2';
 
+  // Skull: only show on last life
+  const skull = document.querySelector('.ov-icon');
+  if (skull) skull.classList.toggle('critical', state.lives === 1);
+
   // Streak milestone banner
   if (state._streakMilestone) {
     const labels = { 3: '\u{1F525} ON FIRE', 5: '\u26A1 UNSTOPPABLE', 7: '\u{1F480} OVERLORD MODE' };
@@ -627,6 +631,30 @@ export function showAnswerFeedback(correct, rationale, userAnswer = null) {
   if (rex) {
     rex.textContent = rationale || '';
     rex.style.whiteSpace = 'pre-wrap';
+  }
+
+  // SRNA reacts to answer
+  if (typeof window._setSRNAState === 'function') {
+    const run = getCurrentRun();
+    if (correct && run && run.streak >= 3) {
+      window._setSRNAState('confident', 3000);
+    } else if (!correct) {
+      window._setSRNAState('wipe_brow', 2000);
+    }
+  }
+
+  // Voss reacts to correct/wrong
+  if (typeof window.vossSay === 'function') {
+    const run = getCurrentRun();
+    if (run && run.lives === 1 && !correct) {
+      window.vossSay('ON_LAST_LIFE');
+    } else if (correct && run && run.streak === 3) {
+      window.vossSay('ON_STREAK_3');
+    } else if (correct && run && run.streak === 5) {
+      window.vossSay('ON_STREAK_5');
+    } else {
+      window.vossSay(correct ? 'ON_CORRECT' : 'ON_WRONG');
+    }
   }
 }
 

@@ -6,6 +6,7 @@ import { getQuestionsForNode } from './core/questionEngine.js';
 import { getNodeConfig } from './core/nodeConfig.js';
 import { loadState, saveState } from './core/state.js';
 import { showReviewPanel, hideReviewPanel, buildReviewSession, REVIEW_SESSION_SIZE } from './ui/reviewMode.js';
+import { vossSay, vossOnQuestion } from './core/voss.js';
 
 // Track which engine is currently active
 window.usingNewEngine = false;
@@ -294,6 +295,9 @@ window.startGameWithQuestions = function(questions) {
   updateHUD();
   _syncPwrBtns();
 
+  // Voss greets the player
+  vossSay('ON_GAME_START');
+
   return run;
 };
 
@@ -330,6 +334,9 @@ window.nextQ = function() {
 
     renderCurrentQuestion();
     updateHUD();
+
+    // Voss commentary on question cadence
+    vossOnQuestion(run);
 
     const q = run.questions[run.index];
     if (q) console.log('QUESTION TYPE:', q.type, '| id:', q.id);
@@ -394,6 +401,10 @@ function _showNewEngineGameOver(run) {
 
   if (!go) return;
   go.classList.add('on');
+
+  // Voss reacts to outcome
+  const survived = run.lives > 0;
+  vossSay(survived ? 'ON_LEVEL_COMPLETE' : 'ON_GAME_OVER');
 
   const correctCount = run.results.filter(r => r.correct).length;
   const totalCount   = run.results.length;

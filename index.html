@@ -92,7 +92,9 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 /* OVERLORD */
 #ov-area{position:absolute;top:0;right:6px;width:120px;text-align:center;pointer-events:none;z-index:20;}
-.ov-icon{font-size:2rem;display:block;animation:ovf 2s ease-in-out infinite;}
+.ov-icon{font-size:2rem;display:none;animation:ovf 2s ease-in-out infinite;}
+.ov-icon.critical{display:block;color:var(--red,#ff3366);animation:ovf 2s ease-in-out infinite,skull-pulse 1.5s ease-in-out infinite;}
+@keyframes skull-pulse{0%,100%{opacity:.6;text-shadow:0 0 10px rgba(255,51,102,.3)}50%{opacity:1;text-shadow:0 0 25px rgba(255,51,102,.6)}}
 @keyframes ovf{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .ov-bub{background:rgba(0,4,18,.94);border:1px solid rgba(0,255,163,.2);border-radius:6px;padding:.35rem .45rem;font-size:.48rem;color:var(--muted-2,#7a95b0);line-height:1.5;margin-top:.3rem;opacity:0;transition:opacity .35s;text-align:left;font-family:var(--fb);}
 .ov-bub.show{opacity:1;}
