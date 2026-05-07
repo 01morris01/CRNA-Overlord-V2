@@ -217,7 +217,7 @@ function getMarkerConfig(type) {
         color: white;
         font-size: 22px;
         text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
-        font-family: 'Courier New', monospace;
+        font-family: 'JetBrains Mono', monospace;
         animation: worldMarkerPulse 2s ease-in-out infinite;
       `
     },
@@ -240,7 +240,7 @@ function getMarkerConfig(type) {
         color: #ffeeee;
         font-size: 24px;
         text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
-        font-family: 'Courier New', monospace;
+        font-family: 'JetBrains Mono', monospace;
         animation: worldMarkerIntensePulse 1.5s ease-in-out infinite;
       `
     },
@@ -263,7 +263,7 @@ function getMarkerConfig(type) {
         color: white;
         font-size: 24px;
         text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
-        font-family: 'Courier New', monospace;
+        font-family: 'JetBrains Mono', monospace;
         animation: worldMarkerIntensePulse 1.5s ease-in-out infinite;
       `
     }
@@ -328,7 +328,7 @@ function ensureWorldMapStyles() {
       border: 1px solid rgba(255, 150, 0, 0.5) !important;
       border-radius: 4px !important;
       color: #ffaa00 !important;
-      font-family: 'Courier New', monospace !important;
+      font-family: 'JetBrains Mono', monospace !important;
       font-size: 0.75rem !important;
       padding: 6px 10px !important;
       box-shadow: 0 0 12px rgba(255, 150, 0, 0.3) !important;
