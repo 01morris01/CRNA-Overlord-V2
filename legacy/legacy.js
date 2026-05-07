@@ -1981,10 +1981,19 @@ function startGame(){
   playerName=document.getElementById('name-input').value.trim()||'ROOKIE';
   const s=getSave();bankedPts=s.bankedPts||0;inv=s.inv||{shield:0,skip:0,reveal:0,time:0};equip=s.equip||{vent:false,mac:false,vl:false,bougie:false};
   save();
-  document.getElementById('splash').style.display='none';
-  document.getElementById('level-map').style.display='none';
-  if(typeof window._scheduleThreeCleanup==='function')window._scheduleThreeCleanup();
-  showCourseSelector();
+  const _splashEl=document.getElementById('splash');
+  _splashEl.style.transition='opacity 350ms ease';
+  _splashEl.style.opacity='0';
+  _splashEl.style.pointerEvents='none';
+  setTimeout(()=>{
+    _splashEl.style.display='none';
+    _splashEl.style.pointerEvents='';
+    _splashEl.style.opacity='';
+    _splashEl.style.transition='';
+    document.getElementById('level-map').style.display='none';
+    if(typeof window._scheduleThreeCleanup==='function')window._scheduleThreeCleanup();
+    showCourseSelector();
+  },350);
 }
 
 // === COURSE SELECTOR & STORE STATE ===
