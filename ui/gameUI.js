@@ -230,9 +230,11 @@ export function updateHUD() {
     }
   }
 
-  if (l1) l1.style.opacity = state.lives >= 1 ? '1' : '.2';
-  if (l2) l2.style.opacity = state.lives >= 2 ? '1' : '.2';
-  if (l3) l3.style.opacity = state.lives >= 3 ? '1' : '.2';
+  if (l1) l1.classList.toggle('dead', state.lives < 1);
+  if (l2) l2.classList.toggle('dead', state.lives < 2);
+  if (l3) l3.classList.toggle('dead', state.lives < 3);
+  if (state.lives === 1 && l1) l1.classList.add('lastlife');
+  else if (l1) l1.classList.remove('lastlife');
 
   // Skull: only show on last life
   const skull = document.querySelector('.ov-icon');
