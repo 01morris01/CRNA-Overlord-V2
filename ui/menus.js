@@ -1,6 +1,6 @@
 import { loadState, saveState } from '../core/state.js';
 import { filterQuestions, getQuestionsForNode, getQuestionMetadata } from '../core/questionEngine.js';
-import { getNodesByCourse, getDistinctCourses } from '../core/nodeConfig.js';
+import { getNodesByCourse, getDistinctCourses, getNodeConfig } from '../core/nodeConfig.js';
 
 /** Currently selected courseId — defaults to last-used or first available. */
 let _activeCourseId = null;

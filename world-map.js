@@ -31,13 +31,8 @@ function initLeafletWorldMap(courseId, course, layout) {
     return;
   }
 
-  // Lazy-load Leaflet if not yet available
   if (typeof L === 'undefined') {
-    if (typeof window._loadLeaflet === 'function') {
-      window._loadLeaflet().then(() => initLeafletWorldMap(courseId, course, layout));
-    } else {
-      console.warn('Leaflet not loaded and no loader available');
-    }
+    console.warn('Leaflet not loaded');
     return;
   }
 
