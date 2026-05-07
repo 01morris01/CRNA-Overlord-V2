@@ -234,7 +234,7 @@ function _hideNodePreview() {
  * Start a game with specific questions (new engine path).
  * Called by startStudySessionForNode for all nodes.
  */
-window.startGameWithQuestions = function(questions) {
+window.startGameWithQuestions = function(questions, opts = {}) {
   if (!questions || questions.length === 0) {
     console.error('No questions provided to startGameWithQuestions');
     return;
@@ -264,7 +264,7 @@ window.startGameWithQuestions = function(questions) {
   console.log('QUESTION COUNT:', questions.length);
   console.log('FIRST QUESTION:', questions[0]);
 
-  const run = engineStartRun({ mode: 'lesson', questions, lives: 3 });
+  const run = engineStartRun({ mode: opts.mode || 'lesson', questions, lives: opts.lives || 3 });
 
   // Hide all entry screens, show game
   const splash         = document.getElementById('splash');

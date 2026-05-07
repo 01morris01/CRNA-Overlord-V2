@@ -49,7 +49,8 @@ export function submitAnswer(isCorrect) {
     currentRun.streak += 1;
     currentRun.bestStreak = Math.max(currentRun.bestStreak, currentRun.streak);
     const mult = Math.min(1 + Math.floor(currentRun.streak / 2), 5);
-    pointsEarned = 100 * mult;
+    const modeMultiplier = currentRun.mode === 'code-blue' ? 2 : 1;
+    pointsEarned = 100 * mult * modeMultiplier;
     currentRun.score += pointsEarned;
     currentRun._lastMult = mult;
 
@@ -96,8 +97,10 @@ export function submitAnswer(isCorrect) {
 
   const state = loadState();
   state.gamesPlayed = (state.gamesPlayed || 0) + (currentRun.done ? 1 : 0);
-  state.bankedPts = (state.bankedPts || 0) + pointsEarned;
-  state.totalPts = (state.totalPts || 0) + pointsEarned;
+  // Study mode earns no points
+  const earnablePts = currentRun.mode === 'study' ? 0 : pointsEarned;
+  state.bankedPts = (state.bankedPts || 0) + earnablePts;
+  state.totalPts = (state.totalPts || 0) + earnablePts;
   state.highScore = Math.max(state.highScore || 0, currentRun.score);
   saveState(state);
 

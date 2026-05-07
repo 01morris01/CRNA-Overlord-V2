@@ -152,31 +152,63 @@ export function startStudySessionForNode(courseId, nodeId) {
     return;
   }
 
-  console.log('Question count (full bank):', questions.length);
+  // Store pending session for mode picker
+  window._pendingSession = { courseId, nodeId, questions };
 
-  // Shuffle and take a session-sized subset
+  // Show mode picker
+  const modal = document.getElementById('mode-picker-modal');
+  const nodeLabel = document.getElementById('mode-picker-node');
+  if (nodeLabel) {
+    const cfg = getNodeConfig(nodeId);
+    nodeLabel.textContent = cfg ? `${cfg.title} (${questions.length} questions)` : nodeId;
+  }
+  if (modal) modal.style.display = 'flex';
+}
+
+// Launch with selected mode
+window._launchWithMode = function(mode) {
+  const modal = document.getElementById('mode-picker-modal');
+  if (modal) modal.style.display = 'none';
+
+  const pending = window._pendingSession;
+  if (!pending) return;
+
+  const { courseId, nodeId, questions } = pending;
+  window._pendingSession = null;
+
+  // Shuffle and take session subset
   const shuffled = [...questions].sort(() => Math.random() - 0.5);
   const sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
 
-  console.log('Session size:', sessionQuestions.length);
+  // Apply mode rules
+  let lives = 3;
+  if (mode === 'code-blue') lives = 1;
+  if (mode === 'study') lives = 999; // effectively unlimited
 
-  // Store session info — totalInBank used for node completion %
+  // Store session info
   window.currentSession = {
     courseId,
     nodeId,
     questions: sessionQuestions,
     totalInBank: questions.length,
+    mode,
   };
 
-  // Start the game — startGameWithQuestions handles all display switching
+  // Save last mode preference
+  const state = loadState();
+  state.lastMode = mode;
+  saveState(state);
+
+  // Store mode on window for timer/powerup logic
+  window._sessionMode = mode;
+
   if (window.startGameWithQuestions) {
-    window.startGameWithQuestions(sessionQuestions);
+    window.startGameWithQuestions(sessionQuestions, { lives, mode });
     return;
   }
 
-  // Fallback if shim not loaded yet
   if (window.engineStartRun) {
-    window.engineStartRun({ questions: sessionQuestions, lives: 3, mode: 'lesson' });
+    window.engineStartRun({ questions: sessionQuestions, lives, mode });
   }
   hideMap();
   const splash = document.getElementById('splash');
@@ -187,7 +219,7 @@ export function startStudySessionForNode(courseId, nodeId) {
   if (levelMap) levelMap.classList.remove('on');
   if (window.renderCurrentQuestion) window.renderCurrentQuestion();
   if (window.updateHUD) window.updateHUD();
-}
+};
 
 export function setLastSeen(course, section, lesson) {
   const state = loadState();

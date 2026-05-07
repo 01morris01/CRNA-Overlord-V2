@@ -53,12 +53,27 @@ const QUESTION_TIME_SEC = 60;
 let _remaining = 0;
 let _currentTimerQ = null; // current question, used by resumeQuestionTimer
 
+function _getTimerDuration() {
+  const mode = window._sessionMode;
+  if (mode === 'code-blue') return 15;
+  if (mode === 'study') return 0; // no timer
+  return QUESTION_TIME_SEC;
+}
+
 function startQuestionTimer(q) {
   clearInterval(_timerInterval);
   _timerInterval = null;
 
+  // Study mode: no timer
+  const duration = _getTimerDuration();
+  if (duration === 0) {
+    const fill = document.getElementById('tmr-fill');
+    if (fill) { fill.style.width = '0%'; }
+    return;
+  }
+
   _currentTimerQ = q;
-  _remaining = QUESTION_TIME_SEC;
+  _remaining = duration;
   const fill = document.getElementById('tmr-fill');
   if (fill) {
     fill.style.transition = 'background 300ms ease';
@@ -67,10 +82,11 @@ function startQuestionTimer(q) {
   }
 
   console.log('Timer start:', _remaining, 'for', q.id);
+  const _timerTotal = duration;
 
   _timerInterval = setInterval(() => {
     _remaining--;
-    const pct = Math.max(0, (_remaining / QUESTION_TIME_SEC) * 100);
+    const pct = Math.max(0, (_remaining / _timerTotal) * 100);
 
     if (fill) {
       fill.style.width = pct + '%';
