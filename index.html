@@ -331,6 +331,15 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   #scn{max-height:140px;}
 }
 
+/* Disable hover transforms on touch devices (catch-all safety) */
+@media not all and (hover: hover) and (pointer: fine) {
+  .auth-btn:hover,.logout-btn:hover,.mode-btn:hover,.big-btn.green:hover,
+  #store-btn:hover,.pwr-btn.has:hover,.abtn:hover,#type-submit:hover,
+  .multi-btn:hover,.multi-submit:hover,.nxt-btn:hover,.store-item:hover,
+  .si-buy:hover,.store-close:hover,.map-store-btn:hover,.pause-btn:hover,
+  .rev-card:hover{transform:none !important;box-shadow:none !important;}
+}
+
 .leaflet-test-tooltip {
   background:rgba(5,10,30,.95) !important;
   border:1px solid rgba(255,150,0,.5) !important;
