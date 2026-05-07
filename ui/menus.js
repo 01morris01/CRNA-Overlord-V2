@@ -28,7 +28,7 @@ export function renderSectionList(sections=[]) {
     if (section.available) {
       node.classList.add('map-available');
     }
-    node.innerHTML=`<div class='mn-icon'>${section.icon||'📍'}</div><div class='mn-info'><div class='mn-name'>${section.name}</div><div class='mn-desc'>${section.desc||''}</div></div><div class='mn-status'>${section.status||''}</div>`;
+    node.innerHTML=`<div class='mn-icon'>${section.icon||'📍'}</div><div class='mn-info'><div class='mn-name'>${section.name}</div><div class='mn-desc'>${section.desc||''}</div><div class='mn-badge'>${section.status||''}</div></div>`;
     node.onclick = ()=> {
       if(section.onClick) section.onClick(section);
     };
@@ -82,7 +82,7 @@ function _renderNodesForCourse(courseId) {
   const sections = nodes.map(({ nodeId, courseId: cid, title, chapterLabel, icon, questionsMeta }) => {
     const meta = questionsMeta || getQuestionMetadata(cid, nodeId);
     const desc = meta
-      ? `${meta.totalQuestions} questions (${meta.questionTypes?.mcq ?? 0} MCQ, ${meta.questionTypes?.multi ?? 0} Multi, ${meta.questionTypes?.short ?? 0} Short)`
+      ? `${meta.totalQuestions} questions · ${meta.questionTypes?.mcq ?? 0} MCQ · ${meta.questionTypes?.multi ?? 0} Multi · ${meta.questionTypes?.short ?? 0} Short`
       : 'Questions loading...';
 
     const nodeData = nc[nodeId];
