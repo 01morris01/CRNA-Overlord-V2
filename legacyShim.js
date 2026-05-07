@@ -421,6 +421,21 @@ function _showNewEngineGameOver(run) {
   // Check daily mission completion
   checkMissionCompletion(run);
 
+  // Award chapter badge if boss case completed (all 3 boss Qs correct)
+  const bossResults = run.results.filter((r, i) => run.questions[i]?._isBoss);
+  if (bossResults.length >= 3 && bossResults.every(r => r.correct)) {
+    const nodeId = window.currentSession?.nodeId;
+    if (nodeId) {
+      const state = loadState();
+      if (!state.badges) state.badges = [];
+      if (!state.badges.includes(nodeId)) {
+        state.badges.push(nodeId);
+        saveState(state);
+        console.log('[BADGE] Earned badge for', nodeId);
+      }
+    }
+  }
+
   const correctCount = run.results.filter(r => r.correct).length;
   const totalCount   = run.results.length;
   const pct          = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;

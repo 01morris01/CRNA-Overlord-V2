@@ -337,6 +337,15 @@ export function renderCurrentQuestion() {
   const q = state.questions[state.index];
   if (!q) return;
 
+  // Boss case banner
+  if (q._isBoss && !state._bossAnnounced) {
+    state._bossAnnounced = true;
+    _showStreakBanner('BOSS CASE');
+    if (typeof window.vossSay === 'function') {
+      window.vossSay('ON_GAME_START'); // reuse start quotes for dramatic effect
+    }
+  }
+
   console.log('Rendering question:', q.id, q.type, q);
 
   // Validate (auto-repairs where possible)

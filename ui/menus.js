@@ -180,6 +180,16 @@ window._launchWithMode = function(mode) {
   const shuffled = [...questions].sort(() => Math.random() - 0.5);
   const sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
 
+  // Append boss case: 3 high-priority questions from the same node
+  const bossPool = questions.filter(q =>
+    q.metadata?.priority === 'high' && !sessionQuestions.some(sq => sq.id === q.id)
+  );
+  const bossQuestions = bossPool.sort(() => Math.random() - 0.5).slice(0, 3);
+  if (bossQuestions.length >= 3) {
+    bossQuestions.forEach(q => { q._isBoss = true; });
+    sessionQuestions.push(...bossQuestions);
+  }
+
   // Apply mode rules
   let lives = 3;
   if (mode === 'code-blue') lives = 1;
