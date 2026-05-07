@@ -304,13 +304,13 @@ function _showTutorial() {
   overlay.id = 'tutorial-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;pointer-events:auto;';
 
-  const card = document.createElement('div');
-  card.style.cssText = 'position:absolute;background:var(--card,#0c1828);border:2px solid var(--green,#00ffa3);border-radius:10px;padding:1rem 1.2rem;max-width:300px;text-align:center;box-shadow:0 0 40px rgba(0,255,163,.3);';
-  overlay.appendChild(card);
-
   const ring = document.createElement('div');
-  ring.style.cssText = 'position:absolute;border:2px solid var(--green,#00ffa3);border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.78),0 0 20px var(--green,#00ffa3);pointer-events:none;transition:all .3s ease;';
+  ring.style.cssText = 'position:absolute;border:2px solid var(--green,#00ffa3);border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.78),0 0 20px var(--green,#00ffa3);pointer-events:none;transition:all .3s ease;z-index:1;';
   overlay.appendChild(ring);
+
+  const card = document.createElement('div');
+  card.style.cssText = 'position:absolute;background:var(--card,#0c1828);border:2px solid var(--green,#00ffa3);border-radius:10px;padding:1rem 1.2rem;max-width:300px;text-align:center;box-shadow:0 0 40px rgba(0,255,163,.3);z-index:2;';
+  overlay.appendChild(card);
 
   function show() {
     const step = steps[idx];
