@@ -218,15 +218,17 @@ export function updateHUD() {
 
   if (scv) scv.textContent = state.score.toLocaleString();
 
-  // Show multiplier only when > 1x
-  const mult = state._lastMult || Math.min(1 + Math.floor(state.streak / 2), 5);
+  const mult = state._lastMult || 1;
   if (skv) {
-    if (mult > 1) {
-      skv.textContent = `\u{1F525}${mult}x`;
-      skv.style.color = '#ffc400';
+    if (state.streak >= 2) {
+      skv.innerHTML = `\u{1F525}${state.streak}<span style="font-size:.55em;opacity:.85;margin-left:2px;">\u00D7${mult}</span>`;
+      skv.style.color = mult >= 3 ? '#ff3366' : '#ffc400';
+    } else if (state.streak === 1) {
+      skv.textContent = `\u{1F525}1`;
+      skv.style.color = 'var(--green, #00ffa3)';
     } else {
-      skv.textContent = `x1`;
-      skv.style.color = '';
+      skv.textContent = '\u2013';
+      skv.style.color = 'var(--muted, #4a6282)';
     }
   }
 
