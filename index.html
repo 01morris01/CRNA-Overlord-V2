@@ -195,9 +195,10 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .lose-bg .nxt-btn:hover{background:rgba(255,68,68,.1);box-shadow:0 0 25px rgba(255,68,68,.35);}
 
 /* STORE MODAL */
-#store-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:9999;pointer-events:auto;}
+#store-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:flex-end;background:rgba(0,0,0,.7);z-index:9999;pointer-events:auto;}
 #store-modal.on{display:flex;}
-.store-box{background:rgba(5,8,25,.95);border:2px solid rgba(255,200,0,.3);border-radius:12px;padding:1.8rem;max-width:680px;width:90%;max-height:90vh;overflow-y:auto;}
+#store-modal.on .store-box{transform:translateX(0);}
+.store-box{background:var(--abyss,#070d1a);border:1px solid var(--line,#1a2940);border-left:2px solid var(--amber,#ffb000);border-radius:0;padding:1.5rem;width:420px;max-width:90vw;height:100vh;overflow-y:auto;transform:translateX(100%);transition:transform 320ms var(--ease-drawer,cubic-bezier(.32,.72,0,1));}
 .store-title{font-size:1.65rem;font-weight:900;color:#ffcc00;text-shadow:0 0 12px #aa8800;text-align:center;margin-bottom:.3rem;letter-spacing:.15em;}
 .store-sub{font-size:.82rem;color:#886600;text-align:center;margin-bottom:1rem;letter-spacing:.1em;}
 .store-pts{font-size:1.05rem;color:#4488ff;text-align:center;margin-bottom:1rem;}
@@ -319,7 +320,9 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   #type-input{font-size:.75rem;padding:.4rem .5rem;}
   .cb{font-size:.42rem;padding:.1rem .35rem;}
   .store-grid{grid-template-columns:1fr!important;}
-  .store-box{padding:.8rem;max-height:85vh;}
+  .store-box{padding:.8rem;width:100%;max-width:100vw;height:auto;max-height:70vh;border-radius:12px 12px 0 0;border-left:none;border-top:2px solid var(--amber,#ffb000);transform:translateY(100%);position:fixed;bottom:0;left:0;right:0;}
+  #store-modal{align-items:flex-end;justify-content:center;}
+  #store-modal.on .store-box{transform:translateY(0);}
 }
 @media(max-width:380px){
   #hud{height:44px;}
@@ -498,7 +501,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div class="store-sub">GEAR UP OR GET WRECKED</div>
 <div class="store-pts">YOUR POINTS: <span id="store-pts-val" style="color:#ffcc00;font-weight:900;">0</span></div>
 <div class="store-grid" id="store-grid"></div>
-<button class="store-close" onclick="closeStore()">BACK TO THE OR</button>
+<button class="store-close" onclick="closeStore()">BACK</button>
 </div>
 </div>
 

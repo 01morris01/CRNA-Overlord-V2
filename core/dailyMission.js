@@ -122,12 +122,26 @@ export function renderMissionCard() {
   const statusText = done ? 'COMPLETE' : 'ACTIVE';
   const streakText = streak > 0 ? ` | ${streak} day streak` : '';
 
-  card.innerHTML = `
-    <div style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#4a6282);letter-spacing:.15em;margin-bottom:.3rem;">TODAY'S MISSION${streakText}</div>
-    <div style="font-size:.65rem;color:var(--txt,#dce8f5);font-weight:700;margin-bottom:.2rem;">${mission.nodeTitle}</div>
-    <div style="font-size:.48rem;color:var(--muted-2,#7a95b0);margin-bottom:.3rem;">5 correct, 80% accuracy, no powerups. Reward: 500 pts.</div>
-    <div style="font-size:.5rem;color:${done ? 'var(--green,#00ffa3)' : 'var(--amber,#ffc400)'};font-weight:700;">${statusIcon} ${statusText}</div>
-  `;
+  if (done) {
+    card.innerHTML = `
+      <div style="font-family:var(--fm);font-size:.5rem;color:var(--green-2,#00c485);letter-spacing:.15em;margin-bottom:.3rem;">TODAY'S MISSION${streakText}</div>
+      <div style="font-size:.7rem;color:var(--green,#00ffa3);font-weight:700;margin-bottom:.2rem;">COMPLETED +500 PTS</div>
+      <div style="font-size:.5rem;color:var(--muted,#5a6f8a);">Come back tomorrow for the next mission.</div>
+    `;
+  } else {
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">
+        <span style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;">TODAY'S MISSION</span>
+        ${streak > 0 ? `<span style="font-family:var(--fm);font-size:.45rem;color:var(--amber,#ffb000);">${streak} day streak</span>` : ''}
+      </div>
+      <div style="font-family:var(--fd);font-size:.85rem;color:var(--txt,#e5edf7);font-weight:700;margin-bottom:.3rem;">${mission.nodeTitle}</div>
+      <div style="font-size:.55rem;color:var(--txt-2,#a3b3c9);margin-bottom:.5rem;line-height:1.4;">5 correct · 80% accuracy · no powerups · Reward: 500 pts</div>
+      <div style="height:3px;background:var(--line,#1a2940);border-radius:2px;margin-bottom:.3rem;overflow:hidden;">
+        <div style="height:100%;width:0%;background:var(--green,#00ffa3);border-radius:2px;"></div>
+      </div>
+      <div style="font-family:var(--fm);font-size:.42rem;color:var(--muted,#5a6f8a);text-align:right;">0 / 5</div>
+    `;
+  }
 }
 
 // Check mission completion after a game session
