@@ -222,6 +222,21 @@ export function updateHUD() {
   const skull = document.querySelector('.ov-icon');
   if (skull) skull.classList.toggle('critical', state.lives === 1);
 
+  // Update vitals display
+  if (state.vitals) {
+    const vhr  = document.getElementById('vhr');
+    const vbp  = document.getElementById('vbp');
+    const vsp  = document.getElementById('vsp');
+    const vmap = document.getElementById('vmap');
+    const v = state.vitals;
+    const mapVal = Math.round(v.dbp + (v.sbp - v.dbp) / 3);
+
+    if (vhr)  { vhr.textContent  = v.hr;  vhr.classList.toggle('bad', v.hr > 120);  vhr.classList.toggle('warn', v.hr > 100 && v.hr <= 120); }
+    if (vbp)  { vbp.textContent  = `${v.sbp}/${v.dbp}`; vbp.classList.toggle('bad', v.sbp < 80); vbp.classList.toggle('warn', v.sbp < 100 && v.sbp >= 80); }
+    if (vsp)  { vsp.textContent  = Math.round(v.spo2); vsp.classList.toggle('bad', v.spo2 < 90); vsp.classList.toggle('warn', v.spo2 < 95 && v.spo2 >= 90); }
+    if (vmap) { vmap.textContent = mapVal; vmap.classList.toggle('bad', mapVal < 60); vmap.classList.toggle('warn', mapVal < 70 && mapVal >= 60); }
+  }
+
   // Streak milestone banner
   if (state._streakMilestone) {
     const labels = { 3: '\u{1F525} ON FIRE', 5: '\u26A1 UNSTOPPABLE', 7: '\u{1F480} OVERLORD MODE' };

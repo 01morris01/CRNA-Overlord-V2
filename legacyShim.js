@@ -361,6 +361,17 @@ window.submitAnswer = function(isCorrect) {
   const result = engineSubmitAnswer(isCorrect);
   updateHUD();
 
+  // Code blue: critical vitals trigger immediate game over
+  if (run && run._codeBlueTrigger) {
+    run._codeBlueTrigger = false;
+    run.done = true;
+    run.lives = 0;
+    // Override game over title to "PATIENT CODED"
+    run._codeBlue = true;
+    setTimeout(() => _showNewEngineGameOver(run), 1200);
+    return result;
+  }
+
   if (run) {
     const progress = (run.index / run.questions.length) * 100;
     const progFill = document.getElementById('prog-fill');
@@ -431,10 +442,13 @@ function _showNewEngineGameOver(run) {
 
   if (run.lives > 0) {
     if (goT) goT.textContent = 'SESSION COMPLETE';
-    if (goS) goS.textContent = `${correctCount}/${totalCount} correct (${pct}%)${nodeCompLine ? ' — ' + nodeCompLine : ''}`;
+    if (goS) goS.textContent = `${correctCount}/${totalCount} correct (${pct}%)${nodeCompLine ? ', ' + nodeCompLine : ''}`;
+  } else if (run._codeBlue) {
+    if (goT) goT.textContent = 'PATIENT CODED';
+    if (goS) goS.textContent = `Code blue triggered by critical vitals. ${correctCount}/${totalCount} correct.`;
   } else {
     if (goT) goT.textContent = 'PATIENT DECEASED';
-    if (goS) goS.textContent = `${correctCount}/${totalCount} correct${nodeCompLine ? ' — ' + nodeCompLine : ''}`;
+    if (goS) goS.textContent = `${correctCount}/${totalCount} correct${nodeCompLine ? ', ' + nodeCompLine : ''}`;
   }
 
   // ── XP Improvement Bonus (follow-up sessions only) ────────────────────────
