@@ -247,10 +247,18 @@ export function updateHUD() {
     const v = state.vitals;
     const mapVal = Math.round(v.dbp + (v.sbp - v.dbp) / 3);
 
-    if (vhr)  { vhr.textContent  = v.hr;  vhr.classList.toggle('bad', v.hr > 120);  vhr.classList.toggle('warn', v.hr > 100 && v.hr <= 120); }
-    if (vbp)  { vbp.textContent  = `${v.sbp}/${v.dbp}`; vbp.classList.toggle('bad', v.sbp < 80); vbp.classList.toggle('warn', v.sbp < 100 && v.sbp >= 80); }
-    if (vsp)  { vsp.textContent  = Math.round(v.spo2); vsp.classList.toggle('bad', v.spo2 < 90); vsp.classList.toggle('warn', v.spo2 < 95 && v.spo2 >= 90); }
-    if (vmap) { vmap.textContent = mapVal; vmap.classList.toggle('bad', mapVal < 60); vmap.classList.toggle('warn', mapVal < 70 && mapVal >= 60); }
+    if (vhr)  { vhr.textContent = v.hr;
+                vhr.classList.toggle('bad',  v.hr > 110 || v.hr < 50);
+                vhr.classList.toggle('warn', (v.hr > 90 && v.hr <= 110) || (v.hr >= 50 && v.hr < 60)); }
+    if (vbp)  { vbp.textContent = `${v.sbp}/${v.dbp}`;
+                vbp.classList.toggle('bad',  v.sbp < 90);
+                vbp.classList.toggle('warn', v.sbp >= 90 && v.sbp < 110); }
+    if (vsp)  { vsp.textContent = Math.round(v.spo2);
+                vsp.classList.toggle('bad',  v.spo2 < 92);
+                vsp.classList.toggle('warn', v.spo2 >= 92 && v.spo2 < 96); }
+    if (vmap) { vmap.textContent = mapVal;
+                vmap.classList.toggle('bad',  mapVal < 65);
+                vmap.classList.toggle('warn', mapVal >= 65 && mapVal < 75); }
   }
 
   // Streak milestone banner
