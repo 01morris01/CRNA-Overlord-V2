@@ -226,8 +226,13 @@ export function initApp() {
 
 initApp();
 
-// Register service worker for PWA
+// Unregister old service workers and register fresh one
 if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(r => r.unregister());
+  });
+  // Re-register with network-first strategy after clearing old caches
+  caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
   navigator.serviceWorker.register('/sw.js').catch(err => {
     console.warn('[SW] Registration failed:', err);
   });
