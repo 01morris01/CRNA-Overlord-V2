@@ -30,15 +30,15 @@ button:active,.big-btn:active,.abtn:active,.course-tab:active,.map-node:active,.
   .course-tab:hover{border-color:var(--green,#00ffa3);color:var(--txt,#e5edf7);background:var(--card-hi,#122236);}
   .map-node:hover:not(.map-locked){border-color:var(--green,#00ffa3);background:var(--card-hi,#122236);transform:translateY(-2px);}
 }
-canvas#bg{position:fixed;top:0;left:0;z-index:0;}
+canvas#bg{position:fixed;top:0;left:0;z-index:0;opacity:0.15;}
 #app{position:fixed;inset:0;z-index:10;pointer-events:none;display:flex;flex-direction:column;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.03) 3px,rgba(0,0,0,.03) 6px);pointer-events:none;z-index:9999;}
 
 /* SPLASH */
-#splash{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;pointer-events:auto;background:radial-gradient(ellipse,rgba(0,60,40,.22) 0%,rgba(4,6,14,.98) 72%);z-index:500;overflow-y:auto;padding:clamp(.5rem,3vh,2rem) 1rem 1rem;}
-.sp-title{font-size:clamp(2rem,7vw,4.5rem);font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--green,#00ffa3);text-shadow:0 0 20px rgba(0,255,163,.4),0 0 40px rgba(0,255,163,.2),0 0 80px rgba(0,200,128,.15);animation:glow 3s ease-in-out infinite;text-align:center;line-height:1;font-family:var(--fd);}
-@keyframes glow{0%,100%{text-shadow:0 0 15px rgba(0,255,163,.3),0 0 30px rgba(0,255,163,.15),0 0 60px rgba(0,200,128,.1)}50%{text-shadow:0 0 25px rgba(0,255,163,.5),0 0 50px rgba(0,255,163,.25),0 0 100px rgba(0,200,128,.15)}}
-.sp-sub{font-size:clamp(.55rem,1.3vw,.75rem);color:var(--green-dim,#00cc80);letter-spacing:.4em;text-transform:uppercase;margin:.3rem 0 .6rem;opacity:.85;font-family:var(--fm);}
+#splash{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;background:radial-gradient(ellipse at 50% 40%,rgba(10,20,36,.95) 0%,var(--void,#03060c) 70%);z-index:500;overflow-y:auto;padding:clamp(1rem,4vh,3rem) 1.5rem 1.5rem;}
+.sp-title{font-size:clamp(2.5rem,8vw,5rem);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt,#e5edf7);text-align:center;line-height:.95;font-family:var(--fd);}
+@keyframes sp-stagger{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.sp-sub{display:none;}
 .sp-tag{font-size:clamp(.65rem,1.2vw,.82rem);color:#777;text-align:center;max-width:560px;line-height:1.6;margin-bottom:.6rem;padding:0 1.2rem;}
 .sp-tag b{color:var(--green,#00ffa3);}
 .name-area{margin-bottom:1rem;text-align:center;}
@@ -354,37 +354,58 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <canvas id="bg"></canvas>
 <div id="app">
 <div id="splash">
-<div class="sp-title">HEMODYNAMIC<br>OVERLORD</div>
-<div class="sp-sub">⚡ SRNA survival simulator ⚡</div>
-<div class="sp-tag">You're a Student Registered Nurse Anesthetist on your first OR rotation. The attending is an unhinged AI with a god complex. Your patient is open on the table.<br><b>Answer the damn physiology or the patient codes and your career is over before it started.</b><br><br>Earn points. Buy equipment. Become a real CRNA.<br><b>Free recall. Click-to-identify. No hand-holding.</b></div>
-<div class="auth-area" id="auth-area">
+<!-- Status bar -->
+<div class="sp-status" style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.2em;margin-bottom:1.5rem;opacity:0;animation:sp-stagger 400ms var(--ease-out,cubic-bezier(.23,1,.32,1)) 0ms forwards;">SYSTEM ONLINE</div>
+
+<!-- Eyebrow -->
+<div style="font-family:var(--fm);font-size:.55rem;color:var(--green-2,#00c485);letter-spacing:.3em;margin-bottom:.4rem;opacity:0;animation:sp-stagger 400ms var(--ease-out) 60ms forwards;">SRNA SURVIVAL SIMULATOR</div>
+
+<!-- Title -->
+<div class="sp-title" style="opacity:0;animation:sp-stagger 400ms var(--ease-out) 120ms forwards;">HEMODYNAMIC</div>
+<div class="sp-title" style="color:var(--green,#00ffa3);opacity:0;animation:sp-stagger 400ms var(--ease-out) 180ms forwards;">OVERLORD</div>
+
+<!-- Tagline -->
+<div style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;margin:.6rem 0 1rem;opacity:0;animation:sp-stagger 400ms var(--ease-out) 240ms forwards;">board prep · anesthesia · no mercy</div>
+
+<!-- Stat strip -->
+<div style="display:flex;gap:1.5rem;font-family:var(--fm);font-size:.55rem;color:var(--txt-2,#a3b3c9);margin-bottom:1.5rem;opacity:0;animation:sp-stagger 400ms var(--ease-out) 300ms forwards;">
+<span>88 study nodes</span><span style="color:var(--line-2,#243757);">|</span><span>2,400+ questions</span><span style="color:var(--line-2,#243757);">|</span><span style="color:var(--green-2,#00c485);">infinite pressure</span>
+</div>
+
+<!-- Auth area (first visit) -->
+<div class="auth-area" id="auth-area" style="opacity:0;animation:sp-stagger 400ms var(--ease-out) 360ms forwards;">
 <div class="auth-tabs">
 <button class="auth-tab active" id="tab-login" onclick="window.switchAuthTab('login')">LOGIN</button>
 <button class="auth-tab" id="tab-register" onclick="window.switchAuthTab('register')">REGISTER</button>
 </div>
-<label id="auth-label">YOUR SRNA CREDENTIALS</label>
 <input class="auth-input" id="auth-username" placeholder="Username" autocomplete="username" maxlength="20"/>
 <input class="auth-input" id="auth-password" type="password" placeholder="Password" autocomplete="current-password" maxlength="40"/>
-<button class="auth-btn" id="auth-btn" onclick="window.handleAuth()">LOGIN</button>
+<button class="auth-btn" id="auth-btn" onclick="window.handleAuth()">SCRUB IN</button>
 <div class="auth-error" id="auth-error"></div>
 </div>
 
-<div id="logged-in-area" style="display:none;text-align:center;margin-bottom:1rem;">
-<div class="logged-in-info" id="logged-in-info"></div>
-<div class="saved-info" id="saved-info"></div>
+<!-- Returning user area -->
+<div id="logged-in-area" style="display:none;text-align:center;margin-bottom:1rem;opacity:0;animation:sp-stagger 400ms var(--ease-out) 360ms forwards;">
+<div class="logged-in-info" id="logged-in-info" style="font-size:.8rem;color:var(--txt,#e5edf7);margin-bottom:.4rem;"></div>
+<div class="saved-info" id="saved-info" style="font-size:.6rem;color:var(--txt-2,#a3b3c9);margin-bottom:.8rem;"></div>
+<div id="daily-mission-card"></div>
 </div>
 
+<!-- Name + Enter (shown after auth or for returning users) -->
 <div class="name-area" id="name-area" style="display:none;">
-<label>YOUR SRNA NAME</label>
-<input id="name-input" placeholder="Enter your name, rookie..." autocomplete="off" maxlength="20"/>
+<label style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;">DISPLAY NAME</label>
+<input id="name-input" placeholder="Enter your callsign..." autocomplete="off" maxlength="20"/>
 </div>
-<button class="big-btn" id="start-btn" onclick="startGame()" style="display:none;">SCRUB IN, ROOKIE</button>
+<button class="big-btn" id="start-btn" onclick="startGame()" style="display:none;">ENTER THE OR</button>
+
+<!-- Utilities -->
 <div id="backup-area" style="display:none;margin-top:.8rem;text-align:center;">
-<button onclick="window._backupProgress()" style="background:none;border:1px solid var(--muted,#4a6282);color:var(--muted-2,#7a95b0);font-family:var(--fm);font-size:.45rem;padding:.25rem .8rem;cursor:pointer;border-radius:3px;margin-right:.4rem;">BACKUP PROGRESS</button>
-<label style="background:none;border:1px solid var(--muted,#4a6282);color:var(--muted-2,#7a95b0);font-family:var(--fm);font-size:.45rem;padding:.25rem .8rem;cursor:pointer;border-radius:3px;display:inline-block;">IMPORT BACKUP<input type="file" accept=".json" onchange="window._importBackup(event)" style="display:none;"></label>
+<button onclick="window._backupProgress()" style="background:none;border:1px solid var(--line,#1a2940);color:var(--muted,#5a6f8a);font-family:var(--fm);font-size:.45rem;padding:.25rem .8rem;cursor:pointer;border-radius:3px;margin-right:.4rem;">BACKUP</button>
+<label style="background:none;border:1px solid var(--line,#1a2940);color:var(--muted,#5a6f8a);font-family:var(--fm);font-size:.45rem;padding:.25rem .8rem;cursor:pointer;border-radius:3px;display:inline-block;">IMPORT<input type="file" accept=".json" onchange="window._importBackup(event)" style="display:none;"></label>
 </div>
-<div style="font-size:.38rem;color:var(--muted,#4a6282);margin-top:.4rem;text-align:center;max-width:320px;">Your progress saves locally. Back up regularly to avoid losing it if you clear your browser.</div>
-<div style="font-size:.35rem;color:var(--muted,#4a6282);margin-top:1.5rem;text-align:center;max-width:400px;line-height:1.6;">Educational use only. Not medical advice. Built by Shawn Morris.</div>
+
+<!-- Footer -->
+<div style="font-size:.4rem;color:var(--muted-2,#384a66);margin-top:auto;padding-top:1.5rem;text-align:center;line-height:1.6;font-family:var(--fm);letter-spacing:.08em;">BUILD V6.0 · EDUCATIONAL USE; NOT MEDICAL ADVICE · SHAWN MORRIS</div>
 </div>
 
 <div id="game" style="display:none;flex-direction:column;flex:1;height:100%;overflow:hidden;">
