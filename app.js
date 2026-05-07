@@ -226,14 +226,16 @@ export function initApp() {
 
 initApp();
 
-// Unregister old service workers and register fresh one
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(regs => {
-    regs.forEach(r => r.unregister());
-  });
-  // Re-register with network-first strategy after clearing old caches
-  caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
-  navigator.serviceWorker.register('/sw.js').catch(err => {
+  navigator.serviceWorker.register('/sw.js').then((reg) => {
+    setInterval(() => reg.update(), 5 * 60 * 1000);
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+  }).catch(err => {
     console.warn('[SW] Registration failed:', err);
   });
 }
