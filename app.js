@@ -3,6 +3,7 @@ import { showMap , createSimpleCourseMap } from './ui/menus.js';
 import { updateHUD, renderCurrentQuestion } from './ui/gameUI.js';
 import { getOpioidsQuestions, getQuestionsForNode } from './core/questionEngine.js';
 import { getSession, loginUser, registerUser, logout } from './core/auth.js';
+import { renderMissionCard } from './core/dailyMission.js';
 
 let _authMode = 'login'; // 'login' or 'register'
 
@@ -33,6 +34,9 @@ function _showLoggedIn(displayName) {
   if (nameInput && state.name) {
     nameInput.value = state.name;
   }
+
+  // Show daily mission card for returning users
+  renderMissionCard();
 }
 
 function _showAuthForm() {

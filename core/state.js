@@ -21,6 +21,12 @@ const DEFAULT_STATE = {
   savedForLater: [],
   // Recall First: show stem before answer options, hold timer until user is ready
   recallFirstEnabled: false,
+  // Daily missions: { [dateString]: { completedAt } }
+  dailyMissions: {},
+  // Last selected game mode
+  lastMode: 'or-rounds',
+  // Chapter badges earned
+  badges: [],
 };
 
 function safeParse(json) {

@@ -7,6 +7,7 @@ import { getNodeConfig } from './core/nodeConfig.js';
 import { loadState, saveState } from './core/state.js';
 import { showReviewPanel, hideReviewPanel, buildReviewSession, REVIEW_SESSION_SIZE } from './ui/reviewMode.js';
 import { vossSay, vossOnQuestion } from './core/voss.js';
+import { checkMissionCompletion } from './core/dailyMission.js';
 
 // Track which engine is currently active
 window.usingNewEngine = false;
@@ -416,6 +417,9 @@ function _showNewEngineGameOver(run) {
   // Voss reacts to outcome
   const survived = run.lives > 0;
   vossSay(survived ? 'ON_LEVEL_COMPLETE' : 'ON_GAME_OVER');
+
+  // Check daily mission completion
+  checkMissionCompletion(run);
 
   const correctCount = run.results.filter(r => r.correct).length;
   const totalCount   = run.results.length;
