@@ -290,43 +290,74 @@ function _showStreakBanner(text) {
 // ─── First-run tutorial ──────────────────────────────────────────────────────
 
 function _showTutorial() {
+  // Pause the timer during tutorial
+  stopTimer();
+
   const steps = [
-    { text: "These are your patient's vitals. They react to your answers.", target: '#hud' },
-    { text: "This is your timer. Do not waste it.", target: '#tmr-wrap' },
-    { text: "Pick the right answer. Build a streak for combo points.", target: '#ans-area' },
+    { text: "These are your patient's vitals.<br><b>Wrong answers degrade them. Right answers stabilize them.</b>", highlight: '#hud' },
+    { text: "This is your timer.<br><b>Don't waste it.</b> Time runs out, the patient loses a life.", highlight: '#tmr-wrap' },
+    { text: "Pick the right answer.<br><b>Build a streak.</b> 3 in a row triggers a multiplier.", highlight: '#ans-area' },
   ];
 
   let idx = 0;
   const overlay = document.createElement('div');
   overlay.id = 'tutorial-overlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:10000;display:flex;align-items:center;justify-content:center;pointer-events:auto;';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;pointer-events:auto;';
+
+  const card = document.createElement('div');
+  card.style.cssText = 'position:absolute;background:var(--card,#0c1828);border:2px solid var(--green,#00ffa3);border-radius:10px;padding:1rem 1.2rem;max-width:300px;text-align:center;box-shadow:0 0 40px rgba(0,255,163,.3);';
+  overlay.appendChild(card);
+
+  const ring = document.createElement('div');
+  ring.style.cssText = 'position:absolute;border:2px solid var(--green,#00ffa3);border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.78),0 0 20px var(--green,#00ffa3);pointer-events:none;transition:all .3s ease;';
+  overlay.appendChild(ring);
 
   function show() {
     const step = steps[idx];
     const isLast = idx === steps.length - 1;
-    overlay.innerHTML = `
-      <div style="background:var(--card,#0c1828);border:2px solid var(--green,#00ffa3);border-radius:12px;padding:1.2rem 1.5rem;max-width:340px;text-align:center;">
-        <div style="font-size:.7rem;color:var(--txt,#dce8f5);margin-bottom:.8rem;line-height:1.5;">${step.text}</div>
-        <div style="font-size:.45rem;color:var(--muted,#4a6282);margin-bottom:.6rem;">Step ${idx+1} of ${steps.length}</div>
-        <button id="tutorial-next" style="background:transparent;border:2px solid var(--green,#00ffa3);color:var(--green,#00ffa3);font-family:var(--fd);font-size:.7rem;font-weight:700;padding:.4rem 1.5rem;cursor:pointer;border-radius:4px;">${isLast ? 'GOT IT' : 'NEXT'}</button>
-      </div>
+    const target = document.querySelector(step.highlight);
+    if (target) {
+      const r = target.getBoundingClientRect();
+      const pad = 6;
+      ring.style.left = `${r.left - pad}px`;
+      ring.style.top  = `${r.top - pad}px`;
+      ring.style.width  = `${r.width + pad * 2}px`;
+      ring.style.height = `${r.height + pad * 2}px`;
+    }
+
+    card.innerHTML = `
+      <div style="font-size:.8rem;color:var(--txt,#dce8f5);margin-bottom:.7rem;line-height:1.55;">${step.text}</div>
+      <div style="font-size:.5rem;color:var(--muted,#4a6282);letter-spacing:.15em;margin-bottom:.6rem;">STEP ${idx+1} OF ${steps.length}</div>
+      <button id="tutorial-next" style="background:transparent;border:2px solid var(--green,#00ffa3);color:var(--green,#00ffa3);font-family:var(--fd);font-size:.78rem;font-weight:700;padding:.45rem 1.6rem;cursor:pointer;border-radius:4px;letter-spacing:.1em;">${isLast ? 'GOT IT' : 'NEXT'}</button>
+      ${isLast ? '' : '<button id="tutorial-skip" style="background:transparent;border:none;color:var(--muted,#4a6282);font-family:var(--fb);font-size:.6rem;padding:.3rem;margin-left:.6rem;cursor:pointer;">SKIP</button>'}
     `;
+
+    const targetRect = target ? target.getBoundingClientRect() : { bottom: 0, left: 0, top: 0 };
+    const cardW = 300, cardH = 160;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    let cardLeft = Math.min(Math.max(targetRect.left, 12), vw - cardW - 12);
+    let cardTop;
+    if (targetRect.bottom + cardH + 30 < vh) cardTop = targetRect.bottom + 18;
+    else if (targetRect.top - cardH - 30 > 0) cardTop = targetRect.top - cardH - 18;
+    else cardTop = vh / 2 - cardH / 2;
+    card.style.left = `${cardLeft}px`;
+    card.style.top  = `${cardTop}px`;
+
+    function dismiss() {
+      overlay.remove();
+      const s = loadState(); s.tutorialSeen = true; saveState(s);
+    }
     document.getElementById('tutorial-next').onclick = () => {
       idx++;
-      if (idx >= steps.length) {
-        overlay.remove();
-        // Mark tutorial as seen
-        const s = loadState();
-        s.tutorialSeen = true;
-        saveState(s);
-      } else {
-        show();
-      }
+      if (idx >= steps.length) dismiss();
+      else show();
     };
+    const skipBtn = document.getElementById('tutorial-skip');
+    if (skipBtn) skipBtn.onclick = dismiss;
   }
 
   document.body.appendChild(overlay);
-  show();
+  requestAnimationFrame(() => requestAnimationFrame(show));
 }
 
 // ─── Recall First helpers ─────────────────────────────────────────────────────
