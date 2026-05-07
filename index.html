@@ -141,6 +141,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 /* ANSWER TYPES */
 #ans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
+.ans-chip{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:4px;background:rgba(80,100,200,.15);color:var(--blue,#5b9eff);font-family:var(--fm);font-size:.55rem;font-weight:700;margin-right:.4rem;flex-shrink:0;letter-spacing:0;}
 .abtn{background:rgba(16,18,42,.82);border:1px solid rgba(80,100,200,.25);color:#bbc8ff;font-family:inherit;font-size:clamp(.58rem,1vw,.72rem);padding:.65rem .4rem;cursor:pointer;text-align:center;transition:color 200ms var(--ease-out),border-color 200ms var(--ease-out),background-color 200ms var(--ease-out),transform var(--t-press) var(--ease-out);border-radius:5px;line-height:1.5;position:relative;}
 .abtn:hover{border-color:rgba(100,160,255,.7);color:#fff;box-shadow:0 0 16px rgba(80,100,255,.25);transform:translateY(-2px);}
 .abtn.correct{background:rgba(0,255,100,.12)!important;border-color:#00ff88!important;color:#00ff88!important;box-shadow:0 0 22px rgba(0,255,136,.4)!important;animation:cpop .5s;}

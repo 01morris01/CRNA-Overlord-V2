@@ -561,24 +561,67 @@ function renderMCQUI(q) {
   ansGrid.style.gridTemplateColumns = n === 4 ? 'repeat(2,1fr)' : `repeat(${Math.min(n, 3)},1fr)`;
   ansGrid.innerHTML = '';
 
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
   shuffled.forEach((choice, idx) => {
     const btn = document.createElement('button');
     btn.id = `b${idx}`;
     btn.className = 'abtn';
-    btn.textContent = choice.t || '';
-    btn.onclick = () => {
-      // Disable all buttons immediately
-      ansGrid.querySelectorAll('.abtn').forEach((b, i) => {
-        b.disabled = true;
-        if (q._shuffledAns[i]?.ok) b.classList.add('correct');
-      });
-      if (!choice.ok) btn.classList.add('wrong');
-      showAnswerFeedback(Boolean(choice.ok), q.rationale || q.ex, choice.t);
-      if (window.submitAnswer) window.submitAnswer(Boolean(choice.ok));
-    };
+    btn.dataset.ansIdx = idx;
+    btn.innerHTML = `<span class="ans-chip">${letters[idx] || ''}</span> ${choice.t || ''}`;
+    btn.onclick = () => _selectMCQAnswer(q, ansGrid, idx);
     ansGrid.appendChild(btn);
   });
 }
+
+function _selectMCQAnswer(q, ansGrid, idx) {
+  if (!q || !q._shuffledAns) return;
+  const choice = q._shuffledAns[idx];
+  if (!choice) return;
+  const btns = ansGrid.querySelectorAll('.abtn');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (q._shuffledAns[i]?.ok) b.classList.add('correct');
+  });
+  if (!choice.ok) btns[idx]?.classList.add('wrong');
+
+  // Screen edge flash on correct, shake on wrong
+  if (choice.ok) {
+    _flashEdge('var(--green,#00ffa3)');
+  }
+
+  showAnswerFeedback(Boolean(choice.ok), q.rationale || q.ex, choice.t);
+  if (window.submitAnswer) window.submitAnswer(Boolean(choice.ok));
+}
+
+function _flashEdge(color) {
+  let el = document.getElementById('edge-flash');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'edge-flash';
+    el.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9998;border:3px solid transparent;border-radius:0;opacity:0;transition:opacity 80ms ease,border-color 80ms ease;';
+    document.body.appendChild(el);
+  }
+  el.style.borderColor = color;
+  el.style.opacity = '0.6';
+  setTimeout(() => { el.style.opacity = '0'; }, 150);
+}
+
+// Keyboard shortcuts for MCQ: A/B/C/D or 1/2/3/4
+document.addEventListener('keydown', (e) => {
+  if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+  const game = document.getElementById('game');
+  if (!game || game.style.display === 'none') return;
+
+  const keyMap = { 'a': 0, 'b': 1, 'c': 2, 'd': 3, '1': 0, '2': 1, '3': 2, '4': 3 };
+  const idx = keyMap[e.key.toLowerCase()];
+  if (idx === undefined) return;
+
+  const ansGrid = document.getElementById('ans-grid');
+  if (!ansGrid || ansGrid.style.display === 'none') return;
+
+  const btn = ansGrid.querySelector(`.abtn[data-ans-idx="${idx}"]`);
+  if (btn && !btn.disabled) btn.click();
+});
 
 // ─── MULTI-SELECT ─────────────────────────────────────────────────────────────
 // BUG FIX: previous code did chCard.insertBefore(multiArea, ansGrid.nextSibling)
