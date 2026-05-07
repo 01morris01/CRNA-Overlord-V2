@@ -1952,9 +1952,30 @@ function startGame(){
   playerName=document.getElementById('name-input').value.trim()||'ROOKIE';
   const s=getSave();bankedPts=s.bankedPts||0;inv=s.inv||{shield:0,skip:0,reveal:0,time:0};equip=s.equip||{vent:false,mac:false,vl:false,bougie:false};
   save();
-  document.getElementById('splash').style.display='none';
-  document.getElementById('level-map').style.display='none';
-  showCourseSelector();
+  // Cross-fade splash to course selector (250ms)
+  const splashEl=document.getElementById('splash');
+  if(splashEl){
+    splashEl.style.transition='opacity 250ms ease';
+    splashEl.style.opacity='0';
+    setTimeout(()=>{
+      splashEl.style.display='none';
+      splashEl.style.opacity='';
+      splashEl.style.transition='';
+      document.getElementById('level-map').style.display='none';
+      showCourseSelector();
+      // Fade in course selector
+      const sel=document.getElementById('course-selector');
+      if(sel){
+        sel.style.opacity='0';
+        sel.style.transition='opacity 250ms ease';
+        sel.style.display='flex';
+        requestAnimationFrame(()=>{requestAnimationFrame(()=>{sel.style.opacity='1';});});
+      }
+    },250);
+  } else {
+    document.getElementById('level-map').style.display='none';
+    showCourseSelector();
+  }
 }
 
 // === COURSE SELECTOR & STORE STATE ===
@@ -2181,12 +2202,18 @@ function showCourseSelector(){
     padding: 1rem;
   `;
   
+  // Context header for first-time orientation
+  const ctxHeader=document.createElement('div');
+  ctxHeader.style.cssText='grid-column:1/-1;font-size:0.55rem;color:#7a95b0;text-align:center;margin-bottom:0.3rem;letter-spacing:0.05em;';
+  ctxHeader.textContent='Pick a course. '+COURSES.length+' available, '+COURSES.reduce((s,c)=>s+c.topics.length,0)+' study nodes total.';
+  courseContainer.appendChild(ctxHeader);
+
   // Player info header
   const header=document.createElement('div');
   header.style.cssText='grid-column:1/-1;font-size:0.75rem;color:#4488ff;text-align:center;margin-bottom:0.5rem;font-weight:bold;';
   // Read bankedPts fresh from localStorage so new-engine session earnings are visible
   const _freshPts=(loadSave()||{}).bankedPts||bankedPts||0;
-  header.innerHTML=`${playerName} — Banked: ${_freshPts.toLocaleString()} pts`;
+  header.innerHTML=`${playerName}, Banked: ${_freshPts.toLocaleString()} pts`;
   courseContainer.appendChild(header);
   
   // Create course buttons
