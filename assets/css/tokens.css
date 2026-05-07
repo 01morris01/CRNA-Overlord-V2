@@ -1,0 +1,20 @@
+:root {
+  --bg: #04060e;
+  --surf: #08101e;
+  --card: #0c1828;
+  --card-2: #101f30;
+  --border: #162035;
+  --green: #00ffa3;
+  --green-dim: #00cc80;
+  --green-glow: rgba(0,255,163,.18);
+  --red: #ff3366;
+  --red-glow: rgba(255,51,102,.18);
+  --amber: #ffc400;
+  --blue: #4d9aff;
+  --txt: #dce8f5;
+  --muted: #4a6282;
+  --muted-2: #7a95b0;
+  --fd: 'Barlow Condensed', sans-serif;
+  --fm: 'Share Tech Mono', monospace;
+  --fb: 'Nunito', sans-serif;
+}

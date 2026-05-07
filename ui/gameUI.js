@@ -61,9 +61,9 @@ function startQuestionTimer(q) {
   _remaining = QUESTION_TIME_SEC;
   const fill = document.getElementById('tmr-fill');
   if (fill) {
-    fill.style.transition = 'none';
+    fill.style.transition = 'background 300ms ease';
     fill.style.width = '100%';
-    fill.style.background = 'linear-gradient(90deg,#ff2200,#ff8800)';
+    fill.style.background = 'var(--green,#00ffa3)';
   }
 
   console.log('Timer start:', _remaining, 'for', q.id);
@@ -74,7 +74,9 @@ function startQuestionTimer(q) {
 
     if (fill) {
       fill.style.width = pct + '%';
-      if (pct < 25) fill.style.background = '#ff2200';
+      if (pct < 25) fill.style.background = 'var(--red,#ff3366)';
+      else if (pct < 50) fill.style.background = 'var(--amber,#ffc400)';
+      else fill.style.background = 'var(--green,#00ffa3)';
     }
 
     if (_remaining <= 0) {
