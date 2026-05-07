@@ -2188,132 +2188,120 @@ function launchCombinedStudy(){
 function showCourseSelector(){
   const sel=document.getElementById('course-selector');
   if(!sel)return;
-  
+
   selectedTopicId=null;
   selectedCourseId=null;
   lastScreen='course-selector';
-  
-  // Hide world map, show course selector content
+
   const worldMap=document.getElementById('world-map');
   if(worldMap)worldMap.style.display='none';
-  
-  // Get or create course selection container
+
   let courseContainer=document.getElementById('course-selection-container');
   if(!courseContainer){
     courseContainer=document.createElement('div');
     courseContainer.id='course-selection-container';
-    const worldMapParent=worldMap.parentNode;
-    if(worldMapParent){
-      worldMapParent.insertBefore(courseContainer, worldMap);
-    }
+    const worldMapParent=worldMap?worldMap.parentNode:sel;
+    if(worldMapParent){worldMapParent.insertBefore(courseContainer, worldMap);}
   }
-  
-  // Clear and fill with course buttons
-  courseContainer.innerHTML='';
-  courseContainer.style.cssText=`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    width: 100%;
-    flex: 1;
-    overflow: auto;
-    padding: 1rem;
-  `;
-  
-  // Context header for first-time orientation
-  const ctxHeader=document.createElement('div');
-  ctxHeader.style.cssText='grid-column:1/-1;font-size:0.55rem;color:#7a95b0;text-align:center;margin-bottom:0.3rem;letter-spacing:0.05em;';
-  ctxHeader.textContent='Pick a course. '+COURSES.length+' available, '+COURSES.reduce((s,c)=>s+c.topics.length,0)+' study nodes total.';
-  courseContainer.appendChild(ctxHeader);
 
-  // Player info header
-  const header=document.createElement('div');
-  header.style.cssText='grid-column:1/-1;font-size:0.75rem;color:#4488ff;text-align:center;margin-bottom:0.5rem;font-weight:bold;';
-  // Read bankedPts fresh from localStorage so new-engine session earnings are visible
   const _freshPts=(loadSave()||{}).bankedPts||bankedPts||0;
-  header.innerHTML=`${playerName}, Banked: ${_freshPts.toLocaleString()} pts`;
-  courseContainer.appendChild(header);
-  
-  // Create course buttons
-  COURSES.forEach(course=>{
-    const btn=document.createElement('button');
-    btn.className='big-btn';
-    btn.textContent=course.title;
-    btn.style.cssText=`
-      width: 100%;
-      padding: 1rem;
-      font-size: 0.85rem;
-      text-align: center;
-      white-space: normal;
-      line-height: 1.3;
-      min-height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  const _lastCourse=(loadSave()||{}).lastSeen?.course||null;
+  const _inv=(loadSave()||{}).inv||{shield:0,skip:0,reveal:0,time:0};
+
+  const COURSE_DESCS={
+    'adv-phys-path-1':'Guyton and Hall foundations. Cardiac muscle, ECG, circulation, fluid balance. The longest course; 17 nodes through chapter 30.',
+    'adv-phys-path-2':'Guyton continued. Acid base, hematology, pulmonary, neuro, endocrine. 14 nodes for the second semester.',
+    'tech-advances-anesthesia':'Pardo plus Nagelhout. The clinical course. Monitoring, machines, induction, advanced airway.',
+    'basics-anesthesia':'Miller foundations. Airway, pharmacology, agents, neuromuscular. Start here if you are new.',
+    'chem-phys-anesthesia':'Gas laws applied. Vaporizers, fluid dynamics, electricity, radiation. Boards relevant physics.',
+    'adv-health-assess':'NAS 520 head to toe. Clinical interview, physical exam, system by system assessment with anesthesia cues.',
+  };
+  const COURSE_PALETTES={
+    'adv-phys-path-1':['#ff3300','#660000'],
+    'adv-phys-path-2':['#00ddff','#003355'],
+    'tech-advances-anesthesia':['#00ffa3','#003322'],
+    'basics-anesthesia':['#5b9eff','#0a1a44'],
+    'chem-phys-anesthesia':['#a78bfa','#2a0f5c'],
+    'adv-health-assess':['#ffb000','#3a2400'],
+  };
+
+  courseContainer.innerHTML='';
+  courseContainer.style.cssText='display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;width:100%;flex:1;overflow-y:auto;padding:.8rem;align-content:start;';
+
+  // Header
+  const hdr=document.createElement('div');
+  hdr.style.cssText='grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;';
+  hdr.innerHTML=`<div><div style="font-family:var(--fm);font-size:.5rem;color:var(--green-2,#00c485);letter-spacing:.2em;margin-bottom:.2rem;">SELECT COURSE</div><div style="font-size:.65rem;color:var(--txt-2,#a3b3c9);">${COURSES.length} courses, ${COURSES.reduce((s,c)=>s+c.topics.length,0)} nodes total</div></div><div style="font-family:var(--fm);font-size:.55rem;color:var(--amber,#ffb000);">${playerName} · ${_freshPts.toLocaleString()} PTS</div>`;
+  courseContainer.appendChild(hdr);
+
+  // Course cards
+  COURSES.forEach((course,idx)=>{
+    const isActive=course.id===_lastCourse;
+    const pal=COURSE_PALETTES[course.id]||['#5b9eff','#0a1a44'];
+    const desc=COURSE_DESCS[course.id]||'';
+    const nodeCount=course.topics.length;
+    const qCount=nodeCount*25;
+
+    const card=document.createElement('button');
+    card.style.cssText=`
+      width:100%;text-align:left;padding:.8rem;border-radius:8px;cursor:pointer;
+      border:1px solid ${isActive?pal[0]+'60':'var(--line,#1a2940)'};
+      background:${isActive?'linear-gradient(135deg,'+pal[1]+' 0%,var(--card,#0e1a2e) 100%)':'var(--card,#0e1a2e)'};
+      color:var(--txt,#e5edf7);font-family:var(--fb);
+      transition:border-color 200ms var(--ease-out,cubic-bezier(.23,1,.32,1)),transform 130ms var(--ease-out);
+      ${isActive?'grid-row:span 2;box-shadow:0 0 20px '+pal[0]+'20;':''}
+      opacity:0;animation:sp-stagger 280ms var(--ease-out,cubic-bezier(.23,1,.32,1)) ${60*idx}ms forwards;
     `;
-    btn.onclick=()=>{
-      selectedCourseId=course.id;
-      showTopicMap();
-    };
-    courseContainer.appendChild(btn);
+
+    card.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">
+        <span style="font-family:var(--fm);font-size:.45rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;">COURSE ${String(idx+1).padStart(2,'0')}</span>
+        <span style="font-family:var(--fm);font-size:.4rem;padding:.15rem .4rem;border-radius:3px;letter-spacing:.1em;${isActive?'background:'+pal[0]+'20;color:'+pal[0]+';':'background:var(--line,#1a2940);color:var(--muted,#5a6f8a);'}">${isActive?'IN PROGRESS':'NEW'}</span>
+      </div>
+      <div style="font-family:var(--fd);font-size:${isActive?'1.2rem':'1rem'};font-weight:700;line-height:1.2;margin-bottom:.3rem;">${course.title}</div>
+      <div style="font-size:.55rem;color:var(--txt-2,#a3b3c9);line-height:1.4;margin-bottom:.5rem;">${desc}</div>
+      <div style="height:3px;background:var(--line,#1a2940);border-radius:2px;margin-bottom:.4rem;overflow:hidden;">
+        <div style="height:100%;width:${isActive?'25':'0'}%;background:${pal[0]};border-radius:2px;transition:width 600ms var(--ease-out);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:.42rem;color:var(--muted,#5a6f8a);letter-spacing:.08em;">
+        <span>${nodeCount} NODES · ${qCount}Q</span>
+      </div>
+    `;
+
+    card.onclick=()=>{selectedCourseId=course.id;showTopicMap();};
+    courseContainer.appendChild(card);
   });
-  
-  // Combined Study button spanning full width
-  const combinedBtn=document.createElement('button');
-  combinedBtn.className='big-btn';
-  combinedBtn.textContent='🧠 COMBINED STUDY';
-  combinedBtn.style.cssText=`
-    grid-column: 1/-1;
-    font-size: 0.85rem;
-    background: rgba(100,200,255,.1);
-    border-color: rgba(100,200,255,.4);
-    color: #88ccff;
-    padding: 1rem;
+
+  // Bottom bar: equipment + store + back
+  const bar=document.createElement('div');
+  bar.style.cssText='grid-column:1/-1;display:flex;align-items:center;gap:.8rem;padding:.6rem 0;margin-top:.4rem;border-top:1px solid var(--line,#1a2940);font-family:var(--fm);font-size:.5rem;';
+  bar.innerHTML=`
+    <span style="color:var(--amber,#ffb000);">${_freshPts.toLocaleString()} PTS</span>
+    <span style="color:var(--muted-2,#384a66);">|</span>
+    <span style="color:var(--muted,#5a6f8a);">🫁${_inv.shield} 🔪${_inv.skip} 📺${_inv.reveal} 🔧${_inv.time}</span>
+    <span style="flex:1;"></span>
   `;
-  combinedBtn.onclick=()=>{
-    startCombinedStudy();
-  };
-  courseContainer.appendChild(combinedBtn);
-  
-  // Footer buttons: Store and Back
-  const footerDiv=document.createElement('div');
-  footerDiv.style.cssText='grid-column:1/-1;display:flex;gap:0.5rem;margin-top:1rem;';
-  
   const storeBtn=document.createElement('button');
-  storeBtn.className='big-btn';
-  storeBtn.textContent='🛒 STORE';
-  storeBtn.style.cssText='flex:1;font-size:0.75rem;';
-  storeBtn.onclick=()=>{
-    lastScreen='course-selector';
-    openStore();
-  };
-  footerDiv.appendChild(storeBtn);
-  
+  storeBtn.textContent='STORE';
+  storeBtn.style.cssText='background:none;border:1px solid var(--line,#1a2940);color:var(--amber,#ffb000);font-family:var(--fm);font-size:.5rem;padding:.25rem .7rem;cursor:pointer;border-radius:3px;letter-spacing:.1em;transition:border-color 200ms var(--ease-out);';
+  storeBtn.onclick=()=>{lastScreen='course-selector';openStore();};
+  bar.appendChild(storeBtn);
   const backBtn=document.createElement('button');
-  backBtn.className='big-btn';
-  backBtn.textContent='← BACK';
-  backBtn.style.cssText='flex:1;font-size:0.75rem;';
-  backBtn.onclick=()=>{
-    showSplash();
-  };
-  footerDiv.appendChild(backBtn);
-  
-  courseContainer.appendChild(footerDiv);
+  backBtn.textContent='BACK';
+  backBtn.style.cssText='background:none;border:1px solid var(--line,#1a2940);color:var(--muted,#5a6f8a);font-family:var(--fm);font-size:.5rem;padding:.25rem .7rem;cursor:pointer;border-radius:3px;letter-spacing:.1em;transition:border-color 200ms var(--ease-out);';
+  backBtn.onclick=()=>{showSplash();};
+  bar.appendChild(backBtn);
+  courseContainer.appendChild(bar);
   courseContainer.style.display='grid';
-  
-  // Hide topic-map nav buttons (we're showing course selector)
+
+  // Cleanup other views
   const topicMapNavBtns=document.querySelector('.topic-map-nav-buttons');
   if(topicMapNavBtns)topicMapNavBtns.style.display='none';
-  
-  // Hide other screen containers (mutual exclusive views)
   const combinedContainer=document.getElementById('combined-study-container');
   if(combinedContainer)combinedContainer.style.display='none';
-  
-  // Hide other UI elements
   const sessionBtn=document.getElementById('start-session-btn');
   if(sessionBtn)sessionBtn.style.display='none';
-  
-  // Show selector
+
   sel.style.display='flex';
 }
 
