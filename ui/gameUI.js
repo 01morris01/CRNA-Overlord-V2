@@ -908,6 +908,31 @@ export function showAnswerFeedback(correct, rationale, userAnswer = null) {
       window.vossSay(correct ? 'ON_CORRECT' : 'ON_WRONG');
     }
   }
+
+  // Safe rung WALK option at Q5 and Q10
+  const run = getCurrentRun();
+  if (correct && run && run._safeRungReached && run.lives > 0) {
+    run._safeRungReached = false;
+    const nxtBtn = result.querySelector('.nxt-btn');
+    if (nxtBtn) {
+      const nextTier = run.index <= 5 ? 'MAINTENANCE' : 'CRITICAL';
+      nxtBtn.textContent = `PUSH TO ${nextTier}`;
+
+      const walkBtn = document.createElement('button');
+      walkBtn.className = 'walk-btn';
+      walkBtn.textContent = `WALK · BANK ${run.score.toLocaleString()}`;
+      walkBtn.onclick = () => {
+        run.lives = 99;
+        run.done = true;
+        run.walked = true;
+        result.classList.remove('on');
+        if (typeof window._showNewEngineGameOver === 'function') {
+          window._showNewEngineGameOver(run);
+        }
+      };
+      nxtBtn.parentNode.insertBefore(walkBtn, nxtBtn);
+    }
+  }
 }
 
 // ─── HIDE FEEDBACK ────────────────────────────────────────────────────────────
