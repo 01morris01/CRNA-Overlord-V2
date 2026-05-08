@@ -27,6 +27,8 @@ const DEFAULT_STATE = {
   lastMode: 'or-rounds',
   // Chapter badges earned
   badges: [],
+  // Per-topic stats: { nodeId: { plays, bestScore, bestPct, lastSeen } }
+  topicStats: {},
 };
 
 function safeParse(json) {

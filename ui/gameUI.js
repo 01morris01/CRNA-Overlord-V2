@@ -1,4 +1,4 @@
-import { getCurrentRun } from '../core/gameEngine.js';
+import { getCurrentRun, LADDER_REWARDS } from '../core/gameEngine.js';
 import { gradeShortAnswer, gradeMultiSelect } from '../core/answerGrading.js';
 import { renderAirwayManagementScene, stopAirwayManagementScene } from './airwayManagementScene.js';
 import { renderBasicPharmacologicPrinciplesScene, stopBasicPharmacologicPrinciplesScene } from './basicPharmacologicPrinciplesScene.js';
@@ -272,6 +272,35 @@ export function updateHUD() {
     if (label) _showStreakBanner(label);
     state._streakMilestone = null;
   }
+
+  // Ladder bar
+  _updateLadderBar(state);
+}
+
+function _updateLadderBar(run) {
+  const bar = document.getElementById('ladder-bar');
+  if (!bar || !run) { if (bar) bar.innerHTML = ''; return; }
+
+  const total = Math.max(15, run.questions?.length || 15);
+  let html = '';
+  for (let i = 0; i < total; i++) {
+    let bg = 'var(--muted-2,#384a66)';
+    if (i < run.index) {
+      const result = run.results?.[i];
+      bg = result?.correct ? 'var(--green,#00ffa3)' : 'var(--red,#ff2e63)';
+    } else if (i === run.index) {
+      bg = 'var(--amber,#ffb000)';
+    } else {
+      if (i < 5) bg = 'rgba(0,255,163,.15)';
+      else if (i < 10) bg = 'rgba(255,176,0,.15)';
+      else if (i < 14) bg = 'rgba(255,46,99,.15)';
+      else bg = 'rgba(255,46,99,.4)';
+    }
+    const isSafe = (i === 4 || i === 9);
+    const safeShadow = isSafe ? 'box-shadow:0 0 4px var(--amber,#ffb000);' : '';
+    html += `<div style="flex:1;background:${bg};border-radius:1px;${safeShadow}transition:background 200ms var(--ease-out,cubic-bezier(.23,1,.32,1));"></div>`;
+  }
+  bar.innerHTML = html;
 }
 
 function _showStreakBanner(text) {
@@ -502,7 +531,13 @@ export function renderCurrentQuestion() {
     const chapterLabel = cfg?.chapterLabel || 'Ch. ?';
     const defaultTitle  = cfg?.title || 'Study';
     const topic = q.metadata?.topic || q.metadata?.topicId || defaultTitle;
-    if (chb) chb.textContent = `📚 ${chapterLabel} — ${topic.toUpperCase()}`;
+    if (chb) {
+      const rIdx = state.index;
+      const tier = rIdx < 5 ? 'PRE-INDUCTION' : rIdx < 10 ? 'MAINTENANCE' : rIdx < 14 ? 'CRITICAL' : 'CODE BLUE';
+      const tierColor = rIdx < 5 ? 'var(--green,#00ffa3)' : rIdx < 10 ? 'var(--amber,#ffb000)' : 'var(--red,#ff2e63)';
+      const reward = LADDER_REWARDS[Math.min(rIdx, LADDER_REWARDS.length - 1)];
+      chb.innerHTML = `<span style="color:${tierColor};font-weight:700;">${tier}</span> · Q${rIdx + 1}/${state.questions.length} · <span style="color:var(--amber,#ffb000);">${reward}pts</span>`;
+    }
   }
   if (ovs) ovs.textContent = q.setup || '';
   if (qtxt) qtxt.textContent = q.q || '';

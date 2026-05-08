@@ -3,6 +3,18 @@ import { recordQuestionOutcome, filterQuestions } from './questionEngine.js';
 
 let currentRun = null;
 
+// PRESSURE LADDER: each question rung is worth more than the last
+export const LADDER_REWARDS = [
+  // Q1-Q5: pre-induction (banks at Q5)
+  50, 50, 50, 50, 100,
+  // Q6-Q10: maintenance (banks at Q10)
+  150, 150, 150, 150, 250,
+  // Q11-Q14: critical phase
+  400, 400, 400, 400,
+  // Q15: code blue
+  1000,
+];
+
 export function getCurrentRun() {
   return currentRun;
 }
@@ -24,6 +36,7 @@ export function startRun(options = {}) {
     done: false,
     results: [],
     vitals: { hr: 72, sbp: 120, dbp: 80, spo2: 98 },
+    lockedScore: 0,
   };
 
   return currentRun;
@@ -50,7 +63,11 @@ export function submitAnswer(isCorrect) {
     currentRun.bestStreak = Math.max(currentRun.bestStreak, currentRun.streak);
     const mult = Math.min(1 + Math.floor(currentRun.streak / 2), 5);
     const modeMultiplier = currentRun.mode === 'code-blue' ? 2 : 1;
-    pointsEarned = 100 * mult * modeMultiplier;
+
+    // Base points from the pressure ladder (not flat 100)
+    const ladderIdx = Math.min(currentRun.index, LADDER_REWARDS.length - 1);
+    const basePts = LADDER_REWARDS[ladderIdx];
+    pointsEarned = basePts * mult * modeMultiplier;
     currentRun.score += pointsEarned;
     currentRun._lastMult = mult;
 
@@ -84,7 +101,13 @@ export function submitAnswer(isCorrect) {
   v.hr = Math.round(v.hr); v.sbp = Math.round(v.sbp);
   v.dbp = Math.round(v.dbp); v.spo2 = Math.round(v.spo2 * 10) / 10;
 
-  currentRun.results.push({questionId:q.id, correct:isCorrect, timestamp: Date.now()});
+  // Safe rungs: lock in score at Q5 and Q10
+  if (isCorrect && (currentRun.index === 4 || currentRun.index === 9)) {
+    currentRun.lockedScore = currentRun.score;
+    currentRun._safeRungReached = true;
+  }
+
+  currentRun.results.push({questionId:q.id, correct:isCorrect, timestamp: Date.now(), topic: q.metadata?.topic || q.metadata?.topicId || 'general'});
 
   if (currentRun.lives <= 0 || currentRun.index >= currentRun.questions.length - 1) {
     currentRun.done = true;
@@ -97,11 +120,40 @@ export function submitAnswer(isCorrect) {
 
   const state = loadState();
   state.gamesPlayed = (state.gamesPlayed || 0) + (currentRun.done ? 1 : 0);
-  // Study mode earns no points
-  const earnablePts = currentRun.mode === 'study' ? 0 : pointsEarned;
-  state.bankedPts = (state.bankedPts || 0) + earnablePts;
-  state.totalPts = (state.totalPts || 0) + earnablePts;
+
+  // Banking: study mode earns nothing; dead runs bank only locked score
+  if (currentRun.mode !== 'study') {
+    if (currentRun.done && currentRun.lives <= 0) {
+      // Lost all lives: bank only the locked safe-rung amount
+      const finalBank = currentRun.lockedScore || 0;
+      state.bankedPts = (state.bankedPts || 0) + finalBank;
+      state.totalPts = (state.totalPts || 0) + finalBank;
+    } else {
+      // Still alive or just finished: bank incrementally
+      state.bankedPts = (state.bankedPts || 0) + pointsEarned;
+      state.totalPts = (state.totalPts || 0) + pointsEarned;
+    }
+  }
   state.highScore = Math.max(state.highScore || 0, currentRun.score);
+
+  // Track per-topic stats
+  if (currentRun.done) {
+    const nodeId = window.currentSession?.nodeId;
+    if (nodeId && currentRun.results?.length > 0) {
+      const correct = currentRun.results.filter(r => r.correct).length;
+      const total = currentRun.results.length;
+      const pct = Math.round(correct / total * 100);
+      if (!state.topicStats) state.topicStats = {};
+      const prev = state.topicStats[nodeId] || { plays: 0, bestScore: 0, bestPct: 0 };
+      state.topicStats[nodeId] = {
+        plays: prev.plays + 1,
+        bestScore: Math.max(prev.bestScore, currentRun.score),
+        bestPct: Math.max(prev.bestPct, pct),
+        lastSeen: Date.now(),
+      };
+    }
+  }
+
   saveState(state);
 
   return {currentRun, nextQuestion: getCurrentQuestion()};
