@@ -54,6 +54,46 @@ function _tierForStats(stats) {
   return 'new';
 }
 
+function _showNodeDetail(topic, stats, onStart) {
+  const s = stats || { plays: 0, bestScore: 0, bestPct: 0 };
+  const statusLabel = s.bestPct >= 80 ? '\u2605 MASTERED' : s.bestPct >= 60 ? '\u25D0 COMPLETED' : s.plays > 0 ? '\u25CB STARTED' : 'NEW';
+
+  const ov = document.createElement('div');
+  ov.id = 'node-detail-overlay';
+  ov.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 200ms var(--ease-out,cubic-bezier(.23,1,.32,1));pointer-events:auto;';
+
+  const card = document.createElement('div');
+  card.style.cssText = 'background:var(--card,#0e1a2e);border:1px solid var(--line-2,#243757);border-radius:8px;padding:1.5rem;max-width:340px;width:90%;transform:scale(0.95);transition:transform 240ms var(--ease-out);';
+  card.innerHTML = `
+    <div style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.2em;margin-bottom:.4rem;">NODE ${topic.order || '?'}</div>
+    <div style="font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--txt,#e5edf7);line-height:1.1;margin-bottom:.3rem;">${topic.title}</div>
+    <div style="font-size:.55rem;color:var(--txt-2,#a3b3c9);margin-bottom:1rem;">${topic.chapters ? 'Ch. ' + topic.chapters : ''}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.8rem;">
+      <div style="background:var(--abyss,#070d1a);padding:.5rem;border-radius:4px;text-align:center;">
+        <div style="font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--green,#00ffa3);line-height:1;">${s.bestPct || 0}%</div>
+        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.12em;margin-top:.15rem;">BEST</div>
+      </div>
+      <div style="background:var(--abyss,#070d1a);padding:.5rem;border-radius:4px;text-align:center;">
+        <div style="font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--amber,#ffb000);line-height:1;">${s.plays || 0}</div>
+        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.12em;margin-top:.15rem;">PLAYS</div>
+      </div>
+    </div>
+    <div style="height:3px;background:var(--line,#1a2940);border-radius:2px;margin-bottom:.3rem;overflow:hidden;">
+      <div style="height:100%;width:${s.bestPct || 0}%;background:linear-gradient(90deg,var(--green,#00ffa3),var(--amber,#ffb000));"></div>
+    </div>
+    <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted-2,#384a66);text-align:right;margin-bottom:.8rem;letter-spacing:.1em;">${statusLabel} · HIGH: ${(s.bestScore||0).toLocaleString()}</div>
+    <button id="node-play" style="width:100%;background:var(--green,#00ffa3);border:none;color:#000;font-family:var(--fd);font-size:.9rem;font-weight:700;letter-spacing:.12em;padding:.7rem;border-radius:4px;cursor:pointer;margin-bottom:.4rem;transition:transform 130ms var(--ease-out);">START SESSION</button>
+    <button id="node-cancel" style="width:100%;background:transparent;border:1px solid var(--line-2,#243757);color:var(--muted,#5a6f8a);font-family:var(--fm);font-size:.5rem;letter-spacing:.12em;padding:.4rem;border-radius:4px;cursor:pointer;">CANCEL</button>
+  `;
+  ov.appendChild(card);
+  document.body.appendChild(ov);
+  requestAnimationFrame(() => { ov.style.opacity = '1'; card.style.transform = 'scale(1)'; });
+
+  document.getElementById('node-play').onclick = () => { ov.remove(); onStart(); };
+  document.getElementById('node-cancel').onclick = () => { ov.style.opacity = '0'; setTimeout(() => ov.remove(), 200); };
+  ov.onclick = (e) => { if (e.target === ov) { ov.style.opacity = '0'; setTimeout(() => ov.remove(), 200); } };
+}
+
 function renderTopicMap(courseId, course, onSelectTopic) {
   const wm = document.getElementById('world-map');
   if (!wm) return;
@@ -162,7 +202,7 @@ function renderTopicMap(courseId, course, onSelectTopic) {
       `;
       row.appendChild(label);
 
-      row.onclick = () => onSelectTopic(topic.id);
+      row.onclick = () => _showNodeDetail(topic, topicStats, () => onSelectTopic(topic.id));
       nodeContainer.appendChild(row);
     });
 
@@ -240,7 +280,8 @@ function renderTopicMap(courseId, course, onSelectTopic) {
       label.textContent = topic.title;
       wrapper.appendChild(label);
 
-      wrapper.onclick = () => onSelectTopic(topic.id);
+      const dStats = allStats[topic.id];
+      wrapper.onclick = () => _showNodeDetail(topic, dStats, () => onSelectTopic(topic.id));
       nodeContainer.appendChild(wrapper);
     });
   }
