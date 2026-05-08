@@ -309,11 +309,14 @@ window.startGameWithQuestions = function(questions, opts = {}) {
 function _syncPwrBtns() {
   const state = loadState();
   const inv = state.inv || { shield: 0, skip: 0, reveal: 0, time: 0 };
+  const run = getCurrentRun();
+  const house = run?.houseLifelines || { shield: 0, skip: 0, reveal: 0, time: 0 };
   ['shield', 'skip', 'reveal', 'time'].forEach(p => {
     const btn = document.getElementById('pw-' + p);
     const cnt = document.getElementById('pc-' + p);
-    if (cnt) cnt.textContent = inv[p] || 0;
-    if (btn) btn.classList.toggle('has', (inv[p] || 0) > 0);
+    const total = (house[p] || 0) + (inv[p] || 0);
+    if (cnt) cnt.textContent = total;
+    if (btn) btn.classList.toggle('has', total > 0);
   });
 }
 
@@ -874,17 +877,24 @@ window.usePwr = function(type) {
     return;
   }
 
+  // Consume house lifeline first, then store inventory
+  const house = run.houseLifelines || { shield: 0, skip: 0, reveal: 0, time: 0 };
   const state = loadState();
   const inv   = state.inv || { shield: 0, skip: 0, reveal: 0, time: 0 };
-  if ((inv[type] || 0) <= 0) return;
 
-  inv[type]--;
-  state.inv = inv;
-  saveState(state);
-
-  // Keep legacy closures in sync
-  if (window._syncLegacyInv) window._syncLegacyInv(state.inv);
-  if (window._syncLegacyPts) window._syncLegacyPts(state.bankedPts);
+  if ((house[type] || 0) > 0) {
+    house[type]--;
+    console.log('[POWERUP] Used house lifeline:', type);
+  } else if ((inv[type] || 0) > 0) {
+    inv[type]--;
+    state.inv = inv;
+    saveState(state);
+    if (window._syncLegacyInv) window._syncLegacyInv(state.inv);
+    if (window._syncLegacyPts) window._syncLegacyPts(state.bankedPts);
+    console.log('[POWERUP] Used store inventory:', type);
+  } else {
+    return; // nothing available
+  }
 
   _syncPwrBtns();
 

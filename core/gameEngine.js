@@ -37,6 +37,10 @@ export function startRun(options = {}) {
     results: [],
     vitals: { hr: 72, sbp: 120, dbp: 80, spo2: 98 },
     lockedScore: 0,
+    // House lifelines: 1 of each per session (separate from store inventory)
+    houseLifelines: (options.mode !== 'code-blue')
+      ? { shield: 1, skip: 1, reveal: 1, time: 1 }
+      : { shield: 0, skip: 0, reveal: 0, time: 0 },
   };
 
   return currentRun;
