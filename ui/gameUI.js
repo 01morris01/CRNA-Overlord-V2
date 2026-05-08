@@ -853,10 +853,18 @@ function _toggleMultiChoice(btn, choice, q) {
   if (counter) counter.textContent = `Selected: ${multiSelectState.selected.size} / ${q.selectCount}`;
 
   const sub = document.getElementById('multi-submit');
+  const ready = multiSelectState.selected.size === q.selectCount;
   if (sub) {
-    const ready = multiSelectState.selected.size === q.selectCount;
     sub.disabled = !ready;
     sub.classList.toggle('disabled', !ready);
+  }
+
+  // Auto-submit when target count reached (220ms pause so user sees their selection)
+  if (ready) {
+    if (counter) counter.textContent = `Submitting...`;
+    setTimeout(() => {
+      if (sub && !sub.disabled) sub.click();
+    }, 220);
   }
 }
 
