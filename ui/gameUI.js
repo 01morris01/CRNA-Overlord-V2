@@ -338,6 +338,7 @@ function _updateLadderBar(run) {
   bar.innerHTML = html;
 }
 
+window._showStreakBanner = _showStreakBanner;
 function _showStreakBanner(text) {
   const run = getCurrentRun();
   const streak = run?.streak || 0;

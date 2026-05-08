@@ -363,9 +363,20 @@ window.submitAnswer = function(isCorrect) {
   }
 
   const scoreBefore = run ? run.score : 0;
+  const oldStreak = run ? run.streak : 0;
   const result = engineSubmitAnswer(isCorrect);
   const scoreAfter = run ? run.score : 0;
   const delta = scoreAfter - scoreBefore;
+  const newStreak = run ? run.streak : 0;
+
+  // Streak threshold crossings (trigger at the exact moment)
+  if (oldStreak < 3 && newStreak >= 3) {
+    setTimeout(() => { if (typeof window._showStreakBanner === 'function') window._showStreakBanner('\u{1F525} ON FIRE'); }, 300);
+  } else if (oldStreak < 5 && newStreak >= 5) {
+    setTimeout(() => { if (typeof window._showStreakBanner === 'function') window._showStreakBanner('\u26A1 UNSTOPPABLE'); }, 300);
+  } else if (oldStreak < 7 && newStreak >= 7) {
+    setTimeout(() => { if (typeof window._showStreakBanner === 'function') window._showStreakBanner('\u{1F480} OVERLORD MODE'); }, 300);
+  }
 
   if (delta > 0) {
     const isBig = (run?._lastMult || 1) >= 3;
