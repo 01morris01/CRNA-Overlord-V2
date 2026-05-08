@@ -38,6 +38,22 @@ function _nodeShape(type) {
  * @param {object} course - { id, title, topics: [...] }
  * @param {Function} onSelectTopic - called with topicId when a node is clicked
  */
+function _getTopicStats() {
+  try {
+    const key = typeof window._getUserSaveKey === 'function' ? window._getUserSaveKey() : 'hemodynamic_overlord_save';
+    const raw = JSON.parse(localStorage.getItem(key) || '{}');
+    return raw.topicStats || {};
+  } catch(e) { return {}; }
+}
+
+function _tierForStats(stats) {
+  if (!stats) return 'new';
+  if (stats.bestPct >= 80) return 'mastered';
+  if (stats.bestPct >= 60) return 'completed';
+  if (stats.plays > 0) return 'started';
+  return 'new';
+}
+
 function renderTopicMap(courseId, course, onSelectTopic) {
   const wm = document.getElementById('world-map');
   if (!wm) return;
@@ -45,6 +61,7 @@ function renderTopicMap(courseId, course, onSelectTopic) {
   const theme = COURSE_THEMES[courseId] || COURSE_THEMES['tech-advances-anesthesia'];
   const topics = course.topics || [];
   const isMobile = window.innerWidth < 700;
+  const allStats = _getTopicStats();
 
   wm.innerHTML = '';
   wm.style.cssText = `
@@ -100,7 +117,13 @@ function renderTopicMap(courseId, course, onSelectTopic) {
         row.appendChild(line);
       }
 
-      // Node circle/shape
+      // Node circle/shape with tier treatment
+      const topicStats = allStats[topic.id];
+      const tier = _tierForStats(topicStats);
+      const tierRing = tier === 'mastered' ? '3px solid var(--amber,#ffb000)' : tier === 'completed' ? '2px solid var(--amber,#ffb000)' : tier === 'started' ? `2px solid ${theme.accent}` : `1px solid ${theme.accent}50`;
+      const tierGlow = tier === 'mastered' ? `box-shadow:0 0 16px rgba(255,176,0,.5);` : tier === 'completed' ? `box-shadow:0 0 10px rgba(255,176,0,.3);` : '';
+      const tierBadge = tier === 'mastered' ? '\u2605\u2605' : tier === 'completed' ? '\u2605' : tier === 'started' ? '\u25D0' : '';
+
       const node = document.createElement('div');
       const size = 44;
       let shapeCSS = `border-radius:50%;`;
@@ -108,11 +131,12 @@ function renderTopicMap(courseId, course, onSelectTopic) {
       if (shape === 'diamond') shapeCSS = `transform:rotate(45deg);border-radius:4px;`;
 
       node.style.cssText = `
-        width:${size}px;height:${size}px;flex-shrink:0;
+        width:${size}px;height:${size}px;flex-shrink:0;position:relative;
         background:linear-gradient(135deg,${theme.accent}30,var(--card,#0e1a2e));
-        border:2px solid ${theme.accent}50;
+        border:${tierRing};${tierGlow}
         display:flex;align-items:center;justify-content:center;
         font-family:var(--fd);font-size:1rem;font-weight:700;color:${theme.accent};
+        opacity:${tier === 'new' ? '0.6' : '1'};
         ${shapeCSS}
         transition:border-color 200ms var(--ease-out),transform 130ms var(--ease-out);
       `;
@@ -130,8 +154,9 @@ function renderTopicMap(courseId, course, onSelectTopic) {
       const label = document.createElement('div');
       label.style.cssText = `margin-left:.7rem;flex:1;min-width:0;`;
       const topicType = topic.type === 'synthesis' ? 'SYNTHESIS' : topic.type === 'mastery' ? 'MASTERY' : `NODE ${topic.order}`;
+      const badgeHTML = tierBadge ? ` <span style="color:var(--amber,#ffb000);font-size:.55rem;">${tierBadge}</span>` : '';
       label.innerHTML = `
-        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.12em;margin-bottom:.15rem;">${topicType}</div>
+        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.12em;margin-bottom:.15rem;">${topicType}${badgeHTML}</div>
         <div style="font-size:.7rem;color:var(--txt,#e5edf7);font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${topic.title}</div>
         ${topic.chapters ? `<div style="font-family:var(--fm);font-size:.4rem;color:var(--muted-2,#384a66);margin-top:.15rem;">Ch. ${topic.chapters}</div>` : ''}
       `;
