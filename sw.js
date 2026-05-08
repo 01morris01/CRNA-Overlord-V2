@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v6-2026-05-07b';
+const CACHE_VERSION = 'v7-2026-05-08';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
