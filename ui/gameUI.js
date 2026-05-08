@@ -46,6 +46,41 @@ function shuffleArray(arr) {
 
 let multiSelectState = { selected: new Set(), requiredCount: 0 };
 
+// ─── Web Audio synthesizer ──────────────────────────────────────────────────
+
+let _audioCtx = null;
+function _audio() {
+  if (!_audioCtx) {
+    try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  }
+  return _audioCtx;
+}
+
+function playTone(freq, duration = 0.1, type = 'sine', vol = 0.15) {
+  const ctx = _audio();
+  if (!ctx) return;
+  try {
+    const state = loadState();
+    if (state.soundMuted) return;
+  } catch(e) {}
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(vol, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
+}
+
+window.playCorrect = () => playTone(880, 0.08, 'sine', 0.12);
+window.playWrong = () => { playTone(160, 0.18, 'sawtooth', 0.18); setTimeout(() => playTone(110, 0.22, 'sawtooth', 0.18), 80); };
+window.playStreak3 = () => { [523, 659, 784].forEach((f, i) => setTimeout(() => playTone(f, 0.12, 'sine', 0.15), i * 100)); };
+window.playStreak5 = () => { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => playTone(f, 0.1, 'square', 0.12), i * 80)); };
+window.playWalk = () => playTone(440, 0.4, 'triangle', 0.2);
+window.playCode = () => { [220, 165, 110, 60].forEach((f, i) => setTimeout(() => playTone(f, 0.3, 'sawtooth', 0.2), i * 100)); };
+
 // ─── timer ────────────────────────────────────────────────────────────────────
 
 let _timerInterval = null;
@@ -338,6 +373,10 @@ function _showStreakBanner(text) {
   ov.appendChild(center);
 
   document.body.appendChild(ov);
+
+  // Audio cue
+  if (streak >= 5 && typeof window.playStreak5 === 'function') window.playStreak5();
+  else if (typeof window.playStreak3 === 'function') window.playStreak3();
 
   // Animate in
   requestAnimationFrame(() => {
