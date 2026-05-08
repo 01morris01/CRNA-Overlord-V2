@@ -40,6 +40,63 @@ function _showLoggedIn(displayName) {
 
   // Show daily mission card for returning users
   renderMissionCard();
+
+  // Check for abandoned run
+  _checkAbandonedRun(state);
+}
+
+function _checkAbandonedRun(state) {
+  if (!state.activeRun) return;
+  const run = state.activeRun;
+  const age = Date.now() - (run.timestamp || 0);
+  if (age > 24 * 60 * 60 * 1000) {
+    // Older than 24 hours; auto-abandon and bank locked score
+    const s = loadState();
+    if (run.lockedScore > 0 && run.mode !== 'study') {
+      s.bankedPts = (s.bankedPts || 0) + run.lockedScore;
+      s.totalPts = (s.totalPts || 0) + run.lockedScore;
+    }
+    s.activeRun = null;
+    saveState(s);
+    return;
+  }
+
+  // Show abandoned patient banner
+  let banner = document.getElementById('abandoned-run-banner');
+  if (banner) banner.remove();
+  banner = document.createElement('div');
+  banner.id = 'abandoned-run-banner';
+  banner.style.cssText = 'max-width:320px;width:100%;margin-bottom:1rem;padding:.8rem;background:rgba(255,46,99,.08);border:1px solid rgba(255,46,99,.3);border-radius:8px;text-align:center;';
+  banner.innerHTML = `
+    <div style="font-family:var(--fm);font-size:.5rem;color:var(--red,#ff2e63);letter-spacing:.15em;margin-bottom:.3rem;">ABANDONED PATIENT</div>
+    <div style="font-size:.65rem;color:var(--txt,#e5edf7);font-weight:600;margin-bottom:.2rem;">${run.nodeId || 'Unknown'}, Q${(run.index||0)+1}/15</div>
+    <div style="font-size:.5rem;color:var(--txt-2,#a3b3c9);margin-bottom:.6rem;">Score: ${(run.score||0).toLocaleString()} · Locked: ${(run.lockedScore||0).toLocaleString()}</div>
+    <div style="display:flex;gap:.5rem;justify-content:center;">
+      <button id="abandon-resume" style="background:var(--red,#ff2e63);border:none;color:#fff;font-family:var(--fd);font-size:.7rem;font-weight:700;padding:.4rem 1rem;border-radius:4px;cursor:pointer;letter-spacing:.1em;">RESUME</button>
+      <button id="abandon-quit" style="background:transparent;border:1px solid var(--line,#1a2940);color:var(--muted,#5a6f8a);font-family:var(--fm);font-size:.55rem;padding:.4rem 1rem;border-radius:4px;cursor:pointer;">ABANDON</button>
+    </div>
+  `;
+
+  const loggedIn = document.getElementById('logged-in-area');
+  if (loggedIn) loggedIn.appendChild(banner);
+
+  document.getElementById('abandon-quit')?.addEventListener('click', () => {
+    const s = loadState();
+    if (run.lockedScore > 0 && run.mode !== 'study') {
+      s.bankedPts = (s.bankedPts || 0) + run.lockedScore;
+      s.totalPts = (s.totalPts || 0) + run.lockedScore;
+    }
+    s.activeRun = null;
+    saveState(s);
+    banner.remove();
+  });
+
+  // Resume just clicks SCRUB IN (the run state is still in the engine)
+  document.getElementById('abandon-resume')?.addEventListener('click', () => {
+    banner.remove();
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) startBtn.click();
+  });
 }
 
 function _showAuthForm() {

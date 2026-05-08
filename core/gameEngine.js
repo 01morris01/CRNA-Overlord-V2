@@ -140,6 +140,23 @@ export function submitAnswer(isCorrect) {
   }
   state.highScore = Math.max(state.highScore || 0, currentRun.score);
 
+  // Save run snapshot for quit-recovery (cleared on clean end)
+  if (!currentRun.done) {
+    state.activeRun = {
+      courseId: window.currentSession?.courseId,
+      nodeId: window.currentSession?.nodeId,
+      index: currentRun.index,
+      score: currentRun.score,
+      lockedScore: currentRun.lockedScore,
+      streak: currentRun.streak,
+      lives: currentRun.lives,
+      mode: currentRun.mode,
+      timestamp: Date.now(),
+    };
+  } else {
+    state.activeRun = null;
+  }
+
   // Track per-topic stats
   if (currentRun.done) {
     const nodeId = window.currentSession?.nodeId;
