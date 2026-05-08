@@ -94,6 +94,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .hlf{font-size:1.2rem;color:#ff2200;filter:drop-shadow(0 0 6px #ff2200);transition:color 200ms var(--ease-out),opacity 200ms var(--ease-out),filter 200ms var(--ease-out),transform 200ms var(--ease-out);margin:0 1px;}
 .hlf.dead{opacity:.12;filter:none;transform:scale(.7);}
 .hlf.lastlife{animation:lastlife-pulse .7s ease-in-out infinite;}
+@keyframes vital-alarm{0%,100%{color:inherit;transform:scale(1);}20%{color:var(--red,#ff2e63);transform:scale(1.15);text-shadow:0 0 16px var(--red,#ff2e63);}60%{color:var(--red,#ff2e63);transform:scale(1.05);}}
 @keyframes lastlife-pulse{0%,100%{filter:drop-shadow(0 0 6px var(--red,#ff3366));transform:scale(1);}50%{filter:drop-shadow(0 0 16px var(--red,#ff3366)) drop-shadow(0 0 28px var(--red,#ff3366));transform:scale(1.15);}}
 .sc-area{text-align:right;min-width:55px;}
 .sc-l{font-size:.42rem;color:#4488ff;letter-spacing:.15em;opacity:.6;}

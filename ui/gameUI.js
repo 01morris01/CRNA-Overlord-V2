@@ -659,13 +659,43 @@ function _selectMCQAnswer(q, ansGrid, idx) {
   });
   if (!choice.ok) btns[idx]?.classList.add('wrong');
 
-  // Screen edge flash on correct, shake on wrong
   if (choice.ok) {
     _flashEdge('var(--green,#00ffa3)');
+    if (typeof window.playCorrect === 'function') window.playCorrect();
+  } else {
+    _onWrongAnswer();
   }
 
   showAnswerFeedback(Boolean(choice.ok), q.rationale || q.ex, choice.t);
   if (window.submitAnswer) window.submitAnswer(Boolean(choice.ok));
+}
+
+function _onWrongAnswer() {
+  // Red edge flash (more pronounced)
+  _flashEdge('var(--red,#ff2e63)');
+
+  // Vital alarm pulse
+  ['vhr','vbp','vsp','vmap'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.animation = 'vital-alarm 0.8s ease';
+      setTimeout(() => { el.style.animation = ''; }, 850);
+    }
+  });
+
+  // Scene dim
+  const scn = document.getElementById('scn');
+  if (scn) {
+    scn.style.transition = 'opacity 200ms var(--ease-out,cubic-bezier(.23,1,.32,1))';
+    scn.style.opacity = '0.3';
+    setTimeout(() => { scn.style.opacity = '1'; }, 600);
+  }
+
+  // Haptic
+  if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
+
+  // Audio
+  if (typeof window.playWrong === 'function') window.playWrong();
 }
 
 function _flashEdge(color) {
