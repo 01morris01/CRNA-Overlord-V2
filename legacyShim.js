@@ -484,16 +484,54 @@ function _showNewEngineGameOver(run) {
     nodeCompLine = `Node exposure: ${exposurePct}% (${nc[nodeId].seen}/${totalInBank} seen)`;
   }
 
-  if (run.lives > 0) {
+  // Tier reached
+  const tierReached = run.index >= 14 ? 'CODE BLUE' : run.index >= 10 ? 'CRITICAL' : run.index >= 5 ? 'MAINTENANCE' : 'PRE-INDUCTION';
+  const bankedAmt = (run.lives > 0 || run.walked) ? run.score : (run.lockedScore || 0);
+
+  if (run.walked) {
+    if (goT) goT.textContent = 'WALKED AWAY';
+    if (goS) goS.innerHTML = `${correctCount}/${totalCount} correct (${pct}%) · ${tierReached}<br><span style="color:var(--amber,#ffb000);">Banked: +${bankedAmt.toLocaleString()} pts</span>`;
+  } else if (run.lives > 0) {
     if (goT) goT.textContent = 'SESSION COMPLETE';
-    if (goS) goS.textContent = `${correctCount}/${totalCount} correct (${pct}%)${nodeCompLine ? ', ' + nodeCompLine : ''}`;
+    if (goS) goS.innerHTML = `${correctCount}/${totalCount} correct (${pct}%) · ${tierReached}<br><span style="color:var(--green,#00ffa3);">Banked: +${bankedAmt.toLocaleString()} pts</span>`;
   } else if (run._codeBlue) {
     if (goT) goT.textContent = 'PATIENT CODED';
-    if (goS) goS.textContent = `Code blue triggered by critical vitals. ${correctCount}/${totalCount} correct.`;
+    if (goS) goS.innerHTML = `Code blue triggered by critical vitals. ${correctCount}/${totalCount} correct.<br><span style="color:var(--red,#ff2e63);">Saved: +${bankedAmt.toLocaleString()} pts (locked at safe rung)</span>`;
   } else {
     if (goT) goT.textContent = 'PATIENT DECEASED';
-    if (goS) goS.textContent = `${correctCount}/${totalCount} correct${nodeCompLine ? ', ' + nodeCompLine : ''}`;
+    if (goS) goS.innerHTML = `${correctCount}/${totalCount} correct · ${tierReached}<br><span style="color:var(--red,#ff2e63);">Saved: +${bankedAmt.toLocaleString()} pts (locked at safe rung)</span>`;
   }
+
+  // Strengths and weak spots
+  const topicMap = {};
+  run.results.forEach((r, i) => {
+    const topic = r.topic || run.questions[i]?.metadata?.topic || 'General';
+    if (!topicMap[topic]) topicMap[topic] = { correct: 0, total: 0 };
+    topicMap[topic].total++;
+    if (r.correct) topicMap[topic].correct++;
+  });
+  const topics = Object.entries(topicMap).map(([t, d]) => ({ topic: t, ...d, pct: Math.round(d.correct / d.total * 100) }));
+  const strengths = topics.filter(t => t.pct >= 80).sort((a, b) => b.pct - a.pct).slice(0, 3);
+  const weakSpots = topics.filter(t => t.pct < 60).sort((a, b) => a.pct - b.pct).slice(0, 3);
+
+  // Render recap below existing stats
+  let recapEl = document.getElementById('go-recap');
+  if (!recapEl) {
+    recapEl = document.createElement('div');
+    recapEl.id = 'go-recap';
+    recapEl.style.cssText = 'margin-top:.8rem;font-size:.6rem;text-align:left;max-width:340px;margin-left:auto;margin-right:auto;';
+    goS?.parentNode?.insertBefore(recapEl, goS.nextSibling);
+  }
+  let recapHTML = `<div style="font-family:var(--fm);font-size:.45rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;margin-bottom:.3rem;">BEST STREAK: ${run.bestStreak}</div>`;
+  if (strengths.length > 0) {
+    recapHTML += `<div style="font-family:var(--fm);font-size:.42rem;color:var(--green-2,#00c485);letter-spacing:.12em;margin-top:.5rem;">STRENGTHS</div>`;
+    strengths.forEach(s => { recapHTML += `<div style="font-size:.55rem;color:var(--txt-2,#a3b3c9);margin-top:.15rem;">\u2605 ${s.topic} (${s.correct}/${s.total})</div>`; });
+  }
+  if (weakSpots.length > 0) {
+    recapHTML += `<div style="font-family:var(--fm);font-size:.42rem;color:var(--red,#ff2e63);letter-spacing:.12em;margin-top:.5rem;">WEAK SPOTS</div>`;
+    weakSpots.forEach(s => { recapHTML += `<div style="font-size:.55rem;color:var(--txt-2,#a3b3c9);margin-top:.15rem;">\u25CB ${s.topic} (${s.correct}/${s.total})</div>`; });
+  }
+  recapEl.innerHTML = recapHTML;
 
   // ── XP Improvement Bonus (follow-up sessions only) ────────────────────────
   if (bonusEl) bonusEl.style.display = 'none';
