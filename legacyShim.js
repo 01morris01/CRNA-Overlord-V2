@@ -11,6 +11,7 @@ import { checkMissionCompletion } from './core/dailyMission.js';
 
 // Track which engine is currently active
 window.usingNewEngine = false;
+window.engineGetCurrentRun = getCurrentRun;
 
 // Capture legacy functions before any overrides
 const mapRuntime = {

@@ -91,11 +91,80 @@ function _checkAbandonedRun(state) {
     banner.remove();
   });
 
-  // Resume just clicks SCRUB IN (the run state is still in the engine)
+  // Resume: reload questions for the node and restore run state
   document.getElementById('abandon-resume')?.addEventListener('click', () => {
     banner.remove();
-    const startBtn = document.getElementById('start-btn');
-    if (startBtn) startBtn.click();
+
+    // Import the question loader and start a resumed session
+    import('./core/questionEngine.js').then(({ getQuestionsForNode }) => {
+      import('./ui/menus.js').then(({ SESSION_SIZE }) => {
+        const questions = getQuestionsForNode(run.courseId, run.nodeId);
+        if (!questions || questions.length === 0) {
+          alert('Could not load questions for this node. Starting fresh.');
+          const startBtn = document.getElementById('start-btn');
+          if (startBtn) startBtn.click();
+          return;
+        }
+
+        // Shuffle and take session subset (same size as original)
+        const shuffled = [...questions].sort(() => Math.random() - 0.5);
+        const sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
+
+        // Set up the session
+        window.currentSession = {
+          courseId: run.courseId,
+          nodeId: run.nodeId,
+          questions: sessionQuestions,
+          totalInBank: questions.length,
+          mode: run.mode || 'or-rounds',
+        };
+        window._sessionMode = run.mode || 'or-rounds';
+
+        // Start the game
+        if (window.startGameWithQuestions) {
+          const lives = run.lives || 3;
+          window.startGameWithQuestions(sessionQuestions, { lives, mode: run.mode || 'or-rounds' });
+
+          // After the engine starts, restore the run state
+          setTimeout(() => {
+            const engineRun = window.engineGetCurrentRun?.() || (typeof getCurrentRun === 'function' ? getCurrentRun() : null);
+            if (engineRun) {
+              // Fast-forward index to where they left off
+              // We can't truly restore mid-question, so start them at the question they were on
+              engineRun.score = run.score || 0;
+              engineRun.lockedScore = run.lockedScore || 0;
+              engineRun.streak = run.streak || 0;
+              engineRun.bestStreak = Math.max(run.streak || 0, run.bestStreak || 0);
+              engineRun.lives = run.lives || 3;
+
+              // Skip to the right question index
+              const targetIdx = Math.min(run.index || 0, engineRun.questions.length - 1);
+              engineRun.index = targetIdx;
+
+              // Fill in placeholder results for skipped questions
+              while (engineRun.results.length < targetIdx) {
+                engineRun.results.push({ questionId: 'resumed', correct: true, timestamp: Date.now(), topic: 'resumed' });
+              }
+
+              // Re-render at the correct position
+              if (window.renderCurrentQuestion) window.renderCurrentQuestion();
+              if (window.updateHUD) window.updateHUD();
+
+              // Update HUD counters
+              const qn = document.getElementById('qn');
+              const qt = document.getElementById('qt');
+              if (qn) qn.textContent = targetIdx + 1;
+              if (qt) qt.textContent = engineRun.questions.length;
+            }
+
+            // Clear the activeRun since we're resuming
+            const s = loadState();
+            s.activeRun = null;
+            saveState(s);
+          }, 100);
+        }
+      });
+    });
   });
 }
 
