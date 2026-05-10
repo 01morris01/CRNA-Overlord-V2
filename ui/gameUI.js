@@ -710,6 +710,76 @@ function _selectMCQAnswer(q, ansGrid, idx) {
   if (window.submitAnswer) window.submitAnswer(Boolean(choice.ok));
 }
 
+function _showWalkScreen(run) {
+  const correctCount = run.results.filter(r => r.correct).length;
+  const totalCount = run.results.length;
+  const pct = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+  const tierReached = run.index >= 14 ? 'CODE BLUE' : run.index >= 10 ? 'CRITICAL' : run.index >= 5 ? 'MAINTENANCE' : 'PRE-INDUCTION';
+
+  // Play the walk sound
+  if (typeof window.playWalk === 'function') window.playWalk();
+
+  // Build the walk overlay
+  const ov = document.createElement('div');
+  ov.id = 'walk-overlay';
+  ov.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(3,6,12,.95);opacity:0;transition:opacity 300ms var(--ease-out,cubic-bezier(.23,1,.32,1));pointer-events:auto;';
+
+  const card = document.createElement('div');
+  card.style.cssText = 'text-align:center;max-width:360px;width:90%;transform:scale(0.9);transition:transform 350ms var(--ease-out);';
+
+  // Animate the points counter
+  const ptsDisplay = run.score.toLocaleString();
+
+  card.innerHTML = `
+    <div style="font-family:var(--fm);font-size:.55rem;color:var(--amber,#ffb000);letter-spacing:.3em;margin-bottom:.6rem;">YOU WALKED AWAY</div>
+    <div style="font-family:var(--fd);font-size:clamp(3rem,10vw,5rem);font-weight:700;color:var(--amber,#ffb000);line-height:.9;text-shadow:0 0 40px rgba(255,176,0,.4);">+${ptsDisplay}</div>
+    <div style="font-family:var(--fm);font-size:.7rem;color:var(--txt-2,#a3b3c9);margin-top:.3rem;letter-spacing:.12em;">POINTS BANKED</div>
+
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;margin-bottom:1.5rem;">
+      <div style="text-align:center;">
+        <div style="font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--green,#00ffa3);line-height:1;">${pct}%</div>
+        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;margin-top:.2rem;">ACCURACY</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--txt,#e5edf7);line-height:1;">${correctCount}/${totalCount}</div>
+        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;margin-top:.2rem;">CORRECT</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--amber,#ffb000);line-height:1;">${run.bestStreak}</div>
+        <div style="font-family:var(--fm);font-size:.4rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;margin-top:.2rem;">BEST STREAK</div>
+      </div>
+    </div>
+
+    <div style="font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.15em;margin-bottom:1.5rem;">${tierReached} TIER REACHED</div>
+
+    <button id="walk-continue" style="background:var(--amber,#ffb000);border:none;color:#000;font-family:var(--fd);font-size:1rem;font-weight:700;letter-spacing:.15em;padding:.8rem 2rem;border-radius:4px;cursor:pointer;transition:transform 130ms var(--ease-out);">CONTINUE</button>
+  `;
+
+  ov.appendChild(card);
+  document.body.appendChild(ov);
+
+  requestAnimationFrame(() => {
+    ov.style.opacity = '1';
+    card.style.transform = 'scale(1)';
+  });
+
+  // Play a celebratory ascending tone after a short delay
+  setTimeout(() => {
+    if (typeof window.playStreak3 === 'function') window.playStreak3();
+  }, 400);
+
+  document.getElementById('walk-continue').onclick = () => {
+    ov.style.opacity = '0';
+    setTimeout(() => {
+      ov.remove();
+      // Bank the points and go to game over which leads to course menu
+      if (typeof window._showNewEngineGameOver === 'function') {
+        window._showNewEngineGameOver(run);
+      }
+    }, 300);
+  };
+}
+
 function _onWrongAnswer() {
   // Red edge flash (more pronounced)
   _flashEdge('var(--red,#ff2e63)');
@@ -1004,9 +1074,7 @@ export function showAnswerFeedback(correct, rationale, userAnswer = null) {
         run.done = true;
         run.walked = true;
         result.classList.remove('on');
-        if (typeof window._showNewEngineGameOver === 'function') {
-          window._showNewEngineGameOver(run);
-        }
+        _showWalkScreen(run);
       };
       nxtBtn.parentNode.insertBefore(walkBtn, nxtBtn);
     }
