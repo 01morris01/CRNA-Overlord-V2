@@ -78,6 +78,21 @@ import { TA_WK11_QUESTIONS, TA_WK11_METADATA } from '../data/questions/ta-wk11-i
 import { TA_WK12_QUESTIONS, TA_WK12_METADATA } from '../data/questions/ta-wk12-induction-emergence.js';
 import { TA_WK13_QUESTIONS, TA_WK13_METADATA } from '../data/questions/ta-wk13-induction-emergence.js';
 
+// ── Advanced Pharmacology I (Stoelting's) ──────────────────────────────────
+import { AP1_WK1_QUESTIONS,  AP1_WK1_METADATA  } from '../data/questions/ap1-wk1-receptors-pharmacodynamics.js';
+import { AP1_WK2_QUESTIONS,  AP1_WK2_METADATA  } from '../data/questions/ap1-wk2.js';
+import { AP1_WK3_QUESTIONS,  AP1_WK3_METADATA  } from '../data/questions/ap1-wk3.js';
+import { AP1_WK4_QUESTIONS,  AP1_WK4_METADATA  } from '../data/questions/ap1-wk4.js';
+import { AP1_WK5_QUESTIONS,  AP1_WK5_METADATA  } from '../data/questions/ap1-wk5.js';
+import { AP1_WK6_QUESTIONS,  AP1_WK6_METADATA  } from '../data/questions/ap1-wk6.js';
+import { AP1_WK7_QUESTIONS,  AP1_WK7_METADATA  } from '../data/questions/ap1-wk7.js';
+import { AP1_WK8_QUESTIONS,  AP1_WK8_METADATA  } from '../data/questions/ap1-wk8.js';
+import { AP1_WK9_QUESTIONS,  AP1_WK9_METADATA  } from '../data/questions/ap1-wk9.js';
+import { AP1_WK10_QUESTIONS, AP1_WK10_METADATA } from '../data/questions/ap1-wk10.js';
+import { AP1_WK11_QUESTIONS, AP1_WK11_METADATA } from '../data/questions/ap1-wk11.js';
+import { AP1_WK12_QUESTIONS, AP1_WK12_METADATA } from '../data/questions/ap1-wk12.js';
+import { AP1_WK13_QUESTIONS, AP1_WK13_METADATA } from '../data/questions/ap1-wk13.js';
+
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
 import { WEEK_3_QUESTIONS, WEEK_3_METADATA } from '../data/questions/week-3.js';
@@ -851,6 +866,22 @@ export const NODE_CONFIG = {
     questionsMeta: TA_WK13_METADATA,
   },
 
+  // ── Advanced Pharmacology I (Stoelting's) ──────────────────────────────────
+
+  "ap1-wk-1":  { courseId: "adv-pharmacology-1", title: "Drug Receptors, Pharmacodynamics, Time Course", chapterLabel: "Stoelting Ch 2", badgeLabel: "RECEPTORS / PD", icon: "💊", questions: AP1_WK1_QUESTIONS, questionsMeta: AP1_WK1_METADATA },
+  "ap1-wk-2":  { courseId: "adv-pharmacology-1", title: "Autonomic Drugs, Cholinergic Agonism/Antagonism", chapterLabel: "Stoelting Ch 3", badgeLabel: "CHOLINERGIC", icon: "🧪", questions: AP1_WK2_QUESTIONS, questionsMeta: AP1_WK2_METADATA },
+  "ap1-wk-3":  { courseId: "adv-pharmacology-1", title: "Sympathomimetics, Antihypertensives, Vasodilators", chapterLabel: "Stoelting Ch 15,18,19,20", badgeLabel: "SYMPATHOMIMETICS", icon: "💉", questions: AP1_WK3_QUESTIONS, questionsMeta: AP1_WK3_METADATA },
+  "ap1-wk-4":  { courseId: "adv-pharmacology-1", title: "Anticoagulants and Procoagulants", chapterLabel: "Stoelting Ch 29,30", badgeLabel: "COAGULATION", icon: "🩸", questions: AP1_WK4_QUESTIONS, questionsMeta: AP1_WK4_METADATA },
+  "ap1-wk-5":  { courseId: "adv-pharmacology-1", title: "Lipid Lowering, Antidysrhythmics, Diuretics", chapterLabel: "Stoelting Ch 19,21,22,23,37", badgeLabel: "CARDIAC PHARM", icon: "❤️", questions: AP1_WK5_QUESTIONS, questionsMeta: AP1_WK5_METADATA },
+  "ap1-wk-6":  { courseId: "adv-pharmacology-1", title: "Histamine, Vasoactive, Prostaglandin Drugs", chapterLabel: "Stoelting Ch 3,20,25", badgeLabel: "HISTAMINE / PG", icon: "🫁", questions: AP1_WK6_QUESTIONS, questionsMeta: AP1_WK6_METADATA },
+  "ap1-wk-7":  { courseId: "adv-pharmacology-1", title: "Nitric Oxide, Respiratory Active Drugs", chapterLabel: "Stoelting Ch 20,25", badgeLabel: "NO / RESP", icon: "🌬️", questions: AP1_WK7_QUESTIONS, questionsMeta: AP1_WK7_METADATA },
+  "ap1-wk-8":  { courseId: "adv-pharmacology-1", title: "Antipsychotic and Antidepressant Drugs", chapterLabel: "Stoelting Ch 13,43", badgeLabel: "PSYCH PHARM", icon: "🧠", questions: AP1_WK8_QUESTIONS, questionsMeta: AP1_WK8_METADATA },
+  "ap1-wk-9":  { courseId: "adv-pharmacology-1", title: "Hypothalamus, Thyroid, Adrenocorticosteroids", chapterLabel: "Stoelting Ch 37,38,39,40", badgeLabel: "ENDOCRINE", icon: "🦋", questions: AP1_WK9_QUESTIONS, questionsMeta: AP1_WK9_METADATA },
+  "ap1-wk-10": { courseId: "adv-pharmacology-1", title: "Antiseizure, Movement Disorders, Antimicrobials, GI", chapterLabel: "Stoelting Ch 13,32,34,35,41", badgeLabel: "NEURO / GI", icon: "⚡", questions: AP1_WK10_QUESTIONS, questionsMeta: AP1_WK10_METADATA },
+  "ap1-wk-11": { courseId: "adv-pharmacology-1", title: "Steroids and Antihistamines", chapterLabel: "Stoelting Ch 35,40", badgeLabel: "STEROIDS", icon: "💎", questions: AP1_WK11_QUESTIONS, questionsMeta: AP1_WK11_METADATA },
+  "ap1-wk-12": { courseId: "adv-pharmacology-1", title: "Drugs of Abuse, Cannabinoids, Chemotherapy", chapterLabel: "Stoelting Ch 42,43", badgeLabel: "ABUSE / CHEMO", icon: "☣️", questions: AP1_WK12_QUESTIONS, questionsMeta: AP1_WK12_METADATA },
+  "ap1-wk-13": { courseId: "adv-pharmacology-1", title: "Dietary Supplements and Herbal Medications", chapterLabel: "Stoelting Ch 36", badgeLabel: "HERBALS", icon: "🌿", questions: AP1_WK13_QUESTIONS, questionsMeta: AP1_WK13_METADATA },
+
   // ── Add future nodes here ──────────────────────────────────────────────────
 
 };
@@ -881,6 +912,7 @@ const COURSE_LABELS = {
   'adv-phys-path-1':          'Pathophysiology I',
   'adv-phys-path-2':          'Pathophysiology II',
   'tech-advances-anesthesia': 'Tech Advances',
+  'adv-pharmacology-1':       'Pharmacology I',
   'chem-phys-anesthesia':     'Chemistry & Physics',
   'adv-health-assessment':    'Health Assessment',
 };
@@ -890,6 +922,7 @@ const COURSE_ORDER = [
   'adv-phys-path-1',
   'adv-phys-path-2',
   'tech-advances-anesthesia',
+  'adv-pharmacology-1',
   'adv-health-assessment',
   'chem-phys-anesthesia',
 ];

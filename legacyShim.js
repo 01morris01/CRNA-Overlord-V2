@@ -167,6 +167,21 @@ const TOPIC_TO_NODE = {
   'ta-wk-11': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-11' },
   'ta-wk-12': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-12' },
   'ta-wk-13': { courseId: 'tech-advances-anesthesia', nodeId: 'ta-wk-13' },
+
+  // Advanced Pharmacology I (Stoelting's)
+  'ap1-wk-1':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-1'  },
+  'ap1-wk-2':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-2'  },
+  'ap1-wk-3':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-3'  },
+  'ap1-wk-4':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-4'  },
+  'ap1-wk-5':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-5'  },
+  'ap1-wk-6':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-6'  },
+  'ap1-wk-7':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-7'  },
+  'ap1-wk-8':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-8'  },
+  'ap1-wk-9':  { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-9'  },
+  'ap1-wk-10': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-10' },
+  'ap1-wk-11': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-11' },
+  'ap1-wk-12': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-12' },
+  'ap1-wk-13': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-13' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.

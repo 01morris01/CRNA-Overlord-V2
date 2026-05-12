@@ -1584,6 +1584,25 @@ const COURSES = [
     ]
   },
   {
+    id:'adv-pharmacology-1',
+    title:'Advanced Pharmacology I',
+    topics:[
+      {id:'ap1-wk-1',title:'Drug Receptors, Pharmacodynamics, Time Course',chapters:'Stoelting Ch 2',order:1,type:'topic'},
+      {id:'ap1-wk-2',title:'Autonomic Drugs, Cholinergic Agonism/Antagonism',chapters:'Stoelting Ch 3',order:2,type:'topic'},
+      {id:'ap1-wk-3',title:'Sympathomimetics, Antihypertensives, Vasodilators',chapters:'Stoelting Ch 15,18,19,20',order:3,type:'topic'},
+      {id:'ap1-wk-4',title:'Anticoagulants and Procoagulants',chapters:'Stoelting Ch 29,30',order:4,type:'topic'},
+      {id:'ap1-wk-5',title:'Lipid Lowering, Antidysrhythmics, Diuretics',chapters:'Stoelting Ch 19,21,22,23,37',order:5,type:'topic'},
+      {id:'ap1-wk-6',title:'Histamine, Vasoactive, Prostaglandin Drugs',chapters:'Stoelting Ch 3,20,25',order:6,type:'topic'},
+      {id:'ap1-wk-7',title:'Nitric Oxide, Respiratory Active Drugs',chapters:'Stoelting Ch 20,25',order:7,type:'topic'},
+      {id:'ap1-wk-8',title:'Antipsychotic and Antidepressant Drugs',chapters:'Stoelting Ch 13,43',order:8,type:'topic'},
+      {id:'ap1-wk-9',title:'Hypothalamus, Thyroid, Adrenocorticosteroids',chapters:'Stoelting Ch 37,38,39,40',order:9,type:'topic'},
+      {id:'ap1-wk-10',title:'Antiseizure, Movement Disorders, Antimicrobials, GI',chapters:'Stoelting Ch 13,32,34,35,41',order:10,type:'topic'},
+      {id:'ap1-wk-11',title:'Steroids and Antihistamines',chapters:'Stoelting Ch 35,40',order:11,type:'topic'},
+      {id:'ap1-wk-12',title:'Drugs of Abuse, Cannabinoids, Chemotherapy',chapters:'Stoelting Ch 42,43',order:12,type:'topic'},
+      {id:'ap1-wk-13',title:'Dietary Supplements and Herbal Medications',chapters:'Stoelting Ch 36',order:13,type:'topic'},
+    ]
+  },
+  {
     id:'basics-anesthesia',
     title:'Basics of Anesthesia',
     topics:[
@@ -2215,6 +2234,7 @@ function showCourseSelector(){
     'basics-anesthesia':'Miller foundations. Airway, pharmacology, agents, neuromuscular. Start here if you are new.',
     'chem-phys-anesthesia':'Gas laws applied. Vaporizers, fluid dynamics, electricity, radiation. Boards relevant physics.',
     'adv-health-assess':'NAS 520 head to toe. Clinical interview, physical exam, system by system assessment with anesthesia cues.',
+    'adv-pharmacology-1':'Stoelting foundations. Receptors, autonomics, cardiac drugs, coagulation, endocrine, neuro, and herbals. 13 weeks of pharmacology.',
   };
   const COURSE_PALETTES={
     'adv-phys-path-1':['#ff3300','#660000'],
@@ -2223,6 +2243,7 @@ function showCourseSelector(){
     'basics-anesthesia':['#5b9eff','#0a1a44'],
     'chem-phys-anesthesia':['#a78bfa','#2a0f5c'],
     'adv-health-assess':['#ffb000','#3a2400'],
+    'adv-pharmacology-1':['#ff6b9d','#3a0020'],
   };
 
   courseContainer.innerHTML='';
