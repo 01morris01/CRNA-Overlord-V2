@@ -550,6 +550,11 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div style="font-weight:700;font-size:1rem;">CODE BLUE</div>
 <div style="font-size:.7rem;color:var(--muted-2,#7a95b0);margin-top:.25rem;line-height:1.4;">15s timer. No powerups. 1 life. Double points.</div>
 </button>
+<button class="mode-opt" id="mode-free-recall" data-mode="free-recall" onclick="window._launchWithMode('free-recall')" style="background:rgba(167,139,250,.06);border:2px solid rgba(167,139,250,.3);color:var(--purple,#a78bfa);padding:1rem;border-radius:8px;cursor:pointer;text-align:left;font-family:var(--fb);">
+<div style="font-weight:700;font-size:1rem;">FREE RECALL <span style="font-size:.6rem;opacity:.7;font-weight:400;">[no MCQ]</span></div>
+<div style="font-size:.7rem;color:var(--muted-2,#7a95b0);margin-top:.25rem;line-height:1.4;">Type or speak your answer. Dr. Voss grades it.<br>90s timer · 3 lives · Partial credit · Voice supported</div>
+</button>
+<div id="mode-recall-notice" style="display:none;font-size:.6rem;color:var(--amber,#ffb000);text-align:center;padding:.3rem;line-height:1.4;"></div>
 </div>
 <button onclick="document.getElementById('mode-picker-modal').style.display='none'" style="margin-top:1rem;background:none;border:1px solid var(--muted,#4a6282);color:var(--muted,#4a6282);padding:.4rem 1.2rem;border-radius:4px;cursor:pointer;font-size:.7rem;font-family:var(--fm);">CANCEL</button>
 </div>

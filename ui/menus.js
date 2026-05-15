@@ -162,6 +162,30 @@ export function startStudySessionForNode(courseId, nodeId) {
     const cfg = getNodeConfig(nodeId);
     nodeLabel.textContent = cfg ? `${cfg.title} (${questions.length} questions)` : nodeId;
   }
+
+  // Check recall availability for free-recall mode button
+  const recallCount = questions.filter(q => q.type === 'recall').length;
+  const recallBtn = document.getElementById('mode-free-recall');
+  const recallNotice = document.getElementById('mode-recall-notice');
+  if (recallBtn) {
+    if (recallCount === 0) {
+      recallBtn.disabled = true;
+      recallBtn.style.opacity = '.3';
+      recallBtn.style.cursor = 'not-allowed';
+      if (recallNotice) { recallNotice.style.display = 'block'; recallNotice.textContent = 'Coming soon for this node — no recall questions yet.'; }
+    } else {
+      recallBtn.disabled = false;
+      recallBtn.style.opacity = '1';
+      recallBtn.style.cursor = 'pointer';
+      if (recallNotice && recallCount < 5) {
+        recallNotice.style.display = 'block';
+        recallNotice.textContent = `This node has only ${recallCount} recall question${recallCount > 1 ? 's' : ''}. Free recall is most effective with full coverage.`;
+      } else if (recallNotice) {
+        recallNotice.style.display = 'none';
+      }
+    }
+  }
+
   if (modal) modal.style.display = 'flex';
 }
 
@@ -176,24 +200,38 @@ window._launchWithMode = function(mode) {
   const { courseId, nodeId, questions } = pending;
   window._pendingSession = null;
 
-  // Shuffle and take session subset
-  const shuffled = [...questions].sort(() => Math.random() - 0.5);
-  const sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
+  let pool = questions;
+  let sessionQuestions;
 
-  // Append boss case: 3 high-priority questions from the same node
-  const bossPool = questions.filter(q =>
-    q.metadata?.priority === 'high' && !sessionQuestions.some(sq => sq.id === q.id)
-  );
-  const bossQuestions = bossPool.sort(() => Math.random() - 0.5).slice(0, 3);
-  if (bossQuestions.length >= 3) {
-    bossQuestions.forEach(q => { q._isBoss = true; });
-    sessionQuestions.push(...bossQuestions);
+  if (mode === 'free-recall') {
+    pool = questions.filter(q => q.type === 'recall');
+    if (pool.length === 0) {
+      console.error('No recall questions for this node');
+      return;
+    }
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
+  } else {
+    // Shuffle and take session subset
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    sessionQuestions = shuffled.slice(0, Math.min(SESSION_SIZE, shuffled.length));
+
+    // Append boss case: 3 high-priority questions from the same node
+    const bossPool = pool.filter(q =>
+      q.metadata?.priority === 'high' && !sessionQuestions.some(sq => sq.id === q.id)
+    );
+    const bossQuestions = bossPool.sort(() => Math.random() - 0.5).slice(0, 3);
+    if (bossQuestions.length >= 3) {
+      bossQuestions.forEach(q => { q._isBoss = true; });
+      sessionQuestions.push(...bossQuestions);
+    }
   }
 
   // Apply mode rules
   let lives = 3;
   if (mode === 'code-blue') lives = 1;
-  if (mode === 'study') lives = 999; // effectively unlimited
+  if (mode === 'study') lives = 999;
+  if (mode === 'free-recall') lives = 3;
 
   // Store session info
   window.currentSession = {
