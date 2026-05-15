@@ -1,12 +1,14 @@
-const CACHE_VERSION = 'v7-1-2026-05-08';
+const CACHE_VERSION = 'v8-fr-2026-05-14';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
   '/', '/index.html', '/app.js', '/legacyShim.js', '/legacy/legacy.js',
   '/world-map.js', '/core/state.js', '/core/auth.js', '/core/gameEngine.js',
   '/core/questionEngine.js', '/core/answerGrading.js', '/core/nodeConfig.js',
-  '/core/voss.js', '/core/dailyMission.js', '/ui/gameUI.js', '/ui/menus.js',
+  '/core/voss.js', '/core/dailyMission.js', '/core/recallGrader.js',
+  '/ui/gameUI.js', '/ui/menus.js',
   '/ui/reviewMode.js', '/ui/sceneRegistry.js', '/assets/css/tokens.css',
+  '/data/recall-questions.js',
   '/manifest.json',
 ];
 
