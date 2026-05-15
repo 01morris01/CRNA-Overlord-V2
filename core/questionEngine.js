@@ -114,7 +114,7 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     chapter: resolvedChapter,
     scene,
     sceneCfg,
-    type: q.type, // mcq, multi, short
+    type: q.type, // mcq, multi, short, recall
     difficulty: q.metadata?.priority === 'high' ? 3 : (q.metadata?.priority === 'medium' ? 2 : 1),
     setup: q.setup || '',
     q: q.prompt || q.q || '',
@@ -130,7 +130,7 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     // For short answer
     accepted: q.acceptedAnswers || q.correctAnswers || [],
     acceptedAnswers: q.acceptedAnswers || [],
-    canonicalAnswer: q.canonicalAnswer || null, // optional human-readable display answer
+    canonicalAnswer: q.canonicalAnswer || null,
     answerMatching: q.answerMatching || {
       ignoreCase: true,
       ignoreExtraSpaces: true,
@@ -138,6 +138,9 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
       allowMinorMisspellings: true,
       fuzzyThreshold: 0.8
     },
+
+    // For free recall
+    rubric: q.rubric || null,
 
     correctTarget: null,
     hint: '',
@@ -192,7 +195,22 @@ function _validateNormalized(q) {
   if ((q.type === 'short' || q.type === 'type') && (!q.acceptedAnswers || !q.acceptedAnswers.length)) {
     console.warn('[QE VALIDATE]', q.id, 'short missing acceptedAnswers'); ok = false;
   }
-  if (!q.rationale && !q.ex) { console.warn('[QE VALIDATE]', q.id, 'missing rationale (non-fatal)'); }
+  if (q.type === 'recall') {
+    if (!q.q && !q.prompt) { console.warn('[QE VALIDATE]', q.id, 'recall missing prompt'); ok = false; }
+    if (!q.rubric || !q.rubric.key_points || !q.rubric.key_points.length) {
+      console.warn('[QE VALIDATE]', q.id, 'recall missing rubric.key_points'); ok = false;
+    } else {
+      q.rubric.key_points.forEach((kp, i) => {
+        if (!kp.id) { console.warn('[QE VALIDATE]', q.id, `key_point[${i}] missing id`); ok = false; }
+        if (typeof kp.weight !== 'number') { console.warn('[QE VALIDATE]', q.id, `key_point[${i}] missing weight`); ok = false; }
+        if (!kp.description) { console.warn('[QE VALIDATE]', q.id, `key_point[${i}] missing description`); ok = false; }
+      });
+    }
+    if (q.rubric && typeof q.rubric.minimum_passing_score !== 'number') {
+      q.rubric.minimum_passing_score = 60;
+    }
+  }
+  if (!q.rationale && !q.ex && q.type !== 'recall') { console.warn('[QE VALIDATE]', q.id, 'missing rationale (non-fatal)'); }
   return ok;
 }
 

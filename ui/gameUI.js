@@ -232,7 +232,18 @@ function _validateQuestion(q) {
     }
   }
 
-  if (!q.rationale && !q.ex) {
+  if (q.type === 'recall') {
+    if (!q.q && !q.prompt) {
+      console.warn('[VALIDATE]', q.id, 'recall: missing prompt');
+      ok = false;
+    }
+    if (!q.rubric || !q.rubric.key_points || !q.rubric.key_points.length) {
+      console.warn('[VALIDATE]', q.id, 'recall: missing rubric.key_points');
+      ok = false;
+    }
+  }
+
+  if (!q.rationale && !q.ex && q.type !== 'recall') {
     console.warn('[VALIDATE]', q.id, 'missing rationale (non-fatal)');
   }
 
