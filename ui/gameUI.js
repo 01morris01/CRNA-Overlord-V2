@@ -188,6 +188,10 @@ function _disableAllInputs() {
   if (inp) inp.disabled = true;
   const tsub = document.getElementById('type-submit');
   if (tsub) tsub.disabled = true;
+  const rinp = document.getElementById('recall-input');
+  if (rinp) rinp.disabled = true;
+  const rsub = document.getElementById('recall-submit-btn');
+  if (rsub) rsub.disabled = true;
 }
 
 // ─── validation ───────────────────────────────────────────────────────────────
@@ -597,14 +601,16 @@ export function renderCurrentQuestion() {
   document.getElementById('recall-reveal-btn')?.remove();
 
   // Hide all answer areas
-  const typeArea  = document.getElementById('type-area');
-  const ansGrid   = document.getElementById('ans-grid');
-  const clickInst = document.getElementById('click-inst');
-  const multiArea = document.getElementById('multi-area');
-  if (typeArea)  typeArea.style.display  = 'none';
-  if (ansGrid)   ansGrid.style.display   = 'none';
-  if (clickInst) clickInst.style.display = 'none';
-  if (multiArea) multiArea.style.display = 'none';
+  const typeArea   = document.getElementById('type-area');
+  const ansGrid    = document.getElementById('ans-grid');
+  const clickInst  = document.getElementById('click-inst');
+  const multiArea  = document.getElementById('multi-area');
+  const recallArea = document.getElementById('recall-area');
+  if (typeArea)   typeArea.style.display   = 'none';
+  if (ansGrid)    ansGrid.style.display    = 'none';
+  if (clickInst)  clickInst.style.display  = 'none';
+  if (multiArea)  multiArea.style.display  = 'none';
+  if (recallArea) recallArea.style.display = 'none';
 
   console.log('QUESTION TYPE:', q.type, '| id:', q.id);
   if (q.type === 'multi') console.log('Choices:', q.choices);
@@ -626,8 +632,16 @@ export function renderCurrentQuestion() {
     if (fill) { fill.style.transition = 'none'; fill.style.width = '0%'; }
   }
 
-  // Recall First: show stem only, hold timer until user clicks ready
-  if (loadState().recallFirstEnabled) {
+  // Free recall questions get their own renderer and timer logic
+  if (q.type === 'recall') {
+    renderRecallUI(q);
+    if (!isUntimed && window._sessionMode !== 'study') {
+      const recallTime = window._sessionMode === 'code-blue' ? 45 : 90;
+      _remaining = recallTime;
+      startQuestionTimer(q);
+    }
+  } else if (loadState().recallFirstEnabled) {
+    // Recall First: show stem only, hold timer until user clicks ready
     _showRecallPhase(q);
   } else {
     // Normal path: render answers and start timer immediately (unless untimed)
@@ -1015,6 +1029,125 @@ function _submitShortAnswer(q) {
   showAnswerFeedback(result.correct, feedback, userAnswer);
   if (window.submitAnswer) window.submitAnswer(result.correct);
 }
+
+// ─── FREE RECALL ─────────────────────────────────────────────────────────────
+
+let _speechRecognition = null;
+
+function renderRecallUI(q) {
+  const recallArea = document.getElementById('recall-area');
+  if (!recallArea) return;
+
+  recallArea.style.display = 'flex';
+
+  const hasSpeechAPI = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+
+  recallArea.innerHTML = `
+    <textarea id="recall-input" placeholder="Type your answer in your own words..." rows="6"></textarea>
+    <div class="recall-char-count" id="recall-char-count">0 / 20 MIN</div>
+    <div class="recall-controls">
+      ${hasSpeechAPI ? '<button class="recall-mic" id="recall-mic-btn">🎤 SPEAK</button>' : ''}
+      <button class="recall-submit" id="recall-submit-btn" disabled>KEEP GOING...</button>
+    </div>
+    <div class="recall-grading-status" id="recall-grading-status">DR. VOSS IS REVIEWING...</div>
+  `;
+
+  const input = document.getElementById('recall-input');
+  const submitBtn = document.getElementById('recall-submit-btn');
+  const charCount = document.getElementById('recall-char-count');
+  const micBtn = document.getElementById('recall-mic-btn');
+
+  // Auto-resize textarea
+  if (input) {
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, window.innerHeight * 0.5) + 'px';
+
+      const len = input.value.length;
+      if (charCount) charCount.textContent = len < 20 ? `${len} / 20 MIN` : `${len} CHARS`;
+
+      if (submitBtn) {
+        const ready = len >= 20;
+        submitBtn.disabled = !ready;
+        submitBtn.textContent = ready ? 'SUBMIT ANSWER →' : 'KEEP GOING...';
+      }
+    });
+
+    input.focus();
+  }
+
+  // Submit handler
+  if (submitBtn) {
+    submitBtn.onclick = () => {
+      if (input && input.value.length >= 20) {
+        window._handleRecallSubmit(q);
+      }
+    };
+  }
+
+  // Voice input
+  if (micBtn && hasSpeechAPI) {
+    micBtn.onclick = () => _toggleSpeechRecognition(input, micBtn);
+  }
+}
+
+function _toggleSpeechRecognition(textarea, btn) {
+  if (_speechRecognition) {
+    _speechRecognition.stop();
+    _speechRecognition = null;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 SPEAK';
+    return;
+  }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  _speechRecognition = new SpeechRecognition();
+  _speechRecognition.continuous = true;
+  _speechRecognition.interimResults = true;
+  _speechRecognition.lang = 'en-US';
+
+  let finalTranscript = textarea.value;
+
+  btn.classList.add('recording');
+  btn.textContent = '⏹ STOP';
+
+  _speechRecognition.onresult = (event) => {
+    let interim = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const transcript = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalTranscript += (finalTranscript ? ' ' : '') + transcript;
+      } else {
+        interim += transcript;
+      }
+    }
+    textarea.value = finalTranscript + (interim ? ' ' + interim : '');
+    textarea.dispatchEvent(new Event('input'));
+  };
+
+  _speechRecognition.onerror = () => {
+    _speechRecognition = null;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 SPEAK';
+  };
+
+  _speechRecognition.onend = () => {
+    if (_speechRecognition) {
+      _speechRecognition = null;
+      btn.classList.remove('recording');
+      btn.textContent = '🎤 SPEAK';
+      textarea.value = finalTranscript;
+      textarea.dispatchEvent(new Event('input'));
+    }
+  };
+
+  _speechRecognition.start();
+}
+
+// Stub for submit — wired in Fix 5
+window._handleRecallSubmit = window._handleRecallSubmit || function(q) {
+  console.log('[RECALL] Submit stub — grading not wired yet');
+};
 
 // ─── FEEDBACK OVERLAY ─────────────────────────────────────────────────────────
 

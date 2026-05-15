@@ -162,6 +162,51 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .type-row{display:flex;gap:.4rem;align-items:center;}
 .type-hint{font-size:.52rem;color:#555;margin-top:.3rem;}
 
+/* FREE RECALL STYLES */
+#recall-area{display:none;flex-direction:column;gap:.6rem;}
+#recall-input{width:100%;background:var(--abyss,#070d1a);border:1px solid var(--line-2,#243757);border-radius:6px;color:var(--txt,#e5edf7);font-family:var(--fb,'Inter',system-ui,sans-serif);font-size:1rem;padding:1rem;outline:none;resize:none;min-height:200px;max-height:50vh;line-height:1.6;transition:border-color 200ms var(--ease-out),box-shadow 200ms var(--ease-out);}
+#recall-input:focus{border-color:var(--green,#00ffa3);box-shadow:0 0 16px var(--green-glow,rgba(0,255,163,.25));}
+#recall-input::placeholder{color:var(--muted-2,#384a66);}
+#recall-input:disabled{opacity:.5;cursor:not-allowed;}
+.recall-controls{display:flex;gap:.5rem;align-items:center;}
+.recall-submit{flex:1;background:transparent;border:2px solid var(--green,#00ffa3);color:var(--green,#00ffa3);font-family:var(--fd,'Antonio',sans-serif);font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.7rem 1.2rem;cursor:pointer;border-radius:4px;transition:background 200ms var(--ease-out),box-shadow 200ms var(--ease-out),opacity 200ms var(--ease-out),transform var(--t-press,130ms) var(--ease-out);}
+.recall-submit:hover:not(:disabled){background:rgba(0,255,163,.08);box-shadow:0 0 25px var(--green-glow);}
+.recall-submit:disabled{opacity:.35;cursor:not-allowed;border-color:var(--muted-2,#384a66);color:var(--muted-2,#384a66);}
+.recall-mic{background:transparent;border:2px solid var(--muted,#5a6f8a);color:var(--muted,#5a6f8a);font-family:var(--fm,'JetBrains Mono',monospace);font-size:.75rem;font-weight:700;padding:.7rem 1rem;cursor:pointer;border-radius:4px;transition:border-color 200ms var(--ease-out),color 200ms var(--ease-out),box-shadow 200ms var(--ease-out),transform var(--t-press,130ms) var(--ease-out);letter-spacing:.08em;white-space:nowrap;}
+.recall-mic:hover{border-color:var(--txt-2,#a3b3c9);color:var(--txt-2,#a3b3c9);}
+.recall-mic.recording{border-color:var(--red,#ff2e63);color:var(--red,#ff2e63);box-shadow:0 0 16px var(--red-glow,rgba(255,46,99,.25));animation:mic-pulse 1.2s ease-in-out infinite;}
+@keyframes mic-pulse{0%,100%{box-shadow:0 0 8px var(--red-glow);}50%{box-shadow:0 0 24px var(--red-glow),0 0 40px rgba(255,46,99,.15);}}
+.recall-char-count{font-family:var(--fm);font-size:.5rem;color:var(--muted,#5a6f8a);letter-spacing:.1em;text-align:right;}
+.recall-grading-status{font-family:var(--fm);font-size:.6rem;color:var(--amber,#ffb000);letter-spacing:.12em;text-align:center;padding:.5rem;display:none;}
+.recall-grading-status.on{display:block;animation:grading-fade 1.5s ease-in-out infinite;}
+@keyframes grading-fade{0%,100%{opacity:.6;}50%{opacity:1;}}
+@media(max-width:600px){
+  #recall-input{font-size:.95rem;min-height:150px;padding:.75rem;}
+  .recall-submit{font-size:.75rem;padding:.6rem .8rem;}
+  .recall-mic{font-size:.65rem;padding:.6rem .7rem;}
+}
+
+/* RECALL FEEDBACK STYLES */
+.recall-feedback{animation:recall-fb-in 480ms var(--ease-out) both;}
+@keyframes recall-fb-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.recall-fb-header{font-family:var(--fd);font-weight:700;letter-spacing:.12em;margin-bottom:.3rem;}
+.recall-fb-score{font-family:var(--fd);font-size:2.5rem;font-weight:900;line-height:1;}
+.recall-fb-quip{font-family:var(--fb);font-style:italic;font-size:.8rem;color:var(--txt-2,#a3b3c9);line-height:1.5;padding:.6rem .8rem;border-left:3px solid var(--green,#00ffa3);margin:.6rem 0;}
+.recall-fb-section{margin-top:.8rem;}
+.recall-fb-section-title{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;}
+.recall-fb-point{font-family:var(--fb);font-size:.75rem;line-height:1.5;padding:.25rem 0;padding-left:.8rem;position:relative;}
+.recall-fb-point::before{content:'';position:absolute;left:0;top:.55rem;width:6px;height:6px;border-radius:50%;}
+.recall-fb-captured::before{background:var(--green,#00ffa3);}
+.recall-fb-missed::before{background:var(--amber,#ffb000);}
+.recall-fb-error{font-size:.75rem;line-height:1.5;padding:.5rem .8rem;border-left:3px solid var(--red,#ff2e63);margin:.3rem 0;background:rgba(255,46,99,.06);border-radius:0 4px 4px 0;}
+.recall-fb-error-stmt{color:var(--red,#ff2e63);font-weight:600;}
+.recall-fb-error-fix{color:var(--green,#00ffa3);margin-top:.15rem;}
+.recall-fb-toggle{background:none;border:1px solid var(--line-2,#243757);color:var(--muted,#5a6f8a);font-family:var(--fm);font-size:.55rem;padding:.3rem .8rem;cursor:pointer;border-radius:3px;letter-spacing:.1em;margin-top:.5rem;transition:border-color 200ms,color 200ms;}
+.recall-fb-toggle:hover{border-color:var(--txt-2);color:var(--txt-2);}
+.recall-fb-original{display:none;font-family:var(--fb);font-size:.7rem;color:var(--muted,#5a6f8a);line-height:1.6;padding:.6rem;background:var(--abyss,#070d1a);border-radius:4px;margin-top:.4rem;white-space:pre-wrap;}
+.recall-fb-buttons{display:flex;gap:.5rem;margin-top:1rem;}
+.recall-fb-buttons button{flex:1;}
+
 /* MULTI-SELECT STYLES */
 .multi-area{display:flex;flex-direction:column;gap:.5rem;}
 .multi-instruction{font-size:.7rem;color:#ffaa00;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;}
@@ -464,6 +509,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div id="ans-grid"><button class="abtn" id="b0"></button><button class="abtn" id="b1"></button><button class="abtn" id="b2"></button></div>
 <div id="type-area"><div class="type-row"><input id="type-input" placeholder="Type your answer..." autocomplete="off"/><button id="type-submit" onclick="submitType()">LOCK IN</button></div><div class="type-hint" id="type-hint"></div></div>
 <div id="click-inst">👆 TAP / CLICK THE CORRECT AREA ON THE SCENE ABOVE</div>
+<div id="recall-area" style="display:none;"></div>
 </div></div></div>
 
 <div id="result">
