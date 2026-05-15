@@ -1,5 +1,6 @@
-import { getCurrentRun, LADDER_REWARDS } from '../core/gameEngine.js';
+import { getCurrentRun, LADDER_REWARDS, submitAnswer as engineSubmitAnswer } from '../core/gameEngine.js';
 import { gradeShortAnswer, gradeMultiSelect } from '../core/answerGrading.js';
+import { gradeRecallAnswer } from '../core/recallGrader.js';
 import { renderAirwayManagementScene, stopAirwayManagementScene } from './airwayManagementScene.js';
 import { renderBasicPharmacologicPrinciplesScene, stopBasicPharmacologicPrinciplesScene } from './basicPharmacologicPrinciplesScene.js';
 import { renderCardiacPhysiologyScene, stopCardiacPhysiologyScene } from './cardiacPhysiologyScene.js';
@@ -1144,9 +1145,215 @@ function _toggleSpeechRecognition(textarea, btn) {
   _speechRecognition.start();
 }
 
-// Stub for submit — wired in Fix 5
-window._handleRecallSubmit = window._handleRecallSubmit || function(q) {
-  console.log('[RECALL] Submit stub — grading not wired yet');
+window._handleRecallSubmit = async function(q) {
+  const input = document.getElementById('recall-input');
+  const submitBtn = document.getElementById('recall-submit-btn');
+  const micBtn = document.getElementById('recall-mic-btn');
+  const gradingStatus = document.getElementById('recall-grading-status');
+
+  if (!input || input.value.length < 20) return;
+
+  const userAnswer = input.value;
+
+  // Stop speech recognition if active
+  if (_speechRecognition) {
+    _speechRecognition.stop();
+    _speechRecognition = null;
+    if (micBtn) { micBtn.classList.remove('recording'); micBtn.textContent = '🎤 SPEAK'; }
+  }
+
+  // Disable inputs
+  input.disabled = true;
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'GRADING...'; }
+  if (micBtn) micBtn.disabled = true;
+
+  // Pause timer
+  stopTimer();
+
+  // Show grading status
+  if (gradingStatus) gradingStatus.classList.add('on');
+
+  // Long-wait message
+  const longWaitTimer = setTimeout(() => {
+    if (gradingStatus) gradingStatus.textContent = 'DR. VOSS IS REVIEWING... SOMETIMES HE TAKES HIS TIME. STAND BY.';
+  }, 8000);
+
+  try {
+    const result = await gradeRecallAnswer(q, userAnswer);
+
+    clearTimeout(longWaitTimer);
+    if (gradingStatus) gradingStatus.classList.remove('on');
+
+    // Store result for feedback view
+    window._lastRecallResult = { question: q, userAnswer, result };
+
+    // Show feedback view (Fix 6)
+    _showRecallFeedback(q, userAnswer, result);
+
+    // Determine pass/fail for streak/lives
+    const passed = result.score >= (q.rubric?.minimum_passing_score || 60);
+
+    // Submit to game engine
+    if (window.submitAnswer) window.submitAnswer(passed);
+
+    // Apply partial credit override
+    const run = getCurrentRun();
+    if (run && result.score !== undefined) {
+      const ladderIdx = Math.min(Math.max(run.index - 1, 0), LADDER_REWARDS.length - 1);
+      const basePts = LADDER_REWARDS[ladderIdx];
+      const partialPts = Math.floor(basePts * (result.score / 100));
+      const fullPts = basePts * (run._lastMult || 1) * (run.mode === 'code-blue' ? 2 : 1);
+      const diff = partialPts - fullPts;
+      if (diff !== 0 && passed) {
+        run.score += diff;
+      }
+    }
+  } catch (err) {
+    clearTimeout(longWaitTimer);
+    console.error('[RECALL] Grading failed:', err);
+    if (gradingStatus) gradingStatus.classList.remove('on');
+
+    _showRecallFeedback(q, userAnswer, {
+      score: 70, passed: true,
+      captured: [], missed: [], errors: [],
+      summary: 'Grading failed. Counted as correct — keep going.',
+      voss_quip: 'Technical difficulties. Move on.',
+      _fallback: true,
+    });
+
+    if (window.submitAnswer) window.submitAnswer(true);
+  }
+};
+
+// ─── RECALL FEEDBACK VIEW ────────────────────────────────────────────────────
+
+function _showRecallFeedback(q, userAnswer, result) {
+  const recallArea = document.getElementById('recall-area');
+  if (!recallArea) return;
+
+  const score = result.score || 0;
+  let scoreColor = 'var(--red,#ff2e63)';
+  let scoreLabel = 'DR. VOSS IS DISAPPOINTED';
+  if (score >= 80)      { scoreColor = 'var(--green,#00ffa3)'; scoreLabel = 'DR. VOSS APPROVES'; }
+  else if (score >= 60) { scoreColor = 'var(--green-2,#00c485)'; scoreLabel = 'ADEQUATE'; }
+  else if (score >= 40) { scoreColor = 'var(--amber,#ffb000)'; scoreLabel = 'DR. VOSS WILL ACCEPT THIS'; }
+
+  const capturedHTML = (result.captured || []).map(c => {
+    const kp = q.rubric?.key_points?.find(k => k.id === c.point_id);
+    return `<div class="recall-fb-point recall-fb-captured" style="color:var(--green-2,#00c485);">
+      ${kp?.description || c.point_id}
+    </div>`;
+  }).join('');
+
+  const missedHTML = (result.missed || []).map(m => {
+    return `<div class="recall-fb-point recall-fb-missed" style="color:var(--amber,#ffb000);">
+      ${m.description || m.point_id}
+    </div>`;
+  }).join('');
+
+  const errorsHTML = (result.errors || []).map(e => {
+    return `<div class="recall-fb-error">
+      <div class="recall-fb-error-stmt">You said: "${e.statement}"</div>
+      <div class="recall-fb-error-fix">Correction: ${e.correction}</div>
+    </div>`;
+  }).join('');
+
+  recallArea.innerHTML = `
+    <div class="recall-feedback">
+      <div class="recall-fb-header" style="color:${scoreColor};">${scoreLabel}</div>
+      <div class="recall-fb-score" style="color:${scoreColor};text-shadow:0 0 30px ${scoreColor}40;">${score}</div>
+
+      ${result.voss_quip ? `<div class="recall-fb-quip">"${result.voss_quip}"<br><span style="font-size:.6rem;color:var(--muted);font-style:normal;">— DR. VOSS</span></div>` : ''}
+
+      ${result.summary ? `<div style="font-size:.75rem;color:var(--txt-2);line-height:1.5;margin:.5rem 0;">${result.summary}</div>` : ''}
+
+      ${capturedHTML ? `
+        <div class="recall-fb-section">
+          <div class="recall-fb-section-title" style="color:var(--green,#00ffa3);">✓ YOU CAPTURED</div>
+          ${capturedHTML}
+        </div>
+      ` : ''}
+
+      ${missedHTML ? `
+        <div class="recall-fb-section">
+          <div class="recall-fb-section-title" style="color:var(--amber,#ffb000);">✗ YOU MISSED</div>
+          ${missedHTML}
+        </div>
+      ` : ''}
+
+      ${errorsHTML ? `
+        <div class="recall-fb-section">
+          <div class="recall-fb-section-title" style="color:var(--red,#ff2e63);">⚠ FACTUAL ERRORS</div>
+          ${errorsHTML}
+        </div>
+      ` : ''}
+
+      <button class="recall-fb-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">YOUR ANSWER ▾</button>
+      <div class="recall-fb-original">${_escapeHTML(userAnswer)}</div>
+
+      <div class="recall-fb-buttons">
+        <button class="recall-submit" onclick="window._showRecallReview()" style="border-color:var(--muted);color:var(--muted);">REVIEW RUBRIC</button>
+        <button class="recall-submit" onclick="nextQ()">NEXT QUESTION →</button>
+      </div>
+    </div>
+  `;
+
+  // Stagger animation for child sections
+  const sections = recallArea.querySelectorAll('.recall-fb-section, .recall-fb-quip, .recall-fb-buttons');
+  sections.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    el.style.transition = `opacity 200ms var(--ease-out) ${(i + 1) * 60}ms, transform 200ms var(--ease-out) ${(i + 1) * 60}ms`;
+    requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
+  });
+
+  // Voss reacts
+  if (typeof window.vossSay === 'function') {
+    if (score >= 80) window.vossSay('ON_CORRECT');
+    else if (score >= 60) window.vossSay('ON_CORRECT');
+    else window.vossSay('ON_WRONG');
+  }
+
+  // Sound
+  if (score >= 60 && typeof window.playCorrect === 'function') window.playCorrect();
+  else if (score < 60 && typeof window.playWrong === 'function') window.playWrong();
+}
+
+function _escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+window._showRecallReview = function() {
+  const data = window._lastRecallResult;
+  if (!data) return;
+
+  const q = data.question;
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:100001;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.9);pointer-events:auto;';
+
+  const card = document.createElement('div');
+  card.style.cssText = 'background:var(--card,#0e1a2e);border:2px solid var(--line-2,#243757);border-radius:12px;padding:1.5rem;max-width:500px;width:92%;max-height:80vh;overflow-y:auto;';
+
+  const kpHTML = (q.rubric?.key_points || []).map(kp => {
+    const captured = data.result.captured?.some(c => c.point_id === kp.id);
+    const color = captured ? 'var(--green,#00ffa3)' : 'var(--amber,#ffb000)';
+    const icon = captured ? '✓' : '✗';
+    return `<div style="font-size:.75rem;color:${color};padding:.25rem 0;line-height:1.5;">${icon} [w:${kp.weight}] ${kp.description}</div>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div style="font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--green,#00ffa3);letter-spacing:.1em;margin-bottom:.5rem;">RUBRIC REVIEW</div>
+    <div style="font-family:var(--fb);font-size:.8rem;color:var(--txt);line-height:1.6;margin-bottom:1rem;">${q.q}</div>
+    <div style="font-family:var(--fm);font-size:.5rem;color:var(--muted);letter-spacing:.15em;margin-bottom:.4rem;">KEY POINTS</div>
+    ${kpHTML}
+    <button onclick="this.closest('div[style*=fixed]').remove()" style="margin-top:1rem;width:100%;background:transparent;border:2px solid var(--green,#00ffa3);color:var(--green,#00ffa3);font-family:var(--fd);font-size:.8rem;font-weight:700;padding:.6rem;cursor:pointer;border-radius:4px;letter-spacing:.1em;">CLOSE</button>
+  `;
+
+  overlay.appendChild(card);
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  document.body.appendChild(overlay);
 };
 
 // ─── FEEDBACK OVERLAY ─────────────────────────────────────────────────────────
