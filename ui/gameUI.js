@@ -13,7 +13,7 @@ import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
 import { SCENE_REGISTRY, runScene, stopActiveScene } from './sceneRegistry.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
-import { loadState } from '../core/state.js';
+import { loadState, updateRecallStats } from '../core/state.js';
 
 /**
  * Returns a safe display string for the correct answer of any question type,
@@ -1187,7 +1187,10 @@ window._handleRecallSubmit = async function(q) {
     // Store result for feedback view
     window._lastRecallResult = { question: q, userAnswer, result };
 
-    // Show feedback view (Fix 6)
+    // Save recall stats
+    updateRecallStats(q.id, result);
+
+    // Show feedback view
     _showRecallFeedback(q, userAnswer, result);
 
     // Determine pass/fail for streak/lives

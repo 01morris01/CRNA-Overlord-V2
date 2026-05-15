@@ -29,6 +29,8 @@ const DEFAULT_STATE = {
   badges: [],
   // Per-topic stats: { nodeId: { plays, bestScore, bestPct, lastSeen } }
   topicStats: {},
+  // Free recall stats: { [questionId]: { attempts, bestScore, lastAttempt, capturedPoints, missedCounts, persistentlyMissed } }
+  recallStats: {},
 };
 
 function safeParse(json) {
@@ -76,6 +78,45 @@ export function saveState(state) {
   } catch (e) {
     console.warn('Failed to save state', e);
   }
+}
+
+export function updateRecallStats(questionId, result) {
+  const state = loadState();
+  if (!state.recallStats) state.recallStats = {};
+
+  const prev = state.recallStats[questionId] || {
+    attempts: 0,
+    bestScore: 0,
+    lastAttempt: 0,
+    capturedPoints: [],
+    missedCounts: {},
+    persistentlyMissed: [],
+  };
+
+  prev.attempts += 1;
+  prev.bestScore = Math.max(prev.bestScore, result.score || 0);
+  prev.lastAttempt = Date.now();
+
+  const captured = (result.captured || []).map(c => c.point_id);
+  prev.capturedPoints = [...new Set([...prev.capturedPoints, ...captured])];
+
+  const missed = (result.missed || []).map(m => m.point_id);
+  for (const pid of missed) {
+    prev.missedCounts[pid] = (prev.missedCounts[pid] || 0) + 1;
+  }
+  // Reset miss count for points that were captured this time
+  for (const pid of captured) {
+    if (prev.missedCounts[pid]) prev.missedCounts[pid] = 0;
+  }
+
+  prev.persistentlyMissed = Object.entries(prev.missedCounts)
+    .filter(([, count]) => count >= 3)
+    .map(([pid]) => pid);
+
+  state.recallStats[questionId] = prev;
+  saveState(state);
+
+  return prev;
 }
 
 export function clearState() {
