@@ -1603,6 +1603,25 @@ const COURSES = [
     ]
   },
   {
+    id:'regional-anesthesia',
+    title:'Regional Anesthesia',
+    topics:[
+      {id:'ra-wk-1',title:'Functional Regional Anesthesia Anatomy',chapters:'Anatomy',order:1,type:'topic'},
+      {id:'ra-wk-2',title:'Local Anesthetic Pharmacology',chapters:'LA Pharm',order:2,type:'topic'},
+      {id:'ra-wk-3',title:'Regional Anesthesia Equipment',chapters:'Equipment',order:3,type:'topic'},
+      {id:'ra-wk-4',title:'Interscalene Brachial Plexus Block',chapters:'Interscalene',order:4,type:'topic'},
+      {id:'ra-wk-5',title:'Supraclavicular and Infraclavicular',chapters:'Supra/Infra',order:5,type:'topic'},
+      {id:'ra-wk-6',title:'Phrenic Sparing Alternatives',chapters:'Phrenic Sparing',order:6,type:'topic'},
+      {id:'ra-wk-7',title:'Neuraxial Anesthesia',chapters:'Neuraxial',order:7,type:'topic'},
+      {id:'ra-wk-8',title:'Fascia Iliaca and Hip Region Blocks',chapters:'Hip Blocks',order:8,type:'topic'},
+      {id:'ra-wk-9',title:'Femoral Nerve Block',chapters:'Femoral',order:9,type:'topic'},
+      {id:'ra-wk-10',title:'Adductor Canal, Femoral Triangle, LFCN',chapters:'Adductor Canal',order:10,type:'topic'},
+      {id:'ra-wk-11',title:'Sciatic and Popliteal Blocks',chapters:'Sciatic',order:11,type:'topic'},
+      {id:'ra-wk-12',title:'Ankle Block',chapters:'Ankle',order:12,type:'topic'},
+      {id:'ra-wk-13',title:'Truncal Blocks (TAP, ESP, PVB, Serratus)',chapters:'Truncal',order:13,type:'topic'},
+    ]
+  },
+  {
     id:'basics-anesthesia',
     title:'Basics of Anesthesia',
     topics:[
@@ -2235,6 +2254,7 @@ function showCourseSelector(){
     'chem-phys-anesthesia':'Gas laws applied. Vaporizers, fluid dynamics, electricity, radiation. Boards relevant physics.',
     'adv-health-assess':'NAS 520 head to toe. Clinical interview, physical exam, system by system assessment with anesthesia cues.',
     'adv-pharmacology-1':'Stoelting foundations. Receptors, autonomics, cardiac drugs, coagulation, endocrine, neuro, and herbals. 13 weeks of pharmacology.',
+    'regional-anesthesia':'Plexuses, blocks, and anatomy. Brachial, lumbar, sacral, neuraxial, and truncal. Hands on regional from roots to branches.',
   };
   const COURSE_PALETTES={
     'adv-phys-path-1':['#ff3300','#660000'],
@@ -2244,6 +2264,7 @@ function showCourseSelector(){
     'chem-phys-anesthesia':['#a78bfa','#2a0f5c'],
     'adv-health-assess':['#ffb000','#3a2400'],
     'adv-pharmacology-1':['#ff6b9d','#3a0020'],
+    'regional-anesthesia':['#00e5ff','#002a33'],
   };
 
   courseContainer.innerHTML='';

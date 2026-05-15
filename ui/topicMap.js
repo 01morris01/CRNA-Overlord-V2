@@ -12,6 +12,7 @@ const COURSE_THEMES = {
   'chem-phys-anesthesia':     { name: 'GAS LAW LAB',       accent: '#a78bfa', bg: '#0a041a', pattern: 'molecule' },
   'adv-health-assess':        { name: 'CADAVER LAB',       accent: '#ffb000', bg: '#1a0e00', pattern: 'anatomy' },
   'adv-pharmacology-1':       { name: 'PHARM LAB',         accent: '#ff6b9d', bg: '#1a0010', pattern: 'molecule' },
+  'regional-anesthesia':      { name: 'NERVE MAP',         accent: '#00e5ff', bg: '#001a1f', pattern: 'circuit' },
 };
 
 function _svgPattern(pattern, accent) {

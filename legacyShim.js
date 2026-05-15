@@ -182,6 +182,21 @@ const TOPIC_TO_NODE = {
   'ap1-wk-11': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-11' },
   'ap1-wk-12': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-12' },
   'ap1-wk-13': { courseId: 'adv-pharmacology-1', nodeId: 'ap1-wk-13' },
+
+  // Regional Anesthesia
+  'ra-wk-1':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-1'  },
+  'ra-wk-2':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-2'  },
+  'ra-wk-3':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-3'  },
+  'ra-wk-4':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-4'  },
+  'ra-wk-5':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-5'  },
+  'ra-wk-6':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-6'  },
+  'ra-wk-7':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-7'  },
+  'ra-wk-8':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-8'  },
+  'ra-wk-9':  { courseId: 'regional-anesthesia', nodeId: 'ra-wk-9'  },
+  'ra-wk-10': { courseId: 'regional-anesthesia', nodeId: 'ra-wk-10' },
+  'ra-wk-11': { courseId: 'regional-anesthesia', nodeId: 'ra-wk-11' },
+  'ra-wk-12': { courseId: 'regional-anesthesia', nodeId: 'ra-wk-12' },
+  'ra-wk-13': { courseId: 'regional-anesthesia', nodeId: 'ra-wk-13' },
 };
 
 // Pending mapping stored by selectTopic, consumed by startStudySession.

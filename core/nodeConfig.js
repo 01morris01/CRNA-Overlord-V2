@@ -93,6 +93,21 @@ import { AP1_WK11_QUESTIONS, AP1_WK11_METADATA } from '../data/questions/ap1-wk1
 import { AP1_WK12_QUESTIONS, AP1_WK12_METADATA } from '../data/questions/ap1-wk12.js';
 import { AP1_WK13_QUESTIONS, AP1_WK13_METADATA } from '../data/questions/ap1-wk13.js';
 
+// ── Regional Anesthesia ────────────────────────────────────────────────────
+import { RA_WK1_QUESTIONS,  RA_WK1_METADATA  } from '../data/questions/ra-wk1-functional-anatomy.js';
+import { RA_WK2_QUESTIONS,  RA_WK2_METADATA  } from '../data/questions/ra-wk2.js';
+import { RA_WK3_QUESTIONS,  RA_WK3_METADATA  } from '../data/questions/ra-wk3.js';
+import { RA_WK4_QUESTIONS,  RA_WK4_METADATA  } from '../data/questions/ra-wk4.js';
+import { RA_WK5_QUESTIONS,  RA_WK5_METADATA  } from '../data/questions/ra-wk5.js';
+import { RA_WK6_QUESTIONS,  RA_WK6_METADATA  } from '../data/questions/ra-wk6.js';
+import { RA_WK7_QUESTIONS,  RA_WK7_METADATA  } from '../data/questions/ra-wk7.js';
+import { RA_WK8_QUESTIONS,  RA_WK8_METADATA  } from '../data/questions/ra-wk8.js';
+import { RA_WK9_QUESTIONS,  RA_WK9_METADATA  } from '../data/questions/ra-wk9.js';
+import { RA_WK10_QUESTIONS, RA_WK10_METADATA } from '../data/questions/ra-wk10.js';
+import { RA_WK11_QUESTIONS, RA_WK11_METADATA } from '../data/questions/ra-wk11.js';
+import { RA_WK12_QUESTIONS, RA_WK12_METADATA } from '../data/questions/ra-wk12.js';
+import { RA_WK13_QUESTIONS, RA_WK13_METADATA } from '../data/questions/ra-wk13.js';
+
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
 import { WEEK_3_QUESTIONS, WEEK_3_METADATA } from '../data/questions/week-3.js';
@@ -882,6 +897,22 @@ export const NODE_CONFIG = {
   "ap1-wk-12": { courseId: "adv-pharmacology-1", title: "Drugs of Abuse, Cannabinoids, Chemotherapy", chapterLabel: "Stoelting Ch 42,43", badgeLabel: "ABUSE / CHEMO", icon: "☣️", questions: AP1_WK12_QUESTIONS, questionsMeta: AP1_WK12_METADATA },
   "ap1-wk-13": { courseId: "adv-pharmacology-1", title: "Dietary Supplements and Herbal Medications", chapterLabel: "Stoelting Ch 36", badgeLabel: "HERBALS", icon: "🌿", questions: AP1_WK13_QUESTIONS, questionsMeta: AP1_WK13_METADATA },
 
+  // ── Regional Anesthesia ────────────────────────────────────────────────────
+
+  "ra-wk-1":  { courseId: "regional-anesthesia", title: "Functional Regional Anesthesia Anatomy", chapterLabel: "Anatomy", badgeLabel: "ANATOMY", icon: "🦴", questions: RA_WK1_QUESTIONS, questionsMeta: RA_WK1_METADATA },
+  "ra-wk-2":  { courseId: "regional-anesthesia", title: "Local Anesthetic Pharmacology", chapterLabel: "LA Pharm", badgeLabel: "LA PHARM", icon: "💉", questions: RA_WK2_QUESTIONS, questionsMeta: RA_WK2_METADATA },
+  "ra-wk-3":  { courseId: "regional-anesthesia", title: "Regional Anesthesia Equipment", chapterLabel: "Equipment", badgeLabel: "EQUIPMENT", icon: "🔧", questions: RA_WK3_QUESTIONS, questionsMeta: RA_WK3_METADATA },
+  "ra-wk-4":  { courseId: "regional-anesthesia", title: "Interscalene Brachial Plexus Block", chapterLabel: "Interscalene", badgeLabel: "INTERSCALENE", icon: "💪", questions: RA_WK4_QUESTIONS, questionsMeta: RA_WK4_METADATA },
+  "ra-wk-5":  { courseId: "regional-anesthesia", title: "Supraclavicular and Infraclavicular", chapterLabel: "Supra/Infra", badgeLabel: "SUPRA/INFRA", icon: "🫁", questions: RA_WK5_QUESTIONS, questionsMeta: RA_WK5_METADATA },
+  "ra-wk-6":  { courseId: "regional-anesthesia", title: "Phrenic Sparing Alternatives", chapterLabel: "Phrenic Sparing", badgeLabel: "PHRENIC SPARE", icon: "🌬️", questions: RA_WK6_QUESTIONS, questionsMeta: RA_WK6_METADATA },
+  "ra-wk-7":  { courseId: "regional-anesthesia", title: "Neuraxial Anesthesia", chapterLabel: "Neuraxial", badgeLabel: "NEURAXIAL", icon: "🧠", questions: RA_WK7_QUESTIONS, questionsMeta: RA_WK7_METADATA },
+  "ra-wk-8":  { courseId: "regional-anesthesia", title: "Fascia Iliaca and Hip Region Blocks", chapterLabel: "Hip Blocks", badgeLabel: "HIP BLOCKS", icon: "🦵", questions: RA_WK8_QUESTIONS, questionsMeta: RA_WK8_METADATA },
+  "ra-wk-9":  { courseId: "regional-anesthesia", title: "Femoral Nerve Block", chapterLabel: "Femoral", badgeLabel: "FEMORAL", icon: "🩸", questions: RA_WK9_QUESTIONS, questionsMeta: RA_WK9_METADATA },
+  "ra-wk-10": { courseId: "regional-anesthesia", title: "Adductor Canal, Femoral Triangle, LFCN", chapterLabel: "Adductor Canal", badgeLabel: "ADDUCTOR", icon: "🎯", questions: RA_WK10_QUESTIONS, questionsMeta: RA_WK10_METADATA },
+  "ra-wk-11": { courseId: "regional-anesthesia", title: "Sciatic and Popliteal Blocks", chapterLabel: "Sciatic", badgeLabel: "SCIATIC", icon: "⚡", questions: RA_WK11_QUESTIONS, questionsMeta: RA_WK11_METADATA },
+  "ra-wk-12": { courseId: "regional-anesthesia", title: "Ankle Block", chapterLabel: "Ankle", badgeLabel: "ANKLE", icon: "🦶", questions: RA_WK12_QUESTIONS, questionsMeta: RA_WK12_METADATA },
+  "ra-wk-13": { courseId: "regional-anesthesia", title: "Truncal Blocks (TAP, ESP, PVB, Serratus)", chapterLabel: "Truncal", badgeLabel: "TRUNCAL", icon: "🫀", questions: RA_WK13_QUESTIONS, questionsMeta: RA_WK13_METADATA },
+
   // ── Add future nodes here ──────────────────────────────────────────────────
 
 };
@@ -913,6 +944,7 @@ const COURSE_LABELS = {
   'adv-phys-path-2':          'Pathophysiology II',
   'tech-advances-anesthesia': 'Tech Advances',
   'adv-pharmacology-1':       'Pharmacology I',
+  'regional-anesthesia':      'Regional Anesthesia',
   'chem-phys-anesthesia':     'Chemistry & Physics',
   'adv-health-assessment':    'Health Assessment',
 };
@@ -923,6 +955,7 @@ const COURSE_ORDER = [
   'adv-phys-path-2',
   'tech-advances-anesthesia',
   'adv-pharmacology-1',
+  'regional-anesthesia',
   'adv-health-assessment',
   'chem-phys-anesthesia',
 ];
