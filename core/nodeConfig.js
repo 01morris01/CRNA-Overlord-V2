@@ -108,6 +108,9 @@ import { RA_WK11_QUESTIONS, RA_WK11_METADATA } from '../data/questions/ra-wk11.j
 import { RA_WK12_QUESTIONS, RA_WK12_METADATA } from '../data/questions/ra-wk12.js';
 import { RA_WK13_QUESTIONS, RA_WK13_METADATA } from '../data/questions/ra-wk13.js';
 
+// ── Free Recall Questions ─────────────────────────────────────────────────────
+import { RECALL_QUESTIONS_BASICS } from '../data/recall-questions.js';
+
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
 import { WEEK_3_QUESTIONS, WEEK_3_METADATA } from '../data/questions/week-3.js';
@@ -916,6 +919,14 @@ export const NODE_CONFIG = {
   // ── Add future nodes here ──────────────────────────────────────────────────
 
 };
+
+// ─── Merge recall questions into their target nodes ──────────────────────────
+for (const rq of RECALL_QUESTIONS_BASICS) {
+  const targetNode = NODE_CONFIG[rq.nodeId];
+  if (targetNode) {
+    targetNode.questions = [...targetNode.questions, rq];
+  }
+}
 
 // ─── Accessors ────────────────────────────────────────────────────────────────
 
