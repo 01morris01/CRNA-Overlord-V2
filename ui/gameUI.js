@@ -1261,7 +1261,7 @@ function _showRecallFeedback(q, userAnswer, result) {
   recallArea.innerHTML = `
     <div class="recall-feedback">
       <div class="recall-fb-header" style="color:${scoreColor};">${scoreLabel}</div>
-      <div class="recall-fb-score" style="color:${scoreColor};text-shadow:0 0 30px ${scoreColor}40;">${score}</div>
+      <div class="recall-fb-score ${score >= 80 ? 'recall-fb-score-glow' : ''}" style="color:${scoreColor};text-shadow:0 0 30px ${scoreColor}40;">${score}</div>
 
       ${result.voss_quip ? `<div class="recall-fb-quip">"${result.voss_quip}"<br><span style="font-size:.6rem;color:var(--muted);font-style:normal;">— DR. VOSS</span></div>` : ''}
 

@@ -206,6 +206,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .recall-fb-original{display:none;font-family:var(--fb);font-size:.7rem;color:var(--muted,#5a6f8a);line-height:1.6;padding:.6rem;background:var(--abyss,#070d1a);border-radius:4px;margin-top:.4rem;white-space:pre-wrap;}
 .recall-fb-buttons{display:flex;gap:.5rem;margin-top:1rem;}
 .recall-fb-buttons button{flex:1;}
+.recall-fb-score-glow{animation:score-glow 2s ease-in-out infinite;}
+@keyframes score-glow{0%,100%{filter:drop-shadow(0 0 8px currentColor);}50%{filter:drop-shadow(0 0 24px currentColor) drop-shadow(0 0 40px currentColor);}}
 
 /* MULTI-SELECT STYLES */
 .multi-area{display:flex;flex-direction:column;gap:.5rem;}
