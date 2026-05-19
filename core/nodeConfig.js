@@ -110,6 +110,7 @@ import { RA_WK13_QUESTIONS, RA_WK13_METADATA } from '../data/questions/ra-wk13.j
 
 // ── Free Recall Questions ─────────────────────────────────────────────────────
 import { RECALL_QUESTIONS_BASICS } from '../data/recall-questions.js';
+import { RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 } from '../data/recall-questions-adv-pharmacology-1.js';
 
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
@@ -922,6 +923,12 @@ export const NODE_CONFIG = {
 
 // ─── Merge recall questions into their target nodes ──────────────────────────
 for (const rq of RECALL_QUESTIONS_BASICS) {
+  const targetNode = NODE_CONFIG[rq.nodeId];
+  if (targetNode) {
+    targetNode.questions = [...targetNode.questions, rq];
+  }
+}
+for (const rq of RECALL_QUESTIONS_ADV_PHARMACOLOGY_1) {
   const targetNode = NODE_CONFIG[rq.nodeId];
   if (targetNode) {
     targetNode.questions = [...targetNode.questions, rq];
