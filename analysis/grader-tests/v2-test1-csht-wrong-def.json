@@ -1,0 +1,48 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "The central compartment includes the brain and other VRG organs"
+    }
+  ],
+  "missed": [
+    {
+      "point_id": "kp2",
+      "description": "Single-bolus awakening is due to redistribution from brain to peripheral tissues, not hepatic metabolism"
+    },
+    {
+      "point_id": "kp3",
+      "description": "Correct definition of context-sensitive half-time as time for plasma concentration to fall 50% after stopping an infusion"
+    },
+    {
+      "point_id": "kp4",
+      "description": "Peripheral saturation eliminates redistribution gradient after prolonged infusion, making recovery depend on metabolism"
+    },
+    {
+      "point_id": "kp5",
+      "description": "First-pass pulmonary uptake buffers peak arterial concentrations of lipophilic drugs"
+    }
+  ],
+  "errors": [
+    {
+      "statement": "The bolus patient wakes up fast because propofol is rapidly metabolized by the liver",
+      "correction": "Rapid awakening from a single bolus is due to REDISTRIBUTION from the highly perfused brain to muscle and fat. Hepatic metabolism, while high for propofol, is far too slow to drop brain concentration in 8 minutes."
+    },
+    {
+      "statement": "After 4 hours the liver enzymes are overwhelmed and cannot keep up",
+      "correction": "Hepatic enzymes are not saturated by propofol at clinical infusion rates. Prolonged emergence occurs because peripheral compartments (muscle, fat) saturate, abolishing the redistribution gradient \u2014 so recovery now depends on the slower elimination process."
+    },
+    {
+      "statement": "Context-sensitive half-time means the drug half-life changes depending on how long you give it",
+      "correction": "CSHT is the time required for plasma concentration to fall by 50% AFTER STOPPING an infusion of a given duration. It is not a changing half-life; it reflects the combined effect of redistribution and elimination as a function of infusion length."
+    },
+    {
+      "statement": "Elderly patients might need higher doses because they have more body fat",
+      "correction": "Elderly patients require LOWER doses. They have a smaller effective central compartment, reduced cardiac output, and decreased clearance, producing higher peak plasma concentrations from the same bolus."
+    }
+  ],
+  "score": 9,
+  "passed": false,
+  "summary": "Safety override applied: the student recommended HIGHER propofol doses in the elderly, which would cause profound hypotension and potentially cardiovascular collapse \u2014 this is a patient-killing error. The student also inverted the core mechanism of the question, attributing bolus awakening to metabolism instead of redistribution, and mis-defined context-sensitive half-time. Only the central compartment composition was correctly identified.",
+  "voss_quip": "Give Grandma a bigger propofol dose and you'll be explaining the arrest to her family. Redistribution, not metabolism \u2014 learn it."
+}

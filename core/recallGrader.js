@@ -1,5 +1,5 @@
 const GRADE_ENDPOINT = '/api/grade-recall';
-const TIMEOUT_MS = 15000;
+const TIMEOUT_MS = 30000;
 
 export async function gradeRecallAnswer(question, userAnswer) {
   const rubric = question.rubric;

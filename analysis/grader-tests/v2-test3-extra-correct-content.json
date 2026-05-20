@@ -1,0 +1,34 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "central compartment \u2014 vessel-rich group including brain, heart, kidneys, liver, ~75% of CO, ~10% body mass"
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "wakes in 8 minutes due to redistribution from brain to muscle/fat; hepatic metabolism too slow"
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "CSHT defined as time for plasma concentration to fall 50% after stopping infusion of a given duration"
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "peripheral compartments saturate, eliminating redistribution gradient; recovery depends on slower hepatic metabolism"
+    },
+    {
+      "point_id": "kp5",
+      "evidence": "fentanyl undergoes 65-75% first-pass pulmonary uptake, protecting brain from spikes"
+    },
+    {
+      "point_id": "kp6",
+      "evidence": "72-year-old has smaller effective central compartment, higher peaks, requires dose reduction"
+    }
+  ],
+  "missed": [],
+  "errors": [],
+  "score": 100,
+  "passed": true,
+  "summary": "Complete and accurate explanation of the three-compartment model, with correct mechanism for bolus redistribution versus prolonged-infusion CSHT prolongation. The student also correctly applied pulmonary first-pass uptake and elderly dosing. Nothing to fix here.",
+  "voss_quip": "Textbook recall, mechanism intact, no dose errors. Now do it again at 3 a.m. with a hypotensive patient."
+}

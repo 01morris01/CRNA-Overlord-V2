@@ -1,0 +1,34 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "vessel-rich group gets 75% of CO despite being 10% of body weight"
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "drug moves out of brain into muscle and fat; hepatic metabolism too slow to explain 8-min awakening"
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "time for plasma level to fall by half after stopping an infusion of a given length gets longer the longer the infusion ran"
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "after 4 hours muscle and fat are filled, brain level only drops via slow hepatic metabolism"
+    },
+    {
+      "point_id": "kp5",
+      "evidence": "lungs buffer peak arterial concentration; fentanyl 65-75% first-pass pulmonary uptake"
+    },
+    {
+      "point_id": "kp6",
+      "evidence": "72-year-old has smaller effective central compartment; higher peak from standard bolus; reduce the dose"
+    }
+  ],
+  "missed": [],
+  "errors": [],
+  "score": 100,
+  "passed": true,
+  "summary": "Complete and mechanistically accurate. The student correctly distinguished redistribution-driven awakening from metabolism-driven emergence, explained the context-sensitive half-time concept in their own words, and addressed pulmonary first-pass uptake and geriatric dose reduction. Nothing to fix.",
+  "voss_quip": "Fine. You actually understand why the bolus patient wakes up \u2014 most of your classmates blame the liver."
+}

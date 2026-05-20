@@ -1176,7 +1176,7 @@ window._handleRecallSubmit = async function(q) {
   // Long-wait message
   const longWaitTimer = setTimeout(() => {
     if (gradingStatus) gradingStatus.textContent = 'DR. VOSS IS REVIEWING... SOMETIMES HE TAKES HIS TIME. STAND BY.';
-  }, 8000);
+  }, 15000);
 
   try {
     const result = await gradeRecallAnswer(q, userAnswer);
