@@ -1,0 +1,30 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "Lidocaine has a high extraction ratio meaning its clearance depends on hepatic blood flow. In cardiogenic shock, blood flow to the liver is reduced so the drug accumulates regardless of enzyme function."
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "For renal clearance, drugs are filtered at the glomerulus, some are actively secreted, and some are reabsorbed."
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "The creatinine is misleading because she has low muscle mass producing less creatinine. A normal level does not mean normal kidney function in the elderly. You need Cockcroft-Gault equations."
+    }
+  ],
+  "missed": [
+    {
+      "point_id": "kp4",
+      "description": "Ion trapping mechanisms and clinical applications"
+    },
+    {
+      "point_id": "kp5",
+      "description": "Glutathione conjugation and acetaminophen toxicity"
+    }
+  ],
+  "errors": [],
+  "score": 80,
+  "summary": "Solid understanding of hepatic extraction ratios and age-related creatinine changes with appropriate clinical application. Missing discussion of ion trapping and phase II metabolism concepts.",
+  "voss_quip": "Good basics, but you're only scratching the surface of pharmacokinetics."
+}

@@ -1,0 +1,33 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "Phase I reactions are functionalization reactions \u2014 oxidation, reduction, and hydrolysis \u2014 that expose or introduce functional groups on the drug molecule. These prepare it for Phase II but can also produce active or toxic metabolites."
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "Phase II reactions are conjugation reactions, most commonly glucuronidation by UDP-glucuronosyltransferase, attaching polar groups to make highly water-soluble, usually inactive metabolites for renal or biliary excretion."
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "CYP3A4 is the most abundant hepatic CYP isoenzyme, responsible for roughly 50% of all drug metabolism. It handles fentanyl, sufentanil, alfentanil, and midazolam. Ketoconazole and grapefruit juice inhibit CYP3A4; rifampin induces it."
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "Remifentanil contains a methyl ester linkage hydrolyzed by nonspecific tissue and plasma esterases, NOT pseudocholinesterase and NOT CYP450. This organ-independent metabolism gives a CSHT of 3-5 minutes regardless of infusion duration or hepatic/renal function."
+    },
+    {
+      "point_id": "kp5",
+      "evidence": "Halothane hepatitis results from reductive anaerobic Phase I metabolism producing reactive trifluoroacetyl chloride intermediates triggering immune-mediated hepatocyte destruction."
+    },
+    {
+      "point_id": "kp6",
+      "evidence": "Codeine is a prodrug requiring CYP2D6 O-demethylation to morphine \u2014 poor metabolizers get no analgesia, ultrarapid metabolizers risk dangerous morphine levels."
+    }
+  ],
+  "missed": [],
+  "errors": [],
+  "score": 100,
+  "summary": "Perfect recall of all key pharmacokinetic concepts with accurate details on drug metabolism pathways. Your understanding of remifentanil's unique esterase-based metabolism is spot-on.",
+  "voss_quip": "Finally, someone who knows esterases aren't pseudocholinesterase. Textbook perfect."
+}

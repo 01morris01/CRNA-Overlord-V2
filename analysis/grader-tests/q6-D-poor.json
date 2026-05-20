@@ -1,0 +1,46 @@
+{
+  "captured": [],
+  "missed": [
+    {
+      "point_id": "kp1",
+      "description": "Phase I reactions (oxidation, reduction, hydrolysis) expose or introduce functional groups, preparing the molecule for conjugation; these may produce active or toxic metabolites"
+    },
+    {
+      "point_id": "kp2",
+      "description": "Phase II reactions are conjugation reactions (most commonly glucuronidation by UDP-glucuronosyltransferase); they attach polar groups producing highly water-soluble, usually inactive metabolites for renal/biliary excretion"
+    },
+    {
+      "point_id": "kp3",
+      "description": "CYP3A4 is the most abundant hepatic CYP isoenzyme (~50% of all drug metabolism); it metabolizes fentanyl, sufentanil, alfentanil, and midazolam; inhibitors (ketoconazole, grapefruit juice) and inducers (rifampin) dramatically alter clearance"
+    },
+    {
+      "point_id": "kp4",
+      "description": "Remifentanil contains a methyl ester linkage hydrolyzed by nonspecific tissue and plasma esterases (not pseudocholinesterase, not CYP450) \u2014 this organ-independent metabolism gives it a CSHT of ~3-5 minutes regardless of infusion duration or hepatic/renal function"
+    },
+    {
+      "point_id": "kp5",
+      "description": "Halothane hepatitis occurs via reductive (anaerobic) Phase I metabolism producing reactive trifluoroacetyl chloride intermediates that trigger immune-mediated hepatocyte destruction"
+    },
+    {
+      "point_id": "kp6",
+      "description": "Codeine is a prodrug requiring CYP2D6 O-demethylation to morphine for analgesic effect; poor metabolizers get no relief, ultrarapid metabolizers may produce dangerous morphine levels"
+    }
+  ],
+  "errors": [
+    {
+      "statement": "It gets cleared by the kidneys faster than fentanyl",
+      "correction": "Remifentanil is metabolized by plasma and tissue esterases, not cleared by kidneys"
+    },
+    {
+      "statement": "Phase I and Phase II both happen in the liver using CYP enzymes",
+      "correction": "Phase II involves conjugation reactions (like glucuronidation), not CYP enzymes"
+    },
+    {
+      "statement": "CYP3A4 breaks down remifentanil",
+      "correction": "Remifentanil is metabolized by nonspecific esterases, not CYP3A4"
+    }
+  ],
+  "score": 0,
+  "summary": "Student demonstrated no understanding of drug metabolism pathways or remifentanil's unique esterase-based clearance mechanism. Multiple fundamental errors regarding CYP enzymes and renal clearance require immediate remediation.",
+  "voss_quip": "Did you confuse remifentanil with furosemide? Back to basics."
+}

@@ -1,0 +1,42 @@
+{
+  "captured": [],
+  "missed": [
+    {
+      "point_id": "kp1",
+      "description": "Initial distribution into central compartment and vessel-rich group"
+    },
+    {
+      "point_id": "kp2",
+      "description": "Redistribution mechanism for rapid awakening from single bolus"
+    },
+    {
+      "point_id": "kp3",
+      "description": "Context-sensitive half-time concept"
+    },
+    {
+      "point_id": "kp4",
+      "description": "Peripheral compartment saturation after prolonged infusion"
+    },
+    {
+      "point_id": "kp5",
+      "description": "First-pass pulmonary uptake"
+    },
+    {
+      "point_id": "kp6",
+      "description": "Age-related changes in central compartment"
+    }
+  ],
+  "errors": [
+    {
+      "statement": "The liver breaks down propofol and after 4 hours it gets fatigued",
+      "correction": "The liver does not become 'fatigued' - hepatic metabolism remains constant. Recovery differences are due to compartment saturation, not liver fatigue"
+    },
+    {
+      "statement": "Propofol works faster as a bolus because it hits the brain at a higher concentration",
+      "correction": "Rapid awakening from bolus is due to redistribution away from brain, not initial higher concentration"
+    }
+  ],
+  "score": 0,
+  "summary": "Student completely missed the fundamental pharmacokinetic principles of redistribution versus elimination and context-sensitive half-time. Answer contains factual errors about liver 'fatigue' and misunderstands the mechanism of propofol recovery.",
+  "voss_quip": "Liver fatigue? Did you confuse pharmacokinetics with your study habits?"
+}

@@ -1,0 +1,446 @@
+{
+  "q3-A-excellent": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "enters the central compartment first \u2014 the blood and vessel-rich group including brain, heart, kidneys, and liver. This group receives about 75% of cardiac output despite being only 10% of body mass"
+      },
+      {
+        "point_id": "kp2",
+        "evidence": "wakes up in 8 minutes NOT because of metabolism \u2014 hepatic metabolism is too slow. It is redistribution: propofol moves from the highly perfused brain into less-perfused peripheral tissues like muscle and fat, dropping brain concentration below the threshold for consciousness"
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "context-sensitive half-time \u2014 the time for plasma concentration to fall 50% after stopping an infusion of a given duration"
+      },
+      {
+        "point_id": "kp4",
+        "evidence": "after 4 hours the peripheral compartments have progressively saturated with propofol. The redistribution gradient is gone. Recovery depends on slower hepatic metabolism"
+      },
+      {
+        "point_id": "kp5",
+        "evidence": "First-pass pulmonary uptake buffers peak arterial concentrations of lipophilic drugs \u2014 fentanyl undergoes 65-75% first-pass pulmonary uptake protecting the brain"
+      },
+      {
+        "point_id": "kp6",
+        "evidence": "elderly patients have smaller effective central compartments, producing higher peak concentrations from the same dose \u2014 dose reduction is essential"
+      }
+    ],
+    "missed": [],
+    "errors": [],
+    "score": 100,
+    "summary": "Excellent comprehensive answer covering all key pharmacokinetic principles with accurate details. You correctly emphasized redistribution vs metabolism and explained context-sensitive half-time perfectly.",
+    "voss_quip": "Finally, someone who understands redistribution isn't just a fancy word."
+  },
+  "q3-B-good": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "brain is in the vessel-rich group which receives a large portion of cardiac output"
+      },
+      {
+        "point_id": "kp2",
+        "evidence": "wakes up quickly because the drug redistributes from the brain to muscle and fat, not because of hepatic metabolism"
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "Context-sensitive half-time describes how the time for plasma levels to drop 50% changes depending on infusion duration"
+      },
+      {
+        "point_id": "kp4",
+        "evidence": "After a long infusion, the muscle and fat compartments are already saturated with drug, so there is no concentration gradient for redistribution anymore. Recovery then depends on the liver metabolizing the drug"
+      }
+    ],
+    "missed": [
+      {
+        "point_id": "kp5",
+        "description": "First-pass pulmonary uptake and its protective buffering effect"
+      },
+      {
+        "point_id": "kp6",
+        "description": "Impact of age and hypovolemia on central compartment size and dosing requirements"
+      }
+    ],
+    "errors": [],
+    "score": 83,
+    "summary": "You correctly explained redistribution vs. elimination and context-sensitive half-time concepts. Missing discussion of pulmonary uptake and age-related pharmacokinetic changes.",
+    "voss_quip": "Solid grasp of compartment basics, but you missed the lungs entirely."
+  },
+  "q3-C-partial": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "The central compartment includes the brain and other VRG organs"
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "Context-sensitive half-time means the drug half-life changes depending on how long you give it"
+      }
+    ],
+    "missed": [
+      {
+        "point_id": "kp2",
+        "description": "Single-bolus awakening is due to redistribution from brain to peripheral tissues, not hepatic metabolism"
+      },
+      {
+        "point_id": "kp4",
+        "description": "After prolonged infusion, peripheral compartments saturate, eliminating redistribution gradient"
+      },
+      {
+        "point_id": "kp5",
+        "description": "First-pass pulmonary uptake buffers peak arterial concentration"
+      },
+      {
+        "point_id": "kp6",
+        "description": "Elderly patients have smaller central compartments requiring dose reduction"
+      }
+    ],
+    "errors": [
+      {
+        "statement": "The bolus patient wakes up fast because propofol is rapidly metabolized by the liver",
+        "correction": "Rapid awakening after bolus is due to redistribution from brain to peripheral tissues, not hepatic metabolism"
+      },
+      {
+        "statement": "after 4 hours the liver enzymes are overwhelmed and cannot keep up",
+        "correction": "Hepatic metabolism rate remains constant; delayed emergence is due to peripheral compartment saturation eliminating redistribution"
+      },
+      {
+        "statement": "Elderly patients might need higher doses because they have more body fat",
+        "correction": "Elderly patients need lower doses due to smaller central compartments causing higher peak concentrations"
+      }
+    ],
+    "score": 29,
+    "summary": "You correctly identified the central compartment components and context-sensitive half-time concept, but fundamentally misunderstood that rapid awakening is due to redistribution, not metabolism. Your explanation of prolonged infusion effects and elderly dosing requirements are backwards.",
+    "voss_quip": "Redistribution, not metabolism. The liver doesn't get tired after lunch."
+  },
+  "q3-D-poor": {
+    "captured": [],
+    "missed": [
+      {
+        "point_id": "kp1",
+        "description": "Initial distribution into central compartment and vessel-rich group"
+      },
+      {
+        "point_id": "kp2",
+        "description": "Redistribution mechanism for rapid awakening from single bolus"
+      },
+      {
+        "point_id": "kp3",
+        "description": "Context-sensitive half-time concept"
+      },
+      {
+        "point_id": "kp4",
+        "description": "Peripheral compartment saturation after prolonged infusion"
+      },
+      {
+        "point_id": "kp5",
+        "description": "First-pass pulmonary uptake"
+      },
+      {
+        "point_id": "kp6",
+        "description": "Age-related changes in central compartment"
+      }
+    ],
+    "errors": [
+      {
+        "statement": "The liver breaks down propofol and after 4 hours it gets fatigued",
+        "correction": "The liver does not become 'fatigued' - hepatic metabolism remains constant. Recovery differences are due to compartment saturation, not liver fatigue"
+      },
+      {
+        "statement": "Propofol works faster as a bolus because it hits the brain at a higher concentration",
+        "correction": "Rapid awakening from bolus is due to redistribution away from brain, not initial higher concentration"
+      }
+    ],
+    "score": 0,
+    "summary": "Student completely missed the fundamental pharmacokinetic principles of redistribution versus elimination and context-sensitive half-time. Answer contains factual errors about liver 'fatigue' and misunderstands the mechanism of propofol recovery.",
+    "voss_quip": "Liver fatigue? Did you confuse pharmacokinetics with your study habits?"
+  },
+  "q6-A-excellent": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "Phase I reactions are functionalization reactions \u2014 oxidation, reduction, and hydrolysis \u2014 that expose or introduce functional groups on the drug molecule. These prepare it for Phase II but can also produce active or toxic metabolites."
+      },
+      {
+        "point_id": "kp2",
+        "evidence": "Phase II reactions are conjugation reactions, most commonly glucuronidation by UDP-glucuronosyltransferase, attaching polar groups to make highly water-soluble, usually inactive metabolites for renal or biliary excretion."
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "CYP3A4 is the most abundant hepatic CYP isoenzyme, responsible for roughly 50% of all drug metabolism. It handles fentanyl, sufentanil, alfentanil, and midazolam. Ketoconazole and grapefruit juice inhibit CYP3A4; rifampin induces it."
+      },
+      {
+        "point_id": "kp4",
+        "evidence": "Remifentanil contains a methyl ester linkage hydrolyzed by nonspecific tissue and plasma esterases, NOT pseudocholinesterase and NOT CYP450. This organ-independent metabolism gives a CSHT of 3-5 minutes regardless of infusion duration or hepatic/renal function."
+      },
+      {
+        "point_id": "kp5",
+        "evidence": "Halothane hepatitis results from reductive anaerobic Phase I metabolism producing reactive trifluoroacetyl chloride intermediates triggering immune-mediated hepatocyte destruction."
+      },
+      {
+        "point_id": "kp6",
+        "evidence": "Codeine is a prodrug requiring CYP2D6 O-demethylation to morphine \u2014 poor metabolizers get no analgesia, ultrarapid metabolizers risk dangerous morphine levels."
+      }
+    ],
+    "missed": [],
+    "errors": [],
+    "score": 100,
+    "summary": "Perfect recall of all key pharmacokinetic concepts with accurate details on drug metabolism pathways. Your understanding of remifentanil's unique esterase-based metabolism is spot-on.",
+    "voss_quip": "Finally, someone who knows esterases aren't pseudocholinesterase. Textbook perfect."
+  },
+  "q6-B-good": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "Phase I involves oxidation, reduction, and hydrolysis that modify the drug and can produce active or toxic metabolites"
+      },
+      {
+        "point_id": "kp2",
+        "evidence": "Phase II is conjugation, mainly glucuronidation, making drugs water-soluble for excretion"
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "CYP3A4 is the major CYP enzyme handling about half of drug metabolism including fentanyl and midazolam"
+      },
+      {
+        "point_id": "kp4",
+        "evidence": "tissue esterases hydrolyze it through ester hydrolysis, not CYP enzymes. Organ-independent metabolism keeps CSHT at 3-5 minutes no matter how long the infusion runs"
+      }
+    ],
+    "missed": [
+      {
+        "point_id": "kp5",
+        "description": "Halothane hepatitis mechanism via reductive metabolism and trifluoroacetyl chloride intermediates"
+      },
+      {
+        "point_id": "kp6",
+        "description": "Codeine as prodrug requiring CYP2D6 metabolism to morphine"
+      }
+    ],
+    "errors": [],
+    "score": 86,
+    "summary": "Solid grasp of drug metabolism phases and remifentanil's unique esterase pathway. Missing discussion of halothane hepatitis and codeine prodrug metabolism examples.",
+    "voss_quip": "Good. Now explain why your patient won't need naloxone tomorrow."
+  },
+  "q6-C-partial": {
+    "captured": [
+      {
+        "point_id": "kp2",
+        "evidence": "Phase II is glucuronidation making drugs inactive"
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "CYP3A4 is the main enzyme"
+      }
+    ],
+    "missed": [
+      {
+        "point_id": "kp1",
+        "description": "Phase I reactions (oxidation, reduction, hydrolysis) expose or introduce functional groups, preparing the molecule for conjugation; these may produce active or toxic metabolites"
+      },
+      {
+        "point_id": "kp4",
+        "description": "Remifentanil contains a methyl ester linkage hydrolyzed by nonspecific tissue and plasma esterases (not pseudocholinesterase, not CYP450) \u2014 this organ-independent metabolism gives it a CSHT of ~3-5 minutes regardless of infusion duration or hepatic/renal function"
+      },
+      {
+        "point_id": "kp5",
+        "description": "Halothane hepatitis occurs via reductive (anaerobic) Phase I metabolism producing reactive trifluoroacetyl chloride intermediates that trigger immune-mediated hepatocyte destruction"
+      },
+      {
+        "point_id": "kp6",
+        "description": "Codeine is a prodrug requiring CYP2D6 O-demethylation to morphine for analgesic effect; poor metabolizers get no relief, ultrarapid metabolizers may produce dangerous morphine levels"
+      }
+    ],
+    "errors": [
+      {
+        "statement": "pseudocholinesterase in the plasma breaks it down",
+        "correction": "Remifentanil is hydrolyzed by nonspecific tissue and plasma esterases, NOT pseudocholinesterase"
+      }
+    ],
+    "score": 29,
+    "summary": "You correctly identified glucuronidation as Phase II and CYP3A4 as the main enzyme, but your understanding of remifentanil metabolism is fundamentally wrong. You need to learn the specific esterases involved and understand Phase I reactions beyond just oxidation.",
+    "voss_quip": "Wrong esterase, incomplete phases - this answer needs serious metabolic rehabilitation."
+  },
+  "q6-D-poor": {
+    "captured": [],
+    "missed": [
+      {
+        "point_id": "kp1",
+        "description": "Phase I reactions (oxidation, reduction, hydrolysis) expose or introduce functional groups, preparing the molecule for conjugation; these may produce active or toxic metabolites"
+      },
+      {
+        "point_id": "kp2",
+        "description": "Phase II reactions are conjugation reactions (most commonly glucuronidation by UDP-glucuronosyltransferase); they attach polar groups producing highly water-soluble, usually inactive metabolites for renal/biliary excretion"
+      },
+      {
+        "point_id": "kp3",
+        "description": "CYP3A4 is the most abundant hepatic CYP isoenzyme (~50% of all drug metabolism); it metabolizes fentanyl, sufentanil, alfentanil, and midazolam; inhibitors (ketoconazole, grapefruit juice) and inducers (rifampin) dramatically alter clearance"
+      },
+      {
+        "point_id": "kp4",
+        "description": "Remifentanil contains a methyl ester linkage hydrolyzed by nonspecific tissue and plasma esterases (not pseudocholinesterase, not CYP450) \u2014 this organ-independent metabolism gives it a CSHT of ~3-5 minutes regardless of infusion duration or hepatic/renal function"
+      },
+      {
+        "point_id": "kp5",
+        "description": "Halothane hepatitis occurs via reductive (anaerobic) Phase I metabolism producing reactive trifluoroacetyl chloride intermediates that trigger immune-mediated hepatocyte destruction"
+      },
+      {
+        "point_id": "kp6",
+        "description": "Codeine is a prodrug requiring CYP2D6 O-demethylation to morphine for analgesic effect; poor metabolizers get no relief, ultrarapid metabolizers may produce dangerous morphine levels"
+      }
+    ],
+    "errors": [
+      {
+        "statement": "It gets cleared by the kidneys faster than fentanyl",
+        "correction": "Remifentanil is metabolized by plasma and tissue esterases, not cleared by kidneys"
+      },
+      {
+        "statement": "Phase I and Phase II both happen in the liver using CYP enzymes",
+        "correction": "Phase II involves conjugation reactions (like glucuronidation), not CYP enzymes"
+      },
+      {
+        "statement": "CYP3A4 breaks down remifentanil",
+        "correction": "Remifentanil is metabolized by nonspecific esterases, not CYP3A4"
+      }
+    ],
+    "score": 0,
+    "summary": "Student demonstrated no understanding of drug metabolism pathways or remifentanil's unique esterase-based clearance mechanism. Multiple fundamental errors regarding CYP enzymes and renal clearance require immediate remediation.",
+    "voss_quip": "Did you confuse remifentanil with furosemide? Back to basics."
+  },
+  "q9b-A-excellent": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "Lidocaine is a high hepatic extraction ratio drug, extraction ratio above 0.7, same category as propofol and morphine. For high extraction drugs, clearance is flow-limited \u2014 determined primarily by hepatic blood flow, not enzyme activity or protein binding. In cardiogenic shock, reduced cardiac output directly reduces hepatic blood flow and therefore lidocaine clearance."
+      },
+      {
+        "point_id": "kp2",
+        "evidence": "renal clearance involves three mechanisms: glomerular filtration of unbound drug passively, active tubular secretion into the lumen, and passive tubular reabsorption back into blood. Net excretion equals filtration plus secretion minus reabsorption."
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "The creatinine of 1.0 is misleading because this frail 82-year-old has very little muscle mass. Less muscle means less creatinine production, masking severely reduced GFR. Cockcroft-Gault or CKD-EPI equations give accurate estimates for drug dosing."
+      },
+      {
+        "point_id": "kp4",
+        "evidence": "alkalinizing urine with sodium bicarbonate ionizes weakly acidic drugs like phenobarbital and salicylates in the tubular lumen, trapping them and preventing reabsorption. Fetal ion trapping \u2014 fetal blood is more acidic than maternal, trapping weak base local anesthetics in fetal circulation."
+      },
+      {
+        "point_id": "kp5",
+        "evidence": "Glutathione conjugation detoxifies NAPQI, the toxic metabolite of acetaminophen. In overdose, glutathione depletion allows NAPQI accumulation causing centrilobular hepatic necrosis. N-acetylcysteine replenishes glutathione."
+      }
+    ],
+    "missed": [],
+    "errors": [],
+    "score": 100,
+    "summary": "Comprehensive answer covering all key pharmacokinetic principles with accurate clinical correlations. Correctly explained flow-limited clearance, renal mechanisms, creatinine limitations in elderly, ion trapping, and acetaminophen toxicity.",
+    "voss_quip": "Finally, someone who actually understands pharmacokinetics instead of memorizing flashcards."
+  },
+  "q9b-B-good": {
+    "captured": [
+      {
+        "point_id": "kp1",
+        "evidence": "Lidocaine has a high extraction ratio meaning its clearance depends on hepatic blood flow. In cardiogenic shock, blood flow to the liver is reduced so the drug accumulates regardless of enzyme function."
+      },
+      {
+        "point_id": "kp2",
+        "evidence": "For renal clearance, drugs are filtered at the glomerulus, some are actively secreted, and some are reabsorbed."
+      },
+      {
+        "point_id": "kp3",
+        "evidence": "The creatinine is misleading because she has low muscle mass producing less creatinine. A normal level does not mean normal kidney function in the elderly. You need Cockcroft-Gault equations."
+      }
+    ],
+    "missed": [
+      {
+        "point_id": "kp4",
+        "description": "Ion trapping mechanisms and clinical applications"
+      },
+      {
+        "point_id": "kp5",
+        "description": "Glutathione conjugation and acetaminophen toxicity"
+      }
+    ],
+    "errors": [],
+    "score": 80,
+    "summary": "Solid understanding of hepatic extraction ratios and age-related creatinine changes with appropriate clinical application. Missing discussion of ion trapping and phase II metabolism concepts.",
+    "voss_quip": "Good basics, but you're only scratching the surface of pharmacokinetics."
+  },
+  "q9b-C-partial": {
+    "captured": [
+      {
+        "point_id": "kp2",
+        "evidence": "drugs are filtered by the glomerulus based on size"
+      }
+    ],
+    "missed": [
+      {
+        "point_id": "kp1",
+        "description": "Failed to identify lidocaine as high hepatic extraction drug with flow-limited clearance; incorrectly attributed accumulation to enzyme dysfunction rather than reduced hepatic blood flow"
+      },
+      {
+        "point_id": "kp3",
+        "description": "Completely missed the concept that decreased muscle mass in elderly masks GFR decline, making normal creatinine misleading"
+      },
+      {
+        "point_id": "kp4",
+        "description": "Incorrectly stated ion trapping mechanism - alkaline urine traps weak acids, not acidic urine"
+      },
+      {
+        "point_id": "kp5",
+        "description": "No mention of glutathione conjugation or acetaminophen metabolism"
+      }
+    ],
+    "errors": [
+      {
+        "statement": "You could try enzyme inducers like rifampin to speed up metabolism",
+        "correction": "Enzyme induction cannot increase clearance of high-extraction drugs beyond their flow-limited ceiling"
+      },
+      {
+        "statement": "Ion trapping means you make urine acidic to trap acidic drugs",
+        "correction": "Ion trapping uses alkaline urine to ionize and trap weakly acidic drugs, preventing reabsorption"
+      },
+      {
+        "statement": "The creatinine being normal is just because lab values vary",
+        "correction": "Normal creatinine in elderly patients with low muscle mass masks significantly reduced GFR"
+      }
+    ],
+    "score": 20,
+    "summary": "Student correctly identified glomerular filtration as part of renal clearance but fundamentally misunderstood hepatic extraction ratios, ion trapping mechanisms, and age-related creatinine interpretation. Multiple factual errors demonstrate poor grasp of pharmacokinetic principles.",
+    "voss_quip": "Rifampin for cardiogenic shock? That's creative but completely wrong."
+  },
+  "q9b-D-poor": {
+    "captured": [],
+    "missed": [
+      {
+        "point_id": "kp1",
+        "description": "High hepatic extraction ratio drugs have flow-limited clearance; cardiogenic shock reduces hepatic blood flow causing accumulation"
+      },
+      {
+        "point_id": "kp2",
+        "description": "Renal drug excretion mechanisms: glomerular filtration, tubular secretion, and tubular reabsorption"
+      },
+      {
+        "point_id": "kp3",
+        "description": "Elderly patients have decreased muscle mass producing less creatinine, masking GFR decline despite normal serum creatinine"
+      },
+      {
+        "point_id": "kp4",
+        "description": "Ion trapping principles for drug excretion and fetal circulation"
+      },
+      {
+        "point_id": "kp5",
+        "description": "Glutathione conjugation and acetaminophen metabolism"
+      }
+    ],
+    "errors": [
+      {
+        "statement": "The creatinine is normal so kidney function should be fine",
+        "correction": "Normal creatinine in elderly patients with low muscle mass can mask significant renal impairment; GFR is 22 mL/min indicating severe kidney dysfunction"
+      }
+    ],
+    "score": 0,
+    "summary": "Student failed to demonstrate understanding of hepatic extraction ratios, renal clearance mechanisms, or age-related creatinine interpretation. Completely missed the pathophysiology behind both clinical scenarios.",
+    "voss_quip": "That's not pharmacology, that's wishful thinking with a stethoscope."
+  }
+}

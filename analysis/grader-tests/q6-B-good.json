@@ -1,0 +1,34 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "Phase I involves oxidation, reduction, and hydrolysis that modify the drug and can produce active or toxic metabolites"
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "Phase II is conjugation, mainly glucuronidation, making drugs water-soluble for excretion"
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "CYP3A4 is the major CYP enzyme handling about half of drug metabolism including fentanyl and midazolam"
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "tissue esterases hydrolyze it through ester hydrolysis, not CYP enzymes. Organ-independent metabolism keeps CSHT at 3-5 minutes no matter how long the infusion runs"
+    }
+  ],
+  "missed": [
+    {
+      "point_id": "kp5",
+      "description": "Halothane hepatitis mechanism via reductive metabolism and trifluoroacetyl chloride intermediates"
+    },
+    {
+      "point_id": "kp6",
+      "description": "Codeine as prodrug requiring CYP2D6 metabolism to morphine"
+    }
+  ],
+  "errors": [],
+  "score": 86,
+  "summary": "Solid grasp of drug metabolism phases and remifentanil's unique esterase pathway. Missing discussion of halothane hepatitis and codeine prodrug metabolism examples.",
+  "voss_quip": "Good. Now explain why your patient won't need naloxone tomorrow."
+}

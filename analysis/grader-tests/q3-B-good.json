@@ -1,0 +1,34 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "brain is in the vessel-rich group which receives a large portion of cardiac output"
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "wakes up quickly because the drug redistributes from the brain to muscle and fat, not because of hepatic metabolism"
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "Context-sensitive half-time describes how the time for plasma levels to drop 50% changes depending on infusion duration"
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "After a long infusion, the muscle and fat compartments are already saturated with drug, so there is no concentration gradient for redistribution anymore. Recovery then depends on the liver metabolizing the drug"
+    }
+  ],
+  "missed": [
+    {
+      "point_id": "kp5",
+      "description": "First-pass pulmonary uptake and its protective buffering effect"
+    },
+    {
+      "point_id": "kp6",
+      "description": "Impact of age and hypovolemia on central compartment size and dosing requirements"
+    }
+  ],
+  "errors": [],
+  "score": 83,
+  "summary": "You correctly explained redistribution vs. elimination and context-sensitive half-time concepts. Missing discussion of pulmonary uptake and age-related pharmacokinetic changes.",
+  "voss_quip": "Solid grasp of compartment basics, but you missed the lungs entirely."
+}

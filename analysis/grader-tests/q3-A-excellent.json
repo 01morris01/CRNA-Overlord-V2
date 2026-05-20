@@ -1,0 +1,33 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "enters the central compartment first \u2014 the blood and vessel-rich group including brain, heart, kidneys, and liver. This group receives about 75% of cardiac output despite being only 10% of body mass"
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "wakes up in 8 minutes NOT because of metabolism \u2014 hepatic metabolism is too slow. It is redistribution: propofol moves from the highly perfused brain into less-perfused peripheral tissues like muscle and fat, dropping brain concentration below the threshold for consciousness"
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "context-sensitive half-time \u2014 the time for plasma concentration to fall 50% after stopping an infusion of a given duration"
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "after 4 hours the peripheral compartments have progressively saturated with propofol. The redistribution gradient is gone. Recovery depends on slower hepatic metabolism"
+    },
+    {
+      "point_id": "kp5",
+      "evidence": "First-pass pulmonary uptake buffers peak arterial concentrations of lipophilic drugs \u2014 fentanyl undergoes 65-75% first-pass pulmonary uptake protecting the brain"
+    },
+    {
+      "point_id": "kp6",
+      "evidence": "elderly patients have smaller effective central compartments, producing higher peak concentrations from the same dose \u2014 dose reduction is essential"
+    }
+  ],
+  "missed": [],
+  "errors": [],
+  "score": 100,
+  "summary": "Excellent comprehensive answer covering all key pharmacokinetic principles with accurate details. You correctly emphasized redistribution vs metabolism and explained context-sensitive half-time perfectly.",
+  "voss_quip": "Finally, someone who understands redistribution isn't just a fancy word."
+}

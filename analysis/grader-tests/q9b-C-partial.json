@@ -1,0 +1,43 @@
+{
+  "captured": [
+    {
+      "point_id": "kp2",
+      "evidence": "drugs are filtered by the glomerulus based on size"
+    }
+  ],
+  "missed": [
+    {
+      "point_id": "kp1",
+      "description": "Failed to identify lidocaine as high hepatic extraction drug with flow-limited clearance; incorrectly attributed accumulation to enzyme dysfunction rather than reduced hepatic blood flow"
+    },
+    {
+      "point_id": "kp3",
+      "description": "Completely missed the concept that decreased muscle mass in elderly masks GFR decline, making normal creatinine misleading"
+    },
+    {
+      "point_id": "kp4",
+      "description": "Incorrectly stated ion trapping mechanism - alkaline urine traps weak acids, not acidic urine"
+    },
+    {
+      "point_id": "kp5",
+      "description": "No mention of glutathione conjugation or acetaminophen metabolism"
+    }
+  ],
+  "errors": [
+    {
+      "statement": "You could try enzyme inducers like rifampin to speed up metabolism",
+      "correction": "Enzyme induction cannot increase clearance of high-extraction drugs beyond their flow-limited ceiling"
+    },
+    {
+      "statement": "Ion trapping means you make urine acidic to trap acidic drugs",
+      "correction": "Ion trapping uses alkaline urine to ionize and trap weakly acidic drugs, preventing reabsorption"
+    },
+    {
+      "statement": "The creatinine being normal is just because lab values vary",
+      "correction": "Normal creatinine in elderly patients with low muscle mass masks significantly reduced GFR"
+    }
+  ],
+  "score": 20,
+  "summary": "Student correctly identified glomerular filtration as part of renal clearance but fundamentally misunderstood hepatic extraction ratios, ion trapping mechanisms, and age-related creatinine interpretation. Multiple factual errors demonstrate poor grasp of pharmacokinetic principles.",
+  "voss_quip": "Rifampin for cardiogenic shock? That's creative but completely wrong."
+}

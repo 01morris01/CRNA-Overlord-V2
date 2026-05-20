@@ -1,0 +1,47 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "The central compartment includes the brain and other VRG organs"
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "Context-sensitive half-time means the drug half-life changes depending on how long you give it"
+    }
+  ],
+  "missed": [
+    {
+      "point_id": "kp2",
+      "description": "Single-bolus awakening is due to redistribution from brain to peripheral tissues, not hepatic metabolism"
+    },
+    {
+      "point_id": "kp4",
+      "description": "After prolonged infusion, peripheral compartments saturate, eliminating redistribution gradient"
+    },
+    {
+      "point_id": "kp5",
+      "description": "First-pass pulmonary uptake buffers peak arterial concentration"
+    },
+    {
+      "point_id": "kp6",
+      "description": "Elderly patients have smaller central compartments requiring dose reduction"
+    }
+  ],
+  "errors": [
+    {
+      "statement": "The bolus patient wakes up fast because propofol is rapidly metabolized by the liver",
+      "correction": "Rapid awakening after bolus is due to redistribution from brain to peripheral tissues, not hepatic metabolism"
+    },
+    {
+      "statement": "after 4 hours the liver enzymes are overwhelmed and cannot keep up",
+      "correction": "Hepatic metabolism rate remains constant; delayed emergence is due to peripheral compartment saturation eliminating redistribution"
+    },
+    {
+      "statement": "Elderly patients might need higher doses because they have more body fat",
+      "correction": "Elderly patients need lower doses due to smaller central compartments causing higher peak concentrations"
+    }
+  ],
+  "score": 29,
+  "summary": "You correctly identified the central compartment components and context-sensitive half-time concept, but fundamentally misunderstood that rapid awakening is due to redistribution, not metabolism. Your explanation of prolonged infusion effects and elderly dosing requirements are backwards.",
+  "voss_quip": "Redistribution, not metabolism. The liver doesn't get tired after lunch."
+}

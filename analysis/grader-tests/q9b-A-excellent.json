@@ -1,0 +1,29 @@
+{
+  "captured": [
+    {
+      "point_id": "kp1",
+      "evidence": "Lidocaine is a high hepatic extraction ratio drug, extraction ratio above 0.7, same category as propofol and morphine. For high extraction drugs, clearance is flow-limited \u2014 determined primarily by hepatic blood flow, not enzyme activity or protein binding. In cardiogenic shock, reduced cardiac output directly reduces hepatic blood flow and therefore lidocaine clearance."
+    },
+    {
+      "point_id": "kp2",
+      "evidence": "renal clearance involves three mechanisms: glomerular filtration of unbound drug passively, active tubular secretion into the lumen, and passive tubular reabsorption back into blood. Net excretion equals filtration plus secretion minus reabsorption."
+    },
+    {
+      "point_id": "kp3",
+      "evidence": "The creatinine of 1.0 is misleading because this frail 82-year-old has very little muscle mass. Less muscle means less creatinine production, masking severely reduced GFR. Cockcroft-Gault or CKD-EPI equations give accurate estimates for drug dosing."
+    },
+    {
+      "point_id": "kp4",
+      "evidence": "alkalinizing urine with sodium bicarbonate ionizes weakly acidic drugs like phenobarbital and salicylates in the tubular lumen, trapping them and preventing reabsorption. Fetal ion trapping \u2014 fetal blood is more acidic than maternal, trapping weak base local anesthetics in fetal circulation."
+    },
+    {
+      "point_id": "kp5",
+      "evidence": "Glutathione conjugation detoxifies NAPQI, the toxic metabolite of acetaminophen. In overdose, glutathione depletion allows NAPQI accumulation causing centrilobular hepatic necrosis. N-acetylcysteine replenishes glutathione."
+    }
+  ],
+  "missed": [],
+  "errors": [],
+  "score": 100,
+  "summary": "Comprehensive answer covering all key pharmacokinetic principles with accurate clinical correlations. Correctly explained flow-limited clearance, renal mechanisms, creatinine limitations in elderly, ion trapping, and acetaminophen toxicity.",
+  "voss_quip": "Finally, someone who actually understands pharmacokinetics instead of memorizing flashcards."
+}

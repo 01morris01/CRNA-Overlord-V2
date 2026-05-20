@@ -1,0 +1,34 @@
+{
+  "captured": [],
+  "missed": [
+    {
+      "point_id": "kp1",
+      "description": "High hepatic extraction ratio drugs have flow-limited clearance; cardiogenic shock reduces hepatic blood flow causing accumulation"
+    },
+    {
+      "point_id": "kp2",
+      "description": "Renal drug excretion mechanisms: glomerular filtration, tubular secretion, and tubular reabsorption"
+    },
+    {
+      "point_id": "kp3",
+      "description": "Elderly patients have decreased muscle mass producing less creatinine, masking GFR decline despite normal serum creatinine"
+    },
+    {
+      "point_id": "kp4",
+      "description": "Ion trapping principles for drug excretion and fetal circulation"
+    },
+    {
+      "point_id": "kp5",
+      "description": "Glutathione conjugation and acetaminophen metabolism"
+    }
+  ],
+  "errors": [
+    {
+      "statement": "The creatinine is normal so kidney function should be fine",
+      "correction": "Normal creatinine in elderly patients with low muscle mass can mask significant renal impairment; GFR is 22 mL/min indicating severe kidney dysfunction"
+    }
+  ],
+  "score": 0,
+  "summary": "Student failed to demonstrate understanding of hepatic extraction ratios, renal clearance mechanisms, or age-related creatinine interpretation. Completely missed the pathophysiology behind both clinical scenarios.",
+  "voss_quip": "That's not pharmacology, that's wishful thinking with a stethoscope."
+}
