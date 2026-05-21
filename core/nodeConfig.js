@@ -922,18 +922,20 @@ export const NODE_CONFIG = {
 };
 
 // ─── Merge recall questions into their target nodes ──────────────────────────
-for (const rq of RECALL_QUESTIONS_BASICS) {
-  const targetNode = NODE_CONFIG[rq.nodeId];
-  if (targetNode) {
-    targetNode.questions = [...targetNode.questions, rq];
+// Safety: match on BOTH nodeId (dict key) and courseId to prevent cross-course
+// collisions if two courses ever share a nodeId string.
+function mergeRecallQuestions(recallQuestions) {
+  for (const rq of recallQuestions) {
+    const targetNode = NODE_CONFIG[rq.nodeId];
+    if (targetNode && targetNode.courseId === rq.courseId) {
+      targetNode.questions = [...targetNode.questions, rq];
+    } else {
+      console.warn(`[RECALL MERGE] No node for courseId="${rq.courseId}" nodeId="${rq.nodeId}" (question ${rq.id})`);
+    }
   }
 }
-for (const rq of RECALL_QUESTIONS_ADV_PHARMACOLOGY_1) {
-  const targetNode = NODE_CONFIG[rq.nodeId];
-  if (targetNode) {
-    targetNode.questions = [...targetNode.questions, rq];
-  }
-}
+mergeRecallQuestions(RECALL_QUESTIONS_BASICS);
+mergeRecallQuestions(RECALL_QUESTIONS_ADV_PHARMACOLOGY_1);
 
 // ─── Accessors ────────────────────────────────────────────────────────────────
 

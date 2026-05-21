@@ -1,11 +1,11 @@
 export const RECALL_QUESTIONS_BASICS = [
 
-  // 1. Malignant Hyperthermia — node-2
+  // 1. Malignant Hyperthermia — node-7 (Inhaled Anesthetics — MH is a volatile-agent crisis)
   {
     id: 'r-mh-1',
     type: 'recall',
     courseId: 'basics-of-anesthesia',
-    nodeId: 'node-2',
+    nodeId: 'node-7',
     prompt: 'A patient develops malignant hyperthermia 20 minutes after induction. Walk through the initial management sequence, including the most important medication and its dose.',
     rubric: {
       key_points: [
