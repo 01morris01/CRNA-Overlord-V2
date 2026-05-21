@@ -53,18 +53,18 @@ export const RECALL_QUESTIONS_BASICS = [
       ],
       minimum_passing_score: 60,
     },
-    topic: 'local-anesthetic-toxicity',
+    topic: 'local-anesthetic-systemic-toxicity',
     chapter: 'pharmacologic-principles',
     difficulty: 3,
-    metadata: { priority: 'high', source: 'Barash Ch 36', topic: 'local-anesthetic-toxicity' },
+    metadata: { priority: 'high', source: 'Barash Ch 36', topic: 'local-anesthetic-systemic-toxicity' },
   },
 
-  // 3. Anaphylaxis under anesthesia — node-6
+  // 3. Anaphylaxis under anesthesia — node-3 (Basic Pharmacologic Principles — drug-hypersensitivity crisis)
   {
     id: 'r-anaphylaxis-1',
     type: 'recall',
     courseId: 'basics-of-anesthesia',
-    nodeId: 'node-6',
+    nodeId: 'node-3',
     prompt: 'You suspect anaphylaxis during a general anesthetic. The patient has hypotension, bronchospasm, and a diffuse rash. Describe your immediate management.',
     rubric: {
       key_points: [
@@ -167,10 +167,10 @@ export const RECALL_QUESTIONS_BASICS = [
       ],
       minimum_passing_score: 60,
     },
-    topic: 'frank-starling',
+    topic: 'frank-starling-mechanism',
     chapter: 'cardiac-physiology',
     difficulty: 2,
-    metadata: { priority: 'medium', source: 'Barash Ch 10', topic: 'frank-starling' },
+    metadata: { priority: 'medium', source: 'Barash Ch 10', topic: 'frank-starling-mechanism' },
   },
 
   // 7. Four mechanisms of hypoxemia — node-5
@@ -195,10 +195,10 @@ export const RECALL_QUESTIONS_BASICS = [
       ],
       minimum_passing_score: 60,
     },
-    topic: 'mechanisms-of-hypoxemia',
+    topic: 'hypoxemia-mechanisms',
     chapter: 'pulmonary-physiology',
     difficulty: 2,
-    metadata: { priority: 'high', source: 'Barash Ch 15', topic: 'mechanisms-of-hypoxemia' },
+    metadata: { priority: 'high', source: 'Barash Ch 15', topic: 'hypoxemia-mechanisms' },
   },
 
   // 8. ASA Physical Status Classification — node-2
@@ -225,18 +225,18 @@ export const RECALL_QUESTIONS_BASICS = [
       ],
       minimum_passing_score: 60,
     },
-    topic: 'asa-classification',
+    topic: 'asa-physical-status',
     chapter: 'preoperative-assessment',
     difficulty: 1,
-    metadata: { priority: 'medium', source: 'Barash Ch 1', topic: 'asa-classification' },
+    metadata: { priority: 'medium', source: 'Barash Ch 1', topic: 'asa-physical-status' },
   },
 
-  // 9. Context-sensitive half-time — node-7
+  // 9. Context-sensitive half-time — node-8 (IV Anesthetics — CSHT is an IV-infusion PK concept)
   {
     id: 'r-csht-1',
     type: 'recall',
     courseId: 'basics-of-anesthesia',
-    nodeId: 'node-7',
+    nodeId: 'node-8',
     prompt: 'Define context-sensitive half-time. Explain why it matters more than elimination half-life for choosing anesthetic agents in clinical practice. Give examples comparing two agents.',
     rubric: {
       key_points: [
@@ -281,10 +281,10 @@ export const RECALL_QUESTIONS_BASICS = [
       ],
       minimum_passing_score: 60,
     },
-    topic: 'airway-positioning',
+    topic: 'sniffing-position',
     chapter: 'airway-management',
     difficulty: 2,
-    metadata: { priority: 'high', source: 'Barash Ch 28', topic: 'airway-positioning' },
+    metadata: { priority: 'high', source: 'Barash Ch 28', topic: 'sniffing-position' },
   },
 
 ];
