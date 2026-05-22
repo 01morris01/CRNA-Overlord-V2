@@ -189,6 +189,13 @@ export function addQuestionTime(seconds) {
 export function resumeQuestionTimer() {
   if (_timerInterval || _remaining <= 0 || !_currentTimerQ) return;
   const q    = _currentTimerQ;
+
+  // Recall questions use their own timer display and timeout handler
+  if (q.type === 'recall') {
+    startRecallTimer(q, _remaining);
+    return;
+  }
+
   const fill = document.getElementById('tmr-fill');
   _timerInterval = setInterval(() => {
     _remaining--;
@@ -738,7 +745,7 @@ export function renderCurrentQuestion() {
     }
   }
   if (ovs) ovs.textContent = q.setup || '';
-  if (qtxt) qtxt.textContent = q.q || '';
+  if (qtxt) qtxt.textContent = q.q || q.prompt || '';
 
   // Remove any leftover recall reveal button from previous question
   document.getElementById('recall-reveal-btn')?.remove();
@@ -1505,7 +1512,7 @@ window._showRecallReview = function() {
 
   card.innerHTML = `
     <div style="font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--green,#00ffa3);letter-spacing:.1em;margin-bottom:.5rem;">RUBRIC REVIEW</div>
-    <div style="font-family:var(--fb);font-size:.8rem;color:var(--txt);line-height:1.6;margin-bottom:1rem;">${q.q}</div>
+    <div style="font-family:var(--fb);font-size:.8rem;color:var(--txt);line-height:1.6;margin-bottom:1rem;">${q.q || q.prompt || ''}</div>
     <div style="font-family:var(--fm);font-size:.5rem;color:var(--muted);letter-spacing:.15em;margin-bottom:.4rem;">KEY POINTS</div>
     ${kpHTML}
     <button onclick="this.closest('div[style*=fixed]').remove()" style="margin-top:1rem;width:100%;background:transparent;border:2px solid var(--green,#00ffa3);color:var(--green,#00ffa3);font-family:var(--fd);font-size:.8rem;font-weight:700;padding:.6rem;cursor:pointer;border-radius:4px;letter-spacing:.1em;">CLOSE</button>
