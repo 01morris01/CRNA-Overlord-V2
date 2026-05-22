@@ -88,12 +88,39 @@ let _timerInterval = null;
 const QUESTION_TIME_SEC = 60;
 let _remaining = 0;
 let _currentTimerQ = null; // current question, used by resumeQuestionTimer
+let _currentTimerTotal = 0; // total seconds for current timer (for % calc)
 
 function _getTimerDuration() {
   const mode = window._sessionMode;
   if (mode === 'code-blue') return 15;
   if (mode === 'study') return 0; // no timer
   return QUESTION_TIME_SEC;
+}
+
+/**
+ * Centralized recall timer. Scales with rubric key_points count.
+ *  ≤4 kp → 180s / 120s   |  5 kp → 240s / 150s   |  ≥6 kp → 300s / 180s
+ * Study mode always returns 0 (no timer).
+ */
+export function getRecallTimer(question, mode) {
+  if (mode === 'study') return 0;
+  const kpCount = question?.rubric?.key_points?.length || 5;
+  if (mode === 'code-blue') {
+    if (kpCount <= 4) return 120;
+    if (kpCount === 5) return 150;
+    return 180;
+  }
+  // OR Rounds, free-recall, or any other timed mode
+  if (kpCount <= 4) return 180;
+  if (kpCount === 5) return 240;
+  return 300;
+}
+
+/** Format seconds as M:SS string (e.g. 240 → "4:00", 93 → "1:33"). */
+function _formatTimerMSS(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
 function startQuestionTimer(q) {
@@ -180,6 +207,121 @@ export function resumeQuestionTimer() {
       if (window.submitAnswer) window.submitAnswer(false);
     }
   }, 1000);
+}
+
+/**
+ * Recall-specific timer with M:SS text countdown.
+ * On expiry, triggers recall timeout flow (Fix 3 will enhance this further).
+ */
+function startRecallTimer(q, totalSeconds) {
+  clearInterval(_timerInterval);
+  _timerInterval = null;
+  _currentTimerQ = q;
+  _remaining = totalSeconds;
+  _currentTimerTotal = totalSeconds;
+
+  // Hide the standard MCQ timer bar; recall uses its own inline countdown
+  const fill = document.getElementById('tmr-fill');
+  if (fill) { fill.style.transition = 'none'; fill.style.width = '0%'; }
+
+  // Update the recall timer display
+  const timerEl = document.getElementById('recall-timer-display');
+  if (timerEl) timerEl.textContent = _formatTimerMSS(_remaining);
+
+  _timerInterval = setInterval(() => {
+    _remaining--;
+
+    // Update M:SS display
+    const el = document.getElementById('recall-timer-display');
+    if (el) {
+      el.textContent = _formatTimerMSS(_remaining);
+      if (_remaining <= 30) el.style.color = 'var(--red,#ff3366)';
+      else if (_remaining <= 60) el.style.color = 'var(--amber,#ffc400)';
+      else el.style.color = 'var(--green,#00ffa3)';
+    }
+
+    if (_remaining <= 0) {
+      clearInterval(_timerInterval);
+      _timerInterval = null;
+      _handleRecallTimeout(q);
+    }
+  }, 1000);
+}
+
+/**
+ * Called when the recall timer hits zero.
+ * Captures whatever text is in the textarea and grades it (or reveals rubric if empty).
+ */
+function _handleRecallTimeout(q) {
+  const input = document.getElementById('recall-input');
+  const userText = (input?.value || '').trim();
+
+  // Disable inputs
+  if (input) input.disabled = true;
+  const submitBtn = document.getElementById('recall-submit-btn');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'TIME UP'; }
+  const micBtn = document.getElementById('recall-mic-btn');
+  if (micBtn) micBtn.disabled = true;
+
+  // Stop speech recognition if active
+  if (_speechRecognition) {
+    _speechRecognition.stop();
+    _speechRecognition = null;
+  }
+
+  if (userText.length > 10) {
+    // Has content — grade it, but award zero points
+    _gradeTimeoutAnswer(q, userText);
+  } else {
+    // Empty or near-empty — reveal rubric with all points missed
+    _showTimeoutEmpty(q);
+  }
+}
+
+async function _gradeTimeoutAnswer(q, userText) {
+  const gradingStatus = document.getElementById('recall-grading-status');
+  if (gradingStatus) { gradingStatus.classList.add('on'); gradingStatus.textContent = 'DR. VOSS IS REVIEWING WHAT YOU HAD...'; }
+
+  try {
+    const result = await gradeRecallAnswer(q, userText);
+    if (gradingStatus) gradingStatus.classList.remove('on');
+
+    // Store result but override score to 0 for timeout
+    window._lastRecallResult = { question: q, userAnswer: userText, result };
+
+    _showRecallFeedback(q, userText, result, {
+      isTimeout: true,
+      timeoutBanner: 'Time. In my OR the patient does not wait for you to find the words. Here is what you had.',
+    });
+
+    // Timeout = zero points, counts as incorrect
+    if (window.submitAnswer) window.submitAnswer(false);
+  } catch (err) {
+    if (gradingStatus) gradingStatus.classList.remove('on');
+    console.error('[RECALL TIMEOUT] Grading failed:', err);
+    _showTimeoutEmpty(q);
+    if (window.submitAnswer) window.submitAnswer(false);
+  }
+}
+
+function _showTimeoutEmpty(q) {
+  const allMissed = (q.rubric?.key_points || []).map(kp => ({
+    point_id: kp.id, description: kp.description,
+  }));
+
+  const result = {
+    score: 0, passed: false,
+    captured: [], missed: allMissed, errors: [],
+    summary: '',
+    voss_quip: '',
+  };
+
+  _showRecallFeedback(q, '', result, {
+    isTimeout: true,
+    timeoutBanner: 'Nothing. You froze. It happens once. Not twice. Study this, then come back.',
+  });
+
+  if (window.submitAnswer) window.submitAnswer(false);
 }
 
 function _disableAllInputs() {
@@ -636,10 +778,11 @@ export function renderCurrentQuestion() {
   // Free recall questions get their own renderer and timer logic
   if (q.type === 'recall') {
     renderRecallUI(q);
-    if (!isUntimed && window._sessionMode !== 'study') {
-      const recallTime = window._sessionMode === 'code-blue' ? 45 : 90;
+    const recallTime = getRecallTimer(q, window._sessionMode);
+    if (!isUntimed && recallTime > 0) {
       _remaining = recallTime;
-      startQuestionTimer(q);
+      _currentTimerTotal = recallTime;
+      startRecallTimer(q, recallTime);
     }
   } else if (loadState().recallFirstEnabled) {
     // Recall First: show stem only, hold timer until user clicks ready
@@ -1043,7 +1186,14 @@ function renderRecallUI(q) {
 
   const hasSpeechAPI = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
 
+  // Compute timer text for display (or empty if study/untimed)
+  const _recallSecs = getRecallTimer(q, window._sessionMode);
+  const _timerHTML = _recallSecs > 0
+    ? `<div class="recall-timer" id="recall-timer-display" style="font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--green,#00ffa3);text-align:center;letter-spacing:.08em;margin-bottom:.4rem;">${_formatTimerMSS(_recallSecs)}</div>`
+    : '';
+
   recallArea.innerHTML = `
+    ${_timerHTML}
     <textarea id="recall-input" placeholder="Type your answer in your own words..." rows="6"></textarea>
     <div class="recall-char-count" id="recall-char-count">0 / 20 MIN</div>
     <div class="recall-controls">
@@ -1230,16 +1380,22 @@ window._handleRecallSubmit = async function(q) {
 
 // ─── RECALL FEEDBACK VIEW ────────────────────────────────────────────────────
 
-function _showRecallFeedback(q, userAnswer, result) {
+function _showRecallFeedback(q, userAnswer, result, opts = {}) {
   const recallArea = document.getElementById('recall-area');
   if (!recallArea) return;
 
   const score = result.score || 0;
   let scoreColor = 'var(--red,#ff2e63)';
   let scoreLabel = 'DR. VOSS IS DISAPPOINTED';
-  if (score >= 80)      { scoreColor = 'var(--green,#00ffa3)'; scoreLabel = 'DR. VOSS APPROVES'; }
+  if (opts.isTimeout) { scoreLabel = 'TIME EXPIRED'; scoreColor = 'var(--red,#ff2e63)'; }
+  else if (score >= 80)      { scoreColor = 'var(--green,#00ffa3)'; scoreLabel = 'DR. VOSS APPROVES'; }
   else if (score >= 60) { scoreColor = 'var(--green-2,#00c485)'; scoreLabel = 'ADEQUATE'; }
   else if (score >= 40) { scoreColor = 'var(--amber,#ffb000)'; scoreLabel = 'DR. VOSS WILL ACCEPT THIS'; }
+
+  // Timeout banner (Voss first-person)
+  const timeoutBannerHTML = opts.timeoutBanner
+    ? `<div style="background:rgba(255,46,99,.12);border:1px solid rgba(255,46,99,.3);border-radius:6px;padding:.6rem .8rem;margin-bottom:.6rem;font-size:.75rem;color:var(--red,#ff2e63);line-height:1.5;font-style:italic;">"${_escapeHTML(opts.timeoutBanner)}"<br><span style="font-size:.55rem;color:var(--muted);font-style:normal;">— DR. VOSS · 0 POINTS AWARDED</span></div>`
+    : '';
 
   const capturedHTML = (result.captured || []).map(c => {
     const kp = q.rubric?.key_points?.find(k => k.id === c.point_id);
@@ -1263,8 +1419,9 @@ function _showRecallFeedback(q, userAnswer, result) {
 
   recallArea.innerHTML = `
     <div class="recall-feedback">
+      ${timeoutBannerHTML}
       <div class="recall-fb-header" style="color:${scoreColor};">${scoreLabel}</div>
-      <div class="recall-fb-score ${score >= 80 ? 'recall-fb-score-glow' : ''}" style="color:${scoreColor};text-shadow:0 0 30px ${scoreColor}40;">${score}</div>
+      <div class="recall-fb-score ${score >= 80 ? 'recall-fb-score-glow' : ''}" style="color:${scoreColor};text-shadow:0 0 30px ${scoreColor}40;">${opts.isTimeout ? score + ' (0 pts)' : score}</div>
 
       ${result.voss_quip ? `<div class="recall-fb-quip">"${result.voss_quip}"<br><span style="font-size:.6rem;color:var(--muted);font-style:normal;">— DR. VOSS</span></div>` : ''}
 
