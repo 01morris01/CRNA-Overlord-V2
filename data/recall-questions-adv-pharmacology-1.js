@@ -1,25 +1,51 @@
 export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
 
-  // 1. Receptor Theory — ap1-wk-1
+  // 1a. Receptor Theory — Agonist Spectrum and Buprenorphine — ap1-wk-1
   {
-    id: 'r-ap1-w1-1',
+    id: 'r-ap1-w1-1a',
     type: 'recall',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
-    prompt: 'A patient on chronic buprenorphine therapy presents for emergency surgery requiring potent opioid analgesia. Walk through the receptor pharmacology that makes this situation challenging — specifically, explain the agonist spectrum from full agonist through inverse agonist, and describe why a partial agonist complicates pain management in the presence of a full agonist.',
+    prompt: 'A patient on chronic buprenorphine therapy presents for emergency surgery requiring potent opioid analgesia. Explain the agonist spectrum from full agonist through partial agonist, and describe why buprenorphine complicates pain management when a full agonist like fentanyl is administered.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 1, description: 'Full agonists bind and maximally activate receptors (stabilize R* conformation), producing the ceiling of pharmacologic response' },  // source: ap1-w1-002, ap1-w1-001
         { id: 'kp2', weight: 1, description: 'Partial agonists have lower intrinsic efficacy — they activate receptors submaximally even at 100% occupancy, producing a ceiling effect below full agonist Emax' },  // source: ap1-w1-006
         { id: 'kp3', weight: 2, description: 'In the presence of a full agonist, a partial agonist competes for receptors and displaces the full agonist, reducing the net maximal response — buprenorphine can precipitate withdrawal by displacing morphine/fentanyl from mu receptors' },  // source: ap1-w1-007, ap1-w1-061 (CRITICAL)
-        { id: 'kp4', weight: 1, description: 'Competitive antagonists bind R and R* equally without shifting baseline activity; they can be overcome by increasing agonist concentration (surmountable)' },  // source: ap1-w1-004, ap1-w1-008
-        { id: 'kp5', weight: 1, description: 'Inverse agonists stabilize the inactive R conformation and reduce constitutive receptor activity below resting baseline' },  // source: ap1-w1-003, ap1-w1-005
-        { id: 'kp6', weight: 1, description: 'Noncompetitive antagonism (allosteric or irreversible binding) depresses the maximum of the dose-response curve and cannot be overcome by increasing agonist dose; phenoxybenzamine before pheochromocytoma resection is the clinical example' },  // source: ap1-w1-008
       ],
       common_errors: [
         'Confusing affinity (how tightly a drug binds) with efficacy (capacity to activate once bound) — some antagonists have very high affinity',  // from ap1-w1-006 rationale
         'Stating that partial agonists always have lower affinity than full agonists (affinity is independent of intrinsic activity)',  // from ap1-w1-006 wrong answer B
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'receptor-theory',
+    chapter: 'ap1-wk-1',
+    difficulty: 2,
+    metadata: {
+      priority: 'high',
+      source: 'Stoelting Ch 2, Vandivier lecture',
+      topic: 'receptor-theory',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // 1b. Receptor Theory — Antagonist Types — ap1-wk-1
+  {
+    id: 'r-ap1-w1-1b',
+    type: 'recall',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-1',
+    prompt: 'Describe the three types of receptor antagonism: competitive, noncompetitive, and inverse agonism. For each, explain the mechanism and give a clinical example relevant to anesthesia.',
+    rubric: {
+      key_points: [
+        { id: 'kp4', weight: 1, description: 'Competitive antagonists bind R and R* equally without shifting baseline activity; they can be overcome by increasing agonist concentration (surmountable)' },  // source: ap1-w1-004, ap1-w1-008
+        { id: 'kp5', weight: 1, description: 'Inverse agonists stabilize the inactive R conformation and reduce constitutive receptor activity below resting baseline' },  // source: ap1-w1-003, ap1-w1-005
+        { id: 'kp6', weight: 2, description: 'Noncompetitive antagonism (allosteric or irreversible binding) depresses the maximum of the dose-response curve and cannot be overcome by increasing agonist dose; phenoxybenzamine before pheochromocytoma resection is the clinical example' },  // source: ap1-w1-008
+      ],
+      common_errors: [
         'Claiming competitive antagonism is insurmountable (it is surmountable by increasing agonist concentration)',  // from ap1-w1-004, ap1-w1-008
+        'Confusing inverse agonists with competitive antagonists — inverse agonists reduce baseline activity, antagonists merely block agonist access',  // from ap1-w1-003 rationale
       ],
       minimum_passing_score: 60,
     },
@@ -67,26 +93,52 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
     },
   },
 
-  // 3. Compartment Model and Distribution — ap1-wk-1
+  // 3a. Compartment Model — Bolus Distribution and Redistribution — ap1-wk-1
   {
-    id: 'r-ap1-w1-3',
+    id: 'r-ap1-w1-3a',
     type: 'recall',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
-    prompt: 'A 72-year-old patient receives a single IV bolus of propofol for induction and wakes up in 8 minutes. Later that day, a different patient on a 4-hour propofol TIVA infusion takes 25 minutes to emerge. Using the pharmacokinetic compartment model, explain why these two recovery times differ so dramatically despite using the same drug.',
+    prompt: 'A 72-year-old patient receives a single IV bolus of propofol for induction and wakes up in 8 minutes. Using the pharmacokinetic compartment model, explain where the drug goes immediately after injection, why the patient wakes up so quickly despite minimal hepatic metabolism, and what context-sensitive half-time measures.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 1, description: 'After IV bolus, drug initially distributes into the central compartment (blood and vessel-rich group: brain, heart, kidneys, liver), which receives ~75% of cardiac output despite being only ~10% of body mass' },  // source: ap1-w1-018, ap1-w1-021
         { id: 'kp2', weight: 2, description: 'Single-bolus awakening is due to redistribution: propofol rapidly moves from the highly perfused brain to less-perfused peripheral tissues (muscle, then fat), causing brain concentration to fall below the threshold for unconsciousness — hepatic metabolism is too slow to account for rapid awakening' },  // source: ap1-w1-020 (CRITICAL)
         { id: 'kp3', weight: 1, description: 'Context-sensitive half-time (CSHT) is the time for plasma concentration to fall 50% after stopping an infusion of a given duration; it accounts for the complex interplay of redistribution and elimination that changes with infusion length' },  // source: ap1-w1-022, ap1-w1-054
+      ],
+      common_errors: [
+        'Attributing rapid single-bolus awakening to fast hepatic metabolism rather than redistribution',  // from ap1-w1-020 wrong answer A
+        'Confusing the central compartment with the effect site (biophase) compartment',  // from ap1-w1-018 wrong answers
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pk-compartment-model',
+    chapter: 'ap1-wk-1',
+    difficulty: 2,
+    metadata: {
+      priority: 'high',
+      source: 'Stoelting Ch 2, Vandivier lecture',
+      topic: 'pk-compartment-model',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // 3b. Compartment Model — Prolonged Infusion, Pulmonary Uptake, Special Populations — ap1-wk-1
+  {
+    id: 'r-ap1-w1-3b',
+    type: 'recall',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-1',
+    prompt: 'A patient on a 4-hour propofol TIVA infusion takes 25 minutes to emerge despite the same drug producing 8-minute awakening after a single bolus. Explain the compartment model mechanism behind prolonged emergence after extended infusions, the role of first-pass pulmonary uptake in buffering peak concentrations of lipophilic drugs, and why elderly and hypovolemic patients require dose reduction.',
+    rubric: {
+      key_points: [
         { id: 'kp4', weight: 1, description: 'After prolonged infusion, peripheral compartments (muscle, fat) progressively saturate with drug, eliminating the redistribution gradient; recovery now depends on slower hepatic metabolism, explaining the longer emergence' },  // source: ap1-w1-022, ap1-w1-054
         { id: 'kp5', weight: 1, description: 'First-pass pulmonary uptake buffers peak arterial concentration of lipophilic drugs — fentanyl undergoes 65-75% first-pass pulmonary uptake, protecting the brain and heart from acute concentration spikes' },  // source: ap1-w1-019
         { id: 'kp6', weight: 1, description: 'Elderly and hypovolemic patients have smaller effective central compartments, producing higher initial peak concentrations from the same bolus dose — dose reduction is required' },  // source: ap1-w1-073
       ],
       common_errors: [
-        'Attributing rapid single-bolus awakening to fast hepatic metabolism rather than redistribution',  // from ap1-w1-020 wrong answer A
-        'Confusing the central compartment with the effect site (biophase) compartment',  // from ap1-w1-018 wrong answers
         'Stating that all IV drugs accumulate equally with prolonged infusion (remifentanil has a flat CSHT of ~3-5 min regardless of duration)',  // from ap1-w1-022 rationale
+        'Assuming elderly sensitivity is purely pharmacodynamic when a major component is the pharmacokinetic reduction in central compartment volume',  // from ap1-w1-073 rationale
       ],
       minimum_passing_score: 60,
     },
@@ -167,26 +219,52 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
     },
   },
 
-  // 6. Hepatic Drug Metabolism — ap1-wk-1
+  // 6a. Hepatic Drug Metabolism — Phase I, Phase II, and CYP3A4 — ap1-wk-1
   {
-    id: 'r-ap1-w1-6',
+    id: 'r-ap1-w1-6a',
     type: 'recall',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
-    prompt: 'Your patient is receiving a remifentanil infusion for a 6-hour spine case. At handoff, the incoming CRNA asks why you chose remifentanil over fentanyl for this long case, and how remifentanil metabolism differs from standard hepatic pathways. Walk through Phase I and Phase II drug metabolism, explain CYP3A4\'s role, and describe why remifentanil\'s metabolic pathway gives it a unique clinical advantage.',
+    prompt: 'Walk through the two phases of hepatic drug metabolism. Explain the function of Phase I reactions and Phase II conjugation, identify the single most important cytochrome P450 isoenzyme for anesthesia drugs, and give examples of clinically significant inhibitors and inducers that alter its activity.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 1, description: 'Phase I reactions (oxidation, reduction, hydrolysis) expose or introduce functional groups, preparing the molecule for conjugation; these may produce active or toxic metabolites' },  // source: ap1-w1-030
         { id: 'kp2', weight: 1, description: 'Phase II reactions are conjugation reactions (most commonly glucuronidation by UDP-glucuronosyltransferase); they attach polar groups producing highly water-soluble, usually inactive metabolites for renal/biliary excretion' },  // source: ap1-w1-037
-        { id: 'kp3', weight: 1, description: 'CYP3A4 is the most abundant hepatic CYP isoenzyme (~50% of all drug metabolism); it metabolizes fentanyl, sufentanil, alfentanil, and midazolam; inhibitors (ketoconazole, grapefruit juice) and inducers (rifampin) dramatically alter clearance' },  // source: ap1-w1-031, ap1-w1-032, ap1-w1-076
+        { id: 'kp3', weight: 2, description: 'CYP3A4 is the most abundant hepatic CYP isoenzyme (~50% of all drug metabolism); it metabolizes fentanyl, sufentanil, alfentanil, and midazolam; inhibitors (ketoconazole, grapefruit juice) and inducers (rifampin) dramatically alter clearance' },  // source: ap1-w1-031, ap1-w1-032, ap1-w1-076
+      ],
+      common_errors: [
+        'Confusing Phase I (functionalization) with Phase II (conjugation) — glucuronidation is Phase II, not Phase I',  // from ap1-w1-030 wrong answer D
+        'Claiming that CYP3A4 metabolizes remifentanil (CYP3A4 handles fentanyl/sufentanil, not remifentanil)',  // from ap1-w1-035 wrong answer A
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'drug-metabolism',
+    chapter: 'ap1-wk-1',
+    difficulty: 2,
+    metadata: {
+      priority: 'high',
+      source: 'Stoelting Ch 2, Vandivier lecture',
+      topic: 'drug-metabolism',
+      ladder_tier_appropriate: 'maintenance',
+    },
+  },
+
+  // 6b. Drug Metabolism — Remifentanil, Halothane, and Codeine Pathways — ap1-wk-1
+  {
+    id: 'r-ap1-w1-6b',
+    type: 'recall',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-1',
+    prompt: 'Your patient is receiving a remifentanil infusion for a 6-hour spine case. At handoff, the incoming CRNA asks why you chose remifentanil over fentanyl for this long case. Explain remifentanil\'s unique metabolic pathway, describe the mechanism behind halothane hepatitis, and explain why codeine produces dangerously variable responses across the population.',
+    rubric: {
+      key_points: [
         { id: 'kp4', weight: 2, description: 'Remifentanil contains a methyl ester linkage hydrolyzed by nonspecific tissue and plasma esterases (not pseudocholinesterase, not CYP450) — this organ-independent metabolism gives it a CSHT of ~3-5 minutes regardless of infusion duration or hepatic/renal function' },  // source: ap1-w1-035, ap1-w1-034 (CRITICAL)
         { id: 'kp5', weight: 1, description: 'Halothane hepatitis occurs via reductive (anaerobic) Phase I metabolism producing reactive trifluoroacetyl chloride intermediates that trigger immune-mediated hepatocyte destruction' },  // source: ap1-w1-033
         { id: 'kp6', weight: 1, description: 'Codeine is a prodrug requiring CYP2D6 O-demethylation to morphine for analgesic effect; poor metabolizers get no relief, ultrarapid metabolizers may produce dangerous morphine levels' },  // source: ap1-w1-029
       ],
       common_errors: [
         'Stating that remifentanil is metabolized by pseudocholinesterase (it is hydrolyzed by nonspecific tissue esterases; pseudocholinesterase metabolizes succinylcholine and mivacurium)',  // from ap1-w1-035 wrong answer B
-        'Confusing Phase I (functionalization) with Phase II (conjugation) — glucuronidation is Phase II, not Phase I',  // from ap1-w1-030 wrong answer D
-        'Claiming that CYP3A4 metabolizes remifentanil (CYP3A4 handles fentanyl/sufentanil, not remifentanil)',  // from ap1-w1-035 wrong answer A
+        'Confusing halothane hepatitis with direct hepatotoxicity — it is immune-mediated via trifluoroacetylated protein neoantigen formation',  // from ap1-w1-033 rationale
       ],
       minimum_passing_score: 60,
     },
@@ -267,26 +345,52 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
     },
   },
 
-  // 9a. Elimination Kinetics and Steady State — ap1-wk-1 (split from candidate 1-9)
+  // 9a. Elimination Kinetics — First-Order, Zero-Order, and Half-Life — ap1-wk-1
   {
     id: 'r-ap1-w1-9a',
     type: 'recall',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
-    prompt: 'You start a continuous IV infusion of a drug with a half-life of 4 hours. The nurse asks how long until the infusion reaches a stable therapeutic level. A different patient is on phenytoin, and a small dose increase causes a disproportionate jump in serum levels. Walk through the principles of first-order vs zero-order elimination kinetics, the concept of half-life, and the clinical rule for reaching steady state.',
+    prompt: 'Compare first-order and zero-order elimination kinetics: define each, explain how the rate of drug removal differs between them, give a clinical example of each, and define the pharmacokinetic half-life including its mathematical derivation and why it only applies to one of these kinetic orders.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 1, description: 'First-order kinetics: a constant fraction (percentage) of drug is eliminated per unit time — the rate of elimination is proportional to concentration; most drugs follow first-order kinetics at therapeutic concentrations' },  // source: ap1-w1-041
         { id: 'kp2', weight: 1, description: 'Zero-order kinetics: a constant amount of drug is eliminated per unit time regardless of concentration — metabolic enzymes are fully saturated; ethanol is the classic example (~15-20 mg/dL/hr)' },  // source: ap1-w1-051
-        { id: 'kp3', weight: 1, description: 'Half-life = 0.693/ke; after each half-life, 50% of remaining drug is eliminated (50% → 25% → 12.5% → 6.25% → 3.1%); half-life is constant only during first-order elimination' },  // source: ap1-w1-052, ap1-w1-053
+        { id: 'kp3', weight: 2, description: 'Half-life = 0.693/ke; after each half-life, 50% of remaining drug is eliminated (50% → 25% → 12.5% → 6.25% → 3.1%); half-life is constant only during first-order elimination' },  // source: ap1-w1-052, ap1-w1-053
+      ],
+      common_errors: [
+        'Confusing first-order (constant fraction) with zero-order (constant amount) elimination',  // from ap1-w1-041 wrong answer A, ap1-w1-051 wrong answer A
+        'Stating that half-life is variable during first-order kinetics (it is constant during first-order but meaningless during zero-order)',  // from ap1-w1-052 rationale
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'elimination-kinetics',
+    chapter: 'ap1-wk-1',
+    difficulty: 2,
+    metadata: {
+      priority: 'high',
+      source: 'Stoelting Ch 2, Vandivier lecture',
+      topic: 'elimination-kinetics',
+      ladder_tier_appropriate: 'maintenance',
+    },
+  },
+
+  // 9c. Elimination Kinetics — Steady State, Phenytoin Kinetics, and the Three-Phase Curve — ap1-wk-1
+  {
+    id: 'r-ap1-w1-9c',
+    type: 'recall',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-1',
+    prompt: 'You start a continuous IV infusion of a drug with a half-life of 4 hours. The nurse asks how long until the infusion reaches a stable therapeutic level. A different patient is on phenytoin, and a small dose increase causes a disproportionate jump in serum levels. Explain the clinical rule for reaching steady state, why phenytoin is uniquely dangerous to dose, and describe the three phases of the concentration-time curve after an IV bolus including the concept of effect-site equilibration.',
+    rubric: {
+      key_points: [
         { id: 'kp4', weight: 2, description: 'Approximately 5 half-lives are required to reach steady state during a constant infusion (and to eliminate ~97% of drug after discontinuation); for a drug with t1/2 of 4 hours, steady state is reached at ~20 hours' },  // source: ap1-w1-052, ap1-w1-053 (CRITICAL)
         { id: 'kp5', weight: 1, description: 'Phenytoin exhibits saturable (Michaelis-Menten) kinetics: at low concentrations it appears first-order, but as enzymes saturate it shifts to zero-order — small dose increases then produce disproportionately large concentration jumps, narrowing the margin between therapeutic and toxic levels' },  // source: ap1-w1-040, ap1-w1-077
         { id: 'kp6', weight: 1, description: 'The three-phase concentration-time curve after IV bolus: rapid distribution (alpha phase to VRG), slower redistribution (beta phase to muscle/fat), and terminal elimination (gamma phase) — ke0 describes the rate of effect-site equilibration with plasma, and hysteresis reflects the temporal lag between plasma concentration and clinical effect' },  // source: ap1-w1-055, ap1-w1-056, ap1-w1-057
       ],
       common_errors: [
-        'Confusing first-order (constant fraction) with zero-order (constant amount) elimination',  // from ap1-w1-041 wrong answer A, ap1-w1-051 wrong answer A
-        'Stating that half-life is variable during first-order kinetics (it is constant during first-order but meaningless during zero-order)',  // from ap1-w1-052 rationale
         'Forgetting that phenytoin transitions between kinetic orders as concentration rises, making it uniquely dangerous to dose empirically',  // from ap1-w1-040 wrong answer A
+        'Confusing the alpha (distribution) phase with the gamma (elimination) phase when interpreting plasma concentration curves',  // from ap1-w1-055 rationale
       ],
       minimum_passing_score: 60,
     },
