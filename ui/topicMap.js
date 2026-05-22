@@ -204,7 +204,10 @@ function renderTopicMap(courseId, course, onSelectTopic) {
       `;
       row.appendChild(label);
 
-      row.onclick = () => _showNodeDetail(topic, topicStats, () => onSelectTopic(topic.id));
+      row.onclick = () => _showNodeDetail(topic, topicStats, () => {
+        if (window.startStudySessionForNode) window.startStudySessionForNode(courseId, topic.id);
+        else onSelectTopic(topic.id);
+      });
       nodeContainer.appendChild(row);
     });
 
@@ -283,7 +286,10 @@ function renderTopicMap(courseId, course, onSelectTopic) {
       wrapper.appendChild(label);
 
       const dStats = allStats[topic.id];
-      wrapper.onclick = () => _showNodeDetail(topic, dStats, () => onSelectTopic(topic.id));
+      wrapper.onclick = () => _showNodeDetail(topic, dStats, () => {
+        if (window.startStudySessionForNode) window.startStudySessionForNode(courseId, topic.id);
+        else onSelectTopic(topic.id);
+      });
       nodeContainer.appendChild(wrapper);
     });
   }
