@@ -130,9 +130,37 @@ function renderTopicMap(courseId, course, onSelectTopic) {
   wm.appendChild(title);
 
   const subtitle = document.createElement('div');
-  subtitle.style.cssText = 'position:relative;font-family:var(--fm);font-size:.45rem;color:var(--muted,#5a6f8a);text-align:center;margin-bottom:1.5rem;letter-spacing:.1em;';
+  subtitle.style.cssText = 'position:relative;font-family:var(--fm);font-size:.45rem;color:var(--muted,#5a6f8a);text-align:center;margin-bottom:.4rem;letter-spacing:.1em;';
   subtitle.textContent = `${topics.length} NODES · ${course.title.toUpperCase()}`;
   wm.appendChild(subtitle);
+
+  // Affordance hint
+  const hint = document.createElement('div');
+  hint.style.cssText = 'position:relative;font-family:var(--fm);font-size:.38rem;color:var(--muted-2,#384a66);text-align:center;margin-bottom:1.2rem;letter-spacing:.06em;opacity:.7;';
+  hint.textContent = isMobile ? 'TAP A NODE TO BEGIN' : 'CLICK A NODE TO BEGIN';
+  wm.appendChild(hint);
+
+  // Determine next uncompleted node for pulse ring
+  const _nextNodeIdx = topics.findIndex(topic => {
+    const t = _tierForStats(allStats[topic.id]);
+    return t === 'new' || t === 'started';
+  });
+
+  // Inject pulse animation (respects prefers-reduced-motion)
+  if (!document.getElementById('node-pulse-style')) {
+    const pulseStyle = document.createElement('style');
+    pulseStyle.id = 'node-pulse-style';
+    pulseStyle.textContent = `
+      @keyframes node-pulse-ring {
+        0%,100%{box-shadow:0 0 0 0 ${theme.accent}88;}
+        50%{box-shadow:0 0 0 8px ${theme.accent}00;}
+      }
+      @media(prefers-reduced-motion:reduce){
+        .node-pulse-ring{animation:none!important;box-shadow:0 0 12px ${theme.accent}44!important;}
+      }
+    `;
+    document.head.appendChild(pulseStyle);
+  }
 
   // Node container
   const nodeContainer = document.createElement('div');
@@ -189,6 +217,11 @@ function renderTopicMap(courseId, course, onSelectTopic) {
         inner.textContent = topic.order;
         node.innerHTML = '';
         node.appendChild(inner);
+      }
+      if (idx === _nextNodeIdx) {
+        node.classList.add('node-pulse-ring');
+        node.style.animation += ',node-pulse-ring 2s ease-in-out infinite';
+        node.style.opacity = '1';
       }
       row.appendChild(node);
 
@@ -277,6 +310,10 @@ function renderTopicMap(courseId, course, onSelectTopic) {
         circle.appendChild(inner);
       } else {
         circle.textContent = topic.order;
+      }
+      if (idx === _nextNodeIdx) {
+        circle.classList.add('node-pulse-ring');
+        circle.style.animation = 'node-pulse-ring 2s ease-in-out infinite';
       }
       wrapper.appendChild(circle);
 
