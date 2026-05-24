@@ -319,7 +319,7 @@ async function _gradeTimeoutAnswer(q, userText) {
   if (gradingStatus) { gradingStatus.classList.add('on'); gradingStatus.textContent = 'DR. VOSS IS REVIEWING WHAT YOU HAD...'; }
 
   try {
-    const result = await gradeRecallAnswer(q, userText);
+    const result = await gradeRecallAnswer(q, userText, { isTimeout: true });
     if (gradingStatus) gradingStatus.classList.remove('on');
 
     // Store result but override score to 0 for timeout

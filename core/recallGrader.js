@@ -1,7 +1,7 @@
 const GRADE_ENDPOINT = '/api/grade-recall';
 const TIMEOUT_MS = 30000;
 
-export async function gradeRecallAnswer(question, userAnswer) {
+export async function gradeRecallAnswer(question, userAnswer, opts = {}) {
   const rubric = question.rubric;
   const prompt = question.q || question.prompt;
 
@@ -16,10 +16,13 @@ export async function gradeRecallAnswer(question, userAnswer) {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
+      const payload = { prompt, rubric, userAnswer };
+      if (opts.isTimeout) payload.isTimeout = true;
+
       const res = await fetch(GRADE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, rubric, userAnswer }),
+        body: JSON.stringify(payload),
         signal: controller.signal,
       });
 

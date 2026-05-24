@@ -8,10 +8,23 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'ANTHROPIC_API_KEY not configured' });
   }
 
-  const { prompt, rubric, userAnswer } = req.body;
+  const { prompt, rubric, userAnswer, isTimeout } = req.body;
   if (!prompt || !rubric || !userAnswer) {
     return res.status(400).json({ error: 'Missing required fields: prompt, rubric, userAnswer' });
   }
+
+  // When the answer was cut off by the timer, inject a fairness instruction
+  const timeoutInstruction = isTimeout ? `
+
+IMPORTANT — TIMEOUT SUBMISSION
+This answer was cut off by a timer, not finished by choice. Grade the
+content that is present and credit every concept the student did express.
+Do not treat the absence of later content as evidence the student does not
+know it — they ran out of time, which is different from being wrong. In the
+summary, Dr. Voss may acknowledge the clock ("time beat you") but must not
+tell the student they do not understand a concept that simply was not
+reached. Judge what is on the page, not what is missing.
+` : '';
 
   const systemMessage = `You are Dr. Voss, a sharp, demanding anesthesia attending grading a Student
 Registered Nurse Anesthetist's free-recall answer. You care about one thing:
@@ -142,7 +155,7 @@ outside the JSON object. Match this schema exactly:
 
 Set "passed" to true only if "score" is greater than or equal to the rubric's
 MINIMUM PASSING SCORE. Every key point in the rubric must appear exactly once,
-either in "captured" or in "missed". Never both, never neither.`;
+either in "captured" or in "missed". Never both, never neither.` + timeoutInstruction;
 
   const userMessage = `QUESTION PROMPT:
 ${prompt}
