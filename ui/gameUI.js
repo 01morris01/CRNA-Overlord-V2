@@ -14,6 +14,7 @@ import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anes
 import { SCENE_REGISTRY, runScene, stopActiveScene } from './sceneRegistry.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
 import { loadState, saveState, updateRecallStats, updateTopicCompetence } from '../core/state.js';
+import { adaptRecallSession } from './menus.js';
 
 /**
  * Returns a safe display string for the correct answer of any question type,
@@ -312,6 +313,7 @@ async function _gradeTimeoutAnswer(q, userText) {
     updateRecallStats(q.id, result);
     const _tTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
     if (_tTopic) updateTopicCompetence(_tTopic, q.tier || 'synthesis', result.score || 0);
+    adaptRecallSession();
 
     // Timeout = zero points, counts as incorrect
     if (window.submitAnswer) window.submitAnswer(false);
@@ -344,6 +346,7 @@ function _showTimeoutEmpty(q) {
   updateRecallStats(q.id, result);
   const _eTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
   if (_eTopic) updateTopicCompetence(_eTopic, q.tier || 'synthesis', 0);
+  adaptRecallSession();
 
   if (window.submitAnswer) window.submitAnswer(false);
 }
@@ -1365,6 +1368,7 @@ window._handleRecallSubmit = async function(q) {
     updateRecallStats(q.id, result);
     const _topic = q.concept_tag || q.metadata?.topic || q.topic || '';
     if (_topic) updateTopicCompetence(_topic, q.tier || 'synthesis', result.score || 0);
+    adaptRecallSession();
 
     // Show feedback view
     _showRecallFeedback(q, userAnswer, result);
