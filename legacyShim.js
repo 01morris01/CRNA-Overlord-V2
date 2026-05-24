@@ -562,6 +562,23 @@ function _showNewEngineGameOver(run) {
     recapHTML += `<div style="font-family:var(--fm);font-size:.42rem;color:var(--red,#ff2e63);letter-spacing:.12em;margin-top:.5rem;">WEAK SPOTS</div>`;
     weakSpots.forEach(s => { recapHTML += `<div style="font-size:.55rem;color:var(--txt-2,#a3b3c9);margin-top:.15rem;">\u25CB ${s.topic} (${s.correct}/${s.total})</div>`; });
   }
+
+  // Per-topic atom competence (free-recall sessions only)
+  if (run.mode === 'free-recall') {
+    const _state = loadState();
+    const _tc = _state.topicCompetence || {};
+    const activeTopics = Object.entries(_tc).filter(([, v]) => v.atomAttempts > 0);
+    if (activeTopics.length > 0) {
+      recapHTML += `<div style="font-family:var(--fm);font-size:.42rem;color:var(--amber,#ffb000);letter-spacing:.12em;margin-top:.7rem;">TOPIC MASTERY</div>`;
+      activeTopics.sort((a, b) => b[1].rollingAccuracy - a[1].rollingAccuracy);
+      activeTopics.forEach(([topic, data]) => {
+        const icon = data.synthesisUnlocked ? '\u2713' : '\u25CB';
+        const color = data.synthesisUnlocked ? 'var(--green,#00ffa3)' : 'var(--txt-2,#a3b3c9)';
+        recapHTML += `<div style="font-size:.55rem;color:${color};margin-top:.15rem;">${icon} ${topic}: ${data.rollingAccuracy}% (${data.atomAttempts} atoms)</div>`;
+      });
+    }
+  }
+
   recapEl.innerHTML = recapHTML;
 
   // ── XP Improvement Bonus (follow-up sessions only) ────────────────────────

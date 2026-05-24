@@ -523,6 +523,35 @@ function _updateLadderBar(run) {
   bar.innerHTML = html;
 }
 
+/** Brief inline notice in Dr. Voss's voice when synthesis unlocks. */
+function _showSynthesisUnlockNotice() {
+  const existing = document.getElementById('synthesis-unlock-notice');
+  if (existing) existing.remove();
+
+  const notice = document.createElement('div');
+  notice.id = 'synthesis-unlock-notice';
+  notice.style.cssText = `
+    position:fixed; top:12%; left:50%; transform:translateX(-50%);
+    z-index:9000; padding:14px 28px; border-radius:8px;
+    background:rgba(0,0,0,.85); border:1px solid var(--amber,#ffb000);
+    color:var(--amber,#ffb000); font-size:1rem; font-weight:600;
+    text-align:center; pointer-events:none;
+    animation: fadeInOut 3.5s ease forwards;
+  `;
+  notice.textContent = 'You have the pieces. Now put them together.';
+  document.body.appendChild(notice);
+
+  // Inject keyframe if not present
+  if (!document.getElementById('synthesis-unlock-kf')) {
+    const style = document.createElement('style');
+    style.id = 'synthesis-unlock-kf';
+    style.textContent = `@keyframes fadeInOut { 0%{opacity:0;transform:translateX(-50%) translateY(10px)} 15%{opacity:1;transform:translateX(-50%) translateY(0)} 85%{opacity:1} 100%{opacity:0} }`;
+    document.head.appendChild(style);
+  }
+
+  setTimeout(() => notice.remove(), 3600);
+}
+
 window._showStreakBanner = _showStreakBanner;
 function _showStreakBanner(text) {
   const run = getCurrentRun();
@@ -734,6 +763,17 @@ export function renderCurrentQuestion() {
     }
   }
 
+  // Synthesis unlock notice: show once when transitioning from atoms to synthesis
+  if (q.type === 'recall' && q.tier !== 'atom' && (q.feeder_atoms?.length > 0)) {
+    if (!window._synthesisUnlockNoticeShown) {
+      window._synthesisUnlockNoticeShown = new Set();
+    }
+    if (!window._synthesisUnlockNoticeShown.has(q.id)) {
+      window._synthesisUnlockNoticeShown.add(q.id);
+      _showSynthesisUnlockNotice();
+    }
+  }
+
   console.log('Rendering question:', q.id, q.type, q);
 
   // Validate (auto-repairs where possible)
@@ -758,10 +798,19 @@ export function renderCurrentQuestion() {
     const topic = q.metadata?.topic || q.metadata?.topicId || defaultTitle;
     if (chb) {
       const rIdx = state.index;
-      const tier = rIdx < 5 ? 'PRE-INDUCTION' : rIdx < 10 ? 'MAINTENANCE' : rIdx < 14 ? 'CRITICAL' : 'CODE BLUE';
-      const tierColor = rIdx < 5 ? 'var(--green,#00ffa3)' : rIdx < 10 ? 'var(--amber,#ffb000)' : 'var(--red,#ff2e63)';
-      const reward = LADDER_REWARDS[Math.min(rIdx, LADDER_REWARDS.length - 1)];
-      chb.innerHTML = `<span style="color:${tierColor};font-weight:700;">${tier}</span> · Q${rIdx + 1}/${state.questions.length} · <span style="color:var(--amber,#ffb000);">${reward}pts</span>`;
+
+      // Recall questions: show FOUNDATION / SYNTHESIS chip instead of ladder tier
+      if (q.type === 'recall') {
+        const isAtom = q.tier === 'atom';
+        const chipLabel = isAtom ? 'FOUNDATION' : 'SYNTHESIS';
+        const chipColor = isAtom ? 'var(--green,#00ffa3)' : 'var(--amber,#ffb000)';
+        chb.innerHTML = `<span style="color:${chipColor};font-weight:700;">${chipLabel}</span> · Q${rIdx + 1}/${state.questions.length}`;
+      } else {
+        const tier = rIdx < 5 ? 'PRE-INDUCTION' : rIdx < 10 ? 'MAINTENANCE' : rIdx < 14 ? 'CRITICAL' : 'CODE BLUE';
+        const tierColor = rIdx < 5 ? 'var(--green,#00ffa3)' : rIdx < 10 ? 'var(--amber,#ffb000)' : 'var(--red,#ff2e63)';
+        const reward = LADDER_REWARDS[Math.min(rIdx, LADDER_REWARDS.length - 1)];
+        chb.innerHTML = `<span style="color:${tierColor};font-weight:700;">${tier}</span> · Q${rIdx + 1}/${state.questions.length} · <span style="color:var(--amber,#ffb000);">${reward}pts</span>`;
+      }
     }
   }
   if (ovs) ovs.textContent = q.setup || '';
