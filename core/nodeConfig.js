@@ -111,6 +111,7 @@ import { RA_WK13_QUESTIONS, RA_WK13_METADATA } from '../data/questions/ra-wk13.j
 // ── Free Recall Questions ─────────────────────────────────────────────────────
 import { RECALL_QUESTIONS_BASICS } from '../data/recall-questions.js';
 import { RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 } from '../data/recall-questions-adv-pharmacology-1.js';
+import { RECALL_QUESTIONS_ATOMS } from '../data/recall-questions-atoms.js';
 
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
@@ -936,6 +937,7 @@ function mergeRecallQuestions(recallQuestions) {
 }
 mergeRecallQuestions(RECALL_QUESTIONS_BASICS);
 mergeRecallQuestions(RECALL_QUESTIONS_ADV_PHARMACOLOGY_1);
+mergeRecallQuestions(RECALL_QUESTIONS_ATOMS);
 
 // ─── Accessors ────────────────────────────────────────────────────────────────
 

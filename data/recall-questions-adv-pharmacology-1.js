@@ -4,6 +4,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-1a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'A patient on chronic buprenorphine therapy presents for emergency surgery requiring potent opioid analgesia. Explain the agonist spectrum from full agonist through partial agonist, and describe why buprenorphine complicates pain management when a full agonist like fentanyl is administered.',
@@ -34,6 +35,8 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-1b',
     type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-competitive-antag-1', 'atom-noncompetitive-antag-1', 'atom-inverse-agonism-1'],
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'Describe the three types of receptor antagonism: competitive, noncompetitive, and inverse agonism. For each, explain the mechanism and give a clinical example relevant to anesthesia.',
@@ -64,6 +67,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-2',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'You are called to provide anesthesia for three patients in sequence: (1) a spinal cord injury patient 3 weeks post-injury needing debridement, (2) a pheochromocytoma resection after chronic catecholamine excess, and (3) a preterm labor patient who stopped responding to terbutaline after 48 hours of continuous infusion. For each patient, explain the receptor regulation mechanism responsible for the clinical problem and describe how it changes your anesthetic approach.',
@@ -97,6 +101,8 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-3a',
     type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-central-compartment-1', 'atom-redistribution-1', 'atom-csht-1'],
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'A 72-year-old patient receives a single IV bolus of propofol for induction and wakes up in 8 minutes. Using the pharmacokinetic compartment model, explain where the drug goes immediately after injection, why the patient wakes up so quickly despite minimal hepatic metabolism, and what context-sensitive half-time measures.',
@@ -127,6 +133,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-3b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'A patient on a 4-hour propofol TIVA infusion takes 25 minutes to emerge despite the same drug producing 8-minute awakening after a single bolus. Explain the compartment model mechanism behind prolonged emergence after extended infusions, the role of first-pass pulmonary uptake in buffering peak concentrations of lipophilic drugs, and why elderly and hypovolemic patients require dose reduction.',
@@ -157,6 +164,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-4',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'A postoperative patient with sepsis is receiving a lidocaine infusion for visceral pain. The surgical team asks why the same dose that controlled pain yesterday is now inadequate. A second patient — a neonate — develops kernicterus after receiving sulfonamides. Walk through the protein binding principles that explain both scenarios, including the criteria for clinically significant drug displacement.',
@@ -190,6 +198,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-5',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'A patient with an infected finger abscess reports that local anesthetic infiltration at the abscess site provided no relief. The surgeon also notes that oral morphine dose is much higher than the IV morphine dose for equivalent analgesia. Explain the pharmacologic principles of absorption, ionization, and first-pass metabolism that account for both observations, and identify which routes of administration bypass first-pass effect.',
@@ -223,6 +232,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-6a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'Walk through the two phases of hepatic drug metabolism. Explain the function of Phase I reactions and Phase II conjugation, identify the single most important cytochrome P450 isoenzyme for anesthesia drugs, and give examples of clinically significant inhibitors and inducers that alter its activity.',
@@ -253,6 +263,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-6b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'Your patient is receiving a remifentanil infusion for a 6-hour spine case. At handoff, the incoming CRNA asks why you chose remifentanil over fentanyl for this long case. Explain remifentanil\'s unique metabolic pathway, describe the mechanism behind halothane hepatitis, and explain why codeine produces dangerously variable responses across the population.',
@@ -283,6 +294,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-7',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'A child receives codeine after tonsillectomy and develops respiratory arrest. A second patient receives succinylcholine for rapid-sequence intubation and remains paralyzed for 6 hours. For each case, explain the pharmacogenetic mechanism, identify the specific enzyme or receptor defect, and describe how preoperative screening could have prevented the adverse outcome.',
@@ -316,6 +328,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-8',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'An attending shows you two overlaid dose-response curves for Drug A and Drug B used for the same clinical endpoint. Drug A\'s curve is shifted to the left; Drug B has a higher maximum response. The attending asks you to compare the two drugs and then to explain the therapeutic index concept and how synergistic drug interactions are exploited daily in TIVA. Walk through each concept.',
@@ -349,6 +362,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-9a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'Compare first-order and zero-order elimination kinetics: define each, explain how the rate of drug removal differs between them, give a clinical example of each, and define the pharmacokinetic half-life including its mathematical derivation and why it only applies to one of these kinetic orders.',
@@ -379,6 +393,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-9c',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'You start a continuous IV infusion of a drug with a half-life of 4 hours. The nurse asks how long until the infusion reaches a stable therapeutic level. A different patient is on phenytoin, and a small dose increase causes a disproportionate jump in serum levels. Explain the clinical rule for reaching steady state, why phenytoin is uniquely dangerous to dose, and describe the three phases of the concentration-time curve after an IV bolus including the concept of effect-site equilibration.',
@@ -409,6 +424,7 @@ export const RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 = [
   {
     id: 'r-ap1-w1-9b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'adv-pharmacology-1',
     nodeId: 'ap1-wk-1',
     prompt: 'You are managing two patients in the ICU: a 68-year-old in cardiogenic shock receiving a lidocaine infusion, and a frail 82-year-old with CKD stage 4 (GFR 22 mL/min) whose serum creatinine is "normal" at 1.0 mg/dL. The attending asks you to explain why the lidocaine is accumulating and why the creatinine is misleading. Walk through the principles of hepatic extraction ratio and renal clearance that guide dose adjustment in organ failure.',

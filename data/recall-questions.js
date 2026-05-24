@@ -4,6 +4,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-mh-1a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-7',
     prompt: 'A patient develops malignant hyperthermia 20 minutes after sevoflurane induction. Describe the immediate first three actions and the critical drug, including its dose and redosing.',
@@ -31,6 +32,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-mh-1b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-7',
     prompt: 'After administering dantrolene for malignant hyperthermia, what supportive measures do you initiate? Describe cooling techniques and metabolic derangement management.',
@@ -56,6 +58,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-last-1a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-3',
     prompt: 'A patient receiving a brachial plexus block with bupivacaine develops perioral numbness, tinnitus, and then a seizure. Describe your immediate management steps and how you control the seizure.',
@@ -82,6 +85,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-last-1b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-3',
     prompt: 'A patient in LAST progresses to cardiovascular collapse despite initial seizure management. Describe the Intralipid rescue protocol, its dose, and which ACLS drugs must be avoided.',
@@ -109,6 +113,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-anaphylaxis-1a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-3',
     prompt: 'You suspect anaphylaxis during a general anesthetic — hypotension, bronchospasm, diffuse rash. Describe the first three critical actions including the key drug, its dose, and fluid management.',
@@ -136,6 +141,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-anaphylaxis-1b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-3',
     prompt: 'Anaphylaxis under anesthesia is not responding to initial epinephrine boluses. What secondary vasopressors do you use, and what adjunct medications do you add? Include doses.',
@@ -162,6 +168,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-sch-k-1',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-10',
     prompt: 'Explain the mechanism by which succinylcholine causes life-threatening hyperkalemia in a burn patient. When does the risk begin, and when does it resolve?',
@@ -190,6 +197,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-propofol-1a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-8',
     prompt: 'Describe the mechanism of action of propofol at the receptor level. Then explain why a single bolus wears off so quickly and why propofol is favored for TIVA.',
@@ -215,6 +223,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-propofol-1b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-8',
     prompt: 'You are about to induce a patient with propofol. Describe the cardiovascular and respiratory effects you anticipate, including the mechanism of hemodynamic changes. What bonus property makes propofol useful postoperatively?',
@@ -241,6 +250,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-starling-1',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-4',
     prompt: 'Explain the Frank-Starling mechanism in clinical terms. How does it apply to the management of a patient with decreased cardiac output in the OR?',
@@ -269,6 +279,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-hypoxemia-1',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-5',
     prompt: 'List and explain the four mechanisms of hypoxemia. For each, give one clinical example relevant to anesthesia practice.',
@@ -297,6 +308,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-asa-1a',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-2',
     prompt: 'Define ASA Physical Status classes 1 through 3 and the E modifier. For each class, give a clinical example.',
@@ -323,6 +335,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-asa-1b',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-2',
     prompt: 'Define ASA Physical Status classes 4 through 6. For each class, give a clinical example and explain how it changes your anesthetic planning.',
@@ -349,6 +362,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-csht-1',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-8',
     prompt: 'Define context-sensitive half-time. Explain why it matters more than elimination half-life for choosing anesthetic agents in clinical practice. Give examples comparing two agents.',
@@ -377,6 +391,7 @@ export const RECALL_QUESTIONS_BASICS = [
   {
     id: 'r-sniffing-1',
     type: 'recall',
+    tier: 'synthesis',
     courseId: 'basics-of-anesthesia',
     nodeId: 'node-2',
     prompt: 'Describe the sniffing position for direct laryngoscopy. What three axes does it align, and how is each axis manipulated?',

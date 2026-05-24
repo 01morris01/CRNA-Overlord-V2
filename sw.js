@@ -9,6 +9,7 @@ const APP_SHELL = [
   '/ui/gameUI.js', '/ui/menus.js',
   '/ui/reviewMode.js', '/ui/sceneRegistry.js', '/assets/css/tokens.css',
   '/data/recall-questions.js',
+  '/data/recall-questions-atoms.js',
   '/manifest.json',
 ];
 
