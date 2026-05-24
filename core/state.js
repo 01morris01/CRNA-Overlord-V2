@@ -10,6 +10,10 @@ export const SYNTHESIS_UNLOCK_THRESHOLD = 70;
 export const RECALL_TIMER_FLOOR   = 150;  // 2:30 hard minimum for synthesis
 export const RECALL_TIMER_CEILING = 330;  // 5:30 hard maximum for synthesis
 
+// Homeostat step sizes (seconds)
+export const TIMER_LOOSEN_STEP  = 45;  // sharp — erring toward safety
+export const TIMER_TIGHTEN_STEP = 30;  // governed — once per session, post-win only
+
 const DEFAULT_STATE = {
   name: '',
   totalPts: 0,
@@ -42,6 +46,9 @@ const DEFAULT_STATE = {
   // Per-topic atom competence for adaptive gating
   // { [topic]: { atomAttempts, atomAccuracySum, rollingAccuracy, synthesisUnlocked } }
   topicCompetence: {},
+  // Per-topic adaptive timer state (homeostat)
+  // { [topic]: { synthesisAdjust: 0, tightenedThisSession: false } }
+  timerState: {},
 };
 
 function safeParse(json) {
@@ -71,6 +78,7 @@ export function loadState() {
   merged.nodeCompletion = {...DEFAULT_STATE.nodeCompletion, ...(raw.nodeCompletion||{})};
   merged.savedForLater  = Array.isArray(raw.savedForLater) ? [...new Set(raw.savedForLater)] : [];
   merged.topicCompetence = {...DEFAULT_STATE.topicCompetence, ...(raw.topicCompetence||{})};
+  merged.timerState = {...DEFAULT_STATE.timerState, ...(raw.timerState||{})};
 
   return merged;
 }
@@ -129,6 +137,62 @@ export function updateRecallStats(questionId, result) {
   saveState(state);
 
   return prev;
+}
+
+/**
+ * Timer homeostat: adapt synthesis timer toward the just-in-time band.
+ *
+ * @param {string} topic - question topic
+ * @param {number} timeRemaining - seconds left when submitted (0 = timeout)
+ * @param {number} totalTime - total seconds on the clock for this question
+ * @param {number} score - graded score 0-100
+ * @param {number} passingScore - rubric minimum passing score
+ * @param {boolean} isTimeout - true if the submission was forced by timer expiry
+ */
+export function updateTimerHomeostat(topic, timeRemaining, totalTime, score, passingScore, isTimeout) {
+  if (!topic) return;
+  const state = loadState();
+  if (!state.timerState) state.timerState = {};
+
+  const ts = state.timerState[topic] || {
+    synthesisAdjust: 0,
+    tightenedThisSession: false,
+  };
+
+  const pctRemaining = totalTime > 0 ? (timeRemaining / totalTime) : 0;
+  const passed = score >= passingScore;
+
+  if (isTimeout || (pctRemaining < 0.10 && !passed)) {
+    // TOO TIGHT — sharp loosening
+    ts.synthesisAdjust = Math.min(
+      RECALL_TIMER_CEILING - RECALL_TIMER_FLOOR, // max positive adjust
+      ts.synthesisAdjust + TIMER_LOOSEN_STEP
+    );
+  } else if (pctRemaining > 0.33 && passed && !ts.tightenedThisSession) {
+    // TOO LOOSE — governed tightening, once per session, post-win only
+    ts.synthesisAdjust = Math.max(
+      -(RECALL_TIMER_CEILING - RECALL_TIMER_FLOOR), // max negative adjust
+      ts.synthesisAdjust - TIMER_TIGHTEN_STEP
+    );
+    ts.tightenedThisSession = true;
+  }
+  // else: IN THE BAND — no change
+
+  state.timerState[topic] = ts;
+  saveState(state);
+  return ts;
+}
+
+/**
+ * Reset tightenedThisSession for all topics. Call at session start.
+ */
+export function resetSessionTimerFlags() {
+  const state = loadState();
+  if (!state.timerState) return;
+  for (const topic of Object.keys(state.timerState)) {
+    state.timerState[topic].tightenedThisSession = false;
+  }
+  saveState(state);
 }
 
 export function updateTopicCompetence(topic, tier, score) {

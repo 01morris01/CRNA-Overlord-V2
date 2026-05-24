@@ -13,7 +13,7 @@ import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
 import { SCENE_REGISTRY, runScene, stopActiveScene } from './sceneRegistry.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
-import { loadState, saveState, updateRecallStats, updateTopicCompetence, RECALL_TIMER_FLOOR, RECALL_TIMER_CEILING } from '../core/state.js';
+import { loadState, saveState, updateRecallStats, updateTopicCompetence, updateTimerHomeostat, resetSessionTimerFlags, RECALL_TIMER_FLOOR, RECALL_TIMER_CEILING } from '../core/state.js';
 import { adaptRecallSession } from './menus.js';
 
 /**
@@ -334,6 +334,10 @@ async function _gradeTimeoutAnswer(q, userText) {
     updateRecallStats(q.id, result);
     const _tTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
     if (_tTopic) updateTopicCompetence(_tTopic, q.tier || 'synthesis', result.score || 0);
+    // Homeostat: timeout → TOO TIGHT
+    if (_tTopic && (q.tier || 'synthesis') === 'synthesis') {
+      updateTimerHomeostat(_tTopic, 0, _currentTimerTotal, result.score || 0, q.rubric?.minimum_passing_score || 60, true);
+    }
     adaptRecallSession();
 
     // Timeout = zero points, counts as incorrect
@@ -367,6 +371,10 @@ function _showTimeoutEmpty(q) {
   updateRecallStats(q.id, result);
   const _eTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
   if (_eTopic) updateTopicCompetence(_eTopic, q.tier || 'synthesis', 0);
+  // Homeostat: empty timeout → TOO TIGHT
+  if (_eTopic && (q.tier || 'synthesis') === 'synthesis') {
+    updateTimerHomeostat(_eTopic, 0, _currentTimerTotal, 0, q.rubric?.minimum_passing_score || 60, true);
+  }
   adaptRecallSession();
 
   if (window.submitAnswer) window.submitAnswer(false);
@@ -1438,6 +1446,10 @@ window._handleRecallSubmit = async function(q) {
     updateRecallStats(q.id, result);
     const _topic = q.concept_tag || q.metadata?.topic || q.topic || '';
     if (_topic) updateTopicCompetence(_topic, q.tier || 'synthesis', result.score || 0);
+    // Homeostat: classify based on time remaining at submission
+    if (_topic && (q.tier || 'synthesis') === 'synthesis') {
+      updateTimerHomeostat(_topic, _remaining, _currentTimerTotal, result.score || 0, q.rubric?.minimum_passing_score || 60, false);
+    }
     adaptRecallSession();
 
     // Show feedback view

@@ -1,4 +1,4 @@
-import { loadState, saveState, SYNTHESIS_UNLOCK_THRESHOLD } from '../core/state.js';
+import { loadState, saveState, SYNTHESIS_UNLOCK_THRESHOLD, resetSessionTimerFlags } from '../core/state.js';
 import { filterQuestions, getQuestionsForNode, getQuestionMetadata } from '../core/questionEngine.js';
 import { getNodesByCourse, getDistinctCourses, getNodeConfig } from '../core/nodeConfig.js';
 import { getCurrentRun } from '../core/gameEngine.js';
@@ -375,6 +375,11 @@ window._launchWithMode = function(mode) {
 
   const { courseId, nodeId, questions } = pending;
   window._pendingSession = null;
+
+  // Reset per-session timer flags so tightening is allowed once this session
+  resetSessionTimerFlags();
+  // Clear synthesis unlock notices for this session
+  window._synthesisUnlockNoticeShown = new Set();
 
   let pool = questions;
   let sessionQuestions;
