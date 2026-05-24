@@ -104,6 +104,13 @@ function _getTimerDuration() {
  */
 export function getRecallTimer(question, mode) {
   if (mode === 'study') return 0;
+
+  // Atom tier: single-concept, shorter timers
+  if (question?.tier === 'atom') {
+    return (mode === 'code-blue') ? 60 : 90;
+  }
+
+  // Synthesis tier (or absent): existing tiered logic by kp count
   const kpCount = question?.rubric?.key_points?.length || 5;
   if (mode === 'code-blue') {
     if (kpCount <= 4) return 120;
