@@ -13,7 +13,7 @@ import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
 import { SCENE_REGISTRY, runScene, stopActiveScene } from './sceneRegistry.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
-import { loadState, saveState, updateRecallStats, updateTopicCompetence } from '../core/state.js';
+import { loadState, saveState, updateRecallStats, updateTopicCompetence, RECALL_TIMER_FLOOR, RECALL_TIMER_CEILING } from '../core/state.js';
 import { adaptRecallSession } from './menus.js';
 
 /**
@@ -106,22 +106,43 @@ function _getTimerDuration() {
 export function getRecallTimer(question, mode) {
   if (mode === 'study') return 0;
 
-  // Atom tier: single-concept, shorter timers
+  // Atom tier: flat 120s (Code Blue ~65% → 78s, rounded to 75s)
   if (question?.tier === 'atom') {
-    return (mode === 'code-blue') ? 60 : 90;
+    return (mode === 'code-blue') ? 75 : 120;
   }
 
-  // Synthesis tier (or absent): existing tiered logic by kp count
+  // Synthesis tier (or absent): baseline by rubric-point count
   const kpCount = question?.rubric?.key_points?.length || 5;
-  if (mode === 'code-blue') {
-    if (kpCount <= 4) return 120;
-    if (kpCount === 5) return 150;
-    return 180;
+  let baseline;
+  if (kpCount >= 5) {
+    baseline = 300; // 5:00
+  } else {
+    baseline = 240; // 4:00 for 3-4 kp
   }
-  // OR Rounds, free-recall, or any other timed mode
-  if (kpCount <= 4) return 180;
-  if (kpCount === 5) return 240;
-  return 300;
+
+  // Per-topic homeostat adjustment (Fix 3 populates timerState)
+  const topic = question?.concept_tag || question?.metadata?.topic || question?.topic || '';
+  if (topic) {
+    const state = _loadStateForTimer();
+    const ts = state?.timerState?.[topic];
+    if (ts && typeof ts.synthesisAdjust === 'number') {
+      baseline = Math.max(RECALL_TIMER_FLOOR,
+                   Math.min(RECALL_TIMER_CEILING, baseline + ts.synthesisAdjust));
+    }
+  }
+
+  if (mode === 'code-blue') {
+    // Code Blue ≈ 63% of the effective baseline, rounded to nearest 15s
+    return Math.round((baseline * 0.63) / 15) * 15;
+  }
+  return baseline;
+}
+
+// Lazy-load state for timer to avoid circular imports at module init
+function _loadStateForTimer() {
+  try {
+    return loadState();
+  } catch { return null; }
 }
 
 /** Format seconds as M:SS string (e.g. 240 → "4:00", 93 → "1:33"). */

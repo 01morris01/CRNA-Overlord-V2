@@ -6,6 +6,10 @@ const LEGACY_SAVE_KEY = 'hemodynamic_overlord_save';
 // synthesis questions for the topic. One named constant for easy tuning.
 export const SYNTHESIS_UNLOCK_THRESHOLD = 70;
 
+// Adaptive timer bounds (seconds) — the homeostat never pushes outside these.
+export const RECALL_TIMER_FLOOR   = 150;  // 2:30 hard minimum for synthesis
+export const RECALL_TIMER_CEILING = 330;  // 5:30 hard maximum for synthesis
+
 const DEFAULT_STATE = {
   name: '',
   totalPts: 0,
