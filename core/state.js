@@ -2,6 +2,10 @@ import { getUserSaveKey } from './auth.js';
 
 const LEGACY_SAVE_KEY = 'hemodynamic_overlord_save';
 
+// Rolling atom accuracy >= this threshold (and >= 2 attempts) unlocks
+// synthesis questions for the topic. One named constant for easy tuning.
+export const SYNTHESIS_UNLOCK_THRESHOLD = 70;
+
 const DEFAULT_STATE = {
   name: '',
   totalPts: 0,
@@ -31,6 +35,9 @@ const DEFAULT_STATE = {
   topicStats: {},
   // Free recall stats: { [questionId]: { attempts, bestScore, lastAttempt, capturedPoints, missedCounts, persistentlyMissed } }
   recallStats: {},
+  // Per-topic atom competence for adaptive gating
+  // { [topic]: { atomAttempts, atomAccuracySum, rollingAccuracy, synthesisUnlocked } }
+  topicCompetence: {},
 };
 
 function safeParse(json) {
@@ -59,6 +66,7 @@ export function loadState() {
   merged.lastSeen = {...DEFAULT_STATE.lastSeen, ...(raw.lastSeen||{})};
   merged.nodeCompletion = {...DEFAULT_STATE.nodeCompletion, ...(raw.nodeCompletion||{})};
   merged.savedForLater  = Array.isArray(raw.savedForLater) ? [...new Set(raw.savedForLater)] : [];
+  merged.topicCompetence = {...DEFAULT_STATE.topicCompetence, ...(raw.topicCompetence||{})};
 
   return merged;
 }
@@ -117,6 +125,30 @@ export function updateRecallStats(questionId, result) {
   saveState(state);
 
   return prev;
+}
+
+export function updateTopicCompetence(topic, tier, score) {
+  if (tier !== 'atom') return; // only atom scores gate synthesis
+  const state = loadState();
+  if (!state.topicCompetence) state.topicCompetence = {};
+
+  const tc = state.topicCompetence[topic] || {
+    atomAttempts: 0,
+    atomAccuracySum: 0,
+    rollingAccuracy: 0,
+    synthesisUnlocked: false,
+  };
+
+  tc.atomAttempts += 1;
+  tc.atomAccuracySum += score;
+  tc.rollingAccuracy = Math.round(tc.atomAccuracySum / tc.atomAttempts);
+  if (tc.rollingAccuracy >= SYNTHESIS_UNLOCK_THRESHOLD && tc.atomAttempts >= 2) {
+    tc.synthesisUnlocked = true;
+  }
+
+  state.topicCompetence[topic] = tc;
+  saveState(state);
+  return tc;
 }
 
 export function clearState() {

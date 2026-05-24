@@ -13,7 +13,7 @@ import { renderNMBScene, stopNMBScene } from './nmbScene.js';
 import { renderAnesthesiaMachineScene, stopAnesthesiaMachineScene } from './anesthesiaMachineScene.js';
 import { SCENE_REGISTRY, runScene, stopActiveScene } from './sceneRegistry.js';
 import { getNodeConfig } from '../core/nodeConfig.js';
-import { loadState, saveState, updateRecallStats } from '../core/state.js';
+import { loadState, saveState, updateRecallStats, updateTopicCompetence } from '../core/state.js';
 
 /**
  * Returns a safe display string for the correct answer of any question type,
@@ -308,6 +308,11 @@ async function _gradeTimeoutAnswer(q, userText) {
       timeoutBanner: 'Time. In my OR the patient does not wait for you to find the words. Here is what you had.',
     });
 
+    // Save stats for timeout-graded answers
+    updateRecallStats(q.id, result);
+    const _tTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
+    if (_tTopic) updateTopicCompetence(_tTopic, q.tier || 'synthesis', result.score || 0);
+
     // Timeout = zero points, counts as incorrect
     if (window.submitAnswer) window.submitAnswer(false);
   } catch (err) {
@@ -334,6 +339,11 @@ function _showTimeoutEmpty(q) {
     isTimeout: true,
     timeoutBanner: 'Nothing. You froze. It happens once. Not twice. Study this, then come back.',
   });
+
+  // Save stats for empty timeout
+  updateRecallStats(q.id, result);
+  const _eTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
+  if (_eTopic) updateTopicCompetence(_eTopic, q.tier || 'synthesis', 0);
 
   if (window.submitAnswer) window.submitAnswer(false);
 }
@@ -1351,8 +1361,10 @@ window._handleRecallSubmit = async function(q) {
     // Store result for feedback view
     window._lastRecallResult = { question: q, userAnswer, result };
 
-    // Save recall stats
+    // Save recall stats and update topic competence for adaptive gating
     updateRecallStats(q.id, result);
+    const _topic = q.concept_tag || q.metadata?.topic || q.topic || '';
+    if (_topic) updateTopicCompetence(_topic, q.tier || 'synthesis', result.score || 0);
 
     // Show feedback view
     _showRecallFeedback(q, userAnswer, result);
