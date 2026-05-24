@@ -160,6 +160,12 @@ function normalizeNewFormatQuestion(q, index, nodeId) {
     adaptive: q.metadata?.adaptive || q.adaptive || false,
     rationale_mode: q.metadata?.rationale_mode || q.rationale_mode || 'standard',
 
+    // Difficulty-tier fields for the adaptive engine.
+    // tier: 'atom' (single-concept, short) or 'synthesis' (multi-concept, long).
+    // feeder_atoms: array of atom question ids that feed a synthesis question.
+    tier: q.tier || 'synthesis',
+    feeder_atoms: q.feeder_atoms || [],
+
     metadata: {
       sectionId: resolvedCourseId,
       lessonId: resolvedNodeId,
