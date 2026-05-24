@@ -378,8 +378,9 @@ window._launchWithMode = function(mode) {
 
   // Reset per-session timer flags so tightening is allowed once this session
   resetSessionTimerFlags();
-  // Clear synthesis unlock notices for this session
+  // Clear per-session notice trackers
   window._synthesisUnlockNoticeShown = new Set();
+  window._timerShiftNoticeShown = new Set();
 
   let pool = questions;
   let sessionQuestions;

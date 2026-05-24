@@ -581,6 +581,39 @@ function _showSynthesisUnlockNotice() {
   setTimeout(() => notice.remove(), 3600);
 }
 
+/** Brief Voss notice when the adaptive timer has shifted from baseline. */
+function _showTimerShiftNotice(isLoosened) {
+  const existing = document.getElementById('timer-shift-notice');
+  if (existing) existing.remove();
+
+  const notice = document.createElement('div');
+  notice.id = 'timer-shift-notice';
+  const borderColor = isLoosened ? 'var(--green,#00ffa3)' : 'var(--amber,#ffb000)';
+  const textColor   = isLoosened ? 'var(--green,#00ffa3)' : 'var(--amber,#ffb000)';
+  notice.style.cssText = `
+    position:fixed; top:12%; left:50%; transform:translateX(-50%);
+    z-index:9000; padding:14px 28px; border-radius:8px;
+    background:rgba(0,0,0,.85); border:1px solid ${borderColor};
+    color:${textColor}; font-size:1rem; font-weight:600;
+    text-align:center; pointer-events:none;
+    animation: fadeInOut 3.5s ease forwards;
+  `;
+  notice.textContent = isLoosened
+    ? 'I have given you a little more room on this one. Use it. Do not waste it.'
+    : 'You have done this topic comfortably before. Less time now. Keep up.';
+  document.body.appendChild(notice);
+
+  // Reuse the same keyframe animation
+  if (!document.getElementById('synthesis-unlock-kf')) {
+    const style = document.createElement('style');
+    style.id = 'synthesis-unlock-kf';
+    style.textContent = `@keyframes fadeInOut { 0%{opacity:0;transform:translateX(-50%) translateY(10px)} 15%{opacity:1;transform:translateX(-50%) translateY(0)} 85%{opacity:1} 100%{opacity:0} }`;
+    document.head.appendChild(style);
+  }
+
+  setTimeout(() => notice.remove(), 3600);
+}
+
 window._showStreakBanner = _showStreakBanner;
 function _showStreakBanner(text) {
   const run = getCurrentRun();
@@ -800,6 +833,22 @@ export function renderCurrentQuestion() {
     if (!window._synthesisUnlockNoticeShown.has(q.id)) {
       window._synthesisUnlockNoticeShown.add(q.id);
       _showSynthesisUnlockNotice();
+    }
+  }
+
+  // Timer-shift notice for synthesis questions with adaptive adjustment
+  if (q.type === 'recall' && (q.tier || 'synthesis') === 'synthesis') {
+    const _tsTopic = q.concept_tag || q.metadata?.topic || q.topic || '';
+    if (_tsTopic) {
+      const _tsState = _loadStateForTimer();
+      const _tsAdj = _tsState?.timerState?.[_tsTopic]?.synthesisAdjust || 0;
+      if (_tsAdj !== 0) {
+        if (!window._timerShiftNoticeShown) window._timerShiftNoticeShown = new Set();
+        if (!window._timerShiftNoticeShown.has(q.id)) {
+          window._timerShiftNoticeShown.add(q.id);
+          _showTimerShiftNotice(_tsAdj > 0);
+        }
+      }
     }
   }
 
