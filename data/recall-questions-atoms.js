@@ -1,5 +1,5 @@
-// Atom-tier recall questions — ap1-wk-1 + ap1-wk-2
-// Sprint B: 6 engine-proof atoms + 21 wk-1 content atoms + 14 wk-2 content atoms (41 total)
+// Atom-tier recall questions — ap1-wk-1 + ap1-wk-2 + ap1-wk-3
+// Sprint B: 6 engine-proof atoms + 21 wk-1 content atoms + 14 wk-2 content atoms + 19 wk-3 content atoms (60 total)
 
 export const RECALL_QUESTIONS_ATOMS = [
 
@@ -1073,6 +1073,506 @@ export const RECALL_QUESTIONS_ATOMS = [
     chapter: 'ap1-wk-2',
     difficulty: 1,
     metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'thermoregulation-anesthesia' },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  WEEK 3 ATOMS — Sympathomimetics, Antihypertensives, Vasodilators
+  //  (Stoelting Ch 15, 18, 19, 20; Vandivier lectures)
+  //  19 atoms feeding 10 synthesis questions
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── Atoms feeding r-ap1-w3-1 (Catecholamine Selection in Shock) ──────────
+
+  {
+    id: 'atom-epi-dose-dependent-shift-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why low-dose epinephrine produces vasodilation and increased heart rate while high-dose epinephrine produces intense vasoconstriction. Identify which adrenergic receptors dominate at each dose range and describe the clinical significance of this shift when titrating an epinephrine infusion.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'At low IV doses, beta-2 receptors on vascular smooth muscle are more sensitive than alpha-1 receptors, so beta-2 mediated vasodilation predominates; simultaneously, beta-1 stimulation increases heart rate and contractility; the net effect is increased cardiac output with decreased SVR' },  // source: ap1-w3-002
+        { id: 'kp2', weight: 2, description: 'At high IV doses, alpha-1 vasoconstriction overwhelms beta-2 vasodilation because alpha-1 receptors become fully recruited; this produces intense peripheral vasoconstriction, markedly elevated SVR and MAP; the clinical shift means the same drug can either vasodilate or vasoconstrict depending entirely on dose' },  // source: ap1-w3-001, ap1-w3-002
+        { id: 'kp3', weight: 1, description: 'Beta-2 activation also drives potassium intracellularly via the Na-K ATPase pump, causing hypokalemia; this is blunted by nonselective beta-blockers (propranolol) but NOT by beta-1 selective agents (atenolol, esmolol)' },  // source: ap1-w3-003, ap1-w3-004
+      ],
+      common_errors: [
+        'Stating that epinephrine only vasoconstricts; at low doses, beta-2 vasodilation is the dominant vascular effect',
+        'Confusing the dose-dependent receptor shift with different receptor subtypes being present at different locations; both alpha-1 and beta-2 are present on vasculature, but their sensitivity thresholds differ',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'catecholamine-selection',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'catecholamine-selection' },
+  },
+
+  {
+    id: 'atom-ne-septic-first-line-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why norepinephrine is the first-line vasopressor for septic shock by matching its receptor profile to the hemodynamic derangements of sepsis. State why phenylephrine and dopamine are inferior alternatives.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Norepinephrine receptor profile is strong alpha-1, moderate beta-1, minimal beta-2; septic shock features pathologic vasodilation (low SVR) with potential cardiac dysfunction; NE alpha-1 restores vascular tone while beta-1 supports contractility and cardiac output; this dual action matches the hemodynamic deficit' },  // source: ap1-w3-007, ap1-w3-008
+        { id: 'kp2', weight: 1, description: 'Phenylephrine is inferior because it is a pure alpha-1 agonist with no beta-1 support; increasing afterload without inotropic augmentation may worsen tissue perfusion in sepsis where cardiac dysfunction coexists' },  // source: ap1-w3-025
+        { id: 'kp3', weight: 1, description: 'Dopamine is inferior because it causes significantly more tachyarrhythmias than NE at the doses required for hemodynamic support; current Surviving Sepsis guidelines recommend NE first-line with vasopressin as a second agent' },  // source: ap1-w3-015
+      ],
+      common_errors: [
+        'Recommending dopamine as first-line for septic shock based on older protocols; current evidence favors norepinephrine',
+        'Stating that norepinephrine coronary arteries vasoconstrict; coronary arteries actually dilate via metabolic autoregulation despite systemic vasoconstriction',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'catecholamine-selection',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'catecholamine-selection' },
+  },
+
+  // ── Atom feeding r-ap1-w3-2 (Obstetric Vasopressors) ────────────────────
+
+  {
+    id: 'atom-phenylephrine-fetal-acidbase-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why phenylephrine may better preserve fetal acid-base status during cesarean delivery under spinal anesthesia compared with ephedrine. Include the mechanism by which ephedrine affects the fetus differently and describe the typical phenylephrine dosing strategy.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Ephedrine crosses the placenta more readily than phenylephrine and stimulates fetal beta receptors, increasing fetal heart rate, metabolism, and oxygen consumption; this elevated metabolic demand can produce fetal lactic acidosis and lower umbilical artery pH values' },  // source: ap1-w3-023
+        { id: 'kp2', weight: 2, description: 'Phenylephrine is a direct alpha-1 agonist (50 to 100 mcg bolus or 20 to 100 mcg/min infusion) that restores maternal blood pressure through vasoconstriction with minimal placental transfer and fetal metabolic stimulation; at appropriate doses it maintains uteroplacental perfusion while preserving fetal pH' },  // source: ap1-w3-024, ap1-w3-023
+        { id: 'kp3', weight: 1, description: 'Phenylephrine commonly produces reflex bradycardia via the baroreceptor response; this is expected and generally well tolerated in healthy parturients' },  // source: ap1-w3-024
+      ],
+      common_errors: [
+        'Claiming phenylephrine reduces uteroplacental blood flow dangerously; evidence shows it maintains perfusion at appropriate doses',
+        'Stating that ephedrine is always the preferred obstetric vasopressor; current practice favors phenylephrine infusions as first-line',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'obstetric-vasopressors',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'obstetric-vasopressors' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-3 (Inotrope Selection) ───────────────────────
+
+  {
+    id: 'atom-dobutamine-beta1-tachyphylaxis-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain the mechanism by which prolonged dobutamine infusion leads to tachyphylaxis. Describe the cellular process of beta-1 receptor downregulation, the typical timeline, and how this differs from the rapid NE store depletion that causes ephedrine tachyphylaxis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Dobutamine tachyphylaxis occurs after approximately 72 hours of continuous infusion; chronic beta-1 stimulation triggers the cell to phosphorylate, internalize, and decrease synthesis of beta-1 receptors (receptor downregulation); fewer surface receptors means less adenylyl cyclase activation and less cAMP production per dose of dobutamine' },  // source: ap1-w3-020
+        { id: 'kp2', weight: 2, description: 'This is fundamentally different from ephedrine tachyphylaxis: ephedrine depletes presynaptic NE stores within minutes to hours (a neurotransmitter supply problem), while dobutamine downregulates the receptor over days (a receptor density problem); the distinction determines management: switch to a direct agent for NE depletion, switch to a beta-independent agent (milrinone) for receptor downregulation' },  // source: ap1-w3-022, ap1-w3-020
+      ],
+      common_errors: [
+        'Confusing beta-1 receptor downregulation (days) with NE store depletion (minutes); the two mechanisms operate on completely different timescales',
+        'Stating that increasing the dobutamine dose indefinitely can overcome tachyphylaxis; at some point, switching to milrinone (which bypasses the receptor) is necessary',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'inotrope-selection',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'inotrope-selection' },
+  },
+
+  {
+    id: 'atom-milrinone-camp-independence-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why milrinone increases cardiac contractility even in patients on beta-blockers. Describe the specific intracellular signaling step where milrinone acts, why this bypasses beta-receptor blockade, and state why chronic oral PDE III inhibitor therapy is contraindicated despite acute hemodynamic benefits.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Milrinone inhibits phosphodiesterase III (PDE III), the enzyme that degrades cyclic AMP (cAMP) inside cardiac myocytes and vascular smooth muscle; by preventing cAMP breakdown, milrinone increases intracellular cAMP levels, which activates protein kinase A and increases calcium availability for contraction (inotropy) while simultaneously relaxing vascular smooth muscle (vasodilation)' },  // source: ap1-w3-033
+        { id: 'kp2', weight: 2, description: 'This mechanism is completely independent of beta receptors because milrinone acts DOWNSTREAM of the receptor at the level of the second messenger (cAMP); beta-blockers prevent receptor activation of adenylyl cyclase, but milrinone preserves the cAMP that has already been produced; this is why milrinone works in beta-blocked, beta-downregulated, and catecholamine-resistant patients' },  // source: ap1-w3-034
+        { id: 'kp3', weight: 1, description: 'Despite acute hemodynamic benefits, chronic oral PDE III inhibitor therapy (milrinone or amrinone) paradoxically increases morbidity and mortality in heart failure trials, restricting their use to short-term IV administration only' },  // source: ap1-w3-035
+      ],
+      common_errors: [
+        'Stating that milrinone activates beta receptors or displaces beta-blockers; milrinone has zero interaction with any adrenergic receptor',
+        'Confusing PDE III (cardiac/vascular, degrades cAMP) with PDE V (vascular, degrades cGMP, targeted by sildenafil)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'inotrope-selection',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'inotrope-selection' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-4 (Digoxin Toxicity) ─────────────────────────
+
+  {
+    id: 'atom-digoxin-hypokalemia-toxicity-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain the molecular mechanism by which hypokalemia potentiates digoxin toxicity. Identify the specific enzyme where potassium and digoxin compete, describe the intracellular cascade that leads to toxic calcium accumulation, and explain why DC cardioversion is contraindicated during digoxin toxicity.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Potassium and digoxin compete for the SAME binding site on the extracellular face of the Na-K ATPase pump; when serum potassium is low, fewer potassium ions occupy this site, allowing more digoxin molecules to bind; increased digoxin binding means increased Na-K ATPase inhibition, leading to intracellular sodium accumulation that reverses the Na/Ca exchanger, flooding the cell with calcium and causing arrhythmias' },  // source: ap1-w3-031
+        { id: 'kp2', weight: 2, description: 'DC cardioversion during digoxin toxicity can precipitate ventricular fibrillation because the already-elevated intracellular calcium creates a substrate for lethal reentrant arrhythmias when combined with the electrical energy of the shock; if cardioversion is absolutely necessary, use the lowest effective energy and optimize potassium and magnesium first' },  // source: ap1-w3-032
+        { id: 'kp3', weight: 1, description: 'Diuretics that waste potassium (loop diuretics like furosemide, thiazides) are the most common precipitant of digoxin toxicity because they chronically lower serum potassium, increasing digoxin binding to the Na-K ATPase pump' },  // source: ap1-w3-031
+      ],
+      common_errors: [
+        'Describing the potassium-digoxin interaction as affecting drug metabolism or renal clearance; the interaction is at the target enzyme binding site',
+        'Stating that hyperkalemia potentiates digoxin toxicity; it is HYPOkalemia that increases toxicity by reducing competition for the binding site',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'digoxin-toxicity',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'digoxin-toxicity' },
+  },
+
+  {
+    id: 'atom-ionized-calcium-transfusion-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why ionized (free) calcium is the only biologically active form, describe how citrate preservative in stored blood products chelates ionized calcium during massive transfusion, and explain how changes in blood pH (acidosis versus alkalosis) shift the ratio of ionized to protein-bound calcium.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 1, description: 'Only ionized (free) calcium (~45% of total serum calcium) is biologically active, directly affecting cardiac contractility, neuromuscular excitability, and coagulation; protein-bound calcium (~40%) and complexed calcium (~15%) are physiologically inert reservoirs' },  // source: ap1-w3-036
+        { id: 'kp2', weight: 2, description: 'Citrate anticoagulant in stored blood products chelates (binds) ionized calcium in the recipient, reducing the active fraction; rapid or massive transfusion can overwhelm the liver capacity to metabolize citrate, causing symptomatic hypocalcemia with hypotension, decreased contractility, prolonged QT, and coagulopathy' },  // source: ap1-w3-037
+        { id: 'kp3', weight: 1, description: 'Acidosis increases ionized calcium because hydrogen ions displace calcium from albumin binding sites; alkalosis decreases ionized calcium because fewer hydrogen ions allow more calcium to bind albumin; this means correcting acidosis in a transfused patient can unmask or worsen hypocalcemia' },  // source: ap1-w3-037
+      ],
+      common_errors: [
+        'Monitoring total serum calcium instead of ionized calcium during massive transfusion; total calcium can appear normal while ionized fraction is dangerously low',
+        'Forgetting that correcting acidosis (with bicarbonate) shifts calcium onto albumin, potentially dropping ionized calcium further',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'digoxin-toxicity',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'digoxin-toxicity' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-5 (Beta-Blocker Pharmacology) ────────────────
+
+  {
+    id: 'atom-esmolol-rbc-esterase-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why esmolol is the preferred beta-blocker for acute perioperative heart rate control. Describe its unique metabolism by red blood cell esterases, why this makes its clearance independent of hepatic and renal function, and state its pharmacokinetic parameters (half-life, onset, duration).',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Esmolol is a beta-1 selective blocker that is rapidly hydrolyzed by esterases located in red blood cells (not plasma cholinesterase and not hepatic enzymes) to an inactive acid metabolite; this means its clearance does not depend on hepatic or renal function, making it safe in patients with organ dysfunction' },  // source: ap1-w3-043
+        { id: 'kp2', weight: 1, description: 'Pharmacokinetic parameters: half-life approximately 9 minutes, onset approximately 5 minutes, duration 10 to 30 minutes; this ultra-short profile allows precise titration for acute events like laryngoscopy-induced tachycardia, emergence hypertension, or intraoperative SVT' },  // source: ap1-w3-043
+        { id: 'kp3', weight: 1, description: 'As a beta-1 selective agent, esmolol spares beta-2 bronchodilatory receptors at therapeutic doses, making it safer than propranolol in patients with reactive airway disease; however, selectivity is dose-dependent and can be lost at high doses' },  // source: ap1-w3-045
+      ],
+      common_errors: [
+        'Stating that esmolol is metabolized by plasma cholinesterase (pseudocholinesterase); it is metabolized by a different esterase system in red blood cells',
+        'Assuming esmolol is completely safe in asthmatics; beta-1 selectivity is dose-dependent and can be overwhelmed at high doses',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'beta-blocker-pharmacology',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'beta-blocker-pharmacology' },
+  },
+
+  {
+    id: 'atom-cocaine-unopposed-alpha-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why administering an isolated beta-blocker to a cocaine-intoxicated patient is dangerous. Describe how cocaine produces its sympathomimetic effects, explain the concept of unopposed alpha-mediated coronary vasospasm, and identify the safer alternative agents for managing cocaine-induced hypertension.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Cocaine blocks norepinephrine reuptake at sympathetic nerve terminals, producing simultaneous alpha-1 (vasoconstriction) and beta (tachycardia, vasodilation) adrenergic stimulation; giving an isolated beta-blocker removes the beta-2 vasodilatory component while leaving alpha-1 vasoconstriction completely unopposed; this worsens systemic hypertension and, critically, causes coronary artery vasospasm that can trigger acute myocardial infarction' },  // source: ap1-w3-044
+        { id: 'kp2', weight: 1, description: 'Safe alternatives: labetalol (combined alpha-1 plus nonselective beta blocker) provides balanced blockade; benzodiazepines reduce central sympathetic drive; phentolamine provides alpha-blockade if needed; any of these avoid the unopposed alpha problem that isolated beta-blockade creates' },  // source: ap1-w3-044
+        { id: 'kp3', weight: 1, description: 'The principle of unopposed alpha after beta-blockade applies beyond cocaine toxicity: it is the same reason alpha-blockade must precede beta-blockade in pheochromocytoma management' },  // source: ap1-w3-044, ap1-w3-047
+      ],
+      common_errors: [
+        'Recommending propranolol or esmolol alone for cocaine hypertension; isolated beta-blockade is the MOST dangerous choice because it creates unopposed alpha',
+        'Confusing cocaine mechanism with amphetamine mechanism; cocaine primarily blocks reuptake while amphetamines primarily release stored catecholamines',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'beta-blocker-pharmacology',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'beta-blocker-pharmacology' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-6 (Alpha-2 Agonists) ─────────────────────────
+
+  {
+    id: 'atom-clonidine-rebound-htn-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain the receptor-level mechanism that produces rebound hypertension and tachycardia when clonidine is abruptly discontinued. Include the role of receptor upregulation during chronic therapy and describe the perioperative management strategy when oral clonidine cannot be continued.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Chronic clonidine therapy provides continuous alpha-2 agonism that suppresses central sympathetic outflow; the body compensates by upregulating adrenergic receptors (increasing receptor number and sensitivity); when clonidine is abruptly removed, the upregulated receptors are now exposed to normal circulating catecholamine levels, producing an exaggerated sympathetic response with severe hypertension and tachycardia' },  // source: ap1-w3-038
+        { id: 'kp2', weight: 1, description: 'Clonidine has a half-life of 12 to 16 hours and is available in oral, IV, and transdermal formulations; perioperatively, if oral dosing is not possible (NPO, intubation), a transdermal patch (which takes 48 hours to reach therapeutic levels, so it should be applied preoperatively) must be used to prevent withdrawal' },  // source: ap1-w3-038
+        { id: 'kp3', weight: 1, description: 'This withdrawal mechanism (receptor upregulation from chronic suppression) is conceptually identical to the receptor regulation principles from Week 1: chronic agonist exposure causes downregulation, chronic suppression of a pathway causes upregulation of receptors in that pathway' },  // cross-feed to wk-1 concepts
+      ],
+      common_errors: [
+        'Attributing rebound to drug accumulation or direct toxicity; the mechanism is receptor upregulation following withdrawal of chronic suppression',
+        'Assuming that skipping one dose is safe; the rebound can begin within 18 to 24 hours of the last dose',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'alpha2-agonists',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'alpha2-agonists' },
+  },
+
+  {
+    id: 'atom-dex-1600-selectivity-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Compare the alpha-2 to alpha-1 selectivity ratios of dexmedetomidine and clonidine, and explain the paradoxical hypertension with bradycardia that occurs with a rapid IV bolus of dexmedetomidine. Identify the specific receptor subtype responsible and describe how to avoid this response clinically.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 1, description: 'Dexmedetomidine has an alpha-2 to alpha-1 selectivity ratio of approximately 1600:1, which is about eight times more selective than clonidine at approximately 200:1; this high selectivity produces sedation, analgesia, and sympatholysis at therapeutic doses with notably minimal respiratory depression' },  // source: ap1-w3-039
+        { id: 'kp2', weight: 2, description: 'Paradoxical response to rapid bolus: a fast IV bolus activates peripheral alpha-2B receptors on vascular smooth muscle, causing direct vasoconstriction and transient hypertension; the baroreceptor reflex then produces compensatory bradycardia; this is paradoxical because the expected steady-state effects are hypotension and sedation from central alpha-2A receptor activation' },  // source: ap1-w3-040
+        { id: 'kp3', weight: 1, description: 'To avoid the paradoxical response: administer loading doses slowly over 10 minutes, or omit the loading dose entirely and begin a maintenance infusion at 0.2 to 0.7 mcg/kg/hr; the half-life is approximately 2 hours' },  // source: ap1-w3-040
+      ],
+      common_errors: [
+        'Confusing the alpha-2B peripheral vascular receptor (vasoconstriction) with the alpha-2A central receptor (sedation and sympatholysis); the paradox occurs because two different receptor subtypes in different locations produce opposite vascular effects',
+        'Stating that dexmedetomidine causes significant respiratory depression like opioids; it provides sedation with preserved respiratory drive, which is a key clinical advantage',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'alpha2-agonists',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'alpha2-agonists' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-7 (CCB Classification) ───────────────────────
+
+  {
+    id: 'atom-verapamil-wpw-danger-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why verapamil and other AV nodal blocking agents are contraindicated in Wolff-Parkinson-White syndrome with atrial fibrillation. Describe how blocking the AV node redirects impulses through the accessory pathway and identify the preferred antiarrhythmic alternative.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'In WPW, an accessory bypass tract (Bundle of Kent) connects the atria and ventricles outside the AV node; verapamil slows AV nodal conduction but does NOT slow the accessory pathway; during atrial fibrillation, blocking the AV node forces the rapid (300 to 600 per minute) atrial impulses to conduct preferentially through the unblocked accessory pathway to the ventricles' },  // source: ap1-w3-048
+        { id: 'kp2', weight: 2, description: 'The accessory pathway can conduct much faster than the AV node, so unrestricted conduction can produce ventricular rates exceeding 250 per minute, degenerating into ventricular fibrillation and cardiac arrest; ALL AV nodal blockers are contraindicated in WPW with AF: verapamil, diltiazem, digoxin, and adenosine' },  // source: ap1-w3-048
+        { id: 'kp3', weight: 1, description: 'Procainamide is the preferred antiarrhythmic because it slows conduction through the accessory pathway (not just the AV node), reducing the ventricular rate safely' },  // source: ap1-w3-048
+      ],
+      common_errors: [
+        'Confusing rate control drugs (which slow the AV node and are dangerous in WPW) with rhythm control drugs (which slow the accessory pathway and are safe)',
+        'Administering adenosine for SVT in a known WPW patient with atrial fibrillation; adenosine blocks the AV node and can trigger the same lethal pathway acceleration',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ccb-classification',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'ccb-classification' },
+  },
+
+  {
+    id: 'atom-ccb-nmb-potentiation-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain how calcium channel blockers potentiate neuromuscular blocking agents during anesthesia. Describe the role of calcium in acetylcholine release at the neuromuscular junction, state whether both depolarizing and nondepolarizing agents are affected, and describe the monitoring implications.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Acetylcholine release at the neuromuscular junction requires calcium entry into the presynaptic motor nerve terminal; calcium triggers vesicle fusion with the presynaptic membrane and ACh exocytosis; calcium channel blockers reduce this calcium entry, decreasing ACh release and enhancing the neuromuscular block produced by NMB agents' },  // source: ap1-w3-050
+        { id: 'kp2', weight: 1, description: 'BOTH depolarizing (succinylcholine) and nondepolarizing (rocuronium, vecuronium, cisatracurium) NMB agents are potentiated by CCBs; the reduced ACh release creates a lower baseline of neuromuscular transmission that the blocking agents further depress' },  // source: ap1-w3-050
+        { id: 'kp3', weight: 1, description: 'Clinical implication: patients on chronic CCB therapy (verapamil, diltiazem, nifedipine) receiving NMB agents may exhibit deeper and longer-lasting neuromuscular block than expected; quantitative train-of-four monitoring (acceleromyography) is essential to detect residual paralysis before extubation' },  // source: ap1-w3-050
+      ],
+      common_errors: [
+        'Stating that only nondepolarizing agents are potentiated; both NMB classes are affected because the mechanism (reduced ACh release) affects all neuromuscular transmission',
+        'Confusing the CCB-NMB interaction (presynaptic calcium reduction) with the beta agonist reversal of CCB cardiovascular effects (via cAMP mechanism); these are different pathways',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ccb-classification',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'ccb-classification' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-8 (Vasodilator Pharmacology) ─────────────────
+
+  {
+    id: 'atom-ino-hemoglobin-selective-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain the mechanism that makes inhaled nitric oxide a selective pulmonary vasodilator. Describe the intracellular signaling pathway it activates, how hemoglobin provides the selectivity, and state its half-life in blood and primary clinical indications.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Inhaled NO is delivered to ventilated alveoli, diffuses into adjacent pulmonary vascular smooth muscle, and activates soluble guanylate cyclase to increase cGMP, which relaxes smooth muscle via protein kinase G activation and calcium sequestration; NO activates the SAME pathway in ALL vascular beds, so selectivity does NOT come from lung-specific receptors' },  // source: ap1-w3-055
+        { id: 'kp2', weight: 2, description: 'Selectivity comes from rapid hemoglobin inactivation: when NO diffuses from pulmonary smooth muscle into pulmonary capillary blood, hemoglobin binds it with extremely high affinity (forming methemoglobin and nitrate), inactivating it within seconds; the half-life of NO in blood is less than 5 seconds, preventing any systemic vasodilation' },  // source: ap1-w3-055
+        { id: 'kp3', weight: 1, description: 'Clinical indications include persistent pulmonary hypertension of the newborn (PPHN), acute pulmonary hypertension in adults, and RV failure; limitations include methemoglobinemia with high concentrations and rebound pulmonary hypertension on abrupt discontinuation' },  // source: ap1-w3-055
+      ],
+      common_errors: [
+        'Believing NO only activates receptors in the lungs; the guanylate cyclase pathway is identical in systemic vasculature, and selectivity comes entirely from the route of delivery plus hemoglobin inactivation',
+        'Confusing inhaled NO (selective pulmonary vasodilator) with oral nitrates or nitroprusside (systemic vasodilators that also release NO)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'vasodilator-pharmacology',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 18, Vandivier lecture', topic: 'vasodilator-pharmacology' },
+  },
+
+  {
+    id: 'atom-ntg-venous-preload-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why nitroglycerin at standard therapeutic doses is described as primarily a venodilator rather than an arteriolar dilator. Describe how venous capacitance vessel dilation reduces cardiac preload and myocardial oxygen demand, and identify the two preload-dependent cardiac conditions where nitroglycerin is contraindicated.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'At standard therapeutic doses, nitroglycerin preferentially relaxes venous capacitance vessels (veins and venules) over arterioles; venodilation pools blood in the venous system, decreasing venous return to the heart and reducing left ventricular end-diastolic pressure (preload); lower preload decreases ventricular wall stress and myocardial oxygen demand via the LaPlace relationship' },  // source: ap1-w3-057
+        { id: 'kp2', weight: 1, description: 'NTG also dilates coronary arteries, improving myocardial oxygen supply; this dual benefit (reduced demand plus improved supply) makes it the agent of choice for acute coronary syndromes and angina; at higher doses, arteriolar dilation also occurs, reducing afterload' },  // source: ap1-w3-057
+        { id: 'kp3', weight: 2, description: 'Nitroglycerin is contraindicated in two preload-dependent conditions: (1) hypertrophic obstructive cardiomyopathy (HOCM), where reduced preload worsens left ventricular outflow tract obstruction by allowing the interventricular septum to move closer to the mitral valve; and (2) severe aortic stenosis, where maintaining adequate preload is essential to generate sufficient pressure gradient across the stenotic valve' },  // source: ap1-w3-057
+      ],
+      common_errors: [
+        'Stating NTG primarily dilates arterioles; at standard doses the dominant effect is venodilation, and arteriolar dilation becomes significant only at higher doses',
+        'Using NTG to lower blood pressure in a patient with known HOCM; the preload reduction can cause acute hemodynamic collapse from dynamic outflow obstruction',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'vasodilator-pharmacology',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 18, Vandivier lecture', topic: 'vasodilator-pharmacology' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-9 (RAAS Perioperative) ───────────────────────
+
+  {
+    id: 'atom-ace-bradykinin-cough-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain the dual enzymatic function of angiotensin-converting enzyme, describe how ACE inhibition leads to bradykinin accumulation that causes dry cough and angioedema, and explain at the molecular level why switching to an ARB eliminates the cough while maintaining the antihypertensive effect.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ACE has two critical functions: (1) it converts the inactive angiotensin I to the potent vasoconstrictor angiotensin II, which also stimulates aldosterone release; and (2) it degrades bradykinin, an inflammatory peptide that causes vasodilation, increased vascular permeability, and airway irritation; ACE inhibitors block BOTH functions simultaneously' },  // source: ap1-w3-052
+        { id: 'kp2', weight: 1, description: 'When ACE is inhibited, bradykinin accumulates in the airways and lungs because its degradation pathway is blocked; this excess bradykinin stimulates C-fiber sensory nerves in the airway epithelium, producing a persistent dry cough in 5% to 20% of patients and rarely life-threatening angioedema' },  // source: ap1-w3-052
+        { id: 'kp3', weight: 2, description: 'ARBs (losartan, valsartan) block the angiotensin II type 1 (AT1) receptor directly WITHOUT inhibiting ACE; because the ACE enzyme remains active, bradykinin is degraded normally and the cough does not occur; ARBs still provide the antihypertensive benefit by blocking the downstream vasoconstrictor and aldosterone effects of angiotensin II' },  // source: ap1-w3-053
+      ],
+      common_errors: [
+        'Attributing ACE inhibitor cough to drug allergy or irritation rather than the specific molecular mechanism of bradykinin accumulation',
+        'Stating that ARBs also cause cough; the cough is specific to ACE inhibitors because only they block bradykinin degradation',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'raas-perioperative',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 20, Vandivier lecture', topic: 'raas-perioperative' },
+  },
+
+  {
+    id: 'atom-raas-periop-hypotension-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why patients on ACE inhibitors or ARBs are at high risk for refractory intraoperative hypotension. Describe the normal role of the RAAS as a compensatory mechanism during anesthesia, why standard catecholamine vasopressors may fail, and identify the specific rescue agent that works through a non-adrenergic, non-RAAS pathway.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'During anesthesia, vasodilation and reduced preload normally activate the RAAS: renin converts angiotensinogen to angiotensin I, ACE converts it to angiotensin II (vasoconstrictor), and aldosterone retains sodium and water; ACE inhibitors and ARBs block this entire compensatory cascade, leaving the patient unable to mount a normal blood pressure recovery' },  // source: ap1-w3-054
+        { id: 'kp2', weight: 1, description: 'Standard catecholamine vasopressors (phenylephrine, ephedrine, norepinephrine) may provide inadequate response because they work on adrenergic receptors, which is a separate pathway from the RAAS; the RAAS contribution to vascular tone is significant, and losing it creates a deficit that adrenergic stimulation alone may not fill' },  // source: ap1-w3-054
+        { id: 'kp3', weight: 2, description: 'Vasopressin (V1 receptor agonist on vascular smooth muscle) works through a completely different mechanism (non-adrenergic, non-RAAS direct vasoconstriction) and is often the rescue agent that succeeds when catecholamines fail; many practitioners hold ACE inhibitors and ARBs 12 to 24 hours preoperatively to allow RAAS recovery before anesthesia' },  // source: ap1-w3-054
+      ],
+      common_errors: [
+        'Simply giving more phenylephrine when it fails; recognizing the RAAS deficit and switching to vasopressin is the correct response',
+        'Assuming perioperative hypotension from RAAS blockade is benign; it can be profound, refractory, and life-threatening without appropriate rescue',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'raas-perioperative',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 20, Vandivier lecture', topic: 'raas-perioperative' },
+  },
+
+  // ── Atoms feeding r-ap1-w3-10 (Labetalol / Sympathomimetic Classification) ──
+
+  {
+    id: 'atom-labetalol-alpha2-sparing-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain how labetalol lowers blood pressure while generally maintaining cardiac output. Identify which alpha receptor subtypes it blocks and which it spares, describe why preserving alpha-2 negative feedback prevents excessive reflex tachycardia, and state the IV beta-to-alpha blocking ratio.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Labetalol blocks alpha-1 receptors (producing arterial vasodilation and decreased SVR) AND nonselectively blocks beta receptors (reducing heart rate and contractility); cardiac output is maintained because alpha-1 vasodilation reduces afterload, offsetting the negative inotropic and chronotropic effects of beta blockade; the IV beta-to-alpha blocking ratio is approximately 7:1' },  // source: ap1-w3-046
+        { id: 'kp2', weight: 2, description: 'Labetalol blocks alpha-1 but SPARES alpha-2 receptors; presynaptic alpha-2 receptors serve as a negative feedback loop that limits norepinephrine release from sympathetic nerve terminals; by preserving this feedback, labetalol prevents the excessive reflex tachycardia and NE surge seen with nonselective alpha blockers like phentolamine (which blocks both alpha-1 and alpha-2, removing the feedback brake)' },  // source: ap1-w3-047
+        { id: 'kp3', weight: 1, description: 'Clinical uses include hypertensive emergencies (IV 20 to 80 mg every 10 minutes), perioperative hypertension, pheochromocytoma management, and clonidine withdrawal; labetalol half-life is 5 to 8 hours' },  // source: ap1-w3-046, ap1-w3-047
+      ],
+      common_errors: [
+        'Stating that labetalol blocks both alpha-1 and alpha-2; it specifically spares alpha-2 presynaptic receptors to preserve the NE release feedback loop',
+        'Confusing the alpha-2 sparing property (prevents reflex tachycardia) with alpha-2 agonism (direct sympatholysis, as with clonidine and dexmedetomidine)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'labetalol-sympathomimetic-classification',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 19, Vandivier lecture', topic: 'labetalol-sympathomimetic-classification' },
+  },
+
+  {
+    id: 'atom-beta2-comt-resistance-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-3',
+    prompt: 'Explain why selective beta-2 agonists (albuterol, terbutaline) have a longer duration of action than endogenous catecholamines. Identify the structural difference that confers resistance to COMT, and describe two beta-2 mediated side effects that share the same mechanism as epinephrine-induced hypokalemia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Selective beta-2 agonists are noncatecholamines: they lack the catechol ring (3,4-dihydroxyphenyl group) present in endogenous catecholamines; COMT (catechol-O-methyltransferase) requires the catechol ring as its substrate, so noncatecholamines are resistant to COMT degradation; this structural resistance prolongs the duration of action compared with epinephrine and norepinephrine, which are rapidly inactivated by both COMT and MAO' },  // source: ap1-w3-027
+        { id: 'kp2', weight: 1, description: 'Beta-2 agonist hypokalemia: beta-2 receptor activation on skeletal muscle stimulates the Na-K ATPase pump, driving potassium intracellularly; this is the identical mechanism to epinephrine-induced hypokalemia; this side effect is clinically important in patients on digoxin because hypokalemia potentiates digoxin toxicity' },  // source: ap1-w3-029, ap1-w3-003
+        { id: 'kp3', weight: 1, description: 'Beta-2 agonist skeletal muscle tremor: beta-2 receptors on skeletal muscle fibers directly enhance contractile protein activation, producing fine tremor; this is a separate mechanism from the Na-K ATPase hypokalemia effect, though both occur through beta-2 receptors on skeletal muscle' },  // source: ap1-w3-029
+      ],
+      common_errors: [
+        'Confusing COMT resistance (structural, due to absent catechol ring) with MAO resistance (a separate metabolic pathway); both contribute to prolonged duration but through different mechanisms',
+        'Attributing beta-2 agonist hypokalemia to renal potassium wasting; the mechanism is intracellular potassium shift via Na-K ATPase activation, not renal loss',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'labetalol-sympathomimetic-classification',
+    chapter: 'ap1-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 15, Vandivier lecture', topic: 'labetalol-sympathomimetic-classification' },
   },
 
 ];
