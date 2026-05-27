@@ -1,5 +1,5 @@
-// Atom-tier recall questions — ap1-wk-1
-// Sprint B Stage 2: 6 engine-proof atoms + 21 content atoms
+// Atom-tier recall questions — ap1-wk-1 + ap1-wk-2
+// Sprint B: 6 engine-proof atoms + 21 wk-1 content atoms + 14 wk-2 content atoms (41 total)
 
 export const RECALL_QUESTIONS_ATOMS = [
 
@@ -698,6 +698,381 @@ export const RECALL_QUESTIONS_ATOMS = [
     chapter: 'ap1-wk-1',
     difficulty: 1,
     metadata: { priority: 'standard', source: 'Stoelting Ch 2, Vandivier lecture', topic: 'elimination-kinetics' },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  ap1-wk-2 atoms — PNS, Autonomic Pharmacology, Thermoregulation
+  //  Sprint B Stage 4: 14 content atoms
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── Atom feeding r-ap1-w2-1 (ANS Architecture) ─────────────────────────
+
+  {
+    id: 'atom-autonomic-tone-baseline-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Explain the concept of residual autonomic tone. Why are both the sympathetic and parasympathetic divisions described as continuously active, and what is the clinical consequence of blocking one division pharmacologically or with neuraxial anesthesia?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Both the sympathetic and parasympathetic nervous systems maintain continuous baseline activity (autonomic tone) at rest; changes in tone in either direction allow fine regulation of organ function' },  // source: ap1-w2-029
+        { id: 'kp2', weight: 1, description: 'Sympathetic vascular tone normally keeps blood vessels at approximately 50% constriction; this baseline allows the body to increase or decrease vascular resistance bidirectionally' },  // source: ap1-w2-028
+        { id: 'kp3', weight: 1, description: 'Blocking one division unmasks the opposing division: neuraxial anesthesia removes sympathetic vasoconstrictor tone below the block level causing hypotension; beta blockers unmask vagal tone causing bradycardia' },  // source: ap1-w2-028, ap1-w2-029
+      ],
+      common_errors: [
+        'Stating that the ANS is silent at rest and activated only by stimulation (both divisions are continuously active)',
+        'Assuming sympathetic and parasympathetic activity alternate in 24 hour cycles rather than operating simultaneously',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ans-architecture',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'ans-architecture' },
+  },
+
+  // ── Atoms feeding r-ap1-w2-2 (Neurotransmitter Pathways) ──────────────
+
+  {
+    id: 'atom-preganglionic-ach-nicotinic-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Identify the neurotransmitter and receptor type used by ALL preganglionic autonomic neurons, regardless of whether they are sympathetic or parasympathetic. Explain why this shared preganglionic transmitter means that ganglionic blocking drugs inhibit both divisions simultaneously.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'All preganglionic autonomic neurons (both sympathetic and parasympathetic) release acetylcholine that activates nicotinic receptors (NN subtype) on postganglionic cell bodies in autonomic ganglia' },  // source: ap1-w2-009, ap1-w2-010
+        { id: 'kp2', weight: 1, description: 'Because both divisions share ACh/nicotinic ganglionic transmission, ganglionic blockers (e.g., trimethaphan) inhibit sympathetic and parasympathetic pathways simultaneously' },  // source: ap1-w2-009
+        { id: 'kp3', weight: 1, description: 'Ganglionic nicotinic receptors (NN) differ pharmacologically from neuromuscular junction nicotinic receptors (NM), which is why ganglion blockers do not cause skeletal muscle paralysis' },  // source: ap1-w2-010
+      ],
+      common_errors: [
+        'Assuming sympathetic preganglionic neurons release norepinephrine (NE is the postganglionic sympathetic transmitter, not the preganglionic one)',
+        'Confusing ganglionic nicotinic (NN) with neuromuscular nicotinic (NM) receptor subtypes',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neurotransmitter-pathways',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'neurotransmitter-pathways' },
+  },
+
+  {
+    id: 'atom-postganglionic-divergence-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Explain the postganglionic neurotransmitter divergence between the sympathetic and parasympathetic divisions: what transmitter and receptor type does each use at the target organ? Identify the notable exception where sympathetic postganglionic fibers release acetylcholine and state its clinical significance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 1, description: 'Postganglionic sympathetic fibers are adrenergic: they release norepinephrine that acts on alpha and beta adrenergic receptors at target organs' },  // source: ap1-w2-011
+        { id: 'kp2', weight: 1, description: 'Postganglionic parasympathetic fibers are cholinergic: they release acetylcholine that acts on muscarinic receptors at target organs' },  // source: ap1-w2-012
+        { id: 'kp3', weight: 2, description: 'Exception: sympathetic postganglionic fibers innervating sweat glands release acetylcholine instead of norepinephrine (sympathetic cholinergic fibers); anticholinergic drugs like atropine can therefore reduce sweating' },  // source: ap1-w2-013
+      ],
+      common_errors: [
+        'Overgeneralizing that all sympathetic postganglionic fibers are adrenergic without recognizing the sweat gland exception',
+        'Confusing the postganglionic receptor types: sympathetic targets use adrenergic receptors (not nicotinic), parasympathetic targets use muscarinic receptors (not nicotinic)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neurotransmitter-pathways',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'neurotransmitter-pathways' },
+  },
+
+  // ── Atoms feeding r-ap1-w2-3 (NE Lifecycle) ───────────────────────────
+
+  {
+    id: 'atom-ne-synthesis-pathway-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Trace the complete norepinephrine synthesis pathway from its amino acid precursor to the finished neurotransmitter. Identify the rate limiting enzyme, state which steps occur in the cytoplasm versus inside the synaptic vesicle, and name the enzyme that catalyzes the final intravesicular conversion.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The synthesis sequence is Tyrosine to DOPA to Dopamine to Norepinephrine; the rate limiting step is the conversion of tyrosine to DOPA by tyrosine hydroxylase' },  // source: ap1-w2-014
+        { id: 'kp2', weight: 1, description: 'The first two steps (tyrosine to DOPA, DOPA to dopamine) occur in the cytoplasm of the nerve terminal' },  // source: ap1-w2-014, ap1-w2-015
+        { id: 'kp3', weight: 1, description: 'Dopamine is transported into the synaptic vesicle where dopamine beta hydroxylase converts it to norepinephrine; this final step occurs exclusively inside the vesicle' },  // source: ap1-w2-015
+      ],
+      common_errors: [
+        'Placing the dopamine to norepinephrine conversion in the cytoplasm rather than inside the synaptic vesicle',
+        'Misidentifying the rate limiting enzyme as dopamine beta hydroxylase (it is tyrosine hydroxylase)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ne-lifecycle',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'ne-lifecycle' },
+  },
+
+  {
+    id: 'atom-ne-reuptake-dominance-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Identify the three mechanisms that terminate norepinephrine action at the synapse. Which mechanism accounts for approximately 80% of NE removal, and why does blocking this single mechanism (as cocaine and tricyclic antidepressants do) produce such potent sympathomimetic effects?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Reuptake into the presynaptic nerve terminal accounts for approximately 80% of NE removal from the synapse; the recaptured NE is recycled back into synaptic vesicles for reuse' },  // source: ap1-w2-020, ap1-w2-021
+        { id: 'kp2', weight: 1, description: 'The remaining NE is metabolized by monoamine oxidase (MAO, intraneuronal) and catechol O methyltransferase (COMT, extraneuronal), or diffuses away from receptors' },  // source: ap1-w2-019
+        { id: 'kp3', weight: 1, description: 'Blocking the reuptake transporter (cocaine, tricyclic antidepressants) eliminates the dominant termination mechanism, dramatically increasing synaptic NE concentration and producing tachycardia, hypertension, and vasoconstriction' },  // source: ap1-w2-022
+      ],
+      common_errors: [
+        'Stating that enzymatic degradation (MAO/COMT) is the primary NE termination mechanism (reuptake accounts for approximately 80%)',
+        'Confusing NE termination (reuptake, MAO, COMT) with ACh termination (acetylcholinesterase hydrolysis)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ne-lifecycle',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'ne-lifecycle' },
+  },
+
+  // ── Atom feeding r-ap1-w2-4 (Indirect Sympathomimetics) ───────────────
+
+  {
+    id: 'atom-ephedrine-tachyphylaxis-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Ephedrine is an indirect acting sympathomimetic. Explain how it produces its pressor effect, why repeated boluses cause a progressively weaker response (tachyphylaxis), and what class of vasopressor you should switch to when tachyphylaxis occurs.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 1, description: 'Ephedrine causes norepinephrine release from synaptic vesicles in sympathetic nerve terminals; the released NE activates postsynaptic adrenergic receptors producing vasoconstriction and increased heart rate' },  // source: ap1-w2-017, ap1-w2-018
+        { id: 'kp2', weight: 2, description: 'Repeated ephedrine doses progressively deplete the releasable NE stores in synaptic vesicles, producing tachyphylaxis (diminished pressor response); this is neurotransmitter depletion, not receptor failure' },  // source: ap1-w2-018
+        { id: 'kp3', weight: 1, description: 'When tachyphylaxis occurs, switching to a direct acting vasopressor such as phenylephrine (alpha 1 agonist) bypasses the depleted vesicular stores by binding postsynaptic receptors directly' },  // source: ap1-w2-018
+      ],
+      common_errors: [
+        'Attributing ephedrine tachyphylaxis to receptor downregulation rather than depletion of releasable NE stores',
+        'Confusing indirect acting sympathomimetics (release stored NE) with direct acting agents (bind receptors directly)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ne-drug-interactions',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'ne-drug-interactions' },
+  },
+
+  // ── Atom feeding r-ap1-w2-5 (ACh Pharmacology) ────────────────────────
+
+  {
+    id: 'atom-ach-synthesis-hydrolysis-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Trace acetylcholine from synthesis to termination at the parasympathetic neuroeffector junction. Name the synthetic enzyme and its two substrates, identify the enzyme that terminates ACh action, name the hydrolysis products, and explain how choline is conserved for resynthesis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 1, description: 'Choline acetyltransferase (ChAT) synthesizes acetylcholine from choline and acetyl coenzyme A in the nerve terminal' },  // source: ap1-w2-023, ap1-w2-024
+        { id: 'kp2', weight: 2, description: 'Acetylcholinesterase (AChE) rapidly hydrolyzes ACh into choline and acetate at the synapse, providing fast and precise control of cholinergic transmission' },  // source: ap1-w2-025, ap1-w2-026
+        { id: 'kp3', weight: 1, description: 'Choline produced by hydrolysis is actively transported back into the presynaptic nerve terminal and recycled for new ACh synthesis, conserving this essential substrate' },  // source: ap1-w2-026
+      ],
+      common_errors: [
+        'Confusing acetylcholinesterase (degrades ACh) with choline acetyltransferase (synthesizes ACh); they catalyze opposite reactions',
+        'Stating that ACh is terminated by reuptake like norepinephrine (ACh is hydrolyzed enzymatically; only the choline product is recycled)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'acetylcholine-pharmacology',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'acetylcholine-pharmacology' },
+  },
+
+  // ── Atom feeding r-ap1-w2-6 (Autonomic Dysfunction) ───────────────────
+
+  {
+    id: 'atom-hrv-autonomic-marker-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Explain what heart rate variability (HRV) measures at the physiologic level, state the relationship between HRV magnitude and parasympathetic activity, and describe why reduced HRV in a diabetic patient is an early warning sign for cardiac autonomic neuropathy with prognostic significance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'HRV reflects the dynamic interplay between sympathetic and parasympathetic inputs to the SA node; greater beat to beat variability generally indicates healthy parasympathetic (vagal) activity' },  // source: ap1-w2-031
+        { id: 'kp2', weight: 1, description: 'Reduced HRV indicates impaired vagal tone or sympathetic dominance and is an early marker of cardiac autonomic neuropathy in diabetic patients' },  // source: ap1-w2-031
+        { id: 'kp3', weight: 1, description: 'Reduced HRV independently predicts increased cardiovascular morbidity; patients with low HRV are at higher risk for hemodynamic instability during anesthesia' },  // source: ap1-w2-031
+      ],
+      common_errors: [
+        'Stating that greater HRV indicates sympathetic dominance (greater HRV generally indicates healthy parasympathetic activity)',
+        'Claiming HRV directly measures catecholamine levels (it is an indirect measure of autonomic input to the heart)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'autonomic-dysfunction',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'autonomic-dysfunction' },
+  },
+
+  // ── Atom feeding r-ap1-w2-7 (Pheochromocytoma) ────────────────────────
+
+  {
+    id: 'atom-alpha-before-beta-pheo-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'A patient with pheochromocytoma requires preoperative pharmacologic preparation. Explain why alpha adrenergic blockade must be established before beta blockade is initiated. What specific hemodynamic catastrophe occurs if beta blockade is started first, and what is the mechanism?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Alpha blockade must precede beta blockade; initiating beta blockade first removes beta 2 mediated vasodilation in skeletal muscle vasculature, leaving alpha mediated vasoconstriction completely unopposed' },  // source: ap1-w2-035
+        { id: 'kp2', weight: 1, description: 'Unopposed alpha stimulation in the setting of catecholamine excess produces severe hypertensive crisis that can cause stroke, myocardial infarction, or death' },  // source: ap1-w2-035
+        { id: 'kp3', weight: 1, description: 'Once adequate alpha blockade is established (typically with phenoxybenzamine or doxazosin), beta blockade can be safely added to control reflex tachycardia' },  // source: ap1-w2-035
+      ],
+      common_errors: [
+        'Starting beta blockade before alpha blockade is adequately established',
+        'Confusing the reason for the sequence: the danger is not beta blockade itself but the loss of beta 2 vasodilation that partially offsets alpha vasoconstriction',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pheochromocytoma-management',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'pheochromocytoma-management' },
+  },
+
+  // ── Atoms feeding r-ap1-w2-8 (Adrenal Medulla) ────────────────────────
+
+  {
+    id: 'atom-adrenal-modified-ganglion-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Explain why the adrenal medulla is described as a modified sympathetic ganglion rather than a typical endocrine gland. Identify the type of nerve fiber that innervates it, the receptor type on chromaffin cells, and the signaling cascade from preganglionic stimulation to catecholamine release into the bloodstream.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The adrenal medulla receives preganglionic sympathetic fibers directly (no postganglionic neuron is interposed); chromaffin cells function as modified postganglionic neurons that release catecholamines into the bloodstream instead of across a synapse' },  // source: ap1-w2-037, ap1-w2-038
+        { id: 'kp2', weight: 1, description: 'Preganglionic fibers release acetylcholine that activates nicotinic receptors on chromaffin cells, triggering calcium influx and exocytosis of catecholamine containing vesicles' },  // source: ap1-w2-042
+        { id: 'kp3', weight: 1, description: 'This nicotinic receptor mediated release is the same signaling mechanism used at all autonomic ganglia; the adrenal medulla simply uses the bloodstream as the distribution pathway instead of a synapse' },  // source: ap1-w2-042
+      ],
+      common_errors: [
+        'Stating the adrenal medulla receives postganglionic sympathetic fibers (it receives preganglionic fibers because chromaffin cells replace the postganglionic neuron)',
+        'Claiming the adrenal medulla receives parasympathetic innervation (it is exclusively sympathetic)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'adrenal-medulla',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'adrenal-medulla' },
+  },
+
+  {
+    id: 'atom-pnmt-cortisol-epi-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Name the enzyme that converts norepinephrine to epinephrine in the adrenal medulla, state the approximate ratio of epinephrine to norepinephrine in adrenal medullary output, and explain how cortisol from the adjacent adrenal cortex regulates this enzyme to link the HPA stress axis to catecholamine production.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 1, description: 'Phenylethanolamine N methyltransferase (PNMT) catalyzes the N methylation of norepinephrine to produce epinephrine; this is the final step beyond the standard NE synthesis pathway' },  // source: ap1-w2-040
+        { id: 'kp2', weight: 2, description: 'The adrenal medulla releases approximately 80% epinephrine and 20% norepinephrine; cortisol from the adjacent adrenal cortex upregulates PNMT enzyme activity, directly linking HPA axis stress activation to increased epinephrine synthesis' },  // source: ap1-w2-039, ap1-w2-041
+        { id: 'kp3', weight: 1, description: 'The anatomic proximity of cortex and medulla has functional significance: high local cortisol concentrations in the portal blood flowing from cortex to medulla are essential for maintaining PNMT activity and the 80:20 epinephrine to norepinephrine ratio' },  // source: ap1-w2-041
+      ],
+      common_errors: [
+        'Confusing PNMT (converts NE to epinephrine) with dopamine beta hydroxylase (converts dopamine to NE); they catalyze different steps in the pathway',
+        'Stating that the adrenal medulla produces 100% epinephrine (norepinephrine accounts for approximately 20% of output)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'adrenal-medulla',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'adrenal-medulla' },
+  },
+
+  // ── Atoms feeding r-ap1-w2-9 (Thermoregulation Phases) ────────────────
+
+  {
+    id: 'atom-three-phase-hypothermia-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Describe the three phases of perioperative hypothermia that occur during general anesthesia: name each phase, state the timeframe, quantify the temperature change where applicable, and explain the mechanism driving each phase. Specifically distinguish the mechanism of Phase 1 from Phase 2.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Phase 1 (redistribution hypothermia): a 0.5 to 1.5 degree C core temperature drop in the first hour caused by anesthesia induced vasodilation that redistributes warm core blood to the cooler periphery; this is internal heat redistribution, not environmental heat loss' },  // source: ap1-w2-055
+        { id: 'kp2', weight: 1, description: 'Phase 2 (linear heat loss): after redistribution is largely complete, core temperature decreases more slowly because ongoing heat loss to the cold operating environment exceeds the reduced metabolic heat production' },  // source: ap1-w2-056
+        { id: 'kp3', weight: 1, description: 'Phase 3 (plateau, after 3 to 5 hours): thermoregulatory vasoconstriction is triggered (at a lower threshold under anesthesia), reducing peripheral blood flow and establishing equilibrium between heat loss and production' },  // source: ap1-w2-057
+      ],
+      common_errors: [
+        'Attributing the rapid first hour temperature drop to environmental heat loss rather than internal core to peripheral heat redistribution',
+        'Confusing Phase 2 (environmental heat loss exceeds production) with Phase 1 (internal redistribution)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'perioperative-thermoregulation',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'perioperative-thermoregulation' },
+  },
+
+  {
+    id: 'atom-nonshivering-thermogenesis-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Explain nonshivering thermogenesis: identify the tissue responsible, the molecular mechanism by which it generates heat, the receptor system that activates it, and state whether it is present or absent during general anesthesia. Contrast it with shivering thermogenesis in terms of mechanism and metabolic cost.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Nonshivering thermogenesis occurs in brown adipose tissue; uncoupling protein 1 (UCP 1) in brown fat mitochondria uncouples oxidative phosphorylation, generating heat instead of ATP; it is activated by the sympathetic nervous system via beta adrenergic receptors' },  // source: ap1-w2-049
+        { id: 'kp2', weight: 1, description: 'Nonshivering thermogenesis is absent during general anesthesia, removing an important heat production mechanism and accelerating hypothermia' },  // source: ap1-w2-054
+        { id: 'kp3', weight: 1, description: 'Shivering thermogenesis generates heat through involuntary skeletal muscle contraction controlled by the posterior hypothalamus; it increases oxygen consumption by 200 to 300% above baseline, which is metabolically costly and can be treated with meperidine' },  // source: ap1-w2-050
+      ],
+      common_errors: [
+        'Confusing nonshivering thermogenesis (brown fat, UCP 1) with shivering (skeletal muscle contraction); they are distinct mechanisms',
+        'Attributing nonshivering thermogenesis to white adipose tissue (it occurs in brown fat which expresses UCP 1)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'perioperative-thermoregulation',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'perioperative-thermoregulation' },
+  },
+
+  // ── Atom feeding r-ap1-w2-10 (Thermoregulation + Anesthesia) ──────────
+
+  {
+    id: 'atom-regional-thermoreg-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-2',
+    prompt: 'Explain why regional anesthesia (spinal or epidural) increases the risk of perioperative hypothermia beyond what general anesthesia alone produces. Specifically describe which thermoregulatory defense mechanism is blocked, which phase of perioperative hypothermia may fail to develop, and why combined general plus regional anesthesia is the highest risk combination.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Regional anesthesia blocks sympathetic vasoconstriction below the level of the block; the Phase 3 plateau requires thermoregulatory vasoconstriction to establish equilibrium, so it may never develop when the sympathetic block prevents vasoconstriction in the affected segments' },  // source: ap1-w2-058
+        { id: 'kp2', weight: 1, description: 'Combined general plus regional anesthesia is the highest risk combination because GA abolishes central thermoregulatory defenses (widened interthreshold range, loss of shivering, loss of nonshivering thermogenesis) while regional abolishes the peripheral vasoconstriction needed for the Phase 3 plateau' },  // source: ap1-w2-058
+        { id: 'kp3', weight: 1, description: 'Even mild hypothermia (1 to 2 degrees C below normal) causes clinically significant consequences including delayed drug metabolism, prolonged recovery, impaired coagulation, increased wound infection rates, and increased oxygen demand during rewarming' },  // source: ap1-w2-060
+      ],
+      common_errors: [
+        'Assuming the Phase 3 temperature plateau will occur under regional anesthesia (sympathetic blockade prevents the vasoconstriction needed for equilibrium)',
+        'Stating that hypothermia enhances coagulation (it impairs coagulation and platelet function, increasing bleeding risk)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'thermoregulation-anesthesia',
+    chapter: 'ap1-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'standard', source: 'Stoelting Ch 3, Vandivier lecture', topic: 'thermoregulation-anesthesia' },
   },
 
 ];

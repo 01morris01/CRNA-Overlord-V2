@@ -80,7 +80,7 @@ import { TA_WK13_QUESTIONS, TA_WK13_METADATA } from '../data/questions/ta-wk13-i
 
 // ── Advanced Pharmacology I (Stoelting's) ──────────────────────────────────
 import { AP1_WK1_QUESTIONS,  AP1_WK1_METADATA  } from '../data/questions/ap1-wk1-receptors-pharmacodynamics.js';
-import { AP1_WK2_QUESTIONS,  AP1_WK2_METADATA  } from '../data/questions/ap1-wk2.js';
+import { AP1_WK2_QUESTIONS,  AP1_WK2_METADATA  } from '../data/questions/ap1-wk2-pns.js';
 import { AP1_WK3_QUESTIONS,  AP1_WK3_METADATA  } from '../data/questions/ap1-wk3.js';
 import { AP1_WK4_QUESTIONS,  AP1_WK4_METADATA  } from '../data/questions/ap1-wk4.js';
 import { AP1_WK5_QUESTIONS,  AP1_WK5_METADATA  } from '../data/questions/ap1-wk5.js';
