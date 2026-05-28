@@ -35,6 +35,7 @@ import { PATHO_NODE11_QUESTIONS, PATHO_NODE11_METADATA } from '../data/questions
 import { PATHO_NODE12_QUESTIONS, PATHO_NODE12_METADATA } from '../data/questions/patho-node12-valves-shock.js';
 import { PATHO_NODE14_QUESTIONS, PATHO_NODE14_METADATA } from '../data/questions/patho-node14-glomerular-filtration-renal-tubular-reab.js';
 import { PATHO_NODE_13_QUESTIONS as PATHO_NODE13_QUESTIONS, PATHO_NODE_13_METADATA as PATHO_NODE13_METADATA } from '../data/questions/patho-node-13.js';
+import { PATHO_NODE15_QUESTIONS, PATHO_NODE15_METADATA } from '../data/questions/patho-node15-urine-concentration-electrolytes.js';
 
 // ── Chemistry & Physics for Anesthesia Practice ─────────────────────────────
 import { CP_NODE1_QUESTIONS, CP_NODE1_METADATA } from '../data/questions/cp-node1-smart-sheets.js';
@@ -49,6 +50,7 @@ import { CP_NODE10_QUESTIONS, CP_NODE10_METADATA } from '../data/questions/cp-no
 
 // ── BIOL-510-A Adv Phys & Pathophys II (Guyton & Hall 14e, Ch. 29+) ────────
 import { PP2_WK1_QUESTIONS,  PP2_WK1_METADATA  } from '../data/questions/pp2-wk1-acid-base-diuretics-kidney.js';
+import { PP2_WK1_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk1-acid-base-supplement.js';
 import { PP2_WK2_QUESTIONS,  PP2_WK2_METADATA  } from '../data/questions/pp2-wk2-rbc-infection-immunity.js';
 import { PP2_WK3_QUESTIONS,  PP2_WK3_METADATA  } from '../data/questions/pp2-wk3-blood-types-hemostasis-ventilation.js';
 import { PP2_WK4_QUESTIONS,  PP2_WK4_METADATA  } from '../data/questions/pp2-wk4-pulmonary-circulation.js';
@@ -112,6 +114,8 @@ import { RA_WK13_QUESTIONS, RA_WK13_METADATA } from '../data/questions/ra-wk13.j
 import { RECALL_QUESTIONS_BASICS } from '../data/recall-questions.js';
 import { RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 } from '../data/recall-questions-adv-pharmacology-1.js';
 import { RECALL_QUESTIONS_ATOMS } from '../data/recall-questions-atoms.js';
+import { RECALL_QUESTIONS_PATHOPHYSIOLOGY_1 } from '../data/recall-questions-pathophysiology-1.js';
+import { RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 } from '../data/recall-questions-pathophysiology-2.js';
 
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
@@ -395,6 +399,16 @@ export const NODE_CONFIG = {
     questionsMeta: PATHO_NODE13_METADATA,
   },
 
+  "patho-node-15": {
+    courseId:      "adv-phys-path-1",
+    title:         "Urine Concentration & Dilution / Electrolyte Regulation",
+    chapterLabel:  "Ch. 29–30",
+    badgeLabel:    "URINE CONC / ELECTROLYTES Ch.29–30",
+    icon:          "💧",
+    questions:     PATHO_NODE15_QUESTIONS,
+    questionsMeta: PATHO_NODE15_METADATA,
+  },
+
 
   // ── Chemistry & Physics for Anesthesia Practice ────────────────────────────
   //
@@ -632,7 +646,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 29–32",
     badgeLabel:    "ACID-BASE / KIDNEY",
     icon:          "🧪",
-    questions:     PP2_WK1_QUESTIONS,
+    questions:     [...PP2_WK1_QUESTIONS, ...PP2_WK1_SUPPLEMENT_QUESTIONS],
     questionsMeta: PP2_WK1_METADATA,
   },
 
@@ -938,6 +952,8 @@ function mergeRecallQuestions(recallQuestions) {
 mergeRecallQuestions(RECALL_QUESTIONS_BASICS);
 mergeRecallQuestions(RECALL_QUESTIONS_ADV_PHARMACOLOGY_1);
 mergeRecallQuestions(RECALL_QUESTIONS_ATOMS);
+mergeRecallQuestions(RECALL_QUESTIONS_PATHOPHYSIOLOGY_1);
+mergeRecallQuestions(RECALL_QUESTIONS_PATHOPHYSIOLOGY_2);
 
 // ─── Accessors ────────────────────────────────────────────────────────────────
 
