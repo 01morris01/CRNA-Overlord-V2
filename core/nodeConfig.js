@@ -52,6 +52,7 @@ import { CP_NODE10_QUESTIONS, CP_NODE10_METADATA } from '../data/questions/cp-no
 import { PP2_WK1_QUESTIONS,  PP2_WK1_METADATA  } from '../data/questions/pp2-wk1-acid-base-diuretics-kidney.js';
 import { PP2_WK1_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk1-acid-base-supplement.js';
 import { PP2_WK2_QUESTIONS,  PP2_WK2_METADATA  } from '../data/questions/pp2-wk2-rbc-infection-immunity.js';
+import { PP2_WK2_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk2-rbc-immunity-supplement.js';
 import { PP2_WK3_QUESTIONS,  PP2_WK3_METADATA  } from '../data/questions/pp2-wk3-blood-types-hemostasis-ventilation.js';
 import { PP2_WK4_QUESTIONS,  PP2_WK4_METADATA  } from '../data/questions/pp2-wk4-pulmonary-circulation.js';
 import { PP2_WK5_QUESTIONS,  PP2_WK5_METADATA  } from '../data/questions/pp2-wk5-gas-exchange-transport.js';
@@ -656,7 +657,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 33–35",
     badgeLabel:    "RBC / IMMUNITY",
     icon:          "🩸",
-    questions:     PP2_WK2_QUESTIONS,
+    questions:     [...PP2_WK2_QUESTIONS, ...PP2_WK2_SUPPLEMENT_QUESTIONS],
     questionsMeta: PP2_WK2_METADATA,
   },
 

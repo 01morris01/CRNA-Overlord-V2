@@ -2348,4 +2348,923 @@ export const RECALL_QUESTIONS_ATOMS = [
     metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 32', topic: 'ckd-solute-group-patterns' },
   },
 
+  // ═══════════════════════════════════════════════════════════════════════
+  //  pp2-wk-2 ATOMS: Red Blood Cells / Resistance to Infection I & II
+  //  Ch. 33–35, Guyton & Hall 14e — 16 atoms
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ── Atoms feeding r-p2-wk2-1 (EPO & Erythropoiesis Integration) ──────
+
+  {
+    id: 'atom-p2w2-epo-hypoxia-feedback',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the oxygen sensing mechanism that regulates erythropoietin (EPO) production. Include the cellular site of EPO synthesis, the HIF pathway, and the magnitude of EPO increase during severe hypoxia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'EPO is produced by peritubular interstitial fibroblasts in the renal cortex and outer medulla, accounting for approximately 90 percent of circulating EPO; the liver contributes the remaining 10 percent. Under normoxic conditions, prolyl hydroxylase domain (PHD) enzymes use molecular O2 as a co-substrate to hydroxylate hypoxia inducible factor alpha (HIF alpha) subunits. Hydroxylated HIF alpha is recognized by the von Hippel Lindau (VHL) E3 ubiquitin ligase complex, polyubiquitinated, and rapidly degraded by the proteasome, keeping EPO transcription at baseline levels.' },
+        { id: 'kp2', weight: 2, description: 'During tissue hypoxia, reduced O2 availability impairs PHD enzymatic activity because O2 is a required co-substrate. HIF alpha escapes hydroxylation, accumulates in the cytoplasm, dimerizes with HIF beta (which is constitutively expressed), and the heterodimer translocates to the nucleus. There it binds hypoxia response elements (HREs) in the EPO gene promoter region, dramatically upregulating EPO transcription. Circulating EPO levels can increase 100 fold or more during severe anemia or hypoxia, providing a powerful stimulus for accelerated red blood cell production in the bone marrow.' },
+        { id: 'kp3', weight: 1, description: 'This negative feedback loop is self-correcting: as new RBCs are produced and oxygen delivery improves, tissue PO2 rises, PHD activity resumes, HIF alpha is degraded again, and EPO production returns toward baseline. Conditions that trigger this pathway include hemorrhage, high altitude residence, chronic lung disease, and any cause of tissue hypoxia. The CRNA relevance is that exogenous recombinant EPO (epoetin alfa) is used perioperatively to stimulate erythropoiesis in patients who refuse transfusion or who have chronic kidney disease with inadequate endogenous EPO production.' },
+      ],
+      common_errors: [
+        'Stating that EPO is produced primarily by the liver (the kidney produces 90 percent)',
+        'Confusing HIF stabilization (hypoxia) with HIF degradation (normoxia)',
+        'Forgetting that O2 is a required co-substrate for prolyl hydroxylase',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'epo-hypoxia-feedback',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'epo-hypoxia-feedback' },
+  },
+
+  {
+    id: 'atom-p2w2-erythropoiesis-maturation-stages',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'List the sequential maturation stages of erythropoiesis from the committed erythroid progenitor to the mature circulating red blood cell. For each stage, describe the key morphologic change occurring.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The maturation sequence begins with the committed erythroid progenitor (CFU-E, colony forming unit erythroid) that is the primary target of EPO. Under EPO stimulation, CFU-E differentiates into the proerythroblast (the first morphologically recognizable stage), which is a large cell with dispersed chromatin, visible nucleoli, and deep basophilic cytoplasm due to abundant ribosomes. The proerythroblast divides and matures through the basophilic erythroblast (intense RNA staining, beginning of hemoglobin mRNA production), then the polychromatic erythroblast (mixed basophilic RNA staining and eosinophilic hemoglobin staining giving a gray appearance), and finally the orthochromatic erythroblast (abundant hemoglobin, markedly condensed pyknotic nucleus that is about to be expelled).' },
+        { id: 'kp2', weight: 2, description: 'The orthochromatic erythroblast expels its nucleus (enucleation) to become a reticulocyte, which retains residual ribosomal RNA visible as a reticular network with supravital stains (such as new methylene blue). Reticulocytes are released from the bone marrow into the circulation and mature into fully mature erythrocytes within 1 to 2 days as the remaining RNA is degraded. The entire process from proerythroblast to reticulocyte release takes approximately 5 days under normal conditions but can be shortened to 2 to 3 days under intense EPO stimulation (stress erythropoiesis). Normal reticulocyte count is 0.5 to 1.5 percent of circulating red cells.' },
+        { id: 'kp3', weight: 1, description: 'Throughout maturation, cells progressively decrease in size, accumulate hemoglobin, condense their nuclear chromatin, and lose organelles (mitochondria, endoplasmic reticulum, ribosomes). The mature RBC is an anucleate biconcave disc approximately 7.8 micrometers in diameter with a 120 day circulatory lifespan. Loss of all organelles means the mature RBC cannot synthesize new proteins, perform oxidative phosphorylation, or divide; it relies entirely on anaerobic glycolysis for ATP production. Senescent RBCs are removed primarily by splenic macrophages that recognize changes in membrane phospholipid asymmetry and decreased deformability.' },
+      ],
+      common_errors: [
+        'Skipping the polychromatic erythroblast stage between basophilic and orthochromatic',
+        'Stating that reticulocytes have a nucleus (the nucleus is expelled at the orthochromatic stage)',
+        'Claiming that mature RBCs use mitochondrial oxidative phosphorylation (they rely on anaerobic glycolysis)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'erythropoiesis-maturation-stages',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'erythropoiesis-maturation-stages' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-2 (Hemoglobin & RBC Deformability) ────────
+
+  {
+    id: 'atom-p2w2-hemoglobin-cooperative-binding',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the molecular structure of adult hemoglobin A and explain how cooperative oxygen binding produces the sigmoid oxyhemoglobin dissociation curve. Include the T state to R state conformational transition.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Adult hemoglobin A (HbA) is a tetramer composed of two alpha globin chains and two beta globin chains (alpha2 beta2), with a total molecular weight of approximately 64,500 daltons. Each of the four globin subunits contains one heme group, which is a protoporphyrin IX ring coordinating a central ferrous iron atom (Fe2+). Each Fe2+ reversibly binds one O2 molecule, giving each hemoglobin tetramer a maximum carrying capacity of four O2 molecules. The iron must remain in the ferrous (Fe2+) state for O2 binding; oxidation to the ferric (Fe3+) state produces methemoglobin, which cannot bind O2.' },
+        { id: 'kp2', weight: 2, description: 'Cooperative binding means that the binding of O2 to one heme subunit increases the O2 affinity of the remaining unoccupied subunits through conformational change. Deoxyhemoglobin exists in the tense (T) state, a low affinity conformation stabilized by salt bridges and hydrogen bonds between subunits. When O2 binds to one subunit, the iron atom moves into the plane of the porphyrin ring, pulling the proximal histidine and shifting the subunit interface. This disrupts constraining bonds and promotes transition to the relaxed (R) state, which has approximately 300 fold higher O2 affinity. This cooperativity produces the characteristic sigmoid (S shaped) dissociation curve; at alveolar PO2 (approximately 100 mm Hg) saturation is about 97 percent, while at tissue PO2 (approximately 40 mm Hg) saturation drops to about 75 percent, efficiently unloading O2 to tissues.' },
+      ],
+      common_errors: [
+        'Stating that hemoglobin contains four alpha chains (it has two alpha and two beta in HbA)',
+        'Describing the curve as hyperbolic (that is myoglobin; hemoglobin is sigmoid due to cooperativity)',
+        'Confusing ferrous Fe2+ (functional) with ferric Fe3+ (methemoglobin, nonfunctional)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'hemoglobin-cooperative-binding',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'hemoglobin-cooperative-binding' },
+  },
+
+  {
+    id: 'atom-p2w2-rbc-biconcave-deformability',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Explain how the biconcave disc shape of the mature red blood cell optimizes oxygen delivery and allows passage through the microcirculation. Include the role of the spectrin cytoskeleton in maintaining deformability.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The mature RBC is a biconcave disc approximately 7.8 micrometers in diameter and 2.5 micrometers thick at the rim, with a central thickness of only about 1 micrometer. This geometry provides a surface area to volume ratio approximately 1.4 times greater than a sphere of equivalent volume, which minimizes the maximum intracellular diffusion distance for O2 from the membrane to any hemoglobin molecule. The result is extremely rapid O2 loading in the pulmonary capillaries (complete equilibration within 0.25 seconds of the 0.75 second transit time) and efficient O2 unloading at the tissue level. The excess membrane relative to cell volume also allows dramatic deformation without increasing surface tension to the point of membrane rupture.' },
+        { id: 'kp2', weight: 2, description: 'Deformability is maintained by the spectrin based membrane cytoskeleton: spectrin alpha and beta heterodimers form a hexagonal lattice on the inner membrane surface, connected to the lipid bilayer through anchor proteins including ankyrin (linking spectrin to band 3, the anion exchanger) and protein 4.1 (linking spectrin to glycophorin C). This flexible scaffolding allows the RBC to deform reversibly when squeezing through capillaries as narrow as 3 micrometers (less than half the cell diameter) and through splenic sinusoidal slits of 1 to 3 micrometers. Defects in spectrin or ankyrin (as in hereditary spherocytosis) cause loss of membrane surface area, converting the disc to a rigid sphere that cannot traverse splenic slits, leading to splenic trapping and hemolysis.' },
+      ],
+      common_errors: [
+        'Stating that the biconcave shape is maintained by an internal nucleus or organelle skeleton (RBCs lack organelles; the spectrin cytoskeleton maintains shape)',
+        'Claiming that RBCs are rigid (their extreme deformability is essential for microcirculatory flow)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'rbc-biconcave-deformability',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'rbc-biconcave-deformability' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-3 (Iron & B12/Folate Anemias) ─────────────
+
+  {
+    id: 'atom-p2w2-iron-absorption-recycling',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe iron absorption, transport, storage, and recycling. Include the roles of DMT1, ferroportin, hepcidin, transferrin, and ferritin. State total body iron content and the fraction in hemoglobin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Dietary iron absorption occurs primarily in the duodenum and upper jejunum. Non-heme ferric iron (Fe3+) in the intestinal lumen is reduced to ferrous iron (Fe2+) by duodenal cytochrome B (Dcytb) on the apical brush border membrane of enterocytes. Fe2+ enters the enterocyte through divalent metal transporter 1 (DMT1). Inside the cell, iron is either stored as ferritin (an intracellular storage protein that sequesters up to 4,500 iron atoms per molecule) or exported across the basolateral membrane into the blood by ferroportin, the only known cellular iron exporter. Exported Fe2+ is immediately oxidized to Fe3+ by hephaestin and loaded onto transferrin for plasma transport. Each transferrin molecule binds two Fe3+ atoms.' },
+        { id: 'kp2', weight: 2, description: 'Hepcidin is a peptide hormone produced by hepatocytes that serves as the master regulator of systemic iron homeostasis. Hepcidin binds to ferroportin on enterocytes, macrophages, and hepatocytes, causing ferroportin internalization and degradation. This blocks iron export from cells into the plasma. Hepcidin production increases when iron stores are replete (to prevent iron overload) and during inflammation (via IL-6), and decreases during iron deficiency, hypoxia, and increased erythropoietic demand. Total body iron is approximately 4 to 5 grams in adults, with approximately 65 percent contained in hemoglobin, 15 to 30 percent stored as ferritin and hemosiderin (primarily in liver, spleen, and bone marrow), 4 percent in myoglobin, and less than 1 percent in iron containing enzymes and transferrin bound transport iron.' },
+        { id: 'kp3', weight: 1, description: 'Iron recycling by splenic and hepatic macrophages is quantitatively the most important source of iron for daily erythropoiesis. Macrophages phagocytose senescent red blood cells (approximately 200 billion per day), digest hemoglobin, and release recycled iron back into the blood via ferroportin for transferrin loading and delivery to bone marrow erythroblasts. This recycling provides approximately 20 to 25 mg of iron per day, far exceeding the 1 to 2 mg per day absorbed from the diet, which merely replaces small daily losses through desquamation of skin and intestinal epithelial cells.' },
+      ],
+      common_errors: [
+        'Confusing DMT1 (apical entry) with ferroportin (basolateral export)',
+        'Stating that hepcidin increases iron absorption (it decreases absorption by degrading ferroportin)',
+        'Claiming that dietary absorption is the main source of iron for daily erythropoiesis (macrophage recycling provides 20 to 25 mg per day versus 1 to 2 mg from diet)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'iron-absorption-recycling',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'iron-absorption-recycling' },
+  },
+
+  {
+    id: 'atom-p2w2-b12-folate-megaloblastic',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Compare vitamin B12 and folate in terms of absorption mechanism, metabolic role in DNA synthesis, the type of anemia caused by deficiency, and the key laboratory test that distinguishes B12 deficiency from folate deficiency.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Vitamin B12 (cobalamin) requires intrinsic factor (IF), a glycoprotein secreted by gastric parietal cells, for absorption. The B12 IF complex travels to the terminal ileum where it binds cubilin receptors and is absorbed by receptor mediated endocytosis. Hepatic B12 stores are large (2 to 5 mg), lasting 3 to 6 years before deficiency develops. B12 is a cofactor for methionine synthase, which converts homocysteine to methionine while simultaneously converting methyltetrahydrofolate (methyl THF) back to tetrahydrofolate (THF). Without B12, THF becomes trapped as methyl THF (the "methylfolate trap"), unavailable for thymidylate synthesis, thereby impairing DNA synthesis even when total folate levels are adequate.' },
+        { id: 'kp2', weight: 2, description: 'Folate (vitamin B9) is absorbed in the jejunum via the proton coupled folate transporter without requiring intrinsic factor. Body folate stores are small (5 to 20 mg), lasting only 3 to 4 months before deficiency develops. Folate in the form of 5,10 methylene THF is the one carbon donor required by thymidylate synthase, which converts deoxyuridine monophosphate (dUMP) to deoxythymidine monophosphate (dTMP), an essential step for DNA synthesis. Both B12 and folate deficiency impair DNA synthesis while leaving RNA and protein synthesis relatively intact, causing nuclear maturation arrest while cytoplasmic hemoglobin accumulation continues. The result is megaloblastic anemia: abnormally large oval macrocytes (MCV above 100 fL) and hypersegmented neutrophils (6 or more nuclear lobes).' },
+        { id: 'kp3', weight: 1, description: 'The key distinguishing laboratory test is serum methylmalonic acid (MMA). B12 is also a cofactor for methylmalonyl CoA mutase, which converts methylmalonyl CoA to succinyl CoA; B12 deficiency causes MMA to accumulate, so elevated serum MMA is specific for B12 deficiency and is normal in isolated folate deficiency. Serum homocysteine is elevated in both B12 and folate deficiency and therefore does not distinguish between them. B12 deficiency additionally causes subacute combined degeneration of the spinal cord (demyelination of posterior columns and lateral corticospinal tracts) because the methylmalonyl CoA mutase pathway is required for normal myelin maintenance, a function that folate does not share.' },
+      ],
+      common_errors: [
+        'Stating that B12 is absorbed in the jejunum (B12 requires IF and is absorbed in the terminal ileum; folate is absorbed in the jejunum)',
+        'Claiming that elevated homocysteine distinguishes B12 from folate deficiency (homocysteine is elevated in both; MMA is the distinguishing test)',
+        'Claiming that folate deficiency causes neurologic damage (only B12 deficiency causes subacute combined degeneration)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'b12-folate-megaloblastic',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'b12-folate-megaloblastic' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-4 (Neutrophil Recruitment & Killing) ──────
+
+  {
+    id: 'atom-p2w2-neutrophil-margination-diapedesis',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the multi-step adhesion cascade by which circulating neutrophils exit the blood and reach a site of tissue infection. Include the molecular mediators at each step: selectin mediated rolling, integrin mediated firm adhesion, and diapedesis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The adhesion cascade begins with margination, in which neutrophils move from the central axial stream of blood flow to the vessel periphery in post-capillary venules near the site of infection. Step 1 (rolling): inflammatory cytokines (TNF alpha, IL-1) from activated macrophages stimulate endothelial cells to rapidly express P selectin (released from preformed Weibel Palade body stores within minutes) and later E selectin (transcriptionally upregulated over 1 to 2 hours). Selectins bind weakly to carbohydrate ligands on the neutrophil surface (sialyl Lewis X epitopes on PSGL-1), creating a transient "rolling" interaction that slows the neutrophil from blood flow velocity to a crawling pace along the endothelium.' },
+        { id: 'kp2', weight: 2, description: 'Step 2 (firm adhesion): chemokines (primarily IL-8, also called CXCL8) are displayed on the endothelial luminal surface bound to glycosaminoglycans. As the rolling neutrophil encounters these chemokines, intracellular signaling activates neutrophil surface integrins (LFA-1 and Mac-1, both members of the beta-2 integrin family, CD11/CD18) from a low affinity "bent" conformation to a high affinity "extended" conformation. These activated integrins bind tightly to ICAM-1 (intercellular adhesion molecule 1) on the endothelium, arresting the neutrophil completely. Step 3 (diapedesis): the firmly adherent neutrophil extends pseudopods between endothelial cells and migrates through the paracellular junction, guided by PECAM-1 (CD31) homophilic interactions between the neutrophil and endothelial cell junctions. The neutrophil then crosses the basement membrane using secreted matrix metalloproteinases.' },
+        { id: 'kp3', weight: 1, description: 'Step 4 (chemotaxis): once in the tissue, the neutrophil migrates along a concentration gradient of chemoattractants toward the site of maximal infection. Key chemoattractants include bacterial formylated peptides (fMLP), complement fragment C5a, leukotriene B4, and IL-8. The neutrophil detects these gradients through G protein coupled receptors on its surface and moves by extending pseudopods in the direction of highest chemoattractant concentration while retracting the trailing edge, a process requiring actin polymerization at the leading edge and myosin contraction at the rear.' },
+      ],
+      common_errors: [
+        'Confusing selectin mediated rolling (loose, reversible, carbohydrate mediated) with integrin mediated firm adhesion (tight, activation dependent, protein to protein)',
+        'Stating that ICAM-1 is on the neutrophil (ICAM-1 is on the endothelium; the integrins LFA-1 and Mac-1 are on the neutrophil)',
+        'Forgetting that integrin activation requires chemokine signaling (integrins are expressed constitutively but in a low affinity state)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neutrophil-margination-diapedesis',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'neutrophil-margination-diapedesis' },
+  },
+
+  {
+    id: 'atom-p2w2-oxidative-burst-mpo',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the oxygen dependent respiratory burst in neutrophils, including the NADPH oxidase complex, superoxide generation, and the myeloperoxidase hydrogen peroxide halide system. Explain why chronic granulomatous disease patients are susceptible to catalase positive organisms.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Upon phagocytosis, the NADPH oxidase enzyme complex assembles on the phagosomal membrane. The complex consists of membrane bound cytochrome b558 (a heterodimer of gp91phox and p22phox) and cytosolic regulatory subunits (p47phox, p67phox, p40phox, and the small GTPase Rac2) that translocate to the membrane upon activation. NADPH oxidase transfers electrons from cytosolic NADPH across the membrane to molecular oxygen in the phagosome, generating superoxide anion (O2 minus). Superoxide is then converted to hydrogen peroxide (H2O2) by superoxide dismutase. H2O2 alone has moderate bactericidal activity but becomes far more potent when combined with the myeloperoxidase system.' },
+        { id: 'kp2', weight: 2, description: 'Myeloperoxidase (MPO), stored in primary (azurophilic) granules, is released into the phagolysosome upon granule fusion. MPO catalyzes the reaction of H2O2 with halide ions, primarily chloride (Cl minus), to produce hypochlorous acid (HOCl). HOCl is the most potent oxidant in the neutrophil arsenal, approximately 50 times more bactericidal than H2O2 alone, and kills bacteria by oxidizing sulfhydryl groups and disrupting membrane integrity. Additional reactive oxygen species generated during the burst include hydroxyl radicals (OH dot) via the Fenton reaction (Fe2+ plus H2O2) and singlet oxygen. The oxygen independent killing mechanisms working in parallel include lysozyme (hydrolyzes peptidoglycan), defensins (form pores in bacterial membranes), lactoferrin (chelates iron from bacteria), and phagolysosomal acidification to pH 4.0.' },
+        { id: 'kp3', weight: 1, description: 'In chronic granulomatous disease (CGD), genetic mutations in NADPH oxidase subunits (most commonly X linked recessive loss of gp91phox) abolish superoxide generation. The entire downstream oxidative cascade fails. Patients are especially vulnerable to catalase positive organisms (Staphylococcus aureus, Aspergillus, Serratia marcescens, Burkholderia cepacia) because catalase positive bacteria destroy the H2O2 that both the bacteria and the host might otherwise produce, eliminating any residual oxidative killing potential. Catalase negative organisms (such as streptococci) generate H2O2 during their own metabolism but cannot destroy it, so their endogenous H2O2 can partially substitute for the missing neutrophil burst, providing some defense.' },
+      ],
+      common_errors: [
+        'Stating that the respiratory burst uses mitochondrial oxygen (it uses NADPH oxidase, which is separate from mitochondrial respiration)',
+        'Confusing MPO (neutrophil enzyme using H2O2 plus Cl minus) with catalase (bacterial enzyme that destroys H2O2)',
+        'Claiming that CGD patients lack neutrophils (neutrophil numbers and chemotaxis are normal; only the oxidative burst is absent)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'oxidative-burst-mpo',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'oxidative-burst-mpo' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-5 (WBC Differential & Macrophage System) ──
+
+  {
+    id: 'atom-p2w2-wbc-differential-counts',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'State the normal total WBC count and the differential percentage and absolute count range for each of the five major leukocyte types. Describe the bone marrow maturation sequence for granulocytes and the typical circulating half-life for neutrophils.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The normal total WBC count is 4,000 to 11,000 per microliter. The differential percentages are approximately: neutrophils 62 percent (absolute 1,800 to 7,700 per microliter), lymphocytes 30 percent (absolute 1,000 to 4,800), monocytes 5.3 percent (absolute 200 to 800), eosinophils 2.3 percent (absolute 0 to 450), and basophils 0.4 percent (absolute 0 to 200). Neutrophils are further subdivided into segmented neutrophils (mature, multilobed nucleus with 3 to 5 lobes) and band forms (immature, horseshoe shaped nucleus without segmentation). A "left shift" refers to an increased proportion of band forms in the circulation, indicating active bone marrow release in response to infection or stress.' },
+        { id: 'kp2', weight: 2, description: 'Granulocyte maturation in the bone marrow follows a fixed developmental sequence: myeloblast (the first committed granulocyte precursor), promyelocyte (primary azurophilic granules appear containing MPO, defensins, and lysozyme), myelocyte (specific or secondary granules appear that define the cell type; this is the LAST stage capable of mitotic division), metamyelocyte (kidney or bean shaped indented nucleus, no further cell division), band cell (horseshoe shaped nucleus), and segmented mature granulocyte. The total time from myeloblast to mature segmented neutrophil is approximately 10 to 14 days. The bone marrow stores a reserve pool of mature granulocytes approximately 5 to 8 times the number circulating, which can be rapidly mobilized by cortisol, G-CSF, or bacterial endotoxin.' },
+        { id: 'kp3', weight: 1, description: 'Mature neutrophils have a remarkably short circulating half-life of only 4 to 8 hours. Approximately half of the intravascular neutrophils are in the circulating pool (detectable on a CBC) and half are in the marginating pool (loosely adherent to endothelium, not counted). Epinephrine and exercise can demarginate neutrophils, causing a rapid "pseudoneutrophilia" without new production. After exiting the blood, neutrophils survive in tissues for 4 to 5 days before undergoing apoptosis. This short lifespan reflects their role as expendable first responders that sacrifice themselves during bacterial killing.' },
+      ],
+      common_errors: [
+        'Stating that lymphocytes are the most numerous circulating WBC (neutrophils predominate at 62 percent in adults)',
+        'Placing the myelocyte after the metamyelocyte in the maturation sequence (myelocyte comes first and is the last dividing stage)',
+        'Confusing a left shift (increased bands from marrow release) with leukocytosis (increased total WBC count)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'wbc-differential-counts',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'wbc-differential-counts' },
+  },
+
+  {
+    id: 'atom-p2w2-monocyte-macrophage-system',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe how circulating monocytes transform into tissue macrophages. Compare monocyte and neutrophil lifespans, phagocytic capacities, and roles in the immune response. Explain the antigen presenting function of macrophages.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Monocytes circulate in the blood for 10 to 20 hours before migrating into tissues through the same adhesion cascade used by neutrophils (selectin rolling, integrin firm adhesion, diapedesis). Upon entering tissues, monocytes undergo a dramatic transformation: they enlarge 5 to 10 fold in diameter, markedly increase their content of lysosomes and hydrolytic enzymes (acid hydrolases, cathepsins, elastase, collagenase), develop extensive rough endoplasmic reticulum, and increase their mitochondrial number. This transformed cell is the tissue macrophage, which can survive for months to years in tissues, in stark contrast to neutrophils that survive only 4 to 5 days in tissues. Macrophages can also proliferate locally in response to inflammatory signals.' },
+        { id: 'kp2', weight: 2, description: 'Tissue macrophages have far greater phagocytic capacity than neutrophils. A single macrophage can phagocytose approximately 100 bacteria before its own lysosomal contents accumulate to toxic levels and cause self destruction, compared to neutrophils which typically handle 3 to 20 bacteria before dying. Macrophages are also capable of phagocytosing much larger particles, including entire senescent red blood cells, dead neutrophils (efferocytosis), cellular debris, and even tumor cells. Unlike neutrophils, which are terminally differentiated and incapable of further specialization, macrophages can be activated by interferon gamma from Th1 cells to become "activated macrophages" with dramatically enhanced microbicidal and tumoricidal capability.' },
+        { id: 'kp3', weight: 1, description: 'Macrophages serve as professional antigen presenting cells (APCs), bridging innate and adaptive immunity. After phagocytosing a pathogen, macrophages process ingested proteins into peptide fragments within endosomal compartments and load these peptides onto MHC class II molecules. The MHC II peptide complex is then displayed on the macrophage surface, where it can be recognized by CD4+ T helper cells bearing T cell receptors with matching specificity. Macrophages also provide co-stimulatory signals (B7 molecules binding CD28 on T cells) and secrete cytokines (IL-1, IL-12, TNF alpha) that further activate the adaptive immune response. This antigen presentation function is why macrophage depletion severely impairs adaptive immunity.' },
+      ],
+      common_errors: [
+        'Stating that macrophages have a shorter lifespan than neutrophils (macrophages survive months to years; neutrophils only 4 to 5 days in tissue)',
+        'Claiming that macrophages cannot present antigen (they are professional APCs that present on MHC class II)',
+        'Confusing monocytes (blood) with macrophages (tissue); they are the same lineage at different stages',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'monocyte-macrophage-system',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'monocyte-macrophage-system' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-6 (Innate vs Acquired & Tissue Macrophages) ──
+
+  {
+    id: 'atom-p2w2-innate-vs-acquired-overview',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Compare innate and acquired immunity across four dimensions: specificity, speed of response, presence of memory, and the principal cell types involved. Explain why both systems are necessary for effective host defense.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Innate immunity provides a rapid, nonspecific first line of defense that is operational within minutes to hours of pathogen encounter. It does not generate immunologic memory, so the response is the same magnitude and speed with each exposure. Its components include: physical and chemical barriers (skin, mucosal epithelia, stomach acid, lysozyme in secretions), phagocytic cells (neutrophils and macrophages that recognize pathogens through pattern recognition receptors such as toll like receptors binding pathogen associated molecular patterns), natural killer (NK) cells (that kill virus infected and tumor cells by recognizing absence of MHC class I), the complement system (approximately 20 plasma proteins that opsonize, recruit inflammatory cells, and directly lyse pathogens via the membrane attack complex), and the acute inflammatory response.' },
+        { id: 'kp2', weight: 2, description: 'Acquired (adaptive) immunity is slower on first exposure (requiring 5 to 7 days for the primary response) but is highly specific to individual antigenic epitopes, with each lymphocyte clone recognizing a single epitope shape. Its defining feature is immunologic memory: after initial activation, long lived memory B and T cells persist for years or decades, enabling a secondary response that is faster (1 to 2 days), larger (10 to 100 fold higher antibody titers), and more effective (higher affinity antibodies from affinity maturation). Acquired immunity has two branches: humoral immunity (B lymphocytes producing antibodies that neutralize extracellular pathogens and toxins) and cell mediated immunity (T lymphocytes, including CD4+ helper T cells that orchestrate the immune response and CD8+ cytotoxic T cells that kill intracellular pathogen infected cells).' },
+      ],
+      common_errors: [
+        'Stating that innate immunity has immunologic memory (only acquired immunity generates memory)',
+        'Claiming that acquired immunity responds within minutes (the primary response takes 5 to 7 days)',
+        'Treating innate and acquired immunity as independent systems (innate immunity activates acquired immunity through antigen presentation)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'innate-vs-acquired-overview',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'innate-vs-acquired-overview' },
+  },
+
+  {
+    id: 'atom-p2w2-tissue-macrophage-specialization',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Name and locate at least five specialized tissue macrophage populations within the reticuloendothelial system (mononuclear phagocyte system). For each, describe its unique function in host defense or tissue homeostasis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Kupffer cells line the hepatic sinusoids and constitute the largest population of fixed tissue macrophages in the body. They filter portal venous blood arriving from the gastrointestinal tract, clearing bacteria, endotoxin (lipopolysaccharide), immune complexes, and aged red blood cells before blood enters the systemic circulation. Alveolar macrophages reside within the pulmonary alveolar spaces and are the primary defense against inhaled pathogens, particulate matter, and environmental pollutants; they also clear excess surfactant to prevent pulmonary alveolar proteinosis. Splenic macrophages reside in the red pulp of the spleen, where they remove senescent or damaged erythrocytes (those with decreased deformability or altered membrane phospholipid asymmetry) and recycle iron from degraded hemoglobin back into the plasma via ferroportin for transferrin loading.' },
+        { id: 'kp2', weight: 2, description: 'Microglia are the resident macrophages of the central nervous system (brain and spinal cord). They constantly survey the neural environment with motile processes, responding to injury, infection, or neurodegeneration by becoming activated phagocytes that clear debris and release inflammatory cytokines. Osteoclasts are large multinucleated cells derived from monocyte macrophage precursor fusion, residing on bone surfaces; they are the only cells capable of resorbing mineralized bone matrix through secretion of hydrochloric acid and cathepsin K into a sealed resorption lacuna. Additional specialized populations include peritoneal macrophages (defend the abdominal cavity), mesangial cells in the kidney glomerulus (clear immune complexes from the glomerular basement membrane), and Langerhans cells in the epidermis (dendritic cells of macrophage lineage that capture skin antigens and migrate to regional lymph nodes for antigen presentation to T cells).' },
+      ],
+      common_errors: [
+        'Failing to identify Kupffer cells as the largest fixed macrophage population (they process all portal blood)',
+        'Stating that osteoclasts are of osteoblast lineage (osteoclasts are derived from the monocyte macrophage lineage)',
+        'Confusing Langerhans cells (epidermal dendritic antigen presenting cells) with the islets of Langerhans (endocrine pancreas)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'tissue-macrophage-specialization',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'tissue-macrophage-specialization' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-7 (B Cell Activation & Immunoglobulins) ───
+
+  {
+    id: 'atom-p2w2-b-cell-clonal-expansion',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe B cell activation by antigen and T helper cell co-stimulation. Explain clonal expansion, differentiation into plasma cells versus memory cells, and the kinetic differences between primary and secondary immune responses.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Each naive B cell expresses surface immunoglobulin (the B cell receptor, BCR) with a single unique antigen specificity generated by V(D)J recombination during development. When a matching antigen binds the BCR, the B cell internalizes the antigen-antibody complex by receptor mediated endocytosis, processes the antigen into peptide fragments within endosomes, and displays these fragments on MHC class II molecules. A CD4+ helper T cell (Th2) recognizing the same antigen peptide on MHC II delivers co-stimulatory signals: CD40 ligand on the T cell binds CD40 on the B cell, and the T cell secretes activating cytokines (IL-4 promotes proliferation and class switching, IL-5 promotes differentiation, IL-6 promotes plasma cell maturation). This two-signal requirement (antigen plus T cell help) prevents inappropriate B cell activation by self-antigens that lack T cell recognition.' },
+        { id: 'kp2', weight: 2, description: 'After dual stimulation, the activated B cell undergoes clonal expansion, proliferating rapidly over approximately 3 to 5 days to generate a large population of cells with identical antigen specificity. Most daughter cells differentiate into plasma cells, which are antibody secreting factories with extensive rough endoplasmic reticulum that can produce and secrete approximately 2,000 antibody molecules per second. Plasma cells are short lived (days to weeks), residing primarily in the bone marrow and medullary cords of lymph nodes. A smaller but critical subset of daughter cells differentiates into memory B cells, which are long lived (years to decades), circulate through secondary lymphoid organs, and remain quiescent until re-encountering the same antigen.' },
+        { id: 'kp3', weight: 1, description: 'The primary immune response (first antigen encounter) has a lag period of 5 to 7 days before detectable antibody appears, peaks at 10 to 14 days with predominantly IgM production, then declines over weeks. The secondary (anamnestic) response upon re-exposure to the same antigen is dramatically different: the lag period is only 1 to 2 days (memory cells are already present and more numerous), the peak antibody titer is 10 to 100 fold higher, the response is sustained for months, and the predominant class switches to IgG with higher binding affinity (the result of somatic hypermutation and affinity maturation in germinal centers during the primary response). This memory based enhancement is the immunologic basis of vaccination.' },
+      ],
+      common_errors: [
+        'Stating that B cells can be fully activated by antigen alone without T cell co-stimulation (most B cell responses are T cell dependent)',
+        'Claiming that all activated B cells become plasma cells (a critical subset becomes memory cells)',
+        'Stating that IgG dominates the primary response (IgM is produced first; IgG dominates the secondary response)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'b-cell-clonal-expansion',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'b-cell-clonal-expansion' },
+  },
+
+  {
+    id: 'atom-p2w2-immunoglobulin-classes-functions',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the basic structure of an immunoglobulin molecule (heavy chains, light chains, Fab and Fc regions). Then compare the five immunoglobulin classes (IgG, IgM, IgA, IgE, IgD) by their structure, relative serum abundance, location, and primary function.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The immunoglobulin monomer is a Y shaped molecule consisting of two identical heavy chains and two identical light chains (either kappa or lambda type), connected by disulfide bonds. Each heavy chain has one variable domain (VH) and three or four constant domains (CH1 through CH3 or CH4). Each light chain has one variable (VL) and one constant (CL) domain. The paired VH and VL domains at the two tips of the Y form the Fab (fragment antigen binding) regions, each containing a unique antigen binding site (paratope) that recognizes a specific epitope on the antigen. The Fc (fragment crystallizable) region at the stem of the Y, formed by the paired CH2 and CH3 domains of the heavy chains, determines the antibody class (isotype) and mediates effector functions including complement activation, binding to Fc receptors on phagocytes, and transplacental transport.' },
+        { id: 'kp2', weight: 2, description: 'IgG (gamma heavy chain) constitutes approximately 75 percent of serum immunoglobulins and is the dominant antibody of the secondary immune response. It is the only class that crosses the placenta (providing neonatal passive immunity), has four subclasses (IgG1 through IgG4), is an effective opsonin (binds Fc gamma receptors on phagocytes), and activates the classical complement pathway. IgM (mu heavy chain) accounts for approximately 10 percent of serum immunoglobulins and exists as a pentamer in the secreted form (five monomers linked by J chain), giving it 10 antigen binding sites. IgM is the first antibody produced in a primary immune response, is highly efficient at agglutination (due to its 10 binding sites) and complement activation (one IgM pentamer can activate C1q, whereas two IgG molecules in close proximity are required). IgA (alpha heavy chain) accounts for approximately 15 percent of serum immunoglobulins and is the predominant antibody in mucosal secretions (saliva, tears, breast milk, intestinal and respiratory secretions) where it exists as a dimer linked by J chain and a secretory component that protects it from proteolytic degradation.' },
+        { id: 'kp3', weight: 1, description: 'IgE (epsilon heavy chain) is present at extremely low serum concentrations (less than 0.01 percent of total immunoglobulins) but has powerful biologic effects. IgE binds with very high affinity to Fc epsilon RI receptors on mast cells and basophils; when antigen crosslinks two bound IgE molecules, the cell degranulates, releasing histamine, leukotrienes, and other mediators that cause type I immediate hypersensitivity (allergic) reactions. IgE also plays a protective role in defense against helminths (parasitic worms) by arming eosinophils for antibody dependent cellular cytotoxicity. IgD (delta heavy chain) is found primarily on the surface of naive mature B cells as a co-receptor alongside surface IgM, where it functions as part of the B cell receptor complex for antigen recognition; its precise signaling role is not fully defined and its serum concentration is negligible.' },
+      ],
+      common_errors: [
+        'Confusing Fab (antigen binding at the tips) with Fc (effector functions at the stem) regions',
+        'Stating that IgM is a dimer (IgM is a pentamer in secreted form; IgA is a dimer in secretory form)',
+        'Claiming that IgE is the most abundant immunoglobulin (IgG is most abundant at 75 percent; IgE is less than 0.01 percent)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'immunoglobulin-classes-functions',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'immunoglobulin-classes-functions' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-8 (T Cell Maturation & Antibody Effectors) ──
+
+  {
+    id: 'atom-p2w2-thymic-selection-tolerance',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe positive and negative selection of T cells in the thymus. For each process, state the thymic region where it occurs, the selection criterion, and the consequence of failure. Explain how AIRE contributes to self-tolerance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Immature thymocytes (double positive CD4+CD8+ cells) entering the thymic cortex undergo positive selection by cortical thymic epithelial cells. The selection criterion is whether the thymocyte T cell receptor (TCR) can bind self MHC molecules with at least moderate affinity. Thymocytes whose TCRs can bind MHC class I receive a survival signal and commit to the CD8+ single positive lineage (downregulating CD4). Those that bind MHC class II commit to the CD4+ single positive lineage (downregulating CD8). Thymocytes whose TCRs fail to recognize any self MHC molecule do not receive survival signals and undergo death by neglect (apoptosis within 3 to 4 days). This process ensures that all surviving T cells are "MHC restricted," meaning they can only recognize foreign antigen when it is presented on self MHC molecules. Approximately 90 percent of thymocytes die during positive selection.' },
+        { id: 'kp2', weight: 2, description: 'Thymocytes that pass positive selection migrate to the thymic medulla for negative selection by medullary thymic epithelial cells and dendritic cells. The criterion is whether the TCR binds self-peptide presented on self-MHC with HIGH affinity. High affinity binding to self-antigen indicates that the T cell would be autoreactive and likely to attack the body own tissues if released. These self-reactive thymocytes are eliminated by apoptosis (clonal deletion). The transcription factor AIRE (autoimmune regulator) is expressed by medullary thymic epithelial cells and drives ectopic expression of tissue restricted antigens (proteins normally found only in specific organs such as insulin from pancreatic beta cells, thyroglobulin from the thyroid, and myelin basic protein from the nervous system). This allows the thymus to test T cells against a comprehensive sample of self-antigens from distant tissues, deleting those that would cause organ specific autoimmunity.' },
+        { id: 'kp3', weight: 1, description: 'Together, positive and negative selection eliminate approximately 95 to 98 percent of all developing thymocytes. The small surviving fraction (2 to 5 percent) consists of T cells that are MHC restricted (can recognize antigen on self MHC) yet self-tolerant (do not react to self-antigens). Mutations in the AIRE gene cause autoimmune polyendocrinopathy candidiasis ectodermal dystrophy (APECED), in which failure to express tissue restricted antigens in the thymus allows self-reactive T cells to escape into the periphery, causing multi-organ autoimmune destruction. This demonstrates that thymic negative selection is essential for preventing autoimmune disease.' },
+      ],
+      common_errors: [
+        'Reversing where each selection occurs (positive in cortex; negative in medulla)',
+        'Stating that positive selection eliminates self-reactive cells (positive selection tests for MHC recognition; negative selection eliminates self-reactivity)',
+        'Claiming that death by neglect occurs during negative selection (it occurs during positive selection when TCR cannot recognize MHC at all)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'thymic-selection-tolerance',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'thymic-selection-tolerance' },
+  },
+
+  {
+    id: 'atom-p2w2-antibody-effector-mechanisms',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the four major antibody effector mechanisms by which immunoglobulins contribute to pathogen clearance: neutralization, opsonization, complement activation, and agglutination. For each, explain the molecular basis and physiologic significance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Neutralization occurs when antibodies bind directly to functional sites on pathogens or toxins, physically blocking their interaction with host cell receptors. For example, antibodies against viral surface proteins (such as the influenza hemagglutinin) prevent viral attachment and entry into host cells, and antibodies against bacterial exotoxins (such as tetanus toxin or diphtheria toxin) prevent toxin binding to target cells. Neutralization requires only Fab binding and does not require Fc mediated effector functions, complement, or phagocytes. Opsonization occurs when antibodies (primarily IgG subclasses 1 and 3) coat a pathogen surface, and the exposed Fc regions are recognized by Fc gamma receptors on neutrophils and macrophages. This dramatically enhances phagocytic uptake (100 fold or more) because the Fc receptor provides a specific molecular handle for the phagocyte to grasp, overcoming the electrostatic repulsion between the negatively charged pathogen and phagocyte surfaces.' },
+        { id: 'kp2', weight: 2, description: 'Complement activation via the classical pathway occurs when the C1q component of the first complement protein (C1) binds to the Fc regions of antibodies that are already bound to antigen on a pathogen surface. IgM is the most efficient complement activator (a single pentameric IgM molecule can activate C1q), while IgG requires at least two molecules in close proximity to create a platform for C1q binding. Classical pathway activation generates C3b (potent opsonin coating the pathogen), C3a and C5a (anaphylatoxins that trigger mast cell degranulation, vasodilation, and neutrophil chemotaxis), and the C5b-9 membrane attack complex (forms a transmembrane pore that directly lyses gram negative bacteria and enveloped viruses by disrupting membrane integrity).' },
+        { id: 'kp3', weight: 1, description: 'Agglutination occurs when antibodies crosslink identical antigens on separate pathogens or cells, forming large insoluble clumps. This is most effective with IgM because its pentameric structure provides 10 antigen binding sites, allowing it to bridge many particles simultaneously. Agglutinated clumps are too large to disseminate through tissues, are cleared efficiently by phagocytes in the liver and spleen, and in the case of bacteria, are prevented from adhering to mucosal surfaces. A related mechanism, precipitation, occurs when antibodies crosslink soluble antigens (such as dissolved toxins) into insoluble immune complexes that are then cleared by phagocytes. These four mechanisms work synergistically: a single antibody molecule can simultaneously neutralize (blocking receptor binding), opsonize (presenting Fc for phagocyte binding), and activate complement (via Fc mediated C1q binding).' },
+      ],
+      common_errors: [
+        'Stating that neutralization requires complement activation (neutralization works by Fab binding alone without complement or Fc effectors)',
+        'Claiming that IgG is better at agglutination than IgM (IgM pentamer with 10 binding sites is far superior for crosslinking)',
+        'Confusing opsonization (antibody coating enhancing phagocytosis via Fc receptors) with complement mediated lysis (MAC pore formation)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'antibody-effector-mechanisms',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'antibody-effector-mechanisms' },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  //  pp2-wk-2 Ch 33 DEPTH EXPANSION ATOMS (6 atoms)
+  //  RBC destruction, hemoglobin catabolism, anemia, polycythemia,
+  //  hematopoietic regulation (Ch 33 slides 5-7, 22-29)
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ── Atoms feeding r-p2-wk2-9 (RBC Senescence & Bilirubin) ────────────
+
+  {
+    id: 'atom-p2w2-rbc-lifespan-splenic-destruction',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'State the normal red blood cell lifespan and explain why the mature RBC becomes fragile as it ages. Describe where and how senescent red blood cells are removed from the circulation.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The mature red blood cell has a lifespan of approximately 120 days. It lacks a nucleus, mitochondria, and endoplasmic reticulum, so it cannot synthesize new proteins or carry out oxidative phosphorylation. It depends entirely on anaerobic glycolysis (the Embden Meyerhof pathway) to produce the small amounts of ATP needed to maintain membrane pliability, power the Na+/K+ ATPase that preserves cation gradients, and keep heme iron in the functional ferrous state. The pentose phosphate pathway supplies NADPH to regenerate reduced glutathione for antioxidant protection against oxidative membrane damage.' },
+        { id: 'kp2', weight: 2, description: 'As the red cell ages, its metabolic enzyme systems progressively deplete, and it loses the ability to maintain membrane integrity and ion homeostasis. The cell becomes increasingly rigid, fragile, and spherical, losing the deformability required to traverse narrow microvascular passages. Such cells rupture preferentially in the splenic red pulp cords and sinusoidal slits (only 1 to 3 micrometers wide), making the spleen the primary site of senescent RBC removal. Splenic and hepatic macrophages recognize the altered membrane (including externalized phosphatidylserine) and phagocytose the cells. Approximately 200 billion red cells are removed and replaced each day.' },
+      ],
+      common_errors: [
+        'Stating the RBC lifespan is much shorter or longer than 120 days',
+        'Claiming mature RBCs perform oxidative phosphorylation (they have no mitochondria; they use anaerobic glycolysis)',
+        'Identifying the liver rather than the spleen as the primary site of senescent RBC destruction',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'rbc-lifespan-splenic-destruction',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'rbc-lifespan-splenic-destruction' },
+  },
+
+  {
+    id: 'atom-p2w2-hemoglobin-catabolism-bilirubin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Trace the catabolism of hemoglobin after a red blood cell is destroyed. Include the fate of globin, iron, and the porphyrin ring, and describe how bilirubin is processed and ultimately excreted.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'When red blood cells rupture, their hemoglobin is phagocytosed and degraded by macrophages, particularly the Kupffer cells of the liver and macrophages of the splenic red pulp. The globin chains are hydrolyzed to amino acids that re-enter the amino acid pool for reuse. The heme group is split: heme oxygenase opens the porphyrin ring, releasing the iron atom, which is returned to the blood and bound to transferrin for transport back to the bone marrow for new hemoglobin synthesis or stored as ferritin. The opened porphyrin ring is converted to biliverdin and then reduced to bilirubin.' },
+        { id: 'kp2', weight: 2, description: 'The bilirubin formed in macrophages is unconjugated (lipid soluble) and is released into the blood where it travels bound to albumin. Hepatocytes take up the unconjugated bilirubin and conjugate it with glucuronic acid (via UDP glucuronosyltransferase), making it water soluble. The conjugated bilirubin is secreted into bile and enters the intestine, where bacteria convert it to urobilinogen; most is excreted as stercobilin in feces (giving stool its color), while a small fraction is reabsorbed and excreted as urobilin in the urine. Accumulation of bilirubin produces jaundice: hemolytic causes raise unconjugated bilirubin, while biliary obstruction raises conjugated bilirubin.' },
+      ],
+      common_errors: [
+        'Stating that iron is excreted during hemoglobin breakdown (iron is conserved and recycled via transferrin or stored as ferritin)',
+        'Reversing the bilirubin pattern (hemolysis raises unconjugated; obstruction raises conjugated)',
+        'Omitting hepatic conjugation with glucuronic acid as the step that makes bilirubin water soluble for biliary excretion',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'hemoglobin-catabolism-bilirubin',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'hemoglobin-catabolism-bilirubin' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-10 (Anemia Classification & Circulation) ──
+
+  {
+    id: 'atom-p2w2-anemia-types-classification',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Define anemia and describe the four major etiologic categories: blood loss, aplastic, megaloblastic, and hemolytic. For each, state the mechanism and the characteristic red cell morphology.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Anemia is a deficiency of hemoglobin in the blood that reduces oxygen carrying capacity. Blood loss anemia follows hemorrhage: after acute blood loss, plasma volume is restored within 1 to 3 days while red cell concentration takes 3 to 6 weeks to recover, and cells are initially normocytic and normochromic; chronic blood loss depletes iron stores and produces hypochromic, microcytic cells. Aplastic anemia results from bone marrow failure (caused by radiation, chemotherapy, chemical toxins, autoimmune destruction, or idiopathic causes) leading to inadequate red cell production with normocytic cells; it is treated with transfusions and/or bone marrow transplantation.' },
+        { id: 'kp2', weight: 2, description: 'Megaloblastic anemia results from deficiency of vitamin B12 and/or folic acid, which impairs DNA replication and causes nuclear maturation failure while cytoplasmic growth continues; the result is large, fragile, irregularly shaped macrocytes (MCV above 100 fL) that rupture easily and can cause profound anemia. Hemolytic anemia results from shortened red cell survival due either to hereditary defects of the membrane or hemoglobin that increase cellular fragility (hereditary spherocytosis, sickle cell anemia) or to immune mediated destruction (erythroblastosis fetalis, the hemolytic disease of the newborn). The four categories therefore span impaired production, increased loss, and increased destruction.' },
+      ],
+      common_errors: [
+        'Classifying megaloblastic anemia as microcytic (it is macrocytic; iron deficiency from chronic blood loss is microcytic)',
+        'Confusing aplastic anemia (production failure) with hemolytic anemia (increased destruction)',
+        'Stating that red cell concentration recovers within days after hemorrhage (fluid volume recovers in 1 to 3 days, but RBC concentration takes 3 to 6 weeks)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'anemia-types-classification',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'anemia-types-classification' },
+  },
+
+  {
+    id: 'atom-p2w2-anemia-circulatory-effects',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Explain the circulatory consequences of anemia. Describe the two distinct reasons anemia produces a high cardiac output state and explain why exercise capacity is markedly reduced.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Anemia raises cardiac output through two independent mechanisms. First, decreased blood viscosity: a low hematocrit reduces the resistance of blood to flow through vessels, which lowers total peripheral resistance and increases venous return to the heart, thereby raising cardiac output. Second, decreased oxygen carrying capacity: the reduced hemoglobin produces tissue hypoxia, which triggers local vasodilation in the peripheral tissues; this vasodilation further decreases peripheral resistance and increases venous return. The combined effect can raise resting cardiac output to 2 to 3 times normal in severe anemia, a so called high output state.' },
+        { id: 'kp2', weight: 2, description: 'Despite the markedly elevated resting cardiac output, exercise capacity in the anemic patient is severely reduced. Because so much of the cardiac reserve is already being used simply to meet resting oxygen demands, little additional pumping capacity remains. During exercise the tissues demand still more oxygen, but the heart is already near its maximal output, so it cannot increase delivery further. The result is acute tissue hypoxia, profound fatigue, and in severe cases acute cardiac failure. This is clinically important to the CRNA because anemic patients tolerate the added cardiovascular stress of anesthesia and surgery poorly and may unmask underlying cardiac disease.' },
+      ],
+      common_errors: [
+        'Attributing the high cardiac output solely to hypoxia and omitting the decreased viscosity mechanism',
+        'Stating that exercise capacity is preserved because resting cardiac output is high (the elevated resting output consumes the reserve, so exercise capacity is reduced)',
+        'Claiming anemia decreases cardiac output (it increases cardiac output)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'anemia-circulatory-effects',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'anemia-circulatory-effects' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-11 (Polycythemia & Hematopoiesis) ─────────
+
+  {
+    id: 'atom-p2w2-polycythemia-hyperviscosity',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Distinguish secondary polycythemia from polycythemia vera, including the underlying cause, red cell count, hematocrit, and effect on blood volume. Explain the circulatory consequences of hyperviscosity.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Secondary polycythemia is an appropriate, erythropoietin driven increase in red cell mass, with the red cell count rising approximately 30 percent to 6 to 7 million per cubic millimeter. It occurs in response to chronic hypoxemia from heart or lung disease, or as physiologic polycythemia in people who reside at high altitude (14,000 to 17,000 feet), where the higher red cell mass markedly enhances exercise capacity. Polycythemia vera, by contrast, is a clonal myeloproliferative disorder in which a genetic abnormality of the hematopoietic stem cell drives autonomous, erythropoietin independent overproduction, usually involving all blood cell lineages.' },
+        { id: 'kp2', weight: 2, description: 'In polycythemia vera the red cell count reaches 7 to 8 million per cubic millimeter, the hematocrit rises to 60 to 70 percent, and the blood volume increases almost twofold. Blood viscosity can rise to as much as 3 times normal (about 10 times the viscosity of water). This hyperviscosity slows blood flow through the vasculature, greatly increasing the risk of thrombosis and paradoxical tissue hypoxia, increasing cardiac workload, and contributing to hypertension. Treatment centers on therapeutic phlebotomy to lower the hematocrit. The anesthetic relevance is heightened thrombotic risk and altered hemodynamics in these patients.' },
+      ],
+      common_errors: [
+        'Stating that polycythemia vera is erythropoietin driven (it is an autonomous clonal disorder; the secondary type is EPO driven)',
+        'Forgetting that hyperviscosity increases the risk of thrombosis and increases cardiac workload',
+        'Confusing the modest red cell rise of secondary polycythemia with the extreme hematocrit of 60 to 70 percent in polycythemia vera',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'polycythemia-hyperviscosity',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'polycythemia-hyperviscosity' },
+  },
+
+  {
+    id: 'atom-p2w2-hematopoiesis-lineages',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the regulation of hematopoiesis. Include the sites of erythropoiesis across the lifespan, the role of growth and differentiation inducers, and the differentiation of the pluripotent hematopoietic stem cell into the major blood cell lineages.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The site of erythropoiesis shifts during development. During the first few weeks of gestation, primitive red cells are produced in the yolk sac. During mid gestation, the liver is the main site (with contributions from the spleen and lymph nodes). From the last month of gestation through adulthood, the bone marrow takes over; in adults the marrow of the axial skeleton (vertebrae, sternum, ribs, and pelvis) is the principal site. Hematopoiesis is driven by growth inducers (growth factors such as interleukin 3) and differentiation inducers, and it adjusts to physiologic demand: hypoxia stimulates erythropoiesis through erythropoietin, while infection and inflammation stimulate leukopoiesis.' },
+        { id: 'kp2', weight: 2, description: 'The pluripotent (multipotent) hematopoietic stem cell gives rise sequentially to committed progenitor cells called colony forming units. In the myeloid pathway, these include CFU-E (committed to erythrocytes), CFU-GM (committed to granulocytes and monocytes), and CFU-M (committed to megakaryocytes, which fragment into platelets). The separate lymphoid pathway produces T lymphocytes and B lymphocytes. Because all of these lineages descend from a single pluripotent stem cell, a clonal stem cell disorder such as polycythemia vera typically elevates all cell lineages rather than red cells alone, which is a clue distinguishing it from secondary polycythemia.' },
+      ],
+      common_errors: [
+        'Stating that adult erythropoiesis occurs mainly in the liver (the liver is the mid gestation site; the bone marrow is the adult site)',
+        'Confusing the myeloid lineage progenitors (CFU-E, CFU-GM, CFU-M) with the separate lymphoid lineage (T and B lymphocytes)',
+        'Forgetting that hematopoiesis is demand responsive (hypoxia drives erythropoiesis; infection drives leukopoiesis)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'hematopoiesis-lineages',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 33', topic: 'hematopoiesis-lineages' },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  //  pp2-wk-2 Ch 34 DEPTH EXPANSION ATOMS (6 atoms)
+  //  Phagocytosis recognition and digestion, inflammation, the systemic
+  //  marrow response, granulocyte specialization, and white cell disorders
+  //  (Ch 34 slides 13-17, 24-37). These carve territory not already covered
+  //  by the existing adhesion-cascade, oxidative-burst, differential-count,
+  //  monocyte-macrophage, and tissue-macrophage atoms.
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ── Atoms feeding r-p2-wk2-12 (Phagocytosis: Recognition & Digestion) ──
+
+  {
+    id: 'atom-p2w2-phagocyte-recognition-opsonization',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Explain how phagocytes distinguish appropriate targets from the body\'s own cells, define opsonization, and describe how a particle is engulfed into a phagosome. Contrast the phagocytic capacity of neutrophils and macrophages.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Phagocytosis is the ingestion of particulate matter by a cell, and because indiscriminate ingestion would damage healthy tissue, phagocytes must distinguish foreign particles from the body\'s own cells. A particle is treated as an appropriate target when it has a rough surface, when it lacks the protective protein coat that normal host cells carry, and above all when it has been immunologically marked. This marking, called opsonization, occurs when antibodies and activated complement components (such as C3b) coat the microbe and are then recognized by specific receptors on the phagocyte surface, which greatly increases the rate and efficiency of ingestion.' },
+        { id: 'kp2', weight: 2, description: 'To engulf a recognized particle, the phagocyte projects pseudopods that surround it and fuse on the far side, enclosing the particle within a membrane bound vesicle called a phagosome. Neutrophils are mature cells already circulating in the blood and can attack organisms immediately upon reaching infected tissue, but each handles only a limited number before dying. Monocytes that migrate into the tissues enlarge and mature into macrophages, which are far more powerful: a single activated macrophage can ingest as many as 100 bacteria, can engulf much larger particles such as damaged red blood cells and malarial parasites, and can extrude the debris and continue functioning for many months.' },
+      ],
+      common_errors: [
+        'Stating that phagocytes ingest material indiscriminately (recognition depends on a rough surface, lack of a protein coat, and opsonization by antibody and complement)',
+        'Defining opsonization as direct killing (it is the immunologic marking of a target with antibody and complement to promote its ingestion)',
+        'Claiming the neutrophil ingests more organisms than the macrophage (the macrophage is far more powerful, ingesting up to about 100 bacteria)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'phagocyte-recognition-opsonization',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'phagocyte-recognition-opsonization' },
+  },
+
+  {
+    id: 'atom-p2w2-phagolysosome-digestion',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe what happens to a microbe after it has been enclosed within a phagosome. Include the vesicle that forms, the enzymes involved, the special role of lipases in macrophages, and how residual material is removed.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Once a particle has been ingested into a phagosome, the phagosome immediately fuses with one or more lysosomes and other cytoplasmic granules to form a single larger vesicle called a phagolysosome, or digestive vesicle. The lysosomal granules discharge their contents into this vesicle, where proteolytic enzymes break the ingested organism down into its constituent molecules. This intracellular digestion occurs in both neutrophils and macrophages and is the principal non oxidative means by which an ingested microbe is dismantled after it has been engulfed.' },
+        { id: 'kp2', weight: 2, description: 'In macrophages the granules additionally contain large amounts of lipases, enzymes that digest the thick lipid membranes possessed by certain organisms; this lipase activity is especially important for killing the tuberculosis bacillus and some other lipid coated bacteria that resist ordinary proteolytic digestion. After the organism has been digested, the undigestible residual material is expelled from the cell by exocytosis. This proteolytic and lipolytic digestion works in parallel with the separate oxygen dependent respiratory burst, so that an ingested organism is usually both chemically digested and oxidatively killed.' },
+      ],
+      common_errors: [
+        'Stating that the phagosome digests the microbe by itself (it must first fuse with lysosomes to form the phagolysosome that contains the digestive enzymes)',
+        'Omitting the role of macrophage lipases in killing the tuberculosis bacillus',
+        'Forgetting that residual debris is removed by exocytosis after digestion',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'phagolysosome-digestion',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'phagolysosome-digestion' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-13 (Inflammation & Marrow Response) ───────
+
+  {
+    id: 'atom-p2w2-inflammation-signs-mediators',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Define inflammation and list its four cardinal signs. Describe the physiologic tissue changes and chemical mediators that produce them, explain how an inflamed area is walled off, and state what pus is composed of.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Inflammation is a local tissue response driven by chemical mediators and recognized clinically by four cardinal signs: heat, redness, swelling, and pain. The underlying physiologic changes are vasodilation with increased local blood flow, which causes the heat and redness; increased capillary permeability, which lets plasma proteins and fluid leak into the interstitial spaces and produces the swelling; coagulation of the interstitial fluid; accumulation of granulocytes and monocytes at the site; and swelling of the tissue cells themselves. The principal mediators are histamine, bradykinin, serotonin, and prostaglandins, along with complement products, clotting system components, and lymphokines from sensitized lymphocytes.' },
+        { id: 'kp2', weight: 2, description: 'An important effect of inflammation is to wall off the injured region from the surrounding tissue. Fibrinogen leaking from the permeable vessels clots in the interstitial spaces and tissue lymphatics, minimizing the movement of fluid and microbes into and out of the area and delaying the spread of infection. Different organisms are contained with differing success: staphylococci cause intense inflammation and are walled off effectively, whereas streptococci cause less intense walling and tend to spread. Pus is the accumulation of dead neutrophils, dead bacteria, dead macrophages, and protease digested necrotic tissue, mixed with tissue fluid, often within a cavity; over days to weeks it is gradually absorbed into the surrounding tissue and lymph.' },
+      ],
+      common_errors: [
+        'Listing fewer than the four cardinal signs of inflammation (heat, redness, swelling, and pain) or omitting the vascular changes that cause them',
+        'Stating that increased blood flow causes the swelling (the swelling is due to increased capillary permeability with fluid leak; increased flow causes heat and redness)',
+        'Forgetting that fibrinogen clotting is the mechanism that walls off the inflamed area',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'inflammation-signs-mediators',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'inflammation-signs-mediators' },
+  },
+
+  {
+    id: 'atom-p2w2-neutrophilia-marrow-csf',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the systemic response of the white cell system to a significant infection. Include neutrophilia, the signaling loop by which activated macrophages drive the bone marrow through colony stimulating factors, and the time course over which macrophages come to dominate the lesion.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Intense inflammation produces neutrophilia, a rise in the circulating neutrophil count from a normal value of about 4,000 to 5,000 up to 15,000 to 25,000 per cubic millimeter. The immediate increase comes from mobilization of mature neutrophils that are already stored in the bone marrow reserve, released into the blood by inflammatory mediators. This rapid, preformed response allows the number of available phagocytes to climb several fold within hours of a serious infection, long before the marrow can manufacture additional cells.' },
+        { id: 'kp2', weight: 2, description: 'To sustain the elevated demand, activated macrophages release tumor necrosis factor and interleukin 1, which act on the macrophages themselves and on endothelial cells, fibroblasts, and lymphocytes to generate colony stimulating factors (GM-CSF, G-CSF, and M-CSF). These growth factors drive the bone marrow to increase production of granulocytes and monocytes by 20 to 50 fold, with the first newly made mature cells appearing after 3 to 4 days and the heightened output sustainable for months. Meanwhile circulating monocytes accumulate at the site and mature into macrophages, which over the following weeks become the dominant inflammatory cell, clearing residual bacteria and necrotic debris and directing tissue repair.' },
+      ],
+      common_errors: [
+        'Stating that the immediate neutrophilia comes from new marrow production (the rapid rise is from mobilization of the stored reserve; colony stimulating factor driven production takes 3 to 4 days)',
+        'Confusing the inflammatory cytokines TNF and IL-1 with the colony stimulating factors they induce (GM-CSF, G-CSF, M-CSF)',
+        'Claiming neutrophils remain the dominant cell throughout (macrophages become dominant over the following weeks)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neutrophilia-marrow-csf',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'neutrophilia-marrow-csf' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-14 (Granulocyte Specialization & Disorders) ──
+
+  {
+    id: 'atom-p2w2-eosinophil-basophil-mast',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the defensive roles of eosinophils and of basophils and mast cells, naming the substances each releases, and explain at the cellular level how an immediate allergic or anaphylactic reaction is triggered.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Eosinophils are weak phagocytes that are particularly important in defending against parasitic infections such as schistosomiasis and trichinosis. They attach to the surface of the parasite and release killing substances, including hydrolytic enzymes, reactive oxygen species, and a larvicidal polypeptide called major basic protein. Eosinophils also accumulate in tissues affected by allergic reactions, partly in response to an eosinophil chemotactic factor released from basophils and mast cells, and they appear to help detoxify some of the inflammatory mediators that basophils release.' },
+        { id: 'kp2', weight: 2, description: 'Basophils circulate in the blood and are functionally very similar to the mast cells that reside in the tissues; both cell types store and release histamine, bradykinin, serotonin, and heparin. They are the central effector cells of immediate (type I) hypersensitivity: they bind immunoglobulin E (IgE) antibody to receptors on their surface, and when a specific allergen cross links adjacent surface bound IgE molecules, the cells degranulate, releasing histamine, bradykinin, serotonin, heparin, leukotrienes, and lysosomal enzymes. These mediators produce the vasodilation, increased permeability, and bronchoconstriction of allergic and anaphylactic reactions, which is why perioperative anaphylaxis is a major anesthetic concern.' },
+      ],
+      common_errors: [
+        'Confusing eosinophils (parasite defense and allergy) with basophils and mast cells (IgE mediated immediate hypersensitivity)',
+        'Stating that mast cells are found in the blood and basophils in the tissues (it is the reverse: basophils circulate, mast cells are in tissues)',
+        'Claiming degranulation is triggered by IgG or direct antigen contact (it requires allergen cross linking of surface bound IgE)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'eosinophil-basophil-mast',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'eosinophil-basophil-mast' },
+  },
+
+  {
+    id: 'atom-p2w2-leukopenia-leukemia',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe leukopenia and leukemia. For leukopenia, give the usual cause and the clinical danger. For leukemia, give the defining abnormality, the major classifications, and the clinical consequences.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Leukopenia is an abnormally low white blood cell count, usually resulting from decreased production in the bone marrow. Common causes include ionizing radiation, chemical toxins, and certain medications that suppress the marrow. Because the white cells provide the body\'s phagocytic defense, leukopenia removes protection against infection, so that organisms which are ordinarily harmless can cause clinically severe infections; mucous membrane ulceration and respiratory infection may appear within about two days of marrow shutdown. In most cases, with proper supportive care, the surviving marrow stem cells can eventually reconstitute normal blood cell counts.' },
+        { id: 'kp2', weight: 2, description: 'Leukemia is the opposite disorder: an uncontrolled, clonal overproduction of abnormal white blood cells arising from a genetic mutation in a hematopoietic precursor. Leukemias are classified by lineage as lymphocytic or myelogenous, and by tempo as acute (immature, rapidly progressive cells) or chronic (more differentiated cells, sometimes evolving over 10 to 20 years). The proliferating leukemic cells replace normal bone marrow, causing infection, bleeding, and pathologic bone fractures; they infiltrate and enlarge the spleen, lymph nodes, and liver; and their high metabolic demand produces wasting. The combination of marrow failure and immune compromise makes these patients fragile in the perioperative period.' },
+      ],
+      common_errors: [
+        'Confusing leukopenia (too few white cells from reduced marrow production) with leukemia (malignant overproduction of abnormal white cells)',
+        'Stating that leukemia improves immune defense because white cell numbers are high (the cells are abnormal and nonfunctional, and they crowd out normal marrow, causing infection and bleeding)',
+        'Forgetting that leukemic marrow replacement causes bleeding and pathologic fractures in addition to infection',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'leukopenia-leukemia',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 34', topic: 'leukopenia-leukemia' },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  //  pp2-wk-2 Ch 35 DEPTH EXPANSION ATOMS (6 atoms)
+  //  Clinical & foundational immunology: hypersensitivity classification,
+  //  allergic syndromes, autoimmunity, immunization, antigen/epitope/hapten,
+  //  antibody diversity & clonal selection (Ch 35 slides 4, 10, 28-32)
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ── Atoms feeding r-p2-wk2-15 (Hypersensitivity & Allergic Disease) ──
+  {
+    id: 'atom-p2w2-hypersensitivity-classification',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Classify the hypersensitivity reactions using the Gell and Coombs system (types I through IV). For each type, state the immune mediator, the typical time course, and a representative clinical example, and explain the central distinction between immediate (antibody mediated) and delayed (T cell mediated) hypersensitivity.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hypersensitivity reactions are exaggerated or inappropriate immune responses that damage host tissue, traditionally divided into four Gell and Coombs types. Types I, II, and III are antibody mediated and develop within minutes to hours (immediate). Type I (immediate or anaphylactic) is mediated by IgE bound to mast cells and basophils; allergen cross linking of surface IgE triggers degranulation within minutes, producing anaphylaxis, urticaria, hay fever, and allergic asthma. Type II (cytotoxic) is mediated by IgG or IgM directed against antigens fixed on a cell surface, causing destruction through complement activation, opsonized phagocytosis, or antibody dependent cellular cytotoxicity; examples include transfusion reactions, hemolytic disease of the newborn, autoimmune hemolytic anemia, and myasthenia gravis (antibodies against the acetylcholine receptor). Type III (immune complex) results from soluble antigen antibody complexes that deposit in vessel walls, glomeruli, and joints, where they activate complement and recruit neutrophils; examples include systemic lupus erythematosus, poststreptococcal glomerulonephritis, and serum sickness.' },
+        { id: 'kp2', weight: 2, description: 'Type IV (delayed type) hypersensitivity is fundamentally different because it is mediated by sensitized T lymphocytes rather than by antibody, and therefore develops slowly, typically peaking at 48 to 72 hours after antigen exposure (hence delayed). On first contact the antigen is processed and presented on MHC, sensitizing antigen specific T cells; on re-exposure these memory T cells are reactivated. CD4 positive helper T cells release cytokines such as interferon gamma that recruit and activate macrophages, which cause most of the tissue damage, while CD8 positive cytotoxic T cells can directly kill antigen bearing cells. Classic examples include contact dermatitis from poison ivy and nickel, the tuberculin (PPD) skin test reaction, and granuloma formation in tuberculosis; these reactions are usually cutaneous but can occur in the lungs with airborne antigens. The key clinical distinction is timing and mediator: immediate reactions (types I to III) are antibody mediated and rapid, whereas delayed (type IV) reactions are T cell mediated and take one to three days to manifest.' },
+      ],
+      common_errors: [
+        'Stating that type IV (delayed) hypersensitivity is antibody mediated (it is mediated by sensitized T cells and develops over 48 to 72 hours)',
+        'Confusing type II cytotoxic reactions, in which antibody targets a cell bound antigen, with type III immune complex reactions, in which soluble antigen antibody complexes deposit in tissues',
+        'Claiming that type I reactions take days to appear (IgE mediated reactions occur within minutes of allergen exposure)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'hypersensitivity-classification',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'hypersensitivity-classification' },
+  },
+
+  {
+    id: 'atom-p2w2-anaphylaxis-allergic-syndromes',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Describe the major clinical syndromes produced by immediate (IgE mediated) allergy: anaphylaxis, urticaria, hay fever (allergic rhinitis), and asthma. For each, give the principal mediators, the dominant pathophysiology, and the standard treatment, and identify the features most important to anesthetic management.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Anaphylaxis is the systemic, potentially fatal form of immediate hypersensitivity, caused by widespread mast cell and basophil degranulation that releases histamine and other mediators throughout the circulation. The result is generalized vasodilation (causing profound hypotension and distributive shock), greatly increased capillary permeability (causing intravascular volume loss, angioedema, and laryngeal edema), and leukotriene driven bronchospasm with wheezing. Because the cardiovascular and airway collapse can be fatal within minutes, the first line treatment is intramuscular epinephrine, which reverses vasodilation, supports blood pressure, and relieves bronchospasm, supported by antihistamines, intravenous fluids, and corticosteroids. This is a critical anesthetic concern because perioperative anaphylaxis to neuromuscular blocking drugs, antibiotics, or latex presents as sudden hypotension and bronchospasm. Urticaria (hives) is the localized cutaneous form: histamine release in the skin causes localized vasodilation with a red flare and increased permeability with wheals and swelling, and it is treated with antihistamines.' },
+        { id: 'kp2', weight: 2, description: 'Hay fever (allergic rhinitis) is an immediate allergic reaction localized to the upper respiratory mucosa and conjunctiva. It is largely histamine mediated: inhaled allergen triggers vascular dilation in the nasal passages, sinuses, and eyes, with leakage of fluid producing congestion, rhinorrhea, and sneezing, and it is treated with antihistamines and local (intranasal) corticosteroids. Allergic asthma is the lower airway syndrome and is mediated largely by leukotrienes rather than by histamine; the leukotrienes cause sustained bronchospasm, airway edema, and mucus secretion, producing wheezing and airflow obstruction. Treatment targets these mechanisms with beta-2 adrenergic agonists for bronchodilation, inhaled corticosteroids to suppress airway inflammation, and leukotriene receptor antagonists, with attention to any coexisting upper airway component. Asthma is highly relevant to anesthesia because airway instrumentation and certain drugs can provoke intraoperative bronchospasm, and the leukotriene basis explains why beta agonists and steroids, rather than antihistamines, are the mainstays of treatment.' },
+      ],
+      common_errors: [
+        'Stating that antihistamines are the first line treatment for anaphylaxis (intramuscular epinephrine is first line; antihistamines are adjuncts)',
+        'Claiming that asthma is primarily histamine mediated (it is mediated largely by leukotrienes, which is why beta agonists, inhaled steroids, and leukotriene blockers are used)',
+        'Confusing urticaria (localized skin wheals) with anaphylaxis (systemic vasodilation, volume loss, and bronchospasm that can be fatal)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'anaphylaxis-allergic-syndromes',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'anaphylaxis-allergic-syndromes' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-16 (Autoimmunity & Immunization) ──────────
+  {
+    id: 'atom-p2w2-autoimmunity-tolerance-failure',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Explain how failure of immunologic tolerance produces autoimmune disease, including the principal mechanisms by which self tolerance is lost. Then describe four classic autoimmune disorders named in the chapter (rheumatic fever, poststreptococcal glomerulonephritis, myasthenia gravis, and systemic lupus erythematosus), identifying the target and mechanism of each.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Immunologic tolerance normally prevents the immune system from attacking host tissue: self reactive T cell and B cell clones that bind self antigen with high affinity are deleted by apoptosis during clonal selection (central tolerance in the thymus and bone marrow), and additional peripheral mechanisms (anergy and regulatory T cells) restrain any that escape. Autoimmunity arises when these safeguards fail and self reactive clones become activated against self antigens. The principal mechanisms include molecular mimicry (a microbial antigen closely resembles a self antigen, so antibodies or T cells raised against the pathogen cross react with host tissue), exposure of previously sequestered self antigens after tissue injury, failure of clonal deletion or regulatory T cell control, and inappropriate expression of MHC class II on cells that do not normally present antigen. The resulting tissue injury is mediated either by autoantibodies (types II and III hypersensitivity) or by self reactive T cells (type IV hypersensitivity).' },
+        { id: 'kp2', weight: 2, description: 'Rheumatic fever is the classic example of molecular mimicry: antibodies raised against the M protein of group A streptococci cross react with antigens in cardiac valves, myocardium, and joints, producing carditis and arthritis after a streptococcal pharyngitis. Poststreptococcal glomerulonephritis is a type III (immune complex) disease in which streptococcal antigen antibody complexes deposit in the glomerular basement membrane, activating complement and causing hematuria and renal impairment. Myasthenia gravis is a type II disorder in which autoantibodies are directed against the nicotinic acetylcholine receptors at the neuromuscular junction, reducing functional receptors and causing fatigable skeletal muscle weakness; it is profoundly important in anesthesia because affected patients are markedly sensitive to nondepolarizing neuromuscular blocking drugs and relatively resistant to succinylcholine. Systemic lupus erythematosus is a multisystem disease in which autoantibodies form against many self antigens (including antinuclear and anti double stranded DNA antibodies), producing widespread immune complex injury to skin, joints, kidneys, and serous membranes.' },
+      ],
+      common_errors: [
+        'Stating that autoimmune disease is caused by foreign antigens rather than by loss of self tolerance (the immune attack is directed against self antigens of the host)',
+        'Forgetting that myasthenia gravis patients are very sensitive to nondepolarizing neuromuscular blockers and resistant to succinylcholine (a key anesthetic implication)',
+        'Confusing the mechanism of rheumatic fever (molecular mimicry with cross reactive antibodies) with that of poststreptococcal glomerulonephritis (immune complex deposition)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'autoimmunity-tolerance-failure',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'autoimmunity-tolerance-failure' },
+  },
+
+  {
+    id: 'atom-p2w2-active-passive-immunization',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Distinguish active from passive immunization. For active immunity, describe the main vaccine types (killed organisms, toxoids, and live attenuated organisms) with examples and explain why the protection is durable. For passive immunity, describe how it is conferred, give examples, and explain why its protection is immediate but short lived.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Active immunization stimulates the body to mount its own adaptive immune response and, critically, to generate immunologic memory, so protection develops slowly over one to several weeks but is long lasting and can be boosted. There are three main approaches. Killed (inactivated) vaccines introduce whole organisms that have been destroyed so they cannot replicate but still display their antigens, as in typhoid and whooping cough (pertussis) vaccines. Toxoid vaccines use chemically inactivated bacterial exotoxins that retain antigenicity but lose toxicity, teaching the body to neutralize the native toxin, as in diphtheria and tetanus toxoid. Live attenuated vaccines use organisms weakened so they replicate without causing disease, generating a strong and durable response that most closely mimics natural infection, as in smallpox, yellow fever, oral polio, and measles vaccines. Because active immunity creates memory B and T cells, re-exposure produces a rapid, amplified secondary response.' },
+        { id: 'kp2', weight: 2, description: 'Passive immunization confers protection by transferring preformed antibodies, or less commonly activated T cells, from an immune donor to the recipient, rather than having the recipient generate them. Because the effector molecules are supplied ready made, protection is immediate, which is its main advantage in urgent situations. However, the recipient does not generate the response and no memory is created, so the protection is temporary: the transferred antibodies are gradually catabolized and typically last only about two to three weeks. Naturally occurring examples include maternal IgG crossing the placenta and IgA supplied in breast milk, both protecting the newborn until its own immune system matures. Clinical examples include antitoxins and antivenoms, pooled human immunoglobulin, and specific hyperimmune globulins (such as those given after exposure to tetanus, rabies, or hepatitis), all of which provide rapid but transient protection.' },
+      ],
+      common_errors: [
+        'Stating that passive immunization generates immunologic memory (only active immunization creates memory; passive immunity is immediate but lasts only about two to three weeks)',
+        'Confusing toxoid vaccines (inactivated toxin, as in tetanus and diphtheria) with live attenuated vaccines (weakened replicating organisms, as in measles and oral polio)',
+        'Claiming that active immunization protects immediately (it requires one to several weeks to develop a response, unlike passive immunity which is immediate)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'active-passive-immunization',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'active-passive-immunization' },
+  },
+
+  // ── Atoms feeding r-p2-wk2-17 (Antigen Recognition & Specificity) ────
+  {
+    id: 'atom-p2w2-antigen-epitope-hapten',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Define antigen, immunogen, epitope (antigenic determinant), and hapten. Explain the molecular properties that make a substance antigenic, and explain why haptens are clinically important in drug allergy.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'An antigen is any substance that can be specifically recognized and bound by an antibody or by a lymphocyte antigen receptor; an immunogen is an antigen that can also provoke an adaptive immune response on its own. Antigens are unique to each organism and are usually proteins or large polysaccharides bearing recurring molecular groups on their surfaces. Three properties make a substance strongly immunogenic: foreignness (it must be recognized as non self, since self antigens are normally tolerated), sufficient molecular size (generally a molecular weight above roughly 8,000 daltons, with the largest and most complex molecules being the most immunogenic), and chemical complexity. The specific small molecular region of an antigen that is actually recognized and bound by a given antibody or receptor is called the epitope, or antigenic determinant; a single large antigen typically carries many different epitopes, so it can be recognized by several different lymphocyte clones at once.' },
+        { id: 'kp2', weight: 2, description: 'A hapten is a small molecule, usually well under 1,000 daltons, that is antigenic but not immunogenic by itself: it can be bound by an antibody once that antibody exists, but it is too small to provoke an immune response on its own. A hapten becomes immunogenic only after it binds covalently to a large carrier protein, so that the combined hapten carrier complex is large and complex enough to trigger a response; the resulting antibodies can then recognize the small molecule alone. This concept is clinically critical in anesthesia and pharmacology because many drugs and drug metabolites act as haptens: penicillins and other small reactive drugs covalently bind host proteins to form hapten carrier complexes, sensitizing the immune system and producing drug allergy and, on re-exposure, IgE mediated anaphylaxis. Recognizing the hapten mechanism explains why otherwise small, simple drug molecules can cause severe allergic reactions.' },
+      ],
+      common_errors: [
+        'Stating that a hapten can induce an immune response by itself (a hapten is antigenic but not immunogenic until it conjugates to a carrier protein)',
+        'Confusing the antigen (the whole molecule) with the epitope (the specific small region actually bound by the antibody or receptor)',
+        'Claiming that small molecules are the most immunogenic (large, complex, foreign molecules above roughly 8,000 daltons are the most immunogenic)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'antigen-epitope-hapten',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'antigen-epitope-hapten' },
+  },
+
+  {
+    id: 'atom-p2w2-antibody-diversity-clonal-selection',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-2',
+    prompt: 'Explain how the immune system generates an enormous diversity of antibody and T cell receptor specificities from a limited number of genes, and state the clonal selection principle. Include V(D)J recombination, combinatorial and junctional diversity, and the rule that each lymphocyte clone has a single specificity determined before antigen exposure.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The immune system must be able to recognize millions of different epitopes, yet the genome contains far too few genes to encode a separate receptor for each. The solution is somatic gene rearrangement: the genes for B cell receptors (immunoglobulins) and T cell receptors are not inherited as complete genes but as libraries of many small segments, called Variable (V), Diversity (D), and Joining (J) segments. As each lymphocyte develops, it randomly selects and splices together one segment from each library by V(D)J recombination, which is carried out by the RAG recombinase enzymes. Because there are many segments in each library, the number of possible combinations is very large (combinatorial diversity), and this is multiplied further by junctional diversity, the imprecise joining and random addition of nucleotides at the splice sites. The pairing of two independently rearranged chains (heavy with light, or the two T cell receptor chains) multiplies the total still further, generating on the order of billions of distinct possible specificities.' },
+        { id: 'kp2', weight: 2, description: 'Each developing lymphocyte completes its rearrangement before it ever meets an antigen, and the result is that every lymphocyte, and its clonal descendants, expresses receptors of one single specificity, recognizing one epitope of one antigen. The body therefore generates, in advance and at random, an enormous repertoire of clones, each preformed and committed to a different specificity. This is the basis of the clonal selection principle: the antigen does not instruct or shape the receptor; instead it simply selects the rare preexisting clone whose receptor already fits it and drives that clone to proliferate (clonal expansion) and differentiate into effector and memory cells. Clonal selection explains the specificity of the adaptive response, the basis of immunologic memory (expanded memory clones persist), and self tolerance (clones that happen to recognize self antigen are deleted during development), and it accounts for the almost limitless antibody specificity described in the chapter.' },
+      ],
+      common_errors: [
+        'Stating that antigen instructs or molds the antibody to fit it (clonal selection holds that the matching clone preexists and the antigen merely selects and expands it)',
+        'Claiming a separate complete gene is inherited for every antibody specificity (diversity is generated somatically by V(D)J recombination of gene segments)',
+        'Stating that a single lymphocyte clone can recognize many different epitopes (each clone has one specificity, fixed before antigen exposure)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'antibody-diversity-clonal-selection',
+    chapter: 'pp2-wk-2',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 35', topic: 'antibody-diversity-clonal-selection' },
+  },
+
 ];
