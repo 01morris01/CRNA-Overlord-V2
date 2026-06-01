@@ -54,6 +54,7 @@ import { PP2_WK1_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk1-acid-bas
 import { PP2_WK2_QUESTIONS,  PP2_WK2_METADATA  } from '../data/questions/pp2-wk2-rbc-infection-immunity.js';
 import { PP2_WK2_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk2-rbc-immunity-supplement.js';
 import { PP2_WK3_QUESTIONS,  PP2_WK3_METADATA  } from '../data/questions/pp2-wk3-blood-types-hemostasis-ventilation.js';
+import { PP2_WK3_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk3-hemostasis-supplement.js';
 import { PP2_WK4_QUESTIONS,  PP2_WK4_METADATA  } from '../data/questions/pp2-wk4-pulmonary-circulation.js';
 import { PP2_WK5_QUESTIONS,  PP2_WK5_METADATA  } from '../data/questions/pp2-wk5-gas-exchange-transport.js';
 import { PP2_WK6_QUESTIONS,  PP2_WK6_METADATA  } from '../data/questions/pp2-wk6-resp-regulation-insufficiency.js';
@@ -667,7 +668,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 36–38",
     badgeLabel:    "COAG / VENTILATION",
     icon:          "🫁",
-    questions:     PP2_WK3_QUESTIONS,
+    questions:     [...PP2_WK3_QUESTIONS, ...PP2_WK3_SUPPLEMENT_QUESTIONS],
     questionsMeta: PP2_WK3_METADATA,
   },
 

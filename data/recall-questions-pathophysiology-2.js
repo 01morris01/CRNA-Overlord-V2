@@ -858,4 +858,270 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     },
   },
 
+  // ===== CH 37 / pp2-wk-3 (Hemostasis & Blood Coagulation) synthesis =====
+
+  // CH 37 / pp2-wk-3 — Synthesis 1: Primary hemostasis (vasoconstriction + platelet plug)
+  {
+    id: 'r-p2-wk3-1',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-vascular-constriction-mechanisms', 'atom-p2w3-platelet-plug-formation'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Describe primary hemostasis, the immediate response to vascular injury that occurs before the coagulation cascade produces fibrin. Explain the mechanisms of vascular constriction and how its intensity relates to the severity of trauma. Then describe the formation of the platelet plug, including the roles of exposed collagen and von Willebrand factor, platelet adhesion, activation, degranulation, and aggregation. Finally, explain how these two steps work together to limit blood loss and describe the bleeding pattern that appears when platelets are deficient.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'When a vessel is cut or ruptured the first response is immediate constriction of its wall, which narrows the lumen and reduces blood loss. Three mechanisms drive this: local myogenic spasm, a direct contractile response of vascular smooth muscle to injury that accounts for most of the constriction; local humoral vasoconstrictors released from traumatized tissue and from activated platelets, including thromboxane A2 and serotonin; and nervous reflexes triggered by pain and sensory impulses. The degree of spasm is proportional to the severity of trauma, so a crushed vessel constricts more forcefully than a cleanly cut one and often bleeds less. The spasm can last from minutes to hours, buying time for the platelet plug and clot to form.' },
+        { id: 'kp2', weight: 2, description: 'Within seconds, platelets contact the exposed subendothelial collagen and adhere through glycoprotein Ib binding to von Willebrand factor, which bridges the platelet to collagen. Adhesion activates the platelet, which changes shape, extends pseudopods, and degranulates, releasing adenosine diphosphate (ADP) and thromboxane A2. These mediators activate and recruit additional passing platelets, and the recruited platelets aggregate by linking to one another through glycoprotein IIb/IIIa receptors that bind fibrinogen. This positive feedback builds a platelet plug that can seal a small break within seconds, and the plug is later reinforced by fibrin during secondary hemostasis (coagulation).' },
+        { id: 'kp3', weight: 1, description: 'Vascular constriction and platelet plugging together constitute primary hemostasis and are sufficient to seal the many minute vascular breaks that occur daily; the slower coagulation cascade then deposits fibrin to make the seal permanent (secondary hemostasis). When platelets are deficient or dysfunctional, primary hemostasis fails and a characteristic pattern appears: petechiae and purpura in the skin, mucosal and gum bleeding, and a prolonged bleeding time, in contrast to the deep joint and tissue bleeding of clotting factor disorders. This distinction is clinically central, because preoperative assessment of bleeding risk depends on recognizing whether a defect lies in primary (platelet and vessel) or secondary (coagulation factor) hemostasis.' },
+      ],
+      common_errors: [
+        'Confusing platelet adhesion (single platelets binding collagen via glycoprotein Ib and von Willebrand factor) with aggregation (platelets binding one another via glycoprotein IIb/IIIa and fibrinogen)',
+        'Stating that a cleanly cut vessel constricts more than a crushed one (greater trauma produces greater spasm)',
+        'Attributing petechiae and mucosal bleeding to clotting factor deficiency (that superficial pattern is the hallmark of platelet or primary hemostatic failure)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'primary-hemostasis-vasoconstriction-platelet-plug',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'primary-hemostasis-vasoconstriction-platelet-plug',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 2: Platelet biology (structure + function)
+  {
+    id: 'r-p2-wk3-2',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-platelet-structure-production', 'atom-p2w3-platelet-functional-components'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Explain how the structure, production, and internal composition of platelets equip them for their hemostatic roles. Describe the origin, size, normal concentration, and lifespan of platelets and how they are cleared. Then describe their functional components, including contractile proteins, synthetic and storage organelles and their products, energy sources, and the special properties of the platelet membrane. Finally, integrate these facts to explain how a platelet without a nucleus can adhere, change shape, degranulate, retract a clot, and provide a surface for coagulation, and note one clinical implication.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Platelets (thrombocytes) are anucleate cytoplasmic fragments about 1 to 4 micrometers in diameter, pinched off in the thousands from giant megakaryocytes in the bone marrow. The normal blood concentration is about 150,000 to 300,000 per microliter, and because they lack a nucleus they cannot divide. Their functional lifespan is only about 8 to 12 days, after which they are removed by tissue macrophages, particularly in the spleen. These numbers matter clinically: counts below roughly 50,000 per microliter increase bleeding risk and counts below about 10,000 per microliter risk spontaneous hemorrhage, while the short lifespan explains the transient benefit of platelet transfusion and the prolonged effect of irreversible platelet inhibitors such as aspirin.' },
+        { id: 'kp2', weight: 2, description: 'Despite having no nucleus, platelets are metabolically active. They contain the contractile proteins actin, myosin, and thrombosthenin that drive shape change and clot retraction; residual endoplasmic reticulum and Golgi that synthesize enzymes, prostaglandins (including thromboxane A2 precursors), a fibrin stabilizing factor, and platelet derived growth factor, and that store calcium; and mitochondria that make ATP and ADP. The membrane is specialized: a surface glycoprotein coat repels normal intact endothelium but binds injured surfaces and exposed collagen, and membrane phospholipids (platelet factor 3) provide a procoagulant surface on which clotting factor complexes assemble.' },
+        { id: 'kp3', weight: 1, description: 'These components explain how a fragment with no nucleus performs complex hemostatic work: the glycoprotein coat and von Willebrand factor mediate adhesion, the contractile proteins produce the activation shape change and later clot retraction, the granules supply ADP and thromboxane A2 to recruit more platelets, and the membrane phospholipids catalyze the coagulation cascade, so the platelet bridges primary and secondary hemostasis. Clinically, because platelets cannot make new protein from a nucleus and the cyclooxygenase that forms thromboxane A2 is blocked irreversibly by aspirin, a single dose of aspirin impairs platelet function for the remaining lifespan of the existing platelets, which is why aspirin is often held before surgery.' },
+      ],
+      common_errors: [
+        'Calling platelets complete nucleated cells that divide (they are anucleate megakaryocyte fragments with a lifespan of about 8 to 12 days)',
+        'Forgetting that platelet membrane phospholipids (platelet factor 3) provide the catalytic surface for the clotting cascade',
+        'Confusing platelet derived growth factor with a clotting factor (it promotes vessel wall repair, not coagulation)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'platelet-biology-structure-function',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'platelet-biology-structure-function',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 3: Common pathway and clot maturation
+  {
+    id: 'r-p2-wk3-3',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-common-pathway-thrombin-fibrin', 'atom-p2w3-clot-extension-retraction-feedback'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Describe the final common pathway of coagulation and the maturation of the clot. Explain how prothrombin activator and calcium generate thrombin, how thrombin converts fibrinogen to fibrin, and how fibrin stabilizing factor (factor XIII) strengthens the meshwork. Then explain the positive feedback by which thrombin amplifies its own formation, and describe the mechanism, timing, and purpose of clot retraction. Finally, integrate these into the overall picture of secondary hemostasis and explain why calcium and platelets are each indispensable.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The common pathway begins when prothrombin activator, produced by either the extrinsic or intrinsic pathway, splits prothrombin (factor II) into thrombin in a reaction that requires calcium. Thrombin, a protease, cleaves small peptides from fibrinogen to form fibrin monomers, which polymerize spontaneously within seconds into fibrin fibers that form the reticulum of the clot and trap platelets and blood cells. Initially the fibrin is held by weak noncovalent bonds; thrombin also activates fibrin stabilizing factor (factor XIII), which, with calcium, forms covalent cross links between fibrin strands, converting the fragile meshwork into a strong stable clot. Calcium is required at multiple steps, which is why citrate, by chelating calcium, prevents stored blood from clotting.' },
+        { id: 'kp2', weight: 2, description: 'Once formed, thrombin drives a powerful positive feedback: it acts on prothrombin and on other clotting factors to generate still more thrombin and prothrombin activator, and it activates platelets, so the clot grows and propagates at its periphery until bleeding is sealed. Within about 20 to 60 minutes the clot retracts: platelets bound to the fibrin fibers contract using actin, myosin, and thrombosthenin (an active process needing ATP and calcium), squeezing out serum and pulling the broken vessel edges together. Serum is plasma from which fibrinogen and most clotting factors have been removed, so unlike plasma it cannot clot. Effective retraction therefore requires an adequate number of functioning platelets.' },
+        { id: 'kp3', weight: 1, description: 'Together these steps are secondary hemostasis: prothrombin activator gives thrombin, thrombin gives cross linked fibrin, positive feedback amplifies the response, and platelet driven retraction consolidates and seals the wound. The system depends absolutely on calcium (so calcium chelators such as citrate are anticoagulant in a collection tube) and on platelets (which supply both the phospholipid surface for the cascade and the contractile force for retraction), illustrating how primary and secondary hemostasis are interdependent rather than separate. The same dependence explains why massive transfusion of citrated blood can lower ionized calcium and impair clotting, a point of practical importance during large volume resuscitation.' },
+      ],
+      common_errors: [
+        'Saying thrombin acts on prothrombin to make fibrin (thrombin is made from prothrombin by prothrombin activator, then thrombin acts on fibrinogen to make fibrin)',
+        'Omitting fibrin stabilizing factor XIII, which covalently cross links and strengthens the otherwise weak fibrin meshwork',
+        'Confusing serum with plasma, or forgetting that clot retraction requires platelets',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'common-pathway-clot-formation-retraction',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'common-pathway-clot-formation-retraction',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 4: Extrinsic vs intrinsic pathways and their convergence
+  {
+    id: 'r-p2-wk3-4',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-extrinsic-pathway-tissue-factor', 'atom-p2w3-intrinsic-pathway-contact-activation'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Compare and contrast the extrinsic and intrinsic pathways that generate prothrombin activator. For each, give the trigger, the key clotting factors in sequence, the role of calcium and phospholipid, and the speed of clotting. Explain where and how the two pathways converge on the common pathway. Finally, relate each pathway to the laboratory test that assesses it and to the bleeding disorders and anticoagulants that affect it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The extrinsic pathway is triggered by trauma to the vessel wall and surrounding tissue, which releases tissue factor (tissue thromboplastin, factor III), a lipoprotein and phospholipid complex. Tissue factor complexes with factor VII to form tissue factor and VIIa, which, with calcium, activates factor X to Xa. Activated factor X combines with factor V, tissue phospholipid, and calcium to form prothrombin activator. Because it has few steps, the extrinsic pathway is explosive and can produce clotting in as little as 15 seconds. The extrinsic and common pathways are assessed by the prothrombin time, reported as the INR, which is the test used to monitor warfarin.' },
+        { id: 'kp2', weight: 2, description: 'The intrinsic pathway begins with trauma to the blood itself or contact with collagen, which activates factor XII (aided by high molecular weight kininogen and prekallikrein) and causes platelets to release phospholipid. Factor XIIa activates XI, XIa activates IX, and IXa together with activated factor VIII, platelet phospholipid, and calcium activates factor X to Xa. The intrinsic pathway is slower, usually taking 1 to 6 minutes, because it has many more steps. Deficiency of factor VIII or IX (hemophilia A or B) cripples it. The intrinsic and common pathways are assessed by the activated partial thromboplastin time (aPTT), which is prolonged in hemophilia and used to monitor heparin.' },
+        { id: 'kp3', weight: 1, description: 'Both pathways converge at the activation of factor X: from Xa onward they share the identical common pathway (Xa plus factor V and phospholipid forms prothrombin activator, which makes thrombin, which makes fibrin), so the two routes are alternative ways of reaching the same endpoint, and in the body they act together, with tissue factor initiating clotting and the intrinsic pathway amplifying it. Clinically the two tests map onto the two pathways: a prolonged PT or INR points to the extrinsic or common pathway (warfarin, factor VII deficiency, vitamin K deficiency, liver disease), while a prolonged aPTT points to the intrinsic or common pathway (heparin, hemophilia A and B), and this pattern guides diagnosis of a bleeding patient.' },
+      ],
+      common_errors: [
+        'Stating the pathways never meet (both converge at factor X and share the common pathway to thrombin and fibrin)',
+        'Matching the wrong test to the pathway (PT and INR assess the extrinsic and common pathways and monitor warfarin; aPTT assesses the intrinsic and common pathways and monitors heparin)',
+        'Claiming the intrinsic pathway is faster than the extrinsic (the extrinsic pathway is explosive at under 15 seconds, whereas the intrinsic takes 1 to 6 minutes)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'extrinsic-intrinsic-pathways-convergence',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'extrinsic-intrinsic-pathways-convergence',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 5: Limiting and dissolving the clot
+  {
+    id: 'r-p2-wk3-5',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-endogenous-anticoagulants', 'atom-p2w3-fibrinolysis-plasmin-tpa'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Explain how the body keeps clotting localized and then dissolves clots once they are no longer needed. Describe the endothelial and plasma mechanisms that prevent and limit clotting (endothelial surface properties, thrombomodulin and protein C, antithrombin III, and adsorption of thrombin by fibrin). Then describe the fibrinolytic system (plasminogen, tissue plasminogen activator, and plasmin). Finally, integrate these opposing systems with the procoagulant cascade and note the therapeutic agents that exploit each.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Intact endothelium resists clotting because its surface is smooth (preventing contact activation) and coated with a glycocalyx that repels platelets and factors, and because it carries thrombomodulin, which binds thrombin; the thrombomodulin and thrombin complex activates protein C, which, with protein S, inactivates activated factors V and VIII. Once thrombin is formed it is further controlled in two ways: the polymerizing fibrin adsorbs about 85 to 90 percent of the thrombin, localizing it to the clot, and antithrombin III binds and inactivates the thrombin that escapes (over 12 to 20 minutes) as well as activated factors Xa, IXa, XIa, and XIIa. Together these mechanisms confine clotting to the site of injury.' },
+        { id: 'kp2', weight: 2, description: 'Clot removal is the job of the fibrinolytic system. Plasma plasminogen (profibrinolysin) is trapped within a forming clot but is inactive. Over the following days injured tissue and endothelium release tissue plasminogen activator (tPA), which converts the trapped plasminogen into plasmin (fibrinolysin), so plasmin is generated mainly inside the clot. Plasmin is a protease that digests the fibrin fibers and also destroys fibrinogen and factors V, VIII, prothrombin, and XII, dissolving the clot, reopening (recanalizing) occluded small vessels, and clearing the microscopic clots that constantly form in small vessels throughout the body.' },
+        { id: 'kp3', weight: 1, description: 'Hemostasis is thus a balance between procoagulant forces (the cascade and platelet plug) and anticoagulant and fibrinolytic forces; in health these are tuned so a clot forms exactly where and when it is needed and is removed afterward, and disease or drugs shift the balance. Therapeutically, several agents map onto these natural systems: heparin potentiates antithrombin III; warfarin depletes the vitamin K dependent procoagulant factors; and recombinant tPA and related thrombolytics drive plasmin generation to dissolve pathologic clots. Recognizing which arm of the system an agent acts on clarifies its onset, the laboratory test used to follow it, and how it is reversed, which is the basis of rational perioperative anticoagulation management.' },
+      ],
+      common_errors: [
+        'Stating that activated protein C inactivates factors II and X (it inactivates activated factors V and VIII)',
+        'Confusing plasminogen with plasmin, or forgetting that tPA is the physiologic activator and the basis of thrombolytic therapy',
+        'Confusing antithrombin III (a circulating inhibitor of thrombin and other factors, potentiated by heparin) with thrombomodulin (an endothelial protein that activates protein C)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'clot-limitation-anticoagulants-fibrinolysis',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'clot-limitation-anticoagulants-fibrinolysis',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 6: Pharmacologic anticoagulation (heparin + warfarin)
+  {
+    id: 'r-p2-wk3-6',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-heparin-antithrombin-mechanism', 'atom-p2w3-warfarin-vitamin-k-mechanism'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Compare heparin and warfarin as anticoagulants. For each, describe the mechanism of action, the clotting factors or proteins affected, the speed of onset and route, the typical clinical use, the laboratory test used for monitoring, and the method of reversal. Then integrate the two by explaining why they are often started together and how vitamin K links warfarin to the clotting factors, and note the relevant INR targets.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin is a highly negatively charged polysaccharide that works by binding antithrombin III and increasing its activity 100 to 1000 fold; the potentiated antithrombin III then rapidly inactivates thrombin and activated factors XII, XI, X, and IX. Because it acts on existing plasma proteins, heparin works almost immediately and is given parenterally for acute anticoagulation, such as treatment of venous thrombosis and pulmonary embolism, and to prevent clotting in cardiopulmonary bypass and hemodialysis circuits. Its effect on the intrinsic and common pathways is monitored with the activated partial thromboplastin time (aPTT), and it is reversed rapidly by protamine, which binds and neutralizes the heparin molecule.' },
+        { id: 'kp2', weight: 2, description: 'Warfarin (a coumarin) inhibits vitamin K epoxide reductase complex 1 (VKOR c1), the enzyme that recycles vitamin K. Vitamin K is needed by the liver to make functional prothrombin (II) and factors VII, IX, and X (and proteins C and S), so by depleting active vitamin K warfarin depletes these factors. Because it blocks only the synthesis of new factors and existing factors must be cleared first, warfarin acts slowly over days and is taken orally for long term anticoagulation. It is monitored by the prothrombin time as the INR, with targets near 2.0 to 3.0 for atrial fibrillation and deep vein thrombosis or pulmonary embolism and 2.5 to 3.5 for mechanical heart valves; it is reversed by vitamin K (slow) and by fresh frozen plasma or prothrombin complex (immediate).' },
+        { id: 'kp3', weight: 1, description: 'The two drugs are complementary in onset, which is why anticoagulation is often begun with heparin for immediate effect while warfarin is started at the same time and continued once its slow effect develops, after which heparin is stopped (bridging). They also illustrate the two laboratory axes: heparin prolongs the aPTT (intrinsic and common pathways) and warfarin prolongs the PT and INR (extrinsic and common pathways), and each has a specific antidote (protamine for heparin, vitamin K and plasma for warfarin). Understanding these differences is essential for perioperative management, because the timing of stopping and restarting each agent, and the choice of reversal, depends directly on their mechanisms.' },
+      ],
+      common_errors: [
+        'Stating heparin and warfarin act on the same timescale (heparin acts immediately, whereas warfarin acts over days because existing factors must be cleared)',
+        'Mismatching the antidotes (protamine reverses heparin, whereas vitamin K and fresh frozen plasma reverse warfarin)',
+        'Listing the wrong monitored test (heparin is followed by the aPTT, warfarin by the PT and INR)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pharmacologic-anticoagulation-heparin-warfarin',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'pharmacologic-anticoagulation-heparin-warfarin',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 7: Coagulation factor bleeding disorders
+  {
+    id: 'r-p2-wk3-7',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-hemophilia-factor-deficiencies', 'atom-p2w3-vitamin-k-deficiency-coagulopathy'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Explain how deficiencies of coagulation factors cause excessive bleeding, contrasting hemophilia with vitamin K deficiency. For hemophilia, describe the two types and their factor deficiencies, the inheritance, the pathway affected, the bleeding pattern, and the abnormal test. For vitamin K deficiency, describe the dependent factors, why fat absorption and the liver matter, the common causes, the abnormal test, and treatment. Then integrate the two and explain how the bleeding pattern together with the PT and aPTT helps distinguish factor deficiencies from platelet disorders.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hemophilia is an inherited deficiency of a single intrinsic pathway factor. Hemophilia A (about 85 percent of cases, roughly 1 in 10,000 males) is deficiency of factor VIII; hemophilia B (about 15 percent, roughly 1 in 60,000 males) is deficiency of factor IX. Both genes are on the X chromosome, so inheritance is X linked recessive and the disease is expressed almost entirely in males, with females usually carriers. Because the platelet plug forms normally but the cascade is slowed, patients bleed excessively after minor trauma and characteristically into joints, muscles, and deep tissues. The intrinsic pathway defect prolongs the aPTT with a normal PT, and treatment is replacement of the missing factor.' },
+        { id: 'kp2', weight: 2, description: 'Vitamin K is needed by the liver to make functional prothrombin (II) and factors VII, IX, and X (and protein C). Because it is fat soluble, vitamin K requires bile and normal fat absorption, and it comes from diet and from intestinal bacteria. Deficiency arises from biliary obstruction or absence of bile, fat malabsorption, broad spectrum antibiotics, and the newborn period, and hepatocellular disease causes bleeding both by failing to synthesize factors and by impairing bile dependent absorption. Deficiency prolongs the PT first because factor VII has the shortest half life. Treatment is vitamin K, which acts over hours, with fresh frozen plasma when immediate correction is needed.' },
+        { id: 'kp3', weight: 1, description: 'Both disorders impair secondary hemostasis, so both produce deep tissue bleeding rather than the petechiae and mucosal bleeding of platelet disorders, but they differ in test pattern: hemophilia isolates the intrinsic pathway and prolongs only the aPTT, whereas vitamin K deficiency and liver disease prolong the PT (and eventually the aPTT) because they affect factors of both the extrinsic and common pathways. Reading the bleeding pattern together with the PT, aPTT, and platelet count is the practical way to localize a bleeding defect: an isolated long aPTT with deep bleeding suggests hemophilia, a long PT suggests vitamin K deficiency or liver disease, and petechiae with a low platelet count or long bleeding time suggests a platelet problem. This localization is central to preoperative bleeding assessment.' },
+      ],
+      common_errors: [
+        'Swapping the hemophilia deficiencies (A is factor VIII, B is factor IX) or calling hemophilia a platelet disorder',
+        'Forgetting that vitamin K is fat soluble, so biliary obstruction and fat malabsorption are major causes of deficiency',
+        'Mixing up the test patterns (hemophilia prolongs only the aPTT, whereas vitamin K deficiency and liver disease prolong the PT)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'coagulation-factor-bleeding-disorders',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'coagulation-factor-bleeding-disorders',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
+  // CH 37 / pp2-wk-3 — Synthesis 8: Thrombosis and consumptive coagulopathy
+  {
+    id: 'r-p2-wk3-8',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-p2w3-thrombosis-embolism-disorders', 'atom-p2w3-dic-thrombocytopenia'],
+    courseId: 'adv-phys-path-2',
+    nodeId: 'pp2-wk-3',
+    prompt: 'Describe disorders at the opposite ends of the hemostatic balance: excessive pathologic clotting and consumptive failure of clotting. Define thrombus and embolus, give the conditions that promote abnormal clotting, and describe pulmonary embolism and its treatment. Then describe disseminated intravascular coagulation (DIC) and thrombocytopenia, including why DIC paradoxically causes bleeding and the platelet thresholds that make thrombocytopenia dangerous. Finally, integrate these to show how the same hemostatic system produces both thrombosis and hemorrhage depending on the balance, and note the relevant treatments.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A thrombus is an abnormal clot in an intact vessel; an embolus is a thrombus or fragment that has broken loose and travels. Abnormal clotting is promoted by a roughened or damaged endothelial surface (atherosclerosis, infection, trauma) and by sluggish or stagnant flow, which lets activated factors accumulate; stasis occurs with prolonged air travel, bed rest, and orthopedic immobilization, and a hypercoagulable state of the blood adds a third factor. A pulmonary embolus usually arises from deep vein thrombosis in the legs, travels through the right heart, and occludes pulmonary arteries, which can be rapidly fatal. Treatment includes thrombolytics such as tPA, embolectomy, and anticoagulation to prevent recurrence, with prophylaxis in immobilized patients.' },
+        { id: 'kp2', weight: 2, description: 'Disseminated intravascular coagulation follows massive tissue damage or sepsis, which floods the blood with procoagulants and causes widespread microvascular clotting; paradoxically this consumes platelets and clotting factors faster than they are replaced, leaving the patient bleeding from many sites at once, so DIC is a consumptive coagulopathy treated by correcting the cause and replacing platelets and factors. Thrombocytopenia is a low platelet count that causes bleeding from small venules and capillaries with petechiae and thrombocytopenic purpura, often idiopathic; a count below about 50,000 per microliter gives modest bleeding while a count below about 10,000 per microliter is life threatening, and severe cases are treated with platelet transfusion that lasts only days.' },
+        { id: 'kp3', weight: 1, description: 'These disorders show that the hemostatic system can fail in opposite directions: too much clotting causes thrombosis and embolism, while consumption of clotting elements (DIC) or a low platelet count causes hemorrhage, and DIC remarkably produces both at once, microvascular clotting together with diffuse bleeding. The same tools that treat one extreme can worsen the other, so therapy depends on reading the balance: thrombolytics and anticoagulants for thrombosis, but replacement of platelets and factors plus treatment of the underlying trigger for consumptive bleeding. For the anesthetist this balance is a constant perioperative concern, since surgery, immobility, sepsis, and massive transfusion can each tip a patient toward thrombosis or toward bleeding.' },
+      ],
+      common_errors: [
+        'Stating DIC causes only clotting (its consumption of platelets and factors paradoxically causes bleeding from multiple sites)',
+        'Confusing thrombus and embolus, or forgetting that most pulmonary emboli arise from deep vein thrombosis of the legs',
+        'Mixing up the platelet thresholds (below about 50,000 per microliter gives modest bleeding, whereas below about 10,000 per microliter is life threatening)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'thrombosis-consumptive-coagulopathy',
+    chapter: 'pp2-wk-3',
+    difficulty: 3,
+    metadata: {
+      priority: 'high',
+      source: 'Guyton & Hall 14e, Ch 37',
+      topic: 'thrombosis-consumptive-coagulopathy',
+      ladder_tier_appropriate: 'pre-induction',
+    },
+  },
+
 ];
