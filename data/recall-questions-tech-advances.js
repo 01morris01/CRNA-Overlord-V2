@@ -745,4 +745,452 @@ export const RECALL_QUESTIONS_TECH_ADVANCES = [
     metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'neurologic-monitoring' },
   },
 
+  // ###################################################################
+  // ##  Node ta-wk-5 (Gas Laws)  --  Source: NAS 560 Gas Laws lecture
+  // ###################################################################
+
+  // ================= Cluster 1: States of matter and vaporization =================
+  {
+    id: 'r-ta-w5-1',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w5-states-of-matter', 'atom-ta-w5-volatility'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Explain the kinetic molecular basis of the three states of matter and how it relates to anesthetic vaporizer design. Describe how molecules behave in solids, liquids, and gases including Van der Waals forces, define volatility and vapor pressure, and explain why the desflurane vaporizer must be heated.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'All substances are composed of molecules that attract one another and move. In a solid the molecules occupy a regular lattice and oscillate in place under strong forces; in a liquid added heat moves them farther apart so the attraction (Van der Waals forces) weakens; and with still more heat they overcome the Van der Waals forces and move freely as a gas.' },
+        { id: 'kp2', weight: 2, description: 'Volatility is the ability to change from liquid to gas, and a volatile liquid vaporizes readily at a low temperature. Vapor pressure is the pressure exerted by molecules leaving the liquid phase to enter the gas phase, and it determines vaporizer design.' },
+        { id: 'kp3', weight: 1, description: 'Because desflurane has a high boiling point, its vaporizer must be plugged in and heated to deliver a controlled concentration, unlike agents with lower boiling points.' },
+      ],
+      common_errors: [
+        'Stating that liquids have no intermolecular attraction at all',
+        'Defining volatility as resistance to vaporization',
+        'Saying the desflurane vaporizer needs no heating',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w5-states-of-matter',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Describe how molecules behave in the solid, liquid, and gas states, including the role of Van der Waals forces.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'In a solid the molecules occupy a regular lattice and oscillate in place under strong intermolecular forces; in a liquid added heat moves them farther apart with weaker attraction known as Van der Waals forces.' },
+        { id: 'kp2', weight: 2, description: 'With still more heat the molecules overcome the Van der Waals forces and move freely through space as a gas.' },
+      ],
+      common_errors: [
+        'Saying gases sit in a rigid lattice',
+        'Saying liquids have no attraction at all',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+  {
+    id: 'atom-ta-w5-volatility',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Define volatility and vapor pressure, and explain why the desflurane vaporizer must be heated.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Volatility is the ability to change from liquid to gas, and a volatile liquid vaporizes readily at a low temperature; vapor pressure is the pressure exerted by molecules leaving the liquid to enter the gas phase and determines vaporizer design.' },
+        { id: 'kp2', weight: 1, description: 'Desflurane has a high boiling point, so its vaporizer must be plugged in and heated.' },
+      ],
+      common_errors: [
+        'Calling volatility the resistance to vaporization',
+        'Saying vapor pressure does not affect vaporizer design',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+
+  // ================= Cluster 2: Pressure units, STP, gauge versus absolute =================
+  {
+    id: 'r-ta-w5-2',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w5-pressure-units', 'atom-ta-w5-gauge-pressure'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Define standard temperature and pressure and the common units of pressure, and distinguish gauge from absolute pressure. Give the equivalencies for 1 atmosphere and explain the absolute pressure inside a cylinder when its gauge reads zero.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Standard temperature is 273 Kelvin (0 degrees Celsius) and standard pressure is about 100 kilopascals (actual 101.3). One atmosphere equals 760 torr, which is about 760 mmHg, about 14.7 psi, and about 1.013 x 10 to the fifth power pascals; the standard unit of pressure is the pascal.' },
+        { id: 'kp2', weight: 2, description: 'A cylinder gauge reads gauge pressure, the pressure above atmospheric. When the gauge reads zero (0 psi), the absolute pressure inside is still about 1 atmosphere (about 760 mmHg or 14.7 psi), so the cylinder is not a true vacuum.' },
+        { id: 'kp3', weight: 1, description: 'These reference values let gas volumes and pressures be compared across conditions and underlie the gas law calculations.' },
+      ],
+      common_errors: [
+        'Stating standard temperature as 0 Kelvin',
+        'Saying a gauge reading of zero means zero absolute pressure',
+        'Equating 1 atmosphere with 760 psi',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 3,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w5-pressure-units',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State standard temperature and pressure and the equivalencies for 1 atmosphere.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Standard temperature is 273 Kelvin (0 degrees Celsius) and standard pressure is about 100 kilopascals (actual 101.3).' },
+        { id: 'kp2', weight: 2, description: 'One atmosphere equals 760 torr, about 760 mmHg, about 14.7 psi, and about 1.013 x 10 to the fifth power pascals.' },
+      ],
+      common_errors: [
+        'Stating standard temperature as 0 Kelvin',
+        'Equating 1 atmosphere with 760 psi',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+  {
+    id: 'atom-ta-w5-gauge-pressure',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Distinguish gauge pressure from absolute pressure and state the absolute pressure in a cylinder whose gauge reads zero.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A gauge reads pressure above atmospheric (gauge pressure); absolute pressure includes the atmospheric baseline.' },
+        { id: 'kp2', weight: 2, description: 'When the gauge reads zero (0 psi), the absolute pressure inside is still about 1 atmosphere (about 760 mmHg or 14.7 psi), not a vacuum.' },
+      ],
+      common_errors: [
+        'Saying a gauge reading of zero means zero absolute pressure',
+        'Saying the cylinder is a true vacuum at gauge zero',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+
+  // ================= Cluster 3: Solubility and the law of Henry =================
+  {
+    id: 'r-ta-w5-3',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w5-solubility-temp', 'atom-ta-w5-henrys-law'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Explain how temperature and pressure govern the solubility of a gas in a liquid. State how solubility varies with temperature and the clinical effect on emergence in a hypothermic patient, and state the law of Henry with a clinical application to arterial oxygenation.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Gas solubility in a liquid is inversely related to temperature: as temperature falls, slower molecules dissolve more readily and more gas stays in solution. A hypothermic patient therefore retains more anesthetic gas in the blood, which slows emergence.' },
+        { id: 'kp2', weight: 2, description: 'The law of Henry states that, at constant temperature, the amount of gas dissolved in a liquid is directly proportional to the partial pressure of that gas above the liquid. Raising the partial pressure of oxygen above the blood increases the dissolved oxygen and improves arterial oxygenation.' },
+        { id: 'kp3', weight: 1, description: 'A carbonated drink illustrates the law of Henry: it holds dissolved carbon dioxide under pressure and releases bubbles when the pressure above it falls.' },
+      ],
+      common_errors: [
+        'Saying solubility rises with temperature',
+        'Saying a hypothermic patient emerges faster',
+        'Stating that dissolved gas is inversely proportional to partial pressure',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w5-solubility-temp',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State how the solubility of a gas in a liquid varies with temperature and the effect on emergence in a hypothermic patient.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Gas solubility in a liquid is inversely related to temperature; as temperature falls more gas dissolves.' },
+        { id: 'kp2', weight: 2, description: 'A hypothermic patient retains more anesthetic gas in the blood because of this increased solubility, which slows emergence.' },
+      ],
+      common_errors: [
+        'Saying solubility rises as temperature rises',
+        'Saying hypothermia speeds emergence',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+  {
+    id: 'atom-ta-w5-henrys-law',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State the law of Henry and give a clinical application to arterial oxygenation.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The law of Henry states that, at constant temperature, the amount of gas dissolved in a liquid is directly proportional to the partial pressure of that gas above the liquid.' },
+        { id: 'kp2', weight: 2, description: 'Raising the partial pressure of oxygen above the blood increases the oxygen dissolved in blood and improves arterial oxygenation.' },
+      ],
+      common_errors: [
+        'Saying dissolved gas is inversely proportional to partial pressure',
+        'Saying the law of Henry does not apply to oxygen in blood',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+
+  // ================= Cluster 4: Diffusion (Fick, Graham, nitrous oxide) =================
+  {
+    id: 'r-ta-w5-4',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w5-ficks-grahams', 'atom-ta-w5-nitrous-diffusion'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Compare the two laws of diffusion and their clinical applications. State the law of Fick and the law of Graham, and explain how nitrous oxide diffusion produces closed space expansion and diffusion hypoxia and how helium aids a partially obstructed airway.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The law of Fick describes diffusion as movement of molecules from a high concentration to a low concentration, the basis for movement across cell membranes. The law of Graham states that diffusion is inversely proportional to the square root of the molecular weight, so lighter molecules diffuse faster; helium diffuses faster than air or oxygen, so a helium and oxygen mixture passes a partial airway obstruction or epiglottitis more easily.' },
+        { id: 'kp2', weight: 2, description: 'Nitrous oxide is more soluble than the other gases present, so it diffuses into air filled spaces faster than nitrogen leaves, expanding an endotracheal tube cuff, the intestines, the inner ear, intraocular gas, and an air embolism.' },
+        { id: 'kp3', weight: 1, description: 'Diffusion hypoxia occurs when nitrous oxide is discontinued and rapidly diffuses out of the blood into the alveoli, diluting the alveolar oxygen; it is prevented by turning off the nitrous oxide and administering oxygen before extubation.' },
+      ],
+      common_errors: [
+        'Swapping the law of Fick and the law of Graham',
+        'Saying nitrous oxide shrinks air filled spaces',
+        'Saying diffusion hypoxia is prevented by leaving nitrous oxide running',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w5-ficks-grahams',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State the law of Fick and the law of Graham, and give the clinical use of helium that follows from the law of Graham.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The law of Fick describes movement of molecules from high to low concentration, the basis for movement across cell membranes; the law of Graham states that diffusion is inversely proportional to the square root of the molecular weight, so lighter molecules diffuse faster.' },
+        { id: 'kp2', weight: 2, description: 'Helium diffuses faster than air or oxygen, so a helium and oxygen mixture passes a partially obstructed airway or epiglottitis more easily.' },
+      ],
+      common_errors: [
+        'Saying heavier molecules diffuse faster',
+        'Swapping the law of Fick and the law of Graham',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+  {
+    id: 'atom-ta-w5-nitrous-diffusion',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Explain nitrous oxide closed space expansion and diffusion hypoxia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Nitrous oxide is highly soluble and diffuses into air filled spaces faster than nitrogen leaves, expanding an endotracheal tube cuff, the intestines, the inner ear, intraocular gas, and an air embolism.' },
+        { id: 'kp2', weight: 2, description: 'Diffusion hypoxia occurs when nitrous oxide is discontinued and rapidly diffuses out of the blood into the alveoli, diluting the alveolar oxygen; it is prevented by turning off the nitrous oxide and giving oxygen before extubation.' },
+      ],
+      common_errors: [
+        'Saying nitrous oxide shrinks gas spaces',
+        'Saying diffusion hypoxia needs no prevention',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+
+  // ================= Cluster 5: The gas laws and the law of Dalton =================
+  {
+    id: 'r-ta-w5-5',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w5-three-gas-laws', 'atom-ta-w5-daltons-law'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State the three simple gas laws and the law of partial pressures. For the laws of Boyle, Charles, and Gay-Lussac, identify the two variables, the held constant, and the direction of the relationship; then state the law of Dalton and compute the partial pressure of oxygen in room air at sea level.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The law of Boyle: at constant temperature, pressure and volume are inversely proportional. The law of Charles: at constant pressure, volume and temperature are directly proportional. The law of Gay-Lussac: at constant volume, pressure and temperature are directly proportional, which is why heating a fixed volume cylinder raises its pressure toward the point of explosion.' },
+        { id: 'kp2', weight: 2, description: 'The law of Dalton states that the total pressure of a mixture is the sum of the partial pressures of the individual gases (Ptotal = P1 + P2 + P3 and so on), each proportional to its fraction of the mixture.' },
+        { id: 'kp3', weight: 1, description: 'In room air at sea level (760 mmHg), oxygen is about 21 percent, so its partial pressure is 0.21 multiplied by 760, which is about 160 mmHg; nitrogen at about 79 percent gives about 600 mmHg, and the two sum to about 760 mmHg.' },
+      ],
+      common_errors: [
+        'Saying the law of Boyle is a direct relationship',
+        'Confusing which variable is held constant in each law',
+        'Multiplying partial pressures instead of summing them',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w5-three-gas-laws',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'For the laws of Boyle, Charles, and Gay-Lussac, state the two variables, the held constant, and the direction of the relationship.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The law of Boyle: constant temperature, pressure and volume inversely proportional. The law of Charles: constant pressure, volume and temperature directly proportional.' },
+        { id: 'kp2', weight: 2, description: 'The law of Gay-Lussac: constant volume, pressure and temperature directly proportional, so heating a fixed volume cylinder raises its pressure.' },
+      ],
+      common_errors: [
+        'Calling the law of Boyle a direct relationship',
+        'Swapping which variable is held constant',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+  {
+    id: 'atom-ta-w5-daltons-law',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State the law of Dalton and compute the partial pressure of oxygen in room air at sea level.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The law of Dalton states that the total pressure of a mixture is the sum of the partial pressures of the individual gases (Ptotal = P1 + P2 + P3 and so on).' },
+        { id: 'kp2', weight: 2, description: 'In room air at sea level (760 mmHg), oxygen at about 21 percent has a partial pressure of 0.21 multiplied by 760, which is about 160 mmHg.' },
+      ],
+      common_errors: [
+        'Multiplying partial pressures instead of summing them',
+        'Saying oxygen exerts the full 760 mmHg of room air',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+
+  // ================= Cluster 6: Adiabatic cooling, Joule-Thomson, state transitions =================
+  {
+    id: 'r-ta-w5-6',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w5-adiabatic-jt', 'atom-ta-w5-state-transitions'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Explain adiabatic cooling and the Joule-Thomson effect, and state the transition points for liquids, vapors, and gases. Describe why a cylinder cools and its regulator can freeze when gas is released, and give an everyday example.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Adiabatic cooling occurs when a gas expands into a larger volume so rapidly that there is no time to exchange heat; it is seen when gas escapes from a cylinder. A carbon dioxide fire extinguisher illustrates this, cooling as the gas expands to atmospheric pressure.' },
+        { id: 'kp2', weight: 2, description: 'The Joule-Thomson effect is the decrease in temperature of a gas allowed to expand adiabatically; when gas is let out of a cylinder, the cylinder becomes cold, the regulator can freeze, and condensation forms on the cylinder.' },
+        { id: 'kp3', weight: 1, description: 'A substance becomes a liquid at its melting point, a vapor at its boiling point, and a gas at its critical temperature.' },
+      ],
+      common_errors: [
+        'Saying a gas warms as it expands out of a cylinder',
+        'Confusing adiabatic cooling with compression heating',
+        'Saying the critical temperature converts a gas to a solid',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 3,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w5-adiabatic-jt',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'Define adiabatic cooling and the Joule-Thomson effect, and explain why a cylinder cools when gas is released.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Adiabatic cooling occurs when a gas expands so rapidly that there is no time to exchange heat; it is seen when gas escapes from a cylinder, for example a carbon dioxide fire extinguisher.' },
+        { id: 'kp2', weight: 2, description: 'The Joule-Thomson effect is the temperature decrease of a gas allowed to expand adiabatically; the cylinder becomes cold, the regulator can freeze, and condensation forms.' },
+      ],
+      common_errors: [
+        'Saying the gas warms as it expands',
+        'Saying heat must be added for cooling to occur',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+  {
+    id: 'atom-ta-w5-state-transitions',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-5',
+    prompt: 'State the points at which a substance becomes a liquid, a vapor, and a gas.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A solid becomes a liquid at its melting point, and a liquid becomes a vapor at its boiling point.' },
+        { id: 'kp2', weight: 2, description: 'A liquid becomes a gas at its critical temperature.' },
+      ],
+      common_errors: [
+        'Saying the boiling point converts a solid directly to a gas',
+        'Saying the critical temperature freezes a gas into a solid',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-laws',
+    chapter: 'ta-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
+  },
+
 ];
