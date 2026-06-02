@@ -1,0 +1,748 @@
+// Recall questions (atoms + synthesis) for tech-advances-anesthesia, node ta-wk-3 (Clinical Monitoring)
+// Source: NAS 560 Anesthesia Monitoring lecture (Dr. Whybrew)
+// Two-tier model: 10 synthesis questions (difficulty 3), each fed by 2 atoms (difficulty 1). 20 atoms total, 1:1 feeders.
+// Authoring conventions: single-quoted strings, no apostrophes, no dashes as punctuation; numeric ranges written with the word "to".
+
+export const RECALL_QUESTIONS_TECH_ADVANCES = [
+
+  // ================= Cluster 1: Capnography =================
+  {
+    id: 'r-ta-w3-1',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-capnogram-phases', 'atom-ta-w3-capnogram-abnormal'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Integrate capnography from waveform to clinical decision. Describe the four phases of the normal capnogram and what each represents, explain how the end-tidal carbon dioxide value relates to arterial carbon dioxide, and interpret three abnormal capnograms: the curare cleft, expiratory obstruction, and rebreathing. State the corrective action for each abnormality.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The normal capnogram has four phases: phase 1 is the start of expiration carrying carbon dioxide free gas from anatomic dead space; phase 2 is expiration of mixed dead space and alveolar gas; phase 3 is the alveolar plateau of carbon dioxide rich gas, where the end-tidal value is read; and phase 4 (or 0) is inspiration with the baseline returning to zero. End-tidal carbon dioxide normally underestimates arterial carbon dioxide by about 2 to 5 mm Hg, a gradient that widens with age, pulmonary disease, pulmonary embolus, low cardiac output, and hypovolemia.' },
+        { id: 'kp2', weight: 2, description: 'The curare cleft is a dip within phase 3 indicating return of spontaneous respiratory effort, corrected by deepening neuromuscular blockade when relaxation is required. Expiratory obstruction (bronchospasm, COPD, or a kinked tube) prolongs phase 2 and produces a steeper upsloping phase 3, corrected by treating bronchospasm or relieving the kink. Rebreathing raises the baseline above zero and elevates phase 1, corrected by increasing fresh gas flow or changing the exhausted carbon dioxide absorber.' },
+        { id: 'kp3', weight: 1, description: 'Capnography also serves as a circulation monitor: during resuscitation exhaled carbon dioxide is a better indicator of circulation than the ECG, and a sudden increase signals return of spontaneous circulation. The presence of carbon dioxide is not proof of tracheal placement, because carbon dioxide may be detected with the tube tip above the vocal cords, so sustained waveforms over several breaths plus confirmatory signs are required.' },
+      ],
+      common_errors: [
+        'Reading the end-tidal value from phase 2 rather than the end of the alveolar plateau (phase 3)',
+        'Confusing the curare cleft (return of spontaneous effort) with rebreathing (elevated baseline)',
+        'Treating a rising baseline by changing the ventilator rate rather than replacing the carbon dioxide absorber or raising fresh gas flow',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'capnography',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'capnography', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-capnogram-phases',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'List the four phases of the normal capnogram and state what each represents. Indicate where the end-tidal carbon dioxide value is read.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Phase 1 is the initiation of expiration carrying carbon dioxide free gas from anatomic dead space; phase 2 is expiration of a mixture of dead space and alveolar gas; phase 3 is the alveolar plateau of carbon dioxide rich gas from the alveoli; phase 4 (or 0) is inspiration.' },
+        { id: 'kp2', weight: 2, description: 'The end-tidal carbon dioxide value is read at the end of phase 3 (the end of the alveolar plateau), and the baseline should return to zero during inspiration.' },
+      ],
+      common_errors: [
+        'Listing inspiration as phase 1',
+        'Reading the end-tidal value from phase 2 instead of the end of phase 3',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'capnography',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'capnography' },
+  },
+  {
+    id: 'atom-ta-w3-capnogram-abnormal',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Identify the capnogram findings and the corrective action for the curare cleft, expiratory obstruction, and rebreathing of carbon dioxide.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The curare cleft is a dip in phase 3 indicating return of spontaneous respiratory effort; expiratory obstruction (bronchospasm, COPD, or a kinked endotracheal tube) prolongs phase 2 and steepens the phase 3 slope.' },
+        { id: 'kp2', weight: 2, description: 'Rebreathing elevates the baseline above zero and raises phase 1; it is corrected by increasing fresh gas flow or changing the exhausted carbon dioxide absorber.' },
+      ],
+      common_errors: [
+        'Confusing the curare cleft with rebreathing',
+        'Stating that expiratory obstruction lowers the plateau height',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'capnography',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'capnography' },
+  },
+
+  // ================= Cluster 2: Gas analysis methods =================
+  {
+    id: 'r-ta-w3-2',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-mass-spectrometry', 'atom-ta-w3-galvanic-o2'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Compare the major methods of respiratory and anesthetic gas analysis. Describe how mass spectrometry, Raman spectrometry, and colorimetric carbon dioxide detection work, and explain the galvanic (fuel) cell method of oxygen analysis including its calibration and why the oxygen analyzer is a mandated monitor.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Mass spectrometry separates gases by their mass to charge ratio based on differing molecular weights, placing them in a spectrum and reporting concentration as a volumes percent of inspired and end-tidal gas; it is multigas and multiagent, fast, reliable, and low cost, but measures only preprogrammed gases, must be scavenged, and needs warm-up time. Raman spectrometry measures the fraction of laser energy scattered by gas molecules at different wavelengths and is multigas, fast, and accurate but costly. Colorimetric carbon dioxide detection uses a pH sensitive indicator that changes color with carbon dioxide and is often used to confirm intubation outside the operating room.' },
+        { id: 'kp2', weight: 2, description: 'The galvanic (fuel) cell oxygen analyzer uses a lead anode and a gold cathode in potassium hydroxide electrolyte; the cathode is the sensing electrode and the anode is gradually consumed (forming lead oxide) and replaced. It is calibrated daily to room air at 21 percent oxygen, and its life shortens with constant high oxygen exposure, so removing it from the machine when not in use prolongs its life.' },
+        { id: 'kp3', weight: 1, description: 'An oxygen analyzer is a mandated monitor because mixing oxygen, air, nitrous oxide, and a volatile agent can create a hypoxic mixture; any inspired oxygen concentration below 30 percent is considered hypoxic. The analyzer is the final safeguard against an inadvertent hypoxic fresh gas mixture.' },
+      ],
+      common_errors: [
+        'Confusing Raman light scattering with the mass to charge separation of mass spectrometry',
+        'Forgetting that the galvanic cell is calibrated to room air at 21 percent oxygen',
+        'Stating the hypoxic threshold as 21 percent rather than below 30 percent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'gas-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-mass-spectrometry',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain how mass spectrometry analyzes gases, and list two advantages and two disadvantages.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Mass spectrometry compares the mass to charge ratio of gases on the basis of their differing molecular weights, places them in a spectrum, and reports concentration as a volumes percent of inspired and end-tidal gas.' },
+        { id: 'kp2', weight: 1, description: 'Advantages include multigas and multiagent capability, speed, reliability, and low cost; disadvantages include measuring only preprogrammed gases, the need to scavenge, and warm-up time.' },
+      ],
+      common_errors: [
+        'Describing mass spectrometry as a color change method',
+        'Saying it measures only oxygen',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'gas-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-galvanic-o2',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe the construction and calibration of the galvanic (fuel) cell oxygen analyzer, and state the hypoxic threshold on the oxygen analyzer.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A lead anode and a gold cathode are surrounded by potassium hydroxide electrolyte; the cathode is the sensing electrode and the anode is gradually consumed and replaced. The cell is calibrated daily to room air at 21 percent oxygen.' },
+        { id: 'kp2', weight: 1, description: 'Any inspired oxygen concentration below 30 percent is considered a hypoxic mixture, and constant high oxygen exposure shortens sensor life.' },
+      ],
+      common_errors: [
+        'Calibrating the cell to 100 percent oxygen',
+        'Stating that the gold cathode is consumed instead of the lead anode',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'gas-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'gas-monitoring' },
+  },
+
+  // ================= Cluster 3: Pulse oximetry principle =================
+  {
+    id: 'r-ta-w3-3',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-pulse-ox-types', 'atom-ta-w3-pulse-ox-accuracy'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain how pulse oximetry works and the limits of its accuracy. Include the physical law it relies on, the two wavelengths used and how oxyhemoglobin and deoxyhemoglobin differ in absorption, the distinction between fractional and functional saturation, the accurate range, and at least three conditions that reduce accuracy.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Pulse oximetry uses the Lambert-Beer law describing how light is absorbed by matter. It emits red light at 660 nm and infrared light at 940 nm; deoxyhemoglobin absorbs more red and oxyhemoglobin absorbs more infrared, and photoplethysmography isolates the pulsatile arterial signal to calculate the SpO2.' },
+        { id: 'kp2', weight: 2, description: 'Functional saturation is oxyhemoglobin divided by the sum of oxyhemoglobin and deoxyhemoglobin and equals the SpO2 measured noninvasively. Fractional saturation also includes methemoglobin and carboxyhemoglobin in the denominator and equals the SaO2 measured from an arterial sample. A standard pulse oximeter reports the functional SpO2.' },
+        { id: 'kp3', weight: 1, description: 'The pulse oximeter is accurate to within about 5 percent between an SpO2 of 70 and 100 percent; below 70 percent the readings are extrapolated and unreliable. Accuracy is reduced by hypothermia, poor circulation or low cardiac output, vasoconstriction, improper placement, motion artifact, fluorescent light, nail polish, and melanin.' },
+      ],
+      common_errors: [
+        'Swapping the red and infrared wavelengths',
+        'Calling the standard pulse oximeter reading the SaO2',
+        'Claiming the device is reliable below 70 percent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pulse-oximetry',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'pulse-oximetry', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-pulse-ox-types',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the law pulse oximetry relies on, the two wavelengths used, and the difference between fractional and functional oximetry.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It relies on the Lambert-Beer law and emits red light at 660 nm and infrared light at 940 nm; deoxyhemoglobin absorbs more red and oxyhemoglobin absorbs more infrared.' },
+        { id: 'kp2', weight: 2, description: 'Functional oximetry (SpO2) is oxyhemoglobin over the sum of oxyhemoglobin and deoxyhemoglobin and is noninvasive; fractional oximetry (SaO2) also includes methemoglobin and carboxyhemoglobin and requires an arterial sample.' },
+      ],
+      common_errors: [
+        'Reversing the red and infrared wavelengths',
+        'Saying functional saturation includes carboxyhemoglobin',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pulse-oximetry',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'pulse-oximetry' },
+  },
+  {
+    id: 'atom-ta-w3-pulse-ox-accuracy',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the saturation range over which the pulse oximeter is accurate, and list three conditions that reduce its accuracy.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Between an SpO2 of 70 and 100 percent the pulse oximeter is accurate to within about 5 percent; below 70 percent the readings are extrapolated and unreliable.' },
+        { id: 'kp2', weight: 1, description: 'Accuracy is reduced by hypothermia, poor circulation or low cardiac output, vasoconstriction, improper placement, motion artifact, fluorescent light, nail polish, and melanin.' },
+      ],
+      common_errors: [
+        'Claiming accuracy improves below 70 percent',
+        'Saying perfusion does not affect the reading',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pulse-oximetry',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'pulse-oximetry' },
+  },
+
+  // ================= Cluster 4: Dyshemoglobins =================
+  {
+    id: 'r-ta-w3-4',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-carboxyhemoglobin', 'atom-ta-w3-methemoglobin'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain how carboxyhemoglobin and methemoglobin distort the pulse oximeter reading. For each, describe the effect on the displayed SpO2, the underlying mechanism, and the clinical context, and explain why co-oximetry is needed.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Carboxyhemoglobin, seen with smoke or fire exposure, is interpreted by the oximeter as about 90 percent oxyhemoglobin and 10 percent deoxyhemoglobin, so high levels cause the pulse oximeter to overestimate the SpO2. A reassuring SpO2 in a burn or smoke inhalation patient can therefore be dangerously misleading.' },
+        { id: 'kp2', weight: 2, description: 'Methemoglobin absorbs equal amounts of red and infrared light, driving the SpO2 toward a fixed value of about 85 percent regardless of the true saturation. It forms when hemoglobin iron is oxidized from the plus 2 ferrous to the plus 3 ferric state, which left shifts the oxygen dissociation curve and releases oxygen less easily. Causes include nitrates, prilocaine and other local anesthetics, dapsone, sulfonamides, antimalarials, and metoclopramide.' },
+        { id: 'kp3', weight: 1, description: 'Because a standard two wavelength pulse oximeter cannot distinguish these dyshemoglobins, co-oximetry, which uses additional wavelengths to measure fractional saturation, is required to detect carboxyhemoglobin and methemoglobin and to obtain a true saturation.' },
+      ],
+      common_errors: [
+        'Stating that carboxyhemoglobin lowers the SpO2 toward zero',
+        'Saying methemoglobin makes the oximeter read 100 percent',
+        'Claiming the iron is reduced rather than oxidized in methemoglobinemia',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pulse-oximetry',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'pulse-oximetry', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-carboxyhemoglobin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State how carboxyhemoglobin affects the pulse oximeter reading and the clinical setting in which it occurs.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Carboxyhemoglobin is interpreted by the oximeter as about 90 percent oxyhemoglobin and 10 percent deoxyhemoglobin, so high levels cause the device to overestimate the SpO2.' },
+        { id: 'kp2', weight: 1, description: 'It occurs with smoke or fire exposure, so a normal appearing SpO2 in such patients can be falsely reassuring, and co-oximetry is needed.' },
+      ],
+      common_errors: [
+        'Saying carboxyhemoglobin reads falsely low',
+        'Saying carboxyhemoglobin has no effect on the reading',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pulse-oximetry',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'pulse-oximetry' },
+  },
+  {
+    id: 'atom-ta-w3-methemoglobin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State how methemoglobin affects the pulse oximeter reading, the change in the hemoglobin iron, and two drug causes.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Methemoglobin absorbs equal amounts of red and infrared light, so the SpO2 is driven toward a fixed value of about 85 percent regardless of the true saturation.' },
+        { id: 'kp2', weight: 1, description: 'It forms when hemoglobin iron is oxidized from the plus 2 ferrous to the plus 3 ferric state, which left shifts the oxygen dissociation curve; causes include nitrates, prilocaine, dapsone, sulfonamides, antimalarials, and metoclopramide.' },
+      ],
+      common_errors: [
+        'Saying methemoglobin makes the oximeter read 100 percent',
+        'Saying methemoglobin right shifts the oxygen dissociation curve',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'pulse-oximetry',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'pulse-oximetry' },
+  },
+
+  // ================= Cluster 5: Airway pressures and ventilator settings =================
+  {
+    id: 'r-ta-w3-5',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-peak-plateau', 'atom-ta-w3-peep'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain the airway pressures and ventilator settings that protect the lung. Distinguish peak pressure from plateau pressure including their normal values and what each reflects, state the barotrauma thresholds, define PEEP and its benefit, and give the minute volume equation and the typical I:E ratio.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Peak pressure (normally about 15 to 25 cm H2O) is the maximum inspiratory pressure and strongly reflects airway resistance, rising as tidal volume increases; persistent peak pressures above 45 cm H2O are a barotrauma risk. Plateau pressure is measured during an end-inspiratory pause with no airflow and reflects compliance; it is best kept below 30 cm H2O to limit barotrauma in ARDS. A high peak pressure with a normal plateau points to a resistance problem.' },
+        { id: 'kp2', weight: 2, description: 'PEEP is positive pressure maintained at the end of exhalation; it increases end-expired lung volume and prevents airspace closure, essentially splinting the alveoli open, and is effective in diffuse lung disease that decreases functional residual capacity, with about 5 cm commonly used.' },
+        { id: 'kp3', weight: 1, description: 'Minute volume equals respiratory rate multiplied by tidal volume (MV = RR x TV), and the I:E ratio is usually about 1:2 or 1:2.5 to mimic spontaneous breathing; lengthening expiration helps avoid breath stacking in obstructive disease.' },
+      ],
+      common_errors: [
+        'Saying plateau pressure reflects airway resistance rather than compliance',
+        'Describing PEEP as a negative pressure',
+        'Setting the barotrauma plateau target above 45 rather than below 30 cm H2O',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'airway-pressures',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'airway-pressures', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-peak-plateau',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Distinguish peak pressure from plateau pressure, including the normal peak value, what each reflects, and the barotrauma thresholds.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Peak pressure (about 15 to 25 cm H2O) is the maximum inspiratory pressure and reflects airway resistance; persistent values above 45 cm H2O risk barotrauma.' },
+        { id: 'kp2', weight: 2, description: 'Plateau pressure is measured during an end-inspiratory pause with no airflow and reflects compliance; keeping it below 30 cm H2O limits barotrauma in ARDS.' },
+      ],
+      common_errors: [
+        'Swapping which pressure reflects resistance versus compliance',
+        'Stating the plateau target as above 45 cm H2O',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'airway-pressures',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'airway-pressures' },
+  },
+  {
+    id: 'atom-ta-w3-peep',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Define PEEP, state its main benefit, and give a commonly applied value.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'PEEP is positive pressure in the airway at the end of exhalation that increases end-expired lung volume and prevents airspace closure, essentially splinting the alveoli open.' },
+        { id: 'kp2', weight: 1, description: 'It is effective in diffuse lung disease that decreases functional residual capacity, and about 5 cm is commonly applied.' },
+      ],
+      common_errors: [
+        'Describing PEEP as a negative pressure applied during inspiration',
+        'Saying PEEP empties the alveoli at the end of exhalation',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'airway-pressures',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'airway-pressures' },
+  },
+
+  // ================= Cluster 6: Heat loss mechanisms and time course =================
+  {
+    id: 'r-ta-w3-6',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-heat-loss-radiation', 'atom-ta-w3-conduction-evaporation'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe the four mechanisms of intraoperative heat loss, rank their relative importance in the operating room, and explain the time course of core temperature loss under general anesthesia and the dominant mechanism during the first hour.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The four mechanisms are radiation, convection, conduction, and evaporation. Radiation (infrared transfer to the cooler room) is the largest single source in the operating room, and convection (air currents, increased by the constant turnover of room air) is the second largest. Conduction (direct contact) is normally small because of the high resistance of the superficial zone, and evaporation accounts for about 16 kcal/hr of insensible loss, roughly half respiratory.' },
+        { id: 'kp2', weight: 2, description: 'Under general anesthesia, core temperature falls about 1 to 2 degrees Celsius in the first hour, then about 0.3 degrees Celsius per hour, and levels off after about 4 hours. The dominant cause of the first hour drop is redistribution of heat from the warm core to the cooler periphery due to anesthetic induced vasodilation, not simple loss to the environment.' },
+        { id: 'kp3', weight: 1, description: 'Because radiation and redistribution dominate, the most effective countermeasures are covering exposed skin, warming the room, and prewarming the periphery before induction; a single layer of passive insulation traps still air and can reduce cutaneous loss by about 30 percent, but adding more layers adds little.' },
+      ],
+      common_errors: [
+        'Naming conduction or evaporation as the largest operating room heat loss route',
+        'Attributing the first hour drop to evaporation rather than redistribution',
+        'Saying the core temperature keeps falling steadily without a plateau',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-heat-loss-radiation',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'List the four mechanisms of heat loss and identify the two largest in the operating room.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The four mechanisms of heat loss are radiation, convection, conduction, and evaporation.' },
+        { id: 'kp2', weight: 2, description: 'Radiation is the largest single source of heat loss in the operating room, and convection is the second largest; convection is increased by the constant turnover of operating room air.' },
+      ],
+      common_errors: [
+        'Naming conduction as the largest operating room heat loss route',
+        'Omitting radiation from the four mechanisms',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+  {
+    id: 'atom-ta-w3-conduction-evaporation',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe conduction and evaporation as heat loss mechanisms, including the approximate evaporative loss and what increases it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Conduction requires direct physical contact and transfers heat from the warmer object to the cooler one; loss from the core is normally small because the superficial zone has high resistance, though a 1 inch steel slab can raise it above 300 kcal/h.' },
+        { id: 'kp2', weight: 2, description: 'Evaporation accounts for about 16 kcal/hr of insensible loss, roughly half of it respiratory, and increases with open body cavities and with skin prepped using liquids such as alcohol, iodine, or chlorhexidine.' },
+      ],
+      common_errors: [
+        'Saying conduction requires no physical contact',
+        'Saying open body cavities reduce evaporative loss',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+
+  // ================= Cluster 7: Thermoregulation and redistribution =================
+  {
+    id: 'r-ta-w3-7',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-thermoreg-zones', 'atom-ta-w3-redistribution'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain intraoperative thermoregulation and why anesthesia impairs it. Describe where control is centered and the core and peripheral zones, how general anesthesia widens the thermoregulatory thresholds, and the mechanism of core to peripheral redistribution after induction.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Thermoregulatory control is centered in the hypothalamus. The body is modeled as a core zone (trunk and head) and a peripheral zone with a superficial component (skin and subcutaneous tissue) and an intermediate component (skeletal muscle); maintaining total body heat matters more than any single zone temperature.' },
+        { id: 'kp2', weight: 2, description: 'Non-volatile agents such as barbiturates, propofol, and opioids change the set point so that the body, which normally reacts to a deviation of about 2 to 3 degrees Celsius, does not respond until the temperature has changed by about 4 degrees Celsius. This widened interthreshold range lets anesthetized patients cool passively.' },
+        { id: 'kp3', weight: 1, description: 'After induction, anesthetic induced vasodilation redistributes heat from the warm core to the cooler periphery, producing the greatest core temperature drop in the first hour; prewarming the periphery before induction reduces this gradient and blunts the redistribution drop.' },
+      ],
+      common_errors: [
+        'Placing thermoregulatory control in the medulla',
+        'Saying anesthesia tightens rather than widens the thermoregulatory thresholds',
+        'Attributing the first hour drop to evaporation rather than redistribution',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-thermoreg-zones',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State where thermoregulatory control is centered and describe the core and peripheral thermal zones.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Thermoregulatory control appears to be in the hypothalamus.' },
+        { id: 'kp2', weight: 2, description: 'The body is divided into a core zone (trunk and head) and a peripheral zone with a superficial component (skin and subcutaneous tissue) and an intermediate component (skeletal muscle); total body heat matters more than any single zone temperature.' },
+      ],
+      common_errors: [
+        'Placing control in the medulla or liver',
+        'Calling the limbs the core zone',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+  {
+    id: 'atom-ta-w3-redistribution',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain the mechanism and time course of core temperature redistribution after induction of general anesthesia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Anesthetic induced vasodilation increases blood flow and heat flow from the warm core to the cooler periphery, redistributing heat outward.' },
+        { id: 'kp2', weight: 2, description: 'This produces the greatest core temperature drop in the first hour; prewarming the periphery before induction reduces the core to peripheral gradient and blunts the drop.' },
+      ],
+      common_errors: [
+        'Saying anesthesia causes vasoconstriction that traps heat in the core',
+        'Saying the core temperature drop is greatest after 4 hours',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+
+  // ================= Cluster 8: Consequences of hypothermia =================
+  {
+    id: 'r-ta-w3-8',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-hypothermia-ecg', 'atom-ta-w3-hypothermia-infection-coag'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe the adverse consequences of intraoperative hypothermia across the cardiovascular system, wound healing, and coagulation. Include the ECG changes of significant hypothermia, the effect on wound infection after colon surgery, and the effects on platelets and clotting.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Significant hypothermia prolongs the PR, QRS, and QT intervals, can shift the ST segment and make T waves diphasic then inverted, and produces a J wave in the precordial leads; these changes can persist for days. Mild hypothermia can cause cold induced hypertension in the elderly, associated with a roughly 3-fold rise in plasma norepinephrine that may augment cardiac irritability.' },
+        { id: 'kp2', weight: 2, description: 'A core temperature drop of about 1.9 degrees Celsius triples the incidence of wound infection after colon surgery, partly through vasoconstriction that reduces oxygen delivery and impairs neutrophil function.' },
+        { id: 'kp3', weight: 1, description: 'Mild hypothermia increases blood loss through impaired platelet function (related to reduced thromboxane A2 release), reduced clotting factor enzyme activity, and a relative thrombocytopenia from fluid shifts and splenic sequestration.' },
+      ],
+      common_errors: [
+        'Saying hypothermia shortens the ECG intervals',
+        'Saying hypothermia lowers wound infection risk',
+        'Saying hypothermia improves platelet function and reduces blood loss',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-hypothermia-ecg',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the ECG and cardiovascular changes seen with significant and with mild hypothermia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Significant hypothermia prolongs the PR, QRS, and QT intervals, shifts the ST segment, makes T waves diphasic then inverted, and produces a J wave in the precordial leads.' },
+        { id: 'kp2', weight: 1, description: 'Mild hypothermia can cause cold induced hypertension in the elderly, associated with a roughly 3-fold rise in plasma norepinephrine.' },
+      ],
+      common_errors: [
+        'Saying hypothermia shortens the ECG intervals',
+        'Saying hypothermia produces a delta wave',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+  {
+    id: 'atom-ta-w3-hypothermia-infection-coag',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the effect of mild hypothermia on surgical wound infection and on coagulation.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A core temperature drop of about 1.9 degrees Celsius triples the incidence of wound infection after colon surgery, partly through vasoconstriction that reduces oxygen delivery and impairs neutrophil function.' },
+        { id: 'kp2', weight: 2, description: 'Mild hypothermia increases blood loss through impaired platelet function (reduced thromboxane A2 release), reduced clotting factor enzyme activity, and a relative thrombocytopenia.' },
+      ],
+      common_errors: [
+        'Saying hypothermia reduces wound infection risk',
+        'Saying hypothermia decreases blood loss in every case',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+
+  // ================= Cluster 9: Temperature monitoring sites and warming =================
+  {
+    id: 'r-ta-w3-9',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-temp-sites', 'atom-ta-w3-warming-methods'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain how to monitor and maintain temperature intraoperatively. Rank the temperature monitoring sites from nearest to core and note their caveats, and describe the active superficial, active core, and passive methods of warming, identifying the most commonly used operating room method.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Ranked from nearest to core, the monitoring sites are pulmonary artery, esophageal, tympanic, nasopharyngeal, and bladder. Esophageal and nasopharyngeal readings can be inaccurate if influenced by respiratory gases, and bladder temperature is accurate when urine output is high. Non-central sites such as axillary, rectal, and skin may not correlate with core and lag behind core changes.' },
+        { id: 'kp2', weight: 2, description: 'Active warming includes superficial methods (warming blanket, radiant heat unit, forced air warmer, heated liquids against skin) and core methods (heated humidifiers, gastric lavage, peritoneal irrigation, fluid warmers, extracorporeal heat exchangers). The forced air warmer, such as the Bair Hugger, is the most frequently used operating room method, reducing radiant and convective loss and postoperative shivering.' },
+        { id: 'kp3', weight: 1, description: 'Passive methods include a single layer of insulation, which traps still air and reduces cutaneous loss by about 30 percent (adding more layers helps little), and the heat and moisture exchanger, a passive artificial nose that needs about 1 hour to fully saturate and whose efficiency is inversely related to fresh gas flow and tidal volume.' },
+      ],
+      common_errors: [
+        'Ranking bladder or skin as nearest to core',
+        'Saying heated intravenous bags on the skin are the proven first-line method',
+        'Saying more insulation layers proportionally reduce heat loss',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-temp-sites',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Rank the temperature monitoring sites from nearest to core and give the key caveats.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'From nearest to core the sites are pulmonary artery, esophageal, tympanic, nasopharyngeal, and bladder.' },
+        { id: 'kp2', weight: 2, description: 'Esophageal and nasopharyngeal readings can be inaccurate if influenced by respiratory gases; bladder is accurate when urine output is high; axillary, rectal, and skin may not correlate with core and lag behind core changes.' },
+      ],
+      common_errors: [
+        'Ranking bladder as nearest to core',
+        'Saying skin reflects core temperature instantly',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+  {
+    id: 'atom-ta-w3-warming-methods',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'List the active superficial, active core, and passive warming methods, and name the most commonly used operating room method.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Active superficial methods include the warming blanket, radiant heat unit, forced air warmer, and heated liquids against skin; active core methods include heated humidifiers, gastric lavage, peritoneal irrigation, fluid warmers, and extracorporeal heat exchangers.' },
+        { id: 'kp2', weight: 2, description: 'The forced air warmer, such as the Bair Hugger, is the most frequently used operating room method; a single layer of passive insulation traps still air and reduces cutaneous loss by about 30 percent.' },
+      ],
+      common_errors: [
+        'Naming heated intravenous bags on the skin as the first-line method',
+        'Saying forced air warming is contraindicated in the operating room',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'temperature',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'temperature' },
+  },
+
+  // ================= Cluster 10: Neurologic monitoring (BIS and NIRS) =================
+  {
+    id: 'r-ta-w3-10',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-bis', 'atom-ta-w3-nirs'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Compare the bispectral index and cerebral oximetry as neurologic monitors. Explain what BIS measures, its scale and the value range associated with a low incidence of recall, and its interference sources; and explain what cerebral oximetry (NIRS) measures, its normal range, the threshold indicating ischemia, and how it differs from pulse oximetry.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'BIS estimates the depth of hypnosis by extrapolating a number from 0 to 100 from EEG channel parameters; it is not a raw EEG. Values above 70 carry a higher likelihood of recall, while 40 to 70 has a low incidence, though patient variability exists. It is susceptible to electrocautery, electromyographic activity, forced air warmers, and pacemaker spikes, and represents a trend rather than an absolute.' },
+        { id: 'kp2', weight: 2, description: 'Cerebral oximetry uses near infrared spectroscopy to measure regional cerebral oxygen saturation (SrO2) noninvasively from a forehead sensor using the Beer-Lambert law. Normal values under anesthesia are generally 60 to 80 percent, and a greater than 20 percent reduction correlates with regional and global ischemia.' },
+        { id: 'kp3', weight: 1, description: 'Cerebral oximetry differs from pulse oximetry, and the pulse oximeter reading may not reflect cerebral oxygenation; NIRS is best used as a trend monitor with caution about absolute thresholds, most often in neonatology, cardiac surgery, and carotid endarterectomy.' },
+      ],
+      common_errors: [
+        'Calling BIS a raw EEG',
+        'Saying a BIS above 70 indicates deep anesthesia with no recall risk',
+        'Saying a greater than 20 percent increase in cerebral saturation indicates ischemia',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neurologic-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'neurologic-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-bis',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State what BIS measures, its scale, the value range with a low incidence of recall, and two interference sources.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'BIS estimates the depth of hypnosis by extrapolating a number from 0 to 100 from EEG channel parameters; it is not a raw EEG. Values above 70 carry a higher likelihood of recall, and 40 to 70 has a low incidence.' },
+        { id: 'kp2', weight: 1, description: 'It is susceptible to electrocautery, electromyographic activity such as shivering, forced air warmers, and pacemaker spikes, and represents a trend rather than an absolute.' },
+      ],
+      common_errors: [
+        'Calling BIS a raw EEG',
+        'Saying the BIS scale is 0 to 10',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neurologic-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'neurologic-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nirs',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State what cerebral oximetry (NIRS) measures, its normal range under anesthesia, and the threshold that indicates ischemia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Cerebral oximetry uses near infrared spectroscopy to measure regional cerebral oxygen saturation (SrO2) noninvasively from a forehead sensor using the Beer-Lambert law; normal values under anesthesia are generally 60 to 80 percent.' },
+        { id: 'kp2', weight: 1, description: 'A greater than 20 percent reduction in cerebral oxygen saturation correlates with regional and global ischemia, and NIRS is best used as a trend monitor.' },
+      ],
+      common_errors: [
+        'Saying NIRS measures arterial blood pressure',
+        'Saying a 20 percent increase in cerebral saturation indicates ischemia',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neurologic-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Anesthesia Monitoring lecture', topic: 'neurologic-monitoring' },
+  },
+
+];

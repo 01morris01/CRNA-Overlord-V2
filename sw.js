@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v21-pp2-wk3-ch37-coag-mcq-2026-05-31';
+const CACHE_VERSION = 'v22-ta-wk3-monitoring-2026-06-02';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

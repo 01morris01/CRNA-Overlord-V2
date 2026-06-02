@@ -118,6 +118,7 @@ import { RECALL_QUESTIONS_ADV_PHARMACOLOGY_1 } from '../data/recall-questions-ad
 import { RECALL_QUESTIONS_ATOMS } from '../data/recall-questions-atoms.js';
 import { RECALL_QUESTIONS_PATHOPHYSIOLOGY_1 } from '../data/recall-questions-pathophysiology-1.js';
 import { RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 } from '../data/recall-questions-pathophysiology-2.js';
+import { RECALL_QUESTIONS_TECH_ADVANCES } from '../data/recall-questions-tech-advances.js';
 
 import { WEEK_1_QUESTIONS, WEEK_1_METADATA } from '../data/questions/week-1.js';
 import { WEEK_2_QUESTIONS, WEEK_2_METADATA } from '../data/questions/week-2.js';
@@ -956,6 +957,7 @@ mergeRecallQuestions(RECALL_QUESTIONS_ADV_PHARMACOLOGY_1);
 mergeRecallQuestions(RECALL_QUESTIONS_ATOMS);
 mergeRecallQuestions(RECALL_QUESTIONS_PATHOPHYSIOLOGY_1);
 mergeRecallQuestions(RECALL_QUESTIONS_PATHOPHYSIOLOGY_2);
+mergeRecallQuestions(RECALL_QUESTIONS_TECH_ADVANCES);
 
 // ─── Accessors ────────────────────────────────────────────────────────────────
 
