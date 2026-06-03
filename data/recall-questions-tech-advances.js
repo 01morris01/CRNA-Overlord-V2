@@ -1193,4 +1193,526 @@ export const RECALL_QUESTIONS_TECH_ADVANCES = [
     metadata: { priority: 'medium', source: 'NAS 560 Gas Laws lecture', topic: 'gas-laws' },
   },
 
+  // ###################################################################
+  // ##  Node ta-wk-3 (Neuromuscular Monitoring)  --  Source: NAS 560 Neuromuscular Monitoring lecture
+  // ###################################################################
+
+  // ================= Cluster 11: PNS principles =================
+  {
+    id: 'r-ta-w3-11',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-pns-principles', 'atom-ta-w3-nmb-electrodes'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain the principles of peripheral nerve stimulation for neuromuscular monitoring. Describe the all or none muscle response, the difference between supramaximal and submaximal stimuli, the two stimulator variables, and correct electrode placement.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The muscle fiber response is all or none, so the whole muscle response depends on how many fibers are activated. A supramaximal stimulus is about 20 to 25 percent above the current that activates all local motor fibers (under about 50 mA) and is painful but accurate; a submaximal stimulus uses about 50 to 70 percent of that and is recommended in the awake or recovering patient but is less accurate.' },
+        { id: 'kp2', weight: 2, description: 'The two stimulator variables are the pattern, expressed in hertz (1 Hz is one stimulus per second, 0.1 Hz is one every 10 seconds), and the electrical output in milliamps (about 10 mA maximum).' },
+        { id: 'kp3', weight: 1, description: 'Electrodes are placed over the nerve, not the muscle; when far apart the negative black electrode is most distal directly over the nerve with the positive proximal, and the ulnar nerve correlates more closely with the diaphragm.' },
+      ],
+      common_errors: [
+        'Saying the submaximal stimulus is more accurate than the supramaximal',
+        'Placing electrodes over the muscle belly rather than the nerve',
+        'Confusing hertz with milliamps',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-pns-principles',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the all or none principle and the difference between supramaximal and submaximal stimuli.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The muscle fiber response is all or none; the whole muscle response depends on the number of fibers activated.' },
+        { id: 'kp2', weight: 2, description: 'A supramaximal stimulus is about 20 to 25 percent above the current activating all fibers (under about 50 mA) and is accurate but painful; a submaximal stimulus is about 50 to 70 percent of that and is less accurate.' },
+      ],
+      common_errors: [
+        'Saying the submaximal stimulus is more accurate',
+        'Saying the response is graded rather than all or none',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-electrodes',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State where peripheral nerve stimulator electrodes are placed and the two stimulator variables.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Electrodes are placed over the nerve, not the muscle; when far apart the negative black electrode is most distal over the nerve and the positive is proximal; the ulnar nerve correlates more closely with the diaphragm.' },
+        { id: 'kp2', weight: 2, description: 'The two variables are the pattern in hertz (1 Hz one per second, 0.1 Hz one every 10 seconds) and the output in milliamps (about 10 mA maximum).' },
+      ],
+      common_errors: [
+        'Placing electrodes over the muscle',
+        'Placing the positive electrode most distal over the nerve',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
+  // ================= Cluster 12: Single twitch and train of four =================
+  {
+    id: 'r-ta-w3-12',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-tof', 'atom-ta-w3-nmb-tof-succ'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain single twitch and train of four monitoring. Give the frequencies and use of single twitch, the delivery and interpretation of the train of four including the TOF count, the TOF ratio, and fade, how the response differs between nondepolarizing and depolarizing relaxants, and the TOF ratio that indicates adequate recovery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Single twitch stimulation at 1 Hz or 0.1 Hz evaluates intubating conditions; loss of twitches correlates with relaxed laryngeal muscles and diaphragm. The train of four delivers four supramaximal stimuli every 0.5 second (2 Hz); the TOF count is the number of twitches present and the TOF ratio is the fourth twitch divided by the first (T4 over T1).' },
+        { id: 'kp2', weight: 2, description: 'With a nondepolarizing relaxant the twitches fade sequentially, the fourth weakening and disappearing first, then the third and second; with succinylcholine the four twitches diminish together and equally without a true fade. Twitches return in the order they disappeared.' },
+        { id: 'kp3', weight: 1, description: 'A TOF ratio of 0.7 has been cited as adequate recovery for airway maintenance and breathing, although some sources require 0.9 to 0.95.' },
+      ],
+      common_errors: [
+        'Saying succinylcholine produces sequential fade like a nondepolarizing relaxant',
+        'Computing the TOF ratio as the first twitch divided by the fourth',
+        'Saying twitches return in the reverse order',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-tof',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State how the train of four is delivered and how the TOF count and TOF ratio are defined, plus the single twitch frequencies.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The train of four delivers four supramaximal stimuli every 0.5 second (2 Hz); the TOF count is the number of twitches present and the TOF ratio is the fourth twitch divided by the first (T4 over T1).' },
+        { id: 'kp2', weight: 2, description: 'Single twitch stimulation is delivered at 1 Hz or 0.1 Hz and evaluates intubating conditions.' },
+      ],
+      common_errors: [
+        'Defining the TOF ratio as the first divided by the fourth twitch',
+        'Saying the train of four is delivered at 50 Hz',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-tof-succ',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Contrast the train of four fade of a nondepolarizing relaxant with the response to succinylcholine, and give the TOF ratio for adequate recovery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A nondepolarizing relaxant produces sequential fade, the fourth twitch weakening before the first; succinylcholine makes all four twitches diminish together and equally without a true fade.' },
+        { id: 'kp2', weight: 2, description: 'A TOF ratio of 0.7 has been cited as adequate recovery, although some sources require 0.9 to 0.95.' },
+      ],
+      common_errors: [
+        'Saying succinylcholine causes sequential fade',
+        'Saying a TOF ratio of 0.2 is adequate',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
+  // ================= Cluster 13: Tetanus, post tetanic count, double burst =================
+  {
+    id: 'r-ta-w3-13',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-tetanus', 'atom-ta-w3-nmb-ptc-dbs'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain tetanic stimulation, the post tetanic count, and double burst stimulation. Give the frequency and duration of tetanus and the mechanism of its fade, describe how the post tetanic count grades an intense block, and describe double burst stimulation and why it is preferred during recovery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Tetanus most commonly delivers 50 Hz for 5 seconds and is observed for fade. Fade is a presynaptic event: a large initial release of acetylcholine depletes the nerve terminal stores and reduces the rate of release. Tetanus is useful for assessing recovery.' },
+        { id: 'kp2', weight: 2, description: 'When an intense nondepolarizing block leaves no train of four response, the post tetanic count applies 50 Hz tetanus for 5 seconds, waits about 3 seconds, then counts single twitches at 1 Hz; post tetanic twitches appear before the first train of four twitch returns.' },
+        { id: 'kp3', weight: 1, description: 'Double burst stimulation delivers two bursts of 50 Hz tetanus separated by 750 msec; equal contractions are normal and a weaker second contraction indicates partial paralysis. It correlates with the train of four but its fade is easier to feel during recovery.' },
+      ],
+      common_errors: [
+        'Calling tetanic fade a postsynaptic event',
+        'Saying post tetanic twitches appear after the train of four returns',
+        'Saying double burst stimulation cannot detect fade',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-tetanus',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the usual frequency and duration of tetanic stimulation and the mechanism of tetanic fade.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Tetanus most commonly delivers 50 Hz for 5 seconds and is observed for fade.' },
+        { id: 'kp2', weight: 2, description: 'Fade is a presynaptic event: a large initial release of acetylcholine depletes the nerve terminal stores and reduces the rate of release.' },
+      ],
+      common_errors: [
+        'Saying tetanus is delivered at 2 Hz',
+        'Calling the tetanic fade a postsynaptic event',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-ptc-dbs',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe the post tetanic count and double burst stimulation, including why double burst is preferred during recovery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The post tetanic count applies 50 Hz tetanus for 5 seconds, waits about 3 seconds, then counts single twitches at 1 Hz to grade an intense block with no train of four; post tetanic twitches appear before the first train of four twitch.' },
+        { id: 'kp2', weight: 2, description: 'Double burst stimulation delivers two bursts of 50 Hz tetanus separated by 750 msec; a weaker second contraction indicates partial paralysis, and its fade is easier to feel than train of four fade during recovery.' },
+      ],
+      common_errors: [
+        'Saying the post tetanic count is used when the train of four is already 4 of 4',
+        'Saying double burst contractions stay equal even with residual block',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
+  // ================= Cluster 14: Sites and muscle sensitivity =================
+  {
+    id: 'r-ta-w3-14',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-sites', 'atom-ta-w3-nmb-diaphragm'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain how the choice of monitoring site affects interpretation. Identify the most commonly used nerves and a limitation of the ulnar nerve, the order of muscle sensitivity, and how the diaphragm compares with the adductor pollicis in resistance, onset, and recovery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The ulnar and facial nerves are most commonly used. The ulnar nerve is not well correlated with the larynx and diaphragm; at the facial nerve the corrugator supercilii is better correlated than the orbicularis oculi.' },
+        { id: 'kp2', weight: 2, description: 'Muscle sensitivity from most to least sensitive is abdominal, orbicularis oculi, geniohyoid, masseter, upper airway muscles, peripheral limbs, laryngeal, and diaphragm; results from one muscle group cannot be extrapolated to another.' },
+        { id: 'kp3', weight: 1, description: 'The diaphragm is the most resistant muscle, needing about 1.4 to 2.0 times the dose to block the adductor pollicis, with a shorter onset and quicker recovery; so the adductor pollicis can still be blocked while the diaphragm is not, and the patient pushes or bucks.' },
+      ],
+      common_errors: [
+        'Saying the ulnar nerve closely reflects the diaphragm',
+        'Calling the diaphragm the most sensitive muscle',
+        'Saying all muscle groups respond identically',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-sites',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Name the most commonly used monitoring nerves, a limitation of the ulnar nerve, and the order of muscle sensitivity.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The ulnar and facial nerves are most commonly used; the ulnar nerve is not well correlated with the larynx and diaphragm, and the corrugator supercilii is better correlated than the orbicularis oculi.' },
+        { id: 'kp2', weight: 2, description: 'Muscle sensitivity from most to least sensitive is abdominal, orbicularis oculi, geniohyoid, masseter, upper airway muscles, peripheral limbs, laryngeal, and diaphragm.' },
+      ],
+      common_errors: [
+        'Saying the diaphragm is the most sensitive muscle',
+        'Saying the ulnar nerve reflects the larynx well',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-diaphragm',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Compare the diaphragm with the adductor pollicis in resistance, onset, and recovery, and give the clinical consequence.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The diaphragm is the most resistant muscle, needing about 1.4 to 2.0 times the dose required to block the adductor pollicis, and has a shorter onset and quicker recovery.' },
+        { id: 'kp2', weight: 2, description: 'As a relaxant wears off, the adductor pollicis can still be blocked while the diaphragm is not, so the patient can push or buck despite thumb monitoring showing block.' },
+      ],
+      common_errors: [
+        'Saying the diaphragm is blocked first and longest',
+        'Saying the diaphragm needs half the adductor pollicis dose',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
+  // ================= Cluster 15: Receptor occupancy and blockade states =================
+  {
+    id: 'r-ta-w3-15',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-receptor-window', 'atom-ta-w3-nmb-recovery-table'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Explain how receptor occupancy relates to the twitch response and to the clinical states of blockade. Give the occupancy thresholds for single twitch change and loss, define intense and moderate (surgical) blockade, and give the receptor occupancy that corresponds to a 1 of 4 and a 4 of 4 train of four.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'No change is seen in the single twitch until about 70 percent of receptors are occupied, and the single twitch is totally lost at about 90 percent, so a narrow window exists. Intense blockade occurs about 3 to 6 minutes after an intubating dose with no train of four response; moderate (surgical) blockade begins when the first train of four twitch returns and is usually adequate for reversal with neostigmine.' },
+        { id: 'kp2', weight: 2, description: 'On the receptor occupancy chart: 99 to 100 percent blocked gives complete paralysis with 0 of 4; 90 percent gives adequate abdominal relaxation with 1 of 4; 75 percent gives normal tidal volume and vital capacity with 4 of 4; 50 percent allows an inspiratory force of negative 20 cm H2O and a sustained head lift.' },
+        { id: 'kp3', weight: 1, description: 'A 4 of 4 train of four can coexist with substantial receptor occupancy (about 75 percent), so a normal count alone does not prove full recovery and reliable clinical signs are needed.' },
+      ],
+      common_errors: [
+        'Saying the single twitch disappears at 10 percent occupancy',
+        'Saying a 4 of 4 train of four proves zero receptor occupancy',
+        'Calling moderate blockade a 0 of 4 train of four',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-receptor-window',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the receptor occupancy at which the single twitch first changes and at which it is lost, and define intense and moderate blockade.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'No change is seen in the single twitch until about 70 percent of receptors are occupied, and it is totally lost at about 90 percent.' },
+        { id: 'kp2', weight: 2, description: 'Intense blockade occurs about 3 to 6 minutes after an intubating dose with no train of four; moderate (surgical) blockade begins when the first train of four twitch returns and is usually adequate for reversal with neostigmine.' },
+      ],
+      common_errors: [
+        'Saying the single twitch is lost at 30 percent occupancy',
+        'Saying moderate blockade has a 0 of 4 train of four',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-recovery-table',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Give the receptor occupancy that corresponds to a 0 of 4, a 1 of 4, and a 4 of 4 train of four, with the matching clinical findings.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'At 99 to 100 percent blocked there is complete paralysis with 0 of 4; at 90 percent there is adequate abdominal relaxation with 1 of 4.' },
+        { id: 'kp2', weight: 2, description: 'At 75 percent the tidal volume and vital capacity are normal with 4 of 4; at 50 percent the patient can inspire to negative 20 cm H2O and sustain a head lift.' },
+      ],
+      common_errors: [
+        'Saying 100 percent blocked gives a 4 of 4 train of four',
+        'Saying a 4 of 4 means zero receptors blocked',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
+  // ================= Cluster 16: Phase I versus Phase II block =================
+  {
+    id: 'r-ta-w3-16',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-phase1', 'atom-ta-w3-nmb-phase2'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Contrast a Phase I and a Phase II block. For each, describe fasciculations, fade with tetanus and train of four, post tetanic twitches, and the effect of an anticholinesterase, and state what promotes the transition from Phase I to Phase II.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A Phase I block is the normal depolarizing response: fasciculations appear, there is no fade with tetanus or train of four (though amplitude falls with intensity), there are no post tetanic twitches, and an anticholinesterase such as neostigmine augments and prolongs the block because it depresses the pseudocholinesterase that metabolizes succinylcholine.' },
+        { id: 'kp2', weight: 2, description: 'A Phase II block behaves like a nondepolarizing block: no fasciculations before paralysis, fade with tetanus and train of four, post tetanic twitches present, and an anticholinesterase may antagonize it.' },
+        { id: 'kp3', weight: 1, description: 'The transition from Phase I to Phase II depends on time and dose: more than about 3 mg/kg, about 500 mg over 30 minutes, or a prolonged succinylcholine infusion makes a Phase II block more likely.' },
+      ],
+      common_errors: [
+        'Saying a Phase I block shows fade with tetanus',
+        'Saying an anticholinesterase reverses a Phase I block',
+        'Saying a Phase II block occurs only at low doses',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-phase1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe a Phase I block, including fasciculations, fade, post tetanic twitches, and the effect of an anticholinesterase.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A Phase I block is the normal depolarizing response: fasciculations appear, there is no fade with tetanus or train of four, and there are no post tetanic twitches.' },
+        { id: 'kp2', weight: 2, description: 'An anticholinesterase such as neostigmine augments and prolongs a Phase I block because it depresses the pseudocholinesterase that metabolizes succinylcholine.' },
+      ],
+      common_errors: [
+        'Saying a Phase I block shows fade',
+        'Saying an anticholinesterase reverses a Phase I block',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-phase2',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Describe a Phase II block and what promotes the transition from Phase I to Phase II.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A Phase II block behaves like a nondepolarizing block: no fasciculations before paralysis, fade with tetanus and train of four, post tetanic twitches present, and an anticholinesterase may antagonize it.' },
+        { id: 'kp2', weight: 2, description: 'The transition depends on time and dose: more than about 3 mg/kg, about 500 mg over 30 minutes, or a prolonged succinylcholine infusion makes a Phase II block more likely.' },
+      ],
+      common_errors: [
+        'Saying a Phase II block shows no fade',
+        'Saying a Phase II block occurs only at very low doses',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
+  // ================= Cluster 17: Clinical pearls and reversal =================
+  {
+    id: 'r-ta-w3-17',
+    type: 'recall',
+    tier: 'synthesis',
+    feeder_atoms: ['atom-ta-w3-nmb-pearls', 'atom-ta-w3-nmb-reliable-signs'],
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'Summarize the clinical pearls for neuromuscular monitoring and safe reversal. Describe the intraoperative monitoring goal, the train of four count at which reversal should and should not be attempted, why double burst is preferred during recovery, and reliable versus unreliable clinical signs of recovery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Avoid total twitch suppression during surgery; there should be 1 to 2 tactile responses. Reversal should not be attempted at a train of four of 0 of 4; 2 to 3 of 4 is desirable because more twitches mean a more reliable reversal.' },
+        { id: 'kp2', weight: 2, description: 'Double burst stimulation is preferred over the train of four during recovery because fade is easier to feel, but a lack of fade in either does not exclude significant residual blockade.' },
+        { id: 'kp3', weight: 1, description: 'Reliable signs of recovery include a sustained head lift, leg lift, or hand grip for more than 5 seconds and an inspiratory force greater than about 40 to 50 cm H2O; unreliable signs include sustained eye opening, tongue protrusion, and a normal tidal volume.' },
+      ],
+      common_errors: [
+        'Attempting reversal at a 0 of 4 train of four',
+        'Saying a lack of fade proves full recovery',
+        'Citing a normal tidal volume as a reliable sign of recovery',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 3,
+    metadata: { priority: 'high', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring', ladder_tier_appropriate: 'pre-induction' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-pearls',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'State the intraoperative twitch goal and the train of four count at which reversal should and should not be attempted.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Avoid total twitch suppression during surgery; there should be 1 to 2 tactile responses.' },
+        { id: 'kp2', weight: 2, description: 'Reversal should not be attempted at a train of four of 0 of 4; 2 to 3 of 4 is desirable because more twitches mean a more reliable reversal.' },
+      ],
+      common_errors: [
+        'Saying reversal is best attempted at 0 of 4',
+        'Saying total twitch suppression should be maintained during surgery',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+  {
+    id: 'atom-ta-w3-nmb-reliable-signs',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'tech-advances-anesthesia',
+    nodeId: 'ta-wk-3',
+    prompt: 'List reliable and unreliable clinical signs of recovery from neuromuscular blockade.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Reliable signs include a sustained head lift, leg lift, or hand grip for more than 5 seconds and an inspiratory force greater than about 40 to 50 cm H2O.' },
+        { id: 'kp2', weight: 2, description: 'Unreliable signs include sustained eye opening, tongue protrusion, an arm lift to the contralateral shoulder, and a normal tidal volume.' },
+      ],
+      common_errors: [
+        'Citing a normal tidal volume as a reliable sign',
+        'Citing sustained eye opening as a reliable sign',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'neuromuscular-monitoring',
+    chapter: 'ta-wk-3',
+    difficulty: 1,
+    metadata: { priority: 'medium', source: 'NAS 560 Neuromuscular Monitoring lecture', topic: 'neuromuscular-monitoring' },
+  },
+
 ];
