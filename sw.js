@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v24-ta-wk3-nmb-2026-06-02';
+const CACHE_VERSION = 'v25-ta-wk4-positioning-2026-06-03';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
