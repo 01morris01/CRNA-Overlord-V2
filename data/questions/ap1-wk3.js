@@ -86,7 +86,7 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Epinephrine produces hyperglycemia primarily through which metabolic mechanism?",  // source: deck 1, slide 5
     setup: "",
     ans: [
-      { t: "Inhibition of insulin secretion from pancreatic beta cells", ok: false },
+      { t: "Suppression of pancreatic insulin release", ok: false },
       { t: "Stimulation of hepatic glycogenolysis", ok: true },
       { t: "Increased intestinal glucose absorption", ok: false },
       { t: "Decreased renal glucose excretion", ok: false },
@@ -141,10 +141,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Norepinephrine is considered the first-line vasopressor for which type of shock?",  // source: deck 1, slide 10
     setup: "",
     ans: [
-      { t: "Cardiogenic shock", ok: false },
-      { t: "Hypovolemic shock", ok: false },
+      { t: "Cardiogenic shock from pump failure", ok: false },
+      { t: "Hypovolemic shock from blood loss", ok: false },
       { t: "Septic and distributive shock", ok: true },
-      { t: "Obstructive shock from cardiac tamponade", ok: false },
+      { t: "Obstructive shock from tamponade", ok: false },
     ],
     rationale: "Norepinephrine is recommended first-line for septic and distributive shock because its strong alpha-1 activity restores vascular tone while its moderate beta-1 activity supports cardiac output. (A) is wrong because cardiogenic shock management focuses on inotropes and afterload reduction, not primarily vasoconstriction. (B) is wrong because hypovolemic shock requires volume resuscitation as the primary intervention. (D) is wrong because obstructive shock from tamponade requires definitive treatment (pericardiocentesis). Pearl: Surviving Sepsis guidelines recommend norepinephrine first, with vasopressin as a second-line agent.",
     scene: "pharmacology",
@@ -158,10 +158,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "During norepinephrine administration, coronary artery blood flow typically:",  // source: deck 1, slide 10
     setup: "",
     ans: [
-      { t: "Decreases due to intense alpha-1 vasoconstriction", ok: false },
+      { t: "Decreases from alpha-1 vasoconstriction", ok: false },
       { t: "Increases despite systemic vasoconstriction", ok: true },
-      { t: "Remains completely unchanged from baseline", ok: false },
-      { t: "Fluctuates unpredictably", ok: false },
+      { t: "Remains entirely unchanged from baseline", ok: false },
+      { t: "Fluctuates unpredictably with each beat", ok: false },
     ],
     rationale: "Coronary arteries dilate during norepinephrine administration despite systemic vasoconstriction. Increased myocardial work and oxygen consumption trigger local vasodilatory mediators (metabolic autoregulation) that override adrenergic vasoconstriction. (A) is wrong because coronary circulation is protected by metabolic autoregulation. (C) is wrong because coronary flow increases in response to elevated myocardial oxygen demand. (D) is wrong because the coronary flow change is a predictable autoregulatory response. Pearl: This coronary vasodilation explains why norepinephrine can increase MAP without causing myocardial ischemia in most patients.",
     scene: "pharmacology",
@@ -196,9 +196,9 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "At low doses (0.5 to 3 mcg/kg/min), dopamine primarily stimulates which receptors?",  // source: deck 1, slide 14
     setup: "",
     ans: [
-      { t: "Beta-1 cardiac receptors", ok: false },
-      { t: "Alpha-1 vascular receptors", ok: false },
-      { t: "D1 and D2 receptors in renal and mesenteric beds", ok: true },
+      { t: "Beta-1 receptors on cardiac myocytes", ok: false },
+      { t: "Alpha-1 receptors on the vasculature", ok: false },
+      { t: "D1 and D2 in renal and mesenteric beds", ok: true },
       { t: "Muscarinic receptors in the GI tract", ok: false },
     ],
     rationale: "At low doses (0.5 to 3 mcg/kg/min), dopamine preferentially activates D1 and D2 receptors in the renal and mesenteric vascular beds, causing local vasodilation. (A) is wrong because beta-1 cardiac stimulation occurs at moderate doses (3 to 10 mcg/kg/min). (B) is wrong because alpha-1 vasoconstriction predominates at high doses (greater than 10 mcg/kg/min). (D) is wrong because dopamine does not activate muscarinic receptors. Pearl: The dose-dependent receptor activation of dopamine (low = D1/D2, moderate = beta-1, high = alpha-1) is a high-yield pharmacology exam topic.",
@@ -213,10 +213,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "At moderate infusion rates (3 to 10 mcg/kg/min), the predominant cardiovascular effect of dopamine is:",  // source: deck 1, slide 15
     setup: "",
     ans: [
-      { t: "Renal vasodilation with diuresis", ok: false },
-      { t: "Beta-1 mediated cardiac stimulation with increased contractility", ok: true },
-      { t: "Alpha-1 mediated vasoconstriction with elevated SVR", ok: false },
-      { t: "D2-mediated vasodilation with hypotension", ok: false },
+      { t: "Renal vasodilation producing diuresis", ok: false },
+      { t: "Beta-1 stimulation raising contractility", ok: true },
+      { t: "Alpha-1 vasoconstriction raising SVR", ok: false },
+      { t: "D2 vasodilation causing hypotension", ok: false },
     ],
     rationale: "At moderate doses (3 to 10 mcg/kg/min), dopamine activates beta-1 receptors, increasing contractility, heart rate, and cardiac output. (A) is wrong because renal vasodilation via D1/D2 predominates at lower doses. (C) is wrong because alpha-1 vasoconstriction predominates at higher doses (greater than 10 mcg/kg/min). (D) is wrong because dopaminergic vasodilation is a low-dose effect. Pearl: Individual variation in receptor activation thresholds means dose ranges overlap; clinical response must guide titration.",
     scene: "pharmacology",
@@ -265,9 +265,9 @@ export const AP1_WK3_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Has no beta-1 activity at any dose", ok: false },
-      { t: "Causes more tachyarrhythmias than alternative inotropes", ok: true },
+      { t: "Causes more tachyarrhythmias than alternatives", ok: true },
       { t: "Produces excessive renal vasodilation", ok: false },
-      { t: "Cannot be administered intravenously", ok: false },
+      { t: "Cannot be given by the IV route at all", ok: false },
     ],
     rationale: "Dopamine is associated with higher incidence of tachyarrhythmias compared with dobutamine or milrinone when used for inotropic support. (A) is wrong because dopamine does have beta-1 activity at moderate doses. (C) is wrong because renal vasodilation at low doses is not harmful; the issue is cardiac arrhythmogenicity at higher doses. (D) is wrong because dopamine is routinely given IV. Pearl: Current guidelines favor dobutamine or milrinone over dopamine for cardiogenic shock, reserving dopamine primarily for hypotension with bradycardia.",
     scene: "pharmacology",
@@ -323,10 +323,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Dobutamine's primary hemodynamic effect is to increase:",  // source: deck 1, slide 26
     setup: "",
     ans: [
-      { t: "SVR through alpha-1 stimulation", ok: false },
-      { t: "Contractility, stroke volume, and cardiac output through beta-1 stimulation", ok: true },
-      { t: "Renal blood flow through D1 receptor activation", ok: false },
-      { t: "Venous capacitance through beta-2 vasodilation", ok: false },
+      { t: "SVR through alpha-1 vasoconstriction", ok: false },
+      { t: "Cardiac output through beta-1 stimulation", ok: true },
+      { t: "Renal blood flow through D1 activation", ok: false },
+      { t: "Venous capacitance via beta-2 dilation", ok: false },
     ],
     rationale: "Dobutamine is primarily a beta-1 agonist that increases myocardial contractility (positive inotropy), stroke volume, and cardiac output. (A) is wrong because dobutamine typically decreases SVR slightly due to mild beta-2 vasodilation. (C) is wrong because dobutamine does not activate dopamine receptors. (D) is wrong because mild beta-2 vasodilation occurs but is not the primary effect. Pearl: Dobutamine is the inotrope of choice when the goal is to increase cardiac output without significantly increasing SVR.",
     scene: "pharmacology",
@@ -378,9 +378,9 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Ephedrine produces sympathomimetic effects through which mechanism?",  // source: deck 1, slide 30
     setup: "",
     ans: [
-      { t: "Direct alpha-1 receptor activation only", ok: false },
-      { t: "Mixed direct receptor activation and indirect norepinephrine release", ok: true },
-      { t: "Pure indirect release of dopamine from nerve terminals", ok: false },
+      { t: "Direct alpha-1 receptor activation alone", ok: false },
+      { t: "Direct receptor action plus norepinephrine release", ok: true },
+      { t: "Purely indirect dopamine release from nerves", ok: false },
       { t: "Inhibition of monoamine oxidase enzymes", ok: false },
     ],
     rationale: "Ephedrine is a mixed-acting sympathomimetic that both directly stimulates adrenergic receptors and indirectly releases norepinephrine from presynaptic nerve terminals. It is also resistant to MAO because it is a noncatecholamine. (A) is wrong because ephedrine has both direct and indirect components and activates beta receptors as well. (C) is wrong because ephedrine releases norepinephrine, not dopamine. (D) is wrong because ephedrine is resistant to MAO but does not inhibit MAO. Pearl: Ephedrine 5 to 10 mg IV is a common first-line bolus vasopressor for anesthesia-induced hypotension because of its dual mechanism and rapid onset.",
@@ -395,10 +395,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Repeated bolus doses of ephedrine show diminishing effect (tachyphylaxis) because:",  // source: deck 1, slide 31
     setup: "",
     ans: [
-      { t: "Hepatic metabolism accelerates with each dose", ok: false },
-      { t: "Norepinephrine stores in sympathetic nerve terminals become depleted", ok: true },
-      { t: "Alpha-1 receptors develop rapid downregulation", ok: false },
-      { t: "Renal clearance increases after the first dose", ok: false },
+      { t: "Hepatic metabolism speeds up with each dose", ok: false },
+      { t: "Presynaptic norepinephrine stores become depleted", ok: true },
+      { t: "Alpha-1 receptors undergo rapid downregulation", ok: false },
+      { t: "Renal clearance rises after the first dose", ok: false },
     ],
     rationale: "Ephedrine's indirect component relies on releasing stored norepinephrine from presynaptic vesicles. With repeated dosing, these stores become progressively depleted, and subsequent doses release less norepinephrine. (A) is wrong because tachyphylaxis is from neurotransmitter depletion, not accelerated metabolism. (C) is wrong because receptor downregulation requires longer exposure. (D) is wrong because renal clearance does not change significantly between doses. Pearl: When ephedrine tachyphylaxis occurs, switching to a direct-acting agent like phenylephrine bypasses the depleted norepinephrine stores.",
     scene: "pharmacology",
@@ -451,9 +451,9 @@ export const AP1_WK3_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Lacks any vasoconstrictive properties", ok: false },
-      { t: "Increases afterload without providing inotropic support", ok: true },
-      { t: "Has a half-life too short for continuous infusion", ok: false },
-      { t: "Causes severe bronchospasm", ok: false },
+      { t: "Raises afterload without inotropic support", ok: true },
+      { t: "Has a half-life too short to infuse", ok: false },
+      { t: "Causes severe and refractory bronchospasm", ok: false },
     ],
     rationale: "Phenylephrine is a pure vasoconstrictor (alpha-1) without inotropic support (minimal beta-1). In septic shock, where cardiac dysfunction often coexists, increasing afterload without augmenting cardiac output may worsen tissue perfusion. (A) is wrong because phenylephrine is a potent vasoconstrictor. (C) is wrong because phenylephrine can be infused continuously. (D) is wrong because phenylephrine does not cause bronchospasm. Pearl: Phenylephrine may be considered in septic shock only when tachyarrhythmias preclude norepinephrine use.",
     scene: "pharmacology",
@@ -467,10 +467,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Overdose of phenylephrine producing severe hypertension should be treated with:",  // source: deck 1, slide 36
     setup: "",
     ans: [
-      { t: "A beta-blocker to reduce heart rate", ok: false },
+      { t: "A beta-blocker to lower the heart rate", ok: false },
       { t: "Phentolamine, an alpha receptor antagonist", ok: true },
-      { t: "Atropine to increase heart rate", ok: false },
-      { t: "A higher dose of phenylephrine to induce tachyphylaxis", ok: false },
+      { t: "Atropine to raise the heart rate quickly", ok: false },
+      { t: "More phenylephrine to force tachyphylaxis", ok: false },
     ],
     rationale: "Phentolamine is a nonselective alpha receptor antagonist that directly reverses alpha-1 mediated vasoconstriction from phenylephrine overdose. (A) is wrong because beta-blockers do not reverse alpha-1 vasoconstriction and would remove any compensatory cardiac output. (C) is wrong because atropine increases heart rate but does not address the underlying vasoconstriction. (D) is wrong because more phenylephrine would worsen the crisis. Pearl: Phentolamine is the specific reversal agent for alpha-agonist toxicity, also useful when local anesthetic with epinephrine is accidentally injected intra-arterially.",
     scene: "pharmacology",
@@ -632,10 +632,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Compared with amrinone, milrinone is preferred in clinical practice because milrinone:",  // source: deck 1, slide 53
     setup: "",
     ans: [
-      { t: "Is more potent and has fewer side effects", ok: true },
-      { t: "Can be given orally for chronic heart failure", ok: false },
-      { t: "Has a longer half-life requiring less frequent dosing", ok: false },
-      { t: "Does not require a loading dose", ok: false },
+      { t: "Is more potent with fewer side effects", ok: true },
+      { t: "Can be given orally for chronic failure", ok: false },
+      { t: "Has a longer half-life needing less dosing", ok: false },
+      { t: "Does not require any loading dose at all", ok: false },
     ],
     rationale: "Milrinone is more potent than amrinone with fewer adverse effects, including lower incidence of thrombocytopenia. (B) is wrong because chronic oral PDE III inhibitor use increases morbidity and mortality; they are restricted to acute IV use. (C) is wrong because a longer half-life is not the distinguishing advantage. (D) is wrong because milrinone is typically given with a loading dose followed by continuous infusion. Pearl: Despite acute hemodynamic benefits, chronic oral PDE III inhibitor therapy paradoxically increases mortality, restricting their use to short-term IV administration.",
     scene: "pharmacology",
@@ -780,10 +780,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Esmolol is ideal for perioperative heart rate control because it is metabolized by:",  // source: deck 2, slide 14
     setup: "",
     ans: [
-      { t: "Hepatic cytochrome P450 enzymes", ok: false },
-      { t: "Renal tubular secretion", ok: false },
-      { t: "Red blood cell esterases independent of hepatic and renal function", ok: true },
-      { t: "Erythrocyte carbonic anhydrase", ok: false },
+      { t: "Hepatic cytochrome P450 enzyme systems", ok: false },
+      { t: "Renal tubular secretion and excretion", ok: false },
+      { t: "Red blood cell esterases in the plasma", ok: true },
+      { t: "Erythrocyte carbonic anhydrase enzyme", ok: false },
     ],
     rationale: "Esmolol is rapidly hydrolyzed by RBC esterases to an inactive metabolite, independent of liver and kidney function. This produces an ultra-short half-life of ~9 minutes, allowing precise titration. (A) is wrong because esmolol is not metabolized by cytochrome P450. (B) is wrong because renal excretion clears the inactive metabolite, not the parent drug. (D) is wrong because carbonic anhydrase catalyzes CO2 hydration, not ester hydrolysis. Pearl: Esmolol's onset is ~5 minutes with a duration of 10 to 30 minutes, making it excellent for acute rate control during laryngoscopy or emergence hypertension.",
     scene: "pharmacology",
@@ -798,8 +798,8 @@ export const AP1_WK3_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Excessive tachycardia from reflex activation", ok: false },
-      { t: "Unopposed alpha-mediated coronary vasospasm and worsened hypertension", ok: true },
-      { t: "Serotonin syndrome from drug interaction", ok: false },
+      { t: "Unopposed alpha coronary vasospasm and worse hypertension", ok: true },
+      { t: "Serotonin syndrome from a drug interaction", ok: false },
       { t: "Acute kidney injury from renal vasoconstriction", ok: false },
     ],
     rationale: "Cocaine blocks norepinephrine reuptake, producing alpha and beta stimulation. A beta-blocker alone removes beta-2 vasodilation while alpha-1 vasoconstriction remains unopposed, worsening coronary vasospasm and hypertension. (A) is wrong because beta-blockade reduces tachycardia; the concern is vascular. (C) is wrong because this combination does not produce serotonin syndrome. (D) is wrong because the primary danger is coronary vasospasm and myocardial ischemia. Pearl: Labetalol (combined alpha and beta blocker) or benzodiazepines are safer alternatives for cocaine-induced hypertension.",
@@ -835,10 +835,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Labetalol generally maintains cardiac output during blood pressure reduction because it combines:",  // source: deck 2, slide 20
     setup: "",
     ans: [
-      { t: "Alpha-1 blockade (vasodilation) with nonselective beta blockade", ok: true },
-      { t: "Alpha-2 agonism (sympatholysis) with selective beta-1 blockade", ok: false },
+      { t: "Alpha-1 blockade with nonselective beta blockade", ok: true },
+      { t: "Alpha-2 agonism with selective beta-1 blockade", ok: false },
       { t: "Calcium channel blockade with beta-2 agonism", ok: false },
-      { t: "PDE III inhibition with alpha-1 agonism", ok: false },
+      { t: "PDE III inhibition together with alpha-1 agonism", ok: false },
     ],
     rationale: "Labetalol blocks alpha-1 receptors (vasodilation, decreased SVR) and nonselectively blocks beta receptors (reduced HR and contractility). The alpha-1 vasodilation offsets beta-mediated cardiac depression, so cardiac output is generally maintained. (B) is wrong because labetalol is an antagonist and blocks alpha-1, not stimulates alpha-2. (C) is wrong because labetalol does not block calcium channels. (D) is wrong because labetalol does not inhibit PDE III. Pearl: The IV beta-to-alpha blocking ratio is ~7:1; beta blockade predominates, but alpha-1 blockade is sufficient to preserve cardiac output.",
     scene: "pharmacology",
@@ -852,9 +852,9 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Labetalol preserves the alpha-2 negative feedback loop on norepinephrine release because it:",  // source: deck 2, slide 21
     setup: "",
     ans: [
-      { t: "Blocks alpha-1 receptors but does not block alpha-2 receptors", ok: true },
-      { t: "Stimulates alpha-2 receptors directly", ok: false },
-      { t: "Blocks both alpha-1 and alpha-2 receptors equally", ok: false },
+      { t: "Blocks alpha-1 but spares the alpha-2 receptors", ok: true },
+      { t: "Directly stimulates the alpha-2 receptors", ok: false },
+      { t: "Blocks alpha-1 and alpha-2 receptors equally", ok: false },
       { t: "Has no effect on any alpha receptor subtype", ok: false },
     ],
     rationale: "Labetalol selectively blocks alpha-1 while sparing alpha-2. Presynaptic alpha-2 receptors provide negative feedback limiting norepinephrine release. By preserving this feedback, labetalol avoids the excessive reflex tachycardia seen with nonselective alpha-blockers like phentolamine. (B) is wrong because labetalol does not stimulate alpha-2; it simply does not block them. (C) is wrong because blocking alpha-2 would disrupt feedback, increasing tachycardia. (D) is wrong because labetalol clearly blocks alpha-1. Pearl: This alpha-2 sparing property makes labetalol useful for pheochromocytoma management and clonidine withdrawal.",
@@ -874,9 +874,9 @@ export const AP1_WK3_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Abolish the accessory pathway permanently", ok: false },
-      { t: "Accelerate conduction through the accessory pathway", ok: true },
-      { t: "Cause severe bronchoconstriction", ok: false },
-      { t: "Produce extreme hypertension from alpha-1 stimulation", ok: false },
+      { t: "Accelerate conduction down the accessory pathway", ok: true },
+      { t: "Cause severe and abrupt bronchoconstriction", ok: false },
+      { t: "Produce extreme alpha-1 mediated hypertension", ok: false },
     ],
     rationale: "Verapamil slows AV nodal conduction but does not slow the accessory pathway. Rapid atrial impulses are redirected through the unblocked pathway, potentially degenerating into ventricular fibrillation. (A) is wrong because verapamil does not ablate the pathway. (C) is wrong because verapamil does not cause bronchoconstriction. (D) is wrong because verapamil causes vasodilation, not hypertension. Pearl: All AV nodal blocking agents (verapamil, diltiazem, digoxin, adenosine) are contraindicated in WPW with atrial fibrillation; procainamide is preferred.",
     scene: "pharmacology",
@@ -907,10 +907,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Calcium channel blockers potentiate the effects of which drugs used during anesthesia?",  // source: deck 2, slide 28
     setup: "",
     ans: [
-      { t: "Inhaled anesthetic agents exclusively", ok: false },
-      { t: "Both depolarizing and nondepolarizing neuromuscular blocking agents", ok: true },
-      { t: "Opioid analgesics exclusively", ok: false },
-      { t: "Local anesthetics exclusively", ok: false },
+      { t: "Inhaled volatile anesthetic agents only", ok: false },
+      { t: "Depolarizing and nondepolarizing blockers", ok: true },
+      { t: "Opioid analgesic agents and nothing else", ok: false },
+      { t: "Local anesthetic agents and nothing else", ok: false },
     ],
     rationale: "CCBs potentiate both depolarizing and nondepolarizing NMB agents. Calcium is essential for acetylcholine release at the neuromuscular junction; blocking calcium entry reduces neurotransmitter release and enhances the block. (A) is wrong because while CCBs may cause additive cardiovascular depression with inhaled agents, the specific potentiation applies to NMB agents. (C) is wrong because CCBs do not specifically potentiate opioids. (D) is wrong because the interaction is with NMB agents, not local anesthetics. Pearl: Patients on chronic CCB therapy receiving NMB agents require close quantitative train-of-four monitoring for prolonged block.",
     scene: "pharmacology",
@@ -924,10 +924,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Diltiazem is often preferred over verapamil when combined with a beta-blocker because diltiazem produces:",  // source: deck 2, slide 27
     setup: "",
     ans: [
-      { t: "More potent AV nodal blockade", ok: false },
-      { t: "Less myocardial contractility depression", ok: true },
-      { t: "Stronger arterial vasodilation", ok: false },
-      { t: "Complete beta-receptor antagonism as an additive effect", ok: false },
+      { t: "More potent AV nodal conduction blockade", ok: false },
+      { t: "Less depression of myocardial contractility", ok: true },
+      { t: "Stronger arterial vasodilation than verapamil", ok: false },
+      { t: "Added beta-receptor antagonism of its own", ok: false },
     ],
     rationale: "Diltiazem (benzothiazepine) produces less contractility depression than verapamil (phenylalkylamine) when combined with beta-blockers, making the combination safer. (A) is wrong because stronger AV blockade would increase risk, not make it preferable. (C) is wrong because diltiazem is not a more potent vasodilator. (D) is wrong because diltiazem does not block beta receptors. Pearl: Combining verapamil with a beta-blocker carries higher risk of severe bradycardia, heart block, and acute heart failure than the diltiazem combination.",
     scene: "pharmacology",
@@ -1034,10 +1034,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Nitroglycerin reduces cardiac preload primarily by dilating:",  // source: deck 2, slide 42
     setup: "",
     ans: [
-      { t: "Arterioles, decreasing afterload", ok: false },
-      { t: "Venous capacitance vessels, reducing venous return", ok: true },
-      { t: "Pulmonary arteries, reducing RV afterload", ok: false },
-      { t: "Coronary arteries exclusively", ok: false },
+      { t: "Arterioles, which lowers the afterload", ok: false },
+      { t: "Venous capacitance vessels, cutting venous return", ok: true },
+      { t: "Pulmonary arteries, lowering RV afterload", ok: false },
+      { t: "The coronary arteries and nothing else", ok: false },
     ],
     rationale: "At therapeutic doses, nitroglycerin preferentially dilates venous capacitance vessels, pooling blood in the venous system and reducing venous return (preload). This decreases wall stress and myocardial oxygen demand. (A) is wrong because arteriolar dilation is a higher-dose effect; the predominant low-dose effect is venodilation. (C) is wrong because pulmonary arterial dilation is secondary. (D) is wrong because while nitroglycerin dilates coronary arteries, the preload reduction is from systemic venodilation. Pearl: Avoid nitroglycerin in HOCM and severe aortic stenosis; these preload-dependent conditions worsen with reduced venous return.",
     scene: "pharmacology",
@@ -1051,10 +1051,10 @@ export const AP1_WK3_QUESTIONS = [
     prompt: "Hydralazine is commonly used in pregnancy-related hypertension because it:",  // source: deck 2, slide 43
     setup: "",
     ans: [
-      { t: "Crosses the placenta to lower fetal blood pressure", ok: false },
-      { t: "Is a direct arterial vasodilator with an established safety profile in pregnancy", ok: true },
-      { t: "Blocks angiotensin receptors without affecting the fetus", ok: false },
-      { t: "Inhibits catecholamine synthesis in the adrenal medulla", ok: false },
+      { t: "Crosses the placenta to lower fetal pressure", ok: false },
+      { t: "Is a direct arterial vasodilator long used safely in pregnancy", ok: true },
+      { t: "Blocks angiotensin receptors and spares the fetus", ok: false },
+      { t: "Inhibits adrenal medullary catecholamine synthesis", ok: false },
     ],
     rationale: "Hydralazine is a direct arteriolar vasodilator with a long history of safe use in pregnancy hypertension including preeclampsia. It effectively lowers blood pressure without the teratogenic risks of ACE inhibitors and ARBs. (A) is wrong because lowering fetal blood pressure is not the goal. (C) is wrong because hydralazine is not an ARB; ARBs are contraindicated in pregnancy. (D) is wrong because hydralazine does not affect catecholamine synthesis. Pearl: Reflex tachycardia and fluid retention are common side effects; prolonged use can cause drug-induced lupus, especially in slow acetylators.",
     scene: "pharmacology",
@@ -1090,9 +1090,9 @@ export const AP1_WK3_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Acute decompensated heart failure", ok: false },
-      { t: "Systemic hypertension", ok: true },
-      { t: "Acute pulmonary edema requiring urgent diuresis", ok: false },
-      { t: "Hyperkalemia in renal failure", ok: false },
+      { t: "Chronic systemic hypertension", ok: true },
+      { t: "Acute pulmonary edema needing diuresis", ok: false },
+      { t: "Hyperkalemia in established renal failure", ok: false },
     ],
     rationale: "Thiazide diuretics are first-line for systemic hypertension based on trials demonstrating reduction in cardiovascular events and mortality. (A) is wrong because acute heart failure requires loop diuretics (furosemide), which are more potent. (C) is wrong because acute pulmonary edema also requires loop diuretics. (D) is wrong because thiazides do not directly treat hyperkalemia; they can actually worsen hypokalemia. Pearl: In renal insufficiency (GFR below 30), thiazides become ineffective and loop diuretics are substituted; potassium-sparing diuretics and aldosterone antagonists (spironolactone) provide additional benefit in chronic heart failure.",
     scene: "pharmacology",
