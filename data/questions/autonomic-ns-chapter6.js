@@ -851,10 +851,10 @@ export const AUTONOMIC_NS_QUESTIONS = [
     prompt: "Why is the synthetic catecholamine Isoproterenol primarily utilized as a chronotropic agent in patients following a successful heart transplantation?",
     setup: "",
     ans: [
-      { t: "The divided sympathetic fibers prevent the heart from generating endogenous responses.", ok: true },
-      { t: "The divided parasympathetic fibers prevent the heart from generating endogenous responses.", ok: false },
-      { t: "The transplanted cardiac myocytes lack alpha-one receptors.", ok: false },
-      { t: "The transplanted cardiac myocytes lack beta-two receptors.", ok: false },
+      { t: "The divided sympathetic fibers block an endogenous chronotropic response.", ok: true },
+      { t: "The divided parasympathetic fibers block a chronotropic response entirely.", ok: false },
+      { t: "The transplanted cardiac myocytes entirely lack beta-one receptors.", ok: false },
+      { t: "The transplanted cardiac myocytes entirely lack alpha-one receptors.", ok: false },
     ],
     rationale: "Isoproterenol is used as a chronotropic agent after heart transplantation because those patients are unable to generate an endogenous sympathetic response, as the sympathetic fibers are divided when the native heart is removed.",
     metadata: { topic: "Isoproterenol", priority: "medium", category: "autonomic-ns", source: "node-6-chapter-6", tags: ["node-6", "chapter-6", "autonomic-ns", "isoproterenol", "transplant", "single-choice"] }

@@ -13,10 +13,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Which pressure gradient drives blood flow through the pulmonary circulation?",
     setup: "",
     ans: [
-      { t: "Mean pulmonary arterial pressure minus pulmonary venous pressure", ok: true },
-      { t: "Mean arterial pressure minus central venous pressure", ok: false },
-      { t: "Alveolar pressure minus atmospheric pressure", ok: false },
-      { t: "Pulmonary capillary wedge pressure minus left atrial pressure", ok: false },
+      { t: "Pulmonary arterial pressure minus pulmonary venous pressure", ok: true },
+      { t: "Systemic arterial pressure minus central venous pressure", ok: false },
+      { t: "Alveolar pressure minus atmospheric airway pressure", ok: false },
+      { t: "Capillary wedge pressure minus left atrial pressure", ok: false },
     ],
     rationale: "Pulmonary blood flow is driven by the gradient between mean pulmonary arterial pressure (~15 mmHg) and pulmonary venous pressure (~5 mmHg), yielding a low-resistance driving pressure of ~10 mmHg.",
     metadata: { topic: "Pulmonary Circulation", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["PVR", "pulmonary circulation", "hemodynamics"] }
@@ -45,10 +45,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "What is the PRIMARY stimulus for hypoxic pulmonary vasoconstriction (HPV)?",
     setup: "",
     ans: [
-      { t: "Low alveolar PO₂ (PAO₂)", ok: true },
-      { t: "Elevated arterial PCO₂", ok: false },
-      { t: "Decreased mixed venous PO₂ alone", ok: false },
-      { t: "Pulmonary arterial hypoxemia without alveolar hypoxia", ok: false },
+      { t: "Low alveolar oxygen tension (PAO₂)", ok: true },
+      { t: "Elevated arterial carbon dioxide tension", ok: false },
+      { t: "Decreased mixed venous oxygen tension alone", ok: false },
+      { t: "Arterial hypoxemia without any alveolar hypoxia", ok: false },
     ],
     rationale: "HPV is triggered primarily by low alveolar PO₂ (PAO₂ < ~70 mmHg). Mixed venous PO₂ also contributes but is secondary. HPV diverts blood away from poorly ventilated regions, optimizing V/Q matching.",
     metadata: { topic: "Hypoxic Pulmonary Vasoconstriction", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["HPV", "hypoxic pulmonary vasoconstriction", "V/Q"] }
@@ -61,10 +61,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Which inhaled anesthetic agent has the GREATEST inhibitory effect on hypoxic pulmonary vasoconstriction?",
     setup: "",
     ans: [
-      { t: "All potent volatile agents inhibit HPV to a similar degree at clinical concentrations", ok: true },
-      { t: "Halothane inhibits HPV far more than isoflurane or sevoflurane", ok: false },
-      { t: "Desflurane uniquely abolishes HPV at 0.5 MAC", ok: false },
-      { t: "Nitrous oxide selectively potentiates HPV", ok: false },
+      { t: "All potent volatile agents inhibit HPV to a similar degree", ok: true },
+      { t: "Halothane inhibits HPV far more than sevoflurane does", ok: false },
+      { t: "Desflurane uniquely abolishes all HPV at 0.5 MAC", ok: false },
+      { t: "Nitrous oxide selectively potentiates and augments HPV", ok: false },
     ],
     rationale: "At clinical doses (1 MAC), all potent volatile anesthetics inhibit HPV to a similar, modest degree (~50% inhibition). This is clinically relevant during one-lung ventilation. Nitrous oxide mildly increases PVR but does not potentiate HPV.",
     metadata: { topic: "Hypoxic Pulmonary Vasoconstriction", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["HPV", "volatile anesthetics", "one-lung ventilation"] }
@@ -77,10 +77,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "In West Zone 1 of the lung, blood flow is:",
     setup: "",
     ans: [
-      { t: "Absent because alveolar pressure exceeds both arterial and venous pressures", ok: true },
-      { t: "Greatest because gravity increases arterial pressure", ok: false },
-      { t: "Intermittent, occurring only during systole", ok: false },
-      { t: "Determined entirely by venous pressure exceeding alveolar pressure", ok: false },
+      { t: "Absent because alveolar pressure exceeds arterial and venous", ok: true },
+      { t: "Greatest because gravity raises local arterial pressure", ok: false },
+      { t: "Intermittent, occurring only during cardiac systole", ok: false },
+      { t: "Set entirely by venous pressure exceeding alveolar pressure", ok: false },
     ],
     rationale: "Zone 1 (apex): PA > Pa > Pv. Alveolar pressure exceeds capillary pressure, collapsing vessels and stopping flow. Zone 1 rarely exists in normal lungs (occurs when arterial pressure drops or alveolar pressure is raised, e.g., positive pressure ventilation).",
     metadata: { topic: "West Lung Zones", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["West zones", "pulmonary circulation", "blood flow"] }
@@ -93,10 +93,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "In West Zone 2, blood flow is determined by:",
     setup: "",
     ans: [
-      { t: "Arterial minus alveolar pressure (Pa − PA)", ok: true },
-      { t: "Arterial minus venous pressure (Pa − Pv)", ok: false },
-      { t: "Venous minus alveolar pressure (Pv − PA)", ok: false },
-      { t: "Alveolar pressure alone", ok: false },
+      { t: "Arterial minus alveolar pressure (Pa to PA)", ok: true },
+      { t: "Arterial minus venous pressure (Pa to Pv)", ok: false },
+      { t: "Venous minus alveolar pressure (Pv to PA)", ok: false },
+      { t: "Alveolar pressure acting all by itself", ok: false },
     ],
     rationale: "Zone 2 (middle): Pa > PA > Pv. Flow is determined by the arterial–alveolar pressure difference, acting as a Starling resistor. Flow increases toward the base as gravitational arterial pressure increases.",
     metadata: { topic: "West Lung Zones", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["West zones", "Starling resistor", "blood flow"] }
@@ -109,10 +109,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "West Zone 3 of the lung is characterized by:",
     setup: "",
     ans: [
-      { t: "Pa > Pv > PA — flow determined by arteriovenous pressure gradient", ok: true },
-      { t: "PA > Pa > Pv — no blood flow", ok: false },
-      { t: "Pa > PA > Pv — flow driven by arterial-alveolar gradient", ok: false },
-      { t: "Pv > PA > Pa — retrograde flow", ok: false },
+      { t: "Pa > Pv > PA, flow set by arteriovenous pressure gradient", ok: true },
+      { t: "PA > Pa > Pv, so there is no blood flow at all", ok: false },
+      { t: "Pa > PA > Pv, flow set by arterial to alveolar gradient", ok: false },
+      { t: "Pv > PA > Pa, producing retrograde capillary flow", ok: false },
     ],
     rationale: "Zone 3 (base): Pa > Pv > PA. Both pressures exceed alveolar pressure, so flow is determined by the standard arteriovenous gradient (Pa − Pv). This zone has the greatest blood flow.",
     metadata: { topic: "West Lung Zones", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["West zones", "blood flow"] }
@@ -125,10 +125,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "The oxyhemoglobin dissociation curve shifts to the RIGHT in response to:",
     setup: "",
     ans: [
-      { t: "Increased temperature, increased PCO₂, decreased pH, increased 2,3-DPG", ok: true },
-      { t: "Decreased temperature, decreased PCO₂, increased pH, fetal hemoglobin", ok: false },
-      { t: "Carbon monoxide binding to hemoglobin", ok: false },
-      { t: "Methemoglobin formation", ok: false },
+      { t: "Higher temperature, higher PCO₂, lower pH, higher 2,3-DPG", ok: true },
+      { t: "Lower temperature, lower PCO₂, higher pH, fetal hemoglobin", ok: false },
+      { t: "Carbon monoxide binding tightly to the hemoglobin molecule", ok: false },
+      { t: "Formation of methemoglobin within circulating red cells", ok: false },
     ],
     rationale: "A rightward shift (increased P50) means hemoglobin releases O₂ more readily. Causes: ↑temp, ↑PCO₂, ↓pH (acidosis), ↑2,3-DPG. Mnemonic: CADET faces right — CO₂, Acid, 2,3-DPG, Exercise, Temperature.",
     metadata: { topic: "Oxyhemoglobin Dissociation Curve", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["oxyhemoglobin", "P50", "Bohr effect", "2,3-DPG"] }
@@ -157,10 +157,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Pulse oximetry may give a FALSELY HIGH SpO₂ reading in the presence of:",
     setup: "",
     ans: [
-      { t: "Carboxyhemoglobin (COHb)", ok: true },
+      { t: "Carboxyhemoglobin (COHb) in the blood", ok: true },
       { t: "Methemoglobin at high concentrations", ok: false },
       { t: "Severe anemia (hemoglobin 5 g/dL)", ok: false },
-      { t: "Nail polish", ok: false },
+      { t: "Dark blue nail polish on the finger", ok: false },
     ],
     rationale: "Standard pulse oximeters use two wavelengths (660 nm, 940 nm) and cannot distinguish COHb from OxyHb — both absorb similarly at 660 nm. COHb reads as ~90% SpO₂ regardless of true saturation. Methemoglobin drives SpO₂ toward 85% (not falsely high). Anemia affects signal strength but not saturation reading per se.",
     metadata: { topic: "Pulse Oximetry", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["pulse oximetry", "SpO2", "carboxyhemoglobin", "COHb"] }
@@ -205,10 +205,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "At high altitude, PaO₂ decreases primarily because of:",
     setup: "",
     ans: [
-      { t: "Decreased barometric pressure reducing the partial pressure of inspired oxygen", ok: true },
-      { t: "Increased FiO₂ consumption by pulmonary tissues", ok: false },
-      { t: "Increased alveolar CO₂ from altitude-induced hypoventilation", ok: false },
-      { t: "Increased V/Q mismatch from pulmonary vasoconstriction", ok: false },
+      { t: "Lower barometric pressure cutting inspired oxygen tension", ok: true },
+      { t: "Greater oxygen consumption by the pulmonary tissues", ok: false },
+      { t: "Higher alveolar CO₂ from altitude-driven hypoventilation", ok: false },
+      { t: "Worse V/Q mismatch from diffuse pulmonary vasoconstriction", ok: false },
     ],
     rationale: "At altitude, barometric pressure falls while FiO₂ remains 21%. The reduced inspired PO₂ (PiO₂ = FiO₂ × Patm) lowers PAO₂ and thus PaO₂. Hyperventilation actually decreases PaCO₂, partially compensating via the alveolar gas equation.",
     metadata: { topic: "Altitude Physiology", priority: "medium", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["altitude", "barometric pressure", "PaO2"] }
@@ -285,10 +285,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "The P/F ratio (PaO₂/FiO₂) threshold for ARDS is:",
     setup: "",
     ans: [
-      { t: "≤ 300 mmHg (mild), ≤ 200 mmHg (moderate), ≤ 100 mmHg (severe)", ok: true },
-      { t: "≤ 400 mmHg for any severity", ok: false },
-      { t: "≤ 200 mmHg (mild), ≤ 100 mmHg (moderate/severe)", ok: false },
-      { t: "< 60 mmHg regardless of FiO₂", ok: false },
+      { t: "300 mild, 200 moderate, 100 severe (mmHg)", ok: true },
+      { t: "At or below 400 mmHg for any severity", ok: false },
+      { t: "200 mild, 100 moderate to severe (mmHg)", ok: false },
+      { t: "Below 60 mmHg regardless of the FiO₂", ok: false },
     ],
     rationale: "Berlin ARDS criteria: mild P/F ≤ 300, moderate P/F ≤ 200, severe P/F ≤ 100 — all with PEEP ≥ 5 cmH₂O. Normal P/F ratio is ~500 mmHg (PaO₂ 100/FiO₂ 0.21 ≈ 476).",
     metadata: { topic: "P/F Ratio", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["P/F ratio", "ARDS", "Berlin criteria"] }
@@ -317,10 +317,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "The Haldane effect describes:",
     setup: "",
     ans: [
-      { t: "Deoxygenated hemoglobin carries more CO₂ than oxygenated hemoglobin", ok: true },
-      { t: "CO₂ shifts the oxyhemoglobin dissociation curve to the right", ok: false },
-      { t: "Increased CO₂ production at altitude", ok: false },
-      { t: "Inhibition of carbonic anhydrase by CO", ok: false },
+      { t: "Deoxygenated hemoglobin carries more CO₂ than oxygenated", ok: true },
+      { t: "Carbon dioxide shifts the oxyhemoglobin curve to the right", ok: false },
+      { t: "Increased CO₂ production occurring at high altitude", ok: false },
+      { t: "Inhibition of red cell carbonic anhydrase by carbon monoxide", ok: false },
     ],
     rationale: "The Haldane effect: deoxy-Hb binds CO₂ (as carbaminohemoglobin) more avidly than oxy-Hb. In tissues, as Hb unloads O₂ it picks up more CO₂. In lungs, O₂ loading displaces CO₂. The Bohr effect is the opposite relationship (CO₂/pH shifts the O₂ curve).",
     metadata: { topic: "CO2 Transport", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["Haldane effect", "CO2 transport", "carbaminohemoglobin"] }
@@ -333,10 +333,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Hypercapnia (↑PaCO₂) causes which cardiovascular effect?",
     setup: "",
     ans: [
-      { t: "Increased sympathetic tone leading to hypertension and tachycardia", ok: true },
-      { t: "Direct myocardial depression with bradycardia", ok: false },
-      { t: "Pulmonary vasodilation", ok: false },
-      { t: "Peripheral vasoconstriction without change in HR", ok: false },
+      { t: "Increased sympathetic tone causing hypertension and tachycardia", ok: true },
+      { t: "Direct myocardial depression together with bradycardia", ok: false },
+      { t: "Pulmonary vasodilation lowering pulmonary artery pressure", ok: false },
+      { t: "Peripheral vasoconstriction with no change in heart rate", ok: false },
     ],
     rationale: "Hypercapnia stimulates the SNS, causing catecholamine release → tachycardia, hypertension, and increased cardiac output. Simultaneously, CO₂ is a direct cerebral and coronary vasodilator. Pulmonary vasoconstriction (not dilation) also occurs with hypercapnia.",
     metadata: { topic: "Hypercapnia Effects", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["hypercapnia", "CO2", "cardiovascular effects", "sympathetic"] }
@@ -349,10 +349,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Anatomical dead space in a 70 kg adult is approximately:",
     setup: "",
     ans: [
-      { t: "150 mL (roughly 2.2 mL/kg)", ok: true },
-      { t: "500 mL (equal to tidal volume)", ok: false },
-      { t: "50 mL", ok: false },
-      { t: "300 mL", ok: false },
+      { t: "About 150 mL, roughly 2.2 mL/kg", ok: true },
+      { t: "About 500 mL, equal to tidal volume", ok: false },
+      { t: "About 50 mL of conducting airway", ok: false },
+      { t: "About 300 mL of conducting airway", ok: false },
     ],
     rationale: "Anatomical dead space comprises the conducting airways (trachea to terminal bronchioles) — approximately 1 mL/pound (2.2 mL/kg) or ~150 mL in a 70 kg adult. Physiologic dead space = anatomical + alveolar dead space, assessed by the Bohr equation.",
     metadata: { topic: "Dead Space", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["dead space", "anatomical dead space", "tidal volume"] }
@@ -365,10 +365,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "The Bohr equation estimates:",
     setup: "",
     ans: [
-      { t: "Physiologic dead space (VD/VT ratio)", ok: true },
-      { t: "Shunt fraction (Qs/Qt)", ok: false },
-      { t: "Oxygen consumption via Fick principle", ok: false },
-      { t: "Alveolar PO₂", ok: false },
+      { t: "Physiologic dead space (the VD/VT ratio)", ok: true },
+      { t: "Intrapulmonary shunt fraction (Qs/Qt)", ok: false },
+      { t: "Oxygen consumption via the Fick principle", ok: false },
+      { t: "Ideal alveolar oxygen tension (PAO₂)", ok: false },
     ],
     rationale: "Bohr equation: VD/VT = (PaCO₂ − PeCO₂) / PaCO₂. It calculates the fraction of tidal volume that is dead space (does not participate in gas exchange). Normal VD/VT ≈ 0.33.",
     metadata: { topic: "Dead Space", priority: "medium", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["Bohr equation", "dead space", "VD/VT"] }
@@ -381,10 +381,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Central chemoreceptors located in the medulla primarily respond to:",
     setup: "",
     ans: [
-      { t: "Changes in CSF pH (driven by CO₂ diffusion across the blood-brain barrier)", ok: true },
-      { t: "Arterial PO₂ levels below 60 mmHg", ok: false },
-      { t: "Peripheral carotid body input exclusively", ok: false },
-      { t: "Direct CO₂ detection without pH change", ok: false },
+      { t: "CSF pH changes driven by CO₂ crossing the blood brain barrier", ok: true },
+      { t: "Arterial oxygen tension once it drops below 60 mmHg", ok: false },
+      { t: "Input from the peripheral carotid bodies exclusively", ok: false },
+      { t: "Direct carbon dioxide sensing with no change in pH", ok: false },
     ],
     rationale: "Central chemoreceptors sense CSF pH. CO₂ rapidly crosses the blood-brain barrier and combines with water to form H⁺ and HCO₃⁻, lowering CSF pH. They do NOT respond to hypoxemia. They account for ~80% of the ventilatory response to CO₂.",
     metadata: { topic: "Chemoreceptors", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["chemoreceptors", "central", "medulla", "CO2", "CSF pH"] }
@@ -397,10 +397,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Peripheral chemoreceptors (carotid and aortic bodies) primarily respond to:",
     setup: "",
     ans: [
-      { t: "Arterial hypoxemia (PaO₂ < 60 mmHg), hypercapnia, and acidosis", ok: true },
-      { t: "CSF pH changes only", ok: false },
-      { t: "PaO₂ < 100 mmHg", ok: false },
-      { t: "Changes in hemoglobin oxygen saturation", ok: false },
+      { t: "Low arterial PaO₂, hypercapnia, and arterial acidosis", ok: true },
+      { t: "Changes in cerebrospinal fluid pH only, nothing else", ok: false },
+      { t: "Arterial oxygen tension once it drops below 100 mmHg", ok: false },
+      { t: "Changes in hemoglobin oxygen saturation by itself", ok: false },
     ],
     rationale: "Carotid bodies (CN IX) and aortic bodies (CN X) sense PaO₂, PaCO₂, and pH. The hypoxic ventilatory response is steep below PaO₂ 60 mmHg. Carotid bodies are the dominant peripheral sensors. Note: they sense PO₂, not SaO₂ — anemia doesn't stimulate them.",
     metadata: { topic: "Chemoreceptors", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["chemoreceptors", "peripheral", "carotid body", "hypoxia"] }
@@ -429,10 +429,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Volatile anesthetic agents affect ventilation control by:",
     setup: "",
     ans: [
-      { t: "Dose-dependent depression of CO₂ and hypoxic ventilatory responses", ok: true },
-      { t: "Selective blunting of the hypercapnic drive only", ok: false },
+      { t: "Dose-dependent depression of CO₂ and hypoxic responses", ok: true },
+      { t: "Selective blunting of only the hypercapnic drive", ok: false },
       { t: "Stimulation of central chemoreceptors below 0.5 MAC", ok: false },
-      { t: "Preserving hypoxic ventilatory response at all clinical concentrations", ok: false },
+      { t: "Full preservation of hypoxic response at clinical doses", ok: false },
     ],
     rationale: "Volatile agents cause dose-dependent respiratory depression, blunting both central CO₂ response and peripheral hypoxic drive (carotid bodies). Even subanesthetic concentrations (~0.1 MAC) markedly blunt the hypoxic ventilatory response. This is clinically important in the post-anesthesia care unit.",
     metadata: { topic: "Ventilation Control", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["volatile anesthetics", "respiratory depression", "hypoxic drive", "ventilatory response"] }
@@ -477,10 +477,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Which condition causes a LEFT shift of the oxyhemoglobin dissociation curve, INCREASING hemoglobin's affinity for oxygen?",
     setup: "",
     ans: [
-      { t: "Fetal hemoglobin (HbF)", ok: true },
-      { t: "High altitude acclimatization", ok: false },
-      { t: "Stored packed red blood cells (↑2,3-DPG depletion)", ok: false },
-      { t: "Sickle cell disease", ok: false },
+      { t: "Fetal hemoglobin (HbF) in the circulation", ok: true },
+      { t: "Long-term high altitude acclimatization", ok: false },
+      { t: "Stored packed red cells depleted of 2,3-DPG", ok: false },
+      { t: "Acute sickle cell vaso-occlusive crisis", ok: false },
     ],
     rationale: "Left shifts (↑O₂ affinity, ↓P50) occur with: HbF, hypothermia, alkalosis, ↓CO₂, ↓2,3-DPG (stored blood). HbF's left shift facilitates O₂ transfer from mother to fetus across the placenta. Stored blood has ↓2,3-DPG causing a left shift, which can impair O₂ delivery.",
     metadata: { topic: "Oxyhemoglobin Dissociation Curve", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["oxyhemoglobin", "left shift", "fetal hemoglobin", "2,3-DPG"] }
@@ -493,10 +493,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "The respiratory quotient (R) used in the alveolar gas equation reflects:",
     setup: "",
     ans: [
-      { t: "The ratio of CO₂ produced to O₂ consumed (VCO₂/VO₂)", ok: true },
-      { t: "The ratio of dead space to tidal volume", ok: false },
-      { t: "The fraction of alveolar O₂ that diffuses into the blood", ok: false },
-      { t: "The ratio of PaCO₂ to PaO₂", ok: false },
+      { t: "Ratio of CO₂ produced to O₂ consumed (VCO₂/VO₂)", ok: true },
+      { t: "Ratio of dead space to total tidal volume", ok: false },
+      { t: "Fraction of alveolar O₂ that diffuses into blood", ok: false },
+      { t: "Ratio of arterial PaCO₂ to arterial PaO₂", ok: false },
     ],
     rationale: "R (respiratory quotient) = VCO₂/VO₂. Normal value is 0.8 on a mixed diet. Pure carbohydrate metabolism gives R = 1.0; pure fat metabolism gives R = 0.7. R is used in the alveolar gas equation to correct for the CO₂ replaced by O₂ in alveoli.",
     metadata: { topic: "Alveolar Gas Equation", priority: "medium", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["respiratory quotient", "R value", "alveolar gas equation", "VCO2/VO2"] }
@@ -509,10 +509,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Carbon monoxide poisoning causes cellular hypoxia PRIMARILY because:",
     setup: "",
     ans: [
-      { t: "COHb cannot carry O₂ AND CO shifts the oxyhemoglobin curve left, impairing O₂ release", ok: true },
-      { t: "CO directly inhibits carbonic anhydrase", ok: false },
-      { t: "CO causes severe pulmonary edema", ok: false },
-      { t: "CO stimulates HPV, reducing pulmonary blood flow", ok: false },
+      { t: "COHb cannot carry O₂ and a left shift blocks O₂ release", ok: true },
+      { t: "Carbon monoxide directly inhibits carbonic anhydrase", ok: false },
+      { t: "Carbon monoxide causes severe acute pulmonary edema", ok: false },
+      { t: "Carbon monoxide triggers HPV, cutting pulmonary flow", ok: false },
     ],
     rationale: "CO has ~240× higher affinity for Hb than O₂, forming COHb that cannot carry O₂. Additionally, CO causes a left shift (increased O₂ affinity) of remaining oxy-Hb, impairing O₂ unloading at tissues. CO also inhibits cytochrome c oxidase (complex IV), causing cellular asphyxia.",
     metadata: { topic: "Oxyhemoglobin Dissociation Curve", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["carbon monoxide", "COHb", "left shift", "cellular hypoxia"] }
@@ -525,10 +525,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Which statement about V/Q mismatch is CORRECT?",
     setup: "",
     ans: [
-      { t: "Low V/Q regions cause hypoxemia that responds to supplemental O₂; high V/Q regions cause hypercapnia", ok: true },
-      { t: "Low V/Q regions cause hypercapnia; high V/Q regions cause hypoxemia", ok: false },
-      { t: "Both low and high V/Q mismatch produce hypoxemia resistant to O₂ supplementation", ok: false },
-      { t: "V/Q mismatch cannot be detected by an elevated A-a gradient", ok: false },
+      { t: "Low V/Q causes O₂-responsive hypoxemia; high V/Q causes hypercapnia", ok: true },
+      { t: "Low V/Q causes hypercapnia; high V/Q causes the hypoxemia", ok: false },
+      { t: "Both low and high V/Q give hypoxemia resistant to oxygen", ok: false },
+      { t: "V/Q mismatch never shows up as a widened A-a gradient", ok: false },
     ],
     rationale: "Low V/Q (perfusion > ventilation): poorly ventilated alveoli produce low-O₂, high-CO₂ blood → hypoxemia with widened A-a gradient (responds to O₂). High V/Q (ventilation > perfusion): dead space effect → CO₂ retention. Both cause widened A-a gradient.",
     metadata: { topic: "V/Q Mismatch", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["V/Q mismatch", "hypoxemia", "A-a gradient", "supplemental oxygen"] }
@@ -541,10 +541,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "Pulmonary surfactant reduces surface tension in alveoli by:",
     setup: "",
     ans: [
-      { t: "Reducing the work of breathing and preventing alveolar collapse (atelectasis)", ok: true },
-      { t: "Increasing alveolar radius to obey Laplace's Law", ok: false },
-      { t: "Inhibiting carbonic anhydrase in alveolar type II cells", ok: false },
-      { t: "Binding to alveolar macrophages to stimulate O₂ production", ok: false },
+      { t: "Lowering work of breathing and preventing alveolar collapse", ok: true },
+      { t: "Raising alveolar radius to satisfy the law of Laplace", ok: false },
+      { t: "Blocking carbonic anhydrase in alveolar type II cells", ok: false },
+      { t: "Binding alveolar macrophages to drive oxygen production", ok: false },
     ],
     rationale: "Surfactant (dipalmitoylphosphatidylcholine, DPPC) reduces surface tension, lowering the pressure needed to maintain alveolar patency (Laplace's Law: P = 2T/r). By reducing T more in smaller alveoli, surfactant stabilizes alveoli of different sizes and prevents collapse.",
     metadata: { topic: "Pulmonary Mechanics", priority: "medium", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["surfactant", "atelectasis", "Laplace law", "surface tension"] }
@@ -621,10 +621,10 @@ export const PULMONARY_QUESTIONS = [
     prompt: "During one-lung ventilation (OLV), arterial hypoxemia is MOST commonly caused by:",
     setup: "",
     ans: [
-      { t: "Shunt through the non-ventilated (operative) lung receiving continued perfusion", ok: true },
-      { t: "Absolute dead space from the ventilated lung", ok: false },
-      { t: "Bronchoconstriction in the dependent (ventilated) lung", ok: false },
-      { t: "Diffusion impairment in the dependent lung", ok: false },
+      { t: "Continued perfusion of the non-ventilated operative lung", ok: true },
+      { t: "Absolute dead space arising from the ventilated lung", ok: false },
+      { t: "Bronchoconstriction in the dependent ventilated lung", ok: false },
+      { t: "Diffusion impairment within the dependent lower lung", ok: false },
     ],
     rationale: "During OLV, the non-ventilated (operative/nondependent) lung continues to receive ~50% of pulmonary blood flow, creating a large obligatory shunt. HPV partially compensates by diverting blood toward the ventilated lung. Volatile agents reduce HPV, worsening hypoxemia.",
     metadata: { topic: "V/Q Mismatch", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["one-lung ventilation", "OLV", "shunt", "HPV"] }
@@ -638,9 +638,9 @@ export const PULMONARY_QUESTIONS = [
     setup: "",
     ans: [
       { t: "(Hb × SaO₂ × 1.34) + (0.003 × PaO₂)", ok: true },
-      { t: "SaO₂ × PaO₂ / 100", ok: false },
-      { t: "Hb × 1.34 only", ok: false },
-      { t: "(PaO₂ × 0.003) / SaO₂", ok: false },
+      { t: "(SaO₂ × PaO₂) divided by exactly 100", ok: false },
+      { t: "Hb × 1.34, ignoring dissolved oxygen", ok: false },
+      { t: "(PaO₂ × 0.003) divided by SaO₂", ok: false },
     ],
     rationale: "CaO₂ (mL O₂/dL) = (Hb × SaO₂ × 1.34) + (0.003 × PaO₂). The 1.34 mL O₂/g Hb represents the carrying capacity of hemoglobin. The dissolved fraction (0.003 × PaO₂) is small at normal PaO₂ but becomes significant with hyperbaric O₂.",
     metadata: { topic: "Fick Equation", priority: "high", category: "pulmonary-physiology", source: "node-5-chapter-5", tags: ["oxygen content", "CaO2", "hemoglobin", "Fick"] }

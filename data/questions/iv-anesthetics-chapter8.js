@@ -520,10 +520,10 @@ export const IV_ANESTHETICS_QUESTIONS = [
     prompt: "By what exact mechanism does an induction dose of propofol decrease a patient's total minute ventilation?",
     setup: "",
     ans: [
-      { t: "It decreases the tidal volume and respiratory rate.", ok: true },
-      { t: "It increases the tidal volume and respiratory rate.", ok: false },
-      { t: "It halts the resting respiratory system.", ok: false },
-      { t: "It paralyzes the diaphragm.", ok: false },
+      { t: "It decreases both the tidal volume and the respiratory rate.", ok: true },
+      { t: "It increases both the tidal volume and the respiratory rate.", ok: false },
+      { t: "It halts resting drive while sparing the tidal volume fully.", ok: false },
+      { t: "It paralyzes the diaphragm while raising the airway pressure.", ok: false },
     ],
     rationale: "Propofol decreases minute ventilation by reducing both tidal volume and respiratory rate.",
     metadata: { topic: "Propofol", priority: "medium", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["node-8", "chapter-8", "iv-anesthetics", "propofol", "respiratory", "single-choice"] }
@@ -1441,10 +1441,10 @@ export const IV_ANESTHETICS_QUESTIONS = [
     prompt: "In a patient with depleted sympathetic reserves, administration of ketamine may result in which unexpected hemodynamic effect?",
     setup: "",
     ans: [
-      { t: "Myocardial depression and hypotension", ok: true },
-      { t: "Severe hypertension", ok: false },
-      { t: "Reflex bradycardia", ok: false },
-      { t: "Increased systemic vascular resistance", ok: false },
+      { t: "Myocardial depression with profound hypotension", ok: true },
+      { t: "Severe hypertension from sympathetic surge", ok: false },
+      { t: "Reflex bradycardia from baroreceptor reflex", ok: false },
+      { t: "Increased systemic vascular resistance overall", ok: false },
     ],
     rationale: "Ketamine typically increases cardiovascular parameters via sympathetic stimulation, but in catecholamine-depleted states, its direct myocardial depressant effects may predominate.",
     metadata: { topic: "Ketamine", priority: "high", category: "iv-anesthetics", source: "node-8-chapter-8", tags: ["node-8", "chapter-8", "iv-anesthetics", "ketamine", "cardiovascular", "high-yield", "single-choice"] }

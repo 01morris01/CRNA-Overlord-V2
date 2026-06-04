@@ -464,8 +464,8 @@ export const CARDIAC_QUESTIONS = [
     ans: [
       { t: "Arterial diastolic pressure minus LVEDP.", ok: true },
       { t: "Arterial systolic pressure minus LVEDP.", ok: false },
-      { t: "MAP minus CVP.", ok: false },
-      { t: "MAP minus LVEDP.", ok: false },
+      { t: "Mean arterial pressure minus the CVP.", ok: false },
+      { t: "Pulmonary artery pressure minus CVP.", ok: false },
     ],
     rationale: "CPP equals arterial diastolic pressure minus left ventricular end-diastolic pressure.",
     metadata: { topic: "Coronary Perfusion Pressure", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "coronary perfusion pressure", "equations"] }
@@ -478,10 +478,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "During which phase is the left ventricle predominantly perfused?",
     setup: "",
     ans: [
-      { t: "Diastole.", ok: true },
-      { t: "Systole.", ok: false },
-      { t: "Both systole and diastole equally.", ok: false },
-      { t: "Late systole only.", ok: false },
+      { t: "Mainly during diastole.", ok: true },
+      { t: "Mainly during systole.", ok: false },
+      { t: "Equally in both phases.", ok: false },
+      { t: "Only during late systole.", ok: false },
     ],
     rationale: "Left ventricular perfusion occurs mainly during diastole because systolic wall tension limits subendocardial flow.",
     metadata: { topic: "LV vs RV Perfusion Timing", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "coronary perfusion", "diastole"] }
@@ -494,10 +494,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "During which phase is the right ventricle perfused?",
     setup: "",
     ans: [
-      { t: "During both systole and diastole.", ok: true },
-      { t: "Diastole only.", ok: false },
-      { t: "Systole only.", ok: false },
-      { t: "Early systole only.", ok: false },
+      { t: "During systole and diastole.", ok: true },
+      { t: "During diastole only.", ok: false },
+      { t: "During systole only.", ok: false },
+      { t: "During early systole only.", ok: false },
     ],
     rationale: "Because RV intramural pressure is lower, perfusion occurs during both systole and diastole.",
     metadata: { topic: "LV vs RV Perfusion Timing", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "coronary perfusion", "right ventricle"] }
@@ -526,10 +526,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Because the heart already extracts a high amount of oxygen at rest, how does it primarily meet increased oxygen demand?",
     setup: "",
     ans: [
-      { t: "By vasodilation to increase blood flow.", ok: true },
-      { t: "By vasoconstriction to increase blood pressure.", ok: false },
-      { t: "By extracting much more oxygen per hemoglobin.", ok: false },
-      { t: "By reducing heart rate.", ok: false },
+      { t: "By vasodilating to raise coronary flow.", ok: true },
+      { t: "By vasoconstricting to raise pressure.", ok: false },
+      { t: "By extracting far more oxygen per cell.", ok: false },
+      { t: "By slowing the heart rate markedly.", ok: false },
     ],
     rationale: "The heart meets increased oxygen demand mainly by increasing coronary blood flow through vasodilation.",
     metadata: { topic: "Oxygen Extraction by the Heart", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "coronary blood flow", "oxygen supply-demand"] }
@@ -645,10 +645,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Which invasive monitoring device can be used to obtain SVR?",
     setup: "",
     ans: [
-      { t: "Pulmonary artery catheter.", ok: true },
-      { t: "Peripheral IV line.", ok: false },
-      { t: "Noninvasive blood pressure cuff.", ok: false },
-      { t: "ECG strip.", ok: false },
+      { t: "A pulmonary artery catheter.", ok: true },
+      { t: "A peripheral IV line only.", ok: false },
+      { t: "A noninvasive pressure cuff.", ok: false },
+      { t: "A single ECG rhythm strip.", ok: false },
     ],
     rationale: "A pulmonary artery catheter can be used to obtain the measurements needed for SVR.",
     metadata: { topic: "MAP and SVR Equations", priority: "medium", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "SVR", "monitoring"] }
@@ -698,10 +698,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Hyperdynamic states such as sepsis and liver failure usually present with which profile?",
     setup: "",
     ans: [
-      { t: "Decreased systemic blood pressure and possible confusion that low SVR is the only issue.", ok: true },
-      { t: "Increased systemic blood pressure and isolated high SVR.", ok: false },
-      { t: "Profound bradycardia with high SVR.", ok: false },
-      { t: "Profound hypertension with low CO.", ok: false },
+      { t: "Low blood pressure that may hide more than just a low SVR problem.", ok: true },
+      { t: "High blood pressure that reflects an isolated high SVR problem.", ok: false },
+      { t: "Profound bradycardia paired with a markedly high SVR problem.", ok: false },
+      { t: "Profound hypertension paired with a very low cardiac output.", ok: false },
     ],
     rationale: "These states often have low blood pressure and may mislead clinicians into assuming the problem is only low SVR.",
     metadata: { topic: "Hypotension", priority: "medium", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "hemodynamics", "sepsis", "liver failure"] }
@@ -890,10 +890,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "What happens with extreme bradycardia in a patient with a stiff ventricle?",
     setup: "",
     ans: [
-      { t: "Cardiac output becomes inadequate because it is highly heart-rate dependent.", ok: true },
-      { t: "Cardiac output becomes excessive because stroke volume rises massively.", ok: false },
-      { t: "SVR falls profoundly.", ok: false },
-      { t: "Action potentials accelerate.", ok: false },
+      { t: "Cardiac output drops because it is highly heart-rate dependent.", ok: true },
+      { t: "Cardiac output soars because stroke volume rises tremendously.", ok: false },
+      { t: "Systemic vascular resistance collapses to near zero rapidly.", ok: false },
+      { t: "Conduction speeds and action potentials fire much faster.", ok: false },
     ],
     rationale: "In a stiff ventricle, extreme bradycardia may not be compensated by filling and can reduce cardiac output.",
     metadata: { topic: "Cardiac Output", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "bradycardia", "cardiac output", "diastolic dysfunction"] }
@@ -906,10 +906,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "How does extreme tachycardia affect ventricular hemodynamics and cardiac output?",
     setup: "",
     ans: [
-      { t: "It shortens filling time, lowering cardiac output and causing hypotension.", ok: true },
-      { t: "It increases filling time, raising cardiac output and causing hypertension.", ok: false },
-      { t: "It raises stroke volume without affecting blood pressure.", ok: false },
-      { t: "It lowers SVR while maintaining cardiac output.", ok: false },
+      { t: "It cuts filling time, lowering output and causing hypotension.", ok: true },
+      { t: "It adds filling time, raising output and causing hypertension.", ok: false },
+      { t: "It raises stroke volume with no change in blood pressure.", ok: false },
+      { t: "It lowers SVR yet keeps cardiac output fully maintained.", ok: false },
     ],
     rationale: "Very rapid heart rate reduces diastolic filling time and can decrease cardiac output.",
     metadata: { topic: "Cardiac Output", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "tachycardia", "cardiac output", "hypotension"] }
@@ -995,10 +995,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Central venous pressure correlates with left-sided filling pressures only under which conditions?",
     setup: "",
     ans: [
-      { t: "When there is no pulmonary disease and cardiac function is normal.", ok: true },
-      { t: "When severe pulmonary disease is present and cardiac function is poor.", ok: false },
-      { t: "Only under deep general anesthesia.", ok: false },
-      { t: "Only with severe pulmonary hypertension.", ok: false },
+      { t: "When there is no lung disease and cardiac function is normal.", ok: true },
+      { t: "When severe lung disease exists and cardiac function is poor.", ok: false },
+      { t: "Only when the patient is under deep general anesthesia today.", ok: false },
+      { t: "Only when severe pulmonary hypertension is clearly present.", ok: false },
     ],
     rationale: "CVP correlates better with left-sided filling when pulmonary disease is absent and cardiac function is normal.",
     metadata: { topic: "CVP, PAD, PCWP, LA Pressure", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "CVP", "filling pressures"] }
@@ -1043,10 +1043,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "What can happen when a stiff left ventricle is filled to a normal volume?",
     setup: "",
     ans: [
-      { t: "Intracardiac and pulmonary capillary pressures may rise excessively.", ok: true },
-      { t: "Intracardiac and pulmonary capillary pressures may fall excessively.", ok: false },
-      { t: "Heart rate rises without pressure change.", ok: false },
-      { t: "Heart rate falls without pressure change.", ok: false },
+      { t: "Intracardiac and pulmonary capillary pressures may rise sharply.", ok: true },
+      { t: "Intracardiac and pulmonary capillary pressures may fall sharply.", ok: false },
+      { t: "Heart rate climbs sharply while filling pressures stay flat.", ok: false },
+      { t: "Heart rate drops sharply while filling pressures stay flat.", ok: false },
     ],
     rationale: "A poorly compliant ventricle can generate abnormally high filling pressures for a given volume.",
     metadata: { topic: "Ventricular Compliance", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "ventricular compliance", "diastolic dysfunction"] }
@@ -1059,10 +1059,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "How is the Frank-Starling mechanism defined?",
     setup: "",
     ans: [
-      { t: "The heart changes force of contraction and stroke volume in response to venous return.", ok: true },
-      { t: "The heart changes chronotropic rate in response to venous return.", ok: false },
-      { t: "The heart changes electrical conductivity in response to venous return.", ok: false },
-      { t: "The heart changes valve function in response to venous return.", ok: false },
+      { t: "The heart varies contraction force and stroke volume with venous return.", ok: true },
+      { t: "The heart varies its chronotropic firing rate purely with venous return.", ok: false },
+      { t: "The heart varies its electrical conduction velocity with venous return.", ok: false },
+      { t: "The heart varies valve opening and closing behavior with venous return.", ok: false },
     ],
     rationale: "Frank-Starling describes how increased venous return can increase stroke volume via increased stretch.",
     metadata: { topic: "Frank-Starling Mechanism", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "Frank-Starling", "stroke volume"] }
@@ -1075,10 +1075,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "What happens immediately to cardiac output when a healthy person stands up?",
     setup: "",
     ans: [
-      { t: "Cardiac output falls because CVP falls and stroke volume decreases.", ok: true },
-      { t: "Cardiac output rises because CVP rises and stroke volume increases.", ok: false },
-      { t: "Cardiac output remains unchanged.", ok: false },
-      { t: "Cardiac output falls because CVP rises and stroke volume decreases.", ok: false },
+      { t: "It falls because CVP drops and stroke volume decreases.", ok: true },
+      { t: "It rises because CVP climbs and stroke volume increases.", ok: false },
+      { t: "It holds steady with no meaningful change at all initially.", ok: false },
+      { t: "It falls because CVP climbs and stroke volume decreases.", ok: false },
     ],
     rationale: "Standing reduces venous return and CVP, which lowers stroke volume and cardiac output initially.",
     metadata: { topic: "Frank-Starling Mechanism", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "Frank-Starling", "venous return"] }
@@ -1160,10 +1160,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Why do tension pneumothorax and pericardial tamponade cause relative low preload?",
     setup: "",
     ans: [
-      { t: "They raise pressure around the heart, obstructing flow and limiting filling.", ok: true },
-      { t: "They lower pressure around the heart and over-distend flow.", ok: false },
-      { t: "They cause massive active bleeding into the pleural space.", ok: false },
-      { t: "They cause severe vasodilation of SVR.", ok: false },
+      { t: "They raise pressure around the heart, obstructing filling.", ok: true },
+      { t: "They lower pressure around the heart and overdistend it.", ok: false },
+      { t: "They cause heavy active bleeding into the pleural space.", ok: false },
+      { t: "They cause severe systemic vasodilation and a low SVR.", ok: false },
     ],
     rationale: "Both conditions impede venous return and ventricular filling by increasing surrounding pressure.",
     metadata: { topic: "Low Preload States", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "tamponade", "tension pneumothorax", "preload"] }
@@ -1176,10 +1176,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Cardiac tamponade may obstruct filling despite which misleading hemodynamic finding?",
     setup: "",
     ans: [
-      { t: "Normal or increased CVP.", ok: true },
-      { t: "Absent CVP.", ok: false },
-      { t: "Normal or increased cardiac output.", ok: false },
-      { t: "Normal or increased stroke volume.", ok: false },
+      { t: "A normal or elevated CVP.", ok: true },
+      { t: "A completely absent CVP.", ok: false },
+      { t: "A normal or high cardiac output.", ok: false },
+      { t: "A normal or high stroke volume.", ok: false },
     ],
     rationale: "Tamponade can be present even when CVP is normal or elevated.",
     metadata: { topic: "Low Preload States", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "tamponade", "CVP"] }
@@ -1251,10 +1251,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "How is contractility defined in relation to loading conditions?",
     setup: "",
     ans: [
-      { t: "The inotropic state, independent of preload and afterload.", ok: true },
-      { t: "The chronotropic state, independent of preload and afterload.", ok: false },
-      { t: "The volume state, independent of pressure.", ok: false },
-      { t: "The resistance state, independent of volume.", ok: false },
+      { t: "The inotropic state, set apart from loading conditions.", ok: true },
+      { t: "The chronotropic state, set apart from loading conditions.", ok: false },
+      { t: "The filling volume state, set apart from chamber pressure.", ok: false },
+      { t: "The vascular resistance state, set apart from filling volume.", ok: false },
     ],
     rationale: "Contractility is the intrinsic force of contraction independent of loading conditions.",
     metadata: { topic: "Contractility", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "contractility", "inotropy"] }
@@ -1267,10 +1267,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "How is afterload defined?",
     setup: "",
     ans: [
-      { t: "Resistance to ejection of blood from the left ventricle.", ok: true },
-      { t: "Volume in the left ventricle before contraction.", ok: false },
-      { t: "Blood returned to the right atrium.", ok: false },
-      { t: "Heart rate multiplied by stroke volume.", ok: false },
+      { t: "Resistance the left ventricle must overcome to eject.", ok: true },
+      { t: "Volume present in the left ventricle before it contracts.", ok: false },
+      { t: "Blood volume returning to fill the right atrium each beat.", ok: false },
+      { t: "Heart rate multiplied by the stroke volume of each beat.", ok: false },
     ],
     rationale: "Afterload is the resistance the ventricle must overcome to eject blood.",
     metadata: { topic: "Afterload", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "afterload"] }
@@ -1283,10 +1283,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "Which expression represents the Law of Laplace for ventricular wall stress in this source set?",
     setup: "",
     ans: [
-      { t: "Wall stress = P × r / 2T or related thickness form.", ok: true },
-      { t: "Wall stress = P / r × 2T.", ok: false },
-      { t: "Wall stress = P × r × T.", ok: false },
-      { t: "Wall stress = P / r / T.", ok: false },
+      { t: "Wall stress equals pressure times radius over twice the wall thickness.", ok: true },
+      { t: "Wall stress equals pressure divided by radius times twice the thickness.", ok: false },
+      { t: "Wall stress equals pressure times radius times the full wall thickness.", ok: false },
+      { t: "Wall stress equals pressure divided by radius divided by the thickness.", ok: false },
     ],
     rationale: "This source set presents wall stress as depending on pressure, radius, and wall thickness.",
     metadata: { topic: "Law of Laplace", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "Laplace", "wall stress"] }
@@ -1395,10 +1395,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "What is the major effect of parasympathetic stimulation on the heart compared with its effect on contractility?",
     setup: "",
     ans: [
-      { t: "It may slightly decrease contractility, but its major effect is lowering heart rate.", ok: true },
-      { t: "It drops contractility to zero.", ok: false },
-      { t: "It slightly increases contractility.", ok: false },
-      { t: "It has no effect at all.", ok: false },
+      { t: "It may lower contractility slightly, but mainly it slows heart rate.", ok: true },
+      { t: "It drives myocardial contractility all the way down to zero output.", ok: false },
+      { t: "It slightly raises contractility while leaving heart rate unchanged.", ok: false },
+      { t: "It has essentially no effect on either heart rate or contractility.", ok: false },
     ],
     rationale: "The dominant parasympathetic effect is heart-rate reduction, with only slight effect on contractility.",
     metadata: { topic: "ANS Control of the Heart", priority: "medium", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "ANS", "parasympathetic"] }
@@ -1476,10 +1476,10 @@ export const CARDIAC_QUESTIONS = [
     prompt: "How is the Bainbridge reflex defined?",
     setup: "",
     ans: [
-      { t: "Atrial stretch increases heart rate to help match cardiac output to venous return.", ok: true },
-      { t: "Atrial stretch decreases heart rate to prevent overload.", ok: false },
-      { t: "Ventricular stretch increases contractility.", ok: false },
-      { t: "Ventricular stretch decreases contractility.", ok: false },
+      { t: "Atrial stretch raises heart rate to match output to venous return.", ok: true },
+      { t: "Atrial stretch lowers heart rate to guard against cardiac overload.", ok: false },
+      { t: "Ventricular stretch raises contractility in response to filling load.", ok: false },
+      { t: "Ventricular stretch lowers contractility in response to filling load.", ok: false },
     ],
     rationale: "The Bainbridge reflex links atrial stretch with increased heart rate.",
     metadata: { topic: "Bainbridge Reflex", priority: "high", category: "cardiac-physiology", source: "node-4-chapter-4", tags: ["cardiac physiology", "Bainbridge reflex", "venous return"] }

@@ -20,10 +20,10 @@ export const NMB_QUESTIONS = [
     prompt: "At the neuromuscular junction, acetylcholine (ACh) is released from the motor nerve terminal and binds to receptors on the motor end-plate. What type of receptor does ACh bind at the NMJ?",
     setup: "",
     ans: [
-      { t: "Nicotinic acetylcholine receptor (nAChR)", ok: true },
-      { t: "Muscarinic M2 receptor", ok: false },
-      { t: "GABA-A receptor", ok: false },
-      { t: "NMDA glutamate receptor", ok: false },
+      { t: "Nicotinic acetylcholine receptor", ok: true },
+      { t: "Muscarinic M2 cardiac receptor", ok: false },
+      { t: "GABA-A inhibitory receptor", ok: false },
+      { t: "NMDA glutamate ion receptor", ok: false },
     ],
     rationale: "The NMJ uses nicotinic acetylcholine receptors (nAChR), which are ligand-gated ion channels requiring TWO ACh molecules to open. Non-depolarizing NMBAs competitively antagonize this receptor. Muscarinic receptors are found in the heart, glands, and smooth muscle — not the NMJ.",
     metadata: { topic: "NMJ Physiology", priority: "high" }
@@ -46,9 +46,9 @@ export const NMB_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Acetylcholinesterase (AChE)", ok: true },
-      { t: "Pseudocholinesterase (butyrylcholinesterase)", ok: false },
+      { t: "Plasma pseudocholinesterase", ok: false },
       { t: "Monoamine oxidase (MAO)", ok: false },
-      { t: "Catechol-O-methyltransferase (COMT)", ok: false },
+      { t: "Catechol O methyltransferase", ok: false },
     ],
     rationale: "True acetylcholinesterase (AChE), also called specific cholinesterase, terminates ACh signaling at the NMJ by hydrolyzing ACh into choline and acetate. Pseudocholinesterase (plasma cholinesterase/butyrylcholinesterase) is in plasma and metabolizes succinylcholine and mivacurium — not ACh at the NMJ. Neostigmine and edrophonium inhibit AChE to reverse non-depolarizing block.",
     metadata: { topic: "NMJ Physiology", priority: "high" }
@@ -62,9 +62,9 @@ export const NMB_QUESTIONS = [
     prompt: "Succinylcholine is classified as which type of neuromuscular blocking agent?",
     setup: "",
     ans: [
-      { t: "Depolarizing (Phase I block)", ok: true },
-      { t: "Non-depolarizing (competitive antagonist)", ok: false },
-      { t: "Dual block initially depolarizing, later non-depolarizing", ok: false },
+      { t: "Depolarizing agent, Phase I block", ok: true },
+      { t: "Non-depolarizing competitive type", ok: false },
+      { t: "Dual block, depolarizing then not", ok: false },
       { t: "Directly acting muscle relaxant", ok: false },
     ],
     rationale: "Succinylcholine mimics ACh — it depolarizes the motor end-plate and produces visible fasciculations before causing sustained depolarization (Phase I block). The channel stays open but becomes inactivated (desensitized), preventing further contractions. With large/repeated doses, Phase II block (non-depolarizing character) can develop.",
@@ -77,9 +77,9 @@ export const NMB_QUESTIONS = [
     prompt: "Which enzyme is responsible for the metabolism of succinylcholine?",
     setup: "",
     ans: [
-      { t: "Pseudocholinesterase (plasma cholinesterase / butyrylcholinesterase)", ok: true },
-      { t: "True acetylcholinesterase at the NMJ", ok: false },
-      { t: "Hepatic CYP3A4 oxidation", ok: false },
+      { t: "Plasma pseudocholinesterase", ok: true },
+      { t: "True acetylcholinesterase at NMJ", ok: false },
+      { t: "Hepatic CYP3A4 oxidation enzyme", ok: false },
       { t: "Renal elimination unchanged", ok: false },
     ],
     rationale: "Succinylcholine is rapidly hydrolyzed in plasma by pseudocholinesterase (butyrylcholinesterase) to succinylmonocholine and then more slowly to succinic acid and choline. This accounts for its short duration (~10 min). Genetic or acquired pseudocholinesterase deficiency dramatically prolongs its duration.",
@@ -115,10 +115,10 @@ export const NMB_QUESTIONS = [
     prompt: "A patient sustains severe burns covering 40% of BSA. On post-burn day 3, a surgical debridement is planned. Which statement about succinylcholine use is MOST accurate?",
     setup: "72-year-old male, 40% TBSA burns, post-burn day 3, scheduled for debridement.",
     ans: [
-      { t: "Succinylcholine is contraindicated due to risk of life-threatening hyperkalemia", ok: true },
-      { t: "Succinylcholine can be used safely if potassium is checked first", ok: false },
-      { t: "Succinylcholine is safe because the burn is <72 hours old", ok: false },
-      { t: "Succinylcholine is the preferred agent because of its rapid onset", ok: false },
+      { t: "Contraindicated, hyperkalemia risk", ok: true },
+      { t: "Safe if potassium checked first", ok: false },
+      { t: "Safe because burn under 72 hours", ok: false },
+      { t: "Preferred for its rapid onset", ok: false },
     ],
     rationale: "After major burns, immobilization, crush injuries, or denervation injuries, extrajunctional nicotinic acetylcholine receptors proliferate across the muscle membrane within 24 hours. Succinylcholine causes massive K+ efflux from ALL these receptors simultaneously, potentially causing cardiac arrest from hyperkalemia. The critical window begins around 24 hours post-injury and can last months. A normal pre-op potassium does NOT rule out the risk.",
     metadata: { topic: "Hyperkalemia", priority: "high" }
@@ -145,10 +145,10 @@ export const NMB_QUESTIONS = [
     prompt: "Succinylcholine triggers malignant hyperthermia (MH) through which primary mechanism?",
     setup: "",
     ans: [
-      { t: "Uncontrolled calcium release from the sarcoplasmic reticulum via mutant RYR1 channels", ok: true },
-      { t: "Direct mitochondrial uncoupling causing uncontrolled heat production", ok: false },
-      { t: "Excessive acetylcholine release at the motor nerve terminal", ok: false },
-      { t: "Inhibition of the Na+/K+ ATPase pump in muscle cells", ok: false },
+      { t: "Uncontrolled Ca release via RYR1", ok: true },
+      { t: "Direct mitochondrial uncoupling", ok: false },
+      { t: "Excess ACh release at terminal", ok: false },
+      { t: "Block of muscle Na/K ATPase pump", ok: false },
     ],
     rationale: "In genetically susceptible patients (usually RYR1 gene mutation), volatile anesthetics and succinylcholine trigger massive, uncontrolled Ca2+ release from the sarcoplasmic reticulum (SR). This causes sustained muscle hypermetabolism: hyperthermia, rigidity, metabolic acidosis, rhabdomyolysis, and hyperkalemia. Treatment is dantrolene, which blocks RYR1 channels.",
     metadata: { topic: "Malignant Hyperthermia", priority: "high" }
@@ -162,10 +162,10 @@ export const NMB_QUESTIONS = [
     prompt: "Non-depolarizing neuromuscular blocking agents (NDNMBAs) produce muscle relaxation by which mechanism?",
     setup: "",
     ans: [
-      { t: "Competitive antagonism at nicotinic receptors — block without activating", ok: true },
-      { t: "Persistent depolarization of the motor end-plate", ok: false },
-      { t: "Inhibition of acetylcholinesterase at the NMJ", ok: false },
-      { t: "Blockade of voltage-gated Na+ channels in the motor nerve", ok: false },
+      { t: "Competitive block, no activation", ok: true },
+      { t: "Persistent end-plate depolarization", ok: false },
+      { t: "Inhibits acetylcholinesterase", ok: false },
+      { t: "Blocks motor nerve Na channels", ok: false },
     ],
     rationale: "NDNMBAs competitively block nicotinic AChRs without activating them — no fasciculations, no depolarization. Because it is competitive, block can be reversed by increasing the ACh concentration (neostigmine/edrophonium inhibit AChE) or by direct encapsulation (sugammadex for rocuronium/vecuronium). In contrast, succinylcholine acts as an agonist and causes depolarization before sustained block.",
     metadata: { topic: "Rocuronium", priority: "high" }
@@ -224,10 +224,10 @@ export const NMB_QUESTIONS = [
     prompt: "Pancuronium is known for which cardiovascular side effect?",
     setup: "",
     ans: [
-      { t: "Tachycardia and mild hypertension (vagolysis + sympathetic stimulation)", ok: true },
-      { t: "Profound bradycardia and hypotension", ok: false },
-      { t: "Coronary vasospasm", ok: false },
-      { t: "Histamine release causing flushing and hypotension", ok: false },
+      { t: "Tachycardia and mild hypertension", ok: true },
+      { t: "Profound bradycardia, hypotension", ok: false },
+      { t: "Coronary artery vasospasm", ok: false },
+      { t: "Histamine flushing, hypotension", ok: false },
     ],
     rationale: "Pancuronium causes vagolysis (blocks cardiac muscarinic M2 receptors) and some sympathomimetic activity, resulting in tachycardia and mild hypertension. This can worsen myocardial ischemia in at-risk patients. It is renally eliminated (70%), so it accumulates in renal failure. Historically used in ICU sedation but largely replaced by cisatracurium and vecuronium.",
     metadata: { topic: "Pancuronium", priority: "medium" }
@@ -372,10 +372,10 @@ export const NMB_QUESTIONS = [
     prompt: "Neostigmine cannot reliably reverse profound neuromuscular block (TOF count = 0). What is the ceiling effect of neostigmine regarding receptor occupancy?",
     setup: "",
     ans: [
-      { t: "Neostigmine cannot overcome >70-80% receptor occupancy by NDNMBA", ok: true },
-      { t: "Neostigmine is equally effective at any depth of block", ok: false },
-      { t: "Neostigmine works better at deep block because AChE inhibition is more complete", ok: false },
-      { t: "Neostigmine requires TOF count ≥ 4 before administration", ok: false },
+      { t: "Cannot overcome 70 to 80% block", ok: true },
+      { t: "Equally effective at any depth", ok: false },
+      { t: "Works better at deeper block", ok: false },
+      { t: "Needs TOF count 4 to be given", ok: false },
     ],
     rationale: "Anticholinesterase reversal works by shifting the ACh/NDNMBA competitive balance. When receptor occupancy is very high (>70-80%), even maximum AChE inhibition cannot generate enough ACh to displace all NDNMBA. Neostigmine also has a ceiling effect because it fully saturates AChE — additional doses cannot increase ACh further. Always wait for TOF ≥ 1-2 before giving neostigmine. Sugammadex has no such ceiling.",
     metadata: { topic: "Reversal Agents", priority: "medium" }
@@ -404,10 +404,10 @@ export const NMB_QUESTIONS = [
     prompt: "Which condition is associated with Phase II block when succinylcholine is used?",
     setup: "",
     ans: [
-      { t: "Large or repeated doses of succinylcholine causing receptor desensitization resembling non-depolarizing block", ok: true },
-      { t: "Rapid injection of a single standard intubating dose (1–1.5 mg/kg)", ok: false },
-      { t: "Phase II block is synonymous with malignant hyperthermia", ok: false },
-      { t: "Phase II block occurs only in patients with pseudocholinesterase deficiency", ok: false },
+      { t: "Large or repeated doses of sux", ok: true },
+      { t: "One rapid standard intubating dose", ok: false },
+      { t: "Same thing as malignant hyperthermia", ok: false },
+      { t: "Only in cholinesterase deficiency", ok: false },
     ],
     rationale: "Phase I (depolarizing) block is the normal succinylcholine effect — sustained depolarization, fade-free TOF. With large repeated doses or prolonged infusion, Phase II block develops — channels desensitize (no longer respond to ACh), TOF shows fade, and the block begins to resemble a non-depolarizing block. Phase II block can (cautiously) be partially reversed with anticholinesterases, unlike Phase I.",
     metadata: { topic: "Succinylcholine", priority: "medium" }
@@ -436,10 +436,10 @@ export const NMB_QUESTIONS = [
     prompt: "A patient with severe hepatic failure (Child-Pugh C cirrhosis) requires neuromuscular blockade for a 2-hour laparotomy. Which agent is MOST appropriate?",
     setup: "Severe hepatic cirrhosis, Child-Pugh C, requiring 2-hour laparotomy.",
     ans: [
-      { t: "Cisatracurium (Hofmann elimination — organ-independent)", ok: true },
-      { t: "Rocuronium (hepatic metabolism and biliary excretion)", ok: false },
-      { t: "Vecuronium (predominantly hepatic elimination)", ok: false },
-      { t: "Pancuronium (both hepatic and renal)", ok: false },
+      { t: "Cisatracurium, Hofmann elimination", ok: true },
+      { t: "Rocuronium, biliary excretion", ok: false },
+      { t: "Vecuronium, hepatic elimination", ok: false },
+      { t: "Pancuronium, hepatic and renal", ok: false },
     ],
     rationale: "Cisatracurium's Hofmann elimination is temperature and pH-dependent — neither hepatic nor renal function required. This makes it the NDNMBA of choice in hepatic and renal failure. Rocuronium (80% biliary/hepatic) and vecuronium (hepatic) will have prolonged duration in liver failure. Atracurium also undergoes Hofmann elimination, but cisatracurium is preferred because it produces 3-5× less laudanosine.",
     metadata: { topic: "Cisatracurium", priority: "high" }
@@ -452,9 +452,9 @@ export const NMB_QUESTIONS = [
     setup: "",
     ans: [
       { t: "CNS excitation and seizures", ok: true },
-      { t: "Neuromuscular potentiation and residual block", ok: false },
-      { t: "Bradycardia and AV block", ok: false },
-      { t: "Histamine-mediated bronchospasm", ok: false },
+      { t: "Potentiation and residual block", ok: false },
+      { t: "Bradycardia and AV nodal block", ok: false },
+      { t: "Histamine-driven bronchospasm", ok: false },
     ],
     rationale: "Laudanosine crosses the blood-brain barrier and has CNS excitatory properties — at high plasma concentrations (as seen with large doses in ICU patients or renal failure), it can cause seizures. However, clinically significant toxicity from laudanosine is rare with cisatracurium because it produces only 1/5th the laudanosine of atracurium at equipotent doses.",
     metadata: { topic: "Hofmann", priority: "medium" }
@@ -468,10 +468,10 @@ export const NMB_QUESTIONS = [
     prompt: "Residual neuromuscular blockade (RNMB) at extubation is defined as a TOF ratio < 0.9. Which clinical complication is most directly associated with RNMB?",
     setup: "",
     ans: [
-      { t: "Impaired pharyngeal/airway protective reflexes and aspiration risk", ok: true },
-      { t: "Severe bronchospasm from ACh accumulation", ok: false },
-      { t: "Delayed emergence from anesthesia due to drug interactions", ok: false },
-      { t: "Malignant hyperthermia triggered by residual muscle receptor activation", ok: false },
+      { t: "Impaired airway reflexes, aspiration", ok: true },
+      { t: "Severe bronchospasm from extra ACh", ok: false },
+      { t: "Delayed emergence from interaction", ok: false },
+      { t: "Malignant hyperthermia is triggered", ok: false },
     ],
     rationale: "Even mild RNMB (TOF 0.7-0.9) causes significant dysfunction of pharyngeal musculature — the genioglossus, pharyngeal dilators, and upper esophageal sphincter all fail to protect the airway adequately. Patients cannot swallow effectively, increasing aspiration risk. Hypoxic ventilatory response is also blunted. This is why a TOF ≥ 0.9 is the standard before extubation, and quantitative (acceleromyography) monitoring is superior to clinical signs.",
     metadata: { topic: "Monitoring", priority: "high" }
@@ -483,10 +483,10 @@ export const NMB_QUESTIONS = [
     prompt: "Which clinical test best predicts adequate neuromuscular recovery at the bedside WITHOUT a neuromuscular monitor?",
     setup: "",
     ans: [
-      { t: "Sustained head lift for 5 seconds", ok: true },
-      { t: "Grip strength test — patient crushes a towel", ok: false },
-      { t: "Respiratory rate > 12 breaths/min", ok: false },
-      { t: "SpO2 ≥ 95% on room air", ok: false },
+      { t: "Sustained 5 second head lift", ok: true },
+      { t: "Grip strength crushing a towel", ok: false },
+      { t: "Respiratory rate over 12 a minute", ok: false },
+      { t: "SpO2 at or above 95% room air", ok: false },
     ],
     rationale: "Sustained 5-second head lift is the traditional clinical test for adequate reversal — it requires ~30% motor unit recruitment and correlates with TOF ≥ 0.6-0.7. However, it is imperfect: patients can sustain it at TOF 0.7 while still having significant pharyngeal weakness. TOF ratio ≥ 0.9 by quantitative monitoring is the gold standard. Grip strength and SpO2 are insufficient — hypoxia is a LATE sign of RNMB.",
     metadata: { topic: "Monitoring", priority: "medium" }
@@ -515,10 +515,10 @@ export const NMB_QUESTIONS = [
     prompt: "A patient receives a rapid large bolus of atracurium and develops facial flushing, erythema over the chest, and systolic BP drops from 130 to 80 mmHg. What is the most likely mechanism?",
     setup: "Patient is 45F, no history of anaphylaxis, receiving atracurium 0.8 mg/kg IV push.",
     ans: [
-      { t: "Direct mast cell degranulation and histamine release (not IgE-mediated anaphylaxis)", ok: true },
-      { t: "IgE-mediated anaphylactic reaction requiring epinephrine immediately", ok: false },
-      { t: "Vagal activation from rapid injection causing vasodilation", ok: false },
-      { t: "Propofol-induced TIVA cardiovascular depression potentiated by atracurium", ok: false },
+      { t: "Direct mast cell histamine release", ok: true },
+      { t: "IgE anaphylaxis, need epinephrine", ok: false },
+      { t: "Vagal reflex from rapid injection", ok: false },
+      { t: "Propofol depression worsened by it", ok: false },
     ],
     rationale: "Atracurium causes direct (non-immunologic) mast cell degranulation — this releases histamine but is dose- and rate-dependent, not IgE-mediated anaphylaxis. It produces flushing, mild hypotension, and rarely bronchospasm. Treatment: slow down/stop infusion, IV fluid bolus, possibly diphenhydramine. Anaphylaxis (IgE-mediated) presents with urticaria, angioedema, severe bronchospasm, and cardiovascular collapse requiring epinephrine.",
     metadata: { topic: "Histamine", priority: "medium" }
@@ -555,10 +555,10 @@ export const NMB_QUESTIONS = [
     prompt: "Aminoglycoside antibiotics (gentamicin, tobramycin) can interact with neuromuscular blocking agents. What is the mechanism?",
     setup: "",
     ans: [
-      { t: "Reduced ACh quantal release from the presynaptic nerve terminal (Ca2+ channel blockade)", ok: true },
-      { t: "Direct blockade of nicotinic receptors postjunctionally", ok: false },
-      { t: "Inhibition of plasma pseudocholinesterase", ok: false },
-      { t: "Potentiation of AChE inhibition by neostigmine", ok: false },
+      { t: "Less ACh release, Ca channel block", ok: true },
+      { t: "Direct postjunctional receptor block", ok: false },
+      { t: "Inhibits plasma pseudocholinesterase", ok: false },
+      { t: "Boosts neostigmine AChE inhibition", ok: false },
     ],
     rationale: "Aminoglycosides block presynaptic Ca2+ channels required for ACh vesicle exocytosis, reducing the number of ACh quanta released per nerve impulse. They also have some postjunctional stabilizing effect. Net result: they potentiate both depolarizing and non-depolarizing NMBAs, and this block is NOT well reversed by neostigmine. Calcium gluconate administration can partially overcome the aminoglycoside effect. Other drugs that potentiate NMB: local anesthetics, magnesium, volatile agents.",
     metadata: { topic: "Rocuronium", priority: "medium" }
@@ -572,10 +572,10 @@ export const NMB_QUESTIONS = [
     prompt: "Malignant hyperthermia is triggered by succinylcholine and volatile agents. Which drug is the specific treatment?",
     setup: "",
     ans: [
-      { t: "Dantrolene sodium", ok: true },
-      { t: "Bromocriptine (D2 agonist)", ok: false },
-      { t: "Cyproheptadine (serotonin antagonist)", ok: false },
-      { t: "Sugammadex (to remove the triggering NMBA)", ok: false },
+      { t: "Dantrolene sodium given IV", ok: true },
+      { t: "Bromocriptine, a D2 agonist", ok: false },
+      { t: "Cyproheptadine, a serotonin blocker", ok: false },
+      { t: "Sugammadex to remove the NMBA", ok: false },
     ],
     rationale: "Dantrolene blocks RYR1 (ryanodine receptor type 1) in the sarcoplasmic reticulum, preventing uncontrolled Ca2+ release. Dose: 2.5 mg/kg IV initially, then 1 mg/kg q5min until symptoms resolve (max ~10 mg/kg). Treatment also includes: stop triggering agents, 100% O2 via hyperventilation, sodium bicarbonate for acidosis, active cooling, treat hyperkalemia, and supportive care. Dantrolene can also be used prophylactically in MH-susceptible patients.",
     metadata: { topic: "Malignant Hyperthermia", priority: "high" }
@@ -587,10 +587,10 @@ export const NMB_QUESTIONS = [
     prompt: "A patient in the PACU has difficulty breathing after abdominal surgery with rocuronium 0.6 mg/kg given 90 minutes ago. The anesthesiologist administered neostigmine 70 mcg/kg at the end of the case. TOF ratio by acceleromyography is now 0.72. What is the BEST next step?",
     setup: "PACU, 90 min after rocuronium, neostigmine given, TOF = 0.72.",
     ans: [
-      { t: "Administer sugammadex 2 mg/kg to achieve full reversal", ok: true },
-      { t: "Repeat neostigmine 70 mcg/kg (double the dose)", ok: false },
-      { t: "Re-intubate and ventilate — neostigmine is the ceiling; further reversal is impossible", ok: false },
-      { t: "Administer edrophonium as a shorter-acting reversal agent", ok: false },
+      { t: "Give sugammadex 2 mg/kg now", ok: true },
+      { t: "Repeat neostigmine at double dose", ok: false },
+      { t: "Reintubate, no reversal is possible", ok: false },
+      { t: "Give edrophonium, shorter acting", ok: false },
     ],
     rationale: "TOF 0.72 means 28% receptor occupancy remains — the patient has RNMB and is at risk for aspiration and respiratory failure. Neostigmine has already been given and repeated dosing is dangerous (could cause cholinergic crisis). Sugammadex (2 mg/kg for moderate block) is the definitive rescue — it directly captures rocuronium regardless of prior neostigmine administration and achieves TOF ≥ 0.9 within minutes. This scenario illustrates the 'rescue sugammadex' role.",
     metadata: { topic: "Reversal Agents", priority: "high" }
@@ -602,8 +602,8 @@ export const NMB_QUESTIONS = [
     prompt: "Which patient population has the HIGHEST risk of hyperkalemia from succinylcholine?",
     setup: "",
     ans: [
-      { t: "Patients with thermal burns >24 hours old or major denervation injuries", ok: true },
-      { t: "Patients with chronic renal failure but no denervation", ok: false },
+      { t: "Burns over 24h or denervation", ok: true },
+      { t: "Chronic renal failure, no denervation", ok: false },
       { t: "Patients with myasthenia gravis", ok: false },
       { t: "Neonates under 6 months of age", ok: false },
     ],
@@ -630,10 +630,10 @@ export const NMB_QUESTIONS = [
     prompt: "Vecuronium shares which pharmacokinetic characteristic with rocuronium that makes both good candidates for reversal by sugammadex?",
     setup: "",
     ans: [
-      { t: "Both are steroidal (aminosteroidal) non-depolarizing NMBAs", ok: true },
+      { t: "Both are aminosteroidal agents", ok: true },
       { t: "Both undergo Hofmann elimination", ok: false },
-      { t: "Both are metabolized by pseudocholinesterase", ok: false },
-      { t: "Both have quaternary nitrogen groups that create an isoquinolinium structure", ok: false },
+      { t: "Both cleared by cholinesterase", ok: false },
+      { t: "Both are isoquinolinium agents", ok: false },
     ],
     rationale: "Rocuronium and vecuronium are both aminosteroidal NMBAs — they share a steroidal backbone that fits precisely into sugammadex's cyclodextrin cavity. Sugammadex has higher affinity for rocuronium (Ka = 10^7 M-1) than vecuronium (Ka = 10^6 M-1), so higher doses of sugammadex may be needed for vecuronium reversal in practice. The benzylisoquinolinium agents (atracurium, cisatracurium, mivacurium) are NOT captured by sugammadex.",
     metadata: { topic: "Vecuronium", priority: "medium" }
@@ -645,10 +645,10 @@ export const NMB_QUESTIONS = [
     prompt: "In a 'cannot intubate, cannot oxygenate' (CICO) emergency after RSI with rocuronium 1.2 mg/kg, sugammadex 16 mg/kg is given. Approximately how long until the patient regains spontaneous breathing?",
     setup: "CICO scenario — rocuronium RSI, failed intubation, failed mask ventilation.",
     ans: [
-      { t: "~3 minutes (TOF ≥ 0.9 achieved within 3 min in most patients)", ok: true },
-      { t: "~15-20 minutes (must wait for hepatic elimination to begin)", ok: false },
-      { t: "~10 minutes (equivalent to succinylcholine offset)", ok: false },
-      { t: "~30-45 minutes — sugammadex only partially reverses RSI-dose rocuronium", ok: false },
+      { t: "About 3 minutes to TOF 0.9", ok: true },
+      { t: "About 15 to 20 minutes to recover", ok: false },
+      { t: "About 10 minutes, like sux offset", ok: false },
+      { t: "About 30 to 45 min, partial only", ok: false },
     ],
     rationale: "Studies show 16 mg/kg sugammadex achieves TOF ≥ 0.9 within 2-3 minutes after 1.2 mg/kg rocuronium — making it a true CICO rescue. This has changed RSI practice: in MH-susceptible patients or when succinylcholine is contraindicated, rocuronium 1.2 mg/kg + sugammadex 16 mg/kg is a valid alternative strategy. The patient can potentially resume spontaneous ventilation in ~3 min if sugammadex is immediately available.",
     metadata: { topic: "Reversal Agents", priority: "high" }
@@ -660,10 +660,10 @@ export const NMB_QUESTIONS = [
     prompt: "Which of the following best describes the mechanism of succinylcholine-induced fasciculations before complete block?",
     setup: "",
     ans: [
-      { t: "Depolarization of the motor end-plate activates muscle contractile units in an asynchronous, disorganized manner", ok: true },
-      { t: "Fasciculations are caused by direct electrical stimulation from the drug's charged moiety", ok: false },
-      { t: "Succinylcholine stimulates the alpha motor neuron to fire repetitively", ok: false },
-      { t: "Fasciculations reflect the onset of Phase II block converting to non-depolarizing character", ok: false },
+      { t: "End-plate depolarization fires fibers", ok: true },
+      { t: "Direct shock from the charged drug", ok: false },
+      { t: "Alpha motor neuron fires repeatedly", ok: false },
+      { t: "Onset of converting Phase II block", ok: false },
     ],
     rationale: "Succinylcholine depolarizes the motor end-plate (mimicking ACh at nAChR), causing asynchronous muscle fiber activation = fasciculations. After this initial depolarization, the membrane remains depolarized (channels inactivated) and cannot respond to further ACh — producing the flaccid paralysis (Phase I block). Fasciculations can be attenuated (not eliminated) by precurarization: giving a small dose of an NDNMBA (e.g., rocuronium 0.06 mg/kg) 3 min before succinylcholine.",
     metadata: { topic: "Succinylcholine", priority: "medium" }
@@ -675,10 +675,10 @@ export const NMB_QUESTIONS = [
     prompt: "The ED95 for succinylcholine is approximately 0.3 mg/kg, but the typical intubating dose is 1–1.5 mg/kg. Why is such a large dose used relative to ED95?",
     setup: "",
     ans: [
-      { t: "To ensure rapid complete block (excellent intubating conditions) within 60 seconds", ok: true },
-      { t: "To minimize fasciculations and myalgia side effects", ok: false },
-      { t: "Higher doses are needed because pseudocholinesterase rapidly breaks it down before it reaches the NMJ", ok: false },
-      { t: "Lower doses of succinylcholine cause Phase II block", ok: false },
+      { t: "Ensure rapid full block in 60 sec", ok: true },
+      { t: "Minimize fasciculation and myalgia", ok: false },
+      { t: "Enzyme destroys it before the NMJ", ok: false },
+      { t: "Lower doses cause Phase II block", ok: false },
     ],
     rationale: "3-5× ED95 of succinylcholine (0.3 × 5 = 1.5 mg/kg) is used for RSI to ensure rapid, complete neuromuscular block — excellent intubating conditions within 45-60 seconds. The large overdose provides a safety margin and accounts for pharmacokinetic variability. Pseudocholinesterase begins hydrolysis immediately after injection, so a larger bolus ensures sufficient drug reaches the NMJ before significant breakdown. The tradeoff is more pronounced fasciculations and myalgia.",
     metadata: { topic: "Succinylcholine", priority: "medium" }
@@ -690,10 +690,10 @@ export const NMB_QUESTIONS = [
     prompt: "A patient with myasthenia gravis (MG) will require general anesthesia. Which statement about NMBA use in MG is MOST accurate?",
     setup: "Patient with known myasthenia gravis, on pyridostigmine, for thymectomy.",
     ans: [
-      { t: "MG patients are very sensitive to non-depolarizing NMBAs; use reduced doses with careful monitoring", ok: true },
-      { t: "MG patients are resistant to succinylcholine and require 2–3× normal doses", ok: false },
-      { t: "MG patients respond normally to all NMBAs; no dose adjustment needed", ok: false },
-      { t: "Non-depolarizing NMBAs are absolutely contraindicated in MG", ok: false },
+      { t: "Very sensitive to NDNMBA, reduce dose", ok: true },
+      { t: "Resistant to sux, need 2 to 3x dose", ok: false },
+      { t: "Respond normally, no dose change", ok: false },
+      { t: "NDNMBA are absolutely contraindicated", ok: false },
     ],
     rationale: "In myasthenia gravis, autoantibodies reduce the number of functional nicotinic AChRs at the NMJ. Therefore: (1) NDNMBAs — patients are EXQUISITELY sensitive (may only need 10-20% of normal dose); (2) Succinylcholine — patients are RESISTANT to depolarizing block (fewer functional receptors, larger margin for complete depolarization). Use quantitative TOF monitoring, low initial NDNMBA doses, and have sugammadex/neostigmine immediately available.",
     metadata: { topic: "Monitoring", priority: "high" }
@@ -722,10 +722,10 @@ export const NMB_QUESTIONS = [
     prompt: "Which statement best explains why succinylcholine has a uniquely short duration among NMBAs despite having the same receptor target as ACh?",
     setup: "",
     ans: [
-      { t: "Succinylcholine is rapidly hydrolyzed by pseudocholinesterase in plasma before significant accumulation at the NMJ", ok: true },
-      { t: "True AChE at the NMJ breaks down succinylcholine as efficiently as ACh", ok: false },
-      { t: "Succinylcholine undergoes Hofmann elimination at physiologic pH", ok: false },
-      { t: "The charged quaternary structure of succinylcholine limits CNS penetration and facilitates rapid renal clearance", ok: false },
+      { t: "Plasma cholinesterase hydrolyzes it fast", ok: true },
+      { t: "NMJ AChE breaks it down like ACh", ok: false },
+      { t: "It undergoes Hofmann elimination", ok: false },
+      { t: "Charged form gives fast renal clearance", ok: false },
     ],
     rationale: "Succinylcholine's brief duration (8-10 min) is due to rapid plasma hydrolysis by pseudocholinesterase (plasma cholinesterase), NOT AChE at the NMJ. AChE cannot hydrolyze succinylcholine efficiently. The drug is destroyed in plasma BEFORE most of it reaches the NMJ, and the portion that does reach the NMJ dissipates as the plasma concentration falls and the drug diffuses back out of the cleft.",
     metadata: { topic: "Succinylcholine", priority: "medium" }
@@ -769,10 +769,10 @@ export const NMB_QUESTIONS = [
     prompt: "Under what condition do steroidal neuromuscular blocker metabolites accumulate to clinically significant levels?",
     setup: "",
     ans: [
-      { t: "Single bolus dose", ok: false },
-      { t: "Rapid sequence induction", ok: false },
-      { t: "Continuous infusion over several days", ok: true },
-      { t: "Low protein states", ok: false },
+      { t: "Single bolus induction dose", ok: false },
+      { t: "Rapid sequence induction dose", ok: false },
+      { t: "Continuous infusion over days", ok: true },
+      { t: "Low plasma protein states", ok: false },
     ],
     rationale: "Accumulation becomes significant only with prolonged administration such as multi-day infusions.",
     metadata: { topic: "NMB Pharmacology", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
@@ -799,10 +799,10 @@ export const NMB_QUESTIONS = [
     prompt: "Why must induction anesthesia be administered before giving a defasciculating dose of a non-depolarizing neuromuscular blocker?",
     setup: "",
     ans: [
-      { t: "Prevent hypertension", ok: false },
-      { t: "Avoid airway edema", ok: false },
-      { t: "Prevent conscious weakness and distress", ok: true },
-      { t: "Improve drug metabolism", ok: false },
+      { t: "Prevent hypertensive response", ok: false },
+      { t: "Avoid upper airway edema", ok: false },
+      { t: "Prevent awake weakness, distress", ok: true },
+      { t: "Improve the drug metabolism", ok: false },
     ],
     rationale: "A small dose of a non-depolarizer can cause muscle weakness and impaired breathing while the patient is still conscious.",
     metadata: { topic: "Succinylcholine", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
@@ -874,10 +874,10 @@ export const NMB_QUESTIONS = [
     prompt: "Why is maintaining normothermia important when interpreting neuromuscular blockade?",
     setup: "",
     ans: [
-      { t: "Prevents bradycardia", ok: false },
-      { t: "Improves oxygenation", ok: false },
-      { t: "Prevents accumulation", ok: false },
-      { t: "Ensures accurate drug effect assessment", ok: true },
+      { t: "It prevents bradycardia onset", ok: false },
+      { t: "It improves tissue oxygenation", ok: false },
+      { t: "It prevents drug accumulation", ok: false },
+      { t: "Gives accurate effect reading", ok: true },
     ],
     rationale: "Hypothermia prolongs drug action and alters interpretation of blockade.",
     metadata: { topic: "Monitoring", priority: "medium", category: "NMB-advanced", source: "ppt-gap" }
