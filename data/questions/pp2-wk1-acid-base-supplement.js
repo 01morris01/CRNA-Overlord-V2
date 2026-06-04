@@ -66,10 +66,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Why is the bicarbonate buffer system the most important extracellular buffer despite having a pK of 6.1, which is far from physiologic pH of 7.4?",
     setup: "",
     ans: [
-      { t: "Its concentration in plasma is far higher than any other buffer", ok: false },
-      { t: "Both components are independently regulated: lungs control CO2 and kidneys control HCO3-", ok: true },
-      { t: "Carbonic acid spontaneously dissociates faster than any other weak acid", ok: false },
-      { t: "The pK of 6.1 actually makes it more effective at physiologic pH", ok: false },
+      { t: "Its plasma concentration far exceeds every other buffer", ok: false },
+      { t: "Lungs regulate CO2 and kidneys regulate HCO3- separately", ok: true },
+      { t: "Carbonic acid dissociates faster than any other weak acid", ok: false },
+      { t: "A pK of 6.1 makes it most effective at a pH of 7.4", ok: false },
     ],
     rationale: "A buffer normally works best within one pH unit of its pK, so at pH 7.4 the bicarbonate system would seem like a poor chemical buffer. Its power comes from the fact that lungs can rapidly adjust PCO2 (the acid component) and kidneys can independently adjust HCO3- (the base component). This dual organ regulation makes the effective buffering capacity far greater than that predicted by the pK alone. Option A is partially true but does not explain why pK 6.1 still works. Options C and D are factually incorrect.", // source: slide Ch31 why bicarbonate is best ECF buffer
     scene: "renal",
@@ -151,10 +151,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "After the proximal tubule reabsorbs 85% of filtered HCO3-, what percentages are reabsorbed in the thick ascending limb and the distal nephron respectively?",
     setup: "",
     ans: [
-      { t: "5 percent in the thick ascending limb; the rest is excreted", ok: false },
-      { t: "10 percent in the thick ascending limb; greater than 4.9 percent in the distal nephron", ok: true },
-      { t: "15 percent in the thick ascending limb; 0 percent in the distal nephron", ok: false },
-      { t: "3 percent in the thick ascending limb; 12 percent in the distal nephron", ok: false },
+      { t: "5 percent in the thick ascending limb, rest excreted", ok: false },
+      { t: "10 percent in the thick limb, over 4.9 percent distally", ok: true },
+      { t: "15 percent in the thick ascending limb, 0 percent distal", ok: false },
+      { t: "3 percent in the thick ascending limb, 12 percent distal", ok: false },
     ],
     rationale: "The thick ascending limb of the loop of Henle reabsorbs approximately 10 percent of filtered HCO3-. The distal tubule and collecting duct together reabsorb the remaining fraction, which is greater than 4.9 percent. Under normal conditions, essentially no HCO3- appears in the final urine (less than 1 mmol per day is excreted). This segmental arrangement ensures nearly complete HCO3- recovery before tubular fluid reaches the collecting duct.", // source: slide Ch31 segmental HCO3 reabsorption
     scene: "renal",
@@ -168,10 +168,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Type A intercalated cells in the collecting duct secrete H+ into the lumen by which two transporters?",
     setup: "",
     ans: [
-      { t: "NHE3 and Na+/K+ ATPase", ok: false },
-      { t: "H+ ATPase and H+/K+ ATPase", ok: true },
-      { t: "NKCC2 and H+ ATPase", ok: false },
-      { t: "Na+/H+ exchanger and Cl-/HCO3- exchanger", ok: false },
+      { t: "NHE3 and the Na+/K+ ATPase pump", ok: false },
+      { t: "H+ ATPase and H+/K+ ATPase pump", ok: true },
+      { t: "NKCC2 cotransporter and H+ ATPase", ok: false },
+      { t: "Na+/H+ and Cl-/HCO3- exchangers", ok: false },
     ],
     rationale: "Type A intercalated cells have two apical H+ secretion mechanisms. The primary pump is a vacuolar H+ ATPase that actively transports H+ into the lumen. The secondary pump is an H+/K+ ATPase that secretes H+ while reabsorbing K+. On the basolateral side, a Cl-/HCO3- exchanger returns newly generated HCO3- to the blood. NHE3 (options A and D) is the proximal tubule transporter, not the intercalated cell mechanism. NKCC2 (option C) is found in the thick ascending limb.", // source: slide Ch31 Type A intercalated cells
     scene: "renal",
@@ -185,10 +185,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "How does a Type B intercalated cell differ functionally from a Type A intercalated cell?",
     setup: "",
     ans: [
-      { t: "Type B cells secrete HCO3- into the lumen and reabsorb H+, which is the opposite polarity of Type A", ok: true },
-      { t: "Type B cells secrete both H+ and K+ into the lumen at a faster rate than Type A", ok: false },
-      { t: "Type B cells only function during metabolic acidosis to maximize acid excretion", ok: false },
-      { t: "Type B cells are found exclusively in the proximal tubule rather than the collecting duct", ok: false },
+      { t: "They secrete HCO3- and reabsorb H+, opposite of Type A", ok: true },
+      { t: "They secrete both H+ and K+ faster than Type A cells do", ok: false },
+      { t: "They work only in acidosis to maximize total acid output", ok: false },
+      { t: "They sit only in the proximal tubule, not collecting duct", ok: false },
     ],
     rationale: "Type B intercalated cells have reversed transporter polarity compared to Type A cells. Type B cells place the H+ ATPase on the basolateral membrane (secreting H+ into blood) and the Cl-/HCO3- exchanger (pendrin) on the apical membrane (secreting HCO3- into the lumen). This arrangement allows the kidney to excrete excess base during alkalosis. Type A cells dominate during acidosis (secreting H+ into the lumen) while Type B cells dominate during alkalosis.", // source: slide Ch31 Type B intercalated cells
     scene: "renal",
@@ -253,10 +253,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "In the collecting duct, how does NH3 contribute to acid excretion?",
     setup: "",
     ans: [
-      { t: "NH3 diffuses from the medullary interstitium into the lumen where it combines with secreted H+ to form NH4+, which is trapped and excreted", ok: true },
-      { t: "NH3 is actively secreted by the H+ ATPase pump alongside hydrogen ions", ok: false },
-      { t: "NH3 is converted to urea in the collecting duct, which carries acid equivalents out", ok: false },
-      { t: "NH3 directly neutralizes luminal H+ without forming any new compound", ok: false },
+      { t: "NH3 enters the lumen, binds H+ to NH4+, and is trapped", ok: true },
+      { t: "NH3 is pumped into the lumen by the H+ ATPase with H+", ok: false },
+      { t: "NH3 becomes urea in the duct, carrying acid out of blood", ok: false },
+      { t: "NH3 neutralizes luminal H+ without forming any compound", ok: false },
     ],
     rationale: "NH3 (ammonia gas) diffuses freely across cell membranes from the medullary interstitium into the collecting duct lumen. There it combines with H+ secreted by the H+ ATPase to form NH4+ (ammonium). Because NH4+ is charged, it cannot diffuse back across the membrane and is trapped in the lumen for excretion. Each NH4+ excreted represents one H+ eliminated from the body and one new HCO3- added to the blood. This trapping mechanism is called nonionic diffusion trapping.", // source: slide Ch31 NH3 buffering in collecting tubules
     scene: "renal",
@@ -287,10 +287,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "During metabolic acidosis, which component of net acid excretion shows the greatest absolute increase?",
     setup: "",
     ans: [
-      { t: "Titratable acid (phosphate buffered H+)", ok: false },
-      { t: "Ammonium (NH4+) excretion", ok: true },
-      { t: "Free H+ excretion", ok: false },
-      { t: "Urinary sulfate excretion", ok: false },
+      { t: "Titratable acid as phosphate buffered H+", ok: false },
+      { t: "Ammonium (NH4+) excretion in the urine", ok: true },
+      { t: "Free hydrogen ion (H+) excretion", ok: false },
+      { t: "Urinary inorganic sulfate excretion", ok: false },
     ],
     rationale: "NH4+ excretion shows the greatest increase during acidosis, rising from a baseline of approximately 30 mmol per day to 165 mmol per day or higher. Titratable acid increases only modestly from 30 to 35 mmol per day because it is limited by the amount of filtered phosphate buffer. Free H+ excretion is negligible even at minimum urine pH. The kidney upregulates glutaminase activity and glutamine transport to drive NH4+ production in response to chronic acidosis.", // source: slide Ch31 NH4 excretion 30 to 165 mmol/day
     scene: "renal",
@@ -304,10 +304,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "During metabolic alkalosis, how does the kidney adjust net acid excretion?",
     setup: "",
     ans: [
-      { t: "Titratable acid and NH4+ excretion both fall to zero while HCO3- excretion rises to approximately 80 mmol per day", ok: true },
-      { t: "Titratable acid doubles and NH4+ excretion triples to eliminate excess base", ok: false },
-      { t: "Only NH4+ excretion falls; titratable acid remains unchanged", ok: false },
-      { t: "The kidney cannot compensate for alkalosis and relies entirely on respiratory adjustment", ok: false },
+      { t: "Titratable acid and NH4+ fall to zero, HCO3- rises near 80", ok: true },
+      { t: "Titratable acid doubles and NH4+ triples to dump excess base", ok: false },
+      { t: "Only NH4+ excretion falls while titratable acid stays the same", ok: false },
+      { t: "The kidney cannot help, so only respiratory change corrects it", ok: false },
     ],
     rationale: "In alkalosis, the kidney reduces H+ secretion so that titratable acid and NH4+ excretion both drop to essentially zero. Simultaneously, the kidney fails to reabsorb all filtered HCO3-, allowing approximately 80 mmol per day of bicarbonate to spill into the urine. This net loss of base from the body helps correct the alkalosis. Type B intercalated cells become more active, directly secreting HCO3- into the lumen. The kidney is an effective compensator for alkalosis, contrary to option D.", // source: slide Ch31 renal compensation for alkalosis
     scene: "renal",
@@ -338,10 +338,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "In the four-step approach to ABG interpretation, after noting whether pH is low or high, what is the next step?",
     setup: "",
     ans: [
-      { t: "Calculate the anion gap", ok: false },
-      { t: "Determine which value (PCO2 or HCO3-) is out of the normal range and could be causing the pH change", ok: true },
-      { t: "Check the PaO2 to assess oxygenation status", ok: false },
-      { t: "Calculate the A-a gradient to rule out pulmonary pathology", ok: false },
+      { t: "Calculate the serum anion gap value here", ok: false },
+      { t: "See whether PCO2 or HCO3- drove the pH", ok: true },
+      { t: "Check the PaO2 to assess oxygenation", ok: false },
+      { t: "Get the A-a gradient for lung pathology", ok: false },
     ],
     rationale: "Step 1 is to note whether pH is low (acidosis) or high (alkalosis). Step 2 is to decide which variable, PCO2 or HCO3-, is abnormal in a direction that could cause the observed pH shift. Step 3 labels the disorder: if PCO2 is the cause, it is respiratory; if HCO3- is the cause, it is metabolic. Step 4 checks whether the other variable has moved in the opposite direction indicating compensation. Anion gap (option A) is a subsequent analysis step for metabolic acidosis specifically.", // source: slide Ch31 4-step ABG algorithm
     scene: "renal",
@@ -355,10 +355,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "In respiratory acidosis, the primary event is an increase in PCO2. Which compensatory mechanism is activated?",
     setup: "",
     ans: [
-      { t: "Kidneys increase H+ excretion and HCO3- reabsorption, raising plasma HCO3-", ok: true },
-      { t: "Lungs increase ventilation rate to blow off CO2", ok: false },
-      { t: "Kidneys excrete excess HCO3- to lower plasma bicarbonate", ok: false },
-      { t: "Peripheral chemoreceptors suppress aldosterone secretion", ok: false },
+      { t: "Kidneys raise H+ excretion and HCO3-, lifting plasma HCO3-", ok: true },
+      { t: "Lungs raise the ventilation rate to blow off excess CO2", ok: false },
+      { t: "Kidneys dump extra HCO3- to lower the plasma bicarbonate", ok: false },
+      { t: "Peripheral chemoreceptors suppress all aldosterone release", ok: false },
     ],
     rationale: "When the primary problem is elevated PCO2 (respiratory acidosis), the lungs are the source of the problem and cannot be the compensatory organ. The kidneys compensate by increasing H+ secretion, increasing HCO3- reabsorption, and producing new HCO3- via ammonia and titratable acid excretion. This raises plasma HCO3-, which partially restores the HCO3-/CO2 ratio toward normal, nudging pH back up. Full renal compensation takes 3 to 5 days. Option B describes correction, not compensation.", // source: slide Ch31 respiratory acidosis compensation table
     scene: "renal",
@@ -373,9 +373,9 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     setup: "",
     ans: [
       { t: "Hypoventilation to retain CO2 and raise PCO2", ok: false },
-      { t: "Hyperventilation to lower PCO2", ok: true },
-      { t: "No respiratory change occurs; only renal compensation activates", ok: false },
-      { t: "Increased tidal volume with unchanged respiratory rate", ok: false },
+      { t: "Hyperventilation to blow off CO2 and lower PCO2", ok: true },
+      { t: "No respiratory change, only renal compensation acts", ok: false },
+      { t: "Higher tidal volume with unchanged respiratory rate", ok: false },
     ],
     rationale: "When plasma HCO3- drops (metabolic acidosis), pH falls. Peripheral and central chemoreceptors detect the low pH and stimulate hyperventilation, which increases CO2 elimination and lowers PCO2. This partially restores the HCO3-/CO2 ratio toward normal. Respiratory compensation begins within minutes and reaches maximum within 12 to 24 hours. Kussmaul breathing (deep, rapid respirations) is the clinical sign of respiratory compensation for severe metabolic acidosis such as diabetic ketoacidosis.", // source: slide Ch31 metabolic acidosis compensation
     scene: "renal",
@@ -457,10 +457,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Common causes of respiratory acidosis include all of the following EXCEPT:",
     setup: "",
     ans: [
-      { t: "Pneumonia", ok: false },
-      { t: "Emphysema", ok: false },
-      { t: "Hyperventilation due to anxiety", ok: true },
-      { t: "Brain damage affecting the respiratory center", ok: false },
+      { t: "Pneumonia with impaired gas exchange", ok: false },
+      { t: "Emphysema with chronic air trapping", ok: false },
+      { t: "Anxiety driven hyperventilation spell", ok: true },
+      { t: "Brain injury to the respiratory center", ok: false },
     ],
     rationale: "Respiratory acidosis results from hypoventilation (decreased CO2 elimination). Pneumonia, emphysema, airway obstruction, and brain damage affecting the respiratory center all impair ventilation and cause CO2 retention. Hyperventilation due to anxiety causes excess CO2 elimination, lowering PCO2 and producing respiratory alkalosis, not acidosis. Other respiratory acidosis causes include chest wall deformity, neuromuscular disease, and respiratory depressant drugs.", // source: slide Ch31 respiratory acidosis causes
     scene: "renal",
@@ -474,10 +474,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Overuse of diuretics can produce metabolic alkalosis through which pathway?",
     setup: "",
     ans: [
-      { t: "Diuretics cause volume expansion that dilutes H+ in the blood", ok: false },
-      { t: "Volume contraction activates angiotensin II and aldosterone while depleting K+, both of which increase tubular H+ secretion and HCO3- reabsorption", ok: true },
-      { t: "Diuretics directly generate HCO3- in the collecting duct lumen", ok: false },
-      { t: "Diuretics inhibit carbonic anhydrase, blocking H+ secretion", ok: false },
+      { t: "They expand blood volume, diluting the plasma H+ load", ok: false },
+      { t: "Volume loss raises aldosterone and drops K+, raising HCO3-", ok: true },
+      { t: "They directly make new HCO3- in the collecting duct lumen", ok: false },
+      { t: "They block carbonic anhydrase, halting tubular H+ secretion", ok: false },
     ],
     rationale: "Diuretic overuse produces volume contraction, which activates the renin-angiotensin-aldosterone system. Elevated angiotensin II and aldosterone both stimulate tubular H+ secretion. Simultaneously, diuretics cause K+ depletion, which independently stimulates H+ secretion (as K+ exits cells, H+ enters cells to maintain charge balance). The combined effect is increased HCO3- reabsorption and production, raising plasma bicarbonate and causing metabolic alkalosis. Option D describes carbonic anhydrase inhibitors, which cause metabolic acidosis.", // source: slide Ch31 diuretic-induced metabolic alkalosis pathway
     scene: "renal",
@@ -491,10 +491,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Which conditions produce an increased anion gap metabolic acidosis?",
     setup: "",
     ans: [
-      { t: "Diarrhea, renal tubular acidosis, Addison disease", ok: false },
-      { t: "Diabetic ketoacidosis, lactic acidosis, aspirin poisoning, methanol poisoning", ok: true },
-      { t: "Vomiting, mineralocorticoid excess, diuretic overuse", ok: false },
-      { t: "Hyperventilation, anxiety, high altitude exposure", ok: false },
+      { t: "Diarrhea, renal tubular acidosis, and Addison disease", ok: false },
+      { t: "Ketoacidosis, lactic acidosis, aspirin and methanol", ok: true },
+      { t: "Vomiting, mineralocorticoid excess, and diuretic overuse", ok: false },
+      { t: "Hyperventilation, anxiety, and high altitude exposure", ok: false },
     ],
     rationale: "Increased anion gap metabolic acidosis results from accumulation of unmeasured anions. The classic causes include diabetic ketoacidosis (beta-hydroxybutyrate and acetoacetate), lactic acidosis (lactate), aspirin poisoning (salicylate), methanol poisoning (formate), ethylene glycol poisoning (oxalate), and starvation ketosis. Option A lists normal anion gap causes. Option C lists metabolic alkalosis causes. Option D lists respiratory alkalosis causes.", // source: slide Ch31 increased AG causes: DKA, lactic, aspirin, methanol
     scene: "renal",
@@ -508,10 +508,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "A patient has pH 7.50, PCO2 48 mm Hg, and HCO3- 36 mEq per liter. What is the primary disorder and what is the compensation?",
     setup: "",
     ans: [
-      { t: "Metabolic alkalosis with respiratory compensation (hypoventilation raising PCO2)", ok: true },
-      { t: "Respiratory alkalosis with renal compensation", ok: false },
-      { t: "Metabolic alkalosis with no compensation present", ok: false },
-      { t: "Mixed respiratory and metabolic alkalosis", ok: false },
+      { t: "Metabolic alkalosis with hypoventilation raising PCO2", ok: true },
+      { t: "Respiratory alkalosis with slower renal HCO3- handling", ok: false },
+      { t: "Metabolic alkalosis with no compensation present yet", ok: false },
+      { t: "Mixed respiratory and metabolic alkalosis together", ok: false },
     ],
     rationale: "The pH is elevated (alkalosis). HCO3- is markedly elevated at 36 (normal 24), which is the primary cause driving pH up. PCO2 is also elevated at 48 (normal 40), which would push pH down and therefore represents compensation, not a primary disorder. The respiratory compensation for metabolic alkalosis is hypoventilation, which retains CO2 and partially offsets the pH rise. Since PCO2 is abnormal, compensation is present, ruling out option C.", // source: slide Ch31 acid-base disorder analysis
     scene: "renal",
@@ -578,10 +578,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Why do loop diuretics impair the kidney's ability to both concentrate and dilute urine?",
     setup: "",
     ans: [
-      { t: "They block NaCl reabsorption in the thick ascending limb, which is essential for building the medullary gradient (concentration) and for producing dilute tubular fluid (dilution)", ok: true },
-      { t: "They block water reabsorption in the collecting duct, preventing both processes", ok: false },
-      { t: "They increase ADH secretion, which locks the kidney into a fixed osmolarity", ok: false },
-      { t: "They destroy medullary interstitial cells that produce prostaglandins needed for both functions", ok: false },
+      { t: "They block TAL NaCl uptake, the key to both gradient and dilution", ok: true },
+      { t: "They block collecting duct water uptake, stopping both processes", ok: false },
+      { t: "They raise ADH, locking the kidney at one fixed urine osmolarity", ok: false },
+      { t: "They kill medullary cells making prostaglandins for both tasks", ok: false },
     ],
     rationale: "The thick ascending limb serves dual roles. By reabsorbing NaCl without water, it both builds the hypertonic medullary interstitium (needed for concentration with ADH) and dilutes the tubular fluid entering the distal nephron (the diluting segment). Loop diuretics block NKCC2 in this segment, abolishing both functions simultaneously. The medullary gradient washes out (impairing concentration) and tubular fluid remains iso-osmotic (impairing dilution). No other single nephron segment has this dual capability.", // source: slide Ch32 loop diuretics impair concentration
     scene: "renal",
@@ -612,10 +612,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "What are the primary clinical indications for thiazide diuretics?",
     setup: "",
     ans: [
-      { t: "Pulmonary edema and acute heart failure exacerbation", ok: false },
-      { t: "Hypertension, mild heart failure, and calcium containing kidney stone prevention", ok: true },
-      { t: "Hyperkalemia and metabolic acidosis", ok: false },
-      { t: "Cerebral edema and acute glaucoma", ok: false },
+      { t: "Pulmonary edema and acute heart failure flares", ok: false },
+      { t: "Hypertension, mild heart failure, calcium stones", ok: true },
+      { t: "Hyperkalemia together with metabolic acidosis", ok: false },
+      { t: "Cerebral edema along with acute angle glaucoma", ok: false },
     ],
     rationale: "Thiazides are first line agents for essential hypertension because of their sustained mild natriuretic effect. They are useful in mild heart failure as well. Unlike loop diuretics, thiazides enhance calcium reabsorption in the distal tubule (blocking NCC shifts voltage more negative, favoring Ca2+ entry through TRPV5). This makes them protective against calcium kidney stones. For severe edema or acute pulmonary edema (option A), loop diuretics are preferred because of their greater potency.", // source: slide Ch32 thiazides HTN, HF, stones
     scene: "renal",
@@ -629,10 +629,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Potassium-sparing diuretics are divided into two subclasses. Which answer correctly identifies both subclasses with an example of each?",
     setup: "",
     ans: [
-      { t: "Aldosterone receptor antagonists (spironolactone, eplerenone) and ENaC blockers (amiloride, triamterene)", ok: true },
-      { t: "Loop diuretics (furosemide) and thiazides (hydrochlorothiazide)", ok: false },
-      { t: "Carbonic anhydrase inhibitors (acetazolamide) and osmotic diuretics (mannitol)", ok: false },
-      { t: "NKCC2 blockers (bumetanide) and NCC blockers (chlorthalidone)", ok: false },
+      { t: "Aldosterone blockers (spironolactone) and ENaC blockers (amiloride)", ok: true },
+      { t: "Loop agents (furosemide) and thiazide agents (hydrochlorothiazide)", ok: false },
+      { t: "Carbonic anhydrase blockers (acetazolamide) and osmotics (mannitol)", ok: false },
+      { t: "NKCC2 blockers (bumetanide) and NCC blockers (chlorthalidone here)", ok: false },
     ],
     rationale: "Potassium-sparing diuretics reduce K+ loss by two distinct mechanisms. Aldosterone receptor antagonists (spironolactone and eplerenone) block mineralocorticoid receptors in principal cells, reducing ENaC and ROMK expression. ENaC blockers (amiloride and triamterene) directly block the epithelial sodium channel. Both mechanisms reduce lumen negative voltage in the collecting duct (normally about -50 mV), which decreases the driving force for K+ secretion. The major risk with both subclasses is hyperkalemia.", // source: slide Ch32 K-sparing: spironolactone/eplerenone and amiloride/triamterene
     scene: "renal",
@@ -646,10 +646,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "The 'diuretic braking phenomenon' refers to which clinical observation?",
     setup: "",
     ans: [
-      { t: "The natriuretic response to a diuretic diminishes over days as compensatory sodium retaining mechanisms activate", ok: true },
-      { t: "Diuretics cause an immediate rebound hypertension when discontinued", ok: false },
-      { t: "Loop diuretics progressively damage the nephron with repeated dosing", ok: false },
-      { t: "Two different diuretic classes always cancel out each other's effects", ok: false },
+      { t: "The natriuretic effect fades over days as Na+ retention rises", ok: true },
+      { t: "The drug triggers rebound hypertension the moment it is stopped", ok: false },
+      { t: "Loop agents steadily damage the nephron with each repeat dose", ok: false },
+      { t: "Two diuretic classes always cancel out one another completely", ok: false },
     ],
     rationale: "Diuretic braking refers to the progressive blunting of a diuretic's natriuretic effect with continued use. After the initial sodium and water loss, the resulting volume contraction activates compensatory mechanisms including the renin-angiotensin-aldosterone system, sympathetic nervous system, and structural remodeling of distal tubule cells (hypertrophy with increased Na+/K+ ATPase expression). These mechanisms increase sodium reabsorption in segments not blocked by the diuretic, offsetting its effect.", // source: slide Ch32 diuretic braking phenomenon
     scene: "renal",
@@ -663,10 +663,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Osmotic diuretics such as mannitol produce diuresis by which mechanism?",
     setup: "",
     ans: [
-      { t: "They block sodium transporters in the proximal tubule", ok: false },
-      { t: "They are filtered at the glomerulus but not reabsorbed, holding water in the tubular lumen by osmotic force", ok: true },
-      { t: "They stimulate ADH secretion, which increases water flow into the collecting duct", ok: false },
-      { t: "They directly open aquaporin channels in the collecting duct", ok: false },
+      { t: "They block proximal tubule sodium transporters directly", ok: false },
+      { t: "They are filtered but not reabsorbed, holding water in lumen", ok: true },
+      { t: "They raise ADH, sending more water into the collecting duct", ok: false },
+      { t: "They open aquaporin channels directly in the collecting duct", ok: false },
     ],
     rationale: "Mannitol is freely filtered at the glomerulus but cannot be reabsorbed by any tubular transporter. As sodium and water are reabsorbed around it, mannitol concentration rises in the tubular fluid, creating an osmotic force that holds water in the lumen and opposes further water reabsorption. This increases urine volume. Clinical uses include reducing intracranial pressure and intraocular pressure. Mannitol must be given intravenously because it is poorly absorbed from the GI tract.", // source: slide Ch32 osmotic diuretics mannitol
     scene: "renal",
@@ -697,10 +697,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Which of the following is a prerenal cause of acute kidney injury?",
     setup: "",
     ans: [
-      { t: "Aminoglycoside nephrotoxicity", ok: false },
-      { t: "Bilateral ureteral obstruction by kidney stones", ok: false },
-      { t: "Severe hemorrhage with hypovolemic shock", ok: true },
-      { t: "Acute glomerulonephritis", ok: false },
+      { t: "Aminoglycoside drug nephrotoxicity", ok: false },
+      { t: "Bilateral ureteral stone blockage", ok: false },
+      { t: "Severe hemorrhage with hypovolemia", ok: true },
+      { t: "Acute glomerulonephritis flare", ok: false },
     ],
     rationale: "Prerenal AKI results from inadequate blood flow to the kidneys before the renal parenchyma itself. Severe hemorrhage causes hypovolemic shock, reducing renal perfusion pressure below the autoregulatory range and dropping GFR. The kidneys are structurally normal but underperfused. Aminoglycoside toxicity (option A) and glomerulonephritis (option D) are intrarenal causes. Bilateral ureteral stones (option B) cause postrenal (obstructive) AKI.", // source: slide Ch32 prerenal AKI causes
     scene: "renal",
@@ -714,10 +714,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "The vicious cycle of chronic kidney disease progression involves nephron loss leading to which sequence of events?",
     setup: "",
     ans: [
-      { t: "Decreased GFR, decreased blood pressure, further nephron loss", ok: false },
-      { t: "Hypertrophy of surviving nephrons, increased glomerular pressure, glomerular sclerosis, further nephron loss", ok: true },
-      { t: "Decreased tubular secretion, decreased blood volume, renal artery stenosis", ok: false },
-      { t: "Increased nephron regeneration, excessive filtration, tubular obstruction", ok: false },
+      { t: "Lower GFR, lower blood pressure, then more nephron loss", ok: false },
+      { t: "Nephron hypertrophy, higher glomerular pressure, sclerosis", ok: true },
+      { t: "Less tubular secretion, low blood volume, artery stenosis", ok: false },
+      { t: "Nephron regrowth, excess filtration, then tubule blockage", ok: false },
     ],
     rationale: "When nephrons are lost, the surviving nephrons undergo compensatory hypertrophy and vasodilation to maintain total GFR. This adaptation increases single nephron GFR by raising glomerular capillary pressure. Over time, the elevated pressure damages glomerular capillaries, causing glomerular sclerosis. Sclerosed glomeruli stop functioning, further reducing nephron number and perpetuating the cycle. Systemic hypertension accelerates this cycle by transmitting higher pressure to the glomeruli.", // source: slide Ch32 CKD vicious cycle
     scene: "renal",
@@ -765,10 +765,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "In chronic kidney disease, plasma solutes fall into three categories based on how their concentrations change as GFR declines. Which category includes creatinine and urea?",
     setup: "",
     ans: [
-      { t: "Group A: concentrations rise steeply as GFR falls because they depend almost entirely on glomerular filtration for excretion", ok: true },
-      { t: "Group B: concentrations rise moderately because tubular secretion partially compensates", ok: false },
-      { t: "Group C: concentrations remain nearly constant because intake is matched by extrarenal losses", ok: false },
-      { t: "Group D: concentrations fall because production decreases with muscle wasting", ok: false },
+      { t: "Group A: levels climb steeply because excretion needs filtration", ok: true },
+      { t: "Group B: levels climb only mildly as tubular secretion offsets it", ok: false },
+      { t: "Group C: levels hold steady as intake matches extrarenal losses", ok: false },
+      { t: "Group D: levels fall because muscle wasting cuts their production", ok: false },
     ],
     rationale: "Group A solutes (creatinine and urea) have plasma concentrations that are inversely proportional to GFR because they rely almost exclusively on glomerular filtration for excretion. As GFR falls by half, their plasma concentrations approximately double. Group B solutes (phosphate and H+) rise moderately because regulatory hormones (PTH for phosphate, ammonia adaptation for H+) partially compensate. Group C solutes (Na+ and Cl-) remain nearly constant because the kidney adjusts fractional reabsorption.", // source: slide Ch32 CKD solute groups A/B/C
     scene: "renal",
@@ -782,10 +782,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Why is serum creatinine an insensitive early marker of GFR decline?",
     setup: "",
     ans: [
-      { t: "Creatinine is actively secreted, so tubular secretion masks the GFR drop", ok: false },
-      { t: "The inverse relationship means large early GFR drops produce only small creatinine increases, and creatinine depends on muscle mass", ok: true },
-      { t: "Creatinine is only filtered when GFR exceeds 60 mL per min", ok: false },
-      { t: "Creatinine production increases in CKD, falsely lowering the ratio", ok: false },
+      { t: "It is secreted by tubules, so secretion hides the GFR drop", ok: false },
+      { t: "The curve means big early GFR drops barely move creatinine", ok: true },
+      { t: "It is filtered only when GFR stays above 60 mL per minute", ok: false },
+      { t: "Its production climbs in CKD, falsely lowering the ratio", ok: false },
     ],
     rationale: "The creatinine versus GFR relationship is a rectangular hyperbola. At normal GFR (120 mL/min), a 50 percent GFR drop (to 60 mL/min) only doubles creatinine from 1.0 to 2.0 mg/dL, a change that may still fall within the normal lab range. Additionally, creatinine production depends on muscle mass, so a cachectic patient with low muscle mass may have a deceptively low creatinine despite significantly reduced GFR. Diet (meat intake) and tubular secretion add further variability.", // source: slide Ch32 creatinine in CKD: large GFR changes → small creatinine changes
     scene: "renal",
@@ -799,10 +799,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Isosthenuria in advanced CKD refers to which finding?",
     setup: "",
     ans: [
-      { t: "Urine osmolarity is fixed near plasma osmolarity regardless of hydration status, reflecting loss of both concentrating and diluting ability", ok: true },
-      { t: "Urine output is fixed at exactly 1 liter per day regardless of fluid intake", ok: false },
-      { t: "Urine protein concentration equals plasma protein concentration", ok: false },
-      { t: "Urine pH is fixed at 7.0 and cannot be changed", ok: false },
+      { t: "Urine osmolarity is fixed near plasma, losing both abilities", ok: true },
+      { t: "Urine output is fixed at one liter a day whatever the intake", ok: false },
+      { t: "Urine protein concentration matches the plasma protein level", ok: false },
+      { t: "Urine pH is locked at 7.0 and cannot be shifted in any way", ok: false },
     ],
     rationale: "As nephron number declines in CKD, each surviving nephron handles a larger obligatory solute load, limiting dilution. Simultaneously, the medullary gradient is washed out by increased per nephron blood flow, limiting concentration. The result is that urine specific gravity converges toward 1.010 (approximately 300 mOsm/L, near plasma osmolarity) regardless of whether the patient is volume depleted or volume loaded. This loss of both concentrating and diluting ability is called isosthenuria.", // source: slide Ch32 isosthenuria SG converges to 1.010
     scene: "renal",
@@ -833,9 +833,9 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Hemodialysis works by passing blood across a semipermeable membrane in contact with dialysate. Which principle drives waste removal?",
     setup: "",
     ans: [
-      { t: "Active transport by membrane pumps", ok: false },
-      { t: "Diffusion down concentration gradients from blood to dialysate", ok: true },
-      { t: "Filtration under high hydrostatic pressure from the blood side", ok: false },
+      { t: "Active transport driven by membrane pumps", ok: false },
+      { t: "Diffusion down gradients from blood to dialysate", ok: true },
+      { t: "Filtration under high hydrostatic blood pressure", ok: false },
       { t: "Pinocytosis of waste molecules by membrane pores", ok: false },
     ],
     rationale: "Hemodialysis relies primarily on diffusion. Waste products (urea, creatinine, K+, H+) have higher concentrations in the blood than in the dialysate, so they diffuse across the semipermeable membrane into the dialysate. Conversely, substances with higher concentration in the dialysate (such as HCO3-) diffuse into the blood. Some convective removal (ultrafiltration) also occurs when a pressure gradient is applied to remove excess fluid, but the principal mechanism for solute clearance is diffusion.", // source: slide Ch32 dialysis semipermeable membrane diffusion
@@ -867,10 +867,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "In the metabolic alkalosis compensation table, what is the expected respiratory response?",
     setup: "",
     ans: [
-      { t: "Hyperventilation to lower PCO2", ok: false },
-      { t: "Hypoventilation to raise PCO2", ok: true },
-      { t: "No change in ventilation; only renal compensation occurs", ok: false },
-      { t: "Increased tidal volume with decreased respiratory rate, net PCO2 unchanged", ok: false },
+      { t: "Hyperventilation acting to lower the PCO2", ok: false },
+      { t: "Hypoventilation acting to raise the PCO2", ok: true },
+      { t: "No ventilation change, only renal compensation", ok: false },
+      { t: "Bigger tidal volume, slower rate, flat net PCO2", ok: false },
     ],
     rationale: "Metabolic alkalosis raises plasma pH. Chemoreceptors detect the elevated pH and reduce respiratory drive, causing hypoventilation. This retains CO2, raising PCO2, which partially corrects pH back toward normal. However, respiratory compensation for metabolic alkalosis is limited because hypoventilation also causes hypoxemia, which eventually stimulates ventilation through peripheral chemoreceptors. This is why respiratory compensation for metabolic alkalosis is typically incomplete compared to the vigorous hyperventilation seen in metabolic acidosis.", // source: slide Ch31 acid-base compensation table: met alkalosis → ↓ventilation
     scene: "renal",
@@ -884,10 +884,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "A patient has pH 7.48, PCO2 30 mm Hg, and HCO3- 22 mEq per liter. What is the primary disorder?",
     setup: "",
     ans: [
-      { t: "Metabolic alkalosis", ok: false },
-      { t: "Respiratory alkalosis", ok: true },
-      { t: "Metabolic acidosis with respiratory compensation", ok: false },
-      { t: "Mixed metabolic and respiratory alkalosis", ok: false },
+      { t: "Primary metabolic alkalosis here", ok: false },
+      { t: "Primary respiratory alkalosis", ok: true },
+      { t: "Metabolic acidosis with resp comp", ok: false },
+      { t: "Mixed metabolic and resp alkalosis", ok: false },
     ],
     rationale: "The pH is elevated (alkalosis). PCO2 is low (30, normal 40), which drives pH up and is therefore the primary disturbance. HCO3- is slightly low (22, normal 24), which would push pH down and therefore represents renal compensation (the kidney reduces HCO3- reabsorption to offset the alkalosis). This is respiratory alkalosis with partial renal compensation. Common causes include hyperventilation from anxiety, high altitude, pulmonary embolism, or pregnancy.", // source: slide Ch31 acid-base classification
     scene: "renal",
@@ -918,10 +918,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Which feature distinguishes postrenal AKI from prerenal and intrarenal AKI?",
     setup: "",
     ans: [
-      { t: "It is caused by obstruction of the urinary outflow tract distal to the kidneys", ok: true },
-      { t: "It is caused by direct toxic damage to renal tubular cells", ok: false },
-      { t: "It is caused by inadequate cardiac output reducing renal blood flow", ok: false },
-      { t: "It always produces complete anuria from the onset", ok: false },
+      { t: "It comes from outflow tract obstruction below the kidneys", ok: true },
+      { t: "It comes from direct toxic injury to the renal tubule cells", ok: false },
+      { t: "It comes from low cardiac output cutting renal blood flow", ok: false },
+      { t: "It always causes complete anuria right from its very onset", ok: false },
     ],
     rationale: "Postrenal AKI results from obstruction of urine flow anywhere downstream of the kidneys, including ureters, bladder, or urethra. Common causes include kidney stones, prostatic hypertrophy, tumors compressing the urinary tract, and urethral strictures. The obstruction must be bilateral (or involve a solitary kidney) to cause significant AKI. Postrenal AKI is the least common form (approximately 5 percent) but is important because it is often reversible with relief of obstruction. It does not always cause complete anuria; partial obstruction can produce oliguria.", // source: slide Ch32 postrenal AKI obstruction
     scene: "renal",
@@ -935,10 +935,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Normal aging causes progressive loss of nephrons. What is the approximate number of glomeruli present per kidney at birth, and what happens by age 80?",
     setup: "",
     ans: [
-      { t: "500,000 at birth; approximately 300,000 remain at age 80 through normal aging", ok: false },
-      { t: "1,000,000 at birth; approximately 500,000 remain at age 80 through normal aging", ok: true },
-      { t: "2,000,000 at birth; all are preserved through age 80 in the absence of disease", ok: false },
-      { t: "100,000 at birth; approximately 10,000 remain at age 80", ok: false },
+      { t: "500,000 at birth, about 300,000 remain by age 80", ok: false },
+      { t: "1,000,000 at birth, about 500,000 remain by age 80", ok: true },
+      { t: "2,000,000 at birth, all preserved through age 80", ok: false },
+      { t: "100,000 at birth, about 10,000 remain by age 80", ok: false },
     ],
     rationale: "Each kidney contains approximately 1 million (1,000,000) glomeruli at birth, totaling roughly 2 million for both kidneys. Normal aging results in a gradual decline, with approximately half of glomeruli lost by age 80. Superimposed kidney disease (diabetes, hypertension) accelerates nephron loss dramatically. The surviving nephrons undergo compensatory hypertrophy and increase their single nephron GFR, which maintains total GFR within functional limits until the reserve is exhausted.", // source: slide Ch32 aging nephron loss figure 32-3
     scene: "renal",
@@ -952,10 +952,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "When GFR drops by 50 percent acutely, what happens to serum creatinine concentration over the following days?",
     setup: "",
     ans: [
-      { t: "It immediately doubles and stabilizes", ok: false },
-      { t: "It rises gradually over 1 to 3 days until a new steady state is reached at approximately double the baseline", ok: true },
-      { t: "It remains unchanged because tubular secretion compensates completely", ok: false },
-      { t: "It rises to 10 times baseline within 24 hours", ok: false },
+      { t: "It doubles at once and then immediately stabilizes", ok: false },
+      { t: "It climbs over 1 to 3 days to roughly double baseline", ok: true },
+      { t: "It stays flat because tubular secretion fully offsets it", ok: false },
+      { t: "It jumps to ten times baseline within the first 24 hours", ok: false },
     ],
     rationale: "After an acute 50 percent GFR drop, creatinine excretion initially falls below creatinine production (which remains constant). This creates a positive creatinine balance. Plasma creatinine rises gradually until the new higher concentration restores excretion to match production (because excretion equals GFR times plasma creatinine). This new steady state, at approximately double the baseline creatinine, is reached over approximately 1 to 3 days. The delay means serum creatinine lags behind acute GFR changes.", // source: slide Ch32 creatinine steady state after 50% GFR drop
     scene: "renal",
@@ -969,10 +969,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Which acid-base disorder is caused by diarrhea, and what is the mechanism?",
     setup: "",
     ans: [
-      { t: "Normal anion gap metabolic acidosis from direct loss of HCO3- in stool", ok: true },
-      { t: "Increased anion gap metabolic acidosis from lactic acid production", ok: false },
-      { t: "Metabolic alkalosis from loss of H+ ions in stool", ok: false },
-      { t: "Respiratory acidosis from decreased ventilatory drive", ok: false },
+      { t: "Normal anion gap acidosis from HCO3- lost in the stool", ok: true },
+      { t: "Increased anion gap acidosis from lactic acid buildup", ok: false },
+      { t: "Metabolic alkalosis from H+ ions lost into the stool", ok: false },
+      { t: "Respiratory acidosis from a low central ventilatory drive", ok: false },
     ],
     rationale: "Intestinal fluid distal to the stomach is rich in HCO3- (secreted by the pancreas and intestinal epithelium). Diarrhea causes direct loss of this bicarbonate rich fluid, lowering plasma HCO3-. The lost HCO3- is replaced by Cl- (renal retention), producing hyperchloremic (normal anion gap) metabolic acidosis. No unmeasured anions accumulate, so the anion gap remains normal. This contrasts with metabolic acidosis from ketoacidosis or lactic acidosis, where unmeasured anions elevate the gap.", // source: slide Ch31 diarrhea → normal AG metabolic acidosis
     scene: "renal",
@@ -986,10 +986,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Mineralocorticoid excess (such as primary aldosteronism) causes metabolic alkalosis by which mechanism?",
     setup: "",
     ans: [
-      { t: "Excess aldosterone stimulates collecting duct H+ secretion via the H+ ATPase while simultaneously promoting K+ loss", ok: true },
-      { t: "Aldosterone directly generates HCO3- in the adrenal cortex which is released into blood", ok: false },
-      { t: "Aldosterone blocks carbonic anhydrase, reducing H+ secretion", ok: false },
-      { t: "Aldosterone causes respiratory depression, retaining CO2", ok: false },
+      { t: "Aldosterone drives duct H+ ATPase secretion and K+ loss", ok: true },
+      { t: "Aldosterone makes HCO3- in the adrenal cortex for the blood", ok: false },
+      { t: "Aldosterone blocks carbonic anhydrase, cutting H+ secretion", ok: false },
+      { t: "Aldosterone depresses breathing, leading to CO2 retention", ok: false },
     ],
     rationale: "Aldosterone acts on principal cells to increase ENaC mediated Na+ reabsorption (creating lumen negative voltage) and on Type A intercalated cells to stimulate H+ ATPase activity. The increased H+ secretion generates new HCO3- that enters the blood. Simultaneously, aldosterone promotes K+ secretion through ROMK channels. The resulting hypokalemia further stimulates H+ secretion (as H+ shifts into cells to replace lost K+). Both mechanisms drive HCO3- overproduction and metabolic alkalosis.", // source: slide Ch31 metabolic alkalosis: mineralocorticoid excess
     scene: "renal",
@@ -1003,10 +1003,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "Renal tubular acidosis (RTA) causes metabolic acidosis by which general mechanism, and what type of anion gap does it produce?",
     setup: "",
     ans: [
-      { t: "Impaired tubular H+ secretion or HCO3- reabsorption, producing a normal anion gap (hyperchloremic) metabolic acidosis", ok: true },
-      { t: "Overproduction of lactic acid by tubular cells, producing an increased anion gap metabolic acidosis", ok: false },
-      { t: "Excessive reabsorption of Cl-, producing a decreased anion gap", ok: false },
-      { t: "Impaired ammoniagenesis only, with normal H+ secretion", ok: false },
+      { t: "Poor tubular H+ secretion or HCO3- uptake, normal anion gap", ok: true },
+      { t: "Tubular cells overmake lactic acid, raising the anion gap", ok: false },
+      { t: "Excess chloride reabsorption that lowers the anion gap", ok: false },
+      { t: "Only impaired ammoniagenesis, with normal H+ secretion", ok: false },
     ],
     rationale: "Renal tubular acidosis encompasses a group of disorders in which the kidney fails to adequately secrete H+ (distal/Type 1 RTA), reabsorb HCO3- (proximal/Type 2 RTA), or both. HCO3- is lost in the urine without accumulation of any unmeasured anion. The kidney compensates by retaining Cl-, producing hyperchloremic (normal anion gap) metabolic acidosis. This distinguishes RTA from high anion gap causes such as DKA or lactic acidosis, where unmeasured organic anions accumulate.", // source: slide Ch31 RTA → normal AG metabolic acidosis
     scene: "renal",
