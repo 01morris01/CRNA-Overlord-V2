@@ -32,10 +32,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "With ADH fully suppressed during a water load, the minimum urine osmolarity a healthy kidney can achieve is closest to which value?",
     setup: "",
     ans: [
-      { t: "50 mOsm/L, because the thick ascending limb continues to dilute tubular fluid even without ADH", ok: true },
-      { t: "150 mOsm/L, representing half of normal plasma osmolarity", ok: false },
-      { t: "0 mOsm/L, because the kidney can produce pure water when ADH is absent", ok: false },
-      { t: "300 mOsm/L, because tubular fluid always equilibrates with plasma in the proximal tubule", ok: false },
+      { t: "About 50 mOsm/L, since the diluting segment works without ADH present", ok: true },
+      { t: "About 150 mOsm/L, which is roughly half of normal plasma osmolarity", ok: false },
+      { t: "About 0 mOsm/L, since the kidney can make pure water without any ADH", ok: false },
+      { t: "About 300 mOsm/L, since tubular fluid equilibrates with plasma early", ok: false },
     ],
     rationale: "When ADH is absent, the late distal tubule and collecting duct are impermeable to water, so the dilute fluid generated in the thick ascending limb (the diluting segment) passes through without concentrating. Minimum urine osmolarity is approximately 50 mOsm/L. The kidney cannot produce pure water (0 mOsm/L) because obligatory solute excretion always carries some osmoles. The 300 mOsm/L option describes isosmotic proximal tubular fluid before dilution occurs.", // source: Ch 29 slide — Changes in Osmolarity Based on ADH Levels
     scene: "renal",
@@ -117,10 +117,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Water reabsorption in the late distal tubule and collecting duct is described as 'ADH dependent' because these segments require ADH to do what?",
     setup: "",
     ans: [
-      { t: "Insert aquaporin 2 channels into the luminal membrane, making the epithelium permeable to water", ok: true },
-      { t: "Activate the Na/K/2Cl cotransporter, which drives secondary water reabsorption", ok: false },
-      { t: "Open paracellular tight junctions, allowing bulk water flow between cells", ok: false },
-      { t: "Stimulate Na/K ATPase on the basolateral membrane, pulling water osmotically", ok: false },
+      { t: "Insert aquaporin 2 channels into the luminal membrane to admit water", ok: true },
+      { t: "Activate the Na/K/2Cl cotransporter that drives water reabsorption", ok: false },
+      { t: "Open paracellular tight junctions to let bulk water flow past cells", ok: false },
+      { t: "Stimulate basolateral Na/K ATPase to pull water in osmotically", ok: false },
     ],
     rationale: "ADH (vasopressin) binds V2 receptors on the basolateral membrane of principal cells in the late distal tubule and collecting duct. This triggers cAMP mediated insertion of aquaporin 2 (AQP2) water channels into the luminal membrane. Without ADH, these segments are virtually impermeable to water and dilute urine is excreted. The Na/K/2Cl cotransporter is located in the thick ascending limb and is the target of loop diuretics, not ADH.", // source: Ch 29 slide — Summary of Water Reabsorption; ADH mechanism
     scene: "renal",
@@ -134,10 +134,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "ADH (vasopressin) is synthesized in which brain structure and released from which endocrine gland?",
     setup: "",
     ans: [
-      { t: "Synthesized in magnocellular neurons of the hypothalamus; released from the posterior pituitary", ok: true },
-      { t: "Synthesized in the anterior pituitary; released directly into the systemic circulation from there", ok: false },
-      { t: "Synthesized in the adrenal cortex; released alongside aldosterone during volume depletion", ok: false },
-      { t: "Synthesized in the juxtaglomerular cells of the kidney; released with renin", ok: false },
+      { t: "Made by hypothalamic magnocellular neurons; freed at posterior pituitary", ok: true },
+      { t: "Made in the anterior pituitary; freed straight into systemic circulation", ok: false },
+      { t: "Made in the adrenal cortex; freed with aldosterone during volume loss", ok: false },
+      { t: "Made in renal juxtaglomerular cells; freed together with renin secretion", ok: false },
     ],
     rationale: "ADH is a peptide hormone produced by magnocellular neurons located in the supraoptic and paraventricular nuclei of the hypothalamus. It is transported down axons to the posterior pituitary (neurohypophysis), where it is stored in vesicles and released into the bloodstream in response to osmotic and hemodynamic stimuli. The anterior pituitary produces different hormones (GH, ACTH, TSH). Aldosterone comes from the adrenal cortex zona glomerulosa. Renin comes from juxtaglomerular cells.", // source: Ch 29 slide — ADH Synthesis and Release
     scene: "renal",
@@ -185,10 +185,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Which of the following factors STIMULATES ADH secretion?",
     setup: "",
     ans: [
-      { t: "Nausea, which can produce a potent increase in ADH even without osmolarity changes", ok: true },
-      { t: "Alcohol consumption, which is a well known ADH stimulant", ok: false },
-      { t: "Increased blood volume, which triggers cardiopulmonary reflexes to raise ADH", ok: false },
-      { t: "Haloperidol administration, which enhances posterior pituitary ADH release", ok: false },
+      { t: "Nausea, which can sharply raise ADH even with no osmolarity shift", ok: true },
+      { t: "Alcohol intake, which is a well documented stimulant of ADH release", ok: false },
+      { t: "Increased blood volume, which raises ADH through cardiopulmonary reflexes", ok: false },
+      { t: "Haloperidol dosing, which boosts posterior pituitary ADH secretion", ok: false },
     ],
     rationale: "Nausea is a potent non-osmotic stimulus for ADH release and can raise ADH levels 100 fold. This explains the water retention and hyponatremia sometimes seen with nausea and vomiting. Alcohol INHIBITS ADH release, which is why it causes diuresis. Increased blood volume SUPPRESSES ADH via cardiopulmonary stretch receptors (decreased volume stimulates ADH). Haloperidol DECREASES ADH secretion. Other ADH stimulants include morphine, nicotine, angiotensin II, and decreased blood pressure.", // source: Ch 29 slides — Stimuli for ADH Secretion; Factors That Decrease ADH
     scene: "renal",
@@ -270,10 +270,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "A patient on chronic lithium therapy presents with polyuria and polydipsia. Serum ADH levels are elevated. What is the most likely diagnosis?",
     setup: "",
     ans: [
-      { t: "Nephrogenic diabetes insipidus, because lithium impairs the collecting duct response to ADH", ok: true },
-      { t: "Central diabetes insipidus, because lithium damages the posterior pituitary", ok: false },
-      { t: "SIADH, because lithium stimulates inappropriate ADH release", ok: false },
-      { t: "Primary polydipsia, because lithium stimulates the thirst center", ok: false },
+      { t: "Nephrogenic diabetes insipidus, since lithium blunts the duct ADH response", ok: true },
+      { t: "Central diabetes insipidus, since lithium injures the posterior pituitary", ok: false },
+      { t: "SIADH, since lithium prompts inappropriate posterior pituitary ADH release", ok: false },
+      { t: "Primary polydipsia, since lithium directly stimulates the thirst center", ok: false },
     ],
     rationale: "Lithium is the most common drug cause of nephrogenic diabetes insipidus. It interferes with ADH signaling in the collecting duct by impairing aquaporin 2 channel expression. The kidneys cannot respond to ADH despite its presence (hence elevated serum ADH). Central DI would show LOW ADH levels. SIADH would produce concentrated urine and hyponatremia, not polyuria. The key distinguishing feature is elevated ADH with dilute urine output.", // source: Ch 29 slide — Disorders of Urine Concentrating Ability
     scene: "renal",
@@ -287,10 +287,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "The vasa recta serve as countercurrent EXCHANGERS in the renal medulla. They preserve the medullary osmotic gradient by doing what?",
     setup: "",
     ans: [
-      { t: "Equilibrating slowly with the interstitium as blood descends and ascends, so that net solute removal is minimized", ok: true },
-      { t: "Actively pumping NaCl into the medullary interstitium like the thick ascending limb does", ok: false },
-      { t: "Blocking all water movement across their walls to prevent gradient washout", ok: false },
-      { t: "Carrying only 50% of total renal blood flow, which limits medullary perfusion", ok: false },
+      { t: "Equilibrating slowly as blood descends and ascends, limiting solute loss", ok: true },
+      { t: "Actively pumping NaCl into the medullary interstitium like the thick limb", ok: false },
+      { t: "Blocking all water crossing their walls to stop gradient washout entirely", ok: false },
+      { t: "Carrying about half of total renal blood flow, limiting medullary perfusion", ok: false },
     ],
     rationale: "The vasa recta are U shaped capillary loops that run parallel to the loops of Henle. As blood descends, it loses water and gains solute, equilibrating with the hypertonic medulla. As it ascends, the reverse occurs. This countercurrent exchange means solute picked up during descent is returned during ascent, so the net removal of medullary solute is minimized. The vasa recta carry only 1 to 2% (not 50%) of renal blood flow. They are passive exchangers, not active transporters.", // source: Ch 29 PDF — vasa recta countercurrent exchangers
     scene: "renal",
@@ -304,10 +304,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "If a patient excretes 600 mOsm of solute per day and can only concentrate urine to 300 mOsm/L due to kidney disease, what is the obligatory urine volume?",
     setup: "",
     ans: [
-      { t: "2 liters per day, calculated as 600 mOsm divided by 300 mOsm/L", ok: true },
-      { t: "0.5 liters per day, calculated as 600 mOsm divided by 1200 mOsm/L", ok: false },
-      { t: "1 liter per day, which is the standard daily urine output regardless of concentration", ok: false },
-      { t: "4 liters per day, because kidney disease doubles the excretory requirement", ok: false },
+      { t: "Two liters per day, found by dividing 600 mOsm by 300 mOsm per liter", ok: true },
+      { t: "Half a liter per day, found by dividing 600 mOsm by 1200 mOsm per liter", ok: false },
+      { t: "One liter per day, the usual daily output no matter the urine concentration", ok: false },
+      { t: "Four liters per day, since kidney disease doubles the excretory requirement", ok: false },
     ],
     rationale: "Obligatory urine volume equals daily solute load divided by maximal urine concentration: 600 mOsm / 300 mOsm/L = 2.0 L/day. In a healthy person who can concentrate to 1200 mOsm/L, the obligatory volume would be only 0.5 L/day (600/1200). Kidney disease reduces maximal concentrating ability, which increases obligatory urine volume and makes the patient susceptible to dehydration if water intake is insufficient.", // source: Ch 29 PDF — obligatory urine volume concept
     scene: "renal",
@@ -321,10 +321,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "The descending loop of Henle reabsorbs approximately what percentage of filtered water?",
     setup: "",
     ans: [
-      { t: "15%, as water exits osmotically into the hypertonic medullary interstitium", ok: true },
-      { t: "65%, representing the majority of filtered water reabsorption", ok: false },
-      { t: "0%, because the descending limb is impermeable to water", ok: false },
-      { t: "8%, similar to the collecting tubule in the absence of ADH", ok: false },
+      { t: "About 15%, as water exits into the hypertonic medullary interstitium", ok: true },
+      { t: "About 65%, which is the majority of all filtered water reabsorption", ok: false },
+      { t: "About 0%, because the descending limb is impermeable to water flow", ok: false },
+      { t: "About 8%, similar to the collecting tubule when ADH is fully absent", ok: false },
     ],
     rationale: "The descending thin limb reabsorbs approximately 15% of filtered water. Water leaves by osmosis as the tubular fluid travels through the progressively hypertonic medullary interstitium. The 65% figure applies to the proximal tubule. The ascending limb reabsorbs 0% water (it is water impermeable). The 8 mL figure from the slides refers to the volume reaching the collecting tubule from a starting 125 mL GFR.", // source: Ch 29 slide — Summary of Water Reabsorption; Changes in Osmolarity figure
     scene: "renal",
@@ -372,10 +372,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "When the aldosterone system alone is blocked, what effect does varying sodium intake have on plasma sodium concentration?",
     setup: "",
     ans: [
-      { t: "Plasma sodium changes very little, because the ADH-thirst system maintains osmolarity independently of aldosterone", ok: true },
-      { t: "Plasma sodium rises dramatically, because aldosterone is the primary defense against hypernatremia", ok: false },
-      { t: "Plasma sodium falls to dangerously low levels, because aldosterone is required for sodium retention", ok: false },
-      { t: "Plasma sodium becomes completely unregulated, oscillating between 120 and 160 mEq/L", ok: false },
+      { t: "Plasma sodium barely shifts, since ADH and thirst still hold osmolarity", ok: true },
+      { t: "Plasma sodium climbs sharply, since aldosterone is the main hypernatremia guard", ok: false },
+      { t: "Plasma sodium drops to dangerous lows, since aldosterone is needed to keep sodium", ok: false },
+      { t: "Plasma sodium becomes wholly unregulated, swinging between 120 and 160 mEq/L", ok: false },
     ],
     rationale: "Blocking the aldosterone system has minimal impact on plasma sodium concentration because the ADH-thirst osmoreceptor system is the dominant controller of osmolarity. Aldosterone primarily regulates ECF volume and potassium balance rather than sodium concentration. The experimental comparison shows that blocking ADH-thirst causes large plasma sodium swings, whereas blocking aldosterone causes negligible changes. This demonstrates that water balance (ADH-thirst), not sodium balance (aldosterone), controls plasma sodium concentration.", // source: Ch 29 slide — Effect of Sodium Intake After Blocking Aldosterone System
     scene: "renal",
@@ -508,10 +508,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Compared to the osmotic stimulus for ADH release, the hemodynamic (volume/pressure) stimulus requires what magnitude of change to significantly alter ADH levels?",
     setup: "",
     ans: [
-      { t: "A larger change (5 to 10% decrease in volume or pressure) compared to only 1 to 2% change in osmolarity", ok: true },
-      { t: "A smaller change (0.5% decrease in volume) because hemodynamic reflexes are more sensitive", ok: false },
-      { t: "An identical magnitude of change, because both pathways converge on the same hypothalamic neurons", ok: false },
-      { t: "No threshold; any decrease in blood pressure immediately maximizes ADH release", ok: false },
+      { t: "A larger 5 to 10% drop in volume or pressure versus only 1 to 2% osmolarity", ok: true },
+      { t: "A smaller 0.5% drop in volume, since hemodynamic reflexes are far more sensitive", ok: false },
+      { t: "An identical change, since both pathways act on the same hypothalamic neurons", ok: false },
+      { t: "No threshold at all, since any pressure drop instantly maximizes ADH release", ok: false },
     ],
     rationale: "The osmotic pathway for ADH regulation is exquisitely sensitive; a 1 to 2% increase in plasma osmolarity significantly increases ADH secretion. In contrast, hemodynamic stimuli (decreased blood volume via cardiopulmonary baroreceptors and decreased blood pressure via arterial baroreceptors) require 5 to 10% changes before they significantly affect ADH levels. However, when large hemodynamic changes occur (such as hemorrhagic shock), the volume/pressure stimulus can produce very high ADH levels, overriding the osmotic set point.", // source: Ch 29 slide — Stimuli for ADH graph showing isovolemic osmotic vs isotonic volume depletion
     scene: "renal",
@@ -544,10 +544,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Approximately what percentage of total body potassium resides in the intracellular fluid compartment?",
     setup: "",
     ans: [
-      { t: "98%, with only about 2% in the extracellular fluid", ok: true },
-      { t: "50%, evenly distributed between intracellular and extracellular compartments", ok: false },
-      { t: "70%, with 30% in the extracellular fluid for rapid exchange", ok: false },
-      { t: "85%, with the remaining 15% bound to plasma proteins", ok: false },
+      { t: "About 98%, leaving only roughly 2% within the extracellular fluid", ok: true },
+      { t: "About 50%, divided evenly between intracellular and extracellular pools", ok: false },
+      { t: "About 70%, with the other 30% in extracellular fluid for fast exchange", ok: false },
+      { t: "About 85%, with the remaining 15% bound to circulating plasma proteins", ok: false },
     ],
     rationale: "Approximately 98% of total body potassium (about 3920 mEq out of approximately 3979 mEq total) resides in the intracellular compartment at a concentration of 140 mEq/L across 28 liters of ICF. Only about 2% (approximately 59 mEq) is in the extracellular fluid at 4.2 mEq/L across 14 liters. This massive ICF reservoir means that even small shifts of K+ between compartments can dramatically change plasma K+ concentration.", // source: Ch 30 PDF — K+ distribution: ECF 4.2 mEq/L × 14L = 59 mEq; ICF 140 mEq/L × 28L = 3920 mEq
     scene: "renal",
@@ -578,10 +578,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "A patient with severe metabolic acidosis (pH 7.15) has a plasma K+ of 6.2 mEq/L. What mechanism explains this hyperkalemia?",
     setup: "",
     ans: [
-      { t: "H+ ions enter cells to be buffered, displacing K+ ions into the extracellular fluid to maintain electroneutrality", ok: true },
-      { t: "Acidosis directly stimulates aldosterone release, which paradoxically increases K+ secretion", ok: false },
-      { t: "Low pH inhibits renal Na/K/2Cl cotransporter, blocking all K+ reabsorption in the loop", ok: false },
-      { t: "Acidosis causes massive cell lysis, releasing intracellular K+ stores", ok: false },
+      { t: "H+ moves into cells for buffering and displaces K+ out to keep electroneutrality", ok: true },
+      { t: "Acidosis directly drives aldosterone release, which paradoxically raises K+ output", ok: false },
+      { t: "Low pH blocks the renal Na/K/2Cl cotransporter, halting all loop K+ reabsorption", ok: false },
+      { t: "Acidosis triggers widespread cell lysis, dumping intracellular K+ stores into plasma", ok: false },
     ],
     rationale: "In metabolic acidosis, excess H+ ions move into cells where intracellular proteins buffer them. To maintain electrical neutrality, K+ ions move out of cells into the extracellular fluid. This transcellular shift can raise plasma K+ by approximately 0.6 mEq/L for each 0.1 unit decrease in pH. This is a shift phenomenon, not a change in total body K+. The reverse occurs in alkalosis: K+ moves into cells as H+ exits, causing hypokalemia. Acidosis actually decreases (not increases) aldosterone's effectiveness.", // source: Ch 30 PDF — acidosis shifts K+ extracellularly
     scene: "renal",
@@ -595,10 +595,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "In the collecting duct, which cell type is primarily responsible for potassium SECRETION into the tubular lumen?",
     setup: "",
     ans: [
-      { t: "Principal cells, which secrete K+ through ROMK and BK channels after Na+ entry via ENaC", ok: true },
-      { t: "Type A intercalated cells, which secrete K+ through H/K ATPase pumps", ok: false },
-      { t: "Type B intercalated cells, which secrete both K+ and HCO3 into the lumen", ok: false },
-      { t: "Macula densa cells, which regulate K+ secretion through tubuloglomerular feedback", ok: false },
+      { t: "Principal cells, secreting K+ via ROMK and BK channels after Na+ entry", ok: true },
+      { t: "Type A intercalated cells, secreting K+ through luminal H/K ATPase pumps", ok: false },
+      { t: "Type B intercalated cells, secreting both K+ and HCO3 into the tubule", ok: false },
+      { t: "Macula densa cells, setting K+ secretion through tubuloglomerular feedback", ok: false },
     ],
     rationale: "Principal cells in the cortical collecting duct are responsible for K+ secretion. Na+ enters the cell from the lumen through ENaC (epithelial sodium channel), which is driven by the basolateral Na/K ATPase. This creates a favorable electrochemical gradient for K+ to exit into the lumen through ROMK (renal outer medullary K+) channels and BK (big conductance K+) channels. Aldosterone enhances this process by upregulating both ENaC and Na/K ATPase. Type A intercalated cells REABSORB K+ via H/K ATPase. Macula densa cells sense NaCl delivery for TGF.", // source: Ch 30 PDF — principal cell K+ secretion
     scene: "renal",
@@ -612,10 +612,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Aldosterone regulates potassium balance through a feedback loop. When plasma K+ rises, what sequence of events occurs?",
     setup: "",
     ans: [
-      { t: "Increased K+ stimulates adrenal cortex aldosterone release, which increases renal K+ secretion, restoring K+ to normal", ok: true },
-      { t: "Increased K+ inhibits aldosterone, causing sodium retention that dilutes plasma K+", ok: false },
-      { t: "Increased K+ stimulates ADH release, which increases water reabsorption and dilutes K+", ok: false },
-      { t: "Increased K+ stimulates renin release from juxtaglomerular cells, triggering the full RAAS cascade", ok: false },
+      { t: "High K+ drives adrenal aldosterone release, raising renal K+ secretion to normalize", ok: true },
+      { t: "High K+ suppresses aldosterone, causing sodium retention that dilutes the plasma K+", ok: false },
+      { t: "High K+ triggers ADH release, raising water reabsorption to dilute the plasma K+", ok: false },
+      { t: "High K+ drives renin release from juxtaglomerular cells, firing the full RAAS cascade", ok: false },
     ],
     rationale: "Elevated plasma K+ directly stimulates the adrenal cortex zona glomerulosa to release aldosterone. Aldosterone then acts on principal cells of the collecting duct to increase ENaC expression (enhancing Na+ reabsorption) and Na/K ATPase activity, both of which promote K+ secretion into the tubular lumen. This negative feedback loop returns plasma K+ toward normal. This is an independent aldosterone stimulus separate from angiotensin II. K+ does not directly stimulate renin release; renin release is driven by decreased renal perfusion, decreased NaCl delivery to macula densa, or sympathetic stimulation.", // source: Ch 30 PDF — aldosterone-K+ feedback
     scene: "renal",
@@ -629,10 +629,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "All of the following are recognized causes of hyperkalemia EXCEPT:",
     setup: "",
     ans: [
-      { t: "Metabolic alkalosis, which shifts K+ INTO cells and tends to lower plasma K+", ok: true },
-      { t: "Renal failure, which decreases the kidney's ability to excrete K+", ok: false },
-      { t: "Potassium sparing diuretics (e.g., spironolactone), which block K+ secretion in the collecting duct", ok: false },
-      { t: "Addison disease (adrenal insufficiency), which reduces aldosterone mediated K+ secretion", ok: false },
+      { t: "Metabolic alkalosis, which shifts K+ into cells and tends to lower plasma K+", ok: true },
+      { t: "Renal failure, which lowers the kidney capacity to excrete potassium load", ok: false },
+      { t: "Potassium sparing diuretics, which block collecting duct potassium secretion", ok: false },
+      { t: "Addison disease, which cuts aldosterone driven collecting duct K+ secretion", ok: false },
     ],
     rationale: "Metabolic alkalosis shifts K+ INTO cells (as H+ exits cells, K+ enters to maintain electroneutrality), which tends to LOWER plasma K+ (hypokalemia, not hyperkalemia). All other options are established causes of hyperkalemia. Renal failure reduces K+ excretion. K+ sparing diuretics (spironolactone blocks aldosterone receptors; amiloride blocks ENaC) impair collecting duct K+ secretion. Addison disease causes aldosterone deficiency, reducing K+ secretion. Metabolic acidosis (not alkalosis) causes hyperkalemia.", // source: Ch 30 PDF — causes of hyperkalemia; Ch 30 slide — effects of acid-base on K+
     scene: "renal",
@@ -663,10 +663,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Severe hyperkalemia (greater than 7.0 mEq/L) produces which dangerous cardiac effect?",
     setup: "",
     ans: [
-      { t: "Partial depolarization of cell membranes leading to cardiac toxicity, including ventricular fibrillation or asystole", ok: true },
-      { t: "Hyperpolarization of cardiac cells leading to bradycardia and increased automaticity", ok: false },
-      { t: "Accelerated conduction velocity through the AV node causing supraventricular tachycardia", ok: false },
-      { t: "Prolonged action potential plateau phase causing torsades de pointes", ok: false },
+      { t: "Partial membrane depolarization causing cardiac toxicity, even VF or asystole", ok: true },
+      { t: "Membrane hyperpolarization causing bradycardia and increased cardiac automaticity", ok: false },
+      { t: "Faster conduction through the AV node causing supraventricular tachycardia onset", ok: false },
+      { t: "A prolonged action potential plateau phase causing torsades de pointes rhythm", ok: false },
     ],
     rationale: "Severe hyperkalemia (greater than 7.0 mEq/L) reduces the resting membrane potential (partial depolarization) by decreasing the K+ concentration gradient across cell membranes. This inactivates sodium channels, slows conduction, and can produce widened QRS complexes, peaked T waves, loss of P waves, sine wave pattern, and ultimately ventricular fibrillation or asystole. Hyperpolarization occurs with hypokalemia, not hyperkalemia. Hyperkalemia slows conduction rather than accelerating it. Torsades de pointes is associated with QT prolongation from hypokalemia or drug effects.", // source: Ch 30 slide — Effects of severe hyperkalemia (>7.0 mEq/L)
     scene: "renal",
@@ -680,10 +680,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Severe hypokalemia (less than 3.0 mEq/L) can produce which neuromuscular effect?",
     setup: "",
     ans: [
-      { t: "Hyperpolarization of cell membranes causing muscle weakness, fatigue, and hypoventilation", ok: true },
-      { t: "Depolarization of cell membranes causing tetany and muscle spasms", ok: false },
-      { t: "Direct skeletal muscle fiber necrosis (rhabdomyolysis) as the primary presentation", ok: false },
-      { t: "Peripheral nerve demyelination causing progressive sensory loss", ok: false },
+      { t: "Membrane hyperpolarization causing weakness, fatigue, and hypoventilation", ok: true },
+      { t: "Membrane depolarization causing tetany along with frank muscle spasms", ok: false },
+      { t: "Direct skeletal muscle necrosis (rhabdomyolysis) as the first presentation", ok: false },
+      { t: "Peripheral nerve demyelination causing progressive sensory loss over time", ok: false },
     ],
     rationale: "Severe hypokalemia increases the K+ concentration gradient across cell membranes, hyperpolarizing them. Hyperpolarized cells require a larger stimulus to reach threshold, leading to muscle weakness, fatigue, and in severe cases, respiratory muscle weakness causing hypoventilation. Cardiac effects include delayed ventricular repolarization (prolonged QT interval, U waves) and increased risk of arrhythmias. Tetany is associated with hypocalcemia, not hypokalemia. While rhabdomyolysis can occur with extreme hypokalemia, it is not the primary or earliest manifestation.", // source: Ch 30 slide — Effects of severe hypokalemia (<3.0 mEq/L)
     scene: "renal",
@@ -697,10 +697,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "When plasma ionized calcium decreases, parathyroid hormone (PTH) is released. PTH restores calcium through which THREE simultaneous actions?",
     setup: "",
     ans: [
-      { t: "Increases renal Ca2+ reabsorption, increases bone Ca2+ release, and activates vitamin D3 which increases intestinal Ca2+ absorption", ok: true },
-      { t: "Increases renal Ca2+ excretion, decreases bone Ca2+ release, and inhibits vitamin D3 activation", ok: false },
-      { t: "Increases renal Ca2+ reabsorption, increases bone Ca2+ storage, and activates calcitonin release", ok: false },
-      { t: "Decreases renal phosphate reabsorption only; bone and intestinal effects are mediated by calcitonin", ok: false },
+      { t: "Raises renal Ca2+ uptake, raises bone Ca2+ release, and activates vitamin D3", ok: true },
+      { t: "Raises renal Ca2+ excretion, cuts bone Ca2+ release, and blocks vitamin D3 activation", ok: false },
+      { t: "Raises renal Ca2+ uptake, raises bone Ca2+ storage, and triggers calcitonin release", ok: false },
+      { t: "Cuts renal phosphate uptake only; bone and gut effects come from calcitonin instead", ok: false },
     ],
     rationale: "PTH has three coordinated actions to raise plasma calcium: (1) it increases Ca2+ reabsorption in the distal tubule of the kidney, (2) it stimulates osteoclast activity to release Ca2+ from bone, and (3) it activates 1 alpha hydroxylase in the kidney to convert 25 hydroxyvitamin D to active 1,25 dihydroxyvitamin D3 (calcitriol), which increases intestinal Ca2+ absorption. PTH also decreases renal phosphate reabsorption (phosphaturic effect), which prevents Ca2+ x PO4 product from rising. Calcitonin has the opposite effect (lowers calcium) but is physiologically less important.", // source: Ch 30 slide — Compensatory Responses to Decreased Plasma Ionized Calcium (Figure 30-11)
     scene: "renal",
@@ -714,10 +714,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "In chronic kidney disease, nephron loss leads to phosphate retention. What cascade does this trigger regarding calcium and bone?",
     setup: "",
     ans: [
-      { t: "Phosphate retention decreases plasma Ca2+, which increases PTH, which increases bone Ca2+ release, leading to osteoporosis", ok: true },
-      { t: "Phosphate retention increases plasma Ca2+, which suppresses PTH and protects bone mass", ok: false },
-      { t: "Phosphate retention has no effect on calcium because they are regulated by independent pathways", ok: false },
-      { t: "Phosphate retention directly dissolves bone matrix without any hormonal mediator", ok: false },
+      { t: "Retained phosphate lowers plasma Ca2+, raising PTH and bone loss toward osteoporosis", ok: true },
+      { t: "Retained phosphate raises plasma Ca2+, which suppresses PTH and protects bone mass", ok: false },
+      { t: "Retained phosphate has no calcium effect, since the two use independent pathways", ok: false },
+      { t: "Retained phosphate dissolves bone matrix directly without any hormonal mediator", ok: false },
     ],
     rationale: "In CKD, decreased nephron number impairs phosphate excretion, leading to hyperphosphatemia. Elevated phosphate complexes with calcium, lowering ionized Ca2+ in plasma. The calcium sensing receptor on parathyroid glands detects this hypocalcemia and increases PTH secretion (secondary hyperparathyroidism). Chronically elevated PTH promotes ongoing bone resorption to maintain serum calcium, leading to renal osteodystrophy and osteoporosis with brittle bones. Additionally, CKD impairs 1 alpha hydroxylase activity, reducing active vitamin D3 production and further worsening hypocalcemia.", // source: Ch 30 slide — Hormonal Response to Chronic Renal Disease PTH cascade
     scene: "renal",
@@ -765,10 +765,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "The renal-body fluid feedback system links arterial pressure to sodium and water excretion. When arterial pressure rises, what is the renal response?",
     setup: "",
     ans: [
-      { t: "Increased sodium and water excretion (pressure natriuresis and diuresis), which reduces ECF volume and returns BP toward normal", ok: true },
-      { t: "Decreased sodium excretion due to increased proximal tubule reabsorption from higher perfusion pressure", ok: false },
-      { t: "No change in sodium excretion, because autoregulation keeps GFR constant across a wide pressure range", ok: false },
-      { t: "Increased renin release, which raises angiotensin II and further elevates blood pressure", ok: false },
+      { t: "More sodium and water excretion (pressure natriuresis), lowering ECF and BP", ok: true },
+      { t: "Less sodium excretion from greater proximal reabsorption at higher perfusion", ok: false },
+      { t: "No change in sodium excretion, since autoregulation holds GFR over a wide range", ok: false },
+      { t: "More renin release, which raises angiotensin II and pushes blood pressure higher", ok: false },
     ],
     rationale: "Pressure natriuresis is the direct renal mechanism by which increased arterial pressure increases sodium and water excretion. When pressure rises, several mechanisms increase excretion: slightly increased GFR (despite autoregulation), increased peritubular capillary hydrostatic pressure (reducing reabsorption), and decreased angiotensin II and aldosterone (which reduce tubular reabsorption). This is a key negative feedback loop: increased pressure raises excretion, reduces ECF volume, reduces blood volume, reduces venous return and cardiac output, and returns arterial pressure toward normal.", // source: Ch 30 slides — Renal-Body Fluid Feedback; Renal Pressure Natriuresis
     scene: "renal",
@@ -782,10 +782,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "The chronic pressure natriuresis curve is much steeper than the acute curve. Which of the following contributes to the enhanced chronic natriuresis when arterial pressure rises?",
     setup: "",
     ans: [
-      { t: "Decreased angiotensin II and decreased aldosterone, which reduce tubular sodium reabsorption", ok: true },
-      { t: "Increased ADH secretion, which concentrates urine and increases sodium excretion per liter", ok: false },
-      { t: "Increased sympathetic nerve activity to the kidney, which inhibits proximal reabsorption", ok: false },
-      { t: "Decreased renal blood flow due to autoregulatory vasoconstriction", ok: false },
+      { t: "Lower angiotensin II and lower aldosterone, which cut tubular sodium reabsorption", ok: true },
+      { t: "Higher ADH secretion, which concentrates urine and raises sodium output per liter", ok: false },
+      { t: "Higher renal sympathetic nerve activity, which suppresses proximal reabsorption", ok: false },
+      { t: "Lower renal blood flow caused by autoregulatory vasoconstriction of the afferent", ok: false },
     ],
     rationale: "The chronic pressure natriuresis curve is steeper than the acute curve because sustained increases in arterial pressure suppress the renin angiotensin aldosterone system. Decreased angiotensin II reduces proximal tubule sodium reabsorption and reduces aldosterone, which further reduces collecting duct sodium reabsorption. These hormonal changes amplify the direct pressure effect. The four mechanisms of chronic pressure natriuresis include increased glomerular pressure (slight GFR increase), increased peritubular pressure, decreased angiotensin II, and decreased aldosterone.", // source: Ch 30 slides — Renal Pressure Natriuresis; Mechanisms of Chronic Pressure Natriuresis
     scene: "renal",
@@ -816,10 +816,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "What is the relationship between extracellular fluid (ECF) volume and blood volume when ECF volume expands beyond normal?",
     setup: "",
     ans: [
-      { t: "Blood volume increases modestly, but most excess fluid distributes to the interstitium, producing edema", ok: true },
-      { t: "Blood volume increases proportionally with ECF, maintaining a constant blood to interstitial ratio", ok: false },
-      { t: "Blood volume remains completely fixed; all excess ECF goes to the interstitial space", ok: false },
-      { t: "Blood volume actually decreases because the expanded interstitium pulls fluid out of vessels", ok: false },
+      { t: "Blood volume rises modestly while most excess fluid floods the interstitium", ok: true },
+      { t: "Blood volume rises in step with ECF, holding the blood to interstitial ratio", ok: false },
+      { t: "Blood volume stays wholly fixed; every bit of excess ECF goes interstitial", ok: false },
+      { t: "Blood volume actually falls as the swollen interstitium pulls fluid from vessels", ok: false },
     ],
     rationale: "When ECF volume expands beyond normal (approximately 15 L), blood volume increases initially. However, once ECF exceeds about 20 L, the compliance of the interstitial space increases dramatically, and most additional fluid accumulates in the interstitial compartment rather than the vascular space. This produces edema. Blood volume may increase from 5 to 6 or 7 liters, but it does not increase proportionally. The interstitial compliance changes explain why patients with severe fluid overload develop massive edema while maintaining blood volumes that are only moderately elevated.", // source: Ch 30 slide — ECF Volume and Blood Volume relationship; Edema threshold
     scene: "renal",
@@ -833,10 +833,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "A 'salt sensitive' individual requires a greater increase in arterial pressure to excrete a given sodium load compared to a normal person. What does this indicate about their pressure natriuresis curve?",
     setup: "",
     ans: [
-      { t: "The curve is shifted to the right, meaning a higher pressure is needed to achieve the same level of sodium excretion", ok: true },
-      { t: "The curve is shifted to the left, meaning sodium is excreted at lower than normal pressures", ok: false },
-      { t: "The curve is unchanged; salt sensitivity affects only the thirst mechanism, not renal excretion", ok: false },
-      { t: "The curve is steeper than normal, indicating an exaggerated natriuretic response", ok: false },
+      { t: "The curve shifts rightward, so higher pressure is needed for the same sodium output", ok: true },
+      { t: "The curve shifts leftward, so sodium is excreted at lower than normal arterial pressures", ok: false },
+      { t: "The curve is unchanged, since salt sensitivity alters thirst and not renal excretion", ok: false },
+      { t: "The curve is steeper than normal, reflecting an exaggerated natriuretic response", ok: false },
     ],
     rationale: "In salt sensitive individuals, the pressure natriuresis curve is shifted to the right (or has a decreased slope), meaning they require a higher arterial pressure to excrete a given sodium load. At normal sodium intake, their blood pressure is at the intersection of the intake line and their shifted excretion curve, which means a higher equilibrium pressure. Increasing sodium intake in these individuals causes a disproportionately large rise in blood pressure. This is the mechanism of salt sensitive hypertension.", // source: Ch 30 slide — Effectiveness of Pressure Natriuresis Determines Salt-Sensitivity
     scene: "renal",
@@ -850,10 +850,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Which of the following is a major cause of salt sensitive blood pressure?",
     setup: "",
     ans: [
-      { t: "Loss of functional nephrons (kidney disease), which impairs the kidney's ability to excrete sodium at normal pressures", ok: true },
-      { t: "Excessive ADH secretion, which concentrates urine and retains free water without affecting sodium", ok: false },
-      { t: "Hyperaldosteronism with intact feedback, which increases sodium excretion capacity", ok: false },
-      { t: "Increased cardiac output from exercise training, which enhances renal perfusion", ok: false },
+      { t: "Loss of working nephrons, which cripples sodium excretion at normal pressures", ok: true },
+      { t: "Excessive ADH secretion, which concentrates urine and retains only free water", ok: false },
+      { t: "Hyperaldosteronism with intact feedback, which boosts sodium excretion capacity", ok: false },
+      { t: "Higher cardiac output from exercise training, which lifts renal perfusion", ok: false },
     ],
     rationale: "Loss of functional nephrons (from any cause of CKD) reduces the total number of glomeruli available to excrete sodium, shifting the pressure natriuresis curve rightward. Other major causes include an inability of the renin angiotensin system to respond appropriately: low renin/angiotensin II states, fixed high renin/angiotensin II (non-modulators), and fixed aldosterone (primary aldosteronism). In primary aldosteronism, aldosterone does NOT have intact feedback; it is autonomously elevated, causing persistent sodium retention and requiring higher pressure for excretion.", // source: Ch 30 slide — Major Causes of Salt-Sensitive Blood Pressure
     scene: "renal",
@@ -867,10 +867,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "High levels of angiotensin II shift the pressure natriuresis curve in which direction?",
     setup: "",
     ans: [
-      { t: "To the right, requiring higher arterial pressure to achieve sodium balance; this mechanism underlies renovascular hypertension", ok: true },
-      { t: "To the left, allowing sodium excretion at lower pressures; this is how ACE inhibitors cause hypotension", ok: false },
-      { t: "The curve becomes vertical (infinitely steep), preventing any pressure mediated sodium excretion", ok: false },
-      { t: "Angiotensin II does not affect pressure natriuresis; it only acts on vascular smooth muscle", ok: false },
+      { t: "To the right, needing higher pressure for sodium balance, as in renovascular HTN", ok: true },
+      { t: "To the left, allowing sodium output at lower pressures, as ACE inhibitors lower BP", ok: false },
+      { t: "The curve turns vertical and infinitely steep, blocking any pressure driven output", ok: false },
+      { t: "Angiotensin II changes nothing here; it only acts on vascular smooth muscle tone", ok: false },
     ],
     rationale: "High angiotensin II shifts the pressure natriuresis curve to the right by increasing proximal tubule sodium reabsorption (via Na/H exchanger stimulation) and by stimulating aldosterone secretion (further increasing distal sodium reabsorption). This means a higher arterial pressure is required to excrete any given sodium load. Conversely, angiotensin blockade shifts the curve to the left, allowing sodium excretion at lower pressures. This is the theoretical basis for renovascular hypertension and why ACE inhibitors and ARBs are effective antihypertensives.", // source: Ch 30 slide — Effect of Angiotensin II on Renal Pressure Natriuresis (Figure 30-17)
     scene: "renal",
@@ -884,10 +884,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "When impaired kidney function shifts the pressure natriuresis curve rightward, what happens to mean arterial pressure and urinary sodium excretion over the following days?",
     setup: "",
     ans: [
-      { t: "Arterial pressure rises to a new steady state where sodium excretion again equals intake, but at a higher pressure", ok: true },
-      { t: "Arterial pressure falls because the kidney retains sodium, expanding volume and reducing peripheral resistance", ok: false },
-      { t: "Sodium excretion drops permanently because the kidney can never compensate for the rightward shift", ok: false },
-      { t: "Both pressure and sodium excretion oscillate indefinitely without reaching equilibrium", ok: false },
+      { t: "Pressure climbs to a new steady state where sodium output again matches intake", ok: true },
+      { t: "Pressure falls as the kidney retains sodium, expanding volume and cutting resistance", ok: false },
+      { t: "Sodium output drops for good, since the kidney can never offset the rightward shift", ok: false },
+      { t: "Both pressure and sodium output oscillate forever and never reach equilibrium", ok: false },
     ],
     rationale: "When the pressure natriuresis curve shifts rightward (e.g., due to reduced nephron mass), sodium excretion initially decreases, causing sodium retention, ECF volume expansion, increased blood volume, increased cardiac output, and rising arterial pressure. The elevated pressure then drives sodium excretion back up (pressure natriuresis) until a new steady state is reached where intake equals output. However, this balance occurs at a higher mean arterial pressure. This is the fundamental mechanism of volume dependent hypertension.", // source: Ch 30 slide — Effect of Hypertensive Shift on Sodium Excretion and Arterial Pressure
     scene: "renal",
@@ -901,10 +901,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "In heart failure, the kidneys retain sodium and water. Which integrated response explains this retention?",
     setup: "",
     ans: [
-      { t: "Decreased cardiac output lowers arterial pressure, triggering decreased GFR and increased Na+ reabsorption via angiotensin II, aldosterone, and sympathetic activity", ok: true },
-      { t: "The failing heart releases a natriuretic factor that paradoxically causes sodium retention at the proximal tubule", ok: false },
-      { t: "Heart failure directly damages the glomerular basement membrane, making it impermeable to sodium filtration", ok: false },
-      { t: "Venous congestion from heart failure compresses the kidneys, physically blocking urine output", ok: false },
+      { t: "Low cardiac output drops pressure, cutting GFR and raising Na+ reabsorption", ok: true },
+      { t: "The failing heart sheds a natriuretic factor that oddly retains proximal sodium", ok: false },
+      { t: "Heart failure harms the glomerular basement membrane, blocking sodium filtration", ok: false },
+      { t: "Venous congestion compresses the kidneys directly, physically halting urine output", ok: false },
     ],
     rationale: "In heart failure, reduced cardiac output decreases renal perfusion and arterial pressure. The kidneys respond as if the body is volume depleted: GFR decreases slightly, and multiple hormonal systems (increased angiotensin II, increased aldosterone, increased sympathetic activity) increase tubular sodium reabsorption. Decreased peritubular capillary pressure also enhances proximal reabsorption. The net effect is sodium and water retention, which expands ECF volume in an attempt to restore cardiac output and blood pressure. This creates a vicious cycle of volume overload worsening heart failure.", // source: Ch 30 slide — Integrated Responses to Heart Failure
     scene: "renal",
@@ -918,10 +918,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "In hepatic cirrhosis, reduced plasma protein synthesis and increased vascular capacity affect the renal-body fluid feedback system by doing what?",
     setup: "",
     ans: [
-      { t: "Decreasing plasma oncotic pressure and increasing venous capacitance, both of which reduce effective circulating volume and trigger renal sodium retention", ok: true },
-      { t: "Increasing plasma oncotic pressure, which pulls fluid into the vascular space and causes hypertension", ok: false },
-      { t: "Directly stimulating ADH release from damaged hepatocytes", ok: false },
-      { t: "Increasing GFR through hepatorenal reflex vasodilation of the afferent arteriole", ok: false },
+      { t: "Lower oncotic pressure and wider venous capacity shrink effective circulating volume", ok: true },
+      { t: "Higher oncotic pressure that pulls fluid into vessels and produces hypertension", ok: false },
+      { t: "Direct ADH release straight out of the damaged and failing hepatocytes", ok: false },
+      { t: "Higher GFR from a hepatorenal reflex that dilates the afferent arteriole", ok: false },
     ],
     rationale: "In cirrhosis, the diseased liver produces less albumin, reducing plasma oncotic pressure. Fluid leaks into the peritoneal cavity (ascites) and interstitium. Simultaneously, portal hypertension and splanchnic vasodilation increase vascular capacity. Both effects reduce effective circulating blood volume, which triggers the same retention reflexes as heart failure: decreased renal perfusion leads to RAAS activation, increased sympathetic tone, and increased ADH, all promoting sodium and water retention. Despite total body fluid overload, the effective arterial volume is reduced.", // source: Ch 30 slide — Renal-Body Fluid Feedback with Cirrhosis (decreased plasma proteins, increased vascular capacity)
     scene: "renal",
@@ -935,10 +935,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Increased distal tubular flow rate promotes potassium loss because it does what at the principal cell level?",
     setup: "",
     ans: [
-      { t: "Washes away secreted K+ from the luminal surface, maintaining a favorable concentration gradient for continued K+ secretion", ok: true },
-      { t: "Dilutes luminal Na+ below the threshold for ENaC activation, shutting down the driving force for K+ secretion", ok: false },
-      { t: "Directly stimulates aldosterone release from the adrenal cortex via a tubular paracrine signal", ok: false },
-      { t: "Increases Type A intercalated cell activity, which secretes K+ through H/K ATPase", ok: false },
+      { t: "Washes secreted K+ off the luminal surface, keeping the gradient for K+ secretion", ok: true },
+      { t: "Dilutes luminal Na+ under the ENaC threshold, shutting the driving force for K+ loss", ok: false },
+      { t: "Directly drives adrenal aldosterone release through a tubular paracrine signal", ok: false },
+      { t: "Boosts Type A intercalated cell activity, which secretes K+ via the H/K ATPase", ok: false },
     ],
     rationale: "Increased tubular flow rate past the principal cells of the collecting duct rapidly removes secreted K+ from the luminal fluid, keeping the luminal K+ concentration low. This maintains a steep concentration gradient from cell interior (high K+) to lumen (low K+), favoring continued K+ secretion through ROMK and BK channels. This flow dependent effect explains why loop diuretics and osmotic diuretics cause significant K+ wasting. Additionally, flow activates BK (big conductance K+) channels specifically. Type A intercalated cells REABSORB K+, not secrete it.", // source: Ch 30 PDF — tubular flow rate effects on K+ secretion
     scene: "renal",
@@ -952,10 +952,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Glomerulotubular balance refers to which intrarenal compensatory mechanism?",
     setup: "",
     ans: [
-      { t: "When GFR increases, proximal tubule reabsorption increases proportionally, so the fraction of filtrate reabsorbed stays approximately constant", ok: true },
-      { t: "When GFR increases, the glomerulus automatically constricts its afferent arteriole to restore GFR to normal", ok: false },
-      { t: "When tubular reabsorption increases, GFR increases by the same amount to prevent volume depletion", ok: false },
-      { t: "The balance between afferent and efferent arteriolar resistance that determines filtration fraction", ok: false },
+      { t: "When GFR rises, proximal reabsorption rises in step, holding the fraction constant", ok: true },
+      { t: "When GFR rises, the glomerulus constricts its afferent arteriole to restore GFR", ok: false },
+      { t: "When reabsorption rises, GFR rises by the same amount to prevent volume depletion", ok: false },
+      { t: "The afferent and efferent resistance balance that sets the filtration fraction value", ok: false },
     ],
     rationale: "Glomerulotubular balance ensures that the proximal tubule reabsorbs a constant fraction (approximately 65%) of the filtered load regardless of changes in GFR. If GFR rises, proximal reabsorption rises proportionally. This prevents large fluctuations in distal delivery that could overwhelm downstream segments. The mechanism involves changes in peritubular Starling forces: increased GFR raises peritubular capillary oncotic pressure (from increased filtration fraction) and lowers peritubular hydrostatic pressure, both favoring increased reabsorption. This is distinct from tubuloglomerular feedback (TGF), which adjusts GFR based on distal NaCl delivery.", // source: Ch 30 slide — Local Renal Mechanisms (glomerulotubular balance shown)
     scene: "renal",
@@ -969,10 +969,10 @@ export const PATHO_NODE15_QUESTIONS = [
     prompt: "Clinical factors associated with salt sensitive blood pressure include all of the following EXCEPT:",
     setup: "",
     ans: [
-      { t: "Young age, which is actually associated with LESS salt sensitivity due to higher nephron reserve", ok: true },
-      { t: "Older age, because age related nephron loss impairs sodium excretion capacity", ok: false },
-      { t: "Diabetes mellitus, which damages renal vasculature and reduces functional nephron mass", ok: false },
-      { t: "Kidney diseases such as glomerulonephritis, which destroy nephrons and shift the natriuresis curve", ok: false },
+      { t: "Young age, which actually brings LESS salt sensitivity from greater nephron reserve", ok: true },
+      { t: "Older age, since age related nephron loss weakens the sodium excretion capacity", ok: false },
+      { t: "Diabetes mellitus, which harms renal vasculature and cuts functional nephron mass", ok: false },
+      { t: "Glomerulonephritis and similar kidney disease, which destroys functioning nephrons", ok: false },
     ],
     rationale: "Older age is associated with increased salt sensitivity because of progressive nephron loss (normal aging reduces nephron number). Young age is associated with greater nephron reserve and less salt sensitivity. Other clinical factors that increase salt sensitivity include African American race (greater prevalence than Caucasians), genetic or familial conditions (Liddle syndrome), kidney diseases (glomerulonephritis), diabetes mellitus, and renin angiotensin aldosterone abnormalities.", // source: Ch 30 slide — Clinical Factors Associated With Salt-Sensitive Blood Pressure
     scene: "renal",
