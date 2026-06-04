@@ -817,10 +817,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "Why is neuromuscular monitoring used during anesthesia, and what four questions does it help answer?",
     setup: "",
     ans: [
-      { t: "Because it is easy to give more relaxant than necessary (causing longer recovery, prolonged ventilation, and added expense) and the depth of relaxation in the diaphragm, larynx, and surgical field cannot be measured directly, a peripheral nerve is monitored to answer whether blockade is adequate, whether it is excessive, whether it can be antagonized, and whether it has been adequately antagonized", ok: true },
-      { t: "Because relaxants have no measurable side effects, monitoring simply confirms the drug was given", ok: false },
-      { t: "Because the diaphragm can be measured directly, peripheral nerve monitoring is unnecessary", ok: false },
-      { t: "Only to determine the patient body temperature during the case", ok: false },
+      { t: "It is easy to overdose relaxant, and the diaphragm cannot be measured directly, so a peripheral nerve is used", ok: true },
+      { t: "Relaxants have no real side effects, so monitoring just confirms that the drug was actually given at all", ok: false },
+      { t: "The diaphragm can be measured directly, so monitoring a peripheral nerve is unnecessary in any case at all", ok: false },
+      { t: "It is used only to determine the patient core body temperature at intervals throughout the operative case", ok: false },
     ],
     rationale: "Neuromuscular monitoring is used because it is easy to give more relaxant than necessary, which leads to a longer recovery phase, prolonged mechanical ventilation, and expense. The depth of relaxation in the diaphragm, larynx, and surgical field cannot be measured directly, so a peripheral nerve is stimulated instead. Monitoring helps answer four questions: is neuromuscular blockade adequate, is it excessive, can it be antagonized, and has it been adequately antagonized. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 3
     scene: "neuro",
@@ -834,10 +834,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "Stimulation of a peripheral nerve produces an all-or-none muscle response. How do supramaximal and submaximal stimuli differ?",
     setup: "",
     ans: [
-      { t: "A supramaximal stimulus is set about 20 to 25 percent higher than the current needed to activate all local motor nerve fibers (under about 50 mA) and is painful but accurate, whereas a submaximal stimulus uses about 50 to 70 percent of that current, is recommended in the awake or recovering patient, but is less accurate", ok: true },
-      { t: "A submaximal stimulus is higher than a supramaximal stimulus and is the most accurate", ok: false },
-      { t: "Both stimuli activate only a single nerve fiber and give identical results", ok: false },
-      { t: "A supramaximal stimulus is painless while a submaximal stimulus is painful", ok: false },
+      { t: "Supramaximal is about 20 to 25 percent above the maximal current and painful; submaximal is less accurate", ok: true },
+      { t: "Submaximal current is higher than supramaximal current and is by far the most accurate of the two patterns", ok: false },
+      { t: "Both of these stimuli activate only one single nerve fiber and so they give exactly identical results", ok: false },
+      { t: "A supramaximal stimulus is entirely painless, while a submaximal stimulus is the painful one of the two", ok: false },
     ],
     rationale: "The reaction of a muscle fiber is all or none: it either contracts or it does not, and the response of the whole muscle depends on the number of nerve fibers activated. A supramaximal stimulus is set about 20 to 25 percent higher than the current required to activate all local motor nerve fibers (under about 50 mA); it ensures every fiber fires but is painful. A submaximal stimulus uses about 50 to 70 percent of the supramaximal current and is recommended during recovery and when the patient is awake, but it is not as accurate. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 7
     scene: "neuro",
@@ -851,10 +851,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "The two variables of a peripheral nerve stimulator are the stimulation pattern and the electrical output. How are they expressed?",
     setup: "",
     ans: [
-      { t: "The pattern is expressed in hertz (cycles per second, for example 1 Hz is one stimulus per second and 0.1 Hz is one every 10 seconds), and the electrical output is measured in milliamps, with about 10 mA as the maximum", ok: true },
-      { t: "The pattern is measured in milliamps and the output is measured in hertz", ok: false },
-      { t: "Both variables are measured in volts, with 100 V as the maximum", ok: false },
-      { t: "The pattern is fixed at 50 Hz and the output cannot be changed", ok: false },
+      { t: "The pattern is in hertz (1 Hz is one per second), and the output is in milliamps, with about 10 mA maximum", ok: true },
+      { t: "The pattern is measured in milliamps, while the electrical output is instead measured in hertz per second", ok: false },
+      { t: "Both variables are measured in volts, and the maximum output that is ever used is about 100 volts total", ok: false },
+      { t: "The pattern is permanently fixed at 50 Hz, and the electrical output simply cannot be changed at all", ok: false },
     ],
     rationale: "A peripheral nerve stimulator has two variables. The stimulation pattern is expressed in hertz, the number of cycles per second: 1 Hz is one stimulus every second and 0.1 Hz is one stimulus every 10 seconds. The electrical output is how much current is used and is measured in milliamps, with about 10 mA as the maximum. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 9
     scene: "neuro",
@@ -868,10 +868,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How should the electrodes of a peripheral nerve stimulator be placed?",
     setup: "",
     ans: [
-      { t: "Directly over the nerve (not the muscle); when the electrodes are far apart, the negative (black) electrode is placed most distally directly over the nerve and the positive electrode proximally; the ulnar nerve correlates more closely with the diaphragm, and clean dry skin with adhesive pads allows the same site each time", ok: true },
-      { t: "Directly over the muscle belly, with polarity irrelevant at any spacing", ok: false },
-      { t: "The positive (red) electrode is always placed most distally over the nerve", ok: false },
-      { t: "One electrode per arm on opposite limbs, to compare sides", ok: false },
+      { t: "Over the nerve, not muscle; the black electrode goes most distal, and the ulnar correlates with the diaphragm", ok: true },
+      { t: "Directly over the muscle belly itself, with the polarity being irrelevant at any electrode spacing used", ok: false },
+      { t: "The red positive electrode is always placed most distally and directly over the course of the chosen nerve", ok: false },
+      { t: "One electrode is placed on each opposite limb, so that the two sides can be directly compared at once", ok: false },
     ],
     rationale: "Electrodes are placed directly over the nerve, not the muscle, and the ulnar nerve correlates more closely with the diaphragm. Because direct current is applied there is a positive (red) and a negative (black) electrode; using adhesive pads on clean dry skin lets the same area be monitored each time. If the electrodes are close together (about 2 cm) polarity does not matter, but if they are farther apart the negative (black) electrode is placed most distally and directly over the nerve with the positive electrode proximal. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 11
     scene: "neuro",
@@ -885,10 +885,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "What is single twitch stimulation used for, and at what frequencies is it delivered?",
     setup: "",
     ans: [
-      { t: "Single electrical stimuli are delivered at 1 Hz (once per second) or 0.1 Hz (once every 10 seconds); it is a good pattern for evaluating intubating conditions, because when the twitches disappear it should correlate with relaxed laryngeal muscles and diaphragm", ok: true },
-      { t: "It delivers four stimuli at once and is used only during recovery", ok: false },
-      { t: "It is delivered at 50 Hz for 5 seconds and measures fade", ok: false },
-      { t: "It cannot be used to assess intubating conditions", ok: false },
+      { t: "Single stimuli at 1 Hz or 0.1 Hz; it is good for judging intubating conditions as the twitches disappear", ok: true },
+      { t: "It delivers four separate stimuli at once and is therefore only useful during the recovery from blockade", ok: false },
+      { t: "It is delivered as 50 Hz applied for five full seconds, and it is interpreted by looking for the fade", ok: false },
+      { t: "It cannot be used to assess intubating conditions at any point during the induction of anesthesia", ok: false },
     ],
     rationale: "Single twitch stimulation applies single electrical stimuli at 1 Hz (once every second) or 0.1 Hz (once every 10 seconds). It is a good pattern for evaluating intubating conditions, because when the twitches have disappeared this should correlate with relaxed laryngeal muscles and diaphragm. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 14
     scene: "neuro",
@@ -902,10 +902,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How is the train-of-four (TOF) delivered, and how are the TOF count and TOF ratio interpreted?",
     setup: "",
     ans: [
-      { t: "Four supramaximal stimuli are delivered every 0.5 second (2 Hz); the response is judged by the fade of the twitches, the TOF count is the number of twitches present, and the TOF ratio is the height of the fourth twitch divided by the first (T4 over T1)", ok: true },
-      { t: "A single stimulus is delivered once every 10 seconds, and the ratio is the first twitch divided by the fourth", ok: false },
-      { t: "Forty stimuli are delivered per second, and only the total count matters", ok: false },
-      { t: "Two stimuli are delivered 750 msec apart, and there is no ratio", ok: false },
+      { t: "Four stimuli every half second; the count is the number of twitches and the ratio is the fourth over first", ok: true },
+      { t: "A single stimulus once every ten seconds; the ratio is taken as the first twitch over the fourth twitch", ok: false },
+      { t: "Forty separate stimuli are delivered each second, and only the total twitch count actually matters here", ok: false },
+      { t: "Two stimuli are delivered 750 milliseconds apart, and there is no ratio calculated for this pattern", ok: false },
     ],
     rationale: "The train-of-four, introduced in the 1970s, delivers four supramaximal stimuli every 0.5 second, which is 2 Hz. It is evaluated by the fade in the muscle twitch response. The TOF count is the number of twitches present out of four, and the TOF ratio is the height of the fourth twitch divided by the first (T4 over T1). With a nondepolarizing relaxant the first twitch is always the strongest and the later twitches fade. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 15
     scene: "neuro",
@@ -919,10 +919,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "As nondepolarizing neuromuscular blockade deepens, how does the train-of-four response change?",
     setup: "",
     ans: [
-      { t: "With no blockade the fourth twitch is as strong as the first; as blockade deepens the fourth twitch fades and is lost first, then the third and second follow the same pattern, and with deep blockade no twitch is present", ok: true },
-      { t: "The first twitch is lost before the fourth as blockade deepens", ok: false },
-      { t: "All four twitches remain equal until blockade is complete", ok: false },
-      { t: "The fourth twitch grows stronger as blockade deepens", ok: false },
+      { t: "With no block all four are equal; as block deepens the fourth fades and is lost first, then third and second", ok: true },
+      { t: "As the block deepens, the first twitch fades and is lost well before the fourth twitch is affected", ok: false },
+      { t: "All four of the twitches stay completely equal in height until the blockade has become fully complete", ok: false },
+      { t: "The fourth twitch actually grows progressively stronger and taller as the neuromuscular block deepens", ok: false },
     ],
     rationale: "With no neuromuscular blockade the fourth twitch is as strong as the first. As nondepolarizing blockade deepens, the fourth twitch becomes weaker (fades) and is lost first; the third and second twitches then follow the same pattern, and with deep blockade no twitch is present. The loss of twitches correlates with the single twitch height. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 16
     scene: "neuro",
@@ -936,10 +936,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How does the train-of-four response to succinylcholine (a depolarizing relaxant) differ from the response to a nondepolarizing relaxant?",
     setup: "",
     ans: [
-      { t: "With succinylcholine all four twitches diminish together and equally (the first and fourth stay equal in height), so there is no true fade; with a nondepolarizing relaxant the twitches fade sequentially, the fourth weakening before the first", ok: true },
-      { t: "With succinylcholine the fourth twitch fades before the first, exactly like a nondepolarizing relaxant", ok: false },
-      { t: "Succinylcholine causes the four twitches to grow progressively stronger", ok: false },
-      { t: "Succinylcholine produces no twitches at any depth of block", ok: false },
+      { t: "All four fade together and equally with no true fade; a nondepolarizer fades the fourth before the first", ok: true },
+      { t: "With succinylcholine the fourth twitch fades well before the first, exactly like a nondepolarizing drug", ok: false },
+      { t: "Succinylcholine makes the four twitches grow progressively stronger and taller as the block slowly deepens", ok: false },
+      { t: "Succinylcholine produces no twitches at all at any depth of the neuromuscular block that it creates", ok: false },
     ],
     rationale: "With succinylcholine, a depolarizing relaxant, all four twitches fade together: the first and fourth twitches remain equal in height, and as blockade deepens all four diminish in size equally until, with deep block, no twitches are seen or felt. This equal decrease is not called a fade, just a lower twitch height. A nondepolarizing relaxant instead produces sequential fade, with the fourth twitch weakening before the first. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 18
     scene: "neuro",
@@ -953,10 +953,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "As neuromuscular blockade wears off, in what order do the train-of-four twitches return, and what TOF ratio indicates adequate recovery?",
     setup: "",
     ans: [
-      { t: "Twitches return in the same order they disappeared (with a nondepolarizing relaxant the first returns, then the second, third, and fourth until the fourth equals the first); a TOF ratio of 0.7 has been cited as adequate recovery, although some sources require 0.9 to 0.95", ok: true },
-      { t: "Twitches return in the reverse order, the fourth first, and any ratio above 0.1 is adequate", ok: false },
-      { t: "All four twitches return simultaneously, and the ratio is irrelevant", ok: false },
-      { t: "Adequate recovery requires a TOF ratio of exactly 0.2", ok: false },
+      { t: "Twitches return in the order they vanished; a ratio of 0.7 is adequate, though some require 0.9 to 0.95", ok: true },
+      { t: "Twitches return in the reverse order, the fourth one first, and any ratio above 0.1 counts as adequate", ok: false },
+      { t: "All four of the twitches return at exactly the same moment, and the ratio between them is irrelevant", ok: false },
+      { t: "Adequate recovery requires a train of four ratio of exactly 0.2 before the patient may be extubated", ok: false },
     ],
     rationale: "As the neuromuscular blocker diffuses away from the junction, relaxation wears off and the twitches return in the same order they disappeared. With a nondepolarizing relaxant the first twitch is felt, then the second, third, and fourth, until the fourth again equals the first; with succinylcholine four weak twitches are felt that all strengthen together to baseline. A TOF ratio of 0.7 (the fourth twitch 70 percent as strong as the first) has been cited as adequate recovery for airway maintenance and breathing, although some sources require 0.9 to 0.95. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 19
     scene: "neuro",
@@ -970,10 +970,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "Tetanic stimulation is used to assess neuromuscular blockade. How is it delivered, and what is the mechanism of the fade it produces?",
     setup: "",
     ans: [
-      { t: "Tetanus is the rapid delivery of stimuli, most commonly 50 Hz for 5 seconds; observation is for fade, which is a presynaptic event because the large initial release of acetylcholine depletes the nerve terminal stores and reduces the rate of release", ok: true },
-      { t: "Tetanus is a single stimulus every 10 seconds, and fade is a purely postsynaptic event", ok: false },
-      { t: "Tetanus is delivered at 2 Hz and never produces fade", ok: false },
-      { t: "Fade during tetanus occurs because acetylcholine release increases over time", ok: false },
+      { t: "Rapid stimuli, usually 50 Hz for 5 seconds, watched for fade; fade is presynaptic from acetylcholine loss", ok: true },
+      { t: "It is a single stimulus delivered once every ten seconds, and its fade is a purely postsynaptic event", ok: false },
+      { t: "It is delivered at only 2 Hz and it never produces any fade regardless of the depth of block present", ok: false },
+      { t: "Fade during the tetanus happens because the release of acetylcholine actually increases steadily over time", ok: false },
     ],
     rationale: "Tetanic stimulation rapidly delivers stimuli at 30, 50, or 100 Hz, most commonly 50 Hz for 5 seconds (sometimes 100 Hz for 5 seconds), and is painful. Observation is for fade, which is a presynaptic event: at the beginning of tetanus a large amount of acetylcholine is released from the nerve terminal, and depletion of the stores reduces the rate of release. The degree of fade depends on the degree of blockade, the frequency, the length, and how often the tetanic stimulus is applied, making tetanus useful for assessing recovery. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 20
     scene: "neuro",
@@ -987,10 +987,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "When a nondepolarizing block is so intense that there is no train-of-four response, how does the post-tetanic count assess it?",
     setup: "",
     ans: [
-      { t: "A 50 Hz tetanus is applied for 5 seconds, then after a 3 second pause single twitches at 1 Hz are counted; post-tetanic twitches appear before the first train-of-four twitch returns, so the count grades an intense block when TOF and single twitch show no response", ok: true },
-      { t: "It applies a single twitch only and is identical to the train-of-four", ok: false },
-      { t: "Post-tetanic twitches appear only after the train-of-four has fully returned", ok: false },
-      { t: "It is used only when the block is light and the train-of-four is already 4 of 4", ok: false },
+      { t: "50 Hz for 5 seconds, wait 3 seconds, then count single twitches; they appear before the train of four returns", ok: true },
+      { t: "It applies only a single twitch stimulus and is therefore completely identical to the standard train of four", ok: false },
+      { t: "Post tetanic twitches appear only well after the train of four has already returned completely to normal", ok: false },
+      { t: "It is used only when the block is very light and the train of four already shows a full four out of four", ok: false },
     ],
     rationale: "When a nondepolarizing relaxant has taken full effect there may be no response to the train-of-four, so the TOF cannot grade the intensity of the block. The post-tetanic count applies a 50 Hz tetanus for 5 seconds, waits about 3 seconds, then delivers single twitch stimuli at 1 Hz. With an extremely intense block there is no response at all; as the block dissipates, post-tetanic twitches appear, and they appear before the first twitch of the train-of-four returns. The count therefore evaluates the degree of an intense block when there is no TOF or single twitch response. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 23
     scene: "neuro",
@@ -1004,10 +1004,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "What is double-burst stimulation (DBS), and why is it preferred over the train-of-four during recovery?",
     setup: "",
     ans: [
-      { t: "DBS delivers two bursts of 50 Hz tetanic stimuli separated by 750 msec; in nonparalyzed muscle the two contractions are equal, while in partially paralyzed muscle the second is weaker (fade); it correlates closely with the TOF but its fade is easier to feel", ok: true },
-      { t: "DBS delivers a single sustained stimulus and cannot detect fade", ok: false },
-      { t: "DBS shows equal contractions even with significant residual paralysis", ok: false },
-      { t: "DBS is delivered at 0.1 Hz and is unrelated to the train-of-four", ok: false },
+      { t: "Two bursts of 50 Hz separated by 750 ms; equal contractions if normal, a weaker second one if paralyzed", ok: true },
+      { t: "It delivers one single sustained stimulus, and as a result it is entirely unable to detect any fade at all", ok: false },
+      { t: "It shows two equal contractions even when there is significant residual paralysis still present in the muscle", ok: false },
+      { t: "It is delivered at only 0.1 Hz, and it has no relationship at all to the standard train of four pattern", ok: false },
     ],
     rationale: "Double-burst stimulation delivers two bursts of 50 Hz tetanic stimuli separated by 750 msec. In nonparalyzed muscle the response is two equal contractions; in partially paralyzed muscle the second response is weaker than the first (fade). DBS is closely correlated with the train-of-four, and during recovery it is preferred because the fade is easier to feel, although a lack of fade in DBS or TOF does not exclude significant residual blockade. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 25
     scene: "neuro",
@@ -1021,10 +1021,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "Which peripheral nerves are most commonly used for neuromuscular monitoring, and what is a key limitation of the ulnar nerve?",
     setup: "",
     ans: [
-      { t: "The ulnar and facial nerves are the most commonly used; the ulnar nerve is not well correlated with the larynx and diaphragm, and at the facial nerve the corrugator supercilii is better correlated than the orbicularis oculi", ok: true },
-      { t: "The ulnar nerve perfectly reflects the larynx and diaphragm and needs no alternative", ok: false },
-      { t: "Only the posterior tibial nerve can be used for monitoring", ok: false },
-      { t: "The facial nerve cannot be used for neuromuscular monitoring", ok: false },
+      { t: "The ulnar and facial nerves are used most; the ulnar correlates poorly with the larynx and the diaphragm", ok: true },
+      { t: "The ulnar nerve perfectly reflects the larynx and diaphragm, so no alternative nerve is ever needed at all", ok: false },
+      { t: "Only the posterior tibial nerve can be used for any neuromuscular monitoring during a general anesthetic", ok: false },
+      { t: "The facial nerve simply cannot be used for neuromuscular monitoring under any clinical circumstances at all", ok: false },
     ],
     rationale: "In principle any superficial peripheral nerve can be stimulated, but the ulnar and facial nerves are the most commonly used. The ulnar nerve is not well correlated with the larynx and diaphragm. At the facial nerve, monitoring may use the orbicularis oculi (inner eyebrow), but the corrugator supercilii is better correlated; the orbicularis oris may also be used. Other options include the posterior tibial, common peroneal, and median nerves. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 29
     scene: "neuro",
@@ -1038,10 +1038,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How does the diaphragm compare with the adductor pollicis in its response to muscle relaxants?",
     setup: "",
     ans: [
-      { t: "The diaphragm is the most resistant muscle, requiring about 1.4 to 2.0 times the dose needed to block the adductor pollicis, and it also has a shorter onset and quicker recovery; so as a relaxant wears off the adductor pollicis may still be blocked while the diaphragm is not, and the patient can push or buck", ok: true },
-      { t: "The diaphragm is the most sensitive muscle and is blocked first and longest", ok: false },
-      { t: "The diaphragm and adductor pollicis respond identically to all relaxants", ok: false },
-      { t: "The diaphragm requires only half the dose needed to block the adductor pollicis", ok: false },
+      { t: "The diaphragm is most resistant, needs 1.4 to 2.0 times the thumb dose, and recovers sooner than the thumb", ok: true },
+      { t: "The diaphragm is the single most sensitive muscle of all and is therefore blocked both first and longest", ok: false },
+      { t: "The diaphragm and the adductor pollicis respond in exactly the same way to all of the muscle relaxants", ok: false },
+      { t: "The diaphragm needs only about half of the dose that is required to fully block the adductor pollicis", ok: false },
     ],
     rationale: "The diaphragm is the most resistant muscle to both depolarizing and nondepolarizing relaxants, requiring about 1.4 to 2.0 times the amount needed to block the adductor pollicis. Its onset is shorter and its recovery quicker than peripheral muscles. As a relaxant wears off, the adductor pollicis may still be blocked while the diaphragm is not, which is why a patient can be pushing or bucking even though monitoring at the thumb still shows blockade. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 30
     scene: "neuro",
@@ -1055,10 +1055,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "Muscles differ in their sensitivity to neuromuscular blockade. Which ordering, from most to least sensitive, is correct?",
     setup: "",
     ans: [
-      { t: "From most to least sensitive: abdominal, orbicularis oculi, geniohyoid, masseter, upper airway muscles, peripheral limbs, laryngeal, and diaphragm", ok: true },
-      { t: "From most to least sensitive: diaphragm, laryngeal, peripheral limbs, with abdominal last", ok: false },
-      { t: "All muscles are equally sensitive to neuromuscular blockade", ok: false },
-      { t: "The diaphragm is the most sensitive and the abdominal muscles are the least sensitive", ok: false },
+      { t: "Most to least: abdominal, orbicularis oculi, then airway and limb muscles, then laryngeal, then diaphragm", ok: true },
+      { t: "Most to least sensitive: diaphragm, then laryngeal, then peripheral limbs, with the abdominal muscles last", ok: false },
+      { t: "Every muscle group in the body is exactly equally sensitive to the effects of any neuromuscular blockade", ok: false },
+      { t: "The diaphragm is the most sensitive muscle of all, and the abdominal muscles are the least sensitive ones", ok: false },
     ],
     rationale: "Muscles vary in their resistance to relaxants, so a dose that blocks one group cannot be automatically extrapolated to another. Listed from most to least sensitive, the order is abdominal, orbicularis oculi, geniohyoid, masseter, upper airway muscles, peripheral limbs, laryngeal, and diaphragm. The diaphragm is the least sensitive and most resistant. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 32
     scene: "neuro",
@@ -1072,10 +1072,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "When monitoring at the ulnar nerve, where are the electrodes placed and what muscle action is observed?",
     setup: "",
     ans: [
-      { t: "Electrodes are applied to the volar side of the wrist, the distal electrode about 1 cm proximal to the flexion crease on the radial side of the flexor carpi ulnaris and the proximal electrode 2 to 5 cm above it; stimulation produces finger flexion and thumb adduction", ok: true },
-      { t: "Electrodes are placed on the dorsum of the hand and produce wrist extension", ok: false },
-      { t: "Electrodes are placed over the orbicularis oculi and produce eyebrow movement", ok: false },
-      { t: "Stimulation of the ulnar nerve produces plantar flexion of the foot", ok: false },
+      { t: "Electrodes on the volar wrist over the ulnar nerve; stimulation gives finger flexion and thumb adduction", ok: true },
+      { t: "Electrodes are placed on the dorsum of the hand, and the stimulation then produces extension of the wrist", ok: false },
+      { t: "Electrodes are placed over the orbicularis oculi muscle, and the stimulation produces eyebrow movement", ok: false },
+      { t: "Stimulation of the ulnar nerve at the wrist produces a brisk plantar flexion of the patient ankle and foot", ok: false },
     ],
     rationale: "For ulnar nerve monitoring the electrodes are best applied to the volar side of the wrist, with the distal electrode about 1 cm proximal to the flexion crease on the radial side of the flexor carpi ulnaris and the proximal electrode 2 to 5 cm proximal to the distal one. Stimulation produces finger flexion and thumb adduction; if the proximal (red) electrode is placed over the ulnar groove at the elbow, thumb adduction is more pronounced. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 33
     scene: "neuro",
@@ -1089,10 +1089,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How does single twitch height relate to the percentage of acetylcholine receptors occupied by a nondepolarizing relaxant?",
     setup: "",
     ans: [
-      { t: "No change is seen in the single twitch until about 70 percent of receptors are occupied, and the single twitch is totally lost when about 90 percent are occupied, so only a narrow window of receptor occupancy separates a normal twitch from complete loss", ok: true },
-      { t: "The single twitch disappears as soon as 10 percent of receptors are occupied", ok: false },
-      { t: "Single twitch height is unrelated to receptor occupancy", ok: false },
-      { t: "The single twitch is lost at 30 percent occupancy and returns at 90 percent", ok: false },
+      { t: "The single twitch is unchanged until about 70 percent of receptors are blocked, and lost near 90 percent", ok: true },
+      { t: "The single twitch entirely disappears as soon as just 10 percent of the receptors have first been occupied", ok: false },
+      { t: "Single twitch height has no relationship at all to the percentage of acetylcholine receptors occupied", ok: false },
+      { t: "The single twitch is lost at 30 percent occupancy and then it reappears again at about 90 percent block", ok: false },
     ],
     rationale: "Interpreting neuromuscular function involves the approximate number of receptors occupied. No change is seen in the single twitch until about 70 percent of receptors are occupied, and the single twitch is totally lost when about 90 percent are occupied. Therefore a narrow window of receptor occupancy exists when administering a nondepolarizing relaxant, which is why monitoring is needed to titrate the block. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 37
     scene: "neuro",
@@ -1106,10 +1106,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How are intense and moderate (surgical) neuromuscular blockade defined?",
     setup: "",
     ans: [
-      { t: "Intense blockade occurs within about 3 to 6 minutes after an intubating dose of a nondepolarizing relaxant, with no train-of-four response and possibly no post-tetanic twitches; moderate (surgical) blockade begins when the first train-of-four twitch returns and indicates adequate relaxation for most procedures and usually enough recovery for reversal with neostigmine", ok: true },
-      { t: "Intense blockade is defined by a 4 of 4 train-of-four, and moderate blockade by 0 of 4", ok: false },
-      { t: "Moderate blockade occurs before any drug is given", ok: false },
-      { t: "Intense blockade always lasts exactly 1 hour regardless of dose or patient", ok: false },
+      { t: "Intense block appears in 3 to 6 minutes with no train of four; surgical block begins as the first twitch returns", ok: true },
+      { t: "Intense block is defined by a full four of four count, and moderate block is defined by a zero of four count", ok: false },
+      { t: "Moderate surgical blockade is present well before any neuromuscular blocking drug has actually been given", ok: false },
+      { t: "Intense blockade reliably lasts exactly one hour, regardless of the drug, the dose, or the patient factors", ok: false },
     ],
     rationale: "Intense blockade occurs within about 3 to 6 minutes after an intubating dose of a nondepolarizing relaxant; there is no response to the train-of-four and there may or may not be post-tetanic twitches, and its duration depends on the drug, dose, and patient. Moderate or surgical blockade begins when the first twitch of the train-of-four returns; it indicates adequate relaxation for most procedures (although the patient can still cough or buck) and is usually enough recovery for adequate reversal with neostigmine. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 39
     scene: "neuro",
@@ -1123,10 +1123,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "On the relationship between receptor blockade and clinical response, which pairing is correct?",
     setup: "",
     ans: [
-      { t: "At about 90 percent of receptors blocked there is adequate abdominal relaxation with a 1 of 4 train-of-four; at about 75 percent the tidal volume and vital capacity are normal with a 4 of 4 train-of-four; and at about 50 percent the patient can generate an inspiratory force of negative 20 cm H2O and sustain a head lift", ok: true },
-      { t: "At 100 percent blocked the train-of-four is 4 of 4 with full strength", ok: false },
-      { t: "At 30 percent blocked the patient is completely paralyzed", ok: false },
-      { t: "A 4 of 4 train-of-four guarantees that zero receptors are blocked", ok: false },
+      { t: "At 90 percent block the count is one of four; at 75 percent it is four of four with a normal tidal volume", ok: true },
+      { t: "At 100 percent receptor block the train of four count is a full four of four and strength is fully normal", ok: false },
+      { t: "At only 30 percent receptor block the patient is already completely and totally paralyzed in every muscle", ok: false },
+      { t: "A four of four count on the train of four guarantees that exactly zero of the receptors remain blocked", ok: false },
     ],
     rationale: "The percentage of receptors blocked correlates with the clinical response: at 99 to 100 percent there is complete paralysis with 0 of 4 train-of-four; at 95 percent the diaphragm moves with 0 of 4; at 90 percent abdominal relaxation is adequate with 1 of 4; at 75 percent tidal volume and vital capacity are normal with 4 of 4; at 50 percent the patient can inspire to negative 20 cm H2O and sustain a head lift; and at 30 percent a hand grasp is sustained. A 4 of 4 train-of-four can still coexist with substantial receptor occupancy, which is why clinical signs matter. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 41
     scene: "neuro",
@@ -1140,10 +1140,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "What characterizes a Phase I block from a depolarizing relaxant such as succinylcholine?",
     setup: "",
     ans: [
-      { t: "Muscle fasciculations appear, there is no fade with tetanus or train-of-four (although amplitude is reduced in proportion to block intensity), there are no post-tetanic twitches, and anticholinesterases such as neostigmine augment (prolong) the block", ok: true },
-      { t: "Fade with tetanus and train-of-four is prominent, and anticholinesterases reverse the block", ok: false },
-      { t: "Fasciculations never occur and post-tetanic twitches are always present", ok: false },
-      { t: "The block is identical to a nondepolarizing block in every respect", ok: false },
+      { t: "Fasciculations appear, there is no fade with tetanus or train of four, and an anticholinesterase prolongs it", ok: true },
+      { t: "There is prominent fade with both tetanus and train of four, and an anticholinesterase reverses the block", ok: false },
+      { t: "Fasciculations never appear at all, and the post tetanic twitches are always present at every depth of block", ok: false },
+      { t: "The block is completely identical to a true nondepolarizing block in every single one of its features", ok: false },
     ],
     rationale: "A Phase I block is the normal response to a depolarizing relaxant. Muscle fasciculations appear, there is no fade with tetanus or the train-of-four (although the amplitude is reduced in proportion to the intensity of block), and there are no post-tetanic twitches. Anticholinesterases such as neostigmine or edrophonium augment and prolong the block, because they depress the pseudocholinesterase that metabolizes succinylcholine, so the drug remains at its site of action. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 43
     scene: "neuro",
@@ -1157,10 +1157,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "How does a Phase II block differ from a Phase I block, and what promotes the transition to a Phase II block?",
     setup: "",
     ans: [
-      { t: "A Phase II block behaves like a nondepolarizing block: fasciculations do not appear, there is fade with tetanus and train-of-four, and post-tetanic twitches are present, so an anticholinesterase may antagonize it; the transition is promoted by a large dose or long duration of succinylcholine, such as more than 3 mg/kg, 500 mg over 30 minutes, or a prolonged infusion", ok: true },
-      { t: "A Phase II block shows no fade and is prolonged by anticholinesterases, exactly like Phase I", ok: false },
-      { t: "A Phase II block occurs only at very low doses of succinylcholine", ok: false },
-      { t: "A Phase II block produces strong fasciculations and no fade", ok: false },
+      { t: "It acts like a nondepolarizer with fade and post tetanic twitches after a large or long succinylcholine dose", ok: true },
+      { t: "It shows absolutely no fade and is prolonged by an anticholinesterase, behaving exactly like a Phase I block", ok: false },
+      { t: "It occurs only at very low doses of succinylcholine, and never after any large or repeated dosing at all", ok: false },
+      { t: "It produces strong, vigorous fasciculations along with a complete absence of any fade on the train of four", ok: false },
     ],
     rationale: "A Phase II block develops when a depolarizing relaxant is given in large doses and begins to behave like a nondepolarizing block. Fasciculations do not appear before paralysis, there is fade with tetanus and the train-of-four, and post-tetanic twitches are present unless the block is extremely intense, so an anticholinesterase may antagonize it. The transition from Phase I to Phase II is influenced by both time and dose: a dose greater than about 3 mg/kg, about 500 mg over 30 minutes, or a prolonged succinylcholine infusion (versus a single bolus) makes a Phase II block more likely. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 44
     scene: "neuro",
@@ -1174,10 +1174,10 @@ export const TA_WK3_QUESTIONS = [
     prompt: "Which clinical pearls about neuromuscular monitoring and reversal are correct?",
     setup: "",
     ans: [
-      { t: "Avoid total twitch suppression during surgery (keep 1 to 2 tactile responses), do not attempt reversal at a train-of-four of 0 of 4 (2 to 3 of 4 is desirable), and confirm recovery with reliable signs such as a sustained head lift for more than 5 seconds, since a lack of fade does not exclude significant residual blockade", ok: true },
-      { t: "Reversal is best attempted at a train-of-four of 0 of 4 for maximum effect", ok: false },
-      { t: "A lack of fade on the train-of-four guarantees full recovery with no residual blockade", ok: false },
-      { t: "Total twitch suppression should be maintained throughout surgery", ok: false },
+      { t: "Keep one to two twitches during surgery, do not reverse at zero of four, and confirm with a sustained head lift", ok: true },
+      { t: "Reversal is always best attempted at exactly zero of four twitches to achieve the maximum drug effect", ok: false },
+      { t: "A complete lack of fade on the train of four reliably guarantees full recovery with no residual blockade", ok: false },
+      { t: "Total twitch suppression should be deliberately maintained throughout the entire surgical procedure itself", ok: false },
     ],
     rationale: "Clinical pearls include avoiding total twitch suppression during surgery (there should be 1 to 2 tactile responses), using tactile train-of-four during the case, and antagonizing the block at the end of the procedure. Double-burst stimulation is preferable to the train-of-four during recovery because fade is easier to feel, but a lack of fade in DBS or TOF does not exclude significant residual blockade. Reversal should not be attempted at a train-of-four of 0 of 4; 2 to 3 of 4 is desirable because more twitches mean more reliable reversal. Reliable signs such as a sustained head lift, leg lift, or hand grip for more than 5 seconds and a strong inspiratory force confirm returned strength. Source: NAS 560 Neuromuscular Monitoring lecture.", // source: NMB slide 46
     scene: "neuro",
