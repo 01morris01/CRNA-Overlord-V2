@@ -55,6 +55,10 @@ import { PP2_WK2_QUESTIONS,  PP2_WK2_METADATA  } from '../data/questions/pp2-wk2
 import { PP2_WK2_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk2-rbc-immunity-supplement.js';
 import { PP2_WK3_QUESTIONS,  PP2_WK3_METADATA  } from '../data/questions/pp2-wk3-blood-types-hemostasis-ventilation.js';
 import { PP2_WK3_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk3-hemostasis-supplement.js';
+import { PP2_WK3_VENTILATION_QUESTIONS } from '../data/questions/pp2-wk3-ventilation-supplement.js';
+import { PP2_WK4_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk4-pulmonary-circulation-supplement.js';
+import { PP2_WK5_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk5-gas-exchange-transport-supplement.js';
+import { PP2_WK6_SUPPLEMENT_QUESTIONS } from '../data/questions/pp2-wk6-resp-regulation-insufficiency-supplement.js';
 import { PP2_WK4_QUESTIONS,  PP2_WK4_METADATA  } from '../data/questions/pp2-wk4-pulmonary-circulation.js';
 import { PP2_WK5_QUESTIONS,  PP2_WK5_METADATA  } from '../data/questions/pp2-wk5-gas-exchange-transport.js';
 import { PP2_WK6_QUESTIONS,  PP2_WK6_METADATA  } from '../data/questions/pp2-wk6-resp-regulation-insufficiency.js';
@@ -669,7 +673,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 36–38",
     badgeLabel:    "COAG / VENTILATION",
     icon:          "🫁",
-    questions:     [...PP2_WK3_QUESTIONS, ...PP2_WK3_SUPPLEMENT_QUESTIONS],
+    questions:     [...PP2_WK3_QUESTIONS, ...PP2_WK3_SUPPLEMENT_QUESTIONS, ...PP2_WK3_VENTILATION_QUESTIONS],
     questionsMeta: PP2_WK3_METADATA,
   },
 
@@ -679,7 +683,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 39",
     badgeLabel:    "PULM CIRCULATION",
     icon:          "💨",
-    questions:     PP2_WK4_QUESTIONS,
+    questions:     [...PP2_WK4_QUESTIONS, ...PP2_WK4_SUPPLEMENT_QUESTIONS],
     questionsMeta: PP2_WK4_METADATA,
   },
 
@@ -689,7 +693,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 40–41",
     badgeLabel:    "GAS EXCHANGE",
     icon:          "🌬️",
-    questions:     PP2_WK5_QUESTIONS,
+    questions:     [...PP2_WK5_QUESTIONS, ...PP2_WK5_SUPPLEMENT_QUESTIONS],
     questionsMeta: PP2_WK5_METADATA,
   },
 
@@ -699,7 +703,7 @@ export const NODE_CONFIG = {
     chapterLabel:  "Ch. 42–43",
     badgeLabel:    "RESP REGULATION",
     icon:          "🫀",
-    questions:     PP2_WK6_QUESTIONS,
+    questions:     [...PP2_WK6_QUESTIONS, ...PP2_WK6_SUPPLEMENT_QUESTIONS],
     questionsMeta: PP2_WK6_METADATA,
   },
 
