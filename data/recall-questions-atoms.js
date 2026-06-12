@@ -10904,4 +10904,956 @@ export const RECALL_QUESTIONS_ATOMS = [
     metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Case 5 warfarin trauma' },
   },
 
+  // ===== ap1-wk-5 Lipid-Lowering atoms =====
+
+  {
+    id: 'atom-lipa-five-particles',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Name the five lipoprotein particles in order of increasing density and state which carries dietary fat and which is densest.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Order by rising density is chylomicron, VLDL, IDL, LDL, HDL; size falls as density rises.' },
+        { id: 'kp2', weight: 2, description: 'Chylomicron is largest and lightest carrying dietary fat; HDL is smallest and densest.' },
+      ],
+      common_errors: [
+        'Calling LDL the largest or least dense particle',
+        'Reversing the size and density relationship',
+        'Placing IDL before VLDL in the sequence',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Lipoprotein particles',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Lipoprotein particles' },
+  },
+
+  {
+    id: 'atom-lipa-ldl-hdl-roles',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Contrast the roles of LDL and HDL in atherosclerosis, including their nicknames and relationship to cardiovascular risk.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'LDL is cholesterol-rich and atherogenic, delivering cholesterol to tissues; it is the bad cholesterol.' },
+        { id: 'kp2', weight: 2, description: 'HDL is protective good cholesterol; higher levels track with lower cardiovascular risk.' },
+      ],
+      common_errors: [
+        'Labeling HDL as the atherogenic particle',
+        'Saying higher LDL lowers cardiovascular risk',
+        'Claiming LDL removes cholesterol from arteries',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LDL versus HDL',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'LDL versus HDL' },
+  },
+
+  {
+    id: 'atom-lipa-hepatic-origin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain where VLDL, IDL, and LDL originate and how the liver initiates the endogenous lipoprotein pathway.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hepatocytes synthesize cholesterol, lipids, and proteins and assemble them into VLDL secreted into plasma.' },
+        { id: 'kp2', weight: 2, description: 'VLDL, IDL, and LDL are all hepatic-derived particles of the endogenous pathway.' },
+      ],
+      common_errors: [
+        'Attributing VLDL production to the intestine',
+        'Saying LDL is made directly in the gut',
+        'Confusing VLDL origin with chylomicron origin',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Endogenous pathway',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Endogenous pathway' },
+  },
+
+  {
+    id: 'atom-lipa-lpl-conversion',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe how endothelial lipoprotein lipase remodels VLDL and the particle sequence that results.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'LPL on endothelium hydrolyzes VLDL triglyceride, releasing free fatty acids to tissues.' },
+        { id: 'kp2', weight: 2, description: 'Triglyceride loss shrinks VLDL into IDL and then into cholesterol-rich LDL.' },
+      ],
+      common_errors: [
+        'Saying LPL esterifies cholesterol rather than hydrolyzing triglyceride',
+        'Skipping IDL as the intermediate',
+        'Claiming LPL converts VLDL into HDL',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LPL processing',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'LPL processing' },
+  },
+
+  {
+    id: 'atom-lipa-ldl-receptor',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State how LDL is cleared from plasma and why hepatic LDL receptors are central to lipid lowering.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hepatic LDL receptors bind and internalize circulating LDL, the main clearance route.' },
+        { id: 'kp2', weight: 2, description: 'LDL carries most plasma cholesterol, so more LDL receptors means lower plasma LDL.' },
+      ],
+      common_errors: [
+        'Saying LDL is cleared by renal filtration',
+        'Forgetting LDL holds most plasma cholesterol',
+        'Locating the main LDL receptors outside the liver',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LDL receptor clearance',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'LDL receptor clearance' },
+  },
+
+  {
+    id: 'atom-lipa-reverse-transport',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Define reverse cholesterol transport, the particle responsible, and the final route of cholesterol elimination.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'HDL collects excess cholesterol from peripheral tissues and delivers it to the liver.' },
+        { id: 'kp2', weight: 2, description: 'The liver excretes that cholesterol into bile, and higher HDL lowers atherosclerosis risk.' },
+      ],
+      common_errors: [
+        'Reversing the direction toward tissues instead of liver',
+        'Assigning reverse transport to LDL',
+        'Saying cholesterol is excreted in urine',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Reverse cholesterol transport',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Reverse cholesterol transport' },
+  },
+
+  {
+    id: 'atom-lipa-two-pathways',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Distinguish the exogenous and endogenous lipoprotein pathways by starting point and characteristic particle.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Exogenous starts in the gut with dietary fat as chylomicrons handled by LPL toward tissues.' },
+        { id: 'kp2', weight: 2, description: 'Endogenous starts in the liver as VLDL processed to IDL to LDL cleared by hepatic LDL receptors.' },
+      ],
+      common_errors: [
+        'Saying the exogenous pathway begins in the liver',
+        'Placing VLDL in the exogenous pathway',
+        'Forgetting both pathways converge on the liver',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Pathway overview',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Pathway overview' },
+  },
+
+  {
+    id: 'atom-lipa-exogenous-mechanics',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Trace the exogenous pathway from dietary fat digestion through chylomicron transport to remnant handling.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Bile and pancreatic lipase digest dietary triglyceride so enterocytes assemble chylomicrons.' },
+        { id: 'kp2', weight: 2, description: 'Chylomicrons travel via the thoracic duct, LPL releases free fatty acids to tissues, and remnants return to the liver.' },
+      ],
+      common_errors: [
+        'Routing chylomicrons through the portal vein instead of lymphatics',
+        'Crediting gastric acid for dietary fat digestion',
+        'Saying chylomicron remnants are excreted rather than cleared by the liver',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Exogenous pathway',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Exogenous pathway' },
+  },
+
+  {
+    id: 'atom-lipa-endogenous-mechanics',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Trace the endogenous pathway and explain why VLDL is triglyceride-rich while LDL becomes cholesterol-rich.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The liver secretes triglyceride-rich VLDL, and LPL strips triglyceride to form IDL then LDL.' },
+        { id: 'kp2', weight: 2, description: 'LDL is cholesterol-rich and delivers cholesterol to tissues, then is cleared by hepatic LDL receptors.' },
+      ],
+      common_errors: [
+        'Saying VLDL carries dietary rather than hepatic triglyceride',
+        'Claiming LDL stays triglyceride-rich',
+        'Omitting hepatic LDL receptor clearance of LDL',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Endogenous pathway',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Endogenous pathway' },
+  },
+
+  {
+    id: 'atom-lipa-benefit-groups',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'List the four ACC AHA statin benefit groups, including the LDL threshold and the diabetes and risk criteria.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Groups are established ASCVD and LDL at or above 190 mg per dL with concern for familial hypercholesterolemia.' },
+        { id: 'kp2', weight: 2, description: 'Also age 40 to 75 with diabetes, and age 40 to 75 with risk factors at intermediate-to-high ASCVD risk.' },
+      ],
+      common_errors: [
+        'Using an LDL cutoff lower than 190 mg per dL',
+        'Limiting the diabetes group outside ages 40 to 75',
+        'Listing isolated low HDL as a benefit group',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin benefit groups',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin benefit groups' },
+  },
+
+  {
+    id: 'atom-lipa-fh-secondary',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe familial hypercholesterolemia, its prevalence, and common secondary causes of hyperlipidemia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Familial hypercholesterolemia is an LDL receptor defect affecting roughly 1 in 500 heterozygotes.' },
+        { id: 'kp2', weight: 2, description: 'Secondary causes include obesity, diabetes, alcohol, hypothyroidism, glucocorticoid excess, and hepatic or renal disease; most adult disease is multifactorial.' },
+      ],
+      common_errors: [
+        'Attributing familial hypercholesterolemia to an LPL defect',
+        'Listing hyperthyroidism rather than hypothyroidism as secondary',
+        'Quoting a prevalence far from 1 in 500',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Familial hypercholesterolemia',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Familial hypercholesterolemia' },
+  },
+
+  {
+    id: 'atom-lipa-lower-better',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State the lower is better principle for LDL and the body of evidence that supports it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Pooled cholesterol treatment meta-analyses show greater absolute LDL reduction yields greater cardiovascular event reduction.' },
+        { id: 'kp2', weight: 2, description: 'The principle is summarized as lower is better, with no demonstrated benefit to keeping LDL higher.' },
+      ],
+      common_errors: [
+        'Claiming a higher LDL target is protective',
+        'Saying the LDL level does not affect outcomes',
+        'Believing benefit plateaus so any LDL reduction is equivalent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Lower is better principle',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Lower is better principle' },
+  },
+
+  {
+    id: 'atom-lipb-hmgcoa-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain how statins inhibit HMG-CoA reductase and why this lowers plasma LDL.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Competitive inhibition of HMG-CoA reductase reduces hepatic cholesterol synthesis.' },
+        { id: 'kp2', weight: 2, description: 'Falling intracellular cholesterol upregulates hepatic LDL receptors and increases LDL clearance from plasma.' },
+      ],
+      common_errors: [
+        'Saying statins bind or destroy circulating LDL particles directly.',
+        'Confusing the target with intestinal NPC1L1 absorption (ezetimibe).',
+        'Claiming statins downregulate rather than upregulate LDL receptors.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin mechanism',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin mechanism' },
+  },
+
+  {
+    id: 'atom-lipb-lipid-effects',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State the approximate effect of statins on LDL, HDL, and triglycerides.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'LDL falls roughly 20 to 60 percent, the dominant and strongest effect.' },
+        { id: 'kp2', weight: 2, description: 'HDL rises only about 10 percent and triglycerides fall about 10 to 20 percent.' },
+      ],
+      common_errors: [
+        'Attributing a large 40 to 50 percent triglyceride drop to statins (that is fibrates).',
+        'Attributing a 20 to 30 percent HDL rise to statins (that is niacin).',
+        'Overstating the modest HDL and triglyceride changes as primary effects.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin lipid effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin lipid effects' },
+  },
+
+  {
+    id: 'atom-lipb-agents',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Differentiate the major statins by potency and metabolism.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Atorvastatin and rosuvastatin give the most potent LDL lowering; lovastatin and simvastatin are prodrugs needing hepatic activation.' },
+        { id: 'kp2', weight: 2, description: 'Pravastatin has minimal hepatic metabolism with renal clearance; fluvastatin and pitavastatin have low CYP3A4 interaction.' },
+      ],
+      common_errors: [
+        'Believing all statins are equally potent for LDL lowering.',
+        'Labeling pravastatin or rosuvastatin as a prodrug.',
+        'Assuming every statin is heavily CYP3A4 metabolized.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin agents',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin agents' },
+  },
+
+  {
+    id: 'atom-lipb-24hr-effect',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain why a statin effect lasts about 24 hours despite a short plasma half-life.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The pharmacodynamic effect persists about 24 hours regardless of plasma half-life.' },
+        { id: 'kp2', weight: 2, description: 'Durable enzyme inhibition and LDL receptor upregulation, not circulating drug level, sustain the effect, so a single missed dose does not lose efficacy.' },
+      ],
+      common_errors: [
+        'Assuming the plasma half-life must exceed 24 hours to explain duration.',
+        'Believing one missed oral dose abolishes the therapeutic effect.',
+        'Crediting protein binding or enterohepatic recycling for the sustained action.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin 24 hour effect',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin 24 hour effect' },
+  },
+
+  {
+    id: 'atom-lipb-pleiotropic',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'List the pleiotropic effects of statins beyond LDL lowering and their perioperative relevance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Statins stabilize plaques, reduce vascular inflammation, have antioxidant activity, and produce modest vasodilation.' },
+        { id: 'kp2', weight: 2, description: 'Observational data show continuing statins perioperatively reduces complications.' },
+      ],
+      common_errors: [
+        'Listing LDL receptor upregulation as a pleiotropic effect rather than the core mechanism.',
+        'Forgetting that these effects are independent of lipid lowering.',
+        'Overlooking the perioperative continuation benefit tied to these effects.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin pleiotropic effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin pleiotropic effects' },
+  },
+
+  {
+    id: 'atom-lipb-muscle-coq10',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe the statin muscle side-effect spectrum and the CoQ10 mechanism.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Spectrum runs from common myalgias to rare myositis with mild CK rise to very rare rhabdomyolysis.' },
+        { id: 'kp2', weight: 2, description: 'Reduced ubiquinone (CoQ10) synthesis causes mitochondrial dysfunction in muscle.' },
+      ],
+      common_errors: [
+        'Ranking rhabdomyolysis as common rather than very rare.',
+        'Naming creatine kinase or myoglobin as the depleted causal molecule.',
+        'Forgetting that CoQ10 depletion is the proposed mechanism.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin muscle effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin muscle effects' },
+  },
+
+  {
+    id: 'atom-lipb-myopathy-risk',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Identify the major risk factors for statin myopathy.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Patient factors include age over 80, female sex, low BMI, Asian ethnicity, renal or hepatic failure, uncontrolled hypothyroidism, low vitamin D, diabetes, and neuromuscular disease.' },
+        { id: 'kp2', weight: 2, description: 'SLCO1B1 polymorphisms are a pharmacogenetic risk by impairing hepatic statin uptake.' },
+      ],
+      common_errors: [
+        'Thinking male sex and high BMI raise risk.',
+        'Omitting SLCO1B1 as a genetic risk factor.',
+        'Overlooking uncontrolled hypothyroidism or low vitamin D as contributors.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin myopathy risk',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin myopathy risk' },
+  },
+
+  {
+    id: 'atom-lipb-cyp3a4',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain the CYP3A4 statin interactions and how to manage interaction-prone patients.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'CYP3A4 inhibitors raise levels of atorvastatin, simvastatin, and lovastatin; offenders include macrolides, azoles, HIV protease inhibitors, warfarin, diltiazem, verapamil, amiodarone, and grapefruit juice.' },
+        { id: 'kp2', weight: 2, description: 'Switch interaction-prone patients to pravastatin, fluvastatin, or pitavastatin, which avoid CYP3A4.' },
+      ],
+      common_errors: [
+        'Assuming all statins are equally affected by CYP3A4 inhibitors.',
+        'Forgetting grapefruit juice or amiodarone as interacting agents.',
+        'Increasing the dose rather than switching to a CYP3A4-sparing statin.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin CYP3A4 interactions',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin CYP3A4 interactions' },
+  },
+
+  {
+    id: 'atom-lipb-discontinue',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State the laboratory thresholds for discontinuing a statin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Creatine kinase greater than 10 times the upper limit of normal warrants discontinuation.' },
+        { id: 'kp2', weight: 2, description: 'AST or ALT greater than 3 times the upper limit of normal warrants discontinuation; severe muscle symptoms with normal CK may justify holding.' },
+      ],
+      common_errors: [
+        'Swapping the thresholds so transaminases use 10 times and CK uses 3 times.',
+        'Stopping for any mild elevation above the upper limit.',
+        'Forgetting that severe symptoms with normal CK can still prompt holding.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin discontinuation',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin discontinuation' },
+  },
+
+  {
+    id: 'atom-lipb-perioperative',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Summarize the perioperative pearls for statins.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Continue statins through surgery; a single missed oral dose does not lose effect given the 24 hour pharmacodynamics.' },
+        { id: 'kp2', weight: 2, description: 'Anesthetics including succinylcholine do not increase statin myopathy; statins are teratogenic and avoided in pregnancy; an unexplained perioperative CK rise should prompt asking about a statin plus CYP3A4 inhibitor.' },
+      ],
+      common_errors: [
+        'Holding statins for days before surgery.',
+        'Blaming succinylcholine or volatile agents for a perioperative CK rise.',
+        'Continuing statins in a pregnant patient.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Statin perioperative pearls',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Statin perioperative pearls' },
+  },
+
+  {
+    id: 'atom-lipc-pcsk9-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Name the two PCSK9 inhibitor agents and explain how binding circulating PCSK9 lowers LDL cholesterol.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Evolocumab and alirocumab are monoclonal antibodies that bind circulating PCSK9.' },
+        { id: 'kp2', weight: 2, description: 'Blocking PCSK9 spares hepatic LDL receptors from degradation, increasing LDL clearance from plasma.' },
+      ],
+      common_errors: [
+        'Saying they inhibit HMG-CoA reductase like statins.',
+        'Claiming they are oral small molecules rather than injectable antibodies.',
+        'Confusing PCSK9 binding with increasing LDL receptor synthesis instead of preventing receptor degradation.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'PCSK9 inhibitors',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'PCSK9 inhibitors' },
+  },
+
+  {
+    id: 'atom-lipc-pcsk9-effect-dosing',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State the magnitude of LDL reduction with PCSK9 inhibitors relative to other classes and their route and frequency of administration.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'LDL falls about 38 to 72 percent, the largest LDL drop of any class.' },
+        { id: 'kp2', weight: 2, description: 'They are given subcutaneously roughly every two weeks because they are antibodies.' },
+      ],
+      common_errors: [
+        'Believing statins lower LDL more than PCSK9 inhibitors.',
+        'Stating they are taken as a daily oral tablet.',
+        'Forgetting that the LDL reduction can exceed seventy percent.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'PCSK9 inhibitors',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'PCSK9 inhibitors' },
+  },
+
+  {
+    id: 'atom-lipc-pcsk9-trials',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Identify the two landmark PCSK9 inhibitor outcome trials and the key finding of each.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'FOURIER showed evolocumab added to a statin reduced cardiovascular events in ASCVD.' },
+        { id: 'kp2', weight: 2, description: 'ODYSSEY OUTCOMES showed alirocumab after acute coronary syndrome reduced major events and all-cause mortality.' },
+      ],
+      common_errors: [
+        'Attributing IMPROVE-IT findings to a PCSK9 inhibitor.',
+        'Swapping the agents so that FOURIER is tied to alirocumab.',
+        'Forgetting the mortality signal seen with alirocumab after ACS.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'PCSK9 trials',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'PCSK9 trials' },
+  },
+
+  {
+    id: 'atom-lipc-pcsk9-indications',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'List the indications for PCSK9 inhibitors and characterize their tolerability and main side effects.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Indicated for established ASCVD on maximally tolerated statin, familial hypercholesterolemia, and statin intolerance.' },
+        { id: 'kp2', weight: 2, description: 'Very well tolerated; main effects are upper respiratory symptoms and injection-site reactions.' },
+      ],
+      common_errors: [
+        'Using them as a primary triglyceride-lowering therapy.',
+        'Prescribing them for low-risk patients with mild LDL elevation.',
+        'Expecting frequent serious systemic toxicity.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'PCSK9 inhibitors',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'PCSK9 inhibitors' },
+  },
+
+  {
+    id: 'atom-lipc-resin-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Name the bile acid resins and explain how sequestering bile acids lowers LDL, including the expected triglyceride change.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Colesevelam, cholestyramine, and colestipol bind bile acids and interrupt enterohepatic recirculation, prompting the liver to make new bile salts and upregulate LDL receptors, lowering LDL about 15 to 30 percent.' },
+        { id: 'kp2', weight: 2, description: 'Triglycerides may rise modestly, about 5 to 20 percent.' },
+      ],
+      common_errors: [
+        'Thinking resins inhibit cholesterol synthesis directly.',
+        'Assuming resins lower triglycerides.',
+        'Forgetting the LDL receptor upregulation step.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Bile acid resins',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Bile acid resins' },
+  },
+
+  {
+    id: 'atom-lipc-resin-absorption',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe the main bile acid resin side effects and the rule for timing other oral medications and fat-soluble vitamins.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Constipation is the chief dose-limiting effect, with bloating and poor palatability, plus impaired absorption of fat-soluble vitamins A, D, E, and K.' },
+        { id: 'kp2', weight: 2, description: 'Give other drugs such as digoxin, levothyroxine, and warfarin at least one hour before or four hours after the resin.' },
+      ],
+      common_errors: [
+        'Naming flushing instead of constipation as the limiting effect.',
+        'Taking interacting drugs at the same time as the resin.',
+        'Forgetting that fat-soluble vitamin absorption is impaired.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Bile acid resins',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Bile acid resins' },
+  },
+
+  {
+    id: 'atom-lipc-cholestyramine-acidosis',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain why cholestyramine specifically can cause hyperchloremic metabolic acidosis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Cholestyramine is supplied as a chloride salt and can deliver excess chloride.' },
+        { id: 'kp2', weight: 2, description: 'This produces a hyperchloremic metabolic acidosis in a small number of patients.' },
+      ],
+      common_errors: [
+        'Attributing the acidosis to colesevelam as the usual cause.',
+        'Calling it an anion-gap acidosis.',
+        'Believing all resins cause it equally.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Bile acid resins',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Bile acid resins' },
+  },
+
+  {
+    id: 'atom-lipc-niacin-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe the mechanism of niacin and its effects on LDL, HDL, and triglycerides, noting which lipid it influences most.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Niacin inhibits hepatic VLDL synthesis and adipocyte free fatty acid release and increases lipoprotein lipase activity.' },
+        { id: 'kp2', weight: 2, description: 'It raises HDL about 20 to 30 percent, the most of any class, while lowering LDL 15 to 30 percent and triglycerides 20 to 50 percent.' },
+      ],
+      common_errors: [
+        'Crediting niacin with the strongest LDL reduction.',
+        'Confusing its mechanism with PPAR-alpha activation.',
+        'Forgetting that HDL is the lipid niacin raises most.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Niacin',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Niacin' },
+  },
+
+  {
+    id: 'atom-lipc-niacin-flushing',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain niacin-induced flushing and its prevention, and list its other major adverse effects.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Flushing is prostaglandin-mediated and is prevented by aspirin about 30 minutes before the dose; alcohol worsens it.' },
+        { id: 'kp2', weight: 2, description: 'Other effects include hyperglycemia, hyperuricemia with gout flares, and hepatic dysfunction at high doses.' },
+      ],
+      common_errors: [
+        'Using acetaminophen instead of aspirin to prevent flushing.',
+        'Thinking flushing is histamine-mediated.',
+        'Overlooking the glucose intolerance and gout risk.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Niacin',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Niacin' },
+  },
+
+  {
+    id: 'atom-lipc-fibrate-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Name the fibrates and explain how PPAR-alpha activation lowers triglycerides, noting their standing among triglyceride therapies.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Gemfibrozil, fenofibrate, and bezafibrate activate PPAR-alpha, increasing lipoprotein lipase, fatty acid oxidation, and HDL synthesis.' },
+        { id: 'kp2', weight: 2, description: 'They lower triglycerides about 40 to 50 percent, the most potent class for triglycerides, and are best for severe hypertriglyceridemia.' },
+      ],
+      common_errors: [
+        'Confusing the PPAR-alpha target with NPC1L1.',
+        'Thinking fibrates are primarily LDL drugs.',
+        'Forgetting fibrates are first choice for severe hypertriglyceridemia.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Fibrates',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Fibrates' },
+  },
+
+  {
+    id: 'atom-lipc-fibrate-cautions',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'List the key cautions with gemfibrozil including the statin interaction, warfarin effect, and gallstone risk.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Gemfibrozil plus a statin raises myopathy and rhabdomyolysis risk, and gemfibrozil displaces warfarin from albumin to raise the INR.' },
+        { id: 'kp2', weight: 2, description: 'Gemfibrozil increases biliary cholesterol, promoting gallstones, and should be restarted postoperatively only when the patient is well-hydrated and tolerating PO.' },
+      ],
+      common_errors: [
+        'Naming fenofibrate as the high-risk statin partner instead of gemfibrozil.',
+        'Saying gemfibrozil lowers the INR rather than raising it.',
+        'Restarting fibrates before oral intake and hydration are reestablished.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Fibrates',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Fibrates' },
+  },
+
+  {
+    id: 'atom-lipc-ezetimibe-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain the ezetimibe mechanism, its LDL effect, and the trial supporting its outcome benefit with a statin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Ezetimibe inhibits the NPC1L1 transporter in the small intestine, reducing cholesterol absorption and secondarily upregulating hepatic LDL receptors, lowering LDL about 8 to 22 percent alone.' },
+        { id: 'kp2', weight: 2, description: 'IMPROVE-IT showed added benefit when ezetimibe was combined with simvastatin after acute coronary syndrome.' },
+      ],
+      common_errors: [
+        'Confusing the NPC1L1 target with bile acid binding.',
+        'Attributing IMPROVE-IT to a PCSK9 inhibitor.',
+        'Overstating the monotherapy LDL reduction.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Ezetimibe',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Ezetimibe' },
+  },
+
+  {
+    id: 'atom-lipc-ezetimibe-newer',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe ezetimibe tolerability and identify the newer lipid agents, including which carries a boxed hepatotoxicity warning.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Ezetimibe has a placebo-like adverse event profile, useful for avoiding high-dose statin and for statin-intolerant patients.' },
+        { id: 'kp2', weight: 2, description: 'Lomitapide treats homozygous FH with a boxed hepatotoxicity warning; mipomersen is an apoB100 antisense agent off the US market; bempedoic acid and inclisiran are emerging options.' },
+      ],
+      common_errors: [
+        'Thinking ezetimibe is poorly tolerated.',
+        'Assigning the boxed hepatotoxicity warning to inclisiran or bempedoic acid.',
+        'Believing mipomersen is still widely marketed in the US.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Newer agents',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Newer agents' },
+  },
+
+  {
+    id: 'atom-lipc-fishoil-periop',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State the primary lipid effect of omega-3 fish oil and the perioperative bleeding rule for elective surgery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Marine omega-3 fatty acids primarily lower triglycerides and are not proven for primary prevention of heart disease.' },
+        { id: 'kp2', weight: 2, description: 'High-dose fish oil raises bleeding risk and should be held one to two weeks before elective surgery, especially with neuraxial anesthesia.' },
+      ],
+      common_errors: [
+        'Believing fish oil mainly lowers LDL.',
+        'Continuing high-dose fish oil up to the day of surgery.',
+        'Treating fish oil as a regulated drug with established long-term safety.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Omega-3 fish oil',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Omega-3 fish oil' },
+  },
+
+  {
+    id: 'atom-lipc-class-profile',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Summarize which class best lowers LDL, which best lowers triglycerides, and which best raises HDL.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'PCSK9 inhibitors give the deepest LDL reduction at 38 to 72 percent; fibrates lower triglycerides most at 40 to 50 percent.' },
+        { id: 'kp2', weight: 2, description: 'Niacin raises HDL most at 20 to 30 percent, while ezetimibe has minimal HDL and triglyceride effect.' },
+      ],
+      common_errors: [
+        'Crediting statins with the single largest LDL drop.',
+        'Naming niacin rather than fibrates for triglyceride lowering.',
+        'Forgetting that resins may raise triglycerides.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Comparative profile',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Comparative profile' },
+  },
+
+  {
+    id: 'atom-lipc-drug-selection',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Match the clinical scenario to the preferred lipid drug for prevention, statin intolerance, hypertriglyceridemia, and residual LDL on a statin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Statins are first line for primary and secondary cardiovascular prevention; severe hypertriglyceridemia calls for a fibrate.' },
+        { id: 'kp2', weight: 2, description: 'Statin-intolerant patients receive a PCSK9 inhibitor or ezetimibe, and residual LDL on a statin is treated by adding ezetimibe.' },
+      ],
+      common_errors: [
+        'Choosing a fibrate for LDL-driven cardiovascular prevention.',
+        'Adding fish oil rather than ezetimibe for residual LDL on a statin.',
+        'Forgetting that statin intolerance points to PCSK9 inhibitors or ezetimibe.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Drug selection',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Drug selection' },
+  },
+
 ];
