@@ -11856,4 +11856,1106 @@ export const RECALL_QUESTIONS_ATOMS = [
     metadata: { priority: 'high', source: 'Stoelting Ch 23; Whybrew lecture', topic: 'Drug selection' },
   },
 
+  // ===== ap1-wk-5 Diuretics atoms =====
+
+  {
+    id: 'atom-diua-what-diuretics-do',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What do diuretics do, and what are their main clinical uses?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They increase urinary excretion of sodium and water, reducing body fluid volume.' },
+        { id: 'kp2', weight: 2, description: 'Used to lower blood pressure, reduce shortness of breath, and decrease edema in the legs, ankles, and feet.' },
+      ],
+      common_errors: [
+        'Calling them bronchodilators because they ease breathlessness.',
+        'Thinking they improve edema by raising oncotic pressure rather than removing salt and water.',
+        'Assuming they act as inotropes to relieve heart failure symptoms.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Diuretic basics',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Diuretic basics' },
+  },
+
+  {
+    id: 'atom-diua-nephron-sites',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What is the loop of Henle, and why do nephron sites matter for diuretics?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The loop of Henle is a U-shaped tubular segment that regulates salt and water reabsorption.' },
+        { id: 'kp2', weight: 2, description: 'Different diuretic classes act at distinct tubular sites, and the site determines potency and electrolyte effects.' },
+      ],
+      common_errors: [
+        'Placing all diuretics at a single tubular site.',
+        'Confusing the loop of Henle with the glomerulus or collecting duct.',
+        'Assuming site of action does not influence potency.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Nephron sites',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Nephron sites' },
+  },
+
+  {
+    id: 'atom-diua-cai-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How does acetazolamide produce diuresis and at what site?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It is a sulfonamide derivative that inhibits carbonic anhydrase mainly in the proximal tubule.' },
+        { id: 'kp2', weight: 2, description: 'Blocking conversion of carbonic acid to carbon dioxide and water reduces reabsorption of sodium, bicarbonate, and water.' },
+      ],
+      common_errors: [
+        'Placing carbonic anhydrase inhibitors in the thick ascending limb.',
+        'Saying they block sodium channels rather than carbonic anhydrase.',
+        'Forgetting bicarbonate reabsorption is reduced.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Carbonic anhydrase inhibitors',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Carbonic anhydrase inhibitors' },
+  },
+
+  {
+    id: 'atom-diua-cai-acid-base',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What is the net renal and acid-base effect of carbonic anhydrase inhibitors?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They increase bicarbonate excretion and produce only a mild diuresis.' },
+        { id: 'kp2', weight: 2, description: 'Bicarbonate loss can cause a metabolic acidosis.' },
+      ],
+      common_errors: [
+        'Expecting a metabolic alkalosis instead of acidosis.',
+        'Overstating the diuretic potency as strong.',
+        'Forgetting that the urine becomes alkaline.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Carbonic anhydrase inhibitors',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Carbonic anhydrase inhibitors' },
+  },
+
+  {
+    id: 'atom-diua-acetazolamide-uses',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the common clinical uses and routes of acetazolamide?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Used for glaucoma, altitude sickness, and edema associated with congestive heart failure.' },
+        { id: 'kp2', weight: 2, description: 'Available both orally and intravenously.' },
+      ],
+      common_errors: [
+        'Choosing acetazolamide for rapid potent diuresis.',
+        'Thinking it is only a topical eye agent.',
+        'Forgetting its role in altitude sickness.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Carbonic anhydrase inhibitors',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Carbonic anhydrase inhibitors' },
+  },
+
+  {
+    id: 'atom-diua-loop-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What transporter and tubular segment do loop diuretics target?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They inhibit the sodium-potassium-two chloride cotransporter in the thick ascending limb of the loop of Henle.' },
+        { id: 'kp2', weight: 2, description: 'This blocks reabsorption of sodium, potassium, and chloride in a segment that is impermeable to water.' },
+      ],
+      common_errors: [
+        'Naming the sodium-chloride cotransporter of the distal tubule instead.',
+        'Placing the action in the proximal tubule or collecting duct.',
+        'Forgetting the segment is water impermeable.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loop mechanism',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loop mechanism' },
+  },
+
+  {
+    id: 'atom-diua-loop-potency',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Why are loop diuretics the most potent class, and what is their lead clinical role?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The thick ascending limb normally reabsorbs about 20 to 30 percent of filtered sodium, so blocking it yields a large dose-dependent natriuresis.' },
+        { id: 'kp2', weight: 2, description: 'They are first-line for fluid overload in heart failure.' },
+      ],
+      common_errors: [
+        'Attributing potency to action along the whole nephron.',
+        'Confusing the dose-dependent response with a ceiling like thiazides.',
+        'Forgetting their first-line role in heart failure fluid overload.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loop potency',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loop potency' },
+  },
+
+  {
+    id: 'atom-diua-loop-agents',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Which four agents make up the loop diuretic class?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Furosemide is the most common and is used for acute rapid diuresis.' },
+        { id: 'kp2', weight: 2, description: 'The class also includes bumetanide, torsemide, and ethacrynic acid.' },
+      ],
+      common_errors: [
+        'Including acetazolamide or a thiazide as a loop agent.',
+        'Omitting ethacrynic acid from the class.',
+        'Confusing torsemide with a thiazide.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loop agents',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loop agents' },
+  },
+
+  {
+    id: 'atom-diua-ethacrynic-acid',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What makes ethacrynic acid distinctive among loop diuretics?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It is the only nonsulfonamide loop diuretic, making it a good option in sulfa allergy.' },
+        { id: 'kp2', weight: 2, description: 'Its potency is about 70 percent that of furosemide and it is dose-dependently ototoxic and can cause nausea.' },
+      ],
+      common_errors: [
+        'Believing it is more potent than furosemide.',
+        'Thinking it is safe to give despite a sulfa allergy because it is still a sulfonamide.',
+        'Forgetting its ototoxicity.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Ethacrynic acid',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Ethacrynic acid' },
+  },
+
+  {
+    id: 'atom-diua-furosemide-pk',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the key pharmacokinetic features of furosemide?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It is given orally or intravenously, is about 90 percent protein bound, and has a one to two hour elimination half-life.' },
+        { id: 'kp2', weight: 2, description: 'After IV dosing onset is 5 to 10 minutes, peak about 30 minutes, and duration 2 to 6 hours, with ototoxicity on fast administration.' },
+      ],
+      common_errors: [
+        'Stating a half-life of many hours.',
+        'Saying it is available only orally.',
+        'Forgetting that rapid IV push risks ototoxicity.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Furosemide pharmacokinetics',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Furosemide pharmacokinetics' },
+  },
+
+  {
+    id: 'atom-diua-furosemide-dose',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How does furosemide dosing differ between normal renal function and chronic renal insufficiency?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'With normal renal function, 20 to 40 mg intravenously produces maximal natriuresis.' },
+        { id: 'kp2', weight: 2, description: 'Chronic renal insufficiency requires higher doses of about 160 to 200 mg intravenously, given slowly to avoid tinnitus.' },
+      ],
+      common_errors: [
+        'Using high renal-failure doses in patients with normal kidneys.',
+        'Pushing large doses rapidly and risking tinnitus.',
+        'Assuming the same dose works regardless of renal function.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Furosemide dosing',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Furosemide dosing' },
+  },
+
+  {
+    id: 'atom-diua-bumetanide',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the pharmacologic features of bumetanide?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Oral bioavailability is 80 to 100 percent and it can be given orally, intravenously, or intramuscularly.' },
+        { id: 'kp2', weight: 2, description: 'It is about 40 times more potent than furosemide with similar potassium effects to other loops.' },
+      ],
+      common_errors: [
+        'Thinking it is less potent than furosemide.',
+        'Believing it has no oral formulation.',
+        'Assuming it spares potassium.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Bumetanide',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Bumetanide' },
+  },
+
+  {
+    id: 'atom-diua-torsemide',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the pharmacologic features of torsemide?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It is about 3 times more potent than furosemide with a 3 to 4 hour half-life and longer duration allowing once-daily dosing.' },
+        { id: 'kp2', weight: 2, description: 'It is primarily metabolized by the liver, and liver failure increases renal drug delivery.' },
+      ],
+      common_errors: [
+        'Saying it is eliminated mainly by the kidneys.',
+        'Calling it the shortest-acting loop.',
+        'Forgetting it allows once-daily dosing.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Torsemide',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Torsemide' },
+  },
+
+  {
+    id: 'atom-diua-loop-hypertension',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How and when are loop diuretics used to treat hypertension?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They lower blood pressure by reducing intravascular volume and sodium retention.' },
+        { id: 'kp2', weight: 2, description: 'They are first-line antihypertensives specifically in renal insufficiency.' },
+      ],
+      common_errors: [
+        'Calling loops first-line for uncomplicated hypertension with normal kidneys.',
+        'Attributing the blood pressure drop to direct arterial dilation alone.',
+        'Forgetting the renal insufficiency indication.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loops in hypertension',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loops in hypertension' },
+  },
+
+  {
+    id: 'atom-diua-loop-heart-failure',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How do loop diuretics help in acute decompensated heart failure?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They are first-line, lowering ventricular filling pressure and pulmonary edema through diuresis and prostaglandin-mediated venodilation.' },
+        { id: 'kp2', weight: 2, description: 'Torsemide has been linked to fewer readmissions than furosemide in heart failure.' },
+      ],
+      common_errors: [
+        'Attributing relief solely to diuresis with no vascular effect.',
+        'Saying loops constrict veins rather than dilate them.',
+        'Forgetting the torsemide readmission signal.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loops in heart failure',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loops in heart failure' },
+  },
+
+  {
+    id: 'atom-diua-loop-icp',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How is furosemide used to lower intracranial pressure and how does it compare with mannitol?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Furosemide 0.5 to 1 mg/kg IV lowers intracranial pressure via systemic diuresis and reduced cerebrospinal fluid production and can be combined with mannitol.' },
+        { id: 'kp2', weight: 2, description: 'Unlike mannitol with a disrupted blood-brain barrier, furosemide produces no rebound intracranial pressure.' },
+      ],
+      common_errors: [
+        'Claiming furosemide causes rebound intracranial pressure.',
+        'Thinking it works by raising serum osmolality like mannitol.',
+        'Forgetting the added dehydration risk when combined with mannitol.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loops and ICP',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loops and ICP' },
+  },
+
+  {
+    id: 'atom-diua-loop-hypercalcemia',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Why are loop diuretics useful in symptomatic hypercalcemia?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They promote urinary calcium excretion.' },
+        { id: 'kp2', weight: 2, description: 'This lowers serum calcium in symptomatic hypercalcemia, contrasting with the calcium-retaining thiazides.' },
+      ],
+      common_errors: [
+        'Confusing loops with thiazides, which retain calcium.',
+        'Thinking loops lower calcium by blocking gut absorption.',
+        'Forgetting the need for concurrent volume repletion.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loops and hypercalcemia',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loops and hypercalcemia' },
+  },
+
+  {
+    id: 'atom-diua-loop-side-effects',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the major side effects and drug interactions of loop diuretics?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hypokalemia increases digoxin toxicity, hypovolemia causes hypotension and renal injury, and ototoxicity is dose-dependent.' },
+        { id: 'kp2', weight: 2, description: 'They add to aminoglycoside nephrotoxicity, raise lithium and aminoglycoside levels, potentiate nondepolarizing neuromuscular blockers, and reduce uric acid excretion.' },
+      ],
+      common_errors: [
+        'Expecting hyperkalemia instead of hypokalemia.',
+        'Forgetting that loops can prolong nondepolarizing neuromuscular blockade.',
+        'Overlooking reduced uric acid excretion and gout risk.',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Loop side effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Loop side effects' },
+  },
+
+  {
+    id: 'atom-diub-thiazide-firstline',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Why are thiazides the preferred first-line agents for long-term treatment of essential hypertension?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They first reduce extracellular fluid volume, then lower systemic vascular resistance long-term through vasodilation.' },
+        { id: 'kp2', weight: 2, description: 'Sustained blood pressure control with oral dosing makes them durable chronic antihypertensives.' },
+      ],
+      common_errors: [
+        'Claiming the long-term effect is mainly continued volume loss rather than vasodilation',
+        'Calling thiazides the most potent diuretics, confusing them with loops',
+        'Saying they are first-line for acute decompensated heart failure',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Thiazide first-line use',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Thiazide first-line use' },
+  },
+
+  {
+    id: 'atom-diub-thiazide-dct',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Where in the nephron do thiazides act, and how does this lead to potassium loss?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They block the sodium chloride cotransporter in the distal convoluted tubule.' },
+        { id: 'kp2', weight: 2, description: 'Increased sodium delivery to the collecting duct drives potassium secretion, causing hypokalemia.' },
+      ],
+      common_errors: [
+        'Placing the thiazide site at the thick ascending limb',
+        'Saying thiazides spare potassium',
+        'Forgetting that downstream sodium delivery drives the kaliuresis',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Thiazide site of action',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Thiazide site of action' },
+  },
+
+  {
+    id: 'atom-diub-thiazide-calcium',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How do thiazides affect calcium handling and serum calcium?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They increase distal calcium reabsorption, lowering urinary calcium.' },
+        { id: 'kp2', weight: 2, description: 'This tends to raise serum calcium, so they are used cautiously in hypercalcemia and help prevent calcium stones.' },
+      ],
+      common_errors: [
+        'Stating thiazides increase urinary calcium like loops do',
+        'Saying thiazides lower serum calcium',
+        'Forgetting the calcium stone prevention application',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Thiazide calcium handling',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Thiazide calcium handling' },
+  },
+
+  {
+    id: 'atom-diub-hctz-pk',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How do the pharmacokinetics of hydrochlorothiazide and chlorthalidone differ, and what limits thiazide efficacy?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hydrochlorothiazide has a half-life of about 8 to 12 hours while chlorthalidone lasts roughly 50 to 60 hours.' },
+        { id: 'kp2', weight: 2, description: 'Most thiazides are renally eliminated and lose efficacy in renal insufficiency, with indapamide the hepatic exception.' },
+      ],
+      common_errors: [
+        'Assuming hydrochlorothiazide and chlorthalidone have similar durations',
+        'Saying thiazides work well in advanced renal insufficiency',
+        'Forgetting indapamide is hepatically cleared',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Thiazide pharmacokinetics',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Thiazide pharmacokinetics' },
+  },
+
+  {
+    id: 'atom-diub-thiazide-uses',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Beyond essential hypertension, what are the key clinical uses of thiazide-type agents?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They prevent calcium-containing kidney stones and chlorthalidone is favored in resistant hypertension.' },
+        { id: 'kp2', weight: 2, description: 'Metolazone is combined with a loop diuretic for sequential nephron blockade in renal insufficiency.' },
+      ],
+      common_errors: [
+        'Naming uric acid stones instead of calcium stones',
+        'Pairing spironolactone rather than metolazone with a loop for resistance',
+        'Forgetting chlorthalidone for resistant hypertension',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Thiazide clinical uses',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Thiazide clinical uses' },
+  },
+
+  {
+    id: 'atom-diub-thiazide-h',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the H-themed side effects and key perioperative interactions of thiazides?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They cause hypokalemia, hypomagnesemia, hypercalcemia, hyperuricemia, hyperglycemia, hyperlipidemia, and metabolic alkalosis.' },
+        { id: 'kp2', weight: 2, description: 'They potentiate nondepolarizing blockers, reduce lithium clearance, and may cross-react in sulfa allergy.' },
+      ],
+      common_errors: [
+        'Saying thiazides cause hypoglycemia rather than hyperglycemia',
+        'Listing hyperkalemia as a thiazide effect',
+        'Forgetting the potentiation of nondepolarizing blockers',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Thiazide side effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Thiazide side effects' },
+  },
+
+  {
+    id: 'atom-diub-osmotic-mech',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How do osmotic diuretics produce diuresis at the level of the tubule?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They are freely filtered and poorly reabsorbed, raising tubular fluid osmolality.' },
+        { id: 'kp2', weight: 2, description: 'They hold water in water-permeable segments such as the proximal tubule and descending loop, producing osmotic diuresis.' },
+      ],
+      common_errors: [
+        'Attributing the effect to blockade of a sodium transporter',
+        'Saying osmotic agents act at the collecting duct',
+        'Forgetting they must be filtered to work',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Osmotic diuretic mechanism',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Osmotic diuretic mechanism' },
+  },
+
+  {
+    id: 'atom-diub-mannitol-systemic',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the physiochemical properties of mannitol and its systemic fluid effects?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It is a six-carbon sugar alcohol that is freely filtered, not metabolized, and not reabsorbed.' },
+        { id: 'kp2', weight: 2, description: 'It raises plasma osmolality, shifts water from intracellular to intravascular space, lowers intracranial pressure, and scavenges free radicals.' },
+      ],
+      common_errors: [
+        'Saying mannitol is extensively metabolized',
+        'Claiming it shifts water from intravascular into cells',
+        'Forgetting its free radical scavenging property',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Mannitol properties',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Mannitol properties' },
+  },
+
+  {
+    id: 'atom-diub-mannitol-icp',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How is mannitol used for elevated intracranial pressure, and why does the blood-brain barrier matter?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'With an intact barrier it draws water from brain into the vasculature, with onset 10 to 15 minutes, peak 30 to 45 minutes, and duration about 6 hours.' },
+        { id: 'kp2', weight: 2, description: 'If the barrier is disrupted mannitol enters the brain and causes rebound intracranial pressure.' },
+      ],
+      common_errors: [
+        'Saying mannitol works regardless of barrier integrity',
+        'Confusing mannitol with loops, which cause no rebound',
+        'Misstating the onset as immediate',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Mannitol ICP use',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Mannitol ICP use' },
+  },
+
+  {
+    id: 'atom-diub-mannitol-side',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the major side effects and anesthesia concerns with mannitol?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Initial intravascular volume expansion can cause pulmonary edema and is poorly tolerated in left ventricular dysfunction.' },
+        { id: 'kp2', weight: 2, description: 'It is ineffective in renal failure because it is not filtered and then accumulates, causing a hyperosmolar state.' },
+      ],
+      common_errors: [
+        'Saying mannitol causes immediate intravascular depletion',
+        'Recommending mannitol for diuresis in renal failure',
+        'Forgetting the pulmonary edema risk in heart failure',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Mannitol side effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Mannitol side effects' },
+  },
+
+  {
+    id: 'atom-diub-enac',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How do the epithelial sodium channel blockers work and why is their diuresis mild?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Amiloride and triamterene block the epithelial sodium channel in the collecting duct, sparing potassium without acting on aldosterone receptors.' },
+        { id: 'kp2', weight: 2, description: 'The collecting duct reclaims only a small fraction of sodium, so they cause mild diuresis and are usually combined with loops or thiazides.' },
+      ],
+      common_errors: [
+        'Calling amiloride and triamterene aldosterone antagonists',
+        'Saying these agents produce potent diuresis',
+        'Placing their site of action upstream of the collecting duct',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Potassium-sparing ENaC blockers',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Potassium-sparing ENaC blockers' },
+  },
+
+  {
+    id: 'atom-diub-ksparing-role',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What is the primary clinical role of potassium-sparing diuretics and why are they rarely used alone?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Because the collecting duct reabsorbs only a small fraction of filtered sodium, these agents produce only mild diuresis.' },
+        { id: 'kp2', weight: 2, description: 'They are typically combined with kaliuretic loop or thiazide diuretics to prevent hypokalemia rather than used as primary antihypertensives.' },
+      ],
+      common_errors: [
+        'Saying potassium-sparing agents provide potent standalone diuresis',
+        'Using them mainly as first-line antihypertensive monotherapy',
+        'Forgetting their main job is to offset potassium loss from other diuretics',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Potassium-sparing combination role',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Potassium-sparing combination role' },
+  },
+
+  {
+    id: 'atom-diub-aldo-mech',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How do spironolactone and eplerenone act, and what extra cardiac effect do they have?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They competitively block the mineralocorticoid receptor from the plasma side in the distal tubule and collecting duct, sparing potassium.' },
+        { id: 'kp2', weight: 2, description: 'They blunt aldosterone-mediated cardiac remodeling and fibrosis, with spironolactone nonselective and eplerenone selective.' },
+      ],
+      common_errors: [
+        'Saying they block the epithelial sodium channel directly',
+        'Claiming they must enter the tubular lumen to act',
+        'Forgetting the antifibrotic remodeling effect',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aldosterone antagonist mechanism',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Aldosterone antagonist mechanism' },
+  },
+
+  {
+    id: 'atom-diub-aldo-uses',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What are the major clinical uses of aldosterone antagonists, including supporting trial evidence?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'They reduce morbidity and mortality in heart failure with reduced ejection fraction, supported by the RALES trial, and eplerenone improves survival after myocardial infarction with left ventricular dysfunction.' },
+        { id: 'kp2', weight: 2, description: 'They treat low-renin and resistant hypertension, hyperaldosteronism, edema of cirrhosis and nephrotic syndrome, and aldosterone escape.' },
+      ],
+      common_errors: [
+        'Attributing the heart failure benefit to a different trial than RALES',
+        'Saying they work best in high-renin hypertension',
+        'Forgetting the post-myocardial-infarction survival benefit of eplerenone',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aldosterone antagonist clinical uses',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Aldosterone antagonist clinical uses' },
+  },
+
+  {
+    id: 'atom-diub-aldo-side',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'What pharmacokinetic and adverse effects define aldosterone antagonists, especially perioperatively?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hyperkalemia is the most serious effect, worsened by ACE inhibitors or ARBs and renal impairment, so potassium must be checked before surgery.' },
+        { id: 'kp2', weight: 2, description: 'Spironolactone causes gynecomastia and has a half-life near 20 hours, while eplerenone metabolism increases with CYP3A4 inhibitors.' },
+      ],
+      common_errors: [
+        'Listing hypokalemia rather than hyperkalemia as the danger',
+        'Attributing gynecomastia to eplerenone',
+        'Forgetting to check potassium preoperatively',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aldosterone antagonist side effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Aldosterone antagonist side effects' },
+  },
+
+  {
+    id: 'atom-diub-tolvaptan',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'How does tolvaptan work, what is aquaresis, and what is its black-box warning?',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'It is a selective V2 antagonist that blocks aquaporin-2 insertion in the collecting duct, producing aquaresis with excretion of dilute urine while preserving sodium and potassium.' },
+        { id: 'kp2', weight: 2, description: 'It treats hyponatremia of SIADH, heart failure, and cirrhosis, but rapid sodium correction can cause osmotic demyelination, the basis of its black-box warning.' },
+      ],
+      common_errors: [
+        'Saying tolvaptan wastes sodium and potassium like a loop',
+        'Confusing aquaresis with ordinary natriuretic diuresis',
+        'Forgetting the demyelination warning from fast correction',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Tolvaptan V2 antagonist',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Tolvaptan V2 antagonist' },
+  },
+
+  {
+    id: 'atom-diuc-d1-site',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Name the receptor and tubule sites through which dopamine and fenoldopam produce natriuresis, and state the renal hemodynamic result.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Both agonists stimulate D1 receptors in the proximal tubule and loop of Henle' },
+        { id: 'kp2', weight: 2, description: 'Result is natriuresis, increased renal blood flow, and a mild rise in GFR' },
+      ],
+      common_errors: [
+        'Attributing the renal action to beta1 or alpha1 receptors',
+        'Claiming the agents cause sodium retention rather than natriuresis',
+        'Placing the D1 action in the collecting duct',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Dopamine agonists',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Dopamine agonists' },
+  },
+
+  {
+    id: 'atom-diuc-dopamine-dose',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Describe how dopamine receptor activity shifts from low to high infusion rates and the hemodynamic effect at each stage.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Low dose favors D1 renal vasodilation, moderate dose adds beta1 raising inotropy, output, and blood pressure' },
+        { id: 'kp2', weight: 2, description: 'High dose recruits alpha1 producing vasoconstriction' },
+      ],
+      common_errors: [
+        'Reversing the order so alpha1 appears at low dose',
+        'Assigning vasoconstriction to the D1 range',
+        'Calling the moderate range a beta2 bradycardic effect',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Dopamine agonists',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Dopamine agonists' },
+  },
+
+  {
+    id: 'atom-diuc-lowdose-outcome',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State what low-dose renal dopamine does to renal blood flow and what the evidence says about its effect on clinical outcomes.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Low-dose dopamine causes D1 renal vasodilation and can raise urine output' },
+        { id: 'kp2', weight: 2, description: 'Current evidence shows clinical outcomes are not improved, so it is not used for renal protection' },
+      ],
+      common_errors: [
+        'Believing low-dose dopamine reliably prevents renal failure',
+        'Equating more urine output with preserved renal function',
+        'Recommending it as standard renal protection',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Dopamine agonists',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Dopamine agonists' },
+  },
+
+  {
+    id: 'atom-diuc-fenoldopam',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Give the receptor selectivity, hemodynamic effect, half-life, and route of fenoldopam.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Selective D1 agonist with no alpha1 or beta activity that lowers systemic vascular resistance' },
+        { id: 'kp2', weight: 2, description: 'Short half-life near 10 minutes and given intravenously only' },
+      ],
+      common_errors: [
+        'Describing fenoldopam as having beta or alpha activity',
+        'Stating it is available orally',
+        'Quoting a long half-life of hours',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Dopamine agonists',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Dopamine agonists' },
+  },
+
+  {
+    id: 'atom-diuc-agonist-uses',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Contrast the main clinical indications of dopamine and fenoldopam, and state whether either is supported for routine renal protection.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Dopamine supports cardiogenic shock and perfusion in low or normal SVR, fenoldopam treats severe or resistant hypertension without tachycardia' },
+        { id: 'kp2', weight: 2, description: 'Evidence does not support routine use of these agents for renal protection in high-risk surgery' },
+      ],
+      common_errors: [
+        'Recommending fenoldopam for routine renal protection',
+        'Using dopamine as a primary antihypertensive',
+        'Assuming fenoldopam causes reflex tachycardia',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Dopamine agonists',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Dopamine agonists' },
+  },
+
+  {
+    id: 'atom-diuc-periop-volume',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Explain the expected perioperative volume trajectory of a chronic diuretic user and the resulting cautions for loop or thiazide use.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Patients are often relatively volume depleted preoperatively but retain fluid postoperatively from stress hormone activation' },
+        { id: 'kp2', weight: 2, description: 'Loops and thiazides must balance correcting edema against hypovolemia, electrolyte derangement, and renal hypoperfusion' },
+      ],
+      common_errors: [
+        'Assuming chronic diuretic users are volume overloaded before surgery',
+        'Ignoring stress-driven postoperative fluid retention',
+        'Dosing diuretics aggressively without checking volume and electrolytes',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Perioperative diuretics',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Perioperative diuretics' },
+  },
+
+  {
+    id: 'atom-diuc-class-site',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'List the six diuretic classes and match each to its primary tubule site of action.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Carbonic anhydrase inhibitors at proximal tubule, loops at thick ascending limb, thiazides at distal convoluted tubule' },
+        { id: 'kp2', weight: 2, description: 'Osmotic agents at water-permeable segments and collecting duct holds ENaC blockers, aldosterone antagonists, and V2 antagonists' },
+      ],
+      common_errors: [
+        'Placing thiazides in the collecting duct',
+        'Putting loop diuretics in the proximal tubule',
+        'Forgetting that the collecting duct hosts three different classes',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Diuretic sites',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Diuretic sites' },
+  },
+
+  {
+    id: 'atom-diuc-nak-link',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'Trace the mechanism by which an upstream diuretic that blocks sodium reabsorption ends up causing hypokalemia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Blocking sodium upstream increases sodium delivery to the collecting duct' },
+        { id: 'kp2', weight: 2, description: 'Sodium uptake there creates a lumen-negative voltage that drives potassium secretion into the urine' },
+      ],
+      common_errors: [
+        'Saying decreased distal sodium delivery causes the potassium loss',
+        'Attributing hypokalemia to direct potassium channel blockade',
+        'Crediting a fall in aldosterone for the effect',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Electrolyte effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Electrolyte effects' },
+  },
+
+  {
+    id: 'atom-diuc-universal-rule',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'State the universal rule linking a diuretic\'s site of action to its potassium and acid-base fingerprint.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Agents acting upstream of the collecting duct lower potassium and cause metabolic alkalosis' },
+        { id: 'kp2', weight: 2, description: 'Agents acting at the collecting duct raise potassium and cause metabolic acidosis' },
+      ],
+      common_errors: [
+        'Reversing the two patterns',
+        'Pairing upstream agents with hyperkalemia',
+        'Pairing collecting duct agents with alkalosis',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Electrolyte effects',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Electrolyte effects' },
+  },
+
+  {
+    id: 'atom-diuc-periop-watch',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-5',
+    prompt: 'List the key perioperative diuretic hazards involving digoxin, magnesium, neuromuscular blockers, lithium, sulfa allergy, and mannitol.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hypokalemia worsens digoxin toxicity, hypomagnesemia drives refractory hypokalemia so replace magnesium first, and loops and thiazides potentiate nondepolarizing NMB' },
+        { id: 'kp2', weight: 2, description: 'Diuretics reduce lithium clearance, sulfa allergy favors ethacrynic acid for loop diuresis, and mannitol is contraindicated in renal failure due to accumulation' },
+      ],
+      common_errors: [
+        'Replacing potassium before magnesium in refractory hypokalemia',
+        'Choosing a sulfonamide loop in a patient with sulfa allergy',
+        'Giving mannitol in renal failure despite the lack of filtration',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Perioperative diuretics',
+    chapter: 'ap1-wk-5',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 22; Whybrew lecture', topic: 'Perioperative diuretics' },
+  },
+
 ];

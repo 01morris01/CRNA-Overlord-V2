@@ -92,6 +92,7 @@ import { AP1_WK2_QUESTIONS,  AP1_WK2_METADATA  } from '../data/questions/ap1-wk2
 import { AP1_WK3_QUESTIONS,  AP1_WK3_METADATA  } from '../data/questions/ap1-wk3.js';
 import { AP1_WK4_QUESTIONS,  AP1_WK4_METADATA  } from '../data/questions/ap1-wk4.js';
 import { AP1_WK5_QUESTIONS,  AP1_WK5_METADATA  } from '../data/questions/ap1-wk5.js';
+import { AP1_WK5_DIURETICS_QUESTIONS } from '../data/questions/ap1-wk5-diuretics-supplement.js';
 import { AP1_WK6_QUESTIONS,  AP1_WK6_METADATA  } from '../data/questions/ap1-wk6.js';
 import { AP1_WK7_QUESTIONS,  AP1_WK7_METADATA  } from '../data/questions/ap1-wk7.js';
 import { AP1_WK8_QUESTIONS,  AP1_WK8_METADATA  } from '../data/questions/ap1-wk8.js';
@@ -913,7 +914,7 @@ export const NODE_CONFIG = {
   "ap1-wk-2":  { courseId: "adv-pharmacology-1", title: "Autonomic Drugs, Cholinergic Agonism/Antagonism", chapterLabel: "Stoelting Ch 3", badgeLabel: "CHOLINERGIC", icon: "🧪", questions: AP1_WK2_QUESTIONS, questionsMeta: AP1_WK2_METADATA },
   "ap1-wk-3":  { courseId: "adv-pharmacology-1", title: "Sympathomimetics, Antihypertensives, Vasodilators", chapterLabel: "Stoelting Ch 15,18,19,20", badgeLabel: "SYMPATHOMIMETICS", icon: "💉", questions: AP1_WK3_QUESTIONS, questionsMeta: AP1_WK3_METADATA },
   "ap1-wk-4":  { courseId: "adv-pharmacology-1", title: "Anticoagulants and Procoagulants", chapterLabel: "Stoelting Ch 29,30", badgeLabel: "COAGULATION", icon: "🩸", questions: AP1_WK4_QUESTIONS, questionsMeta: AP1_WK4_METADATA },
-  "ap1-wk-5":  { courseId: "adv-pharmacology-1", title: "Lipid Lowering, Antidysrhythmics, Diuretics", chapterLabel: "Stoelting Ch 19,21,22,23,37", badgeLabel: "CARDIAC PHARM", icon: "❤️", questions: AP1_WK5_QUESTIONS, questionsMeta: AP1_WK5_METADATA },
+  "ap1-wk-5":  { courseId: "adv-pharmacology-1", title: "Lipid Lowering, Antidysrhythmics, Diuretics", chapterLabel: "Stoelting Ch 19,21,22,23,37", badgeLabel: "CARDIAC PHARM", icon: "❤️", questions: [...AP1_WK5_QUESTIONS, ...AP1_WK5_DIURETICS_QUESTIONS], questionsMeta: AP1_WK5_METADATA },
   "ap1-wk-6":  { courseId: "adv-pharmacology-1", title: "Histamine, Vasoactive, Prostaglandin Drugs", chapterLabel: "Stoelting Ch 3,20,25", badgeLabel: "HISTAMINE / PG", icon: "🫁", questions: AP1_WK6_QUESTIONS, questionsMeta: AP1_WK6_METADATA },
   "ap1-wk-7":  { courseId: "adv-pharmacology-1", title: "Nitric Oxide, Respiratory Active Drugs", chapterLabel: "Stoelting Ch 20,25", badgeLabel: "NO / RESP", icon: "🌬️", questions: AP1_WK7_QUESTIONS, questionsMeta: AP1_WK7_METADATA },
   "ap1-wk-8":  { courseId: "adv-pharmacology-1", title: "Antipsychotic and Antidepressant Drugs", chapterLabel: "Stoelting Ch 13,43", badgeLabel: "PSYCH PHARM", icon: "🧠", questions: AP1_WK8_QUESTIONS, questionsMeta: AP1_WK8_METADATA },
