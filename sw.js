@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v29-pp2-ch38-43-coverage-complete-2026-06-10';
+const CACHE_VERSION = 'v31-concept-first-scrub-2026-06-10';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

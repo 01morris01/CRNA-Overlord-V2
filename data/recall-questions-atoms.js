@@ -3979,10 +3979,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'State the normal pulmonary arterial systolic, diastolic, and mean pressures and the pulmonary capillary pressure from the slides, and describe how pressure falls from the pulmonary artery to the left atrium.',
+    prompt: 'State the normal pulmonary arterial systolic, diastolic, and mean pressures and the pulmonary capillary pressure, and describe how pressure falls from the pulmonary artery to the left atrium.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides give pulmonary arterial pressures of systolic 25 mm Hg, diastolic 8 mm Hg, and mean 15 mm Hg, with a pulmonary capillary pressure of 7 mm Hg. These are far lower than systemic arterial pressures, where systolic values reach about 120 mm Hg. The learner should be able to recite each pulmonary value precisely.' },
+        { id: 'kp1', weight: 2, description: 'The pulmonary arterial pressures is about systolic 25 mm Hg, diastolic 8 mm Hg, and mean 15 mm Hg, with a pulmonary capillary pressure of 7 mm Hg. These are far lower than systemic arterial pressures, where systolic values reach about 120 mm Hg. The learner should be able to recite each pulmonary value precisely.' },
         { id: 'kp2', weight: 2, description: 'Pressure falls progressively from the pulmonary artery through the pulmonary capillaries near 7 mm Hg to the left atrium near 2 mm Hg. This declining gradient drives blood through the low pressure pulmonary circuit. The learner should describe the stepwise fall along the pathway.' },
       ],
       common_errors: [
@@ -4054,10 +4054,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Describe the slide graph of pulmonary arterial pressure versus cardiac output, including the normal value and how pressure behaves as cardiac output increases greatly.',
+    prompt: 'Describe the relationship of pulmonary arterial pressure versus cardiac output, including the normal value and how pressure behaves as cardiac output increases greatly.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide graph plots pulmonary arterial pressure against cardiac output, with the normal value near a cardiac output of 4 L per minute and a pulmonary pressure near 15 mm Hg. This point anchors the curve at resting conditions. The learner should identify the normal operating point.' },
+        { id: 'kp1', weight: 2, description: 'the curve plots pulmonary arterial pressure against cardiac output, with the normal value near a cardiac output of 4 L per minute and a pulmonary pressure near 15 mm Hg. This point anchors the curve at resting conditions. The learner should identify the normal operating point.' },
         { id: 'kp2', weight: 2, description: 'As cardiac output increases severalfold, pulmonary arterial pressure rises only modestly rather than in proportion to flow. This nearly flat response reflects the falling resistance from recruitment and distension. The learner should state that pressure rises only a small amount with large flow increases.' },
       ],
       common_errors: [
@@ -4107,7 +4107,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'Describe the zone model of pulmonary blood flow and the relationship between alveolar pressure and pulmonary capillary pressure that defines zones 1, 2, and 3.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The lung is divided into zone 1, zone 2, and zone 3 based on hydrostatic pressure differences that occur due to gravity. The slides label alveolar pressure as PALV and pulmonary capillary pressure as Ppc, and the balance between them determines flow in each zone. The learner should name the three zones and identify PALV and Ppc.' },
+        { id: 'kp1', weight: 2, description: 'The lung is divided into zone 1, zone 2, and zone 3 based on hydrostatic pressure differences that occur due to gravity. The alveolar pressure is PALV and pulmonary capillary pressure as Ppc, and the balance between them determines flow in each zone. The learner should name the three zones and identify PALV and Ppc.' },
         { id: 'kp2', weight: 2, description: 'In the upper zone, alveolar pressure can equal or exceed capillary pressure and compress the vessel so flow is limited, while in the lower zone capillary pressure exceeds alveolar pressure so the vessel stays open and flow is continuous. This explains why areas near the bottom receive more blood flow than areas near the top. The learner should relate each zone to the PALV versus Ppc relationship.' },
       ],
       common_errors: [
@@ -4133,7 +4133,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Decreased alveolar PO2 leads to constriction of the local pulmonary vessels. This response is opposite to the systemic circulation, where hypoxia generally produces vasodilation. The learner should state that low alveolar oxygen causes pulmonary vasoconstriction.' },
-        { id: 'kp2', weight: 2, description: 'The constriction directs blood flow away from poorly ventilated alveoli and toward well ventilated alveoli, improving the matching of perfusion to ventilation. In the normal alveolus the slides show O2 at 100 mm Hg and CO2 at 40 mm Hg, and blood leaving the capillary reaches an O2 of 100 mm Hg. The learner should explain the redirection of flow toward ventilated alveoli.' },
+        { id: 'kp2', weight: 2, description: 'The constriction directs blood flow away from poorly ventilated alveoli and toward well ventilated alveoli, improving the matching of perfusion to ventilation. In the normal alveolus O2 is at 100 mm Hg and CO2 at 40 mm Hg, and blood leaving the capillary reaches an O2 of 100 mm Hg. The learner should explain the redirection of flow toward ventilated alveoli.' },
       ],
       common_errors: [
         'Saying low alveolar PO2 causes pulmonary vasodilation.',
@@ -4154,10 +4154,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Describe the slide graph relating alveolar PO2 to pulmonary blood flow as a percent of control, including the approximate PO2 at which flow nears 100 percent.',
+    prompt: 'Describe the curve relating alveolar PO2 to pulmonary blood flow as a percent of control, including the approximate PO2 at which flow nears 100 percent.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide graph plots blood flow as a percent of control on the vertical axis against alveolar PO2 on the horizontal axis. Flow reaches near 100 percent of control at an alveolar PO2 of about 70 and plateaus toward a PO2 of 200. The learner should identify 70 as the value where flow nears full control.' },
+        { id: 'kp1', weight: 2, description: 'The curve relates blood flow to a percent of control on the vertical axis against alveolar PO2 on the horizontal axis. Flow reaches near 100 percent of control at an alveolar PO2 of about 70 and plateaus toward a PO2 of 200. The learner should identify 70 as the value where flow nears full control.' },
         { id: 'kp2', weight: 2, description: 'Below an alveolar PO2 of about 70, blood flow falls steeply as hypoxic vasoconstriction takes effect. This steep decline at low PO2 is what diverts flow away from poorly oxygenated regions. The learner should describe the steep fall in flow below 70 mm Hg.' },
       ],
       common_errors: [
@@ -4179,7 +4179,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'List the outward and inward Starling forces at the pulmonary capillary from the slides and state the resulting net filtration pressure.',
+    prompt: 'List the outward and inward Starling forces at the pulmonary capillary and state the resulting net filtration pressure.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The outward forces are pulmonary capillary pressure 7 mm Hg, interstitial osmotic pressure 14 mm Hg, and negative interstitial pressure 8 mm Hg, for a total of 29 mm Hg. The single inward force is plasma osmotic pressure at 28 mm Hg. The learner should list all outward forces with their values and the inward force.' },
@@ -4204,10 +4204,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'List the causes of pulmonary edema from the slides and explain how each disrupts the capillary force balance, including the edema safety factor threshold.',
+    prompt: 'List the causes of pulmonary edema and explain how each disrupts the capillary force balance, including the edema safety factor threshold.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides list four causes: increased pulmonary venous and capillary pressure from left heart failure or mitral stenosis, which raises the outward force; increased capillary membrane permeability from infections or noxious gases such as chlorine and sulfur dioxide; decreased plasma osmotic pressure from liver failure, which lowers the inward force; and a large decrease in intrapleural pressure from inspiring heavily against a closed airway as in severe laryngeal spasm. The learner should name each cause and its effect.' },
+        { id: 'kp1', weight: 2, description: 'The four causes are: increased pulmonary venous and capillary pressure from left heart failure or mitral stenosis, which raises the outward force; increased capillary membrane permeability from infections or noxious gases such as chlorine and sulfur dioxide; decreased plasma osmotic pressure from liver failure, which lowers the inward force; and a large decrease in intrapleural pressure from inspiring heavily against a closed airway as in severe laryngeal spasm. The learner should name each cause and its effect.' },
         { id: 'kp2', weight: 2, description: 'The pulmonary edema safety factor provides protection against edema until pulmonary capillary pressure equals the capillary osmotic pressure. Below that point the inward osmotic force still keeps the alveoli dry, but once capillary pressure exceeds the osmotic value fluid accumulates rapidly. The learner should state the threshold at which protection is lost.' },
       ],
       common_errors: [
@@ -4232,7 +4232,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'List the safety factors that protect against pulmonary edema and explain how each helps keep the alveoli dry.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides list three safety factors: negative interstitial pressure, lymphatic pumping, and decreased interstitial osmotic pressure. Negative interstitial pressure pulls fluid out of the air spaces and is specifically credited with keeping the alveoli dry. The learner should name all three safety factors.' },
+        { id: 'kp1', weight: 2, description: 'The three safety factors are: negative interstitial pressure, lymphatic pumping, and decreased interstitial osmotic pressure. Negative interstitial pressure pulls fluid out of the air spaces and is specifically credited with keeping the alveoli dry. The learner should name all three safety factors.' },
         { id: 'kp2', weight: 2, description: 'Lymphatic pumping removes the small amount of fluid that is normally filtered outward at the net 1 mm Hg pressure, and a decreased interstitial osmotic pressure lowers the outward pull on fluid. Together these mechanisms prevent fluid from accumulating until capillary pressure rises enough to overwhelm them. The learner should explain how each factor limits fluid buildup.' },
       ],
       common_errors: [
@@ -4258,7 +4258,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'A thin layer of mucoid fluid lies between the parietal and visceral pleurae to reduce friction between the lung, pleura, and chest wall during ventilation. Because the net Starling force is plus 1, fluid filters slowly but continuously out of the pulmonary capillaries, and the lymphatic system maintains a negative pressure of the pleural fluid and space that keeps the lungs from collapsing. The learner should explain the friction reducing role and the negative pressure maintained by lymphatics.' },
-        { id: 'kp2', weight: 2, description: 'A pleural effusion is a collection of fluid in the pleural space. The slides list its causes as lymphatic obstruction such as tumor, heart failure, reduced plasma osmotic pressure, infection or inflammation of capillary membranes causing increased permeability, or fluid production being greater than drainage. The learner should name the major causes of effusion.' },
+        { id: 'kp2', weight: 2, description: 'A pleural effusion is a collection of fluid in the pleural space. The its causes are lymphatic obstruction such as tumor, heart failure, reduced plasma osmotic pressure, infection or inflammation of capillary membranes causing increased permeability, or fluid production being greater than drainage. The learner should name the major causes of effusion.' },
       ],
       common_errors: [
         'Saying the pleural fluid carries oxygen or stores surfactant rather than reducing friction.',
@@ -4282,8 +4282,8 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'State how the partial pressure of a gas is related to its fraction and to total pressure, and use a barometric pressure of 760 mm Hg to give the approximate dry atmospheric PO2. Explain what total pressure equals in a gas mixture.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Partial pressure is proportional to the fraction of the gas, expressed on the slides as PP proportional to Patm times the fraction of gas, with Patm equal to 760 mm Hg. So a gas present at a given percentage contributes that percentage of the total pressure. For oxygen at about 0.21 in dry air, this yields a PO2 of roughly 149 to 159 mm Hg, and the alveolar air table lists dry atmospheric O2 as 159 mm Hg.' },
-        { id: 'kp2', weight: 2, description: 'Total pressure is the sum of the partial pressures of each gas in the mixture, specifically O2, N2, CO2, and H2O on the slides. Each gas contributes to the total in direct proportion to its concentration, so the partial pressures must add up to the barometric total of 760 mm Hg. This additivity is the basis for partitioning the total into individual gas pressures.' },
+        { id: 'kp1', weight: 2, description: 'Partial pressure is proportional to the fraction of the gas, as PP proportional to Patm times the fraction of gas, with Patm equal to 760 mm Hg. So a gas present at a given percentage contributes that percentage of the total pressure. For oxygen at about 0.21 in dry air, this yields a PO2 of roughly 149 to 159 mm Hg, and the alveolar air table lists dry atmospheric O2 as 159 mm Hg.' },
+        { id: 'kp2', weight: 2, description: 'Total pressure is the sum of the partial pressures of each gas in the mixture, specifically O2, N2, CO2, and H2O. Each gas contributes to the total in direct proportion to its concentration, so the partial pressures must add up to the barometric total of 760 mm Hg. This additivity is the basis for partitioning the total into individual gas pressures.' },
       ],
       common_errors: [
         'Confusing percent concentration with partial pressure in mm Hg',
@@ -4304,10 +4304,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Show how the slides calculate the PO2 of humidified inspired air, including the value subtracted for water vapor, the oxygen fraction used, and the final result. Explain why water vapor is subtracted before applying the oxygen fraction.',
+    prompt: 'Calculate the PO2 of humidified inspired air, including the value subtracted for water vapor, the oxygen fraction used, and the final result. Explain why water vapor is subtracted before applying the oxygen fraction.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides compute inspired PO2 as (760 minus 47) times 0.21, which equals 713 times 0.21, or about 149 mm Hg. The 47 mm Hg is the water vapor pressure added by humidification in the airway, and 0.21 is the oxygen fraction. The slide even flags that some other slides contain an error, emphasizing 149 as the correct humidified inspired value.' },
+        { id: 'kp1', weight: 2, description: 'Inspired PO2 as (760 minus 47) times 0.21, which equals 713 times 0.21, or about 149 mm Hg. The 47 mm Hg is the water vapor pressure added by humidification in the airway, and 0.21 is the oxygen fraction. ' },
         { id: 'kp2', weight: 2, description: 'Water vapor pressure must be subtracted from the total barometric pressure before multiplying by the oxygen fraction because the humidified water vapor dilutes the dry gas mixture. If 760 were multiplied by 0.21 without subtracting 47, the inspired PO2 would be overestimated. Correctly accounting for the 47 mm Hg lowers the humidified inspired PO2 from about 159 in dry air to about 149 in the airway.' },
       ],
       common_errors: [
@@ -4329,10 +4329,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'List, in order from alveolar gas to the red blood cell, the layers of the respiratory membrane that a gas must cross according to the slides.',
+    prompt: 'List, in order from alveolar gas to the red blood cell, the layers of the respiratory membrane that a gas must cross.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The respiratory membrane layers in order are the surfactant and fluid layer, the alveolar epithelium, the epithelial basement membrane, the interstitial space, the capillary basement membrane, and the capillary endothelium. A gas molecule must traverse every one of these layers to move between alveolar air and blood. The diagram on the slide shows O2 diffusing inward and CO2 diffusing outward across this same stack.' },
+        { id: 'kp1', weight: 2, description: 'The respiratory membrane layers in order are the surfactant and fluid layer, the alveolar epithelium, the epithelial basement membrane, the interstitial space, the capillary basement membrane, and the capillary endothelium. A gas molecule must traverse every one of these layers to move between alveolar air and blood. O2 diffusing inward and CO2 diffusing outward across this same stack.' },
         { id: 'kp2', weight: 2, description: 'Each of the six layers is a distinct diffusion barrier, and together they form the complete path for oxygen and carbon dioxide exchange. The surfactant and fluid layer lines the alveolus, while the capillary endothelium borders the blood, with the basement membranes and interstitial space sandwiched between the two cellular layers. Knowing the full sequence clarifies where pathology can add resistance to diffusion.' },
       ],
       common_errors: [
@@ -4354,10 +4354,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the total thickness of the respiratory membrane given on the slides and explain why this dimension matters for gas exchange.',
+    prompt: 'State the total thickness of the respiratory membrane and explain why this dimension matters for gas exchange.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides label the total respiratory membrane thickness as about 0.2 micrometers. This is the distance a gas molecule must diffuse across all six layers of the membrane. It is a very small distance, which is essential for rapid gas transfer.' },
+        { id: 'kp1', weight: 2, description: 'The total respiratory membrane thickness is about 0.2 micrometers. This is the distance a gas molecule must diffuse across all six layers of the membrane. It is a very small distance, which is essential for rapid gas transfer.' },
         { id: 'kp2', weight: 2, description: 'Because diffusion is inversely related to distance, the extremely thin 0.2 micrometer membrane allows oxygen and carbon dioxide to equilibrate quickly during the brief time blood spends in the pulmonary capillary. This thickness should not be confused with the 0.2 mm average alveolar diameter, which is a thousand times larger and describes alveolar size rather than the diffusion path.' },
       ],
       common_errors: [
@@ -4379,11 +4379,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State Fick\'s Law of diffusion as presented on the slides, including every term in the numerator and denominator, and identify which terms are variable and which are fixed.',
+    prompt: 'State Fick\'s Law of diffusion, including every term in the numerator and denominator, and identify which terms are variable and which are fixed.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Fick\'s Law on the slides states that diffusion equals the pressure gradient (P1 minus P2) times area times solubility, all divided by distance times the square root of molecular weight. The numerator contains the pressure gradient, area, and solubility, and the denominator contains the distance and the square root of molecular weight. Diffusion therefore increases with a larger gradient, area, or solubility and decreases with greater distance or molecular weight.' },
-        { id: 'kp2', weight: 2, description: 'The slides identify pressure gradient, area, and distance as the factors that can vary physiologically, while solubility and molecular weight are fixed properties of a given gas. This means that in the body, changes in diffusion are driven by altering the gradient, the available surface area, or the diffusion distance. The diffusing capacity DL is similarly expressed as area times the diffusion coefficient divided by thickness.' },
+        { id: 'kp1', weight: 2, description: 'Fick\'s Law states that diffusion equals the pressure gradient (P1 minus P2) times area times solubility, all divided by distance times the square root of molecular weight. The numerator contains the pressure gradient, area, and solubility, and the denominator contains the distance and the square root of molecular weight. Diffusion therefore increases with a larger gradient, area, or solubility and decreases with greater distance or molecular weight.' },
+        { id: 'kp2', weight: 2, description: 'Pressure gradient, area, and distance as the factors that can vary physiologically, while solubility and molecular weight are fixed properties of a given gas. This means that in the body, changes in diffusion are driven by altering the gradient, the available surface area, or the diffusion distance. The diffusing capacity DL is similarly expressed as area times the diffusion coefficient divided by thickness.' },
       ],
       common_errors: [
         'Placing solubility in the denominator instead of the numerator',
@@ -4404,11 +4404,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State how the solubility of carbon dioxide compares with that of oxygen according to the slides, and explain how this relates to the relative diffusing capacities of the two gases.',
+    prompt: 'State how the solubility of carbon dioxide compares with that of oxygen, and explain how this relates to the relative diffusing capacities of the two gases.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state that CO2 is 20 times as soluble as O2. Because solubility is a numerator term in Fick\'s Law, this much greater solubility strongly favors carbon dioxide diffusion. It allows CO2 to cross the respiratory membrane easily even though its partial pressure gradient is smaller than that of oxygen.' },
-        { id: 'kp2', weight: 2, description: 'As a direct consequence, the slides report that the diffusing capacity of CO2 is about 20 times the diffusing capacity of O2, shown both at rest and during exercise. This high solubility and diffusing capacity mean carbon dioxide transfer is rarely limited by diffusion across the membrane. Oxygen, with much lower solubility, is the gas more likely to be diffusion limited.' },
+        { id: 'kp1', weight: 2, description: 'CO2 is 20 times as soluble as O2. Because solubility is a numerator term in Fick\'s Law, this much greater solubility strongly favors carbon dioxide diffusion. It allows CO2 to cross the respiratory membrane easily even though its partial pressure gradient is smaller than that of oxygen.' },
+        { id: 'kp2', weight: 2, description: 'As a direct consequence, the diffusing capacity of CO2 is about 20 times the diffusing capacity of O2, both at rest and during exercise. This high solubility and diffusing capacity mean carbon dioxide transfer is rarely limited by diffusion across the membrane. Oxygen, with much lower solubility, is the gas more likely to be diffusion limited.' },
       ],
       common_errors: [
         'Stating that oxygen is more soluble than carbon dioxide',
@@ -4429,11 +4429,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Define the ventilation-perfusion ratio as given on the slides and compute the normal whole-lung value from 4 L/min ventilation and 5 L/min blood flow. State what equality of alveolar and end capillary gas pressures implies.',
+    prompt: 'Define the ventilation-perfusion ratio and compute the normal whole-lung value from 4 L/min ventilation and 5 L/min blood flow. State what equality of alveolar and end capillary gas pressures implies.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'V/Q is defined on the slides as the ratio between ventilation and blood flow, representing the relationship between adequate flow and adequate ventilation. Using whole-lung values of 4 L/min ventilation divided by 5 L/min blood flow gives a normal ratio of 0.8. This single number summarizes how well ventilation is matched to perfusion for the whole lung.' },
-        { id: 'kp2', weight: 2, description: 'The slides note that if there is no diffusion impairment, the PO2 between an alveolus and end capillary blood are usually the same, and the same is true for PCO2. This means that in a healthy lung, alveolar gas pressures reflect the gas pressures of blood leaving the capillary. The V/Q ratio thus governs both alveolar and arterial gas values.' },
+        { id: 'kp1', weight: 2, description: 'V/Q is as the ratio between ventilation and blood flow, representing the relationship between adequate flow and adequate ventilation. Using whole-lung values of 4 L/min ventilation divided by 5 L/min blood flow gives a normal ratio of 0.8. This single number summarizes how well ventilation is matched to perfusion for the whole lung.' },
+        { id: 'kp2', weight: 2, description: 'If there is no diffusion impairment, the PO2 between an alveolus and end capillary blood are usually the same, and the same is true for PCO2. This means that in a healthy lung, alveolar gas pressures reflect the gas pressures of blood leaving the capillary. The V/Q ratio thus governs both alveolar and arterial gas values.' },
       ],
       common_errors: [
         'Inverting the ratio to report 1.25 instead of 0.8',
@@ -4454,10 +4454,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the approximate V/Q ratios of the upper lung and lower lung given on the slides, and explain what regional differences produce this variation.',
+    prompt: 'State the approximate V/Q ratios of the upper lung and lower lung, and explain what regional differences produce this variation.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state that the upper lung Va/Q is normally approximately 3 and the lower lung Va/Q is normally approximately 0.5. The apex therefore has a much higher ventilation-perfusion ratio than the base. These regional values bracket the whole-lung average of 0.8.' },
+        { id: 'kp1', weight: 2, description: 'The upper lung Va/Q is normally approximately 3 and the lower lung Va/Q is normally approximately 0.5. The apex therefore has a much higher ventilation-perfusion ratio than the base. These regional values bracket the whole-lung average of 0.8.' },
         { id: 'kp2', weight: 2, description: 'Differences in airway and lung expansion produce uneven regional ventilation, and differences in vascular geometry and hydrostatic pressure produce uneven regional blood flow. Together these cause V/Q ratios to vary across regions even within a normal, healthy lung. The base is relatively underventilated and well perfused, while the apex is relatively overventilated and underperfused.' },
       ],
       common_errors: [
@@ -4479,10 +4479,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Distinguish physiological shunt from physiological dead space as defined on the slides, using how each compares with the normal V/Q and what each represents.',
+    prompt: 'Distinguish physiological shunt from physiological dead space, using how each compares with the normal V/Q and what each represents.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'A physiological shunt is defined on the slides as a unit with Va/Q below normal, corresponding to low ventilation relative to perfusion. Blood passes such a unit without being fully oxygenated because ventilation is inadequate. This is the low V/Q end of the mismatch spectrum.' },
+        { id: 'kp1', weight: 2, description: 'A physiological shunt is as a unit with Va/Q below normal, corresponding to low ventilation relative to perfusion. Blood passes such a unit without being fully oxygenated because ventilation is inadequate. This is the low V/Q end of the mismatch spectrum.' },
         { id: 'kp2', weight: 2, description: 'A physiological dead space is defined as a unit with Va/Q above normal, representing wasted ventilation relative to perfusion. Ventilation reaches such a unit but is not matched by adequate blood flow, so that ventilation does not contribute effectively to gas exchange. This is the high V/Q end of the mismatch spectrum.' },
       ],
       common_errors: [
@@ -4504,11 +4504,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the alveolar PO2 and PCO2 that a lung unit approaches at the two V/Q extremes shown on the slides, when V/Q equals zero and when V/Q approaches infinity.',
+    prompt: 'State the alveolar PO2 and PCO2 that a lung unit approaches at the two V/Q extremes, when V/Q equals zero and when V/Q approaches infinity.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'When V/Q equals zero, ventilation is absent and the alveolar gas equilibrates with mixed venous blood, approaching PO2 of about 40 and PCO2 of about 45 mm Hg. This is the shunt extreme shown on the Decreased V/Q slide. The unit takes on the gas composition of the blood that perfuses it.' },
-        { id: 'kp2', weight: 2, description: 'When V/Q approaches infinity, perfusion is absent and the alveolar gas approaches inspired humidified air, with PO2 of about 150 and PCO2 of about 0 mm Hg. This is the dead space extreme shown on the Increased V/Q slide. Normal alveolar air, at PO2 about 104 and PCO2 about 40, lies between these two extremes.' },
+        { id: 'kp1', weight: 2, description: 'When V/Q equals zero, ventilation is absent and the alveolar gas equilibrates with mixed venous blood, approaching PO2 of about 40 and PCO2 of about 45 mm Hg. This is the shunt extreme. The unit takes on the gas composition of the blood that perfuses it.' },
+        { id: 'kp2', weight: 2, description: 'When V/Q approaches infinity, perfusion is absent and the alveolar gas approaches inspired humidified air, with PO2 of about 150 and PCO2 of about 0 mm Hg. This is the dead space extreme. Normal alveolar air, at PO2 about 104 and PCO2 about 40, lies between these two extremes.' },
       ],
       common_errors: [
         'Assigning inspired air values to the zero V/Q shunt unit',
@@ -4529,11 +4529,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the alveolar PCO2 equation given on the slides, including the constant, and describe quantitatively how PCO2 changes when alveolar ventilation is doubled or halved.',
+    prompt: 'State the alveolar PCO2 equation, including the constant, and describe quantitatively how PCO2 changes when alveolar ventilation is doubled or halved.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides give alveolar PCO2 as CO2 production times a constant K, divided by alveolar ventilation, where K is a multivariable correction factor equal to about 863 mm Hg. Because alveolar ventilation is in the denominator, PCO2 is inversely proportional to ventilation when CO2 production is constant. This equation links the metabolic CO2 load and ventilation to the resulting alveolar PCO2.' },
-        { id: 'kp2', weight: 2, description: 'From this inverse relationship, the slides state that if ventilation is doubled then PCO2 is halved, and if ventilation is halved then PCO2 is doubled. So alveolar ventilation is the primary controller of alveolar and arterial PCO2 at a fixed metabolic rate. Doubling effective alveolar ventilation cuts the carbon dioxide pressure in half.' },
+        { id: 'kp1', weight: 2, description: 'Alveolar PCO2 as CO2 production times a constant K, divided by alveolar ventilation, where K is a multivariable correction factor equal to about 863 mm Hg. Because alveolar ventilation is in the denominator, PCO2 is inversely proportional to ventilation when CO2 production is constant. This equation links the metabolic CO2 load and ventilation to the resulting alveolar PCO2.' },
+        { id: 'kp2', weight: 2, description: 'From this inverse relationship, if ventilation is doubled then PCO2 is halved, and if ventilation is halved then PCO2 is doubled. So alveolar ventilation is the primary controller of alveolar and arterial PCO2 at a fixed metabolic rate. Doubling effective alveolar ventilation cuts the carbon dioxide pressure in half.' },
       ],
       common_errors: [
         'Treating PCO2 as directly proportional to ventilation',
@@ -4554,11 +4554,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State how the slides define hyperventilation and hypoventilation in terms of alveolar PCO2, and explain why these terms are defined relative to metabolic demand rather than a fixed breathing rate.',
+    prompt: 'State how to define hyperventilation and hypoventilation in terms of alveolar PCO2, and explain why these terms are defined relative to metabolic demand rather than a fixed breathing rate.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides define hyperventilation as PACO2 less than 40 and hypoventilation as PACO2 greater than 40. Hyperventilation is increased ventilation beyond metabolic need, which causes a drop in arterial CO2, while hypoventilation is ventilation below needs, which causes arterial CO2 to rise. Increasing V/Q produces a lower PACO2 and decreasing V/Q produces a higher PACO2.' },
-        { id: 'kp2', weight: 2, description: 'These terms are defined relative to metabolic CO2 production, not to any fixed rate of breathing, because the adequacy of ventilation depends on the carbon dioxide load it must clear. The slides illustrate this with a CO2 excretion rate of 200 versus 800 mL per minute, a fourfold increase in metabolic rate, which requires greater ventilation just to keep PACO2 normal. Thus the same minute ventilation can be appropriate, hyperventilation, or hypoventilation depending on metabolic demand.' },
+        { id: 'kp1', weight: 2, description: 'hyperventilation is defined as PACO2 less than 40 and hypoventilation as PACO2 greater than 40. Hyperventilation is increased ventilation beyond metabolic need, which causes a drop in arterial CO2, while hypoventilation is ventilation below needs, which causes arterial CO2 to rise. Increasing V/Q produces a lower PACO2 and decreasing V/Q produces a higher PACO2.' },
+        { id: 'kp2', weight: 2, description: 'These terms are defined relative to metabolic CO2 production, not to any fixed rate of breathing, because the adequacy of ventilation depends on the carbon dioxide load it must clear. one example is a CO2 excretion rate of 200 versus 800 mL per minute, a fourfold increase in metabolic rate, which requires greater ventilation just to keep PACO2 normal. Thus the same minute ventilation can be appropriate, hyperventilation, or hypoventilation depending on metabolic demand.' },
       ],
       common_errors: [
         'Reversing the thresholds so hyperventilation is PACO2 above 40',
@@ -4579,7 +4579,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Define the three measurements used to describe oxygen in blood: partial pressure, saturation, and content. For each, state what it represents, its units, and its physiologic role as taught on the slides.',
+    prompt: 'Define the three measurements used to describe oxygen in blood: partial pressure, saturation, and content. For each, state what it represents, its units, and its physiologic role as taught.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Partial pressure is measured in mm Hg, depends on the percentage of gas present, and is the driving force for diffusion. It reflects only the dissolved gas and not the amount bound to hemoglobin, so it determines the direction and rate of oxygen movement across membranes.' },
@@ -4679,11 +4679,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Explain what determines tissue PO2. State the arterial, interstitial tissue, and intracellular PO2 values from the slides and describe the balance that sets the tissue value.',
+    prompt: 'Explain what determines tissue PO2. State the arterial, interstitial tissue, and intracellular PO2 values and describe the balance that sets the tissue value.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Arterial blood has a PO2 of about 95 to 100 mm Hg, interstitial tissue about 30 to 40 mm Hg, and the value within cells is about 23 mm Hg. Oxygen diffuses down this falling gradient from blood into cells.' },
-        { id: 'kp2', weight: 2, description: 'Tissue PO2 is determined by the balance of oxygen delivery and oxygen usage. Increasing consumption at a fixed delivery lowers tissue PO2, while increasing delivery at a fixed consumption raises it, as shown by the interstitial PO2 versus blood flow figure.' },
+        { id: 'kp2', weight: 2, description: 'Tissue PO2 is determined by the balance of oxygen delivery and oxygen usage. Increasing consumption at a fixed delivery lowers tissue PO2, while increasing delivery at a fixed consumption raises it, reflected in the interstitial PO2 versus blood flow relationship.' },
       ],
       common_errors: [
         'Assuming tissue PO2 equals arterial PO2.',
@@ -4704,7 +4704,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Show how oxygen delivery is calculated as content times blood flow. Using the slide numbers, compute delivery at normal flow and at high flow for a content of 20 mL O2 per 100 mL blood, and state the upper limit on interstitial PO2.',
+    prompt: 'Show how oxygen delivery is calculated as content times blood flow. using the values, compute delivery at normal flow and at high flow for a content of 20 mL O2 per 100 mL blood, and state the upper limit on interstitial PO2.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Oxygen delivery equals oxygen content times blood flow. At a content of 20 mL O2 per 100 mL blood and a normal flow of about 5000 mL per minute, delivery is about 1000 mL O2 per minute.' },
@@ -4732,7 +4732,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'List the four factors that shift the hemoglobin oxygen dissociation curve to the right and state what a right shift does to oxygen affinity and to saturation at a given PO2.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The four right-shift factors taught on the slides are increased hydrogen ions, increased CO2 (the Bohr effect), increased temperature, and increased BPG (2,3 biphosphoglycerate). BPG is a metabolic phosphate compound that reduces the affinity of hemoglobin for oxygen.' },
+        { id: 'kp1', weight: 2, description: 'The four right-shift factors taught are increased hydrogen ions, increased CO2 (the Bohr effect), increased temperature, and increased BPG (2,3 biphosphoglycerate). BPG is a metabolic phosphate compound that reduces the affinity of hemoglobin for oxygen.' },
         { id: 'kp2', weight: 2, description: 'A right shift means that for any given PO2 the percent saturation is lower, because the affinity of hemoglobin for oxygen is reduced. This favors release of oxygen to the tissues, which is helpful in hypoxia and exercise.' },
       ],
       common_errors: [
@@ -4854,10 +4854,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Define the Haldane effect using the slide figure. Explain how the oxygenation state of hemoglobin changes the amount of carbon dioxide the blood carries at a PO2 of 40 mm Hg versus 100 mm Hg, and why this aids carbon dioxide exchange.',
+    prompt: 'Define the Haldane effect. Explain how the oxygenation state of hemoglobin changes the amount of carbon dioxide the blood carries at a PO2 of 40 mm Hg versus 100 mm Hg, and why this aids carbon dioxide exchange.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The Haldane effect is the change in carbon dioxide carriage caused by the oxygenation state of hemoglobin. At a PO2 of 40 mm Hg (tissue conditions) the blood holds more CO2, while at a PO2 of 100 mm Hg (lung conditions) it holds less, as shown by the two curves in the slide figure.' },
+        { id: 'kp1', weight: 2, description: 'The Haldane effect is the change in carbon dioxide carriage caused by the oxygenation state of hemoglobin. At a PO2 of 40 mm Hg (tissue conditions) the blood holds more CO2, while at a PO2 of 100 mm Hg (lung conditions) it holds less across the two conditions.' },
         { id: 'kp2', weight: 2, description: 'Deoxygenated hemoglobin binds carbon dioxide and hydrogen ions more readily, so unloading oxygen at the tissue promotes CO2 pickup, and loading oxygen at the lungs drives CO2 release into the alveoli. This makes oxygen and carbon dioxide transport mutually reinforcing.' },
       ],
       common_errors: [
@@ -5179,11 +5179,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Define obstructive lung disease as taught on the slides. State its fundamental mechanism, the anatomic site most often involved, the factors that increase airway resistance, and how lung volumes and the FEV1/FVC ratio behave.',
+    prompt: 'Define obstructive lung disease as taught. State its fundamental mechanism, the anatomic site most often involved, the factors that increase airway resistance, and how lung volumes and the FEV1/FVC ratio behave.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Obstructive disease is fundamentally an increased resistance to airflow, most often due to issues with the conducting airways and especially the bronchioles. Resistance increases when the lumen is blocked by excessive secretions or aspiration, when the lumen is narrowed by smooth muscle contraction or hypertrophy of the bronchial wall, or when destruction of lung parenchyma removes the outward traction that normally holds airways open.' },
-        { id: 'kp2', weight: 2, description: 'Because air cannot be expelled efficiently, obstruction traps air so lung volumes tend to be higher than normal and the expiratory flow volume loop shifts to the left. On spirometry FEV1 decreases more than FVC, which lowers the FEV1/FVC ratio, as illustrated by the drop from about 80 percent to about 47 percent in Figure 43-3.' },
+        { id: 'kp2', weight: 2, description: 'Because air cannot be expelled efficiently, obstruction traps air so lung volumes tend to be higher than normal and the expiratory flow volume loop shifts to the left. On spirometry FEV1 decreases more than FVC, which lowers the FEV1/FVC ratio, as illustrated by the drop from about 80 percent to about 47 percent.' },
       ],
       common_errors: [
         'Describing obstruction as decreased lung expansion, which is the restrictive mechanism.',
@@ -5204,7 +5204,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Define restrictive lung disease as taught on the slides. State its fundamental mechanism, why the tissues behave this way, how total lung capacity and vital capacity change, and what happens to airway resistance and the FEV1/FVC ratio.',
+    prompt: 'Define restrictive lung disease as taught. State its fundamental mechanism, why the tissues behave this way, how total lung capacity and vital capacity change, and what happens to airway resistance and the FEV1/FVC ratio.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Restrictive disease is fundamentally a decreased expansion of the lungs, often because the lungs and surrounding tissues are stiff or rigid. The flow volume loop shifts to the right toward lower volumes because the lungs cannot fully expand.' },
@@ -5229,7 +5229,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe chronic bronchitis as one of the two main types of COPD on the slides. Address mucus, cilia, the airway wall changes, why air is trapped, and the most common cause.',
+    prompt: 'Describe chronic bronchitis as one of the two main types of COPD. Address mucus, cilia, the airway wall changes, why air is trapped, and the most common cause.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Chronic bronchitis is longterm inflammation and narrowing of the bronchi marked by excessive mucous production, ciliary dysfunction, and airway narrowing with permanent scarring and swelling of the airway walls. This narrowing causes air to get trapped in the areas supplied by those bronchi.' },
@@ -5254,7 +5254,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe emphysema as one of the two main types of COPD on the slides. Address the tissue destroyed, the merging of alveoli, the effects on elasticity and surface area, and the listed consequences including diffusing capacity and pulmonary hypertension.',
+    prompt: 'Describe emphysema as one of the two main types of COPD. Address the tissue destroyed, the merging of alveoli, the effects on elasticity and surface area, and the listed consequences including diffusing capacity and pulmonary hypertension.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Emphysema is the permanent destruction of the elastic connective tissue in the alveoli with loss of parenchyma, so alveoli merge into fewer large pockets of air instead of many small ones. This causes less elasticity, less surface area for gas exchange, and obstruction with trapping of air, which prevents the alveoli from adequately pushing air out during exhalation.' },
@@ -5279,7 +5279,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe the pathophysiology of asthma as taught on the slides. Define it, name the trigger and mediators, list the three main physiological features, and state that the obstruction is reversible.',
+    prompt: 'Describe the pathophysiology of asthma as taught. Define it, name the trigger and mediators, list the three main physiological features, and state that the obstruction is reversible.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Asthma is an obstructive disorder with reversible narrowing of the bronchial airways, usually due to inflammation caused by exposure to an allergen or irritant, which releases inflammatory chemicals such as histamine and leukotrienes. Common irritants include smoke, pollen, mold, pet dander, dust, chemicals, very cold temperature, emotions, and exercise.' },
@@ -5304,7 +5304,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe the gold standard diagnosis of asthma on the slides. State the test used, the drug given, and the exact FEV1 improvement threshold that confirms the diagnosis, noting both criteria.',
+    prompt: 'Describe the gold standard diagnosis of asthma. State the test used, the drug given, and the exact FEV1 improvement threshold that confirms the diagnosis, noting both criteria.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The gold standard for diagnosing asthma is spirometry that measures FEV1 before and after administration of a fast acting bronchodilator inhaler such as albuterol. The test relies on the reversibility of asthma, since acute exacerbations are typically fully reversible.' },
@@ -5329,7 +5329,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List and classify the examples of restrictive lung disease on the slides into intrinsic and extrinsic groups, giving the representative cause or feature noted for each example.',
+    prompt: 'List and classify the examples of restrictive lung disease into intrinsic and extrinsic groups, giving the representative cause or feature noted for each example.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Intrinsic restrictive examples include diffuse interstitial pulmonary fibrosis with thick collagen deposits, sarcoidosis with chronic inflammatory granulomas, and asbestosis or silicosis from tissue scarring due to chronic exposure to irritants.' },
@@ -5354,7 +5354,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe pneumothorax as taught on the slides. State what happens to the pleural cavity, why the lung collapses, the usual causes, and why both lungs do not collapse together.',
+    prompt: 'Describe pneumothorax as taught. State what happens to the pleural cavity, why the lung collapses, the usual causes, and why both lungs do not collapse together.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Pneumothorax occurs when air leaks into the pleural cavity and causes part of the lung to collapse due to pressure changes. It is usually caused by penetrating trauma to the chest but can also occur spontaneously, and current research is examining the association between vaping and spontaneous pneumothorax.' },
@@ -5379,11 +5379,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe atelectasis and its effect on arterial saturation using Figure 43-7. Define it, list its causes, and explain why it produces only a minimal decrease in saturation, including the slide numbers for flow and mean saturation.',
+    prompt: 'Describe atelectasis and its effect on arterial saturation. Define it, list its causes, and explain why it produces only a minimal decrease in saturation, including the values for flow and mean saturation.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Atelectasis is a lack of gas exchange within the alveoli due to collapse of that portion of the lung. The collapse can be caused by external compression by air or fluid in the pleural space, by airway obstruction, or by a lack of surfactant in the alveoli.' },
-        { id: 'kp2', weight: 2, description: 'In Figure 43-7 atelectasis causes only a minimum decrease in percent saturation because less blood flows through the atelectatic lung. Although the left pulmonary veins are 60 percent saturated, flow is only one fifth of normal, so the aortic blood is five sixths at 97 percent and one sixth at 60 percent, giving a mean saturation of about 91 percent.' },
+        { id: 'kp2', weight: 2, description: 'Atelectasis causes only a minimum decrease in percent saturation because less blood flows through the atelectatic lung. Although the left pulmonary veins are 60 percent saturated, flow is only one fifth of normal, so the aortic blood is five sixths at 97 percent and one sixth at 60 percent, giving a mean saturation of about 91 percent.' },
       ],
       common_errors: [
         'Saying atelectasis causes a large desaturation; the reduced flow keeps the mean near 91 percent.',
@@ -5404,15 +5404,15 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe pneumonia and its effect on arterial saturation using Figure 43-6. Define it, name the most common organism, and explain why it produces a significant decrease in saturation, including the mean saturation value.',
+    prompt: 'Describe pneumonia and its effect on arterial saturation. Define it, name the most common organism, and explain why it produces a significant decrease in saturation, including the mean saturation value.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Pneumonia is an acute infection of the lungs resulting in inflammation and the accumulation of fluid or pus within the alveoli. It may be viral, bacterial, or fungal, and Streptococcus pneumoniae is the most common cause.' },
-        { id: 'kp2', weight: 2, description: 'In Figure 43-6 the pneumonic lung remains well perfused, so half the blood leaves at 97 percent saturation and half at 60 percent saturation, giving an aortic mean saturation of about 78 percent. This is a significant decrease in arterial hemoglobin saturation, larger than in atelectasis because flow through the diseased alveoli is preserved.' },
+        { id: 'kp2', weight: 2, description: 'The pneumonic lung remains well perfused, so half the blood leaves at 97 percent saturation and half at 60 percent saturation, giving an aortic mean saturation of about 78 percent. This is a significant decrease in arterial hemoglobin saturation, larger than in atelectasis because flow through the diseased alveoli is preserved.' },
       ],
       common_errors: [
         'Locating the fluid in the pleural space rather than within the alveoli.',
-        'Giving the wrong mean saturation; the slide value is about 78 percent.',
+        'Giving the wrong mean saturation; the value is about 78 percent.',
         'Forgetting that maintained blood flow through poorly oxygenated alveoli is why saturation drops significantly.',
       ],
       minimum_passing_score: 60,
@@ -5429,7 +5429,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List the major categories of hypoxia from the Causes of Hypoxia slide and give representative examples within each category.',
+    prompt: 'List the major categories of hypoxia and give representative examples within each category.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Hypoxia can result from inadequate oxygenation of blood in the lungs, including low atmospheric oxygen and neuromuscular disorders causing hypoventilation, and from pulmonary disease such as hypoventilation from increased airway resistance or decreased compliance, V/Q mismatch, and diffusion abnormalities. Venous-arterial shunts are also listed.' },
@@ -5454,7 +5454,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Explain how lung parenchyma normally affects adjacent airways and how its destruction increases airway resistance, as taught on the slides.',
+    prompt: 'Explain how lung parenchyma normally affects adjacent airways and how its destruction increases airway resistance, as taught.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Lung parenchyma normally pulls outward on the walls of adjacent airways, and this outward traction helps hold the airways open. It is listed under factors outside the airways that affect resistance.' },
@@ -5731,16 +5731,16 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Using Figure 39-1, contrast the aortic pressure curve with the pulmonary artery curve, giving the approximate systolic and diastolic values of each and explaining what the comparison demonstrates about the two circuits.',
+    prompt: 'Contrast the aortic pressure curve with the pulmonary artery curve, giving the approximate systolic and diastolic values of each and explaining what the comparison demonstrates about the two circuits.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The aortic pressure curve peaks at about 120 mmHg systolic and falls to about 75 mmHg diastolic, the familiar systemic blood pressure. It is plotted on the same figure as the pulmonary artery curve so the learner can see the dramatic difference in scale between the two circulations at a glance.' },
+        { id: 'kp1', weight: 2, description: 'The aortic pressure curve peaks at about 120 mmHg systolic and falls to about 75 mmHg diastolic, the familiar systemic blood pressure. It is compared with the pulmonary artery curve so the learner can see the dramatic difference in scale between the two circulations at a glance.' },
         { id: 'kp2', weight: 2, description: 'The pulmonary artery curve peaks at only about 25 mmHg systolic and 8 mmHg diastolic, roughly one fifth of systemic pressure. The contrast demonstrates that the pulmonary circulation is a low pressure, low resistance system even though it carries the entire cardiac output, which protects the thin pulmonary capillaries from filtration injury.' },
       ],
       common_errors: [
         'Stating that pulmonary artery pressure is similar to aortic pressure because both receive the full cardiac output',
         'Confusing the pulmonary systolic value of 25 with the mean of 15 mmHg',
-        'Assuming the aortic curve is on the slide as the main teaching point rather than as a contrast for the pulmonary curve',
+        'Assuming the aortic curve is as the main teaching point rather than as a contrast for the pulmonary curve',
       ],
       minimum_passing_score: 60,
     },
@@ -5756,7 +5756,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Describe the downstream end of the pulmonary pressure gradient shown on Figure 39-2, stating the approximate left atrial pressure and how it relates to pulmonary capillary pressure and to the driving pressure for pulmonary flow.',
+    prompt: 'Describe the downstream end of the pulmonary pressure gradient, stating the approximate left atrial pressure and how it relates to pulmonary capillary pressure and to the driving pressure for pulmonary flow.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Left atrial pressure is about 2 mmHg, the lowest point on the pulmonary pressure gradient. Pressure falls from the mean pulmonary arterial value of 15 mmHg to about 7 mmHg in the capillaries and then to 2 mmHg in the left atrium, showing that most of the pressure drop occurs before and across the capillaries.' },
@@ -5806,11 +5806,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'State the Fick principle as the method cited on the slides for measuring pulmonary blood flow and outline the quantities it relates.',
+    prompt: 'State the Fick principle as the method for measuring pulmonary blood flow and outline the quantities it relates.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The Fick principle measures blood flow, and therefore cardiac output and pulmonary flow, from oxygen uptake and the arteriovenous oxygen difference. Flow equals oxygen consumption divided by the difference between arterial and mixed venous oxygen content, so the same volume of blood that passes the lungs carries the oxygen taken up.' },
-        { id: 'kp2', weight: 2, description: 'Because the entire cardiac output flows through the lungs, pulmonary blood flow equals systemic cardiac output, about 5 liters per minute at rest. The slide cites the Fick principle specifically as the way this flow is quantified, linking oxygen exchange in the lung to the volume of blood moving through it.' },
+        { id: 'kp2', weight: 2, description: 'Because the entire cardiac output flows through the lungs, pulmonary blood flow equals systemic cardiac output, about 5 liters per minute at rest. The Fick principle specifically as the way this flow is quantified, linking oxygen exchange in the lung to the volume of blood moving through it.' },
       ],
       common_errors: [
         'Confusing the Fick principle with the Fick law of diffusion across the membrane',
@@ -5831,11 +5831,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Explain how recruitment and distension buffer pulmonary arterial pressure as cardiac output rises, referring to the shape of the pressure versus cardiac output curve in Figure 39-6 and its normal anchor point.',
+    prompt: 'Explain how recruitment and distension buffer pulmonary arterial pressure as cardiac output rises, referring to the shape of the pressure versus cardiac output curve And its normal anchor point.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'As cardiac output increases, previously closed capillaries open by recruitment and already open capillaries widen by distension, both of which lower pulmonary vascular resistance. Because resistance falls as flow rises, pulmonary arterial pressure increases only slightly across a wide range of output rather than proportionally.' },
-        { id: 'kp2', weight: 2, description: 'Figure 39-6 anchors the normal value at about 15 mmHg at a resting output of 4 to 5 liters per minute, and the curve stays nearly flat as output climbs toward 16 to 20 liters per minute before turning steeply upward near maximal output when recruitment and distension are exhausted. This buffering protects the lung from edema during exercise.' },
+        { id: 'kp2', weight: 2, description: 'The normal value is about 15 mmHg at a resting output of 4 to 5 liters per minute, and the curve stays nearly flat as output climbs toward 16 to 20 liters per minute before turning steeply upward near maximal output when recruitment and distension are exhausted. This buffering protects the lung from edema during exercise.' },
       ],
       common_errors: [
         'Believing pulmonary pressure rises in direct proportion to cardiac output',
@@ -5931,7 +5931,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'State the normal alveolar oxygen and carbon dioxide partial pressures from the slide and the values of blood gas entering and leaving the pulmonary capillary, and describe how equilibration occurs.',
+    prompt: 'State the normal alveolar oxygen and carbon dioxide partial pressures and the values of blood gas entering and leaving the pulmonary capillary, and describe how equilibration occurs.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Normal alveolar gas has an oxygen partial pressure of 100 mmHg and a carbon dioxide partial pressure of 40 mmHg. These alveolar values set the gradient that drives gas exchange across the respiratory membrane with the blood in the surrounding capillary.' },
@@ -5956,10 +5956,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Explain the role of surface tension at the alveolar pore in the pulmonary capillary fluid balance on Figure 39-7, including its approximate magnitude and direction of effect.',
+    prompt: 'Explain the role of surface tension at the alveolar pore in the pulmonary capillary fluid balance, including its approximate magnitude and direction of effect.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Surface tension at the alveolar pore is shown as about 8 mmHg and acts to pull fluid outward toward the alveolar surface. It arises from the air to liquid interface lining the alveolus and is one of several pressures the figure tallies when computing fluid movement across the membrane.' },
+        { id: 'kp1', weight: 2, description: 'Surface tension at the alveolar pore is about 8 mmHg and acts to pull fluid outward toward the alveolar surface. It arises from the air to liquid interface lining the alveolus and is one of several pressures tallied when computing fluid movement across the membrane.' },
         { id: 'kp2', weight: 2, description: 'Although surface tension favors moving fluid out of the capillary, the alveoli stay dry because the strongly negative interstitial pressure and active lymphatic drainage oppose flooding. Surfactant normally limits alveolar surface tension, and a loss of surfactant raises this outward pull and predisposes to alveolar fluid accumulation.' },
       ],
       common_errors: [
@@ -5981,7 +5981,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Define pulmonary edema as given on the slides and describe the sequence by which interstitial fluid accumulation progresses to impaired gas exchange.',
+    prompt: 'Define pulmonary edema and describe the sequence by which interstitial fluid accumulation progresses to impaired gas exchange.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Pulmonary edema is the accumulation of fluid in the pulmonary interstitial space. It develops when the rate of fluid filtration out of the pulmonary capillaries exceeds the rate at which the lymphatics can remove it, overwhelming the normal safety factors.' },
@@ -6006,11 +6006,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Explain how increased capillary membrane permeability causes pulmonary edema and name the specific noxious gases the slides cite as examples.',
+    prompt: 'Explain how increased capillary membrane permeability causes pulmonary edema and name the specific noxious gases as examples.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Damage to the pulmonary capillary membrane increases its permeability, allowing both plasma proteins and fluid to leak into the interstitium. Because protein follows the fluid, the usual inward osmotic gradient is lost, so this mechanism floods the lung even without a rise in capillary hydrostatic pressure.' },
-        { id: 'kp2', weight: 2, description: 'The slides give infection and inhaled noxious gases, specifically chlorine and sulfur dioxide, as causes of this membrane damage. These agents injure the delicate respiratory membrane directly, and the resulting high permeability edema is harder to treat than pressure driven edema because protein has entered the interstitium.' },
+        { id: 'kp2', weight: 2, description: 'Infection and inhaled noxious gases, specifically chlorine and sulfur dioxide, as causes of this membrane damage. These agents injure the delicate respiratory membrane directly, and the resulting high permeability edema is harder to treat than pressure driven edema because protein has entered the interstitium.' },
       ],
       common_errors: [
         'Attributing noxious gas edema to increased capillary pressure rather than increased permeability',
@@ -6056,10 +6056,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Describe the relationship on Figure 39-8 between left atrial pressure and the rate of pulmonary edema formation, including the approximate threshold and the behavior above it.',
+    prompt: 'Describe the relationship between left atrial pressure and the rate of pulmonary edema formation, including the approximate threshold and the behavior above it.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Figure 39-8 plots the rate of edema formation, expressed as edema fluid per hour per dry lung weight, against left atrial pressure. The rate stays essentially zero across normal pressures up to about 23 mmHg, demonstrating the safety factor that protects the lung at ordinary filling pressures.' },
+        { id: 'kp1', weight: 2, description: 'The rate of edema formation, expressed as edema fluid per hour per dry lung weight, against left atrial pressure. The rate stays essentially zero across normal pressures up to about 23 mmHg, demonstrating the safety factor that protects the lung at ordinary filling pressures.' },
         { id: 'kp2', weight: 2, description: 'Above roughly 23 mmHg the curve turns sharply upward and edema accumulates rapidly as left atrial pressure climbs toward 40 to 50 mmHg. This threshold corresponds to the point where rising capillary pressure approaches plasma colloid osmotic pressure and overwhelms the lymphatic safety factor, so small further increases cause large increases in edema.' },
       ],
       common_errors: [
@@ -6131,10 +6131,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Explain, as the slides present it, how gases diffuse in a fluid or across a membrane, including why molecules move in both directions yet produce net transfer, and state what the net direction depends on and how partial pressure relates to it.',
+    prompt: 'Explain, , how gases diffuse in a fluid or across a membrane, including why molecules move in both directions yet produce net transfer, and state what the net direction depends on and how partial pressure relates to it.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides show dissolved gas molecules undergoing random motion in both directions. Diffusion occurs in response to a concentration gradient, and because pressure is proportional to concentration, it equivalently occurs in response to a pressure gradient. Although individual molecules move both ways, the net flux is from the region of higher concentration to the region of lower concentration.' },
+        { id: 'kp1', weight: 2, description: 'Dissolved gas molecules undergoing random motion in both directions. Diffusion occurs in response to a concentration gradient, and because pressure is proportional to concentration, it equivalently occurs in response to a pressure gradient. Although individual molecules move both ways, the net flux is from the region of higher concentration to the region of lower concentration.' },
         { id: 'kp2', weight: 2, description: 'Net diffusion direction is down the concentration or partial pressure gradient, from high to low. Across the respiratory membrane this means each gas moves according to its own partial pressure difference between the two sides, independent of the other gases present, which is why oxygen and carbon dioxide can diffuse in opposite directions at the same time.' },
       ],
       common_errors: [
@@ -6156,11 +6156,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the rule the slides give for total gas pressure in a mixture, name the four gases listed as contributing to the total pressure of air, and explain how each gas contributes relative to its concentration.',
+    prompt: 'State the rule for total gas pressure in a mixture, name the four gases listed as contributing to the total pressure of air, and explain how each gas contributes relative to its concentration.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state that total pressure is the sum of the partial pressures of each gas present, and they list those gases as oxygen, nitrogen, carbon dioxide, and water vapor. Each gas exerts a partial pressure independent of the others, and the partial pressures add to the total.' },
-        { id: 'kp2', weight: 2, description: 'Each gas contributes to the total pressure in direct proportion to its concentration or fractional amount. The slides illustrate this with humidified air where nitrogen at about 74 percent contributes roughly 563 mm Hg, oxygen about 149 mm Hg, water vapor 47 mm Hg, and carbon dioxide a fraction of a mm Hg, summing to 760.' },
+        { id: 'kp1', weight: 2, description: 'Total pressure is the sum of the partial pressures of each gas present, and they list those gases as oxygen, nitrogen, carbon dioxide, and water vapor. Each gas exerts a partial pressure independent of the others, and the partial pressures add to the total.' },
+        { id: 'kp2', weight: 2, description: 'Each gas contributes to the total pressure in direct proportion to its concentration or fractional amount. one example is humidified air where nitrogen at about 74 percent contributes roughly 563 mm Hg, oxygen about 149 mm Hg, water vapor 47 mm Hg, and carbon dioxide a fraction of a mm Hg, summing to 760.' },
       ],
       common_errors: [
         'Listing carbon monoxide or helium instead of nitrogen or water vapor among the contributing gases',
@@ -6181,10 +6181,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'List, in order from the larger airway toward the gas exchange surface, the four components of the respiratory unit named on the slides, and state where in this sequence gas exchange occurs.',
+    prompt: 'List, in order from the larger airway toward the gas exchange surface, the four components of the respiratory unit named, and state where in this sequence gas exchange occurs.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides name the components of the respiratory unit as the terminal bronchiole, the respiratory bronchiole, the alveolar ducts, and the alveolar sacs, in that order from the conducting airway toward the alveoli. Smooth muscle and elastic fibers are shown surrounding the proximal portions.' },
+        { id: 'kp1', weight: 2, description: 'the components of the respiratory unit as the terminal bronchiole, the respiratory bronchiole, the alveolar ducts, and the alveolar sacs, in that order from the conducting airway toward the alveoli. Smooth muscle and elastic fibers surround the proximal portions.' },
         { id: 'kp2', weight: 2, description: 'Gas exchange occurs in the alveolar sacs, which have very thin walls to aid diffusion. The progression from terminal bronchiole through respiratory bronchiole and alveolar ducts leads air to these terminal sacs where the respiratory membrane separates gas from capillary blood.' },
       ],
       common_errors: [
@@ -6206,10 +6206,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the approximate number of alveoli in the two lungs and their average diameter as given on the slides, and explain why these figures matter for gas exchange.',
+    prompt: 'State the approximate number of alveoli in the two lungs and their average diameter, and explain why these figures matter for gas exchange.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state there are approximately 300 million alveoli in the two lungs, each with an average diameter of about 0.2 mm. The alveolar walls are described as very thin to aid in gas exchange.' },
+        { id: 'kp1', weight: 2, description: 'There are approximately 300 million alveoli in the two lungs, each with an average diameter of about 0.2 mm. The alveolar walls are described as very thin to aid in gas exchange.' },
         { id: 'kp2', weight: 2, description: 'The combination of a very large number of small alveoli creates an enormous total surface area for diffusion while keeping each diffusion distance short. A large area in the numerator of the diffusion relationship and thin walls in the denominator both favor rapid gas exchange.' },
       ],
       common_errors: [
@@ -6231,10 +6231,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Name the structures the respiratory unit microanatomy figure labels around the alveoli, and describe how this arrangement supports gas exchange and fluid handling.',
+    prompt: 'Name the structures the respiratory unit microanatomy includes around the alveoli, and describe how this arrangement supports gas exchange and fluid handling.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The microanatomy figure labels pulmonary capillaries forming a dense network across the alveolar walls, the interstitial space, a lymphatic vessel, a vein and an artery, and the perivascular interstitial space. Multiple alveoli surround this shared capillary and vascular bed.' },
+        { id: 'kp1', weight: 2, description: 'The respiratory unit microanatomy includes pulmonary capillaries forming a dense network across the alveolar walls, the interstitial space, a lymphatic vessel, a vein and an artery, and the perivascular interstitial space. Multiple alveoli surround this shared capillary and vascular bed.' },
         { id: 'kp2', weight: 2, description: 'The dense capillary meshwork places blood in close contact with alveolar gas over a wide area, maximizing diffusion. The interstitial spaces and lymphatic vessel provide a route to drain fluid and keep the membrane thin, since accumulation of interstitial fluid would increase diffusion distance and impair exchange.' },
       ],
       common_errors: [
@@ -6256,10 +6256,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Using the composition of alveolar air table on the slides, give the approximate partial pressures of N2, O2, CO2, and H2O for atmospheric, humidified, alveolar, and expired air, and explain the major shifts between columns.',
+    prompt: 'Using the composition of alveolar air table, give the approximate partial pressures of N2, O2, CO2, and H2O for atmospheric, humidified, alveolar, and expired air, and explain the major shifts between columns.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The table gives, in mm Hg, atmospheric air N2 597, O2 159, CO2 0.3, H2O 3.7; humidified air N2 563, O2 149, CO2 0.3, H2O 47; alveolar air N2 569, O2 104, CO2 40, H2O 47; and expired air N2 566, O2 120, CO2 27, H2O 47. Each column totals 760 mm Hg.' },
+        { id: 'kp1', weight: 2, description: 'In mm Hg, the partial pressures are atmospheric air N2 597, O2 159, CO2 0.3, H2O 3.7; humidified air N2 563, O2 149, CO2 0.3, H2O 47; alveolar air N2 569, O2 104, CO2 40, H2O 47; and expired air N2 566, O2 120, CO2 27, H2O 47. Each column totals 760 mm Hg.' },
         { id: 'kp2', weight: 2, description: 'Humidification adds water vapor at 47 mm Hg and dilutes the other gases, dropping O2 from 159 to 149. In the alveoli oxygen is absorbed into blood and carbon dioxide is added, so O2 falls to 104 and CO2 rises to 40. Expired air is intermediate because it mixes alveolar gas with dead space air, giving O2 about 120 and CO2 about 27.' },
       ],
       common_errors: [
@@ -6281,10 +6281,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the alveolar gas equation as written on the slides, define each term, and carry out the slide calculation of alveolar PO2 using PIO2 of 149, PCO2 of 40, and R of 0.8.',
+    prompt: 'State the alveolar gas equation as written, define each term, and carry out the calculation of alveolar PO2 using PIO2 of 149, PCO2 of 40, and R of 0.8.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides write the alveolar gas equation as PAO2 equals PIO2 minus PCO2 divided by R. PIO2 is the partial pressure of oxygen in humidified inspired air, PCO2 is the alveolar carbon dioxide partial pressure, and R is the respiratory exchange ratio.' },
+        { id: 'kp1', weight: 2, description: 'the alveolar gas equation as PAO2 equals PIO2 minus PCO2 divided by R. PIO2 is the partial pressure of oxygen in humidified inspired air, PCO2 is the alveolar carbon dioxide partial pressure, and R is the respiratory exchange ratio.' },
         { id: 'kp2', weight: 2, description: 'Substituting gives PAO2 equals 149 minus (40 divided by 0.8), which is 149 minus 50, equal to 99 mm Hg. This computed value is close to the rounded alveolar PO2 of 104 used elsewhere, and it shows that a rising alveolar PCO2 directly lowers the alveolar PO2.' },
       ],
       common_errors: [
@@ -6306,11 +6306,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Define the respiratory exchange ratio R as used on the slides, state its normal value, and explain its role in relating inspired to alveolar oxygen and in linking alveolar to arterial gases in health.',
+    prompt: 'Define the respiratory exchange ratio R as used, state its normal value, and explain its role in relating inspired to alveolar oxygen and in linking alveolar to arterial gases in health.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides define R as the respiratory exchange ratio with a normal value of approximately 0.8. It reflects carbon dioxide output relative to oxygen uptake, and a value of 0.8 means about 8 carbon dioxide molecules leave for every 10 oxygen molecules taken up.' },
-        { id: 'kp2', weight: 2, description: 'R appears in the alveolar gas equation as the divisor of PCO2, converting inspired PO2 to alveolar PO2. The slides also stress that in a normal healthy person alveolar PO2 equals arterial PO2 and alveolar PCO2 equals arterial PCO2, so the computed alveolar values approximate the arterial values measured clinically.' },
+        { id: 'kp1', weight: 2, description: 'R is defined as the respiratory exchange ratio with a normal value of approximately 0.8. It reflects carbon dioxide output relative to oxygen uptake, and a value of 0.8 means about 8 carbon dioxide molecules leave for every 10 oxygen molecules taken up.' },
+        { id: 'kp2', weight: 2, description: 'R appears in the alveolar gas equation as the divisor of PCO2, converting inspired PO2 to alveolar PO2. in a normal healthy person alveolar PO2 equals arterial PO2 and alveolar PCO2 equals arterial PCO2, so the computed alveolar values approximate the arterial values measured clinically.' },
       ],
       common_errors: [
         'Stating R equals 1.0 rather than about 0.8',
@@ -6331,11 +6331,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the alveolar PCO2 equation on the slides including the value of its constant, and describe quantitatively how alveolar PCO2 responds when alveolar ventilation is doubled or halved.',
+    prompt: 'State the alveolar PCO2 equation including the value of its constant, and describe quantitatively how alveolar PCO2 responds when alveolar ventilation is doubled or halved.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides write alveolar PCO2 equals carbon dioxide production times K divided by alveolar ventilation, where K is a multivariable correction constant equal to 863 mm Hg. PCO2 is therefore directly proportional to carbon dioxide production and inversely proportional to alveolar ventilation.' },
-        { id: 'kp2', weight: 2, description: 'Because of the inverse relationship, the slides state that if ventilation is doubled then PCO2 is halved, and if ventilation is halved then PCO2 is doubled, assuming carbon dioxide production is constant. This makes alveolar ventilation the primary determinant of arterial carbon dioxide.' },
+        { id: 'kp1', weight: 2, description: 'alveolar PCO2 equals carbon dioxide production times K divided by alveolar ventilation, where K is a multivariable correction constant equal to 863 mm Hg. PCO2 is therefore directly proportional to carbon dioxide production and inversely proportional to alveolar ventilation.' },
+        { id: 'kp2', weight: 2, description: 'Because of the inverse relationship, if ventilation is doubled then PCO2 is halved, and if ventilation is halved then PCO2 is doubled, assuming carbon dioxide production is constant. This makes alveolar ventilation the primary determinant of arterial carbon dioxide.' },
       ],
       common_errors: [
         'Giving K as 760 or 713 rather than 863 mm Hg',
@@ -6356,10 +6356,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the two factors the slides say control alveolar PO2, and using the 250 versus 1000 mL O2 per min comparison explain how metabolic rate changes the ventilation needed to maintain arterial PO2.',
+    prompt: 'State the two factors  control alveolar PO2, and using the 250 versus 1000 mL O2 per min comparison explain how metabolic rate changes the ventilation needed to maintain arterial PO2.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state alveolar PO2 is controlled by two factors: the rate of oxygen absorption from the alveoli into the blood and the rate of oxygen entry into the alveoli by ventilation. The steady alveolar PO2 is the balance point between oxygen leaving into blood and oxygen arriving by ventilation.' },
+        { id: 'kp1', weight: 2, description: 'Alveolar PO2 is controlled by two factors: the rate of oxygen absorption from the alveoli into the blood and the rate of oxygen entry into the alveoli by ventilation. The steady alveolar PO2 is the balance point between oxygen leaving into blood and oxygen arriving by ventilation.' },
         { id: 'kp2', weight: 2, description: 'Comparing metabolic rates of 250 and 1000 mL O2 per min, a higher metabolic rate increases oxygen absorption because of increased utilization, so increased ventilation is required to maintain arterial PO2. At 1000 mL O2 per min much greater alveolar ventilation is needed to reach the same alveolar PO2 that lower ventilation provides at 250.' },
       ],
       common_errors: [
@@ -6381,11 +6381,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State how the Figure 40-4 slide defines hyperventilation and hypoventilation using alveolar PO2, contrast this with the carbon dioxide based definition on other slides, and explain why both describe the same physiological states.',
+    prompt: 'State how hyperventilation and hypoventilation are defined using alveolar PO2, contrast this with the carbon dioxide based definition, and explain why both describe the same physiological states.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'On the Figure 40-4 slide, hyperventilation is ventilating above needs, giving alveolar PO2 greater than 100 mm Hg, and hypoventilation is ventilating below needs, giving alveolar PO2 less than 100 mm Hg. These thresholds are defined relative to metabolic demand rather than a fixed breathing rate.' },
-        { id: 'kp2', weight: 2, description: 'Other slides define the same states by carbon dioxide: hyperventilation is PACO2 below 40 and hypoventilation is PACO2 above 40. Because alveolar PO2 and PCO2 are inversely related through alveolar ventilation, a high PO2 accompanies a low PCO2 in hyperventilation and a low PO2 accompanies a high PCO2 in hypoventilation, so both definitions identify the same condition.' },
+        { id: 'kp1', weight: 2, description: 'Hyperventilation is ventilating above needs, giving alveolar PO2 greater than 100 mm Hg, and hypoventilation is ventilating below needs, giving alveolar PO2 less than 100 mm Hg. These thresholds are defined relative to metabolic demand rather than a fixed breathing rate.' },
+        { id: 'kp2', weight: 2, description: 'The same states can be defined by carbon dioxide: hyperventilation is PACO2 below 40 and hypoventilation is PACO2 above 40. Because alveolar PO2 and PCO2 are inversely related through alveolar ventilation, a high PO2 accompanies a low PCO2 in hyperventilation and a low PO2 accompanies a high PCO2 in hypoventilation, so both definitions identify the same condition.' },
       ],
       common_errors: [
         'Mixing the thresholds, such as pairing hyperventilation with PAO2 below 100',
@@ -6406,10 +6406,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State how the slides say alveolar PO2 and PCO2 change as the V/Q ratio increases and as it decreases, and explain the mechanism linking ventilation relative to perfusion to these shifts.',
+    prompt: 'State how  alveolar PO2 and PCO2 change as the V/Q ratio increases and as it decreases, and explain the mechanism linking ventilation relative to perfusion to these shifts.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state that increasing V/Q produces a higher alveolar PO2 and a lower alveolar PCO2, while decreasing V/Q produces a lower alveolar PO2 and a higher alveolar PCO2. PO2 and PCO2 move in opposite directions because they are inversely related through ventilation.' },
+        { id: 'kp1', weight: 2, description: 'Increasing V/Q produces a higher alveolar PO2 and a lower alveolar PCO2, while decreasing V/Q produces a lower alveolar PO2 and a higher alveolar PCO2. PO2 and PCO2 move in opposite directions because they are inversely related through ventilation.' },
         { id: 'kp2', weight: 2, description: 'When ventilation is high relative to perfusion, fresh inspired gas dominates and alveolar values approach inspired air with high PO2 and near zero PCO2. When perfusion dominates over ventilation, alveolar gas is pulled toward mixed venous blood with low PO2 and high PCO2. The continuum runs from inspired values at high V/Q to venous values at low V/Q.' },
       ],
       common_errors: [
@@ -6431,10 +6431,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Describe what the partial pressures along the airway figure shows about the sequence of expired gas and the values of PO2 and PCO2 for dead space air versus alveolar air.',
+    prompt: 'Describe what the partial airway pressure profile shows about the sequence of expired gas and the values of PO2 and PCO2 for dead space air versus alveolar air.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The figure plots PO2 and PCO2 against the volume of air expired. The first gas out is dead space air, which did not participate in exchange and so resembles humidified inspired air with PO2 near 150 and PCO2 near 0. This is followed by a transition zone of mixed dead space and alveolar air.' },
+        { id: 'kp1', weight: 2, description: 'PO2 and PCO2 against the volume of air expired. The first gas out is dead space air, which did not participate in exchange and so resembles humidified inspired air with PO2 near 150 and PCO2 near 0. This is followed by a transition zone of mixed dead space and alveolar air.' },
         { id: 'kp2', weight: 2, description: 'As expiration continues, pure alveolar air emerges with PO2 falling to about 100 and PCO2 rising to about 40. Thus across the expirate PO2 falls and PCO2 rises, reflecting that alveolar gas has given oxygen to and received carbon dioxide from pulmonary capillary blood while dead space gas has not.' },
       ],
       common_errors: [
@@ -6456,11 +6456,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the diffusing capacity formula and the diffusion relationship as written on the slides, identify how area and thickness affect diffusing capacity, and state what happens to diffusing capacity during exercise.',
+    prompt: 'State the diffusing capacity formula and the diffusion relationship as written, identify how area and thickness affect diffusing capacity, and state what happens to diffusing capacity during exercise.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides give diffusing capacity of the lung DL equal to area times the diffusion coefficient divided by thickness, and diffusion equal to the pressure gradient times DL. Therefore diffusing capacity increases with greater surface area and a higher diffusion coefficient and decreases as membrane thickness increases.' },
-        { id: 'kp2', weight: 2, description: 'The slides state diffusing capacity can change, such as during exercise, when it increases. During exercise additional pulmonary capillaries are recruited and distended, increasing the effective surface area, so DL rises for CO, O2, and CO2 as shown in the figure.' },
+        { id: 'kp1', weight: 2, description: 'The diffusing capacity is about the lung DL equal to area times the diffusion coefficient divided by thickness, and diffusion equal to the pressure gradient times DL. Therefore diffusing capacity increases with greater surface area and a higher diffusion coefficient and decreases as membrane thickness increases.' },
+        { id: 'kp2', weight: 2, description: 'Diffusing capacity can change, such as during exercise, when it increases. During exercise additional pulmonary capillaries are recruited and distended, increasing the effective surface area, so DL rises for CO, O2, and CO2.' },
       ],
       common_errors: [
         'Inverting the formula so thickness is in the numerator and area in the denominator',
@@ -6481,11 +6481,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the normal causes of uneven regional ventilation and uneven regional perfusion given on the slides, and give the two example pathologies and which component of V/Q each disturbs.',
+    prompt: 'State the normal causes of uneven regional ventilation and uneven regional perfusion, and give the two example pathologies and which component of V/Q each disturbs.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides state that differences in airway and lung expansion produce uneven regional ventilation, and differences in vascular geometry and hydrostatic pressures produce uneven regional blood flow. As a result V/Q ratios vary across regions even within a normal healthy lung.' },
-        { id: 'kp2', weight: 2, description: 'The slides give asthma as a pathology that causes regional changes in ventilation and pulmonary embolism as one that causes changes in perfusion, both of which increase V/Q mismatch. Asthma narrows airways to reduce ventilation, while an embolus obstructs blood flow to reduce perfusion in the affected region.' },
+        { id: 'kp1', weight: 2, description: 'Differences in airway and lung expansion produce uneven regional ventilation, and differences in vascular geometry and hydrostatic pressures produce uneven regional blood flow. As a result V/Q ratios vary across regions even within a normal healthy lung.' },
+        { id: 'kp2', weight: 2, description: 'Asthma as a pathology that causes regional changes in ventilation and pulmonary embolism as one that causes changes in perfusion, both of which increase V/Q mismatch. Asthma narrows airways to reduce ventilation, while an embolus obstructs blood flow to reduce perfusion in the affected region.' },
       ],
       common_errors: [
         'Attributing pulmonary embolism to reduced ventilation rather than reduced perfusion',
@@ -6506,10 +6506,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the normal mixed venous and systemic arterial values of PO2 and PCO2 shown on the slides as blood enters and leaves the lung unit, and explain what exchange occurs across the pulmonary capillary to convert one to the other.',
+    prompt: 'State the normal mixed venous and systemic arterial values of PO2 and PCO2 as blood enters and leaves the lung unit, and explain what exchange occurs across the pulmonary capillary to convert one to the other.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'On the slides, mixed venous blood entering the pulmonary capillary has PO2 about 40 mm Hg and PCO2 about 45 mm Hg, while systemic arterial blood leaving has PO2 about 100 mm Hg and PCO2 about 40 mm Hg. Alveolar gas sits between at PO2 about 104 and PCO2 about 40, and the mixed venous values also serve as the low ventilation limit a unit drifts toward when V/Q falls to zero.' },
+        { id: 'kp1', weight: 2, description: 'Mixed venous blood entering the pulmonary capillary has PO2 about 40 mm Hg and PCO2 about 45 mm Hg, while systemic arterial blood leaving has PO2 about 100 mm Hg and PCO2 about 40 mm Hg. Alveolar gas sits between at PO2 about 104 and PCO2 about 40, and the mixed venous values also serve as the low ventilation limit a unit drifts toward when V/Q falls to zero.' },
         { id: 'kp2', weight: 2, description: 'Across the pulmonary capillary, oxygen diffuses from alveolus into venous blood, raising PO2 from 40 toward the alveolar value, and carbon dioxide diffuses from blood into the alveolus, lowering PCO2 from 45 to about 40. The blood is thereby arterialized, and in a healthy person the leaving arterial values match the alveolar values.' },
       ],
       common_errors: [
@@ -6531,10 +6531,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Describe what the slides teach about the dilution and replacement of alveolar gas with each breath, including how ventilation rate affects the speed of change and why a slow rate of change is physiologically protective.',
+    prompt: 'Describe  the dilution and replacement of alveolar gas with each breath, including how ventilation rate affects the speed of change and why a slow rate of change is physiologically protective.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides show that alveolar gas is diluted and replaced only gradually, since each breath exchanges just a fraction of the air already in the lungs; the figure tracks the falling fraction of original gas across the first, second, fourth, and later breaths. Increasing the ventilation rate increases the rate of dilution, and decreasing it slows the rate.' },
+        { id: 'kp1', weight: 2, description: 'Alveolar gas is diluted and replaced only gradually, since each breath exchanges just a fraction of the air already in the lungs; The falling fraction of original gas across the first, second, fourth, and later breaths. Increasing the ventilation rate increases the rate of dilution, and decreasing it slows the rate.' },
         { id: 'kp2', weight: 2, description: 'This slow rate of change is important because it prevents rapid swings in alveolar gas concentrations, stabilizing oxygen and carbon dioxide and therefore blood pH even if respiration is briefly interrupted. The buffering provided by the functional residual capacity keeps arterial gases steady between breaths.' },
       ],
       common_errors: [
@@ -6556,10 +6556,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Identify the variables labeled on the schematic lung unit slide for the gas and blood phases, and explain what determines the alveolar gas composition of the unit.',
+    prompt: 'Identify the variables labeled In the lung unit model for the gas and blood phases, and explain what determines the alveolar gas composition of the unit.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The schematic lung unit labels alveolar ventilation VA with a dot in mL per min entering the gas space, the alveolar pressure PA, and blood flow Q with a dot in mL per min through the capillary. Mixed venous blood enters with its pressure and content, and arterial blood leaves with its pressure and content.' },
+        { id: 'kp1', weight: 2, description: 'The lung unit model includes alveolar ventilation VA with a dot in mL per min entering the gas space, the alveolar pressure PA, and blood flow Q with a dot in mL per min through the capillary. Mixed venous blood enters with its pressure and content, and arterial blood leaves with its pressure and content.' },
         { id: 'kp2', weight: 2, description: 'The composition of alveolar gas in the unit is set by the balance between ventilation, which delivers fresh inspired gas, and blood flow, which adds carbon dioxide and removes oxygen. The ratio of these two flows, ventilation over perfusion, therefore determines the alveolar PO2 and PCO2 of that unit.' },
       ],
       common_errors: [
@@ -6569,10 +6569,10 @@ export const RECALL_QUESTIONS_ATOMS = [
       ],
       minimum_passing_score: 60,
     },
-    topic: 'Schematic lung unit variables',
+    topic: 'lung unit model variables',
     chapter: 'pp2-wk-5',
     difficulty: 1,
-    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 40', topic: 'Schematic lung unit variables' },
+    metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 40', topic: 'lung unit model variables' },
   },
 
   {
@@ -6581,11 +6581,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State how the slides relate carbon dioxide excretion to metabolic rate using the two metabolic rate example, and explain what must happen to ventilation to keep alveolar PCO2 normal as production rises.',
+    prompt: 'State how carbon dioxide excretion to metabolic rate using the two metabolic rate example, and explain what must happen to ventilation to keep alveolar PCO2 normal as production rises.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides compare carbon dioxide excretion at two metabolic rates, showing it rises from about 200 to about 800 mL per min when metabolic rate increases roughly fourfold. Carbon dioxide production scales with metabolic rate.' },
-        { id: 'kp2', weight: 2, description: 'Because alveolar PCO2 equals carbon dioxide production times a constant over alveolar ventilation, a higher production would raise PCO2 unless ventilation increases proportionally. The slides therefore stress increasing ventilation to get rid of the extra carbon dioxide and hold alveolar PCO2 near its normal value.' },
+        { id: 'kp1', weight: 2, description: 'carbon dioxide excretion at two metabolic rates, showing it rises from about 200 to about 800 mL per min when metabolic rate increases roughly fourfold. Carbon dioxide production scales with metabolic rate.' },
+        { id: 'kp2', weight: 2, description: 'Because alveolar PCO2 equals carbon dioxide production times a constant over alveolar ventilation, a higher production would raise PCO2 unless ventilation increases proportionally. Therefore ventilation must increase to clear the extra carbon dioxide and hold alveolar PCO2 near its normal value.' },
       ],
       common_errors: [
         'Stating carbon dioxide excretion only doubles rather than rising fourfold from 200 to 800',
@@ -6606,10 +6606,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'State the definition of the diffusing capacity of the lung exactly as given on the slides, including its units, and explain what it physically represents and that it can change with conditions.',
+    prompt: 'State the definition of the diffusing capacity of the lung exactly, including its units, and explain what it physically represents and that it can change with conditions.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides define diffusing capacity as the volume of gas in mL that diffuses each minute for a pressure difference of 1 mm Hg across the respiratory membrane. It is expressed in mL per min per mm Hg and is a measure of how readily a gas crosses the alveolar membrane.' },
+        { id: 'kp1', weight: 2, description: 'Diffusing capacity as the volume of gas in mL that diffuses each minute for a pressure difference of 1 mm Hg across the respiratory membrane. It is expressed in mL per min per mm Hg and is a measure of how readily a gas crosses the alveolar membrane.' },
         { id: 'kp2', weight: 2, description: 'Diffusing capacity is a measure of the alveolar membrane and the specific gas together, and it can change, for example rising during exercise as more capillaries are recruited. A higher diffusing capacity means more gas transfer for the same partial pressure gradient.' },
       ],
       common_errors: [
@@ -6631,7 +6631,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Describe the oxygen partial pressure cascade from atmospheric air to the alveolus using the slide values, and state the alveolar PCO2.',
+    prompt: 'Describe the oxygen partial pressure cascade from atmospheric air to the alveolus using The values, and state the alveolar PCO2.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Dry atmospheric air has a PO2 of 159 mm Hg with a PCO2 of essentially 0. As air is inspired and fully humidified in the airways, added water vapor dilutes the gas and lowers PO2 to 149 mm Hg while PCO2 stays 0. The fall reflects the partial pressure contributed by water vapor at body temperature, before any gas exchange has occurred.' },
@@ -6656,7 +6656,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Explain what happens to oxygen partial pressure and content when blood contains no red cells, using the slide example, and why this proves hemoglobin is essential.',
+    prompt: 'Explain what happens to oxygen partial pressure and content when blood contains no red cells, using The example, and why this proves hemoglobin is essential.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Even without red blood cells, a small amount of oxygen still diffuses from the alveolus into the plasma until the plasma PO2 equilibrates with the alveolar value (around 100 to 104 mm Hg). Partial pressure is therefore maintained because dissolved gas equilibrates by simple diffusion down its gradient and does not depend on hemoglobin.' },
@@ -6681,7 +6681,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Describe the carbon dioxide partial pressure gradient across the tissue (systemic) capillary using the slide values.',
+    prompt: 'Describe the carbon dioxide partial pressure gradient across the tissue (systemic) capillary using The values.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Carbon dioxide is produced inside cells, so the intracellular PCO2 is highest at about 46 mm Hg. It diffuses down its gradient into the interstitial fluid, which sits at about 45 mm Hg, and then into the capillary blood. The direction of net CO2 movement is therefore from cell to interstitium to blood, the reverse of oxygen.' },
@@ -6710,7 +6710,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Tissue PCO2 reflects the balance between CO2 production by metabolism and CO2 removal by blood flow. If metabolism increases while blood flow stays constant, CO2 accumulates faster than it can be washed away and tissue PCO2 rises. At ten times normal metabolism the interstitial PCO2 curve sits far higher than at normal or one fourth normal metabolism.' },
-        { id: 'kp2', weight: 2, description: 'Increasing blood flow clears CO2 more effectively and drives tissue PCO2 down toward the arterial value. The graph shows a lower limit of infinite blood flow near 40 mm Hg, meaning that no matter how high flow rises, tissue PCO2 cannot fall below the incoming arterial PCO2 of about 40 mm Hg. This mirrors the oxygen delivery curve but in the opposite direction.' },
+        { id: 'kp2', weight: 2, description: 'Increasing blood flow clears CO2 more effectively and drives tissue PCO2 down toward the arterial value. A lower limit of infinite blood flow near 40 mm Hg, meaning that no matter how high flow rises, tissue PCO2 cannot fall below the incoming arterial PCO2 of about 40 mm Hg. This mirrors the oxygen delivery curve but in the opposite direction.' },
       ],
       common_errors: [
         'Thinking higher metabolism lowers tissue PCO2',
@@ -6731,7 +6731,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Explain how exercise improves pulmonary oxygen uptake despite a shorter capillary transit time, listing the mechanisms from the slide.',
+    prompt: 'Explain how exercise improves pulmonary oxygen uptake despite a shorter capillary transit time, listing the mechanisms.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'During exercise cardiac output increases, which shortens the time each red cell spends in the pulmonary capillary (decreased transit time). At the same time diffusing capacity increases because previously closed pulmonary capillaries open up (recruitment) and ventilation perfusion matching improves across the lung, expanding the surface area available for gas exchange.' },
@@ -6756,7 +6756,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'List the three ways the body can increase oxygen delivery to tissue from the slide and explain how each works.',
+    prompt: 'List the three ways the body can increase oxygen delivery to tissue and explain how each works.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The first two strategies are increased blood flow and increased oxygen extraction. Because delivery equals oxygen content times blood flow, raising cardiac output (for example from 5000 to 20000 mL per minute) multiplies the oxygen presented to the tissues. Increased extraction means the tissues pull a larger fraction of oxygen off the hemoglobin, lowering venous oxygen content and widening the arteriovenous oxygen difference.' },
@@ -6806,7 +6806,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'List the five causes of hypoxemia from the slides, group them by alveolar to arterial oxygen difference, and identify which is most common.',
+    prompt: 'List the five causes of hypoxemia, group them by alveolar to arterial oxygen difference, and identify which is most common.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The five causes of hypoxemia are hypoventilation, decreased barometric pressure (such as high altitude), right to left shunt, ventilation perfusion (V/Q) mismatch, and diffusion limitation. They can be grouped by their effect on the alveolar to arterial oxygen difference: hypoventilation and low barometric pressure leave the A-a difference normal, while shunt, V/Q mismatch, and diffusion limitation widen it.' },
@@ -6934,7 +6934,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'Describe how the neural control of respiration integrates its inputs: name the three streams of input that converge on the central cycle of inspiration and expiration, give the categories of reflex input, and state where the final motor output is directed.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The central cycle of inspiration and expiration in the brainstem is driven by three converging input streams shown on the overview diagram. First, influences descend from higher centers such as the cortex. Second, chemoreceptor input arrives from both the arterial peripheral chemoreceptors and the central chemoreceptors. Third, a broad set of reflexes feeds in. These inputs are integrated each breath to set rate and depth, and the integrated command is then sent onward to the muscles of breathing as the motor output.' },
+        { id: 'kp1', weight: 2, description: 'The central cycle of inspiration and expiration in the brainstem is driven by three converging input streams feeding the center. First, influences descend from higher centers such as the cortex. Second, chemoreceptor input arrives from both the arterial peripheral chemoreceptors and the central chemoreceptors. Third, a broad set of reflexes feeds in. These inputs are integrated each breath to set rate and depth, and the integrated command is then sent onward to the muscles of breathing as the motor output.' },
         { id: 'kp2', weight: 2, description: 'The reflex input stream comes from several body regions: the lungs and airways supply stretch, irritant, and J receptor signals; the cardiovascular system supplies baroreceptor and chemoreceptor signals; and the muscles, joints, and skin supply mechanoreceptor and proprioceptive signals. By blending higher center drive, chemical feedback, and these mechanical and reflex signals, the respiratory center can match ventilation to both conscious demands and the metabolic and mechanical state of the body.' },
       ],
       common_errors: [
@@ -6956,11 +6956,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Using the respiratory center anatomy figure, describe how sensory information reaches the dorsal respiratory group and how motor commands leave the medullary center, naming the relevant nerves and pathways.',
+    prompt: 'Using the respiratory center anatomy, describe how sensory information reaches the dorsal respiratory group and how motor commands leave the medullary center, naming the relevant nerves and pathways.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Afferent or sensory signals travel to the dorsal respiratory group mainly through the vagus and glossopharyngeal nerves. These cranial nerves carry information from peripheral sensors including the lung stretch, irritant, and J receptors and the peripheral chemoreceptors in the carotid and aortic bodies. They terminate in the region of the dorsal respiratory group, which lies near the tractus solitarius in the medulla, so that this group serves as the main receiving station for reflex respiratory input.' },
-        { id: 'kp2', weight: 2, description: 'Motor output leaves the medullary respiratory center along respiratory motor pathways that descend to the spinal cord and ultimately drive the phrenic nerve to the diaphragm and the intercostal nerves to the chest wall muscles. Thus the figure separates the incoming cranial nerve afferents, the vagus and glossopharyngeal, from the outgoing respiratory motor pathways, emphasizing that the medulla both receives reflex input and issues the commands that produce each breath.' },
+        { id: 'kp2', weight: 2, description: 'Motor output leaves the medullary respiratory center along respiratory motor pathways that descend to the spinal cord and ultimately drive the phrenic nerve to the diaphragm and the intercostal nerves to the chest wall muscles. This separates the incoming cranial nerve afferents, the vagus and glossopharyngeal, from the outgoing respiratory motor pathways, emphasizing that the medulla both receives reflex input and issues the commands that produce each breath.' },
       ],
       common_errors: [
         'Naming the phrenic or intercostal nerves as the afferents to the dorsal respiratory group when they are motor outputs',
@@ -6984,7 +6984,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'Describe the apneustic center: where it is located, the effect it would have on breathing if left unopposed, and how it is normally controlled by another pontine center.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The apneustic center is located in the lower pons and is marked with a question mark on the figure because its exact role in humans is uncertain. When unopposed, as in some experimental brainstem lesions, it promotes apneustic breathing, a pattern of prolonged sustained inspiratory gasps with only brief expirations. This reflects an excitatory drive that prevents the normal switch from inspiration to expiration, holding the lungs in a deeply inflated state.' },
+        { id: 'kp1', weight: 2, description: 'The apneustic center is located in the lower pons and is marked with a question mark because its exact role in humans is uncertain. When unopposed, as in some experimental brainstem lesions, it promotes apneustic breathing, a pattern of prolonged sustained inspiratory gasps with only brief expirations. This reflects an excitatory drive that prevents the normal switch from inspiration to expiration, holding the lungs in a deeply inflated state.' },
         { id: 'kp2', weight: 2, description: 'Under normal conditions the apneustic center is held in check by the pneumotaxic center, which sits in the upper pons and inhibits it. The pneumotaxic center also shortens the inspiratory ramp from the dorsal respiratory group, and together these influences allow inspiration to terminate normally. Because the pneumotaxic center inhibits the apneustic center, loss of pneumotaxic input can release apneustic breathing, linking the two pontine centers in opposing roles.' },
       ],
       common_errors: [
@@ -7181,10 +7181,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Explain the interrelated effects of PCO2, PO2, and pH on alveolar ventilation as shown in the composite diagram, focusing on how oxygen and pH modify the carbon dioxide response.',
+    prompt: 'Explain the interrelated effects of PCO2, PO2, and pH on alveolar ventilation , focusing on how oxygen and pH modify the carbon dioxide response.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The composite diagram shows that the ventilatory response to carbon dioxide is not fixed but is modified by the simultaneous levels of oxygen and pH. As PCO2 rises, alveolar ventilation increases along a carbon dioxide response curve. When the PO2 is lowered, each of these curves becomes steeper and is shifted, so that any given PCO2 now drives a larger ventilation. Low oxygen therefore potentiates or sensitizes the response to carbon dioxide rather than acting only on its own.' },
+        { id: 'kp1', weight: 2, description: 'the composite curves shows that the ventilatory response to carbon dioxide is not fixed but is modified by the simultaneous levels of oxygen and pH. As PCO2 rises, alveolar ventilation increases along a carbon dioxide response curve. When the PO2 is lowered, each of these curves becomes steeper and is shifted, so that any given PCO2 now drives a larger ventilation. Low oxygen therefore potentiates or sensitizes the response to carbon dioxide rather than acting only on its own.' },
         { id: 'kp2', weight: 2, description: 'Lowering the pH, for example from 7.4 to 7.3, similarly shifts the family of curves toward greater ventilation, reflecting added stimulation from acidosis. The practical message is that the three chemical stimuli interact: hypoxia and acidosis both amplify the drive produced by a given carbon dioxide level. This explains why a patient who is simultaneously hypoxic and acidotic ventilates far more at a given PCO2 than one with normal oxygen and pH.' },
       ],
       common_errors: [
@@ -7209,8 +7209,8 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'Describe how different physiological and pharmacological conditions shift the carbon dioxide response curve, contrasting the condition that increases ventilation with those that depress it.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The carbon dioxide response curve plots alveolar ventilation against PCO2, and its position changes with the subject state. Metabolic acidosis shifts the curve up and to the left of normal, so ventilation is greater at any given PCO2; this reflects the body increasing ventilation to blow off carbon dioxide and partially correct the low pH. Metabolic acidosis is therefore the condition on the slide that raises the ventilatory response to carbon dioxide.' },
-        { id: 'kp2', weight: 2, description: 'Several states depress the curve, shifting it down and to the right so that ventilation is lower at any given PCO2. Sleep causes mild depression, narcotics cause greater depression, and anesthesia depresses the response the most, lying lowest on the graph. This ordering shows a spectrum of respiratory depression and explains why sedatives, opioids, and anesthetics blunt the protective increase in breathing that a rising carbon dioxide would normally cause.' },
+        { id: 'kp1', weight: 2, description: 'The carbon dioxide response curve plots alveolar ventilation against PCO2, and its position changes with the subject state. Metabolic acidosis shifts the curve up and to the left of normal, so ventilation is greater at any given PCO2; this reflects the body increasing ventilation to blow off carbon dioxide and partially correct the low pH. Metabolic acidosis is therefore the condition that raises the ventilatory response to carbon dioxide.' },
+        { id: 'kp2', weight: 2, description: 'Several states depress the curve, shifting it down and to the right so that ventilation is lower at any given PCO2. Sleep causes mild depression, narcotics cause greater depression, and anesthesia depresses the response the most. This ordering shows a spectrum of respiratory depression and explains why sedatives, opioids, and anesthetics blunt the protective increase in breathing that a rising carbon dioxide would normally cause.' },
       ],
       common_errors: [
         'Thinking all listed conditions depress the curve and forgetting that metabolic acidosis increases ventilation',
@@ -7235,7 +7235,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'When ventilation is plotted against arterial PCO2, the exercise curve sits far above the resting curve. At a normal arterial PCO2 of about 40 mmHg, the resting curve gives only a few liters per minute of ventilation, whereas the exercise curve gives a much higher value, on the order of 120 liters per minute. The entire relationship is shifted upward, so ventilation is high even though PCO2 remains near its normal resting value.' },
-        { id: 'kp2', weight: 2, description: 'This upward reset means the large rise in ventilation during exercise cannot be explained by a rise in PCO2, because PCO2 stays near normal or even falls slightly. Instead the curve is moved by other drivers such as cortical overflow, signals from moving muscles and joints, and increased body temperature. The graph therefore demonstrates that exercise hyperpnea is driven largely by neurogenic and feedforward factors rather than by a chemical change in arterial carbon dioxide.' },
+        { id: 'kp2', weight: 2, description: 'This upward reset means the large rise in ventilation during exercise cannot be explained by a rise in PCO2, because PCO2 stays near normal or even falls slightly. Instead the curve is moved by other drivers such as cortical overflow, signals from moving muscles and joints, and increased body temperature. This therefore shows that exercise hyperpnea is driven largely by neurogenic and feedforward factors rather than by a chemical change in arterial carbon dioxide.' },
       ],
       common_errors: [
         'Concluding that PCO2 must rise during exercise to drive the higher ventilation',
@@ -7256,7 +7256,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List and explain the additional, nonchemoreceptor factors that influence respiration covered on the other factors slide, including voluntary control, the vasomotor center, and body temperature.',
+    prompt: 'List and explain the additional, nonchemoreceptor factors that influence respiration covered on the other factors, including voluntary control, the vasomotor center, and body temperature.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Breathing can be modified by voluntary control, in which higher cortical centers consciously override the automatic brainstem rhythm for a limited time, as during breath holding, speaking, or hyperventilating on purpose. Activity from the vasomotor center, a primarily cardiovascular brainstem region, can also influence respiration, reflecting the close anatomical and functional linkage between cardiovascular and respiratory control in the brainstem.' },
@@ -7281,14 +7281,14 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Distinguish maximum expiratory flow rate from peak expiratory flow rate as defined on the slides, including the exact timing window for PEFR and the lung volume endpoints of the Figure 43-1 flow curve.',
+    prompt: 'Distinguish maximum expiratory flow rate from peak expiratory flow rate, including the exact timing window for PEFR and the lung volume endpoints of the flow curve.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Maximum expiratory flow rate, MEFR, is the greatest amount of flow that can be achieved during a forceful expiration from lungs filled to a given volume. It is read off the maximum expiratory flow curve of Figure 43-1, which plots expiratory airflow in liters per minute against lung volume. That curve rises steeply from total lung capacity on the left, peaks near 400 liters per minute, then declines to zero at residual volume on the right, so the whole curve spans from total lung capacity down to residual volume.' },
-        { id: 'kp2', weight: 2, description: 'Peak expiratory flow rate, PEFR, is the single maximum expiratory flow rate measured during the first 100 to 120 milliseconds of a forceful expiration that begins from completely full lungs. It is the labeled PEF point at the top of the same Figure 43-1 curve. The key contrast is that MEFR is a flow defined at any given lung volume, whereas PEFR is specifically the highest flow occurring in that brief early window from full inflation.' },
+        { id: 'kp1', weight: 2, description: 'Maximum expiratory flow rate, MEFR, is the greatest amount of flow that can be achieved during a forceful expiration from lungs filled to a given volume. It is read off the maximum expiratory flow curve , which plots expiratory airflow in liters per minute against lung volume. That curve rises steeply from total lung capacity on the left, peaks near 400 liters per minute, then declines to zero at residual volume on the right, so the whole curve spans from total lung capacity down to residual volume.' },
+        { id: 'kp2', weight: 2, description: 'Peak expiratory flow rate, PEFR, is the single maximum expiratory flow rate measured during the first 100 to 120 milliseconds of a forceful expiration that begins from completely full lungs. It is the peak of the same maximum expiratory flow curve. The key contrast is that MEFR is a flow defined at any given lung volume, whereas PEFR is specifically the highest flow occurring in that brief early window from full inflation.' },
       ],
       common_errors: [
-        'Saying PEFR is measured over the first full second; the slide specifies 100 to 120 milliseconds.',
+        'Saying PEFR is measured over the first full second; 100 to 120 milliseconds.',
         'Claiming PEFR can start from any lung volume; it begins from completely full lungs.',
         'Misplacing the curve endpoints, for example starting at functional residual capacity instead of total lung capacity.',
       ],
@@ -7306,14 +7306,14 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'State the two main categories of pulmonary pathology on the slides with the one-line mechanism and usual site for each, and explain the slide note that the two can occur together.',
+    prompt: 'State the two main categories of pulmonary pathology with the one-line mechanism and usual site for each, and explain the two can occur together.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides divide pulmonary pathology into two main categories. Obstructive disease means increased resistance to airflow, most often from problems with the conducting airways, especially the bronchioles. Restrictive disease means decreased expansion of the lungs, most often because the lungs or the surrounding tissues are stiff or rigid. These are defined by opposite core problems, moving air through the airways versus expanding the lung.' },
-        { id: 'kp2', weight: 2, description: 'The slide ends with the explicit reminder that someone can have both obstructive and restrictive disease at the same time. The two categories are not mutually exclusive, so a single patient may simultaneously have narrowed high resistance airways and stiff poorly expanding lungs. Recognizing this overlap prevents the error of forcing every case into one box and explains mixed spirometry patterns.' },
+        { id: 'kp1', weight: 2, description: 'pulmonary pathology divide into two main categories. Obstructive disease means increased resistance to airflow, most often from problems with the conducting airways, especially the bronchioles. Restrictive disease means decreased expansion of the lungs, most often because the lungs or the surrounding tissues are stiff or rigid. These are defined by opposite core problems, moving air through the airways versus expanding the lung.' },
+        { id: 'kp2', weight: 2, description: 'Someone can have both obstructive and restrictive disease at the same time. The two categories are not mutually exclusive, so a single patient may simultaneously have narrowed high resistance airways and stiff poorly expanding lungs. Recognizing this overlap prevents the error of forcing every case into one box and explains mixed spirometry patterns.' },
       ],
       common_errors: [
-        'Treating obstructive and restrictive as mutually exclusive when the slide says they can coexist.',
+        'Treating obstructive and restrictive as mutually exclusive since they can coexist.',
         'Swapping the mechanisms, for example calling restrictive disease an airway resistance problem.',
         'Forgetting that obstruction is centered on the conducting airways, especially the bronchioles.',
       ],
@@ -7331,10 +7331,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List the factors that increase resistance to airflow as grouped on the Increased Resistance to Flow slide, organized by whether the lumen is blocked, the lumen is narrowed, or the cause is outside the airway.',
+    prompt: 'List the factors that increase resistance to airflow organized by whether the lumen is blocked, the lumen is narrowed, or the cause is outside the airway.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide groups intraluminal causes into two buckets. The lumen being blocked is caused by excessive secretions and by obstruction due to aspiration. The lumen being narrowed is caused by contraction of smooth muscle in the airway walls and by hypertrophy of the bronchial wall. Both buckets reduce the effective cross section of the airway and thereby raise resistance to airflow.' },
+        { id: 'kp1', weight: 2, description: 'Intraluminal causes into two buckets. The lumen being blocked is caused by excessive secretions and by obstruction due to aspiration. The lumen being narrowed is caused by contraction of smooth muscle in the airway walls and by hypertrophy of the bronchial wall. Both buckets reduce the effective cross section of the airway and thereby raise resistance to airflow.' },
         { id: 'kp2', weight: 2, description: 'The third group is a cause outside of the airways, namely destruction of lung parenchyma. Normally the lung parenchyma pulls outward on the walls of adjacent airways, holding them open. When parenchyma is destroyed, this outward radial traction is lost, the airways tend to collapse, and resistance rises even though nothing is inside or in the wall of the airway itself.' },
       ],
       common_errors: [
@@ -7356,10 +7356,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe how the airway obstruction and restrictive curves are positioned on the Figure 43-2 maximum expiratory flow volume diagram relative to the normal curve, and explain what the shifts mean given the volume axis orientation.',
+    prompt: 'Describe how the airway obstruction and restrictive curves are positioned on the maximum expiratory flow volume diagram relative to the normal curve, and explain what the shifts mean given the volume axis orientation.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'On Figure 43-2 the horizontal axis is lung volume, plotted with high volume on the left and low volume on the right, near total lung capacity and residual volume markers. The airway obstruction curve is shifted to the left, sitting at higher lung volumes, because air is trapped and the lung is hyperinflated. Its peak flow is also much lower than normal, reflecting the high resistance to airflow.' },
+        { id: 'kp1', weight: 2, description: 'The horizontal axis is lung volume, plotted with high volume on the left and low volume on the right, near total lung capacity and residual volume markers. The airway obstruction curve is shifted to the left, sitting at higher lung volumes, because air is trapped and the lung is hyperinflated. Its peak flow is also much lower than normal, reflecting the high resistance to airflow.' },
         { id: 'kp2', weight: 2, description: 'The restrictive curve, which Guyton labels constricted lungs, is shifted to the right, sitting at smaller lung volumes, because the stiff lung cannot expand to normal total lung capacity. It is a miniaturized version of the normal curve. So obstruction shifts left toward larger volumes while restriction shifts right toward smaller volumes, a direct visual contrast on the same diagram.' },
       ],
       common_errors: [
@@ -7381,7 +7381,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe the flow volume loop findings for obstructive versus restrictive disease as taught on the detailed Flow-Volume Loops slide, including loop direction, relative volumes, and the FEV1 to FVC relationship.',
+    prompt: 'Describe the flow volume loop findings for obstructive versus restrictive disease including loop direction, relative volumes, and the FEV1 to FVC relationship.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The obstructive loop shifts to the left, meaning toward higher lung volumes on the volume axis, and its volumes are greater than normal because air is trapped. FEV1 decreases more than FVC, so the FEV1/FVC ratio is lowered. The expiratory limb is scooped with a reduced peak flow because air leaves slowly through narrowed airways, and air trapping raises the residual volume.' },
@@ -7406,15 +7406,15 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Using the Figure 43-3 slide, define forced vital capacity and forced expiratory volume in one second, give the normal and obstructed FEV1/FVC percentages, and state how obstruction changes the time to exhale.',
+    prompt: 'Define forced vital capacity and forced expiratory volume in one second, give the normal and obstructed FEV1/FVC percentages, and state how obstruction changes the time to exhale.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Forced vital capacity, FVC, is the total amount of air a person can force out of the lungs after a maximal inhalation. Forced expiratory volume in one second, FEV1, is the amount of that air forced out in the first one second after a maximal inhalation. FEV1 is therefore a subset of FVC, capturing how much of the vital capacity leaves in the opening second of a forced exhale.' },
-        { id: 'kp2', weight: 2, description: 'In the normal panel of Figure 43-3 the FEV1/FVC percentage is 80%, whereas in the airway obstruction panel it falls to 47%. The slide explains that it takes longer to get the air out when there is obstruction, so a smaller fraction of the total volume escapes in the first second. The total FVC may eventually be exhaled but over a prolonged time, which is what lowers the ratio.' },
+        { id: 'kp2', weight: 2, description: 'In the normal panel  the FEV1/FVC percentage is 80%, whereas in the airway obstruction panel it falls to 47%. It takes longer to get the air out when there is obstruction, so a smaller fraction of the total volume escapes in the first second. The total FVC may eventually be exhaled but over a prolonged time, which is what lowers the ratio.' },
       ],
       common_errors: [
         'Confusing FEV1 and FVC, for example calling FVC the one second volume.',
-        'Misremembering the figure values; normal is 80% and obstructed is 47%.',
+        'Misremembering the values; normal is 80% and obstructed is 47%.',
         'Saying obstruction speeds up exhalation when it actually prolongs the time to empty the lungs.',
       ],
       minimum_passing_score: 60,
@@ -7431,16 +7431,16 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Define COPD as taught on the slides, stating the nature and time course of the lung damage, its effect on exhalation, and naming its two main types and whether they can coexist.',
+    prompt: 'Define COPD as taught, stating the nature and time course of the lung damage, its effect on exhalation, and naming its two main types and whether they can coexist.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'COPD, chronic obstructive pulmonary disease, is defined on the slide as a group of disorders involving progressive, longterm, permanent damage to lung tissue that results in air being trapped in the lungs during exhalation. The emphasis is that the damage is permanent and progressive, not reversible, which separates COPD from the reversible obstruction of asthma.' },
-        { id: 'kp2', weight: 2, description: 'The slide states there are two main types of COPD, chronic bronchitis and emphysema, and that a person can have both of these at the same time. Chronic bronchitis is centered on longterm inflammation and narrowing of the bronchi, while emphysema is centered on permanent destruction of the elastic tissue of the alveoli; together they produce the air trapping that defines the disease group.' },
+        { id: 'kp1', weight: 2, description: 'COPD, chronic obstructive pulmonary disease, is as a group of disorders involving progressive, longterm, permanent damage to lung tissue that results in air being trapped in the lungs during exhalation. The emphasis is that the damage is permanent and progressive, not reversible, which separates COPD from the reversible obstruction of asthma.' },
+        { id: 'kp2', weight: 2, description: 'There are two main types of COPD, chronic bronchitis and emphysema, and that a person can have both of these at the same time. Chronic bronchitis is centered on longterm inflammation and narrowing of the bronchi, while emphysema is centered on permanent destruction of the elastic tissue of the alveoli; together they produce the air trapping that defines the disease group.' },
       ],
       common_errors: [
-        'Describing COPD damage as reversible; the slide stresses it is progressive and permanent.',
+        'Describing COPD damage as reversible; it is progressive and permanent.',
         'Naming only one type, or adding asthma as a third type of COPD.',
-        'Saying the two types cannot coexist when the slide says a person can have both.',
+        'Saying the two types cannot coexist since a person can have both.',
       ],
       minimum_passing_score: 60,
     },
@@ -7456,11 +7456,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Explain the structural change to the alveoli in emphysema shown on the histology slides, and link it to the loss of elasticity and surface area and to obstruction with air trapping.',
+    prompt: 'Explain the structural change to the alveoli in emphysema and link it to the loss of elasticity and surface area and to obstruction with air trapping.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'In emphysema the lung parenchyma is lost and the alveoli merge into fewer large pockets of air instead of many small ones. The Figure 43-4 and Figure 43-5 images show this as confluent alveoli, large empty spaces replacing the fine normal honeycomb. The destruction is often driven by infection and secretions damaging the elastic connective tissue of the alveolar walls.' },
-        { id: 'kp2', weight: 2, description: 'Merging of alveoli into large pockets has two direct consequences emphasized on the slide. There is less elasticity because the elastic tissue that recoils to push air out is destroyed, and there is less surface area for gas exchange. Combined with loss of parenchymal traction this produces obstruction and trapping of air during exhalation, the hallmark of the emphysematous lung.' },
+        { id: 'kp1', weight: 2, description: 'In emphysema the lung parenchyma is lost and the alveoli merge into fewer large pockets of air instead of many small ones. Histology shows this as confluent alveoli, large empty spaces replacing the fine normal honeycomb. The destruction is often driven by infection and secretions damaging the elastic connective tissue of the alveolar walls.' },
+        { id: 'kp2', weight: 2, description: 'Merging of alveoli into large pockets has two direct consequences emphasized. There is less elasticity because the elastic tissue that recoils to push air out is destroyed, and there is less surface area for gas exchange. Combined with loss of parenchymal traction this produces obstruction and trapping of air during exhalation, the hallmark of the emphysematous lung.' },
       ],
       common_errors: [
         'Saying alveoli multiply or regenerate; they merge into fewer larger spaces.',
@@ -7481,10 +7481,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe the barrel chest finding on the slides, stating which chest dimension changes, the direction of the change, and the underlying process in chronic obstructive disease that produces it.',
+    prompt: 'Describe the barrel chest finding, stating which chest dimension changes, the direction of the change, and the underlying process in chronic obstructive disease that produces it.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The Barrel Chest slide contrasts a normal adult thorax with a barrel chest, showing cross sections. In the normal adult the chest is wider side to side than front to back. In the barrel chest the anteroposterior, front to back, diameter is increased so the cross section becomes more rounded, like a barrel. The change is in the front to back dimension of the rib cage.' },
+        { id: 'kp1', weight: 2, description: 'A barrel chest is contrasted with a normal adult thorax in cross section. In the normal adult the chest is wider side to side than front to back. In the barrel chest the anteroposterior, front to back, diameter is increased so the cross section becomes more rounded, like a barrel. The change is in the front to back dimension of the rib cage.' },
         { id: 'kp2', weight: 2, description: 'The barrel chest develops in chronic obstructive disease such as emphysema because air is chronically trapped and the lungs stay hyperinflated. The rib cage is held in a more expanded inspiratory position over time, permanently enlarging the anteroposterior diameter. It is therefore a physical sign of longstanding air trapping, distinct from spinal curvature deformities such as kyphosis.' },
       ],
       common_errors: [
@@ -7506,16 +7506,16 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List the three main physiological features of an asthma attack as named on the slide, the common triggers, and the listed symptoms, noting that asthma obstruction is reversible.',
+    prompt: 'List the three main physiological features of an asthma attack as named, the common triggers, and the listed symptoms, noting that asthma obstruction is reversible.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide names three main physiological features of asthma: bronchial smooth muscle contraction, bronchial soft tissue swelling, and mucus overproduction with plugging. Together these narrow the bronchial airways from three directions, the muscle squeezing the wall, the inflamed wall thickening, and mucus filling the lumen, which is why an asthma attack produces marked airflow obstruction.' },
-        { id: 'kp2', weight: 2, description: 'Common irritants listed include smoke, pollen, mold, pet dander, dust, chemicals, very cold temperature, emotions, and exercise. Symptoms listed are shortness of breath, wheeze, cough, and tightness in the chest. Crucially the slide labels asthma as reversible, so unlike the permanent damage of COPD the narrowing can resolve, especially during acute exacerbations.' },
+        { id: 'kp1', weight: 2, description: 'Three main physiological features of asthma: bronchial smooth muscle contraction, bronchial soft tissue swelling, and mucus overproduction with plugging. Together these narrow the bronchial airways from three directions, the muscle squeezing the wall, the inflamed wall thickening, and mucus filling the lumen, which is why an asthma attack produces marked airflow obstruction.' },
+        { id: 'kp2', weight: 2, description: 'Common irritants listed include smoke, pollen, mold, pet dander, dust, chemicals, very cold temperature, emotions, and exercise. Symptoms listed are shortness of breath, wheeze, cough, and tightness in the chest. Crucially asthma is reversible, so unlike the permanent damage of COPD the narrowing can resolve, especially during acute exacerbations.' },
       ],
       common_errors: [
         'Listing alveolar destruction or capillary loss, which belong to emphysema, as features of asthma.',
         'Omitting one of the three features, especially mucus plugging or soft tissue swelling.',
-        'Calling asthma obstruction permanent; the slide stresses it is reversible.',
+        'Calling asthma obstruction permanent; it is reversible.',
       ],
       minimum_passing_score: 60,
     },
@@ -7531,16 +7531,16 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Explain the reversibility of asthma as taught on the second Asthma slide, contrasting acute exacerbations with severe long-term disease, and state how this relates to its place among obstructive diseases.',
+    prompt: 'Explain the reversibility of asthma contrasting acute exacerbations with severe long-term disease, and state how this relates to its place among obstructive diseases.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide states that asthma is considered reversible airway obstruction, and that acute exacerbations are typically fully reversible. This reversibility is the defining feature that distinguishes asthma from the permanent damage of COPD; after the trigger resolves or a bronchodilator is given, the narrowed airways open back up and airflow returns toward normal.' },
-        { id: 'kp2', weight: 2, description: 'The slide adds the caveat that technically irreversible chronic changes may also occur due to the chronic inflammation in long-term severe asthma. So while the typical acute episode reverses, repeated severe inflammation over years can produce some fixed airway remodeling, blurring the line between asthma and COPD in the most severe chronic cases.' },
+        { id: 'kp1', weight: 2, description: 'Asthma is considered reversible airway obstruction, and that acute exacerbations are typically fully reversible. This reversibility is the defining feature that distinguishes asthma from the permanent damage of COPD; after the trigger resolves or a bronchodilator is given, the narrowed airways open back up and airflow returns toward normal.' },
+        { id: 'kp2', weight: 2, description: 'The caveat that technically irreversible chronic changes may also occur due to the chronic inflammation in long-term severe asthma. So while the typical acute episode reverses, repeated severe inflammation over years can produce some fixed airway remodeling, blurring the line between asthma and COPD in the most severe chronic cases.' },
       ],
       common_errors: [
         'Stating asthma is always fully and permanently reversible, ignoring the long-term remodeling caveat.',
         'Confusing the reversible acute exacerbation with the fixed changes of severe chronic asthma.',
-        'Calling asthma irreversible like COPD, which contradicts the slide emphasis on reversibility.',
+        'Calling asthma irreversible like COPD, which contradicts asthma reversibility.',
       ],
       minimum_passing_score: 60,
     },
@@ -7556,11 +7556,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'State how restrictive disease changes total lung capacity, vital capacity, airway resistance, and the FEV1/FVC ratio according to the Restrictive Diseases lung-volumes slide, and explain why the ratio behaves that way.',
+    prompt: 'State how restrictive disease changes total lung capacity, vital capacity, airway resistance, and the FEV1/FVC ratio and explain why the ratio behaves that way.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide states restrictive disease causes decreased expansion of the lungs, which reduces the total lung capacity and reduces the vital capacity. Because the lungs cannot fully expand, all of the static lung volumes are scaled down. This is the defining physiology of restriction, a smaller container, in contrast to obstruction where volumes are often increased by air trapping.' },
-        { id: 'kp2', weight: 2, description: 'The slide notes that restrictive disease may still have normal resistance and a normal FEV1/FVC ratio. Since the airways themselves are not narrowed, resistance stays normal, and because FEV1 and FVC fall together in proportion, their ratio is preserved. A normal or even elevated FEV1/FVC ratio with reduced volumes is the spirometric signature that points to restriction rather than obstruction.' },
+        { id: 'kp1', weight: 2, description: 'Restrictive disease causes decreased expansion of the lungs, which reduces the total lung capacity and reduces the vital capacity. Because the lungs cannot fully expand, all of the static lung volumes are scaled down. This is the defining physiology of restriction, a smaller container, in contrast to obstruction where volumes are often increased by air trapping.' },
+        { id: 'kp2', weight: 2, description: 'Restrictive disease may still have normal resistance and a normal FEV1/FVC ratio. Since the airways themselves are not narrowed, resistance stays normal, and because FEV1 and FVC fall together in proportion, their ratio is preserved. A normal or even elevated FEV1/FVC ratio with reduced volumes is the spirometric signature that points to restriction rather than obstruction.' },
       ],
       common_errors: [
         'Reporting a reduced FEV1/FVC ratio in restriction; it is preserved because both values fall together.',
@@ -7581,10 +7581,10 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List the intrinsic restrictive lung diseases on the Restrictive Diseases examples slide and give the characteristic feature or cause noted for each.',
+    prompt: 'List the intrinsic restrictive lung diseases and give the characteristic feature or cause noted for each.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide groups intrinsic restrictive diseases as those arising within the lung tissue itself. Diffuse interstitial pulmonary fibrosis is characterized by thick collagen deposits in the interstitium. Sarcoidosis is characterized by chronic inflammatory granulomas. These intrinsic processes stiffen the lung parenchyma directly, reducing its ability to expand.' },
+        { id: 'kp1', weight: 2, description: 'Intrinsic restrictive diseases as those arising within the lung tissue itself. Diffuse interstitial pulmonary fibrosis is characterized by thick collagen deposits in the interstitium. Sarcoidosis is characterized by chronic inflammatory granulomas. These intrinsic processes stiffen the lung parenchyma directly, reducing its ability to expand.' },
         { id: 'kp2', weight: 2, description: 'Asbestosis and silicosis are listed together as intrinsic restrictive diseases caused by tissue scarring due to chronic exposure to irritants, the inhaled mineral dusts of asbestos and silica. Like fibrosis and sarcoidosis, they replace compliant lung with stiff scarred tissue, so the common thread among the intrinsic group is direct stiffening or scarring of the lung itself.' },
       ],
       common_errors: [
@@ -7606,7 +7606,7 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'List the extrinsic restrictive causes on the Restrictive Diseases examples slide and explain how each restricts the lungs from outside, including the specific neuromuscular diseases named.',
+    prompt: 'List the extrinsic restrictive causes and explain how each restricts the lungs from outside, including the specific neuromuscular diseases named.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Extrinsic restrictive causes act from outside the lung tissue, limiting chest or lung expansion mechanically or neuromuscularly. Pneumothorax causes collapse of the lung due to pressure changes as air enters the pleural space. Kyphosis and scoliosis are posture changes that affect expansion of the chest wall. Obesity hypoventilation syndrome adds external weight that restricts ventilation.' },
@@ -7614,7 +7614,7 @@ export const RECALL_QUESTIONS_ATOMS = [
       ],
       common_errors: [
         'Listing fibrosis, sarcoidosis, or asbestosis as extrinsic; those are intrinsic lung diseases.',
-        'Naming the wrong neuromuscular diseases; the slide lists ALS, muscular dystrophy, and myasthenia gravis.',
+        'Naming the wrong neuromuscular diseases; ALS, muscular dystrophy, and myasthenia gravis.',
         'Forgetting pneumothorax and obesity hypoventilation as extrinsic restrictive causes.',
       ],
       minimum_passing_score: 60,
@@ -7631,15 +7631,15 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe pneumothorax causes and symptoms on the slide, including the usual mechanism, the spontaneous variant and the association under study, and why both lungs do not collapse together.',
+    prompt: 'Describe pneumothorax causes and symptoms, including the usual mechanism, the spontaneous variant and the association under study, and why both lungs do not collapse together.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slide defines pneumothorax as air leaking into the pleural cavity, causing part of the lung to collapse due to pressure changes. It is usually caused by penetrating trauma to the chest but can also occur spontaneously. The slide notes current research into an association between vaping and the risk of a spontaneous pneumothorax. Listed symptoms are sudden sharp chest pain and shortness of breath.' },
-        { id: 'kp2', weight: 2, description: 'The slide explains that, fortunately, the two sides of the pleural cavity are separate, so a pneumothorax on one side does not spread to the other. Otherwise both lungs would collapse together. This independence of the right and left pleural spaces is why a unilateral pneumothorax collapses only the affected lung while the opposite lung continues to ventilate.' },
+        { id: 'kp1', weight: 2, description: 'Pneumothorax as air leaking into the pleural cavity, causing part of the lung to collapse due to pressure changes. It is usually caused by penetrating trauma to the chest but can also occur spontaneously. Current research into an association between vaping and the risk of a spontaneous pneumothorax. Listed symptoms are sudden sharp chest pain and shortness of breath.' },
+        { id: 'kp2', weight: 2, description: 'That, fortunately, the two sides of the pleural cavity are separate, so a pneumothorax on one side does not spread to the other. Otherwise both lungs would collapse together. This independence of the right and left pleural spaces is why a unilateral pneumothorax collapses only the affected lung while the opposite lung continues to ventilate.' },
       ],
       common_errors: [
         'Saying both lungs collapse together; the separate pleural sides prevent this.',
-        'Omitting the spontaneous variant and the vaping association the slide highlights.',
+        'Omitting the spontaneous variant and the vaping association.',
         'Listing fever and productive cough as symptoms; those belong to pneumonia, not pneumothorax.',
       ],
       minimum_passing_score: 60,
@@ -7656,11 +7656,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Define atelectasis as on the slide and list the four causes shown on the Common Causes of Atelectasis diagram, explaining how each leads to collapse.',
+    prompt: 'Define atelectasis and list its four causes, explaining how each leads to collapse.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Atelectasis is defined on the slide as a lack of gas exchange within the alveoli due to the collapse of that portion of the lung. The collapse can be caused by external compression of the lung by air or fluid within the pleural space, by obstruction of airflow within the lung, or by a lack of surfactant in the alveoli. The end result in every case is an airless, non exchanging region of lung.' },
-        { id: 'kp2', weight: 2, description: 'The Common Causes of Atelectasis diagram depicts four mechanisms. Hypoventilation lets alveoli gradually empty and collapse. Compression squeezes the lung from outside. Airway obstruction blocks air from reaching alveoli so trapped gas is absorbed and the unit collapses. Adhesions, linked to lack of surfactant, raise surface tension so alveoli cannot stay open. These four are the causes the slide expects you to name.' },
+        { id: 'kp1', weight: 2, description: 'Atelectasis is as a lack of gas exchange within the alveoli due to the collapse of that portion of the lung. The collapse can be caused by external compression of the lung by air or fluid within the pleural space, by obstruction of airflow within the lung, or by a lack of surfactant in the alveoli. The end result in every case is an airless, non exchanging region of lung.' },
+        { id: 'kp2', weight: 2, description: 'The Common Causes of Atelectasis diagram depicts four mechanisms. Hypoventilation lets alveoli gradually empty and collapse. Compression squeezes the lung from outside. Airway obstruction blocks air from reaching alveoli so trapped gas is absorbed and the unit collapses. Adhesions, linked to lack of surfactant, raise surface tension so alveoli cannot stay open. These four are the causes you should name.' },
       ],
       common_errors: [
         'Listing only airway obstruction and surfactant loss while omitting hypoventilation and compression.',
@@ -7681,14 +7681,14 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Describe pneumonia as defined on the slide, including the location of fluid and pus, the most common causative organism, the range of possible pathogens, and the listed symptoms.',
+    prompt: 'Describe pneumonia, including the location of fluid and pus, the most common causative organism, the range of possible pathogens, and the listed symptoms.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Pneumonia is defined on the slide as an acute infection of the lungs resulting in inflammation and the accumulation of fluid or pus within the alveoli. The word within is emphasized, locating the exudate inside the air sacs themselves. It may be viral, bacterial, or fungal, and Streptococcus pneumoniae, a bacterium, is the most common cause. It can also develop after another illness such as a cold or the flu.' },
-        { id: 'kp2', weight: 2, description: 'The slide lists pneumonia symptoms as a cough that is usually a productive cough with phlegm, along with fever, chills, chest pain, and shortness of breath. The productive nature of the cough reflects the fluid and pus filling the alveoli. These constitutional and respiratory symptoms help distinguish pneumonia from the dry reversible wheeze of asthma or the traumatic sharp pain of pneumothorax.' },
+        { id: 'kp1', weight: 2, description: 'Pneumonia is as an acute infection of the lungs resulting in inflammation and the accumulation of fluid or pus within the alveoli. The word within is emphasized, locating the exudate inside the air sacs themselves. It may be viral, bacterial, or fungal, and Streptococcus pneumoniae, a bacterium, is the most common cause. It can also develop after another illness such as a cold or the flu.' },
+        { id: 'kp2', weight: 2, description: 'Pneumonia symptoms as a cough that is usually a productive cough with phlegm, along with fever, chills, chest pain, and shortness of breath. The productive nature of the cough reflects the fluid and pus filling the alveoli. These constitutional and respiratory symptoms help distinguish pneumonia from the dry reversible wheeze of asthma or the traumatic sharp pain of pneumothorax.' },
       ],
       common_errors: [
-        'Saying fluid collects outside the alveoli; the slide stresses it accumulates within the alveoli.',
+        'Saying fluid collects outside the alveoli; it accumulates within the alveoli.',
         'Naming a virus as the most common cause; Streptococcus pneumoniae bacteria are most common.',
         'Describing the cough as dry; pneumonia typically causes a productive cough with phlegm.',
       ],
@@ -7709,8 +7709,8 @@ export const RECALL_QUESTIONS_ATOMS = [
     prompt: 'Contrast why pneumonia produces a large fall in arterial saturation while atelectasis produces only a small fall, using Figures 43-6 and 43-7 and the mean saturation values.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'In pneumonia, shown in Figure 43-6, blood continues to flow at normal rate through the affected lung but the alveoli are filled with fluid and cannot oxygenate it, so that blood leaves only 60% saturated. With half the cardiac output from the good lung at 97% and half from the bad lung at 60%, the aortic mean saturation falls markedly to 78%. Flowing blood past unventilated alveoli is the key, a venous admixture effect.' },
-        { id: 'kp2', weight: 2, description: 'In atelectasis, shown in Figure 43-7, the collapsed lung receives much less blood flow, only about one fifth of normal, because the collapse and hypoxic vasoconstriction divert blood away. So although that small flow leaves 60% saturated, it is a tiny fraction. With five sixths of blood at 97% and one sixth at 60%, the mean saturation falls only slightly to 91%. Diverting blood away from the collapsed region is what limits the desaturation.' },
+        { id: 'kp1', weight: 2, description: 'In pneumonia, blood continues to flow at normal rate through the affected lung but the alveoli are filled with fluid and cannot oxygenate it, so that blood leaves only 60% saturated. With half the cardiac output from the good lung at 97% and half from the bad lung at 60%, the aortic mean saturation falls markedly to 78%. Flowing blood past unventilated alveoli is the key, a venous admixture effect.' },
+        { id: 'kp2', weight: 2, description: 'In atelectasis, the collapsed lung receives much less blood flow, only about one fifth of normal, because the collapse and hypoxic vasoconstriction divert blood away. So although that small flow leaves 60% saturated, it is a tiny fraction. With five sixths of blood at 97% and one sixth at 60%, the mean saturation falls only slightly to 91%. Diverting blood away from the collapsed region is what limits the desaturation.' },
       ],
       common_errors: [
         'Reversing the values; pneumonia mean is 78% and atelectasis mean is 91%.',
@@ -7731,11 +7731,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Explain why Guyton and Hall label the right side curve of Figure 43-2 as constricted lungs, how this legacy term maps to modern terminology, and what spirometric features the curve actually shows.',
+    prompt: 'Explain why Guyton and Hall label the right side curve  as constricted lungs, how this legacy term maps to modern terminology, and what spirometric features the curve actually shows.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Guyton and Hall use the archaic word constricted as a literal physical description of a lung that is bound up or squeezed, whether from inside by fibrosis or silicosis or from outside by chest cage problems like scoliosis or kyphosis. The original text chose constricted to avoid confusion with airway obstruction such as asthma. The slide stresses that this is institutional legacy phrasing unique to Guyton, not the modern clinical label.' },
-        { id: 'kp2', weight: 2, description: 'The modern clinical translation is that the Guyton constricted lungs curve is simply a restrictive lung profile, equivalent to pulmonary fibrosis or scoliosis in the obstructive versus restrictive taxonomy. On Figure 43-2 it sits shifted to the right because total lung capacity and residual volume are greatly reduced, so the smaller container moves the whole curve toward smaller volumes while keeping a near normal shape. Students should mentally cross out constricted and read restrictive.' },
+        { id: 'kp1', weight: 2, description: 'Guyton and Hall use the archaic word constricted as a literal physical description of a lung that is bound up or squeezed, whether from inside by fibrosis or silicosis or from outside by chest cage problems like scoliosis or kyphosis. The original text chose constricted to avoid confusion with airway obstruction such as asthma. This is institutional legacy phrasing unique to Guyton, not the modern clinical label.' },
+        { id: 'kp2', weight: 2, description: 'The modern clinical translation is that the Guyton constricted lungs curve is simply a restrictive lung profile, equivalent to pulmonary fibrosis or scoliosis in the obstructive versus restrictive taxonomy. it sits shifted to the right because total lung capacity and residual volume are greatly reduced, so the smaller container moves the whole curve toward smaller volumes while keeping a near normal shape. Students should mentally cross out constricted and read restrictive.' },
       ],
       common_errors: [
         'Treating constricted lungs as a separate disease rather than Guyton legacy wording for restrictive lungs.',
@@ -7756,11 +7756,11 @@ export const RECALL_QUESTIONS_ATOMS = [
     tier: 'atom',
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Using Figure 43-5, contrast the microscopic appearance of normal lung, pneumonia, and emphysema, stating what fills or is lost in each and the one line summary the slide gives.',
+    prompt: 'Contrast the microscopic appearance of normal lung, pneumonia, and emphysema, stating what fills or is lost in each.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Figure 43-5 shows three panels. Normal lung is a fine even honeycomb of small alveoli. The pneumonia panel shows inflammation with the alveoli filled by fluid and blood cells and surrounding edema, so the air spaces are flooded rather than destroyed. The slide summarizes pneumonia as inflammation and fluid in the lungs, an additive filling process inside intact alveoli.' },
-        { id: 'kp2', weight: 2, description: 'The emphysema panel shows confluent alveoli, where many small alveoli have merged into a few large empty spaces because the walls and parenchyma are destroyed. The slide summarizes emphysema as loss of alveoli, a subtractive destructive process. So the two diseases are microscopic opposites on the same figure, pneumonia filling the air sacs while emphysema destroys and merges them.' },
+        { id: 'kp1', weight: 2, description: 'Three panels. Normal lung is a fine even honeycomb of small alveoli. The pneumonia panel shows inflammation with the alveoli filled by fluid and blood cells and surrounding edema, so the air spaces are flooded rather than destroyed. Pneumonia as inflammation and fluid in the lungs, an additive filling process inside intact alveoli.' },
+        { id: 'kp2', weight: 2, description: 'The emphysema panel shows confluent alveoli, where many small alveoli have merged into a few large empty spaces because the walls and parenchyma are destroyed. Emphysema as loss of alveoli, a subtractive destructive process. So the two diseases are microscopic opposites together, pneumonia filling the air sacs while emphysema destroys and merges them.' },
       ],
       common_errors: [
         'Swapping the panels, calling pneumonia loss of alveoli or emphysema fluid filling.',
@@ -7850,6 +7850,3058 @@ export const RECALL_QUESTIONS_ATOMS = [
     chapter: 'pp2-wk-6',
     difficulty: 1,
     metadata: { priority: 'high', source: 'Guyton & Hall 14e, Ch 42', topic: 'Chemoreceptor reflex output' },
+  },
+
+  // ===== ap1-wk-4 Anticoagulants atoms =====
+
+  {
+    id: 'atom-aca-three-phases',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the three overlapping phases of hemostasis in order and state the single defining event of the vascular phase.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Hemostasis is how the body stops bleeding and unfolds in three overlapping phases in this order: the vascular phase, primary hemostasis, and secondary hemostasis. They overlap rather than running strictly sequentially, but conceptually the vascular response comes first, the platelet plug second, and fibrin stabilization third.' },
+        { id: 'kp2', weight: 2, description: 'The vascular phase is reflex vasoconstriction that reduces blood flow to the site of injury. By narrowing the vessel it limits blood loss immediately and slows delivery of blood to the wound, setting the stage for the platelet plug and the coagulation cascade that follow.' },
+      ],
+      common_errors: [
+        'Listing fibrinolysis as one of the three hemostatic phases',
+        'Calling the vascular phase vasodilation instead of vasoconstriction',
+        'Putting secondary hemostasis before primary hemostasis',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Three phases of hemostasis',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Three phases of hemostasis' },
+  },
+
+  {
+    id: 'atom-aca-primary-secondary-product',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Contrast primary and secondary hemostasis by what each produces and its approximate time course.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Primary hemostasis is platelets forming a soft plug, occurring on a timescale of seconds to minutes. It is the fast, first structural response that physically plugs the injury but is not yet a stable clot.' },
+        { id: 'kp2', weight: 2, description: 'Secondary hemostasis is the coagulation cascade stabilizing that soft plug with fibrin, occurring over minutes. It is slower than primary hemostasis and its product is the fibrin mesh that converts the soft plug into a durable clot.' },
+      ],
+      common_errors: [
+        'Saying secondary hemostasis forms the initial platelet plug',
+        'Claiming primary hemostasis lays down fibrin',
+        'Stating secondary hemostasis is faster than primary',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Primary versus secondary hemostasis',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Primary versus secondary hemostasis' },
+  },
+
+  {
+    id: 'atom-aca-platelet-three-steps',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the three ordered actions platelets perform during primary hemostasis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Platelets do three things in a strict order: adhere, then activate, then aggregate. This sequence is the backbone of primary hemostasis and each step has its own receptor biology and corresponding drug targets.' },
+        { id: 'kp2', weight: 2, description: 'Adhesion anchors platelets to the injured wall, activation triggers granule release and shape change, and aggregation crosslinks platelets into the growing plug. Keeping the order straight matters because drugs are mapped onto specific steps.' },
+      ],
+      common_errors: [
+        'Reversing activate and adhere in the sequence',
+        'Putting aggregate before activate',
+        'Omitting the activation step entirely',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Primary hemostasis steps',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Primary hemostasis steps' },
+  },
+
+  {
+    id: 'atom-aca-adhesion-vwf',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain platelet adhesion: which molecule bridges the platelet to what surface, and through which receptor.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'During adhesion, von Willebrand factor bridges platelets to exposed subendothelial collagen. When endothelium is injured, the underlying collagen is exposed and vWF acts as the molecular glue linking the platelet to that collagen.' },
+        { id: 'kp2', weight: 2, description: 'The platelet side of this bridge is the GP Ib receptor. vWF binds GP Ib on the platelet surface and collagen on the wall, which is why deficiency of vWF or GP Ib impairs adhesion and causes a bleeding tendency.' },
+      ],
+      common_errors: [
+        'Attributing adhesion to fibrinogen and GP IIb/IIIa',
+        'Saying platelets adhere directly to collagen without vWF',
+        'Confusing GP Ib with GP IIb/IIIa',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Platelet adhesion',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Platelet adhesion' },
+  },
+
+  {
+    id: 'atom-aca-granule-release',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the three mediators released from platelet granules upon activation.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'When platelets activate, their granules release three mediators: adenosine diphosphate, thromboxane A2, and serotonin. These signals are released into the local environment to amplify the hemostatic response.' },
+        { id: 'kp2', weight: 2, description: 'ADP recruits and activates additional platelets via P2Y12, thromboxane A2 amplifies platelet activation, and serotonin contributes to vasoconstriction and platelet effects. This release step is what antiplatelet drugs aim to blunt downstream.' },
+      ],
+      common_errors: [
+        'Including tissue factor among the granule contents',
+        'Listing fibrinogen as a released activation mediator',
+        'Forgetting serotonin as one of the three',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Platelet granule release',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Platelet granule release' },
+  },
+
+  {
+    id: 'atom-aca-aggregation-gp2b3a',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain platelet aggregation: which receptor is exposed and what molecule crosslinks platelets.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'During aggregation, activated platelets expose the GP IIb/IIIa receptor on their surface. This receptor is the platelet\'s binding site for fibrinogen and becomes available only after activation, which is why aggregation follows activation.' },
+        { id: 'kp2', weight: 2, description: 'Fibrinogen crosslinks adjacent platelets by bridging their GP IIb/IIIa receptors, binding them together into the aggregate. This is the final common pathway of platelet aggregation and the target of GP IIb/IIIa antagonist drugs.' },
+      ],
+      common_errors: [
+        'Saying GP Ib mediates aggregation',
+        'Claiming collagen crosslinks platelets during aggregation',
+        'Stating vWF is the aggregation crosslinker',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Platelet aggregation',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Platelet aggregation' },
+  },
+
+  {
+    id: 'atom-aca-cox1-aspirin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what COX-1 produces, its role in platelets, and the drug that blocks it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Cyclooxygenase-1 makes thromboxane A2, which amplifies platelet activation. Thromboxane A2 is a positive-feedback signal that recruits and activates more platelets at the site of injury.' },
+        { id: 'kp2', weight: 2, description: 'Aspirin blocks COX-1, shutting off thromboxane A2 production and therefore blunting platelet activation amplification. This is one of the three drug families mapped onto the activated platelet, each tied to a distinct receptor or enzyme.' },
+      ],
+      common_errors: [
+        'Saying COX-1 makes ADP rather than thromboxane A2',
+        'Attributing COX-1 blockade to clopidogrel',
+        'Claiming aspirin blocks GP IIb/IIIa',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'COX-1 and aspirin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'COX-1 and aspirin' },
+  },
+
+  {
+    id: 'atom-aca-p2y12-drugs',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what the P2Y12 receptor does and name the three drugs that block it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'P2Y12 is the ADP-driven platelet recruitment receptor. ADP released from activated platelets binds P2Y12 on adjacent platelets to recruit them, amplifying thrombosis in a positive-feedback loop.' },
+        { id: 'kp2', weight: 2, description: 'Three drugs block P2Y12: clopidogrel, prasugrel, and ticagrelor. Blocking this receptor breaks the ADP recruitment loop, and this family is one of the three antiplatelet drug groups tied to a specific platelet target.' },
+      ],
+      common_errors: [
+        'Saying P2Y12 responds to thromboxane rather than ADP',
+        'Listing aspirin as a P2Y12 inhibitor',
+        'Forgetting ticagrelor among the three agents',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'P2Y12 inhibitors',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'P2Y12 inhibitors' },
+  },
+
+  {
+    id: 'atom-aca-gp2b3a-drugs',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what GP IIb/IIIa does and name the three drugs that block it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'GP IIb/IIIa is the fibrinogen-crosslinking receptor and represents the final common pathway of platelet aggregation. Because every aggregation route funnels through this receptor, blocking it stops aggregation regardless of the upstream stimulus.' },
+        { id: 'kp2', weight: 2, description: 'Three drugs block GP IIb/IIIa: abciximab, eptifibatide, and tirofiban. These are the third antiplatelet family, acting at the most downstream step of platelet aggregation.' },
+      ],
+      common_errors: [
+        'Saying GP IIb/IIIa is upstream of P2Y12',
+        'Listing aspirin or clopidogrel as a GP IIb/IIIa blocker',
+        'Omitting tirofiban from the three agents',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'GP IIb/IIIa antagonists',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'GP IIb/IIIa antagonists' },
+  },
+
+  {
+    id: 'atom-aca-intrinsic-pathway',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe the intrinsic pathway: its factor sequence, its trigger, and the lab that measures it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The intrinsic pathway runs factor XII to XI to IX, which then activates factor X. It is triggered by contact with foreign surfaces, which is why it is sometimes called the contact pathway.' },
+        { id: 'kp2', weight: 2, description: 'The intrinsic pathway is measured by the activated partial thromboplastin time (aPTT). This makes the aPTT the relevant monitoring test for therapeutic heparin, which acts heavily on this pathway and the common pathway.' },
+      ],
+      common_errors: [
+        'Saying the intrinsic pathway is measured by the prothrombin time',
+        'Claiming tissue injury triggers the intrinsic pathway',
+        'Reversing the XII to XI to IX order',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Intrinsic pathway',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Intrinsic pathway' },
+  },
+
+  {
+    id: 'atom-aca-extrinsic-pathway',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe the extrinsic pathway: its components, its trigger, and the lab that measures it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The extrinsic pathway is tissue factor plus factor VII activating factor X. It is triggered by tissue injury, which exposes tissue factor to the blood and rapidly initiates coagulation.' },
+        { id: 'kp2', weight: 2, description: 'The extrinsic pathway is measured by the prothrombin time. Because warfarin most strongly lowers factor VII, the PT and its derived INR are the standard warfarin monitoring tests.' },
+      ],
+      common_errors: [
+        'Saying the extrinsic pathway is measured by the aPTT',
+        'Claiming foreign-surface contact triggers the extrinsic pathway',
+        'Omitting tissue factor as a required component',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Extrinsic pathway',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Extrinsic pathway' },
+  },
+
+  {
+    id: 'atom-aca-convergence-x',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State where the intrinsic and extrinsic pathways converge and what marks the start of the common pathway.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Both the intrinsic and extrinsic pathways activate factor X, so factor X is the point of convergence. The two entry points of the cascade thus funnel into a single shared downstream route.' },
+        { id: 'kp2', weight: 2, description: 'From factor X onward, the rest of the cascade is the common pathway. Once factor Xa is generated, the question of anticoagulation reduces to how to control Xa and thrombin, regardless of which pathway started the process.' },
+      ],
+      common_errors: [
+        'Saying the pathways converge at factor II',
+        'Claiming the common pathway starts at factor VII',
+        'Listing factor XII as the convergence point',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Pathway convergence',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Pathway convergence' },
+  },
+
+  {
+    id: 'atom-aca-xa-to-thrombin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the direct enzymatic conversion carried out by factor Xa in the common pathway.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Factor Xa converts prothrombin, which is factor II, into thrombin, which is factor IIa. This is the pivotal step that generates the central effector enzyme of coagulation.' },
+        { id: 'kp2', weight: 2, description: 'Because Xa sits at the convergence point and drives thrombin generation, it is a prime anticoagulant target. Direct Xa inhibitors and heparin-amplified antithrombin both act to limit this Xa-to-thrombin step.' },
+      ],
+      common_errors: [
+        'Saying Xa converts fibrinogen to fibrin',
+        'Claiming Xa activates plasminogen',
+        'Stating Xa converts factor XII to XI',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Common pathway Xa',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Common pathway Xa' },
+  },
+
+  {
+    id: 'atom-aca-thrombin-to-fibrin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the direct action of thrombin in the common pathway and what the product does.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Thrombin, factor IIa, converts fibrinogen into fibrin. This is the defining catalytic action of thrombin and the chemical step that produces the structural protein of the clot.' },
+        { id: 'kp2', weight: 2, description: 'Fibrin stabilizes the platelet plug, turning the soft primary plug into a real, durable clot. Thrombin is thus the final amplifier of the cascade, which is why direct thrombin inhibitors are an important anticoagulant class.' },
+      ],
+      common_errors: [
+        'Saying thrombin converts prothrombin to thrombin',
+        'Claiming thrombin activates factor X',
+        'Reversing the reaction to fibrin into fibrinogen',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Common pathway thrombin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Common pathway thrombin' },
+  },
+
+  {
+    id: 'atom-aca-three-mechanisms',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the three and only three things every clinically useful anticoagulant does.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Every clinically useful anticoagulant does one of three things: it blocks factor Xa, it blocks factor IIa (thrombin), or it stops the liver from making the clotting factors. This is the entire conceptual framework for the drug classes.' },
+        { id: 'kp2', weight: 2, description: 'Crucially, anticoagulants do not dissolve an existing clot; dissolving fibrin is the job of the fibrinolytic system and thrombolytic drugs. Keeping anticoagulation separate from fibrinolysis prevents the common error of expecting an anticoagulant to lyse clot.' },
+      ],
+      common_errors: [
+        'Listing direct clot dissolution as an anticoagulant action',
+        'Adding platelet inhibition as a fourth core anticoagulant mechanism here',
+        'Omitting the hepatic synthesis mechanism (warfarin)',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Anticoagulant framework',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Anticoagulant framework' },
+  },
+
+  {
+    id: 'atom-aca-xa-iia-targets',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Identify the two molecules the common pathway reduces to and the role of each.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Factor Xa is the convergence point of both the intrinsic and extrinsic pathways. Because everything funnels through Xa, it is the upstream molecule that anticoagulants frequently target.' },
+        { id: 'kp2', weight: 2, description: 'Factor IIa (thrombin) is the final amplifier that cleaves fibrinogen into fibrin. Reducing the cascade to just Xa and IIa gives a clean mental model: useful anticoagulants block one or both of these, or block their hepatic synthesis.' },
+      ],
+      common_errors: [
+        'Naming factors XII and VII as the two key molecules',
+        'Calling fibrinogen one of the two target molecules',
+        'Confusing which of Xa and IIa is the convergence point versus final amplifier',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Two key molecules',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Two key molecules' },
+  },
+
+  {
+    id: 'atom-aca-antithrombin-serpin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Classify antithrombin and list the factors it inhibits on its own.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Antithrombin is a circulating serpin, a serine protease inhibitor, and is one of the body\'s own brakes on the coagulation cascade. It works by inhibiting active clotting enzymes rather than activating them.' },
+        { id: 'kp2', weight: 2, description: 'On its own and slowly, antithrombin inhibits factors IIa, Xa, IXa, XIa, and XIIa. This broad set of serine-protease targets is why amplifying antithrombin with heparin produces such powerful anticoagulation.' },
+      ],
+      common_errors: [
+        'Calling antithrombin a cofactor that activates clotting factors',
+        'Limiting antithrombin targets to only IIa and Xa',
+        'Describing antithrombin as a zymogen',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Antithrombin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Antithrombin' },
+  },
+
+  {
+    id: 'atom-aca-heparin-amplification',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State by how much heparin amplifies antithrombin and why an antithrombin-deficient patient resists heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin amplifies the antithrombin reaction by 1000 to 10000 fold. Heparin itself is not the direct inhibitor; it dramatically accelerates antithrombin\'s inhibition of clotting factors.' },
+        { id: 'kp2', weight: 2, description: 'Because heparin works only through antithrombin, a patient who is antithrombin-deficient will not respond to heparin, a state called heparin resistance. The fix is to restore antithrombin with antithrombin concentrate or fresh frozen plasma.' },
+      ],
+      common_errors: [
+        'Quoting only a 10 to 100 fold amplification',
+        'Saying heparin directly inhibits factors without antithrombin',
+        'Attributing heparin resistance to protein C deficiency',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin and antithrombin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin and antithrombin' },
+  },
+
+  {
+    id: 'atom-aca-protein-c-s',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe how proteins C and S are activated, what they inactivate, and their vitamin K dependence.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Protein C and protein S are activated by the thrombin-thrombomodulin complex. Once activated, they cleave and inactivate factors Va and VIIIa, removing key accelerators of the cascade and thus serving as a natural brake.' },
+        { id: 'kp2', weight: 2, description: 'Both protein C and protein S are vitamin K dependent. This dependence is clinically pivotal because it means warfarin lowers these natural anticoagulants as well as the procoagulant factors, setting up warfarin\'s early procoagulant phase.' },
+      ],
+      common_errors: [
+        'Saying proteins C and S inactivate factors IIa and Xa',
+        'Claiming tissue factor VIIa activates protein C',
+        'Stating proteins C and S are not vitamin K dependent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protein C and S',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protein C and S' },
+  },
+
+  {
+    id: 'atom-aca-tfpi',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what tissue factor pathway inhibitor does.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Tissue factor pathway inhibitor shuts down the tissue factor / factor VIIa complex. By neutralizing this complex, TFPI brakes the extrinsic trigger of coagulation at its initiating step.' },
+        { id: 'kp2', weight: 2, description: 'TFPI is one of the body\'s natural brake systems on the cascade, alongside antithrombin and the protein C / protein S system. Its target, the tissue factor VIIa complex, distinguishes it from antithrombin and from protein C, which act elsewhere.' },
+      ],
+      common_errors: [
+        'Saying TFPI inhibits the thrombin-thrombomodulin complex',
+        'Claiming TFPI inactivates factors Va and VIIIa',
+        'Confusing TFPI\'s target with antithrombin\'s targets',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'TFPI',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'TFPI' },
+  },
+
+  {
+    id: 'atom-aca-procoagulant-basis',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why the vitamin K dependence of proteins C and S matters for warfarin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Proteins C and S are vitamin K dependent natural anticoagulants. Warfarin, by interfering with vitamin K, lowers the levels of these anticoagulant proteins along with the procoagulant factors.' },
+        { id: 'kp2', weight: 2, description: 'Because some natural anticoagulants fall early, warfarin has an initial procoagulant phase rather than producing immediate anticoagulation. This is the conceptual basis for warfarin-induced skin necrosis in protein C deficient patients and for heparin bridging.' },
+      ],
+      common_errors: [
+        'Attributing warfarin\'s procoagulant phase to heparin resistance',
+        'Saying the procoagulant phase comes from TFPI deficiency',
+        'Claiming the effect prolongs the aPTT specifically',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Procoagulant phase basis',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Procoagulant phase basis' },
+  },
+
+  {
+    id: 'atom-aca-vitk-six-proteins',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List all six vitamin K dependent proteins, grouped as procoagulant and anticoagulant.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Six proteins require vitamin K dependent gamma-carboxylation to function. The procoagulant members are factors II, VII, IX, and X.' },
+        { id: 'kp2', weight: 2, description: 'The anticoagulant vitamin K dependent proteins are protein C and protein S. Knowing the full set, II, VII, IX, X, C, and S, explains why warfarin affects both clotting and natural anticoagulant arms.' },
+      ],
+      common_errors: [
+        'Including factor V or factor VIII as vitamin K dependent',
+        'Including fibrinogen (factor I) in the list',
+        'Listing only the four procoagulant factors and omitting proteins C and S',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Vitamin K dependent factors',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Vitamin K dependent factors' },
+  },
+
+  {
+    id: 'atom-aca-gamma-carboxylation',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what gamma-carboxylation adds to a clotting factor and the consequence of its absence.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Gamma-carboxylation adds a calcium-binding tail to the clotting factor. This post-translational modification is what allows the factor to bind calcium and anchor to phospholipid surfaces during the cascade.' },
+        { id: 'kp2', weight: 2, description: 'Without gamma-carboxylation, the factor is still synthesized but cannot bind calcium and therefore cannot participate in the cascade. This explains why warfarin produces non-functional factors rather than simply reducing factor protein levels.' },
+      ],
+      common_errors: [
+        'Saying gamma-carboxylation adds a heparin-binding site',
+        'Claiming the un-carboxylated factor is never synthesized',
+        'Stating the defect prevents fibrin binding rather than calcium binding',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Gamma-carboxylation',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Gamma-carboxylation' },
+  },
+
+  {
+    id: 'atom-aca-vkor-warfarin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the enzyme that recycles vitamin K and the drug that blocks it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Vitamin K epoxide reductase is the enzyme that recycles vitamin K, regenerating the active form needed for gamma-carboxylation. Without recycling, the supply of usable vitamin K is exhausted.' },
+        { id: 'kp2', weight: 2, description: 'Warfarin blocks vitamin K epoxide reductase, and that single mechanism explains everything about warfarin, including its delayed onset and early procoagulant phase. Without recycled vitamin K, the liver cannot gamma-carboxylate the dependent factors.' },
+      ],
+      common_errors: [
+        'Saying warfarin blocks cyclooxygenase-1',
+        'Claiming warfarin inhibits antithrombin synthesis',
+        'Stating warfarin blocks tissue plasminogen activator',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Warfarin target enzyme',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Warfarin target enzyme' },
+  },
+
+  {
+    id: 'atom-aca-tpa-plasmin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State where tPA comes from and the conversion it catalyzes in fibrinolysis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Tissue plasminogen activator is released from the endothelium. It is the physiological initiator of fibrinolysis once a clot has formed, providing the machinery to dissolve clot.' },
+        { id: 'kp2', weight: 2, description: 'tPA converts plasminogen, an inactive zymogen, into plasmin, the active enzyme. This activation step is the rate-limiting trigger of clot breakdown and is precisely the step that antifibrinolytic lysine analogs block.' },
+      ],
+      common_errors: [
+        'Saying tPA converts plasmin back to plasminogen',
+        'Claiming tPA converts fibrinogen to fibrin',
+        'Stating tPA is released from platelets rather than endothelium',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Fibrinolysis mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Fibrinolysis mechanism' },
+  },
+
+  {
+    id: 'atom-aca-plasmin-action',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the direct action of plasmin in fibrinolysis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Plasmin cleaves fibrin and breaks the clot apart. It is the active effector enzyme of fibrinolysis, digesting the fibrin meshwork that holds a clot together.' },
+        { id: 'kp2', weight: 2, description: 'Because plasmin is the enzyme that actually degrades fibrin, blocking its generation from plasminogen preserves an existing clot. This is why antifibrinolytic drugs act upstream at plasminogen activation rather than on plasmin clot digestion directly.' },
+      ],
+      common_errors: [
+        'Saying plasmin builds fibrin from fibrinogen',
+        'Claiming plasmin activates antithrombin',
+        'Stating plasmin generates thrombin from prothrombin',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Plasmin action',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Plasmin action' },
+  },
+
+  {
+    id: 'atom-aca-txa-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain how tranexamic acid works at the molecular level and what it does to an existing clot.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Tranexamic acid is a lysine analog that competitively blocks the lysine-binding site on plasminogen. With that site occupied, plasminogen cannot bind fibrin and tissue plasminogen activator cannot convert it to plasmin.' },
+        { id: 'kp2', weight: 2, description: 'The net result is less plasmin, therefore less fibrin breakdown and a preserved clot. TXA does not create new clot; it preserves the clot already present, which is the key concept for its use as an antifibrinolytic.' },
+      ],
+      common_errors: [
+        'Saying TXA blocks the active site on thrombin',
+        'Claiming TXA creates new clot rather than preserving existing clot',
+        'Stating TXA blocks the fibrinogen receptor on platelets',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'TXA mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'TXA mechanism' },
+  },
+
+  {
+    id: 'atom-aca-eaca-and-indications',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Compare epsilon-aminocaproic acid with tranexamic acid and list the clinical settings where TXA is used.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Epsilon-aminocaproic acid, also called Amicar, shares the same lysine-analog mechanism as tranexamic acid, blocking the plasminogen lysine-binding site, but it is weaker than TXA. Both are antifibrinolytics that preserve clot.' },
+        { id: 'kp2', weight: 2, description: 'TXA is used in trauma, cardiac surgery, postpartum hemorrhage, and joint arthroplasty. These are bleeding-heavy settings where preserving formed clot reduces blood loss, which is why TXA features in massive transfusion and surgical bleeding protocols.' },
+      ],
+      common_errors: [
+        'Saying EACA is more potent than TXA',
+        'Claiming EACA has a different mechanism from TXA',
+        'Listing pulmonary embolism dissolution as a TXA indication',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'EACA and TXA indications',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'EACA and TXA indications' },
+  },
+
+  {
+    id: 'atom-acb-pt-inr-pathway',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what pathway the prothrombin time and INR measure, which single factor the PT is most sensitive to, and which drug it monitors.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The prothrombin time and INR reflect the extrinsic plus common pathway. The extrinsic pathway is triggered by tissue factor activating factor VII, which then activates factor X into the shared common pathway. Because the PT samples this branch, it is the standard laboratory monitor for warfarin therapy, with the INR normalizing results across laboratories.' },
+        { id: 'kp2', weight: 2, description: 'The PT is most sensitive to factor VII, the extrinsic factor with the shortest half-life. This sensitivity explains why the INR begins to rise early after warfarin is started, even before the patient is truly anticoagulated, because factor VII activity drops first while longer-lived factors like II persist.' },
+      ],
+      common_errors: [
+        'Saying the PT measures the intrinsic pathway, which is actually the aPTT',
+        'Claiming the PT is most sensitive to factor II or fibrinogen rather than factor VII',
+        'Confusing PT/INR as the heparin monitor instead of the warfarin monitor',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Coagulation labs',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Coagulation labs' },
+  },
+
+  {
+    id: 'atom-acb-aptt-pathway',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Identify which pathway the activated partial thromboplastin time measures and which therapeutic anticoagulant it is the classic test for.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The aPTT reflects the intrinsic plus common pathway. The intrinsic pathway proceeds from factor XII to XI to IX, which then activates factor X into the common pathway. The aPTT is sensitive to abnormalities anywhere along this combined route, which is why it is used to detect the effect of unfractionated heparin.' },
+        { id: 'kp2', weight: 2, description: 'The aPTT is the classic therapeutic heparin test, appropriate for prophylactic and low-dose therapeutic ranges. It is distinct from the PT/INR which monitors warfarin, and from the ACT which is reserved for the very high heparin concentrations of cardiopulmonary bypass where the aPTT runs off-scale.' },
+      ],
+      common_errors: [
+        'Stating the aPTT measures the extrinsic pathway, which is the PT instead',
+        'Calling the aPTT the warfarin test rather than the heparin test',
+        'Believing the aPTT remains useful at full bypass heparin concentrations',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Coagulation labs',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Coagulation labs' },
+  },
+
+  {
+    id: 'atom-acb-act-bypass-lab',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe what the activated clotting time measures, the sample type it uses, and the clinical setting it is built for.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The activated clotting time measures whole-blood clotting at very high heparin concentrations. Unlike plasma-based tests, it uses whole blood so it can be run at the point of care, and it remains calibrated at heparin levels far above therapeutic, where plasma tests saturate.' },
+        { id: 'kp2', weight: 2, description: 'The ACT is the cardiopulmonary bypass test. On bypass, heparin runs at concentrations several times therapeutic, and the ACT is the bedside measure that confirms adequate anticoagulation before and during the procedure. It is not used to fine-tune prophylactic or low-dose therapeutic heparin, which is the job of the aPTT.' },
+      ],
+      common_errors: [
+        'Describing the ACT as a plasma-based test rather than whole-blood',
+        'Using the ACT to monitor prophylactic low-dose heparin instead of bypass',
+        'Confusing the ACT with the anti-Xa assay as the bypass monitor',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Coagulation labs',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Coagulation labs' },
+  },
+
+  {
+    id: 'atom-acb-anti-xa-assay',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain what the anti-factor Xa assay measures directly and list the three drug categories it is used to monitor.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The anti-factor Xa assay is a direct measure of factor Xa inhibition. Rather than inferring anticoagulant effect from a clotting time, it quantifies how much factor Xa activity is being suppressed, which makes it the precise tool for agents whose primary action is on Xa.' },
+        { id: 'kp2', weight: 2, description: 'It is used for low-molecular-weight heparin, fondaparinux, and the direct factor Xa inhibitors. These agents all act predominantly on factor Xa, so a Xa-specific assay is the rational monitor. For LMWH and fondaparinux this is the level used when monitoring is needed, and for the direct Xa inhibitors a drug-specific calibrated anti-Xa assay is required.' },
+      ],
+      common_errors: [
+        'Saying the anti-Xa assay measures thrombin inhibition instead of Xa',
+        'Using the anti-Xa assay for dabigatran, which needs a thrombin-based test',
+        'Forgetting fondaparinux as one of the anti-Xa monitored drugs',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Direct inhibitor tests',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Direct inhibitor tests' },
+  },
+
+  {
+    id: 'atom-acb-thrombin-ecarin-time',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State what the thrombin time and ecarin clotting time assess and which oral anticoagulant they are used for.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The thrombin time and ecarin clotting time assess direct thrombin inhibition. They are sensitive to agents that bind and inhibit thrombin (factor IIa) directly, so they reflect the activity of a direct thrombin inhibitor rather than a Xa-acting drug.' },
+        { id: 'kp2', weight: 2, description: 'These tests are used for dabigatran, the oral direct thrombin inhibitor. When quantification of dabigatran effect is needed, thrombin-based assays such as the thrombin time, dilute thrombin time, or ecarin clotting time are appropriate, whereas the PT/INR is not useful for it.' },
+      ],
+      common_errors: [
+        'Pairing thrombin time and ecarin time with a factor Xa inhibitor',
+        'Using these assays for warfarin instead of PT/INR',
+        'Believing the PT/INR is the right test for dabigatran',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Direct inhibitor tests',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Direct inhibitor tests' },
+  },
+
+  {
+    id: 'atom-acb-lab-identifies-drug',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain the teaching principle that links each coagulation lab to the patient\'s drug class.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Each monitoring test maps to a specific drug class, so the lab identifies what the patient is on. PT/INR points to warfarin, aPTT to therapeutic heparin, the ACT to bypass-level heparin, the anti-Xa assay to LMWH, fondaparinux, or direct Xa inhibitors, and thrombin or ecarin time to dabigatran.' },
+        { id: 'kp2', weight: 2, description: 'This mapping is a clinical shortcut: if you can identify the lab being followed, you can identify the drug class even without the medication list. It reframes the coagulation tests as a diagnostic decoder for the patient\'s anticoagulant, which is the practical payoff of memorizing the lab-to-drug pairings.' },
+      ],
+      common_errors: [
+        'Assuming the lab gives an exact plasma drug concentration rather than a class',
+        'Mismatching anti-Xa with dabigatran or thrombin time with a Xa inhibitor',
+        'Thinking PT/INR identifies heparin rather than warfarin',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Direct inhibitor tests',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Direct inhibitor tests' },
+  },
+
+  {
+    id: 'atom-acb-ufh-lmwh-ratio',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Contrast unfractionated heparin and low-molecular-weight heparin by their relative anti-Xa versus anti-IIa activity.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Both unfractionated heparin and low-molecular-weight heparin are antithrombin amplifiers, meaning they work by enhancing antithrombin rather than binding factors directly. They sit together as the antithrombin-amplifier class on the anticoagulant drug map.' },
+        { id: 'kp2', weight: 2, description: 'Unfractionated heparin has roughly equal anti-Xa and anti-IIa activity, written Xa equals IIa, because its long chains can bridge antithrombin to thrombin. Low-molecular-weight heparin favors anti-Xa over anti-IIa, written Xa greater than IIa, because its shorter chains often cannot bridge to thrombin, which is why LMWH is followed by an anti-Xa level.' },
+      ],
+      common_errors: [
+        'Reversing the ratio and saying UFH is Xa over IIa',
+        'Claiming LMWH has no anti-IIa activity at all',
+        'Grouping these as direct inhibitors rather than antithrombin amplifiers',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Anticoagulant drug map',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Anticoagulant drug map' },
+  },
+
+  {
+    id: 'atom-acb-doac-targets',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'On the anticoagulant drug map, name which direct oral inhibitor targets thrombin and which three target factor Xa.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Among the direct oral inhibitors, dabigatran is the single direct thrombin inhibitor. It binds and inhibits factor IIa directly, independent of antithrombin, which distinguishes it mechanistically from the rest of the oral class.' },
+        { id: 'kp2', weight: 2, description: 'Rivaroxaban, apixaban, and edoxaban are the three direct factor Xa inhibitors. They bind the active site of factor Xa directly. The split of one thrombin drug versus three Xa drugs is the anchoring framework for the direct oral anticoagulant class.' },
+      ],
+      common_errors: [
+        'Calling rivaroxaban or apixaban a thrombin inhibitor',
+        'Listing dabigatran as a factor Xa inhibitor',
+        'Forgetting edoxaban as one of the three Xa inhibitors',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Anticoagulant drug map',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Anticoagulant drug map' },
+  },
+
+  {
+    id: 'atom-acb-warfarin-map-factors',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'On the drug map, state warfarin\'s mechanism category and list all six vitamin K dependent proteins it impairs.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Warfarin sits in the vitamin K interference category on the anticoagulant drug map. Rather than amplifying antithrombin or directly binding a factor, it blocks the regeneration of vitamin K and thereby impairs the gamma-carboxylation that activates several clotting proteins.' },
+        { id: 'kp2', weight: 2, description: 'The six vitamin K dependent proteins warfarin affects are the procoagulant factors II, VII, IX, and X plus the anticoagulant proteins C and S. Because proteins C and S are also vitamin K dependent and fall early, warfarin has an initial procoagulant phase, but on the drug map the key point is the full II, VII, IX, X, C, S set.' },
+      ],
+      common_errors: [
+        'Listing fibrinogen or factor V among the vitamin K dependent proteins',
+        'Omitting proteins C and S from warfarin\'s affected set',
+        'Classifying warfarin as an antithrombin amplifier rather than vitamin K interference',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Anticoagulant drug map',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Anticoagulant drug map' },
+  },
+
+  {
+    id: 'atom-acb-platelet-inhibitor-targets',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the three platelet receptor or enzyme targets on the antiplatelet map and the drug or drug group for each.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Aspirin acts on cyclooxygenase-1, and the P2Y12 receptor is blocked by clopidogrel, prasugrel, and ticagrelor. Aspirin removes thromboxane A2 amplification, while the P2Y12 agents block ADP-driven recruitment of additional platelets.' },
+        { id: 'kp2', weight: 2, description: 'The GP IIb/IIIa fibrinogen receptor, the final common pathway of aggregation, is blocked by abciximab, eptifibatide, and tirofiban. Together these three targets, COX-1, P2Y12, and GP IIb/IIIa, organize the entire antiplatelet field into three drug families.' },
+      ],
+      common_errors: [
+        'Assigning aspirin to P2Y12 instead of COX-1',
+        'Placing clopidogrel at the GP IIb/IIIa receptor',
+        'Listing a DOAC as an antiplatelet agent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Antiplatelet drug map',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Antiplatelet drug map' },
+  },
+
+  {
+    id: 'atom-acb-antifibrinolytic-procoagulants',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Identify the two antifibrinolytic procoagulant drugs on the drug map and the general class they belong to.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The two antifibrinolytic procoagulants on the map are tranexamic acid and epsilon-aminocaproic acid. They are grouped as procoagulants on the field map because, by blocking fibrinolysis, they preserve clot that has already formed rather than dissolving it.' },
+        { id: 'kp2', weight: 2, description: 'Both are lysine analogs that work by the same mechanism of blocking plasminogen activation, with epsilon-aminocaproic acid being the weaker of the two. They contrast directly with fibrinolytics, which promote clot breakdown, placing TXA and aminocaproic acid on the procoagulant half of the drug map.' },
+      ],
+      common_errors: [
+        'Listing a fibrinolytic such as alteplase as an antifibrinolytic',
+        'Calling protamine or vitamin K an antifibrinolytic',
+        'Forgetting that both agents share the same lysine-analog mechanism',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Procoagulant drug map',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Procoagulant drug map' },
+  },
+
+  {
+    id: 'atom-acb-heparin-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe heparin\'s mechanism, including its first molecular step, the magnitude of acceleration, and the additional factors inhibited.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin binds circulating antithrombin and changes its conformation. This conformational change is the initiating step; heparin itself is not the enzyme that inactivates clotting factors, but rather a catalyst that supercharges antithrombin, the natural serpin.' },
+        { id: 'kp2', weight: 2, description: 'The bound antithrombin accelerates its inhibition of thrombin (factor IIa) by roughly 1,000 to 10,000-fold, and also amplifies inhibition of factors XIIa, XIa, IXa, and Xa. This broad acceleration across the intrinsic proteases and the common pathway is what produces heparin\'s rapid, potent anticoagulant effect.' },
+      ],
+      common_errors: [
+        'Saying heparin inhibits thrombin directly rather than via antithrombin',
+        'Understating the acceleration as only a few-fold instead of thousands-fold',
+        'Listing factors Va or VIIIa, which are protein C targets, among heparin\'s factors',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin mechanism' },
+  },
+
+  {
+    id: 'atom-acb-heparin-resistance',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why antithrombin deficiency causes heparin resistance and how it is treated.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin works only by amplifying antithrombin, so if the patient is antithrombin-deficient there is insufficient substrate for heparin to act on and the drug fails to anticoagulate despite escalating doses. This is the definition of heparin resistance, a recurring problem in patients on long-term heparin or with congenital deficiency.' },
+        { id: 'kp2', weight: 2, description: 'The treatment is to replace antithrombin, using antithrombin concentrate (Thrombate III) or fresh frozen plasma, which supplies the missing serpin so heparin can again work. Simply giving more heparin does not help without antithrombin, and reversal agents like protamine are irrelevant to the deficiency.' },
+      ],
+      common_errors: [
+        'Treating heparin resistance by escalating the heparin dose alone',
+        'Forgetting fresh frozen plasma as an antithrombin source',
+        'Confusing heparin resistance with heparin-induced thrombocytopenia',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin mechanism' },
+  },
+
+  {
+    id: 'atom-acb-heparin-units-halflife',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State why heparin is dosed in units rather than milligrams and give its approximate therapeutic half-life.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin is dosed in units, not milligrams, because the biological activity varies between vials that contain equal milligrams. Units standardize the actual anticoagulant effect delivered, which is necessary because the mass of heparin does not reliably predict its activity.' },
+        { id: 'kp2', weight: 2, description: 'Heparin has a half-life of approximately 1 hour at therapeutic doses. This short half-life, combined with the dose being expressed in activity units, informs the timing of reversal with protamine and the timing of neuraxial procedures after heparin administration.' },
+      ],
+      common_errors: [
+        'Saying heparin is dosed in milligrams like most drugs',
+        'Quoting the half-life as much longer than about one hour',
+        'Believing units convert directly into a plasma drug level',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin pharmacokinetics',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin pharmacokinetics' },
+  },
+
+  {
+    id: 'atom-acb-heparin-route-variability',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe heparin\'s onset by route and the magnitude of its nonlinear dose-response variability.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Intravenous heparin has immediate onset, while the subcutaneous route is suitable for prophylaxis only because subcutaneous bioavailability is too variable for reliable therapeutic anticoagulation. Heparin is not given orally. This is why therapeutic anticoagulation uses the intravenous route.' },
+        { id: 'kp2', weight: 2, description: 'The dose-response is nonlinear, and patient sensitivity varies roughly fourfold while metabolism varies roughly threefold. This wide and nonlinear variability is the core reason heparin requires laboratory monitoring rather than fixed weight-based dosing for therapeutic effect.' },
+      ],
+      common_errors: [
+        'Claiming subcutaneous heparin is reliable for therapeutic dosing',
+        'Stating the dose-response is linear and predictable',
+        'Swapping the figures so sensitivity is threefold and metabolism fourfold',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin pharmacokinetics',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin pharmacokinetics' },
+  },
+
+  {
+    id: 'atom-acb-aptt-antixa-targets',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Match the aPTT and the anti-factor Xa assay to their heparin dosing roles and state each target value.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The aPTT is used for prophylactic and low-dose therapeutic heparin, with a target of 1.5 to 2.5 times baseline. It is the bedside therapeutic monitor for these lower heparin ranges and reports a clotting-time ratio rather than a concentration.' },
+        { id: 'kp2', weight: 2, description: 'The anti-factor Xa assay is used for therapeutic heparin dosing, with a target of 0.3 to 0.7 units/mL. Because it directly measures Xa inhibition in concentration units, it is favored when precise therapeutic dosing is needed, distinct from the aPTT ratio.' },
+      ],
+      common_errors: [
+        'Quoting the aPTT target in units per mL rather than a baseline multiple',
+        'Stating an anti-Xa therapeutic target other than 0.3 to 0.7 units per mL',
+        'Using the ACT for low-dose therapeutic heparin instead of the aPTT',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin monitoring',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin monitoring' },
+  },
+
+  {
+    id: 'atom-acb-act-bypass-concentration',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why the ACT, not the aPTT, is used on cardiopulmonary bypass and state the heparin concentration there relative to therapeutic.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'On cardiopulmonary bypass heparin runs at approximately 3 to 4 units/mL, which is about 5 to 10 times the therapeutic concentration. This deep level of anticoagulation is required to prevent clotting within the extracorporeal circuit.' },
+        { id: 'kp2', weight: 2, description: 'At that concentration the aPTT runs off-scale and becomes uninformative, whereas the ACT stays calibrated. The ACT is therefore the monitor of choice on bypass; it does not mean the aPTT cannot detect heparin at all, only that it saturates at these very high levels.' },
+      ],
+      common_errors: [
+        'Stating bypass heparin is at therapeutic concentration',
+        'Claiming the aPTT works fine at bypass heparin levels',
+        'Saying the aPTT detects no heparin rather than saturating off-scale',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin monitoring',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin monitoring' },
+  },
+
+  {
+    id: 'atom-acb-act-components-values',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the two components of the ACT assay, its normal baseline range, and the usual bypass target.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The ACT is run on whole blood plus a contact activator, which is either celite or kaolin. The activator triggers the intrinsic pathway through contact activation, and using whole blood lets the test be performed at the point of care during surgery.' },
+        { id: 'kp2', weight: 2, description: 'The normal baseline ACT is about 100 to 150 seconds, and the bypass target is at least 400 seconds at most centers. Reaching and maintaining the bypass threshold confirms adequate heparinization before going on pump, and a value below target calls for additional heparin.' },
+      ],
+      common_errors: [
+        'Saying the ACT uses plasma plus thromboplastin rather than whole blood',
+        'Quoting a baseline far from 100 to 150 seconds',
+        'Using a bypass target other than at least 400 seconds',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ACT bypass test',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ACT bypass test' },
+  },
+
+  {
+    id: 'atom-acb-act-check-timing',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the three time points at which the ACT is checked around cardiopulmonary bypass.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The ACT is checked at baseline before heparin, and again 3 to 5 minutes after the heparin bolus to confirm that the bolus achieved an adequate level before initiating bypass. These first two checks establish the starting point and the response to heparin.' },
+        { id: 'kp2', weight: 2, description: 'On bypass the ACT is then rechecked every 30 minutes to ensure anticoagulation does not drift below target as heparin is metabolized and the circuit continues. This serial monitoring schedule prevents under-anticoagulation during the extracorporeal run.' },
+      ],
+      common_errors: [
+        'Checking the ACT only once before bypass',
+        'Stating the post-bolus check is immediate rather than 3 to 5 minutes',
+        'Believing rechecks occur every 5 minutes rather than every 30',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ACT bypass test',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ACT bypass test' },
+  },
+
+  {
+    id: 'atom-acb-act-confounders',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the confounders that prolong the ACT during bypass without representing more heparin, and state the activator fix for the aprotinin confounder.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A long ACT does not always mean a lot of heparin. Hypothermia, hemodilution from the pump prime, thrombocytopenia, and fibrinogen deficiency all prolong the ACT independent of heparin. Each represents a non-heparin reason the clotting time is elevated, so every ACT must be read in the context of the patient.' },
+        { id: 'kp2', weight: 2, description: 'Aprotinin is an additional confounder, but specifically when celite is the activator; it artifactually prolongs the celite-based ACT. The fix is to use kaolin as the activator instead, which avoids the aprotinin interference and gives a truer reflection of heparin effect.' },
+      ],
+      common_errors: [
+        'Listing hyperthermia rather than hypothermia as a confounder',
+        'Saying aprotinin prolongs the ACT regardless of activator',
+        'Recommending celite instead of kaolin to avoid the aprotinin effect',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ACT confounders',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ACT confounders' },
+  },
+
+  {
+    id: 'atom-acc-hit-type-1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe HIT type I: its immune status, timing relative to heparin start, and clinical significance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'HIT type I is a benign, non-immune drop in platelet count that occurs within hours of starting heparin. It is caused by a direct, dose-dependent proaggregating effect of heparin on platelets rather than by any antibody, so it is sometimes called heparin-associated thrombocytopenia.' },
+        { id: 'kp2', weight: 2, description: 'Type I is not clinically significant. The platelet count typically remains above 100,000, often recovers even with continued heparin, and is not associated with thrombosis. It requires no change in management and must be distinguished from the dangerous immune type II form.' },
+      ],
+      common_errors: [
+        'Calling type I immune-mediated; it is non-immune',
+        'Confusing the within-hours onset of type I with the day 4 to 14 onset of type II',
+        'Believing type I causes thrombosis or needs treatment',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT type I',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT type I' },
+  },
+
+  {
+    id: 'atom-acc-hit-type-2-overview',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe HIT type II: its immune status, why it is the dangerous form, and its incidence with unfractionated heparin versus low-molecular-weight heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'HIT type II is immune-mediated and is the dangerous form because it produces thrombosis rather than bleeding despite a falling platelet count. It is the form that kills patients and must be acted on promptly once suspected.' },
+        { id: 'kp2', weight: 2, description: 'Incidence is roughly 0.5 to 3% with unfractionated heparin and only about 0.2% with low-molecular-weight heparin. The smaller LMWH molecule forms fewer immunogenic heparin-PF4 complexes, so unfractionated heparin carries the higher HIT risk.' },
+      ],
+      common_errors: [
+        'Stating LMWH has higher HIT risk than UFH',
+        'Describing type II as a bleeding disorder',
+        'Quoting incidence in the 10 to 15% range',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT type II',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT type II' },
+  },
+
+  {
+    id: 'atom-acc-hit-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Walk through the immune mechanism of HIT type II from heparin binding to platelet consumption.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin binds platelet factor 4 on the platelet surface, and the resulting heparin-PF4 complex is recognized as foreign by IgG antibodies. The heparin-PF4 complex, not heparin alone, is the antigen that drives the immune response.' },
+        { id: 'kp2', weight: 2, description: 'The IgG antibodies bind the complex and then crosslink platelet Fc receptors, which activates the platelets. The activated platelets are consumed in microthrombi, simultaneously lowering the platelet count and generating widespread clotting.' },
+      ],
+      common_errors: [
+        'Saying complement lysis rather than Fc receptor crosslinking destroys platelets',
+        'Naming antithrombin instead of PF4 as the heparin partner',
+        'Forgetting that platelet activation, not just destruction, drives thrombosis',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT mechanism' },
+  },
+
+  {
+    id: 'atom-acc-hit-timing-threshold',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the typical onset window of HIT type II and the platelet-count criteria that define it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'HIT type II typically begins on day 4 to 14 of heparin exposure, reflecting the time needed to mount an IgG antibody response. Earlier exposure within the preceding 100 days can shorten this window through rapid-onset HIT, but the classic teaching window is day 4 to 14.' },
+        { id: 'kp2', weight: 2, description: 'The platelet count falls by at least 50% from baseline or drops below 100,000. A 50% relative fall can be significant even if the absolute count is still above 100,000, which is why the relative drop is part of the criteria.' },
+      ],
+      common_errors: [
+        'Using the within-hours timing of type I for type II',
+        'Requiring an absolute count below 20,000 to diagnose HIT',
+        'Ignoring the 50% relative drop criterion',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT timing',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT timing' },
+  },
+
+  {
+    id: 'atom-acc-hit-paradox',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain the HIT paradox and list the thrombotic complications it produces.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The HIT paradox is that platelets fall yet thrombosis rises. Because the antibodies activate platelets rather than simply destroying them, the patient becomes prothrombotic even as the laboratory platelet count drops, so a low count does not protect against clotting.' },
+        { id: 'kp2', weight: 2, description: 'The thrombotic complications include deep vein thrombosis, pulmonary embolism, arterial thrombosis, and limb ischemia. This is why stopping heparin alone is insufficient; the prothrombotic state persists and must be treated with active anticoagulation.' },
+      ],
+      common_errors: [
+        'Expecting bleeding rather than clotting in HIT',
+        'Assuming a low platelet count is protective',
+        'Thinking HIT thrombosis is only venous',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT paradox',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT paradox' },
+  },
+
+  {
+    id: 'atom-acc-4ts-score',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the four components of the 4Ts HIT score, how each is scored, and the action threshold.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The 4Ts are Thrombocytopenia, Timing of the platelet fall, Thrombosis, and oTher causes of thrombocytopenia. Each item is scored 0 to 2 points, giving a maximum total of 8, and the tool is a bedside pretest probability screen rather than a confirmatory test.' },
+        { id: 'kp2', weight: 2, description: 'A total score of 4 or more should prompt you to send HIT antibodies, such as the anti-PF4 assay, and switch the patient off heparin to a non-heparin anticoagulant. The antibody titer is a separate confirmatory step and is not itself one of the 4Ts.' },
+      ],
+      common_errors: [
+        'Listing antibody titer as a 4Ts component',
+        'Using a cutoff of 2 instead of 4 to act',
+        'Scoring each T from 0 to 3 rather than 0 to 2',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: '4Ts score',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: '4Ts score' },
+  },
+
+  {
+    id: 'atom-acc-hit-stop-heparin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the two essential management steps when HIT is diagnosed and why stopping heparin alone is inadequate.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Stop all heparin completely, including flushes and heparin-coated catheters, not just the therapeutic infusion. Hidden sources of heparin can perpetuate antibody-mediated platelet activation, so every source must be removed.' },
+        { id: 'kp2', weight: 2, description: 'Start a non-heparin anticoagulant. Stopping heparin alone is not enough because these patients continue to clot, so the prothrombotic state must be actively treated. Prophylactic platelet transfusion is avoided as it can fuel thrombosis.' },
+      ],
+      common_errors: [
+        'Stopping heparin but leaving the patient on no anticoagulation',
+        'Forgetting hidden heparin in flushes and coated catheters',
+        'Transfusing platelets prophylactically in HIT',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT management',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT management' },
+  },
+
+  {
+    id: 'atom-acc-hit-dti',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Identify the standard non-heparin anticoagulant class for HIT and name representative agents.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Parenteral direct thrombin inhibitors are the standard choice in HIT because they inhibit thrombin directly, act independently of antithrombin, and do not cross-react with HIT antibodies. They directly counter the thrombin-driven thrombosis of HIT.' },
+        { id: 'kp2', weight: 2, description: 'Representative agents are bivalirudin and argatroban. The choice between them turns on a renal-versus-hepatic clearance distinction that is covered in the cardiac anesthesia material; both avoid heparin and its cross-reacting antibodies.' },
+      ],
+      common_errors: [
+        'Choosing LMWH, which cross-reacts with HIT antibodies',
+        'Starting warfarin acutely before thrombin inhibition',
+        'Naming a GP IIb/IIIa antagonist as HIT therapy',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'HIT management',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'HIT management' },
+  },
+
+  {
+    id: 'atom-acc-protamine-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain how protamine neutralizes heparin, including the relevant chemistry and the source of protamine.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Protamine is a polypeptide derived from salmon sperm and is about 70% arginine, which makes it strongly basic. Heparin is strongly acidic, and the two form an inactive complex through acid-base ionic binding rather than through enzymatic degradation.' },
+        { id: 'kp2', weight: 2, description: 'Protamine reverses unfractionated heparin specifically. Its basic charge pairs with the acidic heparin molecule to neutralize anticoagulant activity, and its salmon-sperm origin underlies fish-allergy and prior-exposure anaphylaxis concerns.' },
+      ],
+      common_errors: [
+        'Calling protamine acidic and heparin basic',
+        'Describing enzymatic breakdown of heparin',
+        'Forgetting the salmon-sperm origin',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine mechanism' },
+  },
+
+  {
+    id: 'atom-acc-protamine-clearance',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State how and how quickly the heparin-protamine complex is cleared and why that matters.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The inactive heparin-protamine complex is cleared by tissue macrophages of the reticuloendothelial system, located mostly in the liver and spleen, in about 20 minutes. Clearance is therefore reticuloendothelial rather than renal or biliary.' },
+        { id: 'kp2', weight: 2, description: 'This roughly 20-minute macrophage clearance is faster than heparin elimination. Because protamine disappears before tissue-bound heparin does, the mismatch sets the stage for heparin rebound a few hours later.' },
+      ],
+      common_errors: [
+        'Attributing clearance to renal filtration',
+        'Quoting a clearance time of hours rather than about 20 minutes',
+        'Missing the link between fast clearance and heparin rebound',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine clearance',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine clearance' },
+  },
+
+  {
+    id: 'atom-acc-protamine-dose',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the empiric protamine dosing rule and explain why it is based on circulating rather than total heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The empiric rule is about 1 mg of protamine per 100 units of circulating heparin. Because heparin has a half-life of roughly 1 hour, you must account for elimination since the last dose and estimate how much heparin is still circulating rather than how much was originally given.' },
+        { id: 'kp2', weight: 2, description: 'Dosing on the total heparin given systematically overshoots, and excess protamine is itself coagulopathic. The dose must therefore track the residual circulating heparin, which shrinks over time as heparin is eliminated.' },
+      ],
+      common_errors: [
+        'Dosing on total heparin administered rather than circulating heparin',
+        'Using 10 mg per 100 units instead of 1 mg per 100 units',
+        'Ignoring heparin elimination since the last dose',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine dosing',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine dosing' },
+  },
+
+  {
+    id: 'atom-acc-protamine-titration',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why many cardiac centers titrate protamine from measured heparin concentration and name the devices used.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Because empiric dosing on total heparin given systematically overshoots and excess protamine is coagulopathic, many cardiac centers titrate the protamine dose from measured heparin concentration rather than from a fixed formula. This individualizes the dose to the heparin actually present in the patient.' },
+        { id: 'kp2', weight: 2, description: 'The heparin concentration is measured with point-of-care devices such as the Hemochron HMS or the HemoTec system. Concentration-guided titration gives just enough protamine to neutralize residual heparin, avoiding the overshoot and the second coagulopathy that excess protamine causes.' },
+      ],
+      common_errors: [
+        'Believing all centers use the empiric 1 mg per 100 units formula',
+        'Thinking concentration-guided dosing aims to give more protamine, not less',
+        'Forgetting that overshoot causes a protamine coagulopathy',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine dosing',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine dosing' },
+  },
+
+  {
+    id: 'atom-acc-protamine-overdose',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain the protamine overdose paradox, including its mechanism and its effect on the ACT.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'More protamine is not more reversal; excess protamine produces a second coagulopathy on top of the first. It inhibits platelets and also inhibits other serine proteases involved in coagulation, so giving more than needed actively impairs hemostasis.' },
+        { id: 'kp2', weight: 2, description: 'Because of this anticoagulant effect of excess protamine, the activated clotting time actually rises with too much protamine rather than falling. A prolonging ACT after generous protamine should raise suspicion of overdose, not residual heparin alone.' },
+      ],
+      common_errors: [
+        'Believing more protamine always deepens reversal',
+        'Expecting the ACT to fall with excess protamine',
+        'Forgetting that protamine inhibits platelets',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine overdose',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine overdose' },
+  },
+
+  {
+    id: 'atom-acc-heparin-rebound',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe heparin rebound: its timing, mechanism, and the dose used to treat it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Heparin rebound appears about 2 to 3 hours after the initial protamine dose, when heparin levels climb again. Protamine is cleared by macrophages in roughly 20 minutes, faster than heparin, while heparin that had been sequestered in tissues re-enters the circulation unopposed.' },
+        { id: 'kp2', weight: 2, description: 'Treat rebound with a small dose of 5 to 15 mg of protamine, not the original 50 mg. Only the re-emerged tissue heparin needs neutralizing, and repeating a large dose would risk a protamine-induced coagulopathy.' },
+      ],
+      common_errors: [
+        'Repeating the full original protamine dose for rebound',
+        'Confusing the 20-minute protamine clearance with the 2 to 3 hour rebound interval',
+        'Attributing rebound bleeding to a surgical cause only',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Heparin rebound',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Heparin rebound' },
+  },
+
+  {
+    id: 'atom-acc-protamine-anaphylaxis',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the patient groups at increased risk of protamine anaphylaxis and the approximate risk in NPH-insulin diabetics.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Diabetics on NPH (neutral protamine Hagedorn) insulin carry roughly a 1 in 50 anaphylaxis risk, compared with about 1 in 500 in others, because NPH insulin contains protamine and can sensitize the patient. This is the highest-risk group taught.' },
+        { id: 'kp2', weight: 2, description: 'Other groups at increased risk include patients with fish allergy, reflecting protamine\'s salmon-sperm origin, those with prior protamine exposure, and post-vasectomy patients who may form antisperm antibodies. A history in any of these groups warrants caution and readiness to treat anaphylaxis.' },
+      ],
+      common_errors: [
+        'Quoting equal risk across all patient groups',
+        'Omitting the NPH insulin association',
+        'Confusing the 1 in 50 and 1 in 500 figures',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine adverse',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine adverse' },
+  },
+
+  {
+    id: 'atom-acc-protamine-pulmonary',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe the catastrophic pulmonary protamine reaction and its mediator.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Protamine can cause acute pulmonary vasoconstriction with right ventricular failure, which is catastrophic. The sudden rise in pulmonary vascular resistance overloads the right ventricle and can precipitate hemodynamic collapse during or just after reversal.' },
+        { id: 'kp2', weight: 2, description: 'The reaction is driven by thromboxane release from pulmonary macrophages. Recognizing this mediator explains why the event is a pulmonary vasoconstrictive crisis rather than a simple histaminergic drop in systemic pressure.' },
+      ],
+      common_errors: [
+        'Attributing the reaction to histamine rather than thromboxane',
+        'Calling it left rather than right ventricular failure',
+        'Treating it as benign transient hypotension',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine adverse',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine adverse' },
+  },
+
+  {
+    id: 'atom-acc-protamine-hypotension',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain protamine-induced hypotension and how administration technique prevents it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Protamine can cause hypotension that is largely a rate-related effect of rapid administration rather than a true allergic reaction. Giving protamine too fast provokes an abrupt fall in systemic blood pressure.' },
+        { id: 'kp2', weight: 2, description: 'The preventive measure is to administer protamine slowly, over about 5 to 10 minutes. Slow delivery blunts the hemodynamic response and is the simplest way to avoid the rapid-administration hypotension.' },
+      ],
+      common_errors: [
+        'Giving protamine as a rapid IV push',
+        'Confusing rate-related hypotension with anaphylaxis every time',
+        'Using intramuscular or subcutaneous routes for reversal',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine adverse',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine adverse' },
+  },
+
+  {
+    id: 'atom-acc-protamine-not-reverse',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the anticoagulants that protamine does NOT adequately reverse and the practical takeaway.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Protamine does not adequately reverse low-molecular-weight heparin, which gets only partial anti-thrombin reversal while the dominant anti-factor Xa effect persists. It also fails to reverse fondaparinux, the direct oral anticoagulants, and warfarin.' },
+        { id: 'kp2', weight: 2, description: 'The practical takeaway is that protamine is a complete reversal agent for unfractionated heparin only. Outside of unfractionated heparin, reaching for protamine wastes time and may cause harm, so the right reversal strategy depends on the specific drug.' },
+      ],
+      common_errors: [
+        'Believing protamine fully reverses LMWH',
+        'Trying protamine for warfarin or DOAC bleeding',
+        'Expecting protamine to neutralize fondaparinux',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Protamine limits',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Protamine limits' },
+  },
+
+  {
+    id: 'atom-acc-lmwh-agents-weight',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the prototypical low-molecular-weight heparins and state their molecular weight relative to unfractionated heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The prototypical low-molecular-weight heparins are enoxaparin (Lovenox) and dalteparin (Fragmin). These are fractionated derivatives of heparin and are distinct from fondaparinux and the direct thrombin inhibitors.' },
+        { id: 'kp2', weight: 2, description: 'Their molecular weight is about 4,000 to 5,000 daltons, roughly two-thirds smaller than unfractionated heparin. This smaller size is the structural basis for their distinct anti-Xa-dominant activity and more predictable pharmacokinetics.' },
+      ],
+      common_errors: [
+        'Listing fondaparinux or a DOAC as an LMWH',
+        'Quoting the LMWH weight as similar to UFH',
+        'Forgetting that LMWH is smaller than UFH',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LMWH agents',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'LMWH agents' },
+  },
+
+  {
+    id: 'atom-acc-lmwh-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why LMWH favors anti-factor Xa activity and give its anti-Xa to anti-thrombin ratio versus UFH.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Inactivating thrombin requires a heparin chain long enough, at least about 18 saccharides, to bridge antithrombin and thrombin at the same time. LMWH chains are too short to form this bridge, so they retain anti-factor Xa activity, which needs only antithrombin binding, while losing much of their anti-thrombin activity.' },
+        { id: 'kp2', weight: 2, description: 'As a result, LMWH has an anti-factor Xa to anti-thrombin ratio of about 2:1 to 4:1, compared with 1:1 for unfractionated heparin. LMWH still works through antithrombin; it is not antithrombin-independent like the direct oral anticoagulants.' },
+      ],
+      common_errors: [
+        'Saying LMWH acts independently of antithrombin',
+        'Reversing the ratio so anti-thrombin dominates',
+        'Giving UFH a ratio other than 1:1',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LMWH mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'LMWH mechanism' },
+  },
+
+  {
+    id: 'atom-acc-lmwh-advantages',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the pharmacokinetic advantages of LMWH that allow it to be given without routine monitoring.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'LMWH has more predictable pharmacokinetics and less protein binding than unfractionated heparin. Because the dose-response is consistent, fixed or weight-based dosing produces reliable anticoagulation without the fourfold sensitivity variability seen with unfractionated heparin.' },
+        { id: 'kp2', weight: 2, description: 'These properties mean LMWH requires no routine laboratory monitoring in most patients. When monitoring is needed in special situations such as renal failure, obesity, or pregnancy, an anti-factor Xa assay is the appropriate test.' },
+      ],
+      common_errors: [
+        'Attributing nonlinear pharmacokinetics to LMWH',
+        'Saying LMWH needs routine aPTT monitoring',
+        'Claiming LMWH has heavier protein binding than UFH',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LMWH advantages',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'LMWH advantages' },
+  },
+
+  {
+    id: 'atom-acc-lmwh-renal',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why LMWH is problematic in renal failure and which agent is preferred instead.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'LMWH is cleared renally and therefore accumulates in renal failure, prolonging its effect and raising bleeding risk. Because its anticoagulant activity cannot be readily titrated or fully reversed, accumulation is dangerous in patients with poor renal function.' },
+        { id: 'kp2', weight: 2, description: 'Unfractionated heparin is preferred instead in renal failure because it is not renally dependent for clearance, has a short half-life, and is fully reversible with protamine. This makes UFH the safer, more controllable choice when renal function is impaired.' },
+      ],
+      common_errors: [
+        'Increasing the LMWH dose in renal failure',
+        'Choosing fondaparinux, which is also renally cleared',
+        'Forgetting that UFH clearance is not renally dependent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LMWH renal',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'LMWH renal' },
+  },
+
+  {
+    id: 'atom-acc-lmwh-protamine-partial',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why protamine only partially reverses LMWH at the level of anti-thrombin versus anti-factor Xa activity.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Protamine partially neutralizes only the anti-thrombin effect of LMWH. The dominant anti-factor Xa activity, which accounts for most of the LMWH anticoagulant effect given its 2:1 to 4:1 ratio, persists after protamine is given.' },
+        { id: 'kp2', weight: 2, description: 'Because the major anti-Xa component is not reversed, protamine cannot be relied upon to control LMWH-related bleeding. This partial reversal is the reason LMWH appears on the list of drugs protamine does not adequately reverse.' },
+      ],
+      common_errors: [
+        'Assuming protamine fully neutralizes LMWH',
+        'Reversing which component, anti-Xa versus anti-IIa, persists',
+        'Treating LMWH bleeding with protamine as a definitive fix',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LMWH reversal',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'LMWH reversal' },
+  },
+
+  {
+    id: 'atom-acc-lmwh-neuraxial',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial timing intervals for prophylactic and therapeutic LMWH dosing.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA recommends waiting 12 hours after a prophylactic dose of LMWH before performing a neuraxial block or removing a catheter. This interval reflects the lower anticoagulant burden of prophylactic dosing.' },
+        { id: 'kp2', weight: 2, description: 'After a therapeutic dose of LMWH, the interval is 24 hours. The longer wait accounts for the larger anticoagulant effect, and observing these intervals helps prevent the career-ending complication of epidural hematoma.' },
+      ],
+      common_errors: [
+        'Swapping the 12-hour and 24-hour intervals',
+        'Applying the 4 to 6 hour IV heparin interval to LMWH',
+        'Using 72 hours, which belongs to oral factor Xa inhibitors',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'LMWH neuraxial',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'LMWH neuraxial' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State warfarin\'s molecular mechanism: name the enzyme it inhibits, the post-translational modification that fails, and why the affected factors become nonfunctional.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Warfarin inhibits vitamin K epoxide reductase, the enzyme that recycles oxidized vitamin K epoxide back to the active reduced form. Without recycled vitamin K the liver cannot perform gamma-carboxylation, the reaction that adds carboxyl groups to glutamate residues on the vitamin K dependent factors. This is an upstream block on cofactor recycling rather than a direct action on the factors themselves.' },
+        { id: 'kp2', weight: 2, description: 'Gamma-carboxylation creates a calcium-binding tail that lets a factor anchor to phospholipid membranes. Without it the factors are still synthesized and secreted but cannot bind calcium and cannot participate in the cascade, so they are functionally inert. Importantly, factors already carboxylated and circulating are unaffected; only newly produced factors are defective, which is why warfarin has a delayed onset.' },
+      ],
+      common_errors: [
+        'Saying warfarin destroys or inactivates existing circulating factors rather than only newly made ones',
+        'Confusing the target with CYP2C19 or with antithrombin',
+        'Forgetting that the factors are synthesized but cannot bind calcium, instead claiming they are never made',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Warfarin mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Warfarin mechanism' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-factor-halflives',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the vitamin K dependent procoagulant factors in order of half-life with their approximate values, and explain why the INR rises before true anticoagulation is achieved.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The half-lives are factor VII about 6 hours, factor IX about 24 hours, factor X about 36 hours, and factor II (prothrombin) about 60 hours. Factor VII has the shortest half-life so it falls first, and because the prothrombin time is most sensitive to factor VII the INR rises early, within roughly 24 hours of starting warfarin.' },
+        { id: 'kp2', weight: 2, description: 'An early rise in the INR does not equal real anticoagulation. Meaningful antithrombotic protection requires the longest-lived factor, prothrombin (factor II), to fall, which takes around 60 hours or several days. This dissociation between a rising INR and actual protection is why warfarin alone is not trusted for immediate anticoagulation and why bridging is considered when rapid effect is needed.' },
+      ],
+      common_errors: [
+        'Assuming a therapeutic INR at 24 hours means the patient is fully anticoagulated',
+        'Mixing up the order, for example calling factor II the shortest half-life',
+        'Forgetting that factor VII drives the early INR rise',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Warfarin onset',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Warfarin onset' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-procoagulant-phase',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain warfarin\'s early procoagulant phase: which anticoagulant proteins are vitamin K dependent, the relevant half-life, and the clinical consequence in deficient patients.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Proteins C and S are vitamin K dependent anticoagulants, so warfarin lowers them along with the procoagulant factors. Protein C has a short half-life of about 8 hours, similar to factor VII, so it falls before prothrombin (factor II) at about 60 hours. For the first 24 to 48 hours the loss of protein C without a corresponding drop in prothrombin makes the net effect prothrombotic.' },
+        { id: 'kp2', weight: 2, description: 'This transient hypercoagulable window explains warfarin-induced skin necrosis, which occurs especially in patients with underlying protein C deficiency because their already-low protein C plummets and causes dermal microthrombosis. It is also the pharmacologic rationale for overlapping heparin (bridging) when a rapid and safe anticoagulant effect is required at initiation.' },
+      ],
+      common_errors: [
+        'Claiming warfarin is anticoagulant from the very first dose',
+        'Attributing skin necrosis to factor VII deficiency instead of protein C deficiency',
+        'Forgetting that proteins C and S are vitamin K dependent like the procoagulants',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Procoagulant phase',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Procoagulant phase' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-inr-targets',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe warfarin monitoring: name the test, how it is standardized across labs, and the INR targets for most indications versus mechanical mitral valves.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Warfarin is monitored with the prothrombin time reported as the INR. The INR uses the International Sensitivity Index to normalize results between laboratories that use different thromboplastin reagents, allowing comparable values regardless of where the test is run. The PT/INR is the warfarin test because the PT is most sensitive to factor VII.' },
+        { id: 'kp2', weight: 2, description: 'The standard INR target for most indications, including atrial fibrillation and venous thromboembolism, is 2.0 to 3.0. Mechanical mitral valves are the highest thrombotic risk and require a more intense target of 2.5 to 3.5. Warfarin has hundreds of drug, food, and antibiotic interactions, so frequent monitoring and gradual titration are essential.' },
+      ],
+      common_errors: [
+        'Using 2.5 to 3.5 for routine atrial fibrillation',
+        'Applying the standard 2.0 to 3.0 range to a mechanical mitral valve',
+        'Confusing the INR with the aPTT, which is the heparin test',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Warfarin monitoring',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Warfarin monitoring' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-perioperative',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Outline perioperative warfarin management: when to stop before elective surgery, what to do the day before if the INR is still elevated, and the INR threshold to operate.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Warfarin is stopped about 5 days before elective surgery to allow the INR to drift toward normal as the longer-lived factors are remade. The INR is then rechecked the day before surgery, and if it remains elevated a small dose of oral vitamin K, 1 to 2 mg, is given to nudge it down without causing resistance when warfarin resumes.' },
+        { id: 'kp2', weight: 2, description: 'Surgery may proceed when the INR is below 1.5, which reflects near-normal coagulation factor activity and acceptable bleeding risk. The same threshold governs neuraxial procedures. Whether to bridge with heparin during the off-warfarin window is a separate decision driven by thrombotic risk, addressed by the BRIDGE trial.' },
+      ],
+      common_errors: [
+        'Stopping warfarin only 1 day before major surgery',
+        'Giving high-dose IV vitamin K preoperatively instead of low-dose oral',
+        'Operating at an INR of 2 or higher for major surgery',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Perioperative warfarin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Perioperative warfarin' },
+  },
+
+  {
+    id: 'atom-acd-bridge-trial',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Summarize the BRIDGE trial: design and population, and the thromboembolism and major bleeding results comparing bridging to no bridging.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'BRIDGE (NEJM 2015) randomized 1884 atrial fibrillation patients on warfarin during interruption to either dalteparin bridging or no bridging in the off-warfarin window. It specifically studied typical AF patients, not mechanical valves or very recent thromboembolism, which matters when applying its conclusion.' },
+        { id: 'kp2', weight: 2, description: 'At 30 days, thromboembolism was 0.3% with bridging versus 0.4% without, essentially identical with no benefit. Major bleeding was 3.2% with bridging versus 1.3% without, significantly worse with bridging, about 2.5 times the rate. The trial therefore showed bridging causes bleeding harm without preventing strokes in typical AF.' },
+      ],
+      common_errors: [
+        'Believing bridging lowered stroke risk in BRIDGE',
+        'Applying BRIDGE results to mechanical valve patients',
+        'Reversing the bleeding numbers so that no-bridge appears worse',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'BRIDGE trial',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'BRIDGE trial' },
+  },
+
+  {
+    id: 'atom-acd-bridging-exceptions',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the default bridging recommendation for typical atrial fibrillation patients and list the specific exceptions who should still be bridged.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'For typical atrial fibrillation patients, bridging causes bleeding without preventing strokes, so the default is not to bridge during warfarin interruption. This follows directly from the BRIDGE trial and applies to ordinary AF without the high-risk features listed below.' },
+        { id: 'kp2', weight: 2, description: 'Exceptions who should still be bridged are mechanical heart valves, especially mitral, recent venous thromboembolism within 3 months, and the highest-risk CHA2DS2-VASc patients with prior stroke. These groups have a thrombotic risk high enough to justify accepting the bleeding risk of bridging.' },
+      ],
+      common_errors: [
+        'Bridging every patient with atrial fibrillation',
+        'Forgetting that recent VTE within 3 months is a bridging indication',
+        'Omitting mechanical mitral valves from the exception list',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Who bridges',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Who bridges' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-nonurgent-reversal',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe non-urgent warfarin reversal for a high INR without bleeding, including the vitamin K dose and the danger of overcorrecting with high-dose or IV vitamin K.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'When the INR is high but there is no active bleeding, management is to hold warfarin and give oral vitamin K 5 to 10 mg. The INR comes down gradually over about 24 hours as endogenous carboxylation resumes. Prothrombin complex concentrate and plasma are not needed because there is no bleeding emergency.' },
+        { id: 'kp2', weight: 2, description: 'High-dose or intravenous vitamin K overshoots the correction and saturates the recycling pathway, producing relative warfarin resistance when therapy resumes, making it difficult to re-establish a therapeutic INR. Low-dose oral vitamin K avoids this overcorrection while still lowering the INR safely.' },
+      ],
+      common_errors: [
+        'Reaching for PCC or plasma when there is no bleeding',
+        'Giving high-dose or rapid IV vitamin K and causing later resistance',
+        'Expecting the INR to normalize within minutes rather than about 24 hours',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Non-urgent reversal',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Non-urgent reversal' },
+  },
+
+  {
+    id: 'atom-acd-warfarin-urgent-reversal',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Detail urgent warfarin reversal: the contents of 4-factor PCC, its speed versus FFP, its volume and safety advantages, why IV vitamin K is added, and the FFP INR floor.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'For active bleeding or emergency surgery, 4-factor prothrombin complex concentrate (Kcentra) is first-line. It contains factors II, VII, IX, and X plus proteins C, S, and antithrombin, mirroring exactly what warfarin depletes. It restores the INR below 1.3 within about 30 minutes in roughly 55% of patients, compared with only about 10% for fresh frozen plasma.' },
+        { id: 'kp2', weight: 2, description: 'PCC delivers the factors in about 100 mL versus 1 to 2 liters of FFP, with no crossmatch, no TRALI, and no TACO. Because its effect is transient at 6 to 8 hours, IV vitamin K 10 mg given slowly is added for durable correction. Fresh frozen plasma has its own INR of 1.4 to 1.6, so FFP alone cannot bring a patient below 1.5, another reason PCC is preferred.' },
+      ],
+      common_errors: [
+        'Using FFP as first-line and expecting it to reach an INR below 1.5',
+        'Giving PCC without adding vitamin K and missing the transient duration',
+        'Forgetting that PCC contains proteins C, S, and antithrombin in addition to the four factors',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Urgent reversal',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Urgent reversal' },
+  },
+
+  {
+    id: 'atom-acd-doac-rationale-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why DOACs were developed and their unifying mechanism: the warfarin limitations they address, the two mechanistic classes, and what antithrombin-independent means.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'DOACs were designed to do what warfarin does but without routine monitoring, the many food and drug interactions, and the slow onset dictated by factor half-lives. They provide predictable oral dosing, though they still require renal dose adjustment. This makes them easier to use in most patients than warfarin.' },
+        { id: 'kp2', weight: 2, description: 'There are two mechanisms across four drugs: one direct thrombin inhibitor and three direct factor Xa inhibitors. All four are antithrombin-independent, meaning they bind the active site of thrombin or factor Xa directly rather than working through antithrombin the way heparin does. This direct binding gives them their predictable effect.' },
+      ],
+      common_errors: [
+        'Saying DOACs work through antithrombin like heparin',
+        'Claiming DOACs need no dose adjustment at all when they require renal adjustment',
+        'Miscounting the split as anything other than one thrombin and three Xa inhibitors',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Why DOACs exist',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Why DOACs exist' },
+  },
+
+  {
+    id: 'atom-acd-four-doacs',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the four DOACs with brand names, identify each one\'s target and dosing frequency, and state the shared dose-adjustment requirement.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Dabigatran (Pradaxa) is the direct thrombin inhibitor, dosed twice daily. The three direct factor Xa inhibitors are rivaroxaban (Xarelto) once daily, apixaban (Eliquis) twice daily, and edoxaban (Savaysa) once daily. So the twice-daily agents are dabigatran and apixaban, and the once-daily agents are rivaroxaban and edoxaban.' },
+        { id: 'kp2', weight: 2, description: 'All four DOACs require renal dose adjustment. Dabigatran is the most renally dependent, but the factor Xa inhibitors also need modification in kidney disease, which is why renal function must be assessed before dosing and during perioperative interruption planning.' },
+      ],
+      common_errors: [
+        'Calling rivaroxaban or edoxaban a thrombin inhibitor',
+        'Assigning twice-daily dosing to rivaroxaban or edoxaban',
+        'Stating that only dabigatran needs renal adjustment',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'The four DOACs',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'The four DOACs' },
+  },
+
+  {
+    id: 'atom-acd-doac-monitoring',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe DOAC monitoring: the default, the specific assays for dabigatran, the assay for factor Xa inhibitors, and the test that is explicitly not useful.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'DOACs usually require no monitoring, which is a central selling point. When a level must be known, dabigatran is assessed with the thrombin time, dilute thrombin time, or ecarin clotting time; the aPTT gives only a qualitative signal of dabigatran presence and is not quantitative.' },
+        { id: 'kp2', weight: 2, description: 'The direct factor Xa inhibitors are measured with a drug-specific calibrated anti-Xa assay. The prothrombin time and INR are explicitly not useful for the direct Xa inhibitors, a high-yield trap, so a normal INR does not mean the anticoagulant effect has cleared.' },
+      ],
+      common_errors: [
+        'Using the PT or INR to assess a factor Xa inhibitor',
+        'Treating the aPTT as a quantitative dabigatran level',
+        'Applying the anti-Xa assay to dabigatran instead of a thrombin-based test',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'DOAC monitoring',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'DOAC monitoring' },
+  },
+
+  {
+    id: 'atom-acd-pause-protocol',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Summarize the PAUSE perioperative protocol for DOACs: the trial, the stop and resume timing by bleeding risk, and why no bridging is needed.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'PAUSE (JAMA Internal Medicine 2019, n=3007 atrial fibrillation patients) established a simple stop-and-resume schedule. For low-bleeding-risk procedures the DOAC is stopped 1 day before and resumed 1 day after. For high-bleeding-risk procedures it is stopped 2 days before and resumed 2 to 3 days after, with adjustment for renal function.' },
+        { id: 'kp2', weight: 2, description: 'Outcomes were favorable, with about 1% major bleeding and under 0.5% thromboembolism, and no bridging was used. Bridging is unnecessary because DOAC half-lives are short enough that simply stopping and resuming covers the perioperative window safely, unlike warfarin.' },
+      ],
+      common_errors: [
+        'Bridging DOAC patients with heparin perioperatively',
+        'Swapping the timing so high risk uses 1 day and low risk uses 2 days',
+        'Ignoring the requirement to adjust timing for renal function',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'PAUSE protocol',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'PAUSE protocol' },
+  },
+
+  {
+    id: 'atom-acd-doac-reversal',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Detail DOAC reversal: the agent and nature for dabigatran, the agent and nature for factor Xa inhibitors with the ANNEXA-I finding, and the practical default at US institutions.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Dabigatran, the direct thrombin inhibitor, is reversed by idarucizumab (Praxbind), a monoclonal antibody fragment that binds dabigatran with about 350 times the affinity dabigatran has for thrombin. This high-affinity capture rapidly neutralizes the drug.' },
+        { id: 'kp2', weight: 2, description: 'The direct factor Xa inhibitors are reversed by andexanet alfa (Andexxa), a recombinant catalytically inactive factor Xa decoy that sequesters the inhibitor. ANNEXA-I in 2024 showed superior hemostasis versus usual care in intracranial hemorrhage but also more thrombotic events. Off-label 4-factor prothrombin complex concentrate remains the practical default at most US institutions.' },
+      ],
+      common_errors: [
+        'Swapping the agents so idarucizumab is used for Xa inhibitors',
+        'Forgetting that andexanet alfa increased thrombotic events in ANNEXA-I',
+        'Not knowing that off-label 4-factor PCC is the common practical default',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'DOAC reversal',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'DOAC reversal' },
+  },
+
+  {
+    id: 'atom-ace-aspirin-cox1',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State aspirin\'s molecular mechanism on the platelet, naming the enzyme, the type of inhibition, and the downstream mediator that is lost.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Aspirin irreversibly acetylates cyclooxygenase-1 (COX-1) by covalently modifying a serine residue, permanently inactivating the enzyme in that platelet. This is a covalent, irreversible block, distinguishing it from competitive or reversible inhibitors. Because the modification is permanent for the molecule, the platelet cannot restore COX-1 activity.' },
+        { id: 'kp2', weight: 2, description: 'With COX-1 disabled, the platelet cannot synthesize thromboxane A2, and without thromboxane A2 there is no amplification of platelet activation. Thromboxane A2 normally serves as a positive feedback signal recruiting and activating additional platelets, so its loss blunts aggregation. This is why low-dose aspirin is an effective antiplatelet agent.' },
+      ],
+      common_errors: [
+        'Saying aspirin blocks P2Y12 or the ADP receptor, which is the clopidogrel class',
+        'Calling the COX-1 inhibition reversible or competitive rather than irreversible acetylation',
+        'Confusing thromboxane A2 with prostacyclin or with fibrinogen crosslinking',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aspirin mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Aspirin mechanism' },
+  },
+
+  {
+    id: 'atom-ace-aspirin-pk',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain why aspirin\'s antiplatelet effect outlasts its 15 minute plasma half-life, and give the duration of the effect.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Aspirin\'s plasma half-life is only about 15 minutes, yet the platelet it touches is disabled for that platelet\'s entire 7 to 10 day lifespan. The platelet has no nucleus and cannot resynthesize COX-1, so the irreversible acetylation lasts for the life of the cell. A single dose therefore shuts down whatever platelets it contacts for the rest of their life.' },
+        { id: 'kp2', weight: 2, description: 'Because only newly produced platelets carry functional COX-1, recovery of platelet function depends on platelet turnover rather than drug clearance. Roughly 10 to 12 percent of the platelet pool is replaced per day, which is the basis for the 7 to 10 day interruption window when aspirin must be fully reversed. This decoupling of drug half-life from effect duration is a defining feature of irreversible platelet inhibitors.' },
+      ],
+      common_errors: [
+        'Attributing the long effect to a long-lived active metabolite rather than to irreversible enzyme block',
+        'Stating the platelet lifespan as a few hours or as 30 days',
+        'Assuming platelet function returns once the drug is cleared from plasma',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aspirin pharmacokinetics',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Aspirin pharmacokinetics' },
+  },
+
+  {
+    id: 'atom-ace-asa-primary',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe the perioperative management of aspirin taken for primary cardiovascular prevention, citing the supporting trial.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Aspirin taken for primary prevention is usually safe to stop before surgery because continuing it provides no proven benefit while adding bleeding risk. The first perioperative question is always what the patient is taking aspirin for, since primary and secondary prevention are managed differently. Stopping primary prevention aspirin is the default in most non-cardiac surgery.' },
+        { id: 'kp2', weight: 2, description: 'POISE-2 showed no benefit to continuing aspirin for primary prevention in non-cardiac surgery, providing the evidence base for discontinuation. The trial did not demonstrate a reduction in cardiovascular events from continuation, so the bleeding risk is not offset by benefit. This is the key citation distinguishing primary prevention management from the continue-through-surgery rule for secondary prevention.' },
+      ],
+      common_errors: [
+        'Claiming POISE-2 showed benefit to continuing aspirin',
+        'Recommending heparin bridging for an antiplatelet agent',
+        'Applying the primary prevention stop rule to post-stent or post-MI patients',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aspirin perioperative primary prevention',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Aspirin perioperative primary prevention' },
+  },
+
+  {
+    id: 'atom-ace-asa-secondary',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe the perioperative management of aspirin taken for secondary prevention and state whether aspirin contraindicates neuraxial anesthesia.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Aspirin for secondary prevention, meaning post-stent, post-myocardial-infarction, or post-stroke, is continued through most surgery, including cardiac surgery. These patients have established atherothrombotic disease where withdrawing aspirin risks ischemic events. The benefit of continued platelet inhibition outweighs the surgical bleeding risk in most settings.' },
+        { id: 'kp2', weight: 2, description: 'Aspirin is not a contraindication to neuraxial anesthesia; a patient on aspirin alone can receive a spinal or epidural. This aligns with the ASRA position that aspirin alone carries no neuraxial restriction. If aspirin must be interrupted for other reasons it is stopped 7 to 10 days before and resumed the morning after surgery.' },
+      ],
+      common_errors: [
+        'Stopping secondary prevention aspirin routinely before surgery',
+        'Believing aspirin alone prohibits a spinal or epidural',
+        'Confusing the secondary prevention continue rule with the primary prevention stop rule',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Aspirin perioperative secondary prevention',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Aspirin perioperative secondary prevention' },
+  },
+
+  {
+    id: 'atom-ace-p2y12-receptor',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Identify the natural ligand of the platelet P2Y12 receptor and explain its role in thrombosis.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The P2Y12 receptor is the platelet\'s receptor for adenosine diphosphate (ADP). Activated platelets release ADP from their dense granules, and that ADP binds P2Y12 on adjacent platelets. This identifies P2Y12 specifically as an ADP receptor, distinct from the thromboxane and fibrinogen receptors.' },
+        { id: 'kp2', weight: 2, description: 'ADP acting on P2Y12 recruits additional platelets, creating a positive feedback loop that amplifies thrombosis. Blocking P2Y12 breaks this loop, which is the shared mechanism of clopidogrel, prasugrel, and ticagrelor. The receptor thus sits at a key amplification step in primary hemostasis.' },
+      ],
+      common_errors: [
+        'Naming thromboxane A2 or fibrinogen as the P2Y12 ligand',
+        'Confusing P2Y12 with the GP IIb/IIIa fibrinogen receptor',
+        'Forgetting that P2Y12 blockade interrupts a positive feedback amplification loop',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'P2Y12 receptor',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'P2Y12 receptor' },
+  },
+
+  {
+    id: 'atom-ace-clopidogrel',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe clopidogrel\'s activation, the nature of its receptor binding, and the basis of clopidogrel resistance.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Clopidogrel is a prodrug that requires two CYP2C19-dependent activation steps in the liver before it can act, and once active it binds P2Y12 irreversibly. The irreversible binding means the effect persists for the platelet lifespan rather than the drug half-life. This combination of hepatic activation plus irreversible binding defines its pharmacology.' },
+        { id: 'kp2', weight: 2, description: 'Because activation depends on CYP2C19, the 20 to 30 percent of patients carrying CYP2C19 loss-of-function variants underactivate the drug, producing so-called clopidogrel resistance with reduced antiplatelet effect. This pharmacogenetic variability is a major reason prasugrel and ticagrelor were developed. The ASRA neuraxial hold for clopidogrel is 7 days.' },
+      ],
+      common_errors: [
+        'Calling clopidogrel direct-acting or reversibly bound',
+        'Attributing resistance to renal clearance rather than CYP2C19 variants',
+        'Giving the resistance prevalence as a tiny fraction rather than 20 to 30 percent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Clopidogrel',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Clopidogrel' },
+  },
+
+  {
+    id: 'atom-ace-prasugrel',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe prasugrel relative to clopidogrel, including activation, potency, resistance, and the ASRA neuraxial hold for this drug.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Prasugrel is a prodrug activated in a single step, in contrast to clopidogrel\'s two-step CYP2C19 activation. It is more potent than clopidogrel and resistance is rare, giving a more reliable antiplatelet effect. Like clopidogrel it binds the P2Y12 receptor irreversibly.' },
+        { id: 'kp2', weight: 2, description: 'Because prasugrel is potent and irreversible, the recommended interruption before neuraxial anesthesia is 7 to 10 days, matching the ASRA neuraxial number. This longer window reflects the need to regenerate enough unblocked platelets. The 7 to 10 day figure distinguishes prasugrel from clopidogrel at 7 days and ticagrelor at 5 to 7 days.' },
+      ],
+      common_errors: [
+        'Calling prasugrel direct-acting and reversible, which is ticagrelor',
+        'Saying prasugrel is weaker than clopidogrel',
+        'Giving the prasugrel hold as 5 to 7 days instead of 7 to 10 days',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Prasugrel',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Prasugrel' },
+  },
+
+  {
+    id: 'atom-ace-ticagrelor',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe ticagrelor\'s mechanism, including how it binds P2Y12, what its effect duration tracks, and its ASRA neuraxial hold for this drug.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Ticagrelor is direct-acting and binds P2Y12 reversibly, so unlike the prodrugs clopidogrel and prasugrel it does not require hepatic activation. Because the binding is reversible, its antiplatelet effect tracks the drug half-life rather than the platelet lifespan. This is the defining contrast with the irreversible thienopyridine prodrugs.' },
+        { id: 'kp2', weight: 2, description: 'Since the effect follows drug clearance, ticagrelor is interrupted 5 to 7 days before neuraxial anesthesia, the ASRA neuraxial number. This shorter window relative to prasugrel reflects reversible rather than irreversible binding. The 5 to 7 day figure separates ticagrelor from clopidogrel at 7 days and prasugrel at 7 to 10 days.' },
+      ],
+      common_errors: [
+        'Calling ticagrelor a prodrug or irreversibly bound',
+        'Saying its effect tracks platelet lifespan rather than drug half-life',
+        'Giving the ticagrelor hold as 7 to 10 days instead of 5 to 7 days',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Ticagrelor',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Ticagrelor' },
+  },
+
+  {
+    id: 'atom-ace-dapt-definition',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Define dual antiplatelet therapy after coronary stenting and explain why it is needed.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Dual antiplatelet therapy (DAPT) is aspirin plus a P2Y12 inhibitor given after stent placement. It combines two different antiplatelet mechanisms, COX-1 inhibition and ADP receptor blockade, rather than two drugs of the same class or an anticoagulant. This pairing is the standard regimen after percutaneous coronary intervention.' },
+        { id: 'kp2', weight: 2, description: 'DAPT is needed because the stent is a thrombogenic foreign body until endothelium grows over it, a process that takes weeks to months. During that window the exposed metal can trigger platelet-mediated thrombosis, so dual inhibition protects the stent. Aspirin is then continued indefinitely in most patients even after the P2Y12 inhibitor is stopped.' },
+      ],
+      common_errors: [
+        'Defining DAPT as aspirin plus warfarin or aspirin plus heparin',
+        'Saying DAPT means two P2Y12 inhibitors together',
+        'Forgetting that the rationale is endothelialization of a thrombogenic stent',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'DAPT definition',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'DAPT definition' },
+  },
+
+  {
+    id: 'atom-ace-stent-duration',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the minimum DAPT duration for a bare-metal stent and the DAPT durations for a current-generation drug-eluting stent in stable disease versus acute coronary syndrome.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'A bare-metal stent requires a minimum of 30 days of dual antiplatelet therapy, the shortest of the stent durations because it endothelializes relatively quickly. This 30 day floor is the key bare-metal stent number. Aspirin continues indefinitely afterward in most patients.' },
+        { id: 'kp2', weight: 2, description: 'A current-generation drug-eluting stent requires 3 months of DAPT for stable disease and 6 to 12 months for acute coronary syndrome. The longer durations reflect delayed endothelialization from the antiproliferative drug coating and higher thrombotic risk in ACS. These figures contrast with the 30 day bare-metal minimum.' },
+      ],
+      common_errors: [
+        'Giving the bare-metal stent minimum as 6 or 12 months',
+        'Swapping the stable disease and ACS drug-eluting durations',
+        'Stating that DAPT is lifelong rather than aspirin alone continuing indefinitely',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Stent DAPT duration',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Stent DAPT duration' },
+  },
+
+  {
+    id: 'atom-ace-operative-dapt',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the consequence of stopping the P2Y12 inhibitor early within the DAPT window and the resulting scheduling rule for elective surgery.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Stopping the P2Y12 inhibitor early during the DAPT window can precipitate in-stent thrombosis and ST-elevation myocardial infarction, with reported mortality of 20 to 40 percent. This is an acute catastrophic thrombotic event, not slow restenosis. The high mortality is what makes premature discontinuation so dangerous.' },
+        { id: 'kp2', weight: 2, description: 'Because of this risk, elective surgery should be deferred until the DAPT window is complete rather than stopping the P2Y12 inhibitor to operate. Bridging strategies for genuinely urgent surgery exist but are taught in the cardiac anesthesia material and are not a license for elective cases. The governing principle is to wait out the window for anything elective.' },
+      ],
+      common_errors: [
+        'Underestimating the mortality as under 1 percent',
+        'Describing the harm as bleeding rather than stent thrombosis and STEMI',
+        'Proceeding with elective surgery by stopping the P2Y12 inhibitor early',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Operative DAPT question',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Operative DAPT question' },
+  },
+
+  {
+    id: 'atom-ace-gp2b3a-target',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the molecular target of glycoprotein IIb/IIIa antagonists and where this sits in platelet aggregation.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Glycoprotein IIb/IIIa antagonists block the fibrinogen receptor on the activated platelet. Fibrinogen normally crosslinks adjacent activated platelets through this receptor, so blocking it prevents the bridging that holds the aggregate together. This is a distinct target from COX-1 and from P2Y12.' },
+        { id: 'kp2', weight: 2, description: 'The fibrinogen receptor is the final common pathway of platelet aggregation, the convergence point downstream of both thromboxane and ADP signaling. Blocking it therefore inhibits aggregation regardless of the upstream activating stimulus, making these the most potent antiplatelet agents. This final-common-pathway position explains their potency and their bleeding risk.' },
+      ],
+      common_errors: [
+        'Saying GP IIb/IIIa antagonists block P2Y12 or COX-1',
+        'Confusing the GP IIb/IIIa fibrinogen receptor with the GP Ib von Willebrand receptor',
+        'Forgetting that this is the final common pathway of aggregation',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'GP IIb/IIIa target',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'GP IIb/IIIa target' },
+  },
+
+  {
+    id: 'atom-ace-gp2b3a-agents',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Distinguish the three glycoprotein IIb/IIIa antagonists by drug type and recovery, and name the adverse effect they share.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Abciximab is a monoclonal antibody with platelet recovery of 24 to 48 hours, the longest of the three. Eptifibatide is a peptide and tirofiban is a non-peptide, both with short half-lives and correspondingly faster recovery. The antibody versus small-molecule distinction explains the difference in recovery time.' },
+        { id: 'kp2', weight: 2, description: 'All three agents can cause thrombocytopenia, which is the shared class adverse effect to watch for. The class has been largely supplanted by oral P2Y12 inhibitors plus cangrelor, an intravenous reversible P2Y12 agent. Recognizing thrombocytopenia and the modern shift away from these drugs are the two practical points.' },
+      ],
+      common_errors: [
+        'Calling abciximab a peptide or giving it a short half-life',
+        'Forgetting that all three can cause thrombocytopenia',
+        'Confusing cangrelor, a P2Y12 inhibitor, with a GP IIb/IIIa antagonist',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'GP IIb/IIIa agents',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'GP IIb/IIIa agents' },
+  },
+
+  {
+    id: 'atom-ace-asra-rationale',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Name the complication the ASRA neuraxial timing guidelines exist to prevent and cite the governing reference.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The ASRA neuraxial timing rules exist to prevent epidural hematoma in the anticoagulated patient, a rare but devastating and preventable complication that can end careers. It is the bleeding catastrophe of regional anesthesia, not a headache or transient neurologic symptom. The guiding clinical maxim is that if you cannot remember a number, you do not do the block.' },
+        { id: 'kp2', weight: 2, description: 'The reference is the American Society of Regional Anesthesia and Pain Medicine guideline, 4th edition, by Horlocker and colleagues, published in 2018. Knowing the source anchors the specific timing numbers that follow. This edition is the standard cited authority for neuraxial anticoagulation timing.' },
+      ],
+      common_errors: [
+        'Naming postdural puncture headache as the complication being prevented',
+        'Citing a different society or an older edition than the 2018 4th edition',
+        'Forgetting the rule to skip the block when a number is uncertain',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA rationale',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA rationale' },
+  },
+
+  {
+    id: 'atom-ace-asra-aspirin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial recommendation for a patient on aspirin alone.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA places no neuraxial restriction on a patient taking aspirin alone, so a spinal or epidural may proceed without a hold. This is consistent with the broader teaching that aspirin is not a contraindication to neuraxial anesthesia. Aspirin alone is the one antiplatelet that requires no interruption for neuraxial procedures.' },
+        { id: 'kp2', weight: 2, description: 'The no-restriction rule applies to aspirin as a single agent and not to aspirin combined with a P2Y12 inhibitor, where the P2Y12 hold governs. Aspirin is also not monitored by the prothrombin time, so no lab threshold gates the block. The contrast with the P2Y12 holds is the key testable distinction.' },
+      ],
+      common_errors: [
+        'Imposing a 7 day or 24 hour hold for aspirin alone',
+        'Applying the no-restriction rule when a P2Y12 inhibitor is also on board',
+        'Believing a normal PT must be documented before neuraxial on aspirin',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA aspirin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA aspirin' },
+  },
+
+  {
+    id: 'atom-ace-asra-clopidogrel',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial hold for clopidogrel and contrast it with prasugrel and ticagrelor.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA recommends holding clopidogrel for 7 days before a neuraxial procedure. This reflects its irreversible P2Y12 binding, which requires regeneration of unblocked platelets over roughly a week. Seven days is the specific clopidogrel number to memorize.' },
+        { id: 'kp2', weight: 2, description: 'The clopidogrel 7 day hold sits between the other two P2Y12 numbers: prasugrel at 7 to 10 days and ticagrelor at 5 to 7 days. Prasugrel is longer because it is more potent and irreversible, and ticagrelor is shorter because it is reversible. Keeping these three numbers distinct is the high-yield point.' },
+      ],
+      common_errors: [
+        'Giving the clopidogrel hold as 5 to 7 days or 7 to 10 days',
+        'Holding clopidogrel only 24 hours',
+        'Confusing clopidogrel timing with prasugrel or ticagrelor timing',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA clopidogrel',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA clopidogrel' },
+  },
+
+  {
+    id: 'atom-ace-asra-prasugrel',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial hold for prasugrel and explain why it is longer than for ticagrelor.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA recommends holding prasugrel for 7 to 10 days before a neuraxial procedure, the longest of the three P2Y12 windows. This reflects its high potency and irreversible binding to P2Y12. Seven to ten days is the specific prasugrel number.' },
+        { id: 'kp2', weight: 2, description: 'Prasugrel requires a longer hold than ticagrelor because prasugrel binds irreversibly, so recovery depends on platelet turnover, whereas ticagrelor binds reversibly and clears with the drug, needing only 5 to 7 days. The mechanism therefore explains the timing difference. This contrast is a favored test point.' },
+      ],
+      common_errors: [
+        'Giving the prasugrel hold as 7 days or 5 to 7 days',
+        'Saying prasugrel is reversible and therefore needs a shorter hold',
+        'Confusing prasugrel timing with clopidogrel timing',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA prasugrel',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA prasugrel' },
+  },
+
+  {
+    id: 'atom-ace-asra-ticagrelor',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial hold for ticagrelor and the ASRA restart timing for any P2Y12 inhibitor after catheter removal.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA recommends holding ticagrelor for 5 to 7 days before a neuraxial procedure, the shortest P2Y12 window because ticagrelor binds reversibly and its effect tracks drug clearance. Five to seven days is the specific ticagrelor number, distinct from clopidogrel at 7 days and prasugrel at 7 to 10 days. This shorter interval is a direct consequence of reversible binding.' },
+        { id: 'kp2', weight: 2, description: 'After the neuraxial catheter is removed, any of the P2Y12 inhibitors may be restarted 6 hours later. This restart interval is uniform across clopidogrel, prasugrel, and ticagrelor and matches the 6 hour DOAC restart. The 6 hour figure provides margin around catheter manipulation before re-anticoagulating the platelets.' },
+      ],
+      common_errors: [
+        'Giving the ticagrelor hold as 7 to 10 days instead of 5 to 7 days',
+        'Stating the P2Y12 restart as 24 hours or immediately rather than 6 hours after catheter removal',
+        'Confusing ticagrelor timing with prasugrel timing',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA ticagrelor and restart',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA ticagrelor and restart' },
+  },
+
+  {
+    id: 'atom-ace-asra-subq-heparin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial holds for low-dose subcutaneous heparin prophylaxis versus higher-dose or TID subcutaneous heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Low-dose subcutaneous heparin prophylaxis, dosed BID at 10000 units per day or less, requires a 4 to 6 hour hold before a neuraxial procedure. No aPTT documentation is mandated at this low prophylactic dose. The 4 to 6 hour figure is the low-dose subcutaneous number.' },
+        { id: 'kp2', weight: 2, description: 'Higher-dose or TID subcutaneous heparin requires a longer 12 hour hold plus documentation of a normal aPTT before the block. The added time and the lab check reflect the greater and more variable anticoagulant effect at higher dosing. The contrast of 4 to 6 hours versus 12 hours plus a normal aPTT is the key distinction.' },
+      ],
+      common_errors: [
+        'Applying the 12 hour rule to low-dose BID prophylaxis',
+        'Omitting the normal aPTT requirement for higher-dose or TID dosing',
+        'Confusing subcutaneous heparin timing with LMWH timing',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA subcutaneous heparin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA subcutaneous heparin' },
+  },
+
+  {
+    id: 'atom-ace-asra-iv-heparin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial requirement before a block for intravenous therapeutic heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Intravenous therapeutic heparin requires a 4 to 6 hour hold before a neuraxial procedure, allowing the short heparin half-life of about 1 hour to elapse over several half-lives. This is the same 4 to 6 hour window as low-dose subcutaneous prophylaxis but applied to full IV therapy. The interval is dictated by heparin\'s rapid clearance.' },
+        { id: 'kp2', weight: 2, description: 'In addition to the 4 to 6 hour hold, a normal aPTT must be documented before the block, because IV heparin produces a substantial and variable anticoagulant effect that must be confirmed resolved. The aPTT is the correct test for unfractionated heparin. Time plus a normal aPTT together gate the procedure.' },
+      ],
+      common_errors: [
+        'Giving the IV heparin hold as 12 or 24 hours',
+        'Omitting the requirement to document a normal aPTT',
+        'Using the INR instead of the aPTT to confirm heparin resolution',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA intravenous heparin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA intravenous heparin' },
+  },
+
+  {
+    id: 'atom-ace-asra-lmwh',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial holds for prophylactic versus therapeutic low-molecular-weight heparin.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Prophylactic low-molecular-weight heparin requires a 12 hour hold before a neuraxial procedure. This longer interval relative to unfractionated heparin reflects the longer half-life and predominant anti-factor Xa effect of LMWH. Twelve hours is the prophylactic LMWH number.' },
+        { id: 'kp2', weight: 2, description: 'Therapeutic low-molecular-weight heparin requires a 24 hour hold, double the prophylactic interval, because the higher dose produces a greater and longer anti-Xa effect that protamine only partially reverses. The 12 versus 24 hour split is the key prophylactic versus therapeutic distinction. These numbers separate LMWH from the 4 to 6 hour unfractionated heparin windows.' },
+      ],
+      common_errors: [
+        'Swapping the prophylactic and therapeutic intervals',
+        'Giving the prophylactic LMWH hold as 4 to 6 hours',
+        'Confusing LMWH timing with subcutaneous unfractionated heparin timing',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA low-molecular-weight heparin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA low-molecular-weight heparin' },
+  },
+
+  {
+    id: 'atom-ace-asra-warfarin',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial requirement for warfarin, including the INR threshold for placing a block and for removing a catheter.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA requires warfarin be stopped until the INR is below 1.5 before a neuraxial block, which typically takes about 5 days. An INR below 1.5 indicates that enough functional vitamin K dependent clotting factors have recovered for safe neuraxial intervention. The 5 day estimate aligns with the standard preoperative warfarin stop.' },
+        { id: 'kp2', weight: 2, description: 'Neuraxial catheters should likewise be pulled only when the INR is below 1.5, applying the same threshold to catheter removal as to block placement. This protects against bleeding during the high-risk catheter manipulation step. The single INR below 1.5 threshold for both placement and removal is the key warfarin number.' },
+      ],
+      common_errors: [
+        'Using an INR threshold of 2.0 or 1.3 instead of below 1.5',
+        'Applying the threshold only to placement and not to catheter removal',
+        'Forgetting that reaching INR below 1.5 typically takes about 5 days',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA warfarin',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA warfarin' },
+  },
+
+  {
+    id: 'atom-ace-asra-dabigatran',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial hold for dabigatran and how renal function modifies it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA recommends holding dabigatran, the direct thrombin inhibitor among the DOACs, for 4 to 5 days before a neuraxial procedure. This is longer than the 72 hour window used for the oral factor Xa inhibitors. Four to five days is the dabigatran-specific number.' },
+        { id: 'kp2', weight: 2, description: 'The hold must be extended beyond 4 to 5 days if renal function is impaired, because dabigatran is cleared predominantly by the kidney and accumulates in renal insufficiency. This renal dependence sets dabigatran apart from the factor Xa inhibitors in timing. Lengthening the interval for low creatinine clearance is the key safety point.' },
+      ],
+      common_errors: [
+        'Giving the dabigatran hold as 72 hours like the factor Xa inhibitors',
+        'Failing to extend the hold for renal impairment',
+        'Confusing dabigatran, a thrombin inhibitor, with the oral factor Xa inhibitors',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA dabigatran',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA dabigatran' },
+  },
+
+  {
+    id: 'atom-ace-asra-xa-doac',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the ASRA neuraxial hold for the oral direct factor Xa inhibitors and the restart timing for DOACs after catheter removal.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA recommends a 72 hour hold before a neuraxial procedure for the oral direct factor Xa inhibitors rivaroxaban, apixaban, and edoxaban. All three share the same 72 hour figure, distinct from dabigatran at 4 to 5 days. Seventy-two hours is the number for the oral Xa inhibitors.' },
+        { id: 'kp2', weight: 2, description: 'After the neuraxial catheter is removed, a DOAC may be restarted 6 hours later, the same restart interval used for the P2Y12 inhibitors. This applies across both the factor Xa inhibitors and dabigatran once the procedure is complete. The 6 hour restart provides margin around catheter manipulation.' },
+      ],
+      common_errors: [
+        'Giving the oral Xa inhibitor hold as 4 to 5 days like dabigatran',
+        'Stating the DOAC restart as 72 hours or immediately rather than 6 hours after catheter removal',
+        'Assuming the three oral Xa inhibitors have different preprocedure holds',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ASRA factor Xa inhibitors and restart',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ASRA factor Xa inhibitors and restart' },
+  },
+
+  {
+    id: 'atom-acf-txa-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Explain the molecular mechanism by which tranexamic acid (TXA) produces its antifibrinolytic effect, naming the target molecule and the binding site involved.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'TXA is a lysine analog that competitively occupies the lysine-binding site on plasminogen. Because plasminogen normally docks onto fibrin through these lysine-binding sites, blocking them prevents plasminogen from attaching to fibrin in the first place. This is the same mechanism as epsilon-aminocaproic acid (Amicar), only TXA is more potent.' },
+        { id: 'kp2', weight: 2, description: 'With plasminogen unable to bind fibrin, tissue plasminogen activator (tPA) cannot efficiently convert plasminogen to plasmin on the clot surface. Less plasmin means less fibrin breakdown, so the existing clot is preserved. The drug does not create new clot, activate platelets, or boost thrombin generation; it simply shifts the balance away from fibrinolysis.' },
+      ],
+      common_errors: [
+        'Saying TXA directly inhibits thrombin or factor Xa rather than blocking plasminogen',
+        'Claiming TXA creates new clot instead of preserving the clot already present',
+        'Confusing the lysine-binding site target with a serine protease active site',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'TXA mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'TXA mechanism' },
+  },
+
+  {
+    id: 'atom-acf-crash2-trial',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Summarize the CRASH-2 trial of tranexamic acid: year and journal, population and size, the TXA dosing regimen and timing window, the all-cause mortality and death-from-bleeding results, and the CRASH-3 extension.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'CRASH-2 was published in the Lancet in 2010 and enrolled 20,211 trauma patients across 40 countries. TXA was given as 1 g over 10 minutes followed by 1 g over 8 hours, and it had to be started within 8 hours of injury versus placebo. This made it a large, pragmatic trial of a cheap, widely available drug.' },
+        { id: 'kp2', weight: 2, description: 'All-cause mortality was 14.5% with TXA versus 16.0% with placebo, and death from bleeding was 4.9% versus 5.7%, both favoring TXA. The effect of a cheap drug was large enough that TXA is now in essentially every level-one trauma center\'s massive transfusion protocol. CRASH-3 in 2019 extended demonstrated benefit to isolated traumatic brain injury.' },
+      ],
+      common_errors: [
+        'Citing a 3-hour entry window instead of the 8-hour CRASH-2 window',
+        'Mixing up the 14.5 vs 16.0 all-cause mortality with the 4.9 vs 5.7 bleeding-death figures',
+        'Attributing the CRASH-3 brain-injury extension to CRASH-2 itself',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'CRASH-2 trial',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'CRASH-2 trial' },
+  },
+
+  {
+    id: 'atom-acf-atacas-trial',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Summarize the ATACAS trial of tranexamic acid in cardiac surgery: year and journal, population and size, the efficacy benefit on transfusion and reoperation, the seizure signal with its magnitude, and the proposed seizure mechanism.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ATACAS was published in NEJM in 2017 and studied 4,631 CABG patients randomized to tranexamic acid versus placebo. TXA roughly halved transfusion and reduced reoperation for bleeding from 2.8% to 1.4%. These efficacy benefits are why most US cardiac centers now use a 1 g load plus 1 g infusion routinely.' },
+        { id: 'kp2', weight: 2, description: 'The trade-off was a sevenfold increase in seizures, 0.7% with TXA versus 0.1% with placebo. The proposed mechanism is GABA-A receptor antagonism at high doses, which removes cortical inhibition and lowers the seizure threshold. The risk is greatest in elderly and open-chamber patients, so centers dose with that awareness.' },
+      ],
+      common_errors: [
+        'Stating seizures fell rather than rose sevenfold with TXA',
+        'Attributing TXA seizures to NMDA overactivation instead of GABA-A antagonism',
+        'Confusing the ATACAS CABG cohort with the CRASH-2 trauma cohort',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'ATACAS trial',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'ATACAS trial' },
+  },
+
+  {
+    id: 'atom-acf-ddavp-mechanism',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe the mechanism, receptor, source organelle, dose, and administration rate of desmopressin (DDAVP) when used for hemostasis, and explain why the infusion rate matters.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'DDAVP is 1-deamino-8-D-arginine vasopressin, a V2 vasopressin receptor analog. Acting on endothelial V2 receptors, it releases stored von Willebrand factor and factor VIII from Weibel-Palade bodies, the endothelial storage organelles. It works by mobilizing endogenous stores, not by supplying exogenous factor concentrate.' },
+        { id: 'kp2', weight: 2, description: 'The dose is 0.3 mcg/kg intravenously given over 15 to 30 minutes. A slow infusion is non-negotiable because a rapid push releases other endothelial mediators that cause hypotension. Note the unit is micrograms per kilogram, not milligrams, and the slow rate is a safety requirement, not a convenience.' },
+      ],
+      common_errors: [
+        'Writing the dose as milligrams per kilogram instead of 0.3 mcg/kg',
+        'Saying DDAVP supplies exogenous factor VIII rather than releasing stored vWF and factor VIII',
+        'Forgetting that a rapid push causes hypotension and giving it as a fast bolus',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'DDAVP mechanism',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'DDAVP mechanism' },
+  },
+
+  {
+    id: 'atom-acf-ddavp-indications',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'List the genuine indications for desmopressin (DDAVP), name its strongest indication, and explain its limited role in routine cardiac surgery with the supporting evidence.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'DDAVP genuinely helps in type 1 von Willebrand disease, which is its strongest indication, as well as mild hemophilia A and uremic platelet dysfunction. These share a theme of releasable or dysfunctional vWF and factor VIII or a platelet-function defect that DDAVP can partly correct. It does nothing for warfarin or for factor-deficient bleeding that needs replacement.' },
+        { id: 'kp2', weight: 2, description: 'DDAVP is not a routine cardiac surgery rescue. A meta-analysis of 18 trials and roughly 1,300 patients showed a median reduction in blood loss of only about 115 mL. That marginal benefit is why it is not reached for reflexively after bypass; targeted use in its true indications is where it earns its place.' },
+      ],
+      common_errors: [
+        'Listing severe hemophilia B as a DDAVP indication instead of mild hemophilia A',
+        'Treating DDAVP as a first-line routine post-bypass rescue agent',
+        'Forgetting the ~115 mL blood-loss figure that defines its weak cardiac benefit',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'DDAVP indications',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'DDAVP indications' },
+  },
+
+  {
+    id: 'atom-acf-fibrinogen-substrate',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe fibrinogen as a coagulation substrate: its role relative to thrombin, its molecular size and source, its half-life, its normal range, and how pregnancy and postpartum hemorrhage affect it.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Fibrinogen is the substrate that thrombin cleaves into fibrin, the molecule that stabilizes the platelet plug into a real clot. It is a 340-kDa hepatic glycoprotein with a long half-life of about 3.7 days, fitting its role as an abundant structural precursor. It is not an enzyme and is not vitamin K dependent.' },
+        { id: 'kp2', weight: 2, description: 'The normal fibrinogen range is 200 to 400 mg/dL. Pregnancy raises it above 400 in the third trimester, so a precipitous fibrinogen drop during postpartum hemorrhage is an early warning sign, sometimes before the absolute number even looks abnormal. Recognizing that elevated baseline is key to catching consumptive coagulopathy early.' },
+      ],
+      common_errors: [
+        'Calling fibrinogen an enzyme or a vitamin K dependent factor',
+        'Giving a normal range other than 200 to 400 mg/dL',
+        'Saying pregnancy lowers fibrinogen rather than raising it above 400',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Fibrinogen substrate',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Fibrinogen substrate' },
+  },
+
+  {
+    id: 'atom-acf-fibrinogen-repletion',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'State the fibrinogen replacement target in a bleeding patient and compare the options: cryoprecipitate dosing and expected rise, fibrinogen concentrate, and why fresh frozen plasma is a poor source.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'In a bleeding patient the target is to keep fibrinogen above roughly 150 to 200 mg/dL. Cryoprecipitate is standard US practice, dosed at 1 unit per 10 kg, which raises fibrinogen by about 50 to 70 mg/dL. Fibrinogen concentrate (RiaSTAP) is routine in European cardiac centers but used off-label in the US for acquired hypofibrinogenemia.' },
+        { id: 'kp2', weight: 2, description: 'Fresh frozen plasma is a poor source for repleting fibrinogen because its own fibrinogen concentration is only about 200 mg/dL. To raise a low fibrinogen meaningfully with FFP would require a large, impractical volume, which is why concentrated products are preferred. The lesson is to use cryoprecipitate or fibrinogen concentrate, not FFP, when fibrinogen is the deficit.' },
+      ],
+      common_errors: [
+        'Quoting a cryoprecipitate rise far above or below 50 to 70 mg/dL per 1 unit per 10 kg',
+        'Treating FFP as a strong fibrinogen source despite its ~200 mg/dL content',
+        'Forgetting the above 150 to 200 mg/dL bleeding target',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Fibrinogen repletion',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Fibrinogen repletion' },
+  },
+
+  {
+    id: 'atom-acf-pcc-content-role',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe prothrombin complex concentrates: the contents and primary role of 4-factor PCC (Kcentra), how 3-factor PCCs differ, and what FEIBA is used for.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: '4-factor PCC (Kcentra) contains coagulation factors II, VII, IX, and X plus proteins C, S, and antithrombin. It is first-line for urgent warfarin reversal and is also used off-label for direct factor Xa inhibitor reversal when andexanet alfa is unavailable. Its concentrated, low-volume nature makes it superior to FFP for rapid correction.' },
+        { id: 'kp2', weight: 2, description: '3-factor PCCs such as Profilnine and Bebulin are low in factor VII, making them less useful for warfarin reversal than 4-factor products. FEIBA is an activated PCC used in hemophilia patients with inhibitors, a distinct indication. Distinguishing 4-factor from 3-factor and from the activated FEIBA product is the key concept.' },
+      ],
+      common_errors: [
+        'Listing only II, IX, X for 4-factor PCC, which is actually the 3-factor profile',
+        'Forgetting that 4-factor PCC also carries proteins C, S, and antithrombin',
+        'Confusing FEIBA, an activated PCC for inhibitors, with standard non-activated PCC',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Prothrombin complex concentrates',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Prothrombin complex concentrates' },
+  },
+
+  {
+    id: 'atom-acf-rfviia',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'Describe recombinant factor VIIa (NovoSeven): its approved indications, its thrombotic risk profile in non-hemophilia patients, and why its effect on the INR in warfarin patients is misleading.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'Recombinant factor VIIa (NovoSeven) is approved for hemophilia A or B with inhibitors, factor VII deficiency, and Glanzmann thrombasthenia. Off-label use for refractory life-threatening hemorrhage is widespread but carries real thrombotic risk in non-hemophilia patients, with 54% of events arterial and 72% of associated deaths from thrombosis. This is why it should be reserved for true rescue.' },
+        { id: 'kp2', weight: 2, description: 'In warfarin patients rFVIIa normalizes the INR without correcting the underlying multifactor defect, producing a misleading lab value that can give false reassurance. Because of this and its thrombotic risk, prothrombin complex concentrate is preferred for warfarin reversal. rFVIIa is a last-ditch rescue, not a routine reversal agent.' },
+      ],
+      common_errors: [
+        'Claiming rFVIIa corrects the warfarin defect rather than just normalizing the INR cosmetically',
+        'Stating rFVIIa carries no thrombotic risk in non-hemophilia patients',
+        'Preferring rFVIIa over PCC for routine warfarin reversal',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Recombinant factor VIIa',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Recombinant factor VIIa' },
+  },
+
+  {
+    id: 'atom-acf-case1-apixaban',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'For Case 1 (78-year-old, hip fracture, apixaban for atrial fibrillation, last dose 12 hours ago, CrCl 55, OR in 6 hours), state the neuraxial decision and its ASRA basis, the PAUSE surgical-timing point with the hip-fracture caveat, and the bleeding rescue plan.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'ASRA requires 72 hours off apixaban before neuraxial placement, so with only 12 hours elapsed a spinal is ruled out and the patient receives general anesthesia. The PAUSE protocol recommends stopping a DOAC 2 days before a high-bleeding-risk procedure, but a hip fracture cannot safely wait 48 hours given its own mortality conversation. The team therefore proceeds with general anesthesia, blood available, and monitoring for bleeding.' },
+        { id: 'kp2', weight: 2, description: 'Because apixaban cannot be neutralized by protamine or vitamin K, the rescue plan if bleeding becomes life-threatening is off-label 4-factor PCC or andexanet alfa, the recombinant decoy factor Xa. The decision balances the urgency of the hip fracture against residual anticoagulant effect. Andexanet or PCC stands ready rather than being given prophylactically.' },
+      ],
+      common_errors: [
+        'Allowing a spinal at 12 hours instead of honoring the 72-hour ASRA rule for apixaban',
+        'Reaching for protamine or vitamin K to reverse the apixaban',
+        'Forgetting that hip fractures cannot wait the full 48-hour PAUSE hold',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Case 1 apixaban hip fracture',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Case 1 apixaban hip fracture' },
+  },
+
+  {
+    id: 'atom-acf-case3-bypass-bleeding',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'For Case 3 (off pump, ACT 180, platelets 95k, fibrinogen 110 mg/dL, chest tubes climbing), explain why more protamine is wrong, the targeted product for each deficit, the role of TXA, and the next diagnostic step for persistent bleeding.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'An ACT of 180 is back in range, so residual heparin is not driving the bleeding and more protamine would only add its own coagulopathy. The targeted corrections are to transfuse platelets for the count of 95k and to give cryoprecipitate or fibrinogen concentrate for the fibrinogen of 110, which is below the 150 threshold. Tranexamic acid should be added if it has not already been given.' },
+        { id: 'kp2', weight: 2, description: 'If bleeding persists despite these targeted products, the next step is viscoelastic testing, thromboelastography or rotational thromboelastometry, to see what is actually broken rather than continuing to give blind product. This shifts management from empiric to data-driven. The case reinforces that an in-range ACT removes more protamine from the menu entirely.' },
+      ],
+      common_errors: [
+        'Giving more protamine despite an in-range ACT of 180',
+        'Using platelets to fix fibrinogen or cryoprecipitate to fix the platelet count',
+        'Continuing empiric products instead of moving to TEG or ROTEM for persistent bleeding',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Case 3 post-bypass bleeding',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Case 3 post-bypass bleeding' },
+  },
+
+  {
+    id: 'atom-acf-case5-warfarin-ich',
+    type: 'recall',
+    tier: 'atom',
+    courseId: 'adv-pharmacology-1',
+    nodeId: 'ap1-wk-4',
+    prompt: 'For Case 5 (80-year-old on warfarin, INR 4.1, GCS 8, suspected intracranial hemorrhage), state the primary reversal agent and weight-based dose, the adjunct and its timing, the INR recheck interval, and why FFP is the wrong choice.',
+    rubric: {
+      key_points: [
+        { id: 'kp1', weight: 2, description: 'The primary reversal for warfarin-associated intracranial hemorrhage is weight-based 4-factor PCC at 25 to 50 units/kg, given with IV vitamin K 10 mg slowly as a durable adjunct because the PCC effect is transient. The INR is rechecked at 30 minutes and neurosurgery is called to the bedside. Speed matters because this is a life-threatening, time-critical bleed.' },
+        { id: 'kp2', weight: 2, description: 'Fresh frozen plasma is the wrong tool here because it is too slow to thaw and infuse and requires too much volume in an elderly patient, and its own INR of 1.4 to 1.6 cannot even get below 1.5. The concentrated, rapidly acting, low-volume 4-factor PCC is exactly what this emergency demands. FFP would waste the narrow window for reversing an intracranial bleed.' },
+      ],
+      common_errors: [
+        'Choosing FFP first despite its slow speed and large volume in warfarin ICH',
+        'Omitting IV vitamin K, leaving only the transient PCC effect',
+        'Quoting a PCC dose other than the weight-based 25 to 50 units/kg',
+      ],
+      minimum_passing_score: 60,
+    },
+    topic: 'Case 5 warfarin trauma',
+    chapter: 'ap1-wk-4',
+    difficulty: 1,
+    metadata: { priority: 'high', source: 'Stoelting Ch 29, 30; Foster lecture', topic: 'Case 5 warfarin trauma' },
   },
 
 ];

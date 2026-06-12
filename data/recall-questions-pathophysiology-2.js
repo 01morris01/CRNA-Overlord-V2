@@ -1333,10 +1333,10 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w4s-pulmonary-pressures', 'atom-p2w4s-low-resistance'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Integrate the normal pulmonary pressure profile with the low resistance nature of the pulmonary circuit. State the systolic, diastolic, mean, and capillary pulmonary pressures from the slides, then explain how the small pressure drop of about 12 mm Hg across a flow of 5 L per minute produces a resistance only about 1/7 that of the systemic circulation. Explain why operating at these low pressures matters for the lung.',
+    prompt: 'Integrate the normal pulmonary pressure profile with the low resistance nature of the pulmonary circuit. State the systolic, diastolic, mean, and capillary pulmonary pressures, then explain how the small pressure drop of about 12 mm Hg across a flow of 5 L per minute produces a resistance only about 1/7 that of the systemic circulation. Explain why operating at these low pressures matters for the lung.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides give pulmonary pressures of systolic 25 mm Hg, diastolic 8 mm Hg, mean 15 mm Hg, and capillary 7 mm Hg, with the left atrium near 2 mm Hg. These values are far lower than systemic arterial pressures. The learner should be able to recite all four pulmonary values and recognize the steep pressure fall from the pulmonary artery through the capillaries to the left atrium.' },
+        { id: 'kp1', weight: 2, description: 'The pulmonary pressures is about systolic 25 mm Hg, diastolic 8 mm Hg, mean 15 mm Hg, and capillary 7 mm Hg, with the left atrium near 2 mm Hg. These values are far lower than systemic arterial pressures. The learner should be able to recite all four pulmonary values and recognize the steep pressure fall from the pulmonary artery through the capillaries to the left atrium.' },
         { id: 'kp2', weight: 2, description: 'The pressure drop across the lung is only about 12 mm Hg while carrying a flow of 5 L per minute, which yields a pulmonary resistance about 1/7 of the systemic value. Because resistance equals pressure drop divided by flow, the small drop at full cardiac output demonstrates the very low resistance. The learner should connect the 12 mm Hg drop and 5 L per minute flow to the 1/7 resistance statement.' },
         { id: 'kp3', weight: 1, description: 'Operating at low pressure protects the thin pulmonary capillaries and keeps capillary hydrostatic pressure low, which limits fluid filtration into the alveoli and helps keep them dry. The low capillary pressure of 7 mm Hg is central to preventing pulmonary edema.' },
       ],
@@ -1364,7 +1364,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Recruitment is the opening of previously closed pulmonary capillaries and distension is the widening of already open capillaries. Both increase the total cross-sectional area available for blood flow and therefore lower vascular resistance as pulmonary pressure and flow rise. The learner should distinguish the two and recognize that both reduce resistance.' },
-        { id: 'kp2', weight: 2, description: 'The slide graph of pulmonary arterial pressure versus cardiac output shows pressure rising only a small amount above the normal value near 15 mm Hg even when cardiac output increases severalfold. This flat response occurs precisely because recruitment and distension lower resistance as flow climbs. The learner should link the curve shape to the two mechanisms.' },
+        { id: 'kp2', weight: 2, description: 'the curve of pulmonary arterial pressure versus cardiac output shows pressure rising only a small amount above the normal value near 15 mm Hg even when cardiac output increases severalfold. This flat response occurs precisely because recruitment and distension lower resistance as flow climbs. The learner should link the curve shape to the two mechanisms.' },
         { id: 'kp3', weight: 1, description: 'This buffering allows large increases in pulmonary blood flow during exercise without a large rise in pulmonary pressure, which protects the right heart and the capillaries while still increasing gas exchange capacity.' },
       ],
       common_errors: [
@@ -1414,16 +1414,16 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w4s-hypoxic-vasoconstriction', 'atom-p2w4s-po2-flow-curve'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-4',
-    prompt: 'Integrate the mechanism of hypoxic pulmonary vasoconstriction with the alveolar PO2 versus blood flow relationship. Explain how decreased alveolar PO2 leads to local vascular constriction, why this redirects flow toward ventilated alveoli, and how the slide graph shows flow falling steeply below an alveolar PO2 near 70. Contrast this pulmonary response with the systemic vascular response to hypoxia.',
+    prompt: 'Integrate the mechanism of hypoxic pulmonary vasoconstriction with the alveolar PO2 versus blood flow relationship. Explain how decreased alveolar PO2 leads to local vascular constriction, why this redirects flow toward ventilated alveoli, and how the curve shows flow falling steeply below an alveolar PO2 near 70. Contrast this pulmonary response with the systemic vascular response to hypoxia.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Decreased alveolar PO2 causes local pulmonary vessels to constrict, which directs blood flow away from poorly ventilated alveoli and toward well ventilated alveoli. This improves the matching of perfusion to ventilation and optimizes oxygenation of the blood. The learner should describe both the constriction and its redirecting effect.' },
-        { id: 'kp2', weight: 2, description: 'The slide graph of blood flow as a percent of control versus alveolar PO2 shows flow near 100 percent at a PO2 of about 70 and falling steeply as PO2 drops below that level. The plateau above 70 and the steep decline below it define the threshold for hypoxic vasoconstriction. The learner should read the curve and identify the 70 mm Hg region.' },
+        { id: 'kp2', weight: 2, description: 'the curve of blood flow as a percent of control versus alveolar PO2 shows flow near 100 percent at a PO2 of about 70 and falling steeply as PO2 drops below that level. The plateau above 70 and the steep decline below it define the threshold for hypoxic vasoconstriction. The learner should read the curve and identify the 70 mm Hg region.' },
         { id: 'kp3', weight: 1, description: 'This pulmonary response is opposite to the systemic circulation, where hypoxia generally causes vasodilation; the lung uniquely constricts to preserve ventilation perfusion matching.' },
       ],
       common_errors: [
         'Saying low alveolar PO2 causes pulmonary vasodilation like the systemic vessels.',
-        'Misreading the graph and placing the flow threshold far from 70 mm Hg.',
+        'Misreading the relationship and placing the flow threshold far from 70 mm Hg.',
         'Forgetting that the purpose is to redirect blood toward ventilated alveoli.',
       ],
       minimum_passing_score: 60,
@@ -1471,7 +1471,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     prompt: 'Integrate the safety factors that protect against pulmonary edema with the dynamics of pleural fluid and pleural effusion. List the safety factors that keep the alveoli dry, then explain how the same lymphatic and pressure principles govern the thin pleural fluid layer, why the pleural space is normally kept at a negative pressure, and what causes a pleural effusion. Explain how a net Starling force of plus 1 relates to continuous filtration in both settings.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides list the safety factors against pulmonary edema as negative interstitial pressure, lymphatic pumping, and decreased interstitial osmotic pressure. Together these remove excess filtered fluid and keep the alveoli dry until pulmonary capillary pressure rises high enough to overwhelm them. The learner should name all three safety factors.' },
+        { id: 'kp1', weight: 2, description: 'The safety factors against pulmonary edema are negative interstitial pressure, lymphatic pumping, and decreased interstitial osmotic pressure. Together these remove excess filtered fluid and keep the alveoli dry until pulmonary capillary pressure rises high enough to overwhelm them. The learner should name all three safety factors.' },
         { id: 'kp2', weight: 2, description: 'A thin layer of mucoid fluid lies between the parietal and visceral pleurae to reduce friction during ventilation, and the lymphatic system maintains a negative pressure in the pleural space that keeps the lungs from collapsing. Because the net Starling force is plus 1, fluid filters slowly but continuously out of the pulmonary capillaries and is then cleared by lymphatics. The learner should connect the negative pleural pressure and continuous filtration to lymphatic clearance.' },
         { id: 'kp3', weight: 1, description: 'A pleural effusion is a collection of fluid in the pleural space caused by lymphatic obstruction such as tumor, heart failure, reduced plasma osmotic pressure, infection or inflammation increasing permeability, or fluid production exceeding drainage.' },
       ],
@@ -1499,7 +1499,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Partial pressure is proportional to the fraction of the gas times total pressure, so with a barometric pressure of 760 mm Hg, oxygen at about 0.21 in dry air gives roughly 159 mm Hg. Total pressure is the sum of the partial pressures of O2, N2, CO2, and H2O, so the gas fractions must add to one. This proportionality is the basis for converting any gas percentage into a partial pressure in mm Hg.' },
-        { id: 'kp2', weight: 2, description: 'Once air reaches the alveoli it is humidified to a water vapor pressure of 47 mm Hg, which occupies part of the 760 mm Hg total. Therefore the slides compute inspired PO2 as (760 minus 47) times 0.21, which equals 713 times 0.21, or about 149 mm Hg. The water vapor must be subtracted first because it dilutes the dry gas mixture before the oxygen fraction is applied.' },
+        { id: 'kp2', weight: 2, description: 'Once air reaches the alveoli it is humidified to a water vapor pressure of 47 mm Hg, which occupies part of the 760 mm Hg total. Therefore inspired PO2 is computed as (760 minus 47) times 0.21, which equals 713 times 0.21, or about 149 mm Hg. The water vapor must be subtracted first because it dilutes the dry gas mixture before the oxygen fraction is applied.' },
         { id: 'kp3', weight: 1, description: 'Humidification lowers the effective inspired PO2 from about 159 mm Hg in dry air to about 149 mm Hg in the airway, reducing the oxygen pressure available to drive diffusion into blood even before alveolar gas exchange further lowers it toward 104 mm Hg.' },
       ],
       common_errors: [
@@ -1522,11 +1522,11 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5g-respiratory-membrane-layers', 'atom-p2w5g-respiratory-membrane-thickness'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the layered structure of the respiratory membrane with its measured thickness to explain why this barrier permits rapid gas exchange. List the six layers in order from the alveolar gas to the red blood cell, state the total membrane thickness given on the slides, and explain how a thin, layered barrier supports diffusion. Then describe how thickening of any layer would be expected to change the diffusion rate based on the relationship between diffusion and distance.',
+    prompt: 'Integrate the layered structure of the respiratory membrane with its measured thickness to explain why this barrier permits rapid gas exchange. List the six layers in order from the alveolar gas to the red blood cell, state the total membrane thickness, and explain how a thin, layered barrier supports diffusion. Then describe how thickening of any layer would be expected to change the diffusion rate based on the relationship between diffusion and distance.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The respiratory membrane consists, in order, of the surfactant and fluid layer, the alveolar epithelium, the epithelial basement membrane, the interstitial space, the capillary basement membrane, and the capillary endothelium. Gas must cross all of these layers to move between alveolar air and the red blood cell. Each layer is a potential site where disease can add diffusion resistance.' },
-        { id: 'kp2', weight: 2, description: 'Despite having six layers, the total respiratory membrane thickness given on the slides is only about 0.2 micrometers. This very short diffusion distance, combined with a large total surface area, allows oxygen and carbon dioxide to equilibrate rapidly during the brief capillary transit. The thinness of the barrier is a key structural feature enabling efficient gas exchange.' },
+        { id: 'kp2', weight: 2, description: 'Despite having six layers, the total respiratory membrane thickness is only about 0.2 micrometers. This very short diffusion distance, combined with a large total surface area, allows oxygen and carbon dioxide to equilibrate rapidly during the brief capillary transit. The thinness of the barrier is a key structural feature enabling efficient gas exchange.' },
         { id: 'kp3', weight: 1, description: 'Because diffusion is inversely related to distance, thickening any layer, for example by interstitial edema or fibrosis, increases the diffusion path and reduces the rate of gas transfer across the membrane.' },
       ],
       common_errors: [
@@ -1549,12 +1549,12 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5g-ficks-law', 'atom-p2w5g-co2-solubility'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate Fick\'s Law of diffusion with the relative solubilities of oxygen and carbon dioxide to explain why carbon dioxide diffuses so readily across the respiratory membrane. State the Fick\'s Law relationship shown on the slides, identify which terms are variable and which are fixed, and then explain how the 20 times greater solubility of CO2 relative to O2 fits into that equation. Conclude by relating this to the statement that CO2 diffusing capacity is about 20 times that of O2.',
+    prompt: 'Integrate Fick\'s Law of diffusion with the relative solubilities of oxygen and carbon dioxide to explain why carbon dioxide diffuses so readily across the respiratory membrane. State the Fick\'s Law relationship, identify which terms are variable and which are fixed, and then explain how the 20 times greater solubility of CO2 relative to O2 fits into that equation. Conclude by relating this to the statement that CO2 diffusing capacity is about 20 times that of O2.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Fick\'s Law on the slides states that diffusion equals the pressure gradient times area times solubility, divided by distance times the square root of molecular weight. The pressure gradient, area, and distance can vary physiologically, while solubility and molecular weight are fixed properties of a given gas. Diffusion therefore rises with larger gradient or area and falls with greater distance or molecular weight.' },
-        { id: 'kp2', weight: 2, description: 'The slides state that CO2 is 20 times as soluble as O2. Because solubility appears in the numerator of Fick\'s Law, this much higher solubility greatly increases the diffusion of carbon dioxide for any given pressure gradient. This is the dominant reason CO2 crosses the respiratory membrane so easily despite a smaller partial pressure gradient than oxygen.' },
-        { id: 'kp3', weight: 1, description: 'Combining the solubility term with Fick\'s Law explains why the slides report that the CO2 diffusing capacity is about 20 times the diffusing capacity of O2, so carbon dioxide transfer is rarely diffusion limited.' },
+        { id: 'kp1', weight: 2, description: 'Fick\'s Law states that diffusion equals the pressure gradient times area times solubility, divided by distance times the square root of molecular weight. The pressure gradient, area, and distance can vary physiologically, while solubility and molecular weight are fixed properties of a given gas. Diffusion therefore rises with larger gradient or area and falls with greater distance or molecular weight.' },
+        { id: 'kp2', weight: 2, description: 'CO2 is 20 times as soluble as O2. Because solubility appears in the numerator of Fick\'s Law, this much higher solubility greatly increases the diffusion of carbon dioxide for any given pressure gradient. This is the dominant reason CO2 crosses the respiratory membrane so easily despite a smaller partial pressure gradient than oxygen.' },
+        { id: 'kp3', weight: 1, description: 'Combining the solubility term with Fick\'s Law explains why the CO2 diffusing capacity is about 20 times the diffusing capacity of O2, so carbon dioxide transfer is rarely diffusion limited.' },
       ],
       common_errors: [
         'Placing solubility in the denominator of Fick\'s Law instead of the numerator',
@@ -1580,7 +1580,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'V/Q is defined as the ratio between ventilation and blood flow and represents the relationship between adequate ventilation and adequate flow. Using whole-lung values of 4 L/min ventilation and 5 L/min blood flow, the normal ratio is 4 divided by 5, or 0.8. When there is no diffusion impairment, alveolar and end capillary PO2 and PCO2 are usually equal.' },
-        { id: 'kp2', weight: 2, description: 'The slides state that upper lung Va/Q is normally approximately 3 while lower lung Va/Q is normally approximately 0.5. Differences in airway and lung expansion produce uneven regional ventilation, and differences in vascular geometry and hydrostatic pressure produce uneven regional blood flow. As a result V/Q ratios vary across regions even within a normal, healthy lung.' },
+        { id: 'kp2', weight: 2, description: 'Upper lung Va/Q is normally approximately 3 while lower lung Va/Q is normally approximately 0.5. Differences in airway and lung expansion produce uneven regional ventilation, and differences in vascular geometry and hydrostatic pressure produce uneven regional blood flow. As a result V/Q ratios vary across regions even within a normal, healthy lung.' },
         { id: 'kp3', weight: 1, description: 'The whole-lung ratio of 0.8 is an average of these unequal regions, with the overventilated, underperfused apex near 3 and the relatively underventilated, well perfused base near 0.5.' },
       ],
       common_errors: [
@@ -1603,11 +1603,11 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5g-shunt-vs-deadspace', 'atom-p2w5g-vq-extreme-gases'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the definitions of physiological shunt and physiological dead space with the alveolar gas values at the two V/Q extremes shown on the slides. Define physiological shunt and physiological dead space in terms of how their V/Q compares with normal, then state the alveolar PO2 and PCO2 that a unit approaches when V/Q equals zero and when V/Q approaches infinity. Explain how a shunt unit drifts toward mixed venous values while a dead space unit drifts toward inspired air values.',
+    prompt: 'Integrate the definitions of physiological shunt and physiological dead space with the alveolar gas values at the two V/Q extremes. Define physiological shunt and physiological dead space in terms of how their V/Q compares with normal, then state the alveolar PO2 and PCO2 that a unit approaches when V/Q equals zero and when V/Q approaches infinity. Explain how a shunt unit drifts toward mixed venous values while a dead space unit drifts toward inspired air values.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'A physiological shunt is a unit with Va/Q below normal, reflecting low ventilation relative to perfusion. A physiological dead space is a unit with Va/Q above normal, reflecting wasted ventilation relative to perfusion. These two patterns are the opposite extremes of ventilation-perfusion mismatch.' },
-        { id: 'kp2', weight: 2, description: 'When V/Q equals zero, the alveolar gas equilibrates with mixed venous blood, approaching PO2 of about 40 and PCO2 of about 45 mm Hg. When V/Q approaches infinity, the alveolar gas approaches inspired humidified air, with PO2 of about 150 and PCO2 of about 0 mm Hg. These endpoints are shown on the increased and decreased V/Q slides.' },
+        { id: 'kp2', weight: 2, description: 'When V/Q equals zero, the alveolar gas equilibrates with mixed venous blood, approaching PO2 of about 40 and PCO2 of about 45 mm Hg. When V/Q approaches infinity, the alveolar gas approaches inspired humidified air, with PO2 of about 150 and PCO2 of about 0 mm Hg. These endpoints define the V/Q extremes.' },
         { id: 'kp3', weight: 1, description: 'A shunt unit drifts toward mixed venous values because blood flow continues without ventilation, while a dead space unit drifts toward inspired air values because ventilation continues without effective perfusion.' },
       ],
       common_errors: [
@@ -1630,11 +1630,11 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5g-paco2-ventilation', 'atom-p2w5g-hyper-hypoventilation'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the relationship between alveolar PCO2 and alveolar ventilation with the slide definitions of hyperventilation and hypoventilation. State the alveolar PCO2 equation given on the slides and the value of its constant, explain quantitatively what happens to PCO2 when ventilation is doubled or halved, and then connect this to the definitions of hyperventilation as PACO2 below 40 and hypoventilation as PACO2 above 40. Explain why hyperventilation and hypoventilation are defined relative to metabolic needs rather than to any fixed breathing rate.',
+    prompt: 'Integrate the relationship between alveolar PCO2 and alveolar ventilation with the definitions of hyperventilation and hypoventilation. State the alveolar PCO2 equation and the value of its constant, explain quantitatively what happens to PCO2 when ventilation is doubled or halved, and then connect this to the definitions of hyperventilation as PACO2 below 40 and hypoventilation as PACO2 above 40. Explain why hyperventilation and hypoventilation are defined relative to metabolic needs rather than to any fixed breathing rate.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides give alveolar PCO2 as CO2 production times a constant K, divided by alveolar ventilation, where K is about 863 mm Hg. Because ventilation is in the denominator, PCO2 is inversely proportional to alveolar ventilation. Thus doubling ventilation halves PCO2, and halving ventilation doubles PCO2, when CO2 production is constant.' },
-        { id: 'kp2', weight: 2, description: 'The slides define hyperventilation as PACO2 less than 40 and hypoventilation as PACO2 greater than 40, because increasing V/Q lowers alveolar PCO2 and decreasing V/Q raises it. Hyperventilation is increased ventilation beyond metabolic demand, which drops arterial CO2, while hypoventilation is ventilation below needs, which raises arterial CO2.' },
+        { id: 'kp1', weight: 2, description: 'Alveolar PCO2 as CO2 production times a constant K, divided by alveolar ventilation, where K is about 863 mm Hg. Because ventilation is in the denominator, PCO2 is inversely proportional to alveolar ventilation. Thus doubling ventilation halves PCO2, and halving ventilation doubles PCO2, when CO2 production is constant.' },
+        { id: 'kp2', weight: 2, description: 'hyperventilation is defined as PACO2 less than 40 and hypoventilation as PACO2 greater than 40, because increasing V/Q lowers alveolar PCO2 and decreasing V/Q raises it. Hyperventilation is increased ventilation beyond metabolic demand, which drops arterial CO2, while hypoventilation is ventilation below needs, which raises arterial CO2.' },
         { id: 'kp3', weight: 1, description: 'These terms are defined relative to metabolic CO2 production rather than to a fixed rate, so the same minute ventilation can be hyperventilation at a low metabolic rate but inadequate when CO2 production rises, for example with a fourfold increase from 200 to 800 mL per minute.' },
       ],
       common_errors: [
@@ -1662,7 +1662,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
       key_points: [
         { id: 'kp1', weight: 2, description: 'Partial pressure in mm Hg is the diffusion driving force and reflects only dissolved oxygen; saturation is the percent of hemoglobin carrying oxygen, expressed as HbO2 over Hb plus HbO2; content is the absolute quantity in mL O2 per 100 mL blood. These three are distinct and a learner must keep them separate.' },
         { id: 'kp2', weight: 2, description: 'Dissolved oxygen equals solubility times PaO2, where solubility is 0.003 mL O2 per dL per mm Hg, giving only about 0.3 mL per dL at a PaO2 of 100. Hemoglobin-bound oxygen equals 1.34 to 1.39 mL O2 per gram times grams of hemoglobin times percent saturation, giving about 20 mL per dL normally and accounting for roughly 97 percent of transport.' },
-        { id: 'kp3', weight: 1, description: 'Because partial pressure tracks only the dissolved fraction, it can read normal even when hemoglobin is low or absent; the slides show that without red cells the plasma partial pressure is maintained but content is minimal, which is why hemoglobin is essential for meeting the 250 mL per minute oxygen demand.' },
+        { id: 'kp3', weight: 1, description: 'Because partial pressure tracks only the dissolved fraction, it can read normal even when hemoglobin is low or absent; without red cells the plasma partial pressure is maintained but content is minimal, which is why hemoglobin is essential for meeting the 250 mL per minute oxygen demand.' },
       ],
       common_errors: [
         'Treating partial pressure and content as interchangeable and assuming a normal PaO2 guarantees adequate oxygen content.',
@@ -1688,7 +1688,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Blood enters the pulmonary capillary at a PO2 of 40 mm Hg and rises to about 104 mm Hg by the venous end, equilibrating with the alveolar PO2 of about 104 mm Hg. This rising gradient is the basis of oxygen uptake in the lungs.' },
-        { id: 'kp2', weight: 2, description: 'Oxygen equilibration normally completes within about 0.25 seconds, but each red cell spends about 0.75 seconds in the pulmonary capillary, leaving a large reserve of time. The slides label this surplus a safety factor that protects oxygenation when conditions are not ideal.' },
+        { id: 'kp2', weight: 2, description: 'Oxygen equilibration normally completes within about 0.25 seconds, but each red cell spends about 0.75 seconds in the pulmonary capillary, leaving a large reserve of time. This surplus a safety factor that protects oxygenation when conditions are not ideal.' },
         { id: 'kp3', weight: 1, description: 'During exercise, increased cardiac output decreases transit time, yet equilibration still occurs because the safety factor provides spare time and because increased diffusing capacity from recruited capillaries and better ventilation perfusion matching speeds uptake.' },
       ],
       common_errors: [
@@ -1711,12 +1711,12 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5t-tissue-po2-balance', 'atom-p2w5t-flow-delivery'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the determinants of tissue PO2 with the calculation of oxygen delivery as flow times content. Explain that tissue PO2 reflects the balance of oxygen delivery and oxygen usage, citing the arterial, tissue, and intracellular PO2 values. Then show with the slide numbers how delivery equals content times blood flow, comparing normal flow (about 5000 mL per minute) with high flow (about 20000 mL per minute) at a content of 20 mL per 100 mL. Conclude by explaining how raising flow raises interstitial PO2 toward the upper limit set by arterial blood.',
+    prompt: 'Integrate the determinants of tissue PO2 with the calculation of oxygen delivery as flow times content. Explain that tissue PO2 reflects the balance of oxygen delivery and oxygen usage, citing the arterial, tissue, and intracellular PO2 values. Then show using the values how delivery equals content times blood flow, comparing normal flow (about 5000 mL per minute) with high flow (about 20000 mL per minute) at a content of 20 mL per 100 mL. Conclude by explaining how raising flow raises interstitial PO2 toward the upper limit set by arterial blood.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Tissue PO2 is set by the balance of delivery and usage: arterial blood is about 95 to 100 mm Hg, interstitial tissue about 30 to 40 mm Hg, and intracellular about 23 mm Hg. Greater consumption lowers tissue PO2 while greater delivery raises it.' },
         { id: 'kp2', weight: 2, description: 'Oxygen delivery equals content times blood flow; at 20 mL O2 per 100 mL and 5000 mL per minute delivery is about 1000 mL O2 per minute, and raising flow to 20000 mL per minute raises delivery to about 4000 mL O2 per minute. Flow is therefore a powerful lever on delivery.' },
-        { id: 'kp3', weight: 1, description: 'As the slide figure shows, raising blood flow pushes interstitial PO2 upward but never above the upper limit set by arterial PO2, and for a fixed flow higher oxygen consumption shifts the whole relationship downward.' },
+        { id: 'kp3', weight: 1, description: 'As the curve shows, raising blood flow pushes interstitial PO2 upward but never above the upper limit set by arterial PO2, and for a fixed flow higher oxygen consumption shifts the whole relationship downward.' },
       ],
       common_errors: [
         'Stating tissue PO2 depends only on delivery while ignoring oxygen usage by the cells.',
@@ -1738,7 +1738,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5t-right-shift-factors', 'atom-p2w5t-bohr-tissue-lung'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the four factors that shift the dissociation curve to the right with the physiologic role of the Bohr effect at the tissues and lungs. List the four right-shift factors from the slides and state what a right shift does to affinity and saturation at a given PO2. Then explain how increased CO2 and hydrogen ions at the metabolizing tissue shift the curve right to unload oxygen, while loss of CO2 at the lungs shifts the curve left to load oxygen, and why this preserves the partial pressure gradient.',
+    prompt: 'Integrate the four factors that shift the dissociation curve to the right with the physiologic role of the Bohr effect at the tissues and lungs. List the four right-shift factors and state what a right shift does to affinity and saturation at a given PO2. Then explain how increased CO2 and hydrogen ions at the metabolizing tissue shift the curve right to unload oxygen, while loss of CO2 at the lungs shifts the curve left to load oxygen, and why this preserves the partial pressure gradient.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The four right-shift factors are increased hydrogen ions, increased CO2 (the Bohr effect), increased temperature, and increased BPG. A right shift lowers hemoglobin affinity for oxygen so that at any given PO2 the saturation is lower and oxygen is released more readily.' },
@@ -1792,7 +1792,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5t-co2-forms', 'atom-p2w5t-haldane'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the three transport forms of carbon dioxide with the Haldane effect. State the three forms of CO2 carriage with their approximate percentages and the role of carbonic anhydrase and the chloride shift inside the red cell. Then define the Haldane effect using the slide figure, explaining how oxygenation of hemoglobin at the lungs (PO2 rising toward 100 mm Hg) lowers CO2 carriage and how deoxygenation at the tissue (PO2 near 40 mm Hg) raises CO2 carriage, and why this aids CO2 loading and unloading.',
+    prompt: 'Integrate the three transport forms of carbon dioxide with the Haldane effect. State the three forms of CO2 carriage with their approximate percentages and the role of carbonic anhydrase and the chloride shift inside the red cell. Then define the Haldane effect, explaining how oxygenation of hemoglobin at the lungs (PO2 rising toward 100 mm Hg) lowers CO2 carriage and how deoxygenation at the tissue (PO2 near 40 mm Hg) raises CO2 carriage, and why this aids CO2 loading and unloading.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Carbon dioxide is carried as bicarbonate at about 70 percent, as carbaminohemoglobin bound to hemoglobin at about 23 percent, and as dissolved CO2 at about 7 percent. Carbonic anhydrase inside the red cell converts CO2 and water to carbonic acid that dissociates into bicarbonate and hydrogen ions, and bicarbonate leaving the cell is balanced by the chloride shift.' },
@@ -1987,7 +1987,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
       key_points: [
         { id: 'kp1', weight: 2, description: 'Obstructive disease is fundamentally increased resistance to flow, usually from problems in the conducting airways and especially the bronchioles. Resistance rises because the lumen is blocked by secretions or aspiration, the lumen is narrowed by smooth muscle contraction or bronchial wall hypertrophy, or parenchymal destruction removes the outward traction that normally holds airways open. Because emptying is impaired, air is trapped and lung volumes tend to be higher than normal.' },
         { id: 'kp2', weight: 2, description: 'Restrictive disease is fundamentally decreased expansion of the lungs because the lungs or surrounding tissues are stiff or rigid. The hallmark on volumes is reduced total lung capacity and reduced vital capacity, so the loop shifts toward lower volumes. Because airflow resistance can still be normal, FEV1 and FVC fall together in proportion, leaving the FEV1/FVC ratio normal or even elevated, which is the opposite of the lowered ratio seen in obstruction.' },
-        { id: 'kp3', weight: 1, description: 'The two categories are not mutually exclusive; the slides explicitly state someone can have both an obstructive and a restrictive process at the same time, so a learner should not treat the spirometric patterns as forcing a single diagnosis.' },
+        { id: 'kp3', weight: 1, description: 'The two categories are not mutually exclusive; someone can have both an obstructive and a restrictive process at the same time, so a learner should not treat the spirometric patterns as forcing a single diagnosis.' },
       ],
       common_errors: [
         'Swapping the mechanisms, for example calling obstruction a problem of decreased expansion or calling restriction a problem of increased resistance.',
@@ -2014,7 +2014,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
       key_points: [
         { id: 'kp1', weight: 2, description: 'Chronic bronchitis is characterized by excessive mucous production, ciliary dysfunction, and airway narrowing with permanent scarring and swelling of the airway walls. This longterm inflammation and narrowing of the bronchi causes air to get trapped in the areas supplied by those bronchi. Smoking is the most common cause, although other irritants can also produce it.' },
         { id: 'kp2', weight: 2, description: 'Emphysema is the permanent destruction of the elastic connective tissue in the alveoli and loss of parenchyma, so alveoli merge into fewer large pockets of air instead of many small ones. This produces less elasticity, less surface area for gas exchange, and obstruction with trapping of air. The listed consequences are high airway resistance, decreased diffusing capacity, and pulmonary hypertension due to loss of large areas of pulmonary capillary networks.' },
-        { id: 'kp3', weight: 1, description: 'Both types share the COPD definition of progressive, longterm, permanent damage to lung tissue that traps air during exhalation, and the slides emphasize that someone can have both chronic bronchitis and emphysema at the same time.' },
+        { id: 'kp3', weight: 1, description: 'Both types share the COPD definition of progressive, longterm, permanent damage to lung tissue that traps air during exhalation, and someone can have both chronic bronchitis and emphysema at the same time.' },
       ],
       common_errors: [
         'Attributing emphysema to excess mucus or attributing chronic bronchitis to destruction of alveolar elastic tissue, which mixes up the two mechanisms.',
@@ -2063,7 +2063,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w6i-restrictive-examples', 'atom-p2w6i-pneumothorax'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Integrate restrictive lung disease examples with the specific example of pneumothorax. First classify restrictive causes into intrinsic and extrinsic groups and give representative examples of each from the slides. Then explain the mechanism of pneumothorax, why it causes lung collapse, its usual causes, and why both lungs do not collapse together. Explain how an extrinsic problem like pneumothorax fits the restrictive theme of decreased lung expansion.',
+    prompt: 'Integrate restrictive lung disease examples with the specific example of pneumothorax. First classify restrictive causes into intrinsic and extrinsic groups and give representative examples of each. Then explain the mechanism of pneumothorax, why it causes lung collapse, its usual causes, and why both lungs do not collapse together. Explain how an extrinsic problem like pneumothorax fits the restrictive theme of decreased lung expansion.',
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Restrictive diseases are grouped into intrinsic causes such as diffuse interstitial pulmonary fibrosis with thick collagen deposits, sarcoidosis with chronic inflammatory granulomas, and asbestosis or silicosis from chronic irritant exposure, and extrinsic causes such as pneumothorax, kyphosis or scoliosis, obesity hypoventilation syndrome, and muscular pathologies including ALS, muscular dystrophy, and myasthenia gravis.' },
@@ -2090,11 +2090,11 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w6i-atelectasis', 'atom-p2w6i-pneumonia-saturation'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Integrate the saturation consequences of atelectasis and pneumonia using Figures 43-6 and 43-7. Define each condition, then explain why atelectasis produces only a minimal fall in arterial saturation while pneumonia produces a significant fall. Use the slide numbers: state the mean aortic saturation given for each condition and explain the role of blood flow through the affected lung in each case.',
+    prompt: 'Integrate the saturation consequences of atelectasis and pneumonia using Figures 43-6 and 43-7. Define each condition, then explain why atelectasis produces only a minimal fall in arterial saturation while pneumonia produces a significant fall. using the values: state the mean aortic saturation given for each condition and explain the role of blood flow through the affected lung in each case.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Atelectasis is a lack of gas exchange within the alveoli due to collapse of that portion of the lung, caused by airway obstruction, lack of surfactant, or external compression by air or fluid in the pleural space. In Figure 43-7 it causes only a minimal decrease in percent saturation; although the left pulmonary veins are 60 percent saturated, flow through the atelectatic lung is only one fifth of normal, so the aortic mean saturation falls only modestly to about 91 percent.' },
-        { id: 'kp2', weight: 2, description: 'Pneumonia is an acute infection causing inflammation and accumulation of fluid or pus within the alveoli. In Figure 43-6 the affected lung is still well perfused, so half the cardiac output passes through 60 percent saturated blood and half through 97 percent saturated blood, dropping the aortic mean saturation significantly to about 78 percent. This is a significant decrease in arterial hemoglobin saturation.' },
+        { id: 'kp1', weight: 2, description: 'Atelectasis is a lack of gas exchange within the alveoli due to collapse of that portion of the lung, caused by airway obstruction, lack of surfactant, or external compression by air or fluid in the pleural space. It causes only a minimal decrease in percent saturation; although the left pulmonary veins are 60 percent saturated, flow through the atelectatic lung is only one fifth of normal, so the aortic mean saturation falls only modestly to about 91 percent.' },
+        { id: 'kp2', weight: 2, description: 'Pneumonia is an acute infection causing inflammation and accumulation of fluid or pus within the alveoli. The affected lung is still well perfused, so half the cardiac output passes through 60 percent saturated blood and half through 97 percent saturated blood, dropping the aortic mean saturation significantly to about 78 percent. This is a significant decrease in arterial hemoglobin saturation.' },
         { id: 'kp3', weight: 1, description: 'The key distinction is blood flow: atelectasis reduces flow through the collapsed lung so little desaturated blood reaches the aorta, whereas pneumonia maintains flow through poorly oxygenated alveoli, sending much more desaturated blood into the systemic circulation and causing a larger drop in saturation.' },
       ],
       common_errors: [
@@ -2117,10 +2117,10 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w6i-hypoxia-causes', 'atom-p2w6i-parenchyma-traction'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Integrate the general causes of hypoxia with the specific mechanism by which loss of lung parenchyma raises airway resistance. First list the major categories of hypoxia from the slides and give examples in each. Then explain how destruction of lung parenchyma removes the outward pull on adjacent airway walls and raises resistance, and identify which hypoxia category this mechanism belongs to. Connect parenchymal destruction in emphysema to the pulmonary disease pathway of hypoxia.',
+    prompt: 'Integrate the general causes of hypoxia with the specific mechanism by which loss of lung parenchyma raises airway resistance. First list the major categories of hypoxia and give examples in each. Then explain how destruction of lung parenchyma removes the outward pull on adjacent airway walls and raises resistance, and identify which hypoxia category this mechanism belongs to. Connect parenchymal destruction in emphysema to the pulmonary disease pathway of hypoxia.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The slides group causes of hypoxia into inadequate oxygenation of blood in the lungs such as low atmospheric oxygen or neuromuscular hypoventilation, pulmonary disease such as hypoventilation from increased airway resistance or decreased compliance, V/Q mismatch, and diffusion abnormalities, venous-arterial shunts, inadequate oxygen transport by the blood such as anemia, abnormal hemoglobin, reduced blood flow, or tissue edema, and inadequate usage of oxygen by the tissue such as vitamin deficiencies or cyanide.' },
+        { id: 'kp1', weight: 2, description: 'causes of hypoxia into inadequate oxygenation of blood in the lungs such as low atmospheric oxygen or neuromuscular hypoventilation, pulmonary disease such as hypoventilation from increased airway resistance or decreased compliance, V/Q mismatch, and diffusion abnormalities, venous-arterial shunts, inadequate oxygen transport by the blood such as anemia, abnormal hemoglobin, reduced blood flow, or tissue edema, and inadequate usage of oxygen by the tissue such as vitamin deficiencies or cyanide.' },
         { id: 'kp2', weight: 2, description: 'Lung parenchyma normally pulls outward on the walls of adjacent airways, helping hold them open. When parenchyma is destroyed, as in emphysema, this outward traction is lost so airways narrow and resistance to airflow rises. Higher airway resistance promotes hypoventilation of the affected regions.' },
         { id: 'kp3', weight: 1, description: 'This parenchymal mechanism belongs to the pulmonary disease category of hypoxia, specifically hypoventilation due to increased airway resistance, linking the destruction of parenchyma in emphysema directly to the inadequate oxygenation pathway.' },
       ],
@@ -2420,7 +2420,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Pulmonary edema is fluid accumulation in the interstitial space that spills into the alveoli once the filtration rate exceeds lymphatic removal, widening the diffusion distance and impairing gas exchange.' },
-        { id: 'kp2', weight: 2, description: 'On Figure 39-8 the rate of edema formation stays near zero until left atrial pressure rises above about 23 mmHg, then climbs steeply toward 40 to 50 mmHg, illustrating the safety factor at normal filling pressures.' },
+        { id: 'kp2', weight: 2, description: 'The rate of edema formation stays near zero until left atrial pressure rises above about 23 mmHg, then climbs steeply toward 40 to 50 mmHg, illustrating the safety factor at normal filling pressures.' },
         { id: 'kp3', weight: 1, description: 'The threshold marks where rising capillary pressure approaches plasma colloid osmotic pressure and overwhelms maximal lymphatic pumping, so small further pressure rises cause large increases in interstitial and alveolar fluid.' },
       ],
       common_errors: [
@@ -2578,11 +2578,11 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5g-alveolar-air-table', 'atom-p2w5g-airway-partial-pressures'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the composition of alveolar air table with the partial pressures along the airway figure to explain why expired air values are intermediate between alveolar and inspired air and how dead space accounts for this.',
+    prompt: 'Integrate the composition of alveolar air table with the partial airway pressure profile to explain why expired air values are intermediate between alveolar and inspired air and how dead space accounts for this.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'The table gives alveolar air PO2 about 104 and PCO2 about 40, while expired air is PO2 about 120 and PCO2 about 27, intermediate between alveolar and humidified inspired air. Each air column still totals 760 mm Hg.' },
-        { id: 'kp2', weight: 2, description: 'The airway figure explains this: dead space air leaves first with PO2 near 150 and PCO2 near 0 because it never exchanged with blood, then alveolar air follows with PO2 near 100 and PCO2 near 40. Mixing these two streams produces the intermediate expired values in the table.' },
+        { id: 'kp1', weight: 2, description: 'alveolar air PO2 about 104 and PCO2 about 40, while expired air is PO2 about 120 and PCO2 about 27, intermediate between alveolar and humidified inspired air. Each air column still totals 760 mm Hg.' },
+        { id: 'kp2', weight: 2, description: 'this is explained: dead space air leaves first with PO2 near 150 and PCO2 near 0 because it never exchanged with blood, then alveolar air follows with PO2 near 100 and PCO2 near 40. Mixing these two streams produces the intermediate expired values.' },
         { id: 'kp3', weight: 1, description: 'Because expired gas is a blend of unexchanged dead space air and true alveolar air, expired PO2 exceeds alveolar PO2 and expired PCO2 is below alveolar PCO2, which is why expired values cannot be read directly as alveolar values.' },
       ],
       common_errors: [
@@ -2636,7 +2636,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Alveolar PCO2 equals carbon dioxide production times K over alveolar ventilation with K equal to 863, so PCO2 rises with production and falls with ventilation; doubling ventilation halves PCO2. Alveolar PO2 meanwhile is set by the balance of oxygen absorption and oxygen entry by ventilation.' },
-        { id: 'kp2', weight: 2, description: 'Raising metabolic rate increases both oxygen absorption and carbon dioxide production. To keep alveolar PO2 from falling and PCO2 from rising, alveolar ventilation must increase proportionally, which is why the slides show much higher ventilation is required at 1000 than at 250 mL O2 per min.' },
+        { id: 'kp2', weight: 2, description: 'Raising metabolic rate increases both oxygen absorption and carbon dioxide production. To keep alveolar PO2 from falling and PCO2 from rising, alveolar ventilation must increase proportionally, which is why much higher ventilation is required at 1000 than at 250 mL O2 per min.' },
         { id: 'kp3', weight: 1, description: 'Both equations point to alveolar ventilation as the regulated variable that matches gas exchange to metabolic demand, holding arterial PO2 and PCO2 near their normal values across a wide range of activity.' },
       ],
       common_errors: [
@@ -2713,10 +2713,10 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w5g-dilution-slow', 'atom-p2w5g-schematic-lung-unit'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-5',
-    prompt: 'Integrate the slow dilution of alveolar gas with the variables of the schematic lung unit to explain how ventilation and blood flow together set and stabilize the alveolar gas composition of a lung unit.',
+    prompt: 'Integrate the slow dilution of alveolar gas with the variables of the lung unit model to explain how ventilation and blood flow together set and stabilize the alveolar gas composition of a lung unit.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'In the schematic lung unit, alveolar ventilation delivers fresh inspired gas while blood flow adds carbon dioxide and removes oxygen, and the balance of these two flows sets the alveolar PO2 and PCO2. The alveolar gas the unit holds is the running result of gas coming in by ventilation and gas exchanged with capillary blood.' },
+        { id: 'kp1', weight: 2, description: 'In the lung unit model, alveolar ventilation delivers fresh inspired gas while blood flow adds carbon dioxide and removes oxygen, and the balance of these two flows sets the alveolar PO2 and PCO2. The alveolar gas the unit holds is the running result of gas coming in by ventilation and gas exchanged with capillary blood.' },
         { id: 'kp2', weight: 2, description: 'Because each breath replaces only a fraction of the gas in the unit, alveolar composition changes slowly; raising ventilation speeds the approach to a new steady state while lowering it slows the change. This slow dilution buffers the unit so its PO2 and PCO2 do not swing abruptly between breaths.' },
         { id: 'kp3', weight: 1, description: 'Together these ideas show why a unit holds a stable alveolar PO2 and PCO2: a large resident gas volume diluted gradually, continuously refreshed by ventilation and drawn upon by perfusion, keeps arterial gases and pH steady even if a breath is briefly skipped.' },
       ],
@@ -2879,7 +2879,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'The hypoxemia workup uses the A-a oxygen difference first: a normal difference points to hypoventilation or altitude, an increased difference points to shunt, V/Q mismatch, or diffusion limitation, with the alveolar PO2 found from FIO2 times (PB minus 47) minus PCO2 divided by 0.8. Giving 100 percent oxygen then separates a correcting low V/Q from a non-correcting true shunt.' },
-        { id: 'kp2', weight: 2, description: 'Carbon monoxide misleads in a different way: it binds hemoglobin with very high affinity and saturates it at trace partial pressures, slashing oxygen content, yet a standard pulse oximeter cannot tell carboxyhemoglobin from oxyhemoglobin and reports a falsely normal value near 99 percent. The displayed saturation reassures while delivery is failing.' },
+        { id: 'kp2', weight: 2, description: 'Carbon monoxide misleads in a different way: it binds hemoglobin with very high affinity and saturates it at trace partial pressures, slashing oxygen content, yet a standard pulse oximeter cannot tell carboxyhemoglobin from oxyhemoglobin and reports a falsely normal value near 99 percent. The measured saturation reassures while delivery is failing.' },
         { id: 'kp3', weight: 1, description: 'Both pitfalls share a lesson: arterial oxygenation must be judged by more than one number. A shunt is unmasked by the A-a difference and the failure to respond to oxygen, while carbon monoxide poisoning is unmasked by co-oximetry rather than pulse oximetry, because each routine reading can be deceptively normal.' },
       ],
       common_errors: [
@@ -3118,11 +3118,11 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w6i-mefr-pefr', 'atom-p2w6i-fvc-fev1-values'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Integrate the four core spirometry measurements: explain how MEFR and PEFR from the Figure 43-1 flow curve relate to FVC and FEV1 from Figure 43-3, and how each characterizes expiratory airflow and obstruction.',
+    prompt: 'Integrate the four core spirometry measurements: explain how MEFR and PEFR from the flow curve relate to FVC and FEV1 And how each characterizes expiratory airflow and obstruction.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'MEFR is the greatest flow at a given lung volume and PEFR is the single highest flow in the first 100 to 120 milliseconds from full lungs; both come from the maximum expiratory flow curve of Figure 43-1, which runs from total lung capacity to residual volume. They describe instantaneous flow rates along the exhalation.' },
-        { id: 'kp2', weight: 2, description: 'FVC is the total volume forced out after a maximal inhalation and FEV1 is the volume forced out in the first second; these are volumes accumulated over time from Figure 43-3. Their ratio is 80% normally and 47% in obstruction, because obstruction prolongs the time to empty the lungs so less of the FVC escapes in the first second.' },
+        { id: 'kp1', weight: 2, description: 'MEFR is the greatest flow at a given lung volume and PEFR is the single highest flow in the first 100 to 120 milliseconds from full lungs; both come from the maximum expiratory flow curve , which runs from total lung capacity to residual volume. They describe instantaneous flow rates along the exhalation.' },
+        { id: 'kp2', weight: 2, description: 'FVC is the total volume forced out after a maximal inhalation and FEV1 is the volume forced out in the first second; these are volumes accumulated over time. Their ratio is 80% normally and 47% in obstruction, because obstruction prolongs the time to empty the lungs so less of the FVC escapes in the first second.' },
         { id: 'kp3', weight: 1, description: 'Together flow measures and volume measures both fall in obstruction; peak and maximum flows drop as the airways narrow, and the FEV1/FVC ratio drops as exhalation slows, so the flow curve and the timed spirogram tell a consistent story about resistance to airflow.' },
       ],
       common_errors: [
@@ -3150,12 +3150,12 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
       key_points: [
         { id: 'kp1', weight: 2, description: 'Obstructive disease is increased airway resistance centered on the bronchioles; on the loop it shifts left toward higher volumes, volumes are greater than normal from air trapping, FEV1 falls more than FVC, and the FEV1/FVC ratio is lowered. The defining problem is getting air out through narrowed airways.' },
         { id: 'kp2', weight: 2, description: 'Restrictive disease is decreased lung expansion from stiff lung or chest tissue; on the loop it shifts right toward lower volumes, volumes are smaller than normal, FEV1 and FVC fall in proportion, and the FEV1/FVC ratio is normal or elevated. The defining problem is a smaller container that cannot fully expand.' },
-        { id: 'kp3', weight: 1, description: 'Because the slide states a patient can have both at once, a mixed loop is possible, combining reduced volumes with a reduced ratio; the loop direction and the FEV1/FVC ratio are the two discriminators that let you separate or recognize the overlap of the two categories.' },
+        { id: 'kp3', weight: 1, description: 'Because a patient can have both at once, a mixed loop is possible, combining reduced volumes with a reduced ratio; the loop direction and the FEV1/FVC ratio are the two discriminators that let you separate or recognize the overlap of the two categories.' },
       ],
       common_errors: [
         'Reversing loop directions, since obstruction shifts left and restriction shifts right.',
         'Assigning a low FEV1/FVC ratio to restriction when it is preserved or elevated.',
-        'Treating the two categories as mutually exclusive when the slide says they can coexist.',
+        'Treating the two categories as mutually exclusive since they can coexist.',
       ],
       minimum_passing_score: 60,
     },
@@ -3172,12 +3172,12 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w6i-resistance-factors', 'atom-p2w6i-fig432-shifts'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Integrate the factors that raise airway resistance with the Figure 43-2 flow volume diagram, explaining how the obstructive mechanism produces the leftward shifted low peak curve and how restriction differs.',
+    prompt: 'Integrate the factors that raise airway resistance with the flow volume diagram, explaining how the obstructive mechanism produces the leftward shifted low peak curve and how restriction differs.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Resistance rises from a blocked lumen, a narrowed lumen, or loss of outward parenchymal traction on the airways. These mechanisms slow expiratory airflow, which on Figure 43-2 produces the airway obstruction curve, shifted left to higher trapped volumes with a markedly reduced peak flow because air cannot leave quickly.' },
+        { id: 'kp1', weight: 2, description: 'Resistance rises from a blocked lumen, a narrowed lumen, or loss of outward parenchymal traction on the airways. These mechanisms slow expiratory airflow, which produces the airway obstruction curve, shifted left to higher trapped volumes with a markedly reduced peak flow because air cannot leave quickly.' },
         { id: 'kp2', weight: 2, description: 'The restrictive curve on the same diagram is shifted right to smaller volumes because the stiff lung cannot expand to a normal total lung capacity. Its problem is expansion, not resistance, so it is a miniaturized but otherwise normal shaped curve rather than the slow scooped curve of obstruction.' },
-        { id: 'kp3', weight: 1, description: 'Reading the diagram, a left shift with low peak flow signals high resistance obstruction, while a right shift with preserved shape signals reduced volume restriction; the resistance factors explain why the obstructive curve looks the way it does and why the two curves sit on opposite sides of normal.' },
+        { id: 'kp3', weight: 1, description: 'A left shift with low peak flow signals high resistance obstruction, while a right shift with preserved shape signals reduced volume restriction; the resistance factors explain why the obstructive curve looks the way it does and why the two curves sit on opposite sides of normal.' },
       ],
       common_errors: [
         'Reversing the curve positions, placing obstruction on the right or restriction on the left.',
@@ -3231,7 +3231,7 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
       key_points: [
         { id: 'kp1', weight: 2, description: 'The three features, bronchial smooth muscle contraction, soft tissue swelling, and mucus plugging, narrow the airways from three directions during an attack triggered by allergens or irritants. This narrowing produces the listed symptoms of shortness of breath, wheeze, cough, and chest tightness.' },
         { id: 'kp2', weight: 2, description: 'Asthma is labeled reversible airway obstruction, and acute exacerbations are typically fully reversible, so the narrowing and symptoms resolve when the trigger clears or a bronchodilator is given. This reversibility is the key contrast with the permanent damage of COPD.' },
-        { id: 'kp3', weight: 1, description: 'The slide adds that long-term severe asthma may cause technically irreversible chronic changes from sustained inflammation, so the usual reversible episodes can, over years, give way to some fixed remodeling, narrowing the gap between severe asthma and COPD.' },
+        { id: 'kp3', weight: 1, description: 'Long-term severe asthma may cause technically irreversible chronic changes from sustained inflammation, so the usual reversible episodes can, over years, give way to some fixed remodeling, narrowing the gap between severe asthma and COPD.' },
       ],
       common_errors: [
         'Omitting one of the three features or attributing emphysema findings to asthma.',
@@ -3311,8 +3311,8 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     rubric: {
       key_points: [
         { id: 'kp1', weight: 2, description: 'Atelectasis is collapse of a lung portion with absent gas exchange, caused by hypoventilation, external compression, airway obstruction, or adhesions and lack of surfactant. Because the region is collapsed, blood flow to it falls to about one fifth of normal as blood is diverted away.' },
-        { id: 'kp2', weight: 2, description: 'That diversion limits desaturation: in Figure 43-7 only one sixth of aortic blood is the 60% saturated stream and five sixths is 97%, giving a mean of 91%, a minimal drop. The collapse protects saturation by reducing perfusion of the non exchanging region.' },
-        { id: 'kp3', weight: 1, description: 'Pneumonia is the opposite case in Figure 43-6: blood keeps flowing at full rate past fluid filled alveoli, so half the aortic blood is only 60% saturated and the mean falls sharply to 78%. The difference is perfusion, atelectasis diverts blood away while pneumonia perfuses unventilated alveoli, producing a much larger shunt effect.' },
+        { id: 'kp2', weight: 2, description: 'That diversion limits desaturation: Only one sixth of aortic blood is the 60% saturated stream and five sixths is 97%, giving a mean of 91%, a minimal drop. The collapse protects saturation by reducing perfusion of the non exchanging region.' },
+        { id: 'kp3', weight: 1, description: 'Pneumonia is the opposite case: blood keeps flowing at full rate past fluid filled alveoli, so half the aortic blood is only 60% saturated and the mean falls sharply to 78%. The difference is perfusion, atelectasis diverts blood away while pneumonia perfuses unventilated alveoli, producing a much larger shunt effect.' },
       ],
       common_errors: [
         'Listing only two atelectasis causes and omitting hypoventilation or compression.',
@@ -3361,16 +3361,16 @@ export const RECALL_QUESTIONS_PATHOPHYSIOLOGY_2 = [
     feeder_atoms: ['atom-p2w6i-constricted-terminology', 'atom-p2w6i-histology-contrast'],
     courseId: 'adv-phys-path-2',
     nodeId: 'pp2-wk-6',
-    prompt: 'Integrate the Guyton constricted lungs terminology with the Figure 43-5 histology, distinguishing a naming convention for restrictive disease from the microscopic appearances of pneumonia and emphysema, so the right vocabulary is matched to the right tissue change.',
+    prompt: 'Integrate the Guyton constricted lungs terminology with the histology, distinguishing a naming convention for restrictive disease from the microscopic appearances of pneumonia and emphysema, so the right vocabulary is matched to the right tissue change.',
     rubric: {
       key_points: [
-        { id: 'kp1', weight: 2, description: 'Guyton labels the right side of Figure 43-2 constricted lungs, which is legacy wording for a restrictive lung profile, a lung bound up by fibrosis, silicosis, scoliosis, or kyphosis. It is a naming convention about reduced expansion and shifted volumes, not a statement about microscopic tissue, and modern readers should translate constricted to restrictive.' },
-        { id: 'kp2', weight: 2, description: 'Figure 43-5 instead shows microscopic tissue: pneumonia as inflammation with alveoli filled by fluid, and emphysema as confluent alveoli from loss of alveolar walls. These are opposite microscopic processes, additive filling versus subtractive destruction, summarized as fluid in the lungs versus loss of alveoli.' },
-        { id: 'kp3', weight: 1, description: 'The integration is to keep two different axes straight: the constricted versus normal versus obstructed naming describes the spirometric flow volume curves and their volumes, while the Figure 43-5 panels describe what the tissue actually looks like; matching each piece of vocabulary to the correct level prevents conflating a restrictive curve label with an emphysematous or pneumonic tissue change.' },
+        { id: 'kp1', weight: 2, description: 'Guyton labels the right side  constricted lungs, which is legacy wording for a restrictive lung profile, a lung bound up by fibrosis, silicosis, scoliosis, or kyphosis. It is a naming convention about reduced expansion and shifted volumes, not a statement about microscopic tissue, and modern readers should translate constricted to restrictive.' },
+        { id: 'kp2', weight: 2, description: 'histology instead shows microscopic tissue: pneumonia as inflammation with alveoli filled by fluid, and emphysema as confluent alveoli from loss of alveolar walls. These are opposite microscopic processes, additive filling versus subtractive destruction, summarized as fluid in the lungs versus loss of alveoli.' },
+        { id: 'kp3', weight: 1, description: 'The integration is to keep two different axes straight: the constricted versus normal versus obstructed naming describes the spirometric flow volume curves and their volumes, while the panels describe what the tissue actually looks like; matching each piece of vocabulary to the correct level prevents conflating a restrictive curve label with an emphysematous or pneumonic tissue change.' },
       ],
       common_errors: [
         'Equating Guyton constricted lungs with airway constriction or with an emphysematous tissue change.',
-        'Swapping the Figure 43-5 panels, calling pneumonia loss of alveoli or emphysema fluid filling.',
+        'Swapping the panels, calling pneumonia loss of alveoli or emphysema fluid filling.',
         'Mixing the spirometric curve labels with the histology panels as if they described the same thing.',
       ],
       minimum_passing_score: 60,

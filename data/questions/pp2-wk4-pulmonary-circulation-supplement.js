@@ -18,7 +18,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "30 mm Hg", ok: false },
       { t: "45 mm Hg", ok: false },
     ],
-    rationale: "The slides list pulmonary arterial pressures as systolic 25 mm Hg, diastolic 8 mm Hg, and mean 15 mm Hg. The value 25 mm Hg is the systolic value, not the mean. The pulmonary circulation operates at much lower pressures than the systemic circulation.", // source: Ch 39 p 2
+    rationale: "The pulmonary arterial pressures are systolic 25 mm Hg, diastolic 8 mm Hg, and mean 15 mm Hg. The value 25 mm Hg is the systolic value, not the mean. The pulmonary circulation operates at much lower pressures than the systemic circulation.", // source: Ch 39 p 2
     scene: "pulmonary",
     sceneCfg: { label: "MEAN PULMONARY ARTERIAL PRESSURE" },
     metadata: { topic: "Pulmonary arterial pressure", priority: "high" },
@@ -27,7 +27,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-002",
     type: "mcq",
-    prompt: "According to the slides, what is the normal pulmonary capillary pressure?",
+    prompt: "What is the normal pulmonary capillary pressure?",
     setup: "",
     ans: [
       { t: "7 mm Hg", ok: true },
@@ -35,7 +35,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "15 mm Hg", ok: false },
       { t: "25 mm Hg", ok: false },
     ],
-    rationale: "The slides give a pulmonary capillary pressure of 7 mm Hg, with the left atrial pressure falling to about 2 mm Hg. The mean pulmonary arterial pressure is 15 mm Hg and the systolic value is 25 mm Hg. This low capillary pressure helps keep fluid from filtering into the alveoli.", // source: Ch 39 p 2
+    rationale: "The pulmonary capillary pressure is about 7 mm Hg, with the left atrial pressure falling to about 2 mm Hg. The mean pulmonary arterial pressure is 15 mm Hg and the systolic value is 25 mm Hg. This low capillary pressure helps keep fluid from filtering into the alveoli.", // source: Ch 39 p 2
     scene: "pulmonary",
     sceneCfg: { label: "PULMONARY CAPILLARY PRESSURE VALUE" },
     metadata: { topic: "Pulmonary capillary pressure", priority: "high" },
@@ -52,7 +52,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "About equal to it", ok: false },
       { t: "About 1/2 as great", ok: false },
     ],
-    rationale: "The slides state that pulmonary resistance is approximately 1/7 that of the systemic circulation. This reflects a pressure drop of only about 12 mm Hg across the lungs while carrying a flow of 5 L per minute. The low resistance is a defining feature of the pulmonary vascular bed.", // source: Ch 39 p 3
+    rationale: "Pulmonary resistance is approximately 1/7 that of the systemic circulation. This reflects a pressure drop of only about 12 mm Hg across the lungs while carrying a flow of 5 L per minute. The low resistance is a defining feature of the pulmonary vascular bed.", // source: Ch 39 p 3
     scene: "pulmonary",
     sceneCfg: { label: "PULMONARY VERSUS SYSTEMIC RESISTANCE" },
     metadata: { topic: "Pulmonary vascular resistance", priority: "high" },
@@ -69,7 +69,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "25 mm Hg", ok: false },
       { t: "50 mm Hg", ok: false },
     ],
-    rationale: "The slides state the pulmonary pressure drop is approximately 12 mm Hg while carrying a flow of 5 L per minute. This small drop across a normal cardiac output is why pulmonary resistance is only about 1/7 of the systemic value. The systemic circulation has a far larger pressure drop.", // source: Ch 39 p 3
+    rationale: "The pulmonary pressure drop is approximately 12 mm Hg while carrying a flow of 5 L per minute. This small drop across a normal cardiac output is why pulmonary resistance is only about 1/7 of the systemic value. The systemic circulation has a far larger pressure drop.", // source: Ch 39 p 3
     scene: "pulmonary",
     sceneCfg: { label: "PULMONARY CIRCUIT PRESSURE DROP" },
     metadata: { topic: "Pulmonary pressure drop", priority: "medium" },
@@ -86,7 +86,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Collapse and distension", ok: false },
       { t: "Recoil and constriction", ok: false },
     ],
-    rationale: "The slides identify recruitment, the opening of previously closed capillaries, and distension, the widening of already open capillaries. Both mechanisms increase the cross-sectional area available for flow and thereby lower resistance. This allows the lung to accept large increases in flow with little pressure rise.", // source: Ch 39 p 4
+    rationale: "Recruitment, the opening of previously closed capillaries, and distension, the widening of already open capillaries. Both mechanisms increase the cross-sectional area available for flow and thereby lower resistance. This allows the lung to accept large increases in flow with little pressure rise.", // source: Ch 39 p 4
     scene: "pulmonary",
     sceneCfg: { label: "RESISTANCE LOWERING LUNG MECHANISMS" },
     metadata: { topic: "Recruitment and distension", priority: "high" },
@@ -103,7 +103,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "2000 mL", ok: false },
       { t: "5000 mL", ok: false },
     ],
-    rationale: "The slides state the pulmonary blood volume is approximately 500 mL at any given moment. This volume can shift to the systemic circulation when needed. The slides also note that pulmonary flow can be measured using the Fick principle.", // source: Ch 39 p 5
+    rationale: "The pulmonary blood volume is approximately 500 mL at any given moment. This volume can shift to the systemic circulation when needed. pulmonary flow can be measured using the Fick principle.", // source: Ch 39 p 5
     scene: "pulmonary",
     sceneCfg: { label: "PULMONARY BLOOD VOLUME AMOUNT" },
     metadata: { topic: "Pulmonary blood volume", priority: "medium" },
@@ -112,7 +112,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-007",
     type: "mcq",
-    prompt: "Which principle did the slides cite for measuring pulmonary blood flow?",
+    prompt: "Which principle is used for measuring pulmonary blood flow?",
     setup: "",
     ans: [
       { t: "The Fick principle", ok: true },
@@ -120,7 +120,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "The Bohr principle", ok: false },
       { t: "The Henry principle", ok: false },
     ],
-    rationale: "The slides state that pulmonary flow can be measured using the Fick principle. They also note the pulmonary blood volume is about 500 mL and can shift to the systemic circulation. The Fick principle relates flow to oxygen uptake divided by an arteriovenous oxygen difference.", // source: Ch 39 p 5
+    rationale: "Pulmonary flow can be measured using the Fick principle. They also note the pulmonary blood volume is about 500 mL and can shift to the systemic circulation. The Fick principle relates flow to oxygen uptake divided by an arteriovenous oxygen difference.", // source: Ch 39 p 5
     scene: "pulmonary",
     sceneCfg: { label: "FICK PRINCIPLE FLOW MEASUREMENT" },
     metadata: { topic: "Measurement of flow", priority: "medium" },
@@ -137,7 +137,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Falls below baseline", ok: false },
       { t: "Stays exactly fixed", ok: false },
     ],
-    rationale: "The slide graph shows that even when cardiac output increases severalfold, pulmonary arterial pressure rises only a small amount above the normal value near 15 mm Hg. This buffering occurs because recruitment and distension lower resistance as flow increases. The lung can therefore handle large flow increases with little pressure change.", // source: Ch 39 p 6
+    rationale: "Even when cardiac output increases severalfold, pulmonary arterial pressure rises only a small amount above the normal value near 15 mm Hg. This buffering occurs because recruitment and distension lower resistance as flow increases. The lung can therefore handle large flow increases with little pressure change.", // source: Ch 39 p 6
     scene: "pulmonary",
     sceneCfg: { label: "PRESSURE RESPONSE TO OUTPUT" },
     metadata: { topic: "Pressure and cardiac output", priority: "medium" },
@@ -154,7 +154,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "The high apex", ok: false },
       { t: "The hilum", ok: false },
     ],
-    rationale: "The slides state the bottom part of each lung receives more perfusion than the top because of hydrostatic pressure differences from gravity. Areas near the bottom receive more blood flow than areas near the top. Exercise increases overall flow but keeps the same relative distribution.", // source: Ch 39 p 8
+    rationale: "The bottom part of each lung receives more perfusion than the top because of hydrostatic pressure differences from gravity. Areas near the bottom receive more blood flow than areas near the top. Exercise increases overall flow but keeps the same relative distribution.", // source: Ch 39 p 8
     scene: "pulmonary",
     sceneCfg: { label: "REGIONAL LUNG PERFUSION PATTERN" },
     metadata: { topic: "Distribution of blood flow", priority: "high" },
@@ -171,7 +171,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Differences in alveolar size", ok: false },
       { t: "Sympathetic nerve outflow", ok: false },
     ],
-    rationale: "The slides attribute the regional differences to hydrostatic pressure differences that occur due to gravity. The lower regions sit at higher hydrostatic pressure and therefore receive more flow. This forms the basis of the zone model of lung perfusion.", // source: Ch 39 p 7
+    rationale: "the regional differences are attributed to hydrostatic pressure differences that occur due to gravity. The lower regions sit at higher hydrostatic pressure and therefore receive more flow. This forms the basis of the zone model of lung perfusion.", // source: Ch 39 p 7
     scene: "pulmonary",
     sceneCfg: { label: "CAUSE OF FLOW DISTRIBUTION" },
     metadata: { topic: "Hydrostatic effects", priority: "medium" },
@@ -188,7 +188,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Becomes perfectly uniform", ok: false },
       { t: "Shifts flow up to the apex", ok: false },
     ],
-    rationale: "The slides state that exercise increases overall blood flow to the lungs while keeping the same relative distribution. The bottom continues to receive more flow than the top. The graph shows both curves rising with the same general shape during exercise.", // source: Ch 39 p 8
+    rationale: "Exercise increases overall blood flow to the lungs while keeping the same relative distribution. The bottom continues to receive more flow than the top. Both curves rising with the same general shape during exercise.", // source: Ch 39 p 8
     scene: "pulmonary",
     sceneCfg: { label: "EXERCISE EFFECT ON DISTRIBUTION" },
     metadata: { topic: "Exercise and distribution", priority: "medium" },
@@ -205,7 +205,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "They rupture", ok: false },
       { t: "They collapse open", ok: false },
     ],
-    rationale: "The slides show that decreased alveolar PO2 leads to vascular constriction. This response is opposite to that of systemic vessels, which dilate with hypoxia. The constriction redirects blood away from poorly ventilated alveoli.", // source: Ch 39 p 10
+    rationale: "Decreased alveolar PO2 leads to vascular constriction. This response is opposite to that of systemic vessels, which dilate with hypoxia. The constriction redirects blood away from poorly ventilated alveoli.", // source: Ch 39 p 10
     scene: "pulmonary",
     sceneCfg: { label: "VESSEL RESPONSE TO LOW OXYGEN" },
     metadata: { topic: "Hypoxic vasoconstriction", priority: "high" },
@@ -222,7 +222,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Greatly increases lung blood volume", ok: false },
       { t: "Cools the warm inspired air", ok: false },
     ],
-    rationale: "The slides state that decreased alveolar PO2 leads to vascular constriction that directs blood flow to ventilated alveoli. By shunting blood away from poorly ventilated regions, the lung improves matching of blood flow to ventilation. This optimizes oxygenation of the blood.", // source: Ch 39 p 12
+    rationale: "Decreased alveolar PO2 leads to vascular constriction that directs blood flow to ventilated alveoli. By shunting blood away from poorly ventilated regions, the lung improves matching of blood flow to ventilation. This optimizes oxygenation of the blood.", // source: Ch 39 p 12
     scene: "pulmonary",
     sceneCfg: { label: "BENEFIT OF HYPOXIC VASOCONSTRICTION" },
     metadata: { topic: "Hypoxic vasoconstriction", priority: "high" },
@@ -231,7 +231,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-014",
     type: "mcq",
-    prompt: "On the slide graph, alveolar blood flow is near 100 percent of control at what alveolar PO2?",
+    prompt: "Alveolar blood flow is near 100 percent of control at what alveolar PO2?",
     setup: "",
     ans: [
       { t: "70 mm Hg", ok: true },
@@ -239,7 +239,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "200 mm Hg", ok: false },
       { t: "10 mm Hg", ok: false },
     ],
-    rationale: "The slide graph plots blood flow as a percent of control against alveolar PO2, showing flow reaching near 100 percent at a PO2 of about 70. Below that value flow falls steeply as vasoconstriction sets in. Above 70 the curve plateaus toward 200.", // source: Ch 39 p 9
+    rationale: "The curve relates blood flow to a percent of control against alveolar PO2, showing flow reaching near 100 percent at a PO2 of about 70. Below that value flow falls steeply as vasoconstriction sets in. Above 70 the curve plateaus toward 200.", // source: Ch 39 p 9
     scene: "pulmonary",
     sceneCfg: { label: "PO2 THRESHOLD FOR FLOW" },
     metadata: { topic: "Alveolar PO2 and flow", priority: "medium" },
@@ -248,7 +248,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-015",
     type: "mcq",
-    prompt: "In the normal alveolus on the slide, what is the alveolar oxygen partial pressure?",
+    prompt: "In the normal alveolus, what is the alveolar oxygen partial pressure?",
     setup: "",
     ans: [
       { t: "100 mm Hg", ok: true },
@@ -256,7 +256,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "45 mm Hg", ok: false },
       { t: "25 mm Hg", ok: false },
     ],
-    rationale: "The slide depicts a normal alveolus with O2 at 100 mm Hg and CO2 at 40 mm Hg. Blood entering the capillary has O2 of 40 and CO2 of 45, and leaving has O2 of 100 and CO2 of 40. Equilibration with alveolar gas raises capillary oxygen to the alveolar value.", // source: Ch 39 p 11
+    rationale: "A normal alveolus with O2 at 100 mm Hg and CO2 at 40 mm Hg. Blood entering the capillary has O2 of 40 and CO2 of 45, and leaving has O2 of 100 and CO2 of 40. Equilibration with alveolar gas raises capillary oxygen to the alveolar value.", // source: Ch 39 p 11
     scene: "pulmonary",
     sceneCfg: { label: "NORMAL ALVEOLAR OXYGEN VALUE" },
     metadata: { topic: "Alveolar gas values", priority: "medium" },
@@ -265,7 +265,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-016",
     type: "mcq",
-    prompt: "Per the slides, which is an OUTWARD force at the pulmonary capillary?",
+    prompt: "Which is an OUTWARD force at the pulmonary capillary?",
     setup: "",
     ans: [
       { t: "Negative interstitial pressure", ok: true },
@@ -273,7 +273,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Alveolar surface tension inward", ok: false },
       { t: "Capillary wall recoil pressure", ok: false },
     ],
-    rationale: "The slides list the outward forces as pulmonary capillary pressure 7, interstitial osmotic pressure 14, and negative interstitial pressure 8, totaling 29 mm Hg. The plasma colloid osmotic pressure of 28 is the lone inward force. The negative interstitial pressure pulls fluid outward into the interstitium.", // source: Ch 39 p 14
+    rationale: "The outward forces are pulmonary capillary pressure 7, interstitial osmotic pressure 14, and negative interstitial pressure 8, totaling 29 mm Hg. The plasma colloid osmotic pressure of 28 is the lone inward force. The negative interstitial pressure pulls fluid outward into the interstitium.", // source: Ch 39 p 14
     scene: "pulmonary",
     sceneCfg: { label: "OUTWARD PULMONARY CAPILLARY FORCE" },
     metadata: { topic: "Capillary dynamics forces", priority: "high" },
@@ -282,7 +282,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-017",
     type: "mcq",
-    prompt: "According to the slides, what is the net filtration pressure at the pulmonary capillary?",
+    prompt: "What is the net filtration pressure at the pulmonary capillary?",
     setup: "",
     ans: [
       { t: "1 mm Hg outward", ok: true },
@@ -290,7 +290,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "14 mm Hg inward", ok: false },
       { t: "28 mm Hg inward", ok: false },
     ],
-    rationale: "The slides give total outward forces of 29 mm Hg and an inward plasma osmotic pressure of 28 mm Hg, leaving a net filtration pressure of 1 mm Hg outward. This small outward pressure slowly filters fluid that is then carried away by lymphatics. The balance keeps the alveoli essentially dry.", // source: Ch 39 p 14
+    rationale: "The total outward forces is about 29 mm Hg and an inward plasma osmotic pressure of 28 mm Hg, leaving a net filtration pressure of 1 mm Hg outward. This small outward pressure slowly filters fluid that is then carried away by lymphatics. The balance keeps the alveoli essentially dry.", // source: Ch 39 p 14
     scene: "pulmonary",
     sceneCfg: { label: "NET PULMONARY FILTRATION PRESSURE" },
     metadata: { topic: "Net filtration pressure", priority: "high" },
@@ -299,7 +299,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-018",
     type: "mcq",
-    prompt: "Per the slides, the plasma osmotic pressure acting inward at the pulmonary capillary is what value?",
+    prompt: "The plasma osmotic pressure acting inward at the pulmonary capillary is what value?",
     setup: "",
     ans: [
       { t: "28 mm Hg", ok: true },
@@ -307,7 +307,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "8 mm Hg", ok: false },
       { t: "29 mm Hg", ok: false },
     ],
-    rationale: "The slides list plasma osmotic pressure as the single inward force at 28 mm Hg. This opposes the total outward force of 29 mm Hg made up of capillary pressure, interstitial osmotic pressure, and negative interstitial pressure. The result is a net outward pressure of only 1 mm Hg.", // source: Ch 39 p 14
+    rationale: "The plasma osmotic pressure are the single inward force at 28 mm Hg. This opposes the total outward force of 29 mm Hg made up of capillary pressure, interstitial osmotic pressure, and negative interstitial pressure. The result is a net outward pressure of only 1 mm Hg.", // source: Ch 39 p 14
     scene: "pulmonary",
     sceneCfg: { label: "INWARD PLASMA OSMOTIC VALUE" },
     metadata: { topic: "Plasma osmotic pressure", priority: "medium" },
@@ -316,7 +316,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-019",
     type: "mcq",
-    prompt: "Which factor on the slides helps keep the alveoli dry?",
+    prompt: "Which factor helps keep the alveoli dry?",
     setup: "",
     ans: [
       { t: "Negative interstitial pressure", ok: true },
@@ -324,7 +324,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Increased capillary permeability", ok: false },
       { t: "Reduced plasma protein level", ok: false },
     ],
-    rationale: "The slides state that negative interstitial pressure keeps the alveoli dry. Along with lymphatic pumping and a low capillary pressure, it pulls excess fluid out of the air spaces. The opposing factors listed are instead causes of pulmonary edema.", // source: Ch 39 p 14
+    rationale: "Negative interstitial pressure keeps the alveoli dry. Along with lymphatic pumping and a low capillary pressure, it pulls excess fluid out of the air spaces. The opposing factors listed are instead causes of pulmonary edema.", // source: Ch 39 p 14
     scene: "pulmonary",
     sceneCfg: { label: "FACTOR KEEPING ALVEOLI DRY" },
     metadata: { topic: "Keeping alveoli dry", priority: "high" },
@@ -333,7 +333,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-020",
     type: "mcq",
-    prompt: "Which is NOT listed on the slides as a cause of pulmonary edema?",
+    prompt: "Which is NOT as a cause of pulmonary edema?",
     setup: "",
     ans: [
       { t: "Raised plasma osmotic pressure", ok: true },
@@ -341,7 +341,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Increased capillary permeability", ok: false },
       { t: "Severe acute laryngeal spasm", ok: false },
     ],
-    rationale: "The slides list a DECREASE in plasma osmotic pressure, as in liver failure, as a cause of edema because it lowers the inward force. An increase in plasma osmotic pressure would instead protect against edema, so it is the exception. Left heart failure, increased permeability, and laryngeal spasm are all listed causes.", // source: Ch 39 p 15
+    rationale: "A DECREASE in plasma osmotic pressure, as in liver failure, as a cause of edema because it lowers the inward force. An increase in plasma osmotic pressure would instead protect against edema, so it is the exception. Left heart failure, increased permeability, and laryngeal spasm are all listed causes.", // source: Ch 39 p 15
     scene: "pulmonary",
     sceneCfg: { label: "NOT A CAUSE OF EDEMA" },
     metadata: { topic: "Causes of pulmonary edema", priority: "high" },
@@ -350,7 +350,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-021",
     type: "mcq",
-    prompt: "Per the slides, the pulmonary edema safety factor protects until capillary pressure equals what?",
+    prompt: "The pulmonary edema safety factor protects until capillary pressure equals what?",
     setup: "",
     ans: [
       { t: "Capillary osmotic pressure", ok: true },
@@ -358,7 +358,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Alveolar surface tension", ok: false },
       { t: "Right atrial filling pressure", ok: false },
     ],
-    rationale: "The slides state the pulmonary edema safety factor provides protection against edema until pulmonary capillary pressure equals the capillary osmotic pressure. Below that point the inward osmotic force still outweighs the outward forces. Once capillary pressure exceeds the osmotic value, fluid accumulates rapidly.", // source: Ch 39 p 15
+    rationale: "The pulmonary edema safety factor provides protection against edema until pulmonary capillary pressure equals the capillary osmotic pressure. Below that point the inward osmotic force still outweighs the outward forces. Once capillary pressure exceeds the osmotic value, fluid accumulates rapidly.", // source: Ch 39 p 15
     scene: "pulmonary",
     sceneCfg: { label: "EDEMA SAFETY FACTOR THRESHOLD" },
     metadata: { topic: "Edema safety factor", priority: "high" },
@@ -367,7 +367,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-022",
     type: "mcq",
-    prompt: "Per the slides, what is the main function of the thin pleural fluid layer?",
+    prompt: "What is the main function of the thin pleural fluid layer?",
     setup: "",
     ans: [
       { t: "Reduce friction in breathing", ok: true },
@@ -375,7 +375,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "Warm the air entering the lungs", ok: false },
       { t: "Store surfactant for the alveoli", ok: false },
     ],
-    rationale: "The slides state a thin layer of mucoid fluid lies between the parietal and visceral pleurae to reduce friction between lung, pleura, and chest wall during ventilation. The lymphatic system keeps this space at a negative pressure that prevents lung collapse. A pleural effusion is an abnormal collection of fluid in this space.", // source: Ch 39 p 18
+    rationale: "A thin layer of mucoid fluid lies between the parietal and visceral pleurae to reduce friction between lung, pleura, and chest wall during ventilation. The lymphatic system keeps this space at a negative pressure that prevents lung collapse. A pleural effusion is an abnormal collection of fluid in this space.", // source: Ch 39 p 18
     scene: "pulmonary",
     sceneCfg: { label: "FUNCTION OF PLEURAL FLUID" },
     metadata: { topic: "Pleural fluid", priority: "medium" },
@@ -386,7 +386,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-023",
     type: "mcq",
-    prompt: "On Figure 39-1 the aortic pressure curve is shown mainly to contrast systemic pressure with the much lower pulmonary artery curve. What is its approximate systolic peak?",
+    prompt: "The aortic pressure curve serves mainly to contrast systemic pressure with the much lower pulmonary artery curve. What is its approximate systolic peak?",
     setup: "",
     ans: [
       { t: "120 mmHg", ok: true },
@@ -403,7 +403,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-024",
     type: "mcq",
-    prompt: "According to the slides, what is the normal pulmonary artery systolic pressure?",
+    prompt: "What is the normal pulmonary artery systolic pressure?",
     setup: "",
     ans: [
       { t: "25 mmHg", ok: true },
@@ -420,7 +420,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-025",
     type: "mcq",
-    prompt: "According to the slides, what is the normal pulmonary artery diastolic pressure?",
+    prompt: "What is the normal pulmonary artery diastolic pressure?",
     setup: "",
     ans: [
       { t: "8 mmHg", ok: true },
@@ -437,7 +437,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-026",
     type: "mcq",
-    prompt: "On Figure 39-2 the pulmonary pressure falls steadily from the pulmonary artery to the left atrium. What is the approximate left atrial pressure at the end of that gradient?",
+    prompt: "The pulmonary pressure falls steadily from the pulmonary artery to the left atrium. What is the approximate left atrial pressure at the end of that gradient?",
     setup: "",
     ans: [
       { t: "2 mmHg", ok: true },
@@ -454,7 +454,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-027",
     type: "mcq",
-    prompt: "Per the slides, what is the approximate rate of blood flow through the pulmonary circulation at rest?",
+    prompt: "What is the approximate rate of blood flow through the pulmonary circulation at rest?",
     setup: "",
     ans: [
       { t: "5 L per min", ok: true },
@@ -462,7 +462,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "12 L per min", ok: false },
       { t: "25 L per min", ok: false },
     ],
-    rationale: "Pulmonary flow equals cardiac output, about 5 liters per minute at rest, since the entire output passes through the lungs. The 12 figure on that slide is the pressure drop in mmHg, not a flow.", // source: Ch 39 p 3
+    rationale: "Pulmonary flow equals cardiac output, about 5 liters per minute at rest, since the entire output passes through the lungs. The 12 figure is the pressure drop in mmHg, not a flow.", // source: Ch 39 p 3
     scene: "pulmonary",
     sceneCfg: { label: "PULM FLOW" },
     metadata: { topic: "Pulmonary blood flow", priority: "medium" },
@@ -471,7 +471,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-028",
     type: "mcq",
-    prompt: "Per the slides, the pulmonary circulation can act as a blood reservoir. Where can pulmonary blood shift when needed?",
+    prompt: "The pulmonary circulation can act as a blood reservoir. Where can pulmonary blood shift when needed?",
     setup: "",
     ans: [
       { t: "To systemic circulation", ok: true },
@@ -488,7 +488,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-029",
     type: "mcq",
-    prompt: "Per Figure 39-6, recruitment and distension buffer the pulmonary pressure. As cardiac output quadruples from rest, what happens to pulmonary arterial pressure?",
+    prompt: "Recruitment and distension buffer the pulmonary pressure. As cardiac output quadruples from rest, what happens to pulmonary arterial pressure?",
     setup: "",
     ans: [
       { t: "It rises only slightly", ok: true },
@@ -505,7 +505,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-030",
     type: "mcq",
-    prompt: "In the zone model on Figure 39-5, which zone has NO blood flow during the cardiac cycle?",
+    prompt: "In the zone model, which zone has NO blood flow during the cardiac cycle?",
     setup: "",
     ans: [
       { t: "Zone 1", ok: true },
@@ -522,7 +522,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-031",
     type: "mcq",
-    prompt: "In the zone model on Figure 39-5, what defines zone 2, where flow is intermittent?",
+    prompt: "In the zone model, what defines zone 2, where flow is intermittent?",
     setup: "",
     ans: [
       { t: "Palv between Pa and Pv", ok: true },
@@ -539,7 +539,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-032",
     type: "mcq",
-    prompt: "In the zone model on Figure 39-5, which zone has continuous blood flow and normally describes the base of the upright lung?",
+    prompt: "In the zone model, which zone has continuous blood flow and normally describes the base of the upright lung?",
     setup: "",
     ans: [
       { t: "Zone 3", ok: true },
@@ -556,7 +556,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-033",
     type: "mcq",
-    prompt: "On the slide, the normal alveolus has an oxygen partial pressure of 100 mmHg. What is its normal carbon dioxide partial pressure?",
+    prompt: "The normal alveolus has an oxygen partial pressure of 100 mmHg. What is its normal carbon dioxide partial pressure?",
     setup: "",
     ans: [
       { t: "40 mmHg", ok: true },
@@ -573,7 +573,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-034",
     type: "mcq",
-    prompt: "On the slide, blood entering the pulmonary capillary carries an oxygen partial pressure of about what value before it equilibrates with alveolar gas?",
+    prompt: "Blood entering the pulmonary capillary carries an oxygen partial pressure of about what value before it equilibrates with alveolar gas?",
     setup: "",
     ans: [
       { t: "40 mmHg", ok: true },
@@ -590,7 +590,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-035",
     type: "mcq",
-    prompt: "On Figure 39-7, surface tension at the alveolar pore contributes which approximate force toward fluid movement out of the capillary?",
+    prompt: "Surface tension at the alveolar pore contributes which approximate force toward fluid movement out of the capillary?",
     setup: "",
     ans: [
       { t: "8 mmHg", ok: true },
@@ -598,7 +598,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
       { t: "14 mmHg", ok: false },
       { t: "1 mmHg", ok: false },
     ],
-    rationale: "Surface tension at the alveolar pore is shown as about 8 mmHg, contributing to the outward pull on fluid. The 28 mmHg value is plasma osmotic pressure, 14 mmHg is interstitial osmotic pressure, and 1 mmHg is the net filtration pressure.", // source: Ch 39 p 13
+    rationale: "Surface tension at the alveolar pore is about 8 mmHg, contributing to the outward pull on fluid. The 28 mmHg value is plasma osmotic pressure, 14 mmHg is interstitial osmotic pressure, and 1 mmHg is the net filtration pressure.", // source: Ch 39 p 13
     scene: "pulmonary",
     sceneCfg: { label: "PORE TENSION" },
     metadata: { topic: "Surface tension at pore", priority: "medium" },
@@ -607,7 +607,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-036",
     type: "mcq",
-    prompt: "Per the slides, how is pulmonary edema defined?",
+    prompt: "How is pulmonary edema defined?",
     setup: "",
     ans: [
       { t: "Interstitial fluid", ok: true },
@@ -624,7 +624,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-037",
     type: "mcq",
-    prompt: "Per the slides, which edema cause raises the outward filtration force through elevated pulmonary capillary pressure?",
+    prompt: "Which edema cause raises the outward filtration force through elevated pulmonary capillary pressure?",
     setup: "",
     ans: [
       { t: "Mitral valve stenosis", ok: true },
@@ -641,7 +641,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-038",
     type: "mcq",
-    prompt: "Per the slides, inhaling noxious gases such as chlorine or sulfur dioxide causes pulmonary edema mainly by which mechanism?",
+    prompt: "Inhaling noxious gases such as chlorine or sulfur dioxide causes pulmonary edema mainly by which mechanism?",
     setup: "",
     ans: [
       { t: "Raising membrane permeability", ok: true },
@@ -658,7 +658,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-039",
     type: "mcq",
-    prompt: "Per the slides, liver failure promotes pulmonary edema by which mechanism?",
+    prompt: "Liver failure promotes pulmonary edema by which mechanism?",
     setup: "",
     ans: [
       { t: "Lowering plasma osmotic force", ok: true },
@@ -675,7 +675,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-040",
     type: "mcq",
-    prompt: "Per the slides, how does a large decrease in intrapleural pressure, as in severe laryngeal spasm, cause pulmonary edema?",
+    prompt: "How does a large decrease in intrapleural pressure, as in severe laryngeal spasm, cause pulmonary edema?",
     setup: "",
     ans: [
       { t: "Negative pressure pulls fluid out", ok: true },
@@ -692,7 +692,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-041",
     type: "mcq",
-    prompt: "On Figure 39-8, the rate of pulmonary edema formation stays near zero until left atrial pressure rises above approximately what value?",
+    prompt: "The rate of pulmonary edema formation stays near zero until left atrial pressure rises above approximately what value?",
     setup: "",
     ans: [
       { t: "23 mmHg", ok: true },
@@ -709,7 +709,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-042",
     type: "mcq",
-    prompt: "Per the slides, which trio is listed as the safety factors that protect against pulmonary edema?",
+    prompt: "Which trio is listed as the safety factors that protect against pulmonary edema?",
     setup: "",
     ans: [
       { t: "Negative pressure, lymph, low osmotic", ok: true },
@@ -726,7 +726,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-043",
     type: "mcq",
-    prompt: "Per the slides, which is listed as a safety factor that removes filtered fluid and helps prevent alveolar flooding?",
+    prompt: "Which is listed as a safety factor that removes filtered fluid and helps prevent alveolar flooding?",
     setup: "",
     ans: [
       { t: "Lymphatic pumping", ok: true },
@@ -743,7 +743,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-044",
     type: "mcq",
-    prompt: "Per the slides, because the net Starling force at the pulmonary capillary is plus 1, how does fluid behave at the pleural surface?",
+    prompt: "Because the net Starling force at the pulmonary capillary is plus 1, how does fluid behave at the pleural surface?",
     setup: "",
     ans: [
       { t: "It filters out slowly", ok: true },
@@ -760,7 +760,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-045",
     type: "mcq",
-    prompt: "Per the slides, what role do the pleural lymphatics serve besides draining fluid?",
+    prompt: "What role do the pleural lymphatics serve besides draining fluid?",
     setup: "",
     ans: [
       { t: "Keep pleural pressure negative", ok: true },
@@ -777,7 +777,7 @@ export const PP2_WK4_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w4s-046",
     type: "mcq",
-    prompt: "Per the slides, which is listed as a cause of pleural effusion?",
+    prompt: "Which is listed as a cause of pleural effusion?",
     setup: "",
     ans: [
       { t: "Lymphatic obstruction by tumor", ok: true },

@@ -18,7 +18,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Apneustic center area", ok: false },
       { t: "Hering Breuer center", ok: false },
     ],
-    rationale: "The dorsal respiratory group lies in the medulla, has intrinsic nerve activity, and is mainly responsible for inspiration and for the basic rhythm of respiration. The pneumotaxic center is in the pons, and the apneustic center is shown with a question mark in the brainstem.", // source: Ch 42 p 4
+    rationale: "The dorsal respiratory group lies in the medulla, has intrinsic nerve activity, and is mainly responsible for inspiration and for the basic rhythm of respiration. The pneumotaxic center is in the pons, and the apneustic center is marked with a question mark because its role in humans is uncertain.", // source: Ch 42 p 4
     scene: "pulmonary",
     sceneCfg: { label: "DORSAL RESPIRATORY GROUP" },
     metadata: { topic: "Respiratory centers", priority: "high" },
@@ -180,7 +180,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-011",
     type: "mcq",
-    prompt: "According to the slides, stimulation of arterial baroreceptors by elevated blood pressure produces which respiratory effect?",
+    prompt: "Stimulation of arterial baroreceptors by elevated blood pressure produces which respiratory effect?",
     setup: "",
     ans: [
       { t: "Brief apnea and bronchodilation", ok: true },
@@ -324,7 +324,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Normal wakefulness", ok: false },
       { t: "Light sleep", ok: false },
     ],
-    rationale: "On the slide comparing conditions, anesthesia produces the lowest and flattest ventilation response to carbon dioxide, below narcotics, sleep, and normal. Metabolic acidosis shifts the curve in the opposite direction toward greater ventilation.", // source: Ch 42 p 16
+    rationale: "Anesthesia produces the lowest and flattest ventilation response to carbon dioxide, below narcotics, sleep, and normal. Metabolic acidosis shifts the curve in the opposite direction toward greater ventilation.", // source: Ch 42 p 16
     scene: "pulmonary",
     sceneCfg: { label: "ANESTHESIA DEPRESSES RESPONSE" },
     metadata: { topic: "CO2 response curve", priority: "medium" },
@@ -392,7 +392,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "First 1.0 to 1.2 full seconds", ok: false },
       { t: "Middle half of the breath out", ok: false },
     ],
-    rationale: "The slides define PEFR as the maximum expiratory flow rate during the first 100 to 120 milliseconds of forceful expiration from completely full lungs. It is the early, peak portion of the maneuver, not the final or middle segment, and the window is measured in milliseconds rather than seconds.", // source: Ch 43 p 3
+    rationale: "PEFR is defined as the maximum expiratory flow rate during the first 100 to 120 milliseconds of forceful expiration from completely full lungs. It is the early, peak portion of the maneuver, not the final or middle segment, and the window is measured in milliseconds rather than seconds.", // source: Ch 43 p 3
     scene: "pulmonary",
     sceneCfg: { label: "PEFR TIMING WINDOW" },
     metadata: { topic: "Peak expiratory flow rate", priority: "medium" },
@@ -401,7 +401,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-002",
     type: "mcq",
-    prompt: "According to the slides, Maximum Expiratory Flow Rate (MEFR) is best described as the greatest amount of flow achievable during forceful expiration from lungs that are:",
+    prompt: "Maximum Expiratory Flow Rate (MEFR) is best described as the greatest amount of flow achievable during forceful expiration from lungs that are:",
     setup: "",
     ans: [
       { t: "Filled to a given volume", ok: true },
@@ -409,7 +409,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Held at functional capacity", ok: false },
       { t: "Relaxed at resting volume", ok: false },
     ],
-    rationale: "The slides state MEFR is the greatest amount of flow that can be achieved during forceful expiration from lungs filled to a given volume. The other options describe end-expiratory or resting states rather than the defined starting condition of being filled to a given volume.", // source: Ch 43 p 2
+    rationale: "MEFR is the greatest amount of flow that can be achieved during forceful expiration from lungs filled to a given volume. The other options describe end-expiratory or resting states rather than the defined starting condition of being filled to a given volume.", // source: Ch 43 p 2
     scene: "pulmonary",
     sceneCfg: { label: "MEFR DEFINITION" },
     metadata: { topic: "Maximum expiratory flow rate", priority: "medium" },
@@ -418,7 +418,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-003",
     type: "mcq",
-    prompt: "The slides divide pulmonary pathology into two main categories. Which pairing correctly matches each category to its core mechanism?",
+    prompt: "pulmonary pathology divide into two main categories. Which pairing correctly matches each category to its core mechanism?",
     setup: "",
     ans: [
       { t: "Obstructive, more flow resistance", ok: true },
@@ -426,7 +426,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Restrictive, more flow resistance", ok: false },
       { t: "Restrictive, faster airway flow", ok: false },
     ],
-    rationale: "The slides assign increased resistance to flow to obstructive disease and decreased expansion of the lungs to restrictive disease. Pairing obstruction with reduced expansion, or restriction with increased resistance, reverses the defining mechanisms taught on the slide.", // source: Ch 43 p 4
+    rationale: "increased resistance belongs to flow to obstructive disease and decreased expansion of the lungs to restrictive disease. Pairing obstruction with reduced expansion, or restriction with increased resistance, reverses the defining mechanisms taught.", // source: Ch 43 p 4
     scene: "pulmonary",
     sceneCfg: { label: "PULMONARY DISEASE CATEGORIES" },
     metadata: { topic: "Obstructive versus restrictive", priority: "high" },
@@ -435,7 +435,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-004",
     type: "mcq",
-    prompt: "Per the slides, obstructive diseases most often arise from problems with which part of the respiratory system?",
+    prompt: "Obstructive diseases most often arise from problems with which part of the respiratory system?",
     setup: "",
     ans: [
       { t: "The conducting airways", ok: true },
@@ -443,7 +443,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "The pleural fluid layer", ok: false },
       { t: "The pulmonary arteries", ok: false },
     ],
-    rationale: "The slides state obstructive diseases are often due to issues with the conducting airways, especially the bronchioles. Chest wall, pleura, and pulmonary vasculature are not named as the typical source of obstruction on this slide.", // source: Ch 43 p 4
+    rationale: "Obstructive diseases are often due to issues with the conducting airways, especially the bronchioles. Chest wall, pleura, and pulmonary vasculature are not named as the typical source of obstruction.", // source: Ch 43 p 4
     scene: "pulmonary",
     sceneCfg: { label: "OBSTRUCTION AIRWAY SITE" },
     metadata: { topic: "Obstructive disease site", priority: "medium" },
@@ -452,7 +452,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-005",
     type: "mcq",
-    prompt: "The slides explain that destruction of lung parenchyma can increase airway resistance. What normal action of the parenchyma is lost when it is destroyed?",
+    prompt: "Destruction of lung parenchyma can increase airway resistance. What normal action of the parenchyma is lost when it is destroyed?",
     setup: "",
     ans: [
       { t: "It pulls airway walls outward", ok: true },
@@ -460,7 +460,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "It seals the airway mucosa", ok: false },
       { t: "It warms the inspired air", ok: false },
     ],
-    rationale: "The slides note lung parenchyma normally pulls outward on the walls of adjacent airways, helping hold them open. When parenchyma is destroyed this outward traction is lost, so airways narrow and resistance rises. The other actions are not the mechanism described.", // source: Ch 43 p 5
+    rationale: "Lung parenchyma normally pulls outward on the walls of adjacent airways, helping hold them open. When parenchyma is destroyed this outward traction is lost, so airways narrow and resistance rises. The other actions are not the mechanism described.", // source: Ch 43 p 5
     scene: "pulmonary",
     sceneCfg: { label: "PARENCHYMA AIRWAY TRACTION" },
     metadata: { topic: "Parenchymal traction", priority: "medium" },
@@ -469,7 +469,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-006",
     type: "mcq",
-    prompt: "The slides list several factors that increase airway resistance. Which of the following is LEAST consistent with the slide and would NOT increase resistance to airflow?",
+    prompt: "Several factors increase airway resistance. Which of the following would LEAST increase resistance to airflow?",
     setup: "",
     ans: [
       { t: "Outward pull on airway walls", ok: true },
@@ -477,7 +477,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Excessive airway secretions", ok: false },
       { t: "Hypertrophy of bronchial wall", ok: false },
     ],
-    rationale: "Outward traction on airway walls keeps airways open and lowers resistance, so it does not increase resistance and is the correct exception. The slides list lumen blockage by secretions, lumen narrowing from smooth muscle contraction, and bronchial wall hypertrophy as genuine resistance-raising factors.", // source: Ch 43 p 5
+    rationale: "Outward traction on airway walls keeps airways open and lowers resistance, so it does not increase resistance and is the correct exception. Lumen blockage by secretions, lumen narrowing from smooth muscle contraction, and bronchial wall hypertrophy as genuine resistance-raising factors.", // source: Ch 43 p 5
     scene: "pulmonary",
     sceneCfg: { label: "RESISTANCE FACTOR EXCEPTION" },
     metadata: { topic: "Airway resistance factors", priority: "high" },
@@ -486,7 +486,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-007",
     type: "mcq",
-    prompt: "On the maximum expiratory flow volume diagram in the slides, the curve for airway obstruction is shifted in which direction relative to the normal curve?",
+    prompt: "On the maximum expiratory flow volume diagram, the curve for airway obstruction is shifted in which direction relative to the normal curve?",
     setup: "",
     ans: [
       { t: "Left, toward higher volumes", ok: true },
@@ -494,7 +494,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Down, with no volume shift", ok: false },
       { t: "Up, toward greater flow rates", ok: false },
     ],
-    rationale: "The slides show airway obstruction shifting the flow volume curve to the left toward higher lung volumes, reflecting air trapping. The rightward, low-volume shift belongs to restrictive disease, and vertical-only shifts are not what the diagram depicts.", // source: Ch 43 p 6
+    rationale: "Airway obstruction shifting the flow volume curve to the left toward higher lung volumes, reflecting air trapping. The rightward, low-volume shift belongs to restrictive disease, and vertical-only shifts are not the actual change.", // source: Ch 43 p 6
     scene: "pulmonary",
     sceneCfg: { label: "OBSTRUCTION LOOP SHIFT" },
     metadata: { topic: "Flow volume loop obstruction", priority: "high" },
@@ -503,7 +503,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-008",
     type: "mcq",
-    prompt: "On the flow volume loop, restrictive lung disease shows which pattern according to the slides?",
+    prompt: "On the flow volume loop, restrictive lung disease shows which pattern?",
     setup: "",
     ans: [
       { t: "Rightward shift, lower volumes", ok: true },
@@ -511,7 +511,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Rightward shift, higher volumes", ok: false },
       { t: "Leftward shift, normal volumes", ok: false },
     ],
-    rationale: "The slides state the restrictive loop shifts to the right with volumes that are less than normal, because total lung capacity and residual volume are reduced. A leftward shift with higher volumes describes obstruction, not restriction.", // source: Ch 43 p 10
+    rationale: "The restrictive loop shifts to the right with volumes that are less than normal, because total lung capacity and residual volume are reduced. A leftward shift with higher volumes describes obstruction, not restriction.", // source: Ch 43 p 10
     scene: "pulmonary",
     sceneCfg: { label: "RESTRICTIVE LOOP SHIFT" },
     metadata: { topic: "Flow volume loop restriction", priority: "high" },
@@ -520,7 +520,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-009",
     type: "mcq",
-    prompt: "The slides describe how Guyton and Hall label the restrictive flow volume curve. Which legacy term do they use for restrictive lungs?",
+    prompt: "Guyton and Hall label the restrictive flow volume curve. Which legacy term do they use for restrictive lungs?",
     setup: "",
     ans: [
       { t: "Constricted lungs", ok: true },
@@ -528,7 +528,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Fully collapsed lungs", ok: false },
       { t: "Congested lungs", ok: false },
     ],
-    rationale: "The slides point out that Guyton and Hall use the older institutional term constricted lungs for what modern practice calls restrictive lung disease. Obstructed, collapsed, and congested are not the label applied to that rightward shifted curve.", // source: Ch 43 p 7
+    rationale: "Guyton and Hall use the older institutional term constricted lungs for what modern practice calls restrictive lung disease. Obstructed, collapsed, and congested are not the label applied to that rightward shifted curve.", // source: Ch 43 p 7
     scene: "pulmonary",
     sceneCfg: { label: "CONSTRICTED LUNGS LABEL" },
     metadata: { topic: "Guyton terminology", priority: "medium" },
@@ -537,7 +537,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-010",
     type: "mcq",
-    prompt: "In obstructive disease, the slides describe a characteristic change in the spirometry ratio. Which statement matches the slides?",
+    prompt: "In obstructive disease, a characteristic change in the spirometry ratio. Which statement is correct?",
     setup: "",
     ans: [
       { t: "FEV1 falls more than FVC", ok: true },
@@ -545,7 +545,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "FEV1 and FVC fall equally", ok: false },
       { t: "FEV1 rises above the FVC", ok: false },
     ],
-    rationale: "The slides state that in obstruction FEV1 decreases more than FVC, which lowers the FEV1/FVC ratio. Proportional falls describe restriction, and FEV1 can never exceed FVC because it is a fraction of that same forced breath.", // source: Ch 43 p 10
+    rationale: "In obstruction FEV1 decreases more than FVC, which lowers the FEV1/FVC ratio. Proportional falls describe restriction, and FEV1 can never exceed FVC because it is a fraction of that same forced breath.", // source: Ch 43 p 10
     scene: "pulmonary",
     sceneCfg: { label: "OBSTRUCTION FEV1 DROP" },
     metadata: { topic: "Obstructive spirometry ratio", priority: "high" },
@@ -554,7 +554,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-011",
     type: "mcq",
-    prompt: "The slides give a normal FEV1/FVC percentage and an obstructed value from Figure 43-3. Which pairing of normal versus obstructed values is correct?",
+    prompt: "A normal FEV1/FVC percentage and an obstructed value. Which pairing of normal versus obstructed values is correct?",
     setup: "",
     ans: [
       { t: "80 percent then 47 percent", ok: true },
@@ -562,7 +562,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "80 percent then 12 percent", ok: false },
       { t: "60 percent then 47 percent", ok: false },
     ],
-    rationale: "Figure 43-3 on the slides shows a normal FEV1/FVC of about 80 percent and an obstructed value of about 47 percent. The reversed pairing and the alternative numbers do not match the figure, where the ratio falls from 80 to 47 percent with obstruction.", // source: Ch 43 p 11
+    rationale: "A normal FEV1/FVC of about 80 percent and an obstructed value of about 47 percent. The reversed pairing and the alternative numbers do not match the actual values, where the ratio falls from 80 to 47 percent with obstruction.", // source: Ch 43 p 11
     scene: "pulmonary",
     sceneCfg: { label: "NORMAL VERSUS OBSTRUCTED RATIO" },
     metadata: { topic: "FEV1 over FVC values", priority: "medium" },
@@ -571,7 +571,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-012",
     type: "mcq",
-    prompt: "Per the slides, Forced Expiratory Volume in one second (FEV1) measures the amount of air a person can force out:",
+    prompt: "Forced Expiratory Volume in one second (FEV1) measures the amount of air a person can force out:",
     setup: "",
     ans: [
       { t: "In one second after full breath in", ok: true },
@@ -579,7 +579,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "In one second after a normal breath", ok: false },
       { t: "In total after a normal breath out", ok: false },
     ],
-    rationale: "The slides define FEV1 as the total amount of air forced out in one second after a maximal inhalation. FVC, by contrast, is the total air forced out with no time limit; both maneuvers begin from a maximal inhalation rather than a normal breath.", // source: Ch 43 p 11
+    rationale: "FEV1 is defined as the total amount of air forced out in one second after a maximal inhalation. FVC, by contrast, is the total air forced out with no time limit; both maneuvers begin from a maximal inhalation rather than a normal breath.", // source: Ch 43 p 11
     scene: "pulmonary",
     sceneCfg: { label: "FEV1 ONE SECOND VOLUME" },
     metadata: { topic: "FEV1 definition", priority: "medium" },
@@ -588,7 +588,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-013",
     type: "mcq",
-    prompt: "The slides define COPD as a group of disorders involving what kind of damage to lung tissue?",
+    prompt: "COPD is defined as a group of disorders involving what kind of damage to lung tissue?",
     setup: "",
     ans: [
       { t: "Progressive, permanent damage", ok: true },
@@ -596,7 +596,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Mild, self-resolving damage", ok: false },
       { t: "Brief, intermittent damage", ok: false },
     ],
-    rationale: "The slides state COPD involves progressive, longterm, permanent damage to lung tissue that results in air being trapped during exhalation. Reversible, self-resolving, or intermittent damage contradicts the permanent nature emphasized for COPD.", // source: Ch 43 p 12
+    rationale: "COPD involves progressive, longterm, permanent damage to lung tissue that results in air being trapped during exhalation. Reversible, self-resolving, or intermittent damage contradicts the permanent nature emphasized for COPD.", // source: Ch 43 p 12
     scene: "pulmonary",
     sceneCfg: { label: "COPD PERMANENT DAMAGE" },
     metadata: { topic: "COPD definition", priority: "high" },
@@ -605,7 +605,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-014",
     type: "mcq",
-    prompt: "According to the slides, what is the most common cause of chronic bronchitis?",
+    prompt: "What is the most common cause of chronic bronchitis?",
     setup: "",
     ans: [
       { t: "Smoking", ok: true },
@@ -613,7 +613,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Bacteria", ok: false },
       { t: "Asbestos", ok: false },
     ],
-    rationale: "The slides state smoking is the most common cause of chronic bronchitis, although other irritants can cause it too. Allergens, bacteria, and asbestos are not named as the leading cause of chronic bronchitis on this slide.", // source: Ch 43 p 13
+    rationale: "Smoking is the most common cause of chronic bronchitis, although other irritants can cause it too. Allergens, bacteria, and asbestos are not named as the leading cause of chronic bronchitis.", // source: Ch 43 p 13
     scene: "pulmonary",
     sceneCfg: { label: "CHRONIC BRONCHITIS CAUSE" },
     metadata: { topic: "Chronic bronchitis cause", priority: "medium" },
@@ -622,7 +622,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-015",
     type: "mcq",
-    prompt: "The slides describe emphysema as the permanent destruction of which structural component of the alveoli?",
+    prompt: "Emphysema as the permanent destruction of which structural component of the alveoli?",
     setup: "",
     ans: [
       { t: "Elastic connective tissue", ok: true },
@@ -630,7 +630,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "The airway smooth muscle", ok: false },
       { t: "Pleural lining membrane", ok: false },
     ],
-    rationale: "The slides define emphysema as permanent destruction of the elastic connective tissue in the alveoli, which prevents the alveoli from adequately pushing air out during exhalation. Mucus glands, smooth muscle, and pleura are not the tissue destroyed in emphysema.", // source: Ch 43 p 12
+    rationale: "emphysema is defined as permanent destruction of the elastic connective tissue in the alveoli, which prevents the alveoli from adequately pushing air out during exhalation. Mucus glands, smooth muscle, and pleura are not the tissue destroyed in emphysema.", // source: Ch 43 p 12
     scene: "pulmonary",
     sceneCfg: { label: "EMPHYSEMA ELASTIC TISSUE" },
     metadata: { topic: "Emphysema pathology", priority: "high" },
@@ -639,7 +639,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-016",
     type: "mcq",
-    prompt: "The slides list consequences of emphysema. Which of the following is NOT listed and would therefore be the exception?",
+    prompt: "Consequences of emphysema. Which of the following is NOT listed and would therefore be the exception?",
     setup: "",
     ans: [
       { t: "Increased diffusing capacity", ok: true },
@@ -647,7 +647,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Decreased diffusing capacity", ok: false },
       { t: "Pulmonary hypertension", ok: false },
     ],
-    rationale: "Emphysema reduces surface area and capillary networks, so diffusing capacity decreases rather than increases; the increased option is the false exception. The slides list high airway resistance, decreased diffusing capacity, and pulmonary hypertension from loss of pulmonary capillary networks as real consequences.", // source: Ch 43 p 14
+    rationale: "Emphysema reduces surface area and capillary networks, so diffusing capacity decreases rather than increases; the increased option is the false exception. High airway resistance, decreased diffusing capacity, and pulmonary hypertension from loss of pulmonary capillary networks as real consequences.", // source: Ch 43 p 14
     scene: "pulmonary",
     sceneCfg: { label: "EMPHYSEMA CONSEQUENCE EXCEPTION" },
     metadata: { topic: "Emphysema consequences", priority: "high" },
@@ -656,7 +656,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-017",
     type: "mcq",
-    prompt: "The slides state that pulmonary hypertension in emphysema develops because of the loss of large areas of which structures?",
+    prompt: "Pulmonary hypertension in emphysema develops because of the loss of large areas of which structures?",
     setup: "",
     ans: [
       { t: "Pulmonary capillary networks", ok: true },
@@ -664,7 +664,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Alveolar surfactant layers", ok: false },
       { t: "Pleural connective sheets", ok: false },
     ],
-    rationale: "The slides attribute pulmonary hypertension in emphysema to the loss of large areas of pulmonary capillary networks. Losing capillary beds raises pulmonary vascular resistance and pressure; bronchiole walls, surfactant, and pleura are not the cause given.", // source: Ch 43 p 14
+    rationale: "pulmonary hypertension in emphysema are attributed to the loss of large areas of pulmonary capillary networks. Losing capillary beds raises pulmonary vascular resistance and pressure; bronchiole walls, surfactant, and pleura are not the cause given.", // source: Ch 43 p 14
     scene: "pulmonary",
     sceneCfg: { label: "CAPILLARY LOSS HYPERTENSION" },
     metadata: { topic: "Emphysema pulmonary hypertension", priority: "medium" },
@@ -673,7 +673,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-018",
     type: "mcq",
-    prompt: "The slides describe asthma as an obstructive disorder with which key feature distinguishing it from COPD?",
+    prompt: "Asthma as an obstructive disorder with which key feature distinguishing it from COPD?",
     setup: "",
     ans: [
       { t: "Reversible airway narrowing", ok: true },
@@ -681,7 +681,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Fixed alveolar destruction", ok: false },
       { t: "Constant pleural scarring", ok: false },
     ],
-    rationale: "The slides define asthma as an obstructive disorder with reversible narrowing of the bronchial airways and label it Reversible. COPD by contrast features permanent damage; fixed alveolar destruction and pleural scarring are not the defining asthma feature.", // source: Ch 43 p 18
+    rationale: "asthma is defined as an obstructive disorder with reversible narrowing of the bronchial airways and label it Reversible. COPD by contrast features permanent damage; fixed alveolar destruction and pleural scarring are not the defining asthma feature.", // source: Ch 43 p 18
     scene: "pulmonary",
     sceneCfg: { label: "ASTHMA REVERSIBLE NARROWING" },
     metadata: { topic: "Asthma reversibility", priority: "high" },
@@ -690,7 +690,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-019",
     type: "mcq",
-    prompt: "The slides name inflammatory chemicals released during asthma from exposure to an allergen or irritant. Which pair is listed?",
+    prompt: "inflammatory chemicals released during asthma from exposure to an allergen or irritant. Which pair is listed?",
     setup: "",
     ans: [
       { t: "Histamine and leukotrienes", ok: true },
@@ -698,7 +698,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Histamine and erythropoietin", ok: false },
       { t: "Adenosine and bradykinin", ok: false },
     ],
-    rationale: "The slides state asthma results in the release of inflammatory chemicals such as histamine and leukotrienes. Surfactant and erythropoietin are not inflammatory mediators of asthma, and the adenosine bradykinin pair is not named on the slide.", // source: Ch 43 p 18
+    rationale: "Asthma results in the release of inflammatory chemicals such as histamine and leukotrienes. Surfactant and erythropoietin are not inflammatory mediators of asthma, and the adenosine bradykinin pair is not named.", // source: Ch 43 p 18
     scene: "pulmonary",
     sceneCfg: { label: "ASTHMA INFLAMMATORY MEDIATORS" },
     metadata: { topic: "Asthma mediators", priority: "medium" },
@@ -707,7 +707,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-020",
     type: "mcq",
-    prompt: "The slides give the gold standard spirometry threshold that confirms an asthma diagnosis after a fast acting bronchodilator. Which improvement in FEV1 confirms it?",
+    prompt: "The gold standard spirometry threshold that confirms an asthma diagnosis after a fast acting bronchodilator. Which improvement in FEV1 confirms it?",
     setup: "",
     ans: [
       { t: "Over 12 percent and 200 mL", ok: true },
@@ -715,7 +715,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Over 12 percent and 400 mL", ok: false },
       { t: "Over 8 percent and 200 mL", ok: false },
     ],
-    rationale: "The slides state that improvement in FEV1 by more than 12 percent AND 200 mL after a bronchodilator inhaler confirms the diagnosis of asthma. Both criteria must be met; the alternative percentages and volumes do not match the slide threshold.", // source: Ch 43 p 19
+    rationale: "Improvement in FEV1 by more than 12 percent AND 200 mL after a bronchodilator inhaler confirms the diagnosis of asthma. Both criteria must be met; the alternative percentages and volumes do not match the threshold.", // source: Ch 43 p 19
     scene: "pulmonary",
     sceneCfg: { label: "ASTHMA BRONCHODILATOR RESPONSE" },
     metadata: { topic: "Asthma diagnosis threshold", priority: "high" },
@@ -724,7 +724,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-021",
     type: "mcq",
-    prompt: "The slides contrast where fluid accumulates in pneumonia versus where collapse and scarring occur. In pneumonia, fluid and pus accumulate primarily:",
+    prompt: "where fluid accumulates in pneumonia versus where collapse and scarring occur. In pneumonia, fluid and pus accumulate primarily:",
     setup: "",
     ans: [
       { t: "Within the alveoli", ok: true },
@@ -732,7 +732,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Within the bronchi only", ok: false },
       { t: "Within the capillary bed", ok: false },
     ],
-    rationale: "The slides define pneumonia as an acute infection resulting in inflammation and the accumulation of fluid or pus within the alveoli. The pleural sac, bronchi, and capillary bed are not where the slide localizes the fluid accumulation of pneumonia.", // source: Ch 43 p 25
+    rationale: "pneumonia is defined as an acute infection resulting in inflammation and the accumulation of fluid or pus within the alveoli. The pleural sac, bronchi, and capillary bed are not where pneumonia fluid accumulates.", // source: Ch 43 p 25
     scene: "pulmonary",
     sceneCfg: { label: "PNEUMONIA ALVEOLAR FLUID" },
     metadata: { topic: "Pneumonia pathology", priority: "high" },
@@ -741,7 +741,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-022",
     type: "mcq",
-    prompt: "On the Causes of Hypoxia slide, which mechanism is listed under inadequate usage of oxygen by the tissue rather than under inadequate oxygenation of blood?",
+    prompt: "On the hypoxia classification, which mechanism is listed under inadequate usage of oxygen by the tissue rather than under inadequate oxygenation of blood?",
     setup: "",
     ans: [
       { t: "Cyanide poisoning", ok: true },
@@ -749,7 +749,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Diffusion abnormalities", ok: false },
       { t: "Neuromuscular disorder", ok: false },
     ],
-    rationale: "The slides list cyanide and vitamin deficiencies under inadequate usage of oxygen by the tissue, because the tissue cannot use the oxygen delivered. Low atmospheric oxygen, diffusion abnormalities, and neuromuscular disorders fall under inadequate oxygenation of blood in the lungs.", // source: Ch 43 p 29
+    rationale: "Cyanide and vitamin deficiencies under inadequate usage of oxygen by the tissue, because the tissue cannot use the oxygen delivered. Low atmospheric oxygen, diffusion abnormalities, and neuromuscular disorders fall under inadequate oxygenation of blood in the lungs.", // source: Ch 43 p 29
     scene: "pulmonary",
     sceneCfg: { label: "TISSUE OXYGEN USE FAILURE" },
     metadata: { topic: "Causes of hypoxia", priority: "high" },
@@ -768,7 +768,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Output from the spinal reflex arc", ok: false },
       { t: "Drive from the hepatic plexus", ok: false },
     ],
-    rationale: "The overview slide shows three input streams feeding the cycle of inspiration and expiration: influences from higher centers, arterial and central chemoreceptors, and reflexes from the lungs, airways, cardiovascular system, muscles and joints, and skin. The renal cortex, a spinal reflex arc, and a hepatic plexus are not depicted as respiratory inputs.", // source: Ch 42 p 2
+    rationale: "Three input streams feeding the cycle of inspiration and expiration: influences from higher centers, arterial and central chemoreceptors, and reflexes from the lungs, airways, cardiovascular system, muscles and joints, and skin. The renal cortex, a spinal reflex arc, and a hepatic plexus are not respiratory inputs.", // source: Ch 42 p 2
     scene: "pulmonary",
     sceneCfg: { label: "NEURAL INPUTS" },
     metadata: { topic: "Neural integration", priority: "medium" },
@@ -777,7 +777,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-024",
     type: "mcq",
-    prompt: "An unopposed center in the lower pons would drive prolonged inspiratory gasps; the slide marks it with a question mark and shows it inhibited by the pneumotaxic center. Which center is this?",
+    prompt: "An unopposed center in the lower pons would drive prolonged inspiratory gasps; it with a question mark and shows it inhibited by the pneumotaxic center. Which center is this?",
     setup: "",
     ans: [
       { t: "Apneustic center", ok: true },
@@ -785,7 +785,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Cardioinhibitory center", ok: false },
       { t: "Vasomotor center", ok: false },
     ],
-    rationale: "Figure 42-1 labels the apneustic center in the pons with a question mark and an arrow showing the pneumotaxic center inhibits it. If unopposed it tends to produce apneustic breathing, sustained inspiratory effort. The dorsal group sets normal rhythm, while the cardioinhibitory and vasomotor centers are cardiovascular, not respiratory.", // source: Ch 42 p 3
+    rationale: "The apneustic center in the pons with a question mark and an arrow showing the pneumotaxic center inhibits it. If unopposed it tends to produce apneustic breathing, sustained inspiratory effort. The dorsal group sets normal rhythm, while the cardioinhibitory and vasomotor centers are cardiovascular, not respiratory.", // source: Ch 42 p 3
     scene: "pulmonary",
     sceneCfg: { label: "APNEUSTIC" },
     metadata: { topic: "Apneustic center", priority: "high" },
@@ -794,7 +794,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-025",
     type: "mcq",
-    prompt: "According to Figure 42-1, afferent signals are carried into the dorsal respiratory group mainly by which pair of cranial nerves?",
+    prompt: "Afferent signals are carried into the dorsal respiratory group mainly by which pair of cranial nerves?",
     setup: "",
     ans: [
       { t: "Vagus and glossopharyngeal", ok: true },
@@ -802,7 +802,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Trigeminal and facial", ok: false },
       { t: "Hypoglossal and spinal", ok: false },
     ],
-    rationale: "The figure shows the vagus and glossopharyngeal nerves entering the dorsal respiratory group, carrying sensory input from lung receptors and peripheral chemoreceptors. The phrenic and intercostal nerves are motor outputs to breathing muscles, not the labeled afferents, and the other pairs are unrelated.", // source: Ch 42 p 3
+    rationale: "The vagus and glossopharyngeal nerves entering the dorsal respiratory group, carrying sensory input from lung receptors and peripheral chemoreceptors. The phrenic and intercostal nerves are motor outputs to breathing muscles, not the labeled afferents, and the other pairs are unrelated.", // source: Ch 42 p 3
     scene: "pulmonary",
     sceneCfg: { label: "CN AFFERENTS" },
     metadata: { topic: "Cranial nerve afferents", priority: "high" },
@@ -819,7 +819,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "It inverts the ramp slope", ok: false },
       { t: "It removes the ramp signal", ok: false },
     ],
-    rationale: "The slide states the ramp becomes steeper when more rapid lung filling is needed, so inspiration is faster and deeper. Flattening, inverting, or removing the ramp would slow or abolish inspiration rather than speed filling.", // source: Ch 42 p 4
+    rationale: "The ramp becomes steeper when more rapid lung filling is needed, so inspiration is faster and deeper. Flattening, inverting, or removing the ramp would slow or abolish inspiration rather than speed filling.", // source: Ch 42 p 4
     scene: "pulmonary",
     sceneCfg: { label: "RAMP SLOPE" },
     metadata: { topic: "Ramp slope control", priority: "medium" },
@@ -828,7 +828,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-027",
     type: "mcq",
-    prompt: "Where are the airway irritant receptors chiefly located according to the lung receptors slide?",
+    prompt: "Where are the airway irritant receptors chiefly located according to the lung receptors?",
     setup: "",
     ans: [
       { t: "Nasal mucosa and upper airways", ok: true },
@@ -836,7 +836,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "The carotid sinus adventitia layer", ok: false },
       { t: "Pulmonary venous lining", ok: false },
     ],
-    rationale: "The slide places irritant receptors in the nasal mucosa and upper airways, and possibly the alveoli. The aortic arch and carotid sinus house baroreceptors and chemoreceptors, and the pulmonary venous lining is not a listed site.", // source: Ch 42 p 7
+    rationale: "Irritant receptors in the nasal mucosa and upper airways, and possibly the alveoli. The aortic arch and carotid sinus house baroreceptors and chemoreceptors, and the pulmonary venous lining is not a listed site.", // source: Ch 42 p 7
     scene: "pulmonary",
     sceneCfg: { label: "IRRITANT SITE" },
     metadata: { topic: "Irritant receptors", priority: "medium" },
@@ -870,7 +870,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Brief apnea and bronchodilation", ok: false },
       { t: "Slow rate and lower pressure", ok: false },
     ],
-    rationale: "The Other Reflexes slide lists hyperpnea and increased blood pressure as the response to arterial chemoreceptor stimulation. Apnea with bronchodilation is instead the arterial baroreceptor response to elevated pressure, so the distractors mix or reverse these reflexes.", // source: Ch 42 p 8
+    rationale: "The other reflexes include hyperpnea and increased blood pressure as the response to arterial chemoreceptor stimulation. Apnea with bronchodilation is instead the arterial baroreceptor response to elevated pressure, so the distractors mix or reverse these reflexes.", // source: Ch 42 p 8
     scene: "pulmonary",
     sceneCfg: { label: "ARTERIAL CHEMO" },
     metadata: { topic: "Arterial chemoreflex", priority: "high" },
@@ -887,7 +887,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Fixing the apneic threshold", ok: false },
       { t: "Sensing the arterial oxygen", ok: false },
     ],
-    rationale: "The slide states that receptors in the muscles of respiration and in skeletal muscles, joints, and tendons adjust ventilation to elevated workloads, a key proprioceptive contributor to exercise hyperpnea. They do not set resting pH, define the apneic threshold, or sense arterial oxygen.", // source: Ch 42 p 8
+    rationale: "Receptors in the muscles of respiration and in skeletal muscles, joints, and tendons adjust ventilation to elevated workloads, a key proprioceptive contributor to exercise hyperpnea. They do not set resting pH, define the apneic threshold, or sense arterial oxygen.", // source: Ch 42 p 8
     scene: "pulmonary",
     sceneCfg: { label: "PROPRIOCEPTORS" },
     metadata: { topic: "Proprioceptor reflex", priority: "medium" },
@@ -904,7 +904,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Closing calcium channels", ok: false },
       { t: "Blocking sodium channels", ok: false },
     ],
-    rationale: "Figure 42-6 shows low PO2 closing potassium channels in the glomus cell, which depolarizes the membrane, opens voltage gated calcium channels, raises intracellular calcium, and releases ATP and acetylcholine onto the afferent fiber. Opening potassium channels would hyperpolarize and silence the cell, and the other options are not the initiating step.", // source: Ch 42 p 13
+    rationale: "Low PO2 closing potassium channels in the glomus cell, which depolarizes the membrane, opens voltage gated calcium channels, raises intracellular calcium, and releases ATP and acetylcholine onto the afferent fiber. Opening potassium channels would hyperpolarize and silence the cell, and the other options are not the initiating step.", // source: Ch 42 p 13
     scene: "pulmonary",
     sceneCfg: { label: "GLOMUS CELL" },
     metadata: { topic: "Glomus cell mechanism", priority: "high" },
@@ -913,7 +913,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-032",
     type: "mcq",
-    prompt: "On the composite curves of Figure 42-8, how does lowering the PO2 change the ventilatory response to a given PCO2?",
+    prompt: "On the composite curves , how does lowering the PO2 change the ventilatory response to a given PCO2?",
     setup: "",
     ans: [
       { t: "It steepens the CO2 response", ok: true },
@@ -921,7 +921,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "It flattens the CO2 response", ok: false },
       { t: "It reverses the CO2 response", ok: false },
     ],
-    rationale: "The composite diagram shows that at lower PO2 and lower pH the carbon dioxide response curve becomes steeper and is shifted, so each rise in PCO2 produces a larger ventilation increase. Low PO2 potentiates rather than abolishes, flattens, or reverses the CO2 response.", // source: Ch 42 p 15
+    rationale: "the composite curves shows that at lower PO2 and lower pH the carbon dioxide response curve becomes steeper and is shifted, so each rise in PCO2 produces a larger ventilation increase. Low PO2 potentiates rather than abolishes, flattens, or reverses the CO2 response.", // source: Ch 42 p 15
     scene: "pulmonary",
     sceneCfg: { label: "GAS INTERACTION" },
     metadata: { topic: "Interrelated gases", priority: "high" },
@@ -938,7 +938,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Toward a flatter slope", ok: false },
       { t: "Toward no measurable shift", ok: false },
     ],
-    rationale: "On the conditions slide the metabolic acidosis line sits up and to the left of normal, meaning ventilation is greater at any given PCO2 as the body blows off carbon dioxide to compensate. Sleep, narcotics, and anesthesia move the curve the opposite way toward lower ventilation.", // source: Ch 42 p 16
+    rationale: "In these conditions the metabolic acidosis line sits up and to the left of normal, meaning ventilation is greater at any given PCO2 as the body blows off carbon dioxide to compensate. Sleep, narcotics, and anesthesia move the curve the opposite way toward lower ventilation.", // source: Ch 42 p 16
     scene: "pulmonary",
     sceneCfg: { label: "METAB ACIDOSIS" },
     metadata: { topic: "CO2 response conditions", priority: "high" },
@@ -947,7 +947,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-034",
     type: "mcq",
-    prompt: "Figure 42-11 contrasts exercise and resting curves; at a normal arterial PCO2 of 40 mmHg, ventilation during exercise is best described as which of the following relative to rest?",
+    prompt: "Exercise and resting curves; at a normal arterial PCO2 of 40 mmHg, ventilation during exercise is best described as which of the following relative to rest?",
     setup: "",
     ans: [
       { t: "Far higher than at rest", ok: true },
@@ -972,7 +972,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "A steep fall in the arterial pH", ok: false },
       { t: "A drop in core temperature", ok: false },
     ],
-    rationale: "The slide lists overflow of signals from the cortex, body movements, increased body temperature, and a partially learned response as drivers, since blood gases do not change in a direction that would raise ventilation. A large PCO2 rise or steep pH fall does not occur, and core temperature rises rather than drops.", // source: Ch 42 p 22
+    rationale: "Overflow of signals from the cortex, body movements, increased body temperature, and a partially learned response as drivers, since blood gases do not change in a direction that would raise ventilation. A large PCO2 rise or steep pH fall does not occur, and core temperature rises rather than drops.", // source: Ch 42 p 22
     scene: "pulmonary",
     sceneCfg: { label: "EXERCISE DRIVE" },
     metadata: { topic: "Exercise drivers", priority: "high" },
@@ -998,7 +998,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-037",
     type: "mcq",
-    prompt: "By which two mechanisms does increased body temperature stimulate respiration, as listed on the other factors slide?",
+    prompt: "By which two mechanisms does increased body temperature stimulate respiration, as listed on the other factors?",
     setup: "",
     ans: [
       { t: "More CO2 and a direct effect", ok: true },
@@ -1006,7 +1006,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "More oxygen and a baroreflex", ok: false },
       { t: "Less oxygen and a gut reflex", ok: false },
     ],
-    rationale: "The slide gives two routes: increased carbon dioxide production from a higher metabolic rate, and a direct effect of warmth on the respiratory center. Lower carbon dioxide, renal cooling, oxygen changes, and gut reflexes are not the listed mechanisms.", // source: Ch 42 p 23
+    rationale: "Two routes: increased carbon dioxide production from a higher metabolic rate, and a direct effect of warmth on the respiratory center. Lower carbon dioxide, renal cooling, oxygen changes, and gut reflexes are not the listed mechanisms.", // source: Ch 42 p 23
     scene: "pulmonary",
     sceneCfg: { label: "BODY TEMP" },
     metadata: { topic: "Body temperature", priority: "medium" },
@@ -1015,7 +1015,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6r-038",
     type: "mcq",
-    prompt: "Which central nervous structure, primarily cardiovascular, is listed as also influencing respiration on the other factors slide?",
+    prompt: "Which central nervous structure, primarily cardiovascular, is listed as also influencing respiration on the other factors?",
     setup: "",
     ans: [
       { t: "Vasomotor center", ok: true },
@@ -1023,7 +1023,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Basal ganglia bodies", ok: false },
       { t: "Cerebellar vermis lobe", ok: false },
     ],
-    rationale: "The slide lists activity from the vasomotor center as a factor influencing respiration, reflecting shared brainstem circuitry that links cardiovascular and respiratory control. The hypothalamic nuclei, basal ganglia, and cerebellar vermis are not the listed structure.", // source: Ch 42 p 23
+    rationale: "Activity from the vasomotor center as a factor influencing respiration, reflecting shared brainstem circuitry that links cardiovascular and respiratory control. The hypothalamic nuclei, basal ganglia, and cerebellar vermis are not the listed structure.", // source: Ch 42 p 23
     scene: "pulmonary",
     sceneCfg: { label: "VASOMOTOR" },
     metadata: { topic: "Vasomotor influence", priority: "medium" },
@@ -1032,7 +1032,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-023",
     type: "mcq",
-    prompt: "On the Figure 43-1 maximum expiratory flow curve in the slides, the lung volume axis runs between which two endpoints?",
+    prompt: "On the maximum expiratory flow curve, the lung volume axis runs between which two endpoints?",
     setup: "",
     ans: [
       { t: "Total lung capacity to residual volume", ok: true },
@@ -1040,7 +1040,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Vital capacity to the functional residual", ok: false },
       { t: "Tidal volume to the inspiratory reserve", ok: false },
     ],
-    rationale: "Figure 43-1 plots expiratory airflow against lung volume, with flow rising sharply from total lung capacity on the left and falling to zero at residual volume on the right, so the curve spans from total lung capacity down to residual volume.", // source: Ch 43 p 2
+    rationale: "Expiratory airflow against lung volume, with flow rising sharply from total lung capacity on the left and falling to zero at residual volume on the right, so the curve spans from total lung capacity down to residual volume.", // source: Ch 43 p 2
     scene: "pulmonary",
     sceneCfg: { label: "MEFR CURVE AXES" },
     metadata: { topic: "Maximum expiratory flow curve", priority: "medium" },
@@ -1049,7 +1049,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-024",
     type: "mcq",
-    prompt: "The Pulmonary Pathology slide adds a final reminder about how the two disease categories can occur in one patient. Which statement matches that reminder?",
+    prompt: "Obstructive and restrictive disease can coexist in one patient. Which statement about this is correct?",
     setup: "",
     ans: [
       { t: "A single person can have both at once", ok: true },
@@ -1057,7 +1057,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Obstruction must always precede restriction", ok: false },
       { t: "Restriction always blocks any obstruction", ok: false },
     ],
-    rationale: "After defining obstructive and restrictive disease, the slide explicitly states that someone can have both at the same time, so the categories are not mutually exclusive and frequently overlap in clinical practice.", // source: Ch 43 p 4
+    rationale: "After defining obstructive and restrictive disease, someone can have both at the same time, so the categories are not mutually exclusive and frequently overlap in clinical practice.", // source: Ch 43 p 4
     scene: "pulmonary",
     sceneCfg: { label: "BOTH AT ONCE" },
     metadata: { topic: "Coexisting obstructive and restrictive disease", priority: "medium" },
@@ -1066,7 +1066,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-025",
     type: "mcq",
-    prompt: "The Increased Resistance to Flow slide groups blocked-lumen causes separately from narrowed-lumen causes. Which factor is listed under the lumen being blocked rather than narrowed?",
+    prompt: "Causes of increased airway resistance divide into blocked-lumen and narrowed-lumen groups. Which factor reflects a blocked rather than a narrowed lumen?",
     setup: "",
     ans: [
       { t: "Aspirated material in the lumen", ok: true },
@@ -1074,7 +1074,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Bronchial wall growing thicker", ok: false },
       { t: "Loss of outward wall traction", ok: false },
     ],
-    rationale: "The slide files excessive secretions and obstruction due to aspiration under the lumen being blocked, while smooth muscle contraction and bronchial wall hypertrophy are listed under the lumen being narrowed; lost parenchymal traction is a separate outside-the-airway mechanism.", // source: Ch 43 p 5
+    rationale: "Excessive secretions and obstruction due to aspiration under the lumen being blocked, while smooth muscle contraction and bronchial wall hypertrophy are listed under the lumen being narrowed; lost parenchymal traction is a separate outside-the-airway mechanism.", // source: Ch 43 p 5
     scene: "pulmonary",
     sceneCfg: { label: "BLOCKED LUMEN" },
     metadata: { topic: "Blocked versus narrowed lumen", priority: "medium" },
@@ -1083,7 +1083,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-026",
     type: "mcq",
-    prompt: "On Figure 43-2, the Abnormal Flow Volume Responses slide, how are the obstruction and restriction curves shifted relative to the normal curve?",
+    prompt: "On the flow volume loop, how are the obstruction and restriction curves shifted relative to the normal curve?",
     setup: "",
     ans: [
       { t: "Obstruction left, restriction right", ok: true },
@@ -1091,16 +1091,16 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Both shift to the far left", ok: false },
       { t: "Both shift to the far right", ok: false },
     ],
-    rationale: "On Figure 43-2 the volume axis runs from high volume on the left to low volume on the right, so the airway obstruction curve sits at higher trapped volumes on the left while the restrictive or constricted curve sits at smaller volumes on the right.", // source: Ch 43 p 6
+    rationale: "The volume axis runs from high volume on the left to low volume on the right, so the airway obstruction curve sits at higher trapped volumes on the left while the restrictive or constricted curve sits at smaller volumes on the right.", // source: Ch 43 p 6
     scene: "pulmonary",
-    sceneCfg: { label: "FIG 43-2 SHIFTS" },
+    sceneCfg: { label: "SHIFTS" },
     metadata: { topic: "Figure 43-2 curve shifts", priority: "high" },
   },
 
   {
     id: "pp2-w6i-027",
     type: "mcq",
-    prompt: "The Forced Vital Capacity slide defines FVC and FEV1. Which pairing matches the slide definitions?",
+    prompt: "Which pairing correctly defines FVC and FEV1?",
     setup: "",
     ans: [
       { t: "FVC all forced air, FEV1 first second", ok: true },
@@ -1108,7 +1108,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "FVC the tidal air, FEV1 reserve air", ok: false },
       { t: "FVC residual air, FEV1 the tidal air", ok: false },
     ],
-    rationale: "The slide defines forced vital capacity as the total air a person can force out after a maximal inhalation and forced expiratory volume in one second as the air forced out in the first second after a maximal inhalation, so FEV1 is a one second subset of the total FVC.", // source: Ch 43 p 11
+    rationale: "Forced vital capacity as the total air a person can force out after a maximal inhalation and forced expiratory volume in one second as the air forced out in the first second after a maximal inhalation, so FEV1 is a one second subset of the total FVC.", // source: Ch 43 p 11
     scene: "pulmonary",
     sceneCfg: { label: "FVC AND FEV1" },
     metadata: { topic: "FVC and FEV1 definitions", priority: "medium" },
@@ -1117,7 +1117,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-028",
     type: "mcq",
-    prompt: "The COPD slide defines the disease group. Which description of the lung damage and its effect matches the slide?",
+    prompt: "Which description of the lung damage and its effect in COPD is correct?",
     setup: "",
     ans: [
       { t: "Permanent damage trapping air on exhale", ok: true },
@@ -1125,7 +1125,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Sudden injury emptying the air on exhale", ok: false },
       { t: "Brief wall swelling trapping air on inhale", ok: false },
     ],
-    rationale: "The slide defines COPD as a group of disorders involving progressive, longterm, permanent damage to lung tissue that results in air being trapped in the lungs during exhalation, which distinguishes it from the reversible obstruction of asthma.", // source: Ch 43 p 12
+    rationale: "COPD as a group of disorders involving progressive, longterm, permanent damage to lung tissue that results in air being trapped in the lungs during exhalation, which distinguishes it from the reversible obstruction of asthma.", // source: Ch 43 p 12
     scene: "pulmonary",
     sceneCfg: { label: "COPD DEFINED" },
     metadata: { topic: "COPD definition", priority: "high" },
@@ -1134,7 +1134,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-029",
     type: "mcq",
-    prompt: "The Emphysema histology slide describes what happens to alveolar architecture as parenchyma is lost. Which change does it show?",
+    prompt: "As parenchyma is lost in emphysema, which change occurs in the alveolar architecture?",
     setup: "",
     ans: [
       { t: "Alveoli merge into few large pockets", ok: true },
@@ -1151,7 +1151,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-030",
     type: "mcq",
-    prompt: "The Barrel Chest slide contrasts a normal adult thorax with an emphysematous one. What change defines a barrel chest?",
+    prompt: "Compared with a normal adult thorax, what change defines a barrel chest?",
     setup: "",
     ans: [
       { t: "Larger front to back chest diameter", ok: true },
@@ -1159,7 +1159,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Sideways collapse of the rib cage", ok: false },
       { t: "Sharp forward bending of the spine", ok: false },
     ],
-    rationale: "The slide depicts the barrel chest as an increased anteroposterior, front to back, diameter of the thorax from chronic air trapping and hyperinflation; forward spinal bending describes kyphosis, a different finding.", // source: Ch 43 p 17
+    rationale: "The barrel chest as an increased anteroposterior, front to back, diameter of the thorax from chronic air trapping and hyperinflation; forward spinal bending describes kyphosis, a different finding.", // source: Ch 43 p 17
     scene: "pulmonary",
     sceneCfg: { label: "BARREL CHEST" },
     metadata: { topic: "Barrel chest", priority: "medium" },
@@ -1168,7 +1168,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-031",
     type: "mcq",
-    prompt: "The Asthma slide lists three main physiological features of an attack. Which trio matches the slide?",
+    prompt: "Which trio gives the three main physiological features of an asthma attack?",
     setup: "",
     ans: [
       { t: "Muscle spasm, wall swelling, mucus plug", ok: true },
@@ -1176,7 +1176,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Collagen deposits, granulomas, fibrosis", ok: false },
       { t: "Fluid filling, pus, alveolar edema", ok: false },
     ],
-    rationale: "The slide names bronchial smooth muscle contraction, bronchial soft tissue swelling, and mucus overproduction with plugging as the three features; alveolar destruction, collagen, and fluid filling belong to emphysema, fibrosis, and pneumonia respectively.", // source: Ch 43 p 18
+    rationale: "Bronchial smooth muscle contraction, bronchial soft tissue swelling, and mucus overproduction with plugging as the three features; alveolar destruction, collagen, and fluid filling belong to emphysema, fibrosis, and pneumonia respectively.", // source: Ch 43 p 18
     scene: "pulmonary",
     sceneCfg: { label: "ASTHMA FEATURES" },
     metadata: { topic: "Three features of asthma", priority: "high" },
@@ -1185,7 +1185,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-032",
     type: "mcq",
-    prompt: "According to the Asthma slide, which set of symptoms is listed for an asthma attack?",
+    prompt: "Which set of symptoms occurs in an asthma attack?",
     setup: "",
     ans: [
       { t: "Wheeze, cough, and chest tightness", ok: true },
@@ -1193,7 +1193,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Sharp pleuritic pain and hemoptysis", ok: false },
       { t: "Painless gradual weight loss only", ok: false },
     ],
-    rationale: "The slide lists shortness of breath, wheeze, cough, and tightness in the chest as asthma symptoms; fever and chills with a productive cough point to pneumonia, and pleuritic pain points to pneumothorax.", // source: Ch 43 p 18
+    rationale: "Shortness of breath, wheeze, cough, and tightness in the chest as asthma symptoms; fever and chills with a productive cough point to pneumonia, and pleuritic pain points to pneumothorax.", // source: Ch 43 p 18
     scene: "pulmonary",
     sceneCfg: { label: "ASTHMA SYMPTOMS" },
     metadata: { topic: "Asthma symptoms and irritants", priority: "medium" },
@@ -1202,7 +1202,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-033",
     type: "mcq",
-    prompt: "The Restrictive Diseases lung-volumes slide states how the spirometry values behave. Which finding does it give?",
+    prompt: "In restrictive disease, how do the spirometry values behave? Which finding is correct?",
     setup: "",
     ans: [
       { t: "Low volumes but a normal ratio", ok: true },
@@ -1210,7 +1210,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Low volumes with a low ratio too", ok: false },
       { t: "High volumes with a high ratio kept", ok: false },
     ],
-    rationale: "The slide states restrictive disease reduces total lung capacity and vital capacity but may still show normal resistance and a normal FEV1/FVC ratio, because FEV1 and FVC fall together; a low ratio with high volumes signals obstruction instead.", // source: Ch 43 p 20
+    rationale: "Restrictive disease reduces total lung capacity and vital capacity but may still show normal resistance and a normal FEV1/FVC ratio, because FEV1 and FVC fall together; a low ratio with high volumes signals obstruction instead.", // source: Ch 43 p 20
     scene: "pulmonary",
     sceneCfg: { label: "RESTRICTIVE VOLUMES" },
     metadata: { topic: "Restrictive ratio and volumes", priority: "high" },
@@ -1219,7 +1219,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-034",
     type: "mcq",
-    prompt: "The Restrictive Diseases examples slide classifies causes as intrinsic or extrinsic. Which example is grouped as extrinsic?",
+    prompt: "Restrictive disease causes divide into intrinsic and extrinsic. Which example is extrinsic?",
     setup: "",
     ans: [
       { t: "Kyphosis and scoliosis posture", ok: true },
@@ -1227,7 +1227,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Sarcoidosis granuloma disease", ok: false },
       { t: "Asbestosis and silicosis dusts", ok: false },
     ],
-    rationale: "The slide brackets kyphosis, scoliosis, obesity hypoventilation, and neuromuscular disease as extrinsic restrictive causes acting outside the lung, while fibrosis, sarcoidosis, and asbestosis or silicosis are intrinsic lung tissue diseases.", // source: Ch 43 p 21
+    rationale: "Kyphosis, scoliosis, obesity hypoventilation, and neuromuscular disease as extrinsic restrictive causes acting outside the lung, while fibrosis, sarcoidosis, and asbestosis or silicosis are intrinsic lung tissue diseases.", // source: Ch 43 p 21
     scene: "pulmonary",
     sceneCfg: { label: "EXTRINSIC RESTRICTIVE" },
     metadata: { topic: "Extrinsic restrictive causes", priority: "high" },
@@ -1236,7 +1236,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-035",
     type: "mcq",
-    prompt: "The Atelectasis slide and its diagram list the causes of collapse. Which set of mechanisms does it give?",
+    prompt: "Which set of mechanisms causes atelectasis?",
     setup: "",
     ans: [
       { t: "Low breathing, squeeze, block, stick", ok: true },
@@ -1253,7 +1253,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-036",
     type: "mcq",
-    prompt: "The Pneumonia slide gives its definition and most common cause. Which pairing matches the slide?",
+    prompt: "Which pairing gives the definition and most common cause of pneumonia?",
     setup: "",
     ans: [
       { t: "Fluid in alveoli, often Streptococcus", ok: true },
@@ -1261,7 +1261,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Loss of alveoli, often from smoking years", ok: false },
       { t: "Air in the pleura, often from chest trauma", ok: false },
     ],
-    rationale: "The slide defines pneumonia as acute infection with inflammation and accumulation of fluid or pus within the alveoli, and names Streptococcus pneumoniae as the most common cause; loss of alveoli describes emphysema and pleural air describes pneumothorax.", // source: Ch 43 p 25
+    rationale: "Pneumonia as acute infection with inflammation and accumulation of fluid or pus within the alveoli, and names Streptococcus pneumoniae as the most common cause; loss of alveoli describes emphysema and pleural air describes pneumothorax.", // source: Ch 43 p 25
     scene: "pulmonary",
     sceneCfg: { label: "PNEUMONIA DEFINED" },
     metadata: { topic: "Pneumonia definition and cause", priority: "high" },
@@ -1287,7 +1287,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-038",
     type: "mcq",
-    prompt: "On the Pneumonia and Emphysema histology slide (Figure 43-5), which pairing of the microscopic change is correct?",
+    prompt: "For the microscopic histology of pneumonia versus emphysema, which pairing of changes is correct?",
     setup: "",
     ans: [
       { t: "Pneumonia fluid fills, emphysema loses alveoli", ok: true },
@@ -1295,7 +1295,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Both show dense collagen scarring of walls", ok: false },
       { t: "Both show confluent enlarged air sacs", ok: false },
     ],
-    rationale: "Figure 43-5 contrasts normal tissue, pneumonia with inflammation and fluid filling the alveoli, and emphysema with loss of alveoli and confluent air spaces; the two processes are opposite, one filling and one destroying the alveoli.", // source: Ch 43 p 28
+    rationale: "Normal tissue, pneumonia with inflammation and fluid filling the alveoli, and emphysema with loss of alveoli and confluent air spaces; the two processes are opposite, one filling and one destroying the alveoli.", // source: Ch 43 p 28
     scene: "pulmonary",
     sceneCfg: { label: "PNEUMONIA VS EMPHYSEMA" },
     metadata: { topic: "Pneumonia versus emphysema histology", priority: "medium" },
@@ -1304,7 +1304,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-039",
     type: "mcq",
-    prompt: "The Causes of Hypoxia slide lists several categories. Which item is listed under inadequate oxygen transport by the blood?",
+    prompt: "the hypoxia classification lists several categories. Which item is listed under inadequate oxygen transport by the blood?",
     setup: "",
     ans: [
       { t: "Anemia and tissue edema", ok: true },
@@ -1312,7 +1312,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "A V/Q mismatch in the lung", ok: false },
       { t: "Low atmospheric oxygen air", ok: false },
     ],
-    rationale: "Under inadequate oxygen transport by the blood the slide lists anemia, abnormal hemoglobin, abnormal or reduced blood flow, and tissue edema; cyanide is a usage problem, V/Q mismatch is pulmonary disease, and low atmospheric oxygen is inadequate oxygenation.", // source: Ch 43 p 29
+    rationale: "Under inadequate oxygen transport by the blood anemia, abnormal hemoglobin, abnormal or reduced blood flow, and tissue edema; cyanide is a usage problem, V/Q mismatch is pulmonary disease, and low atmospheric oxygen is inadequate oxygenation.", // source: Ch 43 p 29
     scene: "pulmonary",
     sceneCfg: { label: "HYPOXIA TRANSPORT" },
     metadata: { topic: "Hypoxia transport category", priority: "medium" },
@@ -1321,7 +1321,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-040",
     type: "mcq",
-    prompt: "The second Asthma slide qualifies how reversible asthma is. Which statement matches the slide?",
+    prompt: "Asthma is qualified as reversible. Which statement about its reversibility is correct?",
     setup: "",
     ans: [
       { t: "Severe chronic asthma can leave fixed change", ok: true },
@@ -1329,7 +1329,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Asthma never alters the airway structure at all", ok: false },
       { t: "Acute asthma attacks can simply never reverse", ok: false },
     ],
-    rationale: "The slide states asthma is reversible airway obstruction and acute exacerbations are typically fully reversible, but technically irreversible chronic changes may also occur from the chronic inflammation in long-term severe asthma, so some fixed remodeling is possible.", // source: Ch 43 p 19
+    rationale: "Asthma is reversible airway obstruction and acute exacerbations are typically fully reversible, but technically irreversible chronic changes may also occur from the chronic inflammation in long-term severe asthma, so some fixed remodeling is possible.", // source: Ch 43 p 19
     scene: "pulmonary",
     sceneCfg: { label: "ASTHMA REVERSIBILITY" },
     metadata: { topic: "Asthma reversibility caveat", priority: "medium" },
@@ -1338,7 +1338,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-041",
     type: "mcq",
-    prompt: "The Restrictive Diseases examples slide pairs each intrinsic disease with a feature. Which pairing matches the slide?",
+    prompt: "Each intrinsic restrictive disease has a characteristic feature. Which pairing is correct?",
     setup: "",
     ans: [
       { t: "Sarcoidosis with granulomas", ok: true },
@@ -1346,7 +1346,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Fibrosis with bronchial spasm", ok: false },
       { t: "Silicosis with fluid filling", ok: false },
     ],
-    rationale: "The slide pairs diffuse interstitial pulmonary fibrosis with thick collagen deposits, sarcoidosis with chronic inflammatory granulomas, and asbestosis or silicosis with scarring from chronic irritant exposure, so sarcoidosis maps to granulomas.", // source: Ch 43 p 21
+    rationale: "Diffuse interstitial pulmonary fibrosis with thick collagen deposits, sarcoidosis with chronic inflammatory granulomas, and asbestosis or silicosis with scarring from chronic irritant exposure, so sarcoidosis maps to granulomas.", // source: Ch 43 p 21
     scene: "pulmonary",
     sceneCfg: { label: "INTRINSIC RESTRICTIVE" },
     metadata: { topic: "Intrinsic restrictive features", priority: "high" },
@@ -1355,7 +1355,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-042",
     type: "mcq",
-    prompt: "The Pneumothorax slide explains why a pneumothorax on one side does not collapse both lungs. What is the stated reason?",
+    prompt: "Why does a pneumothorax on one side not collapse both lungs?",
     setup: "",
     ans: [
       { t: "The two pleural sides are separate", ok: true },
@@ -1363,7 +1363,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "The diaphragm splits the two lungs", ok: false },
       { t: "The heart blocks air from crossing", ok: false },
     ],
-    rationale: "The slide states that, fortunately, the two sides of the pleural cavity are separate, so air entering one side cannot reach the other; otherwise both lungs would collapse together when a pneumothorax occurs.", // source: Ch 43 p 22
+    rationale: "That, fortunately, the two sides of the pleural cavity are separate, so air entering one side cannot reach the other; otherwise both lungs would collapse together when a pneumothorax occurs.", // source: Ch 43 p 22
     scene: "pulmonary",
     sceneCfg: { label: "SEPARATE PLEURA" },
     metadata: { topic: "Pneumothorax separate pleura", priority: "high" },
@@ -1372,7 +1372,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
   {
     id: "pp2-w6i-043",
     type: "mcq",
-    prompt: "On Figure 43-7, why does atelectasis cause only a minimal fall in arterial saturation to a mean near 91%?",
+    prompt: "Why does atelectasis cause only a minimal fall in arterial saturation to a mean near 91%?",
     setup: "",
     ans: [
       { t: "Little blood flows past collapsed lung", ok: true },
@@ -1380,7 +1380,7 @@ export const PP2_WK6_SUPPLEMENT_QUESTIONS = [
       { t: "Surfactant keeps every alveolus open", ok: false },
       { t: "The other lung shuts its blood flow", ok: false },
     ],
-    rationale: "Figure 43-7 shows the atelectatic lung receives only about one fifth of normal blood flow because blood is diverted away, so the poorly saturated stream is a small fraction and the aortic mean falls only slightly to about 91%.", // source: Ch 43 p 24
+    rationale: "The atelectatic lung receives only about one fifth of normal blood flow because blood is diverted away, so the poorly saturated stream is a small fraction and the aortic mean falls only slightly to about 91%.", // source: Ch 43 p 24
     scene: "pulmonary",
     sceneCfg: { label: "ATELECTASIS SAT" },
     metadata: { topic: "Atelectasis minimal desaturation", priority: "high" },
