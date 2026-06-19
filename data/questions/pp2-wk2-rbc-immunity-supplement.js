@@ -70,10 +70,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "Normal hematocrit (the fraction of blood volume occupied by packed red blood cells) in a healthy adult is approximately:",
     setup: "",
     ans: [
-      { t: "40 to 45 percent, with slightly lower values in women due to lower circulating RBC mass", ok: true },
-      { t: "55 to 60 percent, reflecting the fact that cellular elements dominate blood volume over plasma", ok: false },
-      { t: "20 to 25 percent, because plasma constitutes the vast majority of whole blood", ok: false },
-      { t: "30 to 35 percent in men and 25 to 30 percent in women under normal sea level conditions", ok: false },
+      { t: "40 to 45 percent", ok: true },
+      { t: "55 to 60 percent", ok: false },
+      { t: "20 to 25 percent", ok: false },
+      { t: "30 to 35 percent", ok: false },
     ],
     rationale: "Normal hematocrit is 40 to 45 percent (slightly lower in women, approximately 36 to 44%). Hematocrit below 35% generally indicates anemia, while values above 50 to 55% suggest polycythemia. An elevated hematocrit increases blood viscosity, raising systemic vascular resistance and the risk of thrombotic events. For the CRNA, hematocrit is a critical preoperative value that guides decisions about transfusion thresholds, acceptable blood loss calculations, and assessment of oxygen carrying capacity. Guyton Ch. 33.", // source: Ch 33 slide 3
     scene: "hematology",
@@ -248,10 +248,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "After acute blood loss triggers tissue hypoxia, how quickly does the erythropoietic system respond?",
     setup: "",
     ans: [
-      { t: "Plasma EPO rises within hours but new RBCs take about 5 days; output can rise 10 fold", ok: true },
-      { t: "New RBCs appear in 2 to 4 hours because the marrow stores mature cells for instant release", ok: false },
-      { t: "EPO is unchanged for 48 to 72 hours, then output slowly doubles over several weeks", ok: false },
-      { t: "The spleen releases its RBC reserve in seconds, offsetting losses up to 30 percent of volume", ok: false },
+      { t: "Plasma EPO rises within hours, but new RBCs take about 5 days to appear", ok: true },
+      { t: "New RBCs appear within 2 to 4 hours of the acute blood loss", ok: false },
+      { t: "EPO is unchanged for 48 to 72 hours, then output slowly doubles", ok: false },
+      { t: "The spleen releases its full RBC reserve within a few seconds", ok: false },
     ],
     rationale: "The erythropoietic response to hypoxia follows a predictable timeline. Hypoxia stabilizes HIF in renal interstitial cells, triggering EPO gene transcription within minutes. Plasma EPO levels rise within hours. However, the time required for erythroid progenitors to proliferate, mature through multiple stages, and release reticulocytes means new RBCs reach the circulation in approximately 5 days. Under maximal stimulation, the marrow can increase RBC production up to 10 fold. EPO remains elevated until tissue oxygenation is restored. For the CRNA, this 5 day lag explains why postoperative hemoglobin continues to fall for several days after surgical blood loss before marrow compensation begins. Guyton Ch. 33.", // source: Ch 33 slide 11
     scene: "hematology",
@@ -356,10 +356,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "Total body iron content is approximately 4 to 5 grams. The largest fraction of this iron is found in:",
     setup: "",
     ans: [
-      { t: "Hemoglobin, holding about 65%; the rest is ferritin, myoglobin, heme, and transferrin", ok: true },
-      { t: "Ferritin in the reticuloendothelial system, storing about 65% as an emergency reserve", ok: false },
-      { t: "Myoglobin in skeletal muscle, holding the majority because total muscle mass is large", ok: false },
-      { t: "Plasma transferrin, circulating about 65% for continuous delivery to all body tissues", ok: false },
+      { t: "Hemoglobin within circulating red blood cells", ok: true },
+      { t: "Ferritin in the reticuloendothelial system", ok: false },
+      { t: "Myoglobin within skeletal muscle fibers", ok: false },
+      { t: "Plasma transferrin in the circulation", ok: false },
     ],
     rationale: "Iron distribution in the body follows a clear hierarchy. The vast majority (65%) resides in hemoglobin within circulating RBCs and developing erythroblasts. Storage iron (15 to 30%) exists as ferritin and hemosiderin, primarily in the liver, spleen, and bone marrow macrophages. Myoglobin in skeletal and cardiac muscle holds 4%, while intracellular heme enzymes (cytochromes, catalase) contain about 1%. Only 0.1% circulates bound to the transport protein transferrin, though this small pool turns over rapidly. For the CRNA, this distribution explains why chronic blood loss is the most common cause of iron deficiency in adults, since each milliliter of packed RBCs contains approximately 1 mg of iron. Guyton Ch. 33.", // source: Ch 33 slide 16
     scene: "hematology",
@@ -380,10 +380,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "The total white blood cell count in a normal adult is approximately:",
     setup: "",
     ans: [
-      { t: "7,000 per mm3, almost 1,000 fold fewer than circulating red blood cells", ok: true },
-      { t: "70,000 per mm3, reflecting the high metabolic demands of immune surveillance", ok: false },
-      { t: "700 per mm3, because white blood cells are extremely rare among blood elements", ok: false },
-      { t: "5,000,000 per mm3, about equal to the red cell count for balanced delivery", ok: false },
+      { t: "7,000 per mm3", ok: true },
+      { t: "70,000 per mm3", ok: false },
+      { t: "700 per mm3", ok: false },
+      { t: "5,000,000 per mm3", ok: false },
     ],
     rationale: "The normal total WBC count ranges from approximately 4,500 to 11,000 per mm3, with an average of about 7,000 per mm3. This is roughly 1,000 times fewer than RBCs (5 million per mm3). The platelet count (approximately 300,000 per mm3) falls between these two values. Leukocytosis (WBC above 11,000) suggests infection, inflammation, or hematologic malignancy, while leukopenia (below 4,500) may indicate bone marrow suppression or overwhelming sepsis. For the CRNA, the preoperative WBC count and differential help assess infection risk and guide decisions about proceeding with elective surgery. Guyton Ch. 34.", // source: Ch 34 slide 3
     scene: "hematology",
@@ -414,10 +414,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "Basophils are the least common white blood cell in the peripheral blood. Their normal proportion in the WBC differential is approximately:",
     setup: "",
     ans: [
-      { t: "0.4%, the rarest granulocyte; they hold histamine and heparin like tissue mast cells", ok: true },
-      { t: "2.3%, the same as eosinophils; basophils and eosinophils are present in equal numbers", ok: false },
-      { t: "5.3%, the same as monocytes; basophils and monocytes share a common progenitor cell", ok: false },
-      { t: "10%, because basophils are needed in high numbers for continuous allergic surveillance", ok: false },
+      { t: "0.4 percent", ok: true },
+      { t: "2.3 percent", ok: false },
+      { t: "5.3 percent", ok: false },
+      { t: "10 percent", ok: false },
     ],
     rationale: "Basophils comprise only 0.4% of circulating WBCs, making them the rarest leukocyte in peripheral blood. Despite their low numbers, basophils play an important role in allergic responses and inflammation. They contain granules rich in histamine, heparin, and other mediators, similar to mast cells (their tissue-resident counterparts). Eosinophils constitute 2.3% and are involved in parasitic defense and allergic modulation. For the CRNA, basophil activation during anesthetic drug administration can contribute to anaphylactoid (non-IgE mediated) histamine release, which is clinically indistinguishable from true anaphylaxis. Guyton Ch. 34.", // source: Ch 34 slide 3
     scene: "hematology",
@@ -431,10 +431,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "Lymphocytes comprise the second largest fraction of circulating white blood cells, at approximately:",
     setup: "",
     ans: [
-      { t: "30%; they mediate adaptive immunity via antigen specific B cell and T cell responses", ok: true },
-      { t: "62%; lymphocytes outnumber every other circulating white blood cell type combined", ok: false },
-      { t: "5.3%; they are scarce in blood because most of them reside in lymphoid tissues", ok: false },
-      { t: "2.3%; lymphocytes are rare in circulation and function mainly within the thymus", ok: false },
+      { t: "30 percent", ok: true },
+      { t: "62 percent", ok: false },
+      { t: "5.3 percent", ok: false },
+      { t: "2.3 percent", ok: false },
     ],
     rationale: "Lymphocytes account for approximately 30% of circulating WBCs. They are the mediators of acquired immunity: B lymphocytes produce antibodies (humoral immunity), while T lymphocytes provide cell mediated immunity (CD4+ helper cells and CD8+ cytotoxic cells). The blood lymphocyte count represents only a small fraction of total body lymphocytes; the majority reside in lymphoid organs (lymph nodes, spleen, thymus, Peyer's patches, tonsils). Lymphocytes continuously recirculate between blood and lymph, providing immune surveillance. For the CRNA, lymphopenia can indicate immunosuppression from steroids, chemotherapy, or HIV, increasing perioperative infection risk. Guyton Ch. 34.", // source: Ch 34 slide 3
     scene: "hematology",
@@ -930,10 +930,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "The secondary (anamnestic) immune response differs from the primary response in several important ways. Which characteristic correctly describes the secondary response?",
     setup: "",
     ans: [
-      { t: "Faster, higher titer, longer lasting, higher affinity, from preexisting memory cells", ok: true },
-      { t: "Identical in timing and size to the primary, since each antigen encounter is independent", ok: false },
-      { t: "Produces fewer antibodies than the primary, since many cells were used in the first encounter", ok: false },
-      { t: "Occurs only at the exact prior antigen dose; a different dose cannot trigger any memory cells", ok: false },
+      { t: "Faster in onset, higher in titer, longer lasting, and higher affinity", ok: true },
+      { t: "Identical in onset, titer, and duration to the primary response", ok: false },
+      { t: "Slower in onset and lower in titer than the primary response", ok: false },
+      { t: "Triggered only by the exact antigen dose used in the first exposure", ok: false },
     ],
     rationale: "The secondary immune response is a hallmark of adaptive immunity. During the primary response, antigen-specific memory B and T cells are generated alongside effector cells. These memory cells persist for years and respond much more rapidly upon re-exposure to the same antigen. The secondary response begins within 1 to 2 days (versus 5 to 14 days for the primary), achieves antibody titers 10 to 100 times higher, and produces antibodies with greater affinity for the antigen (due to affinity maturation in germinal centers during the primary response). For the CRNA, the secondary response explains why a second exposure to a drug allergen (e.g., a neuromuscular blocking agent) can produce a much more severe anaphylactic reaction than the initial sensitizing exposure. Guyton Ch. 35.", // source: Ch 35 slide 13
     scene: "hematology",
@@ -983,10 +983,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "Antibodies are described as bivalent. This means:",
     setup: "",
     ans: [
-      { t: "It has at least two binding sites, so one antibody can cross link two identical epitopes", ok: true },
-      { t: "Antibodies work only when two different immunoglobulin classes cooperate together at once", ok: false },
-      { t: "Each antibody can bind two entirely different antigens at the same time at distinct sites", ok: false },
-      { t: "Antibodies need two different receptors on the phagocyte before they trigger internalization", ok: false },
+      { t: "Each antibody monomer carries two identical antigen binding sites", ok: true },
+      { t: "Two different immunoglobulin classes must cooperate to act at once", ok: false },
+      { t: "Each antibody binds two entirely different antigens at the same time", ok: false },
+      { t: "Two different phagocyte receptors are needed before internalization", ok: false },
     ],
     rationale: "Bivalency means each antibody monomer has two identical antigen-binding sites (one on each Fab arm of the Y). This allows a single antibody to bind two identical epitopes simultaneously. When multiple antibodies bind to particles bearing repeated epitopes, they cross-link them into large aggregates (agglutination for cells, precipitation for soluble antigens). IgM, as a pentamer, has 10 antigen-binding sites (decavalent), making it particularly effective at agglutination. Antibody bivalency also permits immune complex formation, which activates complement and is cleared by the reticuloendothelial system. For the CRNA, antibody mediated cross-linking is the mechanism behind blood group agglutination reactions during incompatible transfusions. Guyton Ch. 35.", // source: Ch 35 slide 15
     scene: "hematology",
@@ -1002,10 +1002,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "IgM is the first immunoglobulin class produced during a primary immune response. Which structural feature makes IgM especially effective at agglutinating pathogens?",
     setup: "",
     ans: [
-      { t: "IgM is a pentamer with 10 binding sites, the best at agglutination and complement activation", ok: true },
-      { t: "IgM is a monomer with one huge binding site that fits several epitopes at the same time", ok: false },
-      { t: "IgM circulates as a dimer linked by secretory component, just like secretory IgA in mucosa", ok: false },
-      { t: "IgM carries 20 binding sites per molecule because each monomer contributes four binding sites", ok: false },
+      { t: "It is a pentamer that carries ten antigen binding sites", ok: true },
+      { t: "It is a monomer with one large antigen binding site", ok: false },
+      { t: "It is a dimer linked by a secretory component", ok: false },
+      { t: "It carries twenty antigen binding sites per molecule", ok: false },
     ],
     rationale: "IgM is the largest immunoglobulin, circulating as a pentamer with a molecular weight of approximately 900 kDa. The five monomers are linked by disulfide bonds and a J (joining) chain. This pentameric structure provides 10 antigen-binding sites (though steric constraints may limit functional valence to approximately 5). IgM is the most efficient complement activator (a single IgM pentamer can activate the classical pathway) and is the most effective agglutinin. It is the first antibody produced in a primary response and the first expressed on developing B cells. IgM does not cross the placenta. For the CRNA, IgM anti-A and anti-B isohemagglutinins cause the most severe acute hemolytic transfusion reactions through complement mediated intravascular hemolysis. Guyton Ch. 35.", // source: Ch 35 slide 17
     scene: "hematology",
@@ -1019,10 +1019,10 @@ export const PP2_WK2_SUPPLEMENT_QUESTIONS = [
     prompt: "The five classes of immunoglobulins are IgM, IgG, IgA, IgD, and IgE. Which class is critically involved in allergic reactions?",
     setup: "",
     ans: [
-      { t: "IgE; it binds mast cell receptors, and allergen cross linking triggers histamine release", ok: true },
-      { t: "IgG, since it is the most abundant antibody and so mediates most reactions including allergy", ok: false },
-      { t: "IgA, since it coats all mucosal surfaces, where most allergen exposure actually takes place", ok: false },
-      { t: "IgD, since it acts as the main B cell surface receptor for allergens in the respiratory tract", ok: false },
+      { t: "IgE", ok: true },
+      { t: "IgG", ok: false },
+      { t: "IgA", ok: false },
+      { t: "IgD", ok: false },
     ],
     rationale: "IgE is the least abundant serum immunoglobulin (present in trace amounts) but plays a central role in type I (immediate) hypersensitivity reactions and anaphylaxis. IgE is produced by plasma cells driven by Th2 cytokines (IL-4, IL-13) and binds with very high affinity to FcepsilonRI receptors on mast cells and basophils. When a multivalent allergen cross-links two or more surface-bound IgE molecules, it triggers degranulation and release of histamine, tryptase, prostaglandins, and leukotrienes. Immunoglobulins constitute approximately 20% of total plasma proteins. For the CRNA, IgE-mediated anaphylaxis to NMBs, antibiotics, and latex is a life-threatening OR emergency requiring immediate epinephrine. Guyton Ch. 35.", // source: Ch 35 slide 16
     scene: "hematology",

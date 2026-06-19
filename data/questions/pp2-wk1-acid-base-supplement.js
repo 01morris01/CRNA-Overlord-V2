@@ -765,10 +765,10 @@ export const PP2_WK1_SUPPLEMENT_QUESTIONS = [
     prompt: "In chronic kidney disease, plasma solutes fall into three categories based on how their concentrations change as GFR declines. Which category includes creatinine and urea?",
     setup: "",
     ans: [
-      { t: "Group A: levels climb steeply because excretion needs filtration", ok: true },
-      { t: "Group B: levels climb only mildly as tubular secretion offsets it", ok: false },
-      { t: "Group C: levels hold steady as intake matches extrarenal losses", ok: false },
-      { t: "Group D: levels fall because muscle wasting cuts their production", ok: false },
+      { t: "Group A: plasma levels climb steeply as GFR falls", ok: true },
+      { t: "Group B: plasma levels climb gradually as GFR falls", ok: false },
+      { t: "Group C: plasma levels stay steady as GFR falls", ok: false },
+      { t: "Group D: plasma levels decline as GFR falls", ok: false },
     ],
     rationale: "Group A solutes (creatinine and urea) have plasma concentrations that are inversely proportional to GFR because they rely almost exclusively on glomerular filtration for excretion. As GFR falls by half, their plasma concentrations approximately double. Group B solutes (phosphate and H+) rise moderately because regulatory hormones (PTH for phosphate, ammonia adaptation for H+) partially compensate. Group C solutes (Na+ and Cl-) remain nearly constant because the kidney adjusts fractional reabsorption.", // source: slide Ch32 CKD solute groups A/B/C
     scene: "renal",
