@@ -409,9 +409,42 @@ function buildParticles(kind, halfX, halfZ){
 
 /* ─── node stations ─────────────────────────────────────────────────────── */
 function nodeShapeMesh(type, mat){
-  if (type === 'synthesis') return new THREE.Mesh(new THREE.CylinderGeometry(.62, .62, .5, 6), mat);
-  if (type === 'mastery')   return new THREE.Mesh(new THREE.OctahedronGeometry(.66), mat);
-  return new THREE.Mesh(new THREE.SphereGeometry(.5, 18, 14), mat);
+  if (type === 'synthesis') return new THREE.Mesh(new THREE.CylinderGeometry(.88, .88, .7, 6), mat);
+  if (type === 'mastery')   return new THREE.Mesh(new THREE.OctahedronGeometry(.95), mat);
+  return new THREE.Mesh(new THREE.SphereGeometry(.72, 18, 14), mat);
+}
+
+/* vertical light shaft, revealed on hover (alpha fades toward the top) */
+var _beamTex = null;
+function beamTexture(){
+  if (_beamTex) return _beamTex;
+  var cv = document.createElement('canvas'); cv.width = 64; cv.height = 256;
+  var g = cv.getContext('2d');
+  var gr = g.createLinearGradient(0, 0, 0, 256);
+  gr.addColorStop(0,  'rgba(255,255,255,0)');     /* top of beam */
+  gr.addColorStop(.55,'rgba(255,255,255,.5)');
+  gr.addColorStop(1,  'rgba(255,255,255,.95)');   /* base, brightest */
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 256);
+  _beamTex = new THREE.CanvasTexture(cv);
+  return _beamTex;
+}
+function makeBeam(col){
+  var grp = new THREE.Group();
+  var mats = [];
+  [[.62, .5], [.2, .95]].forEach(function(cfg){   /* soft outer shaft + bright core */
+    var m = new THREE.MeshBasicMaterial({
+      map: beamTexture(), color: new THREE.Color(col),
+      transparent: true, opacity: 0, blending: THREE.AdditiveBlending,
+      depthWrite: false, side: THREE.DoubleSide
+    });
+    m.userData = { max: cfg[1] };
+    var cyl = new THREE.Mesh(new THREE.CylinderGeometry(cfg[0], cfg[0], 13, 14, 1, true), m);
+    cyl.position.y = 13 / 2 + .8;
+    grp.add(cyl);
+    mats.push(m);
+  });
+  grp.userData.mats = mats;
+  return grp;
 }
 
 function layoutPositions(count){
@@ -466,18 +499,18 @@ function buildStations(topics, stats){
     if (volcanic){
       /* basalt outcrop instead of a clinical plinth */
       plinth = new THREE.Mesh(
-        new THREE.DodecahedronGeometry(1.15),
+        new THREE.DodecahedronGeometry(1.55),
         new THREE.MeshLambertMaterial({ color: 0x171008 })
       );
       plinth.scale.set(1, .42, 1);
       plinth.rotation.y = (i * 2.4) % Math.PI;
-      plinth.position.y = .28;
+      plinth.position.y = .34;
     } else {
       plinth = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.05, 1.25, .3, 20),
+        new THREE.CylinderGeometry(1.4, 1.65, .34, 20),
         new THREE.MeshLambertMaterial({ color: 0x0c1424 })
       );
-      plinth.position.y = .15;
+      plinth.position.y = .17;
     }
     grp.add(plinth);
 
@@ -489,46 +522,51 @@ function buildStations(topics, stats){
       emissiveIntensity: volcanic ? (dim ? .55 : .7) : 0
     });
     var shape = nodeShapeMesh(t.type, shapeMat);
-    shape.position.y = 1.35;
+    shape.position.y = 1.7;
     grp.add(shape);
     n._shape = shape;
 
-    var ringGeo = new THREE.RingGeometry(.95, 1.08, 32);
+    var ringGeo = new THREE.RingGeometry(1.3, 1.48, 32);
     var ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({
-      color: dim ? 0x25324a : new THREE.Color(col).getHex(),
-      transparent: true, opacity: dim ? .25 : .6, side: THREE.DoubleSide, depthWrite: false
+      color: dim ? 0x8494b3 : new THREE.Color(col).getHex(),
+      transparent: true, opacity: dim ? .3 : .6, side: THREE.DoubleSide, depthWrite: false
     }));
     ring.rotation.x = -Math.PI / 2;
-    ring.position.y = .32;
+    ring.position.y = .38;
     grp.add(ring);
 
     var glow = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: glowTex(dim ? '#25324a' : col), transparent: true,
-      opacity: tier === 'mastered' ? .55 : tier === 'completed' ? .4 : tier === 'started' ? .3 : .12,
+      map: glowTex(dim ? '#41546f' : col), transparent: true,
+      opacity: tier === 'mastered' ? .6 : tier === 'completed' ? .45 : tier === 'started' ? .35 : .2,
       blending: THREE.AdditiveBlending, depthWrite: false
     }));
-    glow.scale.set(3.4, 3.4, 1);
-    glow.position.y = 1.35;
+    glow.scale.set(4.8, 4.8, 1);
+    glow.position.y = 1.7;
     grp.add(glow);
     n._glowMat = glow.material;
     n._glowBase = glow.material.opacity;
 
+    /* hover-revealed light shaft (the next node keeps a faint one at rest) */
+    var beam = makeBeam(dim ? '#9fb4d8' : col);
+    grp.add(beam);
+    n._beamMats = beam.userData.mats;
+
     if (tier === 'mastered'){
       var halo = new THREE.Mesh(
-        new THREE.TorusGeometry(.85, .05, 8, 32),
+        new THREE.TorusGeometry(1.15, .06, 8, 32),
         new THREE.MeshBasicMaterial({ color: 0xffb000, transparent:true, opacity:.8 })
       );
       halo.rotation.x = Math.PI / 2.4;
-      halo.position.y = 1.35;
+      halo.position.y = 1.7;
       grp.add(halo);
       n._halo = halo;
     }
 
     var hit = new THREE.Mesh(
-      new THREE.BoxGeometry(2.6, 3.2, 2.6),
+      new THREE.BoxGeometry(3.4, 4, 3.4),
       new THREE.MeshBasicMaterial({ visible: false })
     );
-    hit.position.y = 1.4;
+    hit.position.y = 1.8;
     hit.userData.i = i;
     grp.add(hit);
     hitboxes.push(hit);
@@ -538,14 +576,14 @@ function buildStations(topics, stats){
 
     var el = document.createElement('div');
     el.className = 'cm-lcard';
-    el.style.setProperty('--acc', dim ? '#5d7093' : col);
+    el.style.setProperty('--acc', dim ? '#8494b3' : col);
     var typeWord = t.type === 'synthesis' ? 'SYNTHESIS' : t.type === 'mastery' ? 'MASTERY' : 'NODE ' + t.order;
     var s = stats[t.id] || {};
     el.innerHTML =
         '<div class="cm-lhead"><span class="cm-ldot"></span><span class="cm-lorder">' + (t.order || i + 1) + '</span></div>'
+      + '<div class="cm-lname">' + t.title + '</div>'
       + '<div class="cm-lbody">'
       + '<div class="cm-ltype">' + typeWord + ' · ' + TIER_STYLE[tier].word + '</div>'
-      + '<div class="cm-lname">' + t.title + '</div>'
       + '<div class="cm-lmeta"><span class="cm-lbar"><i style="width:' + (s.bestPct || 0) + '%"></i></span><span class="cm-lpct">' + (s.bestPct || 0) + '%</span></div>'
       + '</div>';
     labelsWrap.appendChild(el);
@@ -615,6 +653,7 @@ function disposeScene(){
   pathCurve = null; pathLine = null; pulseMesh = null; pulseGlow = null;
   beacon = null; beaconRing = null; particles = null;
   glowCache = {};
+  _beamTex = null;   /* shared beam gradient is disposed with its materials above */
 }
 
 /* ─── themed GLB environment (Patho I: ashen web world) ─────────────────── */
@@ -751,18 +790,16 @@ function injectCSS(){
     '#world-map.cm-3d .cm-stage{position:absolute;inset:0;touch-action:none;}',
     '#world-map.cm-3d .cm-stage canvas{display:block;width:100%;height:100%;}',
     '#world-map.cm-3d .cm-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3;}',
-    '.cm-lcard{position:absolute;left:0;top:0;will-change:transform;background:rgba(7,13,26,.82);border:1px solid rgba(143,168,255,.16);border-radius:9px;padding:2px 6px;max-width:220px;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .25s,border-color .25s;}',
-    '.cm-lcard.open{padding:5px 9px;}',
+    '.cm-lcard{position:absolute;left:0;top:0;will-change:transform;background:rgba(6,10,20,.92);border:1px solid var(--acc,rgba(143,168,255,.3));border-radius:10px;padding:6px 10px;max-width:200px;box-shadow:0 10px 28px rgba(0,0,0,.55), 0 0 14px rgba(0,0,0,.4);transition:opacity .25s,border-color .25s,box-shadow .25s;}',
     '.cm-lcard.off{opacity:0;}.cm-lcard.dim{opacity:.3;}',
-    '.cm-lhead{display:flex;align-items:center;gap:6px;white-space:nowrap;}',
-    '.cm-ldot{width:7px;height:7px;border-radius:50%;background:var(--acc,#5d7093);box-shadow:0 0 8px var(--acc,#5d7093);}',
-    '.cm-lorder{font-family:var(--fm,monospace);font-weight:700;font-size:.5rem;color:#f2ead8;letter-spacing:.08em;}',
-    '.cm-lbody{max-height:0;max-width:0;opacity:0;overflow:hidden;transition:max-height .3s,max-width .3s,opacity .25s;}',
-    '.cm-lcard.open{border-color:var(--acc,rgba(143,168,255,.34));}',
-    '.cm-lcard.open .cm-lbody{max-height:120px;max-width:220px;opacity:1;}',
-    '.cm-lname{width:200px;}',
-    '.cm-ltype{font-family:var(--fm,monospace);font-size:.38rem;letter-spacing:.14em;color:#5d7093;margin-top:5px;}',
-    '.cm-lname{font-size:.5rem;color:#dbe4f5;margin-top:4px;line-height:1.35;font-weight:500;}',
+    '.cm-lhead{display:flex;align-items:center;gap:7px;white-space:nowrap;}',
+    '.cm-ldot{width:8px;height:8px;border-radius:50%;background:var(--acc,#5d7093);box-shadow:0 0 9px var(--acc,#5d7093);}',
+    '.cm-lorder{font-family:var(--fm,monospace);font-weight:700;font-size:.6rem;color:var(--acc,#f2ead8);letter-spacing:.1em;}',
+    '.cm-lname{font-size:.62rem;color:#f0f4fb;margin-top:4px;line-height:1.3;font-weight:600;max-width:180px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;text-shadow:0 1px 3px rgba(0,0,0,.9);}',
+    '.cm-lbody{max-height:0;opacity:0;overflow:hidden;transition:max-height .3s,opacity .25s;}',
+    '.cm-lcard.open{border-color:var(--acc,rgba(143,168,255,.5));box-shadow:0 10px 28px rgba(0,0,0,.55), 0 0 18px var(--acc,rgba(143,168,255,.4));}',
+    '.cm-lcard.open .cm-lbody{max-height:120px;opacity:1;}',
+    '.cm-ltype{font-family:var(--fm,monospace);font-size:.42rem;letter-spacing:.14em;color:#8fa3c0;margin-top:5px;}',
     '.cm-lmeta{display:flex;align-items:center;gap:6px;margin-top:5px;}',
     '.cm-lbar{flex:1;height:3px;background:rgba(143,168,255,.14);border-radius:2px;overflow:hidden;}',
     '.cm-lbar i{display:block;height:100%;background:var(--acc,#5d7093);}',
@@ -997,14 +1034,14 @@ function updateLabels(){
   if (!W || !H) return;
   _v3 = _v3 || new THREE.Vector3();
   nodes.forEach(function(n){
-    _v3.set(n.x, n.y + 2.15, n.z).project(camera);
+    _v3.set(n.x, n.y + 2.75, n.z).project(camera);
     var behind = _v3.z > 1;
     n._label.classList.toggle('off', behind);
     if (behind) return;
     var sx = (_v3.x * .5 + .5) * W;
     var sy = (-_v3.y * .5 + .5) * H;
     var d = camera.position.distanceTo(n._grp.position);
-    var s = clamp(11 / d, .45, .95);
+    var s = clamp(15 / d, .62, 1.12);
     n._label.style.transform = 'translate(' + sx.toFixed(1) + 'px,' + sy.toFixed(1) + 'px) translate(-50%,-100%) scale(' + s.toFixed(3) + ')';
     n._label.style.transformOrigin = '50% 100%';
   });
@@ -1076,11 +1113,16 @@ function tick(t){
     }
     nodes.forEach(function(n, i){
       n._shape.rotation.y += dt * (n.topic.type === 'mastery' ? 1.2 : .4);
-      n._shape.position.y = 1.35 + Math.sin(t * .0016 + i) * .08;
+      n._shape.position.y = 1.7 + Math.sin(t * .0016 + i) * .1;
       if (n._halo) n._halo.rotation.z += dt * .8;
       var hot = (i === hoverI || i === focusI);
       var target = hot ? Math.min(1, n._glowBase * 2.2 + .15) : n._glowBase;
       n._glowMat.opacity += (target - n._glowMat.opacity) * dt * 8;
+      /* light shaft: full on hover/focus, faint on the next node, hidden otherwise */
+      var beamOn = hot ? 1 : (n.isNext ? .3 : 0);
+      n._beamMats.forEach(function(m){
+        m.opacity += (m.userData.max * beamOn - m.opacity) * dt * 7;
+      });
       var ts = hot ? 1.12 : 1;
       var cs = n._grp.scale.x + (ts - n._grp.scale.x) * dt * 8;
       n._grp.scale.setScalar(cs);
