@@ -22,7 +22,7 @@ var PREF_KEY = 'voss_topicmap_view'; // '3d' | '2d'
 /* Theme identities carried over from the 2D maps (names + accents preserved). */
 var THEMES = {
   'adv-phys-path-1':          { name:'PATHO VOLCANIC',    accent:'#ff3300', bg:0x160502, floor:'lava',      props:'volcanic',   particles:'embers',
-                                model:'assets/models/patho-world.glb' },
+                                model:'assets/models/patho-world.glb', nodeStyle:'volcanic' },
   'adv-phys-path-2':          { name:'NEURAL ARCTIC',     accent:'#00ddff', bg:0x03121e, floor:'ice',       props:'crystals',   particles:'snow'    },
   'tech-advances-anesthesia': { name:'OR ALPHA STATION',  accent:'#00ffa3', bg:0x02130c, floor:'ortile',    props:'orlights',   particles:'dust'    },
   'basics-anesthesia':        { name:'TRAINING THEATRE',  accent:'#5b9eff', bg:0x040b20, floor:'blueprint', props:'holo',       particles:'dust'    },
@@ -42,6 +42,37 @@ var TIER_STYLE = {
 
 var COLS = 6, DX = 6.2, DZ = 7.2;   /* COLS drops to 3 on narrow containers (set per build) */
 
+/* Hand-authored node routes for modeled worlds, in model-footprint space
+   (u,v in -1..1, multiplied by `half`). Placeholder ring for now — replaced
+   with vein-aligned coordinates after plan-view inspection. */
+var ROUTE_LAYOUTS = {
+  /* Ashen-web volcano (patho-world.glb), authored from a top-down plan render.
+     Nodes 1-11 ring the outer craters and lava rivers, 12-16 turn inward along
+     the flows, 17 (Mastery Challenge) sits at the erupting summit. */
+  'adv-phys-path-1': {
+    half: 20,
+    pts: [
+      [-0.095,  1.080],   /* 1  south outer crater        */
+      [-0.645,  0.895],   /* 2  southwest crater          */
+      [-0.995,  0.400],   /* 3  west glowing crater       */
+      [-0.765, -0.075],   /* 4  west river bend           */
+      [-0.495, -0.595],   /* 5  northwest cone            */
+      [-0.160, -0.745],   /* 6  north-northwest junction  */
+      [ 0.475, -0.880],   /* 7  north crater              */
+      [ 0.745, -0.665],   /* 8  northeast river elbow     */
+      [ 1.080, -0.330],   /* 9  east crater               */
+      [ 1.025,  0.300],   /* 10 east rim                  */
+      [ 0.975,  0.860],   /* 11 southeast glowing crater  */
+      [ 0.575,  0.475],   /* 12 southeast river junction  */
+      [-0.025,  0.710],   /* 13 south river               */
+      [-0.295,  0.310],   /* 14 southwest inner junction  */
+      [-0.430,  0.075],   /* 15 west inner river          */
+      [ 0.210,  0.225],   /* 16 south face of the summit  */
+      [ 0.075,  0.040]    /* 17 summit caldera            */
+    ]
+  }
+};
+
 /* ─── module state ──────────────────────────────────────────────────────── */
 var failed = false, active = false;
 var renderer, scene, camera, raf = 0;
@@ -57,6 +88,8 @@ var user = {theta:0, phi:0, dist:1};
 var cam = {tx:0, ty:.5, tz:0, dist:34, theta:0, phi:1.05};
 var fitDist = 34;
 var now = 0, last = 0, pulseT = 0;
+var fieldY = 0;   /* mean snapped station height; lifts the overview target on terrain */
+var customLayout = false;   /* current course uses a hand-authored route */
 var sizedW = -1, sizedH = -1;
 var glowCache = {};
 var inputBound = false;
@@ -382,19 +415,27 @@ function nodeShapeMesh(type, mat){
 }
 
 function layoutPositions(count){
+  /* modeled worlds with a hand-authored route: nodes follow the terrain features */
+  var route = theme && theme.model && ROUTE_LAYOUTS[courseIdNow];
+  if (route && count <= route.pts.length){
+    return {
+      pts: route.pts.slice(0, count).map(function(p){
+        return { x: p[0] * route.half, z: p[1] * route.half };
+      }),
+      rows: 0, custom: true, half: route.half
+    };
+  }
   var rows = Math.ceil(count / COLS);
   var out = [];
   for (var i = 0; i < count; i++){
     var row = Math.floor(i / COLS);
     var col = i % COLS;
     if (row % 2 === 1) col = COLS - 1 - col;   /* serpentine */
-    var rowCount = Math.min(COLS, count - row * COLS);
     var offset = (Math.min(COLS, count) - 1) / 2;
     out.push({
       x: (col - offset) * DX,
       z: ((rows - 1) / 2 - row) * DZ   /* row 0 nearest the camera; later rows recede into fog */
     });
-    void rowCount;
   }
   return { pts: out, rows: rows };
 }
@@ -420,17 +461,32 @@ function buildStations(topics, stats){
     var grp = new THREE.Group();
     grp.position.set(p.x, 0, p.z);
 
-    var plinth = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.05, 1.25, .3, 20),
-      new THREE.MeshLambertMaterial({ color: 0x0c1424 })
-    );
-    plinth.position.y = .15;
+    var volcanic = theme.nodeStyle === 'volcanic';
+    var plinth;
+    if (volcanic){
+      /* basalt outcrop instead of a clinical plinth */
+      plinth = new THREE.Mesh(
+        new THREE.DodecahedronGeometry(1.15),
+        new THREE.MeshLambertMaterial({ color: 0x171008 })
+      );
+      plinth.scale.set(1, .42, 1);
+      plinth.rotation.y = (i * 2.4) % Math.PI;
+      plinth.position.y = .28;
+    } else {
+      plinth = new THREE.Mesh(
+        new THREE.CylinderGeometry(1.05, 1.25, .3, 20),
+        new THREE.MeshLambertMaterial({ color: 0x0c1424 })
+      );
+      plinth.position.y = .15;
+    }
     grp.add(plinth);
 
     var dim = tier === 'new';
     var shapeMat = new THREE.MeshPhongMaterial({
-      color: dim ? 0x25324a : new THREE.Color(col).getHex(),
-      transparent: true, opacity: dim ? .5 : .88, shininess: 80
+      color: dim ? (volcanic ? 0x1c0f08 : 0x25324a) : new THREE.Color(col).getHex(),
+      transparent: true, opacity: dim ? (volcanic ? .9 : .5) : .88, shininess: 80,
+      emissive: new THREE.Color(volcanic ? (dim ? '#4a1505' : col) : '#000000'),
+      emissiveIntensity: volcanic ? (dim ? .55 : .7) : 0
     });
     var shape = nodeShapeMesh(t.type, shapeMat);
     shape.position.y = 1.35;
@@ -568,15 +624,16 @@ function loadThemeModel(url, halfX, halfZ, seq){
     var root = src.clone(true);               /* geometry + materials shared with cache */
     root.traverse(function(o){ o.userData.__keep = true; });
 
-    /* footprint: cover the node field plus a margin all around */
+    /* footprint: cover the node field plus a margin all around.
+       UNIFORM scale — the terrain keeps its true relief. */
     var box = new THREE.Box3().setFromObject(root);
     var size = new THREE.Vector3(); box.getSize(size);
     var center = new THREE.Vector3(); box.getCenter(center);
-    var sXZ = Math.max((halfX + 9) * 2 / size.x, (halfZ + 9) * 2 / size.z);
-    var sY = 6 / Math.max(.001, size.y);      /* flatten relief to ~6 world units */
-    root.scale.set(sXZ, sY, sXZ);
-    root.position.set(-center.x * sXZ, -box.min.y * sY - .6, -center.z * sXZ);
+    var s = Math.max((halfX + 7) * 2 / size.x, (halfZ + 7) * 2 / size.z);
+    root.scale.set(s, s, s);
+    root.position.set(-center.x * s, -box.min.y * s - .6, -center.z * s);
     scene.add(root);
+    root.updateMatrixWorld(true);   /* raycasts below need fresh world matrices */
 
     /* neutral key light so the PBR textures read (theme lights are tinted) */
     var key = new THREE.DirectionalLight(0xfff0dd, .85);
@@ -599,13 +656,16 @@ function snapStations(root){
   var ray = new THREE.Raycaster();
   var down = new THREE.Vector3(0, -1, 0);
   var origin = new THREE.Vector3();
+  var sum = 0;
   nodes.forEach(function(n){
-    origin.set(n.x, 80, n.z);
+    origin.set(n.x, 120, n.z);
     ray.set(origin, down);
     var hits = ray.intersectObject(root, true);
     n.y = hits.length ? hits[0].point.y : 0;
     n._grp.position.y = n.y;
+    sum += n.y;
   });
+  fieldY = nodes.length ? sum / nodes.length : 0;
   if (nodes.length > 1){
     var pts = nodes.map(function(n){ return new THREE.Vector3(n.x, n.y + .25, n.z); });
     pathCurve = new THREE.CatmullRomCurve3(pts);
@@ -623,6 +683,7 @@ function snapStations(root){
 
 function buildScene(courseId, course){
   disposeScene();
+  fieldY = 0;
   /* narrow container: 3 columns so the field reads as a corridor receding
      down the screen instead of overflowing the sides */
   var cw = (wm && wm.clientWidth) || window.innerWidth || 0;
@@ -637,9 +698,14 @@ function buildScene(courseId, course){
 
   var stats = (typeof _getTopicStats === 'function' ? _getTopicStats() : {});
   var lay = buildStations(course.topics || [], stats);
-  var rows = lay.rows;
-  var halfX = (Math.min(COLS, (course.topics || []).length) - 1) / 2 * DX + 3;
-  var halfZ = Math.max(1, (rows - 1) / 2 * DZ + 3);
+  var halfX, halfZ;
+  customLayout = !!lay.custom;
+  if (lay.custom){
+    halfX = halfZ = lay.half + 2;
+  } else {
+    halfX = (Math.min(COLS, (course.topics || []).length) - 1) / 2 * DX + 3;
+    halfZ = Math.max(1, (lay.rows - 1) / 2 * DZ + 3);
+  }
 
   var hasModel = !!(theme.model && typeof THREE.GLTFLoader === 'function');
   if (!hasModel){
@@ -669,7 +735,9 @@ function buildScene(courseId, course){
     loadThemeModel(theme.model, halfX, halfZ, buildSeq);
   }
 
-  fitDist = clamp(Math.max(halfX * 1.25, halfZ * 2.6) + 9, 24, 58);
+  fitDist = lay.custom
+    ? clamp(lay.half * 2.05 + 8, 24, 58)
+    : clamp(Math.max(halfX * 1.25, halfZ * 2.6) + 9, 24, 58);
   /* fog tracks the framing distance so pulled-back cameras never lose the far rows */
   scene.fog = new THREE.Fog(theme.bg, fitDist * .85, fitDist * 2.4);
   cam = {tx:0, ty:.5, tz:0, dist: fitDist * 1.15, theta:0, phi:1.05};
@@ -785,8 +853,10 @@ function desired(){
     };
   }
   return {
-    tx: 0, ty: .5, tz: 0,
-    dist: fitDist * (narrow ? 1.2 : 1) * user.dist,
+    tx: 0, ty: .5 + fieldY * .7, tz: 0,
+    /* authored routes span a square footprint; portrait needs a wider pull-back
+       than the 3-column corridor grid does */
+    dist: fitDist * (narrow ? (customLayout ? 1.85 : 1.2) : 1) * user.dist,
     theta: user.theta + (RM ? 0 : Math.sin(now * .00014) * .04),
     phi: clamp(1.05 + user.phi, .5, 1.4)
   };
@@ -1095,6 +1165,15 @@ function add3DToggle(){
   };
   bar.appendChild(btn);
 }
+
+/* debug handle for automated verification */
+window.__cm = {
+  get scene(){ return scene; },
+  get camera(){ return camera; },
+  get renderer(){ return renderer; },
+  get nodes(){ return nodes; },
+  get fieldY(){ return fieldY; }
+};
 
 /* stop rendering when the user leaves the topic map */
 var _classicSelector2 = window.showCourseSelector;
