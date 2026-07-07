@@ -1,9 +1,10 @@
-const CACHE_VERSION = 'v35-course-map-3d-2026-07-07';
+const CACHE_VERSION = 'v36-patho-world-glb-2026-07-07';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
   '/', '/index.html', '/app.js', '/legacyShim.js', '/legacy/legacy.js',
-  '/world-map.js', '/hospital-map.js', '/course-map-3d.js', '/core/state.js', '/core/auth.js', '/core/gameEngine.js',
+  '/world-map.js', '/hospital-map.js', '/course-map-3d.js', '/vendor/GLTFLoader.r128.js',
+  '/core/state.js', '/core/auth.js', '/core/gameEngine.js',
   '/core/questionEngine.js', '/core/answerGrading.js', '/core/nodeConfig.js',
   '/core/voss.js', '/core/dailyMission.js', '/core/recallGrader.js',
   '/ui/gameUI.js', '/ui/menus.js',

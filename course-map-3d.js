@@ -21,7 +21,8 @@ var PREF_KEY = 'voss_topicmap_view'; // '3d' | '2d'
 
 /* Theme identities carried over from the 2D maps (names + accents preserved). */
 var THEMES = {
-  'adv-phys-path-1':          { name:'PATHO VOLCANIC',    accent:'#ff3300', bg:0x160502, floor:'lava',      props:'volcanic',   particles:'embers'  },
+  'adv-phys-path-1':          { name:'PATHO VOLCANIC',    accent:'#ff3300', bg:0x160502, floor:'lava',      props:'volcanic',   particles:'embers',
+                                model:'assets/models/patho-world.glb' },
   'adv-phys-path-2':          { name:'NEURAL ARCTIC',     accent:'#00ddff', bg:0x03121e, floor:'ice',       props:'crystals',   particles:'snow'    },
   'tech-advances-anesthesia': { name:'OR ALPHA STATION',  accent:'#00ffa3', bg:0x02130c, floor:'ortile',    props:'orlights',   particles:'dust'    },
   'basics-anesthesia':        { name:'TRAINING THEATRE',  accent:'#5b9eff', bg:0x040b20, floor:'blueprint', props:'holo',       particles:'dust'    },
@@ -48,7 +49,9 @@ var wm, labelsWrap, hudEl;
 var nodes = [];            /* per-node scene refs + data */
 var hitboxes = [];
 var theme, courseIdNow, onSelectNow;
-var pathCurve, pulseMesh, pulseGlow, beacon, beaconRing, particles, particleCfg;
+var pathCurve, pathLine, pulseMesh, pulseGlow, beacon, beaconRing, particles, particleCfg;
+var MODEL_CACHE = {};   /* url -> parsed gltf.scene, shared across rebuilds */
+var buildSeq = 0;       /* invalidates async model placement on course switch */
 var mode = 'overview', focusI = null, hoverI = null;
 var user = {theta:0, phi:0, dist:1};
 var cam = {tx:0, ty:.5, tz:0, dist:34, theta:0, phi:1.05};
@@ -410,7 +413,7 @@ function buildStations(topics, stats){
     var p = lay.pts[i];
     var n = {
       topic: t, tier: tier, i: i,
-      x: p.x, z: p.z,
+      x: p.x, y: 0, z: p.z,           /* y is re-snapped onto GLB terrain when present */
       isNext: i === nextIdx
     };
 
@@ -499,10 +502,11 @@ function buildStations(topics, stats){
   var pts = nodes.map(function(n){ return new THREE.Vector3(n.x, .1, n.z); });
   if (pts.length > 1){
     pathCurve = new THREE.CatmullRomCurve3(pts);
-    scene.add(new THREE.Line(
+    pathLine = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(pathCurve.getPoints(Math.max(60, pts.length * 14))),
       new THREE.LineBasicMaterial({ color: accInt(), transparent: true, opacity: .3 })
-    ));
+    );
+    scene.add(pathLine);
     pulseMesh = new THREE.Mesh(
       new THREE.SphereGeometry(.12, 10, 10),
       new THREE.MeshBasicMaterial({ color: accInt() })
@@ -541,6 +545,7 @@ function buildStations(topics, stats){
 function disposeScene(){
   if (!scene) return;
   scene.traverse(function(o){
+    if (o.userData && o.userData.__keep) return;   /* cached GLB assets survive rebuilds */
     if (o.geometry) o.geometry.dispose();
     if (o.material){
       var mats = Array.isArray(o.material) ? o.material : [o.material];
@@ -551,9 +556,69 @@ function disposeScene(){
     }
   });
   nodes = []; hitboxes = [];
-  pathCurve = null; pulseMesh = null; pulseGlow = null;
+  pathCurve = null; pathLine = null; pulseMesh = null; pulseGlow = null;
   beacon = null; beaconRing = null; particles = null;
   glowCache = {};
+}
+
+/* ─── themed GLB environment (Patho I: ashen web world) ─────────────────── */
+function loadThemeModel(url, halfX, halfZ, seq){
+  function place(src){
+    if (seq !== buildSeq || !scene) return;   /* course switched while loading */
+    var root = src.clone(true);               /* geometry + materials shared with cache */
+    root.traverse(function(o){ o.userData.__keep = true; });
+
+    /* footprint: cover the node field plus a margin all around */
+    var box = new THREE.Box3().setFromObject(root);
+    var size = new THREE.Vector3(); box.getSize(size);
+    var center = new THREE.Vector3(); box.getCenter(center);
+    var sXZ = Math.max((halfX + 9) * 2 / size.x, (halfZ + 9) * 2 / size.z);
+    var sY = 6 / Math.max(.001, size.y);      /* flatten relief to ~6 world units */
+    root.scale.set(sXZ, sY, sXZ);
+    root.position.set(-center.x * sXZ, -box.min.y * sY - .6, -center.z * sXZ);
+    scene.add(root);
+
+    /* neutral key light so the PBR textures read (theme lights are tinted) */
+    var key = new THREE.DirectionalLight(0xfff0dd, .85);
+    key.position.set(10, 22, 12);
+    scene.add(key);
+
+    snapStations(root);
+  }
+  if (MODEL_CACHE[url]){ place(MODEL_CACHE[url]); return; }
+  new THREE.GLTFLoader().load(url, function(gltf){
+    MODEL_CACHE[url] = gltf.scene;
+    place(gltf.scene);
+  }, undefined, function(err){
+    console.warn('[course-map-3d] environment model failed to load, keeping procedural floor:', err);
+  });
+}
+
+/* drop each station onto the terrain surface and rebuild the path at height */
+function snapStations(root){
+  var ray = new THREE.Raycaster();
+  var down = new THREE.Vector3(0, -1, 0);
+  var origin = new THREE.Vector3();
+  nodes.forEach(function(n){
+    origin.set(n.x, 80, n.z);
+    ray.set(origin, down);
+    var hits = ray.intersectObject(root, true);
+    n.y = hits.length ? hits[0].point.y : 0;
+    n._grp.position.y = n.y;
+  });
+  if (nodes.length > 1){
+    var pts = nodes.map(function(n){ return new THREE.Vector3(n.x, n.y + .25, n.z); });
+    pathCurve = new THREE.CatmullRomCurve3(pts);
+    if (pathLine){
+      pathLine.geometry.dispose();
+      pathLine.geometry = new THREE.BufferGeometry().setFromPoints(pathCurve.getPoints(Math.max(60, pts.length * 14)));
+    }
+  }
+  var nx = nodes.filter(function(n){ return n.isNext; })[0];
+  if (nx){
+    if (beacon) beacon.position.set(nx.x, nx.y + 3, nx.z);
+    if (beaconRing) beaconRing.position.set(nx.x, nx.y + .06, nx.z);
+  }
 }
 
 function buildScene(courseId, course){
@@ -576,31 +641,33 @@ function buildScene(courseId, course){
   var halfX = (Math.min(COLS, (course.topics || []).length) - 1) / 2 * DX + 3;
   var halfZ = Math.max(1, (rows - 1) / 2 * DZ + 3);
 
-  /* floor */
-  var floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(220, 220),
-    new THREE.MeshBasicMaterial({ map: floorTexture(theme.floor, theme.accent) })
-  );
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -.01;
-  scene.add(floor);
+  var hasModel = !!(theme.model && typeof THREE.GLTFLoader === 'function');
+  if (!hasModel){
+    /* procedural floor */
+    var floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(220, 220),
+      new THREE.MeshBasicMaterial({ map: floorTexture(theme.floor, theme.accent) })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -.01;
+    scene.add(floor);
 
-  /* department slab under the node field */
-  var slab = new THREE.Mesh(
-    new THREE.PlaneGeometry(halfX * 2 + 5, halfZ * 2 + 5),
-    new THREE.MeshBasicMaterial({ color: 0x070d18, transparent: true, opacity: .88 })
-  );
-  slab.rotation.x = -Math.PI / 2;
-  slab.position.y = .015;
-  scene.add(slab);
-  var border = new THREE.Mesh(
-    new THREE.RingGeometry(0, 1, 4),
-    new THREE.MeshBasicMaterial({ visible: false })
-  );
-  scene.add(border);
+    /* department slab under the node field */
+    var slab = new THREE.Mesh(
+      new THREE.PlaneGeometry(halfX * 2 + 5, halfZ * 2 + 5),
+      new THREE.MeshBasicMaterial({ color: 0x070d18, transparent: true, opacity: .88 })
+    );
+    slab.rotation.x = -Math.PI / 2;
+    slab.position.y = .015;
+    scene.add(slab);
 
-  buildProps(theme.props, halfX, halfZ);
+    buildProps(theme.props, halfX, halfZ);
+  }
   buildParticles(theme.particles, halfX, halfZ);
+  if (hasModel){
+    buildSeq++;
+    loadThemeModel(theme.model, halfX, halfZ, buildSeq);
+  }
 
   fitDist = clamp(Math.max(halfX * 1.25, halfZ * 2.6) + 9, 24, 58);
   /* fog tracks the framing distance so pulled-back cameras never lose the far rows */
@@ -711,7 +778,7 @@ function desired(){
   if (mode === 'focus' && focusI != null){
     var n = nodes[focusI];
     return {
-      tx: n.x, ty: 1.1, tz: n.z,
+      tx: n.x, ty: n.y + 1.1, tz: n.z,
       dist: (narrow ? 12 : 9) * user.dist,
       theta: user.theta,
       phi: clamp(1.12 + user.phi, .5, 1.4)
@@ -860,7 +927,7 @@ function updateLabels(){
   if (!W || !H) return;
   _v3 = _v3 || new THREE.Vector3();
   nodes.forEach(function(n){
-    _v3.set(n.x, 2.15, n.z).project(camera);
+    _v3.set(n.x, n.y + 2.15, n.z).project(camera);
     var behind = _v3.z > 1;
     n._label.classList.toggle('off', behind);
     if (behind) return;
