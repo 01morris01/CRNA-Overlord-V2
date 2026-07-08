@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v37-node-beams-2026-07-07';
+const CACHE_VERSION = 'v38-patho2-neural-2026-07-07';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

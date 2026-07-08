@@ -23,7 +23,8 @@ var PREF_KEY = 'voss_topicmap_view'; // '3d' | '2d'
 var THEMES = {
   'adv-phys-path-1':          { name:'PATHO VOLCANIC',    accent:'#ff3300', bg:0x160502, floor:'lava',      props:'volcanic',   particles:'embers',
                                 model:'assets/models/patho-world.glb', nodeStyle:'volcanic' },
-  'adv-phys-path-2':          { name:'NEURAL ARCTIC',     accent:'#00ddff', bg:0x03121e, floor:'ice',       props:'crystals',   particles:'snow'    },
+  'adv-phys-path-2':          { name:'NEURAL ARCTIC',     accent:'#00ddff', bg:0x03121e, floor:'ice',       props:'crystals',   particles:'snow',
+                                model:'assets/models/patho2-world.glb', nodeStyle:'glacial' },
   'tech-advances-anesthesia': { name:'OR ALPHA STATION',  accent:'#00ffa3', bg:0x02130c, floor:'ortile',    props:'orlights',   particles:'dust'    },
   'basics-anesthesia':        { name:'TRAINING THEATRE',  accent:'#5b9eff', bg:0x040b20, floor:'blueprint', props:'holo',       particles:'dust'    },
   'chem-phys-anesthesia':     { name:'GAS LAW LAB',       accent:'#a78bfa', bg:0x0b0619, floor:'molecule',  props:'molecules',  particles:'bubbles' },
@@ -69,6 +70,29 @@ var ROUTE_LAYOUTS = {
       [-0.430,  0.075],   /* 15 west inner river          */
       [ 0.210,  0.225],   /* 16 south face of the summit  */
       [ 0.075,  0.040]    /* 17 summit caldera            */
+    ]
+  },
+  /* Glacial-neural world (patho2-world.glb), authored from a top-down plan
+     render. Nodes 1-13 walk the ring of neural petal plates (each point on a
+     plate's glowing nucleus, south → west → north → east → southeast), and
+     14 (the final week) climbs the central soma bulb — the "brain". */
+  'adv-phys-path-2': {
+    half: 20,
+    pts: [
+      [ 0.011,  0.992],   /* 1  south plate nucleus         */
+      [-0.480,  0.608],   /* 2  southwest inner plate       */
+      [-0.757,  1.099],   /* 3  southwest outer plate       */
+      [-1.077,  0.437],   /* 4  west low shelf plate        */
+      [-0.629,  0.053],   /* 5  west inner plate            */
+      [-0.928, -0.416],   /* 6  west-northwest plate        */
+      [-0.580, -1.050],   /* 7  northwest plate (outer face; label clears node 8) */
+      [-0.011, -0.930],   /* 8  north plate (south shelf; label clears the soma card) */
+      [ 0.523, -0.843],   /* 9  northeast plate             */
+      [ 0.800, -0.331],   /* 10 east-northeast plate        */
+      [ 1.120,  0.416],   /* 11 east outer plate            */
+      [ 0.757,  1.056],   /* 12 southeast outer plate       */
+      [ 0.672,  0.096],   /* 13 east inner plate            */
+      [ 0.011,  0.053]    /* 14 central soma summit         */
     ]
   }
 };
@@ -495,6 +519,8 @@ function buildStations(topics, stats){
     grp.position.set(p.x, 0, p.z);
 
     var volcanic = theme.nodeStyle === 'volcanic';
+    var glacial = theme.nodeStyle === 'glacial';
+    var styled = volcanic || glacial;
     var plinth;
     if (volcanic){
       /* basalt outcrop instead of a clinical plinth */
@@ -505,6 +531,18 @@ function buildStations(topics, stats){
       plinth.scale.set(1, .42, 1);
       plinth.rotation.y = (i * 2.4) % Math.PI;
       plinth.position.y = .34;
+    } else if (glacial){
+      /* faceted ice shelf */
+      plinth = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(1.45),
+        new THREE.MeshPhongMaterial({
+          color: 0x2e5d7d, transparent: true, opacity: .88, shininess: 120,
+          emissive: new THREE.Color('#0a2836'), emissiveIntensity: .45
+        })
+      );
+      plinth.scale.set(1, .5, 1);
+      plinth.rotation.y = (i * 1.9) % Math.PI;
+      plinth.position.y = .4;
     } else {
       plinth = new THREE.Mesh(
         new THREE.CylinderGeometry(1.4, 1.65, .34, 20),
@@ -516,10 +554,10 @@ function buildStations(topics, stats){
 
     var dim = tier === 'new';
     var shapeMat = new THREE.MeshPhongMaterial({
-      color: dim ? (volcanic ? 0x1c0f08 : 0x25324a) : new THREE.Color(col).getHex(),
-      transparent: true, opacity: dim ? (volcanic ? .9 : .5) : .88, shininess: 80,
-      emissive: new THREE.Color(volcanic ? (dim ? '#4a1505' : col) : '#000000'),
-      emissiveIntensity: volcanic ? (dim ? .55 : .7) : 0
+      color: dim ? (volcanic ? 0x1c0f08 : glacial ? 0x0d2b3a : 0x25324a) : new THREE.Color(col).getHex(),
+      transparent: true, opacity: dim ? (styled ? .9 : .5) : .88, shininess: 80,
+      emissive: new THREE.Color(volcanic ? (dim ? '#4a1505' : col) : glacial ? (dim ? '#0d4152' : col) : '#000000'),
+      emissiveIntensity: styled ? (dim ? .55 : .7) : 0
     });
     var shape = nodeShapeMesh(t.type, shapeMat);
     shape.position.y = 1.7;
@@ -1034,7 +1072,10 @@ function updateLabels(){
   if (!W || !H) return;
   _v3 = _v3 || new THREE.Vector3();
   nodes.forEach(function(n){
-    _v3.set(n.x, n.y + 2.75, n.z).project(camera);
+    /* tall summit nodes (volcano crater, neural soma) lift their card higher so
+       it clears the shorter plate/crater nodes projecting behind them */
+    var lift = 2.75 + (n.y > 5 ? Math.min(3.2, (n.y - 5) * .5) : 0);
+    _v3.set(n.x, n.y + lift, n.z).project(camera);
     var behind = _v3.z > 1;
     n._label.classList.toggle('off', behind);
     if (behind) return;
