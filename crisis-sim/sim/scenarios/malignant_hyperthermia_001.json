@@ -1,0 +1,77 @@
+{
+  "id": "malignant_hyperthermia_001",
+  "title": "Malignant Hyperthermia Under Volatile Anesthesia",
+  "description": "During sevoflurane maintenance after succinylcholine, EtCO2 climbs relentlessly with tachycardia and rising temperature. Stop the trigger, hyperventilate on 100% O2, give dantrolene, cool.",
+  "category": "Emergency",
+  "courseUnit": "Anesthesia Emergencies",
+  "difficulty": "advanced",
+  "learningObjectives": [
+    "Recognize early MH: rising EtCO2 refractory to ventilation, tachycardia, rigidity",
+    "Sequence the MH response: stop trigger, 100% O2 + hyperventilate, dantrolene, cooling",
+    "Explain why dantrolene (not cooling alone) treats the hypermetabolism",
+    "State the dantrolene dose: 2.5 mg/kg rapid IV, repeated as needed"
+  ],
+  "tags": ["Malignant hyperthermia", "MH", "Dantrolene", "Volatile anesthetics", "Emergencies"],
+  "maxDurationSeconds": 900,
+  "patientProfile": {
+    "ageYears": 22, "sex": "Male", "weightKg": 80, "heightCm": 182, "asa": 1,
+    "history": ["no prior anesthetics", "family history unknown (adopted)"],
+    "allergiesList": [],
+    "comorbidities": "None",
+    "allergies": "NKDA",
+    "surgicalProcedure": "ORIF right forearm",
+    "baselineHR": 76, "baselineSystolic": 126, "baselineDiastolic": 74,
+    "baselineSpO2": 99, "baselineRR": 12, "baselineTemp": 36.6
+  },
+  "startingSetup": {
+    "oxygenOn": true, "fio2": 0.5, "ventMode": "vcv",
+    "airway": "ett", "ivAccess": "18g peripheral",
+    "vaporizerDial": 2.2, "tidalVolume": 550, "respiratoryRate": 12, "peep": 5
+  },
+  "events": [
+    { "triggerTimeSeconds": 0, "typeName": "learner_prompt",
+      "message": "Maintenance on sevoflurane after RSI with succinylcholine. Case underway.",
+      "description": "Baseline maintenance" },
+    { "triggerTimeSeconds": 30, "typeName": "malignant_hyperthermia",
+      "description": "MH cascade begins: VCO2 surge" },
+    { "triggerTimeSeconds": 90, "typeName": "learner_prompt",
+      "message": "EtCO2 keeps climbing despite increasing minute ventilation. The surgeon mentions the patient feels warm.",
+      "description": "Recognition cue" },
+    { "triggerTimeSeconds": 150, "typeName": "learner_prompt",
+      "message": "Masseter feels tight; HR is rising. Temperature is now trending up.",
+      "description": "Rigidity + tachycardia cue" }
+  ],
+  "expectedActions": [
+    { "action": "stop_volatile", "afterTrigger": "malignant_hyperthermia", "timeLimitSec": 240, "points": 20,
+      "feedback": "Trigger agent OFF — the essential first step." },
+    { "action": "increase_fio2", "points": 10,
+      "feedback": "100% oxygen at high flows." },
+    { "action": "increase_ventilation", "points": 10,
+      "feedback": "Hyperventilating to clear CO2." },
+    { "action": "administer_dantrolene", "acceptedDrugs": ["dantrolene"],
+      "afterTrigger": "malignant_hyperthermia", "timeLimitSec": 420, "points": 25,
+      "feedback": "Dantrolene 2.5 mg/kg — the definitive treatment." },
+    { "action": "cool_patient", "points": 10,
+      "feedback": "Active cooling started." },
+    { "action": "call_for_help", "points": 10,
+      "feedback": "MH is a team emergency — help and the MH cart." }
+  ],
+  "dangerousActions": [
+    { "action": "ignore_rising_etco2", "conditionSec": 180, "penalty": -20,
+      "treatedBy": ["stop_volatile", "increase_ventilation", "administer_dantrolene"],
+      "feedback": "EtCO2 above 60 was left unaddressed — in this context that delay costs minutes of hypermetabolism." },
+    { "action": "deepen_anesthesia", "penalty": -15,
+      "feedback": "Increasing the volatile agent feeds the trigger — the agent must be stopped, not deepened." }
+  ],
+  "debrief": {
+    "summary": "Classic MH: an uncoupled calcium release drives muscle hypermetabolism — EtCO2 rises first and will not clear with ventilation alone; only dantrolene turns off the process.",
+    "teachingPoints": [
+      "A climbing EtCO2 refractory to hyperventilation is the earliest reliable MH sign.",
+      "Stop the trigger and run 100% O2 at high fresh gas flow while help arrives.",
+      "Dantrolene 2.5 mg/kg rapid IV, repeated to effect — cooling alone controls temperature but not the metabolism.",
+      "Each 10-minute delay in dantrolene measurably increases complications."
+    ],
+    "reviewTopics": ["MH pathophysiology", "Dantrolene dosing", "MHAUS protocol", "Volatile triggers"],
+    "reviewTags": ["Malignant hyperthermia", "Dantrolene", "Emergencies", "Volatile anesthetics"]
+  }
+}

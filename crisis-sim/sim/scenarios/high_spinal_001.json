@@ -1,0 +1,71 @@
+{
+  "id": "high_spinal_001",
+  "title": "High Spinal After Neuraxial Block",
+  "description": "Spinal anesthetic spreads high: progressive sympathectomy with hypotension and bradycardia, dyspnea and arm weakness. Support the airway, give vasopressors, stabilize.",
+  "category": "Regional",
+  "courseUnit": "Regional Anesthesia",
+  "difficulty": "intermediate",
+  "learningObjectives": [
+    "Recognize the rising level of a high spinal (hypotension, bradycardia, dyspnea, arm weakness)",
+    "Explain sympathectomy physiology: SVR, venous return, and cardioaccelerator block",
+    "Support oxygenation and ventilation early",
+    "Choose vasopressors that address both tone and heart rate"
+  ],
+  "tags": ["High spinal", "Neuraxial", "Sympathectomy", "Vasopressors", "Airway support"],
+  "maxDurationSeconds": 600,
+  "patientProfile": {
+    "ageYears": 34, "sex": "Female", "weightKg": 68, "heightCm": 165, "asa": 2,
+    "history": ["G2P1, elective cesarean delivery"],
+    "allergiesList": [],
+    "comorbidities": "None significant",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Cesarean delivery under spinal",
+    "baselineHR": 88, "baselineSystolic": 122, "baselineDiastolic": 74,
+    "baselineSpO2": 99, "baselineRR": 16, "baselineTemp": 36.7
+  },
+  "startingSetup": {
+    "oxygenOn": true, "fio2": 0.21, "ventMode": "manual",
+    "airway": "native", "ivAccess": "18g peripheral", "vaporizerDial": 0
+  },
+  "events": [
+    { "triggerTimeSeconds": 0, "typeName": "learner_prompt",
+      "message": "Spinal placed at L3-4 with hyperbaric bupivacaine. Patient supine.",
+      "description": "Block placed" },
+    { "triggerTimeSeconds": 25, "typeName": "high_spinal",
+      "description": "Block spreading high: sympathectomy onset" },
+    { "triggerTimeSeconds": 45, "typeName": "learner_prompt",
+      "message": "Patient: \"I feel like I can't take a deep breath... my hands are tingling.\"",
+      "description": "Dyspnea + arm weakness cue" },
+    { "triggerTimeSeconds": 75, "typeName": "learner_prompt",
+      "message": "She is pale and anxious. BP and heart rate are falling.",
+      "description": "Recognition cue" }
+  ],
+  "expectedActions": [
+    { "action": "increase_fio2", "afterTrigger": "high_spinal", "timeLimitSec": 120, "points": 15,
+      "feedback": "High-flow oxygen while the level is high." },
+    { "action": "treat_hypotension", "acceptedInterventions": ["phenylephrine", "ephedrine", "epinephrine", "fluid_bolus"],
+      "timeLimitSec": 150, "points": 20,
+      "feedback": "Vasopressor support for the sympathectomy." },
+    { "action": "treat_bradycardia", "acceptedDrugs": ["atropine", "ephedrine", "epinephrine"], "points": 15,
+      "feedback": "Cardioaccelerator block treated (chronotrope given)." },
+    { "action": "call_for_help", "points": 10,
+      "feedback": "Help called early — appropriate for a rising block." }
+  ],
+  "dangerousActions": [
+    { "action": "ignore_hypotension", "conditionSec": 120, "penalty": -20, "treatedBy": ["treat_hypotension"],
+      "feedback": "Prolonged untreated hypotension during a high spinal risks maternal and fetal hypoperfusion." },
+    { "action": "ignore_hypoxia", "conditionSec": 60, "penalty": -20, "treatedBy": ["increase_fio2"],
+      "feedback": "Desaturation during a high spinal demands immediate oxygenation and ventilation support." }
+  ],
+  "debrief": {
+    "summary": "A rising spinal blocks sympathetic outflow: SVR and venous return fall, and with T1-T4 spread the cardioaccelerators are blocked, so the usual compensatory tachycardia is replaced by bradycardia.",
+    "teachingPoints": [
+      "Sympathectomy drops SVR and preload — pressure falls before the airway is threatened.",
+      "Cardioaccelerator (T1-T4) block causes bradycardia in the face of hypotension: treat rate and tone together.",
+      "Ephedrine or epinephrine treat both rate and pressure; phenylephrine treats tone but can worsen bradycardia.",
+      "Dyspnea and hand weakness signal a high (cervical-approaching) level — prepare airway support early."
+    ],
+    "reviewTopics": ["Neuraxial physiology", "Sympathectomy", "Vasopressor selection", "High spinal management"],
+    "reviewTags": ["High spinal", "Neuraxial", "Sympathectomy", "Vasopressors"]
+  }
+}

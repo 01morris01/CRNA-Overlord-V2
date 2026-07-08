@@ -1,0 +1,84 @@
+{
+  "id": "rsi_hypotension_001",
+  "title": "RSI With Post-Induction Hypotension",
+  "description": "Rapid sequence induction in an obese hypertensive patient; recognize and treat post-induction hypotension and confirm the airway with EtCO2.",
+  "category": "Induction",
+  "courseUnit": "Basics of Anesthesia",
+  "difficulty": "beginner",
+  "learningObjectives": [
+    "Recognize post-induction hypotension",
+    "Connect induction drugs to decreased SVR and myocardial depression",
+    "Select an appropriate vasopressor",
+    "Secure airway and confirm ventilation with EtCO2"
+  ],
+  "tags": ["RSI", "Induction physiology", "Hypotension", "Vasopressors", "Airway confirmation"],
+  "maxDurationSeconds": 600,
+  "patientProfile": {
+    "ageYears": 58, "sex": "Male", "weightKg": 95, "heightCm": 178, "asa": 3,
+    "history": ["hypertension", "GERD", "obesity"],
+    "allergiesList": [],
+    "comorbidities": "HTN, GERD, obesity",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Laparoscopic cholecystectomy",
+    "baselineHR": 82, "baselineSystolic": 148, "baselineDiastolic": 86,
+    "baselineSpO2": 98, "baselineRR": 16, "baselineTemp": 36.8
+  },
+  "startingSetup": {
+    "oxygenOn": true, "fio2": 1.0, "ventMode": "manual",
+    "airway": "native", "ivAccess": "20g peripheral", "vaporizerDial": 0
+  },
+  "events": [
+    { "triggerTimeSeconds": 0, "typeName": "learner_prompt",
+      "message": "58M for lap chole, full stomach (GERD). Prepare for rapid sequence induction.",
+      "description": "Case start" },
+    { "triggerTimeSeconds": 20, "typeName": "learner_prompt",
+      "message": "Patient is on the table with monitors applied. Begin preoxygenation.",
+      "description": "Preoxygenation prompt" },
+    { "trigger": "propofol_administered", "typeName": "vital_change",
+      "changes": [ { "vital": "sbp", "delta": -38 }, { "vital": "dbp", "delta": -20 }, { "vital": "hr", "delta": 6 } ],
+      "durationSec": 45,
+      "description": "Post-induction SVR fall and myocardial depression" },
+    { "trigger": "etomidate_administered", "typeName": "vital_change",
+      "changes": [ { "vital": "sbp", "delta": -12 }, { "vital": "dbp", "delta": -6 } ],
+      "durationSec": 45,
+      "description": "Etomidate: milder hemodynamic depression" },
+    { "trigger": "intubation_successful", "typeName": "vital_change",
+      "changes": [ { "vital": "etco2", "delta": 38 } ],
+      "durationSec": 10,
+      "description": "Sustained EtCO2 waveform after tube placement" },
+    { "trigger": "intubation_successful", "typeName": "learner_prompt",
+      "message": "Tube is through the cords. What confirms placement?",
+      "description": "Confirmation prompt" }
+  ],
+  "expectedActions": [
+    { "action": "preoxygenate", "timeLimitSec": 90, "points": 10,
+      "feedback": "Preoxygenation extends safe apnea time (denitrogenation)." },
+    { "action": "administer_induction_agent", "acceptedDrugs": ["propofol", "etomidate", "ketamine"], "points": 10,
+      "feedback": "Induction agent given." },
+    { "action": "administer_paralytic", "acceptedDrugs": ["succinylcholine", "rocuronium"], "points": 10,
+      "feedback": "Paralytic given — RSI conditions." },
+    { "action": "intubate", "points": 10, "feedback": "Airway placed." },
+    { "action": "confirm_etco2", "afterTrigger": "intubation_successful", "timeLimitSec": 180, "points": 15,
+      "feedback": "Sustained EtCO2 confirms tracheal placement." },
+    { "action": "treat_hypotension", "acceptedInterventions": ["phenylephrine", "ephedrine", "fluid_bolus"],
+      "afterTrigger": "propofol_administered", "timeLimitSec": 120, "points": 20,
+      "feedback": "Hypotension treated." }
+  ],
+  "dangerousActions": [
+    { "action": "ignore_hypotension", "conditionSec": 90, "penalty": -20, "treatedBy": ["treat_hypotension"],
+      "feedback": "You allowed prolonged hypotension after induction (MAP < 60 for over 90 seconds)." },
+    { "action": "fail_to_confirm_etco2", "conditionSec": 180, "penalty": -25,
+      "feedback": "Tube placement must be confirmed with sustained EtCO2." }
+  ],
+  "debrief": {
+    "summary": "This case tests RSI sequencing, post-induction hypotension recognition, and early airway confirmation.",
+    "teachingPoints": [
+      "Propofol decreases SVR and myocardial contractility, causing hypotension — expect it and be ready.",
+      "EtCO2 confirmation is the standard of care after intubation.",
+      "Phenylephrine is useful when hypotension is primarily vasodilation with adequate heart rate.",
+      "Ephedrine suits hypotension with bradycardia or low cardiac output."
+    ],
+    "reviewTopics": ["Induction physiology", "Vasopressor selection", "Airway confirmation", "RSI sequence"],
+    "reviewTags": ["RSI", "Induction physiology", "Hypotension", "Vasopressors"]
+  }
+}
