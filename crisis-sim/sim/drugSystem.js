@@ -41,9 +41,10 @@ export class DrugSystem {
       case 'Rocuronium': this._rocuroniumC1 = f(this._rocuroniumC1 + totalDoseMg / (volumeL * f(6.7))); break;
       case 'Midazolam': this._midazolamC1 = f(this._midazolamC1 + totalDoseMg / (volumeL * f(1.1))); break;
       case 'Succinylcholine': this._suxC1 = f(this._suxC1 + totalDoseMg / (volumeL * 6)); break;
-      case 'Ephedrine': this._ephedC1 = f(this._ephedC1 + totalDoseMg / 10); break;
-      case 'Phenylephrine': this._phenylC1 = f(this._phenylC1 + totalDoseMg / f(0.1)); break;
-      case 'Epinephrine': this._epiC1 = f(this._epiC1 + totalDoseMg / f(0.05)); break;
+      // pressors weight-scaled (mcg/kg), anchored at the 70 kg reference
+      case 'Ephedrine': this._ephedC1 = f(this._ephedC1 + totalDoseMg / 10 * (70 / this.patient.weightKg)); break;
+      case 'Phenylephrine': this._phenylC1 = f(this._phenylC1 + totalDoseMg / f(0.1) * (70 / this.patient.weightKg)); break;
+      case 'Epinephrine': this._epiC1 = f(this._epiC1 + totalDoseMg / f(0.05) * (70 / this.patient.weightKg)); break;
       case 'Glycopyrrolate': this._atropC1 = f(this._atropC1 + totalDoseMg / f(0.4) * 0.5); break;
       case 'Atropine': this._atropC1 = f(this._atropC1 + totalDoseMg / 0.5); break;
       case 'Naloxone': this._naloxC1 = f(this._naloxC1 + totalDoseMg / f(0.04)); break;

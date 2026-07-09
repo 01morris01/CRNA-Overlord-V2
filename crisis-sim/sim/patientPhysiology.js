@@ -137,7 +137,9 @@ export class PatientPhysiology {
       const e = Clamp01(this.fentanylCe / 4);
       this._hrModifier = f(this._hrModifier - e * 20);
       this._bpModifier = f(this._bpModifier - e * f(0.15));
-      this._rrModifier = f(this._rrModifier - e * f(0.8));
+      // stronger, nonlinear opioid ventilatory depression on its own curve (HR/BP unchanged)
+      const opioidRespEffect = Clamp01(this.fentanylCe / f(1.2));
+      this._rrModifier = f(this._rrModifier - opioidRespEffect * f(1.1));
     }
     if (this.midazolamCe > 0) {
       const e = Clamp01(this.midazolamCe / f(0.2));
