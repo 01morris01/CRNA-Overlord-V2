@@ -10,7 +10,7 @@ This round adds neuromuscular-blockade reversal, independently queryable respira
 The implementation must preserve these invariants:
 
 1. Derived vitals remain outputs. New APIs set drug exposures, physiologic drivers, or device state; they never set TOF, respiratory rate, minute ventilation, EtCO2, or SpO2 directly.
-2. One scalar, `effectiveNmbBlockade`, is the only neuromuscular impairment consumed by TOF, respiratory muscle capability, reversal eligibility, and debrief attribution. There is no second paralysis variable or recovery timer.
+2. One instantaneous scalar, `effectiveNmbBlockade`, is the only neuromuscular exposure consumed by TOF, respiratory muscle capability, reversal eligibility, and debrief attribution. `trainOfFourRatio` is the single stateful transmission integrator. There is no second paralysis variable or recovery timer.
 3. Airway-device state and respiratory drive are orthogonal. Mechanical support may substitute for absent spontaneous ventilation, but it may not erase the separately queryable spontaneous-effort signal.
 4. New state is initialized to values that reproduce the old engine: no forced apnea, no reversal exposure, and the existing airway/ventilator setup. Frozen parity fixtures are not re-baselined.
 5. Every new arithmetic store and boundary uses the existing float32 helpers in `sim/float32.js`.
@@ -58,9 +58,20 @@ effectiveRocBlock = clamp01(rawRocBlock * (1 - sugammadexRocRelief)
 effectiveNmbBlockade = max(effectiveRocBlock, rawSuxBlock)
 ```
 
-`effectiveNmbBlockade` is computed once per physiology tick. TOF count, the TOF-ratio target, respiratory muscle capability, reversal eligibility, and the NMB source reported to the debrief all consume that same value. The raw rocuronium and succinylcholine inputs remain queryable for attribution, but they are not alternative paralysis outputs.
+`effectiveNmbBlockade` is the **instantaneous exposure scalar**: a pure algebraic function of current effect-site concentrations and relief modifiers, with no memory. It is computed once per physiology tick and drives `trainOfFourCount` directly. TOF-ratio target, respiratory muscle capability, reversal eligibility, and the NMB source reported to the debrief all consume that same value or the single ratio integrator it drives. The raw rocuronium and succinylcholine inputs remain queryable for attribution, but they are not alternative paralysis outputs.
 
-The existing engine already models measured TOF ratio as a temporally smoothed response to blockade exposure. That smoothing must remain bit-identical when reversal is unused because it is present in the frozen RSI fixture. `trainOfFourRatio` is therefore the measured transmission output, not a second paralysis model. Respiratory muscle capability is a pure getter derived from that same measured ratio and has no independent state or timer.
+The existing engine already models measured TOF ratio as a temporally smoothed response to blockade exposure. That smoothing must remain bit-identical when reversal is unused because it is present in the frozen RSI fixture. `trainOfFourRatio` is the **single stateful transmission integrator**, smoothed toward `1 - effectiveNmbBlockade`, and is the only lagged neuromuscular state. `respiratoryMuscleCapability` is a pure function of `trainOfFourRatio`, with no independent state or timer. No neuromuscular quantity has a second integrator; the ratio is the sole lagged state and both muscle capability and reversal adequacy read it.
+
+Float32 store discipline is mandatory for the relief expression. It must not be evaluated as one JavaScript double-precision expression rounded once. The implementation rounds each Mono-style float store separately:
+
+```text
+unboundFraction = f(1 - sugammadexRocRelief)
+afterSugammadex = f(rawRocBlock * unboundFraction)
+afterNeostigmine = f(afterSugammadex - neostigmineRocRelief)
+effectiveRocBlock = Clamp01(afterNeostigmine)
+```
+
+Both relief ramps likewise round their target delta, rate, and stored result through the existing float32 helpers.
 
 ### Sugammadex modifier
 
@@ -68,31 +79,36 @@ The existing engine already models measured TOF ratio as a temporally smoothed r
 
 | Dose | Eligible depth | Relief target | Time to target |
 |---|---|---:|---:|
-| `< 2 mg/kg` | Any | proportional fraction of the 2 mg/kg target | 180 s |
+| `< 2 mg/kg` | None | 0; administration is logged | No ramp |
 | `2 to <4 mg/kg` | Moderate block, TOF count at least 2 | 1.0 | 120 s |
 | `4 to <16 mg/kg` | Deep or moderate block, including TOF count 0 | 1.0 | 90 s |
 | `>=16 mg/kg` | Any rocuronium block, including immediate deep block | 1.0 | 30 s |
 
-For sub-tier dosing, the relief target is multiplied by `doseMgPerKg / tierDose`. A 2 mg/kg bolus given during count-0 deep block is still recorded but receives no deep-block relief target; 4 and 16 mg/kg remain effective from count 0. Repeated doses may increase the target but never above 1.
+Sugammadex below 2 mg/kg is below the modeled threshold: administration succeeds and logs, but produces zero meaningful reversal. A 2 mg/kg bolus given during count-0 deep block is also recorded but receives no deep-block relief target; 4 and 16 mg/kg remain effective from count 0. Repeated qualifying doses may increase the target but never above 1.
 
-This is explicitly an **instantaneous-encapsulation teaching simplification with a deterministic effect ramp**, not a compartmental or molar binding model. The effect ramp makes dose tiers observable while avoiding a false claim that the engine's arbitrary rocuronium Ce units represent sugammadex binding stoichiometry.
+This is explicitly an **instantaneous dose-to-capacity assignment with a deterministic effect ramp**, not a compartmental or molar binding model. The engine models sugammadex as threshold-tiered, not continuously titratable, because partial dosing is clinically unreliable and associated with recurarization. The effect ramp makes dose tiers observable while avoiding a false claim that the engine's arbitrary rocuronium Ce units represent sugammadex binding stoichiometry.
+
+Because `effectiveNmbBlockade = max(effectiveRocBlock, rawSuxBlock)` and sugammadex changes only the rocuronium term, sugammadex given while succinylcholine is the dominant deeper block correctly appears to do nothing until the rocuronium term becomes dominant. That is the expected selective behavior, not a bug.
 
 ### Neostigmine modifier and ceiling
 
 `administerBolus("Neostigmine", totalDoseMg)` always administers and logs the push. The administered amount is capped for effect calculation at `min(0.07 mg/kg, 5 mg total)`; excess dose is recorded but adds no reversal effect. A one-compartment `_neoC1`/`_neoCe` driver follows the same deterministic `_eff` convention as other treatment agents.
 
-The twitch requirement gates effect, never administration:
+The twitch requirement gates effect, never administration. The ceiling is graded by current count:
 
 ```text
+hasTwitch = trainOfFourCount >= 1
 neoDoseFraction = clamp01(effectiveDoseMgPerKg / 0.07)
-hasTwitch = TOF count >= 1
-shallowEnough = effectiveNmbBlockade <= 0.75
-neostigmineRocReliefTarget = hasTwitch && shallowEnough
-  ? min(0.45 * neoDoseFraction, rawRocBlock)
-  : 0
+if trainOfFourCount >= 2:
+    neoCeiling = 0.45
+elif trainOfFourCount == 1:
+    neoCeiling = 0.15
+else:
+    neoCeiling = 0
+neostigmineRocReliefTarget = min(neoCeiling * neoDoseFraction, rawRocBlock)
 ```
 
-`neostigmineRocRelief` approaches that target over 7 minutes, matching the label's bounded dosing while representing its slower onset. The 0.45 maximum is a deliberate ceiling simplification: a shallow rocuronium block can be fully relieved, but a deep count-0 block receives near-zero early benefit and cannot be rescued to full recovery by neostigmine. If natural rocuronium clearance later restores a twitch, residual neostigmine exposure may then accelerate recovery; the original drug push remains visible in the action log.
+`neostigmineRocRelief` approaches that target over 7 minutes, matching the label's bounded dosing while representing its slower onset. Count 0 produces zero reversal effect, although the drug administers and logs. Count 1 uses the reduced 0.15 ceiling and is deliberately unreliable: the ratio may climb but often stalls below the 0.9 adequacy endpoint, preserving the "reversed too early, residual weakness" teaching failure. Count 2 or greater uses the full 0.45 ceiling. This count-based model encodes the ASA distinction that neostigmine belongs at minimal/moderate recovery while deeper block calls for sugammadex. If natural rocuronium clearance later restores a higher count, residual neostigmine exposure may then accelerate recovery; the original push remains visible in the action log.
 
 Neostigmine has no beneficial effect on `rawSuxBlock`. Its muscarinic contribution is independently published as `neostigmineBradycardiaEffect`; `PatientPhysiology.updateHemodynamics()` subtracts it from the HR target, while the existing `atropineCe` effect opposes it.
 
@@ -165,7 +181,7 @@ Mechanical and spontaneous ventilation are computed separately, then composed fo
 - Connected VCV/PCV produces mandatory `mechanicalMinuteVentilation` independent of spontaneous drive.
 - Connected PSV requires spontaneous effort; absent effort produces no supported breath.
 - Manual mode supplies no automatic mechanical minute ventilation in this round. A future discrete bag-squeeze API may add manual breaths; it is not faked here.
-- For connected VCV/PCV, `effectiveMinuteVentilation = max(mechanicalMinuteVentilation, spontaneousMinuteVentilation)`. Using `max` is a deliberate teaching simplification that represents adequate controlled ventilation substituting for absent effort without double-counting breath stacking.
+- For connected VCV/PCV, `effectiveMinuteVentilation = max(mechanicalMinuteVentilation, spontaneousMinuteVentilation)`. Using `max` is a deliberate teaching simplification that represents adequate controlled ventilation substituting for absent effort without double-counting breath stacking. Its known failure case is inadequate mechanical settings combined with partially returning spontaneous effort: real ventilation summates both contributions toward adequacy, while `max` discards the smaller contribution. The model is therefore conservative—safe-direction for oxygenation teaching, but it under-reads CO2 clearance. True breath summation is deferred.
 - For connected PSV, effective ventilation is the pressure-supported spontaneous result.
 - Without supported mechanical ventilation, effective ventilation equals spontaneous minute ventilation.
 
@@ -233,6 +249,8 @@ This table defines mechanics only. It does not claim mask seal failure, difficul
 | Ventilator mode/settings | existing mode, rate, tidal volume, pressure, and PEEP inputs | mechanical minute ventilation, composed gas-exchange ventilation |
 
 No API in this table writes TOF, minute ventilation, EtCO2, SpO2, or another derived vital.
+
+The two relief-ramp integrators are gated by administered exposure. `sugammadexRocRelief` and `neostigmineRocRelief` do not advance or write float32 state at all when their respective drug has never been administered. A nominal ramp toward a zero target is not permitted because even a zero-target store could perturb frozen fixture arithmetic.
 
 ## Attribution and debrief surface
 
