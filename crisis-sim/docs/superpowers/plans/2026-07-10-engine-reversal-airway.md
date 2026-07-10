@@ -56,7 +56,7 @@ git commit -m "Refine reversal and respiratory model"
 **Files:**
 - Modify: `test/evidence.test.js`
 
-- [ ] **Step 1: Add reusable fixed-step helpers**
+- [x] **Step 1: Add reusable fixed-step helpers**
 
 Add helpers that create rocuronium/succinylcholine depth, advance until a requested TOF count, capture contribution timeseries, and fingerprint float32 fields. Helpers must administer through `DrugSystem` and call only public airway/apnea APIs.
 
@@ -81,7 +81,7 @@ function reversalSnapshot(rig) {
 }
 ```
 
-- [ ] **Step 2: Add the eight top-level evidence tests**
+- [x] **Step 2: Add the eight top-level evidence tests**
 
 Add one `it()` for each approved case:
 
@@ -98,7 +98,7 @@ it('reversal/apnea/airway runs are deterministic at mid-ramp samples', () => {})
 
 The neostigmine test must assert: count 0 relief stays near zero, count 1 remains `<0.9`, and count 2+ reaches `>=0.9`. The apnea test must record at least one sample before and after `setForcedApnea(false)`. The deterministic fingerprint must include approximately 15 seconds after a 16 mg/kg sugammadex bolus and several minutes into neostigmine exposure.
 
-- [ ] **Step 3: Run the evidence file and verify red failures**
+- [x] **Step 3: Run the evidence file and verify red failures**
 
 Run:
 
@@ -117,7 +117,7 @@ Expected: the existing nine tests pass and the eight new cases fail because the 
 - Modify: `ui/simRunner.js`
 - Test: `test/evidence.test.js`
 
-- [ ] **Step 1: Implement private state and transition validation**
+- [x] **Step 1: Implement private state and transition validation**
 
 Add `AirwayDevice`, private `#airwayDeviceState`, read-only getters, internal reset, and this transition result shape:
 
@@ -138,7 +138,7 @@ transitionAirwayDevice(next) {
 
 Expose `get isIntubated()` without a setter. Replace every existing assignment with `transitionAirwayDevice()` or the internal reset path. Export `AirwayDevice` from `sim/index.js`; delegate through `SimRunner.setAirwayDevice()`.
 
-- [ ] **Step 2: Run transition evidence and source proof**
+- [x] **Step 2: Run transition evidence and source proof**
 
 ```bash
 npx vitest run test/evidence.test.js -t "airway transitions" --reporter=verbose
@@ -155,15 +155,15 @@ Expected: transition test passes; grep finds only the private field's internal c
 - Modify: `sim/scenario/scenarioManager.js`
 - Test: `test/evidence.test.js`
 
-- [ ] **Step 1: Add new inert driver state**
+- [x] **Step 1: Add new inert driver state**
 
 Initialize sugammadex/neostigmine compartments, targets, rates, and exposure gates to exact zero. Publish read-only getters and patient effect drivers only after administration.
 
-- [ ] **Step 2: Add threshold-tiered administration**
+- [x] **Step 2: Add threshold-tiered administration**
 
 Use actual body weight. `<2 mg/kg` sugammadex logs but sets no relief target; 2, 4, and 16 mg/kg tiers set targets and 120/90/30 second ramps. Neostigmine caps effective dose at `min(0.07 mg/kg, 5 mg)`, always enters `_neoC1`, and derives its `0/0.15/0.45` relief target from current TOF count.
 
-- [ ] **Step 3: Implement explicit float32 sub-stores**
+- [x] **Step 3: Implement explicit float32 sub-stores**
 
 The rocuronium relief expression must be written as separate stores:
 
@@ -176,7 +176,7 @@ const effectiveRocBlock = Clamp01(afterNeostigmine);
 
 Ramp stores use `MoveTowards()` with float32-rounded `maxDelta`; skip the entire update when the relevant exposure gate is false.
 
-- [ ] **Step 4: Run sugammadex/neostigmine evidence**
+- [x] **Step 4: Run sugammadex/neostigmine evidence**
 
 ```bash
 npx vitest run test/evidence.test.js -t "sugammadex|neostigmine" --reporter=verbose
@@ -192,19 +192,19 @@ Expected: both reversal cases pass, including sub-2 mg/kg zero effect and count-
 - Modify: `sim/scenario/scenarioDebrief.js`
 - Test: `test/evidence.test.js`
 
-- [ ] **Step 1: Preserve the existing TOF transfer function**
+- [x] **Step 1: Preserve the existing TOF transfer function**
 
 Compute one instantaneous `effectiveNmbBlockade` from effective rocuronium and raw succinylcholine. Keep the old count formula and old ratio `Lerp` rates bit-identical. Implement `respiratoryMuscleCapability` only as `Clamp01(trainOfFourRatio / 0.9)`.
 
-- [ ] **Step 2: Add independently queryable respiratory contributions**
+- [x] **Step 2: Add independently queryable respiratory contributions**
 
 Add `setForcedApnea(active)`, `forcedApneaContribution`, `drugDepressionContribution`, `complicationDriveContribution`, `centralDrive`, spontaneous RR/TV/MV/effort, and dominant-source attribution. The central-drive product must use explicit float32 stores.
 
-- [ ] **Step 3: Add additive attribution output**
+- [x] **Step 3: Add additive attribution output**
 
 Capture contribution values in action/debrief data without removing or renaming any frozen result key. The lift-event timeseries test must see `forced_apnea` before lifting and `nmb` afterward.
 
-- [ ] **Step 4: Run source and coupling evidence**
+- [x] **Step 4: Run source and coupling evidence**
 
 ```bash
 npx vitest run test/evidence.test.js -t "apnea attribution|sole ratio integrator" --reporter=verbose
@@ -218,15 +218,15 @@ Expected: both cases pass and capability equals `Math.fround(Clamp01(ratio / 0.9
 - Modify: `sim/ventilatorSystem.js`
 - Test: `test/evidence.test.js`
 
-- [ ] **Step 1: Retain spontaneous effort during mandatory modes**
+- [x] **Step 1: Retain spontaneous effort during mandatory modes**
 
 Do not overwrite spontaneous RR/TV/effort when VCV/PCV runs. Compute mandatory ventilation separately, gate circuit connectivity through airway-device state, use triggered support for PSV, and compose effective gas-exchange ventilation with the approved conservative `max()` rule.
 
-- [ ] **Step 2: Expose capnogram presence**
+- [x] **Step 2: Expose capnogram presence**
 
 Derive `capnogramPresent` from exhaled flow/effective ventilation. Unsupported apnea sets it false while PaCO2 continues to rise and oxygen stores drain; supported forced apnea retains it true.
 
-- [ ] **Step 3: Run axis and emergence evidence**
+- [x] **Step 3: Run axis and emergence evidence**
 
 ```bash
 npx vitest run test/evidence.test.js -t "axes remain orthogonal|effort remains visible" --reporter=verbose
@@ -239,7 +239,7 @@ Expected: supported forced apnea has stable SpO2 and normal-range EtCO2, unsuppo
 **Files:**
 - Verify: `sim/drugSystem.js`, `sim/patientPhysiology.js`, `sim/ventilatorSystem.js`, `sim/scenario/*.js`, `ui/simRunner.js`, `test/evidence.test.js`
 
-- [ ] **Step 1: Run the mid-ramp determinism case**
+- [x] **Step 1: Run the mid-ramp determinism case**
 
 ```bash
 npx vitest run test/evidence.test.js -t "mid-ramp" --reporter=verbose
@@ -247,7 +247,7 @@ npx vitest run test/evidence.test.js -t "mid-ramp" --reporter=verbose
 
 Expected: two seeded fingerprints match exactly and include active sugammadex and neostigmine ramps.
 
-- [ ] **Step 2: Run the full suite until green**
+- [x] **Step 2: Run the full suite until green**
 
 ```bash
 npm test -- --reporter=verbose
@@ -255,7 +255,7 @@ npm test -- --reporter=verbose
 
 Expected: frozen parity remains 12/12 and evidence totals 17/17.
 
-- [ ] **Step 3: Prove fixtures and direct writes are untouched**
+- [x] **Step 3: Prove fixtures and direct writes are untouched**
 
 ```bash
 git diff feature/js-sim-engine...HEAD -- test/fixtures/parity
@@ -264,7 +264,7 @@ rg -n "isIntubated\s*=|airwayDeviceState\s*=" sim ui test --glob '*.js'
 
 Expected: fixture diff is empty; assignment grep shows only private internal state writes.
 
-- [ ] **Step 4: Verify JavaScript syntax and imports**
+- [x] **Step 4: Verify JavaScript syntax and imports**
 
 ```bash
 for f in sim/*.js sim/scenario/*.js ui/simRunner.js test/evidence.test.js; do node --check "$f"; done
@@ -273,7 +273,7 @@ node -e "import('./sim/index.js').then(() => console.log('import smoke: PASS'))"
 
 Expected: all checks exit zero and import smoke prints `PASS`.
 
-- [ ] **Step 5: Commit the implementation**
+- [x] **Step 5: Commit the implementation**
 
 ```bash
 git add sim ui/simRunner.js test/evidence.test.js docs/reversal-airway-model.md

@@ -23,6 +23,7 @@ export class VentilatorSystem {
     this.measuredTidalVolume = 0; this.measuredRR = 0; this.measuredMinuteVent = 0;
     this.measuredPeakPressure = 0; this.measuredPlateauPressure = 0; this.measuredPeep = 0;
     this.measuredFiO2 = 0; this.inspiredAgentConcentration = 0; this.expiredAgentConcentration = 0;
+    this.mechanicalMinuteVentilation = 0; this.effectiveMinuteVentilation = 0;
 
     this.aplValvePressure = 30; this.aplValveOpen = true; this.absorbentRemaining = 1;
 
@@ -40,21 +41,27 @@ export class VentilatorSystem {
 
   tick(dt) {
     if (this.patient == null || dt <= 0) return;
-    this.updateFiO2();
-    this.updateVaporizer(dt);
-    switch (this.mode) {
-      case VentMode.Manual: this.updateManualMode(); break;
-      case VentMode.VCV: this.updateVCVMode(dt); break;
-      case VentMode.PCV: this.updatePCVMode(dt); break;
-      case VentMode.PSV: this.updatePSVMode(); break;
-      default: break;
+    const connected = this.patient.airwayDeviceState !== 'extubated';
+    this.updateFiO2(connected);
+    this.updateVaporizer(dt, connected);
+    if (!connected && this.mode !== VentMode.Manual) {
+      this.updateManualMode();
+    } else {
+      switch (this.mode) {
+        case VentMode.Manual: this.updateManualMode(); break;
+        case VentMode.VCV: this.updateVCVMode(dt); break;
+        case VentMode.PCV: this.updatePCVMode(dt); break;
+        case VentMode.PSV: this.updatePSVMode(); break;
+        default: break;
+      }
     }
     this.updatePatientInterface();
     this.updateCO2(dt);
     this.updateAbsorbent(dt);
   }
 
-  updateFiO2() {
+  updateFiO2(connected = true) {
+    if (!connected) { this.measuredFiO2 = f(0.21); return; }
     const totalFlow = f(this.o2FlowLPerMin + this.airFlowLPerMin + this.n2oFlowLPerMin);
     if (totalFlow <= 0) { this.measuredFiO2 = f(0.21); return; }
     const o2FromAir = f(this.airFlowLPerMin * f(0.21));
@@ -63,8 +70,8 @@ export class VentilatorSystem {
     if (this.mode !== VentMode.Manual) this.measuredFiO2 = this.setFiO2;
   }
 
-  updateVaporizer(dt) {
-    if (this.vaporizerDial <= 0) {
+  updateVaporizer(dt, connected = true) {
+    if (!connected || this.vaporizerDial <= 0) {
       this.inspiredAgentConcentration = 0;
       this.expiredAgentConcentration = 0;
       this.patient.macMultiple = 0;
@@ -111,6 +118,7 @@ export class VentilatorSystem {
     this.measuredRR = this.setRespiratoryRate;
     this.measuredPeep = this.setPeep;
     this.measuredMinuteVent = f(this.measuredTidalVolume * this.measuredRR / 1000);
+    this.mechanicalMinuteVentilation = this.measuredMinuteVent;
   }
 
   updatePCVMode(dt) {
@@ -129,6 +137,7 @@ export class VentilatorSystem {
     this.measuredRR = this.setRespiratoryRate;
     this.measuredPeep = this.setPeep;
     this.measuredMinuteVent = f(this.measuredTidalVolume * this.measuredRR / 1000);
+    this.mechanicalMinuteVentilation = this.measuredMinuteVent;
   }
 
   updatePSVMode() {
@@ -145,16 +154,21 @@ export class VentilatorSystem {
     }
     this.measuredPeep = this.setPeep;
     this.measuredMinuteVent = f(this.measuredTidalVolume * this.measuredRR / 1000);
+    this.mechanicalMinuteVentilation = this.measuredMinuteVent;
   }
 
   updateManualMode() {
     this.patient.isMechanicallyVentilated = false;
+    this.mechanicalMinuteVentilation = 0;
     this.measuredPeakPressure = 0;
     this.measuredPlateauPressure = 0;
     this.measuredPeep = 0;
     if (this.patient.isBreathingSpontaneously) {
       this.measuredRR = this.patient.respiratoryRate;
-      this.measuredTidalVolume = f(7 * this.patient.weightKg + this._rnd.jitter(20));
+      const baseTidalVolume = f(7 * this.patient.weightKg + this._rnd.jitter(20));
+      this.measuredTidalVolume = this.patient.respiratoryMuscleCapability < 1
+        ? f(baseTidalVolume * this.patient.respiratoryMuscleCapability)
+        : baseTidalVolume;
       this.measuredMinuteVent = f(this.measuredTidalVolume * this.measuredRR / 1000);
     } else {
       this.measuredTidalVolume = 0;
@@ -164,20 +178,28 @@ export class VentilatorSystem {
   }
 
   updatePatientInterface() {
+    const connected = this.patient.airwayDeviceState !== 'extubated';
+    const controlled = connected && this.mode !== VentMode.Manual;
     this.patient.fiO2 = this.measuredFiO2;
     this.patient.tidalVolume = this.measuredTidalVolume;
-    this.patient.minuteVentilation = this.measuredMinuteVent;
+    let effectiveMinuteVent = this.measuredMinuteVent;
+    if (controlled && (this.patient.forcedApneaActive || this.patient.effectiveNmbBlockade > f(0.01))) {
+      effectiveMinuteVent = Max(this.measuredMinuteVent, this.patient.spontaneousMinuteVentilation);
+    }
+    this.effectiveMinuteVentilation = effectiveMinuteVent;
+    this.patient.minuteVentilation = effectiveMinuteVent;
     this.patient.peakAirwayPressure = this.measuredPeakPressure;
     this.patient.plateauPressure = this.measuredPlateauPressure;
     this.patient.peep = this.measuredPeep;
-    if (this.mode !== VentMode.Manual) this.patient.respiratoryRate = this.measuredRR;
+    if (controlled) this.patient.respiratoryRate = this.measuredRR;
   }
 
   updateCO2(dt) {
     const deadspace = Max(60, f(2.2) * this.patient.weightKg);
-    const rr = (this.mode !== VentMode.Manual) ? this.measuredRR
+    const controlled = this.patient.airwayDeviceState !== 'extubated' && this.mode !== VentMode.Manual;
+    const rr = controlled ? this.measuredRR
       : (this.patient.isBreathingSpontaneously ? this.patient.respiratoryRate : 0);
-    const tv = (this.mode !== VentMode.Manual) ? this.measuredTidalVolume
+    const tv = controlled ? this.measuredTidalVolume
       : (this.patient.isBreathingSpontaneously ? 400 : 0);
     const vaLMin = f(Max(0, (tv - deadspace) * rr) / 1000 * this.patient.airwayPatency);
 

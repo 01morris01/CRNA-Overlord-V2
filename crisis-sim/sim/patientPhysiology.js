@@ -14,7 +14,14 @@ export const Status = {
   DeepAnesthesia: 4, Critical: 5,
 };
 
+export const AirwayDevice = Object.freeze({
+  Mask: 'mask', Intubated: 'intubated', Extubated: 'extubated',
+});
+
 export class PatientPhysiology {
+  #airwayDeviceState = AirwayDevice.Mask;
+  #forcedApnea = false;
+
   constructor() {
     this.weightKg = 70; this.heightCm = 170; this.ageYears = 45; this.sex = 'Male';
 
@@ -29,13 +36,16 @@ export class PatientPhysiology {
     this.bisIndex = 97; this.macMultiple = 0; this.endTidalAgent = 0; this.currentAgent = 'None';
 
     this.propofolCe = 0; this.fentanylCe = 0; this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
+    this.sugammadexRocRelief = 0; this.neostigmineRocRelief = 0;
+    this.neostigmineCe = 0;
     this.epinephrineCe = 0; this.phenylephrineCe = 0; this.ephedrineCe = 0;
     this.naloxoneCe = 0; this.dantroleneCe = 0; this.atropineCe = 0; this.albuterolCe = 0;
 
     this.respiratoryDriveFactor = 1; this.bloodVolumeFraction = 1;
     this.trainOfFourRatio = 1.0; this.trainOfFourCount = 4;
+    this.effectiveNmbBlockade = 0;
 
-    this.isIntubated = false; this.isBreathingSpontaneously = true;
+    this.isBreathingSpontaneously = true;
     this.isMechanicallyVentilated = false; this.status = Status.Awake;
 
     this.frcLiters = 2.5; this.alveolarO2Fraction = f(0.21); this.alveolarO2StoresMl = 0;
@@ -72,11 +82,15 @@ export class PatientPhysiology {
     this.status = Status.Awake;
     this.isBreathingSpontaneously = true;
     this.isMechanicallyVentilated = false;
-    this.isIntubated = false;
+    this.#airwayDeviceState = AirwayDevice.Mask;
+    this.#forcedApnea = false;
 
     this._hrModifier = 0; this._bpModifier = 1; this._rrModifier = 1;
 
     this.propofolCe = 0; this.fentanylCe = 0; this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
+    this.sugammadexRocRelief = 0; this.neostigmineRocRelief = 0;
+    this.neostigmineCe = 0;
+    this.effectiveNmbBlockade = 0;
 
     this.airwayPatency = 1; this.airwayResistanceFactor = 1; this.shuntFraction = 0;
     this.svrFactor = 1; this.heatLoadC = 0; this.hrComplicationOffset = 0;
@@ -99,6 +113,90 @@ export class PatientPhysiology {
     const obesityFactor = Clamp(1 - (bmi - 25) * f(0.022), 0.45, 1);
     this.frcLiters = Max(0.12, predicted * obesityFactor);
     this.vo2MlMin = this.deriveVo2();
+  }
+
+  get airwayDeviceState() { return this.#airwayDeviceState; }
+
+  get isIntubated() { return this.#airwayDeviceState === AirwayDevice.Intubated; }
+
+  get respiratoryMuscleCapability() {
+    return Clamp01(this.trainOfFourRatio / f(0.9));
+  }
+
+  setForcedApnea(active) { this.#forcedApnea = active === true; }
+
+  get forcedApneaActive() { return this.#forcedApnea; }
+
+  get forcedApneaContribution() { return this.#forcedApnea ? 0 : 1; }
+
+  get drugDepressionContribution() { return Clamp01(this._rrModifier); }
+
+  get complicationDriveContribution() { return Clamp01(this.respiratoryDriveFactor); }
+
+  get centralDrive() {
+    const forcedDrug = f(this.forcedApneaContribution * this.drugDepressionContribution);
+    return Clamp01(f(forcedDrug * this.complicationDriveContribution));
+  }
+
+  get effectiveSpontaneousVentilationFraction() {
+    return Clamp01(f(this.centralDrive * this.respiratoryMuscleCapability));
+  }
+
+  get spontaneousRespiratoryRate() { return f(this.baselineRR * this.centralDrive); }
+
+  get spontaneousTidalVolume() {
+    return f(f(7 * this.weightKg) * this.respiratoryMuscleCapability);
+  }
+
+  get spontaneousMinuteVentilation() {
+    return f(this.spontaneousRespiratoryRate * this.spontaneousTidalVolume / 1000);
+  }
+
+  get spontaneousEffort() { return this.effectiveSpontaneousVentilationFraction; }
+
+  get capnogramPresent() { return this.minuteVentilation > f(0.3); }
+
+  get dominantInadequateVentilationSource() {
+    if (this.forcedApneaContribution === 0) return 'forced_apnea';
+    const muscle = this.respiratoryMuscleCapability;
+    const drug = this.drugDepressionContribution;
+    const complication = this.complicationDriveContribution;
+    if (muscle < 1 && muscle <= drug && muscle <= complication) return 'nmb';
+    if (drug < 1 && drug <= complication) return 'drug_depression';
+    if (complication < 1) return 'complication_drive';
+    return 'none';
+  }
+
+  get respiratoryAttribution() {
+    return {
+      dominantSource: this.dominantInadequateVentilationSource,
+      forcedApneaActive: this.forcedApneaActive,
+      forcedApneaContribution: this.forcedApneaContribution,
+      drugDepressionContribution: this.drugDepressionContribution,
+      complicationDriveContribution: this.complicationDriveContribution,
+      effectiveNmbBlockade: this.effectiveNmbBlockade,
+      respiratoryMuscleCapability: this.respiratoryMuscleCapability,
+      centralDrive: this.centralDrive,
+    };
+  }
+
+  transitionAirwayDevice(next) {
+    const previous = this.#airwayDeviceState;
+    if (!Object.values(AirwayDevice).includes(next)) {
+      return { ok: false, changed: false, previous, current: previous, reason: `unknown airway device: ${next}` };
+    }
+    if (next === previous) {
+      return { ok: true, changed: false, previous, current: previous, reason: '' };
+    }
+    const legal = (previous === AirwayDevice.Mask && next === AirwayDevice.Intubated)
+      || (previous === AirwayDevice.Intubated && next === AirwayDevice.Extubated)
+      || (previous === AirwayDevice.Extubated
+        && (next === AirwayDevice.Mask || next === AirwayDevice.Intubated));
+    if (!legal) {
+      return { ok: false, changed: false, previous, current: previous, reason: `illegal ${previous} -> ${next}` };
+    }
+    this.#airwayDeviceState = next;
+    return { ok: true, changed: true, previous, current: next, reason: '' };
   }
 
   deriveVo2() {
@@ -138,7 +236,12 @@ export class PatientPhysiology {
       this._hrModifier = f(this._hrModifier - e * 20);
       this._bpModifier = f(this._bpModifier - e * f(0.15));
       // stronger, nonlinear opioid ventilatory depression on its own curve (HR/BP unchanged)
-      const opioidRespEffect = Clamp01(this.fentanylCe / f(1.2));
+      let opioidRespEffect = Clamp01(this.fentanylCe / f(1.2));
+      if (this.naloxoneCe > 0) {
+        const naloxoneBlock = Clamp01(this.naloxoneCe / f(0.8));
+        const unblocked = f(1 - naloxoneBlock);
+        opioidRespEffect = f(opioidRespEffect * unblocked);
+      }
       this._rrModifier = f(this._rrModifier - opioidRespEffect * f(1.1));
     }
     if (this.midazolamCe > 0) {
@@ -151,6 +254,9 @@ export class PatientPhysiology {
       this._hrModifier = f(this._hrModifier - this.macMultiple * 8);
       this._bpModifier = f(this._bpModifier - this.macMultiple * f(0.2));
       this._rrModifier = f(this._rrModifier - this.macMultiple * f(0.4));
+    }
+    if (this.neostigmineCe > 0) {
+      this._hrModifier = f(this._hrModifier - Clamp01(this.neostigmineCe) * 20);
     }
     this._bpModifier = Max(this._bpModifier, 0.3);
     this._rrModifier = Max(this._rrModifier, 0.1);
@@ -180,10 +286,16 @@ export class PatientPhysiology {
   }
 
   updateRespiration(dt) {
-    if (this.isMechanicallyVentilated) return;
-    const targetRR = Clamp(this.baselineRR * this._rrModifier * this.respiratoryDriveFactor, 0, 40);
+    if (this.isMechanicallyVentilated) {
+      this.isBreathingSpontaneously = this.spontaneousEffort > f(0.01);
+      return;
+    }
+    const targetRR = this.#forcedApnea
+      ? 0
+      : Clamp(this.baselineRR * this._rrModifier * this.respiratoryDriveFactor, 0, 40);
     this.respiratoryRate = Lerp(this.respiratoryRate, targetRR, dt * 0.5);
-    this.isBreathingSpontaneously = this.respiratoryRate >= 2;
+    this.isBreathingSpontaneously = !this.#forcedApnea
+      && this.respiratoryRate >= 2 && this.respiratoryMuscleCapability > f(0.01);
   }
 
   updateOxygenReservoir(dt) {
@@ -201,7 +313,7 @@ export class PatientPhysiology {
   }
 
   alveolarVentilationLMin() {
-    const rr = this.respiratoryRate;
+    const rr = (!this.isMechanicallyVentilated && this.#forcedApnea) ? 0 : this.respiratoryRate;
     const tv = this.tidalVolume > 0 ? this.tidalVolume : 450;
     const deadspace = Max(60, f(2.2) * this.weightKg);
     const va = f(Max(0, (tv - deadspace) * rr) / 1000);
@@ -286,9 +398,14 @@ export class PatientPhysiology {
   }
 
   updateNeuromuscular(dt) {
-    const roc = Clamp01(this.rocuroniumCe / 3);
+    const rawRoc = Clamp01(this.rocuroniumCe / 3);
+    const unboundFraction = f(1 - this.sugammadexRocRelief);
+    const afterSugammadex = f(rawRoc * unboundFraction);
+    const afterNeostigmine = f(afterSugammadex - this.neostigmineRocRelief);
+    const roc = Clamp01(afterNeostigmine);
     const sux = Clamp01(this.succinylcholineCe / 1.0);
     const blockade = Max(roc, sux);
+    this.effectiveNmbBlockade = blockade;
     if (blockade > f(0.01)) {
       this.trainOfFourRatio = Lerp(this.trainOfFourRatio, 1 - blockade, dt * 0.3);
       this.trainOfFourCount = RoundToInt(Lerp(4, 0, blockade));

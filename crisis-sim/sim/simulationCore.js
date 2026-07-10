@@ -44,7 +44,11 @@ export class SimulationCore {
     this._initialized = true;
   }
 
-  resetSim(withSeed) { this.initialize(withSeed); }
+  resetSim(withSeed) {
+    if (this.drugSystem && this.drugSystem.resetReversalState) this.drugSystem.resetReversalState();
+    if (this.patient) this.patient.resetToBaseline();
+    this.initialize(withSeed);
+  }
 
   stepOnce(dt) {
     if (this.drugSystem) this.drugSystem.tick(dt);

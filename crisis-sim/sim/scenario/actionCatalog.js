@@ -40,6 +40,8 @@ const RAW = {
   GiveAlbuterol: 'albuterol_administered', Albuterol: 'albuterol_administered',
   GiveEtomidate: 'etomidate_administered', Etomidate: 'etomidate_administered',
   GiveKetamine: 'ketamine_administered', Ketamine: 'ketamine_administered',
+  GiveSugammadex: 'sugammadex_administered', Sugammadex: 'sugammadex_administered',
+  GiveNeostigmine: 'neostigmine_administered', Neostigmine: 'neostigmine_administered',
 };
 
 // case-insensitive lookup map

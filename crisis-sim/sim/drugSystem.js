@@ -4,7 +4,7 @@
    returns / Mathf & float-arg boundaries; non-dyadic float literals
    frounded). No RNG. Propofol = full Eleveld 2018.
    ═══════════════════════════════════════════════════════════════════ */
-import { f, Max, Pow, Exp } from './float32.js';
+import { f, Clamp01, Max, Min, MoveTowards, Pow, Exp } from './float32.js';
 
 export class DrugSystem {
   constructor() {
@@ -27,6 +27,11 @@ export class DrugSystem {
     this._ephedC1 = 0; this._ephedCe = 0;
     this._naloxC1 = 0; this._naloxCe = 0; this._dantC1 = 0; this._dantCe = 0;
     this._atropC1 = 0; this._atropCe = 0; this._albC1 = 0; this._albCe = 0;
+    this._sugammadexRocRelief = 0; this._sugammadexReliefTarget = 0;
+    this._sugammadexReliefRate = 0; this._sugammadexAdministered = false;
+    this._neoC1 = 0; this._neoCe = 0;
+    this._neostigmineRocRelief = 0; this._neostigmineReliefTarget = 0;
+    this._neostigmineReliefRate = 0; this._neostigmineAdministered = false;
 
     this.drivenExternally = false;
     this.rng = null;
@@ -50,6 +55,8 @@ export class DrugSystem {
       case 'Naloxone': this._naloxC1 = f(this._naloxC1 + totalDoseMg / f(0.04)); break;
       case 'Dantrolene': this._dantC1 = f(this._dantC1 + totalDoseMg / (2.5 * this.patient.weightKg)); break;
       case 'Albuterol': this._albC1 = f(this._albC1 + totalDoseMg); break;
+      case 'Sugammadex': this.administerSugammadex(totalDoseMg); break;
+      case 'Neostigmine': this.administerNeostigmine(totalDoseMg); break;
       default: break;
     }
   }
@@ -78,6 +85,7 @@ export class DrugSystem {
     this.updateRocuroniumPK(dt);
     this.updateMidazolamPK(dt);
     this.updateSuccinylcholinePK(dt);
+    this.updateReversalAgents(dt);
     this.updateTreatmentAgents(dt);
 
     this.patient.propofolCe = this._ppfCe;
@@ -85,6 +93,67 @@ export class DrugSystem {
     this.patient.rocuroniumCe = this._rocuroniumCe;
     this.patient.midazolamCe = this._midazolamCe;
     this.patient.succinylcholineCe = this._suxCe;
+    this.patient.sugammadexRocRelief = this._sugammadexRocRelief;
+    this.patient.neostigmineRocRelief = this._neostigmineRocRelief;
+    this.patient.neostigmineCe = this._neoCe;
+  }
+
+  get sugammadexRocRelief() { return this._sugammadexRocRelief; }
+  get neostigmineRocRelief() { return this._neostigmineRocRelief; }
+
+  resetReversalState() {
+    this._sugammadexRocRelief = 0; this._sugammadexReliefTarget = 0;
+    this._sugammadexReliefRate = 0; this._sugammadexAdministered = false;
+    this._neoC1 = 0; this._neoCe = 0;
+    this._neostigmineRocRelief = 0; this._neostigmineReliefTarget = 0;
+    this._neostigmineReliefRate = 0; this._neostigmineAdministered = false;
+  }
+
+  administerSugammadex(totalDoseMg) {
+    if (!(Number.isFinite(totalDoseMg) && totalDoseMg > 0) || this.patient == null) return;
+    this._sugammadexAdministered = true;
+    const dosePerKg = f(totalDoseMg / Max(1, this.patient.weightKg));
+    let duration = 0;
+    if (dosePerKg >= 16) duration = 30;
+    else if (dosePerKg >= 4) duration = 90;
+    else if (dosePerKg >= 2 && this.patient.trainOfFourCount >= 2) duration = 120;
+    if (duration <= 0) return;
+    this._sugammadexReliefTarget = 1;
+    this._sugammadexReliefRate = f(1 / duration);
+  }
+
+  administerNeostigmine(totalDoseMg) {
+    if (!(Number.isFinite(totalDoseMg) && totalDoseMg > 0) || this.patient == null) return;
+    this._neostigmineAdministered = true;
+    const maxByWeight = f(f(0.07) * this.patient.weightKg);
+    const effectiveDose = Min(totalDoseMg, Min(maxByWeight, 5));
+    const effectiveDosePerKg = f(effectiveDose / Max(1, this.patient.weightKg));
+    const doseFraction = Clamp01(effectiveDosePerKg / f(0.07));
+    this._neoC1 = f(this._neoC1 + doseFraction);
+
+    let ceiling = 0;
+    if (this.patient.trainOfFourCount >= 2) ceiling = f(0.45);
+    else if (this.patient.trainOfFourCount === 1) ceiling = f(0.15);
+    const rawRocBlock = Clamp01(this.patient.rocuroniumCe / 3);
+    const scaledCeiling = f(ceiling * doseFraction);
+    const target = Min(scaledCeiling, rawRocBlock);
+    this._neostigmineReliefTarget = Max(this._neostigmineReliefTarget, target);
+    this._neostigmineReliefRate = f(this._neostigmineReliefTarget / 420);
+  }
+
+  updateReversalAgents(dt) {
+    if (this._sugammadexAdministered) {
+      const maxDelta = f(this._sugammadexReliefRate * dt);
+      this._sugammadexRocRelief = MoveTowards(
+        this._sugammadexRocRelief, this._sugammadexReliefTarget, maxDelta,
+      );
+    }
+    if (this._neostigmineAdministered) {
+      const maxDelta = f(this._neostigmineReliefRate * dt);
+      this._neostigmineRocRelief = MoveTowards(
+        this._neostigmineRocRelief, this._neostigmineReliefTarget, maxDelta,
+      );
+    }
   }
 
   static _eff(c1, ce, k10, ke0, dt) {
@@ -101,6 +170,7 @@ export class DrugSystem {
     [this._dantC1, this._dantCe] = DrugSystem._eff(this._dantC1, this._dantCe, f(f(0.008) / 60), f(f(0.30) / 60), dt);
     [this._atropC1, this._atropCe] = DrugSystem._eff(this._atropC1, this._atropCe, f(f(0.03) / 60), f(f(0.60) / 60), dt);
     [this._albC1, this._albCe] = DrugSystem._eff(this._albC1, this._albCe, f(f(0.05) / 60), f(f(0.40) / 60), dt);
+    [this._neoC1, this._neoCe] = DrugSystem._eff(this._neoC1, this._neoCe, f(f(0.03) / 60), f(f(0.60) / 60), dt);
 
     this.patient.epinephrineCe = this._epiCe;
     this.patient.phenylephrineCe = this._phenylCe;
@@ -109,6 +179,7 @@ export class DrugSystem {
     this.patient.dantroleneCe = this._dantCe;
     this.patient.atropineCe = this._atropCe;
     this.patient.albuterolCe = this._albCe;
+    this.patient.neostigmineCe = this._neoCe;
   }
 
   processInfusions(dt) {

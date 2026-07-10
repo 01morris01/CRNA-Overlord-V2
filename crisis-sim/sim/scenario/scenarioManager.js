@@ -9,6 +9,7 @@ import {
   f, add, sub, mul, div, Clamp, Clamp01, Max, Min, Lerp, MoveTowards,
 } from '../float32.js';
 import { VentMode } from '../ventilatorSystem.js';
+import { AirwayDevice } from '../patientPhysiology.js';
 import { ScenarioRunState, ActionClass } from './scenarioState.js';
 import { ScenarioScoring } from './scenarioScoring.js';
 import { ActionLogger } from './actionLogger.js';
@@ -152,6 +153,7 @@ export class ScenarioManager {
     }
 
     if (this.patient != null) this.patient.resetToBaseline();
+    if (this.drugSystem != null && this.drugSystem.resetReversalState) this.drugSystem.resetReversalState();
     this.setState(this.activeScenario != null ? ScenarioState.Ready : ScenarioState.NotLoaded);
   }
 
@@ -224,7 +226,10 @@ export class ScenarioManager {
         break;
       case 'Intubate':
       case 'PlaceETT':
-        if (this.patient != null) { this.patient.isIntubated = true; this.patient.airwayPatency = 1; }
+        if (this.patient != null) {
+          this.patient.transitionAirwayDevice(AirwayDevice.Intubated);
+          this.patient.airwayPatency = 1;
+        }
         if (this.ventilator != null) this.ventilator.setMode(VentMode.VCV);
         break;
       case 'StopVolatile':
@@ -810,6 +815,7 @@ export class ScenarioManager {
       this.run.completedAtSec = this.elapsedTime;
       this.lastResult = buildDebrief(this.activeScenario, this.run, this.scoring, this.actionLog,
         this.currentScore, this.maxPossibleScore, this.elapsedTime);
+      if (this.patient != null) this.lastResult.respiratoryAttribution = this.patient.respiratoryAttribution;
       if (this.onDebriefReady) this.onDebriefReady(this.lastResult);
     }
   }
@@ -832,7 +838,7 @@ export class ScenarioManager {
       }
     }
     if (this.patient != null && (su.airway || '').toLowerCase() === 'ett') {
-      this.patient.isIntubated = true;
+      this.patient.transitionAirwayDevice(AirwayDevice.Intubated);
       this.patient.airwayPatency = 1;
       if (this.run) this.run.markTrigger('intubation_successful', 0);
     }

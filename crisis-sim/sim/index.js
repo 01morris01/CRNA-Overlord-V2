@@ -1,7 +1,7 @@
 /* Barrel + rig/driver helpers for the ported anesthesia sim engine. */
 export * from './float32.js';
 export { SimRandom } from './simRandom.js';
-export { PatientPhysiology, Status } from './patientPhysiology.js';
+export { PatientPhysiology, Status, AirwayDevice } from './patientPhysiology.js';
 export { DrugSystem } from './drugSystem.js';
 export { VentilatorSystem, VentMode } from './ventilatorSystem.js';
 export { SimulationCore } from './simulationCore.js';
