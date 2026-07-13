@@ -1,0 +1,108 @@
+import { describe, expect, it } from 'vitest';
+import {
+  computeDrugDose,
+  deriveAlarms,
+  formatMonitorSnapshot,
+  parsePatientConfig,
+  validateSimulationResult,
+} from '../../ui/liveSimModel.js';
+
+describe('live simulation dose model', () => {
+  it('converts clinical induction units to total milligrams', () => {
+    expect(computeDrugDose('propofol_2_mgkg', 80)).toMatchObject({
+      drugName: 'Propofol', totalMg: 160,
+    });
+    expect(computeDrugDose('fentanyl_2_mcgkg', 80)).toMatchObject({
+      drugName: 'Fentanyl', totalMg: 0.16,
+    });
+    expect(computeDrugDose('phenylephrine_100_mcg', 80)).toMatchObject({
+      drugName: 'Phenylephrine', totalMg: 0.1,
+    });
+  });
+
+  it('computes every sugammadex tier and caps neostigmine at 5 mg', () => {
+    expect(computeDrugDose('sugammadex_2_mgkg', 80).totalMg).toBe(160);
+    expect(computeDrugDose('sugammadex_4_mgkg', 80).totalMg).toBe(320);
+    expect(computeDrugDose('sugammadex_16_mgkg', 80).totalMg).toBe(1280);
+    expect(computeDrugDose('neostigmine_007_mgkg', 80)).toMatchObject({
+      drugName: 'Neostigmine', totalMg: 5,
+    });
+  });
+
+  it('rejects unknown definitions and non-physiologic weights', () => {
+    expect(() => computeDrugDose('unknown', 80)).toThrow(/Unknown drug action/);
+    expect(() => computeDrugDose('propofol_2_mgkg', 0)).toThrow(/weight/);
+  });
+});
+
+describe('live simulation patient setup', () => {
+  it('parses every supported runner config field', () => {
+    const result = parsePatientConfig({
+      weightKg: '80', heightCm: '178', ageYears: '52', sex: 'Female',
+      baselineHR: '68', baselineSystolic: '118', baselineDiastolic: '72',
+      baselineSpO2: '98', baselineRR: '13', baselineTemp: '36.8', baselineEtCO2: '39',
+    });
+
+    expect(result).toEqual({
+      weightKg: 80, heightCm: 178, ageYears: 52, sex: 'Female',
+      baselineHR: 68, baselineSystolic: 118, baselineDiastolic: 72,
+      baselineSpO2: 98, baselineRR: 13, baselineTemp: 36.8, baselineEtCO2: 39,
+    });
+  });
+
+  it('rejects values outside the control surface ranges', () => {
+    expect(() => parsePatientConfig({ weightKg: '5' })).toThrow(/weightKg/);
+    expect(() => parsePatientConfig({ weightKg: '80', sex: 'Other' })).toThrow(/sex/);
+  });
+});
+
+describe('display model', () => {
+  it('formats engine values without inventing missing normals', () => {
+    const model = formatMonitorSnapshot({
+      hr: 72.4, sbp: 121.2, dbp: 77.8, map: 92.3, spo2: 98.7,
+      rr: 14, etco2: 38.2, temp: 36.65, tof: 4, tofRatio: 0.94,
+      spontaneousRR: 11.6, spontaneousTV: 421.4, spontaneousMV: 4.89,
+      spontaneousEffort: 0.78, ppeak: 19.2, mv: 6.4, tv: 500.1,
+      fio2: 0.5, ventMode: 1, vaporizer: 2.1, vaporizerAgent: 'Sevoflurane',
+    });
+
+    expect(model).toMatchObject({
+      hr: '72', bp: '121/78', map: '92', spo2: '99', rr: '14',
+      etco2: '38', temp: '36.7', tof: '4', tofRatio: '0.94',
+      spontaneousRR: '12', spontaneousTV: '421', spontaneousMV: '4.9',
+      spontaneousEffort: '0.78', ventMode: 'VCV',
+    });
+    expect(formatMonitorSnapshot({}).hr).toBe('—');
+  });
+
+  it('derives threshold alarms only from received state', () => {
+    expect(deriveAlarms({ hr: 72, map: 75, spo2: 99, rr: 14, etco2: 38, temp: 36.6, ppeak: 20 })).toEqual([]);
+
+    const ids = deriveAlarms({
+      hr: 135, map: 48, spo2: 84, rr: 3, etco2: 62, temp: 39.2, ppeak: 41,
+    }).map((alarm) => alarm.id);
+
+    expect(ids).toEqual([
+      'hr-high', 'map-low', 'spo2-low', 'rr-low', 'etco2-high', 'temp-high', 'ppeak-high',
+    ]);
+  });
+});
+
+describe('SimulationResult validation', () => {
+  it('accepts the existing live SimulationResult shape and reports missing fields', () => {
+    const valid = {
+      scenarioId: 'live_sim', title: 'Live Anesthesia Simulation', courseUnit: 'Live Simulation',
+      durationSec: 1, rawPoints: 0, maxPoints: 0, score: 0,
+      timeToRecognitionSec: -1, timeToTreatmentSec: -1, teachingFeedback: '',
+      teachingPoints: [], reviewTopics: [], reviewTags: [],
+      criticalActionsCompleted: [], criticalActionsMissed: [], dangerousActions: [],
+      respiratoryAttribution: {},
+    };
+
+    expect(validateSimulationResult(valid)).toEqual({ ok: true, missing: [], invalid: [] });
+    expect(validateSimulationResult({ scenarioId: 'live_sim' })).toMatchObject({
+      ok: false,
+      missing: expect.arrayContaining(['title', 'durationSec', 'respiratoryAttribution']),
+    });
+  });
+});

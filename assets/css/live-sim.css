@@ -1,0 +1,256 @@
+.live-sim-menu-launch {
+  min-height: 44px;
+}
+
+#live-sim-course-launch {
+  align-self: center;
+  width: min(100%, 36rem);
+  margin: 0 0 .85rem;
+  border-color: rgba(0, 255, 163, .5);
+  color: var(--green);
+}
+
+#hospital-live-sim-launch {
+  border-color: rgba(0, 255, 163, .45);
+  color: var(--green);
+}
+
+.live-sim-view {
+  position: fixed;
+  inset: 0;
+  z-index: 200000;
+  overflow: auto;
+  pointer-events: auto;
+  background: var(--void);
+  color: var(--txt);
+  font-family: var(--fb);
+  padding-bottom: 3rem;
+  user-select: text;
+}
+
+.live-sim-view[hidden] { display: none; }
+
+.live-education-fence {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  padding: .45rem 1rem;
+  background: #6d160f;
+  border-bottom: 1px solid var(--red);
+  color: #fff;
+  font-family: var(--fm);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
+.live-sim-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  background: rgba(7, 13, 26, .96);
+  border-bottom: 1px solid var(--line);
+}
+
+.live-sim-header h1 {
+  margin: 0;
+  color: var(--txt);
+  font-family: var(--fd);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: .04em;
+}
+
+.live-eyebrow,
+.live-case-state {
+  margin: 0 0 .2rem;
+  color: var(--green);
+  font-family: var(--fm);
+  font-size: .66rem;
+  letter-spacing: .16em;
+}
+
+.live-case-state { margin: .25rem 0 0; color: var(--txt-2); }
+
+.live-header-actions,
+.live-button-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.live-sim-clock {
+  color: var(--green);
+  font-family: var(--fm);
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 5ch;
+}
+
+.live-sim-view button,
+.live-sim-view select,
+.live-sim-view input {
+  min-height: 44px;
+  border: 1px solid var(--line-2);
+  border-radius: 5px;
+  font: inherit;
+}
+
+.live-sim-view button {
+  padding: .65rem .85rem;
+  background: var(--card-hi);
+  color: var(--txt);
+  cursor: pointer;
+  font-family: var(--fd);
+  font-weight: 700;
+  letter-spacing: .05em;
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+
+.live-sim-view button:hover { border-color: var(--green-2); background: #153047; }
+.live-sim-view button:active { transform: scale(.98); }
+.live-sim-view button.live-primary { background: var(--green); border-color: var(--green); color: var(--void); }
+.live-sim-view button.live-secondary { background: transparent; }
+.live-sim-view button.live-danger-outline { background: transparent; border-color: var(--red); color: var(--red); }
+
+.live-sim-view button:focus-visible,
+.live-sim-view input:focus-visible,
+.live-sim-view select:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.live-vitals {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(110px, 1fr));
+  gap: 1px;
+  margin: 0;
+  background: var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.live-vitals > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: .2rem .6rem;
+  padding: .8rem 1rem;
+  background: var(--abyss);
+}
+
+.live-vitals span,
+.live-vitals small { color: var(--muted); font-family: var(--fm); font-size: .62rem; }
+.live-vitals strong { grid-row: span 2; color: var(--green); font-family: var(--fm); font-size: 1.55rem; font-variant-numeric: tabular-nums; }
+
+.live-action-status {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  margin: 1rem clamp(1rem, 3vw, 2rem) 0;
+  padding: .65rem .85rem;
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: 5px;
+  color: var(--txt-2);
+  font-family: var(--fm);
+  font-size: .72rem;
+}
+
+.live-action-status[data-kind="success"] { border-left-color: var(--green); }
+.live-action-status[data-kind="error"] { border-left-color: var(--red); color: #ffb4c5; }
+
+.live-sim-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, .8fr) minmax(460px, 1.4fr) minmax(260px, .8fr);
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.live-sim-column { display: grid; gap: 1rem; }
+.live-panel { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 1rem; }
+.live-panel h2 { margin: 0 0 .75rem; color: var(--green); font-family: var(--fd); font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; }
+.live-help { margin: -.3rem 0 .8rem; color: var(--muted); font-size: .72rem; line-height: 1.5; }
+
+.live-field { display: grid; gap: .35rem; color: var(--txt-2); font-size: .72rem; }
+.live-field > span:first-child { font-family: var(--fm); }
+.live-field input,
+.live-field select { width: 100%; padding: .55rem .65rem; background: var(--abyss); color: var(--txt); }
+.live-input-unit { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .45rem; }
+.live-input-unit small { min-width: 3rem; color: var(--muted); font-family: var(--fm); }
+
+.live-form-grid,
+.live-machine-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.live-machine-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.live-form-submit,
+.live-machine-submit { grid-column: 1 / -1; }
+
+.live-toggle {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-top: .75rem;
+  min-height: 44px;
+  color: var(--txt);
+  cursor: pointer;
+}
+
+.live-toggle input { width: 22px; min-height: 22px; accent-color: var(--red); }
+.live-drive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; margin-top: .75rem; }
+.live-drive-grid span { display: flex; justify-content: space-between; padding: .5rem; background: var(--abyss); color: var(--muted); font-family: var(--fm); font-size: .65rem; }
+.live-drive-grid strong { color: var(--txt); font-variant-numeric: tabular-nums; }
+
+.live-dose-grid,
+.live-complication-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
+.live-dose-button { display: grid; align-content: center; gap: .25rem; text-align: left; min-height: 64px !important; }
+.live-dose-button small { color: var(--green-2); font-family: var(--fm); font-size: .6rem; font-weight: 400; letter-spacing: 0; }
+.live-complication-button { border-color: rgba(255, 46, 99, .55) !important; color: #ff9ab1 !important; }
+
+.live-event-panel { position: sticky; top: 48px; max-height: calc(100dvh - 70px); overflow: hidden; }
+.live-event-header { display: flex; justify-content: space-between; gap: 1rem; }
+.live-event-header span { color: var(--muted); font-family: var(--fm); font-size: .6rem; }
+.live-event-log { list-style: none; margin: 0; padding: 0; max-height: calc(100dvh - 150px); overflow: auto; user-select: text; }
+.live-event-log li { display: grid; grid-template-columns: 4.5rem 1fr; gap: .55rem; padding: .65rem 0; border-top: 1px solid var(--line); }
+.live-event-log time { color: var(--green-2); font-family: var(--fm); font-size: .65rem; font-variant-numeric: tabular-nums; }
+.live-event-log div { display: grid; gap: .2rem; min-width: 0; }
+.live-event-log strong { color: var(--txt); font-size: .72rem; }
+.live-event-log span { color: var(--txt-2); font-size: .68rem; line-height: 1.4; overflow-wrap: anywhere; }
+.live-event-log .live-empty { display: block; color: var(--muted); font-size: .72rem; }
+
+.live-sim-launch { margin-bottom: .5rem; border-color: var(--green) !important; color: var(--green) !important; }
+
+@media (max-width: 1180px) {
+  .live-sim-grid { grid-template-columns: minmax(260px, .8fr) minmax(430px, 1.2fr); }
+  .live-event-panel { position: static; grid-column: 1 / -1; max-height: none; }
+  .live-event-log { max-height: 340px; }
+}
+
+@media (max-width: 780px) {
+  .live-sim-header { align-items: flex-start; flex-direction: column; }
+  .live-header-actions { width: 100%; }
+  .live-header-actions button { flex: 1; }
+  .live-vitals { grid-template-columns: repeat(2, 1fr); }
+  .live-sim-grid { grid-template-columns: 1fr; }
+  .live-machine-grid,
+  .live-form-grid,
+  .live-dose-grid,
+  .live-complication-grid { grid-template-columns: 1fr; }
+  .live-sim-view input,
+  .live-sim-view select { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-sim-view button:active { transform: none; }
+}

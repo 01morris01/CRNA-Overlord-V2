@@ -96,7 +96,7 @@
 
 - [ ] Write a failing test that parses `APP_SHELL`, checks every new live file and every browser-imported engine file, and rejects the old cache version.
 - [ ] Add all required HTML, CSS, JS, and engine import-graph files to `APP_SHELL`.
-- [ ] Change `CACHE_VERSION` to `v39-live-sim-2026-07-13`.
+- [ ] Preserve the concurrent board-game shell entries and change `CACHE_VERSION` to `v48-boardgame-live-sim-2026-07-13`.
 - [ ] Run the focused contract test and full suite.
 
 ### Task 8: Add the full induction-to-emergence smoke

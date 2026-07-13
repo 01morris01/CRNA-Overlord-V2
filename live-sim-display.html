@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#03060c">
+  <title>Live Anesthesia Display | CRNA Overlord</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/live-sim-display.css">
+</head>
+<body class="live-display-body">
+  <div class="display-education-fence" role="note">Educational simulation. Not for clinical use.</div>
+
+  <header class="display-header">
+    <div>
+      <p>CRNA OVERLORD · LIVE CASE</p>
+      <h1 id="display-patient">Waiting for instructor</h1>
+    </div>
+    <div class="display-header-status">
+      <span id="display-connection" data-state="waiting">WAITING FOR STATE</span>
+      <output id="display-clock" aria-label="Simulation time">00:00</output>
+      <button id="display-audio" type="button">ENABLE ALARM AUDIO</button>
+      <button id="display-fullscreen" type="button">FULL SCREEN</button>
+    </div>
+  </header>
+
+  <main class="display-layout">
+    <section class="display-numerics" aria-label="Engine-derived patient monitor">
+      <article class="display-vital display-vital-ecg"><span>HR</span><strong id="display-hr">—</strong><small>bpm</small></article>
+      <article class="display-vital display-vital-bp"><span>NIBP</span><strong id="display-bp">—</strong><small>MAP <b id="display-map">—</b> mmHg</small></article>
+      <article class="display-vital display-vital-spo2"><span>SpO₂</span><strong id="display-spo2">—</strong><small>%</small></article>
+      <article class="display-vital display-vital-co2"><span>EtCO₂</span><strong id="display-etco2">—</strong><small>mmHg · RR <b id="display-rr">—</b></small></article>
+      <article class="display-vital display-vital-temp"><span>TEMP</span><strong id="display-temp">—</strong><small>°C</small></article>
+      <article class="display-vital display-vital-tof"><span>TOF</span><strong id="display-tof">—</strong><small>RATIO <b id="display-tof-ratio">—</b></small></article>
+    </section>
+
+    <section class="display-waveforms" aria-label="Rendering-only synthesized waveforms">
+      <div class="display-wave-row"><span>ECG II</span><canvas id="display-ecg" aria-label="Synthesized ECG rendering"></canvas></div>
+      <div class="display-wave-row"><span>PLETH</span><canvas id="display-pleth" aria-label="Synthesized pleth rendering"></canvas></div>
+      <div class="display-wave-row"><span>CO₂</span><canvas id="display-capnogram" aria-label="Synthesized capnogram rendering"></canvas></div>
+    </section>
+
+    <section class="display-bottom-grid">
+      <article class="display-panel display-emergence-panel">
+        <header><div><p>EMERGENCE ASSESSMENT</p><h2>Spontaneous effort over mandatory ventilation</h2></div><span id="display-airway">—</span></header>
+        <div class="display-assessment-grid">
+          <div><span>SPONT RR</span><strong id="display-spontaneous-rr">—</strong><small>/min</small></div>
+          <div><span>SPONT TV</span><strong id="display-spontaneous-tv">—</strong><small>mL</small></div>
+          <div><span>SPONT MV</span><strong id="display-spontaneous-mv">—</strong><small>L/min</small></div>
+          <div><span>EFFORT</span><strong id="display-spontaneous-effort">—</strong><small>0–1</small></div>
+        </div>
+      </article>
+
+      <article class="display-panel display-machine-panel">
+        <header><div><p>ANESTHESIA MACHINE</p><h2 id="display-vent-mode">—</h2></div><span id="display-vaporizer">—</span></header>
+        <dl class="display-machine-grid">
+          <div><dt>Measured TV</dt><dd><span id="display-machine-tv">—</span> mL</dd></div>
+          <div><dt>Measured MV</dt><dd><span id="display-machine-mv">—</span> L/min</dd></div>
+          <div><dt>Ppeak</dt><dd><span id="display-ppeak">—</span> cmH₂O</dd></div>
+          <div><dt>FiO₂</dt><dd><span id="display-fio2">—</span>%</dd></div>
+          <div><dt>Set TV</dt><dd><span id="display-set-tv">—</span> mL</dd></div>
+          <div><dt>Set RR</dt><dd><span id="display-set-rr">—</span> /min</dd></div>
+          <div><dt>PEEP</dt><dd><span id="display-peep">—</span> cmH₂O</dd></div>
+          <div><dt>Pressure control</dt><dd><span id="display-set-pressure">—</span> cmH₂O</dd></div>
+          <div><dt>Pressure support</dt><dd><span id="display-pressure-support">—</span> cmH₂O</dd></div>
+        </dl>
+      </article>
+
+      <aside class="display-panel display-alarm-panel" aria-labelledby="display-alarm-heading">
+        <header><div><p>THRESHOLD ALARMS</p><h2 id="display-alarm-heading">No active alarms</h2></div></header>
+        <div id="display-alarm-list" class="display-alarm-list" role="alert"><p>All received values within display thresholds.</p></div>
+        <div class="display-alarm-actions">
+          <button id="display-acknowledge" type="button">ACKNOWLEDGE</button>
+          <button id="display-silence" type="button">SILENCE 2 MIN</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script type="module" src="ui/liveSimDisplay.js"></script>
+</body>
+</html>

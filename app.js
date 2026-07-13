@@ -4,6 +4,7 @@ import { updateHUD, renderCurrentQuestion } from './ui/gameUI.js';
 import { getOpioidsQuestions, getQuestionsForNode } from './core/questionEngine.js';
 import { getSession, loginUser, registerUser, logout } from './core/auth.js';
 import { renderMissionCard } from './core/dailyMission.js';
+import { initLiveSimView } from './ui/liveSimView.js';
 
 let _authMode = 'login'; // 'login' or 'register'
 
@@ -303,6 +304,7 @@ function _initGameUI() {
   const state = loadState();
   window.crnaState = state;
   createSimpleCourseMap();
+  initLiveSimView();
   updateHUD();
   renderCurrentQuestion();
 

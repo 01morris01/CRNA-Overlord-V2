@@ -926,7 +926,10 @@ function tick(t){
   raf = requestAnimationFrame(tick);
   if (!active || !container.clientWidth) return;
   resize();
-  var dt = Math.min(.05, (t - last) / 1000);
+  // A queued first frame can carry a timestamp just before show()'s
+  // performance.now(). Clamp that negative delta so the route parameter
+  // never becomes negative and indexes past CatmullRomCurve3's first point.
+  var dt = Math.max(0, Math.min(.05, (t - last) / 1000));
   last = t; now = t;
 
   var des = desired();

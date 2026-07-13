@@ -6,9 +6,61 @@
    control goes through here so the console never touches engine
    internals directly.
    ═══════════════════════════════════════════════════════════════════ */
-import { AirwayDevice, buildPhysRig, VentMode } from '../sim/index.js';
+import {
+  AirwayDevice, buildPhysRig, ScenarioManager, VentMode,
+} from '../sim/index.js';
+import { buildDebrief as buildScenarioDebrief } from '../sim/scenario/scenarioDebrief.js';
 
 const SEED = 12345;
+
+export const LIVE_COMPLICATIONS = Object.freeze([
+  'Bronchospasm', 'HighSpinal', 'Sympathectomy', 'Anaphylaxis',
+  'MalignantHyperthermia', 'OpioidRespDepression',
+  'OpioidInducedRespiratoryDepression', 'Hemorrhage', 'Laryngospasm',
+  'LocalAnestheticToxicity', 'TensionPneumothorax', 'VentricularFibrillation',
+]);
+
+function liveScenarioDefinition(config) {
+  return {
+    id: 'live_sim',
+    title: 'Live Anesthesia Simulation',
+    courseUnit: 'Live Simulation',
+    maxDurationSeconds: 86400,
+    tags: ['Live simulation', 'Anesthesia'],
+    learningObjectives: [],
+    expectedActions: [],
+    dangerousActions: [],
+    events: [],
+    patientProfile: {
+      weightKg: config.weightKg,
+      heightCm: config.heightCm,
+      ageYears: config.ageYears,
+      sex: config.sex,
+      baselineHR: config.baselineHR,
+      baselineSystolic: config.baselineSystolic,
+      baselineDiastolic: config.baselineDiastolic,
+      baselineSpO2: config.baselineSpO2,
+      baselineRR: config.baselineRR,
+      baselineTemp: config.baselineTemp,
+    },
+    startingSetup: {
+      oxygenOn: false,
+      fio2: 0.21,
+      tidalVolume: 0,
+      respiratoryRate: 0,
+      peep: 0,
+      vaporizerDial: 0,
+      ventMode: 'manual',
+      airway: 'mask',
+    },
+    debrief: {
+      summary: 'Instructor-led live anesthesia simulation.',
+      teachingPoints: [],
+      reviewTopics: [],
+      reviewTags: ['Live simulation', 'Anesthesia'],
+    },
+  };
+}
 
 export const DEFAULT_CONFIG = {
   weightKg: 70, heightCm: 170, ageYears: 45, sex: 'Male',
@@ -46,8 +98,15 @@ export class SimRunner {
     p.baselineTemp = c.baselineTemp;
     p.baselineEtCO2 = c.baselineEtCO2;
     p.resetToBaseline();
+    const scenario = new ScenarioManager();
+    scenario.patient = p;
+    scenario.drugSystem = d;
+    scenario.ventilator = v;
+    core.scenario = scenario;
     core.initialize(SEED);
-    this.p = p; this.d = d; this.v = v; this.core = core;
+    scenario.loadRaw(liveScenarioDefinition(c));
+    scenario.startScenario();
+    this.p = p; this.d = d; this.v = v; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
   }
 
@@ -75,7 +134,9 @@ export class SimRunner {
 
   pause() {
     this.running = false;
-    cancelAnimationFrame(this._raf);
+    if (typeof globalThis.cancelAnimationFrame === 'function') {
+      globalThis.cancelAnimationFrame(this._raf);
+    }
     clearInterval(this._interval);
     this._interval = 0;
     this.emit();
@@ -128,6 +189,9 @@ export class SimRunner {
       tof: p.trainOfFourCount, tofRatio: p.trainOfFourRatio,
       ppeak: v.measuredPeakPressure, mv: v.measuredMinuteVent, tv: v.measuredTidalVolume,
       fio2: p.fiO2, ventMode: v.mode, vaporizer: v.vaporizerDial, vaporizerAgent: v.vaporizerAgent,
+      ventSetTV: v.setTidalVolume, ventSetRR: v.setRespiratoryRate, ventSetPeep: v.setPeep,
+      ventSetPressure: v.setPressureAbovePeep, ventSetPressureSupport: v.setPressureSupport,
+      o2Flow: v.o2FlowLPerMin, airFlow: v.airFlowLPerMin, n2oFlow: v.n2oFlowLPerMin,
       intubated: p.isIntubated, spont: p.isBreathingSpontaneously, status: p.status,
       airwayDevice: p.airwayDeviceState, forcedApnea: p.forcedApneaActive,
       forcedApneaContribution: p.forcedApneaContribution,
@@ -212,6 +276,30 @@ export class SimRunner {
     this.logEvent('Respiratory drive', active ? 'Forced apnea imposed' : 'Forced apnea lifted', {
       action: active ? 'force_apnea' : 'lift_forced_apnea',
     });
+  }
+
+  injectComplication(type) {
+    if (!LIVE_COMPLICATIONS.includes(type)) {
+      throw new RangeError(`Unsupported complication: ${type}`);
+    }
+    this.s.applyComplication({ complicationType: type, description: type });
+    this.logEvent('Complication', type, { action: 'complication', type });
+    return { ok: true, type };
+  }
+
+  buildDebrief() {
+    const def = this.s.activeScenario || liveScenarioDefinition(this.config);
+    const result = buildScenarioDebrief(
+      def,
+      this.s.run,
+      this.s.scoring,
+      this.s.actionLog,
+      0,
+      0,
+      this.simTime,
+    );
+    result.respiratoryAttribution = this.p.respiratoryAttribution;
+    return result;
   }
 
   logEvent(kind, detail, meta) {

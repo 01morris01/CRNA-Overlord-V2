@@ -1,6 +1,6 @@
 # Live Simulation Integration Audit
 
-Date: 2026-07-13  
+Date: 2026-07-13
 Base: `feature/engine-reversal-airway` at `80c067a`
 
 ## Repository placement
@@ -105,7 +105,7 @@ The control surface will reuse these tokens, visible form labels, 44 px minimum 
 - cache-first fetch behavior with same-origin background refresh, except `/data/questions/`, which is network-first with cache fallback;
 - `SKIP_WAITING` message support.
 
-Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. `CACHE_VERSION` must be changed from `v38-patho2-neural-2026-07-07` so installed PWAs invalidate the old shell.
+Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. A concurrent board-game reskin consumed version 39 during this work. Browser verification exercised several live cache revisions; the final verified shell is `v48-boardgame-live-sim-2026-07-13`.
 
 ## Selected architecture and rejected alternatives
 
