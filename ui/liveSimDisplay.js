@@ -1,5 +1,6 @@
 import { deriveAlarms, formatMonitorSnapshot } from './liveSimModel.js';
 import { createLiveSimTransport } from './liveSimTransport.js';
+import { createWaveformRenderer } from './liveWaveformRenderer.js';
 
 let latestSnapshot = null;
 let currentSessionId = null;
@@ -9,6 +10,8 @@ let silencedUntil = 0;
 let activeAlarms = [];
 let audioContext = null;
 const acknowledged = new Set();
+let waveformRenderer = createWaveformRenderer({ sampleRate: 100, seconds: 6 });
+let lastWaveformFrame = 0;
 
 function setText(id, value) {
   const element = document.getElementById(id);
@@ -90,7 +93,11 @@ function renderAlarms(snapshot) {
 
 function onTransportMessage(message) {
   if (message.type !== 'snapshot') return;
-  if (message.sessionChanged) acknowledged.clear();
+  if (message.sessionChanged) {
+    acknowledged.clear();
+    waveformRenderer = createWaveformRenderer({ sampleRate: 100, seconds: 6 });
+    lastWaveformFrame = 0;
+  }
   currentSessionId = message.sessionId;
   latestSnapshot = message.payload;
   lastReceivedAt = Date.now();
@@ -99,7 +106,9 @@ function onTransportMessage(message) {
 }
 
 function ensureCanvas(canvas) {
+  if (!canvas) return null;
   const rect = canvas.getBoundingClientRect();
+  if (rect.width <= 0 || rect.height <= 0) return null;
   const ratio = window.devicePixelRatio || 1;
   const width = Math.max(1, Math.round(rect.width * ratio));
   const height = Math.max(1, Math.round(rect.height * ratio));
@@ -108,6 +117,7 @@ function ensureCanvas(canvas) {
     canvas.height = height;
   }
   const context = canvas.getContext('2d');
+  if (!context) return null;
   context.setTransform(ratio, 0, 0, ratio, 0, 0);
   return { context, width: rect.width, height: rect.height };
 }
@@ -124,73 +134,43 @@ function drawGrid(context, width, height) {
   }
 }
 
-function ecgMorphology(phase) {
-  if (phase < .12) return Math.sin(phase / .12 * Math.PI) * .1;
-  if (phase < .18) return -.12 * Math.sin((phase - .12) / .06 * Math.PI);
-  if (phase < .205) return (phase - .18) / .025 * 1.05;
-  if (phase < .235) return 1.05 - (phase - .205) / .03 * 1.55;
-  if (phase < .29) return -.5 + (phase - .235) / .055 * .5;
-  if (phase < .5) return Math.sin((phase - .29) / .21 * Math.PI) * .24;
-  return 0;
-}
-
-function plethMorphology(phase) {
-  if (phase < .16) return (phase / .16) ** 2;
-  const decay = Math.exp(-(phase - .16) * 4.2);
-  const notch = phase > .38 && phase < .48 ? -.09 * Math.sin((phase - .38) / .1 * Math.PI) : 0;
-  return Math.max(0, decay + notch);
-}
-
-function capnoMorphology(phase) {
-  if (phase < .12) return 0;
-  if (phase < .2) return (phase - .12) / .08;
-  if (phase < .55) return .9 + (phase - .2) / .35 * .1;
-  if (phase < .66) return 1 - (phase - .55) / .11;
-  return 0;
-}
-
-// RENDERING ONLY: waveform morphology below is visual synthesis from received
-// numerics. It is not physiology and never feeds a value back to the engine.
-function drawTrace(canvas, color, valueAt, now) {
-  const { context, width, height } = ensureCanvas(canvas);
+// RENDERING ONLY: these rolling samples are visual synthesis from received
+// numerics. They are not physiology and never feed a value back to the engine.
+function drawTrace(canvas, color, samples, capacity, baseline = 'bottom') {
+  const dimensions = ensureCanvas(canvas);
+  if (!dimensions) return;
+  const { context, width, height } = dimensions;
   drawGrid(context, width, height);
+  if (samples.length === 0) return;
   context.strokeStyle = color;
   context.lineWidth = 2;
   context.shadowBlur = 8;
   context.shadowColor = color;
   context.beginPath();
-  for (let x = 0; x <= width; x += 2) {
-    const time = now - (width - x) * 10;
-    const value = valueAt(time);
-    const y = height * .78 - value * height * .58;
-    if (x === 0) context.moveTo(x, y); else context.lineTo(x, y);
+  const padding = Math.min(10, Math.max(4, height * 0.08));
+  const denominator = Math.max(1, capacity - 1);
+  for (let index = 0; index < samples.length; index += 1) {
+    const x = width - (samples.length - 1 - index) / denominator * width;
+    const value = Math.max(-1, Math.min(1, samples[index]));
+    const y = baseline === 'center'
+      ? height / 2 - value * (height / 2 - padding)
+      : height - padding - Math.max(0, value) * (height - padding * 2);
+    const clampedY = Math.max(padding, Math.min(height - padding, y));
+    if (index === 0) context.moveTo(x, clampedY); else context.lineTo(x, clampedY);
   }
   context.stroke();
   context.shadowBlur = 0;
 }
 
 function drawWaveforms(now) {
-  const snapshot = latestSnapshot;
-  const heartRate = Number.isFinite(snapshot?.hr) ? Math.max(1, snapshot.hr) : 0;
-  const respiratoryRate = Number.isFinite(snapshot?.rr) ? Math.max(1, snapshot.rr) : 0;
-  const oxygenScale = Number.isFinite(snapshot?.spo2) ? Math.max(.25, snapshot.spo2 / 100) : 0;
-  const co2Scale = Number.isFinite(snapshot?.etco2) ? Math.max(.15, snapshot.etco2 / 50) : 0;
+  const elapsedSeconds = lastWaveformFrame > 0 ? (now - lastWaveformFrame) / 1000 : 0;
+  lastWaveformFrame = now;
+  waveformRenderer.advance(elapsedSeconds, latestSnapshot || {});
+  const history = waveformRenderer.snapshot();
 
-  drawTrace(document.getElementById('display-ecg'), '#00ffa3', (time) => {
-    if (!Number.isFinite(snapshot?.hr)) return 0;
-    const phase = ((time / 1000) * heartRate / 60) % 1;
-    return ecgMorphology(phase);
-  }, now);
-  drawTrace(document.getElementById('display-pleth'), '#5b9eff', (time) => {
-    if (!Number.isFinite(snapshot?.hr) || !Number.isFinite(snapshot?.spo2)) return 0;
-    const phase = ((time / 1000) * heartRate / 60) % 1;
-    return plethMorphology(phase) * oxygenScale;
-  }, now);
-  drawTrace(document.getElementById('display-capnogram'), '#ffb000', (time) => {
-    if (snapshot?.capnogramPresent !== true || !Number.isFinite(snapshot?.rr) || !Number.isFinite(snapshot?.etco2)) return 0;
-    const phase = ((time / 1000) * respiratoryRate / 60) % 1;
-    return capnoMorphology(phase) * co2Scale;
-  }, now);
+  drawTrace(document.getElementById('display-ecg'), '#00ffa3', history.ecg, history.capacity, 'center');
+  drawTrace(document.getElementById('display-pleth'), '#5b9eff', history.pleth, history.capacity);
+  drawTrace(document.getElementById('display-capnogram'), '#ffb000', history.co2, history.capacity);
   requestAnimationFrame(drawWaveforms);
 }
 

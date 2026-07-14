@@ -42,6 +42,7 @@ describe('main app live simulation registration', () => {
   it('keeps the second-screen display read-only and visibly fenced', () => {
     const html = read('live-sim-display.html');
     const controller = read('ui/liveSimDisplay.js');
+    const waveforms = read('ui/liveWaveformRenderer.js');
 
     expect(html).toContain('href="assets/css/live-sim-display.css"');
     expect(html).toContain('Educational simulation. Not for clinical use.');
@@ -52,12 +53,14 @@ describe('main app live simulation registration', () => {
     expect(html).toContain('id="display-tof-ratio"');
     expect(controller).toContain("from './liveSimTransport.js'");
     expect(controller).toContain("from './liveSimModel.js'");
+    expect(controller).toContain("from './liveWaveformRenderer.js'");
     expect(controller).not.toContain('SimRunner');
     expect(controller).not.toContain('/crisis-sim/');
     expect(controller).toContain('RENDERING ONLY');
-    expect(controller).toContain('capnogramPresent');
-    expect(controller).toContain('if (!Number.isFinite(snapshot?.hr)) return 0;');
-    expect(controller).toContain('if (!Number.isFinite(snapshot?.hr) || !Number.isFinite(snapshot?.spo2)) return 0;');
+    expect(controller).toContain('const clampedY = Math.max(padding, Math.min(height - padding, y));');
+    expect(waveforms).toContain('receivedSignals.capnogramPresent === true');
+    expect(waveforms).toContain("append('ecg', hasHeartRate ? ecgMorphology(cardiacPhase) : 0);");
+    expect(waveforms).toContain("append('pleth', hasHeartRate && hasSpo2");
     expect(controller).toContain('transport?.requestState();');
     expect(controller).toContain('snapshotAge > 10000');
     expect(controller).toContain("'FORCED APNEA OFF'");
