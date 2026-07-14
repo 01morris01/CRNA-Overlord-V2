@@ -91,6 +91,21 @@ The episode starts at the current fixed-step simulation time and automatically c
 
 An explicit `stopMaskVentilation()` method ends the current episode early and records its actual duration.
 
+The `cricoidPressure` flag remains convenience metadata on a PPV episode. It is not the scoreable cricoid maneuver; the independent action below is.
+
+### Cricoid pressure
+
+The engine and `SimRunner` expose two discrete actions:
+
+```js
+applyCricoidPressure()
+releaseCricoidPressure()
+```
+
+They produce fixed-step `cricoid_pressure_applied` and `cricoid_pressure_released` events. The subsystem stores `cricoidPressureActive` plus a history of apply/release intervals and timestamps. Applying an already-active maneuver or releasing an inactive maneuver is idempotent and does not create a duplicate scoreable action.
+
+Cricoid pressure is independent of PPV. A correct RSI can therefore record applied cricoid pressure without any mask-ventilation action before laryngoscopy. Cricoid pressure has no modeled physiologic effect in this round: it does not change airway resistance, mask ventilation, aspiration risk, or intubation success. This recorded-maneuver-only simplification is explicit in the model document.
+
 ### Intubation attempts
 
 The engine and `SimRunner` expose:
@@ -130,6 +145,8 @@ Starting an attempt is legal only from `mask`, when no attempt is already active
 - Neither outcome changes ventilator mode or settings.
 
 `SimRunner.intubate()` becomes a compatibility alias for `attemptIntubation()` and no longer directly mutates the airway or starts VCV. `setAirwayDevice()` remains available for administrative setup and tests, but it is not a scoreable intubation attempt.
+
+Only `attemptIntubation()` can produce `intubation_attempt_*` log entries. Round 3 scoring must require a successful attempt entry. Reaching `intubated` through `setAirwayDevice()` scores zero on intubation-performance items, even though the administrative device state is valid.
 
 Existing frozen scenarios without `airwayPlan` retain their established immediate scenario-action behavior so their fixtures do not change. New rubric scenarios opt into the timed path by declaring `airwayPlan`.
 
@@ -188,6 +205,8 @@ This is a teaching approximation of end-tidal oxygen. It introduces no new oxyge
 | `effectiveMV` | number | Minute ventilation consumed by gas exchange |
 | `proceduralApnea` | boolean | Intubation-attempt apnea active |
 | `proceduralApneaContribution` | number | 0 during attempt, otherwise 1 |
+| `cricoidPressureActive` | boolean | Recorded cricoid maneuver currently applied |
+| `cricoidPressureHistory` | array | Fixed-step apply/release records |
 | `ppvActive` | boolean | Timed PPV currently delivering support |
 | `ppvEpisodeCount` | number | Number of accepted episodes |
 | `ppvCurrent` | object or null | Current episode settings/timing |
@@ -197,7 +216,7 @@ This is a teaching approximation of end-tidal oxygen. It introduces no new oxyge
 | `lastIntubationOutcome` | string | `none`, `failed`, or `succeeded` |
 | `intubationAttempts` | array | Attempt timing, outcome, airway, and nadir SpO2 |
 
-PPV history records include episode ID, start/end time, planned/actual duration, airway state, TV, RR, minute ventilation, cricoid-pressure flag, and completion reason. Attempt records include attempt number, start/end time, actual duration, outcome, airway before/after, and lowest SpO2 during the attempt.
+PPV history records include episode ID, start/end time, planned/actual duration, airway state, TV, RR, minute ventilation, cricoid-pressure flag, and completion reason. Attempt records include attempt number, start/end time, actual duration, outcome, airway before/after, `spo2Nadir`, `desaturatedBelow90`, and `timeToSpo2_90Sec`. The elapsed crossing time is finite when SpO2 first crosses below 90% during the attempt and `null` if it never crosses.
 
 Snapshot arrays and objects are copies so callers cannot mutate engine state.
 
@@ -207,6 +226,8 @@ Procedure events use explicit fixed-step timestamps rather than wrapper wall-clo
 
 - `mask_ppv_started`
 - `mask_ppv_completed`
+- `cricoid_pressure_applied`
+- `cricoid_pressure_released`
 - `intubation_attempt_started`
 - `intubation_attempt_failed`
 - `intubation_attempt_succeeded`
@@ -218,8 +239,17 @@ This supports the required ordering questions directly:
 - RSI: compare first `mask_ppv_started` with first `intubation_attempt_started`; no pre-laryngoscopy PPV is distinguishable from PPV before laryngoscopy.
 - Standard IV: compare accepted PPV start/completion with the existing rocuronium drug timestamp; confirmed mask ventilation before paralytic is distinguishable from paralytic-first ordering.
 - Rescue: PPV after a failed attempt, including `cricoidPressure: true`, is directly queryable.
+- Correct RSI: `cricoid_pressure_applied` can exist before first laryngoscopy while no `mask_ppv_started` entry exists.
 
 For configured scenarios, the scenario manager defers `intubation_successful`, success scoring, and success-triggered events until the attempt actually succeeds. A failed start is logged but does not secure or score the airway.
+
+Round 3 scoring must inspect the attempt log, not device state alone. Administrative `setAirwayDevice('intubated')` creates no attempt event and cannot satisfy an intubation rubric item.
+
+## Live UI blast radius
+
+The live instructor console moves from immediate tube placement to the timed procedure path. Pressing **INTUBATE** starts laryngoscopy, reports the active attempt and countdown, leaves the device at `mask`, and exposes apnea/support inhibition during the configured interval. The airway changes to `intubated` only on successful completion. The operator must then select/configure mechanical ventilation separately.
+
+The full induction-to-emergence smoke case uses `attemptIntubation()`, advances through the attempt duration, verifies the completed success event, and then explicitly enables VCV. This intentionally changes operator-visible timing while preserving device/support orthogonality.
 
 ## Reset and determinism
 
@@ -239,7 +269,13 @@ Tests and evidence output will demonstrate:
 6. Preoxygenated and non-preoxygenated apnea curves retain a measurable difference, and ETO2 exceeds 90% after adequate preoxygenation.
 7. A combined preoxygenation, PPV, and failed-attempt run has an identical fingerprint across two executions.
 8. All existing tests, snapshot checks, smoke tests, PWA contract checks, and frozen parity fixtures remain green.
+9. RSI rescue chain: attempt 1 fails, cricoid pressure is applied, mask PPV restores oxygenation, and attempt 2 succeeds; the complete required log order is asserted.
+10. Correct-RSI cricoid record: cricoid is applied at induction without pre-laryngoscopy PPV, producing the cricoid event independently.
+11. Desaturation timing: a non-preoxygenated failed attempt records a finite below-90 crossing while the otherwise-equivalent preoxygenated attempt does not cross below 90%.
+12. Scoring-path integrity: administrative transition to `intubated` produces no `intubation_attempt_*` event.
+
+The combined deterministic fingerprint includes samples from the middle of an active PPV episode and the middle of an intubation attempt, not only endpoints. This catches accidental RNG consumption or transient-state nondeterminism.
 
 ## Documentation deliverable
 
-`docs/airway-gaps-model.md` will document every equation, state transition, public method, snapshot field, configuration field, ordering discriminator, and simplification. Each simplification will be labeled, including delivered-MV bag-mask ventilation, assumed adequate seal, no difficult ventilation, no breath summation, approximate ETO2, deterministic configured failure, and no separate CICO pathway.
+`docs/airway-gaps-model.md` will document every equation, state transition, public method, snapshot field, configuration field, ordering discriminator, live-UI behavior change, and simplification. Each simplification will be labeled, including delivered-MV bag-mask ventilation, assumed adequate seal, no difficult ventilation, no breath summation, approximate ETO2, recorded-only cricoid pressure, deterministic configured failure, and no separate CICO pathway.
