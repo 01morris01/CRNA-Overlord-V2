@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { AirwayProcedureSystem, PatientPhysiology, buildPhysRig } from '../sim/index.js';
+import {
+  AirwayProcedureSystem, PatientPhysiology, buildPhysRig, buildRig,
+} from '../sim/index.js';
 
 function procedureRig() {
   const patient = new PatientPhysiology();
@@ -8,6 +10,26 @@ function procedureRig() {
   airway.patient = patient;
   airway.reset();
   return { patient, airway };
+}
+
+function scenarioDefinition(airwayPlan) {
+  const definition = {
+    id: 'timed_airway_test',
+    title: 'Timed airway test',
+    maxDurationSeconds: 300,
+    patientProfile: {
+      weightKg: 70, heightCm: 170, ageYears: 45, sex: 'Male', baselineHR: 72,
+      baselineSystolic: 120, baselineDiastolic: 80, baselineSpO2: 99,
+      baselineRR: 14, baselineTemp: 36.6,
+    },
+    startingSetup: { oxygenOn: false, fio2: 0.21, ventMode: 'manual', airway: 'native' },
+    events: [],
+    expectedActions: [{ action: 'intubate', points: 10 }],
+    dangerousActions: [],
+    debrief: { summary: '', teachingPoints: [], reviewTopics: [], reviewTags: [] },
+  };
+  if (airwayPlan) definition.airwayPlan = airwayPlan;
+  return definition;
 }
 
 describe('airway procedure state machine', () => {
@@ -195,5 +217,67 @@ describe('airway procedure state machine', () => {
     expect(p.proceduralApneaActive).toBe(false);
     expect(p.effectiveNmbBlockade).toBe(0);
     expect(Object.hasOwn(p, 'procedureNmbBlockade')).toBe(false);
+  });
+
+  it('defers configured scenario intubation success until a timed attempt succeeds', () => {
+    const rig = buildRig(8301);
+    rig.s.loadRaw(scenarioDefinition({
+      failedIntubationAttempts: [1],
+      intubationAttemptDurationSeconds: 2,
+    }));
+    rig.s.startScenario();
+
+    expect(rig.s.activeScenario.airwayPlan).toEqual({
+      failedIntubationAttempts: [1],
+      intubationAttemptDurationSeconds: 2,
+    });
+    expect(rig.s.recordStudentAction('Intubate')).toMatchObject({ ok: true, attemptNumber: 1 });
+    expect(rig.s.run.intubatedAtSec).toBe(-1);
+    rig.core.stepFor(2);
+    expect(rig.p.airwayDeviceState).toBe('mask');
+    expect(rig.s.run.intubatedAtSec).toBe(-1);
+
+    expect(rig.s.recordStudentAction('Intubate')).toMatchObject({ ok: true, attemptNumber: 2 });
+    rig.core.stepFor(2);
+    expect(rig.p.airwayDeviceState).toBe('intubated');
+    expect(rig.s.run.intubatedAtSec).toBeGreaterThan(0);
+    expect(rig.s.actionLog.entries.some(
+      (entry) => entry.canonical === 'intubation_attempt_succeeded',
+    )).toBe(true);
+    expect(rig.s.currentScore).toBe(10);
+  });
+
+  it('keeps administrative airway transition outside the scoreable attempt log', () => {
+    const rig = buildRig(8302);
+    rig.s.loadRaw(scenarioDefinition({
+      failedIntubationAttempts: [],
+      intubationAttemptDurationSeconds: 2,
+    }));
+    rig.s.startScenario();
+
+    expect(rig.p.transitionAirwayDevice('intubated').ok).toBe(true);
+    rig.core.stepFor(1);
+
+    expect(rig.a.eventsSince(0).filter(
+      (event) => event.type.startsWith('intubation_attempt_'),
+    )).toEqual([]);
+    expect(rig.s.actionLog.entries.filter(
+      (entry) => entry.canonical.startsWith('intubation_attempt_'),
+    )).toEqual([]);
+    expect(rig.s.currentScore).toBe(0);
+  });
+
+  it('preserves immediate legacy scenario intubation when no airway plan is declared', () => {
+    const rig = buildRig(8303);
+    rig.s.loadRaw(scenarioDefinition(null));
+    rig.s.startScenario();
+
+    rig.s.recordStudentAction('Intubate');
+
+    expect(rig.p.airwayDeviceState).toBe('intubated');
+    expect(rig.s.run.intubatedAtSec).toBe(0);
+    expect(rig.a.eventsSince(0).filter(
+      (event) => event.type.startsWith('intubation_attempt_'),
+    )).toEqual([]);
   });
 });

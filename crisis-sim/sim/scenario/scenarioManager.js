@@ -28,6 +28,7 @@ export class ScenarioManager {
     this.patient = null;
     this.drugSystem = null;
     this.ventilator = null;
+    this.airwayProcedure = null;
     this.alarmSystem = null;
 
     this.activeScenario = null;
@@ -59,6 +60,7 @@ export class ScenarioManager {
 
     this._transitions = [];
     this._deadlines = [];
+    this._airwayEventCursor = 0;
 
     this._cpapUntil = 0; this._jawThrustUntil = 0; this._coolingUntil = 0;
     this._allergenStopped = false;
@@ -98,6 +100,7 @@ export class ScenarioManager {
     this.resetScenario();
     this.applyPatientProfile();
     this.applyStartingSetup();
+    this.applyAirwayPlan();
     this.run = new ScenarioRunState();
     this.run.scenarioId = this.activeScenario.id;
     this.run.startedAtSim = 0;
@@ -125,6 +128,7 @@ export class ScenarioManager {
     this._studentActions.clear();
     this._transitions = [];
     this._deadlines = [];
+    this._airwayEventCursor = 0;
     this._cpapUntil = 0; this._jawThrustUntil = 0; this._coolingUntil = 0;
     this._allergenStopped = false;
     this._spasm = SpasmStage.None;
@@ -152,6 +156,7 @@ export class ScenarioManager {
       }
     }
 
+    if (this.airwayProcedure != null) this.airwayProcedure.reset();
     if (this.patient != null) this.patient.resetToBaseline();
     if (this.drugSystem != null && this.drugSystem.resetReversalState) this.drugSystem.resetReversalState();
     this.setState(this.activeScenario != null ? ScenarioState.Ready : ScenarioState.NotLoaded);
@@ -159,12 +164,20 @@ export class ScenarioManager {
 
   // ── student actions ──────────────────────────────────────────────────
   recordStudentAction(actionName) {
+    const canonical = ActionCatalog.canonical(actionName);
+    if (canonical === 'intubate' && this.activeScenario?.airwayPlan != null
+      && this.airwayProcedure != null) {
+      const result = this.airwayProcedure.attemptIntubation();
+      this.processAirwayProcedureEvents();
+      if (!result.ok) this.logEvent(`Intubation attempt rejected: ${result.reason}`);
+      return result;
+    }
+
     this._studentActions.set(actionName, this.elapsedTime);
     this.logEvent(`Student action: ${actionName} at ${this.formatTime(this.elapsedTime)}`);
     this.applyActionPhysiology(actionName);
     this.checkAssessments(actionName);
 
-    const canonical = ActionCatalog.canonical(actionName);
     if (this.run != null) {
       this.run.markTrigger(canonical, this.elapsedTime);
       if (canonical === 'intubate') {
@@ -184,6 +197,49 @@ export class ScenarioManager {
     const dk = ActionCatalog.isDrugKey(canonical);
     this.actionLog.record(this.elapsedTime, actionName, canonical, this.patient, cls, delta, fb, dk.ok ? dk.drug : null);
     this.processTriggeredEvents(canonical);
+    return undefined;
+  }
+
+  processAirwayProcedureEvents() {
+    if (this.airwayProcedure == null) return;
+    const events = this.airwayProcedure.eventsSince(this._airwayEventCursor);
+    this._airwayEventCursor += events.length;
+    for (const event of events) {
+      let delta = 0;
+      let cls = ActionClass.Neutral;
+      let feedback = '';
+
+      if (event.type === 'intubation_attempt_succeeded' && this.run != null) {
+        this._studentActions.set('Intubate', event.tSec);
+        this.run.intubatedAtSec = event.tSec;
+        this.run.markTrigger('intubate', event.tSec);
+        this.run.markTrigger('intubation_successful', event.tSec);
+        this.checkAssessments('Intubate');
+        if (this.scoring != null) {
+          ({ delta, cls, feedback } = this.scoring.evaluate('intubate', event.tSec));
+          if (delta !== 0) {
+            this.currentScore += delta;
+            if (this.onScoreChanged) this.onScoreChanged(this.currentScore, this.maxPossibleScore);
+          }
+        }
+        this.processTriggeredEvents('intubate');
+        this.processTriggeredEvents('intubation_successful');
+      }
+
+      this.actionLog.record(
+        event.tSec,
+        event.type,
+        event.type,
+        this.patient,
+        cls,
+        delta,
+        feedback,
+        null,
+        0,
+        event.meta,
+      );
+      this.logEvent(`${event.type} at ${this.formatTime(event.tSec)}`);
+    }
   }
 
   recordDrugAction(drugName, doseMg) {
@@ -338,6 +394,7 @@ export class ScenarioManager {
     if (this.state !== ScenarioState.Running || this.activeScenario == null) return;
 
     this.elapsedTime = f(this.elapsedTime + dt * this.scenarioSpeed);
+    this.processAirwayProcedureEvents();
 
     for (let i = 0; i < this.activeScenario.events.length; i++) {
       if (this._firedEvents.has(i)) continue;
@@ -842,6 +899,15 @@ export class ScenarioManager {
       this.patient.airwayPatency = 1;
       if (this.run) this.run.markTrigger('intubation_successful', 0);
     }
+  }
+
+  applyAirwayPlan() {
+    const plan = this.activeScenario?.airwayPlan;
+    if (plan == null || this.airwayProcedure == null) return;
+    this.airwayProcedure.configureIntubation({
+      failedIntubationAttempts: plan.failedIntubationAttempts,
+      attemptDurationSeconds: plan.intubationAttemptDurationSeconds,
+    });
   }
 
   applyPatientProfile() {

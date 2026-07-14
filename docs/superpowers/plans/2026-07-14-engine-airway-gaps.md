@@ -326,7 +326,7 @@ git commit -m "Derive gas exchange from timed mask PPV"
 - Modify: `crisis-sim/sim/scenario/actionLogger.js`
 - Modify: `crisis-sim/test/airway-procedure.test.js`
 
-- [ ] **Step 1: Write failing scenario tests**
+- [x] **Step 1: Write failing scenario tests**
 
 Load a small scenario with `airwayPlan.failedIntubationAttempts: [1]` and two-second attempts. Assert:
 
@@ -345,13 +345,13 @@ expect(rig.s.actionLog.entries.some((e) => e.canonical === 'intubation_attempt_s
 
 Add a separate administrative transition assertion proving `p.transitionAirwayDevice('intubated')` produces no procedure event. Run existing RSI fixture behavior without `airwayPlan` and assert its immediate legacy action remains unchanged.
 
-- [ ] **Step 2: Run tests to verify RED**
+- [x] **Step 2: Run tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/airway-procedure.test.js --reporter=verbose`
 
 Expected: FAIL because loader/manager do not know the plan or procedure events.
 
-- [ ] **Step 3: Implement opt-in configuration and success-only scoring**
+- [x] **Step 3: Implement opt-in configuration and success-only scoring**
 
 Normalize `airwayPlan` only when present. Wire `ScenarioManager.airwayProcedure`. For opted-in scenarios, `recordStudentAction('Intubate')` starts an attempt and returns without marking `intubation_successful`. Process new procedure events during scenario tick; only `intubation_attempt_succeeded` may set `run.intubatedAtSec`, evaluate canonical `intubate`, mark the success trigger, and run success-triggered events.
 
@@ -366,7 +366,7 @@ AttemptIntubation: 'intubation_attempt',
 
 Let action-log records accept copied procedure metadata. Preserve the no-plan scenario path exactly.
 
-- [ ] **Step 4: Verify scenario tests and parity**
+- [x] **Step 4: Verify scenario tests and parity**
 
 Run:
 
@@ -377,7 +377,7 @@ npx vitest run test/airway-procedure.test.js test/parity.test.js --reporter=verb
 
 Expected: configured success is deferred, administrative state is unscoreable, and frozen parity remains green.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add crisis-sim/sim/scenario crisis-sim/test/airway-procedure.test.js

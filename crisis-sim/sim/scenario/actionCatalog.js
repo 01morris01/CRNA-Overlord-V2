@@ -7,8 +7,11 @@ const RAW = {
   PreOxygenate: 'preoxygenate', SetFiO2_100: 'increase_fio2', FiO2_100: 'increase_fio2',
   IncreaseFiO2: 'increase_fio2', GiveOxygen: 'increase_fio2', SupplementalO2: 'increase_fio2',
   Intubate: 'intubate', PlaceETT: 'intubate',
+  AttemptIntubation: 'intubation_attempt',
   ConfirmEtCO2: 'confirm_etco2', CheckEtCO2: 'confirm_etco2',
   MaskVentilate: 'mask_ventilate', BagMask: 'mask_ventilate',
+  ApplyCricoidPressure: 'cricoid_pressure_applied',
+  ReleaseCricoidPressure: 'cricoid_pressure_released',
   CPAP: 'cpap', JawThrust: 'airway_maneuver', AirwayManeuver: 'airway_maneuver',
   PlaceLMA: 'place_lma', CallForHelp: 'call_for_help', CallHelp: 'call_for_help',
   // ventilation

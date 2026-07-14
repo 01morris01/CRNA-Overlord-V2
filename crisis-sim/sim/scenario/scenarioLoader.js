@@ -77,6 +77,17 @@ export function normalize(def) {
   def.expectedActions = def.expectedActions ?? [];
   def.dangerousActions = def.dangerousActions ?? [];
   def.debrief = def.debrief ?? null;
+  def.airwayPlan = def.airwayPlan ?? null;
+  if (def.airwayPlan != null) {
+    const failures = Array.isArray(def.airwayPlan.failedIntubationAttempts)
+      ? def.airwayPlan.failedIntubationAttempts : [];
+    def.airwayPlan.failedIntubationAttempts = [...new Set(failures
+      .filter((attempt) => Number.isInteger(attempt) && attempt > 0))]
+      .sort((left, right) => left - right);
+    const duration = def.airwayPlan.intubationAttemptDurationSeconds;
+    def.airwayPlan.intubationAttemptDurationSeconds = Number.isFinite(duration) && duration > 0
+      ? duration : 30;
+  }
 
   for (const evt of def.events) {
     fillEventDefaults(evt);

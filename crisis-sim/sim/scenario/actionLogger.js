@@ -3,7 +3,7 @@
 export class ActionLogger {
   constructor() { this.entries = []; }
 
-  record(tSec, action, canonical, p, cls, pointsDelta, feedback, drug = null, doseMg = 0) {
+  record(tSec, action, canonical, p, cls, pointsDelta, feedback, drug = null, doseMg = 0, meta = null) {
     const e = {
       tSec,
       action,
@@ -23,6 +23,7 @@ export class ActionLogger {
       tempC: p ? p.temperature : 0,
       bis: p ? p.bisIndex : 0,
     };
+    if (meta != null) e.meta = { ...meta };
     this.entries.push(e);
     return e;
   }
