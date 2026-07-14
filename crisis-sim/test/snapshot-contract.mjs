@@ -19,7 +19,7 @@ const booleanKeys = [
   'intubated', 'spont', 'forcedApnea', 'capnogramPresent', 'running',
 ];
 
-const stringKeys = ['agent', 'vaporizerAgent', 'airwayDevice', 'patient'];
+const stringKeys = ['agent', 'vaporizerAgent', 'airwayDevice', 'lifecycle', 'patient'];
 
 const requiredKeys = [...numericKeys, ...booleanKeys, ...stringKeys];
 
@@ -48,6 +48,10 @@ for (const key of stringKeys) {
 assert.ok(
   ['mask', 'intubated', 'extubated'].includes(snapshot.airwayDevice),
   `unexpected airwayDevice: ${snapshot.airwayDevice}`,
+);
+assert.ok(
+  ['READY', 'RUNNING', 'PAUSED'].includes(snapshot.lifecycle),
+  `unexpected lifecycle: ${snapshot.lifecycle}`,
 );
 
 assert.equal(Object.keys(snapshot).length, requiredKeys.length, 'snapshot key count changed');

@@ -31,7 +31,7 @@
 - Modify: `crisis-sim/test/parity.test.js`
 - Test: `crisis-sim/test/parity.test.js`
 
-- [ ] **Step 1: Add an explicit retired-case contract before changing engine behavior**
+- [x] **Step 1: Add an explicit retired-case contract before changing engine behavior**
 
 Define immutable case lists in the parity test:
 
@@ -48,13 +48,13 @@ const FROZEN_PARITY_CASES = Object.freeze([
 
 Add a test that loads each retired fixture, proves it has a `rocuronium` action, and loads each frozen fixture, proves it has none. Generate parity assertions only for `FROZEN_PARITY_CASES`; do not edit, delete, or regenerate fixture JSON.
 
-- [ ] **Step 2: Run the focused parity suite**
+- [x] **Step 2: Run the focused parity suite**
 
 Run: `cd crisis-sim && npx vitest run test/parity.test.js --reporter=verbose`
 
 Expected: the exposure-boundary contract and all eight high-spinal/MH frozen assertions pass. Any changed frozen assertion is a stop condition; do not update expected fixture data.
 
-- [ ] **Step 3: Commit the contract retirement**
+- [x] **Step 3: Commit the contract retirement**
 
 ```bash
 git add crisis-sim/test/parity.test.js
@@ -70,7 +70,7 @@ git commit -m "Retire rocuronium parity contract"
 - Modify: `crisis-sim/test/neuromuscular.test.js`
 - Test: `crisis-sim/test/neuromuscular.test.js`
 
-- [ ] **Step 1: Write failing clinical-anchor tests**
+- [x] **Step 1: Write failing clinical-anchor tests**
 
 Add deterministic 70 kg, 0.6 mg/kg rocuronium tests using the real patient/drug update loop:
 
@@ -87,13 +87,13 @@ expect(recovery25Seconds).toBeLessThanOrEqual(85 * 60);
 
 Also add a pure-function contract that the same exported `rocuroniumBlockFromCe()` result is observed by patient update and neostigmine reversal eligibility. Assert outputs are `Math.fround`-stable and clamped to `[0, 1]`.
 
-- [ ] **Step 2: Run the NMB tests to verify RED**
+- [x] **Step 2: Run the NMB tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/neuromuscular.test.js --reporter=verbose`
 
 Expected: FAIL because the current `rocuroniumCe / 3` curve misses the onset and depth anchors and the shared function does not yet exist.
 
-- [ ] **Step 3: Implement the minimal shared float32 model**
+- [x] **Step 3: Implement the minimal shared float32 model**
 
 Create a pure module with one public mapping and no patient state:
 
@@ -110,19 +110,19 @@ export function rocuroniumBlockFromCe(effectSiteConcentration) {
 
 Replace both duplicated `Clamp01(rocuroniumCe / 3)` calculations with calls to this function. Do not introduce a second paralysis variable or alter `centralDrive`.
 
-- [ ] **Step 4: Tune only against stated clinical anchors and verify GREEN**
+- [x] **Step 4: Tune only against stated clinical anchors and verify GREEN**
 
 Run: `cd crisis-sim && npx vitest run test/neuromuscular.test.js --reporter=verbose`
 
 Expected: all NMB clinical-anchor and shared-state tests pass, including a reported 25%-twitch recovery time inside 15–85 minutes.
 
-- [ ] **Step 5: Guard frozen parity immediately**
+- [x] **Step 5: Guard frozen parity immediately**
 
 Run: `cd crisis-sim && npx vitest run test/parity.test.js --reporter=verbose`
 
 Expected: all eight frozen parity assertions and the retirement-boundary contract pass. Stop on any non-rocuronium fixture change.
 
-- [ ] **Step 6: Commit the shared NMB calibration**
+- [x] **Step 6: Commit the shared NMB calibration**
 
 ```bash
 git add crisis-sim/sim/neuromuscularModel.js crisis-sim/sim/patientPhysiology.js crisis-sim/sim/drugSystem.js crisis-sim/test/neuromuscular.test.js
@@ -139,7 +139,7 @@ git commit -m "Calibrate shared rocuronium blockade model"
 - Test: `crisis-sim/test/reversal.test.js`
 - Test: `crisis-sim/test/neuromuscular.test.js`
 
-- [ ] **Step 1: Add failing reversal evidence at the recalibrated block depth**
+- [x] **Step 1: Add failing reversal evidence at the recalibrated block depth**
 
 Exercise the public drug APIs and assert:
 
@@ -152,7 +152,7 @@ expect(afterSugammadex.trainOfFourCount).toBeGreaterThanOrEqual(before.trainOfFo
 
 Keep existing sugammadex dose tiers and count-graded neostigmine selectivity. The TOF 0 neostigmine negative case is mandatory.
 
-- [ ] **Step 2: Add the same-drive/different-support orthogonality test**
+- [x] **Step 2: Add the same-drive/different-support orthogonality test**
 
 Build two identical deeply blocked deterministic patients. Leave one unsupported; transition the other through the legal airway API to `intubated` with VCV on. After the same elapsed time assert equal central drive and different derived gas exchange:
 
@@ -163,13 +163,13 @@ expect(supported.etco2).toBeLessThan(unsupported.etco2);
 expect(supported.spo2).toBeGreaterThan(unsupported.spo2);
 ```
 
-- [ ] **Step 3: Run the focused evidence to verify RED or expose exact gaps**
+- [x] **Step 3: Run the focused evidence to verify RED or expose exact gaps**
 
 Run: `cd crisis-sim && npx vitest run test/reversal.test.js test/neuromuscular.test.js --reporter=verbose`
 
 Expected: any failure names either reversal calibration or support derivation, not a UI behavior.
 
-- [ ] **Step 4: Make the smallest engine correction, if required**
+- [x] **Step 4: Make the smallest engine correction, if required**
 
 Use the shared `rocuroniumBlockFromCe()` result for all reversal depth calculations. Preserve the existing composition:
 
@@ -179,7 +179,7 @@ central drive × respiratory muscle capability + device/ventilator mechanical su
 
 Do not write SpO2, EtCO2, RR, or MV directly in tests or UI.
 
-- [ ] **Step 5: Verify focused evidence and frozen parity**
+- [x] **Step 5: Verify focused evidence and frozen parity**
 
 Run:
 
@@ -191,7 +191,7 @@ npx vitest run test/parity.test.js --reporter=verbose
 
 Expected: reversal, TOF 0 negative, orthogonality, and all frozen parity contracts pass.
 
-- [ ] **Step 6: Commit orthogonality evidence**
+- [x] **Step 6: Commit orthogonality evidence**
 
 ```bash
 git add crisis-sim/test/reversal.test.js crisis-sim/test/neuromuscular.test.js crisis-sim/sim/drugSystem.js crisis-sim/sim/patientPhysiology.js
@@ -208,7 +208,7 @@ git commit -m "Prove NMB reversal and support orthogonality"
 - Test: `crisis-sim/test/simRunner.test.js`
 - Test: `crisis-sim/test/live-sim-view.test.js`
 
-- [ ] **Step 1: Write failing runner lifecycle tests**
+- [x] **Step 1: Write failing runner lifecycle tests**
 
 Cover all three states through public methods:
 
@@ -224,13 +224,13 @@ expect(pausedRunner.simTime).toBe(frozenTime);
 
 Add a READY preoxygenation test that calls one runner operation, verifies machine FiO2 is 1.0, starts the clock, and records no drug.
 
-- [ ] **Step 2: Run runner tests to verify RED**
+- [x] **Step 2: Run runner tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/simRunner.test.js --reporter=verbose`
 
 Expected: FAIL because structured lifecycle results and READY auto-start/preoxygenation do not yet exist.
 
-- [ ] **Step 3: Implement the minimal runner API**
+- [x] **Step 3: Implement the minimal runner API**
 
 Add lifecycle derivation and structured results without changing engine vitals:
 
@@ -251,13 +251,13 @@ giveBolus(name, doseMg, label) {
 
 Implement READY preoxygenation as the existing machine changes plus `start()`, returning `{ started, state }`. Do not start again from RUNNING and do not resume from PAUSED.
 
-- [ ] **Step 4: Verify runner GREEN**
+- [x] **Step 4: Verify runner GREEN**
 
 Run: `cd crisis-sim && npx vitest run test/simRunner.test.js --reporter=verbose`
 
 Expected: READY, RUNNING, PAUSED, and preoxygenation lifecycle tests pass.
 
-- [ ] **Step 5: Write failing controller feedback tests**
+- [x] **Step 5: Write failing controller feedback tests**
 
 Use the real DOM/controller binding to assert:
 
@@ -269,13 +269,13 @@ expect(startButton.textContent).toBe('RESUME');
 
 Also assert preoxygenation changes the READY case label/clock state without adding a dose event.
 
-- [ ] **Step 6: Run controller tests to verify RED, then implement feedback**
+- [x] **Step 6: Run controller tests to verify RED, then implement feedback**
 
 Run: `cd crisis-sim && npx vitest run test/live-sim-view.test.js --reporter=verbose`
 
 Expected before implementation: FAIL on explicit lifecycle feedback. Update `liveSimView.js` to consume runner results and update controls/status only; do not calculate or assign vitals.
 
-- [ ] **Step 7: Verify lifecycle suites and commit**
+- [x] **Step 7: Verify lifecycle suites and commit**
 
 Run:
 
@@ -299,7 +299,7 @@ git commit -m "Start live physiology from ready actions"
 - Modify: `ui/liveSimDisplay.js`
 - Test: `crisis-sim/test/live-waveform.test.js`
 
-- [ ] **Step 1: Write failing pure renderer tests**
+- [x] **Step 1: Write failing pure renderer tests**
 
 Test the public module interface:
 
@@ -314,27 +314,27 @@ expect(renderer.snapshot().ecg.length).toBeLessThanOrEqual(600);
 
 Add separate tests proving continuous phase, ECG/pleth cardiac-phase sharing, missing HR/SpO2 flatlines, `capnogramPresent !== true` flat CO2, frame-gap clamping, and every normalized sample within `[-1, 1]`.
 
-- [ ] **Step 2: Run renderer tests to verify RED**
+- [x] **Step 2: Run renderer tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/live-waveform.test.js --reporter=verbose`
 
 Expected: FAIL because `ui/liveWaveformRenderer.js` does not exist.
 
-- [ ] **Step 3: Implement minimal rolling renderer**
+- [x] **Step 3: Implement minimal rolling renderer**
 
 Export pure morphology functions and `createWaveformRenderer()` with private cardiac/respiratory phase, a fixed logical sample rate, bounded arrays, and `advance(elapsedSeconds, signals)`. Clamp elapsed time to one reasonable frame-gap maximum; append new samples only. `snapshot()` returns copies so callers cannot mutate history.
 
-- [ ] **Step 4: Verify renderer GREEN**
+- [x] **Step 4: Verify renderer GREEN**
 
 Run: `cd crisis-sim && npx vitest run test/live-waveform.test.js --reporter=verbose`
 
 Expected: all continuity, flatline, capacity, and bounds tests pass.
 
-- [ ] **Step 5: Integrate the renderer without changing transport or engine state**
+- [x] **Step 5: Integrate the renderer without changing transport or engine state**
 
 In `ui/liveSimDisplay.js`, retain the latest received snapshot, advance the renderer from animation-frame elapsed time, and draw the returned history. Guard zero-sized canvases. Draw with vertical padding and clamp pixel Y inside that padding. Remove absolute-time phase calculation; do not send any rendered value back through BroadcastChannel or `localStorage`.
 
-- [ ] **Step 6: Run renderer and snapshot contracts**
+- [x] **Step 6: Run renderer and snapshot contracts**
 
 Run:
 
@@ -345,7 +345,7 @@ npx vitest run test/live-waveform.test.js test/snapshot-contract.test.js --repor
 
 Expected: renderer and engine-to-display snapshot contracts pass.
 
-- [ ] **Step 7: Commit the waveform repair**
+- [x] **Step 7: Commit the waveform repair**
 
 ```bash
 git add ui/liveWaveformRenderer.js ui/liveSimDisplay.js crisis-sim/test/live-waveform.test.js
@@ -360,17 +360,17 @@ git commit -m "Stabilize live monitor waveform history"
 - Modify: `crisis-sim/test/live-sim-display.test.js`
 - Test: `crisis-sim/test/live-sim-display.test.js`
 
-- [ ] **Step 1: Write failing DOM/CSS contract tests**
+- [x] **Step 1: Write failing DOM/CSS contract tests**
 
 Parse the display HTML and stylesheet. Assert the primary row contains HR, NIBP/MAP, SpO2, EtCO2/RR; the three waveform rows follow; TEMP/TOF occupy a separate secondary row. Assert the CSS includes a weighted NIBP column, BP `white-space: nowrap`, waveform `grid-template-columns: 70px minmax(0, 1fr)`, and waveform canvas `min-width: 0`.
 
-- [ ] **Step 2: Run layout tests to verify RED**
+- [x] **Step 2: Run layout tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/live-sim-display.test.js --reporter=verbose`
 
 Expected: FAIL because TEMP/TOF are still in the six-card primary grid and canvases retain intrinsic overflow.
 
-- [ ] **Step 3: Apply the minimal markup and CSS restructure**
+- [x] **Step 3: Apply the minimal markup and CSS restructure**
 
 Use this content order:
 
@@ -384,13 +384,13 @@ emergence/machine/alarms
 
 Use a four-column weighted desktop grid, two-column laptop/tablet grid, and narrow phone fallback with no horizontal scrolling. Keep all existing DOM IDs consumed by `liveSimDisplay.js`.
 
-- [ ] **Step 4: Verify layout GREEN**
+- [x] **Step 4: Verify layout GREEN**
 
 Run: `cd crisis-sim && npx vitest run test/live-sim-display.test.js --reporter=verbose`
 
 Expected: all DOM ordering and non-clipping CSS contracts pass.
 
-- [ ] **Step 5: Commit layout B**
+- [x] **Step 5: Commit layout B**
 
 ```bash
 git add live-sim-display.html styles.css crisis-sim/test/live-sim-display.test.js
@@ -404,17 +404,17 @@ git commit -m "Prioritize live monitor vitals and traces"
 - Modify: `crisis-sim/test/pwa-contract.test.js`
 - Test: `crisis-sim/test/pwa-contract.test.js`
 
-- [ ] **Step 1: Write the failing PWA cache test**
+- [x] **Step 1: Write the failing PWA cache test**
 
 Require cache namespace `v49-live-sim-monitor-2026-07-14` and `/ui/liveWaveformRenderer.js` in the app-shell manifest while preserving every existing live-simulation asset.
 
-- [ ] **Step 2: Run PWA test to verify RED**
+- [x] **Step 2: Run PWA test to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/pwa-contract.test.js --reporter=verbose`
 
 Expected: FAIL because the current cache is v48 and the new module is absent.
 
-- [ ] **Step 3: Update the service worker**
+- [x] **Step 3: Update the service worker**
 
 Change only the cache namespace and app-shell asset list:
 
@@ -425,7 +425,7 @@ const CACHE_NAME = 'v49-live-sim-monitor-2026-07-14';
 
 Do not remove unrelated shell assets.
 
-- [ ] **Step 4: Verify PWA GREEN and inspect the exact manifest diff**
+- [x] **Step 4: Verify PWA GREEN and inspect the exact manifest diff**
 
 Run:
 
@@ -438,7 +438,7 @@ git diff -- sw.js crisis-sim/test/pwa-contract.test.js
 
 Expected: PWA contract passes; diff shows exactly one cache bump plus the waveform module addition and matching test expectations.
 
-- [ ] **Step 5: Commit the cache update**
+- [x] **Step 5: Commit the cache update**
 
 ```bash
 git add sw.js crisis-sim/test/pwa-contract.test.js
@@ -452,19 +452,19 @@ git commit -m "Refresh PWA cache for monitor repair"
 - Modify: `docs/superpowers/plans/2026-07-14-live-sim-monitor-drug-response-repair.md`
 - Test: all `crisis-sim/test/*.test.js`
 
-- [ ] **Step 1: Run the complete automated suite**
+- [x] **Step 1: Run the complete automated suite**
 
 Run: `cd crisis-sim && npm test`
 
 Expected: all Vitest files and assertions pass. If a test fails, identify the first failing assertion and its root cause before editing. Three consecutive failed fixes on the same assertion is a stop condition.
 
-- [ ] **Step 2: Run frozen parity separately and preserve output**
+- [x] **Step 2: Run frozen parity separately and preserve output**
 
 Run: `cd crisis-sim && npx vitest run test/parity.test.js --reporter=verbose`
 
 Expected: retirement-boundary contract plus eight frozen high-spinal/MH assertions pass. Any frozen failure is a stop condition.
 
-- [ ] **Step 3: Re-run and capture deterministic engine evidence**
+- [x] **Step 3: Re-run and capture deterministic engine evidence**
 
 Run Node scripts against real engine APIs for:
 
@@ -478,11 +478,11 @@ reversal: deep-block sugammadex response and TOF 0 neostigmine rejection
 
 Expected: preoxygenation reserve is materially different; propofol depression remains graded but does not approach zero and is recorded as a Round 2 engine gap; rocuronium/reversal/orthogonality match automated anchors. Do not simulate any missing physiology in the UI.
 
-- [ ] **Step 4: Run snapshot and full induction-to-emergence smoke evidence explicitly**
+- [x] **Step 4: Run snapshot and full induction-to-emergence smoke evidence explicitly**
 
 Run the repository's named snapshot-contract and smoke-case Vitest files discovered with `rg -l "snapshot|induction.*emergence|smoke" crisis-sim/test`, then preserve the passing output.
 
-- [ ] **Step 5: Inspect in a local browser at three widths**
+- [x] **Step 5: Inspect in a local browser at three widths**
 
 Serve the repository locally and use the real instructor and `/live-sim-display.html` pages. At phone, laptop, and classroom widths verify:
 
@@ -501,7 +501,7 @@ no browser console errors
 
 Capture screenshots at the three viewport classes and console output as evidence. Browser rendering may never be used to override failed engine evidence.
 
-- [ ] **Step 6: Review the final diff for scope and truth boundaries**
+- [x] **Step 6: Review the final diff for scope and truth boundaries**
 
 Run:
 
@@ -513,7 +513,7 @@ git diff origin/main...HEAD -- crisis-sim/sim crisis-sim/ui ui live-sim-display.
 
 Expected: no unrelated game, regional-block, or character files; no direct UI writes to derived vitals; exactly one shared NMB mapping; no regenerated parity fixtures.
 
-- [ ] **Step 7: Mark this plan complete and commit final evidence documentation**
+- [x] **Step 7: Mark this plan complete and commit final evidence documentation**
 
 Check each completed plan item. If documentation changed after the last code commit:
 
@@ -522,6 +522,6 @@ git add docs/superpowers/specs/2026-07-14-live-sim-monitor-drug-response-design.
 git commit -m "Document live sim repair evidence"
 ```
 
-- [ ] **Step 8: Hand off without publishing**
+- [x] **Step 8: Hand off without publishing**
 
 Report the branch and commits, actual automated outputs, parity retirement/frozen list, FDA clinical anchors, audit curves, engine gaps, PWA manifest diff, and browser evidence. Do not push, merge, deploy, or modify the user's dirty main checkout.
