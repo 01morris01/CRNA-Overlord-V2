@@ -34,6 +34,7 @@ describe('main app live simulation registration', () => {
     expect(controller).toContain('liveRunner.deliverMaskVentilation');
     expect(controller).toContain('liveRunner.applyCricoidPressure()');
     expect(controller).toContain('liveRunner.releaseCricoidPressure()');
+    expect(controller).toContain('const wasActive = latestSnapshot?.cricoidPressureActive === true;');
     expect(controller).toContain('snapshot.intubationInProgress');
     expect(controller).toContain('result.attemptNumber');
     expect(controller).toContain('deriveLifecyclePresentation(snapshot)');

@@ -1,6 +1,6 @@
 # Airway Gaps Engine Model
 
-Status: approved for implementation  
+Status: implemented and verified on the feature branch
 Date: 2026-07-14  
 Branch: `feature/engine-airway-gaps`
 
@@ -36,6 +36,8 @@ ScenarioManager
 
 It consumes no random numbers. An unused procedure system does not change physiology or shift the established RNG sequence.
 
+Procedure time is calculated as `float32(integerTickCount * fixedStep)` rather than by repeatedly adding an already-rounded timestep. This prevents cumulative float32 drift from extending a nominal action by one tick.
+
 The rig helpers expose it additively as `a`:
 
 ```js
@@ -59,6 +61,8 @@ deliverMaskVentilation({
 
 stopMaskVentilation()
 ```
+
+`SimRunner` exposes the same methods. Successful live actions also return the wrapper lifecycle fields `state` and `started`.
 
 `deliverMaskVentilation()` is one discrete clinical action that schedules a fixed-duration episode. It is not a writable `ppvOn` boolean. The method returns the accepted episode ID, fixed-step start time, requested duration, mask airway state, settings, delivered minute ventilation, and convenience cricoid metadata.
 
@@ -164,6 +168,8 @@ Outcome is deterministic membership in `failedIntubationAttempts`. No intubation
 attemptIntubation()
 ```
 
+`SimRunner.configureIntubationAttempts({ failedIntubationAttempts, attemptDurationSeconds })` configures the live run. `SimRunner.intubate()` is a compatibility alias for `attemptIntubation()` and follows the same timed path.
+
 Starting an attempt requires a `mask` airway and no current attempt. The accepted call increments the count immediately and returns the attempt number, fixed-step start time, duration, and starting airway without revealing outcome before completion.
 
 At attempt start:
@@ -259,6 +265,8 @@ The live snapshot adds:
 
 Objects returned by `snapshot()` are copies and cannot mutate engine state.
 
+The implemented contract contains 79 keys: 60 numeric, 9 boolean, 6 string, 3 array, and 1 nullable-object field.
+
 ## Scoreable paths
 
 `setAirwayDevice()` is an administrative/setup method. It is useful for fixtures, starting states, and instructor setup, but it is not clinical performance evidence.
@@ -326,3 +334,14 @@ The implementation must keep all prior evidence green and add:
 10. Correct RSI cricoid record with no PPV before first attempt.
 11. Attempt desaturation timing: finite below-90 crossing without preoxygenation and no crossing in the preoxygenated equivalent.
 12. Administrative `setAirwayDevice()` creates no attempt log and cannot be scored as intubation.
+
+## Implemented evidence results
+
+- All 89 Vitest assertions pass across 12 files.
+- Apneic/paralyzed PPV at 6 L/min maintained SpO2 at 100.000% and EtCO2 at 37.768 mmHg at 120 seconds; the matched unsupported run reached SpO2 1.000% with zero effective MV.
+- In the forced-apnea comparison, room-air preparation reached SpO2 87.703% by 45 seconds and 69.513% by 60 seconds. The preoxygenated run remained at 100.000% through 60 seconds and 99.928% through 120 seconds.
+- A non-preoxygenated failed attempt crossed below 90% at 41.18 seconds. The matched preoxygenated 60-second attempt never crossed below 90%.
+- Rescue PPV increased SpO2 from 87.649% after failed attempt 1 to 99.882% before successful attempt 2.
+- The ordered rescue log is `intubation_attempt_started -> intubation_attempt_failed -> cricoid_pressure_applied -> mask_ppv_started -> intubation_attempt_started -> intubation_attempt_succeeded`.
+- Two combined runs sampled during active PPV and active laryngoscopy produced the identical SHA-256 fingerprint `0100edda46844c5bdeb6ffee9a96f90e90930e2f9a561c07ad6a8db51e83ba13`.
+- All nine frozen parity/exposure-boundary tests pass without fixture regeneration.

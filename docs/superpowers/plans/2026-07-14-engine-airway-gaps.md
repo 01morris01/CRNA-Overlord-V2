@@ -616,11 +616,11 @@ git commit -m "Move live intubation to timed airway attempts"
 - Modify: `docs/airway-gaps-model.md`
 - Modify: `docs/superpowers/plans/2026-07-14-engine-airway-gaps.md`
 
-- [ ] **Step 1: Reconcile implemented names and output with the model**
+- [x] **Step 1: Reconcile implemented names and output with the model**
 
 Compare every public method, snapshot key, event name, config field, record field, simplification, and live-UI statement against the implementation. Update only genuine implementation facts; do not weaken the approved requirements.
 
-- [ ] **Step 2: Run the complete verification matrix fresh**
+- [x] **Step 2: Run the complete verification matrix fresh**
 
 ```bash
 cd crisis-sim
@@ -643,7 +643,7 @@ Expected:
 
 If the same test fails three times after three root-cause-based corrections, stop and report the blocker. Any broken frozen non-rocuronium fixture is an immediate stop condition.
 
-- [ ] **Step 3: Inspect scope and repository state**
+- [x] **Step 3: Inspect scope and repository state**
 
 ```bash
 git status --short
@@ -653,13 +653,13 @@ git log --oneline 7923dc9..HEAD
 
 Confirm no unrelated user files changed and no remote push occurred.
 
-- [ ] **Step 4: Mark this plan complete and make the final feature commit**
+- [x] **Step 4: Mark this plan complete and make the final feature commit**
 
 ```bash
 git add docs/airway-gaps-model.md docs/superpowers/plans/2026-07-14-engine-airway-gaps.md
 git commit -m "Record airway gaps verification"
 ```
 
-- [ ] **Step 5: Prepare the final report**
+- [x] **Step 5: Prepare the final report**
 
 Paste the complete verification counts, PPV/withheld curve, preoxygenated/non-preoxygenated curve, ordered rescue log, desaturation timing records, determinism fingerprints, frozen parity result, commit ID, branch, and explicit `not pushed` status. State exactly that the operator now experiences a timed unsupported laryngoscopy interval and must enable ventilation separately after successful tube placement.

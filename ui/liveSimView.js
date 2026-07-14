@@ -613,12 +613,13 @@ function bindControls() {
   });
   document.getElementById('live-cricoid-toggle')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
-    const result = latestSnapshot?.cricoidPressureActive
+    const wasActive = latestSnapshot?.cricoidPressureActive === true;
+    const result = wasActive
       ? liveRunner.releaseCricoidPressure()
       : liveRunner.applyCricoidPressure();
     setStatus(
       result.changed
-        ? (latestSnapshot?.cricoidPressureActive ? 'Cricoid pressure released.' : 'Cricoid pressure applied.')
+        ? (wasActive ? 'Cricoid pressure released.' : 'Cricoid pressure applied.')
         : 'Cricoid pressure state unchanged.',
       'success',
     );
