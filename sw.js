@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v48-boardgame-live-sim-2026-07-13';
+const CACHE_VERSION = 'v49-live-sim-monitor-2026-07-14';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -10,10 +10,12 @@ const APP_SHELL = [
   '/ui/gameUI.js', '/ui/menus.js',
   '/ui/reviewMode.js', '/ui/sceneRegistry.js', '/assets/css/tokens.css',
   '/live-sim-display.html', '/assets/css/live-sim.css', '/assets/css/live-sim-display.css',
-  '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
+  '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveWaveformRenderer.js',
+  '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
   '/crisis-sim/ui/simRunner.js',
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',
+  '/crisis-sim/sim/neuromuscularModel.js',
   '/crisis-sim/sim/ventilatorSystem.js', '/crisis-sim/sim/simulationCore.js',
   '/crisis-sim/sim/scenario/scenarioManager.js', '/crisis-sim/sim/scenario/scenarioLoader.js',
   '/crisis-sim/sim/scenario/scenarioState.js', '/crisis-sim/sim/scenario/scenarioScoring.js',

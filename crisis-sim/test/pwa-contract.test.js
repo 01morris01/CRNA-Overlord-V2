@@ -11,6 +11,7 @@ const requiredAppShellEntries = [
   '/assets/css/live-sim-display.css',
   '/ui/liveSimView.js',
   '/ui/liveSimDisplay.js',
+  '/ui/liveWaveformRenderer.js',
   '/ui/liveSimModel.js',
   '/ui/liveSimTransport.js',
   '/crisis-sim/ui/simRunner.js',
@@ -19,6 +20,7 @@ const requiredAppShellEntries = [
   '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js',
   '/crisis-sim/sim/drugSystem.js',
+  '/crisis-sim/sim/neuromuscularModel.js',
   '/crisis-sim/sim/ventilatorSystem.js',
   '/crisis-sim/sim/simulationCore.js',
   '/crisis-sim/sim/scenario/scenarioManager.js',
@@ -32,9 +34,9 @@ const requiredAppShellEntries = [
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v48-boardgame-live-sim-2026-07-13';");
+    expect(sw).toContain("const CACHE_VERSION = 'v49-live-sim-monitor-2026-07-14';");
     expect(sw).toContain("'/hospital-map.js?v=48'");
-    expect(sw).not.toContain("const CACHE_VERSION = 'v38-patho2-neural-2026-07-07';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v48-boardgame-live-sim-2026-07-13';");
   });
 
   it('pre-caches every live view and browser engine dependency', () => {
