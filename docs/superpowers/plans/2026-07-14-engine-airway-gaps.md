@@ -41,7 +41,7 @@
 - Create: `crisis-sim/sim/airwayProcedureSystem.js`
 - Create: `crisis-sim/test/airway-procedure.test.js`
 
-- [ ] **Step 1: Write failing lifecycle tests**
+- [x] **Step 1: Write failing lifecycle tests**
 
 Create focused tests using a reset patient and a procedure system:
 
@@ -109,13 +109,13 @@ it('configures deterministic attempt outcomes and interrupts PPV', () => {
 
 Also test invalid mask/number inputs, reset clearing state, and `eventsSince()` returning copies.
 
-- [ ] **Step 2: Run tests to verify RED**
+- [x] **Step 2: Run tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/airway-procedure.test.js --reporter=verbose`
 
 Expected: FAIL because `AirwayProcedureSystem` is not exported.
 
-- [ ] **Step 3: Implement the minimal subsystem**
+- [x] **Step 3: Implement the minimal subsystem**
 
 Create the class with float32 time stores and no RNG:
 
@@ -150,13 +150,13 @@ export class AirwayProcedureSystem {
 
 Implement validated start/stop, event emission, fixed-step completion, deterministic failure membership, SpO2 nadir/crossing samples, and reset exactly as specified in `docs/airway-gaps-model.md`.
 
-- [ ] **Step 4: Run tests to verify GREEN**
+- [x] **Step 4: Run tests to verify GREEN**
 
 Run: `cd crisis-sim && npx vitest run test/airway-procedure.test.js --reporter=verbose`
 
 Expected: all state-machine tests pass without any RNG field or call.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add crisis-sim/sim/airwayProcedureSystem.js crisis-sim/test/airway-procedure.test.js

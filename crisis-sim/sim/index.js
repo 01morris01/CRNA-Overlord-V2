@@ -5,6 +5,7 @@ export { PatientPhysiology, Status, AirwayDevice } from './patientPhysiology.js'
 export { DrugSystem } from './drugSystem.js';
 export { rocuroniumBlockFromCe } from './neuromuscularModel.js';
 export { VentilatorSystem, VentMode } from './ventilatorSystem.js';
+export { AirwayProcedureSystem } from './airwayProcedureSystem.js';
 export { SimulationCore } from './simulationCore.js';
 export { ScenarioManager, ScenarioState } from './scenario/scenarioManager.js';
 export { normalize, ScenarioEventType } from './scenario/scenarioLoader.js';
