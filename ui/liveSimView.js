@@ -179,6 +179,11 @@ function renderShell() {
             <button type="button" data-airway="intubated">INTUBATE</button>
             <button type="button" data-airway="extubated">EXTUBATE</button>
           </div>
+          <output id="live-intubation-state" class="live-help" aria-live="polite">No intubation attempts.</output>
+          <div class="live-button-row">
+            <button id="live-mask-ppv" type="button">MASK PPV · 30 SEC</button>
+            <button id="live-cricoid-toggle" type="button" aria-pressed="false">APPLY CRICOID</button>
+          </div>
           <label class="live-toggle" for="live-forced-apnea">
             <input id="live-forced-apnea" type="checkbox"><span>Forced apnea imposed</span>
           </label>
@@ -304,6 +309,36 @@ function renderSnapshot(snapshot) {
   setText('live-drive-muscle', Number(snapshot.respiratoryMuscleCapability).toFixed(2));
   const forcedApnea = document.getElementById('live-forced-apnea');
   if (forcedApnea) forcedApnea.checked = snapshot.forcedApnea;
+  const latestAttempt = snapshot.intubationAttempts.at(-1);
+  if (snapshot.intubationInProgress && latestAttempt) {
+    const elapsed = Math.max(0, snapshot.t - latestAttempt.startTimeSec);
+    const remaining = Math.max(0, latestAttempt.plannedDurationSec - elapsed);
+    setText(
+      'live-intubation-state',
+      `ATTEMPT ${latestAttempt.attemptNumber} · ${remaining.toFixed(1)}s remaining · AIRWAY UNSECURED`,
+    );
+  } else if (latestAttempt?.outcome === 'succeeded') {
+    setText(
+      'live-intubation-state',
+      `Attempt ${latestAttempt.attemptNumber} succeeded · tube secured · select ventilation`,
+    );
+  } else if (latestAttempt?.outcome === 'failed') {
+    setText('live-intubation-state', `Attempt ${latestAttempt.attemptNumber} failed · mask airway retained`);
+  } else {
+    setText('live-intubation-state', 'No intubation attempts.');
+  }
+  const intubateButton = document.querySelector('[data-airway="intubated"]');
+  if (intubateButton) intubateButton.disabled = snapshot.intubationInProgress || snapshot.airwayDevice !== 'mask';
+  const ppvButton = document.getElementById('live-mask-ppv');
+  if (ppvButton) {
+    ppvButton.disabled = snapshot.ppvActive || snapshot.intubationInProgress || snapshot.airwayDevice !== 'mask';
+    ppvButton.textContent = snapshot.ppvActive ? 'MASK PPV ACTIVE' : 'MASK PPV · 30 SEC';
+  }
+  const cricoidButton = document.getElementById('live-cricoid-toggle');
+  if (cricoidButton) {
+    cricoidButton.textContent = snapshot.cricoidPressureActive ? 'RELEASE CRICOID' : 'APPLY CRICOID';
+    cricoidButton.setAttribute('aria-pressed', String(snapshot.cricoidPressureActive));
+  }
   transport?.publishSnapshot(snapshot);
 }
 
@@ -333,6 +368,14 @@ function handleAirway(next) {
 
   if (!result.ok) {
     setStatus(result.reason, 'error');
+    return;
+  }
+  if (next === 'intubated') {
+    setStatus(
+      `Intubation attempt ${result.attemptNumber} started · ${result.plannedDurationSec}s unsupported laryngoscopy.`,
+      'info',
+    );
+    liveRunner.emit();
     return;
   }
   if (next === 'mask' && result.changed) liveRunner.logEvent('Airway', 'Device → mask', { action: 'airway', device: 'mask' });
@@ -551,6 +594,35 @@ function bindControls() {
     liveRunner.setForcedApnea(event.currentTarget.checked);
     liveRunner.emit();
     setStatus(event.currentTarget.checked ? 'Forced apnea imposed.' : 'Forced apnea lifted.', 'success');
+  });
+  document.getElementById('live-mask-ppv')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.deliverMaskVentilation({
+      durationSeconds: 30,
+      tidalVolumeMl: latestSnapshot?.ventSetTV || 500,
+      respiratoryRate: latestSnapshot?.ventSetRR || 12,
+      cricoidPressure: latestSnapshot?.cricoidPressureActive === true,
+    });
+    setStatus(
+      result.ok
+        ? `Mask PPV started · ${result.minuteVentilation.toFixed(1)} L/min for ${result.plannedDurationSec}s.`
+        : result.reason,
+      result.ok ? 'success' : 'error',
+    );
+    liveRunner.emit();
+  });
+  document.getElementById('live-cricoid-toggle')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = latestSnapshot?.cricoidPressureActive
+      ? liveRunner.releaseCricoidPressure()
+      : liveRunner.applyCricoidPressure();
+    setStatus(
+      result.changed
+        ? (latestSnapshot?.cricoidPressureActive ? 'Cricoid pressure released.' : 'Cricoid pressure applied.')
+        : 'Cricoid pressure state unchanged.',
+      'success',
+    );
+    liveRunner.emit();
   });
 
   for (const button of view.querySelectorAll('[data-airway]')) {

@@ -58,6 +58,14 @@ line('PASS induction + paralysis', induced);
 
 const intubation = runner.intubate();
 assert.equal(intubation.ok, true, intubation.reason);
+const laryngoscopy = runner.snapshot();
+assert.equal(laryngoscopy.airwayDevice, 'mask', 'airway must remain unsecured during laryngoscopy');
+assert.equal(laryngoscopy.intubationInProgress, true, 'timed attempt must be active');
+assert.equal(laryngoscopy.effectiveMV, 0, 'laryngoscopy must inhibit support');
+const intubated = advance(runner, intubation.plannedDurationSec);
+assert.equal(intubated.lastIntubationOutcome, 'succeeded');
+assert.equal(intubated.airwayDevice, 'intubated');
+assert.equal(intubated.ventMode, VentMode.Manual, 'tube placement must not silently start VCV');
 runner.setVentMode(VentMode.VCV);
 runner.setMachine({
   setTidalVolume: 560, setRespiratoryRate: 12, setPeep: 5,

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v49-live-sim-monitor-2026-07-14';
+const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -16,6 +16,7 @@ const APP_SHELL = [
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',
   '/crisis-sim/sim/neuromuscularModel.js',
+  '/crisis-sim/sim/airwayProcedureSystem.js',
   '/crisis-sim/sim/ventilatorSystem.js', '/crisis-sim/sim/simulationCore.js',
   '/crisis-sim/sim/scenario/scenarioManager.js', '/crisis-sim/sim/scenario/scenarioLoader.js',
   '/crisis-sim/sim/scenario/scenarioState.js', '/crisis-sim/sim/scenario/scenarioScoring.js',

@@ -76,12 +76,22 @@ All patient-affecting instructor actions go through public runner methods:
 - `start()`, `pause()`, `reset()`, and `setSpeed(mult)` for case flow.
 - `giveBolus(name, totalDoseMg, label)` for drug actions. Per-kilogram or microgram calculations happen in the UI model and are converted to total milligrams before this call.
 - `setVentMode(mode)` and `setMachine(patch)` for the ventilator and vaporizer.
-- `setAirwayDevice(next)`, `intubate()`, and `extubate()` for validated device transitions. Rejected transition `reason` text is displayed.
+- `setAirwayDevice(next)` is administrative setup only and produces no scoreable intubation record.
+- `attemptIntubation()` and its compatibility alias `intubate()` start a timed, unsupported laryngoscopy attempt. The device remains `mask` until successful completion; tube placement does not silently start VCV.
+- `deliverMaskVentilation({ durationSeconds, tidalVolumeMl, respiratoryRate, cricoidPressure })` starts one timed mask-PPV episode. The engine derives gas exchange from its delivered minute ventilation.
+- `stopMaskVentilation()` ends an active PPV episode early.
+- `applyCricoidPressure()` and `releaseCricoidPressure()` create independent, timestamped scoreable maneuver records. Cricoid pressure has no modeled physiologic effect in this round.
+- `configureIntubationAttempts({ failedIntubationAttempts, attemptDurationSeconds })` supplies deterministic live/scenario attempt outcomes.
+- `extubate()` performs the validated post-intubation device transition.
 - `setForcedApnea(boolean)` for the explicit forced-apnea contribution.
 - `injectComplication(type)` will be added as a thin wrapper around the already-implemented `ScenarioManager.applyComplication()` state machines. It will not write a vital or create a second physiology model.
 - `buildDebrief()` will reuse `buildDebrief()`/`ScenarioRunState` so the live export has the existing `SimulationResult` keys.
 
 The UI never assigns `hr`, blood pressure, SpO2, RR, EtCO2, temperature, TOF, respiratory effort, or other derived values.
+
+### Timed intubation operator change
+
+Before the airway-gaps round, the instructor's **INTUBATE** button immediately changed the device to `intubated` and automatically selected VCV. It now starts a real timed attempt. The console displays the attempt number, countdown, and `AIRWAY UNSECURED`; during that interval procedural apnea is active and all mechanical support is inhibited. A configured failed attempt returns to the mask state. A successful attempt secures the tube, after which the operator must explicitly select and configure ventilation. The console also exposes independent **MASK PPV** and **APPLY/RELEASE CRICOID** actions.
 
 ## Theme and interaction conventions
 

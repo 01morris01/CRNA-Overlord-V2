@@ -24,7 +24,7 @@
 - Modify `crisis-sim/ui/simRunner.js`: public APIs, structured procedure log, snapshot contract, timed `intubate()` alias.
 - Modify `ui/liveSimView.js`: timed attempt status/countdown plus mask-PPV and cricoid controls; no vital writes.
 - Modify `docs/live-sim-integration.md`: exact wrapper signatures and operator behavior.
-- Modify `crisis-sim/sw.js`: cache the new engine module and bump cache version.
+- Modify `sw.js`: cache the new engine module and bump cache version.
 - Create `crisis-sim/test/airway-procedure.test.js`: unit/state-machine contracts.
 - Create `crisis-sim/test/airway-gaps-evidence.test.js`: physiologic and rubric evidence.
 - Create `crisis-sim/test/airway-gaps-evidence.mjs`: printable curves, ordered logs, and fingerprints.
@@ -548,10 +548,10 @@ git commit -m "Prove airway rubric evidence"
 - Modify: `docs/live-sim-integration.md`
 - Modify: `crisis-sim/test/app-integration.test.js`
 - Modify: `crisis-sim/test/live-case-smoke.mjs`
-- Modify: `crisis-sim/sw.js`
+- Modify: `sw.js`
 - Modify: `crisis-sim/test/pwa-contract.test.js`
 
-- [ ] **Step 1: Write failing UI and smoke contracts**
+- [x] **Step 1: Write failing UI and smoke contracts**
 
 Update integration tests to require instructor controls for timed PPV and apply/release cricoid, an intubation-in-progress status/countdown, and no direct device mutation from the intubate button.
 
@@ -569,7 +569,7 @@ runner.setVentMode(VentMode.VCV);
 
 Require `/crisis-sim/sim/airwayProcedureSystem.js` in the PWA cache contract.
 
-- [ ] **Step 2: Run tests to verify RED**
+- [x] **Step 2: Run tests to verify RED**
 
 Run:
 
@@ -581,17 +581,17 @@ node test/live-case-smoke.mjs
 
 Expected: console/PWA assertions and the old immediate smoke assumption fail.
 
-- [ ] **Step 3: Update the instructor console**
+- [x] **Step 3: Update the instructor console**
 
 Bind the controls only to `SimRunner` methods. Show `Attempt N · Xs remaining` while active; report failure while retaining mask state; report success only when the snapshot changes to `intubated`. Leave ventilator selection explicit. Do not assign patient vitals or airway fields in the view.
 
 Document the exact APIs and the operator change in `docs/live-sim-integration.md`.
 
-- [ ] **Step 4: Update smoke and cache**
+- [x] **Step 4: Update smoke and cache**
 
 Advance the smoke case through the timed attempt and explicitly select VCV afterward. Add the new module URL and bump the service-worker cache name so installed apps receive the engine file.
 
-- [ ] **Step 5: Verify UI, smoke, and PWA GREEN**
+- [x] **Step 5: Verify UI, smoke, and PWA GREEN**
 
 Run:
 
@@ -603,10 +603,10 @@ node test/live-case-smoke.mjs
 
 Expected: instructor, timed smoke, and cache contracts all pass.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
-git add ui/liveSimView.js docs/live-sim-integration.md crisis-sim/test/app-integration.test.js crisis-sim/test/live-case-smoke.mjs crisis-sim/sw.js crisis-sim/test/pwa-contract.test.js
+git add ui/liveSimView.js docs/live-sim-integration.md crisis-sim/test/app-integration.test.js crisis-sim/test/live-case-smoke.mjs sw.js crisis-sim/test/pwa-contract.test.js
 git commit -m "Move live intubation to timed airway attempts"
 ```
 

@@ -28,6 +28,14 @@ describe('main app live simulation registration', () => {
     expect(controller.match(/new SimRunner\(/g)).toHaveLength(1);
     expect(controller).toContain('const result = liveRunner.giveBolus');
     expect(controller).toContain('liveRunner.preoxygenate()');
+    expect(controller).toContain('id="live-mask-ppv"');
+    expect(controller).toContain('id="live-cricoid-toggle"');
+    expect(controller).toContain('id="live-intubation-state"');
+    expect(controller).toContain('liveRunner.deliverMaskVentilation');
+    expect(controller).toContain('liveRunner.applyCricoidPressure()');
+    expect(controller).toContain('liveRunner.releaseCricoidPressure()');
+    expect(controller).toContain('snapshot.intubationInProgress');
+    expect(controller).toContain('result.attemptNumber');
     expect(controller).toContain('deriveLifecyclePresentation(snapshot)');
     expect(hospitalMap).toContain('var dt = Math.max(0, Math.min(.05, (t - last) / 1000));');
   });
