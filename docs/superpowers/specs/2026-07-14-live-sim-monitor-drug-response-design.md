@@ -20,6 +20,7 @@ The rocuronium reference target is the FDA prescribing information: an initial 0
 ## Goals
 
 - Make a first drug action visibly start physiologic time.
+- Make preoxygenation at FiO2 1.0 visibly start physiologic time from `READY`.
 - Preserve an intentional pause while making queued-dose behavior explicit.
 - Preserve the existing graded propofol PK/PD response.
 - Recalibrate rocuronium 0.6 mg/kg to a credible onset and duration.
@@ -47,6 +48,7 @@ The runner continues to own the drug system and simulation clock. The controller
 
 Drug behavior:
 
+- From `READY`, preoxygenation sets FiO2 to 1.0 and immediately starts the runner so oxygen-store wash-in is simulated before induction.
 - From `READY`, record the bolus at time zero and immediately start the runner. The status message names the dose and says that effect evolves with simulation time.
 - From `RUNNING`, record the bolus and continue normally.
 - From `PAUSED`, record the bolus in the drug compartment without advancing time. Return a queued result and announce `DOSE QUEUED — RESUME TO ADVANCE` through the existing live status region.
@@ -83,6 +85,25 @@ Deterministic 70 kg adult acceptance anchors for 0.6 mg/kg rocuronium:
 - Block remains clinically meaningful through at least 15 minutes.
 - Recovery to 25% of control twitch (approximately 75% blockade remaining) occurs within the FDA-reported 15–85 minute clinical-duration range, targeting the neighborhood of the 31-minute median.
 - Existing sugammadex dose tiers and count-graded neostigmine behavior operate on the recalibrated state and retain their selectivity rules.
+
+## Parity contract retirement (NMB path)
+
+The C# reference engine's rocuronium calibration is clinically wrong: TOF 4 at 90 seconds after 0.6 mg/kg does not represent a real patient. Parity with a clinically wrong reference has no value. For the NMB path, the FDA prescribing information supersedes the C# baseline as the truth source: onset of at least 80% block at a median of one minute, maximum block at a median of 1.8 minutes, and median clinical duration of 31 minutes with a reported range of 15–85 minutes.
+
+The pre-change JS parity suite passed all 12 assertions. Fixture inspection establishes this exact exposure boundary:
+
+- `rsi_hypotension_001.json`: contains one rocuronium action and reaches `rocuroniumCe=0.9385258`. Its four fixture assertions are **RETIRED**, not re-baselined. Clinical-anchor evidence tests replace this NMB coverage.
+- `high_spinal_001.json`: no rocuronium action and maximum rocuronium effect-site concentration is zero. Its four assertions remain frozen.
+- `malignant_hyperthermia_001.json`: no rocuronium action and maximum rocuronium effect-site concentration is zero. Its four assertions remain frozen.
+
+No parity fixture is regenerated. If either non-rocuronium fixture changes, that is a real regression and implementation stops rather than updating its expected output.
+
+## Pre-implementation physiology audits
+
+Two deterministic audits must be run and reported without UI workarounds:
+
+1. **Preoxygenation audit:** compare immediate unsupported apnea with three minutes of FiO2 1.0 preoxygenation followed by the same apnea. Print both SpO2 curves and time-to-threshold measurements. If the difference is absent or negligible, record an engine gap for Round 2; do not synthesize reserve in the UI.
+2. **Propofol audit:** administer propofol 2 mg/kg to the deterministic 70 kg patient and print `drugDepressionContribution` and spontaneous minute ventilation for three minutes. If contribution does not approach zero, record an engine gap for Round 2; do not toggle forced apnea automatically or otherwise imitate depression in the UI.
 
 ## Monitor layout B
 
@@ -129,6 +150,7 @@ Move rendering math into a small display-only module with pure morphology functi
 ### Automated
 
 - Runner/controller tests for READY auto-start, RUNNING dose, and PAUSED queued status.
+- Runner/controller tests proving preoxygenation starts time from `READY` and sets FiO2 to 1.0.
 - Existing graded propofol response test remains unchanged and passes.
 - New rocuronium onset, maximum-block, duration, and central-drive-independence tests.
 - Axis-orthogonality evidence using the recalibrated block: unsupported deterioration versus intubated VCV stability.
@@ -140,11 +162,12 @@ Move rendering math into a small display-only module with pure morphology functi
   - buffer size is bounded;
   - peaks stay within plotting bounds.
 - DOM/CSS contract tests for the primary/secondary layout and non-clipping canvas grid.
-- Original parity/evidence suites, snapshot contract, and full induction-to-emergence smoke case.
+- The eight remaining frozen non-rocuronium parity assertions, the engine evidence suite, snapshot contract, and full induction-to-emergence smoke case.
 
 ### Browser
 
 - READY propofol dose starts the clock and produces visible graded changes.
+- READY preoxygenation starts the clock without recording a drug.
 - PAUSED dose announces queued state and begins evolving only after resume.
 - Rocuronium 0.6 mg/kg demonstrates TOF/muscle onset without changing central drive.
 - Unsupported and mechanically supported rocuronium cases produce correctly different gas exchange.
