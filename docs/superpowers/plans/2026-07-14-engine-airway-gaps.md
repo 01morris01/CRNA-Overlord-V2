@@ -258,7 +258,7 @@ git commit -m "Wire procedural apnea and ETO2"
 - Modify: `crisis-sim/sim/ventilatorSystem.js`
 - Create: `crisis-sim/test/airway-gaps-evidence.test.js`
 
-- [ ] **Step 1: Write failing PPV physiology evidence**
+- [x] **Step 1: Write failing PPV physiology evidence**
 
 Build equivalent forced-apnea, deeply rocuronium-blocked patients at FiO2 1.0. Deliver 120 seconds of mask PPV to one and withhold it from the other:
 
@@ -276,13 +276,13 @@ expect(unsupported.p.spO2).toBeLessThan(90);
 
 Add a laryngoscopy test that starts PPV, starts an attempt, then asserts mechanical/effective MV are zero throughout the attempt even if the ventilator was set to a mandatory mode.
 
-- [ ] **Step 2: Run tests to verify RED**
+- [x] **Step 2: Run tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/airway-gaps-evidence.test.js --reporter=verbose`
 
 Expected: FAIL because the ventilator does not read procedure support.
 
-- [ ] **Step 3: Implement PPV support and attempt inhibition**
+- [x] **Step 3: Implement PPV support and attempt inhibition**
 
 Give `VentilatorSystem` an `airwayProcedure` reference. In `tick()` give active laryngoscopy highest priority, active mask PPV next priority, then preserve the existing mode switch unchanged:
 
@@ -298,7 +298,7 @@ if (this.airwayProcedure?.intubationInProgress) {
 
 `updateMaskPpv()` sets measured TV/RR/MV and mechanical MV only. `updatePatientInterface()` composes `Max(mechanicalMinuteVentilation, spontaneousMinuteVentilation)` for PPV, matching the existing controlled-support simplification. `updateCO2()` and the patient oxygen reservoir must consume the resulting effective ventilation; do not assign gas-exchange vitals.
 
-- [ ] **Step 4: Verify evidence and frozen parity**
+- [x] **Step 4: Verify evidence and frozen parity**
 
 Run:
 
@@ -310,7 +310,7 @@ npx vitest run test/parity.test.js --reporter=verbose
 
 Expected: PPV/withholding and support-inhibition evidence pass; frozen fixtures are unchanged.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add crisis-sim/sim/ventilatorSystem.js crisis-sim/test/airway-gaps-evidence.test.js
