@@ -1,6 +1,7 @@
-/* Parity suite — asserts the JS engine reproduces the C# golden fixtures
-   bit-for-bit (float32-exact) for every sampled tick, action-log entry,
-   and debrief field of all 3 MVP scenarios. */
+/* Parity suite — asserts the JS engine reproduces the frozen, non-NMB C#
+   golden fixtures bit-for-bit (float32-exact). The rocuronium-bearing RSI
+   fixture is retained on disk for provenance but its clinically incorrect NMB
+   contract is retired in favor of FDA clinical-anchor evidence tests. */
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +11,15 @@ import { RUNNERS } from './parityDriver.js';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FX = join(HERE, 'fixtures', 'parity');
 const f = Math.fround;
+
+const RETIRED_NMB_PARITY_CASES = Object.freeze([
+  'rsi_hypotension_001',
+]);
+
+const FROZEN_PARITY_CASES = Object.freeze([
+  'high_spinal_001',
+  'malignant_hyperthermia_001',
+]);
 
 const loadFixture = (id) => JSON.parse(readFileSync(join(FX, `${id}.json`), 'utf8'));
 
@@ -57,8 +67,22 @@ function collectDebriefDiffs(fx, ac) {
   return diffs;
 }
 
-describe('golden-fixture parity (C# → JS, float32-exact)', () => {
-  for (const id of Object.keys(RUNNERS)) {
+describe('parity exposure boundary', () => {
+  it('retires only fixtures with an administered rocuronium dose', () => {
+    const hasRocuroniumAction = (id) => loadFixture(id).actionLog.some(
+      (entry) => entry.drug?.toLowerCase() === 'rocuronium',
+    );
+
+    expect(RETIRED_NMB_PARITY_CASES.filter(hasRocuroniumAction)).toEqual(RETIRED_NMB_PARITY_CASES);
+    expect(FROZEN_PARITY_CASES.filter(hasRocuroniumAction)).toEqual([]);
+    expect([...RETIRED_NMB_PARITY_CASES, ...FROZEN_PARITY_CASES].sort()).toEqual(
+      Object.keys(RUNNERS).sort(),
+    );
+  });
+});
+
+describe('frozen golden-fixture parity (C# → JS, float32-exact)', () => {
+  for (const id of FROZEN_PARITY_CASES) {
     describe(id, () => {
       const fixture = loadFixture(id);
       const actual = RUNNERS[id]();
