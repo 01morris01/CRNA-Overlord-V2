@@ -31,14 +31,17 @@
       <article class="display-vital display-vital-bp"><span>NIBP</span><strong id="display-bp">—</strong><small>MAP <b id="display-map">—</b> mmHg</small></article>
       <article class="display-vital display-vital-spo2"><span>SpO₂</span><strong id="display-spo2">—</strong><small>%</small></article>
       <article class="display-vital display-vital-co2"><span>EtCO₂</span><strong id="display-etco2">—</strong><small>mmHg · RR <b id="display-rr">—</b></small></article>
-      <article class="display-vital display-vital-temp"><span>TEMP</span><strong id="display-temp">—</strong><small>°C</small></article>
-      <article class="display-vital display-vital-tof"><span>TOF</span><strong id="display-tof">—</strong><small>RATIO <b id="display-tof-ratio">—</b></small></article>
     </section>
 
     <section class="display-waveforms" aria-label="Rendering-only synthesized waveforms">
       <div class="display-wave-row"><span>ECG II</span><canvas id="display-ecg" aria-label="Synthesized ECG rendering"></canvas></div>
       <div class="display-wave-row"><span>PLETH</span><canvas id="display-pleth" aria-label="Synthesized pleth rendering"></canvas></div>
       <div class="display-wave-row"><span>CO₂</span><canvas id="display-capnogram" aria-label="Synthesized capnogram rendering"></canvas></div>
+    </section>
+
+    <section class="display-secondary-numerics" aria-label="Secondary engine-derived patient values">
+      <article class="display-vital display-vital-temp"><span>TEMP</span><strong id="display-temp">—</strong><small>°C</small></article>
+      <article class="display-vital display-vital-tof"><span>TOF</span><strong id="display-tof">—</strong><small>RATIO <b id="display-tof-ratio">—</b></small></article>
     </section>
 
     <section class="display-bottom-grid">
