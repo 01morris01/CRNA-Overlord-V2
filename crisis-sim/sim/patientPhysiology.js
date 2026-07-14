@@ -8,6 +8,7 @@
    ═══════════════════════════════════════════════════════════════════ */
 import { f, Clamp, Clamp01, Max, Lerp, Exp, Pow, RoundToInt } from './float32.js';
 import { SimRandom } from './simRandom.js';
+import { rocuroniumBlockFromCe } from './neuromuscularModel.js';
 
 export const Status = {
   Awake: 0, Sedated: 1, LightAnesthesia: 2, SurgicalAnesthesia: 3,
@@ -398,7 +399,7 @@ export class PatientPhysiology {
   }
 
   updateNeuromuscular(dt) {
-    const rawRoc = Clamp01(this.rocuroniumCe / 3);
+    const rawRoc = rocuroniumBlockFromCe(this.rocuroniumCe);
     const unboundFraction = f(1 - this.sugammadexRocRelief);
     const afterSugammadex = f(rawRoc * unboundFraction);
     const afterNeostigmine = f(afterSugammadex - this.neostigmineRocRelief);

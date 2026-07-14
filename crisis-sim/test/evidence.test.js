@@ -58,6 +58,17 @@ function scenarioRigAtRocuroniumCount(targetCount, doseMg, seed) {
   return rig;
 }
 
+function scenarioRigAtRecoveringRocuroniumCount(targetCount, doseMg, seed) {
+  const rig = buildRig(seed);
+  rig.d.administerBolus('Rocuronium', doseMg);
+  let sawDeepBlock = false;
+  advanceUntil(rig, (x) => {
+    if (x.p.trainOfFourCount === 0) sawDeepBlock = true;
+    return sawDeepBlock && x.p.trainOfFourCount === targetCount;
+  }, 6000);
+  return rig;
+}
+
 function extendedDeterminismRun(seed) {
   const sug = rocuroniumRigAtCount(0, seed);
   sug.p.transitionAirwayDevice('intubated');
@@ -208,8 +219,8 @@ describe('reversal, respiratory drive, and airway evidence', () => {
     expect(deep.d.neostigmineRocRelief).toBe(0);
     expect(deep.p.trainOfFourCount).toBe(0);
 
-    const count1Control = scenarioRigAtRocuroniumCount(1, 210, 7202);
-    const count1Neo = scenarioRigAtRocuroniumCount(1, 210, 7202);
+    const count1Control = scenarioRigAtRecoveringRocuroniumCount(1, 210, 7202);
+    const count1Neo = scenarioRigAtRecoveringRocuroniumCount(1, 210, 7202);
     count1Neo.s.recordDrugAction('Neostigmine', 4.9);
     count1Control.core.stepFor(600);
     count1Neo.core.stepFor(600);
@@ -217,7 +228,7 @@ describe('reversal, respiratory drive, and airway evidence', () => {
     expect(count1Neo.p.trainOfFourRatio).toBeGreaterThan(count1Control.p.trainOfFourRatio);
     expect(count1Neo.p.trainOfFourRatio).toBeLessThan(0.9);
 
-    const count2 = scenarioRigAtRocuroniumCount(2, 70, 7203);
+    const count2 = scenarioRigAtRecoveringRocuroniumCount(2, 70, 7203);
     count2.s.recordDrugAction('Neostigmine', 4.9);
     count2.core.stepFor(600);
     expect(count2.p.trainOfFourRatio).toBeGreaterThanOrEqual(0.9);

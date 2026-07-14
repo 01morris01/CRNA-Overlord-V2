@@ -5,6 +5,7 @@
    frounded). No RNG. Propofol = full Eleveld 2018.
    ═══════════════════════════════════════════════════════════════════ */
 import { f, Clamp01, Max, Min, MoveTowards, Pow, Exp } from './float32.js';
+import { rocuroniumBlockFromCe } from './neuromuscularModel.js';
 
 export class DrugSystem {
   constructor() {
@@ -134,7 +135,7 @@ export class DrugSystem {
     let ceiling = 0;
     if (this.patient.trainOfFourCount >= 2) ceiling = f(0.45);
     else if (this.patient.trainOfFourCount === 1) ceiling = f(0.15);
-    const rawRocBlock = Clamp01(this.patient.rocuroniumCe / 3);
+    const rawRocBlock = rocuroniumBlockFromCe(this.patient.rocuroniumCe);
     const scaledCeiling = f(ceiling * doseFraction);
     const target = Min(scaledCeiling, rawRocBlock);
     this._neostigmineReliefTarget = Max(this._neostigmineReliefTarget, target);
