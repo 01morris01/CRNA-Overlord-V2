@@ -143,4 +143,75 @@ describe('live SimRunner integration', () => {
       dominantSource: 'forced_apnea',
     });
   });
+
+  it('exposes timed PPV, cricoid, and intubation attempts through structured snapshots and logs', () => {
+    const runner = new SimRunner();
+    runner.configureIntubationAttempts({
+      failedIntubationAttempts: [1],
+      attemptDurationSeconds: 2,
+    });
+
+    expect(runner.applyCricoidPressure()).toMatchObject({ ok: true, changed: true });
+    expect(runner.deliverMaskVentilation({
+      durationSeconds: 1,
+      tidalVolumeMl: 500,
+      respiratoryRate: 12,
+      cricoidPressure: true,
+    })).toMatchObject({ ok: true, plannedDurationSec: 1, minuteVentilation: 6 });
+    advance(runner, 1);
+    expect(runner.intubate()).toMatchObject({ ok: true, attemptNumber: 1, plannedDurationSec: 2 });
+    advance(runner, 2);
+
+    const snapshot = runner.snapshot();
+    expect(snapshot).toMatchObject({
+      eto2: expect.any(Number),
+      cricoidPressureActive: true,
+      ppvActive: false,
+      ppvEpisodeCount: 1,
+      intubationInProgress: false,
+      intubationAttemptCount: 1,
+      lastIntubationOutcome: 'failed',
+      proceduralApnea: false,
+      airwayDevice: 'mask',
+    });
+    expect(snapshot.ppvHistory[0]).toMatchObject({
+      startTimeSec: 0,
+      endTimeSec: 1,
+      deliveredDurationSec: 1,
+      airwayDevice: 'mask',
+      cricoidPressure: true,
+    });
+    expect(snapshot.intubationAttempts[0]).toMatchObject({
+      attemptNumber: 1,
+      startTimeSec: 1,
+      endTimeSec: 3,
+      outcome: 'failed',
+    });
+    expect(runner.log.map((entry) => entry.meta?.action).filter(Boolean)).toEqual([
+      'cricoid_pressure_applied',
+      'mask_ppv_started',
+      'mask_ppv_completed',
+      'intubation_attempt_started',
+      'intubation_attempt_failed',
+    ]);
+
+    const historyCopy = snapshot.ppvHistory;
+    historyCopy[0].completionReason = 'mutated';
+    expect(runner.snapshot().ppvHistory[0].completionReason).toBe('completed');
+  });
+
+  it('keeps administrative airway setup outside the intubation attempt log', () => {
+    const runner = new SimRunner();
+
+    expect(runner.setAirwayDevice('intubated').ok).toBe(true);
+
+    expect(runner.snapshot()).toMatchObject({
+      airwayDevice: 'intubated',
+      intubationAttemptCount: 0,
+      lastIntubationOutcome: 'none',
+    });
+    expect(runner.log.filter(
+      (entry) => entry.meta?.action?.startsWith('intubation_attempt_'),
+    )).toEqual([]);
+  });
 });

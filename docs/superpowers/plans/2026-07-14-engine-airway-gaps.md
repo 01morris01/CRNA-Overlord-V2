@@ -391,7 +391,7 @@ git commit -m "Make intubation attempts scenario-scoreable"
 - Modify: `crisis-sim/test/live-runner.test.js`
 - Modify: `crisis-sim/test/snapshot-contract.mjs`
 
-- [ ] **Step 1: Write failing wrapper tests**
+- [x] **Step 1: Write failing wrapper tests**
 
 Test exact public methods and event ordering through `SimRunner`:
 
@@ -416,7 +416,7 @@ Assert procedure log entries contain their fixed-step `t`, event action, duratio
 
 Extend the snapshot contract with the exact primitive/object/array keys from the model. Validate copied arrays and nullable `ppvCurrent` rather than weakening the total-key contract.
 
-- [ ] **Step 2: Run tests to verify RED**
+- [x] **Step 2: Run tests to verify RED**
 
 Run:
 
@@ -428,7 +428,7 @@ node test/snapshot-contract.mjs
 
 Expected: wrapper tests fail on missing methods and snapshot keys.
 
-- [ ] **Step 3: Implement the wrapper contract**
+- [x] **Step 3: Implement the wrapper contract**
 
 Wire the `a` rig member into `SimRunner`, include an `airwayPlan` in the live scenario, and expose:
 
@@ -444,7 +444,7 @@ configureIntubationAttempts(options) { return this.a.configureIntubation(options
 
 Subscribe to procedure events once per build and append live log records using the event's fixed-step timestamp, not stale wrapper time. Add all approved snapshot fields, copying histories through subsystem getters. Do not start VCV in `intubate()`.
 
-- [ ] **Step 4: Verify wrapper GREEN**
+- [x] **Step 4: Verify wrapper GREEN**
 
 Run:
 
@@ -456,7 +456,7 @@ node test/snapshot-contract.mjs
 
 Expected: APIs, structured logs, copies, and exact snapshot key count pass.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add crisis-sim/ui/simRunner.js crisis-sim/test/live-runner.test.js crisis-sim/test/snapshot-contract.mjs

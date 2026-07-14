@@ -13,15 +13,25 @@ const numericKeys = [
   'neostigmineRocRelief', 'speed', 'svr', 'vol', 'airwayRes', 'shunt',
   'hrOffset', 'respDrive', 'heat', 'vco2', 'propofolCe', 'fentanylCe',
   'midazolamCe', 'weightKg',
+  'eto2', 'mechanicalMV', 'effectiveMV', 'proceduralApneaContribution',
+  'ppvEpisodeCount', 'intubationAttemptCount',
 ];
 
 const booleanKeys = [
   'intubated', 'spont', 'forcedApnea', 'capnogramPresent', 'running',
+  'proceduralApnea', 'cricoidPressureActive', 'ppvActive', 'intubationInProgress',
 ];
 
-const stringKeys = ['agent', 'vaporizerAgent', 'airwayDevice', 'lifecycle', 'patient'];
+const stringKeys = [
+  'agent', 'vaporizerAgent', 'airwayDevice', 'lifecycle', 'patient', 'lastIntubationOutcome',
+];
 
-const requiredKeys = [...numericKeys, ...booleanKeys, ...stringKeys];
+const arrayKeys = ['cricoidPressureHistory', 'ppvHistory', 'intubationAttempts'];
+const nullableObjectKeys = ['ppvCurrent'];
+
+const requiredKeys = [
+  ...numericKeys, ...booleanKeys, ...stringKeys, ...arrayKeys, ...nullableObjectKeys,
+];
 
 const runner = new SimRunner();
 runner.core.stepOnce(runner.core.fixedStep);
@@ -45,6 +55,14 @@ for (const key of stringKeys) {
   assert.equal(typeof snapshot[key], 'string', `${key} must be a string`);
 }
 
+for (const key of arrayKeys) {
+  assert.ok(Array.isArray(snapshot[key]), `${key} must be an array`);
+}
+
+for (const key of nullableObjectKeys) {
+  assert.ok(snapshot[key] === null || typeof snapshot[key] === 'object', `${key} must be null or an object`);
+}
+
 assert.ok(
   ['mask', 'intubated', 'extubated'].includes(snapshot.airwayDevice),
   `unexpected airwayDevice: ${snapshot.airwayDevice}`,
@@ -57,5 +75,5 @@ assert.ok(
 assert.equal(Object.keys(snapshot).length, requiredKeys.length, 'snapshot key count changed');
 
 console.log('SNAPSHOT CONTRACT: PASS');
-console.log(`keys=${requiredKeys.length} numeric=${numericKeys.length} boolean=${booleanKeys.length} string=${stringKeys.length}`);
+console.log(`keys=${requiredKeys.length} numeric=${numericKeys.length} boolean=${booleanKeys.length} string=${stringKeys.length} arrays=${arrayKeys.length}`);
 console.log(`tick=${snapshot.t.toFixed(2)}s airway=${snapshot.airwayDevice} status=${snapshot.status}`);

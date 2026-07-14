@@ -53,6 +53,10 @@ function liveScenarioDefinition(config) {
       ventMode: 'manual',
       airway: 'mask',
     },
+    airwayPlan: {
+      failedIntubationAttempts: [...config.failedIntubationAttempts],
+      intubationAttemptDurationSeconds: config.intubationAttemptDurationSeconds,
+    },
     debrief: {
       summary: 'Instructor-led live anesthesia simulation.',
       teachingPoints: [],
@@ -66,6 +70,7 @@ export const DEFAULT_CONFIG = {
   weightKg: 70, heightCm: 170, ageYears: 45, sex: 'Male',
   baselineHR: 72, baselineSystolic: 120, baselineDiastolic: 80,
   baselineSpO2: 99, baselineRR: 14, baselineTemp: 36.6, baselineEtCO2: 38,
+  failedIntubationAttempts: [], intubationAttemptDurationSeconds: 30,
 };
 
 export class SimRunner {
@@ -81,6 +86,7 @@ export class SimRunner {
     this._lastReal = 0;
     this._raf = 0;
     this._interval = 0;
+    this._procedureUnsubscribe = null;
     this._rafLoop = this._rafLoop.bind(this);
     this._tick = this._tick.bind(this);
     this.build();
@@ -88,7 +94,8 @@ export class SimRunner {
 
   build() {
     const c = this.config;
-    const { p, d, v, core } = buildPhysRig(SEED, c.weightKg, c.heightCm, c.ageYears);
+    if (this._procedureUnsubscribe) this._procedureUnsubscribe();
+    const { p, d, v, a, core } = buildPhysRig(SEED, c.weightKg, c.heightCm, c.ageYears);
     p.sex = c.sex;
     p.baselineHR = c.baselineHR;
     p.baselineSystolic = c.baselineSystolic;
@@ -102,11 +109,13 @@ export class SimRunner {
     scenario.patient = p;
     scenario.drugSystem = d;
     scenario.ventilator = v;
+    scenario.airwayProcedure = a;
     core.scenario = scenario;
+    this._procedureUnsubscribe = a.addEventListener((event) => this.logProcedureEvent(event));
     core.initialize(SEED);
     scenario.loadRaw(liveScenarioDefinition(c));
     scenario.startScenario();
-    this.p = p; this.d = d; this.v = v; this.s = scenario; this.core = core;
+    this.p = p; this.d = d; this.v = v; this.a = a; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
   }
 
@@ -194,10 +203,11 @@ export class SimRunner {
       hr: p.heartRate, sbp: p.systolicBP, dbp: p.diastolicBP,
       // MAP falls back to the derived value before the first tick computes it
       map: p.meanArterialPressure > 0 ? p.meanArterialPressure : p.diastolicBP + (p.systolicBP - p.diastolicBP) / 3,
-      spo2: p.spO2, rr: p.respiratoryRate, etco2: p.etCO2, temp: p.temperature,
+      spo2: p.spO2, rr: p.respiratoryRate, etco2: p.etCO2, eto2: p.endTidalO2Percent, temp: p.temperature,
       bis: p.bisIndex, mac: p.macMultiple, etAgent: p.endTidalAgent, agent: p.currentAgent,
       tof: p.trainOfFourCount, tofRatio: p.trainOfFourRatio,
       ppeak: v.measuredPeakPressure, mv: v.measuredMinuteVent, tv: v.measuredTidalVolume,
+      mechanicalMV: v.mechanicalMinuteVentilation, effectiveMV: v.effectiveMinuteVentilation,
       fio2: p.fiO2, ventMode: v.mode, vaporizer: v.vaporizerDial, vaporizerAgent: v.vaporizerAgent,
       ventSetTV: v.setTidalVolume, ventSetRR: v.setRespiratoryRate, ventSetPeep: v.setPeep,
       ventSetPressure: v.setPressureAbovePeep, ventSetPressureSupport: v.setPressureSupport,
@@ -205,6 +215,8 @@ export class SimRunner {
       intubated: p.isIntubated, spont: p.isBreathingSpontaneously, status: p.status,
       airwayDevice: p.airwayDeviceState, forcedApnea: p.forcedApneaActive,
       forcedApneaContribution: p.forcedApneaContribution,
+      proceduralApnea: p.proceduralApneaActive,
+      proceduralApneaContribution: p.proceduralApneaContribution,
       drugDepressionContribution: p.drugDepressionContribution,
       complicationDriveContribution: p.complicationDriveContribution,
       centralDrive: p.centralDrive, effectiveNmbBlockade: p.effectiveNmbBlockade,
@@ -212,6 +224,16 @@ export class SimRunner {
       spontaneousRR: p.spontaneousRespiratoryRate, spontaneousTV: p.spontaneousTidalVolume,
       spontaneousMV: p.spontaneousMinuteVentilation, spontaneousEffort: p.spontaneousEffort,
       capnogramPresent: p.capnogramPresent,
+      cricoidPressureActive: this.a.cricoidPressureActive,
+      cricoidPressureHistory: this.a.cricoidPressureHistory,
+      ppvActive: this.a.ppvActive,
+      ppvEpisodeCount: this.a.ppvEpisodeCount,
+      ppvCurrent: this.a.ppvCurrent,
+      ppvHistory: this.a.ppvHistory,
+      intubationInProgress: this.a.intubationInProgress,
+      intubationAttemptCount: this.a.intubationAttemptCount,
+      lastIntubationOutcome: this.a.lastIntubationOutcome,
+      intubationAttempts: this.a.intubationAttempts,
       sugammadexRocRelief: this.d.sugammadexRocRelief,
       neostigmineRocRelief: this.d.neostigmineRocRelief,
       running: this.running, lifecycle: this.getLifecycleState(), speed: this.speed,
@@ -274,16 +296,27 @@ export class SimRunner {
     if ('mode' in patch) this.v.setMode(patch.mode);
   }
 
-  intubate() {
-    const result = this.p.transitionAirwayDevice(AirwayDevice.Intubated);
-    if (!result.ok) return result;
-    this.v.setMode(VentMode.VCV);
-    this.v.setTidalVolume = Math.round(this.config.weightKg * 7);
-    this.v.setRespiratoryRate = 12;
-    this.v.setPeep = 5;
-    this.logEvent('Airway', `Intubated · VCV ${this.v.setTidalVolume} mL × 12`, { action: 'intubate' });
-    return result;
+  configureIntubationAttempts(options) { return this.a.configureIntubation(options); }
+
+  deliverMaskVentilation(options) {
+    return this.finishProcedureAction(this.a.deliverMaskVentilation(options));
   }
+
+  stopMaskVentilation() { return this.finishProcedureAction(this.a.stopMaskVentilation(), false); }
+
+  applyCricoidPressure() {
+    const result = this.a.applyCricoidPressure();
+    return this.finishProcedureAction(result, result.changed);
+  }
+
+  releaseCricoidPressure() {
+    const result = this.a.releaseCricoidPressure();
+    return this.finishProcedureAction(result, result.changed);
+  }
+
+  attemptIntubation() { return this.finishProcedureAction(this.a.attemptIntubation()); }
+
+  intubate() { return this.attemptIntubation(); }
 
   extubate() {
     const result = this.p.transitionAirwayDevice(AirwayDevice.Extubated);
@@ -328,6 +361,24 @@ export class SimRunner {
 
   logEvent(kind, detail, meta) {
     const entry = { t: this.simTime, kind, detail, meta: meta || null };
+    this.log.push(entry);
+    if (this.onEvent) this.onEvent(entry);
+  }
+
+  finishProcedureAction(result, startWhenReady = result.ok) {
+    const state = this.getLifecycleState();
+    if (startWhenReady && state === 'READY') this.start();
+    else this.emit();
+    return { ...result, state, started: startWhenReady && state === 'READY' };
+  }
+
+  logProcedureEvent(event) {
+    const entry = {
+      t: event.tSec,
+      kind: 'Airway procedure',
+      detail: event.type,
+      meta: { action: event.type, ...event.meta },
+    };
     this.log.push(entry);
     if (this.onEvent) this.onEvent(entry);
   }
