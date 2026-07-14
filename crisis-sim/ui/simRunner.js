@@ -123,13 +123,18 @@ export class SimRunner {
   start() {
     if (this.running) return;
     this.running = true;
-    this._lastReal = performance.now();
+    this._lastReal = typeof globalThis.performance?.now === 'function'
+      ? globalThis.performance.now()
+      : Date.now();
     // rAF paces smoothly while the tab is visible; the interval keeps the
     // sim advancing on wall-clock time even when this tab is backgrounded
     // (e.g. operator clicks over to the second-screen monitor window).
     // Both call _tick and share _lastReal, so elapsed time is never counted twice.
-    this._raf = requestAnimationFrame(this._rafLoop);
-    this._interval = setInterval(() => this._tick(performance.now()), 100);
+    if (typeof globalThis.requestAnimationFrame === 'function') {
+      this._raf = globalThis.requestAnimationFrame(this._rafLoop);
+      this._interval = globalThis.setInterval(() => this._tick(globalThis.performance.now()), 100);
+    }
+    this.emit();
   }
 
   pause() {
@@ -151,10 +156,15 @@ export class SimRunner {
 
   setSpeed(mult) { this.speed = mult; }
 
+  getLifecycleState() {
+    if (this.running) return 'RUNNING';
+    return this.simTime > 0 ? 'PAUSED' : 'READY';
+  }
+
   _rafLoop(now) {
     if (!this.running) return;
     this._tick(now);
-    this._raf = requestAnimationFrame(this._rafLoop);
+    this._raf = globalThis.requestAnimationFrame(this._rafLoop);
   }
 
   _tick(now) {
@@ -204,7 +214,7 @@ export class SimRunner {
       capnogramPresent: p.capnogramPresent,
       sugammadexRocRelief: this.d.sugammadexRocRelief,
       neostigmineRocRelief: this.d.neostigmineRocRelief,
-      running: this.running, speed: this.speed,
+      running: this.running, lifecycle: this.getLifecycleState(), speed: this.speed,
       patient: `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`,
       // physiologic drivers (truth-boundary inputs) + drug context for the advisor
       svr: p.svrFactor, vol: p.bloodVolumeFraction, airwayRes: p.airwayResistanceFactor,
@@ -239,8 +249,22 @@ export class SimRunner {
 
   // ── control surface ────────────────────────────────────────────────
   giveBolus(name, doseMg, label) {
+    const state = this.getLifecycleState();
     this.d.administerBolus(name, doseMg);
     this.logEvent('Drug', label || `${name} ${doseMg} mg`, { action: 'drug', drug: name, doseMg });
+    if (state === 'READY') this.start();
+    return { state, started: state === 'READY', queued: state === 'PAUSED' };
+  }
+
+  preoxygenate() {
+    const state = this.getLifecycleState();
+    this.setMachine({
+      o2FlowLPerMin: 10, airFlowLPerMin: 0, n2oFlowLPerMin: 0, setFiO2: 1,
+    });
+    this.logEvent('Machine', 'Preoxygenation · 100% O₂ at 10 L/min', { action: 'preoxygenate' });
+    if (state === 'READY') this.start();
+    else this.emit();
+    return { state, started: state === 'READY' };
   }
 
   setVentMode(mode) { this.v.setMode(mode); this.logEvent('Ventilator', `Mode → ${ventName(mode)}`); }

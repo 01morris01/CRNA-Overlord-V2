@@ -54,6 +54,46 @@ function formatTime(seconds) {
     : `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
+export function formatDrugLifecycleStatus(dose, result) {
+  if (result.queued) {
+    return {
+      kind: 'info',
+      message: `${dose.drugName}: ${dose.totalMg} mg total. DOSE QUEUED — RESUME TO ADVANCE.`,
+    };
+  }
+  return {
+    kind: 'success',
+    message: `${dose.drugName}: ${dose.totalMg} mg total given — effect evolves with simulation time.`,
+  };
+}
+
+export function formatPreoxygenationLifecycleStatus(result) {
+  if (result.state === 'PAUSED') {
+    return {
+      kind: 'info',
+      message: 'Preoxygenation set. RESUME TO ADVANCE OXYGEN STORES.',
+    };
+  }
+  if (result.started) {
+    return {
+      kind: 'success',
+      message: 'Preoxygenation started — oxygen stores evolve with simulation time.',
+    };
+  }
+  return { kind: 'success', message: 'Preoxygenation continues.' };
+}
+
+export function deriveLifecyclePresentation(snapshot) {
+  const lifecycle = snapshot.lifecycle
+    || (snapshot.running ? 'RUNNING' : (snapshot.t > 0 ? 'PAUSED' : 'READY'));
+  return {
+    label: `${lifecycle} · ${snapshot.speed}× · ${String(snapshot.airwayDevice).toUpperCase()}`,
+    startText: lifecycle === 'PAUSED' ? 'RESUME' : (lifecycle === 'RUNNING' ? 'RUNNING' : 'START'),
+    startDisabled: lifecycle === 'RUNNING',
+    pauseDisabled: lifecycle !== 'RUNNING',
+  };
+}
+
 function fieldMarkup([name, label, unit, step]) {
   return `
     <label class="live-field" for="live-patient-${name}">
@@ -241,8 +281,16 @@ function setText(id, text) {
 function renderSnapshot(snapshot) {
   latestSnapshot = snapshot;
   const monitor = formatMonitorSnapshot(snapshot);
+  const lifecycle = deriveLifecyclePresentation(snapshot);
   setText('live-sim-clock', formatTime(snapshot.t));
-  setText('live-case-state', `${snapshot.running ? 'RUNNING' : 'PAUSED'} · ${snapshot.speed}× · ${String(snapshot.airwayDevice).toUpperCase()}`);
+  setText('live-case-state', lifecycle.label);
+  const startButton = document.getElementById('live-start');
+  const pauseButton = document.getElementById('live-pause');
+  if (startButton) {
+    startButton.textContent = lifecycle.startText;
+    startButton.disabled = lifecycle.startDisabled;
+  }
+  if (pauseButton) pauseButton.disabled = lifecycle.pauseDisabled;
   setText('live-vital-hr', monitor.hr);
   setText('live-vital-bp', monitor.bp);
   setText('live-vital-map', monitor.map);
@@ -339,8 +387,13 @@ function giveDrug(actionId) {
   const liveRunner = ensureRunner();
   try {
     const dose = computeDrugDose(actionId, liveRunner.config.weightKg);
-    liveRunner.giveBolus(dose.drugName, dose.totalMg, `${dose.clinicalLabel} · ${dose.totalMg} mg total`);
-    setStatus(`${dose.drugName}: ${dose.totalMg} mg total given.`, 'success');
+    const result = liveRunner.giveBolus(
+      dose.drugName,
+      dose.totalMg,
+      `${dose.clinicalLabel} · ${dose.totalMg} mg total`,
+    );
+    const status = formatDrugLifecycleStatus(dose, result);
+    setStatus(status.message, status.kind);
   } catch (error) {
     setStatus(error.message, 'error');
   }
@@ -446,9 +499,13 @@ function bindControls() {
   document.getElementById('live-close')?.addEventListener('click', closeLiveSim);
   document.getElementById('live-start')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
+    const previousState = liveRunner.getLifecycleState();
     liveRunner.start();
-    liveRunner.logEvent('Case', 'Simulation started', { action: 'start' });
-    setStatus('Simulation running.', 'success');
+    const resumed = previousState === 'PAUSED';
+    liveRunner.logEvent('Case', resumed ? 'Simulation resumed' : 'Simulation started', {
+      action: resumed ? 'resume' : 'start',
+    });
+    setStatus(resumed ? 'Simulation resumed.' : 'Simulation running.', 'success');
   });
   document.getElementById('live-pause')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
@@ -473,10 +530,8 @@ function bindControls() {
   });
   document.getElementById('live-preoxygenate')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
-    liveRunner.setMachine({ o2FlowLPerMin: 10, airFlowLPerMin: 0, n2oFlowLPerMin: 0, setFiO2: 1 });
-    liveRunner.logEvent('Machine', 'Preoxygenation · 100% O₂ at 10 L/min', { action: 'preoxygenate' });
-    liveRunner.emit();
-    setStatus('Preoxygenation settings applied.', 'success');
+    const status = formatPreoxygenationLifecycleStatus(liveRunner.preoxygenate());
+    setStatus(status.message, status.kind);
   });
   document.getElementById('live-export')?.addEventListener('click', downloadDebrief);
   document.getElementById('live-open-display')?.addEventListener('click', () => {

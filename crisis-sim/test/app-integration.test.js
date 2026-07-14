@@ -26,6 +26,9 @@ describe('main app live simulation registration', () => {
     expect(controller).toContain("from '../crisis-sim/ui/simRunner.js'");
     expect(controller).not.toContain("from '../crisis-sim/sim/");
     expect(controller.match(/new SimRunner\(/g)).toHaveLength(1);
+    expect(controller).toContain('const result = liveRunner.giveBolus');
+    expect(controller).toContain('liveRunner.preoxygenate()');
+    expect(controller).toContain('deriveLifecyclePresentation(snapshot)');
     expect(hospitalMap).toContain('var dt = Math.max(0, Math.min(.05, (t - last) / 1000));');
   });
 

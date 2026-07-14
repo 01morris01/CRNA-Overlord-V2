@@ -6,8 +6,53 @@ import {
   parsePatientConfig,
   validateSimulationResult,
 } from '../../ui/liveSimModel.js';
+import {
+  deriveLifecyclePresentation,
+  formatDrugLifecycleStatus,
+  formatPreoxygenationLifecycleStatus,
+} from '../../ui/liveSimView.js';
 
 describe('live simulation dose model', () => {
+  it('announces READY evolution and PAUSED dose queueing explicitly', () => {
+    const dose = { drugName: 'Propofol', totalMg: 140 };
+
+    expect(formatDrugLifecycleStatus(dose, {
+      state: 'READY', started: true, queued: false,
+    })).toEqual({
+      kind: 'success',
+      message: 'Propofol: 140 mg total given — effect evolves with simulation time.',
+    });
+    expect(formatDrugLifecycleStatus(dose, {
+      state: 'PAUSED', started: false, queued: true,
+    })).toEqual({
+      kind: 'info',
+      message: 'Propofol: 140 mg total. DOSE QUEUED — RESUME TO ADVANCE.',
+    });
+  });
+
+  it('announces whether preoxygenation started or remains frozen while paused', () => {
+    expect(formatPreoxygenationLifecycleStatus({ state: 'READY', started: true })).toEqual({
+      kind: 'success',
+      message: 'Preoxygenation started — oxygen stores evolve with simulation time.',
+    });
+    expect(formatPreoxygenationLifecycleStatus({ state: 'PAUSED', started: false })).toEqual({
+      kind: 'info',
+      message: 'Preoxygenation set. RESUME TO ADVANCE OXYGEN STORES.',
+    });
+  });
+
+  it('derives READY/RUNNING/PAUSED labels and button state from runner snapshots', () => {
+    expect(deriveLifecyclePresentation({ lifecycle: 'READY', speed: 1, airwayDevice: 'mask' })).toEqual({
+      label: 'READY · 1× · MASK', startText: 'START', startDisabled: false, pauseDisabled: true,
+    });
+    expect(deriveLifecyclePresentation({ lifecycle: 'RUNNING', speed: 5, airwayDevice: 'intubated' })).toEqual({
+      label: 'RUNNING · 5× · INTUBATED', startText: 'RUNNING', startDisabled: true, pauseDisabled: false,
+    });
+    expect(deriveLifecyclePresentation({ lifecycle: 'PAUSED', speed: 1, airwayDevice: 'intubated' })).toEqual({
+      label: 'PAUSED · 1× · INTUBATED', startText: 'RESUME', startDisabled: false, pauseDisabled: true,
+    });
+  });
+
   it('converts clinical induction units to total milligrams', () => {
     expect(computeDrugDose('propofol_2_mgkg', 80)).toMatchObject({
       drugName: 'Propofol', totalMg: 160,

@@ -8,6 +8,56 @@ function advance(runner, seconds) {
 }
 
 describe('live SimRunner integration', () => {
+  it('starts physiologic time when the first READY dose is administered', () => {
+    const runner = new SimRunner();
+
+    expect(runner.getLifecycleState()).toBe('READY');
+    const result = runner.giveBolus('Propofol', 140, 'Propofol 2 mg/kg · 140 mg total');
+
+    expect(result).toEqual({ state: 'READY', started: true, queued: false });
+    expect(runner.getLifecycleState()).toBe('RUNNING');
+    expect(runner.snapshot()).toMatchObject({ running: true, lifecycle: 'RUNNING' });
+    expect(runner.log.at(-1)).toMatchObject({
+      t: 0, kind: 'Drug', meta: { action: 'drug', drug: 'Propofol', doseMg: 140 },
+    });
+  });
+
+  it('continues a RUNNING dose and queues a PAUSED dose without advancing time', () => {
+    const runner = new SimRunner();
+    runner.start();
+
+    expect(runner.giveBolus('Rocuronium', 42, 'Rocuronium 0.6 mg/kg')).toEqual({
+      state: 'RUNNING', started: false, queued: false,
+    });
+    runner.core.stepFor(1);
+    runner.simTime = runner.core.simTime;
+    runner.pause();
+    const frozenTime = runner.simTime;
+
+    expect(runner.getLifecycleState()).toBe('PAUSED');
+    expect(runner.giveBolus('Propofol', 20, 'Propofol 20 mg')).toEqual({
+      state: 'PAUSED', started: false, queued: true,
+    });
+    expect(runner.simTime).toBe(frozenTime);
+    expect(runner.getLifecycleState()).toBe('PAUSED');
+  });
+
+  it('starts preoxygenation from READY without recording a drug', () => {
+    const runner = new SimRunner();
+
+    const result = runner.preoxygenate();
+
+    expect(result).toEqual({ state: 'READY', started: true });
+    expect(runner.getLifecycleState()).toBe('RUNNING');
+    expect(runner.v).toMatchObject({
+      o2FlowLPerMin: 10, airFlowLPerMin: 0, n2oFlowLPerMin: 0, setFiO2: 1,
+    });
+    expect(runner.log.filter((entry) => entry.kind === 'Drug')).toEqual([]);
+    expect(runner.log.at(-1)).toMatchObject({
+      kind: 'Machine', meta: { action: 'preoxygenate' },
+    });
+  });
+
   it('can apply patient configuration in the Node verification environment', () => {
     const runner = new SimRunner();
 
