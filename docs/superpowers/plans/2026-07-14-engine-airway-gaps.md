@@ -469,7 +469,7 @@ git commit -m "Expose scoreable airway actions in live snapshots"
 - Modify: `crisis-sim/test/airway-gaps-evidence.test.js`
 - Create: `crisis-sim/test/airway-gaps-evidence.mjs`
 
-- [ ] **Step 1: Add the remaining failing evidence tests**
+- [x] **Step 1: Add the remaining failing evidence tests**
 
 Add all required runs:
 
@@ -494,17 +494,17 @@ expect(afterPpv.spo2).toBeGreaterThan(beforePpv.spo2);
 - Preoxygenation curve with ETO2 over 90%.
 - Combined determinism with serialized samples at mid-PPV, mid-attempt, and endpoint.
 
-- [ ] **Step 2: Run evidence to identify the first RED assertion**
+- [x] **Step 2: Run evidence to identify the first RED assertion**
 
 Run: `cd crisis-sim && npx vitest run test/airway-gaps-evidence.test.js --reporter=verbose`
 
 Expected: any remaining failure identifies one unmet evidence contract. Apply the systematic-debugging workflow to the first failure only; do not stack speculative corrections.
 
-- [ ] **Step 3: Make only evidence-driven corrections**
+- [x] **Step 3: Make only evidence-driven corrections**
 
 Correct source behavior, never expected values or derived vitals. For desaturation timing, sample actual `patient.spO2` during each active procedure tick and latch the first `< 90` elapsed timestamp. For oxygenation recovery, choose a rescue PPV interval long enough for the existing oxygen model to show a rise; do not assign saturation.
 
-- [ ] **Step 4: Add the printable evidence driver**
+- [x] **Step 4: Add the printable evidence driver**
 
 The Node driver runs the same public APIs and prints:
 
@@ -522,7 +522,7 @@ DETERMINISM fingerprint_a=... fingerprint_b=... equal=true
 
 Use fixed samples and JSON/string fingerprints; do not round before comparing bit-identical values.
 
-- [ ] **Step 5: Verify all evidence**
+- [x] **Step 5: Verify all evidence**
 
 Run:
 
@@ -534,7 +534,7 @@ node test/airway-gaps-evidence.mjs
 
 Expected: all twelve evidence contracts pass and the printed fingerprints are equal.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add crisis-sim/test/airway-gaps-evidence.test.js crisis-sim/test/airway-gaps-evidence.mjs
