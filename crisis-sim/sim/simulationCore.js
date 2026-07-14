@@ -13,6 +13,7 @@ export class SimulationCore {
     this.patient = null;
     this.drugSystem = null;
     this.ventilator = null;
+    this.airwayProcedure = null;
     this.alarmSystem = null;
     this.scenario = null;
 
@@ -38,6 +39,7 @@ export class SimulationCore {
     if (this.patient) { this.patient.rng = this.rng; this.patient.drivenExternally = true; }
     if (this.drugSystem) { this.drugSystem.rng = this.rng; this.drugSystem.drivenExternally = true; }
     if (this.ventilator) { this.ventilator.rng = this.rng; this.ventilator.drivenExternally = true; }
+    if (this.airwayProcedure) this.airwayProcedure.drivenExternally = true;
     if (this.alarmSystem) { this.alarmSystem.drivenExternally = true; }
     if (this.scenario) { this.scenario.rng = this.rng; this.scenario.drivenExternally = true; }
 
@@ -46,14 +48,17 @@ export class SimulationCore {
 
   resetSim(withSeed) {
     if (this.drugSystem && this.drugSystem.resetReversalState) this.drugSystem.resetReversalState();
+    if (this.airwayProcedure) this.airwayProcedure.reset();
     if (this.patient) this.patient.resetToBaseline();
     this.initialize(withSeed);
   }
 
   stepOnce(dt) {
     if (this.drugSystem) this.drugSystem.tick(dt);
+    if (this.airwayProcedure?.prepareTick) this.airwayProcedure.prepareTick(dt);
     if (this.ventilator) this.ventilator.tick(dt);
     if (this.patient) this.patient.tick(dt);
+    if (this.airwayProcedure) this.airwayProcedure.tick(dt);
     if (this.alarmSystem) this.alarmSystem.tick(dt);
     if (this.scenario) this.scenario.tick(dt);
 

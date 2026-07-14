@@ -171,7 +171,7 @@ git commit -m "Add deterministic airway procedure state"
 - Modify: `crisis-sim/sim/index.js`
 - Modify: `crisis-sim/test/airway-procedure.test.js`
 
-- [ ] **Step 1: Add failing composition and rig tests**
+- [x] **Step 1: Add failing composition and rig tests**
 
 ```js
 import { buildPhysRig } from '../sim/index.js';
@@ -193,13 +193,13 @@ it('wires procedure state without duplicating NMB and exposes derived ETO2', () 
 
 Add a reset test asserting procedure state and patient procedural apnea clear while existing `effectiveNmbBlockade` remains owned by the established patient/drug reset.
 
-- [ ] **Step 2: Run tests to verify RED**
+- [x] **Step 2: Run tests to verify RED**
 
 Run: `cd crisis-sim && npx vitest run test/airway-procedure.test.js --reporter=verbose`
 
 Expected: FAIL on missing rig member and patient getters.
 
-- [ ] **Step 3: Implement patient composition and core wiring**
+- [x] **Step 3: Implement patient composition and core wiring**
 
 Add a private patient flag and exact composition:
 
@@ -233,7 +233,7 @@ Likewise, make `alveolarVentilationLMin()` use zero RR when a non-mechanically-v
 
 Wire one `AirwayProcedureSystem` into both rig builders and `SimulationCore`. Procedure state must bracket each ventilation/physiology tick: prepare active state before ventilator, then sample SpO2, advance float32 procedure time, and complete actions after patient physiology but before scenario event processing. This preserves the full requested support/apnea duration and lets scenario scoring observe a completion in the same fixed step. Reset it without assigning an RNG.
 
-- [ ] **Step 4: Verify focused tests and frozen parity immediately**
+- [x] **Step 4: Verify focused tests and frozen parity immediately**
 
 Run:
 
@@ -245,7 +245,7 @@ npx vitest run test/parity.test.js --reporter=verbose
 
 Expected: composition tests pass and every frozen non-rocuronium parity assertion remains green. Any frozen change is a stop condition.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add crisis-sim/sim/patientPhysiology.js crisis-sim/sim/simulationCore.js crisis-sim/sim/index.js crisis-sim/test/airway-procedure.test.js

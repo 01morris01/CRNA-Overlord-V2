@@ -22,6 +22,7 @@ export const AirwayDevice = Object.freeze({
 export class PatientPhysiology {
   #airwayDeviceState = AirwayDevice.Mask;
   #forcedApnea = false;
+  #proceduralApnea = false;
 
   constructor() {
     this.weightKg = 70; this.heightCm = 170; this.ageYears = 45; this.sex = 'Male';
@@ -85,6 +86,7 @@ export class PatientPhysiology {
     this.isMechanicallyVentilated = false;
     this.#airwayDeviceState = AirwayDevice.Mask;
     this.#forcedApnea = false;
+    this.#proceduralApnea = false;
 
     this._hrModifier = 0; this._bpModifier = 1; this._rrModifier = 1;
 
@@ -130,13 +132,20 @@ export class PatientPhysiology {
 
   get forcedApneaContribution() { return this.#forcedApnea ? 0 : 1; }
 
+  setProceduralApnea(active) { this.#proceduralApnea = active === true; }
+
+  get proceduralApneaActive() { return this.#proceduralApnea; }
+
+  get proceduralApneaContribution() { return this.#proceduralApnea ? 0 : 1; }
+
   get drugDepressionContribution() { return Clamp01(this._rrModifier); }
 
   get complicationDriveContribution() { return Clamp01(this.respiratoryDriveFactor); }
 
   get centralDrive() {
     const forcedDrug = f(this.forcedApneaContribution * this.drugDepressionContribution);
-    return Clamp01(f(forcedDrug * this.complicationDriveContribution));
+    const establishedDrive = f(forcedDrug * this.complicationDriveContribution);
+    return Clamp01(f(establishedDrive * this.proceduralApneaContribution));
   }
 
   get effectiveSpontaneousVentilationFraction() {
@@ -157,8 +166,11 @@ export class PatientPhysiology {
 
   get capnogramPresent() { return this.minuteVentilation > f(0.3); }
 
+  get endTidalO2Percent() { return f(Clamp01(this.alveolarO2Fraction) * 100); }
+
   get dominantInadequateVentilationSource() {
     if (this.forcedApneaContribution === 0) return 'forced_apnea';
+    if (this.proceduralApneaContribution === 0) return 'intubation_attempt';
     const muscle = this.respiratoryMuscleCapability;
     const drug = this.drugDepressionContribution;
     const complication = this.complicationDriveContribution;
@@ -173,6 +185,8 @@ export class PatientPhysiology {
       dominantSource: this.dominantInadequateVentilationSource,
       forcedApneaActive: this.forcedApneaActive,
       forcedApneaContribution: this.forcedApneaContribution,
+      proceduralApneaActive: this.proceduralApneaActive,
+      proceduralApneaContribution: this.proceduralApneaContribution,
       drugDepressionContribution: this.drugDepressionContribution,
       complicationDriveContribution: this.complicationDriveContribution,
       effectiveNmbBlockade: this.effectiveNmbBlockade,
@@ -291,11 +305,12 @@ export class PatientPhysiology {
       this.isBreathingSpontaneously = this.spontaneousEffort > f(0.01);
       return;
     }
-    const targetRR = this.#forcedApnea
+    const procedureOrForcedApnea = this.#forcedApnea || this.#proceduralApnea;
+    const targetRR = procedureOrForcedApnea
       ? 0
       : Clamp(this.baselineRR * this._rrModifier * this.respiratoryDriveFactor, 0, 40);
     this.respiratoryRate = Lerp(this.respiratoryRate, targetRR, dt * 0.5);
-    this.isBreathingSpontaneously = !this.#forcedApnea
+    this.isBreathingSpontaneously = !procedureOrForcedApnea
       && this.respiratoryRate >= 2 && this.respiratoryMuscleCapability > f(0.01);
   }
 
@@ -314,7 +329,8 @@ export class PatientPhysiology {
   }
 
   alveolarVentilationLMin() {
-    const rr = (!this.isMechanicallyVentilated && this.#forcedApnea) ? 0 : this.respiratoryRate;
+    const noSpontaneousFlow = this.#forcedApnea || this.#proceduralApnea;
+    const rr = (!this.isMechanicallyVentilated && noSpontaneousFlow) ? 0 : this.respiratoryRate;
     const tv = this.tidalVolume > 0 ? this.tidalVolume : 450;
     const deadspace = Max(60, f(2.2) * this.weightKg);
     const va = f(Max(0, (tv - deadspace) * rr) / 1000);

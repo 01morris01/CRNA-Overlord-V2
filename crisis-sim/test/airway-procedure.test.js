@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AirwayProcedureSystem, PatientPhysiology } from '../sim/index.js';
+import { AirwayProcedureSystem, PatientPhysiology, buildPhysRig } from '../sim/index.js';
 
 function procedureRig() {
   const patient = new PatientPhysiology();
@@ -159,5 +159,41 @@ describe('airway procedure state machine', () => {
     expect(airway.cricoidPressureHistory).toEqual([]);
     expect(airway.intubationAttempts).toEqual([]);
     expect(airway.eventsSince(0)).toEqual([]);
+  });
+
+  it('wires procedural apnea without duplicating NMB and exposes derived ETO2', () => {
+    const { p, a, core } = buildPhysRig(8101, 70, 170, 45);
+
+    expect(a.patient).toBe(p);
+    expect(core.airwayProcedure).toBe(a);
+    expect(p.proceduralApneaActive).toBe(false);
+    expect(p.proceduralApneaContribution).toBe(1);
+    expect(p.endTidalO2Percent).toBe(Math.fround(p.alveolarO2Fraction * 100));
+
+    a.configureIntubation({ failedIntubationAttempts: [1], attemptDurationSeconds: 2 });
+    a.attemptIntubation();
+    expect(p.proceduralApneaActive).toBe(true);
+    expect(p.proceduralApneaContribution).toBe(0);
+    expect(p.centralDrive).toBe(0);
+    expect(Object.hasOwn(p, 'procedureNmbBlockade')).toBe(false);
+
+    core.stepFor(2);
+    expect(p.proceduralApneaActive).toBe(false);
+    expect(a.lastIntubationOutcome).toBe('failed');
+  });
+
+  it('clears procedure state through core reset without a second paralysis state', () => {
+    const { p, a, core } = buildPhysRig(8102, 70, 170, 45);
+    a.applyCricoidPressure();
+    a.deliverMaskVentilation({ durationSeconds: 10 });
+    p.effectiveNmbBlockade = 0.7;
+
+    core.resetSim(8102);
+
+    expect(a.ppvHistory).toEqual([]);
+    expect(a.cricoidPressureHistory).toEqual([]);
+    expect(p.proceduralApneaActive).toBe(false);
+    expect(p.effectiveNmbBlockade).toBe(0);
+    expect(Object.hasOwn(p, 'procedureNmbBlockade')).toBe(false);
   });
 });

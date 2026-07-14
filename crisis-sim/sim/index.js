@@ -13,6 +13,7 @@ export { normalize, ScenarioEventType } from './scenario/scenarioLoader.js';
 import { PatientPhysiology } from './patientPhysiology.js';
 import { DrugSystem } from './drugSystem.js';
 import { VentilatorSystem } from './ventilatorSystem.js';
+import { AirwayProcedureSystem } from './airwayProcedureSystem.js';
 import { SimulationCore } from './simulationCore.js';
 import { ScenarioManager } from './scenario/scenarioManager.js';
 
@@ -24,14 +25,16 @@ export function buildRig(seed) {
   const p = new PatientPhysiology();
   const d = new DrugSystem(); d.patient = p;
   const v = new VentilatorSystem(); v.patient = p;
+  const a = new AirwayProcedureSystem(); a.patient = p; a.ventilator = v;
+  v.airwayProcedure = a;
   const s = new ScenarioManager();
-  s.patient = p; s.drugSystem = d; s.ventilator = v;
+  s.patient = p; s.drugSystem = d; s.ventilator = v; s.airwayProcedure = a;
   const core = new SimulationCore();
-  core.patient = p; core.drugSystem = d; core.ventilator = v;
+  core.patient = p; core.drugSystem = d; core.ventilator = v; core.airwayProcedure = a;
   core.alarmSystem = null; core.scenario = s; core.autoDrive = false;
   p.resetToBaseline();
   core.initialize(seed);
-  return { p, d, v, s, core };
+  return { p, d, v, a, s, core };
 }
 
 /**
@@ -43,10 +46,12 @@ export function buildPhysRig(seed, weightKg = 70, heightCm = 170, ageYears = 45)
   p.weightKg = weightKg; p.heightCm = heightCm; p.ageYears = ageYears;
   const d = new DrugSystem(); d.patient = p;
   const v = new VentilatorSystem(); v.patient = p;
+  const a = new AirwayProcedureSystem(); a.patient = p; a.ventilator = v;
+  v.airwayProcedure = a;
   const core = new SimulationCore();
-  core.patient = p; core.drugSystem = d; core.ventilator = v;
+  core.patient = p; core.drugSystem = d; core.ventilator = v; core.airwayProcedure = a;
   core.alarmSystem = null; core.scenario = null; core.autoDrive = false;
   p.resetToBaseline();
   core.initialize(seed);
-  return { p, d, v, core };
+  return { p, d, v, a, core };
 }

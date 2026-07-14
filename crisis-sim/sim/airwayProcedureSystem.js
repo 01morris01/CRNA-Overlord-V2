@@ -21,6 +21,8 @@ export class AirwayProcedureSystem {
   reset() {
     if (this.patient?.setProceduralApnea) this.patient.setProceduralApnea(false);
     this.timeSec = 0;
+    this._tickCount = 0;
+    this._fixedStep = null;
     this.failedIntubationAttempts = [];
     this.attemptDurationSeconds = f(30);
     this._nextPpvEpisodeId = 1;
@@ -230,9 +232,21 @@ export class AirwayProcedureSystem {
     };
   }
 
+  prepareTick() {
+    if (this._ppvCurrent && this.patient?.airwayDeviceState !== 'mask') {
+      this._completePpv('airway_changed');
+    }
+  }
+
   tick(dt) {
     if (!(dt > 0)) return;
-    const nextTime = f(this.timeSec + dt);
+    const step = f(dt);
+    if (this._fixedStep === null) this._fixedStep = step;
+    else if (step !== this._fixedStep) {
+      throw new RangeError('AirwayProcedureSystem requires a fixed timestep');
+    }
+    this._tickCount += 1;
+    const nextTime = f(this._tickCount * this._fixedStep);
     if (this._attemptCurrent) this._sampleAttemptSpO2(nextTime);
     this.timeSec = nextTime;
 
