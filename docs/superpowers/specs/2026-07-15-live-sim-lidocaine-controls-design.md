@@ -1,6 +1,6 @@
 # Live Simulation Lidocaine and Clinical Controls Design
 
-Status: conversational design approved; written specification pending review
+Status: approved for implementation
 Date: 2026-07-15
 Branch: `feature/live-sim-lidocaine-controls`
 Base: `d917b7e` (`feature/engine-airway-gaps`)
