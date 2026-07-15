@@ -5,6 +5,7 @@ import {
   formatMonitorSnapshot,
   parsePatientConfig,
   validateSimulationResult,
+  VOLATILE_AGENTS,
 } from '../../ui/liveSimModel.js';
 import {
   deriveLifecyclePresentation,
@@ -102,6 +103,14 @@ describe('live simulation patient setup', () => {
 });
 
 describe('display model', () => {
+  it('declares every supported volatile choice and reference dial', () => {
+    expect(VOLATILE_AGENTS).toEqual([
+      { name: 'Sevoflurane', referenceDial: 2 },
+      { name: 'Desflurane', referenceDial: 6 },
+      { name: 'Isoflurane', referenceDial: 1.2 },
+    ]);
+  });
+
   it('formats engine values without inventing missing normals', () => {
     const model = formatMonitorSnapshot({
       hr: 72.4, sbp: 121.2, dbp: 77.8, map: 92.3, spo2: 98.7,

@@ -15,6 +15,7 @@ const numericKeys = [
   'midazolamCe', 'weightKg',
   'eto2', 'mechanicalMV', 'effectiveMV', 'proceduralApneaContribution',
   'ppvEpisodeCount', 'intubationAttemptCount',
+  'tofCheckCount',
 ];
 
 const booleanKeys = [
@@ -26,8 +27,8 @@ const stringKeys = [
   'agent', 'vaporizerAgent', 'airwayDevice', 'lifecycle', 'patient', 'lastIntubationOutcome',
 ];
 
-const arrayKeys = ['cricoidPressureHistory', 'ppvHistory', 'intubationAttempts'];
-const nullableObjectKeys = ['ppvCurrent'];
+const arrayKeys = ['cricoidPressureHistory', 'ppvHistory', 'intubationAttempts', 'tofCheckHistory'];
+const nullableObjectKeys = ['ppvCurrent', 'lastTofCheck'];
 
 const requiredKeys = [
   ...numericKeys, ...booleanKeys, ...stringKeys, ...arrayKeys, ...nullableObjectKeys,

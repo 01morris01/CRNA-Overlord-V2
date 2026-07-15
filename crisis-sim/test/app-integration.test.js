@@ -38,6 +38,14 @@ describe('main app live simulation registration', () => {
     expect(controller).toContain('snapshot.intubationInProgress');
     expect(controller).toContain('result.attemptNumber');
     expect(controller).toContain('deriveLifecyclePresentation(snapshot)');
+    expect(controller).toContain('id="live-volatile-panel"');
+    expect(controller).toContain('data-volatile-agent="Sevoflurane"');
+    expect(controller).toContain('data-volatile-agent="Desflurane"');
+    expect(controller).toContain('data-volatile-agent="Isoflurane"');
+    expect(controller).toContain('id="live-volatile-off"');
+    expect(controller).toContain('id="live-check-tof"');
+    expect(controller).toContain('liveRunner.setVolatile');
+    expect(controller).toContain('liveRunner.checkTrainOfFour');
     expect(hospitalMap).toContain('var dt = Math.max(0, Math.min(.05, (t - last) / 1000));');
   });
 

@@ -117,6 +117,7 @@ export class SimRunner {
     scenario.startScenario();
     this.p = p; this.d = d; this.v = v; this.a = a; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
+    this.tofCheckHistory = [];
   }
 
   applyConfig(patch) {
@@ -236,6 +237,11 @@ export class SimRunner {
       intubationAttempts: this.a.intubationAttempts,
       sugammadexRocRelief: this.d.sugammadexRocRelief,
       neostigmineRocRelief: this.d.neostigmineRocRelief,
+      lastTofCheck: this.tofCheckHistory.length > 0
+        ? { ...this.tofCheckHistory.at(-1) }
+        : null,
+      tofCheckCount: this.tofCheckHistory.length,
+      tofCheckHistory: this.tofCheckHistory.map((entry) => ({ ...entry })),
       running: this.running, lifecycle: this.getLifecycleState(), speed: this.speed,
       patient: `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`,
       // physiologic drivers (truth-boundary inputs) + drug context for the advisor
@@ -294,6 +300,45 @@ export class SimRunner {
   setMachine(patch) {
     Object.assign(this.v, patch);
     if ('mode' in patch) this.v.setMode(patch.mode);
+  }
+
+  setVolatile({ agent, dialPercent } = {}) {
+    const allowed = new Set(['Sevoflurane', 'Desflurane', 'Isoflurane']);
+    if (!Number.isFinite(dialPercent) || dialPercent < 0 || dialPercent > 18) {
+      return { ok: false, reason: 'volatile dial must be between 0 and 18 percent' };
+    }
+    if (!allowed.has(agent)) {
+      return { ok: false, reason: `unsupported volatile agent: ${agent}` };
+    }
+    this.v.vaporizerAgent = agent;
+    this.v.vaporizerDial = dialPercent;
+    this.logEvent('Volatile anesthetic', `${agent} ${dialPercent.toFixed(1)}%`, {
+      action: 'volatile_changed',
+      agent,
+      dialPercent,
+      airwayDevice: this.p.airwayDeviceState,
+    });
+    this.emit();
+    return { ok: true, agent, dialPercent };
+  }
+
+  checkTrainOfFour() {
+    const stored = Object.freeze({
+      tSec: this.simTime,
+      count: this.p.trainOfFourCount,
+      ratio: this.p.trainOfFourRatio,
+      effectiveNmbBlockade: this.p.effectiveNmbBlockade,
+      nmbSource: this.p.dominantNmbSource,
+      airwayDevice: this.p.airwayDeviceState,
+    });
+    this.tofCheckHistory.push(stored);
+    this.logEvent(
+      'Neuromuscular assessment',
+      `TOF ${stored.count} · ratio ${stored.ratio.toFixed(2)}`,
+      { action: 'tof_checked', ...stored },
+    );
+    this.emit();
+    return { ...stored };
   }
 
   configureIntubationAttempts(options) { return this.a.configureIntubation(options); }

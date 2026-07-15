@@ -45,6 +45,12 @@ export const VENT_MODE_NAMES = Object.freeze({
   0: 'Manual/Bag', 1: 'VCV', 2: 'PCV', 3: 'PSV',
 });
 
+export const VOLATILE_AGENTS = Object.freeze([
+  Object.freeze({ name: 'Sevoflurane', referenceDial: 2 }),
+  Object.freeze({ name: 'Desflurane', referenceDial: 6 }),
+  Object.freeze({ name: 'Isoflurane', referenceDial: 1.2 }),
+]);
+
 export const SIMULATION_RESULT_FIELDS = Object.freeze([
   'scenarioId', 'title', 'courseUnit', 'durationSec', 'rawPoints', 'maxPoints',
   'score', 'timeToRecognitionSec', 'timeToTreatmentSec', 'teachingFeedback',

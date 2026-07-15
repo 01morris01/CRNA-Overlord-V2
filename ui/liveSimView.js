@@ -9,6 +9,7 @@ import {
   parsePatientConfig,
   PATIENT_PRESETS,
   validateSimulationResult,
+  VOLATILE_AGENTS,
 } from './liveSimModel.js';
 import { createLiveSimTransport } from './liveSimTransport.js';
 
@@ -20,6 +21,8 @@ let view = null;
 let launchSource = null;
 let launchObserver = null;
 let courseSelectorDisplay = null;
+let selectedVolatileAgent = 'Sevoflurane';
+let volatileSelectionDirty = false;
 
 const patientFields = [
   ['weightKg', 'Weight', 'kg', 1],
@@ -193,10 +196,35 @@ function renderShell() {
             <span>Complication <strong id="live-drive-complication">—</strong></span>
             <span>NMB capability <strong id="live-drive-muscle">—</strong></span>
           </div>
+          <div class="live-tof-assessment">
+            <button id="live-check-tof" type="button">CHECK TOF</button>
+            <output id="live-last-tof" aria-live="polite">No quantitative TOF check recorded.</output>
+          </div>
         </section>
       </div>
 
       <div class="live-sim-column live-sim-column-wide">
+        <section id="live-volatile-panel" class="live-panel live-volatile-panel" aria-labelledby="live-volatile-heading">
+          <h2 id="live-volatile-heading">Volatile anesthetic</h2>
+          <p class="live-help">Select an agent and dial, then apply. End-tidal concentration and MAC remain engine-derived.</p>
+          <div class="live-volatile-agents" role="group" aria-label="Volatile agent">
+            <button type="button" data-volatile-agent="Sevoflurane" aria-pressed="true">SEVOFLURANE</button>
+            <button type="button" data-volatile-agent="Desflurane" aria-pressed="false">DESFLURANE</button>
+            <button type="button" data-volatile-agent="Isoflurane" aria-pressed="false">ISOFLURANE</button>
+            <button id="live-volatile-off" type="button">AGENT OFF</button>
+          </div>
+          <div class="live-volatile-settings">
+            <label class="live-field" for="live-volatile-dial"><span>Vaporizer dial</span><span class="live-input-unit"><input id="live-volatile-dial" type="number" value="2" min="0" max="18" step="0.1"><small>%</small></span></label>
+            <button id="live-volatile-apply" type="button" class="live-primary">APPLY VOLATILE</button>
+          </div>
+          <dl class="live-volatile-readback">
+            <div><dt>Selected</dt><dd id="live-volatile-current-agent">Sevoflurane</dd></div>
+            <div><dt>Dial</dt><dd><span id="live-volatile-current-dial">0.0</span>%</dd></div>
+            <div><dt>End tidal</dt><dd><span id="live-volatile-et">0.0</span>%</dd></div>
+            <div><dt>MAC</dt><dd id="live-volatile-mac">0.00</dd></div>
+          </dl>
+        </section>
+
         <section class="live-panel" aria-labelledby="live-machine-heading">
           <h2 id="live-machine-heading">Anesthesia machine</h2>
           <form id="live-machine-form" class="live-machine-grid">
@@ -210,8 +238,6 @@ function renderShell() {
             <label class="live-field"><span>O₂ flow</span><span class="live-input-unit"><input name="o2FlowLPerMin" type="number" value="2" min="0" max="15" step="0.1"><small>L/min</small></span></label>
             <label class="live-field"><span>Air flow</span><span class="live-input-unit"><input name="airFlowLPerMin" type="number" value="0" min="0" max="15" step="0.1"><small>L/min</small></span></label>
             <label class="live-field"><span>N₂O flow</span><span class="live-input-unit"><input name="n2oFlowLPerMin" type="number" value="0" min="0" max="15" step="0.1"><small>L/min</small></span></label>
-            <label class="live-field"><span>Vaporizer agent</span><select name="vaporizerAgent"><option>Sevoflurane</option><option>Desflurane</option><option>Isoflurane</option></select></label>
-            <label class="live-field"><span>Vaporizer dial</span><span class="live-input-unit"><input name="vaporizerDial" type="number" value="0" min="0" max="18" step="0.1"><small>%</small></span></label>
             <button type="submit" class="live-primary live-machine-submit">APPLY MACHINE SETTINGS</button>
           </form>
         </section>
@@ -283,6 +309,13 @@ function setText(id, text) {
   if (element) element.textContent = text;
 }
 
+function renderVolatileSelection(agent) {
+  selectedVolatileAgent = agent;
+  for (const button of view.querySelectorAll('[data-volatile-agent]')) {
+    button.setAttribute('aria-pressed', String(button.dataset.volatileAgent === agent));
+  }
+}
+
 function renderSnapshot(snapshot) {
   latestSnapshot = snapshot;
   const monitor = formatMonitorSnapshot(snapshot);
@@ -303,6 +336,24 @@ function renderSnapshot(snapshot) {
   setText('live-vital-etco2', monitor.etco2);
   setText('live-vital-tof', monitor.tof);
   setText('live-vital-tof-ratio', `ratio ${monitor.tofRatio}`);
+  const lastTofCheck = snapshot.lastTofCheck;
+  setText(
+    'live-last-tof',
+    lastTofCheck
+      ? `Last check ${lastTofCheck.count}/4 · ratio ${lastTofCheck.ratio.toFixed(2)} · ${formatTime(lastTofCheck.tSec)}`
+      : 'No quantitative TOF check recorded.',
+  );
+  if (!volatileSelectionDirty && VOLATILE_AGENTS.some((entry) => entry.name === snapshot.vaporizerAgent)) {
+    renderVolatileSelection(snapshot.vaporizerAgent);
+  }
+  const volatileDial = document.getElementById('live-volatile-dial');
+  if (volatileDial && document.activeElement !== volatileDial && !volatileSelectionDirty) {
+    volatileDial.value = String(snapshot.vaporizer);
+  }
+  setText('live-volatile-current-agent', snapshot.vaporizerAgent);
+  setText('live-volatile-current-dial', Number(snapshot.vaporizer).toFixed(1));
+  setText('live-volatile-et', Number(snapshot.etAgent).toFixed(1));
+  setText('live-volatile-mac', Number(snapshot.mac).toFixed(2));
   setText('live-drive-forced', Number(snapshot.forcedApneaContribution).toFixed(2));
   setText('live-drive-drug', Number(snapshot.drugDepressionContribution).toFixed(2));
   setText('live-drive-complication', Number(snapshot.complicationDriveContribution).toFixed(2));
@@ -398,8 +449,6 @@ function applyMachine(event) {
     o2FlowLPerMin: Number(data.get('o2FlowLPerMin')),
     airFlowLPerMin: Number(data.get('airFlowLPerMin')),
     n2oFlowLPerMin: Number(data.get('n2oFlowLPerMin')),
-    vaporizerAgent: String(data.get('vaporizerAgent')),
-    vaporizerDial: Number(data.get('vaporizerDial')),
   };
   if (Object.values(patch).some((value) => typeof value === 'number' && !Number.isFinite(value))) {
     setStatus('Machine settings must be finite numbers.', 'error');
@@ -584,6 +633,32 @@ function bindControls() {
   });
   document.getElementById('live-patient-form')?.addEventListener('submit', applyPatient);
   document.getElementById('live-machine-form')?.addEventListener('submit', applyMachine);
+  document.getElementById('live-volatile-dial')?.addEventListener('input', () => {
+    volatileSelectionDirty = true;
+  });
+  document.getElementById('live-volatile-apply')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const dialPercent = Number(document.getElementById('live-volatile-dial')?.value);
+    const result = liveRunner.setVolatile({ agent: selectedVolatileAgent, dialPercent });
+    if (!result.ok) {
+      setStatus(result.reason, 'error');
+      return;
+    }
+    volatileSelectionDirty = false;
+    setStatus(`${result.agent} applied at ${result.dialPercent.toFixed(1)}%.`, 'success');
+  });
+  document.getElementById('live-volatile-off')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.setVolatile({ agent: selectedVolatileAgent, dialPercent: 0 });
+    if (!result.ok) {
+      setStatus(result.reason, 'error');
+      return;
+    }
+    volatileSelectionDirty = false;
+    const dial = document.getElementById('live-volatile-dial');
+    if (dial) dial.value = '0';
+    setStatus(`${result.agent} vaporizer turned off.`, 'success');
+  });
   document.getElementById('live-patient-preset')?.addEventListener('change', (event) => {
     const preset = PATIENT_PRESETS.find((candidate) => candidate.id === event.currentTarget.value);
     if (preset) fillPatientForm({ ...DEFAULT_CONFIG, ...preset.config });
@@ -594,6 +669,14 @@ function bindControls() {
     liveRunner.setForcedApnea(event.currentTarget.checked);
     liveRunner.emit();
     setStatus(event.currentTarget.checked ? 'Forced apnea imposed.' : 'Forced apnea lifted.', 'success');
+  });
+  document.getElementById('live-check-tof')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const record = liveRunner.checkTrainOfFour();
+    setStatus(
+      `TOF checked: ${record.count}/4 · ratio ${record.ratio.toFixed(2)} at ${formatTime(record.tSec)}.`,
+      'success',
+    );
   });
   document.getElementById('live-mask-ppv')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
@@ -628,6 +711,16 @@ function bindControls() {
 
   for (const button of view.querySelectorAll('[data-airway]')) {
     button.addEventListener('click', () => handleAirway(button.dataset.airway));
+  }
+  for (const button of view.querySelectorAll('[data-volatile-agent]')) {
+    button.addEventListener('click', () => {
+      const metadata = VOLATILE_AGENTS.find((entry) => entry.name === button.dataset.volatileAgent);
+      if (!metadata) return;
+      volatileSelectionDirty = true;
+      renderVolatileSelection(metadata.name);
+      const dial = document.getElementById('live-volatile-dial');
+      if (dial) dial.value = String(metadata.referenceDial);
+    });
   }
   for (const button of view.querySelectorAll('[data-drug-action]')) {
     button.addEventListener('click', () => giveDrug(button.dataset.drugAction));

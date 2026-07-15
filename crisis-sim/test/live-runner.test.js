@@ -90,6 +90,79 @@ describe('live SimRunner integration', () => {
     });
   });
 
+  it('sets only supported volatile inputs and logs the fixed-step action', () => {
+    const runner = new SimRunner();
+
+    expect(runner.setVolatile({ agent: 'Desflurane', dialPercent: 6 })).toMatchObject({
+      ok: true, agent: 'Desflurane', dialPercent: 6,
+    });
+    expect(runner.snapshot()).toMatchObject({ vaporizerAgent: 'Desflurane', vaporizer: 6 });
+    expect(runner.log.at(-1)).toMatchObject({
+      t: 0,
+      meta: { action: 'volatile_changed', agent: 'Desflurane', dialPercent: 6 },
+    });
+    const acceptedLogLength = runner.log.length;
+    expect(runner.setVolatile({ agent: 'Ether', dialPercent: 2 })).toEqual({
+      ok: false, reason: 'unsupported volatile agent: Ether',
+    });
+    expect(runner.log).toHaveLength(acceptedLogLength);
+    expect(runner.snapshot()).toMatchObject({ vaporizerAgent: 'Desflurane', vaporizer: 6 });
+    runner.setVolatile({ agent: 'Desflurane', dialPercent: 0 });
+    expect(runner.snapshot()).toMatchObject({ vaporizerAgent: 'Desflurane', vaporizer: 0 });
+  });
+
+  it.each([
+    ['Sevoflurane', 2],
+    ['Desflurane', 6],
+  ])('derives end-tidal concentration and MAC after setting %s', (agent, dialPercent) => {
+    const runner = new SimRunner();
+    runner.setVolatile({ agent, dialPercent });
+
+    const snapshot = advance(runner, 30);
+
+    expect(snapshot.etAgent).toBeGreaterThan(0);
+    expect(snapshot.mac).toBeGreaterThan(0);
+    expect(snapshot.agent).toBe(agent);
+  });
+
+  it('checks TOF without changing any neuromuscular state', () => {
+    const runner = new SimRunner();
+    runner.giveBolus('Rocuronium', 42, 'Rocuronium 42 mg');
+    runner.core.stepFor(120);
+    runner.simTime = runner.core.simTime;
+    const before = runner.snapshot();
+    const fingerprintBefore = {
+      effectiveNmbBlockade: before.effectiveNmbBlockade,
+      tof: before.tof,
+      tofRatio: before.tofRatio,
+      respiratoryMuscleCapability: before.respiratoryMuscleCapability,
+      spontaneousEffort: before.spontaneousEffort,
+    };
+
+    const record = runner.checkTrainOfFour();
+    const after = runner.snapshot();
+
+    expect(record).toMatchObject({
+      count: before.tof,
+      ratio: before.tofRatio,
+      tSec: before.t,
+      nmbSource: 'rocuronium',
+      airwayDevice: 'mask',
+    });
+    expect({
+      effectiveNmbBlockade: after.effectiveNmbBlockade,
+      tof: after.tof,
+      tofRatio: after.tofRatio,
+      respiratoryMuscleCapability: after.respiratoryMuscleCapability,
+      spontaneousEffort: after.spontaneousEffort,
+    }).toEqual(fingerprintBefore);
+    expect(after.tofCheckHistory).toEqual([record]);
+    expect(runner.log.at(-1).meta.action).toBe('tof_checked');
+
+    record.count = 4;
+    expect(runner.snapshot().tofCheckHistory[0].count).toBe(before.tof);
+  });
+
   it('delegates bronchospasm to the existing complication state machine and treatment path', () => {
     const runner = new SimRunner();
 

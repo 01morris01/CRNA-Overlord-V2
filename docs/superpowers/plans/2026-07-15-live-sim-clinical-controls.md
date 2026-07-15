@@ -77,7 +77,7 @@ it('sets only supported volatile inputs and logs the fixed-step action', () => {
   });
   expect(runner.snapshot()).toMatchObject({ vaporizerAgent: 'Desflurane', vaporizer: 6 });
   expect(runner.log.at(-1).meta.action).toBe('volatile_changed');
-  expect(() => runner.setVolatile({ agent: 'Ether', dialPercent: 2 })).toThrow(RangeError);
+  expect(runner.setVolatile({ agent: 'Ether', dialPercent: 2 })).toMatchObject({ ok: false, reason: expect.any(String) });
   runner.setVolatile({ agent: 'Desflurane', dialPercent: 0 });
   expect(runner.snapshot()).toMatchObject({ vaporizerAgent: 'Desflurane', vaporizer: 0 });
 });
@@ -196,7 +196,7 @@ git commit -m "Contain live monitor blood pressure"
 - Modify: `crisis-sim/test/app-integration.test.js`
 - Modify: `crisis-sim/test/snapshot-contract.mjs`
 
-- [ ] **Step 1: Add one copied TOF history to SimRunner**
+- [x] **Step 1: Add one copied TOF history to SimRunner**
 
 Initialize/reset `this.tofCheckHistory = []`. Add:
 
@@ -221,7 +221,7 @@ checkTrainOfFour() {
 
 If `dominantNmbSource` is not public, expose it as a pure getter derived from existing rocuronium/succinylcholine concentrations; do not add state.
 
-- [ ] **Step 2: Extend snapshot with copied records**
+- [x] **Step 2: Extend snapshot with copied records**
 
 Add:
 
@@ -231,15 +231,15 @@ tofCheckCount: this.tofCheckHistory.length,
 tofCheckHistory: this.tofCheckHistory.map((entry) => ({ ...entry })),
 ```
 
-- [ ] **Step 3: Add the live action**
+- [x] **Step 3: Add the live action**
 
 Place a CHECK TOF button beside the continuously displayed TOF/ratio. Its handler calls `checkTrainOfFour()` and reports count, ratio, and simulation time. `renderSnapshot()` shows the last checked result separately from the current continuous value.
 
-- [ ] **Step 4: Update exact snapshot accounting**
+- [x] **Step 4: Update exact snapshot accounting**
 
 Add `tofCheckCount` to numeric keys, `lastTofCheck` to nullable-object keys, and `tofCheckHistory` to array keys in `snapshot-contract.mjs`.
 
-- [ ] **Step 5: Verify focused tests**
+- [x] **Step 5: Verify focused tests**
 
 ```bash
 cd crisis-sim
@@ -249,7 +249,7 @@ node test/snapshot-contract.mjs
 
 Expected: runner and UI contracts pass; snapshot key/type counts are exact.
 
-- [ ] **Step 6: Commit TOF assessment**
+- [x] **Step 6: Commit TOF assessment**
 
 ```bash
 git add crisis-sim/ui/simRunner.js ui/liveSimView.js assets/css/live-sim.css crisis-sim/test/live-runner.test.js crisis-sim/test/app-integration.test.js crisis-sim/test/snapshot-contract.mjs
@@ -266,7 +266,7 @@ git commit -m "Add scoreable TOF assessment"
 - Modify: `crisis-sim/test/live-runner.test.js`
 - Modify: `crisis-sim/test/app-integration.test.js`
 
-- [ ] **Step 1: Implement validated wrapper action**
+- [x] **Step 1: Implement validated wrapper action**
 
 Add to SimRunner:
 
@@ -274,10 +274,10 @@ Add to SimRunner:
 setVolatile({ agent, dialPercent }) {
   const allowed = new Set(['Sevoflurane', 'Desflurane', 'Isoflurane']);
   if (!Number.isFinite(dialPercent) || dialPercent < 0 || dialPercent > 18) {
-    throw new RangeError('volatile dial must be between 0 and 18 percent');
+    return { ok: false, reason: 'volatile dial must be between 0 and 18 percent' };
   }
-  if (dialPercent > 0 && !allowed.has(agent)) throw new RangeError(`unsupported volatile agent: ${agent}`);
-  if (allowed.has(agent)) this.v.vaporizerAgent = agent;
+  if (!allowed.has(agent)) return { ok: false, reason: `unsupported volatile agent: ${agent}` };
+  this.v.vaporizerAgent = agent;
   this.v.vaporizerDial = dialPercent;
   this.logEvent('Volatile anesthetic', `${this.v.vaporizerAgent} ${dialPercent.toFixed(1)}%`, {
     action: 'volatile_changed', agent: this.v.vaporizerAgent, dialPercent,
@@ -288,7 +288,7 @@ setVolatile({ agent, dialPercent }) {
 }
 ```
 
-- [ ] **Step 2: Add declarative agent metadata**
+- [x] **Step 2: Add declarative agent metadata**
 
 In `liveSimModel.js`:
 
@@ -300,15 +300,15 @@ export const VOLATILE_AGENTS = Object.freeze([
 ]);
 ```
 
-- [ ] **Step 3: Move the UI controls**
+- [x] **Step 3: Move the UI controls**
 
 Remove agent/dial inputs from `live-machine-form`. Add `live-volatile-panel` before it with three agent buttons, Agent Off, a numeric dial input, APPLY, and current dial/end-tidal/MAC outputs. Agent buttons select; APPLY calls `setVolatile()`. Agent Off calls the same method with dial zero.
 
-- [ ] **Step 4: Keep the panel synchronized**
+- [x] **Step 4: Keep the panel synchronized**
 
 `renderSnapshot()` sets selected-button `aria-pressed`, dial input when it is not focused, and current values from `snapshot.vaporizerAgent`, `snapshot.vaporizer`, `snapshot.etAgent`, and `snapshot.mac`.
 
-- [ ] **Step 5: Verify UI and runner tests**
+- [x] **Step 5: Verify UI and runner tests**
 
 ```bash
 cd crisis-sim
@@ -319,7 +319,7 @@ Expected: all pass; the general machine form no longer owns vaporizer state.
 
 Also advance a Sevoflurane and a Desflurane run long enough to assert that the existing ventilator/physiology path derives nonzero end-tidal agent and MAC. The wrapper test must never assert a direct write to those outputs.
 
-- [ ] **Step 6: Commit volatile controls**
+- [x] **Step 6: Commit volatile controls**
 
 ```bash
 git add crisis-sim/ui/simRunner.js ui/liveSimModel.js ui/liveSimView.js assets/css/live-sim.css crisis-sim/test/live-runner.test.js crisis-sim/test/app-integration.test.js crisis-sim/test/live-ui-model.test.js

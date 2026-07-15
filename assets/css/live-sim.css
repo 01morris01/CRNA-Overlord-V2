@@ -221,6 +221,51 @@
 .live-drive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; margin-top: .75rem; }
 .live-drive-grid span { display: flex; justify-content: space-between; padding: .5rem; background: var(--abyss); color: var(--muted); font-family: var(--fm); font-size: .65rem; }
 .live-drive-grid strong { color: var(--txt); font-variant-numeric: tabular-nums; }
+.live-tof-assessment {
+  display: grid;
+  grid-template-columns: minmax(120px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: .6rem;
+  margin-top: .75rem;
+}
+.live-tof-assessment output {
+  min-width: 0;
+  color: var(--txt-2);
+  font-family: var(--fm);
+  font-size: .65rem;
+  line-height: 1.4;
+}
+.live-volatile-agents {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .55rem;
+}
+.live-volatile-agents button[aria-pressed="true"] {
+  border-color: var(--green);
+  background: rgba(0, 255, 163, .14);
+  color: var(--green);
+}
+.live-volatile-settings {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(150px, auto);
+  align-items: end;
+  gap: .75rem;
+  margin-top: .75rem;
+}
+.live-volatile-readback {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .5rem;
+  margin: .75rem 0 0;
+}
+.live-volatile-readback > div {
+  min-width: 0;
+  padding: .55rem;
+  border: 1px solid var(--line);
+  background: var(--abyss);
+}
+.live-volatile-readback dt { color: var(--muted); font-family: var(--fm); font-size: .58rem; }
+.live-volatile-readback dd { margin: .25rem 0 0; color: var(--txt); font-family: var(--fm); font-size: .72rem; overflow-wrap: anywhere; }
 
 .live-dose-grid,
 .live-complication-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
@@ -257,6 +302,9 @@
   .live-form-grid,
   .live-dose-grid,
   .live-complication-grid { grid-template-columns: 1fr; }
+  .live-volatile-agents,
+  .live-volatile-readback { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .live-volatile-settings { grid-template-columns: 1fr; }
   .live-sim-view input,
   .live-sim-view select { font-size: 16px; }
 }

@@ -126,6 +126,23 @@ export class PatientPhysiology {
     return Clamp01(this.trainOfFourRatio / f(0.9));
   }
 
+  get effectiveRocuroniumBlockade() {
+    const raw = rocuroniumBlockFromCe(this.rocuroniumCe);
+    const afterSugammadex = f(raw * f(1 - this.sugammadexRocRelief));
+    return Clamp01(f(afterSugammadex - this.neostigmineRocRelief));
+  }
+
+  get effectiveSuccinylcholineBlockade() {
+    return Clamp01(this.succinylcholineCe / 1.0);
+  }
+
+  get dominantNmbSource() {
+    const roc = this.effectiveRocuroniumBlockade;
+    const sux = this.effectiveSuccinylcholineBlockade;
+    if (Max(roc, sux) <= f(0.01)) return 'none';
+    return roc >= sux ? 'rocuronium' : 'succinylcholine';
+  }
+
   setForcedApnea(active) { this.#forcedApnea = active === true; }
 
   get forcedApneaActive() { return this.#forcedApnea; }
@@ -415,12 +432,8 @@ export class PatientPhysiology {
   }
 
   updateNeuromuscular(dt) {
-    const rawRoc = rocuroniumBlockFromCe(this.rocuroniumCe);
-    const unboundFraction = f(1 - this.sugammadexRocRelief);
-    const afterSugammadex = f(rawRoc * unboundFraction);
-    const afterNeostigmine = f(afterSugammadex - this.neostigmineRocRelief);
-    const roc = Clamp01(afterNeostigmine);
-    const sux = Clamp01(this.succinylcholineCe / 1.0);
+    const roc = this.effectiveRocuroniumBlockade;
+    const sux = this.effectiveSuccinylcholineBlockade;
     const blockade = Max(roc, sux);
     this.effectiveNmbBlockade = blockade;
     if (blockade > f(0.01)) {
