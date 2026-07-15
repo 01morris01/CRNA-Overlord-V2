@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildPhysRig, LidocaineSystem } from '../sim/index.js';
+import { buildPhysRig, buildRig, LidocaineSystem } from '../sim/index.js';
 
 function runStimulus({ block }) {
   const rig = buildPhysRig(8128);
@@ -96,5 +96,29 @@ describe('Lidocaine additive physiology evidence', () => {
     expect(rescued.p.meanArterialPressure).toBeGreaterThan(
       noRescue.p.meanArterialPressure + 10,
     );
+  });
+});
+
+describe('shared scenario LAST integrity', () => {
+  it('delegates administrative LAST into central Lidocaine exposure', () => {
+    const { s, l } = buildRig(8642);
+
+    s.applyComplication({ complicationType: 'LocalAnestheticToxicity' });
+
+    expect(l.plasmaTotalMcgMl).toBeCloseTo(10, 4);
+    expect(s.eventLog.some((entry) => entry.includes('last_exposure_injected'))).toBe(true);
+    expect('_lastCnsTox' in s).toBe(false);
+    expect('_lastCardiacTox' in s).toBe(false);
+  });
+
+  it('maps a natural regional overdose without an administrative injection event', () => {
+    const { s, l, core } = buildRig(8642);
+    l.administerRegional({
+      route: 'epidural', concentrationPercent: 2, volumeMl: 200, epinephrine: false,
+    });
+    core.stepFor(5 * 60);
+
+    expect(l.toxicityStage).not.toBe('none');
+    expect(s.eventLog.some((entry) => entry.includes('last_exposure_injected'))).toBe(false);
   });
 });

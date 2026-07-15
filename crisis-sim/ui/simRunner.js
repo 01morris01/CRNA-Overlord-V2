@@ -95,7 +95,7 @@ export class SimRunner {
   build() {
     const c = this.config;
     if (this._procedureUnsubscribe) this._procedureUnsubscribe();
-    const { p, d, v, a, core } = buildPhysRig(SEED, c.weightKg, c.heightCm, c.ageYears);
+    const { p, d, l, v, a, core } = buildPhysRig(SEED, c.weightKg, c.heightCm, c.ageYears);
     p.sex = c.sex;
     p.baselineHR = c.baselineHR;
     p.baselineSystolic = c.baselineSystolic;
@@ -108,6 +108,7 @@ export class SimRunner {
     const scenario = new ScenarioManager();
     scenario.patient = p;
     scenario.drugSystem = d;
+    scenario.lidocaineSystem = l;
     scenario.ventilator = v;
     scenario.airwayProcedure = a;
     core.scenario = scenario;
@@ -115,7 +116,7 @@ export class SimRunner {
     core.initialize(SEED);
     scenario.loadRaw(liveScenarioDefinition(c));
     scenario.startScenario();
-    this.p = p; this.d = d; this.v = v; this.a = a; this.s = scenario; this.core = core;
+    this.p = p; this.d = d; this.l = l; this.v = v; this.a = a; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
     this.tofCheckHistory = [];
   }

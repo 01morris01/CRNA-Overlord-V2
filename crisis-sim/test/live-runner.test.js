@@ -181,6 +181,16 @@ describe('live SimRunner integration', () => {
     expect(runner.log.some((entry) => entry.meta?.action === 'complication')).toBe(true);
   });
 
+  it('wires live administrative LAST into the same Lidocaine system', () => {
+    const runner = new SimRunner();
+
+    runner.injectComplication('LocalAnestheticToxicity');
+
+    expect(runner.l).toBe(runner.s.lidocaineSystem);
+    expect(runner.l.plasmaTotalMcgMl).toBeCloseTo(10, 4);
+    expect(runner.s.eventLog.some((entry) => entry.includes('last_exposure_injected'))).toBe(true);
+  });
+
   it('rejects a complication with no existing engine state machine', () => {
     const runner = new SimRunner();
 

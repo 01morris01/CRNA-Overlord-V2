@@ -27,6 +27,7 @@ export class ScenarioManager {
   constructor() {
     this.patient = null;
     this.drugSystem = null;
+    this.lidocaineSystem = null;
     this.ventilator = null;
     this.airwayProcedure = null;
     this.alarmSystem = null;
@@ -75,9 +76,7 @@ export class ScenarioManager {
 
     this._hemorrhageActive = false; this._bleedingControlled = false;
     this._hemorrhageFailTimer = 0; this._lastHemorrhageClass = -1;
-
-    this._lastActive = false; this._lastBupivacaine = false; this._lastSeizing = false;
-    this._lastCnsTox = 0; this._lastCardiacTox = 0; this._lastLipidEffect = 0; this._lastFailTimer = 0;
+    this._lidocaineToxicityCursor = 0;
   }
 
   // ── loading ──────────────────────────────────────────────────────────
@@ -140,8 +139,7 @@ export class ScenarioManager {
     this._mhFailTimer = 0; this._anaphylaxisFailTimer = 0; this._bronchoFailTimer = 0; this._opioidFailTimer = 0;
     this._naloxoneSurgeActive = false; this._naloxoneSurge = 0;
     this._hemorrhageActive = false; this._bleedingControlled = false; this._hemorrhageFailTimer = 0; this._lastHemorrhageClass = -1;
-    this._lastActive = false; this._lastBupivacaine = false; this._lastSeizing = false;
-    this._lastCnsTox = 0; this._lastCardiacTox = 0; this._lastLipidEffect = 0; this._lastFailTimer = 0;
+    this._lidocaineToxicityCursor = 0;
     this._restingVco2 = this.patient != null ? Max(120, mul(2.8, this.patient.weightKg)) : 200;
     this.eventLog = [];
     this.activePrompts = [];
@@ -159,6 +157,7 @@ export class ScenarioManager {
     if (this.airwayProcedure != null) this.airwayProcedure.reset();
     if (this.patient != null) this.patient.resetToBaseline();
     if (this.drugSystem != null && this.drugSystem.resetReversalState) this.drugSystem.resetReversalState();
+    if (this.lidocaineSystem != null && this.lidocaineSystem.reset) this.lidocaineSystem.reset();
     this.setState(this.activeScenario != null ? ScenarioState.Ready : ScenarioState.NotLoaded);
   }
 
@@ -339,7 +338,7 @@ export class ScenarioManager {
       case 'LipidEmulsion':
       case 'Intralipid':
       case 'LipidRescue':
-        this._lastLipidEffect = Min(1, add(this._lastLipidEffect, 0.30));
+        if (this.lidocaineSystem != null) this.lidocaineSystem.giveLipidBolus();
         break;
       case 'GiveEpinephrineACLS':
       case 'EpinephrineFullDose':
@@ -536,7 +535,10 @@ export class ScenarioManager {
         this.showPrompt('COMPLICATION: Complete airway obstruction, stridor then silent chest. SpO2 falling.');
         break;
       case 'LocalAnestheticToxicity':
-        this.triggerLAST(true, 3.5);
+        if (this.lidocaineSystem != null) {
+          this.lidocaineSystem.injectToxicExposure({ targetPlasmaMcgMl: 10 });
+          this.logEvent('last_exposure_injected');
+        }
         this.showPrompt('COMPLICATION: Perioral numbness, tinnitus, metallic taste, agitation — rising local anesthetic level.');
         break;
       case 'TensionPneumothorax':
@@ -547,6 +549,7 @@ export class ScenarioManager {
         this.showPrompt('COMPLICATION: Desaturation, hypotension, high airway pressures, absent breath sounds left.');
         break;
       case 'VentricularFibrillation':
+        this.patient.explicitVentricularFibrillation = true;
         this.patient.hrComplicationOffset = -this.patient.baselineHR;
         this.patient.svrFactor = 0;
         this.patient.shuntFraction = 0.9;
@@ -566,7 +569,7 @@ export class ScenarioManager {
     this.advanceOpioid(dt);
     this.advanceLaryngospasm(dt);
     this.advanceHemorrhage(dt);
-    this.advanceLAST(dt);
+    this.observeLidocaineToxicity();
   }
 
   advanceSympathectomy(dt) {
@@ -728,39 +731,19 @@ export class ScenarioManager {
     }
   }
 
-  triggerLAST(bupivacaine, mgPerKg) {
-    this._lastActive = true; this._lastLipidEffect = 0; this._lastFailTimer = 0;
-    this.computeLASTToxicity(bupivacaine, mgPerKg);
-  }
-
-  computeLASTToxicity(bup, mgPerKg) {
-    this._lastBupivacaine = bup;
-    const cnsThreshold = bup ? 2.0 : 4.5;
-    const ccCnsRatio = bup ? 2.4 : 7.1;
-    const cardiacThreshold = f(cnsThreshold * ccCnsRatio);
-    this._lastCnsTox = Clamp01((mgPerKg - cnsThreshold * 0.6) / (cnsThreshold * 0.8));
-    this._lastCardiacTox = Clamp01((mgPerKg - cardiacThreshold * 0.5) / (cardiacThreshold * 0.6));
-  }
-
-  advanceLAST(dt) {
-    if (!this._lastActive) return;
-    const p = this.patient;
-    const epiImpair = Clamp01((p.epinephrineCe - 3) / 4);
-    const effLipid = f(Clamp01(this._lastLipidEffect) * (1 - 0.9 * epiImpair));
-    const cns = f(this._lastCnsTox * (1 - effLipid));
-    const cardiac = f(this._lastCardiacTox * (1 - effLipid));
-    const suppressed = p.propofolCe > 1.0 || p.midazolamCe > 0.05;
-    this._lastSeizing = cns > 0.5 && !suppressed;
-    p.svrFactor = f(1 - 0.6 * cardiac);
-    if (cardiac > 0.25) p.hrComplicationOffset = f(-50 * cardiac);
-    else if (this._lastSeizing) p.hrComplicationOffset = 25;
-    else p.hrComplicationOffset = 0;
-    if (cardiac > 0.6) this._lastFailTimer = f(this._lastFailTimer + dt);
-    else this._lastFailTimer = Max(0, this._lastFailTimer - dt);
-    if (this._lastFailTimer > 45) { this.arrest(); this.logEvent('LAST FAILURE'); }
-    if (cns < 0.2 && cardiac < 0.2) {
-      this._lastActive = false; p.svrFactor = 1; p.hrComplicationOffset = 0;
-      this.logEvent('LAST resolved'); this.setFeedback('LAST reversed by lipid emulsion.', true);
+  observeLidocaineToxicity() {
+    if (this.lidocaineSystem == null) return;
+    const history = this.lidocaineSystem.toxicityHistory;
+    while (this._lidocaineToxicityCursor < history.length) {
+      const transition = history[this._lidocaineToxicityCursor++];
+      this.logEvent(`lidocaine_toxicity_${transition.stage}`);
+      if (transition.stage === 'cardiac') {
+        this.showPrompt('LAST: Cardiovascular toxicity is developing — initiate lipid rescue.');
+      } else if (transition.stage === 'cns') {
+        this.showPrompt('LAST: CNS toxicity is developing — stop injection and prepare lipid rescue.');
+      } else if (transition.stage === 'none') {
+        this.setFeedback('LAST exposure returned below the modeled toxicity threshold.', true);
+      }
     }
   }
 

@@ -390,29 +390,29 @@ git commit -m "Model lipid rescue for LAST"
 - Modify: `crisis-sim/test/lidocaine-evidence.test.js`
 - Modify: `crisis-sim/test/live-runner.test.js`
 
-- [ ] **Step 1: Add failing administrative-path integrity test**
+- [x] **Step 1: Add failing administrative-path integrity test**
 
 Inject `LocalAnestheticToxicity` and assert central Lidocaine exposure rises, `last_exposure_injected` is logged, and no independent `_lastCnsTox`/`_lastCardiacTox` state exists. Assert naturally overdosed regional Lidocaine reaches the same toxicity mapper without an administrative injection event.
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
 npx vitest run test/lidocaine-evidence.test.js test/live-runner.test.js -t "administrative|shared LAST" --reporter=verbose
 ```
 
-- [ ] **Step 3: Delegate ScenarioManager**
+- [x] **Step 3: Delegate ScenarioManager**
 
 Wire `scenario.lidocaineSystem = l`. Replace `triggerLAST(true, 3.5)` with `l.injectToxicExposure({ targetPlasmaMcgMl: 10 })`. Remove advancement of independent LAST severity fields and have scenario prompts/events observe shared stage transitions.
 
-- [ ] **Step 4: Verify scenario and parity**
+- [x] **Step 4: Verify scenario and parity**
 
 ```bash
 cd crisis-sim
 npx vitest run test/lidocaine-evidence.test.js test/live-runner.test.js test/parity.test.js --reporter=verbose
 ```
 
-- [ ] **Step 5: Commit scenario integration**
+- [x] **Step 5: Commit scenario integration**
 
 ```bash
 git add crisis-sim/sim/scenario/scenarioManager.js crisis-sim/sim/index.js crisis-sim/ui/simRunner.js crisis-sim/test/lidocaine-evidence.test.js crisis-sim/test/live-runner.test.js
