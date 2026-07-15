@@ -16,18 +16,33 @@ const numericKeys = [
   'eto2', 'mechanicalMV', 'effectiveMV', 'proceduralApneaContribution',
   'ppvEpisodeCount', 'intubationAttemptCount',
   'tofCheckCount',
+  'lidocainePlasmaTotalMcgMl', 'lidocainePlasmaFreeMcgMl',
+  'lidocaineEffectSiteMcgMl', 'lidocaineCentralMg', 'lidocainePeripheralMg',
+  'lidocaineEliminatedMg', 'lidocaineCumulativeMg', 'lidocaineCumulativeMgKg',
+  'lidocaineInfusionRateMgKgHour', 'lidocaineClearanceFactor',
+  'regionalSensoryBlock', 'regionalMotorBlock', 'epiduralSympathectomyContribution',
+  'surgicalStimulusRaw', 'surgicalStimulusEffective',
+  'lidocaineSystemicAnalgesicContribution', 'lidocaineAntiarrhythmicContribution',
+  'ventricularIrritabilityRaw', 'ventricularIrritabilityEffective',
+  'lidocaineCnsToxicity', 'lidocaineCardiacToxicity', 'lipidCumulativeMlKg',
 ];
 
 const booleanKeys = [
   'intubated', 'spont', 'forcedApnea', 'capnogramPresent', 'running',
   'proceduralApnea', 'cricoidPressureActive', 'ppvActive', 'intubationInProgress',
+  'lidocaineInfusionActive', 'lidocaineSeizureActive', 'lipidInfusionActive',
 ];
 
 const stringKeys = [
   'agent', 'vaporizerAgent', 'airwayDevice', 'lifecycle', 'patient', 'lastIntubationOutcome',
+  'derivedRhythm', 'lidocaineToxicityStage',
 ];
 
-const arrayKeys = ['cricoidPressureHistory', 'ppvHistory', 'intubationAttempts', 'tofCheckHistory'];
+const arrayKeys = [
+  'cricoidPressureHistory', 'ppvHistory', 'intubationAttempts', 'tofCheckHistory',
+  'lidocaineRegionalHistory', 'lidocaineDoseHistory', 'lidocaineToxicityHistory',
+  'lipidRescueHistory',
+];
 const nullableObjectKeys = ['ppvCurrent', 'lastTofCheck'];
 
 const requiredKeys = [
@@ -74,6 +89,16 @@ assert.ok(
 );
 
 assert.equal(Object.keys(snapshot).length, requiredKeys.length, 'snapshot key count changed');
+
+runner.administerRegionalLidocaine({
+  route: 'peripheral', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false,
+});
+runner.giveLidocaineBolus({ doseMgPerKg: 1.5 });
+const copied = runner.snapshot();
+copied.lidocaineRegionalHistory[0].remainingMg = -1;
+copied.lidocaineDoseHistory[0].totalDoseMg = -1;
+assert.equal(runner.snapshot().lidocaineRegionalHistory[0].remainingMg, 300);
+assert.ok(runner.snapshot().lidocaineDoseHistory[0].totalDoseMg > 0);
 
 console.log('SNAPSHOT CONTRACT: PASS');
 console.log(`keys=${requiredKeys.length} numeric=${numericKeys.length} boolean=${booleanKeys.length} string=${stringKeys.length} arrays=${arrayKeys.length}`);

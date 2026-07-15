@@ -191,13 +191,105 @@ describe('live SimRunner integration', () => {
     expect(runner.s.eventLog.some((entry) => entry.includes('last_exposure_injected'))).toBe(true);
   });
 
+  it('exposes the approved Lidocaine, stimulus, irritability, and lipid action surface', () => {
+    const runner = new SimRunner();
+
+    expect(runner.giveLidocaineBolus({ doseMgPerKg: 1.5 })).toMatchObject({
+      ok: true, state: 'READY', started: true, queued: false, doseMgPerKg: 1.5,
+    });
+    runner.core.stepFor(1);
+    runner.simTime = runner.core.simTime;
+    runner.pause();
+    const pausedAt = runner.simTime;
+    expect(runner.startLidocaineInfusion({ rateMgPerKgHour: 1.5 })).toMatchObject({
+      ok: true, state: 'PAUSED', started: false, queued: true, rateMgPerKgHour: 1.5,
+    });
+    expect(runner.startLidocaineInfusion({ rateMgPerKgHour: 2 })).toMatchObject({
+      ok: true, changed: true, rateMgPerKgHour: 2,
+    });
+    expect(runner.simTime).toBe(pausedAt);
+    expect(runner.stopLidocaineInfusion()).toMatchObject({ ok: true, changed: true });
+    expect(runner.administerRegionalLidocaine({
+      route: 'peripheral', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false,
+    })).toMatchObject({ ok: true, totalDoseMg: 300, doseLimitStatus: 'within_limit' });
+    const stimulus = runner.setSurgicalStimulus(0.8);
+    const irritability = runner.setVentricularIrritability(0.7);
+    expect(stimulus).toMatchObject({ ok: true });
+    expect(stimulus.value).toBeCloseTo(0.8, 6);
+    expect(irritability).toMatchObject({ ok: true });
+    expect(irritability.value).toBeCloseTo(0.7, 6);
+    expect(runner.giveLipidEmulsionBolus()).toMatchObject({
+      ok: true, doseMlKg: 1.5, deliveredMlKg: 1.5,
+    });
+    expect(runner.startLipidEmulsionInfusion()).toMatchObject({
+      ok: true, rateMlKgMin: 0.25,
+    });
+    expect(runner.startLipidEmulsionInfusion()).toMatchObject({
+      ok: true, rateMlKgMin: 0.5,
+    });
+    expect(runner.stopLipidEmulsionInfusion()).toMatchObject({ ok: true, changed: true });
+
+    expect(runner.log.map((entry) => entry.meta?.action).filter(Boolean)).toEqual([
+      'lidocaine_iv_bolus',
+      'lidocaine_infusion_started',
+      'lidocaine_infusion_rate_changed',
+      'lidocaine_infusion_stopped',
+      'regional_lidocaine_administered',
+      'surgical_stimulus_changed',
+      'ventricular_irritability_changed',
+      'lipid_emulsion_bolus',
+      'lipid_emulsion_infusion_started',
+      'lipid_emulsion_infusion_rate_doubled',
+      'lipid_emulsion_infusion_stopped',
+    ]);
+  });
+
+  it('rejects invalid Lidocaine inputs without changing state or action log', () => {
+    const runner = new SimRunner();
+    const before = runner.snapshot();
+    const logLength = runner.log.length;
+
+    expect(runner.stopLidocaineInfusion()).toMatchObject({ ok: true, changed: false });
+    expect(runner.stopLipidEmulsionInfusion()).toMatchObject({ ok: true, changed: false });
+
+    expect(runner.giveLidocaineBolus({ doseMgPerKg: -1 })).toEqual({
+      ok: false, reason: 'doseMgPerKg must be a positive finite number',
+    });
+    expect(runner.administerRegionalLidocaine({
+      route: 'bier', concentrationPercent: 1, volumeMl: 10, epinephrine: false,
+    })).toEqual({ ok: false, reason: 'unsupported regional Lidocaine route: bier' });
+    expect(runner.setSurgicalStimulus(2)).toEqual({
+      ok: false, reason: 'surgical stimulus must be a finite number between 0 and 1',
+    });
+
+    expect(runner.log).toHaveLength(logLength);
+    expect(runner.getLifecycleState()).toBe('READY');
+    expect(runner.snapshot()).toMatchObject({
+      lidocaineCumulativeMg: before.lidocaineCumulativeMg,
+      surgicalStimulusRaw: before.surgicalStimulusRaw,
+    });
+  });
+
+  it('returns copied Lidocaine histories in the live snapshot', () => {
+    const runner = new SimRunner();
+    runner.administerRegionalLidocaine({
+      route: 'epidural', concentrationPercent: 2, volumeMl: 20, epinephrine: false,
+    });
+    const snapshot = runner.snapshot();
+    snapshot.lidocaineRegionalHistory[0].remainingMg = -1;
+    snapshot.lidocaineDoseHistory.push({ type: 'invented' });
+
+    expect(runner.snapshot().lidocaineRegionalHistory[0].remainingMg).toBe(400);
+    expect(runner.snapshot().lidocaineDoseHistory).toEqual([]);
+  });
+
   it('rejects a complication with no existing engine state machine', () => {
     const runner = new SimRunner();
 
     expect(() => runner.injectComplication('InventedCrisis')).toThrow(/Unsupported complication/);
   });
 
-  it('builds a live debrief with the existing SimulationResult shape', () => {
+  it('builds a live debrief with respiratory and Lidocaine attribution', () => {
     const runner = new SimRunner();
     runner.setForcedApnea(true);
     advance(runner, 1);
@@ -207,7 +299,7 @@ describe('live SimRunner integration', () => {
     expect(Object.keys(result).sort()).toEqual([
       'courseUnit', 'criticalActionsCompleted', 'criticalActionsMissed',
       'dangerousActions', 'durationSec', 'maxPoints', 'rawPoints',
-      'respiratoryAttribution', 'reviewTags', 'reviewTopics', 'scenarioId',
+      'lidocaineAttribution', 'respiratoryAttribution', 'reviewTags', 'reviewTopics', 'scenarioId',
       'score', 'teachingFeedback', 'teachingPoints', 'timeToRecognitionSec',
       'timeToTreatmentSec', 'title',
     ].sort());
@@ -224,6 +316,15 @@ describe('live SimRunner integration', () => {
       forcedApneaActive: true,
       forcedApneaContribution: 0,
       dominantSource: 'forced_apnea',
+    });
+    expect(result.lidocaineAttribution).toMatchObject({
+      peakPlasmaTotalMcgMl: 0,
+      currentToxicityStage: 'none',
+      doseHistory: [],
+      regionalHistory: [],
+      toxicityHistory: [],
+      lipidRescueHistory: [],
+      tofCheckHistory: [],
     });
   });
 

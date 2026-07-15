@@ -428,7 +428,7 @@ git commit -m "Unify LAST with Lidocaine exposure"
 - Modify: `crisis-sim/sim/scenario/scenarioDebrief.js`
 - Modify: `crisis-sim/test/live-case-smoke.mjs`
 
-- [ ] **Step 1: Add failing public-action tests**
+- [x] **Step 1: Add failing public-action tests**
 
 Test every approved signature, READY auto-start behavior for clinical doses/stimulus, PAUSED queued feedback, copied regional histories, and rejection behavior. Add the exact snapshot keys/types from the spec.
 
@@ -448,7 +448,7 @@ stopLipidEmulsionInfusion()
 
 The snapshot contract must account for every primitive and copied array listed in the approved spec, including `lidocaineClearanceFactor`, both raw/effective stimulation and irritability values, `derivedRhythm`, and all four Lidocaine/lipid histories. It must also prove mutations to returned records cannot change engine state.
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
@@ -456,15 +456,15 @@ npx vitest run test/live-runner.test.js --reporter=verbose
 node test/snapshot-contract.mjs
 ```
 
-- [ ] **Step 3: Implement wrapper methods**
+- [x] **Step 3: Implement wrapper methods**
 
 Delegate to `this.l`; translate engine records to runner log entries without changing physiology. Extend snapshot with every primitive/history in the spec. Add Lidocaine exposure/block/toxicity/rescue/TOF context to debrief without removing existing respiratory attribution.
 
-- [ ] **Step 4: Update smoke with an inert therapeutic Lidocaine segment**
+- [x] **Step 4: Update smoke with an inert therapeutic Lidocaine segment**
 
 Give 1.5 mg/kg IV during induction, assert exposure appears and remains below warning toxicity, then complete the existing induction-to-emergence path unchanged.
 
-- [ ] **Step 5: Verify runner/snapshot/smoke**
+- [x] **Step 5: Verify runner/snapshot/smoke**
 
 ```bash
 cd crisis-sim
@@ -473,7 +473,7 @@ node test/snapshot-contract.mjs
 node test/live-case-smoke.mjs
 ```
 
-- [ ] **Step 6: Commit wrapper contract**
+- [x] **Step 6: Commit wrapper contract**
 
 ```bash
 git add crisis-sim/ui/simRunner.js crisis-sim/sim/scenario/scenarioDebrief.js crisis-sim/test/live-runner.test.js crisis-sim/test/snapshot-contract.mjs crisis-sim/test/live-case-smoke.mjs

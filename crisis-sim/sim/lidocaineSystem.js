@@ -44,6 +44,7 @@ export class LidocaineSystem {
     this.infusionRateMgPerKgHour = 0;
     this.clearanceFactor = 1;
     this.effectSiteMcgMl = 0;
+    this.peakPlasmaTotalMcgMl = 0;
     this.surgicalStimulusRaw = 0;
     this.ventricularIrritabilityRaw = 0;
     this._lastToxicityStage = 'none';
@@ -59,6 +60,8 @@ export class LidocaineSystem {
     this._regionalHistory = [];
     this._toxicityHistory = [];
     this._lipidHistory = [];
+    this._irritabilityHistory = [];
+    this._lastDerivedRhythm = 'sinus';
   }
 
   get doseHistory() { return cloneValue(this._doseHistory); }
@@ -68,6 +71,8 @@ export class LidocaineSystem {
   get toxicityHistory() { return cloneValue(this._toxicityHistory); }
 
   get lipidRescueHistory() { return cloneValue(this._lipidHistory); }
+
+  get irritabilityHistory() { return cloneValue(this._irritabilityHistory); }
 
   get weightScale() { return f(positiveFinite(this.weightKg, 'weightKg') / 70); }
 
@@ -222,6 +227,13 @@ export class LidocaineSystem {
       throw new RangeError('ventricular irritability must be a finite number between 0 and 1');
     }
     this.ventricularIrritabilityRaw = f(value);
+    this._record(this._irritabilityHistory, 'ventricular_irritability_set', {
+      raw: this.ventricularIrritabilityRaw,
+      effective: this.ventricularIrritabilityEffective,
+      antiarrhythmicContribution: this.antiarrhythmicContribution,
+      rhythm: this.derivedRhythm,
+    });
+    this._lastDerivedRhythm = this.derivedRhythm;
     return this.ventricularIrritabilityRaw;
   }
 
@@ -232,6 +244,7 @@ export class LidocaineSystem {
     if (addedMg > 0) {
       this.centralMg = f(this.centralMg + addedMg);
       this.cumulativeAdministeredMg = f(this.cumulativeAdministeredMg + addedMg);
+      this._observePeakExposure();
     }
     return this._record(this._doseHistory, 'administrative_toxic_exposure', {
       targetPlasmaMcgMl: target,
@@ -255,6 +268,7 @@ export class LidocaineSystem {
     const totalDoseMg = f(dose * weight);
     this.centralMg = f(this.centralMg + totalDoseMg);
     this.cumulativeAdministeredMg = f(this.cumulativeAdministeredMg + totalDoseMg);
+    this._observePeakExposure();
     return this._record(this._doseHistory, 'iv_bolus', {
       route: 'iv', doseMgPerKg: dose, totalDoseMg,
     });
@@ -488,6 +502,10 @@ export class LidocaineSystem {
     }
   }
 
+  _observePeakExposure() {
+    this.peakPlasmaTotalMcgMl = Max(this.peakPlasmaTotalMcgMl, this.plasmaTotalMcgMl);
+  }
+
   _publishPatientContributions() {
     if (!this.patient) return;
     this.patient.regionalSensoryBlock = this.regionalSensoryBlock;
@@ -529,6 +547,18 @@ export class LidocaineSystem {
         plasmaFreeMcgMl: this.plasmaFreeMcgMl,
       });
       this._lastToxicityStage = stage;
+    }
+
+    const rhythm = this.derivedRhythm;
+    if (rhythm !== this._lastDerivedRhythm) {
+      this._record(this._irritabilityHistory, 'rhythm_transition', {
+        fromRhythm: this._lastDerivedRhythm,
+        rhythm,
+        raw: this.ventricularIrritabilityRaw,
+        effective: this.ventricularIrritabilityEffective,
+        antiarrhythmicContribution: this.antiarrhythmicContribution,
+      });
+      this._lastDerivedRhythm = rhythm;
     }
   }
 
@@ -618,6 +648,7 @@ export class LidocaineSystem {
     const conservedNonEliminated = this.centralMg + this.peripheralMg
       + this.lipidBoundMg + this.regionalDepotMg;
     this.eliminatedMg = Max(0, f(this.cumulativeAdministeredMg - conservedNonEliminated));
+    this._observePeakExposure();
 
     const ke0PerMin = f(Math.log(2) / 2);
     const effectAlpha = f(1 - Exp(f(-ke0PerMin * dtMinutes)));

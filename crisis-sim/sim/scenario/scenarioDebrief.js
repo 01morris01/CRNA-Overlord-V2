@@ -63,6 +63,43 @@ export function buildDebrief(def, run, scoring, log, totalScore, maxScore, durat
   return r;
 }
 
+export function buildLidocaineAttribution(lidocaineSystem, tofCheckHistory = []) {
+  const l = lidocaineSystem;
+  if (!l) {
+    return {
+      peakPlasmaTotalMcgMl: 0,
+      currentToxicityStage: 'none',
+      doseHistory: [], regionalHistory: [], toxicityHistory: [], lipidRescueHistory: [],
+      stimulation: {}, ventricularIrritability: {}, rhythmHistory: [], tofCheckHistory: [],
+    };
+  }
+  return {
+    peakPlasmaTotalMcgMl: l.peakPlasmaTotalMcgMl,
+    currentPlasmaTotalMcgMl: l.plasmaTotalMcgMl,
+    currentPlasmaFreeMcgMl: l.plasmaFreeMcgMl,
+    currentEffectSiteMcgMl: l.effectSiteMcgMl,
+    currentToxicityStage: l.toxicityStage,
+    doseHistory: l.doseHistory,
+    regionalHistory: l.regionalHistory,
+    toxicityHistory: l.toxicityHistory,
+    lipidRescueHistory: l.lipidRescueHistory,
+    stimulation: {
+      raw: l.surgicalStimulusRaw,
+      effective: l.surgicalStimulusEffective,
+      regionalSensoryBlock: l.regionalSensoryBlock,
+      systemicAnalgesicContribution: l.systemicAnalgesicContribution,
+    },
+    ventricularIrritability: {
+      raw: l.ventricularIrritabilityRaw,
+      effective: l.ventricularIrritabilityEffective,
+      antiarrhythmicContribution: l.antiarrhythmicContribution,
+      derivedRhythm: l.derivedRhythm,
+    },
+    rhythmHistory: l.irritabilityHistory,
+    tofCheckHistory: tofCheckHistory.map((record) => ({ ...record })),
+  };
+}
+
 function composeFeedback(def, r) {
   const parts = [];
   if (def.debrief.summary) parts.push(def.debrief.summary);

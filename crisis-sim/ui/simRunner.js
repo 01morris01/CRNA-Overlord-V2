@@ -9,7 +9,10 @@
 import {
   AirwayDevice, buildPhysRig, ScenarioManager, VentMode,
 } from '../sim/index.js';
-import { buildDebrief as buildScenarioDebrief } from '../sim/scenario/scenarioDebrief.js';
+import {
+  buildDebrief as buildScenarioDebrief,
+  buildLidocaineAttribution,
+} from '../sim/scenario/scenarioDebrief.js';
 
 const SEED = 12345;
 
@@ -243,6 +246,37 @@ export class SimRunner {
         : null,
       tofCheckCount: this.tofCheckHistory.length,
       tofCheckHistory: this.tofCheckHistory.map((entry) => ({ ...entry })),
+      lidocainePlasmaTotalMcgMl: this.l.plasmaTotalMcgMl,
+      lidocainePlasmaFreeMcgMl: this.l.plasmaFreeMcgMl,
+      lidocaineEffectSiteMcgMl: this.l.effectSiteMcgMl,
+      lidocaineCentralMg: this.l.centralMg,
+      lidocainePeripheralMg: this.l.peripheralMg,
+      lidocaineEliminatedMg: this.l.eliminatedMg,
+      lidocaineCumulativeMg: this.l.cumulativeAdministeredMg,
+      lidocaineCumulativeMgKg: this.l.cumulativeAdministeredMg / this.l.weightKg,
+      lidocaineInfusionActive: this.l.infusionActive,
+      lidocaineInfusionRateMgKgHour: this.l.infusionRateMgPerKgHour,
+      lidocaineClearanceFactor: this.l.clearanceFactor,
+      regionalSensoryBlock: this.l.regionalSensoryBlock,
+      regionalMotorBlock: this.l.regionalMotorBlock,
+      epiduralSympathectomyContribution: this.l.epiduralSympathectomyContribution,
+      surgicalStimulusRaw: this.l.surgicalStimulusRaw,
+      surgicalStimulusEffective: this.l.surgicalStimulusEffective,
+      lidocaineSystemicAnalgesicContribution: this.l.systemicAnalgesicContribution,
+      lidocaineAntiarrhythmicContribution: this.l.antiarrhythmicContribution,
+      ventricularIrritabilityRaw: this.l.ventricularIrritabilityRaw,
+      ventricularIrritabilityEffective: this.l.ventricularIrritabilityEffective,
+      derivedRhythm: this.l.derivedRhythm,
+      lidocaineCnsToxicity: this.l.cnsToxicity,
+      lidocaineCardiacToxicity: this.l.cardiacToxicity,
+      lidocaineSeizureActive: this.l.seizureActive,
+      lidocaineToxicityStage: this.l.toxicityStage,
+      lipidInfusionActive: this.l.lipidInfusionActive,
+      lipidCumulativeMlKg: this.l.lipidCumulativeMlKg,
+      lidocaineRegionalHistory: this.l.regionalHistory,
+      lidocaineDoseHistory: this.l.doseHistory,
+      lidocaineToxicityHistory: this.l.toxicityHistory,
+      lipidRescueHistory: this.l.lipidRescueHistory,
       running: this.running, lifecycle: this.getLifecycleState(), speed: this.speed,
       patient: `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`,
       // physiologic drivers (truth-boundary inputs) + drug context for the advisor
@@ -283,6 +317,153 @@ export class SimRunner {
     this.logEvent('Drug', label || `${name} ${doseMg} mg`, { action: 'drug', drug: name, doseMg });
     if (state === 'READY') this.start();
     return { state, started: state === 'READY', queued: state === 'PAUSED' };
+  }
+
+  finishLidocaineAction(invoke, {
+    action, kind, detail, startWhenReady = true,
+  }) {
+    const state = this.getLifecycleState();
+    let raw;
+    try {
+      raw = invoke();
+    } catch (error) {
+      return { ok: false, reason: error instanceof Error ? error.message : String(error) };
+    }
+    const result = (raw && typeof raw === 'object')
+      ? { ok: true, ...raw }
+      : { ok: true, changed: true, value: raw };
+    const changed = result.changed !== false;
+    if (changed) {
+      this.logEvent(kind, typeof detail === 'function' ? detail(result) : detail, {
+        action,
+        ...result,
+      });
+    }
+    const started = changed && startWhenReady && state === 'READY';
+    if (started) this.start();
+    else this.emit();
+    return {
+      ...result,
+      state,
+      started,
+      queued: changed && state === 'PAUSED',
+    };
+  }
+
+  giveLidocaineBolus({ doseMgPerKg = 1.5 } = {}) {
+    return this.finishLidocaineAction(
+      () => this.l.giveIvBolus({ doseMgPerKg }),
+      {
+        action: 'lidocaine_iv_bolus',
+        kind: 'Lidocaine',
+        detail: (result) => `IV ${result.doseMgPerKg} mg/kg · ${result.totalDoseMg.toFixed(1)} mg`,
+      },
+    );
+  }
+
+  startLidocaineInfusion({ rateMgPerKgHour } = {}) {
+    return this.finishLidocaineAction(
+      () => this.l.startInfusion({ rateMgPerKgHour }),
+      {
+        action: this.l.infusionActive
+          ? 'lidocaine_infusion_rate_changed'
+          : 'lidocaine_infusion_started',
+        kind: 'Lidocaine',
+        detail: (result) => `Infusion ${result.rateMgPerKgHour} mg/kg/hr`,
+      },
+    );
+  }
+
+  stopLidocaineInfusion() {
+    return this.finishLidocaineAction(
+      () => this.l.stopInfusion(),
+      {
+        action: 'lidocaine_infusion_stopped', kind: 'Lidocaine',
+        detail: 'Infusion stopped', startWhenReady: false,
+      },
+    );
+  }
+
+  administerRegionalLidocaine(options) {
+    const result = this.finishLidocaineAction(
+      () => this.l.administerRegional(options),
+      {
+        action: 'regional_lidocaine_administered',
+        kind: 'Regional Lidocaine',
+        detail: (record) => `${record.route} · ${record.totalDoseMg.toFixed(1)} mg`,
+      },
+    );
+    if (result.ok && result.changed !== false && result.doseLimitStatus === 'exceeded') {
+      this.logEvent('Lidocaine warning', result.warning, {
+        action: 'lidocaine_dose_warning',
+        route: result.route,
+        totalDoseMg: result.totalDoseMg,
+        maximumRecommendedMg: result.maximumRecommendedMg,
+      });
+    }
+    return result;
+  }
+
+  setSurgicalStimulus(intensity) {
+    const previous = this.l.surgicalStimulusRaw;
+    return this.finishLidocaineAction(
+      () => {
+        const value = this.l.setSurgicalStimulus(intensity);
+        return { changed: value !== previous, value };
+      },
+      {
+        action: 'surgical_stimulus_changed', kind: 'Surgical stimulus',
+        detail: (result) => `Intensity ${result.value.toFixed(2)}`,
+      },
+    );
+  }
+
+  setVentricularIrritability(intensity) {
+    const previous = this.l.ventricularIrritabilityRaw;
+    return this.finishLidocaineAction(
+      () => {
+        const value = this.l.setVentricularIrritability(intensity);
+        return { changed: value !== previous, value };
+      },
+      {
+        action: 'ventricular_irritability_changed', kind: 'Rhythm driver',
+        detail: (result) => `Intensity ${result.value.toFixed(2)}`,
+        startWhenReady: false,
+      },
+    );
+  }
+
+  giveLipidEmulsionBolus() {
+    return this.finishLidocaineAction(
+      () => this.l.giveLipidBolus(),
+      {
+        action: 'lipid_emulsion_bolus', kind: 'LAST rescue',
+        detail: (result) => `20% lipid ${result.deliveredMlKg.toFixed(2)} mL/kg bolus`,
+      },
+    );
+  }
+
+  startLipidEmulsionInfusion() {
+    const action = this.l.lipidInfusionActive
+      ? 'lipid_emulsion_infusion_rate_doubled'
+      : 'lipid_emulsion_infusion_started';
+    return this.finishLidocaineAction(
+      () => this.l.startLipidInfusion(),
+      {
+        action, kind: 'LAST rescue',
+        detail: (result) => `20% lipid ${result.rateMlKgMin.toFixed(2)} mL/kg/min`,
+      },
+    );
+  }
+
+  stopLipidEmulsionInfusion() {
+    return this.finishLidocaineAction(
+      () => this.l.stopLipidInfusion(),
+      {
+        action: 'lipid_emulsion_infusion_stopped', kind: 'LAST rescue',
+        detail: '20% lipid infusion stopped', startWhenReady: false,
+      },
+    );
   }
 
   preoxygenate() {
@@ -402,6 +583,7 @@ export class SimRunner {
       this.simTime,
     );
     result.respiratoryAttribution = this.p.respiratoryAttribution;
+    result.lidocaineAttribution = buildLidocaineAttribution(this.l, this.tofCheckHistory);
     return result;
   }
 

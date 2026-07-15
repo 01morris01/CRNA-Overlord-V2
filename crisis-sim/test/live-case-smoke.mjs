@@ -45,6 +45,8 @@ line('PASS preoxygenation', preoxygenated);
 
 runner.giveBolus('Propofol', 2 * 80, 'Propofol 2 mg/kg · 160 mg total');
 runner.giveBolus('Fentanyl', 0.002 * 80, 'Fentanyl 2 mcg/kg · 0.16 mg total');
+const lidocaineBolus = runner.giveLidocaineBolus({ doseMgPerKg: 1.5 });
+assert.equal(lidocaineBolus.ok, true, lidocaineBolus.reason);
 runner.giveBolus('Rocuronium', 0.6 * 80, 'Rocuronium 0.6 mg/kg · 48 mg total');
 runner.setForcedApnea(true);
 const induced = advanceUntil(
@@ -54,6 +56,8 @@ const induced = advanceUntil(
 );
 assert.equal(induced.forcedApnea, true);
 assert.ok(induced.effectiveNmbBlockade > 0.03, 'rocuronium must increase effective blockade');
+assert.ok(induced.lidocainePlasmaTotalMcgMl > 0, 'therapeutic Lidocaine must appear in exposure');
+assert.equal(induced.lidocaineToxicityStage, 'none', '1.5 mg/kg Lidocaine must remain therapeutic');
 line('PASS induction + paralysis', induced);
 
 const intubation = runner.intubate();
@@ -123,6 +127,8 @@ assert.ok(extubated.spontaneousEffort > 0.1);
 line('PASS extubation', extubated);
 
 const debrief = runner.buildDebrief();
+assert.equal(debrief.lidocaineAttribution.doseHistory[0].type, 'iv_bolus');
+assert.equal(debrief.lidocaineAttribution.currentToxicityStage, 'none');
 const debriefValidation = validateSimulationResult(debrief);
 assert.deepEqual(debriefValidation, { ok: true, missing: [], invalid: [] });
 console.log(`PASS debrief SimulationResult validation: ${Object.keys(debrief).length} fields`);
