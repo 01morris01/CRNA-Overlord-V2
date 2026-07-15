@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';
+const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

@@ -334,7 +334,7 @@ git commit -m "Promote live volatile controls"
 - Modify: `docs/live-sim-integration.md`
 - Modify: `docs/superpowers/plans/2026-07-15-live-sim-clinical-controls.md`
 
-- [ ] **Step 1: Write the failing PWA assertions**
+- [x] **Step 1: Write the failing PWA assertions**
 
 Require a new cache version and the changed display/UI assets:
 
@@ -345,11 +345,11 @@ for (const path of ['/assets/css/live-sim-display.css', '/assets/css/live-sim.cs
 }
 ```
 
-- [ ] **Step 2: Bump the cache and update docs**
+- [x] **Step 2: Bump the cache and update docs**
 
 Update `sw.js` cache name and retain every existing cached asset. Document exact signatures, event names, snapshot additions, and that CHECK TOF—not passive display—is the scoreable assessment record.
 
-- [ ] **Step 3: Run browser geometry QA**
+- [x] **Step 3: Run browser geometry QA**
 
 Serve the repository locally and use the in-app browser responsive viewport at 320, 480, 600, 768, 1280, and 1440 pixels. For values `120/80`, `80/40`, and `260/160`, record:
 
@@ -366,7 +366,7 @@ const dbp = document.querySelector('#display-dbp').getBoundingClientRect();
 
 Expected at every width/value: both booleans true and horizontal overflow zero.
 
-- [ ] **Step 4: Run Stage 1 regression**
+- [x] **Step 4: Run Stage 1 regression**
 
 ```bash
 cd crisis-sim
@@ -379,7 +379,7 @@ git -C .. diff --check
 
 Expected: every test, smoke checkpoint, snapshot contract, and frozen parity assertion passes.
 
-- [ ] **Step 5: Mark Stage 1 complete and commit**
+- [x] **Step 5: Mark Stage 1 complete and commit**
 
 ```bash
 git add sw.js crisis-sim/test/pwa-contract.test.js docs/live-sim-integration.md docs/superpowers/plans/2026-07-15-live-sim-clinical-controls.md

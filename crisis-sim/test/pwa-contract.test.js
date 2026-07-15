@@ -35,9 +35,10 @@ const requiredAppShellEntries = [
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';");
+    expect(sw).toContain("const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';");
+    expect(sw).toContain('live-sim-clinical-controls');
     expect(sw).toContain("'/hospital-map.js?v=48'");
-    expect(sw).not.toContain("const CACHE_VERSION = 'v48-boardgame-live-sim-2026-07-13';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';");
   });
 
   it('pre-caches every live view and browser engine dependency', () => {

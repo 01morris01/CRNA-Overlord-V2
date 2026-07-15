@@ -84,10 +84,22 @@ All patient-affecting instructor actions go through public runner methods:
 - `configureIntubationAttempts({ failedIntubationAttempts, attemptDurationSeconds })` supplies deterministic live/scenario attempt outcomes.
 - `extubate()` performs the validated post-intubation device transition.
 - `setForcedApnea(boolean)` for the explicit forced-apnea contribution.
+- `setVolatile({ agent, dialPercent })` accepts `Sevoflurane`, `Desflurane`, or `Isoflurane` and a finite `0..18` percent dial. It records `volatile_changed`; Agent Off sends dial zero with the last valid selected agent, so selecting Off does not discard that agent.
+- `checkTrainOfFour()` samples the existing single NMB state and records `tof_checked`. It returns `{ tSec, count, ratio, effectiveNmbBlockade, nmbSource, airwayDevice }` without changing blockade, count, ratio, respiratory capability, or another physiologic value. The continuously displayed TOF is informative; only this discrete check is a scoreable assessment action.
 - `injectComplication(type)` will be added as a thin wrapper around the already-implemented `ScenarioManager.applyComplication()` state machines. It will not write a vital or create a second physiology model.
 - `buildDebrief()` will reuse `buildDebrief()`/`ScenarioRunState` so the live export has the existing `SimulationResult` keys.
 
 The UI never assigns `hr`, blood pressure, SpO2, RR, EtCO2, temperature, TOF, respiratory effort, or other derived values.
+
+### Clinical-control snapshot additions
+
+The runner snapshot exposes:
+
+- `lastTofCheck`: the latest copied TOF record or `null`;
+- `tofCheckCount`: total number of discrete checks;
+- `tofCheckHistory`: a copied array of copied check records.
+
+The NIBP display receives the same snapshot systolic and diastolic values through independent `display-sbp` and `display-dbp` text nodes. `display-bp` remains their shared semantic container and receives the combined accessible label. Its font sizes against the NIBP card's inline container, rather than the browser viewport, so a narrow card cannot push the diastolic node outside its bounds.
 
 ### Timed intubation operator change
 
@@ -115,7 +127,7 @@ The control surface will reuse these tokens, visible form labels, 44 px minimum 
 - cache-first fetch behavior with same-origin background refresh, except `/data/questions/`, which is network-first with cache fallback;
 - `SKIP_WAITING` message support.
 
-Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. A concurrent board-game reskin consumed version 39 during this work. Browser verification exercised several live cache revisions; the final verified shell is `v48-boardgame-live-sim-2026-07-13`.
+Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. The clinical-control repair advances the installed shell to `v51-live-sim-clinical-controls-2026-07-15`; later additive runtime modules require another version advance and an explicit cache entry.
 
 ## Selected architecture and rejected alternatives
 
