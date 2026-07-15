@@ -33,7 +33,7 @@
 - Create: `crisis-sim/test/lidocaine-system.test.js`
 - Create: `crisis-sim/sim/lidocaineSystem.js`
 
-- [ ] **Step 1: Write failing validation and immutable-history tests**
+- [x] **Step 1: Write failing validation and immutable-history tests**
 
 ```js
 import { describe, expect, it } from 'vitest';
@@ -69,7 +69,7 @@ describe('LidocaineSystem public actions', () => {
 });
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
@@ -78,7 +78,7 @@ npx vitest run test/lidocaine-system.test.js --reporter=verbose
 
 Expected: module-not-found failure for `lidocaineSystem.js`.
 
-- [ ] **Step 3: Implement the minimal action/state shell**
+- [x] **Step 3: Implement the minimal action/state shell**
 
 Create `LidocaineSystem` with weight, fixed-step time/tick count, one infusion, dose/regional/toxicity/lipid histories, input validation, copied getters, `giveIvBolus`, `startInfusion`, `stopInfusion`, and `administerRegional`. Use `f()` for stored numeric state. Do not implement kinetics in this step.
 
@@ -90,7 +90,7 @@ const doseMgKg = f(totalDoseMg / weightKg);
 const maxMg = epinephrine ? Math.min(f(7 * weightKg), 500) : Math.min(f(4.5 * weightKg), 300);
 ```
 
-- [ ] **Step 4: Run and verify GREEN**
+- [x] **Step 4: Run and verify GREEN**
 
 ```bash
 cd crisis-sim
@@ -99,7 +99,7 @@ npx vitest run test/lidocaine-system.test.js --reporter=verbose
 
 Expected: action/validation tests pass.
 
-- [ ] **Step 5: Commit the shell**
+- [x] **Step 5: Commit the shell**
 
 ```bash
 git add crisis-sim/sim/lidocaineSystem.js crisis-sim/test/lidocaine-system.test.js
