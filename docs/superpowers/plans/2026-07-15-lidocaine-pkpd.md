@@ -176,7 +176,7 @@ git commit -m "Model systemic Lidocaine kinetics"
 - Modify: `crisis-sim/sim/lidocaineSystem.js`
 - Modify: `crisis-sim/test/lidocaine-system.test.js`
 
-- [ ] **Step 1: Add failing route-order, epinephrine, and block tests**
+- [x] **Step 1: Add failing route-order, epinephrine, and block tests**
 
 Use matched 70 kg/200 mg cases and assert at documented calibration times:
 
@@ -191,7 +191,7 @@ expect(peripheral.peakMotorBlock).toBeGreaterThan(infiltration.peakMotorBlock);
 expect(epidural.peakSympathectomy).toBeGreaterThan(0);
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
@@ -200,13 +200,13 @@ npx vitest run test/lidocaine-system.test.js -t "regional|epinephrine|block" --r
 
 Expected: missing route tick/block fields.
 
-- [ ] **Step 3: Implement route depots**
+- [x] **Step 3: Implement route depots**
 
 Epidural uses normalized fast/slow fractions and half-lives 9.3/82 minutes. Peripheral absorption is calibrated by test to the `2.3 +/- 0.5 hour` Tmax band. Infiltration uses a 120-minute absorption half-life. Epinephrine multiplies every absorption `ka` by `0.5`.
 
 Move absorbed mass into central mass each tick. Drive route-local sensory/motor values toward potency from remaining depot concentration and dose; infiltration motor target is capped low, peripheral and epidural are not. Record Cmax, peak block, and completion without mutating returned history objects.
 
-- [ ] **Step 4: Verify unit suite**
+- [x] **Step 4: Verify unit suite**
 
 ```bash
 cd crisis-sim
@@ -215,7 +215,7 @@ npx vitest run test/lidocaine-system.test.js --reporter=verbose
 
 Expected: route ordering, mass balance, block, and prior PK tests pass.
 
-- [ ] **Step 5: Commit regional PK/PD**
+- [x] **Step 5: Commit regional PK/PD**
 
 ```bash
 git add crisis-sim/sim/lidocaineSystem.js crisis-sim/test/lidocaine-system.test.js

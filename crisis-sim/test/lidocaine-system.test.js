@@ -9,6 +9,20 @@ function advance(lidocaine, seconds) {
   return lidocaine;
 }
 
+function advanceAt(lidocaine, seconds, stepSeconds = 0.5) {
+  const steps = Math.round(seconds / stepSeconds);
+  for (let index = 0; index < steps; index++) lidocaine.tick(stepSeconds);
+  return lidocaine;
+}
+
+function runRegionalCase(options, durationMinutes = 360) {
+  const l = new LidocaineSystem();
+  l.weightKg = 70;
+  l.administerRegional(options);
+  advanceAt(l, durationMinutes * 60);
+  return { l, record: l.regionalHistory[0] };
+}
+
 describe('LidocaineSystem public actions', () => {
   it('accepts one IV infusion and updates its rate instead of duplicating it', () => {
     const l = new LidocaineSystem();
@@ -139,5 +153,63 @@ describe('LidocaineSystem systemic PK', () => {
 
     expect(reduced.eliminatedMg).toBeLessThan(reference.eliminatedMg);
     expect(reduced.cumulativeAdministeredMg).toBe(reference.cumulativeAdministeredMg);
+  });
+});
+
+describe('LidocaineSystem regional depots and local block', () => {
+  const matchedDose = { concentrationPercent: 1, volumeMl: 20, epinephrine: false };
+
+  it('shows fast and slow epidural absorption phases', () => {
+    const l = new LidocaineSystem();
+    l.administerRegional({ route: 'epidural', ...matchedDose });
+    advanceAt(l, 30 * 60);
+    const record = l.regionalHistory[0];
+
+    expect(record.fastRemainingMg).toBeLessThan(record.slowRemainingMg);
+    expect(record.fastAbsorbedMg).toBeGreaterThan(record.slowAbsorbedMg);
+    expect(record.remainingMg).toBeCloseTo(
+      record.fastRemainingMg + record.slowRemainingMg,
+      3,
+    );
+  });
+
+  it('calibrates peripheral absorption to the 2.3 plus or minus 0.5 hour Tmax band', () => {
+    const { record } = runRegionalCase({ route: 'peripheral', ...matchedDose }, 300);
+
+    expect(record.timeToCmaxMin).toBeGreaterThanOrEqual(108);
+    expect(record.timeToCmaxMin).toBeLessThanOrEqual(168);
+  });
+
+  it('orders route-average exposure and keeps infiltration motor block lower', () => {
+    const epidural = runRegionalCase({ route: 'epidural', ...matchedDose }).record;
+    const peripheral = runRegionalCase({ route: 'peripheral', ...matchedDose }).record;
+    const infiltration = runRegionalCase({ route: 'infiltration', ...matchedDose }).record;
+
+    expect(epidural.cmaxMcgMl).toBeGreaterThan(peripheral.cmaxMcgMl);
+    expect(peripheral.cmaxMcgMl).toBeGreaterThan(infiltration.cmaxMcgMl);
+    expect(peripheral.peakMotorBlock).toBeGreaterThan(infiltration.peakMotorBlock);
+    expect(epidural.peakSympathectomy).toBeGreaterThan(0);
+  });
+
+  it('epinephrine delays and lowers Cmax while prolonging sensory block', () => {
+    const without = runRegionalCase({ route: 'infiltration', ...matchedDose }, 720).record;
+    const withEpinephrine = runRegionalCase({
+      route: 'infiltration', concentrationPercent: 1, volumeMl: 20, epinephrine: true,
+    }, 720).record;
+
+    expect(withEpinephrine.cmaxMcgMl).toBeLessThan(without.cmaxMcgMl);
+    expect(withEpinephrine.timeToCmaxMin).toBeGreaterThan(without.timeToCmaxMin);
+    expect(withEpinephrine.blockDurationSec).toBeGreaterThan(without.blockDurationSec);
+  });
+
+  it('publishes aggregate sensory, motor, and epidural sympathetic contributions', () => {
+    const l = new LidocaineSystem();
+    l.administerRegional({ route: 'epidural', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false });
+    advanceAt(l, 30 * 60);
+
+    expect(l.regionalSensoryBlock).toBeGreaterThan(0.5);
+    expect(l.regionalMotorBlock).toBeGreaterThan(0.25);
+    expect(l.epiduralSympathectomyContribution).toBeGreaterThan(0);
+    expect(l.massBalanceErrorMg).toBeLessThan(0.02);
   });
 });

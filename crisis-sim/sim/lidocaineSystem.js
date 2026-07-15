@@ -4,6 +4,7 @@ import {
 } from './float32.js';
 
 const REGIONAL_ROUTES = new Set(['infiltration', 'peripheral', 'epidural']);
+const LN2 = f(Math.log(2));
 
 function positiveFinite(value, label) {
   if (!Number.isFinite(value) || value <= 0) {
@@ -93,6 +94,30 @@ export class LidocaineSystem {
     return Math.abs(this.cumulativeAdministeredMg - accounted);
   }
 
+  get regionalSensoryBlock() {
+    return this._regionalHistory.reduce((maximum, record) => Max(maximum, record.sensoryBlock || 0), 0);
+  }
+
+  get regionalMotorBlock() {
+    return this._regionalHistory.reduce((maximum, record) => Max(maximum, record.motorBlock || 0), 0);
+  }
+
+  get epiduralSympathectomyContribution() {
+    return this._regionalHistory.reduce(
+      (maximum, record) => Max(maximum, record.sympathectomyContribution || 0),
+      0,
+    );
+  }
+
+  get regionalCoverage() {
+    let strongest = null;
+    for (const record of this._regionalHistory) {
+      if (!strongest || (record.sensoryBlock || 0) > (strongest.sensoryBlock || 0)) strongest = record;
+    }
+    if (!strongest || this.regionalSensoryBlock <= 0) return 0;
+    return strongest.route === 'epidural' ? f(0.9) : 1;
+  }
+
   _record(history, type, data = {}) {
     const stored = { tSec: this.timeSec, type, ...cloneValue(data) };
     history.push(stored);
@@ -177,7 +202,8 @@ export class LidocaineSystem {
       ? `Dose exceeds the ${maximumRecommendedMg} mg route recommendation`
       : null;
     this.cumulativeAdministeredMg = f(this.cumulativeAdministeredMg + totalDoseMg);
-    const record = this._record(this._regionalHistory, 'regional_administered', {
+    const epiduralFastFraction = f(0.38 / f(0.38 + 0.58));
+    const common = {
       route,
       concentrationPercent: concentration,
       volumeMl: volume,
@@ -188,8 +214,106 @@ export class LidocaineSystem {
       doseLimitStatus,
       warning,
       remainingMg: totalDoseMg,
-    });
+      absorbedMg: 0,
+      elapsedSec: 0,
+      cmaxMcgMl: 0,
+      timeToCmaxMin: null,
+      sensoryBlock: 0,
+      motorBlock: 0,
+      sympathectomyContribution: 0,
+      peakSensoryBlock: 0,
+      peakMotorBlock: 0,
+      peakSympathectomy: 0,
+      blockEstablished: false,
+      blockDurationSec: null,
+      completedAtSec: null,
+      absorptionLagMin: route === 'peripheral' ? 60 : 0,
+    };
+    if (route === 'epidural') {
+      common.fastRemainingMg = f(totalDoseMg * epiduralFastFraction);
+      common.slowRemainingMg = f(totalDoseMg - common.fastRemainingMg);
+      common.fastAbsorbedMg = 0;
+      common.slowAbsorbedMg = 0;
+    }
+    const record = this._record(this._regionalHistory, 'regional_administered', common);
     return { ok: true, ...record };
+  }
+
+  _absorbFromDepot(remainingMg, ratePerMinute, dtMinutes) {
+    if (remainingMg <= 0) return 0;
+    const alpha = f(1 - Exp(f(-ratePerMinute * dtMinutes)));
+    return Min(remainingMg, f(remainingMg * alpha));
+  }
+
+  _advanceRegional(dtMinutes, dtSeconds) {
+    let totalAbsorbedMg = 0;
+    for (const record of this._regionalHistory) {
+      const epinephrineMultiplier = record.epinephrine ? f(0.5) : 1;
+      let absorbedMg = 0;
+      if (record.route === 'epidural') {
+        const fastRate = f((LN2 / f(9.3)) * epinephrineMultiplier);
+        const slowRate = f((LN2 / 82) * epinephrineMultiplier);
+        const fastAbsorbed = this._absorbFromDepot(record.fastRemainingMg, fastRate, dtMinutes);
+        const slowAbsorbed = this._absorbFromDepot(record.slowRemainingMg, slowRate, dtMinutes);
+        record.fastRemainingMg = Max(0, f(record.fastRemainingMg - fastAbsorbed));
+        record.slowRemainingMg = Max(0, f(record.slowRemainingMg - slowAbsorbed));
+        record.fastAbsorbedMg = f(record.fastAbsorbedMg + fastAbsorbed);
+        record.slowAbsorbedMg = f(record.slowAbsorbedMg + slowAbsorbed);
+        absorbedMg = f(fastAbsorbed + slowAbsorbed);
+        record.remainingMg = f(record.fastRemainingMg + record.slowRemainingMg);
+      } else {
+        const halfLifeMinutes = record.route === 'peripheral' ? 90 : 120;
+        const rate = f((LN2 / halfLifeMinutes) * epinephrineMultiplier);
+        const absorptionAvailable = f(record.elapsedSec / 60) >= record.absorptionLagMin;
+        absorbedMg = absorptionAvailable
+          ? this._absorbFromDepot(record.remainingMg, rate, dtMinutes)
+          : 0;
+        record.remainingMg = Max(0, f(record.remainingMg - absorbedMg));
+      }
+      record.absorbedMg = f(record.absorbedMg + absorbedMg);
+      record.elapsedSec = f(record.elapsedSec + dtSeconds);
+      totalAbsorbedMg = f(totalAbsorbedMg + absorbedMg);
+
+      const remainingFraction = record.totalDoseMg > 0
+        ? Clamp(record.remainingMg / record.totalDoseMg, 0, 1)
+        : 0;
+      const doseFactor = Clamp(record.doseMgKg / 3, 0, 1);
+      const targetSensory = f(doseFactor * Clamp(f(remainingFraction * 1.5), 0, 1));
+      const onsetMinutes = record.route === 'infiltration' ? 5 : (record.route === 'peripheral' ? 15 : 10);
+      const blockAlpha = f(1 - Exp(f(-dtMinutes / onsetMinutes)));
+      record.sensoryBlock = f(
+        record.sensoryBlock + f(targetSensory - record.sensoryBlock) * blockAlpha,
+      );
+      const motorCeiling = record.route === 'infiltration' ? f(0.15)
+        : (record.route === 'peripheral' ? f(0.9) : f(0.75));
+      const targetMotor = f(targetSensory * motorCeiling);
+      record.motorBlock = f(record.motorBlock + f(targetMotor - record.motorBlock) * blockAlpha);
+      const targetSympathectomy = record.route === 'epidural' ? f(targetSensory * f(0.85)) : 0;
+      record.sympathectomyContribution = f(
+        record.sympathectomyContribution
+        + f(targetSympathectomy - record.sympathectomyContribution) * blockAlpha,
+      );
+      record.peakSensoryBlock = Max(record.peakSensoryBlock, record.sensoryBlock);
+      record.peakMotorBlock = Max(record.peakMotorBlock, record.motorBlock);
+      record.peakSympathectomy = Max(record.peakSympathectomy, record.sympathectomyContribution);
+      if (record.sensoryBlock >= f(0.5)) record.blockEstablished = true;
+      if (record.blockEstablished && record.blockDurationSec === null && record.sensoryBlock < f(0.5)) {
+        record.blockDurationSec = record.elapsedSec;
+      }
+      if (record.completedAtSec === null && record.remainingMg < f(0.01) && record.sensoryBlock < f(0.01)) {
+        record.completedAtSec = record.elapsedSec;
+      }
+    }
+    return totalAbsorbedMg;
+  }
+
+  _observeRegionalExposure() {
+    for (const record of this._regionalHistory) {
+      if (this.plasmaTotalMcgMl > record.cmaxMcgMl) {
+        record.cmaxMcgMl = this.plasmaTotalMcgMl;
+        record.timeToCmaxMin = f(record.elapsedSec / 60);
+      }
+    }
   }
 
   tick(dt) {
@@ -200,6 +324,7 @@ export class LidocaineSystem {
     const peripheralBefore = this.peripheralMg;
 
     const infusionMg = f(this.infusionInputMgPerMin * dtMinutes);
+    const regionalAbsorbedMg = this._advanceRegional(dtMinutes, dtSeconds);
     this.cumulativeAdministeredMg = f(this.cumulativeAdministeredMg + infusionMg);
 
     const centralConcentration = f(centralBefore / this.centralVolumeL);
@@ -223,7 +348,9 @@ export class LidocaineSystem {
       eliminated = Min(eliminated, centralBefore);
     }
 
-    this.centralMg = Max(0, f(centralBefore + infusionMg - eliminated - exchange));
+    this.centralMg = Max(0, f(
+      centralBefore + infusionMg + regionalAbsorbedMg - eliminated - exchange,
+    ));
     this.peripheralMg = Max(0, f(peripheralBefore + exchange));
     this.eliminatedMg = f(this.eliminatedMg + eliminated);
     const conservedNonEliminated = this.centralMg + this.peripheralMg
@@ -235,6 +362,7 @@ export class LidocaineSystem {
     this.effectSiteMcgMl = f(
       this.effectSiteMcgMl + f(this.plasmaFreeMcgMl - this.effectSiteMcgMl) * effectAlpha,
     );
+    this._observeRegionalExposure();
 
     this.tickCount += 1;
     this.timeSec = f(this.tickCount * dtSeconds);
