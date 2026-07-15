@@ -59,6 +59,13 @@ export class PatientPhysiology {
     this.epiduralSympathectomyContribution = 0;
     this.surgicalStimulusRaw = 0; this.surgicalStimulusEffective = 0;
     this.lidocaineSystemicAnalgesicContribution = 0;
+    this.lidocaineAntiarrhythmicContribution = 0;
+    this.ventricularIrritabilityRaw = 0; this.ventricularIrritabilityEffective = 0;
+    this.lidocaineCnsToxicity = 0; this.lidocaineCardiacToxicity = 0;
+    this.lidocaineSeizureDriveActive = false; this.lidocaineSeizureActive = false;
+    this.lidocaineCardiacCollapseContribution = 0;
+    this.lidocaineToxicityStage = 'none'; this.derivedRhythm = 'sinus';
+    this.explicitVentricularFibrillation = false;
 
     this.drivenExternally = false; this.rng = null; this._fallbackRng = null;
     this._ecgPhase = 0; this._breathPhase = 0;
@@ -105,6 +112,13 @@ export class PatientPhysiology {
     this.epiduralSympathectomyContribution = 0;
     this.surgicalStimulusRaw = 0; this.surgicalStimulusEffective = 0;
     this.lidocaineSystemicAnalgesicContribution = 0;
+    this.lidocaineAntiarrhythmicContribution = 0;
+    this.ventricularIrritabilityRaw = 0; this.ventricularIrritabilityEffective = 0;
+    this.lidocaineCnsToxicity = 0; this.lidocaineCardiacToxicity = 0;
+    this.lidocaineSeizureDriveActive = false; this.lidocaineSeizureActive = false;
+    this.lidocaineCardiacCollapseContribution = 0;
+    this.lidocaineToxicityStage = 'none'; this.derivedRhythm = 'sinus';
+    this.explicitVentricularFibrillation = false;
     this.vco2MlMin = this.deriveRestingVco2();
 
     this.epinephrineCe = 0; this.phenylephrineCe = 0; this.ephedrineCe = 0;
@@ -310,11 +324,18 @@ export class PatientPhysiology {
     const hypovolemiaReflex = f(Max(0, 1 - this.bloodVolumeFraction) * 60);
 
     const lidocaineHemodynamicsActive = this.surgicalStimulusEffective > 0
-      || this.epiduralSympathectomyContribution > 0;
+      || this.epiduralSympathectomyContribution > 0
+      || this.lidocaineSeizureActive
+      || this.lidocaineCardiacCollapseContribution > 0;
+    const lidocaineHrContribution = lidocaineHemodynamicsActive
+      ? f((this.lidocaineSeizureActive ? 25 : 0)
+        - f(60 * this.lidocaineCardiacCollapseContribution))
+      : 0;
     const targetHR = lidocaineHemodynamicsActive
       ? Clamp(
         this.baselineHR + this._hrModifier + hrBoost + hypovolemiaReflex
           + this.hrComplicationOffset + f(this.surgicalStimulusEffective * 35)
+          + lidocaineHrContribution
           + this._rnd.jitter(0.5),
         25, 200,
       )
@@ -326,7 +347,8 @@ export class PatientPhysiology {
 
     const lidocaineSvrMultiplier = lidocaineHemodynamicsActive
       ? f(f(1 + f(0.25 * this.surgicalStimulusEffective))
-        * f(1 - f(0.2 * Clamp01(this.epiduralSympathectomyContribution))))
+        * f(1 - f(0.2 * Clamp01(this.epiduralSympathectomyContribution)))
+        * f(1 - f(0.65 * Clamp01(this.lidocaineCardiacCollapseContribution))))
       : 1;
     const sysBase = lidocaineHemodynamicsActive
       ? this.baselineSystolic * this._bpModifier * this.svrFactor * preload * lidocaineSvrMultiplier

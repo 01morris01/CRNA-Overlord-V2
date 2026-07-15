@@ -55,4 +55,28 @@ describe('Lidocaine additive physiology evidence', () => {
     expect(rig.p.svrFactor).toBe(baselineSvr);
     expect(rig.p.meanArterialPressure).toBeLessThan(90);
   });
+
+  it('suppresses imposed ventricular irritability at therapeutic exposure', () => {
+    const untreated = buildPhysRig(2468);
+    const treated = buildPhysRig(2468);
+    untreated.l.setVentricularIrritability(0.8);
+    treated.l.setVentricularIrritability(0.8);
+    treated.l.giveIvBolus({ doseMgPerKg: 1.5 });
+    untreated.core.stepFor(120);
+    treated.core.stepFor(120);
+
+    expect(treated.l.ventricularIrritabilityEffective)
+      .toBeLessThan(untreated.l.ventricularIrritabilityEffective);
+    expect(treated.p.derivedRhythm).toBe('sinus');
+    expect(untreated.p.derivedRhythm).not.toBe('sinus');
+  });
+
+  it('never converts an explicit ventricular-fibrillation state', () => {
+    const rig = buildPhysRig(1357);
+    rig.p.explicitVentricularFibrillation = true;
+    rig.l.giveIvBolus({ doseMgPerKg: 1.5 });
+    rig.core.stepFor(180);
+
+    expect(rig.p.derivedRhythm).toBe('ventricular_fibrillation');
+  });
 });

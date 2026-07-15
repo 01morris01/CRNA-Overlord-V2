@@ -45,6 +45,10 @@ export class LidocaineSystem {
     this.clearanceFactor = 1;
     this.effectSiteMcgMl = 0;
     this.surgicalStimulusRaw = 0;
+    this.ventricularIrritabilityRaw = 0;
+    this._lastToxicityStage = 'none';
+    this._severeCnsExposureSec = 0;
+    this._severeCardiacExposureSec = 0;
 
     this._doseHistory = [];
     this._regionalHistory = [];
@@ -114,6 +118,52 @@ export class LidocaineSystem {
     return Clamp(this.effectSiteMcgMl / 2, 0, 1);
   }
 
+  get toxicityStage() {
+    const exposure = this.plasmaTotalMcgMl;
+    if (exposure > 10) return 'cardiac';
+    if (exposure >= 8) return 'cns';
+    if (exposure >= 5) return 'warning';
+    return 'none';
+  }
+
+  get cnsToxicity() { return Clamp(f((this.plasmaTotalMcgMl - 8) / 2), 0, 1); }
+
+  get cardiacToxicity() { return Clamp(f((this.plasmaTotalMcgMl - 10) / 2.5), 0, 1); }
+
+  get antiarrhythmicContribution() {
+    const therapeutic = Clamp(f(this.effectSiteMcgMl / 0.35), 0, 1);
+    return f(therapeutic * f(1 - this.cardiacToxicity));
+  }
+
+  get ventricularIrritabilityEffective() {
+    const suppressed = f(
+      this.ventricularIrritabilityRaw * f(1 - f(0.8 * this.antiarrhythmicContribution)),
+    );
+    return Clamp(f(suppressed + f(0.8 * this.cardiacToxicity)), 0, 1);
+  }
+
+  get seizureDriveActive() {
+    return this._severeCnsExposureSec >= 8 && this.cnsToxicity >= f(0.5);
+  }
+
+  get seizureActive() {
+    if (!this.seizureDriveActive) return false;
+    const sedated = this.patient
+      && (this.patient.propofolCe > 1 || this.patient.midazolamCe > f(0.05));
+    return !sedated;
+  }
+
+  get cardiacCollapseContribution() {
+    return this._severeCardiacExposureSec >= 12 ? this.cardiacToxicity : 0;
+  }
+
+  get derivedRhythm() {
+    if (this.patient?.explicitVentricularFibrillation) return 'ventricular_fibrillation';
+    if (this.ventricularIrritabilityEffective >= f(0.7)) return 'ventricular_tachycardia';
+    if (this.ventricularIrritabilityEffective >= f(0.25)) return 'ventricular_ectopy';
+    return 'sinus';
+  }
+
   get surgicalStimulusEffective() {
     const blockAttenuation = f(1 - f(this.regionalSensoryBlock * this.regionalCoverage));
     const systemicAttenuation = f(1 - f(0.25 * this.systemicAnalgesicContribution));
@@ -160,6 +210,28 @@ export class LidocaineSystem {
     }
     this.surgicalStimulusRaw = f(value);
     return this.surgicalStimulusRaw;
+  }
+
+  setVentricularIrritability(value) {
+    if (!Number.isFinite(value) || value < 0 || value > 1) {
+      throw new RangeError('ventricular irritability must be a finite number between 0 and 1');
+    }
+    this.ventricularIrritabilityRaw = f(value);
+    return this.ventricularIrritabilityRaw;
+  }
+
+  injectToxicExposure({ targetPlasmaMcgMl } = {}) {
+    const target = positiveFinite(targetPlasmaMcgMl, 'targetPlasmaMcgMl');
+    const targetCentralMg = f(target * this.centralVolumeL);
+    const addedMg = Max(0, f(targetCentralMg - this.centralMg));
+    if (addedMg > 0) {
+      this.centralMg = f(this.centralMg + addedMg);
+      this.cumulativeAdministeredMg = f(this.cumulativeAdministeredMg + addedMg);
+    }
+    return this._record(this._doseHistory, 'administrative_toxic_exposure', {
+      targetPlasmaMcgMl: target,
+      addedMg,
+    });
   }
 
   reset() {
@@ -353,6 +425,38 @@ export class LidocaineSystem {
     this.patient.surgicalStimulusRaw = this.surgicalStimulusRaw;
     this.patient.surgicalStimulusEffective = this.surgicalStimulusEffective;
     this.patient.lidocaineSystemicAnalgesicContribution = this.systemicAnalgesicContribution;
+    this.patient.lidocaineAntiarrhythmicContribution = this.antiarrhythmicContribution;
+    this.patient.ventricularIrritabilityRaw = this.ventricularIrritabilityRaw;
+    this.patient.ventricularIrritabilityEffective = this.ventricularIrritabilityEffective;
+    this.patient.lidocaineCnsToxicity = this.cnsToxicity;
+    this.patient.lidocaineCardiacToxicity = this.cardiacToxicity;
+    this.patient.lidocaineSeizureDriveActive = this.seizureDriveActive;
+    this.patient.lidocaineSeizureActive = this.seizureActive;
+    this.patient.lidocaineCardiacCollapseContribution = this.cardiacCollapseContribution;
+    this.patient.lidocaineToxicityStage = this.toxicityStage;
+    this.patient.derivedRhythm = this.derivedRhythm;
+  }
+
+  _advanceToxicity(dtSeconds) {
+    const cnsSevere = this.cnsToxicity >= f(0.5);
+    const cardiacSevere = this.cardiacToxicity >= f(0.5);
+    this._severeCnsExposureSec = cnsSevere
+      ? f(this._severeCnsExposureSec + dtSeconds)
+      : Max(0, f(this._severeCnsExposureSec - f(dtSeconds * 2)));
+    this._severeCardiacExposureSec = cardiacSevere
+      ? f(this._severeCardiacExposureSec + dtSeconds)
+      : Max(0, f(this._severeCardiacExposureSec - f(dtSeconds * 2)));
+
+    const stage = this.toxicityStage;
+    if (stage !== this._lastToxicityStage) {
+      this._record(this._toxicityHistory, 'toxicity_transition', {
+        fromStage: this._lastToxicityStage,
+        stage,
+        plasmaTotalMcgMl: this.plasmaTotalMcgMl,
+        plasmaFreeMcgMl: this.plasmaFreeMcgMl,
+      });
+      this._lastToxicityStage = stage;
+    }
   }
 
   tick(dt) {
@@ -403,6 +507,7 @@ export class LidocaineSystem {
       this.effectSiteMcgMl + f(this.plasmaFreeMcgMl - this.effectSiteMcgMl) * effectAlpha,
     );
     this._observeRegionalExposure();
+    this._advanceToxicity(dtSeconds);
     this._publishPatientContributions();
 
     this.tickCount += 1;

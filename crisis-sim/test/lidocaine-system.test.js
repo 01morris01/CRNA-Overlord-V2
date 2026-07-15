@@ -213,3 +213,42 @@ describe('LidocaineSystem regional depots and local block', () => {
     expect(l.massBalanceErrorMg).toBeLessThan(0.02);
   });
 });
+
+describe('LidocaineSystem antiarrhythmia and LAST', () => {
+  it('keeps a therapeutic IV bolus below the toxicity threshold', () => {
+    const l = new LidocaineSystem();
+    l.giveIvBolus({ doseMgPerKg: 1.5 });
+    advanceAt(l, 120, 0.1);
+
+    expect(l.toxicityStage).toBe('none');
+    expect(l.antiarrhythmicContribution).toBeGreaterThan(0);
+  });
+
+  it('records ordered warning, CNS, and cardiac transitions from one shared exposure', () => {
+    const l = new LidocaineSystem();
+    for (const target of [5.5, 8.5, 11.5]) {
+      l.injectToxicExposure({ targetPlasmaMcgMl: target });
+      l.tick(0.02);
+    }
+
+    expect(l.toxicityHistory.map((record) => record.stage)).toEqual([
+      'warning', 'cns', 'cardiac',
+    ]);
+  });
+
+  it('lets sedation suppress the visible seizure without erasing toxicity', () => {
+    const l = new LidocaineSystem();
+    l.patient = {
+      weightKg: 70,
+      propofolCe: 2,
+      midazolamCe: 0,
+      explicitVentricularFibrillation: false,
+    };
+    l.injectToxicExposure({ targetPlasmaMcgMl: 11.5 });
+    advanceAt(l, 15, 0.1);
+
+    expect(l.seizureDriveActive).toBe(true);
+    expect(l.seizureActive).toBe(false);
+    expect(l.cardiacToxicity).toBeGreaterThan(0);
+  });
+});

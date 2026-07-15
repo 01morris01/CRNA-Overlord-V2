@@ -296,7 +296,7 @@ git commit -m "Compose Lidocaine with patient physiology"
 - Modify: `crisis-sim/test/lidocaine-system.test.js`
 - Modify: `crisis-sim/test/lidocaine-evidence.test.js`
 
-- [ ] **Step 1: Add failing therapeutic/toxic/arrhythmia tests**
+- [x] **Step 1: Add failing therapeutic/toxic/arrhythmia tests**
 
 Assert a therapeutic bolus has `toxicityStage === 'none'`, a therapeutic effect-site concentration suppresses an imposed ventricular-irritability driver, toxicity rises through warning/CNS/cardiac order, sedation suppresses visible seizure without lowering cardiac toxicity, and Lidocaine never converts an explicit VF state.
 
@@ -309,18 +309,18 @@ expect(sedated.cardioToxicity).toBeGreaterThan(0);
 expect(vfAfterLidocaine.derivedRhythm).toBe('ventricular_fibrillation');
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
 npx vitest run test/lidocaine-system.test.js test/lidocaine-evidence.test.js -t "toxicity|arrhythm|seizure|therapeutic" --reporter=verbose
 ```
 
-- [ ] **Step 3: Implement concentration-to-effect mappings**
+- [x] **Step 3: Implement concentration-to-effect mappings**
 
 Add antiarrhythmic contribution over the therapeutic band, falling as cardiac toxicity increases. Add staged total-plasma thresholds from the spec, a sustained severe-CNS timer for seizure, and sustained severe-cardiac timer for collapse contribution. Publish drivers to patient; PatientPhysiology derives rhythm/status/hemodynamics.
 
-- [ ] **Step 4: Verify tests and parity**
+- [x] **Step 4: Verify tests and parity**
 
 ```bash
 cd crisis-sim
@@ -329,7 +329,7 @@ npx vitest run test/lidocaine-system.test.js test/lidocaine-evidence.test.js tes
 
 Expected: therapeutic/toxic evidence passes; frozen parity remains exact.
 
-- [ ] **Step 5: Commit shared toxicity**
+- [x] **Step 5: Commit shared toxicity**
 
 ```bash
 git add crisis-sim/sim/lidocaineSystem.js crisis-sim/sim/patientPhysiology.js crisis-sim/test/lidocaine-system.test.js crisis-sim/test/lidocaine-evidence.test.js
