@@ -49,6 +49,11 @@ export class LidocaineSystem {
     this._lastToxicityStage = 'none';
     this._severeCnsExposureSec = 0;
     this._severeCardiacExposureSec = 0;
+    this._cardiacCollapseLatched = false;
+    this.lipidCumulativeMlKg = 0;
+    this.lipidInfusionActive = false;
+    this.lipidInfusionRateMlKgMin = 0;
+    this._lipidSinkAvailableMg = 0;
 
     this._doseHistory = [];
     this._regionalHistory = [];
@@ -154,7 +159,7 @@ export class LidocaineSystem {
   }
 
   get cardiacCollapseContribution() {
-    return this._severeCardiacExposureSec >= 12 ? this.cardiacToxicity : 0;
+    return this._cardiacCollapseLatched ? Max(this.cardiacToxicity, f(0.3)) : 0;
   }
 
   get derivedRhythm() {
@@ -279,6 +284,72 @@ export class LidocaineSystem {
     this.infusionRateMgPerKgHour = 0;
     const record = this._record(this._doseHistory, 'infusion_stopped', {
       route: 'iv', previousRateMgPerKgHour: previousRate,
+    });
+    return { ok: true, changed: true, ...record };
+  }
+
+  giveLipidBolus() {
+    const doseMlKg = f(1.5);
+    const remainingMlKg = Max(0, f(12 - this.lipidCumulativeMlKg));
+    const deliveredMlKg = Min(doseMlKg, remainingMlKg);
+    if (deliveredMlKg <= 0) {
+      return {
+        ok: true, changed: false, doseMlKg, deliveredMlKg: 0, reason: '12 mL/kg lipid cap reached',
+      };
+    }
+    this.lipidCumulativeMlKg = f(this.lipidCumulativeMlKg + deliveredMlKg);
+    this._lipidSinkAvailableMg = f(
+      this._lipidSinkAvailableMg + f(deliveredMlKg * this.weightKg * f(0.8)),
+    );
+    const record = this._record(this._lipidHistory, 'lipid_bolus', {
+      concentrationPercent: 20,
+      doseMlKg,
+      deliveredMlKg,
+      cumulativeMlKg: this.lipidCumulativeMlKg,
+    });
+    return { ok: true, changed: true, ...record };
+  }
+
+  startLipidInfusion() {
+    if (this.lipidCumulativeMlKg >= 12) {
+      return {
+        ok: true, changed: false, rateMlKgMin: 0, reason: '12 mL/kg lipid cap reached',
+      };
+    }
+    if (!this.lipidInfusionActive) {
+      this.lipidInfusionActive = true;
+      this.lipidInfusionRateMlKgMin = f(0.25);
+      const record = this._record(this._lipidHistory, 'lipid_infusion_started', {
+        concentrationPercent: 20,
+        rateMlKgMin: this.lipidInfusionRateMlKgMin,
+      });
+      return { ok: true, changed: true, ...record };
+    }
+    if (this.lipidInfusionRateMlKgMin < f(0.5)) {
+      const previousRateMlKgMin = this.lipidInfusionRateMlKgMin;
+      this.lipidInfusionRateMlKgMin = f(0.5);
+      const record = this._record(this._lipidHistory, 'lipid_infusion_rate_doubled', {
+        concentrationPercent: 20,
+        previousRateMlKgMin,
+        rateMlKgMin: this.lipidInfusionRateMlKgMin,
+      });
+      return { ok: true, changed: true, ...record };
+    }
+    return {
+      ok: true, changed: false, rateMlKgMin: this.lipidInfusionRateMlKgMin,
+    };
+  }
+
+  stopLipidInfusion() {
+    if (!this.lipidInfusionActive) {
+      return { ok: true, changed: false, rateMlKgMin: 0 };
+    }
+    const previousRateMlKgMin = this.lipidInfusionRateMlKgMin;
+    this.lipidInfusionActive = false;
+    this.lipidInfusionRateMlKgMin = 0;
+    const record = this._record(this._lipidHistory, 'lipid_infusion_stopped', {
+      previousRateMlKgMin,
+      cumulativeMlKg: this.lipidCumulativeMlKg,
     });
     return { ok: true, changed: true, ...record };
   }
@@ -448,6 +519,8 @@ export class LidocaineSystem {
       : Max(0, f(this._severeCardiacExposureSec - f(dtSeconds * 2)));
 
     const stage = this.toxicityStage;
+    if (this._severeCardiacExposureSec >= 12) this._cardiacCollapseLatched = true;
+    if (stage !== 'cardiac') this._cardiacCollapseLatched = false;
     if (stage !== this._lastToxicityStage) {
       this._record(this._toxicityHistory, 'toxicity_transition', {
         fromStage: this._lastToxicityStage,
@@ -456,6 +529,50 @@ export class LidocaineSystem {
         plasmaFreeMcgMl: this.plasmaFreeMcgMl,
       });
       this._lastToxicityStage = stage;
+    }
+  }
+
+  _advanceLipid(dtMinutes, dtSeconds) {
+    if (this.lipidInfusionActive) {
+      const remainingMlKg = Max(0, f(12 - this.lipidCumulativeMlKg));
+      const requestedMlKg = f(this.lipidInfusionRateMlKgMin * dtMinutes);
+      const deliveredMlKg = Min(requestedMlKg, remainingMlKg);
+      this.lipidCumulativeMlKg = f(this.lipidCumulativeMlKg + deliveredMlKg);
+      this._lipidSinkAvailableMg = f(
+        this._lipidSinkAvailableMg + f(deliveredMlKg * this.weightKg * f(0.8)),
+      );
+      if (this.lipidCumulativeMlKg >= f(12 - 0.00001)) {
+        this.lipidCumulativeMlKg = 12;
+        const previousRateMlKgMin = this.lipidInfusionRateMlKgMin;
+        this.lipidInfusionActive = false;
+        this.lipidInfusionRateMlKgMin = 0;
+        this._record(this._lipidHistory, 'lipid_infusion_capped', {
+          previousRateMlKgMin,
+          cumulativeMlKg: this.lipidCumulativeMlKg,
+        });
+      }
+    }
+
+    if (this.centralMg > 0 && this._lipidSinkAvailableMg > 0) {
+      const freeFraction = this.plasmaTotalMcgMl > 0
+        ? Clamp(this.plasmaFreeMcgMl / this.plasmaTotalMcgMl, 0, 1)
+        : 0;
+      const freeCentralMg = f(this.centralMg * freeFraction);
+      const captureAlpha = f(1 - Exp(f(-LN2 * f(dtSeconds / 15))));
+      const capturedMg = Min(
+        this._lipidSinkAvailableMg,
+        Min(this.centralMg, f(freeCentralMg * captureAlpha)),
+      );
+      this.centralMg = Max(0, f(this.centralMg - capturedMg));
+      this.lipidBoundMg = f(this.lipidBoundMg + capturedMg);
+      this._lipidSinkAvailableMg = Max(0, f(this._lipidSinkAvailableMg - capturedMg));
+    }
+
+    if (this.lipidBoundMg > 0) {
+      const eliminationAlpha = f(1 - Exp(f(-LN2 * f(dtMinutes / 240))));
+      const eliminatedBoundMg = Min(this.lipidBoundMg, f(this.lipidBoundMg * eliminationAlpha));
+      this.lipidBoundMg = Max(0, f(this.lipidBoundMg - eliminatedBoundMg));
+      this.eliminatedMg = f(this.eliminatedMg + eliminatedBoundMg);
     }
   }
 
@@ -497,6 +614,7 @@ export class LidocaineSystem {
     ));
     this.peripheralMg = Max(0, f(peripheralBefore + exchange));
     this.eliminatedMg = f(this.eliminatedMg + eliminated);
+    this._advanceLipid(dtMinutes, dtSeconds);
     const conservedNonEliminated = this.centralMg + this.peripheralMg
       + this.lipidBoundMg + this.regionalDepotMg;
     this.eliminatedMg = Max(0, f(this.cumulativeAdministeredMg - conservedNonEliminated));

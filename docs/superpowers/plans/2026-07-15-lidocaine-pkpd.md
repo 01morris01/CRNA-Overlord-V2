@@ -343,7 +343,7 @@ git commit -m "Derive Lidocaine therapy and toxicity"
 - Modify: `crisis-sim/test/lidocaine-system.test.js`
 - Modify: `crisis-sim/test/lidocaine-evidence.test.js`
 
-- [ ] **Step 1: Write failing dose, cap, and recovery tests**
+- [x] **Step 1: Write failing dose, cap, and recovery tests**
 
 ```js
 expect(l.giveLipidBolus()).toMatchObject({ doseMlKg: 1.5 });
@@ -356,25 +356,25 @@ expect(adequateRescue.meanArterialPressure).toBeGreaterThan(noRescue.meanArteria
 expect(inadequateRescue.toxicityStage).not.toBe('none');
 ```
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
 npx vitest run test/lidocaine-system.test.js test/lidocaine-evidence.test.js -t "lipid|rescue" --reporter=verbose
 ```
 
-- [ ] **Step 3: Implement finite lipid binding**
+- [x] **Step 3: Implement finite lipid binding**
 
 Track cumulative mL/kg, enforce 12 mL/kg, and create a finite sink that transfers active central/free Lidocaine into `lipidBoundMg`. Release/eliminate bound mass slowly; do not write vitals. Record bolus, infusion, rate doubling, stop, and cap events.
 
-- [ ] **Step 4: Verify rescue and prior evidence**
+- [x] **Step 4: Verify rescue and prior evidence**
 
 ```bash
 cd crisis-sim
 npx vitest run test/lidocaine-system.test.js test/lidocaine-evidence.test.js --reporter=verbose
 ```
 
-- [ ] **Step 5: Commit lipid rescue**
+- [x] **Step 5: Commit lipid rescue**
 
 ```bash
 git add crisis-sim/sim/lidocaineSystem.js crisis-sim/test/lidocaine-system.test.js crisis-sim/test/lidocaine-evidence.test.js

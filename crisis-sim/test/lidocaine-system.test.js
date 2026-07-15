@@ -252,3 +252,44 @@ describe('LidocaineSystem antiarrhythmia and LAST', () => {
     expect(l.cardiacToxicity).toBeGreaterThan(0);
   });
 });
+
+describe('LidocaineSystem lipid rescue', () => {
+  it('uses ASRA dosing, doubles a repeated infusion start, and enforces the 12 mL/kg cap', () => {
+    const l = new LidocaineSystem();
+
+    expect(l.giveLipidBolus()).toMatchObject({
+      ok: true, changed: true, doseMlKg: 1.5, deliveredMlKg: 1.5,
+    });
+    expect(l.startLipidInfusion()).toMatchObject({
+      ok: true, changed: true, rateMlKgMin: 0.25,
+    });
+    expect(l.startLipidInfusion()).toMatchObject({
+      ok: true, changed: true, rateMlKgMin: 0.5,
+    });
+    advanceAt(l, 30 * 60, 1);
+
+    expect(l.lipidCumulativeMlKg).toBe(12);
+    expect(l.lipidInfusionActive).toBe(false);
+    expect(l.lipidRescueHistory.map((entry) => entry.type)).toEqual([
+      'lipid_bolus', 'lipid_infusion_started', 'lipid_infusion_rate_doubled',
+      'lipid_infusion_capped',
+    ]);
+  });
+
+  it('implements a finite sink rather than clearing any exposure with one bolus', () => {
+    const adequate = new LidocaineSystem();
+    const inadequate = new LidocaineSystem();
+    adequate.injectToxicExposure({ targetPlasmaMcgMl: 11.5 });
+    inadequate.injectToxicExposure({ targetPlasmaMcgMl: 18 });
+    adequate.giveLipidBolus();
+    adequate.startLipidInfusion();
+    inadequate.giveLipidBolus();
+    advanceAt(adequate, 120, 0.1);
+    advanceAt(inadequate, 120, 0.1);
+
+    expect(adequate.lipidBoundMg).toBeGreaterThan(0);
+    expect(adequate.toxicityStage).not.toBe('cardiac');
+    expect(inadequate.toxicityStage).not.toBe('none');
+    expect(inadequate.centralMg).toBeGreaterThan(adequate.centralMg);
+  });
+});

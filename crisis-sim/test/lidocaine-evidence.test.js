@@ -79,4 +79,22 @@ describe('Lidocaine additive physiology evidence', () => {
 
     expect(rig.p.derivedRhythm).toBe('ventricular_fibrillation');
   });
+
+  it('recovers free exposure and pressure through lipid sequestration', () => {
+    const noRescue = buildPhysRig(9753);
+    const rescued = buildPhysRig(9753);
+    noRescue.l.injectToxicExposure({ targetPlasmaMcgMl: 11.5 });
+    rescued.l.injectToxicExposure({ targetPlasmaMcgMl: 11.5 });
+    noRescue.core.stepFor(15);
+    rescued.core.stepFor(15);
+    rescued.l.giveLipidBolus();
+    rescued.l.startLipidInfusion();
+    noRescue.core.stepFor(120);
+    rescued.core.stepFor(120);
+
+    expect(rescued.l.plasmaFreeMcgMl).toBeLessThan(noRescue.l.plasmaFreeMcgMl);
+    expect(rescued.p.meanArterialPressure).toBeGreaterThan(
+      noRescue.p.meanArterialPressure + 10,
+    );
+  });
 });
