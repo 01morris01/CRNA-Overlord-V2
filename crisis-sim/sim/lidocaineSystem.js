@@ -44,6 +44,7 @@ export class LidocaineSystem {
     this.infusionRateMgPerKgHour = 0;
     this.clearanceFactor = 1;
     this.effectSiteMcgMl = 0;
+    this.surgicalStimulusRaw = 0;
 
     this._doseHistory = [];
     this._regionalHistory = [];
@@ -109,6 +110,16 @@ export class LidocaineSystem {
     );
   }
 
+  get systemicAnalgesicContribution() {
+    return Clamp(this.effectSiteMcgMl / 2, 0, 1);
+  }
+
+  get surgicalStimulusEffective() {
+    const blockAttenuation = f(1 - f(this.regionalSensoryBlock * this.regionalCoverage));
+    const systemicAttenuation = f(1 - f(0.25 * this.systemicAnalgesicContribution));
+    return Clamp(f(this.surgicalStimulusRaw * blockAttenuation * systemicAttenuation), 0, 1);
+  }
+
   get regionalCoverage() {
     let strongest = null;
     for (const record of this._regionalHistory) {
@@ -141,6 +152,24 @@ export class LidocaineSystem {
   setClearanceFactor(value) {
     this.clearanceFactor = nonnegativeFinite(value, 'clearanceFactor');
     return this.clearanceFactor;
+  }
+
+  setSurgicalStimulus(value) {
+    if (!Number.isFinite(value) || value < 0 || value > 1) {
+      throw new RangeError('surgical stimulus must be a finite number between 0 and 1');
+    }
+    this.surgicalStimulusRaw = f(value);
+    return this.surgicalStimulusRaw;
+  }
+
+  reset() {
+    const patient = this.patient;
+    const weightKg = this.weightKg;
+    const clearanceFactor = this.clearanceFactor;
+    Object.assign(this, new LidocaineSystem());
+    this.patient = patient;
+    this.weightKg = weightKg;
+    this.clearanceFactor = clearanceFactor;
   }
 
   giveIvBolus({ doseMgPerKg } = {}) {
@@ -316,8 +345,19 @@ export class LidocaineSystem {
     }
   }
 
+  _publishPatientContributions() {
+    if (!this.patient) return;
+    this.patient.regionalSensoryBlock = this.regionalSensoryBlock;
+    this.patient.regionalMotorBlock = this.regionalMotorBlock;
+    this.patient.epiduralSympathectomyContribution = this.epiduralSympathectomyContribution;
+    this.patient.surgicalStimulusRaw = this.surgicalStimulusRaw;
+    this.patient.surgicalStimulusEffective = this.surgicalStimulusEffective;
+    this.patient.lidocaineSystemicAnalgesicContribution = this.systemicAnalgesicContribution;
+  }
+
   tick(dt) {
     if (!Number.isFinite(dt) || dt <= 0) return;
+    if (this.patient) this.weightKg = this.patient.weightKg;
     const dtSeconds = f(dt);
     const dtMinutes = f(dtSeconds / 60);
     const centralBefore = this.centralMg;
@@ -363,6 +403,7 @@ export class LidocaineSystem {
       this.effectSiteMcgMl + f(this.plasmaFreeMcgMl - this.effectSiteMcgMl) * effectAlpha,
     );
     this._observeRegionalExposure();
+    this._publishPatientContributions();
 
     this.tickCount += 1;
     this.timeSec = f(this.tickCount * dtSeconds);

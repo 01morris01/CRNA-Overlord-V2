@@ -55,6 +55,10 @@ export class PatientPhysiology {
     this.vco2MlMin = 200; this.paCO2 = 40;
     this.airwayPatency = 1; this.airwayResistanceFactor = 1; this.shuntFraction = 0;
     this.svrFactor = 1; this.heatLoadC = 0; this.hrComplicationOffset = 0;
+    this.regionalSensoryBlock = 0; this.regionalMotorBlock = 0;
+    this.epiduralSympathectomyContribution = 0;
+    this.surgicalStimulusRaw = 0; this.surgicalStimulusEffective = 0;
+    this.lidocaineSystemicAnalgesicContribution = 0;
 
     this.drivenExternally = false; this.rng = null; this._fallbackRng = null;
     this._ecgPhase = 0; this._breathPhase = 0;
@@ -97,6 +101,10 @@ export class PatientPhysiology {
 
     this.airwayPatency = 1; this.airwayResistanceFactor = 1; this.shuntFraction = 0;
     this.svrFactor = 1; this.heatLoadC = 0; this.hrComplicationOffset = 0;
+    this.regionalSensoryBlock = 0; this.regionalMotorBlock = 0;
+    this.epiduralSympathectomyContribution = 0;
+    this.surgicalStimulusRaw = 0; this.surgicalStimulusEffective = 0;
+    this.lidocaineSystemicAnalgesicContribution = 0;
     this.vco2MlMin = this.deriveRestingVco2();
 
     this.epinephrineCe = 0; this.phenylephrineCe = 0; this.ephedrineCe = 0;
@@ -301,15 +309,32 @@ export class PatientPhysiology {
     const preload = Clamp(this.bloodVolumeFraction, 0.4, 1.1);
     const hypovolemiaReflex = f(Max(0, 1 - this.bloodVolumeFraction) * 60);
 
-    const targetHR = Clamp(
-      this.baselineHR + this._hrModifier + hrBoost + hypovolemiaReflex + this.hrComplicationOffset + this._rnd.jitter(0.5),
-      25, 200,
-    );
+    const lidocaineHemodynamicsActive = this.surgicalStimulusEffective > 0
+      || this.epiduralSympathectomyContribution > 0;
+    const targetHR = lidocaineHemodynamicsActive
+      ? Clamp(
+        this.baselineHR + this._hrModifier + hrBoost + hypovolemiaReflex
+          + this.hrComplicationOffset + f(this.surgicalStimulusEffective * 35)
+          + this._rnd.jitter(0.5),
+        25, 200,
+      )
+      : Clamp(
+        this.baselineHR + this._hrModifier + hrBoost + hypovolemiaReflex + this.hrComplicationOffset + this._rnd.jitter(0.5),
+        25, 200,
+      );
     this.heartRate = Lerp(this.heartRate, targetHR, dt * 0.5);
 
-    const sysBase = this.baselineSystolic * this._bpModifier * this.svrFactor * preload;
+    const lidocaineSvrMultiplier = lidocaineHemodynamicsActive
+      ? f(f(1 + f(0.25 * this.surgicalStimulusEffective))
+        * f(1 - f(0.2 * Clamp01(this.epiduralSympathectomyContribution))))
+      : 1;
+    const sysBase = lidocaineHemodynamicsActive
+      ? this.baselineSystolic * this._bpModifier * this.svrFactor * preload * lidocaineSvrMultiplier
+      : this.baselineSystolic * this._bpModifier * this.svrFactor * preload;
     const targetSys = Clamp(sysBase + bpBoost + this._rnd.jitter(1), 25, 250);
-    const diaBase = this.baselineDiastolic * this._bpModifier * this.svrFactor * preload;
+    const diaBase = lidocaineHemodynamicsActive
+      ? this.baselineDiastolic * this._bpModifier * this.svrFactor * preload * lidocaineSvrMultiplier
+      : this.baselineDiastolic * this._bpModifier * this.svrFactor * preload;
     const targetDia = Clamp(diaBase + bpBoost * f(0.6) + this._rnd.jitter(0.5), 12, 150);
     this.systolicBP = Lerp(this.systolicBP, targetSys, dt * 0.3);
     this.diastolicBP = Lerp(this.diastolicBP, targetDia, dt * 0.3);

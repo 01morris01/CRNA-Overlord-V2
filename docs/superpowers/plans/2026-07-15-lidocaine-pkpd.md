@@ -231,7 +231,7 @@ git commit -m "Model regional Lidocaine depots"
 - Create: `crisis-sim/test/lidocaine-evidence.test.js`
 - Modify: `crisis-sim/test/parity.test.js`
 
-- [ ] **Step 1: Write failing rig-inertness and stimulation tests**
+- [x] **Step 1: Write failing rig-inertness and stimulation tests**
 
 ```js
 it('adds l without moving the unused frozen physiology path', () => {
@@ -250,7 +250,7 @@ it('regional sensory block attenuates the same imposed stimulus', () => {
 
 Add an epidural test proving graded SVR reduction occurs through `epiduralSympathectomyContribution`, not `_sympSeverity`.
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
@@ -259,7 +259,7 @@ npx vitest run test/lidocaine-evidence.test.js test/parity.test.js --reporter=ve
 
 Expected: missing rig key and patient drivers; frozen parity remains green.
 
-- [ ] **Step 3: Wire and compose**
+- [x] **Step 3: Wire and compose**
 
 Create `l`, set `l.patient = p`, expose `{p,d,v,a,l,...}`, add `core.lidocaineSystem`, and tick `l` after general drugs but before patient physiology. Do not give it `core.rng`.
 
@@ -272,7 +272,7 @@ effectiveSurgicalStimulus = raw * (1 - regionalSensoryBlock * coverage)
 
 Compose HR/SVR/cardiac contributions in `updateHemodynamics()` without assigning a vital. Reset all Lidocaine inputs to inert defaults.
 
-- [ ] **Step 4: Verify evidence and frozen parity**
+- [x] **Step 4: Verify evidence and frozen parity**
 
 ```bash
 cd crisis-sim
@@ -281,7 +281,7 @@ npx vitest run test/lidocaine-evidence.test.js test/parity.test.js --reporter=ve
 
 Expected: stimulus/epidural tests pass and all frozen parity assertions remain exact.
 
-- [ ] **Step 5: Commit engine integration**
+- [x] **Step 5: Commit engine integration**
 
 ```bash
 git add crisis-sim/sim/index.js crisis-sim/sim/simulationCore.js crisis-sim/sim/patientPhysiology.js crisis-sim/test/lidocaine-evidence.test.js crisis-sim/test/parity.test.js

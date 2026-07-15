@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    simulationCore.js — faithful port of OperatingRoom.Simulation.SimulationCore.
    Owns the shared deterministic RNG and the fixed-timestep tick loop.
-   Deterministic subsystem order: drugs → ventilator → physiology → alarms
+   Deterministic subsystem order: drugs → Lidocaine → ventilator → physiology → alarms
    → scenario. One SimRandom instance is shared across every subsystem, so
    the global RNG-consumption order per tick is fixed.
    ═══════════════════════════════════════════════════════════════════ */
@@ -12,6 +12,7 @@ export class SimulationCore {
   constructor() {
     this.patient = null;
     this.drugSystem = null;
+    this.lidocaineSystem = null;
     this.ventilator = null;
     this.airwayProcedure = null;
     this.alarmSystem = null;
@@ -48,6 +49,7 @@ export class SimulationCore {
 
   resetSim(withSeed) {
     if (this.drugSystem && this.drugSystem.resetReversalState) this.drugSystem.resetReversalState();
+    if (this.lidocaineSystem?.reset) this.lidocaineSystem.reset();
     if (this.airwayProcedure) this.airwayProcedure.reset();
     if (this.patient) this.patient.resetToBaseline();
     this.initialize(withSeed);
@@ -55,6 +57,7 @@ export class SimulationCore {
 
   stepOnce(dt) {
     if (this.drugSystem) this.drugSystem.tick(dt);
+    if (this.lidocaineSystem) this.lidocaineSystem.tick(dt);
     if (this.airwayProcedure?.prepareTick) this.airwayProcedure.prepareTick(dt);
     if (this.ventilator) this.ventilator.tick(dt);
     if (this.patient) this.patient.tick(dt);

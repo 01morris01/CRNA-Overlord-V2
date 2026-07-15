@@ -1,0 +1,58 @@
+import { describe, expect, it } from 'vitest';
+import { buildPhysRig, LidocaineSystem } from '../sim/index.js';
+
+function runStimulus({ block }) {
+  const rig = buildPhysRig(8128);
+  if (block) {
+    rig.l.administerRegional({
+      route: 'peripheral', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false,
+    });
+    rig.core.stepFor(30 * 60);
+  }
+  rig.l.setSurgicalStimulus(1);
+  let peakHr = rig.p.heartRate;
+  let peakMap = rig.p.meanArterialPressure;
+  for (let second = 0; second < 90; second++) {
+    rig.core.stepFor(1);
+    peakHr = Math.max(peakHr, rig.p.heartRate);
+    peakMap = Math.max(peakMap, rig.p.meanArterialPressure);
+  }
+  return { ...rig, peakHr, peakMap };
+}
+
+describe('Lidocaine additive physiology evidence', () => {
+  it('adds one RNG-free l rig key without replacing existing keys', () => {
+    const rig = buildPhysRig(12345);
+
+    expect(rig.l).toBeInstanceOf(LidocaineSystem);
+    expect(rig.l.rng).toBeNull();
+    expect(rig).toMatchObject({
+      p: expect.any(Object), d: expect.any(Object), v: expect.any(Object),
+      a: expect.any(Object), core: expect.any(Object),
+    });
+  });
+
+  it('regional sensory block attenuates the same imposed stimulus', () => {
+    const control = runStimulus({ block: false });
+    const blocked = runStimulus({ block: true });
+
+    expect(control.peakHr).toBeGreaterThan(blocked.peakHr + 10);
+    expect(control.peakMap).toBeGreaterThan(blocked.peakMap + 8);
+    expect(control.p.surgicalStimulusEffective).toBeGreaterThan(0.95);
+    expect(blocked.p.surgicalStimulusEffective).toBeLessThan(0.35);
+  });
+
+  it('derives graded epidural sympathectomy without using the high-spinal driver', () => {
+    const rig = buildPhysRig(4321);
+    const baselineSvr = rig.p.svrFactor;
+    rig.l.administerRegional({
+      route: 'epidural', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false,
+    });
+    rig.core.stepFor(30 * 60);
+
+    expect(rig.p.epiduralSympathectomyContribution).toBeGreaterThan(0);
+    expect(rig.p.epiduralSympathectomyContribution).toBeLessThanOrEqual(1);
+    expect(rig.p.svrFactor).toBe(baselineSvr);
+    expect(rig.p.meanArterialPressure).toBeLessThan(90);
+  });
+});
