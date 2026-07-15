@@ -112,7 +112,7 @@ describe('display model', () => {
     });
 
     expect(model).toMatchObject({
-      hr: '72', bp: '121/78', map: '92', spo2: '99', rr: '14',
+      hr: '72', sbp: '121', dbp: '78', bp: '121/78', map: '92', spo2: '99', rr: '14',
       etco2: '38', temp: '36.7', tof: '4', tofRatio: '0.94',
       spontaneousRR: '12', spontaneousTV: '421', spontaneousMV: '4.9',
       spontaneousEffort: '0.78', ventMode: 'VCV',

@@ -34,7 +34,7 @@
 - Modify: `crisis-sim/test/app-integration.test.js`
 - Modify: `crisis-sim/test/live-runner.test.js`
 
-- [ ] **Step 1: Add the failing split-NIBP and container-sizing assertions**
+- [x] **Step 1: Add the failing split-NIBP and container-sizing assertions**
 
 Add to `live-sim-display.test.js`:
 
@@ -50,7 +50,7 @@ it('renders systolic and diastolic independently inside a container-sized NIBP v
 });
 ```
 
-- [ ] **Step 2: Add failing visible-control assertions**
+- [x] **Step 2: Add failing visible-control assertions**
 
 Add to `app-integration.test.js`:
 
@@ -65,7 +65,7 @@ expect(controller).toContain('liveRunner.setVolatile');
 expect(controller).toContain('liveRunner.checkTrainOfFour');
 ```
 
-- [ ] **Step 3: Add failing runner behavior tests**
+- [x] **Step 3: Add failing runner behavior tests**
 
 Add to `live-runner.test.js`:
 
@@ -99,7 +99,7 @@ it('checks TOF without changing any neuromuscular state', () => {
 });
 ```
 
-- [ ] **Step 4: Run the focused tests and verify RED**
+- [x] **Step 4: Run the focused tests and verify RED**
 
 Run:
 
@@ -120,7 +120,7 @@ Expected: failures for missing split nodes, control markup, `setVolatile`, and `
 - Modify: `ui/liveSimView.js`
 - Test: `crisis-sim/test/live-sim-display.test.js`
 
-- [ ] **Step 1: Split the display value without splitting its accessible meaning**
+- [x] **Step 1: Split the display value without splitting its accessible meaning**
 
 Replace the NIBP `strong` in `live-sim-display.html` with:
 
@@ -130,7 +130,7 @@ Replace the NIBP `strong` in `live-sim-display.html` with:
 </strong>
 ```
 
-- [ ] **Step 2: Render the two values and combined accessible label**
+- [x] **Step 2: Render the two values and combined accessible label**
 
 In `ui/liveSimDisplay.js`, replace the combined BP assignment with:
 
@@ -143,7 +143,7 @@ if (bp) bp.setAttribute('aria-label', `Blood pressure ${model.sbp} over ${model.
 
 Extend `formatMonitorSnapshot()` to return `sbp` and `dbp` while retaining combined `bp` for the instructor console.
 
-- [ ] **Step 3: Size against the card, not the viewport**
+- [x] **Step 3: Size against the card, not the viewport**
 
 Use these rules in `live-sim-display.css`:
 
@@ -164,11 +164,11 @@ Use these rules in `live-sim-display.css`:
 
 Remove conflicting viewport-only BP font-size overrides from the 680/480-pixel media rules.
 
-- [ ] **Step 4: Constrain the instructor BP tile**
+- [x] **Step 4: Constrain the instructor BP tile**
 
 Give every `.live-vitals > div` `min-width: 0`, make the compact BP value no-wrap with a container-relative font size, and mark the BP tile with `live-vital-bp` in `renderShell()`.
 
-- [ ] **Step 5: Run the display tests and verify GREEN**
+- [x] **Step 5: Run the display tests and verify GREEN**
 
 Run:
 
@@ -179,7 +179,7 @@ npx vitest run test/live-sim-display.test.js test/live-ui-model.test.js --report
 
 Expected: both files pass; formatting still returns combined and split values.
 
-- [ ] **Step 6: Commit the NIBP repair**
+- [x] **Step 6: Commit the NIBP repair**
 
 ```bash
 git add live-sim-display.html assets/css/live-sim-display.css assets/css/live-sim.css ui/liveSimDisplay.js ui/liveSimView.js crisis-sim/test/live-sim-display.test.js crisis-sim/test/live-ui-model.test.js

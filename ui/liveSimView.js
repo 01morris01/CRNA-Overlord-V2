@@ -134,7 +134,7 @@ function renderShell() {
 
     <div class="live-vitals" aria-label="Current engine-derived vitals">
       <div><span>HR</span><strong id="live-vital-hr">—</strong><small>bpm</small></div>
-      <div><span>BP</span><strong id="live-vital-bp">—</strong><small>mmHg</small></div>
+      <div class="live-vital-bp"><span>BP</span><strong id="live-vital-bp">—</strong><small>mmHg</small></div>
       <div><span>MAP</span><strong id="live-vital-map">—</strong><small>mmHg</small></div>
       <div><span>SpO₂</span><strong id="live-vital-spo2">—</strong><small>%</small></div>
       <div><span>EtCO₂</span><strong id="live-vital-etco2">—</strong><small>mmHg</small></div>

@@ -139,6 +139,8 @@ export function formatMonitorSnapshot(snapshot = {}) {
   const diastolic = formatted(snapshot.dbp);
   return {
     hr: formatted(snapshot.hr),
+    sbp: systolic,
+    dbp: diastolic,
     bp: systolic === '—' || diastolic === '—' ? '—' : `${systolic}/${diastolic}`,
     map: formatted(snapshot.map),
     spo2: formatted(snapshot.spo2),

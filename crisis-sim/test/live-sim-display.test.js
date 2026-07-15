@@ -37,6 +37,16 @@ describe('live monitor clinical-priority layout', () => {
     expect(css).toMatch(/\.display-vital\s*\{[^}]*min-width:\s*0;/s);
   });
 
+  it('renders systolic and diastolic independently inside a container-sized NIBP value', () => {
+    const primary = section('display-numerics');
+    expect(primary).toContain('id="display-bp"');
+    expect(primary).toContain('id="display-sbp"');
+    expect(primary).toContain('id="display-dbp"');
+    expect(css).toMatch(/\.display-vital-bp\s*\{[^}]*container-type:\s*inline-size;/s);
+    expect(css).toMatch(/\.display-vital-bp strong\s*\{[^}]*font-size:[^;]*cqi/s);
+    expect(css).toMatch(/\.display-vital-bp strong\s*\{[^}]*min-width:\s*0;/s);
+  });
+
   it('has explicit wide, laptop/tablet, and narrow-phone grid behavior', () => {
     expect(css).toMatch(/@media \(max-width: 1120px\)[\s\S]*?\.display-numerics\s*\{\s*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
     expect(css).toMatch(/@media \(max-width: 480px\)[\s\S]*?\.display-numerics[\s\S]*?grid-template-columns:\s*1fr;/);

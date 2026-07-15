@@ -41,7 +41,15 @@ function renderSnapshot(snapshot) {
   setText('display-patient', snapshot.patient || 'Live patient');
   setText('display-clock', formatTime(snapshot.t));
   setText('display-hr', model.hr);
-  setText('display-bp', model.bp);
+  setText('display-sbp', model.sbp);
+  setText('display-dbp', model.dbp);
+  const bp = document.getElementById('display-bp');
+  if (bp) {
+    const label = model.sbp === '—' || model.dbp === '—'
+      ? 'Blood pressure unavailable'
+      : `Blood pressure ${model.sbp} over ${model.dbp} millimeters of mercury`;
+    bp.setAttribute('aria-label', label);
+  }
   setText('display-map', model.map);
   setText('display-spo2', model.spo2);
   setText('display-etco2', model.etco2);

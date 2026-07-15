@@ -136,6 +136,7 @@
 }
 
 .live-vitals > div {
+  min-width: 0;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: baseline;
@@ -147,6 +148,15 @@
 .live-vitals span,
 .live-vitals small { color: var(--muted); font-family: var(--fm); font-size: .62rem; }
 .live-vitals strong { grid-row: span 2; color: var(--green); font-family: var(--fm); font-size: 1.55rem; font-variant-numeric: tabular-nums; }
+.live-vital-bp { container-type: inline-size; }
+.live-vital-bp strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  font-size: clamp(1rem, 16cqi, 1.55rem);
+  letter-spacing: -.04em;
+  white-space: nowrap;
+}
 
 .live-action-status {
   min-height: 44px;
