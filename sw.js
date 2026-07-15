@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';
+const CACHE_VERSION = 'v52-live-sim-lidocaine-2026-07-15';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -15,6 +15,7 @@ const APP_SHELL = [
   '/crisis-sim/ui/simRunner.js',
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',
+  '/crisis-sim/sim/lidocaineSystem.js',
   '/crisis-sim/sim/neuromuscularModel.js',
   '/crisis-sim/sim/airwayProcedureSystem.js',
   '/crisis-sim/sim/ventilatorSystem.js', '/crisis-sim/sim/simulationCore.js',

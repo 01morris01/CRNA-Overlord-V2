@@ -541,7 +541,7 @@ git commit -m "Add live Lidocaine controls"
 - Modify: `crisis-sim/test/pwa-contract.test.js`
 - Modify: `docs/superpowers/plans/2026-07-15-lidocaine-pkpd.md`
 
-- [ ] **Step 1: Build printable evidence output**
+- [x] **Step 1: Build printable evidence output**
 
 Print CSV/JSON for:
 
@@ -555,15 +555,15 @@ Print CSV/JSON for:
 
 Add a pre-feature no-Lidocaine combined-run fingerprint assertion. It must match the prior value exactly, proving the new subsystem is inert and consumes no RNG when unused.
 
-- [ ] **Step 2: Write the model document**
+- [x] **Step 2: Write the model document**
 
 Document exact equations/constants, public methods, snapshot keys, mass balance, event names, sources, route-average simplifications, toxicity thresholds, exclusions, and operator behavior.
 
-- [ ] **Step 3: Update PWA cache**
+- [x] **Step 3: Update PWA cache**
 
 Bump the cache name and include `/crisis-sim/sim/lidocaineSystem.js` plus every changed runtime UI/model module. Update the PWA contract test before changing `sw.js`, verify RED, then GREEN.
 
-- [ ] **Step 4: Run the complete matrix fresh**
+- [x] **Step 4: Run the complete matrix fresh**
 
 ```bash
 cd crisis-sim
@@ -586,7 +586,7 @@ Expected:
 - every frozen parity assertion remains exact;
 - no whitespace errors.
 
-- [ ] **Step 5: Inspect scope and mark plans complete**
+- [x] **Step 5: Inspect scope and mark plans complete**
 
 ```bash
 git status --short
@@ -596,13 +596,13 @@ git log --oneline cf90b5b..HEAD
 
 Confirm no unrelated game/data files, no regenerated frozen fixture, no direct UI vital writes, and no RNG assigned to LidocaineSystem. Mark every completed checkbox in both implementation plans.
 
-- [ ] **Step 6: Commit final evidence**
+- [x] **Step 6: Commit final evidence**
 
 ```bash
 git add crisis-sim/test/lidocaine-evidence.mjs crisis-sim/test/lidocaine-evidence.test.js docs/lidocaine-model.md docs/live-sim-integration.md sw.js crisis-sim/test/pwa-contract.test.js docs/superpowers/plans/2026-07-15-live-sim-clinical-controls.md docs/superpowers/plans/2026-07-15-lidocaine-pkpd.md
 git commit -m "Verify live Lidocaine simulation"
 ```
 
-- [ ] **Step 7: Prepare final report**
+- [x] **Step 7: Prepare final report**
 
 Report test counts, curves, ordered toxicity/rescue events, mass-balance maximum error, deterministic fingerprints, rendered NIBP geometry results, frozen parity result, branch, commit, and explicit push/merge/deployment status. State that the default application will not change until this branch is integrated and deployed.

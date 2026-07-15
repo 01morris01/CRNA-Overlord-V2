@@ -146,10 +146,16 @@ export class LidocaineSystem {
   }
 
   get ventricularIrritabilityEffective() {
-    const suppressed = f(
-      this.ventricularIrritabilityRaw * f(1 - f(0.8 * this.antiarrhythmicContribution)),
+    return Clamp(f(
+      this.ventricularIrritabilityRaw * f(1 - this.antiarrhythmicContribution),
+    ), 0, 1);
+  }
+
+  get rhythmIrritability() {
+    return Max(
+      this.ventricularIrritabilityEffective,
+      f(0.8 * this.cardiacToxicity),
     );
-    return Clamp(f(suppressed + f(0.8 * this.cardiacToxicity)), 0, 1);
   }
 
   get seizureDriveActive() {
@@ -169,8 +175,8 @@ export class LidocaineSystem {
 
   get derivedRhythm() {
     if (this.patient?.explicitVentricularFibrillation) return 'ventricular_fibrillation';
-    if (this.ventricularIrritabilityEffective >= f(0.7)) return 'ventricular_tachycardia';
-    if (this.ventricularIrritabilityEffective >= f(0.25)) return 'ventricular_ectopy';
+    if (this.rhythmIrritability >= f(0.7)) return 'ventricular_tachycardia';
+    if (this.rhythmIrritability >= f(0.25)) return 'ventricular_ectopy';
     return 'sinus';
   }
 
@@ -230,6 +236,7 @@ export class LidocaineSystem {
     this._record(this._irritabilityHistory, 'ventricular_irritability_set', {
       raw: this.ventricularIrritabilityRaw,
       effective: this.ventricularIrritabilityEffective,
+      rhythmIrritability: this.rhythmIrritability,
       antiarrhythmicContribution: this.antiarrhythmicContribution,
       rhythm: this.derivedRhythm,
     });
@@ -556,6 +563,7 @@ export class LidocaineSystem {
         rhythm,
         raw: this.ventricularIrritabilityRaw,
         effective: this.ventricularIrritabilityEffective,
+        rhythmIrritability: this.rhythmIrritability,
         antiarrhythmicContribution: this.antiarrhythmicContribution,
       });
       this._lastDerivedRhythm = rhythm;

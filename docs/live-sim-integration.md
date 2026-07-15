@@ -86,6 +86,11 @@ All patient-affecting instructor actions go through public runner methods:
 - `setForcedApnea(boolean)` for the explicit forced-apnea contribution.
 - `setVolatile({ agent, dialPercent })` accepts `Sevoflurane`, `Desflurane`, or `Isoflurane` and a finite `0..18` percent dial. It records `volatile_changed`; Agent Off sends dial zero with the last valid selected agent, so selecting Off does not discard that agent.
 - `checkTrainOfFour()` samples the existing single NMB state and records `tof_checked`. It returns `{ tSec, count, ratio, effectiveNmbBlockade, nmbSource, airwayDevice }` without changing blockade, count, ratio, respiratory capability, or another physiologic value. The continuously displayed TOF is informative; only this discrete check is a scoreable assessment action.
+- `giveLidocaineBolus({ doseMgPerKg = 1.5 })` accepts an IV dose in mg/kg; it is not a total-mg API.
+- `startLidocaineInfusion({ rateMgPerKgHour })` starts or updates the one active systemic infusion. `stopLidocaineInfusion()` stops it without logging a no-op stop.
+- `administerRegionalLidocaine({ route, concentrationPercent, volumeMl, epinephrine })` accepts the exact route strings `infiltration`, `peripheral`, or `epidural`; it derives total mg and mg/kg from percent and mL and records an additive warning when the modeled recommendation is exceeded.
+- `setSurgicalStimulus(intensity)` and `setVentricularIrritability(intensity)` accept finite `0..1` drivers. They never assign a vital or rhythm directly.
+- `giveLipidEmulsionBolus()`, `startLipidEmulsionInfusion()`, and `stopLipidEmulsionInfusion()` act on the shared concentration-derived LAST state. Starting an active infusion escalates its modeled rate; cumulative delivery is capped at 12 mL/kg.
 - `injectComplication(type)` will be added as a thin wrapper around the already-implemented `ScenarioManager.applyComplication()` state machines. It will not write a vital or create a second physiology model.
 - `buildDebrief()` will reuse `buildDebrief()`/`ScenarioRunState` so the live export has the existing `SimulationResult` keys.
 
@@ -100,6 +105,19 @@ The runner snapshot exposes:
 - `tofCheckHistory`: a copied array of copied check records.
 
 The NIBP display receives the same snapshot systolic and diastolic values through independent `display-sbp` and `display-dbp` text nodes. `display-bp` remains their shared semantic container and receives the combined accessible label. Its font sizes against the NIBP card's inline container, rather than the browser viewport, so a narrow card cannot push the diastolic node outside its bounds.
+
+### Lidocaine snapshot additions
+
+The runner snapshot adds one shared Lidocaine truth surface:
+
+- systemic exposure/mass: `lidocainePlasmaTotalMcgMl`, `lidocainePlasmaFreeMcgMl`, `lidocaineEffectSiteMcgMl`, `lidocaineCentralMg`, `lidocainePeripheralMg`, `lidocaineEliminatedMg`, `lidocaineCumulativeMg`, `lidocaineCumulativeMgKg`, `lidocaineClearanceFactor`;
+- infusion: `lidocaineInfusionActive`, `lidocaineInfusionRateMgKgHour`;
+- regional and stimulation: `regionalSensoryBlock`, `regionalMotorBlock`, `epiduralSympathectomyContribution`, `surgicalStimulusRaw`, `surgicalStimulusEffective`, `lidocaineSystemicAnalgesicContribution`;
+- rhythm: `lidocaineAntiarrhythmicContribution`, `ventricularIrritabilityRaw`, `ventricularIrritabilityEffective`, `derivedRhythm`;
+- toxicity and rescue: `lidocaineCnsToxicity`, `lidocaineCardiacToxicity`, `lidocaineSeizureActive`, `lidocaineToxicityStage`, `lipidInfusionActive`, `lipidCumulativeMlKg`;
+- copied chronology: `lidocaineRegionalHistory`, `lidocaineDoseHistory`, `lidocaineToxicityHistory`, `lipidRescueHistory`.
+
+The exact equations, event names, calibration sources, and labeled simplifications are in [`docs/lidocaine-model.md`](lidocaine-model.md). The live console displays dose math and warnings, but calls only the public methods above and cannot write an exposure or derived vital.
 
 ### Timed intubation operator change
 
@@ -127,7 +145,7 @@ The control surface will reuse these tokens, visible form labels, 44 px minimum 
 - cache-first fetch behavior with same-origin background refresh, except `/data/questions/`, which is network-first with cache fallback;
 - `SKIP_WAITING` message support.
 
-Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. The clinical-control repair advances the installed shell to `v51-live-sim-clinical-controls-2026-07-15`; later additive runtime modules require another version advance and an explicit cache entry.
+Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. The Lidocaine implementation advances the installed shell to `v52-live-sim-lidocaine-2026-07-15` and explicitly caches `/crisis-sim/sim/lidocaineSystem.js` in addition to the controller, model, runner, display, styles, and complete browser engine import graph.
 
 ## Selected architecture and rejected alternatives
 

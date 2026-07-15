@@ -20,6 +20,7 @@ const requiredAppShellEntries = [
   '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js',
   '/crisis-sim/sim/drugSystem.js',
+  '/crisis-sim/sim/lidocaineSystem.js',
   '/crisis-sim/sim/neuromuscularModel.js',
   '/crisis-sim/sim/airwayProcedureSystem.js',
   '/crisis-sim/sim/ventilatorSystem.js',
@@ -35,9 +36,10 @@ const requiredAppShellEntries = [
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';");
-    expect(sw).toContain('live-sim-clinical-controls');
+    expect(sw).toContain("const CACHE_VERSION = 'v52-live-sim-lidocaine-2026-07-15';");
+    expect(sw).toContain('live-sim-lidocaine');
     expect(sw).toContain("'/hospital-map.js?v=48'");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';");
   });
 

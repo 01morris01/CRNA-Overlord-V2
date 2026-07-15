@@ -65,6 +65,11 @@ describe('Lidocaine additive physiology evidence', () => {
     untreated.core.stepFor(120);
     treated.core.stepFor(120);
 
+    expect(treated.l.ventricularIrritabilityEffective).toBeCloseTo(
+      treated.l.ventricularIrritabilityRaw
+        * (1 - treated.l.antiarrhythmicContribution),
+      6,
+    );
     expect(treated.l.ventricularIrritabilityEffective)
       .toBeLessThan(untreated.l.ventricularIrritabilityEffective);
     expect(treated.p.derivedRhythm).toBe('sinus');
