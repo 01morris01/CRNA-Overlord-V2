@@ -112,7 +112,7 @@ git commit -m "Add Lidocaine action state"
 - Modify: `crisis-sim/sim/lidocaineSystem.js`
 - Modify: `crisis-sim/test/lidocaine-system.test.js`
 
-- [ ] **Step 1: Add failing PK-anchor tests**
+- [x] **Step 1: Add failing PK-anchor tests**
 
 Add helpers that tick at `0.02` seconds and sample a 70 kg patient after a 1.5 mg/kg bolus. Assert:
 
@@ -130,7 +130,7 @@ Add an infusion test showing 1.5 mg/kg/hour adds exactly 1.75 mg/min for a 70 kg
 
 Add a clearance-factor test proving the default is exactly `1`, the factor is independently queryable, and changing it alters elimination without changing dose input or another physiologic driver.
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
@@ -139,7 +139,7 @@ npx vitest run test/lidocaine-system.test.js -t "two-compartment|mass balance|bi
 
 Expected: missing tick/concentration getters.
 
-- [ ] **Step 3: Implement systemic tick**
+- [x] **Step 3: Implement systemic tick**
 
 Use reference constants `Vc=43`, `Vp=56`, `Cl=0.95`, `Q=1.0` L or L/min, weight-scaled as specified. Per minute:
 
@@ -154,7 +154,7 @@ peripheralMg += exchanged;
 
 Use nonnegative bounded transfers so no compartment crosses below zero. Store eliminated mass separately. Update the effect site toward free concentration with `ke0 = ln(2)/2 min` through the float32 layer.
 
-- [ ] **Step 4: Verify focused and full unit tests**
+- [x] **Step 4: Verify focused and full unit tests**
 
 ```bash
 cd crisis-sim
@@ -163,7 +163,7 @@ npx vitest run test/lidocaine-system.test.js --reporter=verbose
 
 Expected: all PK and public-state tests pass.
 
-- [ ] **Step 5: Commit systemic PK**
+- [x] **Step 5: Commit systemic PK**
 
 ```bash
 git add crisis-sim/sim/lidocaineSystem.js crisis-sim/test/lidocaine-system.test.js

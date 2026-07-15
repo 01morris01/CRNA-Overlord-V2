@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { LidocaineSystem } from '../sim/lidocaineSystem.js';
 
+const STEP = Math.fround(0.02);
+
+function advance(lidocaine, seconds) {
+  const steps = Math.round(seconds / STEP);
+  for (let index = 0; index < steps; index++) lidocaine.tick(STEP);
+  return lidocaine;
+}
+
 describe('LidocaineSystem public actions', () => {
   it('accepts one IV infusion and updates its rate instead of duplicating it', () => {
     const l = new LidocaineSystem();
@@ -67,5 +75,69 @@ describe('LidocaineSystem public actions', () => {
     expect(() => l.administerRegional({
       route, concentrationPercent: 1, volumeMl: 10, epinephrine: false,
     })).toThrow(RangeError);
+  });
+});
+
+describe('LidocaineSystem systemic PK', () => {
+  it('follows the reference two-compartment bolus anchors and terminal half-life', () => {
+    const l = new LidocaineSystem();
+    l.weightKg = 70;
+    l.giveIvBolus({ doseMgPerKg: 1.5 });
+
+    expect(l.plasmaTotalMcgMl).toBeCloseTo(105 / 43, 5);
+    const initial = l.plasmaTotalMcgMl;
+    advance(l, 90 * 60);
+    const at90Minutes = l.plasmaTotalMcgMl;
+    advance(l, 120 * 60);
+    const at210Minutes = l.plasmaTotalMcgMl;
+    const terminalHalfLifeMinutes = 120 * Math.log(2) / Math.log(at90Minutes / at210Minutes);
+
+    expect(at90Minutes).toBeLessThan(initial);
+    expect(terminalHalfLifeMinutes).toBeGreaterThanOrEqual(90);
+    expect(terminalHalfLifeMinutes).toBeLessThanOrEqual(120);
+  });
+
+  it('closes systemic mass balance within float32 tolerance', () => {
+    const l = new LidocaineSystem();
+    l.weightKg = 70;
+    l.giveIvBolus({ doseMgPerKg: 1.5 });
+    l.startInfusion({ rateMgPerKgHour: 1.5 });
+
+    advance(l, 60 * 60);
+
+    expect(l.infusionInputMgPerMin).toBeCloseTo(1.75, 6);
+    expect(l.massBalanceErrorMg).toBeLessThan(0.02);
+    expect(l.eliminatedMg).toBeGreaterThan(0);
+    expect(l.peripheralMg).toBeGreaterThan(0);
+  });
+
+  it('reports concentration-dependent binding and a lagging effect site', () => {
+    const l = new LidocaineSystem();
+
+    expect(l.bindingForTotal(1).boundFraction).toBeCloseTo(0.8, 5);
+    expect(l.bindingForTotal(4).boundFraction).toBeCloseTo(0.6, 5);
+    expect(l.bindingForTotal(7).boundFraction).toBeCloseTo(0.4, 5);
+
+    l.giveIvBolus({ doseMgPerKg: 1.5 });
+    expect(l.effectSiteMcgMl).toBe(0);
+    advance(l, 30);
+    expect(l.effectSiteMcgMl).toBeGreaterThan(0);
+    expect(l.effectSiteMcgMl).toBeLessThan(l.plasmaFreeMcgMl);
+  });
+
+  it('keeps clearance factor independently queryable and causal', () => {
+    const reference = new LidocaineSystem();
+    const reduced = new LidocaineSystem();
+    expect(reference.clearanceFactor).toBe(1);
+    reduced.setClearanceFactor(0.5);
+    expect(reduced.clearanceFactor).toBe(0.5);
+    reference.giveIvBolus({ doseMgPerKg: 1.5 });
+    reduced.giveIvBolus({ doseMgPerKg: 1.5 });
+
+    advance(reference, 60 * 60);
+    advance(reduced, 60 * 60);
+
+    expect(reduced.eliminatedMg).toBeLessThan(reference.eliminatedMg);
+    expect(reduced.cumulativeAdministeredMg).toBe(reference.cumulativeAdministeredMg);
   });
 });
