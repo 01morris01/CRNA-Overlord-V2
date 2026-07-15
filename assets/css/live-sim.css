@@ -115,6 +115,7 @@
 
 .live-sim-view button:hover { border-color: var(--green-2); background: #153047; }
 .live-sim-view button:active { transform: scale(.98); }
+.live-sim-view button:disabled { cursor: not-allowed; opacity: .5; }
 .live-sim-view button.live-primary { background: var(--green); border-color: var(--green); color: var(--void); }
 .live-sim-view button.live-secondary { background: transparent; }
 .live-sim-view button.live-danger-outline { background: transparent; border-color: var(--red); color: var(--red); }
@@ -184,8 +185,8 @@
   align-items: start;
 }
 
-.live-sim-column { display: grid; gap: 1rem; }
-.live-panel { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 1rem; }
+.live-sim-column { min-width: 0; display: grid; gap: 1rem; }
+.live-panel { min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 1rem; }
 .live-panel h2 { margin: 0 0 .75rem; color: var(--green); font-family: var(--fd); font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; }
 .live-help { margin: -.3rem 0 .8rem; color: var(--muted); font-size: .72rem; line-height: 1.5; }
 
@@ -267,6 +268,88 @@
 .live-volatile-readback dt { color: var(--muted); font-family: var(--fm); font-size: .58rem; }
 .live-volatile-readback dd { margin: .25rem 0 0; color: var(--txt); font-family: var(--fm); font-size: .72rem; overflow-wrap: anywhere; }
 
+.live-lidocaine-panel { border-color: rgba(0, 255, 163, .35); }
+.live-lidocaine-iv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: .65rem;
+}
+.live-regional-fieldset {
+  min-width: 0;
+  margin: 1rem 0 0;
+  padding: .8rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.live-regional-fieldset legend {
+  padding: 0 .35rem;
+  color: var(--txt-2);
+  font-family: var(--fm);
+  font-size: .67rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.live-regional-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: .65rem;
+}
+.live-regional-epinephrine { margin: 0; }
+.live-dose-calculation {
+  display: block;
+  min-height: 1.5rem;
+  margin: .65rem 0 .25rem;
+  color: var(--green-2);
+  font-family: var(--fm);
+  font-size: .72rem;
+  font-variant-numeric: tabular-nums;
+}
+.live-dose-warning {
+  margin: 0 0 .65rem;
+  padding: .6rem .7rem;
+  border: 1px solid rgba(255, 186, 46, .55);
+  border-radius: 5px;
+  background: rgba(255, 186, 46, .08);
+  color: #ffd681;
+  font-size: .72rem;
+  line-height: 1.4;
+}
+.live-dose-warning[hidden] { display: none; }
+.live-readback-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .5rem;
+  margin: .8rem 0 0;
+}
+.live-readback-grid > div {
+  min-width: 0;
+  padding: .55rem;
+  border: 1px solid var(--line);
+  background: var(--abyss);
+}
+.live-readback-grid dt { color: var(--muted); font-family: var(--fm); font-size: .58rem; }
+.live-readback-grid dd {
+  margin: .25rem 0 0;
+  color: var(--txt);
+  font-family: var(--fm);
+  font-size: .7rem;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+#live-lidocaine-toxicity[data-stage="warning"] { color: var(--amber); }
+#live-lidocaine-toxicity[data-stage="cns"],
+#live-lidocaine-toxicity[data-stage="cardiac"] { color: #ff9ab1; }
+.live-clinical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.live-readback-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.live-rescue-actions { display: grid; gap: .5rem; }
+#live-stimulus-intensity { width: 100%; accent-color: var(--green); }
+
 .live-dose-grid,
 .live-complication-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
 .live-dose-button { display: grid; align-content: center; gap: .25rem; text-align: left; min-height: 64px !important; }
@@ -305,6 +388,10 @@
   .live-volatile-agents,
   .live-volatile-readback { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .live-volatile-settings { grid-template-columns: 1fr; }
+  .live-lidocaine-iv-grid,
+  .live-regional-grid,
+  .live-clinical-grid { grid-template-columns: 1fr; }
+  .live-readback-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .live-sim-view input,
   .live-sim-view select { font-size: 16px; }
 }

@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import {
   computeDrugDose,
+  computeRegionalLidocaineDose,
   deriveAlarms,
+  formatLidocaineSnapshot,
   formatMonitorSnapshot,
   parsePatientConfig,
   validateSimulationResult,
   VOLATILE_AGENTS,
+  LIDOCAINE_ROUTES,
 } from '../../ui/liveSimModel.js';
 import {
   deriveLifecyclePresentation,
@@ -79,6 +82,35 @@ describe('live simulation dose model', () => {
     expect(() => computeDrugDose('unknown', 80)).toThrow(/Unknown drug action/);
     expect(() => computeDrugDose('propofol_2_mgkg', 0)).toThrow(/weight/);
   });
+
+  it('computes regional Lidocaine dose and capped route recommendation', () => {
+    expect(LIDOCAINE_ROUTES.map((route) => route.id)).toEqual([
+      'infiltration', 'peripheral', 'epidural',
+    ]);
+    expect(computeRegionalLidocaineDose({
+      route: 'peripheral', concentrationPercent: 1.5, volumeMl: 20,
+      weightKg: 70, epinephrine: false,
+    })).toMatchObject({
+      totalMg: 300,
+      doseMgKg: 300 / 70,
+      maximumMg: 300,
+      exceeded: false,
+      warning: null,
+    });
+    expect(computeRegionalLidocaineDose({
+      route: 'epidural', concentrationPercent: 2, volumeMl: 20,
+      weightKg: 70, epinephrine: false,
+    })).toMatchObject({ totalMg: 400, maximumMg: 300, exceeded: true });
+  });
+
+  it('rejects unsupported regional routes and invalid numeric inputs', () => {
+    expect(() => computeRegionalLidocaineDose({
+      route: 'bier', concentrationPercent: 1, volumeMl: 20, weightKg: 70, epinephrine: false,
+    })).toThrow(/route/);
+    expect(() => computeRegionalLidocaineDose({
+      route: 'peripheral', concentrationPercent: 0, volumeMl: 20, weightKg: 70, epinephrine: false,
+    })).toThrow(/concentration/);
+  });
 });
 
 describe('live simulation patient setup', () => {
@@ -139,6 +171,25 @@ describe('display model', () => {
     expect(ids).toEqual([
       'hr-high', 'map-low', 'spo2-low', 'rr-low', 'etco2-high', 'temp-high', 'ppeak-high',
     ]);
+  });
+
+  it('formats Lidocaine exposure, block, stimulus, toxicity, and rescue state', () => {
+    expect(formatLidocaineSnapshot({
+      lidocainePlasmaTotalMcgMl: 2.345,
+      lidocainePlasmaFreeMcgMl: 0.678,
+      lidocaineEffectSiteMcgMl: 0.456,
+      lidocaineCumulativeMg: 300,
+      regionalSensoryBlock: 0.75,
+      regionalMotorBlock: 0.4,
+      surgicalStimulusRaw: 0.8,
+      surgicalStimulusEffective: 0.2,
+      lidocaineToxicityStage: 'warning',
+      lipidCumulativeMlKg: 1.5,
+    })).toEqual({
+      totalLevel: '2.35', freeLevel: '0.68', effectSite: '0.46', cumulativeMg: '300.0',
+      sensoryBlock: '75%', motorBlock: '40%', stimulusRaw: '0.80',
+      stimulusEffective: '0.20', toxicity: 'WARNING', lipidCumulative: '1.50',
+    });
   });
 });
 

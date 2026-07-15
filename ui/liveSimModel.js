@@ -51,6 +51,12 @@ export const VOLATILE_AGENTS = Object.freeze([
   Object.freeze({ name: 'Isoflurane', referenceDial: 1.2 }),
 ]);
 
+export const LIDOCAINE_ROUTES = Object.freeze([
+  Object.freeze({ id: 'infiltration', label: 'Infiltration' }),
+  Object.freeze({ id: 'peripheral', label: 'Peripheral block' }),
+  Object.freeze({ id: 'epidural', label: 'Epidural' }),
+]);
+
 export const SIMULATION_RESULT_FIELDS = Object.freeze([
   'scenarioId', 'title', 'courseUnit', 'durationSec', 'rawPoints', 'maxPoints',
   'score', 'timeToRecognitionSec', 'timeToTreatmentSec', 'teachingFeedback',
@@ -97,6 +103,42 @@ export function computeDrugDose(actionId, weightKg) {
     drugName: action.drugName,
     totalMg: roundMg(totalMg),
     clinicalLabel: action.label,
+  };
+}
+
+export function computeRegionalLidocaineDose({
+  route, concentrationPercent, volumeMl, weightKg, epinephrine,
+} = {}) {
+  if (!LIDOCAINE_ROUTES.some((candidate) => candidate.id === route)) {
+    throw new RangeError(`Unsupported regional Lidocaine route: ${route}`);
+  }
+  if (!Number.isFinite(concentrationPercent) || concentrationPercent <= 0) {
+    throw new RangeError('Lidocaine concentration must be a positive finite number');
+  }
+  if (!Number.isFinite(volumeMl) || volumeMl <= 0) {
+    throw new RangeError('Lidocaine volume must be a positive finite number');
+  }
+  if (!Number.isFinite(weightKg) || weightKg <= 0) {
+    throw new RangeError('Patient weight must be a positive finite number');
+  }
+  if (typeof epinephrine !== 'boolean') {
+    throw new TypeError('epinephrine must be a boolean');
+  }
+  const totalMg = concentrationPercent * 10 * volumeMl;
+  const doseMgKg = totalMg / weightKg;
+  const maximumMg = epinephrine
+    ? Math.min(7 * weightKg, 500)
+    : Math.min(4.5 * weightKg, 300);
+  const exceeded = totalMg > maximumMg;
+  return {
+    route,
+    totalMg,
+    doseMgKg,
+    maximumMg,
+    exceeded,
+    warning: exceeded
+      ? `Dose exceeds the ${maximumMg.toFixed(0)} mg recommendation for this selection.`
+      : null,
   };
 }
 
@@ -166,6 +208,24 @@ export function formatMonitorSnapshot(snapshot = {}) {
     ventMode: VENT_MODE_NAMES[snapshot.ventMode] || '—',
     vaporizer: formatted(snapshot.vaporizer, 1),
     vaporizerAgent: typeof snapshot.vaporizerAgent === 'string' ? snapshot.vaporizerAgent : '—',
+  };
+}
+
+export function formatLidocaineSnapshot(snapshot = {}) {
+  const percent = (value) => (Number.isFinite(value) ? `${formatted(value * 100)}%` : '—');
+  return {
+    totalLevel: formatted(snapshot.lidocainePlasmaTotalMcgMl, 2),
+    freeLevel: formatted(snapshot.lidocainePlasmaFreeMcgMl, 2),
+    effectSite: formatted(snapshot.lidocaineEffectSiteMcgMl, 2),
+    cumulativeMg: formatted(snapshot.lidocaineCumulativeMg, 1),
+    sensoryBlock: percent(snapshot.regionalSensoryBlock),
+    motorBlock: percent(snapshot.regionalMotorBlock),
+    stimulusRaw: formatted(snapshot.surgicalStimulusRaw, 2),
+    stimulusEffective: formatted(snapshot.surgicalStimulusEffective, 2),
+    toxicity: typeof snapshot.lidocaineToxicityStage === 'string'
+      ? snapshot.lidocaineToxicityStage.toUpperCase()
+      : '—',
+    lipidCumulative: formatted(snapshot.lipidCumulativeMlKg, 2),
   };
 }
 

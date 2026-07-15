@@ -489,7 +489,7 @@ git commit -m "Expose live Lidocaine actions"
 - Modify: `crisis-sim/test/live-ui-model.test.js`
 - Modify: `crisis-sim/test/app-integration.test.js`
 
-- [ ] **Step 1: Write failing dose and markup tests**
+- [x] **Step 1: Write failing dose and markup tests**
 
 Add pure dose tests:
 
@@ -501,29 +501,29 @@ expect(computeRegionalLidocaineDose({ concentrationPercent: 1.5, volumeMl: 20, w
 
 Assert all approved element IDs and exact runner method calls appear in `liveSimView.js`.
 
-- [ ] **Step 2: Run and verify RED**
+- [x] **Step 2: Run and verify RED**
 
 ```bash
 cd crisis-sim
 npx vitest run test/live-ui-model.test.js test/app-integration.test.js --reporter=verbose
 ```
 
-- [ ] **Step 3: Implement pure model helpers**
+- [x] **Step 3: Implement pure model helpers**
 
 Add route metadata, dose-limit math, unit formatting, and toxicity/status presentation with no DOM dependencies.
 
-- [ ] **Step 4: Render and bind controls**
+- [x] **Step 4: Render and bind controls**
 
 Add IV bolus/infusion, regional route/concentration/volume/epinephrine, stimulus, and lipid controls exactly as specified. Update computed dose preview on every relevant input. Show warnings without disabling administration. Render current plasma/effect-site/block/toxicity/rescue values from snapshots.
 
-- [ ] **Step 5: Verify UI tests**
+- [x] **Step 5: Verify UI tests**
 
 ```bash
 cd crisis-sim
 npx vitest run test/live-ui-model.test.js test/app-integration.test.js --reporter=verbose
 ```
 
-- [ ] **Step 6: Commit UI**
+- [x] **Step 6: Commit UI**
 
 ```bash
 git add ui/liveSimModel.js ui/liveSimView.js assets/css/live-sim.css crisis-sim/test/live-ui-model.test.js crisis-sim/test/app-integration.test.js

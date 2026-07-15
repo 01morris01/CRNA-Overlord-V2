@@ -46,6 +46,24 @@ describe('main app live simulation registration', () => {
     expect(controller).toContain('id="live-check-tof"');
     expect(controller).toContain('liveRunner.setVolatile');
     expect(controller).toContain('liveRunner.checkTrainOfFour');
+    for (const id of [
+      'live-lidocaine-panel', 'live-lidocaine-bolus', 'live-lidocaine-infusion-rate',
+      'live-lidocaine-infusion-start', 'live-lidocaine-infusion-stop',
+      'live-lidocaine-route', 'live-lidocaine-concentration', 'live-lidocaine-volume',
+      'live-lidocaine-epinephrine', 'live-lidocaine-dose-preview',
+      'live-lidocaine-dose-warning', 'live-lidocaine-regional-administer',
+      'live-stimulus-panel', 'live-stimulus-intensity', 'live-stimulus-apply',
+      'live-stimulus-off', 'live-lipid-panel', 'live-lipid-bolus',
+      'live-lipid-infusion-start', 'live-lipid-infusion-stop',
+    ]) expect(controller).toContain(`id="${id}"`);
+    expect(controller).toContain('liveRunner.giveLidocaineBolus({ doseMgPerKg: 1.5 })');
+    expect(controller).toContain('liveRunner.startLidocaineInfusion({ rateMgPerKgHour })');
+    expect(controller).toContain('liveRunner.stopLidocaineInfusion()');
+    expect(controller).toContain('liveRunner.administerRegionalLidocaine({');
+    expect(controller).toContain('liveRunner.setSurgicalStimulus(intensity)');
+    expect(controller).toContain('liveRunner.giveLipidEmulsionBolus()');
+    expect(controller).toContain('liveRunner.startLipidEmulsionInfusion()');
+    expect(controller).toContain('liveRunner.stopLipidEmulsionInfusion()');
     expect(hospitalMap).toContain('var dt = Math.max(0, Math.min(.05, (t - last) / 1000));');
   });
 

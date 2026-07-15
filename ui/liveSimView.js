@@ -4,8 +4,11 @@ import {
 import {
   COMPLICATION_OPTIONS,
   computeDrugDose,
+  computeRegionalLidocaineDose,
   DRUG_ACTIONS,
+  formatLidocaineSnapshot,
   formatMonitorSnapshot,
+  LIDOCAINE_ROUTES,
   parsePatientConfig,
   PATIENT_PRESETS,
   validateSimulationResult,
@@ -225,6 +228,68 @@ function renderShell() {
           </dl>
         </section>
 
+        <section id="live-lidocaine-panel" class="live-panel live-lidocaine-panel" aria-labelledby="live-lidocaine-heading">
+          <h2 id="live-lidocaine-heading">Lidocaine</h2>
+          <p class="live-help">Systemic and regional doses share one exposure model. Recommended-dose warnings remain advisory for deliberate toxicity exercises.</p>
+          <div class="live-lidocaine-iv-grid">
+            <button id="live-lidocaine-bolus" type="button" class="live-primary">IV BOLUS · 1.5 MG/KG</button>
+            <label class="live-field" for="live-lidocaine-infusion-rate"><span>Infusion rate</span><span class="live-input-unit"><input id="live-lidocaine-infusion-rate" type="number" value="1.5" min="0.1" max="10" step="0.1"><small>mg/kg/hr</small></span></label>
+            <button id="live-lidocaine-infusion-start" type="button">START / UPDATE INFUSION</button>
+            <button id="live-lidocaine-infusion-stop" type="button" class="live-secondary">STOP INFUSION</button>
+          </div>
+          <fieldset class="live-regional-fieldset">
+            <legend>Regional administration</legend>
+            <div class="live-regional-grid">
+              <label class="live-field" for="live-lidocaine-route"><span>Route</span><select id="live-lidocaine-route">${LIDOCAINE_ROUTES.map((route) => `<option value="${route.id}">${route.label}</option>`).join('')}</select></label>
+              <label class="live-field" for="live-lidocaine-concentration"><span>Concentration</span><span class="live-input-unit"><input id="live-lidocaine-concentration" type="number" value="1.5" min="0.1" max="4" step="0.1" aria-describedby="live-lidocaine-dose-preview live-lidocaine-dose-warning"><small>%</small></span></label>
+              <label class="live-field" for="live-lidocaine-volume"><span>Volume</span><span class="live-input-unit"><input id="live-lidocaine-volume" type="number" value="20" min="0.1" max="250" step="0.1" aria-describedby="live-lidocaine-dose-preview live-lidocaine-dose-warning"><small>mL</small></span></label>
+              <label class="live-toggle live-regional-epinephrine" for="live-lidocaine-epinephrine"><input id="live-lidocaine-epinephrine" type="checkbox"><span>With epinephrine</span></label>
+            </div>
+            <output id="live-lidocaine-dose-preview" class="live-dose-calculation" aria-live="polite">300 mg · 4.29 mg/kg · max 300 mg</output>
+            <p id="live-lidocaine-dose-warning" class="live-dose-warning" role="alert" hidden></p>
+            <button id="live-lidocaine-regional-administer" type="button" class="live-primary">ADMINISTER REGIONAL LIDOCAINE</button>
+          </fieldset>
+          <dl class="live-readback-grid" aria-label="Current Lidocaine state">
+            <div><dt>Total plasma</dt><dd><span id="live-lidocaine-total-level">0.00</span> mcg/mL</dd></div>
+            <div><dt>Free plasma</dt><dd><span id="live-lidocaine-free-level">0.00</span> mcg/mL</dd></div>
+            <div><dt>Effect site</dt><dd><span id="live-lidocaine-effect-level">0.00</span> mcg/mL</dd></div>
+            <div><dt>Cumulative</dt><dd><span id="live-lidocaine-cumulative">0.0</span> mg</dd></div>
+            <div><dt>Sensory block</dt><dd id="live-lidocaine-sensory">0%</dd></div>
+            <div><dt>Motor block</dt><dd id="live-lidocaine-motor">0%</dd></div>
+            <div><dt>Infusion</dt><dd id="live-lidocaine-infusion-state">OFF</dd></div>
+            <div><dt>Toxicity</dt><dd id="live-lidocaine-toxicity" data-stage="none">NONE</dd></div>
+          </dl>
+        </section>
+
+        <div class="live-clinical-grid">
+          <section id="live-stimulus-panel" class="live-panel" aria-labelledby="live-stimulus-heading">
+            <h2 id="live-stimulus-heading">Surgical stimulus</h2>
+            <label class="live-field" for="live-stimulus-intensity"><span>Selected intensity · <output id="live-stimulus-selection" for="live-stimulus-intensity">0.00</output></span><input id="live-stimulus-intensity" type="range" value="0" min="0" max="1" step="0.05"></label>
+            <div class="live-button-row">
+              <button id="live-stimulus-apply" type="button" class="live-primary">APPLY STIMULUS</button>
+              <button id="live-stimulus-off" type="button">STIMULUS OFF</button>
+            </div>
+            <dl class="live-readback-grid live-readback-compact">
+              <div><dt>Raw</dt><dd id="live-stimulus-raw">0.00</dd></div>
+              <div><dt>Effective</dt><dd id="live-stimulus-effective">0.00</dd></div>
+            </dl>
+          </section>
+
+          <section id="live-lipid-panel" class="live-panel" aria-labelledby="live-lipid-heading">
+            <h2 id="live-lipid-heading">LAST rescue · 20% lipid</h2>
+            <p class="live-help">1.5 mL/kg bolus · 0.25 mL/kg/min infusion · cumulative cap 12 mL/kg.</p>
+            <div class="live-rescue-actions">
+              <button id="live-lipid-bolus" type="button" class="live-primary">GIVE 1.5 ML/KG BOLUS</button>
+              <button id="live-lipid-infusion-start" type="button">START / DOUBLE INFUSION</button>
+              <button id="live-lipid-infusion-stop" type="button">STOP INFUSION</button>
+            </div>
+            <dl class="live-readback-grid live-readback-compact">
+              <div><dt>Cumulative</dt><dd><span id="live-lipid-cumulative">0.00</span> mL/kg</dd></div>
+              <div><dt>Infusion</dt><dd id="live-lipid-infusion-state">OFF</dd></div>
+            </dl>
+          </section>
+        </div>
+
         <section class="live-panel" aria-labelledby="live-machine-heading">
           <h2 id="live-machine-heading">Anesthesia machine</h2>
           <form id="live-machine-form" class="live-machine-grid">
@@ -277,6 +342,7 @@ function fillPatientForm(config) {
     if (control) control.value = String(value);
   }
   updateDosePreviews(config.weightKg);
+  updateRegionalLidocainePreview(config.weightKg);
 }
 
 function updateDosePreviews(weightKg) {
@@ -290,6 +356,50 @@ function updateDosePreviews(weightKg) {
       preview.textContent = 'total — mg';
     }
   }
+}
+
+function updateRegionalLidocainePreview(weightKg = runner?.config.weightKg ?? DEFAULT_CONFIG.weightKg) {
+  const route = document.getElementById('live-lidocaine-route');
+  const concentration = document.getElementById('live-lidocaine-concentration');
+  const volume = document.getElementById('live-lidocaine-volume');
+  const epinephrine = document.getElementById('live-lidocaine-epinephrine');
+  const preview = document.getElementById('live-lidocaine-dose-preview');
+  const warning = document.getElementById('live-lidocaine-dose-warning');
+  if (!route || !concentration || !volume || !epinephrine || !preview || !warning) return null;
+  concentration.removeAttribute('aria-invalid');
+  volume.removeAttribute('aria-invalid');
+  try {
+    const dose = computeRegionalLidocaineDose({
+      route: route.value,
+      concentrationPercent: Number(concentration.value),
+      volumeMl: Number(volume.value),
+      weightKg: Number(weightKg),
+      epinephrine: epinephrine.checked,
+    });
+    preview.textContent = `${dose.totalMg.toFixed(1)} mg · ${dose.doseMgKg.toFixed(2)} mg/kg · max ${dose.maximumMg.toFixed(0)} mg`;
+    warning.hidden = !dose.warning;
+    warning.textContent = dose.warning || '';
+    return dose;
+  } catch (error) {
+    preview.textContent = 'Enter a valid concentration, volume, and patient weight.';
+    warning.hidden = false;
+    warning.textContent = error.message;
+    concentration.setAttribute('aria-invalid', 'true');
+    volume.setAttribute('aria-invalid', 'true');
+    return null;
+  }
+}
+
+function setClinicalActionStatus(label, result) {
+  if (!result.ok) {
+    setStatus(result.reason, 'error');
+    return;
+  }
+  if (result.queued) {
+    setStatus(`${label} queued at paused simulation time — resume to advance physiology.`, 'info');
+    return;
+  }
+  setStatus(`${label} recorded; effect evolves through the engine.`, 'success');
 }
 
 function renderEventLog() {
@@ -354,6 +464,26 @@ function renderSnapshot(snapshot) {
   setText('live-volatile-current-dial', Number(snapshot.vaporizer).toFixed(1));
   setText('live-volatile-et', Number(snapshot.etAgent).toFixed(1));
   setText('live-volatile-mac', Number(snapshot.mac).toFixed(2));
+  const lidocaine = formatLidocaineSnapshot(snapshot);
+  setText('live-lidocaine-total-level', lidocaine.totalLevel);
+  setText('live-lidocaine-free-level', lidocaine.freeLevel);
+  setText('live-lidocaine-effect-level', lidocaine.effectSite);
+  setText('live-lidocaine-cumulative', lidocaine.cumulativeMg);
+  setText('live-lidocaine-sensory', lidocaine.sensoryBlock);
+  setText('live-lidocaine-motor', lidocaine.motorBlock);
+  setText(
+    'live-lidocaine-infusion-state',
+    snapshot.lidocaineInfusionActive
+      ? `${Number(snapshot.lidocaineInfusionRateMgKgHour).toFixed(1)} mg/kg/hr`
+      : 'OFF',
+  );
+  setText('live-lidocaine-toxicity', lidocaine.toxicity);
+  const toxicity = document.getElementById('live-lidocaine-toxicity');
+  if (toxicity) toxicity.dataset.stage = snapshot.lidocaineToxicityStage;
+  setText('live-stimulus-raw', lidocaine.stimulusRaw);
+  setText('live-stimulus-effective', lidocaine.stimulusEffective);
+  setText('live-lipid-cumulative', lidocaine.lipidCumulative);
+  setText('live-lipid-infusion-state', snapshot.lipidInfusionActive ? 'RUNNING' : 'OFF');
   setText('live-drive-forced', Number(snapshot.forcedApneaContribution).toFixed(2));
   setText('live-drive-drug', Number(snapshot.drugDepressionContribution).toFixed(2));
   setText('live-drive-complication', Number(snapshot.complicationDriveContribution).toFixed(2));
@@ -468,6 +598,7 @@ function applyPatient(event) {
     const config = parsePatientConfig(Object.fromEntries(new FormData(form)));
     ensureRunner().applyConfig(config);
     updateDosePreviews(config.weightKg);
+    updateRegionalLidocainePreview(config.weightKg);
     setStatus('Patient applied; runner reset.', 'success');
     renderEventLog();
   } catch (error) {
@@ -659,11 +790,90 @@ function bindControls() {
     if (dial) dial.value = '0';
     setStatus(`${result.agent} vaporizer turned off.`, 'success');
   });
+  document.getElementById('live-lidocaine-bolus')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.giveLidocaineBolus({ doseMgPerKg: 1.5 });
+    setClinicalActionStatus('Lidocaine 1.5 mg/kg IV bolus', result);
+  });
+  document.getElementById('live-lidocaine-infusion-start')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const rateMgPerKgHour = Number(document.getElementById('live-lidocaine-infusion-rate')?.value);
+    const result = liveRunner.startLidocaineInfusion({ rateMgPerKgHour });
+    setClinicalActionStatus(`Lidocaine infusion ${rateMgPerKgHour} mg/kg/hr`, result);
+  });
+  document.getElementById('live-lidocaine-infusion-stop')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.stopLidocaineInfusion();
+    if (result.ok && !result.changed) setStatus('Lidocaine infusion is already off.', 'info');
+    else setClinicalActionStatus('Lidocaine infusion stopped', result);
+  });
+  for (const id of [
+    'live-lidocaine-route', 'live-lidocaine-concentration',
+    'live-lidocaine-volume', 'live-lidocaine-epinephrine',
+  ]) {
+    document.getElementById(id)?.addEventListener('input', () => updateRegionalLidocainePreview());
+    document.getElementById(id)?.addEventListener('change', () => updateRegionalLidocainePreview());
+  }
+  document.getElementById('live-lidocaine-regional-administer')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const dose = updateRegionalLidocainePreview(liveRunner.config.weightKg);
+    if (!dose) {
+      setStatus('Regional Lidocaine inputs are invalid.', 'error');
+      return;
+    }
+    const result = liveRunner.administerRegionalLidocaine({
+      route: dose.route,
+      concentrationPercent: Number(document.getElementById('live-lidocaine-concentration')?.value),
+      volumeMl: Number(document.getElementById('live-lidocaine-volume')?.value),
+      epinephrine: document.getElementById('live-lidocaine-epinephrine')?.checked === true,
+    });
+    setClinicalActionStatus(
+      `${dose.route} Lidocaine ${dose.totalMg.toFixed(1)} mg${dose.exceeded ? ' · ABOVE RECOMMENDATION' : ''}`,
+      result,
+    );
+  });
+  document.getElementById('live-stimulus-intensity')?.addEventListener('input', (event) => {
+    setText('live-stimulus-selection', Number(event.currentTarget.value).toFixed(2));
+  });
+  document.getElementById('live-stimulus-apply')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const intensity = Number(document.getElementById('live-stimulus-intensity')?.value);
+    const result = liveRunner.setSurgicalStimulus(intensity);
+    setClinicalActionStatus(`Surgical stimulus ${intensity.toFixed(2)}`, result);
+  });
+  document.getElementById('live-stimulus-off')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.setSurgicalStimulus(0);
+    const control = document.getElementById('live-stimulus-intensity');
+    if (control) control.value = '0';
+    setText('live-stimulus-selection', '0.00');
+    if (result.ok && !result.changed) setStatus('Surgical stimulus is already off.', 'info');
+    else setClinicalActionStatus('Surgical stimulus off', result);
+  });
+  document.getElementById('live-lipid-bolus')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.giveLipidEmulsionBolus();
+    setClinicalActionStatus('20% lipid bolus', result);
+  });
+  document.getElementById('live-lipid-infusion-start')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.startLipidEmulsionInfusion();
+    setClinicalActionStatus('20% lipid infusion', result);
+  });
+  document.getElementById('live-lipid-infusion-stop')?.addEventListener('click', () => {
+    const liveRunner = ensureRunner();
+    const result = liveRunner.stopLipidEmulsionInfusion();
+    if (result.ok && !result.changed) setStatus('20% lipid infusion is already off.', 'info');
+    else setClinicalActionStatus('20% lipid infusion stopped', result);
+  });
   document.getElementById('live-patient-preset')?.addEventListener('change', (event) => {
     const preset = PATIENT_PRESETS.find((candidate) => candidate.id === event.currentTarget.value);
     if (preset) fillPatientForm({ ...DEFAULT_CONFIG, ...preset.config });
   });
-  document.getElementById('live-patient-weightKg')?.addEventListener('input', (event) => updateDosePreviews(event.currentTarget.value));
+  document.getElementById('live-patient-weightKg')?.addEventListener('input', (event) => {
+    updateDosePreviews(event.currentTarget.value);
+    updateRegionalLidocainePreview(event.currentTarget.value);
+  });
   document.getElementById('live-forced-apnea')?.addEventListener('change', (event) => {
     const liveRunner = ensureRunner();
     liveRunner.setForcedApnea(event.currentTarget.checked);
