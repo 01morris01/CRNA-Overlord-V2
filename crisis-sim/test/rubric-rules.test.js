@@ -73,6 +73,52 @@ function preoxygenationTrace(start, end) {
   }));
 }
 
+function advanceRunner(runner, seconds) {
+  runner.core.stepFor(seconds);
+  runner.simTime = runner.core.simTime;
+  return runner.snapshot();
+}
+
+function createRunnerBridge(rubric, runner = new SimRunner(), criteria = CRITERIA) {
+  const session = new RubricScoringSession({ rubric, criteria });
+  let logCursor = 0;
+
+  function sync(expectedAction = null) {
+    const recorded = [];
+    while (logCursor < runner.log.length) {
+      const entry = runner.log[logCursor];
+      logCursor += 1;
+      if (typeof entry.meta?.action !== 'string') continue;
+      const { action: canonicalAction, ...meta } = entry.meta;
+      recorded.push(session.recordAction({
+        tSec: Math.round(entry.t),
+        action: canonicalAction,
+        meta,
+        snapshot: runner.snapshot(),
+      }));
+    }
+    if (expectedAction !== null) expect(recorded.at(-1)?.action).toBe(expectedAction);
+    return recorded;
+  }
+
+  function record(actionName, meta = {}) {
+    return session.recordAction({
+      tSec: Math.round(runner.simTime),
+      action: actionName,
+      meta,
+      snapshot: runner.snapshot(),
+    });
+  }
+
+  function trace(t) {
+    const snapshot = runner.snapshot();
+    session.recordTrace({ ...snapshot, t });
+    return snapshot;
+  }
+
+  return { runner, session, sync, record, trace };
+}
+
 const RESCUE_ACTIONS = [
   action(1, 'intubation_attempt_failed', { attemptNumber: 1 }),
   action(2, 'cricoid_pressure_applied'),
@@ -600,6 +646,103 @@ describe('anesthetic infusion and machine-state adapters', () => {
   });
 });
 
+describe('ordered evidence regression cases', () => {
+  test('later volatile or infusion reactivation lowers a completed shutdown to partial', () => {
+    const volatileActions = [
+      action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 2 }),
+      action(2, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 0 }),
+      action(3, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 3 }),
+    ];
+    const infusionActions = [
+      action(1, 'drug_infusion_stopped', {
+        drug: 'Propofol', previousRate: 100, rate: 0,
+      }),
+      action(2, 'drug_infusion_changed', {
+        drug: 'Propofol', previousRate: 0, rate: 100,
+      }),
+    ];
+
+    const volatile = evaluate('emergence_stop_anesthetic', { actions: volatileActions });
+    const infusion = evaluate('emergence_stop_anesthetic', { actions: infusionActions });
+
+    expect(volatile).toMatchObject({ status: 'partial', points: 1 });
+    expect(infusion).toMatchObject({ status: 'partial', points: 1 });
+    expect(volatile.evidence.actions.map(({ index }) => index)).toEqual([0, 1, 2]);
+    expect(infusion.evidence.actions.map(({ index }) => index)).toEqual([0, 1]);
+  });
+
+  test('a low TOF requires low-check then reversal then adequate repeat in ledger order', () => {
+    const low = action(10, 'tof_checked', { ratio: 0.4 });
+    const reversal = action(10, 'drug', { drug: 'Sugammadex', doseMg: 140 });
+    const adequate = action(10, 'tof_checked', { ratio: 0.95 });
+
+    expect(evaluate('emergence_tof_and_reversal', { actions: [low, adequate] }))
+      .toMatchObject({ status: 'partial', points: 1 });
+    expect(evaluate('emergence_tof_and_reversal', { actions: [low, reversal, adequate] }))
+      .toMatchObject({ status: 'performed', points: 2 });
+    expect(evaluate('emergence_tof_and_reversal', { actions: [low, adequate, reversal] }))
+      .toMatchObject({ status: 'partial', points: 1 });
+    expect(evaluate('emergence_tof_and_reversal', { actions: [adequate] }))
+      .toMatchObject({ status: 'performed', points: 2 });
+  });
+
+  test('spontaneous ventilation assessments after extubation cannot improve the score', () => {
+    const extubation = action(1, 'extubate');
+    const adequateAfter = action(2, 'spontaneous_ventilation_assessed', {}, {
+      spontaneousRR: 12, spontaneousTV: 450, spontaneousMV: 5.4,
+    });
+    const partialBefore = action(0, 'spontaneous_ventilation_assessed', {}, {
+      spontaneousRR: 10, spontaneousTV: 100, spontaneousMV: 1,
+    });
+
+    expect(evaluate('emergence_spontaneous_ventilation', {
+      actions: [extubation, adequateAfter],
+    })).toMatchObject({ status: 'not_performed', points: 0 });
+    expect(evaluate('emergence_spontaneous_ventilation', {
+      actions: [partialBefore, extubation, adequateAfter],
+    })).toMatchObject({ status: 'partial', points: 1 });
+  });
+
+  test('preoxygenation uses the longest qualifying run before induction, even after interruption', () => {
+    const longThenInterrupted = [
+      ...preoxygenationTrace(0, 180),
+      { t: 181, fio2: 0.21, spontaneousRR: 14, spontaneousTV: 490 },
+    ];
+    const shortThenInterrupted = [
+      ...preoxygenationTrace(0, 30),
+      { t: 31, fio2: 0.21, spontaneousRR: 14, spontaneousTV: 490 },
+    ];
+
+    expect(evaluate('rsi_preoxygenation', {
+      actions: [action(182, 'drug', { drug: 'Propofol', doseMg: 100 })],
+      trace: longThenInterrupted,
+    })).toMatchObject({ status: 'performed', points: 2 });
+    expect(evaluate('rsi_preoxygenation', {
+      actions: [action(32, 'drug', { drug: 'Propofol', doseMg: 100 })],
+      trace: shortThenInterrupted,
+    })).toMatchObject({ status: 'partial', points: 1 });
+    expect(evaluate('rsi_preoxygenation', {
+      actions: [action(180, 'drug', { drug: 'Propofol', doseMg: 100 })],
+      trace: preoxygenationTrace(0, 178),
+    })).toMatchObject({ status: 'partial', points: 1 });
+  });
+
+  test('same-time cricoid release requires confirm action earlier in ledger order', () => {
+    const applied = action(0, 'cricoid_pressure_applied');
+    const success = action(1, 'intubation_attempt_succeeded', { attemptNumber: 1 });
+    const confirmation = action(6, 'confirm_etco2');
+    const release = action(6, 'cricoid_pressure_released');
+    const trace = ventilationTrace(1, 5);
+
+    expect(evaluate('rsi_cricoid_release_after_confirmation', {
+      actions: [applied, success, confirmation, release], trace,
+    })).toMatchObject({ status: 'performed', points: 2 });
+    expect(evaluate('rsi_cricoid_release_after_confirmation', {
+      actions: [applied, success, release, confirmation], trace,
+    })).toMatchObject({ status: 'partial', points: 1 });
+  });
+});
+
 describe('RubricScoringSession engine integration', () => {
   test('uses canonical actions and a real SimRunner snapshot to score Standard IV ventilation', () => {
     const runner = new SimRunner();
@@ -661,6 +804,227 @@ describe('RubricScoringSession engine integration', () => {
     expect(final.items.filter(({ scoringSource }) => scoringSource === 'ENGINE_OBSERVABLE'))
       .not.toContainEqual(expect.objectContaining({ points: null }));
     expect(session.finalize({ tSec: 999 })).toBe(final);
+  });
+});
+
+describe('real engine rubric evidence bridge', () => {
+  function liveItem(session, itemId) {
+    return session.getLiveResult().items.find(({ id }) => id === itemId);
+  }
+
+  test('uses actual volatile, NMB, reversal, TOF, and spontaneous engine state for emergence', () => {
+    const bridge = createRunnerBridge(emergenceRaw);
+    const { runner, session } = bridge;
+
+    runner.setVolatile({ agent: 'Sevoflurane', dialPercent: 2 });
+    bridge.sync('volatile_changed');
+    expect(runner.snapshot().vaporizer).toBe(2);
+    runner.setVolatile({ agent: 'Sevoflurane', dialPercent: 0 });
+    bridge.sync('volatile_changed');
+    expect(liveItem(session, 'emergence-2')).toMatchObject({ points: 2 });
+    runner.setVolatile({ agent: 'Sevoflurane', dialPercent: 3 });
+    bridge.sync('volatile_changed');
+    expect(runner.snapshot().vaporizer).toBe(3);
+    expect(liveItem(session, 'emergence-2')).toMatchObject({ points: 1 });
+
+    runner.giveBolus('Rocuronium', 42);
+    bridge.sync('drug');
+    advanceRunner(runner, 120);
+    const lowCheck = runner.checkTrainOfFour();
+    bridge.sync('tof_checked');
+    expect(lowCheck.ratio).toBeLessThan(0.9);
+    runner.giveBolus('Sugammadex', 280);
+    bridge.sync('drug');
+    advanceRunner(runner, 300);
+    const recoveredCheck = runner.checkTrainOfFour();
+    bridge.sync('tof_checked');
+    expect(recoveredCheck.ratio).toBeGreaterThanOrEqual(0.9);
+    expect(liveItem(session, 'emergence-3')).toMatchObject({ points: 2 });
+
+    const spontaneous = createRunnerBridge(emergenceRaw);
+    expect(spontaneous.runner.setAirwayDevice('intubated').ok).toBe(true);
+    const assessment = spontaneous.runner.snapshot();
+    expect(assessment.spontaneousRR).toBeGreaterThanOrEqual(8);
+    expect(assessment.spontaneousTV).toBeGreaterThanOrEqual(350);
+    expect(assessment.spontaneousMV).toBeGreaterThanOrEqual(4);
+    spontaneous.record('spontaneous_ventilation_assessed');
+    expect(spontaneous.runner.extubate().ok).toBe(true);
+    spontaneous.sync('extubate');
+    expect(liveItem(spontaneous.session, 'emergence-4')).toMatchObject({ points: 2 });
+
+    const afterExtubation = createRunnerBridge(emergenceRaw);
+    expect(afterExtubation.runner.setAirwayDevice('intubated').ok).toBe(true);
+    expect(afterExtubation.runner.extubate().ok).toBe(true);
+    afterExtubation.sync('extubate');
+    afterExtubation.record('spontaneous_ventilation_assessed');
+    expect(liveItem(afterExtubation.session, 'emergence-4')).toMatchObject({ points: 0 });
+  });
+
+  test('uses actual mask PPV and NMB actions for paired Standard IV outcomes', () => {
+    const compliant = createRunnerBridge(standardRaw);
+    const ppv = compliant.runner.deliverMaskVentilation({
+      durationSeconds: 1, tidalVolumeMl: 500, respiratoryRate: 12,
+    });
+    compliant.sync('mask_ppv_started');
+    expect(ppv.minuteVentilation).toBe(6);
+    expect(compliant.runner.snapshot().airwayDevice).toBe('mask');
+    compliant.runner.giveBolus('Rocuronium', 42);
+    compliant.sync('drug');
+    expect(liveItem(compliant.session, 'standard-7')).toMatchObject({ points: 2 });
+
+    const omitted = createRunnerBridge(standardRaw);
+    omitted.runner.giveBolus('Rocuronium', 42);
+    omitted.sync('drug');
+    omitted.runner.configureIntubationAttempts({
+      failedIntubationAttempts: [], attemptDurationSeconds: 1,
+    });
+    omitted.runner.attemptIntubation();
+    omitted.sync('intubation_attempt_started');
+    expect(liveItem(omitted.session, 'standard-7')).toMatchObject({ points: 0 });
+  });
+
+  test('scores a complete RSI run from actual preoxygenation, airway, and machine state', () => {
+    const bridge = createRunnerBridge(rsiRaw);
+    const { runner, session } = bridge;
+    runner.preoxygenate();
+    bridge.sync('preoxygenate');
+    for (let second = 1; second <= 180; second += 1) {
+      const snapshot = advanceRunner(runner, 1);
+      expect(snapshot.fio2).toBeGreaterThanOrEqual(0.99);
+      expect(snapshot.spontaneousRR).toBeGreaterThan(0);
+      expect(snapshot.spontaneousTV).toBeGreaterThan(0);
+      bridge.trace(second);
+    }
+
+    runner.giveBolus('Propofol', 140);
+    bridge.sync('drug');
+    runner.giveBolus('Rocuronium', 50);
+    bridge.sync('drug');
+    runner.applyCricoidPressure();
+    bridge.sync('cricoid_pressure_applied');
+    runner.configureIntubationAttempts({
+      failedIntubationAttempts: [], attemptDurationSeconds: 1,
+    });
+    runner.attemptIntubation();
+    bridge.sync('intubation_attempt_started');
+    advanceRunner(runner, 1);
+    bridge.sync('intubation_attempt_succeeded');
+    expect(runner.snapshot().airwayDevice).toBe('intubated');
+
+    const machinePatch = {
+      setTidalVolume: 500,
+      setRespiratoryRate: 12,
+      o2FlowLPerMin: 2,
+      airFlowLPerMin: 2,
+      n2oFlowLPerMin: 0,
+      setFiO2: 0.5,
+    };
+    runner.setMachine({ mode: 1, ...machinePatch });
+    bridge.record('vent_mode_changed', { previousMode: 0, mode: 1 });
+    bridge.record('machine_settings_changed', { patch: machinePatch });
+    runner.setVolatile({ agent: 'Sevoflurane', dialPercent: 2 });
+    bridge.sync('volatile_changed');
+
+    let ventilated = runner.snapshot();
+    for (let elapsed = 0; elapsed < 20 && !ventilated.capnogramPresent; elapsed += 1) {
+      ventilated = advanceRunner(runner, 1);
+    }
+    expect(ventilated).toMatchObject({
+      airwayDevice: 'intubated',
+      capnogramPresent: true,
+      ventMode: 1,
+      ventSetTV: 500,
+      ventSetRR: 12,
+    });
+    expect(ventilated.mechanicalMV).toBeGreaterThan(0);
+    expect(ventilated.etco2).toBeGreaterThan(0);
+    bridge.record('confirm_etco2');
+    const firstTraceSecond = Math.round(runner.simTime);
+    for (let offset = 0; offset < 5; offset += 1) {
+      if (offset > 0) advanceRunner(runner, 1);
+      const actual = bridge.trace(firstTraceSecond + offset);
+      expect(actual.capnogramPresent).toBe(true);
+      expect(actual.mechanicalMV).toBeGreaterThan(0);
+    }
+    runner.releaseCricoidPressure();
+    bridge.sync('cricoid_pressure_released');
+
+    for (const itemId of [
+      'rsi-7', 'rsi-9', 'rsi-10a', 'rsi-10c', 'rsi-11', 'rsi-26', 'rsi-29',
+      'rsi-30', 'rsi-32', 'rsi-33', 'rsi-34', 'rsi-35', 'rsi-36', 'rsi-37', 'rsi-42',
+    ]) {
+      expect(liveItem(session, itemId), itemId).toMatchObject({ points: 2 });
+    }
+  });
+
+  test('uses actual failed attempts and rescue ventilation for conditional RSI rules', () => {
+    const rescued = createRunnerBridge(rsiRaw);
+    rescued.runner.configureIntubationAttempts({
+      failedIntubationAttempts: [1], attemptDurationSeconds: 1,
+    });
+    rescued.runner.attemptIntubation();
+    rescued.sync('intubation_attempt_started');
+    advanceRunner(rescued.runner, 1);
+    rescued.sync('intubation_attempt_failed');
+    rescued.runner.applyCricoidPressure();
+    rescued.sync('cricoid_pressure_applied');
+    const ppv = rescued.runner.deliverMaskVentilation({
+      durationSeconds: 1,
+      tidalVolumeMl: 500,
+      respiratoryRate: 12,
+      cricoidPressure: true,
+    });
+    rescued.sync('mask_ppv_started');
+    expect(ppv.minuteVentilation).toBe(6);
+    advanceRunner(rescued.runner, 1);
+    rescued.sync('mask_ppv_completed');
+    rescued.runner.attemptIntubation();
+    rescued.sync('intubation_attempt_started');
+    advanceRunner(rescued.runner, 1);
+    rescued.sync('intubation_attempt_succeeded');
+    expect(liveItem(rescued.session, 'rsi-28')).toMatchObject({ points: 2 });
+    expect(liveItem(rescued.session, 'rsi-41')).toMatchObject({ points: 2 });
+    expect(liveItem(rescued.session, 'rsi-42')).toMatchObject({ points: 2 });
+
+    const omitted = createRunnerBridge(rsiRaw);
+    omitted.runner.configureIntubationAttempts({
+      failedIntubationAttempts: [1, 2], attemptDurationSeconds: 1,
+    });
+    omitted.runner.attemptIntubation();
+    omitted.sync('intubation_attempt_started');
+    advanceRunner(omitted.runner, 1);
+    omitted.sync('intubation_attempt_failed');
+    omitted.runner.attemptIntubation();
+    omitted.sync('intubation_attempt_started');
+    expect(liveItem(omitted.session, 'rsi-28')).toMatchObject({ points: 0 });
+    expect(liveItem(omitted.session, 'rsi-41')).toMatchObject({ points: 0 });
+    advanceRunner(omitted.runner, 1);
+    omitted.sync('intubation_attempt_failed');
+    omitted.runner.attemptIntubation();
+    omitted.sync('intubation_attempt_started');
+    expect(liveItem(omitted.session, 'rsi-42')).toMatchObject({ points: 0 });
+
+    const ppvBeforeAttempt = createRunnerBridge(rsiRaw);
+    ppvBeforeAttempt.runner.setMachine({
+      o2FlowLPerMin: 0, airFlowLPerMin: 5, n2oFlowLPerMin: 0, setFiO2: 0.21,
+    });
+    for (let second = 1; second <= 5; second += 1) {
+      const roomAir = advanceRunner(ppvBeforeAttempt.runner, 1);
+      expect(roomAir.fio2).toBeLessThan(0.99);
+      ppvBeforeAttempt.trace(second);
+    }
+    ppvBeforeAttempt.runner.giveBolus('Propofol', 140);
+    ppvBeforeAttempt.sync('drug');
+    expect(liveItem(ppvBeforeAttempt.session, 'rsi-7')).toMatchObject({ points: 0 });
+    ppvBeforeAttempt.runner.deliverMaskVentilation({
+      durationSeconds: 1, tidalVolumeMl: 500, respiratoryRate: 12,
+    });
+    ppvBeforeAttempt.sync('mask_ppv_started');
+    advanceRunner(ppvBeforeAttempt.runner, 1);
+    ppvBeforeAttempt.sync('mask_ppv_completed');
+    ppvBeforeAttempt.runner.attemptIntubation();
+    ppvBeforeAttempt.sync('intubation_attempt_started');
+    expect(liveItem(ppvBeforeAttempt.session, 'rsi-11')).toMatchObject({ points: 0 });
   });
 });
 

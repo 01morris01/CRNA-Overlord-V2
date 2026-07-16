@@ -387,38 +387,40 @@ function evaluateStopAnesthetic({ actionEntries, trace, finalized, ruleId }) {
   }
 
   const sourceStates = [];
-  const reductionCitations = [];
+  const stateChangeCitations = [];
   for (const source of sources.values()) {
     if (source.type === 'volatile') {
       const changes = actionEntries.filter((entry) => (
         entry.record.action === 'volatile_changed'
         && entry.record.tSec >= source.time
         && typeof ownValue(entry.record.meta, 'dialPercent') === 'number'
-        && (!source.name
-          || String(ownValue(entry.record.meta, 'agent')).toLocaleLowerCase('en-US') === source.name)
       ));
-      const reduction = changes.filter((entry) => (
+      const reduced = changes.some((entry) => (
         ownValue(entry.record.meta, 'dialPercent') < source.initialRate
-      )).at(-1);
+      ));
+      const latest = changes.at(-1);
       sourceStates.push({
-        reduced: Boolean(reduction),
-        remains: reduction ? ownValue(reduction.record.meta, 'dialPercent') > 0 : true,
+        reduced,
+        remains: latest ? ownValue(latest.record.meta, 'dialPercent') > 0 : true,
       });
-      if (reduction) reductionCitations.push(actionCitation(reduction, ['agent', 'dialPercent']));
+      stateChangeCitations.push(...changes.map((entry) => (
+        actionCitation(entry, ['agent', 'dialPercent'])
+      )));
     } else {
       const changes = actionEntries
         .map((entry) => ({ entry, infusion: infusionAction(entry) }))
         .filter(({ entry, infusion }) => (
           infusion?.drug === source.name && entry.record.tSec >= source.time
         ));
-      const reduction = changes.filter(({ infusion }) => infusion.rate < source.initialRate).at(-1);
+      const reduced = changes.some(({ infusion }) => infusion.rate < source.initialRate);
+      const latest = changes.at(-1);
       sourceStates.push({
-        reduced: Boolean(reduction),
-        remains: reduction ? reduction.infusion.rate > 0 : true,
+        reduced,
+        remains: latest ? latest.infusion.rate > 0 : true,
       });
-      if (reduction) reductionCitations.push(actionCitation(
-        reduction.entry, reduction.infusion.keys,
-      ));
+      stateChangeCitations.push(...changes.map(({ entry, infusion }) => (
+        actionCitation(entry, infusion.keys)
+      )));
     }
   }
 
@@ -431,7 +433,7 @@ function evaluateStopAnesthetic({ actionEntries, trace, finalized, ruleId }) {
     .filter((citation, index, citations) => (
       citations.findIndex((candidate) => candidate.index === citation.index) === index
     ));
-  const actionCitations = [...sourceActionCitations, ...reductionCitations]
+  const actionCitations = [...sourceActionCitations, ...stateChangeCitations]
     .filter((citation, index, citations) => (
       citations.findIndex((candidate) => candidate.index === citation.index) === index
     ))
@@ -468,15 +470,26 @@ function evaluateTof({ actionEntries, criteria, finalized, ruleId }) {
     ...reversals.map((entry) => actionCitation(entry, ['drug', 'doseMg'])),
   ].sort((left, right) => left.index - right.index);
   if (latest && actionRatio(latest) >= criteria.tofRecoveryRatio) {
-    return result('performed', ruleId, citations);
+    const latestLowBefore = checks.filter((entry) => (
+      entry.index < latest.index && actionRatio(entry) < criteria.tofRecoveryRatio
+    )).at(-1);
+    if (!latestLowBefore) return result('performed', ruleId, citations);
+    const orderedReversal = reversals.some((entry) => (
+      entry.index > latestLowBefore.index && entry.index < latest.index
+    ));
+    return result(orderedReversal ? 'performed' : 'partial', ruleId, citations);
   }
   if (checks.length > 0 || reversals.length > 0) return result('partial', ruleId, citations);
   return result(extubation || finalized ? 'not_performed' : 'pending', ruleId, citations);
 }
 
 function evaluateSpontaneous({ actionEntries, criteria, finalized, ruleId }) {
+  const extubation = actionEntries.find(({ record }) => record.action === 'extubate');
+  const cutoff = extubation?.index ?? Infinity;
   const assessment = actionEntries.filter(
-    ({ record }) => record.action === 'spontaneous_ventilation_assessed',
+    (entry) => (
+      entry.index < cutoff && entry.record.action === 'spontaneous_ventilation_assessed'
+    ),
   ).at(-1);
   if (!assessment) {
     return result(endDiscriminator(actionEntries, finalized) ? 'not_performed' : 'pending', ruleId);
@@ -533,7 +546,6 @@ function qualifyingPreoxygenation(trace, induction, criteria) {
   const available = traceEntries(trace)
     .filter(({ sample }) => Number.isSafeInteger(sample.t) && sample.t <= induction.record.tSec)
     .sort((left, right) => left.sample.t - right.sample.t);
-  const last = available.at(-1);
   const qualifies = ({ sample }) => (
     typeof sample.fio2 === 'number'
     && sample.fio2 >= criteria.preoxygenationFiO2Min
@@ -542,14 +554,20 @@ function qualifyingPreoxygenation(trace, induction, criteria) {
     && typeof sample.spontaneousTV === 'number'
     && sample.spontaneousTV > 0
   );
-  if (!last || induction.record.tSec - last.sample.t > 1 || !qualifies(last)) return [];
-  const run = [last];
-  for (let index = available.length - 2; index >= 0; index -= 1) {
-    const candidate = available[index];
-    if (!qualifies(candidate) || run[0].sample.t - candidate.sample.t !== 1) break;
-    run.unshift(candidate);
+  let current = [];
+  let longest = [];
+  for (const candidate of available) {
+    if (!qualifies(candidate)) {
+      current = [];
+      continue;
+    }
+    if (current.length > 0 && candidate.sample.t - current.at(-1).sample.t !== 1) {
+      current = [];
+    }
+    current.push(candidate);
+    if (current.length > longest.length) longest = [...current];
   }
-  return run;
+  return longest;
 }
 
 function evaluatePreoxygenation({ actionEntries, trace, criteria, finalized, ruleId }) {
@@ -560,7 +578,7 @@ function evaluatePreoxygenation({ actionEntries, trace, criteria, finalized, rul
   const traceCitations = run.map((entry) => (
     traceCitation(entry, ['fio2', 'spontaneousRR', 'spontaneousTV'])
   ));
-  const duration = run.length > 0 ? induction.record.tSec - run[0].sample.t : 0;
+  const duration = run.length;
   if (duration >= criteria.preoxygenationDurationSec) {
     return result('performed', ruleId, actionCitations, traceCitations);
   }
@@ -772,12 +790,10 @@ function evaluateCricoidRelease({ actionEntries, trace, criteria, finalized, rul
   ].sort((left, right) => left.index - right.index);
   if (applied && release && applied.index < release.index
     && facts.success && release.index > facts.success.index) {
-    const confirmationTime = Math.max(
-      facts.confirmation?.record.tSec ?? Infinity,
-      facts.run.at(-1)?.sample.t ?? Infinity,
-    );
+    const waveformCompletedAt = facts.run.at(-1)?.sample.t ?? Infinity;
     if (facts.confirmation && facts.run.length >= criteria.etco2ConfirmationSamples
-      && release.record.tSec >= confirmationTime) {
+      && facts.confirmation.index < release.index
+      && release.record.tSec >= waveformCompletedAt) {
       return result('performed', ruleId, citations, etco2.trace);
     }
     return result('partial', ruleId, citations, etco2.trace);
@@ -1078,7 +1094,7 @@ export function detectRubricViolations({
       ));
       if (preoxygenationItem) {
         const run = qualifyingPreoxygenation(trace, trigger, resolvedCriteria);
-        const duration = run.length > 0 ? trigger.record.tSec - run[0].sample.t : 0;
+        const duration = run.length;
         if (duration < resolvedCriteria.preoxygenationDurationSec) {
           add(preoxygenationItem, {
             actions: [],
