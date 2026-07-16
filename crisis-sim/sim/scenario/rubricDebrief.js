@@ -177,6 +177,9 @@ function validateItems(sessionResult) {
     if (!Object.hasOwn(SOURCE_LABELS, item.scoringSource)) {
       throw new RangeError(`items[${index}].scoringSource is not supported`);
     }
+    if (item.scoringSource === 'UNSCOREABLE') {
+      throw new RangeError(`items[${index}] cannot be UNSCOREABLE in a finalized rubric result`);
+    }
     if (typeof item.note !== 'string') throw new TypeError(`items[${index}].note must be a string`);
     if (item.evidence !== null && !isPlainObject(item.evidence)) {
       throw new TypeError(`items[${index}].evidence must be null or a plain object`);
@@ -204,6 +207,22 @@ function validateFinalizedSession(sessionResult) {
     throw new TypeError('sessionResult must be a successful finalized rubric result');
   }
   requireString(sessionResult.rubricId, 'sessionResult.rubricId');
+  if (sessionResult.provisional !== false) {
+    throw new TypeError('sessionResult.provisional must be exactly false');
+  }
+  if (sessionResult.incomplete !== false) {
+    throw new TypeError('sessionResult.incomplete must be exactly false');
+  }
+  for (const field of [
+    'pendingInstructorCount',
+    'pendingEngineCount',
+    'pendingUnscoreableCount',
+  ]) {
+    if (!Number.isSafeInteger(sessionResult[field]) || sessionResult[field] !== 0) {
+      throw new TypeError(`sessionResult.${field} must be exactly integer zero`);
+    }
+  }
+  requireFinite(sessionResult.finalizedAtSec, 'sessionResult.finalizedAtSec', { min: 0 });
   requireFinite(sessionResult.rawPoints, 'sessionResult.rawPoints', { min: 0 });
   requireFinite(sessionResult.maxPoints, 'sessionResult.maxPoints', { min: Number.MIN_VALUE });
   requireFinite(sessionResult.percentage, 'sessionResult.percentage', { min: 0, max: 100 });
@@ -225,6 +244,12 @@ function validateFinalizedSession(sessionResult) {
   if (omitted.length !== sessionResult.criticalItemsOmitted.length
     || omitted.some((id, index) => id !== sessionResult.criticalItemsOmitted[index])) {
     throw new RangeError('sessionResult.criticalItemsOmitted does not match finalized items');
+  }
+  const expectedOutcome = sessionResult.percentage >= 85 && omitted.length === 0
+    ? 'PASS'
+    : 'NOT PASS';
+  if (sessionResult.outcome !== expectedOutcome) {
+    throw new RangeError(`sessionResult.outcome must be ${expectedOutcome}`);
   }
 }
 
@@ -264,10 +289,7 @@ function selectActionSnapshot(snapshot, fields) {
   for (const field of fields) {
     if (!Object.hasOwn(snapshot, field)) continue;
     const value = snapshot[field];
-    if (typeof value === 'number' && !Number.isFinite(value)) continue;
-    if (value === null || ['string', 'number', 'boolean'].includes(typeof value)) {
-      selected[field] = value;
-    }
+    if (typeof value === 'number' && Number.isFinite(value)) selected[field] = value;
   }
   return selected;
 }
@@ -301,7 +323,7 @@ function validateConsequenceItem(item) {
 const CONSEQUENCE_RULES = Object.freeze({
   emergence_tof_and_reversal: Object.freeze({
     triggerAction: 'extubate',
-    snapshotFields: Object.freeze(['tofRatio', 'effectiveNmbBlockade', 'airwayDevice']),
+    snapshotFields: Object.freeze(['tofRatio']),
   }),
   emergence_spontaneous_ventilation: Object.freeze({
     triggerAction: 'extubate',
@@ -309,8 +331,6 @@ const CONSEQUENCE_RULES = Object.freeze({
       'spontaneousRR',
       'spontaneousTV',
       'spontaneousMV',
-      'respiratoryMuscleCapability',
-      'airwayDevice',
     ]),
   }),
 });
@@ -352,6 +372,9 @@ function observedConsequenceFromCopied(item, copiedActions, copiedTrace, windowS
   if (triggerIndex < 0) return null;
   const triggerAction = copiedActions[triggerIndex];
   const endSec = triggerAction.tSec + windowSec;
+  if (!Number.isFinite(endSec)) {
+    throw new RangeError('observation window end must be finite');
+  }
   const actionSnapshot = selectActionSnapshot(triggerAction.snapshot, rule.snapshotFields);
   const samples = copiedTrace.filter((sample) => (
     sample.t >= triggerAction.tSec && sample.t <= endSec
@@ -360,10 +383,14 @@ function observedConsequenceFromCopied(item, copiedActions, copiedTrace, windowS
   for (const sample of samples) {
     if (!Number.isFinite(sample.spo2)) continue;
     if (spo2Nadir === null || sample.spo2 < spo2Nadir.value) {
+      const elapsedSec = sample.t - triggerAction.tSec;
+      if (!Number.isFinite(elapsedSec)) {
+        throw new RangeError('observation elapsed time must be finite');
+      }
       spo2Nadir = {
         value: sample.spo2,
         tSec: sample.t,
-        elapsedSec: sample.t - triggerAction.tSec,
+        elapsedSec,
       };
     }
   }

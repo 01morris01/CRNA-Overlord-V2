@@ -205,6 +205,57 @@ describe('pure rubric debrief composition', () => {
     expect(() => buildRubricDebrief({ baseResult: base, sessionResult: unsafe }))
       .toThrow(/unsafe|dangerous/i);
   });
+
+  test.each([
+    ['provisional result', (result) => { result.provisional = true; }],
+    ['missing provisional marker', (result) => { delete result.provisional; }],
+    ['incomplete result', (result) => { result.incomplete = true; }],
+    ['pending instructor count', (result) => { result.pendingInstructorCount = 1; }],
+    ['pending engine count', (result) => { result.pendingEngineCount = 1; }],
+    ['pending unscoreable count', (result) => { result.pendingUnscoreableCount = 1; }],
+    ['missing pending count', (result) => { delete result.pendingEngineCount; }],
+    ['null finalization time', (result) => { result.finalizedAtSec = null; }],
+    ['negative finalization time', (result) => { result.finalizedAtSec = -1; }],
+    ['unscoreable item', (result) => {
+      result.items[0].scoringSource = 'UNSCOREABLE';
+      result.items[0].evidence = null;
+    }],
+    ['pending item', (result) => {
+      result.items[0].points = null;
+      result.items[0].status = 'pending';
+    }],
+    ['raw point mismatch', (result) => { result.rawPoints += 1; }],
+    ['maximum mismatch', (result) => { result.maxPoints += 2; }],
+    ['percentage mismatch', (result) => { result.percentage += 1; }],
+    ['critical omission mismatch', (result) => { result.criticalItemsOmitted = []; }],
+    ['zero-percent PASS', (result) => {
+      for (const item of result.items) {
+        item.points = 0;
+        item.status = 'not_performed';
+      }
+      result.rawPoints = 0;
+      result.percentage = 0;
+      result.criticalItemsOmitted = result.items
+        .filter(({ critical }) => critical)
+        .map(({ id }) => id);
+      result.outcome = 'PASS';
+    }],
+    ['all-performed NOT PASS', (result) => {
+      for (const item of result.items) {
+        item.points = 2;
+        item.status = 'performed';
+      }
+      result.rawPoints = result.maxPoints;
+      result.percentage = 100;
+      result.criticalItemsOmitted = [];
+      result.outcome = 'NOT PASS';
+    }],
+  ])('rejects a forged authoritative session: %s', (_label, mutate) => {
+    const sessionResult = finalizedFor(emergenceRubric);
+    mutate(sessionResult);
+    expect(() => buildRubricDebrief({ baseResult: baseResult(), sessionResult }))
+      .toThrow(/final|sessionResult|pending|outcome|item|point|percent|critical|unscoreable/i);
+  });
 });
 
 describe('observed consequences', () => {
@@ -240,9 +291,11 @@ describe('observed consequences', () => {
       expect(item.observedConsequence.statement).not.toMatch(/caus|resulted|because|led to/i);
     }
     expect(debrief.rubricResult.items.find(({ id }) => id === 'emergence-3')
-      .observedConsequence.actionSnapshot.tofRatio).toBe(action.snapshot.tofRatio);
+      .observedConsequence.actionSnapshot).toEqual({
+        tofRatio: action.snapshot.tofRatio,
+      });
     expect(debrief.rubricResult.items.find(({ id }) => id === 'emergence-4')
-      .observedConsequence.actionSnapshot).toMatchObject({
+      .observedConsequence.actionSnapshot).toEqual({
         spontaneousRR: action.snapshot.spontaneousRR,
         spontaneousTV: action.snapshot.spontaneousTV,
         spontaneousMV: action.snapshot.spontaneousMV,
@@ -266,6 +319,71 @@ describe('observed consequences', () => {
     expect(consequence.actionSnapshot).not.toHaveProperty('spontaneousTV');
     expect(consequence.extrema).not.toHaveProperty('spo2Nadir');
     expect(consequence.statement).not.toMatch(/tidal volume|\bTV\b|SpO2|SpO₂/i);
+  });
+
+  test('uses exact rule-specific numeric action fields and omits unrelated values', () => {
+    const { debrief } = unsafeEmergenceRun();
+    const actions = structuredClone(debrief.actionTimeline);
+    const extubate = actions.find(({ action }) => action === 'extubate');
+    extubate.snapshot = {
+      tofRatio: 0.71,
+      effectiveNmbBlockade: 0.44,
+      airwayDevice: 'extubated',
+      spontaneousRR: 9,
+      spontaneousTV: 180,
+      spontaneousMV: 1.62,
+      respiratoryMuscleCapability: 0.56,
+      unrelatedNull: null,
+      unrelatedString: 'measured',
+      unrelatedBoolean: true,
+    };
+    const trace = structuredClone(debrief.physiologicTrace);
+    const tofItem = structuredClone(
+      debrief.rubricResult.items.find(({ id }) => id === 'emergence-3'),
+    );
+    const ventilationItem = structuredClone(
+      debrief.rubricResult.items.find(({ id }) => id === 'emergence-4'),
+    );
+
+    expect(observedConsequence({ itemResult: tofItem, actions, trace }).actionSnapshot)
+      .toEqual({ tofRatio: 0.71 });
+    expect(observedConsequence({ itemResult: ventilationItem, actions, trace }).actionSnapshot)
+      .toEqual({ spontaneousRR: 9, spontaneousTV: 180, spontaneousMV: 1.62 });
+
+    extubate.snapshot.tofRatio = '0.71';
+    extubate.snapshot.spontaneousRR = null;
+    extubate.snapshot.spontaneousTV = '180';
+    extubate.snapshot.spontaneousMV = false;
+    const noNumericTof = observedConsequence({ itemResult: tofItem, actions, trace });
+    const noNumericVentilation = observedConsequence({
+      itemResult: ventilationItem,
+      actions,
+      trace,
+    });
+    expect(noNumericTof.actionSnapshot).toEqual({});
+    expect(noNumericVentilation.actionSnapshot).toEqual({});
+    expect(noNumericTof.statement).not.toMatch(/TOF ratio|block|airway/i);
+    expect(noNumericVentilation.statement).not.toMatch(/spontaneous|tidal|ventilation/i);
+  });
+
+  test('rejects an overflowing finite observation window before producing output', () => {
+    const { debrief } = unsafeEmergenceRun();
+    const item = structuredClone(
+      debrief.rubricResult.items.find(({ id }) => id === 'emergence-3'),
+    );
+    const actions = [{
+      tSec: Number.MAX_VALUE,
+      action: 'extubate',
+      meta: {},
+      snapshot: { tofRatio: 0.7 },
+    }];
+
+    expect(() => observedConsequence({
+      itemResult: item,
+      actions,
+      trace: [],
+      windowSec: Number.MAX_VALUE,
+    })).toThrow(/window|overflow|finite/i);
   });
 
   test('keeps instructor failures human-scored and consequence-free', () => {
