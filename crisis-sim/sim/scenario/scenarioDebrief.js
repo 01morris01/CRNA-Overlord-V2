@@ -1,6 +1,7 @@
 /* Faithful port of OperatingRoom.Simulation.ScenarioDebrief + SimulationResult.
    completedAtUtc is omitted (non-deterministic; excluded from parity). */
 import { mul, div, RoundToInt } from '../float32.js';
+import { buildRubricDebrief } from './rubricDebrief.js';
 
 const pretty = (key) => (!key ? '' : key.replace(/_/g, ' '));
 
@@ -17,7 +18,16 @@ function fmt0(x) {
   return String(s < 0 ? -r : r);
 }
 
-export function buildDebrief(def, run, scoring, log, totalScore, maxScore, durationSec) {
+export function buildDebrief(
+  def,
+  run,
+  scoring,
+  log,
+  totalScore,
+  maxScore,
+  durationSec,
+  rubricSessionResult = null,
+) {
   const r = {
     scenarioId: def.id,
     title: def.title,
@@ -60,7 +70,9 @@ export function buildDebrief(def, run, scoring, log, totalScore, maxScore, durat
     r.reviewTags = (def.debrief.reviewTags && def.debrief.reviewTags.length > 0)
       ? def.debrief.reviewTags : (def.tags || []);
   }
-  return r;
+  return rubricSessionResult === null
+    ? r
+    : buildRubricDebrief({ baseResult: r, sessionResult: rubricSessionResult });
 }
 
 export function buildLidocaineAttribution(lidocaineSystem, tofCheckHistory = []) {

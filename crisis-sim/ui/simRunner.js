@@ -413,6 +413,7 @@ export class SimRunner {
     this.activeSeed = SEED;
     this._activeRubricScenario = null;
     this._loadedRubricScenario = null;
+    this._finalizedRubricResult = null;
     this._rafLoop = this._rafLoop.bind(this);
     this._tick = this._tick.bind(this);
     this.build();
@@ -454,6 +455,7 @@ export class SimRunner {
     this.tofCheckHistory = [];
     this._instructorNmbTarget = null;
     this.rubricSession = null;
+    this._finalizedRubricResult = null;
     this.activeSeed = seed;
     this._activeRubricScenario = null;
   }
@@ -651,6 +653,7 @@ export class SimRunner {
     this.tofCheckHistory = candidate.tofCheckHistory;
     this._instructorNmbTarget = candidate._instructorNmbTarget;
     this.rubricSession = candidate.rubricSession;
+    this._finalizedRubricResult = candidate._finalizedRubricResult;
     this.activeSeed = candidate.activeSeed;
     this._activeRubricScenario = candidate._activeRubricScenario;
     this._loadedRubricScenario = candidate._loadedRubricScenario;
@@ -733,7 +736,44 @@ export class SimRunner {
     const session = new RubricScoringSession({ rubric, criteria, seed: this.activeSeed });
     session.recordTrace(this.compactRubricSnapshot(0));
     this.rubricSession = session;
+    this._finalizedRubricResult = null;
     return session;
+  }
+
+  _copyFinalizedRubricResult(result) {
+    const copied = copyJsonInput(result, 'finalized rubric result');
+    return {
+      ...copied,
+      denominatorWarnings: copyJsonInput(
+        this.rubricSession.rubric.discrepancies,
+        'rubric denominator warnings',
+      ),
+    };
+  }
+
+  _currentRubricTime() {
+    const live = this.rubricSession.getLiveResult();
+    return Math.max(
+      this.core.tickCount / FIXED_TICKS_PER_SECOND,
+      this.a?.timeSec ?? 0,
+      live.actionLedger.at(-1)?.tSec ?? 0,
+      live.trace.at(-1)?.t ?? 0,
+    );
+  }
+
+  finalizeRubric({ tSec } = {}) {
+    if (!this.rubricSession) {
+      return { ok: false, reason: 'NO_RUBRIC_SESSION', pendingItemIds: [] };
+    }
+    if (this._finalizedRubricResult !== null) {
+      return copyJsonInput(this._finalizedRubricResult, 'finalized rubric result');
+    }
+    const finalized = this.rubricSession.finalize({
+      tSec: tSec === undefined ? this._currentRubricTime() : tSec,
+    });
+    if (!finalized.ok) return copyJsonInput(finalized, 'rubric finalization result');
+    this._finalizedRubricResult = this._copyFinalizedRubricResult(finalized);
+    return copyJsonInput(this._finalizedRubricResult, 'finalized rubric result');
   }
 
   compactRubricSnapshot(t = this.simTime) {
@@ -1236,6 +1276,25 @@ export class SimRunner {
 
   buildDebrief() {
     const def = this.s.activeScenario || liveScenarioDefinition(this.config);
+    let finalizedRubricResult = null;
+    if (this.rubricSession) {
+      if (this._finalizedRubricResult === null) {
+        const live = this.rubricSession.getLiveResult();
+        if (live.ok === true && live.finalized === true) {
+          this._finalizedRubricResult = this._copyFinalizedRubricResult(live);
+        } else {
+          const error = new Error(
+            'Rubric debrief is not finalized; resolve pending instructor scores and call finalizeRubric()',
+          );
+          error.code = 'RUBRIC_DEBRIEF_NOT_FINALIZED';
+          error.pendingItemIds = live.items
+            .filter(({ points }) => points === null)
+            .map(({ id }) => id);
+          throw error;
+        }
+      }
+      finalizedRubricResult = this._finalizedRubricResult;
+    }
     const result = buildScenarioDebrief(
       def,
       this.s.run,
@@ -1244,10 +1303,13 @@ export class SimRunner {
       0,
       0,
       this.simTime,
+      finalizedRubricResult,
     );
     result.respiratoryAttribution = this.p.respiratoryAttribution;
     result.lidocaineAttribution = buildLidocaineAttribution(this.l, this.tofCheckHistory);
-    return result;
+    return finalizedRubricResult === null
+      ? result
+      : copyJsonInput(result, 'rubric debrief result');
   }
 
   logEvent(kind, detail, meta) {
