@@ -67,10 +67,38 @@ describe('RubricScoringSession construction and initial state', () => {
     expect(session.rubric.title).toBe('Rubric test-rubric');
     expect(session.rubric.items[0].text).toBe('Literal item 1');
     expect(session.criteria).toEqual({ nested: { values: [1, 2] } });
+    expect(Object.isFrozen(session.criteria.nested.values)).toBe(true);
     expect(session.seed).toBe(9876);
     expect(Object.isFrozen(session.rubric)).toBe(true);
     expect(normalizedSession.rubric).toEqual(normalized);
     expect(normalizedSession.rubric).not.toBe(normalized);
+  });
+
+  test.each([
+    [null],
+    [[]],
+    [new Date()],
+    [Object.create({ inherited: true })],
+  ])('rejects non-plain constructor criteria %#', (criteria) => {
+    expect(() => new RubricScoringSession({ rubric: makeRubric(), criteria })).toThrow(/criteria/);
+  });
+
+  test.each([
+    [-1],
+    [0x100000000],
+    [1.5],
+    [Number.NaN],
+    [Number.POSITIVE_INFINITY],
+    ['1'],
+    [null],
+  ])('rejects invalid uint32 seed %#', (seed) => {
+    expect(() => new RubricScoringSession({ rubric: makeRubric(), seed })).toThrow(/seed/);
+  });
+
+  test('accepts both uint32 seed boundaries', () => {
+    expect(new RubricScoringSession({ rubric: makeRubric(), seed: 0 }).seed).toBe(0);
+    expect(new RubricScoringSession({ rubric: makeRubric(), seed: 0xffffffff }).seed)
+      .toBe(0xffffffff);
   });
 
   test('starts every item pending with null points and preserves scoring-source identity', () => {
@@ -112,6 +140,7 @@ describe('RubricScoringSession construction and initial state', () => {
       incomplete: true,
       pendingInstructorCount: 1,
       pendingEngineCount: 0,
+      pendingUnscoreableCount: 1,
       finalized: false,
       outcome: null,
     });
@@ -133,6 +162,85 @@ describe('RubricScoringSession construction and initial state', () => {
       maxPoints: 106,
       rawPoints: 0,
       percentage: 0,
+    });
+  });
+});
+
+describe('RubricScoringSession JSON-safe evidence', () => {
+  test.each([
+    [{ meta: null }, /meta/],
+    [{ meta: [] }, /meta/],
+    [{ meta: new Date() }, /meta/],
+    [{ meta: Object.create({ inherited: true }) }, /meta/],
+    [{ snapshot: null }, /snapshot/],
+    [{ snapshot: [] }, /snapshot/],
+    [{ snapshot: new Date() }, /snapshot/],
+    [{ snapshot: Object.create({ inherited: true }) }, /snapshot/],
+  ])('rejects malformed action evidence top-level input %#', (fields, message) => {
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    expect(() => session.recordAction({ tSec: 0, action: 'test', ...fields })).toThrow(message);
+  });
+
+  test.each([
+    ['NaN', () => ({ bad: Number.NaN })],
+    ['Infinity', () => ({ bad: Number.POSITIVE_INFINITY })],
+    ['undefined', () => ({ bad: undefined })],
+    ['bigint', () => ({ bad: 1n })],
+    ['symbol', () => ({ bad: Symbol('bad') })],
+    ['function', () => ({ bad: () => {} })],
+    ['custom prototype', () => ({ bad: Object.create({ inherited: true }) })],
+    ['nested Date', () => ({ bad: new Date() })],
+    ['sparse array', () => ({ bad: Array(1) })],
+    ['sparse array with an extra property', () => {
+      const array = Array(1);
+      array.extra = 'not an indexed element';
+      return { bad: array };
+    }],
+    ['symbol key', () => ({ bad: { [Symbol('key')]: true } })],
+    ['cycle', () => {
+      const cycle = {};
+      cycle.self = cycle;
+      return { bad: cycle };
+    }],
+  ])('rejects recursively unsafe %s values', (_name, makeUnsafe) => {
+    expect(() => new RubricScoringSession({
+      rubric: makeRubric(), criteria: makeUnsafe(),
+    })).toThrow(/JSON-safe|cycle|Dangerous/);
+
+    const actionSession = new RubricScoringSession({ rubric: makeRubric() });
+    expect(() => actionSession.recordAction({
+      tSec: 0, action: 'test', meta: makeUnsafe(),
+    })).toThrow(/JSON-safe|cycle|Dangerous/);
+    expect(() => actionSession.recordAction({
+      tSec: 0, action: 'test', snapshot: makeUnsafe(),
+    })).toThrow(/JSON-safe|cycle|Dangerous/);
+
+    const traceSession = new RubricScoringSession({ rubric: makeRubric() });
+    expect(() => traceSession.recordTrace({ t: 0, payload: makeUnsafe() })).toThrow(
+      /JSON-safe|cycle|Dangerous/,
+    );
+  });
+
+  test.each(['__proto__', 'prototype', 'constructor'])(
+    'rejects dangerous %s keys at nested levels',
+    (key) => {
+      const unsafe = { nested: JSON.parse(`{"${key}":{"polluted":true}}`) };
+      const session = new RubricScoringSession({ rubric: makeRubric() });
+
+      expect(() => session.recordAction({
+        tSec: 0, action: 'test', meta: unsafe,
+      })).toThrow(/Dangerous/);
+      expect(() => session.recordTrace({ t: 0, unsafe })).toThrow(/Dangerous/);
+    },
+  );
+
+  test('normalizes an omitted action snapshot to JSON-safe null', () => {
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    expect(session.recordAction({ tSec: 0, action: 'test' })).toEqual({
+      tSec: 0,
+      action: 'test',
+      meta: {},
+      snapshot: null,
     });
   });
 });
@@ -171,6 +279,19 @@ describe('RubricScoringSession action ledger', () => {
     const session = new RubricScoringSession({ rubric: makeRubric() });
     expect(() => session.recordAction(input)).toThrow(message);
   });
+
+  test('keeps equal action timestamps stable and rejects backward timestamps', () => {
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    session.recordAction({ tSec: 2, action: 'first' });
+    session.recordAction({ tSec: 2, action: 'second' });
+
+    expect(session.getLiveResult().actionLedger.map(({ action }) => action)).toEqual([
+      'first',
+      'second',
+    ]);
+    expect(() => session.recordAction({ tSec: 1, action: 'backward' })).toThrow(/nondecreasing/);
+    expect(session.getLiveResult().actionLedger).toHaveLength(2);
+  });
 });
 
 describe('RubricScoringSession trace', () => {
@@ -205,6 +326,8 @@ describe('RubricScoringSession trace', () => {
     [{ t: Number.NaN }],
     [{ t: Number.POSITIVE_INFINITY }],
     [{ t: Number.MAX_SAFE_INTEGER + 1 }],
+    [new Date()],
+    [Object.create({ t: 1 })],
   ])('rejects invalid trace sample %#', (sample) => {
     const session = new RubricScoringSession({ rubric: makeRubric() });
     expect(() => session.recordTrace(sample)).toThrow(/snapshot|timestamp|\.t/);
@@ -233,18 +356,34 @@ describe('RubricScoringSession instructor scoring', () => {
         tSec: 3,
         action: 'instructor_rubric_score_set',
         meta: { itemId: 'item-1', points: 2, note: 'first', revision: 1 },
-        snapshot: undefined,
+        snapshot: null,
       },
       {
         tSec: 5,
         action: 'instructor_rubric_score_set',
         meta: { itemId: 'item-1', points: 1, note: 'revised', revision: 2 },
-        snapshot: undefined,
+        snapshot: null,
       },
     ]);
 
     session.setInstructorScore({ itemId: 'item-1', points: 0, tSec: 6 });
     expect(session.getItemStatus('item-1').status).toBe('not_performed');
+  });
+
+  test('allows equal-time revisions and rejects backward revisions atomically', () => {
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    session.setInstructorScore({ itemId: 'item-1', points: 2, note: 'first', tSec: 5 });
+    session.setInstructorScore({ itemId: 'item-1', points: 1, note: 'equal', tSec: 5 });
+
+    expect(() => session.setInstructorScore({
+      itemId: 'item-1', points: 0, note: 'backward', tSec: 4,
+    })).toThrow(/nondecreasing/);
+    expect(session.getItemStatus('item-1')).toMatchObject({
+      points: 1,
+      note: 'equal',
+      updatedAtSec: 5,
+    });
+    expect(session.getLiveResult().actionLedger.map(({ meta }) => meta.revision)).toEqual([1, 2]);
   });
 
   test('rejects engine, unscoreable, and unknown item overrides', () => {
@@ -303,6 +442,32 @@ describe('RubricScoringSession instructor scoring', () => {
     expect(() => { item.status = 'performed'; }).toThrow(TypeError);
     expect(() => { result.items[0].points = 2; }).toThrow(TypeError);
     expect(session.getItemStatus('item-1').points).toBeNull();
+  });
+
+  test('caches immutable live projections and invalidates after every mutation type', () => {
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    const initial = session.getLiveResult();
+    expect(session.getLiveResult()).toBe(initial);
+
+    session.recordAction({ tSec: 0, action: 'first' });
+    const afterAction = session.getLiveResult();
+    expect(afterAction).not.toBe(initial);
+    expect(session.getLiveResult()).toBe(afterAction);
+
+    session.recordTrace({ t: 3, value: 'trace' });
+    const afterTrace = session.getLiveResult();
+    expect(afterTrace).not.toBe(afterAction);
+    expect(session.getLiveResult()).toBe(afterTrace);
+
+    session.recordTrace({ t: 3, value: 'replacement' });
+    const afterTraceReplacement = session.getLiveResult();
+    expect(afterTraceReplacement).not.toBe(afterTrace);
+    expect(afterTraceReplacement.trace).toEqual([{ t: 3, value: 'replacement' }]);
+
+    session.setInstructorScore({ itemId: 'item-1', points: 2, tSec: 1 });
+    const afterScore = session.getLiveResult();
+    expect(afterScore).not.toBe(afterTraceReplacement);
+    expect(session.getLiveResult()).toBe(afterScore);
   });
 });
 
@@ -373,14 +538,16 @@ describe('RubricScoringSession finalization', () => {
       criticalItemsOmitted: omitted,
       pendingInstructorCount: 0,
       pendingEngineCount: 0,
+      pendingUnscoreableCount: 0,
       provisional: false,
       incomplete: false,
       finalized: true,
+      finalizedAtSec: 100,
       outcome,
     });
   });
 
-  test('requires every critical item to have exactly two points even when unresolved items are omitted from omission reporting', () => {
+  test('rejects UNSCOREABLE items after instructor and engine pending gates', () => {
     const session = new RubricScoringSession({
       rubric: makeRubric({
         count: 10,
@@ -393,10 +560,30 @@ describe('RubricScoringSession finalization', () => {
     }
 
     const result = session.finalize({ tSec: 20 });
-    expect(result).toMatchObject({
-      percentage: 90,
-      criticalItemsOmitted: [],
-      outcome: 'NOT PASS',
+    expect(result).toEqual({
+      ok: false,
+      reason: 'UNSCOREABLE_ITEMS_PRESENT',
+      pendingItemIds: ['item-1'],
+    });
+    expect(session.getLiveResult()).toMatchObject({
+      pendingUnscoreableCount: 1,
+      incomplete: true,
+      finalized: false,
+      outcome: null,
+    });
+  });
+
+  test('rejects finalization before the latest session time and accepts the exact latest time', () => {
+    const session = new RubricScoringSession({ rubric: makeRubric({ count: 1 }) });
+    session.setInstructorScore({ itemId: 'item-1', points: 2, tSec: 5 });
+    session.recordTrace({ t: 10, value: 'latest' });
+
+    expect(() => session.finalize({ tSec: 9 })).toThrow(/latest session time.*10/);
+    expect(session.getLiveResult()).toMatchObject({ finalized: false, outcome: null });
+    expect(session.finalize({ tSec: 10 })).toMatchObject({
+      finalized: true,
+      finalizedAtSec: 10,
+      outcome: 'PASS',
     });
   });
 
@@ -404,16 +591,19 @@ describe('RubricScoringSession finalization', () => {
     const session = new RubricScoringSession({ rubric: makeRubric({ count: 1 }) });
     session.setInstructorScore({ itemId: 'item-1', points: 2, tSec: 1 });
     const first = session.finalize({ tSec: 2 });
-    const second = session.finalize({ tSec: 999 });
+    const second = session.finalize({ tSec: 0 });
+    const third = session.finalize();
 
     expect(second).toEqual(first);
-    expect(second).not.toBe(first);
+    expect(second).toBe(first);
+    expect(third).toBe(first);
     expect(Object.isFrozen(first)).toBe(true);
     expect(Object.isFrozen(first.items[0])).toBe(true);
     expect(() => session.setInstructorScore({ itemId: 'item-1', points: 0, tSec: 3 })).toThrow(/finalized/);
     expect(() => session.recordAction({ tSec: 3, action: 'late' })).toThrow(/finalized/);
     expect(() => session.recordTrace({ t: 3 })).toThrow(/finalized/);
-    expect(session.getLiveResult()).toEqual(first);
+    expect(first.finalizedAtSec).toBe(2);
+    expect(session.getLiveResult()).toBe(first);
   });
 
   test.each([
