@@ -119,6 +119,43 @@ export class ScenarioManager {
     if (this.state === ScenarioState.Paused) { this.setState(ScenarioState.Running); this.logEvent('Scenario resumed'); }
   }
 
+  /**
+   * Rebase a paused, administratively preconditioned case to learner t=0
+   * without resetting its already-derived physiology. This is intentionally
+   * narrower than resetScenario(): setup state stays intact, while every
+   * learner-visible scenario clock, event cursor, score, and log is fresh.
+   */
+  rebaseLearnerRun() {
+    if (this.activeScenario == null) throw new Error('Cannot rebase without an active scenario');
+    if (this.state !== ScenarioState.Paused) {
+      throw new Error('Scenario must be paused before rebasing learner time');
+    }
+
+    this.elapsedTime = 0;
+    this.currentScore = 0;
+    this._firedEvents.clear();
+    this._completedChecks.clear();
+    this._studentActions.clear();
+    this._transitions = [];
+    this._deadlines = [];
+    this._airwayEventCursor = 0;
+    this.eventLog = [];
+    this.activePrompts = [];
+    this.feedbackMessage = '';
+    this.feedbackTimer = 0;
+
+    this.run = new ScenarioRunState();
+    this.run.scenarioId = this.activeScenario.id;
+    this.run.startedAtSim = 0;
+    this.actionLog.clear();
+    this.scoring = new ScenarioScoring(this.activeScenario, this.run, this.actionLog);
+    this.scoring.onFeedback = (msg, ok) => this.setFeedback(msg, ok);
+    this.maxPossibleScore = this.scoring.MaxExpectedPoints;
+    this.lastResult = null;
+    this.setState(ScenarioState.Running);
+    return { scenarioId: this.activeScenario.id, elapsedTime: this.elapsedTime };
+  }
+
   resetScenario() {
     this.elapsedTime = 0;
     this.currentScore = 0;

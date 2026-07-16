@@ -7,7 +7,7 @@
    internals directly.
    ═══════════════════════════════════════════════════════════════════ */
 import {
-  AirwayDevice, buildPhysRig, RubricScoringSession, ScenarioManager, VentMode,
+  AirwayDevice, buildPhysRig, normalize, RubricScoringSession, ScenarioManager, VentMode,
 } from '../sim/index.js';
 import {
   buildDebrief as buildScenarioDebrief,
@@ -15,6 +15,9 @@ import {
 } from '../sim/scenario/scenarioDebrief.js';
 
 const SEED = 12345;
+const MAX_UINT32 = 0xffffffff;
+const FIXED_TICKS_PER_SECOND = 50;
+const DANGEROUS_INPUT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 // Display-only convergence tolerance; it never feeds back into physiology.
 export const INSTRUCTOR_NMB_TARGET_TOLERANCE = 0.02;
 
@@ -24,6 +27,212 @@ export const LIVE_COMPLICATIONS = Object.freeze([
   'OpioidInducedRespiratoryDepression', 'Hemorrhage', 'Laryngospasm',
   'LocalAnestheticToxicity', 'TensionPneumothorax', 'VentricularFibrillation',
 ]);
+
+function isPlainObject(value) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === Object.prototype || prototype === null;
+}
+
+function copyJsonInput(value, label, ancestors = new WeakSet()) {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) throw new TypeError(`${label} must contain only finite numbers`);
+    return value;
+  }
+  if (typeof value !== 'object') throw new TypeError(`${label} must be JSON-safe`);
+  if (ancestors.has(value)) throw new TypeError(`${label} must not contain cycles`);
+  if (Object.getOwnPropertySymbols(value).length > 0) {
+    throw new TypeError(`${label} must contain only string keys`);
+  }
+  const names = Object.getOwnPropertyNames(value);
+  const dangerous = names.find((key) => DANGEROUS_INPUT_KEYS.has(key));
+  if (dangerous) throw new TypeError(`${label} contains unsafe key ${dangerous}`);
+  ancestors.add(value);
+  let result;
+  if (Array.isArray(value)) {
+    if (Object.getPrototypeOf(value) !== Array.prototype) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} must contain only ordinary arrays`);
+    }
+    const length = Object.getOwnPropertyDescriptor(value, 'length').value;
+    if (names.length !== length + 1) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} arrays must be dense`);
+    }
+    result = new Array(length);
+    for (let index = 0; index < length; index += 1) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, `${index}`);
+      if (!descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        ancestors.delete(value);
+        throw new TypeError(`${label} arrays must contain data properties`);
+      }
+      result[index] = copyJsonInput(descriptor.value, `${label}[${index}]`, ancestors);
+    }
+  } else {
+    if (!isPlainObject(value)) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} must contain only plain objects`);
+    }
+    result = {};
+    for (const key of names) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      if (!descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        ancestors.delete(value);
+        throw new TypeError(`${label} must contain only enumerable data properties`);
+      }
+      Object.defineProperty(result, key, {
+        configurable: true,
+        enumerable: true,
+        value: copyJsonInput(descriptor.value, `${label}.${key}`, ancestors),
+        writable: true,
+      });
+    }
+  }
+  ancestors.delete(value);
+  return result;
+}
+
+function alignedFixedStepCount(seconds, label) {
+  if (typeof seconds !== 'number' || !Number.isFinite(seconds) || seconds <= 0) {
+    throw new RangeError(`${label} must be a finite positive number`);
+  }
+  const rawSteps = seconds * FIXED_TICKS_PER_SECOND;
+  const steps = Math.round(rawSteps);
+  const tolerance = Number.EPSILON * Math.max(1, Math.abs(rawSteps)) * 8;
+  if (!Number.isSafeInteger(steps) || Math.abs(rawSteps - steps) > tolerance) {
+    throw new RangeError(`${label} must be fixed-step aligned to 0.02 seconds`);
+  }
+  return steps;
+}
+
+function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
+  const scenarioCopy = copyJsonInput(scenario, 'scenario');
+  const rubricCopy = copyJsonInput(rubric, 'rubric');
+  if (!isPlainObject(scenarioCopy)) throw new TypeError('scenario must be a plain object');
+  if (!isPlainObject(rubricCopy)) throw new TypeError('rubric must be a plain object');
+
+  // Scenario loading is stricter than legacy normalize defaults: a rubric
+  // case must explicitly declare its reproducibility and scoring contract.
+  if (!Number.isSafeInteger(scenarioCopy.seed)
+    || scenarioCopy.seed < 0 || scenarioCopy.seed > MAX_UINT32) {
+    throw new RangeError('scenario.seed must be an explicitly declared nonnegative uint32 safe integer');
+  }
+  if (typeof scenarioCopy.rubricId !== 'string' || scenarioCopy.rubricId.length === 0) {
+    throw new TypeError('scenario.rubricId must be an explicitly declared nonempty string');
+  }
+  if (!isPlainObject(scenarioCopy.rubricCriteria)) {
+    throw new TypeError('scenario.rubricCriteria must be an explicitly declared plain object');
+  }
+  if (!isPlainObject(scenarioCopy.patientProfile)
+    || !isPlainObject(scenarioCopy.startingSetup)
+    || !Array.isArray(scenarioCopy.events)
+    || !isPlainObject(scenarioCopy.airwayPlan)
+    || !isPlainObject(scenarioCopy.debrief)) {
+    throw new TypeError('scenario must define patientProfile, startingSetup, events, airwayPlan, and debrief');
+  }
+  for (const key of ['weightKg', 'heightCm', 'ageYears']) {
+    if (typeof scenarioCopy.patientProfile[key] !== 'number'
+      || !Number.isFinite(scenarioCopy.patientProfile[key])
+      || scenarioCopy.patientProfile[key] <= 0) {
+      throw new RangeError(`scenario.patientProfile.${key} must be finite and positive`);
+    }
+  }
+  const setup = scenarioCopy.startingSetup;
+  if (typeof setup.oxygenOn !== 'boolean'
+    || typeof setup.fio2 !== 'number' || !Number.isFinite(setup.fio2)
+    || setup.fio2 < 0.21 || setup.fio2 > 1
+    || !['manual', 'vcv', 'pcv', 'psv'].includes(String(setup.ventMode).toLowerCase())
+    || !['mask', 'ett'].includes(String(setup.airway).toLowerCase())) {
+    throw new RangeError('scenario.startingSetup must declare valid oxygen, FiO2, mode, and airway');
+  }
+  const plan = scenarioCopy.airwayPlan;
+  if (!Array.isArray(plan.failedIntubationAttempts)
+    || plan.failedIntubationAttempts.some((attempt) => (
+      !Number.isSafeInteger(attempt) || attempt <= 0
+    ))
+    || new Set(plan.failedIntubationAttempts).size !== plan.failedIntubationAttempts.length) {
+    throw new TypeError('scenario.airwayPlan.failedIntubationAttempts must be unique positive integers');
+  }
+  alignedFixedStepCount(
+    plan.intubationAttemptDurationSeconds,
+    'scenario.airwayPlan.intubationAttemptDurationSeconds',
+  );
+
+  const scenarioForReset = copyJsonInput(scenarioCopy, 'scenario reset definition');
+  const rubricForReset = copyJsonInput(rubricCopy, 'rubric reset definition');
+  const definition = normalize(scenarioCopy);
+  if (typeof definition.id !== 'string' || definition.id.trim().length === 0) {
+    throw new TypeError('scenario.id must be a nonempty string');
+  }
+  if (typeof definition.title !== 'string' || definition.title.trim().length === 0) {
+    throw new TypeError('scenario.title must be a nonempty string');
+  }
+  if (!Number.isSafeInteger(definition.seed)
+    || definition.seed < 0 || definition.seed > MAX_UINT32) {
+    throw new RangeError('scenario.seed must be a nonnegative uint32 safe integer');
+  }
+  if (typeof definition.rubricId !== 'string' || definition.rubricId.length === 0) {
+    throw new TypeError('scenario.rubricId must be a nonempty string');
+  }
+  if (typeof rubricCopy.id !== 'string' || definition.rubricId !== rubricCopy.id) {
+    throw new RangeError('scenario.rubricId and rubric.id mismatch');
+  }
+  if (!isPlainObject(definition.patientProfile)
+    || !isPlainObject(definition.startingSetup)
+    || !Array.isArray(definition.events)
+    || !isPlainObject(definition.airwayPlan)
+    || !isPlainObject(definition.debrief)) {
+    throw new TypeError('scenario must define patientProfile, startingSetup, events, airwayPlan, and debrief');
+  }
+  if (!isPlainObject(definition.rubricCriteria)) {
+    throw new TypeError('scenario.rubricCriteria must be a plain object');
+  }
+
+  let administrativeSetup = null;
+  if (definition.administrativeSetup !== null) {
+    if (!isPlainObject(definition.administrativeSetup)) {
+      throw new TypeError('scenario.administrativeSetup must be a plain object or null');
+    }
+    const allowedKeys = new Set(['instructorNmbTarget', 'preconditioningDurationSeconds']);
+    if (Object.keys(definition.administrativeSetup).some((key) => !allowedKeys.has(key))) {
+      throw new TypeError('scenario.administrativeSetup contains unsupported fields');
+    }
+    const { instructorNmbTarget, preconditioningDurationSeconds } = definition.administrativeSetup;
+    if (!isPlainObject(instructorNmbTarget)
+      || Object.keys(instructorNmbTarget).length !== 1
+      || !Object.hasOwn(instructorNmbTarget, 'targetTofRatio')) {
+      throw new TypeError('administrativeSetup.instructorNmbTarget must declare targetTofRatio');
+    }
+    const { targetTofRatio } = instructorNmbTarget;
+    if (typeof targetTofRatio !== 'number' || !Number.isFinite(targetTofRatio)
+      || targetTofRatio < 0 || targetTofRatio > 1) {
+      throw new RangeError('administrativeSetup targetTofRatio must be from 0 to 1');
+    }
+    administrativeSetup = {
+      instructorNmbTarget: { targetTofRatio },
+      preconditioningDurationSeconds,
+      preconditioningSteps: alignedFixedStepCount(
+        preconditioningDurationSeconds,
+        'administrativeSetup.preconditioningDurationSeconds',
+      ),
+    };
+  }
+
+  // Construction validates the literal rubric, all named criteria, and seed
+  // before the active runner is stopped or any of its state is replaced.
+  const validatedSession = new RubricScoringSession({
+    rubric: rubricCopy,
+    criteria: definition.rubricCriteria,
+    seed: definition.seed,
+  });
+  return {
+    scenario: definition,
+    rubric: validatedSession.rubric,
+    administrativeSetup,
+    resetInputs: { scenario: scenarioForReset, rubric: rubricForReset },
+  };
+}
 
 function liveScenarioDefinition(config) {
   return {
@@ -93,23 +302,32 @@ export class SimRunner {
     this._interval = 0;
     this._procedureUnsubscribe = null;
     this.rubricSession = null;
+    this.activeSeed = SEED;
+    this._activeRubricScenario = null;
+    this._loadedRubricScenario = null;
     this._rafLoop = this._rafLoop.bind(this);
     this._tick = this._tick.bind(this);
     this.build();
   }
 
-  build() {
+  build({ seed = SEED, scenarioDefinition = null } = {}) {
     const c = this.config;
     if (this._procedureUnsubscribe) this._procedureUnsubscribe();
-    const { p, d, l, v, a, core } = buildPhysRig(SEED, c.weightKg, c.heightCm, c.ageYears);
-    p.sex = c.sex;
-    p.baselineHR = c.baselineHR;
-    p.baselineSystolic = c.baselineSystolic;
-    p.baselineDiastolic = c.baselineDiastolic;
-    p.baselineSpO2 = c.baselineSpO2;
-    p.baselineRR = c.baselineRR;
-    p.baselineTemp = c.baselineTemp;
-    p.baselineEtCO2 = c.baselineEtCO2;
+    const profile = scenarioDefinition?.patientProfile ?? c;
+    const { p, d, l, v, a, core } = buildPhysRig(
+      seed,
+      profile.weightKg,
+      profile.heightCm,
+      profile.ageYears,
+    );
+    p.sex = profile.sex ?? c.sex;
+    p.baselineHR = profile.baselineHR ?? c.baselineHR;
+    p.baselineSystolic = profile.baselineSystolic ?? c.baselineSystolic;
+    p.baselineDiastolic = profile.baselineDiastolic ?? c.baselineDiastolic;
+    p.baselineSpO2 = profile.baselineSpO2 ?? c.baselineSpO2;
+    p.baselineRR = profile.baselineRR ?? c.baselineRR;
+    p.baselineTemp = profile.baselineTemp ?? c.baselineTemp;
+    p.baselineEtCO2 = profile.baselineEtCO2 ?? c.baselineEtCO2;
     p.resetToBaseline();
     const scenario = new ScenarioManager();
     scenario.patient = p;
@@ -119,19 +337,23 @@ export class SimRunner {
     scenario.airwayProcedure = a;
     core.scenario = scenario;
     this._procedureUnsubscribe = a.addEventListener((event) => this.logProcedureEvent(event));
-    core.initialize(SEED);
-    scenario.loadRaw(liveScenarioDefinition(c));
+    core.initialize(seed);
+    scenario.seed = seed;
+    scenario.loadRaw(scenarioDefinition ?? liveScenarioDefinition(c));
     scenario.startScenario();
     this.p = p; this.d = d; this.l = l; this.v = v; this.a = a; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
     this.tofCheckHistory = [];
     this._instructorNmbTarget = null;
     this.rubricSession = null;
+    this.activeSeed = seed;
+    this._activeRubricScenario = null;
   }
 
   applyConfig(patch) {
     const wasRunning = this.running;
     this._stopRealtime();
+    this._loadedRubricScenario = null;
     Object.assign(this.config, patch);
     this.build();
     this.logEvent('Patient reset', `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`);
@@ -172,10 +394,109 @@ export class SimRunner {
   }
 
   reset() {
+    if (this._loadedRubricScenario !== null) {
+      const saved = copyJsonInput(this._loadedRubricScenario, 'loaded rubric scenario');
+      return this.loadRubricScenario(saved);
+    }
     this._stopRealtime();
     this.build();
     this.log = [];
     this.emit();
+    return this.snapshot();
+  }
+
+  loadRubricScenario(options) {
+    // Complete strict validation first so rejected loads do not pause, emit,
+    // replace the rig, append logs, or disturb an existing scoring session.
+    const prepared = prepareRubricScenarioInputs(options);
+    const {
+      scenario, rubric, administrativeSetup, resetInputs,
+    } = prepared;
+    const profile = scenario.patientProfile;
+
+    this._stopRealtime();
+    const savedOnTick = this.onTick;
+    const savedOnEvent = this.onEvent;
+    this.onTick = null;
+    this.onEvent = null;
+    let result;
+    try {
+      this.config = {
+        ...DEFAULT_CONFIG,
+        weightKg: profile.weightKg,
+        heightCm: profile.heightCm,
+        ageYears: profile.ageYears,
+        sex: profile.sex,
+        baselineHR: profile.baselineHR,
+        baselineSystolic: profile.baselineSystolic,
+        baselineDiastolic: profile.baselineDiastolic,
+        baselineSpO2: profile.baselineSpO2,
+        baselineRR: profile.baselineRR,
+        baselineTemp: profile.baselineTemp,
+        baselineEtCO2: profile.baselineEtCO2 ?? DEFAULT_CONFIG.baselineEtCO2,
+        failedIntubationAttempts: [...scenario.airwayPlan.failedIntubationAttempts],
+        intubationAttemptDurationSeconds:
+          scenario.airwayPlan.intubationAttemptDurationSeconds,
+      };
+      this.build({ seed: scenario.seed, scenarioDefinition: scenario });
+
+      const setup = scenario.startingSetup;
+      this.setMachine({
+        o2FlowLPerMin: setup.oxygenOn ? Math.max(2, setup.o2FlowLPerMin ?? 2) : 0,
+        airFlowLPerMin: setup.airFlowLPerMin ?? 0,
+        n2oFlowLPerMin: setup.n2oFlowLPerMin ?? 0,
+        setFiO2: setup.fio2,
+        setTidalVolume: setup.tidalVolume || this.v.setTidalVolume,
+        setRespiratoryRate: setup.respiratoryRate || this.v.setRespiratoryRate,
+        setPeep: setup.peep ?? this.v.setPeep,
+      });
+
+      if (administrativeSetup !== null) {
+        // Scenario processing is paused throughout construction. The normal
+        // core order advances physiology for an exact fixed-step duration;
+        // no derived TOF, blockade, respiratory, or vital field is assigned.
+        this.s.pauseScenario();
+        this.setInstructorNmbTarget(administrativeSetup.instructorNmbTarget);
+        this.stepFor(administrativeSetup.preconditioningDurationSeconds);
+        if (this.core.tickCount !== administrativeSetup.preconditioningSteps) {
+          throw new Error('Administrative preconditioning fixed-step count mismatch');
+        }
+
+        // Re-seed learner stochastic time without resetting the constructed
+        // physiologic state. Existing public resets/rebase APIs clear the
+        // procedure/scenario clocks and learner histories before trace t=0.
+        this.core.initialize(scenario.seed);
+        this.a.reset();
+        this.s.applyAirwayPlan();
+        this.s.rebaseLearnerRun();
+        this.simTime = 0;
+        this._accum = 0;
+        this._lastReal = 0;
+      }
+
+      this.log = [];
+      this.tofCheckHistory = [];
+      this._activeRubricScenario = {
+        id: scenario.id,
+        title: scenario.title,
+        rubricId: scenario.rubricId,
+        seed: scenario.seed,
+      };
+      this.attachRubricSession({ rubric, criteria: scenario.rubricCriteria });
+      this._loadedRubricScenario = resetInputs;
+      result = {
+        ok: true,
+        scenarioId: scenario.id,
+        rubricId: scenario.rubricId,
+        seed: scenario.seed,
+        initialSnapshot: this.compactRubricSnapshot(0),
+      };
+    } finally {
+      this.onTick = savedOnTick;
+      this.onEvent = savedOnEvent;
+    }
+    this.emit();
+    return copyJsonInput(result, 'rubric scenario load result');
   }
 
   setSpeed(mult) { this.speed = mult; }
@@ -248,7 +569,7 @@ export class SimRunner {
     if (this.core.tickCount !== 0) {
       throw new Error('Rubric session must be attached before simulation advance');
     }
-    const session = new RubricScoringSession({ rubric, criteria, seed: SEED });
+    const session = new RubricScoringSession({ rubric, criteria, seed: this.activeSeed });
     session.recordTrace(this.compactRubricSnapshot(0));
     this.rubricSession = session;
     return session;
@@ -361,6 +682,9 @@ export class SimRunner {
       tofCheckCount: this.tofCheckHistory.length,
       tofCheckHistory: this.tofCheckHistory.map((entry) => ({ ...entry })),
       instructorNmbTarget: this.getInstructorNmbTargetStatus(),
+      activeRubricScenario: this._activeRubricScenario === null
+        ? null
+        : { ...this._activeRubricScenario },
       activeAnestheticInfusions: this.activeAnestheticInfusions(),
       lidocainePlasmaTotalMcgMl: this.l.plasmaTotalMcgMl,
       lidocainePlasmaFreeMcgMl: this.l.plasmaFreeMcgMl,

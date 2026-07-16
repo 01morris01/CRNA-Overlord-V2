@@ -1,0 +1,75 @@
+{
+  "id": "rsi_failed_first_attempt_001",
+  "title": "RSI — Failed First Intubation Attempt",
+  "description": "A full-stomach RSI in an obese adult with deterministic failure of attempt one and a scoreable oxygenating rescue before attempt two.",
+  "category": "Induction",
+  "courseUnit": "Rapid Sequence Induction",
+  "difficulty": "advanced",
+  "seed": 31004,
+  "rubricId": "carson-newman-rsi-induction",
+  "rubricCriteria": {
+    "weightKg": 110,
+    "preoxygenationFiO2Min": 0.99,
+    "preoxygenationDurationSec": 180,
+    "minimumPpvMinuteVentilation": 4,
+    "failedAttemptSpo2RecoveryDelta": 2,
+    "etco2ConfirmationSamples": 5,
+    "acceptedInductionDrugs": ["Propofol", "Etomidate", "Ketamine"],
+    "acceptedNmbDrugs": ["Rocuronium", "Succinylcholine"],
+    "allowedVentModes": [1, 2]
+  },
+  "administrativeSetup": null,
+  "learningObjectives": [
+    "Recognize deterministic failed placement while the airway remains unsecured",
+    "Deliver adequate mask PPV with cricoid pressure before another attempt",
+    "Secure the airway on attempt two and obtain sustained continuous EtCO2"
+  ],
+  "tags": ["RSI", "Failed intubation", "Rescue PPV", "Aspiration risk"],
+  "maxDurationSeconds": 900,
+  "patientProfile": {
+    "ageYears": 52,
+    "sex": "Female",
+    "weightKg": 110,
+    "heightCm": 165,
+    "asa": 3,
+    "history": ["GERD", "Full stomach", "Class III obesity"],
+    "allergiesList": [],
+    "comorbidities": "GERD, obesity",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Urgent exploratory laparoscopy",
+    "baselineHR": 84,
+    "baselineSystolic": 138,
+    "baselineDiastolic": 82,
+    "baselineSpO2": 98,
+    "baselineRR": 16,
+    "baselineTemp": 36.7
+  },
+  "startingSetup": {
+    "oxygenOn": false,
+    "fio2": 0.21,
+    "ventMode": "manual",
+    "airway": "mask",
+    "ivAccess": "18g peripheral",
+    "vaporizerDial": 0,
+    "tidalVolume": 550,
+    "respiratoryRate": 12,
+    "peep": 5
+  },
+  "events": [],
+  "expectedActions": [],
+  "dangerousActions": [],
+  "airwayPlan": {
+    "failedIntubationAttempts": [1],
+    "intubationAttemptDurationSeconds": 30
+  },
+  "debrief": {
+    "summary": "Attempt one is configured to fail after a full timed laryngoscopy. The airway remains a mask airway until adequate PPV with cricoid pressure precedes successful attempt two.",
+    "teachingPoints": [
+      "A failed attempt consumes time and oxygen stores without securing the airway.",
+      "Rescue PPV must measurably restore oxygenation before the next attempt.",
+      "Attempt and desaturation timing come from the shared airway-procedure history."
+    ],
+    "reviewTopics": ["Failed RSI attempt", "Rescue oxygenation", "Attempt limits"],
+    "reviewTags": ["RSI", "Failed intubation", "Rescue PPV"]
+  }
+}

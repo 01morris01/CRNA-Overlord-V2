@@ -43,7 +43,9 @@ const arrayKeys = [
   'lidocaineRegionalHistory', 'lidocaineDoseHistory', 'lidocaineToxicityHistory',
   'lipidRescueHistory', 'activeAnestheticInfusions',
 ];
-const nullableObjectKeys = ['ppvCurrent', 'lastTofCheck', 'instructorNmbTarget'];
+const nullableObjectKeys = [
+  'ppvCurrent', 'lastTofCheck', 'instructorNmbTarget', 'activeRubricScenario',
+];
 
 const requiredKeys = [
   ...numericKeys, ...booleanKeys, ...stringKeys, ...arrayKeys, ...nullableObjectKeys,

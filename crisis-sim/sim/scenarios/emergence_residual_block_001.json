@@ -1,0 +1,77 @@
+{
+  "id": "emergence_residual_block_001",
+  "title": "Emergence — Residual Neuromuscular Blockade",
+  "description": "An intubated patient on volatile maintenance approaches emergence with administratively constructed residual rocuronium blockade.",
+  "category": "Emergence",
+  "courseUnit": "Anesthesia Emergence",
+  "difficulty": "intermediate",
+  "seed": 31003,
+  "rubricId": "carson-newman-anesthesia-emergence",
+  "rubricCriteria": {
+    "weightKg": 70,
+    "tofRecoveryRatio": 0.9,
+    "spontaneousRrMin": 8,
+    "spontaneousTvMinMlPerKg": 5,
+    "spontaneousMvMin": 4,
+    "reversalDrugs": ["Sugammadex", "Neostigmine"]
+  },
+  "administrativeSetup": {
+    "instructorNmbTarget": {
+      "targetTofRatio": 0.25
+    },
+    "preconditioningDurationSeconds": 20
+  },
+  "learningObjectives": [
+    "Stop active anesthetic delivery before extubation",
+    "Assess and reverse residual blockade through the single NMB state",
+    "Confirm adequate spontaneous ventilation before extubation"
+  ],
+  "tags": ["Emergence", "Residual blockade", "TOF", "Reversal"],
+  "maxDurationSeconds": 900,
+  "patientProfile": {
+    "ageYears": 48,
+    "sex": "Male",
+    "weightKg": 70,
+    "heightCm": 175,
+    "asa": 2,
+    "history": ["Elective general anesthetic nearing completion"],
+    "allergiesList": [],
+    "comorbidities": "None significant",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Laparoscopic inguinal hernia repair",
+    "baselineHR": 70,
+    "baselineSystolic": 118,
+    "baselineDiastolic": 76,
+    "baselineSpO2": 99,
+    "baselineRR": 14,
+    "baselineTemp": 36.5
+  },
+  "startingSetup": {
+    "oxygenOn": true,
+    "fio2": 0.5,
+    "ventMode": "vcv",
+    "airway": "ett",
+    "ivAccess": "18g peripheral",
+    "vaporizerDial": 2,
+    "tidalVolume": 500,
+    "respiratoryRate": 12,
+    "peep": 5
+  },
+  "events": [],
+  "expectedActions": [],
+  "dangerousActions": [],
+  "airwayPlan": {
+    "failedIntubationAttempts": [],
+    "intubationAttemptDurationSeconds": 30
+  },
+  "debrief": {
+    "summary": "The patient begins learner time already intubated, mechanically ventilated, receiving volatile anesthesia, and below a TOF ratio of 0.90 through the same rocuronium state used by drug and reversal logic.",
+    "teachingPoints": [
+      "Administrative preconditioning is not learner drug or TOF evidence.",
+      "TOF recovery and spontaneous ventilation remain separate extubation assessments.",
+      "The first learner trace is rebased to t=0 after fixed-step equilibration."
+    ],
+    "reviewTopics": ["Residual NMB", "TOF assessment", "Reversal", "Extubation readiness"],
+    "reviewTags": ["Emergence", "Residual blockade", "TOF"]
+  }
+}
