@@ -15,6 +15,7 @@ export {
   RUBRIC_SCORING_SOURCES,
   summarizeRubric,
 } from './scenario/rubricLoader.js';
+export { RubricScoringSession } from './scenario/rubricScoringSession.js';
 
 import { PatientPhysiology } from './patientPhysiology.js';
 import { DrugSystem } from './drugSystem.js';
