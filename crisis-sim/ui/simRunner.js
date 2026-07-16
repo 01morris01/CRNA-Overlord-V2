@@ -130,13 +130,13 @@ export class SimRunner {
   }
 
   applyConfig(patch) {
-    Object.assign(this.config, patch);
     const wasRunning = this.running;
-    this.pause();
+    this._stopRealtime();
+    Object.assign(this.config, patch);
     this.build();
     this.logEvent('Patient reset', `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`);
-    this.emit();
     if (wasRunning) this.start();
+    else this.emit();
   }
 
   start() {
@@ -157,17 +157,22 @@ export class SimRunner {
   }
 
   pause() {
+    this._stopRealtime();
+    this.emit();
+  }
+
+  _stopRealtime() {
     this.running = false;
     if (typeof globalThis.cancelAnimationFrame === 'function') {
       globalThis.cancelAnimationFrame(this._raf);
     }
+    this._raf = 0;
     clearInterval(this._interval);
     this._interval = 0;
-    this.emit();
   }
 
   reset() {
-    this.pause();
+    this._stopRealtime();
     this.build();
     this.log = [];
     this.emit();

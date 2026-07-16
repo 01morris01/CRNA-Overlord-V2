@@ -240,3 +240,72 @@ describe('SimRunner instructor NMB administrative contract', () => {
     expect(runner.d._rocuroniumCe).toBe(0);
   });
 });
+
+describe('SimRunner rebuild snapshot coherence', () => {
+  it('reset emits only the rebuilt t=0 snapshot with the administrative target cleared', () => {
+    const runner = new SimRunner();
+    runner.setInstructorNmbTarget({ targetTofRatio: 0.25 });
+    runner.stepFor(1);
+    const emissions = [];
+    runner.onTick = (snapshot) => emissions.push(snapshot);
+
+    runner.reset();
+
+    expect(emissions).toHaveLength(1);
+    expect(emissions[0]).toMatchObject({
+      t: 0,
+      running: false,
+      lifecycle: 'READY',
+      instructorNmbTarget: null,
+      tofRatio: 1,
+      effectiveNmbBlockade: 0,
+    });
+  });
+
+  it('applyConfig never emits stale physiology or target metadata under new demographics', () => {
+    const runner = new SimRunner();
+    runner.setInstructorNmbTarget({ targetTofRatio: 0.25 });
+    runner.stepFor(1);
+    runner.start();
+    const emissions = [];
+    runner.onTick = (snapshot) => emissions.push(snapshot);
+
+    runner.applyConfig({
+      weightKg: 90,
+      ageYears: 60,
+      sex: 'Female',
+      baselineHR: 88,
+    });
+
+    expect(emissions).toHaveLength(1);
+    expect(emissions[0]).toMatchObject({
+      t: 0,
+      running: true,
+      lifecycle: 'RUNNING',
+      instructorNmbTarget: null,
+      tofRatio: 1,
+      effectiveNmbBlockade: 0,
+      hr: 88,
+      weightKg: 90,
+      patient: '90 kg · 60 y · Female',
+    });
+    runner.pause();
+  });
+
+  it('keeps explicit public pause observable through one paused snapshot', () => {
+    const runner = new SimRunner();
+    runner.stepFor(1);
+    runner.start();
+    const emissions = [];
+    runner.onTick = (snapshot) => emissions.push(snapshot);
+
+    runner.pause();
+
+    expect(emissions).toHaveLength(1);
+    expect(emissions[0]).toMatchObject({
+      t: runner.simTime,
+      running: false,
+      lifecycle: 'PAUSED',
+    });
+  });
+});
