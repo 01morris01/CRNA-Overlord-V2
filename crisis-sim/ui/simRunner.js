@@ -7,7 +7,7 @@
    internals directly.
    ═══════════════════════════════════════════════════════════════════ */
 import {
-  AirwayDevice, buildPhysRig, ScenarioManager, VentMode,
+  AirwayDevice, buildPhysRig, div, RoundToInt, RubricScoringSession, ScenarioManager, VentMode,
 } from '../sim/index.js';
 import {
   buildDebrief as buildScenarioDebrief,
@@ -90,6 +90,7 @@ export class SimRunner {
     this._raf = 0;
     this._interval = 0;
     this._procedureUnsubscribe = null;
+    this.rubricSession = null;
     this._rafLoop = this._rafLoop.bind(this);
     this._tick = this._tick.bind(this);
     this.build();
@@ -122,6 +123,7 @@ export class SimRunner {
     this.p = p; this.d = d; this.l = l; this.v = v; this.a = a; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
     this.tofCheckHistory = [];
+    this.rubricSession = null;
   }
 
   applyConfig(patch) {
@@ -192,6 +194,7 @@ export class SimRunner {
     let guard = 0;
     while (this._accum >= step && guard < 8000) {
       this.core.stepOnce(step);
+      this.sampleRubricTraceAfterStep();
       this._accum -= step;
       guard++;
     }
@@ -200,6 +203,101 @@ export class SimRunner {
   }
 
   emit() { if (this.onTick) this.onTick(this.snapshot()); }
+
+  stepFor(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) {
+      throw new RangeError('seconds must be a finite nonnegative number');
+    }
+    const step = this.core.fixedStep;
+    const steps = RoundToInt(div(seconds, step));
+    for (let index = 0; index < steps; index += 1) {
+      this.core.stepOnce(step);
+      this.sampleRubricTraceAfterStep();
+    }
+    this.simTime = this.core.simTime;
+    if (this.running) {
+      this._lastReal = typeof globalThis.performance?.now === 'function'
+        ? globalThis.performance.now()
+        : Date.now();
+    }
+    this.emit();
+    return this.snapshot();
+  }
+
+  activeAnestheticInfusions() {
+    return this.d.activeInfusions
+      .filter(({ drugName, ratePerHour }) => (
+        drugName === 'Propofol' && Number.isFinite(ratePerHour)
+      ))
+      .map(({ drugName, ratePerHour }) => ({ drug: drugName, rate: ratePerHour }));
+  }
+
+  attachRubricSession({ rubric, criteria } = {}) {
+    const session = new RubricScoringSession({ rubric, criteria, seed: SEED });
+    session.recordTrace(this.compactRubricSnapshot(0));
+    this.rubricSession = session;
+    return session;
+  }
+
+  compactRubricSnapshot(t = this.simTime) {
+    const p = this.p;
+    const v = this.v;
+    return {
+      t,
+      hr: p.heartRate,
+      sbp: p.systolicBP,
+      dbp: p.diastolicBP,
+      map: p.meanArterialPressure > 0
+        ? p.meanArterialPressure
+        : p.diastolicBP + (p.systolicBP - p.diastolicBP) / 3,
+      spo2: p.spO2,
+      rr: p.respiratoryRate,
+      etco2: p.etCO2,
+      eto2: p.endTidalO2Percent,
+      bis: p.bisIndex,
+      mac: p.macMultiple,
+      tof: p.trainOfFourCount,
+      tofRatio: p.trainOfFourRatio,
+      effectiveNmbBlockade: p.effectiveNmbBlockade,
+      respiratoryMuscleCapability: p.respiratoryMuscleCapability,
+      airwayDevice: p.airwayDeviceState,
+      capnogramPresent: p.capnogramPresent,
+      cricoidPressureActive: this.a.cricoidPressureActive,
+      intubationAttemptCount: this.a.intubationAttemptCount,
+      spontaneousRR: p.spontaneousRespiratoryRate,
+      spontaneousTV: p.spontaneousTidalVolume,
+      spontaneousMV: p.spontaneousMinuteVentilation,
+      mechanicalMV: v.mechanicalMinuteVentilation,
+      effectiveMV: v.effectiveMinuteVentilation,
+      ventMode: v.mode,
+      ventSetTV: v.setTidalVolume,
+      ventSetRR: v.setRespiratoryRate,
+      ventSetPeep: v.setPeep,
+      ventSetFiO2: v.setFiO2,
+      o2Flow: v.o2FlowLPerMin,
+      airFlow: v.airFlowLPerMin,
+      n2oFlow: v.n2oFlowLPerMin,
+      vaporizer: v.vaporizerDial,
+      vaporizerAgent: v.vaporizerAgent,
+      activeAnestheticInfusions: this.activeAnestheticInfusions(),
+    };
+  }
+
+  recordRubricAction(action, meta = {}, tSec = this.a?.timeSec ?? this.simTime) {
+    if (!this.rubricSession) return null;
+    return this.rubricSession.recordAction({
+      tSec,
+      action,
+      meta,
+      snapshot: this.compactRubricSnapshot(tSec),
+    });
+  }
+
+  sampleRubricTraceAfterStep() {
+    if (!this.rubricSession || this.core.tickCount % 50 !== 0) return null;
+    const t = this.core.tickCount / 50;
+    return this.rubricSession.recordTrace(this.compactRubricSnapshot(t));
+  }
 
   snapshot() {
     const p = this.p, v = this.v;
@@ -215,6 +313,7 @@ export class SimRunner {
       mechanicalMV: v.mechanicalMinuteVentilation, effectiveMV: v.effectiveMinuteVentilation,
       fio2: p.fiO2, ventMode: v.mode, vaporizer: v.vaporizerDial, vaporizerAgent: v.vaporizerAgent,
       ventSetTV: v.setTidalVolume, ventSetRR: v.setRespiratoryRate, ventSetPeep: v.setPeep,
+      ventSetFiO2: v.setFiO2,
       ventSetPressure: v.setPressureAbovePeep, ventSetPressureSupport: v.setPressureSupport,
       o2Flow: v.o2FlowLPerMin, airFlow: v.airFlowLPerMin, n2oFlow: v.n2oFlowLPerMin,
       intubated: p.isIntubated, spont: p.isBreathingSpontaneously, status: p.status,
@@ -246,6 +345,7 @@ export class SimRunner {
         : null,
       tofCheckCount: this.tofCheckHistory.length,
       tofCheckHistory: this.tofCheckHistory.map((entry) => ({ ...entry })),
+      activeAnestheticInfusions: this.activeAnestheticInfusions(),
       lidocainePlasmaTotalMcgMl: this.l.plasmaTotalMcgMl,
       lidocainePlasmaFreeMcgMl: this.l.plasmaFreeMcgMl,
       lidocaineEffectSiteMcgMl: this.l.effectSiteMcgMl,
@@ -477,11 +577,20 @@ export class SimRunner {
     return { state, started: state === 'READY' };
   }
 
-  setVentMode(mode) { this.v.setMode(mode); this.logEvent('Ventilator', `Mode → ${ventName(mode)}`); }
+  setVentMode(mode) {
+    const previousMode = this.v.mode;
+    this.v.setMode(mode);
+    this.logEvent('Ventilator', `Mode → ${ventName(mode)}`, {
+      action: 'vent_mode_changed', previousMode, mode: this.v.mode,
+    });
+  }
 
   setMachine(patch) {
     Object.assign(this.v, patch);
     if ('mode' in patch) this.v.setMode(patch.mode);
+    this.logEvent('Machine settings', 'Settings changed', {
+      action: 'machine_settings_changed', patch: { ...patch },
+    });
   }
 
   setVolatile({ agent, dialPercent } = {}) {
@@ -521,6 +630,20 @@ export class SimRunner {
     );
     this.emit();
     return { ...stored };
+  }
+
+  assessSpontaneousVentilation() {
+    this.logEvent('Respiratory assessment', 'Spontaneous ventilation assessed', {
+      action: 'spontaneous_ventilation_assessed',
+    });
+    return this.compactRubricSnapshot();
+  }
+
+  confirmEtco2() {
+    this.logEvent('Airway confirmation', 'Continuous EtCO₂ confirmed', {
+      action: 'confirm_etco2',
+    });
+    return this.compactRubricSnapshot();
   }
 
   configureIntubationAttempts(options) { return this.a.configureIntubation(options); }
@@ -589,6 +712,10 @@ export class SimRunner {
 
   logEvent(kind, detail, meta) {
     const entry = { t: this.simTime, kind, detail, meta: meta || null };
+    if (typeof meta?.action === 'string') {
+      const { action, ...rubricMeta } = meta;
+      this.recordRubricAction(action, rubricMeta);
+    }
     this.log.push(entry);
     if (this.onEvent) this.onEvent(entry);
   }
@@ -607,6 +734,7 @@ export class SimRunner {
       detail: event.type,
       meta: { action: event.type, ...event.meta },
     };
+    this.recordRubricAction(event.type, { ...event.meta }, event.tSec);
     this.log.push(entry);
     if (this.onEvent) this.onEvent(entry);
   }

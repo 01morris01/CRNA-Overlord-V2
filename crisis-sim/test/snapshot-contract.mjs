@@ -4,7 +4,7 @@ import { SimRunner } from '../ui/simRunner.js';
 const numericKeys = [
   't', 'hr', 'sbp', 'dbp', 'map', 'spo2', 'rr', 'etco2', 'temp',
   'bis', 'mac', 'etAgent', 'tof', 'tofRatio', 'ppeak', 'mv', 'tv',
-  'fio2', 'ventMode', 'vaporizer', 'ventSetTV', 'ventSetRR', 'ventSetPeep',
+  'fio2', 'ventMode', 'vaporizer', 'ventSetTV', 'ventSetRR', 'ventSetPeep', 'ventSetFiO2',
   'ventSetPressure', 'ventSetPressureSupport', 'o2Flow', 'airFlow', 'n2oFlow', 'status',
   'forcedApneaContribution', 'drugDepressionContribution',
   'complicationDriveContribution', 'centralDrive', 'effectiveNmbBlockade',
@@ -41,7 +41,7 @@ const stringKeys = [
 const arrayKeys = [
   'cricoidPressureHistory', 'ppvHistory', 'intubationAttempts', 'tofCheckHistory',
   'lidocaineRegionalHistory', 'lidocaineDoseHistory', 'lidocaineToxicityHistory',
-  'lipidRescueHistory',
+  'lipidRescueHistory', 'activeAnestheticInfusions',
 ];
 const nullableObjectKeys = ['ppvCurrent', 'lastTofCheck'];
 
@@ -99,6 +99,15 @@ copied.lidocaineRegionalHistory[0].remainingMg = -1;
 copied.lidocaineDoseHistory[0].totalDoseMg = -1;
 assert.equal(runner.snapshot().lidocaineRegionalHistory[0].remainingMg, 300);
 assert.ok(runner.snapshot().lidocaineDoseHistory[0].totalDoseMg > 0);
+
+runner.d.startInfusion('Propofol', 300);
+runner.d.startInfusion('Fentanyl', 0.1);
+const infusionSnapshot = runner.snapshot();
+assert.deepEqual(infusionSnapshot.activeAnestheticInfusions, [
+  { drug: 'Propofol', rate: 300 },
+]);
+infusionSnapshot.activeAnestheticInfusions[0].rate = -1;
+assert.equal(runner.snapshot().activeAnestheticInfusions[0].rate, 300);
 
 console.log('SNAPSHOT CONTRACT: PASS');
 console.log(`keys=${requiredKeys.length} numeric=${numericKeys.length} boolean=${booleanKeys.length} string=${stringKeys.length} arrays=${arrayKeys.length}`);

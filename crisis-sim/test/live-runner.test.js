@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { SimRunner } from '../ui/simRunner.js';
+import emergenceRubric from '../../data/rubrics/carson-newman-anesthesia-emergence.json';
+import rsiRubric from '../../data/rubrics/carson-newman-rsi-induction.json';
+import { SimRunner, VentMode } from '../ui/simRunner.js';
 
 function advance(runner, seconds) {
   runner.core.stepFor(seconds);
@@ -8,6 +10,200 @@ function advance(runner, seconds) {
 }
 
 describe('live SimRunner integration', () => {
+  it('attaches a rubric session with a compact initial trace at exact t=0', () => {
+    const runner = new SimRunner();
+
+    const session = runner.attachRubricSession({
+      rubric: emergenceRubric,
+      criteria: { weightKg: 70 },
+    });
+
+    expect(runner.rubricSession).toBe(session);
+    expect(session.getLiveResult().trace).toEqual([
+      expect.objectContaining({
+        t: 0,
+        airwayDevice: 'mask',
+        ventSetFiO2: expect.any(Number),
+        activeAnestheticInfusions: [],
+      }),
+    ]);
+    expect(Object.getPrototypeOf(session.getLiveResult().trace[0])).toBe(Object.prototype);
+  });
+
+  it('samples byte-identical one-second evidence through uneven and continuous advances', () => {
+    function run(chunks) {
+      const runner = new SimRunner();
+      const session = runner.attachRubricSession({
+        rubric: emergenceRubric,
+        criteria: { weightKg: 70 },
+      });
+      runner.setForcedApnea(true);
+      runner.deliverMaskVentilation({
+        durationSeconds: 2.5,
+        tidalVolumeMl: 500,
+        respiratoryRate: 12,
+      });
+      for (const seconds of chunks) runner.stepFor(seconds);
+      return session.getLiveResult().trace;
+    }
+
+    const continuous = run([2.5]);
+    const uneven = run([0.38, 0.62, 0.46, 1.04]);
+
+    expect(continuous.map(({ t }) => t)).toEqual([0, 1, 2]);
+    expect(continuous[1]).toMatchObject({ mechanicalMV: 6, effectiveMV: 6 });
+    expect(continuous[2]).toMatchObject({ mechanicalMV: 6, effectiveMV: 6 });
+    expect(JSON.stringify(uneven)).toBe(JSON.stringify(continuous));
+  });
+
+  it('captures integer trace samples while an intubation attempt is in progress', () => {
+    const runner = new SimRunner();
+    const session = runner.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    });
+    runner.configureIntubationAttempts({ attemptDurationSeconds: 2.5 });
+    runner.attemptIntubation();
+
+    runner.stepFor(2.5);
+
+    expect(session.getLiveResult().trace.map(({ t }) => t)).toEqual([0, 1, 2]);
+    expect(session.getLiveResult().trace[1]).toMatchObject({
+      airwayDevice: 'mask', intubationAttemptCount: 1, mechanicalMV: 0,
+    });
+    expect(session.getLiveResult().trace[2]).toMatchObject({
+      airwayDevice: 'mask', intubationAttemptCount: 1, mechanicalMV: 0,
+    });
+  });
+
+  it('samples the same fixed trace from the production wall-clock tick loop', () => {
+    const runner = new SimRunner();
+    const session = runner.attachRubricSession({
+      rubric: emergenceRubric,
+      criteria: { weightKg: 70 },
+    });
+    runner.running = true;
+    runner._lastReal = 0;
+
+    runner._tick(500);
+    runner._tick(1000);
+
+    expect(session.getLiveResult().trace.map(({ t }) => t)).toEqual([0, 1]);
+    runner.pause();
+  });
+
+  it('records normalized clinical actions with immediate snapshots and procedure timestamps', () => {
+    const runner = new SimRunner();
+    const session = runner.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    });
+
+    runner.preoxygenate();
+    runner.setMachine({
+      setFiO2: 1,
+      setTidalVolume: 500,
+      setRespiratoryRate: 12,
+      o2FlowLPerMin: 10,
+    });
+    runner.setVentMode(VentMode.VCV);
+    runner.setVolatile({ agent: 'Sevoflurane', dialPercent: 2 });
+    runner.giveBolus('Propofol', 140, 'Propofol 140 mg');
+    runner.checkTrainOfFour();
+    runner.applyCricoidPressure();
+    runner.deliverMaskVentilation({ durationSeconds: 1 });
+    runner.stepFor(1);
+    runner.configureIntubationAttempts({ attemptDurationSeconds: 1 });
+    runner.attemptIntubation();
+    runner.stepFor(1);
+    runner.confirmEtco2();
+    runner.releaseCricoidPressure();
+    runner.assessSpontaneousVentilation();
+    runner.extubate();
+
+    const ledger = session.getLiveResult().actionLedger;
+    const canonical = ledger.map(({ action }) => action);
+    expect(canonical).toEqual([
+      'machine_settings_changed',
+      'preoxygenate',
+      'machine_settings_changed',
+      'vent_mode_changed',
+      'volatile_changed',
+      'drug',
+      'tof_checked',
+      'cricoid_pressure_applied',
+      'mask_ppv_started',
+      'mask_ppv_completed',
+      'intubation_attempt_started',
+      'intubation_attempt_succeeded',
+      'confirm_etco2',
+      'cricoid_pressure_released',
+      'spontaneous_ventilation_assessed',
+      'extubate',
+    ]);
+    for (const action of ledger) {
+      expect(action.snapshot).toEqual(expect.objectContaining({
+        t: expect.any(Number),
+        airwayDevice: expect.any(String),
+        ventSetFiO2: expect.any(Number),
+      }));
+    }
+    const completedLog = runner.log.find(
+      (entry) => entry.meta?.action === 'mask_ppv_completed',
+    );
+    const completedAction = ledger.find(({ action }) => action === 'mask_ppv_completed');
+    expect(completedAction.tSec).toBe(completedLog.t);
+    expect(completedAction.tSec).toBe(1);
+    expect(ledger.find(({ action }) => action === 'intubation_attempt_succeeded').tSec)
+      .toBe(2);
+    expect(ledger.find(({ action }) => action === 'vent_mode_changed').meta)
+      .toMatchObject({ mode: VentMode.VCV });
+    expect(ledger.find(({ action }) => action === 'drug').snapshot.activeAnestheticInfusions)
+      .toEqual([]);
+  });
+
+  it('keeps rubric drivers inert without a session and administrative airway setup unscoreable', () => {
+    const runner = new SimRunner();
+
+    expect(() => runner.assessSpontaneousVentilation()).not.toThrow();
+    expect(() => runner.confirmEtco2()).not.toThrow();
+    expect(runner.setAirwayDevice('intubated')).toMatchObject({ ok: true });
+    expect(runner.rubricSession).toBeNull();
+
+    const scored = new SimRunner();
+    const session = scored.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    });
+    expect(scored.setAirwayDevice('intubated')).toMatchObject({ ok: true });
+    expect(session.getLiveResult().actionLedger.filter(
+      ({ action }) => action.startsWith('intubation_attempt_'),
+    )).toEqual([]);
+  });
+
+  it('defensively copies compact anesthetic-infusion evidence', () => {
+    const runner = new SimRunner();
+    runner.d.startInfusion('Propofol', 300);
+    runner.d.startInfusion('Fentanyl', 0.1);
+    runner.d.startInfusion('Rocuronium', 20);
+    const session = runner.attachRubricSession({
+      rubric: emergenceRubric,
+      criteria: { weightKg: 70 },
+    });
+
+    const full = runner.snapshot();
+    const compact = runner.compactRubricSnapshot();
+    expect(full.activeAnestheticInfusions).toEqual([{ drug: 'Propofol', rate: 300 }]);
+    expect(compact.activeAnestheticInfusions).toEqual([{ drug: 'Propofol', rate: 300 }]);
+    full.activeAnestheticInfusions[0].rate = -1;
+    compact.activeAnestheticInfusions[0].rate = -2;
+
+    expect(runner.d.activeInfusions.find(({ drugName }) => drugName === 'Propofol').ratePerHour)
+      .toBe(300);
+    expect(session.getLiveResult().trace[0].activeAnestheticInfusions)
+      .toEqual([{ drug: 'Propofol', rate: 300 }]);
+  });
+
   it('starts physiologic time when the first READY dose is administered', () => {
     const runner = new SimRunner();
 
