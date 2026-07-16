@@ -40,6 +40,15 @@ const BASE_ARRAY_FIELDS = Object.freeze([
   'criticalActionsMissed',
   'dangerousActions',
 ]);
+const VIOLATION_KEYS = Object.freeze([
+  'rubricId',
+  'itemId',
+  'displayNumber',
+  'text',
+  'tSec',
+  'triggerAction',
+  'evidence',
+]);
 
 function isPlainObject(value) {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -303,6 +312,47 @@ function validateRubricProvenance(sessionResult, rubric) {
   }
 }
 
+function validateViolationProvenance(sessionResult, rubric) {
+  const trustedItems = new Map(rubric.items.map((item) => [item.id, item]));
+  const accepted = [];
+  for (let index = 0; index < sessionResult.violations.length; index += 1) {
+    const violation = sessionResult.violations[index];
+    if (!isPlainObject(violation)) {
+      throw new TypeError(`sessionResult.violations[${index}] must be a plain object`);
+    }
+    const keys = Object.keys(violation);
+    if (keys.length !== VIOLATION_KEYS.length
+      || VIOLATION_KEYS.some((key) => !Object.hasOwn(violation, key))) {
+      throw new TypeError(`sessionResult.violations[${index}] does not match the violation contract`);
+    }
+    if (violation.rubricId !== rubric.id) {
+      throw new RangeError(`sessionResult.violations[${index}].rubricId does not match the rubric`);
+    }
+    const item = trustedItems.get(violation.itemId);
+    if (!item) {
+      throw new RangeError(`sessionResult.violations[${index}].itemId is unknown`);
+    }
+    if (violation.displayNumber !== item.displayNumber) {
+      throw new RangeError(`sessionResult.violations[${index}].displayNumber does not match the rubric item`);
+    }
+    if (violation.text !== item.text) {
+      throw new RangeError(`sessionResult.violations[${index}].text does not match the literal rubric item`);
+    }
+    requireFinite(violation.tSec, `sessionResult.violations[${index}].tSec`, { min: 0 });
+    if (typeof violation.triggerAction !== 'string'
+      || violation.triggerAction.trim().length === 0) {
+      throw new TypeError(`sessionResult.violations[${index}].triggerAction must be nonempty`);
+    }
+    if (!isPlainObject(violation.evidence)) {
+      throw new TypeError(`sessionResult.violations[${index}].evidence must be a plain object`);
+    }
+    if (accepted.some((candidate) => equalJsonSafe(candidate, violation))) {
+      throw new RangeError(`Duplicate violation record at index ${index}`);
+    }
+    accepted.push(violation);
+  }
+}
+
 function validateBaseResult(baseResult) {
   for (const field of BASE_STRING_FIELDS) {
     if (typeof baseResult[field] !== 'string') {
@@ -490,6 +540,7 @@ export function buildRubricDebrief({ baseResult, sessionResult, rubricDefinition
   validateBaseResult(base);
   validateFinalizedSession(session);
   validateRubricProvenance(session, rubric);
+  validateViolationProvenance(session, rubric);
 
   const actionTimeline = session.actionLedger.map((record) => ({
     ...copyJsonSafe(record, 'action record'),

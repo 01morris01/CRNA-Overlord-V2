@@ -524,11 +524,61 @@ describe('observed consequences', () => {
       displayNumber: '3',
       text: emergenceRubric.items[2].text,
       tSec: 12,
+      triggerAction: 'extubate',
       evidence: { measured: { tofRatio: 0.55 } },
     }];
     const result = composeRubric(emergenceRubric, sessionResult);
     expect(result.violationFlags).toEqual(sessionResult.violations);
     expect(result.violationFlags).not.toBe(sessionResult.violations);
+    result.violationFlags[0].text = 'mutated output';
+    result.violationFlags[0].evidence.measured.tofRatio = 1;
+    expect(composeRubric(emergenceRubric, sessionResult).violationFlags)
+      .toEqual(sessionResult.violations);
+  });
+
+  test.each([
+    ['wrong rubric id', (flag) => { flag.rubricId = rsiRubric.id; }],
+    ['unknown item id', (flag) => { flag.itemId = 'emergence-unknown'; }],
+    ['wrong existing item id', (flag) => { flag.itemId = 'emergence-4'; }],
+    ['wrong display number', (flag) => { flag.displayNumber = 'X'; }],
+    ['forged literal text', (flag) => { flag.text = 'Forged violation label'; }],
+    ['negative trigger time', (flag) => { flag.tSec = -1; }],
+    ['empty trigger action', (flag) => { flag.triggerAction = ''; }],
+    ['non-object evidence', (flag) => { flag.evidence = null; }],
+  ])('rejects forged violation provenance: %s', (_label, mutate) => {
+    const sessionResult = finalizedFor(emergenceRubric);
+    const item = emergenceRubric.items[2];
+    const flag = {
+      rubricId: emergenceRubric.id,
+      itemId: item.id,
+      displayNumber: item.displayNumber,
+      text: item.text,
+      tSec: 12,
+      triggerAction: 'extubate',
+      evidence: { measured: { tofRatio: 0.55 } },
+    };
+    mutate(flag);
+    sessionResult.violations = [flag];
+
+    expect(() => composeRubric(emergenceRubric, sessionResult))
+      .toThrow(/violation|rubric|item|display|text|time|trigger|evidence/i);
+  });
+
+  test('rejects an exact duplicate violation record', () => {
+    const sessionResult = finalizedFor(emergenceRubric);
+    const item = emergenceRubric.items[2];
+    const flag = {
+      rubricId: emergenceRubric.id,
+      itemId: item.id,
+      displayNumber: item.displayNumber,
+      text: item.text,
+      tSec: 12,
+      triggerAction: 'extubate',
+      evidence: { measured: { tofRatio: 0.55 } },
+    };
+    sessionResult.violations = [flag, structuredClone(flag)];
+
+    expect(() => composeRubric(emergenceRubric, sessionResult)).toThrow(/duplicate violation/i);
   });
 });
 
