@@ -585,6 +585,94 @@ describe('RubricScoringSession instructor scoring', () => {
     const elapsedMs = performance.now() - startedAt;
     expect(elapsedMs).toBeLessThan(200);
   }, 15_000);
+
+  test('evaluates one uncached multi-hour 34-field trace within the live scoring budget', () => {
+    const session = new RubricScoringSession({ rubric: rsiRaw, criteria: { weightKg: 70 } });
+    const sampleCount = 2 * 60 * 60;
+    for (let second = 0; second < sampleCount; second += 1) {
+      const sample = {
+        t: second,
+        hr: 72,
+        sbp: 118,
+        dbp: 72,
+        map: 87,
+        spo2: 99,
+        rr: 14,
+        etco2: 38,
+        eto2: 90,
+        temp: 36.8,
+        bis: 96,
+        mac: 0,
+        etAgent: 0,
+        agent: 'none',
+        tof: 4,
+        tofRatio: 1,
+        ppeak: 0,
+        mv: 6.86,
+        tv: 490,
+        mechanicalMV: 0,
+        effectiveMV: 6.86,
+        fio2: 1,
+        ventMode: 0,
+        vaporizer: 0,
+        ventSetTV: 500,
+        ventSetRR: 12,
+        ventSetPeep: 5,
+        ventSetPressure: 15,
+        o2Flow: 6,
+        airFlow: 0,
+        n2oFlow: 0,
+        airwayDevice: 'mask',
+        spontaneousRR: 14,
+        spontaneousTV: 490,
+      };
+      if (second === 0) expect(Object.keys(sample)).toHaveLength(34);
+      session.recordTrace(sample);
+    }
+    session.recordAction({
+      tSec: sampleCount,
+      action: 'drug',
+      meta: { drug: 'Propofol', doseMg: 100 },
+    });
+    session.recordAction({
+      tSec: sampleCount + 1,
+      action: 'drug',
+      meta: { drug: 'Rocuronium', doseMg: 50 },
+    });
+    session.recordAction({ tSec: sampleCount + 2, action: 'cricoid_pressure_applied' });
+    session.recordAction({
+      tSec: sampleCount + 3,
+      action: 'intubation_attempt_started',
+      meta: { attemptNumber: 1 },
+    });
+    session.getLiveResult();
+
+    session.recordAction({
+      tSec: sampleCount + 4,
+      action: 'volatile_changed',
+      meta: { agent: 'Sevoflurane', vaporizer: 2 },
+    });
+    const startedAt = performance.now();
+    const result = session.getLiveResult();
+    const elapsedMs = performance.now() - startedAt;
+
+    expect(result.items.find(({ id }) => id === 'rsi-7')).toMatchObject({
+      status: 'performed', points: 2,
+    });
+    expect(result.items.find(({ id }) => id === 'rsi-9')).toMatchObject({
+      status: 'performed', points: 2,
+    });
+    expect(result.items.find(({ id }) => id === 'rsi-10a')).toMatchObject({
+      status: 'performed', points: 2,
+    });
+    expect(result.items.find(({ id }) => id === 'rsi-10c')).toMatchObject({
+      status: 'performed', points: 2,
+    });
+    expect(result.items.find(({ id }) => id === 'rsi-11')).toMatchObject({
+      status: 'performed', points: 2,
+    });
+    expect(elapsedMs).toBeLessThan(350);
+  }, 30_000);
 });
 
 describe('RubricScoringSession finalization', () => {

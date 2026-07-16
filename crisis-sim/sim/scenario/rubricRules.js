@@ -291,18 +291,35 @@ function normalizeRubric(rubric) {
   return rubric;
 }
 
-function normalizeEvaluationInput(input) {
-  const copied = normalizedRoot(input, 'evaluateRubricItem input');
+function normalizeEvaluationContext(copied) {
   const finalized = Object.hasOwn(copied, 'finalized') ? copied.finalized : false;
   if (typeof finalized !== 'boolean') throw new TypeError('finalized must be a boolean');
   const criteria = Object.hasOwn(copied, 'criteria') ? copied.criteria : {};
   if (!isPlainObject(criteria)) throw new TypeError('criteria must be a plain object');
   return {
-    item: normalizeItem(copied.item),
     actions: normalizeActionRecords(copied.actions ?? []),
     trace: normalizeTraceRecords(copied.trace ?? []),
     criteria,
     finalized,
+  };
+}
+
+function normalizeEvaluationInput(input) {
+  const copied = normalizedRoot(input, 'evaluateRubricItem input');
+  return {
+    items: [normalizeItem(copied.item)],
+    ...normalizeEvaluationContext(copied),
+  };
+}
+
+function normalizeBulkEvaluationInput(input) {
+  const copied = normalizedRoot(input, 'evaluateRubricItems input');
+  if (!Array.isArray(copied.items)) {
+    throw new TypeError('items must be an ordinary dense array');
+  }
+  return {
+    items: copied.items.map((item, index) => normalizeItem(item, `items[${index}]`)),
+    ...normalizeEvaluationContext(copied),
   };
 }
 
@@ -982,13 +999,16 @@ function failedAttemptOutcome(actionEntries, nextAttempt) {
   )) ?? null;
 }
 
-function failedAttemptOxygenation(trace, failure, ppv, nextAttempt, criteria) {
+function failedAttemptOxygenation(
+  trace, failure, ppv, ppvCompleted, nextAttempt, criteria,
+) {
   if (!ppv) {
     return {
       preRescue: null,
       nadir: null,
       postRescue: null,
       recovered: false,
+      maintained: false,
       citations: [],
     };
   }
@@ -996,32 +1016,52 @@ function failedAttemptOxygenation(trace, failure, ppv, nextAttempt, criteria) {
   const samples = traceEntries(trace).filter(({ sample }) => (
     Number.isSafeInteger(sample.t)
     && sample.t >= failure.record.tSec
-    && sample.t <= endTime
+    && sample.t < endTime
     && typeof sample.spo2 === 'number'
     && Number.isFinite(sample.spo2)
     && sample.spo2 >= 0
     && sample.spo2 <= 100
   ));
   const preRescue = samples.filter(({ sample }) => sample.t <= ppv.record.tSec).at(-1) ?? null;
-  const postRescue = samples.filter(({ sample }) => sample.t >= ppv.record.tSec).at(-1) ?? null;
+  const postCandidates = samples.filter(({ sample }) => (
+    sample.t > ppv.record.tSec
+    && (!preRescue || sample.t > preRescue.sample.t)
+  ));
+  const postCompletionCandidates = ppvCompleted
+    ? postCandidates.filter(({ sample }) => sample.t > ppvCompleted.record.tSec)
+    : [];
+  const postRescue = (postCompletionCandidates.length > 0
+    ? postCompletionCandidates
+    : postCandidates).at(-1) ?? null;
   const nadir = samples.reduce((lowest, candidate) => (
     !lowest || candidate.sample.spo2 < lowest.sample.spo2 ? candidate : lowest
   ), null);
-  const recovered = Boolean(preRescue && nadir && postRescue && (
-    postRescue.sample.spo2 >= preRescue.sample.spo2
-    || postRescue.sample.spo2 - nadir.sample.spo2
-      >= criteria.failedAttemptSpo2RecoveryDelta
-  ));
+  const hasDistinctObservations = Boolean(
+    preRescue
+    && postRescue
+    && preRescue.index !== postRescue.index
+    && postRescue.sample.t > preRescue.sample.t
+    && postRescue.sample.t > ppv.record.tSec,
+  );
+  const recovered = Boolean(
+    hasDistinctObservations
+    && nadir
+    && postRescue.sample.spo2 - nadir.sample.spo2
+      >= criteria.failedAttemptSpo2RecoveryDelta,
+  );
+  const maintained = Boolean(
+    hasDistinctObservations && postRescue.sample.spo2 >= preRescue.sample.spo2,
+  );
   const citations = [preRescue, nadir, postRescue]
     .filter(Boolean)
     .filter((entry, index, entriesToCite) => (
       entriesToCite.findIndex((candidate) => candidate.index === entry.index) === index
     ))
     .map((entry) => traceCitation(entry, ['spo2']));
-  return { preRescue, nadir, postRescue, recovered, citations };
+  return { preRescue, nadir, postRescue, recovered, maintained, citations };
 }
 
-function analyzeFailedAttempts(actionEntries, trace, criteria) {
+function analyzeFailedAttempts(actionEntries, trace, criteria, finalized) {
   const failures = actionEntries.filter(
     ({ record }) => record.action === 'intubation_attempt_failed',
   );
@@ -1029,6 +1069,7 @@ function analyzeFailedAttempts(actionEntries, trace, criteria) {
     const nextAttempt = actionEntries.find((entry) => (
       entry.index > failure.index && entry.record.action === 'intubation_attempt_started'
     ));
+    const segmentOpen = !finalized && !nextAttempt;
     const endIndex = nextAttempt?.index ?? Infinity;
     const entriesInSegment = actionEntries.filter((entry) => (
       entry.index > failure.index && entry.index < endIndex
@@ -1037,6 +1078,11 @@ function analyzeFailedAttempts(actionEntries, trace, criteria) {
       ({ record }) => record.action === 'mask_ppv_started',
     ) ?? null;
     const ppv = entriesInSegment.find((entry) => qualifyingPpv(entry, criteria)) ?? null;
+    const ppvCompleted = ppv
+      ? entriesInSegment.find((entry) => (
+        entry.index > ppv.index && entry.record.action === 'mask_ppv_completed'
+      )) ?? null
+      : null;
     const activeCricoid = Boolean(ppv && cricoidActiveAt(actionEntries, ppv));
     const cricoid = actionEntries.filter((entry) => (
       entry.index <= (ppv?.index ?? endIndex)
@@ -1045,20 +1091,23 @@ function analyzeFailedAttempts(actionEntries, trace, criteria) {
     const cricoidRescue = entriesInSegment.some(
       ({ record }) => record.action === 'cricoid_pressure_applied',
     ) || cricoidActiveAt(actionEntries, failure);
-    const actionStatus = ppv && activeCricoid
-      ? 'performed'
-      : (anyPpv || cricoidRescue ? 'partial' : 'not_performed');
+    let actionStatus;
+    if (ppv && activeCricoid) actionStatus = segmentOpen ? 'partial' : 'performed';
+    else if (anyPpv || cricoidRescue) actionStatus = 'partial';
+    else actionStatus = segmentOpen ? 'pending' : 'not_performed';
     const nextOutcome = failedAttemptOutcome(actionEntries, nextAttempt);
     const oxygenation = failedAttemptOxygenation(
-      trace, failure, ppv, nextAttempt, criteria,
+      trace, failure, ppv, ppvCompleted, nextAttempt, criteria,
     );
     return {
       failure,
       nextAttempt,
       nextOutcome,
       ppv,
+      ppvCompleted,
       cricoid: cricoidRescue ? cricoid : null,
       actionStatus,
+      segmentOpen,
       oxygenation,
     };
   });
@@ -1066,6 +1115,7 @@ function analyzeFailedAttempts(actionEntries, trace, criteria) {
 
 function aggregateSegmentStatuses(statuses) {
   if (statuses.some((status) => status === 'not_performed')) return 'not_performed';
+  if (statuses.some((status) => status === 'pending')) return 'pending';
   if (statuses.some((status) => status === 'partial')) return 'partial';
   return 'performed';
 }
@@ -1080,7 +1130,7 @@ function uniqueCitations(citations) {
 }
 
 function evaluateFailedAttemptPpv({ actionEntries, trace, criteria, finalized, ruleId }) {
-  const segments = analyzeFailedAttempts(actionEntries, trace, criteria);
+  const segments = analyzeFailedAttempts(actionEntries, trace, criteria, finalized);
   if (segments.length === 0) {
     return result(
       finalized ? 'performed' : 'pending', ruleId, [], [],
@@ -1096,11 +1146,13 @@ function evaluateFailedAttemptPpv({ actionEntries, trace, criteria, finalized, r
       ['airwayDevice', 'minuteVentilation', 'cricoidPressure'],
       ['airwayDevice', 'mechanicalMV', 'effectiveMV', 'cricoidPressureActive'],
     ) : null,
+    segment.ppvCompleted ? actionCitation(segment.ppvCompleted) : null,
     segment.nextAttempt ? actionCitation(segment.nextAttempt, ['attemptNumber']) : null,
   ]));
   const summaries = segments.map((segment) => ({
     failureAttemptNumber: ownValue(segment.failure.record.meta, 'attemptNumber') ?? null,
     rescueStatus: segment.actionStatus,
+    segmentOpen: segment.segmentOpen,
     qualifyingPpvIndex: segment.ppv?.index ?? null,
     cricoidActive: Boolean(segment.ppv && cricoidActiveAt(actionEntries, segment.ppv)),
     nextAttemptNumber: ownValue(segment.nextAttempt?.record.meta, 'attemptNumber') ?? null,
@@ -1114,7 +1166,7 @@ function evaluateFailedAttemptPpv({ actionEntries, trace, criteria, finalized, r
 function evaluateAppropriateFailedAttempt({
   actionEntries, trace, criteria, finalized, ruleId,
 }) {
-  const segments = analyzeFailedAttempts(actionEntries, trace, criteria);
+  const segments = analyzeFailedAttempts(actionEntries, trace, criteria, finalized);
   if (segments.length === 0) {
     return result(
       finalized ? 'performed' : 'pending', ruleId, [], [],
@@ -1129,7 +1181,9 @@ function evaluateAppropriateFailedAttempt({
       && Number.isSafeInteger(nextAttemptNumber)
       && nextAttemptNumber > failureAttemptNumber
       && Boolean(segment.nextOutcome);
-    return segment.oxygenation.recovered && progressed ? 'performed' : 'partial';
+    return (segment.oxygenation.recovered || segment.oxygenation.maintained) && progressed
+      ? 'performed'
+      : 'partial';
   });
   const citations = uniqueCitations(segments.flatMap((segment) => [
     actionCitation(segment.failure, ['attemptNumber']),
@@ -1139,6 +1193,7 @@ function evaluateAppropriateFailedAttempt({
       ['airwayDevice', 'minuteVentilation', 'cricoidPressure'],
       ['airwayDevice', 'mechanicalMV', 'effectiveMV', 'cricoidPressureActive'],
     ) : null,
+    segment.ppvCompleted ? actionCitation(segment.ppvCompleted) : null,
     segment.nextAttempt ? actionCitation(segment.nextAttempt, ['attemptNumber']) : null,
     segment.nextOutcome ? actionCitation(segment.nextOutcome, ['attemptNumber']) : null,
   ]));
@@ -1148,10 +1203,18 @@ function evaluateAppropriateFailedAttempt({
   const summaries = segments.map((segment, index) => ({
     failureAttemptNumber: ownValue(segment.failure.record.meta, 'attemptNumber') ?? null,
     rescueStatus: segment.actionStatus,
+    segmentOpen: segment.segmentOpen,
     preRescueSpO2: segment.oxygenation.preRescue?.sample.spo2 ?? null,
+    preRescueTraceIndex: segment.oxygenation.preRescue?.index ?? null,
+    preRescueT: segment.oxygenation.preRescue?.sample.t ?? null,
     nadirSpO2: segment.oxygenation.nadir?.sample.spo2 ?? null,
+    nadirTraceIndex: segment.oxygenation.nadir?.index ?? null,
+    nadirT: segment.oxygenation.nadir?.sample.t ?? null,
     postRescueSpO2: segment.oxygenation.postRescue?.sample.spo2 ?? null,
+    postRescueTraceIndex: segment.oxygenation.postRescue?.index ?? null,
+    postRescueT: segment.oxygenation.postRescue?.sample.t ?? null,
     oxygenationRecovered: segment.oxygenation.recovered,
+    oxygenationMaintained: segment.oxygenation.maintained,
     requiredRecoveryDelta: criteria.failedAttemptSpo2RecoveryDelta,
     nextAttemptNumber: ownValue(segment.nextAttempt?.record.meta, 'attemptNumber') ?? null,
     nextAttemptOutcome: segment.nextOutcome?.record.action === 'intubation_attempt_succeeded'
@@ -1369,16 +1432,6 @@ function evaluateUnderThree({ actionEntries, finalized, ruleId }) {
   return result(finalized ? 'not_performed' : 'pending', ruleId);
 }
 
-function context(input, ruleId) {
-  return {
-    actionEntries: entries(input.actions),
-    trace: input.trace,
-    criteria: resolveCriteria(input.criteria),
-    finalized: input.finalized,
-    ruleId,
-  };
-}
-
 const RULE_EVALUATORS = {
   emergence_stop_anesthetic: evaluateStopAnesthetic,
   emergence_tof_and_reversal: evaluateTof,
@@ -1405,12 +1458,32 @@ const RULE_EVALUATORS = {
 
 export const RUBRIC_RULES = Object.freeze({ ...RULE_EVALUATORS });
 
+function evaluateNormalizedItems({
+  items, actions, trace, criteria, finalized,
+}) {
+  const requestedRules = items.map((item) => {
+    const ruleId = item.engineEvidence.ruleId;
+    const evaluator = RUBRIC_RULES[ruleId];
+    if (!evaluator) throw new RangeError(`Unknown rubric rule: ${String(ruleId)}`);
+    return { ruleId, evaluator };
+  });
+  const sharedContext = {
+    actionEntries: entries(actions),
+    trace,
+    criteria: resolveCriteria(criteria),
+    finalized,
+  };
+  return immutable(requestedRules.map(({ ruleId, evaluator }) => (
+    evaluator({ ...sharedContext, ruleId })
+  )));
+}
+
+export function evaluateRubricItems(input = {}) {
+  return evaluateNormalizedItems(normalizeBulkEvaluationInput(input));
+}
+
 export function evaluateRubricItem(input = {}) {
-  const normalized = normalizeEvaluationInput(input);
-  const ruleId = normalized.item.engineEvidence.ruleId;
-  const evaluator = RUBRIC_RULES[ruleId];
-  if (!evaluator) throw new RangeError(`Unknown rubric rule: ${String(ruleId)}`);
-  return evaluator(context(normalized, ruleId));
+  return evaluateNormalizedItems(normalizeEvaluationInput(input))[0];
 }
 
 function makeFlag(rubric, item, trigger, flagEvidence) {

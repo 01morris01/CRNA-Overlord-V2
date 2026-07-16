@@ -7,6 +7,7 @@ import {
   RubricScoringSession,
   detectRubricViolations,
   evaluateRubricItem,
+  evaluateRubricItems,
 } from '../sim/index.js';
 import { SimRunner } from '../ui/simRunner.js';
 
@@ -125,7 +126,7 @@ const RESCUE_ACTIONS = [
   action(3, 'mask_ppv_started', {
     airwayDevice: 'mask', minuteVentilation: 6, cricoidPressure: true,
   }),
-  action(4, 'intubation_attempt_started', { attemptNumber: 2 }),
+  action(5, 'intubation_attempt_started', { attemptNumber: 2 }),
 ];
 
 describe('rubric rule registry and pure API', () => {
@@ -183,6 +184,33 @@ describe('rubric rule registry and pure API', () => {
     expect(Object.isFrozen(result.evidence)).toBe(true);
     expect(Object.isFrozen(result.evidence.actions)).toBe(true);
     expect(() => { result.evidence.actions[0].tSec = 99; }).toThrow(TypeError);
+  });
+
+  test('bulk evaluation matches single-item results without mutating shared inputs', () => {
+    const items = [
+      itemFor('rsi_medication_selection'),
+      itemFor('rsi_medication_sequence'),
+    ];
+    const actions = [
+      action(1, 'drug', { drug: 'Propofol', doseMg: 100 }),
+      action(2, 'drug', { drug: 'Rocuronium', doseMg: 50 }),
+      action(3, 'intubation_attempt_started', { attemptNumber: 1 }),
+    ];
+    const trace = [{ t: 0, fio2: 1, spontaneousRR: 14, spontaneousTV: 490 }];
+    const before = structuredClone({ items, actions, trace, criteria: CRITERIA });
+
+    const results = evaluateRubricItems({
+      items, actions, trace, criteria: CRITERIA, finalized: false,
+    });
+
+    expect(results).toEqual(items.map((item) => evaluateRubricItem({
+      item, actions, trace, criteria: CRITERIA, finalized: false,
+    })));
+    expect({ items, actions, trace, criteria: CRITERIA }).toEqual(before);
+    expect(Object.isFrozen(results)).toBe(true);
+    expect(Object.isFrozen(results[0])).toBe(true);
+    expect(Object.isFrozen(results[0].evidence.actions)).toBe(true);
+    expect(() => { results[0].evidence.actions[0].tSec = 99; }).toThrow(TypeError);
   });
 
   test('validates named criteria overrides when constructing a scoring session', () => {
@@ -263,6 +291,36 @@ describe('strict exported rubric API boundary', () => {
     class ActionList extends Array {}
     expect(() => evaluateRubricItem({ item: preoxygenationItem, actions: new ActionList() }))
       .toThrow(/ordinary array/i);
+  });
+
+  test('applies the strict boundary to bulk item lists and rejects unknown rules', () => {
+    class ItemList extends Array {}
+    expect(() => evaluateRubricItems({ items: new ItemList(preoxygenationItem) }))
+      .toThrow(/ordinary array/i);
+    expect(() => evaluateRubricItems({ items: new Array(1) }))
+      .toThrow(/array index|indexed values/i);
+
+    let getterCalls = 0;
+    const accessorInput = {};
+    Object.defineProperty(accessorInput, 'items', {
+      enumerable: true,
+      get() {
+        getterCalls += 1;
+        return [preoxygenationItem];
+      },
+    });
+    expect(() => evaluateRubricItems(accessorInput)).toThrow(/data propert/i);
+    expect(getterCalls).toBe(0);
+
+    expect(() => evaluateRubricItems({
+      items: [preoxygenationItem, { engineEvidence: { ruleId: 'invented_rule' } }],
+      actions: [],
+      trace: [],
+      criteria: CRITERIA,
+    })).toThrow(RangeError);
+    expect(() => evaluateRubricItems({
+      items: [preoxygenationItem], finalized: 'false',
+    })).toThrow(/finalized/i);
   });
 
   test.each([
@@ -572,7 +630,7 @@ describe('every engine-observable rule resolves performed and not performed', ()
       performed: {
         actions: [
           ...RESCUE_ACTIONS,
-          action(5, 'intubation_attempt_succeeded', { attemptNumber: 2 }),
+          action(6, 'intubation_attempt_succeeded', { attemptNumber: 2 }),
         ],
         trace: [
           { t: 1, spo2: 98 },
@@ -1360,6 +1418,7 @@ describe('failed-attempt segment aggregation', () => {
   const ppv = (tSec) => action(tSec, 'mask_ppv_started', {
     airwayDevice: 'mask', minuteVentilation: 6, cricoidPressure: true,
   });
+  const ppvCompleted = (tSec) => action(tSec, 'mask_ppv_completed');
 
   test('a later complete rescue cannot erase an earlier missed or partial segment', () => {
     const missedThenRescued = [
@@ -1454,7 +1513,7 @@ describe('failed-attempt segment aggregation', () => {
     expect(item41.evidence).not.toEqual(item28.evidence);
   });
 
-  test('scores a triggered failure immediately and requires physiology plus progression for item 41', () => {
+  test('keeps a lone failed-attempt rescue window open live and closes it at finalization', () => {
     const failureOnly = [failed(1, 1)];
     const completeRescueWithoutTrace = [
       failed(1, 1), cricoid(2), ppv(3), attemptStarted(4, 2), succeeded(5, 2),
@@ -1465,7 +1524,20 @@ describe('failed-attempt segment aggregation', () => {
       'rsi_appropriate_failed_attempt_intervention',
     ]) {
       expect(evaluate(ruleId, { actions: failureOnly })).toMatchObject({
-        status: 'not_performed', points: 0, evidence: { conditionTriggered: true },
+        status: 'pending',
+        points: null,
+        evidence: {
+          conditionTriggered: true,
+          segments: [{ segmentOpen: true, rescueStatus: 'pending' }],
+        },
+      });
+      expect(evaluate(ruleId, { actions: failureOnly, finalized: true })).toMatchObject({
+        status: 'not_performed',
+        points: 0,
+        evidence: {
+          conditionTriggered: true,
+          segments: [{ segmentOpen: false, rescueStatus: 'not_performed' }],
+        },
       });
       expect(evaluate(ruleId)).toMatchObject({
         status: 'pending', points: null,
@@ -1482,16 +1554,189 @@ describe('failed-attempt segment aggregation', () => {
     })).toMatchObject({ status: 'partial', points: 1 });
   });
 
+  test('closes untouched rescue segments on reattempt and preserves an earlier omission', () => {
+    const failureThenAttempt = [failed(1, 1), attemptStarted(2, 2)];
+    const earlierOmissionThenOpen = [
+      failed(1, 1), attemptStarted(2, 2), failed(3, 2),
+    ];
+
+    for (const ruleId of [
+      'rsi_failed_attempt_ppv_with_cricoid',
+      'rsi_appropriate_failed_attempt_intervention',
+    ]) {
+      expect(evaluate(ruleId, { actions: failureThenAttempt })).toMatchObject({
+        status: 'not_performed', points: 0,
+      });
+      expect(evaluate(ruleId, { actions: earlierOmissionThenOpen })).toMatchObject({
+        status: 'not_performed',
+        points: 0,
+        evidence: {
+          segments: [
+            { segmentOpen: false, rescueStatus: 'not_performed' },
+            { segmentOpen: true, rescueStatus: 'pending' },
+          ],
+        },
+      });
+    }
+  });
+
+  test('scores open partial rescue as partial and closed complete rescue as performed', () => {
+    const openPartial = [failed(1, 1), cricoid(2)];
+    const closedComplete = [
+      failed(1, 1), cricoid(2), ppv(3), attemptStarted(5, 2), succeeded(6, 2),
+    ];
+    const recoveryTrace = [
+      { t: 1, spo2: 98 }, { t: 2, spo2: 94 }, { t: 3, spo2: 95 }, { t: 4, spo2: 98 },
+    ];
+
+    for (const ruleId of [
+      'rsi_failed_attempt_ppv_with_cricoid',
+      'rsi_appropriate_failed_attempt_intervention',
+    ]) {
+      expect(evaluate(ruleId, { actions: openPartial })).toMatchObject({
+        status: 'partial',
+        points: 1,
+        evidence: { segments: [{ segmentOpen: true, rescueStatus: 'partial' }] },
+      });
+    }
+    expect(evaluate('rsi_failed_attempt_ppv_with_cricoid', {
+      actions: closedComplete,
+    })).toMatchObject({ status: 'performed', points: 2 });
+    expect(evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions: closedComplete, trace: recoveryTrace,
+    })).toMatchObject({ status: 'performed', points: 2 });
+  });
+
+  test('does not reuse one SpO2 sample as both pre- and post-rescue evidence', () => {
+    const actions = [
+      failed(1, 1), cricoid(2), ppv(3), attemptStarted(6, 2), succeeded(7, 2),
+    ];
+
+    const result = evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions,
+      trace: [{ t: 3, spo2: 98 }],
+    });
+
+    expect(result).toMatchObject({
+      status: 'partial',
+      points: 1,
+      evidence: {
+        segments: [{
+          preRescueSpO2: 98,
+          preRescueTraceIndex: 0,
+          preRescueT: 3,
+          nadirSpO2: 98,
+          nadirTraceIndex: 0,
+          nadirT: 3,
+          postRescueSpO2: null,
+          postRescueTraceIndex: null,
+          postRescueT: null,
+          oxygenationRecovered: false,
+          oxygenationMaintained: false,
+        }],
+      },
+    });
+  });
+
+  test('accepts distinct post-rescue evidence that maintained baseline oxygenation', () => {
+    const actions = [
+      failed(1, 1), cricoid(2), ppv(3), attemptStarted(6, 2), succeeded(7, 2),
+    ];
+
+    const result = evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions,
+      trace: [{ t: 2, spo2: 98 }, { t: 4, spo2: 98 }],
+    });
+
+    expect(result).toMatchObject({
+      status: 'performed',
+      points: 2,
+      evidence: {
+        segments: [{
+          preRescueSpO2: 98,
+          preRescueTraceIndex: 0,
+          preRescueT: 2,
+          postRescueSpO2: 98,
+          postRescueTraceIndex: 1,
+          postRescueT: 4,
+          oxygenationRecovered: false,
+          oxygenationMaintained: true,
+        }],
+      },
+    });
+  });
+
+  test('prefers a post-completion SpO2 sample and reports delta recovery separately', () => {
+    const actions = [
+      failed(1, 1), cricoid(2), ppv(3), ppvCompleted(4),
+      attemptStarted(6, 2), succeeded(7, 2),
+    ];
+
+    const result = evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions,
+      trace: [
+        { t: 3, spo2: 98 }, { t: 4, spo2: 92 }, { t: 5, spo2: 95 },
+      ],
+    });
+
+    expect(result).toMatchObject({
+      status: 'performed',
+      points: 2,
+      evidence: {
+        segments: [{
+          preRescueSpO2: 98,
+          preRescueTraceIndex: 0,
+          preRescueT: 3,
+          nadirSpO2: 92,
+          nadirTraceIndex: 1,
+          nadirT: 4,
+          postRescueSpO2: 95,
+          postRescueTraceIndex: 2,
+          postRescueT: 5,
+          oxygenationRecovered: true,
+          oxygenationMaintained: false,
+        }],
+      },
+    });
+  });
+
+  test('keeps a closed rescue partial when no distinct post-rescue sample exists', () => {
+    const actions = [
+      failed(1, 1), cricoid(2), ppv(3), attemptStarted(6, 2), succeeded(7, 2),
+    ];
+
+    const result = evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions,
+      trace: [{ t: 2, spo2: 97 }],
+    });
+
+    expect(result).toMatchObject({
+      status: 'partial',
+      points: 1,
+      evidence: {
+        segments: [{
+          preRescueTraceIndex: 0,
+          preRescueT: 2,
+          postRescueSpO2: null,
+          postRescueTraceIndex: null,
+          postRescueT: null,
+          oxygenationRecovered: false,
+          oxygenationMaintained: false,
+        }],
+      },
+    });
+  });
+
   test('requires item 41 to progress to a later numbered attempt with a timely outcome', () => {
     const trace = [
       { t: 1, spo2: 98 }, { t: 2, spo2: 95 }, { t: 3, spo2: 98 },
     ];
     const repeatedAttemptNumber = [
-      failed(1, 1), cricoid(2), ppv(2), attemptStarted(3, 1), succeeded(4, 1),
+      failed(1, 1), cricoid(2), ppv(2), attemptStarted(4, 1), succeeded(5, 1),
     ];
     const outcomeAfterAnotherAttempt = [
-      failed(1, 1), cricoid(2), ppv(2), attemptStarted(3, 2),
-      attemptStarted(4, 3), succeeded(5, 2),
+      failed(1, 1), cricoid(2), ppv(2), attemptStarted(4, 2),
+      attemptStarted(5, 3), succeeded(6, 2),
     ];
 
     expect(evaluate('rsi_appropriate_failed_attempt_intervention', {
@@ -1521,6 +1766,8 @@ describe('failed-attempt segment aggregation', () => {
     advanceRunner(bridge.runner, 1);
     bridge.sync('mask_ppv_completed');
     const after = bridge.trace(2);
+    advanceRunner(bridge.runner, 1);
+    bridge.trace(3);
     bridge.runner.attemptIntubation();
     bridge.sync('intubation_attempt_started');
     advanceRunner(bridge.runner, 1);

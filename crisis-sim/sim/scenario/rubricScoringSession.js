@@ -1,5 +1,9 @@
 import { normalizeRubric } from './rubricLoader.js';
-import { detectRubricViolations, evaluateRubricItem } from './rubricRules.js';
+import {
+  detectRubricViolations,
+  evaluateRubricItem,
+  evaluateRubricItems,
+} from './rubricRules.js';
 
 const DANGEROUS_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 const SCORE_STATUS = Object.freeze({
@@ -295,15 +299,19 @@ export class RubricScoringSession {
 
   _evaluateEngineStates(finalized) {
     let changed = false;
-    for (const item of this.rubric.items) {
-      if (item.scoringSource !== 'ENGINE_OBSERVABLE') continue;
-      const evaluated = evaluateRubricItem({
-        item,
-        actions: this._actionLedger,
-        trace: this._trace,
-        criteria: this.criteria,
-        finalized,
-      });
+    const engineItems = this.rubric.items.filter(
+      (item) => item.scoringSource === 'ENGINE_OBSERVABLE',
+    );
+    const evaluations = evaluateRubricItems({
+      items: engineItems,
+      actions: this._actionLedger,
+      trace: this._trace,
+      criteria: this.criteria,
+      finalized,
+    });
+    for (let index = 0; index < engineItems.length; index += 1) {
+      const item = engineItems[index];
+      const evaluated = evaluations[index];
       const state = this._states.get(item.id);
       const evidenceChanged = !equalJsonSafe(state.evidence, evaluated.evidence);
       if (state.status === evaluated.status

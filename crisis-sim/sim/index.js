@@ -20,6 +20,7 @@ export {
   RUBRIC_RULES,
   detectRubricViolations,
   evaluateRubricItem,
+  evaluateRubricItems,
 } from './scenario/rubricRules.js';
 
 import { PatientPhysiology } from './patientPhysiology.js';
