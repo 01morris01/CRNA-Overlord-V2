@@ -8,6 +8,7 @@
   "sourceFootnoteScoredItems": 53,
   "computedItemCount": 53,
   "computedMaxPoints": 106,
+  "computedCriticalCount": 27,
   "discrepancies": [
     {
       "code": "SOURCE_DENOMINATOR_MISMATCH",

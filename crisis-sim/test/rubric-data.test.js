@@ -265,6 +265,7 @@ describe('literal Carson-Newman rubric data', () => {
         sourceFootnoteScoredItems: 9,
         computedItemCount: 9,
         computedMaxPoints: 18,
+        computedCriticalCount: 5,
         discrepancies: [],
       },
       summary: { itemCount: 9, maxPoints: 18, criticalCount: 5 },
@@ -284,6 +285,7 @@ describe('literal Carson-Newman rubric data', () => {
         sourceFootnoteScoredItems: 14,
         computedItemCount: 14,
         computedMaxPoints: 28,
+        computedCriticalCount: 10,
         discrepancies: [],
       },
       summary: { itemCount: 14, maxPoints: 28, criticalCount: 10 },
@@ -303,6 +305,7 @@ describe('literal Carson-Newman rubric data', () => {
         sourceFootnoteScoredItems: 53,
         computedItemCount: 53,
         computedMaxPoints: 106,
+        computedCriticalCount: 27,
         discrepancies: [{
           code: 'SOURCE_DENOMINATOR_MISMATCH',
           sourceHeaderDenominator: 49,
@@ -345,6 +348,15 @@ describe('literal Carson-Newman rubric data', () => {
     expect(Object.isFrozen(rubric.discrepancies)).toBe(true);
     expect(Object.isFrozen(summarizeRubric(rubric))).toBe(true);
     expect(Object.isFrozen(RUBRIC_SCORING_SOURCES)).toBe(true);
+    expect(Object.getPrototypeOf(rubric)).toBe(Object.prototype);
+    expect(Object.getPrototypeOf(rubric.items[0])).toBe(Object.prototype);
+    expect(Object.getPrototypeOf(rubric.items[1].engineEvidence)).toBe(Object.prototype);
+    expect('attackerMetadata' in rubric).toBe(false);
+    expect(() => { rubric.title = 'mutation'; }).toThrow(TypeError);
+    expect(() => { rubric.items[0].text = 'mutation'; }).toThrow(TypeError);
+    expect(() => { rubric.items[1].engineEvidence.ruleId = 'mutation'; }).toThrow(TypeError);
+    expect(() => { rubric.items.push({}); }).toThrow(TypeError);
+    expect(() => { Object.setPrototypeOf(rubric, { attackerMetadata: true }); }).toThrow(TypeError);
   });
 
   test('preserves the RSI source denominator mismatch without guessing a correction', () => {
@@ -379,6 +391,7 @@ describe('strict rubric loader rejection', () => {
     ['wrong computed item count', (raw) => { raw.computedItemCount += 1; }],
     ['wrong source footnote item count', (raw) => { raw.sourceFootnoteScoredItems += 1; }],
     ['wrong computed maximum', (raw) => { raw.computedMaxPoints += 2; }],
+    ['wrong computed critical count', (raw) => { raw.computedCriticalCount = 99; }],
     ['wrong minimum pass percent', (raw) => { raw.passRule.minimumPercent = 80; }],
     ['weakened critical pass rule', (raw) => { raw.passRule.requireEveryCriticalPerformed = false; }],
     ['non-array discrepancies', (raw) => { raw.discrepancies = {}; }],
@@ -387,6 +400,48 @@ describe('strict rubric loader rejection', () => {
     const raw = copy(emergenceRaw);
     mutate(raw);
     expect(() => normalizeRubric(raw)).toThrow();
+  });
+
+  test.each([
+    ['root', (json) => `{"__proto__":{"attackerMetadata":"root"},${json.slice(1)}`],
+    ['item', (json) => json.replace(
+      '"items":[{',
+      '"items":[{"__proto__":{"attackerMetadata":"item"},',
+    )],
+    ['engine evidence', (json) => json.replace(
+      '"engineEvidence":{',
+      '"engineEvidence":{"__proto__":{"attackerMetadata":"evidence"},',
+    )],
+  ])('rejects an own __proto__ key at the %s boundary', (_name, inject) => {
+    const json = JSON.stringify(emergenceRaw);
+    const raw = JSON.parse(inject(json));
+
+    expect(() => normalizeRubric(raw)).toThrow(/Dangerous rubric key.*__proto__/);
+    expect(Object.prototype.attackerMetadata).toBeUndefined();
+  });
+
+  test.each([
+    ['top-level unexpected field', (raw) => { raw.critcal = 5; }, /Rubric schema.*unexpected.*critcal/],
+    ['top-level missing field', (raw) => { delete raw.course; }, /Rubric schema.*missing.*course/],
+    [
+      'missing computed critical count',
+      (raw) => { delete raw.computedCriticalCount; },
+      /Rubric schema.*missing.*computedCriticalCount/,
+    ],
+    [
+      'item unexpected field',
+      (raw) => { raw.items[0].critcal = false; },
+      /emergence-1 schema.*unexpected.*critcal/,
+    ],
+    [
+      'item missing field',
+      (raw) => { delete raw.items[0].critical; },
+      /emergence-1 schema.*missing.*critical/,
+    ],
+  ])('rejects an exact-schema violation: %s', (_name, mutate, message) => {
+    const raw = copy(emergenceRaw);
+    mutate(raw);
+    expect(() => normalizeRubric(raw)).toThrow(message);
   });
 
   test('rejects an unresolved source denominator mismatch', () => {

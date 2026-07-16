@@ -7,11 +7,37 @@ export const RUBRIC_SCORING_SOURCES = Object.freeze([
 const POINT_SCALE_KEYS = Object.freeze(['notPerformed', 'partial', 'performed']);
 const PASS_RULE_KEYS = Object.freeze(['minimumPercent', 'requireEveryCriticalPerformed']);
 const ENGINE_EVIDENCE_KEYS = Object.freeze(['actionLogEntries', 'ruleId', 'snapshotKeys']);
+const RUBRIC_KEYS = Object.freeze([
+  'computedCriticalCount',
+  'computedItemCount',
+  'computedMaxPoints',
+  'course',
+  'discrepancies',
+  'id',
+  'items',
+  'passRule',
+  'pointScale',
+  'sourceFile',
+  'sourceFootnoteScoredItems',
+  'sourceHeaderDenominator',
+  'sourceSha256',
+  'title',
+]);
+const ITEM_KEYS = Object.freeze([
+  'critical',
+  'displayNumber',
+  'engineEvidence',
+  'id',
+  'pointScale',
+  'scoringSource',
+  'text',
+]);
 const SOURCE_DENOMINATOR_MISMATCH_KEYS = Object.freeze([
   'code',
   'computedMaxPoints',
   'sourceHeaderDenominator',
 ]);
+const DANGEROUS_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
 function evidenceContract(ruleId, snapshotKeys, actionLogEntries) {
   return Object.freeze({
@@ -232,7 +258,15 @@ function deepCopy(value, ancestors = new WeakSet()) {
   ancestors.add(value);
   const result = Array.isArray(value) ? [] : {};
   for (const [key, nested] of Object.entries(value)) {
-    result[key] = deepCopy(nested, ancestors);
+    if (DANGEROUS_OBJECT_KEYS.has(key)) {
+      throw new TypeError(`Dangerous rubric key is not allowed: ${key}`);
+    }
+    Object.defineProperty(result, key, {
+      configurable: true,
+      enumerable: true,
+      value: deepCopy(nested, ancestors),
+      writable: true,
+    });
   }
   ancestors.delete(value);
   return result;
@@ -248,6 +282,19 @@ function deepFreeze(value, visited = new WeakSet()) {
 function ownKeysEqual(value, expected) {
   return isPlainObject(value)
     && Object.keys(value).sort().join('\0') === [...expected].sort().join('\0');
+}
+
+function validateExactKeys(value, expected, label) {
+  if (!isPlainObject(value)) throw new TypeError(`${label} must be an object`);
+  const actual = Object.keys(value);
+  const missing = expected.filter((key) => !actual.includes(key));
+  const unexpected = actual.filter((key) => !expected.includes(key));
+  if (missing.length === 0 && unexpected.length === 0) return;
+
+  const details = [];
+  if (missing.length > 0) details.push(`missing: ${missing.join(', ')}`);
+  if (unexpected.length > 0) details.push(`unexpected: ${unexpected.join(', ')}`);
+  throw new TypeError(`${label} schema is invalid (${details.join('; ')})`);
 }
 
 function requireString(value, label, { id = false } = {}) {
@@ -383,6 +430,7 @@ export function summarizeRubric(rubric) {
 export function normalizeRubric(raw) {
   if (!isPlainObject(raw)) throw new TypeError('Rubric must be an object');
   const rubric = deepCopy(raw);
+  validateExactKeys(rubric, RUBRIC_KEYS, 'Rubric');
 
   requireString(rubric.id, 'id', { id: true });
   requireString(rubric.title, 'title');
@@ -396,6 +444,7 @@ export function normalizeRubric(raw) {
   requirePositiveInteger(rubric.sourceFootnoteScoredItems, 'sourceFootnoteScoredItems');
   requirePositiveInteger(rubric.computedItemCount, 'computedItemCount');
   requirePositiveInteger(rubric.computedMaxPoints, 'computedMaxPoints');
+  requirePositiveInteger(rubric.computedCriticalCount, 'computedCriticalCount');
   validatePointScale(rubric.pointScale, 'pointScale');
   validatePassRule(rubric.passRule);
 
@@ -404,7 +453,8 @@ export function normalizeRubric(raw) {
   }
   const itemIds = new Set();
   for (const item of rubric.items) {
-    if (!isPlainObject(item)) throw new TypeError('Each item must be an object');
+    const itemLabel = typeof item?.id === 'string' && item.id.length > 0 ? item.id : 'Rubric item';
+    validateExactKeys(item, ITEM_KEYS, itemLabel);
     requireString(item.id, 'item.id', { id: true });
     if (itemIds.has(item.id)) throw new RangeError(`Duplicate item id: ${item.id}`);
     itemIds.add(item.id);
@@ -434,8 +484,7 @@ export function normalizeRubric(raw) {
   if (rubric.computedMaxPoints !== summary.maxPoints) {
     throw new RangeError('computedMaxPoints does not match the item point scales');
   }
-  if (Object.hasOwn(rubric, 'computedCriticalCount')
-    && rubric.computedCriticalCount !== summary.criticalCount) {
+  if (rubric.computedCriticalCount !== summary.criticalCount) {
     throw new RangeError('computedCriticalCount does not match item critical metadata');
   }
   validateDiscrepancies(rubric, summary);
