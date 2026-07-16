@@ -34,14 +34,26 @@ function copyJsonSafe(value, label, ancestors = new WeakSet()) {
   ancestors.add(value);
   let result;
   if (Array.isArray(value)) {
-    const indexedKeys = Object.keys(value);
-    const hasOnlyDenseIndexes = indexedKeys.length === value.length
-      && indexedKeys.every((key, index) => key === `${index}`);
-    if (!hasOnlyDenseIndexes) {
+    if (Object.getPrototypeOf(value) !== Array.prototype) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} must contain only ordinary arrays`);
+    }
+    const lengthDescriptor = Object.getOwnPropertyDescriptor(value, 'length');
+    const length = lengthDescriptor.value;
+    if (ownNames.length !== length + 1) {
       ancestors.delete(value);
       throw new TypeError(`${label} arrays must contain only JSON-safe indexed values`);
     }
-    result = value.map((nested, index) => copyJsonSafe(nested, `${label}[${index}]`, ancestors));
+
+    result = new Array(length);
+    for (let index = 0; index < length; index += 1) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, `${index}`);
+      if (!descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        ancestors.delete(value);
+        throw new TypeError(`${label} array indexes must be JSON-safe enumerable data properties`);
+      }
+      result[index] = copyJsonSafe(descriptor.value, `${label}[${index}]`, ancestors);
+    }
   } else {
     if (!isPlainObject(value)) {
       ancestors.delete(value);

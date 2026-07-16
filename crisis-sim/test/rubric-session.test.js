@@ -234,6 +234,81 @@ describe('RubricScoringSession JSON-safe evidence', () => {
     },
   );
 
+  test.each([
+    ['Array subclass with overridden map', () => {
+      class UntrustedArray extends Array {
+        map() { return [Number.NaN]; }
+      }
+      return new UntrustedArray('safe input');
+    }],
+    ['array with a replaced prototype', () => {
+      const array = ['safe input'];
+      Object.setPrototypeOf(array, { map: Array.prototype.map });
+      return array;
+    }],
+    ['array with a null prototype', () => {
+      const array = ['safe input'];
+      Object.setPrototypeOf(array, null);
+      return array;
+    }],
+    ['array with an own non-enumerable map', () => {
+      const array = ['safe input'];
+      Object.defineProperty(array, 'map', {
+        value: () => [Number.NaN],
+      });
+      return array;
+    }],
+    ['array with an extra string property', () => {
+      const array = ['safe input'];
+      array.extra = true;
+      return array;
+    }],
+  ])('rejects %s', (_name, makeArray) => {
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    expect(() => session.recordAction({
+      tSec: 0,
+      action: 'test',
+      meta: { values: makeArray() },
+    })).toThrow(/JSON-safe|ordinary array/);
+  });
+
+  test('rejects an accessor array index without invoking it', () => {
+    let accessed = false;
+    const array = [];
+    Object.defineProperty(array, '0', {
+      enumerable: true,
+      get() {
+        accessed = true;
+        return 'safe input';
+      },
+    });
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+
+    expect(() => session.recordAction({
+      tSec: 0,
+      action: 'test',
+      meta: { values: array },
+    })).toThrow(/JSON-safe|data propert|array index/);
+    expect(accessed).toBe(false);
+  });
+
+  test('accepts ordinary nested arrays and returns a copied frozen representation', () => {
+    const values = [1, { nested: [2, null] }];
+    const session = new RubricScoringSession({ rubric: makeRubric() });
+    const record = session.recordAction({
+      tSec: 0,
+      action: 'test',
+      meta: { values },
+    });
+    values[1].nested[0] = 99;
+
+    expect(record.meta.values).toEqual([1, { nested: [2, null] }]);
+    expect(record.meta.values).not.toBe(values);
+    expect(Object.getPrototypeOf(record.meta.values)).toBe(Array.prototype);
+    expect(Object.isFrozen(record.meta.values)).toBe(true);
+    expect(Object.isFrozen(record.meta.values[1].nested)).toBe(true);
+  });
+
   test('normalizes an omitted action snapshot to JSON-safe null', () => {
     const session = new RubricScoringSession({ rubric: makeRubric() });
     expect(session.recordAction({ tSec: 0, action: 'test' })).toEqual({
