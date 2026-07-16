@@ -682,7 +682,6 @@ describe('rubric scenario lifecycle hardening', () => {
   });
 
   test('preserves assessment and expected-action maxima across administrative rebase', () => {
-    const runner = new SimRunner();
     const definition = structuredClone(standardScenario);
     definition.id = 'max_score_rebase_probe';
     definition.events = [{
@@ -693,14 +692,19 @@ describe('rubric scenario lifecycle hardening', () => {
       points: 7,
     }];
     definition.expectedActions = [{ action: 'call_for_help', points: 11 }];
-    runner.s.loadRaw(definition);
-    runner.s.startScenario();
-    expect(runner.s.maxPossibleScore).toBe(18);
+    const ordinary = new SimRunner();
+    ordinary.s.loadRaw(definition);
+    ordinary.s.startScenario();
+    expect(ordinary.s.maxPossibleScore).toBe(18);
 
-    runner.s.beginAdministrativePreconditioning();
-    runner.s.rebaseLearnerRun();
+    definition.administrativeSetup = {
+      instructorNmbTarget: { targetTofRatio: 0.5 },
+      preconditioningDurationSeconds: 0.02,
+    };
+    const preconditioned = new SimRunner();
+    preconditioned.loadRubricScenario({ scenario: definition, rubric: standardRubric });
 
-    expect(runner.s.maxPossibleScore).toBe(18);
+    expect(preconditioned.s.maxPossibleScore).toBe(18);
   });
 
   test('keeps persistent live configuration through multiple rubric scenarios', () => {
@@ -715,7 +719,11 @@ describe('rubric scenario lifecycle hardening', () => {
     });
     runner.loadRubricScenario({ scenario: rsiScenario, rubric: rsiRubric });
     expect(runner.snapshot().weightKg).toBe(rsiScenario.patientProfile.weightKg);
-    expect(runner.config).toMatchObject({ weightKg: 91, ageYears: 63, sex: 'Female' });
+    expect(runner.config).toMatchObject({
+      weightKg: rsiScenario.patientProfile.weightKg,
+      ageYears: rsiScenario.patientProfile.ageYears,
+      sex: rsiScenario.patientProfile.sex,
+    });
 
     runner.applyConfig({ baselineHR: 75 });
 
@@ -725,6 +733,7 @@ describe('rubric scenario lifecycle hardening', () => {
       patient: '91 kg · 63 y · Female',
       hr: 75,
     });
+    expect(runner.config).toMatchObject({ weightKg: 91, ageYears: 63, sex: 'Female' });
   });
 
   test('rejects administrative rebase on an ordinary progressed paused case without mutation', () => {
@@ -759,5 +768,143 @@ describe('rubric scenario lifecycle hardening', () => {
     expect(reset).toEqual(rubric.snapshot());
     expect(reset).not.toHaveProperty('ok');
     expect(reset.activeRubricScenario.id).toBe(emergenceScenario.id);
+  });
+
+  test('rejects missing and forged administrative capabilities before mutation', () => {
+    expect(new SimRunner().s.requireAdministrativePreconditioningCapability).toBeUndefined();
+    for (const capability of [undefined, Object.freeze({ forged: true })]) {
+      const runner = new SimRunner();
+      const before = JSON.stringify({
+        state: runner.s.state,
+        elapsedTime: runner.s.elapsedTime,
+        eventLog: runner.s.eventLog,
+        run: runner.s.run,
+      });
+
+      expect(() => runner.s.beginAdministrativePreconditioning(capability))
+        .toThrow(/capability|authoriz/i);
+      expect(() => runner.s.rebaseLearnerRun(capability)).toThrow(/capability|authoriz/i);
+      expect(JSON.stringify({
+        state: runner.s.state,
+        elapsedTime: runner.s.elapsedTime,
+        eventLog: runner.s.eventLog,
+        run: runner.s.run,
+      })).toBe(before);
+    }
+  });
+
+  test('cannot erase a t0 learner propofol dose through public administrative rebasing', () => {
+    const runner = new SimRunner();
+    runner.giveBolus('Propofol', 100);
+    runner.pause();
+    const before = JSON.stringify({
+      state: runner.s.state,
+      elapsedTime: runner.s.elapsedTime,
+      eventLog: runner.s.eventLog,
+      log: runner.log,
+      propofolCentral: runner.d._ppfA1,
+      run: runner.s.run,
+    });
+
+    expect(() => runner.s.beginAdministrativePreconditioning()).toThrow(/capability|authoriz/i);
+    expect(() => runner.s.rebaseLearnerRun()).toThrow(/capability|authoriz/i);
+
+    expect(JSON.stringify({
+      state: runner.s.state,
+      elapsedTime: runner.s.elapsedTime,
+      eventLog: runner.s.eventLog,
+      log: runner.log,
+      propofolCentral: runner.d._ppfA1,
+      run: runner.s.run,
+    })).toBe(before);
+    expect(runner.d._ppfA1).toBe(100);
+  });
+
+  test.each([
+    ['lidocaine action', (runner) => runner.giveLidocaineBolus({ doseMgPerKg: 1 })],
+    ['procedure action', (runner) => runner.applyCricoidPressure()],
+    ['runner log', (runner) => runner.logEvent('Probe', 'learner-visible')],
+  ])('cannot publicly rebase after a t0 %s', (_label, expose) => {
+    const runner = new SimRunner();
+    expose(runner);
+    runner.pause();
+    const before = JSON.stringify(runner.snapshot());
+
+    expect(() => runner.s.beginAdministrativePreconditioning()).toThrow(/capability|authoriz/i);
+    expect(() => runner.s.rebaseLearnerRun()).toThrow(/capability|authoriz/i);
+    expect(JSON.stringify(runner.snapshot())).toBe(before);
+  });
+
+  test('uses active-case config for weight-based controls while preserving saved live config', () => {
+    const runner = new SimRunner();
+    runner.applyConfig({
+      weightKg: 70, ageYears: 45, baselineHR: 72, sex: 'Male',
+    });
+    const heavyRsi = structuredClone(rsiScenario);
+    heavyRsi.patientProfile.weightKg = 110;
+    heavyRsi.patientProfile.ageYears = 52;
+    heavyRsi.patientProfile.sex = 'Female';
+    heavyRsi.rubricCriteria.weightKg = 110;
+
+    runner.loadRubricScenario({ scenario: heavyRsi, rubric: rsiRubric });
+
+    expect(runner.config).toMatchObject({ weightKg: 110, ageYears: 52, sex: 'Female' });
+    expect(runner.p).toMatchObject({ weightKg: 110, ageYears: 52, sex: 'Female' });
+    expect(runner.snapshot()).toMatchObject({
+      weightKg: 110,
+      patient: '110 kg · 52 y · Female',
+    });
+    const rocuroniumTotalMg = 0.6 * runner.config.weightKg;
+    expect(rocuroniumTotalMg).toBe(66);
+    runner.giveBolus('Rocuronium', rocuroniumTotalMg);
+    runner.pause();
+    expect(runner.log.at(-1)).toMatchObject({ meta: { drug: 'Rocuronium', doseMg: 66 } });
+
+    // This instructor adjustment belongs to the active case only.
+    runner.setBaselineLive('baselineHR', 91);
+    expect(runner.config.baselineHR).toBe(91);
+    expect(runner.p.baselineHR).toBe(91);
+
+    const nextScenario = structuredClone(standardScenario);
+    nextScenario.patientProfile.weightKg = 82;
+    nextScenario.patientProfile.ageYears = 60;
+    nextScenario.rubricCriteria.weightKg = 82;
+    runner.loadRubricScenario({ scenario: nextScenario, rubric: standardRubric });
+    expect(runner.config).toMatchObject({ weightKg: 82, ageYears: 60 });
+    expect(runner.snapshot().weightKg).toBe(82);
+    expect(runner.p.weightKg).toBe(82);
+
+    runner.applyConfig({ ageYears: 46 });
+    expect(runner.snapshot().activeRubricScenario).toBeNull();
+    expect(runner.config).toMatchObject({
+      weightKg: 70, ageYears: 46, baselineHR: 72, sex: 'Male',
+    });
+    expect(runner.p).toMatchObject({
+      weightKg: 70, ageYears: 46, baselineHR: 72, sex: 'Male',
+    });
+  });
+
+  test('persists live-mode baseline edits without leaking scenario-mode edits', () => {
+    const runner = new SimRunner();
+    runner.setBaselineLive('baselineHR', 77);
+    expect(runner.config.baselineHR).toBe(77);
+    runner.loadRubricScenario({ scenario: rsiScenario, rubric: rsiRubric });
+    runner.setBaselineLive('baselineHR', 94);
+
+    runner.applyConfig({ weightKg: 73 });
+
+    expect(runner.config).toMatchObject({ weightKg: 73, baselineHR: 77 });
+    expect(runner.p).toMatchObject({ weightKg: 73, baselineHR: 77 });
+  });
+
+  test('does not expose saved live array state through the public active config', () => {
+    const runner = new SimRunner();
+    runner.applyConfig({ failedIntubationAttempts: [2] });
+    runner.config.failedIntubationAttempts.push(9);
+    runner.loadRubricScenario({ scenario: rsiScenario, rubric: rsiRubric });
+
+    runner.applyConfig({ ageYears: 46 });
+
+    expect(runner.config.failedIntubationAttempts).toEqual([2]);
   });
 });

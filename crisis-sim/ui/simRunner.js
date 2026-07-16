@@ -118,6 +118,33 @@ function validateOptionalFiniteField(object, key, label, range) {
   if (Object.hasOwn(object, key)) requireFiniteField(object, key, label, range);
 }
 
+function drugSystemHasLearnerExposure(drugSystem) {
+  if (drugSystem.activeInfusions.length > 0) return true;
+  return Object.entries(drugSystem).some(([key, value]) => (
+    key.startsWith('_')
+      && ((typeof value === 'number' && value !== 0)
+        || (typeof value === 'boolean' && value))
+  ));
+}
+
+function cloneRunnerConfig(config) {
+  const clone = { ...config };
+  if (Array.isArray(config.failedIntubationAttempts)) {
+    clone.failedIntubationAttempts = [...config.failedIntubationAttempts];
+  }
+  return clone;
+}
+
+function scenarioActiveConfig(scenario, patient, fallback) {
+  return {
+    ...fallback,
+    ...scenario.patientProfile,
+    baselineEtCO2: patient.baselineEtCO2,
+    failedIntubationAttempts: [...scenario.airwayPlan.failedIntubationAttempts],
+    intubationAttemptDurationSeconds: scenario.airwayPlan.intubationAttemptDurationSeconds,
+  };
+}
+
 function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
   const scenarioCopy = copyJsonInput(scenario, 'scenario');
   const rubricCopy = copyJsonInput(rubric, 'rubric');
@@ -338,8 +365,14 @@ export const DEFAULT_CONFIG = {
 };
 
 export class SimRunner {
+  #savedLiveConfig;
+
+  #administrativePreconditioningCapability;
+
   constructor() {
-    this.config = { ...DEFAULT_CONFIG };
+    this.#savedLiveConfig = cloneRunnerConfig(DEFAULT_CONFIG);
+    this.#administrativePreconditioningCapability = Object.freeze({});
+    this.config = cloneRunnerConfig(this.#savedLiveConfig);
     this.running = false;
     this.speed = 1;
     this.simTime = 0;
@@ -379,7 +412,7 @@ export class SimRunner {
     p.baselineTemp = profile.baselineTemp ?? c.baselineTemp;
     p.baselineEtCO2 = profile.baselineEtCO2 ?? c.baselineEtCO2;
     p.resetToBaseline();
-    const scenario = new ScenarioManager();
+    const scenario = new ScenarioManager(this.#administrativePreconditioningCapability);
     scenario.patient = p;
     scenario.drugSystem = d;
     scenario.lidocaineSystem = l;
@@ -404,7 +437,8 @@ export class SimRunner {
     const wasRunning = this.running;
     this._stopRealtime();
     this._loadedRubricScenario = null;
-    Object.assign(this.config, patch);
+    this.#savedLiveConfig = cloneRunnerConfig({ ...this.#savedLiveConfig, ...patch });
+    this.config = cloneRunnerConfig(this.#savedLiveConfig);
     this.build();
     this.logEvent('Patient reset', `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`);
     if (wasRunning) this.start();
@@ -470,15 +504,45 @@ export class SimRunner {
 
   _createRubricScenarioCandidate(prepared) {
     const candidate = new SimRunner();
-    candidate._constructRubricScenarioCandidate(prepared);
+    candidate.#constructRubricScenarioCandidate(prepared);
     return candidate;
   }
 
-  _constructRubricScenarioCandidate(prepared) {
+  #assertLoaderPreconditioningPristine() {
+    const pristine = this.core.tickCount === 0
+      && this.core.simTime === 0
+      && this.simTime === 0
+      && this._accum === 0
+      && this.log.length === 0
+      && this.tofCheckHistory.length === 0
+      && this.rubricSession === null
+      && this.a.timeSec === 0
+      && this.a.eventCount === 0
+      && this.a.intubationAttemptCount === 0
+      && this.a.ppvEpisodeCount === 0
+      && this.a.cricoidPressureHistory.length === 0
+      && this.l.timeSec === 0
+      && this.l.tickCount === 0
+      && this.l.doseHistory.length === 0
+      && this.l.regionalHistory.length === 0
+      && this.l.toxicityHistory.length === 0
+      && this.l.lipidRescueHistory.length === 0
+      && this.l.irritabilityHistory.length === 0
+      && this.s.actionLog.entries.length === 0
+      && this.s._studentActions.size === 0
+      && (this.s.run?.firedTriggers.size ?? 0) === 0
+      && !drugSystemHasLearnerExposure(this.d);
+    if (!pristine) {
+      throw new Error('Loader administrative preconditioning requires a pristine full rig');
+    }
+  }
+
+  #constructRubricScenarioCandidate(prepared) {
     const {
       scenario, rubric, administrativeSetup, resetInputs,
     } = prepared;
     this.build({ seed: scenario.seed, scenarioDefinition: scenario });
+    this.config = scenarioActiveConfig(scenario, this.p, this.config);
 
     const setup = scenario.startingSetup;
     this.setMachine({
@@ -497,7 +561,10 @@ export class SimRunner {
     if (administrativeSetup !== null) {
       // Only a pristine loader-owned transition can authorize this paused
       // administrative interval; no learner event can be replayed afterward.
-      this.s.beginAdministrativePreconditioning();
+      this.#assertLoaderPreconditioningPristine();
+      this.s.beginAdministrativePreconditioning(
+        this.#administrativePreconditioningCapability,
+      );
       this.setInstructorNmbTarget(administrativeSetup.instructorNmbTarget);
       this.stepFor(administrativeSetup.preconditioningDurationSeconds);
       if (this.core.tickCount !== administrativeSetup.preconditioningSteps) {
@@ -511,7 +578,7 @@ export class SimRunner {
       this.v.rebaseLearnerTime();
       this.a.reset();
       this.s.applyAirwayPlan();
-      this.s.rebaseLearnerRun();
+      this.s.rebaseLearnerRun(this.#administrativePreconditioningCapability);
       this.simTime = 0;
       this._accum = 0;
       this._lastReal = 0;
@@ -553,6 +620,7 @@ export class SimRunner {
     this.activeSeed = candidate.activeSeed;
     this._activeRubricScenario = candidate._activeRubricScenario;
     this._loadedRubricScenario = candidate._loadedRubricScenario;
+    this.config = cloneRunnerConfig(candidate.config);
     this._procedureUnsubscribe = this.a.addEventListener(
       (event) => this.logProcedureEvent(event),
     );
@@ -807,7 +875,11 @@ export class SimRunner {
   }
 
   // live baseline nudge — engine lerps current vitals toward the new baseline (no reset)
-  setBaselineLive(key, value) { if (this.p) this.p[key] = value; this.config[key] = value; }
+  setBaselineLive(key, value) {
+    if (this.p) this.p[key] = value;
+    this.config[key] = value;
+    if (this._loadedRubricScenario === null) this.#savedLiveConfig[key] = value;
+  }
 
   // ── control surface ────────────────────────────────────────────────
   giveBolus(name, doseMg, label) {

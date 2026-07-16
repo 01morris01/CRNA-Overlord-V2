@@ -22,9 +22,25 @@ export const ScenarioState = {
 };
 
 const SpasmStage = { None: 0, Partial: 1, Complete: 2, Resolved: 3 };
+const administrativePreconditioningCapabilities = new WeakMap();
+
+function requireAdministrativePreconditioningCapability(manager, capability) {
+  if (!administrativePreconditioningCapabilities.has(manager)
+    || administrativePreconditioningCapabilities.get(manager) !== capability) {
+    throw new Error('Administrative preconditioning capability is not authorized');
+  }
+}
 
 export class ScenarioManager {
-  constructor() {
+  constructor(administrativePreconditioningCapability = null) {
+    if ((typeof administrativePreconditioningCapability === 'object'
+      && administrativePreconditioningCapability !== null)
+      || typeof administrativePreconditioningCapability === 'function') {
+      administrativePreconditioningCapabilities.set(
+        this,
+        administrativePreconditioningCapability,
+      );
+    }
     this.patient = null;
     this.drugSystem = null;
     this.lidocaineSystem = null;
@@ -131,7 +147,8 @@ export class ScenarioManager {
     }
   }
 
-  beginAdministrativePreconditioning() {
+  beginAdministrativePreconditioning(capability) {
+    requireAdministrativePreconditioningCapability(this, capability);
     const pristine = this.state === ScenarioState.Running
       && this.elapsedTime === 0
       && this.currentScore === 0
@@ -162,7 +179,8 @@ export class ScenarioManager {
    * narrower than resetScenario(): setup state stays intact, while every
    * learner-visible scenario clock, event cursor, score, and log is fresh.
    */
-  rebaseLearnerRun() {
+  rebaseLearnerRun(capability) {
+    requireAdministrativePreconditioningCapability(this, capability);
     if (this.activeScenario == null) throw new Error('Cannot rebase without an active scenario');
     const stillPristine = this._administrativePreconditioningEligible
       && this.state === ScenarioState.Paused
