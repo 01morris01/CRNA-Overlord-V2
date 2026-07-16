@@ -52,6 +52,10 @@ function finalizedFor(rubric, { points = 2, actions = [] } = {}) {
   };
 }
 
+function composeRubric(rubric, sessionResult, base = baseResult()) {
+  return buildRubricDebrief({ baseResult: base, sessionResult, rubricDefinition: rubric });
+}
+
 function scoreInstructorRows(runner, points = 2) {
   const tSec = runner.rubricSession.getLiveResult().trace.at(-1)?.t ?? 0;
   for (const item of runner.rubricSession.rubric.items) {
@@ -74,10 +78,7 @@ function unsafeEmergenceRun() {
 
 describe('pure rubric debrief composition', () => {
   test.each(RUBRICS)('preserves $id literal rows and source metadata', (rubric) => {
-    const result = buildRubricDebrief({
-      baseResult: baseResult(),
-      sessionResult: finalizedFor(rubric),
-    });
+    const result = composeRubric(rubric, finalizedFor(rubric));
 
     expect(result.rubricResult).toMatchObject({
       rubricId: rubric.id,
@@ -109,7 +110,7 @@ describe('pure rubric debrief composition', () => {
 
   test('retains the RSI 49-versus-106 warning and separates failure reasons', () => {
     const sessionResult = finalizedFor(rsiRubric, { points: 0 });
-    const result = buildRubricDebrief({ baseResult: baseResult(), sessionResult });
+    const result = composeRubric(rsiRubric, sessionResult);
 
     expect(result.rubricResult.denominatorWarnings).toEqual([{
       code: 'SOURCE_DENOMINATOR_MISMATCH',
@@ -125,31 +126,56 @@ describe('pure rubric debrief composition', () => {
   test('classifies every ledger record without losing chronology or snapshots', () => {
     const snapshot = { t: 3, spo2: 98, tofRatio: 0.7 };
     const actions = [
-      { tSec: 1, action: 'drug', meta: { drug: 'Propofol' }, snapshot },
-      { tSec: 2, action: 'mask_ppv_started', meta: {}, snapshot },
-      { tSec: 3, action: 'intubation_attempt_started', meta: {}, snapshot },
+      {
+        tSec: 1,
+        action: 'drug',
+        meta: { drug: 'Propofol', source: 'administrative' },
+        snapshot,
+      },
+      {
+        tSec: 2,
+        action: 'mask_ppv_started',
+        meta: { source: 'instructor' },
+        snapshot,
+      },
+      {
+        tSec: 3,
+        action: 'intubation_attempt_started',
+        meta: { source: 'administrative' },
+        snapshot,
+      },
+      {
+        tSec: 3.5,
+        action: 'unknown_action',
+        meta: { source: 'administrative' },
+        snapshot,
+      },
       {
         tSec: 4,
         action: 'instructor_nmb_depth_set',
-        meta: { source: 'administrative', targetTofRatio: 0.7 },
+        meta: { source: 'learner', targetTofRatio: 0.7 },
         snapshot,
       },
       {
         tSec: 5,
         action: 'instructor_rubric_score_set',
-        meta: { itemId: 'emergence-1', points: 2, revision: 1 },
+        meta: {
+          itemId: 'emergence-1', points: 2, revision: 1, source: 'learner',
+        },
         snapshot: {},
       },
     ];
     const result = buildRubricDebrief({
       baseResult: baseResult(),
       sessionResult: finalizedFor(emergenceRubric, { actions }),
+      rubricDefinition: emergenceRubric,
     });
 
     expect(result.actionTimeline.map(({ action, source }) => [action, source])).toEqual([
       ['drug', 'learner'],
       ['mask_ppv_started', 'learner'],
       ['intubation_attempt_started', 'learner'],
+      ['unknown_action', 'learner'],
       ['instructor_nmb_depth_set', 'administrative'],
       ['instructor_rubric_score_set', 'instructor'],
       ...emergenceRubric.items
@@ -167,12 +193,12 @@ describe('pure rubric debrief composition', () => {
   test('copies all data defensively and rejects unsafe inputs atomically', () => {
     const base = baseResult();
     const sessionResult = finalizedFor(emergenceRubric);
-    const result = buildRubricDebrief({ baseResult: base, sessionResult });
+    const result = composeRubric(emergenceRubric, sessionResult, base);
     result.teachingPoints.push('mutated');
     result.rubricResult.items[0].text = 'mutated';
     result.actionTimeline[0].meta.note = 'mutated';
 
-    const again = buildRubricDebrief({ baseResult: base, sessionResult });
+    const again = composeRubric(emergenceRubric, sessionResult, base);
     expect(base.teachingPoints).toEqual([]);
     expect(sessionResult.items[0].text).toBe(emergenceRubric.items[0].text);
     expect(again.rubricResult.items[0].text).toBe(emergenceRubric.items[0].text);
@@ -180,29 +206,40 @@ describe('pure rubric debrief composition', () => {
     expect(() => buildRubricDebrief({
       baseResult: base,
       sessionResult: { ok: false, reason: 'INSTRUCTOR_SCORES_PENDING', pendingItemIds: ['x'] },
+      rubricDefinition: emergenceRubric,
     })).toThrow(/successful finalized/i);
-    expect(() => buildRubricDebrief({ baseResult: {}, sessionResult }))
+    expect(() => buildRubricDebrief({
+      baseResult: {}, sessionResult, rubricDefinition: emergenceRubric,
+    }))
       .toThrow(/baseResult/i);
     expect(() => buildRubricDebrief({
       baseResult: base,
       sessionResult: { ...sessionResult, finalized: false },
+      rubricDefinition: emergenceRubric,
     })).toThrow(/successful finalized/i);
     expect(() => buildRubricDebrief({
       baseResult: base,
       sessionResult: { ...sessionResult, percentage: Number.NaN },
+      rubricDefinition: emergenceRubric,
     })).toThrow(/finite|JSON-safe/i);
 
     const accessor = { ...sessionResult };
     Object.defineProperty(accessor, 'outcome', { enumerable: true, get: () => 'PASS' });
-    expect(() => buildRubricDebrief({ baseResult: base, sessionResult: accessor }))
+    expect(() => buildRubricDebrief({
+      baseResult: base, sessionResult: accessor, rubricDefinition: emergenceRubric,
+    }))
       .toThrow(/data propert|JSON-safe/i);
     const cycle = { ...sessionResult };
     cycle.loop = cycle;
-    expect(() => buildRubricDebrief({ baseResult: base, sessionResult: cycle }))
+    expect(() => buildRubricDebrief({
+      baseResult: base, sessionResult: cycle, rubricDefinition: emergenceRubric,
+    }))
       .toThrow(/cycle/i);
     const unsafe = { ...sessionResult };
     Object.defineProperty(unsafe, '__proto__', { enumerable: true, value: {} });
-    expect(() => buildRubricDebrief({ baseResult: base, sessionResult: unsafe }))
+    expect(() => buildRubricDebrief({
+      baseResult: base, sessionResult: unsafe, rubricDefinition: emergenceRubric,
+    }))
       .toThrow(/unsafe|dangerous/i);
   });
 
@@ -253,8 +290,39 @@ describe('pure rubric debrief composition', () => {
   ])('rejects a forged authoritative session: %s', (_label, mutate) => {
     const sessionResult = finalizedFor(emergenceRubric);
     mutate(sessionResult);
-    expect(() => buildRubricDebrief({ baseResult: baseResult(), sessionResult }))
+    expect(() => composeRubric(emergenceRubric, sessionResult))
       .toThrow(/final|sessionResult|pending|outcome|item|point|percent|critical|unscoreable/i);
+  });
+
+  test.each([
+    ['rubric id', (result) => { result.rubricId = 'forged-rubric'; }],
+    ['literal text', (result) => { result.items[0].text = 'Forged literal text'; }],
+    ['item order', (result) => { [result.items[0], result.items[1]] = [result.items[1], result.items[0]]; }],
+    ['display number', (result) => { result.items[0].displayNumber = 'X'; }],
+    ['critical metadata', (result) => { result.items[0].critical = !result.items[0].critical; }],
+    ['scoring source', (result) => {
+      result.items[0].scoringSource = 'ENGINE_OBSERVABLE';
+      result.items[0].evidence = { ruleId: 'emergence_stop_anesthetic', actions: [], trace: [] };
+    }],
+    ['engine rule', (result) => {
+      const engine = result.items.find(({ scoringSource }) => scoringSource === 'ENGINE_OBSERVABLE');
+      engine.evidence.ruleId = 'emergence_spontaneous_ventilation';
+    }],
+    ['extra denominator warning', (result) => {
+      result.denominatorWarnings.push({ code: 'FORGED_WARNING' });
+    }],
+  ])('rejects forged rubric provenance: %s', (_label, mutate) => {
+    const sessionResult = finalizedFor(emergenceRubric);
+    mutate(sessionResult);
+    expect(() => composeRubric(emergenceRubric, sessionResult))
+      .toThrow(/rubric|item|literal|order|source|rule|warning|critical/i);
+  });
+
+  test('requires an explicit normalized rubric consistency contract', () => {
+    expect(() => buildRubricDebrief({
+      baseResult: baseResult(),
+      sessionResult: finalizedFor(emergenceRubric),
+    })).toThrow(/rubric/i);
   });
 });
 
@@ -293,12 +361,16 @@ describe('observed consequences', () => {
     expect(debrief.rubricResult.items.find(({ id }) => id === 'emergence-3')
       .observedConsequence.actionSnapshot).toEqual({
         tofRatio: action.snapshot.tofRatio,
+        effectiveNmbBlockade: action.snapshot.effectiveNmbBlockade,
+        airwayDevice: action.snapshot.airwayDevice,
       });
     expect(debrief.rubricResult.items.find(({ id }) => id === 'emergence-4')
       .observedConsequence.actionSnapshot).toEqual({
         spontaneousRR: action.snapshot.spontaneousRR,
         spontaneousTV: action.snapshot.spontaneousTV,
         spontaneousMV: action.snapshot.spontaneousMV,
+        respiratoryMuscleCapability: action.snapshot.respiratoryMuscleCapability,
+        airwayDevice: action.snapshot.airwayDevice,
       });
     expect(runner.rubricSession.getLiveResult().finalized).toBe(true);
   });
@@ -346,14 +418,27 @@ describe('observed consequences', () => {
     );
 
     expect(observedConsequence({ itemResult: tofItem, actions, trace }).actionSnapshot)
-      .toEqual({ tofRatio: 0.71 });
+      .toEqual({
+        tofRatio: 0.71,
+        effectiveNmbBlockade: 0.44,
+        airwayDevice: 'extubated',
+      });
     expect(observedConsequence({ itemResult: ventilationItem, actions, trace }).actionSnapshot)
-      .toEqual({ spontaneousRR: 9, spontaneousTV: 180, spontaneousMV: 1.62 });
+      .toEqual({
+        spontaneousRR: 9,
+        spontaneousTV: 180,
+        spontaneousMV: 1.62,
+        respiratoryMuscleCapability: 0.56,
+        airwayDevice: 'extubated',
+      });
 
     extubate.snapshot.tofRatio = '0.71';
+    extubate.snapshot.effectiveNmbBlockade = null;
+    extubate.snapshot.airwayDevice = '';
     extubate.snapshot.spontaneousRR = null;
     extubate.snapshot.spontaneousTV = '180';
     extubate.snapshot.spontaneousMV = false;
+    extubate.snapshot.respiratoryMuscleCapability = '0.56';
     const noNumericTof = observedConsequence({ itemResult: tofItem, actions, trace });
     const noNumericVentilation = observedConsequence({
       itemResult: ventilationItem,
@@ -364,6 +449,40 @@ describe('observed consequences', () => {
     expect(noNumericVentilation.actionSnapshot).toEqual({});
     expect(noNumericTof.statement).not.toMatch(/TOF ratio|block|airway/i);
     expect(noNumericVentilation.statement).not.toMatch(/spontaneous|tidal|ventilation/i);
+  });
+
+  test('uses inclusive window endpoints, earliest equal nadirs, and no invented empty samples', () => {
+    const { debrief } = unsafeEmergenceRun();
+    const item = structuredClone(
+      debrief.rubricResult.items.find(({ id }) => id === 'emergence-3'),
+    );
+    const actions = [{
+      tSec: 10,
+      action: 'extubate',
+      meta: {},
+      snapshot: { tofRatio: 0.7 },
+    }];
+    const atEnd = observedConsequence({
+      itemResult: item,
+      actions,
+      trace: [{ t: 9, spo2: 1 }, { t: 10, spo2: 95 }, { t: 100, spo2: 89 }, { t: 101, spo2: 1 }],
+    });
+    expect(atEnd.extrema.spo2Nadir).toEqual({ value: 89, tSec: 100, elapsedSec: 90 });
+
+    const tied = observedConsequence({
+      itemResult: item,
+      actions,
+      trace: [{ t: 10, spo2: 95 }, { t: 60, spo2: 89 }, { t: 100, spo2: 89 }],
+    });
+    expect(tied.extrema.spo2Nadir).toEqual({ value: 89, tSec: 60, elapsedSec: 50 });
+
+    const empty = observedConsequence({
+      itemResult: item,
+      actions,
+      trace: [{ t: 10, tofRatio: 0.7 }],
+    });
+    expect(empty.extrema).toEqual({});
+    expect(empty.statement).not.toMatch(/SpO/i);
   });
 
   test('rejects an overflowing finite observation window before producing output', () => {
@@ -388,7 +507,7 @@ describe('observed consequences', () => {
 
   test('keeps instructor failures human-scored and consequence-free', () => {
     const sessionResult = finalizedFor(emergenceRubric, { points: 0 });
-    const result = buildRubricDebrief({ baseResult: baseResult(), sessionResult });
+    const result = composeRubric(emergenceRubric, sessionResult);
     const instructor = result.rubricResult.items.find(
       ({ scoringSource }) => scoringSource === 'INSTRUCTOR_OBSERVED',
     );
@@ -407,7 +526,7 @@ describe('observed consequences', () => {
       tSec: 12,
       evidence: { measured: { tofRatio: 0.55 } },
     }];
-    const result = buildRubricDebrief({ baseResult: baseResult(), sessionResult });
+    const result = composeRubric(emergenceRubric, sessionResult);
     expect(result.violationFlags).toEqual(sessionResult.violations);
     expect(result.violationFlags).not.toBe(sessionResult.violations);
   });
@@ -427,11 +546,23 @@ describe('SimRunner rubric debrief lifecycle', () => {
     expect(() => runner.buildDebrief()).toThrow(/not finalized|pending/i);
 
     scoreInstructorRows(runner);
-    expect(runner.finalizeRubric()).toMatchObject({
+    const returnedFinal = runner.finalizeRubric();
+    expect(returnedFinal).toMatchObject({
       ok: true,
       finalized: true,
       denominatorWarnings: [],
     });
+    const actionCount = runner.rubricSession.getLiveResult().actionLedger.length;
+    returnedFinal.items[0].text = 'forged returned text';
+    returnedFinal.denominatorWarnings.push({ code: 'FORGED_WARNING' });
+    runner._finalizedRubricResult = {
+      ...returnedFinal,
+      denominatorWarnings: [{ code: 'FORGED_CACHE_WARNING' }],
+    };
+    const repeatedFinal = runner.finalizeRubric();
+    expect(repeatedFinal.items[0].text).toBe(emergenceRubric.items[0].text);
+    expect(repeatedFinal.denominatorWarnings).toEqual([]);
+    expect(runner.rubricSession.getLiveResult().actionLedger).toHaveLength(actionCount);
     const first = runner.buildDebrief();
     const fingerprint = JSON.stringify(first);
     first.rubricResult.items[0].text = 'mutated';
@@ -439,7 +570,22 @@ describe('SimRunner rubric debrief lifecycle', () => {
     const second = runner.buildDebrief();
 
     expect(JSON.stringify(second)).toBe(fingerprint);
+    expect(second.rubricResult.items[0].text).toBe(emergenceRubric.items[0].text);
+    expect(second.rubricResult.denominatorWarnings).toEqual([]);
     expect(validateSimulationResult(second)).toEqual({ ok: true, missing: [], invalid: [] });
+  });
+
+  test('adopts direct frozen session finalization and drops finalized authority on reset', () => {
+    const runner = new SimRunner();
+    runner.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });
+    scoreInstructorRows(runner);
+    const finalized = runner.rubricSession.finalize({ tSec: 0 });
+    expect(finalized).toMatchObject({ ok: true, finalized: true });
+    expect(runner.buildDebrief().rubricResult.rubricId).toBe(emergenceRubric.id);
+
+    runner.reset();
+    expect(runner.rubricSession.getLiveResult().finalized).toBe(false);
+    expect(() => runner.buildDebrief()).toThrow(/not finalized|pending/i);
   });
 
   test('leaves the generic live SimulationResult shape unchanged', () => {

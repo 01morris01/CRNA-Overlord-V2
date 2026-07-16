@@ -1,3 +1,5 @@
+import { normalizeRubric } from './rubricLoader.js';
+
 const DANGEROUS_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 const ADDITIVE_RESULT_KEYS = new Set([
   'rubricResult',
@@ -253,6 +255,54 @@ function validateFinalizedSession(sessionResult) {
   }
 }
 
+function equalJsonSafe(left, right) {
+  if (Object.is(left, right)) return true;
+  if (left === null || right === null || typeof left !== 'object' || typeof right !== 'object') {
+    return false;
+  }
+  if (Array.isArray(left) || Array.isArray(right)) {
+    return Array.isArray(left)
+      && Array.isArray(right)
+      && left.length === right.length
+      && left.every((value, index) => equalJsonSafe(value, right[index]));
+  }
+  const leftKeys = Object.keys(left);
+  const rightKeys = Object.keys(right);
+  return leftKeys.length === rightKeys.length
+    && leftKeys.every((key) => (
+      Object.hasOwn(right, key) && equalJsonSafe(left[key], right[key])
+    ));
+}
+
+function validateRubricProvenance(sessionResult, rubric) {
+  if (sessionResult.rubricId !== rubric.id) {
+    throw new RangeError('sessionResult.rubricId does not match the rubric definition');
+  }
+  if (sessionResult.items.length !== rubric.computedItemCount
+    || sessionResult.items.length !== rubric.items.length) {
+    throw new RangeError('sessionResult item count does not match the rubric definition');
+  }
+  if (sessionResult.maxPoints !== rubric.computedMaxPoints) {
+    throw new RangeError('sessionResult maximum does not match the rubric definition');
+  }
+  if (!equalJsonSafe(sessionResult.denominatorWarnings, rubric.discrepancies)) {
+    throw new RangeError('sessionResult denominator warnings do not match the rubric definition');
+  }
+  for (let index = 0; index < rubric.items.length; index += 1) {
+    const resultItem = sessionResult.items[index];
+    const rubricItem = rubric.items[index];
+    for (const key of ['id', 'displayNumber', 'text', 'critical', 'scoringSource']) {
+      if (resultItem[key] !== rubricItem[key]) {
+        throw new RangeError(`sessionResult item ${index} ${key} does not match the rubric definition`);
+      }
+    }
+    if (rubricItem.scoringSource === 'ENGINE_OBSERVABLE'
+      && resultItem.evidence.ruleId !== rubricItem.engineEvidence.ruleId) {
+      throw new RangeError(`sessionResult item ${rubricItem.id} rule does not match the rubric definition`);
+    }
+  }
+}
+
 function validateBaseResult(baseResult) {
   for (const field of BASE_STRING_FIELDS) {
     if (typeof baseResult[field] !== 'string') {
@@ -273,9 +323,7 @@ function validateBaseResult(baseResult) {
 
 function timelineSource(record) {
   if (record.action === 'instructor_rubric_score_set') return 'instructor';
-  if (record.action === 'instructor_nmb_depth_set'
-    || record.meta.source === 'administrative') return 'administrative';
-  if (record.meta.source === 'instructor') return 'instructor';
+  if (record.action === 'instructor_nmb_depth_set') return 'administrative';
   return 'learner';
 }
 
@@ -283,13 +331,18 @@ function formatMeasurement(value) {
   return Number.isInteger(value) ? String(value) : String(Number(value.toFixed(4)));
 }
 
-function selectActionSnapshot(snapshot, fields) {
+function selectActionSnapshot(snapshot, rule) {
   const selected = {};
   if (!isPlainObject(snapshot)) return selected;
-  for (const field of fields) {
+  for (const field of rule.numericSnapshotFields) {
     if (!Object.hasOwn(snapshot, field)) continue;
     const value = snapshot[field];
     if (typeof value === 'number' && Number.isFinite(value)) selected[field] = value;
+  }
+  for (const field of rule.stringSnapshotFields) {
+    if (!Object.hasOwn(snapshot, field)) continue;
+    const value = snapshot[field];
+    if (typeof value === 'string' && value.length > 0) selected[field] = value;
   }
   return selected;
 }
@@ -323,15 +376,18 @@ function validateConsequenceItem(item) {
 const CONSEQUENCE_RULES = Object.freeze({
   emergence_tof_and_reversal: Object.freeze({
     triggerAction: 'extubate',
-    snapshotFields: Object.freeze(['tofRatio']),
+    numericSnapshotFields: Object.freeze(['tofRatio', 'effectiveNmbBlockade']),
+    stringSnapshotFields: Object.freeze(['airwayDevice']),
   }),
   emergence_spontaneous_ventilation: Object.freeze({
     triggerAction: 'extubate',
-    snapshotFields: Object.freeze([
+    numericSnapshotFields: Object.freeze([
       'spontaneousRR',
       'spontaneousTV',
       'spontaneousMV',
+      'respiratoryMuscleCapability',
     ]),
+    stringSnapshotFields: Object.freeze(['airwayDevice']),
   }),
 });
 
@@ -375,7 +431,7 @@ function observedConsequenceFromCopied(item, copiedActions, copiedTrace, windowS
   if (!Number.isFinite(endSec)) {
     throw new RangeError('observation window end must be finite');
   }
-  const actionSnapshot = selectActionSnapshot(triggerAction.snapshot, rule.snapshotFields);
+  const actionSnapshot = selectActionSnapshot(triggerAction.snapshot, rule);
   const samples = copiedTrace.filter((sample) => (
     sample.t >= triggerAction.tSec && sample.t <= endSec
   ));
@@ -424,14 +480,16 @@ export function observedConsequence({ itemResult, actions, trace, windowSec = 90
   return observedConsequenceFromCopied(item, copiedActions, copiedTrace, windowSec);
 }
 
-export function buildRubricDebrief({ baseResult, sessionResult } = {}) {
+export function buildRubricDebrief({ baseResult, sessionResult, rubricDefinition } = {}) {
   const base = copyRoot(baseResult, 'baseResult');
   const session = copyRoot(sessionResult, 'sessionResult');
+  const rubric = normalizeRubric(rubricDefinition);
   for (const key of ADDITIVE_RESULT_KEYS) {
     if (Object.hasOwn(base, key)) throw new TypeError(`baseResult already contains reserved field ${key}`);
   }
   validateBaseResult(base);
   validateFinalizedSession(session);
+  validateRubricProvenance(session, rubric);
 
   const actionTimeline = session.actionLedger.map((record) => ({
     ...copyJsonSafe(record, 'action record'),
@@ -482,8 +540,8 @@ export function buildRubricDebrief({ baseResult, sessionResult } = {}) {
       criticalItemsOmitted: [...session.criticalItemsOmitted],
       outcome: session.outcome,
       denominatorWarnings: copyJsonSafe(
-        session.denominatorWarnings,
-        'sessionResult.denominatorWarnings',
+        rubric.discrepancies,
+        'rubric.discrepancies',
       ),
       items,
       failureReasons,

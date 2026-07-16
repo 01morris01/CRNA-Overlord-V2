@@ -413,7 +413,6 @@ export class SimRunner {
     this.activeSeed = SEED;
     this._activeRubricScenario = null;
     this._loadedRubricScenario = null;
-    this._finalizedRubricResult = null;
     this._rafLoop = this._rafLoop.bind(this);
     this._tick = this._tick.bind(this);
     this.build();
@@ -455,7 +454,6 @@ export class SimRunner {
     this.tofCheckHistory = [];
     this._instructorNmbTarget = null;
     this.rubricSession = null;
-    this._finalizedRubricResult = null;
     this.activeSeed = seed;
     this._activeRubricScenario = null;
   }
@@ -653,7 +651,6 @@ export class SimRunner {
     this.tofCheckHistory = candidate.tofCheckHistory;
     this._instructorNmbTarget = candidate._instructorNmbTarget;
     this.rubricSession = candidate.rubricSession;
-    this._finalizedRubricResult = candidate._finalizedRubricResult;
     this.activeSeed = candidate.activeSeed;
     this._activeRubricScenario = candidate._activeRubricScenario;
     this._loadedRubricScenario = candidate._loadedRubricScenario;
@@ -736,11 +733,10 @@ export class SimRunner {
     const session = new RubricScoringSession({ rubric, criteria, seed: this.activeSeed });
     session.recordTrace(this.compactRubricSnapshot(0));
     this.rubricSession = session;
-    this._finalizedRubricResult = null;
     return session;
   }
 
-  _copyFinalizedRubricResult(result) {
+  _copyRubricFinalizationResult(result) {
     const copied = copyJsonInput(result, 'finalized rubric result');
     return {
       ...copied,
@@ -765,15 +761,11 @@ export class SimRunner {
     if (!this.rubricSession) {
       return { ok: false, reason: 'NO_RUBRIC_SESSION', pendingItemIds: [] };
     }
-    if (this._finalizedRubricResult !== null) {
-      return copyJsonInput(this._finalizedRubricResult, 'finalized rubric result');
-    }
     const finalized = this.rubricSession.finalize({
       tSec: tSec === undefined ? this._currentRubricTime() : tSec,
     });
     if (!finalized.ok) return copyJsonInput(finalized, 'rubric finalization result');
-    this._finalizedRubricResult = this._copyFinalizedRubricResult(finalized);
-    return copyJsonInput(this._finalizedRubricResult, 'finalized rubric result');
+    return this._copyRubricFinalizationResult(finalized);
   }
 
   compactRubricSnapshot(t = this.simTime) {
@@ -1278,22 +1270,18 @@ export class SimRunner {
     const def = this.s.activeScenario || liveScenarioDefinition(this.config);
     let finalizedRubricResult = null;
     if (this.rubricSession) {
-      if (this._finalizedRubricResult === null) {
-        const live = this.rubricSession.getLiveResult();
-        if (live.ok === true && live.finalized === true) {
-          this._finalizedRubricResult = this._copyFinalizedRubricResult(live);
-        } else {
-          const error = new Error(
-            'Rubric debrief is not finalized; resolve pending instructor scores and call finalizeRubric()',
-          );
-          error.code = 'RUBRIC_DEBRIEF_NOT_FINALIZED';
-          error.pendingItemIds = live.items
-            .filter(({ points }) => points === null)
-            .map(({ id }) => id);
-          throw error;
-        }
+      const live = this.rubricSession.getLiveResult();
+      if (live.ok !== true || live.finalized !== true) {
+        const error = new Error(
+          'Rubric debrief is not finalized; resolve pending instructor scores and call finalizeRubric()',
+        );
+        error.code = 'RUBRIC_DEBRIEF_NOT_FINALIZED';
+        error.pendingItemIds = live.items
+          .filter(({ points }) => points === null)
+          .map(({ id }) => id);
+        throw error;
       }
-      finalizedRubricResult = this._finalizedRubricResult;
+      finalizedRubricResult = this._copyRubricFinalizationResult(live);
     }
     const result = buildScenarioDebrief(
       def,
@@ -1304,6 +1292,7 @@ export class SimRunner {
       0,
       this.simTime,
       finalizedRubricResult,
+      this.rubricSession?.rubric ?? null,
     );
     result.respiratoryAttribution = this.p.respiratoryAttribution;
     result.lidocaineAttribution = buildLidocaineAttribution(this.l, this.tofCheckHistory);

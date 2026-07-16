@@ -27,6 +27,7 @@ export function buildDebrief(
   maxScore,
   durationSec,
   rubricSessionResult = null,
+  rubricDefinition = null,
 ) {
   const r = {
     scenarioId: def.id,
@@ -72,7 +73,11 @@ export function buildDebrief(
   }
   return rubricSessionResult === null
     ? r
-    : buildRubricDebrief({ baseResult: r, sessionResult: rubricSessionResult });
+    : buildRubricDebrief({
+      baseResult: r,
+      sessionResult: rubricSessionResult,
+      rubricDefinition,
+    });
 }
 
 export function buildLidocaineAttribution(lidocaineSystem, tofCheckHistory = []) {
