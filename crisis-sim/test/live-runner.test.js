@@ -56,6 +56,37 @@ describe('live SimRunner integration', () => {
     expect(JSON.stringify(uneven)).toBe(JSON.stringify(continuous));
   });
 
+  it('keeps combined mid-PPV and mid-attempt trace evidence chunk-independent', () => {
+    function run({ ppvChunks, attemptChunks }) {
+      const runner = new SimRunner();
+      const session = runner.attachRubricSession({
+        rubric: rsiRubric,
+        criteria: { weightKg: 70 },
+      });
+      runner.setForcedApnea(true);
+      runner.deliverMaskVentilation({
+        durationSeconds: 1.2,
+        tidalVolumeMl: 500,
+        respiratoryRate: 12,
+      });
+      for (const seconds of ppvChunks) runner.stepFor(seconds);
+      runner.configureIntubationAttempts({ attemptDurationSeconds: 1.2 });
+      runner.attemptIntubation();
+      for (const seconds of attemptChunks) runner.stepFor(seconds);
+      return session.getLiveResult().trace;
+    }
+
+    const continuous = run({ ppvChunks: [1.2], attemptChunks: [1.3] });
+    const uneven = run({ ppvChunks: [0.38, 0.82], attemptChunks: [0.46, 0.84] });
+
+    expect(continuous.map(({ t }) => t)).toEqual([0, 1, 2]);
+    expect(continuous[1]).toMatchObject({ mechanicalMV: 6, effectiveMV: 6 });
+    expect(continuous[2]).toMatchObject({
+      airwayDevice: 'mask', intubationAttemptCount: 1, mechanicalMV: 0,
+    });
+    expect(JSON.stringify(uneven)).toBe(JSON.stringify(continuous));
+  });
+
   it('captures integer trace samples while an intubation attempt is in progress', () => {
     const runner = new SimRunner();
     const session = runner.attachRubricSession({
@@ -160,6 +191,58 @@ describe('live SimRunner integration', () => {
       .toMatchObject({ mode: VentMode.VCV });
     expect(ledger.find(({ action }) => action === 'drug').snapshot.activeAnestheticInfusions)
       .toEqual([]);
+  });
+
+  it('records a failed attempt at the exact procedure timestamp with a matching snapshot', () => {
+    const runner = new SimRunner();
+    const session = runner.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    });
+    runner.configureIntubationAttempts({
+      failedIntubationAttempts: [1],
+      attemptDurationSeconds: 1,
+    });
+    runner.attemptIntubation();
+
+    runner.stepFor(1);
+
+    const procedureEvent = runner.log.find(
+      (entry) => entry.meta?.action === 'intubation_attempt_failed',
+    );
+    const action = session.getLiveResult().actionLedger.find(
+      (entry) => entry.action === 'intubation_attempt_failed',
+    );
+    expect(procedureEvent.t).toBe(1);
+    expect(action).toMatchObject({
+      tSec: procedureEvent.t,
+      meta: { attemptNumber: 1, outcome: 'failed' },
+      snapshot: { t: procedureEvent.t, airwayDevice: 'mask', intubationAttemptCount: 1 },
+    });
+  });
+
+  it('preserves legacy machine logs while projecting machine actions only into a rubric session', () => {
+    const legacy = new SimRunner();
+    legacy.setMachine({ setFiO2: 0.8 });
+    expect(legacy.log).toEqual([]);
+
+    legacy.preoxygenate();
+    expect(legacy.log.map((entry) => entry.meta?.action)).toEqual(['preoxygenate']);
+
+    const scored = new SimRunner();
+    const session = scored.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    });
+    scored.setMachine({ setFiO2: 0.8 });
+    scored.preoxygenate();
+
+    expect(scored.log.map((entry) => entry.meta?.action)).toEqual(['preoxygenate']);
+    expect(session.getLiveResult().actionLedger.map(({ action }) => action)).toEqual([
+      'machine_settings_changed',
+      'machine_settings_changed',
+      'preoxygenate',
+    ]);
   });
 
   it('keeps rubric drivers inert without a session and administrative airway setup unscoreable', () => {

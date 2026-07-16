@@ -588,9 +588,7 @@ export class SimRunner {
   setMachine(patch) {
     Object.assign(this.v, patch);
     if ('mode' in patch) this.v.setMode(patch.mode);
-    this.logEvent('Machine settings', 'Settings changed', {
-      action: 'machine_settings_changed', patch: { ...patch },
-    });
+    this.recordRubricAction('machine_settings_changed', { patch: { ...patch } });
   }
 
   setVolatile({ agent, dialPercent } = {}) {
