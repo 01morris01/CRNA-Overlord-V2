@@ -395,10 +395,73 @@ describe('strict rubric loader rejection', () => {
     expect(() => normalizeRubric(raw)).toThrow(/SOURCE_DENOMINATOR_MISMATCH/);
   });
 
+  test.each([
+    ['a swapped real evidence block', (raw) => {
+      [raw.items[1].engineEvidence, raw.items[2].engineEvidence] = [
+        raw.items[2].engineEvidence,
+        raw.items[1].engineEvidence,
+      ];
+    }],
+    ['another known rule id', (raw) => {
+      raw.items[1].engineEvidence.ruleId = raw.items[2].engineEvidence.ruleId;
+    }],
+    ['another known snapshot key', (raw) => {
+      raw.items[1].engineEvidence.snapshotKeys[0] = 'tofRatio';
+    }],
+    ['a missing snapshot key', (raw) => {
+      raw.items[1].engineEvidence.snapshotKeys.pop();
+    }],
+    ['an extra known snapshot key', (raw) => {
+      raw.items[1].engineEvidence.snapshotKeys.push('tofRatio');
+    }],
+    ['another known action entry', (raw) => {
+      raw.items[1].engineEvidence.actionLogEntries[0] = 'tof_checked';
+    }],
+    ['a missing action entry', (raw) => {
+      raw.items[1].engineEvidence.actionLogEntries.pop();
+    }],
+    ['an extra known action entry', (raw) => {
+      raw.items[1].engineEvidence.actionLogEntries.push('tof_checked');
+    }],
+  ])('rejects engine evidence that substitutes %s', (_name, mutate) => {
+    const raw = copy(emergenceRaw);
+    mutate(raw);
+    expect(() => normalizeRubric(raw)).toThrow(/evidence contract/);
+  });
+
+  test('accepts the exact engine evidence arrays in a different order', () => {
+    const raw = copy(emergenceRaw);
+    raw.items[1].engineEvidence.snapshotKeys.reverse();
+    raw.items[1].engineEvidence.actionLogEntries.reverse();
+    expect(normalizeRubric(raw).items[1].engineEvidence).toEqual(raw.items[1].engineEvidence);
+  });
+
   test('rejects malformed denominator discrepancy metadata', () => {
     const raw = copy(rsiRaw);
     raw.discrepancies[0].computedMaxPoints = 49;
     expect(() => normalizeRubric(raw)).toThrow(/computedMaxPoints/);
+  });
+
+  test.each([
+    ['an unknown code', (discrepancy) => {
+      discrepancy.code = 'UNREVIEWED_SOURCE_WARNING';
+    }],
+    ['a missing field', (discrepancy) => {
+      delete discrepancy.sourceHeaderDenominator;
+    }],
+    ['an extra field', (discrepancy) => {
+      discrepancy.note = 'not part of the approved schema';
+    }],
+    ['a non-numeric source denominator', (discrepancy) => {
+      discrepancy.sourceHeaderDenominator = '49';
+    }],
+    ['a non-numeric computed maximum', (discrepancy) => {
+      discrepancy.computedMaxPoints = '106';
+    }],
+  ])('rejects SOURCE_DENOMINATOR_MISMATCH with %s', (_name, mutate) => {
+    const raw = copy(rsiRaw);
+    mutate(raw.discrepancies[0]);
+    expect(() => normalizeRubric(raw)).toThrow();
   });
 
   test('rejects a denominator mismatch warning when the denominator matches', () => {

@@ -7,30 +7,164 @@ export const RUBRIC_SCORING_SOURCES = Object.freeze([
 const POINT_SCALE_KEYS = Object.freeze(['notPerformed', 'partial', 'performed']);
 const PASS_RULE_KEYS = Object.freeze(['minimumPercent', 'requireEveryCriticalPerformed']);
 const ENGINE_EVIDENCE_KEYS = Object.freeze(['actionLogEntries', 'ruleId', 'snapshotKeys']);
-
-const ENGINE_RULE_IDS = new Set([
-  'emergence_stop_anesthetic',
-  'emergence_tof_and_reversal',
-  'emergence_spontaneous_ventilation',
-  'standard_mask_ventilation_before_nmb',
-  'rsi_preoxygenation',
-  'rsi_cricoid_applied',
-  'rsi_medication_selection',
-  'rsi_medication_sequence',
-  'rsi_no_ppv_before_first_laryngoscopy',
-  'rsi_continuous_etco2_confirmation',
-  'rsi_failed_attempt_ppv_with_cricoid',
-  'rsi_cricoid_release_after_confirmation',
-  'rsi_inhaled_anesthetic_on',
-  'rsi_vent_mode',
-  'rsi_tidal_volume',
-  'rsi_respiratory_rate',
-  'rsi_fresh_gas',
-  'rsi_fio2',
-  'rsi_bag_to_vent',
-  'rsi_appropriate_failed_attempt_intervention',
-  'rsi_under_three_attempts',
+const SOURCE_DENOMINATOR_MISMATCH_KEYS = Object.freeze([
+  'code',
+  'computedMaxPoints',
+  'sourceHeaderDenominator',
 ]);
+
+function evidenceContract(ruleId, snapshotKeys, actionLogEntries) {
+  return Object.freeze({
+    ruleId,
+    snapshotKeys: Object.freeze(snapshotKeys),
+    actionLogEntries: Object.freeze(actionLogEntries),
+  });
+}
+
+const ENGINE_EVIDENCE_CONTRACTS = Object.freeze({
+  'carson-newman-anesthesia-emergence:emergence-2': evidenceContract(
+    'emergence_stop_anesthetic',
+    ['vaporizer', 'vaporizerAgent', 'activeAnestheticInfusions', 'airwayDevice'],
+    ['volatile_changed', 'drug', 'extubate'],
+  ),
+  'carson-newman-anesthesia-emergence:emergence-3': evidenceContract(
+    'emergence_tof_and_reversal',
+    ['tofRatio', 'effectiveNmbBlockade', 'airwayDevice'],
+    ['tof_checked', 'drug', 'extubate'],
+  ),
+  'carson-newman-anesthesia-emergence:emergence-4': evidenceContract(
+    'emergence_spontaneous_ventilation',
+    [
+      'spontaneousRR',
+      'spontaneousTV',
+      'spontaneousMV',
+      'respiratoryMuscleCapability',
+      'airwayDevice',
+    ],
+    ['spontaneous_ventilation_assessed', 'extubate'],
+  ),
+  'carson-newman-standard-iv-induction:standard-7': evidenceContract(
+    'standard_mask_ventilation_before_nmb',
+    ['airwayDevice', 'mechanicalMV', 'effectiveMV'],
+    ['mask_ppv_started', 'mask_ppv_completed', 'drug', 'intubation_attempt_started'],
+  ),
+  'carson-newman-rsi-induction:rsi-7': evidenceContract(
+    'rsi_preoxygenation',
+    ['fio2', 'eto2', 'airwayDevice', 'spontaneousRR', 'spontaneousTV'],
+    ['preoxygenate', 'drug'],
+  ),
+  'carson-newman-rsi-induction:rsi-9': evidenceContract(
+    'rsi_cricoid_applied',
+    ['cricoidPressureActive'],
+    ['drug', 'cricoid_pressure_applied', 'intubation_attempt_started'],
+  ),
+  'carson-newman-rsi-induction:rsi-10a': evidenceContract(
+    'rsi_medication_selection',
+    ['effectiveNmbBlockade'],
+    ['drug'],
+  ),
+  'carson-newman-rsi-induction:rsi-10c': evidenceContract(
+    'rsi_medication_sequence',
+    ['effectiveNmbBlockade', 'airwayDevice'],
+    ['drug', 'intubation_attempt_started'],
+  ),
+  'carson-newman-rsi-induction:rsi-11': evidenceContract(
+    'rsi_no_ppv_before_first_laryngoscopy',
+    ['airwayDevice', 'ppvActive', 'intubationAttemptCount'],
+    ['mask_ppv_started', 'intubation_attempt_started'],
+  ),
+  'carson-newman-rsi-induction:rsi-26': evidenceContract(
+    'rsi_continuous_etco2_confirmation',
+    ['capnogramPresent', 'etco2', 'airwayDevice', 'mechanicalMV'],
+    ['intubation_attempt_succeeded', 'confirm_etco2'],
+  ),
+  'carson-newman-rsi-induction:rsi-28': evidenceContract(
+    'rsi_failed_attempt_ppv_with_cricoid',
+    [
+      'cricoidPressureActive',
+      'ppvActive',
+      'mechanicalMV',
+      'effectiveMV',
+      'intubationAttemptCount',
+    ],
+    [
+      'intubation_attempt_failed',
+      'cricoid_pressure_applied',
+      'mask_ppv_started',
+      'mask_ppv_completed',
+      'intubation_attempt_started',
+    ],
+  ),
+  'carson-newman-rsi-induction:rsi-29': evidenceContract(
+    'rsi_cricoid_release_after_confirmation',
+    ['cricoidPressureActive', 'capnogramPresent', 'etco2', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'confirm_etco2', 'cricoid_pressure_released'],
+  ),
+  'carson-newman-rsi-induction:rsi-30': evidenceContract(
+    'rsi_inhaled_anesthetic_on',
+    ['vaporizer', 'vaporizerAgent', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'volatile_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-32': evidenceContract(
+    'rsi_vent_mode',
+    ['ventMode', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'vent_mode_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-33': evidenceContract(
+    'rsi_tidal_volume',
+    ['ventSetTV', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'machine_settings_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-34': evidenceContract(
+    'rsi_respiratory_rate',
+    ['ventSetRR', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'machine_settings_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-35': evidenceContract(
+    'rsi_fresh_gas',
+    ['o2Flow', 'airFlow', 'n2oFlow', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'machine_settings_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-36': evidenceContract(
+    'rsi_fio2',
+    ['ventSetFiO2', 'fio2', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'machine_settings_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-37': evidenceContract(
+    'rsi_bag_to_vent',
+    ['ventMode', 'mechanicalMV', 'airwayDevice'],
+    ['intubation_attempt_succeeded', 'vent_mode_changed'],
+  ),
+  'carson-newman-rsi-induction:rsi-41': evidenceContract(
+    'rsi_appropriate_failed_attempt_intervention',
+    [
+      'spo2',
+      'cricoidPressureActive',
+      'ppvActive',
+      'mechanicalMV',
+      'effectiveMV',
+      'intubationAttemptCount',
+      'airwayDevice',
+    ],
+    [
+      'intubation_attempt_failed',
+      'cricoid_pressure_applied',
+      'mask_ppv_started',
+      'mask_ppv_completed',
+      'intubation_attempt_started',
+      'intubation_attempt_succeeded',
+    ],
+  ),
+  'carson-newman-rsi-induction:rsi-42': evidenceContract(
+    'rsi_under_three_attempts',
+    ['intubationAttemptCount', 'airwayDevice'],
+    ['intubation_attempt_started', 'intubation_attempt_succeeded'],
+  ),
+});
+
+const ENGINE_RULE_IDS = new Set(
+  Object.values(ENGINE_EVIDENCE_CONTRACTS).map((contract) => contract.ruleId),
+);
 
 const SNAPSHOT_KEYS = new Set([
   'activeAnestheticInfusions',
@@ -161,7 +295,12 @@ function validateEvidenceList(values, allowed, label) {
   }
 }
 
-function validateEngineEvidence(value, itemId) {
+function sameMembers(actual, expected) {
+  return actual.length === expected.length
+    && expected.every((entry) => actual.includes(entry));
+}
+
+function validateEngineEvidence(value, rubricId, itemId) {
   if (!ownKeysEqual(value, ENGINE_EVIDENCE_KEYS)) {
     throw new TypeError(`${itemId}.engineEvidence must contain snapshotKeys, actionLogEntries, and ruleId`);
   }
@@ -175,6 +314,14 @@ function validateEngineEvidence(value, itemId) {
   if (!ENGINE_RULE_IDS.has(value.ruleId)) {
     throw new RangeError(`Unknown rubric rule: ${value.ruleId}`);
   }
+
+  const expected = ENGINE_EVIDENCE_CONTRACTS[`${rubricId}:${itemId}`];
+  if (!expected
+    || value.ruleId !== expected.ruleId
+    || !sameMembers(value.snapshotKeys, expected.snapshotKeys)
+    || !sameMembers(value.actionLogEntries, expected.actionLogEntries)) {
+    throw new RangeError(`${itemId}.engineEvidence does not match the approved evidence contract`);
+  }
 }
 
 function validateDiscrepancies(rubric, summary) {
@@ -187,18 +334,32 @@ function validateDiscrepancies(rubric, summary) {
   for (const discrepancy of rubric.discrepancies) {
     if (!isPlainObject(discrepancy)) throw new TypeError('Each discrepancy must be an object');
     requireString(discrepancy.code, 'discrepancy.code');
+    if (discrepancy.code !== 'SOURCE_DENOMINATOR_MISMATCH') {
+      throw new RangeError(`Unknown discrepancy code: ${discrepancy.code}`);
+    }
+    if (!ownKeysEqual(discrepancy, SOURCE_DENOMINATOR_MISMATCH_KEYS)) {
+      throw new TypeError(
+        'SOURCE_DENOMINATOR_MISMATCH must contain only code, sourceHeaderDenominator, and computedMaxPoints',
+      );
+    }
     if (seenCodes.has(discrepancy.code)) {
       throw new RangeError(`Duplicate discrepancy code: ${discrepancy.code}`);
     }
     seenCodes.add(discrepancy.code);
-    if (discrepancy.code === 'SOURCE_DENOMINATOR_MISMATCH') {
-      denominatorMismatches.push(discrepancy);
-      if (discrepancy.sourceHeaderDenominator !== rubric.sourceHeaderDenominator) {
-        throw new RangeError('SOURCE_DENOMINATOR_MISMATCH sourceHeaderDenominator is incorrect');
-      }
-      if (discrepancy.computedMaxPoints !== summary.maxPoints) {
-        throw new RangeError('SOURCE_DENOMINATOR_MISMATCH computedMaxPoints is incorrect');
-      }
+    requirePositiveInteger(
+      discrepancy.sourceHeaderDenominator,
+      'SOURCE_DENOMINATOR_MISMATCH sourceHeaderDenominator',
+    );
+    requirePositiveInteger(
+      discrepancy.computedMaxPoints,
+      'SOURCE_DENOMINATOR_MISMATCH computedMaxPoints',
+    );
+    denominatorMismatches.push(discrepancy);
+    if (discrepancy.sourceHeaderDenominator !== rubric.sourceHeaderDenominator) {
+      throw new RangeError('SOURCE_DENOMINATOR_MISMATCH sourceHeaderDenominator is incorrect');
+    }
+    if (discrepancy.computedMaxPoints !== summary.maxPoints) {
+      throw new RangeError('SOURCE_DENOMINATOR_MISMATCH computedMaxPoints is incorrect');
     }
   }
 
@@ -257,7 +418,7 @@ export function normalizeRubric(raw) {
       throw new RangeError(`Unknown scoring source: ${item.scoringSource}`);
     }
     if (item.scoringSource === 'ENGINE_OBSERVABLE') {
-      validateEngineEvidence(item.engineEvidence, item.id);
+      validateEngineEvidence(item.engineEvidence, rubric.id, item.id);
     } else if (item.engineEvidence !== null) {
       throw new TypeError(`${item.id} must not declare engine evidence`);
     }
