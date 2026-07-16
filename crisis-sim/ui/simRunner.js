@@ -15,7 +15,7 @@ import {
 } from '../sim/scenario/scenarioDebrief.js';
 
 const SEED = 12345;
-const MAX_UINT32 = 0xffffffff;
+const MAX_ENGINE_SEED = 0x7fffffff;
 const FIXED_TICKS_PER_SECOND = 50;
 const DANGEROUS_INPUT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 // Display-only convergence tolerance; it never feeds back into physiology.
@@ -106,6 +106,18 @@ function alignedFixedStepCount(seconds, label) {
   return steps;
 }
 
+function requireFiniteField(object, key, label, { min = -Infinity, max = Infinity } = {}) {
+  const value = object[key];
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max) {
+    throw new RangeError(`${label}.${key} must be a finite number from ${min} to ${max}`);
+  }
+  return value;
+}
+
+function validateOptionalFiniteField(object, key, label, range) {
+  if (Object.hasOwn(object, key)) requireFiniteField(object, key, label, range);
+}
+
 function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
   const scenarioCopy = copyJsonInput(scenario, 'scenario');
   const rubricCopy = copyJsonInput(rubric, 'rubric');
@@ -115,8 +127,8 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
   // Scenario loading is stricter than legacy normalize defaults: a rubric
   // case must explicitly declare its reproducibility and scoring contract.
   if (!Number.isSafeInteger(scenarioCopy.seed)
-    || scenarioCopy.seed < 0 || scenarioCopy.seed > MAX_UINT32) {
-    throw new RangeError('scenario.seed must be an explicitly declared nonnegative uint32 safe integer');
+    || scenarioCopy.seed < 0 || scenarioCopy.seed > MAX_ENGINE_SEED) {
+    throw new RangeError('scenario.seed must be an explicitly declared nonnegative signed engine seed');
   }
   if (typeof scenarioCopy.rubricId !== 'string' || scenarioCopy.rubricId.length === 0) {
     throw new TypeError('scenario.rubricId must be an explicitly declared nonempty string');
@@ -131,13 +143,25 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     || !isPlainObject(scenarioCopy.debrief)) {
     throw new TypeError('scenario must define patientProfile, startingSetup, events, airwayPlan, and debrief');
   }
-  for (const key of ['weightKg', 'heightCm', 'ageYears']) {
-    if (typeof scenarioCopy.patientProfile[key] !== 'number'
-      || !Number.isFinite(scenarioCopy.patientProfile[key])
-      || scenarioCopy.patientProfile[key] <= 0) {
-      throw new RangeError(`scenario.patientProfile.${key} must be finite and positive`);
-    }
+  const profile = scenarioCopy.patientProfile;
+  requireFiniteField(profile, 'weightKg', 'scenario.patientProfile', { min: 0.1, max: 500 });
+  requireFiniteField(profile, 'heightCm', 'scenario.patientProfile', { min: 30, max: 300 });
+  requireFiniteField(profile, 'ageYears', 'scenario.patientProfile', { min: 0.01, max: 130 });
+  if (profile.sex !== 'Male' && profile.sex !== 'Female') {
+    throw new RangeError('scenario.patientProfile.sex must be Male or Female');
   }
+  requireFiniteField(profile, 'baselineHR', 'scenario.patientProfile', { min: 1, max: 300 });
+  requireFiniteField(profile, 'baselineSystolic', 'scenario.patientProfile', { min: 20, max: 300 });
+  requireFiniteField(profile, 'baselineDiastolic', 'scenario.patientProfile', { min: 10, max: 250 });
+  if (profile.baselineDiastolic >= profile.baselineSystolic) {
+    throw new RangeError('scenario.patientProfile baseline diastolic must be below systolic');
+  }
+  requireFiniteField(profile, 'baselineSpO2', 'scenario.patientProfile', { min: 1, max: 100 });
+  requireFiniteField(profile, 'baselineRR', 'scenario.patientProfile', { min: 1, max: 100 });
+  requireFiniteField(profile, 'baselineTemp', 'scenario.patientProfile', { min: 20, max: 45 });
+  validateOptionalFiniteField(
+    profile, 'baselineEtCO2', 'scenario.patientProfile', { min: 1, max: 150 },
+  );
   const setup = scenarioCopy.startingSetup;
   if (typeof setup.oxygenOn !== 'boolean'
     || typeof setup.fio2 !== 'number' || !Number.isFinite(setup.fio2)
@@ -145,6 +169,29 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     || !['manual', 'vcv', 'pcv', 'psv'].includes(String(setup.ventMode).toLowerCase())
     || !['mask', 'ett'].includes(String(setup.airway).toLowerCase())) {
     throw new RangeError('scenario.startingSetup must declare valid oxygen, FiO2, mode, and airway');
+  }
+  validateOptionalFiniteField(
+    setup, 'o2FlowLPerMin', 'scenario.startingSetup', { min: 0, max: 100 },
+  );
+  validateOptionalFiniteField(
+    setup, 'airFlowLPerMin', 'scenario.startingSetup', { min: 0, max: 100 },
+  );
+  validateOptionalFiniteField(
+    setup, 'n2oFlowLPerMin', 'scenario.startingSetup', { min: 0, max: 100 },
+  );
+  validateOptionalFiniteField(
+    setup, 'tidalVolume', 'scenario.startingSetup', { min: 0, max: 2000 },
+  );
+  validateOptionalFiniteField(
+    setup, 'respiratoryRate', 'scenario.startingSetup', { min: 0, max: 100 },
+  );
+  validateOptionalFiniteField(
+    setup, 'peep', 'scenario.startingSetup', { min: 0, max: 50 },
+  );
+  requireFiniteField(setup, 'vaporizerDial', 'scenario.startingSetup', { min: 0, max: 18 });
+  if (Object.hasOwn(setup, 'vaporizerAgent')
+    && !['Sevoflurane', 'Desflurane', 'Isoflurane'].includes(setup.vaporizerAgent)) {
+    throw new RangeError('scenario.startingSetup.vaporizerAgent is unsupported');
   }
   const plan = scenarioCopy.airwayPlan;
   if (!Array.isArray(plan.failedIntubationAttempts)
@@ -158,6 +205,9 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     plan.intubationAttemptDurationSeconds,
     'scenario.airwayPlan.intubationAttemptDurationSeconds',
   );
+  if (plan.intubationAttemptDurationSeconds > 600) {
+    throw new RangeError('scenario airway attempt duration must not exceed 600 seconds');
+  }
 
   const scenarioForReset = copyJsonInput(scenarioCopy, 'scenario reset definition');
   const rubricForReset = copyJsonInput(rubricCopy, 'rubric reset definition');
@@ -169,8 +219,8 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     throw new TypeError('scenario.title must be a nonempty string');
   }
   if (!Number.isSafeInteger(definition.seed)
-    || definition.seed < 0 || definition.seed > MAX_UINT32) {
-    throw new RangeError('scenario.seed must be a nonnegative uint32 safe integer');
+    || definition.seed < 0 || definition.seed > MAX_ENGINE_SEED) {
+    throw new RangeError('scenario.seed must be a nonnegative signed engine seed');
   }
   if (typeof definition.rubricId !== 'string' || definition.rubricId.length === 0) {
     throw new TypeError('scenario.rubricId must be a nonempty string');
@@ -396,7 +446,8 @@ export class SimRunner {
   reset() {
     if (this._loadedRubricScenario !== null) {
       const saved = copyJsonInput(this._loadedRubricScenario, 'loaded rubric scenario');
-      return this.loadRubricScenario(saved);
+      this.loadRubricScenario(saved);
+      return this.snapshot();
     }
     this._stopRealtime();
     this.build();
@@ -406,97 +457,105 @@ export class SimRunner {
   }
 
   loadRubricScenario(options) {
-    // Complete strict validation first so rejected loads do not pause, emit,
-    // replace the rig, append logs, or disturb an existing scoring session.
+    // Validation and complete candidate construction happen off-side. The
+    // active runner is not stopped or touched unless the candidate already
+    // owns a valid initial rubric trace and coherent learner t=0 state.
     const prepared = prepareRubricScenarioInputs(options);
+    const candidate = this._createRubricScenarioCandidate(prepared);
+    const result = candidate._rubricScenarioLoadResult;
+    this._adoptRubricScenarioCandidate(candidate);
+    this.emit();
+    return copyJsonInput(result, 'rubric scenario load result');
+  }
+
+  _createRubricScenarioCandidate(prepared) {
+    const candidate = new SimRunner();
+    candidate._constructRubricScenarioCandidate(prepared);
+    return candidate;
+  }
+
+  _constructRubricScenarioCandidate(prepared) {
     const {
       scenario, rubric, administrativeSetup, resetInputs,
     } = prepared;
-    const profile = scenario.patientProfile;
+    this.build({ seed: scenario.seed, scenarioDefinition: scenario });
 
-    this._stopRealtime();
-    const savedOnTick = this.onTick;
-    const savedOnEvent = this.onEvent;
-    this.onTick = null;
-    this.onEvent = null;
-    let result;
-    try {
-      this.config = {
-        ...DEFAULT_CONFIG,
-        weightKg: profile.weightKg,
-        heightCm: profile.heightCm,
-        ageYears: profile.ageYears,
-        sex: profile.sex,
-        baselineHR: profile.baselineHR,
-        baselineSystolic: profile.baselineSystolic,
-        baselineDiastolic: profile.baselineDiastolic,
-        baselineSpO2: profile.baselineSpO2,
-        baselineRR: profile.baselineRR,
-        baselineTemp: profile.baselineTemp,
-        baselineEtCO2: profile.baselineEtCO2 ?? DEFAULT_CONFIG.baselineEtCO2,
-        failedIntubationAttempts: [...scenario.airwayPlan.failedIntubationAttempts],
-        intubationAttemptDurationSeconds:
-          scenario.airwayPlan.intubationAttemptDurationSeconds,
-      };
-      this.build({ seed: scenario.seed, scenarioDefinition: scenario });
+    const setup = scenario.startingSetup;
+    this.setMachine({
+      o2FlowLPerMin: setup.oxygenOn ? Math.max(2, setup.o2FlowLPerMin ?? 2) : 0,
+      airFlowLPerMin: setup.airFlowLPerMin ?? 0,
+      n2oFlowLPerMin: setup.n2oFlowLPerMin ?? 0,
+      setFiO2: setup.fio2,
+      setTidalVolume: setup.tidalVolume || this.v.setTidalVolume,
+      setRespiratoryRate: setup.respiratoryRate || this.v.setRespiratoryRate,
+      setPeep: setup.peep ?? this.v.setPeep,
+    });
+    if (Object.hasOwn(setup, 'vaporizerAgent')) {
+      this.v.vaporizerAgent = setup.vaporizerAgent;
+    }
 
-      const setup = scenario.startingSetup;
-      this.setMachine({
-        o2FlowLPerMin: setup.oxygenOn ? Math.max(2, setup.o2FlowLPerMin ?? 2) : 0,
-        airFlowLPerMin: setup.airFlowLPerMin ?? 0,
-        n2oFlowLPerMin: setup.n2oFlowLPerMin ?? 0,
-        setFiO2: setup.fio2,
-        setTidalVolume: setup.tidalVolume || this.v.setTidalVolume,
-        setRespiratoryRate: setup.respiratoryRate || this.v.setRespiratoryRate,
-        setPeep: setup.peep ?? this.v.setPeep,
-      });
-
-      if (administrativeSetup !== null) {
-        // Scenario processing is paused throughout construction. The normal
-        // core order advances physiology for an exact fixed-step duration;
-        // no derived TOF, blockade, respiratory, or vital field is assigned.
-        this.s.pauseScenario();
-        this.setInstructorNmbTarget(administrativeSetup.instructorNmbTarget);
-        this.stepFor(administrativeSetup.preconditioningDurationSeconds);
-        if (this.core.tickCount !== administrativeSetup.preconditioningSteps) {
-          throw new Error('Administrative preconditioning fixed-step count mismatch');
-        }
-
-        // Re-seed learner stochastic time without resetting the constructed
-        // physiologic state. Existing public resets/rebase APIs clear the
-        // procedure/scenario clocks and learner histories before trace t=0.
-        this.core.initialize(scenario.seed);
-        this.a.reset();
-        this.s.applyAirwayPlan();
-        this.s.rebaseLearnerRun();
-        this.simTime = 0;
-        this._accum = 0;
-        this._lastReal = 0;
+    if (administrativeSetup !== null) {
+      // Only a pristine loader-owned transition can authorize this paused
+      // administrative interval; no learner event can be replayed afterward.
+      this.s.beginAdministrativePreconditioning();
+      this.setInstructorNmbTarget(administrativeSetup.instructorNmbTarget);
+      this.stepFor(administrativeSetup.preconditioningDurationSeconds);
+      if (this.core.tickCount !== administrativeSetup.preconditioningSteps) {
+        throw new Error('Administrative preconditioning fixed-step count mismatch');
       }
 
-      this.log = [];
-      this.tofCheckHistory = [];
-      this._activeRubricScenario = {
-        id: scenario.id,
-        title: scenario.title,
-        rubricId: scenario.rubricId,
-        seed: scenario.seed,
-      };
-      this.attachRubricSession({ rubric, criteria: scenario.rubricCriteria });
-      this._loadedRubricScenario = resetInputs;
-      result = {
-        ok: true,
-        scenarioId: scenario.id,
-        rubricId: scenario.rubricId,
-        seed: scenario.seed,
-        initialSnapshot: this.compactRubricSnapshot(0),
-      };
-    } finally {
-      this.onTick = savedOnTick;
-      this.onEvent = savedOnEvent;
+      // Preserve constructed physiology, but reseed learner randomness and
+      // rebase every independent learner/action clock and breath phase.
+      this.core.initialize(scenario.seed);
+      this.l.rebaseLearnerTime();
+      this.v.rebaseLearnerTime();
+      this.a.reset();
+      this.s.applyAirwayPlan();
+      this.s.rebaseLearnerRun();
+      this.simTime = 0;
+      this._accum = 0;
+      this._lastReal = 0;
     }
-    this.emit();
-    return copyJsonInput(result, 'rubric scenario load result');
+
+    this.log = [];
+    this.tofCheckHistory = [];
+    this._activeRubricScenario = {
+      id: scenario.id,
+      title: scenario.title,
+      rubricId: scenario.rubricId,
+      seed: scenario.seed,
+    };
+    this.attachRubricSession({ rubric, criteria: scenario.rubricCriteria });
+    this._loadedRubricScenario = resetInputs;
+    this._rubricScenarioLoadResult = {
+      ok: true,
+      scenarioId: scenario.id,
+      rubricId: scenario.rubricId,
+      seed: scenario.seed,
+      initialSnapshot: this.compactRubricSnapshot(0),
+    };
+  }
+
+  _adoptRubricScenarioCandidate(candidate) {
+    this._stopRealtime();
+    if (this._procedureUnsubscribe) this._procedureUnsubscribe();
+    if (candidate._procedureUnsubscribe) candidate._procedureUnsubscribe();
+    candidate._procedureUnsubscribe = null;
+
+    for (const key of ['p', 'd', 'l', 'v', 'a', 's', 'core']) this[key] = candidate[key];
+    this.simTime = candidate.simTime;
+    this._accum = candidate._accum;
+    this._lastReal = candidate._lastReal;
+    this.log = candidate.log;
+    this.tofCheckHistory = candidate.tofCheckHistory;
+    this._instructorNmbTarget = candidate._instructorNmbTarget;
+    this.rubricSession = candidate.rubricSession;
+    this.activeSeed = candidate.activeSeed;
+    this._activeRubricScenario = candidate._activeRubricScenario;
+    this._loadedRubricScenario = candidate._loadedRubricScenario;
+    this._procedureUnsubscribe = this.a.addEventListener(
+      (event) => this.logProcedureEvent(event),
+    );
   }
 
   setSpeed(mult) { this.speed = mult; }
@@ -718,13 +777,13 @@ export class SimRunner {
       lidocaineToxicityHistory: this.l.toxicityHistory,
       lipidRescueHistory: this.l.lipidRescueHistory,
       running: this.running, lifecycle: this.getLifecycleState(), speed: this.speed,
-      patient: `${this.config.weightKg} kg · ${this.config.ageYears} y · ${this.config.sex}`,
+      patient: `${p.weightKg} kg · ${p.ageYears} y · ${p.sex}`,
       // physiologic drivers (truth-boundary inputs) + drug context for the advisor
       svr: p.svrFactor, vol: p.bloodVolumeFraction, airwayRes: p.airwayResistanceFactor,
       shunt: p.shuntFraction, hrOffset: p.hrComplicationOffset, respDrive: p.respiratoryDriveFactor,
       heat: p.heatLoadC, vco2: p.vco2MlMin,
       propofolCe: p.propofolCe, fentanylCe: p.fentanylCe, midazolamCe: p.midazolamCe,
-      weightKg: this.config.weightKg,
+      weightKg: p.weightKg,
     };
   }
 

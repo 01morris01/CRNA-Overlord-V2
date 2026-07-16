@@ -481,3 +481,283 @@ describe('scoreable scenario paths', () => {
     expect(run()).toBe(run());
   });
 });
+
+describe('rubric scenario lifecycle hardening', () => {
+  const invalidCases = [
+    ['missing baseline HR', (scenario) => { delete scenario.patientProfile.baselineHR; }],
+    ['string baseline HR', (scenario) => { scenario.patientProfile.baselineHR = '84'; }],
+    ['NaN baseline HR', (scenario) => { scenario.patientProfile.baselineHR = Number.NaN; }],
+    ['infinite baseline HR', (scenario) => {
+      scenario.patientProfile.baselineHR = Number.POSITIVE_INFINITY;
+    }],
+    ['negative baseline RR', (scenario) => { scenario.patientProfile.baselineRR = -1; }],
+    ['invalid sex', (scenario) => { scenario.patientProfile.sex = 'Other'; }],
+    ['string tidal volume', (scenario) => { scenario.startingSetup.tidalVolume = '500'; }],
+    ['string oxygen flow', (scenario) => { scenario.startingSetup.o2FlowLPerMin = '10'; }],
+    ['invalid FiO2', (scenario) => { scenario.startingSetup.fio2 = 1.1; }],
+    ['invalid vent mode', (scenario) => { scenario.startingSetup.ventMode = 'SIMV'; }],
+    ['invalid airway', (scenario) => { scenario.startingSetup.airway = 'native'; }],
+    ['string vaporizer dial', (scenario) => { scenario.startingSetup.vaporizerDial = '2'; }],
+    ['invalid attempt duration', (scenario) => {
+      scenario.airwayPlan.intubationAttemptDurationSeconds = -30;
+    }],
+    ['unsigned-only seed', (scenario) => { scenario.seed = 0x80000000; }],
+    ['invalid criteria', (scenario) => {
+      scenario.rubricCriteria.etco2ConfirmationSamples = 2.5;
+    }],
+    ['malformed administration', (scenario) => {
+      scenario.administrativeSetup = {
+        instructorNmbTarget: { targetTofRatio: '0.25' },
+        preconditioningDurationSeconds: 20,
+      };
+    }],
+  ];
+
+  test.each(invalidCases)(
+    'rejects %s before touching a running runner',
+    (_label, mutate) => {
+      const runner = new SimRunner();
+      const oldSession = runner.attachRubricSession({
+        rubric: standardRubric, criteria: { weightKg: 70 },
+      });
+      runner.logEvent('Probe', 'preserve', { action: 'condition', name: 'atomic' });
+      const onTick = () => {};
+      const onEvent = () => {};
+      runner.onTick = onTick;
+      runner.onEvent = onEvent;
+      runner.start();
+      const scenario = structuredClone(standardScenario);
+      mutate(scenario);
+      const before = {
+        core: runner.core,
+        patient: runner.p,
+        airway: runner.a,
+        listener: runner._procedureUnsubscribe,
+        session: runner.rubricSession,
+        log: runner.log,
+        config: runner.config,
+        active: runner._activeRubricScenario,
+        loaded: runner._loadedRubricScenario,
+        lastReal: runner._lastReal,
+        accum: runner._accum,
+        snapshot: JSON.stringify(runner.snapshot()),
+      };
+
+      expect(() => runner.loadRubricScenario({ scenario, rubric: standardRubric })).toThrow();
+
+      expect(runner).toMatchObject({
+        core: before.core,
+        p: before.patient,
+        a: before.airway,
+        rubricSession: before.session,
+        log: before.log,
+        config: before.config,
+        _activeRubricScenario: before.active,
+        _loadedRubricScenario: before.loaded,
+        _lastReal: before.lastReal,
+        _accum: before.accum,
+        running: true,
+        onTick,
+        onEvent,
+      });
+      expect(runner._procedureUnsubscribe).toBe(before.listener);
+      expect(JSON.stringify(runner.snapshot())).toBe(before.snapshot);
+      const tickBefore = runner.core.tickCount;
+      runner._tick(runner._lastReal + 20);
+      expect(runner.running).toBe(true);
+      expect(runner.core.tickCount).toBe(tickBefore + 1);
+      runner.pause();
+    },
+  );
+
+  test('keeps the active runner atomic when off-side candidate construction fails', () => {
+    const runner = new SimRunner();
+    runner.start();
+    const before = {
+      core: runner.core,
+      log: runner.log,
+      config: runner.config,
+      lastReal: runner._lastReal,
+      snapshot: JSON.stringify(runner.snapshot()),
+    };
+    runner._createRubricScenarioCandidate = () => {
+      throw new Error('candidate-stage probe');
+    };
+
+    expect(() => runner.loadRubricScenario({
+      scenario: standardScenario, rubric: standardRubric,
+    })).toThrow(/candidate-stage probe/);
+
+    expect(runner.core).toBe(before.core);
+    expect(runner.log).toBe(before.log);
+    expect(runner.config).toBe(before.config);
+    expect(runner._lastReal).toBe(before.lastReal);
+    expect(JSON.stringify(runner.snapshot())).toBe(before.snapshot);
+    expect(runner.running).toBe(true);
+    const tickBefore = runner.core.tickCount;
+    runner._tick(runner._lastReal + 20);
+    expect(runner.core.tickCount).toBe(tickBefore + 1);
+    runner.pause();
+  });
+
+  test('leaves a progressed paused runner bit-identical after invalid loading', () => {
+    const runner = new SimRunner();
+    runner.stepFor(1);
+    const invalid = structuredClone(standardScenario);
+    invalid.startingSetup.vaporizerDial = 'bad';
+    const before = {
+      core: runner.core,
+      session: runner.rubricSession,
+      log: runner.log,
+      config: runner.config,
+      snapshot: JSON.stringify(runner.snapshot()),
+    };
+
+    expect(() => runner.loadRubricScenario({
+      scenario: invalid, rubric: standardRubric,
+    })).toThrow(/vaporizerDial|finite/);
+
+    expect(runner.core).toBe(before.core);
+    expect(runner.rubricSession).toBe(before.session);
+    expect(runner.log).toBe(before.log);
+    expect(runner.config).toBe(before.config);
+    expect(JSON.stringify(runner.snapshot())).toBe(before.snapshot);
+    expect(runner.snapshot().lifecycle).toBe('PAUSED');
+  });
+
+  test('adopts one real procedure listener and emits one coherent loaded snapshot', () => {
+    const runner = new SimRunner();
+    const emissions = [];
+    const events = [];
+    runner.onTick = (snapshot) => emissions.push(snapshot);
+    runner.onEvent = (entry) => events.push(entry);
+
+    runner.loadRubricScenario({ scenario: standardScenario, rubric: standardRubric });
+
+    expect(emissions).toHaveLength(1);
+    expect(emissions[0].activeRubricScenario.id).toBe(standardScenario.id);
+    expect(events).toEqual([]);
+    runner.applyCricoidPressure();
+    runner.pause();
+    expect(runner.log.filter(({ meta }) => meta?.action === 'cricoid_pressure_applied'))
+      .toHaveLength(1);
+    expect(runner.rubricSession.getLiveResult().actionLedger
+      .filter(({ action }) => action === 'cricoid_pressure_applied')).toHaveLength(1);
+  });
+
+  test('rebases every independent learner clock and deterministic ventilator phase', () => {
+    function loadAndSample() {
+      const runner = new SimRunner();
+      runner.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });
+      expect(runner.l).toMatchObject({ timeSec: 0, tickCount: 0 });
+      expect(runner.l.doseHistory).toEqual([]);
+      expect(runner.l.toxicityHistory).toEqual([]);
+      expect(runner.v.breathCyclePhase).toBe(0);
+      const samples = [];
+      for (let index = 0; index < 7; index += 1) {
+        runner.stepFor(1);
+        samples.push(runner.compactRubricSnapshot(index + 1));
+      }
+      return { runner, samples };
+    }
+
+    const first = loadAndSample();
+    const second = loadAndSample();
+    expect(JSON.stringify(first.samples)).toBe(JSON.stringify(second.samples));
+    first.runner.reset();
+    const resetSamples = [];
+    for (let index = 0; index < 7; index += 1) {
+      first.runner.stepFor(1);
+      resetSamples.push(first.runner.compactRubricSnapshot(index + 1));
+    }
+    expect(JSON.stringify(resetSamples)).toBe(JSON.stringify(second.samples));
+
+    const actionRunner = new SimRunner();
+    actionRunner.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });
+    actionRunner.giveLidocaineBolus({ doseMgPerKg: 1.5 });
+    actionRunner.pause();
+    expect(actionRunner.l.doseHistory[0].tSec).toBe(0);
+    expect(actionRunner.log.at(-1).t).toBe(0);
+    expect(actionRunner.rubricSession.getLiveResult().actionLedger.at(-1).tSec).toBe(0);
+  });
+
+  test('preserves assessment and expected-action maxima across administrative rebase', () => {
+    const runner = new SimRunner();
+    const definition = structuredClone(standardScenario);
+    definition.id = 'max_score_rebase_probe';
+    definition.events = [{
+      triggerTimeSeconds: 0,
+      typeName: 'assessment',
+      description: 'Satisfiable assessment',
+      expectedAction: 'CallForHelp',
+      points: 7,
+    }];
+    definition.expectedActions = [{ action: 'call_for_help', points: 11 }];
+    runner.s.loadRaw(definition);
+    runner.s.startScenario();
+    expect(runner.s.maxPossibleScore).toBe(18);
+
+    runner.s.beginAdministrativePreconditioning();
+    runner.s.rebaseLearnerRun();
+
+    expect(runner.s.maxPossibleScore).toBe(18);
+  });
+
+  test('keeps persistent live configuration through multiple rubric scenarios', () => {
+    const runner = new SimRunner();
+    runner.applyConfig({ weightKg: 91, ageYears: 63, sex: 'Female' });
+    expect(runner.config).toMatchObject({ weightKg: 91, ageYears: 63, sex: 'Female' });
+
+    runner.loadRubricScenario({ scenario: standardScenario, rubric: standardRubric });
+    expect(runner.snapshot()).toMatchObject({
+      weightKg: standardScenario.patientProfile.weightKg,
+      patient: expect.stringContaining(`${standardScenario.patientProfile.weightKg} kg`),
+    });
+    runner.loadRubricScenario({ scenario: rsiScenario, rubric: rsiRubric });
+    expect(runner.snapshot().weightKg).toBe(rsiScenario.patientProfile.weightKg);
+    expect(runner.config).toMatchObject({ weightKg: 91, ageYears: 63, sex: 'Female' });
+
+    runner.applyConfig({ baselineHR: 75 });
+
+    expect(runner.snapshot()).toMatchObject({
+      activeRubricScenario: null,
+      weightKg: 91,
+      patient: '91 kg · 63 y · Female',
+      hr: 75,
+    });
+  });
+
+  test('rejects administrative rebase on an ordinary progressed paused case without mutation', () => {
+    const runner = new SimRunner();
+    runner.stepFor(0.02);
+    runner.s.pauseScenario();
+    const before = JSON.stringify({
+      elapsedTime: runner.s.elapsedTime,
+      state: runner.s.state,
+      eventLog: runner.s.eventLog,
+      score: runner.s.currentScore,
+      run: runner.s.run,
+    });
+
+    expect(() => runner.s.beginAdministrativePreconditioning()).toThrow(/pristine|elapsed|admin/i);
+    expect(() => runner.s.rebaseLearnerRun()).toThrow(/administrative|eligible/i);
+    expect(JSON.stringify({
+      elapsedTime: runner.s.elapsedTime,
+      state: runner.s.state,
+      eventLog: runner.s.eventLog,
+      score: runner.s.currentScore,
+      run: runner.s.run,
+    })).toBe(before);
+  });
+
+  test('returns snapshots from reset in generic and rubric modes', () => {
+    const generic = new SimRunner();
+    expect(generic.reset()).toEqual(generic.snapshot());
+    const rubric = new SimRunner();
+    rubric.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });
+    const reset = rubric.reset();
+    expect(reset).toEqual(rubric.snapshot());
+    expect(reset).not.toHaveProperty('ok');
+    expect(reset.activeRubricScenario.id).toBe(emergenceScenario.id);
+  });
+});
