@@ -15,6 +15,8 @@ import {
 } from '../sim/scenario/scenarioDebrief.js';
 
 const SEED = 12345;
+// Display-only convergence tolerance; it never feeds back into physiology.
+export const INSTRUCTOR_NMB_TARGET_TOLERANCE = 0.02;
 
 export const LIVE_COMPLICATIONS = Object.freeze([
   'Bronchospasm', 'HighSpinal', 'Sympathectomy', 'Anaphylaxis',
@@ -123,6 +125,7 @@ export class SimRunner {
     this.p = p; this.d = d; this.l = l; this.v = v; this.a = a; this.s = scenario; this.core = core;
     this.simTime = 0; this._accum = 0;
     this.tofCheckHistory = [];
+    this._instructorNmbTarget = null;
     this.rubricSession = null;
   }
 
@@ -352,6 +355,7 @@ export class SimRunner {
         : null,
       tofCheckCount: this.tofCheckHistory.length,
       tofCheckHistory: this.tofCheckHistory.map((entry) => ({ ...entry })),
+      instructorNmbTarget: this.getInstructorNmbTargetStatus(),
       activeAnestheticInfusions: this.activeAnestheticInfusions(),
       lidocainePlasmaTotalMcgMl: this.l.plasmaTotalMcgMl,
       lidocainePlasmaFreeMcgMl: this.l.plasmaFreeMcgMl,
@@ -635,6 +639,43 @@ export class SimRunner {
     );
     this.emit();
     return { ...stored };
+  }
+
+  getInstructorNmbTargetStatus() {
+    if (!this._instructorNmbTarget) return null;
+    const targetTofRatio = this._instructorNmbTarget.targetTofRatio;
+    const actualTofRatio = this.p.trainOfFourRatio;
+    return {
+      ...this._instructorNmbTarget,
+      actualTofRatio,
+      actualTofCount: this.p.trainOfFourCount,
+      effectiveNmbBlockade: this.p.effectiveNmbBlockade,
+      dominantNmbSource: this.p.dominantNmbSource,
+      tolerance: INSTRUCTOR_NMB_TARGET_TOLERANCE,
+      equilibrating: Math.abs(actualTofRatio - targetTofRatio)
+        > INSTRUCTOR_NMB_TARGET_TOLERANCE,
+    };
+  }
+
+  setInstructorNmbTarget({ targetTofRatio } = {}) {
+    if (typeof targetTofRatio !== 'number' || !Number.isFinite(targetTofRatio)) {
+      throw new TypeError('targetTofRatio must be a finite number');
+    }
+    if (targetTofRatio < 0 || targetTofRatio > 1) {
+      throw new RangeError('targetTofRatio must be between 0 and 1');
+    }
+
+    this._instructorNmbTarget = {
+      ...this.d.setAdministrativeNmbTarget({ targetTofRatio }),
+    };
+    const status = this.getInstructorNmbTargetStatus();
+    this.logEvent(
+      'Instructor NMB',
+      `Administrative target · TOF ratio ${targetTofRatio.toFixed(2)}`,
+      { action: 'instructor_nmb_depth_set', ...status },
+    );
+    this.emit();
+    return { ...status };
   }
 
   assessSpontaneousVentilation() {

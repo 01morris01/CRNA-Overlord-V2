@@ -5,7 +5,9 @@
    frounded). No RNG. Propofol = full Eleveld 2018.
    ═══════════════════════════════════════════════════════════════════ */
 import { f, Clamp01, Max, Min, MoveTowards, Pow, Exp } from './float32.js';
-import { rocuroniumBlockFromCe } from './neuromuscularModel.js';
+import {
+  rocuroniumBlockFromCe, rocuroniumCeFromBlockade,
+} from './neuromuscularModel.js';
 
 export class DrugSystem {
   constructor() {
@@ -108,6 +110,33 @@ export class DrugSystem {
     this._neoC1 = 0; this._neoCe = 0;
     this._neostigmineRocRelief = 0; this._neostigmineReliefTarget = 0;
     this._neostigmineReliefRate = 0; this._neostigmineAdministered = false;
+  }
+
+  setAdministrativeNmbTarget({ targetTofRatio } = {}) {
+    if (typeof targetTofRatio !== 'number' || !Number.isFinite(targetTofRatio)) {
+      throw new TypeError('targetTofRatio must be a finite number');
+    }
+    if (targetTofRatio < 0 || targetTofRatio > 1) {
+      throw new RangeError('targetTofRatio must be between 0 and 1');
+    }
+
+    const targetBlockade = f(1 - f(targetTofRatio));
+    const rocuroniumCe = rocuroniumCeFromBlockade(targetBlockade);
+    this._rocuroniumC1 = rocuroniumCe;
+    this._rocuroniumCe = rocuroniumCe;
+    this._suxC1 = 0;
+    this._suxCe = 0;
+    this.activeInfusions = this.activeInfusions.filter(
+      ({ drugName }) => drugName !== 'Rocuronium',
+    );
+    this.resetReversalState();
+
+    return {
+      source: 'administrative',
+      targetTofRatio,
+      targetBlockade,
+      rocuroniumCe,
+    };
   }
 
   administerSugammadex(totalDoseMg) {
