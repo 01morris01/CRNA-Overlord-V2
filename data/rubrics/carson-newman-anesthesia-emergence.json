@@ -1,0 +1,116 @@
+{
+  "id": "carson-newman-anesthesia-emergence",
+  "title": "Clinical Examination — Anesthesia Emergence",
+  "course": "NAS 560 · Summer 2026",
+  "sourceFile": "Carson-Newman_Anesthesia_Emergence_Rubric.pdf",
+  "sourceSha256": "c0745b7244f2120d4f509545f5dc26120800f0469208e736c3147119969e3fcf",
+  "sourceHeaderDenominator": 18,
+  "sourceFootnoteScoredItems": 9,
+  "computedItemCount": 9,
+  "computedMaxPoints": 18,
+  "discrepancies": [],
+  "pointScale": {
+    "performed": 2,
+    "partial": 1,
+    "notPerformed": 0
+  },
+  "passRule": {
+    "minimumPercent": 85,
+    "requireEveryCriticalPerformed": true
+  },
+  "items": [
+    {
+      "id": "emergence-1",
+      "displayNumber": "1",
+      "text": "Anticipate the end of the surgery and communicate with the surgical team regarding closure and dressings.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "emergence-2",
+      "displayNumber": "2",
+      "text": "Discontinue volatile anesthetics and decrease any continuous infusions (e.g., propofol).",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["vaporizer", "vaporizerAgent", "activeAnestheticInfusions", "airwayDevice"],
+        "actionLogEntries": ["volatile_changed", "drug", "extubate"],
+        "ruleId": "emergence_stop_anesthetic"
+      }
+    },
+    {
+      "id": "emergence-3",
+      "displayNumber": "3",
+      "text": "Confirm adequate train-of-four (TOF) ratio and reverse neuromuscular blockade if necessary.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["tofRatio", "effectiveNmbBlockade", "airwayDevice"],
+        "actionLogEntries": ["tof_checked", "drug", "extubate"],
+        "ruleId": "emergence_tof_and_reversal"
+      }
+    },
+    {
+      "id": "emergence-4",
+      "displayNumber": "4",
+      "text": "Ensure the patient has resumed spontaneous ventilation and that rate and tidal volumes are adequate.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["spontaneousRR", "spontaneousTV", "spontaneousMV", "respiratoryMuscleCapability", "airwayDevice"],
+        "actionLogEntries": ["spontaneous_ventilation_assessed", "extubate"],
+        "ruleId": "emergence_spontaneous_ventilation"
+      }
+    },
+    {
+      "id": "emergence-5",
+      "displayNumber": "5",
+      "text": "Un-tape the eyes.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "emergence-6",
+      "displayNumber": "6",
+      "text": "Suction the oropharynx as needed. Loosen tape / securing devices on the ETT. Ensure the patient is hemodynamically stable.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "emergence-7",
+      "displayNumber": "7",
+      "text": "Extubate either when deeply anesthetized (deep extubation to prevent coughing / bucking) or when fully awake (patient opens eyes, follows commands, and has sustained protective airway reflexes).",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "emergence-8",
+      "displayNumber": "8",
+      "text": "Apply a supplementary oxygen delivery device (e.g., face mask, nasal cannula), assess for airway obstruction (e.g., need for OPA / NPA), and monitor oxygen saturation closely.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "emergence-9",
+      "displayNumber": "9",
+      "text": "Ensure the patient is stable for transfer and provide a structured handover to the Post-Anesthesia Care Unit (PACU) team.",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    }
+  ]
+}

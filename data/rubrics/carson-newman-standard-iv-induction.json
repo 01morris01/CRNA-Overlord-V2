@@ -1,0 +1,153 @@
+{
+  "id": "carson-newman-standard-iv-induction",
+  "title": "Clinical Examination — General Anesthesia: Standard Intravenous Induction (Non–Rapid Sequence)",
+  "course": "NAS 560 · Summer 2026",
+  "sourceFile": "Carson-Newman_Standard_IV_Induction_Rubric.pdf",
+  "sourceSha256": "453455c5be47ff3e00cc13da1106ea8738501073302e3f1b6a846f786b2a91a7",
+  "sourceHeaderDenominator": 28,
+  "sourceFootnoteScoredItems": 14,
+  "computedItemCount": 14,
+  "computedMaxPoints": 28,
+  "discrepancies": [],
+  "pointScale": {
+    "performed": 2,
+    "partial": 1,
+    "notPerformed": 0
+  },
+  "passRule": {
+    "minimumPercent": 85,
+    "requireEveryCriticalPerformed": true
+  },
+  "items": [
+    {
+      "id": "standard-1",
+      "displayNumber": "1",
+      "text": "Don PPE and observe universal precautions",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-2",
+      "displayNumber": "2",
+      "text": "Verbalize the anesthesia time-out prior to induction",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-3",
+      "displayNumber": "3",
+      "text": "Apply standard ASA monitors and obtain baseline vital signs\nPulse oximeter · blood pressure · ECG (BIS/CVP PRN); assess baseline vitals",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-4",
+      "displayNumber": "4",
+      "text": "Confirm readiness for induction\nMachine checked · suction on · monitors on · airway equipment available · IV access · induction drugs available",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-5",
+      "displayNumber": "5",
+      "text": "Position (“sniffing”) and pre-oxygenate\n100% FiO₂ for 3 minutes at normal tidal breaths; verbalize ETO₂ > 90%",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-6",
+      "displayNumber": "6",
+      "text": "Verbalize and administer induction medications\nAppropriate selection · correct doses · correct sequence",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-7",
+      "displayNumber": "7",
+      "text": "Confirm ability to mask-ventilate before the neuromuscular blocking agent\nAssess LOC / eyelash reflex, then confirm positive-pressure ventilation before the paralytic",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["airwayDevice", "mechanicalMV", "effectiveMV"],
+        "actionLogEntries": ["mask_ppv_started", "mask_ppv_completed", "drug", "intubation_attempt_started"],
+        "ruleId": "standard_mask_ventilation_before_nmb"
+      }
+    },
+    {
+      "id": "standard-8",
+      "displayNumber": "8",
+      "text": "Administer neuromuscular blocking agent and manage onset\nVerbalize agent and dose · demonstrate PPV while awaiting blockade · re-assess vital signs",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-9",
+      "displayNumber": "9",
+      "text": "Prepare to intubate\nConfirm unconsciousness/apnea · eye protection · confirm readiness (TOF 0/4) · continue SaO₂ monitoring",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-10",
+      "displayNumber": "10",
+      "text": "Laryngoscopy\nOpen mouth (jaw thrust / scissor) · insert blade avoiding teeth & soft tissue · verbalize anatomy (pharynx, epiglottis, glottis, cords)",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-11",
+      "displayNumber": "11",
+      "text": "Endotracheal intubation\nPass ETT through glottis under direct vision · remove blade & stylet · inflate cuff · connect breathing circuit",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-12",
+      "displayNumber": "12",
+      "text": "Confirm endotracheal tube placement\nContinuous ETCO₂ waveform · symmetric chest rise · bilateral breath sounds · absent epigastric sounds",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-13",
+      "displayNumber": "13",
+      "text": "Secure airway and initiate maintenance\nIf unable to intubate, mask-ventilate · turn on inhaled agent · secure ETT · set ventilator (mode, Vt, RR, fresh gas, FiO₂, bag→vent)",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "standard-14",
+      "displayNumber": "14",
+      "text": "Closeout and overall competency\nRe-assess vitals & adjust agent · verbalize readiness for surgery · appropriate rescue if unable to intubate · intubation in < 3 attempts",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    }
+  ]
+}

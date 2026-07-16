@@ -10,6 +10,11 @@ export { AirwayProcedureSystem } from './airwayProcedureSystem.js';
 export { SimulationCore } from './simulationCore.js';
 export { ScenarioManager, ScenarioState } from './scenario/scenarioManager.js';
 export { normalize, ScenarioEventType } from './scenario/scenarioLoader.js';
+export {
+  normalizeRubric,
+  RUBRIC_SCORING_SOURCES,
+  summarizeRubric,
+} from './scenario/rubricLoader.js';
 
 import { PatientPhysiology } from './patientPhysiology.js';
 import { DrugSystem } from './drugSystem.js';

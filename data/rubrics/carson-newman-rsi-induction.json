@@ -1,0 +1,574 @@
+{
+  "id": "carson-newman-rsi-induction",
+  "title": "Clinical Examination — General Anesthesia: Rapid Sequence Induction (RSI)",
+  "course": "NAS 560 · Summer 2026",
+  "sourceFile": "Carson-Newman_RSI_Induction_Rubric.pdf",
+  "sourceSha256": "36a48cb37f9d85333357d583981048da615ec314611dee29a9a8eea6efb14de0",
+  "sourceHeaderDenominator": 49,
+  "sourceFootnoteScoredItems": 53,
+  "computedItemCount": 53,
+  "computedMaxPoints": 106,
+  "discrepancies": [
+    {
+      "code": "SOURCE_DENOMINATOR_MISMATCH",
+      "sourceHeaderDenominator": 49,
+      "computedMaxPoints": 106
+    }
+  ],
+  "pointScale": {
+    "performed": 2,
+    "partial": 1,
+    "notPerformed": 0
+  },
+  "passRule": {
+    "minimumPercent": 85,
+    "requireEveryCriticalPerformed": true
+  },
+  "items": [
+    {
+      "id": "rsi-1",
+      "displayNumber": "1",
+      "text": "Don appropriate PPE and observe universal precautions during induction / intubation",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-2",
+      "displayNumber": "2",
+      "text": "Verbalize the anesthesia time-out prior to induction",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-3",
+      "displayNumber": "3",
+      "text": "Apply standard ASA monitors",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-3a",
+      "displayNumber": "3a",
+      "text": "Pulse oximeter",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-3b",
+      "displayNumber": "3b",
+      "text": "Blood pressure",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-3c",
+      "displayNumber": "3c",
+      "text": "Electrocardiogram",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-3d",
+      "displayNumber": "3d",
+      "text": "Other monitors (BIS, CVP, etc.) PRN",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-4",
+      "displayNumber": "4",
+      "text": "Obtain and assess baseline vital signs",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-5",
+      "displayNumber": "5",
+      "text": "Confirm readiness for induction (anesthesia machine checked, suction on, monitors on, airway equipment available, IV access, induction drugs available)",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-6",
+      "displayNumber": "6",
+      "text": "Position patient in proper “sniffing position”",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-7",
+      "displayNumber": "7",
+      "text": "Pre-oxygenate at 100% FiO₂ for 3 minutes at normal tidal breaths",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["fio2", "eto2", "airwayDevice", "spontaneousRR", "spontaneousTV"],
+        "actionLogEntries": ["preoxygenate", "drug"],
+        "ruleId": "rsi_preoxygenation"
+      }
+    },
+    {
+      "id": "rsi-8",
+      "displayNumber": "8",
+      "text": "Verbalize that the ETO₂ is > 90%",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-9",
+      "displayNumber": "9",
+      "text": "Apply cricoid pressure as appropriate",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["cricoidPressureActive"],
+        "actionLogEntries": ["drug", "cricoid_pressure_applied", "intubation_attempt_started"],
+        "ruleId": "rsi_cricoid_applied"
+      }
+    },
+    {
+      "id": "rsi-10",
+      "displayNumber": "10",
+      "text": "Verbalize and administer medications for induction",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-10a",
+      "displayNumber": "10a",
+      "text": "Select appropriate medications",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["effectiveNmbBlockade"],
+        "actionLogEntries": ["drug"],
+        "ruleId": "rsi_medication_selection"
+      }
+    },
+    {
+      "id": "rsi-10b",
+      "displayNumber": "10b",
+      "text": "Verbalize appropriate doses",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-10c",
+      "displayNumber": "10c",
+      "text": "Administer the medications in the appropriate sequence",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["effectiveNmbBlockade", "airwayDevice"],
+        "actionLogEntries": ["drug", "intubation_attempt_started"],
+        "ruleId": "rsi_medication_sequence"
+      }
+    },
+    {
+      "id": "rsi-11",
+      "displayNumber": "11",
+      "text": "Do not mask ventilate prior to first laryngoscopy",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["airwayDevice", "ppvActive", "intubationAttemptCount"],
+        "actionLogEntries": ["mask_ppv_started", "intubation_attempt_started"],
+        "ruleId": "rsi_no_ppv_before_first_laryngoscopy"
+      }
+    },
+    {
+      "id": "rsi-12",
+      "displayNumber": "12",
+      "text": "Re-assess vital signs and correct if needed",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-13",
+      "displayNumber": "13",
+      "text": "Confirm unconsciousness and apnea",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-14",
+      "displayNumber": "14",
+      "text": "Apply eye protection",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-15",
+      "displayNumber": "15",
+      "text": "Verbalize and confirm readiness to intubate",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-16",
+      "displayNumber": "16",
+      "text": "Continue to monitor SaO₂",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-17",
+      "displayNumber": "17",
+      "text": "Open mouth – jaw thrust or scissor technique",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-18",
+      "displayNumber": "18",
+      "text": "Insert laryngoscope blade avoiding teeth and soft tissue",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-19",
+      "displayNumber": "19",
+      "text": "Verbalize anatomy visualized (pharynx, epiglottis, glottis, vocal cords)",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-20",
+      "displayNumber": "20",
+      "text": "Insert endotracheal tube through glottic opening",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-21",
+      "displayNumber": "21",
+      "text": "Verbalize and confirm visualization of endotracheal tube passing through glottic opening",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-22",
+      "displayNumber": "22",
+      "text": "Hold the endotracheal tube and remove the laryngoscope blade",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-23",
+      "displayNumber": "23",
+      "text": "Hold the endotracheal tube and remove the stylet",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-24",
+      "displayNumber": "24",
+      "text": "Inflate the endotracheal tube pilot balloon",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-25",
+      "displayNumber": "25",
+      "text": "Connect the breathing circuit to the endotracheal tube",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-26",
+      "displayNumber": "26",
+      "text": "Verbalize and confirm placement of the endotracheal tube by the presence of continuous ETCO₂ waveform with ventilation",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["capnogramPresent", "etco2", "airwayDevice", "mechanicalMV"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "confirm_etco2"],
+        "ruleId": "rsi_continuous_etco2_confirmation"
+      }
+    },
+    {
+      "id": "rsi-27",
+      "displayNumber": "27",
+      "text": "Verbalize and confirm endotracheal tube placement by additional indicators",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-27a",
+      "displayNumber": "27a",
+      "text": "Observe for symmetric chest rise",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-27b",
+      "displayNumber": "27b",
+      "text": "Auscultate for bilateral breath sounds",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-27c",
+      "displayNumber": "27c",
+      "text": "Auscultate over the stomach to rule out esophageal intubation",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-27d",
+      "displayNumber": "27d",
+      "text": "Misting in the endotracheal tube",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-28",
+      "displayNumber": "28",
+      "text": "If unable to intubate perform positive pressure mask ventilation with cricoid pressure",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["cricoidPressureActive", "ppvActive", "mechanicalMV", "effectiveMV", "intubationAttemptCount"],
+        "actionLogEntries": ["intubation_attempt_failed", "cricoid_pressure_applied", "mask_ppv_started", "mask_ppv_completed", "intubation_attempt_started"],
+        "ruleId": "rsi_failed_attempt_ppv_with_cricoid"
+      }
+    },
+    {
+      "id": "rsi-29",
+      "displayNumber": "29",
+      "text": "Remove cricoid pressure after endotracheal tube placement confirmed",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["cricoidPressureActive", "capnogramPresent", "etco2", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "confirm_etco2", "cricoid_pressure_released"],
+        "ruleId": "rsi_cricoid_release_after_confirmation"
+      }
+    },
+    {
+      "id": "rsi-30",
+      "displayNumber": "30",
+      "text": "Turn on the inhaled anesthetic",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["vaporizer", "vaporizerAgent", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "volatile_changed"],
+        "ruleId": "rsi_inhaled_anesthetic_on"
+      }
+    },
+    {
+      "id": "rsi-31",
+      "displayNumber": "31",
+      "text": "Secure the endotracheal tube with tape or device",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-32",
+      "displayNumber": "32",
+      "text": "Set ventilator mode appropriate for the patient",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["ventMode", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "vent_mode_changed"],
+        "ruleId": "rsi_vent_mode"
+      }
+    },
+    {
+      "id": "rsi-33",
+      "displayNumber": "33",
+      "text": "Set tidal volume",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["ventSetTV", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "machine_settings_changed"],
+        "ruleId": "rsi_tidal_volume"
+      }
+    },
+    {
+      "id": "rsi-34",
+      "displayNumber": "34",
+      "text": "Set the respiratory rate",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["ventSetRR", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "machine_settings_changed"],
+        "ruleId": "rsi_respiratory_rate"
+      }
+    },
+    {
+      "id": "rsi-35",
+      "displayNumber": "35",
+      "text": "Adjust the fresh gas flow rate",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["o2Flow", "airFlow", "n2oFlow", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "machine_settings_changed"],
+        "ruleId": "rsi_fresh_gas"
+      }
+    },
+    {
+      "id": "rsi-36",
+      "displayNumber": "36",
+      "text": "Set the FiO₂",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["ventSetFiO2", "fio2", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "machine_settings_changed"],
+        "ruleId": "rsi_fio2"
+      }
+    },
+    {
+      "id": "rsi-37",
+      "displayNumber": "37",
+      "text": "Turn on the ventilator from bag to ventilator mode",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["ventMode", "mechanicalMV", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_succeeded", "vent_mode_changed"],
+        "ruleId": "rsi_bag_to_vent"
+      }
+    },
+    {
+      "id": "rsi-38",
+      "displayNumber": "38",
+      "text": "Re-assess vital signs and correct if needed",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-39",
+      "displayNumber": "39",
+      "text": "Re-assess and adjust the inhaled anesthetic",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-40",
+      "displayNumber": "40",
+      "text": "Verbalize readiness for the surgical procedure",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": false,
+      "scoringSource": "INSTRUCTOR_OBSERVED",
+      "engineEvidence": null
+    },
+    {
+      "id": "rsi-41",
+      "displayNumber": "41",
+      "text": "Appropriate intervention if unable to intubate",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["spo2", "cricoidPressureActive", "ppvActive", "mechanicalMV", "effectiveMV", "intubationAttemptCount", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_failed", "cricoid_pressure_applied", "mask_ppv_started", "mask_ppv_completed", "intubation_attempt_started", "intubation_attempt_succeeded"],
+        "ruleId": "rsi_appropriate_failed_attempt_intervention"
+      }
+    },
+    {
+      "id": "rsi-42",
+      "displayNumber": "42",
+      "text": "Completion of intubation in < 3 attempts",
+      "pointScale": { "performed": 2, "partial": 1, "notPerformed": 0 },
+      "critical": true,
+      "scoringSource": "ENGINE_OBSERVABLE",
+      "engineEvidence": {
+        "snapshotKeys": ["intubationAttemptCount", "airwayDevice"],
+        "actionLogEntries": ["intubation_attempt_started", "intubation_attempt_succeeded"],
+        "ruleId": "rsi_under_three_attempts"
+      }
+    }
+  ]
+}
