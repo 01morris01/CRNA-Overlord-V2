@@ -30,6 +30,65 @@ describe('live SimRunner integration', () => {
     expect(Object.getPrototypeOf(session.getLiveResult().trace[0])).toBe(Object.prototype);
   });
 
+  it('allows rubric-session replacement only before the first fixed step', () => {
+    const runner = new SimRunner();
+    const first = runner.attachRubricSession({
+      rubric: emergenceRubric,
+      criteria: { weightKg: 70 },
+    });
+
+    const replacement = runner.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    });
+
+    expect(replacement).not.toBe(first);
+    expect(runner.rubricSession).toBe(replacement);
+    expect(replacement.getLiveResult().trace.map(({ t }) => t)).toEqual([0]);
+  });
+
+  it('rejects first-time late attachment without installing a session', () => {
+    const runner = new SimRunner();
+    runner.stepFor(0.02);
+
+    expect(() => runner.attachRubricSession({
+      rubric: emergenceRubric,
+      criteria: { weightKg: 70 },
+    })).toThrow(/before simulation advance/i);
+    expect(runner.rubricSession).toBeNull();
+  });
+
+  it('rejects late replacement without mutating the existing rubric session', () => {
+    const runner = new SimRunner();
+    const existing = runner.attachRubricSession({
+      rubric: emergenceRubric,
+      criteria: { weightKg: 70 },
+    });
+    runner.stepFor(0.02);
+    const resultBefore = existing.getLiveResult();
+
+    expect(() => runner.attachRubricSession({
+      rubric: rsiRubric,
+      criteria: { weightKg: 70 },
+    })).toThrow(/before simulation advance/i);
+    expect(runner.rubricSession).toBe(existing);
+    expect(existing.getLiveResult()).toBe(resultBefore);
+  });
+
+  it('rejects unaligned deterministic advances and stepping during realtime execution', () => {
+    const runner = new SimRunner();
+
+    expect(() => runner.stepFor(0.01)).toThrow(/fixed-step aligned/i);
+    expect(runner.core.tickCount).toBe(0);
+    expect(() => runner.stepFor(0.02)).not.toThrow();
+    expect(runner.core.tickCount).toBe(1);
+
+    runner.start();
+    expect(() => runner.stepFor(0.02)).toThrow(/realtime runner is active/i);
+    expect(runner.core.tickCount).toBe(1);
+    runner.pause();
+  });
+
   it('samples byte-identical one-second evidence through uneven and continuous advances', () => {
     function run(chunks) {
       const runner = new SimRunner();
@@ -43,6 +102,7 @@ describe('live SimRunner integration', () => {
         tidalVolumeMl: 500,
         respiratoryRate: 12,
       });
+      runner.pause();
       for (const seconds of chunks) runner.stepFor(seconds);
       return session.getLiveResult().trace;
     }
@@ -69,6 +129,7 @@ describe('live SimRunner integration', () => {
         tidalVolumeMl: 500,
         respiratoryRate: 12,
       });
+      runner.pause();
       for (const seconds of ppvChunks) runner.stepFor(seconds);
       runner.configureIntubationAttempts({ attemptDurationSeconds: 1.2 });
       runner.attemptIntubation();
@@ -95,6 +156,7 @@ describe('live SimRunner integration', () => {
     });
     runner.configureIntubationAttempts({ attemptDurationSeconds: 2.5 });
     runner.attemptIntubation();
+    runner.pause();
 
     runner.stepFor(2.5);
 
@@ -143,6 +205,7 @@ describe('live SimRunner integration', () => {
     runner.checkTrainOfFour();
     runner.applyCricoidPressure();
     runner.deliverMaskVentilation({ durationSeconds: 1 });
+    runner.pause();
     runner.stepFor(1);
     runner.configureIntubationAttempts({ attemptDurationSeconds: 1 });
     runner.attemptIntubation();
@@ -204,6 +267,7 @@ describe('live SimRunner integration', () => {
       attemptDurationSeconds: 1,
     });
     runner.attemptIntubation();
+    runner.pause();
 
     runner.stepFor(1);
 

@@ -7,7 +7,7 @@
    internals directly.
    ═══════════════════════════════════════════════════════════════════ */
 import {
-  AirwayDevice, buildPhysRig, div, RoundToInt, RubricScoringSession, ScenarioManager, VentMode,
+  AirwayDevice, buildPhysRig, RubricScoringSession, ScenarioManager, VentMode,
 } from '../sim/index.js';
 import {
   buildDebrief as buildScenarioDebrief,
@@ -208,18 +208,22 @@ export class SimRunner {
     if (!Number.isFinite(seconds) || seconds < 0) {
       throw new RangeError('seconds must be a finite nonnegative number');
     }
+    if (this.running) {
+      throw new Error('Cannot stepFor while the realtime runner is active; pause it first');
+    }
     const step = this.core.fixedStep;
-    const steps = RoundToInt(div(seconds, step));
+    const ticksPerSecond = Math.round(1 / step);
+    const rawSteps = seconds * ticksPerSecond;
+    const steps = Math.round(rawSteps);
+    const alignmentTolerance = Number.EPSILON * Math.max(1, Math.abs(rawSteps)) * 8;
+    if (!Number.isSafeInteger(steps) || Math.abs(rawSteps - steps) > alignmentTolerance) {
+      throw new RangeError(`seconds must be fixed-step aligned (${ticksPerSecond} ticks/second)`);
+    }
     for (let index = 0; index < steps; index += 1) {
       this.core.stepOnce(step);
       this.sampleRubricTraceAfterStep();
     }
     this.simTime = this.core.simTime;
-    if (this.running) {
-      this._lastReal = typeof globalThis.performance?.now === 'function'
-        ? globalThis.performance.now()
-        : Date.now();
-    }
     this.emit();
     return this.snapshot();
   }
@@ -233,6 +237,9 @@ export class SimRunner {
   }
 
   attachRubricSession({ rubric, criteria } = {}) {
+    if (this.core.tickCount !== 0) {
+      throw new Error('Rubric session must be attached before simulation advance');
+    }
     const session = new RubricScoringSession({ rubric, criteria, seed: SEED });
     session.recordTrace(this.compactRubricSnapshot(0));
     this.rubricSession = session;
