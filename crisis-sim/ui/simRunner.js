@@ -145,6 +145,31 @@ function scenarioActiveConfig(scenario, patient, fallback) {
   };
 }
 
+function captureScenarioConstructionEvidence(scenarioManager) {
+  return JSON.stringify({
+    eventLog: scenarioManager.eventLog,
+    activePrompts: scenarioManager.activePrompts,
+    feedbackMessage: scenarioManager.feedbackMessage,
+    feedbackTimer: scenarioManager.feedbackTimer,
+    currentScore: scenarioManager.currentScore,
+    maxPossibleScore: scenarioManager.maxPossibleScore,
+    elapsedTime: scenarioManager.elapsedTime,
+    firedEvents: scenarioManager._firedEvents,
+    completedChecks: scenarioManager._completedChecks,
+    studentActions: scenarioManager._studentActions,
+    transitions: scenarioManager._transitions,
+    deadlines: scenarioManager._deadlines,
+    airwayEventCursor: scenarioManager._airwayEventCursor,
+    actionLog: scenarioManager.actionLog.entries,
+    run: scenarioManager.run,
+    lastResult: scenarioManager.lastResult,
+  }, (_key, value) => {
+    if (value instanceof Map) return { mapEntries: [...value.entries()] };
+    if (value instanceof Set) return { setValues: [...value.values()] };
+    return value;
+  });
+}
+
 function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
   const scenarioCopy = copyJsonInput(scenario, 'scenario');
   const rubricCopy = copyJsonInput(rubric, 'rubric');
@@ -508,7 +533,14 @@ export class SimRunner {
     return candidate;
   }
 
-  #assertLoaderPreconditioningPristine() {
+  #assertScenarioConstructionEvidence(expectedEvidence) {
+    if (captureScenarioConstructionEvidence(this.s) !== expectedEvidence) {
+      throw new Error('Loader scenario construction evidence baseline changed');
+    }
+  }
+
+  #assertLoaderPreconditioningPristine(expectedScenarioEvidence) {
+    this.#assertScenarioConstructionEvidence(expectedScenarioEvidence);
     const pristine = this.core.tickCount === 0
       && this.core.simTime === 0
       && this.simTime === 0
@@ -542,6 +574,7 @@ export class SimRunner {
       scenario, rubric, administrativeSetup, resetInputs,
     } = prepared;
     this.build({ seed: scenario.seed, scenarioDefinition: scenario });
+    const scenarioConstructionEvidence = captureScenarioConstructionEvidence(this.s);
     this.config = scenarioActiveConfig(scenario, this.p, this.config);
 
     const setup = scenario.startingSetup;
@@ -561,7 +594,7 @@ export class SimRunner {
     if (administrativeSetup !== null) {
       // Only a pristine loader-owned transition can authorize this paused
       // administrative interval; no learner event can be replayed afterward.
-      this.#assertLoaderPreconditioningPristine();
+      this.#assertLoaderPreconditioningPristine(scenarioConstructionEvidence);
       this.s.beginAdministrativePreconditioning(
         this.#administrativePreconditioningCapability,
       );
@@ -578,6 +611,7 @@ export class SimRunner {
       this.v.rebaseLearnerTime();
       this.a.reset();
       this.s.applyAirwayPlan();
+      this.#assertScenarioConstructionEvidence(scenarioConstructionEvidence);
       this.s.rebaseLearnerRun(this.#administrativePreconditioningCapability);
       this.simTime = 0;
       this._accum = 0;

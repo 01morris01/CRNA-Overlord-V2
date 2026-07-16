@@ -6,6 +6,7 @@ import emergenceScenario from '../sim/scenarios/emergence_residual_block_001.jso
 import failedRsiScenario from '../sim/scenarios/rsi_failed_first_attempt_001.json';
 import rsiScenario from '../sim/scenarios/rsi_full_stomach_001.json';
 import standardScenario from '../sim/scenarios/standard_iv_healthy_001.json';
+import { ScenarioManager } from '../sim/scenario/scenarioManager.js';
 import { normalize } from '../sim/scenario/scenarioLoader.js';
 import { SimRunner, VentMode } from '../ui/simRunner.js';
 
@@ -653,6 +654,7 @@ describe('rubric scenario lifecycle hardening', () => {
       expect(runner.l.doseHistory).toEqual([]);
       expect(runner.l.toxicityHistory).toEqual([]);
       expect(runner.v.breathCyclePhase).toBe(0);
+      expect(runner.s.eventLog).toEqual([]);
       const samples = [];
       for (let index = 0; index < 7; index += 1) {
         runner.stepFor(1);
@@ -665,6 +667,7 @@ describe('rubric scenario lifecycle hardening', () => {
     const second = loadAndSample();
     expect(JSON.stringify(first.samples)).toBe(JSON.stringify(second.samples));
     first.runner.reset();
+    expect(first.runner.s.eventLog).toEqual([]);
     const resetSamples = [];
     for (let index = 0; index < 7; index += 1) {
       first.runner.stepFor(1);
@@ -906,5 +909,83 @@ describe('rubric scenario lifecycle hardening', () => {
     runner.applyConfig({ ageYears: 46 });
 
     expect(runner.config.failedIntubationAttempts).toEqual([2]);
+  });
+
+  test.each([
+    ['adds a learner-visible event', (scenarioManager) => {
+      scenarioManager.logEvent('injected');
+    }],
+    ['removes the normal scenario-start event', (scenarioManager) => {
+      scenarioManager.eventLog.pop();
+    }],
+  ])('rejects off-side candidate setup that %s before privileged begin', (_label, mutate) => {
+    const runner = new SimRunner();
+    const session = runner.attachRubricSession({
+      rubric: standardRubric, criteria: { weightKg: 70 },
+    });
+    runner.logEvent('Probe', 'active runner must survive');
+    const onTick = () => {};
+    const onEvent = () => {};
+    runner.onTick = onTick;
+    runner.onEvent = onEvent;
+    runner.start();
+    const before = {
+      core: runner.core,
+      patient: runner.p,
+      airway: runner.a,
+      session,
+      listener: runner._procedureUnsubscribe,
+      log: runner.log,
+      config: runner.config,
+      lastReal: runner._lastReal,
+      accum: runner._accum,
+      snapshot: JSON.stringify(runner.snapshot()),
+    };
+
+    const originalSetMachine = SimRunner.prototype.setMachine;
+    const originalBegin = ScenarioManager.prototype.beginAdministrativePreconditioning;
+    let beginCallCount = 0;
+    SimRunner.prototype.setMachine = function injectedSetMachine(patch) {
+      const result = originalSetMachine.call(this, patch);
+      mutate(this.s);
+      return result;
+    };
+    ScenarioManager.prototype.beginAdministrativePreconditioning = function countedBegin(...args) {
+      beginCallCount += 1;
+      return originalBegin.apply(this, args);
+    };
+
+    let loadError = null;
+    try {
+      runner.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });
+    } catch (error) {
+      loadError = error;
+    } finally {
+      SimRunner.prototype.setMachine = originalSetMachine;
+      ScenarioManager.prototype.beginAdministrativePreconditioning = originalBegin;
+    }
+
+    expect(loadError).toBeInstanceOf(Error);
+    expect(loadError.message).toMatch(/baseline|pristine|construction|event/i);
+    expect(beginCallCount).toBe(0);
+    expect(runner).toMatchObject({
+      core: before.core,
+      p: before.patient,
+      a: before.airway,
+      rubricSession: before.session,
+      log: before.log,
+      config: before.config,
+      _lastReal: before.lastReal,
+      _accum: before.accum,
+      running: true,
+      onTick,
+      onEvent,
+    });
+    expect(runner._procedureUnsubscribe).toBe(before.listener);
+    expect(JSON.stringify(runner.snapshot())).toBe(before.snapshot);
+    const tickBefore = runner.core.tickCount;
+    runner._tick(runner._lastReal + 20);
+    expect(runner.core.tickCount).toBe(tickBefore + 1);
+    runner.pause();
   });
 });
