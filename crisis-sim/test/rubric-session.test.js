@@ -544,6 +544,47 @@ describe('RubricScoringSession instructor scoring', () => {
     expect(afterScore).not.toBe(afterTraceReplacement);
     expect(session.getLiveResult()).toBe(afterScore);
   });
+
+  test('keeps multi-hour preoxygenation evidence bounded and cached reads constant-time', () => {
+    const session = new RubricScoringSession({ rubric: rsiRaw, criteria: { weightKg: 70 } });
+    const sampleCount = 2 * 60 * 60;
+    for (let second = 0; second < sampleCount; second += 1) {
+      session.recordTrace({
+        t: second,
+        fio2: 1,
+        spontaneousRR: 14,
+        spontaneousTV: 490,
+      });
+    }
+    session.recordAction({
+      tSec: sampleCount,
+      action: 'drug',
+      meta: { drug: 'Propofol', doseMg: 100 },
+    });
+
+    const first = session.getLiveResult();
+    const preoxygenation = first.items.find(({ id }) => id === 'rsi-7');
+    expect(preoxygenation).toMatchObject({
+      status: 'performed',
+      points: 2,
+      evidence: {
+        preoxygenation: {
+          startT: 0,
+          endT: sampleCount - 1,
+          durationSec: sampleCount,
+          sampleCount,
+        },
+      },
+    });
+    expect(preoxygenation.evidence.trace.length).toBeLessThanOrEqual(2);
+
+    const startedAt = performance.now();
+    for (let read = 0; read < 5; read += 1) {
+      expect(session.getLiveResult()).toBe(first);
+    }
+    const elapsedMs = performance.now() - startedAt;
+    expect(elapsedMs).toBeLessThan(200);
+  }, 15_000);
 });
 
 describe('RubricScoringSession finalization', () => {

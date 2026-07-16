@@ -86,6 +86,23 @@ function deepFreeze(value, visited = new WeakSet()) {
   return Object.freeze(value);
 }
 
+function equalJsonSafe(left, right) {
+  if (Object.is(left, right)) return true;
+  if (left === null || right === null || typeof left !== 'object' || typeof right !== 'object') {
+    return false;
+  }
+  if (Array.isArray(left) || Array.isArray(right)) {
+    if (!Array.isArray(left) || !Array.isArray(right) || left.length !== right.length) return false;
+    return left.every((value, index) => equalJsonSafe(value, right[index]));
+  }
+  const leftKeys = Object.keys(left);
+  const rightKeys = Object.keys(right);
+  return leftKeys.length === rightKeys.length
+    && leftKeys.every((key) => (
+      Object.hasOwn(right, key) && equalJsonSafe(left[key], right[key])
+    ));
+}
+
 function immutableJsonCopy(value, label) {
   return deepFreeze(copyJsonSafe(value, label));
 }
@@ -288,7 +305,7 @@ export class RubricScoringSession {
         finalized,
       });
       const state = this._states.get(item.id);
-      const evidenceChanged = JSON.stringify(state.evidence) !== JSON.stringify(evaluated.evidence);
+      const evidenceChanged = !equalJsonSafe(state.evidence, evaluated.evidence);
       if (state.status === evaluated.status
         && state.points === evaluated.points
         && !evidenceChanged) continue;
@@ -354,6 +371,7 @@ export class RubricScoringSession {
 
   getLiveResult() {
     if (this._finalResult !== null) return this._finalResult;
+    if (this._liveResult !== null) return this._liveResult;
     this._evaluateEngineStates(false);
     if (this._liveResult === null) this._liveResult = deepFreeze(this._buildResult());
     return this._liveResult;

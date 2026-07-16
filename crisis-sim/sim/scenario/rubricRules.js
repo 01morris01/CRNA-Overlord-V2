@@ -5,12 +5,15 @@ const DEFAULT_SPONTANEOUS_RR_MIN = 8;
 const DEFAULT_SPONTANEOUS_TV_MIN_ML_PER_KG = 5;
 const DEFAULT_SPONTANEOUS_MV_MIN = 4;
 const DEFAULT_MINIMUM_PPV_MINUTE_VENTILATION = 4;
+const DEFAULT_FAILED_ATTEMPT_SPO2_RECOVERY_DELTA = 2;
 const DEFAULT_ETCO2_CONFIRMATION_SAMPLES = 5;
 const DEFAULT_ACCEPTED_INDUCTION_DRUGS = Object.freeze(['Propofol', 'Etomidate', 'Ketamine']);
 const DEFAULT_ACCEPTED_NMB_DRUGS = Object.freeze(['Rocuronium', 'Succinylcholine']);
 const DEFAULT_REVERSAL_DRUGS = Object.freeze(['Sugammadex', 'Neostigmine']);
 const DEFAULT_ALLOWED_VENT_MODES = Object.freeze([1, 2]);
 const SUPPORTED_VOLATILE_AGENTS = new Set(['sevoflurane', 'desflurane', 'isoflurane']);
+const SUPPORTED_MECHANICAL_VENT_MODES = new Set([1, 2, 3]);
+const DANGEROUS_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
 const STATUS_POINTS = Object.freeze({
   pending: null,
@@ -23,6 +26,69 @@ function isPlainObject(value) {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
   const prototype = Object.getPrototypeOf(value);
   return prototype === Object.prototype || prototype === null;
+}
+
+function copyJsonSafe(value, label, ancestors = new WeakSet()) {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) throw new TypeError(`${label} must contain only JSON-safe values`);
+    return value;
+  }
+  if (typeof value !== 'object') {
+    throw new TypeError(`${label} must contain only JSON-safe values`);
+  }
+  if (ancestors.has(value)) throw new TypeError(`${label} must not contain cycles`);
+  if (Object.getOwnPropertySymbols(value).length > 0) {
+    throw new TypeError(`${label} must contain only JSON-safe string keys`);
+  }
+
+  const ownNames = Object.getOwnPropertyNames(value);
+  const dangerousKey = ownNames.find((key) => DANGEROUS_OBJECT_KEYS.has(key));
+  if (dangerousKey) throw new TypeError(`Dangerous rubric data key is not allowed: ${dangerousKey}`);
+
+  ancestors.add(value);
+  let copied;
+  if (Array.isArray(value)) {
+    if (Object.getPrototypeOf(value) !== Array.prototype) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} must contain only ordinary arrays`);
+    }
+    const length = Object.getOwnPropertyDescriptor(value, 'length').value;
+    if (ownNames.length !== length + 1) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} arrays must contain only JSON-safe indexed values`);
+    }
+    copied = new Array(length);
+    for (let index = 0; index < length; index += 1) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, `${index}`);
+      if (!descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        ancestors.delete(value);
+        throw new TypeError(`${label} array indexes must be JSON-safe enumerable data properties`);
+      }
+      copied[index] = copyJsonSafe(descriptor.value, `${label}[${index}]`, ancestors);
+    }
+  } else {
+    if (!isPlainObject(value)) {
+      ancestors.delete(value);
+      throw new TypeError(`${label} must contain only JSON-safe plain objects`);
+    }
+    copied = {};
+    for (const key of ownNames) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      if (!descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        ancestors.delete(value);
+        throw new TypeError(`${label} must contain only JSON-safe data properties`);
+      }
+      Object.defineProperty(copied, key, {
+        configurable: true,
+        enumerable: true,
+        value: copyJsonSafe(descriptor.value, `${label}.${key}`, ancestors),
+        writable: true,
+      });
+    }
+  }
+  ancestors.delete(value);
+  return copied;
 }
 
 function cloneJson(value) {
@@ -68,8 +134,13 @@ function modeListCriterion(criteria) {
     ? criteria.allowedVentModes
     : DEFAULT_ALLOWED_VENT_MODES;
   if (!Array.isArray(value) || value.length === 0
-    || value.some((entry) => !Number.isInteger(entry))) {
-    throw new TypeError('criteria.allowedVentModes must be a nonempty array of integer modes');
+    || value.some((entry) => (
+      !Number.isSafeInteger(entry) || !SUPPORTED_MECHANICAL_VENT_MODES.has(entry)
+    ))
+    || new Set(value).size !== value.length) {
+    throw new TypeError(
+      'criteria.allowedVentModes must be a nonempty unique array of supported modes 1, 2, or 3',
+    );
   }
   return Object.freeze([...value]);
 }
@@ -88,6 +159,10 @@ function resolveCriteria(criteria = {}) {
   const spontaneousTvMinMl = Object.hasOwn(criteria, 'spontaneousTvMinMl')
     ? finiteCriterion(criteria, 'spontaneousTvMinMl', null, { min: Number.MIN_VALUE })
     : (weightKg === null ? null : weightKg * spontaneousTvMinMlPerKg);
+  if (spontaneousTvMinMl !== null
+    && (!Number.isFinite(spontaneousTvMinMl) || spontaneousTvMinMl <= 0)) {
+    throw new RangeError('criteria spontaneous tidal-volume threshold must be finite and positive');
+  }
 
   const etco2ConfirmationSamples = finiteCriterion(
     criteria, 'etco2ConfirmationSamples', DEFAULT_ETCO2_CONFIRMATION_SAMPLES, { min: 1 },
@@ -122,6 +197,12 @@ function resolveCriteria(criteria = {}) {
       criteria, 'minimumPpvMinuteVentilation', DEFAULT_MINIMUM_PPV_MINUTE_VENTILATION,
       { min: Number.MIN_VALUE },
     ),
+    failedAttemptSpo2RecoveryDelta: finiteCriterion(
+      criteria,
+      'failedAttemptSpo2RecoveryDelta',
+      DEFAULT_FAILED_ATTEMPT_SPO2_RECOVERY_DELTA,
+      { min: 0, max: 100 },
+    ),
     etco2ConfirmationSamples,
     acceptedInductionDrugs: stringListCriterion(
       criteria, 'acceptedInductionDrugs', DEFAULT_ACCEPTED_INDUCTION_DRUGS,
@@ -132,6 +213,97 @@ function resolveCriteria(criteria = {}) {
     reversalDrugs: stringListCriterion(criteria, 'reversalDrugs', DEFAULT_REVERSAL_DRUGS),
     allowedVentModes: modeListCriterion(criteria),
   });
+}
+
+function normalizedRoot(input, label) {
+  const copied = copyJsonSafe(input, label);
+  if (!isPlainObject(copied)) throw new TypeError(`${label} must be a plain object`);
+  return copied;
+}
+
+function normalizeActionRecords(actions) {
+  if (!Array.isArray(actions)) throw new TypeError('actions must be an ordinary dense array');
+  let previousTime = -Infinity;
+  return actions.map((record, index) => {
+    if (!isPlainObject(record)) throw new TypeError(`actions[${index}] must be a plain object`);
+    if (typeof record.tSec !== 'number' || !Number.isFinite(record.tSec) || record.tSec < 0) {
+      throw new TypeError(`actions[${index}].tSec must be a finite nonnegative number`);
+    }
+    if (record.tSec < previousTime) {
+      throw new TypeError('actions must use nondecreasing ledger chronology');
+    }
+    previousTime = record.tSec;
+    if (typeof record.action !== 'string' || record.action.trim().length === 0) {
+      throw new TypeError(`actions[${index}].action must be a nonempty string`);
+    }
+    const meta = Object.hasOwn(record, 'meta') ? record.meta : {};
+    const snapshot = Object.hasOwn(record, 'snapshot') ? record.snapshot : null;
+    if (!isPlainObject(meta)) throw new TypeError(`actions[${index}].meta must be a plain object`);
+    if (snapshot !== null && !isPlainObject(snapshot)) {
+      throw new TypeError(`actions[${index}].snapshot must be null or a plain object`);
+    }
+    return { ...record, meta, snapshot };
+  });
+}
+
+function normalizeTraceRecords(trace) {
+  if (!Array.isArray(trace)) throw new TypeError('trace must be an ordinary dense array');
+  let previousTime = -1;
+  return trace.map((sample, index) => {
+    if (!isPlainObject(sample)) throw new TypeError(`trace[${index}] must be a plain object`);
+    if (!Number.isSafeInteger(sample.t) || sample.t < 0) {
+      throw new TypeError(`trace[${index}].t must be a nonnegative safe integer`);
+    }
+    if (sample.t <= previousTime) {
+      throw new TypeError('trace timestamps must be strictly increasing and unique');
+    }
+    previousTime = sample.t;
+    return sample;
+  });
+}
+
+function normalizeItem(item, label = 'item') {
+  if (!isPlainObject(item)) throw new TypeError(`${label} must be a plain object`);
+  if (!isPlainObject(item.engineEvidence)) {
+    throw new TypeError(`${label}.engineEvidence must be a plain object`);
+  }
+  if (typeof item.engineEvidence.ruleId !== 'string'
+    || item.engineEvidence.ruleId.trim().length === 0) {
+    throw new TypeError(`${label}.engineEvidence.ruleId must be a nonempty string`);
+  }
+  return item;
+}
+
+function normalizeRubric(rubric) {
+  if (!isPlainObject(rubric)) throw new TypeError('rubric must be a plain object');
+  if (typeof rubric.id !== 'string' || rubric.id.trim().length === 0) {
+    throw new TypeError('rubric.id must be a nonempty string');
+  }
+  if (!Array.isArray(rubric.items)) throw new TypeError('rubric.items must be an ordinary dense array');
+  for (let index = 0; index < rubric.items.length; index += 1) {
+    const item = rubric.items[index];
+    if (!isPlainObject(item)) throw new TypeError(`rubric.items[${index}] must be a plain object`);
+    if (typeof item.id !== 'string' || item.id.trim().length === 0) {
+      throw new TypeError(`rubric.items[${index}].id must be a nonempty string`);
+    }
+    if (item.engineEvidence !== null) normalizeItem(item, `rubric.items[${index}]`);
+  }
+  return rubric;
+}
+
+function normalizeEvaluationInput(input) {
+  const copied = normalizedRoot(input, 'evaluateRubricItem input');
+  const finalized = Object.hasOwn(copied, 'finalized') ? copied.finalized : false;
+  if (typeof finalized !== 'boolean') throw new TypeError('finalized must be a boolean');
+  const criteria = Object.hasOwn(copied, 'criteria') ? copied.criteria : {};
+  if (!isPlainObject(criteria)) throw new TypeError('criteria must be a plain object');
+  return {
+    item: normalizeItem(copied.item),
+    actions: normalizeActionRecords(copied.actions ?? []),
+    trace: normalizeTraceRecords(copied.trace ?? []),
+    criteria,
+    finalized,
+  };
 }
 
 function entries(actions) {
@@ -304,119 +476,141 @@ function infusionAction(entry) {
 }
 
 function evaluateStopAnesthetic({ actionEntries, trace, finalized, ruleId }) {
+  const extubation = actionEntries.find(({ record }) => record.action === 'extubate');
+  const cutoff = extubation?.index ?? Infinity;
+  const scoringActions = actionEntries.filter((entry) => entry.index < cutoff);
+  const scoringTrace = traceEntries(trace).filter(({ sample }) => (
+    !extubation || sample.t <= extubation.record.tSec
+  ));
   const sources = new Map();
-  const addSource = (key, type, name, initialRate, time, citation, citationType) => {
+  const addSource = ({
+    key, type, name, initialRate, time, activationIndex = null, citation, citationType,
+  }) => {
     if (!(initialRate > 0)) return;
     const current = sources.get(key);
-    if (current && current.time <= time) return;
+    if (current && (current.time < time
+      || (current.time === time
+        && (current.activationIndex ?? -1) <= (activationIndex ?? -1)))) return;
     sources.set(key, {
-      type, name, initialRate, time, citation, citationType,
+      type, name, initialRate, time, activationIndex, citation, citationType,
     });
   };
 
-  for (const entry of traceEntries(trace)) {
+  for (const entry of scoringTrace) {
     if (typeof entry.sample.vaporizer === 'number' && entry.sample.vaporizer > 0) {
-      addSource(
-        'volatile',
-        'volatile',
-        typeof entry.sample.vaporizerAgent === 'string'
+      addSource({
+        key: 'volatile',
+        type: 'volatile',
+        name: typeof entry.sample.vaporizerAgent === 'string'
           ? entry.sample.vaporizerAgent.toLocaleLowerCase('en-US')
           : null,
-        entry.sample.vaporizer,
-        entry.sample.t,
-        traceCitation(entry, ['vaporizer', 'vaporizerAgent', 'activeAnestheticInfusions']),
-        'trace',
-      );
+        initialRate: entry.sample.vaporizer,
+        time: entry.sample.t,
+        citation: traceCitation(
+          entry, ['vaporizer', 'vaporizerAgent', 'activeAnestheticInfusions'],
+        ),
+        citationType: 'trace',
+      });
     }
     for (const infusion of infusionRates(entry.sample.activeAnestheticInfusions)) {
-      addSource(
-        `infusion:${infusion.drug}`,
-        'infusion',
-        infusion.drug,
-        infusion.rate,
-        entry.sample.t,
-        traceCitation(entry, ['activeAnestheticInfusions']),
-        'trace',
-      );
+      addSource({
+        key: `infusion:${infusion.drug}`,
+        type: 'infusion',
+        name: infusion.drug,
+        initialRate: infusion.rate,
+        time: entry.sample.t,
+        citation: traceCitation(entry, ['activeAnestheticInfusions']),
+        citationType: 'trace',
+      });
     }
   }
 
-  for (const entry of actionEntries) {
+  for (const entry of scoringActions) {
     if (entry.record.action === 'volatile_changed') {
       const dial = ownValue(entry.record.meta, 'dialPercent');
       const agent = ownValue(entry.record.meta, 'agent');
       if (typeof dial === 'number' && dial > 0 && typeof agent === 'string') {
-        addSource(
-          'volatile',
-          'volatile',
-          agent.toLocaleLowerCase('en-US'),
-          dial,
-          entry.record.tSec,
-          actionCitation(entry, ['agent', 'dialPercent']),
-          'action',
-        );
+        addSource({
+          key: 'volatile',
+          type: 'volatile',
+          name: agent.toLocaleLowerCase('en-US'),
+          initialRate: dial,
+          time: entry.record.tSec,
+          activationIndex: entry.index,
+          citation: actionCitation(entry, ['agent', 'dialPercent']),
+          citationType: 'action',
+        });
       }
     }
     for (const infusion of infusionRates(ownValue(entry.record.snapshot, 'activeAnestheticInfusions'))) {
-      addSource(
-        `infusion:${infusion.drug}`,
-        'infusion',
-        infusion.drug,
-        infusion.rate,
-        entry.record.tSec,
-        actionCitation(entry, [], ['activeAnestheticInfusions']),
-        'action',
-      );
+      addSource({
+        key: `infusion:${infusion.drug}`,
+        type: 'infusion',
+        name: infusion.drug,
+        initialRate: infusion.rate,
+        time: entry.record.tSec,
+        activationIndex: entry.index,
+        citation: actionCitation(entry, [], ['activeAnestheticInfusions']),
+        citationType: 'action',
+      });
     }
     const infusion = infusionAction(entry);
     if (infusion?.previousRate > 0) {
-      addSource(
-        `infusion:${infusion.drug}`,
-        'infusion',
-        infusion.drug,
-        infusion.previousRate,
-        entry.record.tSec,
-        actionCitation(entry, infusion.keys),
-        'action',
-      );
+      addSource({
+        key: `infusion:${infusion.drug}`,
+        type: 'infusion',
+        name: infusion.drug,
+        initialRate: infusion.previousRate,
+        time: entry.record.tSec,
+        activationIndex: entry.index,
+        citation: actionCitation(entry, infusion.keys),
+        citationType: 'action',
+      });
     }
   }
 
   if (sources.size === 0) {
-    return result(endDiscriminator(actionEntries, finalized) ? 'not_performed' : 'pending', ruleId);
+    return result(extubation || finalized ? 'not_performed' : 'pending', ruleId);
   }
 
   const sourceStates = [];
   const stateChangeCitations = [];
   for (const source of sources.values()) {
+    const afterActivation = (entry) => (
+      source.activationIndex === null
+        ? entry.record.tSec >= source.time
+        : entry.index >= source.activationIndex
+    );
     if (source.type === 'volatile') {
-      const changes = actionEntries.filter((entry) => (
+      const changes = scoringActions.filter((entry) => (
         entry.record.action === 'volatile_changed'
-        && entry.record.tSec >= source.time
+        && afterActivation(entry)
         && typeof ownValue(entry.record.meta, 'dialPercent') === 'number'
       ));
-      const reduced = changes.some((entry) => (
+      const changedTowardStop = changes.some((entry) => (
         ownValue(entry.record.meta, 'dialPercent') < source.initialRate
       ));
       const latest = changes.at(-1);
       sourceStates.push({
-        reduced,
-        remains: latest ? ownValue(latest.record.meta, 'dialPercent') > 0 : true,
+        complete: latest ? ownValue(latest.record.meta, 'dialPercent') === 0 : false,
+        changedTowardStop,
       });
       stateChangeCitations.push(...changes.map((entry) => (
         actionCitation(entry, ['agent', 'dialPercent'])
       )));
     } else {
-      const changes = actionEntries
+      const changes = scoringActions
         .map((entry) => ({ entry, infusion: infusionAction(entry) }))
         .filter(({ entry, infusion }) => (
-          infusion?.drug === source.name && entry.record.tSec >= source.time
+          infusion?.drug === source.name && afterActivation(entry)
         ));
-      const reduced = changes.some(({ infusion }) => infusion.rate < source.initialRate);
       const latest = changes.at(-1);
+      const terminalRate = latest?.infusion.rate ?? source.initialRate;
       sourceStates.push({
-        reduced,
-        remains: latest ? latest.infusion.rate > 0 : true,
+        complete: terminalRate < source.initialRate,
+        changedTowardStop: changes.some(({ infusion }) => (
+          infusion.rate < source.initialRate
+        )),
       });
       stateChangeCitations.push(...changes.map(({ entry, infusion }) => (
         actionCitation(entry, infusion.keys)
@@ -439,14 +633,14 @@ function evaluateStopAnesthetic({ actionEntries, trace, finalized, ruleId }) {
     ))
     .sort((left, right) => left.index - right.index);
 
-  if (sourceStates.every(({ reduced, remains }) => reduced && !remains)) {
+  if (sourceStates.every(({ complete }) => complete)) {
     return result('performed', ruleId, actionCitations, sourceTraceCitations);
   }
-  if (sourceStates.some(({ reduced }) => reduced)) {
+  if (sourceStates.some(({ complete, changedTowardStop }) => complete || changedTowardStop)) {
     return result('partial', ruleId, actionCitations, sourceTraceCitations);
   }
   return result(
-    endDiscriminator(actionEntries, finalized) ? 'not_performed' : 'pending',
+    extubation || finalized ? 'not_performed' : 'pending',
     ruleId,
     actionCitations,
     sourceTraceCitations,
@@ -543,10 +737,7 @@ function evaluateStandardMask({ actionEntries, criteria, finalized, ruleId }) {
 }
 
 function qualifyingPreoxygenation(trace, induction, criteria) {
-  const available = traceEntries(trace)
-    .filter(({ sample }) => Number.isSafeInteger(sample.t) && sample.t <= induction.record.tSec)
-    .sort((left, right) => left.sample.t - right.sample.t);
-  const qualifies = ({ sample }) => (
+  const qualifies = (sample) => (
     typeof sample.fio2 === 'number'
     && sample.fio2 >= criteria.preoxygenationFiO2Min
     && typeof sample.spontaneousRR === 'number'
@@ -554,20 +745,59 @@ function qualifyingPreoxygenation(trace, induction, criteria) {
     && typeof sample.spontaneousTV === 'number'
     && sample.spontaneousTV > 0
   );
-  let current = [];
-  let longest = [];
-  for (const candidate of available) {
-    if (!qualifies(candidate)) {
-      current = [];
+  let currentStartIndex = null;
+  let currentEndIndex = null;
+  let currentCount = 0;
+  let bestStartIndex = null;
+  let bestEndIndex = null;
+  let bestCount = 0;
+  for (let index = 0; index < trace.length; index += 1) {
+    const sample = trace[index];
+    if (sample.t > induction.record.tSec) break;
+    if (!qualifies(sample)) {
+      currentStartIndex = null;
+      currentEndIndex = null;
+      currentCount = 0;
       continue;
     }
-    if (current.length > 0 && candidate.sample.t - current.at(-1).sample.t !== 1) {
-      current = [];
+    if (currentEndIndex !== null && sample.t - trace[currentEndIndex].t !== 1) {
+      currentStartIndex = null;
+      currentEndIndex = null;
+      currentCount = 0;
     }
-    current.push(candidate);
-    if (current.length > longest.length) longest = [...current];
+    if (currentStartIndex === null) currentStartIndex = index;
+    currentEndIndex = index;
+    currentCount += 1;
+    if (currentCount > bestCount) {
+      bestStartIndex = currentStartIndex;
+      bestEndIndex = currentEndIndex;
+      bestCount = currentCount;
+    }
   }
-  return longest;
+  return {
+    startIndex: bestStartIndex,
+    endIndex: bestEndIndex,
+    durationSec: bestCount,
+    sampleCount: bestCount,
+  };
+}
+
+function preoxygenationEvidence(run, trace) {
+  const endpointIndexes = [run.startIndex, run.endIndex]
+    .filter((index) => index !== null)
+    .filter((index, position, indexes) => indexes.indexOf(index) === position);
+  const endpoints = endpointIndexes.map((index) => traceCitation(
+    { index, sample: trace[index] }, ['fio2', 'spontaneousRR', 'spontaneousTV'],
+  ));
+  return {
+    endpoints,
+    summary: {
+      startT: run.startIndex === null ? null : trace[run.startIndex].t,
+      endT: run.endIndex === null ? null : trace[run.endIndex].t,
+      durationSec: run.durationSec,
+      sampleCount: run.sampleCount,
+    },
+  };
 }
 
 function evaluatePreoxygenation({ actionEntries, trace, criteria, finalized, ruleId }) {
@@ -575,15 +805,20 @@ function evaluatePreoxygenation({ actionEntries, trace, criteria, finalized, rul
   if (!induction) return result(finalized ? 'not_performed' : 'pending', ruleId);
   const run = qualifyingPreoxygenation(trace, induction, criteria);
   const actionCitations = [actionCitation(induction, ['drug', 'doseMg'])];
-  const traceCitations = run.map((entry) => (
-    traceCitation(entry, ['fio2', 'spontaneousRR', 'spontaneousTV'])
-  ));
-  const duration = run.length;
-  if (duration >= criteria.preoxygenationDurationSec) {
-    return result('performed', ruleId, actionCitations, traceCitations);
+  const compactEvidence = preoxygenationEvidence(run, trace);
+  if (run.durationSec >= criteria.preoxygenationDurationSec) {
+    return result('performed', ruleId, actionCitations, compactEvidence.endpoints, {
+      preoxygenation: compactEvidence.summary,
+    });
   }
-  if (duration > 0) return result('partial', ruleId, actionCitations, traceCitations);
-  return result('not_performed', ruleId, actionCitations, traceCitations);
+  if (run.durationSec > 0) {
+    return result('partial', ruleId, actionCitations, compactEvidence.endpoints, {
+      preoxygenation: compactEvidence.summary,
+    });
+  }
+  return result('not_performed', ruleId, actionCitations, compactEvidence.endpoints, {
+    preoxygenation: compactEvidence.summary,
+  });
 }
 
 function evaluateCricoid({ actionEntries, criteria, finalized, ruleId }) {
@@ -625,12 +860,11 @@ function evaluateMedicationSequence({ actionEntries, criteria, finalized, ruleId
       ? actionCitation(entry, ['drug', 'doseMg'])
       : actionCitation(entry, ['attemptNumber'])
   ));
-  if (induction && nmb && attempt) {
-    return result(
-      induction.index < nmb.index && nmb.index < attempt.index ? 'performed' : 'partial',
-      ruleId,
-      citations,
-    );
+  if (attempt) {
+    if (!induction || !nmb || induction.index > attempt.index || nmb.index > attempt.index) {
+      return result('not_performed', ruleId, citations);
+    }
+    return result(induction.index < nmb.index ? 'performed' : 'partial', ruleId, citations);
   }
   return result(finalized ? 'not_performed' : 'pending', ruleId, citations);
 }
@@ -733,45 +967,202 @@ function cricoidActiveAt(actionEntries, target) {
   return explicit === true || active;
 }
 
-function evaluateFailedIntervention({ actionEntries, criteria, finalized, ruleId }) {
+function failedAttemptOutcome(actionEntries, nextAttempt) {
+  if (!nextAttempt) return null;
+  const attemptNumber = ownValue(nextAttempt.record.meta, 'attemptNumber');
+  const followingAttempt = actionEntries.find((entry) => (
+    entry.index > nextAttempt.index && entry.record.action === 'intubation_attempt_started'
+  ));
+  return actionEntries.find((entry) => (
+    entry.index > nextAttempt.index
+    && entry.index < (followingAttempt?.index ?? Infinity)
+    && ['intubation_attempt_failed', 'intubation_attempt_succeeded'].includes(entry.record.action)
+    && (attemptNumber === undefined
+      || ownValue(entry.record.meta, 'attemptNumber') === attemptNumber)
+  )) ?? null;
+}
+
+function failedAttemptOxygenation(trace, failure, ppv, nextAttempt, criteria) {
+  if (!ppv) {
+    return {
+      preRescue: null,
+      nadir: null,
+      postRescue: null,
+      recovered: false,
+      citations: [],
+    };
+  }
+  const endTime = nextAttempt?.record.tSec ?? Infinity;
+  const samples = traceEntries(trace).filter(({ sample }) => (
+    Number.isSafeInteger(sample.t)
+    && sample.t >= failure.record.tSec
+    && sample.t <= endTime
+    && typeof sample.spo2 === 'number'
+    && Number.isFinite(sample.spo2)
+    && sample.spo2 >= 0
+    && sample.spo2 <= 100
+  ));
+  const preRescue = samples.filter(({ sample }) => sample.t <= ppv.record.tSec).at(-1) ?? null;
+  const postRescue = samples.filter(({ sample }) => sample.t >= ppv.record.tSec).at(-1) ?? null;
+  const nadir = samples.reduce((lowest, candidate) => (
+    !lowest || candidate.sample.spo2 < lowest.sample.spo2 ? candidate : lowest
+  ), null);
+  const recovered = Boolean(preRescue && nadir && postRescue && (
+    postRescue.sample.spo2 >= preRescue.sample.spo2
+    || postRescue.sample.spo2 - nadir.sample.spo2
+      >= criteria.failedAttemptSpo2RecoveryDelta
+  ));
+  const citations = [preRescue, nadir, postRescue]
+    .filter(Boolean)
+    .filter((entry, index, entriesToCite) => (
+      entriesToCite.findIndex((candidate) => candidate.index === entry.index) === index
+    ))
+    .map((entry) => traceCitation(entry, ['spo2']));
+  return { preRescue, nadir, postRescue, recovered, citations };
+}
+
+function analyzeFailedAttempts(actionEntries, trace, criteria) {
   const failures = actionEntries.filter(
     ({ record }) => record.action === 'intubation_attempt_failed',
   );
-  if (failures.length === 0) {
+  return failures.map((failure) => {
+    const nextAttempt = actionEntries.find((entry) => (
+      entry.index > failure.index && entry.record.action === 'intubation_attempt_started'
+    ));
+    const endIndex = nextAttempt?.index ?? Infinity;
+    const entriesInSegment = actionEntries.filter((entry) => (
+      entry.index > failure.index && entry.index < endIndex
+    ));
+    const anyPpv = entriesInSegment.find(
+      ({ record }) => record.action === 'mask_ppv_started',
+    ) ?? null;
+    const ppv = entriesInSegment.find((entry) => qualifyingPpv(entry, criteria)) ?? null;
+    const activeCricoid = Boolean(ppv && cricoidActiveAt(actionEntries, ppv));
+    const cricoid = actionEntries.filter((entry) => (
+      entry.index <= (ppv?.index ?? endIndex)
+      && entry.record.action === 'cricoid_pressure_applied'
+    )).at(-1) ?? null;
+    const cricoidRescue = entriesInSegment.some(
+      ({ record }) => record.action === 'cricoid_pressure_applied',
+    ) || cricoidActiveAt(actionEntries, failure);
+    const actionStatus = ppv && activeCricoid
+      ? 'performed'
+      : (anyPpv || cricoidRescue ? 'partial' : 'not_performed');
+    const nextOutcome = failedAttemptOutcome(actionEntries, nextAttempt);
+    const oxygenation = failedAttemptOxygenation(
+      trace, failure, ppv, nextAttempt, criteria,
+    );
+    return {
+      failure,
+      nextAttempt,
+      nextOutcome,
+      ppv,
+      cricoid: cricoidRescue ? cricoid : null,
+      actionStatus,
+      oxygenation,
+    };
+  });
+}
+
+function aggregateSegmentStatuses(statuses) {
+  if (statuses.some((status) => status === 'not_performed')) return 'not_performed';
+  if (statuses.some((status) => status === 'partial')) return 'partial';
+  return 'performed';
+}
+
+function uniqueCitations(citations) {
+  return citations
+    .filter(Boolean)
+    .filter((citation, index, all) => (
+      all.findIndex((candidate) => candidate.index === citation.index) === index
+    ))
+    .sort((left, right) => left.index - right.index);
+}
+
+function evaluateFailedAttemptPpv({ actionEntries, trace, criteria, finalized, ruleId }) {
+  const segments = analyzeFailedAttempts(actionEntries, trace, criteria);
+  if (segments.length === 0) {
     return result(
       finalized ? 'performed' : 'pending', ruleId, [], [],
       finalized ? { conditionTriggered: false } : {},
     );
   }
-  const failure = failures.at(-1);
-  const nextAttempt = actionEntries.find((entry) => (
-    entry.index > failure.index && entry.record.action === 'intubation_attempt_started'
-  ));
-  const endIndex = nextAttempt?.index ?? Infinity;
-  const segment = actionEntries.filter((entry) => entry.index > failure.index && entry.index < endIndex);
-  const ppv = segment.find((entry) => qualifyingPpv(entry, criteria));
-  const cricoidBeforeFailure = actionEntries.filter((entry) => (
-    entry.index <= failure.index && entry.record.action === 'cricoid_pressure_applied'
-  )).at(-1);
-  const cricoid = segment.find(({ record }) => record.action === 'cricoid_pressure_applied')
-    ?? (cricoidActiveAt(actionEntries, failure) ? cricoidBeforeFailure ?? failure : null);
-  const ppvWithCricoid = ppv && cricoidActiveAt(actionEntries, ppv);
-  const citations = [
-    actionCitation(failure, ['attemptNumber']),
-    ...(cricoid ? [actionCitation(cricoid)] : []),
-    ...(ppv ? [actionCitation(
-      ppv,
+  const status = aggregateSegmentStatuses(segments.map(({ actionStatus }) => actionStatus));
+  const citations = uniqueCitations(segments.flatMap((segment) => [
+    actionCitation(segment.failure, ['attemptNumber']),
+    segment.cricoid ? actionCitation(segment.cricoid) : null,
+    segment.ppv ? actionCitation(
+      segment.ppv,
       ['airwayDevice', 'minuteVentilation', 'cricoidPressure'],
       ['airwayDevice', 'mechanicalMV', 'effectiveMV', 'cricoidPressureActive'],
-    )] : []),
-    ...(nextAttempt ? [actionCitation(nextAttempt, ['attemptNumber'])] : []),
-  ];
-  if (ppvWithCricoid) return result('performed', ruleId, citations, [], { conditionTriggered: true });
-  if (ppv || cricoid) return result('partial', ruleId, citations, [], { conditionTriggered: true });
-  if (nextAttempt || finalized) {
-    return result('not_performed', ruleId, citations, [], { conditionTriggered: true });
+    ) : null,
+    segment.nextAttempt ? actionCitation(segment.nextAttempt, ['attemptNumber']) : null,
+  ]));
+  const summaries = segments.map((segment) => ({
+    failureAttemptNumber: ownValue(segment.failure.record.meta, 'attemptNumber') ?? null,
+    rescueStatus: segment.actionStatus,
+    qualifyingPpvIndex: segment.ppv?.index ?? null,
+    cricoidActive: Boolean(segment.ppv && cricoidActiveAt(actionEntries, segment.ppv)),
+    nextAttemptNumber: ownValue(segment.nextAttempt?.record.meta, 'attemptNumber') ?? null,
+  }));
+  return result(status, ruleId, citations, [], {
+    conditionTriggered: true,
+    segments: summaries,
+  });
+}
+
+function evaluateAppropriateFailedAttempt({
+  actionEntries, trace, criteria, finalized, ruleId,
+}) {
+  const segments = analyzeFailedAttempts(actionEntries, trace, criteria);
+  if (segments.length === 0) {
+    return result(
+      finalized ? 'performed' : 'pending', ruleId, [], [],
+      finalized ? { conditionTriggered: false } : {},
+    );
   }
-  return result('pending', ruleId, citations, [], { conditionTriggered: true });
+  const statuses = segments.map((segment) => {
+    if (segment.actionStatus !== 'performed') return segment.actionStatus;
+    const failureAttemptNumber = ownValue(segment.failure.record.meta, 'attemptNumber');
+    const nextAttemptNumber = ownValue(segment.nextAttempt?.record.meta, 'attemptNumber');
+    const progressed = Number.isSafeInteger(failureAttemptNumber)
+      && Number.isSafeInteger(nextAttemptNumber)
+      && nextAttemptNumber > failureAttemptNumber
+      && Boolean(segment.nextOutcome);
+    return segment.oxygenation.recovered && progressed ? 'performed' : 'partial';
+  });
+  const citations = uniqueCitations(segments.flatMap((segment) => [
+    actionCitation(segment.failure, ['attemptNumber']),
+    segment.cricoid ? actionCitation(segment.cricoid) : null,
+    segment.ppv ? actionCitation(
+      segment.ppv,
+      ['airwayDevice', 'minuteVentilation', 'cricoidPressure'],
+      ['airwayDevice', 'mechanicalMV', 'effectiveMV', 'cricoidPressureActive'],
+    ) : null,
+    segment.nextAttempt ? actionCitation(segment.nextAttempt, ['attemptNumber']) : null,
+    segment.nextOutcome ? actionCitation(segment.nextOutcome, ['attemptNumber']) : null,
+  ]));
+  const traceCitations = uniqueCitations(
+    segments.flatMap(({ oxygenation }) => oxygenation.citations),
+  );
+  const summaries = segments.map((segment, index) => ({
+    failureAttemptNumber: ownValue(segment.failure.record.meta, 'attemptNumber') ?? null,
+    rescueStatus: segment.actionStatus,
+    preRescueSpO2: segment.oxygenation.preRescue?.sample.spo2 ?? null,
+    nadirSpO2: segment.oxygenation.nadir?.sample.spo2 ?? null,
+    postRescueSpO2: segment.oxygenation.postRescue?.sample.spo2 ?? null,
+    oxygenationRecovered: segment.oxygenation.recovered,
+    requiredRecoveryDelta: criteria.failedAttemptSpo2RecoveryDelta,
+    nextAttemptNumber: ownValue(segment.nextAttempt?.record.meta, 'attemptNumber') ?? null,
+    nextAttemptOutcome: segment.nextOutcome?.record.action === 'intubation_attempt_succeeded'
+      ? 'succeeded'
+      : (segment.nextOutcome?.record.action === 'intubation_attempt_failed' ? 'failed' : null),
+    segmentStatus: statuses[index],
+  }));
+  return result(aggregateSegmentStatuses(statuses), ruleId, citations, traceCitations, {
+    conditionTriggered: true,
+    segments: summaries,
+  });
 }
 
 function evaluateCricoidRelease({ actionEntries, trace, criteria, finalized, ruleId }) {
@@ -980,10 +1371,10 @@ function evaluateUnderThree({ actionEntries, finalized, ruleId }) {
 
 function context(input, ruleId) {
   return {
-    actionEntries: entries(input.actions ?? []),
-    trace: input.trace ?? [],
-    criteria: resolveCriteria(input.criteria ?? {}),
-    finalized: input.finalized === true,
+    actionEntries: entries(input.actions),
+    trace: input.trace,
+    criteria: resolveCriteria(input.criteria),
+    finalized: input.finalized,
     ruleId,
   };
 }
@@ -999,7 +1390,7 @@ const RULE_EVALUATORS = {
   rsi_medication_sequence: evaluateMedicationSequence,
   rsi_no_ppv_before_first_laryngoscopy: evaluateNoPpv,
   rsi_continuous_etco2_confirmation: evaluateEtco2,
-  rsi_failed_attempt_ppv_with_cricoid: evaluateFailedIntervention,
+  rsi_failed_attempt_ppv_with_cricoid: evaluateFailedAttemptPpv,
   rsi_cricoid_release_after_confirmation: evaluateCricoidRelease,
   rsi_inhaled_anesthetic_on: evaluatePostSuccess,
   rsi_vent_mode: evaluatePostSuccess,
@@ -1008,19 +1399,18 @@ const RULE_EVALUATORS = {
   rsi_fresh_gas: evaluatePostSuccess,
   rsi_fio2: evaluatePostSuccess,
   rsi_bag_to_vent: evaluatePostSuccess,
-  rsi_appropriate_failed_attempt_intervention: evaluateFailedIntervention,
+  rsi_appropriate_failed_attempt_intervention: evaluateAppropriateFailedAttempt,
   rsi_under_three_attempts: evaluateUnderThree,
 };
 
 export const RUBRIC_RULES = Object.freeze({ ...RULE_EVALUATORS });
 
-export function evaluateRubricItem({
-  item, actions = [], trace = [], criteria = {}, finalized = false,
-} = {}) {
-  const ruleId = item?.engineEvidence?.ruleId;
+export function evaluateRubricItem(input = {}) {
+  const normalized = normalizeEvaluationInput(input);
+  const ruleId = normalized.item.engineEvidence.ruleId;
   const evaluator = RUBRIC_RULES[ruleId];
   if (!evaluator) throw new RangeError(`Unknown rubric rule: ${String(ruleId)}`);
-  return evaluator(context({ actions, trace, criteria, finalized }, ruleId));
+  return evaluator(context(normalized, ruleId));
 }
 
 function makeFlag(rubric, item, trigger, flagEvidence) {
@@ -1047,18 +1437,36 @@ function flagEvidenceWithTrigger(ruleEvidence, trigger) {
   return { ...(ruleEvidence ?? {}), actions };
 }
 
-export function detectRubricViolations({
-  rubric, action, actions = [], trace = [], criteria = {},
-} = {}) {
-  for (const item of rubric?.items ?? []) {
+function normalizeViolationInput(input) {
+  const copied = normalizedRoot(input, 'detectRubricViolations input');
+  const criteria = Object.hasOwn(copied, 'criteria') ? copied.criteria : {};
+  if (!isPlainObject(criteria)) throw new TypeError('criteria must be a plain object');
+  return {
+    rubric: normalizeRubric(copied.rubric),
+    actions: normalizeActionRecords(copied.actions ?? []),
+    trace: normalizeTraceRecords(copied.trace ?? []),
+    criteria,
+  };
+}
+
+export function detectRubricViolations(input = {}) {
+  const normalized = normalizeViolationInput(input);
+  const {
+    rubric, actions, trace, criteria,
+  } = normalized;
+  for (const item of rubric.items) {
     const ruleId = item.engineEvidence?.ruleId;
     if (ruleId && !RUBRIC_RULES[ruleId]) throw new RangeError(`Unknown rubric rule: ${ruleId}`);
   }
+  const rawActions = Object.getOwnPropertyDescriptor(input, 'actions')?.value ?? [];
+  const rawAction = Object.getOwnPropertyDescriptor(input, 'action')?.value;
+  const triggerIndex = rawActions.indexOf(rawAction);
+  if (triggerIndex < 0) {
+    throw new TypeError('action must be the exact ledger member supplied in actions');
+  }
   const actionEntries = entries(actions);
-  const triggerIndex = actionEntries.findIndex(({ record }) => record === action);
-  const fallbackIndex = actionEntries.length - 1;
-  const trigger = actionEntries[triggerIndex >= 0 ? triggerIndex : fallbackIndex];
-  if (!trigger || trigger.record.action === 'instructor_rubric_score_set') return immutable([]);
+  const trigger = actionEntries[triggerIndex];
+  if (trigger.record.action === 'instructor_rubric_score_set') return immutable([]);
   const resolvedCriteria = resolveCriteria(criteria);
   const flags = [];
   const add = (item, ruleEvidence = { actions: [], trace: [] }) => {
@@ -1094,13 +1502,12 @@ export function detectRubricViolations({
       ));
       if (preoxygenationItem) {
         const run = qualifyingPreoxygenation(trace, trigger, resolvedCriteria);
-        const duration = run.length;
-        if (duration < resolvedCriteria.preoxygenationDurationSec) {
+        if (run.durationSec < resolvedCriteria.preoxygenationDurationSec) {
+          const compactEvidence = preoxygenationEvidence(run, trace);
           add(preoxygenationItem, {
             actions: [],
-            trace: run.map((entry) => (
-              traceCitation(entry, ['fio2', 'spontaneousRR', 'spontaneousTV'])
-            )),
+            trace: compactEvidence.endpoints,
+            preoxygenation: compactEvidence.summary,
           });
         }
       }

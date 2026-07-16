@@ -193,6 +193,174 @@ describe('rubric rule registry and pure API', () => {
   });
 });
 
+describe('strict exported rubric API boundary', () => {
+  const preoxygenationItem = itemFor('rsi_preoxygenation');
+
+  test('rejects cycles, custom prototypes, accessors, symbols, and dangerous or unsafe values', () => {
+    const cyclic = { weightKg: 70 };
+    cyclic.self = cyclic;
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, criteria: cyclic }))
+      .toThrow(/cycle/i);
+
+    const customCriteria = Object.create({ inherited: true });
+    customCriteria.weightKg = 70;
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, criteria: customCriteria }))
+      .toThrow(/plain object/i);
+
+    let getterCalls = 0;
+    const accessorCriteria = {};
+    Object.defineProperty(accessorCriteria, 'weightKg', {
+      enumerable: true,
+      get() {
+        getterCalls += 1;
+        return 70;
+      },
+    });
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, criteria: accessorCriteria }))
+      .toThrow(/data propert/i);
+    expect(getterCalls).toBe(0);
+
+    const symbolCriteria = { weightKg: 70 };
+    symbolCriteria[Symbol('unsafe')] = true;
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, criteria: symbolCriteria }))
+      .toThrow(/string keys|JSON-safe/i);
+
+    const dangerousCriteria = { weightKg: 70 };
+    Object.defineProperty(dangerousCriteria, 'constructor', {
+      enumerable: true, value: 'unsafe', writable: true,
+    });
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, criteria: dangerousCriteria }))
+      .toThrow(/Dangerous/i);
+
+    for (const unsafe of [undefined, () => {}, NaN, Infinity]) {
+      expect(() => evaluateRubricItem({
+        item: preoxygenationItem,
+        criteria: { weightKg: 70, unsafe },
+      })).toThrow(/JSON-safe/i);
+    }
+  });
+
+  test('requires ordinary dense arrays at every direct API boundary', () => {
+    class CriteriaList extends Array {}
+    expect(() => evaluateRubricItem({
+      item: preoxygenationItem,
+      criteria: { weightKg: 70, acceptedInductionDrugs: new CriteriaList('Propofol') },
+    })).toThrow(/ordinary array/i);
+    expect(() => evaluateRubricItem({
+      item: preoxygenationItem,
+      criteria: { weightKg: 70, acceptedInductionDrugs: new Array(1) },
+    })).toThrow(/array index|indexed values/i);
+
+    const accessorList = ['Propofol'];
+    Object.defineProperty(accessorList, '0', {
+      enumerable: true, get: () => 'Propofol',
+    });
+    expect(() => evaluateRubricItem({
+      item: preoxygenationItem,
+      criteria: { weightKg: 70, acceptedInductionDrugs: accessorList },
+    })).toThrow(/array index/i);
+
+    class ActionList extends Array {}
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, actions: new ActionList() }))
+      .toThrow(/ordinary array/i);
+  });
+
+  test.each([
+    ['negative action time', [action(-1, 'drug', { drug: 'Propofol' })], []],
+    ['nonfinite action time', [action(Infinity, 'drug', { drug: 'Propofol' })], []],
+    ['empty action name', [action(1, '  ')], []],
+    ['nonmonotonic ledger', [action(2, 'first'), action(1, 'second')], []],
+    ['non-object metadata', [{ tSec: 1, action: 'drug', meta: [], snapshot: null }], []],
+    ['non-object snapshot', [{ tSec: 1, action: 'drug', meta: {}, snapshot: [] }], []],
+    ['noninteger trace time', [], [{ t: 1.5, fio2: 1 }]],
+    ['unsorted trace', [], [{ t: 2, fio2: 1 }, { t: 1, fio2: 1 }]],
+    ['duplicate trace time', [], [{ t: 1, fio2: 1 }, { t: 1, fio2: 1 }]],
+    ['nonfinite trace field', [], [{ t: 1, fio2: NaN }]],
+  ])('rejects malformed action or trace records: %s', (_label, actions, trace) => {
+    expect(() => evaluateRubricItem({
+      item: preoxygenationItem, actions, trace, criteria: CRITERIA,
+    })).toThrow(TypeError);
+  });
+
+  test('rejects cyclic action data and malformed item or finalized shapes', () => {
+    const cyclicMeta = {};
+    cyclicMeta.self = cyclicMeta;
+    expect(() => evaluateRubricItem({
+      item: preoxygenationItem,
+      actions: [action(1, 'drug', cyclicMeta)],
+      criteria: CRITERIA,
+    })).toThrow(/cycle/i);
+    expect(() => evaluateRubricItem({ item: { engineEvidence: null } }))
+      .toThrow(/engineEvidence/i);
+    expect(() => evaluateRubricItem({ item: { engineEvidence: { ruleId: 42 } } }))
+      .toThrow(/ruleId/i);
+    expect(() => evaluateRubricItem({ item: preoxygenationItem, finalized: 1 }))
+      .toThrow(/finalized/i);
+    expect(() => evaluateRubricItem({
+      item: { engineEvidence: { ruleId: 'invented_rule' } },
+    })).toThrow(RangeError);
+  });
+
+  test('requires a violation trigger to be the exact validated ledger member', () => {
+    const ledgerAction = action(1, 'drug', { drug: 'Propofol', doseMg: 100 });
+    const absentTwin = action(1, 'drug', { drug: 'Propofol', doseMg: 100 });
+    expect(() => detectRubricViolations({
+      rubric: rsiRaw,
+      action: absentTwin,
+      actions: [ledgerAction],
+      trace: [],
+      criteria: CRITERIA,
+    })).toThrow(/exact ledger member/i);
+
+    const flags = detectRubricViolations({
+      rubric: rsiRaw,
+      action: ledgerAction,
+      actions: [ledgerAction],
+      trace: [],
+      criteria: CRITERIA,
+    });
+    expect(flags.some(({ itemId }) => itemId === 'rsi-7')).toBe(true);
+    expect(Object.isFrozen(flags)).toBe(true);
+  });
+
+  test('validates allowed vent modes as a unique supported set and rejects derived TV overflow', () => {
+    for (const allowedVentModes of [
+      [1, 1], [0, 1], [-1], [4], [Number.MAX_SAFE_INTEGER + 1],
+    ]) {
+      expect(() => evaluate('rsi_vent_mode', {
+        criteria: { ...CRITERIA, allowedVentModes },
+      })).toThrow(/allowedVentModes/);
+    }
+    expect(evaluate('rsi_vent_mode', {
+      criteria: { ...CRITERIA, allowedVentModes: [3] },
+      actions: [
+        action(1, 'intubation_attempt_succeeded', { attemptNumber: 1 }),
+        action(2, 'vent_mode_changed', { previousMode: 0, mode: 3 }),
+      ],
+    })).toMatchObject({ status: 'performed', points: 2 });
+    expect(() => evaluate('emergence_spontaneous_ventilation', {
+      criteria: { weightKg: Number.MAX_VALUE, spontaneousTvMinMlPerKg: 2 },
+    })).toThrow(/spontaneous.*finite|finite.*spontaneous/i);
+  });
+
+  test('does not mutate valid direct inputs while normalizing and evaluating them', () => {
+    const item = structuredClone(itemFor('rsi_medication_sequence'));
+    const actions = [
+      action(1, 'drug', { drug: 'Propofol', doseMg: 100 }),
+      action(2, 'drug', { drug: 'Rocuronium', doseMg: 50 }),
+      action(3, 'intubation_attempt_started', { attemptNumber: 1 }),
+    ];
+    const criteria = { ...CRITERIA, allowedVentModes: [1, 2] };
+    const before = structuredClone({ item, actions, criteria });
+
+    const result = evaluateRubricItem({ item, actions, criteria, finalized: false });
+
+    expect({ item, actions, criteria }).toEqual(before);
+    expect(result).toMatchObject({ status: 'performed', points: 2 });
+    expect(Object.isFrozen(result)).toBe(true);
+  });
+});
+
 describe('every engine-observable rule resolves performed and not performed', () => {
   const cases = [
     {
@@ -401,7 +569,18 @@ describe('every engine-observable rule resolves performed and not performed', ()
     },
     {
       ruleId: 'rsi_appropriate_failed_attempt_intervention',
-      performed: { actions: RESCUE_ACTIONS },
+      performed: {
+        actions: [
+          ...RESCUE_ACTIONS,
+          action(5, 'intubation_attempt_succeeded', { attemptNumber: 2 }),
+        ],
+        trace: [
+          { t: 1, spo2: 98 },
+          { t: 2, spo2: 94 },
+          { t: 3, spo2: 95 },
+          { t: 4, spo2: 98 },
+        ],
+      },
       notPerformed: {
         actions: [
           action(1, 'intubation_attempt_failed', { attemptNumber: 1 }),
@@ -647,6 +826,145 @@ describe('anesthetic infusion and machine-state adapters', () => {
 });
 
 describe('ordered evidence regression cases', () => {
+  test('cuts anesthetic shutdown scoring at the first extubation action', () => {
+    const result = evaluate('emergence_stop_anesthetic', {
+      actions: [
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 2 }),
+        action(2, 'extubate'),
+        action(3, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 0 }),
+      ],
+    });
+
+    expect(result).toMatchObject({ status: 'not_performed', points: 0 });
+    expect(result.evidence.actions.map(({ index }) => index)).toEqual([0]);
+  });
+
+  test('uses ledger order for same-time volatile terminal state before extubation', () => {
+    const offThenOn = evaluate('emergence_stop_anesthetic', {
+      actions: [
+        action(0, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 2 }),
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 0 }),
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 2 }),
+        action(1, 'extubate'),
+      ],
+    });
+    const onThenOff = evaluate('emergence_stop_anesthetic', {
+      actions: [
+        action(0, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 2 }),
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 3 }),
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 0 }),
+        action(1, 'extubate'),
+      ],
+    });
+
+    expect(offThenOn).toMatchObject({ status: 'partial', points: 1 });
+    expect(onThenOff).toMatchObject({ status: 'performed', points: 2 });
+  });
+
+  test('accepts a terminal active infusion below baseline but not a restored infusion', () => {
+    const trace = [{
+      t: 0,
+      vaporizer: 0,
+      activeAnestheticInfusions: { Propofol: 100 },
+    }];
+    const decreased = evaluate('emergence_stop_anesthetic', {
+      trace,
+      actions: [
+        action(1, 'drug_infusion_changed', {
+          drug: 'Propofol', previousRate: 100, rate: 60,
+        }),
+        action(2, 'extubate'),
+      ],
+    });
+    const restored = evaluate('emergence_stop_anesthetic', {
+      trace,
+      actions: [
+        action(1, 'drug_infusion_changed', {
+          drug: 'Propofol', previousRate: 100, rate: 60,
+        }),
+        action(2, 'drug_infusion_changed', {
+          drug: 'Propofol', previousRate: 60, rate: 100,
+        }),
+        action(3, 'extubate'),
+      ],
+    });
+
+    expect(decreased).toMatchObject({ status: 'performed', points: 2 });
+    expect(restored).toMatchObject({ status: 'partial', points: 1 });
+  });
+
+  test('applies type-specific terminal rules across every active anesthetic source', () => {
+    const trace = [{
+      t: 0,
+      vaporizer: 2,
+      vaporizerAgent: 'Sevoflurane',
+      activeAnestheticInfusions: { Propofol: 100, Remifentanil: 10 },
+    }];
+    const allComplete = evaluate('emergence_stop_anesthetic', {
+      trace,
+      actions: [
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 0 }),
+        action(2, 'drug_infusion_changed', {
+          drug: 'Propofol', previousRate: 100, rate: 75,
+        }),
+        action(3, 'drug_infusion_changed', {
+          drug: 'Remifentanil', previousRate: 10, rate: 5,
+        }),
+        action(4, 'extubate'),
+      ],
+    });
+    const volatileStillOn = evaluate('emergence_stop_anesthetic', {
+      trace,
+      actions: [
+        action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 1 }),
+        action(2, 'drug_infusion_changed', {
+          drug: 'Propofol', previousRate: 100, rate: 75,
+        }),
+        action(3, 'drug_infusion_changed', {
+          drug: 'Remifentanil', previousRate: 10, rate: 5,
+        }),
+        action(4, 'extubate'),
+      ],
+    });
+
+    expect(allComplete).toMatchObject({ status: 'performed', points: 2 });
+    expect(volatileStillOn).toMatchObject({ status: 'partial', points: 1 });
+  });
+
+  test.each([
+    ['induction then NMB then attempt', ['induction', 'nmb', 'attempt'], 2],
+    ['NMB then induction then attempt', ['nmb', 'induction', 'attempt'], 1],
+    ['attempt then induction then NMB', ['attempt', 'induction', 'nmb'], 0],
+    ['induction then attempt then NMB', ['induction', 'attempt', 'nmb'], 0],
+    ['NMB then attempt then induction', ['nmb', 'attempt', 'induction'], 0],
+    ['attempt without medications', ['attempt'], 0],
+    ['induction then attempt without NMB', ['induction', 'attempt'], 0],
+    ['NMB then attempt without induction', ['nmb', 'attempt'], 0],
+  ])('scores medication sequence permutation: %s', (_label, order, points) => {
+    const records = {
+      induction: action(10, 'drug', { drug: 'Propofol', doseMg: 100 }),
+      nmb: action(10, 'drug', { drug: 'Rocuronium', doseMg: 50 }),
+      attempt: action(10, 'intubation_attempt_started', { attemptNumber: 1 }),
+    };
+    const result = evaluate('rsi_medication_sequence', {
+      actions: order.map((key) => records[key]),
+    });
+
+    expect(result.points).toBe(points);
+  });
+
+  test('keeps medication sequence pending before an attempt and finalizes a missing attempt to zero', () => {
+    const actions = [
+      action(1, 'drug', { drug: 'Rocuronium', doseMg: 50 }),
+      action(2, 'drug', { drug: 'Propofol', doseMg: 100 }),
+    ];
+
+    expect(evaluate('rsi_medication_sequence', { actions }))
+      .toMatchObject({ status: 'pending', points: null });
+    expect(evaluate('rsi_medication_sequence', { actions, finalized: true }))
+      .toMatchObject({ status: 'not_performed', points: 0 });
+  });
+
   test('later volatile or infusion reactivation lowers a completed shutdown to partial', () => {
     const volatileActions = [
       action(1, 'volatile_changed', { agent: 'Sevoflurane', dialPercent: 2 }),
@@ -983,7 +1301,7 @@ describe('real engine rubric evidence bridge', () => {
     advanceRunner(rescued.runner, 1);
     rescued.sync('intubation_attempt_succeeded');
     expect(liveItem(rescued.session, 'rsi-28')).toMatchObject({ points: 2 });
-    expect(liveItem(rescued.session, 'rsi-41')).toMatchObject({ points: 2 });
+    expect(liveItem(rescued.session, 'rsi-41')).toMatchObject({ points: 1 });
     expect(liveItem(rescued.session, 'rsi-42')).toMatchObject({ points: 2 });
 
     const omitted = createRunnerBridge(rsiRaw);
@@ -1025,6 +1343,199 @@ describe('real engine rubric evidence bridge', () => {
     ppvBeforeAttempt.runner.attemptIntubation();
     ppvBeforeAttempt.sync('intubation_attempt_started');
     expect(liveItem(ppvBeforeAttempt.session, 'rsi-11')).toMatchObject({ points: 0 });
+  });
+});
+
+describe('failed-attempt segment aggregation', () => {
+  const failed = (tSec, attemptNumber) => (
+    action(tSec, 'intubation_attempt_failed', { attemptNumber })
+  );
+  const attemptStarted = (tSec, attemptNumber) => (
+    action(tSec, 'intubation_attempt_started', { attemptNumber })
+  );
+  const succeeded = (tSec, attemptNumber) => (
+    action(tSec, 'intubation_attempt_succeeded', { attemptNumber })
+  );
+  const cricoid = (tSec) => action(tSec, 'cricoid_pressure_applied');
+  const ppv = (tSec) => action(tSec, 'mask_ppv_started', {
+    airwayDevice: 'mask', minuteVentilation: 6, cricoidPressure: true,
+  });
+
+  test('a later complete rescue cannot erase an earlier missed or partial segment', () => {
+    const missedThenRescued = [
+      failed(1, 1),
+      attemptStarted(2, 2),
+      failed(3, 2),
+      cricoid(4),
+      ppv(5),
+      attemptStarted(6, 3),
+      succeeded(7, 3),
+    ];
+    const partialThenComplete = [
+      failed(1, 1),
+      cricoid(2),
+      attemptStarted(3, 2),
+      failed(4, 2),
+      ppv(5),
+      attemptStarted(6, 3),
+      succeeded(7, 3),
+    ];
+    const allComplete = [
+      failed(1, 1),
+      cricoid(2),
+      ppv(3),
+      attemptStarted(4, 2),
+      failed(5, 2),
+      ppv(6),
+      attemptStarted(7, 3),
+      succeeded(8, 3),
+    ];
+
+    expect(evaluate('rsi_failed_attempt_ppv_with_cricoid', {
+      actions: missedThenRescued,
+    })).toMatchObject({ status: 'not_performed', points: 0 });
+    expect(evaluate('rsi_failed_attempt_ppv_with_cricoid', {
+      actions: partialThenComplete,
+    })).toMatchObject({ status: 'partial', points: 1 });
+    expect(evaluate('rsi_failed_attempt_ppv_with_cricoid', {
+      actions: allComplete,
+    })).toMatchObject({ status: 'performed', points: 2 });
+  });
+
+  test('keeps item 28 action-only and gives item 41 measured oxygenation and progression evidence', () => {
+    const actions = [
+      failed(1, 1),
+      cricoid(2),
+      ppv(3),
+      attemptStarted(5, 2),
+      failed(6, 2),
+      ppv(7),
+      attemptStarted(9, 3),
+      succeeded(10, 3),
+    ];
+    const trace = [
+      { t: 1, spo2: 98 }, { t: 2, spo2: 94 }, { t: 3, spo2: 95 }, { t: 4, spo2: 98 },
+      { t: 6, spo2: 97 }, { t: 7, spo2: 95 }, { t: 8, spo2: 98 },
+    ];
+
+    const item28 = evaluate('rsi_failed_attempt_ppv_with_cricoid', { actions, trace });
+    const item41 = evaluate('rsi_appropriate_failed_attempt_intervention', { actions, trace });
+
+    expect(item28).toMatchObject({ status: 'performed', points: 2 });
+    expect(item28.evidence.trace).toEqual([]);
+    expect(item28.evidence.segments).toHaveLength(2);
+    expect(item41).toMatchObject({
+      status: 'performed',
+      points: 2,
+      evidence: {
+        segments: [
+          {
+            failureAttemptNumber: 1,
+            preRescueSpO2: 95,
+            nadirSpO2: 94,
+            postRescueSpO2: 98,
+            oxygenationRecovered: true,
+            nextAttemptNumber: 2,
+            nextAttemptOutcome: 'failed',
+          },
+          {
+            failureAttemptNumber: 2,
+            preRescueSpO2: 95,
+            nadirSpO2: 95,
+            postRescueSpO2: 98,
+            oxygenationRecovered: true,
+            nextAttemptNumber: 3,
+            nextAttemptOutcome: 'succeeded',
+          },
+        ],
+      },
+    });
+    expect(item41.evidence.trace.length).toBeGreaterThan(0);
+    expect(item41.evidence).not.toEqual(item28.evidence);
+  });
+
+  test('scores a triggered failure immediately and requires physiology plus progression for item 41', () => {
+    const failureOnly = [failed(1, 1)];
+    const completeRescueWithoutTrace = [
+      failed(1, 1), cricoid(2), ppv(3), attemptStarted(4, 2), succeeded(5, 2),
+    ];
+
+    for (const ruleId of [
+      'rsi_failed_attempt_ppv_with_cricoid',
+      'rsi_appropriate_failed_attempt_intervention',
+    ]) {
+      expect(evaluate(ruleId, { actions: failureOnly })).toMatchObject({
+        status: 'not_performed', points: 0, evidence: { conditionTriggered: true },
+      });
+      expect(evaluate(ruleId)).toMatchObject({
+        status: 'pending', points: null,
+      });
+      expect(evaluate(ruleId, { finalized: true })).toMatchObject({
+        status: 'performed', points: 2, evidence: { conditionTriggered: false },
+      });
+    }
+    expect(evaluate('rsi_failed_attempt_ppv_with_cricoid', {
+      actions: completeRescueWithoutTrace,
+    })).toMatchObject({ status: 'performed', points: 2 });
+    expect(evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions: completeRescueWithoutTrace,
+    })).toMatchObject({ status: 'partial', points: 1 });
+  });
+
+  test('requires item 41 to progress to a later numbered attempt with a timely outcome', () => {
+    const trace = [
+      { t: 1, spo2: 98 }, { t: 2, spo2: 95 }, { t: 3, spo2: 98 },
+    ];
+    const repeatedAttemptNumber = [
+      failed(1, 1), cricoid(2), ppv(2), attemptStarted(3, 1), succeeded(4, 1),
+    ];
+    const outcomeAfterAnotherAttempt = [
+      failed(1, 1), cricoid(2), ppv(2), attemptStarted(3, 2),
+      attemptStarted(4, 3), succeeded(5, 2),
+    ];
+
+    expect(evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions: repeatedAttemptNumber, trace,
+    })).toMatchObject({ status: 'partial', points: 1 });
+    expect(evaluate('rsi_appropriate_failed_attempt_intervention', {
+      actions: outcomeAfterAnotherAttempt, trace,
+    })).toMatchObject({ status: 'partial', points: 1 });
+  });
+
+  test('uses actual runner SpO2 and outcome records for an appropriate rescue', () => {
+    const bridge = createRunnerBridge(rsiRaw);
+    bridge.runner.configureIntubationAttempts({
+      failedIntubationAttempts: [1], attemptDurationSeconds: 1,
+    });
+    bridge.runner.attemptIntubation();
+    bridge.sync('intubation_attempt_started');
+    advanceRunner(bridge.runner, 1);
+    bridge.sync('intubation_attempt_failed');
+    const before = bridge.trace(1);
+    bridge.runner.applyCricoidPressure();
+    bridge.sync('cricoid_pressure_applied');
+    bridge.runner.deliverMaskVentilation({
+      durationSeconds: 1, tidalVolumeMl: 500, respiratoryRate: 12, cricoidPressure: true,
+    });
+    bridge.sync('mask_ppv_started');
+    advanceRunner(bridge.runner, 1);
+    bridge.sync('mask_ppv_completed');
+    const after = bridge.trace(2);
+    bridge.runner.attemptIntubation();
+    bridge.sync('intubation_attempt_started');
+    advanceRunner(bridge.runner, 1);
+    bridge.sync('intubation_attempt_succeeded');
+
+    const result = bridge.session.getLiveResult().items.find(({ id }) => id === 'rsi-41');
+    expect(before.spo2).toBeGreaterThan(0);
+    expect(after.spo2).toBeGreaterThan(0);
+    expect(result).toMatchObject({
+      status: 'performed', points: 2,
+      evidence: {
+        conditionTriggered: true,
+        segments: [{ nextAttemptNumber: 2, nextAttemptOutcome: 'succeeded' }],
+      },
+    });
   });
 });
 
@@ -1133,10 +1644,11 @@ describe('live rubric violation flags', () => {
       expect(session.getItemStatus(itemId)).toMatchObject({ status: 'pending', points: null });
     }
 
+    const induction = action(180, 'drug', { drug: 'Propofol', doseMg: 100 });
     const compliant = detectRubricViolations({
       rubric,
-      action: action(180, 'drug', { drug: 'Propofol', doseMg: 100 }),
-      actions: [action(180, 'drug', { drug: 'Propofol', doseMg: 100 })],
+      action: induction,
+      actions: [induction],
       trace: preoxygenationTrace(0, 179),
       criteria: CRITERIA,
     });
