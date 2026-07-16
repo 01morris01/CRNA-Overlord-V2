@@ -1,4 +1,5 @@
 import { normalizeRubric } from './rubricLoader.js';
+import { detectRubricViolations, evaluateRubricItem } from './rubricRules.js';
 
 const DANGEROUS_OBJECT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 const SCORE_STATUS = Object.freeze({
@@ -105,6 +106,19 @@ export class RubricScoringSession {
     this.criteria = immutableJsonCopy(criteria, 'criteria');
     this.seed = seed;
 
+    const criteriaProbeItem = this.rubric.items.find(
+      (item) => item.scoringSource === 'ENGINE_OBSERVABLE',
+    );
+    if (criteriaProbeItem) {
+      evaluateRubricItem({
+        item: criteriaProbeItem,
+        actions: [],
+        trace: [],
+        criteria: this.criteria,
+        finalized: false,
+      });
+    }
+
     this._itemsById = new Map(this.rubric.items.map((item) => [item.id, item]));
     this._states = new Map(this.rubric.items.map((item) => [item.id, {
       status: 'pending',
@@ -116,6 +130,8 @@ export class RubricScoringSession {
     }]));
     this._actionLedger = [];
     this._trace = [];
+    this._violations = [];
+    this._violationKeys = new Set();
     this._liveResult = null;
     this._finalResult = null;
   }
@@ -160,6 +176,25 @@ export class RubricScoringSession {
       snapshot: snapshot === undefined ? null : immutableJsonCopy(snapshot, 'snapshot'),
     });
     this._actionLedger.push(record);
+    try {
+      const flags = detectRubricViolations({
+        rubric: this.rubric,
+        action: record,
+        actions: this._actionLedger,
+        trace: this._trace,
+        criteria: this.criteria,
+      });
+      const triggerIndex = this._actionLedger.length - 1;
+      for (const flag of flags) {
+        const key = `${flag.itemId}\0${triggerIndex}\0${flag.tSec}`;
+        if (this._violationKeys.has(key)) continue;
+        this._violationKeys.add(key);
+        this._violations.push(flag);
+      }
+    } catch (error) {
+      this._actionLedger.pop();
+      throw error;
+    }
     this._invalidateLiveResult();
     return record;
   }
@@ -241,6 +276,37 @@ export class RubricScoringSession {
     return deepFreeze(this._buildItemStatus(item, state));
   }
 
+  _evaluateEngineStates(finalized) {
+    let changed = false;
+    for (const item of this.rubric.items) {
+      if (item.scoringSource !== 'ENGINE_OBSERVABLE') continue;
+      const evaluated = evaluateRubricItem({
+        item,
+        actions: this._actionLedger,
+        trace: this._trace,
+        criteria: this.criteria,
+        finalized,
+      });
+      const state = this._states.get(item.id);
+      const evidenceChanged = JSON.stringify(state.evidence) !== JSON.stringify(evaluated.evidence);
+      if (state.status === evaluated.status
+        && state.points === evaluated.points
+        && !evidenceChanged) continue;
+
+      state.status = evaluated.status;
+      state.points = evaluated.points;
+      state.evidence = evaluated.evidence;
+      const evidenceTimes = [
+        ...evaluated.evidence.actions.map(({ tSec }) => tSec),
+        ...evaluated.evidence.trace.map(({ tSec }) => tSec),
+      ].filter((value) => typeof value === 'number' && Number.isFinite(value));
+      state.updatedAtSec = evidenceTimes.length > 0 ? Math.max(...evidenceTimes) : null;
+      changed = true;
+    }
+    if (changed) this._invalidateLiveResult();
+    return changed;
+  }
+
   _buildResult({ finalized = false, finalizedAtSec = null, outcome = null } = {}) {
     const items = this.rubric.items.map((item) => (
       this._buildItemStatus(item, this._states.get(item.id))
@@ -279,7 +345,7 @@ export class RubricScoringSession {
       items,
       actionLedger: [...this._actionLedger],
       trace: [...this._trace],
-      violations: [],
+      violations: [...this._violations],
       finalized,
       finalizedAtSec,
       outcome,
@@ -288,6 +354,7 @@ export class RubricScoringSession {
 
   getLiveResult() {
     if (this._finalResult !== null) return this._finalResult;
+    this._evaluateEngineStates(false);
     if (this._liveResult === null) this._liveResult = deepFreeze(this._buildResult());
     return this._liveResult;
   }
@@ -318,6 +385,8 @@ export class RubricScoringSession {
         pendingItemIds: pendingInstructorIds,
       });
     }
+
+    this._evaluateEngineStates(true);
 
     const pendingEngineIds = this.rubric.items
       .filter((item) => (

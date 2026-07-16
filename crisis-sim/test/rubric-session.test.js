@@ -559,7 +559,7 @@ describe('RubricScoringSession finalization', () => {
     expect(() => session.setInstructorScore({ itemId: 'item-1', points: 2, tSec: 6 })).not.toThrow();
   });
 
-  test('rejects pending engine scores after instructor scores are complete', () => {
+  test('finalizes omitted engine evidence as not performed after instructor scores are complete', () => {
     const session = new RubricScoringSession({ rubric: emergenceRaw });
     for (const item of session.rubric.items) {
       if (item.scoringSource === 'INSTRUCTOR_OBSERVED') {
@@ -568,12 +568,21 @@ describe('RubricScoringSession finalization', () => {
     }
 
     const result = session.finalize({ tSec: 5 });
-    expect(result).toEqual({
-      ok: false,
-      reason: 'ENGINE_SCORES_PENDING',
-      pendingItemIds: ['emergence-2', 'emergence-3', 'emergence-4'],
+    expect(result).toMatchObject({
+      ok: true,
+      pendingEngineCount: 0,
+      incomplete: false,
+      outcome: 'NOT PASS',
+      criticalItemsOmitted: ['emergence-3', 'emergence-4'],
     });
-    expect(session.getLiveResult().finalized).toBe(false);
+    expect(result.items.filter(({ id }) => (
+      ['emergence-2', 'emergence-3', 'emergence-4'].includes(id)
+    ))).toEqual([
+      expect.objectContaining({ id: 'emergence-2', status: 'not_performed', points: 0 }),
+      expect.objectContaining({ id: 'emergence-3', status: 'not_performed', points: 0 }),
+      expect.objectContaining({ id: 'emergence-4', status: 'not_performed', points: 0 }),
+    ]);
+    expect(session.getLiveResult()).toBe(result);
   });
 
   test.each([

@@ -16,6 +16,11 @@ export {
   summarizeRubric,
 } from './scenario/rubricLoader.js';
 export { RubricScoringSession } from './scenario/rubricScoringSession.js';
+export {
+  RUBRIC_RULES,
+  detectRubricViolations,
+  evaluateRubricItem,
+} from './scenario/rubricRules.js';
 
 import { PatientPhysiology } from './patientPhysiology.js';
 import { DrugSystem } from './drugSystem.js';
