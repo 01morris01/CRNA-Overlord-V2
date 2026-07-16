@@ -580,6 +580,49 @@ describe('observed consequences', () => {
 
     expect(() => composeRubric(emergenceRubric, sessionResult)).toThrow(/duplicate violation/i);
   });
+
+  test('rejects the same violation identity even when structured evidence differs', () => {
+    const sessionResult = finalizedFor(emergenceRubric);
+    const item = emergenceRubric.items[2];
+    const flag = {
+      rubricId: emergenceRubric.id,
+      itemId: item.id,
+      displayNumber: item.displayNumber,
+      text: item.text,
+      tSec: 12,
+      triggerAction: 'extubate',
+      evidence: { measured: { tofRatio: 0.55 } },
+    };
+    sessionResult.violations = [
+      flag,
+      { ...structuredClone(flag), evidence: { measured: { tofRatio: 0.45 } } },
+    ];
+
+    expect(() => composeRubric(emergenceRubric, sessionResult)).toThrow(/duplicate violation/i);
+  });
+
+  test('allows different trigger times and different items at the same trigger', () => {
+    const sessionResult = finalizedFor(emergenceRubric);
+    const tofItem = emergenceRubric.items[2];
+    const ventilationItem = emergenceRubric.items[3];
+    const flagFor = (item, tSec) => ({
+      rubricId: emergenceRubric.id,
+      itemId: item.id,
+      displayNumber: item.displayNumber,
+      text: item.text,
+      tSec,
+      triggerAction: 'extubate',
+      evidence: { measured: { tSec } },
+    });
+    sessionResult.violations = [
+      flagFor(tofItem, 12),
+      flagFor(tofItem, 13),
+      flagFor(ventilationItem, 12),
+    ];
+
+    expect(composeRubric(emergenceRubric, sessionResult).violationFlags)
+      .toEqual(sessionResult.violations);
+  });
 });
 
 describe('SimRunner rubric debrief lifecycle', () => {

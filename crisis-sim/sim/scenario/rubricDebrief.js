@@ -314,7 +314,7 @@ function validateRubricProvenance(sessionResult, rubric) {
 
 function validateViolationProvenance(sessionResult, rubric) {
   const trustedItems = new Map(rubric.items.map((item) => [item.id, item]));
-  const accepted = [];
+  const triggerIdentities = new Set();
   for (let index = 0; index < sessionResult.violations.length; index += 1) {
     const violation = sessionResult.violations[index];
     if (!isPlainObject(violation)) {
@@ -346,10 +346,16 @@ function validateViolationProvenance(sessionResult, rubric) {
     if (!isPlainObject(violation.evidence)) {
       throw new TypeError(`sessionResult.violations[${index}].evidence must be a plain object`);
     }
-    if (accepted.some((candidate) => equalJsonSafe(candidate, violation))) {
+    const triggerIdentity = JSON.stringify([
+      violation.rubricId,
+      violation.itemId,
+      violation.triggerAction,
+      violation.tSec,
+    ]);
+    if (triggerIdentities.has(triggerIdentity)) {
       throw new RangeError(`Duplicate violation record at index ${index}`);
     }
-    accepted.push(violation);
+    triggerIdentities.add(triggerIdentity);
   }
 }
 
