@@ -13,6 +13,8 @@ import {
   renderRubricConsoleShell,
   renderRubricItemMarkup,
   runRubricFinalizationAction,
+  setRubricConsoleReadOnly,
+  syncClinicalDraftControls,
 } from '../../ui/liveSimView.js';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -243,6 +245,101 @@ describe('live rubric instructor console', () => {
     expect(row.focus).not.toHaveBeenCalled();
     expect(runner.buildDebrief).not.toHaveBeenCalled();
     expect(focusPendingRubricItem(documentRoot, 'missing')).toBeNull();
+  });
+
+  it('pauses on successful finalization and locks mutation controls while leaving exit/new-case actions', () => {
+    const callOrder = [];
+    const runner = {
+      finalizeRubric: vi.fn(() => ({ ok: true, outcome: 'PASS' })),
+      buildDebrief: vi.fn(() => {
+        callOrder.push('build');
+        return { rubricResult: { outcome: 'PASS' } };
+      }),
+      pause: vi.fn(() => callOrder.push('pause')),
+    };
+    const onFinalized = vi.fn(() => callOrder.push('finalized'));
+    expect(runRubricFinalizationAction({ runner, documentRoot: {}, onFinalized }))
+      .toMatchObject({ ok: true });
+    expect(runner.pause).toHaveBeenCalledOnce();
+    expect(callOrder).toEqual(['pause', 'build', 'finalized']);
+
+    const controls = [
+      { id: 'live-start', disabled: false, dataset: {} },
+      { id: 'live-machine-form-control', disabled: false, dataset: {} },
+      { id: '', disabled: false, dataset: { rubricPoints: '2' } },
+      { id: '', disabled: false, dataset: { nmbTarget: '0.70' } },
+      { id: 'live-rubric-finalize', disabled: false, dataset: {} },
+      { id: 'live-rubric-load', disabled: false, dataset: {} },
+      { id: 'live-rubric-scenario', disabled: false, dataset: {} },
+      { id: 'live-reset', disabled: false, dataset: {} },
+      { id: 'live-rubric-print', disabled: false, dataset: {} },
+      { id: 'live-export', disabled: false, dataset: {} },
+      { id: 'live-close', disabled: false, dataset: {} },
+      { id: 'live-open-display', disabled: false, dataset: {} },
+    ];
+    const consoleRoot = { querySelectorAll: vi.fn(() => controls) };
+    setRubricConsoleReadOnly(consoleRoot, true);
+    expect(controls.slice(0, 5).map(({ disabled }) => disabled)).toEqual([
+      true, true, true, true, true,
+    ]);
+    expect(controls.slice(5).every(({ disabled }) => disabled === false)).toBe(true);
+    setRubricConsoleReadOnly(consoleRoot, false);
+    expect(controls.every(({ disabled }) => disabled === false)).toBe(true);
+    expect(read('ui/liveSimView.js')).toContain('FINALIZED · READ ONLY');
+  });
+
+  it('synchronizes emergence machine and volatile drafts from the loaded engine snapshot', () => {
+    const runner = new SimRunner();
+    const scenario = JSON.parse(read('crisis-sim/sim/scenarios/emergence_residual_block_001.json'));
+    const rubric = JSON.parse(read('data/rubrics/carson-newman-anesthesia-emergence.json'));
+    runner.loadRubricScenario({ scenario, rubric });
+    const snapshot = runner.snapshot();
+    expect(snapshot).toMatchObject({
+      airwayDevice: 'intubated', ventMode: 1, ventSetFiO2: 0.5,
+      ventSetTV: 500, ventSetRR: 12, ventSetPeep: 5,
+      vaporizerAgent: 'Sevoflurane', vaporizer: 2,
+    });
+
+    const names = [
+      'mode', 'setTidalVolume', 'setRespiratoryRate', 'setPeep',
+      'setPressureAbovePeep', 'setPressureSupport', 'setFiO2',
+      'o2FlowLPerMin', 'airFlowLPerMin', 'n2oFlowLPerMin',
+    ];
+    const controls = new Map(names.map((name) => [name, { value: 'stale' }]));
+    const form = { elements: { namedItem: (name) => controls.get(name) ?? null } };
+    const dial = { value: 'stale' };
+    const documentRoot = {
+      getElementById: (id) => {
+        if (id === 'live-machine-form') return form;
+        if (id === 'live-volatile-dial') return dial;
+        return null;
+      },
+    };
+    const onVolatileAgent = vi.fn();
+    const draft = syncClinicalDraftControls({ documentRoot, snapshot, onVolatileAgent });
+    expect(Object.fromEntries([...controls].map(([name, control]) => [name, control.value])))
+      .toEqual({
+        mode: '1', setTidalVolume: '500', setRespiratoryRate: '12', setPeep: '5',
+        setPressureAbovePeep: '15', setPressureSupport: '10', setFiO2: '0.5',
+        o2FlowLPerMin: '2', airFlowLPerMin: '0', n2oFlowLPerMin: '0',
+      });
+    expect(dial.value).toBe('2');
+    expect(onVolatileAgent).toHaveBeenCalledWith('Sevoflurane');
+    expect(draft.ventMode).toBe(1);
+    expect(read('ui/liveSimView.js')).toContain('syncCaseSetupControls(liveRunner.snapshot())');
+  });
+
+  it('uses non-animated pending focus and list scrolling under reduced motion', () => {
+    const scoreControl = { focus: vi.fn() };
+    const row = {
+      scrollIntoView: vi.fn(),
+      querySelector: vi.fn(() => scoreControl),
+    };
+    const documentRoot = { getElementById: vi.fn(() => row) };
+    focusPendingRubricItem(documentRoot, 'rsi-1', { prefersReducedMotion: true });
+    expect(row.scrollIntoView).toHaveBeenCalledWith({ block: 'center', behavior: 'auto' });
+    const css = read('assets/css/live-sim.css');
+    expect(css).toMatch(/prefers-reduced-motion:\s*reduce[\s\S]*\.live-rubric-items\s*\{\s*scroll-behavior:\s*auto;/);
   });
 
   it('routes instructor scoring and NMB targets only through public runner APIs', () => {

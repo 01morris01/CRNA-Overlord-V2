@@ -761,6 +761,10 @@ export class SimRunner {
     return this.rubricSession?.getLiveResult() ?? null;
   }
 
+  isRubricFinalized() {
+    return this.rubricSession?.isFinalized() ?? false;
+  }
+
   getRubricDiscrepancies() {
     if (!this.rubricSession) return [];
     return copyJsonInput(this.rubricSession.rubric.discrepancies, 'rubric discrepancies');
@@ -834,7 +838,7 @@ export class SimRunner {
   }
 
   recordRubricAction(action, meta = {}, tSec = this.a?.timeSec ?? this.simTime) {
-    if (!this.rubricSession) return null;
+    if (!this.rubricSession || this.isRubricFinalized()) return null;
     return this.rubricSession.recordAction({
       tSec,
       action,
@@ -844,7 +848,9 @@ export class SimRunner {
   }
 
   sampleRubricTraceAfterStep() {
-    if (!this.rubricSession || this.core.tickCount % 50 !== 0) return null;
+    if (!this.rubricSession || this.isRubricFinalized() || this.core.tickCount % 50 !== 0) {
+      return null;
+    }
     const t = this.core.tickCount / 50;
     return this.rubricSession.recordTrace(this.compactRubricSnapshot(t));
   }

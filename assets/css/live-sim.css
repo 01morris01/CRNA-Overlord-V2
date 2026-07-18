@@ -569,4 +569,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .live-sim-view button:active { transform: none; }
+  .live-rubric-items { scroll-behavior: auto; }
 }

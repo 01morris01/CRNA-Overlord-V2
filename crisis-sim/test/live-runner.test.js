@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import emergenceRubric from '../../data/rubrics/carson-newman-anesthesia-emergence.json';
 import rsiRubric from '../../data/rubrics/carson-newman-rsi-induction.json';
+import emergenceScenario from '../sim/scenarios/emergence_residual_block_001.json';
 import { SimRunner, VentMode } from '../ui/simRunner.js';
 
 function advance(runner, seconds) {
@@ -10,6 +11,27 @@ function advance(runner, seconds) {
 }
 
 describe('live SimRunner integration', () => {
+  it('seals finalized rubric evidence against later stepping and action projection', () => {
+    const runner = new SimRunner();
+    runner.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });
+    for (const item of runner.getRubricStatus().items) {
+      if (item.scoringSource === 'INSTRUCTOR_OBSERVED') {
+        runner.setInstructorScore({ itemId: item.id, points: 2 });
+      }
+    }
+    expect(runner.finalizeRubric()).toMatchObject({ ok: true, finalized: true });
+    const sealed = runner.getRubricStatus();
+    const sealedTrace = JSON.stringify(sealed.trace);
+    const sealedLedger = JSON.stringify(sealed.actionLedger);
+
+    expect(() => runner.stepFor(1)).not.toThrow();
+    expect(() => runner.giveBolus('Propofol', 140, 'post-finalization probe')).not.toThrow();
+    expect(() => runner.setInstructorNmbTarget({ targetTofRatio: 0.7 })).not.toThrow();
+    expect(runner.getRubricStatus()).toBe(sealed);
+    expect(JSON.stringify(sealed.trace)).toBe(sealedTrace);
+    expect(JSON.stringify(sealed.actionLedger)).toBe(sealedLedger);
+  });
+
   it('attaches a rubric session with a compact initial trace at exact t=0', () => {
     const runner = new SimRunner();
 

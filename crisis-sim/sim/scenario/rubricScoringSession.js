@@ -161,6 +161,10 @@ export class RubricScoringSession {
     if (this._finalResult !== null) throw new Error('Rubric scoring session is finalized');
   }
 
+  isFinalized() {
+    return this._finalResult !== null;
+  }
+
   _requireState(itemId) {
     const state = this._states.get(itemId);
     if (!state) throw new RangeError(`Unknown rubric item: ${itemId}`);

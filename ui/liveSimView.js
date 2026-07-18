@@ -231,17 +231,26 @@ export function applyInstructorNmbTarget(liveRunner, value) {
   return liveRunner.setInstructorNmbTarget({ targetTofRatio });
 }
 
-export function finalizeRubricDebrief(liveRunner) {
+export function finalizeRubricDebrief(liveRunner, { pauseOnSuccess = false } = {}) {
   const finalized = liveRunner.finalizeRubric();
   if (!finalized.ok) return finalized;
+  if (pauseOnSuccess) liveRunner.pause();
   return { ok: true, finalized, debrief: liveRunner.buildDebrief() };
 }
 
-export function focusPendingRubricItem(documentRoot, itemId) {
+function systemPrefersReducedMotion() {
+  return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true;
+}
+
+export function focusPendingRubricItem(documentRoot, itemId, {
+  prefersReducedMotion = systemPrefersReducedMotion(),
+} = {}) {
   if (!itemId) return null;
   const row = documentRoot?.getElementById?.(`live-rubric-item-${itemId}`) ?? null;
   if (!row) return null;
-  row.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+  row.scrollIntoView?.({
+    block: 'center', behavior: prefersReducedMotion ? 'auto' : 'smooth',
+  });
   const score = row.querySelector?.('[data-rubric-points]') ?? null;
   (score ?? row).focus?.();
   return row;
@@ -253,7 +262,7 @@ export function runRubricFinalizationAction({
   onPending = () => {},
   onFinalized = () => {},
 } = {}) {
-  const result = finalizeRubricDebrief(liveRunner);
+  const result = finalizeRubricDebrief(liveRunner, { pauseOnSuccess: true });
   if (!result.ok) {
     focusPendingRubricItem(documentRoot, result.pendingItemIds?.[0]);
     onPending(result);
@@ -261,6 +270,33 @@ export function runRubricFinalizationAction({
   }
   onFinalized(result);
   return result;
+}
+
+const FINALIZED_CONSOLE_ALLOWED_CONTROL_IDS = new Set([
+  'live-close',
+  'live-open-display',
+  'live-rubric-print',
+  'live-export',
+  'live-rubric-scenario',
+  'live-rubric-load',
+  'live-reset',
+]);
+
+export function setRubricConsoleReadOnly(rootElement, readOnly) {
+  const controls = rootElement?.querySelectorAll?.('button, input, select, textarea') ?? [];
+  for (const control of controls) {
+    if (FINALIZED_CONSOLE_ALLOWED_CONTROL_IDS.has(control.id)) continue;
+    if (readOnly) {
+      if (!Object.hasOwn(control.dataset, 'rubricLockPriorDisabled')) {
+        control.dataset.rubricLockPriorDisabled = control.disabled ? 'true' : 'false';
+      }
+      control.disabled = true;
+    } else if (Object.hasOwn(control.dataset, 'rubricLockPriorDisabled')) {
+      control.disabled = control.dataset.rubricLockPriorDisabled === 'true';
+      delete control.dataset.rubricLockPriorDisabled;
+    }
+  }
+  if (rootElement?.dataset) rootElement.dataset.rubricReadOnly = String(readOnly);
 }
 
 export function bindRubricActionControls({
@@ -628,6 +664,64 @@ function renderVolatileSelection(agent) {
   }
 }
 
+const MACHINE_DRAFT_FIELDS = Object.freeze({
+  mode: 'ventMode',
+  setTidalVolume: 'ventSetTV',
+  setRespiratoryRate: 'ventSetRR',
+  setPeep: 'ventSetPeep',
+  setPressureAbovePeep: 'ventSetPressure',
+  setPressureSupport: 'ventSetPressureSupport',
+  setFiO2: 'ventSetFiO2',
+  o2FlowLPerMin: 'o2Flow',
+  airFlowLPerMin: 'airFlow',
+  n2oFlowLPerMin: 'n2oFlow',
+});
+
+export function syncClinicalDraftControls({
+  documentRoot,
+  snapshot,
+  onVolatileAgent = () => {},
+} = {}) {
+  const draft = {
+    ventMode: snapshot?.ventMode,
+    ventSetTV: snapshot?.ventSetTV,
+    ventSetRR: snapshot?.ventSetRR,
+    ventSetPeep: snapshot?.ventSetPeep,
+    ventSetPressure: snapshot?.ventSetPressure,
+    ventSetPressureSupport: snapshot?.ventSetPressureSupport,
+    ventSetFiO2: snapshot?.ventSetFiO2,
+    o2Flow: snapshot?.o2Flow,
+    airFlow: snapshot?.airFlow,
+    n2oFlow: snapshot?.n2oFlow,
+    vaporizerAgent: snapshot?.vaporizerAgent,
+    vaporizer: snapshot?.vaporizer,
+  };
+  const form = documentRoot?.getElementById?.('live-machine-form');
+  for (const [controlName, snapshotKey] of Object.entries(MACHINE_DRAFT_FIELDS)) {
+    const value = snapshot?.[snapshotKey];
+    const control = form?.elements?.namedItem?.(controlName);
+    if (control && Number.isFinite(value)) control.value = String(value);
+  }
+  const volatileDial = documentRoot?.getElementById?.('live-volatile-dial');
+  if (volatileDial && Number.isFinite(snapshot?.vaporizer)) {
+    volatileDial.value = String(snapshot.vaporizer);
+  }
+  if (typeof snapshot?.vaporizerAgent === 'string') {
+    onVolatileAgent(snapshot.vaporizerAgent);
+  }
+  return Object.freeze(draft);
+}
+
+function syncCaseSetupControls(snapshot) {
+  const draft = syncClinicalDraftControls({
+    documentRoot: document,
+    snapshot,
+    onVolatileAgent: renderVolatileSelection,
+  });
+  volatileSelectionDirty = false;
+  return draft;
+}
+
 function renderInstructorNmb(snapshot) {
   const nmb = formatInstructorNmb(snapshot);
   setText('live-nmb-target-ratio', nmb.targetRatio);
@@ -727,6 +821,7 @@ function renderRubricResult(result) {
     if (finalizationStatus) finalizationStatus.textContent = 'Finalization unavailable until a rubric scenario is loaded.';
     if (finalizeButton) finalizeButton.disabled = true;
     if (printButton) printButton.disabled = true;
+    setRubricConsoleReadOnly(view, false);
     return;
   }
 
@@ -765,9 +860,10 @@ function renderRubricResult(result) {
     }
   }
   clearRubricDraftsOnNextRender = false;
+  setRubricConsoleReadOnly(view, display.finalized);
   if (finalizationStatus) {
     finalizationStatus.textContent = display.finalized
-      ? `Debrief finalized · ${display.outcome} · ${display.score} (${display.percentage}).`
+      ? `FINALIZED · READ ONLY · ${display.outcome} · ${display.score} (${display.percentage}).`
       : display.pendingMessage;
   }
   if (finalizeButton) finalizeButton.disabled = display.finalized;
@@ -894,6 +990,7 @@ function ensureRunner() {
   runner.onEvent = renderEventLog;
   runner.emit();
   fillPatientForm(runner.config);
+  syncCaseSetupControls(runner.snapshot());
   renderEventLog();
   return runner;
 }
@@ -957,7 +1054,9 @@ function applyPatient(event) {
     latestRubricDebrief = null;
     latestRubricPresentationKey = null;
     clearRubricDraftsOnNextRender = true;
-    ensureRunner().applyConfig(config);
+    const liveRunner = ensureRunner();
+    liveRunner.applyConfig(config);
+    syncCaseSetupControls(liveRunner.snapshot());
     updateDosePreviews(config.weightKg);
     updateRegionalLidocainePreview(config.weightKg);
     setStatus('Patient applied; runner reset.', 'success');
@@ -1010,6 +1109,7 @@ async function loadSelectedRubricScenario() {
     latestRubricDebrief = null;
     clearRubricDraftsOnNextRender = true;
     fillPatientForm(liveRunner.config);
+    syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();
     liveRunner.emit();
     const selected = RUBRIC_SCENARIOS.find(({ id }) => id === selectedId);
@@ -1043,7 +1143,7 @@ function finalizeLiveRubric() {
         latestRubricResult = null;
         latestRubricPresentationKey = null;
         liveRunner.emit();
-        setStatus(`Rubric finalized · ${result.finalized.outcome}.`, 'success');
+        setStatus(`FINALIZED · READ ONLY · ${result.finalized.outcome}.`, 'success');
       },
     });
   } catch (error) {
@@ -1182,10 +1282,12 @@ function bindControls() {
     latestRubricDebrief = null;
     latestRubricPresentationKey = null;
     clearRubricDraftsOnNextRender = true;
-    liveRunner.reset();
+    const resetSnapshot = liveRunner.reset();
     liveRunner.logEvent('Case', 'Simulation reset', { action: 'reset' });
     fillPatientForm(liveRunner.config);
+    syncCaseSetupControls(resetSnapshot);
     renderEventLog();
+    liveRunner.emit();
     setStatus('Simulation reset.', 'success');
   });
   document.getElementById('live-speed')?.addEventListener('change', (event) => {
