@@ -186,7 +186,30 @@ function makeMultiProjectionDefinition({ required = true } = {}) {
   return normalizeCaseExperience(definition);
 }
 
-function makeMultiPlanSessionState(agents) {
+function makePendingRuleResults(definition) {
+  return [
+    ...definition.assessment.scoringRules,
+    ...definition.planRequirements.rules,
+  ].map((rule) => ({
+    id: rule.id,
+    label: rule.label,
+    critical: rule.critical,
+    source: rule.source,
+    status: 'pending',
+    points: null,
+    evidence: structuredClone(rule.evidence),
+    updatedAtSec: null,
+  }));
+}
+
+function makeProjectionSessionState(definition, overrides = {}) {
+  return makeCaseSessionState({
+    ruleResults: makePendingRuleResults(definition),
+    ...overrides,
+  });
+}
+
+function makeMultiPlanSessionState(definition, agents) {
   const submission = {
     selections: { disposition: 'proceed', agents },
     rationale: 'Multi-select projection',
@@ -197,6 +220,7 @@ function makeMultiPlanSessionState(agents) {
   return makeCaseSessionState({
     stage: 'live_simulation',
     sequence: 1,
+    ruleResults: makePendingRuleResults(definition),
     planSubmission: structuredClone(submission),
     planSubmissionHistory: [structuredClone(submission)],
     timeline: [{
@@ -248,12 +272,39 @@ function makePopulatedSessionState(overrides = {}) {
       source: 'ENGINE_OBSERVABLE',
       status: 'performed',
       points: 2,
-      evidence: {
-        type: 'assessment_action',
-        actionId: 'ask_npo',
-        privateMarker: SENTINELS.ruleResultEvidence,
-      },
+      evidence: { type: 'assessment_action', actionId: 'ask_npo' },
       updatedAtSec: 2,
+    }, {
+      id: 'assess_airway_rule',
+      label: 'Assesses airway history',
+      critical: true,
+      source: 'ENGINE_OBSERVABLE',
+      status: 'pending',
+      points: null,
+      evidence: { type: 'assessment_action', actionId: 'assess_airway' },
+      updatedAtSec: null,
+    }, {
+      id: 'blocked_follow_up_rule',
+      label: 'Performs the follow-up',
+      critical: false,
+      source: 'ENGINE_OBSERVABLE',
+      status: 'pending',
+      points: null,
+      evidence: { type: 'assessment_action', actionId: 'blocked_follow_up' },
+      updatedAtSec: null,
+    }, {
+      id: 'plan_proceed',
+      label: SENTINELS.planRule,
+      critical: true,
+      source: 'ENGINE_OBSERVABLE',
+      status: 'pending',
+      points: null,
+      evidence: {
+        type: 'plan_equals',
+        fieldId: 'disposition',
+        value: SENTINELS.planEvidence,
+      },
+      updatedAtSec: null,
     }],
     instructorObservations: [{
       considerationId: 'consider_npo',
@@ -333,7 +384,7 @@ describe('learner case projection', () => {
     const definition = makeProjectionDefinition();
     const beforeCompletion = projectLearnerCase({
       definition,
-      sessionState: makeCaseSessionState({ stage: 'interview' }),
+      sessionState: makeProjectionSessionState(definition, { stage: 'interview' }),
     });
 
     expect(beforeCompletion.actions).toEqual([{
@@ -584,7 +635,7 @@ describe('instructor case projection', () => {
 describe('case projection validation and determinism', () => {
   test('accepts and defensively projects canonical multi-select plan values', () => {
     const definition = makeMultiProjectionDefinition();
-    const sessionState = makeMultiPlanSessionState(['propofol', 'ketamine']);
+    const sessionState = makeMultiPlanSessionState(definition, ['propofol', 'ketamine']);
 
     const learner = projectLearnerCase({ definition, sessionState });
     const instructor = projectInstructorCase({ definition, sessionState });
@@ -606,14 +657,14 @@ describe('case projection validation and determinism', () => {
     ['empty required multi value', [], /agents|required|empty/i],
   ])('rejects %s', (_label, agents, pattern) => {
     const definition = makeMultiProjectionDefinition();
-    const sessionState = makeMultiPlanSessionState(agents);
+    const sessionState = makeMultiPlanSessionState(definition, agents);
 
     expect(() => projectInstructorCase({ definition, sessionState })).toThrow(pattern);
   });
 
   test('rejects an array for a single field and allows empty multi only when optional', () => {
     const requiredDefinition = makeMultiProjectionDefinition();
-    const invalidSingle = makeMultiPlanSessionState(['propofol']);
+    const invalidSingle = makeMultiPlanSessionState(requiredDefinition, ['propofol']);
     invalidSingle.planSubmission.selections.disposition = ['proceed'];
     expect(() => projectInstructorCase({
       definition: requiredDefinition,
@@ -621,7 +672,7 @@ describe('case projection validation and determinism', () => {
     })).toThrow(/disposition|single|option/i);
 
     const optionalDefinition = makeMultiProjectionDefinition({ required: false });
-    const optionalEmpty = makeMultiPlanSessionState([]);
+    const optionalEmpty = makeMultiPlanSessionState(optionalDefinition, []);
     expect(() => projectInstructorCase({
       definition: optionalDefinition,
       sessionState: optionalEmpty,
@@ -659,6 +710,137 @@ describe('case projection validation and determinism', () => {
     flowState.currentPhaseId = 'missing_phase';
     expect(() => projectLearnerCase({ definition, sessionState, flowState }))
       .toThrow(/flowState.*currentPhaseId.*unknown|unknown.*phase.*missing_phase/i);
+  });
+
+  test.each([
+    [
+      'completed action without an assessment record',
+      (state) => {
+        state.assessmentRecords = [];
+        state.discoveredFindingIds = [];
+        state.timeline = [];
+      },
+      /completedActionIds.*assessmentRecords|completed action.*record/i,
+    ],
+    [
+      'assessment record without a completed action',
+      (state) => { state.completedActionIds = []; },
+      /assessmentRecords.*completedActionIds|completedActionIds.*assessmentRecords/i,
+    ],
+    [
+      'duplicate assessment action record',
+      (state) => {
+        state.assessmentRecords.push(structuredClone(state.assessmentRecords[0]));
+        state.timeline.push(structuredClone(state.timeline[0]));
+      },
+      /assessmentRecords.*duplicate.*action/i,
+    ],
+    [
+      'completed action with an unmet prerequisite',
+      (state) => {
+        state.completedActionIds = ['assess_airway'];
+        state.assessmentRecords = [{
+          actionId: 'assess_airway',
+          tSec: 2,
+          sequence: 1,
+          stage: 'interview',
+          critical: true,
+          scoringRuleId: 'assess_airway_rule',
+          revealedFindingIds: ['concealed_airway_finding'],
+        }];
+        state.discoveredFindingIds = ['concealed_airway_finding'];
+        state.timeline = [{
+          kind: 'assessment_action',
+          actionId: 'assess_airway',
+          tSec: 2,
+          sequence: 1,
+          stage: 'interview',
+          revealedFindingIds: ['concealed_airway_finding'],
+        }];
+      },
+      /prerequisite.*ask_npo|ask_npo.*prerequisite/i,
+    ],
+    [
+      'assessment reveal not declared by the action',
+      (state) => {
+        state.assessmentRecords[0].revealedFindingIds = ['concealed_airway_finding'];
+        state.discoveredFindingIds = ['concealed_airway_finding'];
+        state.timeline[0].revealedFindingIds = ['concealed_airway_finding'];
+      },
+      /revealedFindingIds.*declared|reveal.*action/i,
+    ],
+    [
+      'discovered finding without assessment evidence',
+      (state) => { state.discoveredFindingIds.push('concealed_airway_finding'); },
+      /discoveredFindingIds.*assessment.*reveal|discovered.*evidence/i,
+    ],
+    [
+      'assessment reveal omitted from discovered findings',
+      (state) => { state.discoveredFindingIds = []; },
+      /discoveredFindingIds.*assessment.*reveal|discovered.*evidence/i,
+    ],
+    [
+      'assessment action missing from canonical timeline',
+      (state) => { state.timeline = []; },
+      /assessmentRecords.*timeline|timeline.*assessment action/i,
+    ],
+    [
+      'assessment action mismatched in canonical timeline',
+      (state) => { state.timeline[0].stage = 'focused_exam'; },
+      /assessmentRecords.*timeline|timeline.*match/i,
+    ],
+  ])('rejects forged %s evidence', (_label, mutate, pattern) => {
+    const definition = makeProjectionDefinition();
+    const sessionState = makePopulatedSessionState();
+    mutate(sessionState);
+
+    expect(() => projectLearnerCase({ definition, sessionState })).toThrow(pattern);
+  });
+
+  test('accepts same rule ID in assessment and plan namespaces in definition order', () => {
+    const rawDefinition = makeCaseExperience();
+    rawDefinition.planRequirements.rules[0].id = 'discover_npo';
+    const definition = normalizeCaseExperience(rawDefinition);
+    const expectedRules = [
+      ...definition.assessment.scoringRules,
+      ...definition.planRequirements.rules,
+    ];
+    const ruleResults = expectedRules.map((rule) => ({
+      id: rule.id,
+      label: rule.label,
+      critical: rule.critical,
+      source: rule.source,
+      status: 'pending',
+      points: null,
+      evidence: structuredClone(rule.evidence),
+      updatedAtSec: null,
+    }));
+
+    const projection = projectInstructorCase({
+      definition,
+      sessionState: makeCaseSessionState({ ruleResults }),
+    });
+
+    expect(projection.ruleResults.map(({ id }) => id))
+      .toEqual(['discover_npo', 'discover_npo']);
+    expect(projection.ruleResults.map(({ evidence }) => evidence))
+      .toEqual(expectedRules.map(({ evidence }) => evidence));
+  });
+
+  test.each([
+    ['missing result', (results) => { results.pop(); }],
+    ['reordered results', (results) => { results.reverse(); }],
+    ['mismatched label', (results) => { results[0].label = 'forged label'; }],
+    ['mismatched criticality', (results) => { results[0].critical = false; }],
+    ['mismatched source', (results) => { results[0].source = 'FORGED_SOURCE'; }],
+    ['mismatched evidence', (results) => { results[0].evidence.actionId = 'assess_airway'; }],
+  ])('rejects %s against concatenated definition rule order', (_label, mutate) => {
+    const definition = makeProjectionDefinition();
+    const sessionState = makePopulatedSessionState();
+    mutate(sessionState.ruleResults);
+
+    expect(() => projectInstructorCase({ definition, sessionState }))
+      .toThrow(/ruleResults.*definition order|ruleResults.*match.*rule|exactly.*rule/i);
   });
 
   test.each([
@@ -719,9 +901,9 @@ describe('case projection validation and determinism', () => {
       /ruleResults.*unknown.*rule|missing_rule/i,
     ],
     [
-      'duplicate rule result',
+      'extra rule result',
       (state) => { state.ruleResults.push(structuredClone(state.ruleResults[0])); },
-      /ruleResults.*duplicate/i,
+      /ruleResults.*definition order|exactly.*rule|ruleResults.*length/i,
     ],
     [
       'unknown instructor observation',
@@ -841,9 +1023,13 @@ describe('case projection validation and determinism', () => {
 
   test('requires normalized definitions, plain state, nullable plain flow, and ID arrays', () => {
     const definition = makeProjectionDefinition();
-    const sessionState = makeCaseSessionState();
+    const sessionState = makeProjectionSessionState(definition);
+    const rawDefinition = makeCaseExperience();
 
-    expect(() => projectLearnerCase({ definition: makeCaseExperience(), sessionState }))
+    expect(() => projectLearnerCase({
+      definition: rawDefinition,
+      sessionState: makeProjectionSessionState(rawDefinition),
+    }))
       .not.toThrow();
     expect(() => projectLearnerCase({ definition: null, sessionState }))
       .toThrow(/validated.*definition|definition.*validated/i);

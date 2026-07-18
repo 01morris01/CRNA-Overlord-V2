@@ -183,10 +183,10 @@ function createDefinitionReferences(definition) {
     actions: new Map(definition.assessment.actions.map((entry) => [entry.id, entry])),
     findings: new Map(definition.assessment.findings.map((entry) => [entry.id, entry])),
     fields: new Map(definition.planRequirements.fields.map((entry) => [entry.id, entry])),
-    rules: new Set([
-      ...definition.assessment.scoringRules.map(({ id }) => id),
-      ...definition.planRequirements.rules.map(({ id }) => id),
-    ]),
+    rules: [
+      ...definition.assessment.scoringRules,
+      ...definition.planRequirements.rules,
+    ],
     considerations: new Map(
       definition.instructorGuide.considerations.map((entry) => [entry.id, entry]),
     ),
@@ -289,20 +289,47 @@ function validatePlanSubmission(submission, label, references) {
   requireRevision(submission.revision, `${label}.revision`);
 }
 
+function equalJsonSafe(left, right) {
+  if (Object.is(left, right)) return true;
+  if (left === null || right === null || typeof left !== 'object' || typeof right !== 'object') {
+    return false;
+  }
+  if (Array.isArray(left) || Array.isArray(right)) {
+    return Array.isArray(left)
+      && Array.isArray(right)
+      && left.length === right.length
+      && left.every((entry, index) => equalJsonSafe(entry, right[index]));
+  }
+  const leftKeys = Object.keys(left);
+  const rightKeys = Object.keys(right);
+  return leftKeys.length === rightKeys.length
+    && leftKeys.every((key) => Object.hasOwn(right, key)
+      && equalJsonSafe(left[key], right[key]));
+}
+
 function validateRuleResults(results, references) {
-  const seen = new Set();
+  if (results.length !== references.rules.length) {
+    throw new TypeError(
+      `sessionState.ruleResults must contain exactly ${references.rules.length} results in definition order`,
+    );
+  }
   results.forEach((result, index) => {
     const label = `sessionState.ruleResults[${index}]`;
     requireExactKeys(result, RULE_RESULT_KEYS, label);
     requireNonemptyString(result.id, `${label}.id`);
-    if (!references.rules.has(result.id)) {
-      throw new TypeError(`${label}.id references unknown rule ${result.id}`);
-    }
-    if (seen.has(result.id)) throw new TypeError(`sessionState.ruleResults contains duplicate id ${result.id}`);
-    seen.add(result.id);
     requireNonemptyString(result.label, `${label}.label`);
     if (typeof result.critical !== 'boolean') throw new TypeError(`${label}.critical must be a boolean`);
     requireNonemptyString(result.source, `${label}.source`);
+    const expectedRule = references.rules[index];
+    if (result.id !== expectedRule.id
+      || result.label !== expectedRule.label
+      || result.critical !== expectedRule.critical
+      || result.source !== expectedRule.source
+      || !equalJsonSafe(result.evidence, expectedRule.evidence)) {
+      throw new TypeError(
+        `${label} with id ${result.id} must match definition rule ${expectedRule.id} in definition order`,
+      );
+    }
     if (!['pending', 'performed', 'not_performed'].includes(result.status)) {
       throw new TypeError(`${label}.status is unsupported`);
     }
@@ -392,6 +419,101 @@ function validateTimeline(records, references) {
   });
 }
 
+function equalStringArrays(left, right) {
+  return left.length === right.length && left.every((entry, index) => entry === right[index]);
+}
+
+function validateAssessmentEvidence(sessionState, references) {
+  const recordsByActionId = new Map();
+  const recordSequences = new Set();
+  for (const record of sessionState.assessmentRecords) {
+    if (recordsByActionId.has(record.actionId)) {
+      throw new TypeError(
+        `sessionState.assessmentRecords contains duplicate action record ${record.actionId}`,
+      );
+    }
+    if (recordSequences.has(record.sequence)) {
+      throw new TypeError(
+        `sessionState.assessmentRecords contains duplicate sequence ${record.sequence}`,
+      );
+    }
+    recordsByActionId.set(record.actionId, record);
+    recordSequences.add(record.sequence);
+  }
+
+  const completedActionIds = new Set(sessionState.completedActionIds);
+  if (completedActionIds.size !== recordsByActionId.size
+    || [...completedActionIds].some((id) => !recordsByActionId.has(id))) {
+    throw new TypeError(
+      'sessionState.completedActionIds must equal the unique action IDs in assessmentRecords',
+    );
+  }
+
+  const orderedRecords = [...sessionState.assessmentRecords]
+    .sort((left, right) => left.sequence - right.sequence || left.tSec - right.tSec);
+  const accumulatedFindingIds = new Set();
+  for (const record of orderedRecords) {
+    const action = references.actions.get(record.actionId);
+    for (const prerequisiteId of action.prerequisites) {
+      const prerequisite = recordsByActionId.get(prerequisiteId);
+      if (!prerequisite) {
+        throw new TypeError(
+          `assessment action ${action.id} is missing completed prerequisite ${prerequisiteId}`,
+        );
+      }
+      if (prerequisite.sequence >= record.sequence || prerequisite.tSec > record.tSec) {
+        throw new TypeError(
+          `assessment action ${action.id} must occur after prerequisite ${prerequisiteId}`,
+        );
+      }
+    }
+
+    const declaredRevealIds = new Set(action.reveals);
+    const expectedNewFindingIds = [...references.findings.values()]
+      .filter((finding) => declaredRevealIds.has(finding.id)
+        && !accumulatedFindingIds.has(finding.id))
+      .map(({ id }) => id);
+    if (!equalStringArrays(record.revealedFindingIds, expectedNewFindingIds)) {
+      throw new TypeError(
+        `assessment record ${action.id}.revealedFindingIds must equal newly declared action reveals in definition order`,
+      );
+    }
+    for (const findingId of record.revealedFindingIds) accumulatedFindingIds.add(findingId);
+  }
+
+  const expectedDiscoveredFindingIds = [...references.findings.values()]
+    .filter(({ id }) => accumulatedFindingIds.has(id))
+    .map(({ id }) => id);
+  if (!equalStringArrays(sessionState.discoveredFindingIds, expectedDiscoveredFindingIds)) {
+    throw new TypeError(
+      'sessionState.discoveredFindingIds must equal assessment record reveals in definition order',
+    );
+  }
+
+  const assessmentTimeline = sessionState.timeline.filter(
+    ({ kind }) => kind === 'assessment_action',
+  );
+  if (assessmentTimeline.length !== sessionState.assessmentRecords.length) {
+    throw new TypeError(
+      'sessionState.assessmentRecords must have one matching assessment action timeline record each',
+    );
+  }
+  for (const record of sessionState.assessmentRecords) {
+    const matchingTimelineRecords = assessmentTimeline.filter((entry) => (
+      entry.actionId === record.actionId
+      && entry.tSec === record.tSec
+      && entry.sequence === record.sequence
+      && entry.stage === record.stage
+      && equalStringArrays(entry.revealedFindingIds, record.revealedFindingIds)
+    ));
+    if (matchingTimelineRecords.length !== 1) {
+      throw new TypeError(
+        `sessionState.assessmentRecords action ${record.actionId} must match its canonical timeline record`,
+      );
+    }
+  }
+}
+
 function validateRevisions(records) {
   records.forEach((record, index) => {
     const label = `sessionState.revisions[${index}]`;
@@ -477,6 +599,7 @@ function copyAndValidateSessionState(sessionState, references) {
   );
   validateFeedbackHistory(copied.feedbackRevealHistory, references);
   validateTimeline(copied.timeline, references);
+  validateAssessmentEvidence(copied, references);
   validateRevisions(copied.revisions);
   return copied;
 }
