@@ -1,23 +1,88 @@
-import { copyCaseData } from './caseContract.js';
-
-const REQUIRED_DEFINITION_SECTIONS = Object.freeze([
-  'learnerChart',
-  'assessment',
-  'planRequirements',
-  'surgery',
-  'eventFlow',
-  'instructorGuide',
-  'debrief',
-]);
+import {
+  CASE_STAGES,
+  copyCaseData,
+  normalizeCaseExperience,
+} from './caseContract.js';
 
 const SESSION_ARRAY_KEYS = Object.freeze([
   'completedActionIds',
   'assessmentRecords',
   'discoveredFindingIds',
+  'findingsSubmissionHistory',
+  'planSubmissionHistory',
   'ruleResults',
   'instructorObservations',
+  'instructorObservationHistory',
   'feedbackRevealIds',
+  'feedbackRevealHistory',
+  'timeline',
   'revisions',
+]);
+
+const OBSERVATION_STATUSES = Object.freeze([
+  'observed',
+  'missed',
+  'not_yet_evaluable',
+]);
+
+const ASSESSMENT_RECORD_KEYS = Object.freeze([
+  'actionId',
+  'tSec',
+  'sequence',
+  'stage',
+  'critical',
+  'scoringRuleId',
+  'revealedFindingIds',
+]);
+
+const FINDINGS_SUBMISSION_KEYS = Object.freeze([
+  'findingIds',
+  'notes',
+  'tSec',
+  'sequence',
+  'revision',
+]);
+
+const PLAN_SUBMISSION_KEYS = Object.freeze([
+  'selections',
+  'rationale',
+  'tSec',
+  'sequence',
+  'revision',
+]);
+
+const RULE_RESULT_KEYS = Object.freeze([
+  'id',
+  'label',
+  'critical',
+  'source',
+  'status',
+  'points',
+  'evidence',
+  'updatedAtSec',
+]);
+
+const OBSERVATION_KEYS = Object.freeze([
+  'considerationId',
+  'status',
+  'note',
+  'tSec',
+  'sequence',
+  'revision',
+]);
+
+const FEEDBACK_HISTORY_KEYS = Object.freeze([
+  'considerationId',
+  'reveal',
+  'tSec',
+  'sequence',
+  'revision',
+]);
+
+const REVISION_KEYS = Object.freeze([
+  'revision',
+  'tSec',
+  'sequence',
 ]);
 
 const LEARNER_RECORD_KEYS = Object.freeze([
@@ -45,6 +110,50 @@ function requireOrdinaryArray(value, label) {
   }
 }
 
+function requirePlainObject(value, label) {
+  if (!isPlainObject(value)) throw new TypeError(`${label} must be a plain object`);
+}
+
+function requireNonemptyString(value, label) {
+  if (typeof value !== 'string' || value.trim().length === 0) {
+    throw new TypeError(`${label} must be a nonempty string`);
+  }
+}
+
+function requireExactKeys(value, expectedKeys, label) {
+  requirePlainObject(value, label);
+  const actual = Object.keys(value).sort();
+  const expected = [...expectedKeys].sort();
+  if (actual.length !== expected.length
+    || actual.some((key, index) => key !== expected[index])) {
+    throw new TypeError(`${label} must have exact shape {${expectedKeys.join(',')}}`);
+  }
+}
+
+function requireTimestamp(value, label, { nullable = false } = {}) {
+  if (nullable && value === null) return;
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
+    throw new TypeError(`${label} must be a finite nonnegative fixed-step timestamp`);
+  }
+  const ticks = value * 50;
+  const nearestTick = Math.round(ticks);
+  if (!Number.isSafeInteger(nearestTick) || Math.abs(ticks - nearestTick) > 1e-9) {
+    throw new RangeError(`${label} must align to safe-integer 0.02-second fixed-step ticks`);
+  }
+}
+
+function requireSequence(value, label) {
+  if (!Number.isSafeInteger(value) || value < 0) {
+    throw new TypeError(`${label} must be a nonnegative safe integer`);
+  }
+}
+
+function requireRevision(value, label) {
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new TypeError(`${label} must be a positive safe integer`);
+  }
+}
+
 function requireStringIds(value, label) {
   requireOrdinaryArray(value, label);
   const seen = new Set();
@@ -57,35 +166,228 @@ function requireStringIds(value, label) {
   });
 }
 
-function copyNormalizedDefinition(definition) {
-  if (!isPlainObject(definition)
-    || !Object.isFrozen(definition)
-    || definition.version !== 1
-    || REQUIRED_DEFINITION_SECTIONS.some(
-      (key) => !isPlainObject(definition[key]) || !Object.isFrozen(definition[key]),
-    )) {
-    throw new TypeError('definition must be a normalized frozen case definition object');
-  }
-
+function normalizeProjectionDefinition(definition) {
   try {
-    return copyCaseData(definition, 'normalized case definition');
+    const normalized = normalizeCaseExperience(definition);
+    if (normalized === null) {
+      throw new TypeError('definition must contain a complete case experience');
+    }
+    return normalized;
   } catch (error) {
-    throw new TypeError(`definition must be a normalized case definition: ${error.message}`);
+    throw new TypeError(`definition must be a validated case definition: ${error.message}`);
   }
 }
 
-function copyAndValidateSessionState(sessionState) {
-  if (!isPlainObject(sessionState)) {
-    throw new TypeError('sessionState must be a plain object');
+function createDefinitionReferences(definition) {
+  return {
+    actions: new Map(definition.assessment.actions.map((entry) => [entry.id, entry])),
+    findings: new Map(definition.assessment.findings.map((entry) => [entry.id, entry])),
+    fields: new Map(definition.planRequirements.fields.map((entry) => [entry.id, entry])),
+    rules: new Set([
+      ...definition.assessment.scoringRules.map(({ id }) => id),
+      ...definition.planRequirements.rules.map(({ id }) => id),
+    ]),
+    considerations: new Map(
+      definition.instructorGuide.considerations.map((entry) => [entry.id, entry]),
+    ),
+    phases: new Map(definition.eventFlow.phases.map((entry) => [entry.id, entry])),
+    events: new Map(definition.eventFlow.events.map((entry) => [entry.id, entry])),
+    branches: new Map(definition.eventFlow.branches.map((entry) => [entry.id, entry])),
+  };
+}
+
+function requireKnownIds(value, label, references, kind) {
+  requireStringIds(value, label);
+  for (const id of value) {
+    if (!references.has(id)) throw new TypeError(`${label} contains unknown ${kind} id ${id}`);
   }
+}
+
+function validateRecordPosition(record, label) {
+  requireTimestamp(record.tSec, `${label}.tSec`);
+  requireSequence(record.sequence, `${label}.sequence`);
+}
+
+function validateAssessmentRecords(records, references) {
+  records.forEach((record, index) => {
+    const label = `sessionState.assessmentRecords[${index}]`;
+    requireExactKeys(record, ASSESSMENT_RECORD_KEYS, label);
+    const action = references.actions.get(record.actionId);
+    if (!action) throw new TypeError(`${label}.actionId references unknown action ${record.actionId}`);
+    if (!CASE_STAGES.includes(record.stage) || record.stage !== action.stage) {
+      throw new TypeError(`${label}.stage must match the referenced action stage`);
+    }
+    if (typeof record.critical !== 'boolean' || record.critical !== action.critical) {
+      throw new TypeError(`${label}.critical must match the referenced action`);
+    }
+    if (record.scoringRuleId !== action.scoringRuleId) {
+      throw new TypeError(`${label}.scoringRuleId must match the referenced action`);
+    }
+    requireKnownIds(
+      record.revealedFindingIds,
+      `${label}.revealedFindingIds`,
+      references.findings,
+      'finding',
+    );
+    validateRecordPosition(record, label);
+  });
+}
+
+function validateFindingsSubmission(submission, label, references) {
+  requireExactKeys(submission, FINDINGS_SUBMISSION_KEYS, label);
+  requireKnownIds(submission.findingIds, `${label}.findingIds`, references.findings, 'finding');
+  if (typeof submission.notes !== 'string') throw new TypeError(`${label}.notes must be a string`);
+  validateRecordPosition(submission, label);
+  requireRevision(submission.revision, `${label}.revision`);
+}
+
+function validatePlanSelections(selections, label, references) {
+  requirePlainObject(selections, label);
+  for (const fieldId of Object.keys(selections)) {
+    const field = references.fields.get(fieldId);
+    if (!field) throw new TypeError(`${label} contains unknown plan field ${fieldId}`);
+    if (!field.options.includes(selections[fieldId])) {
+      throw new RangeError(`${label}.${fieldId} must use a valid option`);
+    }
+  }
+  for (const field of references.fields.values()) {
+    if (field.required && !Object.hasOwn(selections, field.id)) {
+      throw new TypeError(`${label} is missing required plan field ${field.id}`);
+    }
+  }
+}
+
+function validatePlanSubmission(submission, label, references) {
+  requireExactKeys(submission, PLAN_SUBMISSION_KEYS, label);
+  validatePlanSelections(submission.selections, `${label}.selections`, references);
+  if (typeof submission.rationale !== 'string') {
+    throw new TypeError(`${label}.rationale must be a string`);
+  }
+  validateRecordPosition(submission, label);
+  requireRevision(submission.revision, `${label}.revision`);
+}
+
+function validateRuleResults(results, references) {
+  const seen = new Set();
+  results.forEach((result, index) => {
+    const label = `sessionState.ruleResults[${index}]`;
+    requireExactKeys(result, RULE_RESULT_KEYS, label);
+    requireNonemptyString(result.id, `${label}.id`);
+    if (!references.rules.has(result.id)) {
+      throw new TypeError(`${label}.id references unknown rule ${result.id}`);
+    }
+    if (seen.has(result.id)) throw new TypeError(`sessionState.ruleResults contains duplicate id ${result.id}`);
+    seen.add(result.id);
+    requireNonemptyString(result.label, `${label}.label`);
+    if (typeof result.critical !== 'boolean') throw new TypeError(`${label}.critical must be a boolean`);
+    requireNonemptyString(result.source, `${label}.source`);
+    if (!['pending', 'performed', 'not_performed'].includes(result.status)) {
+      throw new TypeError(`${label}.status is unsupported`);
+    }
+    if (result.points !== null
+      && (typeof result.points !== 'number' || !Number.isFinite(result.points))) {
+      throw new TypeError(`${label}.points must be null or a finite number`);
+    }
+    requirePlainObject(result.evidence, `${label}.evidence`);
+    requireTimestamp(result.updatedAtSec, `${label}.updatedAtSec`, { nullable: true });
+  });
+}
+
+function validateObservation(record, label, references) {
+  requireExactKeys(record, OBSERVATION_KEYS, label);
+  if (!references.considerations.has(record.considerationId)) {
+    throw new TypeError(`${label}.considerationId references unknown consideration ${record.considerationId}`);
+  }
+  if (!OBSERVATION_STATUSES.includes(record.status)) {
+    throw new TypeError(`${label}.status is unsupported`);
+  }
+  if (typeof record.note !== 'string') throw new TypeError(`${label}.note must be a string`);
+  validateRecordPosition(record, label);
+  requireRevision(record.revision, `${label}.revision`);
+}
+
+function validateObservations(records, label, references, { unique = false } = {}) {
+  const seen = new Set();
+  records.forEach((record, index) => {
+    validateObservation(record, `${label}[${index}]`, references);
+    if (unique && seen.has(record.considerationId)) {
+      throw new TypeError(`${label} contains duplicate consideration id ${record.considerationId}`);
+    }
+    seen.add(record.considerationId);
+  });
+}
+
+function validateFeedbackHistory(records, references) {
+  records.forEach((record, index) => {
+    const label = `sessionState.feedbackRevealHistory[${index}]`;
+    requireExactKeys(record, FEEDBACK_HISTORY_KEYS, label);
+    if (!references.considerations.has(record.considerationId)) {
+      throw new TypeError(`${label}.considerationId references unknown consideration ${record.considerationId}`);
+    }
+    if (typeof record.reveal !== 'boolean') throw new TypeError(`${label}.reveal must be a boolean`);
+    validateRecordPosition(record, label);
+    requireRevision(record.revision, `${label}.revision`);
+  });
+}
+
+function validateOptionalRecordReferences(record, label, references) {
+  for (const [key, map, kind] of [
+    ['actionId', references.actions, 'action'],
+    ['findingId', references.findings, 'finding'],
+    ['considerationId', references.considerations, 'consideration'],
+    ['phaseId', references.phases, 'phase'],
+    ['fromPhaseId', references.phases, 'phase'],
+    ['toPhaseId', references.phases, 'phase'],
+    ['eventId', references.events, 'event'],
+    ['branchId', references.branches, 'branch'],
+  ]) {
+    if (Object.hasOwn(record, key) && !map.has(record[key])) {
+      throw new TypeError(`${label}.${key} references unknown ${kind} ${record[key]}`);
+    }
+  }
+  for (const key of ['findingIds', 'revealedFindingIds']) {
+    if (Object.hasOwn(record, key)) {
+      requireKnownIds(record[key], `${label}.${key}`, references.findings, 'finding');
+    }
+  }
+  for (const key of ['stage', 'fromStage', 'toStage']) {
+    if (Object.hasOwn(record, key) && !CASE_STAGES.includes(record[key])) {
+      throw new TypeError(`${label}.${key} is an unsupported case stage`);
+    }
+  }
+  if (Object.hasOwn(record, 'selections')) {
+    validatePlanSelections(record.selections, `${label}.selections`, references);
+  }
+}
+
+function validateTimeline(records, references) {
+  records.forEach((record, index) => {
+    const label = `sessionState.timeline[${index}]`;
+    requirePlainObject(record, label);
+    requireNonemptyString(record.kind, `${label}.kind`);
+    validateRecordPosition(record, label);
+    validateOptionalRecordReferences(record, label, references);
+  });
+}
+
+function validateRevisions(records) {
+  records.forEach((record, index) => {
+    const label = `sessionState.revisions[${index}]`;
+    requireExactKeys(record, REVISION_KEYS, label);
+    requireRevision(record.revision, `${label}.revision`);
+    validateRecordPosition(record, label);
+  });
+}
+
+function copyAndValidateSessionState(sessionState, references) {
+  if (!isPlainObject(sessionState)) throw new TypeError('sessionState must be a plain object');
 
   const copied = copyCaseData(sessionState, 'sessionState');
-  if (typeof copied.stage !== 'string' || copied.stage.trim().length === 0) {
-    throw new TypeError('sessionState.stage must be a nonempty string');
+  if (!CASE_STAGES.includes(copied.stage)) {
+    throw new TypeError(`sessionState.stage is an unknown or unsupported case stage: ${copied.stage}`);
   }
-  if (!Number.isInteger(copied.sequence) || copied.sequence < 0) {
-    throw new TypeError('sessionState.sequence must be a nonnegative integer');
-  }
+  requireSequence(copied.sequence, 'sessionState.sequence');
+  requireTimestamp(copied.currentTimeSec, 'sessionState.currentTimeSec');
   if (typeof copied.active !== 'boolean') {
     throw new TypeError('sessionState.active must be a boolean');
   }
@@ -93,77 +395,127 @@ function copyAndValidateSessionState(sessionState) {
     throw new TypeError('sessionState.finalized must be a boolean');
   }
   if (copied.outcome !== null
-    && (typeof copied.outcome !== 'string' || copied.outcome.trim().length === 0)) {
-    throw new TypeError('sessionState.outcome must be null or a nonempty string');
+    && !['completed', 'appropriately_deferred'].includes(copied.outcome)) {
+    throw new TypeError('sessionState.outcome must be null, completed, or appropriately_deferred');
+  }
+  requireTimestamp(copied.finalizedAtSec, 'sessionState.finalizedAtSec', { nullable: true });
+  if (copied.finalized && copied.finalizedAtSec === null) {
+    throw new TypeError('sessionState.finalizedAtSec is required when finalized');
   }
   for (const key of SESSION_ARRAY_KEYS) {
     requireOrdinaryArray(copied[key], `sessionState.${key}`);
   }
-  requireStringIds(copied.completedActionIds, 'sessionState.completedActionIds');
-  requireStringIds(copied.discoveredFindingIds, 'sessionState.discoveredFindingIds');
+  requireKnownIds(
+    copied.completedActionIds,
+    'sessionState.completedActionIds',
+    references.actions,
+    'completed action',
+  );
+  requireKnownIds(
+    copied.discoveredFindingIds,
+    'sessionState.discoveredFindingIds',
+    references.findings,
+    'discovered finding',
+  );
+  validateAssessmentRecords(copied.assessmentRecords, references);
 
-  for (const key of ['findingsSubmission', 'planSubmission']) {
-    if (copied[key] !== null && !isPlainObject(copied[key])) {
-      throw new TypeError(`sessionState.${key} must be null or a plain object`);
-    }
+  if (copied.findingsSubmission !== null) {
+    validateFindingsSubmission(copied.findingsSubmission, 'sessionState.findingsSubmission', references);
   }
-
-  copied.assessmentRecords.forEach((record, index) => {
-    if (!isPlainObject(record)) {
-      throw new TypeError(`sessionState.assessmentRecords[${index}] must be a plain object`);
-    }
+  copied.findingsSubmissionHistory.forEach((submission, index) => {
+    validateFindingsSubmission(
+      submission,
+      `sessionState.findingsSubmissionHistory[${index}]`,
+      references,
+    );
   });
+  if (copied.planSubmission !== null) {
+    validatePlanSubmission(copied.planSubmission, 'sessionState.planSubmission', references);
+  }
+  copied.planSubmissionHistory.forEach((submission, index) => {
+    validatePlanSubmission(submission, `sessionState.planSubmissionHistory[${index}]`, references);
+  });
+  validateRuleResults(copied.ruleResults, references);
+  validateObservations(
+    copied.instructorObservations,
+    'sessionState.instructorObservations',
+    references,
+    { unique: true },
+  );
+  validateObservations(
+    copied.instructorObservationHistory,
+    'sessionState.instructorObservationHistory',
+    references,
+  );
+  requireKnownIds(
+    copied.feedbackRevealIds,
+    'sessionState.feedbackRevealIds',
+    references.considerations,
+    'consideration',
+  );
+  validateFeedbackHistory(copied.feedbackRevealHistory, references);
+  validateTimeline(copied.timeline, references);
+  validateRevisions(copied.revisions);
   return copied;
 }
 
-function copyAndValidateFlowState(flowState) {
+function copyAndValidateFlowState(flowState, references) {
   if (flowState === null) return null;
   if (!isPlainObject(flowState)) {
     throw new TypeError('flowState must be null or a plain object');
   }
 
   const copied = copyCaseData(flowState, 'flowState');
-  for (const key of ['currentPhaseId', 'currentPhaseTitle']) {
-    if (Object.hasOwn(copied, key)
-      && (typeof copied[key] !== 'string' || copied[key].trim().length === 0)) {
-      throw new TypeError(`flowState.${key} must be a nonempty string`);
-    }
+  requireNonemptyString(copied.currentPhaseId, 'flowState.currentPhaseId');
+  const phase = references.phases.get(copied.currentPhaseId);
+  if (!phase) {
+    throw new TypeError(`flowState.currentPhaseId references unknown phase ${copied.currentPhaseId}`);
   }
-  if (Object.hasOwn(copied, 'paused') && typeof copied.paused !== 'boolean') {
+  if (typeof copied.paused !== 'boolean') {
     throw new TypeError('flowState.paused must be a boolean');
   }
-  for (const key of ['activeEventIds', 'availableBranchIds']) {
-    if (Object.hasOwn(copied, key)) requireStringIds(copied[key], `flowState.${key}`);
+  requireKnownIds(copied.activeEventIds, 'flowState.activeEventIds', references.events, 'event');
+  for (const eventId of copied.activeEventIds) {
+    if (references.events.get(eventId).phaseId !== phase.id) {
+      throw new TypeError(`flowState.activeEventIds event ${eventId} does not belong to current phase ${phase.id}`);
+    }
   }
-  for (const key of ['responseDeadlines', 'history']) {
-    if (Object.hasOwn(copied, key)) requireOrdinaryArray(copied[key], `flowState.${key}`);
+  requireKnownIds(
+    copied.availableBranchIds,
+    'flowState.availableBranchIds',
+    references.branches,
+    'branch',
+  );
+  for (const branchId of copied.availableBranchIds) {
+    if (references.branches.get(branchId).fromPhaseId !== phase.id) {
+      throw new TypeError(`flowState.availableBranchIds branch ${branchId} is not from current phase ${phase.id}`);
+    }
   }
+  requireOrdinaryArray(copied.responseDeadlines, 'flowState.responseDeadlines');
+  copied.responseDeadlines.forEach((deadline, index) => {
+    const label = `flowState.responseDeadlines[${index}]`;
+    requirePlainObject(deadline, label);
+    const event = references.events.get(deadline.eventId);
+    if (!event) throw new TypeError(`${label}.eventId references unknown event ${deadline.eventId}`);
+    if (event.phaseId !== phase.id) {
+      throw new TypeError(`${label}.eventId does not belong to current phase ${phase.id}`);
+    }
+  });
+  requireOrdinaryArray(copied.history, 'flowState.history');
+  copied.history.forEach((record, index) => {
+    const label = `flowState.history[${index}]`;
+    requirePlainObject(record, label);
+    validateOptionalRecordReferences(record, label, references);
+  });
+  copied.currentPhaseTitle = phase.title;
   return copied;
 }
 
-function validateKnownSessionIds(definition, sessionState) {
-  const actionIds = new Set(definition.assessment.actions.map(({ id }) => id));
-  for (const id of sessionState.completedActionIds) {
-    if (!actionIds.has(id)) {
-      throw new TypeError(`sessionState.completedActionIds contains unknown completed action id ${id}`);
-    }
-  }
-
-  const findingIds = new Set(definition.assessment.findings.map(({ id }) => id));
-  for (const id of sessionState.discoveredFindingIds) {
-    if (!findingIds.has(id)) {
-      throw new TypeError(
-        `sessionState.discoveredFindingIds contains unknown discovered finding id ${id}`,
-      );
-    }
-  }
-}
-
 function createProjectionInputs({ definition, sessionState, flowState }) {
-  const copiedDefinition = copyNormalizedDefinition(definition);
-  const copiedSessionState = copyAndValidateSessionState(sessionState);
-  const copiedFlowState = copyAndValidateFlowState(flowState);
-  validateKnownSessionIds(copiedDefinition, copiedSessionState);
+  const copiedDefinition = normalizeProjectionDefinition(definition);
+  const references = createDefinitionReferences(copiedDefinition);
+  const copiedSessionState = copyAndValidateSessionState(sessionState, references);
+  const copiedFlowState = copyAndValidateFlowState(flowState, references);
   return {
     definition: copiedDefinition,
     sessionState: copiedSessionState,
@@ -294,21 +646,30 @@ export function projectInstructorCase({ definition, sessionState, flowState = nu
     active: safeState.active,
     stage: safeState.stage,
     sequence: safeState.sequence,
+    currentTimeSec: safeState.currentTimeSec,
     finalized: safeState.finalized,
+    finalizedAtSec: safeState.finalizedAtSec,
     outcome: safeState.outcome,
     learnerChart: safeDefinition.learnerChart,
     assessment: safeDefinition.assessment,
     planRequirements: safeDefinition.planRequirements,
     surgery: safeDefinition.surgery,
+    eventFlow: safeDefinition.eventFlow,
     instructorGuide: safeDefinition.instructorGuide,
+    debrief: safeDefinition.debrief,
     completedActionIds: safeState.completedActionIds,
     assessmentRecords: safeState.assessmentRecords,
     discoveredFindingIds: safeState.discoveredFindingIds,
     findingsSubmission: safeState.findingsSubmission,
+    findingsSubmissionHistory: safeState.findingsSubmissionHistory,
     planSubmission: safeState.planSubmission,
+    planSubmissionHistory: safeState.planSubmissionHistory,
     ruleResults: safeState.ruleResults,
     instructorObservations: safeState.instructorObservations,
+    instructorObservationHistory: safeState.instructorObservationHistory,
     feedbackRevealIds: safeState.feedbackRevealIds,
+    feedbackRevealHistory: safeState.feedbackRevealHistory,
+    timeline: safeState.timeline,
     revisions: safeState.revisions,
     flowState: inputs.flowState,
     considerations: createCurrentConsiderations(safeDefinition, inputs.flowState),

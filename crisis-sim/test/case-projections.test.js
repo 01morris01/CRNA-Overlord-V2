@@ -38,6 +38,7 @@ const SENTINELS = Object.freeze({
   responseDeadline: 'RESPONSE_DEADLINE_SENTINEL',
   branch: 'AVAILABLE_BRANCH_SENTINEL',
   flowHistory: 'FLOW_HISTORY_SENTINEL',
+  callerPhaseTitle: 'CALLER_INJECTED_PHASE_GUIDANCE_SENTINEL',
   learnerFindingsNote: 'LEARNER_FINDINGS_NOTE_SENTINEL',
   learnerPlanRationale: 'LEARNER_PLAN_RATIONALE_SENTINEL',
 });
@@ -60,6 +61,13 @@ function expectOnlyPlainContainers(value, seen = new WeakSet()) {
     expect([Object.prototype, null]).toContain(Object.getPrototypeOf(value));
   }
   for (const nested of Object.values(value)) expectOnlyPlainContainers(nested, seen);
+}
+
+function freezeForTest(value, seen = new WeakSet()) {
+  if (value === null || typeof value !== 'object' || seen.has(value)) return value;
+  seen.add(value);
+  for (const nested of Object.values(value)) freezeForTest(nested, seen);
+  return Object.freeze(value);
 }
 
 function makeProjectionDefinition() {
@@ -128,6 +136,33 @@ function makeProjectionDefinition() {
     complicationType: 'projection_test',
     description: SENTINELS.eventEffect,
   };
+  definition.eventFlow.phases.push({
+    id: 'recovery',
+    title: 'Recovery',
+    enterWhen: { type: 'instructor' },
+    events: ['recovery_ready'],
+    completionWhen: { type: 'instructor_advance' },
+    allowedInstructorControls: ['advance'],
+  });
+  definition.eventFlow.events.push({
+    id: 'recovery_ready',
+    phaseId: 'recovery',
+    trigger: { type: 'phase_enter' },
+    repeatable: false,
+    responseWindowSec: 0,
+    expectedResponses: [],
+    unsafeResponses: [],
+    effect: null,
+    guidanceIds: [],
+    debriefIds: [],
+  });
+  definition.eventFlow.branches.push({
+    id: SENTINELS.branch,
+    label: 'Advance to recovery',
+    fromPhaseId: 'assessment',
+    toPhaseId: 'recovery',
+    instructorOnly: true,
+  });
   Object.assign(definition.instructorGuide.considerations[0], {
     consideration: SENTINELS.consideration,
     expectedResponse: SENTINELS.expectedResponse,
@@ -144,15 +179,16 @@ function makePopulatedSessionState(overrides = {}) {
   return makeCaseSessionState({
     stage: 'interview',
     sequence: 7,
+    currentTimeSec: 6,
     completedActionIds: ['ask_npo'],
     assessmentRecords: [{
       actionId: 'ask_npo',
       tSec: 2,
       sequence: 1,
+      stage: 'interview',
       critical: true,
       scoringRuleId: 'discover_npo',
-      points: SENTINELS.assessmentRecordScore,
-      instructorNote: SENTINELS.instructorNote,
+      revealedFindingIds: ['npo_ok'],
     }],
     discoveredFindingIds: ['npo_ok'],
     findingsSubmission: {
@@ -160,21 +196,28 @@ function makePopulatedSessionState(overrides = {}) {
       notes: SENTINELS.learnerFindingsNote,
       tSec: 3,
       sequence: 2,
-      points: 'FINDINGS_SUBMISSION_INTERNAL_POINTS_SENTINEL',
+      revision: 1,
     },
     planSubmission: {
       selections: { disposition: 'proceed' },
       rationale: SENTINELS.learnerPlanRationale,
       tSec: 4,
       sequence: 3,
-      instructorNote: SENTINELS.instructorNote,
+      revision: 1,
     },
     ruleResults: [{
-      ruleId: 'discover_npo',
-      passed: true,
-      evidence: SENTINELS.ruleResultEvidence,
-      points: SENTINELS.ruleResultPoints,
+      id: 'discover_npo',
+      label: SENTINELS.assessmentRule,
       critical: true,
+      source: 'ENGINE_OBSERVABLE',
+      status: 'performed',
+      points: 2,
+      evidence: {
+        type: 'assessment_action',
+        actionId: 'ask_npo',
+        privateMarker: SENTINELS.ruleResultEvidence,
+      },
+      updatedAtSec: 2,
     }],
     instructorObservations: [{
       considerationId: 'consider_npo',
@@ -182,11 +225,50 @@ function makePopulatedSessionState(overrides = {}) {
       note: SENTINELS.instructorNote,
       tSec: 5,
       sequence: 4,
+      revision: 1,
     }],
     feedbackRevealIds: ['consider_npo'],
-    revisions: [{ note: SENTINELS.revision, tSec: 6, sequence: 5 }],
-    finalized: true,
-    outcome: 'completed',
+    findingsSubmissionHistory: [{
+      findingIds: ['npo_ok'],
+      notes: SENTINELS.learnerFindingsNote,
+      tSec: 3,
+      sequence: 2,
+      revision: 1,
+    }],
+    planSubmissionHistory: [{
+      selections: { disposition: 'proceed' },
+      rationale: SENTINELS.learnerPlanRationale,
+      tSec: 4,
+      sequence: 3,
+      revision: 1,
+    }],
+    instructorObservationHistory: [{
+      considerationId: 'consider_npo',
+      status: 'observed',
+      note: SENTINELS.instructorNote,
+      tSec: 5,
+      sequence: 4,
+      revision: 1,
+    }],
+    feedbackRevealHistory: [{
+      considerationId: 'consider_npo',
+      reveal: true,
+      tSec: 5,
+      sequence: 5,
+      revision: 1,
+    }],
+    revisions: [{ revision: 1, tSec: 6, sequence: 6 }],
+    timeline: [{
+      kind: 'assessment_action',
+      actionId: 'ask_npo',
+      stage: 'interview',
+      revealedFindingIds: ['npo_ok'],
+      tSec: 2,
+      sequence: 1,
+    }],
+    finalized: false,
+    finalizedAtSec: null,
+    outcome: null,
     ...overrides,
   });
 }
@@ -194,7 +276,7 @@ function makePopulatedSessionState(overrides = {}) {
 function makeFlowState() {
   return {
     currentPhaseId: 'assessment',
-    currentPhaseTitle: 'Assessment',
+    currentPhaseTitle: SENTINELS.callerPhaseTitle,
     activeEventIds: ['assessment_ready'],
     responseDeadlines: [{
       eventId: 'assessment_ready',
@@ -202,7 +284,11 @@ function makeFlowState() {
     }],
     availableBranchIds: [SENTINELS.branch],
     paused: false,
-    history: [{ eventId: SENTINELS.flowHistory }],
+    history: [{
+      phaseId: 'assessment',
+      eventId: 'assessment_ready',
+      privateMarker: SENTINELS.flowHistory,
+    }],
   };
 }
 
@@ -258,8 +344,8 @@ describe('learner case projection', () => {
     expect(projection).toMatchObject({
       active: true,
       stage: 'interview',
-      finalized: true,
-      outcome: 'completed',
+      finalized: false,
+      outcome: null,
       learnerChart: definition.learnerChart,
       assessmentStages: definition.assessment.stages,
       findingsSubmission: {
@@ -318,6 +404,13 @@ describe('learner case projection', () => {
       'instructorObservations',
       'feedbackRevealIds',
       'revisions',
+      'findingsSubmissionHistory',
+      'planSubmissionHistory',
+      'instructorObservationHistory',
+      'feedbackRevealHistory',
+      'timeline',
+      'currentTimeSec',
+      'finalizedAtSec',
       'eventFlow',
       'debrief',
     ]) {
@@ -378,6 +471,7 @@ describe('learner case projection', () => {
       SENTINELS.responseDeadline,
       SENTINELS.branch,
       SENTINELS.flowHistory,
+      SENTINELS.callerPhaseTitle,
     ]) {
       expect(serialized).not.toContain(forbiddenValue);
     }
@@ -405,23 +499,35 @@ describe('instructor case projection', () => {
       active: sessionState.active,
       stage: sessionState.stage,
       sequence: sessionState.sequence,
+      currentTimeSec: sessionState.currentTimeSec,
       finalized: sessionState.finalized,
+      finalizedAtSec: sessionState.finalizedAtSec,
       outcome: sessionState.outcome,
       learnerChart: definition.learnerChart,
       assessment: definition.assessment,
       planRequirements: definition.planRequirements,
       surgery: definition.surgery,
+      eventFlow: definition.eventFlow,
       instructorGuide: definition.instructorGuide,
+      debrief: definition.debrief,
       completedActionIds: sessionState.completedActionIds,
       assessmentRecords: sessionState.assessmentRecords,
       discoveredFindingIds: sessionState.discoveredFindingIds,
       findingsSubmission: sessionState.findingsSubmission,
+      findingsSubmissionHistory: sessionState.findingsSubmissionHistory,
       planSubmission: sessionState.planSubmission,
+      planSubmissionHistory: sessionState.planSubmissionHistory,
       ruleResults: sessionState.ruleResults,
       instructorObservations: sessionState.instructorObservations,
+      instructorObservationHistory: sessionState.instructorObservationHistory,
       feedbackRevealIds: sessionState.feedbackRevealIds,
+      feedbackRevealHistory: sessionState.feedbackRevealHistory,
+      timeline: sessionState.timeline,
       revisions: sessionState.revisions,
-      flowState,
+      flowState: {
+        ...flowState,
+        currentPhaseTitle: 'Assessment',
+      },
       considerations: definition.instructorGuide.considerations,
     });
     expect(projection.assessment.actions).toEqual(definition.assessment.actions);
@@ -429,6 +535,9 @@ describe('instructor case projection', () => {
     expect(projection.assessment.scoringRules).toEqual(definition.assessment.scoringRules);
     expect(projection.planRequirements).toEqual(definition.planRequirements);
     expect(projection.surgery).toEqual(definition.surgery);
+    expect(projection.eventFlow.branches).toEqual(definition.eventFlow.branches);
+    expect(projection.debrief).toEqual(definition.debrief);
+    expect(JSON.stringify(projection.flowState)).not.toContain(SENTINELS.callerPhaseTitle);
     expect(projection.ruleResults).not.toBe(sessionState.ruleResults);
     expect(projection.flowState).not.toBe(flowState);
     expectOnlyPlainContainers(projection);
@@ -437,16 +546,225 @@ describe('instructor case projection', () => {
 });
 
 describe('case projection validation and determinism', () => {
+  test('revalidates frozen definitions and rejects nested answer-key forgery', () => {
+    const forged = makeCaseExperience();
+    forged.learnerChart.answerKey = 'FORGED_NESTED_ANSWER_KEY_SENTINEL';
+    freezeForTest(forged);
+
+    expect(() => projectLearnerCase({
+      definition: forged,
+      sessionState: makeCaseSessionState(),
+    })).toThrow(/reserved.*learner-chart|answerKey.*reserved/i);
+    expect(() => projectInstructorCase({
+      definition: forged,
+      sessionState: makeCaseSessionState(),
+    })).toThrow(/reserved.*learner-chart|answerKey.*reserved/i);
+  });
+
+  test('derives canonical phase titles and rejects an unknown current phase', () => {
+    const definition = makeProjectionDefinition();
+    const sessionState = makePopulatedSessionState();
+    const flowState = makeFlowState();
+
+    const learner = projectLearnerCase({ definition, sessionState, flowState });
+    const instructor = projectInstructorCase({ definition, sessionState, flowState });
+
+    expect(learner.flowState.currentPhaseTitle).toBe('Assessment');
+    expect(instructor.flowState.currentPhaseTitle).toBe('Assessment');
+    expect(JSON.stringify(learner)).not.toContain(SENTINELS.callerPhaseTitle);
+    expect(JSON.stringify(instructor.flowState)).not.toContain(SENTINELS.callerPhaseTitle);
+
+    flowState.currentPhaseId = 'missing_phase';
+    expect(() => projectLearnerCase({ definition, sessionState, flowState }))
+      .toThrow(/flowState.*currentPhaseId.*unknown|unknown.*phase.*missing_phase/i);
+  });
+
+  test.each([
+    ['unknown stage', (state) => { state.stage = 'forged_stage'; }, /stage.*supported|unknown.*stage/i],
+    [
+      'current time',
+      (state) => { state.currentTimeSec = -1; },
+      /currentTimeSec/i,
+    ],
+    [
+      'finalization time',
+      (state) => { state.finalizedAtSec = -1; },
+      /finalizedAtSec/i,
+    ],
+    [
+      'assessment record action',
+      (state) => { state.assessmentRecords[0].actionId = 'missing_action'; },
+      /assessmentRecords.*actionId.*unknown|unknown.*action/i,
+    ],
+    [
+      'assessment record exact shape',
+      (state) => { state.assessmentRecords[0].unexpected = true; },
+      /assessmentRecords.*exact shape|unexpected/i,
+    ],
+    [
+      'assessment record timestamp',
+      (state) => { state.assessmentRecords[0].tSec = -1; },
+      /assessmentRecords.*tSec|timestamp/i,
+    ],
+    [
+      'assessment record sequence',
+      (state) => { state.assessmentRecords[0].sequence = 1.5; },
+      /assessmentRecords.*sequence/i,
+    ],
+    [
+      'findings submission unknown finding',
+      (state) => { state.findingsSubmission.findingIds = ['missing_finding']; },
+      /findingsSubmission.*unknown.*finding|missing_finding/i,
+    ],
+    [
+      'findings submission duplicate finding',
+      (state) => { state.findingsSubmission.findingIds = ['npo_ok', 'npo_ok']; },
+      /findingsSubmission.*duplicate/i,
+    ],
+    [
+      'plan submission unknown field',
+      (state) => { state.planSubmission.selections.unknown_field = 'x'; },
+      /planSubmission.*unknown.*field|unknown_field/i,
+    ],
+    [
+      'plan submission invalid option',
+      (state) => { state.planSubmission.selections.disposition = 'invalid'; },
+      /planSubmission.*option|disposition.*option/i,
+    ],
+    [
+      'unknown rule result',
+      (state) => { state.ruleResults[0].id = 'missing_rule'; },
+      /ruleResults.*unknown.*rule|missing_rule/i,
+    ],
+    [
+      'duplicate rule result',
+      (state) => { state.ruleResults.push(structuredClone(state.ruleResults[0])); },
+      /ruleResults.*duplicate/i,
+    ],
+    [
+      'unknown instructor observation',
+      (state) => { state.instructorObservations[0].considerationId = 'missing_consideration'; },
+      /instructorObservations.*unknown.*consideration|missing_consideration/i,
+    ],
+    [
+      'invalid instructor observation status',
+      (state) => { state.instructorObservations[0].status = 'partial'; },
+      /instructorObservations.*status/i,
+    ],
+    [
+      'unknown feedback reveal',
+      (state) => { state.feedbackRevealIds = ['missing_consideration']; },
+      /feedbackRevealIds.*unknown.*consideration|missing_consideration/i,
+    ],
+    [
+      'findings history record container',
+      (state) => { state.findingsSubmissionHistory = [null]; },
+      /findingsSubmissionHistory.*plain object/i,
+    ],
+    [
+      'findings history reference',
+      (state) => { state.findingsSubmissionHistory[0].findingIds = ['missing_finding']; },
+      /findingsSubmissionHistory.*unknown.*finding|missing_finding/i,
+    ],
+    [
+      'plan history reference',
+      (state) => { state.planSubmissionHistory[0].selections.disposition = 'invalid'; },
+      /planSubmissionHistory.*option|disposition.*option/i,
+    ],
+    [
+      'instructor observation history reference',
+      (state) => {
+        state.instructorObservationHistory[0].considerationId = 'missing_consideration';
+      },
+      /instructorObservationHistory.*unknown.*consideration|missing_consideration/i,
+    ],
+    [
+      'feedback history reference',
+      (state) => { state.feedbackRevealHistory[0].considerationId = 'missing_consideration'; },
+      /feedbackRevealHistory.*unknown.*consideration|missing_consideration/i,
+    ],
+    [
+      'revision record',
+      (state) => { state.revisions[0].sequence = -1; },
+      /revisions.*sequence/i,
+    ],
+    [
+      'timeline record container',
+      (state) => { state.timeline = [null]; },
+      /timeline.*plain object/i,
+    ],
+    [
+      'timeline reference',
+      (state) => { state.timeline[0].actionId = 'missing_action'; },
+      /timeline.*unknown.*action|missing_action/i,
+    ],
+  ])('rejects malformed or unresolved %s state', (_label, mutate, pattern) => {
+    const definition = makeProjectionDefinition();
+    const sessionState = makePopulatedSessionState();
+    mutate(sessionState);
+
+    expect(() => projectInstructorCase({ definition, sessionState })).toThrow(pattern);
+  });
+
+  test.each([
+    [
+      'unknown active event',
+      (flow) => { flow.activeEventIds = ['missing_event']; },
+      /activeEventIds.*unknown.*event|missing_event/i,
+    ],
+    [
+      'event outside the current phase',
+      (flow) => { flow.activeEventIds = ['recovery_ready']; },
+      /activeEventIds.*current phase|event.*belong.*phase/i,
+    ],
+    [
+      'branch outside the current phase',
+      (flow) => {
+        flow.currentPhaseId = 'recovery';
+        flow.activeEventIds = ['recovery_ready'];
+      },
+      /availableBranchIds.*current phase|branch.*from.*phase/i,
+    ],
+    [
+      'unknown response-deadline event',
+      (flow) => { flow.responseDeadlines[0].eventId = 'missing_event'; },
+      /responseDeadlines.*unknown.*event|missing_event/i,
+    ],
+    [
+      'unknown flow-history phase',
+      (flow) => { flow.history[0].phaseId = 'missing_phase'; },
+      /history.*unknown.*phase|missing_phase/i,
+    ],
+    [
+      'unknown flow-history event',
+      (flow) => { flow.history[0].eventId = 'missing_event'; },
+      /history.*unknown.*event|missing_event/i,
+    ],
+    [
+      'unknown flow-history branch',
+      (flow) => { flow.history[0].branchId = 'missing_branch'; },
+      /history.*unknown.*branch|missing_branch/i,
+    ],
+  ])('rejects malformed or unresolved %s flow state', (_label, mutate, pattern) => {
+    const definition = makeProjectionDefinition();
+    const flowState = makeFlowState();
+    mutate(flowState);
+
+    expect(() => projectInstructorCase({
+      definition,
+      sessionState: makePopulatedSessionState(),
+      flowState,
+    })).toThrow(pattern);
+  });
+
   test('requires normalized definitions, plain state, nullable plain flow, and ID arrays', () => {
     const definition = makeProjectionDefinition();
     const sessionState = makeCaseSessionState();
 
-    expect(() => projectLearnerCase({
-      definition: makeCaseExperience(),
-      sessionState,
-    })).toThrow(/normalized.*definition|definition.*normalized/i);
+    expect(() => projectLearnerCase({ definition: makeCaseExperience(), sessionState }))
+      .not.toThrow();
     expect(() => projectLearnerCase({ definition: null, sessionState }))
-      .toThrow(/normalized.*definition|definition.*normalized/i);
+      .toThrow(/validated.*definition|definition.*validated/i);
     expect(() => projectInstructorCase({ definition, sessionState: [] }))
       .toThrow(/sessionState.*plain object/i);
     expect(() => projectLearnerCase({ definition, sessionState, flowState: [] }))
@@ -459,6 +777,10 @@ describe('case projection validation and determinism', () => {
       definition,
       sessionState: makeCaseSessionState({ discoveredFindingIds: null }),
     })).toThrow(/discoveredFindingIds.*array/i);
+    const missingTimeline = makeCaseSessionState();
+    delete missingTimeline.timeline;
+    expect(() => projectInstructorCase({ definition, sessionState: missingTimeline }))
+      .toThrow(/sessionState\.timeline.*array/i);
   });
 
   test('rejects unknown completed and discovered IDs rather than silently ignoring them', () => {
