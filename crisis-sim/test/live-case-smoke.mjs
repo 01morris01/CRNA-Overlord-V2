@@ -144,7 +144,7 @@ assert.equal(extubated.ventMode, VentMode.Manual);
 assert.ok(extubated.spontaneousEffort > 0.1);
 line('PASS extubation', extubated);
 
-for (const item of runner.rubricSession.rubric.items) {
+for (const item of runner.getRubricStatus().items) {
   if (item.scoringSource === 'INSTRUCTOR_OBSERVED') {
     runner.setInstructorScore({ itemId: item.id, points: 2, note: 'Smoke evidence' });
   }

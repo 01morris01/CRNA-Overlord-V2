@@ -97,7 +97,9 @@ function advanceUntil(runner, predicate, maxSeconds, label) {
 }
 
 function scoreInstructorRows(runner, points = 2) {
-  for (const item of runner.rubricSession.rubric.items) {
+  const status = runner.getRubricStatus();
+  assert.ok(status, 'rubric status must be available through the public runner API');
+  for (const item of status.items) {
     if (item.scoringSource === 'INSTRUCTOR_OBSERVED') {
       runner.setInstructorScore({
         itemId: item.id,
@@ -354,18 +356,26 @@ const passRuleCases = [
     points: [...Array(5).fill(2), ...Array(4).fill(0), ...Array(16).fill(2)],
   }),
   passRuleCase({
-    id: 'all-critical-performed-above-minimum', itemCount: 10, criticalIndexes: [0, 1],
-    points: Array(10).fill(2),
+    id: 'all-critical-performed-at-86', itemCount: 50, criticalIndexes: [0, 1, 2, 3, 4],
+    points: [...Array(43).fill(2), ...Array(7).fill(0)],
   }),
 ];
 assert.deepEqual(passRuleCases.map(({ percentage, outcome }) => ({ percentage, outcome })), [
   { percentage: 90, outcome: 'NOT PASS' },
   { percentage: 84, outcome: 'NOT PASS' },
-  { percentage: 100, outcome: 'PASS' },
+  { percentage: 86, outcome: 'PASS' },
 ]);
 assert.deepEqual(passRuleCases[0].criticalItemsOmitted, ['critical-partial-at-90-1']);
 assert.deepEqual(passRuleCases[1].criticalItemsOmitted, []);
 assert.deepEqual(passRuleCases[2].criticalItemsOmitted, []);
+assert.deepEqual(passRuleCases[2], {
+  id: 'all-critical-performed-at-86',
+  rawPoints: 86,
+  maxPoints: 100,
+  percentage: 86,
+  criticalItemsOmitted: [],
+  outcome: 'PASS',
+});
 printSection('PASS_RULE_CASES', passRuleCases);
 
 const standardPerformedRunner = standardWorkflow();
@@ -420,6 +430,17 @@ matrixSources.rsi_no_ppv_before_first_laryngoscopy = [rsiPerformed, rsiPpvViolat
 matrixSources.rsi_failed_attempt_ppv_with_cricoid = [rescuePerformed, improperFailure];
 matrixSources.rsi_appropriate_failed_attempt_intervention = [rescuePerformed, improperFailure];
 matrixSources.rsi_under_three_attempts = [rsiPerformed, improperFailure];
+const resultDebriefs = new Map([
+  [standardPerformed, standardPerformedRunner.buildDebrief()],
+  [standardOmitted, standardOmittedRunner.buildDebrief()],
+  [emergencePerformed, emergencePerformedRunner.buildDebrief()],
+  [emergenceOmitted, emergenceOmittedRunner.buildDebrief()],
+  [rsiPerformed, rsiPerformedRunner.buildDebrief()],
+  [rsiOmitted, rsiOmittedRunner.buildDebrief()],
+  [rsiPpvViolation, rsiPpvViolationRunner.buildDebrief()],
+  [rescuePerformed, rescuePerformedRun.runner.buildDebrief()],
+  [improperFailure, improperFailureRunner.buildDebrief()],
+]);
 
 const productionRuleIds = RUBRICS.flatMap(({ items }) => items)
   .filter(({ scoringSource }) => scoringSource === 'ENGINE_OBSERVABLE')
@@ -435,6 +456,16 @@ const engineRuleMatrix = RULE_IDS.map((ruleId) => {
   assert.equal(performedItem.status, 'performed', `${ruleId} performed status`);
   assert.equal(omittedItem.points, 0, `${ruleId} omitted case`);
   assert.equal(omittedItem.status, 'not_performed', `${ruleId} omitted status`);
+  const performedCitationAudit = auditEvidenceCitations(
+    performedItem.evidence,
+    resultDebriefs.get(performedResult),
+    `${ruleId} performed matrix evidence`,
+  );
+  const omittedCitationAudit = auditEvidenceCitations(
+    omittedItem.evidence,
+    resultDebriefs.get(omittedResult),
+    `${ruleId} omitted matrix evidence`,
+  );
   return {
     ruleId,
     performed_points: performedItem.points,
@@ -442,6 +473,10 @@ const engineRuleMatrix = RULE_IDS.map((ruleId) => {
     evidence_summary: {
       performed: performedItem.evidence,
       omitted: omittedItem.evidence,
+    },
+    citation_audit: {
+      performed: performedCitationAudit,
+      omitted: omittedCitationAudit,
     },
   };
 });
@@ -456,7 +491,7 @@ for (const ruleId of [
 printSection('ENGINE_RULE_MATRIX', engineRuleMatrix);
 
 function flagsFor(runner, itemId) {
-  return runner.rubricSession.getLiveResult().violations.filter((flag) => flag.itemId === itemId);
+  return runner.getRubricStatus().violations.filter((flag) => flag.itemId === itemId);
 }
 
 function assertLiteralFlag(runner, rubric, itemId) {
@@ -499,6 +534,135 @@ const violationPairs = [
 });
 printSection('VIOLATION_PAIRS', violationPairs);
 
+function assertCitationObject(value, label) {
+  assert.ok(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`);
+}
+
+function assertCitedFields(citedFields, sourceFields, label) {
+  assertCitationObject(citedFields, label);
+  assertCitationObject(sourceFields, `${label} source`);
+  for (const [field, citedValue] of Object.entries(citedFields)) {
+    assert.ok(Object.hasOwn(sourceFields, field), `${label}.${field} missing from source`);
+    assert.deepEqual(sourceFields[field], citedValue, `${label}.${field} differs from source`);
+  }
+}
+
+function auditEvidenceCitations(evidence, debrief, label) {
+  assertCitationObject(evidence, label);
+  assert.ok(Array.isArray(evidence.actions), `${label}.actions must be an array`);
+  assert.ok(Array.isArray(evidence.trace), `${label}.trace must be an array`);
+  const actionIndexes = new Set();
+  const traceIndexes = new Set();
+
+  evidence.actions.forEach((citation, citationIndex) => {
+    const citationLabel = `${label}.actions[${citationIndex}]`;
+    assertCitationObject(citation, citationLabel);
+    assert.ok(Number.isSafeInteger(citation.index), `${citationLabel}.index must be safe integer`);
+    const source = debrief.actionTimeline[citation.index];
+    assert.ok(source, `${citationLabel}.index must resolve to actionTimeline`);
+    assert.equal(source.tSec, citation.tSec, `${citationLabel}.tSec differs from source`);
+    assert.equal(source.action, citation.action, `${citationLabel}.action differs from source`);
+    if (Object.hasOwn(citation, 'meta')) {
+      assertCitedFields(citation.meta, source.meta, `${citationLabel}.meta`);
+    }
+    if (Object.hasOwn(citation, 'snapshot')) {
+      assertCitedFields(citation.snapshot, source.snapshot, `${citationLabel}.snapshot`);
+    }
+    actionIndexes.add(citation.index);
+  });
+
+  evidence.trace.forEach((citation, citationIndex) => {
+    const citationLabel = `${label}.trace[${citationIndex}]`;
+    assertCitationObject(citation, citationLabel);
+    assert.ok(Number.isSafeInteger(citation.index), `${citationLabel}.index must be safe integer`);
+    const source = debrief.physiologicTrace[citation.index];
+    assert.ok(source, `${citationLabel}.index must resolve to physiologicTrace`);
+    assert.equal(source.t, citation.tSec, `${citationLabel}.tSec differs from source`);
+    assertCitedFields(citation.fields, source, `${citationLabel}.fields`);
+    traceIndexes.add(citation.index);
+  });
+
+  let summaryIndexCount = 0;
+  for (const [segmentIndex, segment] of (evidence.segments ?? []).entries()) {
+    const segmentLabel = `${label}.segments[${segmentIndex}]`;
+    if (segment.qualifyingPpvIndex !== null && segment.qualifyingPpvIndex !== undefined) {
+      assert.ok(actionIndexes.has(segment.qualifyingPpvIndex),
+        `${segmentLabel}.qualifyingPpvIndex must resolve through an action citation`);
+      assert.equal(
+        debrief.actionTimeline[segment.qualifyingPpvIndex].action,
+        'mask_ppv_started',
+        `${segmentLabel}.qualifyingPpvIndex must identify mask PPV`,
+      );
+      summaryIndexCount += 1;
+    }
+    for (const prefix of ['preRescue', 'nadir', 'postRescue']) {
+      const index = segment[`${prefix}TraceIndex`];
+      if (index === null || index === undefined) continue;
+      assert.ok(traceIndexes.has(index),
+        `${segmentLabel}.${prefix}TraceIndex must resolve through a trace citation`);
+      const source = debrief.physiologicTrace[index];
+      assert.equal(source.t, segment[`${prefix}T`], `${segmentLabel}.${prefix}T differs`);
+      assert.equal(
+        source.spo2,
+        segment[`${prefix}SpO2`],
+        `${segmentLabel}.${prefix}SpO2 differs`,
+      );
+      summaryIndexCount += 1;
+    }
+  }
+
+  return {
+    actionCitationCount: evidence.actions.length,
+    traceCitationCount: evidence.trace.length,
+    summaryIndexCount,
+  };
+}
+
+function auditObservedConsequence(item, debrief) {
+  const consequence = item.observedConsequence;
+  if (consequence === null) return 0;
+  assertCitationObject(consequence, `${item.id}.observedConsequence`);
+  const sourceAction = debrief.actionTimeline[consequence.trigger.ledgerIndex];
+  assert.ok(sourceAction, `${item.id} consequence trigger must resolve to actionTimeline`);
+  assert.equal(sourceAction.action, consequence.trigger.action);
+  assert.equal(sourceAction.tSec, consequence.trigger.tSec);
+  assert.equal(consequence.observationWindow.startSec, sourceAction.tSec);
+  assert.equal(
+    consequence.observationWindow.endSec,
+    sourceAction.tSec + consequence.observationWindow.windowSec,
+  );
+  if (consequence.extrema.spo2Nadir) {
+    const nadir = consequence.extrema.spo2Nadir;
+    const sourceSample = debrief.physiologicTrace.find(({ t }) => t === nadir.tSec);
+    assert.ok(sourceSample, `${item.id} consequence nadir must resolve to physiologicTrace`);
+    assert.equal(sourceSample.spo2, nadir.value);
+    assert.equal(nadir.elapsedSec, nadir.tSec - sourceAction.tSec);
+  }
+  return 1;
+}
+
+const violationCitationSources = [
+  ['Standard 7', 'standard-7', standardOmittedRunner],
+  ['RSI 11', 'rsi-11', rsiPpvViolationRunner],
+  ['Emergence 3', 'emergence-3', emergenceOmittedRunner],
+  ['Emergence 4', 'emergence-4', emergenceOmittedRunner],
+  ['Standard 5', 'standard-5', standardPreoxViolation],
+  ['RSI 7', 'rsi-7', rsiPreoxViolation],
+  ['RSI 42', 'rsi-42', improperFailureRunner],
+];
+const violationCitationAudits = violationCitationSources.map(([pair, itemId, sourceRunner]) => {
+  if (!sourceRunner.isRubricFinalized()) finalizeRunner(sourceRunner);
+  const debrief = sourceRunner.buildDebrief();
+  assert.ok(debrief.actionTimeline.length > 0 && debrief.physiologicTrace.length > 0);
+  const flags = debrief.violationFlags.filter((flag) => flag.itemId === itemId);
+  assert.ok(flags.length > 0, `${pair} must be present in the finalized debrief`);
+  const audits = flags.map((flag, index) => auditEvidenceCitations(
+    flag.evidence, debrief, `${pair} finalized violation[${index}]`,
+  ));
+  return { pair, itemId, flagCount: flags.length, audits };
+});
+printSection('VIOLATION_CITATION_AUDIT', violationCitationAudits);
+
 function validateDebrief(debrief, finalized, rubric, scenario) {
   assert.deepEqual(validateSimulationResult(debrief), { ok: true, missing: [], invalid: [] });
   assert.equal(finalized.pendingInstructorCount, 0);
@@ -519,15 +683,79 @@ function validateDebrief(debrief, finalized, rubric, scenario) {
     text: item.text,
     scoringSource: item.scoringSource,
   })));
-  assert.ok(Array.isArray(debrief.actionTimeline));
-  assert.ok(Array.isArray(debrief.physiologicTrace) && debrief.physiologicTrace.length > 0);
+  assert.ok(Array.isArray(debrief.actionTimeline) && debrief.actionTimeline.length > 0);
+  let previousActionTime = -Infinity;
+  for (const [index, action] of debrief.actionTimeline.entries()) {
+    assertCitationObject(action, `actionTimeline[${index}]`);
+    assert.ok(Number.isFinite(action.tSec) && action.tSec >= previousActionTime);
+    assert.ok(typeof action.action === 'string' && action.action.length > 0);
+    assert.ok(['learner', 'instructor', 'administrative'].includes(action.source));
+    assertCitationObject(action.meta, `actionTimeline[${index}].meta`);
+    assert.ok(action.snapshot === null || typeof action.snapshot === 'object');
+    previousActionTime = action.tSec;
+  }
+  assert.ok(debrief.actionTimeline.some(({ source }) => source === 'learner'));
+  assert.ok(debrief.actionTimeline.some(({ source }) => source === 'instructor'));
+  assert.ok(Array.isArray(debrief.physiologicTrace) && debrief.physiologicTrace.length > 1);
+  let previousTraceTime = -1;
+  for (const [index, sample] of debrief.physiologicTrace.entries()) {
+    assertCitationObject(sample, `physiologicTrace[${index}]`);
+    assert.ok(Number.isSafeInteger(sample.t) && sample.t > previousTraceTime);
+    for (const field of ['spo2', 'tofRatio', 'fio2']) {
+      assert.ok(Number.isFinite(sample[field]), `physiologicTrace[${index}].${field} must be finite`);
+    }
+    assert.ok(typeof sample.airwayDevice === 'string' && sample.airwayDevice.length > 0);
+    previousTraceTime = sample.t;
+  }
   assert.ok(Array.isArray(debrief.violationFlags));
-  assert.ok(Array.isArray(debrief.administrativeActions));
+  assert.ok(Array.isArray(debrief.administrativeActions)
+    && debrief.administrativeActions.length > 0);
   assert.ok(debrief.administrativeActions.every(({ source }) => (
     source === 'instructor' || source === 'administrative'
   )));
+  for (const administrativeAction of debrief.administrativeActions) {
+    assert.ok(debrief.actionTimeline.some((action) => (
+      action.tSec === administrativeAction.tSec
+      && action.action === administrativeAction.action
+      && action.source === administrativeAction.source
+      && stableStringify(action.meta) === stableStringify(administrativeAction.meta)
+    )), 'administrative action must resolve to the complete action timeline');
+  }
   assert.deepEqual(debrief.rubricResult.denominatorWarnings, rubric.discrepancies);
   assertFiniteJson(debrief);
+  const citationAudit = {
+    engineActionCitations: 0,
+    engineTraceCitations: 0,
+    violationActionCitations: 0,
+    violationTraceCitations: 0,
+    summaryIndexes: 0,
+    observedConsequences: 0,
+  };
+  for (const item of debrief.rubricResult.items) {
+    if (item.scoringSource === 'ENGINE_OBSERVABLE') {
+      const audited = auditEvidenceCitations(item.evidence, debrief, `item ${item.id} evidence`);
+      citationAudit.engineActionCitations += audited.actionCitationCount;
+      citationAudit.engineTraceCitations += audited.traceCitationCount;
+      citationAudit.summaryIndexes += audited.summaryIndexCount;
+    }
+    citationAudit.observedConsequences += auditObservedConsequence(item, debrief);
+  }
+  for (const [index, violation] of debrief.violationFlags.entries()) {
+    assert.ok(debrief.actionTimeline.some(({ tSec, action }) => (
+      tSec === violation.tSec && action === violation.triggerAction
+    )), `violationFlags[${index}] trigger must resolve to actionTimeline`);
+    const audited = auditEvidenceCitations(
+      violation.evidence, debrief, `violationFlags[${index}] evidence`,
+    );
+    citationAudit.violationActionCitations += audited.actionCitationCount;
+    citationAudit.violationTraceCitations += audited.traceCitationCount;
+    citationAudit.summaryIndexes += audited.summaryIndexCount;
+  }
+  assert.ok(
+    citationAudit.engineActionCitations + citationAudit.engineTraceCitations > 0,
+    `${scenario.id} must resolve at least one engine evidence citation`,
+  );
+  return citationAudit;
 }
 
 const caseRuns = [
@@ -539,7 +767,7 @@ const caseRuns = [
 const scenarioDebriefs = caseRuns.map((entry) => {
   const finalized = finalizeRunner(entry.runner);
   const debrief = entry.runner.buildDebrief();
-  validateDebrief(debrief, finalized, entry.rubric, entry.scenario);
+  const citationAudit = validateDebrief(debrief, finalized, entry.rubric, entry.scenario);
   const summary = {
     scenarioId: entry.scenario.id,
     rubricId: entry.rubric.id,
@@ -550,6 +778,7 @@ const scenarioDebriefs = caseRuns.map((entry) => {
     actionCount: debrief.actionTimeline.length,
     traceCount: debrief.physiologicTrace.length,
     flagCount: debrief.violationFlags.length,
+    citationAudit,
   };
   console.log(`=== FOUR_SCENARIO_DEBRIEF:${entry.scenario.id}:SUMMARY ===`);
   console.log(JSON.stringify(summary));
@@ -558,7 +787,28 @@ const scenarioDebriefs = caseRuns.map((entry) => {
   console.log(`=== FOUR_SCENARIO_DEBRIEF:${entry.scenario.id}:JSON_END ===`);
   return { ...entry, finalized, debrief, summary };
 });
+const citationProbeDebrief = scenarioDebriefs.find(({ scenario }) => scenario.id === rsiScenario.id)
+  .debrief;
+const actionProbeEvidence = structuredClone(citationProbeDebrief.rubricResult.items
+  .find(({ evidence }) => evidence?.actions.length > 0).evidence);
+actionProbeEvidence.actions[0].index += 1;
+assert.throws(
+  () => auditEvidenceCitations(actionProbeEvidence, citationProbeDebrief, 'off-by-one action probe'),
+  /source|differ|resolve/i,
+);
+const traceProbeEvidence = structuredClone(citationProbeDebrief.rubricResult.items
+  .find(({ evidence }) => evidence?.trace.length > 0).evidence);
+traceProbeEvidence.trace[0].index += 1;
+assert.throws(
+  () => auditEvidenceCitations(traceProbeEvidence, citationProbeDebrief, 'off-by-one trace probe'),
+  /source|differ|resolve/i,
+);
+const citationMutationProbes = {
+  actionOffByOneRejected: true,
+  traceOffByOneRejected: true,
+};
 printSection('FOUR_SCENARIO_DEBRIEFS', scenarioDebriefs.map(({ summary }) => summary));
+printSection('CITATION_AUDIT', citationMutationProbes);
 
 const failedCase = scenarioDebriefs.find(({ scenario }) => (
   scenario.id === failedRsiScenario.id
@@ -579,8 +829,9 @@ for (const action of requiredRescueChain) {
   chainCursor = procedureActions.indexOf(action, chainCursor + 1);
   assert.ok(chainCursor >= 0, `failed rescue chain missing ordered ${action}`);
 }
-const failedAttempt = failedCase.runner.a.intubationAttempts[0];
-const secondAttempt = failedCase.runner.a.intubationAttempts[1];
+const failedCaseSnapshot = failedCase.runner.snapshot();
+const failedAttempt = failedCaseSnapshot.intubationAttempts[0];
+const secondAttempt = failedCaseSnapshot.intubationAttempts[1];
 const rescueItem = failedCase.debrief.rubricResult.items.find(({ id }) => id === 'rsi-41');
 const rescueSegment = rescueItem.evidence.segments[0];
 assert.equal(failedAttempt.outcome, 'failed');
@@ -628,7 +879,7 @@ printSection('FAILED_FIRST_ATTEMPT_RESCUE', failedRescueEvidence);
 const unsafeConsequenceRunner = unsafeEmergenceWorkflow();
 const unsafeConsequenceFinal = finalizeRunner(unsafeConsequenceRunner);
 const unsafeConsequenceDebrief = unsafeConsequenceRunner.buildDebrief();
-validateDebrief(
+const unsafeCitationAudit = validateDebrief(
   unsafeConsequenceDebrief, unsafeConsequenceFinal, emergenceRubric, emergenceScenario,
 );
 const extubationAction = unsafeConsequenceDebrief.actionTimeline.find(
@@ -676,6 +927,7 @@ const unsafeEmergenceEvidence = {
     nadirAtSec: measuredNadir.t,
     elapsedSec: measuredNadir.t - extubationAction.tSec,
   },
+  citationAudit: unsafeCitationAudit,
   items: unsafeItems,
 };
 printSection('UNSAFE_EMERGENCE_CONSEQUENCES', unsafeEmergenceEvidence);
@@ -704,8 +956,17 @@ function deterministicComprehensiveRun() {
   checkpoints.sustainedSupportedEtco2 = runner.snapshot();
   act(runner, () => runner.releaseCricoidPressure());
   act(runner, () => runner.setInstructorNmbTarget({ targetTofRatio: 0.7 }));
-  runner.stepFor(10);
-  checkpoints.nmbTargetEquilibration = runner.snapshot();
+  checkpoints.nmbTargetEquilibration = advanceUntil(
+    runner,
+    (snapshot) => snapshot.instructorNmbTarget?.equilibrating === false,
+    120,
+    'instructor NMB target equilibration',
+  );
+  assert.equal(checkpoints.nmbTargetEquilibration.instructorNmbTarget.equilibrating, false);
+  assert.ok(Math.abs(
+    checkpoints.nmbTargetEquilibration.instructorNmbTarget.actualTofRatio
+      - checkpoints.nmbTargetEquilibration.instructorNmbTarget.targetTofRatio,
+  ) <= checkpoints.nmbTargetEquilibration.instructorNmbTarget.tolerance);
   const finalized = finalizeRunner(runner);
   const debrief = runner.buildDebrief();
   validateDebrief(debrief, finalized, rsiRubric, failedRsiScenario);
@@ -717,9 +978,9 @@ function deterministicComprehensiveRun() {
   const payload = {
     checkpoints,
     debrief,
-    intubationAttempts: runner.a.intubationAttempts,
-    ppvHistory: runner.a.ppvHistory,
-    cricoidPressureHistory: runner.a.cricoidPressureHistory,
+    intubationAttempts: runner.snapshot().intubationAttempts,
+    ppvHistory: runner.snapshot().ppvHistory,
+    cricoidPressureHistory: runner.snapshot().cricoidPressureHistory,
   };
   assertFiniteJson(payload);
   const canonicalJson = stableStringify(payload);
