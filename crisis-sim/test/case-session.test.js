@@ -685,7 +685,7 @@ describe('CaseSession instructor evidence and feedback', () => {
   });
 });
 
-describe('CaseSession live actions, projections, and Task 3 stubs', () => {
+describe('CaseSession live actions, projections, and event flow', () => {
   test('copies canonical actions without physiology mutation and returns no flow activations', () => {
     const session = makeSession();
     const meta = { dose: { amount: 10 } };
@@ -712,13 +712,13 @@ describe('CaseSession live actions, projections, and Task 3 stubs', () => {
       .toThrow(/snapshot/i);
   });
 
-  test('leaves timeline unchanged for event-flow stubs', () => {
+  test('leaves timeline unchanged for rejected event-flow controls', () => {
     const session = makeSession();
     expect(session.activateBranch({ branchId: 'anything', tSec: 0 })).toEqual({
-      ok: false, reason: 'NO_CASE_FLOW',
+      ok: false, reason: 'UNKNOWN_BRANCH',
     });
     expect(session.advancePhase({ tSec: 0 })).toEqual({
-      ok: false, reason: 'NO_CASE_FLOW',
+      ok: false, reason: 'NO_NEXT_PHASE',
     });
     expect(session.getLiveResult().timeline).toEqual([]);
   });
@@ -730,8 +730,23 @@ describe('CaseSession live actions, projections, and Task 3 stubs', () => {
     const result = session.getLiveResult();
     const serializedResult = JSON.stringify(result);
 
-    expect(learner).toMatchObject({ stage: 'chart_review', flowState: null });
-    expect(instructor).toMatchObject({ stage: 'chart_review', flowState: null });
+    expect(learner).toMatchObject({
+      stage: 'chart_review',
+      flowState: {
+        currentPhaseId: 'assessment',
+        currentPhaseTitle: 'Assessment',
+        paused: false,
+      },
+    });
+    expect(instructor).toMatchObject({
+      stage: 'chart_review',
+      flowState: {
+        currentPhaseId: 'assessment',
+        currentPhaseTitle: 'Assessment',
+        paused: false,
+        activeEventIds: ['assessment_ready'],
+      },
+    });
     expect(instructor.considerations).toHaveLength(2);
     expect(JSON.stringify(learner)).not.toContain('Trainee should');
     expectDeeplyFrozen(learner);

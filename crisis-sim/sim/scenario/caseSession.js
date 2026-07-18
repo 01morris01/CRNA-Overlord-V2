@@ -7,6 +7,7 @@ import {
   projectInstructorCase,
   projectLearnerCase,
 } from './caseProjections.js';
+import { CaseFlowSession } from './caseFlowSession.js';
 
 export const CASE_OBSERVATION_STATUS = Object.freeze([
   'observed',
@@ -172,6 +173,10 @@ function success(details = {}) {
 export class CaseSession {
   #definition;
 
+  #flow;
+
+  #pendingFlowActivations = [];
+
   #stage = 'chart_review';
 
   #sequence = 0;
@@ -230,6 +235,12 @@ export class CaseSession {
     }
 
     this.#definition = normalizeCaseExperience(definition);
+    this.#flow = new CaseFlowSession({
+      eventFlow: this.#definition.eventFlow,
+      initialTimeSec: 0,
+    });
+    this.#flow.enterInitialPhase({ tSec: 0 });
+    this.#pendingFlowActivations.push(...this.#flow.drainActivations());
     Object.defineProperty(this, 'seed', {
       configurable: false,
       enumerable: true,
@@ -258,6 +269,16 @@ export class CaseSession {
 
   currentTimeSec() {
     return this.#timeSec;
+  }
+
+  #captureFlowActivations() {
+    return this.#flow.drainActivations();
+  }
+
+  drainFlowActivations() {
+    const drained = immutableResult(this.#pendingFlowActivations, 'case flow activations');
+    this.#pendingFlowActivations = [];
+    return drained;
   }
 
   #normalMutationGuard() {
@@ -428,7 +449,17 @@ export class CaseSession {
       revealedFindingIds,
     }, 'assessment record'));
     this.#evaluateAssessmentAction(action.id, safeTime);
-    return success({ revealedFindingIds });
+    this.#flow.onAction({
+      action: 'assessment_action',
+      meta: { actionId: action.id },
+      tSec: safeTime,
+      snapshot: {},
+    });
+    const activations = this.#captureFlowActivations();
+    return success({
+      revealedFindingIds,
+      ...(activations.length > 0 ? { activations } : {}),
+    });
   }
 
   submitFindings({ findingIds, notes = '', tSec } = {}) {
@@ -539,7 +570,13 @@ export class CaseSession {
 
     this.#planCompletionStage = nextStage;
     this.#transitionTo(nextStage, safeTime, 'plan_submitted');
-    return success({ submission, stage: this.#stage });
+    this.#flow.onPlan({ selections: orderedSelections, tSec: safeTime });
+    const activations = this.#captureFlowActivations();
+    return success({
+      submission,
+      stage: this.#stage,
+      ...(activations.length > 0 ? { activations } : {}),
+    });
   }
 
   recordCanonicalAction({ action, meta = {}, snapshot = null, tSec } = {}) {
@@ -555,6 +592,7 @@ export class CaseSession {
     const copiedSnapshot = snapshot === null
       ? null
       : immutableCopy(snapshot, 'canonical action snapshot');
+    if (action === 'instructor_event') return failure('RESERVED_INSTRUCTOR_ACTION');
     this.#appendTimeline({
       kind: 'live_action',
       action,
@@ -562,7 +600,13 @@ export class CaseSession {
       snapshot: copiedSnapshot,
       stage: this.#stage,
     }, safeTime);
-    return success({ activations: [] });
+    this.#flow.onAction({
+      action,
+      meta: copiedMeta,
+      snapshot: copiedSnapshot ?? {},
+      tSec: safeTime,
+    });
+    return success({ activations: this.#captureFlowActivations() });
   }
 
   setInstructorObservation({ considerationId, status, note = '', tSec } = {}) {
@@ -628,18 +672,83 @@ export class CaseSession {
     return success({ feedbackRevealIds: this.#orderedFeedbackRevealIds() });
   }
 
-  activateBranch({ tSec } = {}) {
+  processFlowStep({ snapshot = {}, tSec } = {}) {
     const guard = this.#normalMutationGuard();
     if (guard) return guard;
-    this.#validatedTime(tSec);
-    return failure('NO_CASE_FLOW');
+    const safeTime = this.#validatedTime(tSec);
+    this.#flow.onStep({ snapshot, tSec: safeTime });
+    this.#timeSec = safeTime;
+    return success({ activations: this.#captureFlowActivations() });
+  }
+
+  setPaused({ paused, tSec } = {}) {
+    const guard = this.#normalMutationGuard();
+    if (guard) return guard;
+    const safeTime = this.#validatedTime(tSec);
+    const result = this.#flow.setPaused({ paused, tSec: safeTime });
+    if (!result.ok) return result;
+    this.#appendTimeline({
+      kind: paused ? 'case_flow_paused' : 'case_flow_resumed',
+      stage: this.#stage,
+    }, safeTime);
+    return result;
+  }
+
+  activateInstructorEvent({ eventId, tSec } = {}) {
+    const guard = this.#normalMutationGuard();
+    if (guard) return guard;
+    requireNonemptyString(eventId, 'eventId');
+    const safeTime = this.#validatedTime(tSec);
+    this.#flow.onAction({
+      action: 'instructor_event',
+      meta: { eventId },
+      snapshot: {},
+      tSec: safeTime,
+    });
+    const activations = this.#captureFlowActivations();
+    if (activations.length === 0) return failure('EVENT_NOT_AVAILABLE');
+    this.#appendTimeline({
+      kind: 'case_flow_event_activated',
+      eventId,
+      phaseId: activations[0].phaseId,
+      stage: this.#stage,
+    }, safeTime);
+    return success({ activations });
+  }
+
+  activateBranch({ branchId, tSec } = {}) {
+    const guard = this.#normalMutationGuard();
+    if (guard) return guard;
+    const safeTime = this.#validatedTime(tSec);
+    const result = this.#flow.activateBranch({ branchId, tSec: safeTime });
+    if (!result.ok) return result;
+    this.#appendTimeline({
+      kind: 'case_flow_branch_activated',
+      branchId,
+      phaseId: result.phaseId,
+      stage: this.#stage,
+    }, safeTime);
+    return success({
+      phaseId: result.phaseId,
+      activations: this.#captureFlowActivations(),
+    });
   }
 
   advancePhase({ tSec } = {}) {
     const guard = this.#normalMutationGuard();
     if (guard) return guard;
-    this.#validatedTime(tSec);
-    return failure('NO_CASE_FLOW');
+    const safeTime = this.#validatedTime(tSec);
+    const result = this.#flow.advancePhase({ tSec: safeTime });
+    if (!result.ok) return result;
+    this.#appendTimeline({
+      kind: 'case_flow_phase_advanced',
+      phaseId: result.phaseId,
+      stage: this.#stage,
+    }, safeTime);
+    return success({
+      phaseId: result.phaseId,
+      activations: this.#captureFlowActivations(),
+    });
   }
 
   #projectionState() {
@@ -672,7 +781,7 @@ export class CaseSession {
     return projectLearnerCase({
       definition: this.#definition,
       sessionState: this.#projectionState(),
-      flowState: null,
+      flowState: this.#flow.getState(),
     });
   }
 
@@ -680,7 +789,7 @@ export class CaseSession {
     return projectInstructorCase({
       definition: this.#definition,
       sessionState: this.#projectionState(),
-      flowState: null,
+      flowState: this.#flow.getState(),
     });
   }
 

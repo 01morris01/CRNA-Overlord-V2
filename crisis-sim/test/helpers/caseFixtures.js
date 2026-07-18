@@ -130,6 +130,10 @@ export function makeCaseExperience() {
   };
 }
 
+export function makeCaseEventFlow() {
+  return structuredClone(makeCaseExperience().eventFlow);
+}
+
 export function makeCaseScenario() {
   return {
     id: 'case_contract_fixture_001',
