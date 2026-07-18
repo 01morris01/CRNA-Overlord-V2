@@ -430,16 +430,34 @@ matrixSources.rsi_no_ppv_before_first_laryngoscopy = [rsiPerformed, rsiPpvViolat
 matrixSources.rsi_failed_attempt_ppv_with_cricoid = [rescuePerformed, improperFailure];
 matrixSources.rsi_appropriate_failed_attempt_intervention = [rescuePerformed, improperFailure];
 matrixSources.rsi_under_three_attempts = [rsiPerformed, improperFailure];
-const resultDebriefs = new Map([
-  [standardPerformed, standardPerformedRunner.buildDebrief()],
-  [standardOmitted, standardOmittedRunner.buildDebrief()],
-  [emergencePerformed, emergencePerformedRunner.buildDebrief()],
-  [emergenceOmitted, emergenceOmittedRunner.buildDebrief()],
-  [rsiPerformed, rsiPerformedRunner.buildDebrief()],
-  [rsiOmitted, rsiOmittedRunner.buildDebrief()],
-  [rsiPpvViolation, rsiPpvViolationRunner.buildDebrief()],
-  [rescuePerformed, rescuePerformedRun.runner.buildDebrief()],
-  [improperFailure, improperFailureRunner.buildDebrief()],
+const resultEvidenceSources = new Map([
+  [standardPerformed, {
+    debrief: standardPerformedRunner.buildDebrief(), criteria: standardScenario.rubricCriteria,
+  }],
+  [standardOmitted, {
+    debrief: standardOmittedRunner.buildDebrief(), criteria: standardScenario.rubricCriteria,
+  }],
+  [emergencePerformed, {
+    debrief: emergencePerformedRunner.buildDebrief(), criteria: emergenceScenario.rubricCriteria,
+  }],
+  [emergenceOmitted, {
+    debrief: emergenceOmittedRunner.buildDebrief(), criteria: emergenceScenario.rubricCriteria,
+  }],
+  [rsiPerformed, {
+    debrief: rsiPerformedRunner.buildDebrief(), criteria: rsiScenario.rubricCriteria,
+  }],
+  [rsiOmitted, {
+    debrief: rsiOmittedRunner.buildDebrief(), criteria: rsiScenario.rubricCriteria,
+  }],
+  [rsiPpvViolation, {
+    debrief: rsiPpvViolationRunner.buildDebrief(), criteria: rsiScenario.rubricCriteria,
+  }],
+  [rescuePerformed, {
+    debrief: rescuePerformedRun.runner.buildDebrief(), criteria: failedRsiScenario.rubricCriteria,
+  }],
+  [improperFailure, {
+    debrief: improperFailureRunner.buildDebrief(), criteria: rsiScenario.rubricCriteria,
+  }],
 ]);
 
 const productionRuleIds = RUBRICS.flatMap(({ items }) => items)
@@ -456,15 +474,19 @@ const engineRuleMatrix = RULE_IDS.map((ruleId) => {
   assert.equal(performedItem.status, 'performed', `${ruleId} performed status`);
   assert.equal(omittedItem.points, 0, `${ruleId} omitted case`);
   assert.equal(omittedItem.status, 'not_performed', `${ruleId} omitted status`);
+  const performedSource = resultEvidenceSources.get(performedResult);
+  const omittedSource = resultEvidenceSources.get(omittedResult);
   const performedCitationAudit = auditEvidenceCitations(
     performedItem.evidence,
-    resultDebriefs.get(performedResult),
+    performedSource.debrief,
     `${ruleId} performed matrix evidence`,
+    performedSource.criteria,
   );
   const omittedCitationAudit = auditEvidenceCitations(
     omittedItem.evidence,
-    resultDebriefs.get(omittedResult),
+    omittedSource.debrief,
     `${ruleId} omitted matrix evidence`,
+    omittedSource.criteria,
   );
   return {
     ruleId,
@@ -547,7 +569,111 @@ function assertCitedFields(citedFields, sourceFields, label) {
   }
 }
 
-function auditEvidenceCitations(evidence, debrief, label) {
+function productionPreoxygenationRun(trace, inductionT, fio2Min) {
+  const qualifies = (sample) => (
+    typeof sample.fio2 === 'number'
+    && sample.fio2 >= fio2Min
+    && typeof sample.spontaneousRR === 'number'
+    && sample.spontaneousRR > 0
+    && typeof sample.spontaneousTV === 'number'
+    && sample.spontaneousTV > 0
+  );
+  let currentStartIndex = null;
+  let currentEndIndex = null;
+  let currentCount = 0;
+  let bestStartIndex = null;
+  let bestEndIndex = null;
+  let bestCount = 0;
+  for (let index = 0; index < trace.length; index += 1) {
+    const sample = trace[index];
+    if (sample.t > inductionT) break;
+    if (!qualifies(sample)) {
+      currentStartIndex = null;
+      currentEndIndex = null;
+      currentCount = 0;
+      continue;
+    }
+    if (currentEndIndex !== null && sample.t - trace[currentEndIndex].t !== 1) {
+      currentStartIndex = null;
+      currentEndIndex = null;
+      currentCount = 0;
+    }
+    if (currentStartIndex === null) currentStartIndex = index;
+    currentEndIndex = index;
+    currentCount += 1;
+    if (currentCount > bestCount) {
+      bestStartIndex = currentStartIndex;
+      bestEndIndex = currentEndIndex;
+      bestCount = currentCount;
+    }
+  }
+  return {
+    startIndex: bestStartIndex,
+    endIndex: bestEndIndex,
+    startT: bestStartIndex === null ? null : trace[bestStartIndex].t,
+    endT: bestEndIndex === null ? null : trace[bestEndIndex].t,
+    durationSec: bestCount,
+    sampleCount: bestCount,
+  };
+}
+
+function auditPreoxygenationEvidence(evidence, debrief, label, criteria) {
+  if (!Object.hasOwn(evidence, 'preoxygenation')) return 0;
+  const summary = evidence.preoxygenation;
+  const summaryLabel = `${label}.preoxygenation`;
+  assertCitationObject(summary, summaryLabel);
+  const induction = evidence.actions.find(({ action }) => action === 'drug');
+  assert.ok(induction, `${summaryLabel} must cite the triggering induction drug`);
+  const fio2Min = criteria?.preoxygenationFiO2Min ?? 0.99;
+  assert.ok(Number.isFinite(fio2Min) && fio2Min >= 0 && fio2Min <= 1,
+    `${summaryLabel} FiO2 criterion must match the production range`);
+  const expected = productionPreoxygenationRun(
+    debrief.physiologicTrace,
+    induction.tSec,
+    fio2Min,
+  );
+  assert.deepEqual(summary, {
+    startT: expected.startT,
+    endT: expected.endT,
+    durationSec: expected.durationSec,
+    sampleCount: expected.sampleCount,
+  }, `${summaryLabel} differs from the production qualifying interval`);
+  assert.equal(summary.durationSec, summary.sampleCount,
+    `${summaryLabel}.durationSec must equal sampleCount`);
+
+  if (summary.sampleCount === 0) {
+    assert.equal(evidence.trace.length, 0, `${summaryLabel} empty run must not cite endpoints`);
+    return 1;
+  }
+
+  assert.ok(Number.isSafeInteger(expected.startIndex) && Number.isSafeInteger(expected.endIndex));
+  assert.equal(summary.durationSec, summary.endT - summary.startT + 1,
+    `${summaryLabel}.durationSec must use inclusive one-second endpoints`);
+  const endpointIndexes = expected.startIndex === expected.endIndex
+    ? [expected.startIndex]
+    : [expected.startIndex, expected.endIndex];
+  assert.deepEqual(evidence.trace.map(({ index }) => index), endpointIndexes,
+    `${summaryLabel} endpoint citations must identify the production interval`);
+  for (const [endpointPosition, citation] of evidence.trace.entries()) {
+    assert.deepEqual(Object.keys(citation.fields).sort(), [
+      'fio2', 'spontaneousRR', 'spontaneousTV',
+    ], `${summaryLabel} endpoint ${endpointPosition} must cite every production field`);
+  }
+  const interval = debrief.physiologicTrace.slice(expected.startIndex, expected.endIndex + 1);
+  assert.equal(interval.length, summary.sampleCount,
+    `${summaryLabel}.sampleCount must equal the contiguous qualifying interval`);
+  interval.forEach((sample, offset) => {
+    assert.equal(sample.t, summary.startT + offset,
+      `${summaryLabel} interval must advance in one-second inclusive samples`);
+    assert.ok(sample.fio2 >= fio2Min
+      && sample.spontaneousRR > 0
+      && sample.spontaneousTV > 0,
+    `${summaryLabel} interval sample ${offset} must meet production criteria`);
+  });
+  return 1;
+}
+
+function auditEvidenceCitations(evidence, debrief, label, criteria = {}) {
   assertCitationObject(evidence, label);
   assert.ok(Array.isArray(evidence.actions), `${label}.actions must be an array`);
   assert.ok(Array.isArray(evidence.trace), `${label}.trace must be an array`);
@@ -610,54 +736,91 @@ function auditEvidenceCitations(evidence, debrief, label) {
       summaryIndexCount += 1;
     }
   }
+  const preoxygenationSummaryCount = auditPreoxygenationEvidence(
+    evidence, debrief, label, criteria,
+  );
 
   return {
     actionCitationCount: evidence.actions.length,
     traceCitationCount: evidence.trace.length,
     summaryIndexCount,
+    preoxygenationSummaryCount,
   };
 }
 
 function auditObservedConsequence(item, debrief) {
   const consequence = item.observedConsequence;
   if (consequence === null) return 0;
-  assertCitationObject(consequence, `${item.id}.observedConsequence`);
-  const sourceAction = debrief.actionTimeline[consequence.trigger.ledgerIndex];
-  assert.ok(sourceAction, `${item.id} consequence trigger must resolve to actionTimeline`);
-  assert.equal(sourceAction.action, consequence.trigger.action);
-  assert.equal(sourceAction.tSec, consequence.trigger.tSec);
-  assert.equal(consequence.observationWindow.startSec, sourceAction.tSec);
+  const label = `${item.id}.observedConsequence`;
+  assertCitationObject(consequence, label);
+  assertCitationObject(consequence.trigger, `${label}.trigger`);
+  const { ledgerIndex } = consequence.trigger;
+  assert.ok(Number.isSafeInteger(ledgerIndex)
+    && ledgerIndex >= 0
+    && ledgerIndex < debrief.actionTimeline.length,
+  `${label}.trigger.ledgerIndex must be a bounded safe integer`);
+  const sourceAction = debrief.actionTimeline[ledgerIndex];
+  assert.equal(sourceAction.action, consequence.trigger.action,
+    `${label}.trigger.action differs from source`);
+  assert.equal(sourceAction.tSec, consequence.trigger.tSec,
+    `${label}.trigger.tSec differs from source`);
+  assertCitedFields(
+    consequence.actionSnapshot,
+    sourceAction.snapshot,
+    `${label}.actionSnapshot`,
+  );
+  assertCitationObject(consequence.observationWindow, `${label}.observationWindow`);
+  assert.ok(Number.isFinite(consequence.observationWindow.windowSec)
+    && consequence.observationWindow.windowSec >= 0,
+  `${label}.observationWindow.windowSec must be finite and nonnegative`);
+  assert.equal(consequence.observationWindow.startSec, sourceAction.tSec,
+    `${label}.observationWindow.startSec differs from trigger`);
   assert.equal(
     consequence.observationWindow.endSec,
     sourceAction.tSec + consequence.observationWindow.windowSec,
+    `${label}.observationWindow.endSec differs from the inclusive production window`,
   );
-  if (consequence.extrema.spo2Nadir) {
-    const nadir = consequence.extrema.spo2Nadir;
-    const sourceSample = debrief.physiologicTrace.find(({ t }) => t === nadir.tSec);
-    assert.ok(sourceSample, `${item.id} consequence nadir must resolve to physiologicTrace`);
-    assert.equal(sourceSample.spo2, nadir.value);
-    assert.equal(nadir.elapsedSec, nadir.tSec - sourceAction.tSec);
+  assertCitationObject(consequence.extrema, `${label}.extrema`);
+  let measuredNadir = null;
+  for (const sample of debrief.physiologicTrace) {
+    if (sample.t < consequence.observationWindow.startSec
+      || sample.t > consequence.observationWindow.endSec
+      || !Number.isFinite(sample.spo2)) continue;
+    if (measuredNadir === null || sample.spo2 < measuredNadir.value) {
+      measuredNadir = {
+        value: sample.spo2,
+        tSec: sample.t,
+        elapsedSec: sample.t - sourceAction.tSec,
+      };
+    }
   }
+  assert.deepEqual(
+    consequence.extrema,
+    measuredNadir === null ? {} : { spo2Nadir: measuredNadir },
+    `${label}.extrema must match the independently recomputed inclusive-window SpO2 nadir`,
+  );
   return 1;
 }
 
 const violationCitationSources = [
-  ['Standard 7', 'standard-7', standardOmittedRunner],
-  ['RSI 11', 'rsi-11', rsiPpvViolationRunner],
-  ['Emergence 3', 'emergence-3', emergenceOmittedRunner],
-  ['Emergence 4', 'emergence-4', emergenceOmittedRunner],
-  ['Standard 5', 'standard-5', standardPreoxViolation],
-  ['RSI 7', 'rsi-7', rsiPreoxViolation],
-  ['RSI 42', 'rsi-42', improperFailureRunner],
+  ['Standard 7', 'standard-7', standardOmittedRunner, standardScenario.rubricCriteria],
+  ['RSI 11', 'rsi-11', rsiPpvViolationRunner, rsiScenario.rubricCriteria],
+  ['Emergence 3', 'emergence-3', emergenceOmittedRunner, emergenceScenario.rubricCriteria],
+  ['Emergence 4', 'emergence-4', emergenceOmittedRunner, emergenceScenario.rubricCriteria],
+  ['Standard 5', 'standard-5', standardPreoxViolation, standardScenario.rubricCriteria],
+  ['RSI 7', 'rsi-7', rsiPreoxViolation, rsiScenario.rubricCriteria],
+  ['RSI 42', 'rsi-42', improperFailureRunner, rsiScenario.rubricCriteria],
 ];
-const violationCitationAudits = violationCitationSources.map(([pair, itemId, sourceRunner]) => {
+const violationCitationAudits = violationCitationSources.map(([
+  pair, itemId, sourceRunner, criteria,
+]) => {
   if (!sourceRunner.isRubricFinalized()) finalizeRunner(sourceRunner);
   const debrief = sourceRunner.buildDebrief();
   assert.ok(debrief.actionTimeline.length > 0 && debrief.physiologicTrace.length > 0);
   const flags = debrief.violationFlags.filter((flag) => flag.itemId === itemId);
   assert.ok(flags.length > 0, `${pair} must be present in the finalized debrief`);
   const audits = flags.map((flag, index) => auditEvidenceCitations(
-    flag.evidence, debrief, `${pair} finalized violation[${index}]`,
+    flag.evidence, debrief, `${pair} finalized violation[${index}]`, criteria,
   ));
   return { pair, itemId, flagCount: flags.length, audits };
 });
@@ -729,14 +892,18 @@ function validateDebrief(debrief, finalized, rubric, scenario) {
     violationActionCitations: 0,
     violationTraceCitations: 0,
     summaryIndexes: 0,
+    preoxygenationSummaries: 0,
     observedConsequences: 0,
   };
   for (const item of debrief.rubricResult.items) {
     if (item.scoringSource === 'ENGINE_OBSERVABLE') {
-      const audited = auditEvidenceCitations(item.evidence, debrief, `item ${item.id} evidence`);
+      const audited = auditEvidenceCitations(
+        item.evidence, debrief, `item ${item.id} evidence`, scenario.rubricCriteria,
+      );
       citationAudit.engineActionCitations += audited.actionCitationCount;
       citationAudit.engineTraceCitations += audited.traceCitationCount;
       citationAudit.summaryIndexes += audited.summaryIndexCount;
+      citationAudit.preoxygenationSummaries += audited.preoxygenationSummaryCount;
     }
     citationAudit.observedConsequences += auditObservedConsequence(item, debrief);
   }
@@ -745,11 +912,12 @@ function validateDebrief(debrief, finalized, rubric, scenario) {
       tSec === violation.tSec && action === violation.triggerAction
     )), `violationFlags[${index}] trigger must resolve to actionTimeline`);
     const audited = auditEvidenceCitations(
-      violation.evidence, debrief, `violationFlags[${index}] evidence`,
+      violation.evidence, debrief, `violationFlags[${index}] evidence`, scenario.rubricCriteria,
     );
     citationAudit.violationActionCitations += audited.actionCitationCount;
     citationAudit.violationTraceCitations += audited.traceCitationCount;
     citationAudit.summaryIndexes += audited.summaryIndexCount;
+    citationAudit.preoxygenationSummaries += audited.preoxygenationSummaryCount;
   }
   assert.ok(
     citationAudit.engineActionCitations + citationAudit.engineTraceCitations > 0,
@@ -803,9 +971,22 @@ assert.throws(
   () => auditEvidenceCitations(traceProbeEvidence, citationProbeDebrief, 'off-by-one trace probe'),
   /source|differ|resolve/i,
 );
+const preoxygenationProbeEvidence = structuredClone(citationProbeDebrief.rubricResult.items
+  .find(({ evidence }) => evidence?.preoxygenation).evidence);
+preoxygenationProbeEvidence.preoxygenation.durationSec += 1;
+assert.throws(
+  () => auditEvidenceCitations(
+    preoxygenationProbeEvidence,
+    citationProbeDebrief,
+    'preoxygenation summary mutation probe',
+    rsiScenario.rubricCriteria,
+  ),
+  /preoxygenation|duration|sample/i,
+);
 const citationMutationProbes = {
   actionOffByOneRejected: true,
   traceOffByOneRejected: true,
+  preoxygenationSummaryMutationRejected: true,
 };
 printSection('FOUR_SCENARIO_DEBRIEFS', scenarioDebriefs.map(({ summary }) => summary));
 printSection('CITATION_AUDIT', citationMutationProbes);
@@ -882,6 +1063,17 @@ const unsafeConsequenceDebrief = unsafeConsequenceRunner.buildDebrief();
 const unsafeCitationAudit = validateDebrief(
   unsafeConsequenceDebrief, unsafeConsequenceFinal, emergenceRubric, emergenceScenario,
 );
+const consequenceSnapshotProbeItem = structuredClone(
+  unsafeConsequenceDebrief.rubricResult.items.find(({ id }) => id === 'emergence-3'),
+);
+consequenceSnapshotProbeItem.observedConsequence.actionSnapshot.tofRatio += 0.01;
+assert.throws(
+  () => auditObservedConsequence(consequenceSnapshotProbeItem, unsafeConsequenceDebrief),
+  /actionSnapshot|tofRatio|source/i,
+);
+const consequenceMutationProbes = {
+  actionSnapshotMeasurementMutationRejected: true,
+};
 const extubationAction = unsafeConsequenceDebrief.actionTimeline.find(
   ({ action }) => action === 'extubate',
 );
@@ -931,6 +1123,7 @@ const unsafeEmergenceEvidence = {
   items: unsafeItems,
 };
 printSection('UNSAFE_EMERGENCE_CONSEQUENCES', unsafeEmergenceEvidence);
+printSection('CONSEQUENCE_CITATION_AUDIT', consequenceMutationProbes);
 
 function deterministicComprehensiveRun() {
   const runner = loadRunner(failedRsiScenario, rsiRubric);
