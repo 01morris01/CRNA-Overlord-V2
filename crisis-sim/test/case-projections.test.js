@@ -175,13 +175,27 @@ function makeProjectionDefinition() {
   return normalizeCaseExperience(definition);
 }
 
-function makeMultiProjectionDefinition({ required = true } = {}) {
+function makeMultiProjectionDefinition({
+  required = true,
+  evidenceValue = ['propofol', 'ketamine'],
+} = {}) {
   const definition = makeCaseExperience();
   definition.planRequirements.fields.push({
     id: 'agents',
     type: 'multi',
     required,
     options: ['propofol', 'ketamine', 'etomidate'],
+  });
+  definition.planRequirements.rules.push({
+    id: 'plan_agents',
+    label: 'Selects the planned induction agents',
+    critical: false,
+    source: 'ENGINE_OBSERVABLE',
+    evidence: {
+      type: 'plan_equals',
+      fieldId: 'agents',
+      value: evidenceValue,
+    },
   });
   return normalizeCaseExperience(definition);
 }
@@ -648,6 +662,29 @@ describe('case projection validation and determinism', () => {
     expect(() => { instructor.planSubmission.selections.agents[0] = 'mutated'; })
       .toThrow(TypeError);
     expect(sessionState.planSubmission.selections.agents).toEqual(['propofol', 'ketamine']);
+  });
+
+  test('preserves unordered contract evidence while requiring canonical stored selections', () => {
+    const definition = makeMultiProjectionDefinition({
+      evidenceValue: ['ketamine', 'propofol'],
+    });
+    const canonicalState = makeMultiPlanSessionState(definition, ['propofol', 'ketamine']);
+
+    const instructor = projectInstructorCase({
+      definition,
+      sessionState: canonicalState,
+    });
+
+    expect(instructor.planSubmission.selections.agents).toEqual(['propofol', 'ketamine']);
+    expect(instructor.ruleResults.at(-1).evidence.value).toEqual([
+      'ketamine', 'propofol',
+    ]);
+
+    const noncanonicalState = makeMultiPlanSessionState(definition, ['ketamine', 'propofol']);
+    expect(() => projectInstructorCase({
+      definition,
+      sessionState: noncanonicalState,
+    })).toThrow(/agents|canonical|definition order/i);
   });
 
   test.each([

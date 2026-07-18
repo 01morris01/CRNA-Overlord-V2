@@ -76,7 +76,10 @@ function makeSessionDefinition() {
   return normalizeCaseExperience(definition);
 }
 
-function makeMultiSelectDefinition({ required = true } = {}) {
+function makeMultiSelectDefinition({
+  required = true,
+  evidenceValue = ['propofol', 'ketamine'],
+} = {}) {
   const definition = makeCaseExperience();
   definition.planRequirements.fields.push({
     id: 'agents',
@@ -92,7 +95,7 @@ function makeMultiSelectDefinition({ required = true } = {}) {
     evidence: {
       type: 'plan_equals',
       fieldId: 'agents',
-      value: ['propofol', 'ketamine'],
+      value: evidenceValue,
     },
   });
   return normalizeCaseExperience(definition);
@@ -471,6 +474,37 @@ describe('CaseSession learner assessment and submissions', () => {
     expect(() => { instructor.planSubmission.selections.agents.push('mutated'); })
       .toThrow(TypeError);
     expect(session.getLearnerContext()).not.toHaveProperty('planSubmissionHistory');
+  });
+
+  test('scores multi-select plan evidence independently of evidence array order', () => {
+    const session = new CaseSession({
+      definition: makeMultiSelectDefinition({
+        evidenceValue: ['ketamine', 'propofol'],
+      }),
+      seed: 1,
+    });
+    advanceToPlan(session, ['npo_ok']);
+
+    expect(session.submitPlan({
+      selections: {
+        disposition: 'proceed',
+        agents: ['propofol', 'ketamine'],
+      },
+      tSec: 0.14,
+    })).toMatchObject({ ok: true, stage: 'live_simulation' });
+
+    const result = session.getLiveResult();
+    expect(result.planSubmission.selections.agents).toEqual(['propofol', 'ketamine']);
+    expect(result.ruleResults.at(-1)).toMatchObject({
+      id: 'plan_agents',
+      evidence: {
+        type: 'plan_equals',
+        fieldId: 'agents',
+        value: ['ketamine', 'propofol'],
+      },
+      status: 'performed',
+      points: 2,
+    });
   });
 
   test.each([

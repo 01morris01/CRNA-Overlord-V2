@@ -263,6 +263,10 @@ function validatePlanSelections(selections, label, references) {
         }
         selected.add(option);
       });
+      const canonicalSelection = field.options.filter((option) => selected.has(option));
+      if (!equalJsonSafe(selection, canonicalSelection)) {
+        throw new TypeError(`${label}.${fieldId} must use canonical definition order`);
+      }
     } else {
       if (Array.isArray(selection)) {
         throw new TypeError(`${label}.${fieldId} is single-select and must use one option value`);

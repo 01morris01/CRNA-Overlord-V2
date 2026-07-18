@@ -147,6 +147,20 @@ function canonicalizePlanSelection(field, value) {
   return value;
 }
 
+function planSelectionMatches(field, actual, expected) {
+  if (field.type !== 'multi') return equalJsonSafe(actual, expected);
+  if (!Array.isArray(actual) || !Array.isArray(expected)
+    || actual.length !== expected.length) {
+    return false;
+  }
+  const actualOptions = new Set(actual);
+  const expectedOptions = new Set(expected);
+  return actualOptions.size === actual.length
+    && expectedOptions.size === expected.length
+    && expected.every((option) => field.options.includes(option))
+    && actual.every((option) => expectedOptions.has(option));
+}
+
 function failure(reason, details = {}) {
   return immutableResult({ ok: false, reason, ...details }, 'case session failure');
 }
@@ -328,9 +342,12 @@ export class CaseSession {
 
   #evaluatePlan(tSec) {
     const assessmentRuleCount = this.#definition.assessment.scoringRules.length;
+    const fieldsById = new Map(this.#definition.planRequirements.fields
+      .map((field) => [field.id, field]));
     this.#definition.planRequirements.rules.forEach((rule, index) => {
       if (rule.evidence.type !== 'plan_equals') return;
-      const matches = equalJsonSafe(
+      const matches = planSelectionMatches(
+        fieldsById.get(rule.evidence.fieldId),
         this.#planSubmission.selections[rule.evidence.fieldId],
         rule.evidence.value,
       );
