@@ -429,8 +429,14 @@ function validatePlanRequirements(planRequirements) {
     const label = `planRequirements.fields[${index}]`;
     requireNonemptyString(field.id, `${label}.id`);
     requireNonemptyString(field.type, `${label}.type`);
+    if (!['single', 'multi'].includes(field.type)) {
+      throw new TypeError(`${label}.type must be single or multi`);
+    }
     requireBoolean(field.required, `${label}.required`);
     requireStringArray(field.options, `${label}.options`);
+    if (new Set(field.options).size !== field.options.length) {
+      throw new TypeError(`${label}.options must not contain duplicates`);
+    }
   });
 
   planRequirements.rules.forEach((rule, index) => {
@@ -446,6 +452,71 @@ function validatePlanRequirements(planRequirements) {
       throw new TypeError(`${label}.evidence must provide its own value`);
     }
   });
+
+  if (!Object.hasOwn(planRequirements, 'completionRoutes')) return;
+  requirePlainObjectEntries(
+    planRequirements.completionRoutes,
+    'planRequirements.completionRoutes',
+  );
+  const fieldsById = new Map(planRequirements.fields.map((field) => [field.id, field]));
+  const matchKeys = new Set();
+  const validatedRoutes = [];
+
+  planRequirements.completionRoutes.forEach((route, index) => {
+    const label = `planRequirements.completionRoutes[${index}]`;
+    requireExactKeys(route, ['fieldId', 'equals', 'stage'], label);
+    requireNonemptyString(route.fieldId, `${label}.fieldId`);
+    const field = fieldsById.get(route.fieldId);
+    if (!field) {
+      throw new TypeError(`${label}.fieldId references unknown plan field ${route.fieldId}`);
+    }
+    if (!['live_simulation', 'appropriately_deferred'].includes(route.stage)) {
+      throw new TypeError(
+        `${label}.stage must be live_simulation or appropriately_deferred`,
+      );
+    }
+
+    let semanticValue;
+    if (field.type === 'multi') {
+      requireArray(route.equals, `${label}.equals`);
+      const selected = new Set();
+      route.equals.forEach((option, optionIndex) => {
+        requireNonemptyString(option, `${label}.equals[${optionIndex}]`);
+        if (selected.has(option)) {
+          throw new TypeError(`${label}.equals contains duplicate option ${option}`);
+        }
+        if (!field.options.includes(option)) {
+          throw new TypeError(`${label}.equals must contain only valid options`);
+        }
+        selected.add(option);
+      });
+      semanticValue = field.options.filter((option) => selected.has(option));
+    } else {
+      if (Array.isArray(route.equals) || !field.options.includes(route.equals)) {
+        throw new TypeError(`${label}.equals must be a valid option for ${field.id}`);
+      }
+      semanticValue = route.equals;
+    }
+
+    const matchKey = JSON.stringify([field.id, semanticValue]);
+    if (matchKeys.has(matchKey)) {
+      throw new TypeError(`${label} is a duplicate or ambiguous completion route match`);
+    }
+    matchKeys.add(matchKey);
+    validatedRoutes.push({ fieldId: field.id, stage: route.stage });
+  });
+
+  for (let leftIndex = 0; leftIndex < validatedRoutes.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < validatedRoutes.length; rightIndex += 1) {
+      const left = validatedRoutes[leftIndex];
+      const right = validatedRoutes[rightIndex];
+      if (left.fieldId !== right.fieldId && left.stage !== right.stage) {
+        throw new TypeError(
+          'planRequirements.completionRoutes contains ambiguous cross-field destinations',
+        );
+      }
+    }
+  }
 }
 
 function validateSurgery(surgery) {

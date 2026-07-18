@@ -184,6 +184,8 @@ export class CaseSession {
 
   #outcome = null;
 
+  #planCompletionStage = null;
+
   #finalizedAtSec = null;
 
   #completedActionIds = new Set();
@@ -359,6 +361,23 @@ export class CaseSession {
     });
   }
 
+  #resolvePlanCompletionStage(selections) {
+    const fieldsById = new Map(this.#definition.planRequirements.fields
+      .map((field) => [field.id, field]));
+    const matchingRoutes = (this.#definition.planRequirements.completionRoutes ?? [])
+      .filter((route) => planSelectionMatches(
+        fieldsById.get(route.fieldId),
+        selections[route.fieldId],
+        route.equals,
+      ));
+    if (matchingRoutes.length === 0) return 'live_simulation';
+    const stages = new Set(matchingRoutes.map(({ stage }) => stage));
+    if (stages.size !== 1) {
+      throw new TypeError('plan completion routes produced ambiguous destination stages');
+    }
+    return matchingRoutes[0].stage;
+  }
+
   advanceStage({ stage, tSec } = {}) {
     const guard = this.#normalMutationGuard();
     if (guard) return guard;
@@ -498,6 +517,7 @@ export class CaseSession {
         orderedSelections[field.id] = canonicalSelections.get(field.id);
       }
     }
+    const nextStage = this.#resolvePlanCompletionStage(orderedSelections);
     const revision = this.#planSubmissionHistory.length + 1;
     const timelineRecord = this.#appendTimeline({
       kind: 'plan_submission',
@@ -517,9 +537,7 @@ export class CaseSession {
     this.#planSubmissionHistory.push(submission);
     this.#evaluatePlan(safeTime);
 
-    const nextStage = orderedSelections.disposition === 'postpone'
-      ? 'appropriately_deferred'
-      : 'live_simulation';
+    this.#planCompletionStage = nextStage;
     this.#transitionTo(nextStage, safeTime, 'plan_submitted');
     return success({ submission, stage: this.#stage });
   }
@@ -732,14 +750,14 @@ export class CaseSession {
       kind: 'case_finalized',
       fromStage,
       toStage: 'debrief_finalized',
-      outcome: this.#planSubmission?.selections.disposition === 'postpone'
+      outcome: this.#planCompletionStage === 'appropriately_deferred'
         ? 'appropriately_deferred'
         : 'completed',
     }, safeTime);
     this.#stage = 'debrief_finalized';
     this.#active = false;
     this.#finalized = true;
-    this.#outcome = this.#planSubmission?.selections.disposition === 'postpone'
+    this.#outcome = this.#planCompletionStage === 'appropriately_deferred'
       ? 'appropriately_deferred'
       : 'completed';
     this.#finalizedAtSec = safeTime;

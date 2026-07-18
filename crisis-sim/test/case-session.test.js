@@ -101,6 +101,22 @@ function makeMultiSelectDefinition({
   return normalizeCaseExperience(definition);
 }
 
+function makeArbitraryCompletionRouteDefinition() {
+  const definition = makeCaseExperience();
+  definition.planRequirements.fields.push({
+    id: 'readiness',
+    type: 'single',
+    required: true,
+    options: ['ready', 'needs_optimization'],
+  });
+  definition.planRequirements.completionRoutes = [{
+    fieldId: 'readiness',
+    equals: 'needs_optimization',
+    stage: 'appropriately_deferred',
+  }];
+  return normalizeCaseExperience(definition);
+}
+
 function makeSession() {
   return new CaseSession({ definition: makeSessionDefinition(), seed: 12345 });
 }
@@ -559,6 +575,53 @@ describe('CaseSession learner assessment and submissions', () => {
     expect(session.getLiveResult().planSubmission.selections.agents).toEqual([]);
     expect(session.getLiveResult().ruleResults.at(-1)).toMatchObject({
       status: 'not_performed', points: 0,
+    });
+  });
+
+  test('routes completion declaratively from an arbitrary field and defaults unmatched plans live', () => {
+    const deferred = new CaseSession({
+      definition: makeArbitraryCompletionRouteDefinition(),
+      seed: 1,
+    });
+    advanceToPlan(deferred, ['npo_ok']);
+    expect(deferred.submitPlan({
+      selections: {
+        disposition: 'proceed',
+        readiness: 'needs_optimization',
+      },
+      tSec: 0.14,
+    })).toMatchObject({ ok: true, stage: 'appropriately_deferred' });
+    expect(deferred.setInstructorObservation({
+      considerationId: 'consider_npo',
+      status: 'observed',
+      tSec: 0.16,
+    }).ok).toBe(true);
+    expect(deferred.finalize({ tSec: 0.18 })).toMatchObject({
+      ok: true,
+      outcome: 'appropriately_deferred',
+    });
+
+    const unmatched = new CaseSession({
+      definition: makeArbitraryCompletionRouteDefinition(),
+      seed: 1,
+    });
+    advanceToPlan(unmatched, ['npo_ok']);
+    expect(unmatched.submitPlan({
+      selections: {
+        disposition: 'postpone',
+        readiness: 'ready',
+      },
+      tSec: 0.14,
+    })).toMatchObject({ ok: true, stage: 'live_simulation' });
+    expect(unmatched.advanceStage({ stage: 'debrief_draft', tSec: 0.16 }).ok).toBe(true);
+    expect(unmatched.setInstructorObservation({
+      considerationId: 'consider_npo',
+      status: 'observed',
+      tSec: 0.18,
+    }).ok).toBe(true);
+    expect(unmatched.finalize({ tSec: 0.2 })).toMatchObject({
+      ok: true,
+      outcome: 'completed',
     });
   });
 });

@@ -581,6 +581,118 @@ describe('modeled event effects', () => {
   });
 });
 
+describe('declarative plan completion routes', () => {
+  test('preserves a valid route as frozen case data', () => {
+    const normalized = normalizeCaseExperience(makeCaseExperience());
+
+    expect(normalized.planRequirements.completionRoutes).toEqual([{
+      fieldId: 'disposition',
+      equals: 'postpone',
+      stage: 'appropriately_deferred',
+    }]);
+    expect(Object.isFrozen(normalized.planRequirements.completionRoutes)).toBe(true);
+  });
+
+  test('keeps completion routes optional for additive legacy case definitions', () => {
+    const definition = makeCaseExperience();
+    delete definition.planRequirements.completionRoutes;
+
+    expect(normalizeCaseExperience(definition).planRequirements)
+      .not.toHaveProperty('completionRoutes');
+  });
+
+  test.each([
+    [
+      'an extra route key',
+      (value) => { value.planRequirements.completionRoutes[0].answer = true; },
+      /completionRoutes.*exact shape|answer/i,
+    ],
+    [
+      'an unknown field',
+      (value) => { value.planRequirements.completionRoutes[0].fieldId = 'missing_field'; },
+      /completionRoutes.*field|missing_field/i,
+    ],
+    [
+      'an unsupported destination',
+      (value) => { value.planRequirements.completionRoutes[0].stage = 'debrief_draft'; },
+      /completionRoutes.*stage|live_simulation|appropriately_deferred/i,
+    ],
+    [
+      'an invalid single-select value',
+      (value) => { value.planRequirements.completionRoutes[0].equals = 'cancel'; },
+      /completionRoutes.*equals|valid option|cancel/i,
+    ],
+    [
+      'a duplicate semantic match',
+      (value) => {
+        value.planRequirements.completionRoutes.push({
+          fieldId: 'disposition',
+          equals: 'postpone',
+          stage: 'live_simulation',
+        });
+      },
+      /completionRoutes.*duplicate|ambiguous/i,
+    ],
+  ])('rejects %s', (_label, mutate, pattern) => {
+    expect(() => normalizeCaseExperience(withMutation(mutate))).toThrow(pattern);
+  });
+
+  test('validates multi-select routes with set semantics', () => {
+    const valid = withMutation((value) => {
+      value.planRequirements.fields.push({
+        id: 'precautions',
+        type: 'multi',
+        required: false,
+        options: ['mh_cart', 'trigger_free', 'postpone'],
+      });
+      value.planRequirements.completionRoutes = [{
+        fieldId: 'precautions',
+        equals: ['trigger_free', 'mh_cart'],
+        stage: 'appropriately_deferred',
+      }];
+    });
+    expect(() => normalizeCaseExperience(valid)).not.toThrow();
+
+    const duplicate = structuredClone(valid);
+    duplicate.planRequirements.completionRoutes.push({
+      fieldId: 'precautions',
+      equals: ['mh_cart', 'trigger_free'],
+      stage: 'live_simulation',
+    });
+    expect(() => normalizeCaseExperience(duplicate)).toThrow(/duplicate|ambiguous/i);
+
+    for (const equals of [
+      'mh_cart',
+      ['mh_cart', 'mh_cart'],
+      ['mh_cart', 'unknown_precaution'],
+    ]) {
+      const invalid = structuredClone(valid);
+      invalid.planRequirements.completionRoutes[0].equals = equals;
+      expect(() => normalizeCaseExperience(invalid))
+        .toThrow(/completionRoutes.*equals|multi|duplicate|valid option/i);
+    }
+  });
+
+  test('rejects potentially conflicting cross-field destinations', () => {
+    const definition = withMutation((value) => {
+      value.planRequirements.fields.push({
+        id: 'readiness',
+        type: 'single',
+        required: true,
+        options: ['ready', 'not_ready'],
+      });
+      value.planRequirements.completionRoutes.push({
+        fieldId: 'readiness',
+        equals: 'ready',
+        stage: 'live_simulation',
+      });
+    });
+
+    expect(() => normalizeCaseExperience(definition))
+      .toThrow(/completionRoutes.*ambiguous|conflict/i);
+  });
+});
+
 describe('confidentiality and strict JSON-safe input', () => {
   test.each(['instructorNotes', 'answerKey', 'expectedResponse', 'scoringGuidance'])(
     'rejects reserved learner-chart key %s',

@@ -219,6 +219,9 @@ function makePendingRuleResults(definition) {
 function makeProjectionSessionState(definition, overrides = {}) {
   return makeCaseSessionState({
     ruleResults: makePendingRuleResults(definition),
+    feedbackRevealIds: definition.instructorGuide.considerations
+      .filter(({ defaultRevealInDebrief }) => defaultRevealInDebrief)
+      .map(({ id }) => id),
     ...overrides,
   });
 }
@@ -235,6 +238,9 @@ function makeMultiPlanSessionState(definition, agents) {
     stage: 'live_simulation',
     sequence: 1,
     ruleResults: makePendingRuleResults(definition),
+    feedbackRevealIds: definition.instructorGuide.considerations
+      .filter(({ defaultRevealInDebrief }) => defaultRevealInDebrief)
+      .map(({ id }) => id),
     planSubmission: structuredClone(submission),
     planSubmissionHistory: [structuredClone(submission)],
     timeline: [{
@@ -252,7 +258,7 @@ function makeMultiPlanSessionState(definition, agents) {
 function makePopulatedSessionState(overrides = {}) {
   return makeCaseSessionState({
     stage: 'interview',
-    sequence: 7,
+    sequence: 6,
     currentTimeSec: 6,
     completedActionIds: ['ask_npo'],
     assessmentRecords: [{
@@ -366,11 +372,110 @@ function makePopulatedSessionState(overrides = {}) {
       revealedFindingIds: ['npo_ok'],
       tSec: 2,
       sequence: 1,
+    }, {
+      kind: 'findings_submission',
+      findingIds: ['npo_ok'],
+      notes: SENTINELS.learnerFindingsNote,
+      revision: 1,
+      stage: 'findings_summary',
+      tSec: 3,
+      sequence: 2,
+    }, {
+      kind: 'plan_submission',
+      selections: { disposition: 'proceed' },
+      rationale: SENTINELS.learnerPlanRationale,
+      revision: 1,
+      stage: 'plan_submission',
+      tSec: 4,
+      sequence: 3,
+    }, {
+      kind: 'instructor_observation',
+      considerationId: 'consider_npo',
+      status: 'observed',
+      note: SENTINELS.instructorNote,
+      revision: 1,
+      stage: 'live_simulation',
+      tSec: 5,
+      sequence: 4,
+    }, {
+      kind: 'feedback_reveal',
+      considerationId: 'consider_npo',
+      reveal: true,
+      revision: 1,
+      stage: 'live_simulation',
+      tSec: 5,
+      sequence: 5,
+    }, {
+      kind: 'revision_started',
+      revision: 1,
+      fromStage: 'debrief_finalized',
+      toStage: 'debrief_revision',
+      tSec: 6,
+      sequence: 6,
     }],
     finalized: false,
     finalizedAtSec: null,
     outcome: null,
     ...overrides,
+  });
+}
+
+function makeFutureDiscoverySubmissionState(definition) {
+  const findingsSubmission = {
+    findingIds: ['concealed_airway_finding'],
+    notes: 'FORGED_CONCEALED_FINDING_SUBMISSION',
+    tSec: 3,
+    sequence: 2,
+    revision: 1,
+  };
+  return makeProjectionSessionState(definition, {
+    stage: 'interview',
+    sequence: 3,
+    currentTimeSec: 4,
+    completedActionIds: ['ask_npo', 'assess_airway'],
+    assessmentRecords: [{
+      actionId: 'ask_npo',
+      tSec: 2,
+      sequence: 1,
+      stage: 'interview',
+      critical: true,
+      scoringRuleId: 'discover_npo',
+      revealedFindingIds: ['npo_ok'],
+    }, {
+      actionId: 'assess_airway',
+      tSec: 4,
+      sequence: 3,
+      stage: 'interview',
+      critical: true,
+      scoringRuleId: 'assess_airway_rule',
+      revealedFindingIds: ['concealed_airway_finding'],
+    }],
+    discoveredFindingIds: ['npo_ok', 'concealed_airway_finding'],
+    findingsSubmission: structuredClone(findingsSubmission),
+    findingsSubmissionHistory: [structuredClone(findingsSubmission)],
+    timeline: [{
+      kind: 'assessment_action',
+      actionId: 'ask_npo',
+      stage: 'interview',
+      revealedFindingIds: ['npo_ok'],
+      tSec: 2,
+      sequence: 1,
+    }, {
+      kind: 'findings_submission',
+      findingIds: ['concealed_airway_finding'],
+      notes: findingsSubmission.notes,
+      revision: 1,
+      stage: 'findings_summary',
+      tSec: 3,
+      sequence: 2,
+    }, {
+      kind: 'assessment_action',
+      actionId: 'assess_airway',
+      stage: 'interview',
+      revealedFindingIds: ['concealed_airway_finding'],
+      tSec: 4,
+      sequence: 3,
+    }],
   });
 }
 
@@ -449,6 +554,12 @@ describe('learner case projection', () => {
       outcome: null,
       learnerChart: definition.learnerChart,
       assessmentStages: definition.assessment.stages,
+      planFields: [{
+        id: 'disposition',
+        type: 'single',
+        required: true,
+        options: ['proceed', 'postpone'],
+      }],
       findingsSubmission: {
         findingIds: ['npo_ok'],
         notes: SENTINELS.learnerFindingsNote,
@@ -494,6 +605,10 @@ describe('learner case projection', () => {
       tSec: 2,
       sequence: 1,
     }]);
+    expect(Object.keys(projection.planFields[0])).toEqual([
+      'id', 'type', 'required', 'options',
+    ]);
+    expect(() => { projection.planFields[0].options.push('forged'); }).toThrow(TypeError);
 
     expect(Object.keys(projection.flowState)).toEqual([
       'currentPhaseId', 'currentPhaseTitle', 'paused',
@@ -543,6 +658,7 @@ describe('learner case projection', () => {
       'responseDeadlines',
       'availableBranchIds',
       'history',
+      'completionRoutes',
     ]) {
       expect(serialized).not.toContain(`\"${forbiddenKey}\"`);
     }
@@ -834,6 +950,152 @@ describe('case projection validation and determinism', () => {
     expect(() => projectLearnerCase({ definition, sessionState })).toThrow(pattern);
   });
 
+  test('rejects a findings submission that names a concealed finding discovered only later', () => {
+    const definition = makeProjectionDefinition();
+    const forged = makeFutureDiscoverySubmissionState(definition);
+
+    expect(() => projectLearnerCase({ definition, sessionState: forged }))
+      .toThrow(/findingsSubmissionHistory.*available|finding.*available.*submission/i);
+    expect(() => projectInstructorCase({ definition, sessionState: forged }))
+      .toThrow(/findingsSubmissionHistory.*available|finding.*available.*submission/i);
+  });
+
+  test.each([
+    [
+      'findings history without its canonical timeline record',
+      (state) => { state.timeline[1].kind = 'live_action'; },
+      /findingsSubmissionHistory.*timeline|findings_submission.*canonical/i,
+    ],
+    [
+      'findings history whose timeline payload differs',
+      (state) => { state.timeline[1].notes = 'FORGED_TIMELINE_NOTE'; },
+      /findingsSubmissionHistory.*timeline|findings_submission.*canonical/i,
+    ],
+    [
+      'current findings submission that is not the latest history entry',
+      (state) => { state.findingsSubmission.notes = 'FORGED_CURRENT_NOTE'; },
+      /findingsSubmission.*latest.*history|current.*findings/i,
+    ],
+  ])('rejects %s', (_label, mutate, pattern) => {
+    const definition = makeProjectionDefinition();
+    const sessionState = makePopulatedSessionState();
+    mutate(sessionState);
+
+    expect(() => projectLearnerCase({ definition, sessionState })).toThrow(pattern);
+  });
+
+  test.each([
+    [
+      'a timeline sequence gap',
+      (state) => { state.timeline[2].sequence = 4; },
+      /timeline.*sequence.*contiguous|timeline.*strict/i,
+    ],
+    [
+      'duplicate timeline sequence values',
+      (state) => { state.timeline[2].sequence = 2; },
+      /timeline.*sequence.*contiguous|timeline.*strict|duplicate/i,
+    ],
+    [
+      'decreasing timeline time',
+      (state) => { state.timeline[2].tSec = 1; },
+      /timeline.*tSec.*nondecreasing|chronolog/i,
+    ],
+    [
+      'session sequence behind the canonical timeline',
+      (state) => { state.sequence = 5; },
+      /sessionState\.sequence.*timeline|max.*sequence/i,
+    ],
+    [
+      'session time ahead of the canonical timeline',
+      (state) => { state.currentTimeSec = 8; },
+      /currentTimeSec.*timeline|max.*time/i,
+    ],
+    [
+      'a findings revision gap',
+      (state) => {
+        state.findingsSubmission.revision = 2;
+        state.findingsSubmissionHistory[0].revision = 2;
+        state.timeline[1].revision = 2;
+      },
+      /findingsSubmissionHistory.*revision.*contiguous/i,
+    ],
+    [
+      'a plan revision gap',
+      (state) => {
+        state.planSubmission.revision = 2;
+        state.planSubmissionHistory[0].revision = 2;
+        state.timeline[2].revision = 2;
+      },
+      /planSubmissionHistory.*revision.*contiguous/i,
+    ],
+    [
+      'an observation revision gap',
+      (state) => {
+        state.instructorObservations[0].revision = 2;
+        state.instructorObservationHistory[0].revision = 2;
+        state.timeline[3].revision = 2;
+      },
+      /instructorObservationHistory.*revision.*contiguous/i,
+    ],
+    [
+      'a feedback revision gap',
+      (state) => {
+        state.feedbackRevealHistory[0].revision = 2;
+        state.timeline[4].revision = 2;
+      },
+      /feedbackRevealHistory.*revision.*contiguous/i,
+    ],
+    [
+      'a debrief revision gap',
+      (state) => {
+        state.revisions[0].revision = 2;
+        state.timeline[5].revision = 2;
+      },
+      /sessionState\.revisions.*revision.*contiguous/i,
+    ],
+    [
+      'a current observation that is not its latest history entry',
+      (state) => { state.instructorObservations[0].note = 'FORGED_CURRENT_NOTE'; },
+      /instructorObservations.*latest.*history|current.*observation/i,
+    ],
+    [
+      'a current plan submission that is not its latest history entry',
+      (state) => { state.planSubmission.rationale = 'FORGED_CURRENT_RATIONALE'; },
+      /planSubmission.*latest.*history|current.*plan/i,
+    ],
+    [
+      'a current feedback reveal that differs from its latest history entry',
+      (state) => { state.feedbackRevealIds = []; },
+      /feedbackRevealIds.*latest.*history|current.*reveal/i,
+    ],
+    [
+      'plan history without matching canonical timeline evidence',
+      (state) => { state.timeline[2].rationale = 'FORGED_TIMELINE_RATIONALE'; },
+      /planSubmissionHistory.*timeline|plan_submission.*canonical/i,
+    ],
+    [
+      'observation history without matching canonical timeline evidence',
+      (state) => { state.timeline[3].note = 'FORGED_TIMELINE_NOTE'; },
+      /instructorObservationHistory.*timeline|instructor_observation.*canonical/i,
+    ],
+    [
+      'feedback history without matching canonical timeline evidence',
+      (state) => { state.timeline[4].reveal = false; },
+      /feedbackRevealHistory.*timeline|feedback_reveal.*canonical/i,
+    ],
+    [
+      'revision history without matching canonical timeline evidence',
+      (state) => { state.timeline[5].kind = 'live_action'; },
+      /sessionState\.revisions.*timeline|revision_started.*canonical/i,
+    ],
+  ])('rejects forged aggregate chronology: %s', (_label, mutate, pattern) => {
+    const definition = makeProjectionDefinition();
+    const sessionState = makePopulatedSessionState();
+    mutate(sessionState);
+
+    expect(() => projectInstructorCase({ definition, sessionState })).toThrow(pattern);
+  });
+
   test('accepts same rule ID in assessment and plan namespaces in definition order', () => {
     const rawDefinition = makeCaseExperience();
     rawDefinition.planRequirements.rules[0].id = 'discover_npo';
@@ -855,7 +1117,10 @@ describe('case projection validation and determinism', () => {
 
     const projection = projectInstructorCase({
       definition,
-      sessionState: makeCaseSessionState({ ruleResults }),
+      sessionState: makeCaseSessionState({
+        ruleResults,
+        feedbackRevealIds: ['consider_npo'],
+      }),
     });
 
     expect(projection.ruleResults.map(({ id }) => id))

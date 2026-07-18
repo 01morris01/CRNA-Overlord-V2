@@ -518,13 +518,201 @@ function validateAssessmentEvidence(sessionState, references) {
   }
 }
 
-function validateRevisions(records) {
+function requireCanonicalTimelineRecord(sessionState, record, kind, label) {
+  const matches = sessionState.timeline.filter((entry) => (
+    entry.kind === kind
+    && entry.sequence === record.sequence
+    && Object.keys(record).every((key) => equalJsonSafe(entry[key], record[key]))
+  ));
+  if (matches.length !== 1) {
+    throw new TypeError(`${label} must match exactly one canonical ${kind} timeline record`);
+  }
+}
+
+function validateContiguousHistory(records, label, keyForRecord = () => 'all') {
+  const revisionsByKey = new Map();
+  let priorSequence = 0;
+  records.forEach((record, index) => {
+    if (record.sequence <= priorSequence) {
+      throw new TypeError(`${label} must be stored in strictly increasing sequence order`);
+    }
+    priorSequence = record.sequence;
+    const key = keyForRecord(record);
+    const expectedRevision = (revisionsByKey.get(key) ?? 0) + 1;
+    if (record.revision !== expectedRevision) {
+      throw new TypeError(
+        `${label}[${index}].revision must be contiguous from 1 for ${key}`,
+      );
+    }
+    revisionsByKey.set(key, expectedRevision);
+  });
+}
+
+function requireCurrentEqualsLatest(current, history, label) {
+  if (history.length === 0) {
+    if (current !== null) {
+      throw new TypeError(`sessionState.${label} must be null without ${label}History`);
+    }
+    return;
+  }
+  if (current === null || !equalJsonSafe(current, history.at(-1))) {
+    throw new TypeError(`sessionState.${label} must equal its latest history entry`);
+  }
+}
+
+function validateSubmissionEvidence(sessionState, references) {
+  validateContiguousHistory(
+    sessionState.findingsSubmissionHistory,
+    'sessionState.findingsSubmissionHistory',
+  );
+  requireCurrentEqualsLatest(
+    sessionState.findingsSubmission,
+    sessionState.findingsSubmissionHistory,
+    'findingsSubmission',
+  );
+
+  const initiallyAvailableIds = new Set([...references.findings.values()]
+    .filter(({ initiallyVisible }) => initiallyVisible)
+    .map(({ id }) => id));
+  for (const [index, submission] of sessionState.findingsSubmissionHistory.entries()) {
+    const availableIds = new Set(initiallyAvailableIds);
+    sessionState.assessmentRecords
+      .filter((record) => record.sequence < submission.sequence)
+      .forEach((record) => record.revealedFindingIds
+        .forEach((findingId) => availableIds.add(findingId)));
+    const unavailableId = submission.findingIds.find((id) => !availableIds.has(id));
+    if (unavailableId !== undefined) {
+      throw new TypeError(
+        `sessionState.findingsSubmissionHistory[${index}] finding ${unavailableId} was not available at submission sequence`,
+      );
+    }
+    requireCanonicalTimelineRecord(
+      sessionState,
+      submission,
+      'findings_submission',
+      `sessionState.findingsSubmissionHistory[${index}]`,
+    );
+  }
+
+  validateContiguousHistory(
+    sessionState.planSubmissionHistory,
+    'sessionState.planSubmissionHistory',
+  );
+  requireCurrentEqualsLatest(
+    sessionState.planSubmission,
+    sessionState.planSubmissionHistory,
+    'planSubmission',
+  );
+  sessionState.planSubmissionHistory.forEach((submission, index) => {
+    requireCanonicalTimelineRecord(
+      sessionState,
+      submission,
+      'plan_submission',
+      `sessionState.planSubmissionHistory[${index}]`,
+    );
+  });
+}
+
+function validateInstructorEvidence(sessionState, references) {
+  validateContiguousHistory(
+    sessionState.instructorObservationHistory,
+    'sessionState.instructorObservationHistory',
+    ({ considerationId }) => considerationId,
+  );
+  const latestObservations = new Map();
+  sessionState.instructorObservationHistory.forEach((observation, index) => {
+    latestObservations.set(observation.considerationId, observation);
+    requireCanonicalTimelineRecord(
+      sessionState,
+      observation,
+      'instructor_observation',
+      `sessionState.instructorObservationHistory[${index}]`,
+    );
+  });
+  const expectedObservations = [...references.considerations.values()]
+    .filter(({ id }) => latestObservations.has(id))
+    .map(({ id }) => latestObservations.get(id));
+  if (!equalJsonSafe(sessionState.instructorObservations, expectedObservations)) {
+    throw new TypeError(
+      'sessionState.instructorObservations must equal the latest history entry for each consideration',
+    );
+  }
+
+  validateContiguousHistory(
+    sessionState.feedbackRevealHistory,
+    'sessionState.feedbackRevealHistory',
+    ({ considerationId }) => considerationId,
+  );
+  const currentRevealIds = new Set([...references.considerations.values()]
+    .filter(({ defaultRevealInDebrief }) => defaultRevealInDebrief)
+    .map(({ id }) => id));
+  sessionState.feedbackRevealHistory.forEach((history, index) => {
+    if (history.reveal) currentRevealIds.add(history.considerationId);
+    else currentRevealIds.delete(history.considerationId);
+    requireCanonicalTimelineRecord(
+      sessionState,
+      history,
+      'feedback_reveal',
+      `sessionState.feedbackRevealHistory[${index}]`,
+    );
+  });
+  const expectedRevealIds = [...references.considerations.values()]
+    .filter(({ id }) => currentRevealIds.has(id))
+    .map(({ id }) => id);
+  if (!equalStringArrays(sessionState.feedbackRevealIds, expectedRevealIds)) {
+    throw new TypeError(
+      'sessionState.feedbackRevealIds must equal the latest reveal history state',
+    );
+  }
+}
+
+function validateRevisions(records, sessionState) {
   records.forEach((record, index) => {
     const label = `sessionState.revisions[${index}]`;
     requireExactKeys(record, REVISION_KEYS, label);
     requireRevision(record.revision, `${label}.revision`);
     validateRecordPosition(record, label);
+    requireCanonicalTimelineRecord(sessionState, record, 'revision_started', label);
   });
+  validateContiguousHistory(records, 'sessionState.revisions');
+}
+
+function validateAggregateChronology(sessionState) {
+  let previousTimeSec = 0;
+  sessionState.timeline.forEach((record, index) => {
+    const expectedSequence = index + 1;
+    if (record.sequence !== expectedSequence) {
+      throw new TypeError(
+        'sessionState.timeline sequence values must be unique, strict, and contiguous from 1',
+      );
+    }
+    if (record.tSec < previousTimeSec) {
+      throw new TypeError('sessionState.timeline tSec values must be nondecreasing');
+    }
+    previousTimeSec = record.tSec;
+  });
+
+  if (sessionState.sequence !== sessionState.timeline.length) {
+    throw new TypeError('sessionState.sequence must equal the maximum canonical timeline sequence');
+  }
+  const timelineTimeSec = sessionState.timeline.at(-1)?.tSec ?? 0;
+  const otherTimes = [
+    sessionState.finalizedAtSec,
+    ...sessionState.ruleResults.map(({ updatedAtSec }) => updatedAtSec),
+    ...sessionState.assessmentRecords.map(({ tSec }) => tSec),
+    ...sessionState.findingsSubmissionHistory.map(({ tSec }) => tSec),
+    ...sessionState.planSubmissionHistory.map(({ tSec }) => tSec),
+    ...sessionState.instructorObservationHistory.map(({ tSec }) => tSec),
+    ...sessionState.feedbackRevealHistory.map(({ tSec }) => tSec),
+    ...sessionState.revisions.map(({ tSec }) => tSec),
+  ].filter((value) => value !== null);
+  const maximumRecordedTimeSec = Math.max(timelineTimeSec, ...otherTimes, 0);
+  if (sessionState.currentTimeSec !== maximumRecordedTimeSec
+    || sessionState.currentTimeSec !== timelineTimeSec) {
+    throw new TypeError(
+      'sessionState.currentTimeSec must equal the maximum recorded canonical timeline time',
+    );
+  }
 }
 
 function copyAndValidateSessionState(sessionState, references) {
@@ -604,7 +792,10 @@ function copyAndValidateSessionState(sessionState, references) {
   validateFeedbackHistory(copied.feedbackRevealHistory, references);
   validateTimeline(copied.timeline, references);
   validateAssessmentEvidence(copied, references);
-  validateRevisions(copied.revisions);
+  validateAggregateChronology(copied);
+  validateSubmissionEvidence(copied, references);
+  validateInstructorEvidence(copied, references);
+  validateRevisions(copied.revisions, copied);
   return copied;
 }
 
@@ -719,6 +910,15 @@ function createLearnerAssessmentRecords(records) {
   });
 }
 
+function createLearnerPlanFields(definition) {
+  return definition.planRequirements.fields.map((field) => ({
+    id: field.id,
+    type: field.type,
+    required: field.required,
+    options: field.options,
+  }));
+}
+
 function createLearnerSubmission(submission, allowedKeys) {
   if (submission === null) return null;
   const projected = {};
@@ -772,6 +972,7 @@ export function projectLearnerCase({ definition, sessionState, flowState = null 
       bloodLossRisk: safeDefinition.surgery.bloodLossRisk,
     },
     assessmentStages: safeDefinition.assessment.stages,
+    planFields: createLearnerPlanFields(safeDefinition),
     actions: createLearnerActions(safeDefinition, safeState),
     discoveredFindings: createLearnerFindings(safeDefinition, safeState),
     assessmentRecords: createLearnerAssessmentRecords(safeState.assessmentRecords),

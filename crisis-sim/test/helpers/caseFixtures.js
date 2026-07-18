@@ -55,6 +55,11 @@ export function makeCaseExperience() {
         required: true,
         options: ['proceed', 'postpone'],
       }],
+      completionRoutes: [{
+        fieldId: 'disposition',
+        equals: 'postpone',
+        stage: 'appropriately_deferred',
+      }],
       rules: [{
         id: 'plan_proceed',
         label: 'Selects disposition',
