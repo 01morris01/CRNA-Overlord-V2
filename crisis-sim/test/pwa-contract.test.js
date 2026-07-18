@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -76,5 +77,31 @@ describe('live simulation PWA contract', () => {
     }
     const normalized = entries.map((entry) => entry.split('?')[0]);
     expect(new Set(normalized).size).toBe(normalized.length);
+  });
+
+  it('evicts only prior Overlord caches while preserving unrelated Cache Storage entries', async () => {
+    const listeners = new Map();
+    const deleted = [];
+    runInNewContext(sw, {
+      caches: {
+        keys: async () => [
+          'overlord-v53-rubric-debrief-2026-07-17',
+          'overlord-v52-live-sim-lidocaine-2026-07-15',
+          'workbox-precache-v1',
+          'hospital-offline-data',
+        ],
+        delete: async (key) => { deleted.push(key); return true; },
+      },
+      self: {
+        addEventListener: (type, listener) => listeners.set(type, listener),
+        skipWaiting: () => {},
+        clients: { claim: async () => {} },
+      },
+      URL,
+    });
+    let activation;
+    listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
+    await activation;
+    expect(deleted).toEqual(['overlord-v52-live-sim-lidocaine-2026-07-15']);
   });
 });

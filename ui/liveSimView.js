@@ -35,6 +35,7 @@ let latestRubricResult = null;
 let latestRubricPresentationKey = null;
 let latestRubricDebrief = null;
 let clearRubricDraftsOnNextRender = false;
+const preparedRubricPrintState = new WeakMap();
 
 const patientFields = [
   ['weightKg', 'Weight', 'kg', 1],
@@ -254,9 +255,9 @@ export function renderPrintableRubric({ debrief, rubricMetadata, identity = {} }
         ${warningMarkup}
       </header>
       <dl class="live-print-identity">
-        <div><dt>Student</dt><dd>${escapeHtml(identity.student ?? '')}</dd></div>
-        <div><dt>Evaluator</dt><dd>${escapeHtml(identity.evaluator ?? '')}</dd></div>
-        <div><dt>Date</dt><dd>${escapeHtml(identity.date ?? '')}</dd></div>
+        <div><dt>Student</dt><dd id="live-print-student">${escapeHtml(identity.student ?? '')}</dd></div>
+        <div><dt>Evaluator</dt><dd id="live-print-evaluator">${escapeHtml(identity.evaluator ?? '')}</dd></div>
+        <div><dt>Date</dt><dd id="live-print-date">${escapeHtml(identity.date ?? '')}</dd></div>
       </dl>
       <section class="live-print-outcome" aria-label="Final rubric result">
         <p>FINAL RESULT</p><strong>${escapeHtml(result.outcome)}</strong>
@@ -312,12 +313,17 @@ export function resetRubricPrintState(documentRoot) {
   if (status) status.textContent = 'Finalize the rubric to prepare its print document.';
   const printDocument = documentRoot?.getElementById?.('live-rubric-print-document');
   if (printDocument) {
+    preparedRubricPrintState.delete(printDocument);
+    if (printDocument.dataset) {
+      delete printDocument.dataset.rubricPrintPrepared;
+      delete printDocument.dataset.rubricPrintId;
+    }
     printDocument.innerHTML = '';
     printDocument.hidden = true;
   }
 }
 
-export function prepareFinalizedRubricPrint({
+function validatedRubricPrintContext({
   runner: liveRunner,
   debrief,
   documentRoot,
@@ -327,8 +333,37 @@ export function prepareFinalizedRubricPrint({
   }
   const rubricMetadata = liveRunner.getRubricPrintMetadata();
   if (!rubricMetadata) return { ok: false, reason: 'RUBRIC_METADATA_UNAVAILABLE' };
+  if (debrief.rubricResult.rubricId !== rubricMetadata.id) {
+    throw new RangeError('Rubric print metadata does not match the finalized debrief');
+  }
   const printDocument = documentRoot?.getElementById?.('live-rubric-print-document');
   if (!printDocument) return { ok: false, reason: 'PRINT_DOCUMENT_UNAVAILABLE' };
+  return {
+    ok: true, liveRunner, debrief, documentRoot, rubricMetadata, printDocument,
+  };
+}
+
+function setRubricPrintStatus(documentRoot, message) {
+  const status = documentRoot?.getElementById?.('live-rubric-print-status');
+  if (status) status.textContent = message;
+}
+
+function updatePreparedRubricIdentity(printDocument, identity) {
+  const entries = [
+    ['#live-print-student', identity.student],
+    ['#live-print-evaluator', identity.evaluator],
+    ['#live-print-date', identity.date],
+  ];
+  const nodes = entries.map(([selector]) => printDocument.querySelector?.(selector) ?? null);
+  if (nodes.some((node) => node === null)) return false;
+  nodes.forEach((node, index) => { node.textContent = entries[index][1]; });
+  return true;
+}
+
+function writeFinalizedRubricPrint(context) {
+  const {
+    debrief, documentRoot, rubricMetadata, printDocument,
+  } = context;
   const markup = renderPrintableRubric({
     debrief,
     rubricMetadata,
@@ -336,9 +371,21 @@ export function prepareFinalizedRubricPrint({
   });
   printDocument.innerHTML = markup;
   printDocument.hidden = false;
-  const status = documentRoot?.getElementById?.('live-rubric-print-status');
-  if (status) status.textContent = 'Finalized rubric print document prepared.';
-  return { ok: true, markup, rubricMetadata };
+  if (printDocument.dataset) {
+    printDocument.dataset.rubricPrintPrepared = 'true';
+    printDocument.dataset.rubricPrintId = rubricMetadata.id;
+  }
+  preparedRubricPrintState.set(printDocument, {
+    debrief,
+    rubricId: rubricMetadata.id,
+  });
+  setRubricPrintStatus(documentRoot, 'Finalized rubric print document prepared.');
+  return { ok: true, reused: false, markup, rubricMetadata };
+}
+
+export function prepareFinalizedRubricPrint(options = {}) {
+  const context = validatedRubricPrintContext(options);
+  return context.ok ? writeFinalizedRubricPrint(context) : context;
 }
 
 export function runRubricPrintAction({
@@ -347,10 +394,26 @@ export function runRubricPrintAction({
   documentRoot,
   printImpl = () => globalThis.print?.(),
 } = {}) {
-  const prepared = prepareFinalizedRubricPrint({
+  const context = validatedRubricPrintContext({
     runner: liveRunner, debrief, documentRoot,
   });
-  if (!prepared.ok) return prepared;
+  if (!context.ok) return context;
+  const { printDocument, rubricMetadata } = context;
+  const preparedState = preparedRubricPrintState.get(printDocument);
+  const markerMatches = printDocument.dataset?.rubricPrintPrepared === 'true'
+    && printDocument.dataset?.rubricPrintId === rubricMetadata.id;
+  const stateMatches = preparedState?.debrief === debrief
+    && preparedState?.rubricId === rubricMetadata.id;
+  let prepared;
+  if (markerMatches && stateMatches && updatePreparedRubricIdentity(
+    printDocument,
+    rubricPrintIdentity(documentRoot),
+  )) {
+    setRubricPrintStatus(documentRoot, 'Finalized rubric print document ready.');
+    prepared = { ok: true, reused: true, rubricMetadata };
+  } else {
+    prepared = writeFinalizedRubricPrint(context);
+  }
   printImpl();
   return prepared;
 }

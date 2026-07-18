@@ -208,10 +208,13 @@ describe('live rubric instructor console', () => {
     expect(markup).toContain(metadata.course);
     expect(markup).toContain(metadata.sourceFile);
     expect(markup).toContain('Student');
+    expect(markup).toContain('id="live-print-student"');
     expect(markup).toContain('A. Student');
     expect(markup).toContain('Evaluator');
+    expect(markup).toContain('id="live-print-evaluator"');
     expect(markup).toContain('E. Faculty');
     expect(markup).toContain('Date');
+    expect(markup).toContain('id="live-print-date"');
     expect(markup).toContain('2026-07-17');
     expect(markup).toContain('NOT PASS');
     expect(markup).toContain('2 / 4');
@@ -365,6 +368,82 @@ describe('live rubric instructor console', () => {
     expect(printDocument.innerHTML).toContain('Student One');
     expect(printDocument.innerHTML).toContain('Evaluator One');
     expect(printImpl).toHaveBeenCalledOnce();
+  });
+
+  it('reuses the finalized report and updates only safe identity text on ordinary print clicks', () => {
+    const identityNodes = {
+      '#live-print-student': { textContent: '' },
+      '#live-print-evaluator': { textContent: '' },
+      '#live-print-date': { textContent: '' },
+    };
+    let innerHtmlWrites = 0;
+    let innerHtml = '';
+    const printDocument = {
+      dataset: {},
+      hidden: true,
+      querySelector: (selector) => identityNodes[selector] ?? null,
+      get innerHTML() { return innerHtml; },
+      set innerHTML(value) { innerHtmlWrites += 1; innerHtml = value; },
+    };
+    const values = {
+      'live-rubric-student': { value: 'Student One' },
+      'live-rubric-evaluator': { value: 'Evaluator One' },
+      'live-rubric-date': { value: '2026-07-17' },
+      'live-rubric-print-document': printDocument,
+    };
+    const documentRoot = { getElementById: (id) => values[id] ?? null };
+    const metadata = {
+      id: 'test', title: 'Test rubric', course: 'Course', sourceFile: 'source.pdf',
+      sourceHeaderDenominator: 1, sourceFootnoteScoredItems: 1, computedMaxPoints: 2,
+      passRule: { minimumPercent: 85, requireEveryCriticalPerformed: true },
+      pointScale: { performed: 2, partial: 1, notPerformed: 0 }, discrepancies: [],
+    };
+    const runner = {
+      isRubricFinalized: vi.fn(() => true),
+      getRubricPrintMetadata: vi.fn(() => ({ ...metadata })),
+    };
+    const debrief = {
+      rubricResult: {
+        rubricId: 'test', rawPoints: 2, maxPoints: 2, percentage: 100,
+        outcome: 'PASS', criticalItemsOmitted: [], items: [],
+      },
+      actionTimeline: [], physiologicTrace: [], violationFlags: [], administrativeActions: [],
+    };
+
+    expect(liveSimView.prepareFinalizedRubricPrint({
+      runner, debrief, documentRoot,
+    })).toMatchObject({ ok: true });
+    expect(innerHtmlWrites).toBe(1);
+    expect(printDocument.dataset).toMatchObject({
+      rubricPrintPrepared: 'true', rubricPrintId: 'test',
+    });
+
+    values['live-rubric-student'].value = 'Student Two <safe text>';
+    values['live-rubric-evaluator'].value = 'Evaluator Two';
+    values['live-rubric-date'].value = '2026-07-18';
+    const printImpl = vi.fn();
+    expect(liveSimView.runRubricPrintAction({
+      runner, debrief, documentRoot, printImpl,
+    })).toMatchObject({ ok: true, reused: true });
+    expect(liveSimView.runRubricPrintAction({
+      runner, debrief, documentRoot, printImpl,
+    })).toMatchObject({ ok: true, reused: true });
+    expect(innerHtmlWrites).toBe(1);
+    expect(identityNodes['#live-print-student'].textContent).toBe('Student Two <safe text>');
+    expect(identityNodes['#live-print-evaluator'].textContent).toBe('Evaluator Two');
+    expect(identityNodes['#live-print-date'].textContent).toBe('2026-07-18');
+    expect(printImpl).toHaveBeenCalledTimes(2);
+
+    runner.getRubricPrintMetadata.mockReturnValue({ ...metadata, id: 'different-rubric' });
+    expect(() => liveSimView.runRubricPrintAction({
+      runner, debrief, documentRoot, printImpl,
+    })).toThrow(/does not match the finalized debrief/);
+    expect(innerHtmlWrites).toBe(1);
+    expect(printImpl).toHaveBeenCalledTimes(2);
+
+    liveSimView.resetRubricPrintState(documentRoot);
+    expect(printDocument.dataset).not.toHaveProperty('rubricPrintPrepared');
+    expect(printDocument.dataset).not.toHaveProperty('rubricPrintId');
   });
 
   it('clears print identity and prepared markup on load/reset without live rubric rerenders touching it', () => {
@@ -705,6 +784,7 @@ describe('live rubric instructor console', () => {
   it('keeps the implementation on the engine truth boundary and makes rubric scrolling independent', () => {
     const controller = read('ui/liveSimView.js');
     const css = read('assets/css/live-sim.css');
+    const index = read('index.html');
     expect(controller).toContain('liveRunner.loadRubricScenario({ scenario, rubric })');
     expect(controller).toContain('liveRunner.getRubricStatus()');
     expect(controller).toContain('liveRunner.getRubricPrintMetadata()');
@@ -718,5 +798,11 @@ describe('live rubric instructor console', () => {
     expect(css).toMatch(/@media print[\s\S]*\.live-rubric-print-document\s*\{[^}]*display:\s*block/s);
     expect(css).toMatch(/@media print[\s\S]*break-inside:\s*avoid/s);
     expect(css).toMatch(/@media print[\s\S]*thead\s*\{[^}]*display:\s*table-header-group/s);
+    expect(index).toMatch(/<div id="app">[\s\S]*<section id="live-sim-view"/);
+    expect(css).not.toContain('body > *:not(.live-sim-view)');
+    expect(css).toMatch(/@media print[\s\S]*body > \*:not\(#app\)\s*\{[^}]*display:\s*none/s);
+    expect(css).toMatch(/@media print[\s\S]*#app\s*\{[^}]*position:\s*static[^}]*display:\s*block[^}]*pointer-events:\s*auto[^}]*overflow:\s*visible/s);
+    expect(css).toMatch(/@media print[\s\S]*#app > \*:not\(\.live-sim-view\)\s*\{[^}]*display:\s*none/s);
+    expect(css).toMatch(/@media print[\s\S]*body::after\s*\{[^}]*display:\s*none/s);
   });
 });
