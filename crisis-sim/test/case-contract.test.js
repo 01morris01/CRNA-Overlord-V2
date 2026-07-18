@@ -44,6 +44,36 @@ function firstEvent(definition) {
   return definition.eventFlow.events[0];
 }
 
+function addReachableSecondPhase(definition) {
+  definition.eventFlow.phases.push({
+    id: 'recovery',
+    title: 'Recovery',
+    enterWhen: { type: 'instructor' },
+    events: ['recovery_ready'],
+    completionWhen: { type: 'instructor_advance' },
+    allowedInstructorControls: ['advance'],
+  });
+  definition.eventFlow.events.push({
+    id: 'recovery_ready',
+    phaseId: 'recovery',
+    trigger: { type: 'phase_enter' },
+    repeatable: false,
+    responseWindowSec: 0,
+    expectedResponses: [],
+    unsafeResponses: [],
+    effect: null,
+    guidanceIds: [],
+    debriefIds: [],
+  });
+  definition.eventFlow.branches.push({
+    id: 'advance_to_recovery',
+    label: 'Advance to recovery',
+    fromPhaseId: 'assessment',
+    toPhaseId: 'recovery',
+    instructorOnly: true,
+  });
+}
+
 describe('case experience normalization', () => {
   test('returns null when a legacy scenario has no case experience', () => {
     expect(normalizeCaseExperience({})).toBeNull();
@@ -113,6 +143,14 @@ describe('case experience normalization', () => {
     expect(() => normalizeCaseExperience({
       caseExperience: { ...makeCaseExperience(), instructorGuide: undefined },
     })).toThrow(/complete case experience|JSON-safe/i);
+  });
+
+  test('treats only an absent or explicit-null wrapper as legacy case content', () => {
+    expect(normalizeCaseExperience({})).toBeNull();
+    expect(() => normalizeCaseExperience({ caseExperience: {} }))
+      .toThrow(/complete case experience/i);
+    expect(() => normalizeCaseExperience({ caseExperience: { version: 1 } }))
+      .toThrow(/complete case experience/i);
   });
 });
 
@@ -230,6 +268,65 @@ describe('stable identifiers and references', () => {
 
     expect(() => normalizeCaseExperience(definition))
       .toThrow(/unreachable.*phase|phase.*unreachable/i);
+  });
+
+  test('requires every event to be listed exactly once by its owning phase', () => {
+    const omitted = withMutation((value) => {
+      value.eventFlow.phases[0].events = [];
+    });
+    expect(() => normalizeCaseExperience(omitted))
+      .toThrow(/event.*listed|phase.*event|event.*membership/i);
+
+    const duplicate = withMutation((value) => {
+      value.eventFlow.phases[0].events.push('assessment_ready');
+    });
+    expect(() => normalizeCaseExperience(duplicate))
+      .toThrow(/event.*exactly once|duplicate.*event|event.*membership/i);
+  });
+
+  test('rejects event membership in a phase other than the event owner', () => {
+    const definition = withMutation((value) => {
+      addReachableSecondPhase(value);
+      value.eventFlow.phases[0].events = [];
+      value.eventFlow.phases[1].events.unshift('assessment_ready');
+    });
+
+    expect(() => normalizeCaseExperience(definition))
+      .toThrow(/event.*phase|phase.*event|owner|owning/i);
+  });
+
+  test('requires a consideration event to belong to the consideration phase', () => {
+    const definition = withMutation((value) => {
+      addReachableSecondPhase(value);
+      value.instructorGuide.considerations[0].phaseId = 'recovery';
+    });
+
+    expect(() => normalizeCaseExperience(definition))
+      .toThrow(/consideration.*event.*phase|event.*belong|phase.*mismatch/i);
+  });
+
+  test('rejects self-referential and multi-action prerequisite cycles', () => {
+    const selfCycle = withMutation((value) => {
+      value.assessment.actions[0].prerequisites = ['ask_npo'];
+    });
+    expect(() => normalizeCaseExperience(selfCycle))
+      .toThrow(/prerequisite.*cycle|cyclic.*prerequisite/i);
+
+    const multiActionCycle = withMutation((value) => {
+      const secondAction = structuredClone(value.assessment.actions[0]);
+      secondAction.id = 'confirm_npo';
+      secondAction.scoringRuleId = 'confirm_npo_rule';
+      secondAction.prerequisites = ['ask_npo'];
+      value.assessment.actions[0].prerequisites = ['confirm_npo'];
+      value.assessment.actions.push(secondAction);
+
+      const secondRule = structuredClone(value.assessment.scoringRules[0]);
+      secondRule.id = 'confirm_npo_rule';
+      secondRule.evidence.actionId = 'confirm_npo';
+      value.assessment.scoringRules.push(secondRule);
+    });
+    expect(() => normalizeCaseExperience(multiActionCycle))
+      .toThrow(/prerequisite.*cycle|cyclic.*prerequisite/i);
   });
 });
 

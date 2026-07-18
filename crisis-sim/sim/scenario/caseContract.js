@@ -284,6 +284,27 @@ function requireReference(ids, id, label) {
   if (!ids.has(id)) throw new TypeError(`${label} references unknown id ${id}`);
 }
 
+function rejectPrerequisiteCycles(actions) {
+  const actionsById = new Map(actions.map((action) => [action.id, action]));
+  const visitState = new Map();
+
+  function visit(actionId) {
+    const state = visitState.get(actionId);
+    if (state === 'visiting') {
+      throw new TypeError(`assessment prerequisite cycle detected at action ${actionId}`);
+    }
+    if (state === 'visited') return;
+
+    visitState.set(actionId, 'visiting');
+    for (const prerequisiteId of actionsById.get(actionId).prerequisites) {
+      visit(prerequisiteId);
+    }
+    visitState.set(actionId, 'visited');
+  }
+
+  for (const action of actions) visit(action.id);
+}
+
 function requireFixedStepSeconds(value, label) {
   requireFiniteNumber(value, label);
   if (value < 0) throw new RangeError(`${label} must be nonnegative`);
@@ -716,6 +737,7 @@ function validateReferences(value) {
       `assessment.actions[${index}] scoring rule`,
     );
   });
+  rejectPrerequisiteCycles(value.assessment.actions);
   value.assessment.scoringRules.forEach((rule, index) => requireReference(
     actionIds,
     rule.evidence.actionId,
@@ -728,12 +750,25 @@ function validateReferences(value) {
   ));
 
   requireReference(phaseIds, value.eventFlow.initialPhaseId, 'eventFlow initial phase');
+  const eventsById = new Map(value.eventFlow.events.map((event) => [event.id, event]));
+  const eventMembershipCounts = new Map(
+    value.eventFlow.events.map((event) => [event.id, 0]),
+  );
   value.eventFlow.phases.forEach((phase, index) => {
     phase.events.forEach((eventId) => requireReference(
       eventIds,
       eventId,
       `eventFlow.phases[${index}] event`,
     ));
+    phase.events.forEach((eventId) => {
+      const event = eventsById.get(eventId);
+      eventMembershipCounts.set(eventId, eventMembershipCounts.get(eventId) + 1);
+      if (event.phaseId !== phase.id) {
+        throw new TypeError(
+          `event ${eventId} is listed under phase ${phase.id} but declares owning phase ${event.phaseId}`,
+        );
+      }
+    });
     if (phase.completionWhen.type === 'event_fired') {
       requireReference(
         eventIds,
@@ -751,6 +786,12 @@ function validateReferences(value) {
   });
   value.eventFlow.events.forEach((event, index) => {
     requireReference(phaseIds, event.phaseId, `eventFlow.events[${index}] phase`);
+    const membershipCount = eventMembershipCounts.get(event.id);
+    if (membershipCount !== 1) {
+      throw new TypeError(
+        `event ${event.id} must be listed exactly once in its owning phase; found ${membershipCount}`,
+      );
+    }
     event.guidanceIds.forEach((id) => requireReference(
       guidanceIds,
       id,
@@ -773,6 +814,12 @@ function validateReferences(value) {
       consideration.eventId,
       `instructorGuide.considerations[${index}] event`,
     );
+    const considerationEvent = eventsById.get(consideration.eventId);
+    if (considerationEvent.phaseId !== consideration.phaseId) {
+      throw new TypeError(
+        `consideration ${consideration.id} event ${consideration.eventId} belongs to phase ${considerationEvent.phaseId}, not declared phase ${consideration.phaseId}`,
+      );
+    }
   });
   value.eventFlow.branches.forEach((branch, index) => {
     requireReference(phaseIds, branch.fromPhaseId, `eventFlow.branches[${index}] from phase`);
@@ -822,7 +869,8 @@ export function normalizeCaseExperience(input) {
     throw new TypeError('case experience input must be a plain object');
   }
 
-  const candidate = Object.hasOwn(input, 'caseExperience')
+  const isWrapped = Object.hasOwn(input, 'caseExperience');
+  const candidate = isWrapped
     ? getWrappedCaseExperience(input)
     : input;
   if (candidate === null) return null;
@@ -831,7 +879,7 @@ export function normalizeCaseExperience(input) {
   }
 
   const presentSections = CASE_SECTION_KEYS.filter((key) => Object.hasOwn(candidate, key));
-  if (presentSections.length === 0) return null;
+  if (presentSections.length === 0 && !isWrapped) return null;
   if (presentSections.length === 1
     && presentSections[0] === 'debrief'
     && Object.hasOwn(candidate, 'events')) return null;
