@@ -237,6 +237,71 @@ export function finalizeRubricDebrief(liveRunner) {
   return { ok: true, finalized, debrief: liveRunner.buildDebrief() };
 }
 
+export function focusPendingRubricItem(documentRoot, itemId) {
+  if (!itemId) return null;
+  const row = documentRoot?.getElementById?.(`live-rubric-item-${itemId}`) ?? null;
+  if (!row) return null;
+  row.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+  const score = row.querySelector?.('[data-rubric-points]') ?? null;
+  (score ?? row).focus?.();
+  return row;
+}
+
+export function runRubricFinalizationAction({
+  runner: liveRunner,
+  documentRoot,
+  onPending = () => {},
+  onFinalized = () => {},
+} = {}) {
+  const result = finalizeRubricDebrief(liveRunner);
+  if (!result.ok) {
+    focusPendingRubricItem(documentRoot, result.pendingItemIds?.[0]);
+    onPending(result);
+    return result;
+  }
+  onFinalized(result);
+  return result;
+}
+
+export function bindRubricActionControls({
+  rootElement,
+  getRunner,
+  onScore = () => {},
+  onNmb = () => {},
+  onError = () => {},
+} = {}) {
+  const runNmbTarget = (value) => {
+    try {
+      const status = applyInstructorNmbTarget(getRunner(), value);
+      onNmb(status);
+    } catch (error) {
+      onError(error);
+    }
+  };
+
+  rootElement?.querySelector?.('#live-rubric-items')?.addEventListener('click', (event) => {
+    const scoreButton = event.target?.closest?.('[data-rubric-points]');
+    if (!scoreButton) return;
+    const itemId = scoreButton.dataset.rubricItem;
+    const points = Number(scoreButton.dataset.rubricPoints);
+    const note = [...(rootElement.querySelectorAll?.('[data-rubric-note]') ?? [])]
+      .find((input) => input.dataset.rubricNote === itemId)?.value ?? '';
+    try {
+      const scored = applyInstructorRubricScore(getRunner(), { itemId, points, note });
+      onScore(scored);
+    } catch (error) {
+      onError(error);
+    }
+  });
+
+  for (const button of rootElement?.querySelectorAll?.('[data-nmb-target]') ?? []) {
+    button.addEventListener('click', () => runNmbTarget(button.dataset.nmbTarget));
+  }
+  rootElement?.querySelector?.('#live-instructor-nmb-apply')?.addEventListener('click', () => {
+    runNmbTarget(rootElement.querySelector?.('#live-instructor-nmb-custom')?.value);
+  });
+}
+
 export async function loadRubricScenarioAssets(liveRunner, scenarioId, fetchImpl = globalThis.fetch) {
   const assets = RUBRIC_SCENARIO_ASSETS[scenarioId];
   if (!assets) throw new RangeError(`Unknown rubric scenario: ${scenarioId}`);
@@ -575,7 +640,50 @@ function renderInstructorNmb(snapshot) {
   if (readback) readback.dataset.state = nmb.equilibrium.toLowerCase().replace(' ', '-');
 }
 
-function rubricPresentationKey(result) {
+function boundedEvidenceValue(value, depth = 0) {
+  if (value === null || typeof value === 'boolean' || typeof value === 'number') return value;
+  if (typeof value === 'string') {
+    return value.length <= 160 ? value : `${value.slice(0, 160)}#${value.length}`;
+  }
+  if (depth >= 4) {
+    if (Array.isArray(value)) return { type: 'array', length: value.length };
+    return { type: 'object', keyCount: Object.keys(value).length };
+  }
+  if (Array.isArray(value)) {
+    const sample = value.length <= 4
+      ? value
+      : [...value.slice(0, 2), ...value.slice(-2)];
+    return {
+      type: 'array',
+      length: value.length,
+      sample: sample.map((entry) => boundedEvidenceValue(entry, depth + 1)),
+    };
+  }
+  if (value && typeof value === 'object') {
+    const keys = Object.keys(value).sort();
+    return {
+      type: 'object',
+      keyCount: keys.length,
+      entries: keys.slice(0, 24).map((key) => [
+        key,
+        boundedEvidenceValue(value[key], depth + 1),
+      ]),
+    };
+  }
+  return String(value);
+}
+
+function boundedEvidenceSignature(evidence) {
+  const serialized = JSON.stringify(boundedEvidenceValue(evidence));
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < serialized.length; index += 1) {
+    hash ^= serialized.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return `${serialized.length}:${hash.toString(16).padStart(8, '0')}`;
+}
+
+export function buildRubricPresentationKey(result) {
   if (!result) return 'NO_RUBRIC';
   return JSON.stringify({
     rubricId: result.rubricId,
@@ -587,7 +695,16 @@ function rubricPresentationKey(result) {
     pendingInstructorCount: result.pendingInstructorCount,
     pendingEngineCount: result.pendingEngineCount,
     pendingUnscoreableCount: result.pendingUnscoreableCount,
-    items: result.items.map(({ id, status, points, note }) => ({ id, status, points, note })),
+    items: result.items.map(({
+      id, status, points, note, updatedAtSec, evidence,
+    }) => ({
+      id,
+      status,
+      points,
+      note,
+      updatedAtSec,
+      evidence: boundedEvidenceSignature(evidence),
+    })),
     violations: result.violations.map(({ itemId, tSec, triggerAction }) => ({
       itemId, tSec, triggerAction,
     })),
@@ -755,7 +872,7 @@ function renderSnapshot(snapshot) {
   const rubricResult = runner?.getRubricStatus() ?? null;
   if (rubricResult !== latestRubricResult) {
     latestRubricResult = rubricResult;
-    const presentationKey = rubricPresentationKey(rubricResult);
+    const presentationKey = buildRubricPresentationKey(rubricResult);
     if (presentationKey !== latestRubricPresentationKey) {
       latestRubricPresentationKey = presentationKey;
       renderRubricResult(rubricResult);
@@ -907,34 +1024,28 @@ async function loadSelectedRubricScenario() {
   }
 }
 
-function focusFirstPendingRubricItem(itemId) {
-  if (!itemId) return;
-  const row = document.getElementById(`live-rubric-item-${itemId}`);
-  row?.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  const score = row?.querySelector('[data-rubric-points]');
-  (score ?? row)?.focus();
-}
-
 function finalizeLiveRubric() {
   const liveRunner = ensureRunner();
   try {
-    const result = finalizeRubricDebrief(liveRunner);
-    if (!result.ok) {
-      const pendingCount = result.pendingItemIds?.length ?? 0;
-      const message = result.reason === 'INSTRUCTOR_SCORES_PENDING'
-        ? `${pendingCount} instructor observation${pendingCount === 1 ? '' : 's'} pending. Complete the highlighted rubric rows before finalization.`
-        : `Finalization blocked: ${result.reason}.`;
-      setText('live-rubric-finalization-status', message);
-      setStatus(message, 'error');
-      focusFirstPendingRubricItem(result.pendingItemIds?.[0]);
-      return result;
-    }
-    latestRubricDebrief = result.debrief;
-    latestRubricResult = null;
-    latestRubricPresentationKey = null;
-    liveRunner.emit();
-    setStatus(`Rubric finalized · ${result.finalized.outcome}.`, 'success');
-    return result;
+    return runRubricFinalizationAction({
+      runner: liveRunner,
+      documentRoot: document,
+      onPending: (result) => {
+        const pendingCount = result.pendingItemIds?.length ?? 0;
+        const message = result.reason === 'INSTRUCTOR_SCORES_PENDING'
+          ? `${pendingCount} instructor observation${pendingCount === 1 ? '' : 's'} pending. Complete the highlighted rubric rows before finalization.`
+          : `Finalization blocked: ${result.reason}.`;
+        setText('live-rubric-finalization-status', message);
+        setStatus(message, 'error');
+      },
+      onFinalized: (result) => {
+        latestRubricDebrief = result.debrief;
+        latestRubricResult = null;
+        latestRubricPresentationKey = null;
+        liveRunner.emit();
+        setStatus(`Rubric finalized · ${result.finalized.outcome}.`, 'success');
+      },
+    });
   } catch (error) {
     setStatus(`Finalization failed: ${error.message}`, 'error');
     return { ok: false, reason: error.message };
@@ -947,7 +1058,8 @@ function downloadDebrief() {
   const rubricStatus = liveRunner.getRubricStatus();
   if (rubricStatus && !rubricStatus.finalized) {
     setStatus('Finalize the live rubric before exporting its debrief.', 'error');
-    focusFirstPendingRubricItem(
+    focusPendingRubricItem(
+      document,
       rubricStatus.items.find((item) => item.scoringSource === 'INSTRUCTOR_OBSERVED' && item.points === null)?.id,
     );
     return;
@@ -1089,36 +1201,18 @@ function bindControls() {
     setStatus(status.message, status.kind);
   });
   document.getElementById('live-rubric-load')?.addEventListener('click', loadSelectedRubricScenario);
-  document.getElementById('live-rubric-items')?.addEventListener('click', (event) => {
-    const scoreButton = event.target.closest('[data-rubric-points]');
-    if (!scoreButton) return;
-    const itemId = scoreButton.dataset.rubricItem;
-    const points = Number(scoreButton.dataset.rubricPoints);
-    const note = [...view.querySelectorAll('[data-rubric-note]')]
-      .find((input) => input.dataset.rubricNote === itemId)?.value ?? '';
-    try {
-      const liveRunner = ensureRunner();
-      const scored = applyInstructorRubricScore(liveRunner, { itemId, points, note });
+  bindRubricActionControls({
+    rootElement: view,
+    getRunner: ensureRunner,
+    onScore: (scored) => {
       latestRubricDebrief = null;
-      liveRunner.emit();
+      ensureRunner().emit();
       setStatus(`Instructor score updated · item ${scored.displayNumber} · ${scored.points}/2.`, 'success');
-    } catch (error) {
-      setStatus(`Instructor score not saved: ${error.message}`, 'error');
-    }
-  });
-  const setNmbTarget = (value) => {
-    try {
-      const status = applyInstructorNmbTarget(ensureRunner(), value);
+    },
+    onNmb: (status) => {
       setStatus(`Administrative NMB target set to TOF ratio ${status.targetTofRatio.toFixed(2)}.`, 'success');
-    } catch (error) {
-      setStatus(error.message, 'error');
-    }
-  };
-  for (const button of view.querySelectorAll('[data-nmb-target]')) {
-    button.addEventListener('click', () => setNmbTarget(button.dataset.nmbTarget));
-  }
-  document.getElementById('live-instructor-nmb-apply')?.addEventListener('click', () => {
-    setNmbTarget(document.getElementById('live-instructor-nmb-custom')?.value);
+    },
+    onError: (error) => setStatus(`Rubric control failed: ${error.message}`, 'error'),
   });
   document.getElementById('live-rubric-finalize')?.addEventListener('click', finalizeLiveRubric);
   document.getElementById('live-rubric-print')?.addEventListener('click', () => {

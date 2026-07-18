@@ -5,14 +5,43 @@ import { SimRunner } from '../ui/simRunner.js';
 import {
   applyInstructorNmbTarget,
   applyInstructorRubricScore,
+  bindRubricActionControls,
+  buildRubricPresentationKey,
   finalizeRubricDebrief,
+  focusPendingRubricItem,
   loadRubricScenarioAssets,
   renderRubricConsoleShell,
   renderRubricItemMarkup,
+  runRubricFinalizationAction,
 } from '../../ui/liveSimView.js';
 
 const root = resolve(import.meta.dirname, '../..');
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
+
+class FakeElement {
+  constructor({ dataset = {}, value = '' } = {}) {
+    this.dataset = dataset;
+    this.value = value;
+    this.listeners = new Map();
+  }
+
+  addEventListener(type, listener) {
+    const listeners = this.listeners.get(type) ?? [];
+    listeners.push(listener);
+    this.listeners.set(type, listeners);
+  }
+
+  emit(type, target = this) {
+    for (const listener of this.listeners.get(type) ?? []) listener({ target });
+  }
+
+  closest(selector) {
+    if (selector === '[data-rubric-points]' && Object.hasOwn(this.dataset, 'rubricPoints')) {
+      return this;
+    }
+    return null;
+  }
+}
 
 describe('live rubric instructor console', () => {
   it('exposes cached live status and timestamped instructor scoring through the runner', () => {
@@ -112,6 +141,108 @@ describe('live rubric instructor console', () => {
     expect(instructor.match(/data-rubric-points="[210]"/g)).toHaveLength(3);
     expect(instructor).toContain('aria-label="Score item 1 performed, 2 points"');
     expect(instructor).toContain('data-rubric-note="rsi-1"');
+  });
+
+  it('changes the bounded presentation key when live evidence or its timestamp changes', () => {
+    const result = {
+      rubricId: 'test-rubric', rawPoints: 0, maxPoints: 2, percentage: 0,
+      finalized: false, outcome: null,
+      pendingInstructorCount: 0, pendingEngineCount: 1, pendingUnscoreableCount: 0,
+      items: [{
+        id: 'engine-1', status: 'pending', points: null, note: '', updatedAtSec: 4,
+        evidence: { ruleId: 'rule', actions: [], trace: [{ tSec: 4, observed: { spo2: 97 } }] },
+      }],
+      violations: [],
+    };
+    const original = buildRubricPresentationKey(result);
+    const evidenceChanged = buildRubricPresentationKey({
+      ...result,
+      items: [{
+        ...result.items[0],
+        evidence: { ruleId: 'rule', actions: [], trace: [{ tSec: 5, observed: { spo2: 96 } }] },
+      }],
+    });
+    const timestampChanged = buildRubricPresentationKey({
+      ...result,
+      items: [{ ...result.items[0], updatedAtSec: 5 }],
+    });
+    expect(evidenceChanged).not.toBe(original);
+    expect(timestampChanged).not.toBe(original);
+    expect(buildRubricPresentationKey({
+      ...result,
+      items: [{
+        ...result.items[0],
+        evidence: { trace: [{ observed: { spo2: 97 }, tSec: 4 }], actions: [], ruleId: 'rule' },
+      }],
+    })).toBe(original);
+    expect(original.length).toBeLessThan(2_000);
+  });
+
+  it('wires real score and 0.70 preset listener paths to the public runner', () => {
+    const itemList = new FakeElement();
+    const scoreButton = new FakeElement({
+      dataset: { rubricItem: 'rsi-11', rubricPoints: '0' },
+    });
+    const note = new FakeElement({
+      dataset: { rubricNote: 'rsi-11' }, value: 'PPV before laryngoscopy',
+    });
+    const nmbPreset = new FakeElement({ dataset: { nmbTarget: '0.70' } });
+    const rootElement = {
+      querySelector: (selector) => (selector === '#live-rubric-items' ? itemList : null),
+      querySelectorAll: (selector) => {
+        if (selector === '[data-rubric-note]') return [note];
+        if (selector === '[data-nmb-target]') return [nmbPreset];
+        return [];
+      },
+    };
+    const runner = {
+      setInstructorScore: vi.fn(() => ({ id: 'rsi-11', points: 0 })),
+      setInstructorNmbTarget: vi.fn(() => ({ targetTofRatio: 0.7 })),
+    };
+    const onScore = vi.fn();
+    const onNmb = vi.fn();
+    bindRubricActionControls({
+      rootElement, getRunner: () => runner, onScore, onNmb, onError: vi.fn(),
+    });
+
+    itemList.emit('click', scoreButton);
+    nmbPreset.emit('click');
+    expect(runner.setInstructorScore).toHaveBeenCalledWith({
+      itemId: 'rsi-11', points: 0, note: 'PPV before laryngoscopy',
+    });
+    expect(onScore).toHaveBeenCalledWith({ id: 'rsi-11', points: 0 });
+    expect(runner.setInstructorNmbTarget).toHaveBeenCalledWith({ targetTofRatio: 0.7 });
+    expect(onNmb).toHaveBeenCalledWith({ targetTofRatio: 0.7 });
+  });
+
+  it('runs the actual pending-finalization path and scrolls/focuses the first row', () => {
+    const scoreControl = { focus: vi.fn() };
+    const row = {
+      scrollIntoView: vi.fn(),
+      querySelector: vi.fn(() => scoreControl),
+      focus: vi.fn(),
+    };
+    const documentRoot = {
+      getElementById: vi.fn((id) => (id === 'live-rubric-item-rsi-1' ? row : null)),
+    };
+    const runner = {
+      finalizeRubric: vi.fn(() => ({
+        ok: false,
+        reason: 'INSTRUCTOR_SCORES_PENDING',
+        pendingItemIds: ['rsi-1', 'rsi-2'],
+      })),
+      buildDebrief: vi.fn(),
+    };
+    const onPending = vi.fn();
+    const result = runRubricFinalizationAction({ runner, documentRoot, onPending });
+    expect(result).toMatchObject({ ok: false, pendingItemIds: ['rsi-1', 'rsi-2'] });
+    expect(onPending).toHaveBeenCalledWith(result);
+    expect(documentRoot.getElementById).toHaveBeenCalledWith('live-rubric-item-rsi-1');
+    expect(row.scrollIntoView).toHaveBeenCalledWith({ block: 'center', behavior: 'smooth' });
+    expect(scoreControl.focus).toHaveBeenCalledOnce();
+    expect(row.focus).not.toHaveBeenCalled();
+    expect(runner.buildDebrief).not.toHaveBeenCalled();
+    expect(focusPendingRubricItem(documentRoot, 'missing')).toBeNull();
   });
 
   it('routes instructor scoring and NMB targets only through public runner APIs', () => {
