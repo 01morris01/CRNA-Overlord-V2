@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import { SimRunner } from '../ui/simRunner.js';
+import * as liveSimView from '../../ui/liveSimView.js';
 import {
   applyFinalizedConsoleLock,
   applyInstructorNmbTarget,
@@ -20,6 +21,12 @@ import {
 
 const root = resolve(import.meta.dirname, '../..');
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
+const escapeHtmlForTest = (value) => String(value)
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;')
+  .replaceAll("'", '&#039;');
 
 class FakeElement {
   constructor({ dataset = {}, value = '' } = {}) {
@@ -74,6 +81,40 @@ describe('live rubric instructor console', () => {
     });
   });
 
+  it('exposes defensive normalized rubric print metadata without exposing session internals', () => {
+    const scenario = JSON.parse(read('crisis-sim/sim/scenarios/rsi_full_stomach_001.json'));
+    const rubric = JSON.parse(read('data/rubrics/carson-newman-rsi-induction.json'));
+    const runner = new SimRunner();
+    runner.loadRubricScenario({ scenario, rubric });
+
+    expect(typeof runner.getRubricPrintMetadata).toBe('function');
+    const metadata = runner.getRubricPrintMetadata();
+    expect(metadata).toEqual({
+      id: 'carson-newman-rsi-induction',
+      title: 'Clinical Examination — General Anesthesia: Rapid Sequence Induction (RSI)',
+      course: 'NAS 560 · Summer 2026',
+      sourceFile: 'Carson-Newman_RSI_Induction_Rubric.pdf',
+      sourceHeaderDenominator: 49,
+      sourceFootnoteScoredItems: 53,
+      computedMaxPoints: 106,
+      passRule: { minimumPercent: 85, requireEveryCriticalPerformed: true },
+      pointScale: { performed: 2, partial: 1, notPerformed: 0 },
+      discrepancies: [{
+        code: 'SOURCE_DENOMINATOR_MISMATCH',
+        sourceHeaderDenominator: 49,
+        computedMaxPoints: 106,
+      }],
+    });
+    metadata.passRule.minimumPercent = 0;
+    metadata.discrepancies[0].computedMaxPoints = 0;
+    expect(runner.getRubricPrintMetadata()).toMatchObject({
+      passRule: { minimumPercent: 85 },
+      discrepancies: [{ computedMaxPoints: 106 }],
+    });
+
+    expect(new SimRunner().getRubricPrintMetadata()).toBeNull();
+  });
+
   it('renders the complete accessible console shell without replacing clinical controls', () => {
     const markup = renderRubricConsoleShell();
     for (const id of [
@@ -81,7 +122,8 @@ describe('live rubric instructor console', () => {
       'live-rubric-source-warning', 'live-rubric-flags', 'live-rubric-items',
       'live-rubric-finalization-status', 'live-instructor-nmb-custom',
       'live-instructor-nmb-apply', 'live-instructor-nmb-readback',
-      'live-rubric-finalize', 'live-rubric-print',
+      'live-rubric-finalize', 'live-rubric-print', 'live-rubric-student',
+      'live-rubric-evaluator', 'live-rubric-date', 'live-rubric-print-status',
     ]) expect(markup).toContain(`id="${id}"`);
 
     expect(markup.match(/<option value="(?:standard_iv_healthy_001|rsi_full_stomach_001|emergence_residual_block_001|rsi_failed_first_attempt_001)"/g))
@@ -94,6 +136,254 @@ describe('live rubric instructor console', () => {
     expect(markup).toContain('Actual TOF count');
     expect(markup).toContain('FINALIZE DEBRIEF');
     expect(markup).toContain('PRINT RUBRIC');
+  });
+
+  it('renders a finalized semantic print rubric with exact provenance, scale, and all rows in order', () => {
+    expect(typeof liveSimView.renderPrintableRubric).toBe('function');
+    const metadata = {
+      id: 'carson-newman-rsi-induction',
+      title: 'Clinical Examination — General Anesthesia: Rapid Sequence Induction (RSI)',
+      course: 'NAS 560 · Summer 2026',
+      sourceFile: 'Carson-Newman_RSI_Induction_Rubric.pdf',
+      sourceHeaderDenominator: 49,
+      sourceFootnoteScoredItems: 53,
+      computedMaxPoints: 106,
+      passRule: { minimumPercent: 85, requireEveryCriticalPerformed: true },
+      pointScale: { performed: 2, partial: 1, notPerformed: 0 },
+      discrepancies: [{
+        code: 'SOURCE_DENOMINATOR_MISMATCH',
+        sourceHeaderDenominator: 49,
+        computedMaxPoints: 106,
+      }],
+    };
+    const debrief = {
+      rubricResult: {
+        rubricId: metadata.id,
+        rawPoints: 2,
+        maxPoints: 4,
+        percentage: 50,
+        outcome: 'NOT PASS',
+        criticalItemsOmitted: ['rsi-11'],
+        items: [
+          {
+            id: 'rsi-11', displayNumber: '11',
+            text: 'Do NOT perform PPV before first laryngoscopy',
+            critical: true, scoringSource: 'ENGINE_OBSERVABLE', source: 'Engine observed',
+            status: 'not_performed', points: 0, note: 'Early PPV observed',
+            evidence: { ruleId: 'rsi_no_ppv_before_first_laryngoscopy', actions: ['mask_ppv_started'] },
+            observedConsequence: { statement: 'Observed SpO2 nadir 88%.' },
+          },
+          {
+            id: 'rsi-12', displayNumber: '12', text: 'Verbalize medication doses',
+            critical: false, scoringSource: 'INSTRUCTOR_OBSERVED', source: 'Instructor observed',
+            status: 'performed', points: 2, note: 'Complete', evidence: null,
+            observedConsequence: null,
+          },
+        ],
+      },
+      actionTimeline: [{
+        tSec: 3, action: 'mask_ppv_started', source: 'learner',
+        meta: { durationSec: 30 }, snapshot: { spo2: 99, airwayDevice: 'mask' },
+      }],
+      physiologicTrace: [{ t: 0, spo2: 100 }, { t: 5, spo2: 97 }],
+      violationFlags: [{
+        rubricId: metadata.id, itemId: 'rsi-11', displayNumber: '11',
+        text: 'Do NOT perform PPV before first laryngoscopy', tSec: 3,
+        triggerAction: 'mask_ppv_started', evidence: { beforeAttempt: true },
+      }],
+      administrativeActions: [{
+        tSec: 0, action: 'instructor_nmb_depth_set', source: 'administrative',
+        meta: { targetTofRatio: 0.7 }, snapshot: null,
+      }],
+    };
+
+    const markup = liveSimView.renderPrintableRubric({
+      debrief,
+      rubricMetadata: metadata,
+      identity: { student: 'A. Student', evaluator: 'E. Faculty', date: '2026-07-17' },
+    });
+    expect(markup).toContain('Educational simulation. Not for clinical use.');
+    expect(markup).toContain('<article');
+    expect(markup).toContain(metadata.title);
+    expect(markup).toContain(metadata.course);
+    expect(markup).toContain(metadata.sourceFile);
+    expect(markup).toContain('Student');
+    expect(markup).toContain('A. Student');
+    expect(markup).toContain('Evaluator');
+    expect(markup).toContain('E. Faculty');
+    expect(markup).toContain('Date');
+    expect(markup).toContain('2026-07-17');
+    expect(markup).toContain('NOT PASS');
+    expect(markup).toContain('2 / 4');
+    expect(markup).toContain('50.0%');
+    expect(markup).toContain('Omitted critical items');
+    expect(markup).toContain('11 · Do NOT perform PPV before first laryngoscopy');
+    expect(markup).toContain('CRITICAL');
+    expect(markup).toContain('ENGINE OBSERVABLE');
+    expect(markup).toContain('INSTRUCTOR OBSERVED');
+    expect(markup).toContain('2 · PERFORMED');
+    expect(markup).toContain('1 · PARTIAL');
+    expect(markup).toContain('0 · NOT PERFORMED');
+    expect(markup).toContain('AWARDED');
+    expect(markup.indexOf('Do NOT perform PPV')).toBeLessThan(markup.indexOf('Verbalize medication doses'));
+    expect(markup).toContain('Early PPV observed');
+    expect(markup).toContain('Observed SpO2 nadir 88%.');
+    expect(markup).toContain('Passing requires at least 85% overall AND every critical item performed (2 points).');
+    expect(markup).toContain('Source header /49; encoded rubric 106 points across 53 rows.');
+    expect(markup).toContain('Action timeline');
+    expect(markup).toContain('Physiologic trace');
+    expect(markup).toContain('Violation flags');
+    expect(markup).toContain('Administrative actions');
+    expect(markup).toContain('mask_ppv_started');
+    expect(markup).toContain('&quot;spo2&quot;: 97');
+    expect(markup).toContain('instructor_nmb_depth_set');
+  });
+
+  it('preserves all 53 RSI source rows with their exact literals and original order', () => {
+    const rubric = JSON.parse(read('data/rubrics/carson-newman-rsi-induction.json'));
+    const items = rubric.items.map((item) => ({
+      id: item.id,
+      displayNumber: item.displayNumber,
+      text: item.text,
+      critical: item.critical,
+      scoringSource: item.scoringSource,
+      source: item.scoringSource === 'ENGINE_OBSERVABLE'
+        ? 'Engine observed'
+        : 'Instructor observed',
+      status: 'performed',
+      points: 2,
+      note: '',
+      updatedAtSec: 0,
+      evidence: item.engineEvidence === null
+        ? null
+        : { ruleId: item.engineEvidence.ruleId },
+      observedConsequence: null,
+    }));
+    const markup = liveSimView.renderPrintableRubric({
+      rubricMetadata: rubric,
+      debrief: {
+        rubricResult: {
+          rubricId: rubric.id,
+          rawPoints: rubric.computedMaxPoints,
+          maxPoints: rubric.computedMaxPoints,
+          percentage: 100,
+          outcome: 'PASS',
+          criticalItemsOmitted: [],
+          items,
+        },
+        actionTimeline: [], physiologicTrace: [], violationFlags: [], administrativeActions: [],
+      },
+    });
+    expect(markup.match(/class="live-print-rubric-row"/g)).toHaveLength(53);
+    expect(markup).toContain('11</th>');
+    expect(markup).toContain('Do not mask ventilate prior to first laryngoscopy');
+    let cursor = -1;
+    for (const item of rubric.items) {
+      const next = markup.indexOf(escapeHtmlForTest(item.text), cursor + 1);
+      expect(next, `missing or out-of-order source row ${item.id}`).toBeGreaterThan(cursor);
+      cursor = next;
+    }
+  });
+
+  it('prints None for no omitted critical items and escapes every printable field', () => {
+    expect(typeof liveSimView.renderPrintableRubric).toBe('function');
+    const payload = '<script>alert("x")</script><img src=x onerror=alert(1)>';
+    const markup = liveSimView.renderPrintableRubric({
+      rubricMetadata: {
+        id: payload, title: payload, course: payload, sourceFile: payload,
+        sourceHeaderDenominator: 2, sourceFootnoteScoredItems: 1, computedMaxPoints: 2,
+        passRule: { minimumPercent: 85, requireEveryCriticalPerformed: true },
+        pointScale: { performed: 2, partial: 1, notPerformed: 0 }, discrepancies: [],
+      },
+      identity: { student: payload, evaluator: payload, date: payload },
+      debrief: {
+        rubricResult: {
+          rubricId: payload, rawPoints: 2, maxPoints: 2, percentage: 100,
+          outcome: 'PASS', criticalItemsOmitted: [],
+          items: [{
+            id: payload, displayNumber: payload, text: payload, critical: true,
+            scoringSource: 'INSTRUCTOR_OBSERVED', source: payload,
+            status: 'performed', points: 2, note: payload,
+            evidence: { unsafe: payload }, observedConsequence: { statement: payload },
+          }],
+        },
+        actionTimeline: [{ tSec: 0, action: payload, source: payload, meta: { unsafe: payload } }],
+        physiologicTrace: [{ t: 0, unsafe: payload }],
+        violationFlags: [{ text: payload, evidence: { unsafe: payload } }],
+        administrativeActions: [{ action: payload, meta: { unsafe: payload } }],
+      },
+    });
+    expect(markup).toContain('PASS');
+    expect(markup).toContain('Omitted critical items</h2><p>None</p>');
+    expect(markup).toContain('&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;');
+    expect(markup).not.toContain('<script>');
+    expect(markup).not.toContain('<img');
+    expect(markup).not.toContain('onerror=alert(1)>');
+  });
+
+  it('prepares and prints only a finalized debrief through public runner metadata', () => {
+    expect(typeof liveSimView.runRubricPrintAction).toBe('function');
+    const printDocument = { innerHTML: '', hidden: true };
+    const values = {
+      'live-rubric-student': { value: 'Student One' },
+      'live-rubric-evaluator': { value: 'Evaluator One' },
+      'live-rubric-date': { value: '2026-07-17' },
+      'live-rubric-print-document': printDocument,
+    };
+    const documentRoot = { getElementById: (id) => values[id] ?? null };
+    const printImpl = vi.fn();
+    const runner = {
+      isRubricFinalized: vi.fn(() => false),
+      getRubricPrintMetadata: vi.fn(),
+    };
+    const debrief = {
+      rubricResult: {
+        rubricId: 'test', rawPoints: 2, maxPoints: 2, percentage: 100,
+        outcome: 'PASS', criticalItemsOmitted: [], items: [],
+      },
+      actionTimeline: [], physiologicTrace: [], violationFlags: [], administrativeActions: [],
+    };
+    expect(liveSimView.runRubricPrintAction({
+      runner, debrief, documentRoot, printImpl,
+    })).toMatchObject({ ok: false, reason: 'RUBRIC_NOT_FINALIZED' });
+    expect(printImpl).not.toHaveBeenCalled();
+    expect(runner.getRubricPrintMetadata).not.toHaveBeenCalled();
+
+    runner.isRubricFinalized.mockReturnValue(true);
+    runner.getRubricPrintMetadata.mockReturnValue({
+      id: 'test', title: 'Test rubric', course: 'Course', sourceFile: 'source.pdf',
+      sourceHeaderDenominator: 1, sourceFootnoteScoredItems: 1, computedMaxPoints: 2,
+      passRule: { minimumPercent: 85, requireEveryCriticalPerformed: true },
+      pointScale: { performed: 2, partial: 1, notPerformed: 0 }, discrepancies: [],
+    });
+    const result = liveSimView.runRubricPrintAction({
+      runner, debrief, documentRoot, printImpl,
+    });
+    expect(result.ok).toBe(true);
+    expect(runner.getRubricPrintMetadata).toHaveBeenCalledOnce();
+    expect(printDocument.hidden).toBe(false);
+    expect(printDocument.innerHTML).toContain('Student One');
+    expect(printDocument.innerHTML).toContain('Evaluator One');
+    expect(printImpl).toHaveBeenCalledOnce();
+  });
+
+  it('clears print identity and prepared markup on load/reset without live rubric rerenders touching it', () => {
+    expect(typeof liveSimView.resetRubricPrintState).toBe('function');
+    const values = {
+      'live-rubric-student': { value: 'Student One' },
+      'live-rubric-evaluator': { value: 'Evaluator One' },
+      'live-rubric-date': { value: '2026-07-17' },
+      'live-rubric-print-status': { textContent: 'Prepared.' },
+      'live-rubric-print-document': { innerHTML: '<article>old</article>', hidden: false },
+    };
+    const documentRoot = { getElementById: (id) => values[id] ?? null };
+    liveSimView.resetRubricPrintState(documentRoot);
+    expect(values['live-rubric-student'].value).toBe('');
+    expect(values['live-rubric-evaluator'].value).toBe('');
+    expect(values['live-rubric-date'].value).toBe('');
+    expect(values['live-rubric-print-status'].textContent).toMatch(/Finalize/);
+    expect(values['live-rubric-print-document']).toMatchObject({ innerHTML: '', hidden: true });
+    expect(read('ui/liveSimView.js')).toContain('resetRubricPrintState(document)');
   });
 
   it('fetches both approved assets before atomically asking the runner to load them', async () => {
@@ -277,6 +567,9 @@ describe('live rubric instructor console', () => {
       { id: 'live-export', disabled: false, dataset: {} },
       { id: 'live-close', disabled: false, dataset: {} },
       { id: 'live-open-display', disabled: false, dataset: {} },
+      { id: 'live-rubric-student', disabled: false, dataset: {} },
+      { id: 'live-rubric-evaluator', disabled: false, dataset: {} },
+      { id: 'live-rubric-date', disabled: false, dataset: {} },
     ];
     const consoleRoot = { querySelectorAll: vi.fn(() => controls) };
     setRubricConsoleReadOnly(consoleRoot, true);
@@ -414,11 +707,16 @@ describe('live rubric instructor console', () => {
     const css = read('assets/css/live-sim.css');
     expect(controller).toContain('liveRunner.loadRubricScenario({ scenario, rubric })');
     expect(controller).toContain('liveRunner.getRubricStatus()');
+    expect(controller).toContain('liveRunner.getRubricPrintMetadata()');
+    expect(controller).toMatch(/onFinalized:[\s\S]*prepareFinalizedRubricPrint\(/);
     expect(controller).toContain('liveRunner.setInstructorScore');
     expect(controller).toContain('liveRunner.setInstructorNmbTarget({ targetTofRatio })');
     expect(controller).not.toContain('liveRunner.setDriver(');
     expect(controller).not.toMatch(/latestSnapshot\.(?:hr|sbp|dbp|map|spo2|rr|etco2|tofRatio)\s*=/);
     expect(css).toMatch(/\.live-rubric-panel\s*\{[^}]*position:\s*sticky[^}]*overflow:\s*hidden/s);
     expect(css).toMatch(/\.live-rubric-items\s*\{[^}]*overflow-y:\s*auto/s);
+    expect(css).toMatch(/@media print[\s\S]*\.live-rubric-print-document\s*\{[^}]*display:\s*block/s);
+    expect(css).toMatch(/@media print[\s\S]*break-inside:\s*avoid/s);
+    expect(css).toMatch(/@media print[\s\S]*thead\s*\{[^}]*display:\s*table-header-group/s);
   });
 });

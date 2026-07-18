@@ -770,6 +770,23 @@ export class SimRunner {
     return copyJsonInput(this.rubricSession.rubric.discrepancies, 'rubric discrepancies');
   }
 
+  getRubricPrintMetadata() {
+    if (!this.rubricSession) return null;
+    const rubric = this.rubricSession.rubric;
+    return copyJsonInput({
+      id: rubric.id,
+      title: rubric.title,
+      course: rubric.course,
+      sourceFile: rubric.sourceFile,
+      sourceHeaderDenominator: rubric.sourceHeaderDenominator,
+      sourceFootnoteScoredItems: rubric.sourceFootnoteScoredItems,
+      computedMaxPoints: rubric.computedMaxPoints,
+      passRule: rubric.passRule,
+      pointScale: rubric.pointScale,
+      discrepancies: rubric.discrepancies,
+    }, 'rubric print metadata');
+  }
+
   setInstructorScore({ itemId, points, note = '' } = {}) {
     if (!this.rubricSession) {
       throw new Error('No rubric scenario is loaded');

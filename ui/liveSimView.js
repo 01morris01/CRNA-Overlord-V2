@@ -166,6 +166,195 @@ export function renderRubricItemMarkup(item = {}) {
     </li>`;
 }
 
+function printableJson(value) {
+  const serialized = JSON.stringify(value, null, 2);
+  return serialized === undefined ? '' : serialized;
+}
+
+function printSourceLabel(source) {
+  return RUBRIC_SOURCE_LABELS[source] ?? String(source ?? 'UNKNOWN').replaceAll('_', ' ');
+}
+
+function renderPrintRecordTable({ title, className, records, columns }) {
+  const safeRecords = Array.isArray(records) ? records : [];
+  const rows = safeRecords.length === 0
+    ? `<tr><td colspan="${columns.length + 2}">None</td></tr>`
+    : safeRecords.map((record, index) => `
+      <tr>
+        <td>${index + 1}</td>
+        ${columns.map(({ key, label }) => `<td data-label="${escapeHtml(label)}">${escapeHtml(record?.[key] ?? '—')}</td>`).join('')}
+        <td data-label="Complete record"><pre>${escapeHtml(printableJson(record))}</pre></td>
+      </tr>`).join('');
+  return `
+    <section class="live-print-appendix ${escapeHtml(className)}">
+      <h2>${escapeHtml(title)}</h2>
+      <table>
+        <thead><tr><th scope="col">#</th>${columns.map(({ label }) => `<th scope="col">${escapeHtml(label)}</th>`).join('')}<th scope="col">Complete record</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </section>`;
+}
+
+export function renderPrintableRubric({ debrief, rubricMetadata, identity = {} } = {}) {
+  const result = debrief?.rubricResult;
+  if (!result || !Array.isArray(result.items)) {
+    throw new TypeError('A finalized rubric debrief is required for printing');
+  }
+  if (!rubricMetadata || result.rubricId !== rubricMetadata.id) {
+    throw new RangeError('Rubric print metadata does not match the finalized debrief');
+  }
+
+  const percent = Number(result.percentage);
+  const formattedPercent = Number.isFinite(percent) ? `${percent.toFixed(1)}%` : '—';
+  const itemById = new Map(result.items.map((item) => [item.id, item]));
+  const omitted = (result.criticalItemsOmitted ?? [])
+    .map((itemId) => itemById.get(itemId))
+    .filter(Boolean);
+  const omittedMarkup = omitted.length === 0
+    ? '<p>None</p>'
+    : `<ul>${omitted.map((item) => `<li>${escapeHtml(item.displayNumber)} · ${escapeHtml(item.text)}</li>`).join('')}</ul>`;
+  const rubricRows = result.items.map((item) => {
+    const points = Number(item.points);
+    const awarded = (value) => points === value
+      ? '<strong class="live-print-awarded">AWARDED</strong>'
+      : '<span aria-label="Not awarded">—</span>';
+    const status = String(item.status ?? '').replaceAll('_', ' ').toUpperCase();
+    const evidence = item.evidence === null || item.evidence === undefined
+      ? 'None'
+      : `<pre>${escapeHtml(printableJson(item.evidence))}</pre>`;
+    const consequence = item.observedConsequence === null || item.observedConsequence === undefined
+      ? ''
+      : `<div><strong>Observed consequence</strong><pre>${escapeHtml(printableJson(item.observedConsequence))}</pre></div>`;
+    return `
+      <tr class="live-print-rubric-row">
+        <th scope="row">${escapeHtml(item.displayNumber ?? '—')}</th>
+        <td><span class="live-print-critical">${item.critical ? 'CRITICAL' : 'NON-CRITICAL'}</span><div>${escapeHtml(item.text ?? '')}</div></td>
+        <td>${escapeHtml(printSourceLabel(item.scoringSource))}</td>
+        <td class="live-print-scale-cell">${awarded(2)}</td>
+        <td class="live-print-scale-cell">${awarded(1)}</td>
+        <td class="live-print-scale-cell">${awarded(0)}</td>
+        <td><strong>${escapeHtml(points)} / 2 · ${escapeHtml(status)}</strong><div>Note: ${escapeHtml(item.note || 'None')}</div><div><strong>Evidence</strong>${evidence}</div>${consequence}</td>
+      </tr>`;
+  }).join('');
+  const denominatorWarning = (rubricMetadata.discrepancies ?? [])
+    .find(({ code }) => code === 'SOURCE_DENOMINATOR_MISMATCH');
+  const warningMarkup = denominatorWarning
+    ? `<p class="live-print-source-warning">Source header /${escapeHtml(rubricMetadata.sourceHeaderDenominator)}; encoded rubric ${escapeHtml(rubricMetadata.computedMaxPoints)} points across ${escapeHtml(rubricMetadata.sourceFootnoteScoredItems)} rows.</p>`
+    : '';
+  const passRule = `Passing requires at least ${escapeHtml(rubricMetadata.passRule?.minimumPercent ?? 85)}% overall AND every critical item performed (2 points).`;
+
+  return `
+    <article class="live-rubric-print-report" aria-labelledby="live-print-rubric-title">
+      <p class="live-print-education-fence">Educational simulation. Not for clinical use.</p>
+      <header class="live-print-header">
+        <p>${escapeHtml(rubricMetadata.course)}</p>
+        <h1 id="live-print-rubric-title">${escapeHtml(rubricMetadata.title)}</h1>
+        <p>Rubric ID: ${escapeHtml(rubricMetadata.id)}</p>
+        <p>Source: ${escapeHtml(rubricMetadata.sourceFile)}</p>
+        ${warningMarkup}
+      </header>
+      <dl class="live-print-identity">
+        <div><dt>Student</dt><dd>${escapeHtml(identity.student ?? '')}</dd></div>
+        <div><dt>Evaluator</dt><dd>${escapeHtml(identity.evaluator ?? '')}</dd></div>
+        <div><dt>Date</dt><dd>${escapeHtml(identity.date ?? '')}</dd></div>
+      </dl>
+      <section class="live-print-outcome" aria-label="Final rubric result">
+        <p>FINAL RESULT</p><strong>${escapeHtml(result.outcome)}</strong>
+        <span>${escapeHtml(result.rawPoints)} / ${escapeHtml(result.maxPoints)} · ${escapeHtml(formattedPercent)}</span>
+      </section>
+      <section class="live-print-omitted"><h2>Omitted critical items</h2>${omittedMarkup}</section>
+      <section class="live-print-rubric-table-section">
+        <h2>Scored rubric</h2>
+        <table class="live-print-rubric-table">
+          <thead><tr><th scope="col">Item</th><th scope="col">Literal criterion</th><th scope="col">Source</th><th scope="col">2 · PERFORMED</th><th scope="col">1 · PARTIAL</th><th scope="col">0 · NOT PERFORMED</th><th scope="col">Award / note / evidence</th></tr></thead>
+          <tbody>${rubricRows}</tbody>
+        </table>
+      </section>
+      <p class="live-print-pass-rule">${passRule}</p>
+      ${warningMarkup}
+      ${renderPrintRecordTable({
+        title: 'Action timeline', className: 'live-print-actions',
+        records: debrief.actionTimeline,
+        columns: [{ key: 'tSec', label: 'Simulation second' }, { key: 'source', label: 'Source' }, { key: 'action', label: 'Action' }],
+      })}
+      ${renderPrintRecordTable({
+        title: 'Physiologic trace', className: 'live-print-trace',
+        records: debrief.physiologicTrace,
+        columns: [{ key: 't', label: 'Simulation second' }],
+      })}
+      ${renderPrintRecordTable({
+        title: 'Violation flags', className: 'live-print-violations',
+        records: debrief.violationFlags,
+        columns: [{ key: 'tSec', label: 'Simulation second' }, { key: 'displayNumber', label: 'Item' }, { key: 'triggerAction', label: 'Trigger' }],
+      })}
+      ${renderPrintRecordTable({
+        title: 'Administrative actions', className: 'live-print-administrative',
+        records: debrief.administrativeActions,
+        columns: [{ key: 'tSec', label: 'Simulation second' }, { key: 'source', label: 'Source' }, { key: 'action', label: 'Action' }],
+      })}
+    </article>`;
+}
+
+function rubricPrintIdentity(documentRoot) {
+  return {
+    student: documentRoot?.getElementById?.('live-rubric-student')?.value ?? '',
+    evaluator: documentRoot?.getElementById?.('live-rubric-evaluator')?.value ?? '',
+    date: documentRoot?.getElementById?.('live-rubric-date')?.value ?? '',
+  };
+}
+
+export function resetRubricPrintState(documentRoot) {
+  for (const id of ['live-rubric-student', 'live-rubric-evaluator', 'live-rubric-date']) {
+    const input = documentRoot?.getElementById?.(id);
+    if (input) input.value = '';
+  }
+  const status = documentRoot?.getElementById?.('live-rubric-print-status');
+  if (status) status.textContent = 'Finalize the rubric to prepare its print document.';
+  const printDocument = documentRoot?.getElementById?.('live-rubric-print-document');
+  if (printDocument) {
+    printDocument.innerHTML = '';
+    printDocument.hidden = true;
+  }
+}
+
+export function prepareFinalizedRubricPrint({
+  runner: liveRunner,
+  debrief,
+  documentRoot,
+} = {}) {
+  if (!liveRunner?.isRubricFinalized?.() || !debrief?.rubricResult) {
+    return { ok: false, reason: 'RUBRIC_NOT_FINALIZED' };
+  }
+  const rubricMetadata = liveRunner.getRubricPrintMetadata();
+  if (!rubricMetadata) return { ok: false, reason: 'RUBRIC_METADATA_UNAVAILABLE' };
+  const printDocument = documentRoot?.getElementById?.('live-rubric-print-document');
+  if (!printDocument) return { ok: false, reason: 'PRINT_DOCUMENT_UNAVAILABLE' };
+  const markup = renderPrintableRubric({
+    debrief,
+    rubricMetadata,
+    identity: rubricPrintIdentity(documentRoot),
+  });
+  printDocument.innerHTML = markup;
+  printDocument.hidden = false;
+  const status = documentRoot?.getElementById?.('live-rubric-print-status');
+  if (status) status.textContent = 'Finalized rubric print document prepared.';
+  return { ok: true, markup, rubricMetadata };
+}
+
+export function runRubricPrintAction({
+  runner: liveRunner,
+  debrief,
+  documentRoot,
+  printImpl = () => globalThis.print?.(),
+} = {}) {
+  const prepared = prepareFinalizedRubricPrint({
+    runner: liveRunner, debrief, documentRoot,
+  });
+  if (!prepared.ok) return prepared;
+  printImpl();
+  return prepared;
+}
+
 export function renderRubricConsoleShell() {
   return `
     <aside class="live-panel live-rubric-panel" aria-labelledby="live-rubric-heading">
@@ -205,6 +394,15 @@ export function renderRubricConsoleShell() {
         <div id="live-rubric-summary" class="live-rubric-summary"><strong>NO RUBRIC</strong><span>Load an approved scenario to begin scoring.</span></div>
         <p id="live-rubric-source-warning" class="live-rubric-warning" role="alert" hidden></p>
       </section>
+      <fieldset class="live-rubric-print-prep">
+        <legend>Printable evaluation record</legend>
+        <div class="live-rubric-print-fields">
+          <label class="live-field" for="live-rubric-student"><span>Student</span><input id="live-rubric-student" type="text" autocomplete="name" maxlength="120"></label>
+          <label class="live-field" for="live-rubric-evaluator"><span>Evaluator</span><input id="live-rubric-evaluator" type="text" autocomplete="name" maxlength="120"></label>
+          <label class="live-field" for="live-rubric-date"><span>Date</span><input id="live-rubric-date" type="date"></label>
+        </div>
+        <output id="live-rubric-print-status" class="live-rubric-inline-status" aria-live="polite">Finalize the rubric to prepare its print document.</output>
+      </fieldset>
       <section class="live-rubric-flag-section" aria-labelledby="live-rubric-flags-heading">
         <h3 id="live-rubric-flags-heading">Exact-text violation flags</h3>
         <ul id="live-rubric-flags" class="live-rubric-flags"><li>No violation flags.</li></ul>
@@ -280,6 +478,9 @@ const FINALIZED_CONSOLE_ALLOWED_CONTROL_IDS = new Set([
   'live-rubric-scenario',
   'live-rubric-load',
   'live-reset',
+  'live-rubric-student',
+  'live-rubric-evaluator',
+  'live-rubric-date',
 ]);
 
 export function setRubricConsoleReadOnly(rootElement, readOnly) {
@@ -568,7 +769,8 @@ function renderShell() {
           <ol id="live-event-log" class="live-event-log"><li class="live-empty">No events yet.</li></ol>
         </section>
       </div>
-    </div>`;
+    </div>
+    <section id="live-rubric-print-document" class="live-rubric-print-document" aria-label="Printable finalized rubric" hidden></section>`;
 }
 
 function setStatus(message, kind = 'info') {
@@ -1061,6 +1263,7 @@ function applyPatient(event) {
     latestRubricDebrief = null;
     latestRubricPresentationKey = null;
     clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
     const liveRunner = ensureRunner();
     liveRunner.applyConfig(config);
     syncCaseSetupControls(liveRunner.snapshot());
@@ -1115,6 +1318,7 @@ async function loadSelectedRubricScenario() {
     latestRubricPresentationKey = null;
     latestRubricDebrief = null;
     clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();
@@ -1147,6 +1351,11 @@ function finalizeLiveRubric() {
       },
       onFinalized: (result) => {
         latestRubricDebrief = result.debrief;
+        prepareFinalizedRubricPrint({
+          runner: liveRunner,
+          debrief: latestRubricDebrief,
+          documentRoot: document,
+        });
         latestRubricResult = null;
         latestRubricPresentationKey = null;
         liveRunner.emit();
@@ -1289,6 +1498,7 @@ function bindControls() {
     latestRubricDebrief = null;
     latestRubricPresentationKey = null;
     clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
     const resetSnapshot = liveRunner.reset();
     liveRunner.logEvent('Case', 'Simulation reset', { action: 'reset' });
     fillPatientForm(liveRunner.config);
@@ -1325,11 +1535,15 @@ function bindControls() {
   });
   document.getElementById('live-rubric-finalize')?.addEventListener('click', finalizeLiveRubric);
   document.getElementById('live-rubric-print')?.addEventListener('click', () => {
-    if (!latestRubricDebrief) {
+    const result = runRubricPrintAction({
+      runner: ensureRunner(),
+      debrief: latestRubricDebrief,
+      documentRoot: document,
+      printImpl: () => window.print(),
+    });
+    if (!result.ok) {
       setStatus('Finalize the rubric before printing.', 'error');
-      return;
     }
-    window.print();
   });
   document.getElementById('live-export')?.addEventListener('click', downloadDebrief);
   document.getElementById('live-open-display')?.addEventListener('click', () => {
