@@ -6,11 +6,16 @@ import {
   computeDrugDose,
   computeRegionalLidocaineDose,
   DRUG_ACTIONS,
+  formatInstructorNmb,
   formatLidocaineSnapshot,
   formatMonitorSnapshot,
+  formatRubricFlag,
+  formatRubricStatus,
   LIDOCAINE_ROUTES,
   parsePatientConfig,
   PATIENT_PRESETS,
+  RUBRIC_SCENARIO_ASSETS,
+  RUBRIC_SCENARIOS,
   validateSimulationResult,
   VOLATILE_AGENTS,
 } from './liveSimModel.js';
@@ -26,6 +31,10 @@ let launchObserver = null;
 let courseSelectorDisplay = null;
 let selectedVolatileAgent = 'Sevoflurane';
 let volatileSelectionDirty = false;
+let latestRubricResult = null;
+let latestRubricPresentationKey = null;
+let latestRubricDebrief = null;
+let clearRubricDraftsOnNextRender = false;
 
 const patientFields = [
   ['weightKg', 'Weight', 'kg', 1],
@@ -120,6 +129,131 @@ function complicationMarkup() {
   return COMPLICATION_OPTIONS.map((type) => `
     <button type="button" class="live-complication-button" data-complication="${type}">${escapeHtml(type.replaceAll(/([a-z])([A-Z])/g, '$1 $2'))}</button>
   `).join('');
+}
+
+const RUBRIC_SOURCE_LABELS = Object.freeze({
+  ENGINE_OBSERVABLE: 'ENGINE OBSERVABLE',
+  INSTRUCTOR_OBSERVED: 'INSTRUCTOR OBSERVED',
+  UNSCOREABLE: 'UNSCOREABLE',
+});
+
+export function renderRubricItemMarkup(item = {}) {
+  const source = RUBRIC_SOURCE_LABELS[item.scoringSource] ?? String(item.scoringSource ?? 'UNKNOWN');
+  const status = String(item.status ?? 'pending').replaceAll('_', ' ').toUpperCase();
+  const points = item.points === null || item.points === undefined ? '—' : `${item.points} / 2`;
+  const evidence = item.evidence
+    ? `Engine evidence · ${JSON.stringify(item.evidence)}`
+    : (item.scoringSource === 'INSTRUCTOR_OBSERVED' && Number.isFinite(item.updatedAtSec)
+      ? `Supporting trace — instructor scored at ${formatTime(item.updatedAtSec)}`
+      : 'Evidence pending.');
+  const scoreControls = item.scoringSource === 'INSTRUCTOR_OBSERVED' ? `
+    <div class="live-rubric-score-controls" role="group" aria-label="Score item ${escapeHtml(item.displayNumber)}">
+      <button type="button" data-rubric-item="${escapeHtml(item.id)}" data-rubric-points="2" aria-pressed="${item.points === 2}" aria-label="Score item ${escapeHtml(item.displayNumber)} performed, 2 points">2 · PERFORMED</button>
+      <button type="button" data-rubric-item="${escapeHtml(item.id)}" data-rubric-points="1" aria-pressed="${item.points === 1}" aria-label="Score item ${escapeHtml(item.displayNumber)} partial, 1 point">1 · PARTIAL</button>
+      <button type="button" data-rubric-item="${escapeHtml(item.id)}" data-rubric-points="0" aria-pressed="${item.points === 0}" aria-label="Score item ${escapeHtml(item.displayNumber)} not performed, 0 points">0 · NOT PERFORMED</button>
+    </div>
+    <label class="live-rubric-note"><span>Instructor note (optional)</span><input type="text" data-rubric-note="${escapeHtml(item.id)}" value="${escapeHtml(item.note ?? '')}" maxlength="500"></label>` : '';
+  return `
+    <li id="live-rubric-item-${escapeHtml(item.id)}" class="live-rubric-item" data-source="${escapeHtml(item.scoringSource)}" tabindex="-1">
+      <div class="live-rubric-item-heading">
+        <span class="live-rubric-number">${escapeHtml(item.displayNumber ?? '—')}${item.critical ? ' *' : ''}</span>
+        <span class="live-rubric-source">${escapeHtml(source)}</span>
+        <span class="live-rubric-points">${escapeHtml(points)} · ${escapeHtml(status)}</span>
+      </div>
+      <p class="live-rubric-literal">${escapeHtml(item.text ?? '')}</p>
+      <p class="live-rubric-evidence">${escapeHtml(evidence)}</p>
+      ${scoreControls}
+    </li>`;
+}
+
+export function renderRubricConsoleShell() {
+  return `
+    <aside class="live-panel live-rubric-panel" aria-labelledby="live-rubric-heading">
+      <div class="live-rubric-header">
+        <div><p class="live-eyebrow">LIVE ASSESSMENT</p><h2 id="live-rubric-heading">Carson-Newman rubric</h2></div>
+        <span class="live-rubric-legend">* CRITICAL</span>
+      </div>
+      <div class="live-rubric-panel-scroll">
+      <label class="live-field" for="live-rubric-scenario"><span>Approved scenario</span>
+        <select id="live-rubric-scenario">${RUBRIC_SCENARIOS.map(({ id, label }) => `<option value="${id}">${escapeHtml(label)}</option>`).join('')}</select>
+      </label>
+      <button id="live-rubric-load" type="button" class="live-primary">LOAD SCENARIO</button>
+      <output id="live-rubric-load-status" class="live-rubric-inline-status" aria-live="polite">No rubric scenario loaded.</output>
+
+      <section class="live-instructor-nmb" aria-labelledby="live-instructor-nmb-heading">
+        <h3 id="live-instructor-nmb-heading">ADMINISTRATIVE SETUP · NMB TARGET</h3>
+        <p>Not a student action and not scoreable. The engine equilibrates the single NMB state.</p>
+        <div class="live-nmb-presets" role="group" aria-label="Administrative TOF ratio presets">
+          ${['0', '0.25', '0.50', '0.70', '0.90', '1'].map((target) => `<button type="button" data-nmb-target="${target}">${target}</button>`).join('')}
+        </div>
+        <div class="live-nmb-custom">
+          <label class="live-field" for="live-instructor-nmb-custom"><span>Custom target ratio · 0 to 1</span><input id="live-instructor-nmb-custom" type="number" value="0.70" min="0" max="1" step="0.01"></label>
+          <button id="live-instructor-nmb-apply" type="button">APPLY TARGET</button>
+        </div>
+        <dl id="live-instructor-nmb-readback" class="live-nmb-readback">
+          <div><dt>Target ratio</dt><dd id="live-nmb-target-ratio">—</dd></div>
+          <div><dt>Actual ratio</dt><dd id="live-nmb-actual-ratio">—</dd></div>
+          <div><dt>Actual TOF count</dt><dd id="live-nmb-tof-count">— / 4</dd></div>
+          <div><dt>Effective blockade</dt><dd id="live-nmb-blockade">—</dd></div>
+          <div><dt>Dominant source</dt><dd id="live-nmb-source">None</dd></div>
+          <div><dt>Target status</dt><dd id="live-nmb-equilibrium">NO TARGET</dd></div>
+        </dl>
+      </section>
+
+      <section class="live-rubric-summary-section" aria-labelledby="live-rubric-summary-heading">
+        <h3 id="live-rubric-summary-heading">Rubric summary</h3>
+        <div id="live-rubric-summary" class="live-rubric-summary"><strong>NO RUBRIC</strong><span>Load an approved scenario to begin scoring.</span></div>
+        <p id="live-rubric-source-warning" class="live-rubric-warning" role="alert" hidden></p>
+      </section>
+      <section class="live-rubric-flag-section" aria-labelledby="live-rubric-flags-heading">
+        <h3 id="live-rubric-flags-heading">Exact-text violation flags</h3>
+        <ul id="live-rubric-flags" class="live-rubric-flags"><li>No violation flags.</li></ul>
+      </section>
+      <ol id="live-rubric-items" class="live-rubric-items" aria-label="Live literal rubric items"><li class="live-empty">Load an approved scenario to view literal rubric rows.</li></ol>
+      <output id="live-rubric-finalization-status" class="live-rubric-finalization-status" aria-live="polite">Finalization unavailable until a rubric scenario is loaded.</output>
+      <div class="live-rubric-actions">
+        <button id="live-rubric-finalize" type="button" class="live-primary" disabled>FINALIZE DEBRIEF</button>
+        <button id="live-rubric-print" type="button" disabled>PRINT RUBRIC</button>
+      </div>
+      </div>
+    </aside>`;
+}
+
+export function applyInstructorRubricScore(liveRunner, { itemId, points, note = '' }) {
+  return liveRunner.setInstructorScore({ itemId, points, note });
+}
+
+export function applyInstructorNmbTarget(liveRunner, value) {
+  const targetTofRatio = Number(value);
+  if (!Number.isFinite(targetTofRatio) || targetTofRatio < 0 || targetTofRatio > 1) {
+    throw new RangeError('Administrative TOF target must be between 0 and 1');
+  }
+  return liveRunner.setInstructorNmbTarget({ targetTofRatio });
+}
+
+export function finalizeRubricDebrief(liveRunner) {
+  const finalized = liveRunner.finalizeRubric();
+  if (!finalized.ok) return finalized;
+  return { ok: true, finalized, debrief: liveRunner.buildDebrief() };
+}
+
+export async function loadRubricScenarioAssets(liveRunner, scenarioId, fetchImpl = globalThis.fetch) {
+  const assets = RUBRIC_SCENARIO_ASSETS[scenarioId];
+  if (!assets) throw new RangeError(`Unknown rubric scenario: ${scenarioId}`);
+  if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
+  const [scenarioResponse, rubricResponse] = await Promise.all([
+    fetchImpl(assets.scenarioUrl),
+    fetchImpl(assets.rubricUrl),
+  ]);
+  if (!scenarioResponse.ok || !rubricResponse.ok) {
+    throw new Error(`Scenario assets unavailable (${scenarioResponse.status}/${rubricResponse.status})`);
+  }
+  const [scenario, rubric] = await Promise.all([
+    scenarioResponse.json(),
+    rubricResponse.json(),
+  ]);
+  const loaded = liveRunner.loadRubricScenario({ scenario, rubric });
+  return { scenario, rubric, loaded };
 }
 
 function renderShell() {
@@ -320,10 +454,13 @@ function renderShell() {
         </section>
       </div>
 
-      <aside class="live-panel live-event-panel" aria-labelledby="live-events-heading">
-        <div class="live-event-header"><h2 id="live-events-heading">Event log</h2><span>sim time</span></div>
-        <ol id="live-event-log" class="live-event-log"><li class="live-empty">No events yet.</li></ol>
-      </aside>
+      <div class="live-sim-column live-side-column">
+        ${renderRubricConsoleShell()}
+        <section class="live-panel live-event-panel" aria-labelledby="live-events-heading">
+          <div class="live-event-header"><h2 id="live-events-heading">Event log</h2><span>sim time</span></div>
+          <ol id="live-event-log" class="live-event-log"><li class="live-empty">No events yet.</li></ol>
+        </section>
+      </div>
     </div>`;
 }
 
@@ -426,6 +563,100 @@ function renderVolatileSelection(agent) {
   }
 }
 
+function renderInstructorNmb(snapshot) {
+  const nmb = formatInstructorNmb(snapshot);
+  setText('live-nmb-target-ratio', nmb.targetRatio);
+  setText('live-nmb-actual-ratio', nmb.actualRatio);
+  setText('live-nmb-tof-count', nmb.tofCount);
+  setText('live-nmb-blockade', nmb.effectiveBlockade);
+  setText('live-nmb-source', nmb.dominantSource);
+  setText('live-nmb-equilibrium', nmb.equilibrium);
+  const readback = document.getElementById('live-instructor-nmb-readback');
+  if (readback) readback.dataset.state = nmb.equilibrium.toLowerCase().replace(' ', '-');
+}
+
+function rubricPresentationKey(result) {
+  if (!result) return 'NO_RUBRIC';
+  return JSON.stringify({
+    rubricId: result.rubricId,
+    rawPoints: result.rawPoints,
+    maxPoints: result.maxPoints,
+    percentage: result.percentage,
+    finalized: result.finalized,
+    outcome: result.outcome,
+    pendingInstructorCount: result.pendingInstructorCount,
+    pendingEngineCount: result.pendingEngineCount,
+    pendingUnscoreableCount: result.pendingUnscoreableCount,
+    items: result.items.map(({ id, status, points, note }) => ({ id, status, points, note })),
+    violations: result.violations.map(({ itemId, tSec, triggerAction }) => ({
+      itemId, tSec, triggerAction,
+    })),
+  });
+}
+
+function renderRubricResult(result) {
+  const summary = document.getElementById('live-rubric-summary');
+  const warning = document.getElementById('live-rubric-source-warning');
+  const flags = document.getElementById('live-rubric-flags');
+  const items = document.getElementById('live-rubric-items');
+  const finalizationStatus = document.getElementById('live-rubric-finalization-status');
+  const finalizeButton = document.getElementById('live-rubric-finalize');
+  const printButton = document.getElementById('live-rubric-print');
+  if (!result) {
+    if (summary) summary.innerHTML = '<strong>NO RUBRIC</strong><span>Load an approved scenario to begin scoring.</span>';
+    if (warning) { warning.hidden = true; warning.textContent = ''; }
+    if (flags) flags.innerHTML = '<li>No violation flags.</li>';
+    if (items) items.innerHTML = '<li class="live-empty">Load an approved scenario to view literal rubric rows.</li>';
+    if (finalizationStatus) finalizationStatus.textContent = 'Finalization unavailable until a rubric scenario is loaded.';
+    if (finalizeButton) finalizeButton.disabled = true;
+    if (printButton) printButton.disabled = true;
+    return;
+  }
+
+  const display = formatRubricStatus({
+    ...result,
+    denominatorWarnings: runner?.getRubricDiscrepancies() ?? [],
+  });
+  if (summary) {
+    summary.innerHTML = `
+      <strong>${escapeHtml(display.outcome)}</strong>
+      <span>${escapeHtml(display.score)} · ${escapeHtml(display.percentage)}</span>
+      <small>${escapeHtml(display.pendingMessage)}</small>`;
+  }
+  if (warning) {
+    warning.hidden = display.warnings.length === 0;
+    warning.textContent = display.warnings.join(' ');
+  }
+  if (flags) {
+    flags.innerHTML = result.violations.length === 0
+      ? '<li>No violation flags.</li>'
+      : result.violations.map((flag) => {
+        const formatted = formatRubricFlag(flag);
+        return `<li><strong>${escapeHtml(formatted.label)}</strong><span>${escapeHtml(formatted.timing)}</span><small>Evidence · ${escapeHtml(formatted.evidence)}</small></li>`;
+      }).join('');
+  }
+  if (items) {
+    const draftNotes = clearRubricDraftsOnNextRender
+      ? new Map()
+      : new Map([...items.querySelectorAll('[data-rubric-note]')]
+        .map((input) => [input.dataset.rubricNote, input.value]));
+    items.innerHTML = result.items.map(renderRubricItemMarkup).join('');
+    for (const input of items.querySelectorAll('[data-rubric-note]')) {
+      if (draftNotes.has(input.dataset.rubricNote)) {
+        input.value = draftNotes.get(input.dataset.rubricNote);
+      }
+    }
+  }
+  clearRubricDraftsOnNextRender = false;
+  if (finalizationStatus) {
+    finalizationStatus.textContent = display.finalized
+      ? `Debrief finalized · ${display.outcome} · ${display.score} (${display.percentage}).`
+      : display.pendingMessage;
+  }
+  if (finalizeButton) finalizeButton.disabled = display.finalized;
+  if (printButton) printButton.disabled = !display.finalized;
+}
+
 function renderSnapshot(snapshot) {
   latestSnapshot = snapshot;
   const monitor = formatMonitorSnapshot(snapshot);
@@ -488,6 +719,7 @@ function renderSnapshot(snapshot) {
   setText('live-drive-drug', Number(snapshot.drugDepressionContribution).toFixed(2));
   setText('live-drive-complication', Number(snapshot.complicationDriveContribution).toFixed(2));
   setText('live-drive-muscle', Number(snapshot.respiratoryMuscleCapability).toFixed(2));
+  renderInstructorNmb(snapshot);
   const forcedApnea = document.getElementById('live-forced-apnea');
   if (forcedApnea) forcedApnea.checked = snapshot.forcedApnea;
   const latestAttempt = snapshot.intubationAttempts.at(-1);
@@ -519,6 +751,15 @@ function renderSnapshot(snapshot) {
   if (cricoidButton) {
     cricoidButton.textContent = snapshot.cricoidPressureActive ? 'RELEASE CRICOID' : 'APPLY CRICOID';
     cricoidButton.setAttribute('aria-pressed', String(snapshot.cricoidPressureActive));
+  }
+  const rubricResult = runner?.getRubricStatus() ?? null;
+  if (rubricResult !== latestRubricResult) {
+    latestRubricResult = rubricResult;
+    const presentationKey = rubricPresentationKey(rubricResult);
+    if (presentationKey !== latestRubricPresentationKey) {
+      latestRubricPresentationKey = presentationKey;
+      renderRubricResult(rubricResult);
+    }
   }
   transport?.publishSnapshot(snapshot);
 }
@@ -596,6 +837,9 @@ function applyPatient(event) {
   const form = event.currentTarget;
   try {
     const config = parsePatientConfig(Object.fromEntries(new FormData(form)));
+    latestRubricDebrief = null;
+    latestRubricPresentationKey = null;
+    clearRubricDraftsOnNextRender = true;
     ensureRunner().applyConfig(config);
     updateDosePreviews(config.weightKg);
     updateRegionalLidocainePreview(config.weightKg);
@@ -622,11 +866,96 @@ function giveDrug(actionId) {
   }
 }
 
+function setRubricLoadStatus(message, kind = 'info') {
+  const output = document.getElementById('live-rubric-load-status');
+  if (!output) return;
+  output.textContent = message;
+  output.dataset.kind = kind;
+}
+
+async function loadSelectedRubricScenario() {
+  const select = document.getElementById('live-rubric-scenario');
+  const button = document.getElementById('live-rubric-load');
+  const selectedId = select?.value;
+  const assets = RUBRIC_SCENARIO_ASSETS[selectedId];
+  if (!assets) {
+    setRubricLoadStatus('Select an approved rubric scenario.', 'error');
+    return;
+  }
+  if (button) button.disabled = true;
+  if (select) select.disabled = true;
+  setRubricLoadStatus('Loading and validating scenario + rubric…');
+  try {
+    const liveRunner = ensureRunner();
+    const { loaded } = await loadRubricScenarioAssets(liveRunner, selectedId);
+    latestRubricResult = null;
+    latestRubricPresentationKey = null;
+    latestRubricDebrief = null;
+    clearRubricDraftsOnNextRender = true;
+    fillPatientForm(liveRunner.config);
+    renderEventLog();
+    liveRunner.emit();
+    const selected = RUBRIC_SCENARIOS.find(({ id }) => id === selectedId);
+    setRubricLoadStatus(`${selected?.label ?? selectedId} loaded and validated.`, 'success');
+    setStatus(`Rubric scenario loaded · ${loaded.scenarioId}.`, 'success');
+  } catch (error) {
+    setRubricLoadStatus(`Load failed; active case preserved. ${error.message}`, 'error');
+    setStatus(`Rubric scenario not loaded: ${error.message}`, 'error');
+  } finally {
+    if (button) button.disabled = false;
+    if (select) select.disabled = false;
+  }
+}
+
+function focusFirstPendingRubricItem(itemId) {
+  if (!itemId) return;
+  const row = document.getElementById(`live-rubric-item-${itemId}`);
+  row?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  const score = row?.querySelector('[data-rubric-points]');
+  (score ?? row)?.focus();
+}
+
+function finalizeLiveRubric() {
+  const liveRunner = ensureRunner();
+  try {
+    const result = finalizeRubricDebrief(liveRunner);
+    if (!result.ok) {
+      const pendingCount = result.pendingItemIds?.length ?? 0;
+      const message = result.reason === 'INSTRUCTOR_SCORES_PENDING'
+        ? `${pendingCount} instructor observation${pendingCount === 1 ? '' : 's'} pending. Complete the highlighted rubric rows before finalization.`
+        : `Finalization blocked: ${result.reason}.`;
+      setText('live-rubric-finalization-status', message);
+      setStatus(message, 'error');
+      focusFirstPendingRubricItem(result.pendingItemIds?.[0]);
+      return result;
+    }
+    latestRubricDebrief = result.debrief;
+    latestRubricResult = null;
+    latestRubricPresentationKey = null;
+    liveRunner.emit();
+    setStatus(`Rubric finalized · ${result.finalized.outcome}.`, 'success');
+    return result;
+  } catch (error) {
+    setStatus(`Finalization failed: ${error.message}`, 'error');
+    return { ok: false, reason: error.message };
+  }
+}
+
 function downloadDebrief() {
   const liveRunner = ensureRunner();
   liveRunner.pause();
-  liveRunner.logEvent('Case', 'Ended for debrief export', { action: 'end_case' });
-  const result = liveRunner.buildDebrief();
+  const rubricStatus = liveRunner.getRubricStatus();
+  if (rubricStatus && !rubricStatus.finalized) {
+    setStatus('Finalize the live rubric before exporting its debrief.', 'error');
+    focusFirstPendingRubricItem(
+      rubricStatus.items.find((item) => item.scoringSource === 'INSTRUCTOR_OBSERVED' && item.points === null)?.id,
+    );
+    return;
+  }
+  if (!rubricStatus) {
+    liveRunner.logEvent('Case', 'Ended for debrief export', { action: 'end_case' });
+  }
+  const result = latestRubricDebrief ?? liveRunner.buildDebrief();
   const validation = validateSimulationResult(result);
   if (!validation.ok) {
     setStatus(`Debrief invalid: ${[...validation.missing, ...validation.invalid].join(', ')}`, 'error');
@@ -738,6 +1067,9 @@ function bindControls() {
   });
   document.getElementById('live-reset')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
+    latestRubricDebrief = null;
+    latestRubricPresentationKey = null;
+    clearRubricDraftsOnNextRender = true;
     liveRunner.reset();
     liveRunner.logEvent('Case', 'Simulation reset', { action: 'reset' });
     fillPatientForm(liveRunner.config);
@@ -755,6 +1087,46 @@ function bindControls() {
     const liveRunner = ensureRunner();
     const status = formatPreoxygenationLifecycleStatus(liveRunner.preoxygenate());
     setStatus(status.message, status.kind);
+  });
+  document.getElementById('live-rubric-load')?.addEventListener('click', loadSelectedRubricScenario);
+  document.getElementById('live-rubric-items')?.addEventListener('click', (event) => {
+    const scoreButton = event.target.closest('[data-rubric-points]');
+    if (!scoreButton) return;
+    const itemId = scoreButton.dataset.rubricItem;
+    const points = Number(scoreButton.dataset.rubricPoints);
+    const note = [...view.querySelectorAll('[data-rubric-note]')]
+      .find((input) => input.dataset.rubricNote === itemId)?.value ?? '';
+    try {
+      const liveRunner = ensureRunner();
+      const scored = applyInstructorRubricScore(liveRunner, { itemId, points, note });
+      latestRubricDebrief = null;
+      liveRunner.emit();
+      setStatus(`Instructor score updated · item ${scored.displayNumber} · ${scored.points}/2.`, 'success');
+    } catch (error) {
+      setStatus(`Instructor score not saved: ${error.message}`, 'error');
+    }
+  });
+  const setNmbTarget = (value) => {
+    try {
+      const status = applyInstructorNmbTarget(ensureRunner(), value);
+      setStatus(`Administrative NMB target set to TOF ratio ${status.targetTofRatio.toFixed(2)}.`, 'success');
+    } catch (error) {
+      setStatus(error.message, 'error');
+    }
+  };
+  for (const button of view.querySelectorAll('[data-nmb-target]')) {
+    button.addEventListener('click', () => setNmbTarget(button.dataset.nmbTarget));
+  }
+  document.getElementById('live-instructor-nmb-apply')?.addEventListener('click', () => {
+    setNmbTarget(document.getElementById('live-instructor-nmb-custom')?.value);
+  });
+  document.getElementById('live-rubric-finalize')?.addEventListener('click', finalizeLiveRubric);
+  document.getElementById('live-rubric-print')?.addEventListener('click', () => {
+    if (!latestRubricDebrief) {
+      setStatus('Finalize the rubric before printing.', 'error');
+      return;
+    }
+    window.print();
   });
   document.getElementById('live-export')?.addEventListener('click', downloadDebrief);
   document.getElementById('live-open-display')?.addEventListener('click', () => {

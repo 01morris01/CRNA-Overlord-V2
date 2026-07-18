@@ -757,6 +757,27 @@ export class SimRunner {
     );
   }
 
+  getRubricStatus() {
+    return this.rubricSession?.getLiveResult() ?? null;
+  }
+
+  getRubricDiscrepancies() {
+    if (!this.rubricSession) return [];
+    return copyJsonInput(this.rubricSession.rubric.discrepancies, 'rubric discrepancies');
+  }
+
+  setInstructorScore({ itemId, points, note = '' } = {}) {
+    if (!this.rubricSession) {
+      throw new Error('No rubric scenario is loaded');
+    }
+    return this.rubricSession.setInstructorScore({
+      itemId,
+      points,
+      note,
+      tSec: this._currentRubricTime(),
+    });
+  }
+
   finalizeRubric({ tSec } = {}) {
     if (!this.rubricSession) {
       return { ok: false, reason: 'NO_RUBRIC_SESSION', pendingItemIds: [] };

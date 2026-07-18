@@ -3,9 +3,14 @@ import {
   computeDrugDose,
   computeRegionalLidocaineDose,
   deriveAlarms,
+  formatInstructorNmb,
   formatLidocaineSnapshot,
   formatMonitorSnapshot,
+  formatRubricFlag,
+  formatRubricStatus,
   parsePatientConfig,
+  RUBRIC_SCENARIO_ASSETS,
+  RUBRIC_SCENARIOS,
   validateSimulationResult,
   VOLATILE_AGENTS,
   LIDOCAINE_ROUTES,
@@ -110,6 +115,96 @@ describe('live simulation dose model', () => {
     expect(() => computeRegionalLidocaineDose({
       route: 'peripheral', concentrationPercent: 0, volumeMl: 20, weightKg: 70, epinephrine: false,
     })).toThrow(/concentration/);
+  });
+});
+
+describe('live rubric presentation model', () => {
+  it('declares the four approved scenario labels separately from their fetch assets', () => {
+    expect(RUBRIC_SCENARIOS).toEqual([
+      { id: 'standard_iv_healthy_001', label: 'Standard IV - Healthy Adult' },
+      { id: 'rsi_full_stomach_001', label: 'RSI - Full Stomach' },
+      { id: 'emergence_residual_block_001', label: 'Emergence - Residual Blockade' },
+      { id: 'rsi_failed_first_attempt_001', label: 'RSI - Failed First Attempt' },
+    ]);
+    expect(RUBRIC_SCENARIO_ASSETS.rsi_full_stomach_001).toEqual({
+      scenarioUrl: '/crisis-sim/sim/scenarios/rsi_full_stomach_001.json',
+      rubricUrl: '/data/rubrics/carson-newman-rsi-induction.json',
+    });
+    expect(RUBRIC_SCENARIO_ASSETS.standard_iv_healthy_001).toEqual({
+      scenarioUrl: '/crisis-sim/sim/scenarios/standard_iv_healthy_001.json',
+      rubricUrl: '/data/rubrics/carson-newman-standard-iv-induction.json',
+    });
+    expect(RUBRIC_SCENARIO_ASSETS.emergence_residual_block_001).toEqual({
+      scenarioUrl: '/crisis-sim/sim/scenarios/emergence_residual_block_001.json',
+      rubricUrl: '/data/rubrics/carson-newman-anesthesia-emergence.json',
+    });
+    expect(RUBRIC_SCENARIO_ASSETS.rsi_failed_first_attempt_001).toEqual({
+      scenarioUrl: '/crisis-sim/sim/scenarios/rsi_failed_first_attempt_001.json',
+      rubricUrl: '/data/rubrics/carson-newman-rsi-induction.json',
+    });
+    expect(RUBRIC_SCENARIO_ASSETS.rsi_failed_first_attempt_001.rubricUrl)
+      .toBe('/data/rubrics/carson-newman-rsi-induction.json');
+  });
+
+  it('formats score state and the literal source-denominator discrepancy', () => {
+    expect(formatRubricStatus({
+      rawPoints: 44,
+      maxPoints: 106,
+      percentage: 44 / 106 * 100,
+      finalized: false,
+      pendingInstructorCount: 3,
+      pendingEngineCount: 0,
+      pendingUnscoreableCount: 0,
+      items: new Array(53).fill({}),
+      denominatorWarnings: [{
+        code: 'SOURCE_DENOMINATOR_MISMATCH',
+        sourceHeaderDenominator: 49,
+        computedMaxPoints: 106,
+      }],
+    })).toEqual({
+      score: '44 / 106',
+      percentage: '41.5%',
+      outcome: 'IN PROGRESS',
+      finalized: false,
+      pendingCount: 3,
+      pendingMessage: '3 instructor observations pending before finalization.',
+      warnings: ['Source header denominator /49; encoded rubric computes 106 points across 53 rows.'],
+    });
+  });
+
+  it('retains exact rubric labels in violation flags and formats NMB readback', () => {
+    expect(formatRubricFlag({
+      displayNumber: '11',
+      text: 'Do NOT provide positive pressure ventilation prior to the first attempt at laryngoscopy',
+      tSec: 12,
+      triggerAction: 'mask_ppv_started',
+      evidence: { actions: [{ tSec: 12, action: 'mask_ppv_started' }] },
+    })).toEqual({
+      label: 'Item 11 — Do NOT provide positive pressure ventilation prior to the first attempt at laryngoscopy',
+      timing: '00:12 · mask_ppv_started',
+      evidence: '{"actions":[{"tSec":12,"action":"mask_ppv_started"}]}',
+    });
+
+    expect(formatInstructorNmb({
+      tofRatio: 0.67,
+      tof: 3,
+      effectiveNmbBlockade: 0.41,
+      instructorNmbTarget: {
+        targetTofRatio: 0.7,
+        actualTofRatio: 0.67,
+        actualTofCount: 3,
+        effectiveNmbBlockade: 0.41,
+        dominantNmbSource: 'Rocuronium',
+        equilibrating: true,
+      },
+    })).toEqual({
+      targetRatio: '0.70',
+      actualRatio: '0.67',
+      tofCount: '3 / 4',
+      effectiveBlockade: '0.41',
+      dominantSource: 'Rocuronium',
+      equilibrium: 'EQUILIBRATING',
+    });
   });
 });
 

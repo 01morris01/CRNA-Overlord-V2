@@ -13,6 +13,110 @@ export const PATIENT_PRESETS = Object.freeze([
   },
 ]);
 
+export const RUBRIC_SCENARIOS = Object.freeze([
+  Object.freeze({ id: 'standard_iv_healthy_001', label: 'Standard IV - Healthy Adult' }),
+  Object.freeze({ id: 'rsi_full_stomach_001', label: 'RSI - Full Stomach' }),
+  Object.freeze({ id: 'emergence_residual_block_001', label: 'Emergence - Residual Blockade' }),
+  Object.freeze({ id: 'rsi_failed_first_attempt_001', label: 'RSI - Failed First Attempt' }),
+]);
+
+export const RUBRIC_SCENARIO_ASSETS = Object.freeze({
+  standard_iv_healthy_001: Object.freeze({
+    scenarioUrl: '/crisis-sim/sim/scenarios/standard_iv_healthy_001.json',
+    rubricUrl: '/data/rubrics/carson-newman-standard-iv-induction.json',
+  }),
+  rsi_full_stomach_001: Object.freeze({
+    scenarioUrl: '/crisis-sim/sim/scenarios/rsi_full_stomach_001.json',
+    rubricUrl: '/data/rubrics/carson-newman-rsi-induction.json',
+  }),
+  emergence_residual_block_001: Object.freeze({
+    scenarioUrl: '/crisis-sim/sim/scenarios/emergence_residual_block_001.json',
+    rubricUrl: '/data/rubrics/carson-newman-anesthesia-emergence.json',
+  }),
+  rsi_failed_first_attempt_001: Object.freeze({
+    scenarioUrl: '/crisis-sim/sim/scenarios/rsi_failed_first_attempt_001.json',
+    rubricUrl: '/data/rubrics/carson-newman-rsi-induction.json',
+  }),
+});
+
+function rubricTime(seconds) {
+  if (!Number.isFinite(seconds)) return 'time unavailable';
+  const total = Math.max(0, Math.floor(seconds));
+  const minutes = Math.floor(total / 60);
+  const remainder = total % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`;
+}
+
+function formatDenominatorWarning(warning, itemCount) {
+  if (warning?.code !== 'SOURCE_DENOMINATOR_MISMATCH') return null;
+  return `Source header denominator /${warning.sourceHeaderDenominator}; encoded rubric computes ${warning.computedMaxPoints} points across ${itemCount} rows.`;
+}
+
+export function formatRubricStatus(result = {}) {
+  const rawPoints = Number.isFinite(result.rawPoints) ? result.rawPoints : 0;
+  const maxPoints = Number.isFinite(result.maxPoints) ? result.maxPoints : 0;
+  const percentage = Number.isFinite(result.percentage) ? result.percentage : 0;
+  const pendingCount = [
+    result.pendingInstructorCount,
+    result.pendingEngineCount,
+    result.pendingUnscoreableCount,
+  ].reduce((total, value) => total + (Number.isSafeInteger(value) ? value : 0), 0);
+  const instructorPending = Number.isSafeInteger(result.pendingInstructorCount)
+    ? result.pendingInstructorCount
+    : 0;
+  const warnings = (Array.isArray(result.denominatorWarnings)
+    ? result.denominatorWarnings
+    : [])
+    .map((warning) => formatDenominatorWarning(warning, result.items?.length ?? 0))
+    .filter(Boolean);
+  let pendingMessage = 'All rubric items are ready for finalization.';
+  if (instructorPending > 0) {
+    pendingMessage = `${instructorPending} instructor observation${instructorPending === 1 ? '' : 's'} pending before finalization.`;
+  } else if (pendingCount > 0) {
+    pendingMessage = `${pendingCount} rubric item${pendingCount === 1 ? '' : 's'} pending before finalization.`;
+  }
+  return Object.freeze({
+    score: `${rawPoints} / ${maxPoints}`,
+    percentage: `${percentage.toFixed(1)}%`,
+    outcome: result.finalized ? (result.outcome ?? 'FINALIZED') : 'IN PROGRESS',
+    finalized: result.finalized === true,
+    pendingCount,
+    pendingMessage,
+    warnings: Object.freeze(warnings),
+  });
+}
+
+export function formatRubricFlag(flag = {}) {
+  const rubricLabel = String(flag.rubricId ?? '').includes('rsi')
+    ? 'RSI item'
+    : (String(flag.rubricId ?? '').includes('emergence')
+      ? 'Emergence item'
+      : (String(flag.rubricId ?? '').includes('standard') ? 'Standard IV item' : 'Item'));
+  return Object.freeze({
+    label: `${rubricLabel} ${flag.displayNumber ?? '—'} — ${flag.text ?? ''}`,
+    timing: `${rubricTime(flag.tSec)} · ${flag.triggerAction ?? 'unknown action'}`,
+    evidence: JSON.stringify(flag.evidence ?? {}),
+  });
+}
+
+function fixedNumber(value, digits = 2) {
+  return Number.isFinite(value) ? Number(value).toFixed(digits) : '—';
+}
+
+export function formatInstructorNmb(snapshot = {}) {
+  const status = snapshot.instructorNmbTarget;
+  return Object.freeze({
+    targetRatio: fixedNumber(status?.targetTofRatio),
+    actualRatio: fixedNumber(status?.actualTofRatio ?? snapshot.tofRatio),
+    tofCount: Number.isFinite(status?.actualTofCount ?? snapshot.tof)
+      ? `${status?.actualTofCount ?? snapshot.tof} / 4`
+      : '— / 4',
+    effectiveBlockade: fixedNumber(status?.effectiveNmbBlockade ?? snapshot.effectiveNmbBlockade),
+    dominantSource: status?.dominantNmbSource ?? 'None',
+    equilibrium: status ? (status.equilibrating ? 'EQUILIBRATING' : 'STABLE') : 'NO TARGET',
+  });
+}
+
 export const DRUG_ACTIONS = Object.freeze([
   { id: 'propofol_2_mgkg', group: 'Induction', drugName: 'Propofol', amount: 2, unit: 'mg/kg', label: 'Propofol 2 mg/kg' },
   { id: 'fentanyl_2_mcgkg', group: 'Induction', drugName: 'Fentanyl', amount: 2, unit: 'mcg/kg', label: 'Fentanyl 2 mcg/kg' },

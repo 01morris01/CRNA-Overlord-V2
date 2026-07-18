@@ -1,0 +1,171 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { describe, expect, it, vi } from 'vitest';
+import { SimRunner } from '../ui/simRunner.js';
+import {
+  applyInstructorNmbTarget,
+  applyInstructorRubricScore,
+  finalizeRubricDebrief,
+  loadRubricScenarioAssets,
+  renderRubricConsoleShell,
+  renderRubricItemMarkup,
+} from '../../ui/liveSimView.js';
+
+const root = resolve(import.meta.dirname, '../..');
+const read = (path) => readFileSync(resolve(root, path), 'utf8');
+
+describe('live rubric instructor console', () => {
+  it('exposes cached live status and timestamped instructor scoring through the runner', () => {
+    const scenario = JSON.parse(read('crisis-sim/sim/scenarios/rsi_full_stomach_001.json'));
+    const rubric = JSON.parse(read('data/rubrics/carson-newman-rsi-induction.json'));
+    const runner = new SimRunner();
+    runner.loadRubricScenario({ scenario, rubric });
+
+    const before = runner.getRubricStatus();
+    expect(runner.getRubricStatus()).toBe(before);
+    expect(runner.getRubricDiscrepancies()).toEqual([{
+      code: 'SOURCE_DENOMINATOR_MISMATCH',
+      sourceHeaderDenominator: 49,
+      computedMaxPoints: 106,
+    }]);
+    expect(runner.setInstructorScore({
+      itemId: 'rsi-1', points: 1, note: 'PPE partially observed',
+    })).toMatchObject({
+      id: 'rsi-1', points: 1, note: 'PPE partially observed', status: 'partial',
+    });
+    const after = runner.getRubricStatus();
+    expect(after).not.toBe(before);
+    expect(after.actionLedger.at(-1)).toMatchObject({
+      tSec: 0,
+      action: 'instructor_rubric_score_set',
+      meta: { itemId: 'rsi-1', points: 1, note: 'PPE partially observed', revision: 1 },
+    });
+  });
+
+  it('renders the complete accessible console shell without replacing clinical controls', () => {
+    const markup = renderRubricConsoleShell();
+    for (const id of [
+      'live-rubric-scenario', 'live-rubric-load', 'live-rubric-summary',
+      'live-rubric-source-warning', 'live-rubric-flags', 'live-rubric-items',
+      'live-rubric-finalization-status', 'live-instructor-nmb-custom',
+      'live-instructor-nmb-apply', 'live-instructor-nmb-readback',
+      'live-rubric-finalize', 'live-rubric-print',
+    ]) expect(markup).toContain(`id="${id}"`);
+
+    expect(markup.match(/<option value="(?:standard_iv_healthy_001|rsi_full_stomach_001|emergence_residual_block_001|rsi_failed_first_attempt_001)"/g))
+      .toHaveLength(4);
+    for (const target of ['0', '0.25', '0.50', '0.70', '0.90', '1']) {
+      expect(markup).toContain(`data-nmb-target="${target}"`);
+    }
+    expect(markup).toContain('ADMINISTRATIVE SETUP');
+    expect(markup).toContain('Not a student action and not scoreable');
+    expect(markup).toContain('Actual TOF count');
+    expect(markup).toContain('FINALIZE DEBRIEF');
+    expect(markup).toContain('PRINT RUBRIC');
+  });
+
+  it('fetches both approved assets before atomically asking the runner to load them', async () => {
+    const scenario = { id: 'rsi_full_stomach_001' };
+    const rubric = { id: 'carson-newman-rsi-induction' };
+    const fetchImpl = vi.fn(async (url) => ({
+      ok: true,
+      status: 200,
+      json: async () => (url.includes('/scenarios/') ? scenario : rubric),
+    }));
+    const runner = { loadRubricScenario: vi.fn(() => ({ ok: true })) };
+
+    await expect(loadRubricScenarioAssets(
+      runner, 'rsi_full_stomach_001', fetchImpl,
+    )).resolves.toEqual({ scenario, rubric, loaded: { ok: true } });
+    expect(fetchImpl.mock.calls.map(([url]) => url)).toEqual([
+      '/crisis-sim/sim/scenarios/rsi_full_stomach_001.json',
+      '/data/rubrics/carson-newman-rsi-induction.json',
+    ]);
+    expect(runner.loadRubricScenario).toHaveBeenCalledWith({ scenario, rubric });
+
+    const unavailableRunner = { loadRubricScenario: vi.fn() };
+    const unavailableFetch = vi.fn(async () => ({ ok: false, status: 404 }));
+    await expect(loadRubricScenarioAssets(
+      unavailableRunner, 'standard_iv_healthy_001', unavailableFetch,
+    )).rejects.toThrow(/unavailable/);
+    expect(unavailableRunner.loadRubricScenario).not.toHaveBeenCalled();
+  });
+
+  it('shows literal text and source labels while restricting manual controls to instructor rows', () => {
+    const literal = 'Confirm <airway> & monitor “exactly”';
+    const engine = renderRubricItemMarkup({
+      id: 'rsi-11', displayNumber: '11', text: literal, critical: true,
+      scoringSource: 'ENGINE_OBSERVABLE', status: 'not_performed', points: 0,
+      evidence: { actions: [] }, note: '',
+    });
+    expect(engine).toContain('11');
+    expect(engine).toContain('Confirm &lt;airway&gt; &amp; monitor “exactly”');
+    expect(engine).toContain('ENGINE OBSERVABLE');
+    expect(engine).not.toContain('data-rubric-points');
+
+    const instructor = renderRubricItemMarkup({
+      id: 'rsi-1', displayNumber: '1', text: 'Don appropriate PPE', critical: true,
+      scoringSource: 'INSTRUCTOR_OBSERVED', status: 'pending', points: null,
+      evidence: null, note: '',
+    });
+    expect(instructor).toContain('INSTRUCTOR OBSERVED');
+    expect(instructor.match(/data-rubric-points="[210]"/g)).toHaveLength(3);
+    expect(instructor).toContain('aria-label="Score item 1 performed, 2 points"');
+    expect(instructor).toContain('data-rubric-note="rsi-1"');
+  });
+
+  it('routes instructor scoring and NMB targets only through public runner APIs', () => {
+    const runner = {
+      setInstructorScore: vi.fn(() => ({ id: 'rsi-1', points: 1 })),
+      setInstructorNmbTarget: vi.fn(() => ({ targetTofRatio: 0.7 })),
+      setDriver: vi.fn(),
+      snapshot: vi.fn(),
+    };
+    expect(applyInstructorRubricScore(runner, {
+      itemId: 'rsi-1', points: 1, note: 'partial observation',
+    })).toEqual({ id: 'rsi-1', points: 1 });
+    expect(runner.setInstructorScore).toHaveBeenCalledWith({
+      itemId: 'rsi-1', points: 1, note: 'partial observation',
+    });
+
+    expect(applyInstructorNmbTarget(runner, '0.70')).toEqual({ targetTofRatio: 0.7 });
+    expect(runner.setInstructorNmbTarget).toHaveBeenCalledWith({ targetTofRatio: 0.7 });
+    expect(runner.setDriver).not.toHaveBeenCalled();
+    expect(runner.snapshot).not.toHaveBeenCalled();
+  });
+
+  it('does not build a debrief while instructor observations remain pending', () => {
+    const pendingRunner = {
+      finalizeRubric: vi.fn(() => ({
+        ok: false, reason: 'INSTRUCTOR_SCORES_PENDING', pendingItemIds: ['rsi-1', 'rsi-2'],
+      })),
+      buildDebrief: vi.fn(),
+    };
+    expect(finalizeRubricDebrief(pendingRunner)).toEqual({
+      ok: false, reason: 'INSTRUCTOR_SCORES_PENDING', pendingItemIds: ['rsi-1', 'rsi-2'],
+    });
+    expect(pendingRunner.buildDebrief).not.toHaveBeenCalled();
+
+    const debrief = { rubricResult: { outcome: 'PASS' } };
+    const readyRunner = {
+      finalizeRubric: vi.fn(() => ({ ok: true, outcome: 'PASS' })),
+      buildDebrief: vi.fn(() => debrief),
+    };
+    expect(finalizeRubricDebrief(readyRunner)).toEqual({
+      ok: true, finalized: { ok: true, outcome: 'PASS' }, debrief,
+    });
+  });
+
+  it('keeps the implementation on the engine truth boundary and makes rubric scrolling independent', () => {
+    const controller = read('ui/liveSimView.js');
+    const css = read('assets/css/live-sim.css');
+    expect(controller).toContain('liveRunner.loadRubricScenario({ scenario, rubric })');
+    expect(controller).toContain('liveRunner.getRubricStatus()');
+    expect(controller).toContain('liveRunner.setInstructorScore');
+    expect(controller).toContain('liveRunner.setInstructorNmbTarget({ targetTofRatio })');
+    expect(controller).not.toContain('liveRunner.setDriver(');
+    expect(controller).not.toMatch(/latestSnapshot\.(?:hr|sbp|dbp|map|spo2|rr|etco2|tofRatio)\s*=/);
+    expect(css).toMatch(/\.live-rubric-panel\s*\{[^}]*position:\s*sticky[^}]*overflow:\s*hidden/s);
+    expect(css).toMatch(/\.live-rubric-items\s*\{[^}]*overflow-y:\s*auto/s);
+  });
+});
