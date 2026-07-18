@@ -733,7 +733,6 @@ describe('CaseSession live actions, projections, and event flow', () => {
     expect(learner).toMatchObject({
       stage: 'chart_review',
       flowState: {
-        currentPhaseId: 'assessment',
         currentPhaseTitle: 'Assessment',
         paused: false,
       },

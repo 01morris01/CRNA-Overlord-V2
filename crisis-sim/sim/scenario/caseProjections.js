@@ -677,7 +677,7 @@ function validateRevisions(records, sessionState) {
   validateContiguousHistory(records, 'sessionState.revisions');
 }
 
-function validateAggregateChronology(sessionState) {
+function validateAggregateChronology(sessionState, flowState) {
   let previousTimeSec = 0;
   sessionState.timeline.forEach((record, index) => {
     const expectedSequence = index + 1;
@@ -707,15 +707,22 @@ function validateAggregateChronology(sessionState) {
     ...sessionState.revisions.map(({ tSec }) => tSec),
   ].filter((value) => value !== null);
   const maximumRecordedTimeSec = Math.max(timelineTimeSec, ...otherTimes, 0);
-  if (sessionState.currentTimeSec !== maximumRecordedTimeSec
-    || sessionState.currentTimeSec !== timelineTimeSec) {
+  if (sessionState.currentTimeSec < maximumRecordedTimeSec) {
     throw new TypeError(
-      'sessionState.currentTimeSec must equal the maximum recorded canonical timeline time',
+      'sessionState.currentTimeSec must be at or after every recorded canonical time',
+    );
+  }
+  const reconciledTimeSec = flowState === null
+    ? sessionState.currentTimeSec
+    : Math.max(maximumRecordedTimeSec, flowState.currentTimeSec);
+  if (flowState !== null && sessionState.currentTimeSec !== reconciledTimeSec) {
+    throw new TypeError(
+      'sessionState.currentTimeSec must reconcile canonical record and flowState times',
     );
   }
 }
 
-function copyAndValidateSessionState(sessionState, references) {
+function copyAndValidateSessionState(sessionState, references, flowState = null) {
   if (!isPlainObject(sessionState)) throw new TypeError('sessionState must be a plain object');
 
   const copied = copyCaseData(sessionState, 'sessionState');
@@ -792,7 +799,7 @@ function copyAndValidateSessionState(sessionState, references) {
   validateFeedbackHistory(copied.feedbackRevealHistory, references);
   validateTimeline(copied.timeline, references);
   validateAssessmentEvidence(copied, references);
-  validateAggregateChronology(copied);
+  validateAggregateChronology(copied, flowState);
   validateSubmissionEvidence(copied, references);
   validateInstructorEvidence(copied, references);
   validateRevisions(copied.revisions, copied);
@@ -814,6 +821,7 @@ function copyAndValidateFlowState(flowState, references) {
   if (typeof copied.paused !== 'boolean') {
     throw new TypeError('flowState.paused must be a boolean');
   }
+  requireTimestamp(copied.currentTimeSec, 'flowState.currentTimeSec');
   requireKnownIds(copied.activeEventIds, 'flowState.activeEventIds', references.events, 'event');
   for (const eventId of copied.activeEventIds) {
     if (references.events.get(eventId).phaseId !== phase.id) {
@@ -854,8 +862,12 @@ function copyAndValidateFlowState(flowState, references) {
 function createProjectionInputs({ definition, sessionState, flowState }) {
   const copiedDefinition = normalizeProjectionDefinition(definition);
   const references = createDefinitionReferences(copiedDefinition);
-  const copiedSessionState = copyAndValidateSessionState(sessionState, references);
   const copiedFlowState = copyAndValidateFlowState(flowState, references);
+  const copiedSessionState = copyAndValidateSessionState(
+    sessionState,
+    references,
+    copiedFlowState,
+  );
   return {
     definition: copiedDefinition,
     sessionState: copiedSessionState,
@@ -931,7 +943,7 @@ function createLearnerSubmission(submission, allowedKeys) {
 function createLearnerFlowState(flowState) {
   if (flowState === null) return null;
   const projected = {};
-  for (const key of ['currentPhaseId', 'currentPhaseTitle', 'paused']) {
+  for (const key of ['currentPhaseTitle', 'paused']) {
     if (Object.hasOwn(flowState, key)) projected[key] = flowState[key];
   }
   return projected;

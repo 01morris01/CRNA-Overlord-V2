@@ -482,6 +482,7 @@ function makeFutureDiscoverySubmissionState(definition) {
 function makeFlowState() {
   return {
     currentPhaseId: 'assessment',
+    currentTimeSec: 6,
     currentPhaseTitle: SENTINELS.callerPhaseTitle,
     activeEventIds: ['assessment_ready'],
     responseDeadlines: [{
@@ -573,7 +574,6 @@ describe('learner case projection', () => {
         sequence: 3,
       },
       flowState: {
-        currentPhaseId: 'assessment',
         currentPhaseTitle: 'Assessment',
         paused: false,
       },
@@ -611,7 +611,7 @@ describe('learner case projection', () => {
     expect(() => { projection.planFields[0].options.push('forged'); }).toThrow(TypeError);
 
     expect(Object.keys(projection.flowState)).toEqual([
-      'currentPhaseId', 'currentPhaseTitle', 'paused',
+      'currentPhaseTitle', 'paused',
     ]);
     for (const forbiddenKey of [
       'instructorGuide',
@@ -654,6 +654,8 @@ describe('learner case projection', () => {
       'points',
       'critical',
       'scoringRuleId',
+      'currentPhaseId',
+      'currentTimeSec',
       'activeEventIds',
       'responseDeadlines',
       'availableBranchIds',
@@ -1006,11 +1008,6 @@ describe('case projection validation and determinism', () => {
       /sessionState\.sequence.*timeline|max.*sequence/i,
     ],
     [
-      'session time ahead of the canonical timeline',
-      (state) => { state.currentTimeSec = 8; },
-      /currentTimeSec.*timeline|max.*time/i,
-    ],
-    [
       'a findings revision gap',
       (state) => {
         state.findingsSubmission.revision = 2;
@@ -1094,6 +1091,25 @@ describe('case projection validation and determinism', () => {
     mutate(sessionState);
 
     expect(() => projectInstructorCase({ definition, sessionState })).toThrow(pattern);
+  });
+
+  test('allows session time after the latest action and reconciles it with flow time', () => {
+    const definition = makeProjectionDefinition();
+    const withoutFlow = makePopulatedSessionState({ currentTimeSec: 8 });
+    expect(() => projectInstructorCase({ definition, sessionState: withoutFlow }))
+      .not.toThrow();
+
+    const behindRecords = makePopulatedSessionState({ currentTimeSec: 5 });
+    expect(() => projectInstructorCase({ definition, sessionState: behindRecords }))
+      .toThrow(/currentTimeSec.*recorded|recorded.*time/i);
+
+    const mismatchedFlow = makeFlowState();
+    mismatchedFlow.currentTimeSec = 7;
+    expect(() => projectInstructorCase({
+      definition,
+      sessionState: makePopulatedSessionState(),
+      flowState: mismatchedFlow,
+    })).toThrow(/currentTimeSec.*flowState|flowState.*currentTimeSec/i);
   });
 
   test('accepts same rule ID in assessment and plan namespaces in definition order', () => {

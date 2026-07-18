@@ -73,6 +73,22 @@ function equalJsonSafe(left, right) {
       && equalJsonSafe(left[key], right[key]));
 }
 
+function equalPlanTriggerValue(actual, expected) {
+  if (!Array.isArray(actual) || !Array.isArray(expected)) {
+    return equalJsonSafe(actual, expected);
+  }
+  if (actual.length !== expected.length) return false;
+  const consumedActualIndexes = new Set();
+  return expected.every((expectedOption) => {
+    const matchingIndex = actual.findIndex((actualOption, index) => (
+      !consumedActualIndexes.has(index) && equalJsonSafe(actualOption, expectedOption)
+    ));
+    if (matchingIndex < 0) return false;
+    consumedActualIndexes.add(matchingIndex);
+    return true;
+  });
+}
+
 function matchesSubset(actual, expected) {
   if (expected === null || typeof expected !== 'object') return equalJsonSafe(actual, expected);
   if (Array.isArray(expected)) return equalJsonSafe(actual, expected);
@@ -429,13 +445,17 @@ export class CaseFlowSession {
   #evaluatePhysiology(currentEvent, tSec, snapshot) {
     const trigger = currentEvent.trigger;
     const actual = snapshot[trigger.key];
-    if (typeof actual !== 'number' || !Number.isFinite(actual)) return false;
-    const comparator = PHYSIOLOGY_OPERATORS[trigger.operator];
-    if (!comparator) return false;
     const prior = this.#physiologyState.get(currentEvent.id) ?? {
       armed: true,
       sinceActiveSec: null,
     };
+    if (typeof actual !== 'number' || !Number.isFinite(actual)) {
+      prior.sinceActiveSec = null;
+      this.#physiologyState.set(currentEvent.id, prior);
+      return false;
+    }
+    const comparator = PHYSIOLOGY_OPERATORS[trigger.operator];
+    if (!comparator) return false;
     const conditionMet = comparator(actual, trigger.value);
     if (!prior.armed) {
       if (shouldResetPhysiology(trigger, actual)) {
@@ -540,7 +560,7 @@ export class CaseFlowSession {
       const currentEvent = this.#eventsById.get(eventId);
       if (currentEvent.trigger.type !== 'plan') continue;
       if (!Object.hasOwn(copiedSelections, currentEvent.trigger.fieldId)
-        || !equalJsonSafe(
+        || !equalPlanTriggerValue(
           copiedSelections[currentEvent.trigger.fieldId],
           currentEvent.trigger.equals,
         )) continue;
@@ -650,6 +670,7 @@ export class CaseFlowSession {
     const responseDeadlines = [...this.#responseDeadlines.values()];
     return immutableCopy({
       currentPhaseId: this.#currentPhaseId,
+      currentTimeSec: this.#latestTimeSec,
       paused: this.#paused,
       activeEventIds: [...this.#activeEventIds],
       availableBranchIds,

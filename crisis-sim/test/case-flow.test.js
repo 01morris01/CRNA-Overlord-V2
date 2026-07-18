@@ -205,6 +205,31 @@ describe('CaseFlowSession trigger evaluation', () => {
     expect(flow.onStep({ tSec: 0.3, snapshot: { spo2: 89 } })).toEqual(['spo2_low']);
   });
 
+  test.each([
+    ['missing', {}],
+    ['non-finite', { value: Number.NaN }],
+  ])('breaks continuous physiology dwell on a %s sample', (_label, interruptedSnapshot) => {
+    const thresholdEvent = event({
+      id: 'continuous',
+      trigger: {
+        type: 'physiology', key: 'value', operator: '<=', value: 90, dwellSec: 0.04, resetDelta: 2,
+      },
+    });
+    const flow = new CaseFlowSession({
+      eventFlow: flowDefinition({
+        phases: [phase({ id: 'preop', events: ['continuous'] })],
+        events: [thresholdEvent],
+      }),
+    });
+    flow.enterInitialPhase({ tSec: 0 });
+
+    expect(flow.onStep({ tSec: 0.02, snapshot: { value: 90 } })).toEqual([]);
+    expect(flow.onStep({ tSec: 0.04, snapshot: interruptedSnapshot })).toEqual([]);
+    expect(flow.onStep({ tSec: 0.06, snapshot: { value: 90 } })).toEqual([]);
+    expect(flow.onStep({ tSec: 0.08, snapshot: { value: 90 } })).toEqual([]);
+    expect(flow.onStep({ tSec: 0.1, snapshot: { value: 90 } })).toEqual(['continuous']);
+  });
+
   test('requires leaving an inclusive threshold before rearming when reset delta is zero', () => {
     const thresholdEvent = event({
       id: 'inclusive',
@@ -587,7 +612,9 @@ describe('CaseFlowSession lifecycle and controls', () => {
 });
 
 function runMixedFingerprint() {
-  const flow = new CaseFlowSession({ eventFlow: makeTriggerFlow() });
+  const eventFlow = makeTriggerFlow();
+  eventFlow.events.find(({ id }) => id === 'induction_started').responseWindowSec = 1;
+  const flow = new CaseFlowSession({ eventFlow });
   const samples = [];
   samples.push({ returned: flow.enterInitialPhase({ tSec: 0 }), state: flow.getState() });
   flow.drainActivations();
@@ -598,7 +625,11 @@ function runMixedFingerprint() {
   flow.onAction({
     action: 'drug', meta: { drug: 'Propofol' }, tSec: 0.08, snapshot: { spo2: 89 },
   });
-  samples.push({ marker: 'mid_event', state: flow.getState(), drained: flow.drainActivations() });
+  samples.push({
+    marker: 'mid_response_window',
+    state: flow.getState(),
+    drained: flow.drainActivations(),
+  });
   flow.onPlan({ selections: { disposition: 'postpone' }, tSec: 0.1 });
   flow.setPaused({ paused: true, tSec: 0.12 });
   flow.onStep({ tSec: 0.2, snapshot: { spo2: 88 } });
@@ -608,8 +639,10 @@ function runMixedFingerprint() {
 }
 
 describe('CaseFlowSession determinism', () => {
-  test('is byte-identical across two mixed runs including mid-dwell and mid-event samples', () => {
-    expect(runMixedFingerprint()).toBe(runMixedFingerprint());
+  test('is byte-identical across two mixed runs including mid-dwell and open-window samples', () => {
+    const first = runMixedFingerprint();
+    expect(first).toBe(runMixedFingerprint());
+    expect(first).toContain('"responseDeadlineSec":1.08');
   });
 });
 
@@ -650,6 +683,28 @@ function makeIntegratedDefinition() {
 }
 
 describe('CaseSession event-flow integration', () => {
+  test('keeps projections usable when fixed-step flow time advances without a canonical action', () => {
+    const session = new CaseSession({ definition: makeIntegratedDefinition(), seed: 6 });
+    session.drainFlowActivations();
+
+    expect(session.processFlowStep({ tSec: 0.02, snapshot: { spo2: 99 } }))
+      .toMatchObject({ ok: true });
+    expect(session.getLiveResult()).toMatchObject({ currentTimeSec: 0.02, timeline: [] });
+    expect(() => session.getLearnerContext()).not.toThrow();
+    expect(() => session.getInstructorContext()).not.toThrow();
+    expect(session.getInstructorContext()).toMatchObject({
+      currentTimeSec: 0.02,
+      flowState: { currentTimeSec: 0.02 },
+    });
+
+    expect(session.advanceStage({ stage: 'interview', tSec: 0.04 })).toMatchObject({ ok: true });
+    expect(() => session.getLearnerContext()).not.toThrow();
+    expect(session.getInstructorContext()).toMatchObject({
+      currentTimeSec: 0.04,
+      flowState: { currentTimeSec: 0.02 },
+    });
+  });
+
   test('feeds only accepted assessment actions to its single flow instance', () => {
     const session = new CaseSession({ definition: makeIntegratedDefinition(), seed: 7 });
     expect(session.drainFlowActivations().map(({ eventId }) => eventId)).toEqual([
@@ -706,7 +761,6 @@ describe('CaseSession event-flow integration', () => {
     const learner = session.getLearnerContext();
     const instructor = session.getInstructorContext();
     expect(learner.flowState).toEqual({
-      currentPhaseId: 'assessment',
       currentPhaseTitle: 'Assessment',
       paused: false,
     });
@@ -777,5 +831,71 @@ describe('CaseSession event-flow integration', () => {
         eventId: 'instructor_recorded', source: 'instructor',
       })],
     });
+  });
+
+  test('matches reversed multi-select plan trigger values after canonical submission', () => {
+    const raw = makeCaseExperience();
+    raw.planRequirements.fields.push({
+      id: 'agents',
+      type: 'multi',
+      required: true,
+      options: ['propofol', 'ketamine', 'etomidate'],
+    });
+    raw.eventFlow.events.push(event({
+      id: 'agents_selected',
+      phaseId: 'assessment',
+      trigger: {
+        type: 'plan',
+        fieldId: 'agents',
+        equals: ['ketamine', 'propofol'],
+      },
+    }));
+    raw.eventFlow.phases[0].events.push('agents_selected');
+    const session = new CaseSession({
+      definition: normalizeCaseExperience(raw),
+      seed: 11,
+    });
+    session.drainFlowActivations();
+    expect(session.advanceStage({ stage: 'interview', tSec: 0.02 }).ok).toBe(true);
+    expect(session.recordAssessmentAction({ actionId: 'ask_npo', tSec: 0.04 }).ok).toBe(true);
+    expect(session.advanceStage({ stage: 'focused_exam', tSec: 0.06 }).ok).toBe(true);
+    expect(session.advanceStage({ stage: 'findings_summary', tSec: 0.08 }).ok).toBe(true);
+    expect(session.submitFindings({ findingIds: ['npo_ok'], tSec: 0.1 }).ok).toBe(true);
+    expect(session.advanceStage({ stage: 'plan_submission', tSec: 0.12 }).ok).toBe(true);
+
+    expect(session.submitPlan({
+      selections: {
+        disposition: 'proceed',
+        agents: ['ketamine', 'propofol'],
+      },
+      tSec: 0.14,
+    })).toMatchObject({
+      ok: true,
+      activations: [expect.objectContaining({ eventId: 'agents_selected', source: 'plan' })],
+    });
+    expect(session.getLiveResult().planSubmission.selections.agents)
+      .toEqual(['propofol', 'ketamine']);
+  });
+
+  test('never exposes hostile internal phase ids to the learner projection', () => {
+    const raw = makeCaseExperience();
+    const concealedPhaseId = 'concealed_mh_answer';
+    raw.eventFlow.initialPhaseId = concealedPhaseId;
+    raw.eventFlow.phases[0].id = concealedPhaseId;
+    raw.eventFlow.events[0].phaseId = concealedPhaseId;
+    raw.instructorGuide.considerations[0].phaseId = concealedPhaseId;
+    const session = new CaseSession({
+      definition: normalizeCaseExperience(raw),
+      seed: 12,
+    });
+
+    const learner = session.getLearnerContext();
+    const instructor = session.getInstructorContext();
+    expect(learner.flowState).toEqual({
+      currentPhaseTitle: 'Assessment',
+      paused: false,
+    });
+    expect(JSON.stringify(learner)).not.toContain(concealedPhaseId);
+    expect(instructor.flowState.currentPhaseId).toBe(concealedPhaseId);
   });
 });
