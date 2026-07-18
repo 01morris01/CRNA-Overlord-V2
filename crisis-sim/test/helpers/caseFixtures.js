@@ -143,3 +143,23 @@ export function makeCaseScenario() {
     caseExperience: makeCaseExperience(),
   };
 }
+
+export function makeCaseSessionState(overrides = {}) {
+  return {
+    stage: 'chart_review',
+    sequence: 0,
+    active: true,
+    completedActionIds: [],
+    assessmentRecords: [],
+    discoveredFindingIds: [],
+    findingsSubmission: null,
+    planSubmission: null,
+    ruleResults: [],
+    instructorObservations: [],
+    feedbackRevealIds: [],
+    revisions: [],
+    finalized: false,
+    outcome: null,
+    ...overrides,
+  };
+}
