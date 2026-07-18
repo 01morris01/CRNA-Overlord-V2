@@ -37,6 +37,12 @@ const RESERVED_LEARNER_CHART_KEYS = new Set([
   'scoringguidance',
   'concealedresponse',
 ]);
+const RESERVED_LEARNER_CHART_KEY_FAMILIES = Object.freeze([
+  /^expectedanswers?/,
+  /^instructorconsiderations?/,
+  /answerkeys?$/,
+  /^concealedfindings?/,
+]);
 const INSTRUCTOR_CONTROLS = new Set([
   'pause',
   'resume',
@@ -195,7 +201,9 @@ function deepFreeze(value) {
 function rejectReservedLearnerChartKeys(value, path = 'learnerChart') {
   if (value === null || typeof value !== 'object') return;
   for (const name of Object.getOwnPropertyNames(value)) {
-    if (RESERVED_LEARNER_CHART_KEYS.has(name.toLowerCase())) {
+    const normalizedName = name.replace(/[^a-z0-9]/gi, '').toLowerCase();
+    if (RESERVED_LEARNER_CHART_KEYS.has(normalizedName)
+      || RESERVED_LEARNER_CHART_KEY_FAMILIES.some((pattern) => pattern.test(normalizedName))) {
       throw new TypeError(`${path}.${name} is a reserved learner-chart key`);
     }
     const descriptor = Object.getOwnPropertyDescriptor(value, name);
@@ -253,6 +261,14 @@ function requireExactKeys(value, expectedKeys, label) {
   }
 }
 
+function rejectUnsupportedTriggerFields(trigger, allowedKeys, label) {
+  const allowed = new Set(allowedKeys);
+  const unsupported = Object.keys(trigger).find((key) => !allowed.has(key));
+  if (unsupported !== undefined) {
+    throw new TypeError(`${label}.${unsupported} is an unsupported trigger field`);
+  }
+}
+
 function collectIds(entries, label) {
   const ids = new Set();
   entries.forEach((entry, index) => {
@@ -271,9 +287,14 @@ function requireReference(ids, id, label) {
 function requireFixedStepSeconds(value, label) {
   requireFiniteNumber(value, label);
   if (value < 0) throw new RangeError(`${label} must be nonnegative`);
-  const fixedSteps = value / 0.02;
-  if (Math.abs(fixedSteps - Math.round(fixedSteps)) > 1e-9) {
-    throw new RangeError(`${label} must align to the 0.02-second fixed step`);
+  const fixedSteps = value * 50;
+  const nearestStep = Math.round(fixedSteps);
+  if (!Number.isFinite(fixedSteps)
+    || !Number.isSafeInteger(nearestStep)
+    || Math.abs(fixedSteps - nearestStep) > 1e-9) {
+    throw new RangeError(
+      `${label} must align to finite safe-integer 0.02-second fixed-step ticks`,
+    );
   }
 }
 
@@ -445,19 +466,27 @@ function validateTrigger(trigger, label, planFieldIds) {
   switch (trigger.type) {
     case 'fixed_time':
     case 'phase_time':
+      rejectUnsupportedTriggerFields(trigger, ['type', 'atSec'], label);
       requireFixedStepSeconds(trigger.atSec, `${label}.atSec`);
       break;
     case 'action':
+      rejectUnsupportedTriggerFields(trigger, ['type', 'action', 'match'], label);
       requireNonemptyString(trigger.action, `${label}.action`);
       if (Object.hasOwn(trigger, 'match')) requirePlainObject(trigger.match, `${label}.match`);
       break;
     case 'plan':
+      rejectUnsupportedTriggerFields(trigger, ['type', 'fieldId', 'equals'], label);
       requireReference(planFieldIds, trigger.fieldId, `${label} plan field`);
       if (!Object.hasOwn(trigger, 'equals')) {
         throw new TypeError(`${label} plan trigger must provide its own equals value`);
       }
       break;
     case 'physiology':
+      rejectUnsupportedTriggerFields(
+        trigger,
+        ['type', 'key', 'operator', 'value', 'dwellSec', 'resetDelta'],
+        label,
+      );
       requireNonemptyString(trigger.key, `${label}.key`);
       if (!PHYSIOLOGY_OPERATORS.has(trigger.operator)) {
         throw new TypeError(`${label}.operator is an unsupported physiology comparator`);
@@ -468,6 +497,7 @@ function validateTrigger(trigger, label, planFieldIds) {
       break;
     case 'instructor':
     case 'phase_enter':
+      rejectUnsupportedTriggerFields(trigger, ['type'], label);
       break;
     default:
       throw new TypeError(`${label} has unsupported trigger type ${trigger.type}`);
@@ -651,6 +681,7 @@ function validateDebrief(debrief) {
 }
 
 function validateReferences(value) {
+  collectIds(value.learnerChart.documents, 'learner chart documents');
   const actionIds = collectIds(value.assessment.actions, 'assessment actions');
   const findingIds = collectIds(value.assessment.findings, 'assessment findings');
   const assessmentRuleIds = collectIds(

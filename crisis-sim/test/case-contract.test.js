@@ -118,6 +118,15 @@ describe('case experience normalization', () => {
 
 describe('stable identifiers and references', () => {
   test.each([
+    ['learner chart document', (value) => {
+      const document = {
+        id: 'duplicate_document',
+        title: 'Duplicate document',
+        type: 'note',
+        sections: [],
+      };
+      value.learnerChart.documents.push(document, structuredClone(document));
+    }],
     ['assessment action', (value) => value.assessment.actions.push(
       structuredClone(value.assessment.actions[0]),
     )],
@@ -261,6 +270,34 @@ describe('event flow grammar', () => {
   );
 
   test.each([
+    ['fixed time', { type: 'fixed_time', atSec: 0.02, unexpected: true }],
+    ['phase time', { type: 'phase_time', atSec: 0.02, unexpected: true }],
+    ['action', { type: 'action', action: 'drug', unexpected: true }],
+    [
+      'plan',
+      { type: 'plan', fieldId: 'disposition', equals: 'proceed', unexpected: true },
+    ],
+    [
+      'physiology',
+      {
+        type: 'physiology',
+        key: 'spo2',
+        operator: '<',
+        value: 90,
+        dwellSec: 0,
+        resetDelta: 2,
+        unexpected: true,
+      },
+    ],
+    ['instructor', { type: 'instructor', action: 'spoof' }],
+    ['phase entry', { type: 'phase_enter', atSec: 0.02 }],
+  ])('rejects an unsupported field on the %s trigger', (_label, trigger) => {
+    const definition = withMutation((value) => { firstEvent(value).trigger = trigger; });
+    expect(() => normalizeCaseExperience(definition))
+      .toThrow(/unsupported trigger field|trigger.*field|unexpected/i);
+  });
+
+  test.each([
     ['missing trigger type', {}, /trigger/i],
     ['unknown trigger type', { type: 'wall_clock' }, /trigger/i],
     ['fixed time without a time', { type: 'fixed_time' }, /trigger|time|atSec/i],
@@ -330,6 +367,37 @@ describe('event flow grammar', () => {
       (value) => {
         firstEvent(value).trigger = {
           type: 'physiology', key: 'spo2', operator: '<', value: 90, dwellSec: 0.03, resetDelta: 2,
+        };
+      },
+    ],
+    [
+      'overflowing fixed time',
+      (value) => { firstEvent(value).trigger = { type: 'fixed_time', atSec: Number.MAX_VALUE }; },
+    ],
+    [
+      'overflowing phase time',
+      (value) => { firstEvent(value).trigger = { type: 'phase_time', atSec: Number.MAX_VALUE }; },
+    ],
+    [
+      'overflowing event response window',
+      (value) => { firstEvent(value).responseWindowSec = Number.MAX_VALUE; },
+    ],
+    [
+      'overflowing guidance response window',
+      (value) => {
+        value.instructorGuide.considerations[0].responseWindowSec = Number.MAX_VALUE;
+      },
+    ],
+    [
+      'overflowing physiology dwell',
+      (value) => {
+        firstEvent(value).trigger = {
+          type: 'physiology',
+          key: 'spo2',
+          operator: '<',
+          value: 90,
+          dwellSec: Number.MAX_VALUE,
+          resetDelta: 2,
         };
       },
     ],
@@ -427,6 +495,20 @@ describe('confidentiality and strict JSON-safe input', () => {
         .toThrow(/learner.?chart|reserved|instructor|answer|guidance/i);
     },
   );
+
+  test.each([
+    'expectedAnswers',
+    'instructorConsiderations',
+    'rubricAnswerKey',
+    'concealedFindings',
+    'EXPECTED_ANSWERS',
+  ])('rejects nested learner-chart field-family alias %s', (key) => {
+    const definition = withMutation((value) => {
+      value.learnerChart.patient.nested = { [key]: ['concealed answer'] };
+    });
+    expect(() => normalizeCaseExperience(definition))
+      .toThrow(/learner.?chart|reserved|instructor|answer|concealed|finding/i);
+  });
 
   test('rejects an accessor without invoking it', () => {
     let getterCalls = 0;
