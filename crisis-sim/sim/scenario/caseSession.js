@@ -117,6 +117,36 @@ function equalJsonSafe(left, right) {
       && equalJsonSafe(left[key], right[key]));
 }
 
+function canonicalizePlanSelection(field, value) {
+  if (field.type === 'multi') {
+    requireOrdinaryArray(value, `plan field ${field.id}`);
+    if (field.required && value.length === 0) {
+      throw new RangeError(`required multi plan field ${field.id} must not be empty`);
+    }
+
+    const selected = new Set();
+    value.forEach((option, index) => {
+      requireNonemptyString(option, `plan field ${field.id}[${index}]`);
+      if (selected.has(option)) {
+        throw new TypeError(`multi plan field ${field.id} contains duplicate option ${option}`);
+      }
+      if (!field.options.includes(option)) {
+        throw new RangeError(`plan field ${field.id} must use valid options`);
+      }
+      selected.add(option);
+    });
+    return field.options.filter((option) => selected.has(option));
+  }
+
+  if (Array.isArray(value)) {
+    throw new TypeError(`single plan field ${field.id} must use one option value`);
+  }
+  if (!field.options.some((option) => equalJsonSafe(option, value))) {
+    throw new RangeError(`plan field ${field.id} must use a valid option`);
+  }
+  return value;
+}
+
 function failure(reason, details = {}) {
   return immutableResult({ ok: false, reason, ...details }, 'case session failure');
 }
@@ -432,20 +462,23 @@ export class CaseSession {
     for (const fieldId of Object.keys(copiedSelections)) {
       if (!fieldsById.has(fieldId)) throw new TypeError(`selections contains unknown field ${fieldId}`);
     }
+    const canonicalSelections = new Map();
     for (const field of this.#definition.planRequirements.fields) {
       if (field.required && !Object.hasOwn(copiedSelections, field.id)) {
         throw new TypeError(`required plan field ${field.id} is missing`);
       }
-      if (Object.hasOwn(copiedSelections, field.id)
-        && !field.options.some((option) => equalJsonSafe(option, copiedSelections[field.id]))) {
-        throw new RangeError(`plan field ${field.id} must use a valid option`);
+      if (Object.hasOwn(copiedSelections, field.id)) {
+        canonicalSelections.set(
+          field.id,
+          canonicalizePlanSelection(field, copiedSelections[field.id]),
+        );
       }
     }
 
     const orderedSelections = {};
     for (const field of this.#definition.planRequirements.fields) {
-      if (Object.hasOwn(copiedSelections, field.id)) {
-        orderedSelections[field.id] = copiedSelections[field.id];
+      if (canonicalSelections.has(field.id)) {
+        orderedSelections[field.id] = canonicalSelections.get(field.id);
       }
     }
     const revision = this.#planSubmissionHistory.length + 1;
@@ -578,15 +611,22 @@ export class CaseSession {
     return {
       stage: this.#stage,
       sequence: this.#sequence,
+      currentTimeSec: this.#timeSec,
       active: this.#active,
+      finalizedAtSec: this.#finalizedAtSec,
       completedActionIds: this.#orderedCompletedActionIds(),
       assessmentRecords: this.#assessmentRecords,
       discoveredFindingIds: this.#orderedDiscoveredFindingIds(),
       findingsSubmission: this.#findingsSubmission,
+      findingsSubmissionHistory: this.#findingsSubmissionHistory,
       planSubmission: this.#planSubmission,
+      planSubmissionHistory: this.#planSubmissionHistory,
       ruleResults: this.#ruleResults,
       instructorObservations: this.#orderedInstructorObservations(),
+      instructorObservationHistory: this.#instructorObservationHistory,
       feedbackRevealIds: this.#orderedFeedbackRevealIds(),
+      feedbackRevealHistory: this.#feedbackRevealHistory,
+      timeline: this.#timeline,
       revisions: this.#revisions,
       finalized: this.#finalized,
       outcome: this.#outcome,

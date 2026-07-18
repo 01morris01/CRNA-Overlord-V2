@@ -246,8 +246,30 @@ function validatePlanSelections(selections, label, references) {
   for (const fieldId of Object.keys(selections)) {
     const field = references.fields.get(fieldId);
     if (!field) throw new TypeError(`${label} contains unknown plan field ${fieldId}`);
-    if (!field.options.includes(selections[fieldId])) {
-      throw new RangeError(`${label}.${fieldId} must use a valid option`);
+    const selection = selections[fieldId];
+    if (field.type === 'multi') {
+      requireOrdinaryArray(selection, `${label}.${fieldId}`);
+      if (field.required && selection.length === 0) {
+        throw new RangeError(`${label}.${fieldId} is required and must not be empty`);
+      }
+      const selected = new Set();
+      selection.forEach((option, index) => {
+        requireNonemptyString(option, `${label}.${fieldId}[${index}]`);
+        if (selected.has(option)) {
+          throw new TypeError(`${label}.${fieldId} contains duplicate option ${option}`);
+        }
+        if (!field.options.includes(option)) {
+          throw new RangeError(`${label}.${fieldId} must use valid options`);
+        }
+        selected.add(option);
+      });
+    } else {
+      if (Array.isArray(selection)) {
+        throw new TypeError(`${label}.${fieldId} is single-select and must use one option value`);
+      }
+      if (!field.options.includes(selection)) {
+        throw new RangeError(`${label}.${fieldId} must use a valid option`);
+      }
     }
   }
   for (const field of references.fields.values()) {

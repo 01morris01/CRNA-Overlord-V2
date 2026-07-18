@@ -76,6 +76,28 @@ function makeSessionDefinition() {
   return normalizeCaseExperience(definition);
 }
 
+function makeMultiSelectDefinition({ required = true } = {}) {
+  const definition = makeCaseExperience();
+  definition.planRequirements.fields.push({
+    id: 'agents',
+    type: 'multi',
+    required,
+    options: ['propofol', 'ketamine', 'etomidate'],
+  });
+  definition.planRequirements.rules.push({
+    id: 'plan_agents',
+    label: 'Selects the planned induction agents',
+    critical: false,
+    source: 'ENGINE_OBSERVABLE',
+    evidence: {
+      type: 'plan_equals',
+      fieldId: 'agents',
+      value: ['propofol', 'ketamine'],
+    },
+  });
+  return normalizeCaseExperience(definition);
+}
+
 function makeSession() {
   return new CaseSession({ definition: makeSessionDefinition(), seed: 12345 });
 }
@@ -412,6 +434,99 @@ describe('CaseSession learner assessment and submissions', () => {
       { id: 'discover_npo', status: 'not_performed', points: 0 },
     ]);
   });
+
+  test('accepts, canonicalizes, scores, and isolates multi-select plan values', () => {
+    const session = new CaseSession({
+      definition: makeMultiSelectDefinition(),
+      seed: 1,
+    });
+    advanceToPlan(session, ['npo_ok']);
+    const agents = ['ketamine', 'propofol'];
+
+    expect(session.submitPlan({
+      selections: { disposition: 'proceed', agents },
+      tSec: 0.14,
+    })).toMatchObject({ ok: true, stage: 'live_simulation' });
+    agents[0] = 'etomidate';
+    agents.push('caller_mutation');
+
+    const result = session.getLiveResult();
+    expect(result.planSubmission.selections).toEqual({
+      disposition: 'proceed',
+      agents: ['propofol', 'ketamine'],
+    });
+    expect(result.planSubmissionHistory[0].selections.agents).toEqual([
+      'propofol', 'ketamine',
+    ]);
+    expect(result.ruleResults.at(-1)).toMatchObject({
+      id: 'plan_agents', status: 'performed', points: 2,
+    });
+    expect(session.getLearnerContext().planSubmission.selections.agents).toEqual([
+      'propofol', 'ketamine',
+    ]);
+    const instructor = session.getInstructorContext();
+    expect(instructor.planSubmissionHistory[0].selections.agents).toEqual([
+      'propofol', 'ketamine',
+    ]);
+    expect(() => { instructor.planSubmission.selections.agents.push('mutated'); })
+      .toThrow(TypeError);
+    expect(session.getLearnerContext()).not.toHaveProperty('planSubmissionHistory');
+  });
+
+  test.each([
+    [
+      'a scalar for multi',
+      { disposition: 'proceed', agents: 'propofol' },
+      /agents|multi|array/i,
+    ],
+    [
+      'an array for single',
+      { disposition: ['proceed'], agents: ['propofol'] },
+      /disposition|single|option/i,
+    ],
+    [
+      'duplicate multi values',
+      { disposition: 'proceed', agents: ['propofol', 'propofol'] },
+      /duplicate/i,
+    ],
+    [
+      'an unknown multi option',
+      { disposition: 'proceed', agents: ['propofol', 'thiopental'] },
+      /agents|option/i,
+    ],
+    [
+      'an empty required multi value',
+      { disposition: 'proceed', agents: [] },
+      /agents|required|empty/i,
+    ],
+  ])('rejects %s without mutation', (_label, selections, message) => {
+    const session = new CaseSession({
+      definition: makeMultiSelectDefinition(),
+      seed: 1,
+    });
+    advanceToPlan(session, ['npo_ok']);
+    const before = JSON.stringify(session.getLiveResult());
+
+    expect(() => session.submitPlan({ selections, tSec: 0.14 })).toThrow(message);
+    expect(JSON.stringify(session.getLiveResult())).toBe(before);
+  });
+
+  test('allows an empty ordinary multi array only for an optional field', () => {
+    const session = new CaseSession({
+      definition: makeMultiSelectDefinition({ required: false }),
+      seed: 1,
+    });
+    advanceToPlan(session, ['npo_ok']);
+
+    expect(session.submitPlan({
+      selections: { disposition: 'proceed', agents: [] },
+      tSec: 0.14,
+    })).toMatchObject({ ok: true });
+    expect(session.getLiveResult().planSubmission.selections.agents).toEqual([]);
+    expect(session.getLiveResult().ruleResults.at(-1)).toMatchObject({
+      status: 'not_performed', points: 0,
+    });
+  });
 });
 
 describe('CaseSession instructor evidence and feedback', () => {
@@ -533,6 +648,66 @@ describe('CaseSession live actions, projections, and Task 3 stubs', () => {
     expect(session.getInstructorContext()).not.toBe(instructor);
     expect(session.getLiveResult()).not.toBe(result);
     expect(JSON.stringify(session.getLiveResult())).toBe(serializedResult);
+  });
+
+  test('projects authorized instructor histories and times without leaking them to learners', () => {
+    const session = makeSession();
+    advanceToFindings(session);
+    expect(session.submitFindings({
+      findingIds: ['npo_ok'], notes: 'first', tSec: 0.1,
+    }).ok).toBe(true);
+    expect(session.submitFindings({
+      findingIds: [], notes: 'revised', tSec: 0.1,
+    }).ok).toBe(true);
+    expect(session.advanceStage({ stage: 'plan_submission', tSec: 0.12 }).ok).toBe(true);
+    expect(session.submitPlan({
+      selections: { disposition: 'proceed', technique: 'general' }, tSec: 0.14,
+    }).ok).toBe(true);
+    expect(session.setInstructorObservation({
+      considerationId: 'consider_npo', status: 'observed', tSec: 0.14,
+    }).ok).toBe(true);
+    expect(session.setFeedbackReveal({
+      considerationId: 'consider_airway', reveal: true, tSec: 0.14,
+    }).ok).toBe(true);
+
+    const instructor = session.getInstructorContext();
+    expect(instructor).toMatchObject({
+      currentTimeSec: 0.14,
+      finalizedAtSec: null,
+      findingsSubmissionHistory: [
+        { findingIds: ['npo_ok'], notes: 'first', revision: 1 },
+        { findingIds: [], notes: 'revised', revision: 2 },
+      ],
+      planSubmissionHistory: [{
+        selections: { disposition: 'proceed', technique: 'general' }, revision: 1,
+      }],
+      instructorObservationHistory: [{
+        considerationId: 'consider_npo', status: 'observed', revision: 1,
+      }],
+      feedbackRevealHistory: [{
+        considerationId: 'consider_airway', reveal: true, revision: 1,
+      }],
+    });
+    expect(instructor.timeline.length).toBeGreaterThan(0);
+    expectDeeplyFrozen(instructor);
+    expect(() => { instructor.findingsSubmissionHistory[0].notes = 'mutated'; })
+      .toThrow(TypeError);
+    expect(session.getInstructorContext().findingsSubmissionHistory[0].notes).toBe('first');
+
+    const learner = session.getLearnerContext();
+    for (const key of [
+      'currentTimeSec',
+      'finalizedAtSec',
+      'findingsSubmissionHistory',
+      'planSubmissionHistory',
+      'instructorObservationHistory',
+      'feedbackRevealHistory',
+      'timeline',
+    ]) {
+      expect(learner).not.toHaveProperty(key);
+    }
+    expect(JSON.stringify(learner)).not.toContain('first');
+    expect(JSON.stringify(learner)).not.toContain('consider_airway');
   });
 });
 

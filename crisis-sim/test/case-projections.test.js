@@ -175,6 +175,42 @@ function makeProjectionDefinition() {
   return normalizeCaseExperience(definition);
 }
 
+function makeMultiProjectionDefinition({ required = true } = {}) {
+  const definition = makeCaseExperience();
+  definition.planRequirements.fields.push({
+    id: 'agents',
+    type: 'multi',
+    required,
+    options: ['propofol', 'ketamine', 'etomidate'],
+  });
+  return normalizeCaseExperience(definition);
+}
+
+function makeMultiPlanSessionState(agents) {
+  const submission = {
+    selections: { disposition: 'proceed', agents },
+    rationale: 'Multi-select projection',
+    tSec: 0,
+    sequence: 1,
+    revision: 1,
+  };
+  return makeCaseSessionState({
+    stage: 'live_simulation',
+    sequence: 1,
+    planSubmission: structuredClone(submission),
+    planSubmissionHistory: [structuredClone(submission)],
+    timeline: [{
+      kind: 'plan_submission',
+      selections: structuredClone(submission.selections),
+      rationale: submission.rationale,
+      revision: 1,
+      stage: 'plan_submission',
+      tSec: 0,
+      sequence: 1,
+    }],
+  });
+}
+
 function makePopulatedSessionState(overrides = {}) {
   return makeCaseSessionState({
     stage: 'interview',
@@ -546,6 +582,52 @@ describe('instructor case projection', () => {
 });
 
 describe('case projection validation and determinism', () => {
+  test('accepts and defensively projects canonical multi-select plan values', () => {
+    const definition = makeMultiProjectionDefinition();
+    const sessionState = makeMultiPlanSessionState(['propofol', 'ketamine']);
+
+    const learner = projectLearnerCase({ definition, sessionState });
+    const instructor = projectInstructorCase({ definition, sessionState });
+
+    expect(learner.planSubmission.selections.agents).toEqual(['propofol', 'ketamine']);
+    expect(instructor.planSubmission.selections.agents).toEqual(['propofol', 'ketamine']);
+    expect(instructor.planSubmissionHistory[0].selections.agents).toEqual([
+      'propofol', 'ketamine',
+    ]);
+    expect(() => { instructor.planSubmission.selections.agents[0] = 'mutated'; })
+      .toThrow(TypeError);
+    expect(sessionState.planSubmission.selections.agents).toEqual(['propofol', 'ketamine']);
+  });
+
+  test.each([
+    ['scalar multi value', 'propofol', /agents|multi|array/i],
+    ['duplicate multi options', ['propofol', 'propofol'], /agents|duplicate/i],
+    ['unknown multi option', ['propofol', 'thiopental'], /agents|option/i],
+    ['empty required multi value', [], /agents|required|empty/i],
+  ])('rejects %s', (_label, agents, pattern) => {
+    const definition = makeMultiProjectionDefinition();
+    const sessionState = makeMultiPlanSessionState(agents);
+
+    expect(() => projectInstructorCase({ definition, sessionState })).toThrow(pattern);
+  });
+
+  test('rejects an array for a single field and allows empty multi only when optional', () => {
+    const requiredDefinition = makeMultiProjectionDefinition();
+    const invalidSingle = makeMultiPlanSessionState(['propofol']);
+    invalidSingle.planSubmission.selections.disposition = ['proceed'];
+    expect(() => projectInstructorCase({
+      definition: requiredDefinition,
+      sessionState: invalidSingle,
+    })).toThrow(/disposition|single|option/i);
+
+    const optionalDefinition = makeMultiProjectionDefinition({ required: false });
+    const optionalEmpty = makeMultiPlanSessionState([]);
+    expect(() => projectInstructorCase({
+      definition: optionalDefinition,
+      sessionState: optionalEmpty,
+    })).not.toThrow();
+  });
+
   test('revalidates frozen definitions and rejects nested answer-key forgery', () => {
     const forged = makeCaseExperience();
     forged.learnerChart.answerKey = 'FORGED_NESTED_ANSWER_KEY_SENTINEL';
