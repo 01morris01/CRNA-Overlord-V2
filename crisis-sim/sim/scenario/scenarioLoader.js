@@ -1,6 +1,8 @@
 /* Faithful port of OperatingRoom.Simulation.ScenarioLoader.Normalize + the
    JsonUtility default-filling that FromJson<ScenarioDefinition> performs. */
 
+import { normalizeCaseExperience } from './caseContract.js';
+
 export const ScenarioEventType = {
   VitalChange: 0, Complication: 1, Prompt: 2, Assessment: 3, DrugEffect: 4, VentilatorChange: 5,
 };
@@ -90,6 +92,7 @@ export function normalize(def) {
   def.administrativeSetup = copyAdditiveScenarioData(def.administrativeSetup ?? null);
   def.seed = Number.isInteger(def.seed) ? def.seed : 12345;
   def.airwayPlan = def.airwayPlan ?? null;
+  def.caseExperience = normalizeCaseExperience(def);
   if (def.airwayPlan != null) {
     const failures = Array.isArray(def.airwayPlan.failedIntubationAttempts)
       ? def.airwayPlan.failedIntubationAttempts : [];

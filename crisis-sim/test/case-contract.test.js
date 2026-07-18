@@ -4,6 +4,7 @@ import {
   CASE_STAGES,
   normalizeCaseExperience,
 } from '../sim/scenario/caseContract.js';
+import { normalize as normalizeScenario } from '../sim/scenario/scenarioLoader.js';
 import { makeCaseExperience, makeCaseScenario } from './helpers/caseFixtures.js';
 
 const EXPECTED_CASE_STAGES = [
@@ -85,6 +86,25 @@ describe('case experience normalization', () => {
     expect(normalized).toEqual(normalizeCaseExperience(scenario.caseExperience));
     expect(normalized).not.toHaveProperty('id', scenario.id);
     expect(Object.isFrozen(normalized)).toBe(true);
+  });
+
+  test('integrates a frozen defensive case copy without freezing legacy scenario state', () => {
+    const scenario = makeCaseScenario();
+    const originalCaseExperience = scenario.caseExperience;
+    const originalEvents = scenario.events;
+
+    expect(normalizeScenario(scenario)).toBe(scenario);
+    expect(scenario.caseExperience).toEqual(normalizeCaseExperience(originalCaseExperience));
+    expect(scenario.caseExperience).not.toBe(originalCaseExperience);
+    expect(Object.isFrozen(scenario.caseExperience)).toBe(true);
+    expect(Object.isFrozen(scenario)).toBe(false);
+    expect(Object.isFrozen(originalEvents)).toBe(false);
+
+    const legacy = { id: 'legacy', events: [] };
+    expect(normalizeScenario(legacy)).toBe(legacy);
+    expect(legacy.caseExperience).toBeNull();
+    expect(Object.isFrozen(legacy)).toBe(false);
+    expect(Object.isFrozen(legacy.events)).toBe(false);
   });
 
   test('rejects a partial case instead of filling a misleading default contract', () => {
