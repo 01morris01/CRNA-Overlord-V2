@@ -299,6 +299,12 @@ export function setRubricConsoleReadOnly(rootElement, readOnly) {
   if (rootElement?.dataset) rootElement.dataset.rubricReadOnly = String(readOnly);
 }
 
+export function applyFinalizedConsoleLock({ rootElement, runner: activeRunner } = {}) {
+  if (!activeRunner?.isRubricFinalized?.()) return false;
+  setRubricConsoleReadOnly(rootElement, true);
+  return true;
+}
+
 export function bindRubricActionControls({
   rootElement,
   getRunner,
@@ -974,6 +980,7 @@ function renderSnapshot(snapshot) {
       renderRubricResult(rubricResult);
     }
   }
+  applyFinalizedConsoleLock({ rootElement: view, runner });
   transport?.publishSnapshot(snapshot);
 }
 

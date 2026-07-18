@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import { SimRunner } from '../ui/simRunner.js';
 import {
+  applyFinalizedConsoleLock,
   applyInstructorNmbTarget,
   applyInstructorRubricScore,
   bindRubricActionControls,
@@ -286,6 +287,30 @@ describe('live rubric instructor console', () => {
     setRubricConsoleReadOnly(consoleRoot, false);
     expect(controls.every(({ disabled }) => disabled === false)).toBe(true);
     expect(read('ui/liveSimView.js')).toContain('FINALIZED · READ ONLY');
+  });
+
+  it('reapplies the finalized lock after a later snapshot-derived control update', () => {
+    const start = { id: 'live-start', disabled: false, dataset: {} };
+    const intubate = { id: '', disabled: false, dataset: {} };
+    const ppv = { id: 'live-mask-ppv', disabled: false, dataset: {} };
+    const display = { id: 'live-open-display', disabled: false, dataset: {} };
+    const controls = [start, intubate, ppv, display];
+    const rootElement = { querySelectorAll: vi.fn(() => controls), dataset: {} };
+    const runner = { isRubricFinalized: vi.fn(() => true) };
+
+    setRubricConsoleReadOnly(rootElement, true);
+    expect([start.disabled, intubate.disabled, ppv.disabled]).toEqual([true, true, true]);
+    start.disabled = false;
+    intubate.disabled = false;
+    ppv.disabled = false;
+
+    expect(applyFinalizedConsoleLock({ rootElement, runner })).toBe(true);
+    expect([start.disabled, intubate.disabled, ppv.disabled]).toEqual([true, true, true]);
+    expect(display.disabled).toBe(false);
+    expect(runner.isRubricFinalized).toHaveBeenCalledOnce();
+    expect(read('ui/liveSimView.js')).toMatch(
+      /applyFinalizedConsoleLock\(\{ rootElement: view, runner \}\);\s*transport\?\.publishSnapshot/,
+    );
   });
 
   it('synchronizes emergence machine and volatile drafts from the loaded engine snapshot', () => {
