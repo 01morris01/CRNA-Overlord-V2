@@ -840,6 +840,7 @@ export class SimRunner {
       spontaneousMV: p.spontaneousMinuteVentilation,
       mechanicalMV: v.mechanicalMinuteVentilation,
       effectiveMV: v.effectiveMinuteVentilation,
+      fio2: p.fiO2,
       ventMode: v.mode,
       ventSetTV: v.setTidalVolume,
       ventSetRR: v.setRespiratoryRate,

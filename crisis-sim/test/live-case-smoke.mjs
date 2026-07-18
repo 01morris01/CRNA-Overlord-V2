@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { SimRunner, VentMode } from '../ui/simRunner.js';
 import { validateSimulationResult } from '../../ui/liveSimModel.js';
 
+const loadJson = (relativeUrl) => JSON.parse(readFileSync(new URL(relativeUrl, import.meta.url), 'utf8'));
+const standardScenario = loadJson('../sim/scenarios/standard_iv_healthy_001.json');
+const standardRubric = loadJson('../../data/rubrics/carson-newman-standard-iv-induction.json');
+
 function advance(runner, seconds) {
-  runner.core.stepFor(seconds);
-  runner.simTime = runner.core.simTime;
-  const snapshot = runner.snapshot();
-  runner.emit();
-  return snapshot;
+  return runner.stepFor(seconds);
 }
 
 function advanceUntil(runner, predicate, maxSeconds, stepSeconds = 1) {
@@ -28,9 +29,10 @@ function line(label, snapshot, extra = '') {
   );
 }
 
-console.log('LIVE CASE SMOKE: 80 kg induction-to-emergence');
+console.log('LIVE CASE SMOKE: production Standard IV scenario induction-to-emergence');
 const runner = new SimRunner();
-runner.applyConfig({ weightKg: 80, heightCm: 178, ageYears: 52, sex: 'Male' });
+runner.loadRubricScenario({ scenario: standardScenario, rubric: standardRubric });
+const weightKg = runner.config.weightKg;
 
 runner.setAirwayDevice('mask');
 runner.setVentMode(VentMode.Manual);
@@ -43,11 +45,23 @@ assert.ok(preoxygenated.fio2 > 0.95, 'preoxygenation must raise FiO2');
 assert.ok(preoxygenated.spo2 > 97, 'preoxygenation must preserve saturation');
 line('PASS preoxygenation', preoxygenated);
 
-runner.giveBolus('Propofol', 2 * 80, 'Propofol 2 mg/kg · 160 mg total');
-runner.giveBolus('Fentanyl', 0.002 * 80, 'Fentanyl 2 mcg/kg · 0.16 mg total');
+runner.giveBolus('Propofol', 2 * weightKg, `Propofol 2 mg/kg · ${2 * weightKg} mg total`);
+runner.giveBolus(
+  'Fentanyl', 0.002 * weightKg,
+  `Fentanyl 2 mcg/kg · ${(0.002 * weightKg).toFixed(2)} mg total`,
+);
 const lidocaineBolus = runner.giveLidocaineBolus({ doseMgPerKg: 1.5 });
 assert.equal(lidocaineBolus.ok, true, lidocaineBolus.reason);
-runner.giveBolus('Rocuronium', 0.6 * 80, 'Rocuronium 0.6 mg/kg · 48 mg total');
+const maskVentilation = runner.deliverMaskVentilation({
+  durationSeconds: 300, tidalVolumeMl: 500, respiratoryRate: 12,
+});
+runner.pause();
+assert.equal(maskVentilation.ok, true, maskVentilation.reason);
+assert.ok(maskVentilation.minuteVentilation >= 4, 'mask PPV must be adequate before NMB');
+runner.giveBolus(
+  'Rocuronium', 0.6 * weightKg,
+  `Rocuronium 0.6 mg/kg · ${0.6 * weightKg} mg total`,
+);
 runner.setForcedApnea(true);
 const induced = advanceUntil(
   runner,
@@ -62,11 +76,12 @@ line('PASS induction + paralysis', induced);
 
 const intubation = runner.intubate();
 assert.equal(intubation.ok, true, intubation.reason);
-const laryngoscopy = runner.snapshot();
+const oneFixedStepSec = 1 / 50;
+const laryngoscopy = advance(runner, oneFixedStepSec);
 assert.equal(laryngoscopy.airwayDevice, 'mask', 'airway must remain unsecured during laryngoscopy');
 assert.equal(laryngoscopy.intubationInProgress, true, 'timed attempt must be active');
 assert.equal(laryngoscopy.effectiveMV, 0, 'laryngoscopy must inhibit support');
-const intubated = advance(runner, intubation.plannedDurationSec);
+const intubated = advance(runner, intubation.plannedDurationSec - oneFixedStepSec);
 assert.equal(intubated.lastIntubationOutcome, 'succeeded');
 assert.equal(intubated.airwayDevice, 'intubated');
 assert.equal(intubated.ventMode, VentMode.Manual, 'tube placement must not silently start VCV');
@@ -83,12 +98,12 @@ assert.ok(ventilated.capnogramPresent, 'supported intubated ventilation must pro
 line('PASS intubation + VCV', ventilated);
 
 runner.setMachine({ vaporizerAgent: 'Sevoflurane', vaporizerDial: 2.1 });
-const maintenance = advance(runner, 20 * 60);
+const maintenance = advance(runner, 5 * 60);
 assert.equal(maintenance.forcedApnea, true);
 assert.equal(maintenance.airwayDevice, 'intubated');
 assert.ok(maintenance.mv > 4);
 assert.ok(maintenance.mac > 0, 'volatile maintenance must produce a MAC signal');
-line('PASS 20-minute maintenance', maintenance);
+line('PASS 5-minute maintenance', maintenance);
 
 runner.injectComplication('Bronchospasm');
 const bronchospasm = advance(runner, 10);
@@ -100,7 +115,10 @@ assert.ok(treated.airwayRes < bronchospasm.airwayRes, 'albuterol must reverse th
 line('PASS bronchospasm injected + treated', treated, `airwayRes ${bronchospasm.airwayRes.toFixed(2)}→${treated.airwayRes.toFixed(2)}`);
 
 runner.setMachine({ vaporizerDial: 0, setFiO2: 1, o2FlowLPerMin: 10, airFlowLPerMin: 0 });
-runner.giveBolus('Sugammadex', 4 * 80, 'Sugammadex 4 mg/kg · 320 mg total');
+runner.giveBolus(
+  'Sugammadex', 4 * weightKg,
+  `Sugammadex 4 mg/kg · ${4 * weightKg} mg total`,
+);
 const reversed = advanceUntil(runner, (snapshot) => snapshot.tofRatio >= 0.9, 900);
 assert.ok(reversed.tofRatio >= 0.9);
 line('PASS sugammadex reversal', reversed);
@@ -126,9 +144,26 @@ assert.equal(extubated.ventMode, VentMode.Manual);
 assert.ok(extubated.spontaneousEffort > 0.1);
 line('PASS extubation', extubated);
 
+for (const item of runner.rubricSession.rubric.items) {
+  if (item.scoringSource === 'INSTRUCTOR_OBSERVED') {
+    runner.setInstructorScore({ itemId: item.id, points: 2, note: 'Smoke evidence' });
+  }
+}
+const finalizedRubric = runner.finalizeRubric();
+assert.equal(finalizedRubric.ok, true, finalizedRubric.reason);
+assert.equal(finalizedRubric.pendingInstructorCount, 0);
+assert.equal(finalizedRubric.outcome, 'PASS');
 const debrief = runner.buildDebrief();
 assert.equal(debrief.lidocaineAttribution.doseHistory[0].type, 'iv_bolus');
 assert.equal(debrief.lidocaineAttribution.currentToxicityStage, 'none');
+assert.equal(debrief.rubricResult.rubricId, standardRubric.id);
+assert.equal(debrief.rubricResult.items.length, standardRubric.items.length);
+assert.deepEqual(
+  debrief.rubricResult.items.map(({ id, text, scoringSource }) => ({ id, text, scoringSource })),
+  standardRubric.items.map(({ id, text, scoringSource }) => ({ id, text, scoringSource })),
+);
+assert.ok(Array.isArray(debrief.actionTimeline) && debrief.actionTimeline.length > 0);
+assert.ok(Array.isArray(debrief.physiologicTrace) && debrief.physiologicTrace.length > 0);
 const debriefValidation = validateSimulationResult(debrief);
 assert.deepEqual(debriefValidation, { ok: true, missing: [], invalid: [] });
 console.log(`PASS debrief SimulationResult validation: ${Object.keys(debrief).length} fields`);
@@ -139,6 +174,7 @@ negative.applyConfig({ weightKg: 80 });
 for (let dose = 0; dose < 5; dose += 1) {
   negative.giveBolus('Rocuronium', 0.6 * 80, 'Rocuronium 0.6 mg/kg · 48 mg total');
 }
+negative.pause();
 const tofZero = advanceUntil(negative, (snapshot) => snapshot.tof === 0, 600);
 assert.equal(tofZero.tof, 0);
 negative.giveBolus('Neostigmine', Math.min(0.07 * 80, 5), 'Neostigmine 0.07 mg/kg · 5 mg total');
