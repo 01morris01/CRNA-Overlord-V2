@@ -585,8 +585,13 @@ The machine patch allowlist is `o2FlowLPerMin`, `airFlowLPerMin`, `n2oFlowLPerMi
 
 ```bash
 cd crisis-sim
-npx vitest run test/case-runner.test.js test/live-runner.test.js test/snapshot-contract.mjs test/parity.test.js
+npx vitest run test/case-runner.test.js test/live-runner.test.js test/parity.test.js
+node test/snapshot-contract.mjs
 ```
+
+`snapshot-contract.mjs` is a node evidence script, not a vitest test; passing it to
+`vitest run` silently skips it. Run it with `node` and require the `SNAPSHOT
+CONTRACT: PASS` line.
 
 Expected: PASS, with no case answer fields in `snapshot()` and all frozen fixtures unchanged.
 
@@ -656,10 +661,11 @@ Copy the projected object again inside `publishSnapshot` so callers cannot mutat
 
 ```bash
 cd crisis-sim
-npx vitest run test/live-transport.test.js test/live-sim-display.test.js test/snapshot-contract.mjs
+npx vitest run test/live-transport.test.js test/live-sim-display.test.js
+node test/snapshot-contract.mjs
 ```
 
-Expected: PASS.
+Expected: PASS, including the `SNAPSHOT CONTRACT: PASS` line.
 
 - [ ] **Step 5: Commit Task 5**
 
