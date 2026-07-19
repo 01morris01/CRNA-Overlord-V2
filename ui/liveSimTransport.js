@@ -1,6 +1,20 @@
 export const LIVE_SIM_CHANNEL = 'crna-overlord-live-sim-v1';
 export const LIVE_SIM_PROTOCOL = 1;
 
+export const LEARNER_MONITOR_KEYS = Object.freeze([
+  't', 'patient', 'hr', 'sbp', 'dbp', 'map', 'spo2', 'rr', 'etco2', 'temp',
+  'tof', 'tofRatio', 'spontaneousRR', 'spontaneousTV', 'spontaneousMV',
+  'spontaneousEffort', 'ppeak', 'mv', 'tv', 'fio2', 'ventMode', 'vaporizer',
+  'vaporizerAgent', 'airwayDevice', 'forcedApnea', 'ventSetTV', 'ventSetRR',
+  'ventSetPeep', 'ventSetPressure', 'ventSetPressureSupport', 'capnogramPresent',
+]);
+
+export function projectLearnerMonitorSnapshot(snapshot = {}) {
+  return Object.fromEntries(LEARNER_MONITOR_KEYS
+    .filter((key) => Object.hasOwn(snapshot, key))
+    .map((key) => [key, snapshot[key]]));
+}
+
 function makeId(prefix) {
   const randomId = globalThis.crypto?.randomUUID?.()
     || `${Math.random().toString(36).slice(2)}-${Date.now().toString(36)}`;
@@ -95,7 +109,7 @@ export function createLiveSimTransport({
     publishSnapshot(payload) {
       assertOpen();
       if (role !== 'instructor') throw new Error('Only the instructor can publish snapshots');
-      return publishPayload(payload);
+      return publishPayload(projectLearnerMonitorSnapshot(payload));
     },
 
     requestState() {

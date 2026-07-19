@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createLiveSimTransport } from '../../ui/liveSimTransport.js';
+import {
+  createLiveSimTransport,
+  LEARNER_MONITOR_KEYS,
+  projectLearnerMonitorSnapshot,
+} from '../../ui/liveSimTransport.js';
 
 class FakeBroadcastChannel {
   static rooms = new Map();
@@ -98,6 +102,51 @@ describe('live simulation transport', () => {
     expect(received[1].sessionChanged).toBe(true);
   });
 
+  it('publishes only allowlisted monitor keys even when handed a raw runner snapshot', () => {
+    const instructor = createLiveSimTransport({
+      role: 'instructor', BroadcastChannelImpl: FakeBroadcastChannel,
+      sessionId: 'session-a', sessionStartedAt: 100,
+    });
+    const display = createLiveSimTransport({
+      role: 'display', BroadcastChannelImpl: FakeBroadcastChannel,
+    });
+    const received = [];
+    display.subscribe((message) => received.push(message));
+
+    instructor.publishSnapshot({
+      t: 10, hr: 88, dbp: 70,
+      instructorGuide: { answer: 'postpone' },
+      rubricNotes: ['answer key'],
+    });
+
+    expect(received).toHaveLength(1);
+    expect(received[0].payload).toEqual({ t: 10, hr: 88, dbp: 70 });
+    expect(JSON.stringify(received[0].payload)).not.toMatch(/postpone|answer key/);
+  });
+
+  it('keeps the late-join payload immune to caller mutation after publishing', () => {
+    const instructor = createLiveSimTransport({
+      role: 'instructor', BroadcastChannelImpl: FakeBroadcastChannel,
+      sessionId: 'session-a', sessionStartedAt: 100,
+    });
+    const projected = projectLearnerMonitorSnapshot({ t: 12, hr: 88, dbp: 70 });
+    instructor.publishSnapshot(projected);
+
+    projected.hr = 999;
+    projected.instructorGuide = { answer: 'postpone' };
+
+    const display = createLiveSimTransport({
+      role: 'display', BroadcastChannelImpl: FakeBroadcastChannel,
+    });
+    const received = [];
+    display.subscribe((message) => received.push(message));
+    display.requestState();
+
+    expect(received).toHaveLength(1);
+    expect(received[0].payload).toEqual({ t: 12, hr: 88, dbp: 70 });
+    expect(JSON.stringify(received[0].payload)).not.toMatch(/postpone/);
+  });
+
   it('removes listeners and closes cleanly', () => {
     const instructor = createLiveSimTransport({
       role: 'instructor', BroadcastChannelImpl: FakeBroadcastChannel,
@@ -114,5 +163,46 @@ describe('live simulation transport', () => {
 
     expect(received).toEqual([]);
     expect(() => display.requestState()).toThrow(/closed/);
+  });
+});
+
+describe('learner monitor snapshot projection', () => {
+  it('projects only allowlisted monitor keys and drops case guidance', () => {
+    const projected = projectLearnerMonitorSnapshot({
+      t: 10, hr: 88, dbp: 70, patient: '70 kg · 40 y · Female',
+      instructorGuide: { answer: 'postpone' },
+      concealedFindings: ['MH'], expectedResponse: 'avoid volatile',
+      rubricNotes: ['answer key'], caseContext: { private: true },
+    });
+
+    expect(projected).toEqual({ t: 10, hr: 88, dbp: 70, patient: '70 kg · 40 y · Female' });
+    expect(JSON.stringify(projected)).not.toMatch(/postpone|MH|answer key|private/);
+  });
+
+  it('omits absent allowlisted keys instead of inventing them', () => {
+    expect(projectLearnerMonitorSnapshot({ hr: 55 })).toEqual({ hr: 55 });
+    expect(projectLearnerMonitorSnapshot()).toEqual({});
+  });
+
+  it('exposes a frozen allowlist without instructor fields', () => {
+    expect(Object.isFrozen(LEARNER_MONITOR_KEYS)).toBe(true);
+    expect(LEARNER_MONITOR_KEYS).toContain('hr');
+    expect(LEARNER_MONITOR_KEYS).toContain('capnogramPresent');
+    for (const forbidden of [
+      'instructorGuide', 'concealedFindings', 'expectedResponse', 'rubricNotes', 'caseContext',
+    ]) {
+      expect(LEARNER_MONITOR_KEYS).not.toContain(forbidden);
+    }
+  });
+
+  it('is unaffected by later mutation of the source snapshot', () => {
+    const source = { t: 5, hr: 60, spo2: 99 };
+    const projected = projectLearnerMonitorSnapshot(source);
+
+    source.hr = 999;
+    source.spo2 = 0;
+    source.instructorGuide = { answer: 'postpone' };
+
+    expect(projected).toEqual({ t: 5, hr: 60, spo2: 99 });
   });
 });

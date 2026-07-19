@@ -19,7 +19,7 @@ import {
   validateSimulationResult,
   VOLATILE_AGENTS,
 } from './liveSimModel.js';
-import { createLiveSimTransport } from './liveSimTransport.js';
+import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
 
 let initialized = false;
 let runner = null;
@@ -1246,7 +1246,7 @@ function renderSnapshot(snapshot) {
     }
   }
   applyFinalizedConsoleLock({ rootElement: view, runner });
-  transport?.publishSnapshot(snapshot);
+  transport?.publishSnapshot(projectLearnerMonitorSnapshot(snapshot));
 }
 
 function ensureRunner() {
