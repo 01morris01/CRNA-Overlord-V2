@@ -781,6 +781,87 @@ describe('live rubric instructor console', () => {
     });
   });
 
+  it('mounts the case workspace and instructor case panel around the existing consoles', () => {
+    const controller = read('ui/liveSimView.js');
+    const css = read('assets/css/live-sim.css');
+
+    expect(controller).toContain("from './liveCaseView.js'");
+    expect(controller).toContain('createLiveCaseController({');
+    const learnerShellAt = controller.indexOf('${renderLearnerCaseShell()}');
+    const caseFlowAt = controller.indexOf('<h2 id="live-case-heading">Case flow</h2>');
+    const instructorShellAt = controller.indexOf('${renderInstructorCaseShell()}');
+    const rubricShellAt = controller.indexOf('${renderRubricConsoleShell()}');
+    expect(learnerShellAt).toBeGreaterThan(-1);
+    expect(caseFlowAt).toBeGreaterThan(learnerShellAt);
+    expect(instructorShellAt).toBeGreaterThan(caseFlowAt);
+    expect(rubricShellAt).toBeGreaterThan(instructorShellAt);
+
+    expect(controller).toContain('caseController?.render()');
+    expect(controller).toContain('caseController?.reset()');
+    expect(controller).not.toMatch(/runner\.s\.activeScenario/);
+
+    const shell = renderRubricConsoleShell();
+    expect(shell).toContain('value="cn_preassessment_lap_chole_001"');
+    expect(shell).toContain('value="cn_preassessment_npo_mh_001"');
+    expect(shell).toContain('Preassessment - Lap Chole / PONV');
+    expect(shell).toContain('Preassessment - NPO / MH / Difficult Airway');
+
+    expect(css).toContain('.live-case-grid {');
+    expect(css).toMatch(/\.live-case-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*minmax\(20rem,\s*\.8fr\)/s);
+    expect(css).toMatch(/\.live-case-scroll\s*\{[^}]*max-height:\s*min\(52vh,\s*42rem\)[^}]*overflow:\s*auto[^}]*min-width:\s*0/s);
+    expect(css).toMatch(/@media \(max-width: 980px\)\s*\{[\s\S]*?\.live-case-grid\s*\{\s*grid-template-columns:\s*1fr;/);
+    expect(css).toMatch(/\.live-case-(?:workspace|instructor)[^{]*:focus-visible/);
+    expect(css).toMatch(/\.live-case-considerations\s*[^{]*\{[^}]*overflow-y:\s*auto/s);
+    expect(css).toMatch(/\.live-case-history\s*[^{]*\{[^}]*overflow-y:\s*auto/s);
+  });
+
+  it('loads teaching-case and rubric-only assets through one generalized loader', async () => {
+    expect(typeof liveSimView.loadSelectedScenarioAssets).toBe('function');
+
+    const caseScenario = { id: 'cn_preassessment_lap_chole_001' };
+    const caseFetch = vi.fn(async () => ({
+      ok: true, status: 200, json: async () => caseScenario,
+    }));
+    const caseRunner = {
+      loadCaseScenario: vi.fn(() => ({ ok: true })),
+      loadRubricScenario: vi.fn(),
+    };
+    await expect(liveSimView.loadSelectedScenarioAssets(
+      caseRunner, 'cn_preassessment_lap_chole_001', caseFetch,
+    )).resolves.toEqual({ scenario: caseScenario, rubric: null, loaded: { ok: true } });
+    expect(caseFetch.mock.calls.map(([url]) => url)).toEqual([
+      '/crisis-sim/sim/scenarios/cn_preassessment_lap_chole_001.json',
+    ]);
+    expect(caseRunner.loadCaseScenario).toHaveBeenCalledWith({
+      scenario: caseScenario, rubric: null,
+    });
+    expect(caseRunner.loadRubricScenario).not.toHaveBeenCalled();
+
+    const failingRunner = { loadCaseScenario: vi.fn(), loadRubricScenario: vi.fn() };
+    const failingFetch = vi.fn(async () => ({ ok: false, status: 404 }));
+    await expect(liveSimView.loadSelectedScenarioAssets(
+      failingRunner, 'cn_preassessment_npo_mh_001', failingFetch,
+    )).rejects.toThrow(/unavailable/);
+    expect(failingRunner.loadCaseScenario).not.toHaveBeenCalled();
+
+    const scenario = { id: 'rsi_full_stomach_001' };
+    const rubric = { id: 'carson-newman-rsi-induction' };
+    const rubricFetch = vi.fn(async (url) => ({
+      ok: true,
+      status: 200,
+      json: async () => (url.includes('/scenarios/') ? scenario : rubric),
+    }));
+    const rubricRunner = {
+      loadRubricScenario: vi.fn(() => ({ ok: true })),
+      loadCaseScenario: vi.fn(),
+    };
+    await expect(liveSimView.loadSelectedScenarioAssets(
+      rubricRunner, 'rsi_full_stomach_001', rubricFetch,
+    )).resolves.toEqual({ scenario, rubric, loaded: { ok: true } });
+    expect(rubricRunner.loadRubricScenario).toHaveBeenCalledWith({ scenario, rubric });
+    expect(rubricRunner.loadCaseScenario).not.toHaveBeenCalled();
+  });
+
   it('keeps the implementation on the engine truth boundary and makes rubric scrolling independent', () => {
     const controller = read('ui/liveSimView.js');
     const css = read('assets/css/live-sim.css');

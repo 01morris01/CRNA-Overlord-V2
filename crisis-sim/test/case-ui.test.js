@@ -1,7 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { describe, expect, it, vi } from 'vitest';
+import standardScenario from '../sim/scenarios/standard_iv_healthy_001.json';
 import { normalizeCaseExperience } from '../sim/scenario/caseContract.js';
 import { CASE_OBSERVATION_STATUS, CaseSession } from '../sim/scenario/caseSession.js';
-import { makeCaseScenario } from './helpers/caseFixtures.js';
+import { SimRunner } from '../ui/simRunner.js';
+import { makeCaseExperience, makeCaseScenario } from './helpers/caseFixtures.js';
 import {
   escapeCaseHtml,
   formatCaseClock,
@@ -10,6 +14,7 @@ import {
   renderLearnerCaseMarkup,
   renderLearnerCaseShell,
 } from '../../ui/liveCaseModel.js';
+import { createLiveCaseController } from '../../ui/liveCaseView.js';
 
 const XSS = '<script>alert("case")</script>';
 const ATTR_BREAKOUT = '"><img src=x onerror=alert(1)>';
@@ -496,5 +501,369 @@ describe('instructor case markup', () => {
     expect(combined).not.toContain('"><img');
     expect(combined).toContain('&lt;script&gt;');
     expect(combined).toContain('&lt;img');
+  });
+});
+
+describe('live case controller', () => {
+  class FakeCaseElement {
+    constructor({ id = '', dataset = {}, value = '', checked = false, type = '' } = {}) {
+      this.id = id;
+      this.dataset = dataset;
+      this.value = value;
+      this.checked = checked;
+      this.type = type;
+      this.innerHTML = '';
+      this.textContent = '';
+      this.disabled = false;
+      this.listeners = new Map();
+      this.queryMap = {};
+    }
+
+    addEventListener(eventType, listener) {
+      const listeners = this.listeners.get(eventType) ?? [];
+      listeners.push(listener);
+      this.listeners.set(eventType, listeners);
+    }
+
+    removeEventListener(eventType, listener) {
+      const listeners = (this.listeners.get(eventType) ?? []).filter((entry) => entry !== listener);
+      this.listeners.set(eventType, listeners);
+    }
+
+    emit(eventType, target = this) {
+      for (const listener of this.listeners.get(eventType) ?? []) {
+        listener({ target, currentTarget: this });
+      }
+    }
+
+    closest(selector) {
+      const match = /^\[data-([a-z-]+)\]$/.exec(selector);
+      if (!match) return null;
+      const key = match[1].replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+      return Object.hasOwn(this.dataset, key) ? this : null;
+    }
+
+    querySelector(selector) {
+      return (this.queryMap[selector] ?? [null])[0] ?? null;
+    }
+
+    querySelectorAll(selector) {
+      return this.queryMap[selector] ?? [];
+    }
+  }
+
+  const CONSOLE_IDS = [
+    'live-case-workspace', 'live-case-status', 'live-case-notes',
+    'live-case-submit-findings', 'live-case-submit-plan', 'live-case-stage-nav',
+    'live-case-instructor', 'live-case-current-phase', 'live-case-active-event',
+    'live-case-pause', 'live-case-advance', 'live-case-branches',
+    'live-case-considerations', 'live-case-history',
+  ];
+
+  function makeCaseConsoleDom() {
+    const byId = Object.fromEntries(CONSOLE_IDS.map((id) => [id, new FakeCaseElement({ id })]));
+    const regions = Object.fromEntries(['chart', 'interview', 'exam', 'findings', 'plan']
+      .map((region) => [region, new FakeCaseElement({ dataset: { caseRegionContent: region } })]));
+    const root = {
+      querySelector(selector) {
+        if (selector.startsWith('#')) return byId[selector.slice(1)] ?? null;
+        const regionMatch = /^\[data-case-region-content="([a-z]+)"\]$/.exec(selector);
+        if (regionMatch) return regions[regionMatch[1]] ?? null;
+        return null;
+      },
+    };
+    return { root, byId, regions };
+  }
+
+  function makeControllerHarness() {
+    const runner = new SimRunner();
+    const dom = makeCaseConsoleDom();
+    const changes = [];
+    const controller = createLiveCaseController({
+      runner,
+      root: dom.root,
+      onChanged: (change) => changes.push(change),
+    });
+    return { runner, dom, controller, changes };
+  }
+
+  function loadControllerCase(runner, customizeExperience = () => {}) {
+    const scenario = structuredClone(standardScenario);
+    scenario.id = 'case_ui_controller_001';
+    scenario.title = 'Case UI controller fixture';
+    scenario.caseExperience = makeCaseExperience();
+    customizeExperience(scenario.caseExperience);
+    return runner.loadCaseScenario({ scenario });
+  }
+
+  function advanceRunnerToFindings(runner) {
+    expect(runner.advanceCaseStage({ stage: 'interview' })).toMatchObject({ ok: true });
+    expect(runner.performAssessmentAction({ actionId: 'ask_npo' })).toMatchObject({ ok: true });
+    expect(runner.advanceCaseStage({ stage: 'focused_exam' })).toMatchObject({ ok: true });
+    expect(runner.advanceCaseStage({ stage: 'findings_summary' })).toMatchObject({ ok: true });
+  }
+
+  function advanceRunnerToPlan(runner) {
+    advanceRunnerToFindings(runner);
+    expect(runner.submitCaseFindings({ findingIds: ['npo_ok'], notes: 'Reviewed' }))
+      .toMatchObject({ ok: true });
+    expect(runner.advanceCaseStage({ stage: 'plan_submission' })).toMatchObject({ ok: true });
+  }
+
+  it('returns a render/reset/destroy surface and tolerates an empty console', () => {
+    const runner = new SimRunner();
+    const controller = createLiveCaseController({ runner, root: { querySelector: () => null } });
+    expect(typeof controller.render).toBe('function');
+    expect(typeof controller.reset).toBe('function');
+    expect(typeof controller.destroy).toBe('function');
+    expect(() => controller.render()).not.toThrow();
+    expect(() => controller.reset()).not.toThrow();
+    expect(() => controller.destroy()).not.toThrow();
+  });
+
+  it('refreshes both projections atomically on load and renders them into the console', () => {
+    const { runner, dom, controller } = makeControllerHarness();
+    controller.render();
+    expect(dom.byId['live-case-status'].innerHTML).toContain('No teaching case');
+    expect(dom.byId['live-case-considerations'].innerHTML).toContain('No active considerations');
+
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    const learnerSpy = vi.spyOn(runner, 'getLearnerCaseContext');
+    const instructorSpy = vi.spyOn(runner, 'getInstructorCaseContext');
+    controller.render();
+    expect(learnerSpy).toHaveBeenCalledTimes(1);
+    expect(instructorSpy).toHaveBeenCalledTimes(1);
+    expect(dom.regions.chart.innerHTML).toContain('Taylor Example');
+    expect(dom.regions.interview.innerHTML).toContain('No available actions');
+    expect(dom.byId['live-case-status'].innerHTML).toContain('CHART REVIEW');
+    expect(dom.byId['live-case-current-phase'].innerHTML).toContain('Assessment');
+    expect(dom.byId['live-case-considerations'].innerHTML).toContain('NPO status');
+    expect(dom.byId['live-case-considerations'].innerHTML)
+      .toContain('Trainee should establish intake timing.');
+    expect(dom.byId['live-case-history'].innerHTML).toContain('No case events recorded.');
+
+    expect(runner.advanceCaseStage({ stage: 'interview' })).toMatchObject({ ok: true });
+    controller.render();
+    expect(dom.byId['live-case-history'].innerHTML).toContain('stage_transition');
+  });
+
+  it('sends assessment button clicks to performAssessmentAction with the exact actionId', () => {
+    const { runner, dom, controller, changes } = makeControllerHarness();
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    expect(runner.advanceCaseStage({ stage: 'interview' })).toMatchObject({ ok: true });
+    controller.render();
+    const spy = vi.spyOn(runner, 'performAssessmentAction');
+    const actionButton = new FakeCaseElement({ dataset: { caseAction: 'ask_npo' } });
+    dom.byId['live-case-workspace'].emit('click', actionButton);
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith({ actionId: 'ask_npo' });
+    expect(changes.at(-1)).toMatchObject({
+      kind: 'assessment_action', result: { ok: true, revealedFindingIds: ['npo_ok'] },
+    });
+    expect(dom.regions.interview.innerHTML).toContain('Solids eight hours ago');
+  });
+
+  it('renders stage navigation that cannot skip and surfaces rejected transitions', () => {
+    const { runner, dom, controller, changes } = makeControllerHarness();
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    controller.render();
+
+    const nav = dom.byId['live-case-stage-nav'].innerHTML;
+    const navButtons = nav.match(/<button\b[^>]*>/g) ?? [];
+    const buttonFor = (stage) => navButtons.find((tag) => tag.includes(`data-case-stage="${stage}"`));
+    expect(buttonFor('chart_review')).toContain('aria-current="step"');
+    expect(buttonFor('chart_review')).toContain('disabled');
+    expect(buttonFor('interview')).not.toContain('disabled');
+    for (const stage of ['focused_exam', 'findings_summary', 'plan_submission']) {
+      expect(buttonFor(stage)).toContain('disabled');
+    }
+
+    const skipButton = new FakeCaseElement({ dataset: { caseStage: 'findings_summary' } });
+    dom.byId['live-case-workspace'].emit('click', skipButton);
+    expect(changes.at(-1)).toMatchObject({
+      kind: 'stage_advance', result: { ok: false, reason: 'INVALID_STAGE_TRANSITION' },
+    });
+    expect(runner.getLearnerCaseContext()).toMatchObject({ stage: 'chart_review' });
+
+    const nextButton = new FakeCaseElement({ dataset: { caseStage: 'interview' } });
+    dom.byId['live-case-workspace'].emit('click', nextButton);
+    expect(changes.at(-1)).toMatchObject({ kind: 'stage_advance', result: { ok: true } });
+    expect(runner.getLearnerCaseContext()).toMatchObject({ stage: 'interview' });
+    expect(dom.byId['live-case-stage-nav'].innerHTML)
+      .toMatch(/data-case-stage="interview"[^>]*aria-current="step"/);
+  });
+
+  it('submits checked findings with optional notes as stable structured values', () => {
+    const { runner, dom, controller } = makeControllerHarness();
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    advanceRunnerToFindings(runner);
+    controller.render();
+
+    const checkedFinding = new FakeCaseElement({
+      dataset: { caseFinding: 'npo_ok' }, type: 'checkbox', checked: true,
+    });
+    dom.byId['live-case-workspace'].queryMap['[data-case-finding]'] = [checkedFinding];
+    dom.byId['live-case-notes'].value = 'Summary note';
+    const spy = vi.spyOn(runner, 'submitCaseFindings');
+    dom.byId['live-case-submit-findings'].emit('click');
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith({ findingIds: ['npo_ok'], notes: 'Summary note' });
+    expect(runner.getLearnerCaseContext().findingsSubmission)
+      .toMatchObject({ findingIds: ['npo_ok'], notes: 'Summary note' });
+  });
+
+  it('submits single and multi plan selections plus rationale through submitCasePlan', () => {
+    const { runner, dom, controller } = makeControllerHarness();
+    expect(loadControllerCase(runner, (experience) => {
+      experience.planRequirements.fields.push({
+        id: 'monitors', type: 'multi', required: false,
+        options: ['standard_asa', 'arterial_line'],
+      });
+    })).toMatchObject({ ok: true });
+    advanceRunnerToPlan(runner);
+    controller.render();
+
+    dom.byId['live-case-workspace'].queryMap['[data-case-plan-field]'] = [
+      new FakeCaseElement({
+        dataset: { casePlanField: 'disposition' }, type: 'radio', value: 'proceed', checked: true,
+      }),
+      new FakeCaseElement({
+        dataset: { casePlanField: 'disposition' }, type: 'radio', value: 'postpone', checked: false,
+      }),
+      new FakeCaseElement({
+        dataset: { casePlanField: 'monitors' }, type: 'checkbox', value: 'standard_asa', checked: true,
+      }),
+      new FakeCaseElement({
+        dataset: { casePlanField: 'monitors' }, type: 'checkbox', value: 'arterial_line', checked: true,
+      }),
+    ];
+    dom.byId['live-case-notes'].value = 'Plan rationale';
+    const spy = vi.spyOn(runner, 'submitCasePlan');
+    dom.byId['live-case-submit-plan'].emit('click');
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith({
+      selections: { disposition: 'proceed', monitors: ['standard_asa', 'arterial_line'] },
+      rationale: 'Plan rationale',
+    });
+    expect(runner.getLearnerCaseContext()).toMatchObject({ stage: 'live_simulation' });
+  });
+
+  it('routes observation status, note, and reveal controls through the public runner APIs', () => {
+    const { runner, dom, controller, changes } = makeControllerHarness();
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    controller.render();
+
+    dom.byId['live-case-instructor'].queryMap['[data-case-observation-note]'] = [
+      new FakeCaseElement({
+        dataset: { caseObservationNote: 'consider_npo' }, value: 'Seen at bedside',
+      }),
+    ];
+    const observationSpy = vi.spyOn(runner, 'setInstructorCaseObservation');
+    const statusButton = new FakeCaseElement({
+      dataset: { caseObservation: 'consider_npo', caseStatus: 'observed' },
+    });
+    dom.byId['live-case-instructor'].emit('click', statusButton);
+    expect(observationSpy).toHaveBeenCalledWith({
+      considerationId: 'consider_npo', status: 'observed', note: 'Seen at bedside',
+    });
+    expect(changes.at(-1)).toMatchObject({
+      kind: 'instructor_observation', result: { ok: true },
+    });
+
+    const revealSpy = vi.spyOn(runner, 'setCaseFeedbackReveal');
+    const revealCheckbox = new FakeCaseElement({
+      dataset: { caseReveal: 'consider_npo' }, type: 'checkbox', checked: false,
+    });
+    dom.byId['live-case-instructor'].emit('change', revealCheckbox);
+    expect(revealSpy).toHaveBeenCalledWith({ considerationId: 'consider_npo', reveal: false });
+    expect(changes.at(-1)).toMatchObject({ kind: 'feedback_reveal', result: { ok: true } });
+  });
+
+  it('drives pause/resume, phase advance, and branch controls through public APIs only', () => {
+    const { runner, dom, controller, changes } = makeControllerHarness();
+    expect(loadControllerCase(runner, (experience) => {
+      experience.eventFlow.phases[0].allowedInstructorControls = ['pause', 'resume', 'advance'];
+    })).toMatchObject({ ok: true });
+    controller.render();
+
+    const pauseSpy = vi.spyOn(runner, 'pauseCase');
+    const resumeSpy = vi.spyOn(runner, 'resumeCase');
+    dom.byId['live-case-pause'].emit('click');
+    expect(pauseSpy).toHaveBeenCalledTimes(1);
+    expect(resumeSpy).not.toHaveBeenCalled();
+    expect(dom.byId['live-case-pause'].textContent).toBe('RESUME CASE');
+    dom.byId['live-case-pause'].emit('click');
+    expect(resumeSpy).toHaveBeenCalledTimes(1);
+    expect(dom.byId['live-case-pause'].textContent).toBe('PAUSE CASE');
+
+    const advanceSpy = vi.spyOn(runner, 'advanceCasePhase');
+    dom.byId['live-case-advance'].emit('click');
+    expect(advanceSpy).toHaveBeenCalledTimes(1);
+    expect(changes.at(-1)).toMatchObject({ kind: 'phase_advance' });
+
+    const branchSpy = vi.spyOn(runner, 'activateCaseBranch');
+    const branchButton = new FakeCaseElement({ dataset: { caseBranch: 'proceed_for_training' } });
+    dom.byId['live-case-instructor'].emit('click', branchButton);
+    expect(branchSpy).toHaveBeenCalledWith({ branchId: 'proceed_for_training' });
+    expect(changes.at(-1)).toMatchObject({
+      kind: 'branch_activation', result: { ok: false },
+    });
+  });
+
+  it('disables every case mutation control once the debrief is finalized', () => {
+    const { runner, dom, controller } = makeControllerHarness();
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    advanceRunnerToPlan(runner);
+    expect(runner.submitCasePlan({
+      selections: { disposition: 'postpone' }, rationale: 'NPO violation',
+    })).toMatchObject({ ok: true, stage: 'appropriately_deferred' });
+    expect(runner.setInstructorCaseObservation({
+      considerationId: 'consider_npo', status: 'observed',
+    })).toMatchObject({ ok: true });
+    expect(runner.finalizeCaseDebrief()).toMatchObject({ ok: true });
+    controller.render();
+
+    expect(dom.byId['live-case-status'].innerHTML).toContain('FINALIZED');
+    expect(dom.byId['live-case-submit-findings'].disabled).toBe(true);
+    expect(dom.byId['live-case-submit-plan'].disabled).toBe(true);
+    expect(dom.byId['live-case-notes'].disabled).toBe(true);
+    expect(dom.byId['live-case-pause'].disabled).toBe(true);
+    expect(dom.byId['live-case-advance'].disabled).toBe(true);
+    const navButtons = dom.byId['live-case-stage-nav'].innerHTML.match(/<button\b[^>]*>/g) ?? [];
+    expect(navButtons.length).toBeGreaterThan(0);
+    for (const tag of navButtons) expect(tag).toContain('disabled');
+  });
+
+  it('clears drafts and rerenders every case region on reset', () => {
+    const { runner, dom, controller } = makeControllerHarness();
+    expect(loadControllerCase(runner)).toMatchObject({ ok: true });
+    expect(runner.advanceCaseStage({ stage: 'interview' })).toMatchObject({ ok: true });
+    controller.render();
+    dom.byId['live-case-notes'].value = 'Draft note';
+    for (const region of Object.values(dom.regions)) region.innerHTML = 'stale-markup';
+    dom.byId['live-case-considerations'].innerHTML = 'stale-markup';
+
+    expect(runner.reset()).toBeTruthy();
+    controller.reset();
+    expect(dom.byId['live-case-notes'].value).toBe('');
+    for (const region of Object.values(dom.regions)) {
+      expect(region.innerHTML).not.toBe('stale-markup');
+    }
+    expect(dom.byId['live-case-considerations'].innerHTML).not.toBe('stale-markup');
+    expect(runner.getLearnerCaseContext()).toMatchObject({ stage: 'chart_review' });
+    expect(dom.byId['live-case-status'].innerHTML).toContain('CHART REVIEW');
+  });
+
+  it('never reaches into runner internals from the case controller module', () => {
+    const controllerSource = readFileSync(
+      resolve(import.meta.dirname, '../../ui/liveCaseView.js'),
+      'utf8',
+    );
+    expect(controllerSource).toContain('runner.getLearnerCaseContext');
+    expect(controllerSource).toContain('runner.getInstructorCaseContext');
+    for (const forbidden of [
+      'runner.s.', 'runner.caseSession', 'runner.rubricSession', 'runner.core',
+      'runner.snapshot(', '_activeCaseScenario', '_loadedCaseScenario',
+    ]) expect(controllerSource).not.toContain(forbidden);
   });
 });

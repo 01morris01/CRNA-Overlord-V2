@@ -16,13 +16,21 @@ import {
   PATIENT_PRESETS,
   RUBRIC_SCENARIO_ASSETS,
   RUBRIC_SCENARIOS,
+  TEACHING_CASE_ASSETS,
+  TEACHING_CASES,
   validateSimulationResult,
   VOLATILE_AGENTS,
 } from './liveSimModel.js';
+import {
+  renderInstructorCaseShell,
+  renderLearnerCaseShell,
+} from './liveCaseModel.js';
+import { createLiveCaseController } from './liveCaseView.js';
 import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
 
 let initialized = false;
 let runner = null;
+let caseController = null;
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -427,7 +435,7 @@ export function renderRubricConsoleShell() {
       </div>
       <div class="live-rubric-panel-scroll">
       <label class="live-field" for="live-rubric-scenario"><span>Approved scenario</span>
-        <select id="live-rubric-scenario">${RUBRIC_SCENARIOS.map(({ id, label }) => `<option value="${id}">${escapeHtml(label)}</option>`).join('')}</select>
+        <select id="live-rubric-scenario">${RUBRIC_SCENARIOS.map(({ id, label }) => `<option value="${id}">${escapeHtml(label)}</option>`).join('')}${TEACHING_CASES.map(({ id, label }) => `<option value="${id}">${escapeHtml(label)}</option>`).join('')}</select>
       </label>
       <button id="live-rubric-load" type="button" class="live-primary">LOAD SCENARIO</button>
       <output id="live-rubric-load-status" class="live-rubric-inline-status" aria-live="polite">No rubric scenario loaded.</output>
@@ -627,6 +635,21 @@ export async function loadRubricScenarioAssets(liveRunner, scenarioId, fetchImpl
   return { scenario, rubric, loaded };
 }
 
+export async function loadSelectedScenarioAssets(liveRunner, scenarioId, fetchImpl = globalThis.fetch) {
+  const caseAssets = TEACHING_CASE_ASSETS[scenarioId];
+  if (!caseAssets) return loadRubricScenarioAssets(liveRunner, scenarioId, fetchImpl);
+  if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
+  const scenarioResponse = await fetchImpl(caseAssets.scenarioUrl);
+  const rubricResponse = caseAssets.rubricUrl ? await fetchImpl(caseAssets.rubricUrl) : null;
+  if (!scenarioResponse.ok || (rubricResponse !== null && !rubricResponse.ok)) {
+    throw new Error(`Scenario assets unavailable (${scenarioResponse.status}/${rubricResponse?.status ?? '-'})`);
+  }
+  const scenario = await scenarioResponse.json();
+  const rubric = rubricResponse === null ? null : await rubricResponse.json();
+  const loaded = liveRunner.loadCaseScenario({ scenario, rubric });
+  return { scenario, rubric, loaded };
+}
+
 function renderShell() {
   view.innerHTML = `
     <div class="live-education-fence" role="note">Educational simulation. Not for clinical use.</div>
@@ -656,6 +679,7 @@ function renderShell() {
 
     <div class="live-sim-grid">
       <div class="live-sim-column">
+        ${renderLearnerCaseShell()}
         <section class="live-panel" aria-labelledby="live-case-heading">
           <h2 id="live-case-heading">Case flow</h2>
           <div class="live-button-row">
@@ -826,6 +850,7 @@ function renderShell() {
       </div>
 
       <div class="live-sim-column live-side-column">
+        ${renderInstructorCaseShell()}
         ${renderRubricConsoleShell()}
         <section class="live-panel live-event-panel" aria-labelledby="live-events-heading">
           <div class="live-event-header"><h2 id="live-events-heading">Event log</h2><span>sim time</span></div>
@@ -1245,6 +1270,7 @@ function renderSnapshot(snapshot) {
       renderRubricResult(rubricResult);
     }
   }
+  caseController?.render();
   applyFinalizedConsoleLock({ rootElement: view, runner });
   transport?.publishSnapshot(projectLearnerMonitorSnapshot(snapshot));
 }
@@ -1260,6 +1286,15 @@ function ensureRunner() {
   }
   runner.onTick = renderSnapshot;
   runner.onEvent = renderEventLog;
+  caseController = createLiveCaseController({
+    runner,
+    root: view,
+    onChanged: ({ result } = {}) => {
+      if (result && result.ok === false && result.reason) {
+        setStatus(`Case control rejected: ${result.reason}`, 'error');
+      }
+    },
+  });
   runner.emit();
   fillPatientForm(runner.config);
   syncCaseSetupControls(runner.snapshot());
@@ -1329,6 +1364,7 @@ function applyPatient(event) {
     resetRubricPrintState(document);
     const liveRunner = ensureRunner();
     liveRunner.applyConfig(config);
+    caseController?.reset();
     syncCaseSetupControls(liveRunner.snapshot());
     updateDosePreviews(config.weightKg);
     updateRegionalLidocainePreview(config.weightKg);
@@ -1366,32 +1402,34 @@ async function loadSelectedRubricScenario() {
   const select = document.getElementById('live-rubric-scenario');
   const button = document.getElementById('live-rubric-load');
   const selectedId = select?.value;
-  const assets = RUBRIC_SCENARIO_ASSETS[selectedId];
+  const assets = RUBRIC_SCENARIO_ASSETS[selectedId] ?? TEACHING_CASE_ASSETS[selectedId];
   if (!assets) {
-    setRubricLoadStatus('Select an approved rubric scenario.', 'error');
+    setRubricLoadStatus('Select an approved scenario or teaching case.', 'error');
     return;
   }
   if (button) button.disabled = true;
   if (select) select.disabled = true;
-  setRubricLoadStatus('Loading and validating scenario + rubric…');
+  setRubricLoadStatus('Loading and validating scenario assets…');
   try {
     const liveRunner = ensureRunner();
-    const { loaded } = await loadRubricScenarioAssets(liveRunner, selectedId);
+    const { loaded } = await loadSelectedScenarioAssets(liveRunner, selectedId);
     latestRubricResult = null;
     latestRubricPresentationKey = null;
     latestRubricDebrief = null;
     clearRubricDraftsOnNextRender = true;
     resetRubricPrintState(document);
+    caseController?.reset();
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();
     liveRunner.emit();
-    const selected = RUBRIC_SCENARIOS.find(({ id }) => id === selectedId);
+    const selected = RUBRIC_SCENARIOS.find(({ id }) => id === selectedId)
+      ?? TEACHING_CASES.find(({ id }) => id === selectedId);
     setRubricLoadStatus(`${selected?.label ?? selectedId} loaded and validated.`, 'success');
-    setStatus(`Rubric scenario loaded · ${loaded.scenarioId}.`, 'success');
+    setStatus(`Scenario loaded · ${loaded.scenarioId}.`, 'success');
   } catch (error) {
     setRubricLoadStatus(`Load failed; active case preserved. ${error.message}`, 'error');
-    setStatus(`Rubric scenario not loaded: ${error.message}`, 'error');
+    setStatus(`Scenario not loaded: ${error.message}`, 'error');
   } finally {
     if (button) button.disabled = false;
     if (select) select.disabled = false;
@@ -1563,6 +1601,7 @@ function bindControls() {
     clearRubricDraftsOnNextRender = true;
     resetRubricPrintState(document);
     const resetSnapshot = liveRunner.reset();
+    caseController?.reset();
     liveRunner.logEvent('Case', 'Simulation reset', { action: 'reset' });
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(resetSnapshot);

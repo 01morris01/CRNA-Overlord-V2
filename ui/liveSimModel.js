@@ -39,6 +39,20 @@ export const RUBRIC_SCENARIO_ASSETS = Object.freeze({
   }),
 });
 
+export const TEACHING_CASES = Object.freeze([
+  { id: 'cn_preassessment_lap_chole_001', label: 'Preassessment - Lap Chole / PONV' },
+  { id: 'cn_preassessment_npo_mh_001', label: 'Preassessment - NPO / MH / Difficult Airway' },
+]);
+
+export const TEACHING_CASE_ASSETS = Object.freeze({
+  cn_preassessment_lap_chole_001: Object.freeze({
+    scenarioUrl: '/crisis-sim/sim/scenarios/cn_preassessment_lap_chole_001.json',
+  }),
+  cn_preassessment_npo_mh_001: Object.freeze({
+    scenarioUrl: '/crisis-sim/sim/scenarios/cn_preassessment_npo_mh_001.json',
+  }),
+});
+
 function rubricTime(seconds) {
   if (!Number.isFinite(seconds)) return 'time unavailable';
   const total = Math.max(0, Math.floor(seconds));
