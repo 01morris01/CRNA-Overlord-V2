@@ -188,12 +188,12 @@ describe('CaseFlowSession trigger evaluation', () => {
       .toEqual(shouldFire ? ['threshold'] : []);
   });
 
-  test('requires continuous dwell, finite snapshot values, and hysteresis before a repeat', () => {
+  test('requires continuous dwell, numeric snapshot values, and hysteresis before a repeat', () => {
     const flow = new CaseFlowSession({ eventFlow: makeTriggerFlow() });
     flow.enterInitialPhase({ tSec: 0 });
     flow.drainActivations();
 
-    expect(flow.onStep({ tSec: 0.02, snapshot: { spo2: Number.NaN } })).toEqual([]);
+    expect(flow.onStep({ tSec: 0.02, snapshot: { spo2: null } })).toEqual([]);
     expect(flow.onStep({ tSec: 0.04, snapshot: { spo2: 90 } })).toEqual([]);
     expect(flow.onStep({ tSec: 0.06, snapshot: { spo2: 91 } })).toEqual([]);
     expect(flow.onStep({ tSec: 0.08, snapshot: { spo2: 90 } })).toEqual([]);
@@ -207,7 +207,7 @@ describe('CaseFlowSession trigger evaluation', () => {
 
   test.each([
     ['missing', {}],
-    ['non-finite', { value: Number.NaN }],
+    ['non-numeric', { value: null }],
   ])('breaks continuous physiology dwell on a %s sample', (_label, interruptedSnapshot) => {
     const thresholdEvent = event({
       id: 'continuous',
@@ -387,6 +387,55 @@ describe('CaseFlowSession lifecycle and controls', () => {
     });
   });
 
+  test('preserves overlapping repeat-event response windows and expires each independently', () => {
+    const repeatEvent = event({
+      id: 'repeat_response',
+      trigger: { type: 'action', action: 'stimulus' },
+      repeatable: true,
+      responseWindowSec: 1,
+    });
+    const flow = new CaseFlowSession({
+      eventFlow: flowDefinition({
+        phases: [phase({ id: 'preop', events: ['repeat_response'] })],
+        events: [repeatEvent],
+      }),
+    });
+    flow.enterInitialPhase({ tSec: 0 });
+    flow.onAction({ action: 'stimulus', tSec: 0.02, snapshot: {} });
+    flow.onAction({ action: 'stimulus', tSec: 0.52, snapshot: {} });
+
+    expect(flow.getState().responseDeadlines).toEqual([{
+      eventId: 'repeat_response',
+      activationSequence: 1,
+      activatedAtSec: 0.02,
+      responseDeadlineSec: 1.02,
+    }, {
+      eventId: 'repeat_response',
+      activationSequence: 2,
+      activatedAtSec: 0.52,
+      responseDeadlineSec: 1.52,
+    }]);
+    expect(flow.drainActivations().map(({ sequence }) => sequence)).toEqual([1, 2]);
+
+    flow.onStep({ tSec: 1.04, snapshot: {} });
+    expect(flow.getState().activeEventIds).toEqual(['repeat_response']);
+    expect(flow.getState().responseDeadlines).toEqual([expect.objectContaining({
+      activationSequence: 2, responseDeadlineSec: 1.52,
+    })]);
+    expect(flow.getState().history.filter(
+      ({ kind }) => kind === 'response_window_expired',
+    )).toEqual([expect.objectContaining({
+      eventId: 'repeat_response', activationSequence: 1, tSec: 1.04,
+    })]);
+
+    flow.onStep({ tSec: 1.54, snapshot: {} });
+    expect(flow.getState().activeEventIds).toEqual([]);
+    expect(flow.getState().responseDeadlines).toEqual([]);
+    expect(flow.getState().history.filter(
+      ({ kind }) => kind === 'response_window_expired',
+    ).map(({ activationSequence }) => activationSequence)).toEqual([1, 2]);
+  });
+
   test('manually advances in definition order and fires phase-entry events', () => {
     const secondReady = event({
       id: 'second_ready', phaseId: 'second', trigger: { type: 'phase_enter' },
@@ -403,13 +452,66 @@ describe('CaseFlowSession lifecycle and controls', () => {
     flow.enterInitialPhase({ tSec: 0 });
 
     expect(flow.advancePhase({ tSec: 0.02 })).toEqual({
-      ok: true, phaseId: 'second', activations: ['second_ready'],
+      ok: true, phaseId: 'second', targetPhaseId: 'second', activations: ['second_ready'],
     });
     expect(flow.getState()).toMatchObject({ currentPhaseId: 'second' });
     expect(flow.advancePhase({ tSec: 0.04 })).toEqual({
       ok: false, reason: 'NO_NEXT_PHASE',
     });
   });
+
+  test.each(['advance', 'branch'])(
+    'records %s causality before an immediately completing target phase',
+    (control) => {
+      const targetReady = event({
+        id: 'target_ready', phaseId: 'target', trigger: { type: 'phase_enter' },
+      });
+      const definition = flowDefinition({
+        phases: [
+          phase({ id: 'start', events: [] }),
+          phase({
+            id: 'target',
+            events: ['target_ready'],
+            completionWhen: { type: 'event_fired', eventId: 'target_ready' },
+          }),
+          phase({ id: 'final', events: [] }),
+        ],
+        events: [targetReady],
+        branches: [{
+          id: 'to_target',
+          label: 'To target',
+          fromPhaseId: 'start',
+          toPhaseId: 'target',
+          instructorOnly: true,
+        }],
+      });
+      const flow = new CaseFlowSession({ eventFlow: definition });
+      flow.enterInitialPhase({ tSec: 0 });
+
+      const result = control === 'advance'
+        ? flow.advancePhase({ tSec: 0.02 })
+        : flow.activateBranch({ branchId: 'to_target', tSec: 0.02 });
+      expect(result).toMatchObject({
+        ok: true,
+        phaseId: 'final',
+        targetPhaseId: 'target',
+        activations: ['target_ready'],
+      });
+      expect(flow.getState().currentPhaseId).toBe('final');
+      const history = flow.getState().history;
+      const controlKind = control === 'advance' ? 'phase_advanced' : 'branch_activated';
+      const controlIndex = history.findIndex(({ kind }) => kind === controlKind);
+      const targetEnterIndex = history.findIndex((entry) => (
+        entry.kind === 'phase_entered' && entry.phaseId === 'target'
+      ));
+      const targetEventIndex = history.findIndex((entry) => (
+        entry.kind === 'event_activated' && entry.eventId === 'target_ready'
+      ));
+      expect(controlIndex).toBeGreaterThanOrEqual(0);
+      expect(controlIndex).toBeLessThan(targetEnterIndex);
+      expect(controlIndex).toBeLessThan(targetEventIndex);
+    },
+  );
 
   test('permits only defined branches from phases with branch control', () => {
     const rescueReady = event({
@@ -436,7 +538,12 @@ describe('CaseFlowSession lifecycle and controls', () => {
       ok: false, reason: 'UNKNOWN_BRANCH',
     });
     expect(allowed.activateBranch({ branchId: 'proceed_for_training', tSec: 0.04 }))
-      .toEqual({ ok: true, phaseId: 'rescue', activations: ['rescue_ready'] });
+      .toEqual({
+        ok: true,
+        phaseId: 'rescue',
+        targetPhaseId: 'rescue',
+        activations: ['rescue_ready'],
+      });
 
     const forbiddenDefinition = flowDefinition({
       phases: [
@@ -456,6 +563,42 @@ describe('CaseFlowSession lifecycle and controls', () => {
     forbidden.enterInitialPhase({ tSec: 0 });
     expect(forbidden.activateBranch({ branchId: 'proceed_for_training', tSec: 0.02 }))
       .toEqual({ ok: false, reason: 'CONTROL_NOT_ALLOWED' });
+  });
+
+  test('advertises branches only while branch activation is currently permitted', () => {
+    const branch = {
+      id: 'to_rescue',
+      label: 'To rescue',
+      fromPhaseId: 'preop',
+      toPhaseId: 'rescue',
+      instructorOnly: true,
+    };
+    const withoutControl = new CaseFlowSession({
+      eventFlow: flowDefinition({
+        phases: [
+          phase({ id: 'preop', events: [], allowedInstructorControls: ['pause', 'resume'] }),
+          phase({ id: 'rescue', events: [] }),
+        ],
+        events: [],
+        branches: [branch],
+      }),
+    });
+    withoutControl.enterInitialPhase({ tSec: 0 });
+    expect(withoutControl.getState().availableBranchIds).toEqual([]);
+
+    const whilePaused = new CaseFlowSession({
+      eventFlow: flowDefinition({
+        phases: [phase({ id: 'preop', events: [] }), phase({ id: 'rescue', events: [] })],
+        events: [],
+        branches: [branch],
+      }),
+    });
+    whilePaused.enterInitialPhase({ tSec: 0 });
+    expect(whilePaused.getState().availableBranchIds).toEqual(['to_rescue']);
+    whilePaused.setPaused({ paused: true, tSec: 0.02 });
+    expect(whilePaused.getState().availableBranchIds).toEqual([]);
+    whilePaused.setPaused({ paused: false, tSec: 0.04 });
+    expect(whilePaused.getState().availableBranchIds).toEqual(['to_rescue']);
   });
 
   test('pause freezes fixed and phase-relative clocks until an allowed resume', () => {
@@ -569,13 +712,82 @@ describe('CaseFlowSession lifecycle and controls', () => {
     flow.setPaused({ paused: false, tSec: 2.5 });
 
     expect(flow.getState().responseDeadlines).toEqual([{
-      eventId: 'respond', activatedAtSec: 0.02, responseDeadlineSec: 3.02,
+      eventId: 'respond',
+      activationSequence: 1,
+      activatedAtSec: 0.02,
+      responseDeadlineSec: 3.02,
     }]);
     flow.onStep({ tSec: 3.02, snapshot: {} });
     expect(flow.getState().activeEventIds).toEqual(['respond']);
     flow.onStep({ tSec: 3.04, snapshot: {} });
     expect(flow.getState().activeEventIds).toEqual([]);
   });
+
+  test('expires a passed response deadline before pausing and never revives it on resume', () => {
+    const responseEvent = event({
+      id: 'respond',
+      trigger: { type: 'action', action: 'stimulus' },
+      responseWindowSec: 0.1,
+    });
+    const flow = new CaseFlowSession({
+      eventFlow: flowDefinition({
+        phases: [phase({ id: 'preop', events: ['respond'] })],
+        events: [responseEvent],
+      }),
+    });
+    flow.enterInitialPhase({ tSec: 0 });
+    flow.onAction({ action: 'stimulus', tSec: 0.02, snapshot: {} });
+    flow.setPaused({ paused: true, tSec: 0.14 });
+
+    expect(flow.getState().responseDeadlines).toEqual([]);
+    expect(flow.getState().activeEventIds).toEqual([]);
+    expect(flow.getState().history.slice(-2).map(({ kind }) => kind)).toEqual([
+      'response_window_expired', 'flow_paused',
+    ]);
+    flow.setPaused({ paused: false, tSec: 1.14 });
+    expect(flow.getState().responseDeadlines).toEqual([]);
+    expect(flow.getState().history.filter(
+      ({ kind }) => kind === 'response_window_expired',
+    )).toHaveLength(1);
+  });
+
+  test.each(['advance', 'branch'])(
+    'expires a passed response deadline before an instructor %s transition',
+    (control) => {
+      const responseEvent = event({
+        id: 'respond',
+        phaseId: 'first',
+        trigger: { type: 'action', action: 'stimulus' },
+        responseWindowSec: 0.1,
+      });
+      const flow = new CaseFlowSession({
+        eventFlow: flowDefinition({
+          phases: [phase({ id: 'first', events: ['respond'] }), phase({ id: 'second', events: [] })],
+          events: [responseEvent],
+          branches: [{
+            id: 'to_second',
+            label: 'To second',
+            fromPhaseId: 'first',
+            toPhaseId: 'second',
+            instructorOnly: true,
+          }],
+        }),
+      });
+      flow.enterInitialPhase({ tSec: 0 });
+      flow.onAction({ action: 'stimulus', tSec: 0.02, snapshot: {} });
+      if (control === 'advance') flow.advancePhase({ tSec: 0.14 });
+      else flow.activateBranch({ branchId: 'to_second', tSec: 0.14 });
+
+      const kinds = flow.getState().history.map(({ kind }) => kind);
+      const expiredIndex = kinds.indexOf('response_window_expired');
+      const controlIndex = kinds.indexOf(
+        control === 'advance' ? 'phase_advanced' : 'branch_activated',
+      );
+      expect(expiredIndex).toBeGreaterThanOrEqual(0);
+      expect(expiredIndex).toBeLessThan(controlIndex);
+      expect(kinds).not.toContain('response_window_closed');
+    },
+  );
 
   test('enforces fixed-step nondecreasing timestamps atomically', () => {
     const flow = new CaseFlowSession({ eventFlow: makeTriggerFlow(), initialTimeSec: 0.02 });
@@ -587,6 +799,51 @@ describe('CaseFlowSession lifecycle and controls', () => {
     const before = JSON.stringify(flow.getState());
     expect(() => flow.onStep({ tSec: 0.01, snapshot: {} })).toThrow(/0\.02|fixed-step|tick/i);
     expect(() => flow.onStep({ tSec: 0, snapshot: {} })).toThrow(/nondecreasing/i);
+    expect(JSON.stringify(flow.getState())).toBe(before);
+  });
+
+  test('rejects an accessor snapshot without invoking it or mutating flow state', () => {
+    const flow = new CaseFlowSession({ eventFlow: makeTriggerFlow() });
+    flow.enterInitialPhase({ tSec: 0 });
+    flow.drainActivations();
+    let getterCalls = 0;
+    const snapshot = {};
+    Object.defineProperty(snapshot, 'spo2', {
+      enumerable: true,
+      get() {
+        getterCalls += 1;
+        return 90;
+      },
+    });
+    const before = JSON.stringify(flow.getState());
+
+    expect(() => flow.onStep({ tSec: 0.02, snapshot })).toThrow(/accessor|data property/i);
+    expect(getterCalls).toBe(0);
+    expect(JSON.stringify(flow.getState())).toBe(before);
+    expect(() => flow.onStep({ tSec: 0.02, snapshot: { spo2: 99 } })).not.toThrow();
+  });
+
+  test.each([
+    ['symbol key', () => {
+      const snapshot = { spo2: 99 };
+      snapshot[Symbol('private')] = true;
+      return snapshot;
+    }],
+    ['sparse nested array', () => ({ spo2: 99, nested: new Array(2) })],
+    ['cycle', () => {
+      const snapshot = { spo2: 99 };
+      snapshot.self = snapshot;
+      return snapshot;
+    }],
+    ['non-finite number', () => ({ spo2: 99, nested: Number.POSITIVE_INFINITY })],
+  ])('rejects a snapshot containing a %s atomically', (_label, makeSnapshot) => {
+    const flow = new CaseFlowSession({ eventFlow: makeTriggerFlow() });
+    flow.enterInitialPhase({ tSec: 0 });
+    flow.drainActivations();
+    const before = JSON.stringify(flow.getState());
+
+    expect(() => flow.onStep({ tSec: 0.02, snapshot: makeSnapshot() }))
+      .toThrow(/JSON-safe|symbol|dense|cycle|finite/i);
     expect(JSON.stringify(flow.getState())).toBe(before);
   });
 
@@ -683,6 +940,79 @@ function makeIntegratedDefinition() {
 }
 
 describe('CaseSession event-flow integration', () => {
+  test('delivers constructor and action activations chronologically without an initial drain', () => {
+    const session = new CaseSession({ definition: makeIntegratedDefinition(), seed: 5 });
+
+    const result = session.recordCanonicalAction({
+      action: 'drug',
+      meta: { drug: 'Propofol' },
+      snapshot: { spo2: 99 },
+      tSec: 0.02,
+    });
+    expect(result).toMatchObject({ ok: true });
+    expect(result.activations.map(({ eventId }) => eventId)).toEqual([
+      'assessment_ready', 'live_drug_recorded',
+    ]);
+    expect(result.activations.map(({ sequence }) => sequence)).toEqual([1, 2]);
+    expect(session.drainFlowActivations()).toEqual([]);
+  });
+
+  test('delivers every flow activation exactly once across drain and action returns', () => {
+    const session = new CaseSession({ definition: makeIntegratedDefinition(), seed: 51 });
+    expect(session.drainFlowActivations().map(({ eventId }) => eventId))
+      .toEqual(['assessment_ready']);
+    expect(session.drainFlowActivations()).toEqual([]);
+
+    const result = session.recordCanonicalAction({
+      action: 'drug',
+      meta: { drug: 'Propofol' },
+      snapshot: { spo2: 99 },
+      tSec: 0.02,
+    });
+    expect(result.activations.map(({ eventId }) => eventId)).toEqual(['live_drug_recorded']);
+    expect(session.drainFlowActivations()).toEqual([]);
+  });
+
+  test('attributes an instructor event to its own phase when constructor activations are pending', () => {
+    const raw = makeCaseExperience();
+    raw.eventFlow.phases[0].completionWhen = {
+      type: 'event_fired',
+      eventId: 'assessment_ready',
+    };
+    raw.eventFlow.phases.push(phase({
+      id: 'training',
+      title: 'Training',
+      events: ['training_cue'],
+      allowedInstructorControls: ['activate_event'],
+    }));
+    raw.eventFlow.events.push(event({
+      id: 'training_cue',
+      phaseId: 'training',
+      trigger: { type: 'instructor' },
+    }));
+    raw.eventFlow.branches.push({
+      id: 'to_training',
+      label: 'To training',
+      fromPhaseId: 'assessment',
+      toPhaseId: 'training',
+      instructorOnly: true,
+    });
+    const session = new CaseSession({
+      definition: normalizeCaseExperience(raw),
+      seed: 52,
+    });
+
+    const result = session.activateInstructorEvent({ eventId: 'training_cue', tSec: 0.02 });
+    expect(result.activations.map(({ eventId }) => eventId)).toEqual([
+      'assessment_ready', 'training_cue',
+    ]);
+    expect(session.getLiveResult().timeline.at(-1)).toMatchObject({
+      kind: 'case_flow_event_activated',
+      eventId: 'training_cue',
+      phaseId: 'training',
+    });
+  });
+
   test('keeps projections usable when fixed-step flow time advances without a canonical action', () => {
     const session = new CaseSession({ definition: makeIntegratedDefinition(), seed: 6 });
     session.drainFlowActivations();

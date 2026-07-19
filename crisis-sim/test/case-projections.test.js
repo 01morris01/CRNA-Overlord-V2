@@ -136,6 +136,7 @@ function makeProjectionDefinition() {
     complicationType: 'projection_test',
     description: SENTINELS.eventEffect,
   };
+  definition.eventFlow.phases[0].allowedInstructorControls.push('activate_branch');
   definition.eventFlow.phases.push({
     id: 'recovery',
     title: 'Recovery',
@@ -487,13 +488,19 @@ function makeFlowState() {
     activeEventIds: ['assessment_ready'],
     responseDeadlines: [{
       eventId: 'assessment_ready',
+      activationSequence: 1,
+      activatedAtSec: 1,
+      responseDeadlineSec: 10,
       privateMarker: SENTINELS.responseDeadline,
     }],
     availableBranchIds: [SENTINELS.branch],
     paused: false,
     history: [{
+      kind: 'event_activated',
       phaseId: 'assessment',
       eventId: 'assessment_ready',
+      sequence: 1,
+      tSec: 1,
       privateMarker: SENTINELS.flowHistory,
     }],
   };
@@ -1313,6 +1320,36 @@ describe('case projection validation and determinism', () => {
       /responseDeadlines.*unknown.*event|missing_event/i,
     ],
     [
+      'missing response-deadline activation sequence',
+      (flow) => { delete flow.responseDeadlines[0].activationSequence; },
+      /responseDeadlines.*activationSequence.*positive.*integer/i,
+    ],
+    [
+      'duplicate response-deadline activation sequence',
+      (flow) => { flow.responseDeadlines.push({ ...flow.responseDeadlines[0] }); },
+      /responseDeadlines.*duplicate.*activationSequence/i,
+    ],
+    [
+      'response deadline before activation',
+      (flow) => { flow.responseDeadlines[0].responseDeadlineSec = 0.5; },
+      /responseDeadlineSec.*before.*activatedAtSec/i,
+    ],
+    [
+      'response deadline for inactive event',
+      (flow) => { flow.activeEventIds = []; },
+      /responseDeadlines.*activeEventIds/i,
+    ],
+    [
+      'response deadline without activation history',
+      (flow) => { flow.history[0].sequence = 2; },
+      /responseDeadlines.*activation history/i,
+    ],
+    [
+      'available branch while paused',
+      (flow) => { flow.paused = true; },
+      /availableBranchIds.*paused/i,
+    ],
+    [
       'unknown flow-history phase',
       (flow) => { flow.history[0].phaseId = 'missing_phase'; },
       /history.*unknown.*phase|missing_phase/i,
@@ -1337,6 +1374,21 @@ describe('case projection validation and determinism', () => {
       sessionState: makePopulatedSessionState(),
       flowState,
     })).toThrow(pattern);
+  });
+
+  test('rejects advertised branches when the current phase forbids branch control', () => {
+    const rawDefinition = structuredClone(makeProjectionDefinition());
+    const assessment = rawDefinition.eventFlow.phases
+      .find(({ id }) => id === 'assessment');
+    assessment.allowedInstructorControls = assessment.allowedInstructorControls
+      .filter((control) => control !== 'activate_branch');
+    const definition = normalizeCaseExperience(rawDefinition);
+
+    expect(() => projectInstructorCase({
+      definition,
+      sessionState: makePopulatedSessionState(),
+      flowState: makeFlowState(),
+    })).toThrow(/availableBranchIds.*activate_branch.*control/i);
   });
 
   test('requires normalized definitions, plain state, nullable plain flow, and ID arrays', () => {

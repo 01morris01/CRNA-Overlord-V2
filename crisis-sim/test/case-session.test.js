@@ -326,7 +326,13 @@ describe('CaseSession learner assessment and submissions', () => {
     });
 
     expect(session.recordAssessmentAction({ actionId: 'ask_npo', tSec: 0 })).toEqual({
-      ok: true, revealedFindingIds: ['npo_ok'],
+      ok: true,
+      revealedFindingIds: ['npo_ok'],
+      activations: [expect.objectContaining({
+        eventId: 'assessment_ready',
+        sequence: 1,
+        source: 'phase_enter',
+      })],
     });
     expect(session.recordAssessmentAction({ actionId: 'ask_npo', tSec: 0 })).toEqual({
       ok: false, reason: 'DUPLICATE_ACTION',
@@ -686,14 +692,21 @@ describe('CaseSession instructor evidence and feedback', () => {
 });
 
 describe('CaseSession live actions, projections, and event flow', () => {
-  test('copies canonical actions without physiology mutation and returns no flow activations', () => {
+  test('copies canonical actions without physiology mutation and returns pending flow activations', () => {
     const session = makeSession();
     const meta = { dose: { amount: 10 } };
     const snapshot = { hr: 80, nested: { source: 'caller' } };
 
     expect(session.recordCanonicalAction({
       action: 'drug', meta, snapshot, tSec: 0,
-    })).toEqual({ ok: true, activations: [] });
+    })).toEqual({
+      ok: true,
+      activations: [expect.objectContaining({
+        eventId: 'assessment_ready',
+        sequence: 1,
+        source: 'phase_enter',
+      })],
+    });
     meta.dose.amount = 999;
     snapshot.nested.source = 'mutated';
     expect(session.getLiveResult().timeline[0]).toEqual({

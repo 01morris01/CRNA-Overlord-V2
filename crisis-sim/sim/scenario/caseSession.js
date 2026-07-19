@@ -272,13 +272,16 @@ export class CaseSession {
   }
 
   #captureFlowActivations() {
-    return this.#flow.drainActivations();
+    const captured = immutableResult([
+      ...this.#pendingFlowActivations,
+      ...this.#flow.drainActivations(),
+    ], 'case flow activations');
+    this.#pendingFlowActivations = [];
+    return captured;
   }
 
   drainFlowActivations() {
-    const drained = immutableResult(this.#pendingFlowActivations, 'case flow activations');
-    this.#pendingFlowActivations = [];
-    return drained;
+    return this.#captureFlowActivations();
   }
 
   #normalMutationGuard() {
@@ -699,18 +702,21 @@ export class CaseSession {
     if (guard) return guard;
     requireNonemptyString(eventId, 'eventId');
     const safeTime = this.#validatedTime(tSec);
-    this.#flow.onAction({
+    const activatedIds = this.#flow.onAction({
       action: 'instructor_event',
       meta: { eventId },
       snapshot: {},
       tSec: safeTime,
     });
+    if (activatedIds.length === 0) return failure('EVENT_NOT_AVAILABLE');
     const activations = this.#captureFlowActivations();
-    if (activations.length === 0) return failure('EVENT_NOT_AVAILABLE');
+    const instructorActivation = [...activations].reverse().find((activation) => (
+      activation.eventId === eventId && activation.source === 'instructor'
+    ));
     this.#appendTimeline({
       kind: 'case_flow_event_activated',
       eventId,
-      phaseId: activations[0].phaseId,
+      phaseId: instructorActivation.phaseId,
       stage: this.#stage,
     }, safeTime);
     return success({ activations });
@@ -730,6 +736,7 @@ export class CaseSession {
     }, safeTime);
     return success({
       phaseId: result.phaseId,
+      targetPhaseId: result.targetPhaseId,
       activations: this.#captureFlowActivations(),
     });
   }
@@ -747,6 +754,7 @@ export class CaseSession {
     }, safeTime);
     return success({
       phaseId: result.phaseId,
+      targetPhaseId: result.targetPhaseId,
       activations: this.#captureFlowActivations(),
     });
   }

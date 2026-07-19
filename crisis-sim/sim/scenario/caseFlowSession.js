@@ -264,7 +264,19 @@ export class CaseFlowSession {
   }
 
   #clearActiveEvents(tSec, reason) {
+    const eventsWithDeadlines = new Set();
+    for (const deadline of this.#responseDeadlines.values()) {
+      eventsWithDeadlines.add(deadline.eventId);
+      this.#appendHistory({
+        kind: 'response_window_closed',
+        ...deadline,
+        phaseId: this.#currentPhaseId,
+        tSec,
+        reason,
+      });
+    }
     for (const eventId of this.#activeEventIds) {
+      if (eventsWithDeadlines.has(eventId)) continue;
       this.#appendHistory({
         kind: 'response_window_closed',
         eventId,
@@ -278,16 +290,16 @@ export class CaseFlowSession {
   }
 
   #expireResponseWindows(tSec) {
-    for (const [eventId, deadline] of [...this.#responseDeadlines.entries()]) {
+    for (const [activationSequence, deadline] of [...this.#responseDeadlines.entries()]) {
       if (tSec <= deadline.responseDeadlineSec) continue;
-      this.#responseDeadlines.delete(eventId);
-      this.#activeEventIds.delete(eventId);
+      this.#responseDeadlines.delete(activationSequence);
+      const hasRemainingWindow = [...this.#responseDeadlines.values()]
+        .some(({ eventId }) => eventId === deadline.eventId);
+      if (!hasRemainingWindow) this.#activeEventIds.delete(deadline.eventId);
       this.#appendHistory({
         kind: 'response_window_expired',
-        eventId,
+        ...deadline,
         phaseId: this.#currentPhaseId,
-        activatedAtSec: deadline.activatedAtSec,
-        responseDeadlineSec: deadline.responseDeadlineSec,
         tSec,
       });
     }
@@ -317,11 +329,10 @@ export class CaseFlowSession {
     this.#firedEventIds.add(currentEvent.id);
     this.#activeEventIds.delete(currentEvent.id);
     this.#activeEventIds.add(currentEvent.id);
-    if (responseDeadlineSec === null) {
-      this.#responseDeadlines.delete(currentEvent.id);
-    } else {
-      this.#responseDeadlines.set(currentEvent.id, immutableCopy({
+    if (responseDeadlineSec !== null) {
+      this.#responseDeadlines.set(activation.sequence, immutableCopy({
         eventId: currentEvent.id,
+        activationSequence: activation.sequence,
         activatedAtSec: tSec,
         responseDeadlineSec,
       }, 'case response deadline'));
@@ -483,12 +494,13 @@ export class CaseFlowSession {
 
   onStep({ tSec, snapshot = {} } = {}) {
     requirePlainObject(snapshot, 'snapshot');
+    const copiedSnapshot = copyCaseData(snapshot, 'snapshot');
     const safeTime = this.#validatedTime(tSec);
     this.#commitTime(safeTime);
     if (!this.#entered || this.#paused) return immutableCopy([], 'step activations');
     this.#expireResponseWindows(safeTime);
     return immutableCopy(
-      this.#evaluateTimeEvents(safeTime, snapshot),
+      this.#evaluateTimeEvents(safeTime, copiedSnapshot),
       'step activations',
     );
   }
@@ -498,6 +510,7 @@ export class CaseFlowSession {
     requirePlainObject(meta, 'meta');
     requirePlainObject(snapshot, 'snapshot');
     const copiedMeta = copyCaseData(meta, 'action meta');
+    copyCaseData(snapshot, 'action snapshot');
     if (action === INSTRUCTOR_EVENT_ACTION) {
       requireNonemptyString(copiedMeta.eventId, 'meta.eventId');
     }
@@ -586,13 +599,21 @@ export class CaseFlowSession {
     const nextPhaseId = this.#nextPhaseId();
     if (nextPhaseId === null) return failure('NO_NEXT_PHASE');
     this.#commitTime(safeTime);
-    const activations = this.#enterPhase(nextPhaseId, safeTime, 'instructor_advance');
+    this.#expireResponseWindows(safeTime);
+    const fromPhaseId = this.#currentPhaseId;
     this.#appendHistory({
       kind: 'phase_advanced',
+      fromPhaseId,
+      toPhaseId: nextPhaseId,
       phaseId: nextPhaseId,
       tSec: safeTime,
     });
-    return success({ phaseId: nextPhaseId, activations });
+    const activations = this.#enterPhase(nextPhaseId, safeTime, 'instructor_advance');
+    return success({
+      phaseId: this.#currentPhaseId,
+      targetPhaseId: nextPhaseId,
+      activations,
+    });
   }
 
   activateBranch({ branchId, tSec } = {}) {
@@ -607,8 +628,8 @@ export class CaseFlowSession {
     }
     if (branch.fromPhaseId !== this.#currentPhaseId) return failure('BRANCH_NOT_AVAILABLE');
     this.#commitTime(safeTime);
+    this.#expireResponseWindows(safeTime);
     const fromPhaseId = this.#currentPhaseId;
-    const activations = this.#enterPhase(branch.toPhaseId, safeTime, `branch:${branch.id}`);
     this.#appendHistory({
       kind: 'branch_activated',
       branchId: branch.id,
@@ -617,7 +638,12 @@ export class CaseFlowSession {
       phaseId: branch.toPhaseId,
       tSec: safeTime,
     });
-    return success({ phaseId: branch.toPhaseId, activations });
+    const activations = this.#enterPhase(branch.toPhaseId, safeTime, `branch:${branch.id}`);
+    return success({
+      phaseId: this.#currentPhaseId,
+      targetPhaseId: branch.toPhaseId,
+      activations,
+    });
   }
 
   setPaused({ paused, tSec } = {}) {
@@ -631,6 +657,7 @@ export class CaseFlowSession {
     }
     this.#commitTime(safeTime);
     if (paused) {
+      this.#expireResponseWindows(safeTime);
       this.#paused = true;
       this.#pauseStartedAtSec = safeTime;
       this.#appendHistory({
@@ -638,8 +665,8 @@ export class CaseFlowSession {
       });
     } else {
       const pausedDurationSec = safeTime - this.#pauseStartedAtSec;
-      for (const [eventId, deadline] of this.#responseDeadlines.entries()) {
-        this.#responseDeadlines.set(eventId, immutableCopy({
+      for (const [activationSequence, deadline] of this.#responseDeadlines.entries()) {
+        this.#responseDeadlines.set(activationSequence, immutableCopy({
           ...deadline,
           responseDeadlineSec: normalizeFixedStepTime(
             deadline.responseDeadlineSec + pausedDurationSec,
@@ -664,9 +691,14 @@ export class CaseFlowSession {
   }
 
   getState() {
-    const availableBranchIds = this.#eventFlow.branches
-      .filter(({ fromPhaseId }) => fromPhaseId === this.#currentPhaseId)
-      .map(({ id }) => id);
+    const branchActivationPermitted = this.#entered
+      && !this.#paused
+      && this.#currentPhase().allowedInstructorControls.includes('activate_branch');
+    const availableBranchIds = branchActivationPermitted
+      ? this.#eventFlow.branches
+        .filter(({ fromPhaseId }) => fromPhaseId === this.#currentPhaseId)
+        .map(({ id }) => id)
+      : [];
     const responseDeadlines = [...this.#responseDeadlines.values()];
     return immutableCopy({
       currentPhaseId: this.#currentPhaseId,

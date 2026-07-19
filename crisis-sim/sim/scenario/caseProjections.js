@@ -839,7 +839,17 @@ function copyAndValidateFlowState(flowState, references) {
       throw new TypeError(`flowState.availableBranchIds branch ${branchId} is not from current phase ${phase.id}`);
     }
   }
+  if (copied.availableBranchIds.length > 0 && copied.paused) {
+    throw new TypeError('flowState.availableBranchIds must be empty while flowState.paused is true');
+  }
+  if (copied.availableBranchIds.length > 0
+    && !phase.allowedInstructorControls.includes('activate_branch')) {
+    throw new TypeError(
+      'flowState.availableBranchIds requires the current phase activate_branch control',
+    );
+  }
   requireOrdinaryArray(copied.responseDeadlines, 'flowState.responseDeadlines');
+  const deadlineSequences = new Set();
   copied.responseDeadlines.forEach((deadline, index) => {
     const label = `flowState.responseDeadlines[${index}]`;
     requirePlainObject(deadline, label);
@@ -848,12 +858,46 @@ function copyAndValidateFlowState(flowState, references) {
     if (event.phaseId !== phase.id) {
       throw new TypeError(`${label}.eventId does not belong to current phase ${phase.id}`);
     }
+    if (!copied.activeEventIds.includes(deadline.eventId)) {
+      throw new TypeError(`${label}.eventId must also appear in flowState.activeEventIds`);
+    }
+    if (!Number.isSafeInteger(deadline.activationSequence)
+      || deadline.activationSequence < 1) {
+      throw new TypeError(`${label}.activationSequence must be a positive safe integer`);
+    }
+    if (deadlineSequences.has(deadline.activationSequence)) {
+      throw new TypeError(
+        `flowState.responseDeadlines contains duplicate activationSequence ${deadline.activationSequence}`,
+      );
+    }
+    deadlineSequences.add(deadline.activationSequence);
+    requireTimestamp(deadline.activatedAtSec, `${label}.activatedAtSec`);
+    requireTimestamp(deadline.responseDeadlineSec, `${label}.responseDeadlineSec`);
+    if (deadline.activatedAtSec > copied.currentTimeSec) {
+      throw new TypeError(`${label}.activatedAtSec must not exceed flowState.currentTimeSec`);
+    }
+    if (deadline.responseDeadlineSec < deadline.activatedAtSec) {
+      throw new TypeError(`${label}.responseDeadlineSec must not be before activatedAtSec`);
+    }
   });
   requireOrdinaryArray(copied.history, 'flowState.history');
   copied.history.forEach((record, index) => {
     const label = `flowState.history[${index}]`;
     requirePlainObject(record, label);
     validateOptionalRecordReferences(record, label, references);
+  });
+  copied.responseDeadlines.forEach((deadline, index) => {
+    const hasActivationHistory = copied.history.some((record) => (
+      record.kind === 'event_activated'
+      && record.eventId === deadline.eventId
+      && record.sequence === deadline.activationSequence
+      && record.tSec === deadline.activatedAtSec
+    ));
+    if (!hasActivationHistory) {
+      throw new TypeError(
+        `flowState.responseDeadlines[${index}] must reference matching activation history`,
+      );
+    }
   });
   copied.currentPhaseTitle = phase.title;
   return copied;
