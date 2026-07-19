@@ -29,7 +29,7 @@ Do not broaden this plan to free-text AI conversation, server authentication, re
 - `crisis-sim/sim/scenario/casePhysiologyInputs.js` — validate and apply only allowlisted modeled inputs emitted by case events.
 - `crisis-sim/sim/scenario/caseDebrief.js` — validate and append finalized case evidence to the existing `SimulationResult`.
 
-### New UI module
+### New UI modules
 
 - `ui/liveCaseModel.js` — pure formatting, escaping, and accessible markup for the learner workspace and instructor event-feedback panel.
 - `ui/liveCaseView.js` — case-specific DOM mounting, event binding, form reads, and projection rendering through public runner APIs.
@@ -57,18 +57,22 @@ Do not broaden this plan to free-text AI conversation, server authentication, re
 
 - `crisis-sim/ui/simRunner.js` — atomic optional-case loading, public case APIs, one canonical action bridge, fixed-step flow processing, allowlisted effects, projections, and debrief composition.
 - `crisis-sim/sim/scenario/scenarioDebrief.js` — optional finalized case-result argument.
+- `crisis-sim/sim/scenario/scenarioLoader.js` — inert additive `caseExperience` normalization (Task 1).
 - `ui/liveSimModel.js` — combined scenario registry and case formatting helpers.
 - `ui/liveSimView.js` — case asset loading, learner workspace, instructor feedback controls, lifecycle synchronization, and unified finalization.
 - `ui/liveSimTransport.js` — explicit learner-monitor projection.
 - `assets/css/live-sim.css` — responsive case workspace and instructor panel styling.
 - `crisis-sim/test/live-transport.test.js` — deny-list and allowlist evidence.
+- `crisis-sim/test/live-sim-display.test.js` — learner-display allowlist evidence (Task 5).
 - `crisis-sim/test/rubric-ui.test.js` — existing rubric-console coexistence.
+- `crisis-sim/test/app-integration.test.js` — case registry and live-console integration (Tasks 7 and 10).
 - `crisis-sim/test/live-runner.test.js` — no-case inertness and load/reset compatibility.
 - `crisis-sim/test/snapshot-contract.mjs` — assert case answer data is absent, without adding snapshot fields.
 - `crisis-sim/test/live-case-smoke.mjs` — complete assessment-to-emergence path.
 - `crisis-sim/test/pwa-contract.test.js` — new modules/assets and cache version.
 - `sw.js` — PWA cache version and new local assets.
 - `docs/live-sim-integration.md` — operator workflow and static-hosting confidentiality limitation.
+- `FINAL_STATUS.md` — commit and test evidence, recorded only after verification succeeds (Task 10).
 
 ## Stable public API names
 
