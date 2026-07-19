@@ -13,6 +13,8 @@ import {
   buildDebrief as buildScenarioDebrief,
   buildLidocaineAttribution,
 } from '../sim/scenario/scenarioDebrief.js';
+import { CaseSession } from '../sim/scenario/caseSession.js';
+import { applyCasePhysiologyInput } from '../sim/scenario/casePhysiologyInputs.js';
 
 const SEED = 12345;
 const MAX_ENGINE_SEED = 0x7fffffff;
@@ -170,22 +172,32 @@ function captureScenarioConstructionEvidence(scenarioManager) {
   });
 }
 
-function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
+function prepareScenarioInputs({
+  scenario,
+  rubric,
+  requireRubric = false,
+  requireCase = false,
+} = {}) {
   const scenarioCopy = copyJsonInput(scenario, 'scenario');
-  const rubricCopy = copyJsonInput(rubric, 'rubric');
+  const rubricCopy = requireRubric || rubric !== null && rubric !== undefined
+    ? copyJsonInput(rubric, 'rubric')
+    : null;
   if (!isPlainObject(scenarioCopy)) throw new TypeError('scenario must be a plain object');
-  if (!isPlainObject(rubricCopy)) throw new TypeError('rubric must be a plain object');
+  if (rubricCopy !== null && !isPlainObject(rubricCopy)) {
+    throw new TypeError('rubric must be a plain object');
+  }
 
-  // Scenario loading is stricter than legacy normalize defaults: a rubric
-  // case must explicitly declare its reproducibility and scoring contract.
+  // Explicit loaders are stricter than legacy normalize defaults: every
+  // teaching run must declare the reproducibility and physiology contract.
   if (!Number.isSafeInteger(scenarioCopy.seed)
     || scenarioCopy.seed < 0 || scenarioCopy.seed > MAX_ENGINE_SEED) {
     throw new RangeError('scenario.seed must be an explicitly declared nonnegative signed engine seed');
   }
-  if (typeof scenarioCopy.rubricId !== 'string' || scenarioCopy.rubricId.length === 0) {
+  if (rubricCopy !== null
+    && (typeof scenarioCopy.rubricId !== 'string' || scenarioCopy.rubricId.length === 0)) {
     throw new TypeError('scenario.rubricId must be an explicitly declared nonempty string');
   }
-  if (!isPlainObject(scenarioCopy.rubricCriteria)) {
+  if (rubricCopy !== null && !isPlainObject(scenarioCopy.rubricCriteria)) {
     throw new TypeError('scenario.rubricCriteria must be an explicitly declared plain object');
   }
   if (!isPlainObject(scenarioCopy.patientProfile)
@@ -262,7 +274,9 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
   }
 
   const scenarioForReset = copyJsonInput(scenarioCopy, 'scenario reset definition');
-  const rubricForReset = copyJsonInput(rubricCopy, 'rubric reset definition');
+  const rubricForReset = rubricCopy === null
+    ? null
+    : copyJsonInput(rubricCopy, 'rubric reset definition');
   const definition = normalize(scenarioCopy);
   if (typeof definition.id !== 'string' || definition.id.trim().length === 0) {
     throw new TypeError('scenario.id must be a nonempty string');
@@ -274,10 +288,12 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     || definition.seed < 0 || definition.seed > MAX_ENGINE_SEED) {
     throw new RangeError('scenario.seed must be a nonnegative signed engine seed');
   }
-  if (typeof definition.rubricId !== 'string' || definition.rubricId.length === 0) {
+  if (rubricCopy !== null
+    && (typeof definition.rubricId !== 'string' || definition.rubricId.length === 0)) {
     throw new TypeError('scenario.rubricId must be a nonempty string');
   }
-  if (typeof rubricCopy.id !== 'string' || definition.rubricId !== rubricCopy.id) {
+  if (rubricCopy !== null
+    && (typeof rubricCopy.id !== 'string' || definition.rubricId !== rubricCopy.id)) {
     throw new RangeError('scenario.rubricId and rubric.id mismatch');
   }
   if (!isPlainObject(definition.patientProfile)
@@ -287,8 +303,11 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     || !isPlainObject(definition.debrief)) {
     throw new TypeError('scenario must define patientProfile, startingSetup, events, airwayPlan, and debrief');
   }
-  if (!isPlainObject(definition.rubricCriteria)) {
+  if (rubricCopy !== null && !isPlainObject(definition.rubricCriteria)) {
     throw new TypeError('scenario.rubricCriteria must be a plain object');
+  }
+  if (requireCase && definition.caseExperience === null) {
+    throw new TypeError('scenario must define a complete case experience');
   }
 
   let administrativeSetup = null;
@@ -321,19 +340,31 @@ function prepareRubricScenarioInputs({ scenario, rubric } = {}) {
     };
   }
 
-  // Construction validates the literal rubric, all named criteria, and seed
-  // before the active runner is stopped or any of its state is replaced.
-  const validatedSession = new RubricScoringSession({
-    rubric: rubricCopy,
-    criteria: definition.rubricCriteria,
-    seed: definition.seed,
-  });
+  // Construction validates the optional literal rubric, all named criteria,
+  // and seed before the active runner is stopped or any state is replaced.
+  const validatedRubric = rubricCopy === null
+    ? null
+    : new RubricScoringSession({
+      rubric: rubricCopy,
+      criteria: definition.rubricCriteria,
+      seed: definition.seed,
+    }).rubric;
   return {
     scenario: definition,
-    rubric: validatedSession.rubric,
+    rubric: validatedRubric,
     administrativeSetup,
-    resetInputs: { scenario: scenarioForReset, rubric: rubricForReset },
+    resetInputs: rubricForReset === null
+      ? { scenario: scenarioForReset }
+      : { scenario: scenarioForReset, rubric: rubricForReset },
   };
+}
+
+function prepareRubricScenarioInputs(options) {
+  return prepareScenarioInputs({ ...options, requireRubric: true });
+}
+
+function prepareCaseScenarioInputs({ scenario, rubric = null } = {}) {
+  return prepareScenarioInputs({ scenario, rubric, requireCase: true });
 }
 
 function liveScenarioDefinition(config) {
@@ -410,9 +441,15 @@ export class SimRunner {
     this._interval = 0;
     this._procedureUnsubscribe = null;
     this.rubricSession = null;
+    this.caseSession = null;
     this.activeSeed = SEED;
     this._activeRubricScenario = null;
     this._loadedRubricScenario = null;
+    this._activeCaseScenario = null;
+    this._loadedCaseScenario = null;
+    this._caseClockTick = 0;
+    this._caseLiveEpochSec = null;
+    this._appliedCaseActivationSequences = new Set();
     this._rafLoop = this._rafLoop.bind(this);
     this._tick = this._tick.bind(this);
     this.build();
@@ -454,14 +491,20 @@ export class SimRunner {
     this.tofCheckHistory = [];
     this._instructorNmbTarget = null;
     this.rubricSession = null;
+    this.caseSession = null;
     this.activeSeed = seed;
     this._activeRubricScenario = null;
+    this._activeCaseScenario = null;
+    this._caseClockTick = 0;
+    this._caseLiveEpochSec = null;
+    this._appliedCaseActivationSequences = new Set();
   }
 
   applyConfig(patch) {
     const wasRunning = this.running;
     this._stopRealtime();
     this._loadedRubricScenario = null;
+    this._loadedCaseScenario = null;
     this.#savedLiveConfig = cloneRunnerConfig({ ...this.#savedLiveConfig, ...patch });
     this.config = cloneRunnerConfig(this.#savedLiveConfig);
     this.build();
@@ -503,6 +546,11 @@ export class SimRunner {
   }
 
   reset() {
+    if (this._loadedCaseScenario !== null) {
+      const saved = copyJsonInput(this._loadedCaseScenario, 'loaded case scenario');
+      this.loadCaseScenario(saved);
+      return this.snapshot();
+    }
     if (this._loadedRubricScenario !== null) {
       const saved = copyJsonInput(this._loadedRubricScenario, 'loaded rubric scenario');
       this.loadRubricScenario(saved);
@@ -527,9 +575,24 @@ export class SimRunner {
     return copyJsonInput(result, 'rubric scenario load result');
   }
 
+  loadCaseScenario({ scenario, rubric = null } = {}) {
+    const prepared = prepareCaseScenarioInputs({ scenario, rubric });
+    const candidate = this._createCaseScenarioCandidate(prepared);
+    const result = candidate._caseScenarioLoadResult;
+    this._adoptRubricScenarioCandidate(candidate);
+    this.emit();
+    return copyJsonInput(result, 'case scenario load result');
+  }
+
   _createRubricScenarioCandidate(prepared) {
     const candidate = new SimRunner();
-    candidate.#constructRubricScenarioCandidate(prepared);
+    candidate.#constructScenarioCandidate(prepared, { withCase: false });
+    return candidate;
+  }
+
+  _createCaseScenarioCandidate(prepared) {
+    const candidate = new SimRunner();
+    candidate.#constructScenarioCandidate(prepared, { withCase: true });
     return candidate;
   }
 
@@ -569,7 +632,7 @@ export class SimRunner {
     }
   }
 
-  #constructRubricScenarioCandidate(prepared) {
+  #constructScenarioCandidate(prepared, { withCase }) {
     const {
       scenario, rubric, administrativeSetup, resetInputs,
     } = prepared;
@@ -620,21 +683,39 @@ export class SimRunner {
 
     this.log = [];
     this.tofCheckHistory = [];
-    this._activeRubricScenario = {
-      id: scenario.id,
-      title: scenario.title,
-      rubricId: scenario.rubricId,
-      seed: scenario.seed,
-    };
-    this.attachRubricSession({ rubric, criteria: scenario.rubricCriteria });
-    this._loadedRubricScenario = resetInputs;
-    this._rubricScenarioLoadResult = {
+    if (rubric !== null) {
+      this._activeRubricScenario = {
+        id: scenario.id,
+        title: scenario.title,
+        rubricId: scenario.rubricId,
+        seed: scenario.seed,
+      };
+      this.attachRubricSession({ rubric, criteria: scenario.rubricCriteria });
+    }
+    const loadResult = {
       ok: true,
       scenarioId: scenario.id,
-      rubricId: scenario.rubricId,
+      rubricId: rubric === null ? null : scenario.rubricId,
       seed: scenario.seed,
       initialSnapshot: this.compactRubricSnapshot(0),
     };
+    if (withCase) {
+      this.caseSession = new CaseSession({
+        definition: scenario.caseExperience,
+        seed: scenario.seed,
+      });
+      this._activeCaseScenario = {
+        id: scenario.id,
+        title: scenario.title,
+        seed: scenario.seed,
+      };
+      this._loadedCaseScenario = resetInputs;
+      this._caseScenarioLoadResult = loadResult;
+      this.applyCaseActivations(this.caseSession.drainFlowActivations());
+    } else {
+      this._loadedRubricScenario = resetInputs;
+      this._rubricScenarioLoadResult = loadResult;
+    }
   }
 
   _adoptRubricScenarioCandidate(candidate) {
@@ -651,13 +732,208 @@ export class SimRunner {
     this.tofCheckHistory = candidate.tofCheckHistory;
     this._instructorNmbTarget = candidate._instructorNmbTarget;
     this.rubricSession = candidate.rubricSession;
+    this.caseSession = candidate.caseSession;
     this.activeSeed = candidate.activeSeed;
     this._activeRubricScenario = candidate._activeRubricScenario;
     this._loadedRubricScenario = candidate._loadedRubricScenario;
+    this._activeCaseScenario = candidate._activeCaseScenario;
+    this._loadedCaseScenario = candidate._loadedCaseScenario;
+    this._caseClockTick = candidate._caseClockTick;
+    this._caseLiveEpochSec = candidate._caseLiveEpochSec;
+    this._appliedCaseActivationSequences = new Set(candidate._appliedCaseActivationSequences);
     this.config = cloneRunnerConfig(candidate.config);
     this._procedureUnsubscribe = this.a.addEventListener(
       (event) => this.logProcedureEvent(event),
     );
+  }
+
+  _nextCaseTimestamp({ live = false, engineTimeSec = null } = {}) {
+    if (live) {
+      if (this._caseLiveEpochSec === null) {
+        throw new Error('Case live epoch is not initialized');
+      }
+      const rawTime = engineTimeSec === null
+        ? this.core.tickCount / FIXED_TICKS_PER_SECOND
+        : engineTimeSec;
+      if (typeof rawTime !== 'number' || !Number.isFinite(rawTime) || rawTime < 0) {
+        throw new TypeError('engineTimeSec must be a finite nonnegative number');
+      }
+      const engineTick = Math.round(rawTime * FIXED_TICKS_PER_SECOND);
+      if (!Number.isSafeInteger(engineTick)) {
+        throw new RangeError('engineTimeSec exceeds the safe fixed-step range');
+      }
+      return (Math.round(this._caseLiveEpochSec * FIXED_TICKS_PER_SECOND) + engineTick)
+        / FIXED_TICKS_PER_SECOND;
+    }
+    this._caseClockTick += 1;
+    if (!Number.isSafeInteger(this._caseClockTick)) {
+      throw new RangeError('case ordering clock exceeds the safe fixed-step range');
+    }
+    return this._caseClockTick / FIXED_TICKS_PER_SECOND;
+  }
+
+  _copyCaseMutationResult(result, label = 'case mutation result') {
+    const copied = copyJsonInput(result, label);
+    if (isPlainObject(copied) && Object.hasOwn(copied, 'activations')) {
+      delete copied.activations;
+    }
+    return copied;
+  }
+
+  _caseUnavailableResult() {
+    return { ok: false, reason: 'NO_CASE_SESSION' };
+  }
+
+  _runCaseMutation(invoke, { enterLiveOnSuccess = false } = {}) {
+    if (this.caseSession === null) return this._caseUnavailableResult();
+    const usingLiveClock = this._caseLiveEpochSec !== null;
+    const priorCaseClockTick = this._caseClockTick;
+    const tSec = this._nextCaseTimestamp({ live: usingLiveClock });
+    let result;
+    try {
+      result = invoke(tSec);
+    } catch (error) {
+      this._caseClockTick = priorCaseClockTick;
+      throw error;
+    }
+    if (result?.ok !== true) {
+      this._caseClockTick = priorCaseClockTick;
+      return this._copyCaseMutationResult(result);
+    }
+    if (enterLiveOnSuccess && result.stage === 'live_simulation'
+      && this._caseLiveEpochSec === null) {
+      this._caseLiveEpochSec = tSec;
+    }
+    this.applyCaseActivations(result.activations ?? []);
+    this.emit();
+    return this._copyCaseMutationResult(result);
+  }
+
+  getLearnerCaseContext() {
+    return this.caseSession?.getLearnerContext() ?? null;
+  }
+
+  getInstructorCaseContext() {
+    return this.caseSession?.getInstructorContext() ?? null;
+  }
+
+  performAssessmentAction({ actionId } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.recordAssessmentAction({ actionId, tSec }),
+    );
+  }
+
+  advanceCaseStage({ stage } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.advanceStage({ stage, tSec }),
+    );
+  }
+
+  submitCaseFindings({ findingIds, notes = '' } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.submitFindings({ findingIds, notes, tSec }),
+    );
+  }
+
+  submitCasePlan({ selections, rationale = '' } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.submitPlan({ selections, rationale, tSec }),
+      { enterLiveOnSuccess: true },
+    );
+  }
+
+  setInstructorCaseObservation({ considerationId, status, note = '' } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.setInstructorObservation({
+        considerationId, status, note, tSec,
+      }),
+    );
+  }
+
+  setCaseFeedbackReveal({ considerationId, reveal } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.setFeedbackReveal({ considerationId, reveal, tSec }),
+    );
+  }
+
+  advanceCasePhase() {
+    return this._runCaseMutation((tSec) => this.caseSession.advancePhase({ tSec }));
+  }
+
+  activateCaseBranch({ branchId } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.activateBranch({ branchId, tSec }),
+    );
+  }
+
+  pauseCase() {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.setPaused({ paused: true, tSec }),
+    );
+  }
+
+  resumeCase() {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.setPaused({ paused: false, tSec }),
+    );
+  }
+
+  finalizeCaseDebrief() {
+    return this._runCaseMutation((tSec) => this.caseSession.finalize({ tSec }));
+  }
+
+  beginCaseDebriefRevision() {
+    return this._runCaseMutation((tSec) => this.caseSession.beginRevision({ tSec }));
+  }
+
+  applyCaseActivations(activations = []) {
+    if (this.caseSession === null) return [];
+    if (!Array.isArray(activations)) throw new TypeError('case activations must be an array');
+    const applied = [];
+    for (const activation of activations) {
+      if (!Number.isSafeInteger(activation?.sequence) || activation.sequence <= 0) {
+        throw new TypeError('case activation sequence must be a positive safe integer');
+      }
+      if (this._appliedCaseActivationSequences.has(activation.sequence)) continue;
+      let appliedEffect = null;
+      if (activation.effect !== null) {
+        appliedEffect = applyCasePhysiologyInput({
+          input: activation.effect,
+          patient: this.p,
+          lidocaineSystem: this.l,
+          ventilator: this.v,
+          scenarioManager: this.s,
+        });
+      }
+      this._appliedCaseActivationSequences.add(activation.sequence);
+      const entry = {
+        t: activation.tSec,
+        kind: 'Case event',
+        detail: activation.eventId,
+        meta: {
+          source: 'scenario',
+          eventId: activation.eventId,
+          phaseId: activation.phaseId,
+          activationSequence: activation.sequence,
+          effect: appliedEffect,
+        },
+      };
+      this.log.push(entry);
+      if (this.onEvent) this.onEvent(entry);
+      applied.push(copyJsonInput(entry, 'applied case activation'));
+    }
+    return applied;
+  }
+
+  processCaseFlowAfterStep() {
+    if (this.caseSession === null || this._caseLiveEpochSec === null) return null;
+    const tSec = this._nextCaseTimestamp({ live: true });
+    const result = this.caseSession.processFlowStep({
+      snapshot: this.compactRubricSnapshot(tSec),
+      tSec,
+    });
+    if (result.ok === true) this.applyCaseActivations(result.activations ?? []);
+    return result;
   }
 
   setSpeed(mult) { this.speed = mult; }
@@ -683,8 +959,7 @@ export class SimRunner {
     const step = this.core.fixedStep;
     let guard = 0;
     while (this._accum >= step && guard < 8000) {
-      this.core.stepOnce(step);
-      this.sampleRubricTraceAfterStep();
+      this._stepOnce(step);
       this._accum -= step;
       guard++;
     }
@@ -693,6 +968,12 @@ export class SimRunner {
   }
 
   emit() { if (this.onTick) this.onTick(this.snapshot()); }
+
+  _stepOnce(step) {
+    this.core.stepOnce(step);
+    this.processCaseFlowAfterStep();
+    this.sampleRubricTraceAfterStep();
+  }
 
   stepFor(seconds) {
     if (!Number.isFinite(seconds) || seconds < 0) {
@@ -710,8 +991,7 @@ export class SimRunner {
       throw new RangeError(`seconds must be fixed-step aligned (${ticksPerSecond} ticks/second)`);
     }
     for (let index = 0; index < steps; index += 1) {
-      this.core.stepOnce(step);
-      this.sampleRubricTraceAfterStep();
+      this._stepOnce(step);
     }
     this.simTime = this.core.simTime;
     this.emit();
@@ -865,6 +1145,36 @@ export class SimRunner {
     });
   }
 
+  recordCanonicalAction(action, meta = {}, tSec = this.a?.timeSec ?? this.simTime) {
+    const rubric = this.recordRubricAction(action, meta, tSec);
+    if (this.caseSession === null) return { rubric, caseResult: null };
+
+    const usingLiveClock = this._caseLiveEpochSec !== null;
+    const priorCaseClockTick = this._caseClockTick;
+    const caseTimeSec = this._nextCaseTimestamp({
+      live: usingLiveClock,
+      engineTimeSec: usingLiveClock ? tSec : null,
+    });
+    let caseResult;
+    try {
+      caseResult = this.caseSession.recordCanonicalAction({
+        action,
+        meta,
+        snapshot: this.compactRubricSnapshot(caseTimeSec),
+        tSec: caseTimeSec,
+      });
+    } catch (error) {
+      this._caseClockTick = priorCaseClockTick;
+      throw error;
+    }
+    if (caseResult.ok !== true) {
+      this._caseClockTick = priorCaseClockTick;
+      return { rubric, caseResult };
+    }
+    this.applyCaseActivations(caseResult.activations ?? []);
+    return { rubric, caseResult };
+  }
+
   sampleRubricTraceAfterStep() {
     if (!this.rubricSession || this.isRubricFinalized() || this.core.tickCount % 50 !== 0) {
       return null;
@@ -989,7 +1299,9 @@ export class SimRunner {
   setBaselineLive(key, value) {
     if (this.p) this.p[key] = value;
     this.config[key] = value;
-    if (this._loadedRubricScenario === null) this.#savedLiveConfig[key] = value;
+    if (this._loadedRubricScenario === null && this._loadedCaseScenario === null) {
+      this.#savedLiveConfig[key] = value;
+    }
   }
 
   // ── control surface ────────────────────────────────────────────────
@@ -1170,7 +1482,7 @@ export class SimRunner {
   setMachine(patch) {
     Object.assign(this.v, patch);
     if ('mode' in patch) this.v.setMode(patch.mode);
-    this.recordRubricAction('machine_settings_changed', { patch: { ...patch } });
+    this.recordCanonicalAction('machine_settings_changed', { patch: { ...patch } });
   }
 
   setVolatile({ agent, dialPercent } = {}) {
@@ -1348,12 +1660,12 @@ export class SimRunner {
 
   logEvent(kind, detail, meta) {
     const entry = { t: this.simTime, kind, detail, meta: meta || null };
-    if (typeof meta?.action === 'string') {
-      const { action, ...rubricMeta } = meta;
-      this.recordRubricAction(action, rubricMeta);
-    }
     this.log.push(entry);
     if (this.onEvent) this.onEvent(entry);
+    if (meta?.source !== 'scenario' && typeof meta?.action === 'string') {
+      const { action, ...canonicalMeta } = meta;
+      this.recordCanonicalAction(action, canonicalMeta);
+    }
   }
 
   finishProcedureAction(result, startWhenReady = result.ok) {
@@ -1370,9 +1682,9 @@ export class SimRunner {
       detail: event.type,
       meta: { action: event.type, ...event.meta },
     };
-    this.recordRubricAction(event.type, { ...event.meta }, event.tSec);
     this.log.push(entry);
     if (this.onEvent) this.onEvent(entry);
+    this.recordCanonicalAction(event.type, { ...event.meta }, event.tSec);
   }
 }
 

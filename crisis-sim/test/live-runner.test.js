@@ -11,6 +11,52 @@ function advance(runner, seconds) {
 }
 
 describe('live SimRunner integration', () => {
+  it('preserves the frozen no-case action fingerprint', () => {
+    const runner = new SimRunner();
+    runner.giveBolus('Propofol', 140);
+    runner.pause();
+    runner.setAirwayDevice('intubated');
+    runner.setMachine({
+      mode: VentMode.VCV,
+      setFiO2: 1,
+      setTidalVolume: 500,
+      setRespiratoryRate: 12,
+      setPeep: 5,
+    });
+    runner.stepFor(1);
+    const snapshot = runner.snapshot();
+
+    expect({
+      coreTick: runner.core.tickCount,
+      simTime: runner.simTime,
+      ppfA1: runner.d._ppfA1,
+      hr: snapshot.hr,
+      sbp: snapshot.sbp,
+      dbp: snapshot.dbp,
+      spo2: snapshot.spo2,
+      rr: snapshot.rr,
+      etco2: snapshot.etco2,
+      airway: snapshot.airwayDevice,
+      mode: snapshot.ventMode,
+      log: runner.log.map((entry) => entry.meta?.action),
+    }).toEqual({
+      coreTick: 50,
+      simTime: 0.9999999776482582,
+      ppfA1: 138.5626220703125,
+      hr: 71.99114227294922,
+      sbp: 119.92874145507812,
+      dbp: 79.96990966796875,
+      spo2: 97.57184600830078,
+      rr: 12,
+      etco2: 38.058746337890625,
+      airway: 'intubated',
+      mode: VentMode.VCV,
+      log: ['drug'],
+    });
+    expect(runner.getLearnerCaseContext()).toBeNull();
+    expect(runner.getInstructorCaseContext()).toBeNull();
+  });
+
   it('seals finalized rubric evidence against later stepping and action projection', () => {
     const runner = new SimRunner();
     runner.loadRubricScenario({ scenario: emergenceScenario, rubric: emergenceRubric });

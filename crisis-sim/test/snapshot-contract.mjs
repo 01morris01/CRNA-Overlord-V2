@@ -91,6 +91,12 @@ assert.ok(
 );
 
 assert.equal(Object.keys(snapshot).length, requiredKeys.length, 'snapshot key count changed');
+for (const forbidden of [
+  'caseExperience', 'caseContext', 'learnerChart', 'assessment', 'planRequirements',
+  'instructorGuide', 'considerations', 'expectedResponse', 'scoringGuidance',
+]) {
+  assert.equal(Object.hasOwn(snapshot, forbidden), false, `snapshot leaked ${forbidden}`);
+}
 
 runner.administerRegionalLidocaine({
   route: 'peripheral', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false,
