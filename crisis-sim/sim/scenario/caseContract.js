@@ -406,6 +406,14 @@ function validateAssessment(assessment) {
       finding.instructorOnlyUntilDiscovered,
       `${label}.instructorOnlyUntilDiscovered`,
     );
+    // A finding cannot be both on the chart from the start and hidden until
+    // discovered. Rejecting the contradiction stops an author from believing
+    // instructorOnlyUntilDiscovered conceals an initiallyVisible finding.
+    if (finding.initiallyVisible && finding.instructorOnlyUntilDiscovered) {
+      throw new TypeError(
+        `${label} cannot be both initiallyVisible and instructorOnlyUntilDiscovered`,
+      );
+    }
   });
 
   assessment.scoringRules.forEach((rule, index) => {

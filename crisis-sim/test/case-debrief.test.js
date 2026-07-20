@@ -317,12 +317,17 @@ describe('buildCaseDebrief rejection rules', () => {
     const { definition, caseSessionResult } = makeFinalizedCase();
     const timeline = caseSessionResult.timeline.map((entry) => ({ ...entry }));
     expect(timeline.length).toBeGreaterThan(1);
-    timeline[timeline.length - 1] = { ...timeline.at(-1), tSec: -1 };
+    // Use a non-negative tSec below its predecessor so the chronology branch
+    // fires, not the min:0 finite-number guard. (tSec:-1 would trip the latter
+    // and pass this test without exercising the ordering check at all.)
+    const priorTime = timeline[timeline.length - 2].tSec;
+    expect(priorTime).toBeGreaterThan(0);
+    timeline[timeline.length - 1] = { ...timeline.at(-1), tSec: 0 };
     expect(() => buildCaseDebrief({
       baseResult: makeBaseResult(),
       caseSessionResult: { ...caseSessionResult, timeline },
       caseDefinition: definition,
-    })).toThrow(/chronological|tSec/i);
+    })).toThrow(/chronological/i);
   });
 
   test('rejects an unknown released consideration id', () => {

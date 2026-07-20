@@ -1644,6 +1644,12 @@ function finalizeLiveRubric() {
   }
 }
 
+// Instructor-console action. The exported JSON is the COMPLETE instructor
+// debrief record: like rubricResult, caseResult intentionally names missed
+// findings and scoring detail because the instructor debrief teaches from them.
+// The student-facing artifact is renderPrintableCase, which scrubs that content
+// (proven in test/case-print.test.js and test/case-confidentiality-regressions.js).
+// These are two deliberate tiers; do not route this export to a learner surface.
 function downloadDebrief() {
   const liveRunner = ensureRunner();
   liveRunner.pause();

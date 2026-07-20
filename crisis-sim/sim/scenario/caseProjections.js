@@ -942,7 +942,12 @@ function createLearnerActions(definition, sessionState) {
 function createLearnerFindings(definition, sessionState) {
   const discoveredIds = new Set(sessionState.discoveredFindingIds);
   return definition.assessment.findings
-    .filter((finding) => finding.initiallyVisible || discoveredIds.has(finding.id))
+    // Honor instructorOnlyUntilDiscovered as a hard gate: a finding reaches the
+    // learner only once discovered, or if it is chart-visible AND not marked
+    // instructor-only. The contract already rejects the contradictory pair;
+    // this is defense in depth if a definition reaches here unvalidated.
+    .filter((finding) => discoveredIds.has(finding.id)
+      || (finding.initiallyVisible && !finding.instructorOnlyUntilDiscovered))
     .map((finding) => {
       const discovered = discoveredIds.has(finding.id);
       const projected = {

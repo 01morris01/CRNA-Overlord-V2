@@ -247,16 +247,23 @@ function buildAssessment(session, definition) {
     learnerLabel: finding.learnerLabel,
     significance: finding.significance,
   });
-  const visible = (finding) => finding.initiallyVisible || discovered.has(finding.id);
+
+  // Three exhaustive, mutually exclusive buckets so no finding is silently
+  // lost from the record. A finding is either: actively discovered by the
+  // learner; present on the chart from the start (initiallyVisible, which the
+  // session never adds to discoveredFindingIds); or missed (neither).
+  const chartVisible = definition.assessment.findings
+    .filter((finding) => finding.initiallyVisible && !discovered.has(finding.id));
+  const discoveredList = definition.assessment.findings
+    .filter((finding) => discovered.has(finding.id));
+  const missed = definition.assessment.findings
+    .filter((finding) => !finding.initiallyVisible && !discovered.has(finding.id));
 
   return {
     actions,
-    discoveredFindings: definition.assessment.findings
-      .filter((finding) => discovered.has(finding.id))
-      .map(describeFinding),
-    missedFindings: definition.assessment.findings
-      .filter((finding) => !visible(finding))
-      .map(describeFinding),
+    discoveredFindings: discoveredList.map(describeFinding),
+    chartVisibleFindings: chartVisible.map(describeFinding),
+    missedFindings: missed.map(describeFinding),
     findingsSubmission: session.findingsSubmission === null
       ? null
       : copyCaseData(session.findingsSubmission, 'findings submission'),
