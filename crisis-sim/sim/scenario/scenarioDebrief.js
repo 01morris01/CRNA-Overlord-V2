@@ -2,6 +2,7 @@
    completedAtUtc is omitted (non-deterministic; excluded from parity). */
 import { mul, div, RoundToInt } from '../float32.js';
 import { buildRubricDebrief } from './rubricDebrief.js';
+import { buildCaseDebrief } from './caseDebrief.js';
 
 const pretty = (key) => (!key ? '' : key.replace(/_/g, ' '));
 
@@ -28,6 +29,8 @@ export function buildDebrief(
   durationSec,
   rubricSessionResult = null,
   rubricDefinition = null,
+  caseSessionResult = null,
+  caseDefinition = null,
 ) {
   const r = {
     scenarioId: def.id,
@@ -71,12 +74,20 @@ export function buildDebrief(
     r.reviewTags = (def.debrief.reviewTags && def.debrief.reviewTags.length > 0)
       ? def.debrief.reviewTags : (def.tags || []);
   }
-  return rubricSessionResult === null
+  // Composition order: legacy base result, optional rubric debrief, optional case debrief.
+  const withRubric = rubricSessionResult === null
     ? r
     : buildRubricDebrief({
       baseResult: r,
       sessionResult: rubricSessionResult,
       rubricDefinition,
+    });
+  return caseSessionResult === null
+    ? withRubric
+    : buildCaseDebrief({
+      baseResult: withRubric,
+      caseSessionResult,
+      caseDefinition,
     });
 }
 

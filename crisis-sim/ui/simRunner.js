@@ -446,6 +446,7 @@ export class SimRunner {
     this._activeRubricScenario = null;
     this._loadedRubricScenario = null;
     this._activeCaseScenario = null;
+    this._activeCaseDefinition = null;
     this._loadedCaseScenario = null;
     this._caseClockTick = 0;
     this._caseLiveEpochSec = null;
@@ -495,6 +496,7 @@ export class SimRunner {
     this.activeSeed = seed;
     this._activeRubricScenario = null;
     this._activeCaseScenario = null;
+    this._activeCaseDefinition = null;
     this._caseClockTick = 0;
     this._caseLiveEpochSec = null;
     this._appliedCaseActivationSequences = new Set();
@@ -709,6 +711,7 @@ export class SimRunner {
         title: scenario.title,
         seed: scenario.seed,
       };
+      this._activeCaseDefinition = scenario.caseExperience;
       this._loadedCaseScenario = resetInputs;
       this._caseScenarioLoadResult = loadResult;
       this.applyCaseActivations(this.caseSession.drainFlowActivations());
@@ -737,6 +740,7 @@ export class SimRunner {
     this._activeRubricScenario = candidate._activeRubricScenario;
     this._loadedRubricScenario = candidate._loadedRubricScenario;
     this._activeCaseScenario = candidate._activeCaseScenario;
+    this._activeCaseDefinition = candidate._activeCaseDefinition;
     this._loadedCaseScenario = candidate._loadedCaseScenario;
     this._caseClockTick = candidate._caseClockTick;
     this._caseLiveEpochSec = candidate._caseLiveEpochSec;
@@ -1640,6 +1644,19 @@ export class SimRunner {
       }
       finalizedRubricResult = this._copyRubricFinalizationResult(live);
     }
+    let finalizedCaseResult = null;
+    if (this.caseSession) {
+      const liveCase = this.caseSession.getLiveResult();
+      if (liveCase.finalized !== true) {
+        const error = new Error(
+          'Case debrief is not finalized; resolve pending instructor observations and call finalizeCaseDebrief()',
+        );
+        error.code = 'CASE_DEBRIEF_NOT_FINALIZED';
+        error.pendingConsiderationIds = this._pendingCaseConsiderationIds();
+        throw error;
+      }
+      finalizedCaseResult = liveCase;
+    }
     const result = buildScenarioDebrief(
       def,
       this.s.run,
@@ -1650,12 +1667,30 @@ export class SimRunner {
       this.simTime,
       finalizedRubricResult,
       this.rubricSession?.rubric ?? null,
+      finalizedCaseResult,
+      finalizedCaseResult === null ? null : this._activeCaseDefinition,
     );
     result.respiratoryAttribution = this.p.respiratoryAttribution;
     result.lidocaineAttribution = buildLidocaineAttribution(this.l, this.tofCheckHistory);
-    return finalizedRubricResult === null
+    return finalizedRubricResult === null && finalizedCaseResult === null
       ? result
-      : copyJsonInput(result, 'rubric debrief result');
+      : copyJsonInput(result, 'debrief result');
+  }
+
+  /* Considerations that finalizeCaseDebrief() would refuse on, so callers can
+     surface exactly what still needs an instructor decision. */
+  _pendingCaseConsiderationIds() {
+    if (!this.caseSession || !this._activeCaseDefinition) return [];
+    const observations = new Map(
+      this.caseSession.getLiveResult().instructorObservations
+        .map((observation) => [observation.considerationId, observation]),
+    );
+    return this._activeCaseDefinition.instructorGuide.considerations
+      .filter(({ id }) => {
+        const observation = observations.get(id);
+        return !observation || observation.status === 'not_yet_evaluable';
+      })
+      .map(({ id }) => id);
   }
 
   logEvent(kind, detail, meta) {
