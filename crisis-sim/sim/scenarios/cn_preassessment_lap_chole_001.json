@@ -1,0 +1,203 @@
+{
+  "id": "cn_preassessment_lap_chole_001",
+  "title": "Preanesthesia: Karen Whitfield, Laparoscopic Cholecystectomy",
+  "description": "Preanesthesia assessment and outpatient laparoscopic cholecystectomy for a young adult with mild intermittent asthma and high PONV risk. Realigned to the real Carson-Newman Case 07 patient; asthma drives a live bronchospasm teaching beat, and pneumoperitoneum drives a ventilatory challenge. See docs/case-clinical-sourcing.md and docs/case-design-scripts.md.",
+  "category": "preanesthesia_case",
+  "courseUnit": "NAS 530 Preanesthesia Assessment",
+  "difficulty": "core",
+  "seed": 53007,
+  "maxDurationSeconds": 5400,
+  "learningObjectives": [
+    "Assess and interpret mild intermittent asthma before general anesthesia",
+    "Build a multimodal PONV prevention plan for a high Apfel-risk patient",
+    "Recognize and treat intraoperative bronchospasm",
+    "Adjust ventilation for pneumoperitoneum-related hypercarbia"
+  ],
+  "tags": ["preanesthesia", "asthma", "ponv", "laparoscopy", "carson-newman"],
+  "patientProfile": {
+    "ageYears": 32,
+    "sex": "Female",
+    "weightKg": 68,
+    "heightCm": 165,
+    "asa": 2,
+    "history": ["Symptomatic cholelithiasis", "Mild intermittent asthma", "Migraine on PRN therapy", "Oral contraceptive use"],
+    "allergiesList": ["Latex (contact dermatitis)"],
+    "comorbidities": "Mild intermittent asthma; migraine; OCP use",
+    "allergies": "Latex contact dermatitis; codeine intolerance (nausea)",
+    "surgicalProcedure": "Outpatient laparoscopic cholecystectomy",
+    "baselineHR": 78,
+    "baselineSystolic": 118,
+    "baselineDiastolic": 74,
+    "baselineSpO2": 99,
+    "baselineRR": 14,
+    "baselineTemp": 36.6,
+    "baselineEtCO2": 38
+  },
+  "startingSetup": {
+    "oxygenOn": false,
+    "fio2": 0.21,
+    "ventMode": "manual",
+    "airway": "mask",
+    "ivAccess": "18g peripheral",
+    "vaporizerDial": 0,
+    "tidalVolume": 500,
+    "respiratoryRate": 12,
+    "peep": 5
+  },
+  "events": [],
+  "expectedActions": [],
+  "dangerousActions": [],
+  "airwayPlan": {
+    "failedIntubationAttempts": [],
+    "intubationAttemptDurationSeconds": 30
+  },
+  "debrief": {
+    "summary": "Outpatient laparoscopic cholecystectomy in a young adult with mild asthma and high PONV risk.",
+    "teachingPoints": [],
+    "reviewTopics": [],
+    "reviewTags": ["asthma", "ponv", "laparoscopy"]
+  },
+  "caseExperience": {
+    "version": 1,
+    "learnerChart": {
+      "patient": {
+        "syntheticName": "Karen Whitfield",
+        "mrn": "CN-53007",
+        "ageYears": 32,
+        "sex": "Female"
+      },
+      "scheduledProcedure": {
+        "name": "Laparoscopic cholecystectomy",
+        "site": "Abdomen",
+        "laterality": "none"
+      },
+      "documents": [
+        {"id": "hpi", "title": "History of present illness", "type": "note", "sections": [{"heading": "HPI", "text": "32-year-old woman with symptomatic cholelithiasis scheduled for outpatient laparoscopic cholecystectomy. Recurrent postprandial right upper quadrant pain."}]},
+        {"id": "pmh", "title": "Past medical history", "type": "note", "sections": [{"heading": "PMH", "text": "Mild intermittent asthma, uses albuterol inhaler rarely (last use over a month ago, none for exertion). Migraine headaches treated as needed. No prior surgery under general anesthesia documented."}]}
+      ],
+      "medications": [
+        {"id": "albuterol", "name": "Albuterol inhaler", "dose": "2 puffs", "route": "inhaled", "frequency": "PRN"},
+        {"id": "ocp", "name": "Combined oral contraceptive", "dose": "1 tab", "route": "oral", "frequency": "daily"},
+        {"id": "sumatriptan", "name": "Sumatriptan", "dose": "50 mg", "route": "oral", "frequency": "PRN migraine"}
+      ],
+      "allergies": [
+        {"id": "latex", "substance": "Latex", "reaction": "contact dermatitis"},
+        {"id": "codeine", "substance": "Codeine", "reaction": "nausea (intolerance, not allergy)"}
+      ],
+      "labs": [],
+      "studies": []
+    },
+    "assessment": {
+      "stages": ["chart_review", "interview", "focused_exam", "findings_summary"],
+      "actions": [
+        {"id": "ask_asthma_control", "stage": "interview", "domain": "pulmonary", "prompt": "Ask about asthma control, triggers, rescue-inhaler use, and last exacerbation", "response": "Mild intermittent asthma; albuterol used less than monthly, none in the last month; no exertional symptoms; no recent exacerbation or steroids.", "reveals": ["mild_asthma"], "prerequisites": [], "scoringRuleId": "rule_assess_asthma", "critical": true},
+        {"id": "ask_ponv_history", "stage": "interview", "domain": "ponv", "prompt": "Ask about prior postoperative or motion-related nausea and vomiting", "response": "Severe nausea and vomiting after a prior anesthetic; also motion sick easily; non-smoker.", "reveals": ["ponv_high_risk"], "prerequisites": [], "scoringRuleId": "rule_assess_ponv", "critical": true},
+        {"id": "ask_contraceptive", "stage": "interview", "domain": "hematologic", "prompt": "Ask about oral contraceptive use and thromboembolic history", "response": "Takes a combined oral contraceptive; no personal or family clotting history.", "reveals": ["ocp_vte_risk"], "prerequisites": [], "scoringRuleId": "rule_assess_ocp", "critical": false},
+        {"id": "ask_codeine", "stage": "interview", "domain": "allergy", "prompt": "Clarify the nature of the codeine reaction", "response": "Codeine causes nausea, not rash or anaphylaxis; it is an intolerance, not a true allergy.", "reveals": ["codeine_intolerance"], "prerequisites": [], "scoringRuleId": "rule_assess_codeine", "critical": false},
+        {"id": "exam_airway", "stage": "focused_exam", "domain": "airway", "prompt": "Perform and document the airway exam", "response": "Mallampati I, thyromental distance 7 cm, full neck mobility, full native dentition. Easy intubation predicted.", "reveals": ["airway_assessed"], "prerequisites": [], "scoringRuleId": "rule_airway_exam", "critical": true},
+        {"id": "review_anesthetic_history", "stage": "chart_review", "domain": "history", "prompt": "Review prior anesthetic records and history", "response": "No prior general anesthetic on record beyond the reported severe PONV; no family history of anesthetic problems.", "reveals": ["anesthetic_history_reviewed"], "prerequisites": [], "scoringRuleId": "rule_anesthetic_history", "critical": false}
+      ],
+      "findings": [
+        {"id": "mild_asthma", "learnerLabel": "Mild intermittent asthma", "significance": "Reactive airway; prefer sevoflurane (bronchodilator) over desflurane; have albuterol available; risk of intraoperative bronchospasm on airway instrumentation.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "ponv_high_risk", "learnerLabel": "High PONV risk", "significance": "Apfel factors: female, non-smoker, prior PONV/motion sickness, anticipated postoperative opioids. High risk warrants multimodal prophylaxis.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "ocp_vte_risk", "learnerLabel": "Oral contraceptive use", "significance": "Combined OCP plus pneumoperitoneum raises venous thromboembolism risk; mechanical prophylaxis (SCDs) indicated.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "codeine_intolerance", "learnerLabel": "Codeine intolerance", "significance": "Nausea, not allergy. Avoid codeine and tramadol; favor fentanyl plus multimodal analgesia.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "airway_assessed", "learnerLabel": "Airway examined: reassuring", "significance": "Mallampati I, easy intubation predicted; documentation must precede laryngoscopy.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "anesthetic_history_reviewed", "learnerLabel": "Anesthetic history reviewed", "significance": "Prior records reviewed; the only prior event of note is severe PONV.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true}
+      ],
+      "requiredDomains": ["pulmonary", "ponv", "airway"],
+      "scoringRules": [
+        {"id": "rule_assess_asthma", "label": "Assesses asthma control and triggers", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_asthma_control"}},
+        {"id": "rule_assess_ponv", "label": "Elicits the high PONV history", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_ponv_history"}},
+        {"id": "rule_assess_ocp", "label": "Identifies oral contraceptive and VTE risk", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_contraceptive"}},
+        {"id": "rule_assess_codeine", "label": "Clarifies codeine intolerance versus allergy", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_codeine"}},
+        {"id": "rule_airway_exam", "label": "Documents the airway exam", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "exam_airway"}},
+        {"id": "rule_anesthetic_history", "label": "Reviews the anesthetic history", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "review_anesthetic_history"}}
+      ]
+    },
+    "planRequirements": {
+      "fields": [
+        {"id": "disposition", "type": "single", "required": true, "options": ["proceed", "postpone"]},
+        {"id": "asa_class", "type": "single", "required": true, "options": ["I", "II", "III", "IV"]},
+        {"id": "reactive_airway", "type": "single", "required": true, "options": ["sevoflurane_albuterol_ready", "no_special_precaution"]},
+        {"id": "ponv_prophylaxis", "type": "single", "required": true, "options": ["multimodal", "single_agent", "none"]},
+        {"id": "vte_prophylaxis", "type": "single", "required": true, "options": ["mechanical_scd", "none"]},
+        {"id": "analgesia", "type": "single", "required": true, "options": ["multimodal_no_codeine", "opioid_only", "codeine_based"]}
+      ],
+      "completionRoutes": [
+        {"fieldId": "disposition", "equals": "proceed", "stage": "live_simulation"}
+      ],
+      "rules": [
+        {"id": "asa_ii_with_reason", "label": "Classifies ASA II with mild systemic disease as the reason", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "asa_class", "value": "II"}},
+        {"id": "reactive_airway_plan", "label": "Plans for the reactive airway (sevoflurane, albuterol ready)", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "reactive_airway", "value": "sevoflurane_albuterol_ready"}},
+        {"id": "multimodal_ponv_prophylaxis", "label": "Selects multimodal PONV prophylaxis", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "ponv_prophylaxis", "value": "multimodal"}},
+        {"id": "vte_prophylaxis", "label": "Provides mechanical VTE prophylaxis", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "vte_prophylaxis", "value": "mechanical_scd"}},
+        {"id": "postoperative_pain_plan", "label": "Plans multimodal analgesia avoiding codeine", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "analgesia", "value": "multimodal_no_codeine"}}
+      ]
+    },
+    "surgery": {
+      "procedure": "Laparoscopic cholecystectomy",
+      "indication": "Symptomatic cholelithiasis",
+      "position": "supine",
+      "expectedDurationMin": 75,
+      "expectedStimulation": "moderate",
+      "bloodLossRisk": "low",
+      "physiologicChallenges": ["Pneumoperitoneum hypercarbia", "Reactive airway"],
+      "anesthesiaConsiderations": ["Multimodal PONV prophylaxis", "Sevoflurane for reactive airway", "OG tube for gastric decompression"]
+    },
+    "eventFlow": {
+      "initialPhaseId": "preassessment",
+      "phases": [
+        {"id": "preassessment", "title": "Preanesthesia assessment", "enterWhen": {"type": "load"}, "events": ["case_ready"], "completionWhen": {"type": "plan_submitted"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_branch"]},
+        {"id": "preinduction", "title": "Preinduction preparation", "enterWhen": {"type": "plan_accepted"}, "events": ["plan_accepted"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "induction_airway", "title": "Induction and airway", "enterWhen": {"type": "instructor_advance"}, "events": ["induction_started", "airway_secured", "bronchospasm_onset"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "laparoscopic_maintenance", "title": "Laparoscopic maintenance", "enterWhen": {"type": "instructor_advance"}, "events": ["pneumoperitoneum_started", "ventilatory_challenge_detected", "ventilation_adjusted", "surgical_stimulus_ended"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "emergence", "title": "Emergence", "enterWhen": {"type": "instructor_advance"}, "events": ["emergence_started", "case_complete"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "debrief", "title": "Debrief", "enterWhen": {"type": "instructor_advance"}, "events": [], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance"]}
+      ],
+      "events": [
+        {"id": "case_ready", "phaseId": "preassessment", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_asthma_control", "consider_ponv_risk", "consider_airway_exam"], "debriefIds": ["teach_asthma", "teach_ponv"]},
+        {"id": "plan_accepted", "phaseId": "preinduction", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_reactive_airway_prep"], "debriefIds": ["teach_reactive_airway"]},
+        {"id": "induction_started", "phaseId": "induction_airway", "trigger": {"type": "action", "action": "drug", "match": {"drug": "Propofol"}}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_mask_before_paralytic"], "debriefIds": []},
+        {"id": "airway_secured", "phaseId": "induction_airway", "trigger": {"type": "action", "action": "intubation_attempt_succeeded"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": [], "debriefIds": []},
+        {"id": "bronchospasm_onset", "phaseId": "induction_airway", "trigger": {"type": "instructor"}, "repeatable": false, "responseWindowSec": 120, "expectedResponses": ["Albuterol", "deepen_anesthetic"], "unsafeResponses": [], "effect": {"type": "inject_complication", "complicationType": "Bronchospasm", "description": "Reactive-airway bronchospasm on airway instrumentation"}, "guidanceIds": ["consider_bronchospasm_rescue"], "debriefIds": ["teach_bronchospasm"]},
+        {"id": "pneumoperitoneum_started", "phaseId": "laparoscopic_maintenance", "trigger": {"type": "instructor"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": {"type": "set_machine", "patch": {"setTidalVolume": 340, "setRespiratoryRate": 10}}, "guidanceIds": ["consider_pneumoperitoneum"], "debriefIds": ["teach_pneumoperitoneum"]},
+        {"id": "ventilatory_challenge_detected", "phaseId": "laparoscopic_maintenance", "trigger": {"type": "physiology", "key": "etco2", "operator": ">=", "value": 50, "dwellSec": 20, "resetDelta": 5}, "repeatable": false, "responseWindowSec": 90, "expectedResponses": ["increase_minute_ventilation"], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_increase_ventilation"], "debriefIds": ["teach_pneumoperitoneum"]},
+        {"id": "ventilation_adjusted", "phaseId": "laparoscopic_maintenance", "trigger": {"type": "action", "action": "set_machine"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": [], "debriefIds": []},
+        {"id": "surgical_stimulus_ended", "phaseId": "laparoscopic_maintenance", "trigger": {"type": "instructor"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": {"type": "set_surgical_stimulus", "intensity": 0}, "guidanceIds": [], "debriefIds": []},
+        {"id": "emergence_started", "phaseId": "emergence", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_emergence_plan"], "debriefIds": ["teach_reversal"]},
+        {"id": "case_complete", "phaseId": "emergence", "trigger": {"type": "instructor"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": [], "debriefIds": []}
+      ],
+      "branches": [
+        {"id": "to_preinduction", "label": "Advance to preinduction", "fromPhaseId": "preassessment", "toPhaseId": "preinduction", "instructorOnly": true},
+        {"id": "to_induction", "label": "Advance to induction and airway", "fromPhaseId": "preinduction", "toPhaseId": "induction_airway", "instructorOnly": true},
+        {"id": "to_maintenance", "label": "Advance to laparoscopic maintenance", "fromPhaseId": "induction_airway", "toPhaseId": "laparoscopic_maintenance", "instructorOnly": true},
+        {"id": "to_emergence", "label": "Advance to emergence", "fromPhaseId": "laparoscopic_maintenance", "toPhaseId": "emergence", "instructorOnly": true},
+        {"id": "to_debrief", "label": "Advance to debrief", "fromPhaseId": "emergence", "toPhaseId": "debrief", "instructorOnly": true}
+      ]
+    },
+    "instructorGuide": {
+      "considerations": [
+        {"id": "consider_asthma_control", "phaseId": "preassessment", "eventId": "case_ready", "title": "Asthma control", "consideration": "The trainee should actively ask about asthma control, triggers, rescue-inhaler frequency, and last exacerbation, not merely read the chart.", "expectedResponse": "Asks about control, triggers, last use of albuterol, and any recent exacerbation or steroid course.", "responseWindowSec": 0, "redFlags": ["Proceeds to airway plan without characterizing asthma control"], "scoringGuidance": "Award full credit when the trainee elicits both baseline control and trigger history.", "defaultRevealInDebrief": true},
+        {"id": "consider_ponv_risk", "phaseId": "preassessment", "eventId": "case_ready", "title": "PONV risk", "consideration": "The trainee should recognize a high Apfel score (female, non-smoker, prior PONV/motion sickness, postoperative opioids) and plan multimodal prophylaxis.", "expectedResponse": "Elicits the severe prior PONV and motion-sickness history and links it to multimodal prophylaxis.", "responseWindowSec": 0, "redFlags": ["Misses the prior PONV history", "Plans a single antiemetic for a high-risk patient"], "scoringGuidance": "Full credit requires eliciting the history and stating a multimodal plan.", "defaultRevealInDebrief": true},
+        {"id": "consider_airway_exam", "phaseId": "preassessment", "eventId": "case_ready", "title": "Airway examination", "consideration": "A documented airway exam must precede any airway plan and laryngoscopy.", "expectedResponse": "Performs and documents Mallampati, thyromental distance, mobility, and dentition.", "responseWindowSec": 0, "redFlags": ["Moves to plan without an airway exam"], "scoringGuidance": "Award credit only if the exam is documented before the plan.", "defaultRevealInDebrief": false},
+        {"id": "consider_reactive_airway_prep", "phaseId": "preinduction", "eventId": "plan_accepted", "title": "Reactive-airway preparation", "consideration": "Before induction the trainee should have sevoflurane selected and albuterol immediately available, anticipating bronchospasm.", "expectedResponse": "Confirms sevoflurane and ready albuterol before inducing.", "responseWindowSec": 0, "redFlags": ["Chooses desflurane for a reactive airway", "No albuterol available"], "scoringGuidance": "Full credit for a bronchospasm-ready setup.", "defaultRevealInDebrief": true},
+        {"id": "consider_mask_before_paralytic", "phaseId": "induction_airway", "eventId": "induction_started", "title": "Mask ventilation before the paralytic", "consideration": "For a standard IV induction the trainee must confirm the ability to mask-ventilate before giving the neuromuscular blocker, and demonstrate PPV while awaiting onset.", "expectedResponse": "Confirms mask ventilation, then gives rocuronium, ventilating during onset.", "responseWindowSec": 0, "redFlags": ["Gives the paralytic before confirming mask ventilation"], "scoringGuidance": "This is the Standard IV Induction discriminator; award credit only for the correct order.", "defaultRevealInDebrief": true},
+        {"id": "consider_bronchospasm_rescue", "phaseId": "induction_airway", "eventId": "bronchospasm_onset", "title": "Bronchospasm recognition and rescue", "consideration": "On bronchospasm (rising peak pressure, falling SpO2, wheeze) the trainee should deepen the anesthetic and give albuterol, hand-ventilating as needed.", "expectedResponse": "Recognizes bronchospasm, deepens anesthetic, gives albuterol, confirms improving peak pressure and saturation.", "responseWindowSec": 120, "redFlags": ["Fails to recognize rising peak pressure", "Does not treat with a bronchodilator"], "scoringGuidance": "Full credit for prompt recognition plus bronchodilator and deepening.", "defaultRevealInDebrief": true},
+        {"id": "consider_pneumoperitoneum", "phaseId": "laparoscopic_maintenance", "eventId": "pneumoperitoneum_started", "title": "Pneumoperitoneum physiology", "consideration": "CO2 insufflation reduces effective ventilation and raises EtCO2; the trainee should anticipate hypercarbia.", "expectedResponse": "Anticipates rising EtCO2 with insufflation.", "responseWindowSec": 0, "redFlags": ["Ignores the rising EtCO2"], "scoringGuidance": "Credit for anticipating the hypercarbia.", "defaultRevealInDebrief": true},
+        {"id": "consider_increase_ventilation", "phaseId": "laparoscopic_maintenance", "eventId": "ventilatory_challenge_detected", "title": "Correcting hypercarbia", "consideration": "The trainee should increase minute ventilation roughly 25 to 30 percent to correct pneumoperitoneum hypercarbia, rather than chasing anesthetic depth.", "expectedResponse": "Increases tidal volume or rate to restore normocapnia.", "responseWindowSec": 90, "redFlags": ["Deepens anesthetic instead of increasing ventilation"], "scoringGuidance": "Full credit for increasing minute ventilation and confirming EtCO2 fall.", "defaultRevealInDebrief": true},
+        {"id": "consider_emergence_plan", "phaseId": "emergence", "eventId": "emergence_started", "title": "Emergence and reversal", "consideration": "The trainee should end the volatile, confirm the train-of-four, reverse with sugammadex, confirm spontaneous ventilation, and carry PONV prophylaxis to PACU.", "expectedResponse": "Reverses appropriately and extubates a stable patient with PONV coverage.", "responseWindowSec": 0, "redFlags": ["Extubates before adequate reversal or ventilation"], "scoringGuidance": "Credit for a controlled, reversed, PONV-covered emergence.", "defaultRevealInDebrief": true}
+      ]
+    },
+    "debrief": {
+      "teachingItems": [
+        {"id": "teach_asthma", "title": "Mild asthma before anesthesia", "explanation": "Characterize control and triggers; sevoflurane is a bronchodilator preferred over desflurane, and albuterol should be ready. Source: Case 07 implications summary."},
+        {"id": "teach_ponv", "title": "Multimodal PONV prevention", "explanation": "Apfel score of four predicts about an 80 percent PONV rate without prophylaxis. Use dexamethasone plus ondansetron, adding a scopolamine patch or propofol TIVA. Source: Case 07 teaching pearls."},
+        {"id": "teach_reactive_airway", "title": "Preparing for the reactive airway", "explanation": "Anticipate bronchospasm at airway instrumentation; have a bronchodilator ready and choose a bronchodilating volatile. Source: Case 07 anesthetic plan."},
+        {"id": "teach_bronchospasm", "title": "Treating intraoperative bronchospasm", "explanation": "Rising peak airway pressure with falling saturation signals bronchospasm; deepen the anesthetic and give albuterol. Source: engine physiology validation and Case 07."},
+        {"id": "teach_pneumoperitoneum", "title": "Ventilation during laparoscopy", "explanation": "Pneumoperitoneum raises EtCO2; increase minute ventilation about 25 to 30 percent. Standard insufflation is 15 mmHg; above 20 mmHg risks hemodynamic compromise. Source: Case 07 pearls."},
+        {"id": "teach_reversal", "title": "Reversal with sugammadex", "explanation": "Sugammadex 2 to 4 mg/kg fully reverses rocuronium and saves PACU time versus neostigmine. Source: Case 07 pearls."}
+      ]
+    }
+  }
+}

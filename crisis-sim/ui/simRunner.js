@@ -870,6 +870,17 @@ export class SimRunner {
     );
   }
 
+  // Instructor fires a scheduled teaching beat (an `instructor`-triggered event)
+  // on demand. This is the time-compression control: the instructor advances
+  // the case to the next physiologic beat without waiting out the clock, and
+  // the event's effect (e.g. inject a bronchospasm complication) is applied
+  // through the same activation path as automatic events.
+  activateCaseEvent({ eventId } = {}) {
+    return this._runCaseMutation(
+      (tSec) => this.caseSession.activateInstructorEvent({ eventId, tSec }),
+    );
+  }
+
   pauseCase() {
     return this._runCaseMutation(
       (tSec) => this.caseSession.setPaused({ paused: true, tSec }),
