@@ -1,0 +1,208 @@
+{
+  "id": "cn_preassessment_npo_mh_001",
+  "title": "Preanesthesia: Brittany Cole, NPO Violation with MH Risk",
+  "description": "Preanesthesia assessment of an elective knee arthroscopy with a recent heavy meal (ASA fasting violation), malignant-hyperthermia family history, and a predicted difficult airway. The correct disposition is to postpone; an instructor-only training branch exercises trigger-free RSI, difficult intubation, and MH recognition. Clinical sourcing in docs/case-clinical-sourcing.md (MH from NAS 560 MH deck; fasting from ASA standards, operator-directed).",
+  "category": "preanesthesia_case",
+  "courseUnit": "NAS 530 Preanesthesia Assessment",
+  "difficulty": "core",
+  "seed": 53021,
+  "maxDurationSeconds": 5400,
+  "learningObjectives": [
+    "Recognize an inadequate fasting interval against ASA standards and postpone an elective case",
+    "Escalate a malignant-hyperthermia family history and plan a trigger-free anesthetic",
+    "Recognize that ASA physical status is not changed by an acute NPO violation",
+    "Prepare for a predicted difficult airway and, in the training branch, manage failed intubation and MH"
+  ],
+  "tags": ["preanesthesia", "npo", "malignant-hyperthermia", "difficult-airway", "carson-newman"],
+  "patientProfile": {
+    "ageYears": 26,
+    "sex": "Female",
+    "weightKg": 82,
+    "heightCm": 168,
+    "asa": 2,
+    "history": ["Elective knee arthroscopy", "Family history of malignant hyperthermia", "Predicted difficult airway"],
+    "allergiesList": [],
+    "comorbidities": "MH family history; predicted difficult airway",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Elective knee arthroscopy",
+    "baselineHR": 82,
+    "baselineSystolic": 124,
+    "baselineDiastolic": 76,
+    "baselineSpO2": 98,
+    "baselineRR": 15,
+    "baselineTemp": 36.7,
+    "baselineEtCO2": 38
+  },
+  "startingSetup": {
+    "oxygenOn": false,
+    "fio2": 0.21,
+    "ventMode": "manual",
+    "airway": "mask",
+    "ivAccess": "18g peripheral",
+    "vaporizerDial": 0,
+    "tidalVolume": 500,
+    "respiratoryRate": 12,
+    "peep": 5
+  },
+  "events": [],
+  "expectedActions": [],
+  "dangerousActions": [],
+  "airwayPlan": {
+    "failedIntubationAttempts": [1],
+    "intubationAttemptDurationSeconds": 45
+  },
+  "debrief": {
+    "summary": "Elective knee arthroscopy with a fasting violation and MH family history; the correct disposition is to postpone.",
+    "teachingPoints": [],
+    "reviewTopics": [],
+    "reviewTags": ["npo", "malignant-hyperthermia", "difficult-airway"]
+  },
+  "caseExperience": {
+    "version": 1,
+    "learnerChart": {
+      "patient": {
+        "syntheticName": "Brittany Cole",
+        "mrn": "CN-53021",
+        "ageYears": 26,
+        "sex": "Female"
+      },
+      "scheduledProcedure": {
+        "name": "Knee arthroscopy",
+        "site": "Right knee",
+        "laterality": "right"
+      },
+      "documents": [
+        {"id": "hpi", "title": "History of present illness", "type": "note", "sections": [{"heading": "HPI", "text": "26-year-old woman scheduled for elective right knee arthroscopy for a meniscal tear. Reports she ate a full breakfast about two hours before arrival because she misunderstood the fasting instructions."}]},
+        {"id": "fh", "title": "Family history", "type": "note", "sections": [{"heading": "Family history", "text": "A maternal uncle had a severe reaction under general anesthesia with high fever and rigidity requiring intensive care; details are limited but the family was told it may run in the family."}]}
+      ],
+      "medications": [],
+      "allergies": [],
+      "labs": [],
+      "studies": []
+    },
+    "assessment": {
+      "stages": ["chart_review", "interview", "focused_exam", "findings_summary"],
+      "actions": [
+        {"id": "ask_last_meal", "stage": "interview", "domain": "npo", "prompt": "Ask about the last solid and liquid intake and confirm fasting status", "response": "Ate a full breakfast (eggs, toast, sausage) about two hours ago; did not realize she needed to fast.", "reveals": ["heavy_breakfast_two_hours"], "prerequisites": [], "scoringRuleId": "rule_assess_npo", "critical": true},
+        {"id": "ask_family_anesthesia", "stage": "interview", "domain": "family_history", "prompt": "Ask specifically whether any family member had an adverse reaction to anesthesia", "response": "A maternal uncle had a dangerous high-fever, rigid reaction under anesthesia and nearly died; the family was warned it could be inherited.", "reveals": ["family_history_mh"], "prerequisites": [], "scoringRuleId": "rule_assess_mh", "critical": true},
+        {"id": "ask_pregnancy", "stage": "interview", "domain": "reproductive", "prompt": "Address pregnancy status and last menstrual period", "response": "Last menstrual period is uncertain; pregnancy status is not documented.", "reveals": ["pregnancy_screen_needed"], "prerequisites": [], "scoringRuleId": "rule_assess_pregnancy", "critical": false},
+        {"id": "exam_airway", "stage": "focused_exam", "domain": "airway", "prompt": "Perform and document the airway exam", "response": "Mallampati III, thyromental distance 5 cm, limited neck extension, mouth opening 3.5 cm. Predicts a difficult direct laryngoscopy.", "reveals": ["predicted_difficult_airway"], "prerequisites": [], "scoringRuleId": "rule_airway_exam", "critical": true},
+        {"id": "exam_dentition", "stage": "focused_exam", "domain": "airway", "prompt": "Examine and document dentition and injury risk", "response": "A loose upper incisor and a chipped molar are noted; dental-injury risk must be documented before laryngoscopy.", "reveals": ["dental_injury_risk"], "prerequisites": [], "scoringRuleId": "rule_dental", "critical": false}
+      ],
+      "findings": [
+        {"id": "heavy_breakfast_two_hours", "learnerLabel": "Full meal about two hours ago", "significance": "Violates the ASA fasting minimum for solids (six to eight hours). An elective case with a full stomach should be postponed.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "family_history_mh", "learnerLabel": "Family history of malignant hyperthermia", "significance": "A family history of a fever-and-rigidity anesthetic reaction demands MH escalation, a trigger-free plan (no succinylcholine, no volatile agents), and a diagnosis established before proceeding.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "pregnancy_screen_needed", "learnerLabel": "Pregnancy status not documented", "significance": "Pregnancy status and last menstrual period are required documentation for an elective case in a person of childbearing potential.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "predicted_difficult_airway", "learnerLabel": "Predicted difficult airway", "significance": "Mallampati III, short thyromental distance, and limited neck extension predict a difficult direct laryngoscopy; plan a rescue path.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true},
+        {"id": "dental_injury_risk", "learnerLabel": "Dental injury risk", "significance": "Loose and chipped teeth must be documented before laryngoscopy and the patient informed of injury risk.", "initiallyVisible": false, "instructorOnlyUntilDiscovered": true}
+      ],
+      "requiredDomains": ["npo", "family_history", "airway"],
+      "scoringRules": [
+        {"id": "rule_assess_npo", "label": "Elicits the fasting violation", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_last_meal"}},
+        {"id": "rule_assess_mh", "label": "Elicits the malignant-hyperthermia family history", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_family_anesthesia"}},
+        {"id": "rule_assess_pregnancy", "label": "Addresses pregnancy status", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "ask_pregnancy"}},
+        {"id": "rule_airway_exam", "label": "Documents the difficult-airway exam", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "exam_airway"}},
+        {"id": "rule_dental", "label": "Documents dental injury risk", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "assessment_action", "actionId": "exam_dentition"}}
+      ]
+    },
+    "planRequirements": {
+      "fields": [
+        {"id": "disposition", "type": "single", "required": true, "options": ["proceed", "postpone"]},
+        {"id": "asa_class", "type": "single", "required": true, "options": ["I", "II", "III", "IV"]},
+        {"id": "mh_management", "type": "single", "required": true, "options": ["escalate_trigger_free", "standard"]},
+        {"id": "trigger_free_technique", "type": "single", "required": true, "options": ["no_sux_no_volatile", "standard_agents"]},
+        {"id": "airway_readiness", "type": "single", "required": true, "options": ["difficult_airway_prepared", "routine"]},
+        {"id": "team_communication", "type": "single", "required": true, "options": ["notify_team", "none"]}
+      ],
+      "completionRoutes": [
+        {"fieldId": "disposition", "equals": "postpone", "stage": "appropriately_deferred"},
+        {"fieldId": "disposition", "equals": "proceed", "stage": "live_simulation"}
+      ],
+      "rules": [
+        {"id": "asa_not_changed_by_npo", "label": "Keeps ASA physical status unchanged by the NPO violation", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "asa_class", "value": "II"}},
+        {"id": "postpone_elective_case", "label": "Postpones the elective case for the fasting violation", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "disposition", "value": "postpone"}},
+        {"id": "escalate_mh_history", "label": "Escalates the malignant-hyperthermia history", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "mh_management", "value": "escalate_trigger_free"}},
+        {"id": "trigger_free_plan", "label": "Plans a trigger-free technique (no succinylcholine, no volatile)", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "trigger_free_technique", "value": "no_sux_no_volatile"}},
+        {"id": "difficult_airway_plan", "label": "Prepares for the difficult airway", "critical": true, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "airway_readiness", "value": "difficult_airway_prepared"}},
+        {"id": "team_communication", "label": "Communicates the plan to the team", "critical": false, "source": "ENGINE_OBSERVABLE", "evidence": {"type": "plan_equals", "fieldId": "team_communication", "value": "notify_team"}}
+      ]
+    },
+    "surgery": {
+      "procedure": "Knee arthroscopy",
+      "indication": "Meniscal tear",
+      "position": "supine",
+      "expectedDurationMin": 45,
+      "expectedStimulation": "moderate",
+      "bloodLossRisk": "low",
+      "physiologicChallenges": ["Malignant hyperthermia susceptibility", "Difficult airway"],
+      "anesthesiaConsiderations": ["Trigger-free technique", "Difficult-airway readiness", "Full-stomach precautions"]
+    },
+    "eventFlow": {
+      "initialPhaseId": "preassessment",
+      "phases": [
+        {"id": "preassessment", "title": "Preanesthesia assessment", "enterWhen": {"type": "load"}, "events": ["case_ready"], "completionWhen": {"type": "plan_submitted"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_branch"]},
+        {"id": "plan_review", "title": "Disposition review", "enterWhen": {"type": "plan_accepted"}, "events": ["plan_reviewed"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_branch"]},
+        {"id": "appropriately_deferred", "title": "Appropriately deferred", "enterWhen": {"type": "instructor_advance"}, "events": ["deferred_complete"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_branch"]},
+        {"id": "debrief", "title": "Debrief", "enterWhen": {"type": "instructor_advance"}, "events": [], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance"]},
+        {"id": "training_preinduction", "title": "Training: preinduction (counterfactual)", "enterWhen": {"type": "branch_activated"}, "events": ["training_branch_activated"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "trigger_free_induction", "title": "Training: trigger-free induction", "enterWhen": {"type": "instructor_advance"}, "events": ["unsafe_trigger_selected", "trigger_free_path_maintained"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "difficult_airway", "title": "Training: difficult airway", "enterWhen": {"type": "instructor_advance"}, "events": ["first_intubation_attempt_failed", "rescue_oxygenation_started", "second_intubation_attempt_succeeded"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "training_maintenance", "title": "Training: maintenance and MH", "enterWhen": {"type": "instructor_advance"}, "events": ["mh_complication_started"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_event", "activate_branch"]},
+        {"id": "training_emergence", "title": "Training: emergence", "enterWhen": {"type": "instructor_advance"}, "events": ["training_emergence_ready"], "completionWhen": {"type": "instructor_advance"}, "allowedInstructorControls": ["pause", "resume", "advance", "activate_branch"]}
+      ],
+      "events": [
+        {"id": "case_ready", "phaseId": "preassessment", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_npo_violation", "consider_mh_escalation", "consider_difficult_airway_exam"], "debriefIds": ["teach_npo", "teach_mh"]},
+        {"id": "plan_reviewed", "phaseId": "plan_review", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_asa_unchanged", "consider_postpone"], "debriefIds": ["teach_asa_npo"]},
+        {"id": "deferred_complete", "phaseId": "appropriately_deferred", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_deferral_correct"], "debriefIds": ["teach_deferral"]},
+        {"id": "training_branch_activated", "phaseId": "training_preinduction", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_training_counterfactual"], "debriefIds": ["teach_counterfactual"]},
+        {"id": "unsafe_trigger_selected", "phaseId": "trigger_free_induction", "trigger": {"type": "action", "action": "drug", "match": {"drug": "Succinylcholine"}}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": ["Succinylcholine"], "effect": null, "guidanceIds": ["consider_unsafe_trigger"], "debriefIds": ["teach_mh"]},
+        {"id": "trigger_free_path_maintained", "phaseId": "trigger_free_induction", "trigger": {"type": "instructor"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_trigger_free_success"], "debriefIds": ["teach_trigger_free"]},
+        {"id": "first_intubation_attempt_failed", "phaseId": "difficult_airway", "trigger": {"type": "action", "action": "intubation_attempt_failed"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_failed_attempt"], "debriefIds": ["teach_difficult_airway"]},
+        {"id": "rescue_oxygenation_started", "phaseId": "difficult_airway", "trigger": {"type": "action", "action": "mask_ppv_started"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_rescue_oxygenation"], "debriefIds": ["teach_difficult_airway"]},
+        {"id": "second_intubation_attempt_succeeded", "phaseId": "difficult_airway", "trigger": {"type": "action", "action": "intubation_attempt_succeeded"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": [], "debriefIds": ["teach_difficult_airway"]},
+        {"id": "mh_complication_started", "phaseId": "training_maintenance", "trigger": {"type": "instructor"}, "repeatable": false, "responseWindowSec": 300, "expectedResponses": ["Dantrolene", "stop_volatile"], "unsafeResponses": [], "effect": {"type": "inject_complication", "complicationType": "MalignantHyperthermia", "description": "Malignant hyperthermia unmasked by a triggering agent"}, "guidanceIds": ["consider_mh_crisis"], "debriefIds": ["teach_mh_treatment"]},
+        {"id": "training_emergence_ready", "phaseId": "training_emergence", "trigger": {"type": "phase_enter"}, "repeatable": false, "responseWindowSec": 0, "expectedResponses": [], "unsafeResponses": [], "effect": null, "guidanceIds": ["consider_training_emergence"], "debriefIds": []}
+      ],
+      "branches": [
+        {"id": "to_plan_review", "label": "Advance to disposition review", "fromPhaseId": "preassessment", "toPhaseId": "plan_review", "instructorOnly": true},
+        {"id": "to_deferred", "label": "Advance to appropriately deferred", "fromPhaseId": "plan_review", "toPhaseId": "appropriately_deferred", "instructorOnly": true},
+        {"id": "to_debrief", "label": "Advance to debrief", "fromPhaseId": "appropriately_deferred", "toPhaseId": "debrief", "instructorOnly": true},
+        {"id": "proceed_for_training", "label": "Instructor-only training counterfactual (NOT the recommended disposition)", "fromPhaseId": "plan_review", "toPhaseId": "training_preinduction", "instructorOnly": true},
+        {"id": "to_trigger_free_induction", "label": "Training: to induction", "fromPhaseId": "training_preinduction", "toPhaseId": "trigger_free_induction", "instructorOnly": true},
+        {"id": "to_difficult_airway", "label": "Training: to difficult airway", "fromPhaseId": "trigger_free_induction", "toPhaseId": "difficult_airway", "instructorOnly": true},
+        {"id": "to_training_maintenance", "label": "Training: to maintenance", "fromPhaseId": "difficult_airway", "toPhaseId": "training_maintenance", "instructorOnly": true},
+        {"id": "to_training_emergence", "label": "Training: to emergence", "fromPhaseId": "training_maintenance", "toPhaseId": "training_emergence", "instructorOnly": true},
+        {"id": "training_to_debrief", "label": "Training: to debrief", "fromPhaseId": "training_emergence", "toPhaseId": "debrief", "instructorOnly": true}
+      ]
+    },
+    "instructorGuide": {
+      "considerations": [
+        {"id": "consider_npo_violation", "phaseId": "preassessment", "eventId": "case_ready", "title": "Fasting violation", "consideration": "The trainee should elicit the recent full meal and recognize it violates the ASA fasting minimum for solids, making an elective case unsafe to proceed.", "expectedResponse": "Elicits the two-hour-old full breakfast and identifies inadequate fasting.", "responseWindowSec": 0, "redFlags": ["Proceeds despite a full stomach", "Does not ask about last intake"], "scoringGuidance": "Full credit for eliciting the meal and naming the fasting violation.", "defaultRevealInDebrief": true},
+        {"id": "consider_mh_escalation", "phaseId": "preassessment", "eventId": "case_ready", "title": "MH family history", "consideration": "The trainee should specifically ask about family anesthetic reactions, recognize a probable malignant-hyperthermia history, and plan escalation with a trigger-free technique.", "expectedResponse": "Elicits the uncle's fever-and-rigidity reaction and plans MH escalation and trigger-free anesthesia.", "responseWindowSec": 0, "redFlags": ["Misses the family MH history", "Plans succinylcholine or a volatile agent"], "scoringGuidance": "Full credit for eliciting the history and stating a trigger-free plan.", "defaultRevealInDebrief": true},
+        {"id": "consider_difficult_airway_exam", "phaseId": "preassessment", "eventId": "case_ready", "title": "Difficult-airway exam", "consideration": "The airway exam predicts difficulty (Mallampati III, short thyromental distance, limited extension) and must be documented with a rescue plan.", "expectedResponse": "Documents the difficult-airway exam and plans a rescue path.", "responseWindowSec": 0, "redFlags": ["No airway exam before planning"], "scoringGuidance": "Credit for documenting the exam and predicting difficulty.", "defaultRevealInDebrief": false},
+        {"id": "consider_asa_unchanged", "phaseId": "plan_review", "eventId": "plan_reviewed", "title": "ASA is not changed by NPO", "consideration": "The trainee should classify ASA physical status by systemic disease. An acute fasting violation does not change the ASA class.", "expectedResponse": "Assigns ASA II and states the NPO violation does not change it.", "responseWindowSec": 0, "redFlags": ["Raises the ASA class because of the full stomach"], "scoringGuidance": "Full credit for the correct ASA and the explicit reasoning.", "defaultRevealInDebrief": true},
+        {"id": "consider_postpone", "phaseId": "plan_review", "eventId": "plan_reviewed", "title": "Correct disposition", "consideration": "The correct disposition for an elective case with a fasting violation and an unresolved MH history is to postpone and optimize.", "expectedResponse": "Chooses to postpone and escalate rather than proceed.", "responseWindowSec": 0, "redFlags": ["Proceeds with an elective full-stomach case"], "scoringGuidance": "Full credit for postponing; declining to proceed is the successful outcome.", "defaultRevealInDebrief": true},
+        {"id": "consider_deferral_correct", "phaseId": "appropriately_deferred", "eventId": "deferred_complete", "title": "Deferral is a success", "consideration": "Deferring this case is the correct, successful clinical decision and should be reinforced as such, not treated as a failure.", "expectedResponse": "Recognizes the deferral as the right call.", "responseWindowSec": 0, "redFlags": [], "scoringGuidance": "Reinforce the correct decision.", "defaultRevealInDebrief": true},
+        {"id": "consider_training_counterfactual", "phaseId": "training_preinduction", "eventId": "training_branch_activated", "title": "Training counterfactual", "consideration": "This branch is an instructor-selected educational counterfactual. Proceeding is NOT the recommended clinical disposition; it exists only to practice downstream management.", "expectedResponse": "Understands this is a teaching exercise, not the correct disposition.", "responseWindowSec": 0, "redFlags": ["Believing this branch endorses proceeding"], "scoringGuidance": "State plainly that proceeding was wrong and this is practice only.", "defaultRevealInDebrief": true},
+        {"id": "consider_unsafe_trigger", "phaseId": "trigger_free_induction", "eventId": "unsafe_trigger_selected", "title": "Unsafe trigger given", "consideration": "Giving succinylcholine (or a volatile agent) to an MH-susceptible patient is an unsafe trigger that can unmask malignant hyperthermia.", "expectedResponse": "Recognizes that succinylcholine is a trigger to be avoided.", "responseWindowSec": 0, "redFlags": ["Gives succinylcholine to an MH-susceptible patient"], "scoringGuidance": "Mark the trigger as unsafe and connect it to MH risk.", "defaultRevealInDebrief": true},
+        {"id": "consider_trigger_free_success", "phaseId": "trigger_free_induction", "eventId": "trigger_free_path_maintained", "title": "Trigger-free technique maintained", "consideration": "A trigger-free induction (propofol or etomidate, a non-depolarizing relaxant, no volatile) avoids unmasking MH.", "expectedResponse": "Maintains a trigger-free technique.", "responseWindowSec": 0, "redFlags": [], "scoringGuidance": "Credit a trigger-free induction.", "defaultRevealInDebrief": true},
+        {"id": "consider_failed_attempt", "phaseId": "difficult_airway", "eventId": "first_intubation_attempt_failed", "title": "Failed first attempt", "consideration": "The first intubation attempt fails as predicted; the trainee should limit attempts, maintain oxygenation, and move to a rescue plan.", "expectedResponse": "Recognizes the failed attempt and prioritizes oxygenation.", "responseWindowSec": 0, "redFlags": ["Repeated forced attempts without oxygenating"], "scoringGuidance": "Credit for limiting attempts and oxygenating.", "defaultRevealInDebrief": true},
+        {"id": "consider_rescue_oxygenation", "phaseId": "difficult_airway", "eventId": "rescue_oxygenation_started", "title": "Rescue oxygenation", "consideration": "Mask ventilation between attempts restores oxygenation before a second, optimized attempt.", "expectedResponse": "Provides mask ventilation to recover saturation.", "responseWindowSec": 0, "redFlags": ["Does not oxygenate between attempts"], "scoringGuidance": "Credit for effective rescue oxygenation.", "defaultRevealInDebrief": true},
+        {"id": "consider_mh_crisis", "phaseId": "training_maintenance", "eventId": "mh_complication_started", "title": "MH crisis recognition and treatment", "consideration": "Rising EtCO2 with tachycardia is the early sign of malignant hyperthermia; later, temperature climbs. Treat immediately: stop the trigger, hyperventilate with 100 percent oxygen, give dantrolene 2.5 mg per kg (repeat to effect), cool, and call for help (MHAUS).", "expectedResponse": "Recognizes rising EtCO2, stops the trigger, gives dantrolene 2.5 mg/kg, hyperventilates, and cools.", "responseWindowSec": 300, "redFlags": ["Attributes the rising EtCO2 to hypoventilation only", "Delays dantrolene"], "scoringGuidance": "Full credit for early recognition and dantrolene plus supportive care.", "defaultRevealInDebrief": true},
+        {"id": "consider_training_emergence", "phaseId": "training_emergence", "eventId": "training_emergence_ready", "title": "Training emergence", "consideration": "After the training exercise, review the trigger-free emergence and the plan for MH monitoring in the ICU.", "expectedResponse": "Reviews continued MH monitoring and the recovery plan.", "responseWindowSec": 0, "redFlags": [], "scoringGuidance": "Reinforce post-MH ICU monitoring.", "defaultRevealInDebrief": true}
+      ]
+    },
+    "debrief": {
+      "teachingItems": [
+        {"id": "teach_npo", "title": "Fasting violation and postponement", "explanation": "A recent full meal violates the ASA fasting minimum for solids; an inappropriate fast is a recognized reason to delay or cancel an elective case. Source: ASA fasting standards (operator-directed) and NAS 530 assessment lecture."},
+        {"id": "teach_mh", "title": "Malignant hyperthermia susceptibility", "explanation": "A family history of a fever-and-rigidity anesthetic reaction requires escalation and a trigger-free technique. Volatile agents and succinylcholine are triggers; propofol, etomidate, opioids, benzodiazepines, ketamine, non-depolarizing relaxants, and local anesthetics are safe. Source: NAS 560 MH deck."},
+        {"id": "teach_asa_npo", "title": "ASA status and NPO", "explanation": "ASA physical status reflects systemic disease and is not changed by an acute fasting violation. Source: ASA-PS standards (operator-directed)."},
+        {"id": "teach_deferral", "title": "Deferral as the correct decision", "explanation": "Declining to proceed with an unsafe elective case is a successful clinical decision, not a failure. Source: NAS 530 assessment lecture."},
+        {"id": "teach_counterfactual", "title": "The training branch is a counterfactual", "explanation": "Proceeding here is an instructor-selected teaching exercise and is never the recommended disposition for this patient."},
+        {"id": "teach_trigger_free", "title": "Trigger-free technique", "explanation": "Avoid succinylcholine and all volatile agents; use propofol or etomidate with a non-depolarizing relaxant and a clean machine. Source: NAS 560 MH deck."},
+        {"id": "teach_difficult_airway", "title": "Managing the difficult airway", "explanation": "Limit intubation attempts, oxygenate by mask between attempts, apply cricoid for the full stomach, and complete intubation in fewer than three attempts. Source: Carson-Newman RSI rubric."},
+        {"id": "teach_mh_treatment", "title": "Treating an MH crisis", "explanation": "Stop the trigger, hyperventilate with 100 percent oxygen, give dantrolene 2.5 mg/kg repeated to effect (up to 10 mg/kg), cool actively, correct acidosis, and monitor in the ICU for 6 to 72 hours. Source: NAS 560 MH deck."}
+      ]
+    }
+  }
+}
