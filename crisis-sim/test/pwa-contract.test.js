@@ -44,6 +44,17 @@ const requiredAppShellEntries = [
   '/crisis-sim/sim/scenarios/rsi_full_stomach_001.json',
   '/crisis-sim/sim/scenarios/emergence_residual_block_001.json',
   '/crisis-sim/sim/scenarios/rsi_failed_first_attempt_001.json',
+  // Preanesthesia case feature: browser-loaded UI + runtime modules and assets.
+  '/ui/liveCaseView.js',
+  '/ui/liveCaseModel.js',
+  '/crisis-sim/sim/scenario/caseContract.js',
+  '/crisis-sim/sim/scenario/caseSession.js',
+  '/crisis-sim/sim/scenario/caseFlowSession.js',
+  '/crisis-sim/sim/scenario/caseProjections.js',
+  '/crisis-sim/sim/scenario/caseDebrief.js',
+  '/crisis-sim/sim/scenario/casePhysiologyInputs.js',
+  '/crisis-sim/sim/scenarios/cn_preassessment_lap_chole_001.json',
+  '/crisis-sim/sim/scenarios/cn_preassessment_npo_mh_001.json',
 ];
 
 function appShellEntries() {
@@ -53,9 +64,10 @@ function appShellEntries() {
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v53-rubric-debrief-2026-07-17';");
-    expect(sw).toContain('rubric-debrief');
+    expect(sw).toContain("const CACHE_VERSION = 'v54-preanesthesia-cases-2026-07-20';");
+    expect(sw).toContain('preanesthesia-cases');
     expect(sw).toContain("'/hospital-map.js?v=48'");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v53-rubric-debrief-2026-07-17';");
     expect(sw).not.toContain('v52-live-sim-lidocaine-2026-07-15');
     expect(sw).not.toContain("const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';");
@@ -85,6 +97,7 @@ describe('live simulation PWA contract', () => {
     runInNewContext(sw, {
       caches: {
         keys: async () => [
+          'overlord-v54-preanesthesia-cases-2026-07-20',
           'overlord-v53-rubric-debrief-2026-07-17',
           'overlord-v52-live-sim-lidocaine-2026-07-15',
           'workbox-precache-v1',
@@ -102,6 +115,9 @@ describe('live simulation PWA contract', () => {
     let activation;
     listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
     await activation;
-    expect(deleted).toEqual(['overlord-v52-live-sim-lidocaine-2026-07-15']);
+    expect(deleted).toEqual([
+      'overlord-v53-rubric-debrief-2026-07-17',
+      'overlord-v52-live-sim-lidocaine-2026-07-15',
+    ]);
   });
 });

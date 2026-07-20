@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v53-rubric-debrief-2026-07-17';
+const CACHE_VERSION = 'v54-preanesthesia-cases-2026-07-20';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -12,6 +12,7 @@ const APP_SHELL = [
   '/live-sim-display.html', '/assets/css/live-sim.css', '/assets/css/live-sim-display.css',
   '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveWaveformRenderer.js',
   '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
+  '/ui/liveCaseView.js', '/ui/liveCaseModel.js',
   '/crisis-sim/ui/simRunner.js',
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',
@@ -26,6 +27,12 @@ const APP_SHELL = [
   '/crisis-sim/sim/scenario/rubricScoringSession.js',
   '/crisis-sim/sim/scenario/rubricRules.js',
   '/crisis-sim/sim/scenario/rubricDebrief.js',
+  '/crisis-sim/sim/scenario/caseContract.js',
+  '/crisis-sim/sim/scenario/caseSession.js',
+  '/crisis-sim/sim/scenario/caseFlowSession.js',
+  '/crisis-sim/sim/scenario/caseProjections.js',
+  '/crisis-sim/sim/scenario/caseDebrief.js',
+  '/crisis-sim/sim/scenario/casePhysiologyInputs.js',
   '/crisis-sim/sim/scenario/actionLogger.js',
   '/crisis-sim/sim/scenario/actionCatalog.js',
   '/data/rubrics/carson-newman-standard-iv-induction.json',
@@ -35,6 +42,8 @@ const APP_SHELL = [
   '/crisis-sim/sim/scenarios/rsi_full_stomach_001.json',
   '/crisis-sim/sim/scenarios/emergence_residual_block_001.json',
   '/crisis-sim/sim/scenarios/rsi_failed_first_attempt_001.json',
+  '/crisis-sim/sim/scenarios/cn_preassessment_lap_chole_001.json',
+  '/crisis-sim/sim/scenarios/cn_preassessment_npo_mh_001.json',
   '/data/recall-questions.js',
   '/data/recall-questions-atoms.js',
   '/manifest.json',

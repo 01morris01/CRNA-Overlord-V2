@@ -186,4 +186,48 @@ assert.equal(afterNeostigmine.neostigmineRocRelief, 0, 'TOF-0 neostigmine must h
 assert.ok(afterNeostigmine.tofRatio < 0.9, 'block must persist below the extubation endpoint');
 line('PASS TOF-0 neostigmine logs without reversal', afterNeostigmine);
 
+// Preanesthesia teaching cases: both app-shell scenarios load through the same
+// public path the app uses and drive to their correct finalized outcomes.
+console.log('LIVE CASE SMOKE: preanesthesia teaching cases');
+const KAREN = loadJson('../sim/scenarios/cn_preassessment_lap_chole_001.json');
+const BRITTANY = loadJson('../sim/scenarios/cn_preassessment_npo_mh_001.json');
+const observeAll = (r, exp) => {
+  for (const c of exp.caseExperience.instructorGuide.considerations) {
+    r.setInstructorCaseObservation({ considerationId: c.id, status: 'observed' });
+  }
+};
+
+const karen = new SimRunner();
+assert.equal(karen.loadCaseScenario({ scenario: KAREN }).ok, true, 'Karen must load');
+karen.advanceCaseStage({ stage: 'interview' });
+for (const id of ['ask_asthma_control', 'ask_ponv_history', 'ask_contraceptive', 'ask_codeine']) karen.performAssessmentAction({ actionId: id });
+karen.advanceCaseStage({ stage: 'focused_exam' });
+karen.performAssessmentAction({ actionId: 'exam_airway' });
+karen.advanceCaseStage({ stage: 'findings_summary' });
+karen.submitCaseFindings({ findingIds: ['mild_asthma', 'ponv_high_risk', 'ocp_vte_risk', 'codeine_intolerance', 'airway_assessed'] });
+karen.advanceCaseStage({ stage: 'plan_submission' });
+karen.submitCasePlan({ selections: { disposition: 'proceed', asa_class: 'II', reactive_airway: 'sevoflurane_albuterol_ready', ponv_prophylaxis: 'multimodal', vte_prophylaxis: 'mechanical_scd', analgesia: 'multimodal_no_codeine' } });
+karen.advanceCaseStage({ stage: 'debrief_draft' });
+observeAll(karen, KAREN);
+assert.equal(karen.finalizeCaseDebrief().ok, true, 'Karen must finalize');
+assert.equal(karen.buildDebrief().caseResult.outcome, 'completed', 'Karen outcome must be completed');
+console.log('PASS Karen laparoscopic cholecystectomy -> completed');
+
+const brittany = new SimRunner();
+assert.equal(brittany.loadCaseScenario({ scenario: BRITTANY }).ok, true, 'Brittany must load');
+brittany.advanceCaseStage({ stage: 'interview' });
+for (const id of ['ask_last_meal', 'ask_family_anesthesia', 'ask_pregnancy']) brittany.performAssessmentAction({ actionId: id });
+brittany.advanceCaseStage({ stage: 'focused_exam' });
+brittany.performAssessmentAction({ actionId: 'exam_airway' });
+brittany.performAssessmentAction({ actionId: 'exam_dentition' });
+brittany.advanceCaseStage({ stage: 'findings_summary' });
+brittany.submitCaseFindings({ findingIds: ['heavy_breakfast_two_hours', 'family_history_mh', 'pregnancy_screen_needed', 'predicted_difficult_airway', 'dental_injury_risk'] });
+brittany.advanceCaseStage({ stage: 'plan_submission' });
+brittany.submitCasePlan({ selections: { disposition: 'postpone', asa_class: 'II', mh_management: 'escalate_trigger_free', trigger_free_technique: 'no_sux_no_volatile', airway_readiness: 'difficult_airway_prepared', team_communication: 'notify_team' } });
+brittany.advanceCaseStage({ stage: 'debrief_draft' });
+observeAll(brittany, BRITTANY);
+assert.equal(brittany.finalizeCaseDebrief().ok, true, 'Brittany must finalize');
+assert.equal(brittany.buildDebrief().caseResult.outcome, 'appropriately_deferred', 'Brittany outcome must be appropriately_deferred');
+console.log('PASS Brittany NPO/MH -> appropriately_deferred');
+
 console.log('LIVE CASE SMOKE: PASS');
