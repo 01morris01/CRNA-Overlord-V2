@@ -304,6 +304,181 @@ export function renderPrintableRubric({ debrief, rubricMetadata, identity = {} }
     </article>`;
 }
 
+/* Printable case sections.
+
+   CONFIDENTIALITY: this surface is rendered from an explicit allowlist, never
+   from a whole-record JSON dump. renderPrintRecordTable prints each record's
+   complete JSON, which is safe for rubric records but NOT for case timeline
+   records, since instructor_observation entries carry free-text notes and any
+   future record could carry answer-key content. Every field below is named
+   deliberately. Do not replace this with a generic record dump.
+
+   Excluded on purpose, proven by test/case-print.test.js:
+   - scoringGuidance and redFlags, even for released considerations;
+   - unreleased considerations in any form;
+   - undiscovered (missed) finding labels and significance, count only;
+   - responses to assessment actions the learner never performed;
+   - debrief teaching text that was never released. */
+const CASE_TIMELINE_PRINT_FIELDS = Object.freeze(['tSec', 'sequence', 'kind', 'source']);
+const TRAINING_BRANCH_ID = 'proceed_for_training';
+
+function casePrintRows(records, columns, emptyLabel = 'None') {
+  const safe = Array.isArray(records) ? records : [];
+  if (safe.length === 0) {
+    return `<tr><td colspan="${columns.length + 1}">${escapeHtml(emptyLabel)}</td></tr>`;
+  }
+  return safe.map((record, index) => `
+      <tr>
+        <td>${index + 1}</td>
+        ${columns.map(({ key, label, fallback = '—' }) => `<td data-label="${escapeHtml(label)}">${escapeHtml(record?.[key] ?? fallback)}</td>`).join('')}
+      </tr>`).join('');
+}
+
+function casePrintTable({ title, className, records, columns, emptyLabel }) {
+  return `
+    <section class="live-print-case-section ${escapeHtml(className)}">
+      <h2>${escapeHtml(title)}</h2>
+      <table>
+        <thead><tr><th scope="col">#</th>${columns.map(({ label }) => `<th scope="col">${escapeHtml(label)}</th>`).join('')}</tr></thead>
+        <tbody>${casePrintRows(records, columns, emptyLabel)}</tbody>
+      </table>
+    </section>`;
+}
+
+function casePlanSelectionRows(selections) {
+  const entries = selections && typeof selections === 'object' ? Object.entries(selections) : [];
+  if (entries.length === 0) return '<tr><td colspan="2">No plan submitted</td></tr>';
+  return entries.map(([field, value]) => `
+      <tr>
+        <th scope="row">${escapeHtml(field)}</th>
+        <td>${escapeHtml(Array.isArray(value) ? value.join(', ') : value)}</td>
+      </tr>`).join('');
+}
+
+export function renderPrintableCase({ debrief, identity = {} } = {}) {
+  const result = debrief?.caseResult;
+  if (!result || typeof result !== 'object' || !result.assessment || !result.plan) {
+    throw new TypeError('A finalized case debrief is required for printing');
+  }
+
+  const deferred = result.outcome === 'appropriately_deferred';
+  const timeline = Array.isArray(result.eventTimeline) ? result.eventTimeline : [];
+  const trainingActivated = timeline.some((entry) => (
+    entry?.kind === 'case_flow_branch_activated'
+    && typeof entry.branchId === 'string'
+    && (entry.branchId === TRAINING_BRANCH_ID || entry.branchId.includes('training'))
+  ));
+
+  const outcomeLabel = deferred ? 'APPROPRIATELY DEFERRED' : 'COMPLETED';
+  const deferredBanner = deferred
+    ? '<p class="live-print-case-deferred">This case was appropriately deferred. Declining to proceed was the correct clinical disposition and is scored as a successful outcome.</p>'
+    : '';
+  const trainingBanner = trainingActivated
+    ? '<p class="live-print-case-training">TRAINING-ONLY BRANCH. An instructor selected an educational counterfactual so the trainee could practice downstream management. This branch is NOT the recommended clinical disposition for this patient and must not be read as endorsing proceeding.</p>'
+    : '';
+
+  const missedCount = Array.isArray(result.assessment.missedFindings)
+    ? result.assessment.missedFindings.length
+    : 0;
+  // Count only: naming a missed finding would print the answer key.
+  const missedMarkup = `<p class="live-print-case-missed">Findings not discovered: ${escapeHtml(missedCount)}</p>`;
+
+  const findingsSubmission = result.assessment.findingsSubmission;
+  const submissionNotes = findingsSubmission?.notes
+    ? `<p><strong>Learner summary</strong> ${escapeHtml(findingsSubmission.notes)}</p>`
+    : '';
+
+  return `
+    <article class="live-case-print-report" aria-labelledby="live-print-case-title">
+      <p class="live-print-education-fence">Educational simulation. Not for clinical use.</p>
+      <header class="live-print-header">
+        <h1 id="live-print-case-title">Preanesthesia Case Record</h1>
+        <p>Case ID: ${escapeHtml(result.caseId)}</p>
+        <p>Finalized at simulation second ${escapeHtml(result.finalizedAtSec)}</p>
+      </header>
+      <dl class="live-print-identity">
+        <div><dt>Student</dt><dd>${escapeHtml(identity.student ?? '')}</dd></div>
+        <div><dt>Evaluator</dt><dd>${escapeHtml(identity.evaluator ?? '')}</dd></div>
+        <div><dt>Date</dt><dd>${escapeHtml(identity.date ?? '')}</dd></div>
+      </dl>
+      <section class="live-print-case-outcome" aria-label="Case outcome">
+        <p>CASE OUTCOME</p><strong>${escapeHtml(outcomeLabel)}</strong>
+        ${deferredBanner}
+        ${trainingBanner}
+      </section>
+      ${casePrintTable({
+        title: 'Assessment', className: 'live-print-case-assessment',
+        records: result.assessment.actions,
+        columns: [
+          { key: 'tSec', label: 'Simulation second' },
+          { key: 'stage', label: 'Stage' },
+          { key: 'domain', label: 'Domain' },
+          { key: 'prompt', label: 'Assessment performed' },
+        ],
+        emptyLabel: 'No assessment actions performed',
+      })}
+      ${casePrintTable({
+        title: 'Findings discovered', className: 'live-print-case-findings',
+        records: result.assessment.discoveredFindings,
+        columns: [
+          { key: 'learnerLabel', label: 'Finding' },
+          { key: 'significance', label: 'Significance' },
+        ],
+        emptyLabel: 'No findings discovered',
+      })}
+      ${missedMarkup}
+      ${submissionNotes}
+      <section class="live-print-case-section live-print-case-plan">
+        <h2>Anesthetic Plan</h2>
+        <table><tbody>${casePlanSelectionRows(result.plan.selections)}</tbody></table>
+        <p><strong>Rationale</strong> ${escapeHtml(result.plan.rationale || 'None recorded')}</p>
+      </section>
+      ${casePrintTable({
+        title: 'Plan scoring', className: 'live-print-case-rules',
+        records: result.plan.ruleResults,
+        columns: [
+          { key: 'id', label: 'Rule' },
+          { key: 'status', label: 'Status' },
+          { key: 'points', label: 'Points' },
+        ],
+        emptyLabel: 'No plan rules evaluated',
+      })}
+      ${casePrintTable({
+        title: 'Event Timeline', className: 'live-print-case-timeline',
+        records: timeline.map((entry) => Object.fromEntries(
+          CASE_TIMELINE_PRINT_FIELDS.map((field) => [field, entry?.[field]]),
+        )),
+        columns: [
+          { key: 'tSec', label: 'Simulation second' },
+          { key: 'sequence', label: 'Seq' },
+          { key: 'kind', label: 'Event' },
+          { key: 'source', label: 'Source' },
+        ],
+        emptyLabel: 'No case events recorded',
+      })}
+      ${casePrintTable({
+        title: 'Instructor Observations', className: 'live-print-case-observations',
+        records: result.instructorObservations,
+        columns: [
+          { key: 'considerationId', label: 'Consideration' },
+          { key: 'status', label: 'Status' },
+          { key: 'note', label: 'Instructor note', fallback: '' },
+        ],
+        emptyLabel: 'No instructor observations recorded',
+      })}
+      ${casePrintTable({
+        title: 'Released Teaching Feedback', className: 'live-print-case-feedback',
+        records: result.releasedFeedback,
+        columns: [
+          { key: 'title', label: 'Topic' },
+          { key: 'consideration', label: 'Teaching point' },
+          { key: 'expectedResponse', label: 'Expected response' },
+        ],
+        emptyLabel: 'No teaching feedback released',
+      })}
+    </article>`;
+}
+
 function rubricPrintIdentity(documentRoot) {
   return {
     student: documentRoot?.getElementById?.('live-rubric-student')?.value ?? '',
