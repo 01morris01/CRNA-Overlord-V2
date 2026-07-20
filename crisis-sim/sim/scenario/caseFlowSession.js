@@ -699,6 +699,19 @@ export class CaseFlowSession {
         .filter(({ fromPhaseId }) => fromPhaseId === this.#currentPhaseId)
         .map(({ id }) => id)
       : [];
+    // Instructor-fireable teaching beats for the current phase: an event whose
+    // trigger is `instructor`, that has not already fired (unless repeatable),
+    // when the phase permits activate_event and the flow is running. Mirrors
+    // the guard in onAction(INSTRUCTOR_EVENT_ACTION) exactly.
+    const eventActivationPermitted = this.#entered
+      && !this.#paused
+      && this.#currentPhase().allowedInstructorControls.includes('activate_event');
+    const availableInstructorEventIds = eventActivationPermitted
+      ? this.#currentPhase().events
+        .map((eventId) => this.#eventsById.get(eventId))
+        .filter((event) => event.trigger.type === 'instructor' && this.#canFire(event))
+        .map((event) => event.id)
+      : [];
     const responseDeadlines = [...this.#responseDeadlines.values()];
     return immutableCopy({
       currentPhaseId: this.#currentPhaseId,
@@ -706,6 +719,7 @@ export class CaseFlowSession {
       paused: this.#paused,
       activeEventIds: [...this.#activeEventIds],
       availableBranchIds,
+      availableInstructorEventIds,
       responseDeadlines,
       history: this.#history,
     }, 'case flow state');

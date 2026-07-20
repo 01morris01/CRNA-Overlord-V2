@@ -69,6 +69,7 @@ export function createLiveCaseController({
   const pause = query('#live-case-pause');
   const advance = query('#live-case-advance');
   const branches = query('#live-case-branches');
+  const caseEvents = query('#live-case-events');
   const considerations = query('#live-case-considerations');
   const history = query('#live-case-history');
   const printButton = query('#live-case-print');
@@ -153,6 +154,7 @@ export function createLiveCaseController({
     if (currentPhase) currentPhase.innerHTML = instructorMarkup.currentPhase;
     if (activeEvent) activeEvent.innerHTML = instructorMarkup.activeEvent;
     if (branches) branches.innerHTML = instructorMarkup.branches;
+    if (caseEvents) caseEvents.innerHTML = instructorMarkup.instructorEvents;
     if (considerations) considerations.innerHTML = instructorMarkup.considerations;
     if (history) history.innerHTML = instructorMarkup.history;
     if (pause) {
@@ -251,6 +253,13 @@ export function createLiveCaseController({
     if (branchButton) {
       runAction('branch_activation', () => runner.activateCaseBranch({
         branchId: branchButton.dataset.caseBranch,
+      }));
+      return;
+    }
+    const eventButton = event.target?.closest?.('[data-case-event]');
+    if (eventButton) {
+      runAction('instructor_event', () => runner.activateCaseEvent({
+        eventId: eventButton.dataset.caseEvent,
       }));
     }
   }

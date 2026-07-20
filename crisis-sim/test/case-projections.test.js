@@ -494,6 +494,7 @@ function makeFlowState() {
       privateMarker: SENTINELS.responseDeadline,
     }],
     availableBranchIds: [SENTINELS.branch],
+    availableInstructorEventIds: [],
     paused: false,
     history: [{
       kind: 'event_activated',
@@ -666,6 +667,7 @@ describe('learner case projection', () => {
       'activeEventIds',
       'responseDeadlines',
       'availableBranchIds',
+      'availableInstructorEventIds',
       'history',
       'completionRoutes',
     ]) {

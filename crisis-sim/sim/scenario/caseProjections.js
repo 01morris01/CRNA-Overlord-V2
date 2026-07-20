@@ -848,6 +848,26 @@ function copyAndValidateFlowState(flowState, references) {
       'flowState.availableBranchIds requires the current phase activate_branch control',
     );
   }
+  requireKnownIds(
+    copied.availableInstructorEventIds,
+    'flowState.availableInstructorEventIds',
+    references.events,
+    'event',
+  );
+  for (const eventId of copied.availableInstructorEventIds) {
+    if (references.events.get(eventId).phaseId !== phase.id) {
+      throw new TypeError(`flowState.availableInstructorEventIds event ${eventId} is not from current phase ${phase.id}`);
+    }
+  }
+  if (copied.availableInstructorEventIds.length > 0 && copied.paused) {
+    throw new TypeError('flowState.availableInstructorEventIds must be empty while flowState.paused is true');
+  }
+  if (copied.availableInstructorEventIds.length > 0
+    && !phase.allowedInstructorControls.includes('activate_event')) {
+    throw new TypeError(
+      'flowState.availableInstructorEventIds requires the current phase activate_event control',
+    );
+  }
   requireOrdinaryArray(copied.responseDeadlines, 'flowState.responseDeadlines');
   const deadlineSequences = new Set();
   copied.responseDeadlines.forEach((deadline, index) => {

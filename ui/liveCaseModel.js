@@ -121,6 +121,12 @@ export function renderInstructorCaseShell() {
       <div id="live-case-branches" class="live-case-branches" role="group" aria-label="Instructor branch controls">
         <p class="live-empty">No instructor branches available.</p>
       </div>
+      <section class="live-case-events-section" aria-labelledby="live-case-events-heading">
+        <h3 id="live-case-events-heading">Instructor teaching beats</h3>
+        <div id="live-case-events" class="live-case-events" role="group" aria-label="Instructor teaching-beat controls">
+          <p class="live-empty">No teaching beats available in this phase.</p>
+        </div>
+      </section>
       <section class="live-case-considerations-section" aria-labelledby="live-case-considerations-heading">
         <h3 id="live-case-considerations-heading">Phase considerations</h3>
         <ol id="live-case-considerations" class="live-case-considerations"><li class="live-empty">No active considerations.</li></ol>
@@ -499,6 +505,17 @@ export function renderInstructorCaseMarkup(context = {}) {
     : branchIds.map((branchId) => `
       <button type="button" class="live-case-branch" data-case-branch="${escapeCaseHtml(branchId)}"${disabledAttr(locked)}>${escapeCaseHtml(humanizeToken(branchId).toUpperCase())}</button>`).join('');
 
+  // Instructor-only control: fire a scheduled teaching beat on demand (time
+  // compression). Sourced from the instructor projection's flow state, which
+  // the learner projection strips, so these ids never reach the learner.
+  const instructorEventIds = asArray(flowState.availableInstructorEventIds)
+    .map((eventId) => asText(eventId))
+    .filter((eventId) => eventId.length > 0);
+  const instructorEvents = instructorEventIds.length === 0
+    ? '<p class="live-empty">No teaching beats available in this phase.</p>'
+    : instructorEventIds.map((eventId) => `
+      <button type="button" class="live-case-event" data-case-event="${escapeCaseHtml(eventId)}"${disabledAttr(locked)}>${escapeCaseHtml(humanizeToken(eventId).toUpperCase())}</button>`).join('');
+
   const observations = latestObservationsById(source.instructorObservations);
   const revealIds = new Set(asArray(source.feedbackRevealIds).map((id) => asText(id)));
   const considerationItems = asArray(source.considerations)
@@ -515,6 +532,7 @@ export function renderInstructorCaseMarkup(context = {}) {
     currentPhase,
     activeEvent,
     branches,
+    instructorEvents,
     considerations,
     history: renderInstructorHistoryMarkup(source.timeline),
     pauseLabel: paused ? 'RESUME CASE' : 'PAUSE CASE',
