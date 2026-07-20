@@ -34,41 +34,47 @@ name the case number, which is stable in the source.
 
 ### Population and provenance — read this first
 
-The SPEC defines Karen as: laparoscopic cholecystectomy, **current smoking, controlled
-GERD, severe prior PONV**.
+> **Realigned (2026-07-20):** an earlier draft built Karen as an invented composite
+> (`current_smoker`, `controlled_gerd`, `severe_prior_ponv`). The operator directed
+> realignment to the **real DOC-A Case 07 patient**, and the shipped JSON now uses the
+> realigned ids below. The tables in this section describe the **shipped** case. The
+> superseded composite and its per-id remap are recorded in the plan document,
+> Amendment A, and in `docs/case-design-scripts.md`. **U-1 is resolved by realignment.**
 
-DOC-A **Case 07** is the only laparoscopic cholecystectomy in the 30-case companion, and it
-is the source for everything procedure-related. **But its patient is not Karen.** DOC-A
-Case 07 is a 32F with mild asthma, migraine, OCP use, codeine intolerance, and latex contact
-dermatitis, who is explicitly a **non-smoker** ("female, non-smoker", DOC-A Case 07 line
-316), has **no GERD**, and whose PONV history is hypothetical ("prior PONV history
-*potential*", line 316).
+DOC-A **Case 07** is the only laparoscopic cholecystectomy in the 30-case companion and is
+the source patient. It is a 32F with **mild asthma, migraine, OCP use, codeine intolerance,
+and latex contact dermatitis**, explicitly a **non-smoker** ("female, non-smoker", DOC-A
+Case 07 lines 316 and 345), with **no GERD** (snapshot line 304) and a **hypothetical** PONV
+history ("prior PONV history *potential*", line 316). Karen's only comorbidity the engine
+can render as a live effect is her **asthma** (→ bronchospasm). All line numbers below are
+approximate (±3) against the extracted DOC-A text; the case number and quoted content are
+authoritative.
 
-**Karen is therefore a composite**, not a verbatim source patient: DOC-A Case 07 supplies the
-procedure and its physiology, DOC-A Case 19 supplies GERD implications, and DOC-A Cases 04
-and 12 supply smoking implications. Every individual element is traceable, but the operator
-should know the combination is authored, not lifted. This is flagged for review as item
-**U-1**.
-
-### Discoverable findings
+### Discoverable findings (shipped ids)
 
 | Finding ID | Clinical content | Source |
 | --- | --- | --- |
-| `current_smoker` | Active smoking. Pulmonary implication: >8 weeks of cessation is ideal for reducing pulmonary complications; carboxyhaemoglobin may persist so SpO₂ can overestimate true oxygenation; wound healing improves if quit >4 weeks. | DOC-A Case 04 lines 169–171 ("Recent smoking cessation (2 weeks) — >8 weeks ideal…; Carboxyhemoglobin still possible; oxygen saturation may overestimate true O₂"); DOC-A Case 12 lines 587–590 (">8 weeks ideal"; "Wound healing improved if quit >4 weeks"). Population transferred from a VATS lobectomy and a spine-fusion patient. |
-| `controlled_gerd` | GERD controlled on a PPI. Continue the PPI; slight aspiration risk; **standard induction remains acceptable**; famotidine is an acceptable adjunct. | DOC-A Case 19 lines 1033–1036, verbatim: "Mild GERD on PPI / Continue PPI. / Slight aspiration risk; standard induction acceptable. / Famotidine/Pepcid acceptable adjunct." Population transferred from a robotic prostatectomy patient. |
-| `severe_prior_ponv` | Prior severe PONV is one of the four Apfel risk factors. | DOC-A Case 07 line 345 (teaching pearl): "Apfel PONV score: female, non-smoker, h/o PONV or motion sickness, postop opioids — 4 risk factors = 80% risk without prophylaxis." DOC-B lists Apfel as a required scored field. |
-| `airway_assessed` | Airway exam documented: Mallampati, thyromental distance, mobility, dentition. DOC-A Case 07's airway is "Mallampati I, TMD 7 cm, full mobility, full native dentition. Easy intubation predicted." | DOC-A Case 07 line 332; DOC-B "AIRWAY EXAM" block (Mallampati, TMD, mouth opening, neck ROM, dentition, predicted mask/DL/SGA); DOC-C airway-exam slides. |
-| `anesthetic_history_reviewed` | Prior anaesthetic records retrieved and reviewed; if unavailable the patient must supply details of significant anaesthetic experiences. | DOC-C lines 140–150: "Previous anesthesia records should be retrieved and reviewed. Especially if complications are suspected." |
+| `mild_asthma` | Mild intermittent asthma; reactive airway. Prefer sevoflurane (bronchodilator) over desflurane; have albuterol available; risk of intraoperative bronchospasm on instrumentation. | DOC-A Case 07 snapshot (mild asthma) and ≈lines 307–310 ("Sevoflurane is bronchodilator — preferred over desflurane"). |
+| `ponv_high_risk` | High Apfel PONV risk (female, non-smoker, prior PONV/motion sickness, postoperative opioids). | DOC-A Case 07 teaching pearl ≈line 345 ("Apfel PONV score: female, non-smoker, h/o PONV or motion sickness, postop opioids — 4 risk factors = 80%"); DOC-B Apfel field. |
+| `ocp_vte_risk` | Combined OCP plus pneumoperitoneum raises VTE risk; mechanical prophylaxis (SCDs). | DOC-A Case 07 ≈lines 317–319 ("Increased VTE risk in laparoscopy with pneumoperitoneum. Mechanical prophylaxis (SCDs)"). |
+| `codeine_intolerance` | Codeine causes nausea (intolerance, not allergy). Avoid codeine and tramadol; favour fentanyl + multimodal. | DOC-A Case 07 ≈lines 314–315 ("Codeine intolerance (nausea, not allergy) — Avoid codeine and tramadol; use fentanyl + multimodal"). |
+| `airway_assessed` | Airway exam documented; DOC-A Case 07's airway is "Mallampati I, TMD 7 cm, full mobility, full native dentition. Easy intubation predicted." | DOC-A Case 07 ≈line 329; DOC-B "AIRWAY EXAM" block; DOC-C airway-exam slides. |
+| `anesthetic_history_reviewed` | Prior anaesthetic records retrieved and reviewed; if unavailable the patient supplies details of significant anaesthetic experiences. | DOC-C lines 138–150 ("Previous anesthesia records should be retrieved and reviewed"). |
 
-### Expected anaesthetic plan elements
+### Expected anaesthetic plan elements (shipped ids)
 
 | Plan rule ID | Expected content | Source |
 | --- | --- | --- |
-| `asa_ii_with_reason` | ASA II with a stated reason (mild systemic disease). | DOC-A Case 07 line 305: "ASA CLASSIFICATION ASA II — mild systemic disease". DOC-B requires ASA with justification. |
-| `aspiration_strategy` | Continue PPI; standard (non-RSI) induction is acceptable for controlled GERD; famotidine adjunct acceptable; OG tube to decompress the stomach for laparoscopic exposure. | DOC-A Case 19 lines 1034–1036; DOC-A Case 07 line 337 ("OG tube to decompress stomach for laparoscopic exposure"). |
-| `multimodal_ponv_prophylaxis` | Dexamethasone 4–8 mg **plus** ondansetron 4 mg **plus** scopolamine patch, **or** propofol TIVA. | DOC-A Case 07 line 346, verbatim teaching pearl. Reinforced at line 335 ("dexamethasone, ondansetron (multimodal PONV prevention)") and red flag line 341. |
-| `smoking_pulmonary_plan` | Address active smoking: counsel cessation, anticipate reactive airway, prefer sevoflurane (bronchodilator) over desflurane (airway irritant). | Sevoflurane preference: DOC-A Case 07 line 310. Smoking cessation benefit: DOC-A Cases 04/12 as above. |
-| `postoperative_pain_plan` | Multimodal analgesia: acetaminophen, an NSAID (ketorolac), local anaesthetic at port sites; coordinate NSAID use with the surgeon. Fentanyl rather than codeine/tramadol where intolerance exists. | DOC-A Case 07 line 339 ("Multimodal analgesia: acetaminophen, NSAID (ketorolac), local at port sites"); red flag line 344 ("Avoid NSAIDs if surgeon plans to use ketorolac — coordinate"); line 315 ("Avoid codeine and tramadol; use fentanyl + multimodal"). |
+| `asa_ii_with_reason` | ASA II with a stated reason (mild systemic disease). | DOC-A Case 07 ≈line 305 ("ASA II — mild systemic disease"); DOC-B requires ASA with justification. |
+| `reactive_airway_plan` | Reactive-airway readiness: sevoflurane (bronchodilating volatile), albuterol immediately available, anticipate bronchospasm. This is what the live bronchospasm beat pays off. | DOC-A Case 07 ≈line 310 (sevoflurane preferred); Case 07 red flags (bronchospasm/PONV). |
+| `multimodal_ponv_prophylaxis` | Dexamethasone 4–8 mg **plus** ondansetron 4 mg **plus** scopolamine patch, **or** propofol TIVA. | DOC-A Case 07 teaching pearl ≈line 346; reinforced ≈line 335. |
+| `vte_prophylaxis` | Mechanical VTE prophylaxis (SCDs) for pneumoperitoneum + OCP. | DOC-A Case 07 ≈lines 317–319. |
+| `postoperative_pain_plan` | Multimodal analgesia: acetaminophen, an NSAID (ketorolac), local at port sites; coordinate NSAID with surgeon; fentanyl rather than codeine/tramadol. | DOC-A Case 07 ≈line 339; red flag ≈line 344; ≈line 315 (avoid codeine/tramadol). |
+
+*Historical note:* the superseded composite ids `current_smoker` (from DOC-A Cases 04/12),
+`controlled_gerd` (DOC-A Case 19), `severe_prior_ponv`, `aspiration_strategy`, and
+`smoking_pulmonary_plan` are **not in the shipped JSON**. Their remap to the ids above is in
+plan Amendment A.
 
 ### Red flags
 

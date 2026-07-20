@@ -199,7 +199,7 @@
     },
     "debrief": {
       "teachingItems": [
-        {"id": "teach_npo", "title": "Fasting violation and postponement", "explanation": "A recent full meal violates the ASA fasting minimum for solids; an inappropriate fast is a recognized reason to delay or cancel an elective case. Source: ASA fasting standards (operator-directed) and NAS 530 assessment lecture."},
+        {"id": "teach_npo", "title": "Fasting violation and postponement", "explanation": "An inappropriate fast is a recognized reason to delay or cancel an elective case (source: NAS 530 assessment lecture). The specific fasting-interval minimum that makes a two-hour-old full meal a violation is the ASA fasting standard (operator-directed), not a value from the attached course documents."},
         {"id": "teach_mh", "title": "Malignant hyperthermia susceptibility", "explanation": "A family history of a fever-and-rigidity anesthetic reaction requires escalation and a trigger-free technique. Volatile agents and succinylcholine are triggers; propofol, etomidate, opioids, benzodiazepines, ketamine, non-depolarizing relaxants, and local anesthetics are safe. Source: NAS 560 MH deck."},
         {"id": "teach_asa_npo", "title": "ASA status and NPO", "explanation": "ASA physical status reflects systemic disease and is not changed by an acute fasting violation. Source: ASA-PS standards (operator-directed)."},
         {"id": "teach_deferral", "title": "Deferral as the correct decision", "explanation": "Declining to proceed with an unsafe elective case is a successful clinical decision, not a failure. Source: NAS 530 assessment lecture."},
