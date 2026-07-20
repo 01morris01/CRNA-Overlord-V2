@@ -10,6 +10,62 @@
 
 ---
 
+## Amendment A (2026-07-20): Karen finding/rule id remap
+
+This plan's Task 9 Step 1 listed **invented composite ids** for Karen Whitfield that
+were built against an imagined patient (a smoker with GERD and confirmed prior PONV).
+During authoring, the operator directed realigning both cases to the **real** course
+patients with comorbidities the engine can physiologically express. The only lap
+cholecystectomy in the operator's teaching companion (Case 07) is a **non-smoker with
+no GERD and only a hypothetical PONV history** whose one engine-expressible comorbidity
+is **mild asthma** (see `docs/case-clinical-sourcing.md` and `docs/case-design-scripts.md`).
+Karen's ids were therefore remapped as follows. Brittany Cole's ids are **unchanged**
+from the plan.
+
+**Rationale:** realignment to the real Carson-Newman Case 07 patient so every finding is
+source-traceable and its intraoperative effect is engine-real (asthma → bronchospasm)
+rather than a fake label. Silent divergence would break Task 10's registry metadata and
+scope-hygiene check, so it is recorded here.
+
+Karen finding ids (old → new):
+
+| Plan (composite) | Authored (realigned) | Reason |
+| --- | --- | --- |
+| `current_smoker` | `mild_asthma` | Case 07 is a non-smoker; asthma is her reactive-airway comorbidity |
+| `controlled_gerd` | `codeine_intolerance` | Case 07 has no GERD; codeine intolerance is a documented reaction |
+| `severe_prior_ponv` | `ponv_high_risk` | Renamed; PONV is a *risk* (Apfel), assessed but not engine-modeled |
+| (added) | `ocp_vte_risk` | Case 07 uses an OCP; pneumoperitoneum + OCP raises VTE risk |
+| `airway_assessed` | `airway_assessed` | unchanged |
+| `anesthetic_history_reviewed` | `anesthetic_history_reviewed` | unchanged |
+
+Karen plan rule ids (old → new):
+
+| Plan (composite) | Authored (realigned) | Reason |
+| --- | --- | --- |
+| `asa_ii_with_reason` | `asa_ii_with_reason` | unchanged |
+| `aspiration_strategy` | `reactive_airway_plan` | no GERD/aspiration; the live risk is bronchospasm |
+| `multimodal_ponv_prophylaxis` | `multimodal_ponv_prophylaxis` | unchanged |
+| `smoking_pulmonary_plan` | `vte_prophylaxis` | non-smoker; OCP + laparoscopy VTE prophylaxis instead |
+| `postoperative_pain_plan` | `postoperative_pain_plan` | unchanged |
+
+## Amendment B (2026-07-20): authorized files beyond the original file map
+
+The following were added or changed beyond the plan's original (75bb862-corrected) file
+map, and are authorized additions rather than scope drift:
+
+- `crisis-sim/ui/simRunner.js` — `activateCaseEvent` and `isCaseFinalized` public methods
+  (necessary: without them an instructor cannot fire teaching beats or print in the app).
+- `ui/liveSimView.js`, `ui/liveCaseView.js`, `ui/liveCaseModel.js` — printable case record
+  wiring and the instructor teaching-beat control (Task 8 print gap + the beat control).
+- `crisis-sim/sim/scenario/caseFlowSession.js`, `caseProjections.js` —
+  `availableInstructorEventIds` flow-state field for the beat control, learner-stripped.
+- `docs/case-clinical-sourcing.md`, `docs/case-design-scripts.md` — clinical trace and
+  design script (the operator-facing provenance artifacts).
+- Test files: `case-leak-probe`, `case-print`, `case-print-wiring`, `case-instructor-events`,
+  `case-confidentiality-regressions`, `case-scenarios`, `case-evidence(.mjs/.test.js)`.
+
+---
+
 ## Approved specification
 
 Implement against:
