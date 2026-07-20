@@ -241,3 +241,95 @@ Karen can be authored now, subject to **U-1**. Brittany's assessment phase and c
 postpone path can be authored subject to **U-2**, **U-4**, **U-5** and **U-6**; her
 **training-only MH branch cannot be responsibly authored until U-3 is resolved**, because its
 entire teaching payload would otherwise be invented.
+
+---
+
+# Addendum — operator resolutions (2026-07-20)
+
+The operator supplied `NAS 560 MH.ppt` and directed: (2) "use the updated ASA standards";
+(3) "realign each scenario to real comorbidities and have those comorbidities have effect
+during the case… everything should be a path towards the scenario and a script and feedback
+for the instructor and what the trainee should be doing at each stage." Resolutions below.
+
+## DOC-E — `NAS 560 MH.ppt`, "Malignant Hyperthermia," NAS 560 Summer 2026, Dr. Dawn Whybrew
+
+This resolves **U-3**. Extracted via the OLE PowerPoint Document stream (legacy binary `.ppt`);
+text-record extraction, no rendering. All MH teaching and simulation content is now sourced:
+
+| MH element | Sourced content | DOC-E slide text |
+| --- | --- | --- |
+| Definition | "a subclinical myopathy that is unmasked upon exposure to volatile anesthetics and/or succinylcholine" | "Definition" slide. |
+| Triggering agents | Volatile gases (halothane, enflurane, isoflurane, sevoflurane, desflurane); succinylcholine; N₂O possibly a weak trigger. | "Triggering Agents" slide. |
+| Safe (non-triggering) drugs | Barbiturates, propofol, etomidate, opioids, benzodiazepines, ketamine, non-depolarizing muscle relaxants, reversal agents, local anesthetics, vasopressors. | "Anesthesia Preparation" slide. |
+| Early sign | **Hypercarbia (rising EtCO₂) is an early sign.** Tachycardia, tachypnea. "The earliest signs… enormous increases in metabolic rate." | "Signs and Symptoms" and notes: "Hypercarbia is an early sign." |
+| Late sign | **Temperature rise is often a late sign**, but can be precipitous — "1ºC every 5 minutes… up to 46ºC." | "Signs and Symptoms" slide. |
+| Masseter spasm | Trismus / "jaws of steel" after succinylcholine; with persistent rigidity >a few minutes, halt the procedure. | "Trismus-Masseter Spasm" slides. |
+| Onset window | "within 10 min or several hours of administration of triggering drugs"; death may occur in as little as 15 minutes; V-fib is the most common cause of death. | "Incidence" and notes slides. |
+| Full sign set | Tachycardia, tachypnea/hypercarbia, arterial hypoxemia, metabolic/respiratory acidosis, hyperkalemia, dysrhythmias, hypotension, rigidity, hyperthermia, mottled skin. | "Signs and Symptoms" slides. |
+| Treatment — drug | **Dantrolene / Ryanodex 2.5 mg/kg IV bolus, repeat q5–10 min until controlled, up to 10 mg/kg** (occasionally more). | "Treatment" slide. |
+| Treatment — supportive | Turn off volatile gases; hyperventilate with 100% O₂; active cooling (stop at 38ºC); conclude surgery ASAP; correct acidosis (NaHCO₃ 1–2 mEq/kg); maintain UOP (mannitol 0.25 g/kg, furosemide 1 mg/kg); treat dysrhythmias and hyperkalemia; ICU 6–72 h with dantrolene 1 mg/kg q6h ×72 h. | "Treatment" slides. |
+| Trigger-free machine prep | First case of day; disposable circuit and fresh-gas hose; new CO₂ absorbent; vaporizers removed/taped off; flush O₂ 10 L/min for 5–20 min; regional if appropriate. | "Anesthesia Preparation" slide. |
+| Resource | MHAUS 24-hour hotline 1-800-MH-HYPER; www.mhaus.org. | "For More Information" slide. |
+
+**Simulation consequence:** MH in Brittany's training branch is triggered ONLY by
+succinylcholine or a volatile agent (DOC-E). Its first engine-visible sign must be rising
+EtCO₂ / tachycardia, with temperature as a later sign, and it resolves to dantrolene 2.5 mg/kg
+— matching the engine's existing `MalignantHyperthermia` complication. The trigger-free plan's
+"safe drugs" list and machine prep are DOC-E-sourced. **U-3 resolved.**
+
+## ASA standards (operator-directed) — resolves U-2 and U-6
+
+The operator directed use of "the updated ASA standards." These are named professional
+standards, not an attached file, so every value below is tagged `source: "ASA (operator-
+directed)"` in the JSON rather than attributed to a supplied document, and flagged
+`needsReview: true` so the operator can confirm the version.
+
+- **U-2 (fasting).** ASA "Practice Guidelines for Preoperative Fasting" (2023 update):
+  clear liquids 2 h; breast milk 4 h; infant formula / nonhuman milk / light meal 6 h;
+  fried/fatty food or a full/heavy meal 8 h. Brittany's "heavy breakfast ~2 hours ago"
+  therefore violates the 6–8 h solid-food minimum. The finding will assert the violation
+  against the ASA minimum rather than inventing an uncited threshold.
+- **U-6 (ASA physical status).** ASA-PS classification reflects systemic disease severity and
+  is not altered by a fasting violation (an acute NPO status is not a systemic disease). This
+  is inherent to the ASA-PS definitions and is now attributed to that standard rather than to
+  DOC-A by analogy. `asa_not_changed_by_npo` stands.
+
+## Realignment to real comorbidities (resolves U-1; supersedes the composite)
+
+Per directive (3), the invented composites are abandoned. Each case is realigned to
+source-backed comorbidities that produce a **real engine physiologic effect**, so the
+comorbidity drives the clinical path rather than sitting as a cosmetic label.
+
+- **Karen → the real DOC-A Case 07 patient.** 32F, symptomatic cholelithiasis for outpatient
+  laparoscopic cholecystectomy; **mild intermittent asthma**, migraine on PRN treatment, OCP
+  use, codeine intolerance (nausea, not allergy), latex contact dermatitis; **non-smoker**;
+  **high Apfel PONV risk**. This replaces the smoker/GERD/severe-PONV composite. Asthma is the
+  comorbidity chosen to have an intraoperative engine effect (bronchospasm on airway
+  instrumentation / light anesthesia) if the engine supports it; PONV risk and OCP/VTE remain
+  assessment-and-plan findings.
+- **Brittany → retained identity, now fully sourced.** Elective knee arthroscopy; recent heavy
+  meal (ASA fasting violation); **MH family history** (DOC-E) as the engine-effect comorbidity
+  in the training branch; predicted difficult airway with dental risk (DOC-C). No underlying
+  source-patient exists, so her non-MH attributes stay at the level DOC-C/DOC-B support.
+
+**Consequence for the plan's hard-coded finding IDs.** The plan's Task 9 Step 1 lists Karen
+finding IDs built for the composite (`current_smoker`, `controlled_gerd`, `severe_prior_ponv`).
+Realignment changes these to match the real patient (e.g. `mild_asthma`, `ponv_high_risk`,
+`ocp_vte_risk`, `codeine_intolerance`, `latex_precaution`, `airway_assessed`,
+`anesthetic_history_reviewed`). This is a deliberate, operator-directed divergence from the
+written plan; the plan's exact-ID test is updated to the realigned IDs and the change is noted
+in the Task 9 commit. Brittany's IDs are unaffected by realignment.
+
+**Pending engine confirmation.** Which comorbidity effects are actually expressible (e.g.
+whether the engine models weight-dependent desaturation and asthma→bronchospasm) is being
+verified against the engine before authoring, so no effect is asserted that the engine cannot
+produce. Any comorbidity whose physiology the engine cannot express will be authored as an
+assessment/plan finding only, explicitly noted, never as a fake live effect.
+
+## Remaining open items after this addendum
+
+- **U-4** (pregnancy-screen indication) and **U-5** (Brittany's specific airway exam values)
+  remain unsourced; both will be authored as documentation-completeness items marked
+  `needsReview: true` unless the operator supplies values.
+- **U-7** (knee-arthroscopy procedural physiology) remains unsourced; Brittany's training
+  branch stays procedure-generic and exercises only the airway and MH pathways.
