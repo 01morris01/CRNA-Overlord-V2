@@ -479,6 +479,45 @@ export function renderPrintableCase({ debrief, identity = {} } = {}) {
     </article>`;
 }
 
+function casePrintIdentity(documentRoot) {
+  return {
+    student: documentRoot?.getElementById?.('live-case-student')?.value ?? '',
+    evaluator: documentRoot?.getElementById?.('live-case-evaluator')?.value ?? '',
+    date: documentRoot?.getElementById?.('live-case-date')?.value ?? '',
+  };
+}
+
+function setCasePrintStatus(documentRoot, message) {
+  const status = documentRoot?.getElementById?.('live-case-print-status');
+  if (status) status.textContent = message;
+}
+
+// Wires renderPrintableCase into a reachable instructor action, mirroring
+// runRubricPrintAction. Refuses unless the case is finalized (so the debrief
+// exists and is complete). The rendered markup is the scrubbed student record;
+// confidentiality is proven in test/case-print.test.js and
+// test/case-print-wiring.test.js.
+export function runCasePrintAction({
+  runner: liveRunner,
+  documentRoot,
+  printImpl = () => globalThis.print?.(),
+} = {}) {
+  if (!liveRunner?.isCaseFinalized?.()) {
+    setCasePrintStatus(documentRoot, 'Finalize the case debrief before printing.');
+    return { ok: false, reason: 'CASE_NOT_FINALIZED' };
+  }
+  const printDocument = documentRoot?.getElementById?.('live-case-print-document');
+  if (!printDocument) return { ok: false, reason: 'CASE_PRINT_DOCUMENT_UNAVAILABLE' };
+  const debrief = liveRunner.buildDebrief();
+  if (!debrief?.caseResult) return { ok: false, reason: 'CASE_DEBRIEF_UNAVAILABLE' };
+  const markup = renderPrintableCase({ debrief, identity: casePrintIdentity(documentRoot) });
+  printDocument.innerHTML = markup;
+  printDocument.hidden = false;
+  setCasePrintStatus(documentRoot, 'Finalized case record ready.');
+  printImpl();
+  return { ok: true, caseId: debrief.caseResult.caseId };
+}
+
 function rubricPrintIdentity(documentRoot) {
   return {
     student: documentRoot?.getElementById?.('live-rubric-student')?.value ?? '',
@@ -1468,6 +1507,11 @@ function ensureRunner() {
       if (result && result.ok === false && result.reason) {
         setStatus(`Case control rejected: ${result.reason}`, 'error');
       }
+    },
+    onPrint: () => {
+      const result = runCasePrintAction({ runner, documentRoot: document });
+      if (result.ok) setStatus('Case record prepared for print.', 'success');
+      else setStatus(`Case print unavailable: ${result.reason}`, 'error');
     },
   });
   runner.emit();

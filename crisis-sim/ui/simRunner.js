@@ -1060,6 +1060,10 @@ export class SimRunner {
     return this.rubricSession?.isFinalized() ?? false;
   }
 
+  isCaseFinalized() {
+    return this.caseSession?.getLiveResult().finalized === true;
+  }
+
   getRubricDiscrepancies() {
     if (!this.rubricSession) return [];
     return copyJsonInput(this.rubricSession.rubric.discrepancies, 'rubric discrepancies');

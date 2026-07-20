@@ -129,6 +129,17 @@ export function renderInstructorCaseShell() {
         <h3 id="live-case-history-heading">Case history</h3>
         <ol id="live-case-history" class="live-case-history"><li class="live-empty">No case events recorded.</li></ol>
       </section>
+      <fieldset class="live-case-print-prep">
+        <legend>Printable case record</legend>
+        <div class="live-case-print-fields">
+          <label class="live-field" for="live-case-student"><span>Student</span><input id="live-case-student" type="text" autocomplete="name" maxlength="120"></label>
+          <label class="live-field" for="live-case-evaluator"><span>Evaluator</span><input id="live-case-evaluator" type="text" autocomplete="name" maxlength="120"></label>
+          <label class="live-field" for="live-case-date"><span>Date</span><input id="live-case-date" type="date"></label>
+        </div>
+        <output id="live-case-print-status" class="live-case-inline-status" aria-live="polite">Finalize the case debrief to print its record.</output>
+        <button id="live-case-print" type="button" disabled>PRINT CASE RECORD</button>
+      </fieldset>
+      <section id="live-case-print-document" class="live-case-print-document" aria-label="Printable finalized case record" hidden></section>
     </section>`;
 }
 

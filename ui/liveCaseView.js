@@ -51,7 +51,9 @@ function renderStageNavMarkup(learnerContext, learnerMarkup) {
   }).join('');
 }
 
-export function createLiveCaseController({ runner, root, onChanged = () => {} } = {}) {
+export function createLiveCaseController({
+  runner, root, onChanged = () => {}, onPrint = () => {},
+} = {}) {
   const query = (selector) => root?.querySelector?.(selector) ?? null;
 
   const workspace = query('#live-case-workspace');
@@ -69,6 +71,7 @@ export function createLiveCaseController({ runner, root, onChanged = () => {} } 
   const branches = query('#live-case-branches');
   const considerations = query('#live-case-considerations');
   const history = query('#live-case-history');
+  const printButton = query('#live-case-print');
 
   let stageNav = query('#live-case-stage-nav');
   if (!stageNav && status?.insertAdjacentHTML) {
@@ -157,6 +160,8 @@ export function createLiveCaseController({ runner, root, onChanged = () => {} } 
       pause.disabled = instructorMarkup.pauseDisabled;
     }
     if (advance) advance.disabled = instructorMarkup.advanceDisabled;
+    // The printable case record is only available once the case is finalized.
+    if (printButton) printButton.disabled = runner.isCaseFinalized?.() !== true;
 
     if (drafts) restoreDrafts(drafts);
   }
@@ -267,6 +272,11 @@ export function createLiveCaseController({ runner, root, onChanged = () => {} } 
     runAction('phase_advance', () => runner.advanceCasePhase());
   }
 
+  function handlePrint() {
+    if (runner.isCaseFinalized?.() !== true) return;
+    onPrint();
+  }
+
   const bindings = [
     [workspace, 'click', handleWorkspaceClick],
     [submitFindings, 'click', handleSubmitFindings],
@@ -275,6 +285,7 @@ export function createLiveCaseController({ runner, root, onChanged = () => {} } 
     [instructor, 'change', handleInstructorChange],
     [pause, 'click', handlePauseToggle],
     [advance, 'click', handlePhaseAdvance],
+    [printButton, 'click', handlePrint],
   ];
   for (const [element, eventType, handler] of bindings) {
     element?.addEventListener?.(eventType, handler);
