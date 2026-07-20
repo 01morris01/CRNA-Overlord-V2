@@ -326,6 +326,28 @@ verified against the engine before authoring, so no effect is asserted that the 
 produce. Any comorbidity whose physiology the engine cannot express will be authored as an
 assessment/plan finding only, explicitly noted, never as a fake live effect.
 
+## Engine ↔ physiology validation (2026-07-20)
+
+Before authoring, each physiologic behavior the cases rely on was driven through
+the real `SimRunner` and checked for clinical plausibility (not just that it runs).
+Results:
+
+| Behavior | Measured | Clinically realistic? |
+| --- | --- | --- |
+| Weight → desaturation (apnea to SpO₂<90 after full preox) | 60 kg → 565 s (~9.4 min); 120 kg (BMI 41) → 155 s; 160 kg (BMI 59) → 85 s | ✅ Correct gradient — lean adults tolerate ~6–10 min, obese ~2–3 min, morbidly obese <2 min |
+| Asthma → bronchospasm | Ppeak 0→44 cmH₂O, SpO₂ 100→88; albuterol + deepening → Ppeak 44→18, SpO₂→98 over ~90 s | ✅ High peak pressure + hypoxia, resolves with bronchodilator/deepening |
+| MH (properly ventilated, FiO₂ 0.5) | EtCO₂ 40→127 (early), Temp 35.7→40.6 (later), HR 59→92, **SpO₂ held 99.5**; dantrolene 2.5 mg/kg + stop volatile → EtCO₂ falls 127→69 | ✅ Correct sign ordering (EtCO₂ early, temp late), oxygenation preserved when ventilated, treatment resolves |
+| EtCO₂ ↔ minute ventilation | MV 5.9 → EtCO₂ 40; MV 2.3 → 126; MV 9.0 → 24 | ✅ Correct inverse relationship (drives the laparoscopy vent challenge) |
+| Difficult intubation (`failedIntubationAttempts:[1]`) | non-preox attempt SpO₂ nadir 69.6% at 41 s; preox attempt holds 99.8%; rescue order attempt→failed→cricoid→mask PPV→attempt→succeeded, SpO₂ 87.6→99.9 | ✅ Realistic desaturation, preox protective, correct rescue sequence |
+
+**Two honest modeling simplifications** (substrate engine, not authored): MH EtCO₂
+rises faster than life (≈47→119 in 60 s) and temperature climbs ≈1°C/min versus the
+DOC-E reference of 1°C/5 min — the engine compresses the MH timeline. Ordering and
+treatment response are correct, and the compression aligns with the operator's
+"teach it without the full time expense" requirement. Both are noted so instructors
+know the MH clock runs fast. Verified via throwaway scripts against `SimRunner`;
+the difficult-intubation numbers are additionally locked by `test/airway-gaps-evidence`.
+
 ## Remaining open items after this addendum
 
 - **U-4** (pregnancy-screen indication) and **U-5** (Brittany's specific airway exam values)
