@@ -7,6 +7,13 @@ source that supports it. Anything not traceable is listed in
 resolved by the operator before it is authored into scenario JSON. Items authored under an
 operator decision carry a `needsReview` marker in the JSON.
 
+**Status of `needsReview` markers (2026-07-20):** these are now present inline in
+`cn_preassessment_npo_mh_001.json`. Findings `heavy_breakfast_two_hours` (U-2),
+`pregnancy_screen_needed` (U-4), and `predicted_difficult_airway` (U-5), and the plan
+rule `asa_not_changed_by_npo` (U-6) each carry `needsReview: true` and a `reviewNote`
+naming the gap. Karen's findings and rules are all source-traceable after realignment
+and carry no markers.
+
 ## Source documents
 
 | Key | Document | What it authoritatively supplies |

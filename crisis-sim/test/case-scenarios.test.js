@@ -186,6 +186,19 @@ describe('Brittany Cole — cn_preassessment_npo_mh_001', () => {
     expect(entryEdges[0].id).toBe('proceed_for_training');
   });
 
+  test('unsourced items carry inline needsReview markers with a review note', () => {
+    const markedFindings = exp.assessment.findings.filter((f) => f.needsReview === true);
+    expect(markedFindings.map((f) => f.id).sort()).toEqual([
+      'heavy_breakfast_two_hours', 'predicted_difficult_airway', 'pregnancy_screen_needed',
+    ]);
+    expect(markedFindings.every((f) => typeof f.reviewNote === 'string' && f.reviewNote.length > 0)).toBe(true);
+    const markedRules = exp.planRequirements.rules.filter((r) => r.needsReview === true);
+    expect(markedRules.map((r) => r.id)).toEqual(['asa_not_changed_by_npo']);
+    // Sourced findings must NOT be flagged.
+    expect(exp.assessment.findings.find((f) => f.id === 'family_history_mh').needsReview).toBeUndefined();
+    expect(exp.assessment.findings.find((f) => f.id === 'dental_injury_risk').needsReview).toBeUndefined();
+  });
+
   test('discloses the compressed MH timeline in instructor-facing metadata', () => {
     expect(Array.isArray(scenario.physiologyDisclosures)).toBe(true);
     const joined = scenario.physiologyDisclosures.join(' ');
