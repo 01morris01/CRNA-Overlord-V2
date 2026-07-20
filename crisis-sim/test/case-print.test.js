@@ -33,13 +33,26 @@ function seedForbiddenSentinels(experience) {
     initiallyVisible: false,
     instructorOnlyUntilDiscovered: true,
   });
+  // Scoring-rule labels populate ruleResults[].label — instructor scoring state
+  // that the print scrub must drop (ruleResults print only id/status/points).
   experience.assessment.scoringRules.push({
     id: 'discover_secret',
-    label: 'Assesses the concealed airway question',
+    label: 'LEAK_ASSESSMENT_RULE_LABEL',
     critical: false,
     source: 'ENGINE_OBSERVABLE',
     evidence: { type: 'assessment_action', actionId: 'ask_secret' },
   });
+  experience.planRequirements.rules.push({
+    id: 'plan_secret',
+    label: 'LEAK_PLAN_RULE_LABEL',
+    critical: false,
+    source: 'ENGINE_OBSERVABLE',
+    evidence: { type: 'plan_equals', fieldId: 'disposition', value: 'postpone' },
+  });
+  // Event expected/unsafe responses and effect metadata reach the debrief
+  // timeline; the printable timeline prints only tSec/sequence/kind/source.
+  experience.eventFlow.events[0].expectedResponses = ['LEAK_EVENT_EXPECTED'];
+  experience.eventFlow.events[0].unsafeResponses = ['LEAK_EVENT_UNSAFE'];
 
   // Released consideration: its scoring guidance and red flags stay hidden
   // even though the consideration itself is released.
