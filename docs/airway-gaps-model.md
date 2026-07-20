@@ -317,6 +317,7 @@ The procedure reset does not create or clear an independent NMB variable. Existi
 8. **No CICO state machine:** failed attempts with desaturation cost are modeled; a distinct CICO pathway is not.
 9. **Approximate ETO2:** alveolar oxygen fraction is used as an end-tidal proxy.
 10. **No automatic post-intubation ventilation:** securing a device and starting mechanical support remain orthogonal actions.
+11. **Compressed MH timeline (~5x):** the malignant-hyperthermia complication runs faster than the clinical reference. Measured against `SimRunner`: EtCO2 rises from ~47 to ~119 mmHg in the first 60 seconds and temperature climbs roughly 1°C per minute, versus the NAS 560 MH deck's ~1°C per 5 minutes — about a 5x compression. **Sign ordering is preserved and is the load-bearing teaching point: EtCO2 (early) rises before temperature (late).** Tempo is a substrate simplification, not authored per-case, and the MH math is unchanged this round. Instructors must teach students that the real early rise is *insidious* and easy to miss; the sim's fast rise is a compression for time-limited teaching, disclosed in `data.physiologyDisclosures` on `cn_preassessment_npo_mh_001` and in `docs/case-clinical-sourcing.md`.
 
 ## Required evidence
 

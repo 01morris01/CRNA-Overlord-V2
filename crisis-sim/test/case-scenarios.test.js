@@ -186,6 +186,15 @@ describe('Brittany Cole — cn_preassessment_npo_mh_001', () => {
     expect(entryEdges[0].id).toBe('proceed_for_training');
   });
 
+  test('discloses the compressed MH timeline in instructor-facing metadata', () => {
+    expect(Array.isArray(scenario.physiologyDisclosures)).toBe(true);
+    const joined = scenario.physiologyDisclosures.join(' ');
+    expect(joined).toMatch(/compressed approximately 5x|~5x|5x/i);
+    expect(joined).toMatch(/EtCO2.*early|EtCO2 rises.*before temperature|sign ordering/i);
+    // The one-line description an instructor reads also carries the disclosure.
+    expect(scenario.description).toMatch(/compressed approximately 5x|DISCLOSURE/i);
+  });
+
   test('the MH beat is instructor-triggered and injects MalignantHyperthermia', () => {
     const mh = exp.eventFlow.events.find((e) => e.id === 'mh_complication_started');
     expect(mh.trigger.type).toBe('instructor');

@@ -340,13 +340,19 @@ Results:
 | EtCO₂ ↔ minute ventilation | MV 5.9 → EtCO₂ 40; MV 2.3 → 126; MV 9.0 → 24 | ✅ Correct inverse relationship (drives the laparoscopy vent challenge) |
 | Difficult intubation (`failedIntubationAttempts:[1]`) | non-preox attempt SpO₂ nadir 69.6% at 41 s; preox attempt holds 99.8%; rescue order attempt→failed→cricoid→mask PPV→attempt→succeeded, SpO₂ 87.6→99.9 | ✅ Realistic desaturation, preox protective, correct rescue sequence |
 
-**Two honest modeling simplifications** (substrate engine, not authored): MH EtCO₂
-rises faster than life (≈47→119 in 60 s) and temperature climbs ≈1°C/min versus the
-DOC-E reference of 1°C/5 min — the engine compresses the MH timeline. Ordering and
-treatment response are correct, and the compression aligns with the operator's
-"teach it without the full time expense" requirement. Both are noted so instructors
-know the MH clock runs fast. Verified via throwaway scripts against `SimRunner`;
-the difficult-intubation numbers are additionally locked by `test/airway-gaps-evidence`.
+**Compressed MH timeline — disclosed simplification (~5x).** MH EtCO₂ rises faster
+than life (≈47→119 in 60 s) and temperature climbs ≈1°C/min versus the DOC-E reference
+of 1°C/5 min — the engine compresses the MH timeline roughly 5x. **Sign ordering is
+preserved and is the load-bearing teaching point (EtCO₂ early, temperature late).** The
+MH math was not changed; this is a substrate simplification of the shared engine, now
+disclosed in three places so it is never silent: (1) `docs/airway-gaps-model.md`
+simplification 11, alongside the other engine simplifications; (2) the
+`physiologyDisclosures` array on `cn_preassessment_npo_mh_001.json`; and (3) the case
+description, surfaced in the instructor load status before the case runs. Instructors
+must teach that the *real* early rise is insidious and easy to miss — the sim's fast
+rise is a compression for time-limited teaching, not a claim about clinical pace.
+Verified via `SimRunner`; difficult-intubation numbers are additionally locked by
+`test/airway-gaps-evidence`.
 
 ## Remaining open items after this addendum
 

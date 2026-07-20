@@ -1631,7 +1631,7 @@ async function loadSelectedRubricScenario() {
   setRubricLoadStatus('Loading and validating scenario assets…');
   try {
     const liveRunner = ensureRunner();
-    const { loaded } = await loadSelectedScenarioAssets(liveRunner, selectedId);
+    const { loaded, scenario } = await loadSelectedScenarioAssets(liveRunner, selectedId);
     latestRubricResult = null;
     latestRubricPresentationKey = null;
     latestRubricDebrief = null;
@@ -1645,7 +1645,15 @@ async function loadSelectedRubricScenario() {
     const selected = RUBRIC_SCENARIOS.find(({ id }) => id === selectedId)
       ?? TEACHING_CASES.find(({ id }) => id === selectedId);
     setRubricLoadStatus(`${selected?.label ?? selectedId} loaded and validated.`, 'success');
-    setStatus(`Scenario loaded · ${loaded.scenarioId}.`, 'success');
+    // Surface physiology disclosures (e.g. the compressed MH timeline) to the
+    // instructor before they run the case, per the disclosure decision.
+    const disclosures = Array.isArray(scenario?.physiologyDisclosures)
+      ? scenario.physiologyDisclosures : [];
+    if (disclosures.length > 0) {
+      setStatus(`Scenario loaded · ${loaded.scenarioId}. PHYSIOLOGY DISCLOSURE: ${disclosures[0]}`, 'success');
+    } else {
+      setStatus(`Scenario loaded · ${loaded.scenarioId}.`, 'success');
+    }
   } catch (error) {
     setRubricLoadStatus(`Load failed; active case preserved. ${error.message}`, 'error');
     setStatus(`Scenario not loaded: ${error.message}`, 'error');

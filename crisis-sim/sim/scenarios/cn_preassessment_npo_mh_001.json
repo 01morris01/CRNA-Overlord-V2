@@ -1,7 +1,12 @@
 {
   "id": "cn_preassessment_npo_mh_001",
   "title": "Preanesthesia: Brittany Cole, NPO Violation with MH Risk",
-  "description": "Preanesthesia assessment of an elective knee arthroscopy with a recent heavy meal (ASA fasting violation), malignant-hyperthermia family history, and a predicted difficult airway. The correct disposition is to postpone; an instructor-only training branch exercises trigger-free RSI, difficult intubation, and MH recognition. Clinical sourcing in docs/case-clinical-sourcing.md (MH from NAS 560 MH deck; fasting from ASA standards, operator-directed).",
+  "description": "Preanesthesia assessment of an elective knee arthroscopy with a recent heavy meal (ASA fasting violation), malignant-hyperthermia family history, and a predicted difficult airway. The correct disposition is to postpone; an instructor-only training branch exercises trigger-free RSI, difficult intubation, and MH recognition. DISCLOSURE: the MH timeline is compressed approximately 5x (EtCO2 and temperature rise faster than clinical reality); teach the SIGN ORDERING (EtCO2 rises before temperature) and that the real early rise is insidious, not the sim's fast pace. Clinical sourcing in docs/case-clinical-sourcing.md (MH from NAS 560 MH deck; fasting from ASA standards, operator-directed).",
+  "physiologyDisclosures": [
+    "MH timeline compressed approximately 5x versus real-time: EtCO2 rises ~47->119 mmHg in the first minute and temperature ~1C/min versus the reference ~1C/5min. Sign ordering is correct and is the teaching point (EtCO2 early, temperature late). The real early rise is insidious and easy to miss; the sim's fast rise is a time-teaching compression. Engine MH math unchanged. See docs/airway-gaps-model.md simplification 11.",
+    "PONV, GERD, and smoking are not engine-modeled and are assessed as plan items only; the monitor does not react to them.",
+    "Difficult airway is intubation-side only (first attempt fails, mask rescue succeeds); difficult mask ventilation is not modeled."
+  ],
   "category": "preanesthesia_case",
   "courseUnit": "NAS 530 Preanesthesia Assessment",
   "difficulty": "core",
