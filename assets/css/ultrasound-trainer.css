@@ -1,0 +1,160 @@
+/* ============================================================
+   ULTRASOUND TRAINER: Plexus Studio embedded view.
+   Mirrors the regional-blocks view conventions (fixed full
+   screen overlay, cyan NERVE MAP accent, app token system).
+   The trainer itself renders inside an iframe with its own
+   styles; this file only frames it and the header.
+   ============================================================ */
+
+.ultrasound-trainer-view {
+  position: fixed;
+  inset: 0;
+  /* Above the level map (z-index 400) and the live sim view. The regional
+     blocks reference now lives inside this view as the BLOCK REFERENCE tab. */
+  z-index: 470;
+  display: none;
+  flex-direction: column;
+  background: radial-gradient(ellipse at 50% 22%, rgba(0, 26, 31, .96) 0%, var(--void, #03060c) 72%);
+  color: var(--txt, #e5edf7);
+  overflow: hidden;
+  pointer-events: auto;
+  font-family: var(--fb, 'Inter', system-ui, sans-serif);
+}
+.ultrasound-trainer-view.is-open { display: flex; }
+.ultrasound-trainer-view[hidden] { display: none; }
+
+/* Header, matching the regional blocks header treatment */
+.ut-header {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.4rem .8rem;
+  border-bottom: 1px solid var(--line, #1a2940);
+  background: rgba(2, 6, 18, .55);
+}
+.ut-eyebrow {
+  font-family: var(--fm, monospace);
+  font-size: .52rem;
+  letter-spacing: .3em;
+  color: #00c9e0;
+  text-transform: uppercase;
+  margin-bottom: .25rem;
+}
+.ut-header h1 {
+  font-family: var(--fd, 'Antonio', sans-serif);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 3.4vw, 2rem);
+  letter-spacing: .06em;
+  line-height: 1;
+  color: var(--txt, #e5edf7);
+  text-transform: uppercase;
+}
+.ut-subtitle {
+  font-family: var(--fm, monospace);
+  font-size: .55rem;
+  letter-spacing: .12em;
+  color: var(--muted, #5a6f8a);
+  margin-top: .35rem;
+}
+.ut-header-actions { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
+.ut-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 229, 255, .4);
+  color: #00e5ff;
+  font-family: var(--fd, sans-serif);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .5rem 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), transform var(--t-press, 130ms) var(--ease-out);
+}
+.ut-btn:hover { background: rgba(0, 229, 255, .1); box-shadow: 0 0 18px rgba(0, 229, 255, .28); }
+.ut-btn:active { transform: scale(.97); }
+.ut-btn.ut-secondary { border-color: var(--line-2, #243757); color: var(--muted, #5a6f8a); }
+.ut-btn.ut-secondary:hover { border-color: var(--txt-2, #a3b3c9); color: var(--txt-2, #a3b3c9); box-shadow: none; }
+
+/* ── Tab bar: LIVE TRAINER / BLOCK REFERENCE ───────────────
+   Follows the app's course-tab idiom (see index.html) with the
+   trainer's cyan accent. */
+.ut-tabs {
+  flex-shrink: 0;
+  display: flex;
+  gap: .4rem;
+  padding: .55rem 1.4rem;
+  border-bottom: 1px solid var(--line, #1a2940);
+  background: rgba(2, 6, 18, .4);
+}
+.ut-tab {
+  background: var(--card, #0c1828);
+  border: 1px solid var(--border, #162035);
+  color: var(--muted, #4a6282);
+  font-family: var(--fd, 'Antonio', sans-serif);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .42rem 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 200ms var(--ease-out), border-color 200ms var(--ease-out), background-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), transform var(--t-press, 130ms) var(--ease-out);
+  white-space: nowrap;
+}
+.ut-tab:hover { border-color: rgba(0, 229, 255, .45); color: var(--txt, #dce8f5); background: var(--card-hi, #122236); }
+.ut-tab:active { transform: scale(.97); }
+.ut-tab.is-active {
+  background: rgba(0, 229, 255, .1);
+  border-color: #00e5ff;
+  color: #00e5ff;
+  box-shadow: 0 0 12px rgba(0, 229, 255, .25);
+}
+
+/* Iframe stage: fills the remaining height */
+.ut-frame-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #03060c;
+}
+/* Hidden with a class rather than [hidden] so the iframe (and its wasm
+   session) stays alive while the BLOCK REFERENCE tab is open. */
+.ut-frame-wrap.is-hidden { display: none; }
+.ut-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #03060c;
+}
+
+/* ── BLOCK REFERENCE tab panel ─────────────────────────────
+   Hosts the regional nerve blocks study reference (rb-* styles
+   in assets/css/regional-blocks.css) inside the trainer. */
+.ut-blocks-panel {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.ut-blocks-panel[hidden] { display: none; }
+
+/* Faint circuit texture echoing the NERVE MAP theme, carried
+   over from the former standalone regional blocks view. */
+.ut-blocks-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .06;
+  background-image:
+    radial-gradient(circle at 18% 30%, rgba(0, 229, 255, .18) 0%, transparent 45%),
+    radial-gradient(circle at 82% 78%, rgba(0, 229, 255, .12) 0%, transparent 45%),
+    repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(0, 229, 255, .08) 38px, rgba(0, 229, 255, .08) 39px);
+}

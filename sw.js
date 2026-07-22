@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v52-live-sim-lidocaine-2026-07-15';
+const CACHE_VERSION = 'v53-ultrasound-trainer-2026-07-22';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -9,6 +9,8 @@ const APP_SHELL = [
   '/core/voss.js', '/core/dailyMission.js', '/core/recallGrader.js',
   '/ui/gameUI.js', '/ui/menus.js',
   '/ui/reviewMode.js', '/ui/sceneRegistry.js', '/assets/css/tokens.css',
+  '/ui/ultrasoundTrainerView.js', '/ui/regionalBlocksView.js', '/ui/regionalBlocks.data.js',
+  '/assets/css/ultrasound-trainer.css', '/assets/css/regional-blocks.css',
   '/live-sim-display.html', '/assets/css/live-sim.css', '/assets/css/live-sim-display.css',
   '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveWaveformRenderer.js',
   '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
