@@ -1,9 +1,10 @@
-const CACHE_VERSION = 'v48-boardgame-live-sim-2026-07-13';
+const CACHE_VERSION = 'v50-blocks-tab-2026-07-22';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
   '/', '/index.html', '/app.js', '/legacyShim.js', '/legacy/legacy.js',
   '/world-map.js', '/hospital-map.js?v=48', '/course-map-3d.js', '/vendor/GLTFLoader.r128.js',
+  '/srna-character.js', '/assets/css/game-v2.css',
   '/core/state.js', '/core/auth.js', '/core/gameEngine.js',
   '/core/questionEngine.js', '/core/answerGrading.js', '/core/nodeConfig.js',
   '/core/voss.js', '/core/dailyMission.js', '/core/recallGrader.js',
@@ -11,6 +12,7 @@ const APP_SHELL = [
   '/ui/reviewMode.js', '/ui/sceneRegistry.js', '/assets/css/tokens.css',
   '/live-sim-display.html', '/assets/css/live-sim.css', '/assets/css/live-sim-display.css',
   '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
+  '/ui/ultrasoundTrainerView.js', '/assets/css/ultrasound-trainer.css',
   '/crisis-sim/ui/simRunner.js',
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',

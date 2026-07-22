@@ -7,3 +7,8 @@
 
 # node
 node_modules/
+ultrasound/node_modules/
+
+# local proof screenshots, not app code
+evidence/
+ultrasound/evidence/
