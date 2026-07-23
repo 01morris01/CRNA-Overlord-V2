@@ -135,6 +135,7 @@ function validateEventFlow(eventFlow) {
     eventIds.add(currentEvent.id);
     eventsById.set(currentEvent.id, currentEvent);
   }
+  const phaseEventIds = new Set();
   for (const currentPhase of eventFlow.phases) {
     for (const eventId of currentPhase.events) {
       requireNonemptyString(eventId, `phase ${currentPhase.id} event id`);
@@ -142,6 +143,19 @@ function validateEventFlow(eventFlow) {
       if (!currentEvent || currentEvent.phaseId !== currentPhase.id) {
         throw new TypeError(`phase ${currentPhase.id} contains invalid event ${eventId}`);
       }
+      if (phaseEventIds.has(eventId)) {
+        throw new TypeError(`event ${eventId} is listed in more than one phase`);
+      }
+      phaseEventIds.add(eventId);
+    }
+  }
+  // Reverse invariant (matches caseContract): every declared event must appear
+  // in its owning phase's events list. Otherwise getState() (which iterates
+  // phase.events) would hide an event that onAction (which checks phaseId only)
+  // would still fire — a hidden-but-fireable divergence.
+  for (const currentEvent of eventFlow.events) {
+    if (!phaseEventIds.has(currentEvent.id)) {
+      throw new TypeError(`event ${currentEvent.id} is not listed in its owning phase ${currentEvent.phaseId}`);
     }
   }
 }

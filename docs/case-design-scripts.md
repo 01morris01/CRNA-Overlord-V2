@@ -43,8 +43,9 @@ paralytic (item 7, the sole ENGINE_OBSERVABLE critical), PPV while awaiting onse
 (item 8).** Also exercises items 1–6, 12, 14.
 
 **Realigned finding IDs** (supersede the plan's composite IDs): `mild_asthma`,
-`ponv_high_risk`, `ocp_vte_risk`, `codeine_intolerance`, `latex_precaution`,
-`airway_assessed`, `anesthetic_history_reviewed`.
+`ponv_high_risk`, `ocp_vte_risk`, `codeine_intolerance`, `airway_assessed`,
+`anesthetic_history_reviewed`. (Latex is carried as a chart allergy, not a
+discoverable finding.)
 
 **Realigned plan rule IDs:** `asa_ii_with_reason`, `reactive_airway_plan`,
 `multimodal_ponv_prophylaxis`, `vte_prophylaxis`, `postoperative_pain_plan`.

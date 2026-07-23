@@ -713,6 +713,10 @@ export class CaseSession {
     const instructorActivation = [...activations].reverse().find((activation) => (
       activation.eventId === eventId && activation.source === 'instructor'
     ));
+    // The flow only returns a nonempty activatedIds for an instructor event when
+    // it also emits the matching activation, so this is always found; guard
+    // defensively rather than dereferencing a possible undefined.
+    if (!instructorActivation) return failure('EVENT_NOT_AVAILABLE');
     this.#appendTimeline({
       kind: 'case_flow_event_activated',
       eventId,

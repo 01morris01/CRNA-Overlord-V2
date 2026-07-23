@@ -4,6 +4,7 @@
    document innerHTML for sentinels. */
 import { describe, expect, test } from 'vitest';
 import standardScenario from '../sim/scenarios/standard_iv_healthy_001.json';
+import standardRubric from '../../data/rubrics/carson-newman-standard-iv-induction.json';
 import { SimRunner } from '../ui/simRunner.js';
 import { makeCaseExperience } from './helpers/caseFixtures.js';
 import { runCasePrintAction } from '../../ui/liveSimView.js';
@@ -149,6 +150,36 @@ describe('case print action is wired and reachable', () => {
     expect(byId['live-case-print'].disabled).toBe(false);
     byId['live-case-print'].emit('click');
     expect(printed).toBe(1);
+  });
+
+  test('degrades gracefully (no throw) when a finalized case has an unfinalized rubric', async () => {
+    // standard_iv_healthy_001 carries a rubric; load the case WITH its rubric,
+    // finalize the case but leave the rubric unfinalized. buildDebrief() then
+    // throws RUBRIC_DEBRIEF_NOT_FINALIZED; the print action must catch it.
+    const runner = new SimRunner();
+    const scenario = structuredClone(standardScenario);
+    scenario.id = 'cn_print_rubric_guard_001';
+    scenario.caseExperience = makeCaseExperience();
+    runner.loadCaseScenario({ scenario, rubric: standardRubric });
+    runner.advanceCaseStage({ stage: 'interview' });
+    runner.performAssessmentAction({ actionId: 'ask_npo' });
+    runner.advanceCaseStage({ stage: 'focused_exam' });
+    runner.advanceCaseStage({ stage: 'findings_summary' });
+    runner.submitCaseFindings({ findingIds: ['npo_ok'] });
+    runner.advanceCaseStage({ stage: 'plan_submission' });
+    runner.submitCasePlan({ selections: { disposition: 'proceed' } });
+    runner.advanceCaseStage({ stage: 'debrief_draft' });
+    runner.setInstructorCaseObservation({ considerationId: 'consider_npo', status: 'observed' });
+    runner.finalizeCaseDebrief();
+    expect(runner.isCaseFinalized()).toBe(true);
+    expect(runner.isRubricFinalized?.()).toBe(false);
+
+    const { root } = makeDocRoot(['live-case-print-document', 'live-case-print-status']);
+    let result;
+    expect(() => { result = runCasePrintAction({ runner, documentRoot: root, printImpl: () => {} }); })
+      .not.toThrow();
+    expect(result).toMatchObject({ ok: false });
+    expect(result.reason).toMatch(/RUBRIC/);
   });
 
   test('refuses to print an unfinalized case', () => {

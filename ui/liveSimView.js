@@ -508,7 +508,17 @@ export function runCasePrintAction({
   }
   const printDocument = documentRoot?.getElementById?.('live-case-print-document');
   if (!printDocument) return { ok: false, reason: 'CASE_PRINT_DOCUMENT_UNAVAILABLE' };
-  const debrief = liveRunner.buildDebrief();
+  // buildDebrief() composes rubric + case; it throws if a rubric is loaded but
+  // not finalized. Degrade gracefully rather than letting the click handler
+  // throw (broken button + console error).
+  let debrief;
+  try {
+    debrief = liveRunner.buildDebrief();
+  } catch (error) {
+    const reason = error?.code ?? 'CASE_DEBRIEF_BUILD_FAILED';
+    setCasePrintStatus(documentRoot, `Cannot print yet: ${reason}.`);
+    return { ok: false, reason };
+  }
   if (!debrief?.caseResult) return { ok: false, reason: 'CASE_DEBRIEF_UNAVAILABLE' };
   const markup = renderPrintableCase({ debrief, identity: casePrintIdentity(documentRoot) });
   printDocument.innerHTML = markup;

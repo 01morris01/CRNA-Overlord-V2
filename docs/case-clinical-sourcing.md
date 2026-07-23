@@ -327,9 +327,10 @@ comorbidity drives the clinical path rather than sitting as a cosmetic label.
 
 **Consequence for the plan's hard-coded finding IDs.** The plan's Task 9 Step 1 lists Karen
 finding IDs built for the composite (`current_smoker`, `controlled_gerd`, `severe_prior_ponv`).
-Realignment changes these to match the real patient (e.g. `mild_asthma`, `ponv_high_risk`,
-`ocp_vte_risk`, `codeine_intolerance`, `latex_precaution`, `airway_assessed`,
-`anesthetic_history_reviewed`). This is a deliberate, operator-directed divergence from the
+Realignment changes these to match the real patient (`mild_asthma`, `ponv_high_risk`,
+`ocp_vte_risk`, `codeine_intolerance`, `airway_assessed`,
+`anesthetic_history_reviewed`; latex is a chart allergy, not a finding). This is a
+deliberate, operator-directed divergence from the
 written plan; the plan's exact-ID test is updated to the realigned IDs and the change is noted
 in the Task 9 commit. Brittany's IDs are unaffected by realignment.
 

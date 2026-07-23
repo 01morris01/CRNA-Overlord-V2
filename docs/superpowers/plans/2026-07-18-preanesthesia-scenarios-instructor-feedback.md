@@ -48,6 +48,16 @@ Karen plan rule ids (old → new):
 | `smoking_pulmonary_plan` | `vte_prophylaxis` | non-smoker; OCP + laparoscopy VTE prophylaxis instead |
 | `postoperative_pain_plan` | `postoperative_pain_plan` | unchanged |
 
+Karen's **event flow** also deviates from Task 9 Step 3 as a consequence of the same
+realignment: a `bronchospasm_onset` instructor beat is added (her real live effect);
+`pneumoperitoneum_started` uses a `set_machine` ventilation reduction rather than
+`set_surgical_stimulus`, because `set_surgical_stimulus` cannot raise EtCO₂ in the engine
+and a fake CO₂ effect is not authored; and the plan's `surgical_stimulus_ended` beat was
+**removed** because, with pneumoperitoneum no longer raising surgical stimulus, it reset a
+value that is never raised — a no-op instructor button. These event-flow deviations are
+specified in `docs/case-design-scripts.md` (Karen Phase 3–4). Brittany's event ids follow
+the plan.
+
 ## Amendment B (2026-07-20): authorized files beyond the original file map
 
 The following were added or changed beyond the plan's original (75bb862-corrected) file
