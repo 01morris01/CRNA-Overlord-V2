@@ -17,6 +17,8 @@
 <meta name="theme-color" content="#00ffa3">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/live-sim.css">
+<link rel="stylesheet" href="assets/css/regional-blocks.css">
+<link rel="stylesheet" href="assets/css/ultrasound-trainer.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="vendor/GLTFLoader.r128.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
@@ -531,12 +533,17 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <div id="course-tabs"></div>
 <div class="map-player" id="map-player"></div>
 <button class="map-store-btn live-sim-launch" id="live-sim-launch" type="button">LIVE ANESTHESIA SIM</button>
+<button class="map-store-btn" id="ultrasound-trainer-launch" type="button">🔬 ULTRASOUND TRAINER</button>
 <button class="map-store-btn" onclick="openStore()">🛒 EQUIPMENT STORE</button>
 <div class="map-path" id="map-path"></div>
 </div>
 
 <!-- LIVE ANESTHESIA SIM: fixed app view, registered from app.js like other views -->
 <section id="live-sim-view" class="live-sim-view" aria-label="Live anesthesia simulation instructor console" aria-hidden="true" hidden></section>
+
+<!-- ULTRASOUND TRAINER: Plexus Studio embedded inline, registered from app.js like other views.
+     The regional nerve blocks study reference lives inside it as the BLOCK REFERENCE tab. -->
+<section id="ultrasound-trainer-view" class="ultrasound-trainer-view" aria-label="Plexus Studio ultrasound structure highlighting trainer" aria-hidden="true" hidden></section>
 
 <!-- MODE PICKER -->
 <div id="mode-picker-modal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.88);z-index:100000;pointer-events:auto;">

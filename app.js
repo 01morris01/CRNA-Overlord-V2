@@ -5,6 +5,7 @@ import { getOpioidsQuestions, getQuestionsForNode } from './core/questionEngine.
 import { getSession, loginUser, registerUser, logout } from './core/auth.js';
 import { renderMissionCard } from './core/dailyMission.js';
 import { initLiveSimView } from './ui/liveSimView.js';
+import { initUltrasoundTrainerView } from './ui/ultrasoundTrainerView.js';
 
 let _authMode = 'login'; // 'login' or 'register'
 
@@ -305,6 +306,7 @@ function _initGameUI() {
   window.crnaState = state;
   createSimpleCourseMap();
   initLiveSimView();
+  initUltrasoundTrainerView();
   updateHUD();
   renderCurrentQuestion();
 

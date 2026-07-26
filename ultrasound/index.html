@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plexus Studio, ultrasound structure highlighting trainer</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Persistent scope banner. Not dismissible by design. -->
+<div class="banner" role="note">
+  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+    <path d="M8 1.5 15 14H1L8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <line x1="8" y1="6.2" x2="8" y2="10" stroke="currentColor" stroke-width="1.4"/>
+    <circle cx="8" cy="12" r="0.9" fill="currentColor"/>
+  </svg>
+  <span><strong>Training aid only.</strong> This overlay teaches structure recognition to anesthesia students on volunteers and recorded clips. It is not a medical device, it gives no clinical guidance, and it never indicates where to insert a needle.</span>
+</div>
+
+<header class="masthead">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="var(--peri)" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="4.5" fill="none" stroke="var(--cobalt-bright)" stroke-width="1.8"/>
+      <circle cx="12" cy="12" r="1.4" fill="var(--amber)"/>
+    </svg>
+    <div>
+      <h1>PLEXUS STUDIO</h1>
+      <p>capture to overlay ultrasound trainer, brachial plexus</p>
+    </div>
+  </div>
+  <div id="bootPanel" class="boot">
+    <span class="boot-dot"></span>
+    <span id="bootStatus" class="mono">initializing</span>
+  </div>
+</header>
+
+<main class="layout">
+
+  <!-- ===================== stage ===================== -->
+  <section class="stage panel">
+    <div class="panel-title">
+      <span>LIVE FIELD</span>
+      <span id="frozenChip" class="chip chip-amber" hidden>FROZEN</span>
+      <span id="recChip" class="chip chip-rec" hidden>REC</span>
+      <span id="replayChip" class="chip chip-navy" hidden>REPLAY</span>
+    </div>
+
+    <div class="viewport">
+      <video id="video" playsinline muted></video>
+      <canvas id="noiseCanvas" hidden></canvas>
+      <canvas id="simCanvas" hidden></canvas>
+      <canvas id="replayCanvas" hidden></canvas>
+      <canvas id="overlay"></canvas>
+      <canvas id="refOverlay" hidden></canvas>
+      <canvas id="guessOverlay" hidden></canvas>
+      <div id="roiRect" class="roi-rect" hidden><span class="roi-tag">B MODE ROI</span></div>
+      <div id="roiLayer" class="roi-layer" hidden></div>
+      <div id="markLayer" class="roi-layer" hidden></div>
+      <div id="viewportMsg" class="viewport-msg" hidden></div>
+      <div class="corner c-tl"></div><div class="corner c-tr"></div>
+      <div class="corner c-bl"></div><div class="corner c-br"></div>
+    </div>
+
+    <div class="stage-status mono">
+      <div class="stat">
+        <label>SOURCE</label>
+        <span id="sourceReadout">--</span>
+        <em id="clipNoteReadout"></em>
+      </div>
+      <div class="stat">
+        <label>FRAME</label>
+        <span id="resReadout">--</span>
+      </div>
+      <div class="stat">
+        <label>MODEL RATE</label>
+        <span id="fpsReadout">--</span>
+      </div>
+      <div class="stat">
+        <label>INFERENCE</label>
+        <span id="inferReadout">--</span>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="seg-control" role="group" aria-label="video source">
+        <button id="srcClipBtn" class="seg active">RECORDED CLIP</button>
+        <button id="srcHdmiBtn" class="seg">HDMI CAPTURE DEVICE</button>
+        <button id="srcGrabberBtn" class="seg">GRABBER SIM</button>
+        <button id="srcNoiseBtn" class="seg">NOISE TEST</button>
+      </div>
+
+      <div id="clipRow" class="source-row">
+        <select id="clipSelect" aria-label="clip"></select>
+      </div>
+
+      <div id="deviceRow" class="source-row" hidden>
+        <select id="deviceSelect" aria-label="video input device"></select>
+        <button id="deviceRefresh" class="btn" title="rescan video inputs">
+          <svg viewBox="0 0 16 16" width="13" height="13"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 1.5v3h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div id="hdmiStatus" class="hdmi-status mono" hidden></div>
+
+      <div class="transport-actions">
+        <button id="playBtn" class="btn" title="play or pause the clip">
+          <svg id="playIcon" viewBox="0 0 16 16" width="13" height="13" style="display:none"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
+          <svg id="pauseIcon" viewBox="0 0 16 16" width="13" height="13"><path d="M4 2.5h2.6v11H4zM9.4 2.5H12v11H9.4z" fill="currentColor"/></svg>
+        </button>
+        <button id="freezeBtn" class="btn" title="freeze the frame and the overlay">
+          <svg viewBox="0 0 16 16" width="13" height="13"><path d="M8 1v14M2 4l12 8M14 4L2 12" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
+          <span>FREEZE</span>
+        </button>
+        <button id="captureBtn" class="btn btn-primary" title="save the overlaid frame as a PNG">
+          <svg viewBox="0 0 16 16" width="13" height="13"><rect x="1.5" y="4" width="13" height="9.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8.7" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 4l1-1.7h3l1 1.7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          <span>CAPTURE PNG</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="roi-bar">
+      <div class="roi-head">
+        <span class="roi-label">B MODE REGION OF INTEREST</span>
+        <span id="roiReadout" class="mono roi-readout">not set</span>
+      </div>
+      <div class="roi-actions">
+        <button id="roiDrawBtn" class="btn">DRAW ROI</button>
+        <button id="roiWholeBtn" class="btn">USE WHOLE FRAME</button>
+        <button id="roiClearBtn" class="btn">CLEAR</button>
+      </div>
+    </div>
+    <p class="hdmi-note">Draw the rectangle around the live B mode image once. On a real grabber the ultrasound picture sits inside device chrome, so the operator defines the region the model reads. Inference refuses to run until a region is set; it never silently reads the whole capture frame. Any USB HDMI grabber (Epiphan, Elgato, AV.io) shows up under HDMI capture device.</p>
+  </section>
+
+  <!-- ===================== instrument rail ===================== -->
+  <aside class="rail">
+
+    <section class="panel trust">
+      <div class="panel-title"><span>MODEL TRUST</span><span class="chip chip-navy">ASSISTIVE, NOT AUTHORITATIVE</span></div>
+      <div class="trust-grid">
+        <div class="metric">
+          <label>LIVE CONFIDENCE</label>
+          <div class="metric-value mono" id="confValue">--</div>
+          <div class="metric-sub">mean max softmax over detected structure pixels</div>
+        </div>
+        <div class="metric ceiling">
+          <label>PUBLISHED ACCURACY CEILING</label>
+          <div class="metric-value mono">73<span class="dim">to</span>74<span class="unit">%</span></div>
+          <div class="metric-sub">best reported for this class of model on this task</div>
+        </div>
+      </div>
+      <div class="bar">
+        <div id="confBarFill" class="bar-fill"></div>
+        <div class="bar-marker" style="left:73%" title="published ceiling 73 to 74 percent"></div>
+      </div>
+      <p id="confState" class="trust-note">raw uncalibrated softmax, can read high even when the model is wrong</p>
+      <div class="limits">
+        <label>WHAT THIS MODEL DOES NOT KNOW</label>
+        <ul>
+          <li>Nerve Dice is 0.61 on held out subjects, expect ragged and missing boundaries.</li>
+          <li>Validated on 2 subjects only, your volunteer's anatomy may look nothing like the training set.</li>
+          <li>It cannot abstain reliably, it may paint structure onto poor or empty images.</li>
+          <li>Confidence is uncalibrated, a high number is not evidence of correctness.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel quality">
+      <div class="panel-title"><span>SCAN QUALITY</span></div>
+      <div class="quality-head">
+        <div class="metric-value mono big" id="qualityValue">--</div>
+        <div class="quality-side">
+          <span class="quality-scale mono">/ 100</span>
+          <span id="qualityLabel" class="quality-word">waiting for frames</span>
+        </div>
+      </div>
+      <div class="bar"><div id="qualityBarFill" class="bar-fill bar-fill-quality"></div></div>
+      <div class="quality-grid mono">
+        <div><label>PRESENCE</label><span id="qPresence">--</span></div>
+        <div><label>CENTERING</label><span id="qCentering">--</span></div>
+        <div><label>COHERENCE</label><span id="qCoherence">--</span></div>
+        <div><label>NERVE AREA px</label><span id="qArea">--</span></div>
+      </div>
+      <p class="panel-foot">presence x centering of the nerve in 256 space, scored per frame by the same grader used in training evaluation</p>
+    </section>
+
+    <section class="panel structures">
+      <div class="panel-title"><span>STRUCTURES</span></div>
+      <div class="legend-row">
+        <span class="swatch swatch-nerve"></span>
+        <div class="legend-name">
+          <span>Nerve</span>
+          <em>brachial plexus, cobalt fill, periwinkle contour</em>
+        </div>
+        <span class="mono legend-count" id="nervePx">--</span>
+        <label class="switch"><input type="checkbox" id="nerveToggle" checked /><span></span></label>
+      </div>
+      <div class="legend-row">
+        <span class="swatch swatch-needle"></span>
+        <div class="legend-name">
+          <span>Needle</span>
+          <em>identified structure, amber</em>
+        </div>
+        <span class="mono legend-count" id="needlePx">--</span>
+        <label class="switch"><input type="checkbox" id="needleToggle" checked /><span></span></label>
+      </div>
+      <div class="opacity-row">
+        <label for="opacity">OVERLAY OPACITY</label>
+        <input type="range" id="opacity" min="0" max="100" value="90" />
+        <span class="mono" id="opacityReadout">90%</span>
+      </div>
+      <p class="panel-foot">structure highlighting only, this tool never draws a trajectory, target, or insertion cue</p>
+    </section>
+
+    <section class="panel reference">
+      <div class="panel-title"><span>REFERENCE ANSWER KEY</span><span class="chip chip-cream">GROUND TRUTH</span></div>
+      <div class="legend-row">
+        <span class="swatch swatch-ref"></span>
+        <div class="legend-name">
+          <span>Ground truth</span>
+          <em>real dataset annotation, the answer key, distinct from the model</em>
+        </div>
+        <label class="switch"><input type="checkbox" id="refToggle" /><span></span></label>
+      </div>
+      <div class="ref-status mono">
+        <span id="refReadout">reference available for recorded clips</span>
+      </div>
+      <div class="ref-actions">
+        <button id="refMarkBtn" class="btn">PLACE MANUAL MARK</button>
+        <button id="refMarkClearBtn" class="btn" disabled>CLEAR MARK</button>
+      </div>
+      <p class="panel-foot">Recorded clips carry the real nerve mask and needle tip/tail from the dataset. For a live volunteer with no dataset answer key, the instructor places a manual reference mark. The reference is the answer key; the cobalt and amber model overlay is only a second opinion.</p>
+    </section>
+
+    <section class="panel selftest">
+      <div class="panel-title"><span>CALL IT FIRST SELF TEST</span><span id="stState" class="chip chip-navy">OFF</span></div>
+      <p id="stPrompt" class="st-prompt">Freeze a frame, then start the self test. You commit your call before the model or the answer key is revealed.</p>
+      <div class="st-actions">
+        <button id="stStartBtn" class="btn btn-primary">START</button>
+        <button id="stGuessBtn" class="btn" disabled>PLACE CALL</button>
+        <button id="stAbstainBtn" class="btn" disabled>ABSTAIN</button>
+        <button id="stRevealBtn" class="btn" disabled>REVEAL &amp; SCORE</button>
+      </div>
+      <div id="stResult" class="st-result" hidden>
+        <div class="st-verdict" id="stVerdict">--</div>
+        <div class="st-lines mono" id="stLines"></div>
+        <div class="st-distrust" id="stDistrust" hidden></div>
+      </div>
+      <p class="panel-foot">You are scored against the real dataset ground truth, never against the model. The cobalt and amber overlay is a fallible second opinion; when it disagrees with the answer key, or reads confident on an incoherent image, that is the lesson.</p>
+    </section>
+
+    <section class="panel nervelab">
+      <div class="panel-title"><span>NERVE MODEL LAB</span><span class="chip chip-navy">PERIPHERAL NERVE MODELS</span></div>
+      <p class="nervelab-intro">The live loop above runs the supraclavicular model on volunteer and clip video. These four peripheral-nerve models (Nerve-UTP) have no video in the studio, so each is exercised on a REAL held-out Nerve-UTP still frame. Use NOISE and BLANK to watch the abstention gate stay silent on non-anatomical input.</p>
+      <div class="nervelab-controls">
+        <select id="nerveModelSelect" aria-label="peripheral nerve model"></select>
+        <div class="nervelab-btns">
+          <button id="labRunSample" class="btn btn-primary">RUN SAMPLE FRAME</button>
+          <button id="labRunNoise" class="btn">TEST NOISE</button>
+          <button id="labRunBlank" class="btn">TEST BLANK</button>
+        </div>
+      </div>
+      <div class="nervelab-stage">
+        <canvas id="labFrame" width="256" height="256"></canvas>
+        <canvas id="labOverlay" width="256" height="256"></canvas>
+      </div>
+      <div class="nervelab-grid mono">
+        <div><label>GATE DECISION</label><span id="labDecision" class="lab-decision">--</span></div>
+        <div><label>INPUT</label><span id="labInput">--</span></div>
+        <div><label>RAW NERVE px</label><span id="labRawPx">--</span></div>
+        <div><label>GATED NERVE px</label><span id="labGatedPx">--</span></div>
+        <div><label>GATE p(anatomical)</label><span id="labGateProb">--</span></div>
+        <div><label>INFERENCE</label><span id="labInfer">--</span></div>
+        <div><label>DICE</label><span id="labDice">--</span></div>
+        <div><label>SCAN QUALITY</label><span id="labQuality">--</span></div>
+      </div>
+      <div class="nervelab-feats mono" id="labDims">--</div>
+      <p class="panel-foot">The gate reads three raw-frame input-quality features only (no probability map), so the in-browser decision reproduces the verified Python decision exactly. It rejects NON-ANATOMICAL input (noise, blank, dropout). A true in-domain ultrasound frame with no nerve in view is UNTESTABLE here because the Nerve-UTP dataset contains no nerve-absent frame; that limitation is stated honestly and is not covered by these numbers.</p>
+    </section>
+
+    <section class="panel session">
+      <div class="panel-title"><span>SESSION RECORD</span><span id="sessState" class="chip chip-navy">IDLE</span></div>
+      <div class="session-actions">
+        <button id="sessRecBtn" class="btn">RECORD</button>
+        <button id="sessReplayBtn" class="btn" disabled>REVIEW</button>
+        <button id="sessClearBtn" class="btn" disabled>CLEAR</button>
+      </div>
+      <div class="session-scrub">
+        <button id="sessPlayBtn" class="btn" disabled title="play or pause the replay">
+          <svg viewBox="0 0 16 16" width="12" height="12"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
+        </button>
+        <input type="range" id="sessScrub" min="0" max="0" value="0" disabled />
+        <span class="mono session-count" id="sessCount">0 / 0</span>
+      </div>
+      <p class="panel-foot">records source frame, segmentation, confidence, and scan quality per frame, entirely in browser memory. Nothing is uploaded. Scrub to review a captured scan with its overlay intact.</p>
+    </section>
+
+  </aside>
+</main>
+
+<footer class="baseline">
+  <span>PLEXUS STUDIO, courseware for anesthesia students. Scan consenting volunteers only. No patient data, no diagnosis, no block guidance.</span>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/nerve_lab.js"></script>
+</body>
+</html>

@@ -64,13 +64,13 @@ function appShellEntries() {
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v54-preanesthesia-cases-2026-07-20';");
-    expect(sw).toContain('preanesthesia-cases');
+    expect(sw).toContain("const CACHE_VERSION = 'v55-preanesthesia-ultrasound-2026-07-22';");
+    expect(sw).toContain('preanesthesia');
     expect(sw).toContain("'/hospital-map.js?v=48'");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v54-preanesthesia-cases-2026-07-20';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v53-ultrasound-trainer-2026-07-22';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v53-rubric-debrief-2026-07-17';");
     expect(sw).not.toContain('v52-live-sim-lidocaine-2026-07-15');
-    expect(sw).not.toContain("const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';");
-    expect(sw).not.toContain("const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';");
   });
 
   it('pre-caches every live view and browser engine dependency', () => {
@@ -97,8 +97,9 @@ describe('live simulation PWA contract', () => {
     runInNewContext(sw, {
       caches: {
         keys: async () => [
+          'overlord-v55-preanesthesia-ultrasound-2026-07-22',
           'overlord-v54-preanesthesia-cases-2026-07-20',
-          'overlord-v53-rubric-debrief-2026-07-17',
+          'overlord-v53-ultrasound-trainer-2026-07-22',
           'overlord-v52-live-sim-lidocaine-2026-07-15',
           'workbox-precache-v1',
           'hospital-offline-data',
@@ -116,7 +117,8 @@ describe('live simulation PWA contract', () => {
     listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
     await activation;
     expect(deleted).toEqual([
-      'overlord-v53-rubric-debrief-2026-07-17',
+      'overlord-v54-preanesthesia-cases-2026-07-20',
+      'overlord-v53-ultrasound-trainer-2026-07-22',
       'overlord-v52-live-sim-lidocaine-2026-07-15',
     ]);
   });
