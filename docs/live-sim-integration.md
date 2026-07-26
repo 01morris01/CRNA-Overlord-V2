@@ -145,7 +145,21 @@ The control surface will reuse these tokens, visible form labels, 44 px minimum 
 - cache-first fetch behavior with same-origin background refresh, except `/data/questions/`, which is network-first with cache fallback;
 - `SKIP_WAITING` message support.
 
-Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. The Lidocaine implementation advances the installed shell to `v52-live-sim-lidocaine-2026-07-15` and explicitly caches `/crisis-sim/sim/lidocaineSystem.js` in addition to the controller, model, runner, display, styles, and complete browser engine import graph.
+Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine module needed by the browser import graph, must be listed in `APP_SHELL`. The Lidocaine implementation advances the installed shell to `v52-live-sim-lidocaine-2026-07-15` and explicitly caches `/crisis-sim/sim/lidocaineSystem.js` in addition to the controller, model, runner, display, styles, and complete browser engine import graph. The preanesthesia teaching cases advance the shell to `v54-preanesthesia-cases-2026-07-20`, adding `ui/liveCaseView.js`, `ui/liveCaseModel.js`, the six `crisis-sim/sim/scenario/case*.js` runtime modules, and both `cn_preassessment_*.json` scenarios.
+
+## Preanesthesia teaching cases
+
+Two structured preanesthesia cases sit beside the rubric scenarios, sharing the same
+`SimRunner`, transport, and PWA shell:
+
+- **`cn_preassessment_lap_chole_001` (Karen Whitfield):** laparoscopic cholecystectomy with mild asthma and high PONV risk; the live effect is instructor-fired bronchospasm plus a pneumoperitoneum ventilation challenge.
+- **`cn_preassessment_npo_mh_001` (Brittany Cole):** an elective case with a fasting violation and MH family history whose correct disposition is to postpone (`appropriately_deferred`); an instructor-only `proceed_for_training` branch exercises trigger-free RSI, difficult intubation, and an instructor-fired MH beat.
+
+**Confidentiality boundary.** A `CaseSession` owns assessment/plan/observation state; a `CaseFlowSession` evaluates deterministic triggers. The learner sees only `projectLearnerCase` (findings gated by discovery, a two-key flow state) and the physiology-only transport allowlist; the instructor console holds all answer-key material, the branch controls, the teaching-beat controls (`availableInstructorEventIds`), and the finalized debrief. The printable case record (`renderPrintableCase`, wired via `runCasePrintAction`) is the scrubbed student artifact.
+
+**Time compression.** Intraoperative teaching beats are `instructor`-triggered so the instructor fires them on demand rather than waiting out the clock; the physiology then evolves in real fixed-step time. The deterministic clock is never scaled.
+
+**MH timeline disclosure.** The shared MH complication runs ~5x faster than the reference deck (EtCO₂ early, temperature late — ordering preserved). This is disclosed in `docs/airway-gaps-model.md` simplification 11, the scenario `physiologyDisclosures`, the case description, and the instructor load status. See `docs/case-clinical-sourcing.md` for the full per-finding clinical trace and `needsReview` markers.
 
 ## Selected architecture and rejected alternatives
 
@@ -157,7 +171,8 @@ Every new live-sim HTML, JS, and CSS file, plus every newly tracked engine modul
 
 - Snapshot contract: a Node script instantiates `SimRunner`, advances a fixed tick, and validates every required key and type before UI implementation.
 - Unit tests: dose conversion, complication delegation, debrief shape, transport late-join/session replacement, alarm derivation, and display model.
-- Full-case smoke: 80 kg induction through emergence using only runner methods, including treated bronchospasm and the TOF-0 neostigmine negative case.
+- Full-case smoke: 80 kg induction through emergence using only runner methods, including treated bronchospasm and the TOF-0 neostigmine negative case; extended to load both preanesthesia cases and drive them to their correct finalized outcomes (Karen completed, Brittany appropriately_deferred).
+- Case scenario contract, evidence, confidentiality probes, and print/beat wiring: `case-scenarios`, `case-evidence(.mjs/.test.js)`, `case-leak-probe`, `case-print(-wiring)`, `case-instructor-events`, `case-confidentiality-regressions`.
 - App/PWA contract: static checks for menu registration, one-engine import boundary, display read-only imports, all cache entries, and version bump.
 - Browser: both documents load through a local HTTP server with no console/page errors; instructor-to-display state and late-join behavior are exercised.
 - Engine regression: the original `npm test -- --reporter=verbose` remains 29/29 before new live-sim tests are counted separately.

@@ -1,0 +1,75 @@
+{
+  "id": "rsi_full_stomach_001",
+  "title": "RSI — Full Stomach / Aspiration Risk",
+  "description": "An obese adult with GERD and a full stomach requires rapid sequence induction without mask ventilation before first laryngoscopy.",
+  "category": "Induction",
+  "courseUnit": "Rapid Sequence Induction",
+  "difficulty": "intermediate",
+  "seed": 31002,
+  "rubricId": "carson-newman-rsi-induction",
+  "rubricCriteria": {
+    "weightKg": 110,
+    "preoxygenationFiO2Min": 0.99,
+    "preoxygenationDurationSec": 180,
+    "minimumPpvMinuteVentilation": 4,
+    "failedAttemptSpo2RecoveryDelta": 2,
+    "etco2ConfirmationSamples": 5,
+    "acceptedInductionDrugs": ["Propofol", "Etomidate", "Ketamine"],
+    "acceptedNmbDrugs": ["Rocuronium", "Succinylcholine"],
+    "allowedVentModes": [1, 2]
+  },
+  "administrativeSetup": null,
+  "learningObjectives": [
+    "Sustain three minutes of 100% oxygen preoxygenation",
+    "Apply cricoid pressure independently and avoid PPV before first laryngoscopy",
+    "Confirm placement with sustained continuous EtCO2 before releasing cricoid pressure"
+  ],
+  "tags": ["RSI", "Full stomach", "Aspiration risk", "Obesity"],
+  "maxDurationSeconds": 900,
+  "patientProfile": {
+    "ageYears": 52,
+    "sex": "Female",
+    "weightKg": 110,
+    "heightCm": 165,
+    "asa": 3,
+    "history": ["GERD", "Full stomach", "Class III obesity"],
+    "allergiesList": [],
+    "comorbidities": "GERD, obesity",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Urgent exploratory laparoscopy",
+    "baselineHR": 84,
+    "baselineSystolic": 138,
+    "baselineDiastolic": 82,
+    "baselineSpO2": 98,
+    "baselineRR": 16,
+    "baselineTemp": 36.7
+  },
+  "startingSetup": {
+    "oxygenOn": false,
+    "fio2": 0.21,
+    "ventMode": "manual",
+    "airway": "mask",
+    "ivAccess": "18g peripheral",
+    "vaporizerDial": 0,
+    "tidalVolume": 550,
+    "respiratoryRate": 12,
+    "peep": 5
+  },
+  "events": [],
+  "expectedActions": [],
+  "dangerousActions": [],
+  "airwayPlan": {
+    "failedIntubationAttempts": [],
+    "intubationAttemptDurationSeconds": 30
+  },
+  "debrief": {
+    "summary": "This case scores the RSI sequence, including three-minute preoxygenation, independent cricoid pressure, no pre-laryngoscopy PPV, timed intubation, sustained EtCO2 confirmation, and transition to mechanical ventilation.",
+    "teachingPoints": [
+      "Obesity reduces FRC through the existing body-geometry oxygen-store model.",
+      "Cricoid pressure is recorded independently of bag-mask ventilation.",
+      "Continuous EtCO2 confirmation must be sustained before cricoid release."
+    ],
+    "reviewTopics": ["RSI sequence", "Preoxygenation", "Cricoid pressure", "EtCO2 confirmation"],
+    "reviewTags": ["RSI", "Aspiration risk", "Full stomach"]
+  }
+}

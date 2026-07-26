@@ -40,6 +40,14 @@ export class VentilatorSystem {
     return this._fallbackRng;
   }
 
+  get breathCyclePhase() { return this._breathTimer; }
+
+  /** Start learner ventilation timing at a deterministic breath-cycle origin. */
+  rebaseLearnerTime() {
+    this._breathTimer = 0;
+    return { breathCyclePhase: this._breathTimer };
+  }
+
   tick(dt) {
     if (this.patient == null || dt <= 0) return;
     const connected = this.patient.airwayDeviceState !== 'extubated';

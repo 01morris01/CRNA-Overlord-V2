@@ -22,9 +22,25 @@ export const ScenarioState = {
 };
 
 const SpasmStage = { None: 0, Partial: 1, Complete: 2, Resolved: 3 };
+const administrativePreconditioningCapabilities = new WeakMap();
+
+function requireAdministrativePreconditioningCapability(manager, capability) {
+  if (!administrativePreconditioningCapabilities.has(manager)
+    || administrativePreconditioningCapabilities.get(manager) !== capability) {
+    throw new Error('Administrative preconditioning capability is not authorized');
+  }
+}
 
 export class ScenarioManager {
-  constructor() {
+  constructor(administrativePreconditioningCapability = null) {
+    if ((typeof administrativePreconditioningCapability === 'object'
+      && administrativePreconditioningCapability !== null)
+      || typeof administrativePreconditioningCapability === 'function') {
+      administrativePreconditioningCapabilities.set(
+        this,
+        administrativePreconditioningCapability,
+      );
+    }
     this.patient = null;
     this.drugSystem = null;
     this.lidocaineSystem = null;
@@ -77,6 +93,8 @@ export class ScenarioManager {
     this._hemorrhageActive = false; this._bleedingControlled = false;
     this._hemorrhageFailTimer = 0; this._lastHemorrhageClass = -1;
     this._lidocaineToxicityCursor = 0;
+    this._administrativePreconditioningEligible = false;
+    this._administrativePreconditioningEventLogLength = null;
   }
 
   // ── loading ──────────────────────────────────────────────────────────
@@ -106,17 +124,111 @@ export class ScenarioManager {
     this.actionLog.clear();
     this.scoring = new ScenarioScoring(this.activeScenario, this.run, this.actionLog);
     this.scoring.onFeedback = (msg, ok) => this.setFeedback(msg, ok);
-    this.maxPossibleScore += this.scoring.MaxExpectedPoints;
+    this.maxPossibleScore = this.assessmentMaxPossibleScore()
+      + this.scoring.MaxExpectedPoints;
+    this._administrativePreconditioningEligible = false;
     this.setState(ScenarioState.Running);
     this.logEvent(`Scenario started: ${this.activeScenario.title}`);
   }
 
   pauseScenario() {
-    if (this.state === ScenarioState.Running) { this.setState(ScenarioState.Paused); this.logEvent('Scenario paused'); }
+    if (this.state === ScenarioState.Running) {
+      this._administrativePreconditioningEligible = false;
+      this.setState(ScenarioState.Paused);
+      this.logEvent('Scenario paused');
+    }
   }
 
   resumeScenario() {
-    if (this.state === ScenarioState.Paused) { this.setState(ScenarioState.Running); this.logEvent('Scenario resumed'); }
+    if (this.state === ScenarioState.Paused) {
+      this._administrativePreconditioningEligible = false;
+      this.setState(ScenarioState.Running);
+      this.logEvent('Scenario resumed');
+    }
+  }
+
+  beginAdministrativePreconditioning(capability) {
+    requireAdministrativePreconditioningCapability(this, capability);
+    const pristine = this.state === ScenarioState.Running
+      && this.elapsedTime === 0
+      && this.currentScore === 0
+      && this._firedEvents.size === 0
+      && this._completedChecks.size === 0
+      && this._studentActions.size === 0
+      && this._transitions.length === 0
+      && this._deadlines.length === 0
+      && this.activePrompts.length === 0
+      && this.actionLog.entries.length === 0
+      && (this.run?.firedTriggers.size ?? 0) === 0
+      && (this.airwayProcedure?.eventCount ?? 0) === 0
+      && !this._mhActive && !this._anaphylaxisActive && !this._bronchoActive
+      && !this._opioidActive && !this._sympActive && !this._hemorrhageActive
+      && !this._naloxoneSurgeActive && this._spasm === SpasmStage.None;
+    if (!pristine) {
+      throw new Error('Administrative preconditioning requires a pristine elapsed-t=0 scenario');
+    }
+    this._administrativePreconditioningEligible = true;
+    this._administrativePreconditioningEventLogLength = this.eventLog.length;
+    this.setState(ScenarioState.Paused);
+    return { scenarioId: this.activeScenario.id, elapsedTime: 0 };
+  }
+
+  /**
+   * Rebase a paused, administratively preconditioned case to learner t=0
+   * without resetting its already-derived physiology. This is intentionally
+   * narrower than resetScenario(): setup state stays intact, while every
+   * learner-visible scenario clock, event cursor, score, and log is fresh.
+   */
+  rebaseLearnerRun(capability) {
+    requireAdministrativePreconditioningCapability(this, capability);
+    if (this.activeScenario == null) throw new Error('Cannot rebase without an active scenario');
+    const stillPristine = this._administrativePreconditioningEligible
+      && this.state === ScenarioState.Paused
+      && this.elapsedTime === 0
+      && this.currentScore === 0
+      && this._firedEvents.size === 0
+      && this._completedChecks.size === 0
+      && this._studentActions.size === 0
+      && this._transitions.length === 0
+      && this._deadlines.length === 0
+      && this.activePrompts.length === 0
+      && this.actionLog.entries.length === 0
+      && (this.run?.firedTriggers.size ?? 0) === 0
+      && (this.airwayProcedure?.eventCount ?? 0) === 0
+      && this.eventLog.length === this._administrativePreconditioningEventLogLength
+      && !this._mhActive && !this._anaphylaxisActive && !this._bronchoActive
+      && !this._opioidActive && !this._sympActive && !this._hemorrhageActive
+      && !this._naloxoneSurgeActive && this._spasm === SpasmStage.None;
+    if (!stillPristine) {
+      throw new Error('Scenario is not eligible for administrative learner-time rebase');
+    }
+    this._administrativePreconditioningEligible = false;
+    this._administrativePreconditioningEventLogLength = null;
+
+    this.elapsedTime = 0;
+    this.currentScore = 0;
+    this._firedEvents.clear();
+    this._completedChecks.clear();
+    this._studentActions.clear();
+    this._transitions = [];
+    this._deadlines = [];
+    this._airwayEventCursor = 0;
+    this.eventLog = [];
+    this.activePrompts = [];
+    this.feedbackMessage = '';
+    this.feedbackTimer = 0;
+
+    this.run = new ScenarioRunState();
+    this.run.scenarioId = this.activeScenario.id;
+    this.run.startedAtSim = 0;
+    this.actionLog.clear();
+    this.scoring = new ScenarioScoring(this.activeScenario, this.run, this.actionLog);
+    this.scoring.onFeedback = (msg, ok) => this.setFeedback(msg, ok);
+    this.maxPossibleScore = this.assessmentMaxPossibleScore()
+      + this.scoring.MaxExpectedPoints;
+    this.lastResult = null;
+    this.setState(ScenarioState.Running);
+    return { scenarioId: this.activeScenario.id, elapsedTime: this.elapsedTime };
   }
 
   resetScenario() {
@@ -140,19 +252,15 @@ export class ScenarioManager {
     this._naloxoneSurgeActive = false; this._naloxoneSurge = 0;
     this._hemorrhageActive = false; this._bleedingControlled = false; this._hemorrhageFailTimer = 0; this._lastHemorrhageClass = -1;
     this._lidocaineToxicityCursor = 0;
+    this._administrativePreconditioningEligible = false;
+    this._administrativePreconditioningEventLogLength = null;
     this._restingVco2 = this.patient != null ? Max(120, mul(2.8, this.patient.weightKg)) : 200;
     this.eventLog = [];
     this.activePrompts = [];
     this.feedbackMessage = '';
     this.feedbackTimer = 0;
 
-    if (this.activeScenario != null) {
-      this.maxPossibleScore = 0;
-      for (const evt of this.activeScenario.events) {
-        if (evt.type !== ScenarioEventType.Assessment) continue;
-        if (this.isAssessmentSatisfiable(evt.expectedAction)) this.maxPossibleScore += evt.points;
-      }
-    }
+    this.maxPossibleScore = this.assessmentMaxPossibleScore();
 
     if (this.airwayProcedure != null) this.airwayProcedure.reset();
     if (this.patient != null) this.patient.resetToBaseline();
@@ -163,6 +271,7 @@ export class ScenarioManager {
 
   // ── student actions ──────────────────────────────────────────────────
   recordStudentAction(actionName) {
+    this._administrativePreconditioningEligible = false;
     const canonical = ActionCatalog.canonical(actionName);
     if (canonical === 'intubate' && this.activeScenario?.airwayPlan != null
       && this.airwayProcedure != null) {
@@ -422,6 +531,7 @@ export class ScenarioManager {
   }
 
   processEvent(evt, index) {
+    this._administrativePreconditioningEligible = false;
     switch (evt.type) {
       case ScenarioEventType.VitalChange:
         if (evt.changes != null && evt.changes.length > 0 && this.patient != null) {
@@ -502,6 +612,7 @@ export class ScenarioManager {
   }
 
   applyComplication(evt) {
+    this._administrativePreconditioningEligible = false;
     if (this.patient == null) return;
     switch (evt.complicationType) {
       case 'Bronchospasm':
@@ -827,6 +938,16 @@ export class ScenarioManager {
       if (tok.length > 0 && this.tokenSatisfiable(tok)) return true;
     }
     return false;
+  }
+
+  assessmentMaxPossibleScore() {
+    if (this.activeScenario == null) return 0;
+    let total = 0;
+    for (const evt of this.activeScenario.events) {
+      if (evt.type !== ScenarioEventType.Assessment) continue;
+      if (this.isAssessmentSatisfiable(evt.expectedAction)) total += evt.points;
+    }
+    return total;
   }
 
   tokenSatisfiable(tok) {

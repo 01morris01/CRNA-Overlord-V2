@@ -4,7 +4,7 @@ import { SimRunner } from '../ui/simRunner.js';
 const numericKeys = [
   't', 'hr', 'sbp', 'dbp', 'map', 'spo2', 'rr', 'etco2', 'temp',
   'bis', 'mac', 'etAgent', 'tof', 'tofRatio', 'ppeak', 'mv', 'tv',
-  'fio2', 'ventMode', 'vaporizer', 'ventSetTV', 'ventSetRR', 'ventSetPeep',
+  'fio2', 'ventMode', 'vaporizer', 'ventSetTV', 'ventSetRR', 'ventSetPeep', 'ventSetFiO2',
   'ventSetPressure', 'ventSetPressureSupport', 'o2Flow', 'airFlow', 'n2oFlow', 'status',
   'forcedApneaContribution', 'drugDepressionContribution',
   'complicationDriveContribution', 'centralDrive', 'effectiveNmbBlockade',
@@ -41,9 +41,11 @@ const stringKeys = [
 const arrayKeys = [
   'cricoidPressureHistory', 'ppvHistory', 'intubationAttempts', 'tofCheckHistory',
   'lidocaineRegionalHistory', 'lidocaineDoseHistory', 'lidocaineToxicityHistory',
-  'lipidRescueHistory',
+  'lipidRescueHistory', 'activeAnestheticInfusions',
 ];
-const nullableObjectKeys = ['ppvCurrent', 'lastTofCheck'];
+const nullableObjectKeys = [
+  'ppvCurrent', 'lastTofCheck', 'instructorNmbTarget', 'activeRubricScenario',
+];
 
 const requiredKeys = [
   ...numericKeys, ...booleanKeys, ...stringKeys, ...arrayKeys, ...nullableObjectKeys,
@@ -89,6 +91,12 @@ assert.ok(
 );
 
 assert.equal(Object.keys(snapshot).length, requiredKeys.length, 'snapshot key count changed');
+for (const forbidden of [
+  'caseExperience', 'caseContext', 'learnerChart', 'assessment', 'planRequirements',
+  'instructorGuide', 'considerations', 'expectedResponse', 'scoringGuidance',
+]) {
+  assert.equal(Object.hasOwn(snapshot, forbidden), false, `snapshot leaked ${forbidden}`);
+}
 
 runner.administerRegionalLidocaine({
   route: 'peripheral', concentrationPercent: 1.5, volumeMl: 20, epinephrine: false,
@@ -99,6 +107,37 @@ copied.lidocaineRegionalHistory[0].remainingMg = -1;
 copied.lidocaineDoseHistory[0].totalDoseMg = -1;
 assert.equal(runner.snapshot().lidocaineRegionalHistory[0].remainingMg, 300);
 assert.ok(runner.snapshot().lidocaineDoseHistory[0].totalDoseMg > 0);
+
+runner.d.startInfusion('Propofol', 300);
+runner.d.startInfusion('Fentanyl', 0.1);
+const infusionSnapshot = runner.snapshot();
+assert.deepEqual(infusionSnapshot.activeAnestheticInfusions, [
+  { drug: 'Propofol', rate: 300 },
+]);
+infusionSnapshot.activeAnestheticInfusions[0].rate = -1;
+assert.equal(runner.snapshot().activeAnestheticInfusions[0].rate, 300);
+
+assert.equal(snapshot.instructorNmbTarget, null);
+const administrativeNmb = runner.setInstructorNmbTarget({ targetTofRatio: 0.7 });
+const nmbSnapshot = runner.snapshot().instructorNmbTarget;
+assert.deepEqual(Object.keys(nmbSnapshot), [
+  'source',
+  'targetTofRatio',
+  'targetBlockade',
+  'rocuroniumCe',
+  'actualTofRatio',
+  'actualTofCount',
+  'effectiveNmbBlockade',
+  'dominantNmbSource',
+  'tolerance',
+  'equilibrating',
+]);
+assert.equal(nmbSnapshot.source, 'administrative');
+assert.equal(nmbSnapshot.targetTofRatio, 0.7);
+assert.equal(typeof nmbSnapshot.equilibrating, 'boolean');
+administrativeNmb.targetTofRatio = 0;
+nmbSnapshot.targetTofRatio = 0;
+assert.equal(runner.snapshot().instructorNmbTarget.targetTofRatio, 0.7);
 
 console.log('SNAPSHOT CONTRACT: PASS');
 console.log(`keys=${requiredKeys.length} numeric=${numericKeys.length} boolean=${booleanKeys.length} string=${stringKeys.length} arrays=${arrayKeys.length}`);

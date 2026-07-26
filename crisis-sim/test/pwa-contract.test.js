@@ -1,5 +1,6 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -30,22 +31,95 @@ const requiredAppShellEntries = [
   '/crisis-sim/sim/scenario/scenarioState.js',
   '/crisis-sim/sim/scenario/scenarioScoring.js',
   '/crisis-sim/sim/scenario/scenarioDebrief.js',
+  '/crisis-sim/sim/scenario/rubricLoader.js',
+  '/crisis-sim/sim/scenario/rubricScoringSession.js',
+  '/crisis-sim/sim/scenario/rubricRules.js',
+  '/crisis-sim/sim/scenario/rubricDebrief.js',
   '/crisis-sim/sim/scenario/actionLogger.js',
   '/crisis-sim/sim/scenario/actionCatalog.js',
+  '/data/rubrics/carson-newman-standard-iv-induction.json',
+  '/data/rubrics/carson-newman-rsi-induction.json',
+  '/data/rubrics/carson-newman-anesthesia-emergence.json',
+  '/crisis-sim/sim/scenarios/standard_iv_healthy_001.json',
+  '/crisis-sim/sim/scenarios/rsi_full_stomach_001.json',
+  '/crisis-sim/sim/scenarios/emergence_residual_block_001.json',
+  '/crisis-sim/sim/scenarios/rsi_failed_first_attempt_001.json',
+  // Preanesthesia case feature: browser-loaded UI + runtime modules and assets.
+  '/ui/liveCaseView.js',
+  '/ui/liveCaseModel.js',
+  '/crisis-sim/sim/scenario/caseContract.js',
+  '/crisis-sim/sim/scenario/caseSession.js',
+  '/crisis-sim/sim/scenario/caseFlowSession.js',
+  '/crisis-sim/sim/scenario/caseProjections.js',
+  '/crisis-sim/sim/scenario/caseDebrief.js',
+  '/crisis-sim/sim/scenario/casePhysiologyInputs.js',
+  '/crisis-sim/sim/scenarios/cn_preassessment_lap_chole_001.json',
+  '/crisis-sim/sim/scenarios/cn_preassessment_npo_mh_001.json',
 ];
+
+function appShellEntries() {
+  const literal = sw.match(/const APP_SHELL = \[([\s\S]*?)\n\];/)?.[1] ?? '';
+  return [...literal.matchAll(/'([^']+)'/g)].map(([, entry]) => entry);
+}
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v52-live-sim-lidocaine-2026-07-15';");
-    expect(sw).toContain('live-sim-lidocaine');
+    expect(sw).toContain("const CACHE_VERSION = 'v55-preanesthesia-ultrasound-2026-07-22';");
+    expect(sw).toContain('preanesthesia');
     expect(sw).toContain("'/hospital-map.js?v=48'");
-    expect(sw).not.toContain("const CACHE_VERSION = 'v51-live-sim-clinical-controls-2026-07-15';");
-    expect(sw).not.toContain("const CACHE_VERSION = 'v50-airway-gaps-2026-07-14';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v54-preanesthesia-cases-2026-07-20';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v53-ultrasound-trainer-2026-07-22';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v53-rubric-debrief-2026-07-17';");
+    expect(sw).not.toContain('v52-live-sim-lidocaine-2026-07-15');
   });
 
   it('pre-caches every live view and browser engine dependency', () => {
     for (const entry of requiredAppShellEntries) {
       expect(sw, `missing ${entry}`).toContain(`'${entry}'`);
     }
+  });
+
+  it('resolves every app-shell URL to a local file so cache installation cannot abort', () => {
+    const entries = appShellEntries();
+    expect(entries.length).toBeGreaterThan(0);
+    for (const entry of entries) {
+      const pathname = entry.split('?')[0];
+      const localPath = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
+      expect(existsSync(resolve(root, localPath)), `${entry} -> ${localPath}`).toBe(true);
+    }
+    const normalized = entries.map((entry) => entry.split('?')[0]);
+    expect(new Set(normalized).size).toBe(normalized.length);
+  });
+
+  it('evicts only prior Overlord caches while preserving unrelated Cache Storage entries', async () => {
+    const listeners = new Map();
+    const deleted = [];
+    runInNewContext(sw, {
+      caches: {
+        keys: async () => [
+          'overlord-v55-preanesthesia-ultrasound-2026-07-22',
+          'overlord-v54-preanesthesia-cases-2026-07-20',
+          'overlord-v53-ultrasound-trainer-2026-07-22',
+          'overlord-v52-live-sim-lidocaine-2026-07-15',
+          'workbox-precache-v1',
+          'hospital-offline-data',
+        ],
+        delete: async (key) => { deleted.push(key); return true; },
+      },
+      self: {
+        addEventListener: (type, listener) => listeners.set(type, listener),
+        skipWaiting: () => {},
+        clients: { claim: async () => {} },
+      },
+      URL,
+    });
+    let activation;
+    listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
+    await activation;
+    expect(deleted).toEqual([
+      'overlord-v54-preanesthesia-cases-2026-07-20',
+      'overlord-v53-ultrasound-trainer-2026-07-22',
+      'overlord-v52-live-sim-lidocaine-2026-07-15',
+    ]);
   });
 });

@@ -269,6 +269,22 @@ export class LidocaineSystem {
     this.clearanceFactor = clearanceFactor;
   }
 
+  /** Rebase learner-visible time while preserving current PK/PD exposure. */
+  rebaseLearnerTime() {
+    this.timeSec = 0;
+    this.tickCount = 0;
+    this._doseHistory = [];
+    this._toxicityHistory = [];
+    this._lipidHistory = [];
+    this._irritabilityHistory = [];
+    // Regional records are also the active depot/block state, so they cannot
+    // be discarded without changing physiology. No rubric preconditioning
+    // creates them; retain any externally established active baseline.
+    this._lastToxicityStage = this.toxicityStage;
+    this._lastDerivedRhythm = this.derivedRhythm;
+    return { timeSec: this.timeSec, tickCount: this.tickCount };
+  }
+
   giveIvBolus({ doseMgPerKg } = {}) {
     const dose = positiveFinite(doseMgPerKg, 'doseMgPerKg');
     const weight = positiveFinite(this.weightKg, 'weightKg');

@@ -6,18 +6,31 @@ import {
   computeDrugDose,
   computeRegionalLidocaineDose,
   DRUG_ACTIONS,
+  formatInstructorNmb,
   formatLidocaineSnapshot,
   formatMonitorSnapshot,
+  formatRubricFlag,
+  formatRubricStatus,
   LIDOCAINE_ROUTES,
   parsePatientConfig,
   PATIENT_PRESETS,
+  RUBRIC_SCENARIO_ASSETS,
+  RUBRIC_SCENARIOS,
+  TEACHING_CASE_ASSETS,
+  TEACHING_CASES,
   validateSimulationResult,
   VOLATILE_AGENTS,
 } from './liveSimModel.js';
-import { createLiveSimTransport } from './liveSimTransport.js';
+import {
+  renderInstructorCaseShell,
+  renderLearnerCaseShell,
+} from './liveCaseModel.js';
+import { createLiveCaseController } from './liveCaseView.js';
+import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
 
 let initialized = false;
 let runner = null;
+let caseController = null;
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -26,6 +39,11 @@ let launchObserver = null;
 let courseSelectorDisplay = null;
 let selectedVolatileAgent = 'Sevoflurane';
 let volatileSelectionDirty = false;
+let latestRubricResult = null;
+let latestRubricPresentationKey = null;
+let latestRubricDebrief = null;
+let clearRubricDraftsOnNextRender = false;
+const preparedRubricPrintState = new WeakMap();
 
 const patientFields = [
   ['weightKg', 'Weight', 'kg', 1],
@@ -122,6 +140,740 @@ function complicationMarkup() {
   `).join('');
 }
 
+const RUBRIC_SOURCE_LABELS = Object.freeze({
+  ENGINE_OBSERVABLE: 'ENGINE OBSERVABLE',
+  INSTRUCTOR_OBSERVED: 'INSTRUCTOR OBSERVED',
+  UNSCOREABLE: 'UNSCOREABLE',
+});
+
+export function renderRubricItemMarkup(item = {}) {
+  const source = RUBRIC_SOURCE_LABELS[item.scoringSource] ?? String(item.scoringSource ?? 'UNKNOWN');
+  const status = String(item.status ?? 'pending').replaceAll('_', ' ').toUpperCase();
+  const points = item.points === null || item.points === undefined ? '—' : `${item.points} / 2`;
+  const evidence = item.evidence
+    ? `Engine evidence · ${JSON.stringify(item.evidence)}`
+    : (item.scoringSource === 'INSTRUCTOR_OBSERVED' && Number.isFinite(item.updatedAtSec)
+      ? `Supporting trace — instructor scored at ${formatTime(item.updatedAtSec)}`
+      : 'Evidence pending.');
+  const scoreControls = item.scoringSource === 'INSTRUCTOR_OBSERVED' ? `
+    <div class="live-rubric-score-controls" role="group" aria-label="Score item ${escapeHtml(item.displayNumber)}">
+      <button type="button" data-rubric-item="${escapeHtml(item.id)}" data-rubric-points="2" aria-pressed="${item.points === 2}" aria-label="Score item ${escapeHtml(item.displayNumber)} performed, 2 points">2 · PERFORMED</button>
+      <button type="button" data-rubric-item="${escapeHtml(item.id)}" data-rubric-points="1" aria-pressed="${item.points === 1}" aria-label="Score item ${escapeHtml(item.displayNumber)} partial, 1 point">1 · PARTIAL</button>
+      <button type="button" data-rubric-item="${escapeHtml(item.id)}" data-rubric-points="0" aria-pressed="${item.points === 0}" aria-label="Score item ${escapeHtml(item.displayNumber)} not performed, 0 points">0 · NOT PERFORMED</button>
+    </div>
+    <label class="live-rubric-note"><span>Instructor note (optional)</span><input type="text" data-rubric-note="${escapeHtml(item.id)}" value="${escapeHtml(item.note ?? '')}" maxlength="500"></label>` : '';
+  return `
+    <li id="live-rubric-item-${escapeHtml(item.id)}" class="live-rubric-item" data-source="${escapeHtml(item.scoringSource)}" tabindex="-1">
+      <div class="live-rubric-item-heading">
+        <span class="live-rubric-number">${escapeHtml(item.displayNumber ?? '—')}${item.critical ? ' *' : ''}</span>
+        <span class="live-rubric-source">${escapeHtml(source)}</span>
+        <span class="live-rubric-points">${escapeHtml(points)} · ${escapeHtml(status)}</span>
+      </div>
+      <p class="live-rubric-literal">${escapeHtml(item.text ?? '')}</p>
+      <p class="live-rubric-evidence">${escapeHtml(evidence)}</p>
+      ${scoreControls}
+    </li>`;
+}
+
+function printableJson(value) {
+  const serialized = JSON.stringify(value, null, 2);
+  return serialized === undefined ? '' : serialized;
+}
+
+function printSourceLabel(source) {
+  return RUBRIC_SOURCE_LABELS[source] ?? String(source ?? 'UNKNOWN').replaceAll('_', ' ');
+}
+
+function renderPrintRecordTable({ title, className, records, columns }) {
+  const safeRecords = Array.isArray(records) ? records : [];
+  const rows = safeRecords.length === 0
+    ? `<tr><td colspan="${columns.length + 2}">None</td></tr>`
+    : safeRecords.map((record, index) => `
+      <tr>
+        <td>${index + 1}</td>
+        ${columns.map(({ key, label }) => `<td data-label="${escapeHtml(label)}">${escapeHtml(record?.[key] ?? '—')}</td>`).join('')}
+        <td data-label="Complete record"><pre>${escapeHtml(printableJson(record))}</pre></td>
+      </tr>`).join('');
+  return `
+    <section class="live-print-appendix ${escapeHtml(className)}">
+      <h2>${escapeHtml(title)}</h2>
+      <table>
+        <thead><tr><th scope="col">#</th>${columns.map(({ label }) => `<th scope="col">${escapeHtml(label)}</th>`).join('')}<th scope="col">Complete record</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </section>`;
+}
+
+export function renderPrintableRubric({ debrief, rubricMetadata, identity = {} } = {}) {
+  const result = debrief?.rubricResult;
+  if (!result || !Array.isArray(result.items)) {
+    throw new TypeError('A finalized rubric debrief is required for printing');
+  }
+  if (!rubricMetadata || result.rubricId !== rubricMetadata.id) {
+    throw new RangeError('Rubric print metadata does not match the finalized debrief');
+  }
+
+  const percent = Number(result.percentage);
+  const formattedPercent = Number.isFinite(percent) ? `${percent.toFixed(1)}%` : '—';
+  const itemById = new Map(result.items.map((item) => [item.id, item]));
+  const omitted = (result.criticalItemsOmitted ?? [])
+    .map((itemId) => itemById.get(itemId))
+    .filter(Boolean);
+  const omittedMarkup = omitted.length === 0
+    ? '<p>None</p>'
+    : `<ul>${omitted.map((item) => `<li>${escapeHtml(item.displayNumber)} · ${escapeHtml(item.text)}</li>`).join('')}</ul>`;
+  const rubricRows = result.items.map((item) => {
+    const points = Number(item.points);
+    const awarded = (value) => points === value
+      ? '<strong class="live-print-awarded">AWARDED</strong>'
+      : '<span aria-label="Not awarded">—</span>';
+    const status = String(item.status ?? '').replaceAll('_', ' ').toUpperCase();
+    const evidence = item.evidence === null || item.evidence === undefined
+      ? 'None'
+      : `<pre>${escapeHtml(printableJson(item.evidence))}</pre>`;
+    const consequence = item.observedConsequence === null || item.observedConsequence === undefined
+      ? ''
+      : `<div><strong>Observed consequence</strong><pre>${escapeHtml(printableJson(item.observedConsequence))}</pre></div>`;
+    return `
+      <tr class="live-print-rubric-row">
+        <th scope="row">${escapeHtml(item.displayNumber ?? '—')}</th>
+        <td><span class="live-print-critical">${item.critical ? 'CRITICAL' : 'NON-CRITICAL'}</span><div>${escapeHtml(item.text ?? '')}</div></td>
+        <td>${escapeHtml(printSourceLabel(item.scoringSource))}</td>
+        <td class="live-print-scale-cell">${awarded(2)}</td>
+        <td class="live-print-scale-cell">${awarded(1)}</td>
+        <td class="live-print-scale-cell">${awarded(0)}</td>
+        <td><strong>${escapeHtml(points)} / 2 · ${escapeHtml(status)}</strong><div>Note: ${escapeHtml(item.note || 'None')}</div><div><strong>Evidence</strong>${evidence}</div>${consequence}</td>
+      </tr>`;
+  }).join('');
+  const denominatorWarning = (rubricMetadata.discrepancies ?? [])
+    .find(({ code }) => code === 'SOURCE_DENOMINATOR_MISMATCH');
+  const warningMarkup = denominatorWarning
+    ? `<p class="live-print-source-warning">Source header /${escapeHtml(rubricMetadata.sourceHeaderDenominator)}; encoded rubric ${escapeHtml(rubricMetadata.computedMaxPoints)} points across ${escapeHtml(rubricMetadata.sourceFootnoteScoredItems)} rows.</p>`
+    : '';
+  const passRule = `Passing requires at least ${escapeHtml(rubricMetadata.passRule?.minimumPercent ?? 85)}% overall AND every critical item performed (2 points).`;
+
+  return `
+    <article class="live-rubric-print-report" aria-labelledby="live-print-rubric-title">
+      <p class="live-print-education-fence">Educational simulation. Not for clinical use.</p>
+      <header class="live-print-header">
+        <p>${escapeHtml(rubricMetadata.course)}</p>
+        <h1 id="live-print-rubric-title">${escapeHtml(rubricMetadata.title)}</h1>
+        <p>Rubric ID: ${escapeHtml(rubricMetadata.id)}</p>
+        <p>Source: ${escapeHtml(rubricMetadata.sourceFile)}</p>
+        ${warningMarkup}
+      </header>
+      <dl class="live-print-identity">
+        <div><dt>Student</dt><dd id="live-print-student">${escapeHtml(identity.student ?? '')}</dd></div>
+        <div><dt>Evaluator</dt><dd id="live-print-evaluator">${escapeHtml(identity.evaluator ?? '')}</dd></div>
+        <div><dt>Date</dt><dd id="live-print-date">${escapeHtml(identity.date ?? '')}</dd></div>
+      </dl>
+      <section class="live-print-outcome" aria-label="Final rubric result">
+        <p>FINAL RESULT</p><strong>${escapeHtml(result.outcome)}</strong>
+        <span>${escapeHtml(result.rawPoints)} / ${escapeHtml(result.maxPoints)} · ${escapeHtml(formattedPercent)}</span>
+      </section>
+      <section class="live-print-omitted"><h2>Omitted critical items</h2>${omittedMarkup}</section>
+      <section class="live-print-rubric-table-section">
+        <h2>Scored rubric</h2>
+        <table class="live-print-rubric-table">
+          <thead><tr><th scope="col">Item</th><th scope="col">Literal criterion</th><th scope="col">Source</th><th scope="col">2 · PERFORMED</th><th scope="col">1 · PARTIAL</th><th scope="col">0 · NOT PERFORMED</th><th scope="col">Award / note / evidence</th></tr></thead>
+          <tbody>${rubricRows}</tbody>
+        </table>
+      </section>
+      <p class="live-print-pass-rule">${passRule}</p>
+      ${warningMarkup}
+      ${renderPrintRecordTable({
+        title: 'Action timeline', className: 'live-print-actions',
+        records: debrief.actionTimeline,
+        columns: [{ key: 'tSec', label: 'Simulation second' }, { key: 'source', label: 'Source' }, { key: 'action', label: 'Action' }],
+      })}
+      ${renderPrintRecordTable({
+        title: 'Physiologic trace', className: 'live-print-trace',
+        records: debrief.physiologicTrace,
+        columns: [{ key: 't', label: 'Simulation second' }],
+      })}
+      ${renderPrintRecordTable({
+        title: 'Violation flags', className: 'live-print-violations',
+        records: debrief.violationFlags,
+        columns: [{ key: 'tSec', label: 'Simulation second' }, { key: 'displayNumber', label: 'Item' }, { key: 'triggerAction', label: 'Trigger' }],
+      })}
+      ${renderPrintRecordTable({
+        title: 'Administrative actions', className: 'live-print-administrative',
+        records: debrief.administrativeActions,
+        columns: [{ key: 'tSec', label: 'Simulation second' }, { key: 'source', label: 'Source' }, { key: 'action', label: 'Action' }],
+      })}
+    </article>`;
+}
+
+/* Printable case sections.
+
+   CONFIDENTIALITY: this surface is rendered from an explicit allowlist, never
+   from a whole-record JSON dump. renderPrintRecordTable prints each record's
+   complete JSON, which is safe for rubric records but NOT for case timeline
+   records, since instructor_observation entries carry free-text notes and any
+   future record could carry answer-key content. Every field below is named
+   deliberately. Do not replace this with a generic record dump.
+
+   Excluded on purpose, proven by test/case-print.test.js:
+   - scoringGuidance and redFlags, even for released considerations;
+   - unreleased considerations in any form;
+   - undiscovered (missed) finding labels and significance, count only;
+   - responses to assessment actions the learner never performed;
+   - debrief teaching text that was never released. */
+const CASE_TIMELINE_PRINT_FIELDS = Object.freeze(['tSec', 'sequence', 'kind', 'source']);
+const TRAINING_BRANCH_ID = 'proceed_for_training';
+
+function casePrintRows(records, columns, emptyLabel = 'None') {
+  const safe = Array.isArray(records) ? records : [];
+  if (safe.length === 0) {
+    return `<tr><td colspan="${columns.length + 1}">${escapeHtml(emptyLabel)}</td></tr>`;
+  }
+  return safe.map((record, index) => `
+      <tr>
+        <td>${index + 1}</td>
+        ${columns.map(({ key, label, fallback = '—' }) => `<td data-label="${escapeHtml(label)}">${escapeHtml(record?.[key] ?? fallback)}</td>`).join('')}
+      </tr>`).join('');
+}
+
+function casePrintTable({ title, className, records, columns, emptyLabel }) {
+  return `
+    <section class="live-print-case-section ${escapeHtml(className)}">
+      <h2>${escapeHtml(title)}</h2>
+      <table>
+        <thead><tr><th scope="col">#</th>${columns.map(({ label }) => `<th scope="col">${escapeHtml(label)}</th>`).join('')}</tr></thead>
+        <tbody>${casePrintRows(records, columns, emptyLabel)}</tbody>
+      </table>
+    </section>`;
+}
+
+function casePlanSelectionRows(selections) {
+  const entries = selections && typeof selections === 'object' ? Object.entries(selections) : [];
+  if (entries.length === 0) return '<tr><td colspan="2">No plan submitted</td></tr>';
+  return entries.map(([field, value]) => `
+      <tr>
+        <th scope="row">${escapeHtml(field)}</th>
+        <td>${escapeHtml(Array.isArray(value) ? value.join(', ') : value)}</td>
+      </tr>`).join('');
+}
+
+export function renderPrintableCase({ debrief, identity = {} } = {}) {
+  const result = debrief?.caseResult;
+  if (!result || typeof result !== 'object' || !result.assessment || !result.plan) {
+    throw new TypeError('A finalized case debrief is required for printing');
+  }
+
+  const deferred = result.outcome === 'appropriately_deferred';
+  const timeline = Array.isArray(result.eventTimeline) ? result.eventTimeline : [];
+  const trainingActivated = timeline.some((entry) => (
+    entry?.kind === 'case_flow_branch_activated'
+    && typeof entry.branchId === 'string'
+    && (entry.branchId === TRAINING_BRANCH_ID || entry.branchId.includes('training'))
+  ));
+
+  const outcomeLabel = deferred ? 'APPROPRIATELY DEFERRED' : 'COMPLETED';
+  const deferredBanner = deferred
+    ? '<p class="live-print-case-deferred">This case was appropriately deferred. Declining to proceed was the correct clinical disposition and is scored as a successful outcome.</p>'
+    : '';
+  const trainingBanner = trainingActivated
+    ? '<p class="live-print-case-training">TRAINING-ONLY BRANCH. An instructor selected an educational counterfactual so the trainee could practice downstream management. This branch is NOT the recommended clinical disposition for this patient and must not be read as endorsing proceeding.</p>'
+    : '';
+
+  const missedCount = Array.isArray(result.assessment.missedFindings)
+    ? result.assessment.missedFindings.length
+    : 0;
+  // Count only: naming a missed finding would print the answer key.
+  const missedMarkup = `<p class="live-print-case-missed">Findings not discovered: ${escapeHtml(missedCount)}</p>`;
+
+  const findingsSubmission = result.assessment.findingsSubmission;
+  const submissionNotes = findingsSubmission?.notes
+    ? `<p><strong>Learner summary</strong> ${escapeHtml(findingsSubmission.notes)}</p>`
+    : '';
+
+  return `
+    <article class="live-case-print-report" aria-labelledby="live-print-case-title">
+      <p class="live-print-education-fence">Educational simulation. Not for clinical use.</p>
+      <header class="live-print-header">
+        <h1 id="live-print-case-title">Preanesthesia Case Record</h1>
+        <p>Case ID: ${escapeHtml(result.caseId)}</p>
+        <p>Finalized at simulation second ${escapeHtml(result.finalizedAtSec)}</p>
+      </header>
+      <dl class="live-print-identity">
+        <div><dt>Student</dt><dd>${escapeHtml(identity.student ?? '')}</dd></div>
+        <div><dt>Evaluator</dt><dd>${escapeHtml(identity.evaluator ?? '')}</dd></div>
+        <div><dt>Date</dt><dd>${escapeHtml(identity.date ?? '')}</dd></div>
+      </dl>
+      <section class="live-print-case-outcome" aria-label="Case outcome">
+        <p>CASE OUTCOME</p><strong>${escapeHtml(outcomeLabel)}</strong>
+        ${deferredBanner}
+        ${trainingBanner}
+      </section>
+      ${casePrintTable({
+        title: 'Assessment', className: 'live-print-case-assessment',
+        records: result.assessment.actions,
+        columns: [
+          { key: 'tSec', label: 'Simulation second' },
+          { key: 'stage', label: 'Stage' },
+          { key: 'domain', label: 'Domain' },
+          { key: 'prompt', label: 'Assessment performed' },
+        ],
+        emptyLabel: 'No assessment actions performed',
+      })}
+      ${casePrintTable({
+        title: 'Findings discovered', className: 'live-print-case-findings',
+        records: result.assessment.discoveredFindings,
+        columns: [
+          { key: 'learnerLabel', label: 'Finding' },
+          { key: 'significance', label: 'Significance' },
+        ],
+        emptyLabel: 'No findings discovered',
+      })}
+      ${missedMarkup}
+      ${submissionNotes}
+      <section class="live-print-case-section live-print-case-plan">
+        <h2>Anesthetic Plan</h2>
+        <table><tbody>${casePlanSelectionRows(result.plan.selections)}</tbody></table>
+        <p><strong>Rationale</strong> ${escapeHtml(result.plan.rationale || 'None recorded')}</p>
+      </section>
+      ${casePrintTable({
+        title: 'Plan scoring', className: 'live-print-case-rules',
+        records: result.plan.ruleResults,
+        columns: [
+          { key: 'id', label: 'Rule' },
+          { key: 'status', label: 'Status' },
+          { key: 'points', label: 'Points' },
+        ],
+        emptyLabel: 'No plan rules evaluated',
+      })}
+      ${casePrintTable({
+        title: 'Event Timeline', className: 'live-print-case-timeline',
+        records: timeline.map((entry) => Object.fromEntries(
+          CASE_TIMELINE_PRINT_FIELDS.map((field) => [field, entry?.[field]]),
+        )),
+        columns: [
+          { key: 'tSec', label: 'Simulation second' },
+          { key: 'sequence', label: 'Seq' },
+          { key: 'kind', label: 'Event' },
+          { key: 'source', label: 'Source' },
+        ],
+        emptyLabel: 'No case events recorded',
+      })}
+      ${casePrintTable({
+        title: 'Instructor Observations', className: 'live-print-case-observations',
+        records: result.instructorObservations,
+        columns: [
+          { key: 'considerationId', label: 'Consideration' },
+          { key: 'status', label: 'Status' },
+          { key: 'note', label: 'Instructor note', fallback: '' },
+        ],
+        emptyLabel: 'No instructor observations recorded',
+      })}
+      ${casePrintTable({
+        title: 'Released Teaching Feedback', className: 'live-print-case-feedback',
+        records: result.releasedFeedback,
+        columns: [
+          { key: 'title', label: 'Topic' },
+          { key: 'consideration', label: 'Teaching point' },
+          { key: 'expectedResponse', label: 'Expected response' },
+        ],
+        emptyLabel: 'No teaching feedback released',
+      })}
+    </article>`;
+}
+
+function casePrintIdentity(documentRoot) {
+  return {
+    student: documentRoot?.getElementById?.('live-case-student')?.value ?? '',
+    evaluator: documentRoot?.getElementById?.('live-case-evaluator')?.value ?? '',
+    date: documentRoot?.getElementById?.('live-case-date')?.value ?? '',
+  };
+}
+
+function setCasePrintStatus(documentRoot, message) {
+  const status = documentRoot?.getElementById?.('live-case-print-status');
+  if (status) status.textContent = message;
+}
+
+// Wires renderPrintableCase into a reachable instructor action, mirroring
+// runRubricPrintAction. Refuses unless the case is finalized (so the debrief
+// exists and is complete). The rendered markup is the scrubbed student record;
+// confidentiality is proven in test/case-print.test.js and
+// test/case-print-wiring.test.js.
+export function runCasePrintAction({
+  runner: liveRunner,
+  documentRoot,
+  printImpl = () => globalThis.print?.(),
+} = {}) {
+  if (!liveRunner?.isCaseFinalized?.()) {
+    setCasePrintStatus(documentRoot, 'Finalize the case debrief before printing.');
+    return { ok: false, reason: 'CASE_NOT_FINALIZED' };
+  }
+  const printDocument = documentRoot?.getElementById?.('live-case-print-document');
+  if (!printDocument) return { ok: false, reason: 'CASE_PRINT_DOCUMENT_UNAVAILABLE' };
+  // buildDebrief() composes rubric + case; it throws if a rubric is loaded but
+  // not finalized. Degrade gracefully rather than letting the click handler
+  // throw (broken button + console error).
+  let debrief;
+  try {
+    debrief = liveRunner.buildDebrief();
+  } catch (error) {
+    const reason = error?.code ?? 'CASE_DEBRIEF_BUILD_FAILED';
+    setCasePrintStatus(documentRoot, `Cannot print yet: ${reason}.`);
+    return { ok: false, reason };
+  }
+  if (!debrief?.caseResult) return { ok: false, reason: 'CASE_DEBRIEF_UNAVAILABLE' };
+  const markup = renderPrintableCase({ debrief, identity: casePrintIdentity(documentRoot) });
+  printDocument.innerHTML = markup;
+  printDocument.hidden = false;
+  setCasePrintStatus(documentRoot, 'Finalized case record ready.');
+  printImpl();
+  return { ok: true, caseId: debrief.caseResult.caseId };
+}
+
+function rubricPrintIdentity(documentRoot) {
+  return {
+    student: documentRoot?.getElementById?.('live-rubric-student')?.value ?? '',
+    evaluator: documentRoot?.getElementById?.('live-rubric-evaluator')?.value ?? '',
+    date: documentRoot?.getElementById?.('live-rubric-date')?.value ?? '',
+  };
+}
+
+export function resetRubricPrintState(documentRoot) {
+  for (const id of ['live-rubric-student', 'live-rubric-evaluator', 'live-rubric-date']) {
+    const input = documentRoot?.getElementById?.(id);
+    if (input) input.value = '';
+  }
+  const status = documentRoot?.getElementById?.('live-rubric-print-status');
+  if (status) status.textContent = 'Finalize the rubric to prepare its print document.';
+  const printDocument = documentRoot?.getElementById?.('live-rubric-print-document');
+  if (printDocument) {
+    preparedRubricPrintState.delete(printDocument);
+    if (printDocument.dataset) {
+      delete printDocument.dataset.rubricPrintPrepared;
+      delete printDocument.dataset.rubricPrintId;
+    }
+    printDocument.innerHTML = '';
+    printDocument.hidden = true;
+  }
+}
+
+function validatedRubricPrintContext({
+  runner: liveRunner,
+  debrief,
+  documentRoot,
+} = {}) {
+  if (!liveRunner?.isRubricFinalized?.() || !debrief?.rubricResult) {
+    return { ok: false, reason: 'RUBRIC_NOT_FINALIZED' };
+  }
+  const rubricMetadata = liveRunner.getRubricPrintMetadata();
+  if (!rubricMetadata) return { ok: false, reason: 'RUBRIC_METADATA_UNAVAILABLE' };
+  if (debrief.rubricResult.rubricId !== rubricMetadata.id) {
+    throw new RangeError('Rubric print metadata does not match the finalized debrief');
+  }
+  const printDocument = documentRoot?.getElementById?.('live-rubric-print-document');
+  if (!printDocument) return { ok: false, reason: 'PRINT_DOCUMENT_UNAVAILABLE' };
+  return {
+    ok: true, liveRunner, debrief, documentRoot, rubricMetadata, printDocument,
+  };
+}
+
+function setRubricPrintStatus(documentRoot, message) {
+  const status = documentRoot?.getElementById?.('live-rubric-print-status');
+  if (status) status.textContent = message;
+}
+
+function updatePreparedRubricIdentity(printDocument, identity) {
+  const entries = [
+    ['#live-print-student', identity.student],
+    ['#live-print-evaluator', identity.evaluator],
+    ['#live-print-date', identity.date],
+  ];
+  const nodes = entries.map(([selector]) => printDocument.querySelector?.(selector) ?? null);
+  if (nodes.some((node) => node === null)) return false;
+  nodes.forEach((node, index) => { node.textContent = entries[index][1]; });
+  return true;
+}
+
+function writeFinalizedRubricPrint(context) {
+  const {
+    debrief, documentRoot, rubricMetadata, printDocument,
+  } = context;
+  const markup = renderPrintableRubric({
+    debrief,
+    rubricMetadata,
+    identity: rubricPrintIdentity(documentRoot),
+  });
+  printDocument.innerHTML = markup;
+  printDocument.hidden = false;
+  if (printDocument.dataset) {
+    printDocument.dataset.rubricPrintPrepared = 'true';
+    printDocument.dataset.rubricPrintId = rubricMetadata.id;
+  }
+  preparedRubricPrintState.set(printDocument, {
+    debrief,
+    rubricId: rubricMetadata.id,
+  });
+  setRubricPrintStatus(documentRoot, 'Finalized rubric print document prepared.');
+  return { ok: true, reused: false, markup, rubricMetadata };
+}
+
+export function prepareFinalizedRubricPrint(options = {}) {
+  const context = validatedRubricPrintContext(options);
+  return context.ok ? writeFinalizedRubricPrint(context) : context;
+}
+
+export function runRubricPrintAction({
+  runner: liveRunner,
+  debrief,
+  documentRoot,
+  printImpl = () => globalThis.print?.(),
+} = {}) {
+  const context = validatedRubricPrintContext({
+    runner: liveRunner, debrief, documentRoot,
+  });
+  if (!context.ok) return context;
+  const { printDocument, rubricMetadata } = context;
+  const preparedState = preparedRubricPrintState.get(printDocument);
+  const markerMatches = printDocument.dataset?.rubricPrintPrepared === 'true'
+    && printDocument.dataset?.rubricPrintId === rubricMetadata.id;
+  const stateMatches = preparedState?.debrief === debrief
+    && preparedState?.rubricId === rubricMetadata.id;
+  let prepared;
+  if (markerMatches && stateMatches && updatePreparedRubricIdentity(
+    printDocument,
+    rubricPrintIdentity(documentRoot),
+  )) {
+    setRubricPrintStatus(documentRoot, 'Finalized rubric print document ready.');
+    prepared = { ok: true, reused: true, rubricMetadata };
+  } else {
+    prepared = writeFinalizedRubricPrint(context);
+  }
+  printImpl();
+  return prepared;
+}
+
+export function renderRubricConsoleShell() {
+  return `
+    <aside class="live-panel live-rubric-panel" aria-labelledby="live-rubric-heading">
+      <div class="live-rubric-header">
+        <div><p class="live-eyebrow">LIVE ASSESSMENT</p><h2 id="live-rubric-heading">Carson-Newman rubric</h2></div>
+        <span class="live-rubric-legend">* CRITICAL</span>
+      </div>
+      <div class="live-rubric-panel-scroll">
+      <label class="live-field" for="live-rubric-scenario"><span>Approved scenario</span>
+        <select id="live-rubric-scenario">${RUBRIC_SCENARIOS.map(({ id, label }) => `<option value="${id}">${escapeHtml(label)}</option>`).join('')}${TEACHING_CASES.map(({ id, label }) => `<option value="${id}">${escapeHtml(label)}</option>`).join('')}</select>
+      </label>
+      <button id="live-rubric-load" type="button" class="live-primary">LOAD SCENARIO</button>
+      <output id="live-rubric-load-status" class="live-rubric-inline-status" aria-live="polite">No rubric scenario loaded.</output>
+
+      <section class="live-instructor-nmb" aria-labelledby="live-instructor-nmb-heading">
+        <h3 id="live-instructor-nmb-heading">ADMINISTRATIVE SETUP · NMB TARGET</h3>
+        <p>Not a student action and not scoreable. The engine equilibrates the single NMB state.</p>
+        <div class="live-nmb-presets" role="group" aria-label="Administrative TOF ratio presets">
+          ${['0', '0.25', '0.50', '0.70', '0.90', '1'].map((target) => `<button type="button" data-nmb-target="${target}">${target}</button>`).join('')}
+        </div>
+        <div class="live-nmb-custom">
+          <label class="live-field" for="live-instructor-nmb-custom"><span>Custom target ratio · 0 to 1</span><input id="live-instructor-nmb-custom" type="number" value="0.70" min="0" max="1" step="0.01"></label>
+          <button id="live-instructor-nmb-apply" type="button">APPLY TARGET</button>
+        </div>
+        <dl id="live-instructor-nmb-readback" class="live-nmb-readback">
+          <div><dt>Target ratio</dt><dd id="live-nmb-target-ratio">—</dd></div>
+          <div><dt>Actual ratio</dt><dd id="live-nmb-actual-ratio">—</dd></div>
+          <div><dt>Actual TOF count</dt><dd id="live-nmb-tof-count">— / 4</dd></div>
+          <div><dt>Effective blockade</dt><dd id="live-nmb-blockade">—</dd></div>
+          <div><dt>Dominant source</dt><dd id="live-nmb-source">None</dd></div>
+          <div><dt>Target status</dt><dd id="live-nmb-equilibrium">NO TARGET</dd></div>
+        </dl>
+      </section>
+
+      <section class="live-rubric-summary-section" aria-labelledby="live-rubric-summary-heading">
+        <h3 id="live-rubric-summary-heading">Rubric summary</h3>
+        <div id="live-rubric-summary" class="live-rubric-summary"><strong>NO RUBRIC</strong><span>Load an approved scenario to begin scoring.</span></div>
+        <p id="live-rubric-source-warning" class="live-rubric-warning" role="alert" hidden></p>
+      </section>
+      <fieldset class="live-rubric-print-prep">
+        <legend>Printable evaluation record</legend>
+        <div class="live-rubric-print-fields">
+          <label class="live-field" for="live-rubric-student"><span>Student</span><input id="live-rubric-student" type="text" autocomplete="name" maxlength="120"></label>
+          <label class="live-field" for="live-rubric-evaluator"><span>Evaluator</span><input id="live-rubric-evaluator" type="text" autocomplete="name" maxlength="120"></label>
+          <label class="live-field" for="live-rubric-date"><span>Date</span><input id="live-rubric-date" type="date"></label>
+        </div>
+        <output id="live-rubric-print-status" class="live-rubric-inline-status" aria-live="polite">Finalize the rubric to prepare its print document.</output>
+      </fieldset>
+      <section class="live-rubric-flag-section" aria-labelledby="live-rubric-flags-heading">
+        <h3 id="live-rubric-flags-heading">Exact-text violation flags</h3>
+        <ul id="live-rubric-flags" class="live-rubric-flags"><li>No violation flags.</li></ul>
+      </section>
+      <ol id="live-rubric-items" class="live-rubric-items" aria-label="Live literal rubric items"><li class="live-empty">Load an approved scenario to view literal rubric rows.</li></ol>
+      <output id="live-rubric-finalization-status" class="live-rubric-finalization-status" aria-live="polite">Finalization unavailable until a rubric scenario is loaded.</output>
+      <div class="live-rubric-actions">
+        <button id="live-rubric-finalize" type="button" class="live-primary" disabled>FINALIZE DEBRIEF</button>
+        <button id="live-rubric-print" type="button" disabled>PRINT RUBRIC</button>
+      </div>
+      </div>
+    </aside>`;
+}
+
+export function applyInstructorRubricScore(liveRunner, { itemId, points, note = '' }) {
+  return liveRunner.setInstructorScore({ itemId, points, note });
+}
+
+export function applyInstructorNmbTarget(liveRunner, value) {
+  const targetTofRatio = Number(value);
+  if (!Number.isFinite(targetTofRatio) || targetTofRatio < 0 || targetTofRatio > 1) {
+    throw new RangeError('Administrative TOF target must be between 0 and 1');
+  }
+  return liveRunner.setInstructorNmbTarget({ targetTofRatio });
+}
+
+export function finalizeRubricDebrief(liveRunner, { pauseOnSuccess = false } = {}) {
+  const finalized = liveRunner.finalizeRubric();
+  if (!finalized.ok) return finalized;
+  if (pauseOnSuccess) liveRunner.pause();
+  return { ok: true, finalized, debrief: liveRunner.buildDebrief() };
+}
+
+function systemPrefersReducedMotion() {
+  return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true;
+}
+
+export function focusPendingRubricItem(documentRoot, itemId, {
+  prefersReducedMotion = systemPrefersReducedMotion(),
+} = {}) {
+  if (!itemId) return null;
+  const row = documentRoot?.getElementById?.(`live-rubric-item-${itemId}`) ?? null;
+  if (!row) return null;
+  row.scrollIntoView?.({
+    block: 'center', behavior: prefersReducedMotion ? 'auto' : 'smooth',
+  });
+  const score = row.querySelector?.('[data-rubric-points]') ?? null;
+  (score ?? row).focus?.();
+  return row;
+}
+
+export function runRubricFinalizationAction({
+  runner: liveRunner,
+  documentRoot,
+  onPending = () => {},
+  onFinalized = () => {},
+} = {}) {
+  const result = finalizeRubricDebrief(liveRunner, { pauseOnSuccess: true });
+  if (!result.ok) {
+    focusPendingRubricItem(documentRoot, result.pendingItemIds?.[0]);
+    onPending(result);
+    return result;
+  }
+  onFinalized(result);
+  return result;
+}
+
+const FINALIZED_CONSOLE_ALLOWED_CONTROL_IDS = new Set([
+  'live-close',
+  'live-open-display',
+  'live-rubric-print',
+  'live-export',
+  'live-rubric-scenario',
+  'live-rubric-load',
+  'live-reset',
+  'live-rubric-student',
+  'live-rubric-evaluator',
+  'live-rubric-date',
+]);
+
+export function setRubricConsoleReadOnly(rootElement, readOnly) {
+  const controls = rootElement?.querySelectorAll?.('button, input, select, textarea') ?? [];
+  for (const control of controls) {
+    if (FINALIZED_CONSOLE_ALLOWED_CONTROL_IDS.has(control.id)) continue;
+    if (readOnly) {
+      if (!Object.hasOwn(control.dataset, 'rubricLockPriorDisabled')) {
+        control.dataset.rubricLockPriorDisabled = control.disabled ? 'true' : 'false';
+      }
+      control.disabled = true;
+    } else if (Object.hasOwn(control.dataset, 'rubricLockPriorDisabled')) {
+      control.disabled = control.dataset.rubricLockPriorDisabled === 'true';
+      delete control.dataset.rubricLockPriorDisabled;
+    }
+  }
+  if (rootElement?.dataset) rootElement.dataset.rubricReadOnly = String(readOnly);
+}
+
+export function applyFinalizedConsoleLock({ rootElement, runner: activeRunner } = {}) {
+  if (!activeRunner?.isRubricFinalized?.()) return false;
+  setRubricConsoleReadOnly(rootElement, true);
+  return true;
+}
+
+export function bindRubricActionControls({
+  rootElement,
+  getRunner,
+  onScore = () => {},
+  onNmb = () => {},
+  onError = () => {},
+} = {}) {
+  const runNmbTarget = (value) => {
+    try {
+      const status = applyInstructorNmbTarget(getRunner(), value);
+      onNmb(status);
+    } catch (error) {
+      onError(error);
+    }
+  };
+
+  rootElement?.querySelector?.('#live-rubric-items')?.addEventListener('click', (event) => {
+    const scoreButton = event.target?.closest?.('[data-rubric-points]');
+    if (!scoreButton) return;
+    const itemId = scoreButton.dataset.rubricItem;
+    const points = Number(scoreButton.dataset.rubricPoints);
+    const note = [...(rootElement.querySelectorAll?.('[data-rubric-note]') ?? [])]
+      .find((input) => input.dataset.rubricNote === itemId)?.value ?? '';
+    try {
+      const scored = applyInstructorRubricScore(getRunner(), { itemId, points, note });
+      onScore(scored);
+    } catch (error) {
+      onError(error);
+    }
+  });
+
+  for (const button of rootElement?.querySelectorAll?.('[data-nmb-target]') ?? []) {
+    button.addEventListener('click', () => runNmbTarget(button.dataset.nmbTarget));
+  }
+  rootElement?.querySelector?.('#live-instructor-nmb-apply')?.addEventListener('click', () => {
+    runNmbTarget(rootElement.querySelector?.('#live-instructor-nmb-custom')?.value);
+  });
+}
+
+export async function loadRubricScenarioAssets(liveRunner, scenarioId, fetchImpl = globalThis.fetch) {
+  const assets = RUBRIC_SCENARIO_ASSETS[scenarioId];
+  if (!assets) throw new RangeError(`Unknown rubric scenario: ${scenarioId}`);
+  if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
+  const [scenarioResponse, rubricResponse] = await Promise.all([
+    fetchImpl(assets.scenarioUrl),
+    fetchImpl(assets.rubricUrl),
+  ]);
+  if (!scenarioResponse.ok || !rubricResponse.ok) {
+    throw new Error(`Scenario assets unavailable (${scenarioResponse.status}/${rubricResponse.status})`);
+  }
+  const [scenario, rubric] = await Promise.all([
+    scenarioResponse.json(),
+    rubricResponse.json(),
+  ]);
+  const loaded = liveRunner.loadRubricScenario({ scenario, rubric });
+  return { scenario, rubric, loaded };
+}
+
+export async function loadSelectedScenarioAssets(liveRunner, scenarioId, fetchImpl = globalThis.fetch) {
+  const caseAssets = TEACHING_CASE_ASSETS[scenarioId];
+  if (!caseAssets) return loadRubricScenarioAssets(liveRunner, scenarioId, fetchImpl);
+  if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
+  const scenarioResponse = await fetchImpl(caseAssets.scenarioUrl);
+  const rubricResponse = caseAssets.rubricUrl ? await fetchImpl(caseAssets.rubricUrl) : null;
+  if (!scenarioResponse.ok || (rubricResponse !== null && !rubricResponse.ok)) {
+    throw new Error(`Scenario assets unavailable (${scenarioResponse.status}/${rubricResponse?.status ?? '-'})`);
+  }
+  const scenario = await scenarioResponse.json();
+  const rubric = rubricResponse === null ? null : await rubricResponse.json();
+  const loaded = liveRunner.loadCaseScenario({ scenario, rubric });
+  return { scenario, rubric, loaded };
+}
+
 function renderShell() {
   view.innerHTML = `
     <div class="live-education-fence" role="note">Educational simulation. Not for clinical use.</div>
@@ -151,6 +903,7 @@ function renderShell() {
 
     <div class="live-sim-grid">
       <div class="live-sim-column">
+        ${renderLearnerCaseShell()}
         <section class="live-panel" aria-labelledby="live-case-heading">
           <h2 id="live-case-heading">Case flow</h2>
           <div class="live-button-row">
@@ -320,11 +1073,16 @@ function renderShell() {
         </section>
       </div>
 
-      <aside class="live-panel live-event-panel" aria-labelledby="live-events-heading">
-        <div class="live-event-header"><h2 id="live-events-heading">Event log</h2><span>sim time</span></div>
-        <ol id="live-event-log" class="live-event-log"><li class="live-empty">No events yet.</li></ol>
-      </aside>
-    </div>`;
+      <div class="live-sim-column live-side-column">
+        ${renderInstructorCaseShell()}
+        ${renderRubricConsoleShell()}
+        <section class="live-panel live-event-panel" aria-labelledby="live-events-heading">
+          <div class="live-event-header"><h2 id="live-events-heading">Event log</h2><span>sim time</span></div>
+          <ol id="live-event-log" class="live-event-log"><li class="live-empty">No events yet.</li></ol>
+        </section>
+      </div>
+    </div>
+    <section id="live-rubric-print-document" class="live-rubric-print-document" aria-label="Printable finalized rubric" hidden></section>`;
 }
 
 function setStatus(message, kind = 'info') {
@@ -426,6 +1184,212 @@ function renderVolatileSelection(agent) {
   }
 }
 
+const MACHINE_DRAFT_FIELDS = Object.freeze({
+  mode: 'ventMode',
+  setTidalVolume: 'ventSetTV',
+  setRespiratoryRate: 'ventSetRR',
+  setPeep: 'ventSetPeep',
+  setPressureAbovePeep: 'ventSetPressure',
+  setPressureSupport: 'ventSetPressureSupport',
+  setFiO2: 'ventSetFiO2',
+  o2FlowLPerMin: 'o2Flow',
+  airFlowLPerMin: 'airFlow',
+  n2oFlowLPerMin: 'n2oFlow',
+});
+
+export function syncClinicalDraftControls({
+  documentRoot,
+  snapshot,
+  onVolatileAgent = () => {},
+} = {}) {
+  const draft = {
+    ventMode: snapshot?.ventMode,
+    ventSetTV: snapshot?.ventSetTV,
+    ventSetRR: snapshot?.ventSetRR,
+    ventSetPeep: snapshot?.ventSetPeep,
+    ventSetPressure: snapshot?.ventSetPressure,
+    ventSetPressureSupport: snapshot?.ventSetPressureSupport,
+    ventSetFiO2: snapshot?.ventSetFiO2,
+    o2Flow: snapshot?.o2Flow,
+    airFlow: snapshot?.airFlow,
+    n2oFlow: snapshot?.n2oFlow,
+    vaporizerAgent: snapshot?.vaporizerAgent,
+    vaporizer: snapshot?.vaporizer,
+  };
+  const form = documentRoot?.getElementById?.('live-machine-form');
+  for (const [controlName, snapshotKey] of Object.entries(MACHINE_DRAFT_FIELDS)) {
+    const value = snapshot?.[snapshotKey];
+    const control = form?.elements?.namedItem?.(controlName);
+    if (control && Number.isFinite(value)) control.value = String(value);
+  }
+  const volatileDial = documentRoot?.getElementById?.('live-volatile-dial');
+  if (volatileDial && Number.isFinite(snapshot?.vaporizer)) {
+    volatileDial.value = String(snapshot.vaporizer);
+  }
+  if (typeof snapshot?.vaporizerAgent === 'string') {
+    onVolatileAgent(snapshot.vaporizerAgent);
+  }
+  return Object.freeze(draft);
+}
+
+function syncCaseSetupControls(snapshot) {
+  const draft = syncClinicalDraftControls({
+    documentRoot: document,
+    snapshot,
+    onVolatileAgent: renderVolatileSelection,
+  });
+  volatileSelectionDirty = false;
+  return draft;
+}
+
+function renderInstructorNmb(snapshot) {
+  const nmb = formatInstructorNmb(snapshot);
+  setText('live-nmb-target-ratio', nmb.targetRatio);
+  setText('live-nmb-actual-ratio', nmb.actualRatio);
+  setText('live-nmb-tof-count', nmb.tofCount);
+  setText('live-nmb-blockade', nmb.effectiveBlockade);
+  setText('live-nmb-source', nmb.dominantSource);
+  setText('live-nmb-equilibrium', nmb.equilibrium);
+  const readback = document.getElementById('live-instructor-nmb-readback');
+  if (readback) readback.dataset.state = nmb.equilibrium.toLowerCase().replace(' ', '-');
+}
+
+function boundedEvidenceValue(value, depth = 0) {
+  if (value === null || typeof value === 'boolean' || typeof value === 'number') return value;
+  if (typeof value === 'string') {
+    return value.length <= 160 ? value : `${value.slice(0, 160)}#${value.length}`;
+  }
+  if (depth >= 4) {
+    if (Array.isArray(value)) return { type: 'array', length: value.length };
+    return { type: 'object', keyCount: Object.keys(value).length };
+  }
+  if (Array.isArray(value)) {
+    const sample = value.length <= 4
+      ? value
+      : [...value.slice(0, 2), ...value.slice(-2)];
+    return {
+      type: 'array',
+      length: value.length,
+      sample: sample.map((entry) => boundedEvidenceValue(entry, depth + 1)),
+    };
+  }
+  if (value && typeof value === 'object') {
+    const keys = Object.keys(value).sort();
+    return {
+      type: 'object',
+      keyCount: keys.length,
+      entries: keys.slice(0, 24).map((key) => [
+        key,
+        boundedEvidenceValue(value[key], depth + 1),
+      ]),
+    };
+  }
+  return String(value);
+}
+
+function boundedEvidenceSignature(evidence) {
+  const serialized = JSON.stringify(boundedEvidenceValue(evidence));
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < serialized.length; index += 1) {
+    hash ^= serialized.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return `${serialized.length}:${hash.toString(16).padStart(8, '0')}`;
+}
+
+export function buildRubricPresentationKey(result) {
+  if (!result) return 'NO_RUBRIC';
+  return JSON.stringify({
+    rubricId: result.rubricId,
+    rawPoints: result.rawPoints,
+    maxPoints: result.maxPoints,
+    percentage: result.percentage,
+    finalized: result.finalized,
+    outcome: result.outcome,
+    pendingInstructorCount: result.pendingInstructorCount,
+    pendingEngineCount: result.pendingEngineCount,
+    pendingUnscoreableCount: result.pendingUnscoreableCount,
+    items: result.items.map(({
+      id, status, points, note, updatedAtSec, evidence,
+    }) => ({
+      id,
+      status,
+      points,
+      note,
+      updatedAtSec,
+      evidence: boundedEvidenceSignature(evidence),
+    })),
+    violations: result.violations.map(({ itemId, tSec, triggerAction }) => ({
+      itemId, tSec, triggerAction,
+    })),
+  });
+}
+
+function renderRubricResult(result) {
+  const summary = document.getElementById('live-rubric-summary');
+  const warning = document.getElementById('live-rubric-source-warning');
+  const flags = document.getElementById('live-rubric-flags');
+  const items = document.getElementById('live-rubric-items');
+  const finalizationStatus = document.getElementById('live-rubric-finalization-status');
+  const finalizeButton = document.getElementById('live-rubric-finalize');
+  const printButton = document.getElementById('live-rubric-print');
+  if (!result) {
+    if (summary) summary.innerHTML = '<strong>NO RUBRIC</strong><span>Load an approved scenario to begin scoring.</span>';
+    if (warning) { warning.hidden = true; warning.textContent = ''; }
+    if (flags) flags.innerHTML = '<li>No violation flags.</li>';
+    if (items) items.innerHTML = '<li class="live-empty">Load an approved scenario to view literal rubric rows.</li>';
+    if (finalizationStatus) finalizationStatus.textContent = 'Finalization unavailable until a rubric scenario is loaded.';
+    if (finalizeButton) finalizeButton.disabled = true;
+    if (printButton) printButton.disabled = true;
+    setRubricConsoleReadOnly(view, false);
+    return;
+  }
+
+  const display = formatRubricStatus({
+    ...result,
+    denominatorWarnings: runner?.getRubricDiscrepancies() ?? [],
+  });
+  if (summary) {
+    summary.innerHTML = `
+      <strong>${escapeHtml(display.outcome)}</strong>
+      <span>${escapeHtml(display.score)} · ${escapeHtml(display.percentage)}</span>
+      <small>${escapeHtml(display.pendingMessage)}</small>`;
+  }
+  if (warning) {
+    warning.hidden = display.warnings.length === 0;
+    warning.textContent = display.warnings.join(' ');
+  }
+  if (flags) {
+    flags.innerHTML = result.violations.length === 0
+      ? '<li>No violation flags.</li>'
+      : result.violations.map((flag) => {
+        const formatted = formatRubricFlag(flag);
+        return `<li><strong>${escapeHtml(formatted.label)}</strong><span>${escapeHtml(formatted.timing)}</span><small>Evidence · ${escapeHtml(formatted.evidence)}</small></li>`;
+      }).join('');
+  }
+  if (items) {
+    const draftNotes = clearRubricDraftsOnNextRender
+      ? new Map()
+      : new Map([...items.querySelectorAll('[data-rubric-note]')]
+        .map((input) => [input.dataset.rubricNote, input.value]));
+    items.innerHTML = result.items.map(renderRubricItemMarkup).join('');
+    for (const input of items.querySelectorAll('[data-rubric-note]')) {
+      if (draftNotes.has(input.dataset.rubricNote)) {
+        input.value = draftNotes.get(input.dataset.rubricNote);
+      }
+    }
+  }
+  clearRubricDraftsOnNextRender = false;
+  setRubricConsoleReadOnly(view, display.finalized);
+  if (finalizationStatus) {
+    finalizationStatus.textContent = display.finalized
+      ? `FINALIZED · READ ONLY · ${display.outcome} · ${display.score} (${display.percentage}).`
+      : display.pendingMessage;
+  }
+  if (finalizeButton) finalizeButton.disabled = display.finalized;
+  if (printButton) printButton.disabled = !display.finalized;
+}
+
 function renderSnapshot(snapshot) {
   latestSnapshot = snapshot;
   const monitor = formatMonitorSnapshot(snapshot);
@@ -488,6 +1452,7 @@ function renderSnapshot(snapshot) {
   setText('live-drive-drug', Number(snapshot.drugDepressionContribution).toFixed(2));
   setText('live-drive-complication', Number(snapshot.complicationDriveContribution).toFixed(2));
   setText('live-drive-muscle', Number(snapshot.respiratoryMuscleCapability).toFixed(2));
+  renderInstructorNmb(snapshot);
   const forcedApnea = document.getElementById('live-forced-apnea');
   if (forcedApnea) forcedApnea.checked = snapshot.forcedApnea;
   const latestAttempt = snapshot.intubationAttempts.at(-1);
@@ -520,7 +1485,18 @@ function renderSnapshot(snapshot) {
     cricoidButton.textContent = snapshot.cricoidPressureActive ? 'RELEASE CRICOID' : 'APPLY CRICOID';
     cricoidButton.setAttribute('aria-pressed', String(snapshot.cricoidPressureActive));
   }
-  transport?.publishSnapshot(snapshot);
+  const rubricResult = runner?.getRubricStatus() ?? null;
+  if (rubricResult !== latestRubricResult) {
+    latestRubricResult = rubricResult;
+    const presentationKey = buildRubricPresentationKey(rubricResult);
+    if (presentationKey !== latestRubricPresentationKey) {
+      latestRubricPresentationKey = presentationKey;
+      renderRubricResult(rubricResult);
+    }
+  }
+  caseController?.render();
+  applyFinalizedConsoleLock({ rootElement: view, runner });
+  transport?.publishSnapshot(projectLearnerMonitorSnapshot(snapshot));
 }
 
 function ensureRunner() {
@@ -534,8 +1510,23 @@ function ensureRunner() {
   }
   runner.onTick = renderSnapshot;
   runner.onEvent = renderEventLog;
+  caseController = createLiveCaseController({
+    runner,
+    root: view,
+    onChanged: ({ result } = {}) => {
+      if (result && result.ok === false && result.reason) {
+        setStatus(`Case control rejected: ${result.reason}`, 'error');
+      }
+    },
+    onPrint: () => {
+      const result = runCasePrintAction({ runner, documentRoot: document });
+      if (result.ok) setStatus('Case record prepared for print.', 'success');
+      else setStatus(`Case print unavailable: ${result.reason}`, 'error');
+    },
+  });
   runner.emit();
   fillPatientForm(runner.config);
+  syncCaseSetupControls(runner.snapshot());
   renderEventLog();
   return runner;
 }
@@ -596,7 +1587,14 @@ function applyPatient(event) {
   const form = event.currentTarget;
   try {
     const config = parsePatientConfig(Object.fromEntries(new FormData(form)));
-    ensureRunner().applyConfig(config);
+    latestRubricDebrief = null;
+    latestRubricPresentationKey = null;
+    clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
+    const liveRunner = ensureRunner();
+    liveRunner.applyConfig(config);
+    caseController?.reset();
+    syncCaseSetupControls(liveRunner.snapshot());
     updateDosePreviews(config.weightKg);
     updateRegionalLidocainePreview(config.weightKg);
     setStatus('Patient applied; runner reset.', 'success');
@@ -622,11 +1620,114 @@ function giveDrug(actionId) {
   }
 }
 
+function setRubricLoadStatus(message, kind = 'info') {
+  const output = document.getElementById('live-rubric-load-status');
+  if (!output) return;
+  output.textContent = message;
+  output.dataset.kind = kind;
+}
+
+async function loadSelectedRubricScenario() {
+  const select = document.getElementById('live-rubric-scenario');
+  const button = document.getElementById('live-rubric-load');
+  const selectedId = select?.value;
+  const assets = RUBRIC_SCENARIO_ASSETS[selectedId] ?? TEACHING_CASE_ASSETS[selectedId];
+  if (!assets) {
+    setRubricLoadStatus('Select an approved scenario or teaching case.', 'error');
+    return;
+  }
+  if (button) button.disabled = true;
+  if (select) select.disabled = true;
+  setRubricLoadStatus('Loading and validating scenario assets…');
+  try {
+    const liveRunner = ensureRunner();
+    const { loaded, scenario } = await loadSelectedScenarioAssets(liveRunner, selectedId);
+    latestRubricResult = null;
+    latestRubricPresentationKey = null;
+    latestRubricDebrief = null;
+    clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
+    caseController?.reset();
+    fillPatientForm(liveRunner.config);
+    syncCaseSetupControls(liveRunner.snapshot());
+    renderEventLog();
+    liveRunner.emit();
+    const selected = RUBRIC_SCENARIOS.find(({ id }) => id === selectedId)
+      ?? TEACHING_CASES.find(({ id }) => id === selectedId);
+    setRubricLoadStatus(`${selected?.label ?? selectedId} loaded and validated.`, 'success');
+    // Surface physiology disclosures (e.g. the compressed MH timeline) to the
+    // instructor before they run the case, per the disclosure decision.
+    const disclosures = Array.isArray(scenario?.physiologyDisclosures)
+      ? scenario.physiologyDisclosures : [];
+    if (disclosures.length > 0) {
+      setStatus(`Scenario loaded · ${loaded.scenarioId}. PHYSIOLOGY DISCLOSURE: ${disclosures[0]}`, 'success');
+    } else {
+      setStatus(`Scenario loaded · ${loaded.scenarioId}.`, 'success');
+    }
+  } catch (error) {
+    setRubricLoadStatus(`Load failed; active case preserved. ${error.message}`, 'error');
+    setStatus(`Scenario not loaded: ${error.message}`, 'error');
+  } finally {
+    if (button) button.disabled = false;
+    if (select) select.disabled = false;
+  }
+}
+
+function finalizeLiveRubric() {
+  const liveRunner = ensureRunner();
+  try {
+    return runRubricFinalizationAction({
+      runner: liveRunner,
+      documentRoot: document,
+      onPending: (result) => {
+        const pendingCount = result.pendingItemIds?.length ?? 0;
+        const message = result.reason === 'INSTRUCTOR_SCORES_PENDING'
+          ? `${pendingCount} instructor observation${pendingCount === 1 ? '' : 's'} pending. Complete the highlighted rubric rows before finalization.`
+          : `Finalization blocked: ${result.reason}.`;
+        setText('live-rubric-finalization-status', message);
+        setStatus(message, 'error');
+      },
+      onFinalized: (result) => {
+        latestRubricDebrief = result.debrief;
+        prepareFinalizedRubricPrint({
+          runner: liveRunner,
+          debrief: latestRubricDebrief,
+          documentRoot: document,
+        });
+        latestRubricResult = null;
+        latestRubricPresentationKey = null;
+        liveRunner.emit();
+        setStatus(`FINALIZED · READ ONLY · ${result.finalized.outcome}.`, 'success');
+      },
+    });
+  } catch (error) {
+    setStatus(`Finalization failed: ${error.message}`, 'error');
+    return { ok: false, reason: error.message };
+  }
+}
+
+// Instructor-console action. The exported JSON is the COMPLETE instructor
+// debrief record: like rubricResult, caseResult intentionally names missed
+// findings and scoring detail because the instructor debrief teaches from them.
+// The student-facing artifact is renderPrintableCase, which scrubs that content
+// (proven in test/case-print.test.js and test/case-confidentiality-regressions.js).
+// These are two deliberate tiers; do not route this export to a learner surface.
 function downloadDebrief() {
   const liveRunner = ensureRunner();
   liveRunner.pause();
-  liveRunner.logEvent('Case', 'Ended for debrief export', { action: 'end_case' });
-  const result = liveRunner.buildDebrief();
+  const rubricStatus = liveRunner.getRubricStatus();
+  if (rubricStatus && !rubricStatus.finalized) {
+    setStatus('Finalize the live rubric before exporting its debrief.', 'error');
+    focusPendingRubricItem(
+      document,
+      rubricStatus.items.find((item) => item.scoringSource === 'INSTRUCTOR_OBSERVED' && item.points === null)?.id,
+    );
+    return;
+  }
+  if (!rubricStatus) {
+    liveRunner.logEvent('Case', 'Ended for debrief export', { action: 'end_case' });
+  }
+  const result = latestRubricDebrief ?? liveRunner.buildDebrief();
   const validation = validateSimulationResult(result);
   if (!validation.ok) {
     setStatus(`Debrief invalid: ${[...validation.missing, ...validation.invalid].join(', ')}`, 'error');
@@ -738,10 +1839,17 @@ function bindControls() {
   });
   document.getElementById('live-reset')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
-    liveRunner.reset();
+    latestRubricDebrief = null;
+    latestRubricPresentationKey = null;
+    clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
+    const resetSnapshot = liveRunner.reset();
+    caseController?.reset();
     liveRunner.logEvent('Case', 'Simulation reset', { action: 'reset' });
     fillPatientForm(liveRunner.config);
+    syncCaseSetupControls(resetSnapshot);
     renderEventLog();
+    liveRunner.emit();
     setStatus('Simulation reset.', 'success');
   });
   document.getElementById('live-speed')?.addEventListener('change', (event) => {
@@ -755,6 +1863,32 @@ function bindControls() {
     const liveRunner = ensureRunner();
     const status = formatPreoxygenationLifecycleStatus(liveRunner.preoxygenate());
     setStatus(status.message, status.kind);
+  });
+  document.getElementById('live-rubric-load')?.addEventListener('click', loadSelectedRubricScenario);
+  bindRubricActionControls({
+    rootElement: view,
+    getRunner: ensureRunner,
+    onScore: (scored) => {
+      latestRubricDebrief = null;
+      ensureRunner().emit();
+      setStatus(`Instructor score updated · item ${scored.displayNumber} · ${scored.points}/2.`, 'success');
+    },
+    onNmb: (status) => {
+      setStatus(`Administrative NMB target set to TOF ratio ${status.targetTofRatio.toFixed(2)}.`, 'success');
+    },
+    onError: (error) => setStatus(`Rubric control failed: ${error.message}`, 'error'),
+  });
+  document.getElementById('live-rubric-finalize')?.addEventListener('click', finalizeLiveRubric);
+  document.getElementById('live-rubric-print')?.addEventListener('click', () => {
+    const result = runRubricPrintAction({
+      runner: ensureRunner(),
+      debrief: latestRubricDebrief,
+      documentRoot: document,
+      printImpl: () => window.print(),
+    });
+    if (!result.ok) {
+      setStatus('Finalize the rubric before printing.', 'error');
+    }
   });
   document.getElementById('live-export')?.addEventListener('click', downloadDebrief);
   document.getElementById('live-open-display')?.addEventListener('click', () => {

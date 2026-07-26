@@ -1,0 +1,69 @@
+{
+  "id": "standard_iv_healthy_001",
+  "title": "Standard IV Induction — Healthy Adult",
+  "description": "A healthy adult for elective surgery. Demonstrate that mask ventilation is possible before giving neuromuscular blockade, then continue positive-pressure ventilation during onset.",
+  "category": "Induction",
+  "courseUnit": "General Anesthesia Induction",
+  "difficulty": "beginner",
+  "seed": 31001,
+  "rubricId": "carson-newman-standard-iv-induction",
+  "rubricCriteria": {
+    "weightKg": 70,
+    "minimumPpvMinuteVentilation": 4,
+    "acceptedInductionDrugs": ["Propofol", "Etomidate", "Ketamine"],
+    "acceptedNmbDrugs": ["Rocuronium", "Succinylcholine"]
+  },
+  "administrativeSetup": null,
+  "learningObjectives": [
+    "Confirm adequate mask ventilation before administering neuromuscular blockade",
+    "Continue positive-pressure ventilation while awaiting blockade onset",
+    "Complete timed intubation in fewer than three attempts"
+  ],
+  "tags": ["Standard IV induction", "Mask ventilation", "Neuromuscular blockade"],
+  "maxDurationSeconds": 900,
+  "patientProfile": {
+    "ageYears": 42,
+    "sex": "Male",
+    "weightKg": 70,
+    "heightCm": 172,
+    "asa": 1,
+    "history": ["Healthy adult presenting for elective surgery"],
+    "allergiesList": [],
+    "comorbidities": "None",
+    "allergies": "NKDA",
+    "surgicalProcedure": "Elective laparoscopic procedure",
+    "baselineHR": 72,
+    "baselineSystolic": 120,
+    "baselineDiastolic": 78,
+    "baselineSpO2": 99,
+    "baselineRR": 14,
+    "baselineTemp": 36.6
+  },
+  "startingSetup": {
+    "oxygenOn": false,
+    "fio2": 0.21,
+    "ventMode": "manual",
+    "airway": "mask",
+    "ivAccess": "18g peripheral",
+    "vaporizerDial": 0,
+    "tidalVolume": 500,
+    "respiratoryRate": 12,
+    "peep": 5
+  },
+  "events": [],
+  "expectedActions": [],
+  "dangerousActions": [],
+  "airwayPlan": {
+    "failedIntubationAttempts": [],
+    "intubationAttemptDurationSeconds": 30
+  },
+  "debrief": {
+    "summary": "Standard IV induction requires proving that mask ventilation is possible before neuromuscular blockade and maintaining ventilation through onset.",
+    "teachingPoints": [
+      "The scoreable discriminator is adequate mask PPV before the first neuromuscular blocker.",
+      "Timed laryngoscopy has a real oxygenation cost and should begin only after preparation."
+    ],
+    "reviewTopics": ["Standard IV sequence", "Mask ventilation", "Intubation preparation"],
+    "reviewTags": ["Standard IV induction", "Mask PPV"]
+  }
+}
