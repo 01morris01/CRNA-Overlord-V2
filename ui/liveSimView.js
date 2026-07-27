@@ -26,11 +26,13 @@ import {
   renderLearnerCaseShell,
 } from './liveCaseModel.js';
 import { createLiveCaseController } from './liveCaseView.js';
+import { createPatientInterview } from './patientInterview.js';
 import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
 
 let initialized = false;
 let runner = null;
 let caseController = null;
+let patientInterview = null;
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -1524,6 +1526,13 @@ function ensureRunner() {
       else setStatus(`Case print unavailable: ${result.reason}`, 'error');
     },
   });
+  patientInterview = createPatientInterview({
+    runner,
+    root: document,
+    // A voice-discovered finding must refresh the workspace and monitor exactly
+    // as clicking the assessment button would.
+    onActionPerformed: () => { caseController?.render(); runner.emit(); },
+  });
   runner.emit();
   fillPatientForm(runner.config);
   syncCaseSetupControls(runner.snapshot());
@@ -1651,6 +1660,8 @@ async function loadSelectedRubricScenario() {
     // Publish the learner-safe case brief (patient chart) to the anesthesia
     // display, or clear it for a rubric-only scenario.
     transport?.setCaseBrief(liveRunner.getLearnerCaseContext?.()?.learnerChart ?? null);
+    // Ground the voice patient in the loaded case (or hide it for rubric-only).
+    patientInterview?.setCase(scenario?.caseExperience ?? null);
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();
