@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v55-preanesthesia-ultrasound-2026-07-22';
+const CACHE_VERSION = 'v56-anesthesia-case-brief-2026-07-26';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

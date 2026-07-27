@@ -26,6 +26,33 @@
   </header>
 
   <main class="display-layout">
+    <section id="display-case-brief" class="display-case-brief" aria-labelledby="display-brief-heading" hidden>
+      <header class="display-brief-header">
+        <div>
+          <p>PREANESTHESIA CASE BRIEF</p>
+          <h2 id="display-brief-heading"><span id="display-brief-patient">—</span></h2>
+        </div>
+        <button id="display-brief-toggle" type="button" aria-expanded="true">HIDE BRIEF</button>
+      </header>
+      <div id="display-brief-body" class="display-brief-body">
+        <dl class="display-brief-demographics" id="display-brief-demographics"></dl>
+        <div class="display-brief-columns">
+          <section class="display-brief-docs" aria-label="Chart">
+            <h3>Chart</h3>
+            <div id="display-brief-documents"></div>
+          </section>
+          <section class="display-brief-side" aria-label="Medications, allergies, labs">
+            <h3>Medications</h3>
+            <ul id="display-brief-medications"><li>—</li></ul>
+            <h3>Allergies</h3>
+            <ul id="display-brief-allergies"><li>—</li></ul>
+            <h3>Labs</h3>
+            <ul id="display-brief-labs"><li>—</li></ul>
+          </section>
+        </div>
+      </div>
+    </section>
+
     <section class="display-numerics" aria-label="Engine-derived patient monitor">
       <article class="display-vital display-vital-ecg"><span>HR</span><strong id="display-hr">—</strong><small>bpm</small></article>
       <article class="display-vital display-vital-bp"><span>NIBP</span><strong id="display-bp" aria-label="Blood pressure unavailable"><span id="display-sbp">—</span><span aria-hidden="true">/</span><span id="display-dbp">—</span></strong><small>MAP <b id="display-map">—</b> mmHg</small></article>

@@ -2,7 +2,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
   createLiveSimTransport,
   LEARNER_MONITOR_KEYS,
+  LEARNER_BRIEF_KEYS,
   projectLearnerMonitorSnapshot,
+  projectLearnerCaseBrief,
 } from '../../ui/liveSimTransport.js';
 
 class FakeBroadcastChannel {
@@ -42,6 +44,76 @@ class FakeBroadcastChannel {
 }
 
 beforeEach(() => FakeBroadcastChannel.reset());
+
+describe('learner-safe case brief', () => {
+  it('projects only allowlisted chart keys and drops any instructor-only key', () => {
+    const chart = {
+      patient: { syntheticName: 'Karen Whitfield', mrn: 'CN-1', ageYears: 32, sex: 'Female' },
+      scheduledProcedure: { name: 'Lap chole', site: 'Abdomen', laterality: 'none' },
+      documents: [{ id: 'hpi', title: 'HPI', type: 'note', sections: [{ heading: 'HPI', text: 'RUQ pain' }] }],
+      medications: [{ id: 'ocp', name: 'OCP' }],
+      allergies: [{ id: 'latex', substance: 'Latex', reaction: 'dermatitis' }],
+      labs: [],
+      studies: [],
+      // Hostile extras that must never survive projection:
+      instructorGuide: { considerations: ['LEAK_ANSWER_KEY'] },
+      scoringGuidance: 'LEAK_GUIDANCE',
+      answerKey: 'LEAK_KEY',
+    };
+    const brief = projectLearnerCaseBrief(chart);
+    expect(Object.keys(brief).sort()).toEqual([...LEARNER_BRIEF_KEYS].sort());
+    const serialized = JSON.stringify(brief);
+    expect(serialized).not.toContain('LEAK_');
+    expect(serialized).not.toContain('instructorGuide');
+    expect(brief.patient.syntheticName).toBe('Karen Whitfield');
+    // Deep-copied, not aliased.
+    brief.patient.syntheticName = 'mutated';
+    expect(chart.patient.syntheticName).toBe('Karen Whitfield');
+  });
+
+  it('returns null for a missing chart (rubric-only scenario)', () => {
+    expect(projectLearnerCaseBrief(null)).toBeNull();
+    expect(projectLearnerCaseBrief(undefined)).toBeNull();
+  });
+
+  it('carries the brief in the snapshot envelope and to late-joining displays', () => {
+    const instructor = createLiveSimTransport({
+      role: 'instructor', BroadcastChannelImpl: FakeBroadcastChannel,
+      sessionId: 'session-b', sessionStartedAt: 100,
+    });
+    instructor.setCaseBrief({
+      patient: { syntheticName: 'Brittany Cole' },
+      scheduledProcedure: { name: 'Knee arthroscopy' },
+      instructorGuide: { x: 'LEAK_ANSWER_KEY' },
+    });
+    instructor.publishSnapshot({ hr: 80 });
+
+    const display = createLiveSimTransport({ role: 'display', BroadcastChannelImpl: FakeBroadcastChannel });
+    const received = [];
+    display.subscribe((m) => received.push(m));
+    display.requestState();
+
+    expect(received).toHaveLength(1);
+    expect(received[0].brief.patient.syntheticName).toBe('Brittany Cole');
+    expect(JSON.stringify(received[0].brief)).not.toContain('LEAK_');
+    expect('instructorGuide' in received[0].brief).toBe(false);
+  });
+
+  it('setCaseBrief(null) clears the brief and the display cannot set one', () => {
+    const instructor = createLiveSimTransport({
+      role: 'instructor', BroadcastChannelImpl: FakeBroadcastChannel,
+      sessionId: 'session-c', sessionStartedAt: 100,
+    });
+    instructor.setCaseBrief({ patient: { syntheticName: 'X' } });
+    instructor.setCaseBrief(null);
+    const display = createLiveSimTransport({ role: 'display', BroadcastChannelImpl: FakeBroadcastChannel });
+    const received = [];
+    display.subscribe((m) => received.push(m));
+    instructor.publishSnapshot({ hr: 70 });
+    expect(received[0].brief).toBeNull();
+    expect(() => display.setCaseBrief({})).toThrow(/instructor/i);
+  });
+});
 
 describe('live simulation transport', () => {
   it('publishes snapshots without exposing BroadcastChannel to callers', () => {

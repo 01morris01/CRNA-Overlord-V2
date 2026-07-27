@@ -1648,6 +1648,9 @@ async function loadSelectedRubricScenario() {
     clearRubricDraftsOnNextRender = true;
     resetRubricPrintState(document);
     caseController?.reset();
+    // Publish the learner-safe case brief (patient chart) to the anesthesia
+    // display, or clear it for a rubric-only scenario.
+    transport?.setCaseBrief(liveRunner.getLearnerCaseContext?.()?.learnerChart ?? null);
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();
