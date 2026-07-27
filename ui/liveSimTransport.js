@@ -15,6 +15,23 @@ export function projectLearnerMonitorSnapshot(snapshot = {}) {
     .map((key) => [key, snapshot[key]]));
 }
 
+// The learner-safe case brief published to the anesthesia display: the chart the
+// trainee is meant to read. The case contract already forbids instructor keys in
+// learnerChart, and this allowlist is a second gate — any key not listed (e.g. a
+// stray instructorGuide) is dropped, so the brief can never carry the answer key.
+export const LEARNER_BRIEF_KEYS = Object.freeze([
+  'patient', 'scheduledProcedure', 'documents', 'medications', 'allergies', 'labs', 'studies',
+]);
+
+export function projectLearnerCaseBrief(chart) {
+  if (chart === null || typeof chart !== 'object') return null;
+  const projected = {};
+  for (const key of LEARNER_BRIEF_KEYS) {
+    if (Object.hasOwn(chart, key)) projected[key] = structuredClone(chart[key]);
+  }
+  return projected;
+}
+
 function makeId(prefix) {
   const randomId = globalThis.crypto?.randomUUID?.()
     || `${Math.random().toString(36).slice(2)}-${Date.now().toString(36)}`;
@@ -40,6 +57,7 @@ export function createLiveSimTransport({
   let closed = false;
   let sequence = 0;
   let currentEnvelope = null;
+  let currentBrief = null;
   let receivedSessionId = null;
   let receivedSessionStartedAt = -Infinity;
   let receivedSequence = 0;
@@ -59,8 +77,10 @@ export function createLiveSimTransport({
 
   function publishPayload(payload) {
     sequence += 1;
+    // The learner-safe brief (static per case) rides in every envelope so a
+    // late-joining display gets it via the existing state-request replay.
     currentEnvelope = {
-      type: 'snapshot', sessionId, sessionStartedAt, sequence, payload,
+      type: 'snapshot', sessionId, sessionStartedAt, sequence, payload, brief: currentBrief,
     };
     post(currentEnvelope);
     return sequence;
@@ -110,6 +130,15 @@ export function createLiveSimTransport({
       assertOpen();
       if (role !== 'instructor') throw new Error('Only the instructor can publish snapshots');
       return publishPayload(projectLearnerMonitorSnapshot(payload));
+    },
+
+    // Sets (or clears with null) the learner-safe case brief carried to the
+    // display. Projected once here through the allowlist, then reused per tick.
+    setCaseBrief(chart) {
+      assertOpen();
+      if (role !== 'instructor') throw new Error('Only the instructor can set the case brief');
+      currentBrief = projectLearnerCaseBrief(chart);
+      return currentBrief;
     },
 
     requestState() {

@@ -99,18 +99,94 @@ function renderAlarms(snapshot) {
     </div>`).join('');
 }
 
+let currentBriefKey = null;
+
+function el(tag, text, className) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function renderBrief(brief) {
+  const panel = document.getElementById('display-case-brief');
+  if (!panel) return;
+  // A rubric-only scenario (no case) clears the brief.
+  if (!brief || typeof brief !== 'object') {
+    panel.hidden = true;
+    currentBriefKey = null;
+    return;
+  }
+  // Re-render only when the brief actually changes (it is static per case).
+  const key = JSON.stringify(brief);
+  if (key === currentBriefKey) { panel.hidden = false; return; }
+  currentBriefKey = key;
+  panel.hidden = false;
+
+  const patient = brief.patient ?? {};
+  const proc = brief.scheduledProcedure ?? {};
+  setText('display-brief-patient', patient.syntheticName || 'Case patient');
+
+  const demo = document.getElementById('display-brief-demographics');
+  if (demo) {
+    demo.replaceChildren();
+    const rows = [
+      ['MRN', patient.mrn],
+      ['Age', Number.isFinite(patient.ageYears) ? `${patient.ageYears} yr` : patient.ageYears],
+      ['Sex', patient.sex],
+      ['Procedure', proc.name],
+      ['Site', [proc.site, proc.laterality && proc.laterality !== 'none' ? `(${proc.laterality})` : ''].filter(Boolean).join(' ')],
+    ];
+    for (const [label, value] of rows) {
+      if (value === undefined || value === null || value === '') continue;
+      const div = el('div');
+      div.append(el('dt', label), el('dd', String(value)));
+      demo.append(div);
+    }
+  }
+
+  const docs = document.getElementById('display-brief-documents');
+  if (docs) {
+    docs.replaceChildren();
+    for (const doc of Array.isArray(brief.documents) ? brief.documents : []) {
+      const article = el('article', undefined, 'display-brief-doc');
+      article.append(el('h4', doc.title || doc.id || 'Note'));
+      for (const section of Array.isArray(doc.sections) ? doc.sections : []) {
+        if (section?.heading) article.append(el('strong', section.heading));
+        if (section?.text) article.append(el('p', section.text));
+      }
+      docs.append(article);
+    }
+    if (!docs.childNodes.length) docs.append(el('p', 'No chart notes.'));
+  }
+
+  const listInto = (id, items, format) => {
+    const ul = document.getElementById(id);
+    if (!ul) return;
+    ul.replaceChildren();
+    const rows = (Array.isArray(items) ? items : []).map(format).filter(Boolean);
+    if (!rows.length) { ul.append(el('li', '—')); return; }
+    for (const row of rows) ul.append(el('li', row));
+  };
+  listInto('display-brief-medications', brief.medications, (m) => [m.name, m.dose, m.route, m.frequency].filter(Boolean).join(' · '));
+  listInto('display-brief-allergies', brief.allergies, (a) => [a.substance, a.reaction ? `(${a.reaction})` : ''].filter(Boolean).join(' '));
+  listInto('display-brief-labs', brief.labs, (l) => [l.name ?? l.label, l.value, l.unit].filter(Boolean).join(' '));
+}
+
 function onTransportMessage(message) {
   if (message.type !== 'snapshot') return;
   if (message.sessionChanged) {
     acknowledged.clear();
     waveformRenderer = createWaveformRenderer({ sampleRate: 100, seconds: 6 });
     lastWaveformFrame = 0;
+    currentBriefKey = null;
   }
   currentSessionId = message.sessionId;
   latestSnapshot = message.payload;
   lastReceivedAt = Date.now();
   setConnection(`LIVE · ${currentSessionId.slice(-8)}`, 'live');
   renderSnapshot(latestSnapshot);
+  renderBrief(message.brief ?? null);
 }
 
 function ensureCanvas(canvas) {
@@ -225,6 +301,13 @@ document.getElementById('display-fullscreen')?.addEventListener('click', () => {
   else document.exitFullscreen?.();
 });
 document.getElementById('display-audio')?.addEventListener('click', enableAudio);
+document.getElementById('display-brief-toggle')?.addEventListener('click', (event) => {
+  const body = document.getElementById('display-brief-body');
+  if (!body) return;
+  const collapsed = body.hidden = !body.hidden;
+  event.target.textContent = collapsed ? 'SHOW BRIEF' : 'HIDE BRIEF';
+  event.target.setAttribute('aria-expanded', String(!collapsed));
+});
 document.getElementById('display-acknowledge')?.addEventListener('click', () => {
   activeAlarms.forEach((alarm) => acknowledged.add(alarm.id));
   if (latestSnapshot) renderAlarms(latestSnapshot);
