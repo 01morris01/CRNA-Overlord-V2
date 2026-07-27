@@ -91,6 +91,19 @@ export function renderLearnerCaseShell() {
         <h2 id="live-case-workspace-heading">Learner case workspace</h2>
       </div>
       <output id="live-case-status" class="live-case-status" aria-live="polite">No teaching case loaded.</output>
+      <section id="live-patient-interview" class="live-patient-interview" aria-labelledby="patient-interview-heading" hidden>
+        <div class="live-case-header">
+          <p class="live-eyebrow">VOICE INTERVIEW</p>
+          <h3 id="patient-interview-heading">Talk with the patient</h3>
+        </div>
+        <div id="patient-interview-transcript" class="patient-interview-transcript" role="log" aria-live="polite" aria-label="Interview transcript"></div>
+        <div class="patient-interview-controls">
+          <button id="patient-interview-mic" type="button" class="patient-interview-mic" aria-pressed="false" title="Speak your question">SPEAK</button>
+          <input id="patient-interview-input" type="text" placeholder="Ask the patient a question, e.g. when did you last eat?" autocomplete="off" aria-label="Question for the patient">
+          <button id="patient-interview-send" type="button" class="live-primary">ASK</button>
+        </div>
+        <output id="patient-interview-status" class="patient-interview-status" aria-live="polite"></output>
+      </section>
       ${stagePanels}
       <label class="live-field live-case-notes-field" for="live-case-notes">
         <span>Learner notes (optional)</span>
