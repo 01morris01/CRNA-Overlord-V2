@@ -1014,6 +1014,7 @@
 .live-operator-header h2 { margin: 0; }
 .live-operator-panel .live-eyebrow { color: var(--amber); }
 .live-operator-settings { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin: .5rem 0; }
+.live-operator-settings .live-field:last-child { grid-column: 1 / -1; }
 .live-operator-feed {
   list-style: none;
   margin: .6rem 0;

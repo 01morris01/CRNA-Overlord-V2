@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
   BARK_RULES,
+  caseStage,
+  CHATTER_LEVELS,
+  worstFinding,
   buildLocalAnswer,
   buildLocalRoast,
   CALM_INTENSITY,
@@ -229,7 +232,7 @@ describe('Booth barks (most specific rule wins)', () => {
   });
 
   it('has a line at every attitude for every rule, with no dashes as punctuation', () => {
-    const knownSlots = new Set(['spo2', 'map', 'hr', 'etco2', 'temp', 'tofRatio', 'tof', 'attempts', 'complication', 'name']);
+    const knownSlots = new Set(['spo2', 'map', 'hr', 'etco2', 'temp', 'tofRatio', 'tof', 'attempts', 'complication', 'name', 'worst', 'agent', 'dial', 'mac', 'bis', 'rr']);
     for (const rule of BARK_RULES) {
       const heats = new Set(rule.lines.map(([heat]) => heat));
       expect([...heats].sort(), rule.id).toEqual(expect.arrayContaining([1, 2, 3]));
@@ -429,5 +432,82 @@ describe('Booth offline fallbacks and model prompt', () => {
     expect(prompt).toContain('disclosed false');
     expect(prompt).toContain('Never discourage asking for help');
     expect(prompt).toContain('never about the trainee as a person');
+  });
+});
+
+describe('Booth talks throughout the case', () => {
+  function chattyOperator({ chatter = 1, base = STABLE, active = () => [], runner = fakeRunner({ active }), seconds = 120 } = {}) {
+    const lines = [];
+    let clock = 0;
+    const operator = createSimOperator({
+      runner, say: (line) => lines.push(line), random: seeded(3), now: () => clock,
+      schedule: (fn) => fn(), chaos: 0, chatter, minGapMs: 5000,
+    });
+    for (let t = 0; t <= seconds; t += 1) {
+      clock = t * 1000;
+      operator.observe({ ...base, t });
+    }
+    return { lines, operator };
+  }
+
+  it('fills silence on a steady cadence and stays quiet in events only mode', () => {
+    const steady = chattyOperator({ chatter: 1, seconds: 180 });
+    const ambient = steady.lines.filter((line) => line.concept === 'AMBIENT');
+    expect(ambient.length).toBeGreaterThanOrEqual(8);
+    const gaps = ambient.slice(1).map((line, i) => line.tSec - ambient[i].tSec);
+    expect(Math.min(...gaps)).toBeGreaterThanOrEqual(CHATTER_LEVELS[1].gapMs[0] / 1000 - 1);
+
+    const nonstop = chattyOperator({ chatter: 2, seconds: 180 }).lines.filter((line) => line.concept === 'AMBIENT');
+    expect(nonstop.length).toBeGreaterThan(ambient.length);
+
+    const quiet = chattyOperator({ chatter: 0, seconds: 180 }).lines;
+    expect(quiet.map((line) => line.concept)).toEqual(['CASE_START']);
+  });
+
+  it('rotates lines instead of repeating himself', () => {
+    const texts = chattyOperator({ chatter: 2, seconds: 300 }).lines.map((line) => line.text);
+    expect(texts.length).toBeGreaterThan(30);
+    // No line repeats within any six consecutive lines.
+    for (let i = 0; i + 6 <= texts.length; i += 1) {
+      expect(new Set(texts.slice(i, i + 6)).size, texts.slice(i, i + 6).join(' | ')).toBe(6);
+    }
+  });
+
+  it('reads the real worst number when the patient is unstable', () => {
+    const { lines } = chattyOperator({ chatter: 2, base: { ...STABLE, map: 52 } });
+    const ambient = lines.filter((line) => line.concept === 'AMBIENT');
+    expect(ambient.length).toBeGreaterThan(0);
+    expect(ambient.some((line) => line.text.includes('MAP 52'))).toBe(true);
+  });
+
+  it('never gives away a hidden complication while chattering', () => {
+    let active = [];
+    const runner = fakeRunner({ active: () => active });
+    const lines = [];
+    let clock = 0;
+    const operator = createSimOperator({
+      runner, say: (line) => lines.push(line.text), random: () => 0, now: () => clock,
+      schedule: (fn) => fn(), chaos: 3, chatter: 2, minGapMs: 0,
+    });
+    runner.onEvent = (entry) => { operator.observeEvent(entry); active = [entry.meta.type]; };
+    operator.observeEvent({ t: 0, meta: { action: 'drug', drug: 'Succinylcholine', doseMg: 70 } });
+    for (let t = 0; t <= 600; t += 1) {
+      clock = t * 1000;
+      const deranged = runner.injected.length > 0 ? { etco2: 66, hr: 118 } : {};
+      operator.observe({ ...STABLE, ...deranged, t });
+    }
+    expect(runner.injected).toHaveLength(1);
+    const label = COMPLICATION_LABELS[runner.injected[0]];
+    expect(lines.length).toBeGreaterThan(40);
+    for (const text of lines) expect(text.toLowerCase()).not.toContain(label);
+  });
+
+  it('knows the stage of the case and the worst number', () => {
+    expect(caseStage({ airwayDevice: 'mask' }, { drugsGiven: new Set() })).toBe('preinduction');
+    expect(caseStage({ airwayDevice: 'mask' }, { drugsGiven: new Set(['Propofol']) })).toBe('induction');
+    expect(caseStage({ airwayDevice: 'intubated' }, { drugsGiven: new Set(['Propofol']) })).toBe('maintenance');
+    expect(caseStage({ airwayDevice: 'extubated' }, { drugsGiven: new Set(['Propofol']) })).toBe('emergence');
+    expect(worstFinding(STABLE)).toBeNull();
+    expect(worstFinding({ ...STABLE, spo2: 86, map: 60 })).toBe('SpO2 86');
   });
 });

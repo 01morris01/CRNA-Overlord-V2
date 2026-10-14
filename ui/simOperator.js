@@ -51,6 +51,14 @@ export const CHAOS_PROFILES = Object.freeze({
   }),
 });
 
+// How much Booth talks between events. Gaps are wall clock milliseconds of
+// silence before he fills it, so he keeps talking at any sim speed.
+export const CHATTER_LEVELS = Object.freeze([
+  Object.freeze({ id: 0, label: 'EVENTS ONLY', gapMs: null }),
+  Object.freeze({ id: 1, label: 'STEADY', gapMs: [12000, 18000] }),
+  Object.freeze({ id: 2, label: 'NONSTOP', gapMs: [5000, 8000] }),
+]);
+
 export const CALM_INTENSITY = 0.12;
 export const PEAK_INTENSITY = 0.55;
 const PEAK_FADE_HOLD_SEC = 30;
@@ -173,6 +181,36 @@ export function computeIntensity(s = {}) {
   const worst = Math.max(...terms);
   const total = terms.reduce((sum, value) => sum + value, 0);
   return Math.min(1, worst + 0.3 * (total - worst));
+}
+
+/* The single most deranged engine value, phrased for Booth to read out
+   ("MAP 58"). Null when everything is within the calm range. */
+export function worstFinding(s = {}) {
+  const candidates = [];
+  const push = (score, text) => { if (score > 0) candidates.push({ score: clamp01(score), text }); };
+  if (s.derivedRhythm === 'ventricular_fibrillation') push(1, 'Ventricular fibrillation');
+  else if (s.derivedRhythm === 'ventricular_tachycardia') push(0.8, 'Ventricular tachycardia on the monitor');
+  if (finite(s.spo2)) push((94 - s.spo2) / 20, `SpO2 ${Math.round(s.spo2)}`);
+  if (finite(s.map)) {
+    push((65 - s.map) / 25, `MAP ${Math.round(s.map)}`);
+    push((s.map - 120) / 40, `MAP ${Math.round(s.map)}`);
+  }
+  if (finite(s.hr)) {
+    push((s.hr - 120) / 40, `Heart rate ${Math.round(s.hr)}`);
+    push((50 - s.hr) / 20, `Heart rate ${Math.round(s.hr)}`);
+  }
+  if (finite(s.etco2) && s.capnogramPresent !== false) push((s.etco2 - 50) / 25, `EtCO2 ${Math.round(s.etco2)}`);
+  if (finite(s.temp)) push((s.temp - 38) / 1.5, `Temp ${s.temp.toFixed(1)}`);
+  if (candidates.length === 0) return null;
+  return candidates.sort((a, b) => b.score - a.score)[0].text;
+}
+
+export function caseStage(s = {}, history = {}) {
+  const drugs = history.drugsGiven ?? new Set();
+  if (s.airwayDevice === 'extubated' || drugs.has('Sugammadex') || drugs.has('Neostigmine')) return 'emergence';
+  if (s.airwayDevice === 'intubated') return 'maintenance';
+  if (drugs.size === 0 && !((s.vaporizer ?? 0) > 0)) return 'preinduction';
+  return 'induction';
 }
 
 // Complications that should hold the director back. Opioid depression lingers
@@ -306,6 +344,23 @@ export function createDirector({ random = Math.random } = {}) {
    Templates fill from engine values: {spo2} {map} {hr} {etco2} {temp}
    {tofRatio} {tof} {attempts} {complication} {name}. No line here invents a
    number; every clinical claim is standard teaching. */
+// Standard board facts Booth drops during quiet stretches. Kept to well
+// established teaching (MHAUS, ASRA, FDA labeling) and to doses the console uses.
+export const PEARLS = Object.freeze([
+  'sevoflurane MAC is about 2 percent in a middle aged adult, and MAC falls with age.',
+  'the TOF ratio should be at least 0.9 before extubation.',
+  'neostigmine can\'t reverse a deep block. You need twitches first.',
+  'early malignant hyperthermia usually shows up as rising EtCO2 and tachycardia. The temperature climbs later.',
+  'dantrolene starts at 2.5 mg per kg and repeats until the signs settle.',
+  'laryngospasm breaks with positive pressure, deepening, or succinylcholine.',
+  'in anaphylaxis, epinephrine is the drug. Antihistamines are supporting cast.',
+  'lipid rescue for local anesthetic toxicity starts with a 1.5 mL per kg bolus of 20 percent emulsion.',
+  'good preoxygenation means an end tidal oxygen of about 90 percent before apnea.',
+  'succinylcholine and the volatile agents are the classic MH triggers.',
+  'phenylephrine raises pressure and often drops the heart rate by reflex.',
+  'naloxone gets titrated in small increments so you restore breathing without a sympathetic surge.',
+]);
+
 export const BARK_RULES = Object.freeze([
   // Case flow
   { id: 'case_start', concept: 'CASE_START', score: 1, once: true, lines: [
@@ -485,6 +540,161 @@ export const BARK_RULES = Object.freeze([
     [3, 'You gave the patient a salad dressing for no reason. Read the room.'],
   ] },
 
+  // More drug and machine commentary so the booth is never silent for long.
+  { id: 'fentanyl', concept: 'DRUG', score: 2, cooldownMs: 90000, when: (q) => q.drug === 'Fentanyl', lines: [
+    [1, 'Fentanyl in. Respiratory drive is about to take a hit if they are breathing on their own.'],
+    [2, 'Fentanyl. Watch the respiratory rate. It will tell on you.'],
+    [3, 'Fentanyl. The patient is about to forget how to breathe. Keep up.'],
+  ] },
+  { id: 'midazolam', concept: 'DRUG', score: 2, cooldownMs: 90000, when: (q) => q.drug === 'Midazolam', lines: [
+    [1, 'Midazolam in. Anxiolysis and amnesia, plus some respiratory depression.'],
+    [2, 'Versed. Calm patient, calmer respiratory drive.'],
+    [3, 'Midazolam. Now the patient is as relaxed as you pretend to be.'],
+  ] },
+  { id: 'phenylephrine', concept: 'DRUG', score: 2, cooldownMs: 60000, when: (q) => q.drug === 'Phenylephrine', lines: [
+    [1, 'Phenylephrine. Expect a reflex drop in heart rate.'],
+    [2, 'Neo push. Pressure up, heart rate down. Classic.'],
+    [3, 'Phenylephrine. Treating the number. Hopefully you also know the cause.'],
+  ] },
+  { id: 'ephedrine', concept: 'DRUG', score: 2, cooldownMs: 60000, when: (q) => q.drug === 'Ephedrine', lines: [
+    [1, 'Ephedrine. Mixed acting, so it helps both rate and pressure.'],
+    [2, 'Ephedrine. Nice choice when the heart rate is low too.'],
+    [3, 'Ephedrine. The pressor equivalent of a pep talk.'],
+  ] },
+  { id: 'epinephrine', concept: 'DRUG', score: 2, cooldownMs: 60000, when: (q) => q.drug === 'Epinephrine', lines: [
+    [1, 'Epinephrine in. Watch for tachycardia and arrhythmias.'],
+    [2, 'Epi. The big gun. Make sure the indication matches.'],
+    [3, 'Epi. The heart rate is about to have opinions.'],
+  ] },
+  { id: 'anticholinergic', concept: 'DRUG', score: 2, cooldownMs: 60000, when: (q) => q.drug === 'Glycopyrrolate' || q.drug === 'Atropine', lines: [
+    [1, 'Anticholinergic in. Watch the heart rate climb.'],
+    [2, 'Anticholinergic on board. Dry mouth, faster heart. You\'re welcome, patient.'],
+    [3, 'Anticholinergic. Heart rate goes up. So does my respect. Slightly.'],
+  ] },
+  { id: 'albuterol', concept: 'DRUG', score: 2, cooldownMs: 60000, when: (q) => q.drug === 'Albuterol', lines: [
+    [1, 'Albuterol. Watch the peak pressures for a response.'],
+    [2, 'Albuterol down the tube. Let\'s see if the airway agrees with you.'],
+    [3, 'Albuterol. Puff puff, hope it helps.'],
+  ] },
+  { id: 'volatile_on', concept: 'VOLATILE', score: 1, cooldownMs: 30000, when: (q) => finite(q.dial) && q.dial > 0, lines: [
+    [1, '{agent} at {dial} percent. Give it time to equilibrate before you judge it.'],
+    [2, '{agent} dialed to {dial}. The end tidal will catch up. Patience.'],
+    [3, '{agent} at {dial}. Spinning dials like a DJ.'],
+  ] },
+  { id: 'cricoid', concept: 'CRICOID', score: 1, once: true, lines: [
+    [1, 'Cricoid on. Release it if it worsens the view or ventilation.'],
+    [2, 'Cricoid pressure. Controversial, but go ahead.'],
+    [3, 'Cricoid on. Hope your helper has better aim than you.'],
+  ] },
+  { id: 'vent_mode', concept: 'VENT_MODE', score: 1, cooldownMs: 45000, lines: [
+    [1, 'Vent mode changed. Check the delivered tidal volume and EtCO2.'],
+    [2, 'New vent mode. Now confirm it is doing what you think it is.'],
+    [3, 'Button pushing on the vent. Bold. Check the numbers.'],
+  ] },
+
+  // Ambient chatter: fills silence with commentary grounded in the current
+  // monitor. Most specific situation wins; cooldowns rotate the rest.
+  { id: 'amb_unstable', concept: 'AMBIENT', score: 6, cooldownMs: 15000, when: (q) => q.intensity >= 0.35 && q.worst, lines: [
+    [1, '{worst}. That is still the number that matters most right now.'],
+    [1, 'Still looking at {worst}. What is your plan for it?'],
+    [2, '{worst}. Still. I\'m not going to stop mentioning it.'],
+    [2, 'Reminder: {worst}. The patient hasn\'t forgotten either.'],
+    [3, '{worst}. I\'ll keep saying it until you fix it.'],
+    [3, '{worst}. Bold strategy, ignoring that.'],
+    [1, '{worst}. If you are falling behind, call for help. That is a skill, not a weakness.'],
+    [1, '{worst}. Work it systematically: airway, breathing, circulation.'],
+    [2, '{worst}. Pick a cause. Treat it. Reassess.'],
+    [2, '{worst}. Calling for help is allowed. Encouraged, even.'],
+    [3, '{worst}. Panic is optional. Treatment isn\'t.'],
+    [3, '{worst}. Call for help now, before this turns into a code.'],
+  ] },
+  { id: 'amb_apneic', concept: 'AMBIENT', score: 5, cooldownMs: 20000,
+    when: (q) => q.airwayDevice !== 'intubated' && q.spont === false && !q.ppvActive && !q.intubationInProgress, lines: [
+    [1, 'No spontaneous breathing and nobody is ventilating. Mask ventilate or secure the airway.'],
+    [2, 'Patient isn\'t breathing. Neither is your plan. Ventilate.'],
+    [3, 'Apneic and unventilated. The oxygen reserve is a clock, and it\'s running.'],
+  ] },
+  { id: 'amb_awareness', concept: 'AMBIENT', score: 5, cooldownMs: 30000,
+    when: (q) => q.airwayDevice === 'intubated' && !(q.vaporizer > 0) && !q.infusionRunning && finite(q.bis) && q.bis > 60, lines: [
+    [1, 'BIS {bis} with no agent running. Awareness under anesthesia is a real complication.'],
+    [2, 'BIS {bis}, vaporizer off. Is anything keeping this patient asleep?'],
+    [3, 'BIS {bis} and no agent. The patient may be listening to all of this.'],
+  ] },
+  { id: 'amb_hidden', concept: 'AMBIENT', score: 4, cooldownMs: 25000, when: (q) => q.hiddenActive && q.intensity < 0.35, lines: [
+    [1, 'Something is still off. Run your monitors top to bottom.'],
+    [1, 'Scan everything: pressures, EtCO2, temperature, rhythm.'],
+    [2, 'You good? Because I know something you don\'t.'],
+    [2, 'Scan the whole monitor. Not just the parts you like.'],
+    [3, 'I can see it. Can you?'],
+    [3, 'Tick tock. Waiting costs you.'],
+  ] },
+  { id: 'amb_mild', concept: 'AMBIENT', score: 3, cooldownMs: 20000, when: (q) => q.intensity >= CALM_INTENSITY && q.intensity < 0.35 && q.worst, lines: [
+    [1, '{worst}. Drifting. Watch it.'],
+    [2, '{worst}. Not a crisis. Yet.'],
+    [3, '{worst}. Trending the wrong way, like my patience.'],
+  ] },
+  { id: 'amb_relax', concept: 'AMBIENT', score: 3, cooldownMs: 40000, when: (q) => q.phase === 'RELAX', lines: [
+    [1, 'Quiet stretch. Use it: check depth, check the vent, plan ahead.'],
+    [2, 'I\'m letting you breathe. Enjoy it while it lasts.'],
+    [3, 'Recess. Don\'t get used to it.'],
+  ] },
+  { id: 'amb_preinduction', concept: 'AMBIENT', score: 3, cooldownMs: 25000, when: (q) => q.stage === 'preinduction', lines: [
+    [1, 'Before induction: suction, backup airway, drugs ready. Know your plan B.'],
+    [1, 'Patient is awake. Have the airway plan settled before you push anything.'],
+    [2, 'Patient is awake and trusts you. Adorable.'],
+    [2, 'Still preinduction. The OR clock is running.'],
+    [3, 'Any day now. The patient is aging in real time.'],
+    [3, 'Take your time. Not like anyone is waiting. Everyone is waiting.'],
+  ] },
+  { id: 'amb_emergence', concept: 'AMBIENT', score: 2, cooldownMs: 25000, when: (q) => q.stage === 'emergence', lines: [
+    [1, 'Emergence. Watch the airway, the breathing, and the TOF ratio.'],
+    [1, 'TOF ratio {tofRatio}, respiratory rate {rr}. Keep an eye on both.'],
+    [2, 'Emergence: where good cases go to die. Watch that airway.'],
+    [3, 'Waking up. The most dangerous part, and you look relaxed. Interesting.'],
+  ] },
+  { id: 'amb_maintenance', concept: 'AMBIENT', score: 2, cooldownMs: 20000,
+    when: (q) => q.stage === 'maintenance' && q.vaporizer > 0 && q.intensity < 0.35, lines: [
+    [1, '{agent} at {dial} percent, MAC {mac}. Steady.'],
+    [1, 'MAC {mac}. Think about awareness on one side and blood pressure on the other.'],
+    [2, '{agent} dialed to {dial}, MAC {mac}. Riveting.'],
+    [2, 'Maintenance. Peak excitement for absolutely no one.'],
+    [3, 'MAC {mac}. The patient is asleep. I\'m almost asleep.'],
+    [3, 'Sitting at {dial} percent {agent}. I\'ve seen glaciers with more energy.'],
+    [1, 'End tidal agent catching up. Watch MAC, not just the dial.'],
+    [2, 'MAC {mac}. Asleep, not dead. Let\'s keep it that way.'],
+    [3, 'MAC {mac}. Deep enough for you to stop fidgeting.'],
+  ] },
+  { id: 'amb_scheming', concept: 'AMBIENT', score: 2, cooldownMs: 35000, when: (q) => q.phase === 'BUILD_UP' && q.directorArmed && q.intensity < CALM_INTENSITY, lines: [
+    [1, 'Everything is stable. Stay sharp anyway.'],
+    [2, 'Everything\'s stable. That\'s usually when I get ideas.'],
+    [3, 'Stable vitals. Suspiciously stable. I\'m bored, and bored is dangerous for you.'],
+  ] },
+  { id: 'amb_done', concept: 'AMBIENT', score: 2, cooldownMs: 120000, when: (q) => q.phase === 'DONE' && q.directorArmed, lines: [
+    [1, 'I\'m out of complications for this one. Finish strong.'],
+    [2, 'Out of tricks. Don\'t tell anyone.'],
+    [3, 'I\'ve run out of ways to ruin your day. Take the win.'],
+  ] },
+  { id: 'amb_calm', concept: 'AMBIENT', score: 1, when: (q) => q.intensity < CALM_INTENSITY, lines: [
+    [1, 'HR {hr}, MAP {map}, sat {spo2}. Stable. Keep scanning.'],
+    [1, 'EtCO2 {etco2}, sat {spo2}. Ventilation looks fine.'],
+    [2, 'HR {hr}, MAP {map}, sat {spo2}. Boring. I hate boring.'],
+    [2, 'Sat {spo2}. Look at you, oxygenating.'],
+    [3, 'MAP {map}. Fine. Fine is my least favorite word.'],
+    [3, 'Heart rate {hr}. Steadier than your hands.'],
+    [1, 'Sat {spo2}, EtCO2 {etco2}. Check the waveform, not just the number.'],
+    [1, 'Pressure {map}. Is that adequate for this patient\'s baseline?'],
+    [2, 'MAP {map}. Kidneys are happy. Rare day.'],
+    [2, 'EtCO2 {etco2}. Ventilating like you meant it.'],
+    [3, 'Sat {spo2}. Hard to mess that up. Don\'t test me.'],
+    [3, 'HR {hr}. Calmer than the surgeon will be.'],
+  ] },
+  // Boredom and trivia never play during a crisis; only amb_unstable does.
+  { id: 'amb_pearl', concept: 'AMBIENT', score: 0, cooldownMs: 40000, when: (q) => q.intensity < 0.35, lines: PEARLS.flatMap((pearl) => [
+    [1, `Pearl: ${pearl}`],
+    [2, `Free education: ${pearl}`],
+    [3, `Since you clearly need it: ${pearl}`],
+  ]) },
+
   // Vitals, from the snapshot only.
   { id: 'arrest', concept: 'ARREST', score: 1, priority: 3, lines: [
     [1, 'No perfusion. Call for help and start ACLS. Now.'],
@@ -576,6 +786,12 @@ export function fillTemplate(text, facts = {}) {
     tof: finite(facts.tof) ? facts.tof : '?',
     attempts: finite(facts.attempts) ? facts.attempts : '?',
     complication: facts.complicationLabel ?? 'That',
+    worst: facts.worst ?? 'Something',
+    agent: facts.agent ?? facts.vaporizerAgent ?? 'The agent',
+    dial: finite(facts.dial) ? facts.dial.toFixed(1) : (finite(facts.vaporizer) ? facts.vaporizer.toFixed(1) : '?'),
+    mac: finite(facts.mac) ? facts.mac.toFixed(2) : '?',
+    bis: finite(facts.bis) ? Math.round(facts.bis) : '?',
+    rr: finite(facts.rr) ? Math.round(facts.rr) : '?',
     name: OPERATOR_NAME,
   };
   return text.replace(/\{(\w+)\}/g, (match, key) => (key in fmt ? String(fmt[key]) : match));
@@ -595,15 +811,28 @@ export function selectBark(query, {
     return rule.lines.some(([heat]) => heat <= meanness);
   });
   if (matching.length === 0) return null;
-  const best = Math.max(...matching.map((rule) => rule.score ?? 0));
-  const top = matching.filter((rule) => (rule.score ?? 0) === best);
+  // Chatter shouldn't hit the same rule twice in a row when anything else fits.
+  const varied = query.concept === 'AMBIENT' && matching.length > 1
+    ? matching.filter((rule) => rule.id !== memory?.lastRuleId)
+    : matching;
+  const best = Math.max(...varied.map((rule) => rule.score ?? 0));
+  const top = varied.filter((rule) => (rule.score ?? 0) === best);
   const rule = top[Math.min(top.length - 1, Math.floor(random() * top.length))];
   const exact = rule.lines.filter(([heat]) => heat === meanness);
-  const pool = exact.length > 0 ? exact : rule.lines.filter(([heat]) => heat <= meanness);
-  const fresh = pool.filter(([, text]) => text !== memory?.lastText);
+  const upToLevel = rule.lines.filter(([heat]) => heat <= meanness);
+  // Chatter draws from every line up to the attitude level for variety, but
+  // only falls to a milder line once the exact-heat lines have all been used.
+  const exactFresh = exact.filter(([, text]) => !(memory?.recentTemplates ?? []).includes(text));
+  const pool = query.concept === 'AMBIENT' && exactFresh.length === 0 ? upToLevel
+    : (exact.length > 0 ? exact : upToLevel);
+  const recent = memory?.recentTemplates ?? [];
+  const fresh = pool.filter(([, text]) => text !== memory?.lastTemplate && !recent.includes(text));
   const choices = fresh.length > 0 ? fresh : pool;
   const [heat, text] = choices[Math.min(choices.length - 1, Math.floor(random() * choices.length))];
-  return { ruleId: rule.id, concept: query.concept, heat, priority: rule.priority ?? 1, text: fillTemplate(text, query) };
+  return {
+    ruleId: rule.id, concept: query.concept, heat, priority: rule.priority ?? 1,
+    template: text, text: fillTemplate(text, query),
+  };
 }
 
 // Vital sign bands with hysteresis so a number hovering at a threshold
@@ -656,9 +885,11 @@ export function createSimOperator({
   chaos = 1,
   minGapMs = 5000,
   enabled = true,
+  chatter = 1,
 } = {}) {
   const director = createDirector({ random });
-  const settings = { meanness, chaos, enabled };
+  const settings = { meanness, chaos, enabled, chatter };
+  let nextAmbientGapMs = null;
   let memory;
   let history;
   let bands;
@@ -673,7 +904,9 @@ export function createSimOperator({
 
   function resetState() {
     director.reset();
-    memory = { said: new Set(), lastByRule: new Map(), lastText: null, lastSayMs: -Infinity };
+    memory = {
+      said: new Set(), lastByRule: new Map(), lastText: null, lastTemplate: null, lastRuleId: null, lastSayMs: -Infinity,
+    };
     history = {
       drugsGiven: new Set(), epiduralGiven: false, wasIntubated: false, preoxygenated: false,
       failedAttempts: 0, lastLearnerActionT: 0, lastDrugT: null, learnerActions: [],
@@ -721,12 +954,46 @@ export function createSimOperator({
     memory.said.add(bark.ruleId);
     memory.lastByRule.set(bark.ruleId, nowMs);
     memory.lastText = bark.text;
+    memory.lastTemplate = bark.template;
+    memory.recentTemplates = [...(memory.recentTemplates ?? []), bark.template].slice(-10);
+    memory.lastRuleId = bark.ruleId;
     memory.lastSayMs = nowMs;
+    nextAmbientGapMs = pickAmbientGap();
     const line = { ...bark, tSec: last?.t ?? 0, speaker: OPERATOR_NAME };
     transcript.push(line);
     if (transcript.length > 200) transcript = transcript.slice(-200);
     say(line);
     return line;
+  }
+
+  function pickAmbientGap() {
+    const level = CHATTER_LEVELS.find((entry) => entry.id === settings.chatter);
+    if (!level?.gapMs) return null;
+    const [low, high] = level.gapMs;
+    return low + random() * (high - low);
+  }
+
+  // Fill silence with commentary grounded in the current monitor.
+  function maybeChatter(snapshot, intensity, active) {
+    if (nextAmbientGapMs === null) nextAmbientGapMs = pickAmbientGap();
+    if (nextAmbientGapMs === null) return;
+    if (now() - memory.lastSayMs < nextAmbientGapMs) return;
+    const hidden = hiddenTypes();
+    const directorState = director.getState();
+    const line = speak({
+      concept: 'AMBIENT',
+      intensity,
+      worst: worstFinding(snapshot),
+      stage: caseStage(snapshot, history),
+      phase: directorState.phase,
+      directorArmed: directorAllowed() && settings.chaos > 0,
+      hiddenActive: active.some((type) => hidden.has(type))
+        || (hidden.has('LocalAnestheticToxicity') && (snapshot.lidocaineToxicityStage ?? 'none') !== 'none'),
+      infusionRunning: (snapshot.activeAnestheticInfusions?.length ?? 0) > 0,
+      agent: snapshot.vaporizerAgent,
+      dial: snapshot.vaporizer,
+    }, { force: true });
+    if (!line) nextAmbientGapMs = pickAmbientGap(); // nothing fit; try again after another gap
   }
 
   function trackExtremes(s) {
@@ -851,6 +1118,7 @@ export function createSimOperator({
       enabled: settings.enabled && directorAllowed(),
     });
     if (decision?.inject) performInjection(decision.inject);
+    if (settings.enabled && !decision?.inject) maybeChatter(snapshot, intensity, active);
   }
 
   function treatMatches(type, { drug = null, action = null }) {
@@ -922,7 +1190,15 @@ export function createSimOperator({
       case 'volatile_changed':
         if (meta.dialPercent === 0 && activeComplications().includes('MalignantHyperthermia')) {
           speak({ concept: 'TRIGGER_OFF', dantroleneGiven: history.drugsGiven.has('Dantrolene') });
+          return;
         }
+        speak({ concept: 'VOLATILE', agent: meta.agent, dial: meta.dialPercent });
+        return;
+      case 'cricoid_pressure_applied':
+        speak({ concept: 'CRICOID' });
+        return;
+      case 'vent_mode_changed':
+        speak({ concept: 'VENT_MODE' });
         return;
       case 'preoxygenate':
         history.preoxygenated = true;
@@ -1019,6 +1295,12 @@ export function createSimOperator({
       }
     },
     setEnabled(value) { settings.enabled = Boolean(value); },
+    setChatter(level) {
+      if (CHATTER_LEVELS.some((entry) => entry.id === Number(level))) {
+        settings.chatter = Number(level);
+        nextAmbientGapMs = pickAmbientGap();
+      }
+    },
     forceSoon() { director.forceSoon(); },
     reset: resetState,
     getSettings() { return { ...settings, directorAllowed: directorAllowed() }; },

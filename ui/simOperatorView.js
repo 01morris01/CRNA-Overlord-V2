@@ -8,12 +8,13 @@ import {
   buildLocalAnswer,
   buildLocalRoast,
   CHAOS_PROFILES,
+  CHATTER_LEVELS,
   createSimOperator,
   MEANNESS_LEVELS,
   OPERATOR_NAME,
 } from './simOperator.js';
 
-const SETTINGS_KEY = 'overlord.booth.settings.v1';
+const SETTINGS_KEY = 'overlord.booth.settings.v2';
 const FEED_LIMIT = 30;
 
 function escapeHtml(value) {
@@ -43,6 +44,8 @@ export function renderOperatorPanel() {
     .map((level) => `<option value="${level.id}">${escapeHtml(level.label)}</option>`).join('');
   const chaos = Object.values(CHAOS_PROFILES)
     .map((profile) => `<option value="${profile.id}">${escapeHtml(profile.label)}</option>`).join('');
+  const chatter = CHATTER_LEVELS
+    .map((level) => `<option value="${level.id}">${escapeHtml(level.label)}</option>`).join('');
   return `
     <section id="live-operator-panel" class="live-panel live-operator-panel" aria-labelledby="live-operator-heading">
       <div class="live-operator-header">
@@ -56,8 +59,9 @@ export function renderOperatorPanel() {
       <div class="live-operator-settings">
         <label class="live-field" for="live-operator-meanness"><span>Attitude</span><select id="live-operator-meanness">${meanness}</select></label>
         <label class="live-field" for="live-operator-chaos"><span>Chaos</span><select id="live-operator-chaos">${chaos}</select></label>
+        <label class="live-field" for="live-operator-chatter"><span>Chatter</span><select id="live-operator-chatter">${chatter}</select></label>
       </div>
-      <label class="live-toggle" for="live-operator-voice"><input id="live-operator-voice" type="checkbox"><span>Voice</span></label>
+      <label class="live-toggle" for="live-operator-voice"><input id="live-operator-voice" type="checkbox" checked><span>Voice</span></label>
       <output id="live-operator-phase" class="live-help" aria-live="polite">Waiting for the case to start.</output>
       <div class="live-button-row">
         <button id="live-operator-tryme" type="button">TRY ME</button>
@@ -81,10 +85,11 @@ function readSettings(storage) {
       enabled: parsed.enabled !== false,
       meanness: [1, 2, 3].includes(parsed.meanness) ? parsed.meanness : 2,
       chaos: Object.hasOwn(CHAOS_PROFILES, parsed.chaos) ? parsed.chaos : 1,
-      voice: parsed.voice === true,
+      chatter: CHATTER_LEVELS.some((level) => level.id === parsed.chatter) ? parsed.chatter : 1,
+      voice: parsed.voice !== false,
     };
   } catch {
-    return { enabled: true, meanness: 2, chaos: 1, voice: false };
+    return { enabled: true, meanness: 2, chaos: 1, chatter: 1, voice: true };
   }
 }
 
@@ -140,21 +145,29 @@ export function createSimOperatorController({
   function speakWithSynthesis(text) {
     const synth = speechHost?.speechSynthesis;
     const Utterance = speechHost?.SpeechSynthesisUtterance;
-    if (!synth || !Utterance) return;
-    synth.cancel();
-    const utterance = new Utterance(text);
-    utterance.pitch = 0.8;
-    utterance.rate = 1.05;
-    synth.speak(utterance);
+    if (!synth || !Utterance) return Promise.resolve();
+    return new Promise((resolve) => {
+      stopCurrent = resolve;
+      const utterance = new Utterance(text);
+      utterance.pitch = 0.8;
+      utterance.rate = 1.05;
+      utterance.onend = resolve;
+      utterance.onerror = resolve;
+      synth.speak(utterance);
+      // Some browsers never fire onend; don't let the queue stall.
+      setTimeout(resolve, Math.min(20000, 1500 + text.length * 80));
+    });
   }
 
-  async function voice(text, priority = 1) {
-    if (!settings.voice) return;
-    // Booth doesn't talk over himself; low priority lines are dropped while he speaks.
-    if (speaking && priority < 2) return;
-    speaking = true;
-    try {
-      if (fetchImpl) {
+  // One line plays at a time. While Booth is talking, the newest waiting
+  // line replaces any older waiting line, so he never falls behind the case;
+  // urgent lines (priority 2+) jump ahead of chatter.
+  let pending = null;
+  let stopCurrent = null;
+
+  async function playOne(text) {
+    if (fetchImpl) {
+      try {
         const res = await fetchImpl('/api/tts', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
@@ -163,9 +176,9 @@ export function createSimOperatorController({
         if (res.ok) {
           const blob = await res.blob();
           const url = URL.createObjectURL(blob);
-          currentAudio?.pause?.();
           currentAudio = new (speechHost?.Audio ?? Audio)(url);
           await new Promise((resolve) => {
+            stopCurrent = resolve;
             currentAudio.addEventListener('ended', resolve, { once: true });
             currentAudio.addEventListener('error', resolve, { once: true });
             currentAudio.play().catch(resolve);
@@ -173,12 +186,28 @@ export function createSimOperatorController({
           URL.revokeObjectURL(url);
           return;
         }
+      } catch { /* fall through to synthesis */ }
+    }
+    await speakWithSynthesis(text);
+  }
+
+  async function voice(text, priority = 1) {
+    if (!settings.voice) return;
+    if (speaking) {
+      if (!pending || priority >= pending.priority) pending = { text, priority };
+      return;
+    }
+    speaking = true;
+    try {
+      let next = { text, priority };
+      while (next && settings.voice) {
+        pending = null;
+        await playOne(next.text);
+        next = pending;
       }
-      speakWithSynthesis(text);
-    } catch {
-      speakWithSynthesis(text);
     } finally {
       speaking = false;
+      pending = null;
     }
   }
 
@@ -194,6 +223,7 @@ export function createSimOperatorController({
     now,
     meanness: settings.meanness,
     chaos: settings.chaos,
+    chatter: settings.chatter,
     enabled: settings.enabled,
   });
 
@@ -272,6 +302,13 @@ export function createSimOperatorController({
     const meanness = query('live-operator-meanness');
     const chaos = query('live-operator-chaos');
     const voiceToggle = query('live-operator-voice');
+    const chatter = query('live-operator-chatter');
+    if (chatter) chatter.value = String(settings.chatter);
+    chatter?.addEventListener('change', () => {
+      settings.chatter = Number(chatter.value);
+      operator.setChatter(settings.chatter);
+      persist();
+    });
     if (enabled) enabled.checked = settings.enabled;
     if (meanness) meanness.value = String(settings.meanness);
     if (chaos) chaos.value = String(settings.chaos);
@@ -297,7 +334,9 @@ export function createSimOperatorController({
     voiceToggle?.addEventListener('change', () => {
       settings.voice = voiceToggle.checked;
       if (!settings.voice) {
+        pending = null;
         currentAudio?.pause?.();
+        stopCurrent?.();
         speechHost?.speechSynthesis?.cancel?.();
       }
       persist();
