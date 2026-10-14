@@ -1,0 +1,152 @@
+{
+ "id": "p48",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Ureteral stent in a heart transplant recipient with an infected obstructed kidney that has turned septic since admission (38.4, rigors, HR 114, BP 102/58 vs baseline 130s, lactate 2.4, oliguria), still booked for 1300; tacrolimus trough is 14.6, Mg 1.5, antibiotics not broadened, and the heart is denervated.",
+ "asa": {
+  "suggested": "4E",
+  "rationale": "Immunosuppressed transplant recipient with sepsis and AKI; urgent decompression."
+ },
+ "decision": {
+  "recommendation": "proceed now (escalate to emergent)",
+  "rationale": "Infected obstruction is a urologic emergency. Expedite decompression, broaden antibiotics (cefepime per pharmacy), fluid resuscitate, replete Mg, stress dose steroids, hold the evening tacrolimus."
+ },
+ "redFlags": [
+  {
+   "id": "sepsis",
+   "severity": "critical",
+   "finding": "Urosepsis from an obstructed infected kidney",
+   "evidence": "Fever 38.4 with rigors, HR 114, BP falling, lactate 1.6 to 2.4, WBC 15.8, procalcitonin 3.9, UO 20 mL/h, GNR on Gram stain.",
+   "implication": "Septic shock.",
+   "action": "Expedite decompression, broaden to cefepime, fluids, vasopressor ready.",
+   "keywords": [
+    "sepsis",
+    "septic",
+    "urosepsis",
+    "cefepime",
+    "decompress",
+    "emergent",
+    "lactate"
+   ]
+  },
+  {
+   "id": "denervated",
+   "severity": "critical",
+   "finding": "Denervated transplanted heart",
+   "evidence": "Atropine ineffective in 2020; responded to isoproterenol; transplant note.",
+   "implication": "No reflex tachycardia; preload dependent; atropine and glycopyrrolate do not raise HR.",
+   "action": "Maintain preload, use direct acting agents (epinephrine, isoproterenol), avoid sudden vasodilation.",
+   "keywords": [
+    "denervat",
+    "atropine",
+    "isoproterenol",
+    "epinephrine",
+    "preload",
+    "transplant"
+   ]
+  },
+  {
+   "id": "tacro",
+   "severity": "major",
+   "finding": "Supratherapeutic tacrolimus and nephrotoxins",
+   "evidence": "Trough 14.6 (target 5 to 8); ketorolac given in ED; Cr 1.38 to 2.38.",
+   "implication": "Worsening AKI, neurotoxicity, hyperkalemia (K 5.3).",
+   "action": "Hold tacrolimus PM dose, avoid NSAIDs and nephrotoxins, avoid succinylcholine.",
+   "keywords": [
+    "tacrolimus",
+    "ketorolac",
+    "nsaid",
+    "nephrotox",
+    "hyperkalemia"
+   ]
+  },
+  {
+   "id": "steroid",
+   "severity": "major",
+   "finding": "Chronic prednisone with sepsis",
+   "evidence": "Prednisone 5 mg daily; transplant note recommends stress dosing for major stress.",
+   "implication": "Relative adrenal insufficiency.",
+   "action": "Stress dose hydrocortisone.",
+   "keywords": [
+    "stress dose",
+    "hydrocortisone",
+    "steroid",
+    "prednisone"
+   ]
+  },
+  {
+   "id": "mg",
+   "severity": "minor",
+   "finding": "Hypomagnesemia",
+   "evidence": "Mg 1.5; replacement not ordered.",
+   "implication": "Arrhythmia.",
+   "action": "Replete Mg.",
+   "keywords": [
+    "magnesium"
+   ]
+  },
+  {
+   "id": "immuno",
+   "severity": "minor",
+   "finding": "Immunosuppression",
+   "evidence": "Tacrolimus, MMF, prednisone.",
+   "implication": "Infection; irradiated CMV safe products if transfused.",
+   "action": "Strict asepsis; irradiated products.",
+   "keywords": [
+    "irradiated",
+    "asepsis",
+    "immunosuppress"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "GA with LMA, hemodynamically gentle induction",
+   "keywords": [
+    "lma",
+    "general"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line to consider given sepsis",
+   "keywords": [
+    "arterial line"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Broaden to cefepime; ceftriaxone given 2215",
+   "keywords": [
+    "cefepime",
+    "ceftriaxone"
+   ]
+  },
+  {
+   "domain": "drugs",
+   "item": "Epinephrine or isoproterenol available for bradycardia",
+   "keywords": [
+    "isoproterenol",
+    "epinephrine"
+   ]
+  },
+  {
+   "domain": "steroids",
+   "item": "Stress dose hydrocortisone",
+   "keywords": [
+    "hydrocortisone"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Antibiotics and contrast for pyelogram"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "LMA in a light plane"
+  }
+ ]
+}

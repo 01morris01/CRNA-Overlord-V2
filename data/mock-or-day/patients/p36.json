@@ -1,0 +1,1137 @@
+{
+ "id": "p36",
+ "room": "OR 13",
+ "time": "0730",
+ "name": "DEBUSK, RANDALL SCOTT",
+ "mrn": "0146036",
+ "dob": "12/02/1981",
+ "age": "44 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 95.0,
+ "preferred_name": "Randy",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. M. Shular, Jefferson City Internal Medicine",
+ "insurance": "Humana commercial PPO",
+ "emergency_contact": "Tonya DeBusk (wife) 865-555-0154",
+ "isolation": "",
+ "allergies": [
+  [
+   "Aspirin",
+   "GI upset",
+   "Mild (intolerance)",
+   "2019"
+  ],
+  [
+   "Cat dander",
+   "Rhinitis, wheeze",
+   "Moderate",
+   "2005"
+  ]
+ ],
+ "case": {
+  "procedure": "Bilateral functional endoscopic sinus surgery (total ethmoidectomy, maxillary antrostomy, sphenoidotomy, frontal sinusotomy) with image guidance; septoplasty",
+  "short": "Bilateral FESS with septoplasty",
+  "laterality": "Bilateral",
+  "service": "Otolaryngology",
+  "surgeon": "W. Coffelt, MD",
+  "assistant": "",
+  "indication": "Chronic rhinosinusitis with nasal polyps, recurrent after 2020 polypectomy; septal deviation",
+  "duration_min": 150,
+  "anesthesia_requested": "General endotracheal (TIVA preferred by surgeon for field)",
+  "position": "Supine, head up 15-20 degrees, table turned 180",
+  "dispo": "Same-day discharge vs overnight observation",
+  "blood": "Type and screen",
+  "equipment": "Image guidance (headset/CT navigation), oral RAE, throat pack",
+  "implants": "Absorbable steroid-eluting sinus implants (mometasone) x2",
+  "surgeon_notes": "Topical oxymetazoline pledgets, lidocaine 1% with epinephrine 1:100,000 injection. Controlled hypotension (MAP 60-70) if field bloody. Order set: ketorolac 30 mg IV at closure, ibuprofen PRN post-op, dexamethasone 10 mg.",
+  "add_on": false,
+  "scheduled_on": "09/21/2026"
+ },
+ "problems": [
+  [
+   "Chronic rhinosinusitis with nasal polyps",
+   "2017",
+   "Active"
+  ],
+  [
+   "Asthma, moderate persistent",
+   "2005",
+   "Active"
+  ],
+  [
+   "Deviated nasal septum",
+   "2020",
+   "Active"
+  ],
+  [
+   "Anosmia",
+   "2019",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea, mild (AHI 9), CPAP not tolerated",
+   "2023",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2022",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2018",
+   "Active"
+  ],
+  [
+   "Obesity, BMI 30",
+   "2020",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "CRSwNP since ~2017; endoscopic polypectomy 2020; recurrence 2023",
+   "Asthma since 20s, worse since 2017; 2 prednisone bursts in last year; ED 2019",
+   "Anosmia",
+   "Mild OSA",
+   "HLD",
+   "GERD"
+  ],
+  "psh": [
+   [
+    "03/2020",
+    "Endoscopic nasal polypectomy (office/OR)",
+    "Lakeway Regional"
+   ],
+   [
+    "2010",
+    "Right ankle ORIF",
+    "Fort Sanders"
+   ],
+   [
+    "2023",
+    "Colonoscopy (rectal bleeding - internal hemorrhoids)",
+    "Lakeway Endoscopy"
+   ]
+  ],
+  "family": [
+   "Father: asthma, nasal polyps",
+   "Mother: HTN",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "2-3 beers/week (\"beer and wine make my nose stuffy\")",
+   "drugs": "None",
+   "occupation": "HVAC technician",
+   "living": "Wife, 2 children",
+   "other": "Indoor cat"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2024"
+   ],
+   [
+    "COVID-19",
+    "2023"
+   ],
+   [
+    "Tdap",
+    "2010 (ankle ORIF)"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Budesonide/formoterol 160/4.5 mcg",
+   "2 puffs BID",
+   "Dr. E. Halvorsen (Allergy)",
+   "10/27/2026 0500"
+  ],
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs q4h PRN",
+   "Dr. E. Halvorsen",
+   "10/26/2026 2200"
+  ],
+  [
+   "Montelukast 10 mg",
+   "1 tab PO nightly",
+   "Dr. E. Halvorsen",
+   "10/26/2026 2200"
+  ],
+  [
+   "Fluticasone propionate nasal 50 mcg",
+   "2 sprays each nostril BID",
+   "Dr. W. Coffelt",
+   "10/26/2026 2200"
+  ],
+  [
+   "Budesonide 0.5 mg respule in saline rinse",
+   "Nasal irrigation BID",
+   "Dr. W. Coffelt",
+   "10/26/2026 2200"
+  ],
+  [
+   "Prednisone 10 mg tab",
+   "30 mg PO daily x7 d preop (10/21-10/27)",
+   "Dr. W. Coffelt",
+   "10/27/2026 0500"
+  ],
+  [
+   "Atorvastatin 20 mg",
+   "1 tab PO daily",
+   "Dr. M. Shular",
+   "10/26/2026 2200"
+  ],
+  [
+   "Omeprazole 20 mg",
+   "1 cap PO daily",
+   "Dr. M. Shular",
+   "10/27/2026 0500"
+  ],
+  [
+   "Cetirizine 10 mg",
+   "PO daily",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Dexamethasone 10 mg IV",
+   "Intraop",
+   "Due"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Ketorolac 30 mg IV",
+   "Once at end of case (ENT FESS order set)",
+   "Due"
+  ],
+  [
+   "Ibuprofen 600 mg PO",
+   "q6h PRN pain (PACU/discharge)",
+   "Ordered"
+  ],
+  [
+   "Oxymetazoline 0.05% nasal",
+   "2 sprays each nostril preop",
+   "Given 10/27/2026 0640"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0640"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Mepolizumab 100 mg SC q4wk",
+   "Requested 2025",
+   "Prior auth denied - step therapy"
+  ],
+  [
+   "Fluticasone/salmeterol 250/50",
+   "2015-2021",
+   "Changed to budesonide/formoterol"
+  ],
+  [
+   "Prednisone burst 40 mg x5 d",
+   "02/2026",
+   "Course complete"
+  ],
+  [
+   "Prednisone burst 40 mg x5 d",
+   "06/2026",
+   "Course complete"
+  ],
+  [
+   "Naproxen 500 mg",
+   "2019",
+   "Stopped per allergy clinic"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/14/2026",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "14.6",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "227",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "1.05",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/20/2025",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "14.9",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "98",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "108",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2022",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "64",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "162",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "98",
+      ""
+     ],
+     "A1c": [
+      "5.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/02/2021",
+    "comment": "Allergy clinic",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "14.9",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "229",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "28",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "79",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/10/2019 1720",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "10.9",
+      ""
+     ],
+     "Hgb": [
+      "15.3",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.88",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "05/02/2021",
+    "Absolute eosinophil count",
+    "780 cells/uL (ref 0-500)",
+    "H"
+   ],
+   [
+    "05/02/2021",
+    "Total IgE",
+    "210 IU/mL (ref <100)",
+    "H"
+   ],
+   [
+    "05/02/2021",
+    "Allergen panel (ImmunoCAP)",
+    "Cat dander class 3; dust mite class 1; others negative",
+    "A"
+   ],
+   [
+    "10/14/2026",
+    "Absolute eosinophil count",
+    "910 cells/uL",
+    "H"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/10/2019",
+   "XR Chest 2 views",
+   "Mild hyperinflation, peribronchial thickening. No consolidation.",
+   "J. Pickering, MD"
+  ],
+  [
+   "11/12/2019",
+   "CT Sinus without contrast",
+   "Pansinus mucosal thickening, polypoid opacification of bilateral ethmoids and maxillary sinuses. Lund-Mackay 16.",
+   "H. Okonkwo, MD"
+  ],
+  [
+   "08/25/2026",
+   "CT Sinus without contrast (navigation protocol)",
+   "Near-complete opacification bilateral ethmoid, maxillary, frontal, and sphenoid sinuses; Lund-Mackay 21. Septal deviation to the left with spur. Intact lamina papyracea and skull base. Keros type II. Impression: extensive recurrent sinonasal polyposis.",
+   "H. Okonkwo, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "05/02/2021",
+   "Spirometry",
+   "Pre FEV1 2.92 L (72%), FEV1/FVC 0.68; post-BD FEV1 3.38 L (+16%, +460 mL). Consistent with asthma with significant BD response.",
+   "E. Halvorsen, MD"
+  ],
+  [
+   "09/30/2026",
+   "Spirometry",
+   "Pre FEV1 3.05 L (75%), post 3.40 L (+11%). FeNO 58 ppb (high).",
+   "E. Halvorsen, MD"
+  ],
+  [
+   "02/2023",
+   "Home sleep apnea test",
+   "AHI 9.2, nadir SpO2 86%. Mild OSA. CPAP trial 2023 not tolerated (nasal obstruction).",
+   "G. Rankin, MD"
+  ]
+ ],
+ "encounters": [
+  [
+   "03/10/2019",
+   "ED visit",
+   "Jefferson Memorial Hospital",
+   "Wheezing, nasal congestion",
+   "Asthma exacerbation, discharged"
+  ],
+  [
+   "03/12/2020",
+   "Outpatient surgery",
+   "Lakeway Regional",
+   "Nasal polypectomy",
+   "Discharged same day"
+  ],
+  [
+   "05/02/2021",
+   "Clinic",
+   "East TN Allergy & Asthma",
+   "Asthma/polyps",
+   "AERD diagnosed"
+  ],
+  [
+   "02/18/2026",
+   "Urgent care",
+   "Jefferson City Walk-In",
+   "Asthma flare with URI",
+   "Prednisone burst"
+  ],
+  [
+   "08/25/2026",
+   "Clinic",
+   "C-N University ENT",
+   "Recurrent polyps",
+   "FESS planned"
+  ],
+  [
+   "09/30/2026",
+   "Clinic",
+   "East TN Allergy & Asthma",
+   "Preop asthma optimization",
+   "Prednisone preop course recommended"
+  ]
+ ],
+ "notes": [
+  [
+   "03/10/2019 1745",
+   "Progress Note",
+   "Emergency Medicine (outside)",
+   "D. Vance, MD",
+   "37M asthma, took 2 aspirin (650 mg) for headache ~1 h before onset of nasal congestion, rhinorrhea, flushing, then chest tightness and wheeze. SpO2 93%. Diffuse wheeze. Albuterol/ipratropium x3, methylprednisolone 125 mg IV. Improved. Dx: asthma exacerbation, possibly aspirin-related. Recommend avoid aspirin/NSAIDs; allergy referral. Allergy list updated: Aspirin - wheezing."
+  ],
+  [
+   "03/12/2020 1300",
+   "Media (Outside Record)",
+   "Otolaryngology (outside)",
+   "S. Barnard, MD",
+   "Lakeway Regional operative note: bilateral endoscopic polypectomy, GA ETT. Moderate bleeding. Pathology: inflammatory polyps with abundant eosinophils."
+  ],
+  [
+   "05/02/2021 1130",
+   "Consult",
+   "Allergy/Immunology (outside)",
+   "E. Halvorsen, MD",
+   "39M asthma, CRSwNP with polypectomy 2020, anosmia, and reaction to aspirin 2019 (congestion + bronchospasm within 1 h) and reported similar sx with naproxen. Alcohol worsens congestion. Eos 780. Assessment: aspirin-exacerbated respiratory disease (Samter triad). Plan: strict avoidance of aspirin and all nonselective COX-1 inhibiting NSAIDs (ibuprofen, naproxen, ketorolac, etc.). Acetaminophen <= 650 mg/dose generally tolerated; celecoxib generally tolerated. Montelukast added. Consider aspirin desensitization after future sinus surgery. Med alert card given."
+  ],
+  [
+   "05/03/2021 0900",
+   "Letter",
+   "Allergy/Immunology (outside)",
+   "E. Halvorsen, MD",
+   "To Dr. Shular: Mr. DeBusk has AERD. Please list NSAID/aspirin sensitivity (respiratory reaction). [Scanned to Media]"
+  ],
+  [
+   "06/14/2022 1400",
+   "Progress Note",
+   "Internal Medicine",
+   "M. Shular, MD",
+   "Annual. LDL 162 - start atorvastatin 20. Allergy list reconciled with pt verbally: \"aspirin upsets my stomach\" - updated reaction to GI upset. Asthma controlled."
+  ],
+  [
+   "05/14/2025 1100",
+   "Media (Outside Record)",
+   "Insurance",
+   "Humana Clinical Pharmacy Review",
+   "Prior authorization for mepolizumab: DENIED. Reason: step therapy - must document failure of surgical intervention or two biologic-preferred criteria. Appeal rights enclosed."
+  ],
+  [
+   "08/25/2026 1000",
+   "Consult",
+   "Otolaryngology",
+   "W. Coffelt, MD",
+   "44M CRSwNP, recurrent after 2020 polypectomy, total nasal obstruction, anosmia. Endoscopy grade 3 polyps bilat. CT L-M 21. Plan revision-style FESS + septoplasty with image guidance, steroid-eluting implants. Preop prednisone 30 mg x7 d (allergy to confirm). Asthma - allergy to optimize. Postop pain: standard order set."
+  ],
+  [
+   "09/30/2026 1400",
+   "Progress Note",
+   "Allergy/Immunology (outside)",
+   "E. Halvorsen, MD",
+   "Preop asthma check. FEV1 75%, FeNO 58. Agree prednisone 30 mg x7 d starting 10/21 through DOS. Continue Symbicort, montelukast. AERD - reminder: no NSAIDs perioperatively; plan aspirin desensitization 4-6 wk post-FESS if surgeon agrees. Letter faxed to ENT."
+  ],
+  [
+   "10/14/2026 1000",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT: labs. Allergies reviewed: aspirin (GI upset), cat. Asthma controlled per pt, uses albuterol ~2x/wk. Bring inhalers. Take Symbicort, prednisone, omeprazole AM of surgery."
+  ],
+  [
+   "10/14/2026 1030",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "M. Leach, CRNA",
+   "ASA 2-3. Asthma, mild OSA (CPAP intolerant), BMI 30. MP III, thick neck 44 cm. Plan GETA, TIVA per surgeon. No prior anesthesia problems."
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0530. NPO midnight, clears until 0430. Inhaler + prednisone AM. Driver wife."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/10/2019 1720",
+   "146/88",
+   108,
+   24,
+   93,
+   36.9,
+   92.0,
+   "0/10",
+   "ED (outside)"
+  ],
+  [
+   "05/02/2021 1115",
+   "128/80",
+   76,
+   16,
+   97,
+   36.6,
+   93.0,
+   "0/10",
+   "Allergy clinic"
+  ],
+  [
+   "06/14/2022 1345",
+   "132/84",
+   74,
+   16,
+   97,
+   36.7,
+   94.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "02/18/2026 1600",
+   "134/82",
+   96,
+   20,
+   95,
+   37.4,
+   95.5,
+   "0/10",
+   "Urgent care"
+  ],
+  [
+   "08/25/2026 0945",
+   "130/82",
+   72,
+   16,
+   97,
+   36.6,
+   95.3,
+   "0/10",
+   "ENT"
+  ],
+  [
+   "10/14/2026 0945",
+   "128/80",
+   74,
+   16,
+   97,
+   36.6,
+   95.0,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0540",
+   "136/84",
+   82,
+   16,
+   97,
+   36.6,
+   95.0,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/14/2026",
+   "Resulted"
+  ],
+  [
+   "ENT FESS order set: ketorolac 30 mg IV end of case, ibuprofen 600 mg PO q6h PRN",
+   "10/27/2026 0535",
+   "Active"
+  ],
+  [
+   "Dexamethasone 10 mg IV intraop",
+   "10/27/2026 0535",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0535",
+   "Active"
+  ],
+  [
+   "Image guidance CT loaded",
+   "10/26/2026",
+   "Done"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "11/13/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: bilateral FESS with image guidance, septoplasty, sinus implants",
+   "Signed 08/25/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2010",
+   "R ankle ORIF",
+   "GETA + popliteal block",
+   "None",
+   "Fort Sanders"
+  ],
+  [
+   "03/2020",
+   "Nasal polypectomy",
+   "GETA, sevoflurane",
+   "Bronchospasm on emergence treated with albuterol; \"ketorolac given\" per op record",
+   "Lakeway Regional"
+  ],
+  [
+   "2023",
+   "Colonoscopy",
+   "MAC propofol",
+   "None",
+   "Lakeway Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 2030",
+  "npo_clears": "10/27/2026 0400 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A (bilateral nasal)"
+   ],
+   [
+    "Allergy band",
+    "Yes - aspirin, cat"
+   ]
+  ],
+  "nursing_note": "Took Symbicort, prednisone 30 mg and omeprazole at 0500. Mouth breathing, total nasal obstruction. Lungs: faint end-expiratory wheeze R base, pt says \"that's normal for me.\" Wears a \"Samter's\" med alert bracelet - removed and placed in belongings bag with wedding ring. 18g L hand.",
+  "iv": "18g L hand, LR",
+  "glucose": ""
+ },
+ "label": "R. Debusk",
+ "bmi": "30.0"
+}

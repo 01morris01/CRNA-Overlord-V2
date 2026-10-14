@@ -1,0 +1,3092 @@
+{
+ "id": "p39",
+ "room": "OR 7",
+ "time": "1330",
+ "name": "TREADWAY, DWAYNE R",
+ "mrn": "0147039",
+ "dob": "03/14/1969",
+ "age": "57 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 84.2,
+ "preferred_name": "Dewey",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "M. Ledford, MD, Morristown Family Practice",
+ "insurance": "BlueCare Tennessee (TennCare) / Medicare Part A (SSDI)",
+ "emergency_contact": "Rhonda Treadway Pace (sister) 423-555-0187",
+ "isolation": "",
+ "allergies": [
+  [
+   "Sulfamethoxazole-trimethoprim",
+   "Diffuse rash",
+   "Moderate",
+   "1998"
+  ]
+ ],
+ "case": {
+  "procedure": "Open umbilical hernia repair, primary vs mesh",
+  "short": "Open umbilical hernia repair",
+  "laterality": "N/A",
+  "service": "General Surgery",
+  "surgeon": "S. Brannigan, MD",
+  "assistant": "T. Burchett, PA-C",
+  "indication": "Symptomatic incarcerating umbilical hernia in setting of cirrhotic ascites. 2.1 cm fascial defect containing omentum, painful, only partially reducible in clinic 10/16. No bowel obstruction on US. Thinning overlying skin; risk of rupture/leak.",
+  "duration_min": 90,
+  "anesthesia_requested": "General",
+  "position": "Supine, arms out",
+  "dispo": "Inpatient admission, step-down (hepatology to co-manage)",
+  "blood": "Type and crossmatch 2 units PRBC; FFP/platelets per anesthesia",
+  "equipment": "Standard laparotomy tray",
+  "implants": "Possible small polypropylene mesh",
+  "surgeon_notes": "Child B per hepatology 8/2026. LVP by IR 10/20 (5 L) to decompress before repair. Will avoid mesh if contamination or skin compromise. Hepatology aware and agrees surgery reasonable given rupture risk. Will need post-op albumin per hepatology.",
+  "add_on": false,
+  "scheduled_on": "10/16/2026"
+ },
+ "problems": [
+  [
+   "Alcohol-associated cirrhosis, decompensated (ascites, HE, varices)",
+   "08/2021",
+   "Active"
+  ],
+  [
+   "Ascites, diuretic-requiring, intermittent LVP",
+   "08/2021",
+   "Active"
+  ],
+  [
+   "Esophageal varices s/p hemorrhage, EVL eradication",
+   "03/2025",
+   "Active"
+  ],
+  [
+   "Hepatic encephalopathy, controlled on lactulose/rifaximin",
+   "11/2023",
+   "Active"
+  ],
+  [
+   "Hyponatremia, hypervolemic",
+   "2025",
+   "Active"
+  ],
+  [
+   "Thrombocytopenia due to hypersplenism",
+   "2021",
+   "Active"
+  ],
+  [
+   "Umbilical hernia, incarcerating",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Alcohol use disorder, severe, in reported remission",
+   "2016",
+   "Active"
+  ],
+  [
+   "Tobacco use",
+   "1985",
+   "Active"
+  ],
+  [
+   "Acute alcoholic pancreatitis",
+   "05/2017",
+   "Resolved"
+  ],
+  [
+   "Seborrheic keratosis",
+   "2022",
+   "Resolved"
+  ],
+  [
+   "Right ankle fracture s/p ORIF",
+   "1998",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Alcohol-associated cirrhosis dx 08/2021 (first presentation: new ascites); HCV Ab neg, HBsAg neg, HBV immune (vaccinated)",
+   "Esophageal variceal hemorrhage 03/2025 - EVL, transfused, intubated for EGD; eradicated by serial EVL 07/2025",
+   "Hepatic encephalopathy grade 2, 11/2023 (constipation/UTI precipitated) - lactulose + rifaximin since",
+   "Acute alcoholic pancreatitis 05/2017",
+   "Tobacco 1/2 ppd",
+   "Chronic low back pain, no daily opioids"
+  ],
+  "psh": [
+   [
+    "1998",
+    "ORIF right ankle (bimalleolar fx)",
+    "Morristown-Hamblen Hospital"
+   ],
+   [
+    "03/2025",
+    "EGD with EVL (emergent, intubated)",
+    "C-N University Hospital"
+   ],
+   [
+    "04/2025-07/2025",
+    "EGD with EVL x3 (surveillance)",
+    "C-N University Hospital"
+   ],
+   [
+    "Multiple 2021-2026",
+    "Paracentesis, US-guided (IR) - most recent 10/20/2026",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Father: alcohol use disorder, died 61 (cirrhosis)",
+   "Mother: T2DM, CAD, alive 81",
+   "Brother: alcohol use disorder",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Current, 1/2 ppd x 40 yrs (20 pack-yr)",
+   "alcohol": "Reports none since 06/2024 (previously 12-18 beers/day x 25 yrs)",
+   "drugs": "Denies",
+   "occupation": "Former long-haul truck driver; SSDI since 2022",
+   "living": "Lives alone in a single-wide, Bean Station. Sister checks on him; she drives him to appointments.",
+   "other": "Completed 6-wk IOP 2021 (relapsed). No current AA attendance per 8/2026 note."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "09/2023"
+   ],
+   [
+    "Hepatitis A series",
+    "2021-2022"
+   ],
+   [
+    "Hepatitis B series",
+    "2021-2022"
+   ],
+   [
+    "Tdap",
+    "09/12/2026 (ED)"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Spironolactone 100 mg tab",
+   "1 tab PO daily",
+   "J. Whitlock, NP (Hepatology)",
+   "10/26/2026 0800 (held AM of surgery)"
+  ],
+  [
+   "Furosemide 40 mg tab",
+   "1 tab PO daily",
+   "J. Whitlock, NP (Hepatology)",
+   "10/26/2026 0800 (held AM of surgery)"
+  ],
+  [
+   "Propranolol 20 mg tab",
+   "1 tab PO BID",
+   "R. Sandoval, MD (GI)",
+   "10/27/2026 0700"
+  ],
+  [
+   "Lactulose 10 g/15 mL soln",
+   "30 mL PO BID-TID, titrate to 2-3 soft BMs/day",
+   "J. Whitlock, NP (Hepatology)",
+   "10/26/2026 2000"
+  ],
+  [
+   "Rifaximin 550 mg tab",
+   "1 tab PO BID",
+   "J. Whitlock, NP (Hepatology)",
+   "10/27/2026 0700"
+  ],
+  [
+   "Pantoprazole 40 mg tab",
+   "1 tab PO daily",
+   "R. Sandoval, MD (GI)",
+   "10/27/2026 0700"
+  ],
+  [
+   "Thiamine 100 mg tab",
+   "1 tab PO daily",
+   "M. Ledford, MD",
+   "10/26/2026"
+  ],
+  [
+   "Folic acid 1 mg tab",
+   "1 tab PO daily",
+   "M. Ledford, MD",
+   "10/26/2026"
+  ],
+  [
+   "Multivitamin",
+   "1 tab PO daily",
+   "OTC",
+   "10/26/2026"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "1 tab PO q8h PRN pain (max 2 g/day per hepatology)",
+   "OTC",
+   "10/26/2026 2100"
+  ],
+  [
+   "Nicotine patch 14 mg/24 h",
+   "Apply daily",
+   "M. Ledford, MD",
+   "Not using per pt"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's",
+   "KVO 20 mL/h",
+   "Hung 10/27/2026 1005"
+  ],
+  [
+   "Thiamine 100 mg IV",
+   "Once preop",
+   "Not ordered - see pharmacy note"
+  ],
+  [
+   "Albumin 25% 25 g IV",
+   "Post-op per hepatology",
+   "Pending - post-op order"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Nadolol 20 mg daily",
+   "03/2025-05/2025",
+   "Changed to propranolol (fatigue, cost)"
+  ],
+  [
+   "Ciprofloxacin 500 mg daily (SBP ppx)",
+   "2025",
+   "Completed course after variceal bleed (ceftriaxone then cipro x7d)"
+  ],
+  [
+   "Tramadol 50 mg PRN",
+   "2019-2021",
+   "Stopped at cirrhosis diagnosis"
+  ],
+  [
+   "Ibuprofen OTC",
+   "-2021",
+   "Avoid NSAIDs in cirrhosis"
+  ],
+  [
+   "Spironolactone 200 mg / furosemide 80 mg",
+   "06/2026-09/2026",
+   "Reduced for Na 126, Cr 1.4 (hepatology 9/2026)"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 1005",
+    "comment": "Day of surgery",
+    "vals": {
+     "Na": [
+      "128",
+      "L"
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "96",
+      "L"
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "23",
+      "H"
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "96",
+      ""
+     ],
+     "Ca": [
+      "8.4",
+      "L"
+     ],
+     "WBC": [
+      "4.3",
+      "L"
+     ],
+     "Hgb": [
+      "10.3",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "66",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/23/2026 1040",
+    "comment": "PAT",
+    "vals": {
+     "Na": [
+      "128",
+      "L"
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "97",
+      "L"
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.12",
+      ""
+     ],
+     "Glu": [
+      "101",
+      "H"
+     ],
+     "Ca": [
+      "8.3",
+      "L"
+     ],
+     "AST": [
+      "64",
+      "H"
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "158",
+      "H"
+     ],
+     "TBili": [
+      "2.4",
+      "H"
+     ],
+     "TProt": [
+      "6.2",
+      ""
+     ],
+     "Alb": [
+      "2.6",
+      "L"
+     ],
+     "WBC": [
+      "4.1",
+      "L"
+     ],
+     "Hgb": [
+      "10.4",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "68",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ],
+     "PT": [
+      "20.7",
+      "H"
+     ],
+     "INR": [
+      "1.7",
+      "H"
+     ],
+     "aPTT": [
+      "38",
+      "H"
+     ],
+     "Fib": [
+      "142",
+      "L"
+     ],
+     "Mg": [
+      "1.6",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "10/20/2026 0900",
+    "comment": "Pre-paracentesis",
+    "vals": {
+     "Na": [
+      "128",
+      "L"
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "21",
+      "H"
+     ],
+     "Cr": [
+      "1.08",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ],
+     "AST": [
+      "65",
+      "H"
+     ],
+     "ALT": [
+      "35",
+      ""
+     ],
+     "ALKP": [
+      "163",
+      "H"
+     ],
+     "TBili": [
+      "2.3",
+      "H"
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "2.5",
+      "L"
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "10.5",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "69",
+      "L"
+     ],
+     "MCV": [
+      "97",
+      ""
+     ],
+     "PT": [
+      "20.7",
+      "H"
+     ],
+     "INR": [
+      "1.7",
+      "H"
+     ],
+     "aPTT": [
+      "33",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/24/2026",
+    "comment": "Hepatology - diuretics reduced",
+    "vals": {
+     "Na": [
+      "126",
+      "L"
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "29",
+      "H"
+     ],
+     "Cr": [
+      "1.41",
+      "H"
+     ],
+     "Glu": [
+      "103",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "09/12/2026 2315",
+    "comment": "ED - fall. Ethanol see other.",
+    "vals": {
+     "Na": [
+      "129",
+      "L"
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "8.7",
+      ""
+     ],
+     "AST": [
+      "96",
+      "H"
+     ],
+     "ALT": [
+      "41",
+      ""
+     ],
+     "ALKP": [
+      "138",
+      ""
+     ],
+     "TBili": [
+      "2.3",
+      "H"
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "2.8",
+      "L"
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "70",
+      "L"
+     ],
+     "MCV": [
+      "102",
+      "H"
+     ],
+     "PT": [
+      "19.5",
+      "H"
+     ],
+     "INR": [
+      "1.6",
+      "H"
+     ],
+     "aPTT": [
+      "36",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/11/2026",
+    "comment": "Hepatology; PEth sent",
+    "vals": {
+     "Na": [
+      "130",
+      "L"
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ],
+     "AST": [
+      "79",
+      "H"
+     ],
+     "ALT": [
+      "38",
+      ""
+     ],
+     "ALKP": [
+      "150",
+      "H"
+     ],
+     "TBili": [
+      "2.1",
+      "H"
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "2.9",
+      "L"
+     ],
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "10.9",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "76",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ],
+     "PT": [
+      "18.3",
+      "H"
+     ],
+     "INR": [
+      "1.5",
+      "H"
+     ],
+     "aPTT": [
+      "37",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/12/2026",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "132",
+      "L"
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.7",
+      ""
+     ],
+     "AST": [
+      "62",
+      "H"
+     ],
+     "ALT": [
+      "38",
+      ""
+     ],
+     "ALKP": [
+      "150",
+      "H"
+     ],
+     "TBili": [
+      "2.0",
+      "H"
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "3.0",
+      "L"
+     ],
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "81",
+      "L"
+     ],
+     "MCV": [
+      "99",
+      ""
+     ],
+     "PT": [
+      "18.3",
+      "H"
+     ],
+     "INR": [
+      "1.5",
+      "H"
+     ],
+     "aPTT": [
+      "36",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/15/2025",
+    "comment": "Hepatology",
+    "vals": {
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ],
+     "AST": [
+      "63",
+      "H"
+     ],
+     "ALT": [
+      "40",
+      ""
+     ],
+     "ALKP": [
+      "156",
+      "H"
+     ],
+     "TBili": [
+      "1.9",
+      "H"
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "3.1",
+      "L"
+     ],
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "11.2",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "86",
+      "L"
+     ],
+     "MCV": [
+      "98",
+      ""
+     ],
+     "PT": [
+      "17.1",
+      "H"
+     ],
+     "INR": [
+      "1.4",
+      "H"
+     ],
+     "aPTT": [
+      "37",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/11/2025 0500",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "112",
+      "H"
+     ],
+     "Ca": [
+      "8.8",
+      ""
+     ],
+     "AST": [
+      "69",
+      "H"
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "145",
+      ""
+     ],
+     "TBili": [
+      "2.0",
+      "H"
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "2.8",
+      "L"
+     ],
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "8.4",
+      "L"
+     ],
+     "Hct": [
+      "26",
+      "L"
+     ],
+     "Plt": [
+      "74",
+      "L"
+     ],
+     "MCV": [
+      "99",
+      ""
+     ],
+     "PT": [
+      "18.3",
+      "H"
+     ],
+     "INR": [
+      "1.5",
+      "H"
+     ],
+     "aPTT": [
+      "35",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/08/2025 1100",
+    "comment": "Post 2 u PRBC",
+    "vals": {
+     "WBC": [
+      "6.0",
+      ""
+     ],
+     "Hgb": [
+      "7.6",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "66",
+      "L"
+     ],
+     "MCV": [
+      "94",
+      ""
+     ],
+     "PT": [
+      "19.5",
+      "H"
+     ],
+     "INR": [
+      "1.6",
+      "H"
+     ],
+     "aPTT": [
+      "36",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/08/2025 0315",
+    "comment": "ED - hematemesis",
+    "vals": {
+     "Na": [
+      "131",
+      "L"
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "38",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.6",
+      ""
+     ],
+     "AST": [
+      "58",
+      "H"
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "140",
+      ""
+     ],
+     "TBili": [
+      "2.3",
+      "H"
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "2.7",
+      "L"
+     ],
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "6.9",
+      "L"
+     ],
+     "Hct": [
+      "21",
+      "L"
+     ],
+     "Plt": [
+      "71",
+      "L"
+     ],
+     "MCV": [
+      "97",
+      ""
+     ],
+     "PT": [
+      "20.7",
+      "H"
+     ],
+     "INR": [
+      "1.7",
+      "H"
+     ],
+     "aPTT": [
+      "38",
+      "H"
+     ],
+     "Fib": [
+      "158",
+      "L"
+     ],
+     "Lactate": [
+      "3.1",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/11/2024",
+    "comment": "PCP",
+    "vals": {
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.89",
+      ""
+     ],
+     "Glu": [
+      "108",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ],
+     "AST": [
+      "70",
+      "H"
+     ],
+     "ALT": [
+      "35",
+      ""
+     ],
+     "ALKP": [
+      "135",
+      ""
+     ],
+     "TBili": [
+      "1.7",
+      "H"
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "3.1",
+      "L"
+     ],
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "94",
+      "L"
+     ],
+     "MCV": [
+      "100",
+      ""
+     ],
+     "PT": [
+      "17.1",
+      "H"
+     ],
+     "INR": [
+      "1.4",
+      "H"
+     ],
+     "aPTT": [
+      "37",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "11/18/2023 2240",
+    "comment": "ED - confusion. Ammonia see other.",
+    "vals": {
+     "Na": [
+      "130",
+      "L"
+     ],
+     "K": [
+      "3.3",
+      "L"
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "1.12",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.6",
+      ""
+     ],
+     "AST": [
+      "74",
+      "H"
+     ],
+     "ALT": [
+      "36",
+      ""
+     ],
+     "ALKP": [
+      "145",
+      ""
+     ],
+     "TBili": [
+      "2.6",
+      "H"
+     ],
+     "TProt": [
+      "6.4",
+      ""
+     ],
+     "Alb": [
+      "2.9",
+      "L"
+     ],
+     "WBC": [
+      "9.8",
+      ""
+     ],
+     "Hgb": [
+      "11.9",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      "L"
+     ],
+     "Plt": [
+      "88",
+      "L"
+     ],
+     "MCV": [
+      "100",
+      ""
+     ],
+     "PT": [
+      "19.5",
+      "H"
+     ],
+     "INR": [
+      "1.6",
+      "H"
+     ],
+     "aPTT": [
+      "35",
+      ""
+     ],
+     "USG": [
+      "1.021",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Large",
+      "A"
+     ],
+     "UNit": [
+      "Positive",
+      "A"
+     ]
+    }
+   },
+   {
+    "dt": "02/10/2022",
+    "comment": "Hepatology f/u",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "103",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ],
+     "AST": [
+      "61",
+      "H"
+     ],
+     "ALT": [
+      "33",
+      ""
+     ],
+     "ALKP": [
+      "145",
+      ""
+     ],
+     "TBili": [
+      "1.4",
+      "H"
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "3.3",
+      "L"
+     ],
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "112",
+      "L"
+     ],
+     "MCV": [
+      "98",
+      ""
+     ],
+     "PT": [
+      "15.9",
+      "H"
+     ],
+     "INR": [
+      "1.3",
+      "H"
+     ],
+     "aPTT": [
+      "36",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/06/2021 0500",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "106",
+      "H"
+     ],
+     "Ca": [
+      "8.8",
+      ""
+     ],
+     "AST": [
+      "88",
+      "H"
+     ],
+     "ALT": [
+      "41",
+      ""
+     ],
+     "ALKP": [
+      "152",
+      "H"
+     ],
+     "TBili": [
+      "1.8",
+      "H"
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "2.8",
+      "L"
+     ],
+     "WBC": [
+      "7.5",
+      ""
+     ],
+     "Hgb": [
+      "12.1",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "98",
+      "L"
+     ],
+     "MCV": [
+      "103",
+      "H"
+     ],
+     "PT": [
+      "17.1",
+      "H"
+     ],
+     "INR": [
+      "1.4",
+      "H"
+     ],
+     "aPTT": [
+      "35",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/03/2021 1410",
+    "comment": "Admission - new ascites",
+    "vals": {
+     "Na": [
+      "131",
+      "L"
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "109",
+      "H"
+     ],
+     "Ca": [
+      "8.6",
+      ""
+     ],
+     "AST": [
+      "112",
+      "H"
+     ],
+     "ALT": [
+      "48",
+      ""
+     ],
+     "ALKP": [
+      "164",
+      "H"
+     ],
+     "TBili": [
+      "2.1",
+      "H"
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "2.9",
+      "L"
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "104",
+      "L"
+     ],
+     "MCV": [
+      "104",
+      "H"
+     ],
+     "PT": [
+      "18.3",
+      "H"
+     ],
+     "INR": [
+      "1.5",
+      "H"
+     ],
+     "aPTT": [
+      "37",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/09/2019",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.88",
+      ""
+     ],
+     "Glu": [
+      "108",
+      "H"
+     ],
+     "Ca": [
+      "8.7",
+      ""
+     ],
+     "AST": [
+      "81",
+      "H"
+     ],
+     "ALT": [
+      "44",
+      ""
+     ],
+     "ALKP": [
+      "110",
+      ""
+     ],
+     "TBili": [
+      "1.0",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "WBC": [
+      "7.9",
+      ""
+     ],
+     "Hgb": [
+      "14.0",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "132",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "05/16/2017 0510",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.85",
+      ""
+     ],
+     "Glu": [
+      "121",
+      "H"
+     ],
+     "Ca": [
+      "8.3",
+      "L"
+     ],
+     "WBC": [
+      "10.1",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "140",
+      "L"
+     ],
+     "MCV": [
+      "102",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "05/14/2017 0620",
+    "comment": "Admission - lipase 1,840 (see other)",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "1.05",
+      ""
+     ],
+     "Glu": [
+      "168",
+      "H"
+     ],
+     "Ca": [
+      "8.4",
+      "L"
+     ],
+     "AST": [
+      "142",
+      "H"
+     ],
+     "ALT": [
+      "66",
+      "H"
+     ],
+     "ALKP": [
+      "118",
+      ""
+     ],
+     "TBili": [
+      "1.4",
+      "H"
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "3.7",
+      ""
+     ],
+     "WBC": [
+      "14.2",
+      "H"
+     ],
+     "Hgb": [
+      "14.1",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "151",
+      ""
+     ],
+     "MCV": [
+      "102",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/22/2016",
+    "comment": "PCP annual",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "96",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "98",
+      "H"
+     ],
+     "ALT": [
+      "51",
+      ""
+     ],
+     "ALKP": [
+      "102",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "14.6",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "168",
+      ""
+     ],
+     "MCV": [
+      "103",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "288",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "05/14/2017",
+    "Lipase",
+    "1,840 U/L (ref 13-60)",
+    "H"
+   ],
+   [
+    "08/03/2021",
+    "Hepatitis panel",
+    "HAV IgG neg, HBsAg neg, anti-HBs neg, anti-HBc neg, HCV Ab neg",
+    ""
+   ],
+   [
+    "08/03/2021",
+    "Ascitic fluid",
+    "SAAG 2.2, total protein 0.9 g/dL, PMN 60/mm3, culture no growth",
+    ""
+   ],
+   [
+    "08/03/2021",
+    "Ethanol, serum",
+    "Not detected",
+    ""
+   ],
+   [
+    "11/18/2023",
+    "Ammonia",
+    "118 umol/L (ref 11-51)",
+    "H"
+   ],
+   [
+    "11/18/2023",
+    "Urine culture",
+    ">100,000 CFU/mL E. coli, pan-sensitive except TMP-SMX",
+    "A"
+   ],
+   [
+    "03/08/2025",
+    "Type and crossmatch",
+    "2 units PRBC transfused 03/08/2025",
+    ""
+   ],
+   [
+    "09/15/2025",
+    "Alpha-fetoprotein",
+    "4.1 ng/mL",
+    ""
+   ],
+   [
+    "09/15/2025",
+    "Anti-HBs",
+    ">1000 mIU/mL (immune)",
+    ""
+   ],
+   [
+    "08/11/2026",
+    "Alpha-fetoprotein",
+    "5.0 ng/mL",
+    ""
+   ],
+   [
+    "08/11/2026",
+    "Phosphatidylethanol (PEth), blood",
+    "286 ng/mL (ref <20; >200 consistent with heavy consumption)",
+    "H"
+   ],
+   [
+    "09/12/2026",
+    "Ethanol, serum",
+    "180 mg/dL",
+    "H"
+   ],
+   [
+    "09/12/2026",
+    "Urine drug screen",
+    "Negative",
+    ""
+   ],
+   [
+    "10/20/2026",
+    "Ascitic fluid",
+    "Cell count: WBC 180/mm3, PMN 22/mm3; total protein 0.8 g/dL; albumin 0.4 g/dL; culture no growth at 72 h",
+    ""
+   ],
+   [
+    "10/23/2026",
+    "Type and screen",
+    "O positive, antibody screen negative",
+    ""
+   ],
+   [
+    "10/23/2026",
+    "Ammonia",
+    "64 umol/L (ref 11-51)",
+    "H"
+   ],
+   [
+    "10/27/2026",
+    "Fingerstick glucose",
+    "91 mg/dL at 1000",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "05/14/2017",
+   "CT Abdomen/Pelvis with contrast",
+   "Peripancreatic fat stranding and fluid consistent with acute interstitial edematous pancreatitis. No necrosis. Hepatic steatosis. Small umbilical fat-containing hernia. Impression: Acute pancreatitis without necrosis.",
+   "L. Greer, MD"
+  ],
+  [
+   "08/03/2021",
+   "US Abdomen complete with Doppler",
+   "Liver coarsened, nodular contour. Moderate ascites. Spleen 14.8 cm. Portal vein patent, hepatopetal flow, velocity 18 cm/s. Gallbladder wall thickening attributed to ascites. Impression: Cirrhotic morphology with splenomegaly and ascites.",
+   "K. Barnhill, MD"
+  ],
+  [
+   "08/04/2021",
+   "XR Chest 2 views",
+   "Lungs clear. No effusion. Heart size normal. Impression: No acute disease.",
+   "K. Barnhill, MD"
+  ],
+  [
+   "11/19/2023",
+   "CT Head without contrast",
+   "No hemorrhage, mass, or infarct. Mild generalized volume loss, advanced for age. Impression: No acute intracranial abnormality.",
+   "D. Fenwick, MD"
+  ],
+  [
+   "03/08/2025",
+   "XR Chest portable",
+   "ETT tip 4 cm above carina. OG tube in stomach. Lungs clear. Impression: Lines/tubes as above.",
+   "D. Fenwick, MD"
+  ],
+  [
+   "09/15/2025",
+   "MRI Abdomen liver protocol with contrast",
+   "Cirrhotic liver. 9 mm segment VI arterially enhancing focus without washout or capsule, LI-RADS 3. Moderate ascites. Splenomegaly 16.1 cm. Recanalized paraumbilical vein. Small umbilical hernia containing fluid and fat. Impression: LI-RADS 3 observation; repeat imaging 3-6 months.",
+   "A. Ostrowski, MD"
+  ],
+  [
+   "02/12/2026",
+   "US Abdomen limited (HCC surveillance)",
+   "Nodular liver. No discrete mass. Segment VI observation not seen by US. Moderate ascites. Impression: No US evidence of HCC; MRI recommended per LI-RADS follow-up.",
+   "K. Barnhill, MD"
+  ],
+  [
+   "09/12/2026",
+   "CT Head without contrast",
+   "Left parietal scalp hematoma. No intracranial hemorrhage. No calvarial fracture. Impression: No acute intracranial abnormality.",
+   "R. Vance, MD"
+  ],
+  [
+   "09/12/2026",
+   "CT Cervical spine without contrast",
+   "No fracture or malalignment. Multilevel spondylosis C5-C7. Impression: No acute fracture.",
+   "R. Vance, MD"
+  ],
+  [
+   "10/16/2026",
+   "US Abdominal wall (umbilicus)",
+   "2.1 cm fascial defect at umbilicus containing omentum and ascitic fluid; overlying skin thinned to 2 mm. Bowel not seen within sac. Peristalsis normal in adjacent loops. Impression: Umbilical hernia with omental content; partially reducible with probe pressure.",
+   "A. Ostrowski, MD"
+  ],
+  [
+   "10/20/2026",
+   "US-guided paracentesis",
+   "Large-volume paracentesis left lower quadrant, 5.0 L clear straw-colored fluid removed. Albumin 25% 40 g given per protocol. No complications. Post-procedure moderate residual ascites.",
+   "M. Leclair, MD (IR)"
+  ],
+  [
+   "10/23/2026",
+   "XR Chest 2 views",
+   "Small right pleural effusion, new from 2021. Lungs otherwise clear. Heart size normal. Elevation of right hemidiaphragm. Impression: Small right pleural effusion, possibly hepatic hydrothorax in this patient with cirrhosis.",
+   "L. Greer, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "05/14/2017",
+   "ECG 12-lead",
+   "Sinus tachycardia 108. Normal axis. QTc 452. No ST changes.",
+   "B. Hensley, MD",
+   {
+    "rate": 108,
+    "pr": 148,
+    "qrs": 88,
+    "qtc": 452,
+    "axis": 55
+   }
+  ],
+  [
+   "03/08/2025",
+   "ECG 12-lead",
+   "Sinus tachycardia 122. Low voltage limb leads. QTc 488. No acute ST changes.",
+   "B. Hensley, MD",
+   {
+    "rate": 122,
+    "pr": 142,
+    "qrs": 88,
+    "qtc": 488,
+    "axis": 55,
+    "lowvLimb": 1
+   }
+  ],
+  [
+   "09/30/2025",
+   "Echocardiogram, transthoracic with agitated saline",
+   "LVEF 65-70%, hyperdynamic. Normal LV size. Grade I diastolic dysfunction. RV normal size and function, TAPSE 2.4 cm. RVSP 28 mm Hg. Agitated saline: no early or late bubbles (no intracardiac or intrapulmonary shunt). Trivial pericardial effusion. Impression: Normal biventricular function; no evidence of portopulmonary hypertension or hepatopulmonary shunt.",
+   "C. Ferraro, MD"
+  ],
+  [
+   "09/30/2025",
+   "ABG room air (transplant screening)",
+   "pH 7.44, PaCO2 33, PaO2 86, A-a gradient 20 mm Hg. Impression: Mild respiratory alkalosis; no hypoxemia.",
+   "Pulmonary Function Lab"
+  ],
+  [
+   "10/23/2026",
+   "ECG 12-lead",
+   "Sinus bradycardia 58. Normal axis. PR 172. QTc 481. Nonspecific T-wave flattening. Compared with 03/2025: rate slower, QTc similar.",
+   "B. Hensley, MD",
+   {
+    "rate": 58,
+    "pr": 172,
+    "qrs": 90,
+    "qtc": 481,
+    "axis": 55,
+    "tmod": {
+     "I": 0.3,
+     "II": 0.3,
+     "aVF": 0.3,
+     "V4": 0.35,
+     "V5": 0.3,
+     "V6": 0.3
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "03/22/2016",
+   "Clinic - PCP annual",
+   "Morristown Family Practice",
+   "Annual exam; elevated LFTs, heavy alcohol use",
+   "Counseled; declined referral"
+  ],
+  [
+   "05/14/2017",
+   "Inpatient admission (3 days)",
+   "C-N University Hospital",
+   "Acute alcoholic pancreatitis",
+   "Discharged home; CIWA required lorazepam day 2"
+  ],
+  [
+   "04/09/2019",
+   "Clinic - PCP",
+   "Morristown Family Practice",
+   "Back pain, BP check",
+   "Tramadol PRN"
+  ],
+  [
+   "08/03/2021",
+   "Inpatient admission (5 days)",
+   "C-N University Hospital",
+   "New-onset ascites; cirrhosis diagnosed",
+   "Discharged on diuretics; IOP referral"
+  ],
+  [
+   "02/10/2022",
+   "Clinic - Hepatology",
+   "C-N Liver Clinic",
+   "Cirrhosis follow-up",
+   "Stable; abstinent per pt"
+  ],
+  [
+   "11/18/2023",
+   "Inpatient admission (4 days)",
+   "C-N University Hospital",
+   "Hepatic encephalopathy grade 2, E. coli UTI",
+   "Discharged on lactulose + rifaximin"
+  ],
+  [
+   "06/11/2024",
+   "Clinic - PCP",
+   "Morristown Family Practice",
+   "Follow-up",
+   "Reports quitting alcohol this month"
+  ],
+  [
+   "03/08/2025",
+   "Inpatient admission, MICU (6 days)",
+   "C-N University Hospital",
+   "Esophageal variceal hemorrhage",
+   "EVL, 2 u PRBC, intubated 1 day; discharged home"
+  ],
+  [
+   "07/22/2025",
+   "Outpatient endoscopy (3rd of 3, 04-07/2025)",
+   "C-N University Hospital",
+   "Surveillance EVL",
+   "Varices eradicated 07/2025"
+  ],
+  [
+   "09/15/2025",
+   "Clinic - Hepatology",
+   "C-N Liver Clinic",
+   "Transplant candidacy discussion",
+   "Referral contingent on documented abstinence"
+  ],
+  [
+   "08/11/2026",
+   "Clinic - Hepatology",
+   "C-N Liver Clinic",
+   "Cirrhosis follow-up",
+   "Diuretics increased; PEth sent"
+  ],
+  [
+   "09/12/2026",
+   "ED visit",
+   "C-N University Hospital",
+   "Fall at home, scalp laceration",
+   "Laceration repaired (staples); discharged to sister"
+  ],
+  [
+   "09/24/2026",
+   "Clinic - Hepatology (NP)",
+   "C-N Liver Clinic",
+   "Hyponatremia/AKI",
+   "Diuretics reduced"
+  ],
+  [
+   "10/16/2026",
+   "Clinic - General Surgery",
+   "C-N Surgical Associates",
+   "Painful umbilical hernia",
+   "Scheduled for repair 10/27"
+  ],
+  [
+   "10/20/2026",
+   "Outpatient procedure - IR",
+   "C-N University Hospital",
+   "Large-volume paracentesis",
+   "5.0 L removed"
+  ],
+  [
+   "10/23/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop evaluation",
+   "Cleared to proceed per surgery/hepatology"
+  ]
+ ],
+ "notes": [
+  [
+   "03/22/2016 1015",
+   "Progress Note",
+   "Family Medicine",
+   "M. Ledford, MD",
+   "Annual exam. 47M truck driver. Drinks \"a case on my days off, 6-8 on work nights.\" AUDIT-C 11. LFTs: AST 98, ALT 51 (AST:ALT ~2), MCV 103, TG 288. Exam: no stigmata of chronic liver disease, no hepatomegaly appreciated. A/P: Alcohol use disorder, likely alcoholic fatty liver. Counseled at length; declined naltrexone and declined referral. Hep A/B vaccines offered - declined today. Recheck LFTs 6 mo. Flu shot given."
+  ],
+  [
+   "05/16/2017 1130",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "P. Okonkwo, MD",
+   "Admit 05/14 - D/C 05/17. Dx: acute alcoholic pancreatitis (lipase 1,840, CT without necrosis). Last drink morning of admission. Required CIWA protocol, lorazepam 2 mg x3 doses on HD2 for tremor/tachycardia/diaphoresis (max CIWA 17); no seizures, no DTs. NPO then advanced to low-fat diet. Discharged on thiamine, folate. Strongly advised abstinence. F/u PCP 2 wk."
+  ],
+  [
+   "04/09/2019 1420",
+   "Progress Note",
+   "Family Medicine",
+   "M. Ledford, MD",
+   "Low back pain after long haul, no red flags. BP 138/86. States cut down to \"weekends only.\" Tramadol 50 mg PRN #30. Colonoscopy discussed - declined. Platelets 132, trending down from 168 in 2016 - will monitor."
+  ],
+  [
+   "08/07/2021 1000",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "H. Carver, DO",
+   "Admit 08/03 - D/C 08/08. Presented with 3 wk abdominal distension, 18 lb weight gain. Dx: decompensated alcohol-associated cirrhosis with new ascites. Diagnostic/therapeutic paracentesis 4.2 L: SAAG 2.2, PMN 60 (no SBP). Viral hepatitis neg. MELD 15 on admission. Ethanol not detected on arrival; pt reported last drink 2 days PTA; CIWA max 9, no benzodiazepines needed. Started spironolactone 100 / furosemide 40, 2 g Na diet. Hep A/B vaccine series started. GI referral for variceal screening (pt did not schedule). IOP referral placed. Stopped tramadol and NSAIDs."
+  ],
+  [
+   "08/06/2021 1530",
+   "Social Work",
+   "Case Management",
+   "D. Kincaid, LCSW",
+   "Met with pt re alcohol use. Pt tearful, states \"this scared me.\" Agreeable to Cornerstone IOP (6 wk). Lives alone; sister Rhonda involved. Discussed driving/CDL - pt aware he will not return to commercial driving. Disability application information provided."
+  ],
+  [
+   "02/10/2022 1340",
+   "Progress Note",
+   "Hepatology",
+   "R. Sandoval, MD",
+   "Cirrhosis f/u. Completed IOP 11/2021, reports abstinent since 08/2021. Ascites controlled on diuretics. No HE. EGD screening still not done - rescheduled (pt cancelled x2 for transport). CTP A (6) today: bili 1.4, alb 3.3, INR 1.3, minimal ascites on diuretics, no HE. MELD 11. HCC surveillance US q6mo ordered."
+  ],
+  [
+   "09/14/2022 1100",
+   "Progress Note",
+   "Dermatology",
+   "E. Lowery, PA-C",
+   "Itchy rough spots on back. Exam: 4 stuck-on brown papules on back consistent with seborrheic keratoses. Several spider angiomata upper chest noted. Reassurance; cryotherapy x2 irritated lesions. No f/u needed."
+  ],
+  [
+   "11/21/2023 1415",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "A. Whitfield, MD",
+   "Admit 11/18 - D/C 11/22. Brought by sister for confusion, somnolence x2 days. West Haven grade 2 HE, ammonia 118 (not used for management). Precipitants: constipation (no BM x4 days, not taking lactulose regularly) and E. coli cystitis. Diagnostic paracentesis neg for SBP. Treated with lactulose titration and ceftriaxone, transitioned to cefpodoxime. Added rifaximin 550 BID for secondary prophylaxis. Back to baseline HD3. Pt denies alcohol use. Discharged home with sister."
+  ],
+  [
+   "06/11/2024 0945",
+   "Progress Note",
+   "Family Medicine",
+   "M. Ledford, MD",
+   "F/u. Pt states he \"quit for good this month\" after brother was hospitalized. Admits relapse 2022-2024, \"a 12-pack most days.\" Encouraged; AA info given. Labs: plt 94, INR 1.4. Continues lactulose/rifaximin. Smoking 1/2 ppd, not ready to quit. Nicotine patch Rx (pt unlikely to use)."
+  ],
+  [
+   "03/11/2025 1610",
+   "Discharge Summary",
+   "Critical Care / Hospital Medicine",
+   "N. Fairchild, MD",
+   "Admit 03/08 - D/C 03/14. Presented with hematemesis x3, Hgb 6.9, HR 120s, BP 88/50. Intubated in MICU for airway protection prior to EGD (RSI etomidate/succinylcholine, MAC 4, grade 1 view, 7.5 ETT, uneventful). EGD: large esophageal varices with stigmata of recent bleeding (white nipple sign); 5 bands placed. Octreotide x72 h, ceftriaxone 1 g daily x5 d then cipro to complete 7 d, 2 u PRBC (target Hgb 7-8). Extubated HD2. CIWA scoring: max 6, no withdrawal; pt reports no alcohol since 06/2024. Started nadolol (later changed to propranolol) plus serial EVL for secondary prophylaxis. Pantoprazole x course post-banding."
+  ],
+  [
+   "07/22/2025 1015",
+   "Procedure Note",
+   "Gastroenterology",
+   "R. Sandoval, MD",
+   "EGD with EVL #4 under MAC (propofol, nasal cannula). Small residual grade 1 varices distal esophagus, 2 bands placed. No gastric varices. Mild portal hypertensive gastropathy. Varices considered eradicated. Repeat EGD 6-12 months. Continue propranolol 20 BID (HR goal 55-65)."
+  ],
+  [
+   "09/15/2025 1430",
+   "Progress Note",
+   "Hepatology",
+   "R. Sandoval, MD",
+   "Transplant discussion. CTP B (8): bili 1.9 (2), alb 3.1 (2), INR 1.4 (1), mild-moderate ascites on diuretics (2), HE controlled on rx (1 - none on exam, on prophylaxis). MELD 14. MRI: LI-RADS 3 segment VI. TTE/ABG screening done - no POPH/HPS. Explained that transplant referral requires documented sustained abstinence, engagement in AUD treatment, and random PEth testing. Pt states abstinent since 06/2024. Sister present, supportive. Plan: PEth at next visits, f/u 6 mo."
+  ],
+  [
+   "02/12/2026 1110",
+   "Telephone Encounter",
+   "Hepatology",
+   "L. Mabry, RN",
+   "Pt called for lactulose and rifaximin refills. Rifaximin prior auth renewed (BlueCare). Reminded of MRI due 3/2026; pt states he cannot afford gas this month. Sister will call to schedule."
+  ],
+  [
+   "05/06/2026 0930",
+   "Dietitian",
+   "Nutrition Services",
+   "K. Ellison, RD",
+   "Referral for cirrhosis nutrition. Wt 81 kg (with ascites), est dry wt ~75 kg. Grip strength reduced, temporal wasting mild - moderate malnutrition (sarcopenia likely). Goals: protein 1.2-1.5 g/kg dry wt, 35 kcal/kg, 2 g Na, do not restrict protein, late-evening snack, avoid fasting >6 h. Pt eats one meal a day plus snacks. Provided handouts."
+  ],
+  [
+   "08/11/2026 1500",
+   "Progress Note",
+   "Hepatology",
+   "J. Whitlock, NP",
+   "Cirrhosis f/u. Wt up 4 kg, increased abdominal girth, umbilical bulge. Pt reports adherence to diuretics and lactulose (2-3 BMs/day). States no alcohol since 06/2024. Exam: tense-ish ascites, small soft reducible umbilical hernia, no asterixis, scleral icterus. Labs: Na 130, Cr 0.9, bili 2.1, alb 2.9, INR 1.5, plt 76. CTP B (9): bili 2, alb 2, INR 1, ascites 2, HE 2 (on meds). MELD 14. Plan: increase spironolactone 200/furosemide 80. PEth today per transplant pathway. MRI ordered (LI-RADS 3 follow-up, still not done). Umbilical hernia: discussed risk of incarceration/rupture; will refer to surgery if symptomatic. RTC 6 wk."
+  ],
+  [
+   "08/14/2026 0812",
+   "Result Note",
+   "Hepatology",
+   "J. Whitlock, NP",
+   "PEth 286 ng/mL. Will address in person at next visit; transplant referral on hold. Routed to Dr. Sandoval."
+  ],
+  [
+   "09/12/2026 2350",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "C. Navarro, MD",
+   "Fall down 3 porch steps tonight, struck head, no LOC per pt. Brought by EMS (neighbor called). Smells of alcohol, slurred speech, ambulatory with assist. GCS 14 (E4V4M6). 4 cm L parietal scalp lac. Serum ethanol 180 mg/dL. Pt states he \"had two beers at a cookout.\" Glucose 88. CT head/C-spine neg. INR 1.6, plt 70. Lac repaired with 5 staples. Tdap given. CIWA 4 at 0300. Observed until clinically sober; ambulating steadily, discharged to sister 0540. Staple removal 7-10 d PCP. Advised alcohol cessation; resources given."
+  ],
+  [
+   "09/13/2026 0035",
+   "Nursing Note",
+   "Emergency Medicine",
+   "B. Lattimore, RN",
+   "Pt resting on stretcher, sister at bedside. Sister states pt \"has been drinking again since summer, he hides it.\" Pt became upset and asked her to leave. Scalp lac dressing dry/intact."
+  ],
+  [
+   "09/24/2026 1350",
+   "Progress Note",
+   "Hepatology",
+   "J. Whitlock, NP",
+   "Lab f/u: Na 126, Cr 1.41 (from 0.9). Likely diuretic-induced AKI/hyponatremia. Reduced spironolactone to 100 and furosemide to 40. Fluid restriction 1.5 L. Recheck BMP 2 wk. Pt did not bring up ED visit; PEth result not discussed (pt left before provider returned - transport). Rescheduled."
+  ],
+  [
+   "10/16/2026 1105",
+   "Consult",
+   "General Surgery",
+   "S. Brannigan, MD",
+   "Referred by hepatology for painful umbilical hernia. Pain 6/10 x10 days, worse with cough, only partially reducible in clinic, skin over hernia thin and shiny without ulceration or leak. No N/V, normal BMs (on lactulose). US: 2.1 cm defect with omentum. PMH cirrhosis, Child B per hepatology 8/2026, MELD ~14-16. Social: former drinker, quit 2024. A/P: Symptomatic incarcerating umbilical hernia with ascites. Risk of strangulation and spontaneous rupture (Flood syndrome) outweighs elective deferral. Plan: LVP by IR next week to control ascites, then open repair 10/27. Discussed higher risk of recurrence, ascitic leak, wound complications, decompensation, and mortality in cirrhosis. Pt agrees."
+  ],
+  [
+   "10/20/2026 1115",
+   "Procedure Note",
+   "Interventional Radiology",
+   "M. Leclair, MD",
+   "US-guided LVP LLQ, 5.0 L removed. Albumin 25% 40 g IV. Fluid sent. Pre-procedure INR 1.7, plt 69 - no transfusion per society guidance for paracentesis. No bleeding. Tolerated well."
+  ],
+  [
+   "10/23/2026 1130",
+   "Anesthesia Preop Note",
+   "Preadmission Testing",
+   "G. Lindqvist, CRNA",
+   "PAT visit. 57M cirrhosis for open umbilical hernia repair. ETOH: former heavy use, quit 06/2024 per pt. Smoker. METs ~4 (walks mailbox and back, limited by abdominal distension). Airway: MP II, TMD 6 cm, full dentition with several broken molars, neck ROM full. Prior anesthetics: MICU intubation 2025 grade 1 per DS; MAC EGDs uneventful. Labs: Na 128, plt 68, INR 1.7, fibrinogen 142, alb 2.6. ECG QTc 481. CXR small R effusion. Plan GA with RSI (ascites, full stomach precautions). T&C 2 u. Consider viscoelastic testing. Day-of-surgery BMP/CBC. Continue propranolol, rifaximin, PPI AM of surgery; hold diuretics."
+  ],
+  [
+   "10/23/2026 1210",
+   "Pharmacy Note",
+   "Pharmacy",
+   "S. Rhee, PharmD",
+   "Med rec completed with pt and sister by phone. Note: pt receives lactulose 30 mL BID but takes \"when I remember.\" Acetaminophen limited to 2 g/day. Thiamine listed as home med; no inpatient thiamine order present - recommend thiamine 100 mg IV before any dextrose. Rifaximin supply OK. Recommend avoiding benzodiazepines when possible given HE history."
+  ],
+  [
+   "10/26/2026 1430",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "T. Ogle, RN",
+   "Preop call. Arrive 0930. NPO solids after midnight, clears until 1130. Take propranolol, rifaximin, pantoprazole AM with sip of water. Hold spironolactone and furosemide AM. Take lactulose tonight. Sister driving and staying. Pt verbalized understanding."
+  ],
+  [
+   "06/30/2026 1622",
+   "Patient Message",
+   "Hepatology",
+   "Treadway, Dwayne (patient)",
+   "Can I get a handicap parking sticker form filled out. Walking from the parking deck is hard with my belly. Thank you."
+  ],
+  [
+   "07/02/2026 0910",
+   "Letter",
+   "Hepatology",
+   "J. Whitlock, NP",
+   "Disabled parking placard medical certification completed and mailed to patient."
+  ],
+  [
+   "10/27/2026 1020",
+   "H&P (Interval Update)",
+   "General Surgery",
+   "T. Burchett, PA-C",
+   "H&P of 10/16 reviewed, pt examined, no interval change except mild increase in hernia tenderness. Abdomen: moderate ascites (reaccumulating), umbilical hernia tender, partially reducible. Child B cirrhosis, MELD 16. Quit alcohol 2024. Consent signed. Site N/A (midline). Proceed as planned."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/22/2016 1000",
+   "142/88",
+   84,
+   16,
+   98,
+   36.8,
+   92.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "05/14/2017 0530",
+   "154/96",
+   112,
+   20,
+   96,
+   37.6,
+   90.0,
+   "9/10",
+   "ED"
+  ],
+  [
+   "08/03/2021 1330",
+   "118/72",
+   92,
+   18,
+   97,
+   36.9,
+   89.1,
+   "3/10",
+   "ED"
+  ],
+  [
+   "11/18/2023 2200",
+   "104/62",
+   88,
+   16,
+   95,
+   37.4,
+   82.4,
+   "0/10",
+   "ED"
+  ],
+  [
+   "03/08/2025 0300",
+   "88/50",
+   122,
+   22,
+   96,
+   36.5,
+   null,
+   "2/10",
+   "ED"
+  ],
+  [
+   "09/15/2025 1415",
+   "108/66",
+   62,
+   16,
+   97,
+   36.7,
+   79.8,
+   "0/10",
+   "Hepatology"
+  ],
+  [
+   "08/11/2026 1440",
+   "102/64",
+   66,
+   16,
+   96,
+   36.6,
+   87.6,
+   "3/10",
+   "Hepatology"
+  ],
+  [
+   "09/12/2026 2310",
+   "126/78",
+   98,
+   18,
+   95,
+   36.4,
+   null,
+   "5/10",
+   "ED"
+  ],
+  [
+   "09/24/2026 1335",
+   "96/58",
+   64,
+   16,
+   96,
+   36.7,
+   86.9,
+   "2/10",
+   "Hepatology"
+  ],
+  [
+   "10/16/2026 1045",
+   "104/60",
+   64,
+   18,
+   95,
+   36.8,
+   88.8,
+   "6/10",
+   "Surgery clinic"
+  ],
+  [
+   "10/20/2026 1130",
+   "98/56",
+   66,
+   16,
+   97,
+   36.6,
+   83.6,
+   "3/10",
+   "IR post-LVP"
+  ],
+  [
+   "10/23/2026 1035",
+   "100/62",
+   60,
+   16,
+   96,
+   36.7,
+   84.9,
+   "5/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0950",
+   "102/64",
+   64,
+   18,
+   96,
+   36.7,
+   84.2,
+   "6/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units PRBC",
+   "10/23/2026 1040",
+   "Resulted - crossmatched"
+  ],
+  [
+   "BMP, CBC day of surgery",
+   "10/23/2026",
+   "Resulted"
+  ],
+  [
+   "NPO after midnight, clears until 1130",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0945",
+   "Active"
+  ],
+  [
+   "Point-of-care glucose on arrival and q2h while NPO",
+   "10/27/2026 0945",
+   "Active"
+  ],
+  [
+   "Admit to step-down post-op, hepatology consult",
+   "10/27/2026 0945",
+   "Active (post-op)"
+  ],
+  [
+   "Albumin 25% 25 g IV post-op x1",
+   "10/27/2026 0945",
+   "Active (post-op)"
+  ],
+  [
+   "SCDs",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "CIWA-Ar protocol",
+   "",
+   "Not ordered"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "History of transfusion 03/2025 (2 units). FFP and platelets not prepared; blood bank can thaw plasma in ~30 min.",
+  "specimen_expires": "10/26/2026 2359 - REDRAWN 10/27 1005, expires 10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: open umbilical hernia repair, possible mesh",
+   "Signed 10/16/2026, confirmed 10/27/2026"
+  ],
+  [
+   "Blood product consent",
+   "Signed 10/23/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file. Pt states sister Rhonda should make decisions if he cannot.",
+ "anesthesia_history": [
+  [
+   "1998",
+   "ORIF right ankle",
+   "GA, ETT",
+   "No problems per pt",
+   "Morristown-Hamblen Hospital"
+  ],
+  [
+   "03/2025",
+   "Emergent EGD/EVL",
+   "RSI in MICU (etomidate/succinylcholine), MAC 4 grade 1, 7.5 ETT",
+   "Extubated HD2, uneventful",
+   "C-N University Hospital"
+  ],
+  [
+   "04/2025-07/2025",
+   "EGD with EVL x3",
+   "MAC, propofol infusion, nasal cannula",
+   "Uneventful",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0935",
+  "npo_solids": "10/26/2026 2200 (sandwich)",
+  "npo_clears": "10/27/2026 0700 water with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/16, updated today)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A midline"
+   ],
+   [
+    "Allergy band",
+    "Done - sulfa"
+   ],
+   [
+    "Blood available",
+    "2 u crossmatched"
+   ],
+   [
+    "Labs reviewed",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "57M A&O x4, slow to answer some questions but appropriate. Mild jaundice. Abdomen distended, firm, umbilical hernia tender to touch, skin intact, no drainage. Small ecchymoses bilateral forearms. Healed scalp lac. Last BM this AM x2 (lactulose). Denies alcohol \"since 2024.\" Smoked 1 cigarette this AM. Mild hand tremor noted, pt states \"I always shake a little.\" Sister at bedside. 20 g R forearm on 2nd attempt, LR KVO.",
+  "iv": "20 g R forearm",
+  "glucose": "91 mg/dL (1000)"
+ },
+ "label": "D. Treadway",
+ "bmi": "26.6"
+}

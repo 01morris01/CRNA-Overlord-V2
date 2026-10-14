@@ -1,0 +1,151 @@
+{
+ "id": "p13",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "5 week old ex 35 weeker with pyloric stenosis and electrolytes still not at target, a father who had masseter rigidity and fever under anesthesia, active vomiting with no gastric tube, and prior apnea of prematurity.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Dehydration with metabolic alkalosis, ex premature infant, possible MH susceptibility."
+ },
+ "decision": {
+  "recommendation": "delay until electrolytes are corrected",
+  "rationale": "Pyloric stenosis is a medical emergency, not a surgical one. Hospitalist targets (Cl 100 or more, HCO3 under 30, normal K) are not met; alkalosis raises postoperative apnea risk. Do not keep the 1300 slot unless the 1200 BMP meets target."
+ },
+ "redFlags": [
+  {
+   "id": "lytes",
+   "severity": "critical",
+   "finding": "Alkalosis and electrolytes not corrected",
+   "evidence": "Cl 93, HCO3 33, K 3.2, pH 7.49; BMP pending 1200; surgeon asking to keep 1300.",
+   "implication": "Metabolic alkalosis causes postoperative hypoventilation and apnea.",
+   "action": "Continue resuscitation, proceed only after targets are met.",
+   "keywords": [
+    "alkalosis",
+    "chloride",
+    "bicarbonate",
+    "potassium",
+    "electrolytes",
+    "correct"
+   ]
+  },
+  {
+   "id": "mh",
+   "severity": "critical",
+   "finding": "Father with probable MH event",
+   "evidence": "Father: high fever and stiff jaw during childhood ear surgery, surgery stopped, never tested.",
+   "implication": "Treat infant as MH susceptible.",
+   "action": "Trigger free anesthetic (no succinylcholine, no volatile agents), prepared machine, dantrolene available.",
+   "keywords": [
+    "malignant hyperthermia",
+    "mh",
+    "masseter",
+    "trigger free",
+    "dantrolene",
+    "tiva",
+    "father"
+   ]
+  },
+  {
+   "id": "stomach",
+   "severity": "critical",
+   "finding": "Full stomach without gastric decompression",
+   "evidence": "Vomited at 0930 despite NPO; no NG or OG ordered; distended fluid filled stomach on US.",
+   "implication": "Aspiration at induction.",
+   "action": "Pass OG and suction (supine, lateral, prone) before induction; RSI with rocuronium.",
+   "keywords": [
+    "og",
+    "ng",
+    "orogastric",
+    "suction",
+    "rsi",
+    "aspiration"
+   ]
+  },
+  {
+   "id": "apnea",
+   "severity": "major",
+   "finding": "Postoperative apnea risk",
+   "evidence": "35 weeks GA, now about 40 weeks PMA; A&B spells with caffeine in NICU; postop apnea monitoring not ordered.",
+   "implication": "Apnea after anesthesia, worse with alkalosis and opioids.",
+   "action": "Avoid opioids (acetaminophen and local), continuous apnea and oximetry monitoring overnight.",
+   "keywords": [
+    "apnea",
+    "postconceptual",
+    "postmenstrual",
+    "monitor",
+    "caffeine",
+    "ex premature"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "minor",
+   "finding": "Mild micrognathia",
+   "evidence": "NICU and surgical exams.",
+   "implication": "Possible difficult laryngoscopy.",
+   "action": "Difficult airway equipment sized for neonates.",
+   "keywords": [
+    "micrognathia",
+    "difficult airway"
+   ]
+  },
+  {
+   "id": "glucose",
+   "severity": "minor",
+   "finding": "Hypoglycemia risk",
+   "evidence": "NPO, D5 maintenance running, neonatal hypoglycemia history.",
+   "implication": "Intraoperative hypoglycemia if dextrose stopped.",
+   "action": "Continue dextrose containing fluid, check glucose.",
+   "keywords": [
+    "glucose",
+    "dextrose",
+    "hypoglycemia"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "OG suction then RSI with rocuronium (no succinylcholine)",
+   "keywords": [
+    "rocuronium",
+    "rsi",
+    "og"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Trigger free TIVA or non triggering technique",
+   "keywords": [
+    "tiva",
+    "propofol"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Acetaminophen and surgeon local, avoid opioids",
+   "keywords": [
+    "acetaminophen",
+    "local",
+    "avoid opioid"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Temperature management and warming",
+   "keywords": [
+    "warming",
+    "temperature"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Continuous apnea monitoring overnight",
+   "keywords": [
+    "apnea monitor",
+    "oximetry"
+   ]
+  }
+ ],
+ "boothComplications": []
+}

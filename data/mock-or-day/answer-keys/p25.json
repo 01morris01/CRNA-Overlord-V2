@@ -1,0 +1,111 @@
+{
+ "id": "p25",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "BMI 44 with untreated moderate OSA for EGD plus colonoscopy under propofol MAC, on tirzepatide (last dose 3 days ago) with worsening fullness and regurgitation, and the GI med list never mentions it.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "BMI over 40, untreated OSA, T2DM, HTN."
+ },
+ "decision": {
+  "recommendation": "do not proceed with unprotected deep sedation",
+  "rationale": "Active GI symptoms on a GLP-1/GIP agonist mean a likely full stomach. Either convert to GA with RSI and an ETT or postpone with the drug held per current guidance."
+ },
+ "redFlags": [
+  {
+   "id": "glp1",
+   "severity": "critical",
+   "finding": "Tirzepatide with symptoms of delayed gastric emptying",
+   "evidence": "Weekly tirzepatide 10 mg, last 10/24; 10/25 message: full after a few bites, food sits, burping at night; queasy today and burped up prep; not on GI med list.",
+   "implication": "Aspiration risk under propofol, especially with an upper endoscopy.",
+   "action": "RSI with ETT (or gastric ultrasound to decide) or postpone; update med list.",
+   "keywords": [
+    "tirzepatide",
+    "mounjaro",
+    "glp",
+    "gastric",
+    "full stomach",
+    "rsi",
+    "aspiration",
+    "gastric ultrasound"
+   ]
+  },
+  {
+   "id": "osa_airway",
+   "severity": "major",
+   "finding": "Untreated moderate OSA, BMI 44, neck 49 cm, prior PACU hypoxemia",
+   "evidence": "AHI 28, nadir 79%, CPAP returned; 2011 needed face mask for an hour.",
+   "implication": "Obstruction and desaturation under deep sedation in lateral position.",
+   "action": "If sedation: HFNC or nasal airway, capnography, experienced airway backup; GA may be safer.",
+   "keywords": [
+    "osa",
+    "obstruction",
+    "hfnc",
+    "high flow",
+    "nasal airway",
+    "capnography"
+   ]
+  },
+  {
+   "id": "angioedema",
+   "severity": "minor",
+   "finding": "ACE inhibitor angioedema, now on losartan",
+   "evidence": "Lisinopril lip swelling 2017.",
+   "implication": "Small risk of angioedema with ARBs; airway awareness.",
+   "action": "Note; no change today.",
+   "keywords": [
+    "angioedema",
+    "losartan"
+   ]
+  },
+  {
+   "id": "glucose",
+   "severity": "minor",
+   "finding": "Diabetes management during prep",
+   "evidence": "Glipizide held, glucose 132.",
+   "implication": "Hypoglycemia risk is addressed.",
+   "action": "Recheck glucose.",
+   "keywords": [
+    "glipizide",
+    "glucose"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "GA with RSI and ETT for the upper endoscopy",
+   "keywords": [
+    "ett",
+    "rsi",
+    "general"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Capnography; ramped positioning",
+   "keywords": [
+    "capnography",
+    "ramp"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Extended PACU observation for OSA",
+   "keywords": [
+    "osa",
+    "observation"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Upper endoscopy under light sedation"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Sedation with untreated OSA"
+  }
+ ]
+}

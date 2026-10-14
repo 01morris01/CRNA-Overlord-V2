@@ -1,0 +1,543 @@
+{
+ "id": "p32",
+ "room": "OR 12",
+ "time": "0930",
+ "name": "KILGORE, BRAXTON LEE",
+ "mrn": "0146032",
+ "dob": "04/11/2007",
+ "age": "19 y",
+ "sex": "M",
+ "ht_cm": 183,
+ "wt_kg": 78.9,
+ "preferred_name": "Brax",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "C-N Student Health Services (Dr. J. Okonedo)",
+ "insurance": "Aetna Choice POS II (parent employer) + NCAA catastrophic secondary",
+ "emergency_contact": "Monica Kilgore (mother) 615-555-0187",
+ "isolation": "",
+ "allergies": [
+  [
+   "Amoxicillin",
+   "Rash (age 3)",
+   "Mild",
+   "2010"
+  ]
+ ],
+ "case": {
+  "procedure": "Left anterior cruciate ligament reconstruction with bone-patellar tendon-bone autograft, possible meniscal repair",
+  "short": "L ACL reconstruction, BTB autograft",
+  "laterality": "Left",
+  "service": "Orthopaedic Sports Medicine",
+  "surgeon": "C. Wingo, MD",
+  "assistant": "D. Esterline, ATC/OPA",
+  "indication": "Complete L ACL tear (non-contact pivot injury, soccer 09/2026)",
+  "duration_min": 120,
+  "anesthesia_requested": "General + adductor canal block (single shot)",
+  "position": "Supine, leg holder, thigh tourniquet",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Arthroscopy tower, tourniquet",
+  "implants": "Interference screws (titanium)",
+  "surgeon_notes": "Outpatient. Cefazolin 2 g (amoxicillin rash childhood - ok per pharmacy). Cryocuff. Brace locked in extension.",
+  "add_on": false,
+  "scheduled_on": "10/09/2026"
+ },
+ "problems": [
+  [
+   "ACL tear, left knee, complete",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "ADHD, combined type",
+   "2015",
+   "Active"
+  ],
+  [
+   "Concussion, history of (2023, 2025)",
+   "2025",
+   "Resolved"
+  ],
+  [
+   "Sickle cell trait",
+   "2007",
+   "Active"
+  ],
+  [
+   "Acne vulgaris",
+   "2021",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "ADHD since age 8, on stimulant; doing well academically (sophomore, exercise science)",
+   "Concussion 10/2023 (high school soccer, header), symptoms 12 d; concussion 04/2025 (college, collision), symptoms 3 wk, cleared by return-to-play protocol 05/2025",
+   "Sickle cell trait (newborn screen), asymptomatic",
+   "Acne, topical treatment"
+  ],
+  "psh": [
+   [
+    "2015",
+    "Tonsillectomy and adenoidectomy",
+    "Vanderbilt Children's"
+   ],
+   [
+    "2021",
+    "Closed reduction R distal radius fracture",
+    "Williamson Medical Center ED"
+   ]
+  ],
+  "family": [
+   "Father: HTN",
+   "Mother: sickle cell trait, migraine",
+   "Maternal grandmother: \"took a long time to wake up\" after surgery - details unknown, mother says it was \"just the pain medicine\""
+  ],
+  "social": {
+   "tobacco": "Never; denies vaping",
+   "alcohol": "Occasional, \"a few drinks at parties\"",
+   "drugs": "Denies",
+   "occupation": "College student, varsity soccer (C-N University)",
+   "living": "Dorm; mother driving in for surgery",
+   "other": "Caffeine: energy drink most days"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026"
+   ],
+   [
+    "Meningococcal ACWY booster",
+    "2023"
+   ],
+   [
+    "MenB",
+    "2025"
+   ],
+   [
+    "Tdap",
+    "2018"
+   ],
+   [
+    "HPV x2",
+    "2019"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Amphetamine/dextroamphetamine mixed salts XR 30 mg",
+   "1 cap PO every morning",
+   "Dr. J. Okonedo",
+   "10/27/2026 0630"
+  ],
+  [
+   "Adapalene 0.1% gel",
+   "Apply nightly to face",
+   "Dr. J. Okonedo",
+   "10/26/2026 2300"
+  ],
+  [
+   "Ibuprofen 200 mg",
+   "3 tabs PO PRN knee pain",
+   "OTC (team ATC)",
+   "10/24/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0815"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Methylphenidate ER 36 mg",
+   "2015-2019",
+   "Appetite suppression; switched"
+  ],
+  [
+   "Doxycycline 100 mg",
+   "2022-2023",
+   "Acne improved"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/13/2026",
+    "comment": "Pre-op (team physician)",
+    "vals": {
+     "WBC": [
+      "6.0",
+      ""
+     ],
+     "Hgb": [
+      "15.0",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "259",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/28/2025",
+    "comment": "NCAA sickle cell solubility follow-up; Hb electrophoresis",
+    "vals": {
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "15.0",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "HbS": [
+      "39",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Hematology",
+    "key": "HbS",
+    "name": "Hemoglobin S",
+    "unit": "%",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "07/28/2025",
+    "Sickle solubility test",
+    "Positive (trait confirmed by electrophoresis: HbA 59.1%, HbS 38.6%, HbA2 2.3%)",
+    "A"
+   ],
+   [
+    "07/28/2025",
+    "Pre-participation ECG",
+    "Sinus rhythm 58, early repolarization, normal for athlete",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "Urine drug screen (NCAA)",
+    "Positive amphetamine - documented medical exception on file",
+    "A"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "04/02/2021",
+   "XR Wrist right 3 views",
+   "Transverse distal radius metaphyseal fracture, mild dorsal angulation. Post-reduction: improved alignment.",
+   "L. Brandt, MD"
+  ],
+  [
+   "04/19/2025",
+   "CT Head without contrast",
+   "No intracranial hemorrhage, mass effect, or fracture. Impression: negative.",
+   "J. Pickering, MD"
+  ],
+  [
+   "09/22/2026",
+   "MRI Knee left without contrast",
+   "Complete tear of the ACL, femoral attachment. Bone bruises lateral femoral condyle and posterolateral tibial plateau (pivot shift pattern). Small vertical tear peripheral posterior horn lateral meniscus. MCL low-grade sprain. Moderate effusion.",
+   "H. Okonkwo, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "04/18/2025",
+   "ED visit",
+   "Jefferson Memorial Hospital",
+   "Head collision during soccer match",
+   "Concussion, CT negative, discharged"
+  ],
+  [
+   "09/20/2026",
+   "Clinic",
+   "C-N Sports Medicine (athletic training)",
+   "L knee injury in match",
+   "Lachman positive, MRI ordered"
+  ],
+  [
+   "09/29/2026",
+   "Clinic",
+   "C-N University Orthopaedics",
+   "ACL tear",
+   "Prehab, surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "04/18/2025 2140",
+   "Progress Note",
+   "Emergency Medicine",
+   "K. Fannon, MD",
+   "18M soccer player, head-to-head collision, brief LOC (<10 s per ATC), headache, nausea x1. GCS 15. Neuro nonfocal. CT head negative. Dx concussion (2nd lifetime). Cognitive/physical rest, return-to-play protocol per team physician."
+  ],
+  [
+   "05/09/2025 1100",
+   "Progress Note",
+   "Sports Medicine",
+   "J. Okonedo, MD",
+   "Concussion f/u. Asymptomatic x7 d, completed graded return. ImPACT at baseline. Cleared. Discussed cumulative risk. Continue Adderall XR 30 mg."
+  ],
+  [
+   "09/29/2026 1400",
+   "Consult",
+   "Orthopaedic Sports Medicine",
+   "C. Wingo, MD",
+   "19M L knee non-contact pivot 09/19. Effusion, Lachman 3+, pivot shift +. MRI complete ACL tear + small lateral meniscus tear. Plan BTB autograft ACLR once ROM restored. Prehab x 4 wk. Surgery 10/27."
+  ],
+  [
+   "10/13/2026 1510",
+   "Progress Note",
+   "Sports Medicine",
+   "J. Okonedo, MD",
+   "Pre-op for ACLR. Healthy. Meds: Adderall XR 30 mg daily. Sickle cell trait - discussed hydration; no contraindication to tourniquet. Lungs clear, RRR, no murmur; athlete HR 58. Cleared for surgery. NCAA medical exception for stimulant on file."
+  ],
+  [
+   "10/14/2026 1020",
+   "PT Evaluation",
+   "Physical Therapy (Athletics)",
+   "R. Hammontree, PT, DPT",
+   "Prehab: ROM 0-130, quad lag 0, effusion trace. Gait normal. Ready for surgery per surgeon criteria."
+  ],
+  [
+   "10/26/2026 1320",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0730. NPO midnight, clears until 0630. Meds: may take usual meds with sip of water. Driver: mother. Pt asked about energy drink - told clear liquids only (no energy drinks)."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/18/2025 2120",
+   "128/74",
+   72,
+   16,
+   99,
+   36.8,
+   77.0,
+   "4/10",
+   "ED"
+  ],
+  [
+   "09/29/2026 1345",
+   "124/70",
+   60,
+   14,
+   99,
+   36.6,
+   79.4,
+   "3/10",
+   "Ortho clinic"
+  ],
+  [
+   "10/13/2026 1500",
+   "122/72",
+   58,
+   14,
+   99,
+   36.7,
+   79.0,
+   "1/10",
+   "Sports medicine"
+  ],
+  [
+   "10/27/2026 0740",
+   "144/86",
+   98,
+   16,
+   99,
+   36.7,
+   78.9,
+   "1/10",
+   "Preop holding"
+  ],
+  [
+   "10/27/2026 0840",
+   "140/84",
+   94,
+   16,
+   99,
+   null,
+   null,
+   "1/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO after midnight, clears until 0630",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0735",
+   "Active"
+  ],
+  [
+   "Adductor canal block per anesthesia",
+   "10/27/2026 0735",
+   "Active"
+  ],
+  [
+   "Discharge home when criteria met; brace, crutches",
+   "10/27/2026 0735",
+   "Pending (postop)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not done",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: left ACL reconstruction, BTB autograft, possible meniscal repair",
+   "Signed by patient 09/29/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2015",
+   "T&A",
+   "GA ETT",
+   "None per mother",
+   "Vanderbilt Children's"
+  ],
+  [
+   "2021",
+   "Closed reduction distal radius",
+   "ED procedural sedation (ketamine)",
+   "Emergence \"vivid dreams,\" otherwise fine",
+   "Williamson Medical Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0725",
+  "npo_solids": "10/26/2026 2300",
+  "npo_clears": "10/27/2026 0615 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes, L knee"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "Driver",
+    "Mother"
+   ]
+  ],
+  "nursing_note": "Fit 19M, anxious but joking. Took his Adderall at 0630 \"out of habit, I take it every morning.\" No energy drink today. HR 98 (resting usually 50s per pt). 18g R hand. Mother at bedside, asks that he not get \"too much pain medicine\" because of grandmother's slow wake-up.",
+  "iv": "18g R hand, LR",
+  "glucose": ""
+ },
+ "label": "B. Kilgore",
+ "bmi": "23.6"
+}

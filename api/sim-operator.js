@@ -1,9 +1,12 @@
 /* Booth, the sim operator: on-demand language model replies.
 
-   Two modes, both grounded in a case context the client builds from engine
-   snapshots and the action log (ui/simOperator.js caseContext):
-   - ask:   the trainee asks Booth something mid case.
+   Three modes, each grounded in a context the client builds:
+   - ask:   the trainee asks Booth something mid case (engine snapshots and
+            the action log, ui/simOperator.js caseContext).
    - roast: end of case review, sarcastic but specific.
+   - plan:  Mock OR Day care plan review. Context holds the chart digest, the
+            trainee's care plan, the draft answer key, and the offline grade
+            (ui/carePlanSheet.js buildPlanReviewContext).
 
    Truth boundary: the model may only use facts in CONTEXT. In ask mode the
    client withholds any complication Booth injected that the trainee has not
@@ -11,7 +14,7 @@
    Uses the same ANTHROPIC_API_KEY as grade-recall and patient-chat. Without a
    key this returns 501 and the client falls back to offline replies.
 
-   Request body: { mode: 'ask'|'roast', question?, meanness: 1|2|3, context, history? }
+   Request body: { mode: 'ask'|'roast'|'plan', question?, meanness: 1|2|3, context, history? }
    Response: { reply: string }
 */
 
@@ -29,7 +32,7 @@ function asString(value, max = 4000) {
 
 export function buildSystemPrompt({ mode, meanness, context }) {
   const level = ATTITUDE[meanness] ? meanness : 2;
-  const contextJson = JSON.stringify(context ?? {}, null, 2).slice(0, 12000);
+  const contextJson = JSON.stringify(context ?? {}, null, mode === 'plan' ? 0 : 2).slice(0, mode === 'plan' ? 24000 : 12000);
   const shared = `You are Booth, the sim operator who runs an anesthesia simulation from the control booth for a nurse anesthesia trainee. Attitude: ${ATTITUDE[level]}
 
 RULES. These protect a teaching simulation. Never break them.
@@ -39,6 +42,22 @@ RULES. These protect a teaching simulation. Never break them.
 4. Never discourage asking for help, calling for help, or pausing to think. If the trainee asks for help, help them, with attitude.
 5. Do not use dashes as punctuation. Use commas, periods, or parentheses.
 6. Plain text only. No markdown, no lists with symbols, no emoji.`;
+
+  if (mode === 'plan') {
+    return `${shared}
+
+TASK: Review the trainee's preoperative care plan before the simulation starts. CONTEXT has the chart digest (chart), the trainee's plan (plan), a draft faculty answer key (answerKey), and an automatic keyword grade (offlineGrade). Write 5 to 8 sentences:
+- Open with one line of attitude about the plan overall.
+- Name the most dangerous chart finding the plan missed or underplayed, quoting the chart evidence. Critical findings first.
+- Comment on the go or delay decision if the plan made one, compared with answerKey.decision.
+- Point out any calculation in offlineGrade.calcChecks that is wrong.
+- Give one grudging sentence for something the plan got right, if anything.
+- End with what to fix before they press START.
+The answer key is a draft for faculty review, so if the plan makes a defensible choice the key did not list, accept it. Never invent chart facts.
+
+CONTEXT:
+${contextJson}`;
+  }
 
   if (mode === 'roast') {
     return `${shared}
@@ -67,7 +86,7 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(501).json({ error: 'sim_operator_unavailable', reason: 'ANTHROPIC_API_KEY not configured' });
 
   const body = req.body ?? {};
-  const mode = body.mode === 'roast' ? 'roast' : 'ask';
+  const mode = body.mode === 'roast' || body.mode === 'plan' ? body.mode : 'ask';
   const question = asString(body.question, 400);
   if (mode === 'ask' && !question.trim()) return res.status(400).json({ error: 'Missing question' });
   const meanness = [1, 2, 3].includes(body.meanness) ? body.meanness : 2;
@@ -82,7 +101,7 @@ export default async function handler(req, res) {
       }))
       .filter((turn) => turn.content.length > 0)
     : [];
-  const userContent = mode === 'roast' ? 'Roast my case.' : question;
+  const userContent = mode === 'roast' ? 'Roast my case.' : (mode === 'plan' ? 'Grade my care plan.' : question);
   // The Messages API needs alternating roles starting with user.
   const messages = [];
   for (const turn of [...priorTurns, { role: 'user', content: userContent }]) {
@@ -99,7 +118,7 @@ export default async function handler(req, res) {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: mode === 'roast' ? 450 : 220, system, messages }),
+      body: JSON.stringify({ model: MODEL, max_tokens: mode === 'ask' ? 220 : 500, system, messages }),
     });
     if (!response.ok) return res.status(502).json({ error: 'sim_operator_error', details: response.status });
     const data = await response.json();

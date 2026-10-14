@@ -1,0 +1,156 @@
+{
+ "id": "p50",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Strabismus surgery in a 9 y with trisomy 21, repaired AV canal, known atlantoaxial instability (ADI 5 mm in flexion) and a new report of tripping more, which needs a neuro exam before he is positioned. Also oculocardiac reflex, sevoflurane bradycardia history, mild OSA, emergence delirium and high PONV risk.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Trisomy 21 with repaired congenital heart disease, atlantoaxial instability, OSA."
+ },
+ "decision": {
+  "recommendation": "neuro exam first; proceed if normal",
+  "rationale": "New gait change in a child with atlantoaxial instability may be early myelopathy. If the exam shows any new deficit, delay for MRI and neurosurgery review. If normal, proceed with neck precautions."
+ },
+ "redFlags": [
+  {
+   "id": "aai",
+   "severity": "critical",
+   "finding": "Atlantoaxial instability with possible new symptoms",
+   "evidence": "ADI 5 mm in flexion (2024); mother says he trips more lately; tumbling and trampoline.",
+   "implication": "Cord injury with neck flexion during laryngoscopy or positioning.",
+   "action": "Focused neuro exam, neutral neck, avoid flexion, video laryngoscopy; MRI and delay if deficits.",
+   "keywords": [
+    "atlantoaxial",
+    "adi",
+    "neck",
+    "neutral",
+    "neuro exam",
+    "myelopathy",
+    "mri"
+   ]
+  },
+  {
+   "id": "ocr",
+   "severity": "major",
+   "finding": "Oculocardiac reflex and bradycardia",
+   "evidence": "Medial rectus surgery; bradycardia with sevoflurane 8% in 2022; first degree AV block.",
+   "implication": "Severe bradycardia or asystole with muscle traction.",
+   "action": "Glycopyrrolate or atropine ready or given, avoid high sevoflurane concentrations, ask surgeon to release traction.",
+   "keywords": [
+    "oculocardiac",
+    "bradycardia",
+    "atropine",
+    "glycopyrrolate",
+    "traction"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "major",
+   "finding": "Down syndrome airway and OSA",
+   "evidence": "Mild residual OSA; prior grade 1 to 2; nasal congestion.",
+   "implication": "Obstruction at induction and emergence; possible subglottic narrowing.",
+   "action": "Smaller cuffed ETT ready, oral airway, observe postop.",
+   "keywords": [
+    "osa",
+    "subglottic",
+    "ett",
+    "airway",
+    "obstruction"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "High PONV risk",
+   "evidence": "Strabismus surgery.",
+   "implication": "Vomiting and delayed discharge.",
+   "action": "Dexamethasone and ondansetron, consider TIVA.",
+   "keywords": [
+    "ponv",
+    "dexamethasone",
+    "ondansetron",
+    "tiva"
+   ]
+  },
+  {
+   "id": "ed",
+   "severity": "minor",
+   "finding": "Emergence delirium and anxiety",
+   "evidence": "Wild wake up 2022; anxious; midazolam ordered.",
+   "implication": "Agitation, injury to operated eyes.",
+   "action": "Dexmedetomidine, parental presence, oral midazolam.",
+   "keywords": [
+    "emergence delirium",
+    "dexmedetomidine",
+    "midazolam"
+   ]
+  },
+  {
+   "id": "mh",
+   "severity": "minor",
+   "finding": "Strabismus and masseter rigidity association",
+   "evidence": "Strabismus surgery.",
+   "implication": "Possible MH susceptibility signal if trismus with succinylcholine.",
+   "action": "Avoid succinylcholine, monitor EtCO2 and temperature.",
+   "keywords": [
+    "malignant hyperthermia",
+    "masseter",
+    "succinylcholine"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "Mask induction after oral midazolam, then IV",
+   "keywords": [
+    "mask",
+    "midazolam"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "LMA or cuffed ETT with neutral neck",
+   "keywords": [
+    "lma",
+    "ett",
+    "neutral"
+   ]
+  },
+  {
+   "domain": "drugs",
+   "item": "Anticholinergic ready for oculocardiac reflex",
+   "keywords": [
+    "atropine",
+    "glycopyrrolate"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Dexamethasone and ondansetron",
+   "keywords": [
+    "dexamethasone",
+    "ondansetron"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Observe for OSA; overnight if desaturations",
+   "keywords": [
+    "overnight",
+    "observ"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Pediatric airway with OSA"
+  },
+  {
+   "type": "MalignantHyperthermia",
+   "why": "Strabismus surgery association"
+  }
+ ]
+}

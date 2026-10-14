@@ -1,0 +1,1918 @@
+{
+ "id": "p10",
+ "room": "OR 9",
+ "time": "0730",
+ "name": "ABERNATHY, CAROL J",
+ "mrn": "0092288",
+ "dob": "09/03/1977",
+ "age": "49 y",
+ "sex": "F",
+ "ht_cm": 163,
+ "wt_kg": 64.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "M. Talley, NP, Jefferson City Family Medicine",
+ "insurance": "BlueCross BlueShield TN (State of TN employee plan)",
+ "emergency_contact": "Dale Abernathy (husband) 865-555-0161",
+ "isolation": "",
+ "allergies": [
+  [
+   "Ondansetron",
+   "QT prolongation (QTc 490 on cycle 3, noted by oncology)",
+   "Intolerance",
+   "07/2026"
+  ],
+  [
+   "Adhesive tape",
+   "Skin blistering",
+   "Mild",
+   "2019"
+  ]
+ ],
+ "case": {
+  "procedure": "Right total mastectomy with sentinel lymph node biopsy, possible axillary lymph node dissection",
+  "short": "R mastectomy, SLNB, possible ALND",
+  "laterality": "Right",
+  "service": "Breast Surgery",
+  "surgeon": "E. Morrow, MD",
+  "assistant": "T. Gaines, PA-C",
+  "indication": "Right breast invasive ductal carcinoma, stage IIB (cT2N1), HER2-positive, after neoadjuvant chemotherapy.",
+  "duration_min": 150,
+  "anesthesia_requested": "General",
+  "position": "Supine, right arm on armboard",
+  "dispo": "Overnight observation",
+  "blood": "Type and screen.",
+  "equipment": "Gamma probe",
+  "implants": "",
+  "surgeon_notes": "Isosulfan blue dye injected in the OR after induction (Tc-99m injected in nuclear medicine 10/26). No paralysis during axillary dissection (nerve identification). Pectoral nerve block welcome.",
+  "add_on": false,
+  "scheduled_on": "10/12/2026"
+ },
+ "problems": [
+  [
+   "Malignant neoplasm of right breast, HER2+, stage IIB",
+   "04/2026",
+   "Active"
+  ],
+  [
+   "Chemotherapy-induced neutropenia",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Cardiomyopathy, chemotherapy-related (EF 40%)",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Chemotherapy-induced peripheral neuropathy",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Lymphedema, left upper extremity",
+   "2019",
+   "Active"
+  ],
+  [
+   "Hypothyroidism",
+   "2012",
+   "Active"
+  ],
+  [
+   "Anxiety disorder",
+   "2015",
+   "Active"
+  ],
+  [
+   "Anemia due to chemotherapy",
+   "07/2026",
+   "Active"
+  ],
+  [
+   "Prolonged QT interval",
+   "07/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "R breast IDC, ER-/PR-, HER2 3+, cT2N1, stage IIB (04/2026); BRCA1/2 and multigene panel negative",
+   "Neoadjuvant dose-dense AC x4 (05-06/2026), then weekly paclitaxel x12 with trastuzumab (07-10/2026); last chemo 10/06; trastuzumab q3 weeks, held since 10/20",
+   "Left arm lymphedema after left axillary node excision for a benign mass (2019): \"no BP or IV in the left arm\"",
+   "Hypothyroidism (Hashimoto)",
+   "Anxiety",
+   "Chemotherapy-induced neuropathy (feet)",
+   "Febrile neutropenia 06/2026 (admitted 2 days)"
+  ],
+  "psh": [
+   [
+    "2019",
+    "Left axillary lymph node excision (benign reactive node)",
+    "C-N University Hospital"
+   ],
+   [
+    "05/2026",
+    "Port placement (left IJ)",
+    "C-N University Hospital"
+   ],
+   [
+    "04/2026",
+    "US-guided core biopsy R breast and R axillary node, clip placement",
+    "C-N Breast Center"
+   ],
+   [
+    "2008",
+    "Cesarean delivery",
+    "Morristown-Hamblen"
+   ]
+  ],
+  "family": [
+   "Mother: breast cancer age 62",
+   "Maternal aunt: ovarian cancer",
+   "Father: COPD",
+   "No anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Middle school librarian (medical leave)",
+   "living": "Husband and 18-year-old son, Jefferson City",
+   "other": "Church support group. Wears wig."
+  },
+  "immunizations": [
+   [
+    "Influenza (inactivated)",
+    "09/2026"
+   ],
+   [
+    "COVID-19",
+    "09/2026"
+   ],
+   [
+    "PCV20",
+    "05/2026 (pre-chemo)"
+   ],
+   [
+    "Tdap",
+    "2020"
+   ]
+  ],
+  "ob": "G1P1 (cesarean 2008). Postmenopausal since chemotherapy (amenorrhea since 06/2026)."
+ },
+ "home_meds": [
+  [
+   "Trastuzumab IV",
+   "Every 3 weeks (infusion center)",
+   "P. Lindqvist, MD (Oncology)",
+   "10/06/2026 (held since 10/20)"
+  ],
+  [
+   "Levothyroxine 100 mcg",
+   "100 mcg PO daily",
+   "M. Talley, NP",
+   "10/27/2026 0500"
+  ],
+  [
+   "Dexamethasone 4 mg",
+   "4 mg PO BID day before/after chemo cycles",
+   "P. Lindqvist, MD",
+   "10/07/2026"
+  ],
+  [
+   "Gabapentin 300 mg",
+   "300 mg PO TID (neuropathy)",
+   "P. Lindqvist, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sertraline 50 mg",
+   "50 mg PO daily",
+   "M. Talley, NP",
+   "10/27/2026 0500"
+  ],
+  [
+   "Lorazepam 0.5 mg",
+   "0.5 mg PO q8h PRN anxiety/nausea",
+   "P. Lindqvist, MD",
+   "10/26/2026 2200"
+  ],
+  [
+   "Prochlorperazine 10 mg",
+   "10 mg PO q6h PRN nausea",
+   "P. Lindqvist, MD",
+   "10/2026"
+  ],
+  [
+   "Magnesium oxide 400 mg",
+   "400 mg PO BID",
+   "P. Lindqvist, MD",
+   "\"Stopped it, gave me diarrhea\""
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop",
+   "Given 10/27 0610"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "On call to OR",
+   "Due (no IV access)"
+  ],
+  [
+   "Lactated Ringer's",
+   "KVO",
+   "Not started (no IV access)"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Doxorubicin + cyclophosphamide (dose-dense)",
+   "05/18/2026-06/29/2026",
+   "Completed 4 cycles"
+  ],
+  [
+   "Paclitaxel weekly",
+   "07/13/2026-10/06/2026",
+   "Completed 12 doses (1 delayed)"
+  ],
+  [
+   "Pegfilgrastim on-body",
+   "05-06/2026",
+   "With AC cycles"
+  ],
+  [
+   "Ondansetron 8 mg",
+   "05/2026-07/2026",
+   "QTc 490"
+  ],
+  [
+   "Olanzapine 5 mg",
+   "05/2026-06/2026",
+   "Sedation"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/24/2026 1000",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "2.4",
+      "L"
+     ],
+     "Hgb": [
+      "9.8",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "112",
+      "L"
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Mg": [
+      "1.5",
+      "L"
+     ],
+     "TSH": [
+      "2.10",
+      ""
+     ],
+     "FT4": [
+      "1.23",
+      ""
+     ],
+     "BNP": [
+      "310",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/20/2026 0900",
+    "comment": "Oncology visit",
+    "vals": {
+     "WBC": [
+      "2.6",
+      "L"
+     ],
+     "Hgb": [
+      "9.9",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "116",
+      "L"
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "BNP": [
+      "240",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/06/2026 0800",
+    "comment": "Paclitaxel #12 given (ANC 1,300)",
+    "vals": {
+     "WBC": [
+      "2.9",
+      "L"
+     ],
+     "Hgb": [
+      "10.0",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "121",
+      "L"
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.74",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "97",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Mg": [
+      "1.6",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "09/29/2026 0800",
+    "comment": "Paclitaxel #12 held 1 week (ANC 800)",
+    "vals": {
+     "WBC": [
+      "2.2",
+      "L"
+     ],
+     "Hgb": [
+      "9.9",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "128",
+      "L"
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Mg": [
+      "1.6",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "09/08/2026 0800",
+    "comment": "Paclitaxel #9",
+    "vals": {
+     "WBC": [
+      "3.1",
+      "L"
+     ],
+     "Hgb": [
+      "10.1",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "150",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "27",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Mg": [
+      "1.6",
+      "L"
+     ],
+     "TSH": [
+      "2.30",
+      ""
+     ],
+     "FT4": [
+      "1.28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/10/2026 0800",
+    "comment": "Paclitaxel #5",
+    "vals": {
+     "WBC": [
+      "3.6",
+      "L"
+     ],
+     "Hgb": [
+      "10.3",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "176",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Mg": [
+      "1.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/13/2026 0800",
+    "comment": "Paclitaxel #1",
+    "vals": {
+     "WBC": [
+      "4.2",
+      "L"
+     ],
+     "Hgb": [
+      "10.0",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "190",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.77",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "64",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/29/2026 0800",
+    "comment": "C4 AC",
+    "vals": {
+     "WBC": [
+      "7.8",
+      ""
+     ],
+     "Hgb": [
+      "10.2",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "162",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.75",
+      ""
+     ],
+     "Glu": [
+      "80",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/08/2026 2130",
+    "comment": "ED: fever 38.6, ANC 120",
+    "vals": {
+     "WBC": [
+      "0.6",
+      "L"
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "88",
+      "L"
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Lactate": [
+      "1.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/18/2026 0800",
+    "comment": "C1 AC",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "254",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.75",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "78",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/28/2026 0900",
+    "comment": "Oncology baseline",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "249",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "TSH": [
+      "1.81",
+      ""
+     ],
+     "FT4": [
+      "1.09",
+      ""
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/20/2023 0830",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "259",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.75",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "34",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "81",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "TSH": [
+      "1.72",
+      ""
+     ],
+     "FT4": [
+      "1.27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/11/2019 0900",
+    "comment": "Preop node excision",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "246",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "TSH": [
+      "2.39",
+      ""
+     ],
+     "FT4": [
+      "1.20",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "04/14/2026",
+    "Surgical pathology, R breast core biopsy",
+    "Invasive ductal carcinoma, grade 3. ER 0%, PR 0%, HER2 3+ (IHC). Ki-67 60%. R axillary node: metastatic carcinoma.",
+    "A"
+   ],
+   [
+    "05/05/2026",
+    "Hereditary cancer panel (47 genes)",
+    "No pathogenic variants (BRCA1/2 negative)",
+    ""
+   ],
+   [
+    "06/08/2026",
+    "ANC",
+    "120 /uL",
+    "L"
+   ],
+   [
+    "09/29/2026",
+    "ANC",
+    "800 /uL",
+    "L"
+   ],
+   [
+    "10/06/2026",
+    "ANC",
+    "1,300 /uL",
+    "L"
+   ],
+   [
+    "10/20/2026",
+    "ANC",
+    "1,000 /uL",
+    "L"
+   ],
+   [
+    "10/24/2026",
+    "ANC",
+    "900 /uL (ref 1,500-8,000)",
+    "L"
+   ],
+   [
+    "10/26/2026",
+    "CBC (oncology order)",
+    "Not collected",
+    ""
+   ],
+   [
+    "10/24/2026",
+    "Type and screen",
+    "B positive, antibody negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "09/2025",
+   "Screening mammogram, bilateral",
+   "Heterogeneously dense. No suspicious findings. BI-RADS 1.",
+   "K. Ames, MD"
+  ],
+  [
+   "04/09/2026",
+   "Diagnostic mammogram and US, right",
+   "3.4 cm irregular spiculated mass R breast 10 o'clock, 6 cm FN. Abnormal R axillary node 2.1 cm with cortical thickening. BI-RADS 5.",
+   "K. Ames, MD"
+  ],
+  [
+   "04/22/2026",
+   "CT Chest/Abdomen/Pelvis with contrast (staging)",
+   "R breast mass and R axillary adenopathy. No distant metastatic disease.",
+   "L. Darby, MD"
+  ],
+  [
+   "05/12/2026",
+   "XR Chest 1 view (post port)",
+   "Left IJ port, tip at cavoatrial junction. No pneumothorax.",
+   "P. Mendez, MD"
+  ],
+  [
+   "10/12/2026",
+   "US Breast right (response)",
+   "Mass decreased to 1.1 cm. Axillary node normalized morphology, clip in place.",
+   "K. Ames, MD"
+  ],
+  [
+   "10/24/2026",
+   "XR Chest 2 views",
+   "Port tip at cavoatrial junction. Clear lungs. Normal heart size.",
+   "A. Stroud, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "05/06/2026",
+   "Echocardiogram, transthoracic (baseline)",
+   "LVEF 62% (biplane). GLS -20%. Normal valves. Normal diastolic function.",
+   "S. Kaur, MD"
+  ],
+  [
+   "07/10/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 92. QTc 490 ms (on ondansetron, K 3.4).",
+   "D. Harrell, MD",
+   {
+    "rate": 92,
+    "pr": 150,
+    "qrs": 86,
+    "qtc": 490,
+    "axis": 50,
+    "tmod": {
+     "V2": 0.7,
+     "V3": 0.7,
+     "V4": 0.7
+    }
+   }
+  ],
+  [
+   "08/18/2026",
+   "Echocardiogram, transthoracic (surveillance)",
+   "LVEF 55%. GLS -16% (relative decline 20% from baseline). Normal valves. Recommend repeat in 6-8 weeks; continue trastuzumab per oncology.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/20/2026",
+   "Echocardiogram, transthoracic (surveillance)",
+   "LVEF 40% (baseline before chemotherapy 62% in 05/2026). Global hypokinesis. GLS -12%. Mild MR. Normal RV. Impression: Significant decline in LVEF consistent with cancer therapy-related cardiac dysfunction. Cardio-oncology referral recommended.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/24/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 98. QTc 484 ms. Low voltage limb leads. No acute ST changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 98,
+    "pr": 148,
+    "qrs": 86,
+    "qtc": 484,
+    "axis": 50,
+    "lowvLimb": 1,
+    "tmod": {
+     "V2": 0.7,
+     "V3": 0.7,
+     "V4": 0.7
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "03/2019",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "L axillary node excision",
+   "Severe PONV, overnight stay"
+  ],
+  [
+   "09/14/2019",
+   "Therapy (12 visits through 01/2020)",
+   "C-N Lymphedema Clinic",
+   "L arm lymphedema",
+   "Compression sleeve"
+  ],
+  [
+   "04/09/2026",
+   "Diagnostic imaging",
+   "C-N Breast Center",
+   "Palpable R breast lump",
+   "Biopsy"
+  ],
+  [
+   "04/28/2026",
+   "Specialty clinic",
+   "C-N Cancer Center",
+   "New breast cancer",
+   "Neoadjuvant chemo"
+  ],
+  [
+   "05/12/2026",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "Port placement",
+   "Uneventful"
+  ],
+  [
+   "06/08/2026",
+   "ED -> inpatient",
+   "C-N University Hospital",
+   "Febrile neutropenia",
+   "Cefepime, discharged 06/10"
+  ],
+  [
+   "07/13/2026",
+   "Infusion center (12 visits through 10/06/2026)",
+   "C-N Cancer Center",
+   "Paclitaxel/trastuzumab",
+   "Completed"
+  ],
+  [
+   "10/12/2026",
+   "Specialty clinic",
+   "C-N Breast Surgery",
+   "Surgical planning",
+   "Scheduled 10/27"
+  ],
+  [
+   "10/20/2026",
+   "Specialty clinic",
+   "C-N Cancer Center",
+   "Post-chemo",
+   "Trastuzumab held; cardio-oncology referral"
+  ],
+  [
+   "10/24/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Labs, ECG, CXR",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "03/12/2019 1300",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "C-N Anesthesia (archived)",
+   "L axillary node excision. GA with LMA #4, propofol/fentanyl, sevoflurane. Dexamethasone 4 mg and ondansetron 4 mg prophylaxis. PACU: severe PONV x 4 h, promethazine and scopolamine; admitted overnight."
+  ],
+  [
+   "09/14/2019 1000",
+   "PT Evaluation",
+   "Lymphedema Clinic",
+   "J. Moss, PT, CLT",
+   "L arm lymphedema stage II, 3.5 cm circumference difference at forearm. CDT, compression sleeve. Precautions: no BP, venipuncture, or IV in left arm."
+  ],
+  [
+   "04/28/2026 1400",
+   "Consult",
+   "Medical Oncology",
+   "P. Lindqvist, MD",
+   "Stage IIB HER2+ (ER/PR negative) IDC R breast. Plan neoadjuvant ddAC x4 then weekly paclitaxel x12 with trastuzumab, then surgery; complete 1 year of HER2-directed therapy. Baseline echo. Port. Genetics."
+  ],
+  [
+   "06/10/2026 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "A. Pennington, MD",
+   "Febrile neutropenia after C2 AC (ANC 120). Cefepime, cultures negative. Recovered. Pegfilgrastim continued. Discharged."
+  ],
+  [
+   "07/10/2026 1500",
+   "Progress Note",
+   "Medical Oncology",
+   "P. Lindqvist, MD",
+   "Cycle 3 (AC) complications: nausea, QTc 490 on ondansetron with K 3.4. Ondansetron discontinued, added to allergy/intolerance list. Antiemetics: prochlorperazine, lorazepam, dexamethasone. Starting paclitaxel/trastuzumab 07/13."
+  ],
+  [
+   "08/18/2026 1600",
+   "Telephone Encounter",
+   "Cardiology",
+   "S. Kaur, MD",
+   "Echo EF 55% (from 62%), GLS relative drop 20%. Asymptomatic per oncology. OK to continue trastuzumab with repeat echo 6-8 weeks. Consider ACEi/BB if further decline."
+  ],
+  [
+   "09/29/2026 0930",
+   "Nursing Note",
+   "Infusion Center",
+   "H. Ruiz, RN",
+   "ANC 800 - paclitaxel #12 held per parameters. Patient reports mild DOE with stairs and ankle swelling at end of day; told oncology NP. Return 10/06."
+  ],
+  [
+   "10/12/2026 1030",
+   "H&P",
+   "Breast Surgery",
+   "E. Morrow, MD",
+   "Oncology history: stage IIB, HER2-positive. Neoadjuvant doxorubicin and cyclophosphamide x4, then paclitaxel with trastuzumab. Last chemotherapy 10/06. Trastuzumab continuing every 3 weeks. PMH: hypothyroidism. Anxiety. Left arm lymphedema after a prior left axillary node excision for a benign mass (2019): \"no BP or IV in the left arm.\" Exam: BP 112/70, HR 98, SpO2 97%. Left chest port. Mild exertional dyspnea, new over 2 months. Peripheral neuropathy both feet. Airway: MP II. Normal neck. Mucositis healed. Plan: R total mastectomy, SLNB (dual tracer), possible ALND 10/27. Patient declines reconstruction now."
+  ],
+  [
+   "10/20/2026 1500",
+   "Progress Note",
+   "Medical Oncology",
+   "P. Lindqvist, MD",
+   "Drop in EF likely anthracycline and trastuzumab cardiotoxicity. Holding further trastuzumab pending cardio-oncology. Counts recovering; next CBC 10/26. Surgery 10/27 per Dr. Morrow - \"will defer to surgery/anesthesia.\" Mg low: restart Mg oxide."
+  ],
+  [
+   "10/21/2026 0815",
+   "Referral",
+   "Cardio-Oncology",
+   "Scheduling",
+   "Referral received. First available new patient appointment: 11/18/2026. Patient notified."
+  ],
+  [
+   "10/22/2026 2010",
+   "Patient Message",
+   "Medical Oncology",
+   "Carol Abernathy",
+   "Do I still need the blood test on Monday since surgery is Tuesday? I have a lot going on. Reply (A. Moody, RN): The surgery center will do labs at your pre-admission visit Saturday, that should be fine."
+  ],
+  [
+   "10/24/2026 1030",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Carney, RN",
+   "PAT. Labs, ECG, CXR. Left arm restriction band placed in chart flag (lymphedema). R arm veins small, difficult draw (2 attempts). Pt anxious about IV access; port accessed for chemo only at the cancer center. Lab results to surgeon inbasket."
+  ],
+  [
+   "10/26/2026 1300",
+   "Procedure Note",
+   "Nuclear Medicine",
+   "S. Nilsen, MD",
+   "Tc-99m filtered sulfur colloid 0.5 mCi injected periareolar right breast for sentinel node mapping. Tolerated well."
+  ],
+  [
+   "08/20/2023 0900",
+   "Progress Note",
+   "Family Medicine",
+   "M. Talley, NP",
+   "Annual. TSH 2.1 on levothyroxine 100. Mammogram due. Lymphedema stable with sleeve."
+  ],
+  [
+   "05/05/2026 1500",
+   "Consult",
+   "Genetics",
+   "K. Wynn, MS, CGC",
+   "Family history mother breast 62, maternal aunt ovarian. 47-gene panel sent. Result 05/19: negative."
+  ],
+  [
+   "06/22/2026 1100",
+   "Social Work",
+   "Oncology Social Work",
+   "D. Pryor, LCSW",
+   "FMLA paperwork completed. Wig voucher provided. Distress thermometer 6. Support group referral."
+  ],
+  [
+   "08/24/2026 0930",
+   "Nursing Note",
+   "Infusion Center",
+   "H. Ruiz, RN",
+   "Paclitaxel #7 + trastuzumab. Premeds diphenhydramine 25 mg IV, famotidine, dexamethasone. Tolerated. Tingling feet worse - oncology aware."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/12/2019 0630",
+   "118/74",
+   72,
+   14,
+   99,
+   36.6,
+   66.0,
+   "0/10",
+   "Preop"
+  ],
+  [
+   "04/28/2026 1400",
+   "120/76",
+   78,
+   14,
+   99,
+   36.7,
+   67.5,
+   "0/10",
+   "Oncology"
+  ],
+  [
+   "06/08/2026 2130",
+   "98/58",
+   124,
+   22,
+   97,
+   38.6,
+   65.8,
+   "2/10",
+   "ED"
+  ],
+  [
+   "07/13/2026 0800",
+   "116/72",
+   88,
+   14,
+   98,
+   36.8,
+   65.0,
+   "0/10",
+   "Infusion center"
+  ],
+  [
+   "09/29/2026 0900",
+   "110/70",
+   96,
+   16,
+   98,
+   36.7,
+   64.4,
+   "0/10",
+   "Infusion center"
+  ],
+  [
+   "10/12/2026 1030",
+   "112/70",
+   98,
+   16,
+   97,
+   36.8,
+   64.0,
+   "1/10",
+   "Breast surgery"
+  ],
+  [
+   "10/20/2026 1500",
+   "108/68",
+   100,
+   16,
+   97,
+   36.9,
+   64.2,
+   "0/10",
+   "Oncology"
+  ],
+  [
+   "10/24/2026 1030",
+   "110/66",
+   100,
+   16,
+   96,
+   37.0,
+   64.0,
+   "1/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0600",
+   "108/66",
+   102,
+   16,
+   96,
+   37.2,
+   64.0,
+   "2/10",
+   "Preop holding (R arm cuff)"
+  ]
+ ],
+ "orders": [
+  [
+   "CBC with differential",
+   "10/20/2026 (oncology, for 10/26)",
+   "Not collected"
+  ],
+  [
+   "Type and screen",
+   "10/24/2026",
+   "Resulted"
+  ],
+  [
+   "No BP/IV/venipuncture left arm",
+   "2019",
+   "Active"
+  ],
+  [
+   "Isosulfan blue 1% 5 mL (OR)",
+   "10/12/2026",
+   "Dispensed to OR"
+  ],
+  [
+   "Port access",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Cardio-oncology consult",
+   "10/20/2026",
+   "Scheduled 11/18/2026"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": "10/27/2026 2359"
+ },
+ "consents": [
+  [
+   "Surgical consent: right total mastectomy, SLNB, possible ALND",
+   "Signed 10/12/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Living will and HCPOA (husband) signed 05/2026, scanned to Media.",
+ "anesthesia_history": [
+  [
+   "03/2019",
+   "Left axillary node excision",
+   "GA, LMA",
+   "Severe PONV despite dexamethasone and ondansetron; overnight admission",
+   "C-N University Hospital"
+  ],
+  [
+   "05/2026",
+   "Port placement",
+   "MAC (propofol, fentanyl)",
+   "Uneventful",
+   "C-N University Hospital"
+  ],
+  [
+   "2008",
+   "Cesarean",
+   "Spinal",
+   "Uneventful",
+   "Morristown-Hamblen"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 1800",
+  "npo_clears": "10/27/2026 0400",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/12)"
+   ],
+   [
+    "Allergy band",
+    "On (ondansetron, adhesive)"
+   ],
+   [
+    "Site marked",
+    "Yes, right"
+   ],
+   [
+    "Limb restriction band",
+    "Left arm"
+   ],
+   [
+    "IV access",
+    "Not obtained"
+   ],
+   [
+    "Pregnancy test",
+    "Negative (urine hCG 0545)"
+   ]
+  ],
+  "nursing_note": "BP 108/66, HR 102, SpO2 96%, T 37.2. Pain 2/10. Solids 10/26 1800. Clears 0400. PIV attempted twice in the right arm, unsuccessful. Nurse asks whether to try the left arm or access the port. Consent signed. Allergy band: ondansetron. Pt reports getting winded on stairs.",
+  "iv": "None (2 failed attempts, right arm)",
+  "glucose": ""
+ },
+ "label": "C. Abernathy",
+ "bmi": "24.1"
+}

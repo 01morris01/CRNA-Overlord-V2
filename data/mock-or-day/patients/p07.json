@@ -1,0 +1,1779 @@
+{
+ "id": "p07",
+ "room": "OR 4",
+ "time": "0730",
+ "name": "MARSH, GERALD T",
+ "mrn": "0095107",
+ "dob": "04/18/1964",
+ "age": "62 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 98.0,
+ "preferred_name": "Jerry",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "L. Harmon, MD, Talbott Family Medicine",
+ "insurance": "BlueCross BlueShield TN (Network S)",
+ "emergency_contact": "Brenda Marsh (wife) 423-555-0147",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Robotic ventral (incisional) hernia repair with mesh",
+  "short": "Robotic ventral hernia repair with mesh",
+  "laterality": "N/A",
+  "service": "General Surgery",
+  "surgeon": "M. Castellano, MD",
+  "assistant": "J. Pike, CSFA",
+  "indication": "Symptomatic 6 cm midline incisional hernia, intermittently painful, reducible.",
+  "duration_min": 165,
+  "anesthesia_requested": "General",
+  "position": "Supine, arms tucked, slight Trendelenburg for docking",
+  "dispo": "Outpatient (23-hour observation)",
+  "blood": "None. EBL < 50 mL. No type and screen.",
+  "equipment": "da Vinci Xi",
+  "implants": "Polypropylene mesh (retromuscular)",
+  "surgeon_notes": "\"Patient told to stop clopidogrel 5 days and aspirin 7 days before surgery per our standard instruction sheet.\"",
+  "add_on": false,
+  "scheduled_on": "09/30/2026"
+ },
+ "problems": [
+  [
+   "NSTEMI, s/p DES to RCA 09/20/2026",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Coronary artery disease, LAD 50% (medical therapy)",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Ischemic cardiomyopathy, EF 45%",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Incisional hernia",
+   "2022",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes mellitus",
+   "2017",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2012",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2012",
+   "Active"
+  ],
+  [
+   "Former smoker",
+   "2021",
+   "Active"
+  ],
+  [
+   "S/p open sigmoid colectomy for complicated diverticulitis",
+   "2021",
+   "Resolved"
+  ],
+  [
+   "Gout",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "NSTEMI 09/18/2026; DES to RCA 09/20/2026",
+   "LAD 50% stenosis, medical therapy",
+   "EF 45% (inferior hypokinesis) 09/2026",
+   "T2DM since 2017",
+   "HTN",
+   "Hyperlipidemia",
+   "Gout (allopurinol stopped 2023, flares rare)",
+   "Former smoker 35 pack-years, quit 2021"
+  ],
+  "psh": [
+   [
+    "03/2021",
+    "Open sigmoid colectomy with primary anastomosis (perforated diverticulitis)",
+    "C-N University Hospital"
+   ],
+   [
+    "09/2026",
+    "Left heart cath with DES to RCA",
+    "C-N Heart Center"
+   ],
+   [
+    "2016",
+    "Colonoscopy with polypectomy",
+    "C-N Endoscopy"
+   ],
+   [
+    "1988",
+    "Left knee arthroscopy",
+    "Outside"
+   ]
+  ],
+  "family": [
+   "Father: MI age 58, died 64",
+   "Mother: T2DM, stroke",
+   "Brother: CABG age 60",
+   "No anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Former, 35 pack-years, quit 03/2021",
+   "alcohol": "2-3 beers/week",
+   "drugs": "None",
+   "occupation": "Tool-and-die maker (on medical leave since 09/2026)",
+   "living": "Wife, Talbott",
+   "other": "Cardiac rehab started 10/13/2026 (3x/week)."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ],
+   [
+    "PCV20",
+    "2024"
+   ],
+   [
+    "Shingrix x2",
+    "2023"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Clopidogrel 75 mg",
+   "75 mg PO daily",
+   "A. Brandt, MD (Cardiology)",
+   "10/21/2026 (stopped as instructed by surgery)"
+  ],
+  [
+   "Aspirin 81 mg EC",
+   "81 mg PO daily",
+   "A. Brandt, MD",
+   "10/19/2026 (stopped as instructed by surgery)"
+  ],
+  [
+   "Metoprolol succinate 50 mg",
+   "50 mg PO daily",
+   "A. Brandt, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Atorvastatin 80 mg",
+   "80 mg PO nightly",
+   "A. Brandt, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Lisinopril 10 mg",
+   "10 mg PO daily",
+   "A. Brandt, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Metformin 1,000 mg",
+   "1,000 mg PO BID",
+   "L. Harmon, MD",
+   "10/26/2026 1900"
+  ],
+  [
+   "Nitroglycerin 0.4 mg SL",
+   "1 tab SL q5 min PRN chest pain, max 3",
+   "A. Brandt, MD",
+   "Used 10/24/2026 for chest tightness walking up stairs"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop",
+   "Given 10/27 0610"
+  ],
+  [
+   "Heparin 5,000 units SC",
+   "Preop",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's",
+   "KVO",
+   "Infusing 0605"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Allopurinol 100 mg",
+   "2019-2023",
+   "Patient stopped; flares rare"
+  ],
+  [
+   "Atorvastatin 20 mg",
+   "2012-09/2026",
+   "Increased to 80 mg after NSTEMI"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "2015-09/2026",
+   "Changed to metoprolol after NSTEMI"
+  ],
+  [
+   "Glipizide 5 mg",
+   "2018-2020",
+   "Hypoglycemia"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/24/2026 0910",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "13.9",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ],
+     "A1c": [
+      "7.6",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/21/2026 0500",
+    "comment": "Post-cath",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "14.5",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "239",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "139",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/18/2026 1340",
+    "comment": "ED chest pain",
+    "vals": {
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "13.9",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "255",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "214",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "PT": [
+      "11.8",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "139",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/20/2026 0815",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.82",
+      ""
+     ],
+     "Glu": [
+      "134",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "64",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "7.5",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "141",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "111",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/02/2024 0830",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "140",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "69",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "7.3",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "134",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "14.4",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "234",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/18/2022 0830",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "136",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "7.1",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "133",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "87",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/05/2021 0500",
+    "comment": "POD 2",
+    "vals": {
+     "WBC": [
+      "12.4",
+      "H"
+     ],
+     "Hgb": [
+      "11.6",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      "L"
+     ],
+     "Plt": [
+      "266",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "138",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/02/2021 2210",
+    "comment": "ED, perforated diverticulitis",
+    "vals": {
+     "WBC": [
+      "18.2",
+      "H"
+     ],
+     "Hgb": [
+      "14.2",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "246",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "143",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.98",
+      ""
+     ],
+     "Glu": [
+      "141",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "Lactate": [
+      "2.8",
+      "H"
+     ],
+     "PT": [
+      "12.1",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/12/2019 0815",
+    "comment": "Gout flare",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "139",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "Uric": [
+      "9.1",
+      "H"
+     ],
+     "A1c": [
+      "7.0",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "05/09/2017 0800",
+    "comment": "New T2DM",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "134",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "80",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "6.8",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "132",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "122",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Uric",
+    "name": "Uric acid",
+    "unit": "mg/dL",
+    "ref": "3.4-7.0"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "09/18/2026 1340",
+    "Troponin I (conventional)",
+    "0.62 ng/mL (ref < 0.04)",
+    "H"
+   ],
+   [
+    "09/18/2026 1940",
+    "Troponin I (conventional)",
+    "2.8 ng/mL (ref < 0.04)",
+    "H"
+   ],
+   [
+    "09/19/2026 0500",
+    "Troponin I (conventional)",
+    "2.1 ng/mL",
+    "H"
+   ],
+   [
+    "03/2021",
+    "Surgical pathology, sigmoid colon",
+    "Diverticular disease with perforation and acute serositis. No malignancy.",
+    ""
+   ],
+   [
+    "2016",
+    "Colon polyp pathology",
+    "Tubular adenoma x2, < 1 cm",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/02/2021",
+   "CT Abdomen/Pelvis with contrast",
+   "Sigmoid diverticulitis with extraluminal gas and 3 cm pericolic abscess. Impression: Perforated sigmoid diverticulitis.",
+   "A. Stroud, MD"
+  ],
+  [
+   "07/11/2022",
+   "CT Abdomen/Pelvis without contrast",
+   "Midline incisional hernia, 4.2 cm fascial defect, containing transverse colon without obstruction.",
+   "A. Stroud, MD"
+  ],
+  [
+   "08/26/2026",
+   "CT Abdomen/Pelvis with contrast",
+   "Midline incisional hernia, fascial defect 6.1 x 5.4 cm, containing small bowel and omentum, no obstruction or strangulation. Coronary artery calcification noted.",
+   "L. Darby, MD"
+  ],
+  [
+   "09/18/2026",
+   "XR Chest 1 view",
+   "No acute cardiopulmonary disease.",
+   "P. Mendez, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Stillwaterising, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Chest_Xray_PA_3-8-2010.png)"
+   }
+  ]
+ ],
+ "cardiology": [
+  [
+   "08/20/2026",
+   "ECG 12-lead",
+   "Normal sinus rhythm 70. Normal axis. No Q waves. Normal ST-T.",
+   "D. Harrell, MD",
+   {
+    "rate": 70,
+    "pr": 164,
+    "qrs": 92,
+    "qtc": 420,
+    "axis": 40
+   }
+  ],
+  [
+   "09/18/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 84. 1 mm ST depression II, III, aVF, V5-V6. Impression: NSTEMI pattern.",
+   "D. Harrell, MD",
+   {
+    "rate": 84,
+    "pr": 166,
+    "qrs": 92,
+    "qtc": 430,
+    "axis": 40,
+    "st": {
+     "II": -0.1,
+     "III": -0.1,
+     "aVF": -0.1,
+     "V5": -0.1,
+     "V6": -0.1
+    }
+   }
+  ],
+  [
+   "09/19/2026",
+   "Echocardiogram, transthoracic",
+   "LVEF 45%. Inferior and inferoseptal hypokinesis. Mild LVH. Mild MR. No pericardial effusion.",
+   "A. Brandt, MD"
+  ],
+  [
+   "09/20/2026",
+   "Left heart catheterization / PCI",
+   "RCA mid 95% stenosis: drug-eluting stent (everolimus 3.0 x 23 mm), TIMI 3 flow. LAD mid 50%: medical therapy. LCx minor irregularities. LVEDP 18. Recommend DAPT (aspirin + clopidogrel) uninterrupted for 12 months.",
+   "A. Brandt, MD"
+  ],
+  [
+   "10/24/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 64. Inferior Q waves (II, III, aVF), new since 08/2026. T-wave inversion III, aVF.",
+   "D. Harrell, MD",
+   {
+    "rate": 64,
+    "pr": 168,
+    "qrs": 96,
+    "qtc": 432,
+    "axis": 10,
+    "iq": 1,
+    "tmod": {
+     "III": -0.8,
+     "aVF": -0.6
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2016",
+   "Endoscopy",
+   "C-N Endoscopy",
+   "Screening colonoscopy",
+   "Adenomas x2, repeat 5 years"
+  ],
+  [
+   "03/02/2021",
+   "ED -> inpatient",
+   "C-N University Hospital",
+   "Perforated diverticulitis",
+   "Open sigmoid colectomy; discharged 03/09"
+  ],
+  [
+   "07/11/2022",
+   "Office visit",
+   "C-N General Surgery",
+   "Bulge at incision",
+   "Incisional hernia, observe"
+  ],
+  [
+   "05/02/2024",
+   "Annual exam",
+   "Talbott Family Medicine",
+   "Routine",
+   "Stable"
+  ],
+  [
+   "08/20/2026",
+   "Annual exam",
+   "Talbott Family Medicine",
+   "Routine, hernia pain",
+   "Surgery referral"
+  ],
+  [
+   "08/26/2026",
+   "Office visit",
+   "C-N General Surgery",
+   "Symptomatic hernia",
+   "Robotic repair planned"
+  ],
+  [
+   "09/18/2026",
+   "ED -> inpatient",
+   "C-N University Hospital",
+   "Chest pain, NSTEMI",
+   "DES to RCA; discharged 09/22"
+  ],
+  [
+   "09/30/2026",
+   "Office visit",
+   "C-N General Surgery",
+   "Preop H&P",
+   "Scheduled 10/27"
+  ],
+  [
+   "10/13/2026",
+   "Cardiac rehab",
+   "C-N Cardiac Rehabilitation",
+   "Phase II intake",
+   "Enrolled"
+  ],
+  [
+   "10/24/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Preop labs, ECG",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "03/04/2021 1100",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "C-N Anesthesia (archived intraop record)",
+   "Open sigmoid colectomy 03/03/2021. Thoracic epidural T9-10 preop, then GA. Easy mask. DL Mac 4 grade I, 8.0 ETT. Uneventful. PACU: severe nausea/vomiting despite ondansetron; required promethazine and scopolamine patch. Epidural x 3 days."
+  ],
+  [
+   "03/09/2021 1000",
+   "Discharge Summary",
+   "General Surgery",
+   "M. Castellano, MD",
+   "Perforated sigmoid diverticulitis with abscess. Open sigmoid colectomy with primary anastomosis. Uncomplicated recovery. Smoking cessation counseled - pt quit during admission."
+  ],
+  [
+   "07/11/2022 1400",
+   "Progress Note",
+   "General Surgery",
+   "M. Castellano, MD",
+   "Asymptomatic bulge at midline incision. CT 4 cm defect. Observe; repair if symptomatic. Weight loss advised."
+  ],
+  [
+   "08/20/2026 0830",
+   "Progress Note",
+   "Family Medicine",
+   "L. Harmon, MD",
+   "Annual. Hernia bigger, aches with lifting at work. A1c 7.5, LDL 141 on atorva 20 - increase discussed. ECG normal. Refer back to Dr. Castellano. No chest pain. BP 138/84."
+  ],
+  [
+   "08/26/2026 1500",
+   "Progress Note",
+   "General Surgery",
+   "M. Castellano, MD",
+   "6 cm incisional hernia, symptomatic, reducible. CT reviewed. Plan robotic retromuscular repair with mesh. Will schedule after PCP clearance."
+  ],
+  [
+   "09/18/2026 1600",
+   "H&P",
+   "Cardiology",
+   "A. Brandt, MD",
+   "Substernal pressure while mowing, 40 min, diaphoresis. Trop 0.62 -> 2.8. ECG inferolateral ST depression. Heparin, aspirin, clopidogrel load 600 mg (ticagrelor declined by patient: cost). Cath tomorrow."
+  ],
+  [
+   "09/22/2026 1030",
+   "Discharge Summary",
+   "Cardiology",
+   "A. Brandt, MD",
+   "NSTEMI with DES to RCA 09/20/2026. LAD 50%, medical therapy. EF 45%. Dual antiplatelet therapy (aspirin and clopidogrel) for at least 12 months. Do not interrupt without speaking to cardiology. Defer elective surgery at least 6 months. Atorvastatin 80, metoprolol succinate 50, lisinopril 10. Cardiac rehab referral. Follow-up Dr. Brandt 11/03/2026."
+  ],
+  [
+   "09/24/2026 1015",
+   "Telephone Encounter",
+   "Cardiology",
+   "J. Vance, RN",
+   "Post-discharge call. No chest pain. Taking all meds including Plavix and aspirin. Reviewed bleeding precautions and stent card. Appointment 11/03 confirmed."
+  ],
+  [
+   "09/30/2026 1430",
+   "H&P",
+   "General Surgery",
+   "M. Castellano, MD",
+   "Incisional hernia after open colectomy 2021. Intermittent pain, no obstruction. PMH: NSTEMI 09/2026: drug-eluting stent to the right coronary artery (per patient \"heart attack last month, they put a stent\"). HTN. HLD. T2DM. Former smoker. Exam: BP 138/82, HR 66. BMI 31. Reducible midline hernia. Heart regular. Lungs clear. Functional capacity: cardiac rehab, walking 20 minutes. Plan: robotic VHR with mesh 10/27. Standard preop instruction sheet given (antiplatelet/anticoagulant section). PCP clearance requested."
+  ],
+  [
+   "10/05/2026 0900",
+   "Letter",
+   "Family Medicine",
+   "L. Harmon, MD",
+   "Preoperative clearance letter to Dr. Castellano: \"Mr. Marsh is medically optimized from a primary care standpoint. Recent cardiac event managed by cardiology. Defer to cardiology regarding cardiac risk.\""
+  ],
+  [
+   "10/13/2026 1000",
+   "PT Evaluation",
+   "Cardiac Rehabilitation",
+   "K. Holt, MS, CEP",
+   "Phase II intake. 6MWT 410 m, no symptoms, HR 64 -> 98. Exercise Rx 3x/week. Meds reviewed: on aspirin and clopidogrel. Education: medication adherence."
+  ],
+  [
+   "10/22/2026 1600",
+   "Telephone Encounter",
+   "Cardiac Rehabilitation",
+   "K. Holt, MS, CEP",
+   "Pt cancelled sessions 10/22 through 10/30: \"having hernia surgery.\" Will resume after surgery."
+  ],
+  [
+   "10/24/2026 0930",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Carney, RN",
+   "PAT. Labs, ECG done. Med rec: pt stopped aspirin 10/19 and clopidogrel 10/21 per surgeon instruction sheet. Pt states he used one nitroglycerin earlier this week (unsure when) \"but it was just the stairs.\" ECG to anesthesia for review (auto-route)."
+  ],
+  [
+   "11/12/2021 1000",
+   "Progress Note",
+   "General Surgery",
+   "M. Castellano, MD",
+   "Post-op visit. Incision healed. Tolerating diet. Return PRN."
+  ],
+  [
+   "09/15/2023 1100",
+   "Telephone Encounter",
+   "Family Medicine",
+   "T. Reese, CMA",
+   "Gout flare R great toe. Colchicine 0.6 mg x 3 days called in per Dr. Harmon. Pt declines allopurinol restart."
+  ],
+  [
+   "05/02/2024 0900",
+   "Progress Note",
+   "Family Medicine",
+   "L. Harmon, MD",
+   "Annual. A1c 7.3. Hernia bulge stable, mild discomfort. Colonoscopy due 2026 (adenomas 2016, then normal 2021 at time of colectomy pathology)."
+  ],
+  [
+   "09/21/2026 1500",
+   "Dietitian",
+   "Cardiac Nutrition",
+   "R. Benoit, RD",
+   "Heart-healthy, consistent carbohydrate diet education with wife. Sodium < 2 g. Handouts given."
+  ],
+  [
+   "10/16/2026 1000",
+   "Nursing Note",
+   "Cardiac Rehabilitation",
+   "K. Holt, MS, CEP",
+   "Session 2. Treadmill 2.5 mph x 15 min, HR 64-92, BP 128/76 -> 144/80. Asymptomatic. RPE 12."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/02/2021 2210",
+   "148/90",
+   118,
+   22,
+   96,
+   38.6,
+   101.0,
+   "9/10",
+   "ED"
+  ],
+  [
+   "07/11/2022 1400",
+   "136/84",
+   76,
+   16,
+   97,
+   36.7,
+   99.5,
+   "0/10",
+   "Surgery clinic"
+  ],
+  [
+   "05/02/2024 0830",
+   "134/82",
+   74,
+   16,
+   97,
+   36.6,
+   100.2,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "08/20/2026 0830",
+   "138/84",
+   72,
+   16,
+   97,
+   36.7,
+   99.0,
+   "2/10",
+   "PCP"
+  ],
+  [
+   "09/18/2026 1340",
+   "162/94",
+   88,
+   20,
+   96,
+   36.8,
+   99.0,
+   "7/10",
+   "ED"
+  ],
+  [
+   "09/22/2026 0800",
+   "124/76",
+   62,
+   16,
+   97,
+   36.6,
+   null,
+   "0/10",
+   "Cardiology floor"
+  ],
+  [
+   "09/30/2026 1430",
+   "138/82",
+   66,
+   16,
+   97,
+   36.7,
+   98.4,
+   "1/10",
+   "Surgery clinic"
+  ],
+  [
+   "10/13/2026 1000",
+   "128/78",
+   64,
+   16,
+   98,
+   null,
+   98.1,
+   "0/10",
+   "Cardiac rehab"
+  ],
+  [
+   "10/24/2026 0930",
+   "142/86",
+   64,
+   16,
+   97,
+   36.6,
+   98.0,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0600",
+   "146/88",
+   62,
+   16,
+   97,
+   36.6,
+   98.0,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Hold clopidogrel 5 days and aspirin 7 days preop (surgery instruction sheet)",
+   "09/30/2026",
+   "Completed per patient"
+  ],
+  [
+   "POC glucose",
+   "10/27/2026",
+   "Resulted 162"
+  ],
+  [
+   "Hold metformin day of surgery",
+   "09/30/2026",
+   "Completed"
+  ],
+  [
+   "Cardiology clearance",
+   "",
+   "Not requested"
+  ],
+  [
+   "Observation status postop",
+   "09/30/2026",
+   "Pending"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "No type and screen ordered.",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: robotic ventral hernia repair with mesh",
+   "Signed 09/30/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "03/2021",
+   "Open sigmoid colectomy",
+   "GA with thoracic epidural; easy mask; DL grade I",
+   "Severe PONV",
+   "C-N University Hospital"
+  ],
+  [
+   "09/2026",
+   "Cardiac catheterization / PCI",
+   "Moderate sedation (midazolam/fentanyl)",
+   "Uneventful",
+   "C-N Heart Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0545",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0500 coffee with cream",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/30)"
+   ],
+   [
+    "Allergy band",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "POC glucose",
+    "162"
+   ],
+   [
+    "Anticoagulants/antiplatelets held",
+    "Yes - aspirin 10/19, clopidogrel 10/21"
+   ]
+  ],
+  "nursing_note": "BP 146/88, HR 62, SpO2 97%, T 36.6. Solids 10/26 1900. Coffee with cream 0500. Reports chest tightness with stairs this week, relieved by rest and one nitroglycerin on 10/24. Did not tell the surgeon. Consent signed. 20 G left forearm.",
+  "iv": "20 G left forearm",
+  "glucose": "162"
+ },
+ "label": "G. Marsh",
+ "bmi": "30.9"
+}

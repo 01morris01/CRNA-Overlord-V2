@@ -1,6 +1,19 @@
 import { deriveAlarms, formatMonitorSnapshot } from './liveSimModel.js';
 import { createLiveSimTransport } from './liveSimTransport.js';
-import { createWaveformRenderer } from './liveWaveformRenderer.js';
+import { createWaveformRenderer, PAW_SCALE } from './liveWaveformRenderer.js';
+
+const FLOWMETER_MAX_L_MIN = 10;
+
+function fixed(value, digits = 0) {
+  return Number.isFinite(value) ? Number(value).toFixed(digits) : '—';
+}
+
+function setBar(id, value) {
+  const bar = document.getElementById(id);
+  if (!bar) return;
+  const fraction = Number.isFinite(value) ? Math.max(0, Math.min(1, value / FLOWMETER_MAX_L_MIN)) : 0;
+  bar.style.height = `${(fraction * 100).toFixed(1)}%`;
+}
 
 let latestSnapshot = null;
 let currentSessionId = null;
@@ -66,13 +79,30 @@ function renderSnapshot(snapshot) {
   setText('display-machine-tv', model.tv);
   setText('display-machine-mv', model.mv);
   setText('display-ppeak', model.ppeak);
+  setText('display-peep-measured', Number.isFinite(snapshot.ventSetPeep) ? Math.round(snapshot.ventSetPeep) : '—');
   setText('display-fio2', model.fio2);
+  setText('display-eto2', fixed(snapshot.eto2));
+  setText('display-et-agent', snapshot.vaporizer > 0 || snapshot.etAgent > 0.05 ? fixed(snapshot.etAgent, 1) : '—');
+  setText('display-mac', snapshot.vaporizer > 0 || snapshot.mac > 0.02 ? fixed(snapshot.mac, 2) : '—');
+  const agentName = typeof snapshot.vaporizerAgent === 'string' ? snapshot.vaporizerAgent : '';
+  setText('display-agent-name', agentName ? agentName.slice(0, 4).toUpperCase() : 'AGENT');
+  const agentBlock = document.getElementById('display-agent-block');
+  if (agentBlock) agentBlock.dataset.agent = snapshot.vaporizer > 0 && agentName ? agentName.toLowerCase() : 'none';
+  setText('display-set-fio2', Number.isFinite(snapshot.ventSetFiO2) ? Math.round(snapshot.ventSetFiO2 * 100) : '—');
+  setText('display-flow-o2', fixed(snapshot.o2Flow, 1));
+  setText('display-flow-air', fixed(snapshot.airFlow, 1));
+  setText('display-flow-n2o', fixed(snapshot.n2oFlow, 1));
+  setBar('display-flow-o2-bar', snapshot.o2Flow);
+  setBar('display-flow-air-bar', snapshot.airFlow);
+  setBar('display-flow-n2o-bar', snapshot.n2oFlow);
+  const flows = [snapshot.o2Flow, snapshot.airFlow, snapshot.n2oFlow].filter(Number.isFinite);
+  setText('display-flow-total', flows.length ? flows.reduce((sum, value) => sum + value, 0).toFixed(1) : '—');
   setText('display-set-tv', Number.isFinite(snapshot.ventSetTV) ? Math.round(snapshot.ventSetTV) : '—');
   setText('display-set-rr', Number.isFinite(snapshot.ventSetRR) ? Math.round(snapshot.ventSetRR) : '—');
   setText('display-peep', Number.isFinite(snapshot.ventSetPeep) ? Math.round(snapshot.ventSetPeep) : '—');
   setText('display-set-pressure', Number.isFinite(snapshot.ventSetPressure) ? Math.round(snapshot.ventSetPressure) : '—');
   setText('display-pressure-support', Number.isFinite(snapshot.ventSetPressureSupport) ? Math.round(snapshot.ventSetPressureSupport) : '—');
-  setText('display-vaporizer', `${model.vaporizerAgent} ${model.vaporizer}%`);
+  setText('display-vaporizer', snapshot.vaporizer > 0 ? `${model.vaporizer}%` : 'OFF');
   renderAlarms(snapshot);
 }
 
@@ -81,6 +111,17 @@ function renderAlarms(snapshot) {
   const activeIds = new Set(activeAlarms.map((alarm) => alarm.id));
   for (const id of acknowledged) {
     if (!activeIds.has(id)) acknowledged.delete(id);
+  }
+
+  const banner = document.getElementById('display-alarm-banner');
+  if (banner) {
+    const pending = activeAlarms.filter((alarm) => !acknowledged.has(alarm.id));
+    const top = pending.find((alarm) => alarm.severity !== 'warning') ?? pending[0];
+    banner.hidden = !top;
+    if (top) {
+      banner.textContent = `${top.label.toUpperCase()} ${Number(top.value).toFixed(0)}${pending.length > 1 ? ` +${pending.length - 1}` : ''}`;
+      banner.dataset.severity = top.severity === 'warning' ? 'warning' : 'critical';
+    }
   }
 
   const list = document.getElementById('display-alarm-list');
@@ -208,7 +249,7 @@ function ensureCanvas(canvas) {
 
 function drawGrid(context, width, height) {
   context.clearRect(0, 0, width, height);
-  context.strokeStyle = 'rgba(90, 111, 138, .12)';
+  context.strokeStyle = 'rgba(90, 111, 138, .10)';
   context.lineWidth = 1;
   for (let x = 0; x < width; x += 32) {
     context.beginPath(); context.moveTo(x, 0); context.lineTo(x, height); context.stroke();
@@ -252,9 +293,15 @@ function drawWaveforms(now) {
   waveformRenderer.advance(elapsedSeconds, latestSnapshot || {});
   const history = waveformRenderer.snapshot();
 
-  drawTrace(document.getElementById('display-ecg'), '#00ffa3', history.ecg, history.capacity, 'center');
-  drawTrace(document.getElementById('display-pleth'), '#5b9eff', history.pleth, history.capacity);
-  drawTrace(document.getElementById('display-capnogram'), '#ffb000', history.co2, history.capacity);
+  drawTrace(document.getElementById('display-ecg'), '#3cff6b', history.ecg, history.capacity, 'center');
+  drawTrace(document.getElementById('display-pleth'), '#26d9ff', history.pleth, history.capacity);
+  drawTrace(document.getElementById('display-paw'), '#ffd400', history.paw, history.capacity);
+  drawTrace(document.getElementById('display-flow'), '#4be37a', history.flow, history.capacity, 'center');
+  drawTrace(document.getElementById('display-capnogram'), '#f2f4f8', history.co2, history.capacity);
+  // Pmean is the average of the drawn Paw trace over the last breaths.
+  const recent = history.paw.slice(-Math.min(history.paw.length, history.sampleRate * 5));
+  const mean = recent.length ? (recent.reduce((sum, value) => sum + value, 0) / recent.length) * PAW_SCALE : NaN;
+  setText('display-pmean', latestSnapshot && Number.isFinite(mean) && latestSnapshot.ppeak > 0 ? mean.toFixed(0) : '—');
   requestAnimationFrame(drawWaveforms);
 }
 

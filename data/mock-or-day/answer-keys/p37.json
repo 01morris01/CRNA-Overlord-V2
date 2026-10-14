@@ -1,0 +1,105 @@
+{
+ "id": "p37",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "18 month old for ear tubes by mask induction without IV, three weeks after a URI, with secondhand smoke exposure. Fasting is appropriate. Teaching case for pediatric airway planning; outside the adult engine range.",
+ "asa": {
+  "suggested": "1",
+  "rationale": "Healthy toddler."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "URI resolved 3 weeks ago with no current symptoms; fasting times meet guidelines (formula over 6 h, clears over 1 to 2 h)."
+ },
+ "redFlags": [
+  {
+   "id": "uri",
+   "severity": "major",
+   "finding": "Recent URI and passive smoke exposure",
+   "evidence": "URI early October; father smokes outside; daycare.",
+   "implication": "Higher risk of laryngospasm and desaturation for several weeks.",
+   "action": "Deep plane before airway stimulation, suction ready, CPAP for laryngospasm.",
+   "keywords": [
+    "uri",
+    "upper respiratory",
+    "laryngospasm",
+    "smoke",
+    "airway reactiv"
+   ]
+  },
+  {
+   "id": "noiv",
+   "severity": "major",
+   "finding": "No IV planned",
+   "evidence": "Mask case.",
+   "implication": "Laryngospasm rescue without IV access.",
+   "action": "Have IM succinylcholine and atropine drawn up, IV supplies ready.",
+   "keywords": [
+    "im succinylcholine",
+    "intramuscular",
+    "atropine",
+    "no iv",
+    "iv access"
+   ]
+  },
+  {
+   "id": "emergence",
+   "severity": "minor",
+   "finding": "Emergence delirium and analgesia",
+   "evidence": "Sevoflurane mask anesthetic.",
+   "implication": "Agitation in PACU.",
+   "action": "Intranasal fentanyl or dexmedetomidine, acetaminophen.",
+   "keywords": [
+    "emergence delirium",
+    "intranasal",
+    "fentanyl",
+    "dexmedetomidine"
+   ]
+  },
+  {
+   "id": "npo",
+   "severity": "minor",
+   "finding": "Fasting meets guidelines",
+   "evidence": "Formula and crackers 0100, apple juice 0650.",
+   "implication": "No delay needed.",
+   "action": "Proceed.",
+   "keywords": [
+    "npo",
+    "formula",
+    "clear"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "Sevoflurane mask induction with parent present to OR door",
+   "keywords": [
+    "sevoflurane",
+    "mask"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Mask anesthetic, laryngospasm plan",
+   "keywords": [
+    "mask",
+    "laryngospasm"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Intranasal fentanyl or acetaminophen",
+   "keywords": [
+    "intranasal",
+    "acetaminophen"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Recent URI, mask anesthetic"
+  }
+ ]
+}

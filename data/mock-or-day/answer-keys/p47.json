@@ -1,0 +1,149 @@
+{
+ "id": "p47",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Laparoscopic cholecystectomy at 18 weeks gestation. A well prepared case that tests pregnancy physiology: aortocaval compression (already symptomatic supine), aspiration risk with GERD, CO2 pneumoperitoneum, fetal assessment, and a prior PONV history.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Pregnancy with symptomatic cholelithiasis."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Second trimester is the preferred window and recurrent colic carries more risk than surgery. OB consult recommendations are in place."
+ },
+ "redFlags": [
+  {
+   "id": "aortocaval",
+   "severity": "major",
+   "finding": "Aortocaval compression",
+   "evidence": "Lightheaded supine with BP 94/58, resolved with tilt.",
+   "implication": "Reduced uteroplacental perfusion.",
+   "action": "Left uterine displacement throughout, keep MAP within 20% of baseline with phenylephrine.",
+   "keywords": [
+    "left uterine displacement",
+    "lud",
+    "aortocaval",
+    "tilt",
+    "phenylephrine",
+    "uteroplacental"
+   ]
+  },
+  {
+   "id": "aspiration",
+   "severity": "major",
+   "finding": "Aspiration risk",
+   "evidence": "18 weeks, GERD, heartburn today; sodium citrate pending.",
+   "implication": "Aspiration at induction.",
+   "action": "Sodium citrate within 30 min, RSI with ETT.",
+   "keywords": [
+    "rsi",
+    "sodium citrate",
+    "bicitra",
+    "aspiration",
+    "ett"
+   ]
+  },
+  {
+   "id": "ventilation",
+   "severity": "major",
+   "finding": "CO2 pneumoperitoneum in pregnancy",
+   "evidence": "Insufflation 10 to 12 mm Hg; target EtCO2 32 to 34.",
+   "implication": "Fetal acidosis with maternal hypercarbia; reduced venous return.",
+   "action": "Adjust ventilation to pregnancy normal PaCO2, low insufflation pressure, avoid hypoxemia.",
+   "keywords": [
+    "etco2",
+    "hypercarbia",
+    "pneumoperitoneum",
+    "insufflation",
+    "hypoxemia"
+   ]
+  },
+  {
+   "id": "fetal",
+   "severity": "minor",
+   "finding": "Fetal assessment and tocolysis",
+   "evidence": "FHT 148 preop; pre viable fetus.",
+   "implication": "Continuous monitoring not indicated.",
+   "action": "FHT before and after; no NSAIDs; report contractions.",
+   "keywords": [
+    "fht",
+    "fetal heart",
+    "nsaid"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "minor",
+   "finding": "PONV history",
+   "evidence": "PONV after 2016 laparoscopy; female nonsmoker.",
+   "implication": "Vomiting postop.",
+   "action": "Ondansetron; dexamethasone is acceptable after the first trimester.",
+   "keywords": [
+    "ponv",
+    "ondansetron",
+    "dexamethasone"
+   ]
+  },
+  {
+   "id": "vte",
+   "severity": "minor",
+   "finding": "VTE risk",
+   "evidence": "Pregnancy, laparoscopy.",
+   "implication": "DVT.",
+   "action": "SCDs and enoxaparin.",
+   "keywords": [
+    "scd",
+    "enoxaparin",
+    "vte"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "RSI with propofol and rocuronium or succinylcholine",
+   "keywords": [
+    "rsi"
+   ]
+  },
+  {
+   "domain": "positioning",
+   "item": "Left uterine displacement",
+   "keywords": [
+    "lud",
+    "left uterine"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "FHT before and after surgery",
+   "keywords": [
+    "fht"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Acetaminophen and short course opioids, no NSAIDs",
+   "keywords": [
+    "acetaminophen"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence after airway instrumentation"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

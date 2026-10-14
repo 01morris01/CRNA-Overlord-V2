@@ -1,0 +1,120 @@
+{
+ "id": "p42",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Rotator cuff repair in beach chair with an interscalene block ordered on the right in a patient with a paralyzed LEFT hemidiaphragm (phrenic injury after thoracotomy). An interscalene block would paralyze the other side.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Moderate OSA, obesity, unilateral diaphragm paralysis with restriction, HTN with LVH."
+ },
+ "decision": {
+  "recommendation": "proceed with a diaphragm sparing analgesic plan",
+  "rationale": "Do not perform an interscalene or supraclavicular block. Use suprascapular (anterior or posterior) plus axillary nerve block, or surgeon infiltration, with multimodal analgesia."
+ },
+ "redFlags": [
+  {
+   "id": "diaphragm",
+   "severity": "critical",
+   "finding": "Contralateral hemidiaphragm paralysis with interscalene block ordered",
+   "evidence": "Left phrenic injury 2020; PFT supine FVC drop 22%, MIP -58; orthopnea; SpO2 94% flat.",
+   "implication": "Interscalene block blocks the right phrenic nerve nearly always, causing bilateral paralysis and respiratory failure.",
+   "action": "Cancel interscalene; suprascapular and axillary nerve blocks or local infiltration.",
+   "keywords": [
+    "phrenic",
+    "diaphragm",
+    "hemidiaphragm",
+    "interscalene",
+    "suprascapular",
+    "axillary nerve",
+    "diaphragm sparing"
+   ]
+  },
+  {
+   "id": "beachchair",
+   "severity": "major",
+   "finding": "Beach chair with hypotensive anesthesia request",
+   "evidence": "70 degree sitting; surgeon wants hypotension; untreated BP 158/94 with LVH.",
+   "implication": "Cerebral hypoperfusion and stroke.",
+   "action": "Measure or correct BP to the brain level, keep MAP near baseline, avoid deliberate hypotension, consider cerebral oximetry.",
+   "keywords": [
+    "beach chair",
+    "cerebral",
+    "hypoperfusion",
+    "brain level",
+    "hydrostatic",
+    "cerebral oximetry",
+    "map"
+   ]
+  },
+  {
+   "id": "osa",
+   "severity": "major",
+   "finding": "Moderate OSA with restrictive physiology",
+   "evidence": "AHI 24, CPAP 10, STOP-Bang 6, BMI 32.8.",
+   "implication": "Postop hypoxemia with opioids.",
+   "action": "CPAP in PACU, opioid sparing.",
+   "keywords": [
+    "osa",
+    "cpap",
+    "stop-bang",
+    "opioid"
+   ]
+  },
+  {
+   "id": "bp",
+   "severity": "minor",
+   "finding": "Hypertension today",
+   "evidence": "158/94; lisinopril held.",
+   "implication": "Labile BP with positioning.",
+   "action": "Treat to baseline.",
+   "keywords": [
+    "hypertension"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "GA with ETT plus diaphragm sparing block",
+   "keywords": [
+    "ett",
+    "general",
+    "suprascapular"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "BP referenced to brain level; consider arterial line or cerebral oximetry",
+   "keywords": [
+    "arterial line",
+    "cerebral",
+    "brain"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "positioning",
+   "item": "Beach chair with head neutral and padding",
+   "keywords": [
+    "beach chair",
+    "head"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Peripheral nerve blocks"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "OSA and restrictive lung disease"
+  }
+ ]
+}

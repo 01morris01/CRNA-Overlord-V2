@@ -1,0 +1,385 @@
+{
+ "id": "p37",
+ "room": "OR 13",
+ "time": "0930",
+ "name": "ROUTH, ELI JAMES",
+ "mrn": "0146037",
+ "dob": "04/20/2025",
+ "age": "18 mo",
+ "sex": "M",
+ "ht_cm": 81,
+ "wt_kg": 11.2,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. H. Stansberry, Jefferson City Pediatrics",
+ "insurance": "TennCare (Amerigroup)",
+ "emergency_contact": "Kelsey Routh (mother) 865-555-0172; Tyler Routh (father) 865-555-0173",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Bilateral myringotomy with tympanostomy tube placement",
+  "short": "Bilateral myringotomy and tubes",
+  "laterality": "Bilateral",
+  "service": "Pediatric ENT",
+  "surgeon": "W. Coffelt, MD",
+  "assistant": "",
+  "indication": "Recurrent acute otitis media (5 episodes in 6 months) with persistent bilateral effusion",
+  "duration_min": 15,
+  "anesthesia_requested": "General, mask (no IV anticipated)",
+  "position": "Supine, head turned",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Operating microscope",
+  "implants": "Fluoroplastic tympanostomy tubes x2",
+  "surgeon_notes": "Ciprofloxacin/dexamethasone otic drops intraop.",
+  "add_on": false,
+  "scheduled_on": "10/01/2026"
+ },
+ "problems": [
+  [
+   "Recurrent acute otitis media",
+   "01/2026",
+   "Active"
+  ],
+  [
+   "Otitis media with effusion, bilateral",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Upper respiratory infection",
+   "10/2026",
+   "Resolved"
+  ],
+  [
+   "Atopic dermatitis, mild",
+   "2025",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Born 39w1d, SVD, BW 3.42 kg, no NICU",
+   "AOM x5 since 04/2026 (amoxicillin, amoxicillin-clavulanate, cefdinir)",
+   "Mild eczema",
+   "URI early 10/2026, resolved",
+   "Development normal: walks, ~10 words"
+  ],
+  "psh": [],
+  "family": [
+   "Mother: asthma (childhood)",
+   "Father: had ear tubes as child",
+   "No family history of anesthesia problems, malignant hyperthermia, or bleeding disorders"
+  ],
+  "social": {
+   "tobacco": "No smoke exposure in home (father smokes outside only)",
+   "alcohol": "N/A",
+   "drugs": "N/A",
+   "occupation": "Daycare 5 days/week",
+   "living": "Parents and 4-year-old sister",
+   "other": "Bottle at night discontinued 09/2026"
+  },
+  "immunizations": [
+   [
+    "Hepatitis B x3",
+    "2025"
+   ],
+   [
+    "DTaP x3",
+    "10/2025"
+   ],
+   [
+    "IPV x3",
+    "10/2025"
+   ],
+   [
+    "Hib x3",
+    "10/2025"
+   ],
+   [
+    "PCV20 x4",
+    "07/2026"
+   ],
+   [
+    "Rotavirus x2",
+    "2025"
+   ],
+   [
+    "Hepatitis A #1",
+    "07/2026"
+   ],
+   [
+    "Varicella",
+    "07/2026"
+   ],
+   [
+    "Influenza #1",
+    "10/2025"
+   ],
+   [
+    "Influenza #2",
+    "11/2025"
+   ],
+   [
+    "Influenza 2026-27",
+    "09/2026"
+   ],
+   [
+    "MMR #1",
+    "Not given - deferred 04/2026 (febrile AOM), catch-up planned at 18-mo visit 11/2026"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Acetaminophen 160 mg/5 mL",
+   "5 mL PO q6h PRN",
+   "OTC",
+   "10/24/2026"
+  ],
+  [
+   "Hydrocortisone 1% cream",
+   "Apply BID PRN eczema",
+   "Dr. H. Stansberry",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Ciprofloxacin/dexamethasone otic",
+   "4 drops each ear intraop",
+   "Due"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Cefdinir 125 mg/5 mL",
+   "08/2026",
+   "Course complete"
+  ],
+  [
+   "Amoxicillin-clavulanate ES",
+   "06/2026",
+   "Course complete"
+  ],
+  [
+   "Amoxicillin 400 mg/5 mL",
+   "04/2026, 05/2026",
+   "Courses complete"
+  ]
+ ],
+ "labs": {
+  "cols": [],
+  "rows": [],
+  "other": [
+   [
+    "04/2025",
+    "Newborn screen (state)",
+    "Normal",
+    ""
+   ],
+   [
+    "04/2025",
+    "Newborn hearing screen",
+    "Pass bilaterally",
+    ""
+   ]
+  ]
+ },
+ "imaging": [],
+ "cardiology": [],
+ "encounters": [
+  [
+   "04/23/2025",
+   "Clinic",
+   "Jefferson City Pediatrics",
+   "Newborn visit",
+   "Well"
+  ],
+  [
+   "04/14/2026",
+   "Clinic",
+   "Jefferson City Pediatrics",
+   "12-month well child + fever",
+   "AOM; MMR deferred"
+  ],
+  [
+   "08/12/2026",
+   "Clinic",
+   "Jefferson City Pediatrics",
+   "AOM #5",
+   "ENT referral"
+  ],
+  [
+   "09/22/2026",
+   "Clinic",
+   "C-N University Pediatric ENT",
+   "Recurrent AOM",
+   "BMT scheduled"
+  ],
+  [
+   "10/01/2026",
+   "Telehealth",
+   "Jefferson City Pediatrics",
+   "Cough, runny nose",
+   "Viral URI, supportive"
+  ]
+ ],
+ "notes": [
+  [
+   "04/14/2026 1030",
+   "Progress Note",
+   "Pediatrics",
+   "H. Stansberry, MD",
+   "12 mo WCC. T 38.9, R TM bulging. AOM - amoxicillin 90 mg/kg/d. Growth 50th %ile. MMR/varicella/HepA deferred due to febrile illness - return for vaccines in 2-4 wk."
+  ],
+  [
+   "07/16/2026 0915",
+   "Nursing Note",
+   "Pediatrics",
+   "A. Leming, LPN",
+   "Vaccine visit: PCV20 #4, varicella, HepA #1 given. MMR not available today (backorder at clinic) - mom to return; will catch up at 18 mo WCC if not before."
+  ],
+  [
+   "09/22/2026 1400",
+   "Consult",
+   "Pediatric ENT",
+   "W. Coffelt, MD",
+   "17 mo M, 5 AOM in 6 mo, bilateral effusion on exam today, type B tympanograms bilaterally. Speech ~8 words. Plan BMT. Mother asks about adenoidectomy - not indicated now. No snoring/apnea. No bleeding history."
+  ],
+  [
+   "10/01/2026 1100",
+   "Telehealth",
+   "Pediatrics",
+   "R. Gilliam, NP",
+   "Mom reports clear runny nose, mild cough x3 d, no fever, eating/drinking well, active. Daycare outbreak. Viral URI. Supportive care, saline, honey OK. Call if fever, labored breathing. Mom asks re surgery 10/27 - should be ok if resolved; ENT will assess."
+  ],
+  [
+   "10/26/2026 1600",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0800. Solids/formula/milk until 0130 (8 h light meal), breast milk N/A, clears until 0700. URI resolved ~3 wk ago per mom, no cough, no fever. Bring sippy cup, comfort item."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/23/2025 1000",
+   "",
+   148,
+   40,
+   99,
+   36.9,
+   3.4,
+   "0/10",
+   "Newborn visit"
+  ],
+  [
+   "04/14/2026 1015",
+   "",
+   142,
+   32,
+   98,
+   38.9,
+   9.8,
+   "FLACC 3",
+   "Pediatrics"
+  ],
+  [
+   "09/22/2026 1345",
+   "",
+   118,
+   26,
+   99,
+   36.8,
+   11.0,
+   "FLACC 0",
+   "Pediatric ENT"
+  ],
+  [
+   "10/27/2026 0810",
+   "96/58",
+   116,
+   26,
+   99,
+   36.7,
+   11.2,
+   "FLACC 0",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO per pediatric guidelines",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Discharge home with parents when criteria met",
+   "10/27/2026 0805",
+   "Pending (postop)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not done",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: bilateral myringotomy and tubes",
+   "Signed by mother 09/22/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "N/A (minor)",
+ "anesthesia_history": [],
+ "preop": {
+  "arrived": "10/27/2026 0800",
+  "npo_solids": "10/27/2026 0100 toddler formula 6 oz + crackers",
+  "npo_clears": "10/27/2026 0650 apple juice 4 oz",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes (mother); anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A (bilateral)"
+   ],
+   [
+    "Allergy band",
+    "N/A (NKDA)"
+   ],
+   [
+    "Weight",
+    "11.2 kg"
+   ]
+  ],
+  "nursing_note": "Active, playful toddler with mother and father. Mom reports cold resolved ~3 wk ago; no fever, no cough this week. Clear nose, lungs clear, no retractions. Small dry eczema patches antecubital. No loose teeth (8 teeth). Last formula/crackers 0100, apple juice 0650. Mom will accompany to OR door. No IV.",
+  "iv": "None",
+  "glucose": ""
+ },
+ "label": "E. Routh",
+ "bmi": "17.1"
+}

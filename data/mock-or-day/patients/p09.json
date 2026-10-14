@@ -1,0 +1,1951 @@
+{
+ "id": "p09",
+ "room": "OR 8",
+ "time": "1100",
+ "name": "CALLOWAY, ROBERT E",
+ "mrn": "0086390",
+ "dob": "01/30/1953",
+ "age": "73 y",
+ "sex": "M",
+ "ht_cm": 175,
+ "wt_kg": 70.0,
+ "preferred_name": "Bob",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "S. Whitson, MD, Newport Internal Medicine",
+ "insurance": "Humana Gold Plus (Medicare Advantage HMO)",
+ "emergency_contact": "Karen Calloway-Hurst (daughter) 423-555-0102",
+ "isolation": "",
+ "allergies": [
+  [
+   "Haloperidol",
+   "Severe rigidity",
+   "Severe",
+   "2019"
+  ],
+  [
+   "Metoclopramide",
+   "Severe rigidity",
+   "Severe",
+   "2021"
+  ]
+ ],
+ "case": {
+  "procedure": "Exploratory laparotomy, possible small bowel resection",
+  "short": "Ex lap, possible small bowel resection",
+  "laterality": "N/A",
+  "service": "Acute Care Surgery",
+  "surgeon": "H. Kim, MD",
+  "assistant": "S. Ali, MD (surgery resident PGY-2)",
+  "indication": "Closed-loop small bowel obstruction with concern for ischemia (CT 10/27 0700).",
+  "duration_min": 150,
+  "anesthesia_requested": "General",
+  "position": "Supine, arms out",
+  "dispo": "SICU",
+  "blood": "Type and crossmatch 2 units requested.",
+  "equipment": "Laparotomy tray, bowel stapler",
+  "implants": "",
+  "surgeon_notes": "Class: emergent (within 1 h). Add-on.",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Parkinson disease",
+   "2014",
+   "Active"
+  ],
+  [
+   "Atrial fibrillation, permanent, on warfarin",
+   "2018",
+   "Active"
+  ],
+  [
+   "COPD, moderate (GOLD 2)",
+   "2016",
+   "Active"
+  ],
+  [
+   "Benign prostatic hyperplasia, s/p TURP",
+   "2023",
+   "Active"
+  ],
+  [
+   "Oropharyngeal dysphagia, mild",
+   "2025",
+   "Active"
+  ],
+  [
+   "Orthostatic hypotension",
+   "2024",
+   "Active"
+  ],
+  [
+   "Postoperative delirium, history",
+   "2023",
+   "Resolved"
+  ],
+  [
+   "Small bowel obstruction",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2005",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Parkinson disease x 12 years (dx 2014), Hoehn & Yahr stage 3; motor fluctuations with wearing off",
+   "Permanent AF, warfarin (INR goal 2-3), anticoagulation clinic",
+   "COPD, FEV1 61% (2024); former smoker 40 pack-years, quit 2010",
+   "BPH s/p TURP 2023",
+   "Orthostatic hypotension (PD-related)",
+   "Mild oropharyngeal dysphagia (SLP 2025)",
+   "Haloperidol 2019 (ED for agitation/UTI delirium) and metoclopramide 2021: severe rigidity"
+  ],
+  "psh": [
+   [
+    "1994",
+    "Open appendectomy",
+    "Morristown-Hamblen (records unavailable)"
+   ],
+   [
+    "2008",
+    "Open cholecystectomy",
+    "C-N University Hospital"
+   ],
+   [
+    "03/2023",
+    "Transurethral resection of prostate (TURP)",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Father: Parkinson disease",
+   "Mother: stroke",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Former, 40 pack-years, quit 2010",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Retired machinist",
+   "living": "Lives with wife (early dementia) in Newport; daughter checks daily",
+   "other": "Uses walker. Daughter manages pill organizer."
+  },
+  "immunizations": [
+   [
+    "Influenza, high-dose",
+    "09/2026"
+   ],
+   [
+    "PCV20",
+    "2024"
+   ],
+   [
+    "RSV",
+    "2024"
+   ],
+   [
+    "Shingrix x2",
+    "2021"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2016"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Carbidopa-levodopa 25/100 mg",
+   "2 tablets PO q4h while awake (0600, 1000, 1400, 1800, 2200)",
+   "E. Marlow, MD (Neurology)",
+   "10/25/2026 2200 (vomiting since)"
+  ],
+  [
+   "Warfarin 5 mg",
+   "5 mg PO daily (Mon-Sat), 2.5 mg Sun",
+   "Anticoagulation Clinic",
+   "10/25/2026 1800"
+  ],
+  [
+   "Rasagiline 1 mg",
+   "1 mg PO daily",
+   "E. Marlow, MD",
+   "10/25/2026 0800"
+  ],
+  [
+   "Tiotropium 18 mcg inhaled",
+   "Daily",
+   "R. Fenner, MD (Pulmonology)",
+   "10/25/2026"
+  ],
+  [
+   "Albuterol HFA",
+   "2 puffs q4h PRN",
+   "R. Fenner, MD",
+   "10/2026"
+  ],
+  [
+   "Tamsulosin 0.4 mg",
+   "0.4 mg PO nightly",
+   "Urology",
+   "10/24/2026"
+  ],
+  [
+   "Metoprolol tartrate 25 mg",
+   "25 mg PO BID",
+   "S. Whitson, MD",
+   "10/25/2026 2000"
+  ],
+  [
+   "Polyethylene glycol 17 g",
+   "Daily",
+   "OTC",
+   "10/24/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Ondansetron 4 mg IV (ED)",
+   "q6h PRN",
+   "Given 10/27 0520"
+  ],
+  [
+   "Metoclopramide 10 mg IV (ED order set)",
+   "x1",
+   "Cancelled by pharmacy 0525 (allergy/Parkinson disease)"
+  ],
+  [
+   "Lactated Ringer's 30 mL/kg (2,100 mL)",
+   "Bolus",
+   "Completed 0830"
+  ],
+  [
+   "Piperacillin-tazobactam 4.5 g IV",
+   "q6h",
+   "Given 0715"
+  ],
+  [
+   "Hydromorphone 0.5 mg IV",
+   "q3h PRN",
+   "Given 0600, 0900"
+  ],
+  [
+   "Vitamin K 10 mg IV",
+   "x1",
+   "Ordered 0950, not yet given"
+  ],
+  [
+   "Norepinephrine",
+   "Titrate MAP > 65",
+   "Not started (order pending ICU)"
+  ],
+  [
+   "Carbidopa-levodopa",
+   "Home med",
+   "Not ordered (NPO)"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Ropinirole 2 mg TID",
+   "2016-2022",
+   "Hallucinations, impulse control"
+  ],
+  [
+   "Amantadine 100 mg BID",
+   "2019-2024",
+   "Livedo, confusion"
+  ],
+  [
+   "Lisinopril 10 mg",
+   "2005-2024",
+   "Orthostatic hypotension"
+  ],
+  [
+   "Diltiazem",
+   "2018-2019",
+   "Changed to metoprolol"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0930",
+    "comment": "Preop (ABG on 4 L NC)",
+    "vals": {
+     "Na": [
+      "149",
+      "H"
+     ],
+     "K": [
+      "3.1",
+      "L"
+     ],
+     "Cl": [
+      "92",
+      "L"
+     ],
+     "CO2": [
+      "31",
+      "H"
+     ],
+     "BUN": [
+      "52",
+      "H"
+     ],
+     "Cr": [
+      "2.30",
+      "H"
+     ],
+     "Glu": [
+      "142",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "WBC": [
+      "18.9",
+      "H"
+     ],
+     "Hgb": [
+      "16.8",
+      ""
+     ],
+     "Hct": [
+      "51",
+      ""
+     ],
+     "Plt": [
+      "204",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "PT": [
+      "38.2",
+      "H"
+     ],
+     "INR": [
+      "3.4",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ],
+     "Lactate": [
+      "4.6",
+      "H"
+     ],
+     "pH": [
+      "7.34",
+      "L"
+     ],
+     "PaCO2": [
+      "58",
+      "H"
+     ],
+     "PaO2": [
+      "64",
+      "L"
+     ],
+     "HCO3a": [
+      "30",
+      "H"
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/27/2026 0530",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "17.2",
+      "H"
+     ],
+     "Hgb": [
+      "16.5",
+      ""
+     ],
+     "Hct": [
+      "50",
+      ""
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "147",
+      "H"
+     ],
+     "K": [
+      "3.3",
+      "L"
+     ],
+     "Cl": [
+      "94",
+      "L"
+     ],
+     "CO2": [
+      "30",
+      "H"
+     ],
+     "BUN": [
+      "46",
+      "H"
+     ],
+     "Cr": [
+      "2.00",
+      "H"
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "PT": [
+      "40.3",
+      "H"
+     ],
+     "INR": [
+      "3.3",
+      "H"
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "Lactate": [
+      "3.1",
+      "H"
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "97",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/20/2026 1000",
+    "comment": "Anticoag clinic; no dose change",
+    "vals": {
+     "PT": [
+      "37.8",
+      "H"
+     ],
+     "INR": [
+      "3.1",
+      "H"
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/22/2026 1000",
+    "comment": "Anticoag clinic",
+    "vals": {
+     "PT": [
+      "29.3",
+      "H"
+     ],
+     "INR": [
+      "2.4",
+      "H"
+     ],
+     "aPTT": [
+      "31",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/25/2026 0900",
+    "comment": "PCP",
+    "vals": {
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "13.7",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "240",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/08/2025 0900",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "5.6",
+      ""
+     ],
+     "Hgb": [
+      "13.8",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "230",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "34.2",
+      "H"
+     ],
+     "INR": [
+      "2.8",
+      "H"
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/20/2024 0830",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "14.1",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "240",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "83",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "59",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "104",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/16/2023 0500",
+    "comment": "POD 1 TURP",
+    "vals": {
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "12.1",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.99",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2023 0600",
+    "comment": "Preop TURP (warfarin held, bridged)",
+    "vals": {
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "13.4",
+      "L"
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.99",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "PT": [
+      "15.9",
+      "H"
+     ],
+     "INR": [
+      "1.3",
+      "H"
+     ],
+     "aPTT": [
+      "31",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/22/2021 1100",
+    "comment": "Anticoag clinic",
+    "vals": {
+     "PT": [
+      "31.7",
+      "H"
+     ],
+     "INR": [
+      "2.6",
+      "H"
+     ],
+     "aPTT": [
+      "33",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/14/2019 2230",
+    "comment": "ED, UTI with delirium",
+    "vals": {
+     "WBC": [
+      "13.1",
+      "H"
+     ],
+     "Hgb": [
+      "13.8",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "255",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "USG": [
+      "1.015",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "3+",
+      "A"
+     ],
+     "UNit": [
+      "Positive",
+      "A"
+     ]
+    }
+   },
+   {
+    "dt": "04/02/2018 1500",
+    "comment": "New AF",
+    "vals": {
+     "WBC": [
+      "7.6",
+      ""
+     ],
+     "Hgb": [
+      "13.7",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "249",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "143",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "TSH": [
+      "2.17",
+      ""
+     ],
+     "FT4": [
+      "1.15",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/12/2017 0830",
+    "comment": "Neurology annual (pre-warfarin)",
+    "vals": {
+     "WBC": [
+      "8.4",
+      ""
+     ],
+     "Hgb": [
+      "14.2",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "247",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "19",
+      ""
+     ],
+     "Cr": [
+      "1.06",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "87",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.5",
+      ""
+     ],
+     "TSH": [
+      "1.57",
+      ""
+     ],
+     "FT4": [
+      "1.10",
+      ""
+     ],
+     "B12": [
+      "433",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaO2",
+    "name": "PO2",
+    "unit": "mm Hg",
+    "ref": "80-100"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026 0930",
+    "Type and crossmatch",
+    "A positive, antibody screen negative; 2 units crossmatched",
+    ""
+   ],
+   [
+    "10/27/2026 0530",
+    "Lipase",
+    "48 U/L",
+    ""
+   ],
+   [
+    "10/27/2026 0700",
+    "Blood cultures x2",
+    "Pending",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "04/02/2018",
+   "XR Chest 2 views",
+   "Hyperinflation. No acute disease.",
+   "P. Mendez, MD"
+  ],
+  [
+   "09/09/2025",
+   "Modified barium swallow (SLP)",
+   "Mild oral and pharyngeal phase dysphagia; delayed swallow initiation; trace penetration with thin liquids, no aspiration. Recommend chin tuck, small bites.",
+   "A. Stroud, MD / SLP"
+  ],
+  [
+   "10/27/2026",
+   "XR Abdomen, obstruction series (0540)",
+   "Multiple dilated small bowel loops with air-fluid levels. Paucity of colonic gas. Impression: Small bowel obstruction.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/27/2026",
+   "CT Abdomen/Pelvis with IV contrast (0700)",
+   "IV contrast given (creatinine pending at time of scan). Closed-loop small bowel obstruction in the right lower quadrant with mesenteric swirl and two adjacent transition points. Reduced bowel wall enhancement of the closed loop and mesenteric edema, concerning for ischemia. Small free fluid. No pneumatosis or portal venous gas. Impression: Closed-loop SBO with signs of ischemia.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/27/2026",
+   "XR Chest 1 view portable",
+   "Hyperinflation. Elevated diaphragms (distended abdomen). NG tube tip in stomach. No consolidation.",
+   "L. Darby, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "04/02/2018",
+   "ECG 12-lead",
+   "Atrial fibrillation, rate 104. Low voltage.",
+   "D. Harrell, MD",
+   {
+    "rate": 104,
+    "rhythm": "af",
+    "qrs": 94,
+    "qtc": 450,
+    "axis": 30,
+    "lowv": 1
+   }
+  ],
+  [
+   "03/14/2023",
+   "Echocardiogram, transthoracic",
+   "LVEF 55-60%. Biatrial enlargement. Mild TR. RVSP 34.",
+   "S. Kaur, MD"
+  ],
+  [
+   "05/20/2024",
+   "Pulmonary function test",
+   "FEV1 1.72 L (61% pred), FVC 3.10 L (79%), FEV1/FVC 0.55. DLCO 64%. Moderate obstruction, no bronchodilator response.",
+   "R. Fenner, MD"
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead",
+   "Atrial fibrillation 122. Low voltage. QTc 470. Nonspecific ST-T changes.",
+   "D. Harrell, MD",
+   {
+    "tmod": {
+     "I": 0.35,
+     "aVL": 0.2,
+     "V4": 0.4,
+     "V5": 0.3,
+     "V6": 0.3,
+     "II": 0.5
+    },
+    "rate": 122,
+    "rhythm": "af",
+    "qrs": 94,
+    "qtc": 470,
+    "axis": 30,
+    "lowv": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2014",
+   "Specialty clinic",
+   "C-N Neurology",
+   "Tremor",
+   "Parkinson disease diagnosed"
+  ],
+  [
+   "04/02/2018",
+   "ED -> observation",
+   "C-N University Hospital",
+   "New AF",
+   "Rate control, warfarin"
+  ],
+  [
+   "08/14/2019",
+   "ED -> inpatient",
+   "C-N University Hospital",
+   "UTI with delirium",
+   "Haloperidol -> severe rigidity; discharged day 4"
+  ],
+  [
+   "11/09/2021",
+   "ED visit",
+   "C-N University Hospital",
+   "Gastroenteritis",
+   "Metoclopramide -> rigidity; discharged"
+  ],
+  [
+   "03/15/2023",
+   "Inpatient",
+   "C-N University Hospital",
+   "TURP",
+   "Postop delirium 1 day; discharged POD 3"
+  ],
+  [
+   "05/20/2024",
+   "Specialty clinic",
+   "C-N Pulmonology",
+   "COPD",
+   "PFTs, tiotropium"
+  ],
+  [
+   "09/08/2025",
+   "Specialty clinic",
+   "C-N Neurology",
+   "PD follow-up",
+   "Levodopa schedule q4h"
+  ],
+  [
+   "10/20/2026",
+   "Anticoagulation clinic",
+   "C-N Anticoagulation Clinic",
+   "INR check",
+   "INR 3.1"
+  ],
+  [
+   "10/27/2026",
+   "ED -> OR",
+   "C-N University Hospital",
+   "Abdominal pain, vomiting",
+   "Emergency laparotomy"
+  ]
+ ],
+ "notes": [
+  [
+   "08/16/2019 1000",
+   "Progress Note",
+   "Hospital Medicine",
+   "M. Okafor, MD",
+   "UTI with hyperactive delirium. Haloperidol 2 mg IV given overnight by cross-cover for agitation -> severe generalized rigidity, unable to swallow, T 38.4. Neurology: dopamine blockade in PD. Resolved over 24 h with levodopa resumption. Allergy list updated: haloperidol."
+  ],
+  [
+   "11/09/2021 2300",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "R. Lyle, DO",
+   "Viral gastroenteritis. Metoclopramide 10 mg IV for nausea -> marked rigidity and akathisia within 1 h. Diphenhydramine given. Allergy list: metoclopramide. Discharged after observation."
+  ],
+  [
+   "03/15/2023 0700",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology",
+   "C. Rowan, CRNA",
+   "TURP. PD: give carbidopa-levodopa 0600 with sip, resume ASAP postop. Avoid dopamine antagonists. Warfarin held 5 days, INR 1.3. Spinal L3-4, bupivacaine 0.75% 10.5 mg. Uneventful intraop."
+  ],
+  [
+   "03/17/2023 1000",
+   "Discharge Summary",
+   "Urology",
+   "B. Teague, PA-C",
+   "TURP uneventful. POD 1 delirium overnight, nausea treated with promethazine by night team - \"worsened rigidity,\" resolved after levodopa dose. Warfarin resumed POD 2. Added promethazine to intolerance note (not to allergy list)."
+  ],
+  [
+   "05/20/2024 1100",
+   "Progress Note",
+   "Pulmonology",
+   "R. Fenner, MD",
+   "COPD GOLD 2, 1 exacerbation/year. Tiotropium daily. Albuterol PRN. Weak cough due to PD; airway clearance techniques."
+  ],
+  [
+   "09/08/2025 1000",
+   "Progress Note",
+   "Neurology",
+   "E. Marlow, MD",
+   "PD 11 years, H&Y 3. Wearing off at 3.5 h; changed to 2 tabs q4h while awake. Rasagiline continued. Freezing, walker. Hospital/Surgery: never stop levodopa abruptly; if NPO use rotigotine patch or NG levodopa. AVOID haloperidol, metoclopramide, prochlorperazine, promethazine, droperidol. Rasagiline: avoid meperidine, tramadol, methadone, dextromethorphan. Wallet card provided."
+  ],
+  [
+   "09/10/2025 1400",
+   "Dietitian",
+   "Nutrition",
+   "R. Benoit, RD",
+   "Post-MBS. Mild dysphagia. Soft diet, thin liquids with chin tuck. Protein redistribution: protein mostly at dinner to optimize levodopa absorption. Wt 72 kg."
+  ],
+  [
+   "10/20/2026 1015",
+   "Telephone Encounter",
+   "Anticoagulation Clinic",
+   "J. Vance, RN",
+   "INR 3.1 (goal 2-3). Recent antibiotic? No. Diet change? Eating less. Continue same dose, recheck 2 weeks."
+  ],
+  [
+   "10/27/2026 0515",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "C. Whitlow, MD",
+   "73 yo M with abdominal pain and distension 2 days, bilious vomiting since evening of 10/25, no flatus 24 h. Has not kept down meds since 10/25 night. Hx PD, AF on warfarin, COPD. T 38.3, HR 124 irregular, BP 92/54. Distended, diffusely tender. NG placed: 1.4 L bilious. Labs, CT, sepsis bundle, surgery consult. Metoclopramide ordered from nausea order set - cancelled by pharmacy."
+  ],
+  [
+   "10/27/2026 0530",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Ferris, PharmD",
+   "Metoclopramide order cancelled: documented severe rigidity, Parkinson disease (dopamine antagonist). Ondansetron OK. Note: home carbidopa-levodopa q4h and rasagiline not ordered - patient NPO with NG. Recommend neurology input for rotigotine transdermal. Warfarin INR 3.3: anticipate reversal if surgical."
+  ],
+  [
+   "10/27/2026 0800",
+   "Consult",
+   "Acute Care Surgery",
+   "H. Kim, MD",
+   "Abdominal pain and distension 2 days, bilious vomiting. No flatus 24 h. Prior open cholecystectomy and appendectomy. PMH: Parkinson disease (12 years). AF on warfarin. COPD. BPH. Exam: T 38.3, HR 124 irregular, BP 92/54, RR 28. Distended, peritoneal signs. Resting tremor, rigidity. Missed carbidopa-levodopa doses since vomiting began. NG tube placed in ED: 1.4 L bilious output. CT: closed-loop SBO with ischemia. Plan: emergent ex lap, possible SBR. Consent. Reverse INR. SICU postop."
+  ],
+  [
+   "10/27/2026 0940",
+   "Telephone Encounter",
+   "Neurology (phone consult)",
+   "E. Marlow, MD",
+   "\"Hold off on dopamine antagonists. Missing levodopa risks severe rigidity and a parkinsonism-hyperpyrexia syndrome. Consider rotigotine patch until enteral route is back.\" Rotigotine 4 mg/24 h suggested; ordering deferred to primary team."
+  ],
+  [
+   "10/27/2026 1015",
+   "Nursing Note",
+   "Emergency",
+   "L. Ortiz, RN",
+   "Daughter at bedside, brought pill organizer: Sunday-Saturday boxes untouched since Sunday 10/25 evening. Patient stiff, difficulty turning in bed, soft voice. Foley 40 mL in 2 h."
+  ],
+  [
+   "06/12/2017 1000",
+   "Progress Note",
+   "Neurology",
+   "E. Marlow, MD",
+   "PD 3 years. Carbidopa-levodopa 25/100 TID, ropinirole. Mild tremor, no falls."
+  ],
+  [
+   "04/03/2018 0900",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "A. Pennington, MD",
+   "New AF RVR, rate controlled with diltiazem. CHA2DS2-VASc 2 (age 65-74, HTN). Warfarin started (patient preference/cost), anticoagulation clinic referral."
+  ],
+  [
+   "11/14/2024 1000",
+   "PT Evaluation",
+   "Outpatient PT",
+   "L. Gentry, PT",
+   "LSVT BIG program. Freezing at doorways; walker. Fall risk high. Home program."
+  ],
+  [
+   "09/09/2025 1100",
+   "Procedure Note",
+   "Speech-Language Pathology",
+   "M. Dade, CCC-SLP",
+   "MBS: mild oropharyngeal dysphagia, trace penetration thin liquids. Chin tuck, small bites, meds whole in puree."
+  ],
+  [
+   "08/25/2026 0900",
+   "Progress Note",
+   "Internal Medicine",
+   "S. Whitson, MD",
+   "Annual. Orthostatic BP 124/72 -> 100/62 standing. Fludrocortisone discussed, deferred. Flu shot next month. Weight 71.4 kg."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/02/2018 1500",
+   "148/86",
+   104,
+   18,
+   95,
+   36.8,
+   76.0,
+   "0/10",
+   "ED"
+  ],
+  [
+   "08/14/2019 2230",
+   "132/76",
+   98,
+   20,
+   95,
+   38.1,
+   75.0,
+   "0/10",
+   "ED"
+  ],
+  [
+   "03/14/2023 0600",
+   "128/74",
+   78,
+   16,
+   95,
+   36.6,
+   73.5,
+   "0/10",
+   "Preop"
+  ],
+  [
+   "05/20/2024 1100",
+   "122/70 (standing 98/60)",
+   76,
+   16,
+   94,
+   36.6,
+   72.8,
+   "0/10",
+   "Pulmonology"
+  ],
+  [
+   "09/08/2025 1000",
+   "126/72",
+   74,
+   16,
+   95,
+   36.7,
+   72.0,
+   "0/10",
+   "Neurology"
+  ],
+  [
+   "10/20/2026 1015",
+   "124/70",
+   80,
+   16,
+   95,
+   null,
+   71.4,
+   "0/10",
+   "Anticoag clinic"
+  ],
+  [
+   "10/27/2026 0500",
+   "92/54",
+   124,
+   28,
+   92,
+   38.3,
+   70.0,
+   "8/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0830",
+   "96/56",
+   120,
+   28,
+   92,
+   38.4,
+   null,
+   "7/10",
+   "ED, post bolus"
+  ],
+  [
+   "10/27/2026 1030",
+   "88/50",
+   128,
+   30,
+   91,
+   38.5,
+   null,
+   "8/10",
+   "Preop holding, 4 L NC"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO, NG to low intermittent suction",
+   "10/27/2026 0515",
+   "Active"
+  ],
+  [
+   "Sepsis bundle",
+   "10/27/2026 0520",
+   "Completed (lactate, cultures, antibiotics, 30 mL/kg)"
+  ],
+  [
+   "Type and crossmatch 2 units",
+   "10/27/2026 0800",
+   "Resulted"
+  ],
+  [
+   "4-factor PCC",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Vitamin K 10 mg IV",
+   "10/27/2026 0950",
+   "Active - not given"
+  ],
+  [
+   "Rotigotine transdermal patch",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Admit SICU postop",
+   "10/27/2026",
+   "Pending"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "FFP/PCC: none requested",
+  "specimen_expires": "10/30/2026 0930"
+ },
+ "consents": [
+  [
+   "Surgical consent: exploratory laparotomy, possible bowel resection",
+   "Signed by patient 10/27/2026 0830"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/27/2026"
+  ]
+ ],
+ "directives": "Advance directive (2020): full treatment; HCPOA daughter Karen Calloway-Hurst.",
+ "anesthesia_history": [
+  [
+   "03/2023",
+   "TURP",
+   "Spinal (bupivacaine 10.5 mg)",
+   "Postop delirium 1 day; promethazine worsened rigidity",
+   "C-N University Hospital"
+  ],
+  [
+   "2008",
+   "Open cholecystectomy",
+   "GA, ETT",
+   "No records of problems",
+   "C-N University Hospital"
+  ],
+  [
+   "1994",
+   "Appendectomy",
+   "GA",
+   "Records unavailable",
+   "Morristown-Hamblen"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1020 (from ED)",
+  "npo_solids": "10/25/2026 (NPO 2 days)",
+  "npo_clears": "10/25/2026 2200 (with levodopa)",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes (patient, oriented)"
+   ],
+   [
+    "H&P",
+    "Surgery consult"
+   ],
+   [
+    "Allergy band",
+    "On (haloperidol, metoclopramide)"
+   ],
+   [
+    "Type and crossmatch",
+    "2 units"
+   ],
+   [
+    "NG tube",
+    "In place, to suction"
+   ],
+   [
+    "Foley",
+    "In place"
+   ],
+   [
+    "Code status",
+    "Full code"
+   ]
+  ],
+  "nursing_note": "HR 128 AF, BP 88/50, RR 30, SpO2 91% on 4 L, T 38.5. Foley 40 mL/2 h. NPO 2 days. NG to suction, 1.4 L. Full code. Consent by patient; oriented. Daughter at bedside. Rigid, tremor, soft voice. Last carbidopa-levodopa 10/25 2200.",
+  "iv": "18 G left forearm, 20 G right hand",
+  "glucose": "142"
+ },
+ "label": "R. Calloway",
+ "bmi": "22.9"
+}

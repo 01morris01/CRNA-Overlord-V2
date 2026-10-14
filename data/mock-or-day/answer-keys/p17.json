@@ -1,0 +1,126 @@
+{
+ "id": "p17",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Lap chole in a patient with thiazide induced hypokalemia (K 3.0) who held the diuretic but took the ACE inhibitor she was told to hold.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Controlled hypertension, hypothyroidism, obesity class I."
+ },
+ "decision": {
+  "recommendation": "proceed with modifications",
+  "rationale": "Chronic mild hypokalemia (3.0) without cardiac disease or ECG changes usually allows an elective case; replete and consider a repeat ECG. Expect more induction hypotension from the lisinopril taken at 0600."
+ },
+ "redFlags": [
+  {
+   "id": "potassium",
+   "severity": "major",
+   "finding": "Hypokalemia on a thiazide",
+   "evidence": "K 3.0, Cl 96, HCO3 30 (contraction alkalosis), Mg 1.7; HCTZ increased to 25 mg; nightly leg cramps.",
+   "implication": "Arrhythmia risk, potentiated neuromuscular blockade.",
+   "action": "Replete K (and Mg), ECG, avoid hyperventilation.",
+   "keywords": [
+    "potassium",
+    "hypokalemia",
+    "k 3.0",
+    "thiazide",
+    "hctz",
+    "magnesium"
+   ]
+  },
+  {
+   "id": "acei",
+   "severity": "major",
+   "finding": "ACE inhibitor taken the morning of surgery",
+   "evidence": "Took lisinopril at 0600; PAT instructions said hold lisinopril and HCTZ.",
+   "implication": "Refractory hypotension after induction.",
+   "action": "Gentle induction, vasopressors ready (vasopressin if refractory).",
+   "keywords": [
+    "lisinopril",
+    "ace inhibitor",
+    "hypotension",
+    "vasopressin"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "PONV risk",
+   "evidence": "Female, nonsmoker, laparoscopic cholecystectomy, postop opioids.",
+   "implication": "Apfel 3.",
+   "action": "Multimodal prophylaxis.",
+   "keywords": [
+    "ponv",
+    "ondansetron",
+    "dexamethasone"
+   ]
+  },
+  {
+   "id": "morphine",
+   "severity": "minor",
+   "finding": "Morphine listed as allergy is an intolerance",
+   "evidence": "Itching and nausea with neuraxial morphine 1994.",
+   "implication": "Pseudoallergy (histamine), not anaphylaxis.",
+   "action": "Prefer other opioids, but not an absolute contraindication.",
+   "keywords": [
+    "morphine",
+    "pseudoallergy",
+    "intolerance"
+   ]
+  },
+  {
+   "id": "gerd",
+   "severity": "minor",
+   "finding": "GERD and obesity",
+   "evidence": "Omeprazole; famotidine given preop.",
+   "implication": "Aspiration risk modestly increased.",
+   "action": "Standard induction acceptable with controlled GERD.",
+   "keywords": [
+    "gerd",
+    "aspiration"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "ETT",
+   "keywords": [
+    "ett",
+    "endotracheal"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision (sulfa antibiotic allergy is unrelated)",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Multimodal PONV prophylaxis",
+   "keywords": [
+    "ondansetron",
+    "dexamethasone"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "Potassium replacement",
+   "keywords": [
+    "potassium"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence after airway manipulation"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

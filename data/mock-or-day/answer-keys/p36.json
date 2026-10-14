@@ -1,0 +1,144 @@
+{
+ "id": "p36",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "FESS in a patient with aspirin exacerbated respiratory disease whose allergy was downgraded to GI upset in 2022; the ENT order set has ketorolac and ibuprofen ordered, he bronchospasmed after ketorolac in 2020, and his Samter's bracelet is in a belongings bag.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Moderate persistent asthma with wheeze, AERD, mild OSA."
+ },
+ "decision": {
+  "recommendation": "proceed after fixing the orders",
+  "rationale": "Cancel ketorolac and ibuprofen, correct the allergy entry, use acetaminophen and celecoxib per allergy guidance. Asthma has been optimized with prednisone."
+ },
+ "redFlags": [
+  {
+   "id": "aerd",
+   "severity": "critical",
+   "finding": "AERD with NSAIDs ordered",
+   "evidence": "Allergy consult 2021 AERD; ED visit 2019; bronchospasm on emergence after ketorolac 2020; ketorolac 30 mg and ibuprofen 600 mg in order set; allergy list says GI upset; bracelet removed.",
+   "implication": "Severe bronchospasm.",
+   "action": "Discontinue ketorolac and ibuprofen, update allergy list to respiratory reaction, communicate in time out.",
+   "keywords": [
+    "aerd",
+    "samter",
+    "nsaid",
+    "ketorolac",
+    "ibuprofen",
+    "aspirin exacerbated",
+    "allergy list"
+   ]
+  },
+  {
+   "id": "asthma",
+   "severity": "major",
+   "finding": "Active asthma",
+   "evidence": "End expiratory wheeze; FeNO 58; FEV1 75%; prednisone bursts.",
+   "implication": "Bronchospasm at intubation and emergence.",
+   "action": "Bronchodilator preinduction, deep anesthesia before airway, consider deep extubation or smooth emergence with lidocaine or dexmedetomidine.",
+   "keywords": [
+    "asthma",
+    "albuterol",
+    "bronchodilat",
+    "wheeze",
+    "deep extubation"
+   ]
+  },
+  {
+   "id": "vasoconstrictor",
+   "severity": "major",
+   "finding": "Topical oxymetazoline and epinephrine injection",
+   "evidence": "Surgeon notes.",
+   "implication": "Hypertension and arrhythmia; beta blockers given for this can precipitate pulmonary edema and bronchospasm.",
+   "action": "Deepen anesthesia or use vasodilator; avoid beta blockers for oxymetazoline hypertension.",
+   "keywords": [
+    "oxymetazoline",
+    "epinephrine",
+    "beta blocker",
+    "hypertension"
+   ]
+  },
+  {
+   "id": "field",
+   "severity": "minor",
+   "finding": "Controlled hypotension and throat pack",
+   "evidence": "MAP 60 to 70 if field bloody; throat pack.",
+   "implication": "Ischemia; retained pack.",
+   "action": "TIVA with remifentanil, document pack removal.",
+   "keywords": [
+    "tiva",
+    "remifentanil",
+    "throat pack",
+    "controlled hypotension"
+   ]
+  },
+  {
+   "id": "osa",
+   "severity": "minor",
+   "finding": "Mild OSA with nasal packing",
+   "evidence": "AHI 9, CPAP intolerant, MP III.",
+   "implication": "Obstruction after surgery.",
+   "action": "Opioid sparing, monitor in PACU.",
+   "keywords": [
+    "osa",
+    "opioid"
+   ]
+  },
+  {
+   "id": "steroid",
+   "severity": "minor",
+   "finding": "Week of prednisone",
+   "evidence": "30 mg daily, taken today.",
+   "implication": "Hyperglycemia, wound effects.",
+   "action": "Dexamethasone dose acceptable; check glucose.",
+   "keywords": [
+    "prednisone",
+    "steroid"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "GETA with TIVA, oral RAE",
+   "keywords": [
+    "tiva",
+    "rae",
+    "propofol"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Acetaminophen and celecoxib; no nonselective NSAIDs",
+   "keywords": [
+    "acetaminophen",
+    "celecoxib"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Dexamethasone and ondansetron",
+   "keywords": [
+    "dexamethasone",
+    "ondansetron"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "AERD and asthma"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Blood in the airway at emergence"
+  }
+ ]
+}

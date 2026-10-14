@@ -1,0 +1,2021 @@
+{
+ "id": "p03",
+ "room": "OR 5",
+ "time": "0730",
+ "name": "WHITAKER, EVELYN R",
+ "mrn": "0088765",
+ "dob": "06/14/1942",
+ "age": "84 y",
+ "sex": "F",
+ "ht_cm": 160,
+ "wt_kg": 64.0,
+ "preferred_name": "Evie",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "DNR/DNI",
+ "pcp": "H. Mabry, MD, White Pine Internal Medicine",
+ "insurance": "Medicare Part A/B; AARP Medicare Supplement Plan G",
+ "emergency_contact": "Gary Whitaker (son, HCPOA) 865-555-0119",
+ "isolation": "",
+ "allergies": [
+  [
+   "Sulfa (sulfonamide antibiotics)",
+   "Rash",
+   "Moderate",
+   "1998"
+  ],
+  [
+   "Morphine",
+   "Confusion, hallucinations",
+   "Moderate",
+   "2021"
+  ]
+ ],
+ "case": {
+  "procedure": "Left hip hemiarthroplasty, cemented",
+  "short": "L hip hemiarthroplasty, cemented",
+  "laterality": "Left",
+  "service": "Orthopedics",
+  "surgeon": "J. Pruitt, MD",
+  "assistant": "T. Bales, PA-C",
+  "indication": "Displaced left femoral neck fracture (Garden IV) after ground-level fall at home 10/26/2026 0200.",
+  "duration_min": 90,
+  "anesthesia_requested": "\"Spinal please\"",
+  "position": "Right lateral decubitus",
+  "dispo": "Ortho floor (telemetry)",
+  "blood": "Type and crossmatch 2 units. Expected EBL 300-500 mL.",
+  "equipment": "Hana table not needed; lateral positioner, cement, cemented bipolar system",
+  "implants": "Cemented bipolar hemiarthroplasty",
+  "surgeon_notes": "Within 48 h of admission per hip fracture pathway.",
+  "add_on": false,
+  "scheduled_on": "10/26/2026"
+ },
+ "problems": [
+  [
+   "Closed displaced fracture of left femoral neck",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Atrial fibrillation, permanent",
+   "05/2019",
+   "Active"
+  ],
+  [
+   "Heart failure with preserved ejection fraction",
+   "2023",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2002",
+   "Active"
+  ],
+  [
+   "Chronic kidney disease stage 3a",
+   "2023",
+   "Active"
+  ],
+  [
+   "Mild neurocognitive disorder / mild Alzheimer dementia",
+   "2025",
+   "Active"
+  ],
+  [
+   "Osteoporosis",
+   "2015",
+   "Active"
+  ],
+  [
+   "Aortic valve sclerosis",
+   "2023",
+   "Active"
+  ],
+  [
+   "Bilateral sensorineural hearing loss",
+   "2017",
+   "Active"
+  ],
+  [
+   "S/p right total knee arthroplasty",
+   "2016",
+   "Resolved"
+  ],
+  [
+   "Pseudophakia, left eye",
+   "2021",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Atrial fibrillation, permanent (dx 05/2019), rate control + apixaban",
+   "HFpEF, admission 2023 for exacerbation; EF 60% 2023",
+   "Hypertension",
+   "CKD 3a (baseline Cr 1.0-1.2)",
+   "Mild Alzheimer dementia (memory clinic 2025, MoCA 19/30); lives with son",
+   "Osteoporosis on alendronate; L1 compression fracture 2015",
+   "Hearing loss, bilateral hearing aids",
+   "Postoperative delirium 2016; hallucinations with morphine 2021"
+  ],
+  "psh": [
+   [
+    "09/2016",
+    "Right total knee arthroplasty",
+    "C-N University Hospital"
+   ],
+   [
+    "07/2021",
+    "Cataract extraction with IOL, left eye",
+    "Tennessee Valley Eye Surgery Center"
+   ],
+   [
+    "1978",
+    "Abdominal hysterectomy (fibroids)",
+    "Morristown-Hamblen (records unavailable)"
+   ],
+   [
+    "1965",
+    "Tonsillectomy",
+    "Unknown"
+   ]
+  ],
+  "family": [
+   "Family history unknown per son (\"she was raised by her aunt\")",
+   "Husband deceased (MI 2012)"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Retired school cafeteria manager",
+   "living": "Lives with son Gary (HCPOA) in single-level house, White Pine. Uses cane indoors, walker outside.",
+   "other": "Son works nights 3x/week; patient alone overnight those nights. Meals on Wheels weekdays."
+  },
+  "immunizations": [
+   [
+    "Influenza, high-dose",
+    "09/2026"
+   ],
+   [
+    "Influenza, high-dose",
+    "10/2025"
+   ],
+   [
+    "PCV20",
+    "2023"
+   ],
+   [
+    "RSV (Arexvy)",
+    "11/2024"
+   ],
+   [
+    "Shingrix x2",
+    "2019-2020"
+   ],
+   [
+    "Tdap",
+    "03/2021"
+   ],
+   [
+    "COVID-19 (2025-26)",
+    "10/2025"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Apixaban 5 mg tab",
+   "5 mg PO BID",
+   "S. Kaur, MD (Cardiology)",
+   "10/25/2026 2000 (home); 10/26 2100 given inpatient"
+  ],
+  [
+   "Metoprolol tartrate 25 mg tab",
+   "25 mg PO BID",
+   "S. Kaur, MD",
+   "10/25/2026 2000 (home)"
+  ],
+  [
+   "Furosemide 20 mg tab",
+   "20 mg PO daily",
+   "H. Mabry, MD",
+   "10/25/2026 0800 (home)"
+  ],
+  [
+   "Lisinopril 10 mg tab",
+   "10 mg PO daily",
+   "H. Mabry, MD",
+   "10/25/2026 0800 (home)"
+  ],
+  [
+   "Donepezil 10 mg tab",
+   "10 mg PO nightly",
+   "R. Ashby, MD (Neurology)",
+   "10/25/2026 2000 (home)"
+  ],
+  [
+   "Alendronate 70 mg tab",
+   "70 mg PO weekly (Fridays)",
+   "H. Mabry, MD",
+   "10/23/2026"
+  ],
+  [
+   "Calcium carbonate-vitamin D3 600 mg-20 mcg",
+   "1 tab PO BID",
+   "OTC",
+   "10/25/2026"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "1000 mg PO TID PRN knee pain",
+   "OTC",
+   "10/25/2026"
+  ],
+  [
+   "Polyethylene glycol 3350",
+   "17 g PO daily PRN",
+   "OTC",
+   "10/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Apixaban 5 mg PO BID",
+   "Continued from home (admission med rec)",
+   "Given 10/26/2026 2100"
+  ],
+  [
+   "Metoprolol tartrate 25 mg PO BID",
+   "BID",
+   "Given 10/26 2100; 10/27 0600 with sips"
+  ],
+  [
+   "Furosemide 20 mg PO daily",
+   "Daily 0800",
+   "Given 10/26/2026 0800 (ED)"
+  ],
+  [
+   "Lisinopril 10 mg PO daily",
+   "Daily 0800",
+   "Given 10/26/2026 0800 (ED)"
+  ],
+  [
+   "Donepezil 10 mg PO nightly",
+   "Nightly",
+   "Given 10/26/2026 2100"
+  ],
+  [
+   "Hydrocodone-acetaminophen 5-325 mg PO",
+   "q6h PRN pain",
+   "Given 10/26 1400, 2000; 10/27 0600"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "75 mL/h",
+   "Infusing since 10/26 1200"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "On call to OR",
+   "Due"
+  ],
+  [
+   "Morphine 2 mg IV q2h PRN severe pain (ED order set)",
+   "PRN",
+   "Discontinued 10/26 1015 (allergy alert)"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Diltiazem ER 120 mg",
+   "2019-2023",
+   "Changed to metoprolol (HFpEF admission)"
+  ],
+  [
+   "Warfarin",
+   "05/2019-08/2019",
+   "Changed to apixaban (INR lability)"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "2010-2023",
+   "Edema"
+  ],
+  [
+   "Oxybutynin 5 mg",
+   "2024",
+   "Stopped by memory clinic (anticholinergic burden)"
+  ],
+  [
+   "Zolpidem 5 mg",
+   "2018-2024",
+   "Stopped by memory clinic (falls/confusion)"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0500",
+    "comment": "AM labs",
+    "vals": {
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "9.4",
+      "L"
+     ],
+     "Hct": [
+      "29",
+      "L"
+     ],
+     "Plt": [
+      "196",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "127",
+      "L"
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "38",
+      "H"
+     ],
+     "Cr": [
+      "1.70",
+      "H"
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "PT": [
+      "15.6",
+      "H"
+     ],
+     "INR": [
+      "1.3",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ],
+     "CK": [
+      "2840",
+      "H"
+     ],
+     "BNP": [
+      "640",
+      "H"
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 0915",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "11.8",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "237",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "131",
+      "L"
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "31",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "132",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "PT": [
+      "14.6",
+      "H"
+     ],
+     "INR": [
+      "1.2",
+      "H"
+     ],
+     "aPTT": [
+      "32",
+      ""
+     ],
+     "CK": [
+      "1920",
+      "H"
+     ],
+     "BNP": [
+      "520",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/12/2026 0845",
+    "comment": "PCP 6-month",
+    "vals": {
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "255",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "98",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "BNP": [
+      "210",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/18/2025 0900",
+    "comment": "Memory clinic workup; RPR nonreactive",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "271",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.7",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.15",
+      "H"
+     ],
+     "Glu": [
+      "103",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "B12": [
+      "410",
+      ""
+     ],
+     "TSH": [
+      "1.95",
+      ""
+     ],
+     "FT4": [
+      "1.18",
+      ""
+     ],
+     "VitD": [
+      "34",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/04/2024 0830",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "247",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "101",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "60",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "7.5",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "107",
+      ""
+     ],
+     "TSH": [
+      "2.06",
+      ""
+     ],
+     "FT4": [
+      "1.12",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/06/2023 1000",
+    "comment": "Post-discharge check",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      "H"
+     ],
+     "Glu": [
+      "105",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/22/2023 0500",
+    "comment": "Discharge day",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "28",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      "H"
+     ],
+     "Glu": [
+      "99",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/19/2023 1630",
+    "comment": "ED, dyspnea",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "234",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "30",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      "H"
+     ],
+     "Glu": [
+      "102",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "BNP": [
+      "920",
+      "H"
+     ],
+     "Trop": [
+      "22",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/08/2021 1930",
+    "comment": "ED, fall with rib fractures",
+    "vals": {
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "98",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/14/2019 1120",
+    "comment": "New AF",
+    "vals": {
+     "WBC": [
+      "7.8",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "239",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "104",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "TSH": [
+      "2.38",
+      ""
+     ],
+     "FT4": [
+      "1.16",
+      ""
+     ],
+     "PT": [
+      "11.9",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/13/2016 0500",
+    "comment": "POD 1",
+    "vals": {
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "10.8",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "262",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "108",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/30/2016 0910",
+    "comment": "Preop R TKA",
+    "vals": {
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "13.1",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "112",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "PT": [
+      "11.8",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Cardiac",
+    "key": "CK",
+    "name": "CK",
+    "unit": "U/L",
+    "ref": "30-200"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   }
+  ],
+  "other": [
+   [
+    "10/26/2026 0915",
+    "Troponin I (conventional)",
+    "0.05 ng/mL (ref < 0.04)",
+    "H"
+   ],
+   [
+    "10/27/2026 0500",
+    "Troponin I (conventional)",
+    "0.09 ng/mL (ref < 0.04)",
+    "H"
+   ],
+   [
+    "10/26/2026 1030",
+    "Urinalysis",
+    "SG 1.028, protein trace, blood 2+ with 0-2 RBC/hpf (myoglobin pattern), no LE/nitrite",
+    "A"
+   ],
+   [
+    "03/18/2025",
+    "RPR",
+    "Nonreactive",
+    ""
+   ],
+   [
+    "10/26/2026 0915",
+    "Type and crossmatch",
+    "O positive, antibody screen negative; 2 units crossmatched",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/08/2021",
+   "XR Chest / Ribs left",
+   "Acute nondisplaced fractures of left 6th and 7th ribs laterally. No pneumothorax. Cardiomegaly, mild. Impression: Left rib fractures 6-7.",
+   "P. Mendez, MD"
+  ],
+  [
+   "02/19/2023",
+   "XR Chest 2 views",
+   "Cardiomegaly. Bilateral interstitial edema, small bilateral effusions. Impression: CHF.",
+   "A. Stroud, MD"
+  ],
+  [
+   "03/18/2025",
+   "MRI Brain without contrast",
+   "Moderate generalized volume loss with disproportionate bilateral hippocampal atrophy. Moderate chronic small vessel ischemic change. No acute infarct, hemorrhage, or mass. Impression: Findings supportive of neurodegenerative process (Alzheimer type) with chronic microvascular disease.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/26/2026",
+   "XR Pelvis AP and Left Hip 2 views",
+   "Acute displaced subcapital fracture of the left femoral neck with superior migration of the femoral shaft (Garden IV). Diffuse osteopenia. Right TKA partially visualized. Impression: Displaced left femoral neck fracture.",
+   "P. Mendez, MD"
+  ],
+  [
+   "10/26/2026",
+   "XR Chest 1 view portable",
+   "Cardiomegaly. Small bilateral pleural effusions. Mild pulmonary vascular congestion. Calcified aortic knob. Impression: Mild CHF pattern.",
+   "P. Mendez, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "05/14/2019",
+   "ECG 12-lead",
+   "Atrial fibrillation, ventricular rate 128. Left axis deviation. Nonspecific ST-T changes. New compared with 2016 (sinus).",
+   "S. Kaur, MD",
+   {
+    "tmod": {
+     "I": 0.35,
+     "aVL": 0.2,
+     "V4": 0.4,
+     "V5": 0.3,
+     "V6": 0.3,
+     "II": 0.5
+    },
+    "rate": 128,
+    "rhythm": "af",
+    "qrs": 92,
+    "qtc": 450,
+    "axis": -40
+   }
+  ],
+  [
+   "02/20/2023",
+   "Echocardiogram, transthoracic",
+   "LVEF 60%. Mild concentric LVH. Biatrial enlargement. Grade II diastolic dysfunction (indeterminate in AF). Aortic valve: trileaflet, sclerotic with reduced excursion; peak velocity 2.9 m/s, mean gradient 18 mm Hg. Mild MR. RVSP 38 mm Hg. Impression: Preserved EF; aortic valve sclerosis; follow-up echo in 2-3 years.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/26/2026",
+   "ECG 12-lead",
+   "Atrial fibrillation, ventricular rate 110. LVH with strain pattern. No acute ST elevation. QTc 462.",
+   "D. Harrell, MD",
+   {
+    "tmod": {
+     "I": -0.6,
+     "aVL": -0.6,
+     "V4": -0.4,
+     "V5": -0.8,
+     "V6": -0.8
+    },
+    "st": {
+     "I": -0.07,
+     "aVL": -0.07,
+     "V4": -0.05,
+     "V5": -0.1,
+     "V6": -0.1
+    },
+    "stDown": [
+     "I",
+     "aVL",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "rate": 110,
+    "rhythm": "af",
+    "qrs": 98,
+    "qtc": 462,
+    "axis": -20,
+    "lvh": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "09/12/2016",
+   "Inpatient",
+   "C-N University Hospital",
+   "Elective R TKA",
+   "Postop delirium x 2 days; discharged to SNF rehab 09/16"
+  ],
+  [
+   "05/14/2019",
+   "Specialty clinic",
+   "C-N Cardiology",
+   "New AF (palpitations)",
+   "Diltiazem, warfarin, later apixaban"
+  ],
+  [
+   "03/08/2021",
+   "ED visit -> observation",
+   "C-N University Hospital",
+   "Fall, L rib fractures",
+   "IV morphine -> hallucinations; discharged 03/10"
+  ],
+  [
+   "07/20/2021",
+   "Outpatient surgery",
+   "Tennessee Valley Eye Surgery Center",
+   "L cataract",
+   "Discharged same day"
+  ],
+  [
+   "02/19/2023",
+   "Inpatient",
+   "C-N University Hospital",
+   "Acute on chronic HFpEF, AF RVR",
+   "Diuresis, metoprolol; discharged home 02/22"
+  ],
+  [
+   "04/10/2024",
+   "Office visit",
+   "White Pine Internal Medicine",
+   "Advance care planning",
+   "POLST completed"
+  ],
+  [
+   "03/18/2025",
+   "Specialty clinic",
+   "C-N Memory Clinic",
+   "Memory decline",
+   "Mild Alzheimer dementia; donepezil"
+  ],
+  [
+   "08/12/2026",
+   "Office visit",
+   "White Pine Internal Medicine",
+   "6-month follow-up",
+   "Stable"
+  ],
+  [
+   "10/26/2026",
+   "ED visit -> inpatient",
+   "C-N University Hospital",
+   "Fall, L hip fracture",
+   "Admitted to hospitalist, ortho consult"
+  ]
+ ],
+ "notes": [
+  [
+   "09/16/2016 1100",
+   "Discharge Summary",
+   "Orthopedics",
+   "K. Wills, PA-C",
+   "R TKA 09/12/2016 under spinal (bupivacaine 12 mg) with adductor canal catheter. POD 1-2: acute confusion, pulling lines, visual hallucinations at night; morphine PCA stopped, attributed to opioid. Resolved by POD 3. Discharged to Brookhaven SNF for rehab."
+  ],
+  [
+   "05/14/2019 1200",
+   "Consult",
+   "Cardiology",
+   "S. Kaur, MD",
+   "New AF with RVR 128, palpitations x 1 week. CHA2DS2-VASc 4 (age, HTN, female). Rate control diltiazem ER. Anticoagulation: warfarin per patient preference (cost); revisit DOAC. TTE ordered (2019: EF 60%, AV sclerosis, no stenosis)."
+  ],
+  [
+   "08/20/2019 1030",
+   "Telephone Encounter",
+   "Cardiology",
+   "P. Ruff, RN",
+   "INR 1.6, 3.8, 1.9 last 3 checks. Dr. Kaur: change to apixaban 5 mg BID; Medicare Part D copay acceptable per son. Warfarin stopped, start apixaban when INR < 2."
+  ],
+  [
+   "03/08/2021 2200",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "R. Lyle, DO",
+   "Tripped over rug. L chest wall pain. L ribs 6-7 fx. No PTX. No head strike, CT head not indicated per pt. Morphine 4 mg IV x 2. Obs for pain control/incentive spirometry. Addendum 03/09 0400 (RN call): pt seeing \"children in the room,\" agitated. Morphine stopped, acetaminophen/lidocaine patch. Allergy list updated: morphine - confusion/hallucinations."
+  ],
+  [
+   "07/20/2021 0730",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "Tennessee Valley Eye Surgery Center (scanned)",
+   "Anesthesia record, L phaco/IOL. MAC: fentanyl 25 mcg, topical + intracameral lidocaine. Stable. Uneventful."
+  ],
+  [
+   "02/22/2023 1015",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "M. Okafor, MD",
+   "Acute on chronic HFpEF triggered by AF RVR (rate 140s) and dietary indiscretion. IV furosemide, net -3.2 L. Diltiazem changed to metoprolol tartrate 25 BID. TTE: EF 60%, AV sclerosis mean gradient 18, follow-up 2-3 yr. Discharge Cr 1.2. Wt 63 kg dry. Home with son, home health PT."
+  ],
+  [
+   "03/02/2023 1400",
+   "PT Evaluation",
+   "Home Health Physical Therapy",
+   "L. Gentry, PT",
+   "Home safety eval. Throw rugs in hallway and bathroom; recommended removal, nightlights, bedside commode. TUG 18 s (fall risk). Cane indoors, walker outdoors. Son receptive."
+  ],
+  [
+   "04/10/2024 1130",
+   "Progress Note",
+   "Internal Medicine",
+   "H. Mabry, MD",
+   "Advance care planning visit with patient and son. Pt clearly states she does not want CPR or a breathing machine \"if my heart stops,\" but would want treatment for fixable problems like a broken bone or pneumonia. POLST completed: DNR, selective treatment, no intubation. Pt has capacity today (alert, oriented x 3, consistent reasoning). HCPOA: son Gary (document on file)."
+  ],
+  [
+   "03/18/2025 1500",
+   "Consult",
+   "Neurology - Memory Clinic",
+   "R. Ashby, MD",
+   "18 months of short-term memory decline, repeating questions, missed medications (son now fills pill box). MoCA 19/30. B12, TSH, RPR normal. MRI: hippocampal atrophy. Dx mild Alzheimer dementia. Start donepezil 5 mg, increase to 10 mg in 4 weeks. Stop oxybutynin and zolpidem. Discussed delirium risk with surgery/hospitalization."
+  ],
+  [
+   "09/04/2025 0915",
+   "Refill Request",
+   "Internal Medicine",
+   "T. Reese, CMA",
+   "Pharmacy request: apixaban 5 mg #180. Approved per protocol (last visit within 12 months, Cr 1.1, wt 63 kg). Dose criteria reviewed: age >= 80 only (1 of 3)."
+  ],
+  [
+   "08/12/2026 0900",
+   "Progress Note",
+   "Internal Medicine",
+   "H. Mabry, MD",
+   "6-month f/u. Son reports stable memory, needs reminders. No falls since 2021 per son. Mild DOE 1 block, unchanged. BP 132/70, HR 78 irregular. Exam: 2/6 SEM at RUSB, unchanged; trace edema. Labs stable, Cr 1.1, BNP 210. Echo due (last 02/2023): ordered, pt declined for now (\"too many appointments\"). Flu shot next visit."
+  ],
+  [
+   "09/18/2026 1030",
+   "Patient Message",
+   "Internal Medicine",
+   "Gary Whitaker (son)",
+   "Mom got her flu shot at Walgreens 9/16. Also can she take something for sleep? She is up at night wandering some nights. Reply (T. Reese, CMA, per Dr. Mabry): Please avoid OTC sleep aids like Benadryl/Tylenol PM. Melatonin 3 mg OK. Schedule visit if worse."
+  ],
+  [
+   "10/26/2026 0905",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "C. Whitlow, MD",
+   "84 yo F found on floor by son at ~0800 after fall going to bathroom ~0200 (son working night shift). Down ~6 h. L hip pain, unable to bear weight. Son: no head strike reported, \"but she can't tell me.\" On apixaban. Exam: L leg shortened, externally rotated. Confused, oriented to self. XR: displaced L femoral neck fracture. CK 1,920, Cr 1.4 (baseline 1.1). LR started. Morphine ordered per hip fx order set, cancelled by pharmacy (allergy). Admit hospitalist, ortho consult."
+  ],
+  [
+   "10/26/2026 1045",
+   "H&P",
+   "Hospital Medicine",
+   "A. Pennington, MD",
+   "History: fell getting up to bathroom at night, lay on floor about 6 h until found by son. No head strike reported. PMH: AF, HTN, mild dementia (lives with son), HFpEF (2023), CKD, osteoporosis. Code status: DNR/DNI (POLST on file, signed by patient 2024). Exam: BP 104/62, HR 108 irregular. Dry mucous membranes. New harsh 3/6 systolic murmur at the right upper sternal border radiating to the carotids. Bibasilar crackles. L leg shortened, externally rotated. Mental status: oriented to person only; son says this is worse than baseline. A/P: 1) L femoral neck fx - ortho, pain control, avoid morphine. 2) Rhabdo/AKI - IVF, trend CK. 3) AF - continue home metoprolol and apixaban (resume per med rec). 4) Murmur - cards e-consult. 5) Delirium - geriatrics. DVT ppx: on apixaban."
+  ],
+  [
+   "10/26/2026 1150",
+   "Consult",
+   "Orthopedics",
+   "T. Bales, PA-C / J. Pruitt, MD",
+   "Displaced L femoral neck fracture, Garden IV. Recommend cemented hemiarthroplasty, target within 48 h of admission. Posted for 10/27 0730 OR 5. NPO after midnight. T&C 2 units. Will request spinal."
+  ],
+  [
+   "10/26/2026 1405",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Ferris, PharmD",
+   "Admission med rec. Apixaban 5 mg BID resumed on admission orders. Patient has surgery planned within 24 h; recommend HOLD apixaban pending surgical/anesthesia plan (neuraxial requires 72 h). Also: age >= 80 and Cr now 1.4 (if >= 1.5, meets dose-reduction criteria). Message sent to hospitalist via secure chat. Morphine order discontinued (allergy)."
+  ],
+  [
+   "10/26/2026 1520",
+   "Consult",
+   "Geriatrics",
+   "E. Vance, NP",
+   "Delirium risk high (dementia, prior postop delirium, opioid hallucinations, sensory impairment). Recommendations: avoid benzodiazepines, anticholinergics (diphenhydramine, scopolamine), and meperidine; hearing aids and glasses on; sleep hygiene; fascia iliaca or PENG block recommended for pain; scheduled acetaminophen; low-dose oxycodone or hydromorphone if needed. Son is HCPOA."
+  ],
+  [
+   "10/26/2026 1640",
+   "Social Work",
+   "Case Management",
+   "D. Pryor, LCSW",
+   "Met son at bedside. HCPOA document scanned to Media (2024). Pt lives with son, alone overnight 3 nights/week. Likely SNF rehab after surgery; Medicare 3-midnight stay expected. Son works tonight, will return after 0900 tomorrow."
+  ],
+  [
+   "10/26/2026 2300",
+   "Consult",
+   "Cardiology (e-consult)",
+   "B. Strand, MD",
+   "Chart reviewed. Murmur likely aortic stenosis progression. Echo can be done as outpatient. Proceed with surgery; avoid hypotension. Continue rate control. No in-person evaluation."
+  ],
+  [
+   "10/26/2026 2115",
+   "Nursing Note",
+   "Ortho/Telemetry",
+   "K. Lam, RN",
+   "Evening meds given per MAR incl. apixaban 5 mg 2100 and metoprolol. Pt confused, calling for her husband. Reoriented. Hearing aids in. HR 104-118 AF on tele. Foley placed 1930 for strict I&O."
+  ],
+  [
+   "10/27/2026 0315",
+   "Nursing Note",
+   "Ortho/Telemetry",
+   "K. Lam, RN",
+   "Pt agitated, pulling at IV, trying to get out of bed. Reoriented, sitter requested (none available), bed alarm on, mitts not used. Hospitalist cross-cover paged: \"no sedatives, reorient.\" Urine dark, 120 mL since 1930."
+  ],
+  [
+   "10/27/2026 0540",
+   "Progress Note",
+   "Hospital Medicine",
+   "J. Hyde, MD (night cross-cover)",
+   "AM labs: Na 127, Cr 1.7, CK 2,840, Hgb 9.4 (11.8), trop 0.09, BNP 640. SpO2 92% on 2 L. Likely hemodilution + fracture bleeding; rhabdo. Increase LR to 100 mL/h. Day team to follow up. Surgery as planned this AM per ortho."
+  ],
+  [
+   "10/26/2026 1700",
+   "Media (Outside Record)",
+   "Advance Directives",
+   "Scanned document",
+   "Tennessee POLST, signed 04/10/2024 by patient and H. Mabry, MD: Section A: Do Not Attempt Resuscitation. Section B: Selective treatment; no intubation/mechanical ventilation. Durable POA for Health Care: Gary Whitaker (son), signed 04/10/2024, notarized."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/12/2016 0600",
+   "148/82",
+   72,
+   16,
+   97,
+   36.6,
+   68.0,
+   "0/10",
+   "Preop"
+  ],
+  [
+   "05/14/2019 1120",
+   "142/80",
+   128,
+   16,
+   97,
+   36.8,
+   67.1,
+   "0/10",
+   "Cardiology clinic"
+  ],
+  [
+   "03/08/2021 1930",
+   "156/84",
+   92,
+   20,
+   95,
+   36.9,
+   66.0,
+   "8/10",
+   "ED"
+  ],
+  [
+   "02/19/2023 1630",
+   "162/88",
+   142,
+   26,
+   88,
+   36.7,
+   66.4,
+   "2/10",
+   "ED"
+  ],
+  [
+   "02/22/2023 0800",
+   "128/70",
+   84,
+   18,
+   95,
+   36.6,
+   63.0,
+   "0/10",
+   "Medicine floor"
+  ],
+  [
+   "04/10/2024 1130",
+   "134/72",
+   76,
+   16,
+   96,
+   36.6,
+   63.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "03/18/2025 1500",
+   "138/76",
+   80,
+   16,
+   96,
+   36.7,
+   64.2,
+   "0/10",
+   "Memory clinic"
+  ],
+  [
+   "08/12/2026 0900",
+   "132/70",
+   78,
+   16,
+   96,
+   36.6,
+   64.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "10/26/2026 0840",
+   "104/62",
+   108,
+   20,
+   94,
+   36.2,
+   64.0,
+   "9/10",
+   "ED"
+  ],
+  [
+   "10/26/2026 1600",
+   "112/64",
+   104,
+   18,
+   94,
+   37.0,
+   null,
+   "6/10",
+   "Ortho/Tele"
+  ],
+  [
+   "10/26/2026 2300",
+   "106/60",
+   112,
+   20,
+   93,
+   37.2,
+   null,
+   "7/10",
+   "Ortho/Tele"
+  ],
+  [
+   "10/27/2026 0400",
+   "102/60",
+   114,
+   22,
+   91,
+   37.3,
+   null,
+   "8/10",
+   "Ortho/Tele (2 L NC started)"
+  ],
+  [
+   "10/27/2026 0630",
+   "98/58",
+   112,
+   22,
+   92,
+   37.4,
+   null,
+   "8/10",
+   "Preop holding, 2 L NC"
+  ]
+ ],
+ "orders": [
+  [
+   "Admit inpatient, hospitalist",
+   "10/26/2026 1045",
+   "Active"
+  ],
+  [
+   "Code status: DNR/DNI (POLST)",
+   "10/26/2026 1045",
+   "Active"
+  ],
+  [
+   "Apixaban 5 mg PO BID",
+   "10/26/2026 1045",
+   "Active"
+  ],
+  [
+   "Telemetry",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "NPO after midnight except meds with sips",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Type and crossmatch 2 units",
+   "10/26/2026",
+   "Resulted - available"
+  ],
+  [
+   "Strict I&O, Foley",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Echocardiogram, transthoracic",
+   "10/26/2026 2310",
+   "Ordered - outpatient (per e-consult)"
+  ],
+  [
+   "CT head without contrast",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Fascia iliaca block",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Consent for surgery",
+   "10/26/2026",
+   "Signed 10/27 0610"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched, available",
+  "notes": "",
+  "specimen_expires": "10/29/2026 0915"
+ },
+ "consents": [
+  [
+   "Surgical consent: left hip hemiarthroplasty",
+   "Signed by patient 10/27/2026 0610 (witness: RN)"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood consent",
+   "Signed by patient 10/27/2026 0612"
+  ]
+ ],
+ "directives": "POLST (04/10/2024): DNR; selective treatment; no intubation. Durable POA for Health Care: Gary Whitaker (son). Documents in Media.",
+ "anesthesia_history": [
+  [
+   "09/2016",
+   "Right total knee arthroplasty",
+   "Spinal, bupivacaine 12 mg; adductor canal catheter; morphine PCA",
+   "Postoperative delirium 2 days, attributed to morphine",
+   "C-N University Hospital"
+  ],
+  [
+   "07/2021",
+   "Left cataract",
+   "MAC, fentanyl 25 mcg",
+   "Uneventful",
+   "Tennessee Valley Eye Surgery Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0620 (from Ortho/Tele)",
+  "npo_solids": "10/25/2026 evening (has not eaten since fall)",
+  "npo_clears": "10/27/2026 0600 sips with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes (by patient 0610)"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Site marked",
+    "Yes, left hip"
+   ],
+   [
+    "Allergy band",
+    "On (sulfa, morphine)"
+   ],
+   [
+    "DNR band",
+    "On"
+   ],
+   [
+    "Type and crossmatch",
+    "2 units available"
+   ],
+   [
+    "Hearing aids",
+    "In place"
+   ],
+   [
+    "Dentures",
+    "Upper and lower in place"
+   ]
+  ],
+  "nursing_note": "BP 98/58, HR 112 AF, RR 22, SpO2 92% on 2 L, T 37.4. Pain 8/10. Foley: 120 mL in 8 hours, dark. Consent signed by the patient this morning. Patient oriented to person only. Son is the healthcare power of attorney and was not present (works nights, back after 0900). DNR band on. Hearing aids and dentures (upper and lower) in place. Apixaban given 2100 per MAR.",
+  "iv": "20 G left forearm (LR 100 mL/h)",
+  "glucose": ""
+ },
+ "label": "E. Whitaker",
+ "bmi": "25.0"
+}

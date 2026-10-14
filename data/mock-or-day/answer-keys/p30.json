@@ -1,0 +1,140 @@
+{
+ "id": "p30",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "VATS lobectomy for neuroendocrine lung cancer in a patient neurology thinks has Lambert-Eaton syndrome (needed a second sugammadex dose after EBUS), with marginal predicted postoperative lung function.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "COPD with ppoFEV1 44% and ppoDLCO 40%, suspected paraneoplastic LEMS."
+ },
+ "decision": {
+  "recommendation": "proceed with modifications",
+  "rationale": "Cancer surgery should not wait weeks, but the team must plan for LEMS: minimize or avoid neuromuscular blockers, quantitative monitoring, ICU bed, and readiness for postoperative ventilation. Inform neurology; consider amifampridine."
+ },
+ "redFlags": [
+  {
+   "id": "lems",
+   "severity": "critical",
+   "finding": "Suspected Lambert-Eaton myasthenic syndrome",
+   "evidence": "Neurology 10/13: proximal weakness, areflexia with post exercise facilitation, autonomic symptoms with LCNEC; VGCC antibody pending; EBUS 09/2026: weakness, diplopia, needed a second sugammadex dose.",
+   "implication": "Marked sensitivity to nondepolarizing and depolarizing blockers; prolonged weakness and respiratory failure.",
+   "action": "Avoid or minimize NMB (DLT under deep propofol and remifentanil, or small rocuronium dose), quantitative TOF, sugammadex, plan for postop ventilation, ICU.",
+   "keywords": [
+    "lambert",
+    "lems",
+    "eaton",
+    "neuromuscular",
+    "rocuronium",
+    "sugammadex",
+    "quantitative",
+    "tof",
+    "amifampridine"
+   ]
+  },
+  {
+   "id": "pulm",
+   "severity": "major",
+   "finding": "Marginal pulmonary reserve",
+   "evidence": "FEV1 52%, DLCO 48%, ppoFEV1 44%, ppoDLCO 40%, VO2 peak 15.8; emphysema; PaO2 71.",
+   "implication": "Hypoxemia on one lung ventilation and postoperative respiratory failure.",
+   "action": "Lung protective OLV, CPAP to the operative lung if needed, excellent analgesia, early mobilization.",
+   "keywords": [
+    "one lung",
+    "olv",
+    "ppofev1",
+    "dlco",
+    "hypoxemia",
+    "protective"
+   ]
+  },
+  {
+   "id": "analgesia",
+   "severity": "major",
+   "finding": "Analgesia choice matters",
+   "evidence": "Thoracic epidural vs PVB or ESP per DOS team; aspirin held.",
+   "implication": "Poor analgesia worsens pulmonary function.",
+   "action": "Thoracic epidural or paravertebral block with multimodal adjuncts.",
+   "keywords": [
+    "epidural",
+    "paravertebral",
+    "esp",
+    "erector"
+   ]
+  },
+  {
+   "id": "autonomic",
+   "severity": "minor",
+   "finding": "Autonomic dysfunction",
+   "evidence": "Dry mouth, constipation, ED.",
+   "implication": "Hemodynamic lability.",
+   "action": "Arterial line, pressor ready.",
+   "keywords": [
+    "autonomic",
+    "arterial line"
+   ]
+  },
+  {
+   "id": "shellfish",
+   "severity": "minor",
+   "finding": "Shellfish allergy",
+   "evidence": "Allergy list.",
+   "implication": "Not related to iodine or contrast.",
+   "action": "No change.",
+   "keywords": [
+    "shellfish"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "Left DLT with bronchoscopic confirmation",
+   "keywords": [
+    "dlt",
+    "double lumen",
+    "bronchoscop"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, quantitative neuromuscular monitoring",
+   "keywords": [
+    "arterial line",
+    "quantitative"
+   ]
+  },
+  {
+   "domain": "regional",
+   "item": "Thoracic epidural or paravertebral",
+   "keywords": [
+    "epidural",
+    "paravertebral"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "ICU or step down with ventilator backup",
+   "keywords": [
+    "icu",
+    "step down"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "COPD with airway instrumentation by a DLT"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

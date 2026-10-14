@@ -1,0 +1,785 @@
+{
+ "id": "p33",
+ "room": "OR 18",
+ "time": "0900",
+ "name": "HARTSELL, AMBER NICOLE",
+ "mrn": "0146033",
+ "dob": "02/19/1995",
+ "age": "31 y",
+ "sex": "F",
+ "ht_cm": 163,
+ "wt_kg": 68.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. K. Siler, White Pine Family Health",
+ "insurance": "TennCare (BlueCare)",
+ "emergency_contact": "Jordan Hartsell (husband) 865-555-0161",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Diagnostic laparoscopy, probable left salpingectomy for ruptured ectopic pregnancy, possible laparotomy",
+  "short": "Diagnostic laparoscopy, ectopic pregnancy",
+  "laterality": "Left (probable)",
+  "service": "Gynecology",
+  "surgeon": "N. Ellender, MD",
+  "assistant": "T. Bowlin, MD (resident)",
+  "indication": "Suspected ruptured left tubal ectopic pregnancy with hemoperitoneum",
+  "duration_min": 60,
+  "anesthesia_requested": "General endotracheal",
+  "position": "Supine, lithotomy (low), Trendelenburg",
+  "dispo": "Inpatient, GYN floor",
+  "blood": "Type and crossmatch 2 units (O negative available)",
+  "equipment": "Laparoscopy; laparotomy tray open",
+  "implants": "",
+  "surgeon_notes": "ADD-ON EMERGENT. Hemodynamics borderline. Cefazolin 2 g.",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Ectopic pregnancy, suspected ruptured",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Hemoperitoneum",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Chlamydia cervicitis, treated",
+   "2019",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Healthy",
+   "Chlamydia 2019, treated (azithromycin), test of cure negative",
+   "Anxiety (situational), no meds"
+  ],
+  "psh": [
+   [
+    "2012",
+    "Wisdom teeth",
+    "Oral surgery office"
+   ]
+  ],
+  "family": [
+   "Mother: HTN",
+   "Father: T2DM",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Daycare teacher",
+   "living": "Husband, 4-year-old son",
+   "other": ""
+  },
+  "immunizations": [
+   [
+    "Tdap",
+    "2021 (pregnancy)"
+   ],
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": "G2P1001. SVD 06/2022 at term, epidural, uncomplicated; Rh negative, received RhIG at 28 wk and postpartum 2022. LMP ~09/08/2026 (7 wk). Not using contraception, not trying to conceive."
+ },
+ "home_meds": [
+  [
+   "Prenatal vitamin",
+   "1 tab PO daily (not taking regularly)",
+   "OTC",
+   "10/2026"
+  ],
+  [
+   "Ibuprofen 200 mg",
+   "2 tabs PO PRN",
+   "OTC",
+   "10/27/2026 0145"
+  ]
+ ],
+ "mar": [
+  [
+   "Lactated Ringer's 1,000 mL IV bolus",
+   "x1",
+   "Given 10/27/2026 0515"
+  ],
+  [
+   "Lactated Ringer's 1,000 mL IV bolus",
+   "x1",
+   "Given 10/27/2026 0700 (infusing)"
+  ],
+  [
+   "Ondansetron 4 mg IV",
+   "q6h PRN nausea",
+   "Given 10/27/2026 0320"
+  ],
+  [
+   "Morphine 4 mg IV",
+   "x1",
+   "Given 10/27/2026 0330"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Rho(D) immune globulin 300 mcg IM",
+   "Within 72 h",
+   "Ordered - pending blood bank"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Norethindrone 0.35 mg",
+   "2022-2024",
+   "Pt stopped"
+  ],
+  [
+   "Azithromycin 1 g",
+   "2019",
+   "Single dose"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0640",
+    "comment": "Repeat",
+    "vals": {
+     "WBC": [
+      "12.4",
+      "H"
+     ],
+     "Hgb": [
+      "9.6",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "212",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "PT": [
+      "12.8",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "Fib": [
+      "268",
+      ""
+     ],
+     "Lactate": [
+      "2.6",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/27/2026 0310",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "11.8",
+      "H"
+     ],
+     "Hgb": [
+      "11.9",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "254",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.69",
+      ""
+     ],
+     "Glu": [
+      "84",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "hCG": [
+      "4800",
+      "H"
+     ],
+     "USG": [
+      "1.010",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/14/2021",
+    "comment": "Prenatal 28 wk (outside)",
+    "vals": {
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "259",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "hCG",
+    "name": "hCG, quantitative",
+    "unit": "mIU/mL",
+    "ref": "<5"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026 0300",
+    "Urine hCG, qualitative",
+    "Positive",
+    "A"
+   ],
+   [
+    "06/2022",
+    "Antibody screen (L&D)",
+    "Positive - anti-D, attributed to antenatal RhIG",
+    "A"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/27/2026",
+   "US Pelvis, transvaginal and transabdominal",
+   "Uterus: no intrauterine gestational sac; endometrium 11 mm. Left adnexa: 2.8 cm heterogeneous complex mass separate from the ovary. Moderate-large complex free fluid in pelvis extending to the right upper quadrant (hepatorenal/Morison pouch). Right ovary normal. Impression: findings highly suspicious for ruptured left ectopic pregnancy with hemoperitoneum. Findings called to Dr. Ellender at 0525.",
+   "R. Haverty, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/27/2026",
+   "ECG 12-lead (ED)",
+   "Sinus tachycardia 112. Normal intervals. No ST changes.",
+   "K. Fannon, MD",
+   {
+    "rate": 112,
+    "pr": 136,
+    "qrs": 82,
+    "qtc": 440,
+    "axis": 65
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "06/2022",
+   "Inpatient admission (L&D)",
+   "Morristown-Hamblen",
+   "Term SVD",
+   "Discharged PPD2"
+  ],
+  [
+   "05/03/2019",
+   "Clinic",
+   "Jefferson County Health Department",
+   "Vaginal discharge",
+   "Chlamydia, treated"
+  ],
+  [
+   "10/27/2026",
+   "ED visit",
+   "C-N University Hospital ED",
+   "Abdominal pain, positive pregnancy test",
+   "GYN consult -> OR"
+  ]
+ ],
+ "notes": [
+  [
+   "05/03/2019 1100",
+   "Media (Outside Record)",
+   "Public Health",
+   "S. Ingle, RN",
+   "Jefferson County Health Dept. STI clinic: NAAT chlamydia positive, GC negative. Azithromycin 1 g given. EPT for partner. Test of cure 3 mo: negative."
+  ],
+  [
+   "06/12/2022 1200",
+   "Media (Outside Record)",
+   "Obstetrics (outside)",
+   "R. Cate, MD",
+   "Morristown-Hamblen discharge summary: G1 SVD 39w2d, epidural (uncomplicated), EBL 300. Blood type O negative, RhIG given 28 wk and postpartum (infant O positive). Discharged PPD2."
+  ],
+  [
+   "10/27/2026 0305",
+   "H&P",
+   "Emergency Medicine",
+   "K. Fannon, MD",
+   "31F G2P1 LMP ~7 wk ago, presents 0250 with sudden LLQ pain at ~0200 radiating to R shoulder, lightheaded on standing, 1 episode vomiting. Ate a sandwich and chips around 0130 after night shift with son sick. Spotting x2 d. VS: HR 92, BP 112/70. Abdomen: diffuse tenderness LLQ > RLQ, voluntary guarding. Plan: hCG quant, CBC, T&S, TVUS, IV x2, LR, ondansetron, morphine."
+  ],
+  [
+   "10/27/2026 0540",
+   "Progress Note",
+   "Emergency Medicine",
+   "K. Fannon, MD",
+   "US: no IUP, L adnexal mass, free fluid to Morison pouch. hCG 4,800. HR now 104, BP 104/64 after 1 L LR. GYN at bedside. Type: O NEGATIVE."
+  ],
+  [
+   "10/27/2026 0610",
+   "Consult",
+   "Gynecology",
+   "N. Ellender, MD",
+   "Ruptured L ectopic with hemoperitoneum, increasingly tachycardic. Plan emergent diagnostic laparoscopy, likely L salpingectomy, possible laparotomy. Discussed with patient and husband; she desires future fertility; consented for salpingectomy vs salpingostomy at surgeon discretion. Crossmatch 2 u. RhIG."
+  ],
+  [
+   "10/27/2026 0655",
+   "Progress Note",
+   "Emergency Medicine",
+   "C. Eppes, RN",
+   "Repeat CBC Hgb 9.6 (from 11.9). HR 118, BP 96/58. Pt pale, diaphoretic, states dizzy. 2nd liter LR hung. GYN and OR notified. Blood bank: 2 u O neg crossmatched, ready ~0745."
+  ],
+  [
+   "10/27/2026 0750",
+   "Nursing Note",
+   "Blood Bank",
+   "L. Pressley, MT(ASCP)",
+   "O negative, antibody screen negative. 2 units O negative PRBC crossmatch-compatible, available. RhIG workup: weak D negative confirmed; RhIG 300 mcg vial released to floor on request."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/10/2022 1000",
+   "118/72",
+   88,
+   18,
+   99,
+   36.9,
+   84.0,
+   "8/10",
+   "L&D (outside)"
+  ],
+  [
+   "10/27/2026 0255",
+   "112/70",
+   92,
+   18,
+   99,
+   36.7,
+   68.0,
+   "8/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0400",
+   "108/68",
+   98,
+   18,
+   99,
+   null,
+   null,
+   "5/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0530",
+   "104/64",
+   104,
+   20,
+   99,
+   null,
+   null,
+   "6/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0645",
+   "96/58",
+   118,
+   22,
+   98,
+   36.4,
+   null,
+   "8/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0745",
+   "94/56",
+   122,
+   22,
+   98,
+   null,
+   null,
+   "8/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units PRBC",
+   "10/27/2026 0540",
+   "Resulted - 2 units O neg available"
+  ],
+  [
+   "Rho(D) immune globulin 300 mcg IM",
+   "10/27/2026 0615",
+   "Active - not yet given"
+  ],
+  [
+   "NPO",
+   "10/27/2026 0300",
+   "Active"
+  ],
+  [
+   "LR 1 L bolus",
+   "10/27/2026 0700",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0615",
+   "Active"
+  ],
+  [
+   "Repeat CBC",
+   "10/27/2026 0615",
+   "Resulted"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O negative",
+  "antibody_screen": "Negative",
+  "units": "2 units O negative PRBC crossmatched",
+  "notes": "RhIG indicated (Rh negative, ectopic pregnancy). 2022 anti-D was passive from antenatal RhIG; current screen negative.",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: diagnostic laparoscopy, salpingectomy vs salpingostomy, possible laparotomy",
+   "Signed 10/27/2026 0620"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/27/2026 0620"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2012",
+   "Wisdom teeth",
+   "IV sedation",
+   "None",
+   "Oral surgery office"
+  ],
+  [
+   "06/2022",
+   "Labor",
+   "Epidural",
+   "None",
+   "Morristown-Hamblen"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0740 (from ED)",
+  "npo_solids": "10/27/2026 0130 sandwich and chips",
+  "npo_clears": "10/27/2026 0130 soda",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (ED H&P today)"
+   ],
+   [
+    "Pregnancy test",
+    "Positive (ectopic)"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "N/A (NKDA)"
+   ],
+   [
+    "Blood available",
+    "2 u O neg in OR fridge"
+   ]
+  ],
+  "nursing_note": "Pale, anxious, diaphoretic. Two 18g IVs (L AC, R FA), 2nd liter LR infusing. Voided in ED. Vomited once at 0230 (partially digested food). RhIG not given yet - ordered, vial on floor. Husband at bedside.",
+  "iv": "18g L AC, 18g R forearm; LR",
+  "glucose": ""
+ },
+ "label": "A. Hartsell",
+ "bmi": "25.6"
+}

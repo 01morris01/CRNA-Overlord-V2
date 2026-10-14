@@ -1,0 +1,147 @@
+{
+ "id": "p35",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "TURBT under spinal in an 80 y with EF 30% and an ICD that nobody has a plan for (device clinic not called, no magnet, interrogation not ordered) while the surgeon uses monopolar cautery and glycine, on a lateral wall tumor next to the obturator nerve.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "HFrEF EF 30 to 35%, ICD with prior VT shock, permanent AF, CKD."
+ },
+ "decision": {
+  "recommendation": "proceed only after a device plan is in place",
+  "rationale": "The magnet response is Inhibit Therapy, so a magnet over the generator plus external defibrillator pads is an acceptable plan if the device clinic or rep confirms. Postoperative interrogation should be arranged because monopolar cautery is used. If no plan can be made, delay."
+ },
+ "redFlags": [
+  {
+   "id": "icd",
+   "severity": "critical",
+   "finding": "ICD without a perioperative plan with monopolar cautery",
+   "evidence": "Device card on chart; rep and device clinic not contacted; no magnet in room; interrogation not ordered; bipolar resectoscope unavailable.",
+   "implication": "EMI can be sensed as VT or VF and trigger inappropriate shocks.",
+   "action": "Call device clinic or rep, magnet over generator (inhibits tachy therapy), external pads on, return pad away from device, postop interrogation.",
+   "keywords": [
+    "icd",
+    "magnet",
+    "defibrillator",
+    "pads",
+    "electrocautery",
+    "emi",
+    "interrogat",
+    "device",
+    "rep"
+   ]
+  },
+  {
+   "id": "hf",
+   "severity": "critical",
+   "finding": "HFrEF with EF 30 to 35%",
+   "evidence": "Echo 2025; BNP 455; trace edema; METs 3 to 4.",
+   "implication": "Poor tolerance of spinal induced vasodilation and of fluid absorption.",
+   "action": "Low dose spinal titrated or careful GA, phenylephrine ready, judicious fluids, arterial line to consider.",
+   "keywords": [
+    "heart failure",
+    "ef",
+    "ejection fraction",
+    "hfref",
+    "low dose",
+    "phenylephrine"
+   ]
+  },
+  {
+   "id": "glycine",
+   "severity": "major",
+   "finding": "Glycine irrigation with monopolar resection",
+   "evidence": "Glycine 1.5% irrigation.",
+   "implication": "TUR syndrome: hyponatremia, fluid overload, visual changes, in a patient with HF.",
+   "action": "Track irrigation deficit, monitor mental status under spinal, check Na if symptoms.",
+   "keywords": [
+    "tur syndrome",
+    "glycine",
+    "hyponatremia",
+    "irrigation",
+    "sodium"
+   ]
+  },
+  {
+   "id": "obturator",
+   "severity": "major",
+   "finding": "Obturator reflex risk",
+   "evidence": "Tumor on right lateral wall near the ureteral orifice.",
+   "implication": "Leg adduction during resection can perforate the bladder; spinal does not block it.",
+   "action": "Obturator nerve block or GA with paralysis; discuss with surgeon.",
+   "keywords": [
+    "obturator",
+    "adductor",
+    "perforation",
+    "obturator block"
+   ]
+  },
+  {
+   "id": "apixaban",
+   "severity": "minor",
+   "finding": "Apixaban held about 3.5 days",
+   "evidence": "Last dose 10/23 2000; Cr 1.33, eGFR 53.",
+   "implication": "Meets the 72 h interval for neuraxial anesthesia.",
+   "action": "Document timing before spinal.",
+   "keywords": [
+    "apixaban",
+    "anticoag",
+    "72"
+   ]
+  },
+  {
+   "id": "hoh",
+   "severity": "minor",
+   "finding": "Hearing loss",
+   "evidence": "Hearing aids.",
+   "implication": "Communication under spinal.",
+   "action": "Keep hearing aids in.",
+   "keywords": [
+    "hearing"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "Spinal with careful dosing or GA with paralysis for obturator concerns",
+   "keywords": [
+    "spinal",
+    "general"
+   ]
+  },
+  {
+   "domain": "device",
+   "item": "Magnet on ICD and defibrillator pads; postop interrogation",
+   "keywords": [
+    "magnet",
+    "pads",
+    "interrogat"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Telemetry overnight",
+   "keywords": [
+    "telemetry"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "HighSpinal",
+   "why": "Spinal in a frail HF patient"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Elderly patient receiving sedation"
+  }
+ ]
+}

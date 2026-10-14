@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#03060c">
+  <meta name="theme-color" content="#000000">
   <title>Live Anesthesia Display | CRNA Overlord</title>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="assets/css/tokens.css">
@@ -13,11 +13,12 @@
   <div class="display-education-fence" role="note">Educational simulation. Not for clinical use.</div>
 
   <header class="display-header">
-    <div>
-      <p>CRNA OVERLORD · LIVE CASE</p>
+    <div class="display-header-id">
+      <p>CRNA OVERLORD · OR 1 · ADULT</p>
       <h1 id="display-patient">Waiting for instructor</h1>
     </div>
     <div class="display-header-status">
+      <output id="display-alarm-banner" class="display-alarm-banner" aria-live="assertive" hidden></output>
       <span id="display-connection" data-state="waiting">WAITING FOR STATE</span>
       <output id="display-clock" aria-label="Simulation time">00:00</output>
       <button id="display-audio" type="button">ENABLE ALARM AUDIO</button>
@@ -26,6 +27,96 @@
   </header>
 
   <main class="display-layout">
+    <!-- Patient monitor: ECG and pleth with their parameter windows, then NIBP, TEMP, TOF. -->
+    <section class="ge-screen ge-monitor" aria-label="Patient monitor">
+      <div class="ge-row ge-row-ecg">
+        <div class="ge-wave"><span class="ge-wave-label">II</span><canvas id="display-ecg" aria-label="Synthesized ECG rendering"></canvas></div>
+        <article class="ge-param ge-param-hr"><span>HR</span><strong id="display-hr">—</strong><small>bpm</small></article>
+      </div>
+      <div class="ge-row ge-row-pleth">
+        <div class="ge-wave"><span class="ge-wave-label">PLETH</span><canvas id="display-pleth" aria-label="Synthesized pleth rendering"></canvas></div>
+        <article class="ge-param ge-param-spo2"><span>SpO₂</span><strong id="display-spo2">—</strong><small>%</small></article>
+      </div>
+      <div class="ge-param-strip">
+        <article class="ge-param ge-param-nibp"><span>NIBP</span><strong id="display-bp" aria-label="Blood pressure unavailable"><span id="display-sbp">—</span><span aria-hidden="true">/</span><span id="display-dbp">—</span></strong><small>(<b id="display-map">—</b>) mmHg</small></article>
+        <article class="ge-param ge-param-temp"><span>TEMP</span><strong id="display-temp">—</strong><small>°C</small></article>
+        <article class="ge-param ge-param-tof"><span>TOF</span><strong id="display-tof">—</strong><small>RATIO <b id="display-tof-ratio">—</b></small></article>
+      </div>
+    </section>
+
+    <!-- Anesthesia machine: Paw, flow and CO2 waveforms, ventilation and gas numerics,
+         fresh gas flowmeters, and the ventilator settings bar. -->
+    <section class="ge-screen ge-vent" aria-label="Anesthesia machine">
+      <div class="ge-vent-main">
+        <div class="ge-vent-waves">
+          <div class="ge-wave ge-wave-paw"><span class="ge-wave-label">Paw <small>cmH₂O</small></span><span class="ge-scale" aria-hidden="true">40</span><canvas id="display-paw" aria-label="Synthesized airway pressure rendering"></canvas></div>
+          <div class="ge-wave ge-wave-flow"><span class="ge-wave-label">Flow <small>L/min</small></span><span class="ge-scale" aria-hidden="true">60</span><canvas id="display-flow" aria-label="Synthesized flow rendering"></canvas></div>
+          <div class="ge-wave ge-wave-co2"><span class="ge-wave-label">CO₂ <small>mmHg</small></span><span class="ge-scale" aria-hidden="true">50</span><canvas id="display-capnogram" aria-label="Synthesized capnogram rendering"></canvas></div>
+        </div>
+        <div class="ge-vent-numerics">
+          <div class="ge-group ge-group-paw">
+            <div class="ge-num ge-num-big"><span>Ppeak</span><strong id="display-ppeak">—</strong></div>
+            <div class="ge-num"><span>Pmean</span><strong id="display-pmean">—</strong></div>
+            <div class="ge-num"><span>PEEP</span><strong id="display-peep-measured">—</strong></div>
+          </div>
+          <div class="ge-group ge-group-vol">
+            <div class="ge-num ge-num-big"><span>MV <small>L/min</small></span><strong id="display-machine-mv">—</strong></div>
+            <div class="ge-num"><span>TVexp <small>mL</small></span><strong id="display-machine-tv">—</strong></div>
+            <div class="ge-num"><span>RR</span><strong id="display-rr">—</strong></div>
+          </div>
+          <div class="ge-group ge-group-co2">
+            <div class="ge-num ge-num-big"><span>EtCO₂ <small>mmHg</small></span><strong id="display-etco2">—</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ge-gas-row" aria-label="Gas monitoring">
+        <div class="ge-gas ge-gas-o2"><span>O₂ <small>%</small></span><dl><div><dt>Fi</dt><dd id="display-fio2">—</dd></div><div><dt>Et</dt><dd id="display-eto2">—</dd></div></dl></div>
+        <div class="ge-gas ge-gas-agent" id="display-agent-block" data-agent="none"><span id="display-agent-name">AGENT</span><dl><div><dt>Dial</dt><dd id="display-vaporizer">—</dd></div><div><dt>Et</dt><dd id="display-et-agent">—</dd></div></dl></div>
+        <div class="ge-gas ge-gas-mac"><span>MAC</span><strong id="display-mac">—</strong></div>
+      </div>
+
+      <div class="ge-bottom">
+        <div class="ge-flowmeters" aria-label="Fresh gas flow">
+          <div class="ge-flow ge-flow-o2"><span>O₂</span><div class="ge-flow-tube"><i id="display-flow-o2-bar"></i></div><b id="display-flow-o2">—</b></div>
+          <div class="ge-flow ge-flow-air"><span>AIR</span><div class="ge-flow-tube"><i id="display-flow-air-bar"></i></div><b id="display-flow-air">—</b></div>
+          <div class="ge-flow ge-flow-n2o"><span>N₂O</span><div class="ge-flow-tube"><i id="display-flow-n2o-bar"></i></div><b id="display-flow-n2o">—</b></div>
+          <div class="ge-flow-total"><span>Total flow</span><strong id="display-flow-total">—</strong><small>L/min</small></div>
+        </div>
+        <div class="ge-vent-settings" aria-label="Ventilator settings">
+          <div class="ge-setting ge-setting-mode"><span>Mode</span><strong id="display-vent-mode">—</strong></div>
+          <div class="ge-setting"><span>TV</span><strong id="display-set-tv">—</strong><small>mL</small></div>
+          <div class="ge-setting"><span>RR</span><strong id="display-set-rr">—</strong><small>/min</small></div>
+          <div class="ge-setting"><span>I:E</span><strong>1:2</strong></div>
+          <div class="ge-setting"><span>PEEP</span><strong id="display-peep">—</strong><small>cmH₂O</small></div>
+          <div class="ge-setting"><span>Pinsp</span><strong id="display-set-pressure">—</strong><small>cmH₂O</small></div>
+          <div class="ge-setting"><span>Psupp</span><strong id="display-pressure-support">—</strong><small>cmH₂O</small></div>
+          <div class="ge-setting"><span>FiO₂</span><strong id="display-set-fio2">—</strong><small>%</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="display-bottom-grid">
+      <article class="display-panel display-emergence-panel">
+        <header><div><p>EMERGENCE ASSESSMENT</p><h2>Spontaneous effort over mandatory ventilation</h2></div><span id="display-airway">—</span></header>
+        <div class="display-assessment-grid">
+          <div><span>SPONT RR</span><strong id="display-spontaneous-rr">—</strong><small>/min</small></div>
+          <div><span>SPONT TV</span><strong id="display-spontaneous-tv">—</strong><small>mL</small></div>
+          <div><span>SPONT MV</span><strong id="display-spontaneous-mv">—</strong><small>L/min</small></div>
+          <div><span>EFFORT</span><strong id="display-spontaneous-effort">—</strong><small>0–1</small></div>
+        </div>
+      </article>
+
+      <aside class="display-panel display-alarm-panel" aria-labelledby="display-alarm-heading">
+        <header><div><p>THRESHOLD ALARMS</p><h2 id="display-alarm-heading">No active alarms</h2></div></header>
+        <div id="display-alarm-list" class="display-alarm-list" role="alert"><p>All received values within display thresholds.</p></div>
+        <div class="display-alarm-actions">
+          <button id="display-acknowledge" type="button">ACKNOWLEDGE</button>
+          <button id="display-silence" type="button">SILENCE 2 MIN</button>
+        </div>
+      </aside>
+    </section>
+
     <section id="display-case-brief" class="display-case-brief" aria-labelledby="display-brief-heading" hidden>
       <header class="display-brief-header">
         <div>
@@ -51,60 +142,6 @@
           </section>
         </div>
       </div>
-    </section>
-
-    <section class="display-numerics" aria-label="Engine-derived patient monitor">
-      <article class="display-vital display-vital-ecg"><span>HR</span><strong id="display-hr">—</strong><small>bpm</small></article>
-      <article class="display-vital display-vital-bp"><span>NIBP</span><strong id="display-bp" aria-label="Blood pressure unavailable"><span id="display-sbp">—</span><span aria-hidden="true">/</span><span id="display-dbp">—</span></strong><small>MAP <b id="display-map">—</b> mmHg</small></article>
-      <article class="display-vital display-vital-spo2"><span>SpO₂</span><strong id="display-spo2">—</strong><small>%</small></article>
-      <article class="display-vital display-vital-co2"><span>EtCO₂</span><strong id="display-etco2">—</strong><small>mmHg · RR <b id="display-rr">—</b></small></article>
-    </section>
-
-    <section class="display-waveforms" aria-label="Rendering-only synthesized waveforms">
-      <div class="display-wave-row"><span>ECG II</span><canvas id="display-ecg" aria-label="Synthesized ECG rendering"></canvas></div>
-      <div class="display-wave-row"><span>PLETH</span><canvas id="display-pleth" aria-label="Synthesized pleth rendering"></canvas></div>
-      <div class="display-wave-row"><span>CO₂</span><canvas id="display-capnogram" aria-label="Synthesized capnogram rendering"></canvas></div>
-    </section>
-
-    <section class="display-secondary-numerics" aria-label="Secondary engine-derived patient values">
-      <article class="display-vital display-vital-temp"><span>TEMP</span><strong id="display-temp">—</strong><small>°C</small></article>
-      <article class="display-vital display-vital-tof"><span>TOF</span><strong id="display-tof">—</strong><small>RATIO <b id="display-tof-ratio">—</b></small></article>
-    </section>
-
-    <section class="display-bottom-grid">
-      <article class="display-panel display-emergence-panel">
-        <header><div><p>EMERGENCE ASSESSMENT</p><h2>Spontaneous effort over mandatory ventilation</h2></div><span id="display-airway">—</span></header>
-        <div class="display-assessment-grid">
-          <div><span>SPONT RR</span><strong id="display-spontaneous-rr">—</strong><small>/min</small></div>
-          <div><span>SPONT TV</span><strong id="display-spontaneous-tv">—</strong><small>mL</small></div>
-          <div><span>SPONT MV</span><strong id="display-spontaneous-mv">—</strong><small>L/min</small></div>
-          <div><span>EFFORT</span><strong id="display-spontaneous-effort">—</strong><small>0–1</small></div>
-        </div>
-      </article>
-
-      <article class="display-panel display-machine-panel">
-        <header><div><p>ANESTHESIA MACHINE</p><h2 id="display-vent-mode">—</h2></div><span id="display-vaporizer">—</span></header>
-        <dl class="display-machine-grid">
-          <div><dt>Measured TV</dt><dd><span id="display-machine-tv">—</span> mL</dd></div>
-          <div><dt>Measured MV</dt><dd><span id="display-machine-mv">—</span> L/min</dd></div>
-          <div><dt>Ppeak</dt><dd><span id="display-ppeak">—</span> cmH₂O</dd></div>
-          <div><dt>FiO₂</dt><dd><span id="display-fio2">—</span>%</dd></div>
-          <div><dt>Set TV</dt><dd><span id="display-set-tv">—</span> mL</dd></div>
-          <div><dt>Set RR</dt><dd><span id="display-set-rr">—</span> /min</dd></div>
-          <div><dt>PEEP</dt><dd><span id="display-peep">—</span> cmH₂O</dd></div>
-          <div><dt>Pressure control</dt><dd><span id="display-set-pressure">—</span> cmH₂O</dd></div>
-          <div><dt>Pressure support</dt><dd><span id="display-pressure-support">—</span> cmH₂O</dd></div>
-        </dl>
-      </article>
-
-      <aside class="display-panel display-alarm-panel" aria-labelledby="display-alarm-heading">
-        <header><div><p>THRESHOLD ALARMS</p><h2 id="display-alarm-heading">No active alarms</h2></div></header>
-        <div id="display-alarm-list" class="display-alarm-list" role="alert"><p>All received values within display thresholds.</p></div>
-        <div class="display-alarm-actions">
-          <button id="display-acknowledge" type="button">ACKNOWLEDGE</button>
-          <button id="display-silence" type="button">SILENCE 2 MIN</button>
-        </div>
-      </aside>
     </section>
   </main>
 

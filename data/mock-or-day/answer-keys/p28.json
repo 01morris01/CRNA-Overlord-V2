@@ -1,0 +1,98 @@
+{
+ "id": "p28",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Healthy 36 y smoker for open inguinal hernia repair. A control case: the issues are smoking (cigarette at 0645), airway reactivity under LMA, and anxiety.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Current smoker, otherwise healthy."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "No contraindication. Clears stopped at 0700 for an 1130 case."
+ },
+ "redFlags": [
+  {
+   "id": "smoking",
+   "severity": "major",
+   "finding": "Smoked 4.5 h before induction, daily vaping, morning productive cough",
+   "evidence": "Last cigarette 0645 in the parking lot; 19 pack years.",
+   "implication": "Carboxyhemoglobin (pulse oximetry overestimates), airway irritability, laryngospasm and bronchospasm with LMA.",
+   "action": "Adequate depth before airway manipulation, bronchodilator available, smoking cessation counseling.",
+   "keywords": [
+    "smok",
+    "carboxyhemoglobin",
+    "carbon monoxide",
+    "laryngospasm",
+    "bronchospasm",
+    "lma"
+   ]
+  },
+  {
+   "id": "anxiety",
+   "severity": "minor",
+   "finding": "Anxious first general anesthetic",
+   "evidence": "Nursing note.",
+   "implication": "Anxiety.",
+   "action": "Reassurance, consider midazolam.",
+   "keywords": [
+    "anxiety",
+    "midazolam"
+   ]
+  },
+  {
+   "id": "snoring",
+   "severity": "minor",
+   "finding": "Snores some",
+   "evidence": "Wife's report on questionnaire.",
+   "implication": "Low OSA screening risk.",
+   "action": "Routine.",
+   "keywords": [
+    "snor",
+    "stop-bang"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "LMA general anesthetic or MAC with local",
+   "keywords": [
+    "lma",
+    "mac"
+   ]
+  },
+  {
+   "domain": "regional",
+   "item": "Surgeon ilioinguinal and iliohypogastric infiltration",
+   "keywords": [
+    "ilioinguinal",
+    "local"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Same day discharge",
+   "keywords": [
+    "discharge"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Smoker with an LMA"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Smoker with productive cough"
+  }
+ ]
+}

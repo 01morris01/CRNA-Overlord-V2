@@ -232,7 +232,7 @@ describe('Booth barks (most specific rule wins)', () => {
   });
 
   it('has a line at every attitude for every rule, with no dashes as punctuation', () => {
-    const knownSlots = new Set(['spo2', 'map', 'hr', 'etco2', 'temp', 'tofRatio', 'tof', 'attempts', 'complication', 'name', 'worst', 'agent', 'dial', 'mac', 'bis', 'rr']);
+    const knownSlots = new Set(['spo2', 'map', 'hr', 'etco2', 'temp', 'tofRatio', 'tof', 'attempts', 'complication', 'name', 'worst', 'agent', 'dial', 'mac', 'bis', 'rr', 'patient', 'procedure', 'hook']);
     for (const rule of BARK_RULES) {
       const heats = new Set(rule.lines.map(([heat]) => heat));
       expect([...heats].sort(), rule.id).toEqual(expect.arrayContaining([1, 2, 3]));

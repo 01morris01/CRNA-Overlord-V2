@@ -33,12 +33,22 @@ import {
   renderOperatorStrip,
 } from './simOperatorView.js';
 import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
+import { createCarePlanController, renderCarePlanModal } from './carePlanSheet.js';
+import {
+  buildBoothCaseProfile,
+  buildChartInterviewGrounding,
+  createMockOrController,
+  renderChartModal,
+  renderMockOrPanel,
+} from './mockOrDay.js';
 
 let initialized = false;
 let runner = null;
 let caseController = null;
 let patientInterview = null;
 let simOperator = null;
+let carePlan = null;
+let mockOr = null;
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -913,6 +923,7 @@ function renderShell() {
 
     <div class="live-sim-grid">
       <div class="live-sim-column">
+        ${renderMockOrPanel()}
         ${renderLearnerCaseShell()}
         <section class="live-panel" aria-labelledby="live-case-heading">
           <h2 id="live-case-heading">Case flow</h2>
@@ -1093,7 +1104,9 @@ function renderShell() {
         </section>
       </div>
     </div>
-    <section id="live-rubric-print-document" class="live-rubric-print-document" aria-label="Printable finalized rubric" hidden></section>`;
+    <section id="live-rubric-print-document" class="live-rubric-print-document" aria-label="Printable finalized rubric" hidden></section>
+    ${renderCarePlanModal()}
+    ${renderChartModal()}`;
 }
 
 function setStatus(message, kind = 'info') {
@@ -1227,15 +1240,19 @@ export function syncClinicalDraftControls({
     vaporizerAgent: snapshot?.vaporizerAgent,
     vaporizer: snapshot?.vaporizer,
   };
+  // The engine stores settings as float32 (room air FiO2 reads back as
+  // 0.2099999934). Writing that raw value under min="0.21" made the form
+  // invalid, and the browser then silently refused APPLY MACHINE SETTINGS.
+  const tidy = (value) => String(Number(value.toFixed(4)));
   const form = documentRoot?.getElementById?.('live-machine-form');
   for (const [controlName, snapshotKey] of Object.entries(MACHINE_DRAFT_FIELDS)) {
     const value = snapshot?.[snapshotKey];
     const control = form?.elements?.namedItem?.(controlName);
-    if (control && Number.isFinite(value)) control.value = String(value);
+    if (control && Number.isFinite(value)) control.value = tidy(value);
   }
   const volatileDial = documentRoot?.getElementById?.('live-volatile-dial');
   if (volatileDial && Number.isFinite(snapshot?.vaporizer)) {
-    volatileDial.value = String(snapshot.vaporizer);
+    volatileDial.value = tidy(snapshot.vaporizer);
   }
   if (typeof snapshot?.vaporizerAgent === 'string') {
     onVolatileAgent(snapshot.vaporizerAgent);
@@ -1551,11 +1568,79 @@ function ensureRunner() {
     // as clicking the assessment button would.
     onActionPerformed: () => { caseController?.render(); runner.emit(); },
   });
+  initMockOr();
   runner.emit();
   fillPatientForm(runner.config);
   syncCaseSetupControls(runner.snapshot());
   renderEventLog();
   return runner;
+}
+
+/* Mock OR Day: chart driven patients with a required care plan. */
+function initMockOr() {
+  carePlan = createCarePlanController({
+    root: document,
+    getMeanness: () => simOperator?.operator?.getSettings?.().meanness ?? 2,
+    onOpenChart: (id) => mockOr?.openChart(id),
+    onGraded: (planStatus) => {
+      mockOr?.planUpdated(planStatus);
+      if (planStatus?.submitted) applyBoothCaseProfile({ withFindings: true });
+    },
+  });
+  mockOr = createMockOrController({
+    root: document,
+    carePlan,
+    onLoadPatient: ({ entry, patient, config }) => {
+      try {
+        const parsed = parsePatientConfig(config);
+        latestRubricDebrief = null;
+        latestRubricPresentationKey = null;
+        clearRubricDraftsOnNextRender = true;
+        resetRubricPrintState(document);
+        runner.applyConfig(parsed);
+        caseController?.reset();
+        transport?.setCaseBrief(null);
+        patientInterview?.setGrounding?.(buildChartInterviewGrounding(patient));
+        fillPatientForm(runner.config);
+        syncCaseSetupControls(runner.snapshot());
+        renderEventLog();
+        runner.logEvent('Mock OR', `${entry.label} loaded · ${entry.procedure}`, { action: 'mock_or_load', patientId: entry.id });
+        runner.emit();
+        setStatus(`${entry.label} loaded from the Mock OR schedule. Read the chart and submit the care plan before START.`, 'success');
+        return { ok: true };
+      } catch (error) {
+        setStatus(`Mock OR physiology rejected: ${error.message}`, 'error');
+        return { ok: false, reason: error.message };
+      }
+    },
+    onExit: () => {
+      simOperator?.operator?.setCaseProfile?.(null);
+      patientInterview?.setGrounding?.(null);
+      setStatus('Left Mock OR Day. Free play.', 'info');
+    },
+    onStateChange: (state) => {
+      const startButton = document.getElementById('live-start');
+      if (startButton) startButton.dataset.mockorLocked = String(!mockOr?.gate().allowed);
+      if (state.active) applyBoothCaseProfile({ withFindings: state.planSubmitted });
+    },
+  });
+  mockOr.init();
+}
+
+function applyBoothCaseProfile({ withFindings }) {
+  const state = mockOr?.getState();
+  if (!state?.active) return;
+  const profile = buildBoothCaseProfile(state.entry, state.answerKey);
+  // Chart findings stay out of Booth's mouth until the plan is in.
+  simOperator?.operator?.setCaseProfile?.({ ...profile, hooks: withFindings ? profile.hooks : [] });
+}
+
+function mockOrBlocksStart() {
+  const gate = mockOr?.gate();
+  if (!gate || gate.allowed) return false;
+  setStatus(gate.reason, 'error');
+  if (mockOr?.getState().engineSupported !== false) carePlan?.open();
+  return true;
 }
 
 function handleAirway(next) {
@@ -1678,6 +1763,8 @@ async function loadSelectedRubricScenario() {
     // Publish the learner-safe case brief (patient chart) to the anesthesia
     // display, or clear it for a rubric-only scenario.
     transport?.setCaseBrief(liveRunner.getLearnerCaseContext?.()?.learnerChart ?? null);
+    // A teaching case or rubric scenario replaces any Mock OR patient.
+    if (mockOr?.getState().active) mockOr.exit();
     // Ground the voice patient in the loaded case (or hide it for rubric-only).
     patientInterview?.setCase(scenario?.caseExperience ?? null);
     fillPatientForm(liveRunner.config);
@@ -1855,6 +1942,7 @@ function bindControls() {
   document.getElementById('live-close')?.addEventListener('click', closeLiveSim);
   document.getElementById('live-start')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
+    if (mockOrBlocksStart()) return;
     const previousState = liveRunner.getLifecycleState();
     liveRunner.start();
     const resumed = previousState === 'PAUSED';
@@ -1893,6 +1981,7 @@ function bindControls() {
   });
   document.getElementById('live-preoxygenate')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
+    if (mockOrBlocksStart()) return;
     const status = formatPreoxygenationLifecycleStatus(liveRunner.preoxygenate());
     setStatus(status.message, status.kind);
   });

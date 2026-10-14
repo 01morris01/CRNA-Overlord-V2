@@ -14,45 +14,45 @@ function section(className) {
   return html.slice(start, end);
 }
 
-describe('live monitor clinical-priority layout', () => {
-  it('keeps four primary vitals above waveforms and TEMP/TOF in a secondary row', () => {
-    const primary = section('display-numerics');
-    const secondary = section('display-secondary-numerics');
-    const waveformsAt = html.indexOf('<section class="display-waveforms"');
-
-    for (const id of ['display-hr', 'display-bp', 'display-spo2', 'display-etco2']) {
-      expect(primary).toContain(`id="${id}"`);
+describe('live monitor GE style layout', () => {
+  it('puts the patient monitor and the anesthesia machine screen side by side', () => {
+    const monitor = section('ge-screen ge-monitor');
+    const machine = section('ge-screen ge-vent');
+    for (const id of ['display-ecg', 'display-pleth', 'display-hr', 'display-spo2', 'display-bp', 'display-temp', 'display-tof']) {
+      expect(monitor).toContain(`id="${id}"`);
     }
-    expect(primary).not.toContain('id="display-temp"');
-    expect(primary).not.toContain('id="display-tof"');
-    expect(secondary).toContain('id="display-temp"');
-    expect(secondary).toContain('id="display-tof"');
-    expect(html.indexOf('<section class="display-numerics"')).toBeLessThan(waveformsAt);
-    expect(html.indexOf('<section class="display-secondary-numerics"')).toBeGreaterThan(waveformsAt);
+    for (const id of ['display-paw', 'display-flow', 'display-capnogram', 'display-ppeak', 'display-pmean', 'display-machine-mv',
+      'display-machine-tv', 'display-rr', 'display-etco2', 'display-fio2', 'display-eto2', 'display-et-agent', 'display-mac',
+      'display-flow-o2', 'display-flow-air', 'display-flow-n2o', 'display-flow-total', 'display-vent-mode', 'display-set-tv',
+      'display-set-rr', 'display-peep', 'display-set-pressure', 'display-pressure-support', 'display-set-fio2']) {
+      expect(machine).toContain(`id="${id}"`);
+    }
+    expect(html.indexOf('ge-screen ge-monitor')).toBeLessThan(html.indexOf('ge-screen ge-vent'));
+    expect(css).toMatch(/\.display-layout\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\) minmax\(0, 1\.35fr\);/s);
   });
 
-  it('gives NIBP extra width and prevents numeric and canvas clipping', () => {
-    expect(css).toContain('grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);');
-    expect(css).toMatch(/\.display-vital-bp strong\s*\{[^}]*white-space:\s*nowrap;/s);
-    expect(css).toContain('grid-template-columns: 70px minmax(0, 1fr);');
-    expect(css).toMatch(/\.display-wave-row canvas\s*\{[^}]*min-width:\s*0;/s);
-    expect(css).toMatch(/\.display-vital\s*\{[^}]*min-width:\s*0;/s);
+  it('pairs each waveform with its parameter window and keeps canvases from clipping', () => {
+    expect(html).toMatch(/ge-row-ecg[\s\S]*display-ecg[\s\S]*display-hr/);
+    expect(html).toMatch(/ge-row-pleth[\s\S]*display-pleth[\s\S]*display-spo2/);
+    expect(css).toMatch(/\.ge-wave canvas\s*\{[^}]*min-width:\s*0;/s);
+    expect(css).toMatch(/\.ge-param\s*\{[^}]*min-width:\s*0;/s);
   });
 
   it('renders systolic and diastolic independently inside a container-sized NIBP value', () => {
-    const primary = section('display-numerics');
-    expect(primary).toContain('id="display-bp"');
-    expect(primary).toContain('id="display-sbp"');
-    expect(primary).toContain('id="display-dbp"');
-    expect(css).toMatch(/\.display-vital-bp\s*\{[^}]*container-type:\s*inline-size;/s);
-    expect(css).toMatch(/\.display-vital-bp strong\s*\{[^}]*font-size:[^;]*cqi/s);
-    expect(css).toMatch(/\.display-vital-bp strong\s*\{[^}]*min-width:\s*0;/s);
+    const monitor = section('ge-screen ge-monitor');
+    expect(monitor).toContain('id="display-sbp"');
+    expect(monitor).toContain('id="display-dbp"');
+    expect(css).toMatch(/\.ge-param-nibp\s*\{[^}]*container-type:\s*inline-size;/s);
+    expect(css).toMatch(/\.ge-param-nibp strong\s*\{[^}]*font-size:[^;]*cqi/s);
+    expect(css).toMatch(/\.ge-param-nibp strong\s*\{[^}]*min-width:\s*0;/s);
   });
 
-  it('has explicit wide, laptop/tablet, and narrow-phone grid behavior', () => {
-    expect(css).toMatch(/@media \(max-width: 1120px\)[\s\S]*?\.display-numerics\s*\{\s*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
-    expect(css).toMatch(/@media \(max-width: 480px\)[\s\S]*?\.display-numerics[\s\S]*?grid-template-columns:\s*1fr;/);
-    expect(css).toMatch(/@media \(max-width: 480px\)[\s\S]*?\.display-secondary-numerics[\s\S]*?grid-template-columns:\s*1fr;/);
+  it('uses channel colors and stacks on narrow screens', () => {
+    for (const token of ['--ge-ecg', '--ge-spo2', '--ge-paw', '--ge-flow', '--ge-co2', '--ge-sevo', '--ge-des', '--ge-iso']) {
+      expect(css).toContain(token);
+    }
+    expect(css).toMatch(/@media \(max-width: 1120px\)[\s\S]*?\.display-layout\s*\{\s*grid-template-columns: 1fr;/);
+    expect(css).toMatch(/@media \(max-width: 480px\)[\s\S]*?\.ge-param-strip\s*\{\s*grid-template-columns: 1fr;/);
   });
 });
 
@@ -64,6 +64,7 @@ describe('learner display transport allowlist evidence', () => {
       'spontaneousEffort', 'ppeak', 'mv', 'tv', 'fio2', 'ventMode', 'vaporizer',
       'vaporizerAgent', 'airwayDevice', 'forcedApnea', 'ventSetTV', 'ventSetRR',
       'ventSetPeep', 'ventSetPressure', 'ventSetPressureSupport',
+      'eto2', 'etAgent', 'mac', 'o2Flow', 'airFlow', 'n2oFlow', 'ventSetFiO2', 'spont',
     ];
     for (const field of displayedFields) {
       expect(LEARNER_MONITOR_KEYS).toContain(field);

@@ -1,0 +1,211 @@
+{
+ "id": "p03",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "84 y DNR/DNI with dementia and acute delirium for cemented hip hemiarthroplasty; apixaban given 10 h ago with a spinal request, consent signed by a delirious patient, and a new murmur suggesting severe AS.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "Probable severe aortic stenosis, HFpEF with decompensation (BNP 640, effusions), AF with RVR, AKI with rhabdomyolysis, rising troponin."
+ },
+ "decision": {
+  "recommendation": "delay hours, not days",
+  "rationale": "Hip fracture surgery within 48 h is still the goal, but first: valid consent from the HCPOA (son back after 0900), a required reconsideration of the DNR/DNI for the OR, a focused echo for the new murmur, and an anticoagulation plan (no neuraxial within 72 h of apixaban, longer with Cr 1.7)."
+ },
+ "redFlags": [
+  {
+   "id": "apixaban",
+   "severity": "critical",
+   "finding": "Apixaban given 10.5 h before a requested spinal",
+   "evidence": "MAR: apixaban 5 mg 10/26 2100; pharmacy note recommended holding; Cr 1.7 now.",
+   "implication": "ASRA recommends 72 h off apixaban before neuraxial; renal impairment prolongs effect.",
+   "action": "No spinal; plan GA (if DNR revised) or alternative, hold apixaban.",
+   "keywords": [
+    "apixaban",
+    "eliquis",
+    "72",
+    "anticoagul",
+    "no spinal"
+   ]
+  },
+  {
+   "id": "consent",
+   "severity": "critical",
+   "finding": "Consent signed by a patient without capacity",
+   "evidence": "Oriented to person only, delirium overnight; consent signed by patient 0610; son is HCPOA, back after 0900.",
+   "implication": "Consent is not valid.",
+   "action": "Obtain consent from the HCPOA.",
+   "keywords": [
+    "consent",
+    "capacity",
+    "hcpoa",
+    "power of attorney",
+    "son"
+   ]
+  },
+  {
+   "id": "dnr",
+   "severity": "critical",
+   "finding": "POLST DNR/DNI with no intubation",
+   "evidence": "POLST 04/2024: DNR, selective treatment, no intubation.",
+   "implication": "GA with an airway device conflicts with the directive.",
+   "action": "Required reconsideration of the DNR for the perioperative period with the HCPOA; document the agreed plan.",
+   "keywords": [
+    "dnr",
+    "dni",
+    "polst",
+    "code status",
+    "required reconsideration"
+   ]
+  },
+  {
+   "id": "aortic_stenosis",
+   "severity": "critical",
+   "finding": "New harsh murmur, probable severe aortic stenosis",
+   "evidence": "New 3/6 systolic murmur at RUSB radiating to carotids; 2023 echo mean gradient 18; no current echo.",
+   "implication": "Fixed outflow: vasodilation from neuraxial or induction and bone cement implantation syndrome can be catastrophic.",
+   "action": "Preop focused echo, arterial line before induction, phenylephrine ready, maintain SVR and sinus rate control, slow titration.",
+   "keywords": [
+    "aortic stenosis",
+    "as ",
+    "murmur",
+    "echo",
+    "phenylephrine",
+    "afterload",
+    "svr"
+   ]
+  },
+  {
+   "id": "cement",
+   "severity": "major",
+   "finding": "Bone cement implantation syndrome risk",
+   "evidence": "Cemented hemiarthroplasty in an elderly patient with probable severe AS and heart failure.",
+   "implication": "Hypoxia, hypotension, arrest at cementing.",
+   "action": "Communicate with surgeon at cementing, FiO2 1.0, volume and pressor ready, consider uncemented if appropriate.",
+   "keywords": [
+    "cement",
+    "bcis"
+   ]
+  },
+  {
+   "id": "rhabdo_aki",
+   "severity": "major",
+   "finding": "Rhabdomyolysis with AKI, hyponatremia, low urine output",
+   "evidence": "Down 6 h; CK 2840, Cr 1.7 (baseline 1.1), Na 127, dark urine 120 mL in 8 h.",
+   "implication": "Hyperkalemia risk with succinylcholine; renally cleared drugs accumulate.",
+   "action": "Avoid succinylcholine and NSAIDs, follow K and UOP, fluids guided by HF status.",
+   "keywords": [
+    "rhabdo",
+    "ck",
+    "aki",
+    "succinylcholine",
+    "creatinine",
+    "sodium",
+    "hyponatremia"
+   ]
+  },
+  {
+   "id": "cardiac",
+   "severity": "major",
+   "finding": "Decompensating HFpEF, AF with RVR, rising troponin, hypoxemia",
+   "evidence": "BNP 640, CXR effusions and congestion, HR 112 AF, BP 98/58, troponin 0.05 to 0.09, SpO2 92% on 2 L, Hgb 11.8 to 9.4.",
+   "implication": "Limited reserve for hemorrhage and fluid shifts.",
+   "action": "Arterial line, judicious fluids, rate control, transfusion threshold discussion.",
+   "keywords": [
+    "troponin",
+    "bnp",
+    "heart failure",
+    "atrial fibrillation",
+    "rvr",
+    "hypoxemia"
+   ]
+  },
+  {
+   "id": "delirium",
+   "severity": "major",
+   "finding": "High postoperative delirium risk",
+   "evidence": "Dementia, current delirium, prior postop delirium, morphine hallucinations; geriatrics consult.",
+   "implication": "Drug choices matter.",
+   "action": "Avoid benzodiazepines, anticholinergics, meperidine, morphine; fascia iliaca or PENG block (compressible, acceptable on anticoagulation); hearing aids on.",
+   "keywords": [
+    "delirium",
+    "fascia iliaca",
+    "peng",
+    "benzodiazepine",
+    "avoid midazolam"
+   ]
+  },
+  {
+   "id": "dentures",
+   "severity": "minor",
+   "finding": "Dentures and hearing aids in place",
+   "evidence": "Preop checklist.",
+   "implication": "Airway and communication.",
+   "action": "Remove dentures before airway management; keep hearing aids for communication.",
+   "keywords": [
+    "denture",
+    "hearing aid"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line before induction",
+   "keywords": [
+    "arterial line",
+    "a-line"
+   ]
+  },
+  {
+   "domain": "regional",
+   "item": "Fascia iliaca or PENG block for analgesia",
+   "keywords": [
+    "fascia iliaca",
+    "peng"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "Slow titrated induction with vasopressor ready (if GA after DNR discussion)",
+   "keywords": [
+    "etomidate",
+    "titrate",
+    "phenylephrine"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision (sulfa allergy is not a contraindication)",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "Crossmatched blood available (2 units); judicious fluids",
+   "keywords": [
+    "blood",
+    "transfus"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Telemetry or step down; delirium precautions",
+   "keywords": [
+    "telemetry",
+    "icu",
+    "step down"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Large volume fascia iliaca block in a frail patient"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin or cement exposure"
+  }
+ ]
+}

@@ -1,0 +1,1178 @@
+{
+ "id": "p50",
+ "room": "Eye OR",
+ "time": "1000",
+ "name": "BOWLIN, ELIJAH R",
+ "mrn": "0147050",
+ "dob": "03/15/2017",
+ "age": "9 y",
+ "sex": "M",
+ "ht_cm": 123,
+ "wt_kg": 26.0,
+ "preferred_name": "Eli",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "S. Whitlow, MD, Dandridge Pediatrics",
+ "insurance": "TennCare (BlueCare) - Katie Beckett waiver",
+ "emergency_contact": "Amanda Bowlin (mother) 865-555-0627; Travis Bowlin (father) 865-555-0631",
+ "isolation": "",
+ "allergies": [
+  [
+   "Adhesive (silk tape)",
+   "Skin redness",
+   "Mild",
+   "2017"
+  ]
+ ],
+ "case": {
+  "procedure": "Bilateral medial rectus recession (strabismus surgery)",
+  "short": "Bilateral medial rectus recession",
+  "laterality": "Bilateral",
+  "service": "Pediatric Ophthalmology",
+  "surgeon": "M. Teague, MD",
+  "assistant": "",
+  "indication": "Esotropia 35 prism diopters at distance and near, not corrected with glasses; amblyopia treated.",
+  "duration_min": 60,
+  "anesthesia_requested": "General",
+  "position": "Supine, head on donut, table turned 90 degrees",
+  "dispo": "Same-day discharge (vs overnight obs per anesthesia given OSA)",
+  "blood": "None",
+  "equipment": "Strabismus tray",
+  "implants": "",
+  "surgeon_notes": "Down syndrome. Heart repaired as infant - cardiology letter on file. Please LMA or ETT per anesthesia.",
+  "add_on": false,
+  "scheduled_on": "09/29/2026"
+ },
+ "problems": [
+  [
+   "Trisomy 21 (Down syndrome)",
+   "Birth",
+   "Active"
+  ],
+  [
+   "Complete atrioventricular canal defect, s/p repair 07/2017",
+   "2017",
+   "Active"
+  ],
+  [
+   "Mitral (left AV valve) regurgitation, mild, residual",
+   "2017",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea, mild residual after T&A",
+   "2020",
+   "Active"
+  ],
+  [
+   "Congenital hypothyroidism -> acquired hypothyroidism on levothyroxine",
+   "2017",
+   "Active"
+  ],
+  [
+   "Esotropia, infantile/accommodative",
+   "2021",
+   "Active"
+  ],
+  [
+   "Amblyopia, left",
+   "2022",
+   "Active"
+  ],
+  [
+   "Atlantoaxial instability (radiographic)",
+   "2024",
+   "Active"
+  ],
+  [
+   "Intellectual disability, moderate",
+   "2019",
+   "Active"
+  ],
+  [
+   "Recurrent otitis media s/p tubes",
+   "2018",
+   "Resolved"
+  ],
+  [
+   "Constipation, chronic",
+   "2019",
+   "Active"
+  ],
+  [
+   "Eczema",
+   "2020",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Trisomy 21 (karyotype 47,XY,+21)",
+   "Complete AVSD repaired 07/2017 (2-patch) at 4 months; mild residual L AV valve regurgitation",
+   "OSA - T&A 2020; PSG 2022 AHI 3.8 (mild); no CPAP",
+   "Hypothyroidism on levothyroxine",
+   "Esotropia/amblyopia (patching 2022-2024)",
+   "Moderate ID; verbal in short phrases, uses some signs; anxious in medical settings"
+  ],
+  "psh": [
+   [
+    "07/2017",
+    "Complete AV canal repair (CPB)",
+    "Vanderbilt-area Children's Heart Center (outside)"
+   ],
+   [
+    "05/2018",
+    "Bilateral myringotomy tubes",
+    "C-N University Hospital"
+   ],
+   [
+    "02/2020",
+    "Tonsillectomy and adenoidectomy",
+    "C-N University Hospital"
+   ],
+   [
+    "2022",
+    "Dental rehabilitation under GA",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Mother: healthy",
+   "Father: hypertension",
+   "Sister (12): healthy",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "N/A (no smokers in home)",
+   "alcohol": "N/A",
+   "drugs": "N/A",
+   "occupation": "3rd grade, special education class with aide",
+   "living": "Parents and sister, Dandridge",
+   "other": "Special Olympics swimming. Likes tumbling/trampoline at therapy gym."
+  },
+  "immunizations": [
+   [
+    "Up to date per TennIIS",
+    "2026"
+   ],
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "Synagis (palivizumab)",
+    "2017-2018 season"
+   ],
+   [
+    "Pneumococcal PCV13 + PPSV23",
+    "2019"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Levothyroxine 50 mcg tab",
+   "1 tab PO daily",
+   "H. Lambert, MD (Peds Endocrinology)",
+   "10/27/2026 0600"
+  ],
+  [
+   "Polyethylene glycol 3350",
+   "8.5 g PO daily",
+   "S. Whitlow, MD",
+   "10/26/2026"
+  ],
+  [
+   "Cetirizine 5 mg",
+   "PO daily PRN",
+   "S. Whitlow, MD",
+   "10/25/2026"
+  ],
+  [
+   "Hydrocortisone 2.5% cream",
+   "Topical BID PRN eczema",
+   "S. Whitlow, MD",
+   "PRN"
+  ],
+  [
+   "Glasses (hyperopic correction)",
+   "Daily",
+   "M. Teague, MD",
+   "10/27/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Midazolam 0.5 mg/kg PO (max 15 mg) = 13 mg",
+   "Preop x1 PRN anxiety",
+   "Ordered"
+  ],
+  [
+   "Acetaminophen 15 mg/kg PO = 390 mg",
+   "Preop x1",
+   "Given 10/27/2026 0915"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Furosemide 1 mg/kg",
+   "2017",
+   "Stopped after AVSD repair"
+  ],
+  [
+   "Captopril",
+   "2017-2018",
+   "Stopped by cardiology"
+  ],
+  [
+   "Amoxicillin",
+   "2018",
+   "Otitis"
+  ],
+  [
+   "Fluticasone nasal",
+   "2019-2020",
+   "Stopped after T&A"
+  ],
+  [
+   "Atropine eye drops (penalization)",
+   "2022-2023",
+   "Completed"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "04/02/2026",
+    "comment": "Annual DS screening",
+    "vals": {
+     "WBC": [
+      "8.7",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "218",
+      ""
+     ],
+     "MCV": [
+      "94",
+      ""
+     ],
+     "TSH": [
+      "2.90",
+      ""
+     ],
+     "FT4": [
+      "1.17",
+      ""
+     ],
+     "Ferritin": [
+      "44",
+      ""
+     ],
+     "Fe": [
+      "130",
+      ""
+     ],
+     "TSAT": [
+      "24",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/22/2024",
+    "comment": "Annual DS screening",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "226",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "TSH": [
+      "2.20",
+      ""
+     ],
+     "FT4": [
+      "1.15",
+      ""
+     ],
+     "Ferritin": [
+      "38",
+      ""
+     ],
+     "Fe": [
+      "109",
+      ""
+     ],
+     "TSAT": [
+      "24",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2022",
+    "comment": "Annual DS screening - levothyroxine increased",
+    "vals": {
+     "WBC": [
+      "8.2",
+      ""
+     ],
+     "Hgb": [
+      "13.2",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "TSH": [
+      "5.60",
+      "H"
+     ],
+     "FT4": [
+      "1.00",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.45",
+      ""
+     ],
+     "Glu": [
+      "82",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "16",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "208",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/21/2020",
+    "comment": "Pre-T&A",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "TSH": [
+      "3.40",
+      ""
+     ],
+     "FT4": [
+      "1.17",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/10/2017",
+    "comment": "Pre-cardiac surgery (outside)",
+    "vals": {
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "10.8",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "84",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.47",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "PT": [
+      "12.8",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/18/2017",
+    "comment": "Newborn - TSH elevated",
+    "vals": {
+     "WBC": [
+      "15.1",
+      "H"
+     ],
+     "Hgb": [
+      "17.9",
+      "H"
+     ],
+     "Hct": [
+      "54",
+      "H"
+     ],
+     "Plt": [
+      "152",
+      ""
+     ],
+     "MCV": [
+      "104",
+      "H"
+     ],
+     "TSH": [
+      "14.20",
+      "H"
+     ],
+     "FT4": [
+      "0.86",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "5-18"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.30-0.70"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "86-315"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-13.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "11.5-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "35-45"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "77-95"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "24-336"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "03/2017",
+    "Karyotype",
+    "47,XY,+21",
+    "A"
+   ],
+   [
+    "03/22/2024",
+    "Celiac screen (tTG-IgA, total IgA)",
+    "Negative; IgA normal",
+    ""
+   ],
+   [
+    "03/22/2024",
+    "Lead level",
+    "<2 mcg/dL",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/16/2017",
+   "XR Chest (newborn)",
+   "Cardiomegaly, increased pulmonary vascularity. 11 pairs of ribs.",
+   "Outside"
+  ],
+  [
+   "05/2018",
+   "XR Chest 2 views",
+   "Post-sternotomy. Normal heart size. Clear lungs.",
+   "K. Odell, MD"
+  ],
+  [
+   "01/2020",
+   "XR Soft tissue neck lateral",
+   "Large adenoid, narrowing nasopharyngeal airway.",
+   "K. Odell, MD"
+  ],
+  [
+   "06/11/2024",
+   "XR Cervical spine with flexion/extension views",
+   "Atlantodens interval 3 mm in neutral, 5 mm in flexion, 2.5 mm extension. Neural canal width (C1) 15 mm in flexion. No os odontoideum. Mild hypoplasia of posterior arch C1. Impression: Increased ADI in flexion (5 mm) consistent with atlantoaxial instability in this patient with trisomy 21. Recommend clinical correlation and orthopedic/neurosurgical evaluation; consider MRI if neurologic signs.",
+   "K. Odell, MD"
+  ],
+  [
+   "06/11/2024",
+   "XR Pelvis AP",
+   "Mild bilateral acetabular shallowness. No dislocation.",
+   "K. Odell, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/16/2017",
+   "Echocardiogram (outside, newborn)",
+   "Complete balanced AVSD (Rastelli A), large primum ASD and inlet VSD, common AV valve with moderate regurgitation. Bidirectional shunt. PDA small.",
+   "Outside"
+  ],
+  [
+   "07/2017",
+   "Operative report summary (outside) - two-patch AVSD repair",
+   "CPB 128 min. Cleft closure L AV valve. Post-op: junctional ectopic tachycardia x24 h, temporary pacing, no permanent pacemaker. Extubated POD2.",
+   "Outside"
+  ],
+  [
+   "2018",
+   "ECG",
+   "Sinus rhythm. Superior (left) axis. First-degree AV block (PR 172). RBBB pattern incomplete.",
+   "D. Gaines, MD (Peds Cardiology)",
+   {
+    "rate": 100,
+    "pr": 172,
+    "qrs": 102,
+    "qtc": 430,
+    "axis": -70,
+    "irbbb": 1,
+    "tmod": {
+     "V1": -1,
+     "V2": -1,
+     "V3": -0.6
+    }
+   }
+  ],
+  [
+   "08/2025",
+   "Echocardiogram, transthoracic",
+   "S/p complete AVSD repair. Intact atrial and ventricular patches, no residual shunt. Mild L AV valve regurgitation (cleft), no stenosis (mean gradient 2 mm Hg). Trivial R AV valve regurgitation, RVSP 24 + RA. Normal biventricular size and function, LVEF 64%. No LVOT obstruction.",
+   "D. Gaines, MD"
+  ],
+  [
+   "08/2025",
+   "ECG",
+   "Sinus rhythm 92. Superior axis. PR 168. Incomplete RBBB. Unchanged.",
+   "D. Gaines, MD",
+   {
+    "rate": 92,
+    "pr": 168,
+    "qrs": 102,
+    "qtc": 430,
+    "axis": -70,
+    "irbbb": 1,
+    "tmod": {
+     "V1": -1,
+     "V2": -1,
+     "V3": -0.6
+    }
+   }
+  ],
+  [
+   "09/2022",
+   "Polysomnography (pediatric)",
+   "Obstructive AHI 3.8/h, SpO2 nadir 87%, no hypoventilation (ETCO2 >50 for 2% TST). Impression: Mild residual OSA post T&A. Recommend weight management, nasal steroid trial, repeat PSG 2-3 yr.",
+   "R. Haddock, MD"
+  ]
+ ],
+ "encounters": [
+  [
+   "03/15/2017",
+   "Birth/NICU (9 days) - outside",
+   "Outside",
+   "Trisomy 21, AVSD",
+   "Discharged"
+  ],
+  [
+   "07/2017",
+   "Inpatient (11 days) - outside",
+   "Outside Children's Heart Center",
+   "AVSD repair",
+   "Discharged"
+  ],
+  [
+   "05/2018",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "Myringotomy tubes",
+   "Home"
+  ],
+  [
+   "02/2020",
+   "Inpatient overnight",
+   "C-N University Hospital",
+   "T&A (OSA)",
+   "Overnight obs; desat to 86% night 1"
+  ],
+  [
+   "2022",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "Dental rehab",
+   "Home"
+  ],
+  [
+   "06/11/2024",
+   "Clinic - PCP",
+   "Dandridge Pediatrics",
+   "Pre-Special Olympics physical; C-spine films",
+   "Ortho referral placed"
+  ],
+  [
+   "08/2025",
+   "Clinic - Peds Cardiology",
+   "C-N Children's Heart Clinic",
+   "Annual",
+   "Stable, 2-yr follow-up"
+  ],
+  [
+   "04/02/2026",
+   "Clinic - PCP",
+   "Dandridge Pediatrics",
+   "Annual DS health maintenance",
+   "Routine"
+  ],
+  [
+   "09/29/2026",
+   "Clinic - Peds Ophthalmology",
+   "C-N Eye Institute",
+   "Esotropia",
+   "Surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "07/28/2017 1000",
+   "Media (Outside Record)",
+   "Pediatric Cardiac Surgery",
+   "Outside Children's Heart Center",
+   "Discharge summary: 4-month-old with T21 and complete AVSD, two-patch repair, cleft closure. JET post-op controlled with cooling/amiodarone, resolved. No heart block. Mild residual L AV valve regurgitation. Home on furosemide, captopril."
+  ],
+  [
+   "02/21/2020 0800",
+   "Discharge Summary",
+   "Pediatric ENT",
+   "R. Haddad, MD",
+   "T&A for OSA (preop AHI 14). Overnight obs: desaturation to 86% x3 on night 1, resolved with repositioning and 0.5 L O2. Discharged POD1. Anesthesia record: mask induction sevo, 4.5 cuffed ETT, grade 1, \"neck kept neutral per DS precautions.\""
+  ],
+  [
+   "04/12/2022 1300",
+   "Anesthesia Record Summary",
+   "Anesthesiology",
+   "P. Russo, MD",
+   "Dental rehab: nasal RAE 5.0 cuffed, grade 2, mask induction, bradycardia to 68 with sevo 8% - resolved with lower concentration. Emergence delirium, dexmedetomidine 0.5 mcg/kg. Uneventful otherwise."
+  ],
+  [
+   "06/11/2024 1100",
+   "Progress Note",
+   "Pediatrics",
+   "S. Whitlow, MD",
+   "Special Olympics physical. Parents want him to start swimming/tumbling; Special Olympics requires C-spine film for butterfly/diving/gymnastics. Neuro exam: normal gait for him, no clonus, reflexes symmetric, no neck pain per parents. Films ordered."
+  ],
+  [
+   "06/14/2024 1530",
+   "Telephone Encounter",
+   "Pediatrics",
+   "L. Seals, LPN",
+   "Per Dr. Whitlow: C-spine x-ray abnormal (ADI 5 mm). Referral to pediatric orthopedic spine placed. Advise no diving, butterfly stroke, or tumbling until evaluated. Left voicemail for mother."
+  ],
+  [
+   "08/02/2024 0900",
+   "Telephone Encounter",
+   "Pediatric Orthopedics",
+   "Scheduling",
+   "Referral received - 3 attempts to schedule, unable to reach family; letter sent. Referral closed 09/2024."
+  ],
+  [
+   "08/20/2025 1000",
+   "Progress Note",
+   "Pediatric Cardiology",
+   "D. Gaines, MD",
+   "Annual. S/p AVSD repair, mild L AV valve regurg, normal function. No SBE prophylaxis needed (repaired >6 mo, no prosthetic valve/residual shunt at patch). Cleared for activity. RTC 2 yr. For anesthesia: no restrictions; baseline first-degree AV block, superior axis."
+  ],
+  [
+   "04/02/2026 1430",
+   "Progress Note",
+   "Pediatrics",
+   "S. Whitlow, MD",
+   "Annual DS visit. Growth on DS curve. TSH 2.9 on levothyroxine 50. Hearing/vision: ophtho follow-up. Snores occasionally. Mother reports he enjoys tumbling class at therapy gym 2x/week. No complaints. Hgb normal."
+  ],
+  [
+   "09/29/2026 1100",
+   "H&P",
+   "Pediatric Ophthalmology",
+   "M. Teague, MD",
+   "Esotropia 35 PD distance/near despite full hyperopic correction. Amblyopia treated. Plan bilateral MR recession 5.0 mm. PMH: T21, heart repaired, hypothyroid, OSA s/p T&A. Cardiology letter 08/2025 on file. Consent signed by mother."
+  ],
+  [
+   "10/20/2026 1400",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "G. Mize, RN",
+   "Phone PAT. Mother reports snoring \"some,\" no witnessed apneas. Last anesthesia (dental) with \"wild wake-up.\" No recent illness. Takes levothyroxine AM - ok. NPO instructions given. Comfort item allowed. Midazolam ordered."
+  ],
+  [
+   "10/27/2026 0920",
+   "Nursing Note",
+   "Pediatric Preop",
+   "C. Rector, RN",
+   "9M with T21, anxious, clinging to mother, accepts tablet. Weight 26 kg. Lungs clear, mild nasal congestion, no fever. Mother states no neck pain or new weakness; mentions he \"trips more lately but he always has.\" Glasses on."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/11/2024 1045",
+   "98/58",
+   96,
+   20,
+   98,
+   36.8,
+   22.4,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "08/20/2025 0945",
+   "100/60",
+   92,
+   20,
+   98,
+   36.7,
+   24.6,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "04/02/2026 1415",
+   "102/62",
+   94,
+   20,
+   98,
+   36.6,
+   25.4,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "09/29/2026 1045",
+   "100/60",
+   98,
+   20,
+   98,
+   36.7,
+   25.9,
+   "0/10",
+   "Ophthalmology"
+  ],
+  [
+   "10/27/2026 0915",
+   "104/64",
+   104,
+   22,
+   97,
+   36.8,
+   26.0,
+   "0/10 (FLACC 0)",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO solids after midnight, clears until 0900",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Midazolam PO preop",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Discharge home vs overnight observation per anesthesia",
+   "10/27/2026",
+   "Active (post-op)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not done",
+  "antibody_screen": "Not done",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: bilateral medial rectus recession",
+   "Signed by mother 09/29/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Minor - parents are legal guardians.",
+ "anesthesia_history": [
+  [
+   "07/2017",
+   "AVSD repair",
+   "GA ETT, CPB",
+   "JET post-op",
+   "Outside"
+  ],
+  [
+   "05/2018",
+   "Myringotomy tubes",
+   "Mask GA",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "02/2020",
+   "T&A",
+   "Mask induction, 4.5 cuffed ETT, grade 1",
+   "Desats night 1",
+   "C-N University Hospital"
+  ],
+  [
+   "2022",
+   "Dental rehab",
+   "Nasal RAE 5.0 cuffed, grade 2",
+   "Bradycardia with sevo 8%; emergence delirium",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0830",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0700 apple juice",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - bilateral (above eyes)"
+   ],
+   [
+    "Allergy band",
+    "Done - adhesive"
+   ]
+  ],
+  "nursing_note": "See nursing note 0920. Glasses with mother. Comfort item (stuffed dog). No IV - plan mask induction.",
+  "iv": "None",
+  "glucose": ""
+ },
+ "label": "E. Bowlin",
+ "bmi": "17.2"
+}

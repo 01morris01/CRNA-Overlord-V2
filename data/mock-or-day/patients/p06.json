@@ -1,0 +1,1811 @@
+{
+ "id": "p06",
+ "room": "OR 3",
+ "time": "0730",
+ "name": "PATTERSON, LINDA S",
+ "mrn": "0089911",
+ "dob": "12/05/1967",
+ "age": "58 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 66.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "D. Kinser, DO, Jefferson County Primary Care",
+ "insurance": "UnitedHealthcare Choice Plus (employer)",
+ "emergency_contact": "Ronald Patterson (husband) 865-555-0128",
+ "isolation": "",
+ "allergies": [
+  [
+   "Iodinated contrast media",
+   "Hives",
+   "Moderate",
+   "2023"
+  ]
+ ],
+ "case": {
+  "procedure": "Total thyroidectomy, possible median sternotomy",
+  "short": "Total thyroidectomy, possible sternotomy",
+  "laterality": "N/A",
+  "service": "Endocrine Surgery",
+  "surgeon": "K. Osei, MD",
+  "assistant": "Thoracic surgery on standby (P. Ruiz, MD)",
+  "indication": "Graves disease with large multinodular goiter, substernal extension, compressive symptoms.",
+  "duration_min": 210,
+  "anesthesia_requested": "General",
+  "position": "Supine, shoulder roll, neck extended, arms tucked; table turned 180 degrees",
+  "dispo": "Surgical step-down",
+  "blood": "Type and crossmatch 2 units",
+  "equipment": "Nerve integrity monitoring (NIM) endotracheal tube requested; sternal saw available",
+  "implants": "",
+  "surgeon_notes": "No long-acting relaxant after intubation (nerve monitoring). Thoracic surgery standby for possible sternotomy.",
+  "add_on": false,
+  "scheduled_on": "10/06/2026"
+ },
+ "problems": [
+  [
+   "Graves disease",
+   "04/2022",
+   "Active"
+  ],
+  [
+   "Multinodular goiter with substernal extension",
+   "2025",
+   "Active"
+  ],
+  [
+   "Paroxysmal atrial fibrillation",
+   "02/2025",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2014",
+   "Active"
+  ],
+  [
+   "Anxiety",
+   "2010",
+   "Active"
+  ],
+  [
+   "Osteopenia",
+   "2024",
+   "Active"
+  ],
+  [
+   "Diverticulosis",
+   "2023",
+   "Active"
+  ],
+  [
+   "Dysphagia",
+   "2026",
+   "Active"
+  ],
+  [
+   "Hoarseness",
+   "2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Graves disease dx 04/2022 (TRAb positive, diffuse uptake 2022); methimazole intermittently, adherence poor; multinodular change and enlargement since 2024",
+   "Paroxysmal AF dx 02/2025 (ED, RVR, while thyrotoxic); propranolol, apixaban",
+   "Hypertension",
+   "Anxiety",
+   "Osteopenia (DEXA 2024)",
+   "Sigmoid diverticulitis 2023 (CT with contrast -> hives)"
+  ],
+  "psh": [
+   [
+    "2012",
+    "Laparoscopic cholecystectomy",
+    "C-N University Hospital"
+   ],
+   [
+    "1994",
+    "Cesarean delivery (spinal)",
+    "Morristown-Hamblen"
+   ],
+   [
+    "2018",
+    "Colonoscopy, normal",
+    "C-N Endoscopy"
+   ]
+  ],
+  "family": [
+   "Sister: \"high fever under anesthesia\" during a surgery (details unknown)",
+   "Mother: hypothyroidism",
+   "Father: CAD, MI age 66",
+   "Daughter: healthy"
+  ],
+  "social": {
+   "tobacco": "Former, quit 2005 (10 pack-years)",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Bank branch manager",
+   "living": "Husband, Jefferson City",
+   "other": "Sister lives in Ohio; husband will call her for details if asked."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "COVID-19",
+    "2024"
+   ],
+   [
+    "Shingrix x2",
+    "2022"
+   ],
+   [
+    "Tdap",
+    "2019"
+   ],
+   [
+    "Pneumococcal",
+    "Not given"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Methimazole 10 mg tab",
+   "20 mg PO daily",
+   "J. Hartwell, MD (Endocrinology)",
+   "\"Ran out 2 weeks ago\""
+  ],
+  [
+   "Propranolol 20 mg tab",
+   "20 mg PO TID",
+   "J. Hartwell, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Apixaban 5 mg tab",
+   "5 mg PO BID",
+   "S. Kaur, MD (Cardiology)",
+   "10/24/2026 2100 (held 2 days)"
+  ],
+  [
+   "Lisinopril 10 mg tab",
+   "10 mg PO daily",
+   "D. Kinser, DO",
+   "10/26/2026 0800"
+  ],
+  [
+   "Lorazepam 0.5 mg tab",
+   "0.5 mg PO BID PRN anxiety",
+   "D. Kinser, DO",
+   "10/26/2026 2200"
+  ],
+  [
+   "Calcium + vitamin D3",
+   "600 mg/20 mcg BID",
+   "OTC",
+   "10/26/2026"
+  ],
+  [
+   "Potassium iodide (SSKI) 1 g/mL",
+   "\"Started\" 10/17 per surgeon note; 2 drops TID x 10 days",
+   "K. Osei, MD",
+   "Not on patient's home list; never filled"
+  ]
+ ],
+ "mar": [
+  [
+   "Propranolol 20 mg PO",
+   "Preop with sip",
+   "Patient took 10/26 2100; AM dose not taken (told NPO)"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "On call to OR",
+   "Due"
+  ],
+  [
+   "Dexamethasone 8 mg IV",
+   "Intraop (surgeon)",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's",
+   "KVO",
+   "Infusing 0615"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Metoprolol succinate 50 mg",
+   "02/2025-06/2025",
+   "Changed to propranolol by endocrinology"
+  ],
+  [
+   "Methimazole 10 mg",
+   "2022-2023, 2025",
+   "Self-discontinued intermittently (\"felt fine\")"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "2014-2019",
+   "Edema; changed to lisinopril"
+  ],
+  [
+   "Sertraline 50 mg",
+   "2016-2019",
+   "Patient preference"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/26/2026 1330",
+    "comment": "Preadmission testing",
+    "vals": {
+     "TSH": [
+      "<0.01",
+      ""
+     ],
+     "FT4": [
+      "3.80",
+      "H"
+     ],
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "210",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.64",
+      ""
+     ],
+     "Glu": [
+      "128",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "13.4",
+      ""
+     ],
+     "INR": [
+      "1.1",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/06/2026 1100",
+    "comment": "Surgical H&P",
+    "vals": {
+     "TSH": [
+      "<0.01",
+      ""
+     ],
+     "FT4": [
+      "2.40",
+      "H"
+     ],
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "214",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.76",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "11.8",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/11/2026 1000",
+    "comment": "Endocrinology",
+    "vals": {
+     "TSH": [
+      "<0.01",
+      ""
+     ],
+     "FT4": [
+      "2.20",
+      "H"
+     ],
+     "WBC": [
+      "7.6",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "252",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "100",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/10/2025 0900",
+    "comment": "Endocrinology",
+    "vals": {
+     "TSH": [
+      "0.03",
+      "L"
+     ],
+     "FT4": [
+      "1.70",
+      ""
+     ],
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "243",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "AST": [
+      "14",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "60",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/09/2025 2200",
+    "comment": "ED AF RVR",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "13.2",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "247",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.4",
+      "L"
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.77",
+      ""
+     ],
+     "Glu": [
+      "104",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "TSH": [
+      "<0.01",
+      ""
+     ],
+     "FT4": [
+      "2.90",
+      "H"
+     ],
+     "Trop": [
+      "12",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ],
+     "PT": [
+      "12.6",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/05/2024 0830",
+    "comment": "Off methimazole since 11/2023",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "101",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "TSH": [
+      "0.05",
+      "L"
+     ],
+     "FT4": [
+      "1.90",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "121",
+      ""
+     ],
+     "VitD": [
+      "40",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/22/2023 1530",
+    "comment": "ED diverticulitis",
+    "vals": {
+     "WBC": [
+      "13.4",
+      "H"
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "240",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.73",
+      ""
+     ],
+     "Glu": [
+      "107",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "33",
+      ""
+     ],
+     "ALKP": [
+      "66",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Lactate": [
+      "0.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/18/2023 0900",
+    "comment": "Euthyroid on methimazole",
+    "vals": {
+     "TSH": [
+      "0.90",
+      ""
+     ],
+     "FT4": [
+      "1.10",
+      ""
+     ],
+     "WBC": [
+      "8.0",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "226",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/14/2022 0845",
+    "comment": "Methimazole monitoring",
+    "vals": {
+     "WBC": [
+      "5.1",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "235",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "TSH": [
+      "0.02",
+      "L"
+     ],
+     "FT4": [
+      "1.60",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "34",
+      ""
+     ],
+     "ALKP": [
+      "69",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/12/2022 0900",
+    "comment": "Weight loss, palpitations",
+    "vals": {
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "260",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "104",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "152",
+      "H"
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "TSH": [
+      "<0.01",
+      ""
+     ],
+     "FT4": [
+      "3.10",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/09/2021 0830",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.77",
+      ""
+     ],
+     "Glu": [
+      "103",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "29",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "72",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "98",
+      ""
+     ],
+     "TSH": [
+      "1.80",
+      ""
+     ],
+     "FT4": [
+      "1.10",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "04/12/2022",
+    "TSH receptor antibody (TRAb)",
+    "8.6 IU/L (ref < 1.75)",
+    "H"
+   ],
+   [
+    "05/03/2022",
+    "Thyroid uptake and scan, I-123 (24 h)",
+    "Uptake 62% (ref 10-30%), diffuse homogeneous",
+    "H"
+   ],
+   [
+    "10/26/2026 1330",
+    "Free T3",
+    "9.6 pg/mL (ref 2.3-4.2)",
+    "H"
+   ],
+   [
+    "10/06/2026",
+    "Free T3",
+    "Not drawn",
+    ""
+   ],
+   [
+    "10/26/2026 1330",
+    "Type and crossmatch",
+    "O positive, antibody negative, 2 units",
+    ""
+   ],
+   [
+    "10/26/2026 1330",
+    "PTH, intact (baseline)",
+    "41 pg/mL",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "05/03/2022",
+   "NM Thyroid uptake and scan",
+   "Diffusely enlarged gland with homogeneous increased uptake, 24-h uptake 62%. No cold nodule. Impression: Graves disease.",
+   "S. Nilsen, MD"
+  ],
+  [
+   "08/22/2023",
+   "CT Abdomen/Pelvis with IV contrast",
+   "Uncomplicated sigmoid diverticulitis. No abscess. Incidental: none. (Addendum: patient developed hives after contrast, treated with diphenhydramine.)",
+   "A. Stroud, MD"
+  ],
+  [
+   "04/18/2024",
+   "DEXA",
+   "Lowest T-score -1.9 femoral neck. Osteopenia. FRAX 10-yr major 9%.",
+   "S. Nilsen, MD"
+  ],
+  [
+   "06/10/2025",
+   "US Thyroid",
+   "Enlarged heterogeneous gland, right lobe 7.2 cm, left lobe 6.8 cm, multiple nodules up to 2.4 cm (TR3). Inferior extent not visualized, extends below clavicles. Impression: Multinodular goiter, possible substernal extension; recommend CT.",
+   "J. Whitlock, MD"
+  ],
+  [
+   "09/28/2026",
+   "CT Neck and Chest without contrast",
+   "Large multinodular goiter with substernal extension to the level of the aortic arch. Trachea deviated to the right and narrowed to 6 mm transverse diameter at the thoracic inlet. Esophagus displaced. No lymphadenopathy. Lungs clear. Impression: Substernal goiter with marked tracheal narrowing and deviation.",
+   "L. Darby, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "02/09/2025",
+   "ECG 12-lead",
+   "Atrial fibrillation with RVR, rate 148. No acute ST changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 148,
+    "rhythm": "af",
+    "qrs": 84,
+    "qtc": 440,
+    "axis": 60
+   }
+  ],
+  [
+   "02/11/2025",
+   "Echocardiogram, transthoracic",
+   "LVEF 55%. Normal LV size. Mild LA enlargement. No significant valve disease. RVSP 28.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/01/2026",
+   "Pulmonary function test with flow-volume loop",
+   "Spirometry: FVC 84% pred, FEV1 62% pred, PEF 41% pred. Flow-volume loop: flattening of both inspiratory and expiratory limbs, consistent with fixed upper airway obstruction.",
+   "C-N Pulmonary Function Lab"
+  ],
+  [
+   "10/26/2026",
+   "ECG 12-lead",
+   "Atrial fibrillation, ventricular rate 112. QTc 448. No acute ST changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 112,
+    "rhythm": "af",
+    "qrs": 84,
+    "qtc": 448,
+    "axis": 60
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2012",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "Lap cholecystectomy",
+   "Uneventful"
+  ],
+  [
+   "04/12/2022",
+   "Office visit",
+   "Jefferson County Primary Care",
+   "Weight loss, palpitations",
+   "Hyperthyroid; endocrine referral"
+  ],
+  [
+   "05/03/2022",
+   "Specialty clinic",
+   "C-N Endocrinology",
+   "Graves disease",
+   "Methimazole"
+  ],
+  [
+   "08/22/2023",
+   "ED visit",
+   "C-N University Hospital",
+   "LLQ pain, diverticulitis",
+   "Oral antibiotics, contrast reaction"
+  ],
+  [
+   "02/09/2025",
+   "ED visit -> observation",
+   "C-N University Hospital",
+   "AF with RVR, thyrotoxic",
+   "Rate control, apixaban; discharged 02/11"
+  ],
+  [
+   "06/10/2025",
+   "Specialty clinic",
+   "C-N Endocrinology",
+   "Graves, goiter growing",
+   "Recommended thyroidectomy; patient deferred"
+  ],
+  [
+   "09/11/2026",
+   "Specialty clinic",
+   "C-N Endocrinology",
+   "Compressive symptoms",
+   "Surgery referral"
+  ],
+  [
+   "10/06/2026",
+   "Specialty clinic",
+   "C-N Endocrine Surgery",
+   "Surgical consult/H&P",
+   "Scheduled 10/27"
+  ],
+  [
+   "10/26/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Preop labs, ECG",
+   "Labs resulted"
+  ]
+ ],
+ "notes": [
+  [
+   "2012",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "C-N Anesthesia (archived)",
+   "Lap chole 2012. GA, propofol/rocuronium, DL Mac 3 grade I, 7.0 ETT. Sevoflurane. Uneventful. Family history of anesthesia problems: \"none\" (checked box)."
+  ],
+  [
+   "04/12/2022 0920",
+   "Progress Note",
+   "Family Medicine",
+   "D. Kinser, DO",
+   "10-lb weight loss, palpitations, heat intolerance, tremor x 3 months. HR 112. Diffuse goiter. TSH < 0.01, FT4 3.1. Start propranolol 10 TID. Endocrinology referral."
+  ],
+  [
+   "05/03/2022 1330",
+   "Consult",
+   "Endocrinology",
+   "J. Hartwell, MD",
+   "Graves disease: TRAb 8.6, uptake 62% diffuse. Mild proptosis, no active orbitopathy. Options reviewed: ATD, RAI, surgery. Pt chooses methimazole 20 mg daily. Agranulocytosis/hepatotoxicity counseling given."
+  ],
+  [
+   "11/28/2023 1015",
+   "Telephone Encounter",
+   "Endocrinology",
+   "P. Ruff, RN",
+   "Pt stopped methimazole 2 weeks ago, \"felt fine and didn't want to take pills.\" Advised to continue, f/u visit. Pt declined visit until spring."
+  ],
+  [
+   "08/22/2023 1800",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "R. Lyle, DO",
+   "LLQ pain. CT with contrast: uncomplicated diverticulitis. 20 min after contrast developed hives on chest/arms, no wheeze or hypotension. Diphenhydramine 25 mg IV. Allergy entered: iodinated contrast. Amox-clav x 10 days."
+  ],
+  [
+   "02/10/2025 0800",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "M. Okafor, MD",
+   "AF RVR 148 in setting of thyrotoxicosis (off methimazole). Diltiazem IV, then metoprolol. Methimazole restarted 20 mg. CHA2DS2-VASc 2 (female, HTN): apixaban 5 BID. TTE EF 55%. Converted to sinus spontaneously on day 2."
+  ],
+  [
+   "06/10/2025 1420",
+   "Progress Note",
+   "Endocrinology",
+   "J. Hartwell, MD",
+   "Goiter enlarging, now multinodular. Mild dysphagia. Recommend definitive therapy: total thyroidectomy preferred (large goiter, nodules). Pt wishes to wait. Propranolol 20 TID replaces metoprolol. Continue methimazole."
+  ],
+  [
+   "03/14/2026 1100",
+   "Refill Request",
+   "Endocrinology",
+   "T. Reese, CMA",
+   "Pharmacy request methimazole 10 mg #60. Last fill 11/2025 per pharmacy (90-day supply was due 02/2026). Approved x 1, pt to schedule labs."
+  ],
+  [
+   "09/11/2026 1000",
+   "Consult",
+   "Endocrinology",
+   "J. Hartwell, MD",
+   "Not euthyroid (FT4 2.2, HR 104). Voice change and dysphagia, orthopnea. Adherence to methimazole questionable. Recommend: methimazole 20 mg daily, propranolol 20 TID, and SSKI for 10 days before surgery. Surgery should be deferred until euthyroid unless airway compromise forces urgency. Referred to Dr. Osei. Will recheck TFTs in 4 weeks."
+  ],
+  [
+   "10/06/2026 1100",
+   "H&P",
+   "Endocrine Surgery",
+   "K. Osei, MD",
+   "Graves disease diagnosed 2022, intermittent methimazole. Goiter growing. Dyspnea lying flat, sleeps on 3 pillows, voice change for 3 months. Dysphagia to solids. PMH: AF (paroxysmal) 2025. HTN. Anxiety. Osteopenia. Exam: BP 152/78, HR 104 irregular. Large goiter, extends below the sternal notch. Trachea deviated to the right. Fine tremor, lid lag. Hoarse voice. Stridor when supine? Not documented. Mallampati II. Mouth opening normal. CT: substernal to arch, trachea 6 mm. A/P: total thyroidectomy, possible sternotomy (thoracic standby), 10/27. SSKI x 10 days preop (start 10/17). NIM tube. Laryngoscopy: will do in OR."
+  ],
+  [
+   "10/07/2026 0900",
+   "Consult",
+   "Cardiology",
+   "S. Kaur, MD",
+   "Preop. Paroxysmal AF; rate control with propranolol. Hold apixaban 48 h before surgery. No further cardiac testing needed; echo 2025 normal EF."
+  ],
+  [
+   "10/17/2026 1600",
+   "Progress Note",
+   "Endocrine Surgery",
+   "L. Byrd, NP",
+   "Phone visit. SSKI started today per plan, 2 drops TID until surgery. Pt confirms surgery date. Reminded hold apixaban 48 h."
+  ],
+  [
+   "10/19/2026 1015",
+   "Pharmacy Note",
+   "Outpatient Pharmacy",
+   "C-N Outpatient Pharmacy (auto-message)",
+   "E-prescription for potassium iodide (SSKI) 1 g/mL 30 mL received 10/17: product not stocked, prescriber/patient notified by automated call. Prescription not filled; cancelled 10/24 (no response)."
+  ],
+  [
+   "10/22/2026 1930",
+   "Patient Message",
+   "Endocrine Surgery",
+   "Linda Patterson",
+   "I'm having a hard time sleeping, have to sit up in the recliner. Is that normal before the surgery? Also I need a refill on my thyroid pill, I'm out. Reply 10/23 (L. Byrd, NP): Sleeping upright is common with large goiters; go to ED if trouble breathing. Refill request forwarded to Dr. Hartwell (endocrinology)."
+  ],
+  [
+   "10/23/2026 0845",
+   "Refill Request",
+   "Endocrinology",
+   "T. Reese, CMA",
+   "Methimazole refill request routed from surgery. Dr. Hartwell out of office until 10/30. Pended."
+  ],
+  [
+   "10/26/2026 1400",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Carney, RN",
+   "PAT. Labs, T&C, ECG. HR 116 irregular. Pt states last apixaban 10/24 2100. Pt reports she \"ran out\" of methimazole about 2 weeks ago. Med list reviewed; patient does not have SSKI (\"never heard from the pharmacy\"). Anxious about surgery. Husband reports sister in Ohio had \"a high fever under anesthesia\" years ago; details unknown."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/12/2022 0920",
+   "146/78",
+   112,
+   16,
+   98,
+   37.0,
+   63.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "01/18/2023 0900",
+   "132/76",
+   72,
+   14,
+   98,
+   36.7,
+   69.0,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "08/22/2023 1530",
+   "138/82",
+   98,
+   18,
+   98,
+   37.6,
+   70.1,
+   "7/10",
+   "ED"
+  ],
+  [
+   "02/09/2025 2200",
+   "152/88",
+   148,
+   20,
+   97,
+   37.3,
+   67.4,
+   "0/10",
+   "ED"
+  ],
+  [
+   "06/10/2025 1420",
+   "138/72",
+   92,
+   16,
+   98,
+   36.8,
+   67.0,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "09/11/2026 1000",
+   "148/76",
+   104,
+   18,
+   97,
+   37.1,
+   66.8,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "10/06/2026 1100",
+   "152/78",
+   104,
+   18,
+   97,
+   37.2,
+   66.5,
+   "0/10",
+   "Endocrine surgery"
+  ],
+  [
+   "10/26/2026 1400",
+   "160/80",
+   116,
+   20,
+   96,
+   37.6,
+   66.0,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0600",
+   "168/82",
+   124,
+   22,
+   95,
+   37.9,
+   66.0,
+   "0/10",
+   "Preop holding (sitting upright)"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units",
+   "10/26/2026",
+   "Resulted"
+  ],
+  [
+   "TFTs",
+   "10/26/2026",
+   "Resulted"
+  ],
+  [
+   "Hold apixaban 48 h preop",
+   "10/07/2026",
+   "Completed per patient"
+  ],
+  [
+   "Potassium iodide (SSKI) 2 drops PO TID",
+   "10/17/2026",
+   "Cancelled by pharmacy 10/24 (not filled)"
+  ],
+  [
+   "NIM endotracheal tube",
+   "10/06/2026",
+   "Active"
+  ],
+  [
+   "Flexible laryngoscopy (ENT)",
+   "",
+   "Not ordered (\"will do in OR\")"
+  ],
+  [
+   "Calcium/PTH postop",
+   "10/06/2026",
+   "Pending postop"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "",
+  "specimen_expires": "10/29/2026 1330"
+ },
+ "consents": [
+  [
+   "Surgical consent: total thyroidectomy, possible sternotomy",
+   "Signed 10/06/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/26/2026"
+  ]
+ ],
+ "directives": "Living will on file (2019): no prolonged life support if terminal. HCPOA: husband.",
+ "anesthesia_history": [
+  [
+   "2012",
+   "Laparoscopic cholecystectomy",
+   "GA, DL grade I, 7.0 ETT",
+   "Uneventful",
+   "C-N University Hospital"
+  ],
+  [
+   "1994",
+   "Cesarean delivery",
+   "Spinal",
+   "Uneventful",
+   "Morristown-Hamblen"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0430",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/06)"
+   ],
+   [
+    "Allergy band",
+    "On (contrast)"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Type and crossmatch",
+    "2 units"
+   ],
+   [
+    "Pregnancy test",
+    "N/A (postmenopausal)"
+   ],
+   [
+    "Anticoagulant held",
+    "Apixaban last 10/24 2100"
+   ]
+  ],
+  "nursing_note": "BP 168/82, HR 124 AF, RR 22, SpO2 95% RA, T 37.9. Anxious, tremulous. Prefers to sit upright; becomes short of breath when the bed is flattened. Hoarse. Solids 10/26 1900. Clears 0430. Did not take AM propranolol (\"told nothing by mouth\"). Consent signed. IV 20 G left forearm.",
+  "iv": "20 G left forearm",
+  "glucose": ""
+ },
+ "label": "L. Patterson",
+ "bmi": "24.2"
+}

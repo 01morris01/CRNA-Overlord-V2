@@ -1,0 +1,139 @@
+{
+ "id": "p07",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Elective robotic hernia repair 5 weeks after a DES for NSTEMI, with both antiplatelets stopped by a surgery instruction sheet, new inferior Q waves, and nitroglycerin use for exertional chest tightness this week.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "MI within 3 months with ongoing angina and a fresh drug eluting stent off antiplatelet therapy."
+ },
+ "decision": {
+  "recommendation": "cancel",
+  "rationale": "Cardiology discharge: do not interrupt DAPT and defer elective surgery at least 6 months. DAPT has been stopped for 6 to 8 days with new angina and new inferior Q waves: high stent thrombosis risk. Cancel, restart antiplatelets, and get cardiology evaluation today."
+ },
+ "redFlags": [
+  {
+   "id": "dapt",
+   "severity": "critical",
+   "finding": "DAPT stopped 5 weeks after a drug eluting stent",
+   "evidence": "DES to RCA 09/20; aspirin stopped 10/19 and clopidogrel 10/21 per surgeon's standard sheet; cardiology said do not interrupt and defer elective surgery 6 months.",
+   "implication": "Stent thrombosis and MI risk.",
+   "action": "Cancel elective surgery, resume aspirin and clopidogrel, contact cardiology.",
+   "keywords": [
+    "dapt",
+    "clopidogrel",
+    "plavix",
+    "aspirin",
+    "stent",
+    "des",
+    "thrombosis",
+    "6 months"
+   ]
+  },
+  {
+   "id": "ischemia",
+   "severity": "critical",
+   "finding": "Active ischemic symptoms and new ECG findings",
+   "evidence": "Chest tightness with stairs this week, nitroglycerin 10/24, not told to surgeon; 10/24 ECG new inferior Q waves and T inversion.",
+   "implication": "Unstable coronary disease.",
+   "action": "Cardiology evaluation (troponin, ECG) before any surgery.",
+   "keywords": [
+    "angina",
+    "chest pain",
+    "nitroglycerin",
+    "q wave",
+    "ischemia",
+    "troponin",
+    "cardiology"
+   ]
+  },
+  {
+   "id": "npo",
+   "severity": "major",
+   "finding": "Coffee with cream at 0500",
+   "evidence": "Preop note: coffee with cream 0500.",
+   "implication": "Cream is not a clear liquid; ASA guidance treats it like non-human milk (6 h).",
+   "action": "Not eligible for a 0730 start even if the case were otherwise appropriate.",
+   "keywords": [
+    "coffee",
+    "cream",
+    "npo",
+    "milk"
+   ]
+  },
+  {
+   "id": "ef",
+   "severity": "major",
+   "finding": "Ischemic cardiomyopathy, EF 45%, LAD 50%",
+   "evidence": "Echo 09/19; cath 09/20.",
+   "implication": "Limited reserve for pneumoperitoneum and Trendelenburg.",
+   "action": "Arterial line and hemodynamic goals if surgery is later rescheduled.",
+   "keywords": [
+    "ef 45",
+    "cardiomyopathy",
+    "ejection fraction"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "minor",
+   "finding": "Severe PONV history",
+   "evidence": "2021 colectomy: severe PONV despite ondansetron.",
+   "implication": "High risk.",
+   "action": "Multimodal prophylaxis, consider TIVA.",
+   "keywords": [
+    "ponv",
+    "nausea",
+    "scopolamine",
+    "tiva"
+   ]
+  },
+  {
+   "id": "process",
+   "severity": "minor",
+   "finding": "No cardiology clearance requested; PCP deferred to cardiology",
+   "evidence": "Orders: cardiology clearance not requested; PCP letter defers.",
+   "implication": "System failure.",
+   "action": "Close the loop with cardiology.",
+   "keywords": [
+    "clearance"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "disposition",
+   "item": "Cancel and reschedule after 6 months on DAPT per cardiology",
+   "keywords": [
+    "cancel",
+    "reschedule",
+    "postpone"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "If ever done: arterial line, ischemia monitoring",
+   "keywords": [
+    "arterial line",
+    "st segment"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "35 pack year former smoker"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin exposure"
+  }
+ ]
+}

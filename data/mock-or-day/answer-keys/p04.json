@@ -1,0 +1,225 @@
+{
+ "id": "p04",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "BMI 51 sleeve gastrectomy with a known difficult mask and airway, semaglutide 3 days ago with vomiting yesterday, empagliflozin not held with an anion gap and ketonuria, undisclosed phentermine, and an SSRI meeting the surgeon's methylene blue leak test.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "BMI over 40 with severe OSA, T2DM, HTN, and mild pulmonary hypertension."
+ },
+ "decision": {
+  "recommendation": "postpone",
+  "rationale": "Empagliflozin taken yesterday (should be held at least 3 days) with liquid diet, anion gap 18, CO2 18, and 2+ urine ketones is concerning for early euglycemic DKA; check beta hydroxybutyrate and a gas. GLP-1 effect with active nausea, vomiting, and prior retained food makes this a full stomach, and phentermine was taken yesterday. Reschedule with correct medication holds."
+ },
+ "redFlags": [
+  {
+   "id": "sglt2",
+   "severity": "critical",
+   "finding": "SGLT2 inhibitor not held, possible euglycemic DKA",
+   "evidence": "Empagliflozin last 10/26 0800; liquid diet 2 weeks; AG 18, CO2 18, urine ketones 2+, glucose 142 to 156; beta hydroxybutyrate not ordered.",
+   "implication": "Euglycemic DKA can be missed because glucose is near normal.",
+   "action": "Check beta hydroxybutyrate and ABG; postpone; hold empagliflozin at least 3 days before elective surgery.",
+   "keywords": [
+    "empagliflozin",
+    "jardiance",
+    "sglt2",
+    "euglycemic",
+    "dka",
+    "ketone",
+    "anion gap",
+    "beta hydroxybutyrate"
+   ]
+  },
+  {
+   "id": "glp1",
+   "severity": "critical",
+   "finding": "GLP-1 agonist with symptoms of delayed gastric emptying",
+   "evidence": "Semaglutide 2 mg last 10/24; nausea, belching, full feeling today, vomited yesterday; EGD 09/2026 retained food after 12 h fast.",
+   "implication": "Aspiration risk despite fasting.",
+   "action": "Treat as full stomach (RSI, consider gastric ultrasound) or postpone; follow current multisociety GLP-1 guidance.",
+   "keywords": [
+    "semaglutide",
+    "ozempic",
+    "glp",
+    "gastric",
+    "full stomach",
+    "rsi",
+    "aspiration",
+    "gastric ultrasound"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "critical",
+   "finding": "Documented difficult mask ventilation and difficult laryngoscopy",
+   "evidence": "2019: grade 3 mask, VL grade IIb with bougie, SpO2 84%; MP IV, neck 50 cm, short TMD, beard; obstruction under propofol sedation twice.",
+   "implication": "Rapid desaturation with low FRC.",
+   "action": "Ramped position, HFNO preoxygenation, VL first with bougie, awake intubation as an option, supraglottic and front of neck backup.",
+   "keywords": [
+    "difficult airway",
+    "difficult mask",
+    "ramp",
+    "hfno",
+    "high flow",
+    "video",
+    "bougie",
+    "awake"
+   ]
+  },
+  {
+   "id": "serotonin",
+   "severity": "major",
+   "finding": "Serotonin syndrome risk with methylene blue leak test",
+   "evidence": "Sertraline 100 mg daily and tramadol PRN; surgeon plans methylene blue leak test.",
+   "implication": "Methylene blue is an MAO inhibitor; with SSRIs it can cause serotonin syndrome.",
+   "action": "Discuss an alternative leak test with the surgeon; avoid adding tramadol, meperidine, or other serotonergic drugs.",
+   "keywords": [
+    "serotonin",
+    "methylene blue",
+    "sertraline",
+    "ssri",
+    "tramadol"
+   ]
+  },
+  {
+   "id": "phentermine",
+   "severity": "major",
+   "finding": "Phentermine taken yesterday, not in the bariatric record",
+   "evidence": "Pharmacy note 10/27: phentermine 37.5 mg daily, last 10/26 0700.",
+   "implication": "Sympathomimetic: hypertension and tachycardia, unpredictable response to indirect pressors like ephedrine.",
+   "action": "Ideally hold several days before surgery; if proceeding, use direct acting pressors.",
+   "keywords": [
+    "phentermine",
+    "sympathomimetic",
+    "ephedrine"
+   ]
+  },
+  {
+   "id": "osa_ohs",
+   "severity": "major",
+   "finding": "Severe OSA, poor CPAP adherence, possible obesity hypoventilation, mild pulmonary hypertension",
+   "evidence": "AHI 48, CPAP use 41%, CPAP not brought; ABG PaCO2 47, HCO3 27, PaO2 68; RVSP 42.",
+   "implication": "Opioid sensitivity, postoperative hypoventilation, worsened pulmonary pressures with hypoxia and hypercarbia.",
+   "action": "Opioid sparing, awake semi upright extubation to CPAP, family to bring the device, continuous oximetry.",
+   "keywords": [
+    "osa",
+    "cpap",
+    "hypoventilation",
+    "pulmonary hypertension",
+    "opioid sparing"
+   ]
+  },
+  {
+   "id": "antibiotic",
+   "severity": "minor",
+   "finding": "Antibiotic choice and dose",
+   "evidence": "Clindamycin ordered for penicillin anaphylaxis; weight 166 kg.",
+   "implication": "Current allergy guidance allows cefazolin in most penicillin allergic patients (dissimilar side chain); weight based dosing needed.",
+   "action": "Discuss cefazolin 3 g; if clindamycin is used, follow protocol coverage.",
+   "keywords": [
+    "cefazolin",
+    "clindamycin",
+    "antibiotic"
+   ]
+  },
+  {
+   "id": "consent_access",
+   "severity": "minor",
+   "finding": "Anesthesia consent unsigned; difficult IV access",
+   "evidence": "Consents tab; two attempts for a 20 G.",
+   "implication": "Second access for a 2 h case in steep reverse Trendelenburg.",
+   "action": "Ultrasound guided second IV.",
+   "keywords": [
+    "consent",
+    "iv access",
+    "ultrasound"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "RSI or gastric ultrasound guided plan; ramped HFNO preoxygenation",
+   "keywords": [
+    "rsi",
+    "ramp",
+    "preoxygenat"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "VL first with bougie, difficult airway cart",
+   "keywords": [
+    "video",
+    "glidescope",
+    "c-mac"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "Dose induction agents on lean body weight and NMB on ideal body weight",
+   "keywords": [
+    "lean body weight",
+    "ideal body weight",
+    "ibw",
+    "lbw"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Pass the 40 Fr bougie carefully with OGT removed; communicate tube positions",
+   "keywords": [
+    "bougie",
+    "ogt",
+    "orogastric"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Multimodal PONV prophylaxis (scopolamine already applied)",
+   "keywords": [
+    "ondansetron",
+    "dexamethasone",
+    "scopolamine"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Opioid sparing multimodal analgesia, surgeon TAP blocks",
+   "keywords": [
+    "tap",
+    "acetaminophen",
+    "ketamine",
+    "lidocaine",
+    "dexmedetomidine"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Full reversal, awake semi upright extubation to CPAP",
+   "keywords": [
+    "sugammadex",
+    "semi upright",
+    "awake extubation"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Continuous oximetry and CPAP postop",
+   "keywords": [
+    "oximetry",
+    "cpap"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Daily vaping with a reactive airway after intubation"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Severe penicillin allergy history and antibiotic exposure"
+  }
+ ]
+}

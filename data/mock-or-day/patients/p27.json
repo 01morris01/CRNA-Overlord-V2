@@ -1,0 +1,2404 @@
+{
+ "id": "p27",
+ "room": "OR 5",
+ "time": "1100",
+ "name": "VANHOOSE, JOANNE LOUISE",
+ "mrn": "0146027",
+ "dob": "03/14/1960",
+ "age": "66 y",
+ "sex": "F",
+ "ht_cm": 160,
+ "wt_kg": 71.4,
+ "preferred_name": "Jo",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. T. Kincaid, Dandridge Family Practice",
+ "insurance": "Medicare Part A/B + AARP Medigap Plan G",
+ "emergency_contact": "Dale Vanhoose (husband) 865-555-0177",
+ "isolation": "",
+ "allergies": [
+  [
+   "Sulfasalazine",
+   "Rash, diffuse maculopapular",
+   "Moderate",
+   "2007"
+  ],
+  [
+   "Hydrocodone",
+   "Itching",
+   "Mild (intolerance)",
+   "2014"
+  ],
+  [
+   "Adhesive tape",
+   "Skin tears/blistering",
+   "Mild",
+   "2019"
+  ]
+ ],
+ "case": {
+  "procedure": "Left total knee arthroplasty",
+  "short": "Left total knee arthroplasty",
+  "laterality": "Left",
+  "service": "Orthopaedic Surgery",
+  "surgeon": "G. Ashworth, MD",
+  "assistant": "K. Lusk, PA-C",
+  "indication": "End-stage inflammatory arthritis left knee, failed injections and bracing",
+  "duration_min": 120,
+  "anesthesia_requested": "Spinal with adductor canal block, MAC",
+  "position": "Supine, left bump, tourniquet",
+  "dispo": "Inpatient, ortho floor, anticipate 1 night",
+  "blood": "Type and screen",
+  "equipment": "Tourniquet; cemented system",
+  "implants": "Cemented posterior-stabilized TKA, left",
+  "surgeon_notes": "TXA 1 g IV pre-incision per protocol unless contraindicated. Patient on etanercept/MTX, see rheum note re timing. Cefazolin 2 g.",
+  "add_on": false,
+  "scheduled_on": "09/22/2026"
+ },
+ "problems": [
+  [
+   "Rheumatoid arthritis, seropositive, erosive",
+   "2006",
+   "Active"
+  ],
+  [
+   "Primary osteoarthritis superimposed / secondary arthritis L knee",
+   "2021",
+   "Active"
+  ],
+  [
+   "Long-term current use of systemic steroids",
+   "2008",
+   "Active"
+  ],
+  [
+   "Long-term current use of immunosuppressant (MTX, etanercept)",
+   "2006",
+   "Active"
+  ],
+  [
+   "Anemia of chronic disease",
+   "2015",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2016",
+   "Active"
+  ],
+  [
+   "Osteopenia",
+   "2019",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2012",
+   "Active"
+  ],
+  [
+   "Cervicalgia",
+   "2025",
+   "Active"
+  ],
+  [
+   "Temporomandibular joint disorder, bilateral",
+   "2024",
+   "Active"
+  ],
+  [
+   "Cataract, left, s/p extraction",
+   "2023",
+   "Resolved"
+  ],
+  [
+   "Herpes zoster, right T8",
+   "2018",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Seropositive RA diagnosed 2006 (RF+, anti-CCP strongly +), erosive changes hands/feet; on MTX since 2006, prednisone since 2008, etanercept since 2013",
+   "Hypertension on lisinopril",
+   "Anemia of chronic disease, Hgb runs 11-11.8",
+   "Osteopenia (DEXA 2024 T-score -2.1 L femoral neck), on calcium/vit D",
+   "GERD on omeprazole",
+   "Shingles 2018 (prior to Shingrix)",
+   "Bilateral TMJ involvement, dental documented limited opening 2024-2025",
+   "Neck pain/occipital headaches 2025, rheumatology evaluated"
+  ],
+  "psh": [
+   [
+    "2011",
+    "Right carpal tunnel release",
+    "Jefferson Memorial Hospital"
+   ],
+   [
+    "2016",
+    "Right MCP 2-3 synovectomy",
+    "Knoxville Hand Center"
+   ],
+   [
+    "2019",
+    "Colonoscopy with polypectomy (tubular adenoma x1)",
+    "Lakeway Endoscopy Center"
+   ],
+   [
+    "03/2023",
+    "Left cataract extraction with IOL",
+    "East Tennessee Eye Surgeons"
+   ],
+   [
+    "1994",
+    "Cesarean section",
+    "Morristown-Hamblen"
+   ]
+  ],
+  "family": [
+   "Mother: RA, died 78 (CHF)",
+   "Father: MI at 70, died 74",
+   "Sister: hypothyroidism",
+   "No known family anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Former, 10 pack-years, quit 1998",
+   "alcohol": "Rare, 1 glass wine at holidays",
+   "drugs": "None",
+   "occupation": "Retired elementary school secretary",
+   "living": "Lives with husband, 2-story home, bedroom on main level",
+   "other": "Walks with cane outdoors. Attends church; Sunday school pianist (hand pain limits)."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "COVID-19 (2025-26 formula)",
+    "10/2025"
+   ],
+   [
+    "Shingrix x2",
+    "2021"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2023"
+   ],
+   [
+    "Tdap",
+    "2017"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Methotrexate 2.5 mg tablet",
+   "17.5 mg (7 tabs) PO once weekly on Fridays",
+   "Dr. R. Sandoval (Rheum)",
+   "10/23/2026 0800"
+  ],
+  [
+   "Folic acid 1 mg",
+   "1 tab PO daily",
+   "Dr. R. Sandoval",
+   "10/26/2026 0800"
+  ],
+  [
+   "Prednisone 5 mg + 2.5 mg tablets",
+   "7.5 mg PO every morning",
+   "Dr. R. Sandoval",
+   "10/26/2026 0800"
+  ],
+  [
+   "Etanercept 50 mg/mL autoinjector",
+   "50 mg subcut once weekly (Saturdays)",
+   "Dr. R. Sandoval",
+   "10/24/2026 1000"
+  ],
+  [
+   "Lisinopril 10 mg",
+   "1 tab PO daily",
+   "Dr. T. Kincaid",
+   "10/26/2026 0800"
+  ],
+  [
+   "Omeprazole 20 mg",
+   "1 cap PO daily before breakfast",
+   "Dr. T. Kincaid",
+   "10/26/2026 0730"
+  ],
+  [
+   "Calcium carbonate 600 mg + vitamin D3 800 IU",
+   "1 tab PO BID",
+   "OTC",
+   "10/26/2026 1800"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "2 tabs PO q8h PRN pain",
+   "OTC",
+   "10/26/2026 2100"
+  ],
+  [
+   "Diclofenac 1% gel",
+   "Apply to hands QID PRN",
+   "Dr. R. Sandoval",
+   "10/20/2026"
+  ],
+  [
+   "Artificial tears",
+   "1 drop OU PRN",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Tranexamic acid 1 g IV",
+   "Pre-incision",
+   "Due"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0915"
+  ],
+  [
+   "Celecoxib 200 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0915"
+  ],
+  [
+   "Famotidine 20 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0915"
+  ],
+  [
+   "Chlorhexidine 2% cloths",
+   "Preop skin prep",
+   "Done 10/27/2026 0905"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Sulfasalazine 1,000 mg BID",
+   "2006-2007",
+   "Rash"
+  ],
+  [
+   "Hydroxychloroquine 200 mg BID",
+   "2006-2012",
+   "Ineffective as add-on; retinal screening burden"
+  ],
+  [
+   "Adalimumab 40 mg q2wk",
+   "2012-2013",
+   "Secondary loss of response"
+  ],
+  [
+   "Alendronate 70 mg weekly",
+   "2019-2024",
+   "Drug holiday after 5 years"
+  ],
+  [
+   "Hydrochlorothiazide 12.5 mg",
+   "2016-2018",
+   "Switched to lisinopril"
+  ],
+  [
+   "Valacyclovir 1 g TID",
+   "08/2018",
+   "Course complete (zoster)"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/13/2026 1015",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "11.3",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "309",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.75",
+      ""
+     ],
+     "Glu": [
+      "112",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "PT": [
+      "12.1",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ],
+     "A1c": [
+      "5.9",
+      "H"
+     ],
+     "USG": [
+      "1.020",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/14/2026",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "11.7",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "312",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.75",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "A1c": [
+      "5.9",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/02/2025",
+    "comment": "MTX monitoring",
+    "vals": {
+     "WBC": [
+      "7.6",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "333",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "36",
+      ""
+     ],
+     "ALKP": [
+      "94",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/04/2025",
+    "comment": "Steroid-associated; prediabetes range",
+    "vals": {
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "301",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "108",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "100",
+      ""
+     ],
+     "A1c": [
+      "5.8",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "07/15/2024",
+    "comment": "MTX monitoring",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "11.2",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "313",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.88",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "64",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/09/2024",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "11.2",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "316",
+      ""
+     ],
+     "MCV": [
+      "84",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.76",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "81",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "3.7",
+      ""
+     ],
+     "VitD": [
+      "36",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/21/2023",
+    "comment": "Repeat LFTs",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.78",
+      ""
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "27",
+      ""
+     ],
+     "ALT": [
+      "33",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "3.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/23/2023",
+    "comment": "MTX monitoring; repeat 4 wk",
+    "vals": {
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "317",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.78",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "44",
+      "H"
+     ],
+     "ALT": [
+      "61",
+      "H"
+     ],
+     "ALKP": [
+      "71",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/08/2022",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "305",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.81",
+      ""
+     ],
+     "Glu": [
+      "84",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "28",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "85",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/16/2021",
+    "comment": "Pattern c/w anemia of inflammation",
+    "vals": {
+     "WBC": [
+      "7.6",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "313",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "Ferritin": [
+      "210",
+      ""
+     ],
+     "Fe": [
+      "41",
+      "L"
+     ],
+     "TSAT": [
+      "14",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "03/10/2020",
+    "comment": "MTX monitoring",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "315",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.83",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "3.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/04/2019",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "303",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "83",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "110",
+      ""
+     ],
+     "VitD": [
+      "24",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "08/20/2018",
+    "comment": "Zoster; drawn at PCP",
+    "vals": {
+     "WBC": [
+      "5.1",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "309",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "70",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/12/2017",
+    "comment": "MTX monitoring",
+    "vals": {
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "305",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "31",
+      ""
+     ],
+     "ALT": [
+      "17",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "06/04/2019",
+    "Hepatitis B sAg / core Ab / HCV Ab",
+    "Nonreactive / Nonreactive / Nonreactive",
+    ""
+   ],
+   [
+    "03/04/2025",
+    "CRP",
+    "1.4 mg/dL (ref <0.5)",
+    "H"
+   ],
+   [
+    "03/04/2025",
+    "ESR",
+    "38 mm/h (ref 0-30)",
+    "H"
+   ],
+   [
+    "04/14/2026",
+    "CRP",
+    "0.9 mg/dL (ref <0.5)",
+    "H"
+   ],
+   [
+    "01/09/2024",
+    "QuantiFERON-TB Gold Plus",
+    "Negative",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "MRSA nares PCR",
+    "Negative",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "MSSA nares PCR",
+    "Negative",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "Urine culture",
+    "No growth",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/22/2021",
+   "XR Knee left 3 views",
+   "Moderate tricompartmental joint space narrowing, most severe medially. Periarticular osteopenia. Small marginal erosions lateral tibial plateau. Small effusion. Impression: inflammatory arthropathy with superimposed degenerative change.",
+   "H. Okonkwo, MD"
+  ],
+  [
+   "01/09/2024",
+   "XR Chest 2 views",
+   "Lungs clear. No effusion. Heart size normal. Mild degenerative change thoracic spine. Impression: No acute cardiopulmonary process.",
+   "S. Varga, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: No machine-readable author provided. Chikumaya assumed (based on copyright claims)., CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Chest.png)"
+   }
+  ],
+  [
+   "04/30/2024",
+   "DEXA bone density",
+   "L femoral neck T-score -2.1. L1-L4 T-score -1.6. Impression: Osteopenia. FRAX 10-yr major osteoporotic fracture 14%, hip 2.6% (glucocorticoid-adjusted).",
+   "S. Varga, MD"
+  ],
+  [
+   "06/17/2025",
+   "XR Cervical spine with flexion/extension views",
+   "Neutral, flexion and extension lateral views. In neutral, atlanto-dens interval 3 mm. On flexion, the atlanto-dens interval widens to 6 mm. Posterior atlanto-dens interval on flexion 15 mm. Erosive change of the dens tip. Mild C4-5, C5-6 disc space narrowing. No subaxial subluxation. Impression: Atlantoaxial instability with ADI 6 mm on flexion, consistent with rheumatoid involvement. Recommend clinical correlation; MRI cervical spine could be considered if neurologic symptoms.",
+   "P. Ferrante, MD"
+  ],
+  [
+   "06/17/2025",
+   "XR Hands bilateral",
+   "Erosions 2nd and 3rd MCP bilaterally and right ulnar styloid, stable vs 2022. Periarticular osteopenia. Impression: erosive inflammatory arthropathy, stable.",
+   "P. Ferrante, MD"
+  ],
+  [
+   "08/26/2026",
+   "XR Knee left standing AP, lateral, sunrise",
+   "Severe medial and patellofemoral joint space loss, bone-on-bone medially. 8 degree varus. Subchondral cysts. Impression: end-stage arthropathy left knee, progressed since 2021.",
+   "H. Okonkwo, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "01/09/2024",
+   "ECG 12-lead",
+   "Sinus rhythm 74. PR 158, QRS 86, QTc 428. Normal ECG.",
+   "M. Desai, MD",
+   {
+    "rate": 74,
+    "pr": 158,
+    "qrs": 86,
+    "qtc": 428,
+    "axis": 40
+   }
+  ],
+  [
+   "10/13/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 78. PR 162, QRS 88, QTc 432. Nonspecific T wave flattening V5-V6. No change from 01/2024 except as noted.",
+   "M. Desai, MD",
+   {
+    "tmod": {
+     "V5": 0.2,
+     "V6": 0.15
+    },
+    "rate": 78,
+    "pr": 162,
+    "qrs": 88,
+    "qtc": 432,
+    "axis": 40
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "08/20/2018",
+   "Urgent care",
+   "Dandridge Walk-In Clinic",
+   "Painful vesicular rash right flank",
+   "Dx herpes zoster T8, valacyclovir; discharged"
+  ],
+  [
+   "03/22/2021",
+   "Clinic",
+   "Lakeway Orthopaedics",
+   "Left knee pain",
+   "Steroid injection, bracing"
+  ],
+  [
+   "03/14/2023",
+   "Outpatient surgery",
+   "East Tennessee Eye Surgeons ASC",
+   "Left cataract",
+   "Phaco/IOL under MAC, discharged same day"
+  ],
+  [
+   "11/02/2024",
+   "ED visit",
+   "Jefferson Memorial Hospital",
+   "Mechanical fall on wet porch, right wrist pain",
+   "XR negative for fracture, splint, discharged"
+  ],
+  [
+   "06/17/2025",
+   "Clinic",
+   "C-N University Rheumatology",
+   "Neck pain, occipital headaches",
+   "C-spine films obtained, PT referral"
+  ],
+  [
+   "03/04/2026",
+   "Clinic",
+   "Lakeway Orthopaedics",
+   "Left knee, failed injections",
+   "Viscosupplement series completed 2025 without benefit; discuss TKA"
+  ],
+  [
+   "08/26/2026",
+   "Clinic",
+   "C-N University Orthopaedics",
+   "TKA consult",
+   "Scheduled L TKA"
+  ],
+  [
+   "10/13/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Pre-op labs, ECG, education",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "08/20/2018 1520",
+   "Progress Note",
+   "Urgent Care",
+   "B. Hensley, FNP",
+   "S: 58F with RA on MTX/pred/etanercept. 3 d burning R flank, rash since yesterday. O: Grouped vesicles erythematous base R T8 dermatome, does not cross midline. A/P: Herpes zoster, immunosuppressed host. Valacyclovir 1 g TID x7 d. Hold etanercept this week, notify rheum. Return if eye involvement or spread."
+  ],
+  [
+   "03/22/2021 1045",
+   "Progress Note",
+   "Orthopaedics (outside)",
+   "W. Teague, MD",
+   "L knee pain 1 yr, worse on stairs. RA hx. Exam: small effusion, crepitus, ROM 5-115, varus. XR moderate tricompartmental. Injected L knee 40 mg triamcinolone + 4 mL lidocaine. Hinged brace. F/u PRN. [Scanned from Lakeway Orthopaedics]"
+  ],
+  [
+   "05/24/2023 0910",
+   "Telephone Encounter",
+   "Rheumatology",
+   "C. Morrow, RN",
+   "Called pt re ALT 61. Pt reports a few glasses of wine at daughter's wedding weekend before draw; no new meds. Per Dr. Sandoval continue MTX same dose, repeat CMP 4 wk. Pt verbalized understanding."
+  ],
+  [
+   "09/18/2024 1400",
+   "Media (Outside Record)",
+   "Dentistry (outside)",
+   "L. Whitfield, DDS",
+   "Smoky Mountain Family Dentistry - progress note scanned. Recall/prophy visit. Pt reports jaw stiffness and clicking bilaterally, worse in mornings, difficulty with large bites. Maximum interincisal opening 29 mm (normal ~40-50). Bilateral TMJ crepitus on opening. Likely RA involvement of TMJ. Unable to tolerate large bitewing holder; used pediatric size film. Recommend soft diet during flares, night guard. Next recall 6 mo."
+  ],
+  [
+   "03/25/2025 1100",
+   "Media (Outside Record)",
+   "Dentistry (outside)",
+   "L. Whitfield, DDS",
+   "Smoky Mountain Family Dentistry. Recall. #19 MOD composite. Opening still limited ~28 mm; procedure done with small bite block and frequent breaks. Pt tolerating night guard. No change in TMJ findings. Gingiva healthy."
+  ],
+  [
+   "06/17/2025 0940",
+   "Progress Note",
+   "Rheumatology",
+   "R. Sandoval, MD",
+   "RA f/u. Doing fairly. CDAI 14 (moderate). New complaint: posterior neck pain x 3 mo, occipital headaches, worse looking down to read. Denies arm weakness, numbness, gait change, bowel/bladder change, Lhermitte. Exam: neck ROM reduced in rotation, no long-tract signs, reflexes 2+ symmetric, Hoffmann neg. Plan: C-spine flexion/extension films today. Continue MTX 17.5 mg weekly, pred 7.5 mg, etanercept 50 mg weekly. Taper pred discussed again - she has failed tapers below 7.5 mg x2. PT for neck. Labs q3 mo."
+  ],
+  [
+   "06/19/2025 1630",
+   "Patient Message",
+   "Rheumatology",
+   "MyChart (patient)",
+   "Pt: \"Did my neck xrays come back? Is it arthritis? My neck still hurts when I do the church bulletins.\" Reply (C. Morrow, RN): \"Hi Mrs. Vanhoose, Dr. Sandoval reviewed the films. There is arthritis involvement at the top of the neck. She would like you to start PT and avoid heavy lifting and chiropractic neck manipulation. We will recheck at your next visit.\""
+  ],
+  [
+   "08/04/2025 1315",
+   "PT Evaluation",
+   "Physical Therapy",
+   "A. Truong, PT, DPT",
+   "Dx: cervicalgia, RA. Pt reports 5/10 neck pain, aggravated by sustained flexion. Cervical AROM: flexion 30 deg, ext 35, rot R 50 L 45. Neuro screen intact. Per referral avoid end-range flexion, no manual traction/manipulation. POC: postural training, isometrics, scapular strengthening 2x/wk x 6 wk."
+  ],
+  [
+   "12/09/2025 1010",
+   "Progress Note",
+   "Rheumatology",
+   "R. Sandoval, MD",
+   "RA f/u. CDAI 11. Neck better with PT, headaches less frequent. No neuro sx. Knee L worse; ortho to re-eval. Discussed that her cervical films matter for any future surgery/anesthesia. Continue current regimen. Shingrix done. Flu shot given today."
+  ],
+  [
+   "03/04/2026 1120",
+   "Progress Note",
+   "Orthopaedics (outside)",
+   "W. Teague, MD",
+   "L knee. Completed hyaluronate series 2025 without benefit. Last steroid inj 11/2025. Pain 8/10, night pain, walking 1 block with cane. Discuss arthroplasty; refer to C-N University Ortho (Dr. Ashworth) per pt preference."
+  ],
+  [
+   "04/14/2026 0950",
+   "Progress Note",
+   "Rheumatology",
+   "R. Sandoval, MD",
+   "RA f/u. Stable, CDAI 10. Prednisone 7.5 mg daily ongoing (since 2008, failed taper x2). A1c 5.9 - counsel diet. CRP 0.9. Continue MTX 17.5 mg weekly with folic acid, etanercept 50 mg weekly. Considering TKA - will coordinate perioperative plan when date set."
+  ],
+  [
+   "08/26/2026 1430",
+   "Consult",
+   "Orthopaedic Surgery",
+   "G. Ashworth, MD",
+   "New pt. 66F RA, end-stage L knee. Exam: antalgic gait, cane, varus 8 deg correctable partially, ROM 5-105, effusion, stable ligaments. Skin intact. Distal pulses 2+. XR bone-on-bone medial and PF. Plan: L TKA cemented PS. Risks/benefits discussed incl infection risk with immunosuppression. Needs rheum perioperative med plan, PCP clearance. Anticipate spinal anesthesia per our pathway. Scheduled 10/27."
+  ],
+  [
+   "09/01/2026 1500",
+   "Progress Note",
+   "Family Medicine",
+   "T. Kincaid, MD",
+   "Preop eval for L TKA. 66F, HTN, RA. Functional capacity: limited by knee, but does housework, climbs 1 flight slowly with rail (~4 METs). No CP, SOB, syncope. BP 134/80. Lungs clear. RCRI 0. ECG to be done at PAT. Acceptable risk from medical standpoint. Continue lisinopril - defer to anesthesia re holding DOS. Steroids/immunosuppressants per rheumatology."
+  ],
+  [
+   "09/02/2026 1140",
+   "Progress Note",
+   "Rheumatology",
+   "R. Sandoval, MD",
+   "Periop plan for L TKA 10/27/2026, per ACR/AAHKS guidance: 1) Methotrexate - continue through surgery, no interruption. 2) Etanercept (weekly) - HOLD; last dose Saturday 10/17, skip the 10/24 dose so surgery falls in week 2 of dosing cycle. Resume ~14 days postop if wound healing well, no infection. 3) Prednisone - continue her usual 7.5 mg daily dose including the morning of surgery; no need for supraphysiologic stress dosing per guideline, defer to anesthesia. 4) Folic acid continue. Letter sent to Dr. Ashworth. Instructions reviewed with patient and husband; printed handout given."
+  ],
+  [
+   "09/02/2026 1210",
+   "Letter",
+   "Rheumatology",
+   "R. Sandoval, MD",
+   "To: Dr. G. Ashworth. Re: Joanne Vanhoose, DOB 03/14/1960. Perioperative recommendations for L TKA: continue MTX; hold etanercept, last dose 10/17; continue prednisone 7.5 mg daily including DOS. Please also note her 2025 cervical spine films in our system. Sincerely, R. Sandoval, MD"
+  ],
+  [
+   "09/22/2026 0915",
+   "Telephone Encounter",
+   "Orthopaedic Surgery",
+   "J. Bales, MA",
+   "Surgery scheduled L TKA 10/27/2026 1100 C-N University Hospital. PAT 10/13. Joint class 10/13 1300. Pt agreeable."
+  ],
+  [
+   "10/13/2026 1120",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT visit. Labs, ECG, MRSA swab done. Med list reviewed with pt (she brought bottles; etanercept pens kept in fridge at home). Instructions: NPO after midnight solids, clears until 2 h before arrival. Take omeprazole AM of surgery. Hold lisinopril AM of surgery per anesthesia protocol. Pt asks \"do I take my prednisone?\" - told to follow the rheumatology instructions. Joint class attended. CHG cloths given."
+  ],
+  [
+   "10/13/2026 1150",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "M. Leach, CRNA",
+   "PAT screening. 66F RA/HTN for L TKA. Airway: Mallampati III, MO \"slightly limited\", TMD >6 cm, neck ROM decreased. Plan per pathway spinal + ACB. Day-of-surgery team to review full chart. Prior anesthetics: GA 2011, 2016 (no records available), MAC 2023 uneventful. Dentition: own teeth, composite fillings."
+  ],
+  [
+   "10/14/2026 0812",
+   "Refill Request",
+   "Family Medicine",
+   "Pharmacy (electronic)",
+   "Lisinopril 10 mg #90 refill request from Food City Pharmacy Dandridge. Approved, 3 refills. - T. Kincaid, MD"
+  ],
+  [
+   "10/20/2026 1530",
+   "Patient Message",
+   "Orthopaedic Surgery",
+   "MyChart (patient)",
+   "Pt: \"My hands are really bad this week. Can I still use my Enbrel shot this Saturday? I don't want to be in a flare for surgery.\" Reply (J. Bales, MA): \"I will forward to Dr. Ashworth's nurse.\" [No further reply documented.]"
+  ],
+  [
+   "10/26/2026 1405",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "D. Carver, RN",
+   "Pre-surgery call. Arrival time 0900 confirmed. NPO reviewed: no food after midnight, clear liquids until 0700. Meds AM of surgery: omeprazole only with sip of water, \"hold all other morning medications.\" Pt verbalized understanding. Ride: husband."
+  ]
+ ],
+ "vitals": [
+  [
+   "08/20/2018 1505",
+   "138/84",
+   82,
+   16,
+   98,
+   36.9,
+   70.0,
+   "6/10",
+   "Urgent care"
+  ],
+  [
+   "03/22/2021 1030",
+   "132/82",
+   76,
+   16,
+   98,
+   36.6,
+   72.6,
+   "6/10",
+   "Ortho clinic (outside)"
+  ],
+  [
+   "11/02/2024 1712",
+   "152/88",
+   92,
+   18,
+   98,
+   36.7,
+   null,
+   "7/10",
+   "ED"
+  ],
+  [
+   "06/17/2025 0930",
+   "128/78",
+   72,
+   14,
+   97,
+   36.6,
+   71.8,
+   "4/10",
+   "Rheumatology clinic"
+  ],
+  [
+   "12/09/2025 1000",
+   "130/80",
+   74,
+   14,
+   98,
+   36.5,
+   72.1,
+   "3/10",
+   "Rheumatology clinic"
+  ],
+  [
+   "04/14/2026 0940",
+   "126/76",
+   70,
+   14,
+   98,
+   36.7,
+   71.5,
+   "5/10",
+   "Rheumatology clinic"
+  ],
+  [
+   "08/26/2026 1420",
+   "138/82",
+   80,
+   16,
+   98,
+   36.8,
+   71.9,
+   "8/10",
+   "Ortho clinic"
+  ],
+  [
+   "09/01/2026 1450",
+   "134/80",
+   78,
+   16,
+   97,
+   36.6,
+   71.6,
+   "7/10",
+   "Family Medicine"
+  ],
+  [
+   "10/13/2026 1005",
+   "136/78",
+   76,
+   16,
+   98,
+   36.7,
+   71.4,
+   "7/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0915",
+   "148/86",
+   84,
+   16,
+   97,
+   36.6,
+   71.4,
+   "6/10",
+   "Preop holding"
+  ],
+  [
+   "10/27/2026 0950",
+   "142/84",
+   80,
+   16,
+   97,
+   null,
+   null,
+   "6/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/13/2026 1015",
+   "Resulted"
+  ],
+  [
+   "NPO after midnight except clears until 0700",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0850",
+   "Active"
+  ],
+  [
+   "Tranexamic acid 1 g IV pre-incision",
+   "10/27/2026 0850",
+   "Active"
+  ],
+  [
+   "POC glucose on arrival",
+   "10/27/2026 0850",
+   "Resulted"
+  ],
+  [
+   "SCDs right leg",
+   "10/27/2026 0850",
+   "Active"
+  ],
+  [
+   "Postop: enoxaparin 40 mg SC daily starting POD1",
+   "10/27/2026 0850",
+   "Pending (postop)"
+  ],
+  [
+   "PT/OT evaluate and treat POD0",
+   "10/27/2026 0850",
+   "Pending (postop)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "Specimen 10/13/2026",
+  "specimen_expires": "11/12/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: left total knee arthroplasty",
+   "Signed by patient 08/26/2026, reconfirmed 10/27/2026"
+  ],
+  [
+   "Blood product consent",
+   "Signed 10/13/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Healthcare POA: Dale Vanhoose (husband), copy on file 2019. Living will on file: no prolonged life support if terminal.",
+ "anesthesia_history": [
+  [
+   "1994",
+   "Cesarean section",
+   "Spinal",
+   "None per pt",
+   "Morristown-Hamblen"
+  ],
+  [
+   "2011",
+   "Right carpal tunnel release",
+   "GA (pt unsure of airway)",
+   "PONV per pt; no records",
+   "Jefferson Memorial Hospital"
+  ],
+  [
+   "2016",
+   "Right MCP synovectomy",
+   "GA + axillary block",
+   "\"Sore throat for a week\" per pt; no records",
+   "Knoxville Hand Center"
+  ],
+  [
+   "03/2023",
+   "Left cataract extraction",
+   "MAC, topical",
+   "Uneventful",
+   "East Tennessee Eye Surgeons ASC"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0858",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0640 black coffee",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (08/26 + update 10/27)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A (postmenopausal)"
+   ],
+   [
+    "Site marked",
+    "Yes, L knee"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "CHG bathing night before + AM",
+    "Yes"
+   ],
+   [
+    "Dentures/jewelry removed",
+    "No dentures; wedding ring taped"
+   ],
+   [
+    "Ride/caregiver",
+    "Husband"
+   ]
+  ],
+  "nursing_note": "66F for L TKA. A&O x4, calm. Took only omeprazole this AM per phone instructions - did NOT take prednisone, lisinopril, or folic acid. Reports she gave her Enbrel shot Saturday \"because my hands were flaring and nobody called me back.\" Fine pain-limited ROM L knee. Ulnar deviation both hands, nodules R elbow. States she \"can't open real wide\" and neck is stiff. 20g R forearm, 1 attempt (poor veins, hand IV avoided). Skin: thin, ecchymoses forearms, paper tape only. POC glucose 126. Husband at bedside.",
+  "iv": "20g R forearm, LR KVO",
+  "glucose": "126 mg/dL (0920)"
+ },
+ "label": "J. Vanhoose",
+ "bmi": "27.9"
+}

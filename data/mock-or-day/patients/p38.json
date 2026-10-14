@@ -1,0 +1,1553 @@
+{
+ "id": "p38",
+ "room": "OR 17",
+ "time": "1230",
+ "name": "SHULTS, MELISSA DAWN",
+ "mrn": "0146038",
+ "dob": "06/11/1987",
+ "age": "39 y",
+ "sex": "F",
+ "ht_cm": 168,
+ "wt_kg": 64.8,
+ "preferred_name": "Missy",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. C. Ivey, Seymour Family Medicine",
+ "insurance": "Cigna Open Access Plus (employer)",
+ "emergency_contact": "Aaron Shults (husband) 865-555-0119",
+ "isolation": "",
+ "allergies": [
+  [
+   "Erythromycin",
+   "GI upset",
+   "Mild (intolerance)",
+   "2002"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic left adrenalectomy",
+  "short": "Laparoscopic L adrenalectomy",
+  "laterality": "Left",
+  "service": "Endocrine Surgery",
+  "surgeon": "F. Arrowood, MD",
+  "assistant": "M. Delozier, MD (resident)",
+  "indication": "Left adrenal pheochromocytoma 4.2 cm, biochemically confirmed (normetanephrine-secreting)",
+  "duration_min": 150,
+  "anesthesia_requested": "General endotracheal; arterial line pre-induction",
+  "position": "Right lateral decubitus, flexed, kidney rest",
+  "dispo": "Inpatient, SICU or step-down overnight",
+  "blood": "Type and crossmatch 2 units",
+  "equipment": "Arterial line; vasoactive infusions per anesthesia (nitroprusside/nicardipine, phenylephrine/norepinephrine, esmolol)",
+  "implants": "",
+  "surgeon_notes": "Alpha blockade with phenoxybenzamine since 10/13 per endocrinology; beta blocker added 10/22. Early adrenal vein ligation. Notify anesthesia before vein clamped. Cefazolin 2 g.",
+  "add_on": false,
+  "scheduled_on": "09/29/2026"
+ },
+ "problems": [
+  [
+   "Pheochromocytoma, left adrenal",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Secondary hypertension",
+   "2025",
+   "Active"
+  ],
+  [
+   "Prediabetes (catecholamine-related)",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Panic disorder (diagnosis 2024 - likely misattributed)",
+   "2024",
+   "Active"
+  ],
+  [
+   "Migraine",
+   "2010",
+   "Active"
+  ],
+  [
+   "Hypothyroidism, subclinical",
+   "2021",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Episodic headache, palpitations, sweating since ~2023; dx panic disorder at urgent care 2024",
+   "HTN noted 2025, started amlodipine by PCP; severe episode 08/2026 -> ED -> workup -> pheochromocytoma",
+   "Plasma free normetanephrine 3.8 nmol/L (4x ULN); CT 4.2 cm L adrenal mass; Ga-68 DOTATATE PET single lesion",
+   "Germline genetic panel pending",
+   "Migraine",
+   "Two pregnancies uncomplicated; second with \"high BP at end\" 2017"
+  ],
+  "psh": [
+   [
+    "2014",
+    "Cesarean section",
+    "Fort Sanders Sevier"
+   ],
+   [
+    "2017",
+    "Repeat cesarean section",
+    "Fort Sanders Sevier"
+   ],
+   [
+    "2019",
+    "Laparoscopic cholecystectomy",
+    "LeConte Medical Center"
+   ]
+  ],
+  "family": [
+   "Mother: HTN",
+   "Maternal aunt: \"adrenal tumor\" age 40s, details unknown",
+   "Father: T2DM",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Dental hygienist",
+   "living": "Husband, 2 children (12, 9)",
+   "other": "Stopped caffeine 08/2026 per cardiology advice"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2017"
+   ],
+   [
+    "COVID-19",
+    "2022"
+   ],
+   [
+    "HPV",
+    "2006"
+   ]
+  ],
+  "ob": "G2P2, C-section x2"
+ },
+ "home_meds": [
+  [
+   "Phenoxybenzamine 10 mg cap",
+   "Started 10 mg BID 10/13; titrated; current 20 mg PO TID since 10/21",
+   "Dr. S. Nakamura (Endocrine)",
+   "10/26/2026 2200"
+  ],
+  [
+   "Metoprolol succinate 25 mg",
+   "1 tab PO daily (started 10/22)",
+   "Dr. S. Nakamura",
+   "10/27/2026 0600"
+  ],
+  [
+   "Sodium chloride 1 g tab",
+   "1 g PO TID with meals",
+   "Dr. S. Nakamura",
+   "10/26/2026 1800"
+  ],
+  [
+   "Saline nasal spray",
+   "2 sprays each nostril PRN congestion",
+   "Dr. S. Nakamura",
+   "10/27/2026 0600"
+  ],
+  [
+   "Sumatriptan 50 mg",
+   "PRN migraine - instructed to avoid until after surgery",
+   "Dr. C. Ivey",
+   "06/2026"
+  ],
+  [
+   "Levonorgestrel IUD",
+   "In place since 2021",
+   "Dr. R. Cate",
+   "N/A"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's 1,000 mL IV",
+   "Preop over 2 h",
+   "Started 10/27/2026 1030"
+  ],
+  [
+   "Midazolam 1-2 mg IV",
+   "Preop PRN anxiety (anesthesia)",
+   "Available"
+  ],
+  [
+   "Heparin 5,000 units SC",
+   "Preop x1",
+   "Given 10/27/2026 1040"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Amlodipine 5 mg",
+   "03/2025-10/2026",
+   "Stopped when alpha blockade titrated (10/21)"
+  ],
+  [
+   "Propranolol 10 mg PRN",
+   "2024",
+   "Prescribed at urgent care for \"panic palpitations\" - stopped 08/2026 by ED (unopposed alpha concern)"
+  ],
+  [
+   "Sertraline 50 mg",
+   "2024-2025",
+   "No benefit; stopped"
+  ],
+  [
+   "Metoclopramide 10 mg PRN",
+   "2019",
+   "Avoid - catecholamine release; listed as avoid by endocrine"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/26/2026 0900",
+    "comment": "Preadmission testing, day 14",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "255",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.68",
+      ""
+     ],
+     "Glu": [
+      "98",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "PT": [
+      "12.4",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/20/2026 0900",
+    "comment": "Endocrine, day 8",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "13.3",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "263",
+      ""
+     ],
+     "MCV": [
+      "84",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.77",
+      ""
+     ],
+     "Glu": [
+      "102",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 0900",
+    "comment": "Endocrine, day 1 alpha blockade",
+    "vals": {
+     "WBC": [
+      "7.5",
+      ""
+     ],
+     "Hgb": [
+      "14.4",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "230",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.73",
+      ""
+     ],
+     "Glu": [
+      "110",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/08/2026",
+    "comment": "Endocrine",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.75",
+      ""
+     ],
+     "Glu": [
+      "112",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "88",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "6.0",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/30/2026 2340",
+    "comment": "ED - hypertensive episode",
+    "vals": {
+     "WBC": [
+      "11.4",
+      "H"
+     ],
+     "Hgb": [
+      "14.6",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "256",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.78",
+      ""
+     ],
+     "Glu": [
+      "162",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "Trop": [
+      "18",
+      ""
+     ],
+     "TSH": [
+      "1.06",
+      ""
+     ],
+     "FT4": [
+      "1.10",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/11/2025",
+    "comment": "New HTN",
+    "vals": {
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "13.9",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "256",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "104",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "A1c": [
+      "5.7",
+      "H"
+     ],
+     "TSH": [
+      "1.88",
+      ""
+     ],
+     "FT4": [
+      "1.11",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/22/2021",
+    "comment": "Repeat",
+    "vals": {
+     "TSH": [
+      "3.10",
+      ""
+     ],
+     "FT4": [
+      "1.18",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/18/2021",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "7.7",
+      ""
+     ],
+     "Hgb": [
+      "13.4",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.77",
+      ""
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "98",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "TSH": [
+      "4.60",
+      "H"
+     ],
+     "FT4": [
+      "1.12",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "5.3",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "09/04/2026",
+    "Plasma free metanephrine",
+    "0.31 nmol/L (ref <0.50)",
+    ""
+   ],
+   [
+    "09/04/2026",
+    "Plasma free normetanephrine",
+    "3.82 nmol/L (ref <0.90)",
+    "H"
+   ],
+   [
+    "09/04/2026",
+    "Plasma 3-methoxytyramine",
+    "0.08 nmol/L (ref <0.10)",
+    ""
+   ],
+   [
+    "09/08/2026",
+    "Germline hereditary pheochromocytoma/paraganglioma panel",
+    "Pending",
+    ""
+   ],
+   [
+    "09/08/2026",
+    "Calcium / PTH (MEN2 screen)",
+    "Ca 9.3 / PTH 41 - normal",
+    ""
+   ],
+   [
+    "09/08/2026",
+    "Calcitonin",
+    "<2 pg/mL - normal",
+    ""
+   ],
+   [
+    "10/26/2026",
+    "Urine hCG",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026 1035",
+    "POC glucose",
+    "96 mg/dL",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/31/2026",
+   "CT Abdomen/Pelvis with IV contrast (ED)",
+   "Ordered for flank/abdominal pain with hypertensive emergency. 4.2 x 3.8 cm heterogeneous enhancing left adrenal mass with small central cystic/necrotic area. No adenopathy. Right adrenal normal. Impression: left adrenal mass - given clinical presentation, pheochromocytoma must be excluded; biochemical evaluation recommended before any biopsy.",
+   "R. Haverty, MD"
+  ],
+  [
+   "09/16/2026",
+   "CT Adrenal protocol (unenhanced, portal venous, 15-min delay)",
+   "Unenhanced 38 HU, absolute washout 41%. Size unchanged 4.2 cm. Impression: lipid-poor adrenal mass not meeting adenoma criteria; with biochemistry, consistent with pheochromocytoma.",
+   "P. Lindqvist, MD"
+  ],
+  [
+   "09/23/2026",
+   "Ga-68 DOTATATE PET-CT",
+   "Intense uptake left adrenal mass (SUVmax 48). No other somatostatin receptor-avid lesions. Impression: solitary left pheochromocytoma; no evidence of multifocal or metastatic disease.",
+   "R. Haverty, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "08/30/2026",
+   "ECG 12-lead (ED)",
+   "Sinus tachycardia 118. LVH by voltage criteria. Diffuse ST depression 0.5-1 mm with T wave inversion V4-V6. QTc 472.",
+   "K. Fannon, MD",
+   {
+    "rate": 118,
+    "pr": 142,
+    "qrs": 92,
+    "qtc": 472,
+    "axis": 40,
+    "lvh": 1,
+    "tmod": {
+     "V4": -0.6,
+     "V5": -0.8,
+     "V6": -0.8,
+     "I": 0.3
+    },
+    "st": {
+     "I": -0.06,
+     "II": -0.07,
+     "aVF": -0.06,
+     "V3": -0.05,
+     "V4": -0.08,
+     "V5": -0.1,
+     "V6": -0.1
+    }
+   }
+  ],
+  [
+   "09/10/2026",
+   "Echocardiogram, transthoracic",
+   "LVEF 60-65%. Mild concentric LVH (septum 1.2 cm). Normal regional wall motion. Grade I diastolic dysfunction. No significant valve disease. No evidence of catecholamine (takotsubo-type) cardiomyopathy.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "09/10/2026",
+   "Holter monitor 48 h",
+   "Sinus rhythm, rate 64-142, average 92. Episodes of sinus tachycardia correlating with diary \"pounding headaches\". 1,240 isolated PVCs (1% burden), 6 couplets. No sustained arrhythmia.",
+   "P. Satterfield, MD"
+  ],
+  [
+   "10/13/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 92. LVH voltage. Nonspecific T wave flattening V5-V6. QTc 452. Improved vs 08/30.",
+   "M. Desai, MD",
+   {
+    "tmod": {
+     "V5": 0.2,
+     "V6": 0.15
+    },
+    "rate": 92,
+    "pr": 148,
+    "qrs": 90,
+    "qtc": 452,
+    "axis": 40,
+    "lvh": 1
+   }
+  ],
+  [
+   "10/26/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 66. LVH voltage. No ST-T abnormalities. No ectopy on 10-second strip. QTc 430. ST-T changes resolved compared with 08/30 and 10/13.",
+   "M. Desai, MD",
+   {
+    "rate": 66,
+    "pr": 154,
+    "qrs": 90,
+    "qtc": 430,
+    "axis": 40,
+    "lvh": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "05/18/2021",
+   "Clinic",
+   "Seymour Family Medicine",
+   "Annual",
+   "Routine"
+  ],
+  [
+   "11/06/2024",
+   "Urgent care",
+   "Sevierville Urgent Care",
+   "Palpitations, headache, sweating",
+   "Dx panic attack; propranolol PRN"
+  ],
+  [
+   "03/11/2025",
+   "Clinic",
+   "Seymour Family Medicine",
+   "Elevated BP",
+   "Amlodipine started"
+  ],
+  [
+   "08/30/2026",
+   "ED visit",
+   "C-N University Hospital ED",
+   "Severe headache, palpitations, BP 214/122",
+   "Admitted obs; adrenal mass; discharged 09/01/2026"
+  ],
+  [
+   "09/08/2026",
+   "Clinic",
+   "C-N University Endocrinology",
+   "Adrenal mass, metanephrines",
+   "Pheochromocytoma"
+  ],
+  [
+   "09/29/2026",
+   "Clinic",
+   "C-N University Endocrine Surgery",
+   "Surgical consult",
+   "Scheduled"
+  ],
+  [
+   "10/13/2026",
+   "Clinic",
+   "C-N University Endocrinology",
+   "Start alpha blockade",
+   "Phenoxybenzamine"
+  ],
+  [
+   "10/26/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "11/06/2024 1715",
+   "Progress Note",
+   "Urgent Care",
+   "J. Hurst, PA-C",
+   "37F episodes of pounding headache, racing heart, drenched in sweat, lasting 10-20 min, several times/month. Anxious. BP 158/96 HR 112 in clinic, improved to 136/84 after 30 min. ECG sinus tach. Dx panic attacks. Propranolol 10 mg PRN. F/u PCP, counseling."
+  ],
+  [
+   "03/11/2025 1030",
+   "Progress Note",
+   "Family Medicine",
+   "C. Ivey, MD",
+   "BP 152/98, 148/96 repeat. Young for essential HTN - pt declines further workup now (cost). Start amlodipine 5. Lifestyle. Recheck 3 mo."
+  ],
+  [
+   "08/31/2026 0200",
+   "H&P",
+   "Hospital Medicine",
+   "J. Pendleton, DO",
+   "39F with severe headache, palpitations, diaphoresis, L flank/abd pain after lifting a laundry basket. BP 214/122, HR 124. Trop 18. CT: 4.2 cm L adrenal mass. Pheo suspected. Held propranolol (risk unopposed alpha). Nicardipine infusion briefly. Plasma metanephrines sent. Avoid metoclopramide and glucagon. Endocrine consult."
+  ],
+  [
+   "09/01/2026 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "J. Pendleton, DO",
+   "Hypertensive emergency resolved, off nicardipine 12 h. Amlodipine 10 mg. Plasma metanephrines pending. Endocrinology f/u 09/08. Return precautions."
+  ],
+  [
+   "09/08/2026 1000",
+   "Consult",
+   "Endocrinology",
+   "S. Nakamura, MD",
+   "Normetanephrine 3.82 (4x ULN), metanephrine normal - noradrenergic pheochromocytoma, 4.2 cm L adrenal. MEN2 screen normal. Plan: adrenal CT, DOTATATE PET, echo/Holter, genetic panel. Surgery referral. Preop alpha blockade 10-14 days with phenoxybenzamine before surgery, then beta blocker only after adequate alpha blockade if tachycardic, high-sodium diet and fluids 2.5-3 L/day from day 3. Targets: seated BP <130/80, standing SBP >90; seated HR 60-70, standing HR 70-80."
+  ],
+  [
+   "09/29/2026 1400",
+   "Consult",
+   "Endocrine Surgery",
+   "F. Arrowood, MD",
+   "39F L pheo 4.2 cm, solitary. Lap L adrenalectomy 10/27 after 14 d alpha blockade (start 10/13 per endocrine). Discussed hemodynamic instability, possible conversion, postop hypoglycemia/hypotension. Consent signed."
+  ],
+  [
+   "10/13/2026 1030",
+   "Progress Note",
+   "Endocrinology",
+   "S. Nakamura, MD",
+   "Day 1 phenoxybenzamine 10 mg BID. BP seated 152/94, HR 94. Hct 44. Home BP cuff checked against ours. Daily log seated + standing BP/HR BID. Titrate by 10 mg every 2-3 days for symptoms/BP. Salt tabs 1 g TID, liberal salt, fluids 2.5-3 L/d. Expect nasal stuffiness, orthostatic dizziness - rise slowly."
+  ],
+  [
+   "10/16/2026 1630",
+   "Telephone Encounter",
+   "Endocrinology",
+   "K. Rhyne, RN",
+   "Day 4 log: seated 136/88, 132/86; standing 128/84; HR 96-104. Increased phenoxybenzamine to 10 mg TID per Dr. Nakamura. Pt reports stuffy nose - asked if she can take Sudafed: NO (pseudoephedrine contraindicated); saline spray ok."
+  ],
+  [
+   "10/19/2026 1615",
+   "Telephone Encounter",
+   "Endocrinology",
+   "K. Rhyne, RN",
+   "Day 7 log: seated 128/82-130/84, standing 112/74, HR seated 98, standing 112. Increase to 20 mg BID then 20 mg TID 10/21. Amlodipine stopped 10/21. Mild dizziness on standing, no syncope."
+  ],
+  [
+   "10/22/2026 1000",
+   "Progress Note",
+   "Endocrinology",
+   "S. Nakamura, MD",
+   "Day 10. Phenoxybenzamine 20 mg TID since 10/21. Seated 118/76, standing 102/66. HR seated 102, standing 118 (reflex tachycardia from alpha blockade). Hct 40 (from 44), consistent with volume re-expansion. Now adequately alpha-blocked -> START metoprolol succinate 25 mg daily for HR. Continue salt/fluids. Nasal congestion, mild orthostatic lightheadedness - expected. Weight up 1.6 kg."
+  ],
+  [
+   "10/26/2026 0945",
+   "Progress Note",
+   "Endocrinology",
+   "S. Nakamura, MD",
+   "Day 14, preop. Home log last 48 h: seated 108-122/68-78, standing 94-104/58-66; HR seated 64-70, standing 76-84. No paroxysms since 10/20. Orthostatic lightheadedness mild, nasal stuffiness. Hct 37 (44 -> 40 -> 37). ECG today: ST-T changes resolved, no ectopy. Wt 64.8 (from 62.6 on 10/13). Meets preop targets. Last phenoxybenzamine dose 2200 tonight; take metoprolol in AM. Postop: check glucose q1h x first hours (hypoglycemia), expect hypotension."
+  ],
+  [
+   "10/26/2026 1100",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT labs, ECG, T&C 2 u. Arrival 1030 tomorrow. NPO after 0430 light breakfast (light meal permitted), clears until 0930. Take metoprolol AM, saline spray. Last phenoxybenzamine tonight 2200."
+  ],
+  [
+   "10/26/2026 1130",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "M. Leach, CRNA",
+   "ASA 3. Pheo, alpha/beta blocked. MP I, full ROM. Plan GETA, pre-induction art line, central line not routinely planned, large-bore IV x2. Discuss infusions with DOS team."
+  ]
+ ],
+ "vitals": [
+  [
+   "05/18/2021 0915",
+   "124/80",
+   78,
+   14,
+   99,
+   36.6,
+   61.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "11/06/2024 1700",
+   "158/96",
+   112,
+   18,
+   99,
+   36.9,
+   62.5,
+   "6/10",
+   "Urgent care"
+  ],
+  [
+   "03/11/2025 1015",
+   "152/98",
+   90,
+   16,
+   99,
+   36.7,
+   63.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "08/30/2026 2330",
+   "214/122",
+   124,
+   22,
+   98,
+   37.3,
+   63.4,
+   "9/10",
+   "ED"
+  ],
+  [
+   "09/01/2026 0800",
+   "138/86",
+   96,
+   16,
+   99,
+   36.8,
+   null,
+   "2/10",
+   "Observation"
+  ],
+  [
+   "09/08/2026 0945",
+   "146/92",
+   98,
+   16,
+   99,
+   36.6,
+   62.8,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "10/13/2026 1015",
+   "152/94",
+   94,
+   16,
+   99,
+   36.6,
+   62.6,
+   "0/10",
+   "Endocrinology (seated)"
+  ],
+  [
+   "10/13/2026 1020",
+   "146/92",
+   104,
+   16,
+   99,
+   null,
+   null,
+   "0/10",
+   "Endocrinology (standing)"
+  ],
+  [
+   "10/22/2026 0945",
+   "118/76",
+   102,
+   16,
+   99,
+   36.7,
+   64.2,
+   "0/10",
+   "Endocrinology (seated)"
+  ],
+  [
+   "10/22/2026 0950",
+   "102/66",
+   118,
+   16,
+   99,
+   null,
+   null,
+   "0/10",
+   "Endocrinology (standing)"
+  ],
+  [
+   "10/26/2026 0930",
+   "114/72",
+   66,
+   14,
+   99,
+   36.6,
+   64.8,
+   "0/10",
+   "Endocrinology (seated)"
+  ],
+  [
+   "10/26/2026 0935",
+   "98/62",
+   80,
+   14,
+   99,
+   null,
+   null,
+   "0/10",
+   "Endocrinology (standing)"
+  ],
+  [
+   "10/27/2026 1035",
+   "112/70",
+   64,
+   14,
+   99,
+   36.6,
+   64.8,
+   "0/10",
+   "Preop holding (seated)"
+  ],
+  [
+   "10/27/2026 1040",
+   "96/60",
+   78,
+   14,
+   99,
+   null,
+   null,
+   "0/10",
+   "Preop holding (standing)"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units PRBC",
+   "10/26/2026 0900",
+   "Resulted - 2 units available"
+  ],
+  [
+   "LR 1 L preop",
+   "10/27/2026 1030",
+   "Active"
+  ],
+  [
+   "Arterial line pre-induction (anesthesia)",
+   "10/27/2026 1030",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 1030",
+   "Active"
+  ],
+  [
+   "POC glucose q1h x 6 h postop",
+   "10/27/2026 1030",
+   "Pending (postop)"
+  ],
+  [
+   "Plasma metanephrines 2-6 wk postop",
+   "10/26/2026",
+   "Pending"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "",
+  "specimen_expires": "10/29/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic left adrenalectomy, possible open",
+   "Signed 09/29/2026"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/26/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2014",
+   "Cesarean section",
+   "Spinal",
+   "None",
+   "Fort Sanders Sevier"
+  ],
+  [
+   "2017",
+   "Repeat cesarean section",
+   "Spinal",
+   "\"BP very high at end of pregnancy and in OR\" - attributed to preeclampsia (no proteinuria documented)",
+   "Fort Sanders Sevier"
+  ],
+  [
+   "2019",
+   "Lap cholecystectomy",
+   "GETA",
+   "Labile BP on induction (SBP to 220), \"light anesthesia\" - treated with labetalol; uneventful otherwise",
+   "LeConte Medical Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1028",
+  "npo_solids": "10/27/2026 0430 toast and banana",
+  "npo_clears": "10/27/2026 0915 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "Negative 10/26"
+   ],
+   [
+    "Site marked",
+    "Yes, L flank"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "Calm, slightly anxious. Last phenoxybenzamine 2200, metoprolol 0600. Lightheaded when stood for orthostatics, resolved sitting. Stuffy nose, using saline. No headache/palpitations since 10/20. 18g L FA, 18g R FA. Husband at bedside.",
+  "iv": "18g L forearm, 18g R forearm; LR",
+  "glucose": "96 mg/dL (1035)"
+ },
+ "label": "M. Shults",
+ "bmi": "23.0"
+}

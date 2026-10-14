@@ -1,0 +1,136 @@
+{
+ "id": "p20",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Reduction mammaplasty in a patient whose whole worry is PONV: motion sickness, two prior anesthetics with severe vomiting despite TIVA plus dexamethasone and ondansetron. Plus intraoperative sitting to 80 degrees.",
+ "asa": {
+  "suggested": "1",
+  "rationale": "Healthy; BMI 29."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Fasting is met (Gatorade 0930 for a 1200 case). The deliverable is an aggressive, mechanistically diverse PONV plan and safe beach chair management."
+ },
+ "redFlags": [
+  {
+   "id": "ponv",
+   "severity": "critical",
+   "finding": "Refractory PONV, Apfel 4",
+   "evidence": "Female, nonsmoker, motion sickness and prior PONV, postop opioids; 2014 admitted for PONV; 2019 failed TIVA plus dexamethasone plus ondansetron.",
+   "implication": "Very high risk; prior prophylaxis failed.",
+   "action": "Multiple different receptor classes: scopolamine patch early, dexamethasone, 5HT3 antagonist, NK1 antagonist (aprepitant), consider amisulpride, haloperidol, or droperidol; propofol TIVA; opioid sparing with Exparel, acetaminophen, NSAID if surgeon agrees; hydration.",
+   "keywords": [
+    "ponv",
+    "aprepitant",
+    "nk1",
+    "scopolamine",
+    "amisulpride",
+    "droperidol",
+    "tiva",
+    "apfel",
+    "opioid sparing"
+   ]
+  },
+  {
+   "id": "beach_chair",
+   "severity": "major",
+   "finding": "Sitting 60 to 80 degrees during the case",
+   "evidence": "Surgeon notes: sits patient up for symmetry.",
+   "implication": "Cerebral hypoperfusion if BP is measured at the arm without correction; hypotension.",
+   "action": "Correct BP to brain level, avoid hypotension, secure head and airway during position change.",
+   "keywords": [
+    "beach chair",
+    "sitting",
+    "cerebral perfusion",
+    "hydrostatic"
+   ]
+  },
+  {
+   "id": "exparel",
+   "severity": "minor",
+   "finding": "Liposomal bupivacaine infiltration",
+   "evidence": "Surgeon plans Exparel.",
+   "implication": "Total local dose and timing with other local anesthetics.",
+   "action": "Coordinate local anesthetic totals; lipid available.",
+   "keywords": [
+    "exparel",
+    "liposomal",
+    "local anesthetic"
+   ]
+  },
+  {
+   "id": "tape",
+   "severity": "minor",
+   "finding": "Adhesive tape allergy (blistering)",
+   "evidence": "Allergy list; surgeon note.",
+   "implication": "Skin injury.",
+   "action": "Non paper, gentle tape for eyes and ETT.",
+   "keywords": [
+    "tape",
+    "adhesive"
+   ]
+  },
+  {
+   "id": "temperature",
+   "severity": "minor",
+   "finding": "Large exposure, 3 h case",
+   "evidence": "Bilateral breast surgery.",
+   "implication": "Hypothermia (also worsens nausea and bleeding).",
+   "action": "Forced air warming.",
+   "keywords": [
+    "warming",
+    "hypothermia",
+    "bair"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "maintenance",
+   "item": "Propofol TIVA",
+   "keywords": [
+    "tiva",
+    "propofol infusion"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Four agent prophylaxis from different classes",
+   "keywords": [
+    "aprepitant",
+    "scopolamine",
+    "dexamethasone",
+    "ondansetron"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "BP correction for sitting position",
+   "keywords": [
+    "beach chair",
+    "sitting"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence in a healthy young patient"
+  },
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Large volume local infiltration"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

@@ -1,0 +1,1412 @@
+{
+ "id": "p08",
+ "room": "OR 4",
+ "time": "1500",
+ "name": "NGUYEN, ALYSSA T",
+ "mrn": "0095522",
+ "dob": "07/11/2003",
+ "age": "23 y",
+ "sex": "F",
+ "ht_cm": 166,
+ "wt_kg": 58.0,
+ "preferred_name": "Aly",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Carson-Newman Student Health / R. Delaney, PA-C",
+ "insurance": "Aetna Choice POS II (parent employer)",
+ "emergency_contact": "Thu Nguyen (mother) 865-555-0183",
+ "isolation": "",
+ "allergies": [
+  [
+   "Eggs",
+   "Hives (childhood)",
+   "Mild",
+   "2006"
+  ],
+  [
+   "Soy",
+   "\"Maybe\" - unclear reaction",
+   "Unknown",
+   "2015"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic appendectomy",
+  "short": "Laparoscopic appendectomy",
+  "laterality": "N/A",
+  "service": "Acute Care Surgery",
+  "surgeon": "P. Dubois, MD",
+  "assistant": "S. Ali, MD (surgery resident PGY-2)",
+  "indication": "Acute appendicitis on CT (11 mm appendix, periappendiceal stranding, no perforation).",
+  "duration_min": 60,
+  "anesthesia_requested": "General",
+  "position": "Supine, left arm tucked, Trendelenburg and left tilt",
+  "dispo": "Surgical floor",
+  "blood": "No type and screen.",
+  "equipment": "Standard laparoscopy",
+  "implants": "",
+  "surgeon_notes": "Class: urgent (within 6 h). Add-on.",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Type 1 diabetes mellitus, on insulin pump",
+   "2014",
+   "Active"
+  ],
+  [
+   "Asthma, intermittent",
+   "2010",
+   "Active"
+  ],
+  [
+   "Major depressive disorder, single episode, moderate",
+   "2022",
+   "Active"
+  ],
+  [
+   "Diabetic ketoacidosis, history",
+   "2019",
+   "Resolved"
+  ],
+  [
+   "Cannabis use",
+   "2024",
+   "Active"
+  ],
+  [
+   "Nicotine dependence, e-cigarettes",
+   "2023",
+   "Active"
+  ],
+  [
+   "Irregular menses",
+   "2021",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Type 1 DM since age 11 (2014); insulin pump (t:slim, lispro) + Dexcom CGM since 2018; A1c 8-9%",
+   "DKA admissions 2014 (diagnosis) and 2019 (pump failure)",
+   "Asthma, intermittent; albuterol PRN",
+   "Depression, fluoxetine since 2022",
+   "Irregular menses (oligomenorrhea), no hormonal contraception"
+  ],
+  "psh": [
+   [
+    "06/2021",
+    "Wisdom teeth extraction x4, office IV sedation (propofol)",
+    "Morristown Oral Surgery"
+   ]
+  ],
+  "family": [
+   "Mother: Hashimoto thyroiditis",
+   "Father: HTN",
+   "Brother: celiac disease",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Vapes nicotine daily",
+   "alcohol": "Weekends, 4-6 drinks",
+   "drugs": "Vapes THC daily",
+   "occupation": "Graduate student (MS Biology), Carson-Newman; lab TA",
+   "living": "Apartment with roommate, Jefferson City",
+   "other": "Boyfriend at bedside. Parents in Knoxville."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026"
+   ],
+   [
+    "COVID-19",
+    "2023"
+   ],
+   [
+    "HPV series",
+    "2015"
+   ],
+   [
+    "MenACWY booster",
+    "2019"
+   ],
+   [
+    "Tdap",
+    "2014"
+   ]
+  ],
+  "ob": "G0 per patient. LMP \"about 7 weeks ago, I'm irregular.\" Sexually active, condoms \"usually.\""
+ },
+ "home_meds": [
+  [
+   "Insulin lispro via pump (t:slim X2)",
+   "Basal 0.8 units/h (programmed); bolus carb ratio 1:10, ISF 1:40",
+   "M. Shah, MD (Endocrinology)",
+   "Pump still running; patient removed the CGM sensor in the ED"
+  ],
+  [
+   "Fluoxetine 40 mg",
+   "40 mg PO daily",
+   "R. Delaney, PA-C",
+   "10/27/2026 0700"
+  ],
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs q4h PRN",
+   "R. Delaney, PA-C",
+   "10/27/2026 0830"
+  ],
+  [
+   "Glucagon nasal 3 mg",
+   "PRN severe hypoglycemia",
+   "M. Shah, MD",
+   "Never used"
+  ]
+ ],
+ "mar": [
+  [
+   "Ondansetron 4 mg IV (ED)",
+   "q6h PRN",
+   "Given 10/27 1030, 1230"
+  ],
+  [
+   "Morphine 4 mg IV (ED)",
+   "q2h PRN",
+   "Given 10/27 1100, 1300"
+  ],
+  [
+   "Lactated Ringer's 1,000 mL IV bolus (ED)",
+   "x1",
+   "Completed 1130"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "125 mL/h",
+   "Infusing"
+  ],
+  [
+   "Piperacillin-tazobactam 3.375 g IV (ED)",
+   "x1",
+   "Given 10/27 1250"
+  ],
+  [
+   "Insulin",
+   "No inpatient insulin order",
+   "—"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Insulin glargine/lispro injections",
+   "2014-2018",
+   "Changed to pump"
+  ],
+  [
+   "Sertraline 50 mg",
+   "2022",
+   "GI upset; changed to fluoxetine"
+  ],
+  [
+   "Montelukast 10 mg",
+   "2012-2016",
+   "Outgrew symptoms"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 1030",
+    "comment": "ED (anion gap 20)",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "3.2",
+      "L"
+     ],
+     "Cl": [
+      "98",
+      ""
+     ],
+     "CO2": [
+      "16",
+      "L"
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "288",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "WBC": [
+      "16.2",
+      "H"
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "310",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ],
+     "Phos": [
+      "3.6",
+      ""
+     ],
+     "USG": [
+      "1.014",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "4+",
+      "A"
+     ],
+     "UKet": [
+      "3+",
+      "A"
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/20/2026 0930",
+    "comment": "Endocrinology",
+    "vals": {
+     "A1c": [
+      "9.1",
+      "H"
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "179",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "245",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/24/2025 0900",
+    "comment": "",
+    "vals": {
+     "A1c": [
+      "8.4",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/18/2024 0915",
+    "comment": "Annual",
+    "vals": {
+     "A1c": [
+      "8.8",
+      "H"
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.73",
+      ""
+     ],
+     "Glu": [
+      "182",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "14",
+      ""
+     ],
+     "ALKP": [
+      "78",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "80",
+      ""
+     ],
+     "TSH": [
+      "1.84",
+      ""
+     ],
+     "FT4": [
+      "1.26",
+      ""
+     ],
+     "USG": [
+      "1.012",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/10/2023 0900",
+    "comment": "",
+    "vals": {
+     "A1c": [
+      "8.2",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/16/2022 0900",
+    "comment": "",
+    "vals": {
+     "A1c": [
+      "8.6",
+      "H"
+     ],
+     "TSH": [
+      "2.30",
+      ""
+     ],
+     "FT4": [
+      "1.15",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/02/2021 0900",
+    "comment": "College transition",
+    "vals": {
+     "A1c": [
+      "8.1",
+      "H"
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.82",
+      ""
+     ],
+     "Glu": [
+      "180",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "USG": [
+      "1.009",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/14/2020 0900",
+    "comment": "Endocrinology",
+    "vals": {
+     "A1c": [
+      "8.9",
+      "H"
+     ],
+     "TSH": [
+      "1.92",
+      ""
+     ],
+     "FT4": [
+      "1.40",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "88",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/03/2019 0600",
+    "comment": "DKA resolving",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "168",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/02/2019 0240",
+    "comment": "ED DKA (pump failure)",
+    "vals": {
+     "Na": [
+      "131",
+      "L"
+     ],
+     "K": [
+      "5.6",
+      "H"
+     ],
+     "Cl": [
+      "96",
+      "L"
+     ],
+     "CO2": [
+      "9",
+      "L"
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "512",
+      "H"
+     ],
+     "Ca": [
+      "8.9",
+      ""
+     ],
+     "WBC": [
+      "14.2",
+      "H"
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "pH": [
+      "7.12",
+      "L"
+     ],
+     "PaCO2": [
+      "22",
+      "L"
+     ],
+     "HCO3a": [
+      "8",
+      "L"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Phos",
+    "name": "Phosphorus",
+    "unit": "mg/dL",
+    "ref": "2.5-4.5"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "03/02/2019",
+    "Beta-hydroxybutyrate",
+    "7.8 mmol/L",
+    "H"
+   ],
+   [
+    "08/18/2024",
+    "Urine albumin/creatinine",
+    "12 mg/g (normal)",
+    ""
+   ],
+   [
+    "08/18/2024",
+    "Celiac tTG-IgA",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026 1030",
+    "Beta-hydroxybutyrate",
+    "3.4 mmol/L (ref < 0.4)",
+    "H"
+   ],
+   [
+    "10/27/2026 1030",
+    "Anion gap (calculated)",
+    "20",
+    "H"
+   ],
+   [
+    "10/27/2026 1000",
+    "Urine hCG, qualitative (ED triage)",
+    "Not resulted - \"specimen not received in lab\"",
+    "A"
+   ],
+   [
+    "10/27/2026 1415",
+    "POC hCG, urine (preop)",
+    "POSITIVE",
+    "A"
+   ],
+   [
+    "10/27/2026",
+    "Quantitative serum hCG",
+    "Not ordered",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/27/2026",
+   "CT Abdomen/Pelvis with IV contrast (1140)",
+   "Dilated appendix 11 mm with periappendiceal fat stranding. Appendicolith not seen. No perforation or abscess. Small free fluid in the pelvis. Uterus and adnexa: limited evaluation; no adnexal mass. Impression: Acute appendicitis without perforation.",
+   "L. Darby, MD"
+  ],
+  [
+   "2021",
+   "Panoramic dental XR (outside)",
+   "Impacted third molars x4.",
+   "Outside"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/27/2026",
+   "ECG 12-lead",
+   "Sinus tachycardia 116. Normal intervals, QTc 452. No U waves. No ST changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 116,
+    "pr": 138,
+    "qrs": 82,
+    "qtc": 452,
+    "axis": 65
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "03/02/2019",
+   "ED -> PICU/inpatient",
+   "C-N University Hospital",
+   "DKA, pump occlusion",
+   "Insulin infusion, discharged 03/04"
+  ],
+  [
+   "06/2021",
+   "Office procedure",
+   "Morristown Oral Surgery",
+   "Wisdom teeth",
+   "Uneventful"
+  ],
+  [
+   "04/11/2022",
+   "Student health visit",
+   "C-N Student Health",
+   "Depressed mood",
+   "Sertraline, counseling"
+  ],
+  [
+   "11/03/2022",
+   "ED visit",
+   "C-N University Hospital",
+   "Asthma exacerbation with URI",
+   "Nebs, prednisone, discharged"
+  ],
+  [
+   "08/18/2024",
+   "Specialty clinic",
+   "C-N Endocrinology",
+   "T1DM annual",
+   "Pump settings adjusted"
+  ],
+  [
+   "08/20/2026",
+   "Specialty clinic",
+   "C-N Endocrinology",
+   "T1DM",
+   "A1c 9.1; sick-day plan reviewed"
+  ],
+  [
+   "10/27/2026",
+   "ED -> inpatient",
+   "C-N University Hospital",
+   "RLQ pain",
+   "Surgery accepted; add-on"
+  ]
+ ],
+ "notes": [
+  [
+   "03/04/2019 1100",
+   "Discharge Summary",
+   "Pediatric Endocrinology",
+   "G. Lowe, MD",
+   "15 yo with T1DM admitted in DKA (pH 7.12, HCO3 8) after pump occlusion overnight with no backup injections. Insulin infusion 18 h. Discharged on pump. Sick-day rules: if glucose > 250 with ketones, inject by pen and change site. Always carry backup pen."
+  ],
+  [
+   "06/18/2021 1000",
+   "Media (Outside Record)",
+   "Oral Surgery",
+   "Morristown Oral Surgery (scanned)",
+   "Third molar extraction x4 under IV sedation: midazolam 2 mg, fentanyl 50 mcg, propofol 120 mg total. Egg allergy noted; propofol given without reaction. Uneventful."
+  ],
+  [
+   "04/11/2022 1500",
+   "Progress Note",
+   "Student Health",
+   "R. Delaney, PA-C",
+   "PHQ-9 16. No SI. Start sertraline 50 mg, counseling referral. Discussed alcohol use."
+  ],
+  [
+   "06/14/2022 1100",
+   "Telephone Encounter",
+   "Student Health",
+   "R. Delaney, PA-C",
+   "Sertraline GI upset. Change to fluoxetine 20 mg. Increased to 40 mg 09/2022."
+  ],
+  [
+   "11/03/2022 2130",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "J. Castile, PA-C",
+   "Wheezing x 2 days with cold. SpO2 94%. Albuterol/ipratropium x 3, prednisone 40 mg x 5 days. Glucose up to 320 on steroids - pt adjusted pump. Discharged."
+  ],
+  [
+   "08/18/2024 0930",
+   "Progress Note",
+   "Endocrinology",
+   "M. Shah, MD",
+   "T1DM on t:slim + Dexcom. A1c 8.8. Time in range 48%. Frequent missed boluses with snacking. No severe hypoglycemia. Eye exam due. Microalbumin normal. Settings: basal 0.75 -> 0.8 u/h overnight. Vaping and cannabis: counseled."
+  ],
+  [
+   "03/12/2025 1400",
+   "Progress Note",
+   "Ophthalmology",
+   "C. Barlow, OD",
+   "Dilated diabetic eye exam. No diabetic retinopathy. Return 1 year."
+  ],
+  [
+   "08/20/2026 1000",
+   "Progress Note",
+   "Endocrinology",
+   "M. Shah, MD",
+   "A1c 9.1. TIR 41%. Pump site failures x2 this summer (kinked cannula). Reviewed sick-day/DKA plan again: if unexplained high with ketones, give correction by pen, change site, call. Pt has backup pens at apartment. Contraception discussed given A1c (preconception risks): pt declines hormonal methods."
+  ],
+  [
+   "09/30/2026 1615",
+   "Patient Message",
+   "Endocrinology",
+   "Alyssa Nguyen",
+   "My Dexcom keeps falling off, can I get extra overpatches? Reply (A. Moody, RN): Sent to pharmacy. Reminder your next visit is 02/2027."
+  ],
+  [
+   "10/27/2026 1010",
+   "H&P",
+   "Emergency Medicine",
+   "K. Barlow, MD",
+   "RLQ pain 18 hours, nausea, vomited 4 times. LMP \"about 7 weeks ago, I'm irregular.\" PMH: asthma (intermittent). Depression. Type 1 diabetes since age 11, insulin pump. Social: vapes nicotine and THC daily, alcohol on weekends. Ate a sandwich at 0830 before coming. Exam: T 38.4, HR 118, BP 108/64. RLQ tenderness with guarding, Rovsing positive. MP I. Tongue piercing. Wt 58 kg, BMI 21. Plan: labs, UA, urine hCG, CT A/P with contrast, IVF, analgesia, antiemetic."
+  ],
+  [
+   "10/27/2026 1015",
+   "Nursing Note",
+   "Emergency",
+   "L. Ortiz, RN",
+   "Triage. Urine specimen collected and sent (hCG/UA). Pt removed Dexcom sensor \"because it was beeping.\" Pump on, tubing to L abdomen."
+  ],
+  [
+   "10/27/2026 1250",
+   "Consult",
+   "Acute Care Surgery",
+   "S. Ali, MD (resident) / P. Dubois, MD",
+   "CT: acute appendicitis, nonperforated. Plan lap appendectomy today, urgent add-on. NPO. Zosyn. Consent to be obtained. Pregnancy test: \"pending\" per ED."
+  ],
+  [
+   "10/27/2026 1330",
+   "Progress Note",
+   "Emergency Medicine",
+   "K. Barlow, MD",
+   "ED course. Surgery accepted. NPO since arrival. IV LR 1 L. Glucose 288, HCO3 16, AG 20 - glucose \"elevated, will recheck.\" Insulin plan not addressed. UA: 4+ glucose, 3+ ketones. Urine hCG: lab reports specimen not received; re-collect ordered. Admit to surgery."
+  ],
+  [
+   "10/27/2026 1400",
+   "Nursing Note",
+   "Emergency",
+   "L. Ortiz, RN",
+   "Surgical consent signed with resident at 1400. Morphine 4 mg IV given at 1300 for pain 8/10. Pt drowsy but answering questions. Vomited x1 at 1230 (~150 mL bilious)."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/02/2019 0240",
+   "102/60",
+   132,
+   32,
+   99,
+   37.2,
+   52.0,
+   "6/10",
+   "ED"
+  ],
+  [
+   "11/03/2022 2130",
+   "118/72",
+   108,
+   24,
+   94,
+   37.3,
+   56.0,
+   "0/10",
+   "ED"
+  ],
+  [
+   "08/18/2024 0930",
+   "112/70",
+   78,
+   14,
+   99,
+   36.6,
+   57.4,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "08/20/2026 1000",
+   "110/68",
+   82,
+   14,
+   99,
+   36.7,
+   58.6,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "10/27/2026 0950",
+   "108/64",
+   118,
+   22,
+   98,
+   38.4,
+   58.0,
+   "8/10",
+   "ED triage"
+  ],
+  [
+   "10/27/2026 1200",
+   "106/62",
+   116,
+   24,
+   98,
+   38.5,
+   null,
+   "6/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 1415",
+   "104/60",
+   122,
+   24,
+   98,
+   38.6,
+   null,
+   "6/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Urine hCG",
+   "10/27/2026 1000",
+   "Re-collect ordered 1330; not collected"
+  ],
+  [
+   "NPO",
+   "10/27/2026 1010",
+   "Active"
+  ],
+  [
+   "POC glucose q4h",
+   "10/27/2026 1330",
+   "Active (none charted)"
+  ],
+  [
+   "Insulin infusion (DKA protocol)",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Endocrinology consult",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Piperacillin-tazobactam",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "POC hCG (preop protocol)",
+   "10/27/2026 1410",
+   "Resulted POSITIVE 1415"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic appendectomy",
+   "Signed 10/27/2026 1400 (after IV morphine 1300)"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "06/2021",
+   "Wisdom teeth extraction",
+   "Office IV sedation: midazolam, fentanyl, propofol",
+   "Uneventful (patient told \"they used propofol\")",
+   "Morristown Oral Surgery"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1405 (from ED)",
+  "npo_solids": "10/27/2026 0830 sandwich",
+  "npo_clears": "10/27/2026 0830",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes (1400)"
+   ],
+   [
+    "H&P",
+    "ED H&P"
+   ],
+   [
+    "Pregnancy test",
+    "POC hCG POSITIVE 1415"
+   ],
+   [
+    "Allergy band",
+    "On (egg, soy)"
+   ],
+   [
+    "Piercings removed",
+    "No - tongue"
+   ],
+   [
+    "Insulin pump",
+    "On, running"
+   ],
+   [
+    "POC glucose",
+    "Not done"
+   ]
+  ],
+  "nursing_note": "HR 122, BP 104/60, RR 24, SpO2 98%, T 38.6. Ate a sandwich at 0830 before coming to the ED. Vomited 1230. Kussmaul-type breathing noted. Nauseated. POC hCG positive at 1415; surgeon not yet informed (paged, awaiting call back). Insulin pump running; CGM sensor removed. Tongue piercing in place.",
+  "iv": "20 G right antecubital",
+  "glucose": "Not checked in preop"
+ },
+ "label": "A. Nguyen",
+ "bmi": "21.0"
+}

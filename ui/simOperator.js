@@ -238,6 +238,9 @@ export function eligibleComplications(s, history, { active = [], used = [] } = {
    to act; the caller performs the injection through the runner. */
 export function createDirector({ random = Math.random } = {}) {
   let state;
+  // Case authored preferences (Mock OR Day answer keys). Survives reset so a
+  // loaded case keeps its flavor across runner resets; empty means no bias.
+  let preferred = [];
   function reset() {
     state = {
       phase: 'BUILD_UP', calmForSec: 0, fadeCalmSec: 0, relaxUntilSec: 0,
@@ -275,7 +278,9 @@ export function createDirector({ random = Math.random } = {}) {
         if (state.calmForSec < required) return null;
         const pool = eligibleComplications(snapshot, history, { active, used: state.injected });
         if (pool.length === 0) return null;
-        const type = pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))];
+        const favored = pool.filter((entry) => preferred.includes(entry));
+        const pickFrom = favored.length > 0 ? favored : pool;
+        const type = pickFrom[Math.min(pickFrom.length - 1, Math.floor(random() * pickFrom.length))];
         state.injected.push(type);
         state.phase = 'PEAK';
         state.calmForSec = 0;
@@ -323,6 +328,12 @@ export function createDirector({ random = Math.random } = {}) {
     reset,
     // The trainee asked for it: shorten the wait, and grant one more
     // complication if the case already hit its cap.
+    setPreferred(types) {
+      preferred = Array.isArray(types)
+        ? types.filter((type) => DIRECTOR_COMPLICATIONS.some((entry) => entry.type === type))
+        : [];
+    },
+    getPreferred() { return [...preferred]; },
     forceSoon() {
       state.forceSoon = true;
       if (state.phase === 'RELAX') state.relaxUntilSec = 0;
@@ -674,6 +685,17 @@ export const BARK_RULES = Object.freeze([
     [2, 'Out of tricks. Don\'t tell anyone.'],
     [3, 'I\'ve run out of ways to ruin your day. Take the win.'],
   ] },
+  // Mock OR Day: Booth has read the chart. Hooks are chart findings from the
+  // case answer key, only used after the care plan is in.
+  { id: 'amb_case', concept: 'AMBIENT', score: 2, cooldownMs: 45000,
+    when: (q) => Boolean(q.caseHook) && q.intensity < 0.35 && !q.hiddenActive, lines: [
+    [1, '{patient}, {procedure}. Remember the chart: {hook}.'],
+    [1, 'Chart check for {patient}: {hook}. Is your plan still covering that?'],
+    [2, 'Reminder, since the chart exists for a reason: {hook}.'],
+    [2, '{patient}. {hook}. I read the chart. Did you?'],
+    [3, '{hook}. It was in the chart. In writing. With words.'],
+    [3, '{patient} has {hook} and you have a plan sheet. Let\'s see which one wins.'],
+  ] },
   { id: 'amb_calm', concept: 'AMBIENT', score: 1, when: (q) => q.intensity < CALM_INTENSITY, lines: [
     [1, 'HR {hr}, MAP {map}, sat {spo2}. Stable. Keep scanning.'],
     [1, 'EtCO2 {etco2}, sat {spo2}. Ventilation looks fine.'],
@@ -792,6 +814,9 @@ export function fillTemplate(text, facts = {}) {
     mac: finite(facts.mac) ? facts.mac.toFixed(2) : '?',
     bis: finite(facts.bis) ? Math.round(facts.bis) : '?',
     rr: finite(facts.rr) ? Math.round(facts.rr) : '?',
+    patient: facts.casePatient ?? 'The patient',
+    procedure: facts.caseProcedure ?? 'this case',
+    hook: facts.caseHook ?? 'the chart',
     name: OPERATOR_NAME,
   };
   return text.replace(/\{(\w+)\}/g, (match, key) => (key in fmt ? String(fmt[key]) : match));
@@ -901,6 +926,8 @@ export function createSimOperator({
   let pendingInjection = null;
   let idleBarkedForAction = -1;
   let transcript = [];
+  let caseProfile = null;
+  let caseHookIndex = 0;
 
   function resetState() {
     director.reset();
@@ -957,6 +984,7 @@ export function createSimOperator({
     memory.lastTemplate = bark.template;
     memory.recentTemplates = [...(memory.recentTemplates ?? []), bark.template].slice(-10);
     memory.lastRuleId = bark.ruleId;
+    if (bark.ruleId === 'amb_case') caseHookIndex += 1;
     memory.lastSayMs = nowMs;
     nextAmbientGapMs = pickAmbientGap();
     const line = { ...bark, tSec: last?.t ?? 0, speaker: OPERATOR_NAME };
@@ -992,8 +1020,16 @@ export function createSimOperator({
       infusionRunning: (snapshot.activeAnestheticInfusions?.length ?? 0) > 0,
       agent: snapshot.vaporizerAgent,
       dial: snapshot.vaporizer,
+      ...nextCaseFacts(),
     }, { force: true });
     if (!line) nextAmbientGapMs = pickAmbientGap(); // nothing fit; try again after another gap
+  }
+
+  function nextCaseFacts() {
+    if (!caseProfile) return {};
+    const hooks = caseProfile.hooks ?? [];
+    const hook = hooks.length > 0 ? hooks[caseHookIndex % hooks.length] : null;
+    return { casePatient: caseProfile.patient, caseProcedure: caseProfile.procedure, caseHook: hook };
   }
 
   function trackExtremes(s) {
@@ -1280,6 +1316,12 @@ export function createSimOperator({
       outcomes: history.outcomes.slice(-12).map((o) => o.text),
       recentLines: transcript.slice(-8).map((line) => line.text),
       directorPhase: director.getState().phase,
+      mockOrCase: caseProfile ? {
+        patient: caseProfile.patient,
+        procedure: caseProfile.procedure,
+        chartSummary: caseProfile.summary ?? null,
+        chartFindings: caseProfile.hooks ?? [],
+      } : null,
     };
   }
 
@@ -1302,6 +1344,24 @@ export function createSimOperator({
       }
     },
     forceSoon() { director.forceSoon(); },
+    /* Mock OR Day case: who the patient is, chart findings Booth may bring up,
+       and which complications fit this chart. null clears it. */
+    setCaseProfile(profile) {
+      if (!profile) {
+        caseProfile = null;
+        director.setPreferred([]);
+        return;
+      }
+      caseProfile = {
+        patient: String(profile.patient ?? 'The patient'),
+        procedure: String(profile.procedure ?? 'this case'),
+        summary: profile.summary ? String(profile.summary) : null,
+        hooks: Array.isArray(profile.hooks) ? profile.hooks.map(String).filter(Boolean).slice(0, 8) : [],
+      };
+      caseHookIndex = 0;
+      director.setPreferred(profile.complications ?? []);
+    },
+    getCaseProfile() { return caseProfile ? { ...caseProfile, preferred: director.getPreferred() } : null; },
     reset: resetState,
     getSettings() { return { ...settings, directorAllowed: directorAllowed() }; },
     getDirectorState() { return director.getState(); },

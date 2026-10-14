@@ -1,0 +1,1301 @@
+{
+ "id": "p19",
+ "room": "OR 15",
+ "time": "0730",
+ "name": "LAWSON-GREER, DWAYNE T",
+ "mrn": "0145019",
+ "dob": "07/30/1972",
+ "age": "54 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 91.4,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "No PCP listed (uses Grainger County Health Dept clinic)",
+ "insurance": "TennCare (BlueCare Tennessee)",
+ "emergency_contact": "Tammy Greer (sister) 865-555-0938",
+ "isolation": "",
+ "allergies": [
+  [
+   "Tramadol",
+   "Seizure-like episode per pt",
+   "Severe",
+   "2018"
+  ]
+ ],
+ "case": {
+  "procedure": "L4-L5 posterior lumbar decompression (laminectomy, bilateral foraminotomy) and instrumented posterolateral fusion with TLIF",
+  "short": "L4-L5 decompression and fusion (TLIF)",
+  "laterality": "N/A",
+  "service": "Neurosurgery - Spine",
+  "surgeon": "A. Mendenhall, MD",
+  "assistant": "S. Ivey, PA-C",
+  "indication": "Grade 1 degenerative spondylolisthesis L4-L5 with severe central and bilateral foraminal stenosis, neurogenic claudication, L5 radiculopathy; failed PT, ESI x2.",
+  "duration_min": 240,
+  "anesthesia_requested": "General ETT, TIVA for neuromonitoring",
+  "position": "Prone on Jackson table, head in foam prone pillow, arms up",
+  "dispo": "Inpatient, 2-3 nights",
+  "blood": "Type and screen; cell saver",
+  "equipment": "O-arm/navigation, neuromonitoring (SSEP, TcMEP, EMG), cell saver, bite block",
+  "implants": "Pedicle screws L4-L5, interbody cage, allograft/BMP per surgeon",
+  "surgeon_notes": "MEPs/SSEPs - please TIVA, no paralytic after intubation. Tranexamic acid OK. Postop PCA per anesthesia/APS.",
+  "add_on": false,
+  "scheduled_on": "09/21/2026"
+ },
+ "problems": [
+  [
+   "Spondylolisthesis, L4-L5, degenerative",
+   "2024",
+   "Active"
+  ],
+  [
+   "Spinal stenosis, lumbar region with neurogenic claudication",
+   "2024",
+   "Active"
+  ],
+  [
+   "Lumbar radiculopathy, left L5",
+   "2025",
+   "Active"
+  ],
+  [
+   "Chronic low back pain",
+   "2014",
+   "Active"
+  ],
+  [
+   "Tobacco use disorder",
+   "1990",
+   "Active"
+  ],
+  [
+   "Hepatitis C, treated, SVR12",
+   "2022",
+   "Resolved"
+  ],
+  [
+   "Essential hypertension",
+   "2023",
+   "Active"
+  ],
+  [
+   "Depression, mild",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Chronic LBP since work injury 2014 (fell from scaffold); progressive stenosis",
+   "Hepatitis C genotype 1a, treated 2022 sofosbuvir-velpatasvir, SVR12",
+   "HTN 2023",
+   "Depression, on sertraline",
+   "Tobacco 1 ppd x 35 yrs",
+   "Hx L ankle fracture 2009"
+  ],
+  "psh": [
+   [
+    "2009",
+    "ORIF left ankle",
+    "Morristown-Hamblen (outside)"
+   ],
+   [
+    "2015",
+    "Lumbar epidural steroid injection x1",
+    "Tri-Cities Pain (outside)"
+   ],
+   [
+    "07/2025",
+    "L4-L5 interlaminar ESI",
+    "C-N Spine Center"
+   ],
+   [
+    "11/2025",
+    "L4-L5 interlaminar ESI",
+    "C-N Spine Center"
+   ]
+  ],
+  "family": [
+   "Father: COPD, died 66",
+   "Mother: T2DM, HTN",
+   "Brother: alcohol use disorder",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Current, 1 ppd x 35 yrs (35 pack-years). Counseled. Down to 3/4 ppd per pt.",
+   "alcohol": "None since 2021",
+   "drugs": "Pt denies current use. (See outside records.)",
+   "occupation": "Formerly drywall installer; on disability claim since 2024",
+   "living": "Lives alone in rental home, Rutledge; sister nearby",
+   "other": "Uses cane for longer distances."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "Hepatitis A/B series (Twinrix)",
+    "2022"
+   ],
+   [
+    "Tdap",
+    "2016"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Gabapentin 600 mg",
+   "1 tab PO TID",
+   "A. Mendenhall, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Meloxicam 15 mg",
+   "1 tab PO daily",
+   "Grainger Co. Health Dept",
+   "10/19/2026 (held 7 d per surgeon)"
+  ],
+  [
+   "Cyclobenzaprine 10 mg",
+   "1 tab PO TID PRN spasm",
+   "Grainger Co. Health Dept",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sertraline 100 mg",
+   "1 tab PO daily",
+   "Grainger Co. Health Dept",
+   "10/27/2026 0500"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "1 tab PO daily",
+   "Grainger Co. Health Dept",
+   "10/27/2026 0500"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "2 tabs PO q8h PRN",
+   "OTC",
+   "10/26/2026"
+  ],
+  [
+   "Nicotine patch 14 mg/24 h",
+   "Daily (pt reports using intermittently)",
+   "A. Mendenhall, MD",
+   "10/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Gabapentin 600 mg",
+   "Preop - home dose taken",
+   "Taken at home 0500"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Tranexamic acid IV",
+   "Per anesthesia",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0615"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Hydrocodone-acetaminophen 10-325 mg",
+   "2015-2020",
+   "Discontinued by outside prescriber"
+  ],
+  [
+   "Oxycodone 5 mg",
+   "2019",
+   "Short course, outside ED"
+  ],
+  [
+   "Tramadol 50 mg",
+   "2018",
+   "Seizure-like episode"
+  ],
+  [
+   "Duloxetine 60 mg",
+   "2020-2021",
+   "GI upset; switched to sertraline"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0600",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/14/2026",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "7.5",
+      ""
+     ],
+     "Hgb": [
+      "16.1",
+      ""
+     ],
+     "Hct": [
+      "48",
+      ""
+     ],
+     "Plt": [
+      "275",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.93",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "28",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "70",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "USG": [
+      "1.014",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/20/2023",
+    "comment": "Health Dept",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "83",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "29",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "66",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "106",
+      ""
+     ],
+     "A1c": [
+      "5.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/30/2022",
+    "comment": "SVR12",
+    "vals": {
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "93",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/02/2022",
+    "comment": "Pre-treatment",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.93",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "61",
+      "H"
+     ],
+     "ALT": [
+      "84",
+      "H"
+     ],
+     "ALKP": [
+      "83",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "15.3",
+      ""
+     ],
+     "Hct": [
+      "46",
+      ""
+     ],
+     "Plt": [
+      "237",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/14/2021",
+    "comment": "Health Dept - HCV workup",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "15.6",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "240",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "74",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "68",
+      "H"
+     ],
+     "ALT": [
+      "92",
+      "H"
+     ],
+     "ALKP": [
+      "88",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "04/14/2021",
+    "Hepatitis C antibody",
+    "Reactive",
+    "A"
+   ],
+   [
+    "04/14/2021",
+    "HCV RNA, quantitative",
+    "1,840,000 IU/mL",
+    "A"
+   ],
+   [
+    "04/14/2021",
+    "HIV-1/2 Ag/Ab",
+    "Nonreactive",
+    ""
+   ],
+   [
+    "08/30/2022",
+    "HCV RNA, quantitative",
+    "Not detected (SVR12)",
+    ""
+   ],
+   [
+    "10/14/2026",
+    "MRSA nares PCR",
+    "Negative",
+    ""
+   ],
+   [
+    "10/14/2026",
+    "Nicotine/cotinine, urine",
+    "Positive (cotinine)",
+    "A"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/10/2024",
+   "XR Lumbar spine with flexion/extension",
+   "Grade 1 anterolisthesis L4 on L5 (6 mm) increasing to 9 mm on flexion. Disc height loss L4-L5, L5-S1. Facet arthropathy.",
+   "N. Pemberton, MD"
+  ],
+  [
+   "07/02/2025",
+   "MRI Lumbar spine without contrast",
+   "L4-L5: grade 1 anterolisthesis, disc bulge, ligamentum flavum hypertrophy, facet effusions; severe central canal stenosis, severe L > R foraminal stenosis. L5-S1: mild disc desiccation, no stenosis. Conus normal.",
+   "N. Pemberton, MD"
+  ],
+  [
+   "10/14/2026",
+   "XR Chest 2 views (preop)",
+   "Hyperinflation. No acute process.",
+   "N. Pemberton, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Doc. MUDr. Jan Šprindrich CSc., CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:ZP_emfyzem_(11).jpg)"
+   }
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/14/2026",
+   "ECG 12-lead (preop)",
+   "Normal sinus rhythm 82. Normal axis. No ST-T abnormality. QTc 432.",
+   "B. Lyle, MD",
+   {
+    "rate": 82,
+    "pr": 160,
+    "qrs": 90,
+    "qtc": 432,
+    "axis": 45
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2009",
+   "Outpatient surgery",
+   "Morristown-Hamblen (outside)",
+   "L ankle fx",
+   "ORIF"
+  ],
+  [
+   "09/14/2019",
+   "ED visit",
+   "Lakeway Regional Medical Center",
+   "Back pain flare",
+   "Oxycodone x5 days, discharged"
+  ],
+  [
+   "06/10/2024",
+   "Spine clinic",
+   "C-N Spine Center",
+   "Back/leg pain",
+   "PT, imaging"
+  ],
+  [
+   "07/02/2025",
+   "Spine clinic",
+   "C-N Spine Center",
+   "Worsening claudication",
+   "MRI, ESI"
+  ],
+  [
+   "11/2025",
+   "Procedure",
+   "C-N Spine Center",
+   "ESI #2",
+   "Partial relief 3 wk"
+  ],
+  [
+   "09/21/2026",
+   "Neurosurgery clinic",
+   "C-N Neurosurgery",
+   "Surgical consult",
+   "TLIF scheduled"
+  ],
+  [
+   "10/14/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "09/14/2019 0215",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "J. Pack, MD (Lakeway Regional - outside, scanned)",
+   "47 M acute on chronic LBP after lifting. No red flags. PDMP reviewed: hydrocodone 10/325 monthly from pain clinic. Ketorolac IM, oxycodone 5 mg #10. F/u pain clinic."
+  ],
+  [
+   "06/10/2024 1400",
+   "Progress Note",
+   "Spine Center",
+   "C. Rutledge, NP",
+   "LBP with bilateral leg pain worse standing/walking, relieved sitting. Walks 1 block. XR grade 1 spondylo, dynamic. PT referral. Gabapentin titrate to 600 TID. Pt declines opioids. Smoking cessation counseled."
+  ],
+  [
+   "11/18/2025 0900",
+   "Procedure Note",
+   "Spine Center",
+   "H. Dao, MD",
+   "L4-L5 interlaminar ESI, fluoroscopic guidance, triamcinolone 80 mg. Tolerated well. No sedation."
+  ],
+  [
+   "03/14/2024 1030",
+   "Media (Outside Record)",
+   "Addiction Medicine",
+   "Clinch River Recovery Center (scanned letter)",
+   "To whom it may concern: Mr. Lawson-Greer has been a patient in our office-based opioid treatment program since 05/2021 for opioid use disorder, severe, in sustained remission on maintenance therapy. Current regimen buprenorphine-naloxone 8 mg/2 mg sublingual film twice daily. Urine drug screens consistently appropriate. He is compliant with weekly then monthly visits. Please contact our office before any change to his buprenorphine or before prescribing opioids. -- P. Okonkwo-Hale, MD, Clinch River Recovery Center, 865-555-0410. (Scanned 03/2024 with disability paperwork.)"
+  ],
+  [
+   "09/21/2026 1300",
+   "Consult",
+   "Neurosurgery",
+   "A. Mendenhall, MD",
+   "54 M with progressive neurogenic claudication, L L5 radiculopathy, grade 1 dynamic spondylolisthesis L4-L5, severe stenosis. Failed PT 12 wk, ESI x2, gabapentin. Walks < 1 block. EHL 4/5 L. Recommend L4-L5 decompression and TLIF. Discussed smoking and nonunion risk extensively - pt agrees to quit, nicotine patch Rx. Med rec reviewed with pt: gabapentin 600 TID, meloxicam 15 (stop 7 d preop), cyclobenzaprine PRN, sertraline 100, amlodipine 5. Denies opioid use currently. Allergies: tramadol. Plan surgery 10/27, neuromonitoring, cell saver. Will ask APS to see postop."
+  ],
+  [
+   "09/21/2026 1345",
+   "H&P",
+   "Neurosurgery",
+   "S. Ivey, PA-C",
+   "H&P for L4-L5 TLIF. PMH: chronic LBP, HTN, depression, HCV treated, tobacco. PSH: L ankle ORIF, ESI x3. Meds per neurosurgery med rec. Allergies: tramadol (seizure). SH: 1 ppd, no EtOH since 2021, denies drugs. Exam: BMI 28.8. RRR. Lungs diminished, scattered expiratory wheeze cleared with cough. Neuro: L EHL 4/5, decreased sensation L dorsum foot, reflexes 1+ symmetric. Mallampati per anesthesia. A/P: proceed 10/27. Labs, ECG, CXR at PAT."
+  ],
+  [
+   "10/14/2026 1015",
+   "Nursing Note",
+   "Preadmission Testing",
+   "L. Burchett, RN",
+   "PAT visit. Pt brought med list from neurosurgery visit. Prone surgery education given. CHG wipes given. Pt states he smoked this morning, using patch \"sometimes.\" STOP-BANG 4 (snoring, male, age > 50, HTN); no sleep study."
+  ],
+  [
+   "10/14/2026 1140",
+   "Pharmacy Note",
+   "Preadmission Testing",
+   "J. Vance, PharmD",
+   "Preop med rec/PDMP check (CSMD) per protocol for spine surgery. CSMD 12-month report: gabapentin 600 mg #90 q30d (Mendenhall); cyclobenzaprine 10 mg #60 (Health Dept); buprenorphine-naloxone 8-2 mg SL film #56 every 28 days, prescriber P. Okonkwo-Hale, MD (Clinch River Recovery Center), fills consistent x12 months, last fill 10/09/2026; no other opioids or benzodiazepines in 12 mo. Med list updated in pharmacy reconciliation queue; pending provider review."
+  ],
+  [
+   "10/14/2026 1150",
+   "Telephone Encounter",
+   "Neurosurgery",
+   "D. Shipley, LPN",
+   "Pt called asking about pain control after surgery, worried \"it will be bad.\" Advised APS will see him in hospital, surgeon plans PCA. Pt verbalized understanding."
+  ],
+  [
+   "10/20/2026 0915",
+   "Patient Message",
+   "Neurosurgery",
+   "MyChart - patient",
+   "Do I take my morning meds the day of surgery? -- Reply (D. Shipley, LPN): Take gabapentin, sertraline and amlodipine with a sip of water. Do not take meloxicam. Bring all your medications in the original bottles."
+  ],
+  [
+   "10/26/2026 1340",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "L. Burchett, RN",
+   "Preop call. Arrival 0530. NPO midnight, clears until 0530. Take morning meds as instructed by surgeon office. Sister driving and will stay. No smoking AM of surgery advised."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/14/2019 0150",
+   "158/94",
+   98,
+   18,
+   97,
+   36.8,
+   88.0,
+   "9/10",
+   "Lakeway Regional ED (outside)"
+  ],
+  [
+   "06/10/2024 1345",
+   "146/90",
+   84,
+   16,
+   96,
+   36.7,
+   90.2,
+   "7/10",
+   "Spine Center"
+  ],
+  [
+   "07/02/2025 1010",
+   "142/88",
+   80,
+   16,
+   96,
+   36.6,
+   91.0,
+   "8/10",
+   "Spine Center"
+  ],
+  [
+   "11/18/2025 0845",
+   "138/86",
+   82,
+   16,
+   96,
+   36.6,
+   91.5,
+   "7/10",
+   "Spine Center"
+  ],
+  [
+   "09/21/2026 1230",
+   "136/84",
+   84,
+   16,
+   96,
+   36.7,
+   91.6,
+   "8/10",
+   "Neurosurgery"
+  ],
+  [
+   "10/14/2026 1000",
+   "138/86",
+   86,
+   16,
+   95,
+   36.6,
+   91.4,
+   "7/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0540",
+   "142/88",
+   88,
+   16,
+   95,
+   36.5,
+   91.4,
+   "6/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/27/2026 0600",
+   "Resulted"
+  ],
+  [
+   "Cell saver",
+   "09/21/2026",
+   "Active"
+  ],
+  [
+   "Neuromonitoring: SSEP, TcMEP, EMG",
+   "09/21/2026",
+   "Active"
+  ],
+  [
+   "Acute Pain Service consult postop",
+   "09/21/2026",
+   "Active"
+  ],
+  [
+   "Hydromorphone PCA per APS postop",
+   "10/27/2026",
+   "Pending"
+  ],
+  [
+   "NPO after midnight",
+   "09/21/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched (cell saver)",
+  "notes": "",
+  "specimen_expires": "10/30/2026 2359"
+ },
+ "consents": [
+  [
+   "Surgical consent: L4-L5 decompression and fusion, TLIF, instrumentation",
+   "Signed by patient 09/21/2026"
+  ],
+  [
+   "Blood products consent",
+   "Signed 09/21/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2009",
+   "ORIF L ankle",
+   "GA, ETT",
+   "Pt recalls \"hard to wake up and sick\"",
+   "Morristown-Hamblen (outside)"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 2100",
+  "npo_clears": "10/27/2026 0500 water with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/21)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - lumbar, by PA Ivey"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "CHG bath",
+    "Done at home"
+   ]
+  ],
+  "nursing_note": "A&O x4, anxious, pacing then sitting due to back pain. Smells of smoke; states last cigarette 0430. Took \"all my morning meds\" at 0500. Brought pill bottles in a bag, sent to pharmacy for verification. Nicotine patch not on. Sister in waiting room.",
+  "iv": "18g L forearm 0612",
+  "glucose": ""
+ },
+ "label": "D. Lawson-Greer",
+ "bmi": "28.8"
+}

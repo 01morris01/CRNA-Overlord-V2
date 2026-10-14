@@ -1,0 +1,2147 @@
+{
+ "id": "p11",
+ "room": "CVOR 1",
+ "time": "0715",
+ "name": "TATE, WILLIAM H",
+ "mrn": "0124706",
+ "dob": "02/11/1955",
+ "age": "71 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 92.0,
+ "preferred_name": "Bill",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "R. Gentry, MD, Morristown Primary Care Associates",
+ "insurance": "Medicare Part A/B; BCBS TN Medicare Supplement",
+ "emergency_contact": "Joyce Tate (wife) 423-555-0175",
+ "isolation": "",
+ "allergies": [
+  [
+   "Sulfa (sulfonamide antibiotics)",
+   "Rash",
+   "Moderate",
+   "1990s"
+  ]
+ ],
+ "case": {
+  "procedure": "Coronary artery bypass grafting x3 (LIMA-LAD, SVG-OM1, SVG-RCA) and aortic valve replacement (bioprosthetic)",
+  "short": "CABG x3 + AVR (bioprosthetic)",
+  "laterality": "N/A",
+  "service": "Cardiothoracic Surgery",
+  "surgeon": "J. Okonkwo, MD",
+  "assistant": "M. Pressley, PA-C",
+  "indication": "Three-vessel CAD with severe aortic stenosis (AVA 0.7 cm2, mean gradient 44); NYHA III, CCS III.",
+  "duration_min": 300,
+  "anesthesia_requested": "General with TEE",
+  "position": "Supine, arms tucked",
+  "dispo": "CVICU, intubated",
+  "blood": "Type and crossmatch 4 units PRBC. Cell saver requested.",
+  "equipment": "CPB, TEE, cell saver, endoscopic vein harvest",
+  "implants": "Bioprosthetic aortic valve (size per sizing)",
+  "surgeon_notes": "On pump. First-time sternotomy. TEE by anesthesia. Tranexamic acid per protocol. Heparin 400 units/kg for bypass, target ACT > 480 s. Patient on heparin infusion since cath; continue until OR.",
+  "add_on": false,
+  "scheduled_on": "10/11/2026"
+ },
+ "problems": [
+  [
+   "Coronary artery disease, three-vessel",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Aortic stenosis, severe",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Unstable angina (NSTEMI ruled out)",
+   "10/03/2026",
+   "Active"
+  ],
+  [
+   "Sick sinus syndrome, s/p dual-chamber pacemaker",
+   "03/2021",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes mellitus with CKD",
+   "2009",
+   "Active"
+  ],
+  [
+   "CKD stage 3a",
+   "2022",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2002",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2002",
+   "Active"
+  ],
+  [
+   "Carotid stenosis, left ICA 70-79%, asymptomatic",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Thrombocytopenia",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Former smoker",
+   "2015",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Three-vessel CAD (cath 10/03/2026); severe calcific AS",
+   "HTN",
+   "T2DM since 2009 (insulin since 2020); A1c 7.9",
+   "Hyperlipidemia",
+   "CKD 3a, baseline Cr 1.3-1.4",
+   "Sick sinus syndrome, Medtronic dual-chamber pacemaker 03/2021 (not ICD)",
+   "Former smoker 40 pack-years, quit 2015",
+   "Asymptomatic L ICA 70-79% stenosis"
+  ],
+  "psh": [
+   [
+    "2012",
+    "Right inguinal hernia repair (open)",
+    "C-N University Hospital"
+   ],
+   [
+    "03/2021",
+    "Dual-chamber pacemaker implant",
+    "C-N Heart Center"
+   ],
+   [
+    "10/2026",
+    "Left heart catheterization",
+    "C-N Heart Center"
+   ],
+   [
+    "2018",
+    "Colonoscopy",
+    "C-N Endoscopy"
+   ]
+  ],
+  "family": [
+   "Father: MI at 60",
+   "Mother: T2DM",
+   "No anesthesia complications"
+  ],
+  "social": {
+   "tobacco": "Former, 40 pack-years, quit 2015",
+   "alcohol": "1-2 beers/week",
+   "drugs": "None",
+   "occupation": "Retired TVA lineman",
+   "living": "Wife, Morristown",
+   "other": "Inpatient since 10/03 awaiting surgery."
+  },
+  "immunizations": [
+   [
+    "Influenza, high-dose",
+    "10/08/2026 (inpatient)"
+   ],
+   [
+    "PCV20",
+    "2023"
+   ],
+   [
+    "Shingrix x2",
+    "2020"
+   ],
+   [
+    "Tdap",
+    "2019"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Aspirin 81 mg",
+   "Daily",
+   "R. Gentry, MD",
+   "Inpatient - see MAR"
+  ],
+  [
+   "Metoprolol tartrate 25 mg",
+   "BID",
+   "L. Haskins, MD (Cardiology)",
+   "Inpatient - see MAR"
+  ],
+  [
+   "Lisinopril 20 mg",
+   "Daily",
+   "R. Gentry, MD",
+   "Inpatient - see MAR"
+  ],
+  [
+   "Atorvastatin 40 mg",
+   "Nightly (increased to 80 inpatient)",
+   "R. Gentry, MD",
+   "Inpatient"
+  ],
+  [
+   "Empagliflozin 10 mg",
+   "Daily",
+   "R. Gentry, MD",
+   "Held since 10/23"
+  ],
+  [
+   "Insulin glargine",
+   "24 units SC nightly",
+   "R. Gentry, MD",
+   "Inpatient 18 units"
+  ],
+  [
+   "Metformin 500 mg",
+   "BID",
+   "R. Gentry, MD",
+   "Held since admission 10/03"
+  ],
+  [
+   "Nitroglycerin 0.4 mg SL",
+   "PRN",
+   "L. Haskins, MD",
+   "10/02/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Aspirin 81 mg PO daily",
+   "Daily 0600",
+   "Given 10/27 0600"
+  ],
+  [
+   "Clopidogrel 75 mg PO daily",
+   "Daily 0900",
+   "Given 10/24 0900; discontinued 10/25 0815 (by CT surgery PA)"
+  ],
+  [
+   "Metoprolol tartrate 25 mg PO BID",
+   "0600/1800",
+   "Given 10/27 0600"
+  ],
+  [
+   "Lisinopril 20 mg PO daily",
+   "Daily 0600",
+   "Given 10/27 0600"
+  ],
+  [
+   "Atorvastatin 80 mg PO nightly",
+   "2100",
+   "Given 10/26 2100"
+  ],
+  [
+   "Empagliflozin 10 mg PO daily",
+   "0900",
+   "Held per pharmacy since 10/23 (last given 10/23 0900)"
+  ],
+  [
+   "Insulin glargine 18 units SC nightly",
+   "2100",
+   "Given 10/26 2100"
+  ],
+  [
+   "Insulin lispro correction scale",
+   "AC/HS",
+   "Given 10/26 1700 (4 units)"
+  ],
+  [
+   "Heparin infusion (ACS protocol, anti-Xa titrated)",
+   "1,100 units/h",
+   "Running (since 10/03)"
+  ],
+  [
+   "Pantoprazole 40 mg PO daily",
+   "0600",
+   "Given 10/27 0600"
+  ],
+  [
+   "Cefazolin 2 g IV + vancomycin 1.5 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Chlorhexidine bath",
+   "Evening and AM",
+   "Done 10/27 0430"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Clopidogrel 75 mg",
+   "10/03/2026-10/24/2026",
+   "Hold for surgery (ordered 10/11; stopped 10/25)"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "2015-2021",
+   "Edema"
+  ],
+  [
+   "Glipizide 10 mg",
+   "2012-2020",
+   "Hypoglycemia; insulin started"
+  ],
+  [
+   "Tamsulosin",
+   "2019-2020",
+   "Orthostasis"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0400",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      "L"
+     ],
+     "Plt": [
+      "96",
+      "L"
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "172",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "13.4",
+      ""
+     ],
+     "INR": [
+      "1.1",
+      ""
+     ],
+     "aPTT": [
+      "68",
+      "H"
+     ],
+     "Fib": [
+      "390",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/22/2026 0400",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.7",
+      ""
+     ],
+     "Hgb": [
+      "12.3",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "104",
+      "L"
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "23",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "148",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/18/2026 0400",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "112",
+      "L"
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "154",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 0400",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "8.5",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "131",
+      "L"
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.35",
+      "H"
+     ],
+     "Glu": [
+      "152",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "12.3",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "66",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/10/2026 0400",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "160",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.32",
+      "H"
+     ],
+     "Glu": [
+      "150",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/06/2026 0400",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "8.7",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "205",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.39",
+      "H"
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "PT": [
+      "12.6",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "72",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/03/2026 1015",
+    "comment": "Admission (cath day); repeat trop 21",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "13.4",
+      "L"
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "218",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      ""
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "PT": [
+      "12.4",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ],
+     "Trop": [
+      "18",
+      ""
+     ],
+     "BNP": [
+      "410",
+      "H"
+     ],
+     "A1c": [
+      "7.9",
+      "H"
+     ],
+     "Chol": [
+      "167",
+      ""
+     ],
+     "LDL": [
+      "95",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "117",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/18/2025 0830",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.0",
+      ""
+     ],
+     "Hgb": [
+      "13.5",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "222",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "93",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "7.8",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "82",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "92",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/02/2024 0830",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "13.8",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "226",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      ""
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "93",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "7.7",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "07/14/2022 0845",
+    "comment": "PCP; CKD 3a coded",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      ""
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "70",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.6",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "A1c": [
+      "7.6",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "96",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "121",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/08/2021 0700",
+    "comment": "Pre-pacemaker",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "13.6",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "231",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      ""
+     ],
+     "Glu": [
+      "150",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "11.7",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/20/2019 0830",
+    "comment": "PCP annual",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "13.3",
+      "L"
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "219",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      ""
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "80",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "7.4",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "101",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "PSA": [
+      "1.39",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/11/2017 0830",
+    "comment": "PCP annual",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "13.6",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "247",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "154",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "28",
+      ""
+     ],
+     "ALT": [
+      "16",
+      ""
+     ],
+     "ALKP": [
+      "87",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "7.1",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "123",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "PSA",
+    "name": "PSA",
+    "unit": "ng/mL",
+    "ref": "<4.00"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026 0400",
+    "eGFR (CKD-EPI 2021)",
+    "51 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/27/2026 0400",
+    "Anti-Xa (unfractionated heparin)",
+    "0.52 IU/mL (target 0.3-0.7)",
+    ""
+   ],
+   [
+    "10/03/2026",
+    "Troponin I, hs (repeat 3 h)",
+    "21 ng/L (delta < 5): NSTEMI ruled out",
+    ""
+   ],
+   [
+    "10/27/2026 0530",
+    "POC glucose",
+    "168 mg/dL",
+    "H"
+   ],
+   [
+    "10/25/2026",
+    "Type and crossmatch",
+    "O positive, antibody screen negative; 4 units crossmatched",
+    ""
+   ],
+   [
+    "10/12/2026",
+    "MRSA nares PCR",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "PF4/heparin antibody (HIT ELISA)",
+    "Not ordered",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/09/2021",
+   "XR Chest 2 views (post pacemaker)",
+   "Left subclavian dual-chamber pacemaker, leads in RA and RV apex. No pneumothorax.",
+   "P. Mendez, MD"
+  ],
+  [
+   "10/03/2026",
+   "XR Chest 1 view",
+   "Pacemaker leads unchanged. Mild cardiomegaly. Aortic valve calcification. No edema.",
+   "A. Stroud, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: CardioNetworks: Drj, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Chest_xray_pacemaker_(CardioNetworks_ECGpedia).jpg)"
+   }
+  ],
+  [
+   "10/07/2026",
+   "US Carotid duplex bilateral",
+   "Right ICA < 50% stenosis. Left ICA 70-79% stenosis (PSV 268 cm/s, EDV 92 cm/s). Antegrade vertebrals.",
+   "J. Whitlock, MD"
+  ],
+  [
+   "10/09/2026",
+   "CT Chest without contrast (sternotomy planning)",
+   "Moderate ascending aortic calcification without porcelain aorta. No retrosternal adhesions. Mild emphysema. 5 mm RUL nodule, follow-up 12 months.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/09/2026",
+   "US Venous mapping bilateral lower extremities",
+   "Great saphenous veins patent, 3-4 mm bilaterally, suitable for harvest. No DVT.",
+   "J. Whitlock, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/2021",
+   "Pacemaker implant report",
+   "Medtronic Azure XT DR MRI SureScan, DDDR 60-130. RA and RV leads. Indication: sick sinus syndrome with symptomatic pauses 4.2 s.",
+   "T. Lindahl, MD (EP)"
+  ],
+  [
+   "06/12/2025",
+   "Pacemaker interrogation",
+   "Battery 9.8 years. Normal lead function. AP 38%, VP 2%. Underlying sinus 50s. No arrhythmias. Magnet response: asynchronous DOO at 85 bpm. Next check 12 months.",
+   "Device clinic"
+  ],
+  [
+   "10/03/2026",
+   "Left heart catheterization",
+   "LM 30%. LAD proximal 85%. Circumflex: OM1 75%. RCA mid 90%. LVEDP 22 mm Hg. Aortic valve heavily calcified, not crossed. Unfractionated heparin given during the procedure. Recommend surgical revascularization + AVR.",
+   "L. Haskins, MD"
+  ],
+  [
+   "10/04/2026",
+   "Echocardiogram, transthoracic",
+   "LVEF 45%, inferior hypokinesis. Concentric LVH. Grade 2 diastolic dysfunction. Aortic valve: calcified trileaflet, AVA 0.7 cm2, mean gradient 44 mm Hg, peak velocity 4.2 m/s. Mild AR. Mild MR. RVSP 38 mm Hg.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/05/2026",
+   "Pulmonary function test (bedside spirometry)",
+   "FEV1 2.3 L (74%), FEV1/FVC 0.68. Mild obstruction.",
+   "Respiratory therapy"
+  ],
+  [
+   "10/26/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 64 with intermittent atrial pacing. LVH with strain. QTc 452.",
+   "D. Harrell, MD",
+   {
+    "tmod": {
+     "I": -0.6,
+     "aVL": -0.6,
+     "V4": -0.4,
+     "V5": -0.8,
+     "V6": -0.8
+    },
+    "st": {
+     "I": -0.07,
+     "aVL": -0.07,
+     "V4": -0.05,
+     "V5": -0.1,
+     "V6": -0.1
+    },
+    "stDown": [
+     "I",
+     "aVL",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "rate": 64,
+    "pr": 180,
+    "qrs": 98,
+    "qtc": 452,
+    "axis": 0,
+    "lvh": 1,
+    "apace": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2012",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "R inguinal hernia",
+   "Uneventful"
+  ],
+  [
+   "03/08/2021",
+   "Outpatient procedure (overnight)",
+   "C-N Heart Center",
+   "Symptomatic sinus pauses",
+   "Dual-chamber pacemaker"
+  ],
+  [
+   "07/14/2022",
+   "Office visit",
+   "Morristown Primary Care",
+   "Annual",
+   "CKD 3a"
+  ],
+  [
+   "06/12/2025",
+   "Device clinic",
+   "C-N Heart Center",
+   "Pacemaker check",
+   "Normal; next 12 months (not scheduled)"
+  ],
+  [
+   "06/18/2025",
+   "Office visit",
+   "Morristown Primary Care",
+   "Annual; murmur noted",
+   "Echo recommended (not done)"
+  ],
+  [
+   "09/22/2026",
+   "Office visit",
+   "C-N Cardiology",
+   "Exertional chest pressure, near-syncope",
+   "Cath scheduled"
+  ],
+  [
+   "10/03/2026",
+   "Inpatient",
+   "C-N University Hospital",
+   "Unstable angina, 3VD + severe AS",
+   "Heparin, awaiting CABG/AVR"
+  ]
+ ],
+ "notes": [
+  [
+   "2012",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "C-N Anesthesia (archived)",
+   "R inguinal hernia repair 2012. General, ETT, grade I view. No issues."
+  ],
+  [
+   "03/08/2021 1400",
+   "Procedure Note",
+   "Electrophysiology",
+   "T. Lindahl, MD",
+   "Dual-chamber pacemaker implant, left subclavian. MAC with propofol and local. Uneventful."
+  ],
+  [
+   "06/18/2025 0930",
+   "Progress Note",
+   "Family Medicine",
+   "R. Gentry, MD",
+   "Annual. New 3/6 SEM RUSB. Mild DOE. Echo ordered. Device check done last week. A1c 7.8. Addendum 08/2025: echo not scheduled, pt cancelled twice (\"busy with grandkids\")."
+  ],
+  [
+   "09/22/2026 1100",
+   "Consult",
+   "Cardiology",
+   "L. Haskins, MD",
+   "Exertional chest pressure x 4 months, now with 1 block. Two episodes of near-syncope climbing stairs. Harsh late-peaking SEM, soft S2. Probable severe AS + CAD. Cath 10/03, echo."
+  ],
+  [
+   "10/03/2026 1500",
+   "H&P",
+   "Cardiology",
+   "L. Haskins, MD",
+   "Admitted after cath: LM 30%, LAD 85%, OM1 75%, RCA 90%; severe AS. Rest angina this AM; hs-troponin 18 -> 21 (NSTEMI ruled out). Heparin infusion (ACS protocol), aspirin, clopidogrel 300 mg load then 75 daily (given before cath findings), atorvastatin 80. CT surgery consult. Keep inpatient awaiting OR."
+  ],
+  [
+   "10/04/2026 1630",
+   "Consult",
+   "Cardiothoracic Surgery",
+   "J. Okonkwo, MD",
+   "Three-vessel disease and severe AS, STS predicted mortality 3.1%. Recommend CABG x3 + bioprosthetic AVR. Clopidogrel loaded 10/03 - needs 5-day washout. Next OR availability 10/27. Continue heparin. Carotid duplex, vein mapping, CT chest."
+  ],
+  [
+   "10/08/2026 1000",
+   "Consult",
+   "Vascular Surgery",
+   "B. Moreland, MD",
+   "Asymptomatic left ICA 70-79%. No carotid intervention before cardiac surgery. Higher MAP on bypass, cerebral oximetry recommended. Reassess post-op."
+  ],
+  [
+   "10/11/2026 1100",
+   "H&P",
+   "Cardiothoracic Surgery",
+   "J. Okonkwo, MD",
+   "Exertional chest pressure for 4 months, now with walking one block. Two episodes of near-syncope climbing stairs. NSTEMI ruled out 10/03. Admitted for cath; kept in hospital on heparin awaiting surgery. PMH: HTN, T2DM, HLD, CKD 3a, SSS with dual-chamber pacemaker (2021). Former smoker, 40 pack-years, quit 2015. Exam: Ht 178 cm, Wt 92 kg. BP 142/78, HR 64 paced/sinus. Harsh 4/6 late-peaking SEM RUSB radiating to both carotids; soft S2. Left carotid bruit. Lungs clear. Trace ankle edema. NYHA III, CCS III. STS 3.1%. Plan: CABG x3 + AVR 10/27. Hold clopidogrel 5 days before surgery."
+  ],
+  [
+   "10/12/2026 0900",
+   "Dietitian",
+   "Nutrition",
+   "R. Benoit, RD",
+   "Consistent-carbohydrate cardiac diet. Albumin 3.8. Appetite fair. Reviewed diabetic diet. No intervention."
+  ],
+  [
+   "10/14/2026 1400",
+   "PT Evaluation",
+   "Physical Therapy",
+   "L. Gentry, PT",
+   "Prehab. Independent ambulation 200 ft with mild DOE. Incentive spirometry 1,750 mL. Sternal precautions education provided."
+  ],
+  [
+   "10/18/2026 1000",
+   "Progress Note",
+   "Hospital Medicine",
+   "A. Pennington, MD",
+   "HD 15. Stable on heparin, anti-Xa therapeutic. No angina. Plt 112 (from 218) - \"likely hemodilution/consumptive,\" monitor. Glucose 150-200s on glargine 18 + correction. Empagliflozin: pharmacy to hold 3 days before surgery."
+  ],
+  [
+   "10/20/2026 1530",
+   "Social Work",
+   "Case Management",
+   "D. Pryor, LCSW",
+   "Long LOS awaiting OR. Wife visits daily. Discharge plan: home with home health after surgery. Medicare benefits verified."
+  ],
+  [
+   "10/23/2026 0930",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Ferris, PharmD",
+   "Empagliflozin held from today (> 72 h before 10/27 surgery). Clopidogrel: last day should be 10/21 for 5-day hold per CT surgery H&P; order remains active - message sent to CT surgery PA."
+  ],
+  [
+   "10/25/2026 0815",
+   "Progress Note",
+   "Cardiothoracic Surgery",
+   "M. Pressley, PA-C",
+   "Reviewed pharmacy message. Clopidogrel discontinued today. Surgery 10/27 as planned. Consents signed. T&C 4 units. Continue heparin until OR."
+  ],
+  [
+   "10/26/2026 1145",
+   "Telephone Encounter",
+   "Hematology (phone note)",
+   "G. Whitfield, MD",
+   "Curbside from hospitalist re: platelets. \"Platelets drifting down on heparin. Consider HIT workup if it continues.\" No order placed."
+  ],
+  [
+   "10/26/2026 1600",
+   "Anesthesia Preop Note (prior)",
+   "Cardiac Anesthesia",
+   "N. Bauer, MD (resident)",
+   "Preliminary. Severe AS + 3VD, EF 45%. Plan art line pre-induction, PA catheter, TEE. Pacemaker: device rep to be contacted by CVOR charge RN. Labs AM. Full note to follow."
+  ],
+  [
+   "10/26/2026 2100",
+   "Nursing Note",
+   "Cardiac Step-down",
+   "K. Lam, RN",
+   "Evening meds given. Heparin 1,100 units/h, anti-Xa 0.48. Small bruise L forearm at old IV site. Pt asks if \"the blood thinner drip\" will stop before surgery; told it continues until OR per surgeon order. CHG bath done."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/08/2021 0700",
+   "148/80",
+   52,
+   16,
+   96,
+   36.6,
+   95.0,
+   "0/10",
+   "Pre-pacemaker"
+  ],
+  [
+   "06/18/2025 0930",
+   "146/78",
+   64,
+   16,
+   96,
+   36.6,
+   94.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "09/22/2026 1100",
+   "144/80",
+   62,
+   16,
+   96,
+   36.7,
+   93.0,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "10/03/2026 1015",
+   "152/84",
+   72,
+   18,
+   95,
+   36.8,
+   92.5,
+   "4/10",
+   "Cath lab"
+  ],
+  [
+   "10/06/2026 0800",
+   "138/76",
+   64,
+   16,
+   96,
+   36.6,
+   null,
+   "0/10",
+   "Step-down"
+  ],
+  [
+   "10/11/2026 1100",
+   "142/78",
+   64,
+   16,
+   96,
+   36.7,
+   92.0,
+   "0/10",
+   "Step-down"
+  ],
+  [
+   "10/15/2026 0800",
+   "136/74",
+   62,
+   16,
+   96,
+   36.8,
+   null,
+   "0/10",
+   "Step-down"
+  ],
+  [
+   "10/20/2026 0800",
+   "140/76",
+   64,
+   16,
+   96,
+   36.6,
+   92.2,
+   "0/10",
+   "Step-down"
+  ],
+  [
+   "10/24/2026 0800",
+   "144/78",
+   62,
+   16,
+   96,
+   36.7,
+   null,
+   "0/10",
+   "Step-down"
+  ],
+  [
+   "10/26/2026 2000",
+   "146/80",
+   64,
+   16,
+   96,
+   36.8,
+   92.0,
+   "0/10",
+   "Step-down"
+  ],
+  [
+   "10/27/2026 0545",
+   "148/80",
+   62,
+   16,
+   96,
+   36.8,
+   null,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Heparin infusion, ACS protocol, continue until OR",
+   "10/03/2026",
+   "Active"
+  ],
+  [
+   "Type and crossmatch 4 units PRBC",
+   "10/25/2026",
+   "Resulted"
+  ],
+  [
+   "Cell saver",
+   "10/11/2026",
+   "Active"
+  ],
+  [
+   "Hold clopidogrel 5 days preop",
+   "10/11/2026",
+   "Order text only; drug discontinued 10/25"
+  ],
+  [
+   "Pacemaker interrogation/reprogramming",
+   "",
+   "Not ordered"
+  ],
+  [
+   "PF4 antibody (HIT ELISA)",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Insulin infusion protocol intraop",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "NPO after midnight",
+   "10/26/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "4 units PRBC crossmatched",
+  "notes": "Platelets/FFP available on request",
+  "specimen_expires": "10/28/2026 0400"
+ },
+ "consents": [
+  [
+   "Surgical consent: CABG x3, AVR",
+   "Signed 10/25/2026"
+  ],
+  [
+   "Anesthesia consent (incl. TEE, PA catheter)",
+   "Signed 10/26/2026"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/25/2026"
+  ]
+ ],
+ "directives": "Living will (2018): would accept surgery and short-term life support. HCPOA: wife.",
+ "anesthesia_history": [
+  [
+   "03/2021",
+   "Pacemaker implant",
+   "MAC with propofol and local",
+   "Uneventful",
+   "C-N Heart Center"
+  ],
+  [
+   "2012",
+   "Inguinal hernia repair",
+   "General, ETT, grade I",
+   "No issues",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530 (from step-down)",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0300",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consents",
+    "Surgery, anesthesia, blood signed"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/11)"
+   ],
+   [
+    "Allergy band",
+    "On (sulfa)"
+   ],
+   [
+    "Type and crossmatch",
+    "4 units"
+   ],
+   [
+    "CHG bath",
+    "Done"
+   ],
+   [
+    "Pacemaker rep notified",
+    "Not yet called"
+   ],
+   [
+    "Code status",
+    "Full code"
+   ]
+  ],
+  "nursing_note": "BP 148/80, HR 62, RR 16, SpO2 96% RA, T 36.8, pain 0/10. Solids 10/26 1900. Clears 0300. Right forearm 20 g with heparin infusion running at 1,100 units/h. Left hand 22 g. Consents signed: surgery, anesthesia, blood. Full code. CHG bath done. POC glucose 0530: 168. Pacemaker rep not yet called.",
+  "iv": "20 G R forearm (heparin), 22 G L hand",
+  "glucose": "168 (0530)"
+ },
+ "label": "W. Tate",
+ "bmi": "29.0"
+}
