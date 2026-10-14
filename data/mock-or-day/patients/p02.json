@@ -1,0 +1,1855 @@
+{
+ "id": "p02",
+ "room": "L&D OR 1",
+ "time": "0730",
+ "name": "DELGADO, ROSA M",
+ "mrn": "0093018",
+ "dob": "11/09/1995",
+ "age": "30 y",
+ "sex": "F",
+ "ht_cm": 163,
+ "wt_kg": 101.0,
+ "preferred_name": "Rosa",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "N. Whitfield, FNP, Morristown Community Health Center",
+ "insurance": "TennCare (Amerigroup Community Care)",
+ "emergency_contact": "Luis Delgado (husband) 423-555-0198",
+ "isolation": "",
+ "allergies": [
+  [
+   "Latex",
+   "Hives, worse with each exposure",
+   "Moderate",
+   "2019"
+  ],
+  [
+   "Banana",
+   "Oral itching",
+   "Mild",
+   "2020"
+  ],
+  [
+   "Kiwi",
+   "Oral itching",
+   "Mild",
+   "2020"
+  ]
+ ],
+ "case": {
+  "procedure": "Repeat low transverse cesarean delivery, possible bilateral tubal ligation",
+  "short": "Repeat cesarean, possible BTL",
+  "laterality": "N/A",
+  "service": "Obstetrics",
+  "surgeon": "T. Abernathy, MD",
+  "assistant": "K. Fennell, CNM (first assist)",
+  "indication": "Two prior cesareans (2019, 2022); patient declines trial of labor after cesarean. 38w1d.",
+  "duration_min": 75,
+  "anesthesia_requested": "Spinal or CSE",
+  "position": "Supine with left uterine displacement",
+  "dispo": "Mother-baby unit",
+  "blood": "Type and screen. Third cesarean. Placenta: see ultrasound.",
+  "equipment": "Standard cesarean tray",
+  "implants": "",
+  "surgeon_notes": "Possible tubal ligation (consent signed). Peds to attend delivery.",
+  "add_on": false,
+  "scheduled_on": "09/21/2026"
+ },
+ "problems": [
+  [
+   "Pregnancy, 38 weeks, supervision of high-risk pregnancy",
+   "03/2026",
+   "Active"
+  ],
+  [
+   "Gestational hypertension",
+   "10/19/2026",
+   "Active"
+  ],
+  [
+   "History of 2 cesarean deliveries",
+   "2022",
+   "Active"
+  ],
+  [
+   "Heterozygous factor V Leiden mutation",
+   "02/2020",
+   "Active"
+  ],
+  [
+   "History of DVT, left leg, postpartum",
+   "12/2019",
+   "Resolved"
+  ],
+  [
+   "Obesity, BMI 38",
+   "2019",
+   "Active"
+  ],
+  [
+   "Asthma, mild intermittent",
+   "2008",
+   "Active"
+  ],
+  [
+   "Latex allergy",
+   "2019",
+   "Active"
+  ],
+  [
+   "Rh negative status in pregnancy",
+   "03/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Heterozygous factor V Leiden (hypercoagulable workup 02/2020 after postpartum DVT)",
+   "Left femoral-popliteal DVT 12/2019, 3 weeks after first cesarean; warfarin x 6 months",
+   "Asthma, mild intermittent since childhood; no ED visits since 2015; albuterol rarely",
+   "Obesity",
+   "Latex allergy (hives with gloves/catheter 2019)",
+   "Seasonal allergic rhinitis"
+  ],
+  "psh": [
+   [
+    "11/2019",
+    "Primary low transverse cesarean (arrest of dilation)",
+    "Lakeway Regional Medical Center"
+   ],
+   [
+    "03/2022",
+    "Repeat low transverse cesarean, scheduled",
+    "C-N University Hospital"
+   ],
+   [
+    "2011",
+    "Wisdom teeth extraction (local)",
+    "Oral surgery office"
+   ]
+  ],
+  "family": [
+   "Mother: hypertension, preeclampsia with 2 pregnancies",
+   "Father: type 2 diabetes",
+   "Maternal aunt: \"blood clot in lung\" age 40",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None in pregnancy",
+   "drugs": "Denies",
+   "occupation": "Dental office receptionist (on leave from 10/19)",
+   "living": "Husband and two children (6 y, 4 y), Morristown",
+   "other": "Husband will be present. Plans to breastfeed."
+  },
+  "immunizations": [
+   [
+    "Tdap (pregnancy)",
+    "08/2026"
+   ],
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "COVID-19 (2025-26 formula)",
+    "10/2025"
+   ],
+   [
+    "Rh immune globulin 300 mcg",
+    "07/2026 (28 wk)"
+   ],
+   [
+    "Rubella",
+    "Immune (03/2026)"
+   ],
+   [
+    "Hepatitis B series",
+    "Complete (childhood)"
+   ]
+  ],
+  "ob": "G3 P2002. EDD 11/08/2026 by 8-week ultrasound; 38w1d on 10/27/2026. 2019: primary cesarean at Lakeway Regional for arrest of dilation at 6 cm; labor epidural inadequate, converted to GA (difficult intubation). Postpartum L DVT 12/2019. 2022: scheduled repeat cesarean at C-N under spinal, enoxaparin prophylaxis antepartum and 6 weeks postpartum, uncomplicated. Current pregnancy: prenatal care at C-N OB from 9 weeks. Low-dose aspirin from 12 weeks (preeclampsia risk). Prophylactic enoxaparin per MFM/hematology. Rh negative, RhIG at 28 weeks. 1-hour GTT 118 (normal). Anatomy scan 20 weeks: anterior placenta, lower edge near prior scar, follow-up advised. Gestational hypertension diagnosed 10/19/2026 (BP 142/92), labetalol started. US 10/19/2026: suspicious for placenta accreta spectrum (see imaging/MFM). Desires permanent sterilization."
+ },
+ "home_meds": [
+  [
+   "Enoxaparin 40 mg/0.4 mL syringe",
+   "40 mg SC daily",
+   "L. Ibarra, MD (MFM)",
+   "10/26/2026 2200"
+  ],
+  [
+   "Labetalol 200 mg tab",
+   "200 mg PO BID",
+   "T. Abernathy, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Prenatal vitamin with DHA",
+   "1 tab PO daily",
+   "T. Abernathy, MD",
+   "10/26/2026"
+  ],
+  [
+   "Aspirin 81 mg EC",
+   "81 mg PO daily",
+   "T. Abernathy, MD",
+   "10/26/2026 0800 (stopped at 36 wk? not documented)"
+  ],
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs q4h PRN wheeze",
+   "N. Whitfield, FNP",
+   "06/2026"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "1000 mg PO q6h PRN headache",
+   "OTC",
+   "10/27/2026 0300"
+  ]
+ ],
+ "mar": [
+  [
+   "Sodium citrate/citric acid 30 mL PO",
+   "On call to OR",
+   "Due"
+  ],
+  [
+   "Famotidine 20 mg IV",
+   "On call to OR",
+   "Given 10/27/2026 0620"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min before incision",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's 1,000 mL IV",
+   "125 mL/h",
+   "Infusing 0615"
+  ],
+  [
+   "Labetalol 200 mg PO (home)",
+   "BID",
+   "Taken at home 0500 (patient report)"
+  ],
+  [
+   "Enoxaparin 40 mg SC",
+   "Daily 2200",
+   "Held - NPO/surgery (last home dose 10/26 2200)"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Warfarin (INR goal 2-3)",
+   "12/2019-06/2020",
+   "Completed 6 months for provoked DVT"
+  ],
+  [
+   "Enoxaparin 40 mg SC daily",
+   "06/2021-04/2022",
+   "Completed through 6 weeks postpartum (2022 pregnancy)"
+  ],
+  [
+   "Norethindrone 0.35 mg (progestin-only pill)",
+   "2022-08/2025",
+   "Stopped to conceive"
+  ],
+  [
+   "Ondansetron 4 mg ODT",
+   "04/2026-05/2026",
+   "First trimester nausea resolved"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/26/2026 2000",
+    "comment": "Preadmission testing. Resulted 2141, routed to OB inbasket",
+    "vals": {
+     "WBC": [
+      "10.8",
+      ""
+     ],
+     "Hgb": [
+      "11.2",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      ""
+     ],
+     "Plt": [
+      "88",
+      "L"
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "143",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.90",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "96",
+      "H"
+     ],
+     "ALT": [
+      "110",
+      "H"
+     ],
+     "ALKP": [
+      "188",
+      "H"
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.0",
+      ""
+     ],
+     "Alb": [
+      "3.0",
+      "L"
+     ],
+     "Uric": [
+      "7.2",
+      "H"
+     ],
+     "Fib": [
+      "410",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/19/2026 1120",
+    "comment": "New elevated BP in clinic, preeclampsia labs",
+    "vals": {
+     "WBC": [
+      "9.9",
+      ""
+     ],
+     "Hgb": [
+      "11.5",
+      ""
+     ],
+     "Hct": [
+      "35",
+      ""
+     ],
+     "Plt": [
+      "171",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.70",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "168",
+      "H"
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "6.2",
+      ""
+     ],
+     "Alb": [
+      "3.2",
+      "L"
+     ],
+     "Uric": [
+      "5.4",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 1030",
+    "comment": "36-37 weeks",
+    "vals": {
+     "WBC": [
+      "9.4",
+      ""
+     ],
+     "Hgb": [
+      "11.6",
+      ""
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "186",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/22/2026 1015",
+    "comment": "28 weeks",
+    "vals": {
+     "WBC": [
+      "9.8",
+      ""
+     ],
+     "Hgb": [
+      "11.8",
+      ""
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/08/2026 1000",
+    "comment": "1-hour GTT 118 (see other)",
+    "vals": {
+     "A1c": [
+      "5.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/23/2026 0915",
+    "comment": "Prenatal panel, 9 weeks",
+    "vals": {
+     "WBC": [
+      "9.1",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "242",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "TSH": [
+      "1.65",
+      ""
+     ],
+     "FT4": [
+      "1.16",
+      ""
+     ],
+     "USG": [
+      "1.020",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/12/2024 0840",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "9.6",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "217",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "62",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "121",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "114",
+      ""
+     ],
+     "A1c": [
+      "5.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/16/2022 0600",
+    "comment": "POD 1",
+    "vals": {
+     "WBC": [
+      "12.8",
+      ""
+     ],
+     "Hgb": [
+      "10.2",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "242",
+      ""
+     ],
+     "MCV": [
+      "95",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/15/2022 0530",
+    "comment": "Preop repeat cesarean",
+    "vals": {
+     "WBC": [
+      "8.1",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      ""
+     ],
+     "Plt": [
+      "214",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/04/2021 1020",
+    "comment": "Prenatal intake (2022 pregnancy)",
+    "vals": {
+     "WBC": [
+      "9.3",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "251",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "82",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "TSH": [
+      "1.64",
+      ""
+     ],
+     "FT4": [
+      "1.32",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/18/2020 0910",
+    "comment": "Hematology; off-anticoagulation thrombophilia panel 07/2020",
+    "vals": {
+     "WBC": [
+      "9.0",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "242",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "12/11/2019 0500",
+    "comment": "Warfarin initiation",
+    "vals": {
+     "PT": [
+      "19.4",
+      "H"
+     ],
+     "INR": [
+      "1.6",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "12/09/2019 1840",
+    "comment": "ED: left leg swelling",
+    "vals": {
+     "WBC": [
+      "8.4",
+      ""
+     ],
+     "Hgb": [
+      "11.1",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      ""
+     ],
+     "Plt": [
+      "352",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "31",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/18/2019 0600",
+    "comment": "POD 1 cesarean (outside, transcribed)",
+    "vals": {
+     "WBC": [
+      "11.9",
+      ""
+     ],
+     "Hgb": [
+      "9.6",
+      "L"
+     ],
+     "Hct": [
+      "29",
+      "L"
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/02/2019",
+    "comment": "Prenatal, Lakeway (outside, transcribed)",
+    "vals": {
+     "WBC": [
+      "8.8",
+      ""
+     ],
+     "Hgb": [
+      "11.9",
+      ""
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "243",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Uric",
+    "name": "Uric acid",
+    "unit": "mg/dL",
+    "ref": "2.5-6.0"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-13.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "11.5-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "34-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-450"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "300-600"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "07/14/2020",
+    "Thrombophilia panel",
+    "Factor V Leiden (F5 c.1601G>A): HETEROZYGOUS. Prothrombin G20210A: not detected. Antithrombin, protein C, protein S activity normal. Lupus anticoagulant, anticardiolipin, beta-2 GP1: negative.",
+    "A"
+   ],
+   [
+    "03/23/2026",
+    "Prenatal panel",
+    "Blood type A negative; antibody screen negative; rubella immune; HBsAg negative; HIV negative; RPR nonreactive; HCV Ab negative; GC/CT NAAT negative",
+    ""
+   ],
+   [
+    "06/08/2026",
+    "Glucose challenge, 1-hour (50 g)",
+    "118 mg/dL",
+    ""
+   ],
+   [
+    "07/22/2026",
+    "Antibody screen (pre-RhIG)",
+    "Negative",
+    ""
+   ],
+   [
+    "09/02/2026",
+    "Group B strep, rectovaginal culture",
+    "Negative",
+    ""
+   ],
+   [
+    "10/19/2026",
+    "Urine protein/creatinine ratio",
+    "0.22 (ref < 0.3)",
+    ""
+   ],
+   [
+    "10/26/2026 2000",
+    "Urine protein/creatinine ratio",
+    "0.6 (ref < 0.3)",
+    "H"
+   ],
+   [
+    "10/26/2026 2000",
+    "LDH",
+    "312 U/L (ref 140-280)",
+    "H"
+   ],
+   [
+    "10/27/2026 0545",
+    "CBC (repeat, ordered by L&D RN per protocol)",
+    "Collected 0545, in process",
+    ""
+   ],
+   [
+    "10/26/2026 2000",
+    "Type and screen",
+    "A negative; antibody screen negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "12/09/2019",
+   "US Venous Duplex Left Lower Extremity",
+   "Findings: Noncompressible left common femoral and popliteal veins with echogenic intraluminal thrombus. Absent augmentation. Right not examined. Impression: Acute occlusive DVT left common femoral through popliteal vein.",
+   "G. Holt, MD"
+  ],
+  [
+   "03/24/2026",
+   "US OB < 14 weeks (dating)",
+   "Single live intrauterine pregnancy, CRL 22 mm = 8w6d. FHR 168. EDD by US 11/08/2026, consistent with LMP. Gestational sac implanted on anterior lower uterine wall, near prior cesarean scar region; no cesarean scar pregnancy features. Follow-up placental location at anatomy scan.",
+   "R. Kaminski, MD"
+  ],
+  [
+   "06/16/2026",
+   "US OB detailed anatomy (20 weeks)",
+   "Single live fetus, normal anatomy survey. EFW 342 g (48th %ile). Placenta anterior, lower edge 1.8 cm from internal os, overlying lower uterine segment in the region of the prior hysterotomy. Myometrium thin anteriorly. Recommend follow-up ultrasound at 28-32 weeks for placental location and evaluation for accreta spectrum given 2 prior cesareans.",
+   "R. Kaminski, MD"
+  ],
+  [
+   "10/19/2026",
+   "US OB follow-up with Doppler (MFM)",
+   "Single live fetus, cephalic. EFW 3,100 g (44th %ile). AFI 12 cm. Placenta anterior, overlying the prior hysterotomy scar; lower edge now 3.2 cm from os. Loss of the retroplacental clear zone over a 4 cm segment, two placental lacunae, and increased subplacental vascularity on color Doppler. Bladder wall interface appears intact. Impression: Findings suspicious for placenta accreta spectrum. MRI recommended for further characterization.",
+   "L. Ibarra, MD (MFM)"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/26/2026",
+   "ECG 12-lead",
+   "Sinus tachycardia, rate 102. Normal axis. Normal intervals. QTc 438. No ST-T changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 102,
+    "pr": 150,
+    "qrs": 84,
+    "qtc": 438,
+    "axis": 55
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "11/16/2019",
+   "Inpatient (L&D)",
+   "Lakeway Regional Medical Center",
+   "Labor; primary cesarean (arrest of dilation)",
+   "Discharged POD 3"
+  ],
+  [
+   "12/09/2019",
+   "ED visit -> observation",
+   "C-N University Hospital",
+   "Left leg DVT, 3 wk postpartum",
+   "Enoxaparin bridge to warfarin, discharged 12/11"
+  ],
+  [
+   "02/18/2020",
+   "Specialty clinic",
+   "C-N Hematology",
+   "Postpartum DVT",
+   "Thrombophilia panel off anticoagulation"
+  ],
+  [
+   "03/15/2022",
+   "Inpatient (L&D)",
+   "C-N University Hospital",
+   "Scheduled repeat cesarean",
+   "Discharged POD 2"
+  ],
+  [
+   "05/03/2023",
+   "Urgent care",
+   "FastCare Morristown",
+   "Right ankle sprain",
+   "ACE wrap, ibuprofen"
+  ],
+  [
+   "09/12/2024",
+   "Annual exam",
+   "Morristown Community Health Center",
+   "Routine",
+   "Labs normal"
+  ],
+  [
+   "03/23/2026",
+   "Prenatal intake",
+   "C-N OB/GYN",
+   "New OB, 9 weeks",
+   "High-risk: FVL/DVT, 2 prior CS"
+  ],
+  [
+   "06/16/2026",
+   "Specialty clinic",
+   "C-N Maternal-Fetal Medicine",
+   "Anatomy scan",
+   "Follow-up placental imaging"
+  ],
+  [
+   "10/19/2026",
+   "Prenatal visit",
+   "C-N OB/GYN",
+   "BP 142/92",
+   "Gestational HTN; labetalol; labs"
+  ],
+  [
+   "10/20/2026",
+   "Specialty clinic",
+   "C-N Maternal-Fetal Medicine",
+   "GHTN, suspicious placenta",
+   "Recommendations to OB"
+  ],
+  [
+   "10/26/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Preop labs/ECG",
+   "Labs resulted after hours"
+  ]
+ ],
+ "notes": [
+  [
+   "11/18/2019 0900",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "Lakeway Regional Medical Center (scanned)",
+   "Anesthesia record, urgent primary cesarean 11/16/2019. Labor epidural L3-4 in place 6 h, bilateral T10 block for labor. Extended with lidocaine 2% with epinephrine and bicarbonate 20 mL: patchy, sensation at T8 on left, pain with skin incision test. Converted to GA. RSI propofol/succinylcholine. DL Mac 3: grade III view, failed first attempt; second attempt with bougie, 6.5 ETT. SpO2 nadir 89%. Uneventful remainder. Note in record: \"Difficult airway letter given to patient.\""
+  ],
+  [
+   "12/09/2019 2210",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "P. Lancaster, MD",
+   "24 yo F 3 wk post cesarean with 2 days L calf and thigh swelling and pain. No dyspnea, no chest pain. HR 92, SpO2 98%. L thigh circumference +3 cm. Duplex: occlusive femoral-popliteal DVT. Enoxaparin 1 mg/kg q12h, warfarin start. Breastfeeding: both compatible. Obs for teaching. Hematology referral."
+  ],
+  [
+   "02/18/2020 1030",
+   "Consult",
+   "Hematology",
+   "S. Okonjo, MD",
+   "Provoked postpartum DVT. Family hx of maternal aunt with PE. Complete 6 months warfarin; thrombophilia panel 2 weeks after stopping. If FVL or other thrombophilia: antepartum and 6-week postpartum prophylactic LMWH in future pregnancies. Addendum 07/2020: FVL heterozygous confirmed. Recommendation stands."
+  ],
+  [
+   "03/15/2022 0610",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology",
+   "C. Rowan, CRNA",
+   "Scheduled repeat CS. Prior difficult intubation 2019 (grade III, bougie). Enoxaparin last 03/14 0600 (24 h), plts 214. Plan spinal. Latex allergy - latex-free room. Airway: MP II, TMD 3 FB. Discussed GA backup with VL. Spinal L3-4, 25 g Whitacre, bupivacaine 0.75% hyperbaric 12 mg, fentanyl 15 mcg, morphine 150 mcg. T4 block. Uneventful. Pruritus treated with nalbuphine."
+  ],
+  [
+   "03/17/2022 1015",
+   "Discharge Summary",
+   "Obstetrics",
+   "M. Greer, MD",
+   "Scheduled repeat LTCS 03/15/2022, female infant 3,420 g, Apgars 8/9. EBL 850 mL. Spinal anesthesia uncomplicated except pruritus. Enoxaparin restarted 12 h after spinal, continue 6 weeks. Discharged POD 2. Contraception: progestin-only pill."
+  ],
+  [
+   "05/03/2023 1715",
+   "Progress Note",
+   "Urgent Care",
+   "J. Pruett, PA-C",
+   "Inverted R ankle stepping off curb. Ottawa negative. Grade 1 sprain. RICE, ibuprofen, ACE. Latex allergy noted - nitrile used."
+  ],
+  [
+   "09/12/2024 0840",
+   "Progress Note",
+   "Family Medicine",
+   "N. Whitfield, FNP",
+   "Annual exam. BMI 37. BP 124/78. Asthma well controlled, albuterol < 1x/month. Discussed weight, nutrition. Labs: A1c 5.5, LDL 121. Pap NILM 2023. Desires pregnancy in next year; preconception counseling; advised to notify OB early given FVL."
+  ],
+  [
+   "03/23/2026 0915",
+   "H&P",
+   "Obstetrics",
+   "K. Fennell, CNM",
+   "New OB intake at 9 weeks. G3P2002, 2 prior CS. FVL heterozygous with prior DVT - MFM consult, start enoxaparin 40 mg daily now. Aspirin 81 mg from 12 weeks (risk factors: obesity, mother with preeclampsia). BP 118/74. BMI 35 (pre-pregnancy 34). Latex allergy. Desires repeat CS and BTL; federal sterilization consent to be signed at least 30 days before delivery."
+  ],
+  [
+   "03/24/2026 1340",
+   "Pharmacy Note",
+   "Pharmacy",
+   "D. Kwan, PharmD",
+   "Enoxaparin teaching completed, patient self-injected return demo. Dose 40 mg SC daily at bedtime. Discussed holding before scheduled delivery per OB instructions: OB to provide specific instructions near term."
+  ],
+  [
+   "04/28/2026 1110",
+   "Dietitian",
+   "Nutrition",
+   "R. Benoit, RD",
+   "Referred for obesity in pregnancy. Pre-pregnancy BMI 34. IOM goal gain 11-20 lb. Diet recall high in sweet tea and fast food. Goals set. Follow up PRN."
+  ],
+  [
+   "06/16/2026 1400",
+   "Consult",
+   "Maternal-Fetal Medicine",
+   "L. Ibarra, MD",
+   "Anatomy normal. Placenta anterior, low, overlying LUS near prior scar. With 2 prior CS, accreta risk is elevated (~11% if previa). Follow-up US 28-32 weeks; sooner if bleeding. Continue enoxaparin through delivery and 6 weeks postpartum. Continue aspirin to 36 weeks."
+  ],
+  [
+   "08/24/2026 1000",
+   "Progress Note",
+   "Obstetrics",
+   "K. Fennell, CNM",
+   "30 weeks. BP 124/76. Fundal height 30. FHR 148. Tdap today. Federal sterilization consent signed today (> 30 days before planned delivery). Follow-up US with MFM scheduled (was due 28-32 wk; patient missed appt 08/10 - rescheduled)."
+  ],
+  [
+   "09/21/2026 1530",
+   "Progress Note",
+   "Obstetrics",
+   "T. Abernathy, MD",
+   "34 weeks. BP 132/84. Mild edema. No HA. Repeat CS + BTL scheduled 10/27/2026 at 38w1d (date shared with patient). Stop aspirin at 36 weeks. Enoxaparin: last dose evening before surgery (per patient education sheet)."
+  ],
+  [
+   "10/19/2026 1130",
+   "Progress Note",
+   "Obstetrics",
+   "T. Abernathy, MD",
+   "37w0d. BP 142/92, repeat 140/90. No HA, no visual changes, no RUQ pain. 1+ edema. Reflexes 2+. Preeclampsia labs: Plt 171, AST/ALT normal, Cr 0.7, UPCR 0.22. Dx gestational hypertension. Start labetalol 200 mg BID. Same-day MFM US. Keep scheduled CS 10/27 (38 wk). BP checks at home, call for > 160/110 or symptoms."
+  ],
+  [
+   "10/20/2026 1650",
+   "Consult",
+   "Maternal-Fetal Medicine",
+   "L. Ibarra, MD",
+   "Gestational hypertension, on labetalol. FVL with prior DVT: continue prophylactic enoxaparin through delivery and 6 weeks postpartum. US 10/19: anterior placenta over prior scar with loss of clear zone, lacunae, and increased vascularity: concerning for placenta accreta spectrum. Recommend: MRI if it will change management; delivery at a center with blood bank support and accreta-capable team; two large-bore IVs; crossmatch; anesthesia notification before delivery; consider GYN-onc availability. cc: T. Abernathy, MD."
+  ],
+  [
+   "10/22/2026 0930",
+   "Telephone Encounter",
+   "Obstetrics",
+   "B. Hollins, RN",
+   "Pt calls: home BP 138/88, 144/90. No HA. Fetal movement good. Reviewed precautions. MRI order: insurance prior auth pending (submitted 10/21)."
+  ],
+  [
+   "10/23/2026 1420",
+   "Telephone Encounter",
+   "Prior Authorization",
+   "S. Duff (PA coordinator)",
+   "MRI pelvis without contrast (placenta): TennCare/Amerigroup requests peer-to-peer. Message sent to Dr. Abernathy. No response as of 10/26."
+  ],
+  [
+   "10/26/2026 1530",
+   "H&P",
+   "Obstetrics",
+   "T. Abernathy, MD",
+   "Obstetric H&P for repeat cesarean 10/27. G3P2. CS 2019 (arrest of dilation) and 2022 (repeat). EDD 11/08/2026. Gestational hypertension dx 10/19, BP 142/92, labetalol 200 mg BID. Headache since yesterday, \"seeing spots\" this morning. PMH: FVL heterozygous; DVT postpartum. Asthma, mild, no recent use. BMI 38 at term. Exam: BP 158/104, HR 96. 3+ patellar reflexes. 2+ pitting edema. Lungs clear. Mallampati III (was II at 12 weeks). Neck circumference 41 cm. Large breasts. A/P: repeat cesarean and BTL tomorrow. Gestational hypertension, monitor. Preadmission labs today."
+  ],
+  [
+   "10/26/2026 2015",
+   "Nursing Note",
+   "Preadmission Testing",
+   "A. Corbin, RN",
+   "PAT visit. Labs, T&S, ECG done. BP 156/100 (L arm, large cuff). Pt reports headache, took acetaminophen. Ate dinner at 2000. Instructed: no solids from now. Clears until 0500. Take labetalol with sip 0500. Arrive 0530. Pt asked about her enoxaparin tonight: per OB sheet, take tonight 2200 as usual. Allergy: latex - flagged in OR scheduling? Request sent."
+  ],
+  [
+   "10/27/2026 0605",
+   "Nursing Note",
+   "Labor and Delivery",
+   "J. Ochoa, RN",
+   "Arrived 0530 for scheduled RCS. FHR 140s, moderate variability, accels, Category I. No contractions. BP 162/106, repeat 158/108. HR 98. Headache 6/10, not relieved by acetaminophen at 0300. Visual spots. RUQ discomfort. Dr. Abernathy notified of BP at 0600, \"will see pt in OR holding.\" Repeat CBC sent per L&D protocol."
+  ]
+ ],
+ "vitals": [
+  [
+   "12/09/2019 1840",
+   "128/76",
+   92,
+   18,
+   98,
+   37.0,
+   92.0,
+   "6/10",
+   "ED"
+  ],
+  [
+   "03/15/2022 0540",
+   "118/72",
+   88,
+   16,
+   99,
+   36.8,
+   97.5,
+   "0/10",
+   "L&D preop"
+  ],
+  [
+   "09/12/2024 0840",
+   "124/78",
+   76,
+   14,
+   99,
+   36.7,
+   90.3,
+   "0/10",
+   "Family medicine"
+  ],
+  [
+   "03/23/2026 0915",
+   "118/74",
+   84,
+   16,
+   99,
+   36.8,
+   91.6,
+   "0/10",
+   "OB clinic"
+  ],
+  [
+   "06/16/2026 1400",
+   "120/72",
+   90,
+   16,
+   99,
+   36.9,
+   95.2,
+   "0/10",
+   "MFM clinic"
+  ],
+  [
+   "08/24/2026 1000",
+   "124/76",
+   92,
+   16,
+   99,
+   36.8,
+   98.4,
+   "0/10",
+   "OB clinic"
+  ],
+  [
+   "09/21/2026 1530",
+   "132/84",
+   94,
+   16,
+   98,
+   36.7,
+   99.8,
+   "0/10",
+   "OB clinic"
+  ],
+  [
+   "10/19/2026 1130",
+   "142/92",
+   96,
+   16,
+   98,
+   36.8,
+   100.6,
+   "0/10",
+   "OB clinic"
+  ],
+  [
+   "10/20/2026 1650",
+   "138/90",
+   94,
+   16,
+   99,
+   36.8,
+   null,
+   "0/10",
+   "MFM clinic"
+  ],
+  [
+   "10/26/2026 1530",
+   "158/104",
+   96,
+   18,
+   98,
+   36.9,
+   101.0,
+   "3/10 HA",
+   "OB clinic"
+  ],
+  [
+   "10/26/2026 2015",
+   "156/100",
+   102,
+   18,
+   98,
+   36.9,
+   null,
+   "4/10 HA",
+   "Preadmission testing"
+  ],
+  [
+   "10/27/2026 0600",
+   "162/106",
+   98,
+   18,
+   98,
+   36.9,
+   101.0,
+   "6/10 HA",
+   "L&D preop"
+  ],
+  [
+   "10/27/2026 0610",
+   "158/108",
+   98,
+   18,
+   98,
+   36.9,
+   null,
+   "6/10 HA",
+   "L&D preop, repeat"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/26/2026 2000",
+   "Resulted"
+  ],
+  [
+   "CBC",
+   "10/27/2026 0545",
+   "Collected, in process"
+  ],
+  [
+   "Continuous fetal monitoring preop",
+   "10/27/2026 0530",
+   "Active"
+  ],
+  [
+   "Sodium citrate 30 mL PO on call",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV preop",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "SCDs bilateral lower extremities",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Foley catheter in OR",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Latex precautions",
+   "03/23/2026",
+   "Active (problem list)"
+  ],
+  [
+   "MRI pelvis without contrast (placenta)",
+   "10/21/2026",
+   "Pending prior authorization"
+  ],
+  [
+   "Postpartum enoxaparin 40 mg SC daily, start POD 1",
+   "10/26/2026",
+   "Signed, held"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A negative",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched. Electronic crossmatch eligible.",
+  "notes": "RhIG given 07/2026. Will need postpartum Rh workup if infant Rh positive.",
+  "specimen_expires": "10/29/2026 2359"
+ },
+ "consents": [
+  [
+   "Surgical consent: repeat cesarean delivery and bilateral tubal ligation",
+   "Signed by patient 10/26/2026"
+  ],
+  [
+   "Federal sterilization consent (Medicaid)",
+   "Signed 08/24/2026"
+  ],
+  [
+   "Blood product consent",
+   "Signed 10/26/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "11/2019",
+   "Primary cesarean (urgent)",
+   "Labor epidural extended, inadequate; converted to GA, RSI, DL grade III, 2 attempts, bougie, 6.5 ETT",
+   "Difficult intubation; SpO2 nadir 89%",
+   "Lakeway Regional Medical Center"
+  ],
+  [
+   "03/2022",
+   "Repeat cesarean (scheduled)",
+   "Spinal: bupivacaine 12 mg + fentanyl 15 mcg + morphine 150 mcg",
+   "Pruritus; otherwise uneventful",
+   "C-N University Hospital"
+  ],
+  [
+   "2011",
+   "Wisdom teeth",
+   "Local only",
+   "None",
+   "Oral surgery office"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0500 (water with labetalol)",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Surgical consent",
+    "Signed (incl. tubal)"
+   ],
+   [
+    "Anesthesia consent",
+    "Pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/26)"
+   ],
+   [
+    "Pregnancy",
+    "Intrauterine, 38w1d"
+   ],
+   [
+    "Allergy band",
+    "Not applied"
+   ],
+   [
+    "Type and screen",
+    "Resulted"
+   ],
+   [
+    "SCDs",
+    "On"
+   ],
+   [
+    "Fetal heart tones",
+    "Category I"
+   ]
+  ],
+  "nursing_note": "30 yo G3P2 at 38w1d for repeat CS + BTL. BP 162/106, repeat 158/108. HR 98. SpO2 98% RA. T 36.9. Headache 6/10, not relieved by acetaminophen. Visual spots. RUQ discomfort. Reflexes brisk. Solids 10/26 2000. Clears 0500. Enoxaparin last night 2200 per pt. Consent signed, including tubal. Room set up with standard supplies. 18 G right hand. Husband at bedside.",
+  "iv": "18 G right hand",
+  "glucose": ""
+ },
+ "label": "R. Delgado",
+ "bmi": "38.0"
+}

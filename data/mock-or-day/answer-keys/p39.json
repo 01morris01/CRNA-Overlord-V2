@@ -1,0 +1,177 @@
+{
+ "id": "p39",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Open umbilical hernia repair in Child B (MELD 16) alcohol associated cirrhosis. The chart says abstinent since 2024, but PEth 286 in August and an ethanol level of 180 in September show active drinking; he has a tremor today, CIWA and thiamine are not ordered, and coagulopathy (INR 1.7, fibrinogen 142, platelets 66) has no product plan.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "Decompensated cirrhosis with ascites, encephalopathy, varices, hyponatremia, coagulopathy."
+ },
+ "decision": {
+  "recommendation": "proceed (urgent) with corrections",
+  "rationale": "Rupture and strangulation risk outweigh deferral. Order CIWA monitoring and thiamine before dextrose, have plasma and platelets available or use viscoelastic testing, and tell the team about recent alcohol use."
+ },
+ "redFlags": [
+  {
+   "id": "etoh",
+   "severity": "critical",
+   "finding": "Active alcohol use despite reported abstinence",
+   "evidence": "PEth 286 (08/2026); serum ethanol 180 on 09/12 ED fall; sister reports drinking since summer; tremor today.",
+   "implication": "Withdrawal (possibly delirium tremens) in the perioperative period; altered drug requirements.",
+   "action": "CIWA protocol, thiamine IV before glucose, plan for withdrawal treatment mindful of HE (dexmedetomidine or careful benzodiazepine).",
+   "keywords": [
+    "alcohol",
+    "withdrawal",
+    "ciwa",
+    "peth",
+    "thiamine",
+    "delirium",
+    "etoh"
+   ]
+  },
+  {
+   "id": "coag",
+   "severity": "critical",
+   "finding": "Coagulopathy and thrombocytopenia without products ready",
+   "evidence": "INR 1.7, aPTT 38, fibrinogen 142, platelets 66; FFP and platelets not prepared.",
+   "implication": "Bleeding, though INR overstates risk in cirrhosis.",
+   "action": "TEG or ROTEM guided therapy; cryoprecipitate for low fibrinogen; platelets available; avoid volume overload from plasma.",
+   "keywords": [
+    "coagulopathy",
+    "inr",
+    "fibrinogen",
+    "platelet",
+    "teg",
+    "rotem",
+    "viscoelastic",
+    "cryo",
+    "ffp"
+   ]
+  },
+  {
+   "id": "aspiration",
+   "severity": "major",
+   "finding": "Tense reaccumulating ascites",
+   "evidence": "Ascites returning after 5 L LVP; distended abdomen.",
+   "implication": "Aspiration risk, reduced FRC, hypotension when abdomen opened.",
+   "action": "RSI, albumin for drained ascites, careful fluids.",
+   "keywords": [
+    "rsi",
+    "ascites",
+    "albumin",
+    "aspiration"
+   ]
+  },
+  {
+   "id": "he",
+   "severity": "major",
+   "finding": "Hepatic encephalopathy history and inconsistent lactulose",
+   "evidence": "Ammonia 64; slow responses; lactulose 'when I remember'.",
+   "implication": "Postop encephalopathy, sensitivity to sedatives.",
+   "action": "Minimize benzodiazepines and opioids, continue lactulose and rifaximin.",
+   "keywords": [
+    "encephalopathy",
+    "lactulose",
+    "rifaximin",
+    "benzodiazepine",
+    "ammonia"
+   ]
+  },
+  {
+   "id": "na",
+   "severity": "major",
+   "finding": "Hyponatremia",
+   "evidence": "Na 128; hypervolemic.",
+   "implication": "Osmotic demyelination with rapid correction.",
+   "action": "Avoid large saline loads and rapid correction.",
+   "keywords": [
+    "hyponatremia",
+    "sodium",
+    "osmotic"
+   ]
+  },
+  {
+   "id": "qt",
+   "severity": "minor",
+   "finding": "Prolonged QTc",
+   "evidence": "QTc 481.",
+   "implication": "Torsades with QT prolonging antiemetics.",
+   "action": "Check Mg (1.6) and replete, choose antiemetics carefully.",
+   "keywords": [
+    "qtc",
+    "magnesium",
+    "torsades"
+   ]
+  },
+  {
+   "id": "drugs",
+   "severity": "minor",
+   "finding": "Altered drug handling",
+   "evidence": "Albumin 2.6, cirrhosis.",
+   "implication": "Prolonged action of hepatically cleared drugs.",
+   "action": "Cisatracurium or rocuronium with sugammadex, short acting agents.",
+   "keywords": [
+    "cisatracurium",
+    "sugammadex",
+    "hepatic"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "RSI",
+   "keywords": [
+    "rsi",
+    "rapid sequence"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line to consider; glucose checks",
+   "keywords": [
+    "arterial line",
+    "glucose"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "blood",
+   "item": "2 units crossmatched; products by viscoelastic testing",
+   "keywords": [
+    "crossmatch",
+    "teg",
+    "rotem"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Step down with hepatology and CIWA",
+   "keywords": [
+    "step down",
+    "hepatology",
+    "ciwa"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Smoker, aspiration risk"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Encephalopathy sensitivity to opioids"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin and blood products"
+  }
+ ]
+}

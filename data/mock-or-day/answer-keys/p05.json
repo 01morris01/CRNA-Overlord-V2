@@ -1,0 +1,209 @@
+{
+ "id": "p05",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "36 y with a tibial shaft fracture now showing compartment syndrome, escalating alcohol withdrawal toward DTs, an enlarging pneumothorax with no chest tube, a breakfast at 0730, QTc 498 with low K and Mg, and cirrhosis.",
+ "asa": {
+  "suggested": "3E",
+  "rationale": "Alcohol use disorder in active withdrawal, cirrhosis with thrombocytopenia and coagulopathy, chest trauma; emergency because of compartment syndrome."
+ },
+ "decision": {
+  "recommendation": "proceed urgently with modifications",
+  "rationale": "Pain with passive stretch and a tense calf mean probable compartment syndrome, which is limb threatening and should not wait for an empty stomach. Notify ortho now (fasciotomy likely), place a chest tube before positive pressure, RSI, replete K and Mg, and treat withdrawal."
+ },
+ "redFlags": [
+  {
+   "id": "compartment",
+   "severity": "critical",
+   "finding": "Probable compartment syndrome",
+   "evidence": "Preop: L calf tense and firm, pain with passive toe stretch, escalating opioid needs; compartment pressures not ordered; checks reduced to q4h.",
+   "implication": "Limb threatening emergency; fasciotomy likely.",
+   "action": "Notify ortho immediately, measure compartment pressures, proceed emergently.",
+   "keywords": [
+    "compartment",
+    "fasciotomy",
+    "passive stretch"
+   ]
+  },
+  {
+   "id": "pneumothorax",
+   "severity": "critical",
+   "finding": "Enlarging pneumothorax without a chest tube before positive pressure ventilation",
+   "evidence": "CXR 10/27: PTX increased to about 15%; trauma H&P: chest tube if enlarging or PPV.",
+   "implication": "PPV can convert it to tension pneumothorax.",
+   "action": "Chest tube before induction or at minimum immediately available; avoid nitrous oxide; watch peak pressures.",
+   "keywords": [
+    "pneumothorax",
+    "chest tube",
+    "tension",
+    "nitrous",
+    "n2o"
+   ]
+  },
+  {
+   "id": "withdrawal",
+   "severity": "critical",
+   "finding": "Escalating alcohol withdrawal, possible early delirium tremens",
+   "evidence": "CIWA 4 to 14 overnight, visual hallucinations, T 38.2, HR 126, BP 172/104, diaphoresis.",
+   "implication": "Hemodynamic instability, seizures, higher anesthetic requirements, delirium.",
+   "action": "Treat withdrawal (benzodiazepines, consider phenobarbital per pharmacy), thiamine before dextrose, ICU level care postop.",
+   "keywords": [
+    "withdrawal",
+    "delirium tremens",
+    "dts",
+    "ciwa",
+    "thiamine",
+    "phenobarbital",
+    "lorazepam"
+   ]
+  },
+  {
+   "id": "full_stomach",
+   "severity": "major",
+   "finding": "Not NPO",
+   "evidence": "Ate breakfast tray at 0730 (NPO order never entered).",
+   "implication": "Aspiration risk.",
+   "action": "RSI (rocuronium 1.2 mg/kg rather than succinylcholine given CK 3100 and probable compartment syndrome).",
+   "keywords": [
+    "rsi",
+    "rapid sequence",
+    "full stomach",
+    "breakfast",
+    "rocuronium"
+   ]
+  },
+  {
+   "id": "electrolytes_qt",
+   "severity": "major",
+   "finding": "Hypokalemia, hypomagnesemia, hypophosphatemia with QTc 498 and U waves",
+   "evidence": "K 3.0, Mg 1.3, Phos 1.9; ECG 0600 QTc 498 with U waves; oral KCl not given.",
+   "implication": "Torsades risk; avoid adding QT prolonging drugs.",
+   "action": "IV magnesium and potassium replacement, recheck, avoid or limit ondansetron and other QT prolonging drugs.",
+   "keywords": [
+    "potassium",
+    "magnesium",
+    "qtc",
+    "qt",
+    "torsades",
+    "hypokalemia"
+   ]
+  },
+  {
+   "id": "liver",
+   "severity": "major",
+   "finding": "Cirrhosis with thrombocytopenia and coagulopathy",
+   "evidence": "CT nodular liver, splenomegaly; HCV untreated; Plt 98, INR 1.4, albumin 2.9, bilirubin 1.6; enoxaparin 0600.",
+   "implication": "Bleeding, altered drug handling, encephalopathy risk.",
+   "action": "Type and crossmatch, consider blood availability, titrate drugs.",
+   "keywords": [
+    "cirrhosis",
+    "hepatitis",
+    "platelet",
+    "inr",
+    "coagulopathy",
+    "liver"
+   ]
+  },
+  {
+   "id": "meth",
+   "severity": "major",
+   "finding": "Methamphetamine use",
+   "evidence": "UDS and confirmation positive for methamphetamine.",
+   "implication": "Catecholamine depletion or surges; indirect pressors are unreliable.",
+   "action": "Direct acting pressors; anticipate lability.",
+   "keywords": [
+    "methamphetamine",
+    "meth",
+    "amphetamine",
+    "stimulant"
+   ]
+  },
+  {
+   "id": "consent",
+   "severity": "major",
+   "finding": "Consent obtained while intoxicated; current capacity doubtful",
+   "evidence": "Surgical consent signed 10/25 with EtOH 212; now hallucinating, oriented x2.",
+   "implication": "Consent validity.",
+   "action": "Emergency exception documentation or surrogate (mother) per policy.",
+   "keywords": [
+    "consent",
+    "capacity",
+    "surrogate",
+    "mother"
+   ]
+  },
+  {
+   "id": "opioid_tolerance",
+   "severity": "minor",
+   "finding": "High opioid requirement, no block per surgeon",
+   "evidence": "Hydromorphone q2h, oxycodone; surgeon declines regional to monitor compartments.",
+   "implication": "Hard pain control.",
+   "action": "Ketamine and multimodal analgesia; acute pain service.",
+   "keywords": [
+    "ketamine",
+    "multimodal",
+    "acute pain"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "RSI with rocuronium 1.2 mg/kg, preoxygenation",
+   "keywords": [
+    "rsi",
+    "rocuronium"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line given lability; watch airway pressures for tension PTX",
+   "keywords": [
+    "arterial line",
+    "peak pressure"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "No nitrous oxide; titrate to higher requirements",
+   "keywords": [
+    "no nitrous",
+    "avoid n2o"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "IV K and Mg replacement; thiamine before dextrose",
+   "keywords": [
+    "magnesium",
+    "potassium",
+    "thiamine"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "ICU or step down for withdrawal and chest monitoring",
+   "keywords": [
+    "icu",
+    "step down"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Heavy smoker"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin exposure"
+  }
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "id": "p43",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Elective carpal tunnel release under a Bier block in an HbSS patient three weeks after a vaso-occlusive crisis. Hematology advised against IV regional and tourniquet, she is alloimmunized (anti-E, anti-K) with no compatible blood for 24 to 48 h, there is no IV yet, and preop hydration has not started.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "HbSS with frequent crises, two episodes of acute chest syndrome, alloimmunization, chronic opioid therapy."
+ },
+ "decision": {
+  "recommendation": "change the technique or delay",
+  "rationale": "Elective case, hematology suggests waiting 4 to 6 weeks after a crisis, and no compatible blood exists today. If done today: no Bier block; use a brachial plexus block or wide awake local anesthetic without tourniquet, with hydration, warming, oxygen. Otherwise delay and have blood bank prepare phenotype matched units."
+ },
+ "redFlags": [
+  {
+   "id": "tourniquet",
+   "severity": "critical",
+   "finding": "IV regional anesthesia with tourniquet in HbSS",
+   "evidence": "Hematology 10/21: avoid tourniquet or IVRA if possible; surgeon kept Bier plan.",
+   "implication": "Venous stasis, acidosis and hypoxemia promote sickling, crisis, acute chest.",
+   "action": "Brachial plexus block or WALANT without tourniquet; if tourniquet unavoidable, short time, full exsanguination, oxygen, normothermia.",
+   "keywords": [
+    "bier",
+    "ivra",
+    "tourniquet",
+    "sickl",
+    "walant",
+    "brachial plexus",
+    "axillary",
+    "supraclavicular"
+   ]
+  },
+  {
+   "id": "blood",
+   "severity": "critical",
+   "finding": "No compatible blood available",
+   "evidence": "Antibody screen positive, anti-E and anti-K; phenotype matched units need 24 to 48 h; blood bank not notified ahead; blood consent not signed.",
+   "implication": "No transfusion option if crisis or conversion to GA.",
+   "action": "Notify blood bank now; reconsider timing.",
+   "keywords": [
+    "alloimmun",
+    "anti-e",
+    "anti-k",
+    "phenotype",
+    "antibody",
+    "blood bank",
+    "crossmatch"
+   ]
+  },
+  {
+   "id": "recentvoc",
+   "severity": "major",
+   "finding": "Recent vaso-occlusive crisis",
+   "evidence": "Admitted 10/02 to 10/06; Hgb 8.0, retic 9.8%, LDH 422.",
+   "implication": "Higher risk of perioperative crisis and acute chest.",
+   "action": "Consider delay 4 to 6 weeks for an elective case.",
+   "keywords": [
+    "vaso-occlusive",
+    "voc",
+    "crisis",
+    "acute chest",
+    "delay"
+   ]
+  },
+  {
+   "id": "hydration",
+   "severity": "major",
+   "finding": "Not hydrated, cold, no IV",
+   "evidence": "Two failed IV attempts; LR at 1.5x maintenance not started; cool extremities.",
+   "implication": "Dehydration and hypothermia promote sickling.",
+   "action": "Ultrasound guided IV, start fluids, forced air warming, oxygen to SpO2 95%.",
+   "keywords": [
+    "hydrat",
+    "fluid",
+    "warming",
+    "normotherm",
+    "ultrasound",
+    "iv access",
+    "oxygen"
+   ]
+  },
+  {
+   "id": "opioid",
+   "severity": "major",
+   "finding": "Opioid tolerance",
+   "evidence": "Oxycodone ER 15 q12h plus IR 10 mg 3 to 4 daily; taken 0500; morphine hives; NSAIDs avoided.",
+   "implication": "Higher requirements; withdrawal if held.",
+   "action": "Continue baseline opioids, regional anesthesia, multimodal non NSAID analgesia, hydromorphone for breakthrough.",
+   "keywords": [
+    "opioid toleran",
+    "oxycodone",
+    "hydromorphone",
+    "multimodal",
+    "ketamine"
+   ]
+  },
+  {
+   "id": "asplenia",
+   "severity": "minor",
+   "finding": "Functional asplenia",
+   "evidence": "Autoinfarcted spleen.",
+   "implication": "Infection risk.",
+   "action": "Timely cefazolin.",
+   "keywords": [
+    "asplenia",
+    "cefazolin"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "Brachial plexus block or WALANT; avoid Bier block",
+   "keywords": [
+    "brachial plexus",
+    "axillary",
+    "walant",
+    "supraclavicular"
+   ]
+  },
+  {
+   "domain": "supportive",
+   "item": "Hydration, warming, oxygen SpO2 95% or higher",
+   "keywords": [
+    "hydrat",
+    "warm",
+    "oxygen"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "postop",
+   "item": "Incentive spirometry, hematology follow up",
+   "keywords": [
+    "incentive spirometry",
+    "hematology"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Bier block or brachial plexus block"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Sedation stacked on chronic opioids"
+  }
+ ]
+}

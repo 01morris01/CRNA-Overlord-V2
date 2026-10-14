@@ -1,0 +1,962 @@
+{
+ "id": "p01",
+ "room": "OR 2",
+ "time": "0730",
+ "name": "OKAFOR, MICAH J",
+ "mrn": "0091422",
+ "dob": "03/02/2022",
+ "age": "4 y",
+ "sex": "M",
+ "ht_cm": 102,
+ "wt_kg": 17.0,
+ "preferred_name": "Micah",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "K. Lyle, MD, Jefferson City Pediatrics",
+ "insurance": "TennCare (BlueCare Tennessee)",
+ "emergency_contact": "Adaeze Okafor (mother) 865-555-0142; Emeka Okafor (father) 865-555-0177",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Tonsillectomy and adenoidectomy",
+  "short": "Tonsillectomy and adenoidectomy",
+  "laterality": "N/A",
+  "service": "Pediatric Otolaryngology",
+  "surgeon": "R. Haddad, MD",
+  "assistant": "",
+  "indication": "Obstructive sleep-disordered breathing (PSG 09/14/2026 oAHI 14, nadir 81%); recurrent tonsillitis (6 episodes in 2026).",
+  "duration_min": 45,
+  "anesthesia_requested": "General",
+  "position": "Supine, shoulder roll, table turned 90 degrees",
+  "dispo": "Overnight observation, pediatric floor, continuous pulse oximetry",
+  "blood": "None (expected EBL < 50 mL). No type and screen.",
+  "equipment": "Crowe-Davis mouth gag, oral RAE ETT, suction cautery",
+  "implants": "",
+  "surgeon_notes": "Dexamethasone 0.5 mg/kg IV (max 10 mg) at induction. No NSAID request either way.",
+  "add_on": false,
+  "scheduled_on": "10/13/2026"
+ },
+ "problems": [
+  [
+   "Obstructive sleep apnea, pediatric, severe",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Hypertrophy of tonsils and adenoids",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Recurrent acute tonsillitis",
+   "05/2026",
+   "Active"
+  ],
+  [
+   "Reactive airway disease",
+   "01/2025",
+   "Active"
+  ],
+  [
+   "Allergic rhinitis, seasonal",
+   "2025",
+   "Active"
+  ],
+  [
+   "Recurrent acute otitis media s/p BMT",
+   "2023",
+   "Resolved"
+  ],
+  [
+   "Preterm infant, 34 weeks",
+   "03/2022",
+   "Resolved"
+  ],
+  [
+   "Neonatal feeding difficulty",
+   "03/2022",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Born at 34 0/7 weeks (preterm labor), BW 2,280 g. NICU 9 days for feeding (NG gavage), room air throughout, never intubated, no apnea of prematurity requiring caffeine",
+   "Recurrent AOM (7 episodes in 12 months) 2023-2024, s/p bilateral tympanostomy tubes 04/2024; tubes extruded 2025",
+   "Reactive airway disease: wheeze with viral URIs, albuterol PRN; one ED visit 01/2025, no admissions, no PICU",
+   "Allergic rhinitis, seasonal (spring/fall)",
+   "Recurrent tonsillitis, 6 episodes in 2026 (3 strep-positive)",
+   "Loud nightly snoring with witnessed pauses since ~age 3; mouth breathing; daytime behavior issues at pre-K"
+  ],
+  "psh": [
+   [
+    "04/11/2024",
+    "Bilateral myringotomy and tympanostomy tubes",
+    "Lakeway Regional Medical Center"
+   ]
+  ],
+  "family": [
+   "Mother: hypothyroidism (levothyroxine)",
+   "Father: seasonal allergies, snores",
+   "Sister (7 y): asthma, mild",
+   "Maternal uncle: \"problem waking up after anesthesia\" per mother (see nursing/portal)",
+   "MGM: type 2 diabetes",
+   "No known malignant hyperthermia"
+  ],
+  "social": {
+   "tobacco": "No household smokers indoors (father smokes outside, trying to quit)",
+   "alcohol": "N/A",
+   "drugs": "N/A",
+   "occupation": "Pre-K, Jefferson Elementary",
+   "living": "Lives with mother, father, and sister (7 y) in Jefferson City",
+   "other": "Mother is legal guardian; both parents share custody decisions. Child life referral made."
+  },
+  "immunizations": [
+   [
+    "Hepatitis B #1",
+    "03/2022"
+   ],
+   [
+    "DTaP-IPV-Hib-HepB, PCV15, rotavirus (2 mo)",
+    "05/2022"
+   ],
+   [
+    "DTaP-IPV-Hib-HepB, PCV15, rotavirus (4 mo)",
+    "07/2022"
+   ],
+   [
+    "DTaP-IPV-Hib-HepB, PCV15, rotavirus (6 mo)",
+    "09/2022"
+   ],
+   [
+    "MMR #1, varicella #1, Hep A #1",
+    "03/2023"
+   ],
+   [
+    "DTaP #4, Hib #4, PCV15 #4",
+    "06/2023"
+   ],
+   [
+    "Hep A #2",
+    "09/2023"
+   ],
+   [
+    "Influenza",
+    "10/2024"
+   ],
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "DTaP-IPV #5, MMRV #2 (kindergarten boosters)",
+    "03/2026"
+   ],
+   [
+    "Influenza 2026-27",
+    "Deferred 10/24/2026 (acute illness)"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Albuterol HFA 90 mcg/actuation with spacer and mask",
+   "2 puffs inhaled q4h PRN wheeze/cough",
+   "K. Lyle, MD",
+   "10/26/2026 2000"
+  ],
+  [
+   "Fluticasone propionate nasal 50 mcg/spray",
+   "1 spray each nostril daily",
+   "R. Haddad, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Cetirizine 1 mg/mL oral solution",
+   "5 mg (5 mL) PO daily",
+   "K. Lyle, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Children's ibuprofen 100 mg/5 mL",
+   "170 mg (8.5 mL) PO q6h PRN fever/pain",
+   "OTC",
+   "10/22/2026"
+  ],
+  [
+   "Children's acetaminophen 160 mg/5 mL",
+   "240 mg (7.5 mL) PO q6h PRN fever",
+   "OTC",
+   "10/21/2026"
+  ]
+ ],
+ "mar": [],
+ "discontinued": [
+  [
+   "Montelukast 4 mg chewable",
+   "09/2024-02/2025",
+   "Nightmares/behavior change per mother"
+  ],
+  [
+   "Amoxicillin 400 mg/5 mL",
+   "02/2026, 05/2026, 07/2026 (10-day courses)",
+   "Course completed"
+  ],
+  [
+   "Amoxicillin-clavulanate ES-600",
+   "08/2026",
+   "Course completed (tonsillitis, failed amoxicillin)"
+  ],
+  [
+   "Prednisolone 15 mg/5 mL",
+   "01/2025 (5-day burst)",
+   "Course completed"
+  ],
+  [
+   "Ciprofloxacin-dexamethasone otic",
+   "05/2024",
+   "Post-tube drops, completed"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "02/09/2026 1120",
+    "comment": "Clinic: febrile tonsillitis; differential: 78% neutrophils",
+    "vals": {
+     "WBC": [
+      "16.8",
+      "H"
+     ],
+     "Hgb": [
+      "11.9",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "240",
+      ""
+     ],
+     "MCV": [
+      "79",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/18/2025 2240",
+    "comment": "ED, wheezing with URI",
+    "vals": {
+     "WBC": [
+      "13.1",
+      ""
+     ],
+     "Hgb": [
+      "12.0",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "261",
+      ""
+     ],
+     "MCV": [
+      "80",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/05/2024",
+    "comment": "Capillary Hgb, 24-month well child",
+    "vals": {
+     "Hgb": [
+      "11.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2023",
+    "comment": "Capillary Hgb, 12-month well child",
+    "vals": {
+     "Hgb": [
+      "11.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/04/2022 0600",
+    "comment": "NICU day 2",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "8",
+      ""
+     ],
+     "Cr": [
+      "0.48",
+      ""
+     ],
+     "Glu": [
+      "74",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "5-18"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.20-0.50"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "60-100"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "5.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "11.0-14.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "33-41"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-450"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "75-87"
+   }
+  ],
+  "other": [
+   [
+    "03/03/2022",
+    "Newborn metabolic screen (TN)",
+    "Within normal limits, all analytes",
+    ""
+   ],
+   [
+    "03/05/2022",
+    "Bilirubin total/direct (neonatal)",
+    "9.6 / 0.3 mg/dL, below phototherapy threshold for GA",
+    ""
+   ],
+   [
+    "03/14/2023",
+    "Lead, capillary",
+    "<3.3 mcg/dL",
+    ""
+   ],
+   [
+    "03/05/2024",
+    "Lead, venous",
+    "<3.3 mcg/dL",
+    ""
+   ],
+   [
+    "02/09/2026",
+    "Rapid strep antigen",
+    "Positive",
+    "A"
+   ],
+   [
+    "05/12/2026",
+    "Rapid strep antigen",
+    "Positive",
+    "A"
+   ],
+   [
+    "07/06/2026",
+    "Rapid strep antigen",
+    "Negative; throat culture: no group A strep",
+    ""
+   ],
+   [
+    "08/18/2026",
+    "Rapid strep antigen",
+    "Positive",
+    "A"
+   ],
+   [
+    "09/02/2026",
+    "Monospot",
+    "Negative",
+    ""
+   ],
+   [
+    "10/24/2026",
+    "SARS-CoV-2 / Influenza A/B / RSV PCR (nasal)",
+    "Not detected",
+    ""
+   ],
+   [
+    "05/20/2024",
+    "Audiology: tympanometry and VRA",
+    "Type B bilateral pre-op resolved; post-tube patent tubes, hearing normal sound field",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "01/18/2025",
+   "XR Chest 2 views",
+   "Findings: Peribronchial cuffing and mild hyperinflation. No focal consolidation, effusion, or pneumothorax. Cardiothymic silhouette normal. Impression: Findings compatible with viral illness/reactive airway disease. No pneumonia.",
+   "T. Banerjee, MD"
+  ],
+  [
+   "08/25/2026",
+   "XR Soft tissue neck, lateral",
+   "Findings: Large adenoid soft tissue markedly narrowing the nasopharyngeal airway (adenoid-nasopharyngeal ratio approximately 0.8). Palatine tonsils enlarged. Prevertebral soft tissues normal. Impression: Adenotonsillar hypertrophy.",
+   "J. Whitlock, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "09/14/2026",
+   "Polysomnogram, pediatric attended (overnight)",
+   "Total sleep time 431 min, sleep efficiency 86%. Obstructive AHI 14.0 events/h (REM AHI 26.3). Central AI 0.9/h. Oxygen saturation nadir 81%; time with SpO2 < 90%: 6% of total sleep time. Peak EtCO2 54 mm Hg; EtCO2 > 50 mm Hg for 9% of TST. Snoring loud, continuous. No arrhythmia (sinus rhythm 72-118). Interpretation: Severe obstructive sleep apnea, pediatric criteria (oAHI >= 10). Recommend ENT evaluation for adenotonsillectomy; postoperative inpatient monitoring given severity and nadir < 85%.",
+   "P. Saldana, MD (Sleep Medicine)"
+  ]
+ ],
+ "encounters": [
+  [
+   "03/02/2022",
+   "Inpatient (NICU)",
+   "C-N University Hospital NICU",
+   "Preterm 34 wk, feeding immaturity",
+   "Discharged home 03/11/2022 on ad lib feeds"
+  ],
+  [
+   "03/14/2023",
+   "Well child (12 mo)",
+   "Jefferson City Pediatrics",
+   "Routine",
+   "Vaccines given"
+  ],
+  [
+   "02/12/2024",
+   "Specialty clinic",
+   "C-N Pediatric ENT",
+   "Recurrent AOM",
+   "BMT recommended"
+  ],
+  [
+   "04/11/2024",
+   "Outpatient surgery",
+   "Lakeway Regional Medical Center",
+   "BMT",
+   "Discharged same day after PACU agitation episode"
+  ],
+  [
+   "01/18/2025",
+   "ED visit",
+   "C-N University Hospital Pediatric ED",
+   "Wheezing with URI",
+   "Albuterol x3, prednisolone, discharged"
+  ],
+  [
+   "03/06/2026",
+   "Well child (4 y)",
+   "Jefferson City Pediatrics",
+   "Routine, snoring concern",
+   "Kindergarten vaccines; ENT referral"
+  ],
+  [
+   "08/25/2026",
+   "Specialty clinic",
+   "C-N Pediatric ENT",
+   "Snoring, recurrent tonsillitis",
+   "PSG ordered"
+  ],
+  [
+   "09/14/2026",
+   "Sleep lab",
+   "C-N Sleep Disorders Center",
+   "Polysomnogram",
+   "Severe OSA"
+  ],
+  [
+   "10/13/2026",
+   "Specialty clinic",
+   "C-N Pediatric ENT",
+   "Preop H&P",
+   "T&A scheduled 10/27"
+  ],
+  [
+   "10/24/2026",
+   "Sick visit",
+   "Jefferson City Pediatrics",
+   "Cough, rhinorrhea",
+   "Supportive care"
+  ]
+ ],
+ "notes": [
+  [
+   "03/11/2022 1015",
+   "Discharge Summary",
+   "Neonatology",
+   "L. Ferrante, MD",
+   "Male infant born 03/02/2022 at 34 0/7 wk by SVD after preterm labor; maternal GBS unknown, received adequate IAP. BW 2,280 g. Apgars 7/9. Admitted NICU for feeding immaturity. Course: room air throughout, no apnea/bradycardia events requiring stimulation, no caffeine. NG gavage feeds advanced, ad lib PO by DOL 7. Bilirubin peak 9.6 DOL 3, no phototherapy. Hearing screen passed bilaterally. Newborn screen normal. HepB given. Car seat challenge passed. Discharge wt 2,260 g. Follow-up with PCP in 2 days."
+  ],
+  [
+   "03/14/2023 1030",
+   "Progress Note",
+   "Pediatrics",
+   "K. Lyle, MD",
+   "12-month WCC. Growing well along 25th percentile (corrected). Walking with support, 3 words. Ears: R TM bulging, 3rd AOM this winter, amoxicillin. Vaccines per schedule. Hgb 11.3, lead negative. Anticipatory guidance given."
+  ],
+  [
+   "02/12/2024 1440",
+   "Consult",
+   "Pediatric Otolaryngology",
+   "R. Haddad, MD",
+   "23-month-old with 7 episodes of AOM in 12 months and bilateral middle ear effusion > 3 months with type B tympanograms. Speech mildly delayed per mother. Plan: bilateral myringotomy and tubes. Tonsils 2+. Mild snoring. Will reassess sleep at follow-up."
+  ],
+  [
+   "04/11/2024 0915",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "Lakeway Regional Medical Center (scanned)",
+   "Anesthesia record, BMT. ASA 1. Inhalation induction sevoflurane 8% in N2O/O2 by mask, maintenance sevoflurane 2-3% by mask, oral airway. No IV. Case 12 min. Fentanyl 1 mcg/kg intranasal. Ketorolac not given. Uneventful intraop. PACU: severe emergence agitation (PAED 18) x 20 min, inconsolable, thrashing; PIV placed in PACU, propofol 17 mg (1 mg/kg) IV with resolution. Discharged home 1240."
+  ],
+  [
+   "04/11/2024 1205",
+   "Nursing Note",
+   "PACU",
+   "D. Merriweather, RN",
+   "Pt emerged screaming, kicking, not recognizing mother, pulling at monitors. Anesthesia at bedside. PIV 24 g L hand placed. Propofol given per anesthesia. Calm and sleeping in 3 min. SpO2 97% RA. Mother upset; asked that \"next time\" he get something before waking up. Discharge criteria met 1235."
+  ],
+  [
+   "05/20/2024 1300",
+   "Progress Note",
+   "Audiology",
+   "S. Tran, AuD",
+   "Post-tube check. Tubes patent bilaterally. Sound field thresholds within normal limits. Speech improving per mother. Return PRN."
+  ],
+  [
+   "01/18/2025 2310",
+   "ED Provider Note",
+   "Pediatric Emergency",
+   "J. Castile, PA-C",
+   "2 y 10 mo with 3 days URI, now wheezing and tachypnea. RR 44, SpO2 92% RA, subcostal retractions. Albuterol 2.5 mg neb x 3 and prednisolone 2 mg/kg. After: RR 30, SpO2 96%, scattered end-expiratory wheeze. CXR viral pattern. CBC unremarkable. Discharged with albuterol MDI/spacer and prednisolone x 5 days. Follow up PCP. Dx: reactive airway disease exacerbation with viral URI."
+  ],
+  [
+   "03/06/2026 0945",
+   "Progress Note",
+   "Pediatrics",
+   "K. Lyle, MD",
+   "4-year WCC. Wt 16.3 kg (55th %ile), Ht 100 cm. Development appropriate. Mother reports loud snoring, pauses, restless sleep, bedwetting returned, and teacher reports inattention. Tonsils 3+. Albuterol only with colds. Kindergarten boosters given. Vision/hearing screen passed. Plan: ENT referral; consider PSG."
+  ],
+  [
+   "05/12/2026 1615",
+   "Telephone Encounter",
+   "Pediatrics",
+   "B. Carver, RN",
+   "Mother calls: fever 39.2, sore throat, not eating. Seen same day by NP; rapid strep positive. Amoxicillin 50 mg/kg/day x 10 days sent to Walgreens Jefferson City. This is the 3rd tonsillitis episode this year."
+  ],
+  [
+   "08/18/2026 1100",
+   "Progress Note",
+   "Pediatrics",
+   "M. Ostrander, CPNP",
+   "Tonsillitis, 5th episode in 2026. Rapid strep positive. Failed amoxicillin in July per mother (fever persisted). Amoxicillin-clavulanate ES x 10 days. Tonsils 4+ with exudate. Already referred to ENT; appt 08/25."
+  ],
+  [
+   "08/25/2026 1350",
+   "Progress Note",
+   "Pediatric Otolaryngology",
+   "R. Haddad, MD",
+   "Return visit. 5-6 episodes of tonsillitis in 2026, documented. Snoring with witnessed apneas. Tonsils 4+, kissing. Lateral neck film: large adenoid. Plan: PSG to quantify, then T&A. Discussed postop overnight stay if OSA severe."
+  ],
+  [
+   "09/15/2026 0820",
+   "Patient Message",
+   "Sleep Medicine",
+   "Adaeze Okafor (mother) / P. Saldana, MD",
+   "Mother: \"How did his sleep study go? He barely slept in that room.\" Reply (Dr. Saldana): Results show severe obstructive sleep apnea. Report sent to Dr. Haddad. Surgery is the usual treatment and he will likely need to stay overnight after surgery."
+  ],
+  [
+   "10/13/2026 1410",
+   "H&P",
+   "Pediatric Otolaryngology",
+   "R. Haddad, MD",
+   "HPI: 4 y 7 mo boy with loud nightly snoring, witnessed pauses, mouth breathing, restless sleep, daytime behavior problems. 6 episodes of tonsillitis this year. PSG 09/14: oAHI 14, nadir 81%. PMH: born 34 wk, NICU 9 days for feeding, no intubation. RAD, albuterol with colds; last used this month. UTD on vaccines. PSH: BMT 04/2024 mask anesthesia; mother states \"emergence agitation, required propofol.\" Meds: albuterol PRN, fluticasone nasal, cetirizine. NKDA. Exam: Wt 17 kg (60th %ile), Ht 102 cm. Tonsils 4+, kissing. Mouth breathing, hyponasal speech. Lungs: scattered rhonchi, clears with cough. Loose lower front tooth (#O). TMs intact, tubes out. A/P: severe OSA, recurrent tonsillitis. Tonsillectomy and adenoidectomy 10/27, overnight observation with continuous oximetry. Consent obtained from mother. Dexamethasone at induction."
+  ],
+  [
+   "10/20/2026 2112",
+   "Patient Message",
+   "Pediatric Otolaryngology",
+   "Adaeze Okafor (mother)",
+   "Hi, this is Micah's mom. Before his surgery I wanted to ask something. My brother was stuck on the ventilator for hours after his appendix surgery years ago. They told him he couldn't break down a muscle relaxant. Does Micah need a blood test for that? Also he is getting a little cold, is that ok? Thank you."
+  ],
+  [
+   "10/21/2026 0905",
+   "Patient Message",
+   "Pediatric Otolaryngology",
+   "T. Gaskins, LPN",
+   "Reply to mother: Thank you for letting us know. Please mention this to the anesthesia team on the day of surgery, they will review. For the cold, please call the office if he develops fever. Message routed to: R. Haddad, MD (read 10/21)."
+  ],
+  [
+   "10/24/2026 1140",
+   "Progress Note",
+   "Pediatrics",
+   "K. Lyle, MD",
+   "Sick visit. Cough and runny nose since 10/19. Tmax 38.1 on 10/20, afebrile since. Persistent wet cough, clear to yellow nasal discharge. Eating less, drinking OK. Exam: T 37.2, RR 24, SpO2 97% RA. Nasal congestion, purulent-appearing rhinorrhea. Tonsils 4+, no exudate. Lungs: coarse breath sounds bilaterally, no wheeze, no retractions. Viral PCR negative for COVID/flu/RSV. A/P: viral URI. No antibiotics. Albuterol PRN. Flu vaccine deferred today. Has T&A scheduled 10/27; OK for surgery if afebrile. Return if worse."
+  ],
+  [
+   "10/26/2026 1430",
+   "Telephone Encounter",
+   "Perioperative Services",
+   "J. Odom, RN",
+   "Preop call to mother. Arrival 0545 10/27, Pediatric Surgery entrance. NPO instructions reviewed per pediatric handout: no solid food or milk after midnight; mother states \"he usually eats dinner at 7.\" Clear liquids per handout. Bring albuterol and spacer. Mother reports he still has \"a little cough.\" Child life will meet family in preop. Mother asks if she can come back for \"going to sleep\"; told anesthesia will discuss."
+  ],
+  [
+   "10/27/2026 0610",
+   "Nursing Note",
+   "Child Life",
+   "H. Bledsoe, CCLS",
+   "Met pt and mother in preop. Tablet distraction, mask practice with stickers and scent (bubble gum). Pt clingy and tearful, cries when staff approach, calms with mother. Mother requests to be present for induction. Coping plan shared with anesthesia."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/11/2022 0800",
+   "68/40",
+   148,
+   44,
+   98,
+   36.9,
+   2.26,
+   "0",
+   "NICU, discharge"
+  ],
+  [
+   "03/14/2023 1030",
+   "",
+   122,
+   30,
+   99,
+   36.8,
+   9.1,
+   "0",
+   "Pediatrics clinic"
+  ],
+  [
+   "02/12/2024 1440",
+   "",
+   118,
+   28,
+   99,
+   36.7,
+   11.5,
+   "0",
+   "ENT clinic"
+  ],
+  [
+   "04/11/2024 0640",
+   "92/54",
+   112,
+   24,
+   99,
+   36.6,
+   11.8,
+   "0/10",
+   "Lakeway preop"
+  ],
+  [
+   "01/18/2025 2230",
+   "104/62",
+   152,
+   44,
+   92,
+   37.9,
+   13.6,
+   "FLACC 2",
+   "Pediatric ED"
+  ],
+  [
+   "01/19/2025 0115",
+   "100/58",
+   138,
+   30,
+   96,
+   37.4,
+   null,
+   "FLACC 0",
+   "Pediatric ED, post-albuterol"
+  ],
+  [
+   "03/06/2026 0945",
+   "94/58",
+   104,
+   22,
+   99,
+   36.6,
+   16.3,
+   "0",
+   "Pediatrics clinic"
+  ],
+  [
+   "08/25/2026 1350",
+   "",
+   108,
+   22,
+   98,
+   36.8,
+   16.7,
+   "0",
+   "ENT clinic"
+  ],
+  [
+   "10/13/2026 1410",
+   "96/60",
+   102,
+   22,
+   98,
+   36.7,
+   17.0,
+   "0",
+   "ENT clinic"
+  ],
+  [
+   "10/24/2026 1140",
+   "",
+   116,
+   24,
+   97,
+   37.2,
+   16.9,
+   "0",
+   "Pediatrics clinic"
+  ],
+  [
+   "10/27/2026 0600",
+   "98/58",
+   118,
+   26,
+   95,
+   37.6,
+   17.0,
+   "FLACC 0",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Admit to pediatric observation postop, continuous pulse oximetry",
+   "10/13/2026",
+   "Pending (postop)"
+  ],
+  [
+   "NPO per pediatric guidelines",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Dexamethasone 8.5 mg IV x1 intraop (0.5 mg/kg)",
+   "10/13/2026",
+   "Signed, intraop"
+  ],
+  [
+   "Acetaminophen 15 mg/kg PO/IV q6h scheduled x 48 h postop",
+   "10/13/2026",
+   "Pending (postop)"
+  ],
+  [
+   "Consult Child Life",
+   "10/26/2026",
+   "Completed"
+  ],
+  [
+   "Weight on arrival",
+   "10/27/2026 0545",
+   "Completed"
+  ],
+  [
+   "Anesthesia preop evaluation",
+   "10/27/2026 0545",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "No type and screen ordered (EBL < 50 mL).",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: tonsillectomy and adenoidectomy",
+   "Signed by mother (legal guardian) 10/13/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood products",
+   "Not obtained (not indicated)"
+  ]
+ ],
+ "directives": "None on file (minor).",
+ "anesthesia_history": [
+  [
+   "04/11/2024",
+   "Bilateral myringotomy and tubes",
+   "Mask GA, sevoflurane/N2O, oral airway, no IV intraop; intranasal fentanyl",
+   "Severe emergence agitation x 20 min in PACU; PIV placed, propofol 1 mg/kg",
+   "Lakeway Regional Medical Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0545",
+  "npo_solids": "10/26/2026 1900 (toast)",
+  "npo_clears": "10/27/2026 0545 apple juice (about 4 oz, in the car)",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Surgical consent signed",
+    "Yes (mother)"
+   ],
+   [
+    "Anesthesia consent",
+    "Pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/13)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ],
+   [
+    "Weight in kg",
+    "17.0"
+   ],
+   [
+    "Loose teeth",
+    "Yes, lower front, per mom"
+   ],
+   [
+    "Child life",
+    "Seen"
+   ]
+  ],
+  "nursing_note": "4 y M for T&A. Wet cough during assessment, clear rhinorrhea. Breath sounds coarse, no wheeze heard, no retractions. Crying, clinging to mother. Formula/milk: none. Solids: toast 10/26 1900. Mother gave apple juice at 0545 in the car \"so he would not cry.\" Mother asks for \"a medicine to calm him down\" and to be present at induction. Mother also states her brother \"was on the breathing machine for hours after his appendix surgery; they said he could not break down a muscle relaxant\"; asks if Micah needs a blood test. Loose lower front tooth. Albuterol last given 2000 last night for cough. Two identifiers verified. Consent signed by mother (legal guardian). IV: none (planned after induction).",
+  "iv": "None (planned after inhalation induction)",
+  "glucose": ""
+ },
+ "label": "M. Okafor",
+ "bmi": "16.3"
+}

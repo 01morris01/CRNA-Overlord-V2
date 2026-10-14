@@ -1,0 +1,2358 @@
+{
+ "id": "p46",
+ "room": "OR 21",
+ "time": "0730",
+ "name": "OGLETREE, MARCUS D",
+ "mrn": "0147046",
+ "dob": "09/05/1974",
+ "age": "52 y",
+ "sex": "M",
+ "ht_cm": 180,
+ "wt_kg": 92.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "R. Kinser, MD, Newport Internal Medicine",
+ "insurance": "Medicare (ESRD) primary; BCBST secondary",
+ "emergency_contact": "Lakisha Ogletree (wife) 423-555-0715",
+ "isolation": "",
+ "allergies": [
+  [
+   "Iodinated contrast",
+   "Hives",
+   "Moderate",
+   "2017"
+  ],
+  [
+   "Vancomycin",
+   "Red man syndrome (rate-related)",
+   "Mild",
+   "2023"
+  ]
+ ],
+ "case": {
+  "procedure": "Living-donor kidney transplant (recipient), right iliac fossa, ureteroneocystostomy with stent",
+  "short": "Living-donor kidney transplant (recipient)",
+  "laterality": "Right",
+  "service": "Transplant Surgery",
+  "surgeon": "A. Mehrotra, MD",
+  "assistant": "S. Ruble, MD (fellow)",
+  "indication": "ESRD secondary to diabetic nephropathy on HD since 2022. Living related donor (brother, ABO compatible, negative flow crossmatch).",
+  "duration_min": 240,
+  "anesthesia_requested": "General",
+  "position": "Supine",
+  "dispo": "Transplant step-down unit",
+  "blood": "Type and crossmatch 2 units PRBC (irradiated, leukoreduced, CMV-safe)",
+  "equipment": "Transplant tray, Foley with 3-way irrigation, CVC kit",
+  "implants": "Ureteral stent (double J)",
+  "surgeon_notes": "Donor lap nephrectomy OR 22 at 0730 (Dr. Lowry). Recipient to start in parallel. CVP-guided volume loading before reperfusion (CVP 10-12). Mannitol + furosemide at reperfusion. Methylprednisolone 500 mg and first dose thymoglobulin intraop per protocol. No BP cuffs/IV left arm (AVF).",
+  "add_on": false,
+  "scheduled_on": "09/14/2026"
+ },
+ "problems": [
+  [
+   "End-stage renal disease on hemodialysis (MWF)",
+   "05/2022",
+   "Active"
+  ],
+  [
+   "Diabetic nephropathy",
+   "2016",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes mellitus, insulin-requiring, with neuropathy, retinopathy, gastroparesis",
+   "2006",
+   "Active"
+  ],
+  [
+   "Hypertension secondary to ESRD",
+   "2012",
+   "Active"
+  ],
+  [
+   "Anemia of CKD on ESA",
+   "2020",
+   "Active"
+  ],
+  [
+   "Secondary hyperparathyroidism",
+   "2021",
+   "Active"
+  ],
+  [
+   "Coronary artery disease, nonobstructive (CT 2023)",
+   "2023",
+   "Active"
+  ],
+  [
+   "Diabetic gastroparesis",
+   "2020",
+   "Active"
+  ],
+  [
+   "Proliferative diabetic retinopathy s/p PRP",
+   "2019",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea, mild, not on CPAP",
+   "2021",
+   "Active"
+  ],
+  [
+   "Left brachiocephalic AV fistula",
+   "01/2022",
+   "Active"
+  ],
+  [
+   "Toe ulcer right 2nd toe",
+   "2024",
+   "Resolved"
+  ],
+  [
+   "Gout",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "T2DM since 2006, insulin since 2014",
+   "Diabetic nephropathy -> ESRD, HD start 05/2022 (tunneled catheter, then L AVF)",
+   "HTN",
+   "Anemia CKD - darbepoetin at HD",
+   "Secondary HPT - cinacalcet",
+   "Gastroparesis (gastric emptying study 2020 delayed)",
+   "Retinopathy s/p laser",
+   "Mild OSA (AHI 9) - declined CPAP",
+   "Peripheral neuropathy"
+  ],
+  "psh": [
+   [
+    "01/2022",
+    "Left brachiocephalic AV fistula creation",
+    "C-N University Hospital"
+   ],
+   [
+    "05/2022",
+    "Tunneled HD catheter R IJ (removed 09/2022)",
+    "C-N University Hospital"
+   ],
+   [
+    "2019",
+    "Panretinal photocoagulation OU",
+    "Tennessee Retina"
+   ],
+   [
+    "2024",
+    "I&D R 2nd toe abscess",
+    "C-N Podiatry"
+   ],
+   [
+    "1995",
+    "Knee arthroscopy L",
+    "Outside"
+   ]
+  ],
+  "family": [
+   "Mother: T2DM, ESRD on HD (died 68)",
+   "Father: HTN, stroke",
+   "Brother (donor): healthy",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Former machinist; disability since 2022",
+   "living": "House with wife, Newport. Relies on medical transport van for HD (wife works days).",
+   "other": "HD unit: Cocke County Dialysis, chair 7, MWF 1st shift."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026"
+   ],
+   [
+    "Hepatitis B series (dialysis)",
+    "2022"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2022"
+   ],
+   [
+    "Shingrix x2",
+    "2024"
+   ],
+   [
+    "COVID-19 2025-26",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ],
+   [
+    "MMR titer immune",
+    "2025"
+   ],
+   [
+    "Varicella titer immune",
+    "2025"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Insulin glargine",
+   "22 units SC nightly (reduced to 16 units night before surgery)",
+   "R. Kinser, MD",
+   "10/26/2026 2200 (16 units)"
+  ],
+  [
+   "Insulin lispro",
+   "4-8 units SC with meals per scale",
+   "R. Kinser, MD",
+   "10/26/2026 1800"
+  ],
+  [
+   "Carvedilol 25 mg tab",
+   "1 tab PO BID",
+   "P. Hyder, MD (Nephrology)",
+   "10/27/2026 0500"
+  ],
+  [
+   "Amlodipine 10 mg tab",
+   "1 tab PO daily",
+   "P. Hyder, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Sevelamer carbonate 800 mg",
+   "2 tabs PO TID with meals",
+   "P. Hyder, MD",
+   "10/26/2026 1800"
+  ],
+  [
+   "Cinacalcet 30 mg",
+   "1 tab PO daily",
+   "P. Hyder, MD",
+   "10/26/2026"
+  ],
+  [
+   "Calcitriol 0.25 mcg",
+   "Given at HD",
+   "Dialysis unit",
+   "10/24/2026"
+  ],
+  [
+   "Darbepoetin alfa 60 mcg IV",
+   "Weekly at HD (Monday)",
+   "Dialysis unit",
+   "10/19/2026"
+  ],
+  [
+   "Renal vitamin (B-complex/C/folic acid)",
+   "1 tab PO daily",
+   "P. Hyder, MD",
+   "10/26/2026"
+  ],
+  [
+   "Atorvastatin 40 mg",
+   "1 tab PO nightly",
+   "R. Kinser, MD",
+   "10/26/2026"
+  ],
+  [
+   "Aspirin 81 mg",
+   "1 tab PO daily",
+   "R. Kinser, MD",
+   "10/26/2026"
+  ],
+  [
+   "Metoclopramide 5 mg",
+   "PO before meals PRN (renal dose)",
+   "R. Kinser, MD",
+   "10/25/2026"
+  ],
+  [
+   "Gabapentin 100 mg",
+   "1 cap PO after HD (renal dosing)",
+   "R. Kinser, MD",
+   "10/24/2026"
+  ],
+  [
+   "Allopurinol 100 mg",
+   "Every other day",
+   "P. Hyder, MD",
+   "10/25/2026"
+  ],
+  [
+   "Tacrolimus 4 mg",
+   "PO BID - first dose 10/26 evening per transplant protocol",
+   "A. Mehrotra, MD",
+   "10/26/2026 2000"
+  ],
+  [
+   "Mycophenolate mofetil 1,000 mg",
+   "PO BID - first dose 10/26 evening",
+   "A. Mehrotra, MD",
+   "10/26/2026 2000"
+  ]
+ ],
+ "mar": [
+  [
+   "Tacrolimus 4 mg PO",
+   "BID",
+   "Given 10/27/2026 0500"
+  ],
+  [
+   "Mycophenolate mofetil 1,000 mg PO",
+   "BID",
+   "Given 10/27/2026 0500"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Methylprednisolone 500 mg IV",
+   "Intraop before reperfusion",
+   "Due (OR)"
+  ],
+  [
+   "Anti-thymocyte globulin (rabbit) 1.5 mg/kg IV",
+   "Intraop start, over 6 h via central line",
+   "Due (OR)"
+  ],
+  [
+   "Insulin infusion per transplant protocol",
+   "Glucose >180",
+   "Not started"
+  ],
+  [
+   "Valganciclovir / TMP-SMX prophylaxis",
+   "Start POD1",
+   "Pending"
+  ],
+  [
+   "0.45% NaCl",
+   "KVO only",
+   "Ordered - not hung"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Lisinopril 40 mg",
+   "2012-2022",
+   "Hyperkalemia"
+  ],
+  [
+   "Metformin",
+   "2006-2018",
+   "eGFR <30"
+  ],
+  [
+   "Glipizide",
+   "2010-2016",
+   "Hypoglycemia"
+  ],
+  [
+   "Furosemide 80 mg BID",
+   "2020-2023",
+   "Anuric"
+  ],
+  [
+   "Calcium acetate",
+   "2022-2023",
+   "Hypercalcemia; changed to sevelamer"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0540",
+    "comment": "Day of surgery - hemolysis index: none (not hemolyzed)",
+    "vals": {
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "6.1",
+      "H"
+     ],
+     "Cl": [
+      "98",
+      ""
+     ],
+     "CO2": [
+      "17",
+      "L"
+     ],
+     "BUN": [
+      "84",
+      "H"
+     ],
+     "Cr": [
+      "11.40",
+      "H"
+     ],
+     "Glu": [
+      "192",
+      "H"
+     ],
+     "Ca": [
+      "8.6",
+      ""
+     ],
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "9.8",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "186",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "31",
+      ""
+     ],
+     "Mg": [
+      "2.6",
+      "H"
+     ],
+     "Phos": [
+      "7.1",
+      "H"
+     ],
+     "pH": [
+      "7.30",
+      "L"
+     ],
+     "PaCO2": [
+      "36",
+      ""
+     ],
+     "HCO3a": [
+      "17",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "10/20/2026",
+    "comment": "Pre-transplant clinic (non-HD day)",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "20",
+      "L"
+     ],
+     "BUN": [
+      "57",
+      "H"
+     ],
+     "Cr": [
+      "9.29",
+      "H"
+     ],
+     "Glu": [
+      "167",
+      "H"
+     ],
+     "Ca": [
+      "8.8",
+      ""
+     ],
+     "WBC": [
+      "5.7",
+      ""
+     ],
+     "Hgb": [
+      "10.2",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "206",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "PT": [
+      "12.1",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "84",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/05/2026",
+    "comment": "Monthly HD labs (pre-HD)",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.2",
+      "H"
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "58",
+      "H"
+     ],
+     "Cr": [
+      "9.28",
+      "H"
+     ],
+     "Glu": [
+      "170",
+      "H"
+     ],
+     "Ca": [
+      "8.9",
+      ""
+     ],
+     "WBC": [
+      "7.9",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "192",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Phos": [
+      "5.6",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/15/2026",
+    "comment": "Transplant update",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "57",
+      "H"
+     ],
+     "Cr": [
+      "9.23",
+      "H"
+     ],
+     "Glu": [
+      "170",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "187",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "A1c": [
+      "7.3",
+      "H"
+     ],
+     "Phos": [
+      "5.6",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "01/14/2025 1000",
+    "comment": "Transplant evaluation",
+    "vals": {
+     "PT": [
+      "12.4",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "32",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "72",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "TSH": [
+      "2.07",
+      ""
+     ],
+     "FT4": [
+      "1.37",
+      ""
+     ],
+     "PSA": [
+      "0.83",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/14/2025",
+    "comment": "Transplant evaluation",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "5.1",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "58",
+      "H"
+     ],
+     "Cr": [
+      "9.21",
+      "H"
+     ],
+     "Glu": [
+      "163",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "10.5",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "218",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Phos": [
+      "5.7",
+      "H"
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/04/2024",
+    "comment": "Monthly HD labs",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "5.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "60",
+      "H"
+     ],
+     "Cr": [
+      "9.22",
+      "H"
+     ],
+     "Glu": [
+      "163",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "194",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Phos": [
+      "5.4",
+      "H"
+     ],
+     "A1c": [
+      "7.6",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "07/18/2023 1600",
+    "comment": "ED - toe infection?",
+    "vals": {
+     "WBC": [
+      "14.2",
+      "H"
+     ],
+     "Hgb": [
+      "10.4",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "197",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "5.1",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "58",
+      "H"
+     ],
+     "Cr": [
+      "9.17",
+      "H"
+     ],
+     "Glu": [
+      "165",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "Lactate": [
+      "1.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/10/2023",
+    "comment": "Monthly HD labs",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "58",
+      "H"
+     ],
+     "Cr": [
+      "9.15",
+      "H"
+     ],
+     "Glu": [
+      "167",
+      "H"
+     ],
+     "Ca": [
+      "8.7",
+      ""
+     ],
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "199",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Phos": [
+      "5.7",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "05/02/2022 0500",
+    "comment": "After HD x3",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "54",
+      "H"
+     ],
+     "Cr": [
+      "6.10",
+      "H"
+     ],
+     "Glu": [
+      "173",
+      "H"
+     ],
+     "Ca": [
+      "8.9",
+      ""
+     ],
+     "Phos": [
+      "5.6",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/28/2022 2130",
+    "comment": "ED - dyspnea, uremia",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "6.4",
+      "H"
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "14",
+      "L"
+     ],
+     "BUN": [
+      "112",
+      "H"
+     ],
+     "Cr": [
+      "8.90",
+      "H"
+     ],
+     "Glu": [
+      "173",
+      "H"
+     ],
+     "Ca": [
+      "8.9",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "69",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "3.7",
+      ""
+     ],
+     "WBC": [
+      "5.6",
+      ""
+     ],
+     "Hgb": [
+      "8.6",
+      "L"
+     ],
+     "Hct": [
+      "27",
+      "L"
+     ],
+     "Plt": [
+      "203",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "pH": [
+      "7.24",
+      "L"
+     ],
+     "PaCO2": [
+      "32",
+      "L"
+     ],
+     "HCO3a": [
+      "14",
+      "L"
+     ],
+     "BNP": [
+      "1890",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/12/2020",
+    "comment": "Nephrology",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.3",
+      "H"
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "19",
+      "L"
+     ],
+     "BUN": [
+      "56",
+      "H"
+     ],
+     "Cr": [
+      "4.60",
+      "H"
+     ],
+     "Glu": [
+      "166",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "AST": [
+      "30",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "9.8",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Ferritin": [
+      "210",
+      ""
+     ],
+     "Fe": [
+      "102",
+      ""
+     ],
+     "TSAT": [
+      "22",
+      ""
+     ],
+     "Phos": [
+      "5.4",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/20/2018",
+    "comment": "eGFR 26 - metformin stopped",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.2",
+      "H"
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "41",
+      "H"
+     ],
+     "Cr": [
+      "2.80",
+      "H"
+     ],
+     "Glu": [
+      "166",
+      "H"
+     ],
+     "Ca": [
+      "8.8",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "11.6",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "193",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "A1c": [
+      "8.1",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2016",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "32",
+      "H"
+     ],
+     "Cr": [
+      "1.90",
+      "H"
+     ],
+     "Glu": [
+      "165",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "84",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "WBC": [
+      "7.9",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "199",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "A1c": [
+      "8.6",
+      "H"
+     ],
+     "USG": [
+      "1.013",
+      ""
+     ],
+     "UProt": [
+      "3+",
+      "A"
+     ],
+     "UGlu": [
+      "2+",
+      "A"
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ],
+     "Phos": [
+      "4.0",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Phos",
+    "name": "Phosphorus",
+    "unit": "mg/dL",
+    "ref": "2.5-4.5"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "24-336"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "PSA",
+    "name": "PSA",
+    "unit": "ng/mL",
+    "ref": "<4.00"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "01/14/2025",
+    "HLA typing / PRA",
+    "cPRA 0%",
+    ""
+   ],
+   [
+    "01/14/2025",
+    "Serologies",
+    "CMV IgG positive; EBV IgG positive; HBsAg neg; anti-HBs 86 (immune); HCV neg; HIV neg",
+    ""
+   ],
+   [
+    "01/14/2025",
+    "QuantiFERON",
+    "Negative",
+    ""
+   ],
+   [
+    "10/20/2026",
+    "Flow cytometry crossmatch (T and B cell)",
+    "Negative",
+    ""
+   ],
+   [
+    "10/20/2026",
+    "Type and crossmatch",
+    "O positive; antibody screen negative; donor O positive",
+    ""
+   ],
+   [
+    "10/24/2026",
+    "Dialysis treatment record",
+    "Pre-wt 90.6 kg, post-wt 88.2 kg (EDW 88.0), UF 2.4 L, K bath 2.0",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "POC glucose",
+    "188 mg/dL (0545)",
+    "H"
+   ],
+   [
+    "10/27/2026",
+    "Repeat potassium (whole blood, POC)",
+    "6.2 mmol/L (0610)",
+    "H"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "04/28/2022",
+   "XR Chest portable",
+   "Cardiomegaly, bilateral perihilar edema, small effusions. Impression: Pulmonary edema.",
+   "J. Pressley, MD"
+  ],
+  [
+   "2023",
+   "CT Coronary calcium / CTA (noncontrast calcium only due to allergy)",
+   "Agatston score 412. Impression: Extensive coronary calcification.",
+   "J. Pressley, MD"
+  ],
+  [
+   "01/14/2025",
+   "US Kidneys and iliac vessels (transplant eval)",
+   "Small echogenic native kidneys (8.9 and 9.1 cm). Iliac arteries patent with mild calcification; no aneurysm. Impression: Suitable iliac targets.",
+   "J. Pressley, MD"
+  ],
+  [
+   "01/14/2025",
+   "XR Chest 2 views",
+   "Mild cardiomegaly. Clear lungs.",
+   "J. Pressley, MD"
+  ],
+  [
+   "10/20/2026",
+   "XR Chest 2 views",
+   "Mild cardiomegaly. No edema. Impression: Stable.",
+   "J. Pressley, MD"
+  ],
+  [
+   "10/27/2026",
+   "XR Chest portable",
+   "Cardiomegaly. Mild pulmonary vascular congestion and small bilateral pleural effusions, new since 10/20. Impression: Mild volume overload.",
+   "K. Douthat, MD (prelim)"
+  ]
+ ],
+ "cardiology": [
+  [
+   "2020",
+   "Gastric emptying study (nuclear)",
+   "4-h retention 28% (normal <10%). Impression: Delayed gastric emptying.",
+   "Nuclear Medicine"
+  ],
+  [
+   "01/2025",
+   "Echocardiogram, transthoracic",
+   "LVEF 55%. Moderate concentric LVH. Grade II diastolic dysfunction. LA mildly dilated. RVSP 34. Impression: Hypertensive heart disease, preserved EF.",
+   "D. Lusk, MD"
+  ],
+  [
+   "03/2026",
+   "Regadenoson nuclear stress test",
+   "No ischemia or infarct. EF 54%. Normal wall motion. Impression: Low-risk study.",
+   "D. Lusk, MD"
+  ],
+  [
+   "10/20/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 76. LVH with repolarization abnormality. QTc 452.",
+   "D. Lusk, MD",
+   {
+    "tmod": {
+     "I": -0.6,
+     "aVL": -0.6,
+     "V4": -0.4,
+     "V5": -0.8,
+     "V6": -0.8
+    },
+    "st": {
+     "I": -0.07,
+     "aVL": -0.07,
+     "V4": -0.05,
+     "V5": -0.1,
+     "V6": -0.1
+    },
+    "stDown": [
+     "I",
+     "aVL",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "rate": 76,
+    "pr": 170,
+    "qrs": 98,
+    "qtc": 452,
+    "axis": 10,
+    "lvh": 1
+   }
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 84. Tall peaked T waves V2-V5, new compared with 10/20/2026. LVH. QRS 98 ms. QTc 448.",
+   "Computer read; overread pending",
+   {
+    "rate": 84,
+    "pr": 176,
+    "qrs": 98,
+    "qtc": 448,
+    "axis": 10,
+    "lvh": 1,
+    "peaked": [
+     "V2",
+     "V3",
+     "V4",
+     "V5"
+    ],
+    "tmod": {
+     "I": -0.3,
+     "aVL": -0.3,
+     "V6": -0.3
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "03/14/2016",
+   "Clinic - PCP",
+   "Newport Internal Medicine",
+   "DM/CKD",
+   "Nephrology referral"
+  ],
+  [
+   "09/12/2020",
+   "Clinic - Nephrology",
+   "C-N Kidney Associates",
+   "CKD 4",
+   "Dialysis education; AVF referral"
+  ],
+  [
+   "01/2022",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "L AVF creation",
+   "Home"
+  ],
+  [
+   "04/28/2022",
+   "Inpatient (5 days)",
+   "C-N University Hospital",
+   "Uremia, pulmonary edema, K 6.4",
+   "Urgent HD via tunneled catheter; outpatient HD"
+  ],
+  [
+   "07/18/2023",
+   "ED visit",
+   "C-N University Hospital",
+   "R toe infection",
+   "Admitted overnight; I&D; vanc reaction"
+  ],
+  [
+   "01/14/2025",
+   "Transplant evaluation",
+   "C-N Transplant Center",
+   "Kidney transplant eval",
+   "Listed; living donor work-up"
+  ],
+  [
+   "03/2026",
+   "Cardiology",
+   "C-N Heart Associates",
+   "Pre-transplant stress test",
+   "Negative"
+  ],
+  [
+   "09/14/2026",
+   "Clinic - Transplant Surgery",
+   "C-N Transplant Center",
+   "Surgery scheduling",
+   "Date set 10/27"
+  ],
+  [
+   "10/20/2026",
+   "Preadmission testing",
+   "C-N Transplant Center",
+   "Pre-transplant visit",
+   "Crossmatch negative"
+  ],
+  [
+   "10/24/2026",
+   "Hemodialysis (Saturday - rescheduled)",
+   "Cocke County Dialysis",
+   "Routine HD",
+   "Completed 3.5 h"
+  ],
+  [
+   "10/26/2026",
+   "Hemodialysis (Monday)",
+   "Cocke County Dialysis",
+   "Routine HD",
+   "NO SHOW - transportation"
+  ]
+ ],
+ "notes": [
+  [
+   "03/14/2016 1000",
+   "Progress Note",
+   "Internal Medicine",
+   "R. Kinser, MD",
+   "A1c 8.6. Cr 1.9, 3+ proteinuria. Diabetic nephropathy. Max lisinopril, refer nephrology. Ophthalmology referral."
+  ],
+  [
+   "09/12/2020 1400",
+   "Consult",
+   "Nephrology",
+   "P. Hyder, MD",
+   "CKD 4 (eGFR 14). Discussed RRT options, preemptive transplant referral, vein preservation (L arm). AVF referral. Gastroparesis symptoms - GES ordered."
+  ],
+  [
+   "05/03/2022 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "B. Combs, MD",
+   "Uremic symptoms, pulmonary edema, K 6.4, pH 7.24. Urgent HD via R IJ tunneled catheter. AVF not yet mature. Outpatient HD MWF Cocke County Dialysis."
+  ],
+  [
+   "07/19/2023 1300",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "T. Bales, DO",
+   "R 2nd toe abscess, I&D by podiatry under local/MAC. Vancomycin - flushing/pruritus with rapid infusion (red man), resolved with slower rate. Cefazolin after cultures (MSSA) dosed post-HD."
+  ],
+  [
+   "01/14/2025 1500",
+   "Consult",
+   "Transplant Nephrology",
+   "E. Varghese, MD",
+   "Transplant eval: suitable candidate. cPRA 0%. CMV+ recipient. Cardiac: stress test required (CAC 412). Living donor: brother being evaluated. Listed deceased donor waitlist."
+  ],
+  [
+   "01/14/2025 1600",
+   "Consult",
+   "Anesthesiology (transplant committee)",
+   "G. Petrey, MD",
+   "Pre-transplant anesthesia review: airway MP II, BMI 28. Gastroparesis - RSI indicated. Mild OSA. Continue carvedilol periop. Will need CVC intraop. Accepted."
+  ],
+  [
+   "03/18/2026 1400",
+   "Progress Note",
+   "Cardiology",
+   "D. Lusk, MD",
+   "Regadenoson MPI negative; EF 54%. Acceptable cardiac risk for transplant. Continue aspirin, statin, carvedilol."
+  ],
+  [
+   "09/14/2026 1100",
+   "H&P",
+   "Transplant Surgery",
+   "A. Mehrotra, MD",
+   "Living related donor transplant scheduled 10/27. Recipient: ESRD from DN, HD MWF via L AVF (good thrill), EDW 88 kg, minimal residual urine (<100 mL/day). Native kidneys remain. Plan: R iliac fossa, thymoglobulin induction, tacrolimus/MMF/steroids. Dialysis day before surgery (Monday 10/26) to target EDW, K <5.0. Consent signed."
+  ],
+  [
+   "10/20/2026 1300",
+   "Progress Note",
+   "Transplant Nephrology",
+   "E. Varghese, MD",
+   "Pre-transplant visit. Flow XM negative. K 5.0 on midweek labs. Wt 88.9. Plan: HD Mon 10/26 with 2K bath, UF to EDW; no heparin bolus beyond usual. Start tacrolimus/MMF 10/26 PM. NPO midnight. Report to transplant unit 0500."
+  ],
+  [
+   "10/20/2026 1330",
+   "Pharmacy Note",
+   "Transplant Pharmacy",
+   "H. Duncan, PharmD",
+   "Immunosuppression teaching complete. Tacrolimus 0.1 mg/kg/day divided (4 mg BID). Valganciclovir (CMV D-/R+, intermediate risk) 450 mg after renal function recovers; TMP-SMX ppx. Interaction review: none significant."
+  ],
+  [
+   "10/22/2026 0845",
+   "Social Work",
+   "Dialysis Unit (scanned)",
+   "P. Moyers, MSW (Cocke County Dialysis)",
+   "Unit water treatment maintenance Fri 10/23 - MWF pts moved to Sat 10/24. Pt aware. Transport company notified of Saturday and Monday schedule."
+  ],
+  [
+   "10/26/2026 1105",
+   "Telephone Encounter",
+   "Dialysis Unit (faxed to transplant center 10/26 1820)",
+   "R. Hurd, RN (Cocke County Dialysis)",
+   "Pt no-show for 0600 HD. Called pt: transport van did not arrive (driver schedule error); wife at work. Offered 2nd/3rd shift - no available transport. Pt states \"they will dialyze me at the hospital before surgery anyway.\" Faxed to transplant coordinator. Pt reports mild leg swelling, no SOB."
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Transplant Center",
+   "C. Tolliver, RN (Transplant Coordinator)",
+   "Pre-op call (scripted). Pt confirmed arrival 0500, NPO after midnight, tacrolimus/MMF tonight 2000, glargine 16 units. \"Dialysis done?\" - pt answered \"yes, Saturday.\" Instructions reviewed."
+  ],
+  [
+   "10/27/2026 0600",
+   "Nursing Note",
+   "Transplant Unit",
+   "M. Wyrick, RN",
+   "Admitted 0510. Wt 92.0 kg (EDW 88.0). BP 172/98. 2+ bilateral ankle edema. Lungs: fine crackles bases. SpO2 94% RA. Pt reports last HD Saturday; missed Monday (van). Fistula L arm good thrill/bruit - L arm restricted. Labs drawn 0540 R hand; K 6.1, repeat POC 6.2. ECG done - computer read peaked T waves. Paged transplant fellow 0620 - \"OR at 0730 as planned; donor already in pre-op, will discuss with anesthesia.\""
+  ],
+  [
+   "10/27/2026 0640",
+   "Progress Note",
+   "Transplant Surgery",
+   "S. Ruble, MD (fellow)",
+   "Pre-op. Pt seen. Donor (brother) in OR 22 holding, induction 0730. K 6.1 - discussed with attending; anesthesia to manage hyperkalemia intraop. Volume up 4 kg - will limit fluids until reperfusion. Proceed."
+  ],
+  [
+   "06/09/2025 1915",
+   "Patient Message",
+   "Transplant Center",
+   "Ogletree, Marcus (patient)",
+   "My brother finished his testing. Do we have a date yet? Thank you all."
+  ],
+  [
+   "11/12/2024 1000",
+   "Procedure Note",
+   "Podiatry",
+   "L. Ricker, DPM",
+   "Routine diabetic foot care, nail debridement. Monofilament absent bilaterally. Return 3 mo."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/14/2016 0945",
+   "148/92",
+   82,
+   16,
+   98,
+   36.6,
+   94.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "04/28/2022 2120",
+   "188/104",
+   104,
+   28,
+   88,
+   36.8,
+   96.2,
+   "0/10",
+   "ED"
+  ],
+  [
+   "07/18/2023 1550",
+   "142/80",
+   96,
+   18,
+   97,
+   37.8,
+   90.1,
+   "6/10",
+   "ED"
+  ],
+  [
+   "01/14/2025 1400",
+   "146/86",
+   74,
+   16,
+   97,
+   36.6,
+   89.0,
+   "0/10",
+   "Transplant eval"
+  ],
+  [
+   "10/20/2026 1245",
+   "144/84",
+   76,
+   16,
+   97,
+   36.7,
+   88.9,
+   "0/10",
+   "Transplant clinic"
+  ],
+  [
+   "10/24/2026 1030",
+   "138/80",
+   78,
+   16,
+   97,
+   36.6,
+   88.2,
+   "0/10",
+   "Post-HD (dialysis unit)"
+  ],
+  [
+   "10/27/2026 0515",
+   "172/98",
+   84,
+   20,
+   94,
+   36.7,
+   92.0,
+   "0/10",
+   "Transplant unit"
+  ]
+ ],
+ "orders": [
+  [
+   "BMP, CBC, Coag, Mg, Phos, VBG",
+   "10/27/2026 0530",
+   "Resulted - K 6.1"
+  ],
+  [
+   "ECG",
+   "10/27/2026 0530",
+   "Done - overread pending"
+  ],
+  [
+   "XR Chest portable",
+   "10/27/2026 0530",
+   "Resulted"
+  ],
+  [
+   "NPO",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Hemodialysis pre-op",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Calcium gluconate / insulin-dextrose for K >6",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Central venous catheter (OR)",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "No BP/IV/labs left arm - AV fistula",
+   "09/14/2026",
+   "Active"
+  ],
+  [
+   "Type and crossmatch 2 units, irradiated",
+   "10/20/2026",
+   "Ready"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched (irradiated, leukoreduced)",
+  "notes": "Transplant protocol: leukoreduced only.",
+  "specimen_expires": "10/23/2026 - REDRAWN 10/27 0540"
+ },
+ "consents": [
+  [
+   "Surgical consent: living-donor kidney transplant (recipient)",
+   "Signed 09/14/2026"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/20/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Healthcare POA: wife Lakisha (2025).",
+ "anesthesia_history": [
+  [
+   "1995",
+   "L knee arthroscopy",
+   "GA",
+   "None",
+   "Outside"
+  ],
+  [
+   "01/2022",
+   "L AVF creation",
+   "Supraclavicular block + MAC",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "05/2022",
+   "Tunneled HD catheter",
+   "Local/MAC",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "07/2023",
+   "Toe I&D",
+   "MAC/local",
+   "None",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0510",
+  "npo_solids": "10/26/2026 2200",
+  "npo_clears": "10/27/2026 0500 sip with tacrolimus/MMF/carvedilol",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/14 + 10/20 nephrology)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - right lower quadrant"
+   ],
+   [
+    "Allergy band",
+    "Done - contrast, vancomycin"
+   ],
+   [
+    "L arm restriction band",
+    "Done"
+   ],
+   [
+    "Blood available",
+    "2 u"
+   ]
+  ],
+  "nursing_note": "See nursing note 0600. Wt 92.0 (+4 kg EDW). Crackles bases, SpO2 94% RA, 2+ edema. K 6.1/6.2, peaked T on ECG. Glucose 188. Took carvedilol, tacrolimus, MMF 0500. 20 g R hand.",
+  "iv": "20 g R hand",
+  "glucose": "188 mg/dL (0545)"
+ },
+ "label": "M. Ogletree",
+ "bmi": "28.4"
+}

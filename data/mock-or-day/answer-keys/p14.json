@@ -1,0 +1,159 @@
+{
+ "id": "p14",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Grand multip in active labor with high PPH risk and a new anti-K antibody (no compatible blood for 2 to 4 h), carboprost stocked in the hemorrhage cart despite her bronchospasm reaction, a prior L4 to S1 fusion that made her last epidural patchy, and a worsening airway exam.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Pregnancy with obesity, asthma, red cell alloimmunization, and high hemorrhage risk."
+ },
+ "decision": {
+  "recommendation": "proceed with an early epidural, while fixing the hemorrhage setup",
+  "rationale": "An early, well placed epidural is the plan and lowers GA risk. At the same time: second large bore IV, notify OB and blood bank (antigen negative units), pull carboprost from the cart, TXA ready."
+ },
+ "redFlags": [
+  {
+   "id": "antibody",
+   "severity": "critical",
+   "finding": "Anti-K alloantibody with no compatible blood available",
+   "evidence": "Antibody screen positive: anti-D (passive from RhIG) and anti-K; antigen negative units 2 to 4 h away; prior transfusion 2022.",
+   "implication": "A PPH now has no immediately compatible blood.",
+   "action": "Escalate to blood bank and OB now, keep the hemorrhage plan ready, TXA available, consider cell saver for any operative delivery.",
+   "keywords": [
+    "anti-k",
+    "kell",
+    "antibody",
+    "alloimmun",
+    "antigen negative",
+    "crossmatch",
+    "blood bank"
+   ]
+  },
+  {
+   "id": "carboprost",
+   "severity": "critical",
+   "finding": "Carboprost in the hemorrhage cart despite a documented bronchospasm reaction",
+   "evidence": "Carboprost 2022: wheezing and SpO2 88%; allergy alert overridden when stocking; asthma.",
+   "implication": "Bronchospasm during a hemorrhage.",
+   "action": "Remove carboprost; use oxytocin, methylergonovine (BP allows), misoprostol, TXA.",
+   "keywords": [
+    "carboprost",
+    "hemabate",
+    "methylergonovine",
+    "methergine",
+    "oxytocin",
+    "misoprostol",
+    "txa"
+   ]
+  },
+  {
+   "id": "pph",
+   "severity": "major",
+   "finding": "High PPH risk with one IV",
+   "evidence": "Grand multip, polyhydramnios (AFI 26), EFW 4250 g, prior atony 1600 mL; second IV not placed.",
+   "implication": "Atony likely.",
+   "action": "Second large bore IV now, quantitative blood loss, oxytocin after delivery.",
+   "keywords": [
+    "second iv",
+    "large bore",
+    "pph",
+    "hemorrhage",
+    "atony"
+   ]
+  },
+  {
+   "id": "spine",
+   "severity": "major",
+   "finding": "Prior L4 to S1 fusion with laminectomy and a patchy previous epidural",
+   "evidence": "2018 op note; 2022 epidural 4 attempts, asymmetric block; clinic plan: early epidural by attending, ultrasound, L2-3 or above, consider CSE or DPE; baseline right L5 numbness. OB H&P incorrectly says no prior back surgery.",
+   "implication": "Failed or patchy block, higher dural puncture risk.",
+   "action": "Attending with ultrasound, enter above the fusion, CSE or DPE, document baseline neuro exam, test the block early.",
+   "keywords": [
+    "fusion",
+    "ultrasound",
+    "l2-3",
+    "cse",
+    "dpe",
+    "dural puncture",
+    "patchy",
+    "baseline neuro"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "major",
+   "finding": "Worsening airway exam",
+   "evidence": "Mallampati III now (II at 28 weeks), BMI 38, short neck; ate dinner at 1900.",
+   "implication": "GA would be risky.",
+   "action": "Early functioning epidural to avoid GA; aspiration prophylaxis; difficult airway equipment.",
+   "keywords": [
+    "mallampati",
+    "airway",
+    "aspiration prophylaxis",
+    "sodium citrate"
+   ]
+  },
+  {
+   "id": "rh",
+   "severity": "minor",
+   "finding": "Rh negative",
+   "evidence": "O negative; passive anti-D from RhIG.",
+   "implication": "Postpartum RhIG decision.",
+   "action": "Postpartum Rh workup.",
+   "keywords": [
+    "rh",
+    "rhig",
+    "rhogam"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "regional",
+   "item": "Early epidural or CSE at L2-3 or above with ultrasound",
+   "keywords": [
+    "epidural",
+    "cse",
+    "ultrasound"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "Second large bore IV, TXA available, hemorrhage cart corrected",
+   "keywords": [
+    "large bore",
+    "txa"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Quantitative blood loss, frequent block checks",
+   "keywords": [
+    "qbl",
+    "quantitative blood loss"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Difficult airway plan if GA is needed",
+   "keywords": [
+    "video",
+    "difficult airway"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "HighSpinal",
+   "why": "Epidural with possible unintended dural puncture near prior surgery"
+  },
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Epidural local anesthetic boluses"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Asthma"
+  }
+ ]
+}

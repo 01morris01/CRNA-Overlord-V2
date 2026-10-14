@@ -1,0 +1,137 @@
+{
+ "id": "p26",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "7 y with level 3 autism for dental rehab with nasal intubation; IM ketamine premed worked beautifully in 2024 after a traumatic mask induction in 2022; apple juice 90 min before; asthma not examined.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "ASD and mild intermittent asthma."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Clear liquids at 0830 meet a 1 h pediatric clear fluid policy (if your institution uses 2 h, start at 1030). Repeat the proven IM ketamine plan with mother present."
+ },
+ "redFlags": [
+  {
+   "id": "premed",
+   "severity": "major",
+   "finding": "Uncooperative child with a proven premedication plan",
+   "evidence": "2022 sevo mask induction needed 3 staff and desaturated; 2024 IM ketamine 4 mg/kg in mother's lap was smooth; vitals refused today.",
+   "implication": "Forced mask induction is traumatic and risky.",
+   "action": "IM ketamine (about 4 mg/kg) with mother present, then IV and standard monitors once sedated.",
+   "keywords": [
+    "ketamine",
+    "im",
+    "premed",
+    "intramuscular",
+    "autism",
+    "mother"
+   ]
+  },
+  {
+   "id": "npo",
+   "severity": "minor",
+   "finding": "Clear liquid 90 minutes before start",
+   "evidence": "Apple juice 4 oz at 0830; case 1000; milk and crackers 0145.",
+   "implication": "Meets a 1 h pediatric clear policy, not a 2 h policy.",
+   "action": "Follow institutional rule.",
+   "keywords": [
+    "npo",
+    "juice",
+    "clear"
+   ]
+  },
+  {
+   "id": "asthma",
+   "severity": "major",
+   "finding": "Asthma not assessed and premed albuterol refused",
+   "evidence": "Albuterol 10/14 for cough; refused spacer today; lungs not auscultated.",
+   "implication": "Bronchospasm with nasal and oral instrumentation.",
+   "action": "Auscultate after sedation; albuterol through the circuit after induction.",
+   "keywords": [
+    "asthma",
+    "albuterol",
+    "bronchospasm",
+    "auscultat"
+   ]
+  },
+  {
+   "id": "nasal",
+   "severity": "major",
+   "finding": "Nasotracheal intubation with throat pack",
+   "evidence": "Surgeon request.",
+   "implication": "Epistaxis and a retained throat pack.",
+   "action": "Vasoconstrictor to the nares, lubricated warmed tube, document and count the throat pack removal.",
+   "keywords": [
+    "nasal",
+    "nasotracheal",
+    "oxymetazoline",
+    "throat pack",
+    "epistaxis"
+   ]
+  },
+  {
+   "id": "emergence",
+   "severity": "minor",
+   "finding": "Prior severe emergence agitation",
+   "evidence": "2022 ABR; 2024 calm emergence in a dim room with mother.",
+   "implication": "Agitation after sevoflurane.",
+   "action": "Calm environment, mother at bedside, consider dexmedetomidine or propofol at end.",
+   "keywords": [
+    "emergence",
+    "agitation",
+    "dexmedetomidine"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "IM ketamine premedication, then IV induction",
+   "keywords": [
+    "ketamine"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Nasal RAE with throat pack",
+   "keywords": [
+    "nasal rae",
+    "throat pack"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Dexamethasone and ondansetron",
+   "keywords": [
+    "dexamethasone",
+    "ondansetron"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Acetaminophen, local by dentist, minimal opioid",
+   "keywords": [
+    "acetaminophen",
+    "local"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Same day discharge with parents",
+   "keywords": [
+    "discharge"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Blood and secretions in the airway at emergence"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Asthma"
+  }
+ ]
+}

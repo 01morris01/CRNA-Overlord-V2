@@ -1,0 +1,2078 @@
+{
+ "id": "p04",
+ "room": "OR 7",
+ "time": "0730",
+ "name": "HOLLOWAY, DARNELL K",
+ "mrn": "0090233",
+ "dob": "02/21/1980",
+ "age": "46 y",
+ "sex": "M",
+ "ht_cm": 180,
+ "wt_kg": 166.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "V. Castellanos, MD, Dandridge Family Practice",
+ "insurance": "Cigna Open Access Plus (employer); bariatric benefit prior auth approved 09/30/2026",
+ "emergency_contact": "Tanya Holloway (wife) 865-555-0164",
+ "isolation": "",
+ "allergies": [
+  [
+   "Penicillin",
+   "Throat swelling, hives; required epinephrine",
+   "Severe (anaphylaxis)",
+   "1999"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic sleeve gastrectomy",
+  "short": "Laparoscopic sleeve gastrectomy",
+  "laterality": "N/A",
+  "service": "Bariatric Surgery",
+  "surgeon": "S. Varga, MD",
+  "assistant": "B. Lowery, MD (fellow)",
+  "indication": "Class III obesity (BMI 52) with OSA, type 2 diabetes, hypertension; failed medical weight loss; program requirements complete.",
+  "duration_min": 120,
+  "anesthesia_requested": "General",
+  "position": "Supine, split-leg, steep reverse Trendelenburg; bariatric table, footboard",
+  "dispo": "Bariatric floor, 23-h stay (ERAS)",
+  "blood": "Type and screen. EBL < 100 mL.",
+  "equipment": "Bariatric table and transfer device, 40 Fr bougie sizing tube (passed by anesthesia), laparoscopic staplers",
+  "implants": "",
+  "surgeon_notes": "ERAS pathway. Bougie sizing tube (40 Fr) passed by anesthesia. Leak test with methylene blue via OG at end. TAP blocks by surgeon (laparoscopic-guided).",
+  "add_on": false,
+  "scheduled_on": "09/30/2026"
+ },
+ "problems": [
+  [
+   "Class 3 severe obesity, BMI 50-59.9",
+   "2016",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea, severe (AHI 48)",
+   "2023",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes mellitus with hyperglycemia",
+   "2018",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2015",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2017",
+   "Active"
+  ],
+  [
+   "Major depressive disorder, recurrent, in remission",
+   "2019",
+   "Active"
+  ],
+  [
+   "Chronic low back pain, s/p L4-5 discectomy",
+   "2019",
+   "Active"
+  ],
+  [
+   "Pulmonary hypertension, mild (RVSP 42)",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Nicotine dependence, e-cigarettes",
+   "2024",
+   "Active"
+  ],
+  [
+   "Bilateral knee osteoarthritis",
+   "2022",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Obesity since adolescence; max weight 174 kg (02/2026)",
+   "OSA, severe (PSG 2023 AHI 48, nadir 72%), CPAP 14 cm H2O; download 09/2026: used 41% of nights",
+   "T2DM dx 2018, A1c 8.1 (10/2026)",
+   "HTN",
+   "GERD, LA grade A esophagitis and 2 cm hiatal hernia on EGD 09/2026",
+   "Depression, stable on sertraline since 2019",
+   "Chronic LBP, L4-5 microdiscectomy 2019; tramadol PRN",
+   "Bilateral knee OA"
+  ],
+  "psh": [
+   [
+    "06/2019",
+    "L4-5 microdiscectomy",
+    "C-N University Hospital"
+   ],
+   [
+    "05/2024",
+    "Colonoscopy (hematochezia): internal hemorrhoids",
+    "C-N Endoscopy"
+   ],
+   [
+    "09/2026",
+    "EGD (pre-bariatric)",
+    "C-N Endoscopy"
+   ],
+   [
+    "1997",
+    "Right hand laceration repair (local)",
+    "ED"
+   ]
+  ],
+  "family": [
+   "Father: HTN, CVA age 61",
+   "Mother: T2DM, obesity",
+   "Brother: OSA",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Smoked 1 ppd x 20 yr, quit cigarettes 2024; now vapes nicotine daily",
+   "alcohol": "6-8 beers on weekends",
+   "drugs": "Cannabis: \"a gummy at night for sleep\" (THC edible)",
+   "occupation": "Forklift operator / warehouse lead, Dandridge distribution center",
+   "living": "Wife and two teenage sons, Dandridge",
+   "other": "Wife will drive. Completed 6-month supervised diet program 03-09/2026."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2017"
+   ],
+   [
+    "Hepatitis B series",
+    "2026 (dose 2 of 2 Heplisav 04/2026)"
+   ],
+   [
+    "PCV20",
+    "2025"
+   ],
+   [
+    "COVID-19",
+    "2023"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Semaglutide 2 mg/dose pen (Ozempic)",
+   "2 mg SC weekly (Saturdays)",
+   "S. Varga, MD / bariatric medicine",
+   "10/24/2026"
+  ],
+  [
+   "Metformin ER 500 mg",
+   "1000 mg PO BID",
+   "V. Castellanos, MD",
+   "10/26/2026 1900"
+  ],
+  [
+   "Empagliflozin 25 mg",
+   "25 mg PO daily",
+   "V. Castellanos, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Lisinopril-hydrochlorothiazide 20-25 mg",
+   "1 tab PO daily",
+   "V. Castellanos, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Sertraline 100 mg",
+   "100 mg PO daily",
+   "V. Castellanos, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Tramadol 50 mg",
+   "50 mg PO q6h PRN back pain",
+   "V. Castellanos, MD",
+   "10/26/2026 2200"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "40 mg PO daily",
+   "S. Varga, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Phentermine 37.5 mg",
+   "37.5 mg PO daily (outside prescriber, added by preop RN 10/27)",
+   "R. Dalton, NP (SlimPath Weight Loss, Sevierville)",
+   "10/26/2026 0700"
+  ],
+  [
+   "Multivitamin (bariatric chewable)",
+   "1 tab daily",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop (ERAS)",
+   "Held - nausea; to give IV intraop"
+  ],
+  [
+   "Gabapentin 300 mg PO",
+   "Preop (ERAS)",
+   "Held - nausea"
+  ],
+  [
+   "Heparin 5,000 units SC",
+   "Preop",
+   "Given 10/27/2026 0630"
+  ],
+  [
+   "Clindamycin 900 mg IV",
+   "Within 60 min before incision (PCN allergy alternative per order set)",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "100 mL/h",
+   "Infusing 0625"
+  ],
+  [
+   "Scopolamine 1 mg transdermal patch",
+   "Preop (ERAS PONV)",
+   "Applied 10/27/2026 0630"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Glipizide 5 mg",
+   "2019-2025",
+   "Hypoglycemia at work; switched to empagliflozin"
+  ],
+  [
+   "Liraglutide 1.8 mg",
+   "2021-2023",
+   "Insurance non-coverage"
+  ],
+  [
+   "Cyclobenzaprine 10 mg",
+   "2019-2020",
+   "Sedation"
+  ],
+  [
+   "Omeprazole 20 mg",
+   "2017-2024",
+   "Changed to pantoprazole"
+  ],
+  [
+   "Nicotine patch 21 mg",
+   "2024",
+   "Switched to vaping"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0610",
+    "comment": "Day of surgery (anion gap 18)",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "18",
+      "L"
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "142",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "USG": [
+      "1.020",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "4+",
+      "A"
+     ],
+     "UKet": [
+      "2+",
+      "A"
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 0930",
+    "comment": "Preop clinic. Glucosuria expected on SGLT2i",
+    "vals": {
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "15.8",
+      ""
+     ],
+     "Hct": [
+      "48",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "A1c": [
+      "8.1",
+      "H"
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ],
+     "USG": [
+      "1.016",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "3+",
+      "A"
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/14/2026 0830",
+    "comment": "Bariatric month 6",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.99",
+      ""
+     ],
+     "Glu": [
+      "150",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "34",
+      ""
+     ],
+     "ALT": [
+      "46",
+      ""
+     ],
+     "ALKP": [
+      "89",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "A1c": [
+      "8.0",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/04/2026 0900",
+    "comment": "Bariatric program intake",
+    "vals": {
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "15.4",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "267",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "1.04",
+      ""
+     ],
+     "Glu": [
+      "147",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "32",
+      ""
+     ],
+     "ALT": [
+      "50",
+      ""
+     ],
+     "ALKP": [
+      "78",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "8.3",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "119",
+      "H"
+     ],
+     "HDL": [
+      "37",
+      "L"
+     ],
+     "TG": [
+      "213",
+      "H"
+     ],
+     "TSH": [
+      "1.06",
+      ""
+     ],
+     "FT4": [
+      "1.08",
+      ""
+     ],
+     "Ferritin": [
+      "210",
+      ""
+     ],
+     "Fe": [
+      "80",
+      ""
+     ],
+     "TSAT": [
+      "29",
+      ""
+     ],
+     "B12": [
+      "432",
+      ""
+     ],
+     "VitD": [
+      "18",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "03/19/2025 0815",
+    "comment": "Glipizide stopped, empagliflozin started",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "146",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "30",
+      ""
+     ],
+     "ALT": [
+      "48",
+      ""
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "8.6",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "122",
+      "H"
+     ],
+     "HDL": [
+      "36",
+      "L"
+     ],
+     "TG": [
+      "230",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/08/2024 0830",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.99",
+      ""
+     ],
+     "Glu": [
+      "144",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "36",
+      ""
+     ],
+     "ALT": [
+      "45",
+      ""
+     ],
+     "ALKP": [
+      "85",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "A1c": [
+      "8.4",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/27/2023 0900",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "16.2",
+      ""
+     ],
+     "Hct": [
+      "49",
+      ""
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.87",
+      ""
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "32",
+      ""
+     ],
+     "ALT": [
+      "50",
+      ""
+     ],
+     "ALKP": [
+      "85",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "7.8",
+      "H"
+     ],
+     "TSH": [
+      "2.30",
+      ""
+     ],
+     "FT4": [
+      "1.11",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/07/2022 0845",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "143",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "39",
+      ""
+     ],
+     "ALT": [
+      "50",
+      ""
+     ],
+     "ALKP": [
+      "83",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "7.5",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "7.6",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "108",
+      "H"
+     ],
+     "HDL": [
+      "36",
+      "L"
+     ],
+     "TG": [
+      "206",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/18/2021 0830",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "146",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "38",
+      ""
+     ],
+     "ALT": [
+      "50",
+      ""
+     ],
+     "ALKP": [
+      "80",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "7.2",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/10/2019 0700",
+    "comment": "Preop discectomy",
+    "vals": {
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "15.5",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "241",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.87",
+      ""
+     ],
+     "Glu": [
+      "138",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "PT": [
+      "12.5",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "26",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/02/2018 0815",
+    "comment": "New T2DM",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.99",
+      ""
+     ],
+     "Glu": [
+      "141",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "A1c": [
+      "6.9",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "123",
+      "H"
+     ],
+     "HDL": [
+      "33",
+      "L"
+     ],
+     "TG": [
+      "218",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2017 0800",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "15.4",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "1.01",
+      ""
+     ],
+     "Glu": [
+      "112",
+      "H"
+     ],
+     "Ca": [
+      "10.0",
+      ""
+     ],
+     "AST": [
+      "31",
+      ""
+     ],
+     "ALT": [
+      "44",
+      ""
+     ],
+     "ALKP": [
+      "71",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "126",
+      "H"
+     ],
+     "HDL": [
+      "31",
+      "L"
+     ],
+     "TG": [
+      "201",
+      "H"
+     ],
+     "A1c": [
+      "6.1",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "24-336"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "10/13/2026 1015",
+    "ABG, room air",
+    "pH 7.38, PaCO2 47, PaO2 68, HCO3 27",
+    "A"
+   ],
+   [
+    "10/27/2026 0600",
+    "POC glucose",
+    "156 mg/dL",
+    "H"
+   ],
+   [
+    "10/27/2026 0610",
+    "Anion gap (calculated)",
+    "18 (ref 8-16)",
+    "H"
+   ],
+   [
+    "10/27/2026 0610",
+    "Beta-hydroxybutyrate",
+    "Not ordered",
+    ""
+   ],
+   [
+    "03/04/2026",
+    "H. pylori stool antigen",
+    "Negative",
+    ""
+   ],
+   [
+    "03/04/2026",
+    "Hepatitis B surface Ab",
+    "Non-immune (vaccinated 2026)",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "Nicotine/cotinine, urine",
+    "Cotinine positive (> 500 ng/mL)",
+    "A"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "05/20/2019",
+   "MRI Lumbar spine without contrast",
+   "L4-5 large right paracentral extrusion with severe right lateral recess stenosis contacting right L5 root. Mild degenerative change elsewhere. Impression: L4-5 disc extrusion.",
+   "G. Holt, MD"
+  ],
+  [
+   "03/04/2026",
+   "US Abdomen complete",
+   "Limited by body habitus. Hepatomegaly 20 cm with diffuse increased echogenicity (steatosis). Gallbladder without stones. Impression: Hepatic steatosis.",
+   "T. Banerjee, MD"
+  ],
+  [
+   "03/04/2026",
+   "XR Chest 2 views",
+   "Low lung volumes. No consolidation. Cardiac silhouette upper normal. Impression: No acute process.",
+   "T. Banerjee, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Pektoralisschatten_im_Roentgenbild_38M_-_CR_pa_-_001.jpg)"
+   }
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/06/2023",
+   "Polysomnogram, split-night",
+   "Diagnostic portion: AHI 48/h, RDI 56, nadir SpO2 72%, 22% TST < 88%. CPAP titration: obstruction eliminated at 14 cm H2O. Impression: Severe OSA; CPAP 14 cm H2O, full face mask.",
+   "P. Saldana, MD"
+  ],
+  [
+   "09/22/2026",
+   "CPAP compliance download (30 days)",
+   "Usage >= 4 h on 41% of nights. Average 3.1 h on nights used. Residual AHI 3.8. Large leak 18%.",
+   "C-N Sleep Disorders Center"
+  ],
+  [
+   "08/19/2026",
+   "Echocardiogram, transthoracic",
+   "Technically difficult (body habitus), definity used. LVEF 55%. Mild concentric LVH. Normal diastolic function indeterminate. RV mildly dilated, normal function, TAPSE 19 mm. RVSP 42 mm Hg (mild pulmonary hypertension). No significant valve disease.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/13/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 88. Left axis deviation. Low voltage QRS. No acute ST-T changes. QTc 446.",
+   "D. Harrell, MD",
+   {
+    "rate": 88,
+    "pr": 164,
+    "qrs": 92,
+    "qtc": 446,
+    "axis": -35,
+    "lowv": 1
+   }
+  ],
+  [
+   "09/02/2026",
+   "Spirometry",
+   "FVC 78% pred, FEV1 76% pred, FEV1/FVC 0.80. Restrictive pattern consistent with obesity; no obstruction.",
+   "C-N Pulmonary Function Lab"
+  ]
+ ],
+ "encounters": [
+  [
+   "05/28/2019",
+   "ED visit",
+   "C-N University Hospital",
+   "Low back pain, R leg radiculopathy",
+   "MRI, neurosurgery referral"
+  ],
+  [
+   "06/12/2019",
+   "Outpatient surgery (23-h)",
+   "C-N University Hospital",
+   "L4-5 microdiscectomy",
+   "Difficult mask/desaturation, extubated to CPAP; discharged next day"
+  ],
+  [
+   "03/06/2023",
+   "Sleep lab",
+   "C-N Sleep Disorders Center",
+   "Split-night PSG",
+   "CPAP prescribed"
+  ],
+  [
+   "05/14/2024",
+   "Endoscopy",
+   "C-N Endoscopy",
+   "Colonoscopy (hematochezia)",
+   "Hemorrhoids"
+  ],
+  [
+   "03/04/2026",
+   "Specialty clinic",
+   "C-N Bariatric Center",
+   "Bariatric intake",
+   "6-month program"
+  ],
+  [
+   "08/19/2026",
+   "Cardiology testing",
+   "C-N Heart Center",
+   "Preop echo",
+   "Mild pulmonary HTN"
+  ],
+  [
+   "09/15/2026",
+   "Endoscopy",
+   "C-N Endoscopy",
+   "Pre-bariatric EGD",
+   "Hiatal hernia, LA A esophagitis"
+  ],
+  [
+   "10/13/2026",
+   "Preop clinic",
+   "C-N Bariatric Center / PAT",
+   "Preop H&P",
+   "Cleared for surgery 10/27"
+  ],
+  [
+   "10/27/2026",
+   "Day surgery",
+   "C-N University Hospital",
+   "Sleeve gastrectomy",
+   "In preop"
+  ]
+ ],
+ "notes": [
+  [
+   "06/12/2019 1340",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "C-N Anesthesia (scanned intraop record)",
+   "L4-5 microdiscectomy, prone. Wt 158 kg. Preoxygenation 3 min. Propofol 200 mg, succinylcholine 160 mg. Mask ventilation grade 3 (two-hand with OPA, inadequate). VL (C-MAC 4): grade IIb, first pass with bougie, 8.0 ETT. SpO2 nadir 84% during intubation. Extubated awake in semi-upright position to CPAP. Airway note: \"Difficult mask ventilation. Recommend ramped position, HFNO preoxygenation, VL first.\""
+  ],
+  [
+   "06/13/2019 0900",
+   "Discharge Summary",
+   "Neurosurgery",
+   "J. Abrams, PA-C",
+   "L4-5 microdiscectomy, leg pain resolved. Overnight on continuous pulse oximetry: desaturations to 82% off CPAP (patient did not have home CPAP - first suspicion of OSA). Recommend sleep study (not completed until 2023)."
+  ],
+  [
+   "03/06/2023 2300",
+   "Procedure Note",
+   "Sleep Medicine",
+   "K. Ivey, RPSGT",
+   "Split night completed. Pt fell asleep 2240. Frequent obstructive apneas with desaturation to 72%. CPAP titrated 5 -> 14 cm H2O. Mask fit: full face medium."
+  ],
+  [
+   "05/14/2024 0915",
+   "Procedure Note",
+   "Gastroenterology",
+   "L. Trinh, MD",
+   "Colonoscopy for hematochezia, propofol sedation by anesthesia. Grade 2 internal hemorrhoids. No polyps. Sedation note: upper airway obstruction requiring nasal airway and jaw thrust; SpO2 nadir 86%. Repeat in 10 years."
+  ],
+  [
+   "03/04/2026 1000",
+   "Consult",
+   "Bariatric Surgery",
+   "S. Varga, MD",
+   "Bariatric intake. Wt 174 kg, BMI 53.7. Multiple diet attempts, liraglutide 2021-2023 lost 9 kg. Comorbid OSA, T2DM, HTN, GERD, OA. Discussed sleeve vs RYGB; sleeve favored (patient preference, mild GERD); final choice after EGD. Start semaglutide titration (T2DM and weight) as bridge. Program: 6 months dietitian, psych eval, exercise, EGD, echo (pulm HTN screen), quit nicotine 6 weeks preop."
+  ],
+  [
+   "03/04/2026 1130",
+   "Dietitian",
+   "Bariatric Nutrition",
+   "R. Benoit, RD",
+   "Initial nutrition eval. Diet recall: fast food lunch daily, 2-3 regular sodas/day, beer weekends. Goals: eliminate sugary beverages, protein 80 g/day, track intake. Vitamin D low (18): start D3 2,000 IU."
+  ],
+  [
+   "04/22/2026 1400",
+   "Consult",
+   "Psychology",
+   "M. Ferrell, PhD",
+   "Pre-bariatric psych eval. MDD in remission on sertraline. No binge eating disorder. Alcohol: weekend use, counseled. Cannabis edibles for sleep. Adequate support (wife). Cleared from psychological standpoint."
+  ],
+  [
+   "06/09/2026 1015",
+   "Telephone Encounter",
+   "Bariatric Center",
+   "C. Pope, RN",
+   "Pt reports nausea and early fullness after semaglutide increase to 1 mg. Advised small frequent meals, stay at 1 mg x 4 more weeks, then 2 mg weekly per Dr. Varga if tolerated."
+  ],
+  [
+   "08/14/2026 1100",
+   "Progress Note",
+   "Bariatric Medicine",
+   "A. Lutz, NP",
+   "Month 6. Wt 169 kg (-5 kg). Semaglutide 2 mg weekly since 08/01, mild nausea. A1c 8.0. Still vaping nicotine daily; counseled again, offered varenicline (declined). Echo and PFTs ordered."
+  ],
+  [
+   "09/15/2026 0950",
+   "Procedure Note",
+   "Gastroenterology",
+   "L. Trinh, MD",
+   "EGD, MAC with propofol. 2 cm sliding hiatal hernia, LA grade A esophagitis. Retained food debris in stomach despite 12 h fast (pt on semaglutide; last dose 2 days prior) - lavaged. H. pylori negative. Sedation: chin lift and nasal airway needed. OK for sleeve per surgeon discretion."
+  ],
+  [
+   "09/30/2026 1600",
+   "Letter",
+   "Insurance",
+   "Cigna Utilization Management",
+   "Prior authorization approved: CPT 43775 laparoscopic sleeve gastrectomy, valid 09/30/2026-12/29/2026."
+  ],
+  [
+   "10/13/2026 0930",
+   "H&P",
+   "Bariatric Surgery",
+   "S. Varga, MD",
+   "Preop H&P. Wt 168 kg, Ht 180 cm, BMI 52. Failed medical weight loss. Completed program requirements. PMH: OSA on CPAP (uses about 3 nights a week). T2DM. HTN. GERD. Depression. Chronic LBP. Social: smoked 1 ppd, quit 2024; now vapes nicotine daily. Alcohol 6-8 beers on weekends. Cannabis: \"a gummy at night for sleep.\" Exam: BP 156/94, HR 88, SpO2 93% RA. Neck circumference 50 cm. Mallampati IV. Short thyromental distance. Beard. Lungs clear, distant. Functional capacity: walks about a block; stops for knee pain and breath. Plan: LSG 10/27. 2-week liquid diet starting 10/13. Hold metformin AM of surgery. Medications otherwise per preop instruction sheet. Bring CPAP."
+  ],
+  [
+   "10/13/2026 1200",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Carney, RN",
+   "Med rec with patient: semaglutide, metformin, empagliflozin, lisinopril-HCTZ, sertraline, tramadol, pantoprazole, MVI. Preop instruction sheet (bariatric standard) given: hold metformin morning of surgery; take sertraline and pantoprazole AM of surgery with sip. Sheet does not address GLP-1 or SGLT2 (flag sent to bariatric NP for review). Bring CPAP machine."
+  ],
+  [
+   "10/14/2026 0815",
+   "Patient Message",
+   "Bariatric Center",
+   "Darnell Holloway",
+   "Do I keep taking my weekly shot and my Jardiance before surgery? The paper didn't say. Reply 10/16 (C. Pope, RN): Continue all medications except metformin the morning of surgery unless Dr. Varga tells you otherwise."
+  ],
+  [
+   "10/20/2026 1530",
+   "Telephone Encounter",
+   "Bariatric Center",
+   "C. Pope, RN",
+   "Liquid diet check-in. Pt tolerating shakes, some nausea. Wt 167 kg at home. Reminded no solids. Questions answered."
+  ],
+  [
+   "10/26/2026 1045",
+   "Dietitian",
+   "Bariatric Nutrition",
+   "R. Benoit, RD",
+   "Pt on 2-week liquid diet. Reports early fullness and nausea on semaglutide; vomited this morning after protein shake. Protein intake ~60 g/day. Encouraged sips. Phone visit."
+  ],
+  [
+   "10/26/2026 1400",
+   "Telephone Encounter",
+   "Perioperative Services",
+   "J. Odom, RN",
+   "Preop call. Arrive 0530. Clear liquids until 0430 (water only). Bring CPAP. Pt: \"threw up after my shake this morning, but I'm OK.\" Message routed to bariatric NP pool."
+  ],
+  [
+   "10/27/2026 0555",
+   "Pharmacy Note",
+   "Pharmacy",
+   "D. Kwan, PharmD",
+   "Med rec addendum: pt reports taking phentermine 37.5 mg daily from an outside weight-loss clinic since 07/2026 (not in bariatric record). Controlled substance database: phentermine 37.5 mg #30 filled 07/28, 08/27, 09/26/2026 (SlimPath, R. Dalton NP). Last dose 10/26 0700. Notified anesthesia and surgery via preop RN."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/12/2019 0600",
+   "162/96",
+   92,
+   18,
+   94,
+   36.8,
+   158.0,
+   "6/10",
+   "Preop"
+  ],
+  [
+   "03/06/2023 2100",
+   "150/92",
+   86,
+   18,
+   94,
+   36.7,
+   165.0,
+   "0/10",
+   "Sleep lab"
+  ],
+  [
+   "05/14/2024 0800",
+   "148/90",
+   84,
+   16,
+   94,
+   36.6,
+   168.2,
+   "0/10",
+   "Endoscopy"
+  ],
+  [
+   "03/04/2026 1000",
+   "158/96",
+   90,
+   18,
+   93,
+   36.7,
+   174.0,
+   "3/10",
+   "Bariatric clinic"
+  ],
+  [
+   "08/14/2026 1100",
+   "150/92",
+   88,
+   18,
+   93,
+   36.8,
+   169.0,
+   "2/10",
+   "Bariatric clinic"
+  ],
+  [
+   "09/15/2026 0800",
+   "154/90",
+   90,
+   18,
+   93,
+   36.6,
+   168.8,
+   "0/10",
+   "Endoscopy"
+  ],
+  [
+   "10/13/2026 0930",
+   "156/94",
+   88,
+   18,
+   93,
+   36.8,
+   168.0,
+   "2/10",
+   "Bariatric preop clinic"
+  ],
+  [
+   "10/27/2026 0600",
+   "152/92",
+   96,
+   20,
+   92,
+   36.8,
+   166.0,
+   "0/10 (nausea)",
+   "Preop holding (forearm cuff)"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/27/2026 0540",
+   "Resulted"
+  ],
+  [
+   "BMP",
+   "10/27/2026 0540",
+   "Resulted"
+  ],
+  [
+   "Urinalysis",
+   "10/27/2026 0540",
+   "Resulted"
+  ],
+  [
+   "POC glucose AC and q4h",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "ERAS bariatric order set",
+   "10/13/2026",
+   "Active"
+  ],
+  [
+   "CPAP per home settings postop",
+   "10/13/2026",
+   "Pending - patient device not available"
+  ],
+  [
+   "Continuous pulse oximetry postop",
+   "10/13/2026",
+   "Pending"
+  ],
+  [
+   "Methylene blue 1% for leak test (OR)",
+   "10/13/2026",
+   "Pharmacy dispensed to OR"
+  ],
+  [
+   "Gastric ultrasound",
+   "",
+   "Not ordered"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": "10/30/2026 0540"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic sleeve gastrectomy",
+   "Signed 10/13/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/13/2026"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "06/2019",
+   "L4-5 microdiscectomy",
+   "GA, ETT; difficult mask (grade 3); VL grade IIb, bougie, first pass",
+   "SpO2 nadir 84% at intubation; extubated to CPAP",
+   "C-N University Hospital"
+  ],
+  [
+   "05/2024",
+   "Colonoscopy",
+   "Propofol deep sedation",
+   "Obstruction requiring nasal airway and jaw thrust; SpO2 nadir 86%",
+   "C-N Endoscopy"
+  ],
+  [
+   "09/2026",
+   "EGD",
+   "MAC propofol",
+   "Chin lift/nasal airway; retained gastric food on GLP-1 despite 12-h fast",
+   "C-N Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "Liquid diet x 2 weeks; last protein shake 10/26/2026 2100",
+  "npo_clears": "10/27/2026 0400 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/13)"
+   ],
+   [
+    "Allergy band",
+    "On (penicillin)"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "CPAP brought",
+    "No"
+   ],
+   [
+    "Bariatric bed/equipment",
+    "In room"
+   ],
+   [
+    "POC glucose",
+    "156"
+   ],
+   [
+    "Urine ketones",
+    "2+"
+   ]
+  ],
+  "nursing_note": "BP 152/92 (forearm cuff), HR 96, RR 20, SpO2 92% RA, T 36.8. Wt 166 kg. Liquid diet; last protein shake 10/26 2100. Water 0400. Nausea this morning, \"full feeling,\" belching. CPAP not brought (\"forgot it, wife can bring later\"). Two attempts at PIV, 20 G left hand. POC glucose 156. Urine ketones 2+. Med rec updated: pt reports phentermine daily from outside clinic, last 10/26 0700. Semaglutide last Saturday 10/24. Empagliflozin yesterday AM.",
+  "iv": "20 G left hand (2 attempts)",
+  "glucose": "156 (0600)"
+ },
+ "label": "D. Holloway",
+ "bmi": "51.2"
+}

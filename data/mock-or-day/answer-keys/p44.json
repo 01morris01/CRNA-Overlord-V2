@@ -1,0 +1,170 @@
+{
+ "id": "p44",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Emergent Hartmann procedure in an 82 y in septic shock (norepinephrine 0.12 via peripheral IV, lactate 4.2, AF with RVR) with residual dabigatran (TT over 120, aPTT 54, CrCl 37), idarucizumab available but not given, full stomach, and a family dispute already settled by the HCPOA and ethics.",
+ "asa": {
+  "suggested": "5E",
+  "rationale": "Septic shock from perforated viscus on vasopressors with multiple comorbidities; emergency."
+ },
+ "decision": {
+  "recommendation": "proceed now",
+  "rationale": "Source control is the treatment. Give idarucizumab before incision, place arterial line before induction, secure central access after reversal, and consent anesthesia with the HCPOA (wife). Ethics found no barrier."
+ },
+ "redFlags": [
+  {
+   "id": "dabigatran",
+   "severity": "critical",
+   "finding": "Residual dabigatran effect",
+   "evidence": "Last dose 2100; TT over 120 s; aPTT 54; CrCl about 37 so prolonged half life.",
+   "implication": "Surgical bleeding; central line risk.",
+   "action": "Idarucizumab 5 g IV before incision, then central line.",
+   "keywords": [
+    "dabigatran",
+    "idarucizumab",
+    "praxbind",
+    "reversal",
+    "thrombin time"
+   ]
+  },
+  {
+   "id": "shock",
+   "severity": "critical",
+   "finding": "Septic shock",
+   "evidence": "NE 0.12 mcg/kg/min, MAP mid 60s, lactate 4.2, pH 7.28, oliguria 15 mL/h.",
+   "implication": "Collapse at induction.",
+   "action": "Arterial line before induction, reduced dose induction (etomidate or ketamine), vasopressin and stress dose hydrocortisone if escalating, central line for pressors.",
+   "keywords": [
+    "septic",
+    "shock",
+    "arterial line",
+    "vasopressin",
+    "norepinephrine",
+    "hydrocortisone",
+    "etomidate",
+    "ketamine",
+    "central line"
+   ]
+  },
+  {
+   "id": "fullstomach",
+   "severity": "critical",
+   "finding": "Full stomach with vomiting and ileus",
+   "evidence": "Vomited twice; peritonitis.",
+   "implication": "Aspiration.",
+   "action": "RSI.",
+   "keywords": [
+    "rsi",
+    "rapid sequence",
+    "aspiration"
+   ]
+  },
+  {
+   "id": "af",
+   "severity": "major",
+   "finding": "AF with RVR on pressors",
+   "evidence": "HR 120s; metoprolol held; ST depression.",
+   "implication": "Demand ischemia with CAD.",
+   "action": "Avoid nodal blockers while on pressors; amiodarone if worsening; treat sepsis.",
+   "keywords": [
+    "atrial fibrillation",
+    "rvr",
+    "amiodarone",
+    "ischemia"
+   ]
+  },
+  {
+   "id": "consent",
+   "severity": "major",
+   "finding": "Decision maker conflict",
+   "evidence": "Son wants DNR and no surgery; wife is designated HCPOA; patient said 'fix it, I want to live'; ethics consulted.",
+   "implication": "Consent validity and code status.",
+   "action": "Anesthesia consent from HCPOA, confirm full code, document.",
+   "keywords": [
+    "hcpoa",
+    "consent",
+    "code status",
+    "ethics",
+    "advance directive"
+   ]
+  },
+  {
+   "id": "abx",
+   "severity": "minor",
+   "finding": "Antibiotic redosing",
+   "evidence": "Pip tazo given 0640, q6h.",
+   "implication": "Redose due around incision.",
+   "action": "Redose pip tazo intraop on schedule.",
+   "keywords": [
+    "piperacillin",
+    "pip-tazo",
+    "zosyn",
+    "redose"
+   ]
+  },
+  {
+   "id": "delirium",
+   "severity": "minor",
+   "finding": "Delirium risk",
+   "evidence": "MCI, delirium 2024, codeine confusion.",
+   "implication": "Postop delirium.",
+   "action": "Avoid benzodiazepines and anticholinergics.",
+   "keywords": [
+    "delirium",
+    "benzodiazepine"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line before induction; central line after reversal",
+   "keywords": [
+    "arterial line",
+    "central line"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI with hemodynamically stable agent",
+   "keywords": [
+    "rsi",
+    "etomidate",
+    "ketamine"
+   ]
+  },
+  {
+   "domain": "reversal",
+   "item": "Idarucizumab before incision",
+   "keywords": [
+    "idarucizumab"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Pip tazo redose on schedule",
+   "keywords": [
+    "piperacillin",
+    "redose"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "SICU intubated or extubate if stable",
+   "keywords": [
+    "sicu",
+    "icu"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Antibiotics, reversal agent, blood products"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Aspiration risk"
+  }
+ ]
+}

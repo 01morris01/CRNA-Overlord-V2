@@ -1,0 +1,997 @@
+{
+ "id": "p16",
+ "room": "OR 12",
+ "time": "0730",
+ "name": "STRAHAN, GREGORY P",
+ "mrn": "0145016",
+ "dob": "02/09/1981",
+ "age": "45 y",
+ "sex": "M",
+ "ht_cm": 180,
+ "wt_kg": 72.5,
+ "preferred_name": "Greg",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "M. Kessler, MD, Lakeway Internal Medicine",
+ "insurance": "Cigna Open Access Plus",
+ "emergency_contact": "Lauren Strahan (spouse) 423-555-0418",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Right knee arthroscopy, partial medial meniscectomy",
+  "short": "R knee scope, partial medial meniscectomy",
+  "laterality": "Right",
+  "service": "Orthopedics - Sports Medicine",
+  "surgeon": "C. Whitfield, MD",
+  "assistant": "B. Ogle, PA-C",
+  "indication": "Complex tear posterior horn medial meniscus R knee with mechanical locking, failed 8 wk PT.",
+  "duration_min": 45,
+  "anesthesia_requested": "General (LMA) +/- adductor canal block per anesthesia",
+  "position": "Supine, R leg in leg holder, tourniquet R thigh",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Arthroscopy tower, thigh tourniquet",
+  "implants": "",
+  "surgeon_notes": "Tourniquet available, usually not inflated. Local to portals + intra-articular bupivacaine at close.",
+  "add_on": false,
+  "scheduled_on": "10/06/2026"
+ },
+ "problems": [
+  [
+   "Tear of medial meniscus of right knee, complex",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Allergic rhinitis, seasonal",
+   "2005",
+   "Active"
+  ],
+  [
+   "Sinus bradycardia (athletic)",
+   "2016",
+   "Active"
+  ],
+  [
+   "Plantar fasciitis, left",
+   "2019",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Seasonal allergic rhinitis (spring/fall)",
+   "Resting sinus bradycardia 44-50, asymptomatic, endurance athlete; evaluated 2016 with normal echo and exercise test",
+   "Plantar fasciitis L 2019, resolved with orthotics"
+  ],
+  "psh": [
+   [
+    "1999",
+    "Wisdom teeth extraction",
+    "Oral surgeon, Knoxville"
+   ],
+   [
+    "03/2012",
+    "Laparoscopic R inguinal hernia repair",
+    "Lakeway Regional Medical Center"
+   ]
+  ],
+  "family": [
+   "Father: MI age 71, alive",
+   "Mother: hypothyroidism",
+   "Brother: healthy",
+   "No family hx of anesthesia problems or sudden death"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "3-5 beers/week",
+   "drugs": "None",
+   "occupation": "Civil engineer, TDOT regional office",
+   "other": "Marathon runner, 11 marathons; ran 45-55 miles/week until injury, now cycling. Wife driving.",
+   "living": "Married, 2 children, Morristown"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "05/2022"
+   ],
+   [
+    "COVID-19",
+    "2023"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Fluticasone propionate nasal 50 mcg",
+   "2 sprays each nostril daily (seasonal)",
+   "M. Kessler, MD",
+   "10/26/2026 0700"
+  ],
+  [
+   "Cetirizine 10 mg",
+   "1 tab PO daily PRN",
+   "OTC",
+   "10/26/2026 0700"
+  ],
+  [
+   "Ibuprofen 400 mg",
+   "PO PRN knee pain",
+   "OTC",
+   "10/23/2026"
+  ],
+  [
+   "Vitamin D3 2000 IU",
+   "daily",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0620"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0625"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Meloxicam 15 mg",
+   "08/2026-10/2026",
+   "Stopped by ortho 7 days preop"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/09/2025",
+    "comment": "Annual physical",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.87",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "67",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "108",
+      "H"
+     ],
+     "HDL": [
+      "66",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "5.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/12/2021",
+    "comment": "Annual physical",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "14.4",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "1.01",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "96",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "112",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "5.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/03/2016",
+    "comment": "Bradycardia workup",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "15.0",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "249",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "70",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "TSH": [
+      "1.53",
+      ""
+     ],
+     "FT4": [
+      "1.14",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "10/09/2025",
+    "PSA",
+    "0.8 ng/mL",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/21/2026",
+   "MRI Right Knee without contrast",
+   "Complex tear posterior horn and body medial meniscus with small displaced fragment in intercondylar notch. ACL, PCL, collaterals intact. Mild medial compartment chondrosis. Small joint effusion. Impression: Complex medial meniscus tear with displaced fragment.",
+   "P. Lindqvist, MD"
+  ],
+  [
+   "08/14/2026",
+   "XR Right Knee 3 views",
+   "No fracture. Joint spaces preserved. Small suprapatellar effusion.",
+   "P. Lindqvist, MD"
+  ],
+  [
+   "03/2012",
+   "XR Chest 2 views (preop, outside)",
+   "Clear lungs. Normal heart size.",
+   "Lakeway Regional Radiology"
+  ]
+ ],
+ "cardiology": [
+  [
+   "06/03/2016",
+   "ECG 12-lead",
+   "Sinus bradycardia, rate 44. PR 182 ms, QRS 94 ms, QTc 402. Early repolarization pattern inferolateral. Voltage criteria for LVH (likely athletic). No prior for comparison.",
+   "R. Tanaka, MD",
+   {
+    "er": [
+     "II",
+     "III",
+     "aVF",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "st": {
+     "II": 0.1,
+     "III": 0.07,
+     "aVF": 0.09,
+     "V2": 0.15,
+     "V3": 0.15,
+     "V4": 0.12,
+     "V5": 0.1,
+     "V6": 0.08
+    },
+    "rate": 44,
+    "pr": 182,
+    "qrs": 94,
+    "qtc": 402,
+    "axis": 70,
+    "lvh": 1
+   }
+  ],
+  [
+   "06/20/2016",
+   "Echocardiogram, transthoracic",
+   "Normal LV size, mild concentric remodeling, LVEF 60-65%. Normal RV. No valvular disease. Mild LA enlargement consistent with athletic heart. No LVOT obstruction.",
+   "R. Tanaka, MD"
+  ],
+  [
+   "06/20/2016",
+   "Exercise treadmill test",
+   "Bruce protocol 15:10 min, 17.5 METs. HR 46 -> 178 (101% predicted). Appropriate chronotropic response. No ST changes, no arrhythmia. Excellent functional capacity.",
+   "R. Tanaka, MD"
+  ],
+  [
+   "10/09/2025",
+   "ECG 12-lead",
+   "Sinus bradycardia, rate 48. PR 178 ms. Early repolarization. Unchanged from 06/2016.",
+   "M. Kessler, MD",
+   {
+    "er": [
+     "II",
+     "III",
+     "aVF",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "st": {
+     "II": 0.1,
+     "III": 0.07,
+     "aVF": 0.09,
+     "V2": 0.15,
+     "V3": 0.15,
+     "V4": 0.12,
+     "V5": 0.1,
+     "V6": 0.08
+    },
+    "rate": 48,
+    "pr": 178,
+    "qrs": 94,
+    "qtc": 400,
+    "axis": 70,
+    "lvh": 1
+   }
+  ],
+  [
+   "10/14/2026",
+   "ECG 12-lead (preop)",
+   "Sinus bradycardia, rate 46. PR 184 ms, QRS 96 ms, QTc 398. Early repolarization. No significant change from 10/2025.",
+   "A. Bhandari, MD",
+   {
+    "er": [
+     "II",
+     "III",
+     "aVF",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "st": {
+     "II": 0.1,
+     "III": 0.07,
+     "aVF": 0.09,
+     "V2": 0.15,
+     "V3": 0.15,
+     "V4": 0.12,
+     "V5": 0.1,
+     "V6": 0.08
+    },
+    "rate": 46,
+    "pr": 184,
+    "qrs": 96,
+    "qtc": 398,
+    "axis": 70,
+    "lvh": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "03/2012",
+   "Outpatient surgery",
+   "Lakeway Regional Medical Center",
+   "R inguinal hernia",
+   "Discharged same day"
+  ],
+  [
+   "06/2016",
+   "Cardiology consult",
+   "C-N Heart Associates",
+   "Bradycardia on physical",
+   "Benign athletic heart, no follow-up needed"
+  ],
+  [
+   "09/2019",
+   "Podiatry",
+   "Morristown Foot & Ankle",
+   "L heel pain",
+   "Orthotics, stretching"
+  ],
+  [
+   "10/09/2025",
+   "Annual physical",
+   "Lakeway Internal Medicine",
+   "Wellness",
+   "Routine"
+  ],
+  [
+   "08/14/2026",
+   "Ortho clinic",
+   "C-N Sports Medicine",
+   "R knee locking after trail run",
+   "MRI, PT"
+  ],
+  [
+   "10/06/2026",
+   "Ortho clinic",
+   "C-N Sports Medicine",
+   "Failed PT, locking",
+   "Surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "06/20/2016 1500",
+   "Consult",
+   "Cardiology",
+   "R. Tanaka, MD",
+   "Referred for HR 44 on physical. 35 yo marathoner, asymptomatic - no syncope, presyncope, palpitations, exercise intolerance. FHx negative for SCD. ECG SB 44, early repol. Echo: athletic remodeling, normal function. ETT 17.5 METs, appropriate chronotropy. Impression: physiologic sinus bradycardia of the trained athlete. No further testing. Return PRN symptoms."
+  ],
+  [
+   "10/09/2025 0930",
+   "Progress Note",
+   "Internal Medicine",
+   "M. Kessler, MD",
+   "Annual. Doing well, training for Chattanooga marathon. Allergies seasonal, flonase helps. HR 48, unchanged ECG. Lipids ok, HDL 66. PSA discussed, obtained per pt preference. RTC 1 yr."
+  ],
+  [
+   "08/14/2026 1105",
+   "Progress Note",
+   "Orthopedics",
+   "B. Ogle, PA-C",
+   "R knee pain x 3 wk after twisting on trail run, catching/locking 2x/wk. Exam: medial joint line tenderness, + McMurray, small effusion, ROM 0-120, stable ligaments. XR neg. Plan: MRI, PT, meloxicam 15 mg daily."
+  ],
+  [
+   "10/06/2026 1010",
+   "H&P",
+   "Orthopedics",
+   "C. Whitfield, MD",
+   "45 M marathoner, complex medial meniscal tear R knee with displaced fragment, persistent mechanical locking after 8 wk PT. Plan R knee scope, partial medial meniscectomy. PMH: allergic rhinitis, athletic bradycardia (cards 2016). PSH: lap hernia 2012, no anesthesia issues. NKDA. Meds: flonase, cetirizine, stop meloxicam 7 d preop. Exam: HR 47, BP 118/70. Lungs clear, RRR. R knee: +effusion, MJL tenderness, locked at -10 extension. NVI distally. A/P: R knee arthroscopy 10/27. Risks reviewed. Preop ECG given resting HR."
+  ],
+  [
+   "10/14/2026 1520",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "S. Pickel, RN",
+   "Preop ECG SB 46, routed to PAT anesthesia. Reviewed by A. Bhandari, MD: unchanged from prior, known athletic bradycardia with 2016 cardiology eval, no further workup. Pt informed."
+  ],
+  [
+   "10/26/2026 1305",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "S. Pickel, RN",
+   "Preop call. Arrival 0545. NPO midnight, clears until 0530. Meloxicam stopped 10/20. Wife driving. No URI sx other than usual fall allergies."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/03/2016 0840",
+   "120/72",
+   44,
+   12,
+   99,
+   36.5,
+   71.0,
+   "0/10",
+   "Internal Medicine"
+  ],
+  [
+   "10/09/2025 0915",
+   "116/70",
+   48,
+   12,
+   99,
+   36.6,
+   71.8,
+   "0/10",
+   "Internal Medicine"
+  ],
+  [
+   "08/14/2026 1050",
+   "122/74",
+   52,
+   14,
+   99,
+   36.7,
+   73.0,
+   "4/10",
+   "Ortho clinic"
+  ],
+  [
+   "10/06/2026 1000",
+   "118/70",
+   47,
+   12,
+   99,
+   36.6,
+   72.6,
+   "3/10",
+   "Ortho clinic"
+  ],
+  [
+   "10/27/2026 0555",
+   "124/76",
+   46,
+   12,
+   99,
+   36.4,
+   72.5,
+   "2/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Cefazolin 2 g IV pre-incision",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "NPO after midnight",
+   "10/06/2026",
+   "Active"
+  ],
+  [
+   "ECG 12-lead",
+   "10/06/2026",
+   "Resulted 10/14/2026"
+  ],
+  [
+   "Ice therapy device (Cryo/Cuff) postop",
+   "10/27/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: right knee arthroscopy, partial medial meniscectomy",
+   "Signed by patient 10/06/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "03/2012",
+   "Lap R inguinal hernia repair",
+   "GA, ETT, uneventful",
+   "HR 40s intraop, no treatment needed per record",
+   "Lakeway Regional Medical Center"
+  ],
+  [
+   "1999",
+   "Wisdom teeth",
+   "IV sedation",
+   "None",
+   "Oral surgeon office"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0540",
+  "npo_solids": "10/26/2026 1930",
+  "npo_clears": "10/27/2026 0500 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/06)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - R knee, by Dr. Whitfield 0650"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ]
+  ],
+  "nursing_note": "A&O x4, ambulatory with slight limp. Monitor shows SB 46, pt states \"it's always like that.\" Denies dizziness or CP. Hair clipped R knee. Wife at bedside.",
+  "iv": "18g L forearm 0622",
+  "glucose": ""
+ },
+ "label": "G. Strahan",
+ "bmi": "22.4"
+}

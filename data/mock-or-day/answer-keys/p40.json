@@ -1,0 +1,133 @@
+{
+ "id": "p40",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Laparoscopic ovarian cystectomy in a 24 y with generalized AChR positive myasthenia gravis on pyridostigmine and azathioprine, mild ptosis today, an 1100 pyridostigmine dose in question, and neurology (who asked to be notified before any surgery) not contacted.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Well controlled myasthenia gravis, MGFA IIa, normal spirometry."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Disease is stable with normal FVC and no bulbar symptoms. Continue pyridostigmine, notify neurology, avoid or minimize neuromuscular blockade."
+ },
+ "redFlags": [
+  {
+   "id": "nmb",
+   "severity": "critical",
+   "finding": "Myasthenia gravis and neuromuscular blockers",
+   "evidence": "AChR antibody positive; thymectomy done without NMB.",
+   "implication": "Marked sensitivity to nondepolarizers, resistance to succinylcholine, prolonged effect of succinylcholine with pyridostigmine, unpredictable neostigmine reversal.",
+   "action": "Avoid NMB (propofol remifentanil intubation) or small rocuronium dose with quantitative TOF and sugammadex.",
+   "keywords": [
+    "myasthenia",
+    "rocuronium",
+    "sugammadex",
+    "quantitative",
+    "tof",
+    "succinylcholine",
+    "nondepolariz",
+    "neostigmine"
+   ]
+  },
+  {
+   "id": "pyrido",
+   "severity": "major",
+   "finding": "Pyridostigmine timing",
+   "evidence": "Taken 0600; next due 1100; patient told to ask anesthesia.",
+   "implication": "Missed dose worsens weakness; continued dose changes NMB and cholinergic effects.",
+   "action": "Decide and document (commonly continue usual schedule or give IV equivalent); resume promptly postop.",
+   "keywords": [
+    "pyridostigmine",
+    "mestinon",
+    "cholinesterase"
+   ]
+  },
+  {
+   "id": "crisis",
+   "severity": "major",
+   "finding": "Postop myasthenic weakness risk",
+   "evidence": "Ptosis today with poor sleep; laparoscopy in Trendelenburg; neurology not notified.",
+   "implication": "Respiratory weakness after extubation.",
+   "action": "Notify neurology, measure strength before extubation (head lift, NIF, FVC), monitor in PACU, avoid drugs that worsen MG (aminoglycosides, fluoroquinolones, magnesium).",
+   "keywords": [
+    "neurology",
+    "extubation",
+    "fvc",
+    "nif",
+    "myasthenic crisis",
+    "magnesium",
+    "aminoglycoside"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "minor",
+   "finding": "PONV risk",
+   "evidence": "Female, nonsmoker, laparoscopy.",
+   "implication": "Apfel 2 to 3.",
+   "action": "TIVA, ondansetron, dexamethasone.",
+   "keywords": [
+    "ponv",
+    "tiva",
+    "ondansetron"
+   ]
+  },
+  {
+   "id": "tape",
+   "severity": "minor",
+   "finding": "Adhesive allergy",
+   "evidence": "Blistering.",
+   "implication": "Skin injury.",
+   "action": "Paper tape.",
+   "keywords": [
+    "tape"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "GETA with TIVA, minimal or no NMB",
+   "keywords": [
+    "tiva",
+    "propofol",
+    "remifentanil"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Quantitative neuromuscular monitoring",
+   "keywords": [
+    "quantitative",
+    "tof"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Full strength confirmed before extubation",
+   "keywords": [
+    "head lift",
+    "nif",
+    "strength"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "OpioidRespDepression",
+   "why": "Weak respiratory muscles with opioids"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence after airway instrumentation"
+  }
+ ]
+}

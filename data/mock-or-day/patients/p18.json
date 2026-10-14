@@ -1,0 +1,2270 @@
+{
+ "id": "p18",
+ "room": "OR 14",
+ "time": "0730",
+ "name": "KITTRELL, HAROLD WAYNE",
+ "mrn": "0145018",
+ "dob": "01/22/1949",
+ "age": "77 y",
+ "sex": "M",
+ "ht_cm": 175,
+ "wt_kg": 84.0,
+ "preferred_name": "Wayne",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "S. Batson, MD, Dandridge Medical Associates",
+ "insurance": "Medicare Part A/B + AARP Supplement Plan G",
+ "emergency_contact": "Betty Kittrell (spouse) 865-555-0754; Mark Kittrell (son) 865-555-0181",
+ "isolation": "",
+ "allergies": [
+  [
+   "Penicillin",
+   "Rash as child",
+   "Unknown",
+   "1950s"
+  ],
+  [
+   "Lisinopril",
+   "Cough",
+   "Mild (intolerance)",
+   "2016"
+  ]
+ ],
+ "case": {
+  "procedure": "Transurethral resection of prostate (bipolar, saline irrigation), cystoscopy",
+  "short": "TURP (bipolar), cystoscopy",
+  "laterality": "N/A",
+  "service": "Urology",
+  "surgeon": "R. Gentry, MD",
+  "assistant": "",
+  "indication": "BPH with LUTS refractory to tamsulosin + finasteride; urinary retention 02/2025 requiring Foley; PVR 310 mL; prostate 82 mL.",
+  "duration_min": 75,
+  "anesthesia_requested": "Spinal preferred per surgeon",
+  "position": "Dorsal lithotomy",
+  "dispo": "Inpatient, 1-2 nights, CBI",
+  "blood": "Type and screen",
+  "equipment": "Bipolar resectoscope, 3-way Foley, CBI setup",
+  "implants": "",
+  "surgeon_notes": "Pt on warfarin for AF - held 5 days per anticoag clinic, INR AM of surgery. No bridging (CHA2DS2-VASc 3). Prefer spinal.",
+  "add_on": false,
+  "scheduled_on": "09/28/2026"
+ },
+ "problems": [
+  [
+   "Benign prostatic hyperplasia with lower urinary tract symptoms",
+   "2015",
+   "Active"
+  ],
+  [
+   "Persistent atrial fibrillation",
+   "08/2021",
+   "Active"
+  ],
+  [
+   "Long-term (current) use of anticoagulants",
+   "08/2021",
+   "Active"
+  ],
+  [
+   "Chronic kidney disease, stage 3a",
+   "2023",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2005",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2005",
+   "Active"
+  ],
+  [
+   "Age-related nuclear cataract, bilateral",
+   "2025",
+   "Active"
+  ],
+  [
+   "Acute urinary retention",
+   "02/2025",
+   "Resolved"
+  ],
+  [
+   "Osteoarthritis, bilateral knees",
+   "2012",
+   "Active"
+  ],
+  [
+   "Hearing loss, bilateral, mild (hearing aids)",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Persistent AF since 08/2021 (admission with RVR), rate control + warfarin; CHA2DS2-VASc 3 (age 75+, HTN)",
+   "HTN since 2005",
+   "Hyperlipidemia",
+   "CKD 3a, baseline Cr 1.3-1.4, eGFR ~50",
+   "BPH, urinary retention 02/2025",
+   "OA knees",
+   "Bilateral cataracts, L > R",
+   "Remote tobacco 30 pack-years, quit 1995",
+   "No known CAD; stress test 2021 negative"
+  ],
+  "psh": [
+   [
+    "1972",
+    "Appendectomy",
+    "Knoxville General (outside)"
+   ],
+   [
+    "05/2012",
+    "Open L inguinal hernia repair",
+    "Lakeway Regional Medical Center"
+   ],
+   [
+    "03/2016",
+    "Colonoscopy",
+    "C-N University Hospital Endoscopy"
+   ],
+   [
+    "09/2022",
+    "Colonoscopy with polypectomy",
+    "C-N University Hospital Endoscopy"
+   ]
+  ],
+  "family": [
+   "Father: died stroke age 74",
+   "Mother: died age 88, dementia",
+   "Brother: prostate cancer age 70",
+   "No known anesthesia complications"
+  ],
+  "social": {
+   "tobacco": "Former, 30 pack-years, quit 1995",
+   "alcohol": "1 beer most evenings",
+   "drugs": "None",
+   "occupation": "Retired TVA lineman",
+   "living": "Lives with wife in 1-story home, Dandridge",
+   "other": "Independent ADLs, drives, gardens. Climbs 1 flight slowly due to knees, no CP/SOB."
+  },
+  "immunizations": [
+   [
+    "Influenza high-dose",
+    "10/2026"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2023"
+   ],
+   [
+    "Shingrix x2",
+    "2022"
+   ],
+   [
+    "RSV",
+    "10/2024"
+   ],
+   [
+    "Tdap",
+    "2017"
+   ],
+   [
+    "COVID-19 booster",
+    "10/2025"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Warfarin 5 mg",
+   "5 mg PO daily except 2.5 mg Mon/Fri (per anticoag clinic)",
+   "Anticoagulation Clinic / S. Batson, MD",
+   "10/23/2026 1800"
+  ],
+  [
+   "Metoprolol succinate 50 mg",
+   "1 tab PO daily",
+   "J. Orr, MD (cardiology)",
+   "10/27/2026 0500"
+  ],
+  [
+   "Losartan 50 mg",
+   "1 tab PO daily",
+   "S. Batson, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Atorvastatin 40 mg",
+   "1 tab PO nightly",
+   "S. Batson, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Tamsulosin 0.4 mg",
+   "1 cap PO nightly",
+   "R. Gentry, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Finasteride 5 mg",
+   "1 tab PO daily",
+   "R. Gentry, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Acetaminophen 650 mg ER",
+   "PO BID PRN knee pain",
+   "OTC",
+   "10/26/2026"
+  ],
+  [
+   "Polyethylene glycol 3350",
+   "17 g PO daily PRN",
+   "OTC",
+   "10/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Metoprolol succinate 50 mg PO",
+   "Daily - home dose",
+   "Taken at home 0500 per pt"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision (urine cx negative)",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0610"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Lisinopril 20 mg",
+   "2005-2016",
+   "Cough - changed to losartan"
+  ],
+  [
+   "Diltiazem ER 180 mg",
+   "08/2021-11/2021",
+   "Bradycardia with metoprolol; diltiazem stopped"
+  ],
+  [
+   "Oxybutynin 5 mg",
+   "2018",
+   "Worsened retention, confusion per wife"
+  ],
+  [
+   "Meloxicam 7.5 mg",
+   "2019-2021",
+   "Stopped when warfarin started"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0555",
+    "comment": "",
+    "vals": {
+     "PT": [
+      "23.2",
+      "H"
+     ],
+     "INR": [
+      "1.9",
+      "H"
+     ],
+     "aPTT": [
+      "32",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "30",
+      "H"
+     ],
+     "Cr": [
+      "1.42",
+      "H"
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "13.7",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "235",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/14/2026",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "13.6",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "263",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.39",
+      "H"
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "30.5",
+      "H"
+     ],
+     "INR": [
+      "2.5",
+      "H"
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ],
+     "USG": [
+      "1.021",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/16/2026",
+    "comment": "Anticoag clinic",
+    "vals": {
+     "PT": [
+      "28.1",
+      "H"
+     ],
+     "INR": [
+      "2.3",
+      "H"
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/15/2026",
+    "comment": "Anticoag clinic",
+    "vals": {
+     "PT": [
+      "32.9",
+      "H"
+     ],
+     "INR": [
+      "2.7",
+      "H"
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/08/2026",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "23",
+      "H"
+     ],
+     "Cr": [
+      "1.41",
+      "H"
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "14.1",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "120",
+      ""
+     ],
+     "A1c": [
+      "5.3",
+      ""
+     ],
+     "PT": [
+      "29.3",
+      "H"
+     ],
+     "INR": [
+      "2.4",
+      "H"
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/14/2025",
+    "comment": "Anticoag clinic",
+    "vals": {
+     "PT": [
+      "26.8",
+      "H"
+     ],
+     "INR": [
+      "2.2",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/22/2025",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.7",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.38",
+      "H"
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "74",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "7.9",
+      ""
+     ],
+     "Hgb": [
+      "14.1",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "121",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/05/2025",
+    "comment": "Post-retention f/u (Foley removed 02/28)",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.41",
+      "H"
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "PSA": [
+      "4.40",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/22/2025 2310",
+    "comment": "ED - retention",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "13.7",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "219",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "34",
+      "H"
+     ],
+     "Cr": [
+      "1.78",
+      "H"
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "USG": [
+      "1.019",
+      ""
+     ],
+     "UProt": [
+      "Trace",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Trace",
+      "A"
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ],
+     "PT": [
+      "35.4",
+      "H"
+     ],
+     "INR": [
+      "2.9",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/12/2024",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "PT": [
+      "34.2",
+      "H"
+     ],
+     "INR": [
+      "2.8",
+      "H"
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/19/2023",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "23",
+      "H"
+     ],
+     "Cr": [
+      "1.32",
+      "H"
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "9.8",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "67",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.5",
+      ""
+     ],
+     "WBC": [
+      "6.0",
+      ""
+     ],
+     "Hgb": [
+      "14.3",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "260",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "104",
+      ""
+     ],
+     "PSA": [
+      "3.60",
+      ""
+     ],
+     "PT": [
+      "31.7",
+      "H"
+     ],
+     "INR": [
+      "2.6",
+      "H"
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/06/2022",
+    "comment": "Pre-colonoscopy",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "13.9",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "PT": [
+      "15.9",
+      "H"
+     ],
+     "INR": [
+      "1.3",
+      "H"
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/18/2022",
+    "comment": "Anticoag clinic",
+    "vals": {
+     "PT": [
+      "29.3",
+      "H"
+     ],
+     "INR": [
+      "2.4",
+      "H"
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/11/2021 0500",
+    "comment": "Warfarin started 08/10",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.18",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ],
+     "PT": [
+      "15.9",
+      "H"
+     ],
+     "INR": [
+      "1.3",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/09/2021 1440",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "13.7",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "243",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "1.21",
+      ""
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ],
+     "TSH": [
+      "1.86",
+      ""
+     ],
+     "FT4": [
+      "1.09",
+      ""
+     ],
+     "Trop": [
+      "14",
+      ""
+     ],
+     "BNP": [
+      "412",
+      "H"
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/16/2019",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "19",
+      ""
+     ],
+     "Cr": [
+      "1.15",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "17",
+      ""
+     ],
+     "ALKP": [
+      "96",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "WBC": [
+      "6.0",
+      ""
+     ],
+     "Hgb": [
+      "14.2",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "278",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "PSA": [
+      "3.10",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/11/2017",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "1.08",
+      ""
+     ],
+     "Glu": [
+      "82",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "16",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "14.0",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "255",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "PSA": [
+      "2.60",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "PSA",
+    "name": "PSA",
+    "unit": "ng/mL",
+    "ref": "<4.00"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "10/14/2026",
+    "Urine culture",
+    "No growth",
+    ""
+   ],
+   [
+    "02/22/2025",
+    "Urine culture",
+    "Mixed flora <10,000 CFU/mL",
+    ""
+   ],
+   [
+    "04/08/2026",
+    "eGFR (CKD-EPI 2021)",
+    "52 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/27/2026 0555",
+    "eGFR (CKD-EPI 2021)",
+    "51 mL/min/1.73m2",
+    "L"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/09/2021",
+   "XR Chest 1 view (ED)",
+   "Mild cardiomegaly. Mild interstitial edema. No consolidation. Impression: mild CHF pattern in setting of AF RVR.",
+   "L. Dyer, MD"
+  ],
+  [
+   "08/12/2021",
+   "XR Chest 2 views",
+   "Interval resolution of interstitial edema. Mild cardiomegaly. Biapical scarring.",
+   "L. Dyer, MD"
+  ],
+  [
+   "02/23/2025",
+   "US Renal and bladder",
+   "No hydronephrosis. Renal cortical thinning bilaterally, R 10.2 cm, L 10.4 cm. Bladder decompressed with Foley. Enlarged prostate indents bladder base.",
+   "H. Quarles, MD"
+  ],
+  [
+   "08/27/2026",
+   "US Prostate, transrectal (volume study, urology office)",
+   "Prostate volume 82 mL with prominent median lobe. No focal lesion.",
+   "R. Gentry, MD"
+  ],
+  [
+   "10/14/2026",
+   "XR Chest 2 views (preop)",
+   "Stable mild cardiomegaly. No acute process. Degenerative thoracic spine.",
+   "H. Quarles, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "08/09/2021",
+   "ECG 12-lead",
+   "Atrial fibrillation with RVR, rate 142. Nonspecific ST-T changes. QRS 92.",
+   "J. Orr, MD",
+   {
+    "tmod": {
+     "I": 0.35,
+     "aVL": 0.2,
+     "V4": 0.4,
+     "V5": 0.3,
+     "V6": 0.3,
+     "II": 0.5
+    },
+    "rate": 142,
+    "rhythm": "af",
+    "qrs": 92,
+    "qtc": 448,
+    "axis": -20
+   }
+  ],
+  [
+   "08/10/2021",
+   "Echocardiogram, transthoracic",
+   "LVEF 50-55% (in AF, rate 100s). Mild LVH. LA moderately dilated (LAVI 44 mL/m2). Mild MR, mild TR, RVSP 34 mm Hg. No thrombus seen (TTE limited).",
+   "J. Orr, MD"
+  ],
+  [
+   "09/14/2021",
+   "Pharmacologic nuclear stress test (regadenoson)",
+   "No ischemia or infarct. LVEF 54%. AF throughout.",
+   "J. Orr, MD"
+  ],
+  [
+   "11/03/2021",
+   "Holter monitor 48 h",
+   "AF throughout, avg HR 78, min 48 (sleep), max 124. Pauses up to 2.2 s during sleep. No VT.",
+   "J. Orr, MD"
+  ],
+  [
+   "03/21/2024",
+   "Echocardiogram, transthoracic",
+   "LVEF 55-60%. Mild LVH. Moderate LA dilation. Mild MR. RVSP 32. Unchanged from 2021.",
+   "P. Hinshaw, MD"
+  ],
+  [
+   "10/14/2026",
+   "ECG 12-lead (preop)",
+   "Atrial fibrillation, controlled ventricular response, rate 76. Left axis deviation. Nonspecific T wave flattening. Unchanged from 03/2024.",
+   "J. Orr, MD",
+   {
+    "rate": 76,
+    "rhythm": "af",
+    "qrs": 94,
+    "qtc": 436,
+    "axis": -35,
+    "tmod": {
+     "I": 0.3,
+     "aVL": 0.2,
+     "V5": 0.25,
+     "V6": 0.2,
+     "II": 0.4
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "05/2012",
+   "Outpatient surgery",
+   "Lakeway Regional Medical Center",
+   "L inguinal hernia",
+   "Discharged same day"
+  ],
+  [
+   "08/09/2021",
+   "Inpatient admission (3 days)",
+   "C-N University Hospital",
+   "New AF with RVR, mild HF",
+   "Rate control, warfarin started, discharged home"
+  ],
+  [
+   "09/2021",
+   "Cardiology clinic",
+   "C-N Heart Associates",
+   "AF follow-up",
+   "Stress test ordered"
+  ],
+  [
+   "09/2022",
+   "Endoscopy",
+   "C-N University Hospital",
+   "Surveillance colonoscopy",
+   "2 small adenomas removed"
+  ],
+  [
+   "02/22/2025",
+   "ED visit",
+   "C-N University Hospital ED",
+   "Acute urinary retention",
+   "Foley, 1100 mL, discharged with catheter"
+  ],
+  [
+   "02/28/2025",
+   "Urology clinic",
+   "C-N Urology",
+   "Voiding trial",
+   "Passed, finasteride added"
+  ],
+  [
+   "03/2024",
+   "Cardiology clinic",
+   "C-N Heart Associates",
+   "AF annual",
+   "Stable"
+  ],
+  [
+   "04/08/2026",
+   "Annual physical",
+   "Dandridge Medical Associates",
+   "Wellness",
+   "Stable"
+  ],
+  [
+   "08/27/2026",
+   "Urology clinic",
+   "C-N Urology",
+   "Worsening LUTS, PVR 310",
+   "TURP recommended"
+  ],
+  [
+   "09/10/2026",
+   "Ophthalmology",
+   "Smoky Mountain Eye Center",
+   "Cataract evaluation",
+   "L cataract surgery planned early 2027"
+  ],
+  [
+   "09/28/2026",
+   "Urology clinic",
+   "C-N Urology",
+   "Preop",
+   "TURP scheduled 10/27"
+  ],
+  [
+   "10/14/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Preop labs/ECG/CXR",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "08/12/2021 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "D. Lusk, MD",
+   "72 M admitted 08/09 with new AF RVR 140s, mild pulmonary edema, BNP 412. Rate controlled with IV diltiazem then PO diltiazem + metoprolol. Echo EF 50-55%, LA dilated. TSH nl. Trop flat. CHA2DS2-VASc 3. Started warfarin 08/10 (pt preferred over DOAC due to cost/coverage), enoxaparin bridge until INR therapeutic. Discharged on metoprolol succinate 50, diltiazem ER 180, warfarin 5 mg. F/u anticoag clinic 3 days, cardiology 2 wk."
+  ],
+  [
+   "11/09/2021 1530",
+   "Progress Note",
+   "Cardiology",
+   "J. Orr, MD",
+   "AF f/u. Holter avg 78, nocturnal pauses to 2.2 s. Asymptomatic. Stop diltiazem, continue metoprolol succinate 50. Stress negative. Rate control strategy, pt declines cardioversion/ablation discussion at this time. Continue warfarin goal INR 2-3."
+  ],
+  [
+   "09/06/2022 1400",
+   "Telephone Encounter",
+   "Anticoagulation Clinic",
+   "M. Fain, PharmD",
+   "Pre-colonoscopy warfarin hold: GI requests hold x3 days for low-risk polypectomy plan. Instructed last dose 09/03, resume evening of procedure. No bridge. INR 09/06 1.3."
+  ],
+  [
+   "02/23/2025 0030",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "C. Whaley, MD",
+   "76 M unable to void x 14 h, suprapubic pain. Took OTC diphenhydramine for sleep 2 nights. Foley 16 Fr placed, 1100 mL. Cr 1.78 (baseline 1.36). INR 2.9, mild hematuria after placement. Stop diphenhydramine. Discharge with Foley, urology f/u 1 wk. Recheck BMP."
+  ],
+  [
+   "02/28/2025 1015",
+   "Progress Note",
+   "Urology",
+   "K. Sizemore, NP",
+   "Voiding trial passed, PVR 140. Add finasteride 5 mg. Continue tamsulosin. Avoid anticholinergics/antihistamines. RTC 6 mo or sooner."
+  ],
+  [
+   "03/21/2024 0930",
+   "Progress Note",
+   "Cardiology",
+   "P. Hinshaw, MD",
+   "Annual AF visit. Rate controlled HR 70s. Echo stable EF 55-60%. INRs mostly in range per anticoag clinic. No bleeding. Continue current regimen. Periprocedural: CHA2DS2-VASc 3, no mechanical valve, no prior stroke - no bridging needed for elective procedures."
+  ],
+  [
+   "04/08/2026 1000",
+   "Progress Note",
+   "Internal Medicine",
+   "S. Batson, MD",
+   "Annual. BP 134/78 on losartan 50. AF rate controlled. Cr 1.41, eGFR 52, stable CKD 3a. LDL 74. Mild knee OA, acetaminophen only (on warfarin). Hearing aids. Cognition intact, MoCA 27/30. RTC 6 mo."
+  ],
+  [
+   "08/27/2026 1130",
+   "Progress Note",
+   "Urology",
+   "R. Gentry, MD",
+   "Worsening nocturia x4-5, weak stream, straining. IPSS 24. PVR 310 mL. TRUS volume 82 mL, median lobe. PSA 4.4 (adjusted for finasteride ~8.8, but stable trend, prior MRI not done) - discussed; pt declines MRI/biopsy at this time, will send TURP chips to pathology. Recommend bipolar TURP. Will coordinate warfarin hold with anticoag clinic."
+  ],
+  [
+   "09/10/2026 1420",
+   "Progress Note",
+   "Ophthalmology",
+   "E. Varnell, MD (Smoky Mountain Eye Center)",
+   "Bilateral nuclear sclerotic cataracts 3+ L, 2+ R. BCVA 20/60 OS, 20/40 OD. Glare with night driving. On tamsulosin - high risk for intraoperative floppy iris syndrome; will plan iris expansion device, pre-op atropine drops. Do not need to stop tamsulosin. Plan L phaco/IOL early 2027 after urologic surgery. Warfarin may continue for cataract surgery."
+  ],
+  [
+   "09/28/2026 1045",
+   "H&P",
+   "Urology",
+   "R. Gentry, MD",
+   "77 M with BPH, LUTS refractory to tamsulosin + finasteride, retention episode 02/2025, PVR 310, prostate 82 mL. Plan bipolar TURP. PMH: persistent AF on warfarin (CHA2DS2-VASc 3), HTN, CKD 3a (Cr 1.4), HLD, cataracts. PSH: appy, L IHR, colonoscopies. Meds: warfarin, metoprolol succ 50, losartan 50, atorvastatin 40, tamsulosin 0.4, finasteride 5. Allergies: PCN (childhood rash), lisinopril (cough). SH: former smoker, quit 1995. Exam: irregularly irregular, rate 70s. Lungs clear. Abd soft. Prostate 80+ g, smooth, nontender. Plan: TURP 10/27, spinal preferred. Warfarin hold x5 days (last dose 10/21) per anticoag clinic, INR DOS, no bridging. T&S. Urine cx preop. Admit with CBI."
+  ],
+  [
+   "09/30/2026 0940",
+   "Telephone Encounter",
+   "Anticoagulation Clinic",
+   "M. Fain, PharmD",
+   "Periprocedural plan per urology request: TURP 10/27. CHA2DS2-VASc 3, no bridge. Last warfarin dose Wednesday 10/21; hold 10/22-10/26. INR on arrival DOS. Resume per urology POD 1-2 when hematuria clearing. Instructions mailed to pt and reviewed by phone with wife."
+  ],
+  [
+   "10/14/2026 1010",
+   "Nursing Note",
+   "Preadmission Testing",
+   "G. Ridenour, RN",
+   "PAT visit. Labs, ECG, CXR done. Pt wears bilateral hearing aids, prefers to keep in until OR. Ambulates independently. Wife present, helps with meds (pill organizer). Reviewed NPO. Med instructions per anesthesia protocol: take metoprolol AM of surgery; hold losartan AM of surgery; warfarin per anticoag clinic."
+  ],
+  [
+   "10/14/2026 1100",
+   "Pharmacy Note",
+   "Preadmission Testing",
+   "T. Lail, PharmD",
+   "Med rec completed with pt and wife from pill bottles. Warfarin 5 mg tabs, 2.5 mg Mon/Fri. Metoprolol succinate 50 daily. Losartan 50 daily. Atorvastatin 40 qhs. Tamsulosin 0.4 qhs. Finasteride 5 daily. PRN APAP, PEG. No herbals. Pt reports one beer most evenings."
+  ],
+  [
+   "10/15/2026 0820",
+   "Refill Request",
+   "Internal Medicine",
+   "Pharmacy fax",
+   "Atorvastatin 40 mg #90 refill - approved, S. Batson, MD."
+  ],
+  [
+   "10/20/2026 1530",
+   "Patient Message",
+   "Urology",
+   "MyChart - Mark Kittrell (proxy)",
+   "Dad wants to know if he can drive himself home after the prostate surgery. -- Reply (K. Sizemore, NP): No, he will stay at least 1 night and will go home with a catheter. Someone will need to drive him."
+  ],
+  [
+   "10/26/2026 1110",
+   "Telephone Encounter",
+   "Anticoagulation Clinic",
+   "R. Cantrell, RN",
+   "Courtesy call to confirm warfarin hold before surgery 10/27. Pt states he \"stopped it Saturday like the last time\" - last dose taken Friday 10/23 (2.5 mg). Thought instructions were 3 days like his colonoscopy. Re-educated. Pt instructed to tell preop nurse; INR will be checked AM of surgery. Message sent to Dr. Gentry's office pool."
+  ],
+  [
+   "10/26/2026 1430",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "G. Ridenour, RN",
+   "Preop call. Arrival 0545. NPO midnight, clears until 0530. Take metoprolol with sip water. Hold losartan. Bring hearing aids case. Pt states \"I quit my blood thinner like they told me.\" Wife confirms ride."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/11/2017 0900",
+   "138/82",
+   70,
+   16,
+   97,
+   36.6,
+   88.5,
+   "0/10",
+   "Internal Medicine"
+  ],
+  [
+   "08/09/2021 1420",
+   "148/94",
+   142,
+   22,
+   93,
+   36.9,
+   87.2,
+   "0/10",
+   "ED"
+  ],
+  [
+   "08/11/2021 0800",
+   "126/74",
+   88,
+   18,
+   96,
+   36.7,
+   85.4,
+   "0/10",
+   "Telemetry unit"
+  ],
+  [
+   "11/09/2021 1515",
+   "132/80",
+   74,
+   16,
+   97,
+   36.6,
+   85.9,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "03/21/2024 0915",
+   "130/76",
+   72,
+   16,
+   97,
+   36.6,
+   85.0,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "02/22/2025 2250",
+   "172/96",
+   98,
+   20,
+   97,
+   36.8,
+   84.8,
+   "9/10",
+   "ED"
+  ],
+  [
+   "02/28/2025 1000",
+   "136/80",
+   76,
+   16,
+   97,
+   36.6,
+   84.5,
+   "0/10",
+   "Urology"
+  ],
+  [
+   "04/08/2026 0945",
+   "134/78",
+   70,
+   16,
+   97,
+   36.5,
+   84.3,
+   "2/10",
+   "Internal Medicine"
+  ],
+  [
+   "08/27/2026 1115",
+   "138/80",
+   78,
+   16,
+   97,
+   36.6,
+   84.1,
+   "0/10",
+   "Urology"
+  ],
+  [
+   "09/28/2026 1030",
+   "136/78",
+   74,
+   16,
+   97,
+   36.7,
+   84.0,
+   "0/10",
+   "Urology"
+  ],
+  [
+   "10/14/2026 0950",
+   "140/82",
+   76,
+   16,
+   96,
+   36.6,
+   84.2,
+   "1/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0550",
+   "146/84",
+   78,
+   16,
+   96,
+   36.4,
+   84.0,
+   "1/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "PT/INR AM of surgery",
+   "09/28/2026",
+   "Resulted 10/27/2026 0640"
+  ],
+  [
+   "Type and screen",
+   "10/27/2026 0555",
+   "Resulted"
+  ],
+  [
+   "Cefazolin 2 g IV pre-incision",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "Continuous bladder irrigation, NS, postop",
+   "10/27/2026",
+   "Pending"
+  ],
+  [
+   "SCDs",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Admit to Urology, inpatient",
+   "10/27/2026",
+   "Pending"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/30/2026 2359"
+ },
+ "consents": [
+  [
+   "Surgical consent: transurethral resection of prostate, cystoscopy",
+   "Signed by patient 09/28/2026"
+  ],
+  [
+   "Blood products consent",
+   "Signed 09/28/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Healthcare POA: Betty Kittrell (wife), document on file 2021. Full code.",
+ "anesthesia_history": [
+  [
+   "1972",
+   "Appendectomy",
+   "GA (details unavailable)",
+   "None known",
+   "Knoxville General (outside)"
+  ],
+  [
+   "05/2012",
+   "Open L inguinal hernia repair",
+   "Spinal, bupivacaine",
+   "Urinary retention postop, straight cath x1",
+   "Lakeway Regional Medical Center"
+  ],
+  [
+   "09/2022",
+   "Colonoscopy",
+   "MAC propofol",
+   "Brief bradycardia 42, resolved",
+   "C-N University Hospital Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0545",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0500 water with metoprolol",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/28)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "Hearing aids",
+    "In place, to be removed in OR"
+   ],
+   [
+    "INR resulted",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "A&O x4, HOH, hearing aids in. Irregular rhythm on monitor 70s. Reports last warfarin \"Friday.\" Took metoprolol 0500. Ambulatory. Wife at bedside. Voided small amount with straining.",
+  "iv": "20g L forearm 0608",
+  "glucose": ""
+ },
+ "label": "H. Kittrell",
+ "bmi": "27.4"
+}

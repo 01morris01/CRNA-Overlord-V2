@@ -1,0 +1,1838 @@
+{
+ "id": "p12",
+ "room": "OR 10",
+ "time": "0730",
+ "name": "PRUITT, SANDRA K",
+ "mrn": "0130588",
+ "dob": "07/23/1968",
+ "age": "58 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 74.0,
+ "preferred_name": "Sandy",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "J. Lowry, MD, Rutledge Family Medicine",
+ "insurance": "Humana ChoiceCare PPO (employer)",
+ "emergency_contact": "Mark Pruitt (husband) 865-555-0190",
+ "isolation": "",
+ "allergies": [
+  [
+   "Codeine",
+   "Nausea",
+   "Mild (intolerance)",
+   "2005"
+  ]
+ ],
+ "case": {
+  "procedure": "Left frontal craniotomy for resection of tumor, with neuronavigation and motor mapping",
+  "short": "L frontal craniotomy, tumor resection",
+  "laterality": "Left",
+  "service": "Neurosurgery",
+  "surgeon": "A. Mbeki, MD",
+  "assistant": "C. Hollis, MD (neurosurgery resident PGY-5)",
+  "indication": "4.1 cm enhancing left frontal mass abutting the precentral gyrus with vasogenic edema and midline shift; presented with focal seizure and expressive aphasia.",
+  "duration_min": 240,
+  "anesthesia_requested": "General (TIVA per neurophysiology)",
+  "position": "Supine, Mayfield pins, head turned 30 degrees right",
+  "dispo": "Neuro ICU",
+  "blood": "Type and screen.",
+  "equipment": "Mayfield head holder, neuronavigation, SSEP/tcMEP monitoring",
+  "implants": "Cranial plates",
+  "surgeon_notes": "SSEP and transcranial MEP (tumor abuts motor strip); neurophysiology requests no muscle relaxant after intubation. Mannitol on standby. Dexamethasone continued. Levetiracetam 1,000 mg IV at induction.",
+  "add_on": false,
+  "scheduled_on": "10/19/2026"
+ },
+ "problems": [
+  [
+   "Neoplasm of left frontal lobe (presumed high-grade glioma)",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Focal seizure",
+   "10/01/2026",
+   "Active"
+  ],
+  [
+   "Vasogenic cerebral edema",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Paroxysmal atrial fibrillation",
+   "2021",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2012",
+   "Active"
+  ],
+  [
+   "Prediabetes",
+   "2020",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2015",
+   "Active"
+  ],
+  [
+   "Steroid-induced hyperglycemia",
+   "10/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Left frontal mass, presumed glioma; focal seizure 10/01/2026",
+   "Paroxysmal AF (CHA2DS2-VASc 2: female, HTN) on apixaban since 2021",
+   "HTN",
+   "Prediabetes (A1c 6.0)",
+   "GERD",
+   "Severe PONV 2014"
+  ],
+  "psh": [
+   [
+    "2014",
+    "Laparoscopic cholecystectomy",
+    "C-N University Hospital"
+   ],
+   [
+    "2023",
+    "Colonoscopy",
+    "C-N Endoscopy"
+   ],
+   [
+    "2019",
+    "EGD",
+    "C-N Endoscopy"
+   ],
+   [
+    "1996",
+    "Vaginal delivery x2",
+    "Morristown-Hamblen"
+   ]
+  ],
+  "family": [
+   "Mother: breast cancer",
+   "Father: CAD",
+   "No anesthesia complications"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "1 glass wine/week",
+   "drugs": "None",
+   "occupation": "Payroll specialist, county government",
+   "living": "Husband, Rutledge",
+   "other": "Not driving since seizure."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ],
+   [
+    "Shingrix x2",
+    "2023"
+   ],
+   [
+    "Tdap",
+    "2018"
+   ]
+  ],
+  "ob": "G2P2, postmenopausal."
+ },
+ "home_meds": [
+  [
+   "Dexamethasone 4 mg",
+   "4 mg PO q6h",
+   "A. Mbeki, MD",
+   "10/27/2026 0500 (inpatient)"
+  ],
+  [
+   "Levetiracetam 500 mg",
+   "500 mg PO BID",
+   "T. Rhee, MD (Neurology)",
+   "10/26/2026 0800 (evening dose not given: NPO confusion)"
+  ],
+  [
+   "Apixaban 5 mg",
+   "5 mg PO BID",
+   "S. Kaur, MD (Cardiology)",
+   "10/26/2026 0800 (at home)"
+  ],
+  [
+   "Metoprolol succinate 50 mg",
+   "50 mg PO daily",
+   "S. Kaur, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "40 mg PO daily",
+   "J. Lowry, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "5 mg PO daily",
+   "J. Lowry, MD",
+   "10/26/2026 0800"
+  ]
+ ],
+ "mar": [
+  [
+   "Dexamethasone 4 mg PO q6h",
+   "q6h",
+   "Given 10/26 1800, 2400; 10/27 0500"
+  ],
+  [
+   "Levetiracetam 500 mg PO BID",
+   "0800/2000",
+   "10/26 2000: NOT GIVEN - \"patient NPO for surgery\""
+  ],
+  [
+   "Metoprolol succinate 50 mg PO",
+   "Daily 0500",
+   "Given 10/27 0500"
+  ],
+  [
+   "Pantoprazole 40 mg PO",
+   "Daily 0500",
+   "Given 10/27 0500"
+  ],
+  [
+   "Amlodipine 5 mg PO",
+   "Daily 0800",
+   "Due"
+  ],
+  [
+   "Apixaban",
+   "Not ordered inpatient (held per neurosurgery)",
+   "—"
+  ],
+  [
+   "Ondansetron 4 mg IV",
+   "q6h PRN",
+   "Given 10/27 0440"
+  ],
+  [
+   "Acetaminophen 650 mg PO",
+   "q6h PRN headache",
+   "Given 10/26 2200; 10/27 0300"
+  ],
+  [
+   "Insulin",
+   "No insulin ordered",
+   "—"
+  ],
+  [
+   "Normal saline",
+   "75 mL/h",
+   "Infusing"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Diltiazem ER 120 mg",
+   "2021-2022",
+   "Changed to metoprolol"
+  ],
+  [
+   "Lisinopril 10 mg",
+   "2012-2018",
+   "Cough"
+  ],
+  [
+   "Omeprazole 20 mg",
+   "2015-2019",
+   "Changed to pantoprazole"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0430",
+    "comment": "AM labs",
+    "vals": {
+     "WBC": [
+      "14.1",
+      "H"
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "131",
+      "L"
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "98",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "248",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "PT": [
+      "14.6",
+      "H"
+     ],
+     "INR": [
+      "1.2",
+      "H"
+     ],
+     "aPTT": [
+      "33",
+      ""
+     ],
+     "Osm": [
+      "272",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 1600",
+    "comment": "Admission",
+    "vals": {
+     "WBC": [
+      "13.6",
+      "H"
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "239",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.77",
+      ""
+     ],
+     "Glu": [
+      "231",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "PT": [
+      "14.6",
+      "H"
+     ],
+     "INR": [
+      "1.2",
+      "H"
+     ],
+     "aPTT": [
+      "33",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/19/2026 1000",
+    "comment": "Neurosurgery preop (on dexamethasone)",
+    "vals": {
+     "WBC": [
+      "11.8",
+      "H"
+     ],
+     "Hgb": [
+      "13.1",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "268",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "186",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "PT": [
+      "11.7",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/01/2026 1430",
+    "comment": "ED: seizure",
+    "vals": {
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "256",
+      ""
+     ],
+     "MCV": [
+      "83",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.76",
+      ""
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "AST": [
+      "31",
+      ""
+     ],
+     "ALT": [
+      "16",
+      ""
+     ],
+     "ALKP": [
+      "59",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/15/2025 0830",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.74",
+      ""
+     ],
+     "Glu": [
+      "101",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "A1c": [
+      "6.0",
+      "H"
+     ],
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "13.8",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "94",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/20/2024 0830",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "98",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "33",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "6.5",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "A1c": [
+      "6.0",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "115",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "111",
+      ""
+     ],
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "269",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2022 0830",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "107",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "15",
+      ""
+     ],
+     "ALKP": [
+      "93",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "5.9",
+      "H"
+     ],
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "13.2",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "235",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/27/2021 1945",
+    "comment": "ED: palpitations, new AF",
+    "vals": {
+     "WBC": [
+      "8.0",
+      ""
+     ],
+     "Hgb": [
+      "13.7",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "274",
+      ""
+     ],
+     "MCV": [
+      "94",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.70",
+      ""
+     ],
+     "Glu": [
+      "103",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "TSH": [
+      "2.20",
+      ""
+     ],
+     "FT4": [
+      "1.08",
+      ""
+     ],
+     "Trop": [
+      "6",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/04/2020 0830",
+    "comment": "Annual; prediabetes",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.74",
+      ""
+     ],
+     "Glu": [
+      "102",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "81",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "A1c": [
+      "5.8",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "102",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "106",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/16/2018 0830",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "13.1",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "213",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "101",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "84",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "168",
+      ""
+     ],
+     "LDL": [
+      "100",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "118",
+      ""
+     ],
+     "TSH": [
+      "1.83",
+      ""
+     ],
+     "FT4": [
+      "1.23",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Osm",
+    "name": "Osmolality, serum",
+    "unit": "mOsm/kg",
+    "ref": "275-295"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026 0630",
+    "Anti-Xa, apixaban-calibrated",
+    "62 ng/mL (resulted 0630)",
+    "H"
+   ],
+   [
+    "10/27/2026 0430",
+    "Levetiracetam level",
+    "Pending",
+    ""
+   ],
+   [
+    "10/27/2026 0545",
+    "POC glucose",
+    "251 mg/dL",
+    "H"
+   ],
+   [
+    "10/27/2026 0430",
+    "Type and screen",
+    "A negative, antibody screen negative",
+    ""
+   ],
+   [
+    "10/26/2026 1600",
+    "Urine osmolality / urine sodium",
+    "410 mOsm/kg / 62 mmol/L",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/27/2021",
+   "XR Chest 2 views",
+   "No acute disease.",
+   "P. Mendez, MD"
+  ],
+  [
+   "10/01/2026",
+   "CT Head without contrast (ED)",
+   "Left frontal hypodensity with mass effect concerning for underlying mass with vasogenic edema. 5 mm rightward midline shift. No hemorrhage. Recommend MRI.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/03/2026",
+   "MRI Brain with and without contrast",
+   "4.1 cm heterogeneously enhancing left frontal mass with central necrosis abutting the precentral gyrus. Surrounding vasogenic edema; 6 mm left-to-right midline shift. No hydrocephalus. Impression: Likely high-grade glial neoplasm.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/26/2026",
+   "CT Head without contrast (2300, for headache)",
+   "Edema slightly increased. Midline shift now 8 mm. Effacement of the left lateral ventricle. No hemorrhage. No hydrocephalus.",
+   "A. Stroud, MD (overnight)"
+  ],
+  [
+   "10/12/2026",
+   "MRI Brain functional/DTI (navigation protocol)",
+   "Corticospinal tract displaced posteriorly by mass, within 4 mm of enhancing margin. Hand motor area adjacent.",
+   "L. Darby, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/27/2021",
+   "ECG 12-lead",
+   "Atrial fibrillation with RVR 136.",
+   "D. Harrell, MD",
+   {
+    "rate": 136,
+    "rhythm": "af",
+    "qrs": 86,
+    "qtc": 446,
+    "axis": 45
+   }
+  ],
+  [
+   "04/05/2021",
+   "Echocardiogram, transthoracic",
+   "LVEF 60%. Mild LA enlargement. Normal valves.",
+   "S. Kaur, MD"
+  ],
+  [
+   "10/19/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 72. Normal intervals.",
+   "D. Harrell, MD",
+   {
+    "rate": 72,
+    "pr": 156,
+    "qrs": 86,
+    "qtc": 428,
+    "axis": 45
+   }
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead (0500)",
+   "Sinus bradycardia 56. Normal intervals.",
+   "D. Harrell, MD",
+   {
+    "rate": 56,
+    "pr": 160,
+    "qrs": 86,
+    "qtc": 424,
+    "axis": 45
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2014",
+   "Outpatient surgery (overnight)",
+   "C-N University Hospital",
+   "Lap chole",
+   "Severe PONV, overnight"
+  ],
+  [
+   "03/27/2021",
+   "ED visit",
+   "C-N University Hospital",
+   "Palpitations, new AF",
+   "Rate control, apixaban; discharged"
+  ],
+  [
+   "06/2023",
+   "Endoscopy",
+   "C-N Endoscopy",
+   "Screening colonoscopy",
+   "Normal"
+  ],
+  [
+   "07/15/2025",
+   "Office visit",
+   "Rutledge Family Medicine",
+   "Annual",
+   "Stable"
+  ],
+  [
+   "10/01/2026",
+   "ED visit",
+   "C-N University Hospital",
+   "Focal seizure",
+   "CT mass; levetiracetam, dexamethasone; MRI outpatient"
+  ],
+  [
+   "10/05/2026",
+   "Specialty clinic",
+   "C-N Neurology",
+   "Seizure",
+   "Levetiracetam"
+  ],
+  [
+   "10/19/2026",
+   "Specialty clinic",
+   "C-N Neurosurgery",
+   "Surgical planning/H&P",
+   "Surgery 10/27"
+  ],
+  [
+   "10/26/2026",
+   "Direct admission",
+   "C-N University Hospital (Neuro step-down)",
+   "Worsening headache",
+   "Observe, surgery AM"
+  ]
+ ],
+ "notes": [
+  [
+   "2014",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "C-N Anesthesia (archived)",
+   "Lap cholecystectomy. GA, ETT. Severe PONV requiring overnight admission despite ondansetron."
+  ],
+  [
+   "03/27/2021 2200",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "R. Lyle, DO",
+   "Palpitations x 6 h. AF RVR 136. Diltiazem IV, converted to sinus. CHA2DS2-VASc 2. Apixaban 5 BID started, cardiology f/u."
+  ],
+  [
+   "07/15/2025 0900",
+   "Progress Note",
+   "Family Medicine",
+   "J. Lowry, MD",
+   "Annual. BP 132/80. A1c 6.0. Rare palpitations. Mammogram ordered. Continue meds."
+  ],
+  [
+   "10/01/2026 1500",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "C. Whitlow, MD",
+   "Right arm rhythmic jerking 2 min with retained awareness, then word-finding difficulty. 3 weeks of headaches. CT: L frontal mass with edema. Levetiracetam 1 g IV load, then 500 BID. Dexamethasone 10 mg IV then 4 mg q6h. Discussed with neurosurgery: outpatient MRI and clinic. Discharged with husband."
+  ],
+  [
+   "10/05/2026 1100",
+   "Consult",
+   "Neurology",
+   "T. Rhee, MD",
+   "Focal seizure due to L frontal mass. Continue levetiracetam 500 mg twice daily, increase to 750 if further seizures. Avoid missed doses. No driving per TN law (6 months seizure-free)."
+  ],
+  [
+   "10/09/2026 1400",
+   "Telephone Encounter",
+   "Neurosurgery",
+   "B. Kirk, RN",
+   "Pt reports glucose 210 on husband's meter after dexamethasone. Advised PCP f/u; will address at preop visit."
+  ],
+  [
+   "10/19/2026 1000",
+   "H&P",
+   "Neurosurgery",
+   "A. Mbeki, MD",
+   "Three weeks of headache, word-finding trouble, and a focal seizure (right arm jerking) on 10/01. MRI: L frontal mass. Started on dexamethasone and levetiracetam. PMH: PAF (CHA2DS2-VASc 2) on apixaban. HTN. Prediabetes. GERD. Exam: Ht 165, Wt 74. GCS 15. Pupils 3 mm, equal, reactive. Mild expressive aphasia. Right pronator drift. No papilledema. MP II. Full neck ROM. Plan: resection with navigation and motor mapping 10/27. Hold apixaban 3 days (last dose 10/23). Bring all medications."
+  ],
+  [
+   "10/20/2026 1000",
+   "Consult",
+   "Neurophysiology",
+   "P. Alvarez, PhD (IONM)",
+   "Baseline SSEP and MEP planned after induction. Requests total intravenous anesthesia; if volatile used, keep under 0.5 MAC. No neuromuscular blockade after intubation. Bite blocks placed bilaterally."
+  ],
+  [
+   "10/21/2026 1600",
+   "Patient Message",
+   "Neurosurgery",
+   "Sandra Pruitt",
+   "My heart has been fluttering on and off since Monday. Is that the steroids? Reply 10/22 (B. Kirk, RN): Could be. If it continues call your cardiologist. Keep holding your blood thinner as Dr. Mbeki instructed."
+  ],
+  [
+   "10/26/2026 1430",
+   "H&P",
+   "Neurosurgery",
+   "C. Hollis, MD (resident)",
+   "Direct admit: worsening headache x 2 days, nausea. GCS 15, aphasia stable, pronator drift unchanged. Continue dexamethasone 4 q6h, levetiracetam. NPO after midnight. CT head tonight. Surgery AM as planned. Apixaban held per plan."
+  ],
+  [
+   "10/26/2026 1700",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Ferris, PharmD",
+   "Admission med rec with patient and husband. Patient reports she resumed apixaban at home after her 10/19 visit because of palpitations; last dose this morning 10/26 0800. Not ordered inpatient. Neurosurgery resident paged 1705 (no callback documented). Anti-Xa (apixaban) ordered with AM labs."
+  ],
+  [
+   "10/26/2026 2115",
+   "Nursing Note",
+   "Neuro Step-down",
+   "K. Lam, RN",
+   "Levetiracetam 2000 dose held: pt NPO after midnight per order, clarified \"nothing by mouth\" - charted not given. Headache 6/10, acetaminophen. Neuro checks q2h stable."
+  ],
+  [
+   "10/27/2026 0300",
+   "Nursing Note",
+   "Neuro Step-down",
+   "K. Lam, RN",
+   "Headache 8/10, acetaminophen given. BP 158/94, HR 60. Pt harder to wake for neuro check, oriented once awake. CT result posted 0010 (shift 8 mm). Resident notified at 0020: \"will review.\" 0430 vomited x2, ondansetron given."
+  ],
+  [
+   "06/20/2024 0900",
+   "Progress Note",
+   "Family Medicine",
+   "J. Lowry, MD",
+   "Annual. A1c 6.0. BP 134/82. AF quiet on metoprolol/apixaban. Colonoscopy 2023 normal."
+  ],
+  [
+   "04/05/2021 1300",
+   "Consult",
+   "Cardiology",
+   "S. Kaur, MD",
+   "PAF, CHA2DS2-VASc 2. Continue apixaban 5 BID. Metoprolol succinate 50. Echo normal EF."
+  ],
+  [
+   "10/26/2026 1600",
+   "PT Evaluation",
+   "Physical Therapy",
+   "L. Gentry, PT",
+   "Prehab screen. Mild R pronator drift, independent gait. No PT needs preop; re-eval postop."
+  ],
+  [
+   "10/26/2026 1645",
+   "Social Work",
+   "Neuro Social Work",
+   "D. Pryor, LCSW",
+   "Husband primary support. Discussed FMLA for husband, driving restriction. No barriers."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/27/2021 1945",
+   "146/90",
+   136,
+   18,
+   98,
+   36.8,
+   77.0,
+   "0/10",
+   "ED"
+  ],
+  [
+   "07/15/2025 0900",
+   "132/80",
+   70,
+   14,
+   98,
+   36.6,
+   75.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "10/01/2026 1430",
+   "152/88",
+   88,
+   16,
+   98,
+   36.9,
+   74.5,
+   "5/10",
+   "ED"
+  ],
+  [
+   "10/19/2026 1000",
+   "138/82",
+   72,
+   14,
+   98,
+   36.7,
+   74.0,
+   "3/10",
+   "Neurosurgery clinic"
+  ],
+  [
+   "10/26/2026 1500",
+   "146/88",
+   68,
+   14,
+   98,
+   36.8,
+   74.0,
+   "6/10",
+   "Neuro step-down"
+  ],
+  [
+   "10/26/2026 2300",
+   "152/90",
+   62,
+   14,
+   97,
+   36.8,
+   null,
+   "7/10",
+   "Neuro step-down"
+  ],
+  [
+   "10/27/2026 0300",
+   "158/94",
+   60,
+   14,
+   97,
+   36.9,
+   null,
+   "8/10",
+   "Neuro step-down"
+  ],
+  [
+   "10/27/2026 0600",
+   "164/96",
+   58,
+   14,
+   97,
+   36.9,
+   null,
+   "7/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Dexamethasone 4 mg q6h",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Levetiracetam 500 mg PO BID",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "NPO after midnight",
+   "10/26/2026",
+   "Active (no \"except meds\" clause)"
+  ],
+  [
+   "Neuro checks q2h",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Anti-Xa (apixaban)",
+   "10/26/2026 1715",
+   "Resulted 0630"
+  ],
+  [
+   "Insulin correction scale",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Mannitol 1 g/kg (OR standby)",
+   "10/19/2026",
+   "Active"
+  ],
+  [
+   "Type and screen",
+   "10/27/2026",
+   "Resulted"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A negative",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/30/2026 0430"
+ },
+ "consents": [
+  [
+   "Surgical consent: L frontal craniotomy",
+   "Signed 10/19/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Signed 10/26/2026"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/26/2026"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "2014",
+   "Laparoscopic cholecystectomy",
+   "General, ETT",
+   "Severe PONV requiring overnight admission",
+   "C-N University Hospital"
+  ],
+  [
+   "2023",
+   "Colonoscopy",
+   "Propofol sedation",
+   "No issues",
+   "C-N Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0545 (from neuro step-down)",
+  "npo_solids": "10/26/2026 1800",
+  "npo_clears": "10/27/2026 0400",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consents",
+    "Surgery, anesthesia, blood"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Site marked",
+    "Yes, left"
+   ],
+   [
+    "Allergy band",
+    "On (codeine)"
+   ],
+   [
+    "Anticoagulant held",
+    "Per H&P: apixaban last 10/23"
+   ],
+   [
+    "POC glucose",
+    "251"
+   ]
+  ],
+  "nursing_note": "BP 164/96, HR 58, RR 14, SpO2 97% RA, T 36.9, pain 7/10 (headache). Solids 10/26 1800. Clears 0400. Headache worse since midnight; vomited twice at 0430. More drowsy than yesterday. GCS 14 (E3 V5 M6). Pupils equal. Consents signed. Full code. POC 0545: 251. No insulin ordered. IV left forearm 20 g.",
+  "iv": "20 G left forearm",
+  "glucose": "251 (0545)"
+ },
+ "label": "S. Pruitt",
+ "bmi": "27.2"
+}

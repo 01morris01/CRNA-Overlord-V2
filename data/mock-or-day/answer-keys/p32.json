@@ -1,0 +1,135 @@
+{
+ "id": "p32",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Healthy 19 y athlete for ACL reconstruction who took Adderall XR 30 mg this morning (HR 98, BP 144/86), has sickle cell trait with a thigh tourniquet, and a grandmother who 'took a long time to wake up'.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "ADHD on stimulant, sickle cell trait."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Taking the stimulant is acceptable for most centers. Plan for exaggerated responses to indirect sympathomimetics and avoid succinylcholine until the family history is clarified."
+ },
+ "redFlags": [
+  {
+   "id": "stimulant",
+   "severity": "major",
+   "finding": "Amphetamine taken the morning of surgery",
+   "evidence": "Adderall XR 30 mg at 0630; HR 98 (usual 50s), BP 144/86.",
+   "implication": "Hypertension, tachycardia, arrhythmia; exaggerated response to ephedrine; possibly higher anesthetic requirement.",
+   "action": "Prefer phenylephrine to ephedrine, adequate depth, monitor for arrhythmias.",
+   "keywords": [
+    "amphetamine",
+    "adderall",
+    "stimulant",
+    "ephedrine",
+    "phenylephrine",
+    "tachycardia"
+   ]
+  },
+  {
+   "id": "family",
+   "severity": "major",
+   "finding": "Unexplained delayed emergence in a relative",
+   "evidence": "Maternal grandmother slow to wake after surgery, details unknown.",
+   "implication": "Possible pseudocholinesterase deficiency (or other inherited issue).",
+   "action": "Avoid succinylcholine and mivacurium; quantitative TOF; ask more history.",
+   "keywords": [
+    "pseudocholinesterase",
+    "butyrylcholinesterase",
+    "succinylcholine",
+    "family history",
+    "dibucaine"
+   ]
+  },
+  {
+   "id": "sct",
+   "severity": "major",
+   "finding": "Sickle cell trait with tourniquet",
+   "evidence": "HbS 39%; thigh tourniquet planned.",
+   "implication": "Sickling risk with hypoxia, acidosis, hypothermia, dehydration.",
+   "action": "Hydrate, keep warm, oxygenate, avoid acidosis; tourniquet acceptable.",
+   "keywords": [
+    "sickle",
+    "tourniquet",
+    "hydration",
+    "hypothermia",
+    "acidosis"
+   ]
+  },
+  {
+   "id": "allergy",
+   "severity": "minor",
+   "finding": "Childhood amoxicillin rash",
+   "evidence": "Allergy list; pharmacy ok with cefazolin.",
+   "implication": "Low cross reactivity.",
+   "action": "Give cefazolin.",
+   "keywords": [
+    "cefazolin",
+    "amoxicillin"
+   ]
+  },
+  {
+   "id": "ketamine",
+   "severity": "minor",
+   "finding": "Vivid dreams with ketamine",
+   "evidence": "2021 ED sedation.",
+   "implication": "Emergence phenomena.",
+   "action": "Low dose or avoid; midazolam.",
+   "keywords": [
+    "ketamine",
+    "emergence"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "GA with LMA plus adductor canal block",
+   "keywords": [
+    "lma",
+    "adductor canal",
+    "general"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Multimodal analgesia, opioid sparing per mother's request",
+   "keywords": [
+    "multimodal",
+    "acetaminophen",
+    "ketorolac"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "PONV prophylaxis",
+   "keywords": [
+    "ondansetron",
+    "dexamethasone"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Young patient with LMA"
+  },
+  {
+   "type": "MalignantHyperthermia",
+   "why": "Unclear family anesthetic history"
+  },
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Adductor canal block"
+  }
+ ]
+}

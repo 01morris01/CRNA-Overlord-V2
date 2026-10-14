@@ -1,0 +1,936 @@
+{
+ "id": "p13",
+ "room": "OR 2",
+ "time": "1300",
+ "name": "BAILEY, MASON E",
+ "mrn": "0133017",
+ "dob": "09/21/2026",
+ "age": "5 wk",
+ "sex": "M",
+ "ht_cm": 53,
+ "wt_kg": 3.9,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "K. Lyle, MD, Jefferson City Pediatrics",
+ "insurance": "TennCare (BlueCare Tennessee) - newborn coverage",
+ "emergency_contact": "Ashley Bailey (mother) 865-555-0124; Travis Bailey (father) 865-555-0125",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Laparoscopic pyloromyotomy",
+  "short": "Laparoscopic pyloromyotomy",
+  "laterality": "N/A",
+  "service": "Pediatric Surgery",
+  "surgeon": "K. Lindqvist, MD",
+  "assistant": "",
+  "indication": "Hypertrophic pyloric stenosis (US 10/26: muscle 4.8 mm, channel 19 mm).",
+  "duration_min": 40,
+  "anesthesia_requested": "General",
+  "position": "Supine, transverse on the table",
+  "dispo": "Pediatric floor",
+  "blood": "Type and screen.",
+  "equipment": "3 mm laparoscopic instruments, infant warming",
+  "implants": "",
+  "surgeon_notes": "\"Would like first available afternoon slot.\"",
+  "add_on": false,
+  "scheduled_on": "10/26/2026"
+ },
+ "problems": [
+  [
+   "Hypertrophic pyloric stenosis",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Hypochloremic hypokalemic metabolic alkalosis",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Dehydration, moderate",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Preterm infant, 35 weeks",
+   "09/21/2026",
+   "Active"
+  ],
+  [
+   "Apnea of prematurity (resolved)",
+   "09/2026",
+   "Resolved"
+  ],
+  [
+   "Infant of diabetic mother (LGA)",
+   "09/21/2026",
+   "Resolved"
+  ],
+  [
+   "Hyperbilirubinemia, unconjugated",
+   "10/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Born 09/21/2026 at 35 0/7 weeks by repeat cesarean (preterm labor, maternal GDM on insulin), BW 3.3 kg (LGA). Apgars 8/9.",
+   "NICU 6 days for feeding and two apnea and bradycardia spells; caffeine for 4 days. No intubation, no CPAP. Home without monitor.",
+   "Neonatal hypoglycemia (glucose 38 at 1 h), resolved with feeds by DOL 1.",
+   "Newborn soft systolic murmur, resolved by discharge; no echo.",
+   "Mild micrognathia noted by NICU, \"not significant.\"",
+   "Breastfed plus supplemental formula."
+  ],
+  "psh": [],
+  "family": [
+   "Father: \"had a high fever and stiff jaw during ear surgery as a child; they stopped the surgery.\" No testing done.",
+   "Mother: GDM (insulin), no problems with two cesareans (spinal)",
+   "Sister (3 y): healthy",
+   "Paternal uncle: pyloric stenosis as infant"
+  ],
+  "social": {
+   "tobacco": "No smokers in home",
+   "alcohol": "N/A",
+   "drugs": "N/A",
+   "occupation": "N/A",
+   "living": "Parents and sister, Jefferson City",
+   "other": "Mother on maternity leave. Both parents at bedside."
+  },
+  "immunizations": [
+   [
+    "Hepatitis B #1",
+    "09/21/2026"
+   ],
+   [
+    "Nirsevimab (RSV monoclonal antibody)",
+    "09/27/2026"
+   ],
+   [
+    "2-month vaccines",
+    "Due 11/21/2026"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Breast milk / standard term formula",
+   "On demand, 2-3 oz q3h",
+   "K. Lyle, MD",
+   "10/26/2026 1630 (breast milk)"
+  ],
+  [
+   "Vitamin D 400 IU drops",
+   "1 mL PO daily",
+   "K. Lyle, MD",
+   "10/25/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Normal saline bolus 20 mL/kg (78 mL)",
+   "x1",
+   "Completed 10/26/2026 1800"
+  ],
+  [
+   "D5 0.45% NaCl + KCl 20 mEq/L",
+   "16 mL/h",
+   "Infusing since 10/26/2026 1900"
+  ],
+  [
+   "Acetaminophen",
+   "None ordered/given",
+   "—"
+  ],
+  [
+   "NPO",
+   "Since admission",
+   "Last feed breast milk 10/26/2026 1630"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Caffeine citrate 20 mg/kg load then 5 mg/kg/day",
+   "09/22/2026-09/25/2026 (NICU)",
+   "Apnea resolved"
+  ],
+  [
+   "Ampicillin/gentamicin (rule-out sepsis)",
+   "09/21/2026-09/23/2026 (NICU)",
+   "Cultures negative at 36 h"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0600",
+    "comment": "AM labs (capillary blood gas)",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "3.2",
+      "L"
+     ],
+     "Cl": [
+      "93",
+      "L"
+     ],
+     "CO2": [
+      "33",
+      "H"
+     ],
+     "BUN": [
+      "14",
+      "H"
+     ],
+     "Cr": [
+      "0.30",
+      ""
+     ],
+     "Glu": [
+      "96",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "WBC": [
+      "10.8",
+      ""
+     ],
+     "Hgb": [
+      "13.9",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "388",
+      ""
+     ],
+     "MCV": [
+      "99",
+      ""
+     ],
+     "AST": [
+      "32",
+      ""
+     ],
+     "ALT": [
+      "18",
+      ""
+     ],
+     "ALKP": [
+      "128",
+      ""
+     ],
+     "TBili": [
+      "8.4",
+      "H"
+     ],
+     "Alb": [
+      "3.4",
+      "L"
+     ],
+     "pH": [
+      "7.49",
+      "H"
+     ],
+     "PaCO2": [
+      "47",
+      "H"
+     ],
+     "HCO3a": [
+      "35",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 1700",
+    "comment": "ED",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "3.0",
+      "L"
+     ],
+     "Cl": [
+      "86",
+      "L"
+     ],
+     "CO2": [
+      "38",
+      "H"
+     ],
+     "BUN": [
+      "21",
+      "H"
+     ],
+     "Cr": [
+      "0.40",
+      ""
+     ],
+     "Glu": [
+      "82",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "WBC": [
+      "10.3",
+      ""
+     ],
+     "Hgb": [
+      "14.6",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "366",
+      ""
+     ],
+     "MCV": [
+      "98",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/22/2026 0500",
+    "comment": "NICU DOL 1 (maternal creatinine reflected)",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "5.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.70",
+      "H"
+     ],
+     "Glu": [
+      "64",
+      ""
+     ],
+     "Ca": [
+      "8.6",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "09/21/2026 1400",
+    "comment": "NICU admission; blood culture sent",
+    "vals": {
+     "WBC": [
+      "14.8",
+      ""
+     ],
+     "Hgb": [
+      "18.4",
+      "H"
+     ],
+     "Hct": [
+      "55",
+      ""
+     ],
+     "Plt": [
+      "242",
+      ""
+     ],
+     "MCV": [
+      "108",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.5"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "20-28"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "3-12"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.20-0.40"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "60-100"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.8-10.8"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "80-400"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "5.0-19.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "10.0-18.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "31-55"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-450"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "85-123"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "20-28"
+   }
+  ],
+  "other": [
+   [
+    "09/21/2026",
+    "POC glucose (1 h of life)",
+    "38 mg/dL -> 58 after feed",
+    "L"
+   ],
+   [
+    "09/23/2026",
+    "Blood culture (09/21)",
+    "No growth at 5 days",
+    ""
+   ],
+   [
+    "09/23/2026",
+    "Bilirubin total/direct (DOL 2)",
+    "9.8 / 0.3 mg/dL (low-intermediate risk, no phototherapy)",
+    ""
+   ],
+   [
+    "09/23/2026",
+    "Newborn metabolic screen (TN)",
+    "Normal; CCHD screen passed; hearing passed",
+    ""
+   ],
+   [
+    "10/27/2026 0600",
+    "Bilirubin, direct",
+    "0.4 mg/dL",
+    ""
+   ],
+   [
+    "10/26/2026 1700",
+    "Urine specific gravity / urine chloride",
+    "1.028 / < 10 mmol/L",
+    "A"
+   ],
+   [
+    "10/27/2026 0600",
+    "Type and screen",
+    "O positive, antibody screen negative",
+    ""
+   ],
+   [
+    "10/27/2026 1200",
+    "BMP recheck",
+    "Ordered for 1200",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/26/2026",
+   "US Abdomen limited (pylorus)",
+   "Pyloric muscle thickness 4.8 mm, channel length 19 mm, no passage of gastric contents during 10 min observation. Distended, fluid-filled stomach. Impression: Consistent with hypertrophic pyloric stenosis.",
+   "J. Whitlock, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "09/21/2026",
+   "Inpatient (NICU)",
+   "C-N University Hospital NICU",
+   "Preterm 35 wk, IDM, A&B spells",
+   "Discharged home 09/27/2026"
+  ],
+  [
+   "09/29/2026",
+   "Newborn follow-up",
+   "Jefferson City Pediatrics",
+   "Weight/jaundice check",
+   "Gaining; bili visual mild"
+  ],
+  [
+   "10/07/2026",
+   "Well child (2 wk)",
+   "Jefferson City Pediatrics",
+   "Routine",
+   "Good weight gain"
+  ],
+  [
+   "10/21/2026",
+   "Well child (1 mo)",
+   "Jefferson City Pediatrics",
+   "Routine; spit-ups",
+   "Reflux precautions"
+  ],
+  [
+   "10/26/2026",
+   "ED -> inpatient",
+   "C-N University Hospital",
+   "Projectile vomiting",
+   "Pyloric stenosis; admitted for resuscitation"
+  ]
+ ],
+ "notes": [
+  [
+   "09/21/2026 1330",
+   "H&P",
+   "Neonatology",
+   "L. Ferrante, MD",
+   "Male, 35 0/7 wk, born by repeat cesarean under spinal for preterm labor; mother 31 yo G2P2 with GDM on insulin, GBS unknown (IAP not given - cesarean, no ROM). BW 3.3 kg (LGA). Apgars 8/9. Glucose 38 at 1 h, fed, 58. Mild micrognathia noted, palate intact, \"not significant.\" Admit NICU: hypoglycemia protocol, rule-out sepsis 36 h, feeding."
+  ],
+  [
+   "09/23/2026 0900",
+   "Progress Note",
+   "Neonatology",
+   "D. Akers, NNP",
+   "DOL 2. Two A&B spells overnight (HR 70s, SpO2 82%, stimulation). Caffeine load. Room air. Cultures negative 36 h, antibiotics stopped. Glucoses stable. Feeding PO 60% of volume."
+  ],
+  [
+   "09/27/2026 1100",
+   "Discharge Summary",
+   "Neonatology",
+   "L. Ferrante, MD",
+   "NICU 6 days: feeding immaturity, 2 A&B spells (DOL 1-2), caffeine x 4 days, event-free 5 days off caffeine before discharge; car seat test passed. No intubation, no CPAP. Soft systolic murmur on DOL 1, resolved by DOL 3; CCHD screen passed; no echo. Bili peak 9.8, no phototherapy. Nirsevimab given. Discharge wt 3.12 kg. Discharged home without monitor. PCP 2 days."
+  ],
+  [
+   "09/29/2026 1000",
+   "Progress Note",
+   "Pediatrics",
+   "K. Lyle, MD",
+   "Newborn f/u. Wt 3.18 kg. Breastfeeding + formula supplement. Mild jaundice face/chest. Lactation referral."
+  ],
+  [
+   "09/30/2026 1400",
+   "Nursing Note",
+   "Lactation",
+   "S. Whitt, IBCLC",
+   "Latch improved with nipple shield. Mother pumping. Plan breastfeed then supplement 30 mL formula q3h."
+  ],
+  [
+   "10/07/2026 1030",
+   "Progress Note",
+   "Pediatrics",
+   "K. Lyle, MD",
+   "2-week WCC. Wt 3.55 kg (good gain). Feeding well. Exam normal. Jaundice fading."
+  ],
+  [
+   "10/21/2026 0945",
+   "Progress Note",
+   "Pediatrics",
+   "K. Lyle, MD",
+   "1-month WCC. Wt 4.10 kg. Spitting up after some feeds x 2 days, nonbilious, happy. Reflux precautions, smaller volumes. Return if forceful vomiting, fewer wet diapers. Vitamin D."
+  ],
+  [
+   "10/24/2026 1610",
+   "Telephone Encounter",
+   "Pediatrics",
+   "B. Carver, RN",
+   "Mother: vomiting after every feed now, \"shoots across the room,\" hungry right after. 5 wet diapers today. Advised to be seen if continues or fewer wet diapers; appointment offered Monday."
+  ],
+  [
+   "10/26/2026 1640",
+   "ED Provider Note",
+   "Pediatric Emergency",
+   "J. Castile, PA-C",
+   "Five days projectile nonbilious emesis after every feed, hungry after. 3 wet diapers in 24 h. Wt 3.9 kg (4.1 on 10/21). Sunken fontanelle, dry mucosa, CR 3 s. Palpable olive. US positive. Labs: K 3.0, Cl 86, HCO3 38. NS bolus 20 mL/kg, D5 1/2NS + 20 KCl at maintenance. Peds surgery consulted. Admit."
+  ],
+  [
+   "10/26/2026 1900",
+   "H&P",
+   "Pediatric Surgery",
+   "K. Lindqvist, MD",
+   "Five days of projectile, nonbilious vomiting after every feed. Hungry after vomiting. Fewer wet diapers (3 in 24 h). Weight down from 4.1 kg. Birth history: born at 35 weeks. NICU 6 days for feeding and two A&B spells; caffeine for 4 days. No intubation. Home without monitor. Exam: Wt 3.9 kg. Sunken fontanelle, dry mucous membranes, capillary refill 3 seconds. Palpable olive in the epigastrium. Mild jaundice. Airway: no anomalies. Mild micrognathia noted by NICU, \"not significant.\" Plan: fluid resuscitation, correct electrolytes, OR when corrected. Posted for 10/27 afternoon. Consent from mother."
+  ],
+  [
+   "10/27/2026 0700",
+   "Progress Note",
+   "Pediatric Hospital Medicine",
+   "R. Ostrander, MD",
+   "Rehydrating. Chloride and bicarbonate improving but not at target (Cl 93, HCO3 33, K 3.2). \"Suggest OR once electrolytes corrected per protocol\" (Cl >= 100, HCO3 < 30, K normal). Wet diaper x 2 overnight. Continue D5 1/2NS + KCl; recheck BMP 1200. Jaundice: TBili 8.4, direct 0.4 - unconjugated, likely starvation/icteropyloric; trend."
+  ],
+  [
+   "10/27/2026 0900",
+   "Telephone Encounter",
+   "Pediatric Surgery / Nursing",
+   "M. Fuller, RN",
+   "Surgeon asks if the 1300 slot can be kept \"since the gas is better.\" Message relayed to anesthesia and hospitalist."
+  ],
+  [
+   "10/27/2026 0945",
+   "Nursing Note",
+   "Pediatric Floor",
+   "M. Fuller, RN",
+   "Father asks whether \"the anesthesia\" is safe because of what happened to him as a child (\"high fever and stiff jaw during ear surgery, they stopped the surgery\"). Told anesthesia will discuss. Mother asks about \"the breathing alarms he had in the NICU.\""
+  ],
+  [
+   "10/26/2026 2030",
+   "Nursing Note",
+   "Pediatric Floor",
+   "M. Fuller, RN",
+   "Admitted to floor. Weighed 3.9 kg. Diapers weighed. Parents oriented. Mother pumping and storing milk."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/21/2026 1300",
+   "52/30",
+   148,
+   52,
+   95,
+   36.7,
+   3.3,
+   "NIPS 0",
+   "NICU admission"
+  ],
+  [
+   "09/27/2026 0900",
+   "64/38",
+   152,
+   46,
+   98,
+   36.9,
+   3.12,
+   "NIPS 0",
+   "NICU discharge"
+  ],
+  [
+   "09/29/2026 1000",
+   "",
+   150,
+   44,
+   null,
+   36.8,
+   3.18,
+   "",
+   "Pediatrics clinic"
+  ],
+  [
+   "10/07/2026 1030",
+   "",
+   148,
+   42,
+   null,
+   36.9,
+   3.55,
+   "",
+   "Pediatrics clinic"
+  ],
+  [
+   "10/21/2026 0945",
+   "",
+   146,
+   40,
+   null,
+   36.8,
+   4.1,
+   "",
+   "Pediatrics clinic"
+  ],
+  [
+   "10/26/2026 1630",
+   "68/38",
+   176,
+   48,
+   98,
+   36.4,
+   3.9,
+   "FLACC 2",
+   "Pediatric ED"
+  ],
+  [
+   "10/26/2026 2200",
+   "70/40",
+   164,
+   44,
+   98,
+   36.6,
+   null,
+   "FLACC 0",
+   "Pediatric floor"
+  ],
+  [
+   "10/27/2026 0400",
+   "72/40",
+   160,
+   44,
+   98,
+   36.6,
+   null,
+   "FLACC 0",
+   "Pediatric floor"
+  ],
+  [
+   "10/27/2026 1000",
+   "72/40",
+   158,
+   44,
+   98,
+   36.6,
+   3.9,
+   "FLACC 0",
+   "Preop (axillary temp)"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO",
+   "10/26/2026 1700",
+   "Active"
+  ],
+  [
+   "D5 0.45% NaCl + KCl 20 mEq/L at 16 mL/h",
+   "10/26/2026 1900",
+   "Active"
+  ],
+  [
+   "BMP 1200",
+   "10/27/2026 0700",
+   "Pending"
+  ],
+  [
+   "Type and screen",
+   "10/27/2026",
+   "Resulted"
+  ],
+  [
+   "Strict I&O, weigh diapers",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Nasogastric/orogastric tube",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Postop apnea monitoring",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Pyloromyotomy posted 1300",
+   "10/26/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": "10/30/2026 0600"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic pyloromyotomy",
+   "Signed by mother 10/26/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood consent",
+   "Signed by mother 10/26/2026"
+  ]
+ ],
+ "directives": "None (minor).",
+ "anesthesia_history": [],
+ "preop": {
+  "arrived": "10/27/2026 1000 (preop assessment on floor)",
+  "npo_solids": "10/26/2026 1630 (breast milk; NPO since admission)",
+  "npo_clears": "10/26/2026 1630",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes (mother)"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Allergy band",
+    "N/A"
+   ],
+   [
+    "Type and screen",
+    "Resulted"
+   ],
+   [
+    "Weight in kg",
+    "3.9"
+   ],
+   [
+    "NG/OG tube",
+    "None"
+   ],
+   [
+    "Electrolytes at target",
+    "Not documented"
+   ]
+  ],
+  "nursing_note": "HR 158, RR 44, SpO2 98% RA, T 36.6 C (axillary), BP 72/40. Wt 3.9 kg. Fontanelle flat. More alert. Two wet diapers since 0200. Vomited 15 mL clear fluid at 0930 despite NPO. No NG tube placed. Parents both present. Consent signed by mother. Questions about \"the breathing alarms he had in the NICU.\" Left saphenous 24 g, infusing.",
+  "iv": "24 G left saphenous",
+  "glucose": "96 (0600 BMP)"
+ },
+ "label": "M. Bailey",
+ "bmi": "13.9"
+}

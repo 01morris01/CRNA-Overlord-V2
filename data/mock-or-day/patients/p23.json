@@ -1,0 +1,1486 @@
+{
+ "id": "p23",
+ "room": "OR 11",
+ "time": "1030",
+ "name": "DEFRIESE, NATALIE ROSE",
+ "mrn": "0145023",
+ "dob": "08/25/1985",
+ "age": "41 y",
+ "sex": "F",
+ "ht_cm": 168,
+ "wt_kg": 74.5,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "G. Ashby, MD, Talbott Family Medicine",
+ "insurance": "Aetna Choice POS II",
+ "emergency_contact": "Marcus Defriese (spouse) 865-555-0846",
+ "isolation": "",
+ "allergies": [
+  [
+   "Oral iron (ferrous sulfate)",
+   "Severe constipation, epigastric pain",
+   "Mild (intolerance)",
+   "2024"
+  ]
+ ],
+ "case": {
+  "procedure": "Robotic-assisted total laparoscopic hysterectomy, bilateral salpingectomy, cystoscopy",
+  "short": "Robotic TLH, bilateral salpingectomy",
+  "laterality": "Bilateral",
+  "service": "Gynecology",
+  "surgeon": "W. Calfee, MD",
+  "assistant": "P. Nall, MD (resident PGY-4)",
+  "indication": "Symptomatic uterine leiomyomata (16-week size uterus), menorrhagia with iron deficiency anemia refractory to medical therapy.",
+  "duration_min": 180,
+  "anesthesia_requested": "General",
+  "position": "Dorsal lithotomy, steep Trendelenburg, arms tucked",
+  "dispo": "Overnight observation",
+  "blood": "Type and cross 2 units PRBC",
+  "equipment": "Da Vinci Xi, uterine manipulator, morcellation in bag if needed",
+  "implants": "",
+  "surgeon_notes": "Large posterior fibroid, possible blood loss. T&C 2 units. Ovaries to be conserved.",
+  "add_on": false,
+  "scheduled_on": "09/15/2026"
+ },
+ "problems": [
+  [
+   "Leiomyoma of uterus, intramural and subserosal",
+   "2019",
+   "Active"
+  ],
+  [
+   "Menorrhagia",
+   "2021",
+   "Active"
+  ],
+  [
+   "Iron deficiency anemia secondary to chronic blood loss",
+   "2023",
+   "Active"
+  ],
+  [
+   "Migraine without aura",
+   "2010",
+   "Inactive"
+  ],
+  [
+   "Vitamin D deficiency",
+   "2024",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Uterine fibroids since 2019, enlarging",
+   "Menorrhagia, cycles every 24-26 days, 8-9 days, flooding",
+   "Iron deficiency anemia, intolerant of oral ferrous sulfate, partial response to ferrous bisglycinate",
+   "IV iron (ferric carboxymaltose 750 mg) x1 10/06/2026; second dose missed (pt rescheduled)",
+   "Migraine, rare now"
+  ],
+  "psh": [
+   [
+    "2012",
+    "Cesarean section, primary (arrest of dilation)",
+    "Fort Sanders (outside)"
+   ],
+   [
+    "2015",
+    "Repeat cesarean section",
+    "Fort Sanders (outside)"
+   ],
+   [
+    "2004",
+    "Wisdom teeth",
+    "Oral surgeon"
+   ]
+  ],
+  "family": [
+   "Mother: fibroids, hysterectomy age 45",
+   "Father: T2DM",
+   "Sister: anemia",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Bookkeeper, family landscaping business",
+   "living": "Husband, 2 children (14, 11), Talbott",
+   "other": "Religion (registration): Jehovah's Witness"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2015"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": "G2P2002, cesarean x2. LMP 10/16/2026 (heavy x 8 days). Husband vasectomy 2016."
+ },
+ "home_meds": [
+  [
+   "Ferrous bisglycinate 25 mg elemental",
+   "1 cap PO BID",
+   "G. Ashby, MD",
+   "10/27/2026 0600"
+  ],
+  [
+   "Tranexamic acid 650 mg",
+   "2 tabs PO TID up to 5 days during menses",
+   "W. Calfee, MD",
+   "10/22/2026"
+  ],
+  [
+   "Ibuprofen 600 mg",
+   "PO q6h PRN cramps",
+   "OTC",
+   "10/19/2026"
+  ],
+  [
+   "Vitamin D3 2000 IU",
+   "Daily",
+   "G. Ashby, MD",
+   "10/26/2026"
+  ],
+  [
+   "Folic acid 1 mg",
+   "Daily",
+   "G. Ashby, MD",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0850"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Heparin 5000 units SC",
+   "Preop",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0855"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Ferrous sulfate 325 mg",
+   "2023-2024",
+   "GI intolerance"
+  ],
+  [
+   "Norethindrone acetate 5 mg",
+   "2024-2025",
+   "Breakthrough bleeding, mood"
+  ],
+  [
+   "Relugolix-estradiol-norethindrone (Myfembree)",
+   "02/2025-03/2026",
+   "Insurance denied continuation; partial response"
+  ],
+  [
+   "Medroxyprogesterone 10 mg",
+   "2023",
+   "Short course for heavy bleeding"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0830",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "8.0",
+      "L"
+     ],
+     "Hct": [
+      "25",
+      "L"
+     ],
+     "Plt": [
+      "405",
+      "H"
+     ],
+     "MCV": [
+      "74",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "10/20/2026",
+    "comment": "PAT - 2 wk after IV iron",
+    "vals": {
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "8.1",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "398",
+      ""
+     ],
+     "MCV": [
+      "73",
+      "L"
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Ferritin": [
+      "96",
+      ""
+     ],
+     "Fe": [
+      "23",
+      "L"
+     ],
+     "TSAT": [
+      "14",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "09/15/2026",
+    "comment": "Preop clinic",
+    "vals": {
+     "WBC": [
+      "8.4",
+      ""
+     ],
+     "Hgb": [
+      "7.9",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "412",
+      "H"
+     ],
+     "MCV": [
+      "71",
+      "L"
+     ],
+     "Ferritin": [
+      "4",
+      "L"
+     ],
+     "Fe": [
+      "35",
+      "L"
+     ],
+     "TSAT": [
+      "4",
+      "L"
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "27",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "71",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/14/2026",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "8.4",
+      "L"
+     ],
+     "Hct": [
+      "25",
+      "L"
+     ],
+     "Plt": [
+      "220",
+      ""
+     ],
+     "MCV": [
+      "72",
+      "L"
+     ],
+     "Ferritin": [
+      "5",
+      "L"
+     ],
+     "Fe": [
+      "26",
+      "L"
+     ],
+     "TSAT": [
+      "5",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "06/30/2025",
+    "comment": "On Myfembree",
+    "vals": {
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "9.8",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "76",
+      "L"
+     ],
+     "Ferritin": [
+      "11",
+      ""
+     ],
+     "Fe": [
+      "32",
+      "L"
+     ],
+     "TSAT": [
+      "8",
+      "L"
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.70",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "80",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/12/2024",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "10.1",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "75",
+      "L"
+     ],
+     "Ferritin": [
+      "14",
+      ""
+     ],
+     "Fe": [
+      "32",
+      "L"
+     ],
+     "TSAT": [
+      "4",
+      "L"
+     ],
+     "VitD": [
+      "17",
+      "L"
+     ],
+     "B12": [
+      "580",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/20/2023",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "9.6",
+      "L"
+     ],
+     "Hct": [
+      "29",
+      "L"
+     ],
+     "Plt": [
+      "260",
+      ""
+     ],
+     "MCV": [
+      "77",
+      "L"
+     ],
+     "Ferritin": [
+      "6",
+      "L"
+     ],
+     "Fe": [
+      "37",
+      "L"
+     ],
+     "TSAT": [
+      "4",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "03/04/2023 2140",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "8.3",
+      ""
+     ],
+     "Hgb": [
+      "9.0",
+      "L"
+     ],
+     "Hct": [
+      "28",
+      "L"
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "76",
+      "L"
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "12.7",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "26",
+      ""
+     ],
+     "Fib": [
+      "336",
+      ""
+     ],
+     "hCG": [
+      "1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/18/2021",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "7.9",
+      ""
+     ],
+     "Hgb": [
+      "11.3",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "225",
+      ""
+     ],
+     "MCV": [
+      "82",
+      ""
+     ],
+     "TSH": [
+      "1.60",
+      ""
+     ],
+     "FT4": [
+      "1.07",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/11/2019",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "285",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.76",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "72",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "TSH": [
+      "1.29",
+      ""
+     ],
+     "FT4": [
+      "1.08",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "hCG",
+    "name": "hCG, quantitative",
+    "unit": "mIU/mL",
+    "ref": "<5"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026 0830",
+    "Urine hCG, qualitative (point of care)",
+    "Negative",
+    ""
+   ],
+   [
+    "03/04/2023 2140",
+    "Urine hCG, qualitative",
+    "Negative",
+    ""
+   ],
+   [
+    "10/20/2026",
+    "Reticulocyte count",
+    "2.6% (absolute 98 K/uL)",
+    "H"
+   ],
+   [
+    "05/2025",
+    "Pap/HPV co-test",
+    "NILM, HPV negative",
+    ""
+   ],
+   [
+    "06/2026",
+    "Endometrial biopsy",
+    "Proliferative endometrium, no hyperplasia or malignancy",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/20/2019",
+   "US Pelvis",
+   "Uterus 10.2 cm with two intramural fibroids 2.4 and 3.1 cm. Normal ovaries.",
+   "C. Mayes, MD"
+  ],
+  [
+   "03/04/2023",
+   "US Pelvis (ED)",
+   "Enlarged fibroid uterus 13.4 cm; dominant posterior intramural fibroid 6.8 cm; several smaller. Endometrium 11 mm. No retained products. Ovaries normal.",
+   "C. Mayes, MD"
+  ],
+  [
+   "08/04/2026",
+   "MRI Pelvis with and without contrast",
+   "Uterus 16.8 x 10.1 x 11.4 cm. Dominant posterior intramural/subserosal fibroid 9.2 cm with degeneration, displacing endometrium; 6 additional fibroids 1-4 cm. No features of sarcoma. Ovaries normal. No hydronephrosis.",
+   "B. Ruth, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/20/2026",
+   "ECG 12-lead (preop)",
+   "Normal sinus rhythm 88. Normal intervals. No ST-T abnormality.",
+   "S. Ketron, MD",
+   {
+    "rate": 88,
+    "pr": 150,
+    "qrs": 84,
+    "qtc": 430,
+    "axis": 50
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2015",
+   "Inpatient (L&D)",
+   "Fort Sanders (outside)",
+   "Repeat cesarean",
+   "Uncomplicated"
+  ],
+  [
+   "03/04/2023",
+   "ED visit",
+   "C-N University Hospital ED",
+   "Heavy vaginal bleeding, lightheaded",
+   "IV fluids, medroxyprogesterone, discharged"
+  ],
+  [
+   "04/2023",
+   "Gyn clinic",
+   "C-N Women's Health",
+   "Fibroids, menorrhagia",
+   "Medical management"
+  ],
+  [
+   "02/2025",
+   "Gyn clinic",
+   "C-N Women's Health",
+   "Persistent bleeding",
+   "Myfembree"
+  ],
+  [
+   "07/2026",
+   "Gyn clinic",
+   "C-N Women's Health",
+   "Worsening anemia",
+   "MRI, EMB, surgical planning"
+  ],
+  [
+   "09/15/2026",
+   "Gyn clinic",
+   "C-N Women's Health",
+   "Preop",
+   "Hysterectomy scheduled"
+  ],
+  [
+   "10/06/2026",
+   "Infusion center",
+   "C-N Infusion Center",
+   "IV iron #1",
+   "Ferric carboxymaltose 750 mg, tolerated"
+  ],
+  [
+   "10/20/2026",
+   "Preadmission testing",
+   "C-N University Hospital",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "03/04/2023 2310",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "K. Sherrod, MD",
+   "37 F heavy menstrual bleeding x 9 days, soaking pad hourly today, lightheaded. HR 108, BP 112/68. Hgb 9.0 (prior 11.3). hCG neg. US fibroid uterus, no retained products. Pt states she is a Jehovah's Witness and would not accept a blood transfusion under any circumstances; has a signed card in her wallet. Not needed currently. IV NS 1 L, medroxyprogesterone 10 mg TID taper. Gyn f/u. Return if syncope."
+  ],
+  [
+   "03/06/2023 0900",
+   "Media (Outside Record)",
+   "Health Information Management",
+   "Scanned document",
+   "Durable Power of Attorney / Advance Medical Directive (Jehovah's Witness form), dated 01/09/2022, signed by patient, witnessed x2. Section 1: \"I refuse transfusions of whole blood, red cells, white cells, platelets, or blood plasma under any circumstances, even if health care providers believe that such are necessary to preserve my life.\" Section on blood fractions (albumin, immunoglobulins, clotting factors, etc.): left blank. Section on medical procedures involving my own blood (cell salvage, hemodilution, dialysis, heart-lung bypass): left blank. Health care agent: Marcus Defriese (husband). Alternate: Joyce Lane (sister). (Scanned from copy brought to ED 03/04/2023.)"
+  ],
+  [
+   "04/20/2023 1100",
+   "Progress Note",
+   "Gynecology",
+   "W. Calfee, MD",
+   "Fibroid uterus 14-wk size, menorrhagia, IDA Hgb 9.6. Options reviewed: medical (OCP, progestin, GnRH antagonist, TXA), UAE, myomectomy, hysterectomy. Pt wants to avoid surgery for now. Start norethindrone 5 mg daily, TXA during menses, ferrous sulfate."
+  ],
+  [
+   "02/11/2025 1015",
+   "Progress Note",
+   "Gynecology",
+   "L. Burkhart, NP",
+   "Persistent heavy bleeding on norethindrone. Start relugolix combination therapy. Iron intolerance - switch to ferrous bisglycinate. Hgb ~10."
+  ],
+  [
+   "07/14/2026 1400",
+   "Progress Note",
+   "Gynecology",
+   "W. Calfee, MD",
+   "Myfembree stopped 03/2026 (insurance). Bleeding heavy again, Hgb 8.4, ferritin 5. Uterus 16-wk. Pt now ready for hysterectomy. MRI, EMB. Refer infusion for IV iron. Plan robotic TLH/BS."
+  ],
+  [
+   "09/15/2026 1030",
+   "H&P",
+   "Gynecology",
+   "W. Calfee, MD",
+   "41 F G2P2 with symptomatic fibroid uterus 16-wk size, menorrhagia, IDA (Hgb 7.9) refractory to progestin, GnRH antagonist combination, TXA, oral iron. Plan robotic TLH, bilateral salpingectomy, cysto. PMH: fibroids, IDA, migraine. PSH: C-section x2. Meds: ferrous bisglycinate, TXA PRN, ibuprofen PRN, vit D, folic acid. Allergies: ferrous sulfate intolerance. SH: no tobacco/EtOH. Exam: BMI 26.4. Pale conjunctivae. RRR, soft systolic flow murmur. Lungs clear. Abd: Pfannenstiel scar, uterus palpable 4 cm below umbilicus. A/P: surgery 10/27. IV iron x2 before surgery (infusion referral). T&C 2 units. Consent signed. Ovaries conserved."
+  ],
+  [
+   "09/15/2026 1115",
+   "Nursing Note",
+   "Gynecology",
+   "M. Teague, RN",
+   "Surgical consent signed. Blood consent presented; pt declined to sign at this time, states she will \"discuss at the hospital.\" Preop teaching done. Infusion center referral faxed."
+  ],
+  [
+   "10/06/2026 1320",
+   "Nursing Note",
+   "Infusion Center",
+   "A. Pharr, RN",
+   "Ferric carboxymaltose 750 mg IV over 15 min. Tolerated. Hypophosphatemia counseling. Dose #2 scheduled 10/13."
+  ],
+  [
+   "10/12/2026 1615",
+   "Telephone Encounter",
+   "Infusion Center",
+   "A. Pharr, RN",
+   "Pt called to cancel 10/13 iron infusion due to work (quarter-end) - rescheduled to 11/03 (post-op) per pt request. Gyn office notified by fax."
+  ],
+  [
+   "10/20/2026 1030",
+   "Nursing Note",
+   "Preadmission Testing",
+   "J. Cupp, RN",
+   "PAT. Labs/ECG. Pt reports fatigue, DOE with 1 flight stairs. Med rec done. Religious preference on registration. Blood bank specimen to be drawn DOS for T&C."
+  ],
+  [
+   "10/23/2026 1215",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "J. Cupp, RN",
+   "Preop call. Arrival 0830. NPO midnight; clears until 0830. Take iron as usual. Husband driving."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/11/2019 0900",
+   "112/70",
+   76,
+   14,
+   99,
+   36.7,
+   70.2,
+   "0/10",
+   "Family Medicine"
+  ],
+  [
+   "03/04/2023 2145",
+   "112/68",
+   108,
+   18,
+   99,
+   36.8,
+   72.0,
+   "4/10",
+   "ED"
+  ],
+  [
+   "03/04/2023 2300",
+   "118/72",
+   92,
+   16,
+   99,
+   36.7,
+   null,
+   "2/10",
+   "ED"
+  ],
+  [
+   "07/14/2026 1345",
+   "108/66",
+   94,
+   16,
+   99,
+   36.6,
+   74.8,
+   "3/10",
+   "Gyn clinic"
+  ],
+  [
+   "09/15/2026 1015",
+   "110/68",
+   92,
+   16,
+   99,
+   36.6,
+   74.6,
+   "2/10",
+   "Gyn clinic"
+  ],
+  [
+   "10/06/2026 1300",
+   "106/64",
+   90,
+   16,
+   99,
+   36.6,
+   null,
+   "0/10",
+   "Infusion center"
+  ],
+  [
+   "10/20/2026 1015",
+   "110/66",
+   88,
+   16,
+   99,
+   36.6,
+   74.5,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0840",
+   "114/70",
+   92,
+   16,
+   99,
+   36.5,
+   74.5,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units PRBC",
+   "09/15/2026",
+   "Specimen collected 10/27/2026 0830; units pending"
+  ],
+  [
+   "POC urine hCG",
+   "10/27/2026 0830",
+   "Resulted - negative"
+  ],
+  [
+   "Cefazolin 2 g IV pre-incision",
+   "10/27/2026 0835",
+   "Active"
+  ],
+  [
+   "Heparin 5000 units SC preop",
+   "10/27/2026 0835",
+   "Active"
+  ],
+  [
+   "SCDs",
+   "10/27/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatch in progress",
+  "notes": "Crossmatch ordered by surgeon at booking.",
+  "specimen_expires": "10/30/2026 2359"
+ },
+ "consents": [
+  [
+   "Surgical consent: robotic TLH, bilateral salpingectomy, cystoscopy, possible laparotomy",
+   "Signed by patient 09/15/2026"
+  ],
+  [
+   "Blood products consent",
+   "Not signed"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Advance directive on file (Media, scanned 03/2023).",
+ "anesthesia_history": [
+  [
+   "2012",
+   "Primary cesarean",
+   "Epidural (labor) converted for C-section",
+   "None",
+   "Fort Sanders (outside)"
+  ],
+  [
+   "2015",
+   "Repeat cesarean",
+   "Spinal",
+   "Hypotension treated, nausea",
+   "Fort Sanders (outside)"
+  ],
+  [
+   "2004",
+   "Wisdom teeth",
+   "IV sedation",
+   "None",
+   "Oral surgeon"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0825",
+  "npo_solids": "10/26/2026 2100",
+  "npo_clears": "10/27/2026 0700 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending; blood not signed"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/15)"
+   ],
+   [
+    "Pregnancy test",
+    "POC urine hCG negative"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "Blood bank band",
+    "Applied 0830"
+   ]
+  ],
+  "nursing_note": "A&O x4, pale, fatigued. Took iron 0600. Bleeding light today (LMP 10/16). Husband at bedside. Blood bank armband applied for crossmatch.",
+  "iv": "18g L forearm 0850",
+  "glucose": ""
+ },
+ "label": "N. Defriese",
+ "bmi": "26.4"
+}

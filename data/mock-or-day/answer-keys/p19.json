@@ -1,0 +1,157 @@
+{
+ "id": "p19",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "L4-5 TLIF with TIVA and neuromonitoring in a smoker whose PDMP shows buprenorphine-naloxone 16 mg/day that never made the med list, a postop plan of hydromorphone PCA, untested OSA risk, and prone positioning for 4 hours.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Controlled HTN, active smoker, opioid use disorder on buprenorphine (some would say 3)."
+ },
+ "decision": {
+  "recommendation": "proceed with modifications",
+  "rationale": "Confirm the buprenorphine dose and whether it was taken this morning, continue it through the perioperative period per current guidance, and rebuild the analgesic plan with APS (multimodal, ketamine, higher affinity full agonists as needed)."
+ },
+ "redFlags": [
+  {
+   "id": "buprenorphine",
+   "severity": "critical",
+   "finding": "Undisclosed buprenorphine-naloxone",
+   "evidence": "PDMP: 8-2 mg films, 56 per 28 days (16 mg/day) from a recovery center, last fill 10/09; not on the surgical med list; patient denied opioid use.",
+   "implication": "Partial agonist blunts full agonist analgesia; stopping it risks relapse.",
+   "action": "Verify dose and last dose, continue buprenorphine (possibly split dosing), multimodal analgesia, ketamine, APS involvement, coordinate with prescriber.",
+   "keywords": [
+    "buprenorphine",
+    "suboxone",
+    "pdmp",
+    "opioid use disorder",
+    "oud",
+    "ketamine",
+    "aps"
+   ]
+  },
+  {
+   "id": "ionm",
+   "severity": "major",
+   "finding": "MEP and SSEP monitoring",
+   "evidence": "Surgeon: TIVA, no paralytic after intubation, bite block.",
+   "implication": "Volatile agents and NMB degrade signals.",
+   "action": "Propofol and remifentanil or ketamine TIVA, short acting relaxant for intubation only, bite block.",
+   "keywords": [
+    "tiva",
+    "mep",
+    "ssep",
+    "bite block",
+    "no paralytic"
+   ]
+  },
+  {
+   "id": "prone",
+   "severity": "major",
+   "finding": "Long prone spine case",
+   "evidence": "4 h prone on Jackson table, arms up, cell saver for blood loss.",
+   "implication": "Postoperative visual loss, pressure injury, brachial plexus stretch.",
+   "action": "Head neutral and level with heart, eye checks, padding, limit arm abduction under 90 degrees, maintain BP and Hgb.",
+   "keywords": [
+    "prone",
+    "visual loss",
+    "povl",
+    "eyes",
+    "padding",
+    "positioning"
+   ]
+  },
+  {
+   "id": "smoking_osa",
+   "severity": "major",
+   "finding": "Active smoker with wheeze; STOP-BANG 4 without sleep study",
+   "evidence": "Smoked at 0430; wheeze clearing with cough; hyperinflation on CXR; STOP-BANG 4.",
+   "implication": "Bronchospasm, carboxyhemoglobin, postoperative obstruction with opioids.",
+   "action": "Bronchodilator available, opioid sparing, continuous oximetry postop.",
+   "keywords": [
+    "smok",
+    "wheeze",
+    "osa",
+    "stop-bang",
+    "oximetry",
+    "carbon monoxide"
+   ]
+  },
+  {
+   "id": "tramadol",
+   "severity": "minor",
+   "finding": "Tramadol seizure history with sertraline",
+   "evidence": "Allergy list; sertraline 100 mg.",
+   "implication": "Lowered seizure threshold and serotonergic risk.",
+   "action": "No tramadol or meperidine.",
+   "keywords": [
+    "tramadol",
+    "sertraline",
+    "serotonin"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "minor",
+   "finding": "Prior hard emergence and nausea",
+   "evidence": "2009 ORIF: hard to wake, sick.",
+   "implication": "PONV.",
+   "action": "Prophylaxis; TIVA helps.",
+   "keywords": [
+    "ponv"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "maintenance",
+   "item": "TIVA with neuromonitoring friendly technique; TXA",
+   "keywords": [
+    "tiva",
+    "txa",
+    "tranexamic"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, possibly second large IV",
+   "keywords": [
+    "arterial line"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Continue buprenorphine; ketamine, acetaminophen, gabapentin, APS",
+   "keywords": [
+    "buprenorphine",
+    "ketamine",
+    "multimodal"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision, redose after 4 h or 1500 mL EBL",
+   "keywords": [
+    "cefazolin",
+    "redose"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Inpatient with continuous oximetry",
+   "keywords": [
+    "oximetry",
+    "inpatient"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Active smoker with wheeze"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin and TXA exposure"
+  }
+ ]
+}

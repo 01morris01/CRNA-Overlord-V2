@@ -1,0 +1,204 @@
+{
+ "id": "p09",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Septic, hypotensive 73 y with closed loop SBO and ischemia for emergent ex lap: INR 3.4 not reversed, Parkinson disease with 2 days of missed levodopa and fever, dopamine antagonist rigidity history, rasagiline, COPD with CO2 retention, AKI, and a full stomach.",
+ "asa": {
+  "suggested": "4E",
+  "rationale": "Septic shock physiology, AKI, COPD with hypercarbia, Parkinson disease, anticoagulation."
+ },
+ "decision": {
+  "recommendation": "proceed emergently while resuscitating",
+  "rationale": "Ischemic closed loop SBO cannot wait. Resuscitate in parallel: arterial line, norepinephrine, 4 factor PCC plus vitamin K before incision, NG suction then RSI, and a dopaminergic replacement plan."
+ },
+ "redFlags": [
+  {
+   "id": "inr",
+   "severity": "critical",
+   "finding": "Supratherapeutic warfarin, not reversed",
+   "evidence": "INR 3.4; vitamin K ordered 0950 not given; PCC not ordered; no FFP requested.",
+   "implication": "Surgical bleeding.",
+   "action": "4 factor PCC plus vitamin K 10 mg IV before incision; recheck INR.",
+   "keywords": [
+    "inr",
+    "warfarin",
+    "pcc",
+    "kcentra",
+    "vitamin k",
+    "reversal",
+    "ffp"
+   ]
+  },
+  {
+   "id": "parkinson",
+   "severity": "critical",
+   "finding": "Missed levodopa with fever and rigidity",
+   "evidence": "Last carbidopa levodopa 10/25 2200; rigid, soft voice, T 38.5; neurology: risk of parkinsonism hyperpyrexia syndrome, suggest rotigotine patch; not ordered.",
+   "implication": "Parkinsonism hyperpyrexia, severe rigidity, respiratory compromise.",
+   "action": "Rotigotine transdermal patch now; avoid dopamine antagonists (metoclopramide, haloperidol, droperidol, prochlorperazine, promethazine).",
+   "keywords": [
+    "levodopa",
+    "sinemet",
+    "rotigotine",
+    "parkinson",
+    "hyperpyrexia",
+    "dopamine antagonist",
+    "droperidol",
+    "metoclopramide"
+   ]
+  },
+  {
+   "id": "sepsis",
+   "severity": "critical",
+   "finding": "Septic shock physiology",
+   "evidence": "BP 88/50 after 30 mL/kg, HR 128 AF, T 38.5, lactate 3.1 to 4.6, UOP 20 mL/h, WBC 18.9.",
+   "implication": "Induction can cause cardiovascular collapse.",
+   "action": "Arterial line before induction, norepinephrine running or ready, hemodynamically stable induction agents and reduced doses.",
+   "keywords": [
+    "sepsis",
+    "septic",
+    "norepinephrine",
+    "levophed",
+    "arterial line",
+    "lactate",
+    "vasopressor"
+   ]
+  },
+  {
+   "id": "full_stomach",
+   "severity": "critical",
+   "finding": "Bowel obstruction with large NG output",
+   "evidence": "NG 1.4 L bilious, vomiting.",
+   "implication": "High aspiration risk.",
+   "action": "Suction the NG before induction, RSI.",
+   "keywords": [
+    "rsi",
+    "ng",
+    "suction",
+    "aspiration",
+    "full stomach"
+   ]
+  },
+  {
+   "id": "rasagiline",
+   "severity": "major",
+   "finding": "MAO B inhibitor drug interactions",
+   "evidence": "Rasagiline 1 mg daily; neurology wallet card.",
+   "implication": "Avoid meperidine, tramadol, methadone, dextromethorphan; caution with indirect sympathomimetics.",
+   "action": "Choose opioids and pressors accordingly.",
+   "keywords": [
+    "rasagiline",
+    "mao",
+    "meperidine",
+    "tramadol"
+   ]
+  },
+  {
+   "id": "copd",
+   "severity": "major",
+   "finding": "COPD with hypercarbia and hypoxemia",
+   "evidence": "FEV1 61%, ABG pH 7.34, PaCO2 58, PaO2 64 on 4 L; weak cough from PD.",
+   "implication": "Postoperative respiratory failure likely.",
+   "action": "Plan for postoperative ventilation in SICU, bronchodilators.",
+   "keywords": [
+    "copd",
+    "hypercarbia",
+    "paco2",
+    "postop ventilation",
+    "sicu"
+   ]
+  },
+  {
+   "id": "aki_lytes",
+   "severity": "major",
+   "finding": "AKI after contrast, hypernatremia, hypokalemia, metabolic alkalosis",
+   "evidence": "Cr 2.0 to 2.3, Na 149, K 3.1, Cl 92, HCO3 30 to 31.",
+   "implication": "Drug clearance, arrhythmia.",
+   "action": "Replace K, renally adjust drugs, UOP monitoring.",
+   "keywords": [
+    "aki",
+    "creatinine",
+    "sodium",
+    "potassium",
+    "alkalosis"
+   ]
+  },
+  {
+   "id": "autonomic",
+   "severity": "minor",
+   "finding": "PD orthostatic hypotension and prior postoperative delirium",
+   "evidence": "Problem list; 2023 TURP delirium.",
+   "implication": "Exaggerated hypotension; delirium.",
+   "action": "Careful titration; avoid anticholinergics and benzodiazepines where possible.",
+   "keywords": [
+    "orthostatic",
+    "delirium"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, possibly central access for pressors",
+   "keywords": [
+    "arterial line",
+    "central line"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI after NG suction, reduced dose induction",
+   "keywords": [
+    "rsi",
+    "etomidate",
+    "ketamine"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "PCC and vitamin K, crossmatched blood (2 units)",
+   "keywords": [
+    "pcc",
+    "vitamin k",
+    "blood"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Piperacillin tazobactam redosed per interval",
+   "keywords": [
+    "zosyn",
+    "piperacillin",
+    "redose"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Ondansetron only; no dopamine antagonists",
+   "keywords": [
+    "ondansetron",
+    "avoid metoclopramide",
+    "avoid droperidol"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "SICU, likely remain intubated",
+   "keywords": [
+    "sicu",
+    "icu",
+    "remain intubated"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "COPD"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Antibiotic and PCC exposure"
+  }
+ ]
+}

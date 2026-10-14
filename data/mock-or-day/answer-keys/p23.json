@@ -1,0 +1,129 @@
+{
+ "id": "p23",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Robotic hysterectomy for a 16 week fibroid uterus in a Jehovah's Witness with Hgb 8.0, an unsigned blood consent, a missed second IV iron dose, and a surgeon expecting possible blood loss.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Symptomatic iron deficiency anemia, otherwise healthy."
+ },
+ "decision": {
+  "recommendation": "delay to optimize and clarify blood wishes",
+  "rationale": "Elective surgery with Hgb 8.0 in a patient who may refuse transfusion should be optimized first (complete IV iron, consider an ESA) and her acceptance of each blood product and technique documented in a private conversation."
+ },
+ "redFlags": [
+  {
+   "id": "jw",
+   "severity": "critical",
+   "finding": "Possible refusal of blood without a documented conversation",
+   "evidence": "Registration: Jehovah's Witness; blood consent declined at signing (will discuss at hospital); T&C 2 units ordered; large posterior fibroid with possible blood loss.",
+   "implication": "Hemorrhage plan depends on which products and techniques she accepts.",
+   "action": "Private discussion and documentation of accepted products (fractions, albumin, cell saver in a continuous circuit, TXA), advance directive review, surgeon alignment.",
+   "keywords": [
+    "jehovah",
+    "witness",
+    "blood consent",
+    "refuse",
+    "cell saver",
+    "fractions",
+    "bloodless"
+   ]
+  },
+  {
+   "id": "anemia",
+   "severity": "critical",
+   "finding": "Unoptimized anemia",
+   "evidence": "Hgb 8.0, MCV 74, TSAT 14%; second ferric carboxymaltose dose cancelled to 11/03; DOE with one flight.",
+   "implication": "No reserve for blood loss, especially if transfusion is refused.",
+   "action": "Delay for IV iron completion, consider ESA, minimize phlebotomy.",
+   "keywords": [
+    "anemia",
+    "hemoglobin",
+    "iron",
+    "ferric",
+    "optimiz",
+    "epo",
+    "esa"
+   ]
+  },
+  {
+   "id": "bleeding_plan",
+   "severity": "major",
+   "finding": "Blood conservation plan",
+   "evidence": "Surgeon notes; uterus 16.8 cm.",
+   "implication": "Prepare for hemorrhage without allogeneic blood.",
+   "action": "TXA, cell saver if accepted, two large IVs, controlled BP within reason, early communication with surgeon.",
+   "keywords": [
+    "txa",
+    "tranexamic",
+    "large bore"
+   ]
+  },
+  {
+   "id": "trendelenburg",
+   "severity": "minor",
+   "finding": "Steep Trendelenburg robotic case, arms tucked",
+   "evidence": "Case positioning, 3 h.",
+   "implication": "Airway edema, ventilation pressures, positioning injury.",
+   "action": "Lung protective ventilation, pad and secure, cuff leak before extubation if long.",
+   "keywords": [
+    "trendelenburg",
+    "robotic",
+    "positioning"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "minor",
+   "finding": "PONV risk",
+   "evidence": "Female, nonsmoker, gyn laparoscopy, opioids, prior nausea.",
+   "implication": "Apfel 3.",
+   "action": "Multimodal prophylaxis.",
+   "keywords": [
+    "ponv"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "fluids",
+   "item": "TXA and cell saver per patient wishes",
+   "keywords": [
+    "txa",
+    "cell saver"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "ETT for steep Trendelenburg and pneumoperitoneum",
+   "keywords": [
+    "ett"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Multimodal PONV prophylaxis",
+   "keywords": [
+    "ondansetron",
+    "dexamethasone"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence"
+  }
+ ]
+}

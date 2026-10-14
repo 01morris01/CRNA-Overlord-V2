@@ -7,6 +7,10 @@ export const LEARNER_MONITOR_KEYS = Object.freeze([
   'spontaneousEffort', 'ppeak', 'mv', 'tv', 'fio2', 'ventMode', 'vaporizer',
   'vaporizerAgent', 'airwayDevice', 'forcedApnea', 'ventSetTV', 'ventSetRR',
   'ventSetPeep', 'ventSetPressure', 'ventSetPressureSupport', 'capnogramPresent',
+  // Anesthesia machine screen (gas monitoring, fresh gas flowmeters, set FiO2,
+  // and spontaneous breathing for the Paw and flow traces). All of these are
+  // shown on a real machine; none carries case guidance.
+  'eto2', 'etAgent', 'mac', 'o2Flow', 'airFlow', 'n2oFlow', 'ventSetFiO2', 'spont',
 ]);
 
 export function projectLearnerMonitorSnapshot(snapshot = {}) {

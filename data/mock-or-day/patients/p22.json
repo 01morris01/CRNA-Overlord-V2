@@ -1,0 +1,715 @@
+{
+ "id": "p22",
+ "room": "OR 6",
+ "time": "0730",
+ "name": "RIDDLEBARGER, COLTON JAMES",
+ "mrn": "0145022",
+ "dob": "05/03/1997",
+ "age": "29 y",
+ "sex": "M",
+ "ht_cm": 183,
+ "wt_kg": 88.0,
+ "preferred_name": "Colt",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "None",
+ "insurance": "Self-pay (financial counseling referral placed)",
+ "emergency_contact": "Kayla Brooks (girlfriend) 423-555-0193",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Open reduction internal fixation right trimalleolar ankle fracture, possible syndesmotic fixation",
+  "short": "ORIF R trimalleolar ankle fracture",
+  "laterality": "Right",
+  "service": "Orthopedic Trauma",
+  "surgeon": "E. Swaggerty, MD",
+  "assistant": "D. Kerns, MD (ortho resident PGY-2)",
+  "indication": "Closed R trimalleolar fracture-dislocation, reduced and splinted in ED 10/26; unstable.",
+  "duration_min": 120,
+  "anesthesia_requested": "General + popliteal/saphenous block per anesthesia",
+  "position": "Supine, bump under R hip, thigh tourniquet",
+  "dispo": "Admit ortho, discharge POD 1",
+  "blood": "None",
+  "equipment": "Mini C-arm, small fragment set, thigh tourniquet",
+  "implants": "Lateral plate, medial malleolar screws, possible posterior plate/syndesmotic screw",
+  "surgeon_notes": "Skin wrinkles present this AM, soft tissue ok for early fixation. Posted as add-on first case.",
+  "add_on": true,
+  "scheduled_on": "10/26/2026"
+ },
+ "problems": [
+  [
+   "Closed trimalleolar fracture of right ankle, initial encounter",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Tobacco use (vape)",
+   "2016",
+   "Active"
+  ],
+  [
+   "Cocaine use",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Laceration L hand",
+   "2019",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "No chronic medical problems reported",
+   "L hand laceration 2019 (sutured ED)",
+   "Concussion 2014 (high school football), no sequelae"
+  ],
+  "psh": [
+   [
+    "2009",
+    "Tonsillectomy",
+    "Pt unsure where"
+   ]
+  ],
+  "family": [
+   "Father: HTN",
+   "Mother: healthy",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Nicotine vape daily since ~2016; occasional cigarettes",
+   "alcohol": "\"6-pack on weekends,\" 4-5 beers 10/26 evening",
+   "drugs": "Admits cocaine (intranasal) \"last night\" at a party; marijuana occasionally",
+   "occupation": "Roofer (day labor)",
+   "living": "Lives with girlfriend, Greeneville",
+   "other": "Injury: jumped off friend's porch (~5 ft) at party ~2130 10/26, twisted R ankle."
+  },
+  "immunizations": [
+   [
+    "Tdap",
+    "10/26/2026 (ED)"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [],
+ "mar": [
+  [
+   "Hydromorphone 1 mg IV",
+   "q3h PRN severe pain",
+   "Given 10/26 2310, 10/27 0215, 0510"
+  ],
+  [
+   "Ondansetron 4 mg IV",
+   "q6h PRN nausea",
+   "Given 10/26 2310"
+  ],
+  [
+   "Acetaminophen 1000 mg PO",
+   "q8h",
+   "Given 10/27 0215"
+  ],
+  [
+   "Ketorolac 15 mg IV",
+   "x1",
+   "Given 10/26 2240"
+  ],
+  [
+   "Enoxaparin 40 mg SC",
+   "Daily, start POD 1",
+   "Not started"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "100 mL/h",
+   "Infusing"
+  ],
+  [
+   "Nicotine patch 14 mg",
+   "Daily",
+   "Ordered - pt declined"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0500",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "1.01",
+      ""
+     ],
+     "Glu": [
+      "104",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "14.8",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "201",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 2250",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "11.8",
+      "H"
+     ],
+     "Hgb": [
+      "14.7",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "CK": [
+      "640",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "CK",
+    "name": "CK",
+    "unit": "U/L",
+    "ref": "30-200"
+   }
+  ],
+  "other": [
+   [
+    "10/26/2026 2250",
+    "Ethanol, serum",
+    "96 mg/dL",
+    "H"
+   ],
+   [
+    "10/26/2026 2320",
+    "Urine drug screen",
+    "Cocaine metabolite: POSITIVE. Cannabinoids: POSITIVE. Opiates: negative. Amphetamines: negative. Benzodiazepines: negative. Fentanyl: negative.",
+    "A"
+   ],
+   [
+    "10/26/2026 2250",
+    "Troponin I, hs",
+    "6 ng/L",
+    ""
+   ],
+   [
+    "10/27/2026 0500",
+    "Troponin I, hs",
+    "7 ng/L",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/26/2026",
+   "XR Right Ankle 3 views",
+   "Displaced oblique fracture distal fibula at level of syndesmosis (Weber B), transverse medial malleolus fracture, posterior malleolar fragment ~20% of articular surface. Lateral talar subluxation. Impression: trimalleolar fracture-dislocation.",
+   "K. Pruden, MD"
+  ],
+  [
+   "10/26/2026",
+   "XR Right Ankle post-reduction",
+   "Improved alignment in posterior splint. Residual 2 mm medial clear space widening.",
+   "K. Pruden, MD"
+  ],
+  [
+   "10/26/2026",
+   "XR Right Tib/Fib 2 views",
+   "No proximal fibular fracture.",
+   "K. Pruden, MD"
+  ],
+  [
+   "10/27/2026",
+   "CT Right Ankle without contrast",
+   "Posterior malleolar fragment 22% of tibial plafond, minimal comminution. No talar dome injury.",
+   "K. Pruden, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/26/2026",
+   "ECG 12-lead (ED)",
+   "Sinus tachycardia 118. Normal intervals, QTc 438. Early repolarization. No ischemic changes.",
+   "ED physician; confirmed W. Haynes, MD",
+   {
+    "er": [
+     "II",
+     "III",
+     "aVF",
+     "V4",
+     "V5",
+     "V6"
+    ],
+    "st": {
+     "II": 0.1,
+     "III": 0.07,
+     "aVF": 0.09,
+     "V2": 0.15,
+     "V3": 0.15,
+     "V4": 0.12,
+     "V5": 0.1,
+     "V6": 0.08
+    },
+    "rate": 118,
+    "pr": 136,
+    "qrs": 90,
+    "qtc": 438,
+    "axis": 75
+   }
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead (preop)",
+   "Sinus tachycardia 110. QTc 444. No ST changes. No significant change.",
+   "W. Haynes, MD",
+   {
+    "rate": 110,
+    "pr": 138,
+    "qrs": 90,
+    "qtc": 444,
+    "axis": 75
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "08/2019",
+   "ED visit",
+   "Laughlin Memorial (outside)",
+   "L hand laceration (box cutter)",
+   "Sutured, discharged"
+  ],
+  [
+   "10/26/2026",
+   "ED visit -> Inpatient admission",
+   "C-N University Hospital",
+   "R ankle fracture-dislocation",
+   "Reduced, splinted, admitted to orthopedics"
+  ]
+ ],
+ "notes": [
+  [
+   "10/26/2026 2335",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "A. Ledford, PA-C",
+   "29 M jumped off porch ~5 ft at a party ~2130, inverted R ankle, unable to bear weight. Obvious deformity, skin tented medially, NV intact. Drank \"about 4-5 beers.\" HR 124, BP 164/98, diaphoretic, pupils 5 mm. Pt initially denied drugs; UDS + cocaine, + THC; on re-questioning admits snorting cocaine \"a couple hours ago.\" No chest pain. ECG ST 118. Trop 6. Ketorolac, hydromorphone, ondansetron. Conscious sedation for reduction with propofol 80 mg + fentanyl 50 mcg by ED attending, splinted. Post-reduction NVI. Tdap given. Ortho consulted - admit, OR in AM."
+  ],
+  [
+   "10/26/2026 2350",
+   "Procedure Note",
+   "Emergency Medicine",
+   "R. Byington, MD",
+   "Procedural sedation for closed reduction R ankle. ASA 2. Propofol 80 mg total, fentanyl 50 mcg. Nadir SpO2 94% on 2L NC. Reduction successful, posterior/stirrup splint. Recovered to baseline 0010."
+  ],
+  [
+   "10/27/2026 0045",
+   "H&P",
+   "Orthopedics",
+   "D. Kerns, MD (resident)",
+   "29 M closed R trimalleolar fx-dislocation, reduced in ED. No PMH. NKDA. No home meds. Social: vapes, EtOH weekends, cocaine tonight (see ED note). Exam: splint intact, toes warm, cap refill < 2 s, SILT. A/P: ORIF R ankle as add-on first case 10/27 if soft tissue allows. NPO after midnight. Elevate, ice. Attending E. Swaggerty aware."
+  ],
+  [
+   "10/27/2026 0130",
+   "Nursing Note",
+   "Orthopedic Unit 4 West",
+   "S. Hale, RN",
+   "Admitted from ED 0105. Pt asked for food, states \"didn't eat all night.\" Pt's girlfriend brought pizza while in ED; per pt ate 3 slices of pepperoni pizza around 0100 before transfer. Educated NPO now for surgery. Pt agitated, then calm. Pain 7/10."
+  ],
+  [
+   "10/27/2026 0520",
+   "Nursing Note",
+   "Orthopedic Unit 4 West",
+   "S. Hale, RN",
+   "Slept intermittently. VS: HR 112, BP 158/96, T 37.4. Pain 6/10 after hydromorphone 0510. Splint intact, toes pink, NV intact. Jittery, says he \"always runs fast.\" NPO since midnight per order. Consent to be obtained by ortho."
+  ],
+  [
+   "10/27/2026 0640",
+   "Social Work",
+   "Case Management",
+   "T. Gentry-Shaw, LMSW",
+   "Uninsured; financial counseling and TennCare screening referral. Pt agreeable to SBIRT brief intervention later today; declines treatment referral currently."
+  ]
+ ],
+ "vitals": [
+  [
+   "08/2019",
+   "128/78",
+   92,
+   16,
+   99,
+   36.8,
+   84.0,
+   "6/10",
+   "Laughlin Memorial ED (outside)"
+  ],
+  [
+   "10/26/2026 2225",
+   "164/98",
+   124,
+   20,
+   98,
+   37.3,
+   88.0,
+   "10/10",
+   "ED"
+  ],
+  [
+   "10/26/2026 2355",
+   "148/90",
+   116,
+   18,
+   96,
+   37.2,
+   null,
+   "4/10",
+   "ED post-sedation"
+  ],
+  [
+   "10/27/2026 0110",
+   "152/92",
+   114,
+   18,
+   97,
+   37.3,
+   null,
+   "7/10",
+   "4 West"
+  ],
+  [
+   "10/27/2026 0520",
+   "158/96",
+   112,
+   18,
+   97,
+   37.4,
+   null,
+   "6/10",
+   "4 West"
+  ],
+  [
+   "10/27/2026 0700",
+   "156/94",
+   110,
+   18,
+   98,
+   37.3,
+   88.0,
+   "5/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO after midnight",
+   "10/27/2026 0045",
+   "Active"
+  ],
+  [
+   "Elevate R leg, ice",
+   "10/27/2026 0045",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV pre-incision",
+   "10/27/2026 0045",
+   "Active"
+  ],
+  [
+   "Neurovascular checks q2h",
+   "10/27/2026 0045",
+   "Active"
+  ],
+  [
+   "CIWA-Ar q4h",
+   "10/27/2026 0110",
+   "Active"
+  ],
+  [
+   "Regular diet",
+   "10/26/2026 2340 (ED)",
+   "Discontinued 10/27/2026 0045"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: ORIF right ankle",
+   "Signed by patient 10/27/2026 0615"
+  ],
+  [
+   "ED procedural sedation consent",
+   "Signed 10/26/2026 2340"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2009",
+   "Tonsillectomy",
+   "GA (pt recalls mask induction)",
+   "None known",
+   "Unknown"
+  ],
+  [
+   "10/26/2026",
+   "ED closed reduction R ankle",
+   "Procedural sedation propofol 80 mg + fentanyl 50 mcg",
+   "SpO2 nadir 94%",
+   "C-N University Hospital ED"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0650",
+  "npo_solids": "10/27/2026 0100 (per 4W nursing note)",
+  "npo_clears": "10/27/2026 0000",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/27 0045)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - R ankle"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ],
+   [
+    "NPO since midnight",
+    "Yes per transfer report"
+   ]
+  ],
+  "nursing_note": "Received from 4 West. Fidgety, diaphoretic forehead, pupils 5 mm reactive. Splint intact. HR 110, BP 156/94. Denies CP. Girlfriend at bedside. Transfer report states NPO since midnight.",
+  "iv": "20g L AC (ED) 2245",
+  "glucose": ""
+ },
+ "label": "C. Riddlebarger",
+ "bmi": "26.3"
+}

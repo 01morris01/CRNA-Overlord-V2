@@ -1,0 +1,186 @@
+{
+ "id": "p08",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "T1DM on a pump in untreated DKA (HCO3 16, gap 20, BHB 3.4, K 3.2) for urgent appendectomy, a positive hCG the surgeon does not know about, consent signed an hour after IV morphine, and a full stomach.",
+ "asa": {
+  "suggested": "3E",
+  "rationale": "T1DM in DKA, early pregnancy, emergent abdominal surgery."
+ },
+ "decision": {
+  "recommendation": "delay a few hours to treat DKA, then proceed",
+  "rationale": "Nonperforated appendicitis can wait a few hours while DKA is treated (fluids, potassium first since K is 3.2, then insulin infusion) and the acidosis improves. Inform surgeon and patient of the positive hCG and involve OB. Then RSI."
+ },
+ "redFlags": [
+  {
+   "id": "dka",
+   "severity": "critical",
+   "finding": "Untreated diabetic ketoacidosis",
+   "evidence": "Glucose 288, HCO3 16, AG 20, BHB 3.4, urine ketones 3+, Kussmaul breathing; no insulin order; CGM removed, pump status uncertain.",
+   "implication": "Anesthesia in uncorrected DKA risks arrhythmia, hypotension, and worsening acidosis.",
+   "action": "Treat DKA before surgery: fluids, K replacement first (K under 3.3), then insulin infusion; suspend the pump; check glucose and K hourly.",
+   "keywords": [
+    "dka",
+    "ketoacidosis",
+    "insulin infusion",
+    "insulin drip",
+    "anion gap",
+    "pump",
+    "beta hydroxybutyrate"
+   ]
+  },
+  {
+   "id": "potassium",
+   "severity": "critical",
+   "finding": "Hypokalemia before insulin",
+   "evidence": "K 3.2.",
+   "implication": "Insulin will drive K lower; arrhythmia.",
+   "action": "Replace potassium before starting insulin.",
+   "keywords": [
+    "potassium",
+    "hypokalemia",
+    "k 3.2",
+    "replace k"
+   ]
+  },
+  {
+   "id": "pregnancy",
+   "severity": "critical",
+   "finding": "Positive hCG not communicated",
+   "evidence": "POC hCG positive 1415; LMP about 7 weeks; surgeon not informed; ED urine hCG never processed; CT with contrast already done.",
+   "implication": "Early pregnancy changes counseling, drug choices, and fetal risk discussion.",
+   "action": "Inform patient and surgeon, OB consult, quantitative hCG; appendectomy is still indicated.",
+   "keywords": [
+    "pregnan",
+    "hcg",
+    "ob consult",
+    "fetal"
+   ]
+  },
+  {
+   "id": "consent",
+   "severity": "major",
+   "finding": "Consent signed after IV morphine while drowsy",
+   "evidence": "Morphine 4 mg IV 1300; consent 1400; drowsy; pregnancy not known when consented.",
+   "implication": "Informed consent is questionable.",
+   "action": "Re consent when appropriate with pregnancy disclosed.",
+   "keywords": [
+    "consent",
+    "morphine",
+    "drowsy"
+   ]
+  },
+  {
+   "id": "full_stomach",
+   "severity": "major",
+   "finding": "Full stomach",
+   "evidence": "Sandwich 0830, vomiting, appendicitis, DKA gastroparesis.",
+   "implication": "Aspiration risk.",
+   "action": "RSI.",
+   "keywords": [
+    "rsi",
+    "full stomach",
+    "aspiration",
+    "rapid sequence"
+   ]
+  },
+  {
+   "id": "antibiotic",
+   "severity": "minor",
+   "finding": "Antibiotic timing",
+   "evidence": "Piperacillin tazobactam given 1250 in ED; case 1500 or later.",
+   "implication": "Prophylaxis should be within 60 min before incision; redose interval may have passed.",
+   "action": "Redose per protocol at incision time.",
+   "keywords": [
+    "zosyn",
+    "piperacillin",
+    "redose",
+    "antibiotic"
+   ]
+  },
+  {
+   "id": "piercing",
+   "severity": "minor",
+   "finding": "Tongue piercing in place",
+   "evidence": "Preop checklist.",
+   "implication": "Airway and cautery hazard.",
+   "action": "Remove before induction.",
+   "keywords": [
+    "piercing"
+   ]
+  },
+  {
+   "id": "airway_reactivity",
+   "severity": "minor",
+   "finding": "Intermittent asthma with daily nicotine and THC vaping",
+   "evidence": "History; albuterol 0830.",
+   "implication": "Bronchospasm risk.",
+   "action": "Bronchodilator available, adequate depth.",
+   "keywords": [
+    "asthma",
+    "albuterol",
+    "vaping"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "fluids",
+   "item": "DKA protocol: fluids, K, insulin infusion; hourly glucose and K",
+   "keywords": [
+    "insulin infusion",
+    "potassium",
+    "fluids"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI",
+   "keywords": [
+    "rsi"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Consider arterial line for serial gases",
+   "keywords": [
+    "arterial line",
+    "abg"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Pregnancy considerations: avoid hypoxemia and hypotension, left tilt not required at 7 weeks",
+   "keywords": [
+    "pregnan"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "PONV prophylaxis appropriate in early pregnancy",
+   "keywords": [
+    "ondansetron",
+    "dexamethasone"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Step down or ICU if DKA not resolved; endocrinology consult",
+   "keywords": [
+    "endocrin",
+    "icu",
+    "step down"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Asthma with daily vaping"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Reactive airway at emergence"
+  }
+ ]
+}

@@ -1,0 +1,1432 @@
+{
+ "id": "p42",
+ "room": "OR 12",
+ "time": "1200",
+ "name": "GOFORTH, HOWARD E",
+ "mrn": "0147042",
+ "dob": "07/22/1965",
+ "age": "61 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 104.0,
+ "preferred_name": "Howie",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "S. Daugherty, DO, Jefferson City Family Medicine",
+ "insurance": "BlueCross BlueShield TN PPO",
+ "emergency_contact": "Pamela Goforth (wife) 865-555-0561",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Right shoulder arthroscopy with rotator cuff repair, subacromial decompression, possible biceps tenodesis",
+  "short": "R arthroscopic rotator cuff repair",
+  "laterality": "Right",
+  "service": "Orthopedics - Sports",
+  "surgeon": "B. Marcum, MD",
+  "assistant": "D. Helton, PA-C",
+  "indication": "Full-thickness supraspinatus tear 1.8 cm with retraction, R shoulder, after lifting injury 06/2026; failed PT and injection.",
+  "duration_min": 120,
+  "anesthesia_requested": "General with interscalene block",
+  "position": "Beach chair (approx 70 degrees), head in headrest",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Beach chair positioner, arthroscopy tower, pump",
+  "implants": "Suture anchors x2-3",
+  "surgeon_notes": "Interscalene block for post-op pain please (single shot vs catheter per anesthesia). Pt has OSA - uses CPAP. Hypotensive anesthesia helpful for visualization if tolerated.",
+  "add_on": false,
+  "scheduled_on": "09/30/2026"
+ },
+ "problems": [
+  [
+   "Complete rotator cuff tear, right, traumatic",
+   "07/2026",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2012",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea, moderate, on CPAP",
+   "2017",
+   "Active"
+  ],
+  [
+   "Obesity, BMI 32-33",
+   "2015",
+   "Active"
+  ],
+  [
+   "Prediabetes",
+   "2021",
+   "Active"
+  ],
+  [
+   "Paralysis of left hemidiaphragm (post-thoracotomy phrenic nerve injury)",
+   "2020",
+   "Active"
+  ],
+  [
+   "Pulmonary hamartoma, LUL, s/p wedge resection",
+   "04/2019",
+   "Resolved"
+  ],
+  [
+   "Gout",
+   "2018",
+   "Active"
+  ],
+  [
+   "Right ankle sprain",
+   "2016",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "HTN",
+   "OSA AHI 24 (2017), CPAP 10 cm H2O nightly, good compliance",
+   "LUL nodule 2019 -> L thoracotomy wedge resection (hamartoma)",
+   "Gout (first MTP), rare flares",
+   "Prediabetes"
+  ],
+  "psh": [
+   [
+    "04/2019",
+    "Left VATS converted to thoracotomy, LUL wedge resection",
+    "Knoxville Pulmonary & Thoracic Center (outside)"
+   ],
+   [
+    "2009",
+    "Right knee arthroscopy, meniscectomy",
+    "C-N University Hospital"
+   ],
+   [
+    "2016",
+    "Colonoscopy (normal)",
+    "C-N Endoscopy"
+   ]
+  ],
+  "family": [
+   "Father: HTN, stroke age 74",
+   "Mother: T2DM",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Former, quit 2010 (20 pack-yr)",
+   "alcohol": "2-3 beers/week",
+   "drugs": "None",
+   "occupation": "HVAC technician (on light duty)",
+   "living": "House with wife, Jefferson City",
+   "other": "Bowls in a league (on hold)."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2020"
+   ],
+   [
+    "COVID-19",
+    "2022"
+   ],
+   [
+    "Shingrix",
+    "2024 x2"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Lisinopril 20 mg tab",
+   "1 tab PO daily",
+   "S. Daugherty, DO",
+   "10/26/2026 0800 (held AM)"
+  ],
+  [
+   "Amlodipine 5 mg tab",
+   "1 tab PO daily",
+   "S. Daugherty, DO",
+   "10/27/2026 0600"
+  ],
+  [
+   "Allopurinol 100 mg tab",
+   "1 tab PO daily",
+   "S. Daugherty, DO",
+   "10/27/2026 0600"
+  ],
+  [
+   "Meloxicam 15 mg tab",
+   "1 tab PO daily",
+   "B. Marcum, MD",
+   "10/20/2026 (stopped 7 days preop)"
+  ],
+  [
+   "CPAP 10 cm H2O",
+   "Nightly",
+   "G. Ruark, MD (Sleep)",
+   "10/26/2026 night"
+  ],
+  [
+   "Fish oil",
+   "1 cap daily",
+   "OTC",
+   "10/20/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 1040"
+  ],
+  [
+   "Lactated Ringer's",
+   "KVO",
+   "Started 10/27/2026 1045"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Hydrochlorothiazide 25 mg",
+   "2012-2018",
+   "Gout flare"
+  ],
+  [
+   "Oxycodone 5 mg PRN",
+   "04/2019-05/2019",
+   "Post-thoracotomy, completed"
+  ],
+  [
+   "Triamcinolone 40 mg injection R shoulder",
+   "08/2026",
+   "Single injection, partial relief"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/15/2026",
+    "comment": "PAT",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "112",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "WBC": [
+      "8.1",
+      ""
+     ],
+     "Hgb": [
+      "15.2",
+      ""
+     ],
+     "Hct": [
+      "46",
+      ""
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "94",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/18/2024",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "1.00",
+      ""
+     ],
+     "Glu": [
+      "105",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "18",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "71",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "157",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "126",
+      ""
+     ],
+     "A1c": [
+      "6.1",
+      "H"
+     ],
+     "Uric": [
+      "6.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2022",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "1.08",
+      ""
+     ],
+     "Glu": [
+      "111",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "92",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.5",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "7.7",
+      ""
+     ],
+     "Hgb": [
+      "15.0",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "254",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "109",
+      ""
+     ],
+     "A1c": [
+      "6.1",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/09/2020",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.97",
+      ""
+     ],
+     "Glu": [
+      "101",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "89",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "15.6",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "238",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Uric": [
+      "7.9",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/10/2019 0500",
+    "comment": "POD1 (outside)",
+    "vals": {
+     "WBC": [
+      "11.8",
+      "H"
+     ],
+     "Hgb": [
+      "13.1",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "239",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "110",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/02/2019",
+    "comment": "Pre-thoracic surgery (outside)",
+    "vals": {
+     "WBC": [
+      "5.7",
+      ""
+     ],
+     "Hgb": [
+      "15.4",
+      ""
+     ],
+     "Hct": [
+      "46",
+      ""
+     ],
+     "Plt": [
+      "266",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.97",
+      ""
+     ],
+     "Glu": [
+      "96",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2017",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "102",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "32",
+      ""
+     ],
+     "ALKP": [
+      "74",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "15.4",
+      ""
+     ],
+     "Hct": [
+      "46",
+      ""
+     ],
+     "Plt": [
+      "243",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "125",
+      ""
+     ],
+     "A1c": [
+      "5.8",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Uric",
+    "name": "Uric acid",
+    "unit": "mg/dL",
+    "ref": "3.4-7.0"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": [
+   [
+    "04/2019",
+    "Surgical pathology - LUL wedge (outside)",
+    "Pulmonary chondroid hamartoma 1.6 cm; margins negative; no malignancy",
+    ""
+   ],
+   [
+    "10/15/2026",
+    "HbA1c",
+    "6.0%",
+    "H"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "01/2019",
+   "CT Chest without contrast",
+   "1.5 cm well-circumscribed LUL nodule with popcorn calcification and fat. Diaphragm position normal. Impression: Likely hamartoma; surgical vs surveillance per pulmonology.",
+   "Outside - Knoxville Imaging"
+  ],
+  [
+   "04/10/2019",
+   "XR Chest portable (outside)",
+   "L chest tube. Postsurgical changes LUL. Small L apical pneumothorax. Hemidiaphragms at expected levels (portable). Impression: Post-op changes.",
+   "Outside"
+  ],
+  [
+   "08/2019",
+   "XR Chest 2 views",
+   "Interval removal of chest tube. Postsurgical changes L upper lobe. Elevation of left hemidiaphragm, new since 01/2019 CT scout, with left basilar atelectasis. Impression: Elevated L hemidiaphragm - consider phrenic nerve dysfunction; fluoroscopic sniff test could be considered.",
+   "L. Coffman, MD"
+  ],
+  [
+   "02/2020",
+   "Fluoroscopy - diaphragm (sniff test)",
+   "Left hemidiaphragm elevated approx 5 cm above right, with paradoxical upward motion on sniff. Right hemidiaphragm moves normally. Impression: Left hemidiaphragmatic paralysis.",
+   "L. Coffman, MD"
+  ],
+  [
+   "06/2022",
+   "XR Chest 2 views",
+   "Persistent elevation L hemidiaphragm, stable. Mild L basilar atelectasis. No acute disease.",
+   "R. Bivens, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Zn_Oberlappenresektion_links_bei_Lungenkarzinom_58W_-_CR_ap_-_001.jpg)"
+   }
+  ],
+  [
+   "07/15/2026",
+   "XR Shoulder right 3 views",
+   "Mild AC joint arthropathy, type II acromion. No fracture. Impression: Degenerative changes.",
+   "R. Bivens, MD"
+  ],
+  [
+   "07/29/2026",
+   "MRI Shoulder right without contrast",
+   "Full-thickness supraspinatus tear 1.8 cm AP, retraction to apex of humeral head, Goutallier 1. Infraspinatus tendinosis. Biceps tendinopathy. Impression: Full-thickness supraspinatus tear.",
+   "R. Bivens, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "11/2017",
+   "Polysomnography, in-lab split night",
+   "AHI 24/h (supine 41), SpO2 nadir 81%. CPAP titration: 10 cm H2O eliminated events. Impression: Moderate OSA.",
+   "G. Ruark, MD"
+  ],
+  [
+   "03/2019",
+   "Pulmonary function test (pre-op, outside)",
+   "FEV1 3.42 L (95%), FVC 4.40 L (94%), DLCO 92%. Normal.",
+   "Outside"
+  ],
+  [
+   "02/2020",
+   "Pulmonary function test, complete with supine spirometry",
+   "FVC upright 3.38 L (72% pred), supine 2.62 L (22% decline). FEV1 2.74 L (74%), FEV1/FVC 81%. TLC 76% pred. DLCO 84%, DLCO/VA normal. MIP -58 cm H2O (reduced). Impression: Mild restriction with significant supine decrement, consistent with unilateral diaphragm paralysis (known L).",
+   "P. Lunsford, MD"
+  ],
+  [
+   "02/2020",
+   "ECG 12-lead",
+   "NSR 74. Normal.",
+   "K. Reece, MD",
+   {
+    "rate": 74,
+    "pr": 164,
+    "qrs": 92,
+    "qtc": 420,
+    "axis": 30
+   }
+  ],
+  [
+   "10/15/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 68. LVH by voltage criteria. No ischemic changes.",
+   "K. Reece, MD",
+   {
+    "rate": 68,
+    "pr": 168,
+    "qrs": 96,
+    "qtc": 428,
+    "axis": 20,
+    "lvh": 1
+   }
+  ],
+  [
+   "2024",
+   "CPAP download",
+   "30-day compliance 93% >4 h/night; residual AHI 2.1; leak acceptable.",
+   "Sleep lab"
+  ]
+ ],
+ "encounters": [
+  [
+   "11/2017",
+   "Sleep study",
+   "C-N Sleep Center",
+   "Snoring, daytime sleepiness",
+   "OSA - CPAP"
+  ],
+  [
+   "04/09/2019",
+   "Inpatient (4 days) - outside",
+   "Knoxville Pulmonary & Thoracic Center",
+   "L VATS -> thoracotomy, wedge resection",
+   "Discharged POD3"
+  ],
+  [
+   "08/2019",
+   "Clinic - PCP",
+   "Jefferson City Family Medicine",
+   "Exertional dyspnea since surgery",
+   "CXR; pulmonology referral"
+  ],
+  [
+   "02/2020",
+   "Clinic - Pulmonology",
+   "C-N Lung Associates",
+   "Elevated L hemidiaphragm",
+   "Sniff test + PFTs; observation"
+  ],
+  [
+   "07/15/2026",
+   "Clinic - Orthopedics",
+   "C-N Orthopedics",
+   "R shoulder pain/weakness",
+   "MRI"
+  ],
+  [
+   "08/12/2026",
+   "Clinic - Orthopedics",
+   "C-N Orthopedics",
+   "Full-thickness tear",
+   "Injection; PT"
+  ],
+  [
+   "09/30/2026",
+   "Clinic - Orthopedics",
+   "C-N Orthopedics",
+   "Failed conservative treatment",
+   "Scheduled for repair"
+  ],
+  [
+   "10/15/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Cleared"
+  ]
+ ],
+ "notes": [
+  [
+   "04/13/2019 1000",
+   "Media (Outside Record)",
+   "Thoracic Surgery",
+   "Knoxville Pulmonary & Thoracic Center",
+   "Operative note/discharge summary (scanned). L VATS converted to limited posterolateral thoracotomy for dense apical adhesions. LUL wedge resection 1.6 cm nodule. Nodule abutted mediastinal pleura near aortopulmonary window; dissection near phrenic nerve, nerve visualized and preserved. Frozen: benign. Chest tube removed POD2. Post-op course: mild dyspnea, SpO2 93% RA at discharge attributed to atelectasis. D/C POD3 on oxycodone."
+  ],
+  [
+   "08/22/2019 1430",
+   "Progress Note",
+   "Family Medicine",
+   "S. Daugherty, DO",
+   "Persistent exertional dyspnea since surgery, worse lying flat - sleeps on 2 pillows and CPAP. No chest pain. CXR: elevated L hemidiaphragm, new. Refer pulmonology."
+  ],
+  [
+   "02/18/2020 1100",
+   "Consult",
+   "Pulmonology",
+   "P. Lunsford, MD",
+   "Sniff test: L hemidiaphragm paralysis. PFTs mild restriction, 22% supine FVC drop. Likely phrenic injury from thoracotomy (traction/thermal). Recovery after 9+ months unlikely. Discussed diaphragm plication - not recommended given mild symptoms; weight loss and CPAP adherence advised. Note: pt relies on R hemidiaphragm; any R phrenic compromise could cause significant respiratory insufficiency. RTC PRN."
+  ],
+  [
+   "06/14/2022 0900",
+   "Progress Note",
+   "Family Medicine",
+   "S. Daugherty, DO",
+   "Annual. BP 136/84 on lisinopril 20 - add amlodipine 5. A1c 6.1. Weight 102 kg. CXR stable elevated L hemidiaphragm. Gout quiet on allopurinol."
+  ],
+  [
+   "05/09/2024 1500",
+   "Telephone Encounter",
+   "Sleep Medicine",
+   "J. Pack, RRT",
+   "DME resupply: new mask cushions and filters sent. Compliance download 93%."
+  ],
+  [
+   "07/15/2026 1000",
+   "Consult",
+   "Orthopedics",
+   "B. Marcum, MD",
+   "61M HVAC tech, R dominant. Felt pop lifting compressor 06/2026; weakness overhead, night pain. Exam: + drop arm, weak ER/abduction 4-/5, + Jobe. MRI ordered. PMH: HTN, OSA, prior lung surgery. A/P: suspected RTC tear."
+  ],
+  [
+   "08/12/2026 1030",
+   "Procedure Note",
+   "Orthopedics",
+   "D. Helton, PA-C",
+   "Subacromial injection R shoulder, triamcinolone 40 mg + lidocaine 1% 4 mL. Tolerated well."
+  ],
+  [
+   "09/03/2026 1415",
+   "PT Evaluation",
+   "Physical Therapy",
+   "C. Lowe, DPT",
+   "Visit 6/8. Persistent weakness, limited active elevation 110 degrees. Night pain. Recommend surgical follow-up."
+  ],
+  [
+   "09/30/2026 1015",
+   "H&P",
+   "Orthopedics",
+   "B. Marcum, MD",
+   "Failed 10 wk conservative mgmt. Plan arthroscopic RCR, SAD, possible biceps tenodesis, beach chair, ISB for analgesia. PMH: HTN, OSA on CPAP, gout, s/p L lung surgery 2019 (benign). ROS: denies SOB. Exam: lungs clear, R shoulder as above. Meds: lisinopril, amlodipine, allopurinol, meloxicam. NKDA. Consent signed."
+  ],
+  [
+   "10/15/2026 1130",
+   "Anesthesia Preop Note",
+   "Preadmission Testing",
+   "F. Ogle, RN",
+   "PAT nursing screen. STOP-BANG 6 (known OSA, CPAP compliant - instructed to bring machine). METs ~4-5 (climbs 1 flight, stops to rest at top - \"since my lung surgery\"). Hold lisinopril and meloxicam. ECG LVH. Labs drawn. Anesthesia chart review pending."
+  ],
+  [
+   "10/26/2026 1330",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "F. Ogle, RN",
+   "Preop call. Arrive 1000. NPO midnight, clears until 1000. Take amlodipine and allopurinol. Bring CPAP. Wife driving."
+  ],
+  [
+   "10/27/2026 1050",
+   "H&P (Interval Update)",
+   "Orthopedics",
+   "D. Helton, PA-C",
+   "No change. R shoulder marked. Block per anesthesia. Proceed."
+  ]
+ ],
+ "vitals": [
+  [
+   "11/2017",
+   "142/88",
+   76,
+   16,
+   96,
+   36.7,
+   98.0,
+   "0/10",
+   "Sleep center"
+  ],
+  [
+   "08/22/2019 1415",
+   "138/86",
+   82,
+   18,
+   95,
+   36.8,
+   99.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "02/18/2020 1045",
+   "134/84",
+   78,
+   18,
+   95,
+   36.6,
+   100.2,
+   "0/10",
+   "Pulmonology"
+  ],
+  [
+   "06/14/2022 0845",
+   "136/84",
+   74,
+   16,
+   95,
+   36.7,
+   102.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "07/15/2026 0945",
+   "148/90",
+   76,
+   16,
+   95,
+   36.7,
+   103.5,
+   "6/10",
+   "Ortho"
+  ],
+  [
+   "10/15/2026 1100",
+   "144/88",
+   72,
+   16,
+   95,
+   36.6,
+   104.1,
+   "4/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 1035",
+   "158/94",
+   74,
+   16,
+   94,
+   36.6,
+   104.0,
+   "4/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "BMP, CBC, ECG",
+   "10/15/2026",
+   "Resulted"
+  ],
+  [
+   "NPO after midnight, clears until 1000",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Regional block: interscalene, right (anesthesia to perform)",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Ice therapy device post-op",
+   "10/27/2026",
+   "Active (post-op)"
+  ],
+  [
+   "Sling with abduction pillow",
+   "10/27/2026",
+   "Active (post-op)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not done",
+  "antibody_screen": "Not done",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: R shoulder arthroscopy, RCR, SAD, possible biceps tenodesis",
+   "Signed 09/30/2026"
+  ],
+  [
+   "Anesthesia/regional consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2009",
+   "R knee arthroscopy",
+   "GA LMA",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "04/2019",
+   "L VATS/thoracotomy",
+   "GA, L DLT 39 Fr, thoracic epidural",
+   "Extubated OR; epidural removed POD2",
+   "Knoxville Pulmonary & Thoracic Center"
+  ],
+  [
+   "2016",
+   "Colonoscopy",
+   "MAC propofol",
+   "Brief desaturation, chin lift",
+   "C-N Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1000",
+  "npo_solids": "10/26/2026 2200",
+  "npo_clears": "10/27/2026 0600 water with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - right shoulder"
+   ],
+   [
+    "Allergy band",
+    "N/A NKDA"
+   ],
+   [
+    "CPAP brought",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "61M calm. Brought CPAP. BP 158/94 R arm (L arm cuff - R surgical side) - pt states usually 130s at home. SpO2 94% RA lying flat; 96% sitting up. Mild dyspnea when lying flat for IV start, pt states \"I always do that since my lung surgery.\" Lungs diminished L base. Took amlodipine, allopurinol.",
+  "iv": "20 g L forearm",
+  "glucose": ""
+ },
+ "label": "H. Goforth",
+ "bmi": "32.8"
+}

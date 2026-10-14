@@ -1,0 +1,175 @@
+{
+ "id": "p11",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "CABG x3 plus AVR on a patient whose platelets fell from 218 to 96 on 24 days of heparin (HIT never tested) heading for full heparinization, clopidogrel washout of only 3 days, an unaddressed pacemaker, and lisinopril given this morning.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "Severe AS with three vessel CAD, NYHA III, EF 45%, CKD."
+ },
+ "decision": {
+  "recommendation": "hold until HIT is evaluated and the device plan is set",
+  "rationale": "A platelet drop over 50% on prolonged heparin makes HIT plausible, and CPB needs 400 units/kg heparin. Send PF4 antibody (and SRA if positive), stop heparin if suspicion holds, and plan bivalirudin if HIT is confirmed. Clopidogrel last 10/24 also missed the 5 day washout."
+ },
+ "redFlags": [
+  {
+   "id": "hit",
+   "severity": "critical",
+   "finding": "Possible heparin induced thrombocytopenia before full heparinization",
+   "evidence": "Platelets 218 to 112 to 104 to 96 on a heparin infusion since 10/03; hematology suggested HIT workup; PF4 ELISA not ordered.",
+   "implication": "Heparin for CPB in active HIT risks catastrophic thrombosis.",
+   "action": "PF4 antibody now (SRA if positive), calculate a 4T score, stop heparin and use an alternative (bivalirudin) if HIT is likely.",
+   "keywords": [
+    "hit",
+    "heparin induced",
+    "pf4",
+    "4t",
+    "bivalirudin",
+    "thrombocytopenia",
+    "platelet"
+   ]
+  },
+  {
+   "id": "clopidogrel",
+   "severity": "critical",
+   "finding": "Clopidogrel washout incomplete",
+   "evidence": "Ordered held 5 days but last dose 10/24; surgery 10/27; platelets 96.",
+   "implication": "Major bleeding after CPB.",
+   "action": "Platelets available, consider platelet function testing or delay; antifibrinolytic per protocol.",
+   "keywords": [
+    "clopidogrel",
+    "plavix",
+    "washout",
+    "5 day",
+    "platelet transfusion"
+   ]
+  },
+  {
+   "id": "pacemaker",
+   "severity": "major",
+   "finding": "Pacemaker plan missing",
+   "evidence": "Medtronic dual chamber, AP 38%, underlying sinus 50s; rep not called; interrogation and reprogramming not ordered.",
+   "implication": "Electrocautery interference.",
+   "action": "Interrogate, reprogram to asynchronous mode for the case (or magnet DOO 85), external pads, re interrogate postop.",
+   "keywords": [
+    "pacemaker",
+    "magnet",
+    "asynchronous",
+    "doo",
+    "interrogat",
+    "device rep"
+   ]
+  },
+  {
+   "id": "acei",
+   "severity": "major",
+   "finding": "ACE inhibitor given the morning of CPB",
+   "evidence": "Lisinopril 20 mg 10/27 0600.",
+   "implication": "Vasoplegia after bypass.",
+   "action": "Vasopressin and norepinephrine ready.",
+   "keywords": [
+    "lisinopril",
+    "ace inhibitor",
+    "vasoplegia",
+    "vasopressin"
+   ]
+  },
+  {
+   "id": "as_cad",
+   "severity": "major",
+   "finding": "Severe AS with three vessel CAD",
+   "evidence": "AVA 0.7, mean gradient 44, LAD 85%, LVEDP 22, EF 45%.",
+   "implication": "Induction hypotension or tachycardia can start an ischemic spiral.",
+   "action": "Arterial line before induction, maintain SVR and sinus rhythm, phenylephrine ready, slow induction.",
+   "keywords": [
+    "aortic stenosis",
+    "arterial line",
+    "phenylephrine",
+    "svr",
+    "tachycardia"
+   ]
+  },
+  {
+   "id": "carotid",
+   "severity": "major",
+   "finding": "Left ICA 70 to 79% stenosis",
+   "evidence": "Carotid duplex 10/07; vascular: higher MAP on bypass, cerebral oximetry.",
+   "implication": "Stroke risk.",
+   "action": "Cerebral oximetry, higher MAP targets on CPB.",
+   "keywords": [
+    "carotid",
+    "cerebral oximetry",
+    "nirs",
+    "map"
+   ]
+  },
+  {
+   "id": "vanco",
+   "severity": "minor",
+   "finding": "Vancomycin timing",
+   "evidence": "Cefazolin plus vancomycin due within 60 min of incision.",
+   "implication": "Vancomycin needs to start 60 to 120 min before incision.",
+   "action": "Start vancomycin earlier.",
+   "keywords": [
+    "vancomycin",
+    "120"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line pre induction, PA catheter, TEE",
+   "keywords": [
+    "arterial line",
+    "pa catheter",
+    "tee"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Heparin 400 units/kg with ACT over 480 s unless HIT; TXA per protocol",
+   "keywords": [
+    "heparin",
+    "act",
+    "txa",
+    "tranexamic"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "Cell saver, 4 units crossmatched, platelets available",
+   "keywords": [
+    "cell saver",
+    "platelets",
+    "crossmatch"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin within 60 min, vancomycin started 60 to 120 min before incision",
+   "keywords": [
+    "cefazolin",
+    "vancomycin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "CVICU intubated",
+   "keywords": [
+    "cvicu",
+    "icu"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Antibiotics, protamine, and blood products"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Mild emphysema"
+  }
+ ]
+}

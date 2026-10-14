@@ -1,0 +1,1147 @@
+{
+ "id": "p47",
+ "room": "OR 4",
+ "time": "1000",
+ "name": "MAYBERRY, CHELSEA L",
+ "mrn": "0147047",
+ "dob": "06/21/1992",
+ "age": "34 y",
+ "sex": "F",
+ "ht_cm": 167,
+ "wt_kg": 79.5,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "N. Gentry, NP, Talbott Family Health",
+ "insurance": "UnitedHealthcare Choice Plus (employer)",
+ "emergency_contact": "Jordan Mayberry (husband) 865-555-0459",
+ "isolation": "",
+ "allergies": [
+  [
+   "Sulfa antibiotics",
+   "Hives",
+   "Moderate",
+   "2013"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic cholecystectomy (pregnant, 18 weeks)",
+  "short": "Lap cholecystectomy (18 wk pregnant)",
+  "laterality": "N/A",
+  "service": "General Surgery",
+  "surgeon": "P. Chesney, MD",
+  "assistant": "K. Lowe, PA-C",
+  "indication": "Symptomatic cholelithiasis with recurrent biliary colic (2 ED visits, 3rd episode), intolerant of low-fat diet, at 18 weeks gestation.",
+  "duration_min": 75,
+  "anesthesia_requested": "General",
+  "position": "Supine with left uterine displacement, reverse Trendelenburg, left tilt",
+  "dispo": "Labor & Delivery observation overnight (OB)",
+  "blood": "Type and screen",
+  "equipment": "Open (Hasson) entry, insufflation 10-12 mm Hg, SCDs",
+  "implants": "",
+  "surgeon_notes": "2nd trimester - ideal timing. OB to do FHT pre and post. No IOC unless needed (shielded). Low-pressure pneumoperitoneum.",
+  "add_on": false,
+  "scheduled_on": "10/16/2026"
+ },
+ "problems": [
+  [
+   "Pregnancy, 18w0d (G2P1001), EDD 03/30/2027",
+   "07/2026",
+   "Active"
+  ],
+  [
+   "Symptomatic cholelithiasis, recurrent biliary colic",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Gastroesophageal reflux in pregnancy",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Obesity (pre-pregnancy BMI 26.9)",
+   "2020",
+   "Active"
+  ],
+  [
+   "Postpartum depression, resolved",
+   "2021",
+   "Resolved"
+  ],
+  [
+   "Anemia of pregnancy, mild",
+   "10/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Biliary colic since 08/2026",
+   "GERD in pregnancy",
+   "Postpartum depression 2021 (sertraline 6 mo, resolved)",
+   "Seasonal allergies"
+  ],
+  "psh": [
+   [
+    "2011",
+    "Wisdom teeth extraction",
+    "Oral surgery office"
+   ],
+   [
+    "2016",
+    "Laparoscopy for ruptured ovarian cyst, R",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Mother: gallstones (cholecystectomy), T2DM",
+   "Father: HTN",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None in pregnancy",
+   "drugs": "None",
+   "occupation": "Pharmacy technician",
+   "living": "Husband and son (5 y), Talbott",
+   "other": "Husband driving."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026 (pregnant)"
+   ],
+   [
+    "COVID-19 2025-26",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2021 (prior pregnancy; due 27-36 wk this pregnancy)"
+   ],
+   [
+    "Rubella",
+    "Immune"
+   ]
+  ],
+  "ob": "G2P1001. LMP 06/23/2026, EDD 03/30/2027 by 8-wk US. 18w0d today. 2021: SVD at 39 wk with epidural, uncomplicated, 3,450 g. Current pregnancy: normal anatomy scan pending (scheduled 20 wk). Prenatal labs normal; Rh positive. Quad screen low risk. No contractions, bleeding, or LOF."
+ },
+ "home_meds": [
+  [
+   "Prenatal vitamin with DHA",
+   "1 tab PO daily",
+   "L. Brackett, CNM",
+   "10/26/2026"
+  ],
+  [
+   "Famotidine 20 mg",
+   "1 tab PO BID",
+   "L. Brackett, CNM",
+   "10/26/2026 2100"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "2 tabs PO q6h PRN pain (max 3 g/day)",
+   "L. Brackett, CNM",
+   "10/26/2026 1500"
+  ],
+  [
+   "Ondansetron 4 mg ODT",
+   "PO q8h PRN nausea",
+   "ED 10/09/2026",
+   "10/25/2026"
+  ],
+  [
+   "Calcium carbonate (Tums)",
+   "PRN heartburn",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Sodium citrate/citric acid 30 mL PO",
+   "Within 30 min of induction",
+   "Due (holding)"
+  ],
+  [
+   "Famotidine 20 mg IV",
+   "Preop x1",
+   "Given 10/27/2026 0845"
+  ],
+  [
+   "Metoclopramide 10 mg IV",
+   "Preop x1",
+   "Given 10/27/2026 0845"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's",
+   "100 mL/h",
+   "Started 10/27/2026 0840"
+  ],
+  [
+   "Enoxaparin 40 mg SC",
+   "POD0 evening per OB/surgery",
+   "Pending"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Sertraline 50 mg",
+   "2021-2022",
+   "PPD resolved"
+  ],
+  [
+   "Norethindrone 0.35 mg",
+   "2022-06/2026",
+   "Stopped to conceive"
+  ],
+  [
+   "Oxycodone 5 mg",
+   "10/09/2026 (ED, #6)",
+   "Pt did not fill - pregnancy concerns"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0820",
+    "comment": "Day of surgery",
+    "vals": {
+     "WBC": [
+      "9.1",
+      ""
+     ],
+     "Hgb": [
+      "10.8",
+      ""
+     ],
+     "Hct": [
+      "33",
+      ""
+     ],
+     "Plt": [
+      "228",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/22/2026",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "9.4",
+      ""
+     ],
+     "Hgb": [
+      "10.9",
+      ""
+     ],
+     "Hct": [
+      "33",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "8",
+      ""
+     ],
+     "Cr": [
+      "0.49",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "104",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "3.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/09/2026 0310",
+    "comment": "ED - RUQ pain",
+    "vals": {
+     "WBC": [
+      "12.4",
+      ""
+     ],
+     "Hgb": [
+      "11.1",
+      ""
+     ],
+     "Hct": [
+      "34",
+      ""
+     ],
+     "Plt": [
+      "258",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "5",
+      ""
+     ],
+     "Cr": [
+      "0.55",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "52",
+      "H"
+     ],
+     "ALT": [
+      "68",
+      "H"
+     ],
+     "ALKP": [
+      "142",
+      ""
+     ],
+     "TBili": [
+      "1.1",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "3.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/29/2026 2230",
+    "comment": "ED - RUQ pain. Lipase see other.",
+    "vals": {
+     "WBC": [
+      "11.6",
+      ""
+     ],
+     "Hgb": [
+      "11.1",
+      ""
+     ],
+     "Hct": [
+      "34",
+      ""
+     ],
+     "Plt": [
+      "222",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "7",
+      ""
+     ],
+     "Cr": [
+      "0.57",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "38",
+      ""
+     ],
+     "ALT": [
+      "44",
+      ""
+     ],
+     "ALKP": [
+      "110",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "3.4",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/18/2026",
+    "comment": "Prenatal panel (8 wk)",
+    "vals": {
+     "WBC": [
+      "10.0",
+      ""
+     ],
+     "Hgb": [
+      "11.9",
+      ""
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "241",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "TSH": [
+      "2.14",
+      ""
+     ],
+     "FT4": [
+      "1.22",
+      ""
+     ],
+     "USG": [
+      "1.013",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2021",
+    "comment": "Postpartum check",
+    "vals": {
+     "WBC": [
+      "9.8",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "236",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "18-26"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "3-13"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.40-0.80"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "35-180"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "2.8-4.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "5.6-14.8"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "10.5-14.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "32-41"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "08/18/2026",
+    "Prenatal panel",
+    "ABO/Rh O positive, antibody screen neg; rubella immune; HBsAg neg; HIV neg; syphilis neg; HCV neg",
+    ""
+   ],
+   [
+    "09/22/2026",
+    "NIPT (cell-free DNA)",
+    "Low risk; fetal sex withheld at pt request",
+    ""
+   ],
+   [
+    "08/29/2026",
+    "Lipase",
+    "34 U/L",
+    ""
+   ],
+   [
+    "10/09/2026",
+    "Lipase",
+    "41 U/L",
+    ""
+   ],
+   [
+    "10/08/2026",
+    "Quad screen / AFP",
+    "Low risk",
+    ""
+   ],
+   [
+    "10/22/2026",
+    "Type and screen",
+    "O positive, antibody screen negative",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Fetal heart tones (pre-op, Doppler)",
+    "148 bpm",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/18/2026",
+   "US OB first trimester (dating)",
+   "Single live IUP, CRL 8w0d, FHR 162. EDD 03/30/2027.",
+   "H. Odom, MD"
+  ],
+  [
+   "08/29/2026",
+   "US Abdomen RUQ",
+   "Multiple mobile gallstones up to 1.4 cm. No wall thickening, no pericholecystic fluid, sonographic Murphy negative. CBD 4 mm. Gravid uterus. Impression: Cholelithiasis without cholecystitis.",
+   "H. Odom, MD"
+  ],
+  [
+   "10/09/2026",
+   "US Abdomen RUQ",
+   "Cholelithiasis with 1.2 cm stone in GB neck. Wall 3 mm. CBD 5 mm. Positive sonographic Murphy. No pericholecystic fluid. Impression: Cholelithiasis; early acute cholecystitis not excluded.",
+   "H. Odom, MD"
+  ],
+  [
+   "10/09/2026",
+   "US OB limited",
+   "Single live IUP, FHR 152, appropriate size for 15w3d. Placenta posterior, not low-lying.",
+   "H. Odom, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "2016",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "Ruptured R ovarian cyst - laparoscopy",
+   "Home same day"
+  ],
+  [
+   "2021",
+   "Inpatient (L&D, 2 days)",
+   "C-N University Hospital",
+   "SVD at 39 wk",
+   "Discharged"
+  ],
+  [
+   "08/18/2026",
+   "Prenatal visit",
+   "C-N Women's Health",
+   "New OB",
+   "Dating US"
+  ],
+  [
+   "08/29/2026",
+   "ED visit",
+   "C-N University Hospital",
+   "RUQ pain, vomiting",
+   "Biliary colic; discharged"
+  ],
+  [
+   "09/22/2026",
+   "Prenatal visit",
+   "C-N Women's Health",
+   "Routine 13 wk",
+   "Surgery referral"
+  ],
+  [
+   "10/09/2026",
+   "ED visit",
+   "C-N University Hospital",
+   "RUQ pain",
+   "Biliary colic; discharged; surgery f/u"
+  ],
+  [
+   "10/16/2026",
+   "Clinic - General Surgery",
+   "C-N Surgical Associates",
+   "Recurrent biliary colic in pregnancy",
+   "Scheduled lap chole"
+  ],
+  [
+   "10/22/2026",
+   "Clinic - OB",
+   "C-N Women's Health",
+   "Pre-op OB consult",
+   "Plan documented"
+  ]
+ ],
+ "notes": [
+  [
+   "08/29/2026 2350",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "W. Hale, MD",
+   "34F G2P1 at 9w4d with 3 h RUQ pain after fried chicken, vomiting x2. Murphy +. Labs mild ALT elevation, lipase nl. US: cholelithiasis, no cholecystitis. Pain resolved with IV fluids, acetaminophen, ondansetron. FHT not assessed (<12 wk, US earlier). Low-fat diet, surgery referral if recurs."
+  ],
+  [
+   "09/22/2026 1000",
+   "Prenatal Visit",
+   "Obstetrics",
+   "L. Brackett, CNM",
+   "13w0d. Doing well except heartburn - famotidine. Discussed gallstones: if recurrent, surgery in 2nd trimester is safest. FHT 158."
+  ],
+  [
+   "10/09/2026 0420",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "M. Snapp, DO",
+   "15w3d. RUQ pain 5 h, vomiting. Murphy +. WBC 12.4, ALT 68. US: possible early cholecystitis. FHT 152. Pain controlled with acetaminophen, IV fluids. Surgery (Dr. Chesney) called - outpatient f/u this week, early surgery advised. Oxycodone Rx #6 given."
+  ],
+  [
+   "10/16/2026 1130",
+   "Consult",
+   "General Surgery",
+   "P. Chesney, MD",
+   "34F at 16w3d with 3 episodes biliary colic in 7 wk, 2 ED visits, one with possible early cholecystitis. Recurrence risk high; cholecystectomy in 2nd trimester recommended (SAGES). Plan lap chole 10/27 at 18w0d, Hasson entry, insufflation 10-12 mm Hg, LUD, OB FHT pre/post, VTE prophylaxis. Risks to fetus discussed. Consent signed."
+  ],
+  [
+   "10/22/2026 1400",
+   "Consult",
+   "Obstetrics",
+   "R. Varnell, MD",
+   "Pre-op OB consult for nonobstetric surgery at 18 wk. Uncomplicated IUP. Recommendations: (1) FHT by Doppler before and after surgery; continuous intraop monitoring not indicated pre-viability. (2) Left uterine displacement. (3) Aspiration prophylaxis per anesthesia. (4) No prophylactic tocolysis. (5) Post-op: observe on L&D or monitor FHT q shift, report contractions/bleeding. (6) Acetaminophen and short-course opioids acceptable; avoid NSAIDs (beyond 20 wk especially). (7) SCDs + enoxaparin. (8) Rh positive - no RhIG needed."
+  ],
+  [
+   "10/22/2026 1500",
+   "Anesthesia Preop Note",
+   "Preadmission Testing",
+   "D. Kimsey, CRNA",
+   "34F 18 wk pregnant for lap chole. Airway MP II, TMD 3 fb, good mouth opening. Prior anesthetics: GA 2016 (laparoscopy) - PONV; labor epidural 2021 uneventful. GERD - famotidine. Plan GA ETT RSI, aspiration ppx, LUD, ETCO2 32-34 (pregnancy normal), maintain MAP within 20% baseline, avoid hypoxemia. Hgb 10.9."
+  ],
+  [
+   "10/24/2026 1305",
+   "Patient Message",
+   "General Surgery",
+   "Mayberry, Chelsea (patient)",
+   "Will the anesthesia hurt the baby? I am really nervous. Also can my husband be there when they check the heartbeat after?"
+  ],
+  [
+   "10/25/2026 0915",
+   "Patient Message",
+   "General Surgery",
+   "K. Lowe, PA-C",
+   "Totally understandable. The anesthesia team will go over everything. Yes, your husband can be there for the heartbeat check in recovery."
+  ],
+  [
+   "10/27/2026 0830",
+   "Nursing Note",
+   "Obstetrics",
+   "A. Leming, RN (L&D)",
+   "Pre-op FHT by Doppler 148 bpm. No contractions, no bleeding, no LOF. Will reassess in PACU."
+  ]
+ ],
+ "vitals": [
+  [
+   "08/29/2026 2220",
+   "124/76",
+   98,
+   18,
+   99,
+   36.9,
+   76.8,
+   "8/10",
+   "ED"
+  ],
+  [
+   "09/22/2026 0945",
+   "108/64",
+   86,
+   16,
+   99,
+   36.7,
+   77.4,
+   "0/10",
+   "Prenatal"
+  ],
+  [
+   "10/09/2026 0300",
+   "128/80",
+   104,
+   18,
+   99,
+   37.4,
+   78.2,
+   "9/10",
+   "ED"
+  ],
+  [
+   "10/16/2026 1115",
+   "110/66",
+   88,
+   16,
+   99,
+   36.7,
+   78.9,
+   "1/10",
+   "Surgery clinic"
+  ],
+  [
+   "10/22/2026 1345",
+   "106/62",
+   90,
+   16,
+   99,
+   36.6,
+   79.2,
+   "0/10",
+   "OB"
+  ],
+  [
+   "10/27/2026 0825",
+   "108/64",
+   92,
+   18,
+   99,
+   36.7,
+   79.5,
+   "1/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "CBC, type and screen",
+   "10/22/2026",
+   "Resulted"
+  ],
+  [
+   "FHT pre-op and post-op (L&D RN)",
+   "10/27/2026",
+   "Pre-op done"
+  ],
+  [
+   "NPO after midnight, clears until 0700",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Aspiration prophylaxis",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Left uterine displacement wedge",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "SCDs",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "L&D observation post-op",
+   "10/27/2026",
+   "Active (post-op)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/25/2026 - redrawn 10/27 0820"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic cholecystectomy, possible open",
+   "Signed 10/16/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2011",
+   "Wisdom teeth",
+   "IV sedation",
+   "None",
+   "Oral surgery office"
+  ],
+  [
+   "2016",
+   "Laparoscopy (ovarian cyst)",
+   "GA ETT",
+   "PONV",
+   "C-N University Hospital"
+  ],
+  [
+   "2021",
+   "Labor",
+   "Epidural",
+   "None",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0800",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0630 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A - known pregnancy 18 wk"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Done - sulfa"
+   ],
+   [
+    "FHT pre-op",
+    "148 bpm (0830)"
+   ],
+   [
+    "LUD wedge",
+    "On stretcher"
+   ]
+  ],
+  "nursing_note": "34F, 18 wk, anxious, tearful about baby. Lying supine became lightheaded, BP 94/58 - resolved with left tilt (now 108/64). Heartburn this AM. Husband at bedside. 20 g R forearm.",
+  "iv": "20 g R forearm",
+  "glucose": ""
+ },
+ "label": "C. Mayberry",
+ "bmi": "28.5"
+}

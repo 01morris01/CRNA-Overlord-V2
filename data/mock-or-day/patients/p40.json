@@ -1,0 +1,1041 @@
+{
+ "id": "p40",
+ "room": "OR 11",
+ "time": "1300",
+ "name": "QUILLEN, ANNABETH M",
+ "mrn": "0147040",
+ "dob": "05/09/2002",
+ "age": "24 y",
+ "sex": "F",
+ "ht_cm": 163,
+ "wt_kg": 58.4,
+ "preferred_name": "Annie",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "C. Haskew, NP, Dandridge Primary Care",
+ "insurance": "Cigna Open Access Plus (employer)",
+ "emergency_contact": "Garrett Lyle (fiance) 865-555-0294",
+ "isolation": "",
+ "allergies": [
+  [
+   "Ciprofloxacin",
+   "Worsening weakness, diplopia (myasthenia exacerbation)",
+   "Severe",
+   "2023"
+  ],
+  [
+   "Adhesive tape",
+   "Redness/blistering",
+   "Mild",
+   "2022"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic right ovarian cystectomy, possible right oophorectomy",
+  "short": "Lap R ovarian cystectomy",
+  "laterality": "Right",
+  "service": "Gynecology",
+  "surgeon": "H. Venable, MD",
+  "assistant": "",
+  "indication": "6.1 cm right ovarian complex cyst with echogenic nodule and fat-fluid level c/w mature cystic teratoma; intermittent RLQ pain x3 mo. Risk of torsion.",
+  "duration_min": 75,
+  "anesthesia_requested": "General",
+  "position": "Dorsal lithotomy, Trendelenburg, arms tucked",
+  "dispo": "Same-day discharge",
+  "blood": "Type and screen",
+  "equipment": "Endocatch bag, uterine manipulator",
+  "implants": "",
+  "surgeon_notes": "Ovary-sparing cystectomy planned. Contained extraction. Pt would like to go home same day.",
+  "add_on": false,
+  "scheduled_on": "10/09/2026"
+ },
+ "problems": [
+  [
+   "Myasthenia gravis, generalized, AChR antibody positive",
+   "03/2021",
+   "Active"
+  ],
+  [
+   "S/p thymectomy (thymic hyperplasia)",
+   "06/2022",
+   "Resolved"
+  ],
+  [
+   "Right ovarian mature cystic teratoma (presumed)",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Anxiety",
+   "2020",
+   "Active"
+  ],
+  [
+   "Gastroesophageal reflux, mild",
+   "2023",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "MG - generalized, AChR binding Ab positive; dx 03/2021 (ptosis, diplopia, proximal arm fatigue). Robotic thymectomy 06/2022. Prednisone 2021-2024 (tapered off).",
+   "Anxiety, mild",
+   "GERD"
+  ],
+  "psh": [
+   [
+    "06/2022",
+    "Robotic-assisted thymectomy",
+    "Knoxville Thoracic Surgery Center (outside)"
+   ],
+   [
+    "2019",
+    "Wisdom teeth extraction, IV sedation",
+    "Oral surgery office"
+   ]
+  ],
+  "family": [
+   "Mother: hypothyroidism (Hashimoto)",
+   "Father: HTN",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Occasional, 1-2 drinks/month",
+   "drugs": "None",
+   "occupation": "Dental hygienist",
+   "living": "Lives with fiance, Dandridge",
+   "other": "Wedding planned 05/2027."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "COVID-19",
+    "2022"
+   ],
+   [
+    "Tdap",
+    "2020"
+   ],
+   [
+    "HPV series",
+    "2014-2015"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2022 (pre-immunosuppression)"
+   ]
+  ],
+  "ob": "G0. LMP 10/14/2026. Uses condoms. Urine hCG negative today."
+ },
+ "home_meds": [
+  [
+   "Pyridostigmine (Mestinon) 60 mg tab",
+   "1 tab PO QID (0600, 1100, 1600, 2100)",
+   "A. Szabo, MD (Neurology)",
+   "10/27/2026 0600"
+  ],
+  [
+   "Azathioprine 50 mg tab",
+   "2 tabs (100 mg) PO daily",
+   "A. Szabo, MD (Neurology)",
+   "10/26/2026 0800"
+  ],
+  [
+   "Famotidine 20 mg tab",
+   "1 tab PO BID PRN heartburn",
+   "C. Haskew, NP",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sertraline 50 mg tab",
+   "1 tab PO daily",
+   "C. Haskew, NP",
+   "10/26/2026 0800"
+  ],
+  [
+   "Calcium + vitamin D 600 mg/800 IU",
+   "1 tab PO daily",
+   "OTC",
+   "10/25/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 1125"
+  ],
+  [
+   "Lactated Ringer's",
+   "75 mL/h",
+   "Started 10/27/2026 1130"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Prednisone 20 mg daily, tapered",
+   "04/2021-02/2024",
+   "Tapered off after thymectomy; stable on azathioprine"
+  ],
+  [
+   "Ciprofloxacin 500 mg BID",
+   "09/2023 x2 days",
+   "MG exacerbation - stopped"
+  ],
+  [
+   "Norgestimate-ethinyl estradiol",
+   "2018-2021",
+   "Pt preference"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/20/2026",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "4.4",
+      "L"
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "285",
+      ""
+     ],
+     "MCV": [
+      "98",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.85",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/02/2026",
+    "comment": "Azathioprine monitoring",
+    "vals": {
+     "WBC": [
+      "4.6",
+      ""
+     ],
+     "Hgb": [
+      "13.4",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "227",
+      ""
+     ],
+     "MCV": [
+      "98",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.79",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "81",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/19/2023 1840",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "9.6",
+      ""
+     ],
+     "Hgb": [
+      "13.3",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "259",
+      ""
+     ],
+     "MCV": [
+      "95",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.66",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "USG": [
+      "1.017",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Small",
+      "A"
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/18/2021",
+    "comment": "Neurology - new diplopia",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "13.3",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "292",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "TSH": [
+      "1.33",
+      ""
+     ],
+     "FT4": [
+      "1.31",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "03/18/2021",
+    "Acetylcholine receptor binding antibody",
+    "9.2 nmol/L (ref <0.02)",
+    "H"
+   ],
+   [
+    "03/18/2021",
+    "MuSK antibody",
+    "Negative",
+    ""
+   ],
+   [
+    "04/2021",
+    "TPMT enzyme activity",
+    "Normal (pre-azathioprine)",
+    ""
+   ],
+   [
+    "06/2022",
+    "Surgical pathology - thymus (outside)",
+    "Thymic follicular hyperplasia; no thymoma",
+    ""
+   ],
+   [
+    "09/19/2023",
+    "Urine culture",
+    "Mixed flora, <10,000 CFU/mL",
+    ""
+   ],
+   [
+    "10/20/2026",
+    "Type and screen",
+    "A positive, antibody screen negative",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Urine hCG, qualitative",
+    "Negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "03/25/2021",
+   "CT Chest with contrast",
+   "Anterior mediastinal soft tissue 2.8 x 1.4 cm with preserved triangular shape and interspersed fat, favored thymic hyperplasia over thymoma. Lungs clear. Impression: Anterior mediastinal tissue likely thymic hyperplasia; correlate.",
+   "P. Dunleavy, MD"
+  ],
+  [
+   "10/06/2026",
+   "US Pelvis transvaginal",
+   "Right ovary 7.0 x 5.9 cm containing 6.1 cm complex cyst with echogenic Rokitansky nodule, fat-fluid level, and posterior acoustic shadowing; no internal vascularity. Left ovary normal. Trace free fluid. Impression: Right ovarian lesion most consistent with mature cystic teratoma (O-RADS 2).",
+   "P. Dunleavy, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/30/2021",
+   "Pulmonary function test (spirometry)",
+   "FVC 3.31 L (91% pred), FEV1 2.88 L (92%), FEV1/FVC 87%. MIP -78 cm H2O. Impression: Normal spirometry.",
+   "R. Lindgren, MD"
+  ],
+  [
+   "08/13/2026",
+   "Spirometry (neurology clinic)",
+   "FVC 3.38 L (93% pred). Supine FVC 3.29 L. Impression: Normal; no supine drop.",
+   "A. Szabo, MD"
+  ]
+ ],
+ "encounters": [
+  [
+   "03/18/2021",
+   "Clinic - Neurology (new)",
+   "C-N Neurology Associates",
+   "Diplopia, ptosis, arm fatigue",
+   "MG diagnosed; pyridostigmine/prednisone"
+  ],
+  [
+   "06/14/2022",
+   "Inpatient (2 days) - outside",
+   "Knoxville Thoracic Surgery Center",
+   "Robotic thymectomy",
+   "Discharged POD2"
+  ],
+  [
+   "09/19/2023",
+   "ED visit",
+   "C-N University Hospital",
+   "Diplopia and weakness after starting ciprofloxacin",
+   "Cipro stopped; observed 8 h; discharged"
+  ],
+  [
+   "08/13/2026",
+   "Clinic - Neurology",
+   "C-N Neurology Associates",
+   "MG follow-up",
+   "Stable, MGFA IIa"
+  ],
+  [
+   "10/09/2026",
+   "Clinic - Gynecology",
+   "C-N Women's Health",
+   "Right ovarian cyst",
+   "Scheduled for laparoscopy"
+  ]
+ ],
+ "notes": [
+  [
+   "03/18/2021 1430",
+   "Consult",
+   "Neurology",
+   "A. Szabo, MD",
+   "18F with 6 wk intermittent diplopia, R>L ptosis worse in evening, arm fatigue drying hair. Normal swallowing/speech. Exam: fatigable ptosis on sustained upgaze at 40 s, ice pack test positive, deltoids 4+/5 after repetition. Neck flexion 5-/5. Imp: generalized MG, likely seropositive. Plan: AChR/MuSK Ab, CT chest, pyridostigmine 30 mg TID titrate, spirometry. Avoid fluoroquinolones, aminoglycosides, magnesium, telithromycin; MG alert card given."
+  ],
+  [
+   "06/16/2022 1200",
+   "Media (Outside Record)",
+   "Thoracic Surgery",
+   "Knoxville Thoracic Surgery Center",
+   "Discharge summary and anesthesia record (scanned). Robotic R-sided thymectomy 06/14/2022. Anesthesia: propofol/remifentanil TIVA, no neuromuscular blocker, 7.0 ETT (grade 1), DLT not used, CO2 insufflation. Pyridostigmine held AM of surgery per anesthesia; resumed PACU. Extubated in OR, FVC 2.9 L in PACU. Path: thymic hyperplasia. POD1 mild ptosis, no respiratory issues. D/C POD2."
+  ],
+  [
+   "09/19/2023 2210",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "J. Pickel, PA-C",
+   "Started ciprofloxacin 2 days ago (urgent care, dysuria). Since then worsening double vision, fatigue chewing, \"arms heavy.\" No dyspnea. NIF -50, FVC 2.6 L (bedside). Speech normal. Discussed with neurology on call (Dr. Szabo): stop cipro, nitrofurantoin for cystitis, observe. Repeat FVC 2.8 L at 6 h. Discharged with return precautions. Cipro added to allergy list."
+  ],
+  [
+   "02/20/2024 0905",
+   "Telephone Encounter",
+   "Neurology",
+   "K. Bivens, RN",
+   "Per Dr. Szabo: prednisone taper complete. Continue azathioprine 100 mg daily, pyridostigmine 60 mg QID. CBC/LFTs q3 mo x1 yr then q6 mo."
+  ],
+  [
+   "08/13/2026 1015",
+   "Progress Note",
+   "Neurology",
+   "A. Szabo, MD",
+   "MG f/u. Generalized AChR+ MG, s/p thymectomy 2022, off steroids since 2/2024. Mild end-of-day ptosis 2-3x/wk. No bulbar sx, no dyspnea. Last exacerbation 9/2023 (cipro). MG-ADL 2. Exam: no ptosis at rest, mild ptosis after 60 s upgaze, strength full, neck flexion 5/5. FVC 3.38 L, no supine drop. MGFA class IIa. Plan: continue pyridostigmine 60 mg QID, azathioprine 100 mg. If surgery ever needed: notify neurology; take pyridostigmine as usual unless anesthesia advises; consider IVIG/PLEX only if active disease. Avoid drugs that worsen MG (list provided). RTC 6 mo."
+  ],
+  [
+   "10/09/2026 1340",
+   "H&P",
+   "Gynecology",
+   "H. Venable, MD",
+   "CC: R pelvic pain. 24F G0 with 3 mo intermittent RLQ pain, worse with exercise. US: 6.1 cm R ovarian lesion c/w dermoid. No fever, normal bowel/bladder. PMH: MG, anxiety, GERD. PSH: thymectomy, wisdom teeth. Meds: per med list. All: cipro, tape. Soc: no tobacco. Exam: abd soft, mild RLQ tenderness, no peritoneal signs. Pelvic: R adnexal fullness. A/P: R ovarian mature cystic teratoma, symptomatic, torsion risk. Lap R ovarian cystectomy, possible oophorectomy. Risks/benefits incl. chemical peritonitis from spill, ovarian reserve. Consent signed."
+  ],
+  [
+   "10/20/2026 1100",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "R. Whitsell, RN",
+   "Phone PAT screen. Healthy 24F, METS >4. Med list reviewed: \"Mestinon\" and azathioprine, sertraline, famotidine. Labs/T&S drawn today at outpatient lab. NPO instructions given. Pt asked whether to take her Mestinon - told to take AM meds with sip of water. No anesthesia problems previously per pt."
+  ],
+  [
+   "10/23/2026 1612",
+   "Patient Message",
+   "Gynecology",
+   "Quillen, Annabeth (patient)",
+   "Hi, is it OK if my fiance waits in the lobby the whole time? And will I need someone with me overnight? Thanks!"
+  ],
+  [
+   "10/24/2026 0910",
+   "Patient Message",
+   "Gynecology",
+   "L. Drinnon, RN",
+   "Yes, he can wait in the surgical waiting area and will be updated. You will need a responsible adult with you for 24 hours after anesthesia."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/18/2021 1410",
+   "112/70",
+   72,
+   14,
+   99,
+   36.7,
+   55.0,
+   "0/10",
+   "Neurology"
+  ],
+  [
+   "09/19/2023 1830",
+   "118/74",
+   88,
+   16,
+   99,
+   36.9,
+   57.1,
+   "0/10",
+   "ED"
+  ],
+  [
+   "08/13/2026 1000",
+   "110/68",
+   70,
+   14,
+   99,
+   36.6,
+   58.0,
+   "0/10",
+   "Neurology"
+  ],
+  [
+   "10/09/2026 1320",
+   "114/72",
+   76,
+   14,
+   99,
+   36.7,
+   58.6,
+   "3/10",
+   "Gynecology"
+  ],
+  [
+   "10/27/2026 1110",
+   "116/74",
+   68,
+   14,
+   99,
+   36.6,
+   58.4,
+   "2/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/20/2026",
+   "Resulted"
+  ],
+  [
+   "Urine hCG",
+   "10/27/2026 1105",
+   "Resulted - negative"
+  ],
+  [
+   "NPO after midnight, clears until 1100",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "SCDs",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Discharge home when criteria met",
+   "10/27/2026",
+   "Active (post-op)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/23/2026 - redraw sent 10/27 1110"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic R ovarian cystectomy, possible R oophorectomy",
+   "Signed 10/09/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2019",
+   "Wisdom teeth extraction",
+   "IV sedation (office)",
+   "None",
+   "Oral surgery office"
+  ],
+  [
+   "06/2022",
+   "Robotic thymectomy",
+   "GA, ETT 7.0 grade 1, propofol/remifentanil TIVA, no NMB",
+   "Extubated in OR; uneventful",
+   "Knoxville Thoracic Surgery Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1100",
+  "npo_solids": "10/26/2026 2300",
+  "npo_clears": "10/27/2026 0600 water with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "Urine hCG negative"
+   ],
+   [
+    "Site marked",
+    "Yes - right"
+   ],
+   [
+    "Allergy band",
+    "Done"
+   ]
+  ],
+  "nursing_note": "24F A&O x4, anxious but pleasant. Took \"all my morning meds at 6\" with sip of water. Mild R eyelid droop noted, pt says it gets worse when tired and she slept poorly. Speech clear, swallowing water without difficulty. Next Mestinon dose would be 1100 - pt asked if she should take it; told to ask anesthesia. Fiance in waiting room.",
+  "iv": "20 g L hand",
+  "glucose": ""
+ },
+ "label": "A. Quillen",
+ "bmi": "22.0"
+}

@@ -1,0 +1,2129 @@
+{
+ "id": "p30",
+ "room": "OR 17",
+ "time": "0730",
+ "name": "LOVELADY, HAROLD EUGENE",
+ "mrn": "0146030",
+ "dob": "02/08/1955",
+ "age": "71 y",
+ "sex": "M",
+ "ht_cm": 175,
+ "wt_kg": 72.1,
+ "preferred_name": "Gene",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. W. Haun, Jefferson City Internal Medicine",
+ "insurance": "Humana Medicare Advantage PPO",
+ "emergency_contact": "Brenda Lovelady (wife) 865-555-0126",
+ "isolation": "",
+ "allergies": [
+  [
+   "Lisinopril",
+   "Cough",
+   "Mild (intolerance)",
+   "2015"
+  ],
+  [
+   "Shellfish",
+   "Hives",
+   "Moderate",
+   "1990"
+  ]
+ ],
+ "case": {
+  "procedure": "Right video-assisted thoracoscopic (VATS) upper lobectomy with mediastinal lymph node dissection",
+  "short": "R VATS upper lobectomy",
+  "laterality": "Right",
+  "service": "Thoracic Surgery",
+  "surgeon": "E. Vandergriff, MD",
+  "assistant": "S. Kibler, PA-C",
+  "indication": "Right upper lobe large-cell neuroendocrine carcinoma, clinical T2aN0M0 (stage IB)",
+  "duration_min": 210,
+  "anesthesia_requested": "General with lung isolation (left DLT); thoracic epidural vs paravertebral/ESP per anesthesia",
+  "position": "Left lateral decubitus",
+  "dispo": "Inpatient, thoracic step-down",
+  "blood": "Type and crossmatch 2 units",
+  "equipment": "Left DLT 39 Fr / bronchoscope; arterial line",
+  "implants": "",
+  "surgeon_notes": "Possible conversion to thoracotomy. Cefazolin 2 g. Intercostal cryoablation possible.",
+  "add_on": false,
+  "scheduled_on": "10/02/2026"
+ },
+ "problems": [
+  [
+   "Large-cell neuroendocrine carcinoma RUL",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "COPD, GOLD 2, group B",
+   "2016",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2009",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2009",
+   "Active"
+  ],
+  [
+   "Benign prostatic hyperplasia",
+   "2017",
+   "Active"
+  ],
+  [
+   "Proximal leg weakness, under evaluation",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Former smoker, 50 pack-years",
+   "2023",
+   "Active"
+  ],
+  [
+   "Abdominal aortic ectasia 2.8 cm",
+   "2021",
+   "Active"
+  ],
+  [
+   "Osteoarthritis knees",
+   "2015",
+   "Active"
+  ],
+  [
+   "Erectile dysfunction",
+   "2025",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "RUL LCNEC found on lung cancer screening LDCT 07/2026 (3.2 cm spiculated, LungRADS 4X)",
+   "COPD GOLD 2, one admission for exacerbation 2022",
+   "HTN, HLD",
+   "BPH",
+   "OA knees",
+   "Aortic ectasia 2.8 cm, surveillance",
+   "Proximal leg weakness, dry mouth - neurology eval 10/2026"
+  ],
+  "psh": [
+   [
+    "1978",
+    "Appendectomy",
+    "Fort Sanders"
+   ],
+   [
+    "2012",
+    "Right inguinal hernia repair",
+    "Jefferson Memorial"
+   ],
+   [
+    "2018",
+    "Colonoscopy, 2 polyps",
+    "Lakeway Endoscopy"
+   ],
+   [
+    "09/15/2026",
+    "EBUS-TBNA bronchoscopy",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Father: lung cancer, died 66",
+   "Mother: stroke at 80",
+   "Brother: COPD"
+  ],
+  "social": {
+   "tobacco": "Former, 50 pack-years (1 ppd x 50 yr), quit 03/2023",
+   "alcohol": "2-3 beers per week",
+   "drugs": "None",
+   "occupation": "Retired TVA lineman",
+   "living": "Lives with wife, 1-story home",
+   "other": "Walks dog daily (before 10/2026); stair climbing now limited per notes"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "RSV",
+    "2024"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2022"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2018"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Tiotropium/olodaterol 2.5/2.5 mcg (Stiolto Respimat)",
+   "2 inhalations daily",
+   "Dr. N. Ferris (Pulm)",
+   "10/27/2026 0500"
+  ],
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs q4-6h PRN",
+   "Dr. N. Ferris",
+   "10/26/2026 1900"
+  ],
+  [
+   "Amlodipine 10 mg",
+   "1 tab PO daily",
+   "Dr. W. Haun",
+   "10/27/2026 0500"
+  ],
+  [
+   "Losartan 50 mg",
+   "1 tab PO daily",
+   "Dr. W. Haun",
+   "10/26/2026 0800"
+  ],
+  [
+   "Atorvastatin 40 mg",
+   "1 tab PO nightly",
+   "Dr. W. Haun",
+   "10/26/2026 2100"
+  ],
+  [
+   "Tamsulosin 0.4 mg",
+   "1 cap PO nightly",
+   "Dr. W. Haun",
+   "10/26/2026 2100"
+  ],
+  [
+   "Aspirin 81 mg",
+   "1 tab PO daily",
+   "Dr. W. Haun",
+   "10/20/2026 (held per surgeon)"
+  ],
+  [
+   "Biotene dry mouth rinse",
+   "PRN",
+   "OTC",
+   "10/27/2026 0430"
+  ],
+  [
+   "Polyethylene glycol 17 g",
+   "PO daily PRN",
+   "OTC",
+   "10/25/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Heparin 5,000 units SC",
+   "Preop x1",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Gabapentin 300 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0610"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Lisinopril 20 mg",
+   "2009-2015",
+   "Cough"
+  ],
+  [
+   "Fluticasone/salmeterol 250/50",
+   "2016-2022",
+   "Changed to LAMA/LABA"
+  ],
+  [
+   "Prednisone 40 mg x5 d",
+   "04/2022",
+   "Course complete (AECOPD)"
+  ],
+  [
+   "Varenicline 1 mg BID",
+   "01/2023-04/2023",
+   "Completed, quit smoking"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/20/2026 0930",
+    "comment": "Preadmission testing; ABG room air",
+    "vals": {
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "14.2",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "257",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.89",
+      ""
+     ],
+     "Glu": [
+      "79",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "106",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "PT": [
+      "12.6",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ],
+     "pH": [
+      "7.40",
+      ""
+     ],
+     "PaCO2": [
+      "44",
+      ""
+     ],
+     "PaO2": [
+      "71",
+      "L"
+     ],
+     "HCO3a": [
+      "27",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 1100",
+    "comment": "Neurology",
+    "vals": {
+     "CK": [
+      "96",
+      ""
+     ],
+     "TSH": [
+      "1.79",
+      ""
+     ],
+     "FT4": [
+      "1.12",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ],
+     "B12": [
+      "496",
+      ""
+     ],
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "29",
+      ""
+     ],
+     "ALT": [
+      "15",
+      ""
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.6",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/15/2026 0640",
+    "comment": "Pre-EBUS",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "83",
+      ""
+     ],
+     "Ca": [
+      "8.9",
+      ""
+     ],
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "14.2",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "258",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/05/2026",
+    "comment": "Pre-procedure (CT-guided biopsy)",
+    "vals": {
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "14.0",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "256",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "1.03",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "72",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "4.5",
+      ""
+     ],
+     "PT": [
+      "12.8",
+      ""
+     ],
+     "INR": [
+      "1.1",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/28/2025",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "14.0",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "75",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "A1c": [
+      "5.8",
+      "H"
+     ],
+     "PSA": [
+      "3.10",
+      ""
+     ],
+     "TSH": [
+      "1.61",
+      ""
+     ],
+     "FT4": [
+      "1.18",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/01/2024",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "14.4",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "271",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "1.06",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "69",
+      ""
+     ],
+     "HDL": [
+      "66",
+      ""
+     ],
+     "TG": [
+      "122",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/22/2023",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "14.9",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "255",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "74",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "97",
+      ""
+     ],
+     "A1c": [
+      "5.7",
+      "H"
+     ],
+     "PSA": [
+      "2.90",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/12/2022 0500",
+    "comment": "On steroids",
+    "vals": {
+     "WBC": [
+      "14.1",
+      "H"
+     ],
+     "Hgb": [
+      "14.4",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "264",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.98",
+      ""
+     ],
+     "Glu": [
+      "188",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/10/2022 1915",
+    "comment": "ED - AECOPD",
+    "vals": {
+     "WBC": [
+      "12.9",
+      "H"
+     ],
+     "Hgb": [
+      "14.0",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "246",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "85",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "pH": [
+      "7.33",
+      "L"
+     ],
+     "PaCO2": [
+      "53",
+      "H"
+     ],
+     "HCO3a": [
+      "28",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/01/2018",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.2",
+      ""
+     ],
+     "Hgb": [
+      "13.9",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "229",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "15",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "92",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "PSA": [
+      "2.40",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/14/2016",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "8.0",
+      ""
+     ],
+     "Hgb": [
+      "14.3",
+      ""
+     ],
+     "Hct": [
+      "43",
+      ""
+     ],
+     "Plt": [
+      "241",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "69",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "146",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "113",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaO2",
+    "name": "PO2",
+    "unit": "mm Hg",
+    "ref": "80-100"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Cardiac",
+    "key": "CK",
+    "name": "CK",
+    "unit": "U/L",
+    "ref": "30-200"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "PSA",
+    "name": "PSA",
+    "unit": "ng/mL",
+    "ref": "<4.00"
+   }
+  ],
+  "other": [
+   [
+    "08/06/2026",
+    "Pathology, CT-guided core biopsy RUL",
+    "Nondiagnostic: atypical cells, necrosis. Recommend repeat sampling.",
+    "A"
+   ],
+   [
+    "09/16/2026",
+    "Pathology, EBUS-TBNA + RUL transbronchial biopsy",
+    "RUL: large-cell neuroendocrine carcinoma (synaptophysin+, chromogranin+, INSM1+, Ki-67 ~60%). Stations 4R, 7, 10R, 11R: negative for malignancy (adequate lymphocytes).",
+    "A"
+   ],
+   [
+    "10/13/2026",
+    "Acetylcholine receptor binding antibody",
+    "0.0 nmol/L (ref <=0.02) Negative",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "P/Q-type voltage-gated calcium channel antibody",
+    "Pending - sent to reference lab",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "Paraneoplastic autoantibody panel, serum",
+    "Pending - sent to reference lab",
+    ""
+   ],
+   [
+    "10/20/2026",
+    "MRSA nares PCR",
+    "Negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "11/08/2021",
+   "US abdominal aorta (AAA screening)",
+   "Infrarenal aorta max 2.8 cm. Impression: aortic ectasia, no aneurysm. Repeat 5 yr.",
+   "D. Lyle, MD"
+  ],
+  [
+   "04/10/2022",
+   "XR Chest portable",
+   "Hyperinflation, flattened diaphragms. No consolidation. Impression: COPD, no acute process.",
+   "D. Lyle, MD"
+  ],
+  [
+   "07/14/2026",
+   "CT Chest low-dose, lung cancer screening",
+   "Emphysema, centrilobular, upper lobe predominant, moderate. RUL posterior segment 3.2 x 2.6 cm spiculated solid nodule, new compared with 07/2025 (prior 0.6 cm ground glass). No adenopathy. Lung-RADS 4X. Coronary calcification moderate.",
+   "R. Haverty, MD"
+  ],
+  [
+   "07/30/2026",
+   "PET-CT skull base to thigh",
+   "RUL mass SUVmax 11.4. No FDG-avid hilar or mediastinal nodes. No distant FDG-avid disease. Impression: primary lung malignancy, clinical N0 M0.",
+   "R. Haverty, MD"
+  ],
+  [
+   "08/06/2026",
+   "CT-guided biopsy RUL",
+   "Coaxial 19 g, 3 cores. Small pneumothorax post, stable on 2 h film, no chest tube.",
+   "P. Lindqvist, MD"
+  ],
+  [
+   "08/12/2026",
+   "MRI Brain with and without contrast",
+   "No enhancing lesions. Mild chronic small vessel ischemic change. Impression: no intracranial metastasis.",
+   "P. Lindqvist, MD"
+  ],
+  [
+   "10/20/2026",
+   "XR Chest 2 views",
+   "Emphysema. RUL mass, unchanged. No effusion. Heart normal size.",
+   "D. Lyle, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Plattenepithelkarzinom_der_Lunge_rechter_Oberlappen_76W_-_CR_pa_-_001.jpg)"
+   }
+  ]
+ ],
+ "cardiology": [
+  [
+   "04/10/2022",
+   "ECG 12-lead",
+   "Sinus tachycardia 108, RAD borderline, P pulmonale. QTc 446.",
+   "M. Desai, MD",
+   {
+    "rate": 108,
+    "pr": 140,
+    "qrs": 88,
+    "qtc": 446,
+    "axis": 95,
+    "ppul": 1,
+    "prwp": 1
+   }
+  ],
+  [
+   "08/20/2026",
+   "Pulmonary function tests, full",
+   "Post-bronchodilator FEV1 1.62 L (52% pred), FVC 3.30 L (78%), FEV1/FVC 0.49. TLC 112%, RV 148%. DLCO 48% predicted (corrected for Hgb). Interpretation: moderate obstruction without significant BD response, hyperinflation, air trapping, moderately reduced diffusion. ppo values (RUL resection, 3 of 19 segments, perfusion scan concordant): ppoFEV1 ~44%, ppoDLCO ~40%.",
+   "N. Ferris, MD"
+  ],
+  [
+   "08/20/2026",
+   "Quantitative V/Q perfusion scan",
+   "Right upper zone 13%, right mid 21%, right lower 19%; left 47%. ",
+   "R. Haverty, MD"
+  ],
+  [
+   "08/27/2026",
+   "Cardiopulmonary exercise test",
+   "Cycle ergometry, stopped for leg fatigue (Borg legs 9/10, dyspnea 6/10). Peak VO2 15.8 mL/kg/min (63% predicted). No ischemic changes. Peak SpO2 nadir 92%. Interpretation: moderate risk for anatomic resection per ACCP algorithm; lobectomy acceptable.",
+   "N. Ferris, MD"
+  ],
+  [
+   "08/27/2026",
+   "Transthoracic echocardiogram",
+   "LVEF 60%. Normal RV size and function, TAPSE 2.2 cm. RVSP 32 mmHg. Grade I diastolic dysfunction. No significant valve disease.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "10/20/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 76. Normal axis. QTc 438. Poor R-wave progression (likely lung hyperinflation). No change from 08/2026.",
+   "M. Desai, MD",
+   {
+    "rate": 76,
+    "pr": 154,
+    "qrs": 90,
+    "qtc": 438,
+    "axis": 80,
+    "prwp": 1,
+    "lowvLimb": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "06/01/2018",
+   "Clinic",
+   "Jefferson City Internal Medicine",
+   "Annual",
+   "Routine"
+  ],
+  [
+   "04/10/2022",
+   "Inpatient admission",
+   "C-N University Hospital",
+   "COPD exacerbation",
+   "BiPAP 12 h, steroids, discharged 04/13/2022"
+  ],
+  [
+   "07/14/2026",
+   "Imaging",
+   "C-N University Radiology",
+   "LDCT screening",
+   "RUL mass, referred"
+  ],
+  [
+   "07/30/2026",
+   "Clinic",
+   "C-N University Thoracic Oncology",
+   "Lung mass",
+   "Biopsy, PET, MRI, PFTs"
+  ],
+  [
+   "08/06/2026",
+   "Outpatient procedure",
+   "C-N University IR",
+   "CT-guided biopsy",
+   "Nondiagnostic; small PTX"
+  ],
+  [
+   "09/15/2026",
+   "Outpatient procedure",
+   "C-N University Hospital Bronchoscopy",
+   "EBUS-TBNA",
+   "Diagnostic; discharged after extended PACU stay"
+  ],
+  [
+   "09/24/2026",
+   "Clinic",
+   "C-N University Thoracic Surgery",
+   "Surgical planning",
+   "Scheduled RUL lobectomy"
+  ],
+  [
+   "10/13/2026",
+   "Clinic",
+   "C-N University Neurology",
+   "Leg weakness",
+   "Labs sent; EMG scheduled 11/04/2026"
+  ],
+  [
+   "10/20/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "04/10/2022 2300",
+   "H&P",
+   "Hospital Medicine",
+   "J. Pendleton, DO",
+   "67M COPD, 1 ppd, URI then 3 d worsening dyspnea, wheeze. SpO2 86% RA. VBG 7.33/53. BiPAP, nebs, prednisone 40, doxycycline. Admit stepdown."
+  ],
+  [
+   "04/13/2022 1015",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "R. Antwi, MD",
+   "AECOPD. BiPAP 12 h, weaned. Prednisone 5 d. Changed Advair to tiotropium/olodaterol. Smoking cessation counseled, pt agreeable to varenicline when PCP follow-up."
+  ],
+  [
+   "03/30/2023 1400",
+   "Progress Note",
+   "Internal Medicine",
+   "W. Haun, MD",
+   "Quit smoking 03/2023 with varenicline. BP 132/78. Enroll in annual LDCT screening. Continue meds."
+  ],
+  [
+   "07/30/2026 1000",
+   "Consult",
+   "Thoracic Oncology",
+   "C. Rademacher, MD",
+   "71M ex-smoker, new 3.2 cm spiculated RUL mass on screening LDCT, interval growth from 6 mm GGO 07/2025. Asymptomatic except \"tired more than usual\", mild DOE stable. PS ECOG 1. Plan: PET-CT, brain MRI, tissue diagnosis, full PFTs. Multidisciplinary tumor board."
+  ],
+  [
+   "08/06/2026 1530",
+   "Procedure Note",
+   "Interventional Radiology",
+   "P. Lindqvist, MD",
+   "CT-guided core biopsy RUL mass, local + moderate sedation (midazolam 1 mg, fentanyl 50 mcg). 3 cores. Small apical PTX, stable. Discharged after 2 h CXR."
+  ],
+  [
+   "08/27/2026 1415",
+   "Progress Note",
+   "Pulmonology",
+   "N. Ferris, MD",
+   "Preop pulmonary eval. FEV1 52%, DLCO 48%; ppoFEV1 ~44%, ppoDLCO ~40% (both <60%) -> CPET: VO2peak 15.8 mL/kg/min, moderate risk. Lobectomy acceptable; segmentectomy not favored per surgery given size. Pulm rehab prehab 2x/wk until surgery. Continue Stiolto. Incentive spirometry. Note: CPET terminated by leg fatigue rather than dyspnea."
+  ],
+  [
+   "09/10/2026 1600",
+   "Progress Note",
+   "Pulmonary Rehab",
+   "K. Tolliver, RRT",
+   "Session 4. Treadmill 1.8 mph x 12 min, SpO2 93-95%. Pt reports legs \"give out\" before breathing does, needs arms to rise from chair. Upper body ergometer tolerated well. Will mention to Dr. Ferris."
+  ],
+  [
+   "09/15/2026 0700",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology",
+   "A. Brightwell, MD",
+   "EBUS. ASA 3. COPD, HTN. MP II. GA with 8.0 ETT, rocuronium for EBUS. Uneventful intubation, grade 1."
+  ],
+  [
+   "09/15/2026 1020",
+   "Nursing Note",
+   "PACU",
+   "R. Sizemore, RN",
+   "Arrived from bronch suite extubated. Sugammadex 200 mg given in room per anesthesia record. Pt arousable, following commands, but generalized weakness - unable to sustain head lift >3 sec, weak grip, diplopia \"a little\". SpO2 92% on 4 L FM. Anesthesia (Dr. Brightwell) at bedside 1030: TOF 4/4 without obvious fade; additional sugammadex 200 mg given 1035. Head lift 5 sec at 1110, strength improved over next hour. Weaned to RA by 1300. Extended PACU stay. Discharged home 1415 with wife."
+  ],
+  [
+   "09/15/2026 1045",
+   "Procedure Note",
+   "Pulmonology",
+   "N. Ferris, MD",
+   "EBUS-TBNA: stations 4R, 7, 10R, 11R sampled (3 passes each), ROSE lymphocytes, no malignancy. RUL transbronchial biopsies with radial probe, ROSE atypical cells. Minimal bleeding."
+  ],
+  [
+   "09/18/2026 1110",
+   "Telephone Encounter",
+   "Thoracic Oncology",
+   "L. Grindstaff, RN",
+   "Pathology LCNEC, nodes negative. Tumor board 09/22: recommend lobectomy then adjuvant chemo (platinum-etoposide) consideration. Pt and wife informed. Thoracic surgery appt 09/24."
+  ],
+  [
+   "09/24/2026 1030",
+   "Consult",
+   "Thoracic Surgery",
+   "E. Vandergriff, MD",
+   "71M RUL LCNEC cT2aN0M0 (3.2 cm). PFTs/CPET reviewed - acceptable for lobectomy. Plan R VATS upper lobectomy + MLND 10/27. Hold aspirin 7 d. Prehab continue. Wife reports he \"can't get up off the couch like he used to\" - attributed to deconditioning. Discussed PAL, prolonged air leak risk with emphysema."
+  ],
+  [
+   "10/02/2026 0930",
+   "Telephone Encounter",
+   "Thoracic Surgery",
+   "J. Lowe, MA",
+   "Surgery booked 10/27 0730 OR 17. PAT 10/20."
+  ],
+  [
+   "10/06/2026 1520",
+   "Patient Message",
+   "Internal Medicine",
+   "MyChart (patient)",
+   "Pt: \"My mouth is dry all the time and I'm having trouble getting up out of the bathtub. Dr. Ferris said to ask you. Also my eyelids feel heavy at night.\" Reply (W. Haun, MD): \"Some of this could be your Stiolto inhaler (dry mouth) and the stress of everything, but the leg weakness is new. I am placing a referral to neurology to be seen before your surgery if possible.\""
+  ],
+  [
+   "10/13/2026 1050",
+   "Consult",
+   "Neurology",
+   "M. Castellanos, MD",
+   "Referred by Dr. Haun for proximal leg weakness. 71M with newly dx RUL LCNEC. ~2-3 mo of difficulty rising from chairs, climbing stairs, getting out of tub; arms less so. Dry mouth (on LAMA but predates?), constipation, ED, mild intermittent ptosis evenings. Exam: no fasciculations; hip flexors 4/5, deltoids 4+/5. Reflexes absent at knees/ankles at rest; patellar reflex elicited after 10 s maximal quadriceps contraction. Hip flexor strength improves on repeated testing over ~10 s. Mild bilateral ptosis, no fatigable ptosis on sustained upgaze. Sensation intact. Assessment: proximal weakness with areflexia, post-exercise facilitation and autonomic symptoms in setting of neuroendocrine lung carcinoma - highly suggestive of Lambert-Eaton myasthenic syndrome. DDx: myasthenia gravis, paraneoplastic myopathy, steroid-free so not steroid myopathy. Plan: P/Q-type VGCC Ab, AChR Ab, paraneoplastic panel, CK, TSH, B12. EMG/NCS with repetitive stimulation and post-exercise CMAP - first available 11/04/2026. Will discuss amifampridine if confirmed. Note to surgical team: patients with LEMS have increased sensitivity to neuromuscular blocking drugs - recommend anesthesia be made aware. cc: Dr. Haun."
+  ],
+  [
+   "10/16/2026 0900",
+   "Result Note",
+   "Neurology",
+   "M. Castellanos, MD",
+   "CK, TSH, B12 normal. AChR binding Ab negative. VGCC Ab and paraneoplastic panel pending (reference lab, typically 7-14 days)."
+  ],
+  [
+   "10/20/2026 1000",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT. Labs, ABG, CXR, ECG done. Type and cross 2 u. Took inhaler today. Instructions: take Stiolto, amlodipine AM of surgery; hold losartan AM; aspirin held since 10/20 per surgeon. Pt ambulates with mild difficulty rising from chair, uses armrests. Incentive spirometry teaching: 1,250 mL."
+  ],
+  [
+   "10/20/2026 1030",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "T. Haskins, CRNA",
+   "Screening. ASA 3. COPD, ppoFEV1 44%, CPET VO2 15.8. MP II, good ROM. Prior GA 09/2026 EBUS - record reviewed: uneventful intubation. Plan GA with DLT, art line, epidural vs PVB per DOS team."
+  ],
+  [
+   "10/22/2026 1340",
+   "Refill Request",
+   "Pulmonology",
+   "Pharmacy (electronic)",
+   "Stiolto Respimat refill #1 cartridge. Approved. - N. Ferris, MD"
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0530 confirmed. NPO midnight, clears until 0330. Bring inhalers. Driver wife."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/01/2018 0920",
+   "138/86",
+   78,
+   16,
+   94,
+   36.7,
+   79.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "04/10/2022 1900",
+   "156/92",
+   112,
+   28,
+   86,
+   37.4,
+   77.0,
+   "0/10",
+   "ED"
+  ],
+  [
+   "04/12/2022 0800",
+   "138/80",
+   92,
+   20,
+   92,
+   36.8,
+   null,
+   "0/10",
+   "Stepdown"
+  ],
+  [
+   "03/30/2023 1345",
+   "132/78",
+   80,
+   16,
+   95,
+   36.6,
+   79.8,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "07/30/2026 0945",
+   "134/78",
+   80,
+   18,
+   94,
+   36.7,
+   75.4,
+   "0/10",
+   "Thoracic oncology"
+  ],
+  [
+   "08/27/2026 1400",
+   "136/80",
+   78,
+   18,
+   94,
+   36.6,
+   74.6,
+   "0/10",
+   "Pulmonology"
+  ],
+  [
+   "09/15/2026 0650",
+   "142/84",
+   82,
+   18,
+   94,
+   36.5,
+   74.0,
+   "0/10",
+   "Bronchoscopy preop"
+  ],
+  [
+   "09/15/2026 1020",
+   "128/74",
+   96,
+   22,
+   92,
+   36.2,
+   null,
+   "2/10",
+   "PACU"
+  ],
+  [
+   "09/24/2026 1015",
+   "134/80",
+   80,
+   18,
+   94,
+   36.7,
+   73.2,
+   "0/10",
+   "Thoracic surgery"
+  ],
+  [
+   "10/13/2026 1040",
+   "130/78",
+   82,
+   16,
+   94,
+   36.6,
+   72.6,
+   "0/10",
+   "Neurology"
+  ],
+  [
+   "10/20/2026 0920",
+   "132/80",
+   80,
+   18,
+   94,
+   36.7,
+   72.4,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0545",
+   "138/82",
+   84,
+   18,
+   94,
+   36.5,
+   72.1,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units PRBC",
+   "10/20/2026 0930",
+   "Resulted - 2 units available"
+  ],
+  [
+   "NPO after midnight, clears until 0330",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0540",
+   "Active"
+  ],
+  [
+   "Arterial line per anesthesia",
+   "10/27/2026 0540",
+   "Active"
+  ],
+  [
+   "Postop CXR in PACU",
+   "10/27/2026 0540",
+   "Pending (postop)"
+  ],
+  [
+   "Chest tube to -20 cm H2O suction",
+   "10/27/2026 0540",
+   "Pending (postop)"
+  ],
+  [
+   "EMG/NCS with repetitive nerve stimulation",
+   "10/13/2026",
+   "Scheduled 11/04/2026"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: right VATS upper lobectomy, MLND, possible thoracotomy",
+   "Signed 09/24/2026"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/20/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Living will on file (2023). HCPOA: Brenda Lovelady.",
+ "anesthesia_history": [
+  [
+   "1978",
+   "Appendectomy",
+   "GA",
+   "Unknown",
+   "Fort Sanders"
+  ],
+  [
+   "2012",
+   "R inguinal hernia repair",
+   "GA LMA",
+   "None documented",
+   "Jefferson Memorial"
+  ],
+  [
+   "08/2026",
+   "CT-guided lung biopsy",
+   "Moderate sedation (RN)",
+   "None",
+   "C-N University IR"
+  ],
+  [
+   "09/2026",
+   "EBUS-TBNA",
+   "GETA 8.0, propofol/fentanyl/rocuronium 50 mg, sevoflurane; sugammadex 200 mg",
+   "PACU: generalized weakness, weak head lift, diplopia, SpO2 92% on 4 L; second sugammadex 200 mg; extended PACU stay",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0300 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes, R chest"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "Inhalers brought",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "71M for R VATS lobectomy. Used Stiolto 0500, took amlodipine. Breath sounds diminished bilat, no wheeze. Needed to push up with both arms to stand from stretcher for gown change, wife says \"that's new this fall.\" Dry mucous membranes, pt says mouth always dry. 18g L forearm. Wife at bedside.",
+  "iv": "18g L forearm, LR",
+  "glucose": ""
+ },
+ "label": "H. Lovelady",
+ "bmi": "23.5"
+}

@@ -1,0 +1,116 @@
+{
+ "id": "p22",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Healthy 29 y for ankle ORIF who snorted cocaine about 10 hours ago and still looks sympathomimetic (HR 110, BP 156/94, diaphoresis, 5 mm pupils), and who ate three slices of pizza at 0100 although the handoff says NPO since midnight.",
+ "asa": {
+  "suggested": "2E",
+  "rationale": "Healthy apart from substance use; urgent fracture."
+ },
+ "decision": {
+  "recommendation": "delay",
+  "rationale": "Ongoing signs of cocaine effect raise arrhythmia, ischemia, and hypertensive crisis risk; the fracture is reduced with good soft tissue, so waiting is reasonable. A fatty meal at 0100 also needs about 8 h. Reassess later today or tomorrow."
+ },
+ "redFlags": [
+  {
+   "id": "cocaine",
+   "severity": "critical",
+   "finding": "Recent cocaine with ongoing sympathomimetic signs",
+   "evidence": "UDS positive; intranasal use about 2100 to 2200; HR 110 to 124, BP 156 to 164/94 to 98, diaphoresis, mydriasis, jittery.",
+   "implication": "Coronary vasospasm, arrhythmia, hypertension under anesthesia.",
+   "action": "Delay until signs resolve; if forced to proceed avoid ketamine and unopposed beta blockade, benzodiazepines for agitation, treat hypertension with vasodilators.",
+   "keywords": [
+    "cocaine",
+    "sympathomimetic",
+    "beta blocker",
+    "unopposed",
+    "delay"
+   ]
+  },
+  {
+   "id": "npo",
+   "severity": "major",
+   "finding": "Not NPO despite handoff",
+   "evidence": "4 West note: 3 slices of pepperoni pizza about 0100; transfer report says NPO since midnight; hydromorphone given.",
+   "implication": "Fatty meal needs 8 h; opioids and trauma slow emptying.",
+   "action": "Wait until at least 0900 or RSI.",
+   "keywords": [
+    "pizza",
+    "npo",
+    "fatty",
+    "8 h",
+    "rsi",
+    "full stomach"
+   ]
+  },
+  {
+   "id": "alcohol",
+   "severity": "minor",
+   "finding": "Alcohol last night",
+   "evidence": "EtOH 96; CIWA ordered.",
+   "implication": "Low withdrawal risk with weekend use, but watch.",
+   "action": "CIWA monitoring.",
+   "keywords": [
+    "alcohol",
+    "ciwa"
+   ]
+  },
+  {
+   "id": "consent",
+   "severity": "minor",
+   "finding": "Consent about an hour after IV hydromorphone",
+   "evidence": "Hydromorphone 0510; consent 0615.",
+   "implication": "Possible capacity question.",
+   "action": "Confirm understanding.",
+   "keywords": [
+    "consent"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "regional",
+   "item": "Popliteal and saphenous blocks for opioid sparing",
+   "keywords": [
+    "popliteal",
+    "saphenous",
+    "sciatic"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI if stomach concerns persist",
+   "keywords": [
+    "rsi"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Admit ortho; SBIRT follow up",
+   "keywords": [
+    "admit"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Popliteal and saphenous blocks"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Daily vaping"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Young smoker at emergence"
+  }
+ ]
+}

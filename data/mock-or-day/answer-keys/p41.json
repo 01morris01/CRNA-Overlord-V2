@@ -1,0 +1,148 @@
+{
+ "id": "p41",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Lumpectomy with sentinel node biopsy booked as MAC for a very anxious 70 y who explicitly asked to be fully asleep; isosulfan blue will be injected (anaphylaxis risk, falsely low SpO2), she has severe PONV history, and the left arm is restricted.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Paroxysmal AF on anticoagulation, HTN, hypothyroidism."
+ },
+ "decision": {
+  "recommendation": "proceed with a GA (LMA) discussion",
+  "rationale": "Her stated preference is a reason to offer GA with LMA; MAC with deep sedation in a panicked patient is not safer. Apixaban held since 10/25 0800 (over 48 h)."
+ },
+ "redFlags": [
+  {
+   "id": "preference",
+   "severity": "major",
+   "finding": "Patient wants general anesthesia, MAC booked",
+   "evidence": "Patient message 10/05; PA reply deferred; tearful and repeatedly asking 'will I be asleep'.",
+   "implication": "Uncooperative patient under sedation and failure of informed consent.",
+   "action": "Discuss options; offer GA with LMA; document consent.",
+   "keywords": [
+    "general anesthesia",
+    "lma",
+    "consent",
+    "anxiety",
+    "preference",
+    "asleep"
+   ]
+  },
+  {
+   "id": "blue",
+   "severity": "major",
+   "finding": "Isosulfan blue injection",
+   "evidence": "5 mL subareolar after induction.",
+   "implication": "Anaphylaxis (about 1%), and falsely low SpO2 readings for some time.",
+   "action": "Expect SpO2 drop artifact; be ready for anaphylaxis with epinephrine.",
+   "keywords": [
+    "isosulfan",
+    "blue dye",
+    "anaphylaxis",
+    "pulse ox",
+    "spo2",
+    "epinephrine"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "Severe PONV history",
+   "evidence": "PONV after both GAs; hydrocodone intolerance; female nonsmoker.",
+   "implication": "High PONV risk.",
+   "action": "Multimodal prophylaxis, TIVA, minimize opioids.",
+   "keywords": [
+    "ponv",
+    "tiva",
+    "dexamethasone",
+    "ondansetron",
+    "scopolamine"
+   ]
+  },
+  {
+   "id": "af",
+   "severity": "minor",
+   "finding": "Paroxysmal AF",
+   "evidence": "Sinus with PACs; metoprolol taken.",
+   "implication": "AF with stress.",
+   "action": "Rate control plan.",
+   "keywords": [
+    "atrial fibrillation",
+    "metoprolol",
+    "apixaban"
+   ]
+  },
+  {
+   "id": "arm",
+   "severity": "minor",
+   "finding": "Left arm restricted",
+   "evidence": "Surgical side, IV in right hand.",
+   "implication": "No BP cuff or IV on left.",
+   "action": "Cuff on right arm or leg.",
+   "keywords": [
+    "left arm",
+    "cuff"
+   ]
+  },
+  {
+   "id": "allergy",
+   "severity": "minor",
+   "finding": "Childhood penicillin hives",
+   "evidence": "Allergy list.",
+   "implication": "Cefazolin is acceptable.",
+   "action": "Give cefazolin.",
+   "keywords": [
+    "cefazolin",
+    "penicillin"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "GA with LMA or MAC per discussion",
+   "keywords": [
+    "lma",
+    "general",
+    "mac"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Multimodal PONV prophylaxis",
+   "keywords": [
+    "ponv",
+    "dexamethasone",
+    "ondansetron"
+   ]
+  },
+  {
+   "domain": "anxiolysis",
+   "item": "Midazolam preop titrated",
+   "keywords": [
+    "midazolam"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Isosulfan blue"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Elderly patient under sedation"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "LMA with light anesthesia"
+  }
+ ]
+}
