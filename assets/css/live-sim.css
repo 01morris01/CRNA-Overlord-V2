@@ -983,3 +983,59 @@
 .patient-interview-mic { padding: .55rem .8rem; background: var(--card-hi, #14202e); color: var(--txt, #e6eef5); border: 1px solid var(--line, #21303f); border-radius: 6px; font-family: var(--fm, monospace); font-size: .72rem; letter-spacing: .06em; cursor: pointer; }
 .patient-interview-mic[aria-pressed="true"] { border-color: var(--red, #e5484d); color: var(--red, #e5484d); }
 .patient-interview-status { display: block; margin-top: .4rem; color: var(--muted, #8aa0b4); font-family: var(--fm, monospace); font-size: .7rem; }
+
+/* Booth, the sim operator */
+.live-operator-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  margin: 1rem clamp(1rem, 3vw, 2rem) 0;
+  padding: .7rem .9rem;
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--amber);
+  border-radius: 5px;
+}
+.live-operator-strip[hidden] { display: none; }
+.live-operator-tag {
+  flex: none;
+  padding: .2rem .45rem;
+  border: 1px solid var(--amber);
+  border-radius: 3px;
+  color: var(--amber);
+  font-family: var(--fm);
+  font-size: .64rem;
+  letter-spacing: .14em;
+}
+.live-operator-strip p { margin: 0; color: var(--txt); font-size: .98rem; line-height: 1.4; }
+
+.live-operator-panel { border-top: 3px solid var(--amber); }
+.live-operator-header { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.live-operator-header h2 { margin: 0; }
+.live-operator-panel .live-eyebrow { color: var(--amber); }
+.live-operator-settings { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin: .5rem 0; }
+.live-operator-feed {
+  list-style: none;
+  margin: .6rem 0;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+.live-operator-line { display: grid; grid-template-columns: 3rem 1fr; gap: .5rem; align-items: start; }
+.live-operator-line time { color: var(--txt-2); font-family: var(--fm); font-size: .64rem; padding-top: .3rem; }
+.live-operator-line p { margin: 0; padding: .35rem .55rem; border-radius: 0 6px 6px 0; font-size: .9rem; line-height: 1.4; color: var(--txt); }
+.live-operator-booth p { background: rgba(255, 176, 0, .08); border-left: 2px solid var(--amber); }
+.live-operator-roast p { background: rgba(255, 46, 99, .08); border-left: 2px solid var(--red); }
+.live-operator-you p { color: var(--txt-2); border-left: 2px solid var(--line-2); }
+.live-operator-ask { display: flex; gap: .5rem; align-items: flex-end; }
+.live-operator-ask .live-field { flex: 1; min-width: 0; margin: 0; }
+.live-operator-ask button { min-height: 44px; }
+
+@media (max-width: 640px) {
+  .live-operator-settings { grid-template-columns: 1fr; }
+  .live-operator-line { grid-template-columns: 1fr; }
+  .live-operator-line time { padding-top: 0; }
+}

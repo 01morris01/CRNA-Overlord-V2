@@ -27,12 +27,18 @@ import {
 } from './liveCaseModel.js';
 import { createLiveCaseController } from './liveCaseView.js';
 import { createPatientInterview } from './patientInterview.js';
+import {
+  createSimOperatorController,
+  renderOperatorPanel,
+  renderOperatorStrip,
+} from './simOperatorView.js';
 import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
 
 let initialized = false;
 let runner = null;
 let caseController = null;
 let patientInterview = null;
+let simOperator = null;
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -901,6 +907,8 @@ function renderShell() {
       <div><span>TOF</span><strong id="live-vital-tof">—</strong><small id="live-vital-tof-ratio">ratio —</small></div>
     </div>
 
+    ${renderOperatorStrip()}
+
     <div id="live-action-status" class="live-action-status" role="status" aria-live="polite">Controls ready.</div>
 
     <div class="live-sim-grid">
@@ -1076,6 +1084,7 @@ function renderShell() {
       </div>
 
       <div class="live-sim-column live-side-column">
+        ${renderOperatorPanel()}
         ${renderInstructorCaseShell()}
         ${renderRubricConsoleShell()}
         <section class="live-panel live-event-panel" aria-labelledby="live-events-heading">
@@ -1510,8 +1519,17 @@ function ensureRunner() {
     transport = null;
     setStatus(`Display sync unavailable: ${error.message}`, 'error');
   }
-  runner.onTick = renderSnapshot;
-  runner.onEvent = renderEventLog;
+  // Booth, the sim operator, watches the same tick and event streams the
+  // console renders. He acts only through the runner's public control surface.
+  simOperator = createSimOperatorController({ runner, root: document });
+  runner.onTick = (snapshot) => {
+    renderSnapshot(snapshot);
+    simOperator?.observe(snapshot);
+  };
+  runner.onEvent = (entry) => {
+    renderEventLog();
+    simOperator?.observeEvent(entry);
+  };
   caseController = createLiveCaseController({
     runner,
     root: view,
