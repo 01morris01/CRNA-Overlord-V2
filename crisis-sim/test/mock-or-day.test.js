@@ -161,7 +161,8 @@ describe('care plan sheet', () => {
     const context = buildPlanReviewContext({ patient: p05, chartDigest: 'digest', values: { asa: '2', blank: '' }, answerKey: k05, grade });
     expect(context.plan).toEqual({ asa: '2' });
     expect(context.answerKey.status).toBe('draft');
-    expect(context.offlineGrade.missed.length).toBeGreaterThan(0);
+    expect(Object.values(context.offlineGrade.keywordMatches)).toContain('missed');
+    expect(context.answerKey.redFlags[0].id).toBeTruthy();
   });
 
   it('gates START on the short required list', () => {

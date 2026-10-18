@@ -73,7 +73,35 @@ function initialState(saved) {
     reviewed: saved?.reviewed ?? {},
     questions: saved?.questions ?? 0,
     planSubmitted: false,
+    autoInterview: Boolean(saved?.autoInterview),
   };
+}
+
+/* What the instructor's advance fills in, step by step: reaching a step means
+   every earlier step was done correctly. Pure, used by the console. */
+export function advanceSession(session = {}, patientId, step) {
+  const target = STEPS.indexOf(step);
+  const next = {
+    patientId,
+    step,
+    reviewed: { ...(session.patientId === patientId ? session.reviewed : {}) },
+    questions: session.patientId === patientId ? (session.questions ?? 0) : 0,
+    autoInterview: session.patientId === patientId ? Boolean(session.autoInterview) : false,
+    instructorStep: step,
+    updatedAt: Date.now(),
+  };
+  if (target > STEPS.indexOf('chart')) for (const item of REVIEW_ITEMS) next.reviewed[item] = true;
+  if (target > STEPS.indexOf('interview') && next.questions < MIN_QUESTIONS) {
+    next.questions = Math.max(MIN_QUESTIONS, next.questions);
+    next.autoInterview = true;
+  }
+  return next;
+}
+
+/* Shown in the transcript when the instructor skipped the interview: the
+   scripted answers from the chart, as if the student had asked. */
+export function scriptedInterview(grounding) {
+  return (grounding?.qa ?? []).map((item) => ({ question: `${item.prompt}?`, answer: item.response }));
 }
 
 export function startStudentWorkflow({ root = document, storage = globalThis.localStorage, fetchImpl = globalThis.fetch?.bind(globalThis) } = {}) {
@@ -126,8 +154,70 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
 
   function save() {
     writeStudentSession(storage, {
-      patientId: state.patientId, step: state.step, reviewed: state.reviewed, questions: state.questions, updatedAt: Date.now(),
+      patientId: state.patientId, step: state.step, reviewed: state.reviewed, questions: state.questions,
+      autoInterview: state.autoInterview, updatedAt: Date.now(),
     });
+  }
+
+  let lastReported = '';
+  function report() {
+    const record = state.patientId ? loadStoredPlan(storage, state.patientId) : null;
+    const payload = {
+      type: 'student-state', patientId: state.patientId, step: state.step, questions: state.questions,
+      planSubmitted: state.planSubmitted, percent: record?.grade?.percent ?? null,
+    };
+    const key = JSON.stringify(payload);
+    if (key === lastReported) return;
+    lastReported = key;
+    channel?.post(payload);
+  }
+
+  function fillScriptedInterview() {
+    if (!patient || transcript.querySelector('.patient-interview-trainee')) return;
+    const grounding = buildChartInterviewGrounding(patient);
+    const note = root.createElement('p');
+    note.className = 'student-instructor-note';
+    note.textContent = 'Your instructor completed the interview. These are the patient\'s answers.';
+    transcript.append(note);
+    for (const { question, answer } of scriptedInterview(grounding)) {
+      for (const [role, text] of [['trainee', question], ['patient', answer]]) {
+        const line = root.createElement('div');
+        line.className = `patient-interview-turn patient-interview-${role}`;
+        const who = root.createElement('span');
+        who.className = 'patient-interview-who';
+        who.textContent = role === 'trainee' ? 'You' : grounding.patientName;
+        const said = root.createElement('p');
+        said.textContent = text;
+        line.append(who, said);
+        transcript.append(line);
+      }
+    }
+  }
+
+  async function applyInstructorAdvance(message) {
+    const saved = readStudentSession(storage);
+    if (saved) {
+      state.reviewed = saved.reviewed ?? {};
+      state.questions = saved.questions ?? 0;
+      state.autoInterview = Boolean(saved.autoInterview);
+    }
+    if (message.patientId !== state.patientId || !patient) {
+      state.patientId = null;
+      await selectPatient(message.patientId, { announce: false, keepProgress: true });
+    } else {
+      const status = carePlan.load({ patient, answerKey, chartDigest: buildChartDigest(patient, { maxChars: 9000 }) });
+      state.planSubmitted = Boolean(status.submitted);
+      for (const box of root.querySelectorAll('[data-review]')) box.checked = Boolean(state.reviewed[box.dataset.review]);
+    }
+    if (state.autoInterview) fillScriptedInterview();
+    state.questions = Math.max(state.questions, saved?.questions ?? 0);
+    const label = root.querySelector(`[data-step-tab="${message.step}"]`)?.textContent?.replace(/^\d/, '').trim() ?? message.step;
+    $('student-patient-sub').textContent = `${patient?.case?.procedure ?? ''} · Your instructor moved you to ${label}.`;
+    renderGrade();
+    state.step = message.step;
+    save();
+    render();
+    globalThis.scrollTo?.({ top: 0, behavior: 'smooth' });
   }
 
   function renderSchedule() {
@@ -156,12 +246,13 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     return res.json();
   }
 
-  async function selectPatient(id, { announce = true } = {}) {
+  async function selectPatient(id, { announce = true, keepProgress = false } = {}) {
     const entry = index?.patients.find((row) => row.id === id);
     if (!entry) return;
-    if (id !== state.patientId) {
+    if (id !== state.patientId && !keepProgress) {
       state.reviewed = {};
       state.questions = 0;
+      state.autoInterview = false;
     }
     state.patientId = id;
     [patient, answerKey] = await Promise.all([
@@ -196,7 +287,7 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     const out = $('student-or-status');
     if (!consoleState || !dock.consoleConnected()) {
       out.dataset.state = 'waiting';
-      out.textContent = 'No instructor console found in this browser. Ask your instructor to open the live sim console; you can still open the monitor.';
+      out.textContent = 'No instructor console yet. On the other screen, open LIVE SIM and choose INSTRUCTOR SIM; it links to this window automatically. You can still open the monitor.';
       return;
     }
     if (consoleState.patientId && consoleState.patientId !== state.patientId) {
@@ -238,6 +329,7 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     $('student-gate').textContent = gate.allowed || state.step === 'or' ? '' : gate.reason;
     $('student-interview-count').textContent = `${Math.min(state.questions, 99)} of ${MIN_QUESTIONS} questions asked.`;
     if (state.step === 'or') renderOr();
+    report();
   }
 
   // Events
@@ -279,12 +371,19 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     event.currentTarget.setAttribute('aria-expanded', String(!side.hidden));
   });
   channel?.subscribe((message) => {
+    if (message.type === 'instructor-advance') {
+      applyInstructorAdvance(message);
+      return;
+    }
     if (message.type === 'console-state') {
       const first = !consoleState;
       consoleState = message;
       // The console opened after the student picked a patient: catch it up.
       if (first && state.patientId && message.patientId !== state.patientId) channel.post({ type: 'student-load', patientId: state.patientId });
       if (first && state.planSubmitted && state.patientId) channel.post({ type: 'student-plan', patientId: state.patientId });
+      // Answer every heartbeat so the console knows this screen is still here.
+      lastReported = '';
+      report();
       if (state.step === 'or') renderOr();
     }
   });
@@ -293,7 +392,8 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     try {
       index = await getJson(`${MOCK_OR_BASE}/index.json`);
       renderSchedule();
-      if (state.patientId) await selectPatient(state.patientId, { announce: true });
+      if (state.patientId) await selectPatient(state.patientId, { announce: true, keepProgress: true });
+      if (state.autoInterview) fillScriptedInterview();
     } catch (error) {
       $('student-schedule').innerHTML = `<p class="student-empty">Schedule unavailable: ${esc(error.message)}</p>`;
     }

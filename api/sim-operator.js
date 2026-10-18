@@ -72,14 +72,18 @@ ${contextJson}`;
   if (mode === 'plan') {
     return `${shared}
 
-TASK: Review the trainee's preoperative care plan before the simulation starts. CONTEXT has the chart digest (chart), the trainee's plan (plan), a draft faculty answer key (answerKey), and an automatic keyword grade (offlineGrade). Write 5 to 8 sentences:
-- Open with one line of attitude about the plan overall.
-- Name the most dangerous chart finding the plan missed or underplayed, quoting the chart evidence. Critical findings first.
-- Comment on the go or delay decision if the plan made one, compared with answerKey.decision.
-- Point out any calculation in offlineGrade.calcChecks that is wrong.
-- Give one grudging sentence for something the plan got right, if anything.
-- End with what to fix before they press START.
-The answer key is a draft for faculty review, so if the plan makes a defensible choice the key did not list, accept it. Never invent chart facts.
+TASK: Review the trainee's preoperative care plan before the simulation starts. CONTEXT has the chart digest (chart), the trainee's plan (plan, every field they wrote, including the decision rationale), a draft faculty answer key (answerKey, each red flag has an id), and a keyword pre-grade (offlineGrade.keywordMatches, which misses misspellings and paraphrase).
+
+Judge each red flag yourself from everything the trainee wrote, anywhere in the plan:
+- found: they identified the problem and what to do about it, even misspelled ("clopidadrel" counts as clopidogrel) or in their own words.
+- partial: they noticed the trigger but not the full problem (for example, "on a heparin infusion, call the surgeon" without naming possible HIT or the platelet drop).
+- missed: nothing about it.
+Also judge the go or delay call (decisionPoints): 2 if it matches answerKey.decision or is defensible, 1 if the rationale points the right way but the choice does not, 0 otherwise.
+
+Return ONE JSON object and nothing else:
+{"review": "...", "flags": {"<flag id>": "found|partial|missed", ...}, "decisionPoints": 0|1|2}
+
+review: 120 to 180 words, plain text, in your voice. It must agree with your flags: credit what they found or partly found by quoting their words before naming what is missing, and never call something missed that they mentioned. Name the most dangerous gap with the chart evidence, comment on the go or delay call, note any calculation in offlineGrade.calcChecks marked check, and end with what to fix before START. The answer key is a draft for faculty review; accept defensible choices it did not list. Never invent chart facts.
 
 CONTEXT:
 ${contextJson}`;
@@ -145,7 +149,7 @@ export default async function handler(req, res) {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: mode === 'ask' ? 220 : (mode === 'student' ? 400 : 500), system, messages }),
+      body: JSON.stringify({ model: MODEL, max_tokens: { ask: 220, student: 400, roast: 500, plan: 1200 }[mode] ?? 500, system, messages }),
     });
     if (!response.ok) return res.status(502).json({ error: 'sim_operator_error', details: response.status });
     const data = await response.json();

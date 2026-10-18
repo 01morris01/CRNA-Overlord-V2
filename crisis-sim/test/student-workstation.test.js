@@ -256,3 +256,88 @@ describe('Booth student prompt', () => {
     for (const id of Object.keys(STUDENT_SUGGESTIONS)) expect(id).toMatch(/^[a-z_]+$/);
   });
 });
+
+describe('care plan grading reads what the student meant', () => {
+  const base = resolve(root, 'data/mock-or-day');
+  const read = (path) => JSON.parse(readFileSync(resolve(base, path), 'utf8'));
+
+  it('credits misspelled findings like clopidadrel, without crossing hyper and hypo', async () => {
+    const { gradeCarePlan, keywordHit, planText } = await import('../../ui/carePlanSheet.js');
+    const values = { asa: '4', decision: 'proceed_mod', decisionRationale: 'The surgeon or primary team d/t heperan infusion and ACT. Lisinopril taken and Clopidadrel not held long enough' };
+    const grade = gradeCarePlan(values, read('answer-keys/p11.json'), read('patients/p11.json'));
+    const status = Object.fromEntries(grade.redFlags.map((flag) => [flag.id, flag.status]));
+    expect(status.clopidogrel).toBe('found');
+    expect(status.acei).toBe('found');
+    expect(keywordHit(planText({ x: 'hypertension' }), 'hypotension')).toBe(false);
+    expect(keywordHit(planText({ x: 'sugamadex' }), 'sugammadex')).toBe(true);
+  });
+
+  it("lets Booth's review mark findings partial so the score matches what he says", async () => {
+    const { gradeCarePlan, applyReviewJudgments, parsePlanReview } = await import('../../ui/carePlanSheet.js');
+    const grade = gradeCarePlan({ asa: '4', decision: 'proceed_mod', decisionRationale: 'heparin infusion, clopidogrel not held long enough' }, read('answer-keys/p11.json'), read('patients/p11.json'));
+    const review = parsePlanReview('```json\n{"review":"You flagged the heparin infusion but not possible HIT.","flags":{"hit":"partial","clopidogrel":"found","bogus":"found"},"decisionPoints":1}\n```');
+    const judged = applyReviewJudgments(grade, review);
+    const hit = judged.redFlags.find((flag) => flag.id === 'hit');
+    expect(hit.status).toBe('partial');
+    expect(judged.missedCritical).not.toContain(hit.finding);
+    expect(judged.earned).toBeGreaterThan(grade.earned);
+    expect(judged.source).toBe('review');
+    expect(parsePlanReview('plain text review').review).toBe('plain text review');
+  });
+
+  it('asks the reviewer for per finding judgments and gives it room to finish', () => {
+    const prompt = buildSystemPrompt({ mode: 'plan', meanness: 2, context: {} });
+    expect(prompt).toMatch(/found\|partial\|missed/);
+    expect(prompt).toMatch(/clopidadrel/);
+    expect(prompt).toMatch(/never call something missed that they mentioned/);
+    const api = readFileSync(resolve(root, 'api/sim-operator.js'), 'utf8');
+    expect(api).toMatch(/plan: 1200/);
+  });
+});
+
+describe('instructor moves the student', () => {
+  it('fills in every earlier step as done correctly', async () => {
+    const { advanceSession, scriptedInterview } = await import('../../ui/studentWorkflow.js');
+    const toInterview = advanceSession({}, 'p11', 'interview');
+    expect(Object.values(toInterview.reviewed).every(Boolean)).toBe(true);
+    expect(toInterview.questions).toBe(0);
+    const toPlan = advanceSession({}, 'p11', 'plan');
+    expect(toPlan.questions).toBeGreaterThanOrEqual(3);
+    expect(toPlan.autoInterview).toBe(true);
+    const kept = advanceSession({ patientId: 'p11', questions: 7, reviewed: { allergies: true } }, 'p11', 'plan');
+    expect(kept.questions).toBe(7);
+    expect(furthestStep({ ...toPlan, planSubmitted: false })).toBe(3);
+    const qa = scriptedInterview({ qa: [{ prompt: 'When did you last eat', response: '0730' }] });
+    expect(qa).toEqual([{ question: 'When did you last eat?', answer: '0730' }]);
+  });
+
+  it('files an answer key plan that passes every gate for all 50 charts', async () => {
+    const { buildInstructorPlanRecord } = await import('../../ui/carePlanSheet.js');
+    const index = JSON.parse(readFileSync(resolve(root, 'data/mock-or-day/index.json'), 'utf8'));
+    for (const entry of index.patients) {
+      const patient = JSON.parse(readFileSync(resolve(root, `data/mock-or-day/patients/${entry.id}.json`), 'utf8'));
+      const key = JSON.parse(readFileSync(resolve(root, `data/mock-or-day/answer-keys/${entry.id}.json`), 'utf8'));
+      const record = buildInstructorPlanRecord(patient, key);
+      expect(record.grade.completeness, entry.id).toEqual([]);
+      expect(record.grade.percent, entry.id).toBe(100);
+      expect(record.filledBy).toBe('instructor');
+      expect(record.values.asa).toBe(String(key.asa.suggested));
+    }
+  });
+
+  it('carries progress and advance messages on the student link', () => {
+    expect(sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'student-state', patientId: 'p11', step: 'plan', questions: 4, planSubmitted: true, percent: 83.4 }))
+      .toEqual({ type: 'student-state', patientId: 'p11', step: 'plan', questions: 4, planSubmitted: true, percent: 83 });
+    expect(sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'instructor-advance', patientId: 'p11', step: 'grade' }))
+      .toEqual({ type: 'instructor-advance', patientId: 'p11', step: 'grade' });
+    expect(sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'instructor-advance', patientId: 'p11', step: 'hack' })).toBeNull();
+  });
+
+  it('offers STUDENT SIM and INSTRUCTOR SIM when LIVE SIM is pressed', () => {
+    const view = readFileSync(resolve(root, 'ui/liveSimView.js'), 'utf8');
+    expect(view).toMatch(/data-launch="student"/);
+    expect(view).toMatch(/data-launch="instructor"/);
+    expect(view).toMatch(/data-launch="both"/);
+    expect(view).toMatch(/openLaunchChooser\(\)/);
+  });
+});
