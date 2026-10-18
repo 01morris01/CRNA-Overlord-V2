@@ -161,7 +161,7 @@ describe('care plan sheet', () => {
     const context = buildPlanReviewContext({ patient: p05, chartDigest: 'digest', values: { asa: '2', blank: '' }, answerKey: k05, grade });
     expect(context.plan).toEqual({ asa: '2' });
     expect(context.answerKey.status).toBe('draft');
-    expect(Object.values(context.offlineGrade.keywordMatches)).toContain('missed');
+    expect(Object.values(context.offlineGrade.minimumStatus)).toContain('missed');
     expect(context.answerKey.redFlags[0].id).toBeTruthy();
   });
 

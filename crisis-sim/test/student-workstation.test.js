@@ -274,7 +274,9 @@ describe('care plan grading reads what the student meant', () => {
 
   it("lets Booth's review mark findings partial so the score matches what he says", async () => {
     const { gradeCarePlan, applyReviewJudgments, parsePlanReview } = await import('../../ui/carePlanSheet.js');
-    const grade = gradeCarePlan({ asa: '4', decision: 'proceed_mod', decisionRationale: 'heparin infusion, clopidogrel not held long enough' }, read('answer-keys/p11.json'), read('patients/p11.json'));
+    // No heparin, platelet or HIT words, so the text alone leaves HIT missed.
+    const grade = gradeCarePlan({ asa: '4', decision: 'proceed_mod', decisionRationale: 'call the surgeon about the drip and the ACT, clopidogrel not held long enough' }, read('answer-keys/p11.json'), read('patients/p11.json'));
+    expect(grade.redFlags.find((flag) => flag.id === 'hit').status).toBe('missed');
     const review = parsePlanReview('```json\n{"review":"You flagged the heparin infusion but not possible HIT.","flags":{"hit":"partial","clopidogrel":"found","bogus":"found"},"decisionPoints":1}\n```');
     const judged = applyReviewJudgments(grade, review);
     const hit = judged.redFlags.find((flag) => flag.id === 'hit');
