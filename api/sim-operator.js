@@ -76,8 +76,9 @@ TASK: Review the trainee's preoperative care plan before the simulation starts. 
 
 Judge each red flag yourself from everything the trainee wrote, anywhere in the plan:
 - found: they identified the problem and what to do about it, even misspelled ("clopidadrel" counts as clopidogrel) or in their own words.
-- partial: they noticed the trigger but not the full problem (for example, "on a heparin infusion, call the surgeon" without naming possible HIT or the platelet drop).
-- missed: nothing about it.
+- partial: they named the drug, lab, device or event at the center of the finding, or acted on it, without naming the full problem. Example: "call the surgeon because of the heparin infusion and ACT" is partial for possible HIT, even without the words HIT or platelets. Partial is not missed.
+- missed: nothing in the plan touches it.
+Before marking anything missed, search the whole plan, including the decision rationale, for the central drug, lab or device by name or misspelling.
 Also judge the go or delay call (decisionPoints): 2 if it matches answerKey.decision or is defensible, 1 if the rationale points the right way but the choice does not, 0 otherwise.
 
 Return ONE JSON object and nothing else:
