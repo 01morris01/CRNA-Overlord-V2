@@ -333,9 +333,19 @@ export function checkCalculations(values, reference) {
 
 /* ---------- grading ---------- */
 
+/* Fields copied from the chart (autofill, COPY LATEST LABS) are not the
+   student's thinking and never earn credit. */
+const CHART_COPIED_FIELDS = new Set(['student', 'preceptor', 'date', 'caseNumber', 'procedure', 'indication', 'surgeon',
+  'position', 'duration', 'ageSex', 'heightCm', 'weightKg', 'allergies', 'npoSolids', 'npoClears', 'codeStatus',
+  'vitalBp', 'vitalHr', 'vitalRr', 'vitalSpo2', 'vitalTemp']);
+
+function isChartCopied(key) {
+  return CHART_COPIED_FIELDS.has(key) || /^med\d+_(name|last)$/.test(key) || /^lab[A-Z]/.test(key);
+}
+
 export function planText(values = {}) {
   return Object.entries(values)
-    .filter(([key]) => !['student', 'preceptor', 'date', 'caseNumber'].includes(key))
+    .filter(([key]) => !isChartCopied(key))
     .map(([, value]) => (typeof value === 'string' ? value : ''))
     .join(' \n ')
     .toLowerCase();

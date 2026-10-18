@@ -367,3 +367,16 @@ describe('partial credit floor', () => {
     expect(status).toMatchObject({ hit: 'partial', clopidogrel: 'found', pacemaker: 'found' });
   });
 });
+
+describe('chart copied fields earn nothing', () => {
+  it('scores an untouched sheet (autofill plus copied labs) at zero for every chart', async () => {
+    const { gradeCarePlan, autofillFromChart, labsFromChart } = await import('../../ui/carePlanSheet.js');
+    const index = JSON.parse(readFileSync(resolve(root, 'data/mock-or-day/index.json'), 'utf8'));
+    for (const entry of index.patients) {
+      const patient = JSON.parse(readFileSync(resolve(root, `data/mock-or-day/patients/${entry.id}.json`), 'utf8'));
+      const key = JSON.parse(readFileSync(resolve(root, `data/mock-or-day/answer-keys/${entry.id}.json`), 'utf8'));
+      const grade = gradeCarePlan({ ...autofillFromChart(patient), ...labsFromChart(patient) }, key, patient);
+      expect(grade.percent, entry.id).toBe(0);
+    }
+  });
+});
