@@ -1,0 +1,236 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  STUDENT_SUGGESTIONS,
+  analyzeStudentAction,
+  buildOperatorNote,
+  buildStudentReply,
+  classifyStudentStatement,
+  parseStudentModelReply,
+  studentFacts,
+} from '../../ui/boothStudent.js';
+import { sanitizeStudentMessage, createStudentChannel, STUDENT_PROTOCOL } from '../../ui/studentChannel.js';
+import { STEPS, furthestStep, stepGate, REVIEW_ITEMS } from '../../ui/studentWorkflow.js';
+import { extractBoothCommand } from '../../ui/boothDock.js';
+import { createSimOperatorController } from '../../ui/simOperatorView.js';
+import { patientVoiceFor, pickSynthesisVoice } from '../../ui/patientInterview.js';
+import { resolveVoice, OPERATOR_DEFAULT_VOICE_ID } from '../../api/tts.js';
+import { buildSystemPrompt } from '../../api/sim-operator.js';
+import { SimRunner } from '../ui/simRunner.js';
+
+const root = resolve(import.meta.dirname, '../..');
+const DASH = /[‒–—―]|\s-\s/;
+const awakeFacts = studentFacts({ snapshot: { effectiveNmbBlockade: 0, propofolCe: 0, mac: 0, airwayDevice: 'mask' }, history: { drugsGiven: new Set(), preoxygenated: true } });
+const inducedNoRoc = studentFacts({ snapshot: { effectiveNmbBlockade: 0, propofolCe: 3.5, mac: 0, airwayDevice: 'mask' }, history: { drugsGiven: new Set(['Propofol', 'Fentanyl']), preoxygenated: true } });
+const ready = studentFacts({ snapshot: { effectiveNmbBlockade: 0.95, propofolCe: 3.5, airwayDevice: 'mask' }, history: { drugsGiven: new Set(['Propofol', 'Rocuronium']), preoxygenated: true } });
+
+describe('what the student said', () => {
+  it('tells a plan from a report and picks the action', () => {
+    expect(classifyStudentStatement('I am going to intubate my patient now')).toMatchObject({ intent: 'intubate', tense: 'plan' });
+    expect(classifyStudentStatement('I have tubed them')).toMatchObject({ intent: 'intubate', tense: 'done' });
+    expect(classifyStudentStatement('the tube is in')).toMatchObject({ intent: 'intubate', tense: 'done' });
+    expect(classifyStudentStatement("I'm about to extubate")).toMatchObject({ intent: 'extubate', tense: 'plan' });
+    expect(classifyStudentStatement('why is my pressure dropping?')).toMatchObject({ tense: 'question' });
+    expect(classifyStudentStatement('pushing propofol now')).toMatchObject({ intent: 'induce' });
+  });
+
+  it('accepts only messages that address Booth when hands free', () => {
+    expect(extractBoothCommand("Booth, I'm going to intubate now")).toBe("I'm going to intubate now");
+    expect(extractBoothCommand('hey booth the tube is in')).toBe('the tube is in');
+    expect(extractBoothCommand('can I get suction')).toBeNull();
+    expect(extractBoothCommand('Booth')).toBe('');
+  });
+});
+
+describe('what the student may have missed', () => {
+  it('flags intubation without a paralytic, and without a hypnotic', () => {
+    const noRoc = analyzeStudentAction({ intent: 'intubate' }, inducedNoRoc);
+    expect(noRoc.issues.map((i) => i.id)).toEqual(['no_paralytic']);
+    expect(noRoc.suggestions).toEqual(expect.arrayContaining(['fail_intubation', 'inject_laryngospasm']));
+    const awake = analyzeStudentAction({ intent: 'intubate' }, awakeFacts);
+    expect(awake.issues[0].id).toBe('not_asleep');
+    expect(analyzeStudentAction({ intent: 'intubate' }, ready).issues).toEqual([]);
+  });
+
+  it('respects charts where avoiding paralysis is the plan', () => {
+    const mg = studentFacts({ snapshot: { effectiveNmbBlockade: 0, propofolCe: 4 }, history: { drugsGiven: new Set(['Propofol']), preoxygenated: true }, answerKey: { planItems: [{ item: 'GETA with TIVA, minimal or no NMB' }] } });
+    const result = analyzeStudentAction({ intent: 'intubate' }, mg);
+    expect(result.issues.map((i) => i.id)).toEqual(['no_paralytic_planned']);
+    expect(result.suggestions).toEqual([]);
+  });
+
+  it('tells the instructor when a reported action never happened in the engine', () => {
+    const issues = analyzeStudentAction({ intent: 'intubate', tense: 'done' }, ready).issues;
+    expect(issues.map((i) => i.id)).toEqual(['claimed_not_done']);
+    const tubed = studentFacts({ snapshot: { effectiveNmbBlockade: 0.95, propofolCe: 3.5, airwayDevice: 'intubated' }, history: { drugsGiven: new Set(['Propofol', 'Rocuronium']), preoxygenated: true } });
+    expect(analyzeStudentAction({ intent: 'intubate', tense: 'done' }, tubed).issues).toEqual([]);
+  });
+
+  it('flags extubation on residual block', () => {
+    const f = studentFacts({ snapshot: { tofRatio: 0.6, spont: true, mac: 0.1 }, history: {} });
+    expect(analyzeStudentAction({ intent: 'extubate' }, f).issues[0].id).toBe('residual_block');
+  });
+});
+
+describe('Booth answers the student', () => {
+  it('never names the problem before the student acts', () => {
+    const plan = classifyStudentStatement('I am going to intubate now');
+    const analysis = analyzeStudentAction(plan, inducedNoRoc);
+    for (let i = 0; i < 30; i += 1) {
+      const reply = buildStudentReply(plan, analysis, { meanness: (i % 3) + 1, random: () => (i % 10) / 10 });
+      expect(reply).not.toMatch(/paraly|\broc(uronium)?\b|relax|blocker|\bsux\b|succinyl/i);
+      expect(reply).not.toMatch(DASH);
+    }
+  });
+
+  it('names it, about the decision, once it is done', () => {
+    const done = classifyStudentStatement('I have tubed them');
+    const reply = buildStudentReply(done, analyzeStudentAction(done, inducedNoRoc), { meanness: 3, random: () => 0 });
+    expect(reply).toMatch(/paralytic/);
+    expect(reply).not.toMatch(/idiot|stupid|dumb/i);
+  });
+
+  it('writes the instructor a plain note with what was missed and what it causes', () => {
+    const plan = classifyStudentStatement('I am going to intubate now');
+    const note = buildOperatorNote('I am going to intubate now', plan, analyzeStudentAction(plan, inducedNoRoc));
+    expect(note).toMatch(/No neuromuscular blocker/);
+    expect(note).toMatch(/Would cause/);
+    expect(note).toMatch(/did not tell them/);
+  });
+
+  it('keeps only whitelisted actions from the model', () => {
+    const parsed = parseStudentModelReply('{"reply":"Bold.","operatorNote":"No roc.","suggestions":["fail_intubation","delete_patient"]}');
+    expect(parsed).toEqual({ reply: 'Bold.', operatorNote: 'No roc.', suggestions: ['fail_intubation'] });
+    expect(parseStudentModelReply('not json')).toBeNull();
+  });
+
+  it('runs end to end in the console controller, with buttons that act on the engine', async () => {
+    const runner = new SimRunner();
+    runner.giveBolus('Propofol', 150, 'Propofol');
+    runner.pause();
+    const controller = createSimOperatorController({ runner, root: null, fetchImpl: null, storage: null, random: () => 0 });
+    controller.observeEvent({ t: 0, kind: 'Drug', detail: 'Propofol', meta: { action: 'drug', drug: 'Propofol', doseMg: 150 } });
+    const plan = await controller.respondToStudent('I am going to intubate now');
+    expect(plan.analysis.issues.map((i) => i.id)).toContain('no_paralytic');
+    expect(plan.reply).not.toMatch(/paraly/i);
+    expect(plan.suggestions).toContain('fail_intubation');
+    const result = controller.applySuggestion('fail_intubation');
+    expect(result).toMatchObject({ ok: true, target: 'next', attemptNumber: 1 });
+    expect(runner.log.some((entry) => /set to fail/.test(entry.detail))).toBe(true);
+    expect(controller.applySuggestion('inject_laryngospasm')).toMatchObject({ ok: true });
+    expect(controller.applySuggestion('nonsense').ok).toBe(false);
+  });
+});
+
+describe('instructor can fail an intubation attempt', () => {
+  it('fails the next attempt without touching anything else', () => {
+    const runner = new SimRunner();
+    expect(runner.failIntubationAttempt()).toMatchObject({ ok: true, target: 'next', attemptNumber: 1 });
+    expect(runner.intubate().ok).toBe(true);
+    runner.pause();
+    runner.stepFor(35);
+    expect(runner.snapshot().airwayDevice).toBe('mask');
+    expect(runner.a.intubationAttempts[0].outcome).toBe('failed');
+    // Second attempt is untouched and succeeds.
+    expect(runner.intubate().ok).toBe(true);
+    runner.stepFor(35);
+    expect(runner.snapshot().airwayDevice).toBe('intubated');
+  });
+
+  it('can fail the attempt already in progress', () => {
+    const runner = new SimRunner();
+    runner.intubate();
+    runner.pause();
+    runner.stepFor(5);
+    expect(runner.failIntubationAttempt()).toMatchObject({ ok: true, target: 'current', attemptNumber: 1 });
+    runner.stepFor(30);
+    expect(runner.a.intubationAttempts[0].outcome).toBe('failed');
+  });
+});
+
+describe('student screen link', () => {
+  it('drops malformed or oversized messages', () => {
+    expect(sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'student-load', patientId: 'p05' })).toEqual({ type: 'student-load', patientId: 'p05' });
+    expect(sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'student-load', patientId: '../x' })).toBeNull();
+    expect(sanitizeStudentMessage({ protocol: 2, type: 'student-hello' })).toBeNull();
+    expect(sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'evil' })).toBeNull();
+    const long = sanitizeStudentMessage({ protocol: STUDENT_PROTOCOL, type: 'student-booth', id: 'a', text: 'x'.repeat(5000) });
+    expect(long.text.length).toBe(500);
+  });
+
+  it('delivers student messages to the console and Booth replies back', () => {
+    const bus = new Set();
+    class FakeChannel {
+      constructor() { this.listeners = new Set(); bus.add(this); }
+      postMessage(data) { for (const other of bus) if (other !== this) for (const l of other.listeners) l({ data }); }
+      addEventListener(_, l) { this.listeners.add(l); }
+      removeEventListener(_, l) { this.listeners.delete(l); }
+      close() { bus.delete(this); }
+    }
+    const student = createStudentChannel({ role: 'student', BroadcastChannelImpl: FakeChannel });
+    const consoleSide = createStudentChannel({ role: 'console', BroadcastChannelImpl: FakeChannel });
+    const atConsole = [];
+    const atStudent = [];
+    consoleSide.subscribe((m) => atConsole.push(m));
+    student.subscribe((m) => atStudent.push(m));
+    student.post({ type: 'student-booth', id: 'm1', text: 'I am going to intubate now' });
+    consoleSide.post({ type: 'booth-reply', replyTo: 'm1', text: 'Bold.' });
+    student.post({ type: 'booth-reply', replyTo: 'x', text: 'student cannot speak for Booth' });
+    expect(atConsole).toEqual([{ type: 'student-booth', id: 'm1', text: 'I am going to intubate now' }]);
+    expect(atStudent).toEqual([{ type: 'booth-reply', replyTo: 'm1', text: 'Bold.' }]);
+  });
+});
+
+describe('workstation steps go in order', () => {
+  it('unlocks each step only when the one before is done', () => {
+    expect(STEPS).toEqual(['patient', 'chart', 'interview', 'plan', 'grade', 'or']);
+    expect(furthestStep({})).toBe(0);
+    expect(furthestStep({ patientId: 'p05' })).toBe(1);
+    const reviewed = Object.fromEntries(REVIEW_ITEMS.map((item) => [item, true]));
+    expect(furthestStep({ patientId: 'p05', reviewed })).toBe(2);
+    expect(stepGate('interview', { questions: 2 }).allowed).toBe(false);
+    expect(furthestStep({ patientId: 'p05', reviewed, questions: 3 })).toBe(3);
+    expect(furthestStep({ patientId: 'p05', reviewed, questions: 3, planSubmitted: true })).toBe(5);
+    expect(furthestStep({ patientId: 'p05', reviewed: { allergies: true }, questions: 9, planSubmitted: true })).toBe(1);
+  });
+
+  it('puts every preop step on one page in the right order', () => {
+    const html = readFileSync(resolve(root, 'student.html'), 'utf8');
+    const order = STEPS.map((step) => html.indexOf(`data-step="${step}"`));
+    expect(order.every((at) => at > 0)).toBe(true);
+    expect([...order].sort((x, y) => x - y)).toEqual(order);
+    for (const id of ['student-chart-frame', 'patient-interview-input', 'student-plan-host', 'student-grade-host', 'student-open-monitor', 'student-side']) {
+      expect(html).toContain(`id="${id}"`);
+    }
+  });
+});
+
+describe('Booth has his own voice', () => {
+  it('never falls back to the patient voice', () => {
+    expect(resolveVoice('operator', {})).toBe(OPERATOR_DEFAULT_VOICE_ID);
+    expect(resolveVoice('operator', { ELEVENLABS_VOICE_ID: 'patientVoice' })).toBe(OPERATOR_DEFAULT_VOICE_ID);
+    expect(resolveVoice('operator', {})).not.toBe(resolveVoice('patient-female', {}));
+    expect(resolveVoice('operator', {})).not.toBe(resolveVoice('patient-male', {}));
+    expect(resolveVoice('operator', { ELEVENLABS_OPERATOR_VOICE_ID: 'custom' })).toBe('custom');
+  });
+
+  it('gives patients a voice that matches the chart', () => {
+    expect(patientVoiceFor('M')).toBe('patient-male');
+    expect(patientVoiceFor('Female')).toBe('patient-female');
+    const voices = [{ name: 'Google UK English Male', lang: 'en-GB' }, { name: 'Samantha', lang: 'en-US' }];
+    expect(pickSynthesisVoice(voices, 'patient-male').name).toMatch(/Male/);
+    expect(pickSynthesisVoice(voices, 'patient-female').name).toBe('Samantha');
+  });
+});
+
+describe('Booth student prompt', () => {
+  it('forbids hints before the act and insults at any time', () => {
+    const prompt = buildSystemPrompt({ mode: 'student', meanness: 3, context: { student: { statement: 'x' } } });
+    expect(prompt).toMatch(/NEVER name, hint at/);
+    expect(prompt).toMatch(/no "idiot"/);
+    expect(prompt).toMatch(/operatorNote/);
+    expect(prompt).not.toMatch(/[–—]/);
+    for (const id of Object.keys(STUDENT_SUGGESTIONS)) expect(id).toMatch(/^[a-z_]+$/);
+  });
+});

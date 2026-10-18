@@ -13,6 +13,15 @@ import {
   MEANNESS_LEVELS,
   OPERATOR_NAME,
 } from './simOperator.js';
+import {
+  analyzeStudentAction,
+  buildOperatorNote,
+  buildStudentReply,
+  classifyStudentStatement,
+  parseStudentModelReply,
+  STUDENT_SUGGESTIONS,
+  studentFacts,
+} from './boothStudent.js';
 
 const SETTINGS_KEY = 'overlord.booth.settings.v2';
 const FEED_LIMIT = 30;
@@ -68,6 +77,11 @@ export function renderOperatorPanel() {
         <button id="live-operator-roast" type="button">ROAST MY CASE</button>
       </div>
       <ol id="live-operator-feed" class="live-operator-feed"><li class="live-empty">${escapeHtml(OPERATOR_NAME)} is watching.</li></ol>
+      <section class="live-operator-notes-panel" aria-labelledby="live-operator-notes-heading">
+        <h3 id="live-operator-notes-heading">${escapeHtml(OPERATOR_NAME)}'s notes for you</h3>
+        <p class="live-help">When the student talks to ${escapeHtml(OPERATOR_NAME)} from their screen, he answers them and tells you here what they may have missed. Only you see this.</p>
+        <ol id="live-operator-notes" class="live-operator-notes"><li class="live-empty">No student messages yet.</li></ol>
+      </section>
       <form id="live-operator-ask-form" class="live-operator-ask" novalidate>
         <label class="live-field" for="live-operator-ask"><span>Ask ${escapeHtml(OPERATOR_NAME)}</span>
           <input id="live-operator-ask" type="text" maxlength="400" placeholder="What am I missing?" autocomplete="off">
@@ -112,6 +126,8 @@ export function createSimOperatorController({
   speechHost = (typeof window !== 'undefined' ? window : null),
   storage = (typeof localStorage !== 'undefined' ? localStorage : null),
   now = () => Date.now(),
+  getAnswerKey = () => null,
+  random = Math.random,
 } = {}) {
   const query = (id) => root?.getElementById?.(id) ?? null;
   const settings = readSettings(storage);
@@ -281,6 +297,109 @@ export function createSimOperatorController({
     return reply;
   }
 
+  /* The student talked to Booth from their own screen. Returns the reply for
+     the student (spoken there) and writes the private note into the console. */
+  async function respondToStudent(rawText) {
+    const text = String(rawText ?? '').trim().slice(0, 400);
+    if (!text) return null;
+    const classification = classifyStudentStatement(text);
+    const snapshot = runner?.snapshot?.() ?? {};
+    const answerKey = getAnswerKey();
+    const facts = studentFacts({ snapshot, history: operator.getHistory(), answerKey });
+    const analysis = analyzeStudentAction(classification, facts);
+    let reply = buildStudentReply(classification, analysis, { meanness: settings.meanness, random });
+    let note = buildOperatorNote(text, classification, analysis);
+    let suggestions = analysis.suggestions;
+    const context = {
+      ...operator.caseContext(),
+      student: { statement: text, ...classification, analysis: { issues: analysis.issues.map(({ id, missed, consequence, severity }) => ({ id, missed, consequence, severity })) } },
+      allowedSuggestions: Object.fromEntries(Object.entries(STUDENT_SUGGESTIONS).map(([id, entry]) => [id, entry.label])),
+      mockOrAnswerKey: answerKey ? { summary: answerKey.summary, redFlags: (answerKey.redFlags ?? []).map(({ severity, finding }) => ({ severity, finding })) } : null,
+    };
+    if (fetchImpl) {
+      try {
+        const res = await fetchImpl('/api/sim-operator', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ mode: 'student', question: text, meanness: settings.meanness, context, history: askHistory.slice(-6) }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const parsed = parseStudentModelReply(data?.reply);
+          if (parsed) {
+            reply = parsed.reply;
+            if (parsed.operatorNote) note = parsed.operatorNote;
+            // Engine analysis always contributes its actions; the model can add fitting ones.
+            suggestions = [...new Set([...analysis.suggestions, ...parsed.suggestions])];
+          }
+        }
+      } catch { /* offline reply stands */ }
+    }
+    askHistory.push({ role: 'trainee', content: text }, { role: 'operator', content: reply });
+    appendFeed('student', `Student: ${text}`, runner?.simTime ?? null);
+    appendFeed('booth', reply, runner?.simTime ?? null);
+    showLatest(reply);
+    addNote({ text, note, suggestions, issues: analysis.issues, tSec: runner?.simTime ?? null });
+    return { reply, note, suggestions, classification, analysis };
+  }
+
+  function applySuggestion(id) {
+    const entry = STUDENT_SUGGESTIONS[id];
+    if (!entry || !runner) return { ok: false, reason: 'unknown action' };
+    try {
+      if (entry.kind === 'fail_intubation') return runner.failIntubationAttempt();
+      if (entry.kind === 'inject') return runner.injectComplication(entry.complication);
+      if (entry.kind === 'stimulus') {
+        runner.setSurgicalStimulus(entry.intensity);
+        runner.logEvent?.('Instructor', `Surgical stimulus ${entry.intensity}`, { instructorAction: 'stimulus' });
+        return { ok: true };
+      }
+    } catch (error) {
+      return { ok: false, reason: error.message };
+    }
+    return { ok: false, reason: 'unsupported' };
+  }
+
+  function addNote({ text, note, suggestions, issues, tSec }) {
+    const list = query('live-operator-notes');
+    if (!list || !root?.createElement) return;
+    list.querySelector?.('.live-empty')?.remove();
+    const item = root.createElement('li');
+    const worst = issues[0]?.severity ?? 'none';
+    item.className = `live-operator-note live-operator-note-${worst}`;
+    const head = root.createElement('p');
+    head.className = 'live-operator-note-head';
+    head.textContent = `${tSec === null ? '' : `${formatTime(tSec)} · `}"${text}"`;
+    const body = root.createElement('p');
+    body.textContent = note;
+    item.append(head, body);
+    const row = root.createElement('div');
+    row.className = 'live-operator-note-actions';
+    for (const id of suggestions) {
+      const entry = STUDENT_SUGGESTIONS[id];
+      if (!entry) continue;
+      const button = root.createElement('button');
+      button.type = 'button';
+      button.textContent = entry.label;
+      button.dataset.suggestion = id;
+      button.addEventListener('click', () => {
+        const result = applySuggestion(id);
+        button.disabled = true;
+        button.textContent = result?.ok === false ? `FAILED: ${result.reason}` : `${entry.label} · DONE`;
+      });
+      row.append(button);
+    }
+    const dismiss = root.createElement('button');
+    dismiss.type = 'button';
+    dismiss.className = 'live-secondary';
+    dismiss.textContent = 'DISMISS';
+    dismiss.addEventListener('click', () => item.remove());
+    row.append(dismiss);
+    item.append(row);
+    list.prepend(item);
+    while (list.children.length > 20) list.lastElementChild?.remove();
+  }
+
   async function roast() {
     const context = operator.caseContext({ revealAll: true });
     const button = query('live-operator-roast');
@@ -370,5 +489,7 @@ export function createSimOperatorController({
     observeEvent(entry) { operator.observeEvent(entry); },
     ask,
     roast,
+    respondToStudent,
+    applySuggestion,
   };
 }

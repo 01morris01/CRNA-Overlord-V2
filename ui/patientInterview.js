@@ -33,6 +33,7 @@ export function buildInterviewGrounding(caseExperience) {
     .map((action) => ({ id: action.id, prompt: action.prompt, response: action.response, domain: action.domain }));
   return {
     patientName: chart.patient?.syntheticName ?? 'the patient',
+    voice: patientVoiceFor(chart.patient?.sex),
     chart: {
       patient: chart.patient,
       scheduledProcedure: chart.scheduledProcedure,
@@ -43,6 +44,20 @@ export function buildInterviewGrounding(caseExperience) {
     },
     qa,
   };
+}
+
+// The patient's voice follows the chart's sex; Booth has his own voice.
+export function patientVoiceFor(sex) {
+  return /^(m|male|man)$/i.test(String(sex ?? '').trim()) ? 'patient-male' : 'patient-female';
+}
+
+const MALE_VOICE_NAMES = /\b(male|david|mark|daniel|alex|fred|george|guy|aaron|arthur|james|tom)\b/i;
+const FEMALE_VOICE_NAMES = /\b(female|samantha|victoria|karen|zira|susan|serena|moira|tessa|fiona|allison|ava|jenny)\b/i;
+
+export function pickSynthesisVoice(voices, voice) {
+  const list = Array.isArray(voices) ? voices.filter((v) => /^en/i.test(v.lang ?? '')) : [];
+  const wanted = voice === 'patient-male' ? MALE_VOICE_NAMES : FEMALE_VOICE_NAMES;
+  return list.find((v) => wanted.test(v.name ?? '')) ?? null;
 }
 
 // Deterministic fallback (no AI): match a free-text question to the nearest
@@ -107,7 +122,7 @@ export function createPatientInterview({
     if (fetchImpl) {
       try {
         const res = await fetchImpl('/api/tts', {
-          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }),
+          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text, voice: grounding?.voice ?? 'patient-female' }),
         });
         if (res.ok) {
           const blob = await res.blob();
@@ -121,7 +136,14 @@ export function createPatientInterview({
     }
     const synth = speechHost?.speechSynthesis;
     const Utterance = speechHost?.SpeechSynthesisUtterance;
-    if (synth && Utterance) { synth.cancel(); synth.speak(new Utterance(text)); }
+    if (synth && Utterance) {
+      synth.cancel();
+      const utterance = new Utterance(text);
+      const chosen = pickSynthesisVoice(synth.getVoices?.(), grounding?.voice);
+      if (chosen) utterance.voice = chosen;
+      utterance.pitch = grounding?.voice === 'patient-male' ? 0.95 : 1.1;
+      synth.speak(utterance);
+    }
   }
 
   async function requestPatientReply(question) {

@@ -52,6 +52,19 @@ export class AirwayProcedureSystem {
     };
   }
 
+  /* Instructor control (Booth's notes to the sim operator): make the attempt in
+     progress fail when its timer ends, or, if none is running, the next one.
+     Nothing else about the attempt changes; the patient desaturates as usual. */
+  failIntubationAttempt() {
+    if (this._attemptCurrent) {
+      this._attemptCurrent.willFail = true;
+      return { ok: true, target: 'current', attemptNumber: this._attemptCurrent.record.attemptNumber };
+    }
+    const next = this.intubationAttemptCount + 1;
+    this.failedIntubationAttempts = [...new Set([...this.failedIntubationAttempts, next])].sort((x, y) => x - y);
+    return { ok: true, target: 'next', attemptNumber: next };
+  }
+
   get ppvActive() { return this._ppvCurrent !== null; }
 
   get ppvEpisodeCount() { return this._ppvHistory.length; }

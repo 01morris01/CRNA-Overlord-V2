@@ -94,6 +94,7 @@ export function buildChartInterviewGrounding(patient) {
   const priorAnesthesia = (patient.anesthesia_history ?? []).map((r) => `${r[0]} ${r[1]} with ${r[2]}: ${r[3]}`).join('; ');
   return {
     patientName: patient.preferred_name || patient.label || 'the patient',
+    voice: patient.sex === 'M' ? 'patient-male' : 'patient-female',
     chart: { digest: buildChartDigest(patient, { maxChars: 7200 }) },
     qa: [
       { id: 'mock_allergies', prompt: 'Do you have any allergies to medicines', response: allergies, domain: 'allergies' },
@@ -298,6 +299,15 @@ export function createMockOrController({
     publish();
   }
 
+  /* The student submitted from their own screen: the record is already in
+     shared storage, so reread it without touching the runner. */
+  function refreshPlan() {
+    if (!state.active || !carePlan) return null;
+    const planStatus = carePlan.load({ patient: state.patient, answerKey: state.answerKey, chartDigest: buildChartDigest(state.patient, { maxChars: 9000 }) });
+    planUpdated(planStatus);
+    return planStatus;
+  }
+
   function planUpdated(planStatus) {
     if (!state.active) return;
     state.planSubmitted = Boolean(planStatus?.submitted);
@@ -318,7 +328,7 @@ export function createMockOrController({
   chartModal?.addEventListener?.('click', onBackdrop);
 
   return {
-    init, load, openChart, closeChart, exit, planUpdated,
+    init, load, openChart, closeChart, exit, planUpdated, refreshPlan,
     gate: () => startGate(state),
     getState: () => ({ ...state }),
     destroy() {

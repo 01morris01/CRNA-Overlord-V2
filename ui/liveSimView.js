@@ -41,6 +41,7 @@ import {
   renderChartModal,
   renderMockOrPanel,
 } from './mockOrDay.js';
+import { createStudentChannel, readStudentSession } from './studentChannel.js';
 
 let initialized = false;
 let runner = null;
@@ -49,6 +50,8 @@ let patientInterview = null;
 let simOperator = null;
 let carePlan = null;
 let mockOr = null;
+let studentChannel = null;
+let studentHeartbeat = null;
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -786,6 +789,7 @@ export function runRubricFinalizationAction({
 const FINALIZED_CONSOLE_ALLOWED_CONTROL_IDS = new Set([
   'live-close',
   'live-open-display',
+  'live-open-student',
   'live-rubric-print',
   'live-export',
   'live-rubric-scenario',
@@ -904,6 +908,7 @@ function renderShell() {
       <div class="live-header-actions">
         <output id="live-sim-clock" class="live-sim-clock" aria-label="Simulation time">00:00</output>
         <button id="live-open-display" type="button">OPEN DISPLAY</button>
+        <button id="live-open-student" type="button">STUDENT SCREEN</button>
         <button id="live-close" type="button" class="live-secondary">BACK TO MAP</button>
       </div>
     </header>
@@ -1538,7 +1543,11 @@ function ensureRunner() {
   }
   // Booth, the sim operator, watches the same tick and event streams the
   // console renders. He acts only through the runner's public control surface.
-  simOperator = createSimOperatorController({ runner, root: document });
+  simOperator = createSimOperatorController({
+    runner,
+    root: document,
+    getAnswerKey: () => (mockOr?.getState().active ? mockOr.getState().answerKey ?? null : null),
+  });
   runner.onTick = (snapshot) => {
     renderSnapshot(snapshot);
     simOperator?.observe(snapshot);
@@ -1624,7 +1633,51 @@ function initMockOr() {
       if (state.active) applyBoothCaseProfile({ withFindings: state.planSubmitted });
     },
   });
-  mockOr.init();
+  mockOr.init().then(() => {
+    // A student screen in this browser already picked a patient: follow it.
+    const session = readStudentSession(globalThis.localStorage);
+    const fresh = session && Date.now() - (session.updatedAt ?? 0) < 6 * 3600 * 1000;
+    if (fresh && !mockOr.getState().active) mockOr.load(session.patientId);
+  });
+  initStudentLink();
+}
+
+/* The student works through preop and talks to Booth from their own screen
+   (student.html, the monitor display). Booth's answers go back to that
+   screen; his private notes stay here. */
+function initStudentLink() {
+  studentChannel = createStudentChannel({ role: 'console' });
+  if (!studentChannel) return;
+  const beat = () => {
+    const state = mockOr?.getState() ?? {};
+    studentChannel.post({
+      type: 'console-state',
+      patientId: state.active ? state.id : null,
+      lifecycle: runner?.getLifecycleState?.() ?? null,
+      simTimeSec: runner?.simTime ?? null,
+    });
+  };
+  studentHeartbeat = setInterval(beat, 2000);
+  studentChannel.subscribe(async (message) => {
+    if (message.type === 'student-hello') beat();
+    else if (message.type === 'student-load') {
+      if (mockOr?.getState().id !== message.patientId) {
+        const select = document.getElementById('mockor-select');
+        if (select) select.value = message.patientId;
+        await mockOr?.load(message.patientId);
+        setStatus(`Student screen loaded ${mockOr?.getState().label ?? message.patientId}.`, 'success');
+      }
+      beat();
+    } else if (message.type === 'student-plan') {
+      if (mockOr?.getState().id !== message.patientId) await mockOr?.load(message.patientId);
+      else mockOr?.refreshPlan();
+      setStatus('Student submitted the care plan from their screen.', 'success');
+      beat();
+    } else if (message.type === 'student-booth') {
+      const result = await simOperator?.respondToStudent(message.text);
+      if (result?.reply) studentChannel.post({ type: 'booth-reply', replyTo: message.id, text: result.reply });
+    }
+  });
 }
 
 function applyBoothCaseProfile({ withFindings }) {
@@ -1918,6 +1971,16 @@ function ensureMenuLaunchButtons() {
   }
   registerLaunchButton(document.getElementById('live-sim-course-launch'));
 
+  if (courseSelectorBody && !document.getElementById('student-workstation-launch')) {
+    const link = document.createElement('a');
+    link.id = 'student-workstation-launch';
+    link.className = 'big-btn live-sim-menu-launch';
+    link.href = '/student.html';
+    link.textContent = 'MOCK OR DAY · STUDENT';
+    const after = document.getElementById('live-sim-course-launch');
+    courseSelectorBody.insertBefore(link, after?.nextSibling ?? null);
+  }
+
   const hospitalBar = document.getElementById('hospital-bar');
   if (hospitalBar && !document.getElementById('hospital-live-sim-launch')) {
     const button = document.createElement('button');
@@ -2016,6 +2079,10 @@ function bindControls() {
     window.open('/live-sim-display.html', 'crnaLiveSimDisplay', 'popup,width=1440,height=900');
     ensureRunner().emit();
     setStatus('Display opened; current snapshot published.', 'success');
+  });
+  document.getElementById('live-open-student')?.addEventListener('click', () => {
+    window.open('/student.html', 'crnaStudentScreen', 'popup,width=1400,height=900');
+    setStatus('Student screen opened. It links to this console automatically.', 'success');
   });
   document.getElementById('live-patient-form')?.addEventListener('submit', applyPatient);
   document.getElementById('live-machine-form')?.addEventListener('submit', applyMachine);

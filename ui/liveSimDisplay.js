@@ -1,6 +1,8 @@
 import { deriveAlarms, formatMonitorSnapshot } from './liveSimModel.js';
 import { createLiveSimTransport } from './liveSimTransport.js';
 import { createWaveformRenderer, PAW_SCALE } from './liveWaveformRenderer.js';
+import { createBoothDock, renderBoothDock } from './boothDock.js';
+import { createStudentChannel } from './studentChannel.js';
 
 const FLOWMETER_MAX_L_MIN = 10;
 
@@ -381,3 +383,24 @@ setInterval(() => {
 }, 1000);
 
 requestAnimationFrame(drawWaveforms);
+
+// Booth on the student's screen: talk to him from the monitor. Open by
+// default when the student came here from the workstation.
+(() => {
+  const host = document.getElementById('display-booth');
+  const toggle = document.getElementById('display-talk-booth');
+  if (!host || !toggle) return;
+  host.innerHTML = renderBoothDock({ id: 'booth-dock' });
+  const dock = createBoothDock({ channel: createStudentChannel({ role: 'student' }) });
+  const fromStudent = new URLSearchParams(location.search).has('student');
+  const back = document.getElementById('display-back-preop');
+  if (back) back.hidden = !fromStudent;
+  const setOpen = (open) => {
+    host.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'HIDE BOOTH' : 'TALK TO BOOTH';
+  };
+  setOpen(fromStudent);
+  toggle.addEventListener('click', () => setOpen(host.hidden));
+  window.addEventListener('beforeunload', () => dock.destroy());
+})();

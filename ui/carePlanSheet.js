@@ -625,6 +625,7 @@ export function createCarePlanController({
   getMeanness = () => 2,
   onOpenChart = () => {},
   onGraded = () => {},
+  inline = false, // student workstation: the sheet is part of the page, not a closable dialog
 } = {}) {
   const modal = root?.getElementById?.('careplan-modal');
   const form = root?.getElementById?.('careplan-form');
@@ -735,7 +736,7 @@ export function createCarePlanController({
     modal.querySelector?.('[data-cp-tab]')?.focus?.();
   }
 
-  function close() { if (modal) modal.hidden = true; persist(); }
+  function close() { if (modal && !inline) modal.hidden = true; persist(); }
 
   function handleClick(event) {
     const tab = event.target.closest?.('[data-cp-tab]');

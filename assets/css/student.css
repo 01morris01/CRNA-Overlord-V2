@@ -1,0 +1,175 @@
+/* Student workstation (student.html) and Booth's talk panel (also used on the
+   monitor display). Shares tokens.css with the rest of the app. */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-width: 320px; }
+.student-body {
+  min-height: 100dvh;
+  background: var(--void);
+  color: var(--txt);
+  font-family: var(--fb);
+}
+.student-body button {
+  min-height: 40px;
+  padding: .55rem .9rem;
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  background: var(--card-hi);
+  color: var(--txt);
+  font-family: var(--fd);
+  font-weight: 700;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.student-body button:hover:not(:disabled) { border-color: var(--green); }
+.student-body button:focus-visible, .student-body a:focus-visible, .student-body input:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.student-body button:disabled { opacity: .45; cursor: not-allowed; }
+.student-body .live-primary, .student-primary { border-color: var(--green) !important; background: rgba(0, 255, 163, .12) !important; color: var(--green) !important; }
+.student-quiet { background: transparent !important; color: var(--txt-2) !important; }
+
+.student-fence {
+  padding: .4rem 1rem;
+  background: #6d160f;
+  border-bottom: 1px solid var(--red);
+  color: #fff;
+  font-family: var(--fm);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.student-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  background: var(--abyss);
+  border-bottom: 1px solid var(--line);
+}
+.student-eyebrow, .booth-dock-eyebrow { margin: 0 0 .25rem; color: var(--green-2); font-family: var(--fm); font-size: .68rem; letter-spacing: .14em; }
+.student-header h1 { margin: 0; font-family: var(--fd); font-size: clamp(1.4rem, 3vw, 2.1rem); letter-spacing: .03em; }
+.student-sub { margin: .2rem 0 0; color: var(--txt-2); font-size: .9rem; }
+.student-header-actions { display: flex; gap: .5rem; }
+
+.student-steps { position: sticky; top: 0; z-index: 10; background: rgba(3, 6, 12, .96); border-bottom: 1px solid var(--line); overflow-x: auto; }
+.student-steps ol { display: flex; gap: .25rem; margin: 0; padding: .6rem clamp(1rem, 3vw, 2rem); list-style: none; min-width: max-content; }
+.student-steps button { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; font-size: .85rem; white-space: nowrap; }
+.student-steps button span { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--line-2); font-family: var(--fm); font-size: .75rem; }
+.student-steps button[data-done="true"] span { background: var(--green-2); color: #04110b; }
+.student-steps button[aria-current="step"] { border-color: var(--green); color: var(--green); background: rgba(0, 255, 163, .08); }
+
+.student-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: 1rem; padding: 1rem clamp(1rem, 3vw, 2rem) 2rem; align-items: start; }
+.student-side[hidden] { display: none; }
+.student-layout:has(.student-side[hidden]) { grid-template-columns: minmax(0, 1fr); }
+.student-main { min-width: 0; }
+.student-step-head h2 { margin: 0 0 .35rem; font-family: var(--fd); font-size: 1.45rem; letter-spacing: .03em; }
+.student-step-head p { margin: 0 0 1rem; color: var(--txt-2); line-height: 1.5; max-width: 75ch; }
+.student-empty { color: var(--muted); }
+
+.student-filter { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; color: var(--txt-2); font-size: .85rem; }
+.student-filter input, .booth-dock-form input {
+  flex: 1;
+  min-height: 40px;
+  padding: .45rem .7rem;
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  background: var(--abyss);
+  color: var(--txt);
+  font: inherit;
+}
+.student-schedule { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .6rem; }
+.student-body .student-patient {
+  display: grid;
+  gap: .2rem;
+  min-height: 0;
+  padding: .75rem .85rem;
+  text-align: left;
+  font-family: var(--fb);
+  font-weight: 400;
+  letter-spacing: 0;
+  background: var(--card);
+}
+.student-patient strong { font-family: var(--fd); font-size: 1.05rem; letter-spacing: .03em; }
+.student-patient-time { color: var(--green-2); font-family: var(--fm); font-size: .72rem; }
+.student-patient-meta { color: var(--txt-2); font-size: .8rem; }
+.student-patient-proc { font-size: .85rem; line-height: 1.35; }
+.student-patient-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+.student-patient-tags em { padding: .1rem .4rem; border: 1px solid var(--amber); border-radius: 4px; color: var(--amber); font-size: .7rem; font-style: normal; }
+.student-patient-tags .student-tag-plan { border-color: var(--blue); color: var(--blue); }
+.student-body .student-patient.is-selected { border-color: var(--green); box-shadow: 0 0 0 1px var(--green) inset; }
+
+.student-chart-wrap { display: grid; gap: .4rem; margin-bottom: 1rem; }
+.student-chart-frame { width: 100%; height: min(72vh, 820px); border: 1px solid var(--line-2); border-radius: 8px; background: #fff; }
+.student-link { color: var(--blue); font-size: .85rem; }
+.student-checklist { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .5rem 1rem; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.student-checklist legend { padding: 0 .35rem; color: var(--green); font-family: var(--fm); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+.student-checklist label { display: flex; gap: .5rem; align-items: center; font-size: .9rem; }
+.student-checklist input { width: 1.1rem; height: 1.1rem; }
+
+.student-interview .patient-interview-transcript { max-height: 52vh; min-height: 240px; }
+.student-interview .patient-interview-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+.student-interview .patient-interview-controls input { flex: 1 1 240px; min-height: 40px; padding: .45rem .7rem; border: 1px solid var(--line-2); border-radius: 6px; background: var(--abyss); color: var(--txt); font: inherit; }
+.student-count { color: var(--txt-2); font-family: var(--fm); font-size: .8rem; }
+
+/* The care plan sheet sits in the page on the workstation. */
+.student-plan .cp-modal { position: static; display: block; padding: 0; background: none; z-index: auto; }
+.student-plan .cp-dialog { width: 100%; max-height: none; box-shadow: none; }
+.student-plan .cp-form { overflow: visible; }
+.student-plan [data-cp-action="close"],
+.student-plan [data-cp-tab="result"],
+.student-plan .cp-result,
+.student-plan .cp-footer-actions { display: none !important; }
+
+.student-grade { padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surf); }
+
+.student-or { display: grid; gap: 1rem; justify-items: start; }
+.student-or-status { padding: .75rem 1rem; border: 1px solid var(--amber); border-radius: 8px; color: var(--amber); }
+.student-or-status[data-state="ready"] { border-color: var(--green); color: var(--green); }
+.student-or-status[data-state="warn"] { border-color: var(--red); color: var(--red); }
+.student-primary-link { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.4rem; border: 1px solid var(--green); border-radius: 8px; background: rgba(0, 255, 163, .12); color: var(--green); font-family: var(--fd); font-size: 1.1rem; letter-spacing: .05em; text-decoration: none; }
+.student-or-tips { margin: 0; padding-left: 1.2rem; color: var(--txt-2); line-height: 1.7; }
+
+.student-step-nav { position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding: .75rem 0; background: linear-gradient(transparent, var(--void) 35%); }
+.student-gate { flex: 1; color: var(--amber); font-size: .88rem; text-align: center; }
+
+/* ---------- Booth talk panel ---------- */
+.booth-dock {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  padding: .9rem;
+  border: 1px solid rgba(255, 176, 0, .45);
+  border-radius: 10px;
+  background: var(--surf);
+}
+.student-side .booth-dock { position: sticky; top: 4rem; max-height: calc(100dvh - 5rem); }
+.booth-dock-header { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; }
+.booth-dock-header h2 { margin: 0; font-family: var(--fd); font-size: 1.2rem; letter-spacing: .03em; color: var(--amber); }
+.booth-dock-link { padding: .25rem .45rem; border: 1px solid var(--muted); border-radius: 4px; color: var(--muted); font-family: var(--fm); font-size: .62rem; white-space: nowrap; }
+.booth-dock-link[data-state="console"] { border-color: var(--green); color: var(--green); }
+.booth-dock-transcript { flex: 1 1 auto; min-height: 140px; max-height: 46vh; margin: 0; padding: 0; overflow-y: auto; list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.booth-dock-empty { color: var(--muted); font-size: .85rem; line-height: 1.5; }
+.booth-dock-line { display: grid; gap: .1rem; }
+.booth-dock-line span { font-family: var(--fm); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.booth-dock-line p { margin: 0; padding: .45rem .6rem; border-radius: 8px; line-height: 1.45; font-size: .9rem; }
+.booth-dock-you p { background: var(--card-hi); }
+.booth-dock-booth span { color: var(--amber); }
+.booth-dock-booth p { background: rgba(255, 176, 0, .08); border: 1px solid rgba(255, 176, 0, .3); }
+.booth-dock-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; font-size: .8rem; color: var(--txt-2); }
+.booth-dock-controls label { display: inline-flex; align-items: center; gap: .35rem; }
+.booth-dock .booth-dock-mic { flex: 1 1 100%; min-height: 48px; border-color: var(--amber); color: var(--amber); touch-action: none; }
+.booth-dock .booth-dock-mic[aria-pressed="true"] { background: var(--amber); color: #111; }
+.booth-dock-form { display: flex; gap: .4rem; }
+.booth-dock-status { min-height: 1.1em; color: var(--txt-2); font-size: .78rem; }
+
+@media (max-width: 960px) {
+  .student-layout { grid-template-columns: 1fr; }
+  .student-side .booth-dock { position: static; max-height: none; }
+}
+@media (max-width: 520px) {
+  .student-header-actions { width: 100%; }
+  .student-header-actions button { flex: 1; }
+  .student-chart-frame { height: 64vh; }
+}
