@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import {
+  replyGivesAwayIssue,
   STUDENT_SUGGESTIONS,
   analyzeStudentAction,
   buildOperatorNote,
@@ -97,6 +98,27 @@ describe('Booth answers the student', () => {
     expect(note).toMatch(/No neuromuscular blocker/);
     expect(note).toMatch(/Would cause/);
     expect(note).toMatch(/did not tell them/);
+  });
+
+  it('throws out a model reply that hints at the problem before the act', async () => {
+    const leak = { id: 'no_paralytic' };
+    expect(replyGivesAwayIssue("Bold move without a paralytic. Let's see how that goes.", [leak])).toBe(true);
+    expect(replyGivesAwayIssue("Bold. Let's see how that goes.", [leak])).toBe(false);
+    const runner = new SimRunner();
+    runner.giveBolus('Propofol', 150, 'Propofol');
+    runner.pause();
+    const fetchImpl = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ reply: '```json\n{"reply":"Bold move without a paralytic.","operatorNote":"No roc.","suggestions":["fail_intubation"]}\n```' }),
+    }));
+    const controller = createSimOperatorController({ runner, root: null, fetchImpl, storage: null, random: () => 0 });
+    controller.observeEvent({ t: 0, kind: 'Drug', detail: 'Propofol', meta: { action: 'drug', drug: 'Propofol', doseMg: 150 } });
+    const plan = await controller.respondToStudent('I am going to intubate now');
+    expect(plan.reply).not.toMatch(/paraly/i);
+    expect(plan.note).toBe('No roc.');
+    // After the act the same reply is allowed.
+    const done = await controller.respondToStudent('I have tubed them');
+    expect(done.reply).toBe('Bold move without a paralytic.');
   });
 
   it('keeps only whitelisted actions from the model', () => {

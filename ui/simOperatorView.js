@@ -19,6 +19,7 @@ import {
   buildStudentReply,
   classifyStudentStatement,
   parseStudentModelReply,
+  replyGivesAwayIssue,
   STUDENT_SUGGESTIONS,
   studentFacts,
 } from './boothStudent.js';
@@ -327,7 +328,9 @@ export function createSimOperatorController({
           const data = await res.json();
           const parsed = parseStudentModelReply(data?.reply);
           if (parsed) {
-            reply = parsed.reply;
+            // Before the act, a reply that hints at the problem is replaced.
+            const leaks = classification.tense !== 'done' && replyGivesAwayIssue(parsed.reply, analysis.issues);
+            if (!leaks) reply = parsed.reply;
             if (parsed.operatorNote) note = parsed.operatorNote;
             // Engine analysis always contributes its actions; the model can add fitting ones.
             suggestions = [...new Set([...analysis.suggestions, ...parsed.suggestions])];

@@ -229,6 +229,27 @@ export function buildOperatorNote(statement, classification, analysis) {
   return `${said}. ${timing} ${lines.join(' ')}`;
 }
 
+/* Words that would give an issue away. Before the student acts, a model reply
+   that contains any of them is discarded for the offline line: the rule is
+   enforced in code, not left to the model's instructions. */
+const ISSUE_HINTS = {
+  no_paralytic: /paraly|\broc(uronium)?\b|\bsux\b|succinyl|vecuron|cisatrac|relax|blocker|\bnmb\b|neuromuscular/i,
+  no_paralytic_planned: /paraly|\broc(uronium)?\b|relax|blocker|\bnmb\b|neuromuscular/i,
+  not_asleep: /awake|conscious|asleep|induc|propofol|etomidate|ketamine|hypnotic|sedat/i,
+  no_preox: /pre-?ox|preoxygen|denitrogen|oxygen reserve|\bfao2\b|apnea time/i,
+  residual_block: /\btof\b|train of four|residual|revers|sugammadex|neostigmine|twitch|block/i,
+  apneic: /breath|apne|spontaneous/i,
+  stage_two: /stage|excitement|laryngospasm|\bmac\b|deep|light/i,
+  light: /light|depth|\bmac\b|deep|awareness/i,
+  deep_block: /\btof\b|twitch|neostigmine|sugammadex|deep block/i,
+  rsi_case: /\brsi\b|rapid sequence|cricoid|full stomach|aspirat/i,
+  rsi_mask: /\brsi\b|rapid sequence|full stomach|aspirat|insufflat/i,
+};
+
+export function replyGivesAwayIssue(reply, issues = []) {
+  return issues.some((issue) => ISSUE_HINTS[issue.id]?.test(String(reply ?? '')));
+}
+
 /* The model answers in JSON; keep only well formed fields and whitelisted
    suggestions. Returns null when the text is unusable. */
 export function parseStudentModelReply(text, allowed = Object.keys(STUDENT_SUGGESTIONS)) {
