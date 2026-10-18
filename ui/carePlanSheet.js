@@ -361,7 +361,7 @@ export function editDistance(a, b) {
 
 /* Misspellings students make under time pressure ("clopidadrel", "heperan")
    should still count. Whole words only, same first letter, and a small budget:
-   one edit for 5 to 7 letters, two for 8 or more. Short words stay exact. */
+   one edit for 5 or 6 letters, two for 7 or more. Short words stay exact. */
 // Prefixes that flip the meaning; a misspelling must never cross them.
 const OPPOSITE_PREFIXES = [['hyper', 'hypo'], ['intra', 'inter'], ['hyper', 'hyp']];
 
@@ -373,7 +373,7 @@ function crossesOpposite(word, target) {
 function fuzzyWordMatch(word, target) {
   if (target.length < 5 || word[0] !== target[0]) return false;
   if (crossesOpposite(word, target)) return false;
-  const budget = target.length >= 8 ? 2 : 1;
+  const budget = target.length >= 7 ? 2 : 1;
   if (Math.abs(word.length - target.length) > budget) return false;
   return editDistance(word, target) <= budget;
 }
@@ -414,6 +414,25 @@ export function keywordHit(text, keyword) {
 
 export const SEVERITY_POINTS = Object.freeze({ critical: 5, major: 2, minor: 1 });
 
+/* Partial credit floor: the plan names the drug, lab or device at the center
+   of a finding (taken from the finding's own words, plus common short forms)
+   without the full problem. "heperan infusion" for possible HIT, "pacer" for a
+   pacemaker plan. */
+const PARTIAL_STOPWORDS = new Set(['possible', 'before', 'missing', 'without', 'during', 'patient', 'surgery', 'planned',
+  'history', 'chronic', 'severe', 'recent', 'current', 'morning', 'incomplete', 'pending', 'ordered', 'concern', 'starting',
+  'continue', 'management', 'elevated', 'reduced', 'significant', 'evaluation', 'today', 'induced', 'related', 'associated',
+  'timing', 'vessel', 'between', 'inhibitor', 'without', 'unclear', 'unknown', 'given', 'taken', 'remains', 'despite']);
+const PARTIAL_ALIASES = { pacemaker: ['pacer', 'ppm', 'icd', 'device'], defibrillator: ['icd', 'device'], heparin: ['heparin', 'hep'],
+  anticoagulation: ['anticoag', 'blood thinner'], thrombocytopenia: ['platelets', 'plt'], hypoglycemia: ['glucose', 'sugar'],
+  hyperkalemia: ['potassium'], hypokalemia: ['potassium'], insulin: ['insulin'], stenosis: ['stenosis'] };
+
+export function partialTerms(flag) {
+  const words = (str(flag?.finding).toLowerCase().match(/[a-z]{6,}/g) ?? []).filter((word) => !PARTIAL_STOPWORDS.has(word));
+  const terms = new Set(words);
+  for (const word of words) for (const alias of PARTIAL_ALIASES[word] ?? []) terms.add(alias);
+  return [...terms];
+}
+
 /* A plan that misses a critical chart finding is not a passing plan, however
    tidy the rest of it is. */
 export const MISSED_CRITICAL_CAP = 60;
@@ -440,12 +459,13 @@ export function gradeCarePlan(values = {}, answerKey = null, patient = null) {
       const points = SEVERITY_POINTS[flag.severity] ?? 1;
       const matched = (flag.keywords ?? []).filter((keyword) => keywordHit(text, keyword));
       const found = matched.length > 0;
-      // 'status' lets the reviewer mark a finding partial (named the trigger,
-      // missed the diagnosis); keyword grading only knows found or missed.
+      const partialHits = found ? [] : partialTerms(flag).filter((term) => keywordHit(text, term));
+      const status = found ? 'found' : (partialHits.length > 0 ? 'partial' : 'missed');
       result.possible += points;
-      if (found) result.earned += points;
+      if (status === 'found') result.earned += points;
+      else if (status === 'partial') result.earned += points / 2;
       else if (flag.severity === 'critical') result.missedCritical.push(flag.finding);
-      result.redFlags.push({ id: flag.id, severity: flag.severity, finding: flag.finding, found, status: found ? 'found' : 'missed', matched, evidence: flag.evidence, action: flag.action, points });
+      result.redFlags.push({ id: flag.id, severity: flag.severity, finding: flag.finding, found: status !== 'missed', status, matched: found ? matched : partialHits, evidence: flag.evidence, action: flag.action, points });
     }
     for (const item of answerKey.planItems ?? []) {
       const found = (item.keywords ?? []).some((keyword) => keywordHit(text, keyword));
@@ -507,12 +527,15 @@ export function applyReviewJudgments(grade, judgments = {}) {
       if (!flag.found && flag.severity === 'critical') next.missedCritical.push(flag.finding);
       continue;
     }
-    const before = flag.found ? flag.points : (flag.status === 'partial' ? flag.points / 2 : 0);
-    const after = status === 'found' ? flag.points : (status === 'partial' ? flag.points / 2 : 0);
-    delta += after - before;
-    flag.status = status;
-    flag.found = status !== 'missed';
-    if (status === 'missed' && flag.severity === 'critical') next.missedCritical.push(flag.finding);
+    // The reviewer may raise a status, never lower it below what the plan
+    // text itself shows.
+    const rank = { missed: 0, partial: 1, found: 2 };
+    const final = rank[status] >= rank[flag.status] ? status : flag.status;
+    const value = (s2) => (s2 === 'found' ? flag.points : (s2 === 'partial' ? flag.points / 2 : 0));
+    delta += value(final) - value(flag.status);
+    flag.status = final;
+    flag.found = final !== 'missed';
+    if (final === 'missed' && flag.severity === 'critical') next.missedCritical.push(flag.finding);
   }
   next.earned = grade.earned + delta;
   if (next.decision && [0, 1, 2].includes(judgments.decisionPoints)) {
@@ -592,7 +615,8 @@ export function buildPlanReviewContext({ patient, chartDigest, values, answerKey
     } : null,
     offlineGrade: grade ? {
       percent: grade.percent,
-      keywordMatches: Object.fromEntries(grade.redFlags.map((f) => [f.id, f.found ? 'found' : 'missed'])),
+      minimumStatus: Object.fromEntries(grade.redFlags.map((f) => [f.id, f.status])),
+      matchedWords: Object.fromEntries(grade.redFlags.filter((f) => f.matched?.length).map((f) => [f.id, f.matched])),
       decision: grade.decision, asa: grade.asa,
       calcChecks: grade.calcChecks.filter((check) => check.status !== 'n/a'),
     } : null,

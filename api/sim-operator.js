@@ -72,13 +72,14 @@ ${contextJson}`;
   if (mode === 'plan') {
     return `${shared}
 
-TASK: Review the trainee's preoperative care plan before the simulation starts. CONTEXT has the chart digest (chart), the trainee's plan (plan, every field they wrote, including the decision rationale), a draft faculty answer key (answerKey, each red flag has an id), and a keyword pre-grade (offlineGrade.keywordMatches, which misses misspellings and paraphrase).
+TASK: Review the trainee's preoperative care plan before the simulation starts. CONTEXT has the chart digest (chart), the trainee's plan (plan, every field they wrote, including the decision rationale), a draft faculty answer key (answerKey, each red flag has an id), and a pre-grade from the plan text (offlineGrade.minimumStatus per flag id, with the words it matched in offlineGrade.matchedWords).
 
 Judge each red flag yourself from everything the trainee wrote, anywhere in the plan:
 - found: they identified the problem and what to do about it, even misspelled ("clopidadrel" counts as clopidogrel) or in their own words.
 - partial: they named the drug, lab, device or event at the center of the finding, or acted on it, without naming the full problem. Example: "call the surgeon because of the heparin infusion and ACT" is partial for possible HIT, even without the words HIT or platelets. Partial is not missed.
 - missed: nothing in the plan touches it.
 Before marking anything missed, search the whole plan, including the decision rationale, for the central drug, lab or device by name or misspelling.
+Never rate a flag below offlineGrade.minimumStatus; the plan text already shows that much. Your review must describe each flag at the level you rate it (say "you flagged the heparin infusion but did not name possible HIT", not "you missed HIT").
 Also judge the go or delay call (decisionPoints): 2 if it matches answerKey.decision or is defensible, 1 if the rationale points the right way but the choice does not, 0 otherwise.
 
 Return ONE JSON object and nothing else:

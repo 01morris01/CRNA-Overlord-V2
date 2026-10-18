@@ -341,3 +341,27 @@ describe('instructor moves the student', () => {
     expect(view).toMatch(/openLaunchChooser\(\)/);
   });
 });
+
+describe('partial credit floor', () => {
+  it('gives W. Tate partial credit for the heparin infusion and the pacer, and keeps look alike drugs apart', async () => {
+    const { gradeCarePlan, keywordHit, planText } = await import('../../ui/carePlanSheet.js');
+    const read = (path) => JSON.parse(readFileSync(resolve(root, 'data/mock-or-day', path), 'utf8'));
+    const values = { asa: '4', decision: 'proceed_mod', prob3_problem: 'Pacer', decisionRationale: 'The surgeon or primary team d/t heperan infusion and ACT. Lisinopril taken and Clopidadrel not held long enough' };
+    const grade = gradeCarePlan(values, read('answer-keys/p11.json'), read('patients/p11.json'));
+    const status = Object.fromEntries(grade.redFlags.map((flag) => [flag.id, flag.status]));
+    expect(status).toMatchObject({ hit: 'partial', pacemaker: 'partial', clopidogrel: 'found', acei: 'found' });
+    expect(grade.missedCritical).toEqual([]);
+    for (const [word, target] of [['propofol', 'propranolol'], ['ketorolac', 'ketamine'], ['epinephrine', 'ephedrine'], ['nicardipine', 'nifedipine'], ['dopamine', 'dobutamine'], ['hydromorphone', 'hydralazine']]) {
+      expect(keywordHit(planText({ x: word }), target), `${word} vs ${target}`).toBe(false);
+    }
+  });
+
+  it('never lets the reviewer rate a finding below what the plan text shows', async () => {
+    const { gradeCarePlan, applyReviewJudgments } = await import('../../ui/carePlanSheet.js');
+    const read = (path) => JSON.parse(readFileSync(resolve(root, 'data/mock-or-day', path), 'utf8'));
+    const grade = gradeCarePlan({ decisionRationale: 'heparin infusion, clopidogrel too recent' }, read('answer-keys/p11.json'), read('patients/p11.json'));
+    const judged = applyReviewJudgments(grade, { flags: { hit: 'missed', clopidogrel: 'missed', pacemaker: 'found' } });
+    const status = Object.fromEntries(judged.redFlags.map((flag) => [flag.id, flag.status]));
+    expect(status).toMatchObject({ hit: 'partial', clopidogrel: 'found', pacemaker: 'found' });
+  });
+});
