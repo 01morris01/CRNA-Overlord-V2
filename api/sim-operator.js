@@ -4,6 +4,10 @@
    - ask:   the trainee asks Booth something mid case (engine snapshots and
             the action log, ui/simOperator.js caseContext).
    - roast: end of case review, sarcastic but specific.
+   - student: the student talks to Booth from their own screen ("I'm going to
+            intubate now"). Returns JSON: a reply to the student plus a private
+            note to the sim operator with whitelisted instructor actions
+            (ui/boothStudent.js).
    - plan:  Mock OR Day care plan review. Context holds the chart digest, the
             trainee's care plan, the draft answer key, and the offline grade
             (ui/carePlanSheet.js buildPlanReviewContext).
@@ -14,8 +18,8 @@
    Uses the same ANTHROPIC_API_KEY as grade-recall and patient-chat. Without a
    key this returns 501 and the client falls back to offline replies.
 
-   Request body: { mode: 'ask'|'roast'|'plan', question?, meanness: 1|2|3, context, history? }
-   Response: { reply: string }
+   Request body: { mode: 'ask'|'roast'|'plan'|'student', question?, meanness: 1|2|3, context, history? }
+   Response: { reply: string } (student mode: the reply text is the model's JSON)
 */
 
 const MODEL = process.env.SIM_OPERATOR_MODEL || process.env.PATIENT_CHAT_MODEL || 'claude-haiku-4-5-20251001';
@@ -42,6 +46,28 @@ RULES. These protect a teaching simulation. Never break them.
 4. Never discourage asking for help, calling for help, or pausing to think. If the trainee asks for help, help them, with attitude.
 5. Do not use dashes as punctuation. Use commas, periods, or parentheses.
 6. Plain text only. No markdown, no lists with symbols, no emoji.`;
+
+  if (mode === 'student') {
+    return `${shared}
+
+TASK: The student is talking to you from their screen during the simulation. CONTEXT.student has what they said (statement), how it was classified (intent, tense: plan, done, question, other), and an engine based analysis of what they may have missed (analysis.issues, each with missed and consequence). CONTEXT.allowedSuggestions lists the only instructor actions you may recommend, by id.
+
+Write TWO things and return them as ONE JSON object and nothing else:
+{"reply": "...", "operatorNote": "...", "suggestions": ["id", ...]}
+
+reply (spoken to the student in your voice, 1 or 2 short sentences):
+- If tense is plan: NEVER name, hint at, or ask leading questions about anything in analysis.issues or the chart findings. Let them commit. Sarcastic doubt is fine ("Bold. Let's see how that goes."), but no clue about what is wrong. If analysis.issues is empty, grudgingly approve.
+- If tense is done: the action is history, so you may name the most important issue sarcastically, about the decision and never about the person, then one short teaching point. If no issues, a grudging nod plus a reminder to confirm on the monitor.
+- If tense is question: answer like a good preceptor without giving away a hidden complication or an issue from analysis.issues.
+- No insults about the student as a person (no "idiot", nothing about intelligence or worth). Mock the decision.
+
+operatorNote (private, for the instructor, plain and specific, no attitude, 2 to 4 sentences): what they said, what they may have missed and what it would cause (use analysis.issues and the chart in CONTEXT.mockOrCase if present), and how the instructor might apply or debrief the consequence. If nothing was missed, say so.
+
+suggestions: zero or more ids from CONTEXT.allowedSuggestions that fit the issues. Never invent ids.
+
+CONTEXT:
+${contextJson}`;
+  }
 
   if (mode === 'plan') {
     return `${shared}
@@ -86,13 +112,13 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(501).json({ error: 'sim_operator_unavailable', reason: 'ANTHROPIC_API_KEY not configured' });
 
   const body = req.body ?? {};
-  const mode = body.mode === 'roast' || body.mode === 'plan' ? body.mode : 'ask';
+  const mode = ['roast', 'plan', 'student'].includes(body.mode) ? body.mode : 'ask';
   const question = asString(body.question, 400);
-  if (mode === 'ask' && !question.trim()) return res.status(400).json({ error: 'Missing question' });
+  if ((mode === 'ask' || mode === 'student') && !question.trim()) return res.status(400).json({ error: 'Missing question' });
   const meanness = [1, 2, 3].includes(body.meanness) ? body.meanness : 2;
 
   const system = buildSystemPrompt({ mode, meanness, context: body.context });
-  const priorTurns = mode === 'ask'
+  const priorTurns = mode === 'ask' || mode === 'student'
     ? (Array.isArray(body.history) ? body.history : [])
       .slice(-6)
       .map((turn) => ({
@@ -102,6 +128,7 @@ export default async function handler(req, res) {
       .filter((turn) => turn.content.length > 0)
     : [];
   const userContent = mode === 'roast' ? 'Roast my case.' : (mode === 'plan' ? 'Grade my care plan.' : question);
+  // student mode: the statement is also inside CONTEXT; the user turn repeats it.
   // The Messages API needs alternating roles starting with user.
   const messages = [];
   for (const turn of [...priorTurns, { role: 'user', content: userContent }]) {
@@ -118,7 +145,7 @@ export default async function handler(req, res) {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: mode === 'ask' ? 220 : 500, system, messages }),
+      body: JSON.stringify({ model: MODEL, max_tokens: mode === 'ask' ? 220 : (mode === 'student' ? 400 : 500), system, messages }),
     });
     if (!response.ok) return res.status(502).json({ error: 'sim_operator_error', details: response.status });
     const data = await response.json();

@@ -1616,6 +1616,17 @@ export class SimRunner {
 
   intubate() { return this.attemptIntubation(); }
 
+  // Instructor control: fail the intubation attempt in progress, or the next one.
+  failIntubationAttempt() {
+    const result = this.a.failIntubationAttempt();
+    if (result.ok) {
+      this.logEvent('Instructor', `Intubation attempt ${result.attemptNumber} set to fail`, {
+        instructorAction: 'fail_intubation', attemptNumber: result.attemptNumber, target: result.target,
+      });
+    }
+    return result;
+  }
+
   extubate() {
     const result = this.p.transitionAirwayDevice(AirwayDevice.Extubated);
     if (!result.ok) return result;

@@ -349,4 +349,9 @@ buildList();
 const h0 = location.hash.slice(1), s0 = PTS.findIndex(P => P.id === h0);
 go(s0 >= 0 ? s0 : 0, 0);
 </script>
+<script>
+// Opened for one patient (student workstation, instructor chart button): hide
+// the OR schedule so the chart is just this patient's.
+if (new URLSearchParams(location.search).has('patient')) document.querySelector('.wrap')?.classList.add('single');
+</script>
 </html>

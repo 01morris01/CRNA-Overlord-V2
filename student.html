@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#03060c">
+  <title>Student Workstation | CRNA Overlord</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@600;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/live-sim.css">
+  <link rel="stylesheet" href="assets/css/student.css">
+</head>
+<body class="student-body">
+  <div class="student-fence" role="note">Educational simulation. Fictitious patients. Not for clinical use.</div>
+
+  <header class="student-header">
+    <div>
+      <p class="student-eyebrow">MOCK OR DAY · STUDENT WORKSTATION</p>
+      <h1 id="student-patient-title">Choose your patient</h1>
+      <p id="student-patient-sub" class="student-sub">Work through each step in order. Booth is listening.</p>
+    </div>
+    <div class="student-header-actions">
+      <button id="student-toggle-booth" type="button" aria-expanded="true" aria-controls="booth-dock">BOOTH</button>
+      <button id="student-start-over" type="button" class="student-quiet">START OVER</button>
+    </div>
+  </header>
+
+  <nav class="student-steps" aria-label="Preop steps">
+    <ol id="student-stepper">
+      <li><button type="button" data-step-tab="patient"><span>1</span>Patient</button></li>
+      <li><button type="button" data-step-tab="chart"><span>2</span>Chart review</button></li>
+      <li><button type="button" data-step-tab="interview"><span>3</span>Interview</button></li>
+      <li><button type="button" data-step-tab="plan"><span>4</span>Care plan</button></li>
+      <li><button type="button" data-step-tab="grade"><span>5</span>Booth's grade</button></li>
+      <li><button type="button" data-step-tab="or"><span>6</span>Into the OR</button></li>
+    </ol>
+  </nav>
+
+  <div class="student-layout">
+    <main class="student-main">
+      <!-- 1. Patient -->
+      <section class="student-step" data-step="patient" aria-labelledby="step-patient-heading">
+        <header class="student-step-head">
+          <h2 id="step-patient-heading">1 · Pick today's patient</h2>
+          <p>The OR schedule for Tuesday 10/27/2026. Patients marked chart only are too small for the physiology engine; you can still do their full preop.</p>
+        </header>
+        <label class="student-filter" for="student-filter"><span>Filter</span><input id="student-filter" type="search" placeholder="Name, procedure, room" autocomplete="off"></label>
+        <div id="student-schedule" class="student-schedule" role="list"><p class="student-empty">Loading the schedule...</p></div>
+      </section>
+
+      <!-- 2. Chart review -->
+      <section class="student-step" data-step="chart" aria-labelledby="step-chart-heading" hidden>
+        <header class="student-step-head">
+          <h2 id="step-chart-heading">2 · Review the chart</h2>
+          <p>Read it like the case is yours: allergies, meds and last doses, labs, studies, prior anesthetics, NPO, consents, and every note. Check each item off when you have looked.</p>
+        </header>
+        <div class="student-chart-wrap">
+          <iframe id="student-chart-frame" class="student-chart-frame" title="Patient chart"></iframe>
+          <a id="student-chart-newtab" class="student-link" href="/mock-or-day/ehr.html" target="_blank" rel="noopener">Open the chart in a new tab</a>
+        </div>
+        <fieldset class="student-checklist">
+          <legend>Chart review checklist</legend>
+          <label><input type="checkbox" data-review="allergies"> Allergies and reactions</label>
+          <label><input type="checkbox" data-review="meds"> Home meds, last doses, MAR</label>
+          <label><input type="checkbox" data-review="labs"> Labs, ECG, imaging, studies</label>
+          <label><input type="checkbox" data-review="history"> Problems, history, prior anesthetics</label>
+          <label><input type="checkbox" data-review="logistics"> NPO, consents, blood bank, orders</label>
+          <label><input type="checkbox" data-review="notes"> Every note, newest to oldest</label>
+        </fieldset>
+      </section>
+
+      <!-- 3. Interview -->
+      <section class="student-step" data-step="interview" aria-labelledby="step-interview-heading" hidden>
+        <header class="student-step-head">
+          <h2 id="step-interview-heading">3 · Interview the patient</h2>
+          <p>Ask out loud or type. The patient only knows what is in the chart. Ask at least three questions before moving on; confirm what the chart left unclear.</p>
+        </header>
+        <section id="live-patient-interview" class="live-patient-interview student-interview" aria-labelledby="patient-interview-heading">
+          <div class="live-case-header">
+            <p class="live-eyebrow">VOICE INTERVIEW</p>
+            <h3 id="patient-interview-heading">Talk with the patient</h3>
+          </div>
+          <div id="patient-interview-transcript" class="patient-interview-transcript" role="log" aria-live="polite" aria-label="Interview transcript"></div>
+          <div class="patient-interview-controls">
+            <button id="patient-interview-mic" type="button" class="patient-interview-mic" aria-pressed="false" title="Speak your question">SPEAK</button>
+            <input id="patient-interview-input" type="text" placeholder="When did you last eat or drink anything?" autocomplete="off" aria-label="Question for the patient">
+            <button id="patient-interview-send" type="button" class="live-primary">ASK</button>
+          </div>
+          <output id="patient-interview-status" class="patient-interview-status" aria-live="polite"></output>
+        </section>
+        <p id="student-interview-count" class="student-count">0 of 3 questions asked.</p>
+      </section>
+
+      <!-- 4. Care plan -->
+      <section class="student-step student-plan" data-step="plan" aria-labelledby="step-plan-heading" hidden>
+        <header class="student-step-head">
+          <h2 id="step-plan-heading">4 · Write the care plan</h2>
+          <p>Both pages of the sheet. Patient details came from the chart; the thinking is yours. Submit when the required items are done: ASA, go or no go, technique, airway plan A, and at least three problems.</p>
+        </header>
+        <div id="student-plan-host"></div>
+      </section>
+
+      <!-- 5. Grade -->
+      <section class="student-step" data-step="grade" aria-labelledby="step-grade-heading" hidden>
+        <header class="student-step-head">
+          <h2 id="step-grade-heading">5 · Booth's grade</h2>
+          <p>Read what you missed before you touch the patient. You can go back and fix the plan, then resubmit.</p>
+        </header>
+        <div id="student-grade-host" class="student-grade"><p class="student-empty">Submit the care plan first.</p></div>
+      </section>
+
+      <!-- 6. OR -->
+      <section class="student-step" data-step="or" aria-labelledby="step-or-heading" hidden>
+        <header class="student-step-head">
+          <h2 id="step-or-heading">6 · Into the OR</h2>
+          <p>The instructor runs the case from the console. You work from the monitor, and you talk to Booth from it the whole time: tell him what you are doing before you do it, and when it is done.</p>
+        </header>
+        <div class="student-or">
+          <div id="student-or-status" class="student-or-status" data-state="waiting">Waiting for the instructor console.</div>
+          <a id="student-open-monitor" class="student-primary-link" href="/live-sim-display.html?student=1">OPEN THE MONITOR</a>
+          <ul class="student-or-tips">
+            <li>Say it before you do it: "Booth, I'm going to intubate now."</li>
+            <li>Say it when it is done: "Booth, the tube is in."</li>
+            <li>Ask him anything: "Booth, why is my pressure dropping?"</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="student-step-nav">
+        <button id="student-back" type="button" class="student-quiet">BACK</button>
+        <output id="student-gate" class="student-gate" aria-live="polite"></output>
+        <button id="student-next" type="button" class="student-primary">NEXT</button>
+      </footer>
+    </main>
+
+    <aside class="student-side" id="student-side"></aside>
+  </div>
+
+  <script type="module" src="ui/studentWorkflow.js"></script>
+</body>
+</html>

@@ -5,11 +5,27 @@
    501 and the client falls back to the browser's built-in speech synthesis, so
    the interview still works (with a plainer voice) before a key is added.
 
-   Request body: { text: string, voiceId?: string, voice?: 'operator' }
+   Request body: { text: string, voiceId?: string, voice?: 'operator'|'patient-male'|'patient-female' }
+
+   Voices: Booth must never sound like the patient. Each role has its own
+   built in ElevenLabs premade voice, overridable by env var:
+   - operator (Booth):  ELEVENLABS_OPERATOR_VOICE_ID, default "Clyde" (gruff)
+   - patient, male:     ELEVENLABS_PATIENT_MALE_VOICE_ID, default "Adam"
+   - patient, female:   ELEVENLABS_PATIENT_FEMALE_VOICE_ID or ELEVENLABS_VOICE_ID, default "Rachel"
+   Before this, Booth fell back to the patient voice whenever the operator
+   variable was unset, so both sounded the same.
    Response: audio/mpeg on success; JSON error otherwise.
 */
 
-const DEFAULT_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM'; // "Rachel" preset
+export const OPERATOR_DEFAULT_VOICE_ID = '2EiwWnXFnvU5JabPnv8n'; // "Clyde" preset
+export const PATIENT_MALE_DEFAULT_VOICE_ID = 'pNInz6obpgDQGcFmaJgB'; // "Adam" preset
+
+export function resolveVoice(voice, env = process.env) {
+  if (voice === 'operator') return env.ELEVENLABS_OPERATOR_VOICE_ID || OPERATOR_DEFAULT_VOICE_ID;
+  if (voice === 'patient-male') return env.ELEVENLABS_PATIENT_MALE_VOICE_ID || PATIENT_MALE_DEFAULT_VOICE_ID;
+  if (voice === 'patient-female') return env.ELEVENLABS_PATIENT_FEMALE_VOICE_ID || env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
+  return env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
+}
 const MODEL_ID = process.env.ELEVENLABS_MODEL_ID || 'eleven_turbo_v2_5';
 
 export default async function handler(req, res) {
@@ -27,7 +43,7 @@ export default async function handler(req, res) {
   const operatorVoice = body.voice === 'operator';
   const voiceId = typeof body.voiceId === 'string' && body.voiceId.trim()
     ? body.voiceId.trim()
-    : (operatorVoice ? (process.env.ELEVENLABS_OPERATOR_VOICE_ID || DEFAULT_VOICE_ID) : DEFAULT_VOICE_ID);
+    : resolveVoice(body.voice);
   const modelId = operatorVoice ? (process.env.ELEVENLABS_OPERATOR_MODEL_ID || MODEL_ID) : MODEL_ID;
 
   try {
@@ -41,7 +57,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         text,
         model_id: modelId,
-        voice_settings: { stability: 0.5, similarity_boost: 0.75 },
+        voice_settings: operatorVoice
+          ? { stability: 0.35, similarity_boost: 0.8, style: 0.45 }
+          : { stability: 0.5, similarity_boost: 0.75 },
       }),
     });
     if (!response.ok) {

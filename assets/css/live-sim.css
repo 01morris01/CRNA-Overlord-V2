@@ -1243,3 +1243,28 @@
   body.printing-careplan .cp-field textarea,
   body.printing-careplan .cp-table input { background: #fff; color: #111; border-color: #999; }
 }
+
+/* ---------- Booth's private notes to the sim operator ---------- */
+.live-operator-notes-panel { margin-top: .9rem; padding-top: .75rem; border-top: 1px solid var(--line); }
+.live-operator-notes-panel h3 { margin: 0 0 .25rem; font-family: var(--fd); font-size: 1rem; letter-spacing: .04em; color: var(--amber); }
+.live-operator-notes { display: grid; gap: .6rem; margin: .5rem 0 0; padding: 0; list-style: none; max-height: 420px; overflow-y: auto; }
+.live-operator-note { padding: .6rem .7rem; border: 1px solid var(--line-2); border-left-width: 4px; border-radius: 6px; background: var(--abyss); }
+.live-operator-note-critical { border-left-color: var(--red); }
+.live-operator-note-major { border-left-color: var(--amber); }
+.live-operator-note-minor, .live-operator-note-none { border-left-color: var(--green-2); }
+.live-operator-note p { margin: 0 0 .35rem; font-size: .82rem; line-height: 1.45; }
+.live-operator-note-head { color: var(--txt-2); font-family: var(--fm); font-size: .72rem !important; }
+.live-operator-note-actions { display: flex; flex-wrap: wrap; gap: .4rem; }
+.live-operator-note-actions button { min-height: 32px; font-size: .68rem; }
+.live-operator-student p { color: var(--blue); }
+
+#student-workstation-launch {
+  display: block;
+  align-self: center;
+  width: min(100%, 36rem);
+  margin: 0 0 .85rem;
+  border-color: rgba(255, 176, 0, .55);
+  color: var(--amber);
+  text-align: center;
+  text-decoration: none;
+}
