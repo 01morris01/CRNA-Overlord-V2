@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v60-student-workstation-2026-10-18';
+const CACHE_VERSION = 'v61-instructor-student-sim-2026-10-18';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

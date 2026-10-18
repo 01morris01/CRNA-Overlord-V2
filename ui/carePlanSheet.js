@@ -333,9 +333,19 @@ export function checkCalculations(values, reference) {
 
 /* ---------- grading ---------- */
 
+/* Fields copied from the chart (autofill, COPY LATEST LABS) are not the
+   student's thinking and never earn credit. */
+const CHART_COPIED_FIELDS = new Set(['student', 'preceptor', 'date', 'caseNumber', 'procedure', 'indication', 'surgeon',
+  'position', 'duration', 'ageSex', 'heightCm', 'weightKg', 'allergies', 'npoSolids', 'npoClears', 'codeStatus',
+  'vitalBp', 'vitalHr', 'vitalRr', 'vitalSpo2', 'vitalTemp']);
+
+function isChartCopied(key) {
+  return CHART_COPIED_FIELDS.has(key) || /^med\d+_(name|last)$/.test(key) || /^lab[A-Z]/.test(key);
+}
+
 export function planText(values = {}) {
   return Object.entries(values)
-    .filter(([key]) => !['student', 'preceptor', 'date', 'caseNumber'].includes(key))
+    .filter(([key]) => !isChartCopied(key))
     .map(([, value]) => (typeof value === 'string' ? value : ''))
     .join(' \n ')
     .toLowerCase();
@@ -343,16 +353,95 @@ export function planText(values = {}) {
 
 function escapeRegExp(text) { return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+/* Optimal string alignment distance (Levenshtein plus adjacent swaps). */
+export function editDistance(a, b) {
+  const x = str(a);
+  const y = str(b);
+  const d = Array.from({ length: x.length + 1 }, (_, i) => [i, ...Array(y.length).fill(0)]);
+  for (let j = 1; j <= y.length; j += 1) d[0][j] = j;
+  for (let i = 1; i <= x.length; i += 1) {
+    for (let j = 1; j <= y.length; j += 1) {
+      const cost = x[i - 1] === y[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && x[i - 1] === y[j - 2] && x[i - 2] === y[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+  }
+  return d[x.length][y.length];
+}
+
+/* Misspellings students make under time pressure ("clopidadrel", "heperan")
+   should still count. Whole words only, same first letter, and a small budget:
+   one edit for 5 or 6 letters, two for 7 or more. Short words stay exact. */
+// Prefixes that flip the meaning; a misspelling must never cross them.
+const OPPOSITE_PREFIXES = [['hyper', 'hypo'], ['intra', 'inter'], ['hyper', 'hyp']];
+
+function crossesOpposite(word, target) {
+  return OPPOSITE_PREFIXES.some(([x, y]) => (word.startsWith(x) && target.startsWith(y) && !target.startsWith(x))
+    || (target.startsWith(x) && word.startsWith(y) && !word.startsWith(x)));
+}
+
+function fuzzyWordMatch(word, target) {
+  if (target.length < 5 || word[0] !== target[0]) return false;
+  if (crossesOpposite(word, target)) return false;
+  const budget = target.length >= 7 ? 2 : 1;
+  if (Math.abs(word.length - target.length) > budget) return false;
+  return editDistance(word, target) <= budget;
+}
+
+const textWordsCache = new Map();
+function textWords(text) {
+  if (!textWordsCache.has(text)) {
+    if (textWordsCache.size > 20) textWordsCache.clear();
+    textWordsCache.set(text, text.match(/[a-z0-9]+/g) ?? []);
+  }
+  return textWordsCache.get(text);
+}
+
 /* Short keywords (rsi, ett, tof) need word boundaries so 'rsi' does not match
-   'versions'. Longer stems (sickl, hydrat) match as prefixes. */
+   'versions'. Longer stems (sickl, hydrat) match as prefixes. Whole word
+   keywords also match close misspellings. */
 export function keywordHit(text, keyword) {
   const k = str(keyword).toLowerCase().trim();
   if (!k) return false;
   if (k.length <= 4) return new RegExp(`(^|[^a-z0-9])${escapeRegExp(k)}([^a-z0-9]|$)`).test(text);
-  return text.includes(k);
+  if (text.includes(k)) return true;
+  const parts = k.match(/[a-z0-9]+/g) ?? [];
+  if (parts.length === 0) return false;
+  const words = textWords(text);
+  // Every part of the keyword must appear, in order and adjacent, allowing
+  // misspellings in the longer parts.
+  for (let i = 0; i + parts.length <= words.length; i += 1) {
+    let ok = true;
+    for (let j = 0; j < parts.length && ok; j += 1) {
+      const word = words[i + j];
+      const part = parts[j];
+      ok = word === part || fuzzyWordMatch(word, part);
+    }
+    if (ok) return true;
+  }
+  return false;
 }
 
 export const SEVERITY_POINTS = Object.freeze({ critical: 5, major: 2, minor: 1 });
+
+/* Partial credit floor: the plan names the drug, lab or device at the center
+   of a finding (taken from the finding's own words, plus common short forms)
+   without the full problem. "heperan infusion" for possible HIT, "pacer" for a
+   pacemaker plan. */
+const PARTIAL_STOPWORDS = new Set(['possible', 'before', 'missing', 'without', 'during', 'patient', 'surgery', 'planned',
+  'history', 'chronic', 'severe', 'recent', 'current', 'morning', 'incomplete', 'pending', 'ordered', 'concern', 'starting',
+  'continue', 'management', 'elevated', 'reduced', 'significant', 'evaluation', 'today', 'induced', 'related', 'associated',
+  'timing', 'vessel', 'between', 'inhibitor', 'without', 'unclear', 'unknown', 'given', 'taken', 'remains', 'despite']);
+const PARTIAL_ALIASES = { pacemaker: ['pacer', 'ppm', 'icd', 'device'], defibrillator: ['icd', 'device'], heparin: ['heparin', 'hep'],
+  anticoagulation: ['anticoag', 'blood thinner'], thrombocytopenia: ['platelets', 'plt'], hypoglycemia: ['glucose', 'sugar'],
+  hyperkalemia: ['potassium'], hypokalemia: ['potassium'], insulin: ['insulin'], stenosis: ['stenosis'] };
+
+export function partialTerms(flag) {
+  const words = (str(flag?.finding).toLowerCase().match(/[a-z]{6,}/g) ?? []).filter((word) => !PARTIAL_STOPWORDS.has(word));
+  const terms = new Set(words);
+  for (const word of words) for (const alias of PARTIAL_ALIASES[word] ?? []) terms.add(alias);
+  return [...terms];
+}
 
 /* A plan that misses a critical chart finding is not a passing plan, however
    tidy the rest of it is. */
@@ -380,10 +469,13 @@ export function gradeCarePlan(values = {}, answerKey = null, patient = null) {
       const points = SEVERITY_POINTS[flag.severity] ?? 1;
       const matched = (flag.keywords ?? []).filter((keyword) => keywordHit(text, keyword));
       const found = matched.length > 0;
+      const partialHits = found ? [] : partialTerms(flag).filter((term) => keywordHit(text, term));
+      const status = found ? 'found' : (partialHits.length > 0 ? 'partial' : 'missed');
       result.possible += points;
-      if (found) result.earned += points;
+      if (status === 'found') result.earned += points;
+      else if (status === 'partial') result.earned += points / 2;
       else if (flag.severity === 'critical') result.missedCritical.push(flag.finding);
-      result.redFlags.push({ id: flag.id, severity: flag.severity, finding: flag.finding, found, matched, evidence: flag.evidence, action: flag.action });
+      result.redFlags.push({ id: flag.id, severity: flag.severity, finding: flag.finding, found: status !== 'missed', status, matched: found ? matched : partialHits, evidence: flag.evidence, action: flag.action, points });
     }
     for (const item of answerKey.planItems ?? []) {
       const found = (item.keywords ?? []).some((keyword) => keywordHit(text, keyword));
@@ -417,11 +509,67 @@ export function gradeCarePlan(values = {}, answerKey = null, patient = null) {
   result.board = { entered: values.boardAnswer ?? '', expected: BOARD_QUESTION.answer, points: boardPoints };
   if (patient) result.calcChecks = checkCalculations(values, computeReferenceCalcs(patient));
   result.completeness = missingRequired(values);
+  finalizePercent(result);
+  result.source = 'keywords';
+  return result;
+}
+
+function finalizePercent(result) {
   const raw = result.possible > 0 ? Math.round((result.earned / result.possible) * 100) : 0;
   result.rawPercent = raw;
   result.capped = result.missedCritical.length > 0 && raw > MISSED_CRITICAL_CAP;
   result.percent = result.capped ? MISSED_CRITICAL_CAP : raw;
   return result;
+}
+
+/* Booth's reviewer reads the whole plan, misspellings and all, and judges
+   each finding found, partial or missed (and the go or delay call). Those
+   judgments replace the keyword guesses so the score matches what he says.
+   Partial earns half. Unknown ids and values are ignored. */
+export function applyReviewJudgments(grade, judgments = {}) {
+  if (!grade || !judgments || typeof judgments !== 'object') return grade;
+  const statuses = judgments.flags && typeof judgments.flags === 'object' ? judgments.flags : {};
+  const next = { ...grade, redFlags: grade.redFlags.map((flag) => ({ ...flag })), missedCritical: [] };
+  let delta = 0;
+  for (const flag of next.redFlags) {
+    const status = statuses[flag.id];
+    if (!['found', 'partial', 'missed'].includes(status)) {
+      if (!flag.found && flag.severity === 'critical') next.missedCritical.push(flag.finding);
+      continue;
+    }
+    // The reviewer may raise a status, never lower it below what the plan
+    // text itself shows.
+    const rank = { missed: 0, partial: 1, found: 2 };
+    const final = rank[status] >= rank[flag.status] ? status : flag.status;
+    const value = (s2) => (s2 === 'found' ? flag.points : (s2 === 'partial' ? flag.points / 2 : 0));
+    delta += value(final) - value(flag.status);
+    flag.status = final;
+    flag.found = final !== 'missed';
+    if (final === 'missed' && flag.severity === 'critical') next.missedCritical.push(flag.finding);
+  }
+  next.earned = grade.earned + delta;
+  if (next.decision && [0, 1, 2].includes(judgments.decisionPoints)) {
+    next.earned += judgments.decisionPoints - next.decision.points;
+    next.decision = { ...next.decision, points: judgments.decisionPoints };
+  }
+  next.source = 'review';
+  return finalizePercent(next);
+}
+
+/* The plan reviewer answers in JSON: { review, flags: { id: status }, decisionPoints }. */
+export function parsePlanReview(text) {
+  if (typeof text !== 'string') return null;
+  const start = text.indexOf('{');
+  const end = text.lastIndexOf('}');
+  if (start !== -1 && end > start) {
+    try {
+      const data = JSON.parse(text.slice(start, end + 1));
+      if (typeof data.review === 'string' && data.review.trim()) {
+        return { review: data.review.trim(), flags: data.flags ?? {}, decisionPoints: data.decisionPoints };
+      }
+    } catch { /* fall through to plain text */ }
+  }
+  return text.trim() ? { review: text.trim(), flags: {}, decisionPoints: undefined } : null;
 }
 
 /* START unlocks once these exist. Kept short: the sheet is long, and the gate
@@ -458,7 +606,7 @@ export function offlinePlanVerdict(grade, { meanness = 2 } = {}) {
   }
   const calcIssues = grade.calcChecks.filter((check) => check.status === 'check').map((check) => `${check.label} (yours ${check.entered}, reference ${check.expected})`);
   if (calcIssues.length > 0) lines.push(`Recheck: ${calcIssues.slice(0, 3).join('; ')}.`);
-  const hits = grade.redFlags.filter((f) => f.found && f.severity !== 'minor');
+  const hits = grade.redFlags.filter((f) => f.status === 'found' && f.severity !== 'minor');
   if (hits.length > 0) lines.push(`You did catch ${hits[0].finding.toLowerCase()}.`);
   return lines.join(' ');
 }
@@ -472,13 +620,13 @@ export function buildPlanReviewContext({ patient, chartDigest, values, answerKey
     plan: filled,
     answerKey: answerKey ? {
       status: answerKey.status, summary: answerKey.summary, asa: answerKey.asa, decision: answerKey.decision,
-      redFlags: (answerKey.redFlags ?? []).map(({ severity, finding, evidence, action }) => ({ severity, finding, evidence, action })),
+      redFlags: (answerKey.redFlags ?? []).map(({ id, severity, finding, evidence, action }) => ({ id, severity, finding, evidence, action })),
       planItems: (answerKey.planItems ?? []).map(({ domain, item }) => ({ domain, item })),
     } : null,
     offlineGrade: grade ? {
       percent: grade.percent,
-      found: grade.redFlags.filter((f) => f.found).map((f) => f.finding),
-      missed: grade.redFlags.filter((f) => !f.found).map((f) => `${f.severity}: ${f.finding}`),
+      minimumStatus: Object.fromEntries(grade.redFlags.map((f) => [f.id, f.status])),
+      matchedWords: Object.fromEntries(grade.redFlags.filter((f) => f.matched?.length).map((f) => [f.id, f.matched])),
       decision: grade.decision, asa: grade.asa,
       calcChecks: grade.calcChecks.filter((check) => check.status !== 'n/a'),
     } : null,
@@ -591,11 +739,11 @@ function percentClass(pct) { return pct >= 80 ? 'good' : (pct >= 55 ? 'fair' : '
 export function renderGradeMarkup(grade, { verdict = '', answerKey = null, aiPending = false } = {}) {
   if (!grade) return '<p class="cp-empty">Submit the plan to see the grade.</p>';
   const flagRows = grade.redFlags.map((flag) => `
-    <li class="cp-flag cp-flag-${flag.severity} ${flag.found ? 'cp-found' : 'cp-missed'}">
-      <span class="cp-flag-mark">${flag.found ? 'FOUND' : 'MISSED'}</span>
+    <li class="cp-flag cp-flag-${flag.severity} ${flag.status === 'partial' ? 'cp-partial' : (flag.found ? 'cp-found' : 'cp-missed')}">
+      <span class="cp-flag-mark">${flag.status === 'partial' ? 'PARTIAL' : (flag.found ? 'FOUND' : 'MISSED')}</span>
       <strong>${esc(flag.finding)}</strong> <small>${esc(flag.severity)}</small>
       <p>${esc(flag.evidence)}</p>
-      ${flag.found ? '' : `<p class="cp-flag-action">Expected: ${esc(flag.action)}</p>`}
+      ${flag.status === 'found' ? '' : `<p class="cp-flag-action">Expected: ${esc(flag.action)}</p>`}
     </li>`).join('');
   const items = grade.planItems.map((item) => `<li class="${item.found ? 'cp-found' : 'cp-missed'}">${item.found ? 'Yes' : 'No'} · ${esc(item.item)}</li>`).join('');
   const calcs = grade.calcChecks.filter((check) => check.status !== 'n/a').map((check) => `
@@ -604,7 +752,7 @@ export function renderGradeMarkup(grade, { verdict = '', answerKey = null, aiPen
   const asa = grade.asa ? `<p><strong>ASA:</strong> yours ${esc(grade.asa.entered || 'blank')}; key ${esc(grade.asa.expected)} (${grade.asa.points} of 1). <small>${esc(grade.asa.rationale)}</small></p>` : '';
   const board = `<p><strong>Board question:</strong> yours ${esc(grade.board.entered || 'blank')}; answer ${grade.board.expected}.</p>`;
   return `
-    <div class="cp-score cp-score-${percentClass(grade.percent)}"><strong>${grade.percent}%</strong><span>${grade.earned} of ${grade.possible} points${grade.capped ? ` · capped at ${MISSED_CRITICAL_CAP}% for a missed critical finding` : ''}</span></div>
+    <div class="cp-score cp-score-${percentClass(grade.percent)}"><strong>${grade.percent}%</strong><span>${Number(grade.earned.toFixed(1))} of ${grade.possible} points${grade.source === 'review' ? ' · judged by Booth\'s review' : ''}${grade.source === 'instructor' ? ' · filled in by your instructor from the answer key' : ''}${grade.capped ? ` · capped at ${MISSED_CRITICAL_CAP}% for a missed critical finding` : ''}</span></div>
     <div class="cp-verdict"><span class="cp-verdict-name">BOOTH</span><p id="careplan-verdict">${esc(verdict)}${aiPending ? ' <em>(Booth is reading your plan...)</em>' : ''}</p></div>
     ${answerKey?.status === 'draft' ? `<p class="cp-draft-note">${esc(answerKey.reviewNote ?? 'Draft answer key for faculty review.')}</p>` : ''}
     ${answerKey?.summary ? `<p class="cp-key-summary"><strong>Case:</strong> ${esc(answerKey.summary)}</p>` : ''}
@@ -721,7 +869,12 @@ export function createCarePlanController({
       });
       if (res.ok) {
         const data = await res.json();
-        if (typeof data?.reply === 'string' && data.reply.trim()) persist({ verdict: data.reply.trim(), verdictSource: 'ai' });
+        const review = parsePlanReview(data?.reply);
+        if (review) {
+          const judged = applyReviewJudgments(grade, review);
+          const stillComplete = judged.completeness.length === 0;
+          persist({ verdict: review.review, verdictSource: 'ai', grade: judged, submittedAt: stillComplete ? current.record?.submittedAt : null });
+        }
       }
     } catch { /* offline verdict stands */ }
     renderResult();
@@ -789,5 +942,104 @@ export function createCarePlanController({
       form?.removeEventListener?.('input', handleInput);
       root?.removeEventListener?.('keydown', handleKey);
     },
+  };
+}
+
+/* ---------- instructor fill ---------- */
+
+const TECHNIQUE_RULES = [
+  [/\bmac\b|sedation/, 'MAC'],
+  [/neuraxial|spinal|epidural|\bcse\b/, 'Neuraxial'],
+  [/\btiva\b/, 'TIVA'],
+  [/\blma\b|supraglottic/, 'GA with LMA'],
+];
+
+export function guessTechnique(answerKey) {
+  const items = (answerKey?.planItems ?? []).filter((item) => /technique|airway|induction|regional/.test(item.domain ?? ''));
+  const text = items.map((item) => item.item).join(' ').toLowerCase();
+  const general = /\bga\b|general|\bett\b|\brsi\b|\bdlt\b|intubat/.test(text);
+  if (general && /block|regional|epidural|paravertebral/.test(text)) return 'Combined GA and regional';
+  if (general) return /\btiva\b/.test(text) ? 'TIVA' : (/\blma\b/.test(text) && !/\bett\b|\brsi\b/.test(text) ? 'GA with LMA' : 'GA with ETT');
+  for (const [pattern, label] of TECHNIQUE_RULES) if (pattern.test(text)) return label;
+  return 'GA with ETT';
+}
+
+const DOMAIN_FIELDS = [
+  [/airway/, 'airwayPlanA'],
+  [/antibiotic/, 'antibiotic'],
+  [/monitor|access/, 'monitorsAccess'],
+  [/position/, 'positioning'],
+  [/ponv/, 'ponvProphylaxis'],
+  [/emergence|extubat/, 'extubationCriteria'],
+  [/disposition|postop|pacu/, 'pacuReport'],
+  [/blood|fluid|renal/, 'lossReplacement'],
+];
+
+/* The plan a student would have written if they caught everything in the
+   answer key: used when the instructor advances a student past the care
+   plan. Chart identifiers, labs and calculations come from the chart. */
+export function buildModelPlan(patient, answerKey) {
+  const values = { ...autofillFromChart(patient), ...labsFromChart(patient) };
+  const ref = computeReferenceCalcs(patient);
+  for (const key of ['bmi', 'ibw', 'lbw', 'ebv', 'abl', 'maintenanceRate', 'npoHours', 'npoDeficit']) {
+    if (ref[key] !== undefined) values[key] = String(ref[key]);
+  }
+  if (ref.targetHct) values.ablTarget = String(ref.targetHct);
+  values.date = new Date().toISOString().slice(0, 10);
+  values.student = 'Filled in by instructor';
+  if (!answerKey) return values;
+  values.asa = String(answerKey.asa?.suggested ?? '');
+  values.decision = decisionCategory(answerKey.decision?.recommendation);
+  values.decisionRationale = [answerKey.decision?.recommendation, answerKey.decision?.rationale].filter(Boolean).join('. ');
+  values.technique = guessTechnique(answerKey);
+  const leftovers = [];
+  for (const item of answerKey.planItems ?? []) {
+    // Spell out the specifics the key expects when the item text is generic
+    // ("PONV prophylaxis" becomes "PONV prophylaxis (ondansetron, dexamethasone)").
+    const lower = item.item.toLowerCase();
+    const named = (item.keywords ?? []).some((keyword) => keywordHit(lower, keyword));
+    const text = named || !(item.keywords ?? []).length ? item.item : `${item.item} (${item.keywords.join(', ')})`;
+    const target = DOMAIN_FIELDS.find(([pattern]) => pattern.test(item.domain ?? ''))?.[1];
+    if (target) values[target] = values[target] ? `${values[target]}; ${text}` : text;
+    else leftovers.push(text);
+  }
+  values.techniqueDetail = leftovers.join('; ');
+  if (!values.airwayPlanA) values.airwayPlanA = values.technique;
+  const order = { critical: 0, major: 1, minor: 2 };
+  (answerKey.redFlags ?? []).slice().sort((x, y) => order[x.severity] - order[y.severity]).slice(0, 7).forEach((flag, index) => {
+    values[`prob${index + 1}_problem`] = flag.finding;
+    values[`prob${index + 1}_implication`] = flag.implication ?? '';
+    values[`prob${index + 1}_plan`] = flag.action ?? '';
+  });
+  // A short key still needs three problems on the sheet: use plan elements.
+  let row = Math.min(7, (answerKey.redFlags ?? []).length) + 1;
+  for (const item of answerKey.planItems ?? []) {
+    if (row > 3) break;
+    values[`prob${row}_problem`] = item.item;
+    values[`prob${row}_plan`] = item.item;
+    row += 1;
+  }
+  values.reflection = answerKey.summary ?? '';
+  values.boardAnswer = BOARD_QUESTION.answer;
+  return values;
+}
+
+/* The stored record for an instructor filled plan, graded as the key itself. */
+export function buildInstructorPlanRecord(patient, answerKey, now = new Date()) {
+  const values = buildModelPlan(patient, answerKey);
+  const keyed = gradeCarePlan(values, answerKey, patient);
+  const grade = applyReviewJudgments(keyed, {
+    flags: Object.fromEntries((answerKey?.redFlags ?? []).map((flag) => [flag.id, 'found'])),
+    decisionPoints: 2,
+  });
+  grade.source = 'instructor';
+  return {
+    values,
+    grade,
+    verdict: 'Your instructor moved you past the care plan. This is the plan as the answer key would write it; read it before you go into the OR.',
+    verdictSource: 'instructor',
+    filledBy: 'instructor',
+    submittedAt: now.toISOString(),
+    savedAt: now.toISOString(),
   };
 }

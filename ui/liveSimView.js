@@ -33,7 +33,13 @@ import {
   renderOperatorStrip,
 } from './simOperatorView.js';
 import { createLiveSimTransport, projectLearnerMonitorSnapshot } from './liveSimTransport.js';
-import { createCarePlanController, renderCarePlanModal } from './carePlanSheet.js';
+import {
+  buildInstructorPlanRecord,
+  createCarePlanController,
+  loadStoredPlan,
+  renderCarePlanModal,
+  saveStoredPlan,
+} from './carePlanSheet.js';
 import {
   buildBoothCaseProfile,
   buildChartInterviewGrounding,
@@ -41,7 +47,13 @@ import {
   renderChartModal,
   renderMockOrPanel,
 } from './mockOrDay.js';
-import { createStudentChannel, readStudentSession } from './studentChannel.js';
+import {
+  createStudentChannel,
+  openWindowOnOtherScreen,
+  readStudentSession,
+  writeStudentSession,
+} from './studentChannel.js';
+import { advanceSession, STEPS as STUDENT_STEPS } from './studentWorkflow.js';
 
 let initialized = false;
 let runner = null;
@@ -52,6 +64,10 @@ let carePlan = null;
 let mockOr = null;
 let studentChannel = null;
 let studentHeartbeat = null;
+let studentMirror = null;
+const STUDENT_STEP_LABELS = Object.freeze({
+  patient: 'Patient', chart: 'Chart review', interview: 'Interview', plan: 'Care plan', grade: "Booth's grade", or: 'Into the OR',
+});
 let transport = null;
 let latestSnapshot = null;
 let view = null;
@@ -908,7 +924,7 @@ function renderShell() {
       <div class="live-header-actions">
         <output id="live-sim-clock" class="live-sim-clock" aria-label="Simulation time">00:00</output>
         <button id="live-open-display" type="button">OPEN DISPLAY</button>
-        <button id="live-open-student" type="button">STUDENT SCREEN</button>
+        <button id="live-open-student" type="button">OPEN STUDENT SCREEN</button>
         <button id="live-close" type="button" class="live-secondary">BACK TO MAP</button>
       </div>
     </header>
@@ -929,6 +945,7 @@ function renderShell() {
     <div class="live-sim-grid">
       <div class="live-sim-column">
         ${renderMockOrPanel()}
+        ${renderStudentLinkPanel()}
         ${renderLearnerCaseShell()}
         <section class="live-panel" aria-labelledby="live-case-heading">
           <h2 id="live-case-heading">Case flow</h2>
@@ -1112,6 +1129,75 @@ function renderShell() {
     <section id="live-rubric-print-document" class="live-rubric-print-document" aria-label="Printable finalized rubric" hidden></section>
     ${renderCarePlanModal()}
     ${renderChartModal()}`;
+}
+
+function renderStudentLinkPanel() {
+  const advance = STUDENT_STEPS.filter((step) => step !== 'patient')
+    .map((step) => `<button type="button" data-advance-step="${step}">${escapeHtml(STUDENT_STEP_LABELS[step])}</button>`).join('');
+  return `
+    <section id="student-link-panel" class="live-panel student-link-panel" aria-labelledby="student-link-heading">
+      <h2 id="student-link-heading">Student screen</h2>
+      <output id="student-link-status" class="student-link-status" data-state="none">No student screen connected. Open one below or from LIVE SIM, STUDENT SIM.</output>
+      <dl class="student-link-grid">
+        <div><dt>Patient</dt><dd id="student-link-patient">None</dd></div>
+        <div><dt>Step</dt><dd id="student-link-step">None</dd></div>
+        <div><dt>Questions</dt><dd id="student-link-questions">0</dd></div>
+        <div><dt>Plan</dt><dd id="student-link-plan">Not submitted</dd></div>
+      </dl>
+      <div class="live-button-row"><button id="student-link-open" type="button">OPEN STUDENT SCREEN</button></div>
+      <p class="live-help">Move the student to any step. Everything before it is filled in as if they did it correctly. Skipping past the care plan fills it from the answer key unless they already submitted their own.</p>
+      <div class="student-link-advance" role="group" aria-label="Move the student to a step">${advance}</div>
+    </section>`;
+}
+
+function renderStudentMirror() {
+  const status = document.getElementById('student-link-status');
+  if (!status) return;
+  const fresh = studentMirror && Date.now() - studentMirror.seenAt < 7000;
+  status.dataset.state = fresh ? 'live' : (studentMirror ? 'stale' : 'none');
+  status.textContent = fresh ? 'Student screen connected.' : (studentMirror ? 'Student screen not responding. It may be closed.' : 'No student screen connected. Open one below or from LIVE SIM, STUDENT SIM.');
+  const m = studentMirror ?? {};
+  setText('student-link-patient', m.patientId ? (mockOr?.getState().id === m.patientId ? mockOr.getState().label : m.patientId) : 'None');
+  setText('student-link-step', m.step ? STUDENT_STEP_LABELS[m.step] : 'None');
+  setText('student-link-questions', String(m.questions ?? 0));
+  setText('student-link-plan', m.planSubmitted ? `Submitted${Number.isFinite(m.percent) ? `, ${m.percent}%` : ''}` : 'Not submitted');
+  for (const button of document.querySelectorAll('[data-advance-step]')) {
+    button.setAttribute('aria-current', String(button.dataset.advanceStep === m.step));
+  }
+}
+
+function openStudentScreen() {
+  const win = openWindowOnOtherScreen('/student.html', 'crnaStudentScreen');
+  setStatus(win ? 'Student screen opened. With two screens, Chrome may ask to place it on the other one.' : 'The browser blocked the student window. Allow popups for this site.', win ? 'success' : 'error');
+  return win;
+}
+
+/* Instructor moves the student to a step. Earlier steps count as done
+   correctly; past the care plan, the answer key plan is filed unless the
+   student already submitted their own. */
+async function advanceStudent(step) {
+  if (!STUDENT_STEPS.includes(step)) return { ok: false };
+  let state = mockOr?.getState() ?? {};
+  const patientId = state.active ? state.id : studentMirror?.patientId;
+  if (!patientId) {
+    setStatus('Load a Mock OR patient first, or have the student pick one.', 'error');
+    return { ok: false, reason: 'no patient' };
+  }
+  if (!state.active || state.id !== patientId) {
+    const select = document.getElementById('mockor-select');
+    if (select) select.value = patientId;
+    await mockOr?.load(patientId);
+    state = mockOr?.getState() ?? {};
+  }
+  if (STUDENT_STEPS.indexOf(step) > STUDENT_STEPS.indexOf('plan')) {
+    const existing = loadStoredPlan(globalThis.localStorage, patientId);
+    if (!existing?.submittedAt) saveStoredPlan(globalThis.localStorage, patientId, buildInstructorPlanRecord(state.patient, state.answerKey));
+    mockOr?.refreshPlan();
+  }
+  writeStudentSession(globalThis.localStorage, advanceSession(readStudentSession(globalThis.localStorage) ?? {}, patientId, step));
+  studentChannel?.post({ type: 'instructor-advance', patientId, step });
+  setStatus(`Student moved to ${STUDENT_STEP_LABELS[step]} for ${state.label ?? patientId}.`, 'success');
+  return { ok: true, patientId, step };
 }
 
 function setStatus(message, kind = 'info') {
@@ -1657,7 +1743,7 @@ function initStudentLink() {
       simTimeSec: runner?.simTime ?? null,
     });
   };
-  studentHeartbeat = setInterval(beat, 2000);
+  studentHeartbeat = setInterval(() => { beat(); renderStudentMirror(); }, 2000);
   studentChannel.subscribe(async (message) => {
     if (message.type === 'student-hello') beat();
     else if (message.type === 'student-load') {
@@ -1673,6 +1759,9 @@ function initStudentLink() {
       else mockOr?.refreshPlan();
       setStatus('Student submitted the care plan from their screen.', 'success');
       beat();
+    } else if (message.type === 'student-state') {
+      studentMirror = { ...message, seenAt: Date.now() };
+      renderStudentMirror();
     } else if (message.type === 'student-booth') {
       const result = await simOperator?.respondToStudent(message.text);
       if (result?.reply) studentChannel.post({ type: 'booth-reply', replyTo: message.id, text: result.reply });
@@ -1953,8 +2042,51 @@ function registerLaunchButton(button) {
   button.dataset.liveSimBound = 'true';
   button.addEventListener('click', (event) => {
     launchSource = event.currentTarget;
-    showLiveSim();
+    openLaunchChooser();
   });
+}
+
+/* LIVE SIM asks who is at this screen: the student gets the workstation in
+   its own window, the instructor gets the console, or both on one laptop
+   with two screens. Both sides link up on their own. */
+function renderLaunchChooser() {
+  if (document.getElementById('live-launch-chooser')) return;
+  const chooser = document.createElement('div');
+  chooser.id = 'live-launch-chooser';
+  chooser.className = 'live-launch-chooser';
+  chooser.hidden = true;
+  chooser.setAttribute('role', 'dialog');
+  chooser.setAttribute('aria-modal', 'true');
+  chooser.setAttribute('aria-labelledby', 'live-launch-title');
+  chooser.innerHTML = `
+    <div class="live-launch-card">
+      <p class="live-eyebrow">LIVE ANESTHESIA SIM</p>
+      <h2 id="live-launch-title">Who is at this screen?</h2>
+      <div class="live-launch-options">
+        <button type="button" data-launch="student"><strong>STUDENT SIM</strong><span>Pick the patient, review the chart, interview, write the care plan, then work the monitor and talk to Booth. Opens in its own window.</span></button>
+        <button type="button" data-launch="instructor"><strong>INSTRUCTOR SIM</strong><span>The console: runs the patient and Booth, reads Booth's notes, sees the student's progress and can move them to any step.</span></button>
+        <button type="button" data-launch="both"><strong>BOTH, ONE LAPTOP</strong><span>Console here, student window on your second screen. Everything links automatically.</span></button>
+      </div>
+      <button type="button" class="live-launch-cancel" data-launch="cancel">CANCEL</button>
+    </div>`;
+  document.body.append(chooser);
+  chooser.addEventListener('click', (event) => {
+    const choice = event.target.closest('[data-launch]')?.dataset.launch;
+    if (!choice && event.target !== chooser) return;
+    chooser.hidden = true;
+    if (choice === 'student') openStudentScreen();
+    else if (choice === 'instructor') showLiveSim();
+    else if (choice === 'both') { showLiveSim(); openStudentScreen(); }
+    else launchSource?.focus?.();
+  });
+  chooser.addEventListener('keydown', (event) => { if (event.key === 'Escape') { chooser.hidden = true; launchSource?.focus?.(); } });
+}
+
+function openLaunchChooser() {
+  renderLaunchChooser();
+  const chooser = document.getElementById('live-launch-chooser');
+  chooser.hidden = false;
+  chooser.querySelector('[data-launch="student"]')?.focus();
 }
 
 function ensureMenuLaunchButtons() {
@@ -1970,16 +2102,6 @@ function ensureMenuLaunchButtons() {
     courseSelectorBody.insertBefore(button, courseSelectorBody.children[1] ?? null);
   }
   registerLaunchButton(document.getElementById('live-sim-course-launch'));
-
-  if (courseSelectorBody && !document.getElementById('student-workstation-launch')) {
-    const link = document.createElement('a');
-    link.id = 'student-workstation-launch';
-    link.className = 'big-btn live-sim-menu-launch';
-    link.href = '/student.html';
-    link.textContent = 'MOCK OR DAY · STUDENT';
-    const after = document.getElementById('live-sim-course-launch');
-    courseSelectorBody.insertBefore(link, after?.nextSibling ?? null);
-  }
 
   const hospitalBar = document.getElementById('hospital-bar');
   if (hospitalBar && !document.getElementById('hospital-live-sim-launch')) {
@@ -2080,9 +2202,11 @@ function bindControls() {
     ensureRunner().emit();
     setStatus('Display opened; current snapshot published.', 'success');
   });
-  document.getElementById('live-open-student')?.addEventListener('click', () => {
-    window.open('/student.html', 'crnaStudentScreen', 'popup,width=1400,height=900');
-    setStatus('Student screen opened. It links to this console automatically.', 'success');
+  document.getElementById('live-open-student')?.addEventListener('click', openStudentScreen);
+  document.getElementById('student-link-open')?.addEventListener('click', openStudentScreen);
+  document.getElementById('student-link-panel')?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-advance-step]');
+    if (button) advanceStudent(button.dataset.advanceStep);
   });
   document.getElementById('live-patient-form')?.addEventListener('submit', applyPatient);
   document.getElementById('live-machine-form')?.addEventListener('submit', applyMachine);
@@ -2281,4 +2405,4 @@ export function initLiveSimView() {
   window.showLiveSim = showLiveSim;
 }
 
-export { closeLiveSim, showLiveSim };
+export { closeLiveSim, openLaunchChooser, showLiveSim };

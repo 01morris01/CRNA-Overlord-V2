@@ -1197,6 +1197,7 @@
 .cp-flag small { color: var(--muted); text-transform: uppercase; font-size: .68rem; }
 .cp-flag-mark { display: inline-block; min-width: 4.4rem; font-family: var(--fm); font-size: .68rem; }
 .cp-found .cp-flag-mark, .cp-items .cp-found { color: var(--green); }
+.cp-partial .cp-flag-mark { color: var(--amber); }
 .cp-missed .cp-flag-mark, .cp-items .cp-missed { color: var(--red); }
 .cp-flag-critical.cp-missed strong { color: var(--red); }
 .cp-flag-action { color: var(--txt) !important; }
@@ -1258,13 +1259,30 @@
 .live-operator-note-actions button { min-height: 32px; font-size: .68rem; }
 .live-operator-student p { color: var(--blue); }
 
-#student-workstation-launch {
-  display: block;
-  align-self: center;
-  width: min(100%, 36rem);
-  margin: 0 0 .85rem;
-  border-color: rgba(255, 176, 0, .55);
-  color: var(--amber);
-  text-align: center;
-  text-decoration: none;
-}
+
+/* ---------- LIVE SIM launch chooser ---------- */
+.live-launch-chooser { position: fixed; inset: 0; z-index: 200200; display: grid; place-items: center; padding: 1rem; background: rgba(3, 6, 12, .86); font-family: var(--fb); color: var(--txt); }
+.live-launch-chooser[hidden] { display: none; }
+.live-launch-card { width: min(980px, 100%); padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--line-2); border-radius: 12px; background: var(--surf); box-shadow: 0 30px 90px rgba(0, 0, 0, .7); }
+.live-launch-card h2 { margin: .2rem 0 1rem; font-family: var(--fd); font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: .03em; }
+.live-launch-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .8rem; }
+.live-launch-options button { display: grid; gap: .5rem; align-content: start; min-height: 150px; padding: 1.1rem; border: 1px solid var(--line-2); border-radius: 10px; background: var(--card); color: var(--txt); text-align: left; cursor: pointer; font-family: var(--fb); }
+.live-launch-options button:hover, .live-launch-options button:focus-visible { border-color: var(--green); outline: none; box-shadow: 0 0 0 2px rgba(0, 255, 163, .25); }
+.live-launch-options strong { font-family: var(--fd); font-size: 1.35rem; letter-spacing: .05em; color: var(--green); }
+.live-launch-options button[data-launch="student"] strong { color: var(--amber); }
+.live-launch-options button[data-launch="both"] strong { color: var(--blue); }
+.live-launch-options span { color: var(--txt-2); font-size: .9rem; line-height: 1.5; }
+.live-launch-cancel { margin-top: 1rem; min-height: 40px; padding: 0 1rem; border: 1px solid var(--line-2); border-radius: 6px; background: transparent; color: var(--txt-2); cursor: pointer; font-family: var(--fd); letter-spacing: .05em; }
+
+/* ---------- Student screen mirror on the console ---------- */
+.student-link-panel { border-color: rgba(255, 176, 0, .4); }
+.student-link-status { display: block; padding: .45rem .6rem; border: 1px solid var(--line-2); border-radius: 6px; font-size: .82rem; color: var(--txt-2); }
+.student-link-status[data-state="live"] { border-color: var(--green); color: var(--green); }
+.student-link-status[data-state="stale"] { border-color: var(--amber); color: var(--amber); }
+.student-link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem .8rem; margin: .7rem 0; }
+.student-link-grid dt { color: var(--muted); font-family: var(--fm); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
+.student-link-grid dd { margin: .1rem 0 0; font-size: .9rem; }
+.student-link-advance { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: .4rem; }
+.student-link-advance button { font-size: .72rem; }
+.student-link-advance button[aria-current="true"] { border-color: var(--green); color: var(--green); }
+.student-instructor-note { margin: 0 0 .4rem; color: var(--amber); font-size: .82rem; }
