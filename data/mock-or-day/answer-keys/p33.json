@@ -1,0 +1,130 @@
+{
+ "id": "p33",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Emergent laparoscopy for a ruptured ectopic in an Rh negative patient with ongoing hemorrhage (HR 122, BP 94/56, Hgb 11.9 to 9.6) and a full stomach (ate at 0130, vomited).",
+ "asa": {
+  "suggested": "3E",
+  "rationale": "Hemorrhagic shock from ruptured ectopic; emergency."
+ },
+ "decision": {
+  "recommendation": "proceed now",
+  "rationale": "Ongoing bleeding; delay increases risk. Resuscitate while inducing."
+ },
+ "redFlags": [
+  {
+   "id": "shock",
+   "severity": "critical",
+   "finding": "Hemorrhagic shock",
+   "evidence": "HR 92 to 122, BP falling to 94/56, Hgb 11.9 to 9.6, lactate 2.6, fluid to Morison pouch.",
+   "implication": "Cardiovascular collapse at induction and with pneumoperitoneum.",
+   "action": "Blood in the room and checked, arterial line when feasible, hemodynamically stable induction (ketamine or etomidate, reduced dose), prepared vasopressors, surgeon scrubbed before induction.",
+   "keywords": [
+    "hemorrhag",
+    "shock",
+    "ketamine",
+    "etomidate",
+    "blood",
+    "prbc",
+    "transfus",
+    "vasopressor"
+   ]
+  },
+  {
+   "id": "fullstomach",
+   "severity": "critical",
+   "finding": "Full stomach",
+   "evidence": "Sandwich and chips at 0130, vomited at 0230, opioids given, pregnant.",
+   "implication": "Aspiration risk.",
+   "action": "RSI with cricoid per practice, suction, OG tube after intubation.",
+   "keywords": [
+    "rsi",
+    "rapid sequence",
+    "aspiration",
+    "full stomach",
+    "cricoid"
+   ]
+  },
+  {
+   "id": "rh",
+   "severity": "major",
+   "finding": "Rh negative, RhIG not yet given",
+   "evidence": "O negative; RhIG 300 mcg released to floor but not given.",
+   "implication": "Alloimmunization in future pregnancies.",
+   "action": "Ensure RhIG given within 72 h.",
+   "keywords": [
+    "rhig",
+    "rhogam",
+    "rh negative",
+    "rho(d)"
+   ]
+  },
+  {
+   "id": "awareness",
+   "severity": "minor",
+   "finding": "Awareness risk with low anesthetic doses",
+   "evidence": "Hemodynamic instability.",
+   "implication": "Recall.",
+   "action": "Amnestic plan, BIS or adequate MAC as BP allows.",
+   "keywords": [
+    "awareness",
+    "bis",
+    "midazolam",
+    "amnesia"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "access",
+   "item": "Two large bore IVs, blood warmer, rapid infuser",
+   "keywords": [
+    "large bore",
+    "warmer",
+    "rapid infuser"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI with ketamine or etomidate and rocuronium or succinylcholine",
+   "keywords": [
+    "rsi",
+    "ketamine",
+    "etomidate"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "ETT",
+   "keywords": [
+    "ett",
+    "endotracheal"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "blood",
+   "item": "Transfuse to hemodynamics and Hgb; 2 units available",
+   "keywords": [
+    "transfus",
+    "blood"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin and blood products"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Aspiration risk at induction"
+  }
+ ]
+}

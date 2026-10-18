@@ -1,0 +1,1502 @@
+{
+ "id": "p29",
+ "room": "OR 8",
+ "time": "0730",
+ "name": "QUESENBERRY, LORETTA ANN",
+ "mrn": "0146029",
+ "dob": "05/02/1979",
+ "age": "47 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 54.3,
+ "preferred_name": "Retta",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. S. Mullins, Tazewell Primary Care",
+ "insurance": "UnitedHealthcare Choice Plus",
+ "emergency_contact": "Earl Quesenberry (husband) 423-555-0148",
+ "isolation": "",
+ "allergies": [
+  [
+   "Penicillin",
+   "Hives (childhood)",
+   "Moderate",
+   "1985"
+  ],
+  [
+   "Iodinated contrast",
+   "Itching/flushing",
+   "Mild",
+   "2018"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic Heller myotomy with Dor fundoplication, intraoperative EGD",
+  "short": "Lap Heller myotomy with Dor fundoplication",
+  "laterality": "N/A",
+  "service": "Foregut / General Surgery",
+  "surgeon": "L. Brannigan, MD",
+  "assistant": "R. Ostrander, MD (resident)",
+  "indication": "Type II achalasia, failed botulinum injection and pneumatic dilation",
+  "duration_min": 180,
+  "anesthesia_requested": "General endotracheal",
+  "position": "Supine, split-leg, steep reverse Trendelenburg, arms out",
+  "dispo": "Inpatient, 1-2 nights; esophagram POD1",
+  "blood": "Type and screen",
+  "equipment": "Intraop EGD tower; bougie per surgeon; no OG/NG until surgeon requests",
+  "implants": "",
+  "surgeon_notes": "Clear liquid diet x 48 h preop per foregut protocol. Clindamycin (PCN allergy). Intraop EGD after myotomy for leak test.",
+  "add_on": false,
+  "scheduled_on": "09/14/2026"
+ },
+ "problems": [
+  [
+   "Achalasia, type II (manometry 2025)",
+   "05/2025",
+   "Active"
+  ],
+  [
+   "Weight loss, unintentional",
+   "2025",
+   "Active"
+  ],
+  [
+   "Aspiration pneumonia, RLL",
+   "01/2026",
+   "Resolved"
+  ],
+  [
+   "Hypothyroidism",
+   "2014",
+   "Active"
+  ],
+  [
+   "Migraine without aura",
+   "2003",
+   "Active"
+  ],
+  [
+   "Iron deficiency anemia, mild",
+   "2026",
+   "Active"
+  ],
+  [
+   "Anxiety",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Achalasia type II: dysphagia to solids and liquids since 2024, Eckardt score 9 (2026)",
+   "Botulinum toxin injection LES 07/2025 (relief ~3 mo); pneumatic dilation 30 mm 02/2026 (partial, transient)",
+   "RLL aspiration pneumonia 01/2026, 3-day admission",
+   "Hypothyroidism on levothyroxine",
+   "Migraine, rare now",
+   "Anxiety, sertraline"
+  ],
+  "psh": [
+   [
+    "2008",
+    "Cesarean section",
+    "Wellmont Bristol"
+   ],
+   [
+    "2011",
+    "Laparoscopic tubal ligation",
+    "Wellmont Bristol"
+   ],
+   [
+    "07/2025",
+    "EGD with botulinum toxin injection LES",
+    "C-N University Endoscopy"
+   ],
+   [
+    "02/2026",
+    "EGD with pneumatic dilation 30 mm",
+    "C-N University Endoscopy"
+   ]
+  ],
+  "family": [
+   "Mother: hypothyroidism, breast cancer at 62",
+   "Father: COPD",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Bank teller",
+   "living": "Husband, teenage son",
+   "other": "Sleeps on 3 pillows / wedge for regurgitation"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "02/2026"
+   ],
+   [
+    "Tdap",
+    "2020"
+   ]
+  ],
+  "ob": "G2P1011, C-section 2008"
+ },
+ "home_meds": [
+  [
+   "Levothyroxine 75 mcg",
+   "1 tab PO daily",
+   "Dr. S. Mullins",
+   "10/27/2026 0430"
+  ],
+  [
+   "Sertraline 50 mg",
+   "1 tab PO daily",
+   "Dr. S. Mullins",
+   "10/26/2026 0800"
+  ],
+  [
+   "Omeprazole 20 mg",
+   "1 cap PO daily",
+   "Dr. L. Brannigan",
+   "10/26/2026 0700"
+  ],
+  [
+   "Ferrous sulfate liquid 220 mg/5 mL",
+   "5 mL PO daily",
+   "Dr. S. Mullins",
+   "10/24/2026 (stopped for clear diet)"
+  ],
+  [
+   "Ensure Clear",
+   "1 bottle PO TID",
+   "Dietitian",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sumatriptan 50 mg",
+   "1 tab PO PRN migraine",
+   "Dr. S. Mullins",
+   "08/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Clindamycin 900 mg IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Famotidine 20 mg IV",
+   "Preop x1",
+   "Given 10/27/2026 0600"
+  ],
+  [
+   "Heparin 5,000 units SC",
+   "Preop x1",
+   "Given 10/27/2026 0615"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Nifedipine 10 mg SL before meals",
+   "06/2025-09/2025",
+   "Headache, hypotension, little benefit"
+  ],
+  [
+   "Isosorbide dinitrate 5 mg SL before meals",
+   "09/2025-11/2025",
+   "Headache"
+  ],
+  [
+   "Levofloxacin 750 mg daily",
+   "01/2026",
+   "Course complete (aspiration pneumonia)"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/14/2026 0910",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "11.8",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "269",
+      ""
+     ],
+     "MCV": [
+      "78",
+      "L"
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.70",
+      ""
+     ],
+     "Glu": [
+      "85",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "3.3",
+      "L"
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ],
+     "Phos": [
+      "2.7",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/22/2026",
+    "comment": "Iron deficiency",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "268",
+      ""
+     ],
+     "MCV": [
+      "79",
+      "L"
+     ],
+     "Ferritin": [
+      "9",
+      "L"
+     ],
+     "Fe": [
+      "34",
+      "L"
+     ],
+     "TSAT": [
+      "8",
+      "L"
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.74",
+      ""
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "34",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.3",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "3.4",
+      "L"
+     ],
+     "TSH": [
+      "1.52",
+      ""
+     ],
+     "FT4": [
+      "1.22",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/16/2026 0500",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "10.2",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "83",
+      ""
+     ],
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.72",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/14/2026 2210",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "14.8",
+      "H"
+     ],
+     "Hgb": [
+      "12.1",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "261",
+      ""
+     ],
+     "MCV": [
+      "83",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.3",
+      "L"
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "83",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "3.6",
+      ""
+     ],
+     "Lactate": [
+      "0.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/12/2025",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "254",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.73",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "31",
+      ""
+     ],
+     "ALT": [
+      "17",
+      ""
+     ],
+     "ALKP": [
+      "59",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.6",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "TSH": [
+      "2.13",
+      ""
+     ],
+     "FT4": [
+      "1.28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/06/2022",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "253",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.86",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "18",
+      ""
+     ],
+     "ALKP": [
+      "72",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "TSH": [
+      "2.19",
+      ""
+     ],
+     "FT4": [
+      "1.18",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/18/2019",
+    "comment": "Annual",
+    "vals": {
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "265",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.83",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "TSH": [
+      "2.41",
+      ""
+     ],
+     "FT4": [
+      "1.27",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "120",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Phos",
+    "name": "Phosphorus",
+    "unit": "mg/dL",
+    "ref": "2.5-4.5"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "01/14/2026",
+    "Blood cultures x2",
+    "No growth at 5 days",
+    ""
+   ],
+   [
+    "01/14/2026",
+    "Sputum culture",
+    "Normal oropharyngeal flora",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Urine hCG, qualitative",
+    "Negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "05/20/2025",
+   "Fluoroscopy, timed barium esophagram",
+   "Patient ingested 200 mL barium upright. Barium column height 8 cm at 1 min, 6 cm at 5 min. Distal esophageal \"bird beak\" narrowing at the GEJ. Esophageal body diameter 3.8 cm. Impression: findings consistent with achalasia.",
+   "K. Whitlock, MD"
+  ],
+  [
+   "01/14/2026",
+   "XR Chest portable",
+   "Right lower lobe airspace opacity. Widened mediastinal contour on the right with an air-fluid level projecting behind the heart, likely dilated fluid-filled esophagus. Impression: RLL pneumonia, likely aspiration. Dilated esophagus with air-fluid level.",
+   "F. Ruehl, MD"
+  ],
+  [
+   "01/15/2026",
+   "CT Chest without contrast",
+   "Dilated esophagus up to 5.1 cm containing layering fluid and particulate debris throughout its length to the level of the thoracic inlet. RLL consolidation with tree-in-bud nodularity RML/RLL. No mass at GEJ. Impression: 1. Aspiration pneumonia RLL. 2. Markedly dilated debris-filled esophagus consistent with known achalasia.",
+   "F. Ruehl, MD"
+  ],
+  [
+   "03/10/2026",
+   "XR Chest 2 views",
+   "Interval resolution RLL opacity. Persistent widened right paratracheal stripe compatible with dilated esophagus. Impression: resolved pneumonia.",
+   "K. Whitlock, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Achalasie_in_Thorax%C3%BCbersicht.jpg)"
+   }
+  ],
+  [
+   "09/03/2026",
+   "Fluoroscopy, timed barium esophagram",
+   "Prior to contrast, a large amount of retained food debris and fluid is seen in the esophagus. Patient reports she has been on liquids only since yesterday morning. 200 mL barium upright: column height 12 cm at 1 min, 10 cm at 5 min. Esophageal body diameter 5.2 cm with mild distal tortuosity. Impression: progression of achalasia vs 05/2025 with marked stasis; minimal emptying after prior dilation.",
+   "K. Whitlock, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/14/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 68. Normal intervals, QTc 440. Normal ECG.",
+   "M. Desai, MD",
+   {
+    "rate": 68,
+    "pr": 150,
+    "qrs": 84,
+    "qtc": 440,
+    "axis": 55
+   }
+  ],
+  [
+   "05/2025",
+   "High-resolution esophageal manometry",
+   "IRP 31 mmHg (elevated). 100% failed peristalsis with panesophageal pressurization in 8 of 10 swallows. Chicago v4.0: Type II achalasia.",
+   "A. Velasquez, MD (GI)"
+  ]
+ ],
+ "encounters": [
+  [
+   "03/18/2019",
+   "Clinic",
+   "Tazewell Primary Care",
+   "Annual exam",
+   "Routine"
+  ],
+  [
+   "05/12/2025",
+   "Clinic",
+   "C-N University Gastroenterology",
+   "Dysphagia",
+   "Workup: esophagram, manometry, EGD"
+  ],
+  [
+   "07/21/2025",
+   "Outpatient procedure",
+   "C-N University Endoscopy",
+   "EGD with botulinum toxin",
+   "Discharged same day"
+  ],
+  [
+   "01/14/2026",
+   "Inpatient admission",
+   "C-N University Hospital",
+   "Fever, cough, hypoxia",
+   "RLL aspiration pneumonia; discharged 01/17/2026"
+  ],
+  [
+   "02/24/2026",
+   "Outpatient procedure",
+   "C-N University Endoscopy",
+   "Pneumatic dilation",
+   "Discharged same day"
+  ],
+  [
+   "09/03/2026",
+   "Clinic",
+   "C-N University Foregut Surgery",
+   "Surgical consult",
+   "Scheduled Heller/Dor"
+  ],
+  [
+   "10/14/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "05/12/2025 1030",
+   "Consult",
+   "Gastroenterology",
+   "A. Velasquez, MD",
+   "46F with 10 mo progressive dysphagia to solids then liquids, chest pressure after meals, regurgitation of undigested food. Wt down 4 kg. Eckardt 7. Plan: barium esophagram, HRM, EGD to exclude pseudoachalasia."
+  ],
+  [
+   "07/21/2025 0905",
+   "Procedure Note",
+   "Gastroenterology",
+   "A. Velasquez, MD",
+   "EGD with botulinum toxin injection. Sedation: anesthesia, propofol (see anesthesia record). Findings: dilated esophagus with moderate retained liquid and food debris despite 24 h clear liquid diet; suctioned ~150 mL. Tight LES, passed with gentle pressure. No mass. 100 units botulinum toxin injected in 4 quadrants at the LES. Biopsy GEJ. Plan: soft diet, f/u 6 wk."
+  ],
+  [
+   "07/21/2025 0920",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology",
+   "B. Corrigan, CRNA",
+   "Endoscopy MAC. Propofol infusion, nasal cannula. During scope insertion pt coughed and desaturated to 86%, large volume liquid regurgitated into oropharynx, suctioned, recovered with jaw thrust and FiO2 increase. CXR not obtained; lungs clear in PACU, discharged home. Recommend RSI with ETT for future endoscopic/surgical procedures given esophageal stasis."
+  ],
+  [
+   "07/22/2025 1010",
+   "Result Note",
+   "Gastroenterology",
+   "A. Velasquez, MD",
+   "GEJ biopsy: squamous mucosa with mild chronic inflammation, no dysplasia or malignancy. Notified pt via MyChart."
+  ],
+  [
+   "01/14/2026 2245",
+   "H&P",
+   "Hospital Medicine",
+   "J. Pendleton, DO",
+   "46F achalasia s/p botox 7/2025, 2 d fever, productive cough. Coughing episodes at night, wakes choking. T 38.9, SpO2 89% RA -> 95% 2L. RLL crackles. CXR RLL opacity, dilated esophagus with air-fluid level. Aspiration pneumonia. PCN allergy (hives) - levofloxacin. HOB 45 degrees, NPO except meds, GI to see re dilation."
+  ],
+  [
+   "01/17/2026 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "J. Pendleton, DO",
+   "Aspiration pneumonia RLL treated with levofloxacin, improved, weaned to RA day 2. CT showed markedly dilated debris-filled esophagus. GI arranged pneumatic dilation 02/2026. D/c on levofloxacin to complete 7 d. HOB elevation, upright 2 h after meals, liquid/soft diet."
+  ],
+  [
+   "02/24/2026 1010",
+   "Procedure Note",
+   "Gastroenterology",
+   "A. Velasquez, MD",
+   "EGD with 30 mm pneumatic balloon dilation. GA with ETT (RSI per anesthesia due to prior regurgitation). Large amount retained food/liquid despite 48 h clear liquid diet, extensive suction and lavage before dilation. Dilated to 30 mm x 60 sec. Gastrografin swallow post: no leak. Discharged."
+  ],
+  [
+   "06/22/2026 1400",
+   "Dietitian",
+   "Nutrition",
+   "H. Barlow, RD",
+   "Wt 55.0 kg (UBW 63.5 kg mid-2024; -13% over ~18 mo). Intake limited to liquids/purees, ~1,100 kcal/d. Albumin 3.4. Plan: Ensure Clear/Plus TID, small frequent meals, upright eating. Liquid iron."
+  ],
+  [
+   "09/03/2026 1340",
+   "Consult",
+   "Foregut Surgery",
+   "L. Brannigan, MD",
+   "47F type II achalasia, failed botox (3 mo) and 30 mm PD (partial). Eckardt 9: daily dysphagia solids/liquids, regurgitation nightly, retrosternal pain, wt loss. Repeat timed esophagram today: marked stasis, 5.2 cm. Plan: lap Heller myotomy + Dor fundoplication. POEM discussed, she prefers fundoplication given GERD concern. Clears x 48 h before surgery. Discussed aspiration risk with anesthesia induction; anesthesia to review."
+  ],
+  [
+   "09/03/2026 1405",
+   "Nursing Note",
+   "Foregut Surgery",
+   "M. Cagle, RN",
+   "Pt states she lost \"about 20 pounds\" since last year (9 kg by scale over 12 mo). Regurgitates when lying flat at night, wakes coughing, sleeps propped. Diet handout for 48-h clear liquid prep given."
+  ],
+  [
+   "10/14/2026 1000",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT. Labs, ECG. Instructions: clear liquids only from 10/25 AM; NPO midnight; clears until 0400 (arrival 0530). Take levothyroxine AM. Omeprazole AM. Bring CPAP? - no OSA. Height 165, wt 54.3."
+  ],
+  [
+   "10/14/2026 1030",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "T. Haskins, CRNA",
+   "Screening. MP II, TMD >6 cm, full ROM, good opening. Prior: MAC 7/2025 complicated by regurgitation/desat; GA RSI 2/2026 uneventful. Plan GETA. Defer to DOS team."
+  ],
+  [
+   "10/20/2026 1615",
+   "Patient Message",
+   "Foregut Surgery",
+   "MyChart (patient)",
+   "Pt: \"Can I have jello and broth during the clear diet? Also can I drink coffee with creamer the morning of?\" Reply (M. Cagle, RN): \"Jello and broth are fine. No creamer - black coffee or clear liquids only, and nothing after 0400.\""
+  ],
+  [
+   "10/26/2026 1430",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0530. Clears until 0400. Pt reports clears since Sunday morning 10/25. Driver husband."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/18/2019 0910",
+   "118/74",
+   70,
+   14,
+   99,
+   36.7,
+   63.2,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "05/12/2025 1015",
+   "112/70",
+   76,
+   14,
+   99,
+   36.6,
+   59.4,
+   "2/10",
+   "GI clinic"
+  ],
+  [
+   "07/21/2025 0815",
+   "108/68",
+   78,
+   16,
+   99,
+   36.6,
+   58.8,
+   "0/10",
+   "Endoscopy"
+  ],
+  [
+   "01/14/2026 2200",
+   "102/62",
+   112,
+   24,
+   89,
+   38.9,
+   57.0,
+   "4/10",
+   "ED"
+  ],
+  [
+   "01/16/2026 0800",
+   "110/66",
+   88,
+   18,
+   95,
+   37.2,
+   null,
+   "2/10",
+   "Med-surg"
+  ],
+  [
+   "02/24/2026 0800",
+   "110/70",
+   74,
+   14,
+   98,
+   36.6,
+   56.5,
+   "0/10",
+   "Endoscopy"
+  ],
+  [
+   "06/22/2026 1345",
+   "106/66",
+   72,
+   14,
+   99,
+   36.5,
+   55.0,
+   "0/10",
+   "Nutrition clinic"
+  ],
+  [
+   "09/03/2026 1320",
+   "108/68",
+   76,
+   14,
+   98,
+   36.6,
+   54.6,
+   "3/10",
+   "Foregut clinic"
+  ],
+  [
+   "10/14/2026 0940",
+   "110/70",
+   74,
+   14,
+   99,
+   36.7,
+   54.3,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0545",
+   "104/64",
+   84,
+   16,
+   98,
+   36.4,
+   54.3,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/14/2026 0910",
+   "Resulted"
+  ],
+  [
+   "Clear liquid diet x48 h, then NPO midnight",
+   "10/14/2026",
+   "Active"
+  ],
+  [
+   "Clindamycin 900 mg IV on call",
+   "10/27/2026 0540",
+   "Active"
+  ],
+  [
+   "Urine hCG",
+   "10/27/2026 0540",
+   "Resulted"
+  ],
+  [
+   "Postop: NPO, Gastrografin/barium esophagram POD1",
+   "10/27/2026 0540",
+   "Pending (postop)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "11/13/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic Heller myotomy, Dor fundoplication, EGD; possible open",
+   "Signed 09/03/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2008",
+   "Cesarean section",
+   "Spinal",
+   "None",
+   "Wellmont Bristol"
+  ],
+  [
+   "2011",
+   "Lap tubal ligation",
+   "GETA",
+   "PONV",
+   "Wellmont Bristol"
+  ],
+  [
+   "07/2025",
+   "EGD/botulinum",
+   "MAC propofol, NC",
+   "Regurgitation + desat to 86% at scope insertion; recommend RSI/ETT next time",
+   "C-N University Endoscopy"
+  ],
+  [
+   "02/2026",
+   "EGD/pneumatic dilation",
+   "GETA, RSI, propofol/succinylcholine, MAC 3, grade 1",
+   "Large retained volume suctioned by endoscopist; uneventful",
+   "C-N University Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0528",
+  "npo_solids": "10/25/2026 0700 (clear liquids since)",
+  "npo_clears": "10/27/2026 0400 apple juice",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "Negative"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes (PCN, contrast)"
+   ]
+  ],
+  "nursing_note": "Thin, pleasant. Clears since Sunday AM. Reports she brought up \"some of yesterday's broth and a little jello\" lying down at 0200, sat up in recliner rest of night. Mild cough. Lungs clear to auscultation. Burps frequently. Took levothyroxine 0430 with sip water. 20g L forearm. Heparin/famotidine given.",
+  "iv": "20g L forearm, LR",
+  "glucose": ""
+ },
+ "label": "L. Quesenberry",
+ "bmi": "19.9"
+}

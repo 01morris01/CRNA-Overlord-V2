@@ -202,6 +202,17 @@ export function createPatientInterview({
     if (available) setStatus(`Interview ${grounding.patientName}. Ask by voice or text.`);
   }
 
+  /* Mock OR Day: grounding built straight from a chart (digest plus a few
+     scripted answers for the offline fallback). null hides the panel. */
+  function setGrounding(next) {
+    grounding = next && typeof next === 'object' ? next : null;
+    history.length = 0;
+    if (transcript) transcript.replaceChildren();
+    const available = grounding !== null && (grounding.qa?.length > 0 || Boolean(grounding.chart));
+    if (panel) panel.hidden = !available;
+    if (available) setStatus(`Interview ${grounding.patientName}. Ask by voice or text.`);
+  }
+
   function handleSend() { ask(input?.value ?? ''); }
   function handleKey(event) { if (event.key === 'Enter') { event.preventDefault(); handleSend(); } }
 
@@ -218,5 +229,5 @@ export function createPatientInterview({
     micButton?.removeEventListener?.('click', startListening);
   }
 
-  return { setCase, ask, destroy };
+  return { setCase, setGrounding, ask, destroy };
 }

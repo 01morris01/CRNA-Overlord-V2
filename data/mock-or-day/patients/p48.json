@@ -1,0 +1,2328 @@
+{
+ "id": "p48",
+ "room": "OR 14",
+ "time": "1300",
+ "name": "HARBISON, GLENN T",
+ "mrn": "0147048",
+ "dob": "01/09/1961",
+ "age": "65 y",
+ "sex": "M",
+ "ht_cm": 176,
+ "wt_kg": 81.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "J. Rader, MD, Greeneville Internal Medicine",
+ "insurance": "Medicare Part A/B + Tricare For Life",
+ "emergency_contact": "Sharon Harbison (wife) 423-555-0368",
+ "isolation": "",
+ "allergies": [
+  [
+   "Amiodarone",
+   "Hypothyroidism / pulmonary toxicity concern (pre-transplant)",
+   "Moderate",
+   "2018"
+  ],
+  [
+   "Penicillin",
+   "Rash (as child, unverified)",
+   "Mild",
+   "1960s"
+  ]
+ ],
+ "case": {
+  "procedure": "Cystoscopy, left retrograde pyelogram, left ureteral stent placement",
+  "short": "Cysto, L ureteral stent",
+  "laterality": "Left",
+  "service": "Urology",
+  "surgeon": "T. Ensor, MD",
+  "assistant": "",
+  "indication": "7 mm obstructing L UVJ stone with moderate hydronephrosis and AKI in heart transplant recipient.",
+  "duration_min": 30,
+  "anesthesia_requested": "General (LMA)",
+  "position": "Dorsal lithotomy",
+  "dispo": "Return to medical floor (cardiac transplant service)",
+  "blood": "None",
+  "equipment": "Fluoroscopy, C-arm",
+  "implants": "Ureteral stent 6 Fr x 26 cm",
+  "surgeon_notes": "Decompression only - no ureteroscopy/laser today if infected. Booked 1300 (first open slot).",
+  "add_on": true,
+  "scheduled_on": "10/26/2026"
+ },
+ "problems": [
+  [
+   "Heart transplant status (orthotopic, 06/2019)",
+   "06/2019",
+   "Active"
+  ],
+  [
+   "Cardiac allograft vasculopathy, mild (ISHLT CAV1)",
+   "2025",
+   "Active"
+  ],
+  [
+   "Immunosuppressed state (tacrolimus, mycophenolate, prednisone)",
+   "06/2019",
+   "Active"
+  ],
+  [
+   "CKD stage 3a due to calcineurin inhibitor nephrotoxicity",
+   "2021",
+   "Active"
+  ],
+  [
+   "Left ureteral calculus with hydronephrosis",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Acute kidney injury",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Post-transplant diabetes mellitus",
+   "2020",
+   "Active"
+  ],
+  [
+   "Hypertension (post-transplant)",
+   "2019",
+   "Active"
+  ],
+  [
+   "Osteoporosis (steroid-induced)",
+   "2022",
+   "Active"
+  ],
+  [
+   "Squamous cell carcinoma skin, multiple (2023, 2025)",
+   "2023",
+   "Active"
+  ],
+  [
+   "Dilated cardiomyopathy, nonischemic (pre-transplant)",
+   "2014",
+   "Resolved"
+  ],
+  [
+   "CMV viremia, low-level",
+   "2019",
+   "Resolved"
+  ],
+  [
+   "Gout",
+   "2020",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Nonischemic DCM dx 2014, EF 15%, ICD 2016, LVAD not placed; OHT 06/2019",
+   "Post-transplant: 1 episode ACR grade 1R (2019), no AMR",
+   "CAV1 on 2025 angiogram",
+   "CKD 3a (baseline Cr 1.3-1.4) from tacrolimus",
+   "PTDM on insulin glargine low dose",
+   "Kidney stones 2017 (passed spontaneously)",
+   "Cutaneous SCC x3"
+  ],
+  "psh": [
+   [
+    "2016",
+    "ICD implant (explanted at transplant)",
+    "Vanderbilt-area outside center"
+   ],
+   [
+    "06/2019",
+    "Orthotopic heart transplant, bicaval",
+    "Midsouth Transplant Institute (outside)"
+   ],
+   [
+    "2019-2026",
+    "Endomyocardial biopsies / annual coronary angiography",
+    "C-N University Hospital"
+   ],
+   [
+    "2023",
+    "Mohs SCC R forearm",
+    "Greeneville Dermatology"
+   ],
+   [
+    "2025",
+    "Excision SCC scalp",
+    "Greeneville Dermatology"
+   ],
+   [
+    "1988",
+    "Appendectomy",
+    "Outside"
+   ]
+  ],
+  "family": [
+   "Father: cardiomyopathy, died 58",
+   "Brother: DCM (genetic testing: TTN variant)",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Retired Army logistics NCO, then school bus mechanic",
+   "living": "Wife, Greeneville",
+   "other": "Walks 2 miles daily. Cardiac rehab graduate."
+  },
+  "immunizations": [
+   [
+    "Influenza (inactivated)",
+    "09/2026"
+   ],
+   [
+    "COVID-19 2025-26",
+    "10/2025"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2020"
+   ],
+   [
+    "Shingrix x2",
+    "2021"
+   ],
+   [
+    "Tdap",
+    "2019"
+   ],
+   [
+    "Hepatitis B",
+    "2018"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Tacrolimus 1.5 mg",
+   "PO BID (target trough 5-8 ng/mL)",
+   "Heart transplant clinic",
+   "10/27/2026 0800"
+  ],
+  [
+   "Mycophenolate mofetil 750 mg",
+   "PO BID",
+   "Heart transplant clinic",
+   "10/27/2026 0800"
+  ],
+  [
+   "Prednisone 5 mg",
+   "PO daily",
+   "Heart transplant clinic",
+   "10/27/2026 0800"
+  ],
+  [
+   "Pravastatin 40 mg",
+   "PO nightly",
+   "Heart transplant clinic",
+   "10/25/2026"
+  ],
+  [
+   "Aspirin 81 mg",
+   "PO daily",
+   "Heart transplant clinic",
+   "10/26/2026 0800"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "PO daily",
+   "Heart transplant clinic",
+   "10/25/2026"
+  ],
+  [
+   "Insulin glargine",
+   "10 units SC nightly",
+   "J. Rader, MD",
+   "10/26/2026 2100 (8 units)"
+  ],
+  [
+   "Alendronate 70 mg",
+   "PO weekly (Sunday)",
+   "J. Rader, MD",
+   "10/25/2026"
+  ],
+  [
+   "Calcium + vitamin D",
+   "PO BID",
+   "OTC",
+   "10/25/2026"
+  ],
+  [
+   "Magnesium oxide 400 mg",
+   "PO BID",
+   "Heart transplant clinic",
+   "10/25/2026"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "PO daily",
+   "Heart transplant clinic",
+   "10/27/2026 0800"
+  ],
+  [
+   "Allopurinol 100 mg",
+   "PO daily",
+   "J. Rader, MD",
+   "10/25/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Tacrolimus 1.5 mg PO",
+   "BID",
+   "Given 10/27/2026 0800"
+  ],
+  [
+   "Mycophenolate 750 mg PO",
+   "BID",
+   "Given 10/27/2026 0800"
+  ],
+  [
+   "Prednisone 5 mg PO",
+   "Daily",
+   "Given 10/27/2026 0800"
+  ],
+  [
+   "Ceftriaxone 1 g IV",
+   "q24h",
+   "Given 10/26/2026 2215"
+  ],
+  [
+   "Ketorolac 15 mg IV",
+   "Once (ED)",
+   "Given 10/26/2026 1640"
+  ],
+  [
+   "Hydromorphone 0.5 mg IV",
+   "q3h PRN",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Ondansetron 4 mg IV",
+   "q6h PRN",
+   "Given 10/27/2026 0615"
+  ],
+  [
+   "Normal saline",
+   "75 mL/h",
+   "Infusing since 10/26/2026 2000"
+  ],
+  [
+   "Acetaminophen 650 mg PO",
+   "q6h PRN fever/pain",
+   "Given 10/27/2026 0630 (T 38.4)"
+  ],
+  [
+   "Tamsulosin 0.4 mg PO",
+   "Nightly",
+   "Given 10/26/2026 2200"
+  ],
+  [
+   "Insulin lispro sliding scale",
+   "AC/HS",
+   "Given 2 units 10/27/2026 0730"
+  ],
+  [
+   "Heparin 5,000 units SC",
+   "q8h",
+   "Given 10/27/2026 0600"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Carvedilol, sacubitril-valsartan, spironolactone, furosemide",
+   "2014-06/2019",
+   "Heart failure meds stopped at transplant"
+  ],
+  [
+   "Valganciclovir 450 mg",
+   "2019-2020",
+   "CMV prophylaxis completed"
+  ],
+  [
+   "TMP-SMX SS",
+   "2019-2020",
+   "PJP prophylaxis completed"
+  ],
+  [
+   "Tacrolimus 2 mg BID",
+   "2019-2024",
+   "Dose reduced for CKD (target lowered)"
+  ],
+  [
+   "Diltiazem",
+   "2020",
+   "Raised tacrolimus levels; stopped"
+  ],
+  [
+   "Amiodarone",
+   "2017-2018",
+   "Thyroid dysfunction (pre-transplant)"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0640",
+    "comment": "AM labs",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "5.3",
+      "H"
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "19",
+      "L"
+     ],
+     "BUN": [
+      "46",
+      "H"
+     ],
+     "Cr": [
+      "2.38",
+      "H"
+     ],
+     "Glu": [
+      "214",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "WBC": [
+      "15.8",
+      "H"
+     ],
+     "Hgb": [
+      "12.1",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "138",
+      "L"
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Mg": [
+      "1.5",
+      "L"
+     ],
+     "Lactate": [
+      "2.4",
+      "H"
+     ],
+     "PT": [
+      "14.6",
+      "H"
+     ],
+     "INR": [
+      "1.2",
+      "H"
+     ],
+     "aPTT": [
+      "26",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 1610",
+    "comment": "ED",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "38",
+      "H"
+     ],
+     "Cr": [
+      "2.04",
+      "H"
+     ],
+     "Glu": [
+      "188",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "WBC": [
+      "12.1",
+      "H"
+     ],
+     "Hgb": [
+      "12.8",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "237",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "USG": [
+      "1.028",
+      ""
+     ],
+     "UProt": [
+      "1+",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Trace",
+      "A"
+     ],
+     "ULeuk": [
+      "Moderate",
+      "A"
+     ],
+     "UNit": [
+      "Positive",
+      "A"
+     ],
+     "Lactate": [
+      "1.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/22/2026",
+    "comment": "Transplant clinic",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.9",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.38",
+      "H"
+     ],
+     "Glu": [
+      "133",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/14/2026",
+    "comment": "Transplant clinic",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.32",
+      "H"
+     ],
+     "Glu": [
+      "137",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "99",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "272",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/10/2025",
+    "comment": "Annual + angiogram",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "135",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "91",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.4",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "75",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "109",
+      ""
+     ],
+     "BNP": [
+      "92",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/11/2024",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "23",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "133",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "268",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "A1c": [
+      "6.8",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/13/2023",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.33",
+      "H"
+     ],
+     "Glu": [
+      "131",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "28",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "95",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "12.5",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "227",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "BNP": [
+      "88",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/07/2022",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "132",
+      "H"
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "19",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "71",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "5.4",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "A1c": [
+      "6.8",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "86",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/14/2021",
+    "comment": "CKD 3a noted",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.42",
+      "H"
+     ],
+     "Glu": [
+      "131",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "74",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "253",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/05/2020",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.26",
+      ""
+     ],
+     "Glu": [
+      "138",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "272",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "79",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "104",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "12/12/2019",
+    "comment": "Transplant clinic",
+    "vals": {
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.18",
+      ""
+     ],
+     "Glu": [
+      "132",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "67",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "227",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Mg": [
+      "1.7",
+      ""
+     ],
+     "A1c": [
+      "7.4",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/20/2019",
+    "comment": "Post-OHT (outside)",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      ""
+     ],
+     "Glu": [
+      "210",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "79",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "11.2",
+      "H"
+     ],
+     "Hgb": [
+      "9.6",
+      "L"
+     ],
+     "Hct": [
+      "29",
+      "L"
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/10/2017",
+    "comment": "HF clinic (pre-transplant)",
+    "vals": {
+     "Na": [
+      "133",
+      "L"
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "141",
+      "H"
+     ],
+     "Ca": [
+      "9.9",
+      ""
+     ],
+     "AST": [
+      "27",
+      ""
+     ],
+     "ALT": [
+      "14",
+      ""
+     ],
+     "ALKP": [
+      "71",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "3.8",
+      ""
+     ],
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "13.1",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "274",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "BNP": [
+      "1840",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "Serial 2025-2026",
+    "Tacrolimus trough",
+    "6.1 (04/2026), 5.8 (09/22/2026) ng/mL - target 5-8",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Tacrolimus trough (0745)",
+    "14.6 ng/mL (target 5-8)",
+    "H"
+   ],
+   [
+    "10/26/2026",
+    "Urine culture",
+    "Pending; Gram stain: gram-negative rods",
+    "A"
+   ],
+   [
+    "10/27/2026",
+    "Blood cultures x2 (0630, after fever)",
+    "Pending",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Procalcitonin",
+    "3.9 ng/mL",
+    "H"
+   ],
+   [
+    "06/10/2025",
+    "Donor-specific antibodies",
+    "None detected",
+    ""
+   ],
+   [
+    "06/10/2025",
+    "CMV PCR",
+    "Not detected",
+    ""
+   ],
+   [
+    "10/26/2026",
+    "Type and screen",
+    "A positive, antibody screen negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "2017",
+   "CT Abdomen/Pelvis noncontrast (stone protocol)",
+   "4 mm R UVJ stone, mild hydronephrosis. Impression: Obstructing R ureteral stone.",
+   "Outside"
+  ],
+  [
+   "06/2019",
+   "XR Chest (outside, post-OHT)",
+   "Median sternotomy. Small bilateral effusions.",
+   "Outside"
+  ],
+  [
+   "06/2025",
+   "XR Chest 2 views",
+   "Sternotomy wires. Normal heart size. Clear lungs.",
+   "C. Gilliam, MD"
+  ],
+  [
+   "10/26/2026",
+   "CT Abdomen/Pelvis without contrast (stone protocol)",
+   "7 mm L UVJ calculus with moderate L hydroureteronephrosis and perinephric stranding. Two nonobstructing R renal stones 3 mm. Impression: Obstructing L UVJ stone; perinephric stranding may reflect obstruction or infection.",
+   "C. Gilliam, MD"
+  ],
+  [
+   "10/27/2026",
+   "XR Chest portable",
+   "Sternotomy. No consolidation. Impression: No acute disease.",
+   "C. Gilliam, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "2016",
+   "Echocardiogram (pre-transplant)",
+   "LVEF 15%. Severe LV dilation (LVEDD 7.4 cm). Moderate functional MR. RVSP 52.",
+   "Outside"
+  ],
+  [
+   "06/2019",
+   "Right heart cath (pre-OHT, outside)",
+   "RA 12, PA 52/28, PCWP 26, PVR 2.4 WU, CI 1.7. Acceptable for transplant.",
+   "Outside"
+  ],
+  [
+   "06/10/2025",
+   "Coronary angiography + IVUS + RHC + endomyocardial biopsy",
+   "Mild diffuse luminal irregularities; LAD 30% mid - ISHLT CAV1. RA 6, PA 28/12, PCWP 10, CI 2.9. Biopsy: ISHLT 0R, no AMR.",
+   "R. Pemberton, MD"
+  ],
+  [
+   "06/10/2025",
+   "Echocardiogram, transthoracic",
+   "LVEF 60%. Normal LV size. Mild RV enlargement, TAPSE 1.7 cm. Biatrial (bicaval) anastomosis. Trace pericardial effusion. RVSP 30.",
+   "R. Pemberton, MD"
+  ],
+  [
+   "09/22/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 96. Incomplete RBBB (post-transplant). QTc 438.",
+   "R. Pemberton, MD",
+   {
+    "rate": 96,
+    "pr": 150,
+    "qrs": 104,
+    "qtc": 438,
+    "axis": 80,
+    "irbbb": 1
+   }
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead",
+   "Sinus tachycardia 114. Incomplete RBBB. No acute ST changes. QTc 452.",
+   "R. Pemberton, MD",
+   {
+    "rate": 114,
+    "pr": 146,
+    "qrs": 104,
+    "qtc": 452,
+    "axis": 80,
+    "irbbb": 1
+   }
+  ],
+  [
+   "2020",
+   "Atropine response (documented during biopsy)",
+   "Atropine 1 mg IV given for transient HR 68 with sedation - no chronotropic response (denervated). Responded to isoproterenol.",
+   "Cath lab"
+  ]
+ ],
+ "encounters": [
+  [
+   "2016",
+   "Inpatient - outside",
+   "Outside center",
+   "ICD implant",
+   "Discharged"
+  ],
+  [
+   "03/10/2017",
+   "Clinic - Advanced HF",
+   "C-N Heart Associates",
+   "DCM NYHA III",
+   "Transplant referral"
+  ],
+  [
+   "06/2019",
+   "Inpatient (18 days) - outside",
+   "Midsouth Transplant Institute",
+   "Orthotopic heart transplant",
+   "Discharged; care transferred to C-N 2020"
+  ],
+  [
+   "12/12/2019",
+   "Clinic - Heart transplant",
+   "C-N Heart Transplant Clinic",
+   "Follow-up",
+   "Stable"
+  ],
+  [
+   "2023",
+   "Clinic - Dermatology",
+   "Greeneville Dermatology",
+   "SCC forearm",
+   "Mohs"
+  ],
+  [
+   "06/10/2025",
+   "Outpatient procedure",
+   "C-N University Hospital",
+   "Annual angiogram/biopsy",
+   "CAV1, 0R"
+  ],
+  [
+   "2025",
+   "Clinic - Dermatology",
+   "Greeneville Dermatology",
+   "SCC scalp",
+   "Excised"
+  ],
+  [
+   "09/22/2026",
+   "Clinic - Heart transplant",
+   "C-N Heart Transplant Clinic",
+   "Routine",
+   "Stable"
+  ],
+  [
+   "10/26/2026",
+   "ED -> admission",
+   "C-N University Hospital",
+   "L flank pain, vomiting",
+   "Admitted to transplant cardiology service; urology consult"
+  ]
+ ],
+ "notes": [
+  [
+   "03/10/2017 1400",
+   "Progress Note",
+   "Advanced Heart Failure",
+   "R. Pemberton, MD",
+   "NYHA III DCM on GDMT, EF 15%, ICD. Amiodarone causing hypothyroidism - stop. Refer for transplant evaluation."
+  ],
+  [
+   "07/08/2019 1000",
+   "Media (Outside Record)",
+   "Cardiac Surgery",
+   "Midsouth Transplant Institute",
+   "Discharge summary: bicaval OHT 06/14/2019, ischemic time 3.2 h. Basiliximab induction. Post-op: isoproterenol x3 days for junctional rhythm; temporary pacing wires removed POD6. ACR 1R on first biopsy - no treatment. D/C on tacrolimus, MMF, prednisone taper, valganciclovir, TMP-SMX."
+  ],
+  [
+   "12/12/2019 1100",
+   "Progress Note",
+   "Heart Transplant",
+   "R. Pemberton, MD",
+   "6 mo post-OHT. Biopsies 0R. Tac 9.2 (target 8-10 first year). PTDM - start glargine. Resting HR 98 (denervated)."
+  ],
+  [
+   "06/16/2020 0900",
+   "Procedure Note",
+   "Cardiac Cath Lab",
+   "R. Pemberton, MD",
+   "Annual angiogram/biopsy. Transient HR 68 with sedation, atropine 1 mg - no response (expected denervation); isoproterenol 1 mcg/min x 5 min with HR 90. No CAV."
+  ],
+  [
+   "09/14/2021 1000",
+   "Progress Note",
+   "Heart Transplant",
+   "R. Pemberton, MD",
+   "Cr 1.42 - CNI nephrotoxicity. Tac target lowered to 5-8, dose to 1.5 mg BID. Avoid NSAIDs, nephrotoxins, and interacting drugs (azoles, diltiazem, macrolides)."
+  ],
+  [
+   "06/10/2025 1500",
+   "Procedure Note",
+   "Cardiac Cath Lab",
+   "R. Pemberton, MD",
+   "Angiogram: CAV1 (LAD 30%). IVUS max intimal thickness 0.6 mm. Biopsy 0R. Continue pravastatin, aspirin. Consider sirolimus/everolimus if CAV progresses."
+  ],
+  [
+   "09/22/2026 1030",
+   "Progress Note",
+   "Heart Transplant",
+   "L. Shipe, NP",
+   "7 yr post-OHT. Asymptomatic, walking 2 mi/day. HR 96 resting. BP 132/78. Tac 5.8. Cr 1.38. Continue regimen. Note to all providers: denervated heart - atropine ineffective; use direct-acting agents (epinephrine, isoproterenol). Stress-dose steroids for major stress at provider discretion."
+  ],
+  [
+   "10/26/2026 1700",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "D. Tunnell, MD",
+   "L flank pain since AM, vomiting x4, unable to keep down meds or fluids since last night. Afebrile (37.6). CT: 7 mm L UVJ stone, moderate hydro. Cr 2.04 (baseline 1.38). UA nitrite+, LE moderate. Ketorolac 15 mg IV given for colic. Ceftriaxone after urine culture. Admit to transplant cardiology; urology consulted."
+  ],
+  [
+   "10/26/2026 1945",
+   "Consult",
+   "Urology",
+   "T. Ensor, MD",
+   "Obstructing L UVJ stone, AKI, possible UTI in immunosuppressed host. Recommend L ureteral stent decompression; booked 10/27 1300 (no earlier room). If fever/sepsis develops, consider emergent decompression (stent vs nephrostomy). No ureteroscopy if infected."
+  ],
+  [
+   "10/26/2026 2130",
+   "H&P",
+   "Cardiology - Transplant Service",
+   "A. Rouse, MD (resident)",
+   "65M OHT 2019 with L obstructing stone + AKI. Plan: IVF NS 75 mL/h, ceftriaxone, continue home immunosuppression, check tac trough AM, hold amlodipine, insulin sliding scale. OR tomorrow 1300 with urology."
+  ],
+  [
+   "10/27/2026 0640",
+   "Nursing Note",
+   "Cardiology - Transplant Unit",
+   "B. Moneymaker, RN",
+   "T 38.4 at 0600, rigors x10 min. HR 116, BP 104/62 (baseline 130s). Blood cultures x2 drawn, acetaminophen given. Resident notified 0620. UO 20 mL/h x3 h. Pt drowsy after hydromorphone."
+  ],
+  [
+   "10/27/2026 0715",
+   "Progress Note",
+   "Cardiology - Transplant Service",
+   "A. Rouse, MD (resident)",
+   "Febrile 38.4. Cultures sent. Continue ceftriaxone. Plan per urology 1300. Will f/u tac level."
+  ],
+  [
+   "10/27/2026 0950",
+   "Pharmacy Note",
+   "Transplant Pharmacy",
+   "M. Gouge, PharmD",
+   "Tacrolimus trough 14.6 (target 5-8), likely from volume depletion/AKI plus diarrhea x2 days (increases tacrolimus absorption). Recommend HOLD tacrolimus PM dose, recheck AM; avoid nephrotoxins - note ketorolac given in ED 10/26. Ceftriaxone ok. MMF 750 BID ok. Mg 1.5 - replete. Urine Gram stain GNR - recommend broaden to cefepime if septic per ID guidance in transplant host."
+  ],
+  [
+   "05/03/2023 1300",
+   "Procedure Note",
+   "Dermatology",
+   "K. Lamons, MD",
+   "Mohs SCC R forearm, 2 stages, clear. Annual skin checks q6mo given immunosuppression."
+  ],
+  [
+   "10/27/2026 1030",
+   "Telephone Encounter",
+   "Urology",
+   "J. Moody, RN",
+   "Unit RN called re fever. Message given to Dr. Ensor (in clinic). Case remains 1300."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/10/2017 1345",
+   "96/62",
+   92,
+   18,
+   96,
+   36.6,
+   74.0,
+   "0/10",
+   "HF clinic"
+  ],
+  [
+   "12/12/2019 1045",
+   "142/88",
+   98,
+   16,
+   98,
+   36.6,
+   79.0,
+   "0/10",
+   "Transplant clinic"
+  ],
+  [
+   "06/10/2025 0800",
+   "136/80",
+   96,
+   16,
+   98,
+   36.6,
+   82.0,
+   "0/10",
+   "Cath lab"
+  ],
+  [
+   "09/22/2026 1015",
+   "132/78",
+   96,
+   16,
+   98,
+   36.7,
+   82.4,
+   "0/10",
+   "Transplant clinic"
+  ],
+  [
+   "10/26/2026 1600",
+   "148/86",
+   104,
+   20,
+   97,
+   37.6,
+   81.0,
+   "9/10",
+   "ED"
+  ],
+  [
+   "10/26/2026 2200",
+   "128/74",
+   100,
+   18,
+   97,
+   37.8,
+   null,
+   "5/10",
+   "Floor"
+  ],
+  [
+   "10/27/2026 0600",
+   "104/62",
+   116,
+   22,
+   95,
+   38.4,
+   null,
+   "6/10",
+   "Floor - rigors"
+  ],
+  [
+   "10/27/2026 0900",
+   "108/64",
+   112,
+   20,
+   95,
+   38.0,
+   null,
+   "4/10",
+   "Floor"
+  ],
+  [
+   "10/27/2026 1215",
+   "102/58",
+   114,
+   22,
+   95,
+   38.3,
+   81.0,
+   "5/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO since midnight",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "NS 75 mL/h",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Ceftriaxone 1 g q24h",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Tacrolimus trough AM",
+   "10/26/2026",
+   "Resulted 14.6"
+  ],
+  [
+   "Blood cultures x2",
+   "10/27/2026 0620",
+   "Collected"
+  ],
+  [
+   "Lactate",
+   "10/27/2026",
+   "Resulted 2.4"
+  ],
+  [
+   "Magnesium replacement",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Cefepime",
+   "",
+   "Not ordered (pharmacy rec)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "None",
+  "notes": "Transplant recipient: irradiated, leukoreduced, CMV-safe products if transfused.",
+  "specimen_expires": "10/29/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: cystoscopy, L retrograde pyelogram, L ureteral stent",
+   "Signed 10/26/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Living will and HCPOA (wife) on file 2019.",
+ "anesthesia_history": [
+  [
+   "1988",
+   "Appendectomy",
+   "GA",
+   "None",
+   "Outside"
+  ],
+  [
+   "2016",
+   "ICD implant",
+   "MAC",
+   "None",
+   "Outside"
+  ],
+  [
+   "06/2019",
+   "OHT",
+   "GA, PA catheter, TEE",
+   "Isoproterenol post-op",
+   "Midsouth Transplant Institute"
+  ],
+  [
+   "2019-2025",
+   "Biopsies/angiograms",
+   "Moderate sedation",
+   "Atropine ineffective (2020)",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1205 (from floor)",
+  "npo_solids": "10/25/2026 (vomiting since)",
+  "npo_clears": "10/27/2026 0800 sips with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (10/26)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - left"
+   ],
+   [
+    "Allergy band",
+    "Done"
+   ],
+   [
+    "Antibiotic",
+    "Ceftriaxone 10/26 2215"
+   ]
+  ],
+  "nursing_note": "65M febrile 38.3, HR 114 sinus, BP 102/58. Warm, flushed. Dry mucous membranes. Foley not placed. UO ~20 mL/h per floor. Sternotomy scar. Took immunosuppressants and prednisone 0800. 20 g R forearm (NS 75). Wife at bedside.",
+  "iv": "20 g R forearm",
+  "glucose": "214 mg/dL (0640 lab)"
+ },
+ "label": "G. Harbison",
+ "bmi": "26.1"
+}

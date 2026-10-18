@@ -1,0 +1,963 @@
+{
+ "id": "p45",
+ "room": "OR 20",
+ "time": "0730",
+ "name": "ARWOOD, KAYLEIGH N",
+ "mrn": "0147045",
+ "dob": "03/02/2011",
+ "age": "15 y",
+ "sex": "F",
+ "ht_cm": 162,
+ "wt_kg": 52.0,
+ "preferred_name": "Kay",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "B. Cantrell, MD, Seymour Pediatrics",
+ "insurance": "CoverKids (TN CHIP)",
+ "emergency_contact": "Tonya Arwood (mother) 865-555-0383",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Posterior spinal fusion T4-L1 with segmental pedicle screw instrumentation, Ponte osteotomies",
+  "short": "Posterior spinal fusion T4-L1 (AIS)",
+  "laterality": "N/A",
+  "service": "Pediatric Orthopedics / Spine",
+  "surgeon": "C. Haun, MD",
+  "assistant": "L. Whitson, PA-C",
+  "indication": "Adolescent idiopathic scoliosis, Lenke 1, right main thoracic curve 62 degrees, progressive despite bracing.",
+  "duration_min": 300,
+  "anesthesia_requested": "General, TIVA for neuromonitoring",
+  "position": "Prone on Jackson table, head in Prone-View foam, arms abducted <90 degrees",
+  "dispo": "PICU overnight, then floor",
+  "blood": "Type and crossmatch 2 units PRBC; cell saver",
+  "equipment": "Jackson table, cell saver, SSEP/MEP/EMG neuromonitoring (vendor confirmed), O-arm navigation",
+  "implants": "Pedicle screws, CoCr rods",
+  "surgeon_notes": "TXA per protocol. MAP >= 65-70 during correction. Neuromonitoring baseline after positioning. Wake-up test consent obtained.",
+  "add_on": false,
+  "scheduled_on": "08/19/2026"
+ },
+ "problems": [
+  [
+   "Adolescent idiopathic scoliosis, right thoracic, 62 degrees",
+   "2023",
+   "Active"
+  ],
+  [
+   "Iron deficiency anemia",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Menorrhagia",
+   "2025",
+   "Active"
+  ],
+  [
+   "Mild restrictive ventilatory defect (scoliosis)",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Allergic rhinitis, seasonal",
+   "2018",
+   "Active"
+  ],
+  [
+   "Left ankle sprain",
+   "2022",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "AIS detected on school screening age 12; Boston brace 2023-2025 (variable adherence)",
+   "Heavy menses since 2025 (8-day cycles, flooding)",
+   "Seasonal allergies",
+   "No cardiac/neuromuscular disease; MRI spine normal (no syrinx/Chiari)"
+  ],
+  "psh": [],
+  "family": [
+   "Mother: scoliosis (mild, no surgery), heavy periods",
+   "Father: HTN",
+   "Maternal aunt: von Willebrand? (unconfirmed per mother)",
+   "No known anesthesia problems in family; no MH history"
+  ],
+  "social": {
+   "tobacco": "Never; denies vaping",
+   "alcohol": "Denies",
+   "drugs": "Denies",
+   "occupation": "10th grade, Seymour High School; marching band (color guard)",
+   "living": "Mother and 2 younger brothers, Sevierville",
+   "other": "Mother is legal guardian. HEADSS done privately in clinic 09/2026."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "Tdap",
+    "2022"
+   ],
+   [
+    "MenACWY",
+    "2022"
+   ],
+   [
+    "HPV x2",
+    "2022-2023"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": "Menarche age 12. LMP 09/18/2026 per confidential RN note (mother reported \"early October\" at PAT). Pregnancy test: urine hCG collected 10/27 0555 - result pending."
+ },
+ "home_meds": [
+  [
+   "Ferrous sulfate 325 mg (65 mg elemental)",
+   "1 tab PO every other day",
+   "B. Cantrell, MD",
+   "Not taking since early 09/2026 (stomach upset) per pt"
+  ],
+  [
+   "Cetirizine 10 mg",
+   "1 tab PO daily PRN",
+   "OTC",
+   "10/25/2026"
+  ],
+  [
+   "Ibuprofen 400 mg",
+   "PO q6h PRN cramps",
+   "OTC",
+   "10/19/2026 (stopped 7 days preop per instructions)"
+  ],
+  [
+   "Multivitamin",
+   "1 PO daily",
+   "OTC",
+   "Occasionally"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 1.5 g IV (30 mg/kg)",
+   "Within 60 min of incision, redose q4h",
+   "Due"
+  ],
+  [
+   "Tranexamic acid",
+   "Loading dose + infusion per spine protocol (anesthesia)",
+   "Ordered - intraop"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Gabapentin 300 mg PO",
+   "Preop x1 (spine ERAS)",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Chlorhexidine wipes",
+   "Night before and AM",
+   "Done per pt"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Boston brace (TLSO) 18 h/day",
+   "04/2023-06/2025",
+   "Curve progression; surgery recommended"
+  ],
+  [
+   "Amoxicillin",
+   "2019",
+   "Strep pharyngitis course completed"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0555",
+    "comment": "Day of surgery",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "10.9",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "365",
+      ""
+     ],
+     "MCV": [
+      "75",
+      "L"
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "0.64",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/22/2026",
+    "comment": "PAT",
+    "vals": {
+     "WBC": [
+      "7.5",
+      ""
+     ],
+     "Hgb": [
+      "10.8",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      "L"
+     ],
+     "Plt": [
+      "372",
+      ""
+     ],
+     "MCV": [
+      "75",
+      "L"
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.60",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "137",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "PT": [
+      "12.3",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "Fib": [
+      "306",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/19/2026",
+    "comment": "Ortho preop screen",
+    "vals": {
+     "WBC": [
+      "7.6",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "32",
+      "L"
+     ],
+     "Plt": [
+      "388",
+      ""
+     ],
+     "MCV": [
+      "74",
+      "L"
+     ],
+     "Ferritin": [
+      "6",
+      "L"
+     ],
+     "Fe": [
+      "28",
+      "L"
+     ],
+     "TSAT": [
+      "6",
+      "L"
+     ],
+     "PT": [
+      "12.4",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.40-0.90"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "50-260"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-16.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "08/19/2026",
+    "von Willebrand panel (VWF antigen, activity, factor VIII)",
+    "VWF Ag 88%, VWF activity 82%, FVIII 96% - normal",
+    ""
+   ],
+   [
+    "09/22/2026",
+    "Type and screen",
+    "B positive, antibody screen negative",
+    ""
+   ],
+   [
+    "09/22/2026",
+    "Urine hCG",
+    "Negative (PAT)",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Urine hCG, qualitative",
+    "Collected 0555 - PENDING (in lab)",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Type and crossmatch",
+    "2 units PRBC crossmatched",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "04/2023",
+   "XR Scoliosis series (PA/lateral)",
+   "R thoracic curve T5-T12 Cobb 31 degrees, L lumbar 18 degrees. Risser 0. Impression: AIS, bracing range.",
+   "D. Puckett, MD"
+  ],
+  [
+   "05/2024",
+   "XR Scoliosis series",
+   "R thoracic 39 degrees in brace-out film. Risser 2.",
+   "D. Puckett, MD"
+  ],
+  [
+   "06/2025",
+   "MRI Total spine without contrast",
+   "No syrinx, Chiari, tethered cord, or vertebral anomaly. Thoracic dextroscoliosis. Impression: Idiopathic scoliosis.",
+   "D. Puckett, MD"
+  ],
+  [
+   "08/19/2026",
+   "XR Scoliosis series with bending films",
+   "R main thoracic T5-T12 62 degrees, bending to 38 degrees. L lumbar 34 degrees bending to 6 degrees (nonstructural). Thoracic kyphosis T5-T12 14 degrees (hypokyphotic). Risser 4. Impression: Lenke 1A-.",
+   "D. Puckett, MD"
+  ],
+  [
+   "09/22/2026",
+   "XR Chest 2 views",
+   "Thoracic scoliosis. Lungs clear. Heart normal size. Impression: No acute disease.",
+   "D. Puckett, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "09/22/2026",
+   "Pulmonary function test, spirometry with lung volumes",
+   "FVC 2.86 L (78% pred, arm-span corrected), FEV1 2.52 L (80%), FEV1/FVC 88%. TLC 81%. Impression: Mild restrictive defect consistent with thoracic scoliosis.",
+   "S. Leming, MD (Pediatric Pulmonology)"
+  ],
+  [
+   "09/22/2026",
+   "ECG 12-lead",
+   "Normal sinus rhythm 78. Normal intervals. Normal for age.",
+   "Pediatric Cardiology",
+   {
+    "rate": 78,
+    "pr": 140,
+    "qrs": 82,
+    "qtc": 420,
+    "axis": 70,
+    "tmod": {
+     "V1": -0.6
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "04/2023",
+   "Clinic - Pediatric Orthopedics",
+   "C-N Children's Orthopedics",
+   "School screening referral",
+   "Brace"
+  ],
+  [
+   "05/2024",
+   "Clinic - Pediatric Orthopedics",
+   "C-N Children's Orthopedics",
+   "Brace f/u",
+   "Progression"
+  ],
+  [
+   "06/2025",
+   "Clinic - Pediatric Orthopedics",
+   "C-N Children's Orthopedics",
+   "Curve progression",
+   "MRI; surgery discussion"
+  ],
+  [
+   "08/19/2026",
+   "Clinic - Pediatric Orthopedics",
+   "C-N Children's Orthopedics",
+   "Surgical planning",
+   "Scheduled PSF"
+  ],
+  [
+   "08/26/2026",
+   "Clinic - PCP",
+   "Seymour Pediatrics",
+   "Anemia, heavy menses",
+   "Oral iron; GYN referral"
+  ],
+  [
+   "09/22/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "PFTs, labs, education"
+  ],
+  [
+   "10/27/2026",
+   "Surgery",
+   "C-N University Hospital",
+   "PSF",
+   "Scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "04/11/2023 1000",
+   "Consult",
+   "Pediatric Orthopedics",
+   "C. Haun, MD",
+   "12F school screening, R thoracic 31 degrees, Risser 0, premenarchal. Boston brace 18 h/day. F/u 4-6 mo."
+  ],
+  [
+   "06/16/2025 1100",
+   "Progress Note",
+   "Pediatric Orthopedics",
+   "C. Haun, MD",
+   "Curve 52 degrees despite brace (wear ~8 h/day by sensor). MRI normal. Recommend PSF when ready; family wants to wait until after summer 2026."
+  ],
+  [
+   "08/19/2026 1400",
+   "H&P",
+   "Pediatric Orthopedics",
+   "C. Haun, MD",
+   "15F with AIS, Lenke 1A-, R thoracic 62 degrees. Mild rib hump, shoulder asymmetry, intermittent back pain. Neuro exam normal, abdominal reflexes symmetric. PMH negative. NKDA. Plan PSF T4-L1 with Ponte osteotomies, neuromonitoring, cell saver, TXA. EBL anticipated 500-1,000 mL. Preop CBC shows Hgb 10.6, MCV 74 - routed to PCP for iron deficiency; goal Hgb >12 before surgery, consider IV iron if not improved in 4 wk. Consent signed by mother; patient assent."
+  ],
+  [
+   "08/26/2026 1500",
+   "Progress Note",
+   "Pediatrics",
+   "B. Cantrell, MD",
+   "Iron deficiency anemia (ferritin 6) from menorrhagia. vWF panel normal. Start ferrous sulfate 325 mg every other day with vitamin C. Recheck CBC 4 wk. If no response, IV iron (iron sucrose) via infusion center before 10/27 surgery. GYN referral for menorrhagia (hormonal options)."
+  ],
+  [
+   "09/22/2026 1030",
+   "Anesthesia Preop Note",
+   "Preadmission Testing",
+   "M. Rhyne, CRNA",
+   "15F AIS for PSF. Healthy. No personal/family MH. Airway MP I. PFT mild restriction. Hgb 10.8 (no improvement) - pt admits not taking iron, GI upset. Will message PCP re IV iron. Plan: TIVA (propofol/remifentanil), no NMB after intubation, arterial line, 2 PIV, cell saver, TXA. Discussed wake-up test. Blood consent signed by mother. Day-of hCG per policy (adolescent female). Urine hCG today negative."
+  ],
+  [
+   "09/22/2026 1105",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "M. Rhyne, CRNA",
+   "Left message for Dr. Cantrell re: IV iron preop (Hgb 10.8). Awaiting callback."
+  ],
+  [
+   "09/29/2026 1640",
+   "Telephone Encounter",
+   "Pediatrics",
+   "J. Duggan, LPN",
+   "Received PAT message. Infusion center referral for iron sucrose placed; TennCare/CoverKids PA submitted. Pending approval."
+  ],
+  [
+   "10/14/2026 0920",
+   "Telephone Encounter",
+   "Pediatrics",
+   "J. Duggan, LPN",
+   "Iron sucrose PA approved. Called mother to schedule infusions - no answer, voicemail full. Will retry."
+  ],
+  [
+   "09/22/2026 1200",
+   "Dietitian",
+   "Nutrition Services",
+   "A. Morrell, RD",
+   "Iron-rich diet education, vitamin C with iron, protein goals post-op. Pt picky eater, skips breakfast."
+  ],
+  [
+   "09/22/2026 1215",
+   "Social Work",
+   "Pediatrics",
+   "R. Seaton, LCSW",
+   "Mother single parent, 2 younger children; arranged lodging voucher. Mother will stay overnight in PICU. Transportation ok."
+  ],
+  [
+   "10/27/2026 0620",
+   "Nursing Note - Confidential (Adolescent)",
+   "Preop Holding",
+   "H. Kitts, RN",
+   "Confidential adolescent interview with mother out of room per policy. Pt disclosed she is sexually active with boyfriend (17), condoms \"most of the time.\" States LMP was \"around Sept 18,\" which differs from date mother gave at PAT. Asked that her mother not be told. Urine hCG specimen sent at 0555, result pending. Informed anesthesia and surgeon per policy that result must be reviewed before proceeding; pt informed that results would be shared with her privately. Not disclosed to mother."
+  ],
+  [
+   "10/27/2026 0630",
+   "H&P (Interval Update)",
+   "Pediatric Orthopedics",
+   "L. Whitson, PA-C",
+   "No interval change. Neuro intact. Consent and assent confirmed. Proceed."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/11/2023 0945",
+   "102/64",
+   84,
+   18,
+   99,
+   36.7,
+   41.0,
+   "0/10",
+   "Ortho"
+  ],
+  [
+   "06/16/2025 1045",
+   "106/66",
+   80,
+   16,
+   99,
+   36.6,
+   48.5,
+   "2/10",
+   "Ortho"
+  ],
+  [
+   "08/19/2026 1345",
+   "108/66",
+   86,
+   16,
+   99,
+   36.7,
+   51.6,
+   "2/10",
+   "Ortho"
+  ],
+  [
+   "09/22/2026 1000",
+   "110/68",
+   92,
+   16,
+   99,
+   36.6,
+   51.8,
+   "1/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0600",
+   "112/70",
+   96,
+   16,
+   99,
+   36.5,
+   52.0,
+   "1/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "CBC, BMP, urine hCG, type and crossmatch 2 units",
+   "10/27/2026 0545",
+   "CBC/BMP/T&C resulted; hCG pending"
+  ],
+  [
+   "NPO after midnight, clears until 0530",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 1.5 g IV",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Neuromonitoring SSEP/MEP/EMG",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Cell saver",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "PICU admission post-op",
+   "10/27/2026",
+   "Active (post-op)"
+  ],
+  [
+   "Iron sucrose 200 mg IV x2",
+   "09/29/2026",
+   "Not scheduled"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "Cell saver to be set up by perfusion.",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: PSF T4-L1, possible wake-up test",
+   "Signed by mother 08/19/2026; patient assent"
+  ],
+  [
+   "Blood consent",
+   "Signed by mother 09/22/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Minor - mother is legal guardian.",
+ "anesthesia_history": [],
+ "preop": {
+  "arrived": "10/27/2026 0530",
+  "npo_solids": "10/26/2026 2100",
+  "npo_clears": "10/27/2026 0500 Gatorade (per ERAS protocol)",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (08/19 + update)"
+   ],
+   [
+    "Pregnancy test",
+    "Urine hCG sent 0555 - pending"
+   ],
+   [
+    "Site marked",
+    "N/A (spine - per protocol, level verification intraop)"
+   ],
+   [
+    "Allergy band",
+    "N/A"
+   ],
+   [
+    "Blood available",
+    "2 u crossmatched"
+   ],
+   [
+    "Neuromonitoring present",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "15F, quiet, nervous. Mother at bedside. Pale conjunctivae. Did not take iron (has not for weeks). Chlorhexidine wipes done. 20 g L hand. Confidential interview completed - see separate note. hCG pending.",
+  "iv": "20 g L hand",
+  "glucose": ""
+ },
+ "label": "K. Arwood",
+ "bmi": "19.8"
+}

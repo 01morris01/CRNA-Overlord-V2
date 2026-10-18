@@ -1,0 +1,1238 @@
+{
+ "id": "p25",
+ "room": "Endo 2",
+ "time": "0800",
+ "name": "SWINFORD, DALE AUGUST",
+ "mrn": "0145025",
+ "dob": "12/02/1967",
+ "age": "58 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 139.4,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "C. Hensley, MD, Newport Family Medicine",
+ "insurance": "BlueCross BlueShield TN (State of TN employee plan)",
+ "emergency_contact": "Rhonda Swinford (spouse) 423-555-0347",
+ "isolation": "",
+ "allergies": [
+  [
+   "Lisinopril",
+   "Angioedema (lip swelling)",
+   "Severe",
+   "2017"
+  ]
+ ],
+ "case": {
+  "procedure": "Esophagogastroduodenoscopy with possible biopsy; colonoscopy with possible polypectomy",
+  "short": "EGD and colonoscopy",
+  "laterality": "N/A",
+  "service": "Gastroenterology",
+  "surgeon": "K. Varnadoe, MD",
+  "assistant": "",
+  "indication": "EGD: chronic GERD with intermittent dysphagia, Barrett screening (male, >50, obesity). Colonoscopy: average-risk screening, never screened.",
+  "duration_min": 40,
+  "anesthesia_requested": "MAC with propofol (anesthesia)",
+  "position": "Left lateral decubitus",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Standard",
+  "implants": "",
+  "surgeon_notes": "BMI 44, OSA - anesthesia requested. EGD first then colonoscopy.",
+  "add_on": false,
+  "scheduled_on": "09/08/2026"
+ },
+ "problems": [
+  [
+   "Type 2 diabetes mellitus with hyperglycemia",
+   "2015",
+   "Active"
+  ],
+  [
+   "Obesity, class III, BMI 44",
+   "2015",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea, moderate (AHI 28)",
+   "03/2022",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "2014",
+   "Active"
+  ],
+  [
+   "Gastroesophageal reflux disease",
+   "2019",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2015",
+   "Active"
+  ],
+  [
+   "Nonalcoholic fatty liver disease (MASLD)",
+   "2021",
+   "Active"
+  ],
+  [
+   "Osteoarthritis, knees",
+   "2020",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "T2DM since 2015, A1c 8-9 until tirzepatide 2026",
+   "Obesity, max wt 149 kg (02/2026)",
+   "OSA moderate, AHI 28 on home sleep test 03/2022 - CPAP returned 2022",
+   "HTN",
+   "GERD with occasional solid-food dysphagia",
+   "MASLD (steatosis on US)",
+   "Knee OA"
+  ],
+  "psh": [
+   [
+    "1986",
+    "Tonsillectomy",
+    "Newport (outside)"
+   ],
+   [
+    "2011",
+    "L knee arthroscopy",
+    "Lakeway Regional Medical Center"
+   ]
+  ],
+  "family": [
+   "Father: colon cancer age 74 (diagnosed after age 60)",
+   "Mother: T2DM, CHF",
+   "No anesthesia problems known"
+  ],
+  "social": {
+   "tobacco": "Former, quit 2009 (15 pack-years)",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Maintenance supervisor, Cocke County Schools",
+   "living": "Wife, Newport",
+   "other": "Wife driving. Snores loudly per wife."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2024"
+   ],
+   [
+    "Tdap",
+    "2018"
+   ],
+   [
+    "COVID-19",
+    "2023"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Metformin ER 1000 mg",
+   "2 tabs PO daily with supper",
+   "C. Hensley, MD",
+   "10/25/2026 1800"
+  ],
+  [
+   "Glipizide 5 mg",
+   "1 tab PO daily before breakfast",
+   "C. Hensley, MD",
+   "10/25/2026 0700"
+  ],
+  [
+   "Losartan 100 mg",
+   "1 tab PO daily",
+   "C. Hensley, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Hydrochlorothiazide 25 mg",
+   "1 tab PO daily",
+   "C. Hensley, MD",
+   "10/26/2026 0700"
+  ],
+  [
+   "Atorvastatin 40 mg",
+   "1 tab PO nightly",
+   "C. Hensley, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "1 tab PO daily before breakfast",
+   "K. Varnadoe, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "PO PRN knee pain",
+   "OTC",
+   "10/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0715"
+  ],
+  [
+   "Insulin regular sliding scale",
+   "If glucose > 200",
+   "Not needed (glucose 132)"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Insulin glargine 30 units",
+   "2021-05/2026",
+   "Stopped after tirzepatide titration - glucose improved"
+  ],
+  [
+   "Lisinopril 20 mg",
+   "2014-2017",
+   "Angioedema"
+  ],
+  [
+   "Omeprazole 20 mg",
+   "2019-2023",
+   "Changed to pantoprazole"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "08/18/2026",
+    "comment": "Follow-up on tirzepatide",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "128",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "45",
+      "H"
+     ],
+     "ALT": [
+      "44",
+      ""
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.8",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "A1c": [
+      "6.9",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/12/2026",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.99",
+      ""
+     ],
+     "Glu": [
+      "196",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "44",
+      "H"
+     ],
+     "ALT": [
+      "62",
+      "H"
+     ],
+     "ALKP": [
+      "81",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "28",
+      "L"
+     ],
+     "TG": [
+      "232",
+      "H"
+     ],
+     "A1c": [
+      "8.8",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/22/2023",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "168",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "44",
+      "H"
+     ],
+     "ALT": [
+      "58",
+      "H"
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.7",
+      ""
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "15.6",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "283",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Chol": [
+      "156",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "38",
+      "L"
+     ],
+     "TG": [
+      "244",
+      "H"
+     ],
+     "A1c": [
+      "8.6",
+      "H"
+     ],
+     "USG": [
+      "1.013",
+      ""
+     ],
+     "UProt": [
+      "Trace",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/15/2021",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.87",
+      ""
+     ],
+     "Glu": [
+      "169",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "45",
+      "H"
+     ],
+     "ALT": [
+      "74",
+      "H"
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "34",
+      "L"
+     ],
+     "TG": [
+      "234",
+      "H"
+     ],
+     "A1c": [
+      "9.0",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/09/2019",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "164",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "43",
+      "H"
+     ],
+     "ALT": [
+      "62",
+      "H"
+     ],
+     "ALKP": [
+      "93",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "15.6",
+      ""
+     ],
+     "Hct": [
+      "47",
+      ""
+     ],
+     "Plt": [
+      "233",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "30",
+      "L"
+     ],
+     "TG": [
+      "255",
+      "H"
+     ],
+     "A1c": [
+      "8.1",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026 0705",
+    "POC glucose",
+    "132 mg/dL",
+    "H"
+   ],
+   [
+    "03/22/2023",
+    "Urine microalbumin/creatinine ratio",
+    "48 mg/g",
+    "H"
+   ],
+   [
+    "08/18/2026",
+    "Urine microalbumin/creatinine ratio",
+    "31 mg/g",
+    "H"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/2021",
+   "US Abdomen complete",
+   "Diffuse increased hepatic echogenicity consistent with steatosis. Liver 19.5 cm. Gallbladder normal. No ascites.",
+   "F. Dykes, MD"
+  ],
+  [
+   "09/2023",
+   "XR Knees bilateral standing",
+   "Moderate medial compartment OA bilaterally.",
+   "F. Dykes, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/14/2022",
+   "Home sleep apnea test",
+   "AHI 28/h (moderate OSA), ODI 31, nadir SpO2 79%, T90 18%. Supine-predominant. Recommend APAP 5-15 cm H2O.",
+   "G. Witt, MD (sleep medicine)"
+  ],
+  [
+   "03/22/2023",
+   "ECG 12-lead",
+   "Normal sinus rhythm 84. Low voltage limb leads. No ST-T changes.",
+   "C. Hensley, MD",
+   {
+    "rate": 84,
+    "pr": 162,
+    "qrs": 90,
+    "qtc": 430,
+    "axis": -10,
+    "lowvLimb": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2011",
+   "Outpatient surgery",
+   "Lakeway Regional Medical Center",
+   "L knee scope",
+   "Discharged same day"
+  ],
+  [
+   "03/2022",
+   "Sleep medicine",
+   "C-N Sleep Center",
+   "Snoring, daytime sleepiness",
+   "HST moderate OSA, APAP ordered"
+  ],
+  [
+   "03/22/2023",
+   "Annual",
+   "Newport Family Medicine",
+   "DM, HTN",
+   "Insulin titrated"
+  ],
+  [
+   "02/12/2026",
+   "Annual",
+   "Newport Family Medicine",
+   "DM uncontrolled, obesity",
+   "Tirzepatide started"
+  ],
+  [
+   "08/18/2026",
+   "Office visit",
+   "Newport Family Medicine",
+   "DM follow-up",
+   "A1c 6.9, insulin stopped"
+  ],
+  [
+   "09/08/2026",
+   "GI clinic",
+   "C-N Gastroenterology",
+   "GERD, dysphagia, screening",
+   "EGD/colonoscopy scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "03/14/2022 1500",
+   "Progress Note",
+   "Sleep Medicine",
+   "G. Witt, MD",
+   "HST: moderate OSA AHI 28, nadir 79%. Epworth 14. APAP 5-15 ordered via DME. Follow-up 3 mo with download."
+  ],
+  [
+   "07/28/2022 1030",
+   "Telephone Encounter",
+   "Sleep Medicine",
+   "DME liaison - Mountain Home Medical Supply",
+   "Pt returned APAP machine and mask 07/27/2022 - non-compliant (usage 9% of nights > 4 h), states mask claustrophobic. Insurance requires return. FYI to Dr. Witt. -- Pt did not keep 3-mo follow-up."
+  ],
+  [
+   "02/12/2026 0930",
+   "Progress Note",
+   "Family Medicine",
+   "C. Hensley, MD",
+   "Annual. A1c 8.8 on metformin, glipizide, glargine 30. Wt 149 kg. Start tirzepatide 2.5 mg SC weekly, titrate q4 wk as tolerated to 10 mg. Reduce glargine as glucoses improve. OSA - pt declines re-referral for CPAP. Colon screening overdue - GI referral."
+  ],
+  [
+   "05/20/2026 1410",
+   "Telephone Encounter",
+   "Family Medicine",
+   "L. Bunch, RN",
+   "Glucoses 90-130 fasting on tirzepatide 7.5 mg + glargine 10. Per Dr. Hensley, stop glargine. Increase tirzepatide to 10 mg weekly per plan. Pt reports nausea first few days after each shot, tolerable."
+  ],
+  [
+   "08/18/2026 0945",
+   "Progress Note",
+   "Family Medicine",
+   "C. Hensley, MD",
+   "DM f/u. A1c 6.9. Wt 141 kg (-8 kg). Tirzepatide 10 mg weekly, takes on Saturdays. Some nausea, eating smaller meals. Off insulin. Continue."
+  ],
+  [
+   "09/08/2026 1100",
+   "Consult",
+   "Gastroenterology",
+   "K. Varnadoe, MD",
+   "58 M with longstanding GERD on PPI, intermittent solid-food dysphagia, never had colonoscopy (father CRC at 74). BMI 44, OSA. Plan EGD + colonoscopy with anesthesia. Meds reviewed with pt: metformin ER, glipizide, losartan, HCTZ, atorvastatin, pantoprazole. Allergy: lisinopril angioedema. Split-dose PEG prep. Hold glipizide AM of procedure, hold metformin day of prep. Clear liquids day before."
+  ],
+  [
+   "09/08/2026 1130",
+   "Nursing Note",
+   "Gastroenterology",
+   "H. Reece, RN",
+   "Prep instructions given: clear liquids all day 10/26, first half prep 1800 10/26, second half 0400-0500 10/27, nothing after 0500. Diabetic instructions per GI note. Ride: wife."
+  ],
+  [
+   "10/05/2026 0802",
+   "Refill Request",
+   "Family Medicine",
+   "Pharmacy e-request",
+   "Tirzepatide (Mounjaro) 10 mg/0.5 mL pen, inject 10 mg SC once weekly, #4 pens (28 days). Last fill 09/07/2026. Approved, C. Hensley, MD."
+  ],
+  [
+   "10/25/2026 1922",
+   "Patient Message",
+   "Family Medicine",
+   "MyChart - patient",
+   "Dr. Hensley, the Mounjaro has been making me sick to my stomach more lately. I get full after a few bites and feel like food just sits there, burping it up at night. I took my shot yesterday (Saturday). Should I drop down a dose? I have my scope Tuesday. -- Reply 10/26/2026 0835 (L. Bunch, RN): I will send this to Dr. Hensley. Continue current dose for now and follow your GI prep instructions. -- Provider reply pending."
+  ],
+  [
+   "10/26/2026 1300",
+   "Telephone Encounter",
+   "Endoscopy",
+   "J. Fox, RN",
+   "Pre-procedure call. Arrival 0700. Prep reviewed. Hold glipizide AM, take losartan, pantoprazole with sip. Med list reviewed - no changes per pt. Wife driving."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/09/2019 0900",
+   "146/90",
+   86,
+   18,
+   96,
+   36.7,
+   142.0,
+   "0/10",
+   "Family Medicine"
+  ],
+  [
+   "03/14/2022 1445",
+   "142/88",
+   84,
+   18,
+   95,
+   36.6,
+   145.5,
+   "0/10",
+   "Sleep Medicine"
+  ],
+  [
+   "03/22/2023 0915",
+   "138/86",
+   82,
+   18,
+   96,
+   36.6,
+   146.8,
+   "2/10",
+   "Family Medicine"
+  ],
+  [
+   "02/12/2026 0915",
+   "144/88",
+   88,
+   18,
+   95,
+   36.7,
+   149.0,
+   "2/10",
+   "Family Medicine"
+  ],
+  [
+   "08/18/2026 0930",
+   "132/82",
+   80,
+   16,
+   96,
+   36.6,
+   141.0,
+   "0/10",
+   "Family Medicine"
+  ],
+  [
+   "09/08/2026 1045",
+   "134/84",
+   84,
+   18,
+   95,
+   36.6,
+   140.2,
+   "0/10",
+   "GI clinic"
+  ],
+  [
+   "10/27/2026 0705",
+   "138/86",
+   92,
+   18,
+   94,
+   36.6,
+   139.4,
+   "0/10",
+   "Endo preop"
+  ]
+ ],
+ "orders": [
+  [
+   "POC glucose on arrival",
+   "10/27/2026 0700",
+   "Resulted 132"
+  ],
+  [
+   "Lactated Ringer's KVO",
+   "10/27/2026 0700",
+   "Active"
+  ],
+  [
+   "Split-dose PEG bowel prep",
+   "09/08/2026",
+   "Completed"
+  ],
+  [
+   "Pathology: biopsies/polyps",
+   "10/27/2026",
+   "Pending"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Procedure consent: EGD with possible biopsy, colonoscopy with possible polypectomy",
+   "Signed by patient 10/27/2026 0720"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2011",
+   "L knee arthroscopy",
+   "GA, LMA",
+   "\"Had trouble keeping my oxygen up in recovery,\" needed face mask for 1 h per pt",
+   "Lakeway Regional Medical Center"
+  ],
+  [
+   "1986",
+   "Tonsillectomy",
+   "GA",
+   "None known",
+   "Newport (outside)"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0655",
+  "npo_solids": "10/25/2026 2000",
+  "npo_clears": "10/27/2026 0500 (prep completed)",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Procedure yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (GI consult 09/08 + update today)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Prep completed",
+    "Yes - returns clear yellow per pt"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "Dentures",
+    "None"
+   ]
+  ],
+  "nursing_note": "A&O x4. Completed prep 0500, stools clear. Took losartan, pantoprazole 0500. Held glipizide. Reports \"a little queasy\" this morning, burped up some prep. Neck circumference 49 cm. Wife in waiting room.",
+  "iv": "20g R AC 0712",
+  "glucose": "132 mg/dL 0705"
+ },
+ "label": "D. Swinford",
+ "bmi": "44.0"
+}

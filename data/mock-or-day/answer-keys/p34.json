@@ -1,0 +1,160 @@
+{
+ "id": "p34",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Parathyroidectomy with nerve monitoring and IOPTH in a patient whose HCTZ was supposed to be stopped in 2025 but was auto refilled and taken this morning; calcium 11.9, iCa 1.54, short QTc, K 3.4, volume depleted, and severe PONV history.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Primary hyperparathyroidism with hypercalcemia, HTN, obesity class I."
+ },
+ "decision": {
+  "recommendation": "proceed with hydration",
+  "rationale": "Calcium below 14 without severe symptoms is not a reason to cancel; surgery is the cure. Hydrate with saline, correct potassium, fix the HCTZ medication error and tell the PCP and endocrinology."
+ },
+ "redFlags": [
+  {
+   "id": "hctz",
+   "severity": "major",
+   "finding": "HCTZ still taken despite being discontinued",
+   "evidence": "Endocrinology 06/2025 stopped HCTZ; refill auto approved 03/2026; PAT med rec lists it; taken 0700 today.",
+   "implication": "Worsened hypercalcemia, hypokalemia, volume depletion.",
+   "action": "Stop HCTZ, reconcile meds, notify PCP and endocrinology.",
+   "keywords": [
+    "hctz",
+    "hydrochlorothiazide",
+    "thiazide",
+    "medication reconciliation"
+   ]
+  },
+  {
+   "id": "calcium",
+   "severity": "major",
+   "finding": "Hypercalcemia with ECG changes and dehydration",
+   "evidence": "Ca 11.9, iCa 1.54, QTc 328 short, dry mucosa, polyuria, K 3.4, BUN rising.",
+   "implication": "Arrhythmia, hypotension at induction, variable NMB response.",
+   "action": "Normal saline hydration, ECG monitoring, replete potassium, avoid hyperventilation-induced K drop.",
+   "keywords": [
+    "hypercalcemia",
+    "calcium",
+    "saline",
+    "hydrat",
+    "qtc",
+    "hypokalemia",
+    "potassium"
+   ]
+  },
+  {
+   "id": "nim",
+   "severity": "major",
+   "finding": "Recurrent laryngeal nerve monitoring",
+   "evidence": "NIM EMG ETT 7.0; avoid long acting NMB after intubation.",
+   "implication": "Paralysis blocks EMG signals.",
+   "action": "Succinylcholine or small rocuronium dose with sugammadex; no topical lidocaine on the tube; confirm tube position.",
+   "keywords": [
+    "nim",
+    "nerve monitor",
+    "emg",
+    "recurrent laryngeal",
+    "sugammadex",
+    "succinylcholine"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "Severe PONV history",
+   "evidence": "PONV after GA in 2004 and 2024; female nonsmoker; morphine intolerance.",
+   "implication": "Apfel 3 to 4.",
+   "action": "Multimodal prophylaxis (dexamethasone, ondansetron, consider scopolamine or TIVA), avoid morphine.",
+   "keywords": [
+    "ponv",
+    "apfel",
+    "tiva",
+    "scopolamine",
+    "ondansetron",
+    "dexamethasone"
+   ]
+  },
+  {
+   "id": "iopth",
+   "severity": "minor",
+   "finding": "IOPTH draws",
+   "evidence": "Dedicated R forearm IV, baseline then 5, 10, 15 min post excision.",
+   "implication": "Sample timing and contamination.",
+   "action": "Draw from dedicated line on time.",
+   "keywords": [
+    "iopth",
+    "pth",
+    "draw"
+   ]
+  },
+  {
+   "id": "postop",
+   "severity": "minor",
+   "finding": "Postop neck risks",
+   "evidence": "Neck surgery; hungry bone possible.",
+   "implication": "Hematoma, RLN injury, hypocalcemia.",
+   "action": "Smooth emergence, check voice, calcium follow up.",
+   "keywords": [
+    "hematoma",
+    "hypocalcemia",
+    "hungry bone",
+    "stridor"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "NIM ETT 7.0 with video laryngoscopy placement",
+   "keywords": [
+    "nim",
+    "ett",
+    "video"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "Normal saline hydration",
+   "keywords": [
+    "saline",
+    "hydrat"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Three agent PONV prophylaxis",
+   "keywords": [
+    "ponv",
+    "dexamethasone",
+    "ondansetron",
+    "scopolamine"
+   ]
+  },
+  {
+   "domain": "positioning",
+   "item": "Shoulder roll, arms tucked, protect osteoporotic bone",
+   "keywords": [
+    "shoulder roll",
+    "osteoporo"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Neck surgery emergence"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

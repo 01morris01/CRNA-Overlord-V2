@@ -1,0 +1,1769 @@
+{
+ "id": "p34",
+ "room": "OR 3",
+ "time": "1300",
+ "name": "BURCHFIELD, DONNA KAY",
+ "mrn": "0146034",
+ "dob": "08/30/1970",
+ "age": "56 y",
+ "sex": "F",
+ "ht_cm": 157,
+ "wt_kg": 77.2,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. R. Gentry, New Market Family Medicine",
+ "insurance": "BlueCross BlueShield TN (State of TN employee plan)",
+ "emergency_contact": "Wayne Burchfield (husband) 865-555-0138",
+ "isolation": "",
+ "allergies": [
+  [
+   "Sulfamethoxazole/trimethoprim",
+   "Rash",
+   "Moderate",
+   "2013"
+  ],
+  [
+   "Morphine",
+   "Itching, nausea",
+   "Mild (intolerance)",
+   "2021"
+  ]
+ ],
+ "case": {
+  "procedure": "Minimally invasive parathyroidectomy, left inferior, with intraoperative PTH monitoring; possible bilateral neck exploration",
+  "short": "Parathyroidectomy, L inferior (MIP)",
+  "laterality": "Left",
+  "service": "Endocrine Surgery",
+  "surgeon": "F. Arrowood, MD",
+  "assistant": "",
+  "indication": "Primary hyperparathyroidism, sestamibi-localized left inferior adenoma",
+  "duration_min": 90,
+  "anesthesia_requested": "General (LMA vs ETT) - surgeon prefers laryngeal nerve monitoring",
+  "position": "Supine, shoulder roll, neck extended, arms tucked",
+  "dispo": "Same-day discharge vs 23-h observation",
+  "blood": "None",
+  "equipment": "NIM EMG endotracheal tube 7.0 if ETT; IOPTH draws (art line not required, peripheral IV sample)",
+  "implants": "",
+  "surgeon_notes": "IOPTH baseline pre-incision, then 5, 10, 15 min post-excision - anesthesia to draw from dedicated IV. Avoid long-acting NMB after intubation if NIM used.",
+  "add_on": false,
+  "scheduled_on": "09/28/2026"
+ },
+ "problems": [
+  [
+   "Primary hyperparathyroidism",
+   "06/2025",
+   "Active"
+  ],
+  [
+   "Hypercalcemia",
+   "2018",
+   "Active"
+  ],
+  [
+   "Nephrolithiasis, recurrent (calcium oxalate)",
+   "2021",
+   "Active"
+  ],
+  [
+   "Osteoporosis (distal radius T-score -2.8)",
+   "2025",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2014",
+   "Active"
+  ],
+  [
+   "Vitamin D insufficiency",
+   "2025",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2017",
+   "Active"
+  ],
+  [
+   "Depression, in remission",
+   "2015",
+   "Active"
+  ],
+  [
+   "Obesity, class I",
+   "2014",
+   "Active"
+  ],
+  [
+   "Fatigue",
+   "2024",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Primary hyperparathyroidism diagnosed 06/2025 (Ca 11.6, PTH 142) - calcium mildly elevated on routine panels since ~2018, not addressed until 2025",
+   "Nephrolithiasis: ED 2021 (L 5 mm, passed), 2024 (R 7 mm, ureteroscopy)",
+   "Osteoporosis DEXA 2025",
+   "HTN on HCTZ + amlodipine",
+   "GERD",
+   "Depression, sertraline, stable",
+   "Constipation, fatigue, \"brain fog\" (symptoms attributed to menopause)"
+  ],
+  "psh": [
+   [
+    "2004",
+    "Laparoscopic cholecystectomy",
+    "Fort Sanders"
+   ],
+   [
+    "05/2024",
+    "Right ureteroscopy with laser lithotripsy, stent",
+    "C-N University Hospital"
+   ],
+   [
+    "2009",
+    "Hysterectomy, vaginal (fibroids)",
+    "Fort Sanders"
+   ]
+  ],
+  "family": [
+   "Mother: osteoporosis, hip fracture 79",
+   "Father: HTN, MI 66",
+   "No known MEN syndrome or familial hypercalcemia"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Clerk, county register of deeds office",
+   "living": "Husband",
+   "other": "Drinks \"2-3 big glasses of sweet tea\" a day; does not like water"
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "COVID-19",
+    "2024"
+   ],
+   [
+    "Tdap",
+    "2019"
+   ],
+   [
+    "Shingrix x2",
+    "2022"
+   ]
+  ],
+  "ob": "G2P2, hysterectomy 2009"
+ },
+ "home_meds": [
+  [
+   "Hydrochlorothiazide 25 mg",
+   "1 tab PO daily",
+   "Dr. R. Gentry",
+   "10/27/2026 0700"
+  ],
+  [
+   "Amlodipine 10 mg",
+   "1 tab PO daily",
+   "Dr. R. Gentry",
+   "10/27/2026 0700"
+  ],
+  [
+   "Sertraline 100 mg",
+   "1 tab PO daily",
+   "Dr. R. Gentry",
+   "10/27/2026 0700"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "1 tab PO daily",
+   "Dr. R. Gentry",
+   "10/27/2026 0700"
+  ],
+  [
+   "Cholecalciferol 1,000 IU",
+   "1 cap PO daily",
+   "Dr. K. Prabhu (Endocrine)",
+   "10/26/2026"
+  ],
+  [
+   "Docusate 100 mg",
+   "PO BID PRN",
+   "OTC",
+   "10/25/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "100 mL/h preop",
+   "Started 10/27/2026 1115"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Lisinopril 10 mg",
+   "2014-2016",
+   "Cough"
+  ],
+  [
+   "Tamsulosin 0.4 mg",
+   "04/2024-05/2024",
+   "Stone passage trial"
+  ],
+  [
+   "Oxycodone/acetaminophen 5/325",
+   "05/2024",
+   "Post-ureteroscopy course"
+  ],
+  [
+   "Calcium carbonate 500 mg BID",
+   "2020-06/2025",
+   "Stopped - hypercalcemia"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 1100",
+    "comment": "Day of surgery; baseline for IOPTH",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.4",
+      "L"
+     ],
+     "Cl": [
+      "107",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "11.9",
+      "H"
+     ],
+     "WBC": [
+      "7.5",
+      ""
+     ],
+     "Hgb": [
+      "12.5",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "217",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ],
+     "Phos": [
+      "2.3",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "09/28/2026",
+    "comment": "Endocrine surgery",
+    "vals": {
+     "Na": [
+      "142",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "108",
+      "H"
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "0.85",
+      ""
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "11.8",
+      "H"
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "130",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.5",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Phos": [
+      "2.4",
+      "L"
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/13/2026",
+    "comment": "Endocrine",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "109",
+      "H"
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "11.6",
+      "H"
+     ],
+     "Phos": [
+      "2.6",
+      ""
+     ],
+     "VitD": [
+      "29",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "06/18/2025",
+    "comment": "Endocrine",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "11.7",
+      "H"
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "132",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Phos": [
+      "2.3",
+      "L"
+     ],
+     "VitD": [
+      "21",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "05/30/2025",
+    "comment": "Annual - fatigue",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "108",
+      "H"
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "11.6",
+      "H"
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "17",
+      ""
+     ],
+     "ALKP": [
+      "121",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "TSH": [
+      "1.95",
+      ""
+     ],
+     "FT4": [
+      "1.27",
+      ""
+     ],
+     "VitD": [
+      "19",
+      "L"
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ],
+     "Phos": [
+      "2.4",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "04/27/2024 1840",
+    "comment": "ED - R stone",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "13.3",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "270",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.06",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "11.2",
+      "H"
+     ],
+     "USG": [
+      "1.013",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/28/2022",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "10.8",
+      "H"
+     ],
+     "AST": [
+      "26",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "104",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "5.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/09/2021 2310",
+    "comment": "ED - flank pain; UA RBC >50",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "13.3",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "215",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "107",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.88",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "10.9",
+      "H"
+     ],
+     "USG": [
+      "1.009",
+      ""
+     ],
+     "UProt": [
+      "Trace",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/20/2020",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "107",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "0.82",
+      ""
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "10.7",
+      "H"
+     ],
+     "AST": [
+      "16",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "96",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "TSH": [
+      "1.95",
+      ""
+     ],
+     "FT4": [
+      "1.19",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/02/2018",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "107",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "10.6",
+      "H"
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "90",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "5.3",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/15/2016",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.7",
+      ""
+     ],
+     "Cl": [
+      "107",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.78",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "10.3",
+      "H"
+     ],
+     "AST": [
+      "14",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "105",
+      ""
+     ],
+     "TSH": [
+      "1.98",
+      ""
+     ],
+     "FT4": [
+      "1.42",
+      ""
+     ],
+     "Phos": [
+      "3.2",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Phos",
+    "name": "Phosphorus",
+    "unit": "mg/dL",
+    "ref": "2.5-4.5"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "06/18/2025",
+    "PTH, intact",
+    "142 pg/mL (ref 15-65)",
+    "H"
+   ],
+   [
+    "06/18/2025",
+    "Ionized calcium",
+    "1.49 mmol/L (ref 1.12-1.32)",
+    "H"
+   ],
+   [
+    "06/18/2025",
+    "24-h urine calcium",
+    "338 mg/24 h (ref 100-300) - collected on HCTZ",
+    "H"
+   ],
+   [
+    "06/18/2025",
+    "Urine calcium/creatinine clearance ratio",
+    "0.021",
+    ""
+   ],
+   [
+    "09/28/2026",
+    "PTH, intact",
+    "156 pg/mL",
+    "H"
+   ],
+   [
+    "10/27/2026 1100",
+    "Ionized calcium",
+    "1.54 mmol/L",
+    "H"
+   ],
+   [
+    "10/27/2026 1100",
+    "PTH, intact (IOPTH pre-incision baseline pending)",
+    "Pending",
+    ""
+   ],
+   [
+    "05/2024",
+    "Stone analysis",
+    "Calcium oxalate monohydrate 80%, calcium phosphate 20%",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/09/2021",
+   "CT Abdomen/Pelvis stone protocol",
+   "5 mm L UVJ stone with mild hydronephrosis. Bilateral nonobstructing punctate renal stones.",
+   "D. Lyle, MD"
+  ],
+  [
+   "04/27/2024",
+   "CT Abdomen/Pelvis stone protocol",
+   "7 mm R proximal ureteral stone with moderate hydronephrosis. Additional 3 mm L lower pole calculus. Nephrocalcinosis not seen.",
+   "R. Haverty, MD"
+  ],
+  [
+   "07/09/2025",
+   "DEXA bone density",
+   "L1-L4 T -1.9; L femoral neck T -2.2; L distal 1/3 radius T -2.8. Impression: osteoporosis (radius), cortical-predominant loss typical of hyperparathyroidism.",
+   "S. Varga, MD"
+  ],
+  [
+   "08/14/2025",
+   "US Neck (thyroid/parathyroid)",
+   "1.4 x 0.8 x 0.6 cm hypoechoic oval lesion posterior/inferior to the L thyroid lobe, with polar feeding vessel. Thyroid: small benign-appearing colloid nodules. Impression: likely L inferior parathyroid adenoma.",
+   "P. Ferrante, MD"
+  ],
+  [
+   "09/04/2025",
+   "Tc-99m sestamibi SPECT/CT parathyroid",
+   "Persistent focal uptake on delayed images inferior to L thyroid lobe corresponding to US lesion. No ectopic foci. Impression: L inferior parathyroid adenoma.",
+   "R. Haverty, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "04/27/2024",
+   "ECG 12-lead (ED)",
+   "Sinus rhythm 88. QT 320, QTc 386. No acute changes.",
+   "K. Fannon, MD",
+   {
+    "rate": 88,
+    "pr": 158,
+    "qrs": 86,
+    "qtc": 386,
+    "axis": 45
+   }
+  ],
+  [
+   "10/14/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 72. PR 160, QRS 88. QT 300 ms, QTc 328 ms (short). ST segment short with T wave arising immediately after QRS. Otherwise normal. Compared with 04/2024, QTc shorter.",
+   "M. Desai, MD",
+   {
+    "rate": 72,
+    "pr": 160,
+    "qrs": 88,
+    "qtc": 328,
+    "axis": 45
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "03/15/2016",
+   "Clinic",
+   "New Market Family Medicine",
+   "Annual",
+   "Routine"
+  ],
+  [
+   "08/09/2021",
+   "ED visit",
+   "Jefferson Memorial Hospital",
+   "L flank pain",
+   "Nephrolithiasis 5 mm, passed"
+  ],
+  [
+   "04/27/2024",
+   "ED visit",
+   "C-N University Hospital ED",
+   "R flank pain",
+   "7 mm stone; urology"
+  ],
+  [
+   "05/09/2024",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "R ureteroscopy",
+   "Discharged same day"
+  ],
+  [
+   "06/18/2025",
+   "Clinic",
+   "C-N University Endocrinology",
+   "Hypercalcemia",
+   "PHPT diagnosed"
+  ],
+  [
+   "09/28/2026",
+   "Clinic",
+   "C-N University Endocrine Surgery",
+   "Parathyroidectomy consult",
+   "Scheduled"
+  ],
+  [
+   "10/14/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "04/02/2018 1500",
+   "Result Note",
+   "Family Medicine",
+   "R. Gentry, MD",
+   "Annual labs reviewed. Lipids acceptable. A1c 5.6. Mailed letter: \"Your labs look good.\""
+  ],
+  [
+   "03/28/2022 1610",
+   "Result Note",
+   "Family Medicine",
+   "L. Kesterson, NP",
+   "Labs ok. Calcium slightly high (10.8) - likely due to calcium supplement / HCTZ, recheck next year."
+  ],
+  [
+   "05/12/2024 1000",
+   "Discharge Summary",
+   "Urology",
+   "B. Satterly, MD",
+   "R ureteroscopy laser lithotripsy, stent placed, removed POD7 by string. Stone analysis pending. Recommend metabolic stone evaluation (24-h urine) with PCP. Hydration >2.5 L/day."
+  ],
+  [
+   "05/30/2025 1420",
+   "Progress Note",
+   "Family Medicine",
+   "R. Gentry, MD",
+   "Annual. Fatigue, constipation, poor concentration x1 yr. Two kidney stones. Ca 11.6 - reviewed old labs, calcium mildly high since 2018. Stop calcium supplement. Check PTH - refer endocrinology."
+  ],
+  [
+   "06/18/2025 1100",
+   "Consult",
+   "Endocrinology",
+   "K. Prabhu, MD",
+   "Ca 11.7, PTH 142, iCa 1.49, Phos low, 24-h urine Ca 338 (on HCTZ, so likely underestimated - no FHH). PHPT with end-organ involvement: nephrolithiasis x2, osteoporosis by radius. Meets surgical criteria. Plan: neck US, sestamibi, DEXA. STOP HCTZ (raises serum calcium) - switch to amlodipine dose increase for BP; message to PCP. Vit D repletion 1,000 IU daily. Hydration."
+  ],
+  [
+   "06/19/2025 0930",
+   "Telephone Encounter",
+   "Family Medicine",
+   "M. Duggins, LPN",
+   "Message from Dr. Prabhu re stopping HCTZ. Per Dr. Gentry increase amlodipine to 10 mg daily; discontinue HCTZ. New Rx amlodipine 10 mg sent. Pt notified by voicemail."
+  ],
+  [
+   "09/12/2025 1500",
+   "Progress Note",
+   "Endocrinology",
+   "K. Prabhu, MD",
+   "Localization concordant (US + sestamibi) L inferior adenoma. Refer endocrine surgery. Pt wants to wait until after daughter's wedding (spring 2026). Ca 11.6. Hydration."
+  ],
+  [
+   "01/13/2026 1030",
+   "Progress Note",
+   "Endocrinology",
+   "K. Prabhu, MD",
+   "Ca 11.6, VitD 29. BP 142/88 - \"my BP pills\" bottles not brought. Surgical referral re-sent."
+  ],
+  [
+   "03/22/2026 1415",
+   "Refill Request",
+   "Family Medicine",
+   "Pharmacy (electronic)",
+   "Hydrochlorothiazide 25 mg #90 refill request, Food City New Market. Auto-approved per HTN refill protocol (last BP visit within 12 mo). - M. Duggins, LPN"
+  ],
+  [
+   "09/28/2026 1330",
+   "Consult",
+   "Endocrine Surgery",
+   "F. Arrowood, MD",
+   "56F PHPT, Ca 11.8, PTH 156, concordant L inferior adenoma. Plan MIP with IOPTH; bilateral exploration if PTH does not drop >50%. Nerve monitoring. Voice normal. Same-day d/c anticipated. Med list per pt reviewed."
+  ],
+  [
+   "10/14/2026 0945",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT. ECG done. Med rec with pt: HCTZ 25 mg daily, amlodipine 10 mg daily, sertraline, pantoprazole, vit D. Pt states she \"takes both blood pressure pills.\" Instructions: take amlodipine, sertraline, pantoprazole AM of surgery; hold HCTZ AM. Labs day of surgery."
+  ],
+  [
+   "10/14/2026 1010",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "T. Haskins, CRNA",
+   "ASA 2. MP II, short thick neck, neck circumference 40 cm, full extension. STOP-BANG 3 (BMI 31, HTN, age). Plan GA, NIM ETT per surgeon."
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 1100. Solids until 0500 (light), clears until 1000. Take morning meds as instructed. Driver husband."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/15/2016 0920",
+   "138/86",
+   76,
+   16,
+   98,
+   36.7,
+   74.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "08/09/2021 2300",
+   "162/94",
+   98,
+   20,
+   98,
+   36.8,
+   76.0,
+   "9/10",
+   "ED (outside)"
+  ],
+  [
+   "04/27/2024 1830",
+   "158/92",
+   94,
+   18,
+   98,
+   37.0,
+   78.0,
+   "8/10",
+   "ED"
+  ],
+  [
+   "05/30/2025 1400",
+   "140/86",
+   76,
+   16,
+   98,
+   36.6,
+   78.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "06/18/2025 1045",
+   "136/84",
+   74,
+   16,
+   98,
+   36.6,
+   78.2,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "01/13/2026 1015",
+   "142/88",
+   78,
+   16,
+   98,
+   36.7,
+   77.8,
+   "0/10",
+   "Endocrinology"
+  ],
+  [
+   "09/28/2026 1315",
+   "138/84",
+   76,
+   16,
+   98,
+   36.6,
+   77.5,
+   "0/10",
+   "Endocrine surgery"
+  ],
+  [
+   "10/14/2026 0930",
+   "134/82",
+   74,
+   16,
+   98,
+   36.6,
+   77.3,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 1105",
+   "128/80",
+   86,
+   16,
+   98,
+   36.6,
+   77.2,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "BMP, CBC, Mg, Phos, iCa, PTH DOS",
+   "10/26/2026",
+   "Resulted"
+  ],
+  [
+   "IOPTH x4 per protocol",
+   "10/27/2026 1100",
+   "Active"
+  ],
+  [
+   "LR 100 mL/h",
+   "10/27/2026 1110",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 1110",
+   "Active"
+  ],
+  [
+   "Postop: Ca and PTH 4 h post-op; calcium carbonate PRN tingling",
+   "10/27/2026 1110",
+   "Pending (postop)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Not done",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: parathyroidectomy, possible bilateral neck exploration",
+   "Signed 09/28/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2004",
+   "Lap cholecystectomy",
+   "GA",
+   "PONV severe",
+   "Fort Sanders"
+  ],
+  [
+   "2009",
+   "Vaginal hysterectomy",
+   "Spinal + sedation",
+   "None",
+   "Fort Sanders"
+  ],
+  [
+   "05/2024",
+   "R ureteroscopy",
+   "GA LMA",
+   "PONV, treated in PACU",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1058",
+  "npo_solids": "10/27/2026 0500 toast",
+  "npo_clears": "10/27/2026 0945 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A (hysterectomy)"
+   ],
+   [
+    "Site marked",
+    "N/A (midline)"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "Took \"all my morning pills\" at 0700 including both BP pills. Mucous membranes dry; reports thirst, urinating frequently. Voice normal. 20g L hand, 20g R forearm for IOPTH draws. Husband in waiting room.",
+  "iv": "20g L hand (infusion), 20g R forearm (lab draws only)",
+  "glucose": ""
+ },
+ "label": "D. Burchfield",
+ "bmi": "31.3"
+}

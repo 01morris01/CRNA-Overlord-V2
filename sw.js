@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v57-voice-patient-interview-2026-07-26';
+const CACHE_VERSION = 'v59-mock-or-day-2026-10-14';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -15,6 +15,8 @@ const APP_SHELL = [
   '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveWaveformRenderer.js',
   '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
   '/ui/liveCaseView.js', '/ui/liveCaseModel.js', '/ui/patientInterview.js',
+  '/ui/simOperator.js', '/ui/simOperatorView.js',
+  '/ui/carePlanSheet.js', '/ui/mockOrDay.js', '/data/mock-or-day/index.json',
   '/crisis-sim/ui/simRunner.js',
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',

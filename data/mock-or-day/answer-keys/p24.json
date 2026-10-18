@@ -1,0 +1,121 @@
+{
+ "id": "p24",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "85 y with moderate dementia and an activated HCPOA signed her own consent for a cataract; she cannot lie flat (SpO2 89% when the head was lowered) for a procedure that needs her flat and still; DNR/DNI.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "HFrEF EF 35% with orthopnea at rest, CKD 3b, moderate dementia."
+ },
+ "decision": {
+  "recommendation": "delay",
+  "rationale": "Consent is invalid (patient lacks capacity; daughter is the activated agent). She cannot tolerate the flat position, and GA is excluded by her DNI. Reschedule after consent from the POA and a realistic positioning plan with the surgeon, or reconsider the procedure."
+ },
+ "redFlags": [
+  {
+   "id": "consent",
+   "severity": "critical",
+   "finding": "Consent signed by a patient who lacks capacity",
+   "evidence": "HCPOA activated 03/2025 by physician determination of incapacity; patient oriented to self; signed 0705; daughter not reached.",
+   "implication": "Consent is not valid.",
+   "action": "Obtain informed consent from the daughter (POA), by phone if needed with witness.",
+   "keywords": [
+    "consent",
+    "capacity",
+    "poa",
+    "power of attorney",
+    "daughter"
+   ]
+  },
+  {
+   "id": "orthopnea",
+   "severity": "critical",
+   "finding": "Cannot lie flat",
+   "evidence": "Sleeps in a recliner; SpO2 89% and dyspneic when HOB lowered; cardiology deferred positioning; ophthalmology H&P template said she can lie flat.",
+   "implication": "Cataract surgery needs a flat, still head for 25 min; sedation would worsen it.",
+   "action": "Do not proceed as booked; surgeon and anesthesia to agree on a semi upright technique or defer.",
+   "keywords": [
+    "orthopnea",
+    "lie flat",
+    "supine",
+    "positioning",
+    "head of bed"
+   ]
+  },
+  {
+   "id": "dnr",
+   "severity": "major",
+   "finding": "POLST DNR/DNI",
+   "evidence": "POLST 03/2025: DNR, selective treatment, no intubation.",
+   "implication": "Limits rescue options during MAC.",
+   "action": "Required reconsideration discussion with the POA before any anesthetic.",
+   "keywords": [
+    "dnr",
+    "dni",
+    "polst",
+    "required reconsideration"
+   ]
+  },
+  {
+   "id": "hfref",
+   "severity": "major",
+   "finding": "HFrEF NYHA III with new LBBB and mild to moderate AS",
+   "evidence": "EF 35%, BNP 710, crackles, edema; QRS 148.",
+   "implication": "Little reserve for sedation, anxiety, or fluid.",
+   "action": "Minimal sedation, avoid hypotension and tachycardia.",
+   "keywords": [
+    "heart failure",
+    "ef 35",
+    "bnp",
+    "lbbb"
+   ]
+  },
+  {
+   "id": "cooperation",
+   "severity": "major",
+   "finding": "Dementia with severe hearing loss and agitation risk",
+   "evidence": "MoCA 12, hearing aids refused, agitates when frightened; codeine delirium.",
+   "implication": "Movement during intraocular surgery; delirium.",
+   "action": "Large print communication, familiar aide present, avoid benzodiazepines and anticholinergics, minimal titrated sedation.",
+   "keywords": [
+    "dementia",
+    "hearing",
+    "agitation",
+    "benzodiazepine",
+    "delirium"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Standard monitors with capnography; supplemental oxygen",
+   "keywords": [
+    "capnography",
+    "oxygen"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Topical anesthesia with minimal sedation",
+   "keywords": [
+    "topical",
+    "minimal sedation"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Return to assisted living with clear handoff",
+   "keywords": [
+    "assisted living",
+    "discharge"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "OpioidRespDepression",
+   "why": "Sedation in a frail patient breathing spontaneously"
+  }
+ ]
+}

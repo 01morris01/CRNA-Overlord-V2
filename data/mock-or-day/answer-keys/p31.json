@@ -1,0 +1,156 @@
+{
+ "id": "p31",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "EVAR in a CKD 3b diabetic who has developed contrast associated AKI since the 10/23 CTA (Cr 1.8 to 2.3, eGFR 29, K 5.3, CO2 19) and who took full dose metformin this morning (and on the CT day) despite nephrology instructions, with more contrast planned today.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "AAA 5.9 cm, CAD with stent, CKD with acute kidney injury and metabolic acidosis, insulin dependent diabetes, OSA."
+ },
+ "decision": {
+  "recommendation": "discuss delay with vascular surgery",
+  "rationale": "This is an elective aneurysm below rupture urgency thresholds for today. Fresh AKI plus metformin plus another 100 to 150 mL contrast risks worsening renal failure and metformin associated lactic acidosis. Reasonable to delay several days for renal recovery with metformin stopped; if surgery proceeds, use CO2 angiography, minimal contrast, isotonic hydration, serial lactate and glucose."
+ },
+ "redFlags": [
+  {
+   "id": "aki",
+   "severity": "critical",
+   "finding": "Acute kidney injury after recent contrast",
+   "evidence": "Cr 1.80 on 10/23 to 2.30 today; eGFR 39 to 29; K 5.3; CO2 19; dark small urine.",
+   "implication": "Further contrast and hypotension can push him toward dialysis; hyperkalemia limits succinylcholine.",
+   "action": "Discuss delay; if proceeding, minimize contrast (CO2 angiography), isotonic fluids, avoid nephrotoxins and hypotension, recheck K, avoid succinylcholine.",
+   "keywords": [
+    "aki",
+    "acute kidney",
+    "contrast",
+    "creatinine",
+    "egfr",
+    "co2 angiography",
+    "nephropathy",
+    "hyperkalemia",
+    "potassium"
+   ]
+  },
+  {
+   "id": "metformin",
+   "severity": "critical",
+   "finding": "Metformin 1,000 mg taken this morning with eGFR below 30",
+   "evidence": "Pharmacy med rec: last dose 0500 today; PAT said hold; nephrology wanted 500 mg BID and stop below eGFR 30; also taken on the CT day; refills approved at 1,000 mg BID.",
+   "implication": "Metformin associated lactic acidosis with contrast and AKI.",
+   "action": "Stop metformin, follow lactate and bicarbonate, notify team, reconcile dose with nephrology.",
+   "keywords": [
+    "metformin",
+    "lactic acidosis",
+    "lactate"
+   ]
+  },
+  {
+   "id": "cardiac",
+   "severity": "major",
+   "finding": "CAD with LAD stent",
+   "evidence": "DES 2019, MPI low risk 09/2026, METs about 4, metoprolol taken, aspirin continued.",
+   "implication": "Ischemia with hemodynamic swings during graft deployment.",
+   "action": "Arterial line, tight BP control, continue beta blocker and aspirin.",
+   "keywords": [
+    "cad",
+    "stent",
+    "beta blocker",
+    "arterial line",
+    "ischemia"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "major",
+   "finding": "OSA and difficult mask features under sedation",
+   "evidence": "AHI 34 on CPAP, MP III, neck 46 cm, beard; desaturated to 88% under MAC propofol in 2020.",
+   "implication": "Airway obstruction during MAC; difficult mask ventilation.",
+   "action": "Careful sedation or GA with secured airway; CPAP in PACU.",
+   "keywords": [
+    "osa",
+    "cpap",
+    "mallampati",
+    "beard",
+    "sedation",
+    "mask"
+   ]
+  },
+  {
+   "id": "heparin",
+   "severity": "minor",
+   "finding": "Heparin 100 units/kg with ACT goal over 250",
+   "evidence": "Surgeon notes.",
+   "implication": "Bleeding at access sites; protamine at the end.",
+   "action": "Baseline ACT, heparin dose about 9,200 units, recheck ACT.",
+   "keywords": [
+    "heparin",
+    "act",
+    "protamine"
+   ]
+  },
+  {
+   "id": "glucose",
+   "severity": "minor",
+   "finding": "Glucose control",
+   "evidence": "Glucose 168, glargine reduced to 18 units.",
+   "implication": "Hyperglycemia and infection.",
+   "action": "Hourly POC glucose, insulin per protocol.",
+   "keywords": [
+    "glucose",
+    "insulin"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "MAC with local or GA with secured airway",
+   "keywords": [
+    "mac",
+    "general",
+    "local"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line before induction",
+   "keywords": [
+    "arterial line"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "renal",
+   "item": "Renal protection: minimal contrast, isotonic fluid, avoid hypotension",
+   "keywords": [
+    "renal",
+    "contrast",
+    "fluid"
+   ]
+  },
+  {
+   "domain": "blood",
+   "item": "2 units crossmatched, possible open conversion",
+   "keywords": [
+    "crossmatch",
+    "open conversion"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "OpioidRespDepression",
+   "why": "OSA under MAC"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Contrast and cefazolin"
+  }
+ ]
+}

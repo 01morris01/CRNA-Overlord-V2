@@ -1,0 +1,2286 @@
+{
+ "id": "p43",
+ "room": "OR 19",
+ "time": "0730",
+ "name": "WYRICKSON, JAZMINE R",
+ "mrn": "0147043",
+ "dob": "01/30/1993",
+ "age": "33 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 56.5,
+ "preferred_name": "Jaz",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "K. Mayes, MD, C-N Adult Sickle Cell Clinic (serves as PCP)",
+ "insurance": "TennCare (Amerigroup)",
+ "emergency_contact": "Denise Wyrickson (mother) 865-555-0846",
+ "isolation": "",
+ "allergies": [
+  [
+   "Morphine",
+   "Itching, hives (histamine release)",
+   "Moderate",
+   "2008"
+  ],
+  [
+   "Ketorolac",
+   "Not an allergy - avoid per hematology (CKD risk/hyposthenuria)",
+   "N/A (intolerance)",
+   "2020"
+  ]
+ ],
+ "case": {
+  "procedure": "Right carpal tunnel release, open",
+  "short": "R carpal tunnel release",
+  "laterality": "Right",
+  "service": "Hand Surgery",
+  "surgeon": "E. Rasnake, MD",
+  "assistant": "",
+  "indication": "Severe R carpal tunnel syndrome, EMG-confirmed, thenar weakness, failed splinting and injection.",
+  "duration_min": 30,
+  "anesthesia_requested": "MAC with Bier block (IVRA)",
+  "position": "Supine, R arm on hand table",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Hand table, double-cuff pneumatic tourniquet (upper arm), Esmarch",
+  "implants": "",
+  "surgeon_notes": "Bier block / tourniquet please. Quick case. Pt has sickle cell - hematology aware.",
+  "add_on": false,
+  "scheduled_on": "10/07/2026"
+ },
+ "problems": [
+  [
+   "Sickle cell disease, HbSS",
+   "Birth",
+   "Active"
+  ],
+  [
+   "Vaso-occlusive pain crises, frequent (4-6 admissions/yr)",
+   "2010",
+   "Active"
+  ],
+  [
+   "Acute chest syndrome, history (2015, 2024)",
+   "2024",
+   "Resolved"
+  ],
+  [
+   "Chronic pain syndrome, on long-term opioid therapy",
+   "2016",
+   "Active"
+  ],
+  [
+   "RBC alloimmunization (anti-E, anti-K)",
+   "2015",
+   "Active"
+  ],
+  [
+   "Iron overload, transfusional",
+   "2022",
+   "Active"
+  ],
+  [
+   "Avascular necrosis left femoral head, Ficat II",
+   "2021",
+   "Active"
+  ],
+  [
+   "Carpal tunnel syndrome, right",
+   "04/2026",
+   "Active"
+  ],
+  [
+   "Functional asplenia",
+   "Childhood",
+   "Active"
+  ],
+  [
+   "Cholelithiasis s/p cholecystectomy",
+   "2011",
+   "Resolved"
+  ],
+  [
+   "Microalbuminuria (sickle nephropathy)",
+   "2023",
+   "Active"
+  ],
+  [
+   "Depression, mild",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "HbSS dx newborn screen; functional asplenia; penicillin ppx childhood",
+   "VOC 4-6 admissions/yr; last 10/02-10/06/2026",
+   "Acute chest syndrome 2015 (exchange transfusion, ICU) and 09/2024 (simple transfusion x2, HFNC)",
+   "Alloimmunized: anti-E (2015), anti-K (2024)",
+   "Transfusional iron overload - deferasirox started 2023 (stopped 2025, Cr rise)",
+   "L hip AVN",
+   "No stroke history; TCDs normal as child"
+  ],
+  "psh": [
+   [
+    "2011",
+    "Laparoscopic cholecystectomy",
+    "East Tennessee Children's Hospital (outside)"
+   ],
+   [
+    "2015",
+    "Port-a-cath placement (removed 2018 - infection)",
+    "C-N University Hospital"
+   ],
+   [
+    "2018",
+    "Port removal",
+    "C-N University Hospital"
+   ],
+   [
+    "2020",
+    "Dental extractions x2 (local)",
+    "Dental clinic"
+   ]
+  ],
+  "family": [
+   "Mother: sickle trait",
+   "Father: sickle trait",
+   "Brother: sickle trait",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "Denies; THC \"once in a while for pain\" 2024 per pain clinic note",
+   "occupation": "Medical billing, works from home",
+   "living": "Apartment, Knoxville; mother nearby",
+   "other": "Opioid agreement with C-N Sickle Cell Clinic (single prescriber). Mother driving today."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2023"
+   ],
+   [
+    "MenACWY",
+    "2023"
+   ],
+   [
+    "MenB",
+    "2021"
+   ],
+   [
+    "Hib",
+    "Childhood"
+   ],
+   [
+    "COVID-19",
+    "2023"
+   ],
+   [
+    "Tdap",
+    "2022"
+   ]
+  ],
+  "ob": "G1P0010 (SAB 2019). LMP 10/10/2026. Contraception: medroxyprogesterone injection q12 wk (last 09/2026)."
+ },
+ "home_meds": [
+  [
+   "Hydroxyurea 500 mg cap",
+   "2 caps (1,000 mg) PO daily (~18 mg/kg)",
+   "K. Mayes, MD",
+   "10/26/2026 0900"
+  ],
+  [
+   "Folic acid 1 mg tab",
+   "1 tab PO daily",
+   "K. Mayes, MD",
+   "10/26/2026"
+  ],
+  [
+   "Oxycodone 10 mg tab",
+   "1 tab PO q6h PRN pain (avg 3-4/day)",
+   "K. Mayes, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Oxycodone ER 15 mg tab",
+   "1 tab PO q12h",
+   "K. Mayes, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Naloxone 4 mg nasal spray",
+   "PRN opioid overdose",
+   "K. Mayes, MD",
+   "Never used"
+  ],
+  [
+   "Gabapentin 300 mg cap",
+   "1 cap PO TID",
+   "K. Mayes, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Vitamin D3 2,000 IU",
+   "1 PO daily",
+   "K. Mayes, MD",
+   "10/26/2026"
+  ],
+  [
+   "Sertraline 50 mg tab",
+   "1 tab PO daily",
+   "K. Mayes, MD",
+   "10/26/2026"
+  ],
+  [
+   "Medroxyprogesterone 150 mg IM",
+   "Every 12 weeks",
+   "GYN clinic",
+   "09/08/2026"
+  ],
+  [
+   "Polyethylene glycol 17 g",
+   "PO daily PRN constipation",
+   "K. Mayes, MD",
+   "10/25/2026"
+  ],
+  [
+   "Wrist splint, R",
+   "Nightly",
+   "E. Rasnake, MD",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0615"
+  ],
+  [
+   "Lactated Ringer's 1,000 mL",
+   "100 mL/h preop hydration per hematology",
+   "Not started - IV pending"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Oxygen nasal cannula 2 L",
+   "Maintain SpO2 >= 95%",
+   "Ordered"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Deferasirox 360 mg tabs",
+   "2023-04/2025",
+   "Creatinine rise; on hold, plan phlebotomy/chelation re-eval"
+  ],
+  [
+   "Crizanlizumab infusion monthly",
+   "2022-2023",
+   "No reduction in crises; insurance"
+  ],
+  [
+   "Morphine",
+   "2008",
+   "Itching/hives"
+  ],
+  [
+   "Ketorolac/NSAIDs",
+   "2020",
+   "Microalbuminuria - avoid per hematology"
+  ],
+  [
+   "Penicillin VK prophylaxis",
+   "Childhood-2000",
+   "Stopped age 5"
+  ],
+  [
+   "Amitriptyline",
+   "2019-2020",
+   "Sedation"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0600",
+    "comment": "Day of surgery",
+    "vals": {
+     "WBC": [
+      "11.6",
+      "H"
+     ],
+     "Hgb": [
+      "8.0",
+      "L"
+     ],
+     "Hct": [
+      "25",
+      "L"
+     ],
+     "Plt": [
+      "418",
+      "H"
+     ],
+     "MCV": [
+      "104",
+      "H"
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.54",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/21/2026",
+    "comment": "Hematology preop",
+    "vals": {
+     "WBC": [
+      "11.2",
+      "H"
+     ],
+     "Hgb": [
+      "8.0",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "432",
+      "H"
+     ],
+     "MCV": [
+      "103",
+      "H"
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.55",
+      ""
+     ],
+     "Glu": [
+      "80",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "50",
+      "H"
+     ],
+     "ALT": [
+      "18",
+      ""
+     ],
+     "ALKP": [
+      "120",
+      ""
+     ],
+     "TBili": [
+      "3.4",
+      "H"
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "LDH": [
+      "422",
+      "H"
+     ],
+     "HbS": [
+      "79",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/05/2026 0500",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "12.0",
+      "H"
+     ],
+     "Hgb": [
+      "7.4",
+      "L"
+     ],
+     "Hct": [
+      "23",
+      "L"
+     ],
+     "Plt": [
+      "402",
+      "H"
+     ],
+     "MCV": [
+      "106",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/02/2026 2330",
+    "comment": "ED - VOC",
+    "vals": {
+     "WBC": [
+      "15.2",
+      "H"
+     ],
+     "Hgb": [
+      "7.1",
+      "L"
+     ],
+     "Hct": [
+      "22",
+      "L"
+     ],
+     "Plt": [
+      "466",
+      "H"
+     ],
+     "MCV": [
+      "105",
+      "H"
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "7",
+      ""
+     ],
+     "Cr": [
+      "0.52",
+      ""
+     ],
+     "Glu": [
+      "85",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "50",
+      "H"
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "118",
+      ""
+     ],
+     "TBili": [
+      "4.6",
+      "H"
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "LDH": [
+      "610",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/18/2026",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "10.5",
+      ""
+     ],
+     "Hgb": [
+      "8.3",
+      "L"
+     ],
+     "Hct": [
+      "25",
+      "L"
+     ],
+     "Plt": [
+      "401",
+      "H"
+     ],
+     "MCV": [
+      "104",
+      "H"
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "6",
+      "L"
+     ],
+     "Cr": [
+      "0.49",
+      "L"
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "43",
+      "H"
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "114",
+      ""
+     ],
+     "TBili": [
+      "3.4",
+      "H"
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Ferritin": [
+      "1510",
+      "H"
+     ],
+     "Fe": [
+      "94",
+      ""
+     ],
+     "TSAT": [
+      "29",
+      ""
+     ],
+     "HbS": [
+      "77",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/10/2025",
+    "comment": "Cr up on deferasirox - stopped",
+    "vals": {
+     "WBC": [
+      "10.6",
+      ""
+     ],
+     "Hgb": [
+      "8.0",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "385",
+      ""
+     ],
+     "MCV": [
+      "103",
+      "H"
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "6",
+      "L"
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "90",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "49",
+      "H"
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "125",
+      ""
+     ],
+     "TBili": [
+      "3.4",
+      "H"
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/16/2024 0500",
+    "comment": "Post 2 u PRBC (C,E,K-neg)",
+    "vals": {
+     "WBC": [
+      "14.0",
+      "H"
+     ],
+     "Hgb": [
+      "9.6",
+      "L"
+     ],
+     "Hct": [
+      "30",
+      "L"
+     ],
+     "Plt": [
+      "402",
+      "H"
+     ],
+     "MCV": [
+      "103",
+      "H"
+     ],
+     "HbS": [
+      "48",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/14/2024 0310",
+    "comment": "ED - chest pain, hypoxia",
+    "vals": {
+     "WBC": [
+      "18.6",
+      "H"
+     ],
+     "Hgb": [
+      "6.4",
+      "L"
+     ],
+     "Hct": [
+      "20",
+      "L"
+     ],
+     "Plt": [
+      "182",
+      ""
+     ],
+     "MCV": [
+      "103",
+      "H"
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.54",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "42",
+      "H"
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "123",
+      ""
+     ],
+     "TBili": [
+      "5.8",
+      "H"
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "LDH": [
+      "890",
+      "H"
+     ],
+     "BNP": [
+      "46",
+      ""
+     ],
+     "pH": [
+      "7.34",
+      "L"
+     ],
+     "PaCO2": [
+      "46",
+      "H"
+     ],
+     "HCO3a": [
+      "24",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/09/2023",
+    "comment": "Deferasirox start",
+    "vals": {
+     "WBC": [
+      "10.8",
+      ""
+     ],
+     "Hgb": [
+      "8.1",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "417",
+      "H"
+     ],
+     "MCV": [
+      "104",
+      "H"
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "7",
+      ""
+     ],
+     "Cr": [
+      "0.48",
+      "L"
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "48",
+      "H"
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "121",
+      ""
+     ],
+     "TBili": [
+      "3.5",
+      "H"
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "Ferritin": [
+      "1890",
+      "H"
+     ],
+     "Fe": [
+      "87",
+      ""
+     ],
+     "TSAT": [
+      "30",
+      ""
+     ],
+     "USG": [
+      "1.009",
+      ""
+     ],
+     "UProt": [
+      "1+",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/18/2021",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "11.0",
+      ""
+     ],
+     "Hgb": [
+      "8.3",
+      "L"
+     ],
+     "Hct": [
+      "25",
+      "L"
+     ],
+     "Plt": [
+      "404",
+      "H"
+     ],
+     "MCV": [
+      "105",
+      "H"
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.50",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "46",
+      "H"
+     ],
+     "ALT": [
+      "14",
+      ""
+     ],
+     "ALKP": [
+      "123",
+      ""
+     ],
+     "TBili": [
+      "3.5",
+      "H"
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "Ferritin": [
+      "1120",
+      "H"
+     ],
+     "Fe": [
+      "93",
+      ""
+     ],
+     "TSAT": [
+      "32",
+      ""
+     ],
+     "HbS": [
+      "80",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/02/2020",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "10.7",
+      ""
+     ],
+     "Hgb": [
+      "8.0",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "430",
+      "H"
+     ],
+     "MCV": [
+      "104",
+      "H"
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.55",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "50",
+      "H"
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "123",
+      ""
+     ],
+     "TBili": [
+      "3.5",
+      "H"
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "USG": [
+      "1.010",
+      ""
+     ],
+     "UProt": [
+      "Trace",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2018",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "10.6",
+      ""
+     ],
+     "Hgb": [
+      "8.4",
+      "L"
+     ],
+     "Hct": [
+      "25",
+      "L"
+     ],
+     "Plt": [
+      "412",
+      "H"
+     ],
+     "MCV": [
+      "106",
+      "H"
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "7",
+      ""
+     ],
+     "Cr": [
+      "0.57",
+      ""
+     ],
+     "Glu": [
+      "82",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "42",
+      "H"
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "118",
+      ""
+     ],
+     "TBili": [
+      "3.3",
+      "H"
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "LDH": [
+      "425",
+      "H"
+     ],
+     "Ferritin": [
+      "640",
+      "H"
+     ],
+     "Fe": [
+      "111",
+      ""
+     ],
+     "TSAT": [
+      "28",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/20/2016",
+    "comment": "Hydroxyurea started 05/2016",
+    "vals": {
+     "WBC": [
+      "10.9",
+      ""
+     ],
+     "Hgb": [
+      "7.9",
+      "L"
+     ],
+     "Hct": [
+      "24",
+      "L"
+     ],
+     "Plt": [
+      "417",
+      "H"
+     ],
+     "MCV": [
+      "96",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "6",
+      "L"
+     ],
+     "Cr": [
+      "0.55",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "45",
+      "H"
+     ],
+     "ALT": [
+      "16",
+      ""
+     ],
+     "ALKP": [
+      "116",
+      ""
+     ],
+     "TBili": [
+      "3.4",
+      "H"
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "HbS": [
+      "86",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/11/2016",
+    "comment": "Pre-hydroxyurea",
+    "vals": {
+     "WBC": [
+      "13.4",
+      "H"
+     ],
+     "Hgb": [
+      "7.6",
+      "L"
+     ],
+     "Hct": [
+      "23",
+      "L"
+     ],
+     "Plt": [
+      "421",
+      "H"
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "8",
+      ""
+     ],
+     "Cr": [
+      "0.48",
+      "L"
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "42",
+      "H"
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "119",
+      ""
+     ],
+     "TBili": [
+      "3.3",
+      "H"
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.0",
+      ""
+     ],
+     "LDH": [
+      "427",
+      "H"
+     ],
+     "HbS": [
+      "94",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hepatic",
+    "key": "LDH",
+    "name": "LDH",
+    "unit": "U/L",
+    "ref": "140-280"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Hematology",
+    "key": "HbS",
+    "name": "Hemoglobin S",
+    "unit": "%",
+    "ref": ""
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "Newborn",
+    "Hemoglobin electrophoresis (newborn screen)",
+    "FS pattern - HbSS",
+    "A"
+   ],
+   [
+    "09/20/2016",
+    "HbF",
+    "14%",
+    "A"
+   ],
+   [
+    "02/18/2026",
+    "HbF",
+    "15.8%",
+    "A"
+   ],
+   [
+    "10/21/2026",
+    "HbF",
+    "15.2%",
+    "A"
+   ],
+   [
+    "10/21/2026",
+    "Reticulocyte count",
+    "9.8% (abs 268 K/uL)",
+    "H"
+   ],
+   [
+    "2015",
+    "Antibody identification",
+    "Anti-E identified",
+    "A"
+   ],
+   [
+    "09/2024",
+    "Antibody identification",
+    "Anti-E, anti-K identified",
+    "A"
+   ],
+   [
+    "2024",
+    "RBC extended phenotype",
+    "C-, c+, E-, e+, K-, Fy(a-b-), Jk(a+b-), S-s+",
+    ""
+   ],
+   [
+    "05/09/2023",
+    "Urine albumin/creatinine ratio",
+    "86 mg/g",
+    "H"
+   ],
+   [
+    "02/18/2026",
+    "Urine albumin/creatinine ratio",
+    "112 mg/g",
+    "H"
+   ],
+   [
+    "10/27/2026",
+    "Urine hCG",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Type and screen",
+    "O positive; antibody screen POSITIVE - antibody identification in progress (history anti-E, anti-K). No units available until workup complete; phenotype-matched units require 24-48 h.",
+    "A"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "2015",
+   "XR Chest portable",
+   "New bilateral lower lobe opacities. Impression: c/w acute chest syndrome.",
+   "Outside"
+  ],
+  [
+   "08/2021",
+   "MRI Pelvis without contrast",
+   "L femoral head subchondral serpiginous signal without collapse - AVN Ficat II. R femoral head normal.",
+   "S. Kyle, MD"
+  ],
+  [
+   "09/14/2024",
+   "XR Chest portable",
+   "New R lower lobe consolidation and small R effusion. Impression: Acute chest syndrome vs pneumonia in setting of SCD.",
+   "S. Kyle, MD"
+  ],
+  [
+   "09/18/2024",
+   "XR Chest 2 views",
+   "Improving RLL opacity.",
+   "S. Kyle, MD"
+  ],
+  [
+   "11/2024",
+   "US Abdomen",
+   "Small echogenic spleen (autoinfarction). Cholecystectomy. Kidneys enlarged with increased echogenicity. Impression: c/w sickle cell disease.",
+   "S. Kyle, MD"
+  ],
+  [
+   "10/02/2026",
+   "XR Chest 2 views",
+   "No consolidation. Cardiomegaly mild (chronic anemia). Impression: No acute chest.",
+   "R. Ledbetter, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "06/2025",
+   "Echocardiogram, transthoracic",
+   "LVEF 60-65%. Mild LV dilation (high-output, chronic anemia). TR velocity 2.6 m/s, RVSP 31 mm Hg. Impression: No evidence of pulmonary hypertension (TRV <2.5-2.9 indeterminate range low).",
+   "J. Vinsant, MD"
+  ],
+  [
+   "04/2026",
+   "EMG/Nerve conduction study R upper extremity",
+   "Prolonged R median distal motor latency 6.4 ms, absent sensory response. Denervation APB. Impression: Severe R carpal tunnel syndrome.",
+   "H. Oakes, MD (PM&R)"
+  ],
+  [
+   "10/21/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 92. LVH voltage. QTc 432.",
+   "J. Vinsant, MD",
+   {
+    "rate": 92,
+    "pr": 142,
+    "qrs": 86,
+    "qtc": 432,
+    "axis": 60,
+    "lvh": 1
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2015",
+   "ICU admission (8 days)",
+   "C-N University Hospital",
+   "Acute chest syndrome",
+   "Exchange transfusion; anti-E identified"
+  ],
+  [
+   "2018",
+   "Inpatient (5 days)",
+   "C-N University Hospital",
+   "Port infection, VOC",
+   "Port removed"
+  ],
+  [
+   "2021",
+   "Inpatient x5 admissions",
+   "C-N University Hospital",
+   "VOC",
+   "Discharged"
+  ],
+  [
+   "09/14/2024",
+   "Inpatient (7 days), step-down",
+   "C-N University Hospital",
+   "Acute chest syndrome",
+   "Simple transfusion 2 u; HFNC; anti-K new"
+  ],
+  [
+   "03/2025",
+   "Inpatient (4 days)",
+   "C-N University Hospital",
+   "VOC",
+   "Discharged"
+  ],
+  [
+   "07/2025",
+   "Day hospital",
+   "C-N Sickle Cell Day Unit",
+   "VOC",
+   "IV fluids/hydromorphone, home same day"
+  ],
+  [
+   "01/2026",
+   "Inpatient (3 days)",
+   "C-N University Hospital",
+   "VOC",
+   "Discharged"
+  ],
+  [
+   "05/2026",
+   "Day hospital",
+   "C-N Sickle Cell Day Unit",
+   "VOC",
+   "Home same day"
+  ],
+  [
+   "10/02/2026",
+   "Inpatient (4 days)",
+   "C-N University Hospital",
+   "VOC (back, legs)",
+   "Discharged 10/06"
+  ],
+  [
+   "04/2026",
+   "Clinic - Hand Surgery",
+   "C-N Orthopedics",
+   "R hand numbness",
+   "Splint, injection; EMG"
+  ],
+  [
+   "10/07/2026",
+   "Clinic - Hand Surgery",
+   "C-N Orthopedics",
+   "Severe CTS",
+   "Scheduled CTR"
+  ],
+  [
+   "10/21/2026",
+   "Clinic - Hematology",
+   "C-N Adult Sickle Cell Clinic",
+   "Preop planning",
+   "Recommendations sent"
+  ]
+ ],
+ "notes": [
+  [
+   "06/22/2015 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "P. Gaddis, MD",
+   "ACS with hypoxia (SpO2 84%), ICU, red cell exchange via apheresis catheter; HbS post-exchange 24%. New anti-E alloantibody. Discharged on incentive spirometry, hydroxyurea recommended."
+  ],
+  [
+   "05/12/2016 1000",
+   "Progress Note",
+   "Hematology",
+   "K. Mayes, MD",
+   "Starting hydroxyurea 500 mg titrating to MTD by ANC/plt. Contraception counseling (teratogenic). Labs q4wk during titration."
+  ],
+  [
+   "03/10/2020 1400",
+   "Progress Note",
+   "Hematology",
+   "K. Mayes, MD",
+   "Microalbuminuria trace. Avoid NSAIDs/ketorolac going forward. Start counseling for hydration."
+  ],
+  [
+   "09/21/2024 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "L. Jarnagin, DO",
+   "Admit 09/14-09/21. VOC evolving to ACS HD2: fever 38.6, RLL infiltrate, SpO2 86% RA. HFNC 40 L/50%. Simple transfusion 2 u C/E/K-negative PRBC (Hgb 6.4 -> 9.6, HbS 48%). New anti-K identified. Ceftriaxone/azithromycin. Hydromorphone PCA. Weaned to RA HD6. Blood bank: future transfusions need extended-match units; allow extra time."
+  ],
+  [
+   "09/20/2024 1530",
+   "Pharmacy Note",
+   "Pharmacy",
+   "D. Brabson, PharmD",
+   "Hydromorphone PCA: demand 0.4 mg q10 min, no basal. Opioid tolerant (home oxycodone ER 15 BID + IR). Conversion back to home regimen at discharge."
+  ],
+  [
+   "06/19/2025 1500",
+   "Telephone Encounter",
+   "Cardiology",
+   "J. Vinsant, MD",
+   "Echo screening for pulmonary HTN: TRV 2.6 m/s, no PH. Repeat 1-2 yr."
+  ],
+  [
+   "02/18/2026 1030",
+   "Progress Note",
+   "Hematology",
+   "K. Mayes, MD",
+   "Routine. 4 admissions + 2 day-hospital visits past 12 mo. Hydroxyurea 1,000 mg (MTD limited by ANC). HbF 15.8%. Ferritin 1,510 - off deferasirox since Cr rise; discussed deferoxamine vs retrying lower dose chelation - pt deferring. Opioid agreement renewed; UDS consistent; PDMP reviewed. Hip pain stable."
+  ],
+  [
+   "04/14/2026 1300",
+   "Consult",
+   "Hand Surgery",
+   "E. Rasnake, MD",
+   "R hand numbness 1st-3rd digits 6 mo, nocturnal, dropping objects. Tinel/Phalen positive, thenar atrophy mild. Night splint, steroid injection today. EMG."
+  ],
+  [
+   "05/14/2026 1600",
+   "Nursing Note",
+   "Sickle Cell Day Unit",
+   "A. Whaley, RN",
+   "VOC legs/back 8/10. IV fluids D5 1/2NS 150 mL/h, hydromorphone 2 mg IV x3. Pain 4/10. Discharged with mother."
+  ],
+  [
+   "10/06/2026 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "R. Ingram, MD",
+   "Admit 10/02-10/06. VOC back/legs, no ACS (CXR clear, SpO2 97%). Hgb nadir 7.1 (baseline ~8). Hydromorphone PCA, IV fluids, incentive spirometry. Back to home oxycodone regimen. F/u hematology. Pt mentions upcoming hand surgery - advised to have hematology clear first."
+  ],
+  [
+   "10/07/2026 0915",
+   "H&P",
+   "Hand Surgery",
+   "E. Rasnake, MD",
+   "Severe CTS, EMG-confirmed with denervation; injection gave 3 wk relief. Plan open CTR. PMH: sickle cell, recently hospitalized. Allergies morphine. Plan: Bier block with tourniquet, MAC. Short case. Will route to hematology for clearance. Consent signed."
+  ],
+  [
+   "10/21/2026 1415",
+   "Consult",
+   "Hematology",
+   "K. Mayes, MD",
+   "Preop recommendations, R CTR. HbSS, frequent VOC, ACS x2 (most recent 9/2024), alloimmunized anti-E/anti-K, last VOC 10/02-10/06/2026. Hgb 8.0, HbS 79%, retic 9.8%. Recommendations: (1) If general anesthesia is planned or possible, simple transfusion to Hgb 10 g/dL preop (do not exceed 10-11; do not use exchange). Requires C/E/K-negative extended phenotype-matched units - notify blood bank 48 h ahead. (2) For brief MAC/regional, transfusion may be omitted at baseline Hgb, but have a plan. (3) Tourniquet / IV regional: venous stasis, acidosis, and hypoxemia promote sickling - I would avoid if possible; if surgeon requires, discuss with anesthesia (minimize time, full exsanguination, oxygenation, normothermia). (4) IV hydration preop (LR or NS 1.5x maintenance from NPO onset), normothermia, O2 to keep SpO2 >=95%, incentive spirometry post-op. (5) Continue hydroxyurea and home opioids; expect higher opioid requirement; avoid NSAIDs. (6) Consider waiting >=4-6 wk after VOC if not urgent. Routed to Dr. Rasnake."
+  ],
+  [
+   "10/22/2026 0810",
+   "Telephone Encounter",
+   "Hand Surgery",
+   "M. Shelton, LPN",
+   "Hematology note received. Per Dr. Rasnake: \"Keep date, MAC/Bier, no transfusion needed - not GA.\" Pt informed of date. No blood bank notification made."
+  ],
+  [
+   "10/22/2026 1440",
+   "Anesthesia Preop Note",
+   "Preadmission Testing",
+   "J. Lyle, RN",
+   "Phone screen. 33F SCD. Opioid tolerant. Airway per pt no issues; prior GA (cholecystectomy 2011) uneventful. Labs day of surgery including T&S and urine hCG. NPO instructions. Take oxycodone ER AM. Chart flagged for anesthesia review: recent admission 10/06."
+  ],
+  [
+   "10/23/2026 1910",
+   "Patient Message",
+   "Hand Surgery",
+   "Wyrickson, Jazmine (patient)",
+   "My hand is going numb all the time now. Please do not cancel, I already took off work. Also can I take my pain meds that morning?"
+  ],
+  [
+   "10/24/2026 0900",
+   "Patient Message",
+   "Hand Surgery",
+   "M. Shelton, LPN",
+   "Yes, take your usual morning pain meds with a sip of water. See you Tuesday."
+  ],
+  [
+   "03/12/2024 1000",
+   "Pain Management",
+   "Pain Clinic",
+   "T. Shipley, NP",
+   "Annual opioid risk review. MME ~75 (oxycodone ER 15 BID + IR 10 mg avg 3/day). UDS: oxycodone + THC. Counseled. Naloxone refilled."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/14/2024 0300",
+   "122/70",
+   124,
+   28,
+   86,
+   38.6,
+   55.0,
+   "9/10",
+   "ED"
+  ],
+  [
+   "09/21/2024 0800",
+   "110/64",
+   88,
+   16,
+   97,
+   36.8,
+   null,
+   "3/10",
+   "Inpatient"
+  ],
+  [
+   "02/18/2026 1015",
+   "104/62",
+   86,
+   16,
+   97,
+   36.7,
+   57.0,
+   "3/10",
+   "Hematology"
+  ],
+  [
+   "04/14/2026 1245",
+   "108/64",
+   84,
+   16,
+   97,
+   36.6,
+   57.2,
+   "3/10",
+   "Hand clinic"
+  ],
+  [
+   "10/02/2026 2320",
+   "126/78",
+   112,
+   20,
+   96,
+   37.4,
+   56.8,
+   "9/10",
+   "ED"
+  ],
+  [
+   "10/06/2026 0800",
+   "106/62",
+   86,
+   16,
+   97,
+   36.8,
+   null,
+   "4/10",
+   "Inpatient"
+  ],
+  [
+   "10/21/2026 1400",
+   "102/60",
+   90,
+   16,
+   97,
+   36.7,
+   56.6,
+   "3/10",
+   "Hematology"
+  ],
+  [
+   "10/27/2026 0610",
+   "108/66",
+   96,
+   18,
+   96,
+   36.4,
+   56.5,
+   "4/10 baseline back pain",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "CBC, BMP, type and screen, urine hCG",
+   "10/22/2026",
+   "Resulted - antibody screen positive, ID pending"
+  ],
+  [
+   "NPO after midnight, clears until 0530",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "IV LR 100 mL/h preop",
+   "10/27/2026 0600",
+   "Active - not started"
+  ],
+  [
+   "O2 to keep SpO2 >= 95%",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Forced-air warming preop",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Incentive spirometry post-op",
+   "10/27/2026",
+   "Active (post-op)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "POSITIVE - identification in progress",
+  "units": "None available",
+  "notes": "Historical anti-E (2015) and anti-K (2024). Requires C-, E-, K-negative (extended phenotype-matched, Fy/Jk/S considered), sickle-negative, leukoreduced units. Not requested in advance. Estimated 24-48 h to obtain from regional supplier.",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: R open carpal tunnel release",
+   "Signed 10/07/2026"
+  ],
+  [
+   "Blood consent",
+   "Not signed"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2011",
+   "Lap cholecystectomy",
+   "GA ETT",
+   "Preop transfusion given per records; uneventful",
+   "East Tennessee Children's Hospital"
+  ],
+  [
+   "2015",
+   "Port placement",
+   "MAC",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "2018",
+   "Port removal",
+   "MAC/local",
+   "None",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0545",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0500 water with oxycodone",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "Urine hCG negative"
+   ],
+   [
+    "Site marked",
+    "Yes - right wrist"
+   ],
+   [
+    "Allergy band",
+    "Done"
+   ],
+   [
+    "Blood available",
+    "No - antibody workup pending"
+   ]
+  ],
+  "nursing_note": "33F, chronic low back pain 4/10 (baseline). Took oxycodone ER 15 and IR 10 at 0500. Cool extremities, room cold - warm blanket applied. IV attempts x2 L arm unsuccessful (difficult access, scarred veins); IV team called. Preop fluids not yet started. Pt anxious about being cancelled. Mother at bedside.",
+  "iv": "Pending - IV team (2 failed attempts)",
+  "glucose": ""
+ },
+ "label": "J. Wyrickson",
+ "bmi": "20.8"
+}

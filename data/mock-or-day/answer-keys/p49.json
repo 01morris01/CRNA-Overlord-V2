@@ -1,0 +1,148 @@
+{
+ "id": "p49",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Distal radius ORIF in a 72 y with severe idiopathic PAH and RV failure (TAPSE 1.4, RVSP 72, 6MWD falling) whose ambrisentan has not been given for 3 days because pharmacy has not verified her home supply; a supraclavicular block is requested, which will likely block the phrenic nerve, and she desaturated to 84% after 0.5 mg midazolam in 2024.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "WHO FC III pulmonary arterial hypertension with severe RV dysfunction, home oxygen."
+ },
+ "decision": {
+  "recommendation": "delay a few hours to restart ambrisentan and change the block",
+  "rationale": "PAH therapy must never be interrupted; give ambrisentan now and involve the PH team. Choose a block that spares the diaphragm (infraclavicular or axillary) with minimal sedation."
+ },
+ "redFlags": [
+  {
+   "id": "ambrisentan",
+   "severity": "critical",
+   "finding": "PAH therapy interrupted",
+   "evidence": "Ambrisentan not given 10/25 and 10/26 (awaiting pharmacy verification); PH team: never interrupt therapy.",
+   "implication": "Rebound PH and RV failure.",
+   "action": "Escalate to pharmacy and PH team, give ambrisentan before surgery.",
+   "keywords": [
+    "ambrisentan",
+    "interrupt",
+    "pah therapy",
+    "pulmonary hypertension team"
+   ]
+  },
+  {
+   "id": "phrenic",
+   "severity": "critical",
+   "finding": "Supraclavicular block risks phrenic block",
+   "evidence": "Block requested; SpO2 91% on 3 L.",
+   "implication": "Hypoxemia and hypercarbia raise PVR and can precipitate RV failure.",
+   "action": "Infraclavicular or axillary brachial plexus block instead.",
+   "keywords": [
+    "phrenic",
+    "supraclavicular",
+    "infraclavicular",
+    "axillary",
+    "diaphragm"
+   ]
+  },
+  {
+   "id": "rv",
+   "severity": "critical",
+   "finding": "Severe RV dysfunction",
+   "evidence": "TAPSE 1.4, D shaped septum, RVSP 72, JVD, edema, BP 96/58, NT-proBNP 1,980.",
+   "implication": "Systemic hypotension causes RV ischemia and spiral collapse.",
+   "action": "Arterial line, norepinephrine or vasopressin ready, avoid fluid boluses, keep sinus rhythm, inhaled pulmonary vasodilator available.",
+   "keywords": [
+    "rv",
+    "right ventricle",
+    "arterial line",
+    "norepinephrine",
+    "vasopressin",
+    "inhaled nitric",
+    "epoprostenol",
+    "hypotension"
+   ]
+  },
+  {
+   "id": "sedation",
+   "severity": "major",
+   "finding": "Extreme sensitivity to sedation",
+   "evidence": "SpO2 84% after midazolam 0.5 mg in 2024; oxycodone at 0400.",
+   "implication": "Hypoventilation, hypercarbia, PH crisis.",
+   "action": "Minimal or no sedation, ETCO2 monitoring, oxygen.",
+   "keywords": [
+    "sedation",
+    "hypercarbia",
+    "midazolam",
+    "minimal sedation",
+    "capnography"
+   ]
+  },
+  {
+   "id": "location",
+   "severity": "minor",
+   "finding": "PH team expects notification",
+   "evidence": "PH clinic plan.",
+   "implication": "Team support.",
+   "action": "Notify PH team before surgery.",
+   "keywords": [
+    "ph team",
+    "notify"
+   ]
+  },
+  {
+   "id": "pde5",
+   "severity": "minor",
+   "finding": "Sildenafil",
+   "evidence": "Taken 0600.",
+   "implication": "Nitrates contraindicated.",
+   "action": "Avoid nitroglycerin.",
+   "keywords": [
+    "sildenafil",
+    "nitrate",
+    "nitroglycerin"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "Infraclavicular or axillary block with minimal sedation",
+   "keywords": [
+    "infraclavicular",
+    "axillary"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, capnography",
+   "keywords": [
+    "arterial line",
+    "capnograph",
+    "etco2"
+   ]
+  },
+  {
+   "domain": "drugs",
+   "item": "Norepinephrine and vasopressin available; inhaled pulmonary vasodilator available",
+   "keywords": [
+    "norepinephrine",
+    "vasopressin",
+    "inhaled"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Brachial plexus block"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Exquisite sensitivity to sedation"
+  }
+ ]
+}

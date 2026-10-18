@@ -1,0 +1,140 @@
+{
+ "id": "p27",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "TKA under spinal in a long term RA patient with documented atlantoaxial instability (ADI 6 mm on flexion) nobody carried forward, mouth opening 28 mm, chronic prednisone skipped this morning, and etanercept taken 3 days ago against the rheumatology plan.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Erosive RA on chronic steroids and two immunosuppressants, cervical instability, difficult airway features."
+ },
+ "decision": {
+  "recommendation": "discuss a short delay; airway and steroid plans are required either way",
+  "rationale": "Etanercept on 10/24 puts surgery at peak drug effect (plan was to skip that dose so surgery falls in week 2). Surgeon and rheumatology should weigh PJI risk and likely move the case about a week. If proceeding: spinal with neck protection, a C-spine safe airway backup, and her usual prednisone dose."
+ },
+ "redFlags": [
+  {
+   "id": "aai",
+   "severity": "critical",
+   "finding": "Atlantoaxial instability",
+   "evidence": "C-spine flexion films 06/2025: ADI 6 mm on flexion, dens erosion; rheumatology letter asked to note it; PAT note only says neck ROM decreased.",
+   "implication": "Neck flexion (laryngoscopy, sitting spinal positioning, transfers) can compress the cord.",
+   "action": "Neutral neck with in line stabilization, fiberoptic or VL plan if airway is needed, careful spinal positioning, document neuro baseline.",
+   "keywords": [
+    "atlantoaxial",
+    "c1",
+    "c2",
+    "adi",
+    "cervical instability",
+    "in line stabilization",
+    "fiberoptic",
+    "neck flexion"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "major",
+   "finding": "Limited mouth opening with MP III",
+   "evidence": "Dental: interincisal opening 28 to 29 mm (TMJ RA); Mallampati III; prior GA with a week of sore throat.",
+   "implication": "Difficult airway if spinal fails or conversion to GA is needed.",
+   "action": "Awake fiberoptic setup ready as backup.",
+   "keywords": [
+    "mouth opening",
+    "tmj",
+    "difficult airway",
+    "mallampati",
+    "awake"
+   ]
+  },
+  {
+   "id": "steroids",
+   "severity": "major",
+   "finding": "Chronic prednisone not taken today",
+   "evidence": "Prednisone 7.5 mg daily since 2008; PAT phone call told her to hold all meds but omeprazole; rheum said continue DOS.",
+   "implication": "Risk of adrenal insufficiency and hypotension.",
+   "action": "Give her usual glucocorticoid dose now (or IV hydrocortisone equivalent); stress dosing per institutional practice.",
+   "keywords": [
+    "prednisone",
+    "steroid",
+    "adrenal",
+    "hydrocortisone",
+    "stress dose"
+   ]
+  },
+  {
+   "id": "etanercept",
+   "severity": "major",
+   "finding": "Etanercept given 3 days before arthroplasty",
+   "evidence": "Patient injected 10/24 for a flare (portal question unanswered); plan was last dose 10/17.",
+   "implication": "Higher prosthetic joint infection risk.",
+   "action": "Surgeon and rheumatology decision on delaying about one week.",
+   "keywords": [
+    "etanercept",
+    "enbrel",
+    "biologic",
+    "infection",
+    "delay"
+   ]
+  },
+  {
+   "id": "skin",
+   "severity": "minor",
+   "finding": "Fragile steroid skin and adhesive allergy",
+   "evidence": "Thin skin, ecchymoses, paper tape only.",
+   "implication": "Skin tears and pressure injury.",
+   "action": "Gentle tape, careful padding.",
+   "keywords": [
+    "skin",
+    "tape",
+    "padding"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "regional",
+   "item": "Spinal with neck kept neutral; adductor canal block",
+   "keywords": [
+    "spinal",
+    "adductor canal"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Fiberoptic or VL backup with in line stabilization",
+   "keywords": [
+    "fiberoptic",
+    "in line"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision; TXA 1 g",
+   "keywords": [
+    "cefazolin",
+    "txa"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Usual dose glucocorticoid given",
+   "keywords": [
+    "prednisone",
+    "hydrocortisone"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "HighSpinal",
+   "why": "Neuraxial anesthetic"
+  },
+  {
+   "type": "LocalAnestheticToxicity",
+   "why": "Adductor canal block"
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "MAC sedation with opioids"
+  }
+ ]
+}

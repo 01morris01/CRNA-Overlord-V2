@@ -1,0 +1,770 @@
+{
+ "id": "p15",
+ "room": "OR 11",
+ "time": "0730",
+ "name": "STRICKLIN, MACKENZIE R",
+ "mrn": "0145015",
+ "dob": "06/14/2003",
+ "age": "23 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 61.2,
+ "preferred_name": "Kenzie",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "K. Albright, NP, Mossy Creek Primary Care",
+ "insurance": "BlueCross BlueShield TN PPO (through parent employer)",
+ "emergency_contact": "Dana Stricklin (mother) 865-555-0371",
+ "isolation": "",
+ "allergies": [
+  [
+   "Amoxicillin",
+   "Rash (non-urticarial, maculopapular)",
+   "Mild",
+   "2009"
+  ]
+ ],
+ "case": {
+  "procedure": "Diagnostic laparoscopy, possible excision of endometriosis",
+  "short": "Dx laparoscopy, poss excision endometriosis",
+  "laterality": "N/A",
+  "service": "Gynecology",
+  "surgeon": "L. Szymanski, MD",
+  "assistant": "J. Cardwell, MD (resident PGY-3)",
+  "indication": "Chronic pelvic pain, severe dysmenorrhea refractory to continuous combined OCP x 9 months; suspected endometriosis. US negative for endometrioma.",
+  "duration_min": 75,
+  "anesthesia_requested": "General",
+  "position": "Dorsal lithotomy (Allen stirrups), steep Trendelenburg, arms tucked",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Uterine manipulator, 5 mm laparoscope",
+  "implants": "",
+  "surgeon_notes": "Possible excision vs ablation of implants. Pt prefers no overnight stay.",
+  "add_on": false,
+  "scheduled_on": "10/02/2026"
+ },
+ "problems": [
+  [
+   "Dysmenorrhea, severe",
+   "2022",
+   "Active"
+  ],
+  [
+   "Chronic pelvic pain in female",
+   "03/2025",
+   "Active"
+  ],
+  [
+   "Migraine without aura",
+   "2018",
+   "Active"
+  ],
+  [
+   "Generalized anxiety disorder, mild",
+   "2023",
+   "Active"
+  ],
+  [
+   "Acne vulgaris",
+   "2017",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Migraine without aura since age 15, 2-3/month, sumatriptan PRN",
+   "Dysmenorrhea / chronic pelvic pain, suspected endometriosis",
+   "Generalized anxiety, mild, counseling through university 2023; no daily medication",
+   "Acne vulgaris, treated with topical tretinoin 2017-2020"
+  ],
+  "psh": [
+   [
+    "07/2014",
+    "Closed reduction left distal radius fracture (sedation, ED)",
+    "East Tennessee Children's - outside"
+   ],
+   [
+    "06/2021",
+    "Wisdom teeth extraction x4, IV sedation",
+    "Morristown Oral Surgery"
+   ]
+  ],
+  "family": [
+   "Mother: endometriosis, laparoscopy 2004",
+   "Father: HTN",
+   "Maternal grandmother: breast cancer age 68",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "2-4 drinks/week, weekends",
+   "drugs": "Denies; tried marijuana in college, none in 2+ yrs",
+   "occupation": "Elementary school teacher (2nd grade), Jefferson County",
+   "living": "Apartment with roommate, Jefferson City",
+   "other": "Runs 3x/week. Boyfriend driving her home."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "COVID-19 booster",
+    "11/2023"
+   ],
+   [
+    "HPV series complete",
+    "2016"
+   ],
+   [
+    "Tdap",
+    "08/2019"
+   ],
+   [
+    "Meningococcal B",
+    "2021"
+   ]
+  ],
+  "ob": "G0. LMP 10/12/2026 (on continuous OCP - breakthrough bleeding). Sexually active, monogamous."
+ },
+ "home_meds": [
+  [
+   "Norethindrone acetate-ethinyl estradiol 1 mg/20 mcg (Junel 1/20)",
+   "1 tab PO daily, continuous (skips placebo)",
+   "L. Szymanski, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sumatriptan 50 mg tab",
+   "1 tab PO at onset of migraine, may repeat in 2 h, max 200 mg/day",
+   "K. Albright, NP",
+   "10/22/2026"
+  ],
+  [
+   "Naproxen 500 mg tab",
+   "1 tab PO BID PRN cramps with food",
+   "L. Szymanski, MD",
+   "10/25/2026 0800"
+  ],
+  [
+   "Ondansetron ODT 4 mg",
+   "1 tab SL q8h PRN nausea with migraine",
+   "K. Albright, NP",
+   "08/2026"
+  ],
+  [
+   "Multivitamin",
+   "1 tab daily",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0615"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "75 mL/h preop",
+   "Infusing 0620"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Norgestimate-ethinyl estradiol (Sprintec), cyclic",
+   "2021-01/2026",
+   "Switched to continuous regimen for dysmenorrhea"
+  ],
+  [
+   "Rizatriptan 10 mg",
+   "2019-2022",
+   "Insurance formulary change"
+  ],
+  [
+   "Tretinoin 0.025% cream",
+   "2017-2020",
+   "Acne resolved"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/14/2026",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "224",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/22/2025",
+    "comment": "Pelvic pain workup",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "251",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "10",
+      ""
+     ],
+     "Cr": [
+      "0.67",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "USG": [
+      "1.015",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/18/2023",
+    "comment": "Annual physical",
+    "vals": {
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "276",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "TSH": [
+      "1.93",
+      ""
+     ],
+     "FT4": [
+      "1.26",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "03/22/2025",
+    "GC/Chlamydia NAAT, urine",
+    "Not detected",
+    ""
+   ],
+   [
+    "03/22/2025",
+    "Urine hCG, qualitative",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026 0600",
+    "Urine hCG, qualitative (point of care)",
+    "Negative",
+    ""
+   ],
+   [
+    "06/2024",
+    "Pap smear",
+    "NILM",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "04/02/2025",
+   "US Pelvis, transabdominal and transvaginal",
+   "Uterus anteverted, 7.6 x 4.1 x 4.8 cm, normal echotexture. Endometrial stripe 6 mm. Right ovary 3.1 cm, left ovary 2.9 cm, normal follicles. No endometrioma, no hydrosalpinx. Trace free fluid, physiologic. Impression: Normal pelvic ultrasound. Absence of sonographic findings does not exclude superficial endometriosis.",
+   "S. Varner, MD"
+  ],
+  [
+   "07/2014",
+   "XR Left Wrist 3 views (outside)",
+   "Displaced distal radius metaphyseal fracture. Post-reduction: improved alignment. (Outside report, scanned.)",
+   "Outside radiology"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "07/2014",
+   "ED visit",
+   "East Tennessee Children's (outside)",
+   "Fall from trampoline, L wrist fx",
+   "Closed reduction under ketamine sedation, discharged"
+  ],
+  [
+   "03/22/2025",
+   "Office visit",
+   "C-N Women's Health",
+   "Pelvic pain, dysmenorrhea",
+   "US ordered, continuous OCP"
+  ],
+  [
+   "01/15/2026",
+   "Office visit",
+   "C-N Women's Health",
+   "Follow-up, persistent pain",
+   "Discussed diagnostic laparoscopy"
+  ],
+  [
+   "09/29/2026",
+   "Office visit",
+   "C-N Women's Health",
+   "Preop visit",
+   "Surgery scheduled 10/27"
+  ]
+ ],
+ "notes": [
+  [
+   "03/22/2025 1015",
+   "Progress Note",
+   "Gynecology",
+   "L. Szymanski, MD",
+   "CC: painful periods. 21 yo G0, menarche 12. Cramps since teens, worse last 2 yrs, misses 1-2 days work/month. Deep dyspareunia. On cyclic Sprintec since 2021. NSAIDs partial relief. Exam: mild uterosacral tenderness, no nodularity, adnexa nontender. A/P: dysmenorrhea, r/o endometriosis. TVUS. GC/CT neg today. Switch to continuous OCP. Naproxen scheduled with menses. RTC 3 mo."
+  ],
+  [
+   "04/03/2025 0912",
+   "Patient Message",
+   "Gynecology",
+   "MyChart - patient",
+   "Got the ultrasound results, does normal mean I don't have endo? -- RN reply (T. Greer, RN): Not necessarily, Dr. Szymanski will discuss at your follow up. Many cases are not visible on ultrasound."
+  ],
+  [
+   "01/15/2026 1340",
+   "Progress Note",
+   "Gynecology",
+   "L. Szymanski, MD",
+   "F/u. Continuous Junel 1/20 x 9 mo, breakthrough bleeding, pain still 7/10 several days/mo. Interested in definitive diagnosis. Discussed GnRH antagonist vs dx laparoscopy; pt prefers laparoscopy. Mom with endo. Plan: schedule dx laparoscopy with possible excision, fall break per pt (teacher)."
+  ],
+  [
+   "08/11/2026 1622",
+   "Telephone Encounter",
+   "Primary Care",
+   "R. Pressnell, LPN",
+   "Pt requests refill sumatriptan, using about 2-3x/month, no increase in frequency. Denies aura. Refill sent per protocol."
+  ],
+  [
+   "09/29/2026 1045",
+   "H&P",
+   "Gynecology",
+   "J. Cardwell, MD (resident)",
+   "HPI: 23 yo G0 with chronic pelvic pain, severe dysmenorrhea, deep dyspareunia, failed continuous OCP. Plan dx laparoscopy, possible excision of endometriosis. PMH: migraine w/o aura (sumatriptan PRN), mild anxiety. PSH: wrist fx reduction 2014, wisdom teeth 2021. No anesthesia problems. Meds: Junel 1/20 continuous, sumatriptan PRN, naproxen PRN, MVI. Allergies: amoxicillin (rash). SH: never smoker, social EtOH. ROS neg except HPI. Exam: Wt 61 kg, BMI 22.5. Heart RRR, lungs clear, abd soft, nontender. A/P: dx laparoscopy 10/27. Consent reviewed. Continue OCP. Hold naproxen 3 days preop per routine. Attending attestation: seen and examined, agree. L. Szymanski, MD"
+  ],
+  [
+   "09/29/2026 1120",
+   "Nursing Note",
+   "Gynecology",
+   "T. Greer, RN",
+   "Preop teaching done. NPO instructions given: no solids after midnight, clears until 0530. Pt states she gets \"really anxious about needles.\" Ride: boyfriend. Pre-registration complete."
+  ],
+  [
+   "10/26/2026 1430",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "A. Morrow, RN",
+   "Preop call. Arrival 0545. Confirmed NPO, take OCP as usual. Pt reports she stopped naproxen 10/24, then took one 10/25 AM for cramps; told Dr. Szymanski's office ok. Last migraine 10/22, sumatriptan x1. No URI symptoms."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/18/2023 0905",
+   "112/70",
+   72,
+   14,
+   99,
+   36.7,
+   59.0,
+   "0/10",
+   "Primary care"
+  ],
+  [
+   "03/22/2025 1000",
+   "116/72",
+   78,
+   14,
+   99,
+   36.8,
+   60.3,
+   "4/10",
+   "Women's Health"
+  ],
+  [
+   "01/15/2026 1325",
+   "110/68",
+   74,
+   16,
+   99,
+   36.6,
+   61.0,
+   "3/10",
+   "Women's Health"
+  ],
+  [
+   "09/29/2026 1030",
+   "118/74",
+   80,
+   14,
+   100,
+   36.7,
+   61.2,
+   "2/10",
+   "Women's Health"
+  ],
+  [
+   "10/27/2026 0558",
+   "124/78",
+   92,
+   16,
+   100,
+   36.6,
+   61.2,
+   "2/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Point-of-care urine hCG",
+   "10/27/2026 0550",
+   "Resulted - negative"
+  ],
+  [
+   "NPO after midnight, clears until 0530",
+   "09/29/2026",
+   "Active"
+  ],
+  [
+   "Lactated Ringer's 75 mL/h",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "SCDs bilateral lower extremities",
+   "10/27/2026 0600",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "No T&S required per surgeon",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: diagnostic laparoscopy, possible excision of endometriosis",
+   "Signed by patient 09/29/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood products consent",
+   "Not required"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "07/2014",
+   "Closed reduction L wrist (ED)",
+   "Ketamine IV procedural sedation",
+   "Vomited x1 on emergence per mother",
+   "East Tennessee Children's"
+  ],
+  [
+   "06/2021",
+   "Third molar extraction x4",
+   "IV sedation (midazolam, fentanyl, propofol), nasal cannula",
+   "None noted",
+   "Morristown Oral Surgery"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0545",
+  "npo_solids": "10/26/2026 2000 (pasta)",
+  "npo_clears": "10/27/2026 0500 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/29)"
+   ],
+   [
+    "Pregnancy test",
+    "POC urine hCG negative 0600"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes - amoxicillin"
+   ],
+   [
+    "Jewelry removed",
+    "Navel ring removed"
+   ],
+   [
+    "Voided",
+    "0555"
+   ]
+  ],
+  "nursing_note": "Ambulatory, A&O x4. Tearful, anxious about IV; 20g L hand on 1st attempt with lidocaine wheal. Denies headache today. Took Junel at 2100 last night. Last naproxen 10/25 AM. LMP 10/12 (spotting on continuous OCP). Boyfriend in waiting room, phone verified.",
+  "iv": "20g L hand 0618",
+  "glucose": ""
+ },
+ "label": "M. Stricklin",
+ "bmi": "22.5"
+}

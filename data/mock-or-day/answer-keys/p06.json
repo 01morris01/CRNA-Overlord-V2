@@ -1,0 +1,174 @@
+{
+ "id": "p06",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Uncontrolled Graves disease (out of methimazole, SSKI never filled, AM beta blocker missed) with a substernal goiter narrowing the trachea to 6 mm, orthopnea, and a sister with a high fever under anesthesia.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "Uncontrolled thyrotoxicosis with AF RVR and a critical fixed upper airway obstruction."
+ },
+ "decision": {
+  "recommendation": "postpone elective surgery and optimize, unless the airway forces urgency",
+  "rationale": "FT4 3.8 and FT3 9.6, HR 124 AF, T 37.9: thyroid storm risk is high. Endocrinology advised deferring until euthyroid. If worsening airway compression forces surgery, prepare full storm treatment and a critical airway plan."
+ },
+ "redFlags": [
+  {
+   "id": "thyrotoxic",
+   "severity": "critical",
+   "finding": "Uncontrolled hyperthyroidism, thyroid storm risk",
+   "evidence": "TSH under 0.01, FT4 3.8 (rising), FT3 9.6, HR 124 AF, T 37.9, tremor; methimazole ran out 2 weeks ago; SSKI never filled; AM propranolol not taken.",
+   "implication": "Thyroid storm during or after surgery.",
+   "action": "Postpone and optimize: thionamide, beta blockade (give propranolol now), iodine after thionamide, steroids; storm treatment ready if proceeding.",
+   "keywords": [
+    "thyroid storm",
+    "thyrotoxic",
+    "euthyroid",
+    "methimazole",
+    "propranolol",
+    "sski",
+    "iodine",
+    "hyperthyroid"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "critical",
+   "finding": "Critical tracheal compression from substernal goiter",
+   "evidence": "CT: trachea narrowed to 6 mm at thoracic inlet, deviated; goiter to the aortic arch; flow volume loop fixed obstruction; orthopnea, sleeps upright.",
+   "implication": "Complete airway obstruction possible at induction or with paralysis; the NIM tube may not pass.",
+   "action": "Awake fiberoptic intubation or inhalation induction preserving spontaneous ventilation, small tubes ready, rigid bronchoscopy and ECMO or CPB standby, thoracic surgery present, no paralysis before the airway is secured.",
+   "keywords": [
+    "awake",
+    "fiberoptic",
+    "spontaneous ventilation",
+    "tracheal",
+    "rigid bronch",
+    "ecmo",
+    "cpb",
+    "orthopnea"
+   ]
+  },
+  {
+   "id": "mh_family",
+   "severity": "major",
+   "finding": "Family history suggestive of malignant hyperthermia",
+   "evidence": "PAT note: sister had a high fever under anesthesia, details unknown.",
+   "implication": "Treat as MH susceptible until clarified; thyroid storm and MH can look alike.",
+   "action": "Trigger free anesthetic (TIVA, no succinylcholine, no volatiles), dantrolene available, clarify with the sister's records.",
+   "keywords": [
+    "malignant hyperthermia",
+    "mh",
+    "trigger free",
+    "tiva",
+    "dantrolene",
+    "sister"
+   ]
+  },
+  {
+   "id": "rln",
+   "severity": "major",
+   "finding": "Hoarseness without preoperative laryngoscopy",
+   "evidence": "Voice change 3 months; flexible laryngoscopy not ordered.",
+   "implication": "Baseline vocal cord palsy changes risk of bilateral palsy after surgery.",
+   "action": "Document cord function before surgery.",
+   "keywords": [
+    "laryngoscopy",
+    "vocal cord",
+    "recurrent laryngeal",
+    "hoarse"
+   ]
+  },
+  {
+   "id": "af",
+   "severity": "major",
+   "finding": "AF with RVR",
+   "evidence": "HR 112 to 124 AF; apixaban held 48 h.",
+   "implication": "Rate control and stroke risk.",
+   "action": "Beta blockade, rate control before induction.",
+   "keywords": [
+    "atrial fibrillation",
+    "rate control",
+    "rvr"
+   ]
+  },
+  {
+   "id": "nim",
+   "severity": "minor",
+   "finding": "Nerve monitoring constraints",
+   "evidence": "Surgeon requests NIM tube and no long acting relaxant after intubation.",
+   "implication": "Limits paralysis; tube size vs 6 mm trachea.",
+   "action": "Plan relaxant strategy and confirm a tube size that passes.",
+   "keywords": [
+    "nim",
+    "nerve monitoring",
+    "relaxant"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "Awake fiberoptic or spontaneous ventilation induction; small ETT and NIM size check",
+   "keywords": [
+    "awake",
+    "fiberoptic",
+    "spontaneous"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Trigger free TIVA",
+   "keywords": [
+    "tiva",
+    "propofol infusion",
+    "remifentanil"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, temperature monitoring",
+   "keywords": [
+    "arterial line",
+    "temperature"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Cuff leak and cord assessment before extubation; extubation over an exchange catheter",
+   "keywords": [
+    "cuff leak",
+    "exchange catheter"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Step down: watch hematoma, hypocalcemia, storm",
+   "keywords": [
+    "hematoma",
+    "calcium",
+    "hypocalcemia"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "MalignantHyperthermia",
+   "why": "Possible MH susceptibility if triggers are used"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Airway surgery and recurrent laryngeal nerve risk at emergence"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Instrumented narrowed airway"
+  }
+ ]
+}

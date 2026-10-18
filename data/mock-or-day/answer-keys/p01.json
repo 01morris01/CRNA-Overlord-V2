@@ -1,0 +1,195 @@
+{
+ "id": "p01",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "4 y with severe OSA for T&A, actively sick with a URI, drank juice 1 h 45 min before the case, and a family story that sounds like pseudocholinesterase deficiency.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Severe pediatric OSA (oAHI 14, nadir 81%) with reactive airway disease and an active URI."
+ },
+ "decision": {
+  "recommendation": "postpone",
+  "rationale": "Active URI within a week (Tmax 38.1 on 10/20, wet cough, purulent appearing rhinorrhea, coarse breath sounds, preop SpO2 95% and T 37.6) in a child with RAD and severe OSA having airway surgery carries high perioperative respiratory adverse event risk. Clear liquid at 0545 also violates a 2 h clear fast for a 0730 start. Discuss postponing about 2 to 4 weeks with the surgeon and family."
+ },
+ "redFlags": [
+  {
+   "id": "uri",
+   "severity": "critical",
+   "finding": "Active upper respiratory infection",
+   "evidence": "Preop nursing note and 10/24 sick visit: wet cough, purulent appearing rhinorrhea, coarse breath sounds, fever 38.1 on 10/20; preop SpO2 95%, T 37.6.",
+   "implication": "Laryngospasm, bronchospasm, and desaturation risk are much higher with recent URI plus RAD, OSA, and airway surgery.",
+   "action": "Recommend postponing about 2 to 4 weeks; if proceeding, optimize (albuterol), avoid airway irritation, experienced provider.",
+   "keywords": [
+    "uri",
+    "upper respiratory",
+    "cough",
+    "rhinorrhea",
+    "cold",
+    "postpone",
+    "delay"
+   ]
+  },
+  {
+   "id": "npo_clears",
+   "severity": "major",
+   "finding": "Clear liquid 1 h 45 min before scheduled start",
+   "evidence": "Preop note: apple juice about 4 oz at 0545 in the car; case at 0730.",
+   "implication": "Does not meet a 2 h clear liquid fast.",
+   "action": "Delay start until 2 h after the juice at minimum.",
+   "keywords": [
+    "juice",
+    "npo",
+    "clear",
+    "fasting",
+    "0545"
+   ]
+  },
+  {
+   "id": "bche",
+   "severity": "major",
+   "finding": "Family history suggesting pseudocholinesterase (butyrylcholinesterase) deficiency",
+   "evidence": "Mother's portal message 10/20 and preop note: maternal uncle ventilated for hours after appendectomy, could not break down a muscle relaxant.",
+   "implication": "Succinylcholine (and mivacurium) may cause prolonged paralysis; this matters for laryngospasm rescue.",
+   "action": "Avoid succinylcholine; plan laryngospasm rescue with CPAP, deepening with propofol, and rocuronium if needed; consider BChE activity and dibucaine number testing.",
+   "keywords": [
+    "pseudocholinesterase",
+    "butyrylcholinesterase",
+    "succinylcholine",
+    "sux",
+    "dibucaine",
+    "uncle"
+   ]
+  },
+  {
+   "id": "osa",
+   "severity": "major",
+   "finding": "Severe OSA",
+   "evidence": "PSG 09/14: oAHI 14, REM AHI 26, nadir 81%, peak EtCO2 54.",
+   "implication": "Increased opioid sensitivity and postoperative obstruction.",
+   "action": "Reduce opioid dosing, multimodal analgesia, awake extubation, overnight continuous pulse oximetry (ordered).",
+   "keywords": [
+    "osa",
+    "sleep apnea",
+    "opioid",
+    "oximetry",
+    "nadir"
+   ]
+  },
+  {
+   "id": "emergence_agitation",
+   "severity": "minor",
+   "finding": "Prior severe emergence agitation",
+   "evidence": "Anesthesia history 04/2024: PAED 18 for 20 min, required propofol 1 mg/kg in PACU.",
+   "implication": "Likely to recur after sevoflurane.",
+   "action": "Prophylaxis such as dexmedetomidine or propofol at the end, adequate analgesia, calm emergence with parent.",
+   "keywords": [
+    "emergence",
+    "agitation",
+    "delirium",
+    "dexmedetomidine",
+    "precedex"
+   ]
+  },
+  {
+   "id": "loose_tooth",
+   "severity": "minor",
+   "finding": "Loose lower front tooth",
+   "evidence": "Preop checklist and H&P.",
+   "implication": "Aspiration or dislodgement during laryngoscopy and mouth gag placement.",
+   "action": "Document, discuss with parent, protect or plan removal.",
+   "keywords": [
+    "tooth",
+    "teeth",
+    "dentition",
+    "loose"
+   ]
+  },
+  {
+   "id": "consent",
+   "severity": "minor",
+   "finding": "Anesthesia consent not signed; separation anxiety",
+   "evidence": "Consents tab; child life note.",
+   "implication": "Consent from legal guardian required; anxious child.",
+   "action": "Obtain consent from mother; premedication (oral midazolam) or parental presence at induction.",
+   "keywords": [
+    "consent",
+    "midazolam",
+    "premed",
+    "parental presence"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "Inhalation induction with sevoflurane, IV after induction",
+   "keywords": [
+    "inhalation",
+    "mask induction",
+    "sevo"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Oral RAE ETT per surgeon; avoid succinylcholine",
+   "keywords": [
+    "rae",
+    "ett",
+    "oral rae"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Dexamethasone 0.5 mg/kg IV (8.5 mg) at induction per surgeon",
+   "keywords": [
+    "dexamethasone",
+    "decadron"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Opioid sparing: reduced opioid dose, acetaminophen",
+   "keywords": [
+    "acetaminophen",
+    "opioid sparing",
+    "reduced opioid",
+    "multimodal"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Dexamethasone plus ondansetron (T&A is high PONV risk)",
+   "keywords": [
+    "ondansetron",
+    "zofran"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Awake extubation with OSA; emergence agitation prophylaxis",
+   "keywords": [
+    "awake extubation",
+    "dexmedetomidine"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Overnight observation with continuous pulse oximetry",
+   "keywords": [
+    "overnight",
+    "continuous pulse oximetry",
+    "observation"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "URI, RAD, and airway surgery"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Reactive airway disease with active URI"
+  }
+ ]
+}

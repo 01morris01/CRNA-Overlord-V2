@@ -1,0 +1,125 @@
+{
+ "id": "p18",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "TURP with spinal requested, but the patient stopped warfarin 2 days late (thought it was 3 days like his colonoscopy) and the INR is 1.9.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Persistent AF on anticoagulation, CKD 3a, age 77."
+ },
+ "decision": {
+  "recommendation": "delay",
+  "rationale": "INR 1.9 contraindicates a spinal (needs normalization) and is high for a TURP. Delay 1 to 2 days with repeat INR rather than switch to GA, since the surgeon prefers spinal and bleeding risk applies either way. Discuss with urology."
+ },
+ "redFlags": [
+  {
+   "id": "inr",
+   "severity": "critical",
+   "finding": "INR 1.9 with spinal planned",
+   "evidence": "Last warfarin 10/23 (not 10/21); INR 1.9 this morning; anticoag clinic call 10/26 documented the error.",
+   "implication": "Neuraxial hematoma risk; surgical bleeding.",
+   "action": "No spinal until INR normalizes (under 1.5); delay and recheck.",
+   "keywords": [
+    "inr",
+    "warfarin",
+    "coumadin",
+    "1.9",
+    "neuraxial",
+    "spinal",
+    "delay"
+   ]
+  },
+  {
+   "id": "tamsulosin",
+   "severity": "minor",
+   "finding": "Alpha blocker plus spinal",
+   "evidence": "Tamsulosin nightly.",
+   "implication": "Hypotension after sympathectomy.",
+   "action": "Pressor ready.",
+   "keywords": [
+    "tamsulosin",
+    "alpha blocker",
+    "hypotension"
+   ]
+  },
+  {
+   "id": "anticholinergic",
+   "severity": "minor",
+   "finding": "Anticholinergic sensitivity",
+   "evidence": "Retention with diphenhydramine, confusion with oxybutynin.",
+   "implication": "Retention and delirium.",
+   "action": "Avoid scopolamine and diphenhydramine.",
+   "keywords": [
+    "anticholinergic",
+    "scopolamine",
+    "diphenhydramine"
+   ]
+  },
+  {
+   "id": "fluid",
+   "severity": "minor",
+   "finding": "Irrigation absorption",
+   "evidence": "Bipolar TURP with saline.",
+   "implication": "Saline lowers TURP syndrome hyponatremia risk but volume overload remains.",
+   "action": "Track irrigation deficit; spinal allows mental status monitoring.",
+   "keywords": [
+    "turp syndrome",
+    "irrigation",
+    "absorption"
+   ]
+  },
+  {
+   "id": "af",
+   "severity": "minor",
+   "finding": "AF with pauses and bradycardia history",
+   "evidence": "Holter pauses 2.2 s; HR 42 under propofol 2022; metoprolol taken.",
+   "implication": "Bradycardia with neuraxial or sedation.",
+   "action": "Atropine or glycopyrrolate ready.",
+   "keywords": [
+    "bradycardia",
+    "atrial fibrillation"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "regional",
+   "item": "Spinal once INR normalizes",
+   "keywords": [
+    "spinal"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min (childhood penicillin rash)",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Sodium check if prolonged resection",
+   "keywords": [
+    "sodium"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Inpatient with CBI; restart warfarin per urology",
+   "keywords": [
+    "cbi",
+    "warfarin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "30 pack year former smoker"
+  }
+ ]
+}

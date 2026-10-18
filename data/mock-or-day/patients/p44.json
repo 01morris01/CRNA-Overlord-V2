@@ -1,0 +1,2681 @@
+{
+ "id": "p44",
+ "room": "OR 18",
+ "time": "1230",
+ "name": "LAMBDIN, CLARENCE W",
+ "mrn": "0147044",
+ "dob": "04/18/1944",
+ "age": "82 y",
+ "sex": "M",
+ "ht_cm": 175,
+ "wt_kg": 78.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "A. Fugate, MD, Rutledge Family Medicine",
+ "insurance": "Medicare A/B + AARP Medigap Plan G",
+ "emergency_contact": "Velma Lambdin (wife, HCPOA) 865-555-0927; Darrell Lambdin (son) 423-555-0612",
+ "isolation": "",
+ "allergies": [
+  [
+   "Lisinopril",
+   "Cough",
+   "Mild (intolerance)",
+   "2012"
+  ],
+  [
+   "Codeine",
+   "Confusion",
+   "Moderate",
+   "2019"
+  ]
+ ],
+ "case": {
+  "procedure": "Exploratory laparotomy, sigmoid colectomy with end colostomy (Hartmann procedure)",
+  "short": "Ex lap, Hartmann (perforated diverticulitis)",
+  "laterality": "N/A",
+  "service": "Acute Care Surgery",
+  "surgeon": "J. Woodby, MD",
+  "assistant": "R. Tipton, MD (PGY-4)",
+  "indication": "Perforated sigmoid diverticulitis with pneumoperitoneum and pelvic contamination (Hinchey III vs IV), septic shock.",
+  "duration_min": 150,
+  "anesthesia_requested": "General",
+  "position": "Low lithotomy (Allen stirrups), arms out",
+  "dispo": "SICU",
+  "blood": "Type and crossmatch 2 units PRBC",
+  "equipment": "Laparotomy tray, Bookwalter, ostomy supplies",
+  "implants": "",
+  "surgeon_notes": "ADD-ON emergent. On dabigatran - last dose last night. Pharmacy has idarucizumab. Pt in shock on levophed. Will likely leave ostomy. ICU bed requested.",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Sepsis with septic shock due to perforated sigmoid diverticulitis",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Persistent atrial fibrillation",
+   "2019",
+   "Active"
+  ],
+  [
+   "Long-term (current) use of anticoagulant (dabigatran)",
+   "2019",
+   "Active"
+  ],
+  [
+   "CAD s/p PCI (DES to proximal LAD)",
+   "2017",
+   "Active"
+  ],
+  [
+   "Heart failure with preserved ejection fraction",
+   "2021",
+   "Active"
+  ],
+  [
+   "CKD stage 3b",
+   "2020",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes mellitus with CKD",
+   "2008",
+   "Active"
+  ],
+  [
+   "Essential hypertension",
+   "1998",
+   "Active"
+  ],
+  [
+   "BPH with LUTS",
+   "2014",
+   "Active"
+  ],
+  [
+   "Hearing loss, bilateral, hearing aids",
+   "2016",
+   "Active"
+  ],
+  [
+   "Mild cognitive impairment",
+   "2025",
+   "Active"
+  ],
+  [
+   "Diverticulitis, uncomplicated (outpatient)",
+   "2022",
+   "Resolved"
+  ],
+  [
+   "Basal cell carcinoma, scalp",
+   "2020",
+   "Resolved"
+  ],
+  [
+   "Gout",
+   "2015",
+   "Active"
+  ],
+  [
+   "Pneumonia, community-acquired",
+   "01/2024",
+   "Resolved"
+  ],
+  [
+   "Fall without injury",
+   "05/2025",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "AF dx 2019 (paroxysmal -> persistent 2022), rate control; dabigatran since 2019",
+   "CAD: NSTEMI 2017 -> DES prox LAD; aspirin stopped 2019 when anticoagulated (cardiology)",
+   "HFpEF (EF 55-60%), last admission 2021",
+   "CKD 3b (baseline Cr 1.3-1.4)",
+   "T2DM, A1c 7.0-7.6",
+   "HTN",
+   "BPH",
+   "MCI (MoCA 23/30, 2025)",
+   "Diverticulosis (colonoscopy 2016)"
+  ],
+  "psh": [
+   [
+    "1972",
+    "Appendectomy",
+    "Morristown"
+   ],
+   [
+    "2010",
+    "Right inguinal hernia repair",
+    "C-N University Hospital"
+   ],
+   [
+    "10/2017",
+    "Cardiac cath, PCI DES prox LAD",
+    "C-N University Hospital"
+   ],
+   [
+    "2016",
+    "Colonoscopy",
+    "C-N Endoscopy"
+   ],
+   [
+    "2014",
+    "TURP",
+    "C-N University Hospital"
+   ],
+   [
+    "2020",
+    "Mohs BCC scalp",
+    "Smoky Mountain Dermatology"
+   ],
+   [
+    "2018",
+    "Bilateral cataract extraction",
+    "Tennessee Eye Surgeons"
+   ]
+  ],
+  "family": [
+   "Father: MI age 70",
+   "Mother: stroke age 79",
+   "Brother: colon cancer age 75",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Former, quit 1985 (30 pack-yr)",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Retired dairy farmer",
+   "living": "Farmhouse with wife (79), Rutledge; son lives in Kingsport",
+   "other": "Independent ADLs; wife manages meds. Walks with cane outdoors."
+  },
+  "immunizations": [
+   [
+    "Influenza (high dose)",
+    "09/2026"
+   ],
+   [
+    "COVID-19 2025-26",
+    "10/2025"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2023"
+   ],
+   [
+    "RSV",
+    "2024"
+   ],
+   [
+    "Shingrix x2",
+    "2019"
+   ],
+   [
+    "Tdap",
+    "2016"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Dabigatran 150 mg cap",
+   "1 cap PO BID",
+   "L. Sexton, MD (Cardiology)",
+   "10/26/2026 2100"
+  ],
+  [
+   "Metoprolol tartrate 50 mg tab",
+   "1 tab PO BID",
+   "L. Sexton, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Atorvastatin 40 mg tab",
+   "1 tab PO nightly",
+   "L. Sexton, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Furosemide 20 mg tab",
+   "1 tab PO daily",
+   "L. Sexton, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Losartan 25 mg tab",
+   "1 tab PO daily",
+   "A. Fugate, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Metformin 500 mg tab",
+   "1 tab PO BID",
+   "A. Fugate, MD",
+   "10/26/2026 1800"
+  ],
+  [
+   "Glipizide 5 mg tab",
+   "1 tab PO daily with breakfast",
+   "A. Fugate, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Tamsulosin 0.4 mg cap",
+   "1 cap PO nightly",
+   "A. Fugate, MD",
+   "10/26/2026 2100"
+  ],
+  [
+   "Allopurinol 100 mg tab",
+   "1 tab PO daily",
+   "A. Fugate, MD",
+   "10/26/2026"
+  ],
+  [
+   "Donepezil 5 mg tab",
+   "1 tab PO nightly",
+   "S. Moody, MD (Neurology)",
+   "10/26/2026 2100"
+  ],
+  [
+   "Vitamin B12 1,000 mcg",
+   "1 tab PO daily",
+   "OTC",
+   "10/26/2026"
+  ],
+  [
+   "Docusate 100 mg",
+   "1 cap PO BID PRN",
+   "OTC",
+   "10/25/2026"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "2 tabs PO q6h PRN",
+   "OTC",
+   "10/26/2026 1600"
+  ]
+ ],
+ "mar": [
+  [
+   "Piperacillin-tazobactam 4.5 g IV",
+   "q6h",
+   "Given 10/27/2026 0640"
+  ],
+  [
+   "Lactated Ringer's 2,300 mL (30 mL/kg)",
+   "Bolus",
+   "Completed 10/27/2026 0830"
+  ],
+  [
+   "Norepinephrine 16 mg/250 mL",
+   "Titrate 0.02-0.5 mcg/kg/min to MAP >= 65",
+   "Infusing 0.12 mcg/kg/min via 18 g L antecubital PIV (started 0805)"
+  ],
+  [
+   "Morphine 2 mg IV",
+   "q2h PRN pain",
+   "Given 10/27/2026 0450 (ED)"
+  ],
+  [
+   "Hydromorphone 0.25 mg IV",
+   "q2h PRN",
+   "Given 10/27/2026 0915"
+  ],
+  [
+   "Ondansetron 4 mg IV",
+   "q6h PRN",
+   "Given 10/27/2026 0500"
+  ],
+  [
+   "Insulin regular sliding scale",
+   "q4h",
+   "Given 4 units 10/27/2026 0900"
+  ],
+  [
+   "Idarucizumab 5 g IV (2 x 2.5 g)",
+   "On call per anesthesia/surgery",
+   "Available in OR pharmacy - not given"
+  ],
+  [
+   "Dabigatran 150 mg PO",
+   "BID",
+   "HELD"
+  ],
+  [
+   "Metoprolol tartrate 50 mg PO",
+   "BID",
+   "HELD (shock)"
+  ],
+  [
+   "Metformin, glipizide, losartan, furosemide",
+   "Home",
+   "HELD"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Aspirin 81 mg",
+   "2017-2019",
+   "Stopped when anticoagulated (bleeding risk) per cardiology"
+  ],
+  [
+   "Clopidogrel 75 mg",
+   "10/2017-2019",
+   "DAPT completed; dabigatran started"
+  ],
+  [
+   "Diltiazem",
+   "2019-2020",
+   "Edema/HFpEF"
+  ],
+  [
+   "Amoxicillin-clavulanate",
+   "06/2022",
+   "Diverticulitis course completed"
+  ],
+  [
+   "Hydrochlorothiazide",
+   "1998-2015",
+   "Gout"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 1030",
+    "comment": "Radial stick, 4 L NC",
+    "vals": {
+     "pH": [
+      "7.28",
+      "L"
+     ],
+     "PaCO2": [
+      "32",
+      "L"
+     ],
+     "PaO2": [
+      "74",
+      "L"
+     ],
+     "HCO3a": [
+      "15",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "10/27/2026 0915",
+    "comment": "Post-fluid recheck",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "17",
+      "L"
+     ],
+     "BUN": [
+      "50",
+      "H"
+     ],
+     "Cr": [
+      "1.78",
+      "H"
+     ],
+     "Glu": [
+      "198",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "WBC": [
+      "23.9",
+      "H"
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "128",
+      "L"
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Lactate": [
+      "4.2",
+      "H"
+     ],
+     "Fib": [
+      "520",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/27/2026 0420",
+    "comment": "ED",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "5.2",
+      "H"
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "17",
+      "L"
+     ],
+     "BUN": [
+      "48",
+      "H"
+     ],
+     "Cr": [
+      "1.72",
+      "H"
+     ],
+     "Glu": [
+      "236",
+      "H"
+     ],
+     "Ca": [
+      "8.5",
+      "L"
+     ],
+     "AST": [
+      "38",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "92",
+      ""
+     ],
+     "TBili": [
+      "1.3",
+      "H"
+     ],
+     "TProt": [
+      "6.1",
+      ""
+     ],
+     "Alb": [
+      "3.1",
+      "L"
+     ],
+     "WBC": [
+      "22.4",
+      "H"
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "142",
+      "L"
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "PT": [
+      "17.1",
+      "H"
+     ],
+     "INR": [
+      "1.4",
+      "H"
+     ],
+     "aPTT": [
+      "54",
+      "H"
+     ],
+     "Lactate": [
+      "4.8",
+      "H"
+     ],
+     "Trop": [
+      "48",
+      "H"
+     ],
+     "pH": [
+      "7.26",
+      "L"
+     ],
+     "PaCO2": [
+      "34",
+      "L"
+     ],
+     "HCO3a": [
+      "15",
+      "L"
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/15/2026",
+    "comment": "Cardiology",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "28",
+      "H"
+     ],
+     "Cr": [
+      "1.38",
+      "H"
+     ],
+     "Glu": [
+      "148",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "14",
+      ""
+     ],
+     "ALKP": [
+      "83",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "263",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "A1c": [
+      "7.3",
+      "H"
+     ],
+     "BNP": [
+      "180",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/09/2025",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.42",
+      "H"
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "74",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "13.1",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "205",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "A1c": [
+      "7.6",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "64",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/22/2025",
+    "comment": "Fall/cognition workup",
+    "vals": {
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "243",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.33",
+      "H"
+     ],
+     "Glu": [
+      "145",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "B12": [
+      "238",
+      ""
+     ],
+     "TSH": [
+      "1.67",
+      ""
+     ],
+     "FT4": [
+      "1.20",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/17/2024 0500",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "9.9",
+      ""
+     ],
+     "Hgb": [
+      "13.2",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.41",
+      "H"
+     ],
+     "Glu": [
+      "150",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "01/14/2024 1640",
+    "comment": "ED - pneumonia",
+    "vals": {
+     "WBC": [
+      "15.8",
+      "H"
+     ],
+     "Hgb": [
+      "12.4",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "223",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.68",
+      "H"
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "Lactate": [
+      "1.9",
+      ""
+     ],
+     "BNP": [
+      "340",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "11/01/2022",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "153",
+      "H"
+     ],
+     "Ca": [
+      "9.8",
+      ""
+     ],
+     "AST": [
+      "14",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "97",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "A1c": [
+      "7.1",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "61",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "126",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/12/2022",
+    "comment": "Urgent care - LLQ pain",
+    "vals": {
+     "WBC": [
+      "13.1",
+      "H"
+     ],
+     "Hgb": [
+      "13.3",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "240",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "145",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/09/2021 0500",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.45",
+      "H"
+     ],
+     "Glu": [
+      "147",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/06/2021 1930",
+    "comment": "ED - dyspnea (HF exacerbation)",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "13.1",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "247",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.62",
+      "H"
+     ],
+     "Glu": [
+      "152",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "BNP": [
+      "880",
+      "H"
+     ],
+     "Trop": [
+      "42",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/18/2020",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "145",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "33",
+      ""
+     ],
+     "ALKP": [
+      "86",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "213",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "A1c": [
+      "7.4",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "63",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/03/2019",
+    "comment": "New AF",
+    "vals": {
+     "WBC": [
+      "7.8",
+      ""
+     ],
+     "Hgb": [
+      "13.1",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "237",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.24",
+      ""
+     ],
+     "Glu": [
+      "148",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "TSH": [
+      "2.16",
+      ""
+     ],
+     "FT4": [
+      "1.29",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/15/2017 0500",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "13.2",
+      "L"
+     ],
+     "Hct": [
+      "40",
+      "L"
+     ],
+     "Plt": [
+      "247",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.20",
+      ""
+     ],
+     "Glu": [
+      "150",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "Trop": [
+      "3880",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "112",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/14/2017 1120",
+    "comment": "ED - chest pain (NSTEMI)",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "13.4",
+      "L"
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "263",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.15",
+      ""
+     ],
+     "Glu": [
+      "146",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Trop": [
+      "2140",
+      "H"
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/11/2016",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.10",
+      ""
+     ],
+     "Glu": [
+      "144",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "32",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "88",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "118",
+      "H"
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "6.8",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaO2",
+    "name": "PO2",
+    "unit": "mm Hg",
+    "ref": "80-100"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   }
+  ],
+  "other": [
+   [
+    "10/14/2017",
+    "Cardiac cath report",
+    "See cardiology tab",
+    ""
+   ],
+   [
+    "06/12/2022",
+    "Urinalysis",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Procalcitonin",
+    "18.6 ng/mL",
+    "H"
+   ],
+   [
+    "10/27/2026",
+    "Thrombin time",
+    ">120 sec (ref 14-19)",
+    "H"
+   ],
+   [
+    "10/27/2026",
+    "Dilute thrombin time (dabigatran level)",
+    "Sent to reference lab - pending",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Blood cultures x2",
+    "Pending (drawn 0425 and 0435)",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Urinalysis",
+    "SG 1.024, protein 1+, glucose 2+, ketones trace, LE neg, nitrite neg",
+    "A"
+   ],
+   [
+    "10/27/2026",
+    "Type and crossmatch",
+    "A negative; antibody screen negative; 2 units crossmatched",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "POC glucose",
+    "186 mg/dL (1130)",
+    "H"
+   ],
+   [
+    "10/27/2026",
+    "Estimated CrCl (Cockcroft-Gault)",
+    "~37 mL/min (wt 78 kg, Cr 1.72); baseline ~46",
+    "L"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/15/2017",
+   "XR Chest portable",
+   "No acute disease.",
+   "H. Vaughn, MD"
+  ],
+  [
+   "02/06/2021",
+   "XR Chest 2 views",
+   "Cardiomegaly, bilateral small effusions, interstitial edema. Impression: CHF.",
+   "H. Vaughn, MD"
+  ],
+  [
+   "06/12/2022",
+   "CT Abdomen/Pelvis with contrast (outside)",
+   "Sigmoid diverticulitis with pericolonic stranding, no abscess, no free air. Impression: Uncomplicated diverticulitis.",
+   "Outside - Morristown Imaging"
+  ],
+  [
+   "01/14/2024",
+   "XR Chest 2 views",
+   "RLL consolidation. Impression: Pneumonia.",
+   "H. Vaughn, MD"
+  ],
+  [
+   "05/22/2025",
+   "CT Head without contrast",
+   "Chronic small vessel ischemic change, moderate. Generalized volume loss. No acute process.",
+   "P. Stiles, MD"
+  ],
+  [
+   "10/27/2026",
+   "CT Abdomen/Pelvis with IV contrast",
+   "Sigmoid diverticulitis with focal wall discontinuity, extraluminal gas tracking into the pelvis and moderate pneumoperitoneum. 4.2 cm rim-enhancing pelvic collection with gas. Moderate free fluid. No portal venous gas. Bilateral renal cysts. Prostatomegaly. Impression: Perforated sigmoid diverticulitis with pneumoperitoneum and pelvic abscess.",
+   "P. Stiles, MD"
+  ],
+  [
+   "10/27/2026",
+   "XR Chest portable",
+   "Free air beneath both hemidiaphragms, larger on the right. Heart size upper normal. No effusion or pneumothorax. Impression: Pneumoperitoneum.",
+   "P. Stiles, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Freie_Luft_bei_Sigmaperforation_71W_-_CR_ap_-_001.jpg)"
+   }
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/15/2017",
+   "Cardiac catheterization",
+   "90% prox LAD -> 3.0 x 18 mm DES. LCx 30%, RCA 40%. LVEDP 18. EF 50% by ventriculography.",
+   "L. Sexton, MD"
+  ],
+  [
+   "10/16/2017",
+   "Echocardiogram, transthoracic",
+   "LVEF 50%. Mild anterior hypokinesis. Mild LVH. Mild MR.",
+   "L. Sexton, MD"
+  ],
+  [
+   "09/03/2019",
+   "ECG 12-lead",
+   "Atrial fibrillation, ventricular rate 104. Old anterior Q waves. QTc 446.",
+   "L. Sexton, MD",
+   {
+    "rate": 104,
+    "rhythm": "af",
+    "qrs": 100,
+    "qtc": 446,
+    "axis": -10,
+    "asq": 3
+   }
+  ],
+  [
+   "02/07/2021",
+   "Echocardiogram, transthoracic",
+   "LVEF 55-60% (wall motion normalized). Moderate LVH. Grade II diastolic dysfunction. LA severely dilated (LAVI 52). Aortic sclerosis without stenosis (peak velocity 1.9 m/s). RVSP 42. Impression: HFpEF physiology.",
+   "L. Sexton, MD"
+  ],
+  [
+   "2022",
+   "Nuclear stress test, regadenoson",
+   "No ischemia. Small fixed anterior apical defect (prior infarct). EF 54%.",
+   "L. Sexton, MD"
+  ],
+  [
+   "04/15/2026",
+   "ECG 12-lead",
+   "Atrial fibrillation, rate 78. Q waves V1-V3. QTc 442.",
+   "L. Sexton, MD",
+   {
+    "rate": 78,
+    "rhythm": "af",
+    "qrs": 100,
+    "qtc": 442,
+    "axis": -10,
+    "asq": 3
+   }
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead (ED)",
+   "Atrial fibrillation with RVR 128. Diffuse 1 mm ST depression (rate-related vs demand). Q waves V1-V3. QTc 468.",
+   "ED - preliminary read",
+   {
+    "rate": 128,
+    "rhythm": "af",
+    "qrs": 100,
+    "qtc": 468,
+    "axis": -10,
+    "asq": 3,
+    "st": {
+     "I": -0.1,
+     "II": -0.1,
+     "aVF": -0.08,
+     "V4": -0.1,
+     "V5": -0.1,
+     "V6": -0.1
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "02/11/2016",
+   "Clinic - PCP",
+   "Rutledge Family Medicine",
+   "Annual",
+   "Colonoscopy referral"
+  ],
+  [
+   "03/2016",
+   "Outpatient endoscopy",
+   "C-N Endoscopy",
+   "Screening colonoscopy",
+   "Extensive sigmoid diverticulosis; no polyps"
+  ],
+  [
+   "10/14/2017",
+   "Inpatient (3 days)",
+   "C-N University Hospital",
+   "NSTEMI",
+   "PCI LAD; DAPT"
+  ],
+  [
+   "09/03/2019",
+   "Clinic - Cardiology",
+   "C-N Heart Associates",
+   "New AF",
+   "Dabigatran; aspirin/clopidogrel stopped"
+  ],
+  [
+   "02/06/2021",
+   "Inpatient (4 days)",
+   "C-N University Hospital",
+   "Acute on chronic HFpEF",
+   "Diuresed; furosemide"
+  ],
+  [
+   "06/12/2022",
+   "Urgent care",
+   "Morristown Urgent Care",
+   "LLQ pain - uncomplicated diverticulitis",
+   "Amox-clav; dabigatran continued"
+  ],
+  [
+   "01/14/2024",
+   "Inpatient (3 days)",
+   "C-N University Hospital",
+   "CAP RLL",
+   "Ceftriaxone/azithro; home"
+  ],
+  [
+   "05/22/2025",
+   "ED visit",
+   "C-N University Hospital",
+   "Fall in barn, no injury; confusion question",
+   "CT head neg; neurology referral"
+  ],
+  [
+   "07/2025",
+   "Clinic - Neurology",
+   "C-N Neurology Associates",
+   "Memory concerns",
+   "MCI; donepezil"
+  ],
+  [
+   "04/15/2026",
+   "Clinic - Cardiology",
+   "C-N Heart Associates",
+   "AF/CAD/HFpEF",
+   "Stable"
+  ],
+  [
+   "10/27/2026",
+   "ED visit -> admission",
+   "C-N University Hospital",
+   "Abdominal pain, hypotension",
+   "Septic shock, perforated diverticulitis; to OR"
+  ]
+ ],
+ "notes": [
+  [
+   "03/22/2016 1000",
+   "Procedure Note",
+   "Gastroenterology",
+   "P. Rimmer, MD",
+   "Colonoscopy under MAC: extensive sigmoid diverticulosis, no polyps. No further screening colonoscopy recommended (age >75 at next interval)."
+  ],
+  [
+   "10/17/2017 1100",
+   "Discharge Summary",
+   "Cardiology",
+   "L. Sexton, MD",
+   "NSTEMI, DES prox LAD. DAPT aspirin + clopidogrel x12 mo minimum. Atorvastatin 80 (later 40 for myalgias). Cardiac rehab."
+  ],
+  [
+   "09/03/2019 1500",
+   "Progress Note",
+   "Cardiology",
+   "L. Sexton, MD",
+   "New AF found on routine ECG. CHA2DS2-VASc 5 (age>=75 x2, HTN, DM, vascular). Start dabigatran 150 BID (CrCl ~50). >1 yr post PCI - stop clopidogrel and aspirin; DOAC monotherapy for stable CAD. Rate control metoprolol."
+  ],
+  [
+   "02/10/2021 1000",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "T. Haun, MD",
+   "Acute on chronic HFpEF, AF rate 110s. IV furosemide, net -4 L. Echo EF 55-60%, grade II DD. D/C on furosemide 20 daily."
+  ],
+  [
+   "06/12/2022 1600",
+   "Progress Note",
+   "Urgent Care",
+   "K. Rowe, PA-C",
+   "LLQ pain 2 days, low-grade fever. Outside CT: uncomplicated sigmoid diverticulitis. Amox-clav x10 d, clear liquids. Return precautions."
+  ],
+  [
+   "01/17/2024 1100",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "M. Cagle, DO",
+   "CAP RLL. Mild delirium overnight HD1, resolved. Codeine cough syrup from PCP previously caused confusion - listed as allergy."
+  ],
+  [
+   "05/22/2025 1400",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "B. Jenkins, MD",
+   "Wife reports pt fell in barn, no head strike reported, but \"more forgetful\" for months. CT head chronic changes. On dabigatran - no bleed. Neurology referral."
+  ],
+  [
+   "07/16/2025 1000",
+   "Consult",
+   "Neurology",
+   "S. Moody, MD",
+   "MoCA 23/30 (delayed recall, executive). B12 low-normal - supplement. Imp: MCI, likely vascular/amnestic mixed. Donepezil 5 mg. Retains decision-making capacity for medical decisions; encouraged advance care planning."
+  ],
+  [
+   "09/09/2025 1100",
+   "Progress Note",
+   "Family Medicine",
+   "A. Fugate, MD",
+   "Annual wellness. Advance care planning discussed with pt and wife (16 min). Pt states clearly he wants \"everything done if there is a reasonable chance I get back to my farm.\" Wife Velma named HCPOA; document signed today, scanned. Pt does not want prolonged life support if no meaningful recovery. A1c 7.6 - continue metformin 500 BID (eGFR 46) + glipizide."
+  ],
+  [
+   "09/09/2025 1130",
+   "Media (Advance Directive)",
+   "Family Medicine",
+   "Scanned document",
+   "Tennessee Advance Care Plan + Appointment of Health Care Agent: Agent Velma Lambdin (wife); alternate Darrell Lambdin (son). Treatment wishes: wants CPR, ventilation, and surgery if reasonable chance of returning to current quality of life; would NOT want long-term life support if permanently unconscious or terminal. Signed by patient, two witnesses."
+  ],
+  [
+   "04/15/2026 1000",
+   "Progress Note",
+   "Cardiology",
+   "L. Sexton, MD",
+   "Persistent AF rate controlled 70s. NYHA II. Wt 79 kg. Cr 1.38, CrCl ~46 - continue dabigatran 150 BID (dose reduction to 75 mg only for CrCl 15-30 per US labeling). Discussed bleeding risk. Continue metoprolol 50 BID."
+  ],
+  [
+   "06/30/2026 1400",
+   "Telephone Encounter",
+   "Family Medicine",
+   "C. Goins, LPN",
+   "Wife called: dabigatran copay $140. Enrolled in manufacturer assistance. No change."
+  ],
+  [
+   "08/14/2026 1000",
+   "Patient Message",
+   "Family Medicine",
+   "Lambdin, Velma (proxy)",
+   "Clarence would like his flu shot at the September visit. Also needs refill of tamsulosin."
+  ],
+  [
+   "10/27/2026 0445",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "H. Burkhart, MD",
+   "82M, 2 days worsening LLQ pain, fever/chills at home, vomiting x2 tonight. Wife reports confusion since midnight. Arrival: T 38.9, HR 128 AF, BP 84/48, RR 26, SpO2 93% RA. Peritoneal abdomen, rigid LLQ. Took dabigatran last night ~2100 per wife. Lucid enough at 0500 to state \"fix it, I want to live.\" Sepsis bundle: cultures, pip-tazo 0640, 30 mL/kg LR. CT: perforation with pneumoperitoneum. MAP 58 after 2.3 L -> norepinephrine started 0805 via 18 g L AC PIV; central line deferred given dabigatran; surgery prefers OR asap. Acute care surgery consulted. ICU aware."
+  ],
+  [
+   "10/27/2026 0720",
+   "Consult",
+   "Acute Care Surgery",
+   "R. Tipton, MD (PGY-4)",
+   "Perforated sigmoid diverticulitis, Hinchey III-IV, septic shock. Needs emergent ex lap, likely Hartmann. Discussed with Dr. Woodby. Anticoagulated on dabigatran (last 2100) - pharmacy consulted re: reversal. High-risk surgery discussed with pt (intermittently confused), wife (HCPOA), son. Wife consents. Booked add-on 1230 (first available room after trauma case)."
+  ],
+  [
+   "10/27/2026 0815",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Whaley, PharmD",
+   "Dabigatran: last dose 150 mg 10/26 2100. Est. CrCl ~37 mL/min (AKI on CKD) - half-life prolonged (~18-24 h vs 12-17 h normal). At surgery (~15 h), significant drug effect expected. aPTT 54, TT >120 s confirms residual dabigatran. Idarucizumab 5 g IV (two 2.5 g vials) indicated for emergency surgery; product dispensed to OR satellite pharmacy, available on request. Dilute TT pending (send-out). Hemodialysis removes dabigatran but impractical here. Pip-tazo dose 4.5 g q6h ok for CrCl 20-40 (extended infusion considered). Metformin held - lactate 4.8."
+  ],
+  [
+   "10/27/2026 0900",
+   "Nursing Note",
+   "Emergency Medicine",
+   "S. Ramsey, RN",
+   "Norepinephrine via 18 g L AC, site checked q1h, no infiltration. 2nd PIV 20 g R hand. Foley placed: 40 mL dark urine first hour, 15 mL second hour. Pt moaning, oriented to self only. Son at bedside, upset."
+  ],
+  [
+   "10/27/2026 0945",
+   "Social Work",
+   "Emergency Medicine",
+   "L. Overbay, LCSW",
+   "Called for family conflict. Son Darrell states father \"would never want this, he is 82, make him a DNR, no surgery.\" Wife Velma (designated HCPOA per scanned 9/2025 directive) states husband told her and Dr. Fugate he wants everything done if he can get back home, and he said so this morning. Explained HCPOA hierarchy; pt's own expressed wishes earlier today also documented by ED MD. Wife wants full code and surgery. Son requested ethics consult - placed. Chaplain notified. Son states he may \"get a lawyer.\" Family meeting with surgery/ICU planned post-op."
+  ],
+  [
+   "10/27/2026 1020",
+   "Consult",
+   "Critical Care",
+   "N. Seay, MD",
+   "Septic shock, NE 0.12 mcg/kg/min, MAP 66, lactate 4.8 -> 4.2. AF RVR 120s - avoid rate control while on pressors; amiodarone if worsening. Recommend arterial line and central line in OR after anticoagulation reversal; add vasopressin if NE >0.25; stress-dose hydrocortisone if escalating. SICU bed assigned. Full code confirmed with HCPOA."
+  ],
+  [
+   "10/27/2026 1045",
+   "Anesthesia Preop Note",
+   "Anesthesiology",
+   "T. Gentry, MD",
+   "Brief preop: emergency. See ED/pharmacy notes. Plan RSI, arterial line pre-induction. Will discuss idarucizumab with surgery. Glasses, hearing aids with wife. Airway: edentulous upper (denture removed), MP III. Full code per HCPOA."
+  ],
+  [
+   "10/27/2026 1100",
+   "Ethics Consult",
+   "Ethics",
+   "R. Ailor, DMin",
+   "Request from son. Reviewed advance directive (HCPOA wife) and documented statements. Surgery consistent with pt's stated values (wants treatment if reasonable chance to return home). No ethical barrier to proceed. Will follow post-op for ongoing goals-of-care discussions."
+  ]
+ ],
+ "vitals": [
+  [
+   "02/11/2016 0930",
+   "142/80",
+   72,
+   16,
+   97,
+   36.6,
+   84.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "10/14/2017 1115",
+   "156/92",
+   96,
+   18,
+   96,
+   36.7,
+   83.1,
+   "7/10",
+   "ED"
+  ],
+  [
+   "09/03/2019 1430",
+   "138/78",
+   104,
+   16,
+   97,
+   36.6,
+   82.0,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "02/06/2021 1920",
+   "162/94",
+   112,
+   24,
+   89,
+   36.8,
+   85.3,
+   "0/10",
+   "ED"
+  ],
+  [
+   "06/12/2022 1530",
+   "134/76",
+   88,
+   18,
+   97,
+   37.9,
+   81.4,
+   "6/10",
+   "Urgent care"
+  ],
+  [
+   "01/14/2024 1630",
+   "108/62",
+   104,
+   24,
+   91,
+   38.4,
+   80.2,
+   "2/10",
+   "ED"
+  ],
+  [
+   "05/22/2025 1330",
+   "146/82",
+   82,
+   16,
+   96,
+   36.6,
+   79.0,
+   "1/10",
+   "ED"
+  ],
+  [
+   "04/15/2026 0945",
+   "132/74",
+   78,
+   16,
+   96,
+   36.6,
+   79.1,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "10/27/2026 0410",
+   "84/48",
+   128,
+   26,
+   93,
+   38.9,
+   78.0,
+   "9/10",
+   "ED triage"
+  ],
+  [
+   "10/27/2026 0600",
+   "88/50",
+   124,
+   24,
+   94,
+   38.6,
+   null,
+   "8/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0800",
+   "82/46",
+   122,
+   24,
+   94,
+   38.4,
+   null,
+   "8/10",
+   "ED (pre-NE)"
+  ],
+  [
+   "10/27/2026 0900",
+   "98/54",
+   118,
+   24,
+   95,
+   38.2,
+   null,
+   "7/10",
+   "ED on NE 0.08"
+  ],
+  [
+   "10/27/2026 1000",
+   "96/52",
+   122,
+   26,
+   94,
+   38.3,
+   null,
+   "7/10",
+   "ED on NE 0.12"
+  ],
+  [
+   "10/27/2026 1140",
+   "94/52",
+   124,
+   26,
+   93,
+   38.4,
+   null,
+   "8/10",
+   "Preop holding (NE 0.12, 4 L NC)"
+  ]
+ ],
+ "orders": [
+  [
+   "Sepsis order set",
+   "10/27/2026 0430",
+   "Active"
+  ],
+  [
+   "Blood cultures x2",
+   "10/27/2026 0430",
+   "Collected"
+  ],
+  [
+   "Norepinephrine infusion",
+   "10/27/2026 0805",
+   "Active"
+  ],
+  [
+   "Type and crossmatch 2 units",
+   "10/27/2026 0720",
+   "Resulted - ready"
+  ],
+  [
+   "Thrombin time, dilute TT",
+   "10/27/2026 0815",
+   "TT resulted; dTT pending"
+  ],
+  [
+   "Idarucizumab 5 g - dispense to OR",
+   "10/27/2026 0830",
+   "Dispensed, not administered"
+  ],
+  [
+   "Ethics consult",
+   "10/27/2026 0950",
+   "Completed"
+  ],
+  [
+   "SICU admission post-op",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "NPO",
+   "10/27/2026 0430",
+   "Active"
+  ],
+  [
+   "Foley catheter, strict I&O",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Central line placement",
+   "10/27/2026",
+   "Deferred to OR"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A negative",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "FFP/platelets not prepared. Idarucizumab is a pharmacy product (not blood bank).",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: exploratory laparotomy, possible colectomy/colostomy",
+   "Signed by Velma Lambdin (HCPOA) 10/27/2026 0750 - pt lacks capacity at time"
+  ],
+  [
+   "Blood consent",
+   "Signed by HCPOA 10/27/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed - HCPOA at bedside"
+  ]
+ ],
+ "directives": "Tennessee Advance Care Plan + HCPOA (09/09/2025): agent wife Velma, alternate son Darrell. Wants CPR/ventilation/surgery if reasonable chance of returning to current quality of life; no long-term life support if permanently unconscious/terminal. No POLST.",
+ "anesthesia_history": [
+  [
+   "1972",
+   "Appendectomy",
+   "GA",
+   "Unknown",
+   "Morristown"
+  ],
+  [
+   "2010",
+   "R inguinal hernia repair",
+   "GA LMA",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "2014",
+   "TURP",
+   "Spinal",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "10/2017",
+   "Cardiac cath/PCI",
+   "Moderate sedation",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "2018",
+   "Cataracts",
+   "Topical/MAC",
+   "None",
+   "Tennessee Eye Surgeons"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1130 (from ED)",
+  "npo_solids": "10/26/2026 1800 (supper; vomited x2 since)",
+  "npo_clears": "10/26/2026 2100 (with pills)",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical by HCPOA; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "ED/surgery consult today"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Done"
+   ],
+   [
+    "Blood available",
+    "2 units crossmatched"
+   ],
+   [
+    "Code status verified",
+    "Full code (HCPOA)"
+   ]
+  ],
+  "nursing_note": "Arrived from ED on NE 0.12 mcg/kg/min via 18 g L AC (blood return present, site soft). 20 g R hand LR. 4 L NC SpO2 93%. AF 120s on monitor. Oriented to self, moaning, abdomen rigid. Upper denture and hearing aids given to wife. Foley 15 mL last hour. Wife at bedside; son in hallway. Idarucizumab in OR pharmacy per pharmacy.",
+  "iv": "18 g L AC (norepinephrine), 20 g R hand",
+  "glucose": "186 mg/dL (1130)"
+ },
+ "label": "C. Lambdin",
+ "bmi": "25.5"
+}

@@ -1,0 +1,2092 @@
+{
+ "id": "p35",
+ "room": "OR 14",
+ "time": "1000",
+ "name": "MCMAHAN, VERNON ELLIS",
+ "mrn": "0146035",
+ "dob": "01/05/1946",
+ "age": "80 y",
+ "sex": "M",
+ "ht_cm": 172,
+ "wt_kg": 81.3,
+ "preferred_name": "Vern",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. A. Fugate, Talbott Family Medicine",
+ "insurance": "Medicare + Tricare For Life",
+ "emergency_contact": "Carolyn McMahan (wife) 423-555-0105; Greg McMahan (son) 865-555-0191",
+ "isolation": "",
+ "allergies": [
+  [
+   "Amiodarone",
+   "Hypothyroidism / pulmonary toxicity concern (stopped)",
+   "Moderate",
+   "2021"
+  ],
+  [
+   "Ciprofloxacin",
+   "Tendon pain",
+   "Moderate",
+   "2018"
+  ]
+ ],
+ "case": {
+  "procedure": "Transurethral resection of bladder tumor (TURBT), right lateral wall, with cystoscopy",
+  "short": "TURBT, R lateral wall",
+  "laterality": "Right",
+  "service": "Urology",
+  "surgeon": "B. Satterly, MD",
+  "assistant": "",
+  "indication": "3.5 cm papillary bladder tumor, right lateral wall, gross hematuria",
+  "duration_min": 60,
+  "anesthesia_requested": "Spinal",
+  "position": "Lithotomy",
+  "dispo": "Inpatient overnight, telemetry (ICD, HF)",
+  "blood": "Type and screen",
+  "equipment": "Monopolar resectoscope (bipolar unavailable this date); glycine 1.5% irrigation; grounding pad L thigh",
+  "implants": "",
+  "surgeon_notes": "Tumor R lateral wall just superior/lateral to R ureteral orifice on office cysto. Post-op gemcitabine instillation if no perforation. Cefazolin 2 g.",
+  "add_on": false,
+  "scheduled_on": "10/05/2026"
+ },
+ "problems": [
+  [
+   "Bladder tumor, R lateral wall (suspected urothelial carcinoma)",
+   "09/2026",
+   "Active"
+  ],
+  [
+   "Ischemic cardiomyopathy, HFrEF, LVEF 30%",
+   "2018",
+   "Active"
+  ],
+  [
+   "Coronary artery disease s/p CABG x3 (2012)",
+   "2012",
+   "Active"
+  ],
+  [
+   "ICD, Boston Scientific, single chamber (primary -> secondary prevention)",
+   "2022",
+   "Active"
+  ],
+  [
+   "Atrial fibrillation, permanent",
+   "2019",
+   "Active"
+  ],
+  [
+   "Long-term anticoagulation (apixaban)",
+   "2019",
+   "Active"
+  ],
+  [
+   "CKD stage 3a",
+   "2020",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "1998",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes, diet-controlled",
+   "2015",
+   "Active"
+  ],
+  [
+   "Benign prostatic hyperplasia",
+   "2010",
+   "Active"
+  ],
+  [
+   "Hearing loss, bilateral, hearing aids",
+   "2016",
+   "Active"
+  ],
+  [
+   "Former smoker",
+   "1990",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Ischemic CM, EF 30% (2025 echo), NYHA II",
+   "CABG x3 2012 (LIMA-LAD, SVG-OM, SVG-RCA)",
+   "Permanent AF since 2019, rate controlled",
+   "ICD 2022 (Boston Scientific single-chamber); one appropriate shock for VT 2024",
+   "CKD 3a, Cr 1.2-1.4",
+   "HTN",
+   "Diet-controlled T2DM",
+   "BPH",
+   "Hearing aids",
+   "Gross hematuria 08/2026 -> office cystoscopy 09/2026 bladder tumor"
+  ],
+  "psh": [
+   [
+    "2012",
+    "CABG x3",
+    "C-N University Hospital"
+   ],
+   [
+    "03/2022",
+    "ICD implantation, left subclavian",
+    "C-N University Hospital"
+   ],
+   [
+    "2008",
+    "TURP",
+    "Fort Sanders"
+   ],
+   [
+    "2016",
+    "Bilateral cataract extraction",
+    "East Tennessee Eye Surgeons"
+   ],
+   [
+    "2019",
+    "Colonoscopy",
+    "Lakeway Endoscopy"
+   ]
+  ],
+  "family": [
+   "Father: MI at 62",
+   "Brother: bladder cancer at 75",
+   "No known anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Former, 30 pack-years, quit 1990",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Retired Army, then postal carrier",
+   "living": "Lives with wife, ranch home",
+   "other": "Uses cane; independent ADLs; drives short distances"
+  },
+  "immunizations": [
+   [
+    "Influenza (high-dose)",
+    "09/2026"
+   ],
+   [
+    "RSV",
+    "2023"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2022"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ],
+   [
+    "Shingrix x2",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Apixaban 5 mg",
+   "1 tab PO BID (HELD - last dose 10/23 evening per urology)",
+   "Dr. N. Kessinger (Cardiology)",
+   "10/23/2026 2000"
+  ],
+  [
+   "Sacubitril/valsartan 49/51 mg",
+   "1 tab PO BID",
+   "Dr. N. Kessinger",
+   "10/26/2026 2000"
+  ],
+  [
+   "Metoprolol succinate 100 mg",
+   "1 tab PO daily",
+   "Dr. N. Kessinger",
+   "10/27/2026 0600"
+  ],
+  [
+   "Spironolactone 25 mg",
+   "1 tab PO daily",
+   "Dr. N. Kessinger",
+   "10/26/2026 0800"
+  ],
+  [
+   "Empagliflozin 10 mg",
+   "1 tab PO daily (held 3 days preop per instructions)",
+   "Dr. N. Kessinger",
+   "10/23/2026 0800"
+  ],
+  [
+   "Furosemide 20 mg",
+   "1 tab PO daily",
+   "Dr. N. Kessinger",
+   "10/26/2026 0800"
+  ],
+  [
+   "Atorvastatin 40 mg",
+   "1 tab PO nightly",
+   "Dr. A. Fugate",
+   "10/26/2026 2100"
+  ],
+  [
+   "Tamsulosin 0.4 mg",
+   "1 cap PO nightly",
+   "Dr. B. Satterly",
+   "10/26/2026 2100"
+  ],
+  [
+   "Vitamin B12 1,000 mcg",
+   "PO daily",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Gemcitabine 2 g intravesical",
+   "Post-op in PACU if no perforation",
+   "Pending (postop)"
+  ],
+  [
+   "Metoprolol succinate 100 mg PO",
+   "Daily",
+   "Patient took home dose 0600"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Amiodarone 200 mg daily",
+   "2019-2021",
+   "TSH rise, pulmonary toxicity concern"
+  ],
+  [
+   "Warfarin",
+   "2019",
+   "Changed to apixaban"
+  ],
+  [
+   "Lisinopril 20 mg",
+   "1998-2023",
+   "Changed to sacubitril/valsartan"
+  ],
+  [
+   "Carvedilol 12.5 mg BID",
+   "2018-2020",
+   "Fatigue; changed to metoprolol succinate"
+  ],
+  [
+   "Ciprofloxacin 500 mg BID",
+   "2018",
+   "Tendon pain"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0800",
+    "comment": "Day of surgery",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "29",
+      "H"
+     ],
+     "Cr": [
+      "1.33",
+      "H"
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 1000",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "8.0",
+      ""
+     ],
+     "Hgb": [
+      "11.6",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      "L"
+     ],
+     "Plt": [
+      "277",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "5.1",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "PT": [
+      "12.5",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "BNP": [
+      "455",
+      "H"
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/28/2026",
+    "comment": "Gross hematuria; UA RBC >100/hpf",
+    "vals": {
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "232",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.33",
+      "H"
+     ],
+     "Glu": [
+      "122",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "USG": [
+      "1.015",
+      ""
+     ],
+     "UProt": [
+      "1+",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/08/2026",
+    "comment": "Cardiology/device",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.35",
+      "H"
+     ],
+     "Glu": [
+      "116",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "BNP": [
+      "418",
+      "H"
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "11.8",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "85",
+      ""
+     ],
+     "Mg": [
+      "2.1",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "08/19/2025",
+    "comment": "Cardiology",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      ""
+     ],
+     "Glu": [
+      "121",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "BNP": [
+      "411",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/11/2025",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "23",
+      "H"
+     ],
+     "Cr": [
+      "1.29",
+      ""
+     ],
+     "Glu": [
+      "113",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "26",
+      ""
+     ],
+     "ALKP": [
+      "80",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.5",
+      ""
+     ],
+     "WBC": [
+      "7.8",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "264",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "BNP": [
+      "422",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "124",
+      ""
+     ],
+     "A1c": [
+      "6.4",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "07/18/2024 2200",
+    "comment": "ED - ICD shock",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      ""
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "Mg": [
+      "1.7",
+      ""
+     ],
+     "Trop": [
+      "22",
+      ""
+     ],
+     "WBC": [
+      "5.7",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/02/2023",
+    "comment": "After ARNI + spironolactone",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "5.1",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.31",
+      "H"
+     ],
+     "Glu": [
+      "121",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "BNP": [
+      "422",
+      "H"
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ],
+     "A1c": [
+      "6.2",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2022",
+    "comment": "Pre-ICD",
+    "vals": {
+     "WBC": [
+      "7.9",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "257",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.9",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.32",
+      "H"
+     ],
+     "Glu": [
+      "116",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "PT": [
+      "11.7",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/20/2021",
+    "comment": "Off amiodarone",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.25",
+      ""
+     ],
+     "Glu": [
+      "121",
+      "H"
+     ],
+     "Ca": [
+      "9.9",
+      ""
+     ],
+     "TSH": [
+      "3.40",
+      ""
+     ],
+     "FT4": [
+      "1.09",
+      ""
+     ],
+     "BNP": [
+      "439",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/12/2020",
+    "comment": "On amiodarone",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "25",
+      "H"
+     ],
+     "Cr": [
+      "1.28",
+      ""
+     ],
+     "Glu": [
+      "114",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "20",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "106",
+      ""
+     ],
+     "TBili": [
+      "0.4",
+      ""
+     ],
+     "TProt": [
+      "7.8",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "TSH": [
+      "6.80",
+      "H"
+     ],
+     "FT4": [
+      "0.82",
+      ""
+     ],
+     "BNP": [
+      "420",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/05/2019",
+    "comment": "AF new onset",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.35",
+      "H"
+     ],
+     "Glu": [
+      "114",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "12.1",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "263",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "TSH": [
+      "1.19",
+      ""
+     ],
+     "FT4": [
+      "1.44",
+      ""
+     ],
+     "PT": [
+      "13.4",
+      ""
+     ],
+     "INR": [
+      "1.1",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2018 1530",
+    "comment": "ED - dyspnea",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.9",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "27",
+      "H"
+     ],
+     "Cr": [
+      "1.12",
+      ""
+     ],
+     "Glu": [
+      "120",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "BNP": [
+      "1240",
+      "H"
+     ],
+     "Trop": [
+      "28",
+      ""
+     ],
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "12.1",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "241",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/10/2017",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "143",
+      ""
+     ],
+     "K": [
+      "4.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.05",
+      ""
+     ],
+     "Glu": [
+      "124",
+      "H"
+     ],
+     "Ca": [
+      "10.0",
+      ""
+     ],
+     "AST": [
+      "27",
+      ""
+     ],
+     "ALT": [
+      "18",
+      ""
+     ],
+     "ALKP": [
+      "61",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.6",
+      ""
+     ],
+     "WBC": [
+      "8.6",
+      ""
+     ],
+     "Hgb": [
+      "13.8",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "259",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "103",
+      ""
+     ],
+     "A1c": [
+      "6.1",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "08/28/2026",
+    "Urine cytology",
+    "Atypical urothelial cells, suspicious for high-grade urothelial carcinoma",
+    "A"
+   ],
+   [
+    "08/28/2026",
+    "Urine culture",
+    "No growth",
+    ""
+   ],
+   [
+    "10/13/2026",
+    "eGFR (CKD-EPI 2021)",
+    "53 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/13/2026",
+    "MRSA nares PCR",
+    "Negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/14/2018",
+   "XR Chest portable",
+   "Cardiomegaly, pulmonary vascular congestion, small bilateral effusions, sternotomy wires. Impression: CHF.",
+   "D. Lyle, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Braegel, CC BY-SA 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Kerley_b_lines.jpg)"
+   }
+  ],
+  [
+   "03/15/2022",
+   "XR Chest 2 views",
+   "Left pectoral ICD, single lead in RV apex. No pneumothorax. Cardiomegaly. Sternotomy.",
+   "D. Lyle, MD"
+  ],
+  [
+   "09/18/2026",
+   "CT Urogram",
+   "80 mL iohexol 350 (eGFR 52, prehydration per protocol). 3.3 cm enhancing sessile mass right lateral bladder wall near the right UVJ without hydronephrosis. Upper tracts clear. No adenopathy. Small hepatic cyst. Impression: bladder mass, right lateral wall; no upper tract lesion.",
+   "R. Haverty, MD"
+  ],
+  [
+   "10/13/2026",
+   "XR Chest 2 views",
+   "Stable cardiomegaly, ICD lead in position. No edema or effusion.",
+   "D. Lyle, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "06/16/2018",
+   "Echocardiogram, transthoracic",
+   "LVEF 30%. Akinetic inferior and inferolateral walls, hypokinetic anterior. Moderate MR. LA 4.8 cm.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "01/10/2022",
+   "Echocardiogram, transthoracic",
+   "LVEF 30% despite GDMT >3 mo. Moderate functional MR. RVSP 42.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "03/14/2022",
+   "ICD implant report",
+   "Boston Scientific RESONATE EL ICD (single chamber), RV DF4 lead. DFT not performed. Programmed VVI 40. VT zone 170 bpm (ATP x2 then shock), VF zone 200 bpm (shock). Magnet response: Inhibit Therapy.",
+   "N. Kessinger, MD"
+  ],
+  [
+   "07/18/2024",
+   "ICD interrogation (ED)",
+   "One episode VT 188 bpm, ATP x2 unsuccessful, 41 J shock successful. Lead parameters normal. Battery OK.",
+   "Device clinic"
+  ],
+  [
+   "08/20/2025",
+   "Echocardiogram, transthoracic",
+   "LVEF 30-35%. Moderate MR. Mild TR, RVSP 38. Moderate LAE.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "04/08/2026",
+   "ICD interrogation, in-clinic",
+   "Boston Scientific RESONATE EL ICD. Battery 7.5 yr to ERI. RV pacing threshold 0.7 V @ 0.4 ms, sensing R 11 mV, impedance 520 ohm, shock impedance 62 ohm. Underlying rhythm: AF 70s, not pacemaker dependent (RV pacing 2%). No treated episodes since 07/2024. 3 NSVT episodes (<8 beats). Magnet response: Inhibit Therapy (enabled) - magnet suspends tachyarrhythmia detection/therapy while applied, no effect on bradycardia pacing. Remote monitoring: LATITUDE, next in-clinic 10/2026 - not yet scheduled.",
+   "R. Ogle, RN, CCDS / N. Kessinger, MD"
+  ],
+  [
+   "07/09/2026",
+   "ICD remote transmission (LATITUDE)",
+   "Normal device function. No events. AF burden 100% (permanent).",
+   "Device clinic"
+  ],
+  [
+   "10/13/2026",
+   "ECG 12-lead",
+   "Atrial fibrillation, ventricular rate 74. LBBB-like IVCD, QRS 138. Inferior Q waves. QTc 470. No paced beats.",
+   "M. Desai, MD",
+   {
+    "rate": 74,
+    "rhythm": "af",
+    "qrs": 138,
+    "qtc": 470,
+    "axis": -30,
+    "lbbb": 1,
+    "iq": 1,
+    "st": {
+     "I": -0.06,
+     "aVL": -0.06,
+     "V5": -0.07,
+     "V6": -0.09,
+     "V1": 0.12,
+     "V2": 0.16,
+     "V3": 0.12
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "06/14/2018",
+   "Inpatient admission",
+   "C-N University Hospital",
+   "Acute decompensated HF",
+   "New ischemic CM; discharged 06/18/2018"
+  ],
+  [
+   "03/05/2019",
+   "Clinic",
+   "C-N University Cardiology",
+   "New AF",
+   "Anticoagulation, amiodarone"
+  ],
+  [
+   "03/14/2022",
+   "Outpatient procedure",
+   "C-N University Hospital EP lab",
+   "ICD implant",
+   "Overnight, discharged"
+  ],
+  [
+   "07/18/2024",
+   "ED visit",
+   "C-N University Hospital ED",
+   "ICD shock",
+   "Appropriate VT shock; K/Mg repleted; discharged"
+  ],
+  [
+   "08/20/2025",
+   "Clinic",
+   "C-N University Cardiology",
+   "HF follow-up",
+   "Stable NYHA II"
+  ],
+  [
+   "04/08/2026",
+   "Clinic",
+   "C-N University Device Clinic",
+   "ICD check",
+   "Normal"
+  ],
+  [
+   "08/28/2026",
+   "Clinic",
+   "C-N University Urology",
+   "Gross hematuria",
+   "Cystoscopy, CT urogram"
+  ],
+  [
+   "09/11/2026",
+   "Clinic procedure",
+   "C-N University Urology",
+   "Office flexible cystoscopy",
+   "Bladder tumor"
+  ],
+  [
+   "10/13/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "06/18/2018 1100",
+   "Discharge Summary",
+   "Cardiology",
+   "N. Kessinger, MD",
+   "ADHF, new LVEF 30%, ischemic (prior CABG). Diuresed 6 L. Cath: patent LIMA-LAD, occluded SVG-RCA (chronic), SVG-OM patent; no new targets. GDMT started."
+  ],
+  [
+   "03/05/2019 1400",
+   "Progress Note",
+   "Cardiology",
+   "N. Kessinger, MD",
+   "New AF, CHA2DS2-VASc 5. Apixaban 5 mg BID (no dose-reduction criteria). Amiodarone for rhythm control trial."
+  ],
+  [
+   "05/20/2021 1000",
+   "Progress Note",
+   "Cardiology",
+   "N. Kessinger, MD",
+   "Amiodarone stopped (TSH rise, mild DLCO drop). Accept permanent AF, rate control with metoprolol. Listed as allergy to avoid re-prescription."
+  ],
+  [
+   "03/15/2022 0900",
+   "Procedure Note",
+   "Electrophysiology",
+   "N. Kessinger, MD",
+   "Single-chamber ICD implanted L subclavian under moderate sedation, primary prevention (EF 30% despite GDMT). Programmed as per device report."
+  ],
+  [
+   "07/18/2024 2330",
+   "Progress Note",
+   "Emergency Medicine",
+   "K. Fannon, MD",
+   "Felt shock while mowing. Interrogation: VT 188 treated, appropriate. K 3.9, Mg 1.7 - repleted. Trop flat. Discharge, cardiology f/u."
+  ],
+  [
+   "11/14/2024 1300",
+   "Patient Message",
+   "Cardiology",
+   "MyChart (patient)",
+   "Pt: \"Is it OK to use my electric chainsaw and the welder in the shop?\" Reply (R. Ogle, RN): \"Chainsaw ok, keep motor 6+ inches from device. No arc welding please.\""
+  ],
+  [
+   "08/20/2025 1430",
+   "Progress Note",
+   "Cardiology",
+   "N. Kessinger, MD",
+   "HFrEF EF 30-35% NYHA II on GDMT (ARNI, BB, MRA, SGLT2i). Euvolemic. Walks with cane ~1 block, limited by knees and dyspnea; METs ~3-4. Continue."
+  ],
+  [
+   "04/08/2026 1100",
+   "Progress Note",
+   "Device Clinic",
+   "R. Ogle, RN, CCDS",
+   "In-clinic interrogation, see report. Normal function. Not pacer dependent. Magnet response Inhibit Therapy. Pt reminded to notify device clinic before any surgery so rep/clinic can provide perioperative recommendations. Next in-clinic 10/2026."
+  ],
+  [
+   "08/28/2026 1030",
+   "Consult",
+   "Urology",
+   "B. Satterly, MD",
+   "80M, prior TURP 2008, painless gross hematuria with clots x2 wk. Brother bladder ca. Cytology suspicious. Plan CT urogram, office cysto."
+  ],
+  [
+   "09/11/2026 1110",
+   "Procedure Note",
+   "Urology",
+   "B. Satterly, MD",
+   "Office flexible cystoscopy: wide open prostatic fossa. 3.5 cm papillary/sessile tumor right lateral wall, superolateral to R ureteral orifice. Small satellite lesion R posterior wall. No other lesions. Plan TURBT."
+  ],
+  [
+   "10/05/2026 1500",
+   "Telephone Encounter",
+   "Urology",
+   "J. Moody, LPN",
+   "TURBT scheduled 10/27 1000. Hold apixaban 3 days (last dose 10/23 evening) per Dr. Satterly - cardiology agreed no bridging. Hold empagliflozin 3 days. PAT 10/13."
+  ],
+  [
+   "10/06/2026 0930",
+   "Telephone Encounter",
+   "Cardiology",
+   "R. Ogle, RN, CCDS",
+   "Rec'd urology request re apixaban hold - Dr. Kessinger agrees, no bridge. Device: please have OR contact device clinic or Boston Scientific rep for perioperative plan; magnet response is Inhibit Therapy; device last checked in clinic 04/2026."
+  ],
+  [
+   "10/13/2026 1030",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT: labs, CXR, ECG, T&S. ICD card copied (Boston Scientific RESONATE EL). Apixaban last 10/23 PM - reviewed. Empagliflozin last 10/23 AM. Take metoprolol AM; hold sacubitril/valsartan, spironolactone, furosemide AM of surgery. Hearing aids - bring."
+  ],
+  [
+   "10/13/2026 1100",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "T. Haskins, CRNA",
+   "ASA 4. HFrEF EF 30-35%, AF on apixaban (held), ICD. Plan spinal per urology request. Device - DOS team to address. MP II, edentulous upper, full lower partial."
+  ],
+  [
+   "10/20/2026 0815",
+   "Refill Request",
+   "Cardiology",
+   "Pharmacy (electronic)",
+   "Spironolactone 25 mg #90. Approved. - N. Kessinger, MD"
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0800. NPO midnight, clears until 0700. Metoprolol AM. Bring hearing aids and ICD card."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/14/2018 1520",
+   "154/92",
+   108,
+   26,
+   88,
+   36.8,
+   88.5,
+   "0/10",
+   "ED"
+  ],
+  [
+   "06/18/2018 0800",
+   "112/68",
+   76,
+   18,
+   95,
+   36.6,
+   82.1,
+   "0/10",
+   "Cardiac floor"
+  ],
+  [
+   "03/05/2019 1345",
+   "132/80",
+   112,
+   18,
+   96,
+   36.6,
+   84.0,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "03/15/2022 0800",
+   "118/70",
+   72,
+   16,
+   96,
+   36.5,
+   82.6,
+   "0/10",
+   "EP recovery"
+  ],
+  [
+   "07/18/2024 2200",
+   "128/76",
+   84,
+   18,
+   96,
+   36.7,
+   82.0,
+   "2/10",
+   "ED"
+  ],
+  [
+   "08/20/2025 1415",
+   "112/68",
+   72,
+   16,
+   96,
+   36.6,
+   81.8,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "04/08/2026 1045",
+   "108/66",
+   70,
+   16,
+   96,
+   36.6,
+   81.5,
+   "0/10",
+   "Device clinic"
+  ],
+  [
+   "08/28/2026 1015",
+   "116/70",
+   76,
+   16,
+   96,
+   36.6,
+   81.6,
+   "0/10",
+   "Urology"
+  ],
+  [
+   "10/13/2026 1015",
+   "110/66",
+   74,
+   16,
+   96,
+   36.6,
+   81.3,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0810",
+   "118/68",
+   72,
+   16,
+   95,
+   36.4,
+   81.3,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and screen",
+   "10/13/2026 1000",
+   "Resulted"
+  ],
+  [
+   "BMP, coags DOS",
+   "10/26/2026",
+   "Resulted"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0805",
+   "Active"
+  ],
+  [
+   "Telemetry postop",
+   "10/27/2026 0805",
+   "Pending (postop)"
+  ],
+  [
+   "Continuous bladder irrigation PRN clots",
+   "10/27/2026 0805",
+   "Pending (postop)"
+  ],
+  [
+   "Resume apixaban POD2 if hematuria clearing - per urology",
+   "10/27/2026 0805",
+   "Pending (postop)"
+  ],
+  [
+   "Device interrogation / reprogramming",
+   "",
+   "Not ordered"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "11/12/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: cystoscopy, TURBT, possible intravesical chemotherapy",
+   "Signed 09/11/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Living will on file. HCPOA: Carolyn McMahan (wife). Discussed ICD deactivation preferences 2025 - wants device active.",
+ "anesthesia_history": [
+  [
+   "2008",
+   "TURP",
+   "Spinal",
+   "None",
+   "Fort Sanders"
+  ],
+  [
+   "2012",
+   "CABG x3",
+   "GETA, CPB",
+   "Extubated POD1",
+   "C-N University Hospital"
+  ],
+  [
+   "2016",
+   "Cataracts",
+   "MAC/topical",
+   "None",
+   "East Tennessee Eye Surgeons"
+  ],
+  [
+   "03/2022",
+   "ICD implant",
+   "Moderate sedation",
+   "None",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0800",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0600 water with metoprolol",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "Anticoagulant held",
+    "Yes - apixaban last 10/23 2000"
+   ],
+   [
+    "Implanted device",
+    "ICD - Boston Scientific; card on chart"
+   ],
+   [
+    "Device rep / clinic notified",
+    "No - not contacted"
+   ]
+  ],
+  "nursing_note": "80M, HOH (hearing aids in). Lungs clear, trace ankle edema. Irregular rhythm 70s. ICD L chest. Device card on chart; no rep contacted, no magnet in room at this time. Urine pink-tinged. 20g L forearm. Wife at bedside. Apixaban last Friday night.",
+  "iv": "20g L forearm, NS KVO",
+  "glucose": "122 mg/dL (0815)"
+ },
+ "label": "V. Mcmahan",
+ "bmi": "27.5"
+}

@@ -5,7 +5,7 @@
    501 and the client falls back to the browser's built-in speech synthesis, so
    the interview still works (with a plainer voice) before a key is added.
 
-   Request body: { text: string, voiceId?: string }
+   Request body: { text: string, voiceId?: string, voice?: 'operator' }
    Response: audio/mpeg on success; JSON error otherwise.
 */
 
@@ -23,7 +23,12 @@ export default async function handler(req, res) {
   const body = req.body ?? {};
   const text = typeof body.text === 'string' ? body.text.slice(0, 1200) : '';
   if (!text.trim()) return res.status(400).json({ error: 'Missing text' });
-  const voiceId = typeof body.voiceId === 'string' && body.voiceId.trim() ? body.voiceId.trim() : DEFAULT_VOICE_ID;
+  // voice: 'operator' selects Booth's voice (sim operator) from server config.
+  const operatorVoice = body.voice === 'operator';
+  const voiceId = typeof body.voiceId === 'string' && body.voiceId.trim()
+    ? body.voiceId.trim()
+    : (operatorVoice ? (process.env.ELEVENLABS_OPERATOR_VOICE_ID || DEFAULT_VOICE_ID) : DEFAULT_VOICE_ID);
+  const modelId = operatorVoice ? (process.env.ELEVENLABS_OPERATOR_MODEL_ID || MODEL_ID) : MODEL_ID;
 
   try {
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`, {
@@ -35,7 +40,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         text,
-        model_id: MODEL_ID,
+        model_id: modelId,
         voice_settings: { stability: 0.5, similarity_boost: 0.75 },
       }),
     });

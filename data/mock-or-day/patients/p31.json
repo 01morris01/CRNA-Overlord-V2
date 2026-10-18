@@ -1,0 +1,2228 @@
+{
+ "id": "p31",
+ "room": "Hybrid OR",
+ "time": "0800",
+ "name": "STOOKSBURY, CLARENCE RAY",
+ "mrn": "0146031",
+ "dob": "06/23/1952",
+ "age": "74 y",
+ "sex": "M",
+ "ht_cm": 178,
+ "wt_kg": 92.4,
+ "preferred_name": "Ray",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "Dr. L. Mayfield, Morristown Internal Medicine",
+ "insurance": "Medicare + BCBST Medigap F",
+ "emergency_contact": "Patsy Stooksbury (wife) 423-555-0110",
+ "isolation": "",
+ "allergies": [
+  [
+   "Codeine",
+   "Nausea/vomiting",
+   "Mild (intolerance)",
+   "1998"
+  ],
+  [
+   "Metoclopramide",
+   "Restlessness",
+   "Mild",
+   "2019"
+  ]
+ ],
+ "case": {
+  "procedure": "Endovascular abdominal aortic aneurysm repair (EVAR), bilateral percutaneous femoral access",
+  "short": "EVAR, bilateral percutaneous femoral",
+  "laterality": "Bilateral",
+  "service": "Vascular Surgery",
+  "surgeon": "H. Brummett, MD",
+  "assistant": "T. Cline, MD (fellow)",
+  "indication": "Infrarenal AAA 5.9 cm, growth 0.6 cm/yr",
+  "duration_min": 150,
+  "anesthesia_requested": "MAC with local vs general per anesthesia",
+  "position": "Supine, arms tucked or on boards",
+  "dispo": "Inpatient, vascular step-down",
+  "blood": "Type and crossmatch 2 units",
+  "equipment": "Hybrid OR imaging; arterial line",
+  "implants": "Bifurcated aortic endograft (sizing per CTA 10/23)",
+  "surgeon_notes": "Anticipate ~100-150 mL iodinated contrast; CO2 angiography adjunct if renal function a concern. Heparin 100 units/kg, ACT >250. Cefazolin 2 g.",
+  "add_on": false,
+  "scheduled_on": "09/30/2026"
+ },
+ "problems": [
+  [
+   "Abdominal aortic aneurysm, infrarenal, 5.9 cm",
+   "2019",
+   "Active"
+  ],
+  [
+   "Chronic kidney disease stage 3b",
+   "2022",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes mellitus with diabetic CKD",
+   "2008",
+   "Active"
+  ],
+  [
+   "Coronary artery disease s/p LAD DES 2019",
+   "2019",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2002",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2002",
+   "Active"
+  ],
+  [
+   "Diabetic peripheral neuropathy",
+   "2016",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea on CPAP",
+   "2017",
+   "Active"
+  ],
+  [
+   "Gout",
+   "2014",
+   "Active"
+  ],
+  [
+   "Former smoker",
+   "2010",
+   "Active"
+  ],
+  [
+   "Actinic keratosis",
+   "2023",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "AAA first seen on 2019 CT (4.1 cm), surveillance; 5.3 cm 09/2025, 5.9 cm 09/2026",
+   "CKD 3b, baseline Cr 1.7-1.9, diabetic/hypertensive nephropathy (nephrology since 2022)",
+   "T2DM since 2008, A1c 7.0-7.6, on metformin + glargine",
+   "CAD: NSTEMI 03/2019, DES to proximal LAD; no angina since",
+   "HTN, HLD",
+   "OSA on CPAP 11 cm H2O",
+   "Gout (allopurinol)",
+   "Peripheral neuropathy feet"
+  ],
+  "psh": [
+   [
+    "03/2019",
+    "Left heart cath, PCI LAD (DES x1)",
+    "C-N University Hospital"
+   ],
+   [
+    "2011",
+    "Right total hip arthroplasty",
+    "Morristown-Hamblen"
+   ],
+   [
+    "2006",
+    "Laparoscopic cholecystectomy",
+    "Morristown-Hamblen"
+   ],
+   [
+    "2020",
+    "Colonoscopy",
+    "Lakeway Endoscopy"
+   ]
+  ],
+  "family": [
+   "Father: AAA rupture, died 71",
+   "Brother: AAA repaired at 68",
+   "Mother: T2DM"
+  ],
+  "social": {
+   "tobacco": "Former, 40 pack-years, quit 2010",
+   "alcohol": "None since 2019",
+   "drugs": "None",
+   "occupation": "Retired tool-and-die maker",
+   "living": "Lives with wife",
+   "other": "Grandson lives with them part-time"
+  },
+  "immunizations": [
+   [
+    "Influenza (high-dose)",
+    "09/2026"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2023"
+   ],
+   [
+    "COVID-19",
+    "10/2025"
+   ],
+   [
+    "Shingrix x2",
+    "2022"
+   ],
+   [
+    "Tdap",
+    "2016"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Metformin 1,000 mg",
+   "1 tab PO BID with meals",
+   "Dr. L. Mayfield",
+   "10/27/2026 0500"
+  ],
+  [
+   "Insulin glargine 100 units/mL",
+   "24 units subcut nightly (pt took 18 units 10/26 per instructions)",
+   "Dr. L. Mayfield",
+   "10/26/2026 2100"
+  ],
+  [
+   "Aspirin 81 mg",
+   "1 tab PO daily",
+   "Dr. P. Satterfield (Cardiology)",
+   "10/27/2026 0500"
+  ],
+  [
+   "Atorvastatin 80 mg",
+   "1 tab PO nightly",
+   "Dr. P. Satterfield",
+   "10/26/2026 2100"
+  ],
+  [
+   "Metoprolol succinate 50 mg",
+   "1 tab PO daily",
+   "Dr. P. Satterfield",
+   "10/27/2026 0500"
+  ],
+  [
+   "Lisinopril 20 mg",
+   "1 tab PO daily",
+   "Dr. L. Mayfield",
+   "10/26/2026 0700"
+  ],
+  [
+   "Amlodipine 5 mg",
+   "1 tab PO daily",
+   "Dr. L. Mayfield",
+   "10/26/2026 0700"
+  ],
+  [
+   "Allopurinol 100 mg",
+   "1 tab PO daily",
+   "Dr. L. Mayfield",
+   "10/26/2026 0700"
+  ],
+  [
+   "Gabapentin 300 mg",
+   "1 cap PO nightly",
+   "Dr. L. Mayfield",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sodium bicarbonate 650 mg",
+   "1 tab PO BID",
+   "Dr. A. Rasheed (Nephrology)",
+   "10/26/2026 1900"
+  ],
+  [
+   "Nitroglycerin 0.4 mg SL",
+   "PRN chest pain",
+   "Dr. P. Satterfield",
+   "Never used"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Sodium chloride 0.9% 75 mL/h IV",
+   "Continuous preop",
+   "Started 10/27/2026 0615"
+  ],
+  [
+   "Insulin regular sliding scale subcut",
+   "POC glucose ACHS",
+   "Not given 0600 (glucose 168, below threshold for scale low)"
+  ],
+  [
+   "Metoprolol succinate 50 mg PO",
+   "Daily",
+   "Patient took home dose 0500"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Glipizide 10 mg BID",
+   "2010-2022",
+   "Hypoglycemia, CKD"
+  ],
+  [
+   "Clopidogrel 75 mg daily",
+   "03/2019-04/2020",
+   "DAPT complete 12 mo"
+  ],
+  [
+   "Hydrochlorothiazide 25 mg",
+   "2002-2019",
+   "Gout, CKD"
+  ],
+  [
+   "Ibuprofen OTC",
+   "-2022",
+   "CKD - avoid NSAIDs"
+  ],
+  [
+   "Colchicine 0.6 mg",
+   "04/2024",
+   "Flare course complete"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0545",
+    "comment": "Day of surgery",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "5.3",
+      "H"
+     ],
+     "Cl": [
+      "108",
+      "H"
+     ],
+     "CO2": [
+      "19",
+      "L"
+     ],
+     "BUN": [
+      "41",
+      "H"
+     ],
+     "Cr": [
+      "2.30",
+      "H"
+     ],
+     "Glu": [
+      "168",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ],
+     "Lactate": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/23/2026 0745",
+    "comment": "POC pre-contrast, CT",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "31",
+      "H"
+     ],
+     "Cr": [
+      "1.80",
+      "H"
+     ],
+     "Glu": [
+      "151",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/13/2026 0900",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "7.8",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "231",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.9",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "33",
+      "H"
+     ],
+     "Cr": [
+      "1.80",
+      "H"
+     ],
+     "Glu": [
+      "148",
+      "H"
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ],
+     "PT": [
+      "12.4",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "A1c": [
+      "7.4",
+      "H"
+     ],
+     "USG": [
+      "1.013",
+      ""
+     ],
+     "UProt": [
+      "2+",
+      "A"
+     ],
+     "UGlu": [
+      "1+",
+      "A"
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/14/2026",
+    "comment": "Pre-CTA",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "32",
+      "H"
+     ],
+     "Cr": [
+      "1.70",
+      "H"
+     ],
+     "Glu": [
+      "154",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/23/2026",
+    "comment": "Nephrology",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "5.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "34",
+      "H"
+     ],
+     "Cr": [
+      "1.90",
+      "H"
+     ],
+     "Glu": [
+      "147",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "76",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "6.7",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "WBC": [
+      "6.2",
+      ""
+     ],
+     "Hgb": [
+      "12.5",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "242",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "A1c": [
+      "7.5",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "61",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "114",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/22/2025",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "32",
+      "H"
+     ],
+     "Cr": [
+      "1.80",
+      "H"
+     ],
+     "Glu": [
+      "142",
+      "H"
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "A1c": [
+      "7.4",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/12/2025",
+    "comment": "Nephrology",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "34",
+      "H"
+     ],
+     "Cr": [
+      "1.90",
+      "H"
+     ],
+     "Glu": [
+      "157",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "259",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Phos": [
+      "3.2",
+      ""
+     ],
+     "A1c": [
+      "7.3",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/16/2024",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "31",
+      "H"
+     ],
+     "Cr": [
+      "1.80",
+      "H"
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "64",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "95",
+      ""
+     ],
+     "A1c": [
+      "7.0",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/04/2024",
+    "comment": "Gout flare",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "34",
+      "H"
+     ],
+     "Cr": [
+      "1.80",
+      "H"
+     ],
+     "Glu": [
+      "152",
+      "H"
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "78",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "238",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Uric": [
+      "9.1",
+      "H"
+     ],
+     "A1c": [
+      "7.2",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "01/17/2023",
+    "comment": "Nephrology",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "21",
+      "L"
+     ],
+     "BUN": [
+      "35",
+      "H"
+     ],
+     "Cr": [
+      "1.70",
+      "H"
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "Phos": [
+      "2.9",
+      ""
+     ],
+     "VitD": [
+      "22",
+      "L"
+     ],
+     "Uric": [
+      "6.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/02/2022",
+    "comment": "Nephrology referral",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "22",
+      ""
+     ],
+     "BUN": [
+      "30",
+      "H"
+     ],
+     "Cr": [
+      "1.70",
+      "H"
+     ],
+     "Glu": [
+      "148",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "22",
+      ""
+     ],
+     "ALT": [
+      "23",
+      ""
+     ],
+     "ALKP": [
+      "64",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      "L"
+     ],
+     "Hct": [
+      "38",
+      "L"
+     ],
+     "Plt": [
+      "261",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "A1c": [
+      "7.4",
+      "H"
+     ],
+     "USG": [
+      "1.014",
+      ""
+     ],
+     "UProt": [
+      "2+",
+      "A"
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/08/2020",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      "L"
+     ],
+     "Hct": [
+      "37",
+      "L"
+     ],
+     "Plt": [
+      "274",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "26",
+      "H"
+     ],
+     "Cr": [
+      "1.50",
+      "H"
+     ],
+     "Glu": [
+      "149",
+      "H"
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "61",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "A1c": [
+      "7.1",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/12/2019 0500",
+    "comment": "Post-cath",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "31",
+      "H"
+     ],
+     "Cr": [
+      "1.50",
+      "H"
+     ],
+     "Glu": [
+      "146",
+      "H"
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "Trop": [
+      "1180",
+      "H"
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "127",
+      ""
+     ],
+     "A1c": [
+      "7.8",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/11/2019 1420",
+    "comment": "ED - chest pain",
+    "vals": {
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "13.8",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "228",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "24",
+      "H"
+     ],
+     "Cr": [
+      "1.40",
+      "H"
+     ],
+     "Glu": [
+      "147",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Trop": [
+      "412",
+      "H"
+     ],
+     "PT": [
+      "11.8",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/14/2017",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "14.1",
+      ""
+     ],
+     "Hct": [
+      "42",
+      ""
+     ],
+     "Plt": [
+      "227",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "22",
+      "H"
+     ],
+     "Cr": [
+      "1.30",
+      ""
+     ],
+     "Glu": [
+      "144",
+      "H"
+     ],
+     "Ca": [
+      "9.8",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "21",
+      ""
+     ],
+     "ALKP": [
+      "78",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "3.9",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "83",
+      ""
+     ],
+     "A1c": [
+      "7.6",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Phos",
+    "name": "Phosphorus",
+    "unit": "mg/dL",
+    "ref": "2.5-4.5"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Uric",
+    "name": "Uric acid",
+    "unit": "mg/dL",
+    "ref": "3.4-7.0"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "03/11/2019",
+    "ECG",
+    "See Cardiology",
+    ""
+   ],
+   [
+    "06/02/2022",
+    "Urine albumin/creatinine ratio",
+    "640 mg/g (ref <30)",
+    "H"
+   ],
+   [
+    "03/23/2026",
+    "Urine albumin/creatinine ratio",
+    "880 mg/g (ref <30)",
+    "H"
+   ],
+   [
+    "03/23/2026",
+    "eGFR (CKD-EPI 2021)",
+    "37 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/13/2026",
+    "eGFR (CKD-EPI 2021)",
+    "39 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/27/2026",
+    "eGFR (CKD-EPI 2021)",
+    "29 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/27/2026 0600",
+    "POC glucose",
+    "168 mg/dL",
+    "H"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/12/2019",
+   "CT Abdomen/Pelvis without contrast",
+   "Incidental infrarenal AAA 4.1 cm. Bilateral renal cortical thinning. Impression: AAA 4.1 cm; recommend surveillance US.",
+   "D. Lyle, MD"
+  ],
+  [
+   "09/08/2021",
+   "US Aorta",
+   "Infrarenal AAA 4.6 cm AP.",
+   "D. Lyle, MD"
+  ],
+  [
+   "09/19/2023",
+   "US Aorta",
+   "Infrarenal AAA 5.0 cm AP. Mural thrombus.",
+   "R. Haverty, MD"
+  ],
+  [
+   "09/23/2025",
+   "US Aorta",
+   "Infrarenal AAA 5.3 cm AP.",
+   "R. Haverty, MD"
+  ],
+  [
+   "09/15/2026",
+   "CTA Abdomen/Pelvis",
+   "90 mL iohexol. Infrarenal AAA max diameter 5.9 cm, neck length 22 mm, neck diameter 24 mm, infrarenal angulation 30 deg. Iliacs: CIA 14/15 mm, moderate calcification; EIAs 8 mm bilat. Kidneys small with cortical thinning; single renal arteries. Impression: 5.9 cm AAA, anatomy suitable for EVAR. Slice thickness 5 mm (planning reconstruction limited).",
+   "R. Haverty, MD"
+  ],
+  [
+   "10/23/2026",
+   "CTA Abdomen/Pelvis, thin-section EVAR protocol",
+   "100 mL iohexol 350. Pre-hydration NS 250 mL per renal protocol (eGFR 39). 1 mm reconstructions for device planning. Findings unchanged from 09/15/2026. Impression: AAA 5.9 cm, EVAR-suitable anatomy; centerline measurements sent to vascular.",
+   "P. Lindqvist, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/11/2019",
+   "ECG 12-lead",
+   "Sinus 92, ST depression 1 mm V3-V5. QTc 452.",
+   "M. Desai, MD",
+   {
+    "rate": 92,
+    "pr": 176,
+    "qrs": 96,
+    "qtc": 452,
+    "axis": 0,
+    "st": {
+     "V3": -0.1,
+     "V4": -0.1,
+     "V5": -0.1
+    }
+   }
+  ],
+  [
+   "03/12/2019",
+   "Cardiac catheterization",
+   "90% proximal LAD -> DES 3.0 x 18 mm. RCA 30%, LCx 40% nonobstructive. LVEDP 18. Contrast 110 mL.",
+   "P. Satterfield, MD"
+  ],
+  [
+   "03/13/2019",
+   "Echocardiogram, transthoracic",
+   "LVEF 50%, mild anterior hypokinesis. Grade I DD. No significant valve disease.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "05/18/2024",
+   "Echocardiogram, transthoracic",
+   "LVEF 55%. Normal wall motion. Mild LVH. Grade I DD. Aortic root 3.6 cm.",
+   "K. Abaroa, MD"
+  ],
+  [
+   "09/25/2026",
+   "Pharmacologic nuclear stress test (regadenoson)",
+   "No ischemia. Small fixed apical defect (prior infarct). LVEF 54%. Low-risk study.",
+   "P. Satterfield, MD"
+  ],
+  [
+   "10/13/2026",
+   "ECG 12-lead",
+   "Sinus 64. Q waves V1-V2, unchanged. QTc 448. No acute changes.",
+   "M. Desai, MD",
+   {
+    "rate": 64,
+    "pr": 180,
+    "qrs": 98,
+    "qtc": 448,
+    "axis": 0,
+    "asq": 2
+   }
+  ],
+  [
+   "03/2017",
+   "Polysomnography",
+   "AHI 34, nadir SpO2 81%. CPAP titration: 11 cm H2O.",
+   "G. Rankin, MD"
+  ]
+ ],
+ "encounters": [
+  [
+   "03/11/2019",
+   "Inpatient admission",
+   "C-N University Hospital",
+   "NSTEMI",
+   "PCI LAD; discharged 03/14/2019"
+  ],
+  [
+   "08/12/2019",
+   "ED visit",
+   "Morristown-Hamblen",
+   "Flank pain",
+   "CT no stone; incidental AAA 4.1 cm; discharged"
+  ],
+  [
+   "06/02/2022",
+   "Clinic",
+   "Lakeway Nephrology",
+   "CKD referral",
+   "CKD 3b diabetic nephropathy"
+  ],
+  [
+   "04/04/2024",
+   "Urgent care",
+   "Morristown Express Care",
+   "R first MTP pain",
+   "Gout flare, colchicine"
+  ],
+  [
+   "03/23/2026",
+   "Clinic",
+   "Lakeway Nephrology",
+   "CKD follow-up",
+   "Stable"
+  ],
+  [
+   "09/15/2026",
+   "Clinic",
+   "C-N University Vascular Surgery",
+   "AAA 5.9 cm",
+   "EVAR planned"
+  ],
+  [
+   "09/25/2026",
+   "Clinic",
+   "C-N University Cardiology",
+   "Preop risk",
+   "Stress test low risk"
+  ],
+  [
+   "10/13/2026",
+   "Preadmission testing",
+   "C-N University Hospital PAT",
+   "Preop",
+   "Completed"
+  ],
+  [
+   "10/23/2026",
+   "Outpatient imaging",
+   "C-N University Radiology",
+   "Thin-section CTA",
+   "Completed"
+  ]
+ ],
+ "notes": [
+  [
+   "03/14/2019 1100",
+   "Discharge Summary",
+   "Cardiology",
+   "P. Satterfield, MD",
+   "NSTEMI, DES pLAD. Cr 1.4 -> 1.5 post-cath, stable at d/c. DAPT 12 mo. Metoprolol, atorvastatin 80. Cardiac rehab."
+  ],
+  [
+   "08/12/2019 2215",
+   "Progress Note",
+   "Emergency Medicine (outside)",
+   "K. Fannon, MD",
+   "L flank pain; CT negative for stone; incidental AAA 4.1 cm. Pain resolved with acetaminophen. Musculoskeletal. F/u PCP for AAA surveillance."
+  ],
+  [
+   "06/02/2022 1130",
+   "Consult",
+   "Nephrology (outside)",
+   "A. Rasheed, MD",
+   "CKD 3b (Cr 1.7, eGFR ~41) with albuminuria 640 mg/g - diabetic + HTN nephropathy. Avoid NSAIDs. Continue lisinopril. Metformin OK at current eGFR but reduce if eGFR falls below 45. SGLT2i discussed - pt declined (prior yeast infections). Bicarb 650 BID for CO2 21."
+  ],
+  [
+   "03/12/2025 1015",
+   "Progress Note",
+   "Nephrology (outside)",
+   "A. Rasheed, MD",
+   "Cr 1.9, eGFR 36. Stable. Metformin: decrease to 500 mg BID (max 1,000 mg/day at eGFR 30-45); stop if eGFR <30. Hold metformin before and 48 h after iodinated contrast. Letter to PCP."
+  ],
+  [
+   "03/13/2025 0900",
+   "Letter",
+   "Nephrology (outside)",
+   "A. Rasheed, MD",
+   "Dear Dr. Mayfield, please reduce Mr. Stooksbury's metformin to 500 mg twice daily given eGFR 36. Also please ensure it is held around contrast studies. [Scanned to Media]"
+  ],
+  [
+   "06/18/2025 1405",
+   "Refill Request",
+   "Internal Medicine",
+   "Pharmacy (electronic)",
+   "Metformin 1,000 mg #180 (BID) refill request, Walgreens Morristown. Approved x4 refills. - L. Mayfield, MD"
+  ],
+  [
+   "03/23/2026 1110",
+   "Progress Note",
+   "Nephrology (outside)",
+   "A. Rasheed, MD",
+   "Cr 1.9, eGFR 37. UACR 880. BP 138/76. Med list per patient reviewed. Continue current. RTC 6 mo."
+  ],
+  [
+   "09/15/2026 1300",
+   "Consult",
+   "Vascular Surgery",
+   "H. Brummett, MD",
+   "74M AAA 5.9 cm (5.3 cm 09/2025), family hx rupture. CTA: EVAR suitable. Plan EVAR 10/27, percutaneous. Cardiology risk eval. CKD 3b - will minimize contrast; thin-section CTA needed for device sizing (current 5 mm). Continue aspirin, statin, beta blocker."
+  ],
+  [
+   "09/25/2026 1420",
+   "Progress Note",
+   "Cardiology",
+   "P. Satterfield, MD",
+   "Preop. CAD s/p LAD DES 2019, no angina. METs ~4 (yard work, slow). Regadenoson MPI low risk, EF 54%. RCRI 2 (CAD, insulin-treated DM; Cr 1.7 <2.0; EVAR not intraperitoneal). Acceptable risk for EVAR. Continue aspirin, metoprolol, statin perioperatively."
+  ],
+  [
+   "10/13/2026 0945",
+   "Nursing Note",
+   "Preadmission Testing",
+   "S. Ledford, RN",
+   "PAT. Labs, ECG, T&C. Med instructions: take metoprolol, aspirin AM; hold lisinopril, amlodipine AM; glargine 75% dose night before (18 units); hold metformin AM of surgery. Bring CPAP. Pt reports he takes metformin 1,000 mg twice daily (bottle checked)."
+  ],
+  [
+   "10/13/2026 1015",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology PAT",
+   "T. Haskins, CRNA",
+   "ASA 3-4. AAA, CAD stented, CKD 3b, DM2 insulin, OSA CPAP. MP III, neck circ 46 cm, beard. Plan per DOS team: MAC/local vs GA, art line."
+  ],
+  [
+   "10/16/2026 1515",
+   "Telephone Encounter",
+   "Vascular Surgery",
+   "B. Hodge, RN",
+   "Thin-section CTA scheduled 10/23 0800 per vendor sizing request. Pre-hydration per radiology protocol. Pt instructed to hold metformin day of CT. Will get BMP day of surgery."
+  ],
+  [
+   "10/23/2026 0830",
+   "Nursing Note",
+   "Radiology",
+   "C. Brewster, RN",
+   "CTA. POC Cr 1.8, eGFR 39. NS 250 mL prehydration. 100 mL iohexol 350 injected. No reaction. Pt states he took metformin with breakfast \"out of habit.\" Instructed to hold metformin 48 h post contrast per protocol and resume after."
+  ],
+  [
+   "10/26/2026 1430",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0600. NPO midnight, clears until 0500. Take metoprolol and aspirin with sip water. Reviewed glargine 18 units tonight. Bring CPAP."
+  ],
+  [
+   "10/27/2026 0620",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Whaley, PharmD",
+   "Admission med rec completed with patient and wife. Home list: metformin 1,000 mg BID (last dose 10/27 0500 per pt), glargine 18 units last night, metoprolol/aspirin 0500. Lisinopril and amlodipine held this AM. Glucose 168. [Med rec verified]"
+  ]
+ ],
+ "vitals": [
+  [
+   "03/11/2019 1415",
+   "168/96",
+   98,
+   20,
+   95,
+   36.8,
+   98.0,
+   "7/10",
+   "ED"
+  ],
+  [
+   "03/14/2019 0800",
+   "128/74",
+   64,
+   16,
+   96,
+   36.6,
+   null,
+   "0/10",
+   "Cardiac stepdown"
+  ],
+  [
+   "08/12/2019 2140",
+   "152/88",
+   82,
+   18,
+   97,
+   36.7,
+   97.0,
+   "6/10",
+   "ED (outside)"
+  ],
+  [
+   "06/02/2022 1110",
+   "142/80",
+   66,
+   16,
+   96,
+   36.6,
+   95.3,
+   "0/10",
+   "Nephrology"
+  ],
+  [
+   "04/04/2024 1500",
+   "148/84",
+   72,
+   16,
+   97,
+   37.1,
+   94.0,
+   "8/10",
+   "Urgent care"
+  ],
+  [
+   "03/23/2026 1050",
+   "138/76",
+   62,
+   16,
+   96,
+   36.6,
+   93.0,
+   "0/10",
+   "Nephrology"
+  ],
+  [
+   "09/15/2026 1245",
+   "144/80",
+   64,
+   16,
+   96,
+   36.6,
+   92.9,
+   "0/10",
+   "Vascular"
+  ],
+  [
+   "09/25/2026 1405",
+   "136/78",
+   60,
+   16,
+   96,
+   36.7,
+   92.6,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "10/13/2026 0930",
+   "140/80",
+   62,
+   16,
+   96,
+   36.6,
+   92.6,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/23/2026 0740",
+   "146/82",
+   66,
+   16,
+   97,
+   36.6,
+   null,
+   "0/10",
+   "Radiology"
+  ],
+  [
+   "10/27/2026 0605",
+   "152/84",
+   60,
+   16,
+   95,
+   36.4,
+   92.4,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Type and crossmatch 2 units PRBC",
+   "10/13/2026 0900",
+   "Resulted - 2 units available"
+  ],
+  [
+   "BMP, CBC, Mg, lactate AM of surgery",
+   "10/26/2026",
+   "Resulted"
+  ],
+  [
+   "NS 75 mL/h",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "Arterial line per anesthesia",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "POC glucose q1h intraop, ACHS postop",
+   "10/27/2026 0600",
+   "Active"
+  ],
+  [
+   "CPAP 11 cm H2O at night/PACU",
+   "10/27/2026 0600",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O negative",
+  "antibody_screen": "Negative",
+  "units": "2 units PRBC crossmatched",
+  "notes": "",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: endovascular AAA repair, possible open conversion",
+   "Signed 09/15/2026"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/13/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Living will on file. HCPOA: Patsy Stooksbury.",
+ "anesthesia_history": [
+  [
+   "2006",
+   "Lap cholecystectomy",
+   "GA",
+   "PONV",
+   "Morristown-Hamblen"
+  ],
+  [
+   "2011",
+   "R THA",
+   "Spinal + sedation",
+   "None",
+   "Morristown-Hamblen"
+  ],
+  [
+   "03/2019",
+   "Cardiac cath/PCI",
+   "Moderate sedation",
+   "None",
+   "C-N University Hospital"
+  ],
+  [
+   "2020",
+   "Colonoscopy",
+   "MAC propofol",
+   "Desaturation 88%, chin lift, nasal airway; OSA",
+   "Lakeway Endoscopy"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0555",
+  "npo_solids": "10/26/2026 1930",
+  "npo_clears": "10/27/2026 0500 water with pills",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Bilateral groins"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "CPAP brought",
+    "Yes"
+   ]
+  ],
+  "nursing_note": "74M for EVAR. A&O. Took \"my usual morning pills with water at 5\" - metoprolol, aspirin, and metformin (states he always takes metformin at breakfast and nobody told him to stop it today). Held lisinopril/amlodipine. Pedal pulses diminished bilaterally, feet cool, monofilament decreased. Voided 0550, small amount dark yellow. 18g L FA, 20g R hand. CPAP at bedside. Wife present.",
+  "iv": "18g L forearm, 20g R hand; NS 75 mL/h",
+  "glucose": "168 mg/dL (0600)"
+ },
+ "label": "C. Stooksbury",
+ "bmi": "29.2"
+}

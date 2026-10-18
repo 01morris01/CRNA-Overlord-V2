@@ -1,0 +1,157 @@
+{
+ "id": "p38",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Laparoscopic adrenalectomy for a well prepared noradrenergic pheochromocytoma (14 days phenoxybenzamine, then metoprolol, meets targets). The challenge is intraop management: surges with induction, insufflation and tumor handling, then hypotension and hypoglycemia after vein ligation.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Catecholamine secreting tumor with LVH and secondary hypertension."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Meets Roizen style targets: seated BP under 130/80, standing SBP over 90, HR targets met, ST changes resolved, Hct fell with volume expansion, no paroxysms for a week."
+ },
+ "redFlags": [
+  {
+   "id": "surge",
+   "severity": "critical",
+   "finding": "Catecholamine surges",
+   "evidence": "Pheo; 2019 lap chole SBP 220 on induction.",
+   "implication": "Hypertensive crisis, arrhythmia, ischemia with intubation, positioning, insufflation, tumor manipulation.",
+   "action": "Pre induction arterial line, deep induction, nitroprusside or nicardipine and esmolol ready, communicate with surgeon.",
+   "keywords": [
+    "arterial line",
+    "nicardipine",
+    "nitroprusside",
+    "esmolol",
+    "clevidipine",
+    "hypertensive crisis",
+    "surge",
+    "magnesium"
+   ]
+  },
+  {
+   "id": "ligation",
+   "severity": "critical",
+   "finding": "Hypotension after adrenal vein ligation",
+   "evidence": "Surgeon will notify before clamp.",
+   "implication": "Profound hypotension from catecholamine withdrawal with residual alpha blockade.",
+   "action": "Stop vasodilators before clamp, fluids, phenylephrine or norepinephrine, vasopressin if refractory.",
+   "keywords": [
+    "vein ligation",
+    "hypotension",
+    "norepinephrine",
+    "vasopressin",
+    "phenylephrine"
+   ]
+  },
+  {
+   "id": "drugs",
+   "severity": "major",
+   "finding": "Drugs to avoid",
+   "evidence": "Metoclopramide listed avoid; glucagon avoid.",
+   "implication": "Catecholamine release.",
+   "action": "Avoid metoclopramide, droperidol, ephedrine, ketamine, histamine releasers (morphine, atracurium), desflurane surges.",
+   "keywords": [
+    "metoclopramide",
+    "ephedrine",
+    "ketamine",
+    "droperidol",
+    "histamine",
+    "morphine"
+   ]
+  },
+  {
+   "id": "glucose",
+   "severity": "major",
+   "finding": "Postop hypoglycemia",
+   "evidence": "Endocrine note; prediabetes from catecholamines.",
+   "implication": "Rebound hyperinsulinemia after removal.",
+   "action": "Glucose checks intraop after ligation and hourly postop.",
+   "keywords": [
+    "hypoglycemia",
+    "glucose"
+   ]
+  },
+  {
+   "id": "hereditary",
+   "severity": "minor",
+   "finding": "Possible hereditary syndrome",
+   "evidence": "Germline panel pending; aunt with adrenal tumor.",
+   "implication": "Other paragangliomas or MEN associations.",
+   "action": "MEN2 screen normal; note pending results.",
+   "keywords": [
+    "hereditary",
+    "germline",
+    "men2"
+   ]
+  },
+  {
+   "id": "position",
+   "severity": "minor",
+   "finding": "Lateral decubitus with kidney rest",
+   "evidence": "Case positioning.",
+   "implication": "Venous return changes, nerve injury.",
+   "action": "Axillary roll, padding, check BP after positioning.",
+   "keywords": [
+    "lateral",
+    "axillary roll",
+    "kidney rest"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line before induction; two large bore IVs",
+   "keywords": [
+    "arterial line",
+    "large bore"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "Propofol, opioid, lidocaine; avoid ketamine and ephedrine",
+   "keywords": [
+    "propofol",
+    "lidocaine"
+   ]
+  },
+  {
+   "domain": "infusions",
+   "item": "Vasodilator and vasopressor infusions primed",
+   "keywords": [
+    "nicardipine",
+    "nitroprusside",
+    "norepinephrine",
+    "phenylephrine"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "SICU or step down with glucose monitoring",
+   "keywords": [
+    "sicu",
+    "step down",
+    "icu"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "MalignantHyperthermia",
+   "why": "Differential for tachycardia and hypertension in pheochromocytoma"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

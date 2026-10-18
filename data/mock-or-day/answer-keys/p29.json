@@ -1,0 +1,132 @@
+{
+ "id": "p29",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Heller myotomy in achalasia with a 5.2 cm debris filled esophagus despite 48 h of clears, regurgitation at 0200, a prior aspiration pneumonia, and regurgitation with desaturation during MAC in 2025.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Severe achalasia with prior aspiration pneumonia and malnutrition."
+ },
+ "decision": {
+  "recommendation": "proceed with an aspiration focused plan",
+  "rationale": "Fasting does not empty this esophagus. RSI in a head up position with large bore suction, no blind gastric tubes, and coordination with the surgeon for intraop EGD and bougie."
+ },
+ "redFlags": [
+  {
+   "id": "aspiration",
+   "severity": "critical",
+   "finding": "Retained esophageal contents despite prolonged clear diet",
+   "evidence": "Esophagram 09/2026: 5.2 cm with food debris after liquids only; regurgitated broth and jello at 0200; aspiration pneumonia 01/2026; MAC 07/2025 regurgitation with SpO2 86%; anesthesia recommended RSI.",
+   "implication": "High aspiration risk at induction.",
+   "action": "RSI head up 30 to 45 degrees, suction immediately available, consider awake intubation if extreme; avoid MAC.",
+   "keywords": [
+    "rsi",
+    "aspiration",
+    "head up",
+    "suction",
+    "regurgitat",
+    "achalasia",
+    "awake"
+   ]
+  },
+  {
+   "id": "tubes",
+   "severity": "major",
+   "finding": "No OG or NG until the surgeon requests; intraop EGD and bougie",
+   "evidence": "Equipment notes.",
+   "implication": "Perforation risk at the myotomy; coordinated passage.",
+   "action": "Pass tubes only under surgeon direction; communicate during EGD leak test.",
+   "keywords": [
+    "og",
+    "ng",
+    "bougie",
+    "perforation",
+    "egd"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "Vomiting must be prevented after fundoplication",
+   "evidence": "Female, nonsmoker, prior PONV, opioids.",
+   "implication": "Retching can disrupt the wrap.",
+   "action": "Multimodal prophylaxis, opioid sparing.",
+   "keywords": [
+    "ponv",
+    "ondansetron",
+    "dexamethasone",
+    "scopolamine"
+   ]
+  },
+  {
+   "id": "nutrition",
+   "severity": "minor",
+   "finding": "Malnutrition and iron deficiency",
+   "evidence": "13% weight loss, albumin 3.3, Hgb 11.8 MCV 78.",
+   "implication": "Healing and drug binding.",
+   "action": "Note; dose adjust.",
+   "keywords": [
+    "malnutrition",
+    "albumin",
+    "weight loss"
+   ]
+  },
+  {
+   "id": "antibiotic",
+   "severity": "minor",
+   "finding": "Childhood penicillin hives with clindamycin ordered",
+   "evidence": "Allergy list; MAR.",
+   "implication": "Cefazolin is usually acceptable per current allergy guidance.",
+   "action": "Consider cefazolin.",
+   "keywords": [
+    "cefazolin",
+    "clindamycin",
+    "penicillin"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "RSI head up with rocuronium or succinylcholine",
+   "keywords": [
+    "rsi",
+    "head up"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "ETT, suction ready",
+   "keywords": [
+    "ett",
+    "suction"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Antibiotic within 60 min of incision",
+   "keywords": [
+    "cefazolin",
+    "clindamycin"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Awake extubation after full reversal",
+   "keywords": [
+    "awake extubation",
+    "reversal"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Aspiration related bronchospasm"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Regurgitation at emergence"
+  }
+ ]
+}

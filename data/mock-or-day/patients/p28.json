@@ -1,0 +1,489 @@
+{
+ "id": "p28",
+ "room": "OR 7",
+ "time": "1130",
+ "name": "DUNLAP, TRAVIS WADE",
+ "mrn": "0146028",
+ "dob": "07/19/1990",
+ "age": "36 y",
+ "sex": "M",
+ "ht_cm": 180,
+ "wt_kg": 86.2,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "None listed (uses urgent care)",
+ "insurance": "Cigna OAP (employer)",
+ "emergency_contact": "Kayla Dunlap (wife) 423-555-0193",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Open right inguinal hernia repair with mesh",
+  "short": "Open R inguinal hernia repair w/ mesh",
+  "laterality": "Right",
+  "service": "General Surgery",
+  "surgeon": "P. Oyelaran, MD",
+  "assistant": "",
+  "indication": "Symptomatic reducible right indirect inguinal hernia",
+  "duration_min": 75,
+  "anesthesia_requested": "General (LMA) vs MAC with local; surgeon to infiltrate ilioinguinal/iliohypogastric",
+  "position": "Supine",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "",
+  "implants": "Polypropylene mesh",
+  "surgeon_notes": "Outpatient. Cefazolin 2 g.",
+  "add_on": false,
+  "scheduled_on": "10/06/2026"
+ },
+ "problems": [
+  [
+   "Inguinal hernia, right, reducible",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Tobacco use disorder (cigarettes + e-cigarette)",
+   "2008",
+   "Active"
+  ],
+  [
+   "Ankle sprain, left",
+   "2019",
+   "Resolved"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "No chronic medical problems",
+   "Seasonal allergic rhinitis (OTC loratadine PRN)"
+  ],
+  "psh": [
+   [
+    "2004",
+    "Wisdom teeth extraction",
+    "Oral surgery office"
+   ]
+  ],
+  "family": [
+   "Father: HTN, smoker",
+   "Mother: T2DM",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Cigarettes 1 ppd since age 17 (~19 pack-years); also nicotine vape daily",
+   "alcohol": "Social, 4-6 beers on weekends",
+   "drugs": "Denies",
+   "occupation": "Warehouse forklift operator (Morristown distribution center)",
+   "living": "Lives with wife and 2 children",
+   "other": "Off work until cleared, light duty 2-4 wk"
+  },
+  "immunizations": [
+   [
+    "Tdap",
+    "2019"
+   ],
+   [
+    "COVID-19",
+    "2021"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Loratadine 10 mg",
+   "1 tab PO daily PRN",
+   "OTC",
+   "10/20/2026"
+  ],
+  [
+   "Ibuprofen 200 mg",
+   "2-3 tabs PO PRN groin pain",
+   "OTC",
+   "10/25/2026 2200"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due"
+  ],
+  [
+   "Acetaminophen 1,000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 1015"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Naproxen 500 mg BID",
+   "06/2019",
+   "Ankle sprain course complete"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "02/11/2023",
+    "comment": "Urgent care, flu-like illness",
+    "vals": {
+     "WBC": [
+      "11.6",
+      "H"
+     ],
+     "Hgb": [
+      "16.3",
+      ""
+     ],
+     "Hct": [
+      "49",
+      ""
+     ],
+     "Plt": [
+      "279",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "80",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   }
+  ],
+  "other": [
+   [
+    "02/11/2023",
+    "Influenza A/B + SARS-CoV-2 PCR",
+    "Influenza A DETECTED",
+    "A"
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/03/2019",
+   "XR Ankle left 3 views",
+   "No fracture or dislocation. Soft tissue swelling lateral malleolus. Impression: no acute osseous abnormality.",
+   "J. Pickering, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "06/03/2019",
+   "Urgent care",
+   "Morristown Express Care",
+   "L ankle injury, basketball",
+   "Lateral ankle sprain, ASO brace, discharged"
+  ],
+  [
+   "02/11/2023",
+   "Urgent care",
+   "Morristown Express Care",
+   "Fever, cough",
+   "Influenza A, oseltamivir, discharged"
+  ],
+  [
+   "09/15/2026",
+   "Clinic",
+   "C-N University General Surgery",
+   "Groin bulge",
+   "Scheduled hernia repair"
+  ]
+ ],
+ "notes": [
+  [
+   "02/11/2023 1630",
+   "Progress Note",
+   "Urgent Care",
+   "R. Mabry, PA-C",
+   "Fever 39.1, myalgias, cough x2 d. Flu A positive. Lungs: scattered rhonchi, no consolidation. Oseltamivir 75 BID x5 d. Smoking cessation advised. RTW note."
+  ],
+  [
+   "09/15/2026 1010",
+   "Consult",
+   "General Surgery",
+   "P. Oyelaran, MD",
+   "36M, R groin bulge x 3 mo, worse lifting at work, aching end of shift. Reduces lying down. No obstructive sx. Exam: reducible R inguinal hernia, impulse with cough, L side negative. No prior surgery. Smokes 1 ppd and vapes. Plan: open R inguinal hernia repair with mesh (Lichtenstein). Discussed smoking and wound/recurrence risk; recommended cessation, pt \"will try\". Outpatient."
+  ],
+  [
+   "09/15/2026 1040",
+   "Nursing Note",
+   "General Surgery",
+   "T. Greer, LPN",
+   "Surgery booking packet given. Pt declines nicotine patch Rx at this time. Work note for FMLA paperwork faxed to employer."
+  ],
+  [
+   "10/08/2026 1520",
+   "Telephone Encounter",
+   "General Surgery",
+   "T. Greer, LPN",
+   "Pt called asking if he needs bloodwork beforehand. Per Dr. Oyelaran no preop labs needed for healthy pt. Pre-anesthesia questionnaire completed by phone: no heart/lung disease, no OSA symptoms (wife says he snores \"some\"), no personal/family anesthesia problems, no loose teeth."
+  ],
+  [
+   "10/26/2026 1350",
+   "Telephone Encounter",
+   "Pre-Surgery",
+   "D. Carver, RN",
+   "Arrival 0930 confirmed. NPO after midnight, clears until 0730. Advised no smoking/vaping morning of surgery. Driver: wife."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/03/2019 1810",
+   "128/76",
+   84,
+   16,
+   99,
+   36.8,
+   84.0,
+   "6/10",
+   "Urgent care"
+  ],
+  [
+   "02/11/2023 1615",
+   "124/72",
+   108,
+   20,
+   96,
+   39.1,
+   85.3,
+   "5/10",
+   "Urgent care"
+  ],
+  [
+   "09/15/2026 0955",
+   "132/84",
+   78,
+   16,
+   97,
+   36.7,
+   86.6,
+   "3/10",
+   "Surgery clinic"
+  ],
+  [
+   "10/27/2026 0950",
+   "136/86",
+   82,
+   16,
+   96,
+   36.6,
+   86.2,
+   "2/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO after midnight, clears until 0730",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0945",
+   "Active"
+  ],
+  [
+   "Discharge home when criteria met",
+   "10/27/2026 0945",
+   "Pending (postop)"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not done",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: open right inguinal hernia repair with mesh",
+   "Signed by patient 09/15/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2004",
+   "Wisdom teeth extraction",
+   "IV sedation in office",
+   "None per pt",
+   "Oral surgery office"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0935",
+  "npo_solids": "10/26/2026 2230",
+  "npo_clears": "10/27/2026 0700 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/15 + update)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes, R groin"
+   ],
+   [
+    "Allergy band",
+    "N/A (NKDA)"
+   ],
+   [
+    "Driver",
+    "Wife"
+   ]
+  ],
+  "nursing_note": "Ambulatory, anxious (\"never been put all the way under\"). Last cigarette 0645 in parking lot, vaped in car. Smells of smoke. Lungs clear, occasional morning productive cough per pt. Denies chest pain. 18g L hand first attempt. Beard trimmed short. No dentures. Wife in waiting room.",
+  "iv": "18g L hand, LR",
+  "glucose": ""
+ },
+ "label": "T. Dunlap",
+ "bmi": "26.6"
+}

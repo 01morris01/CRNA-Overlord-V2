@@ -964,6 +964,21 @@ export class ScenarioManager {
     this.feedbackTimer = 5;
   }
 
+  // Read only observability for the sim operator and debriefs. Reports which
+  // complication state machines are live; it never mutates engine state.
+  activeComplicationTypes() {
+    const active = [];
+    if (this._bronchoActive) active.push('Bronchospasm');
+    if (this._sympActive) active.push('HighSpinal');
+    if (this._anaphylaxisActive) active.push('Anaphylaxis');
+    if (this._mhActive) active.push('MalignantHyperthermia');
+    if (this._opioidActive) active.push('OpioidRespDepression');
+    if (this._hemorrhageActive) active.push('Hemorrhage');
+    if (this._spasm !== SpasmStage.None && this._spasm !== SpasmStage.Resolved) active.push('Laryngospasm');
+    if (this._naloxoneSurgeActive) active.push('NaloxoneSurge');
+    return active;
+  }
+
   endCase() {
     if (this.state === ScenarioState.Running || this.state === ScenarioState.Paused) this.completeScenario();
   }

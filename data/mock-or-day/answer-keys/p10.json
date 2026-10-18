@@ -1,0 +1,186 @@
+{
+ "id": "p10",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Mastectomy after neoadjuvant chemo with new cardiotoxicity (EF 62 to 40%), neutropenia, QTc 484 with low Mg and an ondansetron QT intolerance, very high PONV risk, no IV access with the left arm off limits, and isosulfan blue planned.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Cancer therapy related cardiac dysfunction (EF 40%) with symptoms, neutropenia, prolonged QT."
+ },
+ "decision": {
+  "recommendation": "proceed with modifications if same day issues are resolved",
+  "rationale": "Cancer surgery timing matters, but before induction: repeat CBC with ANC today (10/26 draw missed), replete magnesium, quick cardiology input on new HFrEF, IV access via the port, and a non 5HT3 PONV plan."
+ },
+ "redFlags": [
+  {
+   "id": "cardiotox",
+   "severity": "critical",
+   "finding": "New cancer therapy related cardiac dysfunction",
+   "evidence": "EF 62% (05/2026) to 40% (10/20), GLS -12%, BNP 240 to 310, DOE and ankle swelling, HR about 100; cardio oncology not until 11/18.",
+   "implication": "New HFrEF, not on guideline therapy.",
+   "action": "Cardiology input before induction, careful titration, avoid myocardial depression and fluid overload.",
+   "keywords": [
+    "ejection fraction",
+    "ef 40",
+    "cardiotoxic",
+    "cardiomyopathy",
+    "heart failure",
+    "bnp",
+    "anthracycline",
+    "trastuzumab"
+   ]
+  },
+  {
+   "id": "qt",
+   "severity": "critical",
+   "finding": "Prolonged QTc with hypomagnesemia",
+   "evidence": "QTc 484 (490 on ondansetron in 07/2026); Mg 1.5, patient stopped Mg oxide; also on prochlorperazine and sertraline.",
+   "implication": "Torsades risk with QT prolonging drugs.",
+   "action": "Replete magnesium, avoid ondansetron, droperidol, and other QT prolonging antiemetics.",
+   "keywords": [
+    "qt",
+    "qtc",
+    "magnesium",
+    "torsades",
+    "ondansetron",
+    "droperidol"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "Very high PONV risk with limited antiemetic options",
+   "evidence": "Female, nonsmoker, prior severe PONV requiring admission, postop opioids; 5HT3 antagonists problematic.",
+   "implication": "Apfel 4.",
+   "action": "TIVA, dexamethasone, NK1 antagonist (aprepitant), scopolamine, opioid sparing regional (PECS).",
+   "keywords": [
+    "ponv",
+    "tiva",
+    "aprepitant",
+    "scopolamine",
+    "dexamethasone",
+    "apfel"
+   ]
+  },
+  {
+   "id": "neutropenia",
+   "severity": "major",
+   "finding": "Neutropenia and thrombocytopenia without a current count",
+   "evidence": "ANC 900 and Plt 112 on 10/24; oncology CBC for 10/26 not collected.",
+   "implication": "Infection and bleeding risk; regional block decisions.",
+   "action": "CBC with differential this morning; strict asepsis.",
+   "keywords": [
+    "neutropenia",
+    "anc",
+    "cbc",
+    "platelet"
+   ]
+  },
+  {
+   "id": "access",
+   "severity": "major",
+   "finding": "No IV access; left arm restricted, right arm is the surgical side",
+   "evidence": "Two failed attempts right arm; lymphedema left arm restriction; left IJ port present; port access not ordered.",
+   "implication": "Cannot induce safely without access.",
+   "action": "Access the port with sterile technique (order it), or lower extremity IV; avoid the left arm.",
+   "keywords": [
+    "port",
+    "iv access",
+    "lymphedema",
+    "left arm"
+   ]
+  },
+  {
+   "id": "blue_dye",
+   "severity": "major",
+   "finding": "Isosulfan blue injection after induction",
+   "evidence": "Surgeon notes.",
+   "implication": "Anaphylaxis (about 1%) and falsely low pulse oximetry readings.",
+   "action": "Expect SpO2 artifact; be ready to treat anaphylaxis.",
+   "keywords": [
+    "isosulfan",
+    "blue dye",
+    "lymphazurin",
+    "anaphylaxis"
+   ]
+  },
+  {
+   "id": "nmb",
+   "severity": "minor",
+   "finding": "No paralysis during axillary dissection",
+   "evidence": "Surgeon notes.",
+   "implication": "Avoid long acting relaxant or ensure reversal.",
+   "action": "LMA or short acting relaxant with full reversal before dissection.",
+   "keywords": [
+    "paralysis",
+    "relaxant",
+    "lma",
+    "reversal"
+   ]
+  },
+  {
+   "id": "tape",
+   "severity": "minor",
+   "finding": "Adhesive tape allergy",
+   "evidence": "Allergy list.",
+   "implication": "Skin injury.",
+   "action": "Non adhesive or silicone dressings.",
+   "keywords": [
+    "adhesive",
+    "tape"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "regional",
+   "item": "PECS block for opioid sparing",
+   "keywords": [
+    "pecs",
+    "pectoral",
+    "serratus"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Propofol TIVA",
+   "keywords": [
+    "tiva",
+    "propofol infusion"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "BP cuff on a leg or right arm before incision only per team; no left arm",
+   "keywords": [
+    "leg cuff",
+    "no left arm"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Overnight observation with telemetry given QTc and EF",
+   "keywords": [
+    "telemetry",
+    "overnight"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Isosulfan blue dye"
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Supraglottic airway at light planes"
+  }
+ ]
+}

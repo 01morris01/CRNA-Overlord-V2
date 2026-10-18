@@ -1,0 +1,787 @@
+{
+ "id": "p26",
+ "room": "OR 2",
+ "time": "1000",
+ "name": "OUSLEY, HARPER GRACE",
+ "mrn": "0145026",
+ "dob": "03/18/2019",
+ "age": "7 y",
+ "sex": "F",
+ "ht_cm": 121,
+ "wt_kg": 22.4,
+ "preferred_name": "Harper",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "E. Lindamood, MD, Sevier Pediatrics",
+ "insurance": "TennCare (Amerigroup)",
+ "emergency_contact": "Jessica Ousley (mother) 865-555-0623; Travis Ousley (father) 865-555-0659",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Full-mouth dental rehabilitation (restorations, stainless steel crowns, extractions) under general anesthesia",
+  "short": "Full-mouth dental rehab under GA",
+  "laterality": "N/A",
+  "service": "Pediatric Dentistry",
+  "surgeon": "M. Fairchild, DDS",
+  "assistant": "",
+  "indication": "Early childhood caries, multiple carious primary molars with 2 abscessed teeth; unable to treat in clinic due to behavior (ASD).",
+  "duration_min": 120,
+  "anesthesia_requested": "General, nasotracheal intubation",
+  "position": "Supine, head on donut, arms tucked",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Nasal RAE, throat pack",
+  "implants": "Stainless steel crowns",
+  "surgeon_notes": "Nasal tube please. Radiographs to be taken under GA. Approx 10-12 teeth to treat, 2 extractions (#K, #T).",
+  "add_on": false,
+  "scheduled_on": "09/03/2026"
+ },
+ "problems": [
+  [
+   "Autism spectrum disorder, level 3 (requiring very substantial support), minimally verbal",
+   "2021",
+   "Active"
+  ],
+  [
+   "Dental caries, multiple, with periapical abscess",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Asthma, mild intermittent",
+   "2023",
+   "Active"
+  ],
+  [
+   "Feeding difficulty, selective eating (ARFID features)",
+   "2021",
+   "Active"
+  ],
+  [
+   "Iron deficiency without anemia",
+   "2024",
+   "Active"
+  ],
+  [
+   "Constipation, functional",
+   "2022",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "ASD level 3 diagnosed 2021, minimally verbal (~20 words, uses AAC tablet), sensory aversions to touch/face/masks/loud noise",
+   "Mild intermittent asthma, albuterol 1-2x/month with colds, no ED visits or steroids in past year",
+   "Selective eater: chicken nuggets, plain crackers, applesauce pouches, chocolate milk",
+   "Functional constipation on PEG",
+   "Term birth 39 wk, NSVD, no NICU",
+   "Normal hearing (ABR 2022)"
+  ],
+  "psh": [
+   [
+    "05/2022",
+    "Auditory brainstem response test under sedation",
+    "East Tennessee Children's Hospital (outside)"
+   ],
+   [
+    "11/2024",
+    "MRI brain under general anesthesia (normal)",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Mother: asthma",
+   "Father: healthy",
+   "Brother (10): ADHD",
+   "Maternal cousin: autism",
+   "No family history of MH or anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "No smoke exposure",
+   "alcohol": "N/A",
+   "drugs": "N/A",
+   "occupation": "1st grade, special education classroom with 1:1 aide",
+   "living": "Parents, brother, Sevierville",
+   "other": "Receives ABA 15 h/wk, speech and OT. Comfort item: blue weighted blanket, iPad videos."
+  },
+  "immunizations": [
+   [
+    "Up to date per TennIIS",
+    "2024"
+   ],
+   [
+    "Influenza",
+    "10/2025"
+   ],
+   [
+    "DTaP/IPV/MMR/Varicella kindergarten boosters",
+    "03/2023"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs with spacer q4h PRN wheeze/cough",
+   "E. Lindamood, MD",
+   "10/14/2026"
+  ],
+  [
+   "Polyethylene glycol 3350",
+   "8.5 g PO daily in chocolate milk",
+   "E. Lindamood, MD",
+   "10/26/2026"
+  ],
+  [
+   "Melatonin 3 mg",
+   "PO at bedtime",
+   "E. Lindamood, MD",
+   "10/26/2026 2000"
+  ],
+  [
+   "Ferrous sulfate 15 mg/mL elemental",
+   "3 mL PO daily (mixed in applesauce)",
+   "E. Lindamood, MD",
+   "10/26/2026"
+  ],
+  [
+   "Pediatric multivitamin gummy",
+   "Daily",
+   "OTC",
+   "10/26/2026"
+  ],
+  [
+   "Amoxicillin 400 mg/5 mL",
+   "5 mL PO BID x 10 days (dental abscess)",
+   "M. Fairchild, DDS",
+   "10/20/2026 (course completed)"
+  ]
+ ],
+ "mar": [
+  [
+   "Albuterol HFA 4 puffs via spacer",
+   "Preop",
+   "Attempted 0920 - pt refused mask/spacer"
+  ],
+  [
+   "Ketamine IM",
+   "Preop per anesthesia",
+   "Pending anesthesia evaluation"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Risperidone 0.25 mg",
+   "2024",
+   "Weight gain, parents preference"
+  ],
+  [
+   "Cetirizine 5 mg",
+   "2023",
+   "Not needed"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "04/22/2026",
+    "comment": "",
+    "vals": {
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "12.3",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "210",
+      ""
+     ],
+     "MCV": [
+      "79",
+      ""
+     ],
+     "Ferritin": [
+      "18",
+      ""
+     ],
+     "Fe": [
+      "101",
+      ""
+     ],
+     "TSAT": [
+      "30",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/14/2024 0715",
+    "comment": "Pre-MRI (drawn under GA)",
+    "vals": {
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "12.1",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "271",
+      ""
+     ],
+     "MCV": [
+      "79",
+      ""
+     ],
+     "Na": [
+      "144",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.44",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "ALKP": [
+      "236",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/10/2024",
+    "comment": "Selective eating",
+    "vals": {
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "11.8",
+      ""
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "229",
+      ""
+     ],
+     "MCV": [
+      "76",
+      "L"
+     ],
+     "Ferritin": [
+      "9",
+      "L"
+     ],
+     "Fe": [
+      "99",
+      ""
+     ],
+     "TSAT": [
+      "29",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "32",
+      ""
+     ],
+     "ALKP": [
+      "240",
+      ""
+     ],
+     "TBili": [
+      "0.5",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "5-18"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.30-0.70"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "150-420"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "11.5-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "35-45"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "77-95"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "12-150"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "06/10/2024",
+    "Lead, blood",
+    "< 3.3 mcg/dL",
+    ""
+   ],
+   [
+    "2021",
+    "Chromosomal microarray",
+    "Normal female, no pathogenic CNVs",
+    ""
+   ],
+   [
+    "2021",
+    "Fragile X DNA testing",
+    "Normal (29 CGG repeats)",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "11/14/2024",
+   "MRI Brain without contrast (under GA)",
+   "Normal brain MRI for age. No structural abnormality. Normal myelination.",
+   "O. Barlow, MD"
+  ],
+  [
+   "08/18/2026",
+   "Dental radiograph, panoramic (attempted)",
+   "Limited study due to motion. Large carious lesions primary molars bilaterally; periapical radiolucency #K and #T.",
+   "M. Fairchild, DDS"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "2021",
+   "Developmental pediatrics",
+   "East Tennessee Children's (outside)",
+   "Speech delay, ASD evaluation",
+   "ASD level 3 diagnosed"
+  ],
+  [
+   "05/2022",
+   "Audiology",
+   "East Tennessee Children's (outside)",
+   "Sedated ABR",
+   "Normal hearing"
+  ],
+  [
+   "11/2024",
+   "Outpatient MRI",
+   "C-N University Hospital",
+   "Regression concern",
+   "Normal MRI under GA"
+  ],
+  [
+   "03/2026",
+   "Well child",
+   "Sevier Pediatrics",
+   "7 yr well visit",
+   "Routine"
+  ],
+  [
+   "08/18/2026",
+   "Pediatric dentistry",
+   "C-N Pediatric Dentistry",
+   "Facial swelling, tooth pain",
+   "Amoxicillin, OR referral"
+  ],
+  [
+   "09/03/2026",
+   "Pediatric dentistry",
+   "C-N Pediatric Dentistry",
+   "Preop",
+   "OR scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "05/12/2022 1400",
+   "Media (Outside Record)",
+   "Anesthesiology",
+   "East Tennessee Children's Hospital (scanned sedation record)",
+   "Sedated ABR, age 3. Attempted oral midazolam 0.5 mg/kg - spat out. Mask induction attempted with sevoflurane - extremely combative, required 3 staff, desaturation to 88% with breath-holding, recovered. Maintained on sevo via mask. Emergence: severe agitation 30 min. Recommendation: consider IM premedication for future anesthetics."
+  ],
+  [
+   "11/14/2024 0930",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology",
+   "R. Castile, MD",
+   "Age 5, 18.6 kg, ASD level 3, for MRI brain. Hx combative mask induction 2022. Parents request IM premed. Plan: ketamine 4 mg/kg IM (75 mg), no anticholinergic, given in mother's lap in preop room with iPad. Then IV after sedated, propofol infusion, natural airway with nasal cannula + capnography. -- Addendum 1130: Ketamine 75 mg IM L deltoid by RN with mother holding; sedated in 4 min, IV 22g placed on 1st attempt, transported. Propofol 200-250 mcg/kg/min, no airway intervention. Mild secretions, suctioned. Emergence calm in dim room with mother, no agitation. Discharged 1330. Excellent plan - recommend repeating."
+  ],
+  [
+   "03/18/2026 1000",
+   "Progress Note",
+   "Pediatrics",
+   "E. Lindamood, MD",
+   "Well 7 yo. Wt 21.6 kg (40th %ile), ht 120 cm. Asthma mild intermittent, albuterol rarely. Selective eater, on iron, ferritin improving. Constipation controlled on PEG. Behavior: ABA progressing. Dental: overdue - referral to pediatric dentistry. Flu shot today declined (needle distress) - will try at school clinic."
+  ],
+  [
+   "08/18/2026 1500",
+   "Progress Note",
+   "Pediatric Dentistry",
+   "M. Fairchild, DDS",
+   "L cheek swelling x 2 days, not eating. Extensive caries, abscess #K with buccal swelling, #T mobile with fistula. Unable to complete exam - combative, 2 staff. Amoxicillin 45 mg/kg/day x 10 d. Refer for full-mouth rehab under GA. Parents agree."
+  ],
+  [
+   "09/03/2026 1030",
+   "H&P",
+   "Pediatric Dentistry",
+   "M. Fairchild, DDS",
+   "7 yo F with ASD, early childhood caries, 2 abscessed primary molars (swelling resolved after amoxicillin). Plan full-mouth rehab under GA with nasal intubation. PMH: ASD level 3, mild intermittent asthma, iron deficiency, constipation. PSH: sedated ABR 2022, MRI 2024 under GA. Meds: albuterol PRN, PEG, melatonin, iron, MVI. NKDA. Exam (limited): alert, nonverbal, avoids touch. Lungs clear. Heart RRR. Dentition as above. A/P: OR 10/27. Mother requests same IM ketamine premed as MRI - will forward to anesthesia."
+  ],
+  [
+   "09/03/2026 1100",
+   "Nursing Note",
+   "Pediatric Dentistry",
+   "S. Wampler, RN",
+   "Child life referral placed. Mother asks for first-case or quiet room; prolonged waiting increases meltdowns. Mother states Harper had a cold 2 wk ago, now better. Scheduled 1000 (first available)."
+  ],
+  [
+   "10/21/2026 1100",
+   "Telephone Encounter",
+   "Pediatric Anesthesia Preop Clinic",
+   "K. Dotson, RN",
+   "Phone screen with mother. Wt approx 22 kg. Asthma: last albuterol 10/14 with mild cough, no current symptoms, no steroids in past year, no hospitalizations. No recent URI symptoms. Requests IM ketamine premed with mother present like 11/2024 and to arrive as late as possible. Plan per Dr. Castile: mother present for IM premed; child life to meet in quiet room; arrive 0900. Can have chocolate milk until 0600? Clarified - milk is not a clear liquid: NPO solids/milk after 0200, clear apple juice until 0900."
+  ],
+  [
+   "10/26/2026 1600",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "K. Dotson, RN",
+   "Reminder call. Arrival 0900. Last solids/chocolate milk by 0200; clears (apple juice, water) until 0900. Give albuterol 2 puffs AM if possible. Bring iPad and weighted blanket."
+  ]
+ ],
+ "vitals": [
+  [
+   "11/14/2024 0900",
+   "102/62",
+   108,
+   22,
+   99,
+   36.8,
+   18.6,
+   "Unable (FLACC 2)",
+   "Preop - MRI"
+  ],
+  [
+   "03/18/2026 0945",
+   "98/60",
+   96,
+   20,
+   99,
+   36.7,
+   21.6,
+   "0",
+   "Pediatrics"
+  ],
+  [
+   "08/18/2026 1445",
+   "104/64",
+   118,
+   22,
+   99,
+   37.9,
+   21.9,
+   "FLACC 5",
+   "Pediatric Dentistry"
+  ],
+  [
+   "09/03/2026 1015",
+   "Unable (refused cuff)",
+   112,
+   22,
+   99,
+   36.8,
+   22.2,
+   "FLACC 1",
+   "Pediatric Dentistry"
+  ],
+  [
+   "10/27/2026 0910",
+   "Unable (refused cuff)",
+   124,
+   24,
+   98,
+   36.7,
+   22.4,
+   "FLACC 2 (distress)",
+   "Preop - quiet room"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO: solids/milk after 0200, clears until 0900",
+   "10/21/2026",
+   "Active"
+  ],
+  [
+   "Child life consult",
+   "09/03/2026",
+   "Active"
+  ],
+  [
+   "Parent present for premedication",
+   "10/21/2026",
+   "Active"
+  ],
+  [
+   "Dental radiographs under GA",
+   "09/03/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: full-mouth dental rehabilitation under GA",
+   "Signed by mother 09/03/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "N/A (minor). Legal guardians: both parents.",
+ "anesthesia_history": [
+  [
+   "05/2022",
+   "Sedated ABR",
+   "Sevoflurane mask induction (failed oral midazolam)",
+   "Combative induction requiring 3-person hold, breath-holding desat 88%, severe emergence agitation",
+   "East Tennessee Children's Hospital"
+  ],
+  [
+   "11/2024",
+   "MRI brain",
+   "IM ketamine 4 mg/kg premed in mother's lap, then IV propofol infusion, natural airway",
+   "Smooth, mild secretions; calm emergence",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0855",
+  "npo_solids": "10/27/2026 0145 (chocolate milk + 4 crackers)",
+  "npo_clears": "10/27/2026 0830 apple juice 4 oz",
+  "checklist": [
+   [
+    "ID band x2",
+    "Applied to ankle (removed from wrist by pt)"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/03) + update"
+   ],
+   [
+    "Pregnancy test",
+    "N/A (age 7, premenarchal)"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ],
+   [
+    "Weight",
+    "22.4 kg in mother's arms minus mother"
+   ]
+  ],
+  "nursing_note": "In quiet room with mother, iPad, weighted blanket. Pacing, vocalizing, hand-flapping; screams when approached. Would not allow BP cuff; SpO2 via toe briefly 98%. No cough or rhinorrhea observed, lungs not auscultated (refused). Albuterol not given at home or here (refused spacer). Mother requests IM ketamine as last time. Child life present.",
+  "iv": "None - deferred until after premedication",
+  "glucose": ""
+ },
+ "label": "H. Ousley",
+ "bmi": "15.3"
+}

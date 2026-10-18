@@ -1,0 +1,129 @@
+{
+ "id": "p15",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Healthy 23 y for diagnostic laparoscopy. A control case: the work is a clean, well reasoned plan, especially PONV prophylaxis, not hunting for a cancellation.",
+ "asa": {
+  "suggested": "1",
+  "rationale": "Healthy; episodic migraine and mild anxiety without daily medication (some would say 2)."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "No contraindication. NPO met, hCG negative, naproxen last dose 2 days ago is not a concern for this procedure."
+ },
+ "redFlags": [
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "High PONV risk",
+   "evidence": "Female, nonsmoker, gynecologic laparoscopy, expected postop opioids; vomited after ketamine sedation as a child; same day discharge wanted.",
+   "implication": "Apfel 3 (about 60%).",
+   "action": "Two or three agent prophylaxis (dexamethasone, ondansetron, consider scopolamine or TIVA), opioid sparing.",
+   "keywords": [
+    "ponv",
+    "apfel",
+    "ondansetron",
+    "dexamethasone",
+    "scopolamine",
+    "tiva"
+   ]
+  },
+  {
+   "id": "estrogen",
+   "severity": "minor",
+   "finding": "Continuous estrogen containing OCP",
+   "evidence": "Junel 1/20 taken last night.",
+   "implication": "Small VTE risk increase; usually continued for minor surgery.",
+   "action": "Mechanical prophylaxis (SCDs ordered), early ambulation.",
+   "keywords": [
+    "ocp",
+    "estrogen",
+    "vte",
+    "scd"
+   ]
+  },
+  {
+   "id": "trendelenburg",
+   "severity": "minor",
+   "finding": "Steep Trendelenburg with pneumoperitoneum, arms tucked",
+   "evidence": "Case positioning.",
+   "implication": "Ventilation pressures, positioning injury.",
+   "action": "Pad and secure, lung protective ventilation.",
+   "keywords": [
+    "trendelenburg",
+    "positioning",
+    "padding"
+   ]
+  },
+  {
+   "id": "allergy",
+   "severity": "minor",
+   "finding": "Amoxicillin mild rash",
+   "evidence": "Allergy list.",
+   "implication": "Low risk; does not preclude cefazolin if an antibiotic is indicated.",
+   "action": "No routine antibiotic for diagnostic laparoscopy.",
+   "keywords": [
+    "amoxicillin",
+    "antibiotic"
+   ]
+  },
+  {
+   "id": "anxiety",
+   "severity": "minor",
+   "finding": "Needle anxiety",
+   "evidence": "Nursing notes.",
+   "implication": "Anxious induction.",
+   "action": "Reassurance, consider midazolam.",
+   "keywords": [
+    "anxiety",
+    "midazolam"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "ETT for pneumoperitoneum and steep Trendelenburg",
+   "keywords": [
+    "ett",
+    "endotracheal"
+   ]
+  },
+  {
+   "domain": "ponv",
+   "item": "Multimodal PONV prophylaxis",
+   "keywords": [
+    "ondansetron",
+    "dexamethasone"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Acetaminophen (given), NSAID if surgeon agrees, local at ports",
+   "keywords": [
+    "ketorolac",
+    "acetaminophen",
+    "local"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Full reversal, same day discharge criteria",
+   "keywords": [
+    "sugammadex",
+    "reversal",
+    "discharge"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence in a young patient"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Any IV drug exposure"
+  }
+ ]
+}

@@ -1,0 +1,2055 @@
+{
+ "id": "p24",
+ "room": "Eye OR",
+ "time": "0800",
+ "name": "PRIDEMORE, OPAL JEAN",
+ "mrn": "0145024",
+ "dob": "02/14/1941",
+ "age": "85 y",
+ "sex": "F",
+ "ht_cm": 155,
+ "wt_kg": 58.6,
+ "preferred_name": "Miss Opal",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "DNR/DNI (POLST 03/2025)",
+ "pcp": "V. Kincaid, NP, Brookside Assisted Living house calls (Senior Care Partners)",
+ "insurance": "Medicare A/B + Blue Medicare Supplement Plan F",
+ "emergency_contact": "Donna Pridemore-Hurst (daughter, healthcare POA) 865-555-0712",
+ "isolation": "",
+ "allergies": [
+  [
+   "Codeine",
+   "Confusion, hallucinations",
+   "Moderate",
+   "2014"
+  ],
+  [
+   "Sulfa antibiotics",
+   "Rash",
+   "Mild",
+   "1980s"
+  ]
+ ],
+ "case": {
+  "procedure": "Left cataract extraction by phacoemulsification with posterior chamber intraocular lens implant",
+  "short": "L cataract phaco with IOL",
+  "laterality": "Left",
+  "service": "Ophthalmology",
+  "surgeon": "J. Ballinger, MD",
+  "assistant": "",
+  "indication": "Visually significant nuclear cataract OS, BCVA 20/200 OS; falls and inability to recognize faces; OD 20/60.",
+  "duration_min": 25,
+  "anesthesia_requested": "MAC with topical/intracameral lidocaine",
+  "position": "Supine, head flat on headrest, face draped",
+  "dispo": "Same-day discharge to assisted living",
+  "blood": "None",
+  "equipment": "Phaco unit",
+  "implants": "Posterior chamber IOL (power per biometry)",
+  "surgeon_notes": "Topical. Minimal sedation please - pt with dementia. Pt cooperative at clinic visit.",
+  "add_on": false,
+  "scheduled_on": "09/24/2026"
+ },
+ "problems": [
+  [
+   "Heart failure with reduced ejection fraction (EF 35%)",
+   "2019",
+   "Active"
+  ],
+  [
+   "Alzheimer dementia, moderate",
+   "2022",
+   "Active"
+  ],
+  [
+   "Age-related nuclear cataract, bilateral",
+   "2023",
+   "Active"
+  ],
+  [
+   "Chronic kidney disease, stage 3b",
+   "2021",
+   "Active"
+  ],
+  [
+   "Hearing loss, bilateral, severe",
+   "2015",
+   "Active"
+  ],
+  [
+   "Ischemic cardiomyopathy",
+   "2019",
+   "Active"
+  ],
+  [
+   "History of falls",
+   "2025",
+   "Active"
+  ],
+  [
+   "Osteoporosis with L1 compression fracture",
+   "2023",
+   "Active"
+  ],
+  [
+   "Hypothyroidism",
+   "2005",
+   "Active"
+  ],
+  [
+   "Macular degeneration, dry, OD > OS",
+   "2020",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Ischemic cardiomyopathy, HFrEF EF 30-35%, NYHA III; inferior MI 2019 (medical management, declined cath)",
+   "ICD offered 2020 - declined by patient/family",
+   "Moderate Alzheimer dementia (MoCA 12/30 in 2025), oriented to self, sometimes place",
+   "CKD 3b, Cr 1.2-1.4",
+   "Severe bilateral sensorineural hearing loss; hearing aids, often refuses to wear",
+   "Hypothyroidism",
+   "Osteoporosis, L1 compression fx 2023",
+   "Dry AMD",
+   "Falls 2025 x2"
+  ],
+  "psh": [
+   [
+    "1968",
+    "Hysterectomy, abdominal",
+    "Knoxville General (outside)"
+   ],
+   [
+    "2008",
+    "Right total knee arthroplasty",
+    "Lakeway Regional Medical Center"
+   ],
+   [
+    "2016",
+    "Excision basal cell carcinoma, nose",
+    "Dermatology office"
+   ]
+  ],
+  "family": [
+   "Noncontributory at age 85",
+   "Mother: died \"of old age\" 92"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Retired seamstress",
+   "living": "Brookside Assisted Living (memory-support wing since 2025), Morristown",
+   "other": "Widowed 2010. Uses rolling walker. Needs assist with bathing, meds administered by facility. Daughter visits daily."
+  },
+  "immunizations": [
+   [
+    "Influenza high-dose",
+    "10/2026"
+   ],
+   [
+    "RSV",
+    "10/2023"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2023"
+   ],
+   [
+    "COVID-19 booster",
+    "10/2025"
+   ],
+   [
+    "Shingrix x2",
+    "2021"
+   ]
+  ],
+  "ob": "G3P3. Postmenopausal."
+ },
+ "home_meds": [
+  [
+   "Carvedilol 6.25 mg",
+   "1 tab PO BID",
+   "R. Sexton, MD (cardiology)",
+   "10/27/2026 0600 (facility MAR)"
+  ],
+  [
+   "Sacubitril-valsartan 24-26 mg",
+   "1 tab PO BID",
+   "R. Sexton, MD",
+   "10/26/2026 2000"
+  ],
+  [
+   "Furosemide 40 mg",
+   "1 tab PO daily (extra 20 mg PRN weight gain > 2 lb)",
+   "R. Sexton, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Spironolactone 12.5 mg",
+   "PO daily",
+   "R. Sexton, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Aspirin 81 mg",
+   "PO daily",
+   "R. Sexton, MD",
+   "10/26/2026 0800"
+  ],
+  [
+   "Atorvastatin 20 mg",
+   "PO nightly",
+   "R. Sexton, MD",
+   "10/26/2026 2000"
+  ],
+  [
+   "Donepezil 10 mg",
+   "PO nightly",
+   "L. Wynn, MD (neurology)",
+   "10/26/2026 2000"
+  ],
+  [
+   "Memantine 10 mg",
+   "PO BID",
+   "L. Wynn, MD",
+   "10/27/2026 0600"
+  ],
+  [
+   "Levothyroxine 50 mcg",
+   "PO daily 0600",
+   "V. Kincaid, NP",
+   "10/27/2026 0600"
+  ],
+  [
+   "Alendronate 70 mg",
+   "PO weekly (Sundays)",
+   "V. Kincaid, NP",
+   "10/25/2026"
+  ],
+  [
+   "Calcium + vitamin D 600 mg/800 IU",
+   "PO BID",
+   "V. Kincaid, NP",
+   "10/26/2026"
+  ],
+  [
+   "Melatonin 3 mg",
+   "PO nightly",
+   "V. Kincaid, NP",
+   "10/26/2026 2000"
+  ],
+  [
+   "Artificial tears",
+   "Both eyes QID",
+   "J. Ballinger, MD",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Phenylephrine 2.5% / tropicamide 1% ophthalmic",
+   "1 drop OS q5min x3 preop",
+   "Given 0715, 0720, 0725"
+  ],
+  [
+   "Ofloxacin 0.3% ophthalmic",
+   "1 drop OS preop",
+   "Given 0715"
+  ],
+  [
+   "Lidocaine 3.5% gel ophthalmic",
+   "OS preop",
+   "Given 0730"
+  ],
+  [
+   "Saline lock",
+   "-",
+   "Placed 0710"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Lisinopril 10 mg",
+   "2019-2022",
+   "Changed to sacubitril-valsartan"
+  ],
+  [
+   "Metoprolol tartrate 25 mg BID",
+   "2019",
+   "Changed to carvedilol"
+  ],
+  [
+   "Quetiapine 12.5 mg",
+   "2025",
+   "Sedation, fall; discontinued after fall"
+  ],
+  [
+   "Oxybutynin 5 mg",
+   "2023",
+   "Anticholinergic burden - stopped by geriatrics"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "09/22/2026",
+    "comment": "Cardiology",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "32",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "BNP": [
+      "710",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/09/2026",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "35",
+      "H"
+     ],
+     "Cr": [
+      "1.38",
+      "H"
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "17",
+      ""
+     ],
+     "ALKP": [
+      "67",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "11.2",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "250",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "72",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "102",
+      ""
+     ],
+     "BNP": [
+      "680",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "08/19/2025",
+    "comment": "Cardiology",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "33",
+      "H"
+     ],
+     "Cr": [
+      "1.31",
+      "H"
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "BNP": [
+      "620",
+      "H"
+     ],
+     "TSH": [
+      "2.53",
+      ""
+     ],
+     "FT4": [
+      "1.12",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/21/2025",
+    "comment": "Post-fall",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.7",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "33",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.7",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "28",
+      ""
+     ],
+     "ALKP": [
+      "79",
+      ""
+     ],
+     "TBili": [
+      "0.8",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "248",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "BNP": [
+      "590",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/08/2024",
+    "comment": "Cardiology",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "32",
+      "H"
+     ],
+     "Cr": [
+      "1.34",
+      "H"
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "BNP": [
+      "480",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/12/2023",
+    "comment": "Geriatrics",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "30",
+      "H"
+     ],
+     "Cr": [
+      "1.29",
+      "H"
+     ],
+     "Glu": [
+      "84",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.6",
+      ""
+     ],
+     "Hgb": [
+      "11.7",
+      "L"
+     ],
+     "Hct": [
+      "35",
+      "L"
+     ],
+     "Plt": [
+      "253",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "VitD": [
+      "24",
+      "L"
+     ],
+     "B12": [
+      "528",
+      ""
+     ],
+     "TSH": [
+      "2.47",
+      ""
+     ],
+     "FT4": [
+      "1.32",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "12/01/2022 0500",
+    "comment": "Discharge",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "33",
+      "H"
+     ],
+     "Cr": [
+      "1.46",
+      "H"
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Mg": [
+      "2.0",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "11/28/2022 0230",
+    "comment": "ED - SOB",
+    "vals": {
+     "WBC": [
+      "6.3",
+      ""
+     ],
+     "Hgb": [
+      "11.7",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Na": [
+      "131",
+      "L"
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "34",
+      "H"
+     ],
+     "Cr": [
+      "1.58",
+      "H"
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "BNP": [
+      "2210",
+      "H"
+     ],
+     "Trop": [
+      "48",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/10/2021",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "31",
+      "H"
+     ],
+     "Cr": [
+      "1.36",
+      "H"
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "15",
+      ""
+     ],
+     "ALKP": [
+      "79",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.0",
+      ""
+     ],
+     "Hgb": [
+      "12.0",
+      ""
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "266",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "TSH": [
+      "2.67",
+      ""
+     ],
+     "FT4": [
+      "1.16",
+      ""
+     ],
+     "BNP": [
+      "610",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "01/15/2020",
+    "comment": "Cardiology",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.5",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "31",
+      "H"
+     ],
+     "Cr": [
+      "1.29",
+      "H"
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "BNP": [
+      "420",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/07/2019 0500",
+    "comment": "Discharge",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "28",
+      "H"
+     ],
+     "Cr": [
+      "1.18",
+      "H"
+     ],
+     "Glu": [
+      "85",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "11.7",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "262",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "BNP": [
+      "890",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/04/2019 0500",
+    "comment": "",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "3.8",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "32",
+      "H"
+     ],
+     "Cr": [
+      "1.24",
+      "H"
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "Mg": [
+      "1.8",
+      ""
+     ],
+     "Trop": [
+      "3120",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "06/02/2019 1910",
+    "comment": "ED - chest pain",
+    "vals": {
+     "WBC": [
+      "6.7",
+      ""
+     ],
+     "Hgb": [
+      "11.6",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "230",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.8",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "33",
+      "H"
+     ],
+     "Cr": [
+      "1.12",
+      "H"
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "Trop": [
+      "1460",
+      "H"
+     ],
+     "BNP": [
+      "1840",
+      "H"
+     ],
+     "PT": [
+      "12.3",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2017",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "4.6",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "20",
+      ""
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "16",
+      ""
+     ],
+     "ALKP": [
+      "90",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ],
+     "TProt": [
+      "6.4",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "5.9",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "244",
+      ""
+     ],
+     "MCV": [
+      "93",
+      ""
+     ],
+     "TSH": [
+      "2.55",
+      ""
+     ],
+     "FT4": [
+      "1.15",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "78",
+      ""
+     ],
+     "BNP": [
+      "60",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "B12",
+    "name": "Vitamin B12",
+    "unit": "pg/mL",
+    "ref": "200-900"
+   }
+  ],
+  "other": [
+   [
+    "04/09/2026",
+    "eGFR (CKD-EPI 2021)",
+    "38 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "09/22/2026",
+    "eGFR (CKD-EPI 2021)",
+    "39 mL/min/1.73m2",
+    "L"
+   ],
+   [
+    "10/27/2026 0700",
+    "POC glucose",
+    "112 mg/dL",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/02/2019",
+   "XR Chest 1 view",
+   "Cardiomegaly, interstitial edema, small bilateral effusions.",
+   "D. Akers, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Kardiale_Dekompensation_und_Rekompensation_73W_-_CR_pa_-_001.jpg)"
+   }
+  ],
+  [
+   "11/28/2022",
+   "XR Chest 1 view",
+   "Cardiomegaly with pulmonary vascular congestion and bilateral pleural effusions, R > L. Impression: CHF exacerbation.",
+   "D. Akers, MD"
+  ],
+  [
+   "02/20/2025",
+   "CT Head without contrast (fall)",
+   "No acute hemorrhage or fracture. Moderate generalized atrophy, hippocampal volume loss. Chronic small vessel disease.",
+   "D. Akers, MD"
+  ],
+  [
+   "02/20/2025",
+   "XR Pelvis and L hip",
+   "No fracture. Osteopenia. L1 compression deformity on scout, chronic.",
+   "D. Akers, MD"
+  ],
+  [
+   "08/19/2025",
+   "XR Chest 2 views",
+   "Stable cardiomegaly. Small L effusion. Mild vascular congestion. Chronic L1 compression.",
+   "D. Akers, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: James Heilman, MD, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:CHF2016.png)"
+   }
+  ]
+ ],
+ "cardiology": [
+  [
+   "06/02/2019",
+   "ECG 12-lead",
+   "Sinus rhythm 92. Inferior ST elevation II, III, aVF with reciprocal changes. Acute inferior MI.",
+   "R. Sexton, MD",
+   {
+    "st": {
+     "II": 0.25,
+     "III": 0.32,
+     "aVF": 0.28,
+     "I": -0.12,
+     "aVL": -0.2,
+     "V2": -0.1
+    },
+    "tmod": {
+     "II": 1.6,
+     "III": 2.6,
+     "aVF": 1.9
+    },
+    "rate": 92,
+    "pr": 170,
+    "qrs": 90,
+    "qtc": 450,
+    "axis": 40
+   }
+  ],
+  [
+   "06/05/2019",
+   "Echocardiogram, transthoracic",
+   "LVEF 30%. Inferior and inferolateral akinesis. Moderate MR (functional). Grade II diastolic dysfunction. RVSP 44.",
+   "R. Sexton, MD"
+  ],
+  [
+   "12/2022",
+   "Echocardiogram, transthoracic",
+   "LVEF 30-35%. Inferior/inferolateral akinesis. Moderate functional MR. Mod LA enlargement. RVSP 48. Mild AS (AVA 1.4 cm2).",
+   "G. Shook, MD"
+  ],
+  [
+   "08/19/2025",
+   "Echocardiogram, transthoracic",
+   "LVEF 35%. Regional WMA unchanged. Moderate MR. Mild-moderate AS (mean gradient 18 mm Hg, AVA 1.2 cm2). RVSP 50. Small pericardial effusion.",
+   "G. Shook, MD"
+  ],
+  [
+   "09/22/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 66. LBBB, QRS 148 ms (new since 2025 - noted 08/2025). Old inferior Q waves.",
+   "R. Sexton, MD",
+   {
+    "rate": 66,
+    "pr": 190,
+    "qrs": 148,
+    "qtc": 470,
+    "axis": -20,
+    "lbbb": 1,
+    "iq": 1,
+    "st": {
+     "I": -0.07,
+     "aVL": -0.07,
+     "V5": -0.08,
+     "V6": -0.1,
+     "V1": 0.15,
+     "V2": 0.2,
+     "V3": 0.15
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2008",
+   "Inpatient (3 days)",
+   "Lakeway Regional Medical Center",
+   "R TKA",
+   "Discharged to rehab"
+  ],
+  [
+   "06/02/2019",
+   "Inpatient admission (5 days)",
+   "C-N University Hospital",
+   "Inferior STEMI, presented late; HF",
+   "Medical management, declined cath"
+  ],
+  [
+   "2020",
+   "Cardiology clinic",
+   "C-N Heart Associates",
+   "ICD discussion",
+   "Declined ICD"
+  ],
+  [
+   "11/28/2022",
+   "Inpatient admission (3 days)",
+   "C-N University Hospital",
+   "Acute on chronic HFrEF",
+   "Diuresed, sacubitril-valsartan started"
+  ],
+  [
+   "06/2023",
+   "Geriatrics clinic",
+   "C-N Senior Health",
+   "Cognitive decline, falls",
+   "Deprescribing"
+  ],
+  [
+   "02/20/2025",
+   "ED visit",
+   "C-N University Hospital ED",
+   "Fall at assisted living",
+   "No fracture, returned to facility"
+  ],
+  [
+   "03/2025",
+   "Neurology clinic",
+   "C-N Neurology",
+   "Dementia follow-up",
+   "Moderate AD; capacity letter"
+  ],
+  [
+   "08/19/2025",
+   "Cardiology clinic",
+   "C-N Heart Associates",
+   "HFrEF",
+   "Stable NYHA III"
+  ],
+  [
+   "08/2026",
+   "Ophthalmology",
+   "C-N Eye Center",
+   "Decreased vision",
+   "Cataract surgery OS recommended"
+  ],
+  [
+   "09/22/2026",
+   "Cardiology clinic",
+   "C-N Heart Associates",
+   "Preop risk / HF",
+   "OK for cataract surgery"
+  ],
+  [
+   "09/24/2026",
+   "Ophthalmology",
+   "C-N Eye Center",
+   "Preop biometry",
+   "Scheduled 10/27"
+  ]
+ ],
+ "notes": [
+  [
+   "06/07/2019 1200",
+   "Discharge Summary",
+   "Cardiology",
+   "R. Sexton, MD",
+   "78 F presented ~14 h after onset with inferior STEMI. Pt and family declined cath, medical management. EF 30%, mod MR. Diuresed. Discharged on ASA, atorvastatin, metoprolol, lisinopril, furosemide. Codeine caused delirium in hospital 2014 - avoid."
+  ],
+  [
+   "12/01/2022 1030",
+   "Discharge Summary",
+   "Hospital Medicine",
+   "S. Treece, MD",
+   "Acute on chronic HFrEF, BNP 2210, effusions. Diuresed 4 L. Lisinopril changed to sacubitril-valsartan 24-26 BID after 36-h washout. Carvedilol 6.25 BID. Spironolactone 12.5. Delirium overnight HD1, resolved. Discharged to home with home health; family considering assisted living."
+  ],
+  [
+   "06/14/2023 1400",
+   "Consult",
+   "Geriatrics",
+   "M. Rowan, MD",
+   "Cognitive decline and falls. MoCA 16/30. Severe hearing loss - wears aids inconsistently, speak to L ear, use pocket talker. Stopped oxybutynin. Avoid benzodiazepines, anticholinergics, codeine. Recommend assisted living."
+  ],
+  [
+   "02/20/2025 2200",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "B. Fugate, DO",
+   "Unwitnessed fall at AL from recliner reaching for remote. CT head neg, hip XR neg. Quetiapine started recently by facility NP for sundowning - stopped. Returned to facility."
+  ],
+  [
+   "03/18/2025 1100",
+   "Progress Note",
+   "Neurology",
+   "L. Wynn, MD",
+   "Moderate Alzheimer dementia, MoCA 12/30. Pt lacks capacity for complex medical decisions (understanding/appreciation impaired). Letter provided activating healthcare POA (daughter Donna Pridemore-Hurst); concurring physician V. Kincaid, NP / M. Rowan, MD. Continue donepezil + memantine."
+  ],
+  [
+   "03/20/2025 0900",
+   "Media (Outside Record)",
+   "Health Information Management",
+   "Scanned document",
+   "Durable Power of Attorney for Health Care (TN), executed 2018, agent Donna Pridemore-Hurst (daughter). Physician determination of incapacity dated 03/18/2025 attached (L. Wynn, MD; M. Rowan, MD). POLST 03/2025: DNR, selective treatment, no intubation; signed by agent and V. Kincaid, NP."
+  ],
+  [
+   "08/19/2025 1000",
+   "Progress Note",
+   "Cardiology",
+   "G. Shook, MD",
+   "HFrEF EF 35%, NYHA III. DOE with walking to dining hall. Orthopnea - sleeps in recliner most nights now per daughter. Weight stable 59 kg. New LBBB QRS 148 - CRT discussed with daughter, declined given goals of care. Mod MR, mild-mod AS. BP 102/60. No further GDMT titration (soft BP, CKD). Continue."
+  ],
+  [
+   "04/09/2026 1030",
+   "Progress Note",
+   "Primary Care (facility visit)",
+   "V. Kincaid, NP",
+   "Annual at AL. Stable dementia, needs cues for ADLs. Wt 59.1. Ambulates with walker. Sleeps in lift recliner. Hearing aids in drawer, refuses. Labs stable, Cr 1.38. Continue regimen."
+  ],
+  [
+   "08/12/2026 1100",
+   "Progress Note",
+   "Ophthalmology",
+   "J. Ballinger, MD",
+   "Referred for vision decline, unable to recognize daughter. BCVA OD 20/60, OS 20/200. Dense NS 4+ OS, 2+ OD. Dry AMD OD > OS. Expected visual benefit OS moderate given AMD. Discussed with daughter (POA) by phone - wants to proceed for safety/quality of life. Plan phaco/IOL OS."
+  ],
+  [
+   "09/22/2026 1430",
+   "Progress Note",
+   "Cardiology",
+   "R. Sexton, MD",
+   "Preop for cataract (low-risk procedure). HFrEF EF 35%, NYHA III, stable. Still cannot lie flat - needs at least 2-3 pillows/recliner, orthopnea unchanged x 1 yr. Lungs: faint bibasilar crackles. 1+ edema. BNP 710 (baseline 600s). No change in meds. OK to proceed - low-risk surgery; continue all cardiac meds day of surgery including AM carvedilol. Positioning may be an issue - defer to anesthesia/ophthalmology."
+  ],
+  [
+   "09/24/2026 0930",
+   "H&P",
+   "Ophthalmology",
+   "T. Lyle, OD / J. Ballinger, MD",
+   "85 F for L phaco/IOL. PMH: CHF, dementia, CKD, HTN, hypothyroid. Meds per facility list. Allergies codeine, sulfa. ROS: negative per template. Able to lie flat for 30 min: Yes. Exam: A&O x1-2, pleasant, cooperative. Heart RRR. Lungs clear. Biometry done (cooperated with prompting). Plan topical/MAC 10/27. Consent to be signed DOS."
+  ],
+  [
+   "09/24/2026 1000",
+   "Nursing Note",
+   "Ophthalmology",
+   "K. Burris, LPN",
+   "Pt accompanied by AL aide (daughter at work). Preop instructions given to aide and faxed to Brookside. Drops schedule explained."
+  ],
+  [
+   "10/20/2026 1600",
+   "Telephone Encounter",
+   "Ophthalmology",
+   "K. Burris, LPN",
+   "Daughter called - she cannot come morning of surgery (work), facility transport and aide will bring pt. Daughter asks to be called after. Number verified."
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "S. Reagan, RN",
+   "Preop call to Brookside nurse M. Seals, LPN. Arrival 0630. NPO midnight, clears until 0600. Give all AM cardiac meds, levothyroxine, memantine with sip water. Hold furosemide AM until after surgery. Facility to send MAR and transfer form."
+  ],
+  [
+   "10/27/2026 0640",
+   "Media (Outside Record)",
+   "Health Information Management",
+   "Brookside Assisted Living - Interfacility Transfer Form (scanned)",
+   "Resident: Opal Pridemore. Dx: CHF, Alzheimer dementia. Code: DNR (POLST attached). POA: Donna Pridemore-Hurst. Mobility: walker, 1 assist. Hearing: severe HOH, aids in bag - often refuses; write notes in large print. Sleep: sleeps in recliner - cannot lie flat, becomes short of breath and anxious within minutes when supine; HOB 45+ degrees. Behavior: may become agitated when frightened, redirect calmly. Meds given 0600: carvedilol, memantine, levothyroxine. Sacubitril-valsartan AM dose not given (staff unsure of instructions; last dose 2000 10/26). Furosemide held. Last ate 1900."
+  ],
+  [
+   "10/27/2026 0715",
+   "Nursing Note",
+   "Ambulatory Surgery",
+   "P. Jarnagin, RN",
+   "Pt arrived 0645 via facility van with aide. Consent for L cataract reviewed with pt using large print; pt signed 0705, witnessed. Pt pleasant, says \"I want to see better.\" Hearing aids not in. Sitting upright in stretcher, HOB 60 degrees, SpO2 93% RA. Became mildly dyspneic and grabbed rails when HOB lowered for drop placement; returned upright. Daughter not present - voicemail left 0710."
+  ]
+ ],
+ "vitals": [
+  [
+   "03/14/2017 0900",
+   "142/78",
+   72,
+   16,
+   97,
+   36.6,
+   64.0,
+   "0/10",
+   "Primary care"
+  ],
+  [
+   "06/02/2019 1905",
+   "152/88",
+   96,
+   24,
+   91,
+   36.8,
+   63.2,
+   "8/10",
+   "ED"
+  ],
+  [
+   "06/07/2019 0800",
+   "108/64",
+   74,
+   18,
+   95,
+   36.6,
+   61.5,
+   "0/10",
+   "Cardiac step-down"
+  ],
+  [
+   "11/28/2022 0215",
+   "146/82",
+   104,
+   28,
+   88,
+   36.7,
+   63.8,
+   "0/10",
+   "ED"
+  ],
+  [
+   "12/01/2022 0800",
+   "104/62",
+   70,
+   18,
+   95,
+   36.5,
+   60.1,
+   "0/10",
+   "Medical floor"
+  ],
+  [
+   "02/20/2025 2130",
+   "118/68",
+   72,
+   18,
+   95,
+   36.6,
+   null,
+   "3/10",
+   "ED"
+  ],
+  [
+   "08/19/2025 0945",
+   "102/60",
+   64,
+   18,
+   95,
+   36.5,
+   59.0,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "04/09/2026 1015",
+   "106/62",
+   66,
+   18,
+   94,
+   36.5,
+   59.1,
+   "0/10",
+   "AL visit"
+  ],
+  [
+   "08/12/2026 1045",
+   "110/64",
+   68,
+   18,
+   95,
+   36.6,
+   58.8,
+   "0/10",
+   "Ophthalmology"
+  ],
+  [
+   "09/22/2026 1415",
+   "104/60",
+   66,
+   20,
+   94,
+   36.6,
+   58.9,
+   "0/10",
+   "Cardiology"
+  ],
+  [
+   "10/27/2026 0700",
+   "108/62",
+   64,
+   20,
+   93,
+   36.4,
+   58.6,
+   "0/10",
+   "Preop - HOB 60 deg"
+  ],
+  [
+   "10/27/2026 0725",
+   "118/66",
+   74,
+   26,
+   89,
+   36.4,
+   null,
+   "0/10",
+   "Preop - HOB lowered for drops"
+  ]
+ ],
+ "orders": [
+  [
+   "Dilating drops OS per protocol",
+   "10/27/2026 0700",
+   "Completed"
+  ],
+  [
+   "Saline lock",
+   "10/27/2026 0700",
+   "Completed"
+  ],
+  [
+   "NPO after midnight",
+   "09/24/2026",
+   "Active"
+  ],
+  [
+   "Discharge to Brookside AL when criteria met",
+   "10/27/2026",
+   "Pending"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive (2019)",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: left cataract extraction with IOL",
+   "Signed by patient 10/27/2026 0705, witnessed P. Jarnagin, RN"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Healthcare POA: Donna Pridemore-Hurst (daughter) - activated 03/18/2025 by physician determination of incapacity. POLST 03/2025: DNR, selective treatment, no intubation (see Media).",
+ "anesthesia_history": [
+  [
+   "2008",
+   "R TKA",
+   "Spinal + femoral block",
+   "Postop confusion x 2 days",
+   "Lakeway Regional Medical Center"
+  ],
+  [
+   "1968",
+   "Abdominal hysterectomy",
+   "GA (details unavailable)",
+   "Unknown",
+   "Knoxville General (outside)"
+  ],
+  [
+   "2016",
+   "Excision BCC nose",
+   "Local",
+   "None",
+   "Dermatology office"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0645",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0600 water with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes - by patient 0705"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/24)"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - L eye 0715"
+   ],
+   [
+    "Allergy band",
+    "Yes"
+   ],
+   [
+    "DNR band",
+    "Yes"
+   ],
+   [
+    "Facility MAR/transfer form",
+    "Received, scanned to Media"
+   ]
+  ],
+  "nursing_note": "See 0715 note. Pleasant, oriented to self. Very HOH - communicating with large-print notes. Unable to tolerate HOB below ~45 degrees, SpO2 drops to 89% and becomes anxious. Facility aide at bedside. Daughter not reached yet.",
+  "iv": "22g L hand saline lock 0710",
+  "glucose": "112 mg/dL"
+ },
+ "label": "O. Pridemore",
+ "bmi": "24.4"
+}

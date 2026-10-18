@@ -1633,6 +1633,11 @@ export class SimRunner {
     });
   }
 
+  // Read only: complication state machines currently active in the ScenarioManager.
+  activeComplications() {
+    return this.s?.activeComplicationTypes?.() ?? [];
+  }
+
   injectComplication(type) {
     if (!LIVE_COMPLICATIONS.includes(type)) {
       throw new RangeError(`Unsupported complication: ${type}`);

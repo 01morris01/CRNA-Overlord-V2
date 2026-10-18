@@ -1,0 +1,1495 @@
+{
+ "id": "p05",
+ "room": "OR 6",
+ "time": "1000",
+ "name": "REYNOLDS, COLTON A",
+ "mrn": "0094410",
+ "dob": "08/30/1990",
+ "age": "36 y",
+ "sex": "M",
+ "ht_cm": 180,
+ "wt_kg": 82.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "None (no established PCP)",
+ "insurance": "Self-pay; TennCare presumptive eligibility application submitted 10/26/2026",
+ "emergency_contact": "Darla Reynolds (mother) 423-555-0136",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Intramedullary nail, left tibia",
+  "short": "IM nail left tibia",
+  "laterality": "Left",
+  "service": "Orthopedic Trauma",
+  "surgeon": "A. Lindgren, MD",
+  "assistant": "R. Okafor, MD (ortho resident PGY-4)",
+  "indication": "Closed left tibial shaft fracture (motorcycle crash 10/25/2026).",
+  "duration_min": 120,
+  "anesthesia_requested": "General",
+  "position": "Supine, radiolucent table, bump under left hip, fluoroscopy",
+  "dispo": "Trauma floor (step-down if CIWA high)",
+  "blood": "Type and screen. EBL 200-400 mL.",
+  "equipment": "Radiolucent flat-top table, C-arm, tibial nail set",
+  "implants": "Tibial intramedullary nail with interlocking screws",
+  "surgeon_notes": "Delayed from 10/25 (no OR, then \"medical issues\"). No regional block: \"need to check compartments postop.\"",
+  "add_on": false,
+  "scheduled_on": "10/26/2026"
+ },
+ "problems": [
+  [
+   "Closed fracture of shaft of left tibia",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "Fractures of left ribs 7-9, closed",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "Traumatic pneumothorax, left, small",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "Alcohol use disorder",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "Alcohol withdrawal",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Chronic hepatitis C, untreated",
+   "2022",
+   "Active"
+  ],
+  [
+   "Thrombocytopenia",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Tobacco use disorder",
+   "2008",
+   "Active"
+  ],
+  [
+   "Anxiety disorder",
+   "2016",
+   "Active"
+  ],
+  [
+   "Facial abrasions",
+   "10/25/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Hepatitis C (HCV Ab+ and RNA+ 2022 at health department), untreated; hepatology referral no-show 2022",
+   "Anxiety, no current treatment",
+   "Alcohol use (\"a few beers a day\" per patient; mother reports 12+ beers/day and liquor on weekends)",
+   "R 5th metacarpal fracture 2015 (ORIF elsewhere)",
+   "No regular medications"
+  ],
+  "psh": [
+   [
+    "2015",
+    "ORIF right 5th metacarpal (\"a hand surgery\")",
+    "Greeneville Community Hospital (outside, records requested)"
+   ]
+  ],
+  "family": [
+   "Father: alcohol use disorder, died of cirrhosis age 58",
+   "Mother: HTN",
+   "Family anesthesia history unknown"
+  ],
+  "social": {
+   "tobacco": "1 ppd since age 17",
+   "alcohol": "\"A few beers a day\" (patient); mother: 12-pack daily plus weekend liquor. Last drink day of crash 10/25 ~1500.",
+   "drugs": "Denies (UDS positive amphetamine, cannabinoids)",
+   "occupation": "Roofer (seasonal), currently unemployed",
+   "living": "Lives alone in rented trailer, Bulls Gap; mother nearby",
+   "other": "No health insurance. Motorcycle without valid license per police report."
+  },
+  "immunizations": [
+   [
+    "Tdap",
+    "10/25/2026 (ED)"
+   ],
+   [
+    "Influenza",
+    "Never"
+   ],
+   [
+    "Hepatitis A/B",
+    "Unknown (HBsAb negative 2022)"
+   ]
+  ],
+  "ob": null
+ },
+ "home_meds": [
+  [
+   "None",
+   "Patient takes no regular medications",
+   "",
+   ""
+  ],
+  [
+   "Ibuprofen OTC",
+   "PRN back pain, \"a few at a time\"",
+   "OTC",
+   "10/24/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Hydromorphone 1 mg IV",
+   "q2h PRN severe pain",
+   "Given 10/27 0400, 0600, 0800 (using every 2 h)"
+  ],
+  [
+   "Oxycodone 10 mg PO",
+   "q4h PRN moderate pain",
+   "Given 10/26 0900, 1300, 1800, 2200"
+  ],
+  [
+   "Acetaminophen 1 g PO",
+   "q6h scheduled",
+   "Given 10/27 0600"
+  ],
+  [
+   "Enoxaparin 30 mg SC",
+   "q12h (0600/1800)",
+   "Given 10/27 0600"
+  ],
+  [
+   "Lorazepam 1 mg IV",
+   "PRN per CIWA-Ar protocol (CIWA 8-15: 1 mg; >15: 2 mg)",
+   "Given 10/27 0200, 0730"
+  ],
+  [
+   "Thiamine 100 mg IV",
+   "Daily",
+   "Given 10/27 0800"
+  ],
+  [
+   "Folic acid 1 mg PO, multivitamin",
+   "Daily",
+   "Given 10/27 0800"
+  ],
+  [
+   "Nicotine patch 21 mg",
+   "Daily",
+   "Applied 10/27 0800"
+  ],
+  [
+   "Potassium chloride 20 mEq PO",
+   "x1",
+   "Ordered 10/27 0645, not yet given (pt NPO for OR?)"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "On call to OR",
+   "Due"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "100 mL/h",
+   "Infusing"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Morphine 4 mg IV q3h PRN",
+   "10/25/2026",
+   "Changed to hydromorphone (inadequate relief)"
+  ],
+  [
+   "Ketorolac 15 mg IV",
+   "10/25/2026",
+   "Stopped by trauma pharmacist (thrombocytopenia, fracture healing)"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0500",
+    "comment": "AM labs",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "3.0",
+      "L"
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.89",
+      ""
+     ],
+     "Glu": [
+      "104",
+      "H"
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "148",
+      "H"
+     ],
+     "ALT": [
+      "92",
+      "H"
+     ],
+     "ALKP": [
+      "82",
+      ""
+     ],
+     "TBili": [
+      "1.6",
+      "H"
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "2.9",
+      "L"
+     ],
+     "WBC": [
+      "7.5",
+      ""
+     ],
+     "Hgb": [
+      "11.9",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      "L"
+     ],
+     "Plt": [
+      "98",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ],
+     "PT": [
+      "16.8",
+      "H"
+     ],
+     "INR": [
+      "1.4",
+      "H"
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ],
+     "Mg": [
+      "1.3",
+      "L"
+     ],
+     "Phos": [
+      "1.9",
+      "L"
+     ],
+     "CK": [
+      "3100",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 1700",
+    "comment": "Repleted K 40 mEq PO, Mg 2 g IV",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "3.2",
+      "L"
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.97",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "Mg": [
+      "1.4",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "10/26/2026 0500",
+    "comment": "AM labs",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.3",
+      "L"
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "1.05",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "AST": [
+      "140",
+      "H"
+     ],
+     "ALT": [
+      "90",
+      "H"
+     ],
+     "ALKP": [
+      "75",
+      ""
+     ],
+     "TBili": [
+      "1.3",
+      "H"
+     ],
+     "TProt": [
+      "7.3",
+      ""
+     ],
+     "Alb": [
+      "3.1",
+      "L"
+     ],
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.7",
+      "L"
+     ],
+     "Hct": [
+      "39",
+      "L"
+     ],
+     "Plt": [
+      "110",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ],
+     "PT": [
+      "15.9",
+      "H"
+     ],
+     "INR": [
+      "1.3",
+      "H"
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "Mg": [
+      "1.5",
+      "L"
+     ],
+     "Phos": [
+      "2.3",
+      "L"
+     ],
+     "CK": [
+      "2400",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "10/25/2026 2200",
+    "comment": "Repeat H/H",
+    "vals": {
+     "WBC": [
+      "7.3",
+      ""
+     ],
+     "Hgb": [
+      "13.4",
+      "L"
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "119",
+      "L"
+     ],
+     "MCV": [
+      "100",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/25/2026 1630",
+    "comment": "Trauma activation",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.83",
+      ""
+     ],
+     "Glu": [
+      "118",
+      "H"
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "132",
+      "H"
+     ],
+     "ALT": [
+      "88",
+      "H"
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "1.4",
+      "H"
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "3.4",
+      "L"
+     ],
+     "WBC": [
+      "6.5",
+      ""
+     ],
+     "Hgb": [
+      "14.6",
+      ""
+     ],
+     "Hct": [
+      "45",
+      ""
+     ],
+     "Plt": [
+      "128",
+      "L"
+     ],
+     "MCV": [
+      "101",
+      "H"
+     ],
+     "PT": [
+      "14.6",
+      "H"
+     ],
+     "INR": [
+      "1.2",
+      "H"
+     ],
+     "aPTT": [
+      "29",
+      ""
+     ],
+     "Lactate": [
+      "2.6",
+      "H"
+     ],
+     "CK": [
+      "820",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "11/19/2021 2040",
+    "comment": "ED, chest wall contusion (fight)",
+    "vals": {
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "99",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "0.98",
+      ""
+     ],
+     "Glu": [
+      "89",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "88",
+      "H"
+     ],
+     "ALT": [
+      "81",
+      "H"
+     ],
+     "ALKP": [
+      "73",
+      ""
+     ],
+     "TBili": [
+      "1.4",
+      "H"
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "3.4",
+      "L"
+     ],
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "14.5",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "151",
+      ""
+     ],
+     "MCV": [
+      "99",
+      ""
+     ],
+     "PT": [
+      "13.4",
+      ""
+     ],
+     "INR": [
+      "1.1",
+      ""
+     ],
+     "aPTT": [
+      "31",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/03/2018 0215",
+    "comment": "ED, intoxication; ethanol 286",
+    "vals": {
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "13",
+      ""
+     ],
+     "Cr": [
+      "0.89",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "AST": [
+      "64",
+      "H"
+     ],
+     "ALT": [
+      "58",
+      "H"
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "1.2",
+      ""
+     ],
+     "TProt": [
+      "7.4",
+      ""
+     ],
+     "Alb": [
+      "3.6",
+      ""
+     ],
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "14.4",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "182",
+      ""
+     ],
+     "MCV": [
+      "97",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Phos",
+    "name": "Phosphorus",
+    "unit": "mg/dL",
+    "ref": "2.5-4.5"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "Lactate",
+    "name": "Lactate",
+    "unit": "mmol/L",
+    "ref": "0.5-2.0"
+   },
+   {
+    "group": "Cardiac",
+    "key": "CK",
+    "name": "CK",
+    "unit": "U/L",
+    "ref": "30-200"
+   }
+  ],
+  "other": [
+   [
+    "06/03/2018 0215",
+    "Ethanol, serum",
+    "286 mg/dL",
+    "H"
+   ],
+   [
+    "03/14/2022",
+    "HCV antibody / HCV RNA (Hamblen Co. Health Dept, scanned)",
+    "Reactive / 1,840,000 IU/mL, genotype 1a",
+    "A"
+   ],
+   [
+    "03/14/2022",
+    "HIV Ag/Ab, HBsAg, HBsAb",
+    "Nonreactive, negative, negative (non-immune)",
+    ""
+   ],
+   [
+    "10/25/2026 1630",
+    "Ethanol, serum (on admission)",
+    "212 mg/dL",
+    "H"
+   ],
+   [
+    "10/25/2026 1700",
+    "Urine drug screen",
+    "POSITIVE: amphetamines, cannabinoids. Negative: opiates, cocaine, benzodiazepines (pre-lorazepam), fentanyl",
+    "A"
+   ],
+   [
+    "10/26/2026 1400",
+    "Amphetamine confirmation (LC-MS/MS)",
+    "Methamphetamine detected; amphetamine detected",
+    "A"
+   ],
+   [
+    "10/25/2026 1630",
+    "Type and screen",
+    "A positive, antibody screen negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "2015",
+   "XR Right Hand (outside, scanned)",
+   "Angulated fracture of the 5th metacarpal neck. Post-ORIF plate and screws.",
+   "Outside radiology"
+  ],
+  [
+   "10/25/2026",
+   "CT Head without contrast",
+   "No acute intracranial hemorrhage, mass effect, or fracture. Impression: Negative.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/25/2026",
+   "CT Cervical spine without contrast",
+   "No fracture or malalignment. Impression: Negative.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/25/2026",
+   "CT Chest/Abdomen/Pelvis with contrast",
+   "Nondisplaced fractures left ribs 7-9 laterally. Small left apical/anterior pneumothorax (~10%). Mild LLL contusion/atelectasis. Liver: mildly nodular contour, caudate hypertrophy, suggestive of cirrhosis. Spleen 14.2 cm. No solid organ injury. No free fluid. Impression: Left rib fractures with small pneumothorax; morphologic features of cirrhosis with splenomegaly.",
+   "L. Darby, MD"
+  ],
+  [
+   "10/25/2026",
+   "XR Left Tibia/Fibula 2 views",
+   "Transverse fracture of the mid tibial shaft with 1 cm lateral displacement; segmental fibular fracture. Impression: Closed tib/fib shaft fractures.",
+   "P. Mendez, MD"
+  ],
+  [
+   "10/26/2026",
+   "XR Chest 1 view portable",
+   "Small left pneumothorax, ~10%, unchanged. Left rib fractures. Impression: Stable small left pneumothorax.",
+   "A. Stroud, MD"
+  ],
+  [
+   "10/27/2026",
+   "XR Chest 1 view portable (0500)",
+   "Left pneumothorax slightly larger than 10/25, now approximately 15%. Left lower lobe atelectasis. Rib fractures 7-9. No mediastinal shift. Impression: Slight interval enlargement of left pneumothorax.",
+   "A. Stroud, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "10/25/2026",
+   "ECG 12-lead",
+   "Sinus tachycardia 106. QTc 452. No acute changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 106,
+    "pr": 144,
+    "qrs": 88,
+    "qtc": 452,
+    "axis": 70
+   }
+  ],
+  [
+   "10/27/2026",
+   "ECG 12-lead (0600)",
+   "Sinus tachycardia 118. QTc 498 ms. Prominent U waves. No acute ST changes.",
+   "D. Harrell, MD",
+   {
+    "rate": 118,
+    "pr": 140,
+    "qrs": 88,
+    "qtc": 498,
+    "axis": 70,
+    "u": 1,
+    "tmod": {
+     "V2": 0.55,
+     "V3": 0.55,
+     "V4": 0.55,
+     "V5": 0.6
+    }
+   }
+  ]
+ ],
+ "encounters": [
+  [
+   "2015",
+   "Outpatient surgery (outside)",
+   "Greeneville Community Hospital",
+   "R 5th metacarpal fracture (punched wall)",
+   "ORIF, records requested"
+  ],
+  [
+   "06/03/2018",
+   "ED visit",
+   "C-N University Hospital",
+   "Alcohol intoxication, found in parking lot",
+   "Observed, discharged sober"
+  ],
+  [
+   "11/19/2021",
+   "ED visit",
+   "C-N University Hospital",
+   "Chest wall contusion after altercation",
+   "XR negative, discharged"
+  ],
+  [
+   "03/14/2022",
+   "Public health clinic",
+   "Hamblen County Health Department",
+   "HCV screening",
+   "HCV RNA positive; hepatology referral"
+  ],
+  [
+   "05/02/2022",
+   "Specialty clinic",
+   "C-N Hepatology",
+   "HCV new patient",
+   "No-show"
+  ],
+  [
+   "10/25/2026",
+   "ED -> inpatient (trauma)",
+   "C-N University Hospital",
+   "Motorcycle crash, Level II trauma activation",
+   "Admitted Trauma Surgery"
+  ]
+ ],
+ "notes": [
+  [
+   "06/03/2018 0640",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "R. Lyle, DO",
+   "27 yo M brought by police, found asleep in parking lot. EtOH 286. No trauma. Observed until clinically sober. Declined SBIRT counseling. Discharged with friend."
+  ],
+  [
+   "11/19/2021 2120",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "P. Lancaster, MD",
+   "Punched in chest at bar. Tender L chest. CXR no fracture, no PTX. AST/ALT mildly elevated, plt 151: recommended outpatient hepatitis testing. Ibuprofen. Discharged."
+  ],
+  [
+   "03/14/2022 1100",
+   "Media (Outside Record)",
+   "Public Health",
+   "Hamblen County Health Department (scanned)",
+   "HCV Ab reactive, RNA 1.84 million IU/mL, genotype 1a. HIV negative. HBV non-immune: hepatitis B vaccine offered, declined. Referred to C-N Hepatology for DAA treatment."
+  ],
+  [
+   "05/02/2022 0900",
+   "Letter",
+   "Hepatology",
+   "C-N Hepatology",
+   "Missed new patient appointment. Please call to reschedule. (Two phone attempts, no answer.)"
+  ],
+  [
+   "10/25/2026 1650",
+   "H&P",
+   "Trauma Surgery",
+   "M. Sorensen, MD",
+   "Level II activation. 36 yo M motorcycle vs guardrail at ~45 mph, helmeted, + LOC brief per EMS? Patient denies. Injuries: L tibial shaft fracture. L 7th-9th rib fractures, small L pneumothorax (no chest tube). Facial abrasions. CT head negative. PMH: hepatitis C (untreated). Anxiety. No regular meds. Social: \"a few beers a day.\" 1 ppd. Denies drugs. Exam on admission: BP 148/90, HR 104. GCS 15. L leg splinted, compartments soft. Breath sounds slightly decreased on the L. Airway: MP II. Normal neck. Chipped upper incisor (#8) from crash. A/P: admit trauma. Ortho for IMN (OR today if available). PTX small - serial CXR, no chest tube unless enlarging or PPV. CIWA protocol, thiamine. Pain control. EtOH 212."
+  ],
+  [
+   "10/25/2026 1730",
+   "Consult",
+   "Orthopedic Trauma",
+   "R. Okafor, MD (resident) / A. Lindgren, MD",
+   "Closed L tibial shaft fx, NVI, compartments soft. Long-leg splint. Plan IMN; tonight if OR available, otherwise first available. NPO after midnight. Hourly compartment checks overnight (neurovascular checks q1h x 24 h, then q4h)."
+  ],
+  [
+   "10/25/2026 2310",
+   "Nursing Note",
+   "Trauma/Surgical",
+   "B. Hale, RN",
+   "OR cancelled tonight (no room). Pt diet resumed per trauma resident until NPO time. Neurovascular checks q1h: pedal pulses palpable, toes warm, sensation intact. CIWA 4. Mother at bedside, states he drinks \"a 12-pack every day, more on weekends.\""
+  ],
+  [
+   "10/26/2026 0715",
+   "Progress Note",
+   "Trauma Surgery",
+   "K. Ivers, NP",
+   "HD 1. Pain 8/10. CIWA 6. Case delayed today: anesthesia preop flagged K 3.3, Mg 1.5, plt 110, INR 1.3 - \"replete and recheck, rebook tomorrow.\" Neurovascular checks changed to q4h. Diet: regular, NPO at midnight for OR tomorrow. Enoxaparin 30 q12 for VTE ppx (trauma protocol; plt > 50). Ketorolac dc'd per pharmacy."
+  ],
+  [
+   "10/26/2026 1100",
+   "Social Work",
+   "Trauma Social Work",
+   "D. Pryor, LCSW",
+   "SBIRT screening: AUDIT 29 (likely dependence). Pt ambivalent, agrees to talk to addiction medicine \"maybe later.\" Uninsured; TennCare application submitted. Lives alone. No PCP."
+  ],
+  [
+   "10/26/2026 1500",
+   "Pharmacy Note",
+   "Pharmacy",
+   "J. Ferris, PharmD",
+   "CIWA protocol review. Lorazepam selected given hepatic disease. Recommend phenobarbital adjunct consideration if escalating benzodiazepine needs. Note QTc 452 on admission; K/Mg low - replace, monitor QTc with ondansetron. Opioid needs high: consider ketamine adjunct per acute pain service."
+  ],
+  [
+   "10/26/2026 1800",
+   "Dietitian",
+   "Nutrition",
+   "R. Benoit, RD",
+   "Malnutrition risk: alcohol use, albumin 3.1. Refeeding risk moderate (Phos 2.3, Mg 1.5). Recommend thiamine before dextrose, MVI, folate, phos/K/Mg repletion, protein supplement."
+  ],
+  [
+   "10/26/2026 2100",
+   "Nursing Note",
+   "Trauma/Surgical",
+   "B. Hale, RN",
+   "CIWA 4. Pain 7/10 after hydromorphone. L leg: toes warm, pulses palpable, moderate swelling, splint loosened per ortho resident. Patient pacing in bed, asking to go outside to smoke."
+  ],
+  [
+   "10/27/2026 0310",
+   "Nursing Note",
+   "Trauma/Surgical",
+   "S. Mims, RN",
+   "Pt tremulous, sweating, states \"there are bugs on the wall.\" CIWA 12 at 0200 -> lorazepam 1 mg IV. HR 118, T 37.8. Trauma resident notified. Pt asking for pain med every 2 h. L calf tight, more swollen; pt c/o pain with moving toes. Splint loosened again."
+  ],
+  [
+   "10/27/2026 0630",
+   "Progress Note",
+   "Trauma Surgery",
+   "M. Sorensen, MD",
+   "HD 2. Increasing tremor overnight, diaphoresis. CIWA 14 at 0500 (was 4 at 2100). Visual hallucinations reported by night nurse (\"bugs on the wall\"). Pain poorly controlled. Leg: more swollen, pain with passive toe stretch. \"Ortho aware.\" CXR: PTX slightly larger, ~15%. K 3.0, Mg 1.3, Phos 1.9 - repletion ordered. Plan: OR this AM for IMN per ortho. Continue CIWA."
+  ],
+  [
+   "10/27/2026 0700",
+   "Nursing Note",
+   "Trauma/Surgical",
+   "S. Mims, RN",
+   "Breakfast tray delivered 0715 by dietary (diet order regular in system; NPO order from 10/26 not entered). Pt ate most of tray at 0730."
+  ],
+  [
+   "10/25/2026 2000",
+   "Progress Note",
+   "Trauma Surgery",
+   "K. Ivers, NP",
+   "Tertiary survey pending AM. Facial abrasions cleaned, bacitracin. Tdap given in ED. Chipped #8 noted; dental follow-up outpatient."
+  ],
+  [
+   "10/26/2026 0930",
+   "Consult",
+   "Dental (phone)",
+   "L. Petrie, DDS",
+   "Fractured #8 enamel/dentin, no pulp exposure per photo. Non-urgent; outpatient restoration. No mobility reported."
+  ],
+  [
+   "10/26/2026 1300",
+   "Progress Note",
+   "Trauma Surgery",
+   "M. Sorensen, MD",
+   "Tertiary survey: no new injuries. R wrist mild tenderness, XR negative. Continue plan. Smoking cessation offered: nicotine patch."
+  ],
+  [
+   "10/26/2026 1530",
+   "Case Management",
+   "Case Management",
+   "P. Greer, RN",
+   "Uninsured. TennCare presumptive application submitted. Anticipate home with mother after surgery; may need walker/crutches. Lives in trailer with 4 steps."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/03/2018 0215",
+   "138/86",
+   102,
+   16,
+   97,
+   36.4,
+   null,
+   "0/10",
+   "ED"
+  ],
+  [
+   "11/19/2021 2040",
+   "142/88",
+   96,
+   18,
+   98,
+   36.8,
+   84.0,
+   "5/10",
+   "ED"
+  ],
+  [
+   "10/25/2026 1625",
+   "148/90",
+   104,
+   20,
+   95,
+   36.9,
+   82.0,
+   "9/10",
+   "ED trauma bay"
+  ],
+  [
+   "10/25/2026 2200",
+   "140/84",
+   98,
+   18,
+   95,
+   37.0,
+   null,
+   "7/10",
+   "Trauma floor"
+  ],
+  [
+   "10/26/2026 0800",
+   "144/88",
+   100,
+   18,
+   95,
+   37.1,
+   null,
+   "8/10",
+   "Trauma floor"
+  ],
+  [
+   "10/26/2026 2100",
+   "150/92",
+   104,
+   18,
+   94,
+   37.3,
+   null,
+   "7/10",
+   "Trauma floor"
+  ],
+  [
+   "10/27/2026 0200",
+   "164/98",
+   118,
+   22,
+   93,
+   37.8,
+   null,
+   "9/10",
+   "Trauma floor (2 L NC)"
+  ],
+  [
+   "10/27/2026 0500",
+   "168/100",
+   122,
+   22,
+   93,
+   38.0,
+   null,
+   "9/10",
+   "Trauma floor"
+  ],
+  [
+   "10/27/2026 0900",
+   "172/104",
+   126,
+   24,
+   93,
+   38.2,
+   null,
+   "9/10",
+   "Preop holding, 2 L NC"
+  ]
+ ],
+ "orders": [
+  [
+   "Admit Trauma Surgery",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "CIWA-Ar protocol with lorazepam",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "Neurovascular checks L leg",
+   "10/25/2026",
+   "Active q4h (changed from q1h 10/26)"
+  ],
+  [
+   "Diet: regular",
+   "10/26/2026 0715",
+   "Active"
+  ],
+  [
+   "NPO after midnight for OR",
+   "10/26/2026",
+   "Not entered (verbal per NP note)"
+  ],
+  [
+   "CXR daily",
+   "10/25/2026",
+   "Active"
+  ],
+  [
+   "Potassium chloride, magnesium sulfate, sodium phosphate replacement",
+   "10/27/2026 0645",
+   "Pending"
+  ],
+  [
+   "Type and screen",
+   "10/25/2026",
+   "Resulted"
+  ],
+  [
+   "Compartment pressure measurement",
+   "",
+   "Not ordered"
+  ],
+  [
+   "Chest tube",
+   "",
+   "Not ordered"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/28/2026 1630"
+ },
+ "consents": [
+  [
+   "Surgical consent: IM nail left tibia",
+   "Signed by patient 10/25/2026 1800 (on admission; EtOH 212 at the time)"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/25/2026"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "2015",
+   "ORIF right 5th metacarpal",
+   "Unknown (\"went to sleep\")",
+   "Patient reports \"no problems\"; records requested",
+   "Greeneville Community Hospital (outside)"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0850 (from trauma floor)",
+  "npo_solids": "10/27/2026 0730 (breakfast tray)",
+  "npo_clears": "10/27/2026 0730",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Yes (10/25)"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Site marked",
+    "Yes, left leg"
+   ],
+   [
+    "Allergy band",
+    "N/A"
+   ],
+   [
+    "NPO",
+    "No - ate 0730"
+   ],
+   [
+    "Type and screen",
+    "Resulted"
+   ],
+   [
+    "Dental",
+    "Chipped upper incisor"
+   ]
+  ],
+  "nursing_note": "BP 172/104, HR 126, RR 24, SpO2 93% on 2 L, T 38.2. Pain 9/10. Ate breakfast tray at 0730 (\"he was hungry, nobody said NPO\"). Tremulous, diaphoretic, picking at sheets. Oriented to person and place. L calf tense, firm, pain with passive stretch of toes. Consent signed 10/25 on admission. IV 18 G right forearm. Last lorazepam 0730, last hydromorphone 0800, enoxaparin 0600.",
+  "iv": "18 G right forearm",
+  "glucose": ""
+ },
+ "label": "C. Reynolds",
+ "bmi": "25.3"
+}

@@ -1,0 +1,212 @@
+{
+ "id": "p02",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Third cesarean with preeclampsia with severe features, platelets falling to 88, enoxaparin 9.5 h before neuraxial, suspected accreta, a known difficult airway, and latex allergy in a room set with standard supplies.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Preeclampsia with severe features and evolving HELLP picture, suspected placenta accreta spectrum, prior difficult airway, obesity; some would assign 4."
+ },
+ "decision": {
+  "recommendation": "delay to stabilize, then deliver with an accreta capable team",
+  "rationale": "Delivery is indicated, but first: treat severe range BP, start magnesium, get the repeat CBC, wait out the enoxaparin window or plan GA with a difficult airway setup, and assemble blood and the accreta team. Proceeding at 0730 with a spinal is unsafe."
+ },
+ "redFlags": [
+  {
+   "id": "preeclampsia",
+   "severity": "critical",
+   "finding": "Preeclampsia with severe features, possible HELLP",
+   "evidence": "BP 162/106 and 158/108, headache unrelieved by acetaminophen, visual spots, RUQ pain, 3+ reflexes; Plt 88 (171 one week ago), AST 96, ALT 110, LDH 312, UPCR 0.6.",
+   "implication": "Seizure, stroke, and coagulopathy risk; platelets may keep falling.",
+   "action": "Notify OB and MFM, magnesium sulfate, acute antihypertensive (IV labetalol or hydralazine), repeat CBC before neuraxial.",
+   "keywords": [
+    "preeclampsia",
+    "hellp",
+    "magnesium",
+    "severe features",
+    "eclampsia",
+    "labetalol",
+    "hydralazine"
+   ]
+  },
+  {
+   "id": "enoxaparin",
+   "severity": "critical",
+   "finding": "Prophylactic enoxaparin 9.5 h before planned neuraxial",
+   "evidence": "Enoxaparin 40 mg 10/26 2200 per patient and PAT note; case 0730.",
+   "implication": "ASRA timing for prophylactic LMWH is 12 h before neuraxial puncture (earliest about 1000).",
+   "action": "Delay neuraxial until at least 12 h and a reassuring platelet count, or plan GA.",
+   "keywords": [
+    "enoxaparin",
+    "lovenox",
+    "lmwh",
+    "12 h",
+    "12 hours",
+    "anticoagul"
+   ]
+  },
+  {
+   "id": "platelets",
+   "severity": "critical",
+   "finding": "Thrombocytopenia, falling fast",
+   "evidence": "Plt 186 (10/13), 171 (10/19), 88 (10/26); repeat CBC in process.",
+   "implication": "Neuraxial hematoma risk; trend matters more than one number.",
+   "action": "Await repeat CBC before any neuraxial decision.",
+   "keywords": [
+    "platelet",
+    "thrombocytopenia",
+    "plt",
+    "88"
+   ]
+  },
+  {
+   "id": "accreta",
+   "severity": "critical",
+   "finding": "Suspected placenta accreta spectrum without completed workup",
+   "evidence": "MFM US 10/19: loss of clear zone, lacunae, subplacental vascularity; MRI pending prior auth; MFM recommends accreta capable team, two large bore IVs, crossmatch.",
+   "implication": "Massive hemorrhage and possible cesarean hysterectomy.",
+   "action": "Two large bore IVs, arterial line, crossmatched blood and MTP readiness, cell saver, accreta team and GYN onc availability; only T&S and one 18 G now.",
+   "keywords": [
+    "accreta",
+    "hemorrhage",
+    "crossmatch",
+    "large bore",
+    "massive transfusion",
+    "mtp",
+    "arterial line",
+    "cell saver"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "critical",
+   "finding": "Known difficult airway, now worse",
+   "evidence": "2019 GA: grade III, failed first attempt, bougie, SpO2 89%; now Mallampati III (was II), BMI 38, neck 41 cm, preeclampsia edema.",
+   "implication": "GA may be needed if neuraxial is not possible or hemorrhage occurs.",
+   "action": "Difficult airway cart, video laryngoscope, smaller ETT, awake technique available, aspiration prophylaxis.",
+   "keywords": [
+    "difficult airway",
+    "video laryngoscope",
+    "glidescope",
+    "bougie",
+    "mallampati"
+   ]
+  },
+  {
+   "id": "latex",
+   "severity": "major",
+   "finding": "Latex allergy not actioned",
+   "evidence": "Hives worse with each exposure, banana and kiwi cross reactivity; allergy band not applied, room set with standard supplies.",
+   "implication": "Anaphylaxis risk.",
+   "action": "Latex free room and supplies, allergy band.",
+   "keywords": [
+    "latex"
+   ]
+  },
+  {
+   "id": "uterotonics",
+   "severity": "major",
+   "finding": "Uterotonic options are limited",
+   "evidence": "Preeclampsia (avoid methylergonovine) and asthma (carboprost relatively contraindicated).",
+   "implication": "Atony management relies on oxytocin, TXA, misoprostol.",
+   "action": "Plan oxytocin first, TXA available, avoid methergine and use carboprost cautiously.",
+   "keywords": [
+    "methergine",
+    "methylergonovine",
+    "carboprost",
+    "hemabate",
+    "oxytocin",
+    "txa",
+    "tranexamic"
+   ]
+  },
+  {
+   "id": "rh",
+   "severity": "minor",
+   "finding": "Rh negative",
+   "evidence": "A negative; RhIG at 28 weeks.",
+   "implication": "Postpartum Rh workup.",
+   "action": "RhIG postpartum if infant Rh positive.",
+   "keywords": [
+    "rh",
+    "rhogam",
+    "rhig"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "regional",
+   "item": "Neuraxial preferred once enoxaparin and platelet criteria are met; otherwise GA",
+   "keywords": [
+    "spinal",
+    "cse",
+    "epidural",
+    "neuraxial"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, two large bore IVs",
+   "keywords": [
+    "arterial line",
+    "a-line",
+    "large bore"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Difficult airway plan with VL and backup devices",
+   "keywords": [
+    "video",
+    "difficult airway"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Magnesium; note it potentiates neuromuscular blockade",
+   "keywords": [
+    "magnesium"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g (3 g if 120 kg or more) within 60 min of incision",
+   "keywords": [
+    "cefazolin",
+    "ancef"
+   ]
+  },
+  {
+   "domain": "fluids",
+   "item": "Blood available, cell saver, TXA",
+   "keywords": [
+    "blood",
+    "txa",
+    "cell saver"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Postop magnesium monitoring; resume enoxaparin per ASRA timing after catheter removal",
+   "keywords": [
+    "postpartum",
+    "enoxaparin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Latex allergy"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Asthma"
+  },
+  {
+   "type": "HighSpinal",
+   "why": "Neuraxial in a parturient"
+  }
+ ]
+}

@@ -1,0 +1,1262 @@
+{
+ "id": "p14",
+ "room": "L&D Room 7",
+ "time": "0330",
+ "name": "ESPINOZA, MARIA L",
+ "mrn": "0129943",
+ "dob": "04/30/1992",
+ "age": "34 y",
+ "sex": "F",
+ "ht_cm": 160,
+ "wt_kg": 98.0,
+ "preferred_name": "",
+ "language": "English (Spanish at home)",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "C-N Community OB/GYN (L. Haverford, MD)",
+ "insurance": "TennCare (UnitedHealthcare Community Plan)",
+ "emergency_contact": "Hector Espinoza (husband) 423-555-0157",
+ "isolation": "",
+ "allergies": [
+  [
+   "Carboprost tromethamine (Hemabate)",
+   "Bronchospasm, SpO2 88% (2022)",
+   "Severe",
+   "2022"
+  ]
+ ],
+ "case": {
+  "procedure": "Labor epidural analgesia",
+  "short": "Labor epidural analgesia",
+  "laterality": "N/A",
+  "service": "Obstetric Anesthesia",
+  "surgeon": "L. Haverford, MD (attending OB)",
+  "assistant": "",
+  "indication": "Spontaneous active labor at 39w0d, cervix 5 cm at 0310; patient requests epidural.",
+  "duration_min": 30,
+  "anesthesia_requested": "Neuraxial labor analgesia",
+  "position": "Sitting",
+  "dispo": "Remain in L&D",
+  "blood": "Type and screen sent on admission 0250.",
+  "equipment": "Epidural tray; ultrasound available on unit",
+  "implants": "",
+  "surgeon_notes": "\"History of PPH. Please be available. Hemorrhage cart to room.\"",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Pregnancy at 39 weeks, active labor",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Grand multiparity",
+   "2024",
+   "Active"
+  ],
+  [
+   "History of postpartum hemorrhage (atony, 2022)",
+   "2022",
+   "Active"
+  ],
+  [
+   "Polyhydramnios",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Fetal macrosomia, suspected (EFW 4,250 g)",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Asthma, mild persistent",
+   "2005",
+   "Active"
+  ],
+  [
+   "Obesity, BMI 38",
+   "2016",
+   "Active"
+  ],
+  [
+   "S/p L4-S1 posterior lumbar fusion",
+   "2018",
+   "Active"
+  ],
+  [
+   "Anemia of pregnancy",
+   "10/2026",
+   "Active"
+  ],
+  [
+   "Rh negative",
+   "2011",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Asthma, mild persistent; fluticasone-salmeterol; albuterol rarely",
+   "Obesity",
+   "L5-S1 isthmic spondylolisthesis (grade 2) with L4-5 stenosis after lifting injury 2017; L4-S1 posterior instrumented fusion 2018 (outside hospital). Residual mild numbness lateral right foot (L5) since surgery.",
+   "PPH 2022 (atony, 1,600 mL), 2 units PRBC; carboprost -> bronchospasm",
+   "Rh negative"
+  ],
+  "psh": [
+   [
+    "03/2018",
+    "L4-L5 laminectomy and L4-S1 posterior instrumented fusion (pedicle screws L4, L5, S1)",
+    "Ridgeview Orthopaedic & Spine Hospital, Knoxville (outside)"
+   ]
+  ],
+  "family": [
+   "Mother: T2DM, HTN",
+   "Sister: PPH after twins",
+   "No anesthesia complications"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "Homemaker; former poultry plant line worker (injury 2017)",
+   "living": "Husband and four children (15, 10, 4, 2), Morristown",
+   "other": "Bilingual; prefers English for medical discussion. Husband at bedside; mother caring for children."
+  },
+  "immunizations": [
+   [
+    "Tdap",
+    "08/2026"
+   ],
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "RSV vaccine (Abrysvo) 32-36 wk",
+    "09/2026"
+   ],
+   [
+    "Rh immune globulin 300 mcg",
+    "07/2026 (28 wk)"
+   ],
+   [
+    "Rubella",
+    "Immune"
+   ]
+  ],
+  "ob": "G5 P4004 (4 term vaginal deliveries). EDD 11/03/2026 by 9-week US; 39w0d on 10/27/2026. 2011: SVD, labor epidural, uneventful. 2016: SVD, labor epidural, uneventful. 2022 (third delivery): SVD at C-N; epidural after spine fusion - 4 attempts, placed L2-3, patchy one-sided block, replaced once; postpartum hemorrhage 1,600 mL from uterine atony (oxytocin, methylergonovine, carboprost -> bronchospasm), 2 units PRBC. 2024: precipitous SVD (2 h labor), IV fentanyl only, EBL 450 mL. Current pregnancy: prenatal care from 9 weeks. Low-dose aspirin 12-36 weeks (preeclampsia risk: obesity, mother HTN). 1-h GCT 142, 3-h GTT 1 abnormal value (not GDM). Rh negative, RhIG at 28 weeks. Antibody screen negative at 10 and 28 weeks. US 38 weeks: EFW 4,250 g, AFI 26 cm. Anesthesia clinic 28 weeks. Spontaneous labor 10/27 ~0000."
+ },
+ "home_meds": [
+  [
+   "Fluticasone-salmeterol 250/50 inhaler",
+   "1 puff BID",
+   "L. Haverford, MD",
+   "10/26/2026 2000"
+  ],
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs q4h PRN",
+   "L. Haverford, MD",
+   "10/09/2026"
+  ],
+  [
+   "Prenatal vitamin",
+   "Daily",
+   "L. Haverford, MD",
+   "10/26/2026"
+  ],
+  [
+   "Aspirin 81 mg",
+   "Daily",
+   "L. Haverford, MD",
+   "Stopped at 36 weeks (10/06/2026)"
+  ],
+  [
+   "Ferrous sulfate 325 mg",
+   "Daily",
+   "L. Haverford, MD",
+   "10/25/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Lactated Ringer's 1,000 mL",
+   "125 mL/h",
+   "Infusing since 0300"
+  ],
+  [
+   "Oxytocin 30 units/500 mL",
+   "Postpartum per protocol",
+   "Ordered - not started"
+  ],
+  [
+   "Methylergonovine 0.2 mg IM",
+   "PRN hemorrhage (if BP < 140/90)",
+   "Drawn up in hemorrhage cart"
+  ],
+  [
+   "Carboprost 250 mcg IM",
+   "PRN hemorrhage (hemorrhage order set default)",
+   "In hemorrhage cart - ALLERGY ALERT overridden by pharmacy tech stocking"
+  ],
+  [
+   "Misoprostol 800 mcg PR/SL",
+   "PRN hemorrhage",
+   "Available"
+  ],
+  [
+   "Tranexamic acid 1 g IV",
+   "PRN PPH",
+   "Available"
+  ],
+  [
+   "Fentanyl 50-100 mcg IV",
+   "q1h PRN labor pain",
+   "Not given"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Aspirin 81 mg",
+   "07/2026-10/06/2026",
+   "Stopped at 36 weeks per protocol"
+  ],
+  [
+   "Montelukast 10 mg",
+   "2015-2020",
+   "Changed to inhaled steroid/LABA"
+  ],
+  [
+   "Gabapentin 300 mg TID",
+   "2017-2018",
+   "Radicular pain resolved after fusion"
+  ],
+  [
+   "Oxycodone-acetaminophen 5/325",
+   "03/2018-04/2018",
+   "Postop course completed"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0255",
+    "comment": "L&D admission",
+    "vals": {
+     "WBC": [
+      "12.6",
+      ""
+     ],
+     "Hgb": [
+      "10.4",
+      "L"
+     ],
+     "Hct": [
+      "31",
+      "L"
+     ],
+     "Plt": [
+      "186",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ],
+     "Fib": [
+      "480",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/06/2026 1000",
+    "comment": "36 weeks",
+    "vals": {
+     "WBC": [
+      "11.1",
+      ""
+     ],
+     "Hgb": [
+      "10.6",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      ""
+     ],
+     "Plt": [
+      "192",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/20/2026 0900",
+    "comment": "28 weeks",
+    "vals": {
+     "WBC": [
+      "10.4",
+      ""
+     ],
+     "Hgb": [
+      "10.9",
+      "L"
+     ],
+     "Hct": [
+      "33",
+      ""
+     ],
+     "Plt": [
+      "201",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "03/16/2026 0930",
+    "comment": "Prenatal intake, 9 weeks",
+    "vals": {
+     "WBC": [
+      "8.8",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "223",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "TSH": [
+      "1.26",
+      ""
+     ],
+     "FT4": [
+      "1.12",
+      ""
+     ],
+     "USG": [
+      "1.014",
+      ""
+     ],
+     "UProt": [
+      "Negative",
+      ""
+     ],
+     "UGlu": [
+      "Negative",
+      ""
+     ],
+     "UKet": [
+      "Negative",
+      ""
+     ],
+     "ULeuk": [
+      "Negative",
+      ""
+     ],
+     "UNit": [
+      "Negative",
+      ""
+     ],
+     "A1c": [
+      "5.6",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "09/18/2024 0500",
+    "comment": "L&D 2024",
+    "vals": {
+     "WBC": [
+      "9.9",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      ""
+     ],
+     "Hct": [
+      "35",
+      ""
+     ],
+     "Plt": [
+      "224",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/15/2022 0600",
+    "comment": "Post-transfusion",
+    "vals": {
+     "WBC": [
+      "9.3",
+      ""
+     ],
+     "Hgb": [
+      "8.6",
+      "L"
+     ],
+     "Hct": [
+      "27",
+      "L"
+     ],
+     "Plt": [
+      "156",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2022 1310",
+    "comment": "PPH",
+    "vals": {
+     "WBC": [
+      "10.2",
+      ""
+     ],
+     "Hgb": [
+      "7.1",
+      "L"
+     ],
+     "Hct": [
+      "21",
+      "L"
+     ],
+     "Plt": [
+      "142",
+      "L"
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "PT": [
+      "14.6",
+      "H"
+     ],
+     "INR": [
+      "1.2",
+      "H"
+     ],
+     "aPTT": [
+      "30",
+      ""
+     ],
+     "Fib": [
+      "210",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "06/14/2022 0430",
+    "comment": "L&D admission 2022",
+    "vals": {
+     "WBC": [
+      "9.6",
+      ""
+     ],
+     "Hgb": [
+      "11.2",
+      ""
+     ],
+     "Hct": [
+      "34",
+      ""
+     ],
+     "Plt": [
+      "198",
+      ""
+     ],
+     "MCV": [
+      "88",
+      ""
+     ],
+     "PT": [
+      "12.0",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "26",
+      ""
+     ],
+     "Fib": [
+      "450",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "02/20/2018 0800",
+    "comment": "Preop spine fusion (outside, scanned)",
+    "vals": {
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "203",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "28",
+      ""
+     ],
+     "BUN": [
+      "18",
+      ""
+     ],
+     "Cr": [
+      "0.80",
+      ""
+     ],
+     "Glu": [
+      "87",
+      ""
+     ],
+     "Ca": [
+      "9.3",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "6.0-16.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "11.0-15.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "33-45"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "300-600"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "USG",
+    "name": "Urine specific gravity",
+    "unit": "",
+    "ref": "1.005-1.030"
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UProt",
+    "name": "Urine protein",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UGlu",
+    "name": "Urine glucose",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UKet",
+    "name": "Urine ketones",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "ULeuk",
+    "name": "Urine leukocyte esterase",
+    "unit": "",
+    "ref": ""
+   },
+   {
+    "group": "Urinalysis",
+    "key": "UNit",
+    "name": "Urine nitrite",
+    "unit": "",
+    "ref": ""
+   }
+  ],
+  "other": [
+   [
+    "03/16/2026",
+    "Prenatal panel",
+    "O negative; antibody screen negative; rubella immune; HBsAg, HIV, RPR, HCV negative",
+    ""
+   ],
+   [
+    "06/08/2026",
+    "Glucose challenge 1 h / 3-h GTT",
+    "142 mg/dL / fasting 88, 1 h 186 (H), 2 h 148, 3 h 120 - one abnormal value, not GDM",
+    ""
+   ],
+   [
+    "07/20/2026",
+    "Antibody screen (pre-RhIG, 28 wk)",
+    "Negative",
+    ""
+   ],
+   [
+    "09/02/2026",
+    "Group B strep culture",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026 0255",
+    "Type and screen",
+    "O negative; antibody screen POSITIVE",
+    "A"
+   ],
+   [
+    "10/27/2026 0330",
+    "Antibody identification",
+    "Anti-D (weak, consistent with RhIG given 07/2026) and anti-K (Kell) identified; titer pending",
+    "A"
+   ],
+   [
+    "10/27/2026 0340",
+    "Crossmatch",
+    "Pending antigen-negative (K-negative, D-negative) units. Blood bank: \"may take 2 to 4 hours.\"",
+    "A"
+   ],
+   [
+    "06/14/2022",
+    "Transfusion record",
+    "2 units PRBC (O neg), 06/14/2022, no reaction",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "11/2017",
+   "MRI Lumbar spine without contrast (outside, scanned)",
+   "Bilateral L5 pars defects with grade 2 anterolisthesis of L5 on S1. Moderate to severe L4-5 central canal stenosis from disc bulge and facet hypertrophy. Right L5 foraminal stenosis.",
+   "Ridgeview Orthopaedic & Spine Hospital radiology"
+  ],
+  [
+   "04/2019",
+   "XR Lumbar spine AP/lateral/flexion-extension (outside, scanned)",
+   "Postoperative changes: bilateral pedicle screws L4, L5, S1 with connecting rods. Laminectomy defect at L4-L5. Solid-appearing posterolateral fusion mass L4-S1. No hardware loosening. No motion on flexion-extension. Upper lumbar levels L1-L3 with normal disc heights.",
+   "Ridgeview Orthopaedic & Spine Hospital radiology"
+  ],
+  [
+   "06/16/2026",
+   "US OB detailed anatomy (20 weeks)",
+   "Single fetus, normal anatomy. Placenta fundal-posterior, no previa. AFI normal.",
+   "R. Kaminski, MD"
+  ],
+  [
+   "10/20/2026",
+   "US OB growth (38 weeks)",
+   "Single vertex fetus. Estimated fetal weight 4,250 g (>90th percentile). Amniotic fluid index 26 cm (polyhydramnios). Placenta fundal-posterior. No previa.",
+   "R. Kaminski, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "2011",
+   "Inpatient (L&D)",
+   "Morristown-Hamblen",
+   "SVD",
+   "Uneventful"
+  ],
+  [
+   "2016",
+   "Inpatient (L&D)",
+   "Morristown-Hamblen",
+   "SVD",
+   "Uneventful"
+  ],
+  [
+   "03/12/2018",
+   "Inpatient (outside)",
+   "Ridgeview Orthopaedic & Spine Hospital",
+   "L4-S1 fusion",
+   "Discharged POD 4"
+  ],
+  [
+   "06/14/2022",
+   "Inpatient (L&D)",
+   "C-N University Hospital",
+   "SVD with PPH",
+   "2 units PRBC; discharged day 3"
+  ],
+  [
+   "09/18/2024",
+   "Inpatient (L&D)",
+   "C-N University Hospital",
+   "Precipitous SVD",
+   "Discharged day 2"
+  ],
+  [
+   "03/16/2026",
+   "Prenatal intake",
+   "C-N Community OB/GYN",
+   "New OB, 9 weeks",
+   "High-risk features"
+  ],
+  [
+   "08/18/2026",
+   "Specialty clinic",
+   "C-N Obstetric Anesthesia Clinic",
+   "Prenatal anesthesia consult (28 wk)",
+   "Plan documented"
+  ],
+  [
+   "10/20/2026",
+   "Prenatal visit",
+   "C-N Community OB/GYN",
+   "38 weeks",
+   "Polyhydramnios, EFW 4,250"
+  ],
+  [
+   "10/27/2026",
+   "Inpatient (L&D)",
+   "C-N University Hospital",
+   "Active labor",
+   "Admitted 0250"
+  ]
+ ],
+ "notes": [
+  [
+   "03/12/2018 1400",
+   "Media (Outside Record)",
+   "Orthopaedic Spine Surgery",
+   "Ridgeview Orthopaedic & Spine Hospital (scanned 09/2026)",
+   "Operative report. Procedure: L4-L5 laminectomy with bilateral foraminotomies; posterior spinal instrumentation L4-S1 (pedicle screws bilateral L4, L5, S1; titanium rods); posterolateral arthrodesis L4-S1 with local autograft and allograft. Findings: grade 2 L5-S1 isthmic spondylolisthesis, severe L4-5 stenosis. Complications: small incidental durotomy at L5, repaired primarily with suture and fibrin sealant; no postoperative CSF leak. Anesthesia: GA, ETT, uneventful. EBL 450 mL. Skin incision midline L3 to S1."
+  ],
+  [
+   "04/2019",
+   "Letter",
+   "Orthopaedic Spine Surgery",
+   "Ridgeview Orthopaedic & Spine Hospital (scanned)",
+   "One-year follow-up: solid fusion, back pain improved, residual mild numbness lateral R foot. Released to activity as tolerated."
+  ],
+  [
+   "06/14/2022 0715",
+   "Procedure Note",
+   "Obstetric Anesthesia",
+   "C. Rowan, CRNA",
+   "Labor epidural. History of lumbar fusion (no imaging available). Midline scar L3-S1. Attempts at L3-4 x 3 (bone contact, no LOR); placed at L2-3 on 4th attempt, LOR 6 cm. Asymmetric block, left > right, T10. Catheter withdrawn 1 cm and bolused: unchanged. Replaced at L2-3 by attending (J. Moreno, MD) at 0905: improved but patchy right sacral sparing. Recommend early placement by attending with ultrasound in future pregnancies."
+  ],
+  [
+   "06/16/2022 1000",
+   "Discharge Summary",
+   "Obstetrics",
+   "L. Haverford, MD",
+   "SVD 06/14/2022, 3,980 g male. Uterine atony, EBL 1,600 mL. Oxytocin, methylergonovine 0.2 mg x1, carboprost 250 mcg x1 -> wheezing and SpO2 88%, albuterol nebs, resolved. Bakri not needed. 2 units PRBC. Hgb nadir 7.1. Allergy list updated: carboprost. RhIG given (infant Rh+)."
+  ],
+  [
+   "09/18/2024 1100",
+   "Progress Note",
+   "Obstetrics",
+   "K. Fennell, CNM",
+   "Precipitous SVD after 2 h labor; declined epidural (\"last one didn't work well because of my back\"). Fentanyl 100 mcg IV. Active management third stage, oxytocin. EBL 450. Uncomplicated."
+  ],
+  [
+   "03/16/2026 1000",
+   "H&P",
+   "Obstetrics",
+   "L. Haverford, MD",
+   "New OB 9 weeks. G5 P4004. Prior PPH 2022 (carboprost bronchospasm). Asthma well controlled. BMI 36 pre-pregnancy. Lumbar fusion 2018. Plan: aspirin 81 from 12 weeks; anesthesia consult in 3rd trimester; delivery at C-N with hemorrhage precautions."
+  ],
+  [
+   "08/18/2026 1430",
+   "Consult",
+   "Obstetric Anesthesia Clinic",
+   "J. Moreno, MD",
+   "28 weeks. Mallampati II, TMD > 6 cm, good mouth opening, BMI 37. Asthma controlled. Noted: hemorrhage in 2022 treated with carboprost, followed by wheezing and SpO2 88% requiring albuterol - avoid carboprost. Spine: well-healed midline scar L3-S1; spinous processes palpable above L3 only. Prior L4-S1 fusion with L4-5 laminectomy; 2022 epidural difficult and patchy. Plan: request outside op note and imaging; early epidural in labor by attending, ultrasound-guided level identification, enter at L2-3 or above (above the fusion and laminectomy), consider CSE or dural puncture epidural to confirm midline placement; warn re: patchy/unilateral block and higher dural puncture risk; document baseline neuro exam (R L5 numbness). Counseled on early epidural."
+  ],
+  [
+   "09/03/2026 0900",
+   "Telephone Encounter",
+   "Health Information Management",
+   "R. Ochs, HIM",
+   "Outside records received from Ridgeview Orthopaedic & Spine Hospital (op note 03/2018, imaging reports 2017-2019). Scanned to Media. Routed to J. Moreno, MD."
+  ],
+  [
+   "10/20/2026 1000",
+   "Progress Note",
+   "Obstetrics",
+   "L. Haverford, MD",
+   "38 weeks. BP 124/78. Fundal height 41 cm. US: EFW 4,250 g, AFI 26 cm. Discussed macrosomia, shoulder dystocia risk, PPH risk (grand multip, polyhydramnios, prior atony). Patient prefers spontaneous labor; IOL offered at 39 weeks, declined. Hemorrhage risk: HIGH (per AWHONN). Deliver at C-N with T&C on admission."
+  ],
+  [
+   "10/27/2026 0300",
+   "H&P",
+   "Obstetrics",
+   "L. Haverford, MD",
+   "Obstetric history: G5 P4004. Four vaginal deliveries. Third delivery (2022): postpartum hemorrhage, 1,600 mL, uterine atony. Placenta: fundal, posterior. No previa. PMH: asthma, mild persistent. Obesity. Exam: Ht 160 cm, Wt 98 kg (BMI 38). BP 128/82, HR 96. Fundal height 39 cm. FHR 140, moderate variability, Category I. Cervix 5/90/-1, membranes intact. Airway: Mallampati III (II at 28-week anesthesia clinic visit). Short neck. Lumbar spine: palpable spinous processes, no prior back surgery. A/P: admit active labor. T&S. Hemorrhage risk high: 2 IVs, hemorrhage cart. Anesthesia for epidural."
+  ],
+  [
+   "10/27/2026 0340",
+   "Nursing Note",
+   "Blood Bank",
+   "T. Varner, MLS",
+   "Call to L&D charge RN: antibody screen positive. Anti-D (likely from RhIG) and anti-K identified. Antigen-negative units must be located/crossmatched; may take 2 to 4 hours. Will notify when available. Read-back done."
+  ],
+  [
+   "04/14/2026 1000",
+   "Progress Note",
+   "Obstetrics",
+   "K. Fennell, CNM",
+   "13 weeks. NT/cfDNA low risk. BP 116/70. Start aspirin 81. Asthma controlled."
+  ],
+  [
+   "07/20/2026 1000",
+   "Progress Note",
+   "Obstetrics",
+   "K. Fennell, CNM",
+   "28 weeks. Antibody screen negative, RhIG given. Hgb 10.9: ferrous sulfate. Anesthesia clinic referral placed."
+  ],
+  [
+   "09/14/2026 1000",
+   "Dietitian",
+   "Nutrition",
+   "R. Benoit, RD",
+   "One abnormal GTT value. Diet counseling, carb distribution. Weight gain 8 kg so far."
+  ]
+ ],
+ "vitals": [
+  [
+   "06/14/2022 0430",
+   "126/80",
+   92,
+   18,
+   98,
+   36.8,
+   94.0,
+   "8/10",
+   "L&D"
+  ],
+  [
+   "06/14/2022 1320",
+   "92/50",
+   128,
+   24,
+   88,
+   36.6,
+   null,
+   "",
+   "L&D (PPH)"
+  ],
+  [
+   "09/18/2024 0500",
+   "122/76",
+   90,
+   18,
+   99,
+   36.8,
+   92.0,
+   "9/10",
+   "L&D"
+  ],
+  [
+   "03/16/2026 1000",
+   "118/72",
+   84,
+   16,
+   99,
+   36.7,
+   92.5,
+   "0/10",
+   "OB clinic"
+  ],
+  [
+   "08/18/2026 1430",
+   "120/74",
+   90,
+   16,
+   99,
+   36.8,
+   96.0,
+   "0/10",
+   "Anesthesia clinic"
+  ],
+  [
+   "10/20/2026 1000",
+   "124/78",
+   94,
+   16,
+   98,
+   36.8,
+   98.0,
+   "0/10",
+   "OB clinic"
+  ],
+  [
+   "10/27/2026 0250",
+   "128/82",
+   96,
+   18,
+   98,
+   36.9,
+   98.0,
+   "8/10",
+   "L&D triage"
+  ],
+  [
+   "10/27/2026 0330",
+   "130/84",
+   98,
+   20,
+   98,
+   37.0,
+   null,
+   "9/10",
+   "L&D Room 7"
+  ]
+ ],
+ "orders": [
+  [
+   "Admit to L&D",
+   "10/27/2026 0250",
+   "Active"
+  ],
+  [
+   "Type and crossmatch 2 units",
+   "10/27/2026 0250",
+   "Pending antigen-negative units"
+  ],
+  [
+   "Second large-bore IV",
+   "10/27/2026 0300",
+   "Not yet placed"
+  ],
+  [
+   "Hemorrhage cart to room",
+   "10/27/2026 0300",
+   "Done"
+  ],
+  [
+   "Postpartum hemorrhage order set",
+   "10/27/2026 0300",
+   "Active (carboprost included by default)"
+  ],
+  [
+   "Anesthesia consult: labor epidural",
+   "10/27/2026 0320",
+   "Active"
+  ],
+  [
+   "Continuous EFM",
+   "10/27/2026 0250",
+   "Active"
+  ],
+  [
+   "Diet: clear liquids/ice chips",
+   "10/27/2026 0250",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O negative",
+  "antibody_screen": "POSITIVE: anti-D (passive, RhIG 07/2026) and anti-K",
+  "units": "None available; antigen-negative units being sourced (2 to 4 h)",
+  "notes": "Prior transfusion 06/2022 (2 units). Kell sensitization likely from transfusion.",
+  "specimen_expires": "10/30/2026 0255"
+ },
+ "consents": [
+  [
+   "Anesthesia consent (labor epidural)",
+   "Pending"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/27/2026 0305"
+  ],
+  [
+   "Vaginal delivery consent",
+   "Signed 10/27/2026 0300"
+  ]
+ ],
+ "directives": "None on file.",
+ "anesthesia_history": [
+  [
+   "2011, 2016",
+   "Labor epidurals",
+   "Lumbar epidural",
+   "Effective, uneventful",
+   "Morristown-Hamblen"
+  ],
+  [
+   "03/2018",
+   "L4-S1 posterior lumbar fusion",
+   "GA, ETT",
+   "Uneventful (incidental durotomy repaired surgically)",
+   "Ridgeview Orthopaedic & Spine Hospital"
+  ],
+  [
+   "06/2022",
+   "Labor epidural",
+   "Epidural L2-3 after 4 attempts; replaced once",
+   "Patchy, asymmetric block",
+   "C-N University Hospital"
+  ],
+  [
+   "09/2024",
+   "Vaginal delivery",
+   "IV fentanyl only (declined epidural)",
+   "None",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0250",
+  "npo_solids": "10/26/2026 1900 (dinner)",
+  "npo_clears": "Ice chips since arrival",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Allergy band",
+    "On (carboprost)"
+   ],
+   [
+    "Type and screen",
+    "Antibody screen positive - see blood bank"
+   ],
+   [
+    "Anesthesia consent",
+    "Pending"
+   ],
+   [
+    "Blood consent",
+    "Signed"
+   ],
+   [
+    "Second IV",
+    "Not yet placed"
+   ],
+   [
+    "Hemorrhage cart",
+    "In room"
+   ],
+   [
+    "Platelets",
+    "186"
+   ]
+  ],
+  "nursing_note": "BP 130/84, HR 98, RR 20, SpO2 98% RA, T 37.0 C, pain 9/10. Contractions q3 min. Cervix 5 cm at 0310. Ate dinner 1900. Ice chips since arrival. Patient statement: \"Contractions started around midnight. I want the epidural early this time - last time it only worked on one side.\" Right forearm 18 g; second IV not yet placed. Anesthesia consent pending. Blood consent signed.",
+  "iv": "18 G right forearm",
+  "glucose": ""
+ },
+ "label": "M. Espinoza",
+ "bmi": "38.3"
+}

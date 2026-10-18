@@ -1,0 +1,145 @@
+{
+ "id": "p45",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Posterior spinal fusion in a 15 y with neuromonitoring and TIVA. A pregnancy test is still pending after a confidential disclosure that changes the LMP, her iron deficiency anemia was never treated (Hgb 10.9 vs goal over 12, IV iron never scheduled), and expected blood loss is 500 to 1,000 mL.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Idiopathic scoliosis with mild restriction, iron deficiency anemia."
+ },
+ "decision": {
+  "recommendation": "hold until the hCG results; then proceed",
+  "rationale": "Policy requires the result before induction. If negative, proceed with blood conservation (cell saver, TXA, 2 units ready). Handle the result confidentially per adolescent policy."
+ },
+ "redFlags": [
+  {
+   "id": "hcg",
+   "severity": "critical",
+   "finding": "Pregnancy test pending",
+   "evidence": "Urine hCG collected 0555, pending; LMP differs from mother's report; confidential disclosure.",
+   "implication": "Teratogenic exposure and fetal risk.",
+   "action": "Do not induce until resulted; share result privately with the patient per policy.",
+   "keywords": [
+    "hcg",
+    "pregnan",
+    "confidential",
+    "lmp"
+   ]
+  },
+  {
+   "id": "anemia",
+   "severity": "major",
+   "finding": "Untreated iron deficiency anemia before high blood loss surgery",
+   "evidence": "Hgb 10.9, MCV 75, ferritin 6; oral iron stopped; IV iron approved but never given.",
+   "implication": "Higher transfusion likelihood.",
+   "action": "Cell saver, TXA, calculate ABL, crossmatched blood ready; consider whether delay for IV iron is warranted.",
+   "keywords": [
+    "anemia",
+    "iron",
+    "cell saver",
+    "txa",
+    "tranexamic",
+    "abl",
+    "allowable blood loss",
+    "transfus"
+   ]
+  },
+  {
+   "id": "neuromon",
+   "severity": "major",
+   "finding": "SSEP and MEP monitoring",
+   "evidence": "TIVA requested, no NMB after intubation, MAP 65 to 70 during correction, wake-up test.",
+   "implication": "Volatile agents and paralysis degrade signals; hypotension risks cord ischemia.",
+   "action": "Propofol and remifentanil TIVA, no NMB after intubation, bite blocks, keep MAP at target, stable anesthetic during correction.",
+   "keywords": [
+    "tiva",
+    "propofol",
+    "remifentanil",
+    "mep",
+    "ssep",
+    "neuromonitor",
+    "bite block",
+    "map"
+   ]
+  },
+  {
+   "id": "prone",
+   "severity": "major",
+   "finding": "Prone positioning for 5 h",
+   "evidence": "Jackson table, foam headrest.",
+   "implication": "Postoperative visual loss, pressure injury, brachial plexus stretch.",
+   "action": "Eyes free, check q15 to 30 min, arms below 90 degrees.",
+   "keywords": [
+    "prone",
+    "eyes",
+    "visual loss",
+    "padding",
+    "pressure"
+   ]
+  },
+  {
+   "id": "abx",
+   "severity": "minor",
+   "finding": "Weight based cefazolin with redosing",
+   "evidence": "1.5 g (30 mg/kg) redose q4h.",
+   "implication": "Long case.",
+   "action": "Redose at 4 h or after 1,500 mL blood loss.",
+   "keywords": [
+    "cefazolin",
+    "redose"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "technique",
+   "item": "TIVA with propofol and remifentanil",
+   "keywords": [
+    "tiva",
+    "propofol",
+    "remifentanil"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line, two PIVs, neuromonitoring",
+   "keywords": [
+    "arterial line",
+    "piv",
+    "neuromonitor"
+   ]
+  },
+  {
+   "domain": "blood",
+   "item": "TXA, cell saver, 2 units crossmatched",
+   "keywords": [
+    "txa",
+    "cell saver"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 30 mg/kg within 60 min with q4h redose",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "PICU overnight",
+   "keywords": [
+    "picu"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Airway instrumentation"
+  }
+ ]
+}

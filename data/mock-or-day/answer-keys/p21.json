@@ -1,0 +1,142 @@
+{
+ "id": "p21",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Symptomatic carotid stenosis 3 weeks after TIA, arriving with BP 192/104 because he stopped amlodipine 10 days ago (home log in the 170s, portal message never answered), on intentional DAPT.",
+ "asa": {
+  "suggested": "3",
+  "rationale": "Symptomatic carotid disease, CAD with prior DES, diabetes, uncontrolled hypertension."
+ },
+ "decision": {
+  "recommendation": "control BP first, then proceed today if possible",
+  "rationale": "Symptomatic carotid disease is time sensitive (ideally within 2 weeks of TIA), so avoid cancelling for weeks. Treat BP now toward under 180/110 with a reliable agent and confirm no end organ symptoms; proceed when controlled."
+ },
+ "redFlags": [
+  {
+   "id": "htn",
+   "severity": "critical",
+   "finding": "Uncontrolled hypertension on arrival",
+   "evidence": "188/102 and 192/104; amlodipine stopped about 10/14 for edema; home BP 162 to 178 systolic; portal message 10/23 with no provider reply.",
+   "implication": "Labile intraop BP, myocardial ischemia, postoperative hyperperfusion syndrome and hematoma.",
+   "action": "Treat before induction (IV labetalol or a calcium channel blocker infusion), arterial line pre induction, tight postop SBP 100 to 140.",
+   "keywords": [
+    "hypertension",
+    "blood pressure",
+    "amlodipine",
+    "labetalol",
+    "nicardipine",
+    "clevidipine",
+    "hyperperfusion"
+   ]
+  },
+  {
+   "id": "carotid",
+   "severity": "major",
+   "finding": "Symptomatic 85% ulcerated R ICA stenosis",
+   "evidence": "TIA 10/06; CTA and duplex; small R A1 (weaker collateral).",
+   "implication": "Perfusion depends on BP during clamping.",
+   "action": "Arterial line, EEG, keep MAP at or above baseline during clamp, shunt ready, heparin 100 units/kg before clamp.",
+   "keywords": [
+    "clamp",
+    "eeg",
+    "shunt",
+    "heparin",
+    "map",
+    "collateral"
+   ]
+  },
+  {
+   "id": "dapt",
+   "severity": "major",
+   "finding": "Continuing aspirin and clopidogrel by design",
+   "evidence": "Neurology and vascular: do not hold.",
+   "implication": "Neck hematoma with airway compromise.",
+   "action": "Meticulous hemostasis, smooth emergence without coughing or hypertension, airway plan for hematoma.",
+   "keywords": [
+    "clopidogrel",
+    "dapt",
+    "hematoma",
+    "smooth emergence"
+   ]
+  },
+  {
+   "id": "cad",
+   "severity": "major",
+   "finding": "CAD with prior LAD DES",
+   "evidence": "NSTEMI 2021, EF 55%, >4 METs; RCRI 1 to 2.",
+   "implication": "Ischemia with hypertension or tachycardia.",
+   "action": "Continue beta blocker (taken), ST monitoring.",
+   "keywords": [
+    "cad",
+    "ischemia",
+    "beta blocker",
+    "st segment"
+   ]
+  },
+  {
+   "id": "glucose",
+   "severity": "minor",
+   "finding": "Diabetes",
+   "evidence": "Glucose 164; metformin and sitagliptin held.",
+   "implication": "Hyperglycemia worsens neurologic outcomes.",
+   "action": "Glucose q2h, treat above 180.",
+   "keywords": [
+    "glucose",
+    "insulin"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line before induction, EEG",
+   "keywords": [
+    "arterial line",
+    "eeg"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Vasoactive infusions ready in both directions (phenylephrine and nicardipine or clevidipine)",
+   "keywords": [
+    "phenylephrine",
+    "nicardipine",
+    "clevidipine"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Smooth emergence, neuro exam in the OR",
+   "keywords": [
+    "neuro exam",
+    "smooth emergence"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Step down or ICU, SBP 100 to 140",
+   "keywords": [
+    "icu",
+    "step down",
+    "sbp"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "40 pack year former smoker"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Heparin, protamine, bovine patch, cefazolin"
+  }
+ ]
+}

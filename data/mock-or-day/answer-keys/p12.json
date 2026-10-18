@@ -1,0 +1,168 @@
+{
+ "id": "p12",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Craniotomy for a frontal glioma with signs of rising ICP overnight (headache, vomiting, drowsier, BP up, HR down, shift 6 to 8 mm), apixaban taken yesterday against plan with anti-Xa 62, a missed levetiracetam dose, and untreated steroid hyperglycemia with falling sodium.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "Intracranial mass with worsening mass effect and clinical deterioration."
+ },
+ "decision": {
+  "recommendation": "urgent: escalate now, reverse, then proceed",
+  "rationale": "The neurologic decline needs the neurosurgery attending now; surgery likely becomes more urgent, not less. Measurable apixaban before a craniotomy needs reversal per protocol (andexanet or 4 factor PCC). Load levetiracetam, start insulin, treat ICP."
+ },
+ "redFlags": [
+  {
+   "id": "icp",
+   "severity": "critical",
+   "finding": "Rising intracranial pressure",
+   "evidence": "Worse headache, vomiting x2, harder to wake (GCS 14), BP 164/96 with HR 56; CT midline shift 8 mm (was 6), ventricle effacement; resident notified, no action.",
+   "implication": "Herniation risk; anesthetic choices affect ICP.",
+   "action": "Escalate to attending; head up, avoid hypercarbia and hypoxia, mannitol or hypertonic saline, no sedating premedication, smooth induction.",
+   "keywords": [
+    "icp",
+    "intracranial pressure",
+    "herniation",
+    "mannitol",
+    "hypertonic",
+    "midline shift",
+    "cushing"
+   ]
+  },
+  {
+   "id": "apixaban",
+   "severity": "critical",
+   "finding": "Apixaban taken 23 h ago with measurable level",
+   "evidence": "Pharmacy med rec: resumed at home, last 10/26 0800; anti-Xa apixaban 62 ng/mL; H&P assumed last dose 10/23.",
+   "implication": "Intracranial bleeding risk during craniotomy.",
+   "action": "Neurosurgery and hematology decision: reversal (andexanet alfa or 4 factor PCC per protocol) or delay.",
+   "keywords": [
+    "apixaban",
+    "eliquis",
+    "anti-xa",
+    "andexanet",
+    "pcc",
+    "reversal"
+   ]
+  },
+  {
+   "id": "levetiracetam",
+   "severity": "major",
+   "finding": "Missed antiseizure dose",
+   "evidence": "Levetiracetam 2000 dose held because of an NPO order without a meds clause.",
+   "implication": "Seizure risk with rising ICP.",
+   "action": "Give IV levetiracetam now; fix the NPO order.",
+   "keywords": [
+    "levetiracetam",
+    "keppra",
+    "seizure"
+   ]
+  },
+  {
+   "id": "glucose",
+   "severity": "major",
+   "finding": "Untreated steroid induced hyperglycemia",
+   "evidence": "Glucose 231 to 251 on dexamethasone; no insulin ordered.",
+   "implication": "Hyperglycemia worsens neurologic outcomes and infection risk.",
+   "action": "Insulin infusion with a 140 to 180 target.",
+   "keywords": [
+    "glucose",
+    "hyperglycemia",
+    "insulin"
+   ]
+  },
+  {
+   "id": "sodium",
+   "severity": "major",
+   "finding": "Falling sodium with low serum osmolality",
+   "evidence": "Na 133 to 131, serum osm 272, urine osm 410, urine Na 62.",
+   "implication": "Hyponatremia worsens cerebral edema (SIADH or cerebral salt wasting).",
+   "action": "Isotonic or hypertonic fluids only, trend sodium.",
+   "keywords": [
+    "sodium",
+    "hyponatremia",
+    "siadh",
+    "salt wasting",
+    "hypotonic"
+   ]
+  },
+  {
+   "id": "ionm",
+   "severity": "minor",
+   "finding": "Neuromonitoring constraints",
+   "evidence": "SSEP and tcMEP; TIVA requested, no relaxant after intubation; bite blocks.",
+   "implication": "Drug choices.",
+   "action": "Propofol and remifentanil TIVA, no paralysis after intubation, bite blocks.",
+   "keywords": [
+    "tiva",
+    "mep",
+    "ssep",
+    "bite block",
+    "neuromonitoring"
+   ]
+  },
+  {
+   "id": "ponv",
+   "severity": "minor",
+   "finding": "Severe PONV history",
+   "evidence": "2014 cholecystectomy admission.",
+   "implication": "Vomiting raises ICP.",
+   "action": "TIVA plus multimodal prophylaxis.",
+   "keywords": [
+    "ponv"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Arterial line before induction",
+   "keywords": [
+    "arterial line"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "TIVA with propofol and remifentanil; mannitol standby",
+   "keywords": [
+    "tiva",
+    "propofol",
+    "remifentanil",
+    "mannitol"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "maintenance",
+   "item": "Levetiracetam 1000 mg IV, normocarbia, head up",
+   "keywords": [
+    "levetiracetam",
+    "normocarbia"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Neuro ICU",
+   "keywords": [
+    "neuro icu",
+    "icu"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Antibiotic and reversal agent exposure"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Airway instrumentation in a pinned head"
+  }
+ ]
+}

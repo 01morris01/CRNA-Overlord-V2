@@ -1,0 +1,2390 @@
+{
+ "id": "p49",
+ "room": "OR 19",
+ "time": "1000",
+ "name": "CRUMLEY, IRENE M",
+ "mrn": "0147049",
+ "dob": "05/27/1954",
+ "age": "72 y",
+ "sex": "F",
+ "ht_cm": 157,
+ "wt_kg": 61.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "G. Blevins, MD, Tazewell Family Practice",
+ "insurance": "Medicare + BCBST Medigap Plan G; Part D for PAH meds (specialty pharmacy)",
+ "emergency_contact": "Ronald Crumley (husband) 423-555-0249; Dana Shields (daughter) 865-555-0188",
+ "isolation": "",
+ "allergies": [
+  [
+   "Codeine",
+   "Vomiting",
+   "Mild (intolerance)",
+   "1990s"
+  ],
+  [
+   "Adhesive tape",
+   "Skin tears",
+   "Mild",
+   "2020"
+  ]
+ ],
+ "case": {
+  "procedure": "Open reduction internal fixation left distal radius fracture (volar locking plate)",
+  "short": "ORIF L distal radius",
+  "laterality": "Left",
+  "service": "Orthopedics - Hand",
+  "surgeon": "E. Rasnake, MD",
+  "assistant": "J. Pinion, PA-C",
+  "indication": "Displaced, dorsally angulated intra-articular L distal radius fracture after ground-level fall 10/24/2026; loss of reduction in splint.",
+  "duration_min": 90,
+  "anesthesia_requested": "Supraclavicular block with sedation",
+  "position": "Supine, L arm on hand table, upper arm tourniquet",
+  "dispo": "Return to cardiology step-down",
+  "blood": "None",
+  "equipment": "Mini C-arm, volar plating set",
+  "implants": "Volar locking plate",
+  "surgeon_notes": "Pulmonary HTN - pulm wants regional, no GA. Supraclavicular block please. Tourniquet.",
+  "add_on": false,
+  "scheduled_on": "10/25/2026"
+ },
+ "problems": [
+  [
+   "Pulmonary arterial hypertension, idiopathic (WHO group 1), WHO FC III",
+   "03/2022",
+   "Active"
+  ],
+  [
+   "Chronic hypoxemic respiratory failure on home O2 2 L",
+   "2024",
+   "Active"
+  ],
+  [
+   "Right heart failure",
+   "2024",
+   "Active"
+  ],
+  [
+   "Closed fracture left distal radius",
+   "10/24/2026",
+   "Active"
+  ],
+  [
+   "Osteoporosis",
+   "2019",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2015",
+   "Active"
+  ],
+  [
+   "Hypothyroidism",
+   "2010",
+   "Active"
+  ],
+  [
+   "Iron deficiency (PAH-associated), on oral iron",
+   "2025",
+   "Active"
+  ],
+  [
+   "Raynaud phenomenon (ANA negative; no CTD)",
+   "2021",
+   "Active"
+  ],
+  [
+   "Cataract, bilateral, s/p surgery",
+   "2018",
+   "Resolved"
+  ],
+  [
+   "Vertebral compression fracture T12",
+   "2023",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "IPAH dx 03/2022 by RHC (vasoreactivity negative); CTEPH excluded (V/Q normal); CTD/HIV/portal HTN/drug/toxin negative; sleep study without OSA",
+   "Home O2 2 L continuous since 2024",
+   "Osteoporosis with T12 compression fx 2023",
+   "Hypothyroid",
+   "GERD",
+   "Raynaud"
+  ],
+  "psh": [
+   [
+    "2018",
+    "Bilateral cataract extraction",
+    "Tennessee Eye Surgeons"
+   ],
+   [
+    "1985",
+    "Tubal ligation",
+    "Outside"
+   ],
+   [
+    "2003",
+    "Bunionectomy R",
+    "Outside"
+   ],
+   [
+    "03/2022",
+    "Right heart catheterization",
+    "C-N University Hospital"
+   ],
+   [
+    "06/2024",
+    "Right heart catheterization",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Sister: died 60 \"heart and lung trouble\" (unknown cause)",
+   "Mother: osteoporosis, hip fracture",
+   "No known anesthesia problems in family"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "None",
+   "drugs": "None; no anorexigen use",
+   "occupation": "Retired bank teller",
+   "living": "One-level home with husband, Tazewell",
+   "other": "Portable O2 concentrator. Uses walker outdoors. Daughter checks daily."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "09/2026"
+   ],
+   [
+    "COVID-19 2025-26",
+    "10/2025"
+   ],
+   [
+    "Pneumococcal PCV20",
+    "2022"
+   ],
+   [
+    "RSV",
+    "10/2024"
+   ],
+   [
+    "Shingrix x2",
+    "2020"
+   ],
+   [
+    "Tdap",
+    "2017"
+   ]
+  ],
+  "ob": "G2P2, postmenopausal."
+ },
+ "home_meds": [
+  [
+   "Sildenafil 20 mg tab",
+   "1 tab PO TID (0600, 1400, 2200)",
+   "V. Stallard, MD (Pulmonary Hypertension Clinic)",
+   "10/27/2026 0600 (given on unit)"
+  ],
+  [
+   "Ambrisentan 10 mg tab",
+   "1 tab PO daily (REMS)",
+   "V. Stallard, MD",
+   "10/24/2026 0800 (last home dose)"
+  ],
+  [
+   "Furosemide 40 mg tab",
+   "1 tab PO daily",
+   "V. Stallard, MD",
+   "10/26/2026 0900"
+  ],
+  [
+   "Spironolactone 25 mg tab",
+   "1 tab PO daily",
+   "V. Stallard, MD",
+   "10/26/2026 0900"
+  ],
+  [
+   "Oxygen 2 L/min NC",
+   "Continuous; 3 L with exertion",
+   "V. Stallard, MD",
+   "Continuous"
+  ],
+  [
+   "Levothyroxine 88 mcg",
+   "PO daily",
+   "G. Blevins, MD",
+   "10/27/2026 0600"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "PO daily",
+   "G. Blevins, MD",
+   "10/27/2026 0600"
+  ],
+  [
+   "Ferrous sulfate 325 mg",
+   "PO every other day",
+   "V. Stallard, MD",
+   "10/25/2026"
+  ],
+  [
+   "Denosumab 60 mg SC",
+   "Every 6 months",
+   "G. Blevins, MD",
+   "07/2026"
+  ],
+  [
+   "Calcium + vitamin D",
+   "PO BID",
+   "OTC",
+   "10/24/2026"
+  ],
+  [
+   "Acetaminophen 500 mg",
+   "2 tabs PO q6h PRN",
+   "OTC",
+   "10/26/2026 2200"
+  ]
+ ],
+ "mar": [
+  [
+   "Sildenafil 20 mg PO",
+   "TID 0600/1400/2200",
+   "Given 10/27/2026 0600"
+  ],
+  [
+   "Ambrisentan 10 mg PO (patient's own supply)",
+   "Daily 0900",
+   "NOT GIVEN 10/25, 10/26 - \"awaiting pharmacy verification of patient's own medication\""
+  ],
+  [
+   "Furosemide 40 mg IV",
+   "Daily",
+   "Given 10/26/2026 0900; held 10/27 (NPO)"
+  ],
+  [
+   "Spironolactone 25 mg PO",
+   "Daily",
+   "Held 10/27 (NPO)"
+  ],
+  [
+   "Levothyroxine 88 mcg PO",
+   "Daily",
+   "Given 10/27/2026 0600"
+  ],
+  [
+   "Oxycodone 2.5 mg PO",
+   "q4h PRN",
+   "Given 10/26/2026 2300, 10/27/2026 0400"
+  ],
+  [
+   "Morphine 1 mg IV",
+   "q2h PRN severe pain",
+   "Given 10/24/2026 x2"
+  ],
+  [
+   "Enoxaparin 40 mg SC",
+   "Daily",
+   "Held 10/27 AM for block"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "On call to OR",
+   "Due"
+  ],
+  [
+   "Oxygen NC",
+   "Titrate SpO2 90-94%",
+   "Active, 2-3 L"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Tadalafil 40 mg",
+   "03/2022-08/2022",
+   "Headache/myalgias - changed to sildenafil"
+  ],
+  [
+   "Alendronate",
+   "2019-2023",
+   "GERD; changed to denosumab after T12 fx"
+  ],
+  [
+   "Selexipag",
+   "10/2026",
+   "Ordered 10/2026 by PH clinic - prior authorization pending, NOT started"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026 0500",
+    "comment": "Preop",
+    "vals": {
+     "Na": [
+      "134",
+      "L"
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "9",
+      ""
+     ],
+     "Cr": [
+      "1.08",
+      ""
+     ],
+     "Glu": [
+      "84",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "WBC": [
+      "7.4",
+      ""
+     ],
+     "Hgb": [
+      "11.6",
+      "L"
+     ],
+     "Hct": [
+      "36",
+      ""
+     ],
+     "Plt": [
+      "211",
+      ""
+     ],
+     "MCV": [
+      "86",
+      ""
+     ],
+     "Mg": [
+      "1.9",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/24/2026 1440",
+    "comment": "ED",
+    "vals": {
+     "pH": [
+      "7.38",
+      ""
+     ],
+     "PaCO2": [
+      "41",
+      ""
+     ],
+     "HCO3a": [
+      "25",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/24/2026 1420",
+    "comment": "ED",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "1.04",
+      ""
+     ],
+     "Glu": [
+      "91",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "12.1",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "197",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "BNP": [
+      "584",
+      "H"
+     ],
+     "Trop": [
+      "22",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "10/06/2026",
+    "comment": "PH clinic",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "106",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "1.01",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "25",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "74",
+      ""
+     ],
+     "TBili": [
+      "1.3",
+      "H"
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.5",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "208",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "BNP": [
+      "512",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "04/09/2026",
+    "comment": "PH clinic",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.94",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "27",
+      ""
+     ],
+     "ALT": [
+      "19",
+      ""
+     ],
+     "ALKP": [
+      "85",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.5",
+      ""
+     ],
+     "WBC": [
+      "5.5",
+      ""
+     ],
+     "Hgb": [
+      "12.9",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "216",
+      ""
+     ],
+     "MCV": [
+      "87",
+      ""
+     ],
+     "BNP": [
+      "448",
+      "H"
+     ],
+     "Ferritin": [
+      "62",
+      ""
+     ],
+     "Fe": [
+      "94",
+      ""
+     ],
+     "TSAT": [
+      "19",
+      "L"
+     ],
+     "TSH": [
+      "2.61",
+      ""
+     ],
+     "FT4": [
+      "1.14",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "07/15/2025",
+    "comment": "PH clinic",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "27",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.97",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.5",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "29",
+      ""
+     ],
+     "ALKP": [
+      "83",
+      ""
+     ],
+     "TBili": [
+      "1.1",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "12.2",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "212",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "BNP": [
+      "395",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "01/16/2025",
+    "comment": "PH clinic",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "102",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.91",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.6",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "20",
+      ""
+     ],
+     "ALKP": [
+      "61",
+      ""
+     ],
+     "TBili": [
+      "1.0",
+      ""
+     ],
+     "TProt": [
+      "6.9",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "11.4",
+      "L"
+     ],
+     "Hct": [
+      "34",
+      "L"
+     ],
+     "Plt": [
+      "212",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "BNP": [
+      "352",
+      "H"
+     ],
+     "Ferritin": [
+      "18",
+      ""
+     ],
+     "Fe": [
+      "41",
+      "L"
+     ],
+     "TSAT": [
+      "11",
+      "L"
+     ]
+    }
+   },
+   {
+    "dt": "06/18/2024 0700",
+    "comment": "RHC",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.96",
+      ""
+     ],
+     "Glu": [
+      "86",
+      ""
+     ],
+     "Ca": [
+      "9.4",
+      ""
+     ],
+     "AST": [
+      "16",
+      ""
+     ],
+     "ALT": [
+      "30",
+      ""
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "1.1",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "7.7",
+      ""
+     ],
+     "Hgb": [
+      "12.5",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "207",
+      ""
+     ],
+     "MCV": [
+      "90",
+      ""
+     ],
+     "PT": [
+      "12.7",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "28",
+      ""
+     ],
+     "BNP": [
+      "388",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/14/2023",
+    "comment": "PH clinic",
+    "vals": {
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.9",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.93",
+      ""
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "28",
+      ""
+     ],
+     "ALT": [
+      "22",
+      ""
+     ],
+     "ALKP": [
+      "64",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "197",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "BNP": [
+      "172",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "09/20/2022",
+    "comment": "PH clinic - dual therapy",
+    "vals": {
+     "Na": [
+      "135",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "95",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "67",
+      ""
+     ],
+     "TBili": [
+      "1.1",
+      ""
+     ],
+     "TProt": [
+      "7.1",
+      ""
+     ],
+     "Alb": [
+      "4.1",
+      ""
+     ],
+     "WBC": [
+      "7.6",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "217",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "BNP": [
+      "158",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "03/22/2022",
+    "comment": "RHC",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.95",
+      ""
+     ],
+     "Glu": [
+      "94",
+      ""
+     ],
+     "Ca": [
+      "9.0",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "24",
+      ""
+     ],
+     "ALKP": [
+      "77",
+      ""
+     ],
+     "TBili": [
+      "0.9",
+      ""
+     ],
+     "TProt": [
+      "7.0",
+      ""
+     ],
+     "Alb": [
+      "4.2",
+      ""
+     ],
+     "WBC": [
+      "6.9",
+      ""
+     ],
+     "Hgb": [
+      "12.6",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "221",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "PT": [
+      "12.2",
+      ""
+     ],
+     "INR": [
+      "1.0",
+      ""
+     ],
+     "aPTT": [
+      "27",
+      ""
+     ],
+     "BNP": [
+      "286",
+      "H"
+     ]
+    }
+   },
+   {
+    "dt": "02/14/2022",
+    "comment": "Dyspnea workup",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "23",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.84",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "17",
+      ""
+     ],
+     "ALT": [
+      "27",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "1.0",
+      ""
+     ],
+     "TProt": [
+      "7.7",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "7.1",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "38",
+      ""
+     ],
+     "Plt": [
+      "203",
+      ""
+     ],
+     "MCV": [
+      "91",
+      ""
+     ],
+     "BNP": [
+      "220",
+      "H"
+     ],
+     "TSH": [
+      "2.57",
+      ""
+     ],
+     "FT4": [
+      "1.12",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "05/08/2019",
+    "comment": "Osteoporosis workup",
+    "vals": {
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.4",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "17",
+      ""
+     ],
+     "Cr": [
+      "0.86",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "23",
+      ""
+     ],
+     "ALT": [
+      "16",
+      ""
+     ],
+     "ALKP": [
+      "68",
+      ""
+     ],
+     "TBili": [
+      "1.0",
+      ""
+     ],
+     "TProt": [
+      "6.8",
+      ""
+     ],
+     "Alb": [
+      "4.4",
+      ""
+     ],
+     "WBC": [
+      "8.5",
+      ""
+     ],
+     "Hgb": [
+      "12.8",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "211",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "VitD": [
+      "22",
+      "L"
+     ],
+     "TSH": [
+      "2.30",
+      ""
+     ],
+     "FT4": [
+      "1.20",
+      ""
+     ]
+    }
+   },
+   {
+    "dt": "04/12/2016",
+    "comment": "Annual",
+    "vals": {
+     "Na": [
+      "136",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.78",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "Ca": [
+      "9.2",
+      ""
+     ],
+     "AST": [
+      "21",
+      ""
+     ],
+     "ALT": [
+      "25",
+      ""
+     ],
+     "ALKP": [
+      "75",
+      ""
+     ],
+     "TBili": [
+      "0.6",
+      ""
+     ],
+     "TProt": [
+      "7.2",
+      ""
+     ],
+     "Alb": [
+      "4.3",
+      ""
+     ],
+     "WBC": [
+      "5.8",
+      ""
+     ],
+     "Hgb": [
+      "12.4",
+      ""
+     ],
+     "Hct": [
+      "37",
+      ""
+     ],
+     "Plt": [
+      "220",
+      ""
+     ],
+     "MCV": [
+      "92",
+      ""
+     ],
+     "TSH": [
+      "2.29",
+      ""
+     ],
+     "FT4": [
+      "1.19",
+      ""
+     ],
+     "Chol": [
+      "169",
+      ""
+     ],
+     "LDL": [
+      "84",
+      ""
+     ],
+     "HDL": [
+      "64",
+      ""
+     ],
+     "TG": [
+      "117",
+      ""
+     ],
+     "BNP": [
+      "30",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Mg",
+    "name": "Magnesium",
+    "unit": "mg/dL",
+    "ref": "1.7-2.4"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Blood gas",
+    "key": "pH",
+    "name": "pH",
+    "unit": "",
+    "ref": "7.35-7.45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "PaCO2",
+    "name": "PCO2",
+    "unit": "mm Hg",
+    "ref": "35-45"
+   },
+   {
+    "group": "Blood gas",
+    "key": "HCO3a",
+    "name": "HCO3",
+    "unit": "mmol/L",
+    "ref": "22-26"
+   },
+   {
+    "group": "Cardiac",
+    "key": "BNP",
+    "name": "BNP",
+    "unit": "pg/mL",
+    "ref": "<100"
+   },
+   {
+    "group": "Cardiac",
+    "key": "Trop",
+    "name": "Troponin I, hs",
+    "unit": "ng/L",
+    "ref": "<34"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Endocrine",
+    "key": "VitD",
+    "name": "Vitamin D, 25-OH",
+    "unit": "ng/mL",
+    "ref": "30-100"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "03/2022",
+    "Pulmonary hypertension serologic workup",
+    "ANA negative, Scl-70/centromere negative, HIV negative, hepatitis panel negative, TSH normal",
+    ""
+   ],
+   [
+    "03/2022",
+    "NT-proBNP",
+    "1,120 pg/mL",
+    "H"
+   ],
+   [
+    "04/09/2026",
+    "NT-proBNP",
+    "1,640 pg/mL",
+    "H"
+   ],
+   [
+    "10/06/2026",
+    "NT-proBNP",
+    "1,980 pg/mL",
+    "H"
+   ],
+   [
+    "10/06/2026",
+    "6-minute walk test",
+    "268 m on 3 L O2; SpO2 nadir 84%; Borg dyspnea 5 (09/2025: 312 m)",
+    "A"
+   ],
+   [
+    "10/24/2026",
+    "Type and screen",
+    "B positive, antibody screen negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "02/2022",
+   "XR Chest 2 views",
+   "Enlarged central pulmonary arteries. Right heart prominence. Clear lungs. Impression: Suggests pulmonary hypertension.",
+   "M. Vance, MD",
+   {
+    "img": null,
+    "credit": "Teaching image: Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Schwere_pulmonale_Hypertonie_51W_-_CR_pa_-_001.jpg)"
+   }
+  ],
+  [
+   "02/2022",
+   "CT Chest with contrast (PE protocol)",
+   "No PE. Main PA 3.6 cm. RV/LV ratio 1.3. Mild mosaic attenuation. No ILD or emphysema. Impression: PH; no PE.",
+   "M. Vance, MD"
+  ],
+  [
+   "03/2022",
+   "V/Q scan",
+   "Normal perfusion; low probability; no evidence of CTEPH.",
+   "Nuclear Medicine"
+  ],
+  [
+   "2023",
+   "XR Thoracic spine",
+   "T12 compression fracture ~30% height loss.",
+   "M. Vance, MD"
+  ],
+  [
+   "10/24/2026",
+   "XR Wrist left 3 views",
+   "Comminuted intra-articular distal radius fracture, 25 degrees dorsal angulation, 3 mm shortening, ulnar styloid fx. Osteopenia.",
+   "M. Vance, MD"
+  ],
+  [
+   "10/25/2026",
+   "XR Wrist left post-reduction (splint)",
+   "Partial loss of reduction, dorsal angulation 18 degrees.",
+   "M. Vance, MD"
+  ],
+  [
+   "10/24/2026",
+   "XR Chest portable",
+   "Cardiomegaly with RA/RV enlargement, enlarged pulmonary arteries. Small R effusion. No edema. Impression: Stable chronic findings, small effusion.",
+   "M. Vance, MD"
+  ]
+ ],
+ "cardiology": [
+  [
+   "03/22/2022",
+   "Right heart catheterization with vasoreactivity testing",
+   "RA 7, RV 64/8, PA 66/28 (mean 41), PAWP 9, CO 3.9 L/min (thermodilution), CI 2.5, PVR 8.2 WU, SvO2 66%. Inhaled NO 40 ppm: mPAP 38, CO 4.0 - NOT vasoreactive (did not meet criteria). Impression: Precapillary PH, group 1 (IPAH after workup).",
+   "V. Stallard, MD"
+  ],
+  [
+   "06/18/2024",
+   "Right heart catheterization",
+   "RA 11, PA 74/34 (mean 48), PAWP 10, CO 3.2 L/min, CI 2.0, PVR 11.9 WU, SvO2 58%. Impression: Progression on dual oral therapy.",
+   "V. Stallard, MD"
+  ],
+  [
+   "10/06/2026",
+   "Echocardiogram, transthoracic",
+   "LVEF 65%, small underfilled LV, D-shaped septum in systole and diastole. RV severely dilated, severely reduced function: TAPSE 1.4 cm, RV S' 7 cm/s, FAC 22%. RA severely dilated (area 26 cm2). Moderate-severe TR, peak velocity 4.1 m/s, RVSP 72 mm Hg (RA est 15). IVC 2.3 cm, <50% collapse. Small pericardial effusion. TAPSE/PASP 0.19. Impression: Severe PH with severe RV dysfunction; progressed vs 2024 (TAPSE 1.7).",
+   "V. Stallard, MD"
+  ],
+  [
+   "10/06/2026",
+   "ECG 12-lead",
+   "Sinus rhythm 92. Right axis deviation. RVH with strain. P pulmonale. QTc 456.",
+   "V. Stallard, MD",
+   {
+    "rate": 92,
+    "pr": 150,
+    "qrs": 96,
+    "qtc": 456,
+    "axis": 115,
+    "rvh": 1,
+    "ppul": 1,
+    "tmod": {
+     "V1": -1.2,
+     "V2": -1.2,
+     "V3": -0.8,
+     "II": -0.3,
+     "III": -0.8,
+     "aVF": -0.6
+    },
+    "st": {
+     "V1": -0.08,
+     "V2": -0.08
+    }
+   }
+  ],
+  [
+   "10/24/2026",
+   "ECG 12-lead",
+   "Sinus tachycardia 108. RAD, RVH with strain. No new changes.",
+   "ED",
+   {
+    "rate": 108,
+    "pr": 146,
+    "qrs": 96,
+    "qtc": 460,
+    "axis": 115,
+    "rvh": 1,
+    "ppul": 1,
+    "tmod": {
+     "V1": -1.2,
+     "V2": -1.2,
+     "V3": -0.8,
+     "II": -0.3,
+     "III": -0.8,
+     "aVF": -0.6
+    },
+    "st": {
+     "V1": -0.08,
+     "V2": -0.08
+    }
+   }
+  ],
+  [
+   "2021",
+   "Polysomnography",
+   "AHI 3. Nocturnal hypoxemia (T90 22%) without OSA.",
+   "Sleep lab"
+  ],
+  [
+   "09/2025",
+   "Pulmonary function test",
+   "FEV1 84%, FVC 88%, TLC 90%, DLCO 46% (isolated reduction). Impression: Isolated DLCO reduction c/w pulmonary vascular disease.",
+   "PFT lab"
+  ]
+ ],
+ "encounters": [
+  [
+   "04/12/2016",
+   "Clinic - PCP",
+   "Tazewell Family Practice",
+   "Annual",
+   "Routine"
+  ],
+  [
+   "2018",
+   "Outpatient surgery",
+   "Tennessee Eye Surgeons",
+   "Cataracts",
+   "Uneventful"
+  ],
+  [
+   "05/08/2019",
+   "Clinic - PCP",
+   "Tazewell Family Practice",
+   "Osteoporosis",
+   "Alendronate"
+  ],
+  [
+   "02/14/2022",
+   "Clinic - PCP / ED",
+   "C-N University Hospital",
+   "Exertional dyspnea, syncope near-miss",
+   "CT, echo; PH referral"
+  ],
+  [
+   "03/22/2022",
+   "Outpatient procedure",
+   "C-N University Hospital",
+   "RHC",
+   "IPAH diagnosed"
+  ],
+  [
+   "2023",
+   "Clinic - PCP",
+   "Tazewell Family Practice",
+   "Back pain - T12 fx",
+   "Denosumab"
+  ],
+  [
+   "06/18/2024",
+   "Outpatient procedure",
+   "C-N University Hospital",
+   "Repeat RHC",
+   "Progression; home O2"
+  ],
+  [
+   "01/16/2025",
+   "Clinic - PH",
+   "C-N Pulmonary Hypertension Clinic",
+   "Follow-up",
+   "Iron started"
+  ],
+  [
+   "10/06/2026",
+   "Clinic - PH",
+   "C-N Pulmonary Hypertension Clinic",
+   "Follow-up, worsening FC",
+   "Selexipag ordered; parenteral therapy discussed"
+  ],
+  [
+   "10/24/2026",
+   "ED -> admission (cardiology step-down)",
+   "C-N University Hospital",
+   "Fall, L wrist fracture, PAH",
+   "Closed reduction/splint; ORIF planned"
+  ]
+ ],
+ "notes": [
+  [
+   "02/14/2022 1600",
+   "Progress Note",
+   "Family Medicine",
+   "G. Blevins, MD",
+   "8 mo progressive exertional dyspnea, near-syncope climbing church steps. Loud P2, JVD. Echo RVSP 58, RV dilated. CT no PE. Refer PH clinic urgently."
+  ],
+  [
+   "03/22/2022 1400",
+   "Consult",
+   "Pulmonary Hypertension",
+   "V. Stallard, MD",
+   "Workup complete: precapillary PH, PVR 8.2 WU, not vasoreactive; V/Q normal; no CTD, HIV, portal HTN, drugs/toxins, OSA, or parenchymal lung disease. Sister died young of \"heart and lung\" disease - offered genetic counseling (BMPR2), pt declined. Dx IPAH, WHO FC III, intermediate risk. Initial upfront combination: ambrisentan 5 -> 10 mg + tadalafil 40 mg. REMS enrolled. Avoid pregnancy N/A. Diuretics. Supplemental O2 with exertion."
+  ],
+  [
+   "08/30/2022 1000",
+   "Telephone Encounter",
+   "Pulmonary Hypertension",
+   "K. Lyle, RN",
+   "Tadalafil myalgias/headache intolerable. Per Dr. Stallard switch to sildenafil 20 mg TID. Specialty pharmacy notified."
+  ],
+  [
+   "06/18/2024 1300",
+   "Procedure Note",
+   "Cardiac Cath Lab",
+   "V. Stallard, MD",
+   "RHC: mPAP 48, CI 2.0, RA 11, PVR 11.9 WU, SvO2 58% - progression, now intermediate-high risk. Recommended addition of prostacyclin pathway therapy (IV/SC treprostinil discussed); pt declined parenteral therapy. Home O2 2 L continuous. Increase furosemide."
+  ],
+  [
+   "01/16/2025 1100",
+   "Progress Note",
+   "Pulmonary Hypertension",
+   "A. Burleson, NP",
+   "FC III. Iron deficiency (ferritin 18) - oral iron alternate days; consider IV iron. Diuretics ok. 6MWD 312 m. Pt still declines parenteral prostacyclin; agreeable to consider oral selexipag in future."
+  ],
+  [
+   "10/06/2026 1500",
+   "Progress Note",
+   "Pulmonary Hypertension",
+   "V. Stallard, MD",
+   "IPAH follow-up. Worse dyspnea with ADLs, ankle edema, one episode lightheadedness standing from bath. WHO FC III (borderline IV). Exam: JVP 12 cm, RV heave, loud P2, holosystolic TR murmur, 1+ edema, liver edge 2 cm. SpO2 92% on 2 L at rest. 6MWD 268 m (down from 312), NT-proBNP 1,980 (rising). Echo: severe RV dysfunction, TAPSE 1.4, RVSP 72, pericardial effusion - high-risk features. Risk (ESC/ERS 4-strata): intermediate-high. Plan: (1) Start selexipag 200 mcg BID titrate weekly (PA submitted). (2) Strongly recommended parenteral prostacyclin and transplant referral discussion - pt and husband want to think. (3) Furosemide 40 daily + spironolactone 25. (4) For any procedure: anesthesia notification in advance; avoid hypoxemia, hypercarbia, acidosis, hypothermia, systemic hypotension; maintain sinus rhythm; never interrupt PAH therapy; procedures at PH center with PH team aware. RTC 4 wk."
+  ],
+  [
+   "10/24/2026 1500",
+   "ED Provider Note",
+   "Emergency Medicine",
+   "S. Price, MD",
+   "Tripped on O2 tubing at home, FOOSH L. No head strike, no LOC. L wrist deformity. Neurovascularly intact. Closed reduction under hematoma block (lidocaine 1% 10 mL) and sugar-tong splint. Given PAH (RV dysfunction) and SpO2 89% on 2 L, admitted to cardiology step-down with PH team consult. Ortho consulted."
+  ],
+  [
+   "10/24/2026 1800",
+   "Consult",
+   "Pulmonary Hypertension",
+   "A. Burleson, NP",
+   "Admitted after fall. Continue sildenafil 20 TID and ambrisentan 10 daily without interruption (pt has own ambrisentan - REMS; pharmacy to verify patient-supplied med). O2 SpO2 90-94%. Avoid IV fluid boluses; daily weights. For surgery: regional preferred if feasible; avoid hypercarbia with sedation. Dr. Stallard aware."
+  ],
+  [
+   "10/25/2026 0900",
+   "Consult",
+   "Orthopedics - Hand",
+   "E. Rasnake, MD",
+   "Loss of reduction on repeat films. ORIF indicated for function (active, independent). Discussed risk with pt/family given PAH; they wish to proceed. Booked 10/27 1000. Requested supraclavicular block with sedation per pulm request (no GA)."
+  ],
+  [
+   "10/25/2026 1400",
+   "Nursing Note",
+   "Cardiology Step-down",
+   "T. Jarnigan, RN",
+   "Pt asking for her ambrisentan - brought from home in original bottle, sent to pharmacy for verification 10/24 evening. Pharmacy states pending."
+  ],
+  [
+   "10/26/2026 1000",
+   "Pharmacy Note",
+   "Pharmacy",
+   "L. Kyker, PharmD",
+   "Med rec: patient's own ambrisentan 10 mg - verification pending (REMS). Sildenafil formulary. Note denosumab, no interactions. Recommend avoiding nitrates with sildenafil."
+  ],
+  [
+   "10/26/2026 1600",
+   "Anesthesia Preop Note",
+   "Anesthesiology",
+   "Q. Ivey, MD (resident)",
+   "72F IPAH (RVSP 72, TAPSE 1.4) for L distal radius ORIF, supraclavicular block + sedation requested. SpO2 91% 2 L. Plan: regional with light sedation, arterial line?, avoid hypercarbia. Will discuss block choice with attending. Pt aware of risks."
+  ],
+  [
+   "10/27/2026 0615",
+   "Nursing Note",
+   "Cardiology Step-down",
+   "H. Gass, RN",
+   "Sildenafil and levothyroxine given 0600 with sip. Weight 61.0 kg (admit 60.2). SpO2 90% on 2 L, 93% on 3 L. Pt reports pain 6/10 L wrist, received oxycodone 2.5 mg 0400. Bilateral ankle edema 2+. Furosemide held for NPO."
+  ],
+  [
+   "2023",
+   "Progress Note",
+   "Family Medicine",
+   "G. Blevins, MD",
+   "T12 compression fracture after lifting laundry basket. Stop alendronate (GERD) - start denosumab 60 mg q6mo. Fall precautions; home safety evaluation for O2 tubing."
+  ],
+  [
+   "09/2025",
+   "Telephone Encounter",
+   "Pulmonary Hypertension",
+   "K. Lyle, RN",
+   "Specialty pharmacy: ambrisentan shipment delayed 2 days; pt has 4-day supply. Ok."
+  ]
+ ],
+ "vitals": [
+  [
+   "04/12/2016 0930",
+   "128/76",
+   72,
+   14,
+   98,
+   36.6,
+   64.0,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "02/14/2022 1530",
+   "118/72",
+   96,
+   20,
+   93,
+   36.7,
+   63.5,
+   "0/10",
+   "PCP"
+  ],
+  [
+   "03/22/2022 0700",
+   "112/70",
+   88,
+   18,
+   94,
+   36.6,
+   63.0,
+   "0/10",
+   "RHC"
+  ],
+  [
+   "06/18/2024 0700",
+   "108/66",
+   94,
+   20,
+   90,
+   36.6,
+   61.8,
+   "0/10",
+   "RHC (RA)"
+  ],
+  [
+   "01/16/2025 1045",
+   "106/64",
+   92,
+   18,
+   93,
+   36.6,
+   61.0,
+   "0/10",
+   "PH clinic on 2 L"
+  ],
+  [
+   "10/06/2026 1430",
+   "102/64",
+   94,
+   20,
+   92,
+   36.6,
+   62.4,
+   "0/10",
+   "PH clinic on 2 L"
+  ],
+  [
+   "10/24/2026 1410",
+   "118/70",
+   108,
+   22,
+   89,
+   36.6,
+   60.2,
+   "8/10",
+   "ED on 2 L"
+  ],
+  [
+   "10/25/2026 0800",
+   "104/62",
+   96,
+   20,
+   92,
+   36.7,
+   null,
+   "5/10",
+   "Step-down on 3 L"
+  ],
+  [
+   "10/26/2026 0800",
+   "100/62",
+   94,
+   20,
+   92,
+   36.7,
+   60.6,
+   "5/10",
+   "Step-down"
+  ],
+  [
+   "10/27/2026 0600",
+   "98/60",
+   98,
+   22,
+   90,
+   36.5,
+   61.0,
+   "6/10",
+   "Step-down on 2 L"
+  ],
+  [
+   "10/27/2026 0915",
+   "96/58",
+   100,
+   22,
+   91,
+   36.4,
+   61.0,
+   "6/10",
+   "Preop holding on 3 L"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO after midnight",
+   "10/26/2026",
+   "Active"
+  ],
+  [
+   "Daily weight, strict I&O",
+   "10/24/2026",
+   "Active"
+  ],
+  [
+   "Oxygen SpO2 90-94%",
+   "10/24/2026",
+   "Active"
+  ],
+  [
+   "Avoid IV fluid boluses without PH team",
+   "10/24/2026",
+   "Active"
+  ],
+  [
+   "Patient's own medication: ambrisentan - verify",
+   "10/24/2026",
+   "Pending pharmacy"
+  ],
+  [
+   "Selexipag 200 mcg BID",
+   "10/06/2026",
+   "Not started (PA pending)"
+  ],
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "B positive",
+  "antibody_screen": "Negative",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": "10/27/2026 2359"
+ },
+ "consents": [
+  [
+   "Surgical consent: ORIF L distal radius",
+   "Signed 10/25/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "Living will 2022: wants full treatment including ventilation for reversible conditions; HCPOA husband.",
+ "anesthesia_history": [
+  [
+   "1985",
+   "Tubal ligation",
+   "GA",
+   "None",
+   "Outside"
+  ],
+  [
+   "2003",
+   "Bunionectomy",
+   "Ankle block + sedation",
+   "None",
+   "Outside"
+  ],
+  [
+   "2018",
+   "Cataracts x2",
+   "Topical/MAC",
+   "None",
+   "Tennessee Eye Surgeons"
+  ],
+  [
+   "03/2022, 06/2024",
+   "RHC",
+   "Local + midazolam 0.5 mg",
+   "SpO2 dropped to 84% with midazolam 2024; recovered with O2 increase",
+   "C-N University Hospital"
+  ],
+  [
+   "10/24/2026",
+   "Closed reduction wrist",
+   "Hematoma block (ED)",
+   "None",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0910 (from step-down)",
+  "npo_solids": "10/26/2026 1900",
+  "npo_clears": "10/27/2026 0600 sip with meds",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "N/A"
+   ],
+   [
+    "Site marked",
+    "Yes - left"
+   ],
+   [
+    "Allergy band",
+    "Done"
+   ],
+   [
+    "O2 portable",
+    "On 3 L NC"
+   ]
+  ],
+  "nursing_note": "72F frail, pleasant. On 3 L NC SpO2 91%. Sitting upright, dyspneic speaking full sentences slowly. JVD visible sitting. 2+ ankle edema. L arm splint, fingers warm. Sildenafil 0600 given. Asks again about her ambrisentan (\"I haven't had it since Saturday\"). 22 g R hand.",
+  "iv": "22 g R hand",
+  "glucose": ""
+ },
+ "label": "I. Crumley",
+ "bmi": "24.7"
+}

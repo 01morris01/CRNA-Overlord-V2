@@ -1,0 +1,83 @@
+{
+ "id": "p16",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Healthy marathoner for knee arthroscopy with a resting heart rate of 46. A control case: the trap is overreacting to documented, fully evaluated athletic bradycardia.",
+ "asa": {
+  "suggested": "1",
+  "rationale": "Healthy athlete; bradycardia is physiologic and was worked up (normal echo and exercise test, 17.5 METs)."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Athletic bradycardia with excellent functional capacity and unchanged ECGs needs no further workup. Have atropine or glycopyrrolate available."
+ },
+ "redFlags": [
+  {
+   "id": "brady",
+   "severity": "minor",
+   "finding": "Athletic sinus bradycardia with early repolarization",
+   "evidence": "HR 44 to 48 since 2016; normal echo and stress test; HR 40s intraop in 2012 without treatment.",
+   "implication": "Not pathologic; vagal stimuli may drop it further.",
+   "action": "No workup; anticholinergic available, treat only with hypotension or symptoms.",
+   "keywords": [
+    "bradycardia",
+    "athletic",
+    "atropine",
+    "glycopyrrolate"
+   ]
+  },
+  {
+   "id": "nsaid",
+   "severity": "minor",
+   "finding": "Recent NSAIDs",
+   "evidence": "Meloxicam stopped 10/20; ibuprofen 10/23.",
+   "implication": "Not a concern for arthroscopy.",
+   "action": "None.",
+   "keywords": [
+    "meloxicam",
+    "ibuprofen"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "LMA general anesthetic",
+   "keywords": [
+    "lma",
+    "supraglottic"
+   ]
+  },
+  {
+   "domain": "regional",
+   "item": "Adductor canal block optional for analgesia",
+   "keywords": [
+    "adductor canal"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Same day discharge",
+   "keywords": [
+    "discharge"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "LMA anesthetic at light planes"
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin"
+  }
+ ]
+}

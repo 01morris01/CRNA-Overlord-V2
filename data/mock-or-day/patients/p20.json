@@ -1,0 +1,578 @@
+{
+ "id": "p20",
+ "room": "OR 9",
+ "time": "1200",
+ "name": "VESELY, KRISTEN M",
+ "mrn": "0145020",
+ "dob": "11/19/1987",
+ "age": "38 y",
+ "sex": "F",
+ "ht_cm": 163,
+ "wt_kg": 78.0,
+ "preferred_name": "",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "H. Carrigan, MD, New Market Family Health",
+ "insurance": "UnitedHealthcare Choice Plus (prior auth approved 09/2026)",
+ "emergency_contact": "Jason Vesely (spouse) 865-555-0287",
+ "isolation": "",
+ "allergies": [
+  [
+   "Adhesive tape",
+   "Blistering",
+   "Mild",
+   "2014"
+  ]
+ ],
+ "case": {
+  "procedure": "Bilateral reduction mammaplasty (inferior pedicle, Wise pattern)",
+  "short": "Bilateral reduction mammaplasty",
+  "laterality": "Bilateral",
+  "service": "Plastic Surgery",
+  "surgeon": "N. Tolliver, MD",
+  "assistant": "R. Bunch, PA-C",
+  "indication": "Symptomatic macromastia: chronic neck/shoulder pain, bra-strap grooving, intertrigo; failed PT and supportive garments. Est. resection 750 g per side.",
+  "duration_min": 180,
+  "anesthesia_requested": "General",
+  "position": "Supine, arms abducted on boards, sitting to 60-80 degrees intraop for symmetry check",
+  "dispo": "Same-day discharge vs 23-h observation",
+  "blood": "None",
+  "equipment": "Beach-chair capable table, bair hugger",
+  "implants": "",
+  "surgeon_notes": "Will sit patient up during case. Exparel infiltration by surgeon. Please avoid paper tape.",
+  "add_on": false,
+  "scheduled_on": "09/30/2026"
+ },
+ "problems": [
+  [
+   "Macromastia",
+   "2023",
+   "Active"
+  ],
+  [
+   "Cervicalgia",
+   "2023",
+   "Active"
+  ],
+  [
+   "Intertrigo, inframammary",
+   "2024",
+   "Active"
+  ],
+  [
+   "Motion sickness",
+   "childhood",
+   "Active"
+  ],
+  [
+   "Overweight (BMI 29.4)",
+   "2020",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Macromastia, 36H",
+   "Chronic neck and upper back pain",
+   "Motion sickness since childhood (boats, back seat of car)",
+   "Severe PONV with both prior general anesthetics"
+  ],
+  "psh": [
+   [
+    "06/2014",
+    "Laparoscopic appendectomy",
+    "Lakeway Regional Medical Center"
+   ],
+   [
+    "03/2019",
+    "Dilation and curettage (missed abortion)",
+    "C-N University Hospital"
+   ],
+   [
+    "2020",
+    "Cesarean section (spinal)",
+    "C-N University Hospital"
+   ]
+  ],
+  "family": [
+   "Mother: breast cancer age 62, BRCA negative",
+   "Father: HTN",
+   "No known malignant hyperthermia or pseudocholinesterase deficiency"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Occasional wine",
+   "drugs": "None",
+   "occupation": "Dental hygienist",
+   "living": "Married, 1 child (6), New Market",
+   "other": "Husband driving and staying with her. Nicotine screen negative 09/30 (plastics protocol)."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2020 (pregnancy)"
+   ],
+   [
+    "COVID-19",
+    "2022"
+   ]
+  ],
+  "ob": "G2P1011. LMP 10/14/2026. Copper IUD since 2021."
+ },
+ "home_meds": [
+  [
+   "Ibuprofen 600 mg",
+   "PO q6h PRN neck pain",
+   "OTC",
+   "10/19/2026 (stopped 7 d preop)"
+  ],
+  [
+   "Nystatin powder",
+   "Apply to inframammary folds BID PRN",
+   "H. Carrigan, MD",
+   "10/26/2026"
+  ],
+  [
+   "Meclizine 25 mg",
+   "PO PRN travel",
+   "OTC",
+   "07/2026"
+  ],
+  [
+   "Multivitamin",
+   "Daily",
+   "OTC",
+   "10/26/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Acetaminophen 1000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 1030"
+  ],
+  [
+   "Scopolamine 1 mg/72 h transdermal patch",
+   "Preop, behind ear",
+   "Due - per anesthesia"
+  ],
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 1035"
+  ]
+ ],
+ "discontinued": [
+  [
+   "Cyclobenzaprine 5 mg",
+   "2024",
+   "Drowsiness, little benefit"
+  ]
+ ],
+ "labs": {
+  "cols": [
+   {
+    "dt": "09/30/2026",
+    "comment": "Preop",
+    "vals": {
+     "WBC": [
+      "6.4",
+      ""
+     ],
+     "Hgb": [
+      "13.0",
+      ""
+     ],
+     "Hct": [
+      "39",
+      ""
+     ],
+     "Plt": [
+      "223",
+      ""
+     ],
+     "MCV": [
+      "89",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.2",
+      ""
+     ],
+     "Cl": [
+      "105",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "12",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "93",
+      ""
+     ],
+     "Ca": [
+      "9.1",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.50-1.10"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-15.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   }
+  ],
+  "other": [
+   [
+    "09/30/2026",
+    "Nicotine/cotinine, urine",
+    "Negative",
+    ""
+   ],
+   [
+    "10/27/2026 1015",
+    "Urine hCG, qualitative (point of care)",
+    "Negative",
+    ""
+   ],
+   [
+    "06/2026",
+    "Screening mammogram (BI-RADS)",
+    "BI-RADS 1, negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/18/2026",
+   "Mammogram, screening bilateral with tomosynthesis",
+   "Heterogeneously dense breasts. No suspicious mass, calcification, or architectural distortion. BI-RADS 1: Negative.",
+   "M. Oakes-Lyle, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "06/2014",
+   "Inpatient admission (overnight)",
+   "Lakeway Regional Medical Center",
+   "Acute appendicitis",
+   "Lap appy; kept overnight for intractable PONV"
+  ],
+  [
+   "03/2019",
+   "Outpatient surgery",
+   "C-N University Hospital",
+   "Missed abortion",
+   "D&C; delayed discharge for PONV"
+  ],
+  [
+   "2020",
+   "Inpatient (L&D)",
+   "C-N University Hospital",
+   "Cesarean, breech",
+   "Uncomplicated"
+  ],
+  [
+   "09/30/2026",
+   "Plastic surgery clinic",
+   "C-N Plastic Surgery",
+   "Preop",
+   "Surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "06/18/2014 1100",
+   "Media (Outside Record)",
+   "Anesthesia",
+   "Lakeway Regional Medical Center (scanned anesthesia record and PACU notes)",
+   "Lap appendectomy. GA, propofol/fentanyl/rocuronium, ETT, sevoflurane. Ondansetron 4 mg at end. PACU: emesis x4, ondansetron repeat, promethazine 12.5 mg IV, still vomiting; admitted overnight for PONV, discharged POD1 0900. Pt reports \"I was sicker from the anesthesia than the appendix.\""
+  ],
+  [
+   "03/08/2019 0705",
+   "Anesthesia Preop Note (prior)",
+   "Anesthesiology",
+   "C. Ferrell, CRNA",
+   "D&C for missed abortion. Hx severe PONV 2014, motion sickness. Apfel 3. Plan: GA LMA, propofol TIVA, dexamethasone 8 mg + ondansetron 4 mg. -- Addendum (PACU RN M. Simms): nausea/retching 45 min, emesis x2 despite prophylaxis, amisulpride not on formulary, given promethazine 6.25 mg; discharge delayed 3 h."
+  ],
+  [
+   "05/22/2023 1520",
+   "Progress Note",
+   "Family Medicine",
+   "H. Carrigan, MD",
+   "Neck/upper back pain, bra strap grooving. 36H. PT referral. Discussed reduction referral when ready. Weight loss counseling."
+  ],
+  [
+   "09/30/2026 1000",
+   "H&P",
+   "Plastic Surgery",
+   "N. Tolliver, MD",
+   "38 F with symptomatic macromastia, failed PT x 6 mo, chronic intertrigo. Insurance approved. Plan bilateral reduction mammaplasty, inferior pedicle, est 750 g each. PMH: as above. Prior anesthetics with severe PONV - pt very anxious about this, requests \"whatever you can do.\" Nonsmoker, cotinine neg. Meds: ibuprofen PRN (stop 7 days), nystatin powder. Allergies: adhesive tape. Exam: BMI 29.4. Lungs clear, RRR. Breasts symmetric macromastia, grade 3 ptosis, N-SN 34/35 cm. A/P: surgery 10/27. Photos taken."
+  ],
+  [
+   "10/05/2026 1215",
+   "Patient Message",
+   "Plastic Surgery",
+   "MyChart - patient",
+   "I get really sick after anesthesia, both times I threw up for hours. Can someone from anesthesia talk to me before surgery? -- Reply (R. Bunch, PA-C): Absolutely, I have flagged this for the anesthesia team, they will discuss options on the morning of surgery."
+  ],
+  [
+   "10/26/2026 1500",
+   "Telephone Encounter",
+   "Preadmission Testing",
+   "K. Haun, RN",
+   "Preop call. Arrival 1000 for 1200 case. Pt asked if she could eat breakfast early; clarified NPO solids after midnight, clears until 1000. Husband driving."
+  ]
+ ],
+ "vitals": [
+  [
+   "05/22/2023 1500",
+   "118/76",
+   74,
+   14,
+   99,
+   36.7,
+   80.0,
+   "5/10",
+   "Family Medicine"
+  ],
+  [
+   "09/30/2026 0945",
+   "116/74",
+   76,
+   14,
+   99,
+   36.7,
+   78.2,
+   "4/10",
+   "Plastic Surgery"
+  ],
+  [
+   "10/27/2026 1010",
+   "122/78",
+   82,
+   16,
+   99,
+   36.6,
+   78.0,
+   "3/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "POC urine hCG",
+   "10/27/2026 1005",
+   "Resulted - negative"
+  ],
+  [
+   "Cefazolin 2 g IV pre-incision",
+   "10/27/2026 1010",
+   "Active"
+  ],
+  [
+   "Scopolamine patch preop",
+   "10/27/2026 1010",
+   "Active"
+  ],
+  [
+   "NPO after midnight, clears until 1000",
+   "09/30/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A negative (2020)",
+  "antibody_screen": "Not drawn this admission",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: bilateral reduction mammaplasty",
+   "Signed by patient 09/30/2026"
+  ],
+  [
+   "Photography consent",
+   "Signed 09/30/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "06/2014",
+   "Laparoscopic appendectomy",
+   "GA, ETT, sevoflurane",
+   "Severe PONV, admitted overnight",
+   "Lakeway Regional Medical Center"
+  ],
+  [
+   "03/2019",
+   "D&C",
+   "GA, LMA, propofol TIVA, dex + ondansetron",
+   "PONV despite prophylaxis, delayed discharge 3 h",
+   "C-N University Hospital"
+  ],
+  [
+   "2020",
+   "Cesarean section",
+   "Spinal (bupivacaine, fentanyl, morphine 100 mcg)",
+   "Nausea intraop treated with phenylephrine/ondansetron; pruritus",
+   "C-N University Hospital"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 1000",
+  "npo_solids": "10/26/2026 2200 (crackers)",
+  "npo_clears": "10/27/2026 0930 Gatorade",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/30)"
+   ],
+   [
+    "Pregnancy test",
+    "POC urine hCG negative"
+   ],
+   [
+    "Site marked",
+    "Yes - surgeon markings done standing 1040"
+   ],
+   [
+    "Allergy band",
+    "Yes - adhesive tape"
+   ]
+  ],
+  "nursing_note": "A&O x4, anxious, repeatedly asks about nausea plan. Got carsick on drive in. Surgeon markings done. Husband at bedside.",
+  "iv": "20g R hand 1035",
+  "glucose": ""
+ },
+ "label": "K. Vesely",
+ "bmi": "29.4"
+}

@@ -48,6 +48,13 @@ const requiredAppShellEntries = [
   '/ui/liveCaseView.js',
   '/ui/liveCaseModel.js',
   '/ui/patientInterview.js',
+  // Booth, the sim operator.
+  '/ui/simOperator.js',
+  '/ui/simOperatorView.js',
+  // Mock OR Day: care plan sheet, chart picker, schedule index.
+  '/ui/carePlanSheet.js',
+  '/ui/mockOrDay.js',
+  '/data/mock-or-day/index.json',
   '/crisis-sim/sim/scenario/caseContract.js',
   '/crisis-sim/sim/scenario/caseSession.js',
   '/crisis-sim/sim/scenario/caseFlowSession.js',
@@ -65,8 +72,10 @@ function appShellEntries() {
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v57-voice-patient-interview-2026-07-26';");
-    expect(sw).toContain('voice-patient-interview');
+    expect(sw).toContain("const CACHE_VERSION = 'v59-mock-or-day-2026-10-14';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v58-sim-operator-booth-2026-10-14';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v57-voice-patient-interview-2026-07-26';");
+    expect(sw).toContain('mock-or-day');
     expect(sw).toContain("'/hospital-map.js?v=48'");
     expect(sw).not.toContain("const CACHE_VERSION = 'v56-anesthesia-case-brief-2026-07-26';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v55-preanesthesia-ultrasound-2026-07-22';");
@@ -100,6 +109,8 @@ describe('live simulation PWA contract', () => {
     runInNewContext(sw, {
       caches: {
         keys: async () => [
+          'overlord-v59-mock-or-day-2026-10-14',
+          'overlord-v58-sim-operator-booth-2026-10-14',
           'overlord-v57-voice-patient-interview-2026-07-26',
           'overlord-v56-anesthesia-case-brief-2026-07-26',
           'overlord-v55-preanesthesia-ultrasound-2026-07-22',
@@ -121,6 +132,8 @@ describe('live simulation PWA contract', () => {
     listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
     await activation;
     expect(deleted).toEqual([
+      'overlord-v58-sim-operator-booth-2026-10-14',
+      'overlord-v57-voice-patient-interview-2026-07-26',
       'overlord-v56-anesthesia-case-brief-2026-07-26',
       'overlord-v55-preanesthesia-ultrasound-2026-07-22',
       'overlord-v54-preanesthesia-cases-2026-07-20',

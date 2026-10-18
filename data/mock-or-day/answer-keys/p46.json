@@ -1,0 +1,168 @@
+{
+ "id": "p46",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude from the chart for faculty review. Not validated teaching content.",
+ "summary": "Living donor kidney transplant recipient who missed his Monday dialysis: K 6.1 to 6.2 with new peaked T waves, 4 kg over dry weight with pulmonary congestion, pH 7.30, gastroparesis requiring RSI, while his brother's donor nephrectomy is scheduled to induce at 0730.",
+ "asa": {
+  "suggested": "4",
+  "rationale": "ESRD with hyperkalemia, volume overload, diabetic complications."
+ },
+ "decision": {
+  "recommendation": "delay the recipient for dialysis and hold the donor induction",
+  "rationale": "Hyperkalemia with ECG changes plus volume overload before a case that needs volume loading at reperfusion is unsafe. Call the transplant attending and donor room immediately so the donor is not induced; dialyze the recipient first (a few hours)."
+ },
+ "redFlags": [
+  {
+   "id": "k",
+   "severity": "critical",
+   "finding": "Hyperkalemia with ECG changes",
+   "evidence": "K 6.1 and POC 6.2; new peaked T V2 to V5; missed HD 10/26; no hyperkalemia treatment ordered.",
+   "implication": "Arrhythmia, worsened by acidosis, succinylcholine, reperfusion.",
+   "action": "Preop dialysis; if emergent: calcium, insulin with dextrose, avoid succinylcholine, avoid hypoventilation.",
+   "keywords": [
+    "hyperkalemia",
+    "potassium",
+    "peaked t",
+    "dialysis",
+    "calcium",
+    "insulin",
+    "succinylcholine"
+   ]
+  },
+  {
+   "id": "volume",
+   "severity": "critical",
+   "finding": "Volume overload",
+   "evidence": "+4 kg over EDW, crackles, SpO2 94%, new vascular congestion and effusions, BP 172/98.",
+   "implication": "Pulmonary edema with intraop volume loading for graft perfusion.",
+   "action": "Ultrafiltration before surgery.",
+   "keywords": [
+    "volume overload",
+    "pulmonary edema",
+    "ultrafiltration",
+    "edema",
+    "dry weight"
+   ]
+  },
+  {
+   "id": "donor",
+   "severity": "critical",
+   "finding": "Donor already in pre op",
+   "evidence": "Donor induction 0730 in OR 22; fellow says proceed.",
+   "implication": "A healthy donor exposed to surgery with a recipient not ready.",
+   "action": "Escalate to the transplant attending before donor induction.",
+   "keywords": [
+    "donor",
+    "coordinate",
+    "escalat",
+    "transplant attending"
+   ]
+  },
+  {
+   "id": "rsi",
+   "severity": "major",
+   "finding": "Gastroparesis",
+   "evidence": "Gastric emptying 28% at 4 h; diabetic.",
+   "implication": "Aspiration.",
+   "action": "RSI with rocuronium (succinylcholine contraindicated at this K).",
+   "keywords": [
+    "rsi",
+    "rocuronium",
+    "gastroparesis",
+    "aspiration"
+   ]
+  },
+  {
+   "id": "acidosis",
+   "severity": "major",
+   "finding": "Metabolic acidosis",
+   "evidence": "pH 7.30, HCO3 17.",
+   "implication": "Shifts K out of cells.",
+   "action": "Ventilate to compensate; dialysis.",
+   "keywords": [
+    "acidosis",
+    "bicarbonate",
+    "ventilat"
+   ]
+  },
+  {
+   "id": "thymo",
+   "severity": "minor",
+   "finding": "Thymoglobulin and methylprednisolone intraop",
+   "evidence": "Protocol; via central line.",
+   "implication": "Cytokine release, hypotension, fever.",
+   "action": "Premedicate per protocol; central line.",
+   "keywords": [
+    "thymoglobulin",
+    "cytokine",
+    "central line",
+    "methylprednisolone"
+   ]
+  },
+  {
+   "id": "avf",
+   "severity": "minor",
+   "finding": "Left arm AV fistula",
+   "evidence": "Restriction band.",
+   "implication": "No cuff, IV or arterial line on left.",
+   "action": "Protect fistula.",
+   "keywords": [
+    "fistula",
+    "avf",
+    "left arm"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "preop",
+   "item": "Dialysis to normalize K and volume before surgery",
+   "keywords": [
+    "dialysis"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI with rocuronium",
+   "keywords": [
+    "rsi",
+    "rocuronium"
+   ]
+  },
+  {
+   "domain": "monitoring",
+   "item": "Arterial line (right) and CVC",
+   "keywords": [
+    "arterial line",
+    "cvc",
+    "central"
+   ]
+  },
+  {
+   "domain": "reperfusion",
+   "item": "Volume load to CVP 10 to 12, mannitol and furosemide at reperfusion",
+   "keywords": [
+    "cvp",
+    "mannitol",
+    "reperfusion"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Anaphylaxis",
+   "why": "Thymoglobulin and cefazolin"
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Pulmonary congestion and airway instrumentation"
+  }
+ ]
+}
