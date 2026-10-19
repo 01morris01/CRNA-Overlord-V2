@@ -84,7 +84,7 @@ export class ScenarioManager {
     this._spasm = SpasmStage.None;
 
     this._mhActive = false; this._anaphylaxisActive = false; this._bronchoActive = false; this._opioidActive = false;
-    this._sympActive = false; this._sympSeverity = 0;
+    this._sympActive = false; this._sympSeverity = 0; this._sympRising = false; this._mhHeatRate = f(0.02); this._mhPeak = 0;
     this._mhSeverity = 0; this._anaphylaxisSeverity = 0; this._bronchoSeverity = 0; this._opioidSeverity = 0;
     this._mhFailTimer = 0; this._anaphylaxisFailTimer = 0; this._bronchoFailTimer = 0; this._opioidFailTimer = 0;
     this._naloxoneSurgeActive = false; this._naloxoneSurge = 0;
@@ -244,7 +244,7 @@ export class ScenarioManager {
     this._allergenStopped = false;
     this._spasm = SpasmStage.None;
     this._mhActive = false; this._anaphylaxisActive = false; this._bronchoActive = false; this._opioidActive = false;
-    this._sympActive = false; this._sympSeverity = 0;
+    this._sympActive = false; this._sympSeverity = 0; this._sympRising = false; this._mhHeatRate = f(0.02); this._mhPeak = 0;
     this.run = null; this.scoring = null; this.lastResult = null;
     this.actionLog.clear();
     this._mhSeverity = 0; this._anaphylaxisSeverity = 0; this._bronchoSeverity = 0; this._opioidSeverity = 0;
@@ -611,24 +611,35 @@ export class ScenarioManager {
     }
   }
 
+  /* evt.onset 'gradual' (live console injections): the complication builds
+     over minutes, the way it does in a patient, instead of starting at full
+     severity. Scenario files keep the original abrupt onset (and the frozen
+     C# fixtures with it).
+     - MH: severity starts at 0.05 and climbs at the existing 0.003/s
+       (full in about 5 min); heat builds at about 0.25 C/min at full
+       severity instead of over 1 C/min.
+     - Anaphylaxis and bronchospasm: start at 0.4 and climb at the existing
+       0.002/s untreated (full in about 5 min).
+     - High spinal: sympathectomy builds over about 2 min, then recedes. */
   applyComplication(evt) {
     this._administrativePreconditioningEligible = false;
     if (this.patient == null) return;
+    const gradual = evt.onset === 'gradual';
     switch (evt.complicationType) {
       case 'Bronchospasm':
-        this._bronchoActive = true; this._bronchoSeverity = 1;
+        this._bronchoActive = true; this._bronchoSeverity = gradual ? f(0.4) : 1;
         this.showPrompt('COMPLICATION: Rising peak airway pressure, wheeze, SpO2 falling.');
         break;
       case 'HighSpinal':
       case 'Sympathectomy':
-        this._sympActive = true; this._sympSeverity = 1;
+        this._sympActive = true; this._sympSeverity = gradual ? f(0.2) : 1; this._sympRising = gradual;
         break;
       case 'Anaphylaxis':
-        this._anaphylaxisActive = true; this._anaphylaxisSeverity = 1;
+        this._anaphylaxisActive = true; this._anaphylaxisSeverity = gradual ? f(0.4) : 1;
         this.showPrompt('COMPLICATION: Cardiovascular collapse, tachycardia, bronchospasm, rash.');
         break;
       case 'MalignantHyperthermia':
-        this._mhActive = true; this._mhSeverity = 1;
+        this._mhActive = true; this._mhPeak = 0; this._mhSeverity = gradual ? f(0.05) : 1; this._mhHeatRate = gradual ? f(0.004) : f(0.02);
         this.showPrompt('COMPLICATION: EtCO2 rising despite ventilation, tachycardia, rigidity.');
         break;
       case 'OpioidRespDepression':
@@ -688,7 +699,12 @@ export class ScenarioManager {
     const p = this.patient;
     const pressor = f(p.phenylephrineCe + p.ephedrineCe + p.epinephrineCe);
     const recoveryPerSec = pressor > f(0.35) ? f(0.012) : f(0.0015);
-    this._sympSeverity = Max(0, this._sympSeverity - recoveryPerSec * dt);
+    if (this._sympRising) {
+      this._sympSeverity = Min(1, this._sympSeverity + f(0.007) * dt);
+      if (this._sympSeverity >= 1 || pressor > f(0.35)) this._sympRising = false;
+    } else {
+      this._sympSeverity = Max(0, this._sympSeverity - recoveryPerSec * dt);
+    }
     p.svrFactor = Lerp(1, 0.52, this._sympSeverity);
     p.hrComplicationOffset = f(-26 * this._sympSeverity);
     if (this._sympSeverity > 0.7) p.respiratoryDriveFactor = Min(p.respiratoryDriveFactor, 0.6);
@@ -713,12 +729,15 @@ export class ScenarioManager {
     p.hrComplicationOffset = f(30 * this._mhSeverity);
 
     const cooling = this.elapsedTime <= this._coolingUntil;
-    p.heatLoadC = Clamp(p.heatLoadC + (this._mhSeverity * f(0.02) - (cooling ? f(0.05) : 0)) * dt, 0, 4);
+    p.heatLoadC = Clamp(p.heatLoadC + (this._mhSeverity * (this._mhHeatRate ?? f(0.02)) - (cooling ? f(0.05) : 0)) * dt, 0, 4);
 
     if (this._mhSeverity > 0.5) this._mhFailTimer = f(this._mhFailTimer + dt);
     else this._mhFailTimer = Max(0, this._mhFailTimer - dt);
     if (this._mhFailTimer > 1800) { this.arrest(); this.logEvent('MH FAILURE'); }
-    if (this._mhSeverity < 0.1) { this._mhActive = false; this.logEvent('MH resolved'); this.setFeedback('MH controlled', true); }
+    this._mhPeak = Max(this._mhPeak ?? 0, this._mhSeverity);
+    // A gradual onset starts below the resolution line; only a crisis that
+    // has actually built and then come down counts as resolved.
+    if (this._mhSeverity < 0.1 && ((this._mhPeak ?? 1) >= f(0.2) || resolve > f(0.01))) { this._mhActive = false; this.logEvent('MH resolved'); this.setFeedback('MH controlled', true); }
   }
 
   advanceAnaphylaxis(dt) {

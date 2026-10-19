@@ -24,7 +24,7 @@
 export const COMPLICATION_GUIDE = Object.freeze({
   MalignantHyperthermia: Object.freeze({
     label: 'Malignant hyperthermia',
-    signs: 'EtCO2 climbs fast even with more ventilation, heart rate up about 30, airway pressure a little higher, temperature rises later.',
+    signs: 'EtCO2 climbs over about 5 minutes even with more ventilation, heart rate up about 30, airway pressure a little higher, temperature creeps up later (about 1 C every 4 minutes at full crisis).',
     response: 'Volatile off, call for help and the MH cart, 100% O2 at high flow and hyperventilate, dantrolene 2.5 mg/kg and repeat, active cooling.',
     resolves: 'Dantrolene resolves it. It works half as fast while the volatile is still on.',
     when: 'Needs a trigger: a volatile running or succinylcholine given. Best during maintenance.',
@@ -32,7 +32,7 @@ export const COMPLICATION_GUIDE = Object.freeze({
   }),
   Anaphylaxis: Object.freeze({
     label: 'Anaphylaxis',
-    signs: 'MAP falls (SVR down to about half), heart rate up about 40, SpO2 falls from shunt, peak pressures rise, ongoing volume loss.',
+    signs: 'Starts partial and worsens over a few minutes untreated: MAP falls (SVR down to about half), heart rate up about 40, SpO2 falls from shunt, peak pressures rise, ongoing volume loss.',
     response: 'Stop the trigger, call for help, 100% O2, epinephrine titrated IV, fluids, then supporting drugs.',
     resolves: 'Epinephrine resolves it. Stopping the allergen helps a little. It arrests if MAP stays under 45 for 2 minutes.',
     when: 'Any drug given first. Classically minutes after the antibiotic or the neuromuscular blocker.',
@@ -40,7 +40,7 @@ export const COMPLICATION_GUIDE = Object.freeze({
   }),
   Bronchospasm: Object.freeze({
     label: 'Bronchospasm',
-    signs: 'Airway resistance up to 4 times normal, peak pressure rises, EtCO2 slope rises (shark fin), SpO2 falls, heart rate up about 25.',
+    signs: 'Starts partial and worsens over a few minutes untreated: airway resistance up to 4 times normal, peak pressure rises, EtCO2 slope rises (shark fin), SpO2 falls, heart rate up about 25.',
     response: '100% O2, deepen the volatile, albuterol through the circuit, epinephrine if severe, look for a cause (light plane, tube position, anaphylaxis).',
     resolves: 'Albuterol, epinephrine, or a volatile dial of 2.5% or more resolves it. It arrests if SpO2 stays under 85 for 2 minutes.',
     when: 'Patient intubated.',
@@ -64,7 +64,7 @@ export const COMPLICATION_GUIDE = Object.freeze({
   }),
   HighSpinal: Object.freeze({
     label: 'High spinal',
-    signs: 'MAP falls (SVR down to about half), heart rate drops about 26, breathing weakens while it is severe.',
+    signs: 'Builds over about 2 minutes: MAP falls (SVR down to about half), heart rate drops about 26, breathing weakens while it is severe.',
     response: 'Pressors (phenylephrine, ephedrine, epinephrine if severe), fluids, support or secure the airway.',
     resolves: 'Pressors speed recovery a lot. It slowly fades on its own.',
     when: 'Epidural local anesthetic given.',

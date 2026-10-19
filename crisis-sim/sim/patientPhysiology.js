@@ -394,6 +394,10 @@ export class PatientPhysiology {
 
   alveolarVentilationLMin() {
     const noSpontaneousFlow = this.#forcedApnea || this.#proceduralApnea;
+    // A paralyzed or apneic patient who is not being ventilated moves no gas.
+    // Before this, a zero tidal volume fell through to the 450 mL default
+    // below, so drug induced apnea on a mask never desaturated.
+    if (!this.isMechanicallyVentilated && !this.isBreathingSpontaneously && this.tidalVolume === 0) return 0;
     const rr = (!this.isMechanicallyVentilated && noSpontaneousFlow) ? 0 : this.respiratoryRate;
     const tv = this.tidalVolume > 0 ? this.tidalVolume : 450;
     const deadspace = Max(60, f(2.2) * this.weightKg);

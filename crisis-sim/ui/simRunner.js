@@ -1653,7 +1653,9 @@ export class SimRunner {
     if (!LIVE_COMPLICATIONS.includes(type)) {
       throw new RangeError(`Unsupported complication: ${type}`);
     }
-    this.s.applyComplication({ complicationType: type, description: type });
+    // Live injections build over minutes like the real thing (see
+    // ScenarioManager.applyComplication); scenario files keep their timing.
+    this.s.applyComplication({ complicationType: type, description: type, onset: 'gradual' });
     this.logEvent('Complication', type, { action: 'complication', type });
     return { ok: true, type };
   }

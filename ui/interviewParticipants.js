@@ -62,11 +62,31 @@ export function parseContacts(emergencyContact) {
     });
 }
 
-export function voiceForRelation(relation, patientSex) {
-  if (FEMALE.test(relation)) return 'patient-female';
-  if (MALE.test(relation)) return 'patient-male';
+function sexForRelation(relation, patientSex) {
+  if (FEMALE.test(relation)) return 'female';
+  if (MALE.test(relation)) return 'male';
   // A spouse or partner with no gendered word: assume the other sex.
-  return /^m/i.test(String(patientSex ?? '')) ? 'patient-female' : 'patient-male';
+  return /^m/i.test(String(patientSex ?? '')) ? 'female' : 'male';
+}
+
+/* A voice cast role (api/tts.js VOICE_CAST): age band plus sex. */
+export function voiceRole(sex, ageYears) {
+  const who = /^m/i.test(String(sex ?? '')) ? 'male' : 'female';
+  const age = Number.isFinite(ageYears) ? ageYears : 40;
+  const band = age < 12 ? 'child' : age < 18 ? 'teen' : age < 40 ? 'young' : age < 65 ? 'middle' : 'older';
+  return `${band}-${who}`;
+}
+
+/* A relative's likely age, from how they are related to the patient. */
+export function relativeAge(relation, patientAge) {
+  const age = Number.isFinite(patientAge) ? patientAge : 40;
+  if (/mother|father|parent|guardian/.test(relation)) return age < 18 ? (age < 12 ? 32 : 42) : age + 28;
+  if (/daughter|son/.test(relation)) return Math.max(18, age - 30);
+  return age; // spouse, partner, sibling
+}
+
+export function voiceForRelation(relation, patientSex, patientAge = 40) {
+  return voiceRole(sexForRelation(relation, patientSex), relativeAge(relation, patientAge));
 }
 
 function firstName(name) {
@@ -162,7 +182,7 @@ export function buildParticipants(patient = {}) {
     name: patientName,
     label: patientName,
     relation: 'patient',
-    voice: /^(m|male)$/i.test(String(patient.sex ?? '').trim()) ? 'patient-male' : 'patient-female',
+    voice: voiceRole(patient.sex, assessment.ageYears),
     childVoice: stage === 'child' || stage === 'infant',
     presence: 'bedside',
     note: patientNote,
@@ -199,7 +219,7 @@ export function buildParticipants(patient = {}) {
       label: `${firstName(decider.name)}, ${possessive(patientName)} ${relationWord}`,
       relation: relationWord,
       title: titled,
-      voice: voiceForRelation(relationWord, patient.sex),
+      voice: voiceForRelation(relationWord, patient.sex, assessment.ageYears),
       presence: notReached ? 'phone' : 'bedside',
       note: `${decider.name} is ${possessive(patientName)} ${relationWord} and ${titled}${notReached ? '. Nursing has not reached them yet; you reach them by phone' : ''}.`,
     });
@@ -229,7 +249,7 @@ export function buildParticipants(patient = {}) {
       label: contact.name ? `${firstName(contact.name)}, ${possessive(patientName)} ${relationWord}` : `${possessive(patientName)} ${relationWord}`,
       relation: relationWord,
       title: minor && /mother|father|parent/.test(relationWord) ? 'parent' : '',
-      voice: voiceForRelation(relationWord, patient.sex),
+      voice: voiceForRelation(relationWord, patient.sex, assessment.ageYears),
       presence: 'bedside',
       note: '',
     });

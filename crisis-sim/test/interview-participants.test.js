@@ -12,6 +12,9 @@ import { buildChartInterviewGrounding, scriptedAnswer } from '../../ui/mockOrDay
 import { currentSpeaker, historyForSpeaker, questionPlaceholder, speakerTag } from '../../ui/patientInterview.js';
 import { buildSpeakerPrompt, tidyReply } from '../../api/patient-chat.js';
 import { readInterview, writeInterview } from '../../ui/studentWorkflow.js';
+import { relativeAge, voiceRole } from '../../ui/interviewParticipants.js';
+import { resolveVoice, VOICE_CAST } from '../../api/tts.js';
+import { spokenText, synthesisPitch } from '../../ui/patientInterview.js';
 
 const chart = (id) => JSON.parse(readFileSync(new URL(`../../data/mock-or-day/patients/${id}.json`, import.meta.url), 'utf8'));
 const index = JSON.parse(readFileSync(new URL('../../data/mock-or-day/index.json', import.meta.url), 'utf8'));
@@ -54,7 +57,7 @@ describe('who the student talks to, across all 50 patients', () => {
       expect(['mother', 'father'], id).toContain(lead.relation);
       expect(['child', 'nonverbal'], id).toContain(patient.kind);
     }
-    expect(summary('p01').lead).toMatchObject({ name: 'Adaeze Okafor', title: 'parent and legal guardian', voice: 'patient-female' });
+    expect(summary('p01').lead).toMatchObject({ name: 'Adaeze Okafor', title: 'parent and legal guardian', voice: 'young-female' });
     expect(summary('p13').patient.kind).toBe('nonverbal');
     expect(summary('p37').patient.kind).toBe('nonverbal');
     expect(summary('p26').patient.kind).toBe('nonverbal');
@@ -169,5 +172,33 @@ describe('the model is told who is speaking', () => {
     expect(phone).toMatch(/You are NOT at the hospital/);
     expect(tidyReply('*looks at mom* Yes, she did\u2014the nurse had her sign it.\n\nOkay.')).toBe('(looks at mom) Yes, she did, the nurse had her sign it. Okay.');
     for (const prompt of [parent, child]) expect(prompt).not.toMatch(/ [–—] /);
+  });
+});
+
+describe('voices fit the speaker', () => {
+  it('casts by age and sex, and relatives by their likely age', () => {
+    expect(voiceRole('M', 4)).toBe('child-male');
+    expect(voiceRole('F', 15)).toBe('teen-female');
+    expect(voiceRole('F', 85)).toBe('older-female');
+    expect(relativeAge('mother', 4)).toBe(32);
+    expect(relativeAge('daughter', 85)).toBe(55);
+    expect(relativeAge('wife', 82)).toBe(82);
+    const roles = (id) => buildParticipants(chart(id)).participants.map((entry) => entry.voice);
+    expect(roles('p01')).toEqual(['child-male', 'young-female', 'young-male']);
+    expect(roles('p24')).toEqual(['older-female', 'middle-female']);
+    expect(roles('p45')).toEqual(['teen-female', 'middle-female']);
+  });
+
+  it('every cast role resolves to a voice, overridable by env', () => {
+    for (const role of Object.keys(VOICE_CAST)) expect(resolveVoice(role, {})).toMatch(/^[A-Za-z0-9]{20}$/);
+    expect(resolveVoice('older-female', { ELEVENLABS_VOICE_OLDER_FEMALE: 'abc' })).toBe('abc');
+    expect(resolveVoice('patient-male', {})).toBe('pNInz6obpgDQGcFmaJgB');
+    expect(resolveVoice('operator', {})).toBe('2EiwWnXFnvU5JabPnv8n');
+  });
+
+  it('stage directions are read, not spoken', () => {
+    expect(spokenText('(looks at mom) No. (glances up)')).toBe('No.');
+    expect(spokenText('(Mason whimpers softly.)')).toBe('');
+    expect(synthesisPitch('child-male')).toBeGreaterThan(synthesisPitch('older-male'));
   });
 });

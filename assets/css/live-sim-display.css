@@ -179,7 +179,8 @@ body { margin: 0; min-width: 320px; min-height: 100%; background: var(--void); c
 .ge-flow-total span, .ge-flow-total small { color: var(--ge-label); font-size: .62rem; }
 .ge-flow-total strong { color: #fff; font-size: clamp(1.3rem, 2.2vw, 2rem); font-variant-numeric: tabular-nums; }
 
-.ge-vent-settings { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 1px; background: var(--ge-line); }
+.ge-vent-settings { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--ge-line); }
+.ge-setting-mode strong { font-size: clamp(.85rem, 1.25vw, 1.2rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .ge-setting { min-width: 0; display: grid; align-content: center; justify-items: center; gap: .1rem; padding: .5rem .25rem; background: #0e1824; border-top: 2px solid #2f4b6e; font-family: var(--fm); text-align: center; }
 .ge-setting span { color: var(--ge-label); font-size: .62rem; }
 .ge-setting strong { color: #fff; font-size: clamp(1rem, 1.7vw, 1.5rem); font-variant-numeric: tabular-nums; }

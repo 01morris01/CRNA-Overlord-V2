@@ -54,9 +54,29 @@ export function patientVoiceFor(sex) {
 const MALE_VOICE_NAMES = /\b(male|david|mark|daniel|alex|fred|george|guy|aaron|arthur|james|tom)\b/i;
 const FEMALE_VOICE_NAMES = /\b(female|samantha|victoria|karen|zira|susan|serena|moira|tessa|fiona|allison|ava|jenny)\b/i;
 
+/* What gets spoken: stage directions in parentheses are for reading, not
+   for the voice. "(looks at mom) No." speaks "No."; a reply that is only a
+   stage direction (an infant) speaks nothing. */
+export function spokenText(text) {
+  return String(text ?? '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+export function isMaleVoice(voice) {
+  return voice === 'patient-male' || /-male$/.test(String(voice ?? ''));
+}
+
+/* Browser speech fallback pitch per cast role. */
+export function synthesisPitch(voice) {
+  const role = String(voice ?? '');
+  if (role.startsWith('child-')) return 1.5;
+  if (role.startsWith('teen-')) return 1.2;
+  if (role.startsWith('older-')) return isMaleVoice(role) ? 0.85 : 0.95;
+  return isMaleVoice(role) ? 0.95 : 1.1;
+}
+
 export function pickSynthesisVoice(voices, voice) {
   const list = Array.isArray(voices) ? voices.filter((v) => /^en/i.test(v.lang ?? '')) : [];
-  const wanted = voice === 'patient-male' ? MALE_VOICE_NAMES : FEMALE_VOICE_NAMES;
+  const wanted = isMaleVoice(voice) ? MALE_VOICE_NAMES : FEMALE_VOICE_NAMES;
   return list.find((v) => wanted.test(v.name ?? '')) ?? null;
 }
 
@@ -162,7 +182,9 @@ export function createPatientInterview({
     transcript.scrollTop = transcript.scrollHeight;
   }
 
-  async function speak(text) {
+  async function speak(rawText) {
+    const text = spokenText(rawText);
+    if (!text) return;
     // Prefer the ElevenLabs proxy; fall back to browser speech synthesis.
     if (fetchImpl) {
       try {
@@ -187,7 +209,7 @@ export function createPatientInterview({
       const who = speaker();
       const chosen = pickSynthesisVoice(synth.getVoices?.(), who.voice ?? grounding?.voice);
       if (chosen) utterance.voice = chosen;
-      utterance.pitch = who.childVoice ? 1.5 : ((who.voice ?? grounding?.voice) === 'patient-male' ? 0.95 : 1.1);
+      utterance.pitch = synthesisPitch(who.voice ?? grounding?.voice);
       synth.speak(utterance);
     }
   }
