@@ -80,6 +80,7 @@ let latestRubricResult = null;
 let latestRubricPresentationKey = null;
 let latestRubricDebrief = null;
 let clearRubricDraftsOnNextRender = false;
+const machineFormDirty = new Set();
 const preparedRubricPrintState = new WeakMap();
 
 const patientFields = [
@@ -1335,6 +1336,28 @@ const MACHINE_DRAFT_FIELDS = Object.freeze({
   n2oFlowLPerMin: 'n2oFlow',
 });
 
+/* Keeps the machine form showing what the engine is actually set to.
+   PREOXYGENATE and other buttons change FiO2 and flows behind the form; a
+   stale form then put the patient back on 21% the next time anyone pressed
+   APPLY MACHINE SETTINGS. Fields the instructor has edited since the last
+   apply (dirty) and the field being typed in are left alone. Returns the
+   names of the fields it updated. */
+export function syncMachineFormFromSnapshot({ form, snapshot, dirty = new Set(), activeElement = null } = {}) {
+  const updated = [];
+  if (!form || !snapshot) return updated;
+  for (const [controlName, snapshotKey] of Object.entries(MACHINE_DRAFT_FIELDS)) {
+    const value = snapshot[snapshotKey];
+    const control = form.elements?.namedItem?.(controlName);
+    if (!control || !Number.isFinite(value) || dirty.has(controlName) || control === activeElement) continue;
+    const next = String(Number(value.toFixed(4)));
+    if (control.value !== next) {
+      control.value = next;
+      updated.push(controlName);
+    }
+  }
+  return updated;
+}
+
 export function syncClinicalDraftControls({
   documentRoot,
   snapshot,
@@ -1381,6 +1404,7 @@ function syncCaseSetupControls(snapshot) {
     onVolatileAgent: renderVolatileSelection,
   });
   volatileSelectionDirty = false;
+  machineFormDirty.clear();
   return draft;
 }
 
@@ -1566,6 +1590,12 @@ function renderSnapshot(snapshot) {
   if (volatileDial && document.activeElement !== volatileDial && !volatileSelectionDirty) {
     volatileDial.value = String(snapshot.vaporizer);
   }
+  syncMachineFormFromSnapshot({
+    form: document.getElementById('live-machine-form'),
+    snapshot,
+    dirty: machineFormDirty,
+    activeElement: document.activeElement,
+  });
   setText('live-volatile-current-agent', snapshot.vaporizerAgent);
   setText('live-volatile-current-dial', Number(snapshot.vaporizer).toFixed(1));
   setText('live-volatile-et', Number(snapshot.etAgent).toFixed(1));
@@ -1863,6 +1893,7 @@ function applyMachine(event) {
   }
   liveRunner.setVentMode(mode);
   liveRunner.setMachine(patch);
+  machineFormDirty.clear();
   liveRunner.logEvent('Machine', `${ventName(mode)} · TV ${patch.setTidalVolume} · RR ${patch.setRespiratoryRate} · PEEP ${patch.setPeep}`);
   setStatus('Machine settings applied.', 'success');
   liveRunner.emit();
@@ -2277,6 +2308,11 @@ function bindControls() {
   });
   document.getElementById('live-patient-form')?.addEventListener('submit', applyPatient);
   document.getElementById('live-machine-form')?.addEventListener('submit', applyMachine);
+  for (const type of ['input', 'change']) {
+    document.getElementById('live-machine-form')?.addEventListener(type, (event) => {
+      if (event.target?.name) machineFormDirty.add(event.target.name);
+    });
+  }
   document.getElementById('live-volatile-dial')?.addEventListener('input', () => {
     volatileSelectionDirty = true;
   });
