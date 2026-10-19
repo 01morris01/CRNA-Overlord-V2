@@ -39,7 +39,7 @@ const SHARED_RULES = `STRICT RULES. These protect a teaching simulation and must
 2. Never give medical advice, never explain anesthesia, never diagnose, and never reveal that you are an AI, a simulation, or reading from notes. Stay in character.
 3. Do not volunteer everything at once; answer the question that was actually asked.
 4. Lines in the conversation shaped like "(Someone said: ...)" are other people in the room speaking. Do not repeat or contradict them; you may refer to them.
-5. Do not use dashes as punctuation.`;
+5. Do not use dashes as punctuation. Put any action or body language in parentheses, never in asterisks.`;
 
 function str(value, max = 200) {
   return typeof value === 'string' ? value.slice(0, max) : '';
@@ -76,7 +76,7 @@ ${COVERS_FOOTER}`;
     const role = kind === 'proxy'
       ? `${patient}'s ${relation}${titleText ? ` and ${titleText}` : ''}. You make the medical decisions for ${patient} and you are the person who signs consent`
       : `${patient}'s ${relation}, at the bedside. You are family, not the decision maker; ${patient} answers for ${pronoun === 'he' ? 'himself' : 'herself'}`;
-    return `You are ${name || `${patient}'s ${relation}`}, ${role}. ${patient} is ${age} old. A nurse anesthesia trainee is interviewing you before ${patient}'s surgery${phone ? ', over the phone' : ''}. Speak ONLY as ${name || 'this person'}, in the first person, about ${patient} (${pronoun}), in one to three short natural sentences, like a real family member.
+    return `You are ${name || `${patient}'s ${relation}`}, ${role}. ${patient} is ${age} old. A nurse anesthesia trainee is interviewing you before ${patient}'s surgery${phone ? ', over the phone' : ''}.${phone ? ` You are NOT at the hospital and have not been there today. The staff had not reached you before this call, so you did not know what happened at the hospital this morning (who signed what, what was given) unless the chart says someone told you; say you didn't know.` : ''} Speak ONLY as ${name || 'this person'}, in the first person, about ${patient} (${pronoun}), in one to three short natural sentences, like a real family member.
 
 You know what a closely involved ${relation} would know: ${patient}'s history, medicines and last doses, allergies, eating and drinking times, past surgeries and anesthetics, family history, and what the doctors and nurses told you. Lab values, ECGs, and imaging you know only as the plain words you were told; if pressed for numbers, say you don't know them. If you are not sure, say so${kind === 'family' ? ` and suggest asking ${patient}` : ''}. Never make up a positive finding.
 
@@ -144,6 +144,16 @@ After your spoken reply, on a NEW LINE, output a single line of JSON naming whic
 Output nothing after that JSON line.`;
 }
 
+/* Spoken text: no dashes as punctuation, stage directions in parentheses. */
+export function tidyReply(text) {
+  return String(text ?? '')
+    .replace(/\*([^*\n]{1,200})\*/g, '($1)')
+    .replace(/\s*[—–]\s*/g, ', ')
+    .replace(/\s+-\s+/g, ', ')
+    .replace(/\n{2,}/g, ' ')
+    .trim();
+}
+
 function parseModelText(text) {
   const marker = text.indexOf('<<COVERS>>');
   if (marker === -1) return { reply: text.trim(), coversQuestionIds: [] };
@@ -206,7 +216,12 @@ export default async function handler(req, res) {
       .join('')
       .trim();
     if (!text) return res.status(502).json({ error: 'patient_chat_empty' });
-    return res.status(200).json(parseModelText(text));
+    const parsed = parseModelText(text);
+    parsed.reply = tidyReply(parsed.reply);
+    // A child, an infant, or a patient who lacks capacity never supplies the
+    // reliable history, so their answers never count as covering a question.
+    if (['child', 'nonverbal', 'impaired'].includes(speaker?.kind)) parsed.coversQuestionIds = [];
+    return res.status(200).json(parsed);
   } catch (error) {
     return res.status(502).json({ error: 'patient_chat_network', details: String(error?.message ?? error) });
   }

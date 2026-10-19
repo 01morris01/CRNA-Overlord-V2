@@ -10,7 +10,7 @@ import {
 } from '../../ui/interviewParticipants.js';
 import { buildChartInterviewGrounding, scriptedAnswer } from '../../ui/mockOrDay.js';
 import { currentSpeaker, historyForSpeaker, questionPlaceholder, speakerTag } from '../../ui/patientInterview.js';
-import { buildSpeakerPrompt } from '../../api/patient-chat.js';
+import { buildSpeakerPrompt, tidyReply } from '../../api/patient-chat.js';
 import { readInterview, writeInterview } from '../../ui/studentWorkflow.js';
 
 const chart = (id) => JSON.parse(readFileSync(new URL(`../../data/mock-or-day/patients/${id}.json`, import.meta.url), 'utf8'));
@@ -165,6 +165,9 @@ describe('the model is told who is speaking', () => {
     expect(buildSpeakerPrompt({ kind: 'family', name: 'Darla Reynolds', relation: 'mother', patientName: 'Colton', patientAge: '36 y', patientSex: 'M' }, {}, []))
       .toMatch(/You are family, not the decision maker; Colton answers for himself/);
     expect(buildSpeakerPrompt({ kind: 'self' }, {}, [])).toBeNull();
+    const phone = buildSpeakerPrompt({ kind: 'proxy', name: 'Donna', relation: 'daughter', title: 'healthcare POA', presence: 'phone', patientName: 'Miss Opal', patientAge: '85 y', patientSex: 'F' }, {}, []);
+    expect(phone).toMatch(/You are NOT at the hospital/);
+    expect(tidyReply('*looks at mom* Yes, she did\u2014the nurse had her sign it.\n\nOkay.')).toBe('(looks at mom) Yes, she did, the nurse had her sign it. Okay.');
     for (const prompt of [parent, child]) expect(prompt).not.toMatch(/ [–—] /);
   });
 });
