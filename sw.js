@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v65-voices-timing-2026-10-19';
+const CACHE_VERSION = 'v66-onset-tof-2026-10-19';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

@@ -152,3 +152,32 @@ describe('complications injected from the console build like the real thing', ()
     expect(spo2[30]).toBeGreaterThan(spo2[300]);
   });
 });
+
+describe('instant mode for showing the concept', () => {
+  it('INSTANT MH is at full severity right away; REALISTIC builds', () => {
+    const instant = intubatedOnSevo({ settle: 600 });
+    const realistic = intubatedOnSevo({ settle: 600 });
+    const base = instant.snapshot().etco2;
+    expect(instant.injectComplication('MalignantHyperthermia', { onset: 'instant' })).toMatchObject({ onset: 'instant' });
+    expect(realistic.injectComplication('MalignantHyperthermia')).toMatchObject({ onset: 'realistic' });
+    steps(instant, 60);
+    steps(realistic, 60);
+    expect(instant.snapshot().etco2 - base).toBeGreaterThan(40);
+    expect(realistic.snapshot().etco2 - base).toBeLessThan(25);
+    // Abrupt complications have no slow version.
+    expect(instant.injectComplication('Laryngospasm', { onset: 'realistic' }).onset).toBe('instant');
+  });
+
+  it('INSTANT volatile uptake follows the dial within a minute and survives RESET', () => {
+    const r = intubatedOnSevo({ dial: 0 });
+    expect(r.getAgentKinetics()).toBe('physiologic');
+    r.setAgentKinetics('legacy');
+    r.setVolatile({ agent: 'Sevoflurane', dialPercent: 2 });
+    steps(r, 60);
+    expect(r.snapshot().etAgent).toBeGreaterThan(1.3);
+    r.reset();
+    expect(r.getAgentKinetics()).toBe('legacy');
+    r.setAgentKinetics('physiologic');
+    expect(r.getAgentKinetics()).toBe('physiologic');
+  });
+});

@@ -17,6 +17,7 @@ import {
   runRubricFinalizationAction,
   setRubricConsoleReadOnly,
   syncClinicalDraftControls,
+  renderNmbPanel,
 } from '../../ui/liveSimView.js';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -116,12 +117,12 @@ describe('live rubric instructor console', () => {
   });
 
   it('renders the complete accessible console shell without replacing clinical controls', () => {
-    const markup = renderRubricConsoleShell();
+    const markup = renderRubricConsoleShell() + renderNmbPanel();
     for (const id of [
       'live-rubric-scenario', 'live-rubric-load', 'live-rubric-summary',
       'live-rubric-source-warning', 'live-rubric-flags', 'live-rubric-items',
       'live-rubric-finalization-status', 'live-instructor-nmb-custom',
-      'live-instructor-nmb-apply', 'live-instructor-nmb-readback',
+      'live-instructor-nmb-apply', 'live-instructor-nmb-readback', 'live-check-tof',
       'live-rubric-finalize', 'live-rubric-print', 'live-rubric-student',
       'live-rubric-evaluator', 'live-rubric-date', 'live-rubric-print-status',
     ]) expect(markup).toContain(`id="${id}"`);

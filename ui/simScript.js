@@ -203,7 +203,18 @@ const SOURCE_NAMES = Object.freeze({
 });
 
 /* Note for the instructor when a complication starts. */
-export function describeInjection({ type, source = 'instructor', tSec = 0, event = null, freePlay = false } = {}) {
+/* The guide describes the realistic clock; INSTANT drops the timing words. */
+export function instantSigns(text) {
+  const cleaned = String(text)
+    .replace(/^(Starts partial and worsens over a few minutes untreated|Builds over about 2 minutes):\s*/i, '')
+    .replace(/\s*over about 5 minutes/i, '')
+    .replace(/\s*\(about 1 C every 4 minutes at full crisis\)/i, '');
+  return `All at once. ${cleaned.charAt(0).toUpperCase()}${cleaned.slice(1)}`;
+}
+
+export const GRADUAL_TYPES = Object.freeze(['MalignantHyperthermia', 'Anaphylaxis', 'Bronchospasm', 'HighSpinal']);
+
+export function describeInjection({ type, source = 'instructor', tSec = 0, event = null, freePlay = false, onset = null } = {}) {
   const guide = guideFor(type);
   const who = SOURCE_NAMES[source] ?? 'You';
   let why;
@@ -221,10 +232,11 @@ export function describeInjection({ type, source = 'instructor', tSec = 0, event
     severity: 'critical',
     tSec,
     type,
-    title: `${who} started ${guide.label} at ${formatClock(tSec)}`,
+    title: `${who} started ${guide.label}${onset === 'instant' && GRADUAL_TYPES.includes(type) ? ' (instant)' : ''} at ${formatClock(tSec)}`,
     lines: [
       ['Why', why],
-      ['Watch for', guide.signs],
+      ...(GRADUAL_TYPES.includes(type) ? [['Onset', onset === 'instant' ? 'Instant: full severity now, to show the concept.' : 'Realistic: it builds over the next few minutes.']] : []),
+      ['Watch for', onset === 'instant' && GRADUAL_TYPES.includes(type) ? instantSigns(guide.signs) : guide.signs],
       ['Student should', guide.response],
       ['Resolves when', guide.resolves],
     ].filter(([, text]) => text),

@@ -40,6 +40,7 @@ import {
   buildFacultyAnswer,
   formatClock,
   RUN_MODES,
+  GRADUAL_TYPES,
   summarizeEventPlan,
 } from './simScript.js';
 
@@ -203,7 +204,10 @@ export function renderEventPlanMarkup(events = [], { runMode = 'booth', live = f
         <p class="live-event-reason">${escapeHtml(event.reason)}${event.why ? ` <em>Chart: ${escapeHtml(event.why)}.</em>` : ''}</p>
         ${flags}
         ${when ? `<p class="live-event-when">${escapeHtml(when)}</p>` : ''}
-        <button type="button" data-trigger-event="${escapeHtml(event.type)}" ${!live || running ? 'disabled' : ''}>${triggerLabel}</button>
+        <div class="live-event-buttons">
+          <button type="button" data-trigger-event="${escapeHtml(event.type)}" data-onset="realistic" ${!live || running ? 'disabled' : ''} title="${GRADUAL_TYPES.includes(event.type) ? 'Builds over minutes, like the real thing' : 'Start it now'}">${triggerLabel}</button>
+          ${GRADUAL_TYPES.includes(event.type) ? `<button type="button" class="live-event-instant" data-trigger-event="${escapeHtml(event.type)}" data-onset="instant" ${!live || running ? 'disabled' : ''} title="Full severity now, to show the concept">INSTANT</button>` : ''}
+        </div>
       </li>`;
   }).join('');
 }
@@ -656,8 +660,8 @@ export function createSimOperatorController({
     }
   }
 
-  function triggerEvent(type) {
-    const result = operator.triggerEvent(type);
+  function triggerEvent(type, { onset = 'realistic' } = {}) {
+    const result = operator.triggerEvent(type, { onset });
     if (result?.ok === false) {
       onInstructorNote({
         kind: 'info', severity: 'warn', tSec: simTime() ?? 0,
@@ -741,7 +745,7 @@ export function createSimOperatorController({
     }
     query('live-event-plan')?.addEventListener('click', (event) => {
       const button = event.target?.closest?.('[data-trigger-event]');
-      if (button && !button.disabled) triggerEvent(button.dataset.triggerEvent);
+      if (button && !button.disabled) triggerEvent(button.dataset.triggerEvent, { onset: button.dataset.onset ?? 'realistic' });
     });
     query('live-operator-tryme')?.addEventListener('click', () => {
       operator.forceSoon();

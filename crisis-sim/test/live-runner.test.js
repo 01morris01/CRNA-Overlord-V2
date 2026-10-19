@@ -581,7 +581,7 @@ describe('live SimRunner integration', () => {
     const affected = advance(runner, 5);
     const peakResistance = affected.airwayRes;
 
-    expect(result).toEqual({ ok: true, type: 'Bronchospasm' });
+    expect(result).toEqual({ ok: true, type: 'Bronchospasm', onset: 'realistic' });
     expect(peakResistance).toBeGreaterThan(1);
     expect(affected.shunt).toBeGreaterThan(0);
 
