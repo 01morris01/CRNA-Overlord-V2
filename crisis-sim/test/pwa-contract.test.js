@@ -51,6 +51,7 @@ const requiredAppShellEntries = [
   // Booth, the sim operator.
   '/ui/simOperator.js',
   '/ui/simOperatorView.js',
+  '/ui/simScript.js',
   // Mock OR Day: care plan sheet, chart picker, schedule index.
   '/ui/carePlanSheet.js',
   '/ui/mockOrDay.js',
@@ -79,12 +80,13 @@ function appShellEntries() {
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v61-instructor-student-sim-2026-10-18';");
+    expect(sw).toContain("const CACHE_VERSION = 'v62-booth-instructor-desk-2026-10-18';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v60-student-workstation-2026-10-18';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v59-mock-or-day-2026-10-14';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v58-sim-operator-booth-2026-10-14';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v57-voice-patient-interview-2026-07-26';");
-    expect(sw).toContain('instructor-student-sim');
+    expect(sw).not.toContain("const CACHE_VERSION = 'v61-instructor-student-sim-2026-10-18';");
+    expect(sw).toContain('booth-instructor-desk');
     expect(sw).toContain("'/hospital-map.js?v=48'");
     expect(sw).not.toContain("const CACHE_VERSION = 'v56-anesthesia-case-brief-2026-07-26';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v55-preanesthesia-ultrasound-2026-07-22';");
@@ -118,6 +120,7 @@ describe('live simulation PWA contract', () => {
     runInNewContext(sw, {
       caches: {
         keys: async () => [
+          'overlord-v62-booth-instructor-desk-2026-10-18',
           'overlord-v61-instructor-student-sim-2026-10-18',
           'overlord-v60-student-workstation-2026-10-18',
           'overlord-v59-mock-or-day-2026-10-14',
@@ -143,6 +146,7 @@ describe('live simulation PWA contract', () => {
     listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
     await activation;
     expect(deleted).toEqual([
+      'overlord-v61-instructor-student-sim-2026-10-18',
       'overlord-v60-student-workstation-2026-10-18',
       'overlord-v59-mock-or-day-2026-10-14',
       'overlord-v58-sim-operator-booth-2026-10-14',

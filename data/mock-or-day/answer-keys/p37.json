@@ -99,7 +99,10 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Recent URI, mask anesthetic"
+   "why": "Recent URI, mask anesthetic",
+   "flags": [
+    "uri"
+   ]
   }
  ]
 }

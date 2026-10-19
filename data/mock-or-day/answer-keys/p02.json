@@ -198,15 +198,22 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Latex allergy"
+   "why": "Latex allergy",
+   "flags": [
+    "latex"
+   ]
   },
   {
    "type": "Bronchospasm",
-   "why": "Asthma"
+   "why": "Asthma",
+   "flags": [
+    "uterotonics"
+   ]
   },
   {
    "type": "HighSpinal",
-   "why": "Neuraxial in a parturient"
+   "why": "Neuraxial in a parturient",
+   "flags": []
   }
  ]
 }

@@ -165,11 +165,13 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Antibiotics, protamine, and blood products"
+   "why": "Antibiotics, protamine, and blood products",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "Mild emphysema"
+   "why": "Mild emphysema",
+   "flags": []
   }
  ]
 }

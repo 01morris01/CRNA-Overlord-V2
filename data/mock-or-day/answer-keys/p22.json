@@ -102,15 +102,18 @@
  "boothComplications": [
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Popliteal and saphenous blocks"
+   "why": "Popliteal and saphenous blocks",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "Daily vaping"
+   "why": "Daily vaping",
+   "flags": []
   },
   {
    "type": "Laryngospasm",
-   "why": "Young smoker at emergence"
+   "why": "Young smoker at emergence",
+   "flags": []
   }
  ]
 }

@@ -158,11 +158,17 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Thymoglobulin and cefazolin"
+   "why": "Thymoglobulin and cefazolin",
+   "flags": [
+    "thymo"
+   ]
   },
   {
    "type": "Bronchospasm",
-   "why": "Pulmonary congestion and airway instrumentation"
+   "why": "Pulmonary congestion and airway instrumentation",
+   "flags": [
+    "volume"
+   ]
   }
  ]
 }

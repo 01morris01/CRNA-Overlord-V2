@@ -132,11 +132,13 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "40 pack year former smoker"
+   "why": "40 pack year former smoker",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Heparin, protamine, bovine patch, cefazolin"
+   "why": "Heparin, protamine, bovine patch, cefazolin",
+   "flags": []
   }
  ]
 }

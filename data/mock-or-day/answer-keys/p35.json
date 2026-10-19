@@ -137,11 +137,15 @@
  "boothComplications": [
   {
    "type": "HighSpinal",
-   "why": "Spinal in a frail HF patient"
+   "why": "Spinal in a frail HF patient",
+   "flags": [
+    "hf"
+   ]
   },
   {
    "type": "OpioidRespDepression",
-   "why": "Elderly patient receiving sedation"
+   "why": "Elderly patient receiving sedation",
+   "flags": []
   }
  ]
 }

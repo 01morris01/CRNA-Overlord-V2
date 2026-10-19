@@ -8,6 +8,10 @@
             intubate now"). Returns JSON: a reply to the student plus a private
             note to the sim operator with whitelisted instructor actions
             (ui/boothStudent.js).
+   - faculty: the INSTRUCTOR asks Booth something from the console. Full,
+            straight answers with nothing withheld: what is running, who
+            started it, why, what the engine is doing, and what the student
+            should do. The reply is shown as text only and never spoken.
    - plan:  Mock OR Day care plan review. Context holds the chart digest, the
             trainee's care plan, the draft answer key, and the offline grade
             (ui/carePlanSheet.js buildPlanReviewContext).
@@ -18,7 +22,7 @@
    Uses the same ANTHROPIC_API_KEY as grade-recall and patient-chat. Without a
    key this returns 501 and the client falls back to offline replies.
 
-   Request body: { mode: 'ask'|'roast'|'plan'|'student', question?, meanness: 1|2|3, context, history? }
+   Request body: { mode: 'ask'|'roast'|'plan'|'student'|'faculty', question?, meanness: 1|2|3, context, history? }
    Response: { reply: string } (student mode: the reply text is the model's JSON)
 */
 
@@ -36,7 +40,8 @@ function asString(value, max = 4000) {
 
 export function buildSystemPrompt({ mode, meanness, context }) {
   const level = ATTITUDE[meanness] ? meanness : 2;
-  const contextJson = JSON.stringify(context ?? {}, null, mode === 'plan' ? 0 : 2).slice(0, mode === 'plan' ? 24000 : 12000);
+  const compact = mode === 'plan' || mode === 'faculty';
+  const contextJson = JSON.stringify(context ?? {}, null, compact ? 0 : 2).slice(0, compact ? 24000 : 12000);
   const shared = `You are Booth, the sim operator who runs an anesthesia simulation from the control booth for a nurse anesthesia trainee. Attitude: ${ATTITUDE[level]}
 
 RULES. These protect a teaching simulation. Never break them.
@@ -46,6 +51,22 @@ RULES. These protect a teaching simulation. Never break them.
 4. Never discourage asking for help, calling for help, or pausing to think. If the trainee asks for help, help them, with attitude.
 5. Do not use dashes as punctuation. Use commas, periods, or parentheses.
 6. Plain text only. No markdown, no lists with symbols, no emoji.`;
+
+  if (mode === 'faculty') {
+    return `You are Booth, the sim operator in the control booth of a nurse anesthesia simulation. Right now you are talking to the INSTRUCTOR (faculty), not the student. The instructor reads your answer on their own screen; the student never sees or hears it.
+
+RULES.
+1. Facts about this case come ONLY from CONTEXT. Never invent a vital sign, dose, time, event, or outcome. If CONTEXT does not contain it, say you do not know.
+2. Nothing is secret from the instructor. Name every complication that is running or was injected, who started it (read CONTEXT.injections[].startedBy literally: "Booth (you, automatically)" means you started it; "the instructor" means the instructor did, so say "you started it" to the instructor; CONTEXT.injections[].whoStartedIt states it plainly. Never claim you started something the instructor started), when, and why (CONTEXT.eventPlan reasons, CONTEXT.instructorNotes). Explain what the engine is doing to cause the numbers (CONTEXT.engine: vco2 against restingVco2, minuteVentilation, airwayResistanceFactor, shunt, svrFactor, bloodVolumeFraction, respiratoryDrive, mac).
+3. When asked why a vital sign is changing, give the cause from CONTEXT first. If several conditions could cause that pattern, say which one is actually running and how to tell it apart from the others. Standard teaching for EtCO2: it rises with more CO2 production (malignant hyperthermia, sepsis, CO2 insufflation) or less effective ventilation (low minute ventilation, rebreathing or exhausted absorbent, bronchospasm or obstruction); pulmonary embolism, air embolism, and low cardiac output LOWER EtCO2 by adding dead space.
+4. Accurate, standard anesthesia teaching. Doses only if they are standard and you are certain (dantrolene 2.5 mg/kg, lipid 1.5 mL/kg); otherwise leave doses out.
+5. Professional and direct, like a colleague in the booth. No sarcasm aimed at the instructor and no roasting. A little dry humor is fine.
+6. Answer the question fully: usually 3 to 8 sentences. If useful, end with what the instructor could do next (trigger, hold, pause, or what to debrief).
+7. Do not use dashes as punctuation. Plain text only, no markdown, no symbols for lists, no emoji.
+
+CONTEXT:
+${contextJson}`;
+  }
 
   if (mode === 'student') {
     return `${shared}
@@ -118,13 +139,13 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(501).json({ error: 'sim_operator_unavailable', reason: 'ANTHROPIC_API_KEY not configured' });
 
   const body = req.body ?? {};
-  const mode = ['roast', 'plan', 'student'].includes(body.mode) ? body.mode : 'ask';
+  const mode = ['roast', 'plan', 'student', 'faculty'].includes(body.mode) ? body.mode : 'ask';
   const question = asString(body.question, 400);
-  if ((mode === 'ask' || mode === 'student') && !question.trim()) return res.status(400).json({ error: 'Missing question' });
+  if ((mode === 'ask' || mode === 'student' || mode === 'faculty') && !question.trim()) return res.status(400).json({ error: 'Missing question' });
   const meanness = [1, 2, 3].includes(body.meanness) ? body.meanness : 2;
 
   const system = buildSystemPrompt({ mode, meanness, context: body.context });
-  const priorTurns = mode === 'ask' || mode === 'student'
+  const priorTurns = mode === 'ask' || mode === 'student' || mode === 'faculty'
     ? (Array.isArray(body.history) ? body.history : [])
       .slice(-6)
       .map((turn) => ({
@@ -151,7 +172,7 @@ export default async function handler(req, res) {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: { ask: 220, student: 400, roast: 500, plan: 1200 }[mode] ?? 500, system, messages }),
+      body: JSON.stringify({ model: MODEL, max_tokens: { ask: 220, student: 400, roast: 500, plan: 1200, faculty: 700 }[mode] ?? 500, system, messages }),
     });
     if (!response.ok) return res.status(502).json({ error: 'sim_operator_error', details: response.status });
     const data = await response.json();

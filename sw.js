@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v61-instructor-student-sim-2026-10-18';
+const CACHE_VERSION = 'v62-booth-instructor-desk-2026-10-18';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -15,7 +15,7 @@ const APP_SHELL = [
   '/ui/liveSimView.js', '/ui/liveSimDisplay.js', '/ui/liveWaveformRenderer.js',
   '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
   '/ui/liveCaseView.js', '/ui/liveCaseModel.js', '/ui/patientInterview.js',
-  '/ui/simOperator.js', '/ui/simOperatorView.js',
+  '/ui/simOperator.js', '/ui/simOperatorView.js', '/ui/simScript.js',
   '/ui/carePlanSheet.js', '/ui/mockOrDay.js', '/data/mock-or-day/index.json',
   '/student.html', '/assets/css/student.css', '/ui/studentWorkflow.js', '/ui/boothDock.js',
   '/ui/boothStudent.js', '/ui/studentChannel.js',

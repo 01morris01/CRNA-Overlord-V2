@@ -122,15 +122,20 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Emergence in a healthy young patient"
+   "why": "Emergence in a healthy young patient",
+   "flags": []
   },
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Large volume local infiltration"
+   "why": "Large volume local infiltration",
+   "flags": [
+    "exparel"
+   ]
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   }
  ]
 }

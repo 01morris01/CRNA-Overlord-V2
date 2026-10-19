@@ -134,11 +134,18 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "AERD and asthma"
+   "why": "AERD and asthma",
+   "flags": [
+    "aerd",
+    "asthma"
+   ]
   },
   {
    "type": "Laryngospasm",
-   "why": "Blood in the airway at emergence"
+   "why": "Blood in the airway at emergence",
+   "flags": [
+    "field"
+   ]
   }
  ]
 }

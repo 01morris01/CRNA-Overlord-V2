@@ -29,6 +29,19 @@
      Injecting there would corrupt the scored record.
 */
 
+import {
+  buildEventPlan,
+  createTrendWatch,
+  describeFailure,
+  describeInjection,
+  describeResolution,
+  describeTreatment,
+  describeVitalChange,
+  guideFor,
+  INSTRUCTOR_WATCH,
+  RUN_MODES,
+} from './simScript.js';
+
 export const OPERATOR_NAME = 'Booth';
 
 export const MEANNESS_LEVELS = Object.freeze([
@@ -234,6 +247,31 @@ export function eligibleComplications(s, history, { active = [], used = [] } = {
   return (fresh.length > 0 ? fresh : candidates).map((entry) => entry.type);
 }
 
+/* Is this a sensible moment for an event? Used by the instructor's event
+   plan to say when to trigger. ready means the engine conditions fit now;
+   calm adds that nothing else is going on. */
+export function complicationReadiness(type, s = {}, history = {}, { active = [], intensity = 0 } = {}) {
+  const entry = DIRECTOR_COMPLICATIONS.find((item) => item.type === type);
+  const guide = guideFor(type);
+  if (!entry) return { ready: false, calm: false, text: 'Manual only. The console has no rescue for it.' };
+  const h = {
+    drugsGiven: history.drugsGiven instanceof Set ? history.drugsGiven : new Set(history.drugsGiven ?? []),
+    epiduralGiven: Boolean(history.epiduralGiven),
+    wasIntubated: Boolean(history.wasIntubated),
+  };
+  if (active.includes(type)) return { ready: false, calm: false, text: 'Running now.' };
+  let ready = false;
+  try { ready = entry.plausible(s, h); } catch { ready = false; }
+  if (!ready) return { ready: false, calm: false, text: `Waiting. ${guide.when}` };
+  const settling = finite(history.lastDrugT) && finite(s.t) && s.t - history.lastDrugT < DRUG_SETTLE_SEC;
+  const calm = gatingComplications(active, s).length === 0 && intensity < CALM_INTENSITY && !settling;
+  return {
+    ready: true,
+    calm,
+    text: calm ? 'Ready now. The patient is stable, so the student will see it clearly.' : 'Possible now, but something else is going on. Better to wait for a calm stretch.',
+  };
+}
+
 /* Pacing state machine. update() returns { inject: type } when Booth decides
    to act; the caller performs the injection through the runner. */
 export function createDirector({ random = Math.random } = {}) {
@@ -241,6 +279,9 @@ export function createDirector({ random = Math.random } = {}) {
   // Case authored preferences (Mock OR Day answer keys). Survives reset so a
   // loaded case keeps its flavor across runner resets; empty means no bias.
   let preferred = [];
+  // Strict whitelist from the case event plan. null means free play: any
+  // plausible complication. An empty list means nothing fires on its own.
+  let allowed = null;
   function reset() {
     state = {
       phase: 'BUILD_UP', calmForSec: 0, fadeCalmSec: 0, relaxUntilSec: 0,
@@ -276,7 +317,8 @@ export function createDirector({ random = Math.random } = {}) {
         const baseRequired = state.injected.length === 0 ? profile.firstCalmSec : profile.buildCalmSec;
         const required = state.forceSoon ? Math.min(baseRequired, FORCE_SOON_SEC) : baseRequired;
         if (state.calmForSec < required) return null;
-        const pool = eligibleComplications(snapshot, history, { active, used: state.injected });
+        const pool = eligibleComplications(snapshot, history, { active, used: state.injected })
+          .filter((entry) => allowed === null || allowed.includes(entry));
         if (pool.length === 0) return null;
         const favored = pool.filter((entry) => preferred.includes(entry));
         const pickFrom = favored.length > 0 ? favored : pool;
@@ -334,6 +376,10 @@ export function createDirector({ random = Math.random } = {}) {
         : [];
     },
     getPreferred() { return [...preferred]; },
+    setAllowed(types) {
+      allowed = Array.isArray(types) ? types.filter((type) => typeof type === 'string') : null;
+    },
+    getAllowed() { return allowed === null ? null : [...allowed]; },
     forceSoon() {
       state.forceSoon = true;
       if (state.phase === 'RELAX') state.relaxUntilSec = 0;
@@ -911,9 +957,21 @@ export function createSimOperator({
   minGapMs = 5000,
   enabled = true,
   chatter = 1,
+  runMode = 'booth',
+  // Instructor only notes: what started, why, what to watch, what fixes it.
+  // Never spoken; Booth's voice plays in the room.
+  notify = () => {},
 } = {}) {
   const director = createDirector({ random });
-  const settings = { meanness, chaos, enabled, chatter };
+  const settings = {
+    meanness, chaos, enabled, chatter, runMode: RUN_MODES.some((mode) => mode.id === runMode) ? runMode : 'booth',
+  };
+  let eventPlan = [];
+  let instructorNotes = [];
+  let watchState = new Map();
+  let restingVco2 = null;
+  let readyAnnounced = new Set();
+  const trendWatch = createTrendWatch();
   let nextAmbientGapMs = null;
   let memory;
   let history;
@@ -924,6 +982,7 @@ export function createSimOperator({
   let scenarioLogIndex = 0;
   let seenOutcomes = new Set();
   let pendingInjection = null;
+  let pendingSource = null;
   let idleBarkedForAction = -1;
   let transcript = [];
   let caseProfile = null;
@@ -946,8 +1005,76 @@ export function createSimOperator({
     seenOutcomes = new Set();
     idleBarkedForAction = -1;
     transcript = [];
+    instructorNotes = [];
+    watchState = new Map();
+    restingVco2 = null;
+    readyAnnounced = new Set();
+    trendWatch.reset();
+    for (const event of eventPlan) event.fired = false;
   }
   resetState();
+
+  function note(entry) {
+    if (!entry) return null;
+    const item = { ...entry, id: `n${instructorNotes.length + 1}_${Math.round((entry.tSec ?? 0) * 10)}` };
+    instructorNotes.push(item);
+    if (instructorNotes.length > 120) instructorNotes = instructorNotes.slice(-120);
+    try { notify(item); } catch { /* the view is optional */ }
+    return item;
+  }
+
+  function planEvent(type) {
+    return eventPlan.find((event) => event.type === type) ?? null;
+  }
+
+  function runningEntries() {
+    const active = new Set(activeComplications());
+    if ((last?.lidocaineToxicityStage ?? 'none') !== 'none') active.add('LocalAnestheticToxicity');
+    return history.injections
+      .filter((entry) => active.has(entry.type) && entry.resolvedAtSec === null)
+      .map((entry) => ({ type: entry.type, source: entry.source, tSec: entry.tSec }));
+  }
+
+  // Early, silent warnings for the instructor with the reason behind them.
+  function evaluateInstructorWatch(s) {
+    if (!finite(restingVco2) && finite(s.vco2) && s.vco2 > 0) restingVco2 = s.vco2;
+    const context = { restingVco2: restingVco2 ?? 200, active: runningEntries() };
+    for (const watch of INSTRUCTOR_WATCH) {
+      const on = watchState.get(watch.id) === true;
+      let enter = false;
+      let exit = false;
+      try { enter = !on && watch.enter(s); exit = on && watch.exit(s); } catch { /* missing value */ }
+      if (enter) {
+        watchState.set(watch.id, true);
+        note(describeVitalChange(watch, s, context));
+      } else if (exit) {
+        watchState.set(watch.id, false);
+      }
+    }
+    const trend = trendWatch.observe(s);
+    if (trend && watchState.get('etco2') !== true) {
+      note(describeVitalChange({
+        id: 'etco2', label: `EtCO2 climbing (up ${trend.rise} in the last minute)`, value: (snap) => `now ${Math.round(snap.etco2)}`,
+      }, s, context));
+    }
+  }
+
+  // I RUN IT mode: tell the instructor once when each armed event has a
+  // good moment.
+  function announceReadiness(s, intensity, active) {
+    if (settings.runMode !== 'instructor') return;
+    for (const event of eventPlan) {
+      if (!event.autoAllowed || event.fired || readyAnnounced.has(event.type)) continue;
+      const readiness = complicationReadiness(event.type, s, history, { active, intensity });
+      if (!readiness.ready || !readiness.calm) continue;
+      readyAnnounced.add(event.type);
+      note({
+        kind: 'ready', severity: 'info', tSec: s.t ?? 0, type: event.type,
+        title: `Good moment for ${event.label}`,
+        lines: [['Why it is armed', event.reason], ['Now', readiness.text]],
+      });
+    }
+  }
 
   function profile() {
     return CHAOS_PROFILES[settings.chaos] ?? CHAOS_PROFILES[1];
@@ -1075,6 +1202,7 @@ export function createSimOperator({
       seenOutcomes.add(text);
       if (/FAILURE/.test(text)) {
         history.outcomes.push({ tSec: last?.t ?? 0, text });
+        note(describeFailure({ text, tSec: last?.t ?? 0 }));
         for (const entry of history.injections) entry.revealed = true;
         speak({ concept: 'FAILURE' }, { force: true });
         continue;
@@ -1091,6 +1219,9 @@ export function createSimOperator({
         if (entry.type === match.type && entry.resolvedAtSec === null) {
           entry.resolvedAtSec = last?.t ?? 0;
           entry.revealed = true;
+          note(describeResolution({
+            type: entry.type, tSec: entry.resolvedAtSec, startedAtSec: entry.tSec, treated: entry.treatedAtSec !== null,
+          }));
         }
       }
       speak({
@@ -1105,14 +1236,35 @@ export function createSimOperator({
       if (!settings.enabled || !directorAllowed()) return;
       if (!isLive(runner.snapshot?.() ?? last)) return;
       pendingInjection = type;
+      pendingSource = 'booth';
       try {
         runner.injectComplication(type);
       } catch {
         // Unsupported or rejected: the director simply moves on.
       } finally {
         pendingInjection = null;
+        pendingSource = null;
       }
     });
+  }
+
+  /* The instructor pressed TRIGGER on an event plan row. */
+  function triggerEvent(type) {
+    if (!runner) return { ok: false, reason: 'No runner.' };
+    const snapshot = runner.snapshot?.() ?? last;
+    if (!isLive(snapshot)) return { ok: false, reason: 'Start the case first.' };
+    if (activeComplications().includes(type)) return { ok: false, reason: `${guideFor(type).label} is already running.` };
+    pendingInjection = type;
+    pendingSource = 'timeline';
+    try {
+      const result = runner.injectComplication(type);
+      return result ?? { ok: true };
+    } catch (error) {
+      return { ok: false, reason: error.message };
+    } finally {
+      pendingInjection = null;
+      pendingSource = null;
+    }
   }
 
   function observe(snapshot) {
@@ -1141,7 +1293,9 @@ export function createSimOperator({
     readScenarioLog();
     const active = activeComplications();
     const intensity = computeIntensity(snapshot);
+    evaluateInstructorWatch(snapshot);
     evaluateBands(snapshot);
+    announceReadiness(snapshot, intensity, active);
 
     if (intensity >= 0.35
       && t - history.lastLearnerActionT >= IDLE_LIMIT_SEC
@@ -1151,7 +1305,7 @@ export function createSimOperator({
 
     const decision = director.update({
       snapshot, dt, intensity, profile: profile(), active, history,
-      enabled: settings.enabled && directorAllowed(),
+      enabled: settings.enabled && directorAllowed() && settings.runMode === 'booth',
     });
     if (decision?.inject) performInjection(decision.inject);
     if (settings.enabled && !decision?.inject) maybeChatter(snapshot, intensity, active);
@@ -1171,6 +1325,7 @@ export function createSimOperator({
     if (target) {
       target.treatedAtSec = tSec;
       target.revealed = true;
+      note(describeTreatment({ type: target.type, tSec, startedAtSec: target.tSec, drug, action }));
       speak({ concept: 'TREATED', complicationType: target.type, drug }, { force: true });
       return true;
     }
@@ -1190,10 +1345,14 @@ export function createSimOperator({
     if (typeof action !== 'string' || meta.source === 'scenario') return;
 
     if (action === 'complication') {
-      const source = pendingInjection === meta.type ? 'booth' : 'instructor';
+      const source = pendingInjection === meta.type ? (pendingSource ?? 'booth') : 'instructor';
       history.injections.push({
         type: meta.type, source, tSec, treatedAtSec: null, resolvedAtSec: null, revealed: false,
       });
+      const event = planEvent(meta.type);
+      if (event) event.fired = true;
+      note(describeInjection({ type: meta.type, source, tSec, event, freePlay: eventPlan.length === 0 }));
+      if (source === 'timeline') return; // the instructor's trigger stays quiet in the room
       speak({ concept: source === 'booth' ? 'INJECTED' : 'INSTRUCTOR_INJECTED' }, { force: source === 'booth' });
       return;
     }
@@ -1325,10 +1484,86 @@ export function createSimOperator({
     };
   }
 
+  /* Everything, for the instructor's own questions. Nothing is withheld. */
+  function facultyContext() {
+    const base = caseContext({ revealAll: true });
+    const round = (value) => (finite(value) ? Math.round(value) : null);
+    return {
+      ...base,
+      audience: 'instructor',
+      runMode: settings.runMode,
+      injections: history.injections.map((entry) => ({
+        type: entry.type,
+        complication: COMPLICATION_LABELS[entry.type] ?? entry.type,
+        source: entry.source,
+        startedBy: entry.source === 'booth' ? 'Booth (you, automatically)' : 'the instructor',
+        whoStartedIt: entry.source === 'booth'
+          ? `Booth started ${COMPLICATION_LABELS[entry.type] ?? entry.type} on his own.`
+          : `The instructor started ${COMPLICATION_LABELS[entry.type] ?? entry.type} by hand. Booth did not start it.`,
+        injectedAtSec: round(entry.tSec),
+        treatedAtSec: round(entry.treatedAtSec),
+        resolvedAtSec: round(entry.resolvedAtSec),
+      })),
+      activeNow: activeComplications().map((type) => COMPLICATION_LABELS[type] ?? type),
+      eventPlan: eventPlan.map(({ type, label, state, reason, why, autoAllowed, fired, flags }) => ({
+        type, label, state, reason, why, autoAllowed, fired: Boolean(fired),
+        flags: flags.map(({ finding, severity, status }) => ({ finding, severity, status })),
+      })),
+      instructorNotes: instructorNotes.slice(-12).reverse().map(({ kind, title, lines, tSec }) => ({
+        kind, tSec: round(tSec), title, lines,
+      })),
+      engine: {
+        vco2: round(last?.vco2), restingVco2: round(restingVco2), minuteVentilation: finite(last?.effectiveMV) ? Number(last.effectiveMV.toFixed(1)) : null,
+        airwayResistanceFactor: finite(last?.airwayRes) ? Number(last.airwayRes.toFixed(2)) : null,
+        shunt: finite(last?.shunt) ? Number(last.shunt.toFixed(2)) : null,
+        svrFactor: finite(last?.svr) ? Number(last.svr.toFixed(2)) : null,
+        bloodVolumeFraction: finite(last?.vol) ? Number(last.vol.toFixed(2)) : null,
+        respiratoryDrive: finite(last?.respDrive) ? Number(last.respDrive.toFixed(2)) : null,
+        mac: finite(last?.mac) ? Number(last.mac.toFixed(2)) : null,
+        ventMode: last?.ventMode ?? null,
+      },
+    };
+  }
+
+  function setEventPlan(plan) {
+    const fired = new Set(history.injections.map((entry) => entry.type));
+    eventPlan = Array.isArray(plan) ? plan.map((event) => ({ ...event, fired: fired.has(event.type) })) : [];
+    applyAllowed();
+  }
+
+  function applyAllowed() {
+    director.setAllowed(eventPlan.length > 0 ? eventPlan.filter((event) => event.autoAllowed).map((event) => event.type) : null);
+  }
+
   return {
     observe,
     observeEvent,
     caseContext,
+    facultyContext,
+    triggerEvent,
+    setRunMode(mode) {
+      if (RUN_MODES.some((entry) => entry.id === mode)) settings.runMode = mode;
+      readyAnnounced = new Set();
+    },
+    /* Mock OR event plan from the answer key and the graded care plan.
+       null or an empty plan means free play. */
+    setEventPlan,
+    buildAndSetEventPlan({ answerKey, grade }) {
+      const plan = buildEventPlan({ answerKey, grade });
+      setEventPlan(plan);
+      return plan;
+    },
+    getEventPlan() {
+      const active = activeComplications();
+      const s = last ?? {};
+      const intensity = computeIntensity(s);
+      return eventPlan.map((event) => ({
+        ...event,
+        flags: event.flags.map((flag) => ({ ...flag })),
+        readiness: complicationReadiness(event.type, s, history, { active, intensity }),
+      }));
+    },
+    getInstructorNotes() { return instructorNotes.map((entry) => ({ ...entry })); },
     setMeanness(level) { if ([1, 2, 3].includes(Number(level))) settings.meanness = Number(level); },
     setChaos(level) {
       if (Object.hasOwn(CHAOS_PROFILES, Number(level))) {
@@ -1363,7 +1598,7 @@ export function createSimOperator({
     },
     getCaseProfile() { return caseProfile ? { ...caseProfile, preferred: director.getPreferred() } : null; },
     reset: resetState,
-    getSettings() { return { ...settings, directorAllowed: directorAllowed() }; },
+    getSettings() { return { ...settings, directorAllowed: directorAllowed(), planActive: eventPlan.length > 0 }; },
     getDirectorState() { return director.getState(); },
     getHistory() {
       return {

@@ -146,11 +146,17 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Pediatric airway with OSA"
+   "why": "Pediatric airway with OSA",
+   "flags": [
+    "airway"
+   ]
   },
   {
    "type": "MalignantHyperthermia",
-   "why": "Strabismus surgery association"
+   "why": "Strabismus surgery association",
+   "flags": [
+    "mh"
+   ]
   }
  ]
 }

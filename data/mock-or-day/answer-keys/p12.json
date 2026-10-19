@@ -158,11 +158,13 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Antibiotic and reversal agent exposure"
+   "why": "Antibiotic and reversal agent exposure",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "Airway instrumentation in a pinned head"
+   "why": "Airway instrumentation in a pinned head",
+   "flags": []
   }
  ]
 }

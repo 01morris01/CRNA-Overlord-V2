@@ -101,11 +101,17 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Upper endoscopy under light sedation"
+   "why": "Upper endoscopy under light sedation",
+   "flags": [
+    "osa_airway"
+   ]
   },
   {
    "type": "OpioidRespDepression",
-   "why": "Sedation with untreated OSA"
+   "why": "Sedation with untreated OSA",
+   "flags": [
+    "osa_airway"
+   ]
   }
  ]
 }

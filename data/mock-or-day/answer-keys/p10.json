@@ -176,11 +176,15 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Isosulfan blue dye"
+   "why": "Isosulfan blue dye",
+   "flags": [
+    "blue_dye"
+   ]
   },
   {
    "type": "Laryngospasm",
-   "why": "Supraglottic airway at light planes"
+   "why": "Supraglottic airway at light planes",
+   "flags": []
   }
  ]
 }

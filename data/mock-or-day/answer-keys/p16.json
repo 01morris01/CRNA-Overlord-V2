@@ -73,11 +73,13 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "LMA anesthetic at light planes"
+   "why": "LMA anesthetic at light planes",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   }
  ]
 }

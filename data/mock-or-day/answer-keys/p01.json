@@ -185,11 +185,17 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "URI, RAD, and airway surgery"
+   "why": "URI, RAD, and airway surgery",
+   "flags": [
+    "uri"
+   ]
   },
   {
    "type": "Bronchospasm",
-   "why": "Reactive airway disease with active URI"
+   "why": "Reactive airway disease with active URI",
+   "flags": [
+    "uri"
+   ]
   }
  ]
 }

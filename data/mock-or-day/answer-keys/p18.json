@@ -115,11 +115,13 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "30 pack year former smoker"
+   "why": "30 pack year former smoker",
+   "flags": []
   }
  ]
 }

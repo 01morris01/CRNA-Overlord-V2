@@ -215,11 +215,15 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "Daily vaping with a reactive airway after intubation"
+   "why": "Daily vaping with a reactive airway after intubation",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Severe penicillin allergy history and antibiotic exposure"
+   "why": "Severe penicillin allergy history and antibiotic exposure",
+   "flags": [
+    "antibiotic"
+   ]
   }
  ]
 }

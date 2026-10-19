@@ -923,8 +923,17 @@ function renderShell() {
       </div>
       <div class="live-header-actions">
         <output id="live-sim-clock" class="live-sim-clock" aria-label="Simulation time">00:00</output>
+        <button id="live-start" type="button" class="live-primary">START</button>
+        <button id="live-pause" type="button">PAUSE</button>
+        <button id="live-reset" type="button" class="live-danger-outline">RESET</button>
+        <label class="live-field live-speed-field" for="live-speed"><span>Speed</span>
+          <select id="live-speed"><option value="1">1×</option><option value="5">5×</option><option value="20">20×</option><option value="100">100×</option></select>
+        </label>
+      </div>
+      <div class="live-header-actions live-header-links">
         <button id="live-open-display" type="button">OPEN DISPLAY</button>
         <button id="live-open-student" type="button">OPEN STUDENT SCREEN</button>
+        <button id="live-export" type="button">END CASE + EXPORT DEBRIEF</button>
         <button id="live-close" type="button" class="live-secondary">BACK TO MAP</button>
       </div>
     </header>
@@ -942,25 +951,22 @@ function renderShell() {
 
     <div id="live-action-status" class="live-action-status" role="status" aria-live="polite">Controls ready.</div>
 
-    <div class="live-sim-grid">
-      <div class="live-sim-column">
-        ${renderMockOrPanel()}
-        ${renderStudentLinkPanel()}
-        ${renderLearnerCaseShell()}
-        <section class="live-panel" aria-labelledby="live-case-heading">
-          <h2 id="live-case-heading">Case flow</h2>
-          <div class="live-button-row">
-            <button id="live-start" type="button" class="live-primary">START</button>
-            <button id="live-pause" type="button">PAUSE</button>
-            <button id="live-reset" type="button" class="live-danger-outline">RESET</button>
-          </div>
-          <label class="live-field" for="live-speed"><span>Simulation speed</span>
-            <select id="live-speed"><option value="1">1×</option><option value="5">5×</option><option value="20">20×</option><option value="100">100×</option></select>
-          </label>
-          <button id="live-preoxygenate" type="button">PREOXYGENATE · 100% O₂</button>
-          <button id="live-export" type="button">END CASE + EXPORT DEBRIEF</button>
-        </section>
+    <div class="live-console">
+      <div class="live-console-main">
+        <nav class="live-tabs" role="tablist" aria-label="Console sections">
+          <button type="button" role="tab" data-console-tab="setup" aria-selected="true">1 · SETUP</button>
+          <button type="button" role="tab" data-console-tab="run" aria-selected="false">2 · RUN THE PATIENT</button>
+          <button type="button" role="tab" data-console-tab="scored" aria-selected="false">RUBRIC + TEACHING CASES</button>
+        </nav>
 
+        <div class="live-tab-panel" data-console-panel="setup" role="tabpanel">
+          <p class="live-help live-tab-intro">Pick the patient, open the student screen, then press START. The student works through preop on their screen; you can move them ahead from here.</p>
+          <div class="live-setup-grid">
+            ${renderMockOrPanel()}
+            ${renderStudentLinkPanel()}
+          </div>
+          <details class="live-panel-details">
+            <summary>Patient physiology (free play or custom patient)</summary>
         <section class="live-panel" aria-labelledby="live-patient-heading">
           <h2 id="live-patient-heading">Patient setup</h2>
           <p class="live-help">Applying setup rebuilds and resets the verified runner.</p>
@@ -973,7 +979,20 @@ function renderShell() {
             <button type="submit" class="live-primary live-form-submit">APPLY + RESET PATIENT</button>
           </form>
         </section>
+          </details>
+        </div>
 
+        <div class="live-tab-panel" data-console-panel="run" role="tabpanel" hidden>
+          <p class="live-help live-tab-intro">Do what the student asks for. Booth watches every click.</p>
+          <nav class="live-subtabs" aria-label="Patient controls">
+            <button type="button" data-run-tab="airway" aria-pressed="true">AIRWAY + DRUGS</button>
+            <button type="button" data-run-tab="vent" aria-pressed="false">VENT + VOLATILE</button>
+            <button type="button" data-run-tab="regional" aria-pressed="false">LIDOCAINE + LAST</button>
+            <button type="button" data-run-tab="events" aria-pressed="false">STIMULUS + MANUAL EVENTS</button>
+            <button type="button" data-run-tab="log" aria-pressed="false">RAW EVENT LOG</button>
+          </nav>
+          <div class="live-run-panel" data-run-panel="airway">
+            <button id="live-preoxygenate" type="button" class="live-preox-button">PREOXYGENATE · 100% O₂</button>
         <section class="live-panel" aria-labelledby="live-airway-heading">
           <h2 id="live-airway-heading">Airway + respiratory drive</h2>
           <div class="live-button-row">
@@ -1000,9 +1019,29 @@ function renderShell() {
             <output id="live-last-tof" aria-live="polite">No quantitative TOF check recorded.</output>
           </div>
         </section>
-      </div>
-
-      <div class="live-sim-column live-sim-column-wide">
+        ${['Induction', 'Rescue', 'Emergence'].map((group) => `
+          <section class="live-panel" aria-labelledby="live-${group.toLowerCase()}-heading">
+            <h2 id="live-${group.toLowerCase()}-heading">${group} drugs</h2>
+            <div class="live-dose-grid">${drugMarkup(group)}</div>
+          </section>`).join('')}
+          </div>
+          <div class="live-run-panel" data-run-panel="vent" hidden>
+        <section class="live-panel" aria-labelledby="live-machine-heading">
+          <h2 id="live-machine-heading">Anesthesia machine</h2>
+          <form id="live-machine-form" class="live-machine-grid">
+            <label class="live-field"><span>Mode</span><select name="mode"><option value="0">Manual/Bag</option><option value="1">VCV</option><option value="2">PCV</option><option value="3">PSV</option></select></label>
+            <label class="live-field"><span>TV</span><span class="live-input-unit"><input name="setTidalVolume" type="number" value="500" min="100" max="1200"><small>mL</small></span></label>
+            <label class="live-field"><span>RR</span><span class="live-input-unit"><input name="setRespiratoryRate" type="number" value="12" min="1" max="40"><small>/min</small></span></label>
+            <label class="live-field"><span>PEEP</span><span class="live-input-unit"><input name="setPeep" type="number" value="5" min="0" max="30"><small>cmH₂O</small></span></label>
+            <label class="live-field"><span>PC above PEEP</span><span class="live-input-unit"><input name="setPressureAbovePeep" type="number" value="15" min="1" max="50"><small>cmH₂O</small></span></label>
+            <label class="live-field"><span>Pressure support</span><span class="live-input-unit"><input name="setPressureSupport" type="number" value="10" min="0" max="40"><small>cmH₂O</small></span></label>
+            <label class="live-field"><span>FiO₂</span><span class="live-input-unit"><input name="setFiO2" type="number" value="1" min="0.21" max="1" step="0.01"><small>fraction</small></span></label>
+            <label class="live-field"><span>O₂ flow</span><span class="live-input-unit"><input name="o2FlowLPerMin" type="number" value="2" min="0" max="15" step="0.1"><small>L/min</small></span></label>
+            <label class="live-field"><span>Air flow</span><span class="live-input-unit"><input name="airFlowLPerMin" type="number" value="0" min="0" max="15" step="0.1"><small>L/min</small></span></label>
+            <label class="live-field"><span>N₂O flow</span><span class="live-input-unit"><input name="n2oFlowLPerMin" type="number" value="0" min="0" max="15" step="0.1"><small>L/min</small></span></label>
+            <button type="submit" class="live-primary live-machine-submit">APPLY MACHINE SETTINGS</button>
+          </form>
+        </section>
         <section id="live-volatile-panel" class="live-panel live-volatile-panel" aria-labelledby="live-volatile-heading">
           <h2 id="live-volatile-heading">Volatile anesthetic</h2>
           <p class="live-help">Select an agent and dial, then apply. End-tidal concentration and MAC remain engine-derived.</p>
@@ -1023,7 +1062,8 @@ function renderShell() {
             <div><dt>MAC</dt><dd id="live-volatile-mac">0.00</dd></div>
           </dl>
         </section>
-
+          </div>
+          <div class="live-run-panel" data-run-panel="regional" hidden>
         <section id="live-lidocaine-panel" class="live-panel live-lidocaine-panel" aria-labelledby="live-lidocaine-heading">
           <h2 id="live-lidocaine-heading">Lidocaine</h2>
           <p class="live-help">Systemic and regional doses share one exposure model. Recommended-dose warnings remain advisory for deliberate toxicity exercises.</p>
@@ -1056,21 +1096,6 @@ function renderShell() {
             <div><dt>Toxicity</dt><dd id="live-lidocaine-toxicity" data-stage="none">NONE</dd></div>
           </dl>
         </section>
-
-        <div class="live-clinical-grid">
-          <section id="live-stimulus-panel" class="live-panel" aria-labelledby="live-stimulus-heading">
-            <h2 id="live-stimulus-heading">Surgical stimulus</h2>
-            <label class="live-field" for="live-stimulus-intensity"><span>Selected intensity · <output id="live-stimulus-selection" for="live-stimulus-intensity">0.00</output></span><input id="live-stimulus-intensity" type="range" value="0" min="0" max="1" step="0.05"></label>
-            <div class="live-button-row">
-              <button id="live-stimulus-apply" type="button" class="live-primary">APPLY STIMULUS</button>
-              <button id="live-stimulus-off" type="button">STIMULUS OFF</button>
-            </div>
-            <dl class="live-readback-grid live-readback-compact">
-              <div><dt>Raw</dt><dd id="live-stimulus-raw">0.00</dd></div>
-              <div><dt>Effective</dt><dd id="live-stimulus-effective">0.00</dd></div>
-            </dl>
-          </section>
-
           <section id="live-lipid-panel" class="live-panel" aria-labelledby="live-lipid-heading">
             <h2 id="live-lipid-heading">LAST rescue · 20% lipid</h2>
             <p class="live-help">1.5 mL/kg bolus · 0.25 mL/kg/min infusion · cumulative cap 12 mL/kg.</p>
@@ -1084,47 +1109,45 @@ function renderShell() {
               <div><dt>Infusion</dt><dd id="live-lipid-infusion-state">OFF</dd></div>
             </dl>
           </section>
-        </div>
-
-        <section class="live-panel" aria-labelledby="live-machine-heading">
-          <h2 id="live-machine-heading">Anesthesia machine</h2>
-          <form id="live-machine-form" class="live-machine-grid">
-            <label class="live-field"><span>Mode</span><select name="mode"><option value="0">Manual/Bag</option><option value="1">VCV</option><option value="2">PCV</option><option value="3">PSV</option></select></label>
-            <label class="live-field"><span>TV</span><span class="live-input-unit"><input name="setTidalVolume" type="number" value="500" min="100" max="1200"><small>mL</small></span></label>
-            <label class="live-field"><span>RR</span><span class="live-input-unit"><input name="setRespiratoryRate" type="number" value="12" min="1" max="40"><small>/min</small></span></label>
-            <label class="live-field"><span>PEEP</span><span class="live-input-unit"><input name="setPeep" type="number" value="5" min="0" max="30"><small>cmH₂O</small></span></label>
-            <label class="live-field"><span>PC above PEEP</span><span class="live-input-unit"><input name="setPressureAbovePeep" type="number" value="15" min="1" max="50"><small>cmH₂O</small></span></label>
-            <label class="live-field"><span>Pressure support</span><span class="live-input-unit"><input name="setPressureSupport" type="number" value="10" min="0" max="40"><small>cmH₂O</small></span></label>
-            <label class="live-field"><span>FiO₂</span><span class="live-input-unit"><input name="setFiO2" type="number" value="1" min="0.21" max="1" step="0.01"><small>fraction</small></span></label>
-            <label class="live-field"><span>O₂ flow</span><span class="live-input-unit"><input name="o2FlowLPerMin" type="number" value="2" min="0" max="15" step="0.1"><small>L/min</small></span></label>
-            <label class="live-field"><span>Air flow</span><span class="live-input-unit"><input name="airFlowLPerMin" type="number" value="0" min="0" max="15" step="0.1"><small>L/min</small></span></label>
-            <label class="live-field"><span>N₂O flow</span><span class="live-input-unit"><input name="n2oFlowLPerMin" type="number" value="0" min="0" max="15" step="0.1"><small>L/min</small></span></label>
-            <button type="submit" class="live-primary live-machine-submit">APPLY MACHINE SETTINGS</button>
-          </form>
-        </section>
-
-        ${['Induction', 'Rescue', 'Emergence'].map((group) => `
-          <section class="live-panel" aria-labelledby="live-${group.toLowerCase()}-heading">
-            <h2 id="live-${group.toLowerCase()}-heading">${group} drugs</h2>
-            <div class="live-dose-grid">${drugMarkup(group)}</div>
-          </section>`).join('')}
-
+          </div>
+          <div class="live-run-panel" data-run-panel="events" hidden>
+          <section id="live-stimulus-panel" class="live-panel" aria-labelledby="live-stimulus-heading">
+            <h2 id="live-stimulus-heading">Surgical stimulus</h2>
+            <label class="live-field" for="live-stimulus-intensity"><span>Selected intensity · <output id="live-stimulus-selection" for="live-stimulus-intensity">0.00</output></span><input id="live-stimulus-intensity" type="range" value="0" min="0" max="1" step="0.05"></label>
+            <div class="live-button-row">
+              <button id="live-stimulus-apply" type="button" class="live-primary">APPLY STIMULUS</button>
+              <button id="live-stimulus-off" type="button">STIMULUS OFF</button>
+            </div>
+            <dl class="live-readback-grid live-readback-compact">
+              <div><dt>Raw</dt><dd id="live-stimulus-raw">0.00</dd></div>
+              <div><dt>Effective</dt><dd id="live-stimulus-effective">0.00</dd></div>
+            </dl>
+          </section>
         <section class="live-panel" aria-labelledby="live-complication-heading">
-          <h2 id="live-complication-heading">Inject existing complication</h2>
-          <p class="live-help">Delegates to the verified ScenarioManager state machine. Vitals remain derived.</p>
+          <h2 id="live-complication-heading">Start any complication by hand</h2>
+          <p class="live-help">For events outside this case's plan. Booth explains each one in his panel as it starts. Use the event plan on the right for the case's own events.</p>
           <div class="live-complication-grid">${complicationMarkup()}</div>
         </section>
-      </div>
-
-      <div class="live-sim-column live-side-column">
-        ${renderOperatorPanel()}
-        ${renderInstructorCaseShell()}
-        ${renderRubricConsoleShell()}
+          </div>
+          <div class="live-run-panel" data-run-panel="log" hidden>
         <section class="live-panel live-event-panel" aria-labelledby="live-events-heading">
           <div class="live-event-header"><h2 id="live-events-heading">Event log</h2><span>sim time</span></div>
           <ol id="live-event-log" class="live-event-log"><li class="live-empty">No events yet.</li></ol>
         </section>
+          </div>
+        </div>
+
+        <div class="live-tab-panel" data-console-panel="scored" role="tabpanel" hidden>
+          <p class="live-help live-tab-intro">Carson-Newman rubric scenarios and teaching cases. Booth only talks while one of these is loaded.</p>
+          ${renderLearnerCaseShell()}
+          ${renderInstructorCaseShell()}
+          ${renderRubricConsoleShell()}
+        </div>
       </div>
+
+      <aside class="live-console-booth" aria-label="Booth, the sim operator">
+        ${renderOperatorPanel()}
+      </aside>
     </div>
     <section id="live-rubric-print-document" class="live-rubric-print-document" aria-label="Printable finalized rubric" hidden></section>
     ${renderCarePlanModal()}
@@ -1633,6 +1656,11 @@ function ensureRunner() {
     runner,
     root: document,
     getAnswerKey: () => (mockOr?.getState().active ? mockOr.getState().answerKey ?? null : null),
+    getPlanGrade: () => {
+      if (!mockOr?.getState().active) return null;
+      const planStatus = carePlan?.status?.();
+      return planStatus?.submitted ? planStatus.grade ?? null : null;
+    },
   });
   runner.onTick = (snapshot) => {
     renderSnapshot(snapshot);
@@ -1710,6 +1738,7 @@ function initMockOr() {
     },
     onExit: () => {
       simOperator?.operator?.setCaseProfile?.(null);
+      simOperator?.setCasePlan?.(null);
       patientInterview?.setGrounding?.(null);
       setStatus('Left Mock OR Day. Free play.', 'info');
     },
@@ -1775,6 +1804,9 @@ function applyBoothCaseProfile({ withFindings }) {
   const profile = buildBoothCaseProfile(state.entry, state.answerKey);
   // Chart findings stay out of Booth's mouth until the plan is in.
   simOperator?.operator?.setCaseProfile?.({ ...profile, hooks: withFindings ? profile.hooks : [] });
+  // The event plan: only what the student missed fires on its own.
+  const planStatus = carePlan?.status?.();
+  simOperator?.setCasePlan?.({ answerKey: state.answerKey, grade: planStatus?.submitted ? planStatus.grade ?? null : null });
 }
 
 function mockOrBlocksStart() {
@@ -2123,7 +2155,41 @@ function observeMenuLaunchers() {
   launchObserver.observe(courseSelector, { childList: true, subtree: true });
 }
 
+const CONSOLE_TAB_KEY = 'overlord.console.tab.v1';
+
+function showConsoleTab(tab) {
+  if (!view) return;
+  const panels = view.querySelectorAll('[data-console-panel]');
+  if (![...panels].some((panel) => panel.dataset.consolePanel === tab)) return;
+  for (const panel of panels) panel.hidden = panel.dataset.consolePanel !== tab;
+  for (const button of view.querySelectorAll('[data-console-tab]')) {
+    button.setAttribute('aria-selected', String(button.dataset.consoleTab === tab));
+  }
+  try { globalThis.localStorage?.setItem(CONSOLE_TAB_KEY, tab); } catch { /* storage blocked */ }
+}
+
+function showRunTab(tab) {
+  if (!view) return;
+  for (const panel of view.querySelectorAll('[data-run-panel]')) panel.hidden = panel.dataset.runPanel !== tab;
+  for (const button of view.querySelectorAll('[data-run-tab]')) {
+    button.setAttribute('aria-pressed', String(button.dataset.runTab === tab));
+  }
+}
+
+function bindConsoleTabs() {
+  for (const button of view.querySelectorAll('[data-console-tab]')) {
+    button.addEventListener('click', () => showConsoleTab(button.dataset.consoleTab));
+  }
+  for (const button of view.querySelectorAll('[data-run-tab]')) {
+    button.addEventListener('click', () => showRunTab(button.dataset.runTab));
+  }
+  let saved = null;
+  try { saved = globalThis.localStorage?.getItem(CONSOLE_TAB_KEY); } catch { saved = null; }
+  if (saved) showConsoleTab(saved);
+}
+
 function bindControls() {
+  bindConsoleTabs();
   document.getElementById('live-close')?.addEventListener('click', closeLiveSim);
   document.getElementById('live-start')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
@@ -2131,6 +2197,7 @@ function bindControls() {
     const previousState = liveRunner.getLifecycleState();
     liveRunner.start();
     const resumed = previousState === 'PAUSED';
+    if (!resumed) showConsoleTab('run');
     liveRunner.logEvent('Case', resumed ? 'Simulation resumed' : 'Simulation started', {
       action: resumed ? 'resume' : 'start',
     });

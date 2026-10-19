@@ -147,11 +147,15 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "Active smoker with wheeze"
+   "why": "Active smoker with wheeze",
+   "flags": [
+    "smoking_osa"
+   ]
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin and TXA exposure"
+   "why": "Cefazolin and TXA exposure",
+   "flags": []
   }
  ]
 }

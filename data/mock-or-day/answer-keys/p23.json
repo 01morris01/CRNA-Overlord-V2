@@ -119,11 +119,13 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   },
   {
    "type": "Laryngospasm",
-   "why": "Emergence"
+   "why": "Emergence",
+   "flags": []
   }
  ]
 }

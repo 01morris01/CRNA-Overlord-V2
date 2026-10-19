@@ -123,11 +123,15 @@
  "boothComplications": [
   {
    "type": "OpioidRespDepression",
-   "why": "Weak respiratory muscles with opioids"
+   "why": "Weak respiratory muscles with opioids",
+   "flags": [
+    "crisis"
+   ]
   },
   {
    "type": "Laryngospasm",
-   "why": "Emergence after airway instrumentation"
+   "why": "Emergence after airway instrumentation",
+   "flags": []
   }
  ]
 }

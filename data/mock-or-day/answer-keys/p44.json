@@ -160,11 +160,15 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Antibiotics, reversal agent, blood products"
+   "why": "Antibiotics, reversal agent, blood products",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "Aspiration risk"
+   "why": "Aspiration risk",
+   "flags": [
+    "fullstomach"
+   ]
   }
  ]
 }
