@@ -966,6 +966,7 @@ function renderShell() {
             ${renderMockOrPanel()}
             ${renderStudentLinkPanel()}
           </div>
+          <div id="live-setup-interview-slot" class="live-setup-interview-slot"></div>
           <details class="live-panel-details">
             <summary>Patient physiology (free play or custom patient)</summary>
         <section class="live-panel" aria-labelledby="live-patient-heading">
@@ -1754,6 +1755,7 @@ function initMockOr() {
         caseController?.reset();
         transport?.setCaseBrief(null);
         patientInterview?.setGrounding?.(buildChartInterviewGrounding(patient));
+        placeInterviewPanel('setup');
         fillPatientForm(runner.config);
         syncCaseSetupControls(runner.snapshot());
         renderEventLog();
@@ -1769,6 +1771,8 @@ function initMockOr() {
     onExit: () => {
       simOperator?.operator?.setCaseProfile?.(null);
       simOperator?.setCasePlan?.(null);
+      patientInterview?.setGrounding?.(null);
+      placeInterviewPanel('case');
       patientInterview?.setGrounding?.(null);
       setStatus('Left Mock OR Day. Free play.', 'info');
     },
@@ -1837,6 +1841,20 @@ function applyBoothCaseProfile({ withFindings }) {
   // The event plan: only what the student missed fires on its own.
   const planStatus = carePlan?.status?.();
   simOperator?.setCasePlan?.({ answerKey: state.answerKey, grade: planStatus?.submitted ? planStatus.grade ?? null : null });
+}
+
+/* The interview panel lives in the teaching case workspace. For a Mock OR
+   patient it moves to SETUP, where the instructor actually is; without a
+   student screen, that is where the student interviews the patient or family. */
+function placeInterviewPanel(where) {
+  const panel = document.getElementById('live-patient-interview');
+  if (!panel) return;
+  const slot = where === 'setup'
+    ? document.getElementById('live-setup-interview-slot')
+    : document.getElementById('live-case-status');
+  if (!slot) return;
+  if (where === 'setup' && panel.parentElement !== slot) slot.append(panel);
+  else if (where !== 'setup' && panel.previousElementSibling !== slot) slot.after(panel);
 }
 
 function mockOrBlocksStart() {
@@ -1972,6 +1990,7 @@ async function loadSelectedRubricScenario() {
     if (mockOr?.getState().active) mockOr.exit();
     // Ground the voice patient in the loaded case (or hide it for rubric-only).
     patientInterview?.setCase(scenario?.caseExperience ?? null);
+    placeInterviewPanel('case');
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();

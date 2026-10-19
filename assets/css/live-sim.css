@@ -1404,3 +1404,15 @@
 .live-booth-now-latest[data-severity="critical"] .live-booth-now-latest-title { color: #ff9ab1 !important; }
 .live-operator-panel .live-empty { color: var(--muted); font-size: .78rem; line-height: 1.45; }
 .live-booth-chats .live-operator-line p { font-size: .82rem; }
+
+/* Who the trainee is talking to in the preop interview */
+.patient-interview-speakers { display: grid; gap: .5rem; margin: .4rem 0 .6rem; }
+.patient-interview-speakers[hidden] { display: none; }
+.patient-interview-banner { margin: 0; padding: .55rem .7rem; border-left: 3px solid var(--blue, #4da6ff); border-radius: 0 6px 6px 0; background: rgba(77, 166, 255, .08); color: var(--txt, #e6eef5); font-size: .86rem; line-height: 1.45; }
+.patient-interview-speaker-row { display: flex; flex-wrap: wrap; gap: .4rem; }
+.patient-interview-speaker-row button { display: grid; gap: .1rem; min-height: 44px; padding: .4rem .7rem; text-align: left; background: var(--card-hi, #14202e); color: var(--txt, #e6eef5); border: 1px solid var(--line, #21303f); border-radius: 6px; cursor: pointer; font: inherit; }
+.patient-interview-speaker-row button strong { font-size: .86rem; }
+.patient-interview-speaker-row button small { color: var(--muted, #8aa0b4); font-family: var(--fm, monospace); font-size: .58rem; letter-spacing: .08em; }
+.patient-interview-speaker-row button[aria-pressed="true"] { border-color: var(--amber, #f0b23a); background: rgba(240, 178, 58, .1); }
+.patient-interview-speaker-row button[aria-pressed="true"] small { color: var(--amber, #f0b23a); }
+.patient-interview-turn { grid-template-columns: 7.5rem 1fr; }

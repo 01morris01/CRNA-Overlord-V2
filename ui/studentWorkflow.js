@@ -32,6 +32,18 @@ import {
 export const STEPS = Object.freeze(['patient', 'chart', 'interview', 'plan', 'grade', 'or']);
 export const REVIEW_ITEMS = Object.freeze(['allergies', 'meds', 'labs', 'history', 'logistics', 'notes']);
 export const MIN_QUESTIONS = 3;
+export const INTERVIEW_STORAGE_PREFIX = 'overlord.interview.v1.';
+
+export function readInterview(storage, patientId) {
+  try {
+    const parsed = JSON.parse(storage?.getItem?.(`${INTERVIEW_STORAGE_PREFIX}${patientId}`) ?? '[]');
+    return Array.isArray(parsed) ? parsed.slice(-80) : [];
+  } catch { return []; }
+}
+
+export function writeInterview(storage, patientId, turns) {
+  try { storage?.setItem?.(`${INTERVIEW_STORAGE_PREFIX}${patientId}`, JSON.stringify(turns.slice(-80))); } catch { /* storage blocked */ }
+}
 
 /* Pure: may the student leave this step for the next one? */
 export function stepGate(step, state = {}) {
@@ -45,7 +57,7 @@ export function stepGate(step, state = {}) {
     case 'interview':
       return (state.questions ?? 0) >= MIN_QUESTIONS
         ? { allowed: true }
-        : { allowed: false, reason: `Ask the patient at least ${MIN_QUESTIONS} questions (${state.questions ?? 0} so far).` };
+        : { allowed: false, reason: `Ask at least ${MIN_QUESTIONS} questions (${state.questions ?? 0} so far).` };
     case 'plan':
       return state.planSubmitted ? { allowed: true } : { allowed: false, reason: 'Submit the care plan.' };
     case 'grade':
@@ -145,7 +157,12 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     },
   });
 
-  const interview = createPatientInterview({ runner: null, root });
+  // The interview survives a reload: every turn is saved per patient.
+  const interview = createPatientInterview({
+    runner: null,
+    root,
+    onTurn: () => { if (state.patientId) writeInterview(storage, state.patientId, interview.getTranscript()); },
+  });
   const transcript = $('patient-interview-transcript');
   new MutationObserver(() => {
     const asked = transcript.querySelectorAll('.patient-interview-trainee').length;
@@ -177,7 +194,8 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     const grounding = buildChartInterviewGrounding(patient);
     const note = root.createElement('p');
     note.className = 'student-instructor-note';
-    note.textContent = 'Your instructor completed the interview. These are the patient\'s answers.';
+    const lead = grounding.participants?.find((entry) => entry.id === grounding.defaultSpeakerId);
+    note.textContent = `Your instructor completed the interview. These are the answers from ${lead && lead.role !== 'patient' ? lead.label : 'the patient'}.`;
     transcript.append(note);
     for (const { question, answer } of scriptedInterview(grounding)) {
       for (const [role, text] of [['trainee', question], ['patient', answer]]) {
@@ -185,7 +203,7 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
         line.className = `patient-interview-turn patient-interview-${role}`;
         const who = root.createElement('span');
         who.className = 'patient-interview-who';
-        who.textContent = role === 'trainee' ? 'You' : grounding.patientName;
+        who.textContent = role === 'trainee' ? 'You' : (grounding.participants?.find((entry) => entry.id === grounding.defaultSpeakerId)?.label ?? grounding.patientName);
         const said = root.createElement('p');
         said.textContent = text;
         line.append(who, said);
@@ -265,6 +283,7 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     $('student-chart-frame').src = url;
     $('student-chart-newtab').href = url;
     interview.setGrounding(buildChartInterviewGrounding(patient));
+    interview.restore(readInterview(storage, id));
     const status = carePlan.load({ patient, answerKey, chartDigest: buildChartDigest(patient, { maxChars: 9000 }) });
     state.planSubmitted = Boolean(status.submitted);
     for (const box of root.querySelectorAll('[data-review]')) box.checked = Boolean(state.reviewed[box.dataset.review]);
@@ -285,6 +304,12 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
 
   function renderOr() {
     const out = $('student-or-status');
+    const entry = index?.patients.find((row) => row.id === state.patientId);
+    if (entry && !entry.engineSupported) {
+      out.dataset.state = 'warn';
+      out.textContent = `${patient?.label ?? 'This patient'} is chart and care plan only (${entry.engineNote ?? 'outside the physiology engine range'}). There is no live case to run. Debrief the plan with your instructor, or pick an adult patient for the OR.`;
+      return;
+    }
     if (!consoleState || !dock.consoleConnected()) {
       out.dataset.state = 'waiting';
       out.textContent = 'No instructor console yet. On the other screen, open LIVE SIM and choose INSTRUCTOR SIM; it links to this window automatically. You can still open the monitor.';
@@ -327,7 +352,9 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     next.textContent = state.step === 'plan' && !state.planSubmitted ? 'SUBMIT PLAN' : (state.step === 'grade' ? 'INTO THE OR' : 'NEXT');
     next.disabled = state.step === 'plan' ? false : !gate.allowed;
     $('student-gate').textContent = gate.allowed || state.step === 'or' ? '' : gate.reason;
-    $('student-interview-count').textContent = `${Math.min(state.questions, 99)} of ${MIN_QUESTIONS} questions asked.`;
+    $('student-interview-count').textContent = state.questions >= MIN_QUESTIONS
+      ? `${Math.min(state.questions, 99)} questions asked. You can move on whenever you are ready.`
+      : `${state.questions} of ${MIN_QUESTIONS} questions asked.`;
     if (state.step === 'or') renderOr();
     report();
   }
@@ -357,6 +384,8 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
     if (gate.allowed) go(STEPS[STEPS.indexOf(state.step) + 1]);
   });
   $('student-start-over').addEventListener('click', () => {
+    if (state.patientId) writeInterview(storage, state.patientId, []);
+    interview.setGrounding(null);
     state.patientId = null; state.step = 'patient'; state.reviewed = {}; state.questions = 0; state.planSubmitted = false;
     patient = null; answerKey = null;
     $('student-patient-title').textContent = 'Choose your patient';
