@@ -1497,6 +1497,9 @@ export function createSimOperator({
         complication: COMPLICATION_LABELS[entry.type] ?? entry.type,
         source: entry.source,
         startedBy: entry.source === 'booth' ? 'Booth (you, automatically)' : 'the instructor',
+        whoStartedIt: entry.source === 'booth'
+          ? `Booth started ${COMPLICATION_LABELS[entry.type] ?? entry.type} on his own.`
+          : `The instructor started ${COMPLICATION_LABELS[entry.type] ?? entry.type} by hand. Booth did not start it.`,
         injectedAtSec: round(entry.tSec),
         treatedAtSec: round(entry.treatedAtSec),
         resolvedAtSec: round(entry.resolvedAtSec),
