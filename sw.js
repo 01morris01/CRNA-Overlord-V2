@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v62-booth-instructor-desk-2026-10-18';
+const CACHE_VERSION = 'v63-vent-form-sync-2026-10-18';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

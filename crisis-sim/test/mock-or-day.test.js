@@ -312,4 +312,27 @@ describe('machine form sync', () => {
     expect(controls.get('o2FlowLPerMin').value).toBe('2.1');
     expect(dial.value).toBe('1.7');
   });
+
+  it('follows PREOXYGENATE on the real engine so APPLY MACHINE SETTINGS cannot undo it', async () => {
+    const { syncMachineFormFromSnapshot } = await import('../../ui/liveSimView.js');
+    const { SimRunner } = await import('../ui/simRunner.js');
+    const runner = new SimRunner();
+    const names = ['mode', 'setTidalVolume', 'setRespiratoryRate', 'setPeep', 'setPressureAbovePeep', 'setPressureSupport', 'setFiO2', 'o2FlowLPerMin', 'airFlowLPerMin', 'n2oFlowLPerMin'];
+    const controls = new Map(names.map((name) => [name, { value: '' }]));
+    const form = { elements: { namedItem: (name) => controls.get(name) ?? null } };
+    syncMachineFormFromSnapshot({ form, snapshot: runner.snapshot() });
+    expect(controls.get('setFiO2').value).toBe('0.21');
+    runner.preoxygenate();
+    runner.pause();
+    const updated = syncMachineFormFromSnapshot({ form, snapshot: runner.snapshot() });
+    expect(updated).toEqual(expect.arrayContaining(['setFiO2', 'o2FlowLPerMin']));
+    expect(controls.get('setFiO2').value).toBe('1');
+    expect(controls.get('o2FlowLPerMin').value).toBe('10');
+    // A field the instructor is editing, or edited since the last apply, is left alone.
+    controls.get('setTidalVolume').value = '450';
+    runner.setMachine({ setTidalVolume: 600, setFiO2: 0.5 });
+    syncMachineFormFromSnapshot({ form, snapshot: runner.snapshot(), dirty: new Set(['setTidalVolume']), activeElement: controls.get('setFiO2') });
+    expect(controls.get('setTidalVolume').value).toBe('450');
+    expect(controls.get('setFiO2').value).toBe('1');
+  });
 });
