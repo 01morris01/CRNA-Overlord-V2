@@ -130,11 +130,15 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "COPD with airway instrumentation by a DLT"
+   "why": "COPD with airway instrumentation by a DLT",
+   "flags": [
+    "pulm"
+   ]
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   }
  ]
 }

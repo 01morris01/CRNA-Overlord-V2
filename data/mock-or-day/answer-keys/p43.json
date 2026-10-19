@@ -146,11 +146,17 @@
  "boothComplications": [
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Bier block or brachial plexus block"
+   "why": "Bier block or brachial plexus block",
+   "flags": [
+    "tourniquet"
+   ]
   },
   {
    "type": "OpioidRespDepression",
-   "why": "Sedation stacked on chronic opioids"
+   "why": "Sedation stacked on chronic opioids",
+   "flags": [
+    "opioid"
+   ]
   }
  ]
 }

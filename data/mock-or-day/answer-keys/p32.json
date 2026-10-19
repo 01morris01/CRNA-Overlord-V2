@@ -121,15 +121,20 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Young patient with LMA"
+   "why": "Young patient with LMA",
+   "flags": []
   },
   {
    "type": "MalignantHyperthermia",
-   "why": "Unclear family anesthetic history"
+   "why": "Unclear family anesthetic history",
+   "flags": [
+    "family"
+   ]
   },
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Adductor canal block"
+   "why": "Adductor canal block",
+   "flags": []
   }
  ]
 }

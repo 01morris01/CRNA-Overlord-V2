@@ -88,11 +88,17 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Smoker with an LMA"
+   "why": "Smoker with an LMA",
+   "flags": [
+    "smoking"
+   ]
   },
   {
    "type": "Bronchospasm",
-   "why": "Smoker with productive cough"
+   "why": "Smoker with productive cough",
+   "flags": [
+    "smoking"
+   ]
   }
  ]
 }

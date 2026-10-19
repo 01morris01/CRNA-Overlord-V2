@@ -788,12 +788,17 @@ describe('live rubric instructor console', () => {
     expect(controller).toContain("from './liveCaseView.js'");
     expect(controller).toContain('createLiveCaseController({');
     const learnerShellAt = controller.indexOf('${renderLearnerCaseShell()}');
-    const caseFlowAt = controller.indexOf('<h2 id="live-case-heading">Case flow</h2>');
+    // Case flow (START, PAUSE, RESET) lives in the console header; the scored
+    // case shells share the RUBRIC + TEACHING CASES tab.
+    const caseFlowAt = controller.indexOf('<button id="live-start" type="button" class="live-primary">START</button>');
+    const scoredTabAt = controller.indexOf('data-console-panel="scored"');
     const instructorShellAt = controller.indexOf('${renderInstructorCaseShell()}');
     const rubricShellAt = controller.indexOf('${renderRubricConsoleShell()}');
     expect(learnerShellAt).toBeGreaterThan(-1);
-    expect(caseFlowAt).toBeGreaterThan(learnerShellAt);
-    expect(instructorShellAt).toBeGreaterThan(caseFlowAt);
+    expect(caseFlowAt).toBeGreaterThan(-1);
+    expect(learnerShellAt).toBeGreaterThan(caseFlowAt);
+    expect(learnerShellAt).toBeGreaterThan(scoredTabAt);
+    expect(instructorShellAt).toBeGreaterThan(learnerShellAt);
     expect(rubricShellAt).toBeGreaterThan(instructorShellAt);
 
     expect(controller).toContain('caseController?.render()');

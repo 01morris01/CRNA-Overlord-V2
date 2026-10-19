@@ -146,11 +146,15 @@
  "boothComplications": [
   {
    "type": "OpioidRespDepression",
-   "why": "OSA under MAC"
+   "why": "OSA under MAC",
+   "flags": [
+    "airway"
+   ]
   },
   {
    "type": "Anaphylaxis",
-   "why": "Contrast and cefazolin"
+   "why": "Contrast and cefazolin",
+   "flags": []
   }
  ]
 }

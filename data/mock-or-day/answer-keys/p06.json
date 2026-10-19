@@ -160,15 +160,24 @@
  "boothComplications": [
   {
    "type": "MalignantHyperthermia",
-   "why": "Possible MH susceptibility if triggers are used"
+   "why": "Possible MH susceptibility if triggers are used",
+   "flags": [
+    "mh_family"
+   ]
   },
   {
    "type": "Laryngospasm",
-   "why": "Airway surgery and recurrent laryngeal nerve risk at emergence"
+   "why": "Airway surgery and recurrent laryngeal nerve risk at emergence",
+   "flags": [
+    "rln"
+   ]
   },
   {
    "type": "Bronchospasm",
-   "why": "Instrumented narrowed airway"
+   "why": "Instrumented narrowed airway",
+   "flags": [
+    "airway"
+   ]
   }
  ]
 }

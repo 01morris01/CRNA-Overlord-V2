@@ -126,15 +126,18 @@
  "boothComplications": [
   {
    "type": "HighSpinal",
-   "why": "Neuraxial anesthetic"
+   "why": "Neuraxial anesthetic",
+   "flags": []
   },
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Adductor canal block"
+   "why": "Adductor canal block",
+   "flags": []
   },
   {
    "type": "OpioidRespDepression",
-   "why": "MAC sedation with opioids"
+   "why": "MAC sedation with opioids",
+   "flags": []
   }
  ]
 }

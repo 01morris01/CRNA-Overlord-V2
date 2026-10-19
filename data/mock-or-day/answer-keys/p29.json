@@ -122,11 +122,17 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "Aspiration related bronchospasm"
+   "why": "Aspiration related bronchospasm",
+   "flags": [
+    "aspiration"
+   ]
   },
   {
    "type": "Laryngospasm",
-   "why": "Regurgitation at emergence"
+   "why": "Regurgitation at emergence",
+   "flags": [
+    "aspiration"
+   ]
   }
  ]
 }

@@ -176,11 +176,17 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "Asthma with daily vaping"
+   "why": "Asthma with daily vaping",
+   "flags": [
+    "airway_reactivity"
+   ]
   },
   {
    "type": "Laryngospasm",
-   "why": "Reactive airway at emergence"
+   "why": "Reactive airway at emergence",
+   "flags": [
+    "airway_reactivity"
+   ]
   }
  ]
 }

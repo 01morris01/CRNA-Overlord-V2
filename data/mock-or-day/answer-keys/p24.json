@@ -115,7 +115,8 @@
  "boothComplications": [
   {
    "type": "OpioidRespDepression",
-   "why": "Sedation in a frail patient breathing spontaneously"
+   "why": "Sedation in a frail patient breathing spontaneously",
+   "flags": []
   }
  ]
 }

@@ -138,11 +138,15 @@
  "boothComplications": [
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Brachial plexus block"
+   "why": "Brachial plexus block",
+   "flags": []
   },
   {
    "type": "OpioidRespDepression",
-   "why": "Exquisite sensitivity to sedation"
+   "why": "Exquisite sensitivity to sedation",
+   "flags": [
+    "sedation"
+   ]
   }
  ]
 }

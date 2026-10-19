@@ -150,11 +150,13 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Neck surgery emergence"
+   "why": "Neck surgery emergence",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   }
  ]
 }

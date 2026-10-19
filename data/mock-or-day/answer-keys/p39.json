@@ -163,15 +163,22 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "Smoker, aspiration risk"
+   "why": "Smoker, aspiration risk",
+   "flags": [
+    "aspiration"
+   ]
   },
   {
    "type": "OpioidRespDepression",
-   "why": "Encephalopathy sensitivity to opioids"
+   "why": "Encephalopathy sensitivity to opioids",
+   "flags": [
+    "he"
+   ]
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin and blood products"
+   "why": "Cefazolin and blood products",
+   "flags": []
   }
  ]
 }

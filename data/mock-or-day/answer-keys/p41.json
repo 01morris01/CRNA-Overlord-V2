@@ -134,15 +134,20 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Isosulfan blue"
+   "why": "Isosulfan blue",
+   "flags": [
+    "blue"
+   ]
   },
   {
    "type": "OpioidRespDepression",
-   "why": "Elderly patient under sedation"
+   "why": "Elderly patient under sedation",
+   "flags": []
   },
   {
    "type": "Laryngospasm",
-   "why": "LMA with light anesthesia"
+   "why": "LMA with light anesthesia",
+   "flags": []
   }
  ]
 }

@@ -201,11 +201,13 @@
  "boothComplications": [
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Large volume fascia iliaca block in a frail patient"
+   "why": "Large volume fascia iliaca block in a frail patient",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin or cement exposure"
+   "why": "Cefazolin or cement exposure",
+   "flags": []
   }
  ]
 }

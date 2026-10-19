@@ -120,11 +120,15 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin and blood products"
+   "why": "Cefazolin and blood products",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "Aspiration risk at induction"
+   "why": "Aspiration risk at induction",
+   "flags": [
+    "fullstomach"
+   ]
   }
  ]
 }

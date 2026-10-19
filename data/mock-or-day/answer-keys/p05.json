@@ -199,11 +199,13 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "Heavy smoker"
+   "why": "Heavy smoker",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin exposure"
+   "why": "Cefazolin exposure",
+   "flags": []
   }
  ]
 }

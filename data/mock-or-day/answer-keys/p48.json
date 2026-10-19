@@ -142,11 +142,13 @@
  "boothComplications": [
   {
    "type": "Anaphylaxis",
-   "why": "Antibiotics and contrast for pyelogram"
+   "why": "Antibiotics and contrast for pyelogram",
+   "flags": []
   },
   {
    "type": "Laryngospasm",
-   "why": "LMA in a light plane"
+   "why": "LMA in a light plane",
+   "flags": []
   }
  ]
 }

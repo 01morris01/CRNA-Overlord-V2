@@ -147,11 +147,13 @@
  "boothComplications": [
   {
    "type": "MalignantHyperthermia",
-   "why": "Differential for tachycardia and hypertension in pheochromocytoma"
+   "why": "Differential for tachycardia and hypertension in pheochromocytoma",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Cefazolin"
+   "why": "Cefazolin",
+   "flags": []
   }
  ]
 }

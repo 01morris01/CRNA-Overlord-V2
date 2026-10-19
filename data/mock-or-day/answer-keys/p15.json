@@ -119,11 +119,13 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Emergence in a young patient"
+   "why": "Emergence in a young patient",
+   "flags": []
   },
   {
    "type": "Anaphylaxis",
-   "why": "Any IV drug exposure"
+   "why": "Any IV drug exposure",
+   "flags": []
   }
  ]
 }

@@ -194,11 +194,15 @@
  "boothComplications": [
   {
    "type": "Bronchospasm",
-   "why": "COPD"
+   "why": "COPD",
+   "flags": [
+    "copd"
+   ]
   },
   {
    "type": "Anaphylaxis",
-   "why": "Antibiotic and PCC exposure"
+   "why": "Antibiotic and PCC exposure",
+   "flags": []
   }
  ]
 }

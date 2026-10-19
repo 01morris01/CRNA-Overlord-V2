@@ -110,11 +110,15 @@
  "boothComplications": [
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Peripheral nerve blocks"
+   "why": "Peripheral nerve blocks",
+   "flags": []
   },
   {
    "type": "OpioidRespDepression",
-   "why": "OSA and restrictive lung disease"
+   "why": "OSA and restrictive lung disease",
+   "flags": [
+    "osa"
+   ]
   }
  ]
 }

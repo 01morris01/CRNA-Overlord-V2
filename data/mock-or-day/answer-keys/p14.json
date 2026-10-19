@@ -145,15 +145,22 @@
  "boothComplications": [
   {
    "type": "HighSpinal",
-   "why": "Epidural with possible unintended dural puncture near prior surgery"
+   "why": "Epidural with possible unintended dural puncture near prior surgery",
+   "flags": [
+    "spine"
+   ]
   },
   {
    "type": "LocalAnestheticToxicity",
-   "why": "Epidural local anesthetic boluses"
+   "why": "Epidural local anesthetic boluses",
+   "flags": []
   },
   {
    "type": "Bronchospasm",
-   "why": "Asthma"
+   "why": "Asthma",
+   "flags": [
+    "carboprost"
+   ]
   }
  ]
 }

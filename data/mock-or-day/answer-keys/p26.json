@@ -127,11 +127,17 @@
  "boothComplications": [
   {
    "type": "Laryngospasm",
-   "why": "Blood and secretions in the airway at emergence"
+   "why": "Blood and secretions in the airway at emergence",
+   "flags": [
+    "nasal"
+   ]
   },
   {
    "type": "Bronchospasm",
-   "why": "Asthma"
+   "why": "Asthma",
+   "flags": [
+    "asthma"
+   ]
   }
  ]
 }
