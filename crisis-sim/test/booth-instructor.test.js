@@ -240,7 +240,7 @@ describe('Booth on the real engine, instructor side', () => {
     const context = operator.facultyContext();
     expect(context.audience).toBe('instructor');
     expect(context.activeNow).toContain('malignant hyperthermia');
-    expect(context.injections[0]).toMatchObject({ type: 'MalignantHyperthermia', source: 'instructor' });
+    expect(context.injections[0]).toMatchObject({ type: 'MalignantHyperthermia', source: 'instructor', startedBy: 'the instructor' });
     // The student side context still withholds it.
     expect(operator.caseContext().injections[0].complication).toBeNull();
     expect(buildFacultyAnswer(context, 'why is the etco2 going up')).toMatch(/Malignant hyperthermia is running/);
@@ -268,6 +268,7 @@ describe('event plan rows and the faculty prompt', () => {
     expect(prompt).toMatch(/Nothing is secret from the instructor/);
     expect(prompt).toMatch(/No sarcasm aimed at the instructor/);
     expect(prompt).not.toMatch(/Roast hard/);
+    expect(prompt).toMatch(/pulmonary embolism, air embolism, and low cardiac output LOWER EtCO2/);
     expect(prompt).toContain('MalignantHyperthermia');
   });
 });

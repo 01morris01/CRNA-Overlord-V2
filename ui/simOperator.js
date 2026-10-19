@@ -1496,6 +1496,7 @@ export function createSimOperator({
         type: entry.type,
         complication: COMPLICATION_LABELS[entry.type] ?? entry.type,
         source: entry.source,
+        startedBy: entry.source === 'booth' ? 'Booth (you, automatically)' : 'the instructor',
         injectedAtSec: round(entry.tSec),
         treatedAtSec: round(entry.treatedAtSec),
         resolvedAtSec: round(entry.resolvedAtSec),
