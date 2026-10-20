@@ -1,0 +1,98 @@
+{
+ "id": "p51",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude for faculty review from the Carson-Newman scenario. Not validated teaching content.",
+ "summary": "Healthy adult for a lap umbilical hernia. The CN Standard IV induction rubric case: prove mask ventilation before neuromuscular blockade and keep ventilating through onset. The full beard is the one airway wrinkle.",
+ "asa": {
+  "suggested": "1",
+  "rationale": "Healthy, active, no systemic disease."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Elective case, appropriately fasted, no optimization needed."
+ },
+ "redFlags": [
+  {
+   "id": "beard",
+   "severity": "major",
+   "finding": "Full beard: mask seal may be hard",
+   "evidence": "Nursing and PAT notes document a full beard; he will not shave.",
+   "implication": "Bag mask ventilation can leak, and this rubric requires proving mask ventilation before the blocker.",
+   "action": "Two hand mask hold, oral airway, petroleum gel or a clear dressing over the beard, confirm ventilation on capnography before the blocker.",
+   "keywords": [
+    "beard",
+    "mask seal",
+    "two hand",
+    "oral airway",
+    "mask ventilation"
+   ]
+  },
+  {
+   "id": "snoring",
+   "severity": "minor",
+   "finding": "Snoring without an OSA workup",
+   "evidence": "Wife reports snoring, no witnessed apneas.",
+   "implication": "Possible undiagnosed OSA; mask ventilation and opioid sensitivity.",
+   "action": "STOP-BANG, oral airway ready, opioid sparing analgesia.",
+   "keywords": [
+    "snoring",
+    "osa",
+    "stop-bang",
+    "stop bang"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "Standard IV induction: preoxygenate, induce, confirm mask ventilation, then the neuromuscular blocker",
+   "keywords": [
+    "mask ventilation",
+    "preoxygenate",
+    "propofol",
+    "rocuronium"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Direct or video laryngoscopy with ETT, confirm with EtCO2",
+   "keywords": [
+    "ett",
+    "etco2",
+    "laryngoscopy"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  },
+  {
+   "domain": "disposition",
+   "item": "Same day discharge",
+   "keywords": [
+    "discharge",
+    "same day"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Airway instrumentation at a light plane",
+   "flags": []
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Cefazolin and the neuromuscular blocker",
+   "flags": []
+  }
+ ],
+ "cnRubric": {
+  "kind": "rubric",
+  "scenarioId": "standard_iv_healthy_001",
+  "title": "Carson-Newman rubric: Standard IV induction"
+ }
+}

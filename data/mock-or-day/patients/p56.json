@@ -1,0 +1,427 @@
+{
+ "id": "p56",
+ "room": "CN Sim Lab 2",
+ "time": "1100",
+ "name": "COLE, BRITTANY NICOLE",
+ "mrn": "0156056",
+ "dob": "04/18/2000",
+ "age": "26 y",
+ "sex": "F",
+ "ht_cm": 168,
+ "wt_kg": 82.0,
+ "preferred_name": "Brittany",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "None listed (urgent care only)",
+ "insurance": "Ambetter (marketplace)",
+ "emergency_contact": "Tammy Cole (mother) 423-555-0284",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Right knee arthroscopy, partial medial meniscectomy",
+  "short": "R knee scope, partial meniscectomy",
+  "laterality": "Right",
+  "service": "Orthopedics - Sports Medicine",
+  "surgeon": "C. Whitfield, MD",
+  "assistant": "",
+  "indication": "Medial meniscal tear R knee with mechanical symptoms.",
+  "duration_min": 45,
+  "anesthesia_requested": "General (LMA) per anesthesia",
+  "position": "Supine, R leg in holder, thigh tourniquet",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Arthroscopy tower",
+  "implants": "",
+  "surgeon_notes": "Elective.",
+  "add_on": false,
+  "scheduled_on": "10/13/2026"
+ },
+ "problems": [
+  [
+   "Medial meniscus tear, right",
+   "08/2026",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "No chronic medical problems"
+  ],
+  "psh": [],
+  "family": [
+   "Maternal uncle: \"high fever and went stiff\" under general anesthesia, needed ICU; family told it may run in the family. No one in the family has been tested.",
+   "Mother: healthy"
+  ],
+  "social": {
+   "tobacco": "Vapes nicotine daily",
+   "alcohol": "Social",
+   "drugs": "None",
+   "occupation": "Server, restaurant",
+   "living": "Roommate, Morristown",
+   "other": ""
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": ""
+ },
+ "home_meds": [],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 1015"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.40-0.90"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "50-260"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-16.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026",
+    "Urine hCG",
+    "Not yet collected",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "08/30/2026",
+   "MRI Right Knee",
+   "Oblique tear posterior horn medial meniscus. Ligaments intact.",
+   "P. Lindqvist, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "08/22/2026",
+   "Urgent care",
+   "Morristown Walk-in",
+   "Knee twisted at work",
+   "Referred to ortho"
+  ],
+  [
+   "09/20/2026",
+   "Ortho clinic",
+   "C-N Sports Medicine",
+   "Locking",
+   "Surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "09/20/2026 1400",
+   "Clinic Note",
+   "Orthopedics",
+   "C. Whitfield, MD",
+   "26F R knee locking after a twisting injury. MRI medial meniscus tear. Plan arthroscopy. Healthy, no meds."
+  ],
+  [
+   "10/27/2026 1005",
+   "Nursing Note",
+   "Preop",
+   "A. Greene, RN",
+   "Patient says she ate \"a big breakfast, eggs, toast and sausage\" around 0800 on the drive in; thought only \"no drinking\" applied. Surgeon not yet notified. Mother called: asks if anyone knows about her brother's anesthesia reaction."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/20/2026 1350",
+   "122/74",
+   80,
+   14,
+   99,
+   36.6,
+   82.0,
+   "3/10",
+   "Ortho clinic"
+  ],
+  [
+   "10/27/2026 1000",
+   "124/76",
+   82,
+   15,
+   98,
+   36.7,
+   82.0,
+   "2/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0950",
+   "Active"
+  ],
+  [
+   "NPO after midnight",
+   "09/20/2026",
+   "Active"
+  ],
+  [
+   "Urine hCG",
+   "10/27/2026",
+   "Pending collection"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: right knee arthroscopy, partial meniscectomy",
+   "Signed by patient 09/20/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [],
+ "preop": {
+  "arrived": "10/27/2026 0945",
+  "npo_solids": "10/27/2026 0800 (eggs, toast, sausage)",
+  "npo_clears": "10/27/2026 0800 orange juice",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/20)"
+   ],
+   [
+    "Pregnancy test",
+    "Not collected; LMP unsure"
+   ],
+   [
+    "Site marked",
+    "Yes - R knee"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ]
+  ],
+  "nursing_note": "Ate breakfast at 0800 (see note). LMP \"a month or two ago, not sure.\" Loose upper front tooth she wiggles. Mother on the phone.",
+  "iv": "20g L hand 1015",
+  "glucose": ""
+ },
+ "label": "CN Rubric · B. Cole",
+ "bmi": "29.1",
+ "cn": {
+  "kind": "teaching",
+  "scenarioId": "cn_preassessment_npo_mh_001",
+  "title": "Carson-Newman teaching case: NPO violation, MH family history, difficult airway"
+ }
+}

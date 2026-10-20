@@ -1,0 +1,556 @@
+{
+ "id": "p53",
+ "room": "CN Sim Lab 1",
+ "time": "1100",
+ "name": "TIPTON, CHARLENE MARIE",
+ "mrn": "0153053",
+ "dob": "02/21/1974",
+ "age": "52 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 110.0,
+ "preferred_name": "Charlene",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "G. Hux, MD, Newport Family Medicine",
+ "insurance": "Medicare disability (Part A/B) + TennCare",
+ "emergency_contact": "Dwayne Tipton (husband) 423-555-0631",
+ "isolation": "",
+ "allergies": [
+  [
+   "Morphine",
+   "Itching, hives",
+   "Moderate",
+   "2015"
+  ]
+ ],
+ "case": {
+  "procedure": "Urgent laparoscopic appendectomy",
+  "short": "Urgent lap appendectomy",
+  "laterality": "N/A",
+  "service": "General Surgery (acute care)",
+  "surgeon": "S. Varner, MD",
+  "assistant": "",
+  "indication": "Acute appendicitis without perforation on CT; pain 14 h.",
+  "duration_min": 60,
+  "anesthesia_requested": "General (RSI, ETT)",
+  "position": "Supine, arms out",
+  "dispo": "Inpatient overnight",
+  "blood": "Type and screen",
+  "equipment": "Laparoscopy tower",
+  "implants": "",
+  "surgeon_notes": "Add-on.",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Acute appendicitis",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Obesity, class III (BMI 40.4)",
+   "2012",
+   "Active"
+  ],
+  [
+   "GERD",
+   "2014",
+   "Active"
+  ],
+  [
+   "Obstructive sleep apnea on CPAP",
+   "2019",
+   "Active"
+  ],
+  [
+   "Type 2 diabetes, oral agents",
+   "2017",
+   "Active"
+  ],
+  [
+   "Known difficult intubation",
+   "2015",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Class III obesity",
+   "GERD",
+   "OSA on CPAP 12 cm H2O, uses nightly",
+   "Type 2 diabetes (A1c 7.2)",
+   "Difficult intubation 2015: see anesthesia history"
+  ],
+  "psh": [
+   [
+    "2015",
+    "Laparoscopic cholecystectomy",
+    "Newport Medical Center"
+   ]
+  ],
+  "family": [
+   "Mother: obesity, OSA",
+   "No family history of anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Former, quit 2010",
+   "alcohol": "None",
+   "drugs": "None",
+   "occupation": "On disability (back)",
+   "living": "Husband, Newport",
+   "other": ""
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": ""
+ },
+ "home_meds": [
+  [
+   "Metformin 1000 mg",
+   "1 tab PO BID",
+   "G. Hux, MD",
+   "10/26/2026 1800"
+  ],
+  [
+   "Pantoprazole 40 mg",
+   "1 tab PO daily",
+   "G. Hux, MD",
+   "10/26/2026 0700"
+  ],
+  [
+   "CPAP 12 cm H2O",
+   "Nightly",
+   "Sleep medicine",
+   "10/26/2026 night (brought from home)"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefoxitin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Famotidine 20 mg IV",
+   "Once preop",
+   "Given 10/27/2026 0950"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "100 mL/h",
+   "Infusing"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "14.6",
+      "H"
+     ],
+     "Hgb": [
+      "13.1",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "288",
+      ""
+     ],
+     "Na": [
+      "137",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "101",
+      ""
+     ],
+     "CO2": [
+      "24",
+      ""
+     ],
+     "BUN": [
+      "15",
+      ""
+     ],
+     "Cr": [
+      "0.81",
+      ""
+     ],
+     "Glu": [
+      "188",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.40-0.90"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "50-260"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-16.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026",
+    "Urine hCG",
+    "Negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/27/2026",
+   "CT Abdomen/Pelvis with IV contrast",
+   "Dilated appendix 12 mm with periappendiceal fat stranding. No abscess or free air.",
+   "H. Lamb, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "10/27/2026",
+   "ED visit",
+   "C-N Medical Center",
+   "RLQ pain",
+   "Admitted, surgery"
+  ]
+ ],
+ "notes": [
+  [
+   "03/11/2015 1420",
+   "Anesthesia Record Summary",
+   "Anesthesiology (outside)",
+   "K. Brandt, CRNA",
+   "Lap chole. Mask ventilation difficult (grade 3, two hand with oral airway). DL Mac 3 grade 4 view; Miller 2 grade 3; intubated on 3rd attempt with bougie by attending. SpO2 nadir 84%. Letter given to patient: DIFFICULT AIRWAY. Recommend video laryngoscope and bougie first."
+  ],
+  [
+   "10/27/2026 0820",
+   "ED Note",
+   "Emergency Medicine",
+   "P. Coggins, MD",
+   "52F RLQ pain 14 h, nausea, one emesis 0600. Ate a full lunch at 1230 yesterday and a sandwich at 1900. CT: acute appendicitis. Surgery consulted."
+  ],
+  [
+   "10/27/2026 0950",
+   "Nursing Note",
+   "Preop",
+   "T. Bales, RN",
+   "Brought her difficult airway letter from 2015 and her CPAP. Neck circumference 47 cm, small mouth opening. Nauseated."
+  ]
+ ],
+ "vitals": [
+  [
+   "10/27/2026 0815",
+   "142/86",
+   98,
+   18,
+   97,
+   37.6,
+   110.0,
+   "7/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0955",
+   "138/82",
+   84,
+   16,
+   98,
+   36.7,
+   110.0,
+   "6/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO",
+   "10/27/2026 0830",
+   "Active"
+  ],
+  [
+   "Type and screen",
+   "10/27/2026 0830",
+   "Resulted"
+  ],
+  [
+   "Cefoxitin 2 g IV on call",
+   "10/27/2026 0900",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "O positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic appendectomy, possible open",
+   "Signed by patient 10/27/2026 0910"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "03/2015",
+   "Laparoscopic cholecystectomy",
+   "GA, ETT",
+   "DIFFICULT AIRWAY: difficult mask, grade 4 DL view, intubated 3rd attempt with bougie, SpO2 84%",
+   "Newport Medical Center"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0940 (from ED)",
+  "npo_solids": "10/26/2026 1900 (sandwich)",
+  "npo_clears": "10/27/2026 0200 water; emesis 0600",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "ED and surgery notes today"
+   ],
+   [
+    "Pregnancy test",
+    "Negative"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes - morphine"
+   ],
+   [
+    "Difficult airway alert",
+    "Yes - letter scanned"
+   ]
+  ],
+  "nursing_note": "Difficult airway letter scanned to Media. Mallampati IV per ED. Neck 47 cm, mouth opening about 3 cm. CPAP at bedside. Nauseated.",
+  "iv": "18g L AC",
+  "glucose": "188 mg/dL"
+ },
+ "label": "CN Rubric · C. Tipton",
+ "bmi": "40.4",
+ "cn": {
+  "kind": "rubric",
+  "scenarioId": "rsi_failed_first_attempt_001",
+  "title": "Carson-Newman rubric: RSI, failed first attempt"
+ }
+}

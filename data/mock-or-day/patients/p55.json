@@ -1,0 +1,566 @@
+{
+ "id": "p55",
+ "room": "CN Sim Lab 2",
+ "time": "0930",
+ "name": "WHITFIELD, KAREN ELAINE",
+ "mrn": "0155055",
+ "dob": "06/30/1994",
+ "age": "32 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 68.0,
+ "preferred_name": "Karen",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "L. Moody, NP, Sevierville Primary Care",
+ "insurance": "Aetna Choice POS II (employer)",
+ "emergency_contact": "Josh Whitfield (husband) 865-555-0956",
+ "isolation": "",
+ "allergies": [
+  [
+   "Latex",
+   "Contact dermatitis",
+   "Moderate",
+   "2016"
+  ],
+  [
+   "Codeine",
+   "Nausea (intolerance, not allergy)",
+   "Mild",
+   "2012"
+  ]
+ ],
+ "case": {
+  "procedure": "Laparoscopic cholecystectomy",
+  "short": "Lap chole",
+  "laterality": "N/A",
+  "service": "General Surgery",
+  "surgeon": "J. Rutherford, MD",
+  "assistant": "",
+  "indication": "Symptomatic cholelithiasis with recurrent postprandial RUQ pain.",
+  "duration_min": 75,
+  "anesthesia_requested": "General (ETT)",
+  "position": "Supine, reverse Trendelenburg, left tilt",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Laparoscopy tower; LATEX FREE room",
+  "implants": "",
+  "surgeon_notes": "Outpatient. Local at port sites.",
+  "add_on": false,
+  "scheduled_on": "10/13/2026"
+ },
+ "problems": [
+  [
+   "Symptomatic cholelithiasis",
+   "06/2026",
+   "Active"
+  ],
+  [
+   "Asthma, mild intermittent",
+   "2008",
+   "Active"
+  ],
+  [
+   "Migraine without aura",
+   "2014",
+   "Active"
+  ],
+  [
+   "Latex allergy (contact)",
+   "2016",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Mild intermittent asthma: albuterol less than monthly, none in the last month, no exacerbations or steroids",
+   "Migraine treated with sumatriptan PRN",
+   "Severe nausea and vomiting after wisdom teeth sedation (2012); gets motion sick easily"
+  ],
+  "psh": [
+   [
+    "2012",
+    "Wisdom teeth extraction",
+    "Oral surgeon, Sevierville (deep sedation)"
+   ]
+  ],
+  "family": [
+   "No personal or family clotting history",
+   "No family history of anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Dental hygienist",
+   "living": "Husband, Sevierville",
+   "other": ""
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": ""
+ },
+ "home_meds": [
+  [
+   "Albuterol HFA 90 mcg",
+   "2 puffs q4h PRN",
+   "L. Moody, NP",
+   "over a month ago"
+  ],
+  [
+   "Norethindrone/ethinyl estradiol (combined OCP)",
+   "1 tab PO daily",
+   "L. Moody, NP",
+   "10/26/2026 2100"
+  ],
+  [
+   "Sumatriptan 50 mg",
+   "1 tab PO PRN migraine",
+   "L. Moody, NP",
+   "10/18/2026"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Acetaminophen 1000 mg PO",
+   "Preop x1",
+   "Given 10/27/2026 0910"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0915"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/13/2026",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "7.0",
+      ""
+     ],
+     "Hgb": [
+      "13.2",
+      ""
+     ],
+     "Hct": [
+      "40",
+      ""
+     ],
+     "Plt": [
+      "256",
+      ""
+     ],
+     "Na": [
+      "139",
+      ""
+     ],
+     "K": [
+      "4.0",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "11",
+      ""
+     ],
+     "Cr": [
+      "0.71",
+      ""
+     ],
+     "Glu": [
+      "88",
+      ""
+     ],
+     "AST": [
+      "24",
+      ""
+     ],
+     "ALT": [
+      "31",
+      ""
+     ],
+     "ALKP": [
+      "88",
+      ""
+     ],
+     "TBili": [
+      "0.7",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.40-0.90"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "50-260"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-16.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026",
+    "Urine hCG",
+    "Negative",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "06/02/2026",
+   "US Right upper quadrant",
+   "Multiple mobile gallstones, largest 1.4 cm. No wall thickening or pericholecystic fluid. CBD 4 mm.",
+   "K. Lowe, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "06/02/2026",
+   "ED visit",
+   "LeConte Medical Center",
+   "RUQ pain after fatty meal",
+   "Discharged, surgery referral"
+  ],
+  [
+   "09/15/2026",
+   "Clinic",
+   "C-N General Surgery",
+   "Gallstones",
+   "Surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "09/15/2026 1100",
+   "Consult",
+   "General Surgery",
+   "J. Rutherford, MD",
+   "32F, 3 episodes postprandial RUQ pain since June. US: cholelithiasis. Mild asthma, migraines, OCP. Latex allergy (rash). Plan outpatient lap chole."
+  ],
+  [
+   "10/13/2026 0900",
+   "Preadmission Note",
+   "Anesthesia PAT",
+   "R. Harrell, RN",
+   "States \"codeine allergy\" (nausea). Latex rash. Uses albuterol rarely. Prior \"bad nausea\" after wisdom teeth. Airway not examined at PAT. Instructions given."
+  ]
+ ],
+ "vitals": [
+  [
+   "10/13/2026 0855",
+   "116/72",
+   76,
+   14,
+   99,
+   36.6,
+   68.0,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0905",
+   "118/74",
+   78,
+   14,
+   99,
+   36.6,
+   68.0,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0850",
+   "Active"
+  ],
+  [
+   "Latex precautions",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "SCDs bilateral lower extremities",
+   "10/27/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic cholecystectomy, possible open, possible cholangiogram",
+   "Signed by patient 09/15/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2012",
+   "Wisdom teeth extraction",
+   "Deep sedation",
+   "Severe nausea and vomiting for hours",
+   "Oral surgeon office"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0830",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0630 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Pregnancy test",
+    "Negative"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "Yes - latex, codeine"
+   ],
+   [
+    "Latex free room",
+    "Confirmed"
+   ]
+  ],
+  "nursing_note": "Anxious about nausea \"like last time.\" Lungs clear. Husband at bedside.",
+  "iv": "18g L hand 0915",
+  "glucose": ""
+ },
+ "label": "CN Rubric · K. Whitfield",
+ "bmi": "25.0",
+ "cn": {
+  "kind": "teaching",
+  "scenarioId": "cn_preassessment_lap_chole_001",
+  "title": "Carson-Newman teaching case: Lap chole, reactive airway, PONV"
+ }
+}

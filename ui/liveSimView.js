@@ -744,6 +744,7 @@ export function renderRubricConsoleShell() {
       <button id="live-rubric-load" type="button" class="live-primary">LOAD SCENARIO</button>
       <output id="live-rubric-load-status" class="live-rubric-inline-status" aria-live="polite">No rubric scenario loaded.</output>
 
+      <p class="live-help">Each scenario lives on a Mock OR patient labeled CN Rubric (p51 to p56). Loading here opens that patient with its chart and care plan; picking the patient from the schedule does the same.</p>
       <p class="live-help">The neuromuscular block shortcut moved to RUN THE PATIENT, under AIRWAY + DRUGS.</p>
 
       <section class="live-rubric-summary-section" aria-labelledby="live-rubric-summary-heading">
@@ -1757,6 +1758,51 @@ function ensureRunner() {
   return runner;
 }
 
+let cnLoadToken = 0;
+
+/* A Mock OR patient labeled CN Rubric carries a Carson-Newman rubric
+   scenario or teaching case. The chart, care plan and chart interview stay
+   the Mock OR ones; the scenario adds the scored check-offs (or the teaching
+   case flow) on top, with the same physiology. */
+async function loadCnScenarioForPatient(entry, patient) {
+  const token = ++cnLoadToken;
+  const { scenarioId, kind, title } = entry.cnRubric;
+  const select = document.getElementById('live-rubric-scenario');
+  if (select) select.value = scenarioId;
+  setRubricLoadStatus(`Loading ${title} for ${entry.label}...`);
+  try {
+    const liveRunner = ensureRunner();
+    const { scenario } = await loadSelectedScenarioAssets(liveRunner, scenarioId);
+    if (token !== cnLoadToken || mockOr?.getState().id !== entry.id) return;
+    latestRubricResult = null;
+    latestRubricPresentationKey = null;
+    latestRubricDebrief = null;
+    clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
+    caseController?.reset();
+    transport?.setCaseBrief(null);
+    patientInterview?.setGrounding?.(buildChartInterviewGrounding(patient));
+    placeInterviewPanel('setup');
+    fillPatientForm(liveRunner.config);
+    syncCaseSetupControls(liveRunner.snapshot());
+    liveRunner.logEvent('CN Rubric', `${title} attached to ${entry.label}`, { action: 'cn_rubric_attach', patientId: entry.id, scenarioId });
+    renderEventLog();
+    liveRunner.emit();
+    const where = kind === 'teaching'
+      ? 'The teaching case flow and its check-offs are live in OPTIONAL · SCORED CHECK-OFFS.'
+      : 'Rubric scoring is live in OPTIONAL · SCORED CHECK-OFFS.';
+    const note = entry.cnRubric.note ? ` ${entry.cnRubric.note}` : '';
+    const disclosure = Array.isArray(scenario?.physiologyDisclosures) && scenario.physiologyDisclosures.length
+      ? ` PHYSIOLOGY DISCLOSURE: ${scenario.physiologyDisclosures[0]}` : '';
+    setRubricLoadStatus(`${title} attached to ${entry.label}.`, 'success');
+    setStatus(`${entry.label} loaded with the ${title.replace(/^Carson-Newman /, 'CN ')}. ${where} Booth comments but does not inject while scoring runs.${note} Submit the care plan before START.${disclosure}`, 'success');
+  } catch (error) {
+    if (token !== cnLoadToken) return;
+    setRubricLoadStatus(`Could not attach ${title}: ${error.message}`, 'error');
+    setStatus(`${entry.label} loaded, but the CN scenario failed to load: ${error.message}. The patient still runs unscored.`, 'error');
+  }
+}
+
 /* Mock OR Day: chart driven patients with a required care plan. */
 function initMockOr() {
   carePlan = createCarePlanController({
@@ -1789,6 +1835,7 @@ function initMockOr() {
         runner.logEvent('Mock OR', `${entry.label} loaded · ${entry.procedure}`, { action: 'mock_or_load', patientId: entry.id });
         runner.emit();
         setStatus(`${entry.label} loaded from the Mock OR schedule. Read the chart and submit the care plan before START.`, 'success');
+        if (entry.cnRubric?.scenarioId) loadCnScenarioForPatient(entry, patient);
         return { ok: true };
       } catch (error) {
         setStatus(`Mock OR physiology rejected: ${error.message}`, 'error');
@@ -1996,6 +2043,16 @@ async function loadSelectedRubricScenario() {
   const assets = RUBRIC_SCENARIO_ASSETS[selectedId] ?? TEACHING_CASE_ASSETS[selectedId];
   if (!assets) {
     setRubricLoadStatus('Select an approved scenario or teaching case.', 'error');
+    return;
+  }
+  // Every CN scenario now lives on a Mock OR patient labeled CN Rubric: load
+  // that patient so the chart, care plan and interview come with it.
+  const cnPatient = mockOr?.findByScenario?.(selectedId);
+  if (cnPatient) {
+    setRubricLoadStatus(`Opening ${cnPatient.label} from the Mock OR schedule...`);
+    const mockSelect = document.getElementById('mockor-select');
+    if (mockSelect) mockSelect.value = cnPatient.id;
+    await mockOr.load(cnPatient.id);
     return;
   }
   if (button) button.disabled = true;

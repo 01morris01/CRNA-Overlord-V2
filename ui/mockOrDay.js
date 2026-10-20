@@ -414,6 +414,8 @@ export function createMockOrController({
     init, load, openChart, closeChart, exit, planUpdated, refreshPlan,
     gate: () => startGate(state),
     getState: () => ({ ...state }),
+    // The Mock OR patient that carries a Carson-Newman rubric or teaching case.
+    findByScenario: (scenarioId) => index?.patients?.find((row) => row.cnRubric?.scenarioId === scenarioId) ?? null,
     destroy() {
       loadButton?.removeEventListener?.('click', onLoad);
       chartButton?.removeEventListener?.('click', onChart);

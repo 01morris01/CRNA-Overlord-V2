@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v66-onset-tof-2026-10-19';
+const CACHE_VERSION = 'v67-cn-rubric-patients-2026-10-20';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [

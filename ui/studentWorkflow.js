@@ -253,7 +253,7 @@ export function startStudentWorkflow({ root = document, storage = globalThis.loc
         <strong>${esc(entry.label)}</strong>
         <span class="student-patient-meta">${esc(entry.age)} ${esc(entry.sex)} · ${esc(entry.service)}</span>
         <span class="student-patient-proc">${esc(entry.procedure)}</span>
-        <span class="student-patient-tags">${entry.engineSupported ? '' : '<em>chart only</em>'}${planLabel ? `<em class="student-tag-plan">${esc(planLabel)}</em>` : ''}</span>
+        <span class="student-patient-tags">${entry.cnRubric ? `<em class="student-tag-cn">${entry.cnRubric.kind === 'teaching' ? 'CN teaching case' : 'CN rubric · scored'}</em>` : ''}${entry.engineSupported ? '' : '<em>chart only</em>'}${planLabel ? `<em class="student-tag-plan">${esc(planLabel)}</em>` : ''}</span>
       </button>`;
     }).join('');
   }

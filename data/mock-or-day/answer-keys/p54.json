@@ -1,0 +1,110 @@
+{
+ "id": "p54",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude for faculty review from the Carson-Newman scenario. Not validated teaching content.",
+ "summary": "Healthy hypertensive man for a laparoscopic TEP hernia who had residual blockade in PACU in 2019 (TOF 3/4 with fade, SpO2 89%). The surgeon wants a deep block. The CN Emergence rubric case: the scored run starts at the end of surgery with a TOF ratio below 0.9.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Controlled hypertension."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Elective, optimized; plan quantitative monitoring and sugammadex."
+ },
+ "redFlags": [
+  {
+   "id": "residual",
+   "severity": "critical",
+   "finding": "Prior residual neuromuscular blockade in PACU",
+   "evidence": "2019 PACU note: weak, SpO2 89%, TOF 3/4 with fade after neostigmine; patient remembers it.",
+   "implication": "Repeat risk, especially with the deep block the surgeon wants.",
+   "action": "Quantitative TOF monitoring throughout, reverse with sugammadex dosed to depth, confirm TOF ratio 0.9 or more before extubation.",
+   "keywords": [
+    "residual",
+    "tof",
+    "train of four",
+    "sugammadex",
+    "quantitative",
+    "0.9",
+    "reversal"
+   ]
+  },
+  {
+   "id": "deepblock",
+   "severity": "major",
+   "finding": "Surgeon requests a deep block for TEP",
+   "evidence": "Consult note and case notes.",
+   "implication": "Deep block at closure; neostigmine will not reverse it.",
+   "action": "Rocuronium titrated to PTC, sugammadex 4 mg/kg for deep block, monitor until the end.",
+   "keywords": [
+    "deep block",
+    "ptc",
+    "post tetanic",
+    "sugammadex 4",
+    "rocuronium"
+   ]
+  },
+  {
+   "id": "htn",
+   "severity": "minor",
+   "finding": "Hypertension on amlodipine",
+   "evidence": "Took amlodipine this morning.",
+   "implication": "Mild induction hypotension.",
+   "action": "Continue; treat hypotension.",
+   "keywords": [
+    "amlodipine",
+    "hypertension"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "monitoring",
+   "item": "Quantitative TOF monitoring from induction to extubation",
+   "keywords": [
+    "quantitative",
+    "tof",
+    "acceleromyography"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Volatile off, reverse with sugammadex to depth, TOF ratio 0.9 or more, adequate spontaneous ventilation before extubation",
+   "keywords": [
+    "sugammadex",
+    "tof ratio",
+    "spontaneous",
+    "extubation"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefazolin 2 g within 60 min of incision",
+   "keywords": [
+    "cefazolin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Emergence at a light plane after extubation",
+   "flags": [
+    "residual"
+   ]
+  },
+  {
+   "type": "OpioidRespDepression",
+   "why": "Opioid plus residual weakness after extubation",
+   "flags": [
+    "residual"
+   ]
+  }
+ ],
+ "cnRubric": {
+  "kind": "rubric",
+  "scenarioId": "emergence_residual_block_001",
+  "title": "Carson-Newman rubric: Emergence, residual blockade",
+  "note": "The scored run starts at the END of the case: intubated, on sevoflurane, TOF ratio below 0.9."
+ }
+}

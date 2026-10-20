@@ -1,0 +1,163 @@
+{
+ "id": "p55",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude for faculty review from the Carson-Newman scenario. Not validated teaching content.",
+ "summary": "Outpatient lap chole in a young woman with mild intermittent asthma, latex allergy, codeine intolerance, OCP use, and severe prior PONV with motion sickness (Apfel 4). The CN teaching case: characterize asthma control, plan multimodal PONV prophylaxis, examine the airway, avoid codeine.",
+ "asa": {
+  "suggested": "2",
+  "rationale": "Mild intermittent asthma is mild systemic disease."
+ },
+ "decision": {
+  "recommendation": "proceed",
+  "rationale": "Asthma is well controlled; the risks are planned for, not reasons to delay."
+ },
+ "redFlags": [
+  {
+   "id": "ponv",
+   "severity": "major",
+   "finding": "High PONV risk (Apfel 4)",
+   "evidence": "Female, non smoker, severe PONV after 2012 sedation, motion sickness, postop opioids.",
+   "implication": "Very likely PONV and delayed discharge.",
+   "action": "Multimodal prophylaxis: dexamethasone, ondansetron, scopolamine patch or TIVA, minimize opioids.",
+   "keywords": [
+    "ponv",
+    "apfel",
+    "dexamethasone",
+    "ondansetron",
+    "scopolamine",
+    "tiva",
+    "multimodal"
+   ]
+  },
+  {
+   "id": "asthma",
+   "severity": "major",
+   "finding": "Reactive airway disease",
+   "evidence": "Mild intermittent asthma, albuterol PRN.",
+   "implication": "Bronchospasm at intubation or with light anesthesia.",
+   "action": "Confirm control, albuterol before induction, deep plane before airway, sevoflurane, albuterol ready.",
+   "keywords": [
+    "asthma",
+    "albuterol",
+    "bronchospasm",
+    "sevoflurane"
+   ]
+  },
+  {
+   "id": "latex",
+   "severity": "major",
+   "finding": "Latex allergy",
+   "evidence": "Contact dermatitis 2016; latex precautions ordered.",
+   "implication": "Reaction risk from gloves, catheters, equipment.",
+   "action": "Latex free room and supplies, first case of the day when possible.",
+   "keywords": [
+    "latex"
+   ]
+  },
+  {
+   "id": "codeine",
+   "severity": "minor",
+   "finding": "Codeine listed as allergy but is an intolerance (nausea)",
+   "evidence": "PAT note and allergy list.",
+   "implication": "Codeine worsens nausea; not a true allergy.",
+   "action": "Clarify, avoid codeine, multimodal non opioid analgesia.",
+   "keywords": [
+    "codeine",
+    "intolerance"
+   ]
+  },
+  {
+   "id": "ocp",
+   "severity": "minor",
+   "finding": "Combined oral contraceptive",
+   "evidence": "Taking daily.",
+   "implication": "Higher VTE risk.",
+   "action": "Mechanical prophylaxis (SCDs), early ambulation.",
+   "keywords": [
+    "ocp",
+    "contraceptive",
+    "vte",
+    "scd"
+   ]
+  },
+  {
+   "id": "airwayexam",
+   "severity": "minor",
+   "finding": "Airway not examined at PAT",
+   "evidence": "PAT note: airway not examined.",
+   "implication": "Plan cannot rely on an undocumented exam.",
+   "action": "Examine and document the airway before induction (it is reassuring: Mallampati I).",
+   "keywords": [
+    "airway exam",
+    "mallampati"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "ponv",
+   "item": "Multimodal PONV prophylaxis (two or more agents)",
+   "keywords": [
+    "dexamethasone",
+    "ondansetron",
+    "scopolamine",
+    "multimodal"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "ETT with a deep plane before instrumentation; albuterol ready",
+   "keywords": [
+    "ett",
+    "albuterol",
+    "deep"
+   ]
+  },
+  {
+   "domain": "analgesia",
+   "item": "Multimodal analgesia without codeine",
+   "keywords": [
+    "acetaminophen",
+    "ketorolac",
+    "local",
+    "no codeine"
+   ]
+  },
+  {
+   "domain": "vte",
+   "item": "SCDs",
+   "keywords": [
+    "scd",
+    "sequential"
+   ]
+  },
+  {
+   "domain": "safety",
+   "item": "Latex free room",
+   "keywords": [
+    "latex"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Reactive airway at intubation",
+   "flags": [
+    "asthma"
+   ]
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Latex exposure",
+   "flags": [
+    "latex"
+   ]
+  }
+ ],
+ "cnRubric": {
+  "kind": "teaching",
+  "scenarioId": "cn_preassessment_lap_chole_001",
+  "title": "Carson-Newman teaching case: Lap chole, reactive airway, PONV"
+ }
+}
