@@ -778,7 +778,17 @@
   ],
   "nursing_note": "Pale, anxious, diaphoretic. Two 18g IVs (L AC, R FA), 2nd liter LR infusing. Voided in ED. Vomited once at 0230 (partially digested food). RhIG not given yet - ordered, vial on floor. Husband at bedside.",
   "iv": "18g L AC, 18g R forearm; LR",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Vomited partially digested food at 0230 (full stomach)",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "A. Hartsell",
  "bmi": "25.6"

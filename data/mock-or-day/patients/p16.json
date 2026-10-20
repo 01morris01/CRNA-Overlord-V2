@@ -990,7 +990,17 @@
   ],
   "nursing_note": "A&O x4, ambulatory with slight limp. Monitor shows SB 46, pt states \"it's always like that.\" Denies dizziness or CP. Hair clipped R knee. Wife at bedside.",
   "iv": "18g L forearm 0622",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Athletic build",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "G. Strahan",
  "bmi": "22.4"

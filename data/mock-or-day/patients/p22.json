@@ -708,7 +708,17 @@
   ],
   "nursing_note": "Received from 4 West. Fidgety, diaphoretic forehead, pupils 5 mm reactive. Splint intact. HR 110, BP 156/94. Denies CP. Girlfriend at bedside. Transfer report states NPO since midnight.",
   "iv": "20g L AC (ED) 2245",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Nasal septum: ask about cocaine use (snorted)",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Riddlebarger",
  "bmi": "26.3"

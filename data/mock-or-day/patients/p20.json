@@ -571,7 +571,17 @@
   ],
   "nursing_note": "A&O x4, anxious, repeatedly asks about nausea plan. Got carsick on drive in. Surgeon markings done. Husband at bedside.",
   "iv": "20g R hand 1035",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "K. Vesely",
  "bmi": "29.4"

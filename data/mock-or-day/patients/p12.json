@@ -1831,7 +1831,17 @@
   ],
   "nursing_note": "BP 164/96, HR 58, RR 14, SpO2 97% RA, T 36.9, pain 7/10 (headache). Solids 10/26 1800. Clears 0400. Headache worse since midnight; vomited twice at 0430. More drowsy than yesterday. GCS 14 (E3 V5 M6). Pupils equal. Consents signed. Full code. POC 0545: 251. No insulin ordered. IV left forearm 20 g.",
   "iv": "20 G left forearm",
-  "glucose": "251 (0545)"
+  "glucose": "251 (0545)",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full range",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "S. Pruitt",
  "bmi": "27.2"

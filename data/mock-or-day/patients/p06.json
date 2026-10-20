@@ -1804,7 +1804,17 @@
   ],
   "nursing_note": "BP 168/82, HR 124 AF, RR 22, SpO2 95% RA, T 37.9. Anxious, tremulous. Prefers to sit upright; becomes short of breath when the bed is flattened. Hoarse. Solids 10/26 1900. Clears 0430. Did not take AM propranolol (\"told nothing by mouth\"). Consent signed. IV 20 G left forearm.",
   "iv": "20 G left forearm",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "Normal, over 4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Large goiter; CT shows substernal extension with the trachea narrowed to 6 mm",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "L. Patterson",
  "bmi": "24.2"

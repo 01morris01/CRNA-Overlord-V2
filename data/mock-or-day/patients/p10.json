@@ -1911,7 +1911,17 @@
   ],
   "nursing_note": "BP 108/66, HR 102, SpO2 96%, T 37.2. Pain 2/10. Solids 10/26 1800. Clears 0400. PIV attempted twice in the right arm, unsuccessful. Nurse asks whether to try the left arm or access the port. Consent signed. Allergy band: ondansetron. Pt reports getting winded on stairs.",
   "iv": "None (2 failed attempts, right arm)",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "4.5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Left internal jugular chest port in place",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Abernathy",
  "bmi": "24.1"

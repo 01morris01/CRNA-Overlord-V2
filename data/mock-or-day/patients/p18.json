@@ -2263,7 +2263,17 @@
   ],
   "nursing_note": "A&O x4, HOH, hearing aids in. Irregular rhythm on monitor 70s. Reports last warfarin \"Friday.\" Took metoprolol 0500. Ambulatory. Wife at bedside. Voided small amount with straining.",
   "iv": "20g L forearm 0608",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Mildly reduced extension (age)",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Hearing aids",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "H. Kittrell",
  "bmi": "27.4"

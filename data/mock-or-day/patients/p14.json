@@ -1255,7 +1255,17 @@
   ],
   "nursing_note": "BP 130/84, HR 98, RR 20, SpO2 98% RA, T 37.0 C, pain 9/10. Contractions q3 min. Cervix 5 cm at 0310. Ate dinner 1900. Ice chips since arrival. Patient statement: \"Contractions started around midnight. I want the epidural early this time - last time it only worked on one side.\" Right forearm 18 g; second IV not yet placed. Anesthesia consent pending. Blood consent signed.",
   "iv": "18 G right forearm",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "III (II at 28 weeks)",
+   "tmd": "6 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Short neck, full range",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "BMI 38, airway edema of late pregnancy",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "M. Espinoza",
  "bmi": "38.3"

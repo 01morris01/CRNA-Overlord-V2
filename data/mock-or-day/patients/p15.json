@@ -763,7 +763,17 @@
   ],
   "nursing_note": "Ambulatory, A&O x4. Tearful, anxious about IV; 20g L hand on 1st attempt with lidocaine wheal. Denies headache today. Took Junel at 2100 last night. Last naproxen 10/25 AM. LMP 10/12 (spotting on continuous OCP). Boyfriend in waiting room, phone verified.",
   "iv": "20g L hand 0618",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "M. Stricklin",
  "bmi": "22.5"

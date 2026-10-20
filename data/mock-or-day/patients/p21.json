@@ -2266,7 +2266,17 @@
   ],
   "nursing_note": "See nursing note 0620. Pt brought home BP cuff and log. Took metoprolol, ASA, clopidogrel 0500. Did not take losartan, metformin, sitagliptin. States \"I quit the swelling pill.\" Trace ankle edema. Wife at bedside.",
   "iv": "20g L forearm 0605",
-  "glucose": "164 mg/dL 0550"
+  "glucose": "164 mg/dL 0550",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full range; avoid extreme rotation (carotid disease)",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "BMI 31",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "L. Brannigan",
  "bmi": "31.1"

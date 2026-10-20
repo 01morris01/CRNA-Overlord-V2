@@ -1762,7 +1762,17 @@
   ],
   "nursing_note": "Took \"all my morning pills\" at 0700 including both BP pills. Mucous membranes dry; reports thirst, urinating frequently. Voice normal. 20g L hand, 20g R forearm for IOPTH draws. Husband in waiting room.",
   "iv": "20g L hand (infusion), 20g R forearm (lab draws only)",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "Over 6 cm",
+   "mouth_opening": "Normal, over 4 cm",
+   "neck": "Full extension; short thick neck",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Neck circumference 40 cm",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "D. Burchfield",
  "bmi": "31.3"

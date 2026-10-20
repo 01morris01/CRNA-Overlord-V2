@@ -544,7 +544,17 @@
   ],
   "nursing_note": "Difficult airway letter scanned to Media. Mallampati IV per ED. Neck 47 cm, mouth opening about 3 cm. CPAP at bedside. Nauseated.",
   "iv": "18g L AC",
-  "glucose": "188 mg/dL"
+  "glucose": "188 mg/dL",
+  "airway_exam": {
+   "mallampati": "IV",
+   "tmd": "5 cm",
+   "mouth_opening": "About 3 cm",
+   "neck": "Limited extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Neck circumference 47 cm, BMI 40; 2015 difficult mask, grade 4 DL view, intubated on the 3rd attempt with bougie (letter on file)",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "CN Rubric · C. Tipton",
  "bmi": "40.4",

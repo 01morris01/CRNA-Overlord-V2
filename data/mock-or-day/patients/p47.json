@@ -1140,7 +1140,17 @@
   ],
   "nursing_note": "34F, 18 wk, anxious, tearful about baby. Lying supine became lightheaded, BP 94/58 - resolved with left tilt (now 108/64). Heartburn this AM. Husband at bedside. 20 g R forearm.",
   "iv": "20 g R forearm",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "3 fingerbreadths",
+   "mouth_opening": "Good opening",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "18 weeks pregnant: aspiration precautions",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Mayberry",
  "bmi": "28.5"

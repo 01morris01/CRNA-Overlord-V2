@@ -378,7 +378,17 @@
   ],
   "nursing_note": "Active, playful toddler with mother and father. Mom reports cold resolved ~3 wk ago; no fever, no cough this week. Clear nose, lungs clear, no retractions. Small dry eczema patches antecubital. No loose teeth (8 teeth). Last formula/crackers 0100, apple juice 0650. Mom will accompany to OR door. No IV.",
   "iv": "None",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "Not assessable (toddler)",
+   "tmd": "Age appropriate",
+   "mouth_opening": "Adequate",
+   "neck": "Full range",
+   "dentition": "8 teeth, none loose",
+   "other": "Nose clear now after the early October URI",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "E. Routh",
  "bmi": "17.1"

@@ -2014,7 +2014,17 @@
   ],
   "nursing_note": "BP 98/58, HR 112 AF, RR 22, SpO2 92% on 2 L, T 37.4. Pain 8/10. Foley: 120 mL in 8 hours, dark. Consent signed by the patient this morning. Patient oriented to person only. Son is the healthcare power of attorney and was not present (works nights, back after 0900). DNR band on. Hearing aids and dentures (upper and lower) in place. Apixaban given 2100 per MAR.",
   "iv": "20 G left forearm (LR 100 mL/h)",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "3 fingerbreadths",
+   "neck": "Reduced extension (cervical spondylosis)",
+   "dentition": "Full upper and lower dentures, remove before induction",
+   "other": "Edentulous once dentures are out: mask seal harder; hearing aids",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "E. Whitaker",
  "bmi": "25.0"

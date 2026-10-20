@@ -1488,7 +1488,17 @@
   ],
   "nursing_note": "BP 172/104, HR 126, RR 24, SpO2 93% on 2 L, T 38.2. Pain 9/10. Ate breakfast tray at 0730 (\"he was hungry, nobody said NPO\"). Tremulous, diaphoretic, picking at sheets. Oriented to person and place. L calf tense, firm, pain with passive stretch of toes. Consent signed 10/25 on admission. IV 18 G right forearm. Last lorazepam 0730, last hydromorphone 0800, enoxaparin 0600.",
   "iv": "18 G right forearm",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "7 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Chipped upper central incisor (#8) from the crash, document before laryngoscopy",
+   "other": "Facial abrasions; otherwise normal airway",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Reynolds",
  "bmi": "25.3"

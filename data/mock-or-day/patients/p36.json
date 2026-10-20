@@ -1130,7 +1130,17 @@
   ],
   "nursing_note": "Took Symbicort, prednisone 30 mg and omeprazole at 0500. Mouth breathing, total nasal obstruction. Lungs: faint end-expiratory wheeze R base, pt says \"that's normal for me.\" Wears a \"Samter's\" med alert bracelet - removed and placed in belongings bag with wedding ring. 18g L hand.",
   "iv": "18g L hand, LR",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Nasal polyps, mouth breather, BMI 30, mild OSA",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "R. Debusk",
  "bmi": "30.0"

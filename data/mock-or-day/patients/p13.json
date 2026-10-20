@@ -929,7 +929,17 @@
   ],
   "nursing_note": "HR 158, RR 44, SpO2 98% RA, T 36.6 C (axillary), BP 72/40. Wt 3.9 kg. Fontanelle flat. More alert. Two wet diapers since 0200. Vomited 15 mL clear fluid at 0930 despite NPO. No NG tube placed. Parents both present. Consent signed by mother. Questions about \"the breathing alarms he had in the NICU.\" Left saphenous 24 g, infusing.",
   "iv": "24 G left saphenous",
-  "glucose": "96 (0600 BMP)"
+  "glucose": "96 (0600 BMP)",
+  "airway_exam": {
+   "mallampati": "Not assessable (infant)",
+   "tmd": "Small mandible (mild micrognathia)",
+   "mouth_opening": "Adequate",
+   "neck": "Full range",
+   "dentition": "Edentulous (infant)",
+   "other": "Palate intact; NICU and surgery noted mild micrognathia",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "M. Bailey",
  "bmi": "13.9"

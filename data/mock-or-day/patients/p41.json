@@ -2303,7 +2303,17 @@
   ],
   "nursing_note": "70F anxious, tearful, hands shaking, asking repeatedly \"will I be asleep?\" Husband with walker at bedside, daughter en route. Took levothyroxine, metoprolol, sertraline this AM. Also took alprazolam 0.25 mg last night for sleep. Upper partial denture removed. Sinus rhythm on monitor 70s with occasional PAC. Glasses with husband.",
   "iv": "22 g R hand (L arm restricted)",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "3 fingerbreadths",
+   "mouth_opening": "4 cm",
+   "neck": "Full range",
+   "dentition": "Upper partial denture (remove)",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "L. Vandergriff",
  "bmi": "26.6"

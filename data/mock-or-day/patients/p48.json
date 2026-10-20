@@ -2321,7 +2321,17 @@
   ],
   "nursing_note": "65M febrile 38.3, HR 114 sinus, BP 102/58. Warm, flushed. Dry mucous membranes. Foley not placed. UO ~20 mL/h per floor. Sternotomy scar. Took immunosuppressants and prednisone 0800. 20 g R forearm (NS 75). Wife at bedside.",
   "iv": "20 g R forearm",
-  "glucose": "214 mg/dL (0640 lab)"
+  "glucose": "214 mg/dL (0640 lab)",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "G. Harbison",
  "bmi": "26.1"

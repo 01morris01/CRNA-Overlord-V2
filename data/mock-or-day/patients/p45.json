@@ -956,7 +956,17 @@
   ],
   "nursing_note": "15F, quiet, nervous. Mother at bedside. Pale conjunctivae. Did not take iron (has not for weeks). Chlorhexidine wipes done. 20 g L hand. Confidential interview completed - see separate note. hCG pending.",
   "iv": "20 g L hand",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "6.5 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full range (scoliosis is thoracolumbar)",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "K. Arwood",
  "bmi": "19.8"

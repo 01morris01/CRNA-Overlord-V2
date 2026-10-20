@@ -1944,7 +1944,17 @@
   ],
   "nursing_note": "HR 128 AF, BP 88/50, RR 30, SpO2 91% on 4 L, T 38.5. Foley 40 mL/2 h. NPO 2 days. NG to suction, 1.4 L. Full code. Consent by patient; oriented. Daughter at bedside. Rigid, tremor, soft voice. Last carbidopa-levodopa 10/25 2200.",
   "iv": "18 G left forearm, 20 G right hand",
-  "glucose": "142"
+  "glucose": "142",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6 cm",
+   "mouth_opening": "3 fingerbreadths",
+   "neck": "Reduced extension, cogwheel rigidity",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Rigid, tremor, soft voice; NG tube in place to suction",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "R. Calloway",
  "bmi": "22.9"

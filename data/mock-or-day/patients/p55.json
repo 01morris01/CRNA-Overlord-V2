@@ -554,7 +554,17 @@
   ],
   "nursing_note": "Anxious about nausea \"like last time.\" Lungs clear. Husband at bedside.",
   "iv": "18g L hand 0915",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Lungs clear; latex allergy",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "CN Rubric · K. Whitfield",
  "bmi": "25.0",

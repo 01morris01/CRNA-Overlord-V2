@@ -1294,7 +1294,17 @@
   ],
   "nursing_note": "A&O x4, anxious, pacing then sitting due to back pain. Smells of smoke; states last cigarette 0430. Took \"all my morning meds\" at 0500. Brought pill bottles in a bag, sent to pharmacy for verification. Nicotine patch not on. Sister in waiting room.",
   "iv": "18g L forearm 0612",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Active smoker, wheeze clearing with cough; STOP-Bang 4",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "D. Lawson-Greer",
  "bmi": "28.8"

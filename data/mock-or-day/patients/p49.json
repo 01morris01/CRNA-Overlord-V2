@@ -2383,7 +2383,17 @@
   ],
   "nursing_note": "72F frail, pleasant. On 3 L NC SpO2 91%. Sitting upright, dyspneic speaking full sentences slowly. JVD visible sitting. 2+ ankle edema. L arm splint, fingers warm. Sildenafil 0600 given. Asks again about her ambrisentan (\"I haven't had it since Saturday\"). 22 g R hand.",
   "iv": "22 g R hand",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Mildly reduced extension (age)",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Home oxygen",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "I. Crumley",
  "bmi": "24.7"

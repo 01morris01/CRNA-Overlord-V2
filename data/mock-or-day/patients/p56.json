@@ -415,7 +415,17 @@
   ],
   "nursing_note": "Ate breakfast at 0800 (see note). LMP \"a month or two ago, not sure.\" Loose upper front tooth she wiggles. Mother on the phone.",
   "iv": "20g L hand 1015",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "5 cm",
+   "mouth_opening": "3.5 cm",
+   "neck": "Limited extension",
+   "dentition": "Loose upper incisor, chipped molar",
+   "other": "Ate breakfast at 0800",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "CN Rubric · B. Cole",
  "bmi": "29.1",
