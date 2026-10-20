@@ -1,11 +1,15 @@
 import {
   DEFAULT_CONFIG, SimRunner, VentMode, ventName,
-  GRADUAL_COMPLICATIONS,
+  GRADUAL_COMPLICATIONS, FLUID_TYPES,
 } from '../crisis-sim/ui/simRunner.js';
 import {
   COMPLICATION_OPTIONS,
+  computeCustomDose,
   computeDrugDose,
   computeRegionalLidocaineDose,
+  ENGINE_DRUGS,
+  fio2FromFlows,
+  flowsForFiO2,
   DRUG_ACTIONS,
   formatInstructorNmb,
   formatLidocaineSnapshot,
@@ -1012,7 +1016,7 @@ function renderShell() {
         </div>
 
         <div class="live-tab-panel" data-console-panel="run" role="tabpanel" hidden>
-          <p class="live-help live-tab-intro">Do what the student asks for. Booth watches every click.</p>
+          <p class="live-help live-tab-intro">Booth carries out what the student orders out loud (switch it in the Booth panel). Use these for anything else. A wrong drug can be taken back for 2 minutes.</p>
           <nav class="live-subtabs" aria-label="Patient controls">
             <button type="button" data-run-tab="airway" aria-pressed="true">AIRWAY + DRUGS</button>
             <button type="button" data-run-tab="vent" aria-pressed="false">VENT + VOLATILE</button>
@@ -1043,6 +1047,33 @@ function renderShell() {
             <span>Complication <strong id="live-drive-complication">—</strong></span>
             <span>NMB capability <strong id="live-drive-muscle">—</strong></span>
           </div>
+        </section>
+        <section id="live-undo-panel" class="live-panel live-undo-panel" aria-labelledby="live-undo-heading">
+          <h2 id="live-undo-heading">Pressed the wrong drug?</h2>
+          <p class="live-help">Take a dose back within 2 minutes of sim time. It comes out of the patient as if it was never pushed. Reversal agents cannot be taken back.</p>
+          <ol id="live-undo-list" class="live-undo-list"><li class="live-undo-empty">No recent doses.</li></ol>
+        </section>
+        <section class="live-panel live-custom-dose" aria-labelledby="live-custom-dose-heading">
+          <h2 id="live-custom-dose-heading">Any drug, any dose</h2>
+          <form id="live-custom-dose-form" class="live-custom-dose-form" novalidate>
+            <label class="live-field"><span>Drug</span><select name="drug">${ENGINE_DRUGS.map((name) => `<option value="${name}">${name}</option>`).join('')}</select></label>
+            <label class="live-field"><span>Dose</span><input name="amount" type="number" min="0" step="any" value="" placeholder="100" required></label>
+            <label class="live-field"><span>Unit</span><select name="unit"><option value="mg">mg</option><option value="mcg">mcg</option><option value="mg/kg">mg/kg</option><option value="mcg/kg">mcg/kg</option></select></label>
+            <button type="submit" class="live-primary">GIVE</button>
+          </form>
+        </section>
+        <section id="live-fluids-panel" class="live-panel live-fluids-panel" aria-labelledby="live-fluids-heading">
+          <h2 id="live-fluids-heading">IV fluids + blood</h2>
+          <form id="live-fluid-form" class="live-fluid-form" novalidate>
+            <label class="live-field"><span>Fluid</span><select name="type">${Object.entries(FLUID_TYPES).map(([id, fluid]) => `<option value="${id}">${escapeHtml(fluid.label)}</option>`).join('')}</select></label>
+            <label class="live-field"><span>Bolus</span><span class="live-input-unit"><input name="volumeMl" type="number" value="500" min="50" max="5000" step="50"><small>mL</small></span></label>
+            <label class="live-field"><span>Over</span><span class="live-input-unit"><input name="overMin" type="number" value="10" min="1" max="240" step="1"><small>min</small></span></label>
+            <button type="submit" class="live-primary" data-fluid-action="bolus">GIVE BOLUS</button>
+            <label class="live-field"><span>Maintenance</span><span class="live-input-unit"><input name="mlPerHr" type="number" value="100" min="0" max="2000" step="10"><small>mL/h</small></span></label>
+            <button type="button" data-fluid-action="rate">SET RATE</button>
+            <button type="button" class="live-secondary" data-fluid-action="stop">STOP ALL FLUIDS</button>
+          </form>
+          <output id="live-fluid-status" class="live-help" aria-live="polite">No fluids running. Total in: 0 mL.</output>
         </section>
 ${renderNmbPanel()}
         ${['Induction', 'Rescue', 'Emergence'].map((group) => `
@@ -1698,6 +1729,8 @@ function renderSnapshot(snapshot) {
     }
   }
   caseController?.render();
+  renderUndoList(snapshot);
+  renderFluids(snapshot);
   applyFinalizedConsoleLock({ rootElement: view, runner });
   transport?.publishSnapshot(projectLearnerMonitorSnapshot(snapshot));
 }
@@ -1721,6 +1754,11 @@ function ensureRunner() {
       if (!mockOr?.getState().active) return null;
       const planStatus = carePlan?.status?.();
       return planStatus?.submitted ? planStatus.grade ?? null : null;
+    },
+    // Where the student is: the student screen reports its step.
+    getStage: () => {
+      const fresh = studentMirror && Date.now() - studentMirror.seenAt < 30000;
+      return fresh ? { studentStep: studentMirror.step, studentStepLabel: STUDENT_STEP_LABELS[studentMirror.step] ?? studentMirror.step } : {};
     },
   });
   runner.onTick = (snapshot) => {
@@ -1971,6 +2009,34 @@ function handleAirway(next) {
   liveRunner.emit();
 }
 
+/* The flowmeters and the FiO2 box move together, like a real machine: change
+   a flow and the fraction follows; type a fraction and the O2 and air split
+   changes at the same total flow. */
+export function linkFiO2AndFlows(form, changed, eventType = 'input') {
+  if (!form?.elements) return null;
+  const field = (name) => form.elements.namedItem(name);
+  const read = (name) => Number(field(name)?.value);
+  if (['o2FlowLPerMin', 'airFlowLPerMin', 'n2oFlowLPerMin'].includes(changed)) {
+    const fio2 = fio2FromFlows({ o2: read('o2FlowLPerMin'), air: read('airFlowLPerMin'), n2o: read('n2oFlowLPerMin') });
+    if (fio2 !== null && field('setFiO2')) {
+      field('setFiO2').value = String(Math.max(0.21, fio2));
+      machineFormDirty.add('setFiO2');
+    }
+    return fio2;
+  }
+  if (changed === 'setFiO2' && eventType === 'change') {
+    const target = read('setFiO2');
+    if (!Number.isFinite(target)) return null;
+    const flows = flowsForFiO2({ fio2: target, o2: read('o2FlowLPerMin'), air: read('airFlowLPerMin'), n2o: read('n2oFlowLPerMin') });
+    field('o2FlowLPerMin').value = String(flows.o2);
+    field('airFlowLPerMin').value = String(flows.air);
+    machineFormDirty.add('o2FlowLPerMin');
+    machineFormDirty.add('airFlowLPerMin');
+    return flows;
+  }
+  return null;
+}
+
 function applyMachine(event) {
   event.preventDefault();
   const liveRunner = ensureRunner();
@@ -2019,6 +2085,61 @@ function applyPatient(event) {
   } catch (error) {
     setStatus(error.message, 'error');
   }
+}
+
+function giveCustomDrug(event) {
+  event.preventDefault();
+  const liveRunner = ensureRunner();
+  const data = new FormData(event.currentTarget);
+  try {
+    const dose = computeCustomDose({ drugName: String(data.get('drug')), amount: Number(data.get('amount')), unit: String(data.get('unit')), weightKg: liveRunner.config.weightKg });
+    const result = liveRunner.giveBolus(dose.drugName, dose.totalMg, `${dose.clinicalLabel} · ${dose.totalMg} mg total`);
+    const status = formatDrugLifecycleStatus(dose, result);
+    setStatus(status.message, status.kind);
+  } catch (error) {
+    setStatus(error.message, 'error');
+  }
+}
+
+let lastUndoKey = '';
+function renderUndoList(snapshot) {
+  const list = document.getElementById('live-undo-list');
+  if (!list) return;
+  const doses = snapshot.undoableDoses ?? [];
+  const key = doses.map((dose) => `${dose.id}:${Math.ceil(dose.secondsLeft / 10)}`).join('|');
+  if (key === lastUndoKey) return;
+  lastUndoKey = key;
+  list.innerHTML = doses.length
+    ? doses.map((dose) => `<li><span>${escapeHtml(dose.label)}</span><small>${dose.secondsLeft} s left</small><button type="button" class="live-danger-outline" data-undo-dose="${escapeHtml(dose.id)}">UNDO</button></li>`).join('')
+    : '<li class="live-undo-empty">No recent doses.</li>';
+}
+
+let lastFluidKey = '';
+function renderFluids(snapshot) {
+  const out = document.getElementById('live-fluid-status');
+  const fluids = snapshot.fluids;
+  if (!out || !fluids) return;
+  const running = fluids.lines.map((line) => (line.mode === 'rate'
+    ? `${line.label} at ${line.mlPerHr} mL/h`
+    : `${line.label} bolus, ${line.remainingMl} mL left`));
+  const totals = Object.entries(fluids.byType).map(([type, ml]) => `${FLUID_TYPES[type]?.label ?? type} ${ml} mL`).join(', ');
+  const text = `${running.length ? `Running: ${running.join('; ')}.` : 'No fluids running.'} Total in: ${fluids.totalMl} mL${totals ? ` (${totals})` : ''}.`;
+  if (text === lastFluidKey) return;
+  lastFluidKey = text;
+  out.textContent = text;
+}
+
+function fluidAction(action) {
+  const liveRunner = ensureRunner();
+  const form = document.getElementById('live-fluid-form');
+  if (!form) return;
+  const data = new FormData(form);
+  const type = String(data.get('type'));
+  let result;
+  if (action === 'bolus') result = liveRunner.giveFluid({ type, volumeMl: Number(data.get('volumeMl')), overMin: Number(data.get('overMin')) });
+  else if (action === 'rate') result = liveRunner.setFluidRate({ type, mlPerHr: Number(data.get('mlPerHr')) });
+  else result = liveRunner.stopFluid();
+  setStatus(result.ok ? (result.detail ?? (action === 'stop' ? 'All fluids stopped.' : 'Fluid rate set.')) : result.reason, result.ok ? 'success' : 'error');
 }
 
 function giveDrug(actionId) {
@@ -2429,6 +2550,7 @@ function bindControls() {
   for (const type of ['input', 'change']) {
     document.getElementById('live-machine-form')?.addEventListener(type, (event) => {
       if (event.target?.name) machineFormDirty.add(event.target.name);
+      linkFiO2AndFlows(event.currentTarget, event.target?.name, type);
     });
   }
   document.getElementById('live-volatile-dial')?.addEventListener('input', () => {
@@ -2610,6 +2732,17 @@ function bindControls() {
   for (const button of view.querySelectorAll('[data-drug-action]')) {
     button.addEventListener('click', () => giveDrug(button.dataset.drugAction));
   }
+  document.getElementById('live-custom-dose-form')?.addEventListener('submit', giveCustomDrug);
+  document.getElementById('live-fluid-form')?.addEventListener('submit', (event) => { event.preventDefault(); fluidAction('bolus'); });
+  for (const button of view.querySelectorAll('[data-fluid-action]:not([type=submit])')) {
+    button.addEventListener('click', () => fluidAction(button.dataset.fluidAction));
+  }
+  document.getElementById('live-undo-list')?.addEventListener('click', (event) => {
+    const id = event.target?.closest?.('[data-undo-dose]')?.dataset.undoDose;
+    if (!id) return;
+    const result = ensureRunner().undoDrug(id);
+    setStatus(result.ok ? `${result.label} taken back.` : result.reason, result.ok ? 'success' : 'error');
+  });
   for (const button of view.querySelectorAll('[data-complication]')) {
     button.addEventListener('click', () => {
       try {

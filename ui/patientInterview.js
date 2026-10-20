@@ -14,6 +14,8 @@
      SpeechSynthesis voice.
    - Input: SpeechRecognition (mic) where supported, plus a text box always. */
 
+import { createUtteranceAssembler } from './speechAssembler.js';
+
 const STOP_WORDS = new Set(['the', 'a', 'an', 'is', 'are', 'do', 'did', 'you', 'your', 'have',
   'has', 'any', 'about', 'to', 'of', 'me', 'i', 'we', 'and', 'or', 'for', 'with', 'on', 'in',
   'ask', 'tell', 'what', 'when', 'how', 'was', 'were', 'be', 'been', 'that', 'this', 'it']);
@@ -283,24 +285,38 @@ export function createPatientInterview({
     await speak(reply);
   }
 
+  // The question is sent after a pause of about two seconds, or when the mic
+  // is pressed again, so a long or halting question is not cut off.
+  let assembler = null;
+  function stopListening() {
+    listening = false;
+    micButton?.setAttribute('aria-pressed', 'false');
+    const r = recognition;
+    recognition = null;
+    try { r?.stop?.(); } catch { /* ignore */ }
+  }
   function startListening() {
     const SR = speechHost?.SpeechRecognition ?? speechHost?.webkitSpeechRecognition;
-    if (!SR) { setStatus('Voice input not supported in this browser — type your question.'); return; }
-    if (listening) { recognition?.stop(); return; }
+    if (!SR) { setStatus('Voice input not supported in this browser. Type your question.'); return; }
+    if (listening) { assembler?.flush(); stopListening(); return; }
+    assembler = createUtteranceAssembler({
+      onHearing: (heard) => { if (heard) { if (input) input.value = heard; setStatus('Listening... press the mic again or pause to send.'); } },
+      onUtterance: (said) => { stopListening(); if (input) input.value = said; ask(said); },
+    });
     recognition = new SR();
     recognition.lang = 'en-US';
-    recognition.interimResults = false;
+    recognition.interimResults = true;
+    recognition.continuous = true;
     recognition.maxAlternatives = 1;
     listening = true;
     micButton?.setAttribute('aria-pressed', 'true');
-    setStatus('Listening… ask your question.');
-    recognition.onresult = (event) => {
-      const said = event.results?.[0]?.[0]?.transcript ?? '';
-      if (input) input.value = said;
-      ask(said);
+    setStatus('Listening... ask your question.');
+    recognition.onresult = (event) => assembler?.push(event);
+    recognition.onerror = (event) => { if (event?.error !== 'no-speech' && event?.error !== 'aborted') setStatus('Did not catch that. Try again or type.'); };
+    recognition.onend = () => {
+      // Chrome can stop on its own during a pause: keep listening until sent.
+      if (listening && recognition) { try { recognition.start(); } catch { /* running */ } }
     };
-    recognition.onerror = () => setStatus('Did not catch that — try again or type.');
-    recognition.onend = () => { listening = false; micButton?.setAttribute('aria-pressed', 'false'); };
     recognition.start();
   }
 

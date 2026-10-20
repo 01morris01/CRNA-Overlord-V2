@@ -425,7 +425,7 @@ describe('live SimRunner integration', () => {
     expect(runner.getLifecycleState()).toBe('READY');
     const result = runner.giveBolus('Propofol', 140, 'Propofol 2 mg/kg · 140 mg total');
 
-    expect(result).toEqual({ state: 'READY', started: true, queued: false });
+    expect(result).toEqual({ state: 'READY', started: true, queued: false, doseId: 'dose-1' });
     expect(runner.getLifecycleState()).toBe('RUNNING');
     expect(runner.snapshot()).toMatchObject({ running: true, lifecycle: 'RUNNING' });
     expect(runner.log.at(-1)).toMatchObject({
@@ -438,7 +438,7 @@ describe('live SimRunner integration', () => {
     runner.start();
 
     expect(runner.giveBolus('Rocuronium', 42, 'Rocuronium 0.6 mg/kg')).toEqual({
-      state: 'RUNNING', started: false, queued: false,
+      state: 'RUNNING', started: false, queued: false, doseId: 'dose-1',
     });
     runner.core.stepFor(1);
     runner.simTime = runner.core.simTime;
@@ -447,7 +447,7 @@ describe('live SimRunner integration', () => {
 
     expect(runner.getLifecycleState()).toBe('PAUSED');
     expect(runner.giveBolus('Propofol', 20, 'Propofol 20 mg')).toEqual({
-      state: 'PAUSED', started: false, queued: true,
+      state: 'PAUSED', started: false, queued: true, doseId: 'dose-2',
     });
     expect(runner.simTime).toBe(frozenTime);
     expect(runner.getLifecycleState()).toBe('PAUSED');

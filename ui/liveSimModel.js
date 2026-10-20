@@ -137,6 +137,12 @@ export const DRUG_ACTIONS = Object.freeze([
   { id: 'rocuronium_06_mgkg', group: 'Induction', drugName: 'Rocuronium', amount: 0.6, unit: 'mg/kg', label: 'Rocuronium 0.6 mg/kg' },
   { id: 'succinylcholine_1_mgkg', group: 'Induction', drugName: 'Succinylcholine', amount: 1, unit: 'mg/kg', label: 'Succinylcholine 1 mg/kg' },
   { id: 'midazolam_003_mgkg', group: 'Induction', drugName: 'Midazolam', amount: 0.03, unit: 'mg/kg', label: 'Midazolam 0.03 mg/kg' },
+  { id: 'etomidate_03_mgkg', group: 'Induction', drugName: 'Etomidate', amount: 0.3, unit: 'mg/kg', label: 'Etomidate 0.3 mg/kg' },
+  { id: 'ketamine_1_mgkg', group: 'Induction', drugName: 'Ketamine', amount: 1, unit: 'mg/kg', label: 'Ketamine 1 mg/kg' },
+  { id: 'ketamine_2_mgkg', group: 'Induction', drugName: 'Ketamine', amount: 2, unit: 'mg/kg', label: 'Ketamine 2 mg/kg' },
+  { id: 'rocuronium_12_mgkg', group: 'Induction', drugName: 'Rocuronium', amount: 1.2, unit: 'mg/kg', label: 'Rocuronium 1.2 mg/kg · RSI' },
+  { id: 'vecuronium_01_mgkg', group: 'Induction', drugName: 'Vecuronium', amount: 0.1, unit: 'mg/kg', label: 'Vecuronium 0.1 mg/kg' },
+  { id: 'pancuronium_01_mgkg', group: 'Induction', drugName: 'Pancuronium', amount: 0.1, unit: 'mg/kg', label: 'Pancuronium 0.1 mg/kg' },
   { id: 'phenylephrine_100_mcg', group: 'Rescue', drugName: 'Phenylephrine', amount: 100, unit: 'mcg', label: 'Phenylephrine 100 mcg' },
   { id: 'ephedrine_10_mg', group: 'Rescue', drugName: 'Ephedrine', amount: 10, unit: 'mg', label: 'Ephedrine 10 mg' },
   { id: 'epinephrine_10_mcg', group: 'Rescue', drugName: 'Epinephrine', amount: 10, unit: 'mcg', label: 'Epinephrine 10 mcg' },
@@ -152,6 +158,54 @@ export const DRUG_ACTIONS = Object.freeze([
   { id: 'glycopyrrolate_02_mg', group: 'Emergence', drugName: 'Glycopyrrolate', amount: 0.2, unit: 'mg', label: 'Glycopyrrolate 0.2 mg' },
   { id: 'atropine_05_mg', group: 'Emergence', drugName: 'Atropine', amount: 0.5, unit: 'mg', label: 'Atropine 0.5 mg' },
 ]);
+
+/* The flowmeters set the oxygen fraction: O2 is 100%, air 21%, N2O none.
+   No flow means nothing is mixed, so the caller keeps its value. */
+export function fio2FromFlows({ o2 = 0, air = 0, n2o = 0 } = {}) {
+  const total = Math.max(0, o2) + Math.max(0, air) + Math.max(0, n2o);
+  if (!(total > 0)) return null;
+  return Math.round(((Math.max(0, o2) + 0.21 * Math.max(0, air)) / total) * 100) / 100;
+}
+
+/* The other way: keep the total fresh gas flow and split it between O2 and
+   air to reach the fraction typed. N2O is left as it is. */
+export function flowsForFiO2({ fio2, o2 = 0, air = 0, n2o = 0 } = {}) {
+  const target = Math.min(1, Math.max(0.21, Number(fio2)));
+  const n2oFlow = Math.max(0, n2o);
+  let oxygenAndAir = Math.max(0, o2) + Math.max(0, air);
+  if (!(oxygenAndAir > 0)) oxygenAndAir = 2;
+  const total = oxygenAndAir + n2oFlow;
+  // o2 + 0.21 air = target total, o2 + air = oxygenAndAir
+  const o2Flow = Math.min(oxygenAndAir, Math.max(0, (target * total - 0.21 * oxygenAndAir) / 0.79));
+  const round = (value) => Math.round(value * 100) / 100;
+  return { o2: round(o2Flow), air: round(oxygenAndAir - o2Flow), n2o: round(n2oFlow) };
+}
+
+/* Every drug the engine models, for the any dose row and for Booth. */
+export const ENGINE_DRUGS = Object.freeze([
+  'Propofol', 'Etomidate', 'Ketamine', 'Midazolam', 'Fentanyl',
+  'Rocuronium', 'Vecuronium', 'Pancuronium', 'Succinylcholine',
+  'Phenylephrine', 'Ephedrine', 'Epinephrine', 'Atropine', 'Glycopyrrolate',
+  'Naloxone', 'Dantrolene', 'Albuterol', 'Sugammadex', 'Neostigmine',
+]);
+
+/* A dose typed by hand: amount plus unit, to total mg. */
+export function computeCustomDose({ drugName, amount, unit, weightKg }) {
+  if (!ENGINE_DRUGS.includes(drugName)) throw new RangeError(`The engine does not model ${drugName}`);
+  if (!Number.isFinite(amount) || amount <= 0) throw new RangeError('Dose must be a positive number');
+  if (!Number.isFinite(weightKg) || weightKg <= 0) throw new RangeError('Patient weight must be a positive finite number');
+  let totalMg;
+  switch (unit) {
+    case 'mg': totalMg = amount; break;
+    case 'mcg': totalMg = amount / 1000; break;
+    case 'mg/kg': totalMg = amount * weightKg; break;
+    case 'mcg/kg': totalMg = amount * weightKg / 1000; break;
+    default: throw new RangeError(`Unsupported dose unit: ${unit}`);
+  }
+  totalMg = roundMg(totalMg);
+  const shown = unit.endsWith('/kg') ? `${amount} ${unit} (${totalMg} mg)` : `${amount} ${unit}`;
+  return { drugName, totalMg, clinicalLabel: `${drugName} ${shown}` };
+}
 
 export const COMPLICATION_OPTIONS = Object.freeze([
   'Bronchospasm', 'HighSpinal', 'Anaphylaxis', 'MalignantHyperthermia',

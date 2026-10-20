@@ -115,7 +115,8 @@ describe('Booth answers the student', () => {
     controller.observeEvent({ t: 0, kind: 'Drug', detail: 'Propofol', meta: { action: 'drug', drug: 'Propofol', doseMg: 150 } });
     const plan = await controller.respondToStudent('I am going to intubate now');
     expect(plan.reply).not.toMatch(/paraly/i);
-    expect(plan.note).toBe('No roc.');
+    // Booth carried out the order and says so to the instructor, then the model's note.
+    expect(plan.note).toBe('Booth did: Intubation attempt 1 started. No roc.');
     // After the act the same reply is allowed.
     const done = await controller.respondToStudent('I have tubed them');
     expect(done.reply).toBe('Bold move without a paralytic.');
@@ -137,11 +138,60 @@ describe('Booth answers the student', () => {
     expect(plan.analysis.issues.map((i) => i.id)).toContain('no_paralytic');
     expect(plan.reply).not.toMatch(/paraly/i);
     expect(plan.suggestions).toContain('fail_intubation');
+    // Booth already started the attempt on the student's word, so the fail hits it.
+    expect(runner.snapshot().intubationInProgress).toBe(true);
     const result = controller.applySuggestion('fail_intubation');
-    expect(result).toMatchObject({ ok: true, target: 'next', attemptNumber: 1 });
+    expect(result).toMatchObject({ ok: true, target: 'current', attemptNumber: 1 });
     expect(runner.log.some((entry) => /set to fail/.test(entry.detail))).toBe(true);
     expect(controller.applySuggestion('inject_laryngospasm')).toMatchObject({ ok: true });
     expect(controller.applySuggestion('nonsense').ok).toBe(false);
+  });
+});
+
+describe('Booth carries out what the student orders', () => {
+  function controllerFor(runner, extra = {}) {
+    return createSimOperatorController({ runner, root: null, fetchImpl: null, storage: null, random: () => 0, ...extra });
+  }
+
+  it('gives a drug said through speech errors and asks for a missing dose', async () => {
+    const runner = new SimRunner();
+    const controller = controllerFor(runner);
+    const ask = await controller.respondToStudent("hey Booth we're going to give some automatic");
+    expect(ask.reply).toMatch(/Etomidate/);
+    expect(ask.reply).toMatch(/how much|dose/i);
+    expect(runner.log.some((entry) => entry.meta?.drug === 'Etomidate')).toBe(false);
+    const dose = await controller.respondToStudent('20');
+    expect(dose.executed.map((entry) => entry.label)).toEqual(['Etomidate 20 mg']);
+    expect(runner.log.at(-1).meta).toMatchObject({ action: 'drug', drug: 'Etomidate', doseMg: 20 });
+    expect(runner.getLifecycleState()).toBe('RUNNING');
+    runner.pause();
+    const roc = await controller.respondToStudent('push 100 of rocker onion');
+    expect(roc.executed.map((entry) => entry.label)).toEqual(['Rocuronium 100 mg']);
+    expect(roc.reply).toMatch(/^Rocuronium 100 mg/);
+  });
+
+  it('knows the student is in the OR even before the clock starts', async () => {
+    const runner = new SimRunner();
+    let context = null;
+    const fetchImpl = vi.fn(async (url, init) => { context = JSON.parse(init.body).context; return { ok: false }; });
+    const controller = controllerFor(runner, { fetchImpl, getStage: () => ({ studentStep: 'or', studentStepLabel: 'Into the OR' }) });
+    await controller.respondToStudent('what do you think about the plan');
+    expect(context.where).toMatch(/In the operating room/);
+    expect(context.where).toMatch(/not preop/);
+  });
+
+  it('leaves orders to the instructor when set to', async () => {
+    const runner = new SimRunner();
+    const storage = new Map();
+    const store = { getItem: (k) => storage.get(k) ?? null, setItem: (k, v) => storage.set(k, v) };
+    store.setItem('overlord.booth.settings.v2', JSON.stringify({ studentOrders: 'instructor' }));
+    const controller = controllerFor(runner, { storage: store });
+    expect(controller.getStudentOrdersMode()).toBe('instructor');
+    const result = await controller.respondToStudent('push 50 of propofol');
+    expect(result.executed).toEqual([]);
+    expect(runner.log.some((entry) => entry.meta?.action === 'drug')).toBe(false);
+    expect(result.note).toMatch(/Waiting for you: Propofol 50 mg/);
+    expect(controller.executeOrder(result.parsed.orders[0])).toMatchObject({ ok: true, label: 'Propofol 50 mg' });
   });
 });
 
