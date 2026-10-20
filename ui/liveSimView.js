@@ -1,5 +1,6 @@
 import {
   DEFAULT_CONFIG, SimRunner, VentMode, ventName,
+  GRADUAL_COMPLICATIONS,
 } from '../crisis-sim/ui/simRunner.js';
 import {
   COMPLICATION_OPTIONS,
@@ -172,10 +173,51 @@ function drugMarkup(group) {
     </button>`).join('');
 }
 
+/* Complications that build over minutes get two buttons: REALISTIC (the
+   physiology clock) and INSTANT (full severity now, to show the concept).
+   The rest are abrupt in real life and keep one button. */
 function complicationMarkup() {
-  return COMPLICATION_OPTIONS.map((type) => `
-    <button type="button" class="live-complication-button" data-complication="${type}">${escapeHtml(type.replaceAll(/([a-z])([A-Z])/g, '$1 $2'))}</button>
-  `).join('');
+  return COMPLICATION_OPTIONS.map((type) => {
+    const label = escapeHtml(type.replaceAll(/([a-z])([A-Z])/g, '$1 $2'));
+    if (!GRADUAL_COMPLICATIONS.includes(type)) {
+      return `
+    <div class="live-complication-row"><span>${label}</span><button type="button" class="live-complication-button" data-complication="${type}" data-onset="instant">START</button></div>`;
+    }
+    return `
+    <div class="live-complication-row"><span>${label}</span><button type="button" class="live-complication-button" data-complication="${type}" data-onset="realistic" title="Builds over minutes, like the real thing">REALISTIC</button><button type="button" class="live-complication-button live-complication-instant" data-complication="${type}" data-onset="instant" title="Full severity now, to show the concept">INSTANT</button></div>`;
+  }).join('');
+}
+
+/* Neuromuscular block in one place: the student's TOF check and the
+   instructor's block-level shortcut (moved out of the rubric tab). */
+export function renderNmbPanel() {
+  return `
+        <section id="live-nmb-panel" class="live-panel live-nmb-panel" aria-labelledby="live-nmb-heading">
+          <h2 id="live-nmb-heading">Neuromuscular block · TOF</h2>
+          <div class="live-tof-assessment">
+            <button id="live-check-tof" type="button" class="live-primary">CHECK TOF</button>
+            <output id="live-last-tof" aria-live="polite">No quantitative TOF check recorded.</output>
+          </div>
+          <section class="live-instructor-nmb" aria-labelledby="live-instructor-nmb-heading">
+            <h3 id="live-instructor-nmb-heading">ADMINISTRATIVE SETUP · NMB TARGET</h3>
+            <p>Instructor shortcut to set the block level. Not a student action and not scoreable. The engine equilibrates the single NMB state.</p>
+            <div class="live-nmb-presets" role="group" aria-label="Administrative TOF ratio presets">
+              ${['0', '0.25', '0.50', '0.70', '0.90', '1'].map((target) => `<button type="button" data-nmb-target="${target}">${target}</button>`).join('')}
+            </div>
+            <div class="live-nmb-custom">
+              <label class="live-field" for="live-instructor-nmb-custom"><span>Custom target ratio · 0 to 1</span><input id="live-instructor-nmb-custom" type="number" value="0.70" min="0" max="1" step="0.01"></label>
+              <button id="live-instructor-nmb-apply" type="button">APPLY TARGET</button>
+            </div>
+            <dl id="live-instructor-nmb-readback" class="live-nmb-readback">
+              <div><dt>Target ratio</dt><dd id="live-nmb-target-ratio">—</dd></div>
+              <div><dt>Actual ratio</dt><dd id="live-nmb-actual-ratio">—</dd></div>
+              <div><dt>Actual TOF count</dt><dd id="live-nmb-tof-count">— / 4</dd></div>
+              <div><dt>Effective blockade</dt><dd id="live-nmb-blockade">—</dd></div>
+              <div><dt>Dominant source</dt><dd id="live-nmb-source">None</dd></div>
+              <div><dt>Target status</dt><dd id="live-nmb-equilibrium">NO TARGET</dd></div>
+            </dl>
+          </section>
+        </section>`;
 }
 
 const RUBRIC_SOURCE_LABELS = Object.freeze({
@@ -702,25 +744,8 @@ export function renderRubricConsoleShell() {
       <button id="live-rubric-load" type="button" class="live-primary">LOAD SCENARIO</button>
       <output id="live-rubric-load-status" class="live-rubric-inline-status" aria-live="polite">No rubric scenario loaded.</output>
 
-      <section class="live-instructor-nmb" aria-labelledby="live-instructor-nmb-heading">
-        <h3 id="live-instructor-nmb-heading">ADMINISTRATIVE SETUP · NMB TARGET</h3>
-        <p>Not a student action and not scoreable. The engine equilibrates the single NMB state.</p>
-        <div class="live-nmb-presets" role="group" aria-label="Administrative TOF ratio presets">
-          ${['0', '0.25', '0.50', '0.70', '0.90', '1'].map((target) => `<button type="button" data-nmb-target="${target}">${target}</button>`).join('')}
-        </div>
-        <div class="live-nmb-custom">
-          <label class="live-field" for="live-instructor-nmb-custom"><span>Custom target ratio · 0 to 1</span><input id="live-instructor-nmb-custom" type="number" value="0.70" min="0" max="1" step="0.01"></label>
-          <button id="live-instructor-nmb-apply" type="button">APPLY TARGET</button>
-        </div>
-        <dl id="live-instructor-nmb-readback" class="live-nmb-readback">
-          <div><dt>Target ratio</dt><dd id="live-nmb-target-ratio">—</dd></div>
-          <div><dt>Actual ratio</dt><dd id="live-nmb-actual-ratio">—</dd></div>
-          <div><dt>Actual TOF count</dt><dd id="live-nmb-tof-count">— / 4</dd></div>
-          <div><dt>Effective blockade</dt><dd id="live-nmb-blockade">—</dd></div>
-          <div><dt>Dominant source</dt><dd id="live-nmb-source">None</dd></div>
-          <div><dt>Target status</dt><dd id="live-nmb-equilibrium">NO TARGET</dd></div>
-        </dl>
-      </section>
+      <p class="live-help">Each scenario lives on a Mock OR patient labeled CN Rubric (p51 to p56). Loading here opens that patient with its chart and care plan; picking the patient from the schedule does the same.</p>
+      <p class="live-help">The neuromuscular block shortcut moved to RUN THE PATIENT, under AIRWAY + DRUGS.</p>
 
       <section class="live-rubric-summary-section" aria-labelledby="live-rubric-summary-heading">
         <h3 id="live-rubric-summary-heading">Rubric summary</h3>
@@ -945,7 +970,7 @@ function renderShell() {
       <div><span>MAP</span><strong id="live-vital-map">—</strong><small>mmHg</small></div>
       <div><span>SpO₂</span><strong id="live-vital-spo2">—</strong><small>%</small></div>
       <div><span>EtCO₂</span><strong id="live-vital-etco2">—</strong><small>mmHg</small></div>
-      <div><span>TOF</span><strong id="live-vital-tof">—</strong><small id="live-vital-tof-ratio">ratio —</small></div>
+      <div class="live-vital-tof"><span>TOF</span><strong id="live-vital-tof">—</strong><small id="live-vital-tof-ratio">ratio —</small><button id="live-vital-tof-check" type="button" title="Check train of four now">CHECK</button></div>
     </div>
 
     ${renderOperatorStrip()}
@@ -957,7 +982,7 @@ function renderShell() {
         <nav class="live-tabs" role="tablist" aria-label="Console sections">
           <button type="button" role="tab" data-console-tab="setup" aria-selected="true">1 · SETUP</button>
           <button type="button" role="tab" data-console-tab="run" aria-selected="false">2 · RUN THE PATIENT</button>
-          <button type="button" role="tab" data-console-tab="scored" aria-selected="false">RUBRIC + TEACHING CASES</button>
+          <button type="button" role="tab" data-console-tab="scored" aria-selected="false">OPTIONAL · SCORED CHECK-OFFS</button>
         </nav>
 
         <div class="live-tab-panel" data-console-panel="setup" role="tabpanel">
@@ -966,6 +991,7 @@ function renderShell() {
             ${renderMockOrPanel()}
             ${renderStudentLinkPanel()}
           </div>
+          <div id="live-setup-interview-slot" class="live-setup-interview-slot"></div>
           <details class="live-panel-details">
             <summary>Patient physiology (free play or custom patient)</summary>
         <section class="live-panel" aria-labelledby="live-patient-heading">
@@ -1015,11 +1041,8 @@ function renderShell() {
             <span>Complication <strong id="live-drive-complication">—</strong></span>
             <span>NMB capability <strong id="live-drive-muscle">—</strong></span>
           </div>
-          <div class="live-tof-assessment">
-            <button id="live-check-tof" type="button">CHECK TOF</button>
-            <output id="live-last-tof" aria-live="polite">No quantitative TOF check recorded.</output>
-          </div>
         </section>
+${renderNmbPanel()}
         ${['Induction', 'Rescue', 'Emergence'].map((group) => `
           <section class="live-panel" aria-labelledby="live-${group.toLowerCase()}-heading">
             <h2 id="live-${group.toLowerCase()}-heading">${group} drugs</h2>
@@ -1046,6 +1069,11 @@ function renderShell() {
         <section id="live-volatile-panel" class="live-panel live-volatile-panel" aria-labelledby="live-volatile-heading">
           <h2 id="live-volatile-heading">Volatile anesthetic</h2>
           <p class="live-help">Select an agent and dial, then apply. End-tidal concentration and MAC remain engine-derived.</p>
+          <div class="live-kinetics-toggle" role="group" aria-label="Volatile uptake">
+            <span>Uptake</span>
+            <button type="button" data-agent-kinetics="physiologic" aria-pressed="true" title="Et rises over minutes and depends on fresh gas flow; washout takes minutes">REALISTIC</button>
+            <button type="button" data-agent-kinetics="legacy" aria-pressed="false" title="Et follows the dial within seconds, to show the concept">INSTANT</button>
+          </div>
           <div class="live-volatile-agents" role="group" aria-label="Volatile agent">
             <button type="button" data-volatile-agent="Sevoflurane" aria-pressed="true">SEVOFLURANE</button>
             <button type="button" data-volatile-agent="Desflurane" aria-pressed="false">DESFLURANE</button>
@@ -1139,7 +1167,7 @@ function renderShell() {
         </div>
 
         <div class="live-tab-panel" data-console-panel="scored" role="tabpanel" hidden>
-          <p class="live-help live-tab-intro">Carson-Newman rubric scenarios and teaching cases. Booth only talks while one of these is loaded.</p>
+          <p class="live-help live-tab-intro">Optional. Only needed for a formal check-off: a Carson-Newman rubric scenario scored line by line with a printable evaluation, or a scripted preanesthesia teaching case. Mock OR Day does not use this tab. Booth only talks (no events) while one of these is loaded.</p>
           ${renderLearnerCaseShell()}
           ${renderInstructorCaseShell()}
           ${renderRubricConsoleShell()}
@@ -1722,11 +1750,57 @@ function ensureRunner() {
     onActionPerformed: () => { caseController?.render(); runner.emit(); },
   });
   initMockOr();
+  renderAgentKinetics();
   runner.emit();
   fillPatientForm(runner.config);
   syncCaseSetupControls(runner.snapshot());
   renderEventLog();
   return runner;
+}
+
+let cnLoadToken = 0;
+
+/* A Mock OR patient labeled CN Rubric carries a Carson-Newman rubric
+   scenario or teaching case. The chart, care plan and chart interview stay
+   the Mock OR ones; the scenario adds the scored check-offs (or the teaching
+   case flow) on top, with the same physiology. */
+async function loadCnScenarioForPatient(entry, patient) {
+  const token = ++cnLoadToken;
+  const { scenarioId, kind, title } = entry.cnRubric;
+  const select = document.getElementById('live-rubric-scenario');
+  if (select) select.value = scenarioId;
+  setRubricLoadStatus(`Loading ${title} for ${entry.label}...`);
+  try {
+    const liveRunner = ensureRunner();
+    const { scenario } = await loadSelectedScenarioAssets(liveRunner, scenarioId);
+    if (token !== cnLoadToken || mockOr?.getState().id !== entry.id) return;
+    latestRubricResult = null;
+    latestRubricPresentationKey = null;
+    latestRubricDebrief = null;
+    clearRubricDraftsOnNextRender = true;
+    resetRubricPrintState(document);
+    caseController?.reset();
+    transport?.setCaseBrief(null);
+    patientInterview?.setGrounding?.(buildChartInterviewGrounding(patient));
+    placeInterviewPanel('setup');
+    fillPatientForm(liveRunner.config);
+    syncCaseSetupControls(liveRunner.snapshot());
+    liveRunner.logEvent('CN Rubric', `${title} attached to ${entry.label}`, { action: 'cn_rubric_attach', patientId: entry.id, scenarioId });
+    renderEventLog();
+    liveRunner.emit();
+    const where = kind === 'teaching'
+      ? 'The teaching case flow and its check-offs are live in OPTIONAL · SCORED CHECK-OFFS.'
+      : 'Rubric scoring is live in OPTIONAL · SCORED CHECK-OFFS.';
+    const note = entry.cnRubric.note ? ` ${entry.cnRubric.note}` : '';
+    const disclosure = Array.isArray(scenario?.physiologyDisclosures) && scenario.physiologyDisclosures.length
+      ? ` PHYSIOLOGY DISCLOSURE: ${scenario.physiologyDisclosures[0]}` : '';
+    setRubricLoadStatus(`${title} attached to ${entry.label}.`, 'success');
+    setStatus(`${entry.label} loaded with the ${title.replace(/^Carson-Newman /, 'CN ')}. ${where} Booth comments but does not inject while scoring runs.${note} Submit the care plan before START.${disclosure}`, 'success');
+  } catch (error) {
+    if (token !== cnLoadToken) return;
+    setRubricLoadStatus(`Could not attach ${title}: ${error.message}`, 'error');
+    setStatus(`${entry.label} loaded, but the CN scenario failed to load: ${error.message}. The patient still runs unscored.`, 'error');
+  }
 }
 
 /* Mock OR Day: chart driven patients with a required care plan. */
@@ -1754,12 +1828,14 @@ function initMockOr() {
         caseController?.reset();
         transport?.setCaseBrief(null);
         patientInterview?.setGrounding?.(buildChartInterviewGrounding(patient));
+        placeInterviewPanel('setup');
         fillPatientForm(runner.config);
         syncCaseSetupControls(runner.snapshot());
         renderEventLog();
         runner.logEvent('Mock OR', `${entry.label} loaded · ${entry.procedure}`, { action: 'mock_or_load', patientId: entry.id });
         runner.emit();
         setStatus(`${entry.label} loaded from the Mock OR schedule. Read the chart and submit the care plan before START.`, 'success');
+        if (entry.cnRubric?.scenarioId) loadCnScenarioForPatient(entry, patient);
         return { ok: true };
       } catch (error) {
         setStatus(`Mock OR physiology rejected: ${error.message}`, 'error');
@@ -1769,6 +1845,8 @@ function initMockOr() {
     onExit: () => {
       simOperator?.operator?.setCaseProfile?.(null);
       simOperator?.setCasePlan?.(null);
+      patientInterview?.setGrounding?.(null);
+      placeInterviewPanel('case');
       patientInterview?.setGrounding?.(null);
       setStatus('Left Mock OR Day. Free play.', 'info');
     },
@@ -1837,6 +1915,20 @@ function applyBoothCaseProfile({ withFindings }) {
   // The event plan: only what the student missed fires on its own.
   const planStatus = carePlan?.status?.();
   simOperator?.setCasePlan?.({ answerKey: state.answerKey, grade: planStatus?.submitted ? planStatus.grade ?? null : null });
+}
+
+/* The interview panel lives in the teaching case workspace. For a Mock OR
+   patient it moves to SETUP, where the instructor actually is; without a
+   student screen, that is where the student interviews the patient or family. */
+function placeInterviewPanel(where) {
+  const panel = document.getElementById('live-patient-interview');
+  if (!panel) return;
+  const slot = where === 'setup'
+    ? document.getElementById('live-setup-interview-slot')
+    : document.getElementById('live-case-status');
+  if (!slot) return;
+  if (where === 'setup' && panel.parentElement !== slot) slot.append(panel);
+  else if (where !== 'setup' && panel.previousElementSibling !== slot) slot.after(panel);
 }
 
 function mockOrBlocksStart() {
@@ -1953,6 +2045,16 @@ async function loadSelectedRubricScenario() {
     setRubricLoadStatus('Select an approved scenario or teaching case.', 'error');
     return;
   }
+  // Every CN scenario now lives on a Mock OR patient labeled CN Rubric: load
+  // that patient so the chart, care plan and interview come with it.
+  const cnPatient = mockOr?.findByScenario?.(selectedId);
+  if (cnPatient) {
+    setRubricLoadStatus(`Opening ${cnPatient.label} from the Mock OR schedule...`);
+    const mockSelect = document.getElementById('mockor-select');
+    if (mockSelect) mockSelect.value = cnPatient.id;
+    await mockOr.load(cnPatient.id);
+    return;
+  }
   if (button) button.disabled = true;
   if (select) select.disabled = true;
   setRubricLoadStatus('Loading and validating scenario assets…');
@@ -1972,6 +2074,7 @@ async function loadSelectedRubricScenario() {
     if (mockOr?.getState().active) mockOr.exit();
     // Ground the voice patient in the loaded case (or hide it for rubric-only).
     patientInterview?.setCase(scenario?.caseExperience ?? null);
+    placeInterviewPanel('case');
     fillPatientForm(liveRunner.config);
     syncCaseSetupControls(liveRunner.snapshot());
     renderEventLog();
@@ -2187,6 +2290,13 @@ function observeMenuLaunchers() {
 }
 
 const CONSOLE_TAB_KEY = 'overlord.console.tab.v1';
+
+function renderAgentKinetics() {
+  const mode = runner?.getAgentKinetics?.() ?? 'physiologic';
+  for (const button of view?.querySelectorAll?.('[data-agent-kinetics]') ?? []) {
+    button.setAttribute('aria-pressed', String(button.dataset.agentKinetics === mode));
+  }
+}
 
 function showConsoleTab(tab) {
   if (!view) return;
@@ -2429,6 +2539,14 @@ function bindControls() {
     liveRunner.emit();
     setStatus(event.currentTarget.checked ? 'Forced apnea imposed.' : 'Forced apnea lifted.', 'success');
   });
+  document.getElementById('live-vital-tof-check')?.addEventListener('click', () => document.getElementById('live-check-tof')?.click());
+  for (const button of view.querySelectorAll('[data-agent-kinetics]')) {
+    button.addEventListener('click', () => {
+      const result = ensureRunner().setAgentKinetics(button.dataset.agentKinetics);
+      renderAgentKinetics();
+      setStatus(result.mode === 'legacy' ? 'Volatile uptake set to INSTANT: Et follows the dial within seconds (concept mode).' : 'Volatile uptake set to REALISTIC: Et rises over minutes with fresh gas flow.', 'success');
+    });
+  }
   document.getElementById('live-check-tof')?.addEventListener('click', () => {
     const liveRunner = ensureRunner();
     const record = liveRunner.checkTrainOfFour();
@@ -2487,8 +2605,8 @@ function bindControls() {
   for (const button of view.querySelectorAll('[data-complication]')) {
     button.addEventListener('click', () => {
       try {
-        const result = ensureRunner().injectComplication(button.dataset.complication);
-        setStatus(`${result.type} injected through the engine state machine.`, 'success');
+        const result = ensureRunner().injectComplication(button.dataset.complication, { onset: button.dataset.onset ?? 'realistic' });
+        setStatus(`${result.type} started (${result.onset === 'instant' ? 'instant, full severity now' : 'realistic, builds over minutes'}).`, 'success');
       } catch (error) {
         setStatus(error.message, 'error');
       }

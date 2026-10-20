@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
-import { parsePatientConfig } from '../../ui/liveSimModel.js';
+import { RUBRIC_SCENARIOS, TEACHING_CASES, parsePatientConfig } from '../../ui/liveSimModel.js';
 import {
   BOARD_QUESTION,
   allFieldNames,
@@ -46,17 +46,44 @@ const answerKey = (id) => JSON.parse(readFileSync(resolve(base, `answer-keys/${i
 const DASH = /[‒–—―]|\s-\s/;
 
 describe('Mock OR Day data', () => {
-  it('has all 50 charts, each with an answer key', () => {
-    expect(index.count).toBe(50);
-    expect(index.patients).toHaveLength(50);
-    expect(readdirSync(resolve(base, 'patients')).filter((f) => f.endsWith('.json'))).toHaveLength(50);
-    expect(readdirSync(resolve(base, 'answer-keys')).filter((f) => f.endsWith('.json'))).toHaveLength(50);
-    expect(new Set(index.patients.map((p) => p.id)).size).toBe(50);
+  it('has all 56 charts (50 OR day plus 6 CN Rubric), each with an answer key', () => {
+    expect(index.count).toBe(56);
+    expect(index.patients).toHaveLength(56);
+    expect(readdirSync(resolve(base, 'patients')).filter((f) => f.endsWith('.json'))).toHaveLength(56);
+    expect(readdirSync(resolve(base, 'answer-keys')).filter((f) => f.endsWith('.json'))).toHaveLength(56);
+    expect(new Set(index.patients.map((p) => p.id)).size).toBe(56);
+  });
+
+  it('carries every CN rubric scenario and teaching case as a labeled patient with matching physiology', () => {
+    const cn = index.patients.filter((p) => p.cnRubric);
+    expect(cn.map((p) => p.id)).toEqual(['p51', 'p52', 'p53', 'p54', 'p55', 'p56']);
+    const expected = [...RUBRIC_SCENARIOS.map(({ id }) => [id, 'rubric']), ...TEACHING_CASES.map(({ id }) => [id, 'teaching'])];
+    expect(cn.map((p) => [p.cnRubric.scenarioId, p.cnRubric.kind]).sort()).toEqual(expected.sort());
+    for (const entry of cn) {
+      expect(entry.label, entry.id).toMatch(/^CN Rubric · /);
+      expect(entry.engineSupported, entry.id).toBe(true);
+      const chartData = patient(entry.id);
+      expect(chartData.label).toBe(entry.label);
+      expect(chartData.cn).toEqual(entry.cnRubric);
+      expect(answerKey(entry.id).cnRubric).toEqual(entry.cnRubric);
+      const scenario = JSON.parse(readFileSync(resolve(root, `crisis-sim/sim/scenarios/${entry.cnRubric.scenarioId}.json`), 'utf8'));
+      const profile = scenario.patientProfile;
+      for (const key of ['weightKg', 'heightCm', 'baselineHR', 'baselineSystolic', 'baselineDiastolic', 'baselineRR', 'baselineSpO2', 'baselineTemp']) {
+        expect(entry.physiology[key], `${entry.id}:${key}`).toBe(profile[key]);
+      }
+      expect(chartData.wt_kg).toBe(profile.weightKg);
+      expect(chartData.vitals.at(-1)[1]).toBe(`${profile.baselineSystolic}/${profile.baselineDiastolic}`);
+    }
+    // The full stomach RSI patient reads like one.
+    const rsi = patient('p52');
+    expect(rsi.preop.npo_solids).toMatch(/vomiting/);
+    expect(answerKey('p52').redFlags.map((f) => f.id)).toContain('fullstomach');
+    expect(decisionCategory(answerKey('p56').decision.recommendation)).toBe('delay');
   });
 
   it('gives every engine supported patient a physiology the engine accepts', () => {
     const supported = index.patients.filter((p) => p.engineSupported);
-    expect(supported.length).toBe(47);
+    expect(supported.length).toBe(53);
     for (const entry of supported) {
       expect(() => parsePatientConfig(physiologyConfig(entry)), entry.id).not.toThrow();
     }

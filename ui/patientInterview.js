@@ -54,9 +54,29 @@ export function patientVoiceFor(sex) {
 const MALE_VOICE_NAMES = /\b(male|david|mark|daniel|alex|fred|george|guy|aaron|arthur|james|tom)\b/i;
 const FEMALE_VOICE_NAMES = /\b(female|samantha|victoria|karen|zira|susan|serena|moira|tessa|fiona|allison|ava|jenny)\b/i;
 
+/* What gets spoken: stage directions in parentheses are for reading, not
+   for the voice. "(looks at mom) No." speaks "No."; a reply that is only a
+   stage direction (an infant) speaks nothing. */
+export function spokenText(text) {
+  return String(text ?? '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+export function isMaleVoice(voice) {
+  return voice === 'patient-male' || /-male$/.test(String(voice ?? ''));
+}
+
+/* Browser speech fallback pitch per cast role. */
+export function synthesisPitch(voice) {
+  const role = String(voice ?? '');
+  if (role.startsWith('child-')) return 1.5;
+  if (role.startsWith('teen-')) return 1.2;
+  if (role.startsWith('older-')) return isMaleVoice(role) ? 0.85 : 0.95;
+  return isMaleVoice(role) ? 0.95 : 1.1;
+}
+
 export function pickSynthesisVoice(voices, voice) {
   const list = Array.isArray(voices) ? voices.filter((v) => /^en/i.test(v.lang ?? '')) : [];
-  const wanted = voice === 'patient-male' ? MALE_VOICE_NAMES : FEMALE_VOICE_NAMES;
+  const wanted = isMaleVoice(voice) ? MALE_VOICE_NAMES : FEMALE_VOICE_NAMES;
   return list.find((v) => wanted.test(v.name ?? '')) ?? null;
 }
 
@@ -79,12 +99,53 @@ export function deterministicPatientReply(question, qa) {
   return { reply: "I'm not sure about that — nobody's mentioned anything like that to me.", coversQuestionIds: [], matched: false };
 }
 
+const KIND_TAGS = Object.freeze({
+  self: 'PATIENT', child: 'PATIENT · CHILD', nonverbal: 'PATIENT · CANNOT ANSWER', impaired: 'PATIENT · LACKS CAPACITY',
+});
+
+/* The person the trainee is talking to. Teaching cases and older groundings
+   have no participants: the patient answers for themself. */
+export function currentSpeaker(grounding, speakerId) {
+  const list = Array.isArray(grounding?.participants) ? grounding.participants : [];
+  return list.find((entry) => entry.id === speakerId)
+    ?? list.find((entry) => entry.id === grounding?.defaultSpeakerId)
+    ?? { id: 'patient', role: 'patient', kind: 'self', name: grounding?.patientName ?? 'the patient', label: grounding?.patientName ?? 'Patient', voice: grounding?.voice ?? 'patient-female' };
+}
+
+export function speakerTag(speaker) {
+  if (speaker.role === 'patient') return KIND_TAGS[speaker.kind] ?? 'PATIENT';
+  const parts = [String(speaker.relation ?? '').toUpperCase()];
+  if (speaker.title && !/^parent$/i.test(speaker.title)) parts.push(speaker.title.toUpperCase());
+  if (speaker.presence === 'phone') parts.push('BY PHONE');
+  return parts.filter(Boolean).join(' · ');
+}
+
+export function questionPlaceholder(grounding, speaker) {
+  const name = grounding?.patientName ?? 'the patient';
+  if (speaker.role === 'patient') {
+    if (speaker.kind === 'child') return 'Hi buddy, does anything hurt today?';
+    if (speaker.kind === 'nonverbal') return `${name} cannot answer. Talk to the family.`;
+    return 'When did you last eat or drink anything?';
+  }
+  return `When did ${name} last eat or drink anything?`;
+}
+
+/* Prior turns as the model sees them: lines from someone other than the
+   current speaker are labeled, so a parent and a child never blur. */
+export function historyForSpeaker(history, speakerId) {
+  return history.map((turn) => {
+    if (turn.role !== 'patient' || !turn.speakerId || turn.speakerId === speakerId) return { role: turn.role, content: turn.content };
+    return { role: 'trainee', content: `(${turn.label ?? 'Someone else'} said: ${turn.content})` };
+  });
+}
+
 export function createPatientInterview({
   runner,
   root = (typeof document !== 'undefined' ? document : null),
   fetchImpl = (typeof fetch !== 'undefined' ? fetch : null),
   speechHost = (typeof window !== 'undefined' ? window : null),
   onActionPerformed = () => {},
+  onTurn = () => {},
 } = {}) {
   const query = (id) => root?.getElementById?.(id) ?? null;
   const panel = query('live-patient-interview');
@@ -95,7 +156,9 @@ export function createPatientInterview({
   const statusOut = query('patient-interview-status');
 
   let grounding = null;
+  let speakerId = null;
   const history = [];
+  const heading = query('patient-interview-heading');
   let recognition = null;
   let listening = false;
   let destroyed = false;
@@ -103,13 +166,15 @@ export function createPatientInterview({
 
   function setStatus(text) { if (statusOut) statusOut.textContent = text; }
 
-  function appendTurn(role, content) {
+  function speaker() { return currentSpeaker(grounding, speakerId); }
+
+  function appendTurn(role, content, label = null) {
     if (!transcript) return;
     const line = root.createElement('div');
     line.className = `patient-interview-turn patient-interview-${role}`;
     const who = root.createElement('span');
     who.className = 'patient-interview-who';
-    who.textContent = role === 'trainee' ? 'You' : (grounding?.patientName ?? 'Patient');
+    who.textContent = role === 'trainee' ? 'You' : (label ?? speaker().label ?? grounding?.patientName ?? 'Patient');
     const said = root.createElement('p');
     said.textContent = content;
     line.append(who, said);
@@ -117,12 +182,14 @@ export function createPatientInterview({
     transcript.scrollTop = transcript.scrollHeight;
   }
 
-  async function speak(text) {
+  async function speak(rawText) {
+    const text = spokenText(rawText);
+    if (!text) return;
     // Prefer the ElevenLabs proxy; fall back to browser speech synthesis.
     if (fetchImpl) {
       try {
         const res = await fetchImpl('/api/tts', {
-          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text, voice: grounding?.voice ?? 'patient-female' }),
+          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text, voice: speaker().voice ?? grounding?.voice ?? 'patient-female' }),
         });
         if (res.ok) {
           const blob = await res.blob();
@@ -139,9 +206,10 @@ export function createPatientInterview({
     if (synth && Utterance) {
       synth.cancel();
       const utterance = new Utterance(text);
-      const chosen = pickSynthesisVoice(synth.getVoices?.(), grounding?.voice);
+      const who = speaker();
+      const chosen = pickSynthesisVoice(synth.getVoices?.(), who.voice ?? grounding?.voice);
       if (chosen) utterance.voice = chosen;
-      utterance.pitch = grounding?.voice === 'patient-male' ? 0.95 : 1.1;
+      utterance.pitch = synthesisPitch(who.voice ?? grounding?.voice);
       synth.speak(utterance);
     }
   }
@@ -155,8 +223,21 @@ export function createPatientInterview({
           body: JSON.stringify({
             patientName: grounding.patientName,
             chart: grounding.chart,
-            qa: grounding.qa,
-            history: history.slice(-12),
+            qa: grounding.scripted?.[speaker().id] ?? grounding.qa,
+            speaker: grounding.participants ? {
+              kind: speaker().kind,
+              role: speaker().role,
+              name: speaker().name,
+              relation: speaker().relation,
+              title: speaker().title ?? '',
+              presence: speaker().presence ?? 'bedside',
+              note: speaker().note ?? '',
+              patientName: grounding.patientName,
+              patientAge: grounding.patientAge ?? '',
+              patientSex: grounding.patientSex ?? '',
+              decider: (grounding.participants.find((entry) => entry.id === 'decider') ?? grounding.participants.find((entry) => entry.role === 'parent'))?.relation ?? '',
+            } : null,
+            history: historyForSpeaker(history.slice(-12), speaker().id),
             question,
           }),
         });
@@ -168,29 +249,37 @@ export function createPatientInterview({
         }
       } catch { /* fall through to deterministic */ }
     }
-    // Deterministic, sourced fallback.
-    return { ...deterministicPatientReply(question, grounding.qa), source: 'scripted' };
+    // Deterministic, sourced fallback, phrased for whoever is answering.
+    const qa = grounding.scripted?.[speaker().id] ?? grounding.qa;
+    const who = speaker();
+    if (who.kind === 'nonverbal') return { reply: qa?.[0]?.response ?? `(${who.name} does not answer.)`, coversQuestionIds: [], source: 'scripted' };
+    const fallback = deterministicPatientReply(question, qa);
+    if (!fallback.matched && who.role !== 'patient') fallback.reply = "I'm not sure about that. Nobody has told us anything like that.";
+    return { ...fallback, source: 'scripted' };
   }
 
   async function ask(rawQuestion) {
     const question = String(rawQuestion ?? '').trim();
     if (!question || !grounding) return;
     if (input) input.value = '';
+    const who = speaker();
     appendTurn('trainee', question);
-    history.push({ role: 'trainee', content: question });
-    setStatus('Patient is thinking…');
+    history.push({ role: 'trainee', content: question, speakerId: who.id });
+    onTurn({ role: 'trainee', content: question, speakerId: who.id, label: 'You' });
+    setStatus(`${who.label} is thinking…`);
 
     const { reply, coversQuestionIds, source } = await requestPatientReply(question);
     if (destroyed) return;
-    appendTurn('patient', reply);
-    history.push({ role: 'patient', content: reply });
+    appendTurn('patient', reply, who.label);
+    history.push({ role: 'patient', content: reply, speakerId: who.id, label: who.label });
+    onTurn({ role: 'patient', content: reply, speakerId: who.id, label: who.label });
 
     // Performing the matched interview action discovers the finding and scores it.
     for (const actionId of coversQuestionIds) {
       const result = runner?.performAssessmentAction?.({ actionId });
       if (result?.ok) onActionPerformed({ actionId, result });
     }
-    setStatus(source === 'ai' ? 'Ready.' : 'Ready (scripted voice — add ANTHROPIC_API_KEY for a natural patient).');
+    setStatus(source === 'ai' ? 'Ready.' : 'Ready (scripted answers; the natural voice needs the server).');
     await speak(reply);
   }
 
@@ -224,15 +313,87 @@ export function createPatientInterview({
     if (available) setStatus(`Interview ${grounding.patientName}. Ask by voice or text.`);
   }
 
+  function speakersHost() {
+    if (!panel || !root?.createElement) return null;
+    let host = query('patient-interview-speakers');
+    if (!host) {
+      host = root.createElement('div');
+      host.id = 'patient-interview-speakers';
+      host.className = 'patient-interview-speakers';
+      if (transcript?.parentNode) transcript.parentNode.insertBefore(host, transcript);
+      else panel.append(host);
+      host.addEventListener('click', (event) => {
+        const button = event.target?.closest?.('[data-speaker-id]');
+        if (button) selectSpeaker(button.dataset.speakerId);
+      });
+    }
+    return host;
+  }
+
+  function renderSpeakers() {
+    const host = speakersHost();
+    const who = speaker();
+    if (heading) heading.textContent = grounding?.participants ? `Talking with ${who.label}` : 'Talk with the patient';
+    if (input) input.placeholder = questionPlaceholder(grounding, who);
+    if (!host) return;
+    const list = grounding?.participants ?? [];
+    host.hidden = list.length < 2 && !grounding?.banner;
+    host.replaceChildren();
+    if (grounding?.banner) {
+      const banner = root.createElement('p');
+      banner.className = 'patient-interview-banner';
+      banner.textContent = grounding.banner;
+      host.append(banner);
+    }
+    if (list.length < 2) return;
+    const row = root.createElement('div');
+    row.className = 'patient-interview-speaker-row';
+    row.setAttribute('role', 'group');
+    row.setAttribute('aria-label', 'Who you are talking to');
+    for (const entry of list) {
+      const button = root.createElement('button');
+      button.type = 'button';
+      button.dataset.speakerId = entry.id;
+      button.dataset.kind = entry.kind;
+      button.setAttribute('aria-pressed', String(entry.id === who.id));
+      const name = root.createElement('strong');
+      name.textContent = entry.role === 'patient' ? entry.name : entry.label.split(',')[0];
+      const tag = root.createElement('small');
+      tag.textContent = speakerTag(entry);
+      button.append(name, tag);
+      row.append(button);
+    }
+    host.append(row);
+  }
+
+  function selectSpeaker(id) {
+    if (!grounding?.participants?.some((entry) => entry.id === id)) return;
+    speakerId = id;
+    renderSpeakers();
+    const who = speaker();
+    setStatus(who.note ? `Now talking with ${who.label}. ${who.note}` : `Now talking with ${who.label}.`);
+  }
+
   /* Mock OR Day: grounding built straight from a chart (digest plus a few
      scripted answers for the offline fallback). null hides the panel. */
   function setGrounding(next) {
     grounding = next && typeof next === 'object' ? next : null;
+    speakerId = grounding?.defaultSpeakerId ?? null;
     history.length = 0;
     if (transcript) transcript.replaceChildren();
     const available = grounding !== null && (grounding.qa?.length > 0 || Boolean(grounding.chart));
     if (panel) panel.hidden = !available;
-    if (available) setStatus(`Interview ${grounding.patientName}. Ask by voice or text.`);
+    renderSpeakers();
+    if (available) setStatus(`Talking with ${speaker().label}. Ask by voice or text.`);
+  }
+
+  /* Saved turns from an earlier visit: shown, and given back to the model. */
+  function restore(turns = []) {
+    for (const turn of Array.isArray(turns) ? turns : []) {
+      if (!turn || typeof turn.content !== 'string' || !['trainee', 'patient'].includes(turn.role)) continue;
+      appendTurn(turn.role, turn.content, turn.role === 'patient' ? (turn.label ?? null) : null);
+      history.push({ role: turn.role, content: turn.content, speakerId: turn.speakerId ?? null, label: turn.label ?? null });
+    }
   }
 
   function handleSend() { ask(input?.value ?? ''); }
@@ -251,5 +412,9 @@ export function createPatientInterview({
     micButton?.removeEventListener?.('click', startListening);
   }
 
-  return { setCase, setGrounding, ask, destroy };
+  return {
+    setCase, setGrounding, ask, destroy, restore, selectSpeaker,
+    getSpeaker: () => speaker(),
+    getTranscript: () => history.map((turn) => ({ ...turn })),
+  };
 }

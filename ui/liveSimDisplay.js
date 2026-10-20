@@ -90,7 +90,12 @@ function renderSnapshot(snapshot) {
   setText('display-agent-name', agentName ? agentName.slice(0, 4).toUpperCase() : 'AGENT');
   const agentBlock = document.getElementById('display-agent-block');
   if (agentBlock) agentBlock.dataset.agent = snapshot.vaporizer > 0 && agentName ? agentName.toLowerCase() : 'none';
-  setText('display-set-fio2', Number.isFinite(snapshot.ventSetFiO2) ? Math.round(snapshot.ventSetFiO2 * 100) : '—');
+  // In manual (bag) mode the ventilator's FiO2 setting is not in effect; the
+  // flowmeters decide it. Showing the idle 21% setting next to Fi 100 read
+  // as a contradiction, so manual mode shows the delivered FiO2.
+  const manualMode = Number(snapshot.ventMode) === 0;
+  const shownFiO2 = manualMode ? snapshot.fio2 : snapshot.ventSetFiO2;
+  setText('display-set-fio2', Number.isFinite(shownFiO2) ? Math.round(shownFiO2 * 100) : '—');
   setText('display-flow-o2', fixed(snapshot.o2Flow, 1));
   setText('display-flow-air', fixed(snapshot.airFlow, 1));
   setText('display-flow-n2o', fixed(snapshot.n2oFlow, 1));

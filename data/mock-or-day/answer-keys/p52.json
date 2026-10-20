@@ -1,0 +1,135 @@
+{
+ "id": "p52",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude for faculty review from the Carson-Newman scenario. Not validated teaching content.",
+ "summary": "Class III obesity with GERD and an adhesive SBO: dinner 10 hours ago, vomiting since 0200, distended stomach on CT, refused NG. The CN RSI rubric case: 3 minutes of 100% O2, cricoid, no mask ventilation before laryngoscopy, sustained EtCO2 before cricoid release.",
+ "asa": {
+  "suggested": "3E",
+  "rationale": "Class III obesity, HTN, prediabetes; urgent surgery."
+ },
+ "decision": {
+  "recommendation": "proceed now",
+  "rationale": "Urgent bowel obstruction; proceed with RSI and aspiration precautions."
+ },
+ "redFlags": [
+  {
+   "id": "fullstomach",
+   "severity": "critical",
+   "finding": "Full stomach: SBO with vomiting and a distended stomach, no NG",
+   "evidence": "Vomiting since 0200 (last 0520); CT shows a fluid filled, distended stomach; NG refused.",
+   "implication": "High aspiration risk at induction regardless of fasting time.",
+   "action": "RSI with cricoid pressure, head up, suction ready, consider NG to decompress before induction, no mask ventilation before the first laryngoscopy.",
+   "keywords": [
+    "rsi",
+    "rapid sequence",
+    "full stomach",
+    "aspiration",
+    "cricoid",
+    "ng",
+    "decompress"
+   ]
+  },
+  {
+   "id": "obesity",
+   "severity": "major",
+   "finding": "Class III obesity (BMI 40.4) with reduced FRC",
+   "evidence": "110 kg, 165 cm; neck 44 cm.",
+   "implication": "Fast desaturation during apnea; harder mask and laryngoscopy.",
+   "action": "Ramp position, 3 min preoxygenation at 100% (EtO2 90 or more), video laryngoscope available.",
+   "keywords": [
+    "obesity",
+    "bmi",
+    "ramp",
+    "preoxygenation",
+    "desaturation",
+    "frc"
+   ]
+  },
+  {
+   "id": "gerd",
+   "severity": "major",
+   "finding": "Symptomatic GERD",
+   "evidence": "Nightly reflux despite omeprazole; cannot lie flat.",
+   "implication": "Adds to aspiration risk.",
+   "action": "Aspiration prophylaxis (H2 blocker given, sodium citrate), head up induction.",
+   "keywords": [
+    "gerd",
+    "reflux",
+    "famotidine",
+    "citrate"
+   ]
+  },
+  {
+   "id": "osa",
+   "severity": "minor",
+   "finding": "Probable untreated OSA",
+   "evidence": "Loud snoring, daytime sleepiness, sleep study never done.",
+   "implication": "Opioid sensitivity, postop airway obstruction.",
+   "action": "Opioid sparing plan, monitored bed, extubate fully awake and reversed.",
+   "keywords": [
+    "osa",
+    "sleep apnea",
+    "snoring",
+    "stop-bang"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "induction",
+   "item": "RSI: propofol or etomidate plus rocuronium 1.2 mg/kg or succinylcholine",
+   "keywords": [
+    "rsi",
+    "rocuronium",
+    "succinylcholine",
+    "etomidate",
+    "propofol"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Video laryngoscope and bougie ready; confirm with sustained EtCO2 before releasing cricoid",
+   "keywords": [
+    "video laryngoscope",
+    "bougie",
+    "etco2",
+    "cricoid"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefoxitin 2 g within 60 min of incision",
+   "keywords": [
+    "cefoxitin"
+   ]
+  },
+  {
+   "domain": "emergence",
+   "item": "Extubate awake, full reversal (sugammadex), head up",
+   "keywords": [
+    "awake extubation",
+    "sugammadex",
+    "reversal"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Bronchospasm",
+   "why": "Aspiration at induction",
+   "flags": [
+    "fullstomach"
+   ]
+  },
+  {
+   "type": "Anaphylaxis",
+   "why": "Antibiotic and neuromuscular blocker",
+   "flags": []
+  }
+ ],
+ "cnRubric": {
+  "kind": "rubric",
+  "scenarioId": "rsi_full_stomach_001",
+  "title": "Carson-Newman rubric: RSI, full stomach"
+ }
+}

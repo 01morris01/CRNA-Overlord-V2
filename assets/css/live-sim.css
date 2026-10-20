@@ -1356,13 +1356,15 @@
   background: var(--abyss);
 }
 .live-event-row > :not(button) { grid-column: 1; }
-.live-event-row > button { grid-column: 2; grid-row: 1 / span 4; align-self: center; min-height: 40px; font-size: .7rem; }
+.live-event-row > .live-event-buttons { grid-column: 2; grid-row: 1 / span 4; align-self: center; display: grid; gap: .35rem; }
+.live-event-buttons button { min-height: 38px; font-size: .68rem; }
+.live-event-buttons .live-event-instant { background: transparent; border-style: dashed; }
 .live-event-row[data-state="armed"] { border-left-color: var(--red); }
 .live-event-row[data-state="caught"] { border-left-color: var(--green); }
 .live-event-row[data-state="background"] { border-left-color: var(--muted); }
 .live-event-row[data-state="running"] { border-left-color: var(--amber); background: rgba(255, 176, 0, .07); }
 .live-event-row[data-state="fired"] { opacity: .7; }
-.live-event-row[data-ready="true"] > button { border-color: var(--amber); color: var(--amber); }
+.live-event-row[data-ready="true"] .live-event-buttons button[data-onset="realistic"] { border-color: var(--amber); color: var(--amber); }
 .live-event-row-head { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .live-event-row-head strong { color: var(--txt); font-size: .9rem; }
 .live-event-chip { padding: .1rem .4rem; border: 1px solid currentColor; border-radius: 3px; font-family: var(--fm); font-size: .58rem; letter-spacing: .1em; color: var(--txt-2); }
@@ -1396,7 +1398,7 @@
 @media (max-width: 780px) {
   .live-setup-grid, .live-booth-chats { grid-template-columns: 1fr; }
   .live-event-row { grid-template-columns: 1fr; }
-  .live-event-row > button { grid-column: 1; grid-row: auto; }
+  .live-event-row > .live-event-buttons { grid-column: 1; grid-row: auto; grid-template-columns: 1fr 1fr; }
 }
 .live-booth-now-latest { margin-top: .55rem; padding-top: .5rem; border-top: 1px dashed var(--line-2); }
 .live-booth-now-latest-title { color: var(--amber) !important; font-family: var(--fm); font-size: .72rem !important; }
@@ -1404,3 +1406,33 @@
 .live-booth-now-latest[data-severity="critical"] .live-booth-now-latest-title { color: #ff9ab1 !important; }
 .live-operator-panel .live-empty { color: var(--muted); font-size: .78rem; line-height: 1.45; }
 .live-booth-chats .live-operator-line p { font-size: .82rem; }
+
+/* Who the trainee is talking to in the preop interview */
+.patient-interview-speakers { display: grid; gap: .5rem; margin: .4rem 0 .6rem; }
+.patient-interview-speakers[hidden] { display: none; }
+.patient-interview-banner { margin: 0; padding: .55rem .7rem; border-left: 3px solid var(--blue, #4da6ff); border-radius: 0 6px 6px 0; background: rgba(77, 166, 255, .08); color: var(--txt, #e6eef5); font-size: .86rem; line-height: 1.45; }
+.patient-interview-speaker-row { display: flex; flex-wrap: wrap; gap: .4rem; }
+.patient-interview-speaker-row button { display: grid; gap: .1rem; min-height: 44px; padding: .4rem .7rem; text-align: left; background: var(--card-hi, #14202e); color: var(--txt, #e6eef5); border: 1px solid var(--line, #21303f); border-radius: 6px; cursor: pointer; font: inherit; }
+.patient-interview-speaker-row button strong { font-size: .86rem; }
+.patient-interview-speaker-row button small { color: var(--muted, #8aa0b4); font-family: var(--fm, monospace); font-size: .58rem; letter-spacing: .08em; }
+.patient-interview-speaker-row button[aria-pressed="true"] { border-color: var(--amber, #f0b23a); background: rgba(240, 178, 58, .1); }
+.patient-interview-speaker-row button[aria-pressed="true"] small { color: var(--amber, #f0b23a); }
+.patient-interview-turn { grid-template-columns: 7.5rem 1fr; }
+
+/* Complications: realistic and instant onset */
+.live-complication-grid:has(.live-complication-row) { grid-template-columns: 1fr; gap: .35rem; }
+.live-complication-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: .4rem; padding: .35rem .5rem; border: 1px solid var(--line); border-radius: 6px; background: var(--abyss); }
+.live-complication-row > span { color: var(--txt); font-size: .86rem; }
+.live-complication-row .live-complication-button { min-height: 38px !important; padding: .35rem .65rem; font-size: .68rem; }
+.live-complication-row .live-complication-instant { border-style: dashed !important; background: transparent; }
+
+/* Volatile uptake toggle */
+.live-kinetics-toggle { display: flex; align-items: center; gap: .4rem; margin: -.2rem 0 .7rem; }
+.live-kinetics-toggle > span { color: var(--muted); font-family: var(--fm); font-size: .66rem; letter-spacing: .08em; }
+.live-kinetics-toggle button { min-height: 34px !important; padding: .3rem .6rem; font-size: .66rem; }
+.live-kinetics-toggle button[aria-pressed="true"] { border-color: var(--green); color: var(--green); background: rgba(0, 255, 163, .08); }
+
+/* TOF quick check on the vitals bar and the NMB panel */
+.live-vital-tof { position: relative; }
+.live-vital-tof button { grid-column: 1; justify-self: start; min-height: 26px !important; padding: .1rem .45rem; font-size: .6rem; margin-top: .2rem; }
+.live-nmb-panel .live-tof-assessment { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-bottom: .8rem; }

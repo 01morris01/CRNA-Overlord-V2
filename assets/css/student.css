@@ -98,6 +98,7 @@ html, body { margin: 0; min-width: 320px; }
 .student-patient-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
 .student-patient-tags em { padding: .1rem .4rem; border: 1px solid var(--amber); border-radius: 4px; color: var(--amber); font-size: .7rem; font-style: normal; }
 .student-patient-tags .student-tag-plan { border-color: var(--blue); color: var(--blue); }
+.student-patient-tags .student-tag-cn { border-color: var(--purple); color: var(--purple); }
 .student-body .student-patient.is-selected { border-color: var(--green); box-shadow: 0 0 0 1px var(--green) inset; }
 
 .student-chart-wrap { display: grid; gap: .4rem; margin-bottom: 1rem; }

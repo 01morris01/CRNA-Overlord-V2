@@ -1,0 +1,139 @@
+{
+ "id": "p56",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude for faculty review from the Carson-Newman scenario. Not validated teaching content.",
+ "summary": "Elective knee scope in a healthy young woman who ate a full breakfast at 0800, has a probable MH family history (uncle: fever and rigidity under GA), an unknown pregnancy status, and a difficult airway exam with a loose incisor. The CN teaching case: postpone the elective case; if it goes later, trigger free with a difficult airway plan.",
+ "asa": {
+  "suggested": "1",
+  "rationale": "Healthy. The NPO violation does not change ASA physical status."
+ },
+ "decision": {
+  "recommendation": "postpone",
+  "rationale": "Elective case with a full meal 2 hours ago; postpone (at least 8 hours after a fatty meal) and plan trigger free anesthesia when rescheduled."
+ },
+ "redFlags": [
+  {
+   "id": "npo",
+   "severity": "critical",
+   "finding": "Full meal 2 hours before an elective case",
+   "evidence": "Eggs, toast, sausage at 0800; orange juice at 0800.",
+   "implication": "Fails ASA fasting minimum (8 h after fatty food); aspiration risk.",
+   "action": "Postpone the elective case; notify the surgeon.",
+   "keywords": [
+    "npo",
+    "fasting",
+    "breakfast",
+    "postpone",
+    "delay",
+    "aspiration",
+    "8 hours"
+   ]
+  },
+  {
+   "id": "mh",
+   "severity": "critical",
+   "finding": "Probable malignant hyperthermia family history",
+   "evidence": "Maternal uncle: high fever and rigidity under GA, ICU, family warned it may be inherited.",
+   "implication": "Treat as MH susceptible.",
+   "action": "Trigger free anesthetic (no volatiles, no succinylcholine), flushed machine with charcoal filters, dantrolene available, notify team, refer for testing.",
+   "keywords": [
+    "mh",
+    "malignant hyperthermia",
+    "trigger free",
+    "dantrolene",
+    "tiva",
+    "no succinylcholine",
+    "charcoal"
+   ]
+  },
+  {
+   "id": "airway",
+   "severity": "major",
+   "finding": "Predicted difficult airway",
+   "evidence": "Airway exam: Mallampati III, TMD 5 cm, limited extension, mouth opening 3.5 cm (exam in the teaching case).",
+   "implication": "Difficult laryngoscopy, and succinylcholine is off the table.",
+   "action": "Video laryngoscope, bougie, SGA, difficult airway cart, rocuronium with sugammadex.",
+   "keywords": [
+    "difficult airway",
+    "mallampati",
+    "video laryngoscope",
+    "bougie"
+   ]
+  },
+  {
+   "id": "hcg",
+   "severity": "major",
+   "finding": "Pregnancy status unknown",
+   "evidence": "LMP unsure; hCG not collected.",
+   "implication": "Must be known before an elective anesthetic.",
+   "action": "Urine hCG before any elective anesthetic.",
+   "keywords": [
+    "hcg",
+    "pregnancy"
+   ]
+  },
+  {
+   "id": "dental",
+   "severity": "minor",
+   "finding": "Loose upper incisor",
+   "evidence": "Nursing note; chipped molar on exam.",
+   "implication": "Dental injury risk.",
+   "action": "Document and consent for dental injury risk.",
+   "keywords": [
+    "loose tooth",
+    "dental",
+    "incisor"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "disposition",
+   "item": "Postpone; notify the surgeon and the patient",
+   "keywords": [
+    "postpone",
+    "notify surgeon"
+   ]
+  },
+  {
+   "domain": "mh",
+   "item": "When rescheduled: trigger free TIVA, flushed machine with charcoal filters, dantrolene in the room",
+   "keywords": [
+    "trigger free",
+    "tiva",
+    "charcoal",
+    "dantrolene"
+   ]
+  },
+  {
+   "domain": "airway",
+   "item": "Difficult airway plan without succinylcholine",
+   "keywords": [
+    "video laryngoscope",
+    "rocuronium",
+    "sugammadex"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "MalignantHyperthermia",
+   "why": "MH susceptible patient exposed to a trigger",
+   "flags": [
+    "mh"
+   ]
+  },
+  {
+   "type": "Laryngospasm",
+   "why": "Difficult airway and light plane",
+   "flags": [
+    "airway"
+   ]
+  }
+ ],
+ "cnRubric": {
+  "kind": "teaching",
+  "scenarioId": "cn_preassessment_npo_mh_001",
+  "title": "Carson-Newman teaching case: NPO violation, MH family history, difficult airway"
+ }
+}

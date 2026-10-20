@@ -1,0 +1,137 @@
+{
+ "id": "p53",
+ "status": "draft",
+ "reviewNote": "Drafted by Claude for faculty review from the Carson-Newman scenario. Not validated teaching content.",
+ "summary": "Full stomach appendicitis in class III obesity with a documented difficult airway (grade 4 view, third attempt, SpO2 84% in 2015). The CN RSI failed first attempt case: attempt one fails by design; rescue with mask PPV and cricoid before attempt two.",
+ "asa": {
+  "suggested": "3E",
+  "rationale": "Class III obesity, OSA on CPAP, diabetes; urgent surgery."
+ },
+ "decision": {
+  "recommendation": "proceed with an aspiration focused plan",
+  "rationale": "Urgent appendicitis; proceed with a difficult airway plan in place and help in the room."
+ },
+ "redFlags": [
+  {
+   "id": "difficultairway",
+   "severity": "critical",
+   "finding": "Documented difficult airway",
+   "evidence": "2015 record: difficult mask, grade 4 DL, 3rd attempt with bougie, SpO2 84%; letter scanned; Mallampati IV, neck 47 cm, mouth opening 3 cm.",
+   "implication": "High chance of failed laryngoscopy and rapid desaturation.",
+   "action": "Video laryngoscope and bougie first, second provider in the room, SGA and front of neck kit ready, consider awake intubation.",
+   "keywords": [
+    "difficult airway",
+    "video laryngoscope",
+    "bougie",
+    "awake",
+    "sga",
+    "lma",
+    "front of neck",
+    "help"
+   ]
+  },
+  {
+   "id": "fullstomach",
+   "severity": "critical",
+   "finding": "Full stomach with nausea and emesis",
+   "evidence": "Ate at 1900, emesis 0600, appendicitis.",
+   "implication": "Aspiration risk at induction.",
+   "action": "RSI with cricoid, head up, suction, no mask ventilation before the first attempt unless SpO2 falls.",
+   "keywords": [
+    "rsi",
+    "full stomach",
+    "aspiration",
+    "cricoid"
+   ]
+  },
+  {
+   "id": "osa",
+   "severity": "major",
+   "finding": "OSA on CPAP with class III obesity",
+   "evidence": "CPAP 12 cm H2O nightly, BMI 40.4.",
+   "implication": "Fast desaturation, opioid sensitivity, postop obstruction.",
+   "action": "Ramp, 3 min preoxygenation, apneic oxygenation by nasal cannula, CPAP in PACU.",
+   "keywords": [
+    "osa",
+    "cpap",
+    "ramp",
+    "preoxygenation",
+    "apneic oxygenation"
+   ]
+  },
+  {
+   "id": "morphine",
+   "severity": "minor",
+   "finding": "Morphine allergy (hives)",
+   "evidence": "Allergy list 2015.",
+   "implication": "Choose another opioid.",
+   "action": "Use fentanyl or hydromorphone; multimodal analgesia.",
+   "keywords": [
+    "morphine",
+    "hydromorphone",
+    "fentanyl"
+   ]
+  }
+ ],
+ "planItems": [
+  {
+   "domain": "airway",
+   "item": "Video laryngoscope plus bougie, difficult airway cart, SGA rescue, front of neck kit, call for help",
+   "keywords": [
+    "video laryngoscope",
+    "bougie",
+    "difficult airway cart",
+    "sga",
+    "help"
+   ]
+  },
+  {
+   "domain": "induction",
+   "item": "RSI with cricoid and rocuronium 1.2 mg/kg (sugammadex ready)",
+   "keywords": [
+    "rsi",
+    "rocuronium",
+    "sugammadex",
+    "cricoid"
+   ]
+  },
+  {
+   "domain": "rescue",
+   "item": "After a failed attempt: mask PPV with cricoid until SpO2 recovers, change something before attempt two",
+   "keywords": [
+    "failed attempt",
+    "mask ppv",
+    "reoxygenate",
+    "change"
+   ]
+  },
+  {
+   "domain": "antibiotic",
+   "item": "Cefoxitin 2 g within 60 min of incision",
+   "keywords": [
+    "cefoxitin"
+   ]
+  }
+ ],
+ "boothComplications": [
+  {
+   "type": "Laryngospasm",
+   "why": "Repeated airway instrumentation",
+   "flags": [
+    "difficultairway"
+   ]
+  },
+  {
+   "type": "Bronchospasm",
+   "why": "Aspiration during a failed attempt",
+   "flags": [
+    "fullstomach"
+   ]
+  }
+ ],
+ "cnRubric": {
+  "kind": "rubric",
+  "scenarioId": "rsi_failed_first_attempt_001",
+  "title": "Carson-Newman rubric: RSI, failed first attempt"
+ }
+}

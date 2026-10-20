@@ -137,7 +137,11 @@ describe('explanations for the instructor', () => {
     const event = buildEventPlan({ answerKey: p14, grade: gradeWith(p14, { spine: 'missed' }) }).find((item) => item.type === 'HighSpinal');
     const note = describeInjection({ type: 'HighSpinal', source: 'booth', tSec: 300, event });
     expect(note.title).toBe('Booth started High spinal at 05:00');
-    expect(note.lines.map(([label]) => label)).toEqual(['Why', 'Watch for', 'Student should', 'Resolves when']);
+    expect(note.lines.map(([label]) => label)).toEqual(['Why', 'Onset', 'Watch for', 'Student should', 'Resolves when']);
+    expect(note.lines[1][1]).toMatch(/^Realistic/);
+    const instant = describeInjection({ type: 'HighSpinal', onset: 'instant', tSec: 0 });
+    expect(instant.title).toBe('You started High spinal (instant) at 00:00');
+    expect(instant.lines.find(([label]) => label === 'Watch for')[1]).toMatch(/^All at once\. MAP falls/);
     expect(note.lines[0][1]).toMatch(/missed "Prior L4 to S1 fusion/);
   });
 
@@ -253,7 +257,8 @@ describe('event plan rows and the faculty prompt', () => {
     const events = buildEventPlan({ answerKey: p14, grade: gradeWith(p14, { spine: 'missed' }) })
       .map((event) => ({ ...event, readiness: { ready: false, calm: false, text: 'Waiting.' } }));
     const idle = renderEventPlanMarkup(events, { runMode: 'instructor', live: false });
-    expect(idle.match(/data-trigger-event=/g)).toHaveLength(3);
+    expect(idle.match(/data-onset="realistic"/g)).toHaveLength(3);
+    expect(idle.match(/data-onset="instant"/g)).toHaveLength(2); // high spinal and bronchospasm also offer INSTANT
     expect(idle).toContain('disabled');
     expect(idle).toContain('ARMED');
     expect(idle).toContain('CAUGHT');

@@ -1,0 +1,572 @@
+{
+ "id": "p52",
+ "room": "CN Sim Lab 1",
+ "time": "0930",
+ "name": "MCCARTER, DENISE LYNN",
+ "mrn": "0152052",
+ "dob": "07/09/1974",
+ "age": "52 y",
+ "sex": "F",
+ "ht_cm": 165,
+ "wt_kg": 110.0,
+ "preferred_name": "Denise",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "L. Moody, NP, Sevierville Primary Care",
+ "insurance": "TennCare (Amerigroup)",
+ "emergency_contact": "Ray McCarter (husband) 865-555-0522",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Urgent diagnostic laparoscopy, possible lysis of adhesions, possible small bowel resection",
+  "short": "Urgent diagnostic laparoscopy, possible LOA",
+  "laterality": "N/A",
+  "service": "General Surgery (acute care)",
+  "surgeon": "S. Varner, MD",
+  "assistant": "",
+  "indication": "Partial small bowel obstruction from adhesions; failed 12 h of NG decompression is not documented (no NG placed).",
+  "duration_min": 120,
+  "anesthesia_requested": "General (RSI, ETT)",
+  "position": "Supine, arms out",
+  "dispo": "Inpatient, surgical floor",
+  "blood": "Type and screen",
+  "equipment": "Laparoscopy tower; open tray available",
+  "implants": "",
+  "surgeon_notes": "Add-on. Possible conversion to open.",
+  "add_on": true,
+  "scheduled_on": "10/27/2026"
+ },
+ "problems": [
+  [
+   "Small bowel obstruction, partial, adhesive",
+   "10/27/2026",
+   "Active"
+  ],
+  [
+   "Obesity, class III (BMI 40.4)",
+   "2015",
+   "Active"
+  ],
+  [
+   "GERD with nightly reflux",
+   "2012",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2018",
+   "Active"
+  ],
+  [
+   "Prediabetes",
+   "2022",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "GERD, nightly symptoms despite omeprazole; sleeps on 2 pillows",
+   "Class III obesity",
+   "Hypertension, controlled",
+   "Prediabetes (A1c 6.1)",
+   "Snores loudly, daytime sleepiness; sleep study ordered 2025, never done"
+  ],
+  "psh": [
+   [
+    "1998",
+    "Cesarean delivery",
+    "Fort Sanders Sevier (spinal)"
+   ],
+   [
+    "2009",
+    "Open hysterectomy",
+    "Fort Sanders Sevier (GA)"
+   ]
+  ],
+  "family": [
+   "Mother: type 2 diabetes, HTN",
+   "Father: CAD",
+   "No family history of anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "Rare",
+   "drugs": "None",
+   "occupation": "Cafeteria manager, county schools",
+   "living": "Husband, Sevierville",
+   "other": ""
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": ""
+ },
+ "home_meds": [
+  [
+   "Omeprazole 40 mg",
+   "1 cap PO daily",
+   "L. Moody, NP",
+   "10/26/2026 0700"
+  ],
+  [
+   "Lisinopril 20 mg",
+   "1 tab PO daily",
+   "L. Moody, NP",
+   "10/26/2026 0700"
+  ],
+  [
+   "Metformin 500 mg",
+   "1 tab PO BID",
+   "L. Moody, NP",
+   "10/26/2026 0700"
+  ]
+ ],
+ "mar": [
+  [
+   "Ondansetron 4 mg IV",
+   "q6h PRN nausea",
+   "Given 10/27/2026 0610"
+  ],
+  [
+   "Cefoxitin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Famotidine 20 mg IV",
+   "Once preop",
+   "Given 10/27/2026 0640"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "125 mL/h",
+   "Infusing"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/27/2026",
+    "comment": "ED",
+    "vals": {
+     "WBC": [
+      "11.8",
+      "H"
+     ],
+     "Hgb": [
+      "13.6",
+      ""
+     ],
+     "Hct": [
+      "41",
+      ""
+     ],
+     "Plt": [
+      "302",
+      ""
+     ],
+     "Na": [
+      "138",
+      ""
+     ],
+     "K": [
+      "3.6",
+      ""
+     ],
+     "Cl": [
+      "100",
+      ""
+     ],
+     "CO2": [
+      "25",
+      ""
+     ],
+     "BUN": [
+      "19",
+      ""
+     ],
+     "Cr": [
+      "0.88",
+      ""
+     ],
+     "Glu": [
+      "142",
+      "H"
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.40-0.90"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "50-260"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "12.0-16.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "36-46"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Coagulation",
+    "key": "PT",
+    "name": "PT",
+    "unit": "sec",
+    "ref": "11.0-13.5"
+   },
+   {
+    "group": "Coagulation",
+    "key": "INR",
+    "name": "INR",
+    "unit": "",
+    "ref": "0.9-1.1"
+   },
+   {
+    "group": "Coagulation",
+    "key": "aPTT",
+    "name": "aPTT",
+    "unit": "sec",
+    "ref": "25-35"
+   },
+   {
+    "group": "Coagulation",
+    "key": "Fib",
+    "name": "Fibrinogen",
+    "unit": "mg/dL",
+    "ref": "200-400"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Ferritin",
+    "name": "Ferritin",
+    "unit": "ng/mL",
+    "ref": "11-307"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "Fe",
+    "name": "Iron",
+    "unit": "mcg/dL",
+    "ref": "60-170"
+   },
+   {
+    "group": "Iron studies and other",
+    "key": "TSAT",
+    "name": "Transferrin saturation",
+    "unit": "%",
+    "ref": "20-50"
+   }
+  ],
+  "other": [
+   [
+    "10/27/2026",
+    "Lactate",
+    "1.4 mmol/L",
+    ""
+   ],
+   [
+    "10/27/2026",
+    "Urine hCG",
+    "N/A (s/p hysterectomy)",
+    ""
+   ]
+  ]
+ },
+ "imaging": [
+  [
+   "10/27/2026",
+   "CT Abdomen/Pelvis with IV contrast",
+   "Dilated proximal and mid small bowel to 3.6 cm with transition point in the right lower quadrant near prior surgical site. Fluid filled, distended stomach. No pneumatosis or free air.",
+   "H. Lamb, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "10/27/2026",
+   "ED visit",
+   "C-N Medical Center",
+   "Abdominal pain, vomiting",
+   "Admitted, surgery consulted"
+  ]
+ ],
+ "notes": [
+  [
+   "10/27/2026 0350",
+   "ED Note",
+   "Emergency Medicine",
+   "P. Coggins, MD",
+   "52F crampy abdominal pain since dinner (fried chicken, mashed potatoes) at 2130 last night, vomited x3 since 0200, last vomit 0520. Distended, tympanic. CT: SBO with transition point, distended stomach. NG placement offered, patient refused after 2 attempts (gagging). Surgery consulted."
+  ],
+  [
+   "10/27/2026 0545",
+   "Consult",
+   "General Surgery",
+   "S. Varner, MD",
+   "Partial SBO, likely adhesive from 2009 hysterectomy. Given distension and pain, will take for diagnostic laparoscopy this morning rather than trial of nonoperative management. Consent obtained."
+  ],
+  [
+   "10/27/2026 0700",
+   "Nursing Note",
+   "Preop",
+   "T. Bales, RN",
+   "Nauseated, belching. Abdomen distended. Lies with HOB 40 degrees, says she cannot lie flat because of reflux. No NG tube. 20 g R forearm, 18 g L AC placed."
+  ]
+ ],
+ "vitals": [
+  [
+   "10/27/2026 0340",
+   "146/88",
+   96,
+   18,
+   97,
+   37.0,
+   110.0,
+   "7/10",
+   "ED"
+  ],
+  [
+   "10/27/2026 0705",
+   "138/82",
+   84,
+   16,
+   98,
+   36.7,
+   110.0,
+   "5/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "NPO",
+   "10/27/2026 0400",
+   "Active"
+  ],
+  [
+   "Type and screen",
+   "10/27/2026 0400",
+   "Resulted"
+  ],
+  [
+   "Cefoxitin 2 g IV on call",
+   "10/27/2026 0550",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "A positive",
+  "antibody_screen": "Negative",
+  "units": "None crossmatched",
+  "notes": "",
+  "specimen_expires": "10/30/2026"
+ },
+ "consents": [
+  [
+   "Surgical consent: diagnostic laparoscopy, possible lysis of adhesions, possible bowel resection, possible open",
+   "Signed by patient 10/27/2026 0600"
+  ],
+  [
+   "Blood consent",
+   "Signed 10/27/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "1998",
+   "Cesarean delivery",
+   "Spinal",
+   "None",
+   "Fort Sanders Sevier"
+  ],
+  [
+   "2009",
+   "Open hysterectomy",
+   "GA, ETT",
+   "Grade 2 view with Mac 3, PONV",
+   "Fort Sanders Sevier"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0640 (from ED)",
+  "npo_solids": "10/26/2026 2130 (fried chicken dinner); vomiting since 0200, last 0520",
+  "npo_clears": "10/26/2026 2200 sweet tea",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "ED and surgery notes today"
+   ],
+   [
+    "Pregnancy test",
+    "N/A (hysterectomy)"
+   ],
+   [
+    "Site marked",
+    "N/A"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ],
+   [
+    "NG tube",
+    "Refused in ED"
+   ]
+  ],
+  "nursing_note": "Nauseated, belching, abdomen distended. Cannot lie flat (reflux). Neck circumference 44 cm. Husband at bedside.",
+  "iv": "20g R forearm, 18g L AC",
+  "glucose": "142 mg/dL"
+ },
+ "label": "CN Rubric · D. McCarter",
+ "bmi": "40.4",
+ "cn": {
+  "kind": "rubric",
+  "scenarioId": "rsi_full_stomach_001",
+  "title": "Carson-Newman rubric: RSI, full stomach"
+ }
+}

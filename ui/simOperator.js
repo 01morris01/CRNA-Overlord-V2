@@ -1249,7 +1249,7 @@ export function createSimOperator({
   }
 
   /* The instructor pressed TRIGGER on an event plan row. */
-  function triggerEvent(type) {
+  function triggerEvent(type, { onset = 'realistic' } = {}) {
     if (!runner) return { ok: false, reason: 'No runner.' };
     const snapshot = runner.snapshot?.() ?? last;
     if (!isLive(snapshot)) return { ok: false, reason: 'Start the case first.' };
@@ -1257,7 +1257,7 @@ export function createSimOperator({
     pendingInjection = type;
     pendingSource = 'timeline';
     try {
-      const result = runner.injectComplication(type);
+      const result = runner.injectComplication(type, { onset });
       return result ?? { ok: true };
     } catch (error) {
       return { ok: false, reason: error.message };
@@ -1351,7 +1351,7 @@ export function createSimOperator({
       });
       const event = planEvent(meta.type);
       if (event) event.fired = true;
-      note(describeInjection({ type: meta.type, source, tSec, event, freePlay: eventPlan.length === 0 }));
+      note(describeInjection({ type: meta.type, source, tSec, event, freePlay: eventPlan.length === 0, onset: meta.onset }));
       if (source === 'timeline') return; // the instructor's trigger stays quiet in the room
       speak({ concept: source === 'booth' ? 'INJECTED' : 'INSTRUCTOR_INJECTED' }, { force: source === 'booth' });
       return;

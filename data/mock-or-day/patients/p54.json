@@ -1,0 +1,526 @@
+{
+ "id": "p54",
+ "room": "CN Sim Lab 2",
+ "time": "0800",
+ "name": "BRADEN, KEITH ALLEN",
+ "mrn": "0154054",
+ "dob": "11/03/1977",
+ "age": "48 y",
+ "sex": "M",
+ "ht_cm": 175,
+ "wt_kg": 70.0,
+ "preferred_name": "Keith",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "M. Kessler, MD, Lakeway Internal Medicine",
+ "insurance": "Cigna PPO (employer)",
+ "emergency_contact": "Lisa Braden (wife) 865-555-0748",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Laparoscopic left inguinal hernia repair (TEP) with mesh",
+  "short": "Lap L inguinal hernia repair",
+  "laterality": "Left",
+  "service": "General Surgery",
+  "surgeon": "J. Rutherford, MD",
+  "assistant": "",
+  "indication": "Symptomatic left inguinal hernia.",
+  "duration_min": 75,
+  "anesthesia_requested": "General (ETT)",
+  "position": "Supine, arms tucked",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Laparoscopy tower",
+  "implants": "Polypropylene mesh",
+  "surgeon_notes": "Needs deep block for preperitoneal space; please keep him still until closure.",
+  "add_on": false,
+  "scheduled_on": "10/13/2026"
+ },
+ "problems": [
+  [
+   "Inguinal hernia, left",
+   "07/2026",
+   "Active"
+  ],
+  [
+   "Hypertension",
+   "2019",
+   "Active"
+  ],
+  [
+   "Hyperlipidemia",
+   "2019",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Hypertension, controlled",
+   "Hyperlipidemia"
+  ],
+  "psh": [
+   [
+    "2019",
+    "Right shoulder arthroscopy",
+    "C-N Sports Medicine"
+   ],
+   [
+    "2008",
+    "Tonsillectomy (adult)",
+    "Morristown-Hamblen"
+   ]
+  ],
+  "family": [
+   "Father: HTN",
+   "Mother: healthy",
+   "No family history of anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "1 to 2 drinks/week",
+   "drugs": "None",
+   "occupation": "Electrician",
+   "living": "Wife, Morristown",
+   "other": ""
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": ""
+ },
+ "home_meds": [
+  [
+   "Amlodipine 5 mg",
+   "1 tab PO daily",
+   "M. Kessler, MD",
+   "10/27/2026 0500"
+  ],
+  [
+   "Atorvastatin 20 mg",
+   "1 tab PO nightly",
+   "M. Kessler, MD",
+   "10/26/2026 2100"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0720"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [
+   {
+    "dt": "10/06/2026",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "6.8",
+      ""
+     ],
+     "Hgb": [
+      "14.9",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "241",
+      ""
+     ],
+     "Na": [
+      "141",
+      ""
+     ],
+     "K": [
+      "4.3",
+      ""
+     ],
+     "Cl": [
+      "104",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "16",
+      ""
+     ],
+     "Cr": [
+      "1.02",
+      ""
+     ],
+     "Glu": [
+      "98",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": []
+ },
+ "imaging": [],
+ "cardiology": [
+  [
+   "10/06/2026",
+   "ECG 12-lead",
+   "Normal sinus rhythm, rate 68. Normal intervals. No ischemic changes.",
+   "M. Kessler, MD"
+  ]
+ ],
+ "encounters": [
+  [
+   "07/20/2026",
+   "Clinic",
+   "C-N General Surgery",
+   "Left groin bulge",
+   "Surgery scheduled"
+  ],
+  [
+   "04/2019",
+   "Outpatient surgery",
+   "C-N Sports Medicine",
+   "R shoulder",
+   "PACU event, see note"
+  ]
+ ],
+ "notes": [
+  [
+   "04/16/2019 1210",
+   "PACU Note",
+   "PACU",
+   "D. Reese, RN",
+   "After R shoulder scope (GETA, rocuronium, neostigmine): arrived weak, could not lift head, SpO2 89% on 6 L face mask, shallow breathing. Anesthesia evaluated: TOF 3/4 with fade. Additional neostigmine and glycopyrrolate given; improved over 25 min. Discharged 3 h late."
+  ],
+  [
+   "07/20/2026 1000",
+   "Consult",
+   "General Surgery",
+   "J. Rutherford, MD",
+   "48M L inguinal hernia, symptomatic. Plan laparoscopic TEP repair. Requests deep neuromuscular block for working space."
+  ],
+  [
+   "10/06/2026 0930",
+   "Preadmission Note",
+   "Anesthesia PAT",
+   "R. Harrell, RN",
+   "Remembers being \"weak and couldn't breathe right\" after his 2019 shoulder surgery. Airway Mallampati II, full ROM. ASA 2."
+  ]
+ ],
+ "vitals": [
+  [
+   "10/06/2026 0925",
+   "124/80",
+   70,
+   14,
+   99,
+   36.6,
+   70.0,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0715",
+   "118/76",
+   70,
+   14,
+   99,
+   36.5,
+   70.0,
+   "1/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0650",
+   "Active"
+  ],
+  [
+   "NPO after midnight",
+   "07/20/2026",
+   "Active"
+  ],
+  [
+   "Sugammadex available in OR (pharmacy approved)",
+   "10/27/2026 0700",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic left inguinal hernia repair with mesh",
+   "Signed by patient 07/20/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "04/2019",
+   "R shoulder arthroscopy",
+   "GETA, rocuronium, neostigmine reversal",
+   "PACU: residual weakness, SpO2 89%, TOF 3/4 with fade; extra neostigmine; 25 min to recover",
+   "C-N Sports Medicine"
+  ],
+  [
+   "2008",
+   "Tonsillectomy",
+   "GETA",
+   "None",
+   "Morristown-Hamblen"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0630",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0500 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes"
+   ],
+   [
+    "Site marked",
+    "Yes - L groin"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ]
+  ],
+  "nursing_note": "A&O x4. Asks that \"they make sure I can breathe this time.\" Wife at bedside.",
+  "iv": "18g R hand 0720",
+  "glucose": ""
+ },
+ "label": "CN Rubric · K. Braden",
+ "bmi": "22.9",
+ "cn": {
+  "kind": "rubric",
+  "scenarioId": "emergence_residual_block_001",
+  "title": "Carson-Newman rubric: Emergence, residual blockade",
+  "note": "The scored run starts at the END of the case: intubated, on sevoflurane, TOF ratio below 0.9."
+ }
+}

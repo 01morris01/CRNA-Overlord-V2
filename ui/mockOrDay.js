@@ -15,6 +15,8 @@
    Booth gets the patient, procedure and chart findings, and his director
    favors the complications that fit this chart. */
 
+import { buildParticipants } from './interviewParticipants.js';
+
 export const MOCK_OR_BASE = '/data/mock-or-day';
 export const MOCK_OR_EHR = '/mock-or-day/ehr.html';
 
@@ -82,27 +84,108 @@ export function buildChartDigest(patient, { maxChars = 7500 } = {}) {
 }
 
 /* Interview grounding in the shape createPatientInterview expects. The chart
-   digest is the whole truth; a few scripted answers keep the offline
-   fallback useful when no API key exists. */
+   digest is the whole truth. Who answers depends on the patient: a parent or
+   guardian for children, the healthcare POA when the patient lacks
+   capacity (ui/interviewParticipants.js). A few scripted answers per person
+   keep the offline fallback useful when no API key exists. */
+export function interviewFacts(patient) {
+  const pre = patient.preop ?? {};
+  const social = patient.history?.social ?? {};
+  return {
+    allergies: (patient.allergies ?? []).map((r) => `${r[0]} (${String(r[1]).toLowerCase()})`),
+    solids: pre.npo_solids || 'not recorded',
+    clears: pre.npo_clears || 'not recorded',
+    meds: (patient.home_meds ?? []).map((r) => `${r[0]}, ${r[1]}, last taken ${r[3]}`),
+    anesthesia: (patient.anesthesia_history ?? []).map((r) => `${r[0]} ${r[1]} with ${r[2]}: ${r[3]}`),
+    family: [].concat(patient.history?.family ?? []).filter(Boolean),
+    habits: ['tobacco', 'alcohol', 'drugs'].map((key) => (social[key] ? `${key} ${social[key]}` : '')).filter(Boolean),
+    procedure: patient.case?.procedure ?? 'the operation',
+  };
+}
+
+const QA_PROMPTS = Object.freeze([
+  { id: 'mock_allergies', prompt: 'Do you have any allergies to medicines', domain: 'allergies allergic reaction' },
+  { id: 'mock_npo', prompt: 'When did you last eat or drink anything', domain: 'npo fasting eat drink food last' },
+  { id: 'mock_meds', prompt: 'What medicines do you take and did you take them today', domain: 'medications medicines pills take' },
+  { id: 'mock_anesthesia', prompt: 'Have you had anesthesia or surgery before, any problems', domain: 'anesthesia surgery before problems' },
+  { id: 'mock_family', prompt: 'Has anyone in your family had problems with anesthesia', domain: 'family relatives anyone blood related anesthesia problems hyperthermia' },
+  { id: 'mock_habits', prompt: 'Do you smoke, drink alcohol, or use drugs', domain: 'smoke smoking tobacco vape alcohol drink drugs' },
+  { id: 'mock_procedure', prompt: 'What surgery are you having today', domain: 'surgery procedure operation today' },
+]);
+
+/* One person's scripted answer, phrased for who they are. */
+export function scriptedAnswer(id, facts, speaker = { kind: 'self' }, { patientName = 'the patient', he = 'she', deciderRelation = '' } = {}) {
+  const list = (items) => items.join('; ');
+  const ask = deciderRelation ? ` Ask my ${deciderRelation}.` : '';
+  if (speaker.kind === 'nonverbal') return `(${speaker.note || `${patientName} does not answer.`})`;
+  if (speaker.kind === 'child') {
+    if (id === 'mock_procedure') return `I'm getting surgery. ${ask.trim() || 'I don\'t know what kind.'}`;
+    return `I don't know.${ask}`;
+  }
+  if (speaker.kind === 'impaired') {
+    if (id === 'mock_procedure') return `I'm not sure why I'm here, honey.${ask}`;
+    return `Oh, I don't remember.${ask}`;
+  }
+  const third = speaker.kind === 'proxy' || speaker.kind === 'family';
+  const He = he[0].toUpperCase() + he.slice(1);
+  const his = he === 'he' ? 'his' : 'her';
+  const hedge = speaker.kind === 'family' ? 'As far as I know, ' : '';
+  const subject = hedge ? `${hedge}${he}` : He;
+  switch (id) {
+    case 'mock_allergies':
+      if (!facts.allergies.length) return third ? `${subject} has no allergies that we know of.` : 'No allergies that I know of.';
+      return third ? `${subject} is allergic to ${list(facts.allergies)}.` : `I'm allergic to ${list(facts.allergies)}.`;
+    case 'mock_npo':
+      return third
+        ? `${subject} last had food ${facts.solids}, and the last thing to drink was ${facts.clears}.`
+        : `I last ate ${facts.solids}, and my last drink was ${facts.clears}.`;
+    case 'mock_meds':
+      if (!facts.meds.length) return third ? `${He} doesn't take any regular medicines.` : 'I do not take any regular medicines.';
+      return third ? `${subject} takes ${list(facts.meds)}.` : `I take ${list(facts.meds)}.`;
+    case 'mock_anesthesia':
+      if (!facts.anesthesia.length) return third ? `${He} has never had anesthesia.` : 'I have never had anesthesia.';
+      return third ? `${subject} had ${list(facts.anesthesia)}.` : `I had ${list(facts.anesthesia)}.`;
+    case 'mock_family':
+      if (!facts.family.length) return third ? 'Not that we know of.' : 'Not that I know of.';
+      return third ? `In ${his} family: ${list(facts.family)}.` : `In my family: ${list(facts.family)}.`;
+    case 'mock_habits':
+      if (!facts.habits.length) return 'No.';
+      return third ? `${hedge}${list(facts.habits)}.` : `For me: ${list(facts.habits)}.`;
+    case 'mock_procedure':
+      return third ? `${He} is having ${facts.procedure}.` : `${facts.procedure}.`;
+    default:
+      return "I'm not sure about that.";
+  }
+}
+
 export function buildChartInterviewGrounding(patient) {
   if (!patient) return null;
-  const pre = patient.preop ?? {};
-  const allergies = (patient.allergies ?? []).length
-    ? patient.allergies.map((r) => `${r[0]}, it gave me ${String(r[1]).toLowerCase()}`).join('. ')
-    : 'No allergies that I know of.';
-  const meds = (patient.home_meds ?? []).map((r) => `${r[0]} (${r[1]}), last taken ${r[3]}`).join('; ');
-  const priorAnesthesia = (patient.anesthesia_history ?? []).map((r) => `${r[0]} ${r[1]} with ${r[2]}: ${r[3]}`).join('; ');
+  const facts = interviewFacts(patient);
+  const { participants, defaultId, banner, patientName, assessment } = buildParticipants(patient);
+  const he = patient.sex === 'M' ? 'he' : 'she';
+  const decider = participants.find((entry) => entry.id === 'decider')
+    ?? participants.find((entry) => entry.role === 'parent');
+  const scripted = {};
+  for (const speaker of participants) {
+    scripted[speaker.id] = QA_PROMPTS.map((item) => ({
+      ...item,
+      response: scriptedAnswer(item.id, facts, speaker, { patientName, he, deciderRelation: decider?.relation ?? '' }),
+    }));
+  }
+  const lead = participants.find((entry) => entry.id === defaultId) ?? participants[0];
   return {
-    patientName: patient.preferred_name || patient.label || 'the patient',
-    voice: patient.sex === 'M' ? 'patient-male' : 'patient-female',
+    patientName,
+    patientAge: patient.age,
+    patientSex: patient.sex,
+    voice: lead.voice,
     chart: { digest: buildChartDigest(patient, { maxChars: 7200 }) },
-    qa: [
-      { id: 'mock_allergies', prompt: 'Do you have any allergies to medicines', response: allergies, domain: 'allergies' },
-      { id: 'mock_npo', prompt: 'When did you last eat or drink anything', response: `Last food ${pre.npo_solids || 'not recorded'}; last drink ${pre.npo_clears || 'not recorded'}.`, domain: 'npo fasting eat drink' },
-      { id: 'mock_meds', prompt: 'What medicines do you take and did you take them today', response: meds || 'I do not take any regular medicines.', domain: 'medications pills' },
-      { id: 'mock_anesthesia', prompt: 'Have you had anesthesia or surgery before, any problems', response: priorAnesthesia || 'I have never had anesthesia.', domain: 'anesthesia surgery problems' },
-      { id: 'mock_procedure', prompt: 'What surgery are you having today', response: `${patient.case?.procedure ?? 'My operation'}.`, domain: 'surgery procedure operation' },
-    ],
+    participants,
+    defaultSpeakerId: defaultId,
+    banner,
+    assessment,
+    scripted,
+    // The default speaker's answers; also the "true answers" the model rephrases.
+    qa: scripted[defaultId],
   };
 }
 
@@ -331,6 +414,8 @@ export function createMockOrController({
     init, load, openChart, closeChart, exit, planUpdated, refreshPlan,
     gate: () => startGate(state),
     getState: () => ({ ...state }),
+    // The Mock OR patient that carries a Carson-Newman rubric or teaching case.
+    findByScenario: (scenarioId) => index?.patients?.find((row) => row.cnRubric?.scenarioId === scenarioId) ?? null,
     destroy() {
       loadButton?.removeEventListener?.('click', onLoad);
       chartButton?.removeEventListener?.('click', onChart);

@@ -20,6 +20,10 @@ export class VentilatorSystem {
     this.setPeep = 5; this.setFiO2 = 1.0; this.peakFlowLPerMin = 40;
     this.o2FlowLPerMin = 2; this.airFlowLPerMin = 0; this.n2oFlowLPerMin = 0;
     this.vaporizerDial = 0; this.vaporizerAgent = 'Sevoflurane';
+    // 'physiologic' (default): circuit, alveolar, and tissue kinetics.
+    // 'legacy': the original port (Et = 0.7 x dial within seconds), kept only
+    // so the frozen C# golden fixtures still replay bit for bit.
+    this.agentKinetics = 'physiologic';
 
     this.measuredTidalVolume = 0; this.measuredRR = 0; this.measuredMinuteVent = 0;
     this.measuredPeakPressure = 0; this.measuredPlateauPressure = 0; this.measuredPeep = 0;
@@ -86,7 +90,7 @@ export class VentilatorSystem {
     if (this.mode !== VentMode.Manual) this.measuredFiO2 = this.setFiO2;
   }
 
-  updateVaporizer(dt, connected = true) {
+  updateVaporizerLegacy(dt, connected = true) {
     if (!connected || this.vaporizerDial <= 0) {
       this.inspiredAgentConcentration = 0;
       this.expiredAgentConcentration = 0;
@@ -99,7 +103,61 @@ export class VentilatorSystem {
     const uptakeFactor = f(0.7);
     const targetExpired = f(this.inspiredAgentConcentration * uptakeFactor);
     this.expiredAgentConcentration = Lerp(this.expiredAgentConcentration, targetExpired, dt * f(0.1));
+    this.applyMac();
+  }
 
+  /* Volatile kinetics: circuit wash-in, alveolar wash-in, and uptake into
+     the vessel rich group, so the agent takes minutes to rise and to wash
+     out instead of tracking the dial within seconds.
+     - Circuit (FI): first order toward the dial with tau = 6 L / fresh gas
+       flow. Low flow means slow change.
+     - Alveolar (FA, shown as Et): ventilation brings FI in (VA / FRC) while
+       blood uptake (solubility x cardiac output / FRC) pulls agent into the
+       vessel rich group; a small residual uptake into muscle and fat keeps
+       FA/FI below 1. Steady FA/FI lands near published values at 30 min
+       (desflurane about 0.9, sevoflurane about 0.85, isoflurane about 0.75).
+     - Vessel rich group (FT) equilibrates with FA over a few minutes and
+       gives agent back during washout, so emergence is not instant.
+     Apnea stops alveolar wash-in; extubation or a disconnected circuit
+     removes the inspired agent. */
+  updateVaporizer(dt, connected = true) {
+    if (this.agentKinetics === 'legacy') { this.updateVaporizerLegacy(dt, connected); return; }
+    const PARTITION = { Sevoflurane: f(0.65), Desflurane: f(0.42), Isoflurane: f(1.4) };
+    const TISSUE_TAU_MIN = { Sevoflurane: f(3.5), Desflurane: f(2.5), Isoflurane: f(6) };
+    if (this._agentFA === undefined) { this._agentFI = 0; this._agentFA = 0; this._agentFT = 0; }
+    const dial = connected ? Max(0, this.vaporizerDial) : 0;
+    const fgf = f(this.o2FlowLPerMin + this.airFlowLPerMin + this.n2oFlowLPerMin);
+    const minutes = f(dt / 60);
+    if (connected) {
+      const circuitRate = Max(0, fgf) / f(6);
+      this._agentFI = f(this._agentFI + (dial - this._agentFI) * Clamp01(circuitRate * minutes));
+    } else {
+      this._agentFI = 0;
+    }
+    const frc = Max(0.5, this.patient.frcLiters ?? 2.5);
+    const va = connected ? Max(0, this.patient.alveolarVentilationLMin?.() ?? 0) : Max(0, this.patient.alveolarVentilationLMin?.() ?? 0);
+    const cardiacOutput = f(5 * Clamp((this.patient.weightKg ?? 70) / 70, 0.3, 2));
+    const lambda = PARTITION[this.vaporizerAgent] ?? f(0.65);
+    const uptake = f(lambda * cardiacOutput / frc);
+    const washIn = f(va / frc);
+    const dFA = f(washIn * (this._agentFI - this._agentFA) - uptake * (this._agentFA - this._agentFT) - f(0.15) * uptake * this._agentFA);
+    this._agentFA = Max(0, f(this._agentFA + dFA * minutes));
+    const tissueTau = TISSUE_TAU_MIN[this.vaporizerAgent] ?? f(3.5);
+    this._agentFT = Max(0, f(this._agentFT + (this._agentFA - this._agentFT) * Clamp01(minutes / tissueTau)));
+    this.inspiredAgentConcentration = this._agentFI;
+    this.expiredAgentConcentration = this._agentFA;
+    if (this.vaporizerDial <= 0 && this._agentFA < f(0.02) && this._agentFI < f(0.02)) {
+      this.inspiredAgentConcentration = 0;
+      this.expiredAgentConcentration = 0;
+      this.patient.macMultiple = 0;
+      this.patient.endTidalAgent = 0;
+      this.patient.currentAgent = 'None';
+      return;
+    }
+    this.applyMac();
+  }
+
+  applyMac() {
     let macValue;
     if (this.vaporizerAgent === 'Sevoflurane') macValue = f(2.05);
     else if (this.vaporizerAgent === 'Desflurane') macValue = f(6.0);

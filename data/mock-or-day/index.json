@@ -1,6 +1,6 @@
 {
  "source": "C-N Practice Charts: Mock Patients OR Day (fictional patients)",
- "count": 50,
+ "count": 56,
  "patients": [
   {
    "id": "p01",
@@ -1450,6 +1450,211 @@
     "baselineEtCO2": 38,
     "vitalsSource": "10/27/2026 0330 L&D Room 7",
     "bpSource": "10/27/2026 0330 L&D Room 7"
+   }
+  },
+  {
+   "id": "p51",
+   "room": "CN Sim Lab 1",
+   "time": "0800",
+   "label": "CN Rubric · D. Hensley",
+   "name": "HENSLEY, DANIEL ROSS",
+   "age": "42 y",
+   "sex": "M",
+   "procedure": "Lap umbilical hernia repair",
+   "anesthesia": "General (ETT)",
+   "service": "General Surgery",
+   "engineSupported": true,
+   "engineNote": null,
+   "physiology": {
+    "weightKg": 70,
+    "heightCm": 172,
+    "ageYears": 42.0,
+    "sex": "Male",
+    "baselineHR": 72,
+    "baselineSystolic": 120,
+    "baselineDiastolic": 78,
+    "baselineRR": 14,
+    "baselineSpO2": 99,
+    "baselineTemp": 36.6,
+    "baselineEtCO2": 38,
+    "vitalsSource": "Carson-Newman rubric: Standard IV induction scenario profile",
+    "bpSource": "Scenario profile"
+   },
+   "cnRubric": {
+    "kind": "rubric",
+    "scenarioId": "standard_iv_healthy_001",
+    "title": "Carson-Newman rubric: Standard IV induction"
+   }
+  },
+  {
+   "id": "p52",
+   "room": "CN Sim Lab 1",
+   "time": "0930",
+   "label": "CN Rubric · D. McCarter",
+   "name": "MCCARTER, DENISE LYNN",
+   "age": "52 y",
+   "sex": "F",
+   "procedure": "Urgent diagnostic laparoscopy, possible LOA",
+   "anesthesia": "General (RSI, ETT)",
+   "service": "General Surgery (acute care)",
+   "engineSupported": true,
+   "engineNote": null,
+   "physiology": {
+    "weightKg": 110,
+    "heightCm": 165,
+    "ageYears": 52.0,
+    "sex": "Female",
+    "baselineHR": 84,
+    "baselineSystolic": 138,
+    "baselineDiastolic": 82,
+    "baselineRR": 16,
+    "baselineSpO2": 98,
+    "baselineTemp": 36.7,
+    "baselineEtCO2": 38,
+    "vitalsSource": "Carson-Newman rubric: RSI, full stomach scenario profile",
+    "bpSource": "Scenario profile"
+   },
+   "cnRubric": {
+    "kind": "rubric",
+    "scenarioId": "rsi_full_stomach_001",
+    "title": "Carson-Newman rubric: RSI, full stomach"
+   }
+  },
+  {
+   "id": "p53",
+   "room": "CN Sim Lab 1",
+   "time": "1100",
+   "label": "CN Rubric · C. Tipton",
+   "name": "TIPTON, CHARLENE MARIE",
+   "age": "52 y",
+   "sex": "F",
+   "procedure": "Urgent lap appendectomy",
+   "anesthesia": "General (RSI, ETT)",
+   "service": "General Surgery (acute care)",
+   "engineSupported": true,
+   "engineNote": null,
+   "physiology": {
+    "weightKg": 110,
+    "heightCm": 165,
+    "ageYears": 52.0,
+    "sex": "Female",
+    "baselineHR": 84,
+    "baselineSystolic": 138,
+    "baselineDiastolic": 82,
+    "baselineRR": 16,
+    "baselineSpO2": 98,
+    "baselineTemp": 36.7,
+    "baselineEtCO2": 38,
+    "vitalsSource": "Carson-Newman rubric: RSI, failed first attempt scenario profile",
+    "bpSource": "Scenario profile"
+   },
+   "cnRubric": {
+    "kind": "rubric",
+    "scenarioId": "rsi_failed_first_attempt_001",
+    "title": "Carson-Newman rubric: RSI, failed first attempt"
+   }
+  },
+  {
+   "id": "p54",
+   "room": "CN Sim Lab 2",
+   "time": "0800",
+   "label": "CN Rubric · K. Braden",
+   "name": "BRADEN, KEITH ALLEN",
+   "age": "48 y",
+   "sex": "M",
+   "procedure": "Lap L inguinal hernia repair",
+   "anesthesia": "General (ETT)",
+   "service": "General Surgery",
+   "engineSupported": true,
+   "engineNote": null,
+   "physiology": {
+    "weightKg": 70,
+    "heightCm": 175,
+    "ageYears": 48.0,
+    "sex": "Male",
+    "baselineHR": 70,
+    "baselineSystolic": 118,
+    "baselineDiastolic": 76,
+    "baselineRR": 14,
+    "baselineSpO2": 99,
+    "baselineTemp": 36.5,
+    "baselineEtCO2": 38,
+    "vitalsSource": "Carson-Newman rubric: Emergence, residual blockade scenario profile",
+    "bpSource": "Scenario profile"
+   },
+   "cnRubric": {
+    "kind": "rubric",
+    "scenarioId": "emergence_residual_block_001",
+    "title": "Carson-Newman rubric: Emergence, residual blockade",
+    "note": "The scored run starts at the END of the case: intubated, on sevoflurane, TOF ratio below 0.9."
+   }
+  },
+  {
+   "id": "p55",
+   "room": "CN Sim Lab 2",
+   "time": "0930",
+   "label": "CN Rubric · K. Whitfield",
+   "name": "WHITFIELD, KAREN ELAINE",
+   "age": "32 y",
+   "sex": "F",
+   "procedure": "Lap chole",
+   "anesthesia": "General (ETT)",
+   "service": "General Surgery",
+   "engineSupported": true,
+   "engineNote": null,
+   "physiology": {
+    "weightKg": 68,
+    "heightCm": 165,
+    "ageYears": 32.0,
+    "sex": "Female",
+    "baselineHR": 78,
+    "baselineSystolic": 118,
+    "baselineDiastolic": 74,
+    "baselineRR": 14,
+    "baselineSpO2": 99,
+    "baselineTemp": 36.6,
+    "baselineEtCO2": 38,
+    "vitalsSource": "Carson-Newman teaching case: Lap chole, reactive airway, PONV scenario profile",
+    "bpSource": "Scenario profile"
+   },
+   "cnRubric": {
+    "kind": "teaching",
+    "scenarioId": "cn_preassessment_lap_chole_001",
+    "title": "Carson-Newman teaching case: Lap chole, reactive airway, PONV"
+   }
+  },
+  {
+   "id": "p56",
+   "room": "CN Sim Lab 2",
+   "time": "1100",
+   "label": "CN Rubric · B. Cole",
+   "name": "COLE, BRITTANY NICOLE",
+   "age": "26 y",
+   "sex": "F",
+   "procedure": "R knee scope, partial meniscectomy",
+   "anesthesia": "General (LMA) per anesthesia",
+   "service": "Orthopedics - Sports Medicine",
+   "engineSupported": true,
+   "engineNote": null,
+   "physiology": {
+    "weightKg": 82,
+    "heightCm": 168,
+    "ageYears": 26.0,
+    "sex": "Female",
+    "baselineHR": 82,
+    "baselineSystolic": 124,
+    "baselineDiastolic": 76,
+    "baselineRR": 15,
+    "baselineSpO2": 98,
+    "baselineTemp": 36.7,
+    "baselineEtCO2": 38,
+    "vitalsSource": "Carson-Newman teaching case: NPO violation, MH family history, difficult airway scenario profile",
+    "bpSource": "Scenario profile"
+   },
+   "cnRubric": {
+    "kind": "teaching",
+    "scenarioId": "cn_preassessment_npo_mh_001",
+    "title": "Carson-Newman teaching case: NPO violation, MH family history, difficult airway"
    }
   }
  ]

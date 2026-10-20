@@ -23,6 +23,12 @@ const DANGEROUS_INPUT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 // Display-only convergence tolerance; it never feeds back into physiology.
 export const INSTRUCTOR_NMB_TARGET_TOLERANCE = 0.02;
 
+// Complications whose onset can run realistic (builds over minutes) or
+// instant (full severity at once, to show the concept).
+export const GRADUAL_COMPLICATIONS = Object.freeze([
+  'MalignantHyperthermia', 'Anaphylaxis', 'Bronchospasm', 'HighSpinal', 'Sympathectomy',
+]);
+
 export const LIVE_COMPLICATIONS = Object.freeze([
   'Bronchospasm', 'HighSpinal', 'Sympathectomy', 'Anaphylaxis',
   'MalignantHyperthermia', 'OpioidRespDepression',
@@ -488,6 +494,8 @@ export class SimRunner {
     scenario.loadRaw(scenarioDefinition ?? liveScenarioDefinition(c));
     scenario.startScenario();
     this.p = p; this.d = d; this.l = l; this.v = v; this.a = a; this.s = scenario; this.core = core;
+    // The instructor's uptake choice survives RESET and new patients.
+    if (this._agentKineticsPref) v.agentKinetics = this._agentKineticsPref;
     this.simTime = 0; this._accum = 0;
     this.tofCheckHistory = [];
     this._instructorNmbTarget = null;
@@ -1649,14 +1657,40 @@ export class SimRunner {
     return this.s?.activeComplicationTypes?.() ?? [];
   }
 
-  injectComplication(type) {
+  /* onset 'realistic' (default): builds over minutes like the real thing
+     (see ScenarioManager.applyComplication). 'instant': full severity at
+     once, to demonstrate the concept. Scenario files keep their own timing. */
+  injectComplication(type, { onset = 'realistic' } = {}) {
     if (!LIVE_COMPLICATIONS.includes(type)) {
       throw new RangeError(`Unsupported complication: ${type}`);
     }
-    this.s.applyComplication({ complicationType: type, description: type });
-    this.logEvent('Complication', type, { action: 'complication', type });
-    return { ok: true, type };
+    const instant = onset === 'instant' || !GRADUAL_COMPLICATIONS.includes(type);
+    this.s.applyComplication({ complicationType: type, description: type, onset: instant ? 'instant' : 'gradual' });
+    const effectiveOnset = GRADUAL_COMPLICATIONS.includes(type) ? (instant ? 'instant' : 'realistic') : 'instant';
+    this.logEvent('Complication', `${type}${effectiveOnset === 'instant' && GRADUAL_COMPLICATIONS.includes(type) ? ' (instant)' : ''}`, { action: 'complication', type, onset: effectiveOnset });
+    return { ok: true, type, onset: effectiveOnset };
   }
+
+  /* Volatile uptake: 'physiologic' (circuit, alveolar, tissue kinetics) or
+     'legacy' (Et follows the dial within seconds, to show the concept). */
+  setAgentKinetics(mode) {
+    const next = mode === 'legacy' ? 'legacy' : 'physiologic';
+    const v = this.v;
+    if (v.agentKinetics !== next) {
+      // Carry the current level across so the monitor does not jump.
+      const level = v.expiredAgentConcentration ?? 0;
+      v._agentFA = level;
+      v._agentFT = level;
+      v._agentFI = v.inspiredAgentConcentration ?? level;
+      v.agentKinetics = next;
+      this._agentKineticsPref = next;
+      this.logEvent('Machine', next === 'legacy' ? 'Volatile uptake: instant (concept mode)' : 'Volatile uptake: realistic', { instructorAction: 'agent_kinetics', mode: next });
+    }
+    this.emit?.();
+    return { ok: true, mode: next };
+  }
+
+  getAgentKinetics() { return this.v.agentKinetics ?? 'physiologic'; }
 
   buildDebrief() {
     const def = this.s.activeScenario || liveScenarioDefinition(this.config);

@@ -5,7 +5,13 @@
    501 and the client falls back to the browser's built-in speech synthesis, so
    the interview still works (with a plainer voice) before a key is added.
 
-   Request body: { text: string, voiceId?: string, voice?: 'operator'|'patient-male'|'patient-female' }
+   Request body: { text: string, voiceId?: string, voice?: 'operator'|'patient-male'|'patient-female'|<cast role> }
+
+   Cast roles (ui/interviewParticipants.js voiceRole): an age band plus sex,
+   so a 4 year old, a teenager, a young mother, and an 85 year old do not
+   share one adult voice. Each is an ElevenLabs premade voice the account's
+   key can already use, and each can be overridden with
+   ELEVENLABS_VOICE_<ROLE> (for example ELEVENLABS_VOICE_OLDER_FEMALE).
 
    Voices: Booth must never sound like the patient. Each role has its own
    built in ElevenLabs premade voice, overridable by env var:
@@ -20,7 +26,23 @@
 export const OPERATOR_DEFAULT_VOICE_ID = '2EiwWnXFnvU5JabPnv8n'; // "Clyde" preset
 export const PATIENT_MALE_DEFAULT_VOICE_ID = 'pNInz6obpgDQGcFmaJgB'; // "Adam" preset
 
+export const VOICE_CAST = Object.freeze({
+  'child-female': 'jBpfuIE2acCO8z3wKNLl', // Gigi: childish, American
+  'child-male': 'jBpfuIE2acCO8z3wKNLl', // Gigi: no premade boy voice exists
+  'teen-female': 'MF3mGyEYCl7XYWbV9V6O', // Elli: young American woman
+  'teen-male': 'TX3LPaxmHKxFdv7VOQHJ', // Liam: young adult man
+  'young-female': 'EXAVITQu4vr4xnSDxMaL', // Sarah: young adult woman
+  'young-male': 'TxGEqnHWrfWFTfGW9XjX', // Josh: young American man
+  'middle-female': '21m00Tcm4TlvDq8ikWAM', // Rachel: calm adult woman
+  'middle-male': 'iP95p4xoKVk53GoZ742B', // Chris: down to earth American man
+  'older-female': 'XrExE9yKIg1WjnnlVkGX', // Matilda: lowest premade alto; no premade elderly woman
+  'older-male': 'pqHfZKP75CvOlQylNhV4', // Bill: wise, mature American man
+});
+
 export function resolveVoice(voice, env = process.env) {
+  if (Object.hasOwn(VOICE_CAST, voice)) {
+    return env[`ELEVENLABS_VOICE_${voice.replace(/-/g, '_').toUpperCase()}`] || VOICE_CAST[voice];
+  }
   if (voice === 'operator') return env.ELEVENLABS_OPERATOR_VOICE_ID || OPERATOR_DEFAULT_VOICE_ID;
   if (voice === 'patient-male') return env.ELEVENLABS_PATIENT_MALE_VOICE_ID || PATIENT_MALE_DEFAULT_VOICE_ID;
   if (voice === 'patient-female') return env.ELEVENLABS_PATIENT_FEMALE_VOICE_ID || env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';

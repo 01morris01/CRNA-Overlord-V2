@@ -1,0 +1,483 @@
+{
+ "id": "p51",
+ "room": "CN Sim Lab 1",
+ "time": "0800",
+ "name": "HENSLEY, DANIEL ROSS",
+ "mrn": "0151051",
+ "dob": "05/14/1984",
+ "age": "42 y",
+ "sex": "M",
+ "ht_cm": 172,
+ "wt_kg": 70.0,
+ "preferred_name": "Danny",
+ "language": "English",
+ "interpreter": false,
+ "code_status": "Full code",
+ "pcp": "T. Ingle, MD, Jefferson City Family Practice",
+ "insurance": "BlueCross BlueShield of Tennessee PPO",
+ "emergency_contact": "Amber Hensley (wife) 865-555-0451",
+ "isolation": "",
+ "allergies": [],
+ "case": {
+  "procedure": "Laparoscopic umbilical hernia repair with mesh",
+  "short": "Lap umbilical hernia repair",
+  "laterality": "N/A",
+  "service": "General Surgery",
+  "surgeon": "J. Rutherford, MD",
+  "assistant": "",
+  "indication": "Symptomatic reducible umbilical hernia, 2.5 cm defect.",
+  "duration_min": 60,
+  "anesthesia_requested": "General (ETT)",
+  "position": "Supine, arms out",
+  "dispo": "Same-day discharge",
+  "blood": "None",
+  "equipment": "Laparoscopy tower",
+  "implants": "Ventral hernia mesh",
+  "surgeon_notes": "Standard GETA. Local at port sites.",
+  "add_on": false,
+  "scheduled_on": "10/13/2026"
+ },
+ "problems": [
+  [
+   "Umbilical hernia, reducible",
+   "08/2026",
+   "Active"
+  ],
+  [
+   "Seasonal allergic rhinitis",
+   "2010",
+   "Active"
+  ]
+ ],
+ "history": {
+  "pmh": [
+   "Seasonal allergic rhinitis",
+   "Snores per wife; no witnessed apneas; never tested for OSA"
+  ],
+  "psh": [
+   [
+    "2002",
+    "Wisdom teeth extraction",
+    "Oral surgeon, Knoxville (IV sedation)"
+   ]
+  ],
+  "family": [
+   "Father: hypertension",
+   "Mother: hypothyroidism",
+   "No family history of anesthesia problems"
+  ],
+  "social": {
+   "tobacco": "Never",
+   "alcohol": "2 to 3 beers on weekends",
+   "drugs": "None",
+   "occupation": "High school band director",
+   "living": "Married, 2 children, Jefferson City",
+   "other": "Full beard for 10 years; will not shave it."
+  },
+  "immunizations": [
+   [
+    "Influenza",
+    "10/2026"
+   ],
+   [
+    "Tdap",
+    "2021"
+   ]
+  ],
+  "ob": ""
+ },
+ "home_meds": [
+  [
+   "Cetirizine 10 mg",
+   "1 tab PO daily PRN",
+   "T. Ingle, MD",
+   "10/26/2026 0800"
+  ]
+ ],
+ "mar": [
+  [
+   "Cefazolin 2 g IV",
+   "Within 60 min of incision",
+   "Due - in OR"
+  ],
+  [
+   "Lactated Ringer's IV",
+   "KVO",
+   "Infusing 0715"
+  ]
+ ],
+ "discontinued": [],
+ "labs": {
+  "cols": [
+   {
+    "dt": "09/30/2026",
+    "comment": "Preadmission testing",
+    "vals": {
+     "WBC": [
+      "6.1",
+      ""
+     ],
+     "Hgb": [
+      "15.0",
+      ""
+     ],
+     "Hct": [
+      "44",
+      ""
+     ],
+     "Plt": [
+      "238",
+      ""
+     ],
+     "Na": [
+      "140",
+      ""
+     ],
+     "K": [
+      "4.1",
+      ""
+     ],
+     "Cl": [
+      "103",
+      ""
+     ],
+     "CO2": [
+      "26",
+      ""
+     ],
+     "BUN": [
+      "14",
+      ""
+     ],
+     "Cr": [
+      "0.92",
+      ""
+     ],
+     "Glu": [
+      "92",
+      ""
+     ]
+    }
+   }
+  ],
+  "rows": [
+   {
+    "group": "Chemistry",
+    "key": "Na",
+    "name": "Sodium",
+    "unit": "mmol/L",
+    "ref": "135-145"
+   },
+   {
+    "group": "Chemistry",
+    "key": "K",
+    "name": "Potassium",
+    "unit": "mmol/L",
+    "ref": "3.5-5.1"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cl",
+    "name": "Chloride",
+    "unit": "mmol/L",
+    "ref": "98-107"
+   },
+   {
+    "group": "Chemistry",
+    "key": "CO2",
+    "name": "CO2",
+    "unit": "mmol/L",
+    "ref": "22-29"
+   },
+   {
+    "group": "Chemistry",
+    "key": "BUN",
+    "name": "BUN",
+    "unit": "mg/dL",
+    "ref": "7-20"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Cr",
+    "name": "Creatinine",
+    "unit": "mg/dL",
+    "ref": "0.70-1.30"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Glu",
+    "name": "Glucose",
+    "unit": "mg/dL",
+    "ref": "70-99"
+   },
+   {
+    "group": "Chemistry",
+    "key": "Ca",
+    "name": "Calcium",
+    "unit": "mg/dL",
+    "ref": "8.6-10.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "AST",
+    "name": "AST",
+    "unit": "U/L",
+    "ref": "10-40"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALT",
+    "name": "ALT",
+    "unit": "U/L",
+    "ref": "7-56"
+   },
+   {
+    "group": "Hepatic",
+    "key": "ALKP",
+    "name": "Alk phos",
+    "unit": "U/L",
+    "ref": "44-147"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TBili",
+    "name": "Bilirubin, total",
+    "unit": "mg/dL",
+    "ref": "0.1-1.2"
+   },
+   {
+    "group": "Hepatic",
+    "key": "TProt",
+    "name": "Protein, total",
+    "unit": "g/dL",
+    "ref": "6.0-8.3"
+   },
+   {
+    "group": "Hepatic",
+    "key": "Alb",
+    "name": "Albumin",
+    "unit": "g/dL",
+    "ref": "3.5-5.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "WBC",
+    "name": "WBC",
+    "unit": "K/uL",
+    "ref": "4.5-11.0"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hgb",
+    "name": "Hemoglobin",
+    "unit": "g/dL",
+    "ref": "13.5-17.5"
+   },
+   {
+    "group": "Hematology",
+    "key": "Hct",
+    "name": "Hematocrit",
+    "unit": "%",
+    "ref": "41-53"
+   },
+   {
+    "group": "Hematology",
+    "key": "Plt",
+    "name": "Platelets",
+    "unit": "K/uL",
+    "ref": "150-400"
+   },
+   {
+    "group": "Hematology",
+    "key": "MCV",
+    "name": "MCV",
+    "unit": "fL",
+    "ref": "80-100"
+   },
+   {
+    "group": "Endocrine",
+    "key": "A1c",
+    "name": "Hemoglobin A1c",
+    "unit": "%",
+    "ref": "4.0-5.6"
+   },
+   {
+    "group": "Endocrine",
+    "key": "TSH",
+    "name": "TSH",
+    "unit": "mIU/L",
+    "ref": "0.40-4.00"
+   },
+   {
+    "group": "Endocrine",
+    "key": "FT4",
+    "name": "Free T4",
+    "unit": "ng/dL",
+    "ref": "0.80-1.80"
+   },
+   {
+    "group": "Lipids",
+    "key": "Chol",
+    "name": "Cholesterol",
+    "unit": "mg/dL",
+    "ref": "<199"
+   },
+   {
+    "group": "Lipids",
+    "key": "LDL",
+    "name": "LDL",
+    "unit": "mg/dL",
+    "ref": "<99"
+   },
+   {
+    "group": "Lipids",
+    "key": "HDL",
+    "name": "HDL",
+    "unit": "mg/dL",
+    "ref": "40-200"
+   },
+   {
+    "group": "Lipids",
+    "key": "TG",
+    "name": "Triglycerides",
+    "unit": "mg/dL",
+    "ref": "<149"
+   }
+  ],
+  "other": []
+ },
+ "imaging": [
+  [
+   "08/22/2026",
+   "US abdominal wall",
+   "2.5 cm umbilical hernia containing preperitoneal fat. Reducible.",
+   "K. Lowe, MD"
+  ]
+ ],
+ "cardiology": [],
+ "encounters": [
+  [
+   "08/18/2026",
+   "Clinic",
+   "C-N General Surgery",
+   "Umbilical bulge with lifting",
+   "Surgery scheduled"
+  ]
+ ],
+ "notes": [
+  [
+   "08/18/2026 1030",
+   "Consult",
+   "General Surgery",
+   "J. Rutherford, MD",
+   "42M, umbilical bulge 6 months, aching with lifting at band camp. Reducible 2.5 cm defect. Healthy, active, no meds but cetirizine. Plan lap repair with mesh, outpatient."
+  ],
+  [
+   "09/30/2026 0900",
+   "Preadmission Note",
+   "Anesthesia PAT",
+   "R. Harrell, RN",
+   "ASA 1 candidate. Exercises (runs 3 miles 3x/week). Snores, wife denies apneas. Full beard. Airway: Mallampati II, TMD > 6 cm, full neck ROM, full dentition. Instructions given: NPO solids after midnight, clears until 2 h prior."
+  ]
+ ],
+ "vitals": [
+  [
+   "09/30/2026 0855",
+   "122/76",
+   68,
+   14,
+   99,
+   36.6,
+   70.0,
+   "0/10",
+   "PAT"
+  ],
+  [
+   "10/27/2026 0705",
+   "120/78",
+   72,
+   14,
+   99,
+   36.6,
+   70.0,
+   "0/10",
+   "Preop holding"
+  ]
+ ],
+ "orders": [
+  [
+   "Cefazolin 2 g IV on call",
+   "10/27/2026 0650",
+   "Active"
+  ],
+  [
+   "NPO after midnight",
+   "10/13/2026",
+   "Active"
+  ]
+ ],
+ "blood_bank": {
+  "abo_rh": "Not on file",
+  "antibody_screen": "Not drawn",
+  "units": "None",
+  "notes": "",
+  "specimen_expires": ""
+ },
+ "consents": [
+  [
+   "Surgical consent: laparoscopic umbilical hernia repair with mesh",
+   "Signed by patient 08/18/2026"
+  ],
+  [
+   "Anesthesia consent",
+   "Not yet signed"
+  ]
+ ],
+ "directives": "None on file",
+ "anesthesia_history": [
+  [
+   "2002",
+   "Wisdom teeth extraction",
+   "IV sedation",
+   "None",
+   "Oral surgeon office"
+  ]
+ ],
+ "preop": {
+  "arrived": "10/27/2026 0630",
+  "npo_solids": "10/26/2026 2000",
+  "npo_clears": "10/27/2026 0500 water",
+  "checklist": [
+   [
+    "ID band x2",
+    "Done"
+   ],
+   [
+    "Consent signed",
+    "Surgical yes; anesthesia pending"
+   ],
+   [
+    "H&P within 30 days",
+    "Yes (09/30)"
+   ],
+   [
+    "Site marked",
+    "N/A (midline)"
+   ],
+   [
+    "Allergy band",
+    "N/A - NKDA"
+   ]
+  ],
+  "nursing_note": "A&O x4, calm, ambulatory. Full beard. 18 g L hand. Wife at bedside.",
+  "iv": "18g L hand 0715",
+  "glucose": ""
+ },
+ "label": "CN Rubric · D. Hensley",
+ "bmi": "23.7",
+ "cn": {
+  "kind": "rubric",
+  "scenarioId": "standard_iv_healthy_001",
+  "title": "Carson-Newman rubric: Standard IV induction"
+ }
+}

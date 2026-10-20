@@ -3,7 +3,15 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { buildRig } from '../sim/index.js';
+import { buildRig as buildEngineRig } from '../sim/index.js';
+
+// The frozen C# fixtures predate the physiologic volatile kinetics; replay
+// them with the original vaporizer so they still match bit for bit.
+function buildRig(seed) {
+  const rig = buildEngineRig(seed);
+  rig.v.agentKinetics = 'legacy';
+  return rig;
+}
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SCEN_DIR = join(HERE, '..', 'sim', 'scenarios');
