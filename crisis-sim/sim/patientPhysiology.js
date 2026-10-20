@@ -38,6 +38,7 @@ export class PatientPhysiology {
     this.bisIndex = 97; this.macMultiple = 0; this.endTidalAgent = 0; this.currentAgent = 'None';
 
     this.propofolCe = 0; this.fentanylCe = 0; this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
+    this.etomidateCe = 0; this.ketamineCe = 0; this.pancuroniumCe = 0; this.vecuroniumCe = 0;
     this.sugammadexRocRelief = 0; this.neostigmineRocRelief = 0;
     this.neostigmineCe = 0;
     this.epinephrineCe = 0; this.phenylephrineCe = 0; this.ephedrineCe = 0;
@@ -102,6 +103,7 @@ export class PatientPhysiology {
     this._hrModifier = 0; this._bpModifier = 1; this._rrModifier = 1;
 
     this.propofolCe = 0; this.fentanylCe = 0; this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
+    this.etomidateCe = 0; this.ketamineCe = 0; this.pancuroniumCe = 0; this.vecuroniumCe = 0;
     this.sugammadexRocRelief = 0; this.neostigmineRocRelief = 0;
     this.neostigmineCe = 0;
     this.effectiveNmbBlockade = 0;
@@ -148,9 +150,25 @@ export class PatientPhysiology {
     return Clamp01(this.trainOfFourRatio / f(0.9));
   }
 
+  /* Nondepolarizing block in rocuronium equivalent effect site units.
+     Exactly rocuroniumCe when pancuronium and vecuronium were never given. */
+  get nondepolarizingCe() {
+    if (!(this.pancuroniumCe > 0) && !(this.vecuroniumCe > 0)) return this.rocuroniumCe;
+    return f(this.rocuroniumCe + Max(0, this.vecuroniumCe) + Max(0, this.pancuroniumCe));
+  }
+
   get effectiveRocuroniumBlockade() {
-    const raw = rocuroniumBlockFromCe(this.rocuroniumCe);
-    const afterSugammadex = f(raw * f(1 - this.sugammadexRocRelief));
+    if (!(this.pancuroniumCe > 0) && !(this.vecuroniumCe > 0)) {
+      const raw = rocuroniumBlockFromCe(this.rocuroniumCe);
+      const afterSugammadex = f(raw * f(1 - this.sugammadexRocRelief));
+      return Clamp01(f(afterSugammadex - this.neostigmineRocRelief));
+    }
+    // Sugammadex binds rocuronium and vecuronium well and pancuronium poorly,
+    // so its relief only covers their share of the block.
+    const total = this.nondepolarizingCe;
+    const raw = rocuroniumBlockFromCe(total);
+    const encapsulable = total > 0 ? Clamp01(f((this.rocuroniumCe + Max(0, this.vecuroniumCe)) / total)) : 1;
+    const afterSugammadex = f(raw * f(1 - this.sugammadexRocRelief * encapsulable));
     return Clamp01(f(afterSugammadex - this.neostigmineRocRelief));
   }
 
@@ -162,7 +180,12 @@ export class PatientPhysiology {
     const roc = this.effectiveRocuroniumBlockade;
     const sux = this.effectiveSuccinylcholineBlockade;
     if (Max(roc, sux) <= f(0.01)) return 'none';
-    return roc >= sux ? 'rocuronium' : 'succinylcholine';
+    if (roc < sux) return 'succinylcholine';
+    const panc = Max(0, this.pancuroniumCe || 0);
+    const vec = Max(0, this.vecuroniumCe || 0);
+    if (panc > this.rocuroniumCe && panc >= vec) return 'pancuronium';
+    if (vec > this.rocuroniumCe && vec > panc) return 'vecuronium';
+    return 'rocuronium';
   }
 
   setForcedApnea(active) { this.#forcedApnea = active === true; }
@@ -312,6 +335,24 @@ export class PatientPhysiology {
     if (this.neostigmineCe > 0) {
       this._hrModifier = f(this._hrModifier - Clamp01(this.neostigmineCe) * 20);
     }
+    // Agents added after the port; each block runs only once that drug is given.
+    if (this.etomidateCe > 0) {
+      // Hemodynamically stable: a small fall in pressure, brief apnea.
+      const e = Clamp01(this.etomidateCe / 4);
+      this._bpModifier = f(this._bpModifier - e * f(0.06));
+      this._rrModifier = f(this._rrModifier - e * f(0.55));
+    }
+    if (this.ketamineCe > 0) {
+      // Sympathomimetic: heart rate and pressure rise; breathing is preserved.
+      const e = Clamp01(this.ketamineCe / 3);
+      this._hrModifier = f(this._hrModifier + e * 18);
+      this._bpModifier = f(this._bpModifier + e * f(0.18));
+      this._rrModifier = f(this._rrModifier - e * f(0.15));
+    }
+    if (this.pancuroniumCe > 0) {
+      // Vagolytic: a modest rise in heart rate.
+      this._hrModifier = f(this._hrModifier + Clamp01(this.pancuroniumCe / f(0.15)) * 12);
+    }
     this._bpModifier = Max(this._bpModifier, 0.3);
     this._rrModifier = Max(this._rrModifier, 0.1);
   }
@@ -445,7 +486,11 @@ export class PatientPhysiology {
   }
 
   updateAnesthesiaDepth(dt) {
-    const bisHypnoticOpioid = PatientPhysiology.eleveldBISWithOpioid(this.propofolCe, this.fentanylCe, this.ageYears);
+    // Etomidate and ketamine add to propofol as propofol equivalents.
+    const hypnoticCe = (this.etomidateCe > 0 || this.ketamineCe > 0)
+      ? f(this.propofolCe + Max(0, this.etomidateCe) + Max(0, this.ketamineCe))
+      : this.propofolCe;
+    const bisHypnoticOpioid = PatientPhysiology.eleveldBISWithOpioid(hypnoticCe, this.fentanylCe, this.ageYears);
     let extra = 0;
     extra = f(extra + Clamp01(this.midazolamCe / f(0.15)) * 15);
     extra = f(extra + this.macMultiple * 25);

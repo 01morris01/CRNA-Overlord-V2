@@ -1436,3 +1436,14 @@
 .live-vital-tof { position: relative; }
 .live-vital-tof button { grid-column: 1; justify-self: start; min-height: 26px !important; padding: .1rem .45rem; font-size: .6rem; margin-top: .2rem; }
 .live-nmb-panel .live-tof-assessment { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-bottom: .8rem; }
+
+/* Undo a dose, any drug any dose, IV fluids, who carries out student orders. */
+.live-undo-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.live-undo-list li { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .5rem; padding: .35rem .5rem; border: 1px solid var(--line-2); border-radius: 6px; font-size: .82rem; }
+.live-undo-list li small { color: var(--txt-2); font-variant-numeric: tabular-nums; }
+.live-undo-list .live-undo-empty { display: block; color: var(--txt-2); border-style: dashed; }
+.live-custom-dose-form { display: grid; grid-template-columns: minmax(9rem, 1.4fr) minmax(5rem, 1fr) minmax(5rem, .8fr) auto; gap: .5rem; align-items: end; }
+.live-fluid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem; align-items: end; }
+@media (max-width: 640px) { .live-custom-dose-form { grid-template-columns: 1fr 1fr; } }
+.live-student-orders { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin: .2rem 0 .6rem; }
+.live-student-orders > span { grid-column: 1 / -1; padding: .3rem .6rem; border-bottom: 1px solid var(--line-2); font-size: .7rem; letter-spacing: .08em; color: var(--txt-2); text-transform: uppercase; }

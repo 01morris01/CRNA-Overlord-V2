@@ -994,7 +994,7 @@ export function createSimOperator({
       said: new Set(), lastByRule: new Map(), lastText: null, lastTemplate: null, lastRuleId: null, lastSayMs: -Infinity,
     };
     history = {
-      drugsGiven: new Set(), epiduralGiven: false, wasIntubated: false, preoxygenated: false,
+      drugsGiven: new Set(), doseLedger: new Map(), epiduralGiven: false, wasIntubated: false, preoxygenated: false,
       failedAttempts: 0, lastLearnerActionT: 0, lastDrugT: null, learnerActions: [],
       injections: [], extremes: { minSpO2: null, minMap: null, maxHr: null, maxEtco2: null, maxTemp: null },
       outcomes: [],
@@ -1367,6 +1367,7 @@ export function createSimOperator({
         const drug = meta.drug;
         const doseMg = meta.doseMg;
         history.drugsGiven.add(drug);
+        history.doseLedger.set(meta.doseId ?? `untracked-${tSec}-${drug}`, drug);
         history.lastDrugT = tSec;
         if (handleTreatment({ drug, tSec })) return;
         // Only clear mismatches get called out. Empiric or supportive choices
@@ -1380,6 +1381,13 @@ export function createSimOperator({
           return;
         }
         speak({ concept: 'DRUG', drug, doseMg, treating: false });
+        return;
+      }
+      case 'drug_undone': {
+        // A misclick taken back: forget it unless an earlier dose of the same drug stands.
+        history.doseLedger.delete(meta.doseId);
+        const stillGiven = [...history.doseLedger.values()].includes(meta.drug);
+        if (!stillGiven) history.drugsGiven.delete(meta.drug);
         return;
       }
       case 'volatile_changed':

@@ -9,6 +9,11 @@ import {
   rocuroniumBlockFromCe, rocuroniumCeFromBlockade,
 } from './neuromuscularModel.js';
 
+export const ETOMIDATE_PROPOFOL_EQ = 1.45;
+export const KETAMINE_PROPOFOL_EQ = 0.16;
+export const PANCURONIUM_ROC_EQ = 4.3;
+export const VECURONIUM_ROC_EQ = 6;
+
 export class DrugSystem {
   constructor() {
     this.patient = null;
@@ -35,6 +40,11 @@ export class DrugSystem {
     this._neoC1 = 0; this._neoCe = 0;
     this._neostigmineRocRelief = 0; this._neostigmineReliefTarget = 0;
     this._neostigmineReliefRate = 0; this._neostigmineAdministered = false;
+    // Added after the port (not in the C# engine, so no parity fixture uses
+    // them): etomidate and ketamine in propofol equivalent effect site units,
+    // pancuronium and vecuronium in rocuronium equivalent units.
+    this._etoC1 = 0; this._etoCe = 0; this._ketC1 = 0; this._ketCe = 0;
+    this._pancC1 = 0; this._pancCe = 0; this._vecC1 = 0; this._vecCe = 0;
 
     this.drivenExternally = false;
     this.rng = null;
@@ -60,6 +70,13 @@ export class DrugSystem {
       case 'Albuterol': this._albC1 = f(this._albC1 + totalDoseMg); break;
       case 'Sugammadex': this.administerSugammadex(totalDoseMg); break;
       case 'Neostigmine': this.administerNeostigmine(totalDoseMg); break;
+      // Etomidate 0.3 mg/kg and ketamine 2 mg/kg reach about the hypnotic
+      // effect of propofol 2 mg/kg. Pancuronium (ED95 0.07 mg/kg) and
+      // vecuronium (0.05) are scaled to rocuronium (0.3) by potency.
+      case 'Etomidate': this._etoC1 = f(this._etoC1 + totalDoseMg * f(ETOMIDATE_PROPOFOL_EQ) / volumeL); break;
+      case 'Ketamine': this._ketC1 = f(this._ketC1 + totalDoseMg * f(KETAMINE_PROPOFOL_EQ) / volumeL); break;
+      case 'Pancuronium': this._pancC1 = f(this._pancC1 + totalDoseMg * f(PANCURONIUM_ROC_EQ) / (volumeL * f(6.7))); break;
+      case 'Vecuronium': this._vecC1 = f(this._vecC1 + totalDoseMg * f(VECURONIUM_ROC_EQ) / (volumeL * f(6.7))); break;
       default: break;
     }
   }
@@ -90,6 +107,7 @@ export class DrugSystem {
     this.updateSuccinylcholinePK(dt);
     this.updateReversalAgents(dt);
     this.updateTreatmentAgents(dt);
+    this.updateAddedAgents(dt);
 
     this.patient.propofolCe = this._ppfCe;
     this.patient.fentanylCe = this._fentanylCe;
@@ -126,6 +144,8 @@ export class DrugSystem {
     this._rocuroniumCe = rocuroniumCe;
     this._suxC1 = 0;
     this._suxCe = 0;
+    this._pancC1 = 0; this._pancCe = 0; this._vecC1 = 0; this._vecCe = 0;
+    this.patient.pancuroniumCe = 0; this.patient.vecuroniumCe = 0;
     this.activeInfusions = this.activeInfusions.filter(
       ({ drugName }) => drugName !== 'Rocuronium',
     );
@@ -164,7 +184,9 @@ export class DrugSystem {
     let ceiling = 0;
     if (this.patient.trainOfFourCount >= 2) ceiling = f(0.45);
     else if (this.patient.trainOfFourCount === 1) ceiling = f(0.15);
-    const rawRocBlock = rocuroniumBlockFromCe(this.patient.rocuroniumCe);
+    const rawRocBlock = this.patient.nondepolarizingCe !== undefined
+      ? rocuroniumBlockFromCe(this.patient.nondepolarizingCe)
+      : rocuroniumBlockFromCe(this.patient.rocuroniumCe);
     const scaledCeiling = f(ceiling * doseFraction);
     const target = Min(scaledCeiling, rawRocBlock);
     this._neostigmineReliefTarget = Max(this._neostigmineReliefTarget, target);
@@ -336,6 +358,21 @@ export class DrugSystem {
     const k10 = f(f(0.044) / 60), ke0 = f(f(0.077) / 60);
     this._midazolamC1 = Max(0, this._midazolamC1 - k10 * this._midazolamC1 * dt);
     this._midazolamCe = Max(0, this._midazolamCe + ke0 * (this._midazolamC1 - this._midazolamCe) * dt);
+  }
+
+  /* One compartment plus effect site, like midazolam. Rates per minute:
+     etomidate wakes in about 4 to 6 minutes, ketamine in 10 to 15 with a
+     one minute onset, pancuronium has a 3 to 4 minute onset and about twice
+     rocuronium's duration, vecuronium sits between. */
+  updateAddedAgents(dt) {
+    if (this._etoC1 > 0 || this._etoCe > 0) [this._etoC1, this._etoCe] = DrugSystem._eff(this._etoC1, this._etoCe, f(f(0.30) / 60), f(f(0.55) / 60), dt);
+    if (this._ketC1 > 0 || this._ketCe > 0) [this._ketC1, this._ketCe] = DrugSystem._eff(this._ketC1, this._ketCe, f(f(0.14) / 60), f(f(0.70) / 60), dt);
+    if (this._pancC1 > 0 || this._pancCe > 0) [this._pancC1, this._pancCe] = DrugSystem._eff(this._pancC1, this._pancCe, f(f(0.036) / 60), f(f(0.11) / 60), dt);
+    if (this._vecC1 > 0 || this._vecCe > 0) [this._vecC1, this._vecCe] = DrugSystem._eff(this._vecC1, this._vecCe, f(f(0.075) / 60), f(f(0.13) / 60), dt);
+    this.patient.etomidateCe = this._etoCe;
+    this.patient.ketamineCe = this._ketCe;
+    this.patient.pancuroniumCe = this._pancCe;
+    this.patient.vecuroniumCe = this._vecCe;
   }
 
   updateSuccinylcholinePK(dt) {

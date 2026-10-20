@@ -36,6 +36,7 @@ import {
   STUDENT_SUGGESTIONS,
   studentFacts,
 } from './boothStudent.js';
+import { describeOrders, parseStudentOrders } from './boothOrders.js';
 import {
   buildFacultyAnswer,
   formatClock,
@@ -45,6 +46,15 @@ import {
 } from './simScript.js';
 
 const SETTINGS_KEY = 'overlord.booth.settings.v2';
+
+/* Did the model's reply already say what Booth did? */
+function mentionsExecuted(reply, executed) {
+  const text = String(reply ?? '').toLowerCase();
+  return executed.every((entry) => {
+    const head = String(entry.label ?? '').toLowerCase().split(/[ ,]/)[0];
+    return head.length < 3 || text.includes(head);
+  });
+}
 const FEED_LIMIT = 60;
 const NOTE_LIMIT = 60;
 
@@ -107,6 +117,11 @@ export function renderOperatorPanel() {
         <section class="live-booth-block" aria-labelledby="live-room-heading">
           <h3 id="live-room-heading">Student and ${escapeHtml(OPERATOR_NAME)}</h3>
           <p class="live-help">What the student says and hears. ${escapeHtml(OPERATOR_NAME)}'s lines here are spoken out loud.</p>
+          <div class="live-run-mode live-student-orders" role="group" aria-label="Who carries out what the student orders">
+            <span>Student orders</span>
+            <button type="button" data-student-orders="booth" aria-pressed="true" title="Drugs, fluids, preox, airway, gas and vent orders the student says are done at once. You can UNDO a drug for 2 minutes.">${escapeHtml(OPERATOR_NAME.toUpperCase())} DOES THEM</button>
+            <button type="button" data-student-orders="instructor" aria-pressed="false" title="Each order shows up in the why log with a button; nothing happens until you press it.">I DO THEM</button>
+          </div>
           <ol id="live-operator-feed" class="live-operator-feed"><li class="live-empty">Nothing said yet.</li></ol>
         </section>
         <section class="live-booth-block" aria-labelledby="live-instructor-chat-heading">
@@ -156,9 +171,10 @@ function readSettings(storage) {
       chatter: CHATTER_LEVELS.some((level) => level.id === parsed.chatter) ? parsed.chatter : 1,
       voice: parsed.voice !== false,
       runMode: RUN_MODES.some((mode) => mode.id === parsed.runMode) ? parsed.runMode : 'booth',
+      studentOrders: parsed.studentOrders === 'instructor' ? 'instructor' : 'booth',
     };
   } catch {
-    return { enabled: true, meanness: 2, chaos: 1, chatter: 1, voice: true, runMode: 'booth' };
+    return { enabled: true, meanness: 2, chaos: 1, chatter: 1, voice: true, runMode: 'booth', studentOrders: 'booth' };
   }
 }
 
@@ -221,6 +237,7 @@ export function createSimOperatorController({
   now = () => Date.now(),
   getAnswerKey = () => null,
   getPlanGrade = () => null,
+  getStage = () => ({}),
   random = Math.random,
 } = {}) {
   const query = (id) => root?.getElementById?.(id) ?? null;
@@ -545,22 +562,153 @@ export function createSimOperatorController({
     return reply;
   }
 
+  /* What the student orders, done on the engine. */
+  function executeOrder(order) {
+    if (!runner) return { ok: false, reason: 'no simulation' };
+    const done = (label = order.label, extra = {}) => ({ ok: true, label, ...extra });
+    try {
+      switch (order.kind) {
+        case 'drug': {
+          const result = runner.giveBolus(order.drug, order.totalMg, `${order.label} · ${order.totalMg} mg total (student order)`);
+          return done(order.label, { doseId: result?.doseId ?? null });
+        }
+        case 'preoxygenate': runner.preoxygenate(); return done();
+        case 'mask_ppv': {
+          const s = runner.snapshot();
+          const result = runner.deliverMaskVentilation({ durationSeconds: 30, tidalVolumeMl: s.ventSetTV || 500, respiratoryRate: s.ventSetRR || 12, cricoidPressure: s.cricoidPressureActive === true });
+          return result?.ok === false ? { ok: false, label: order.label, reason: result.reason } : done();
+        }
+        case 'intubate': {
+          const s = runner.snapshot();
+          // Already in, or the attempt is underway: nothing new to start.
+          if (s.airwayDevice === 'intubated' || s.intubationInProgress) return { ok: true, skipped: true, label: order.label };
+          const result = runner.intubate();
+          return result?.ok === false ? { ok: false, label: order.label, reason: result.reason } : done(`Intubation attempt ${result?.attemptNumber ?? ''} started`.replace(/ +started/, ' started'));
+        }
+        case 'extubate': {
+          const result = runner.extubate();
+          return result?.ok === false ? { ok: false, label: order.label, reason: result.reason } : done();
+        }
+        case 'cricoid_on': runner.applyCricoidPressure(); return done();
+        case 'cricoid_off': runner.releaseCricoidPressure(); return done();
+        case 'tof': {
+          const record = runner.checkTrainOfFour();
+          return done(`Train of four ${record.count} of 4${record.count === 4 ? `, ratio ${record.ratio.toFixed(2)}` : ''}`);
+        }
+        case 'vent_on': runner.setVentMode(1); runner.logEvent?.('Ventilator', 'Volume control on (student order)'); return done();
+        case 'volatile': {
+          const result = runner.setVolatile({ agent: order.agent, dialPercent: order.dial });
+          return result?.ok === false ? { ok: false, label: order.label, reason: result.reason } : done();
+        }
+        case 'fluid_bolus': {
+          const result = runner.giveFluid({ type: order.type, volumeMl: order.volumeMl, overMin: order.overMin });
+          return result?.ok === false ? { ok: false, label: order.label, reason: result.reason } : done(result.detail ?? order.label);
+        }
+        case 'fluid_rate': {
+          const result = runner.setFluidRate({ type: order.type, mlPerHr: order.mlPerHr });
+          return result?.ok === false ? { ok: false, label: order.label, reason: result.reason } : done();
+        }
+        case 'fluid_stop': runner.stopFluid(); return done();
+        case 'start': {
+          const state = runner.getLifecycleState?.();
+          if (state === 'READY' || state === 'PAUSED') runner.start();
+          return done('Case clock running');
+        }
+        default: return { ok: false, label: order.label, reason: 'not something the console can do' };
+      }
+    } catch (error) {
+      return { ok: false, label: order.label, reason: error.message };
+    } finally {
+      runner.emit?.();
+    }
+  }
+
+  let pendingDose = null; // { drug, atMs }: Booth asked "how much?"
+
+  function askDoseLine(drug) {
+    const lines = settings.meanness >= 3
+      ? [`${drug}. How much? I don't do guesswork.`, `Dose of ${drug}? Numbers, please.`]
+      : settings.meanness === 2
+        ? [`${drug}. How much?`, `Sure, ${drug}. What dose?`]
+        : [`How much ${drug}?`, `${drug}, what dose?`];
+    return lines[Math.floor(random() * lines.length)];
+  }
+
+  /* Where the case is, in words Booth cannot misread. */
+  function whereWeAre(executedSomething) {
+    const lifecycle = runner?.getLifecycleState?.() ?? 'READY';
+    const stage = getStage?.() ?? {};
+    const inOr = stage.studentStep === 'or' || lifecycle !== 'READY' || executedSomething;
+    if (!inOr) return { inOr, text: `Preop${stage.studentStepLabel ? ` (${stage.studentStepLabel})` : ''}. The student is not in the operating room yet.` };
+    const clock = lifecycle === 'READY'
+      ? 'The sim clock has not started; it starts with the first drug or order you carry out.'
+      : `The sim clock is ${lifecycle === 'RUNNING' ? 'running' : lifecycle.toLowerCase()}.`;
+    return { inOr, text: `In the operating room with the patient, not preop. ${clock}` };
+  }
+
   /* The student talked to Booth from their own screen. Returns the reply for
      the student (spoken there) and writes the private note into the why log. */
   async function respondToStudent(rawText) {
     const text = String(rawText ?? '').trim().slice(0, 400);
     if (!text) return null;
+    // Orders first: what did they tell Booth to do, through speech errors.
+    const pending = pendingDose && now() - pendingDose.atMs < 120000 ? pendingDose.drug : null;
+    const parsed = parseStudentOrders(text, { weightKg: runner?.config?.weightKg ?? 70, pendingDrug: pending });
+    const executed = [];
+    const failed = [];
+    const awaiting = [];
+    if (parsed.orders.length) pendingDose = null;
+    for (const order of parsed.orders) {
+      if (settings.studentOrders === 'booth') {
+        const result = executeOrder(order);
+        if (result.skipped) continue;
+        (result.ok ? executed : failed).push(result);
+      } else {
+        awaiting.push(order);
+      }
+    }
+    if (parsed.needsDose && !parsed.orders.some((order) => order.kind === 'drug')) {
+      pendingDose = { drug: parsed.needsDose, atMs: now() };
+      const reply = askDoseLine(parsed.needsDose);
+      appendRoom('student', text, simTime());
+      appendRoom('booth', reply, simTime());
+      askHistory.push({ role: 'trainee', content: text }, { role: 'operator', content: reply });
+      showLatest(reply);
+      addNote({ text, note: `Heard ${parsed.needsDose} without a dose; asked how much.${executed.length ? ` Did: ${executed.map((entry) => entry.label).join(', ')}.` : ''}`, suggestions: [], issues: [], tSec: simTime(), orders: awaiting });
+      return { reply, note: '', suggestions: [], executed, parsed };
+    }
+    if (parsed.problems.length && !executed.length && !awaiting.length) {
+      const reply = parsed.problems[0];
+      appendRoom('student', text, simTime());
+      appendRoom('booth', reply, simTime());
+      askHistory.push({ role: 'trainee', content: text }, { role: 'operator', content: reply });
+      showLatest(reply);
+      addNote({ text, note: `Did not act: ${parsed.problems.join(' ')}`, suggestions: [], issues: [], tSec: simTime() });
+      return { reply, note: '', suggestions: [], executed, parsed };
+    }
     const classification = classifyStudentStatement(text);
     const snapshot = runner?.snapshot?.() ?? {};
     const answerKey = getAnswerKey();
     const facts = studentFacts({ snapshot, history: operator.getHistory(), answerKey });
     const analysis = analyzeStudentAction(classification, facts);
-    let reply = buildStudentReply(classification, analysis, { meanness: settings.meanness, random });
-    let note = buildOperatorNote(text, classification, analysis);
+    const where = whereWeAre(executed.length > 0);
+    const confirm = executed.length ? `${describeOrders(executed)} ` : '';
+    const failedLine = failed.length ? `Couldn't do ${failed.map((entry) => `${entry.label} (${entry.reason})`).join('; ')}. ` : '';
+    let reply = `${confirm}${failedLine}${buildStudentReply(classification, analysis, { meanness: settings.meanness, random })}`.trim();
+    let note = `${executed.length ? `Booth did: ${executed.map((entry) => entry.label).join(', ')}. ` : ''}${awaiting.length ? `Waiting for you: ${awaiting.map((order) => order.label).join(', ')}. ` : ''}${buildOperatorNote(text, classification, analysis)}`;
     let suggestions = analysis.suggestions;
     const context = {
       ...operator.caseContext(),
-      student: { statement: text, ...classification, analysis: { issues: analysis.issues.map(({ id, missed, consequence, severity }) => ({ id, missed, consequence, severity })) } },
+      where: where.text,
+      student: {
+        statement: text,
+        ...classification,
+        heardDrugs: parsed.drugsHeard ?? [],
+        executed: executed.map((entry) => entry.label),
+        couldNotDo: failed.map((entry) => `${entry.label}: ${entry.reason}`),
+        waitingForInstructor: awaiting.map((order) => order.label),
+        analysis: { issues: analysis.issues.map(({ id, missed, consequence, severity }) => ({ id, missed, consequence, severity })) },
+      },
       allowedSuggestions: Object.fromEntries(Object.entries(STUDENT_SUGGESTIONS).map(([id, entry]) => [id, entry.label])),
       mockOrAnswerKey: answerKey ? { summary: answerKey.summary, redFlags: (answerKey.redFlags ?? []).map(({ severity, finding }) => ({ severity, finding })) } : null,
     };
@@ -577,8 +725,8 @@ export function createSimOperatorController({
           if (parsed) {
             // Before the act, a reply that hints at the problem is replaced.
             const leaks = classification.tense !== 'done' && replyGivesAwayIssue(parsed.reply, analysis.issues);
-            if (!leaks) reply = parsed.reply;
-            if (parsed.operatorNote) note = parsed.operatorNote;
+            if (!leaks) reply = executed.length && !mentionsExecuted(parsed.reply, executed) ? `${confirm}${parsed.reply}` : parsed.reply;
+            if (parsed.operatorNote) note = `${executed.length ? `Booth did: ${executed.map((entry) => entry.label).join(', ')}. ` : ''}${parsed.operatorNote}`;
             // Engine analysis always contributes its actions; the model can add fitting ones.
             suggestions = [...new Set([...analysis.suggestions, ...parsed.suggestions])];
           }
@@ -589,8 +737,8 @@ export function createSimOperatorController({
     appendRoom('student', text, simTime());
     appendRoom('booth', reply, simTime());
     showLatest(reply);
-    addNote({ text, note, suggestions, issues: analysis.issues, tSec: simTime() });
-    return { reply, note, suggestions, classification, analysis };
+    addNote({ text, note, suggestions, issues: analysis.issues, tSec: simTime(), orders: awaiting });
+    return { reply, note, suggestions, classification, analysis, executed, parsed };
   }
 
   function applySuggestion(id) {
@@ -610,7 +758,7 @@ export function createSimOperatorController({
     return { ok: false, reason: 'unsupported' };
   }
 
-  function addNote({ text, note, suggestions, issues, tSec }) {
+  function addNote({ text, note, suggestions, issues, tSec, orders = [] }) {
     if (!query('live-operator-notes') || !root?.createElement) return;
     const worst = issues[0]?.severity ?? 'none';
     const item = noteItem({
@@ -620,6 +768,18 @@ export function createSimOperatorController({
     });
     const row = root.createElement('div');
     row.className = 'live-operator-note-actions';
+    for (const order of orders) {
+      const button = root.createElement('button');
+      button.type = 'button';
+      button.className = 'live-primary';
+      button.textContent = `DO IT: ${order.label}`;
+      button.addEventListener('click', () => {
+        const result = executeOrder(order);
+        button.disabled = true;
+        button.textContent = result.ok ? `${result.label} · DONE` : `FAILED: ${result.reason}`;
+      });
+      row.append(button);
+    }
     for (const id of suggestions) {
       const entry = STUDENT_SUGGESTIONS[id];
       if (!entry) continue;
@@ -743,6 +903,19 @@ export function createSimOperatorController({
     for (const button of root?.querySelectorAll?.('[data-run-mode]') ?? []) {
       button.addEventListener('click', () => setRunMode(button.dataset.runMode));
     }
+    const renderOrdersMode = () => {
+      for (const button of root?.querySelectorAll?.('[data-student-orders]') ?? []) {
+        button.setAttribute('aria-pressed', String(button.dataset.studentOrders === settings.studentOrders));
+      }
+    };
+    for (const button of root?.querySelectorAll?.('[data-student-orders]') ?? []) {
+      button.addEventListener('click', () => {
+        settings.studentOrders = button.dataset.studentOrders === 'instructor' ? 'instructor' : 'booth';
+        persist();
+        renderOrdersMode();
+      });
+    }
+    renderOrdersMode();
     query('live-event-plan')?.addEventListener('click', (event) => {
       const button = event.target?.closest?.('[data-trigger-event]');
       if (button && !button.disabled) triggerEvent(button.dataset.triggerEvent, { onset: button.dataset.onset ?? 'realistic' });
@@ -782,6 +955,8 @@ export function createSimOperatorController({
     ask,
     roast,
     respondToStudent,
+    executeOrder,
+    getStudentOrdersMode: () => settings.studentOrders,
     applySuggestion,
     triggerEvent,
     setCasePlan,

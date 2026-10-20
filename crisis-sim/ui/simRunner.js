@@ -7,7 +7,7 @@
    internals directly.
    ═══════════════════════════════════════════════════════════════════ */
 import {
-  AirwayDevice, buildPhysRig, normalize, RubricScoringSession, ScenarioManager, VentMode,
+  AirwayDevice, buildPhysRig, DrugSystem, normalize, RubricScoringSession, ScenarioManager, VentMode,
 } from '../sim/index.js';
 import {
   buildDebrief as buildScenarioDebrief,
@@ -22,6 +22,23 @@ const FIXED_TICKS_PER_SECOND = 50;
 const DANGEROUS_INPUT_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 // Display-only convergence tolerance; it never feeds back into physiology.
 export const INSTRUCTOR_NMB_TARGET_TOLERANCE = 0.02;
+
+// A drug pressed by mistake can be taken back for this long (sim seconds).
+export const DRUG_UNDO_WINDOW_SEC = 120;
+// Reversal agents change the block through a one way relief state, so they
+// cannot be subtracted back out.
+const NOT_UNDOABLE = new Set(['Sugammadex', 'Neostigmine']);
+const DRUG_STATE_KEY = /^_(ppf(A1|A2|A3|Ce)|[a-zA-Z]+(C1|C2|C3|Ce))$/;
+
+/* IV fluids. retention is the share of each mL that stays intravascular:
+   crystalloid about a quarter at normal volume and more when the patient is
+   dry, colloid and blood nearly all of it. */
+export const FLUID_TYPES = Object.freeze({
+  LR: Object.freeze({ label: "Lactated Ringer's", kind: 'crystalloid', retention: 0.25, dryRetention: 0.5 }),
+  NS: Object.freeze({ label: 'Normal saline', kind: 'crystalloid', retention: 0.25, dryRetention: 0.5 }),
+  Albumin5: Object.freeze({ label: 'Albumin 5%', kind: 'colloid', retention: 0.85, dryRetention: 0.9 }),
+  PRBC: Object.freeze({ label: 'Packed red blood cells', kind: 'blood', retention: 1, dryRetention: 1 }),
+});
 
 // Complications whose onset can run realistic (builds over minutes) or
 // instant (full severity at once, to show the concept).
@@ -499,6 +516,10 @@ export class SimRunner {
     this.simTime = 0; this._accum = 0;
     this.tofCheckHistory = [];
     this._instructorNmbTarget = null;
+    this._recentDoses = [];
+    this._doseSequence = 0;
+    this.fluids = { lines: [], totalMl: 0, byType: {}, used: false };
+    this._fluidSequence = 0;
     this.rubricSession = null;
     this.caseSession = null;
     this.activeSeed = seed;
@@ -994,6 +1015,8 @@ export class SimRunner {
 
   _stepOnce(step) {
     this.core.stepOnce(step);
+    if (this._recentDoses?.length) this._tickDoseShadows(step);
+    if (this.fluids?.used) this._tickFluids(step);
     this.processCaseFlowAfterStep();
     this.sampleRubricTraceAfterStep();
   }
@@ -1299,7 +1322,10 @@ export class SimRunner {
       shunt: p.shuntFraction, hrOffset: p.hrComplicationOffset, respDrive: p.respiratoryDriveFactor,
       heat: p.heatLoadC, vco2: p.vco2MlMin,
       propofolCe: p.propofolCe, fentanylCe: p.fentanylCe, midazolamCe: p.midazolamCe,
+      etomidateCe: p.etomidateCe, ketamineCe: p.ketamineCe, pancuroniumCe: p.pancuroniumCe, vecuroniumCe: p.vecuroniumCe,
       weightKg: p.weightKg,
+      fluids: this.fluidStatus(),
+      undoableDoses: this.undoableDoses(),
     };
   }
 
@@ -1335,9 +1361,134 @@ export class SimRunner {
   giveBolus(name, doseMg, label) {
     const state = this.getLifecycleState();
     this.d.administerBolus(name, doseMg);
-    this.logEvent('Drug', label || `${name} ${doseMg} mg`, { action: 'drug', drug: name, doseMg });
+    const doseId = this._trackDose(name, doseMg, label || `${name} ${doseMg} mg`);
+    this.logEvent('Drug', label || `${name} ${doseMg} mg`, { action: 'drug', drug: name, doseMg, doseId });
     if (state === 'READY') this.start();
-    return { state, started: state === 'READY', queued: state === 'PAUSED' };
+    return { state, started: state === 'READY', queued: state === 'PAUSED', doseId };
+  }
+
+  /* Undo: each bolus is also given to a private copy of the drug model that
+     holds only that dose and ages in step with the real one. The PK is
+     linear, so subtracting the copy removes exactly that dose and what is
+     left of it, now. */
+  _trackDose(name, doseMg, label) {
+    if (NOT_UNDOABLE.has(name) || !this.d?.patient) return null;
+    const shadow = new DrugSystem();
+    const p = this.d.patient;
+    shadow.patient = { weightKg: p.weightKg, heightCm: p.heightCm, ageYears: p.ageYears, sex: p.sex, trainOfFourCount: 4, rocuroniumCe: 0 };
+    shadow.propofolWithOpioid = this.d.propofolWithOpioid;
+    shadow.administerBolus(name, doseMg);
+    this._doseSequence += 1;
+    const id = `dose-${this._doseSequence}`;
+    this._recentDoses.push({ id, name, doseMg, label, tSec: this.simTime, shadow });
+    return id;
+  }
+
+  _tickDoseShadows(dt) {
+    const now = this.core.simTime;
+    this._recentDoses = this._recentDoses.filter((entry) => now - entry.tSec <= DRUG_UNDO_WINDOW_SEC);
+    for (const entry of this._recentDoses) entry.shadow.tick(dt);
+  }
+
+  /* Doses that can still be taken back, newest first. */
+  undoableDoses() {
+    const now = this.core?.simTime ?? this.simTime;
+    return this._recentDoses
+      .filter((entry) => now - entry.tSec <= DRUG_UNDO_WINDOW_SEC)
+      .map(({ id, name, doseMg, label, tSec }) => ({ id, name, doseMg, label, tSec, secondsLeft: Math.max(0, Math.round(DRUG_UNDO_WINDOW_SEC - (now - tSec))) }))
+      .reverse();
+  }
+
+  undoDrug(doseId = null) {
+    const now = this.core?.simTime ?? this.simTime;
+    const live = this._recentDoses.filter((entry) => now - entry.tSec <= DRUG_UNDO_WINDOW_SEC);
+    const entry = doseId ? live.find((candidate) => candidate.id === doseId) : live.at(-1);
+    if (!entry) return { ok: false, reason: `Nothing to undo. Doses can be taken back for ${DRUG_UNDO_WINDOW_SEC / 60} minutes; reversal agents cannot.` };
+    for (const key of Object.keys(entry.shadow)) {
+      if (!DRUG_STATE_KEY.test(key) || typeof entry.shadow[key] !== 'number' || typeof this.d[key] !== 'number') continue;
+      this.d[key] = Math.max(0, Math.fround(this.d[key] - entry.shadow[key]));
+    }
+    this._recentDoses = this._recentDoses.filter((candidate) => candidate !== entry);
+    this.logEvent('Drug undone', `${entry.label} taken back (pressed by mistake)`, { action: 'drug_undone', drug: entry.name, doseMg: entry.doseMg, doseId: entry.id });
+    this.emit();
+    return { ok: true, id: entry.id, name: entry.name, doseMg: entry.doseMg, label: entry.label };
+  }
+
+  /* IV fluids: a bolus (volume over minutes) or a running rate. */
+  giveFluid({ type = 'LR', volumeMl = 500, overMin = 10 } = {}) {
+    const fluid = FLUID_TYPES[type];
+    if (!fluid) return { ok: false, reason: `Unknown fluid: ${type}` };
+    if (!Number.isFinite(volumeMl) || volumeMl <= 0 || volumeMl > 5000) return { ok: false, reason: 'Volume must be 1 to 5000 mL' };
+    if (!Number.isFinite(overMin) || overMin <= 0 || overMin > 240) return { ok: false, reason: 'Run time must be 1 to 240 minutes' };
+    this._fluidSequence += 1;
+    const line = { id: `fluid-${this._fluidSequence}`, type, mode: 'bolus', mlPerSec: volumeMl / (overMin * 60), remainingMl: volumeMl, volumeMl, infusedMl: 0 };
+    this.fluids.lines.push(line);
+    this.fluids.used = true;
+    const detail = `${fluid.label} ${volumeMl} mL over ${overMin} min`;
+    this.logEvent('Fluids', detail, { action: type === 'PRBC' ? 'give_blood' : 'fluid_bolus', fluid: type, volumeMl, overMin, lineId: line.id });
+    this.emit();
+    return { ok: true, id: line.id, detail };
+  }
+
+  setFluidRate({ type = 'LR', mlPerHr = 100 } = {}) {
+    const fluid = FLUID_TYPES[type];
+    if (!fluid) return { ok: false, reason: `Unknown fluid: ${type}` };
+    if (!Number.isFinite(mlPerHr) || mlPerHr < 0 || mlPerHr > 2000) return { ok: false, reason: 'Rate must be 0 to 2000 mL/h' };
+    this.fluids.lines = this.fluids.lines.filter((line) => !(line.mode === 'rate' && line.type === type));
+    if (mlPerHr === 0) {
+      this.logEvent('Fluids', `${fluid.label} stopped`, { action: 'fluid_stopped', fluid: type });
+      this.emit();
+      return { ok: true, stopped: true };
+    }
+    this._fluidSequence += 1;
+    const line = { id: `fluid-${this._fluidSequence}`, type, mode: 'rate', mlPerSec: mlPerHr / 3600, remainingMl: Infinity, mlPerHr, infusedMl: 0 };
+    this.fluids.lines.push(line);
+    this.fluids.used = true;
+    this.logEvent('Fluids', `${fluid.label} at ${mlPerHr} mL/h`, { action: 'fluid_rate', fluid: type, mlPerHr, lineId: line.id });
+    this.emit();
+    return { ok: true, id: line.id };
+  }
+
+  stopFluid(lineId = null) {
+    const before = this.fluids.lines.length;
+    this.fluids.lines = lineId ? this.fluids.lines.filter((line) => line.id !== lineId) : [];
+    if (this.fluids.lines.length === before) return { ok: false, reason: 'No such fluid running' };
+    this.logEvent('Fluids', lineId ? 'Fluid line stopped' : 'All fluids stopped', { action: 'fluid_stopped', lineId });
+    this.emit();
+    return { ok: true };
+  }
+
+  _tickFluids(dt) {
+    const p = this.p;
+    const ebvMl = Math.max(500, 70 * p.weightKg);
+    for (const line of this.fluids.lines) {
+      const ml = Math.min(line.remainingMl, line.mlPerSec * dt);
+      if (!(ml > 0)) continue;
+      line.remainingMl -= ml;
+      line.infusedMl += ml;
+      this.fluids.totalMl += ml;
+      this.fluids.byType[line.type] = (this.fluids.byType[line.type] ?? 0) + ml;
+      const fluid = FLUID_TYPES[line.type];
+      const retention = p.bloodVolumeFraction < 0.95 ? fluid.dryRetention : fluid.retention;
+      p.bloodVolumeFraction = Math.min(1.15, Math.fround(p.bloodVolumeFraction + ml * retention / ebvMl));
+    }
+    this.fluids.lines = this.fluids.lines.filter((line) => line.remainingMl > 0.01);
+    // Above normal volume, the extra redistributes and is excreted over about 40 minutes.
+    if (p.bloodVolumeFraction > 1) p.bloodVolumeFraction = Math.fround(p.bloodVolumeFraction - (p.bloodVolumeFraction - 1) * dt / 2400);
+  }
+
+  fluidStatus() {
+    return {
+      totalMl: Math.round(this.fluids?.totalMl ?? 0),
+      byType: Object.fromEntries(Object.entries(this.fluids?.byType ?? {}).map(([type, ml]) => [type, Math.round(ml)])),
+      lines: (this.fluids?.lines ?? []).map((line) => ({
+        id: line.id, type: line.type, label: FLUID_TYPES[line.type]?.label ?? line.type, mode: line.mode,
+        mlPerHr: line.mode === 'rate' ? line.mlPerHr : Math.round(line.mlPerSec * 3600),
+        remainingMl: Number.isFinite(line.remainingMl) ? Math.round(line.remainingMl) : null,
+        infusedMl: Math.round(line.infusedMl),
+      })),
+      bloodVolumeFraction: this.p ? Math.round(this.p.bloodVolumeFraction * 1000) / 1000 : null,
+    };
   }
 
   finishLidocaineAction(invoke, {
@@ -1507,6 +1658,14 @@ export class SimRunner {
   }
 
   setMachine(patch) {
+    // Flows without an FiO2 (Booth, scenario buttons): the flowmeters decide it.
+    if (!('setFiO2' in patch) && ['o2FlowLPerMin', 'airFlowLPerMin', 'n2oFlowLPerMin'].some((key) => key in patch)) {
+      const o2 = patch.o2FlowLPerMin ?? this.v.o2FlowLPerMin;
+      const air = patch.airFlowLPerMin ?? this.v.airFlowLPerMin;
+      const n2o = patch.n2oFlowLPerMin ?? this.v.n2oFlowLPerMin;
+      const total = o2 + air + n2o;
+      if (total > 0) patch = { ...patch, setFiO2: Math.min(1, Math.max(0.21, (o2 + 0.21 * air) / total)) };
+    }
     Object.assign(this.v, patch);
     if ('mode' in patch) this.v.setMode(patch.mode);
     this.recordCanonicalAction('machine_settings_changed', { patch: { ...patch } });

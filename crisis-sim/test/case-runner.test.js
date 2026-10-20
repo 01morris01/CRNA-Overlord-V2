@@ -432,7 +432,7 @@ describe('canonical case action and effect bridge', () => {
     expect(liveActions(runner)).toEqual([
       expect.objectContaining({
         action: 'drug',
-        meta: { drug: 'Propofol', doseMg: 140 },
+        meta: { drug: 'Propofol', doseMg: 140, doseId: 'dose-1' },
       }),
     ]);
     expect(forcedApnea).toHaveBeenCalledTimes(1);

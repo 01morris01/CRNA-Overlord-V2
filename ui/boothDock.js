@@ -12,6 +12,9 @@
    API directly with the chart context, or answers offline. */
 
 import { OPERATOR_NAME } from './simOperator.js';
+import { createUtteranceAssembler, RELEASE_GRACE_MS } from './speechAssembler.js';
+
+export { createUtteranceAssembler, SILENCE_MS, RELEASE_GRACE_MS } from './speechAssembler.js';
 
 const CONSOLE_FRESH_MS = 6000;
 const REPLY_TIMEOUT_MS = 20000;
@@ -229,37 +232,63 @@ export function createBoothDock({
 
   function Recognition() { return speechHost?.SpeechRecognition ?? speechHost?.webkitSpeechRecognition ?? null; }
 
-  function startRecognition(mode) {
-    const SR = Recognition();
-    if (!SR) { setStatus('Voice input not supported in this browser. Type instead.'); return false; }
-    stopRecognition();
-    recognition = new SR();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.continuous = mode === 'handsfree';
-    listeningMode = mode;
-    recognition.onresult = (event) => {
-      const result = event.results?.[event.results.length - 1];
-      const said = result?.[0]?.transcript ?? '';
-      if (mode === 'ptt') {
+  // Push to talk: everything said while the button is held (or, after a
+  // quick tap, until a pause) is one message. Hands free: everything after
+  // "Booth" until a pause is one message.
+  const assembler = createUtteranceAssembler({
+    onHearing: (heard) => { if (heard) setStatus(`Hearing: ${heard}`); },
+    onUtterance: (said) => {
+      if (listeningMode === 'ptt' || pttTapped) {
+        pttTapped = false;
+        stopPtt();
         send(said);
         return;
       }
       const command = extractBoothCommand(said);
-      if (command === null) return;
+      if (command === null) { setStatus('Hands free on. Start with "Booth".'); return; }
       if (command) send(command);
       else speakReply('Yeah? What.');
+    },
+  });
+  let pttPressedAt = 0;
+  let pttTapped = false;
+
+  function stopPtt() {
+    mic?.setAttribute('aria-pressed', 'false');
+    if (listeningMode === 'ptt') {
+      listeningMode = null;
+      try { recognition?.stop?.(); } catch { /* ignore */ }
+    }
+  }
+
+  function startRecognition(mode) {
+    const SR = Recognition();
+    if (!SR) { setStatus('Voice input not supported in this browser. Type instead.'); return false; }
+    stopRecognition();
+    assembler.clear();
+    recognition = new SR();
+    recognition.lang = 'en-US';
+    recognition.interimResults = true;
+    recognition.continuous = true;
+    listeningMode = mode;
+    recognition.onresult = (event) => {
+      // Holding the button: wait for the release. Tapped or hands free: wait for a pause.
+      const holding = mode === 'ptt' && !pttTapped;
+      assembler.push(event, { autoFlush: !holding });
     };
-    recognition.onerror = () => setStatus('Did not catch that.');
+    recognition.onerror = (event) => { if (event?.error !== 'no-speech' && event?.error !== 'aborted') setStatus('Did not catch that.'); };
     recognition.onend = () => {
       if (listeningMode === 'handsfree' && handsfree?.checked && !voice.speaking) {
         try { recognition.start(); } catch { /* already started */ }
         return;
       }
-      if (listeningMode === 'ptt') { mic?.setAttribute('aria-pressed', 'false'); listeningMode = null; }
+      if (listeningMode === 'ptt' && pttTapped) {
+        // Chrome stopped on its own while the tapped mic was open: keep listening.
+        try { recognition.start(); } catch { /* running */ }
+      }
     };
     try { recognition.start(); } catch { /* ignore */ }
-    if (mode === 'ptt') { mic?.setAttribute('aria-pressed', 'true'); setStatus('Listening...'); }
+    if (mode === 'ptt') { mic?.setAttribute('aria-pressed', 'true'); setStatus('Listening... let go when you are done.'); }
     else setStatus('Hands free on. Start with "Booth".');
     return true;
   }
@@ -278,8 +307,29 @@ export function createBoothDock({
   }
 
   const onSubmit = (event) => { event.preventDefault(); const value = input?.value ?? ''; if (input) input.value = ''; send(value); };
-  const onMicDown = () => { if (!handsfree?.checked) startRecognition('ptt'); };
-  const onMicUp = () => { if (listeningMode === 'ptt') { try { recognition?.stop?.(); } catch { /* ignore */ } } };
+  const onMicDown = () => {
+    if (handsfree?.checked) return;
+    // A second tap while the tapped mic is open sends now.
+    if (pttTapped && listeningMode === 'ptt') { assembler.flush(); return; }
+    pttPressedAt = now();
+    startRecognition('ptt');
+  };
+  const onMicUp = () => {
+    if (listeningMode !== 'ptt' || pttTapped) return;
+    if (now() - pttPressedAt < 350 && !assembler.text) {
+      // A quick tap: keep listening until they pause.
+      pttTapped = true;
+      setStatus('Listening... I will answer when you pause.');
+      setTimeout(() => { if (pttTapped && !assembler.text) { pttTapped = false; stopPtt(); setStatus('Did not hear anything.'); } }, 15000);
+      return;
+    }
+    // Held and released: collect the last words, then send (or stop if nothing was heard).
+    setTimeout(() => {
+      if (listeningMode !== 'ptt' || pttTapped) return;
+      if (assembler.text) assembler.flush();
+      else { stopPtt(); setStatus('Did not hear anything.'); }
+    }, RELEASE_GRACE_MS);
+  };
   const onHandsfree = () => { if (handsfree.checked) startRecognition('handsfree'); else { stopRecognition(); setStatus(''); } };
   const onVoice = () => voice.setEnabled(voiceToggle.checked);
   form?.addEventListener?.('submit', onSubmit);
