@@ -3,6 +3,7 @@ import { createLiveSimTransport } from './liveSimTransport.js';
 import { createWaveformRenderer, PAW_SCALE } from './liveWaveformRenderer.js';
 import { createBoothDock, renderBoothDock } from './boothDock.js';
 import { createStudentChannel } from './studentChannel.js';
+import { bindLinkPanel, renderGuestLinkPanel } from './remoteLinkView.js';
 
 const FLOWMETER_MAX_L_MIN = 10;
 
@@ -388,6 +389,25 @@ setInterval(() => {
 }, 1000);
 
 requestAnimationFrame(drawWaveforms);
+
+// The monitor on a student computer: same room code as the workstation. The
+// workstation tab usually already holds the link; this shows its state.
+(() => {
+  const panel = document.getElementById('display-link');
+  const toggle = document.getElementById('display-link-toggle');
+  if (!panel || !toggle || typeof globalThis.BroadcastChannel !== 'function') return;
+  panel.innerHTML = renderGuestLinkPanel();
+  const manager = bindLinkPanel(panel.firstElementChild, { role: 'guest' });
+  const label = { off: 'LINK', starting: 'LINK …', connecting: 'LINK …', waiting: 'LINK …', connected: 'LINKED', error: 'LINK !' };
+  manager.subscribe((status) => {
+    toggle.textContent = label[status.state] ?? 'LINK';
+    toggle.dataset.state = status.state;
+  });
+  toggle.addEventListener('click', () => {
+    panel.hidden = !panel.hidden;
+    toggle.setAttribute('aria-expanded', String(!panel.hidden));
+  });
+})();
 
 // Booth on the student's screen: talk to him from the monitor. Open by
 // default when the student came here from the workstation.

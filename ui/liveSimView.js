@@ -54,6 +54,7 @@ import {
   readStudentSession,
   writeStudentSession,
 } from './studentChannel.js';
+import { bindLinkPanel, renderHostLinkPanel } from './remoteLinkView.js';
 import { advanceSession, STEPS as STUDENT_STEPS } from './studentWorkflow.js';
 
 let initialized = false;
@@ -65,6 +66,7 @@ let carePlan = null;
 let mockOr = null;
 let studentChannel = null;
 let studentHeartbeat = null;
+let remoteLink = null;
 let studentMirror = null;
 const STUDENT_STEP_LABELS = Object.freeze({
   patient: 'Patient', chart: 'Chart review', interview: 'Interview', plan: 'Care plan', grade: "Booth's grade", or: 'Into the OR',
@@ -1199,6 +1201,7 @@ function renderStudentLinkPanel() {
       <div class="live-button-row"><button id="student-link-open" type="button">OPEN STUDENT SCREEN</button></div>
       <p class="live-help">Move the student to any step. Everything before it is filled in as if they did it correctly. Skipping past the care plan fills it from the answer key unless they already submitted their own.</p>
       <div class="student-link-advance" role="group" aria-label="Move the student to a step">${advance}</div>
+      <div id="remote-link-host">${renderHostLinkPanel()}</div>
     </section>`;
 }
 
@@ -1871,6 +1874,11 @@ function initMockOr() {
 function initStudentLink() {
   studentChannel = createStudentChannel({ role: 'console' });
   if (!studentChannel) return;
+  // A student on another computer joins with the room code shown here.
+  if (!remoteLink) {
+    const host = document.getElementById('remote-link-host');
+    if (host && typeof globalThis.BroadcastChannel === 'function') remoteLink = bindLinkPanel(host.firstElementChild, { role: 'host' });
+  }
   const beat = () => {
     const state = mockOr?.getState() ?? {};
     studentChannel.post({
