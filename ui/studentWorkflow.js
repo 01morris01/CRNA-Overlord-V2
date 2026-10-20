@@ -23,6 +23,7 @@ import {
   buildChartInterviewGrounding,
 } from './mockOrDay.js';
 import { createPatientInterview } from './patientInterview.js';
+import { bindLinkPanel, renderGuestLinkPanel } from './remoteLinkView.js';
 import {
   createStudentChannel,
   readStudentSession,
@@ -119,6 +120,12 @@ export function scriptedInterview(grounding) {
 export function startStudentWorkflow({ root = document, storage = globalThis.localStorage, fetchImpl = globalThis.fetch?.bind(globalThis) } = {}) {
   const $ = (id) => root.getElementById(id);
   const channel = createStudentChannel({ role: 'student' });
+  // On a computer other than the instructor's, the room code links the two.
+  const linkSlot = $('student-remote-link');
+  if (linkSlot && typeof globalThis.BroadcastChannel === 'function') {
+    linkSlot.innerHTML = renderGuestLinkPanel();
+    bindLinkPanel(linkSlot.firstElementChild, { role: 'guest' });
+  }
   const state = initialState(readStudentSession(storage));
   let index = null;
   let patient = null;

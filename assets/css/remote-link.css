@@ -1,0 +1,45 @@
+/* Link to another computer: room code on the console, join box on the
+   student workstation and the monitor. */
+.remote-link { display: grid; gap: .55rem; }
+.remote-link [hidden], .display-link[hidden] { display: none !important; }
+.remote-link h3 { margin: .4rem 0 0; font-size: .95rem; letter-spacing: .04em; }
+.remote-link .live-help { margin: 0; }
+.remote-link-row { display: flex; flex-wrap: wrap; gap: .4rem; }
+.remote-link-room { display: grid; gap: .35rem; }
+.remote-link-code-label { margin: 0; font-size: .72rem; letter-spacing: .12em; color: var(--txt-2, #9aa4b2); text-transform: uppercase; }
+.remote-link-code {
+  display: block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 2.1rem; font-weight: 700;
+  letter-spacing: .32em; color: var(--green, #00ffa3);
+}
+.remote-link-url { margin: 0; font-size: .8rem; overflow-wrap: anywhere; color: var(--txt-2, #9aa4b2); }
+.remote-link-url a { color: var(--blue, #5b9eff); }
+.remote-link-status {
+  display: block; padding: .4rem .6rem; border: 1px solid var(--line-2, #2a3442); border-radius: 6px;
+  font-size: .8rem; color: var(--txt-2, #9aa4b2);
+}
+.remote-link-status[data-state="connected"] { border-color: var(--green, #00ffa3); color: var(--green, #00ffa3); }
+.remote-link-status[data-state="waiting"],
+.remote-link-status[data-state="starting"],
+.remote-link-status[data-state="connecting"] { border-color: var(--amber, #ffb000); color: var(--amber, #ffb000); }
+.remote-link-status[data-state="error"] { border-color: var(--red, #ff4d5e); color: var(--red, #ff4d5e); }
+
+.remote-link-join { display: flex; flex-wrap: wrap; align-items: end; gap: .5rem; margin: 0; }
+.remote-link-join label { display: grid; gap: .2rem; font-size: .75rem; letter-spacing: .06em; color: var(--txt-2, #9aa4b2); }
+.remote-link-join input {
+  width: 9.5rem; padding: .45rem .6rem; border: 1px solid var(--line-2, #2a3442); border-radius: 6px;
+  background: rgba(255, 255, 255, .04); color: inherit; font: 700 1.1rem 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.remote-link-joined { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: .9rem; }
+.remote-link-joined strong { font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .18em; }
+.remote-link-quiet { background: transparent; }
+
+/* Student workstation: a strip under the header. */
+.student-remote-link { margin: 0 1.25rem .75rem; padding: .6rem .8rem; border: 1px solid var(--line-2, #2a3442); border-radius: 8px; }
+.student-remote-link .remote-link-guest { grid-template-columns: auto 1fr; align-items: center; }
+@media (max-width: 760px) { .student-remote-link .remote-link-guest { grid-template-columns: 1fr; } }
+
+/* Monitor display: a drop panel under the header. */
+.display-link { margin: 0 1rem .5rem; padding: .6rem .8rem; border: 1px solid var(--line-2, #2a3442); border-radius: 8px; background: #05080f; }
+#display-link-toggle[data-state="connected"] { color: var(--green, #00ffa3); border-color: var(--green, #00ffa3); }
+#display-link-toggle[data-state="error"] { color: var(--red, #ff4d5e); border-color: var(--red, #ff4d5e); }

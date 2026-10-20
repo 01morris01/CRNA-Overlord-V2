@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/live-sim-display.css">
   <link rel="stylesheet" href="assets/css/student.css">
+  <link rel="stylesheet" href="assets/css/remote-link.css">
 </head>
 <body class="live-display-body">
   <div class="display-education-fence" role="note">Educational simulation. Not for clinical use.</div>
@@ -23,11 +24,13 @@
       <span id="display-connection" data-state="waiting">WAITING FOR STATE</span>
       <output id="display-clock" aria-label="Simulation time">00:00</output>
       <a id="display-back-preop" class="display-back-preop" href="/student.html" hidden>PREOP</a>
+      <button id="display-link-toggle" type="button" aria-expanded="false" aria-controls="display-link">LINK</button>
       <button id="display-talk-booth" type="button" aria-expanded="false" aria-controls="display-booth">TALK TO BOOTH</button>
       <button id="display-audio" type="button">ENABLE ALARM AUDIO</button>
       <button id="display-fullscreen" type="button">FULL SCREEN</button>
     </div>
   </header>
+  <section id="display-link" class="display-link" aria-label="Link to the instructor computer" hidden></section>
 
   <main class="display-layout">
     <!-- Patient monitor: ECG and pleth with their parameter windows, then NIBP, TEMP, TOF. -->

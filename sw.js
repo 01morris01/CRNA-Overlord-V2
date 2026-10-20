@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v67-cn-rubric-patients-2026-10-20';
+const CACHE_VERSION = 'v68-remote-link-2026-10-20';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -18,7 +18,8 @@ const APP_SHELL = [
   '/ui/simOperator.js', '/ui/simOperatorView.js', '/ui/simScript.js', '/ui/interviewParticipants.js',
   '/ui/carePlanSheet.js', '/ui/mockOrDay.js', '/data/mock-or-day/index.json',
   '/student.html', '/assets/css/student.css', '/ui/studentWorkflow.js', '/ui/boothDock.js',
-  '/ui/boothStudent.js', '/ui/studentChannel.js',
+  '/ui/boothStudent.js', '/ui/studentChannel.js', '/ui/remoteLink.js', '/ui/remoteLinkView.js',
+  '/assets/css/remote-link.css',
   '/crisis-sim/ui/simRunner.js',
   '/crisis-sim/sim/index.js', '/crisis-sim/sim/float32.js', '/crisis-sim/sim/simRandom.js',
   '/crisis-sim/sim/patientPhysiology.js', '/crisis-sim/sim/drugSystem.js',
