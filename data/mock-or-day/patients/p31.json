@@ -2221,7 +2221,17 @@
   ],
   "nursing_note": "74M for EVAR. A&O. Took \"my usual morning pills with water at 5\" - metoprolol, aspirin, and metformin (states he always takes metformin at breakfast and nobody told him to stop it today). Held lisinopril/amlodipine. Pedal pulses diminished bilaterally, feet cool, monofilament decreased. Voided 0550, small amount dark yellow. 18g L FA, 20g R hand. CPAP at bedside. Wife present.",
   "iv": "18g L forearm, 20g R hand; NS 75 mL/h",
-  "glucose": "168 mg/dL (0600)"
+  "glucose": "168 mg/dL (0600)",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6 cm",
+   "mouth_opening": "3 fingerbreadths",
+   "neck": "Full range",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Neck circumference 46 cm, beard, OSA on CPAP; desaturated to 88% under propofol sedation in 2020",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Stooksbury",
  "bmi": "29.2"

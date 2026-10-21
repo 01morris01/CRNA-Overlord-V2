@@ -1546,7 +1546,17 @@
   ],
   "nursing_note": "Calm, slightly anxious. Last phenoxybenzamine 2200, metoprolol 0600. Lightheaded when stood for orthostatics, resolved sitting. Stuffy nose, using saline. No headache/palpitations since 10/20. 18g L FA, 18g R FA. Husband at bedside.",
   "iv": "18g L forearm, 18g R forearm; LR",
-  "glucose": "96 mg/dL (1035)"
+  "glucose": "96 mg/dL (1035)",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "4.5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "M. Shults",
  "bmi": "23.0"

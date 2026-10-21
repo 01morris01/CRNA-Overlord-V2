@@ -1560,7 +1560,17 @@
   ],
   "nursing_note": "A&O x4, pleasant. Reports took \"my thyroid, stomach pill and blood pressure pill\" at 0600 with sip water; did not take \"the water pill\" so she would not have to stop to urinate on drive. Denies pain now. C/o occasional leg cramps at night. Husband in waiting room.",
   "iv": "20g R forearm 0840",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "BMI 32; GERD controlled",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Penland",
  "bmi": "32.1"

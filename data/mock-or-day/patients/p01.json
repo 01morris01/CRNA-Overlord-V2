@@ -955,7 +955,17 @@
   ],
   "nursing_note": "4 y M for T&A. Wet cough during assessment, clear rhinorrhea. Breath sounds coarse, no wheeze heard, no retractions. Crying, clinging to mother. Formula/milk: none. Solids: toast 10/26 1900. Mother gave apple juice at 0545 in the car \"so he would not cry.\" Mother asks for \"a medicine to calm him down\" and to be present at induction. Mother also states her brother \"was on the breathing machine for hours after his appendix surgery; they said he could not break down a muscle relaxant\"; asks if Micah needs a blood test. Loose lower front tooth. Albuterol last given 2000 last night for cough. Two identifiers verified. Consent signed by mother (legal guardian). IV: none (planned after induction).",
   "iv": "None (planned after inhalation induction)",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II (cooperative; tonsils 3+)",
+   "tmd": "3 fingerbreadths (age appropriate)",
+   "mouth_opening": "3 fingerbreadths",
+   "neck": "Full flexion and extension",
+   "dentition": "Primary teeth; loose lower central incisor",
+   "other": "Tonsils 3+ touching uvula, mouth breather, loud snoring",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "M. Okafor",
  "bmi": "16.3"

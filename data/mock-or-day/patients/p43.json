@@ -2279,7 +2279,17 @@
   ],
   "nursing_note": "33F, chronic low back pain 4/10 (baseline). Took oxycodone ER 15 and IR 10 at 0500. Cool extremities, room cold - warm blanket applied. IV attempts x2 L arm unsuccessful (difficult access, scarred veins); IV team called. Preop fluids not yet started. Pt anxious about being cancelled. Mother at bedside.",
   "iv": "Pending - IV team (2 failed attempts)",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "J. Wyrickson",
  "bmi": "20.8"

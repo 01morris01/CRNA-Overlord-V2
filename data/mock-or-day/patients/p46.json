@@ -2351,7 +2351,17 @@
   ],
   "nursing_note": "See nursing note 0600. Wt 92.0 (+4 kg EDW). Crackles bases, SpO2 94% RA, 2+ edema. K 6.1/6.2, peaked T on ECG. Glucose 188. Took carvedilol, tacrolimus, MMF 0500. 20 g R hand.",
   "iv": "20 g R hand",
-  "glucose": "188 mg/dL (0545)"
+  "glucose": "188 mg/dL (0545)",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Mild OSA (AHI 9), not on CPAP",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "M. Ogletree",
  "bmi": "28.4"

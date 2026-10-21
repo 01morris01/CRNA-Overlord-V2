@@ -2122,7 +2122,17 @@
   ],
   "nursing_note": "71M for R VATS lobectomy. Used Stiolto 0500, took amlodipine. Breath sounds diminished bilat, no wheeze. Needed to push up with both arms to stand from stretcher for gown change, wife says \"that's new this fall.\" Dry mucous membranes, pt says mouth always dry. 18g L forearm. Wife at bedside.",
   "iv": "18g L forearm, LR",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Uneventful grade 1 intubation in the past",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "H. Lovelady",
  "bmi": "23.5"

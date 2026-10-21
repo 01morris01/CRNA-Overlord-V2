@@ -1772,7 +1772,17 @@
   ],
   "nursing_note": "BP 146/88, HR 62, SpO2 97%, T 36.6. Solids 10/26 1900. Coffee with cream 0500. Reports chest tightness with stairs this week, relieved by rest and one nitroglycerin on 10/24. Did not tell the surgeon. Consent signed. 20 G left forearm.",
   "iv": "20 G left forearm",
-  "glucose": "162"
+  "glucose": "162",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "BMI 31; no beard",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "G. Marsh",
  "bmi": "30.9"

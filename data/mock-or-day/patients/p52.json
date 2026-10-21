@@ -560,7 +560,17 @@
   ],
   "nursing_note": "Nauseated, belching, abdomen distended. Cannot lie flat (reflux). Neck circumference 44 cm. Husband at bedside.",
   "iv": "20g R forearm, 18g L AC",
-  "glucose": "142 mg/dL"
+  "glucose": "142 mg/dL",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full range, thick neck",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Neck circumference 44 cm, BMI 40; prior grade 2 view with Mac 3",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "CN Rubric · D. McCarter",
  "bmi": "40.4",

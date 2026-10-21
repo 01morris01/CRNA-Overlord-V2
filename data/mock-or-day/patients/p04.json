@@ -2071,7 +2071,17 @@
   ],
   "nursing_note": "BP 152/92 (forearm cuff), HR 96, RR 20, SpO2 92% RA, T 36.8. Wt 166 kg. Liquid diet; last protein shake 10/26 2100. Water 0400. Nausea this morning, \"full feeling,\" belching. CPAP not brought (\"forgot it, wife can bring later\"). Two attempts at PIV, 20 G left hand. POC glucose 156. Urine ketones 2+. Med rec updated: pt reports phentermine daily from outside clinic, last 10/26 0700. Semaglutide last Saturday 10/24. Empagliflozin yesterday AM.",
   "iv": "20 G left hand (2 attempts)",
-  "glucose": "156 (0600)"
+  "glucose": "156 (0600)",
+  "airway_exam": {
+   "mallampati": "IV",
+   "tmd": "Under 6 cm (2 fingerbreadths)",
+   "mouth_opening": "4 cm",
+   "neck": "Limited extension (posterior cervical fat pad)",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Neck circumference 50 cm, full beard; 2019 grade 3 mask ventilation and VL grade IIb with bougie",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "D. Holloway",
  "bmi": "51.2"

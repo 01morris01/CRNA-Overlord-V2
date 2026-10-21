@@ -1034,7 +1034,17 @@
   ],
   "nursing_note": "24F A&O x4, anxious but pleasant. Took \"all my morning meds at 6\" with sip of water. Mild R eyelid droop noted, pt says it gets worse when tired and she slept poorly. Speech clear, swallowing water without difficulty. Next Mestinon dose would be 1100 - pt asked if she should take it; told to ask anesthesia. Fiance in waiting room.",
   "iv": "20 g L hand",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Prior grade 1 intubation",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "A. Quillen",
  "bmi": "22.0"

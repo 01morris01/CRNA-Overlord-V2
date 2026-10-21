@@ -1495,7 +1495,17 @@
   ],
   "nursing_note": "Thin, pleasant. Clears since Sunday AM. Reports she brought up \"some of yesterday's broth and a little jello\" lying down at 0200, sat up in recliner rest of night. Mild cough. Lungs clear to auscultation. Burps frequently. Took levothyroxine 0430 with sip water. 20g L forearm. Heparin/famotidine given.",
   "iv": "20g L forearm, LR",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "Over 6 cm",
+   "mouth_opening": "Good opening",
+   "neck": "Full range",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Dilated esophagus with retained food: regurgitation risk at induction",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "L. Quesenberry",
  "bmi": "19.9"

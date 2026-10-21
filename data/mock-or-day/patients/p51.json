@@ -471,7 +471,17 @@
   ],
   "nursing_note": "A&O x4, calm, ambulatory. Full beard. 18 g L hand. Wife at bedside.",
   "iv": "18g L hand 0715",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "Over 6 cm",
+   "mouth_opening": "4.5 cm",
+   "neck": "Full range",
+   "dentition": "Full dentition",
+   "other": "Full beard (mask seal); snores, no witnessed apneas",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "CN Rubric · D. Hensley",
  "bmi": "23.7",

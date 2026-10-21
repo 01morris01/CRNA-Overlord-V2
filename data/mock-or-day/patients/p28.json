@@ -482,7 +482,17 @@
   ],
   "nursing_note": "Ambulatory, anxious (\"never been put all the way under\"). Last cigarette 0645 in parking lot, vaped in car. Smells of smoke. Lungs clear, occasional morning productive cough per pt. Denies chest pain. 18g L hand first attempt. Beard trimmed short. No dentures. Wife in waiting room.",
   "iv": "18g L hand, LR",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "7 cm",
+   "mouth_opening": "4.5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, no dentures",
+   "other": "Beard trimmed short; snores per wife",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "T. Dunlap",
  "bmi": "26.6"

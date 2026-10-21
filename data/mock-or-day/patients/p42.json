@@ -1425,7 +1425,17 @@
   ],
   "nursing_note": "61M calm. Brought CPAP. BP 158/94 R arm (L arm cuff - R surgical side) - pt states usually 130s at home. SpO2 94% RA lying flat; 96% sitting up. Mild dyspnea when lying flat for IV start, pt states \"I always do that since my lung surgery.\" Lungs diminished L base. Took amlodipine, allopurinol.",
   "iv": "20 g L forearm",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full range, thick neck",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "OSA on CPAP 10, BMI 33",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "H. Goforth",
  "bmi": "32.8"

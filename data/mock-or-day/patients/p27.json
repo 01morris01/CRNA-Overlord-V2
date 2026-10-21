@@ -2397,7 +2397,17 @@
   ],
   "nursing_note": "66F for L TKA. A&O x4, calm. Took only omeprazole this AM per phone instructions - did NOT take prednisone, lisinopril, or folic acid. Reports she gave her Enbrel shot Saturday \"because my hands were flaring and nobody called me back.\" Fine pain-limited ROM L knee. Ulnar deviation both hands, nodules R elbow. States she \"can't open real wide\" and neck is stiff. 20g R forearm, 1 attempt (poor veins, hand IV avoided). Skin: thin, ecchymoses forearms, paper tape only. POC glucose 126. Husband at bedside.",
   "iv": "20g R forearm, LR KVO",
-  "glucose": "126 mg/dL (0920)"
+  "glucose": "126 mg/dL (0920)",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6.5 cm",
+   "mouth_opening": "28 to 29 mm (TMJ involvement from RA)",
+   "neck": "Reduced rotation and extension; atlantoaxial instability (ADI 6 mm on flexion): keep neutral, no manipulation",
+   "dentition": "Own teeth with composite fillings",
+   "other": "Prior GA left a week of sore throat",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "J. Vanhoose",
  "bmi": "27.9"

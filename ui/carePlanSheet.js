@@ -15,11 +15,13 @@
 
    Pure helpers are exported for tests; the DOM controller is at the bottom. */
 
+import { completeModelPlan } from './modelCarePlan.js';
+
 export const CARE_PLAN_STORAGE_PREFIX = 'overlord.careplan.v1.';
 
 const MED_ROWS = 8;
 const PROBLEM_ROWS = 7;
-const DRUG_ROWS = 4;
+const DRUG_ROWS = 6;
 const CONTINGENCY_ROWS = 3;
 
 export const DECISION_OPTIONS = Object.freeze([
@@ -102,7 +104,7 @@ export const CARE_PLAN_PAGES = Object.freeze([
     title: 'Anesthetic Plan and Surgical Procedure',
     sections: [
       { id: 'technique', title: 'Technique', fields: [
-        sel('technique', 'Primary technique', ['', 'GA with ETT', 'GA with LMA', 'MAC', 'Neuraxial', 'Peripheral nerve block', 'Combined GA and regional', 'TIVA']),
+        sel('technique', 'Primary technique', ['', 'GA with ETT', 'GA with LMA', 'GA by mask', 'MAC', 'Neuraxial', 'Peripheral nerve block', 'Combined GA and regional', 'TIVA']),
         a('techniqueDetail', 'Technique details and why', { wide: true }),
         a('monitorsAccess', 'Monitors and access (ASA standard plus)'), a('positioning', 'Positioning and padding'),
       ] },
@@ -993,6 +995,7 @@ export function buildModelPlan(patient, answerKey) {
   values.decisionRationale = [answerKey.decision?.recommendation, answerKey.decision?.rationale].filter(Boolean).join('. ');
   values.technique = guessTechnique(answerKey);
   const leftovers = [];
+  const keyAdds = {};
   for (const item of answerKey.planItems ?? []) {
     // Spell out the specifics the key expects when the item text is generic
     // ("PONV prophylaxis" becomes "PONV prophylaxis (ondansetron, dexamethasone)").
@@ -1000,28 +1003,19 @@ export function buildModelPlan(patient, answerKey) {
     const named = (item.keywords ?? []).some((keyword) => keywordHit(lower, keyword));
     const text = named || !(item.keywords ?? []).length ? item.item : `${item.item} (${item.keywords.join(', ')})`;
     const target = DOMAIN_FIELDS.find(([pattern]) => pattern.test(item.domain ?? ''))?.[1];
-    if (target) values[target] = values[target] ? `${values[target]}; ${text}` : text;
+    if (target) (keyAdds[target] ??= []).push(text);
     else leftovers.push(text);
   }
-  values.techniqueDetail = leftovers.join('; ');
-  if (!values.airwayPlanA) values.airwayPlanA = values.technique;
   const order = { critical: 0, major: 1, minor: 2 };
   (answerKey.redFlags ?? []).slice().sort((x, y) => order[x.severity] - order[y.severity]).slice(0, 7).forEach((flag, index) => {
     values[`prob${index + 1}_problem`] = flag.finding;
     values[`prob${index + 1}_implication`] = flag.implication ?? '';
     values[`prob${index + 1}_plan`] = flag.action ?? '';
   });
-  // A short key still needs three problems on the sheet: use plan elements.
-  let row = Math.min(7, (answerKey.redFlags ?? []).length) + 1;
-  for (const item of answerKey.planItems ?? []) {
-    if (row > 3) break;
-    values[`prob${row}_problem`] = item.item;
-    values[`prob${row}_plan`] = item.item;
-    row += 1;
-  }
   values.reflection = answerKey.summary ?? '';
   values.boardAnswer = BOARD_QUESTION.answer;
-  return values;
+  // Everything else on both pages: chart, scores, drugs, airway, contingencies.
+  return completeModelPlan(values, patient, answerKey, { ref, ageYears: ageYearsFromChart(patient.age), keyAdds, keyLeftovers: leftovers });
 }
 
 /* The stored record for an instructor filled plan, graded as the key itself. */

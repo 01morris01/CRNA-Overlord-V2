@@ -2140,7 +2140,17 @@
   ],
   "nursing_note": "BP 148/80, HR 62, RR 16, SpO2 96% RA, T 36.8, pain 0/10. Solids 10/26 1900. Clears 0300. Right forearm 20 g with heparin infusion running at 1,100 units/h. Left hand 22 g. Consents signed: surgery, anesthesia, blood. Full code. CHG bath done. POC glucose 0530: 168. Pacemaker rep not yet called.",
   "iv": "20 G R forearm (heparin), 22 G L hand",
-  "glucose": "168 (0530)"
+  "glucose": "168 (0530)",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "W. Tate",
  "bmi": "29.0"

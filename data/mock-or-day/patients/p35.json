@@ -2085,7 +2085,17 @@
   ],
   "nursing_note": "80M, HOH (hearing aids in). Lungs clear, trace ankle edema. Irregular rhythm 70s. ICD L chest. Device card on chart; no rep contacted, no magnet in room at this time. Urine pink-tinged. 20g L forearm. Wife at bedside. Apixaban last Friday night.",
   "iv": "20g L forearm, NS KVO",
-  "glucose": "122 mg/dL (0815)"
+  "glucose": "122 mg/dL (0815)",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Reduced extension (age)",
+   "dentition": "Edentulous upper, lower partial denture (remove)",
+   "other": "Mask seal harder once the partial is out",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "V. Mcmahan",
  "bmi": "27.5"

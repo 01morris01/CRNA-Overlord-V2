@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v69-drugs-fluids-booth-orders-2026-10-20';
+const CACHE_VERSION = 'v70-complete-model-care-plans-2026-10-20';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -16,7 +16,7 @@ const APP_SHELL = [
   '/ui/liveSimModel.js', '/ui/liveSimTransport.js',
   '/ui/liveCaseView.js', '/ui/liveCaseModel.js', '/ui/patientInterview.js',
   '/ui/simOperator.js', '/ui/simOperatorView.js', '/ui/simScript.js', '/ui/interviewParticipants.js',
-  '/ui/carePlanSheet.js', '/ui/mockOrDay.js', '/data/mock-or-day/index.json',
+  '/ui/carePlanSheet.js', '/ui/modelCarePlan.js', '/ui/modelPlanSpecs.js', '/ui/mockOrDay.js', '/data/mock-or-day/index.json',
   '/student.html', '/assets/css/student.css', '/ui/studentWorkflow.js', '/ui/boothDock.js',
   '/ui/boothStudent.js', '/ui/studentChannel.js', '/ui/remoteLink.js', '/ui/remoteLinkView.js', '/ui/boothOrders.js', '/ui/speechAssembler.js',
   '/assets/css/remote-link.css',

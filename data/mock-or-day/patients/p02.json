@@ -1848,7 +1848,17 @@
   ],
   "nursing_note": "30 yo G3P2 at 38w1d for repeat CS + BTL. BP 162/106, repeat 158/108. HR 98. SpO2 98% RA. T 36.9. Headache 6/10, not relieved by acetaminophen. Visual spots. RUQ discomfort. Reflexes brisk. Solids 10/26 2000. Clears 0500. Enoxaparin last night 2200 per pt. Consent signed, including tubal. Room set up with standard supplies. 18 G right hand. Husband at bedside.",
   "iv": "18 G right hand",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "III (was II earlier in pregnancy)",
+   "tmd": "6 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full range",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Neck circumference 41 cm, facial and airway edema with preeclampsia, large breasts; 2019 grade III view needing a bougie",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "R. Delgado",
  "bmi": "38.0"

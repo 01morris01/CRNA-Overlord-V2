@@ -81,7 +81,7 @@ function appShellEntries() {
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v69-drugs-fluids-booth-orders-2026-10-20';");
+    expect(sw).toContain("const CACHE_VERSION = 'v70-complete-model-care-plans-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v65-voices-timing-2026-10-19';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v64-interview-proxy-2026-10-19';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v63-vent-form-sync-2026-10-18';");
@@ -91,7 +91,8 @@ describe('live simulation PWA contract', () => {
     expect(sw).not.toContain("const CACHE_VERSION = 'v58-sim-operator-booth-2026-10-14';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v57-voice-patient-interview-2026-07-26';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v61-instructor-student-sim-2026-10-18';");
-    expect(sw).toContain('booth-orders');
+    expect(sw).toContain('complete-model-care-plans');
+    expect(sw).not.toContain("const CACHE_VERSION = 'v69-drugs-fluids-booth-orders-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v68-remote-link-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v67-cn-rubric-patients-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v66-onset-tof-2026-10-19';");
@@ -128,7 +129,7 @@ describe('live simulation PWA contract', () => {
     runInNewContext(sw, {
       caches: {
         keys: async () => [
-          'overlord-v69-drugs-fluids-booth-orders-2026-10-20',
+          'overlord-v70-complete-model-care-plans-2026-10-20',
           'overlord-v65-voices-timing-2026-10-19',
           'overlord-v64-interview-proxy-2026-10-19',
           'overlord-v63-vent-form-sync-2026-10-18',

@@ -780,7 +780,17 @@
   ],
   "nursing_note": "In quiet room with mother, iPad, weighted blanket. Pacing, vocalizing, hand-flapping; screams when approached. Would not allow BP cuff; SpO2 via toe briefly 98%. No cough or rhinorrhea observed, lungs not auscultated (refused). Albuterol not given at home or here (refused spacer). Mother requests IM ketamine as last time. Child life present.",
   "iv": "None - deferred until after premedication",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "Not obtainable (will not open on request)",
+   "tmd": "Age appropriate",
+   "mouth_opening": "Appears normal on yawning",
+   "neck": "Full range",
+   "dentition": "Carious primary molars, 2 abscessed teeth, stainless steel crowns planned",
+   "other": "Check nasal patency of both nares for the nasotracheal tube; mild intermittent asthma",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "H. Ousley",
  "bmi": "15.3"

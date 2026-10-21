@@ -1405,7 +1405,17 @@
   ],
   "nursing_note": "HR 122, BP 104/60, RR 24, SpO2 98%, T 38.6. Ate a sandwich at 0830 before coming to the ED. Vomited 1230. Kussmaul-type breathing noted. Nauseated. POC hCG positive at 1415; surgeon not yet informed (paged, awaiting call back). Insulin pump running; CGM sensor removed. Tongue piercing in place.",
   "iv": "20 G right antecubital",
-  "glucose": "Not checked in preop"
+  "glucose": "Not checked in preop",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Tongue piercing in place (must come out)",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "A. Nguyen",
  "bmi": "21.0"

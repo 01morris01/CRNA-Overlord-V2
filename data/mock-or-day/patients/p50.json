@@ -1171,7 +1171,17 @@
   ],
   "nursing_note": "See nursing note 0920. Glasses with mother. Comfort item (stuffed dog). No IV - plan mask induction.",
   "iv": "None",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "Short (2 fingerbreadths)",
+   "mouth_opening": "Normal for age",
+   "neck": "Do not extend or rotate: atlantoaxial instability (ADI 5 mm)",
+   "dentition": "Mixed dentition, check for loose teeth",
+   "other": "Relative macroglossia, midface hypoplasia, nasal congestion; prior grade 1 to 2 views",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "E. Bowlin",
  "bmi": "17.2"

@@ -3085,7 +3085,17 @@
   ],
   "nursing_note": "57M A&O x4, slow to answer some questions but appropriate. Mild jaundice. Abdomen distended, firm, umbilical hernia tender to touch, skin intact, no drainage. Small ecchymoses bilateral forearms. Healed scalp lac. Last BM this AM x2 (lactulose). Denies alcohol \"since 2024.\" Smoked 1 cigarette this AM. Mild hand tremor noted, pt states \"I always shake a little.\" Sister at bedside. 20 g R forearm on 2nd attempt, LR KVO.",
   "iv": "20 g R forearm",
-  "glucose": "91 mg/dL (1000)"
+  "glucose": "91 mg/dL (1000)",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Tense ascites (aspiration risk, reduced FRC)",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "D. Treadway",
  "bmi": "26.6"

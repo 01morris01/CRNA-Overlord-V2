@@ -2674,7 +2674,17 @@
   ],
   "nursing_note": "Arrived from ED on NE 0.12 mcg/kg/min via 18 g L AC (blood return present, site soft). 20 g R hand LR. 4 L NC SpO2 93%. AF 120s on monitor. Oriented to self, moaning, abdomen rigid. Upper denture and hearing aids given to wife. Foley 15 mL last hour. Wife at bedside; son in hallway. Idarucizumab in OR pharmacy per pharmacy.",
   "iv": "18 g L AC (norepinephrine), 20 g R hand",
-  "glucose": "186 mg/dL (1130)"
+  "glucose": "186 mg/dL (1130)",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6 cm",
+   "mouth_opening": "3 fingerbreadths",
+   "neck": "Reduced extension (age)",
+   "dentition": "Edentulous upper (denture given to wife), own lower teeth",
+   "other": "Full stomach; distended rigid abdomen",
+   "anticipated": "Possible",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "C. Lambdin",
  "bmi": "25.5"

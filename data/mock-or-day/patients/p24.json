@@ -2048,7 +2048,17 @@
   ],
   "nursing_note": "See 0715 note. Pleasant, oriented to self. Very HOH - communicating with large-print notes. Unable to tolerate HOB below ~45 degrees, SpO2 drops to 89% and becomes anxious. Facility aide at bedside. Daughter not reached yet.",
   "iv": "22g L hand saline lock 0710",
-  "glucose": "112 mg/dL"
+  "glucose": "112 mg/dL",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6 cm",
+   "mouth_opening": "3 fingerbreadths",
+   "neck": "Reduced extension (age)",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "Cannot lie flatter than about 45 degrees (orthopnea, SpO2 89% when flat)",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "O. Pridemore",
  "bmi": "24.4"

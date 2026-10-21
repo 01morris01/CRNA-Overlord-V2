@@ -1231,7 +1231,17 @@
   ],
   "nursing_note": "A&O x4. Completed prep 0500, stools clear. Took losartan, pantoprazole 0500. Held glipizide. Reports \"a little queasy\" this morning, burped up some prep. Neck circumference 49 cm. Wife in waiting room.",
   "iv": "20g R AC 0712",
-  "glucose": "132 mg/dL 0705"
+  "glucose": "132 mg/dL 0705",
+  "airway_exam": {
+   "mallampati": "III",
+   "tmd": "6 cm",
+   "mouth_opening": "4 cm",
+   "neck": "Full range, thick neck",
+   "dentition": "Dentures, remove before sedation",
+   "other": "Neck circumference 49 cm, loud snoring, BMI 44; needed a face mask for an hour in PACU 2011",
+   "anticipated": "Yes",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "D. Swinford",
  "bmi": "44.0"

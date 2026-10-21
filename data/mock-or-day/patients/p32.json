@@ -536,7 +536,17 @@
   ],
   "nursing_note": "Fit 19M, anxious but joking. Took his Adderall at 0630 \"out of habit, I take it every morning.\" No energy drink today. HR 98 (resting usually 50s per pt). 18g R hand. Mother at bedside, asks that he not get \"too much pain medicine\" because of grandmother's slow wake-up.",
   "iv": "18g R hand, LR",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "I",
+   "tmd": "7 cm",
+   "mouth_opening": "5 cm",
+   "neck": "Full flexion and extension",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "B. Kilgore",
  "bmi": "23.6"

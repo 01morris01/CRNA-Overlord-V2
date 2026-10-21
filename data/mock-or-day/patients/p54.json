@@ -513,7 +513,17 @@
   ],
   "nursing_note": "A&O x4. Asks that \"they make sure I can breathe this time.\" Wife at bedside.",
   "iv": "18g R hand 0720",
-  "glucose": ""
+  "glucose": "",
+  "airway_exam": {
+   "mallampati": "II",
+   "tmd": "6.5 cm",
+   "mouth_opening": "4.5 cm",
+   "neck": "Full range",
+   "dentition": "Own teeth, intact, none loose",
+   "other": "No prior airway problems",
+   "anticipated": "No",
+   "examined": "10/27/2026, preop holding"
+  }
  },
  "label": "CN Rubric · K. Braden",
  "bmi": "22.9",
