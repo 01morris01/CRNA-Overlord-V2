@@ -1,0 +1,122 @@
+{
+ "tunic": {
+  "file": "tunic.glb",
+  "portrait": "tunic.png",
+  "source": "Medical_Female_01",
+  "height": 1.739,
+  "feet_z": -0.004,
+  "forward": [
+   0.005,
+   0,
+   1.0
+  ],
+  "clips": {
+   "Idle": {
+    "seconds": 2.667,
+    "speed": 0.0
+   },
+   "Walk": {
+    "seconds": 1.2,
+    "speed": 1.214
+   },
+   "Brisk": {
+    "seconds": 1.033,
+    "speed": 1.53
+   }
+  },
+  "idle_arm_drop_m": 0.485,
+  "walk_hip_wander_m": 0.029,
+  "verts": 4472,
+  "tris": 8328
+ },
+ "coat": {
+  "file": "coat.glb",
+  "portrait": "coat.png",
+  "source": "Medical_Female_02",
+  "height": 1.732,
+  "feet_z": -0.005,
+  "forward": [
+   0.005,
+   0,
+   1.0
+  ],
+  "clips": {
+   "Idle": {
+    "seconds": 2.667,
+    "speed": 0.0
+   },
+   "Walk": {
+    "seconds": 1.2,
+    "speed": 1.214
+   },
+   "Brisk": {
+    "seconds": 1.033,
+    "speed": 1.53
+   }
+  },
+  "idle_arm_drop_m": 0.485,
+  "walk_hip_wander_m": 0.029,
+  "verts": 4950,
+  "tris": 9264
+ },
+ "longcoat": {
+  "file": "longcoat.glb",
+  "portrait": "longcoat.png",
+  "source": "Medical_Male_03",
+  "height": 1.793,
+  "feet_z": 0.002,
+  "forward": [
+   0.011,
+   0,
+   1.0
+  ],
+  "clips": {
+   "Idle": {
+    "seconds": 2.733,
+    "speed": 0.0
+   },
+   "Walk": {
+    "seconds": 1.2,
+    "speed": 1.012
+   },
+   "Brisk": {
+    "seconds": 1.067,
+    "speed": 1.495
+   }
+  },
+  "idle_arm_drop_m": 0.538,
+  "walk_hip_wander_m": 0.058,
+  "verts": 4101,
+  "tris": 8126
+ },
+ "scrubs": {
+  "file": "scrubs.glb",
+  "portrait": "scrubs.png",
+  "source": "Medical_Male_04",
+  "height": 1.815,
+  "feet_z": 0.001,
+  "forward": [
+   0.011,
+   0,
+   1.0
+  ],
+  "clips": {
+   "Idle": {
+    "seconds": 2.733,
+    "speed": 0.0
+   },
+   "Walk": {
+    "seconds": 1.2,
+    "speed": 1.012
+   },
+   "Brisk": {
+    "seconds": 1.067,
+    "speed": 1.495
+   }
+  },
+  "idle_arm_drop_m": 0.538,
+  "walk_hip_wander_m": 0.058,
+  "verts": 4146,
+  "tris": 8240
+ }
+}
