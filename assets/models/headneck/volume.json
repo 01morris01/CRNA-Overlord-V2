@@ -1,0 +1,1286 @@
+{
+ "schema": "overlord.headneck.volume/1",
+ "source": {
+  "dataset": "TotalSegmentator dataset v3.0.0",
+  "doi": "10.5281/zenodo.22688904",
+  "subject": "s0527",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "CT scan: TotalSegmentator dataset v3.0.0, subject s0527, Wasserthal et al., University Hospital Basel, CC BY 4.0 (doi:10.5281/zenodo.22688904). Structures: TotalSegmentator 2.18.0 (Apache-2.0), reviewed and corrected in 3D Slicer; modified."
+ },
+ "frame": {
+  "units": "metres",
+  "handedness": "right",
+  "x": "patient LEFT",
+  "y": "SUPERIOR",
+  "z": "ANTERIOR",
+  "from_patient_frame_G_mm": "x = -(R - R0)/1000, y = (S - S0)/1000, z = (A - A0)/1000",
+  "origin_G_mm": {
+   "R0": 5.12,
+   "A0": 170.84,
+   "S0": 164.59
+  },
+  "origin_note": "R0 = mid-sagittal plane from spinal canal and trachea centroids; A0, S0 = centre of the exported slice volume",
+  "patient_frame_G": "R, A, S along the image's own voxel axes; equals the publisher's NIfTI world frame rotated rigidly by 1.506 degrees about the volume centre (published sform is oblique). See subject record.",
+  "G_to_published_world": {
+   "formula": "p_world = Rot @ (p_G - c) + c",
+   "Rot": [
+    [
+     0.9996550023626211,
+     -0.02081933365881274,
+     -0.016013481738559935
+    ],
+    [
+     0.020808277879570437,
+     0.9997831172735369,
+     -0.0008567301181231449
+    ],
+    [
+     0.016027845241165073,
+     0.0005232215704212562,
+     0.9998714089402264
+    ]
+   ],
+   "c_mm": [
+    5.919089235365391,
+    170.83575657755136,
+    182.5901478989981
+   ]
+  }
+ },
+ "grid": {
+  "dims_ijk": [
+   98,
+   152,
+   185
+  ],
+  "spacing_mm": [
+   1.5,
+   1.5,
+   1.5
+  ],
+  "axes": {
+   "i": "towards patient RIGHT (-x)",
+   "j": "towards ANTERIOR (+z)",
+   "k": "towards SUPERIOR (+y)"
+  },
+  "voxel_to_frame": [
+   [
+    -0.0015,
+    0.0,
+    0.0,
+    0.0719509097290039
+   ],
+   [
+    0.0,
+    0.0,
+    0.0015,
+    -0.1379998529815674
+   ],
+   [
+    0.0,
+    0.0015,
+    0.0,
+    -0.11325424179077148
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  ],
+  "voxel_to_frame_note": "4x4, row-major, maps the CENTRE of voxel (i, j, k) to metres in the browser frame; a voxel covers index +/- 0.5",
+  "bounds_m": {
+   "min": [
+    -0.074299,
+    -0.13875,
+    -0.114004
+   ],
+   "max": [
+    0.072701,
+    0.13875,
+    0.113996
+   ]
+  },
+  "resolution_note": "the publisher released this scan resampled to 1.5 mm isotropic; these are those voxels, not upsampled"
+ },
+ "crop": {
+  "native_grid_dims_ijk": [
+   98,
+   152,
+   209
+  ],
+  "kept_i": [
+   0,
+   97
+  ],
+  "kept_j": [
+   0,
+   151
+  ],
+  "kept_k": [
+   0,
+   184
+  ],
+  "removed": "native slices k >= 185 (everything above S = 303.34 mm in frame G: orbits, cranial vault, brain)"
+ },
+ "atlas": {
+  "tiles_per_row": 16,
+  "tile_width_px": 98,
+  "tile_height_px": 152,
+  "tiles": 185,
+  "rows": 12,
+  "image_width_px": 1568,
+  "image_height_px": 1824,
+  "slice_order": "tile t (0-based, left to right, then top to bottom) = axial slice k = t; k = 0 is the most INFERIOR slice",
+  "pixel_mapping": "pixel (x, y) from the image's top-left corner: x = (k % tiles_per_row) * tile_width + i ; y = floor(k / tiles_per_row) * tile_height + j",
+  "within_tile": "u = i runs towards patient RIGHT, v = j runs towards ANTERIOR (image top = posterior)",
+  "format": "PNG, 8-bit greyscale (colour type 0), no alpha, no colour profile, lossless"
+ },
+ "intensity": {
+  "file": "volume_intensity.png",
+  "bytes": 1253803,
+  "lut": {
+   "type": "piecewise-linear",
+   "hu": [
+    -1024,
+    -160,
+    240,
+    1840,
+    3071
+   ],
+   "byte": [
+    0,
+    27,
+    187,
+    251,
+    255
+   ],
+   "steps_HU_per_level": {
+    "-1024..-160": 32.0,
+    "-160..240": 2.5,
+    "240..1840": 25.0,
+    "1840..3071": 307.75
+   },
+   "byte_to_hu": [
+    -1024.0,
+    -992.0,
+    -960.0,
+    -928.0,
+    -896.0,
+    -864.0,
+    -832.0,
+    -800.0,
+    -768.0,
+    -736.0,
+    -704.0,
+    -672.0,
+    -640.0,
+    -608.0,
+    -576.0,
+    -544.0,
+    -512.0,
+    -480.0,
+    -448.0,
+    -416.0,
+    -384.0,
+    -352.0,
+    -320.0,
+    -288.0,
+    -256.0,
+    -224.0,
+    -192.0,
+    -160.0,
+    -157.5,
+    -155.0,
+    -152.5,
+    -150.0,
+    -147.5,
+    -145.0,
+    -142.5,
+    -140.0,
+    -137.5,
+    -135.0,
+    -132.5,
+    -130.0,
+    -127.5,
+    -125.0,
+    -122.5,
+    -120.0,
+    -117.5,
+    -115.0,
+    -112.5,
+    -110.0,
+    -107.5,
+    -105.0,
+    -102.5,
+    -100.0,
+    -97.5,
+    -95.0,
+    -92.5,
+    -90.0,
+    -87.5,
+    -85.0,
+    -82.5,
+    -80.0,
+    -77.5,
+    -75.0,
+    -72.5,
+    -70.0,
+    -67.5,
+    -65.0,
+    -62.5,
+    -60.0,
+    -57.5,
+    -55.0,
+    -52.5,
+    -50.0,
+    -47.5,
+    -45.0,
+    -42.5,
+    -40.0,
+    -37.5,
+    -35.0,
+    -32.5,
+    -30.0,
+    -27.5,
+    -25.0,
+    -22.5,
+    -20.0,
+    -17.5,
+    -15.0,
+    -12.5,
+    -10.0,
+    -7.5,
+    -5.0,
+    -2.5,
+    0.0,
+    2.5,
+    5.0,
+    7.5,
+    10.0,
+    12.5,
+    15.0,
+    17.5,
+    20.0,
+    22.5,
+    25.0,
+    27.5,
+    30.0,
+    32.5,
+    35.0,
+    37.5,
+    40.0,
+    42.5,
+    45.0,
+    47.5,
+    50.0,
+    52.5,
+    55.0,
+    57.5,
+    60.0,
+    62.5,
+    65.0,
+    67.5,
+    70.0,
+    72.5,
+    75.0,
+    77.5,
+    80.0,
+    82.5,
+    85.0,
+    87.5,
+    90.0,
+    92.5,
+    95.0,
+    97.5,
+    100.0,
+    102.5,
+    105.0,
+    107.5,
+    110.0,
+    112.5,
+    115.0,
+    117.5,
+    120.0,
+    122.5,
+    125.0,
+    127.5,
+    130.0,
+    132.5,
+    135.0,
+    137.5,
+    140.0,
+    142.5,
+    145.0,
+    147.5,
+    150.0,
+    152.5,
+    155.0,
+    157.5,
+    160.0,
+    162.5,
+    165.0,
+    167.5,
+    170.0,
+    172.5,
+    175.0,
+    177.5,
+    180.0,
+    182.5,
+    185.0,
+    187.5,
+    190.0,
+    192.5,
+    195.0,
+    197.5,
+    200.0,
+    202.5,
+    205.0,
+    207.5,
+    210.0,
+    212.5,
+    215.0,
+    217.5,
+    220.0,
+    222.5,
+    225.0,
+    227.5,
+    230.0,
+    232.5,
+    235.0,
+    237.5,
+    240.0,
+    265.0,
+    290.0,
+    315.0,
+    340.0,
+    365.0,
+    390.0,
+    415.0,
+    440.0,
+    465.0,
+    490.0,
+    515.0,
+    540.0,
+    565.0,
+    590.0,
+    615.0,
+    640.0,
+    665.0,
+    690.0,
+    715.0,
+    740.0,
+    765.0,
+    790.0,
+    815.0,
+    840.0,
+    865.0,
+    890.0,
+    915.0,
+    940.0,
+    965.0,
+    990.0,
+    1015.0,
+    1040.0,
+    1065.0,
+    1090.0,
+    1115.0,
+    1140.0,
+    1165.0,
+    1190.0,
+    1215.0,
+    1240.0,
+    1265.0,
+    1290.0,
+    1315.0,
+    1340.0,
+    1365.0,
+    1390.0,
+    1415.0,
+    1440.0,
+    1465.0,
+    1490.0,
+    1515.0,
+    1540.0,
+    1565.0,
+    1590.0,
+    1615.0,
+    1640.0,
+    1665.0,
+    1690.0,
+    1715.0,
+    1740.0,
+    1765.0,
+    1790.0,
+    1815.0,
+    1840.0,
+    2147.8,
+    2455.5,
+    2763.2,
+    3071.0
+   ],
+   "suggested_windows": {
+    "soft_tissue": {
+     "level": 40,
+     "width": 400
+    },
+    "bone": {
+     "level": 400,
+     "width": 1800
+    },
+    "airway": {
+     "level": -600,
+     "width": 1500
+    }
+   }
+  },
+  "values_outside_body_or_blanked": {
+   "hu": -1024,
+   "byte": 0
+  }
+ },
+ "labels": {
+  "file": "volume_labels.png",
+  "bytes": 100187,
+  "background": 0,
+  "rule": "2x2x2 reduction of the corrected 0.75 mm label map: most frequent structure id among the 8 sub-voxels if >= 4 of 8 carry it; ties to the lower id",
+  "table": [
+   {
+    "label": 1,
+    "id": "trachea",
+    "voxels": 14786,
+    "volume_mL": 49.903,
+    "volume_ratio_to_corrected_mask": 1.024,
+    "centroid_m": [
+     -0.000918,
+     -0.080592,
+     -0.015631
+    ]
+   },
+   {
+    "label": 2,
+    "id": "larynx_air",
+    "voxels": 3154,
+    "volume_mL": 10.645,
+    "volume_ratio_to_corrected_mask": 1.024,
+    "centroid_m": [
+     0.000417,
+     0.012512,
+     0.018892
+    ]
+   },
+   {
+    "label": 3,
+    "id": "hypopharynx",
+    "voxels": 1042,
+    "volume_mL": 3.517,
+    "volume_ratio_to_corrected_mask": 1.04,
+    "centroid_m": [
+     0.000568,
+     0.039788,
+     0.008873
+    ]
+   },
+   {
+    "label": 4,
+    "id": "oropharynx",
+    "voxels": 2584,
+    "volume_mL": 8.721,
+    "volume_ratio_to_corrected_mask": 1.048,
+    "centroid_m": [
+     0.001929,
+     0.077676,
+     0.017501
+    ]
+   },
+   {
+    "label": 5,
+    "id": "nasopharynx",
+    "voxels": 1703,
+    "volume_mL": 5.748,
+    "volume_ratio_to_corrected_mask": 0.999,
+    "centroid_m": [
+     0.002014,
+     0.116381,
+     0.028932
+    ]
+   },
+   {
+    "label": 6,
+    "id": "thyroid_cartilage",
+    "voxels": 2685,
+    "volume_mL": 9.062,
+    "volume_ratio_to_corrected_mask": 1.066,
+    "centroid_m": [
+     0.000765,
+     0.014087,
+     0.02234
+    ]
+   },
+   {
+    "label": 7,
+    "id": "cricoid_cartilage",
+    "voxels": 1356,
+    "volume_mL": 4.577,
+    "volume_ratio_to_corrected_mask": 1.055,
+    "centroid_m": [
+     0.000612,
+     -0.003884,
+     0.012349
+    ]
+   },
+   {
+    "label": 8,
+    "id": "hyoid",
+    "voxels": 1003,
+    "volume_mL": 3.385,
+    "volume_ratio_to_corrected_mask": 1.039,
+    "centroid_m": [
+     0.001527,
+     0.04062,
+     0.028425
+    ]
+   },
+   {
+    "label": 9,
+    "id": "teeth_upper",
+    "voxels": 4457,
+    "volume_mL": 15.042,
+    "volume_ratio_to_corrected_mask": 1.057,
+    "centroid_m": [
+     -0.000454,
+     0.089379,
+     0.072846
+    ]
+   },
+   {
+    "label": 10,
+    "id": "teeth_lower",
+    "voxels": 3301,
+    "volume_mL": 11.141,
+    "volume_ratio_to_corrected_mask": 1.055,
+    "centroid_m": [
+     0.000385,
+     0.073778,
+     0.069832
+    ]
+   },
+   {
+    "label": 11,
+    "id": "mandible",
+    "voxels": 21610,
+    "volume_mL": 72.934,
+    "volume_ratio_to_corrected_mask": 1.031,
+    "centroid_m": [
+     -4.4e-05,
+     0.075683,
+     0.048233
+    ]
+   },
+   {
+    "label": 12,
+    "id": "hard_palate",
+    "voxels": 896,
+    "volume_mL": 3.024,
+    "volume_ratio_to_corrected_mask": 1.191,
+    "centroid_m": [
+     0.001401,
+     0.106212,
+     0.065527
+    ]
+   },
+   {
+    "label": 13,
+    "id": "vertebrae_C1",
+    "voxels": 4773,
+    "volume_mL": 16.109,
+    "volume_ratio_to_corrected_mask": 1.029,
+    "centroid_m": [
+     -8.4e-05,
+     0.102244,
+     -0.013089
+    ]
+   },
+   {
+    "label": 14,
+    "id": "vertebrae_C2",
+    "voxels": 6960,
+    "volume_mL": 23.49,
+    "volume_ratio_to_corrected_mask": 1.02,
+    "centroid_m": [
+     0.000968,
+     0.083426,
+     -0.017462
+    ]
+   },
+   {
+    "label": 15,
+    "id": "vertebrae_C3",
+    "voxels": 4520,
+    "volume_mL": 15.255,
+    "volume_ratio_to_corrected_mask": 1.023,
+    "centroid_m": [
+     -0.000254,
+     0.060899,
+     -0.019455
+    ]
+   },
+   {
+    "label": 16,
+    "id": "vertebrae_C4",
+    "voxels": 4318,
+    "volume_mL": 14.573,
+    "volume_ratio_to_corrected_mask": 1.022,
+    "centroid_m": [
+     -0.001129,
+     0.04178,
+     -0.018161
+    ]
+   },
+   {
+    "label": 17,
+    "id": "vertebrae_C5",
+    "voxels": 4423,
+    "volume_mL": 14.928,
+    "volume_ratio_to_corrected_mask": 1.02,
+    "centroid_m": [
+     -0.00384,
+     0.022621,
+     -0.01893
+    ]
+   },
+   {
+    "label": 18,
+    "id": "vertebrae_C6",
+    "voxels": 4878,
+    "volume_mL": 16.463,
+    "volume_ratio_to_corrected_mask": 1.027,
+    "centroid_m": [
+     -0.00523,
+     0.004133,
+     -0.020429
+    ]
+   },
+   {
+    "label": 19,
+    "id": "vertebrae_C7",
+    "voxels": 5762,
+    "volume_mL": 19.447,
+    "volume_ratio_to_corrected_mask": 1.026,
+    "centroid_m": [
+     -0.003541,
+     -0.013624,
+     -0.026833
+    ]
+   },
+   {
+    "label": 20,
+    "id": "vertebrae_T1",
+    "voxels": 8091,
+    "volume_mL": 27.307,
+    "volume_ratio_to_corrected_mask": 1.02,
+    "centroid_m": [
+     0.000271,
+     -0.031081,
+     -0.03664
+    ]
+   },
+   {
+    "label": 21,
+    "id": "vertebrae_T2",
+    "voxels": 8276,
+    "volume_mL": 27.931,
+    "volume_ratio_to_corrected_mask": 1.017,
+    "centroid_m": [
+     0.004081,
+     -0.05051,
+     -0.047713
+    ]
+   },
+   {
+    "label": 22,
+    "id": "vertebrae_T3",
+    "voxels": 7541,
+    "volume_mL": 25.451,
+    "volume_ratio_to_corrected_mask": 1.019,
+    "centroid_m": [
+     0.00586,
+     -0.071007,
+     -0.059635
+    ]
+   },
+   {
+    "label": 23,
+    "id": "vertebrae_T4",
+    "voxels": 7675,
+    "volume_mL": 25.903,
+    "volume_ratio_to_corrected_mask": 1.017,
+    "centroid_m": [
+     0.006963,
+     -0.091996,
+     -0.06936
+    ]
+   },
+   {
+    "label": 24,
+    "id": "vertebrae_T5",
+    "voxels": 7863,
+    "volume_mL": 26.538,
+    "volume_ratio_to_corrected_mask": 1.019,
+    "centroid_m": [
+     0.007508,
+     -0.113947,
+     -0.076494
+    ]
+   },
+   {
+    "label": 25,
+    "id": "rib_left_1",
+    "voxels": 2847,
+    "volume_mL": 9.609,
+    "volume_ratio_to_corrected_mask": 1.054,
+    "centroid_m": [
+     0.056369,
+     -0.06252,
+     -0.002941
+    ]
+   },
+   {
+    "label": 26,
+    "id": "rib_right_1",
+    "voxels": 3030,
+    "volume_mL": 10.226,
+    "volume_ratio_to_corrected_mask": 1.059,
+    "centroid_m": [
+     -0.051814,
+     -0.069407,
+     -0.012466
+    ]
+   },
+   {
+    "label": 27,
+    "id": "clavicula_left",
+    "voxels": 4321,
+    "volume_mL": 14.583,
+    "volume_ratio_to_corrected_mask": 1.023,
+    "centroid_m": [
+     0.042126,
+     -0.074945,
+     0.02797
+    ]
+   },
+   {
+    "label": 28,
+    "id": "clavicula_right",
+    "voxels": 5135,
+    "volume_mL": 17.331,
+    "volume_ratio_to_corrected_mask": 1.027,
+    "centroid_m": [
+     -0.043298,
+     -0.073903,
+     0.02425
+    ]
+   },
+   {
+    "label": 29,
+    "id": "sternum",
+    "voxels": 9943,
+    "volume_mL": 33.558,
+    "volume_ratio_to_corrected_mask": 1.02,
+    "centroid_m": [
+     0.001019,
+     -0.110369,
+     0.039881
+    ]
+   },
+   {
+    "label": 30,
+    "id": "skull",
+    "voxels": 53250,
+    "volume_mL": 179.719,
+    "volume_ratio_to_corrected_mask": 1.037,
+    "centroid_m": [
+     0.002003,
+     0.123899,
+     0.016568
+    ]
+   },
+   {
+    "label": 31,
+    "id": "aorta",
+    "voxels": 18615,
+    "volume_mL": 62.826,
+    "volume_ratio_to_corrected_mask": 1.013,
+    "centroid_m": [
+     0.016954,
+     -0.112952,
+     -0.018466
+    ]
+   },
+   {
+    "label": 32,
+    "id": "brachiocephalic_trunk",
+    "voxels": 1257,
+    "volume_mL": 4.242,
+    "volume_ratio_to_corrected_mask": 1.023,
+    "centroid_m": [
+     5.6e-05,
+     -0.077019,
+     0.003468
+    ]
+   },
+   {
+    "label": 33,
+    "id": "common_carotid_artery_left",
+    "voxels": 1973,
+    "volume_mL": 6.659,
+    "volume_ratio_to_corrected_mask": 1.055,
+    "centroid_m": [
+     0.023441,
+     -0.020532,
+     -4.1e-05
+    ]
+   },
+   {
+    "label": 34,
+    "id": "common_carotid_artery_right",
+    "voxels": 1599,
+    "volume_mL": 5.397,
+    "volume_ratio_to_corrected_mask": 1.062,
+    "centroid_m": [
+     -0.022316,
+     -0.0108,
+     0.005271
+    ]
+   },
+   {
+    "label": 35,
+    "id": "internal_carotid_artery_left",
+    "voxels": 482,
+    "volume_mL": 1.627,
+    "volume_ratio_to_corrected_mask": 1.056,
+    "centroid_m": [
+     0.029668,
+     0.083014,
+     -0.000278
+    ]
+   },
+   {
+    "label": 36,
+    "id": "internal_carotid_artery_right",
+    "voxels": 500,
+    "volume_mL": 1.688,
+    "volume_ratio_to_corrected_mask": 1.053,
+    "centroid_m": [
+     -0.027643,
+     0.083655,
+     0.001535
+    ]
+   },
+   {
+    "label": 37,
+    "id": "subclavian_artery_left",
+    "voxels": 1586,
+    "volume_mL": 5.353,
+    "volume_ratio_to_corrected_mask": 1.035,
+    "centroid_m": [
+     0.035813,
+     -0.063074,
+     -0.010545
+    ]
+   },
+   {
+    "label": 38,
+    "id": "subclavian_artery_right",
+    "voxels": 1991,
+    "volume_mL": 6.72,
+    "volume_ratio_to_corrected_mask": 1.032,
+    "centroid_m": [
+     -0.037043,
+     -0.057877,
+     -0.009666
+    ]
+   },
+   {
+    "label": 39,
+    "id": "internal_jugular_vein_left",
+    "voxels": 3220,
+    "volume_mL": 10.867,
+    "volume_ratio_to_corrected_mask": 1.071,
+    "centroid_m": [
+     0.034838,
+     0.023234,
+     -0.001492
+    ]
+   },
+   {
+    "label": 40,
+    "id": "internal_jugular_vein_right",
+    "voxels": 2816,
+    "volume_mL": 9.504,
+    "volume_ratio_to_corrected_mask": 1.082,
+    "centroid_m": [
+     -0.033801,
+     0.009679,
+     0.000266
+    ]
+   },
+   {
+    "label": 41,
+    "id": "brachiocephalic_vein_left",
+    "voxels": 2305,
+    "volume_mL": 7.779,
+    "volume_ratio_to_corrected_mask": 1.034,
+    "centroid_m": [
+     0.00774,
+     -0.090388,
+     0.00595
+    ]
+   },
+   {
+    "label": 42,
+    "id": "brachiocephalic_vein_right",
+    "voxels": 2224,
+    "volume_mL": 7.506,
+    "volume_ratio_to_corrected_mask": 1.029,
+    "centroid_m": [
+     -0.026045,
+     -0.083312,
+     -0.001955
+    ]
+   },
+   {
+    "label": 43,
+    "id": "superior_vena_cava",
+    "voxels": 4619,
+    "volume_mL": 15.589,
+    "volume_ratio_to_corrected_mask": 1.018,
+    "centroid_m": [
+     -0.019001,
+     -0.120235,
+     -0.010494
+    ]
+   },
+   {
+    "label": 44,
+    "id": "thyroid_gland",
+    "voxels": 3987,
+    "volume_mL": 13.456,
+    "volume_ratio_to_corrected_mask": 1.018,
+    "centroid_m": [
+     -0.001291,
+     -0.026957,
+     0.010101
+    ]
+   },
+   {
+    "label": 45,
+    "id": "submandibular_gland_left",
+    "voxels": 1503,
+    "volume_mL": 5.073,
+    "volume_ratio_to_corrected_mask": 1.025,
+    "centroid_m": [
+     0.036621,
+     0.049293,
+     0.025263
+    ]
+   },
+   {
+    "label": 46,
+    "id": "submandibular_gland_right",
+    "voxels": 1844,
+    "volume_mL": 6.223,
+    "volume_ratio_to_corrected_mask": 1.029,
+    "centroid_m": [
+     -0.03366,
+     0.050359,
+     0.024672
+    ]
+   },
+   {
+    "label": 47,
+    "id": "esophagus",
+    "voxels": 5001,
+    "volume_mL": 16.878,
+    "volume_ratio_to_corrected_mask": 1.028,
+    "centroid_m": [
+     0.009346,
+     -0.082936,
+     -0.0275
+    ]
+   },
+   {
+    "label": 48,
+    "id": "spinal_cord",
+    "voxels": 13176,
+    "volume_mL": 44.469,
+    "volume_ratio_to_corrected_mask": 1.025,
+    "centroid_m": [
+     0.000922,
+     0.008913,
+     -0.038857
+    ]
+   },
+   {
+    "label": 49,
+    "id": "tongue",
+    "voxels": 12771,
+    "volume_mL": 43.102,
+    "volume_ratio_to_corrected_mask": 1.02,
+    "centroid_m": [
+     0.000805,
+     0.07468,
+     0.052804
+    ]
+   },
+   {
+    "label": 50,
+    "id": "soft_palate",
+    "voxels": 976,
+    "volume_mL": 3.294,
+    "volume_ratio_to_corrected_mask": 1.025,
+    "centroid_m": [
+     0.001964,
+     0.097745,
+     0.032556
+    ]
+   },
+   {
+    "label": 51,
+    "id": "sternocleidomastoid_left",
+    "voxels": 18425,
+    "volume_mL": 62.184,
+    "volume_ratio_to_corrected_mask": 1.034,
+    "centroid_m": [
+     0.043907,
+     0.017966,
+     0.002186
+    ]
+   },
+   {
+    "label": 52,
+    "id": "sternocleidomastoid_right",
+    "voxels": 18096,
+    "volume_mL": 61.074,
+    "volume_ratio_to_corrected_mask": 1.037,
+    "centroid_m": [
+     -0.041033,
+     0.012089,
+     0.005148
+    ]
+   },
+   {
+    "label": 53,
+    "id": "anterior_scalene_left",
+    "voxels": 2044,
+    "volume_mL": 6.899,
+    "volume_ratio_to_corrected_mask": 1.044,
+    "centroid_m": [
+     0.039303,
+     -0.032703,
+     -0.00249
+    ]
+   },
+   {
+    "label": 54,
+    "id": "anterior_scalene_right",
+    "voxels": 2264,
+    "volume_mL": 7.641,
+    "volume_ratio_to_corrected_mask": 1.048,
+    "centroid_m": [
+     -0.042358,
+     -0.033584,
+     -0.007556
+    ]
+   },
+   {
+    "label": 55,
+    "id": "middle_scalene_left",
+    "voxels": 2435,
+    "volume_mL": 8.218,
+    "volume_ratio_to_corrected_mask": 1.041,
+    "centroid_m": [
+     0.04635,
+     -0.01,
+     -0.016897
+    ]
+   },
+   {
+    "label": 56,
+    "id": "middle_scalene_right",
+    "voxels": 2876,
+    "volume_mL": 9.707,
+    "volume_ratio_to_corrected_mask": 1.038,
+    "centroid_m": [
+     -0.050419,
+     -0.014585,
+     -0.022584
+    ]
+   },
+   {
+    "label": 57,
+    "id": "levator_scapulae_left",
+    "voxels": 11546,
+    "volume_mL": 38.968,
+    "volume_ratio_to_corrected_mask": 1.026,
+    "centroid_m": [
+     0.051426,
+     0.007012,
+     -0.046337
+    ]
+   },
+   {
+    "label": 58,
+    "id": "levator_scapulae_right",
+    "voxels": 11269,
+    "volume_mL": 38.033,
+    "volume_ratio_to_corrected_mask": 1.029,
+    "centroid_m": [
+     -0.048724,
+     0.010503,
+     -0.045646
+    ]
+   },
+   {
+    "label": 59,
+    "id": "prevertebral_left",
+    "voxels": 3449,
+    "volume_mL": 11.64,
+    "volume_ratio_to_corrected_mask": 1.047,
+    "centroid_m": [
+     0.012942,
+     0.021313,
+     -0.005207
+    ]
+   },
+   {
+    "label": 60,
+    "id": "prevertebral_right",
+    "voxels": 4150,
+    "volume_mL": 14.006,
+    "volume_ratio_to_corrected_mask": 1.052,
+    "centroid_m": [
+     -0.016136,
+     0.020114,
+     -0.006115
+    ]
+   },
+   {
+    "label": 61,
+    "id": "sterno_thyroid_left",
+    "voxels": 2074,
+    "volume_mL": 7.0,
+    "volume_ratio_to_corrected_mask": 1.067,
+    "centroid_m": [
+     0.014866,
+     -0.049877,
+     0.019955
+    ]
+   },
+   {
+    "label": 62,
+    "id": "sterno_thyroid_right",
+    "voxels": 1841,
+    "volume_mL": 6.213,
+    "volume_ratio_to_corrected_mask": 1.056,
+    "centroid_m": [
+     -0.013136,
+     -0.049716,
+     0.019582
+    ]
+   },
+   {
+    "label": 63,
+    "id": "masseter_left",
+    "voxels": 11794,
+    "volume_mL": 39.805,
+    "volume_ratio_to_corrected_mask": 1.006,
+    "centroid_m": [
+     0.055202,
+     0.099786,
+     0.037164
+    ]
+   },
+   {
+    "label": 64,
+    "id": "masseter_right",
+    "voxels": 10644,
+    "volume_mL": 35.923,
+    "volume_ratio_to_corrected_mask": 1.006,
+    "centroid_m": [
+     -0.052766,
+     0.097477,
+     0.039854
+    ]
+   },
+   {
+    "label": 65,
+    "id": "medial_pterygoid_left",
+    "voxels": 4144,
+    "volume_mL": 13.986,
+    "volume_ratio_to_corrected_mask": 1.016,
+    "centroid_m": [
+     0.03303,
+     0.094742,
+     0.023715
+    ]
+   },
+   {
+    "label": 66,
+    "id": "medial_pterygoid_right",
+    "voxels": 4571,
+    "volume_mL": 15.427,
+    "volume_ratio_to_corrected_mask": 1.013,
+    "centroid_m": [
+     -0.029857,
+     0.094642,
+     0.02529
+    ]
+   },
+   {
+    "label": 67,
+    "id": "lateral_pterygoid_left",
+    "voxels": 2826,
+    "volume_mL": 9.538,
+    "volume_ratio_to_corrected_mask": 1.003,
+    "centroid_m": [
+     0.036287,
+     0.121685,
+     0.025944
+    ]
+   },
+   {
+    "label": 68,
+    "id": "lateral_pterygoid_right",
+    "voxels": 3143,
+    "volume_mL": 10.608,
+    "volume_ratio_to_corrected_mask": 1.006,
+    "centroid_m": [
+     -0.032972,
+     0.120453,
+     0.027594
+    ]
+   }
+  ]
+ },
+ "defacing": {
+  "publisher": "face blurred by the dataset publisher before release (resources/train_nnunet.md: 'Your dataset contains blurred faces')",
+  "additional_blanking_in_this_export": {
+   "applies_to_slices_k": [
+    117,
+    184
+   ],
+   "applies_from_S_mm": 201.34014701843262,
+   "rule_1": "soft tissue more than 3 mm anterior to the facial skeleton (skull, mandible, teeth, hard palate labels), per axial slice, between the outermost bone columns",
+   "rule_2": "soft-tissue surface protrusions removed by a 3D morphological opening of the body mask with a 7.5 mm radius ball (external ears, residual nose)",
+   "never_blanked": "voxels with a structure label; voxels >= 250 HU",
+   "set_to_HU": -1024,
+   "voxels_blanked_rule_1": 47424,
+   "voxels_blanked_rule_2": 13888,
+   "voxels_blanked_total": 61312,
+   "volume_blanked_mL": 206.9
+  }
+ }
+}

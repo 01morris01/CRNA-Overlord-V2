@@ -1,0 +1,6605 @@
+{
+ "schema": "overlord.headneck.structures/1",
+ "disclaimer": "Automatic segmentation (TotalSegmentator) reviewed and corrected by an AI assistant in 3D Slicer with quantitative checks. NOT validated by a radiologist or clinician. Teaching illustration only; not for clinical use.",
+ "source": {
+  "dataset": "TotalSegmentator dataset v3.0.0",
+  "doi": "10.5281/zenodo.22688904",
+  "subject": "s0527",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "CT scan: TotalSegmentator dataset v3.0.0, subject s0527, Wasserthal et al., University Hospital Basel, CC BY 4.0 (doi:10.5281/zenodo.22688904). Structures: TotalSegmentator 2.18.0 (Apache-2.0), reviewed and corrected in 3D Slicer; modified."
+ },
+ "frame": {
+  "units": "metres",
+  "handedness": "right",
+  "x": "patient LEFT",
+  "y": "SUPERIOR",
+  "z": "ANTERIOR",
+  "from_patient_frame_G_mm": "x = -(R - R0)/1000, y = (S - S0)/1000, z = (A - A0)/1000",
+  "origin_G_mm": {
+   "R0": 5.12,
+   "A0": 170.84,
+   "S0": 164.59
+  },
+  "origin_note": "R0 = mid-sagittal plane from spinal canal and trachea centroids; A0, S0 = centre of the exported slice volume",
+  "patient_frame_G": "R, A, S along the image's own voxel axes; equals the publisher's NIfTI world frame rotated rigidly by 1.506 degrees about the volume centre (published sform is oblique). See subject record.",
+  "G_to_published_world": {
+   "formula": "p_world = Rot @ (p_G - c) + c",
+   "Rot": [
+    [
+     0.9996550023626211,
+     -0.02081933365881274,
+     -0.016013481738559935
+    ],
+    [
+     0.020808277879570437,
+     0.9997831172735369,
+     -0.0008567301181231449
+    ],
+    [
+     0.016027845241165073,
+     0.0005232215704212562,
+     0.9998714089402264
+    ]
+   ],
+   "c_mm": [
+    5.919089235365391,
+    170.83575657755136,
+    182.5901478989981
+   ]
+  }
+ },
+ "files": {
+  "meshes": "headneck.glb",
+  "volume": "volume.json"
+ },
+ "counts": {
+  "tasks_run": [
+   "total",
+   "headneck_bones_vessels",
+   "headneck_muscles",
+   "head_glands_cavities",
+   "head_muscles",
+   "craniofacial_structures"
+  ],
+  "classes_in_those_tasks": 189,
+  "classes_with_voxels": 124,
+  "classes_empty_in_this_scan": 65,
+  "exported": 68,
+  "accepted": 50,
+  "corrected": 18,
+  "excluded": 56,
+  "triangles_total": 379976
+ },
+ "verification": {
+  "max_centroid_error_mm": 0.079,
+  "max_abs_volume_diff_pct_mesh_vs_voxels": 1.127,
+  "laterality_checked": 34,
+  "laterality_failures": [],
+  "asymmetry_check": {
+   "aortic_arch_centroid_x_mm": 16.94,
+   "aortic_arch_left_of_midline": true,
+   "superior_vena_cava_centroid_x_mm": -18.98,
+   "superior_vena_cava_right_of_midline": true,
+   "esophagus_centroid_x_mm": 9.35,
+   "midline_structures_x_mm": {
+    "trachea": -0.93,
+    "spinal_cord": 0.93,
+    "larynx_air": 0.41,
+    "hyoid": 1.56,
+    "thyroid_cartilage": 0.8,
+    "cricoid_cartilage": 0.6
+   }
+  },
+  "nodes_with_transform": []
+ },
+ "structures": [
+  {
+   "id": "trachea",
+   "display_name": "Trachea and main bronchi (lumen)",
+   "side": "midline",
+   "group": "airway",
+   "label_id": 1,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 16,
+    "class": "trachea"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Air column from the lower cricoid border to the carina and into both main bronchi, which are cut by the lower scan boundary. Dice 0.96 against the publisher's label (before corrections). Corrected: HU mask removed 3.1 % of voxels; 0.96 mL of unlabeled lumen at the larynx seam added.",
+    "corrections": [
+     {
+      "step": "A",
+      "operation": "Threshold (HU < -400) + Logical operators INTERSECT",
+      "reason": "lumen must be air: remove mucosa / collapsed-lumen / partial-volume voxels included by the model's region label",
+      "voxels_before": 116792,
+      "voxels_after": 113197
+     },
+     {
+      "step": "B",
+      "operation": "voxel-coordinate helper segment + Logical operators UNION",
+      "reason": "seam between two models: 1 unlabeled voxel layer(s) of air between `trachea` (total) and `larynx_air` (headneck_bones_vessels); air voxels (HU < -400) lying between and connected to both were assigned to trachea",
+      "voxels_before": 113197,
+      "voxels_after": 115483
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9644
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 115483,
+    "volume_mL": 48.7194,
+    "voxel_count_before_corrections": 116792,
+    "volume_mL_before_corrections": 49.2716,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.000931,
+     -0.080773,
+     -0.015708
+    ],
+    "bbox_min_m": [
+     -0.03605,
+     -0.13875,
+     -0.04875
+    ],
+    "bbox_max_m": [
+     0.0427,
+     -0.012,
+     0.02925
+    ],
+    "hu_mean": -894.4,
+    "hu_sd": 141.5,
+    "hu_p05": -1001.0,
+    "hu_median": -953.0,
+    "hu_p95": -533.0,
+    "cut_by_field_of_view": {
+     "lower scan boundary": {
+      "voxels": 212,
+      "cut_face_cm2": 1.19
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 14786,
+    "volume_mL": 49.903,
+    "volume_ratio_to_mask": 1.024
+   },
+   "mesh": {
+    "node": "trachea",
+    "triangles_raw": 59540,
+    "triangles_final": 16094,
+    "vertices_final": 8049,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 2,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.089,
+     "p95": 0.2464,
+     "max": 1.1615
+    },
+    "volume_mL_raw_mesh": 48.6551,
+    "volume_mL_final_mesh": 48.7445,
+    "volume_change_pct_raw_to_final": 0.184,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.051,
+    "centroid_m": [
+     -0.000934,
+     -0.080783,
+     -0.015712
+    ],
+    "centroid_error_vs_mask_mm": 0.011
+   }
+  },
+  {
+   "id": "larynx_air",
+   "display_name": "Laryngeal airway (lumen)",
+   "side": "midline",
+   "group": "airway",
+   "label_id": 2,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 1,
+    "class": "larynx_air"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Hourglass lumen from just above the hyoid to the lower cricoid border; narrowest (98 mm2) inside the thyroid cartilage at about the level of the glottis. Corrected: HU mask removed 16.7 % (boundary voxels that were not air).",
+    "corrections": [
+     {
+      "step": "A",
+      "operation": "Threshold (HU < -400) + Logical operators INTERSECT",
+      "reason": "lumen must be air: remove mucosa / collapsed-lumen / partial-volume voxels included by the model's region label",
+      "voxels_before": 29567,
+      "voxels_after": 24643
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 24643,
+    "volume_mL": 10.3963,
+    "voxel_count_before_corrections": 29567,
+    "volume_mL_before_corrections": 12.4736,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000411,
+     0.012056,
+     0.018898
+    ],
+    "bbox_min_m": [
+     -0.01055,
+     -0.01425,
+     0.00675
+    ],
+    "bbox_max_m": [
+     0.01045,
+     0.051,
+     0.036
+    ],
+    "hu_mean": -894.4,
+    "hu_sd": 166.0,
+    "hu_p05": -1031.0,
+    "hu_median": -974.0,
+    "hu_p95": -496.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3154,
+    "volume_mL": 10.645,
+    "volume_ratio_to_mask": 1.024
+   },
+   "mesh": {
+    "node": "larynx_air",
+    "triangles_raw": 18260,
+    "triangles_final": 6782,
+    "vertices_final": 3393,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0877,
+     "p95": 0.2401,
+     "max": 0.3912
+    },
+    "volume_mL_raw_mesh": 10.37,
+    "volume_mL_final_mesh": 10.4052,
+    "volume_change_pct_raw_to_final": 0.34,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.086,
+    "centroid_m": [
+     0.000411,
+     0.01206,
+     0.018896
+    ],
+    "centroid_error_vs_mask_mm": 0.005
+   }
+  },
+  {
+   "id": "hypopharynx",
+   "display_name": "Hypopharynx (air lumen with piriform sinuses)",
+   "side": "midline",
+   "group": "airway",
+   "label_id": 3,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 13,
+    "class": "hypopharynx"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "The model's class is a region: 53.7 % of its voxels were not air (collapsed post-cricoid lumen and mucosa). After the HU mask it is the retro-laryngeal air crescent with both piriform sinuses (7.3 -> 3.4 mL). Largest correction in the set.",
+    "corrections": [
+     {
+      "step": "A",
+      "operation": "Threshold (HU < -400) + Logical operators INTERSECT",
+      "reason": "lumen must be air: remove mucosa / collapsed-lumen / partial-volume voxels included by the model's region label",
+      "voxels_before": 17328,
+      "voxels_after": 8019
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `larynx_air`",
+      "reason": "5 voxels claimed by two different models; `larynx_air` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 8019,
+      "voxels_after": 8014
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 8014,
+    "volume_mL": 3.3809,
+    "voxel_count_before_corrections": 17328,
+    "volume_mL_before_corrections": 7.3103,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000493,
+     0.039839,
+     0.008883
+    ],
+    "bbox_min_m": [
+     -0.0158,
+     0.02175,
+     0.003
+    ],
+    "bbox_max_m": [
+     0.01795,
+     0.0585,
+     0.0165
+    ],
+    "hu_mean": -860.2,
+    "hu_sd": 192.9,
+    "hu_p05": -1049.0,
+    "hu_median": -967.0,
+    "hu_p95": -467.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1042,
+    "volume_mL": 3.517,
+    "volume_ratio_to_mask": 1.04
+   },
+   "mesh": {
+    "node": "hypopharynx",
+    "triangles_raw": 9880,
+    "triangles_final": 4312,
+    "vertices_final": 2160,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0926,
+     "p95": 0.2462,
+     "max": 0.5004
+    },
+    "volume_mL_raw_mesh": 3.3514,
+    "volume_mL_final_mesh": 3.3692,
+    "volume_change_pct_raw_to_final": 0.532,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.346,
+    "centroid_m": [
+     0.000487,
+     0.039792,
+     0.008875
+    ],
+    "centroid_error_vs_mask_mm": 0.048
+   }
+  },
+  {
+   "id": "oropharynx",
+   "display_name": "Oropharynx (lumen)",
+   "side": "midline",
+   "group": "airway",
+   "label_id": 4,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 12,
+    "class": "oropharynx"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Air column from the level of the hard palate down to the hyoid level. Corrected: HU mask removed 20.0 %.",
+    "corrections": [
+     {
+      "step": "A",
+      "operation": "Threshold (HU < -400) + Logical operators INTERSECT",
+      "reason": "lumen must be air: remove mucosa / collapsed-lumen / partial-volume voxels included by the model's region label",
+      "voxels_before": 24660,
+      "voxels_after": 19729
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 19729,
+    "volume_mL": 8.3232,
+    "voxel_count_before_corrections": 24660,
+    "volume_mL_before_corrections": 10.4034,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.001942,
+     0.077096,
+     0.017292
+    ],
+    "bbox_min_m": [
+     -0.0113,
+     0.042,
+     0.003
+    ],
+    "bbox_max_m": [
+     0.0142,
+     0.11025,
+     0.03825
+    ],
+    "hu_mean": -859.9,
+    "hu_sd": 186.7,
+    "hu_p05": -1036.0,
+    "hu_median": -963.0,
+    "hu_p95": -469.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2584,
+    "volume_mL": 8.721,
+    "volume_ratio_to_mask": 1.048
+   },
+   "mesh": {
+    "node": "oropharynx",
+    "triangles_raw": 21000,
+    "triangles_final": 7348,
+    "vertices_final": 3674,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0868,
+     "p95": 0.2387,
+     "max": 0.4154
+    },
+    "volume_mL_raw_mesh": 8.2885,
+    "volume_mL_final_mesh": 8.3173,
+    "volume_change_pct_raw_to_final": 0.347,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.071,
+    "centroid_m": [
+     0.001942,
+     0.077105,
+     0.017283
+    ],
+    "centroid_error_vs_mask_mm": 0.013
+   }
+  },
+  {
+   "id": "nasopharynx",
+   "display_name": "Nasopharynx (lumen)",
+   "side": "midline",
+   "group": "airway",
+   "label_id": 5,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 11,
+    "class": "nasopharynx"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Air space behind the choanae, above the soft palate. Corrected: HU mask removed 7.8 %.",
+    "corrections": [
+     {
+      "step": "A",
+      "operation": "Threshold (HU < -400) + Logical operators INTERSECT",
+      "reason": "lumen must be air: remove mucosa / collapsed-lumen / partial-volume voxels included by the model's region label",
+      "voxels_before": 14787,
+      "voxels_after": 13632
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 13632,
+    "volume_mL": 5.751,
+    "voxel_count_before_corrections": 14787,
+    "volume_mL_before_corrections": 6.2383,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.002025,
+     0.116128,
+     0.028841
+    ],
+    "bbox_min_m": [
+     -0.0128,
+     0.108,
+     0.0165
+    ],
+    "bbox_max_m": [
+     0.01645,
+     0.1275,
+     0.0375
+    ],
+    "hu_mean": -930.4,
+    "hu_sd": 137.7,
+    "hu_p05": -1023.0,
+    "hu_median": -983.0,
+    "hu_p95": -561.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1703,
+    "volume_mL": 5.748,
+    "volume_ratio_to_mask": 0.999
+   },
+   "mesh": {
+    "node": "nasopharynx",
+    "triangles_raw": 8928,
+    "triangles_final": 4060,
+    "vertices_final": 2032,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0855,
+     "p95": 0.2348,
+     "max": 0.3925
+    },
+    "volume_mL_raw_mesh": 5.7366,
+    "volume_mL_final_mesh": 5.7559,
+    "volume_change_pct_raw_to_final": 0.336,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.086,
+    "centroid_m": [
+     0.002024,
+     0.116127,
+     0.028845
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   }
+  },
+  {
+   "id": "thyroid_cartilage",
+   "display_name": "Thyroid cartilage",
+   "side": "midline",
+   "group": "cartilage",
+   "label_id": 6,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 2,
+    "class": "thyroid_cartilage"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Both laminae with superior and inferior horns; partly ossified (mean 149 HU, p95 306). Laminae are about 3 mm thick = 2 published voxels, so the outline is approximate. One 60-voxel island removed.",
+    "corrections": [
+     {
+      "step": "E",
+      "operation": "Islands REMOVE_SMALL_ISLANDS (< 200 voxels)",
+      "reason": "1 disconnected fragment(s) smaller than 84 mm3 (of 2 components)",
+      "voxels_before": 20207,
+      "voxels_after": 20147
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 20147,
+    "volume_mL": 8.4995,
+    "voxel_count_before_corrections": 20207,
+    "volume_mL_before_corrections": 8.5248,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000797,
+     0.01414,
+     0.022385
+    ],
+    "bbox_min_m": [
+     -0.0218,
+     -0.00525,
+     0.0045
+    ],
+    "bbox_max_m": [
+     0.0232,
+     0.03225,
+     0.04575
+    ],
+    "hu_mean": 149.4,
+    "hu_sd": 84.9,
+    "hu_p05": 72.0,
+    "hu_median": 119.0,
+    "hu_p95": 305.7,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2685,
+    "volume_mL": 9.062,
+    "volume_ratio_to_mask": 1.066
+   },
+   "mesh": {
+    "node": "thyroid_cartilage",
+    "triangles_raw": 27896,
+    "triangles_final": 13760,
+    "vertices_final": 6882,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 18 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0896,
+     "p95": 0.2438,
+     "max": 0.3581
+    },
+    "volume_mL_raw_mesh": 8.46,
+    "volume_mL_final_mesh": 8.4915,
+    "volume_change_pct_raw_to_final": 0.372,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.094,
+    "centroid_m": [
+     0.000796,
+     0.014136,
+     0.022378
+    ],
+    "centroid_error_vs_mask_mm": 0.008
+   }
+  },
+  {
+   "id": "cricoid_cartilage",
+   "display_name": "Cricoid cartilage",
+   "side": "midline",
+   "group": "cartilage",
+   "label_id": 7,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 4,
+    "class": "cricoid_cartilage"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Complete ring: tall posterior lamina, low anterior arch. Not ossified (116 HU); its border relies on about 60 HU contrast against muscle and looks slightly thick. Lies at the C6-C7 level.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 10278,
+    "volume_mL": 4.336,
+    "voxel_count_before_corrections": 10278,
+    "volume_mL_before_corrections": 4.336,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000604,
+     -0.003852,
+     0.0123
+    ],
+    "bbox_min_m": [
+     -0.0143,
+     -0.0135,
+     0.003
+    ],
+    "bbox_max_m": [
+     0.0157,
+     0.00825,
+     0.02925
+    ],
+    "hu_mean": 116.3,
+    "hu_sd": 37.2,
+    "hu_p05": 62.0,
+    "hu_median": 114.0,
+    "hu_p95": 174.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1356,
+    "volume_mL": 4.577,
+    "volume_ratio_to_mask": 1.055
+   },
+   "mesh": {
+    "node": "cricoid_cartilage",
+    "triangles_raw": 11696,
+    "triangles_final": 7150,
+    "vertices_final": 3577,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 18 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0869,
+     "p95": 0.2264,
+     "max": 0.3528
+    },
+    "volume_mL_raw_mesh": 4.3161,
+    "volume_mL_final_mesh": 4.3331,
+    "volume_change_pct_raw_to_final": 0.394,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.068,
+    "centroid_m": [
+     0.000603,
+     -0.003846,
+     0.012293
+    ],
+    "centroid_error_vs_mask_mm": 0.009
+   }
+  },
+  {
+   "id": "hyoid",
+   "display_name": "Hyoid bone",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 8,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 3,
+    "class": "hyoid"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body and both greater horns, lesser horns as small bumps (410 HU); lies at the C4 level.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 7723,
+    "volume_mL": 3.2581,
+    "voxel_count_before_corrections": 7723,
+    "volume_mL_before_corrections": 3.2581,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.001553,
+     0.040658,
+     0.028408
+    ],
+    "bbox_min_m": [
+     -0.0203,
+     0.0315,
+     0.0015
+    ],
+    "bbox_max_m": [
+     0.0232,
+     0.05175,
+     0.04125
+    ],
+    "hu_mean": 409.5,
+    "hu_sd": 217.3,
+    "hu_p05": 125.0,
+    "hu_median": 369.0,
+    "hu_p95": 839.9,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1003,
+    "volume_mL": 3.385,
+    "volume_ratio_to_mask": 1.039
+   },
+   "mesh": {
+    "node": "hyoid",
+    "triangles_raw": 11356,
+    "triangles_final": 6826,
+    "vertices_final": 3415,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 14 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0802,
+     "p95": 0.2077,
+     "max": 0.3156
+    },
+    "volume_mL_raw_mesh": 3.2276,
+    "volume_mL_final_mesh": 3.2465,
+    "volume_change_pct_raw_to_final": 0.584,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.356,
+    "centroid_m": [
+     0.001563,
+     0.040648,
+     0.028438
+    ],
+    "centroid_error_vs_mask_mm": 0.033
+   }
+  },
+  {
+   "id": "teeth_upper",
+   "display_name": "Maxillary teeth",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 9,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "craniofacial_structures",
+    "label_value": 7,
+    "class": "teeth_upper"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Maxillary dentition as one merged body; single teeth are not separable at 1.5 mm. Front teeth border the publisher-blurred zone.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 33719,
+    "volume_mL": 14.2252,
+    "voxel_count_before_corrections": 33719,
+    "volume_mL_before_corrections": 14.2252,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.000541,
+     0.089369,
+     0.072906
+    ],
+    "bbox_min_m": [
+     -0.0308,
+     0.0765,
+     0.04275
+    ],
+    "bbox_max_m": [
+     0.0322,
+     0.10425,
+     0.09825
+    ],
+    "hu_mean": 1390.4,
+    "hu_sd": 430.6,
+    "hu_p05": 754.0,
+    "hu_median": 1367.0,
+    "hu_p95": 2212.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4457,
+    "volume_mL": 15.042,
+    "volume_ratio_to_mask": 1.057
+   },
+   "mesh": {
+    "node": "teeth_upper",
+    "triangles_raw": 39068,
+    "triangles_final": 5864,
+    "vertices_final": 2928,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 8 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0737,
+     "p95": 0.2188,
+     "max": 0.3898
+    },
+    "volume_mL_raw_mesh": 14.1407,
+    "volume_mL_final_mesh": 14.1172,
+    "volume_change_pct_raw_to_final": -0.166,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.759,
+    "centroid_m": [
+     -0.000551,
+     0.089342,
+     0.0729
+    ],
+    "centroid_error_vs_mask_mm": 0.029
+   }
+  },
+  {
+   "id": "teeth_lower",
+   "display_name": "Mandibular teeth",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 10,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "craniofacial_structures",
+    "label_value": 2,
+    "class": "teeth_lower"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Mandibular dentition as one merged structure in three parts (front arch and two posterior groups); single teeth are not separable at 1.5 mm. Front teeth border the publisher-blurred zone.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 25024,
+    "volume_mL": 10.557,
+    "voxel_count_before_corrections": 25024,
+    "volume_mL_before_corrections": 10.557,
+    "components": 3,
+    "largest_component_fraction": 0.65901,
+    "centroid_m": [
+     0.000374,
+     0.073796,
+     0.069733
+    ],
+    "bbox_min_m": [
+     -0.03605,
+     0.05475,
+     0.039
+    ],
+    "bbox_max_m": [
+     0.0367,
+     0.08925,
+     0.09525
+    ],
+    "hu_mean": 1406.5,
+    "hu_sd": 394.5,
+    "hu_p05": 796.2,
+    "hu_median": 1382.0,
+    "hu_p95": 2180.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3301,
+    "volume_mL": 11.141,
+    "volume_ratio_to_mask": 1.055
+   },
+   "mesh": {
+    "node": "teeth_lower",
+    "triangles_raw": 33676,
+    "triangles_final": 5184,
+    "vertices_final": 2590,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 8 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0764,
+     "p95": 0.2235,
+     "max": 0.3667
+    },
+    "volume_mL_raw_mesh": 10.4695,
+    "volume_mL_final_mesh": 10.438,
+    "volume_change_pct_raw_to_final": -0.301,
+    "volume_diff_pct_final_mesh_vs_voxels": -1.127,
+    "centroid_m": [
+     0.000367,
+     0.073831,
+     0.069721
+    ],
+    "centroid_error_vs_mask_mm": 0.038
+   }
+  },
+  {
+   "id": "mandible",
+   "display_name": "Mandible",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 11,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "craniofacial_structures",
+    "label_value": 1,
+    "class": "mandible"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Complete, including both condyles and coronoid processes; teeth are separate structures.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 167627,
+    "volume_mL": 70.7176,
+    "voxel_count_before_corrections": 167627,
+    "volume_mL_before_corrections": 70.7176,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     1.2e-05,
+     0.07534,
+     0.048652
+    ],
+    "bbox_min_m": [
+     -0.0608,
+     0.03675,
+     0.00375
+    ],
+    "bbox_max_m": [
+     0.0637,
+     0.138,
+     0.0945
+    ],
+    "hu_mean": 795.2,
+    "hu_sd": 402.3,
+    "hu_p05": 202.0,
+    "hu_median": 771.0,
+    "hu_p95": 1473.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 21610,
+    "volume_mL": 72.934,
+    "volume_ratio_to_mask": 1.031
+   },
+   "mesh": {
+    "node": "mandible",
+    "triangles_raw": 129808,
+    "triangles_final": 17196,
+    "vertices_final": 8584,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.09,
+     "p95": 0.2529,
+     "max": 0.4477
+    },
+    "volume_mL_raw_mesh": 70.6374,
+    "volume_mL_final_mesh": 70.6804,
+    "volume_change_pct_raw_to_final": 0.061,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.053,
+    "centroid_m": [
+     1.2e-05,
+     0.075336,
+     0.048641
+    ],
+    "centroid_error_vs_mask_mm": 0.011
+   }
+  },
+  {
+   "id": "hard_palate",
+   "display_name": "Hard palate",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 12,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 19,
+    "class": "hard_palate"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Bony palate, about 2.9 mm thick (2 published voxels). Lies inside the skull mask, which gives it up (overlap rule). Its slice label is 19 % larger than the mask because of the 1.5 mm grid.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 6017,
+    "volume_mL": 2.5384,
+    "voxel_count_before_corrections": 6017,
+    "volume_mL_before_corrections": 2.5384,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.001519,
+     0.1062,
+     0.065442
+    ],
+    "bbox_min_m": [
+     -0.01355,
+     0.1005,
+     0.0435
+    ],
+    "bbox_max_m": [
+     0.01645,
+     0.11025,
+     0.0825
+    ],
+    "hu_mean": 609.4,
+    "hu_sd": 288.8,
+    "hu_p05": 107.8,
+    "hu_median": 664.0,
+    "hu_p95": 1004.2,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 896,
+    "volume_mL": 3.024,
+    "volume_ratio_to_mask": 1.191
+   },
+   "mesh": {
+    "node": "hard_palate",
+    "triangles_raw": 9212,
+    "triangles_final": 3188,
+    "vertices_final": 1596,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 12 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0772,
+     "p95": 0.2116,
+     "max": 0.3184
+    },
+    "volume_mL_raw_mesh": 2.5181,
+    "volume_mL_final_mesh": 2.5251,
+    "volume_change_pct_raw_to_final": 0.279,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.524,
+    "centroid_m": [
+     0.00152,
+     0.106198,
+     0.065478
+    ],
+    "centroid_error_vs_mask_mm": 0.036
+   }
+  },
+  {
+   "id": "vertebrae_C1",
+   "display_name": "Atlas (C1 vertebra)",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 13,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 50,
+    "class": "vertebrae_C1"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.93 against the publisher's label. Note: ring without a body.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9269
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 37097,
+    "volume_mL": 15.6503,
+    "voxel_count_before_corrections": 37097,
+    "volume_mL_before_corrections": 15.6503,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -9.8e-05,
+     0.102238,
+     -0.013028
+    ],
+    "bbox_min_m": [
+     -0.04205,
+     0.09,
+     -0.0435
+    ],
+    "bbox_max_m": [
+     0.0412,
+     0.1125,
+     0.0075
+    ],
+    "hu_mean": 531.6,
+    "hu_sd": 252.2,
+    "hu_p05": 169.0,
+    "hu_median": 501.0,
+    "hu_p95": 999.2,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4773,
+    "volume_mL": 16.109,
+    "volume_ratio_to_mask": 1.029
+   },
+   "mesh": {
+    "node": "vertebrae_C1",
+    "triangles_raw": 33004,
+    "triangles_final": 5110,
+    "vertices_final": 2549,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 4,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0882,
+     "p95": 0.2483,
+     "max": 1.0548
+    },
+    "volume_mL_raw_mesh": 15.5981,
+    "volume_mL_final_mesh": 15.6388,
+    "volume_change_pct_raw_to_final": 0.261,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.074,
+    "centroid_m": [
+     -0.000108,
+     0.102237,
+     -0.013027
+    ],
+    "centroid_error_vs_mask_mm": 0.01
+   }
+  },
+  {
+   "id": "vertebrae_C2",
+   "display_name": "Axis (C2 vertebra)",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 14,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 49,
+    "class": "vertebrae_C2"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.96 against the publisher's label. Note: dens visible.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9624
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 54583,
+    "volume_mL": 23.0272,
+    "voxel_count_before_corrections": 54583,
+    "volume_mL_before_corrections": 23.0272,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.00096,
+     0.083425,
+     -0.017392
+    ],
+    "bbox_min_m": [
+     -0.0278,
+     0.06525,
+     -0.0525
+    ],
+    "bbox_max_m": [
+     0.0277,
+     0.11025,
+     0.0015
+    ],
+    "hu_mean": 474.4,
+    "hu_sd": 223.8,
+    "hu_p05": 176.0,
+    "hu_median": 432.0,
+    "hu_p95": 903.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 6960,
+    "volume_mL": 23.49,
+    "volume_ratio_to_mask": 1.02
+   },
+   "mesh": {
+    "node": "vertebrae_C2",
+    "triangles_raw": 36796,
+    "triangles_final": 5596,
+    "vertices_final": 2798,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0849,
+     "p95": 0.2461,
+     "max": 0.4216
+    },
+    "volume_mL_raw_mesh": 22.9858,
+    "volume_mL_final_mesh": 23.029,
+    "volume_change_pct_raw_to_final": 0.188,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.008,
+    "centroid_m": [
+     0.000961,
+     0.083427,
+     -0.01739
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   }
+  },
+  {
+   "id": "vertebrae_C3",
+   "display_name": "C3 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 15,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 48,
+    "class": "vertebrae_C3"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.95 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9521
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 35343,
+    "volume_mL": 14.9103,
+    "voxel_count_before_corrections": 35343,
+    "volume_mL_before_corrections": 14.9103,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.000247,
+     0.060906,
+     -0.019424
+    ],
+    "bbox_min_m": [
+     -0.0293,
+     0.04575,
+     -0.0465
+    ],
+    "bbox_max_m": [
+     0.0277,
+     0.075,
+     0.0
+    ],
+    "hu_mean": 461.8,
+    "hu_sd": 205.6,
+    "hu_p05": 200.0,
+    "hu_median": 417.0,
+    "hu_p95": 868.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4520,
+    "volume_mL": 15.255,
+    "volume_ratio_to_mask": 1.023
+   },
+   "mesh": {
+    "node": "vertebrae_C3",
+    "triangles_raw": 28396,
+    "triangles_final": 4598,
+    "vertices_final": 2297,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0882,
+     "p95": 0.2511,
+     "max": 0.4324
+    },
+    "volume_mL_raw_mesh": 14.8708,
+    "volume_mL_final_mesh": 14.9042,
+    "volume_change_pct_raw_to_final": 0.225,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.041,
+    "centroid_m": [
+     -0.000244,
+     0.060904,
+     -0.019423
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   }
+  },
+  {
+   "id": "vertebrae_C4",
+   "display_name": "C4 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 16,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 47,
+    "class": "vertebrae_C4"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.95 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9512
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 33791,
+    "volume_mL": 14.2556,
+    "voxel_count_before_corrections": 33791,
+    "volume_mL_before_corrections": 14.2556,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.001148,
+     0.041791,
+     -0.018072
+    ],
+    "bbox_min_m": [
+     -0.03005,
+     0.0285,
+     -0.045
+    ],
+    "bbox_max_m": [
+     0.0262,
+     0.0555,
+     -0.0015
+    ],
+    "hu_mean": 513.7,
+    "hu_sd": 215.3,
+    "hu_p05": 246.0,
+    "hu_median": 468.0,
+    "hu_p95": 946.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4318,
+    "volume_mL": 14.573,
+    "volume_ratio_to_mask": 1.022
+   },
+   "mesh": {
+    "node": "vertebrae_C4",
+    "triangles_raw": 28404,
+    "triangles_final": 4642,
+    "vertices_final": 2317,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0888,
+     "p95": 0.2501,
+     "max": 0.4262
+    },
+    "volume_mL_raw_mesh": 14.2157,
+    "volume_mL_final_mesh": 14.2442,
+    "volume_change_pct_raw_to_final": 0.2,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.08,
+    "centroid_m": [
+     -0.001147,
+     0.04179,
+     -0.01807
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   }
+  },
+  {
+   "id": "vertebrae_C5",
+   "display_name": "C5 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 17,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 46,
+    "class": "vertebrae_C5"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.95 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9491
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 34675,
+    "volume_mL": 14.6285,
+    "voxel_count_before_corrections": 34675,
+    "volume_mL_before_corrections": 14.6285,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.003834,
+     0.022654,
+     -0.018886
+    ],
+    "bbox_min_m": [
+     -0.03305,
+     0.009,
+     -0.04725
+    ],
+    "bbox_max_m": [
+     0.02695,
+     0.03675,
+     -0.0015
+    ],
+    "hu_mean": 538.7,
+    "hu_sd": 227.2,
+    "hu_p05": 259.0,
+    "hu_median": 492.0,
+    "hu_p95": 994.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4423,
+    "volume_mL": 14.928,
+    "volume_ratio_to_mask": 1.02
+   },
+   "mesh": {
+    "node": "vertebrae_C5",
+    "triangles_raw": 30192,
+    "triangles_final": 4862,
+    "vertices_final": 2427,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.089,
+     "p95": 0.2519,
+     "max": 0.4698
+    },
+    "volume_mL_raw_mesh": 14.5826,
+    "volume_mL_final_mesh": 14.6164,
+    "volume_change_pct_raw_to_final": 0.232,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.083,
+    "centroid_m": [
+     -0.003837,
+     0.022656,
+     -0.018886
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   }
+  },
+  {
+   "id": "vertebrae_C6",
+   "display_name": "C6 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 18,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 45,
+    "class": "vertebrae_C6"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.95 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9474
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 37984,
+    "volume_mL": 16.0245,
+    "voxel_count_before_corrections": 37984,
+    "volume_mL_before_corrections": 16.0245,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.005218,
+     0.004123,
+     -0.020404
+    ],
+    "bbox_min_m": [
+     -0.0338,
+     -0.00975,
+     -0.05625
+    ],
+    "bbox_max_m": [
+     0.02545,
+     0.01725,
+     -0.0015
+    ],
+    "hu_mean": 470.6,
+    "hu_sd": 217.7,
+    "hu_p05": 212.0,
+    "hu_median": 418.0,
+    "hu_p95": 915.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4878,
+    "volume_mL": 16.463,
+    "volume_ratio_to_mask": 1.027
+   },
+   "mesh": {
+    "node": "vertebrae_C6",
+    "triangles_raw": 32888,
+    "triangles_final": 5138,
+    "vertices_final": 2565,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0896,
+     "p95": 0.2543,
+     "max": 0.4234
+    },
+    "volume_mL_raw_mesh": 15.981,
+    "volume_mL_final_mesh": 16.013,
+    "volume_change_pct_raw_to_final": 0.2,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.072,
+    "centroid_m": [
+     -0.005217,
+     0.004123,
+     -0.020404
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   }
+  },
+  {
+   "id": "vertebrae_C7",
+   "display_name": "C7 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 19,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 44,
+    "class": "vertebrae_C7"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.95 against the publisher's label. Note: long spinous process.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9521
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 44908,
+    "volume_mL": 18.9456,
+    "voxel_count_before_corrections": 44908,
+    "volume_mL_before_corrections": 18.9456,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.003587,
+     -0.013643,
+     -0.026743
+    ],
+    "bbox_min_m": [
+     -0.0383,
+     -0.03,
+     -0.0705
+    ],
+    "bbox_max_m": [
+     0.0277,
+     0.00075,
+     -0.006
+    ],
+    "hu_mean": 384.0,
+    "hu_sd": 191.2,
+    "hu_p05": 155.0,
+    "hu_median": 334.0,
+    "hu_p95": 768.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 5762,
+    "volume_mL": 19.447,
+    "volume_ratio_to_mask": 1.026
+   },
+   "mesh": {
+    "node": "vertebrae_C7",
+    "triangles_raw": 35676,
+    "triangles_final": 5372,
+    "vertices_final": 2686,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0877,
+     "p95": 0.2509,
+     "max": 0.4153
+    },
+    "volume_mL_raw_mesh": 18.9013,
+    "volume_mL_final_mesh": 18.936,
+    "volume_change_pct_raw_to_final": 0.184,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.051,
+    "centroid_m": [
+     -0.003585,
+     -0.013644,
+     -0.026744
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   }
+  },
+  {
+   "id": "vertebrae_T1",
+   "display_name": "T1 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 20,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 43,
+    "class": "vertebrae_T1"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.96 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9612
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 63439,
+    "volume_mL": 26.7633,
+    "voxel_count_before_corrections": 63439,
+    "volume_mL_before_corrections": 26.7633,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000304,
+     -0.031114,
+     -0.036608
+    ],
+    "bbox_min_m": [
+     -0.0413,
+     -0.05025,
+     -0.0825
+    ],
+    "bbox_max_m": [
+     0.0397,
+     -0.00825,
+     -0.0135
+    ],
+    "hu_mean": 319.2,
+    "hu_sd": 173.3,
+    "hu_p05": 126.0,
+    "hu_median": 270.0,
+    "hu_p95": 666.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 8091,
+    "volume_mL": 27.307,
+    "volume_ratio_to_mask": 1.02
+   },
+   "mesh": {
+    "node": "vertebrae_T1",
+    "triangles_raw": 43196,
+    "triangles_final": 6202,
+    "vertices_final": 3101,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0879,
+     "p95": 0.2477,
+     "max": 0.3995
+    },
+    "volume_mL_raw_mesh": 26.7144,
+    "volume_mL_final_mesh": 26.7566,
+    "volume_change_pct_raw_to_final": 0.158,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.025,
+    "centroid_m": [
+     0.000305,
+     -0.031115,
+     -0.036609
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   }
+  },
+  {
+   "id": "vertebrae_T2",
+   "display_name": "T2 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 21,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 42,
+    "class": "vertebrae_T2"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.96 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9599
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 65122,
+    "volume_mL": 27.4733,
+    "voxel_count_before_corrections": 65122,
+    "volume_mL_before_corrections": 27.4733,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.004081,
+     -0.050513,
+     -0.047616
+    ],
+    "bbox_min_m": [
+     -0.0353,
+     -0.06975,
+     -0.093
+    ],
+    "bbox_max_m": [
+     0.04045,
+     -0.027,
+     -0.0225
+    ],
+    "hu_mean": 308.3,
+    "hu_sd": 149.1,
+    "hu_p05": 129.0,
+    "hu_median": 268.0,
+    "hu_p95": 603.9,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 8276,
+    "volume_mL": 27.931,
+    "volume_ratio_to_mask": 1.017
+   },
+   "mesh": {
+    "node": "vertebrae_T2",
+    "triangles_raw": 43828,
+    "triangles_final": 6262,
+    "vertices_final": 3131,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.087,
+     "p95": 0.252,
+     "max": 0.416
+    },
+    "volume_mL_raw_mesh": 27.4252,
+    "volume_mL_final_mesh": 27.4667,
+    "volume_change_pct_raw_to_final": 0.151,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.024,
+    "centroid_m": [
+     0.00408,
+     -0.050515,
+     -0.047613
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   }
+  },
+  {
+   "id": "vertebrae_T3",
+   "display_name": "T3 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 22,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 41,
+    "class": "vertebrae_T3"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.96 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.96
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 59224,
+    "volume_mL": 24.9851,
+    "voxel_count_before_corrections": 59224,
+    "volume_mL_before_corrections": 24.9851,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.005829,
+     -0.071025,
+     -0.059556
+    ],
+    "bbox_min_m": [
+     -0.02855,
+     -0.09,
+     -0.1065
+    ],
+    "bbox_max_m": [
+     0.0397,
+     -0.05175,
+     -0.03225
+    ],
+    "hu_mean": 323.6,
+    "hu_sd": 157.5,
+    "hu_p05": 130.0,
+    "hu_median": 284.0,
+    "hu_p95": 637.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 7541,
+    "volume_mL": 25.451,
+    "volume_ratio_to_mask": 1.019
+   },
+   "mesh": {
+    "node": "vertebrae_T3",
+    "triangles_raw": 42008,
+    "triangles_final": 6100,
+    "vertices_final": 3050,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0865,
+     "p95": 0.2468,
+     "max": 0.4367
+    },
+    "volume_mL_raw_mesh": 24.9356,
+    "volume_mL_final_mesh": 24.9795,
+    "volume_change_pct_raw_to_final": 0.176,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.023,
+    "centroid_m": [
+     0.005828,
+     -0.071027,
+     -0.059557
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   }
+  },
+  {
+   "id": "vertebrae_T4",
+   "display_name": "T4 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 23,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 40,
+    "class": "vertebrae_T4"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.96 against the publisher's label. Note: tip of the spinous process touches the posterior image border (132 border voxels).",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9636
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 60365,
+    "volume_mL": 25.4665,
+    "voxel_count_before_corrections": 60365,
+    "volume_mL_before_corrections": 25.4665,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.006933,
+     -0.092019,
+     -0.069299
+    ],
+    "bbox_min_m": [
+     -0.0248,
+     -0.11025,
+     -0.114
+    ],
+    "bbox_max_m": [
+     0.03895,
+     -0.0735,
+     -0.0405
+    ],
+    "hu_mean": 320.7,
+    "hu_sd": 156.9,
+    "hu_p05": 138.0,
+    "hu_median": 280.0,
+    "hu_p95": 638.0,
+    "cut_by_field_of_view": {
+     "posterior image border": {
+      "voxels": 132,
+      "cut_face_cm2": 0.74
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 7675,
+    "volume_mL": 25.903,
+    "volume_ratio_to_mask": 1.017
+   },
+   "mesh": {
+    "node": "vertebrae_T4",
+    "triangles_raw": 41804,
+    "triangles_final": 6106,
+    "vertices_final": 3053,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0854,
+     "p95": 0.2466,
+     "max": 0.3923
+    },
+    "volume_mL_raw_mesh": 25.4184,
+    "volume_mL_final_mesh": 25.4622,
+    "volume_change_pct_raw_to_final": 0.172,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.017,
+    "centroid_m": [
+     0.006933,
+     -0.092021,
+     -0.069302
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   }
+  },
+  {
+   "id": "vertebrae_T5",
+   "display_name": "T5 vertebra",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 24,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 39,
+    "class": "vertebrae_T5"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Body, arch and processes follow the bone; level counted down from C1 and C2. Dice 0.96 against the publisher's label. Note: tip of the spinous process touches the posterior image border (69 border voxels); one 14-voxel island removed.",
+    "corrections": [
+     {
+      "step": "E",
+      "operation": "Islands REMOVE_SMALL_ISLANDS (< 200 voxels)",
+      "reason": "1 disconnected fragment(s) smaller than 84 mm3 (of 2 components)",
+      "voxels_before": 61729,
+      "voxels_after": 61715
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9629
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 61715,
+    "volume_mL": 26.036,
+    "voxel_count_before_corrections": 61729,
+    "volume_mL_before_corrections": 26.0419,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.007522,
+     -0.113956,
+     -0.076426
+    ],
+    "bbox_min_m": [
+     -0.0248,
+     -0.13275,
+     -0.114
+    ],
+    "bbox_max_m": [
+     0.0397,
+     -0.09375,
+     -0.0465
+    ],
+    "hu_mean": 318.6,
+    "hu_sd": 148.6,
+    "hu_p05": 149.0,
+    "hu_median": 280.0,
+    "hu_p95": 619.0,
+    "cut_by_field_of_view": {
+     "posterior image border": {
+      "voxels": 69,
+      "cut_face_cm2": 0.39
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 7863,
+    "volume_mL": 26.538,
+    "volume_ratio_to_mask": 1.019
+   },
+   "mesh": {
+    "node": "vertebrae_T5",
+    "triangles_raw": 41612,
+    "triangles_final": 6092,
+    "vertices_final": 3046,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0861,
+     "p95": 0.2499,
+     "max": 0.4288
+    },
+    "volume_mL_raw_mesh": 25.987,
+    "volume_mL_final_mesh": 26.0287,
+    "volume_change_pct_raw_to_final": 0.161,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.028,
+    "centroid_m": [
+     0.007521,
+     -0.113958,
+     -0.076427
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   }
+  },
+  {
+   "id": "rib_left_1",
+   "display_name": "First rib, left",
+   "side": "left",
+   "group": "bone",
+   "label_id": 25,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 92,
+    "class": "rib_left_1"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "First rib. Its head ends 5.5 mm from T1 (rib heads are a known shortfall of the model) and its anterior end 12 mm from the manubrium (costal cartilage not exported); 75 voxels touch the left image border. Dice 0.91 against the publisher's label before corrections.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9068
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 21603,
+    "volume_mL": 9.1138,
+    "voxel_count_before_corrections": 21603,
+    "volume_mL_before_corrections": 9.1138,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.056295,
+     -0.062299,
+     -0.003017
+    ],
+    "bbox_min_m": [
+     0.0412,
+     -0.105,
+     -0.03525
+    ],
+    "bbox_max_m": [
+     0.0727,
+     -0.0165,
+     0.04125
+    ],
+    "hu_mean": 442.6,
+    "hu_sd": 204.5,
+    "hu_p05": 129.0,
+    "hu_median": 434.0,
+    "hu_p95": 816.0,
+    "cut_by_field_of_view": {
+     "left image border": {
+      "voxels": 75,
+      "cut_face_cm2": 0.42
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2847,
+    "volume_mL": 9.609,
+    "volume_ratio_to_mask": 1.054
+   },
+   "mesh": {
+    "node": "rib_left_1",
+    "triangles_raw": 27772,
+    "triangles_final": 4246,
+    "vertices_final": 2123,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0804,
+     "p95": 0.235,
+     "max": 0.4586
+    },
+    "volume_mL_raw_mesh": 9.0768,
+    "volume_mL_final_mesh": 9.1077,
+    "volume_change_pct_raw_to_final": 0.341,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.067,
+    "centroid_m": [
+     0.0563,
+     -0.062284,
+     -0.003032
+    ],
+    "centroid_error_vs_mask_mm": 0.021
+   },
+   "paired_with": "rib_right_1",
+   "volume_ratio_to_pair": 0.944,
+   "laterality_check": {
+    "centroid_x_mm": 56.3,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "rib_right_1",
+   "display_name": "First rib, right",
+   "side": "right",
+   "group": "bone",
+   "label_id": 26,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 104,
+    "class": "rib_right_1"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "First rib; its head is 2.2 mm from T1 and its anterior end 13 mm from the manubrium (costal cartilage not exported). Dice 0.92 against the publisher's label before corrections.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9195
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 22884,
+    "volume_mL": 9.6542,
+    "voxel_count_before_corrections": 22884,
+    "volume_mL_before_corrections": 9.6542,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.051759,
+     -0.06947,
+     -0.012272
+    ],
+    "bbox_min_m": [
+     -0.06755,
+     -0.108,
+     -0.04425
+    ],
+    "bbox_max_m": [
+     -0.0338,
+     -0.02325,
+     0.02925
+    ],
+    "hu_mean": 437.4,
+    "hu_sd": 224.0,
+    "hu_p05": 101.0,
+    "hu_median": 427.0,
+    "hu_p95": 823.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3030,
+    "volume_mL": 10.226,
+    "volume_ratio_to_mask": 1.059
+   },
+   "mesh": {
+    "node": "rib_right_1",
+    "triangles_raw": 26564,
+    "triangles_final": 4072,
+    "vertices_final": 2038,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.075,
+     "p95": 0.2314,
+     "max": 0.4046
+    },
+    "volume_mL_raw_mesh": 9.6157,
+    "volume_mL_final_mesh": 9.6506,
+    "volume_change_pct_raw_to_final": 0.363,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.037,
+    "centroid_m": [
+     -0.051763,
+     -0.069452,
+     -0.012292
+    ],
+    "centroid_error_vs_mask_mm": 0.027
+   },
+   "paired_with": "rib_left_1",
+   "volume_ratio_to_pair": 1.059,
+   "laterality_check": {
+    "centroid_x_mm": -51.76,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "clavicula_left",
+   "display_name": "Clavicle, left (medial part)",
+   "side": "left",
+   "group": "bone",
+   "label_id": 27,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 73,
+    "class": "clavicula_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Only the medial 58 mm is inside the scan: cut flat by the left image border (2.1 cm2 cut face). Kept because the sternoclavicular end is the landmark. Dice 0.92 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9198
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 33787,
+    "volume_mL": 14.2539,
+    "voxel_count_before_corrections": 33787,
+    "volume_mL_before_corrections": 14.2539,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.04211,
+     -0.074954,
+     0.027983
+    ],
+    "bbox_min_m": [
+     0.01495,
+     -0.09825,
+     0.01275
+    ],
+    "bbox_max_m": [
+     0.0727,
+     -0.048,
+     0.039
+    ],
+    "hu_mean": 433.7,
+    "hu_sd": 297.6,
+    "hu_p05": 55.0,
+    "hu_median": 370.0,
+    "hu_p95": 1008.0,
+    "cut_by_field_of_view": {
+     "left image border": {
+      "voxels": 369,
+      "cut_face_cm2": 2.08
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4321,
+    "volume_mL": 14.583,
+    "volume_ratio_to_mask": 1.023
+   },
+   "mesh": {
+    "node": "clavicula_left",
+    "triangles_raw": 21196,
+    "triangles_final": 3630,
+    "vertices_final": 1817,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0833,
+     "p95": 0.2411,
+     "max": 0.3716
+    },
+    "volume_mL_raw_mesh": 14.2282,
+    "volume_mL_final_mesh": 14.2612,
+    "volume_change_pct_raw_to_final": 0.232,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.051,
+    "centroid_m": [
+     0.042112,
+     -0.074952,
+     0.027984
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   },
+   "paired_with": "clavicula_right",
+   "volume_ratio_to_pair": 0.845,
+   "laterality_check": {
+    "centroid_x_mm": 42.11,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "clavicula_right",
+   "display_name": "Clavicle, right (medial part)",
+   "side": "right",
+   "group": "bone",
+   "label_id": 28,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 74,
+    "class": "clavicula_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Only the medial 62 mm is inside the scan: cut flat by the right image border (2.7 cm2 cut face). Kept because the sternoclavicular end is the landmark. Dice 0.92 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9173
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 39999,
+    "volume_mL": 16.8746,
+    "voxel_count_before_corrections": 39999,
+    "volume_mL_before_corrections": 16.8746,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.043238,
+     -0.073955,
+     0.024253
+    ],
+    "bbox_min_m": [
+     -0.0743,
+     -0.099,
+     0.0105
+    ],
+    "bbox_max_m": [
+     -0.0128,
+     -0.03825,
+     0.0375
+    ],
+    "hu_mean": 429.5,
+    "hu_sd": 288.0,
+    "hu_p05": 70.0,
+    "hu_median": 363.0,
+    "hu_p95": 973.0,
+    "cut_by_field_of_view": {
+     "right image border": {
+      "voxels": 477,
+      "cut_face_cm2": 2.68
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 5135,
+    "volume_mL": 17.331,
+    "volume_ratio_to_mask": 1.027
+   },
+   "mesh": {
+    "node": "clavicula_right",
+    "triangles_raw": 24628,
+    "triangles_final": 4026,
+    "vertices_final": 2015,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0806,
+     "p95": 0.2353,
+     "max": 0.4184
+    },
+    "volume_mL_raw_mesh": 16.8463,
+    "volume_mL_final_mesh": 16.8782,
+    "volume_change_pct_raw_to_final": 0.189,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.021,
+    "centroid_m": [
+     -0.043239,
+     -0.073955,
+     0.024253
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   },
+   "paired_with": "clavicula_left",
+   "volume_ratio_to_pair": 1.184,
+   "laterality_check": {
+    "centroid_x_mm": -43.24,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "sternum",
+   "display_name": "Sternum (manubrium and upper body)",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 29,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 116,
+    "class": "sternum"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Manubrium and the start of the body (51 mm); cut by the lower scan boundary. Dice 0.90 against the publisher's label before corrections.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9048
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 77984,
+    "volume_mL": 32.8995,
+    "voxel_count_before_corrections": 77984,
+    "volume_mL_before_corrections": 32.8995,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000956,
+     -0.110381,
+     0.039866
+    ],
+    "bbox_min_m": [
+     -0.0293,
+     -0.13875,
+     0.02325
+    ],
+    "bbox_max_m": [
+     0.0322,
+     -0.08775,
+     0.0615
+    ],
+    "hu_mean": 201.3,
+    "hu_sd": 110.0,
+    "hu_p05": 68.0,
+    "hu_median": 179.0,
+    "hu_p95": 414.0,
+    "cut_by_field_of_view": {
+     "lower scan boundary": {
+      "voxels": 196,
+      "cut_face_cm2": 1.1
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 9943,
+    "volume_mL": 33.558,
+    "volume_ratio_to_mask": 1.02
+   },
+   "mesh": {
+    "node": "sternum",
+    "triangles_raw": 35068,
+    "triangles_final": 4404,
+    "vertices_final": 2204,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0892,
+     "p95": 0.2553,
+     "max": 0.3902
+    },
+    "volume_mL_raw_mesh": 32.8672,
+    "volume_mL_final_mesh": 32.9002,
+    "volume_change_pct_raw_to_final": 0.1,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.002,
+    "centroid_m": [
+     0.000957,
+     -0.110381,
+     0.039865
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   }
+  },
+  {
+   "id": "skull",
+   "display_name": "Skull base and maxilla (skull cut at the exhibit's upper boundary)",
+   "side": "midline",
+   "group": "bone",
+   "label_id": 30,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "craniofacial_structures",
+    "label_value": 3,
+    "class": "skull"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "craniofacial_structures skull (separate from the mandible), cut at the exhibit's upper boundary S = 303.34 mm: skull base, maxilla, lower zygomatic bones, mastoid and occipital parts only. Includes air cells (p5 -364 HU) where thin bone is not resolved. Hard palate and a 9-voxel overlap with C1 subtracted; fragments left by the cut removed.",
+    "corrections": [
+     {
+      "step": "C",
+      "operation": "box helper segment (S > 303.3401 mm) + Logical operators SUBTRACT",
+      "reason": "exhibit boundary: only the skull base and maxilla below the temporomandibular joints are exported (scope and privacy)",
+      "voxels_before": 914197,
+      "voxels_after": 418212
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `hard_palate`",
+      "reason": "6010 voxels claimed by two different models; `hard_palate` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 418212,
+      "voxels_after": 412202
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `vertebrae_C1`",
+      "reason": "9 voxels claimed by two different models; `vertebrae_C1` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 412202,
+      "voxels_after": 412193
+     },
+     {
+      "step": "E",
+      "operation": "Islands REMOVE_SMALL_ISLANDS (< 200 voxels)",
+      "reason": "8 disconnected fragment(s) smaller than 84 mm3 (of 11 components)",
+      "voxels_before": 412193,
+      "voxels_after": 412075
+     },
+     {
+      "step": "E2",
+      "operation": "Islands KEEP_LARGEST_ISLAND",
+      "reason": "2 fragment(s) left floating by the planar cut at the exhibit's upper boundary",
+      "voxels_before": 412075,
+      "voxels_after": 410954
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 410954,
+    "volume_mL": 173.3712,
+    "voxel_count_before_corrections": 914197,
+    "volume_mL_before_corrections": 385.6769,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.002006,
+     0.123826,
+     0.016401
+    ],
+    "bbox_min_m": [
+     -0.0683,
+     0.08475,
+     -0.0705
+    ],
+    "bbox_max_m": [
+     0.0712,
+     0.13875,
+     0.099
+    ],
+    "hu_mean": 401.1,
+    "hu_sd": 439.3,
+    "hu_p05": -365.0,
+    "hu_median": 358.0,
+    "hu_p95": 1132.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 53250,
+    "volume_mL": 179.719,
+    "volume_ratio_to_mask": 1.037
+   },
+   "mesh": {
+    "node": "skull",
+    "triangles_raw": 374968,
+    "triangles_final": 25692,
+    "vertices_final": 12676,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 4,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0932,
+     "p95": 0.2692,
+     "max": 4.7442
+    },
+    "volume_mL_raw_mesh": 173.1459,
+    "volume_mL_final_mesh": 173.1051,
+    "volume_change_pct_raw_to_final": -0.024,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.154,
+    "centroid_m": [
+     0.002004,
+     0.123852,
+     0.016327
+    ],
+    "centroid_error_vs_mask_mm": 0.079
+   }
+  },
+  {
+   "id": "aorta",
+   "display_name": "Aortic arch",
+   "side": "midline",
+   "group": "vessel",
+   "label_id": 31,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 52,
+    "class": "aorta"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Aortic arch; both limbs cut by the lower scan boundary. Enhancing (160 HU, arterial-late phase). Dice 0.97 against the publisher's label before corrections.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9658
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 147039,
+    "volume_mL": 62.0321,
+    "voxel_count_before_corrections": 147039,
+    "volume_mL_before_corrections": 62.0321,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.016939,
+     -0.112931,
+     -0.018405
+    ],
+    "bbox_min_m": [
+     -0.01505,
+     -0.13875,
+     -0.069
+    ],
+    "bbox_max_m": [
+     0.0442,
+     -0.087,
+     0.0225
+    ],
+    "hu_mean": 159.5,
+    "hu_sd": 36.0,
+    "hu_p05": 91.0,
+    "hu_median": 167.0,
+    "hu_p95": 193.0,
+    "cut_by_field_of_view": {
+     "lower scan boundary": {
+      "voxels": 1318,
+      "cut_face_cm2": 7.41
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 18615,
+    "volume_mL": 62.826,
+    "volume_ratio_to_mask": 1.013
+   },
+   "mesh": {
+    "node": "aorta",
+    "triangles_raw": 56160,
+    "triangles_final": 15430,
+    "vertices_final": 7717,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0846,
+     "p95": 0.2401,
+     "max": 0.3903
+    },
+    "volume_mL_raw_mesh": 61.9859,
+    "volume_mL_final_mesh": 62.0568,
+    "volume_change_pct_raw_to_final": 0.114,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.04,
+    "centroid_m": [
+     0.016939,
+     -0.112934,
+     -0.018406
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   }
+  },
+  {
+   "id": "brachiocephalic_trunk",
+   "display_name": "Brachiocephalic trunk",
+   "side": "midline",
+   "group": "vessel",
+   "label_id": 32,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 54,
+    "class": "brachiocephalic_trunk"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "From the arch to its bifurcation in front of the trachea (137 HU). Dice 0.93 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9303
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 9830,
+    "volume_mL": 4.147,
+    "voxel_count_before_corrections": 9830,
+    "volume_mL_before_corrections": 4.147,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     1.9e-05,
+     -0.077006,
+     0.003477
+    ],
+    "bbox_min_m": [
+     -0.0173,
+     -0.09225,
+     -0.00675
+    ],
+    "bbox_max_m": [
+     0.0127,
+     -0.06225,
+     0.0135
+    ],
+    "hu_mean": 137.3,
+    "hu_sd": 37.0,
+    "hu_p05": 67.0,
+    "hu_median": 141.0,
+    "hu_p95": 189.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1257,
+    "volume_mL": 4.242,
+    "volume_ratio_to_mask": 1.023
+   },
+   "mesh": {
+    "node": "brachiocephalic_trunk",
+    "triangles_raw": 8308,
+    "triangles_final": 3650,
+    "vertices_final": 1827,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0865,
+     "p95": 0.2316,
+     "max": 0.3827
+    },
+    "volume_mL_raw_mesh": 4.1312,
+    "volume_mL_final_mesh": 4.1537,
+    "volume_change_pct_raw_to_final": 0.545,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.161,
+    "centroid_m": [
+     2.2e-05,
+     -0.077011,
+     0.003476
+    ],
+    "centroid_error_vs_mask_mm": 0.006
+   }
+  },
+  {
+   "id": "common_carotid_artery_left",
+   "display_name": "Common carotid artery, left",
+   "side": "left",
+   "group": "vessel",
+   "label_id": 33,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 58,
+    "class": "common_carotid_artery_left"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "From the aortic arch to the carotid bifurcation, 142 mm long, about 6 mm calibre = 4 published voxels (152 HU). The model's mask stopped 13.5 mm below the internal carotid mask; the plainly enhanced segment in between (distal common carotid and carotid bulb, 175 HU) was added (+0.87 mL). Its top 2-3 mm may already be past the bifurcation. Dice 0.87 against the publisher's label before corrections.",
+    "corrections": [
+     {
+      "step": "B2",
+      "operation": "voxel-coordinate helper segment (HU >= 120 inside a 9.0 mm tube) + Logical operators UNION",
+      "reason": "seam between two models: 13.5 mm of clearly enhanced artery (distal common carotid and carotid bulb) lay unlabeled between `common_carotid_artery_left` (total) and `internal_carotid_artery_left` (headneck_bones_vessels). Voxels >= 120 HU that connect the two masks were assigned to the common carotid; the top 2-3 mm may already be past the bifurcation",
+      "voxels_before": 12901,
+      "voxels_after": 14955
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.8704
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 14955,
+    "volume_mL": 6.3091,
+    "voxel_count_before_corrections": 12901,
+    "volume_mL_before_corrections": 5.4426,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.023389,
+     -0.020921,
+     -8.9e-05
+    ],
+    "bbox_min_m": [
+     0.0112,
+     -0.09,
+     -0.01275
+    ],
+    "bbox_max_m": [
+     0.0352,
+     0.05175,
+     0.0075
+    ],
+    "hu_mean": 151.9,
+    "hu_sd": 43.4,
+    "hu_p05": 71.0,
+    "hu_median": 158.0,
+    "hu_p95": 210.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1973,
+    "volume_mL": 6.659,
+    "volume_ratio_to_mask": 1.055
+   },
+   "mesh": {
+    "node": "common_carotid_artery_left",
+    "triangles_raw": 17384,
+    "triangles_final": 6630,
+    "vertices_final": 3317,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0905,
+     "p95": 0.2382,
+     "max": 0.4289
+    },
+    "volume_mL_raw_mesh": 6.2625,
+    "volume_mL_final_mesh": 6.3309,
+    "volume_change_pct_raw_to_final": 1.092,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.345,
+    "centroid_m": [
+     0.02339,
+     -0.020918,
+     -8.8e-05
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   },
+   "paired_with": "common_carotid_artery_right",
+   "volume_ratio_to_pair": 1.241,
+   "laterality_check": {
+    "centroid_x_mm": 23.39,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "common_carotid_artery_right",
+   "display_name": "Common carotid artery, right",
+   "side": "right",
+   "group": "vessel",
+   "label_id": 34,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 57,
+    "class": "common_carotid_artery_right"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "From the brachiocephalic bifurcation to the carotid bifurcation, 114 mm long (156 HU). The model's mask stopped 13.5 mm below the internal carotid mask; the plainly enhanced segment in between (distal common carotid and carotid bulb, 180 HU) was added (+0.82 mL). Its top 2-3 mm may already be past the bifurcation. Dice 0.85 against the publisher's label before corrections.",
+    "corrections": [
+     {
+      "step": "B2",
+      "operation": "voxel-coordinate helper segment (HU >= 120 inside a 9.0 mm tube) + Logical operators UNION",
+      "reason": "seam between two models: 13.5 mm of clearly enhanced artery (distal common carotid and carotid bulb) lay unlabeled between `common_carotid_artery_right` (total) and `internal_carotid_artery_right` (headneck_bones_vessels). Voxels >= 120 HU that connect the two masks were assigned to the common carotid; the top 2-3 mm may already be past the bifurcation",
+      "voxels_before": 10115,
+      "voxels_after": 12047
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.8533
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 12047,
+    "volume_mL": 5.0823,
+    "voxel_count_before_corrections": 10115,
+    "volume_mL_before_corrections": 4.2673,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.022167,
+     -0.011694,
+     0.005319
+    ],
+    "bbox_min_m": [
+     -0.0338,
+     -0.0645,
+     -0.003
+    ],
+    "bbox_max_m": [
+     -0.00305,
+     0.0495,
+     0.015
+    ],
+    "hu_mean": 156.3,
+    "hu_sd": 43.1,
+    "hu_p05": 81.0,
+    "hu_median": 160.0,
+    "hu_p95": 218.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1599,
+    "volume_mL": 5.397,
+    "volume_ratio_to_mask": 1.062
+   },
+   "mesh": {
+    "node": "common_carotid_artery_right",
+    "triangles_raw": 14784,
+    "triangles_final": 5786,
+    "vertices_final": 2895,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0911,
+     "p95": 0.2416,
+     "max": 0.3989
+    },
+    "volume_mL_raw_mesh": 5.0412,
+    "volume_mL_final_mesh": 5.0988,
+    "volume_change_pct_raw_to_final": 1.143,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.324,
+    "centroid_m": [
+     -0.022171,
+     -0.011685,
+     0.005318
+    ],
+    "centroid_error_vs_mask_mm": 0.009
+   },
+   "paired_with": "common_carotid_artery_left",
+   "volume_ratio_to_pair": 0.806,
+   "laterality_check": {
+    "centroid_x_mm": -22.17,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "internal_carotid_artery_left",
+   "display_name": "Internal carotid artery, left",
+   "side": "left",
+   "group": "vessel",
+   "label_id": 35,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 10,
+    "class": "internal_carotid_artery_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "From just above the bifurcation to the skull base; 3-4 mm calibre = 2-3 published voxels, so the calibre is approximate (180 HU). The external carotid artery is not a class and is missing.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 3652,
+    "volume_mL": 1.5407,
+    "voxel_count_before_corrections": 3652,
+    "volume_mL_before_corrections": 1.5407,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.029668,
+     0.082878,
+     -0.000336
+    ],
+    "bbox_min_m": [
+     0.02545,
+     0.05175,
+     -0.00825
+    ],
+    "bbox_max_m": [
+     0.03445,
+     0.12825,
+     0.0075
+    ],
+    "hu_mean": 179.5,
+    "hu_sd": 22.4,
+    "hu_p05": 139.0,
+    "hu_median": 183.0,
+    "hu_p95": 209.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 482,
+    "volume_mL": 1.627,
+    "volume_ratio_to_mask": 1.056
+   },
+   "mesh": {
+    "node": "internal_carotid_artery_left",
+    "triangles_raw": 6236,
+    "triangles_final": 3052,
+    "vertices_final": 1528,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 14 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0882,
+     "p95": 0.2154,
+     "max": 0.3567
+    },
+    "volume_mL_raw_mesh": 1.5163,
+    "volume_mL_final_mesh": 1.5352,
+    "volume_change_pct_raw_to_final": 1.25,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.36,
+    "centroid_m": [
+     0.029668,
+     0.082845,
+     -0.00034
+    ],
+    "centroid_error_vs_mask_mm": 0.033
+   },
+   "paired_with": "internal_carotid_artery_right",
+   "volume_ratio_to_pair": 0.962,
+   "laterality_check": {
+    "centroid_x_mm": 29.67,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "internal_carotid_artery_right",
+   "display_name": "Internal carotid artery, right",
+   "side": "right",
+   "group": "vessel",
+   "label_id": 36,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 9,
+    "class": "internal_carotid_artery_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "From just above the bifurcation to the skull base; 3-4 mm calibre = 2-3 published voxels, so the calibre is approximate (182 HU). The external carotid artery is not a class and is missing.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 3797,
+    "volume_mL": 1.6019,
+    "voxel_count_before_corrections": 3797,
+    "volume_mL_before_corrections": 1.6019,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.027644,
+     0.083457,
+     0.001519
+    ],
+    "bbox_min_m": [
+     -0.0338,
+     0.0495,
+     -0.0045
+    ],
+    "bbox_max_m": [
+     -0.02255,
+     0.12975,
+     0.00675
+    ],
+    "hu_mean": 182.5,
+    "hu_sd": 23.1,
+    "hu_p05": 142.0,
+    "hu_median": 186.0,
+    "hu_p95": 214.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 500,
+    "volume_mL": 1.688,
+    "volume_ratio_to_mask": 1.053
+   },
+   "mesh": {
+    "node": "internal_carotid_artery_right",
+    "triangles_raw": 6368,
+    "triangles_final": 3120,
+    "vertices_final": 1562,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 14 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.084,
+     "p95": 0.2063,
+     "max": 0.3291
+    },
+    "volume_mL_raw_mesh": 1.5763,
+    "volume_mL_final_mesh": 1.5954,
+    "volume_change_pct_raw_to_final": 1.214,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.405,
+    "centroid_m": [
+     -0.027643,
+     0.083429,
+     0.001519
+    ],
+    "centroid_error_vs_mask_mm": 0.028
+   },
+   "paired_with": "internal_carotid_artery_left",
+   "volume_ratio_to_pair": 1.04,
+   "laterality_check": {
+    "centroid_x_mm": -27.64,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "subclavian_artery_left",
+   "display_name": "Subclavian artery, left",
+   "side": "left",
+   "group": "vessel",
+   "label_id": 37,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 56,
+    "class": "subclavian_artery_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Arch over the lung apex; its lateral end stops at the left image border. Dice 0.92 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9167
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 12264,
+    "volume_mL": 5.1739,
+    "voxel_count_before_corrections": 12264,
+    "volume_mL_before_corrections": 5.1739,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.035747,
+     -0.063152,
+     -0.010585
+    ],
+    "bbox_min_m": [
+     0.01795,
+     -0.08775,
+     -0.024
+    ],
+    "bbox_max_m": [
+     0.0727,
+     -0.045,
+     0.003
+    ],
+    "hu_mean": 124.9,
+    "hu_sd": 52.6,
+    "hu_p05": 35.0,
+    "hu_median": 130.0,
+    "hu_p95": 199.0,
+    "cut_by_field_of_view": {
+     "left image border": {
+      "voxels": 67,
+      "cut_face_cm2": 0.38
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1586,
+    "volume_mL": 5.353,
+    "volume_ratio_to_mask": 1.035
+   },
+   "mesh": {
+    "node": "subclavian_artery_left",
+    "triangles_raw": 12880,
+    "triangles_final": 5110,
+    "vertices_final": 2557,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0903,
+     "p95": 0.2339,
+     "max": 0.4266
+    },
+    "volume_mL_raw_mesh": 5.1457,
+    "volume_mL_final_mesh": 5.1879,
+    "volume_change_pct_raw_to_final": 0.821,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.27,
+    "centroid_m": [
+     0.035752,
+     -0.063149,
+     -0.010583
+    ],
+    "centroid_error_vs_mask_mm": 0.006
+   },
+   "paired_with": "subclavian_artery_right",
+   "volume_ratio_to_pair": 0.795,
+   "laterality_check": {
+    "centroid_x_mm": 35.75,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "subclavian_artery_right",
+   "display_name": "Subclavian artery, right",
+   "side": "right",
+   "group": "vessel",
+   "label_id": 38,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 55,
+    "class": "subclavian_artery_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Arch over the lung apex; its lateral end stops at the right image border. Dice 0.93 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9278
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 15428,
+    "volume_mL": 6.5087,
+    "voxel_count_before_corrections": 15428,
+    "volume_mL_before_corrections": 6.5087,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.036873,
+     -0.057898,
+     -0.009605
+    ],
+    "bbox_min_m": [
+     -0.0743,
+     -0.07425,
+     -0.02025
+    ],
+    "bbox_max_m": [
+     -0.0113,
+     -0.04425,
+     0.0075
+    ],
+    "hu_mean": 139.1,
+    "hu_sd": 44.1,
+    "hu_p05": 65.0,
+    "hu_median": 142.0,
+    "hu_p95": 200.0,
+    "cut_by_field_of_view": {
+     "right image border": {
+      "voxels": 38,
+      "cut_face_cm2": 0.21
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1991,
+    "volume_mL": 6.72,
+    "volume_ratio_to_mask": 1.032
+   },
+   "mesh": {
+    "node": "subclavian_artery_right",
+    "triangles_raw": 14172,
+    "triangles_final": 5310,
+    "vertices_final": 2657,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0867,
+     "p95": 0.2297,
+     "max": 0.36
+    },
+    "volume_mL_raw_mesh": 6.4815,
+    "volume_mL_final_mesh": 6.5222,
+    "volume_change_pct_raw_to_final": 0.628,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.207,
+    "centroid_m": [
+     -0.036884,
+     -0.057901,
+     -0.009606
+    ],
+    "centroid_error_vs_mask_mm": 0.012
+   },
+   "paired_with": "subclavian_artery_left",
+   "volume_ratio_to_pair": 1.258,
+   "laterality_check": {
+    "centroid_x_mm": -36.88,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "internal_jugular_vein_left",
+   "display_name": "Internal jugular vein, left",
+   "side": "left",
+   "group": "vessel",
+   "label_id": 39,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 12,
+    "class": "internal_jugular_vein_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "In two parts with an 8 mm gap at the C7 level (S 146-154 mm in frame G): the vein is only weakly opacified (81 HU against 57 HU in muscle) and cannot be traced there at 1.5 mm. The gap was NOT bridged; the mesh shows it. Its lower end is 7.7 mm from the brachiocephalic vein mask.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 24059,
+    "volume_mL": 10.1499,
+    "voxel_count_before_corrections": 24059,
+    "volume_mL_before_corrections": 10.1499,
+    "components": 2,
+    "largest_component_fraction": 0.73756,
+    "centroid_m": [
+     0.034841,
+     0.022715,
+     -0.001419
+    ],
+    "bbox_min_m": [
+     0.0232,
+     -0.063,
+     -0.0135
+    ],
+    "bbox_max_m": [
+     0.04195,
+     0.12825,
+     0.0165
+    ],
+    "hu_mean": 81.2,
+    "hu_sd": 23.5,
+    "hu_p05": 32.0,
+    "hu_median": 85.0,
+    "hu_p95": 112.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3220,
+    "volume_mL": 10.867,
+    "volume_ratio_to_mask": 1.071
+   },
+   "mesh": {
+    "node": "internal_jugular_vein_left",
+    "triangles_raw": 24908,
+    "triangles_final": 8652,
+    "vertices_final": 4330,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0907,
+     "p95": 0.2415,
+     "max": 0.3814
+    },
+    "volume_mL_raw_mesh": 10.0915,
+    "volume_mL_final_mesh": 10.1702,
+    "volume_change_pct_raw_to_final": 0.78,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.2,
+    "centroid_m": [
+     0.034843,
+     0.022739,
+     -0.001423
+    ],
+    "centroid_error_vs_mask_mm": 0.024
+   },
+   "paired_with": "internal_jugular_vein_right",
+   "volume_ratio_to_pair": 1.156,
+   "laterality_check": {
+    "centroid_x_mm": 34.84,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "internal_jugular_vein_right",
+   "display_name": "Internal jugular vein, right",
+   "side": "right",
+   "group": "vessel",
+   "label_id": 40,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_bones_vessels",
+    "label_value": 11,
+    "class": "internal_jugular_vein_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Continuous from the skull base down to the root of the neck, where it ends 3.4 mm from the brachiocephalic vein mask (the venous angle and the subclavian vein are not classes). Weakly opacified (80 HU), so the border relies on fat planes.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 20821,
+    "volume_mL": 8.7839,
+    "voxel_count_before_corrections": 20821,
+    "volume_mL_before_corrections": 8.7839,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.033791,
+     0.009079,
+     0.000301
+    ],
+    "bbox_min_m": [
+     -0.04055,
+     -0.06525,
+     -0.009
+    ],
+    "bbox_max_m": [
+     -0.0233,
+     0.129,
+     0.01275
+    ],
+    "hu_mean": 79.7,
+    "hu_sd": 28.0,
+    "hu_p05": 38.0,
+    "hu_median": 82.0,
+    "hu_p95": 110.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2816,
+    "volume_mL": 9.504,
+    "volume_ratio_to_mask": 1.082
+   },
+   "mesh": {
+    "node": "internal_jugular_vein_right",
+    "triangles_raw": 22984,
+    "triangles_final": 8260,
+    "vertices_final": 4132,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.092,
+     "p95": 0.2424,
+     "max": 0.4427
+    },
+    "volume_mL_raw_mesh": 8.7246,
+    "volume_mL_final_mesh": 8.8061,
+    "volume_change_pct_raw_to_final": 0.935,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.253,
+    "centroid_m": [
+     -0.033792,
+     0.009141,
+     0.000296
+    ],
+    "centroid_error_vs_mask_mm": 0.062
+   },
+   "paired_with": "internal_jugular_vein_left",
+   "volume_ratio_to_pair": 0.865,
+   "laterality_check": {
+    "centroid_x_mm": -33.79,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "brachiocephalic_vein_left",
+   "display_name": "Brachiocephalic vein, left",
+   "side": "left",
+   "group": "vessel",
+   "label_id": 41,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 59,
+    "class": "brachiocephalic_vein_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Crosses in front of the arch branches to the superior vena cava; almost unopacified (57 HU), so the border relies on fat planes. Its ends do not touch the internal jugular (7.7 mm) or the right brachiocephalic mask (4.0 mm). Dice 0.90 against the publisher's label before corrections.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.8997
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 17838,
+    "volume_mL": 7.5254,
+    "voxel_count_before_corrections": 17838,
+    "volume_mL_before_corrections": 7.5254,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.007617,
+     -0.090454,
+     0.005946
+    ],
+    "bbox_min_m": [
+     -0.01955,
+     -0.11175,
+     -0.0045
+    ],
+    "bbox_max_m": [
+     0.03445,
+     -0.06825,
+     0.01725
+    ],
+    "hu_mean": 56.7,
+    "hu_sd": 20.8,
+    "hu_p05": 19.0,
+    "hu_median": 59.0,
+    "hu_p95": 88.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2305,
+    "volume_mL": 7.779,
+    "volume_ratio_to_mask": 1.034
+   },
+   "mesh": {
+    "node": "brachiocephalic_vein_left",
+    "triangles_raw": 15392,
+    "triangles_final": 5668,
+    "vertices_final": 2836,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0839,
+     "p95": 0.2286,
+     "max": 0.3712
+    },
+    "volume_mL_raw_mesh": 7.4995,
+    "volume_mL_final_mesh": 7.537,
+    "volume_change_pct_raw_to_final": 0.499,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.155,
+    "centroid_m": [
+     0.007619,
+     -0.090454,
+     0.005947
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   },
+   "paired_with": "brachiocephalic_vein_right",
+   "volume_ratio_to_pair": 1.032,
+   "laterality_check": {
+    "centroid_x_mm": 7.62,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "brachiocephalic_vein_right",
+   "display_name": "Brachiocephalic vein, right",
+   "side": "right",
+   "group": "vessel",
+   "label_id": 42,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 60,
+    "class": "brachiocephalic_vein_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Short vertical trunk into the superior vena cava (135 HU); its upper end is 3.4 mm from the internal jugular mask. Dice 0.94 against the publisher's label before corrections.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9405
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 17291,
+    "volume_mL": 7.2946,
+    "voxel_count_before_corrections": 17291,
+    "volume_mL_before_corrections": 7.2946,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.026087,
+     -0.083198,
+     -0.001907
+    ],
+    "bbox_min_m": [
+     -0.0368,
+     -0.10125,
+     -0.01575
+    ],
+    "bbox_max_m": [
+     -0.01355,
+     -0.0645,
+     0.00975
+    ],
+    "hu_mean": 135.0,
+    "hu_sd": 39.9,
+    "hu_p05": 64.0,
+    "hu_median": 141.0,
+    "hu_p95": 190.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2224,
+    "volume_mL": 7.506,
+    "volume_ratio_to_mask": 1.029
+   },
+   "mesh": {
+    "node": "brachiocephalic_vein_right",
+    "triangles_raw": 11136,
+    "triangles_final": 4598,
+    "vertices_final": 2301,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0902,
+     "p95": 0.2419,
+     "max": 0.3955
+    },
+    "volume_mL_raw_mesh": 7.2774,
+    "volume_mL_final_mesh": 7.3028,
+    "volume_change_pct_raw_to_final": 0.348,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.112,
+    "centroid_m": [
+     -0.026087,
+     -0.083198,
+     -0.001905
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   },
+   "paired_with": "brachiocephalic_vein_left",
+   "volume_ratio_to_pair": 0.969,
+   "laterality_check": {
+    "centroid_x_mm": -26.09,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "superior_vena_cava",
+   "display_name": "Superior vena cava",
+   "side": "midline",
+   "group": "vessel",
+   "label_id": 43,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 62,
+    "class": "superior_vena_cava"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Upper part only; cut by the lower scan boundary. Dice 0.96 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9608
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 36307,
+    "volume_mL": 15.317,
+    "voxel_count_before_corrections": 36307,
+    "volume_mL_before_corrections": 15.317,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.018982,
+     -0.120201,
+     -0.01049
+    ],
+    "bbox_min_m": [
+     -0.0308,
+     -0.13875,
+     -0.0225
+    ],
+    "bbox_max_m": [
+     -0.0023,
+     -0.09825,
+     0.00675
+    ],
+    "hu_mean": 110.1,
+    "hu_sd": 41.5,
+    "hu_p05": 46.0,
+    "hu_median": 108.0,
+    "hu_p95": 178.0,
+    "cut_by_field_of_view": {
+     "lower scan boundary": {
+      "voxels": 638,
+      "cut_face_cm2": 3.59
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4619,
+    "volume_mL": 15.589,
+    "volume_ratio_to_mask": 1.018
+   },
+   "mesh": {
+    "node": "superior_vena_cava",
+    "triangles_raw": 17332,
+    "triangles_final": 6550,
+    "vertices_final": 3277,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0863,
+     "p95": 0.2433,
+     "max": 0.4097
+    },
+    "volume_mL_raw_mesh": 15.2965,
+    "volume_mL_final_mesh": 15.3299,
+    "volume_change_pct_raw_to_final": 0.219,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.084,
+    "centroid_m": [
+     -0.018983,
+     -0.120203,
+     -0.01049
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   }
+  },
+  {
+   "id": "thyroid_gland",
+   "display_name": "Thyroid gland",
+   "side": "midline",
+   "group": "gland",
+   "label_id": 44,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 17,
+    "class": "thyroid_gland"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Both lobes, enhancing (118 HU). The isthmus is not resolved, so the gland appears as two separate bodies (54 % and 46 % of the volume). Dice 0.93 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9295
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 31346,
+    "volume_mL": 13.2241,
+    "voxel_count_before_corrections": 31346,
+    "volume_mL_before_corrections": 13.2241,
+    "components": 2,
+    "largest_component_fraction": 0.54501,
+    "centroid_m": [
+     -0.001261,
+     -0.026901,
+     0.010103
+    ],
+    "bbox_min_m": [
+     -0.02555,
+     -0.05025,
+     -0.003
+    ],
+    "bbox_max_m": [
+     0.02545,
+     -0.00225,
+     0.02475
+    ],
+    "hu_mean": 118.5,
+    "hu_sd": 23.3,
+    "hu_p05": 76.0,
+    "hu_median": 121.0,
+    "hu_p95": 152.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3987,
+    "volume_mL": 13.456,
+    "volume_ratio_to_mask": 1.018
+   },
+   "mesh": {
+    "node": "thyroid_gland",
+    "triangles_raw": 23528,
+    "triangles_final": 5598,
+    "vertices_final": 2803,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0844,
+     "p95": 0.24,
+     "max": 0.3574
+    },
+    "volume_mL_raw_mesh": 13.1882,
+    "volume_mL_final_mesh": 13.2302,
+    "volume_change_pct_raw_to_final": 0.318,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.046,
+    "centroid_m": [
+     -0.001256,
+     -0.026904,
+     0.010102
+    ],
+    "centroid_error_vs_mask_mm": 0.005
+   }
+  },
+  {
+   "id": "submandibular_gland_left",
+   "display_name": "Submandibular gland, left",
+   "side": "left",
+   "group": "gland",
+   "label_id": 45,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 10,
+    "class": "submandibular_gland_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Ovoid gland under the mandible; only about 20 HU contrast to its surroundings, so the border is approximate.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 11729,
+    "volume_mL": 4.9482,
+    "voxel_count_before_corrections": 11729,
+    "volume_mL_before_corrections": 4.9482,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.036614,
+     0.049279,
+     0.025272
+    ],
+    "bbox_min_m": [
+     0.02695,
+     0.0375,
+     0.01425
+    ],
+    "bbox_max_m": [
+     0.0457,
+     0.0615,
+     0.039
+    ],
+    "hu_mean": 43.4,
+    "hu_sd": 8.6,
+    "hu_p05": 31.0,
+    "hu_median": 43.0,
+    "hu_p95": 58.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1503,
+    "volume_mL": 5.073,
+    "volume_ratio_to_mask": 1.025
+   },
+   "mesh": {
+    "node": "submandibular_gland_left",
+    "triangles_raw": 8100,
+    "triangles_final": 2136,
+    "vertices_final": 1070,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0875,
+     "p95": 0.2413,
+     "max": 0.3769
+    },
+    "volume_mL_raw_mesh": 4.9353,
+    "volume_mL_final_mesh": 4.9535,
+    "volume_change_pct_raw_to_final": 0.369,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.107,
+    "centroid_m": [
+     0.036615,
+     0.049278,
+     0.025271
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   },
+   "paired_with": "submandibular_gland_right",
+   "volume_ratio_to_pair": 0.818,
+   "laterality_check": {
+    "centroid_x_mm": 36.61,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "submandibular_gland_right",
+   "display_name": "Submandibular gland, right",
+   "side": "right",
+   "group": "gland",
+   "label_id": 46,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 9,
+    "class": "submandibular_gland_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Ovoid gland under the mandible; only about 16 HU contrast to its surroundings, so the border is approximate.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 14342,
+    "volume_mL": 6.0505,
+    "voxel_count_before_corrections": 14342,
+    "volume_mL_before_corrections": 6.0505,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.033712,
+     0.050432,
+     0.024725
+    ],
+    "bbox_min_m": [
+     -0.04655,
+     0.03675,
+     0.0135
+    ],
+    "bbox_max_m": [
+     -0.0233,
+     0.06675,
+     0.0375
+    ],
+    "hu_mean": 48.4,
+    "hu_sd": 11.5,
+    "hu_p05": 34.0,
+    "hu_median": 47.0,
+    "hu_p95": 65.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1844,
+    "volume_mL": 6.223,
+    "volume_ratio_to_mask": 1.029
+   },
+   "mesh": {
+    "node": "submandibular_gland_right",
+    "triangles_raw": 9652,
+    "triangles_final": 2434,
+    "vertices_final": 1219,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0905,
+     "p95": 0.2457,
+     "max": 0.4088
+    },
+    "volume_mL_raw_mesh": 6.0363,
+    "volume_mL_final_mesh": 6.0556,
+    "volume_change_pct_raw_to_final": 0.32,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.084,
+    "centroid_m": [
+     -0.033711,
+     0.050431,
+     0.024725
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   },
+   "paired_with": "submandibular_gland_left",
+   "volume_ratio_to_pair": 1.223,
+   "laterality_check": {
+    "centroid_x_mm": -33.71,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "esophagus",
+   "display_name": "Esophagus",
+   "side": "midline",
+   "group": "other",
+   "label_id": 47,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 15,
+    "class": "esophagus"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Collapsed tube behind the trachea, left of the midline; cut by the lower scan boundary. Dice 0.94 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9371
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 38909,
+    "volume_mL": 16.4147,
+    "voxel_count_before_corrections": 38909,
+    "volume_mL_before_corrections": 16.4147,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.009352,
+     -0.082831,
+     -0.027448
+    ],
+    "bbox_min_m": [
+     -0.0068,
+     -0.13875,
+     -0.05175
+    ],
+    "bbox_max_m": [
+     0.02395,
+     -0.01725,
+     0.00375
+    ],
+    "hu_mean": 34.0,
+    "hu_sd": 48.6,
+    "hu_p05": -30.0,
+    "hu_median": 40.0,
+    "hu_p95": 85.0,
+    "cut_by_field_of_view": {
+     "lower scan boundary": {
+      "voxels": 308,
+      "cut_face_cm2": 1.73
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 5001,
+    "volume_mL": 16.878,
+    "volume_ratio_to_mask": 1.028
+   },
+   "mesh": {
+    "node": "esophagus",
+    "triangles_raw": 30700,
+    "triangles_final": 3944,
+    "vertices_final": 1974,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0893,
+     "p95": 0.2551,
+     "max": 0.4051
+    },
+    "volume_mL_raw_mesh": 16.3718,
+    "volume_mL_final_mesh": 16.4164,
+    "volume_change_pct_raw_to_final": 0.272,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.01,
+    "centroid_m": [
+     0.009353,
+     -0.082839,
+     -0.027451
+    ],
+    "centroid_error_vs_mask_mm": 0.008
+   }
+  },
+  {
+   "id": "spinal_cord",
+   "display_name": "Spinal cord with thecal sac (spinal canal contents)",
+   "side": "midline",
+   "group": "other",
+   "label_id": 48,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "total",
+    "label_value": 79,
+    "class": "spinal_cord"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "The mask fills the spinal canal (about 170 mm2 in cross-section): it is the thecal sac with the cord, not the cord alone. Display name changed accordingly. Cut by the lower scan boundary. Dice 0.94 against the publisher's label.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)",
+    "dice_vs_publisher_label_before_corrections": 0.9388
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 102858,
+    "volume_mL": 43.3932,
+    "voxel_count_before_corrections": 102858,
+    "volume_mL_before_corrections": 43.3932,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000927,
+     0.00861,
+     -0.03893
+    ],
+    "bbox_min_m": [
+     -0.01355,
+     -0.13875,
+     -0.0945
+    ],
+    "bbox_max_m": [
+     0.01795,
+     0.11325,
+     -0.0105
+    ],
+    "hu_mean": 23.8,
+    "hu_sd": 25.8,
+    "hu_p05": -22.0,
+    "hu_median": 26.0,
+    "hu_p95": 61.0,
+    "cut_by_field_of_view": {
+     "lower scan boundary": {
+      "voxels": 260,
+      "cut_face_cm2": 1.46
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 13176,
+    "volume_mL": 44.469,
+    "volume_ratio_to_mask": 1.025
+   },
+   "mesh": {
+    "node": "spinal_cord",
+    "triangles_raw": 63740,
+    "triangles_final": 6922,
+    "vertices_final": 3463,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0872,
+     "p95": 0.2525,
+     "max": 0.4032
+    },
+    "volume_mL_raw_mesh": 43.3101,
+    "volume_mL_final_mesh": 43.3822,
+    "volume_change_pct_raw_to_final": 0.167,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.025,
+    "centroid_m": [
+     0.000927,
+     0.008601,
+     -0.038932
+    ],
+    "centroid_error_vs_mask_mm": 0.009
+   }
+  },
+  {
+   "id": "tongue",
+   "display_name": "Tongue",
+   "side": "midline",
+   "group": "muscle",
+   "label_id": 49,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 9,
+    "class": "tongue"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Body of the tongue; ends 11 mm above the hyoid and 5 mm from the mandible (floor-of-mouth muscles are not classes). The tip borders the publisher-blurred zone.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 100149,
+    "volume_mL": 42.2504,
+    "voxel_count_before_corrections": 100149,
+    "volume_mL_before_corrections": 42.2504,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.000819,
+     0.074656,
+     0.052818
+    ],
+    "bbox_min_m": [
+     -0.0158,
+     0.05325,
+     0.0255
+    ],
+    "bbox_max_m": [
+     0.0187,
+     0.09225,
+     0.087
+    ],
+    "hu_mean": 62.6,
+    "hu_sd": 18.4,
+    "hu_p05": 33.0,
+    "hu_median": 63.0,
+    "hu_p95": 90.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 12771,
+    "volume_mL": 43.102,
+    "volume_ratio_to_mask": 1.02
+   },
+   "mesh": {
+    "node": "tongue",
+    "triangles_raw": 32676,
+    "triangles_final": 3686,
+    "vertices_final": 1845,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0872,
+     "p95": 0.2561,
+     "max": 0.3638
+    },
+    "volume_mL_raw_mesh": 42.2224,
+    "volume_mL_final_mesh": 42.2478,
+    "volume_change_pct_raw_to_final": 0.06,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.006,
+    "centroid_m": [
+     0.00082,
+     0.074657,
+     0.052818
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   }
+  },
+  {
+   "id": "soft_palate",
+   "display_name": "Soft palate",
+   "side": "midline",
+   "group": "muscle",
+   "label_id": 50,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_glands_cavities",
+    "label_value": 18,
+    "class": "soft_palate"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Soft palate with uvula between nasopharynx and oral cavity. Two voxels overlapping the skull removed.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "2 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 7620,
+      "voxels_after": 7618
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 7618,
+    "volume_mL": 3.2138,
+    "voxel_count_before_corrections": 7620,
+    "volume_mL_before_corrections": 3.2147,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.001975,
+     0.097766,
+     0.032583
+    ],
+    "bbox_min_m": [
+     -0.0083,
+     0.08325,
+     0.021
+    ],
+    "bbox_max_m": [
+     0.01195,
+     0.1065,
+     0.0465
+    ],
+    "hu_mean": 60.4,
+    "hu_sd": 14.6,
+    "hu_p05": 37.0,
+    "hu_median": 60.0,
+    "hu_p95": 84.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 976,
+    "volume_mL": 3.294,
+    "volume_ratio_to_mask": 1.025
+   },
+   "mesh": {
+    "node": "soft_palate",
+    "triangles_raw": 7340,
+    "triangles_final": 1660,
+    "vertices_final": 832,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0841,
+     "p95": 0.2397,
+     "max": 0.3874
+    },
+    "volume_mL_raw_mesh": 3.1998,
+    "volume_mL_final_mesh": 3.2162,
+    "volume_change_pct_raw_to_final": 0.514,
+    "volume_diff_pct_final_mesh_vs_voxels": 0.073,
+    "centroid_m": [
+     0.001976,
+     0.097767,
+     0.032583
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   }
+  },
+  {
+   "id": "sternocleidomastoid_left",
+   "display_name": "Sternocleidomastoid muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 51,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 2,
+    "class": "sternocleidomastoid_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "From the mastoid region (2 mm from the skull mask) to 2.7 mm above the clavicle and 10.5 mm from the sternum; tendons and attachments are not segmented. Has a through-notch at the C3 level (S 213-232 mm in frame G) around air-density pockets in the left upper lateral neck that open to the skin; the mask follows the image there and was not altered.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 142525,
+    "volume_mL": 60.1277,
+    "voxel_count_before_corrections": 142525,
+    "volume_mL_before_corrections": 60.1277,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.04383,
+     0.017723,
+     0.00238
+    ],
+    "bbox_min_m": [
+     0.0112,
+     -0.078,
+     -0.03975
+    ],
+    "bbox_max_m": [
+     0.0637,
+     0.111,
+     0.0345
+    ],
+    "hu_mean": 56.9,
+    "hu_sd": 22.7,
+    "hu_p05": 8.0,
+    "hu_median": 60.0,
+    "hu_p95": 85.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 18425,
+    "volume_mL": 62.184,
+    "volume_ratio_to_mask": 1.034
+   },
+   "mesh": {
+    "node": "sternocleidomastoid_left",
+    "triangles_raw": 86652,
+    "triangles_final": 7630,
+    "vertices_final": 3815,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0877,
+     "p95": 0.2606,
+     "max": 0.4562
+    },
+    "volume_mL_raw_mesh": 60.0509,
+    "volume_mL_final_mesh": 60.092,
+    "volume_change_pct_raw_to_final": 0.068,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.059,
+    "centroid_m": [
+     0.043833,
+     0.017727,
+     0.002379
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   },
+   "paired_with": "sternocleidomastoid_right",
+   "volume_ratio_to_pair": 1.021,
+   "laterality_check": {
+    "centroid_x_mm": 43.83,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "sternocleidomastoid_right",
+   "display_name": "Sternocleidomastoid muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 52,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 1,
+    "class": "sternocleidomastoid_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "From the mastoid region (2 mm from the skull mask) to 2.4 mm above the clavicle and 5.6 mm from the sternum; tendons and attachments are not segmented. No defect seen.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 139542,
+    "volume_mL": 58.8693,
+    "voxel_count_before_corrections": 139542,
+    "volume_mL_before_corrections": 58.8693,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.040908,
+     0.011543,
+     0.005404
+    ],
+    "bbox_min_m": [
+     -0.06155,
+     -0.0855,
+     -0.03825
+    ],
+    "bbox_max_m": [
+     -0.00455,
+     0.1125,
+     0.0375
+    ],
+    "hu_mean": 56.4,
+    "hu_sd": 26.6,
+    "hu_p05": -7.0,
+    "hu_median": 62.0,
+    "hu_p95": 85.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 18096,
+    "volume_mL": 61.074,
+    "volume_ratio_to_mask": 1.037
+   },
+   "mesh": {
+    "node": "sternocleidomastoid_right",
+    "triangles_raw": 86368,
+    "triangles_final": 7664,
+    "vertices_final": 3834,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0864,
+     "p95": 0.2621,
+     "max": 0.416
+    },
+    "volume_mL_raw_mesh": 58.7975,
+    "volume_mL_final_mesh": 58.829,
+    "volume_change_pct_raw_to_final": 0.054,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.068,
+    "centroid_m": [
+     -0.040909,
+     0.011543,
+     0.005406
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   },
+   "paired_with": "sternocleidomastoid_left",
+   "volume_ratio_to_pair": 0.979,
+   "laterality_check": {
+    "centroid_x_mm": -40.91,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "anterior_scalene_left",
+   "display_name": "Anterior scalene muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 53,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 13,
+    "class": "anterior_scalene_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Runs from the cervical transverse processes towards the first rib and ends 2.6 mm above it (attachments are not segmented); the border with the middle scalene relies on a thin fat plane.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 15662,
+    "volume_mL": 6.6074,
+    "voxel_count_before_corrections": 15662,
+    "volume_mL_before_corrections": 6.6074,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.039327,
+     -0.032778,
+     -0.002451
+    ],
+    "bbox_min_m": [
+     0.02395,
+     -0.0645,
+     -0.0105
+    ],
+    "bbox_max_m": [
+     0.05545,
+     -0.00075,
+     0.006
+    ],
+    "hu_mean": 37.8,
+    "hu_sd": 18.7,
+    "hu_p05": 8.0,
+    "hu_median": 37.0,
+    "hu_p95": 71.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2044,
+    "volume_mL": 6.899,
+    "volume_ratio_to_mask": 1.044
+   },
+   "mesh": {
+    "node": "anterior_scalene_left",
+    "triangles_raw": 12996,
+    "triangles_final": 1824,
+    "vertices_final": 914,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0907,
+     "p95": 0.2558,
+     "max": 0.397
+    },
+    "volume_mL_raw_mesh": 6.5856,
+    "volume_mL_final_mesh": 6.6008,
+    "volume_change_pct_raw_to_final": 0.231,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.1,
+    "centroid_m": [
+     0.039328,
+     -0.032783,
+     -0.00245
+    ],
+    "centroid_error_vs_mask_mm": 0.005
+   },
+   "paired_with": "anterior_scalene_right",
+   "volume_ratio_to_pair": 0.906,
+   "laterality_check": {
+    "centroid_x_mm": 39.33,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "anterior_scalene_right",
+   "display_name": "Anterior scalene muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 54,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 12,
+    "class": "anterior_scalene_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Runs from the cervical transverse processes towards the first rib and ends 3.3 mm above it (attachments are not segmented); the border with the middle scalene relies on a thin fat plane.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 17282,
+    "volume_mL": 7.2908,
+    "voxel_count_before_corrections": 17282,
+    "volume_mL_before_corrections": 7.2908,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.042334,
+     -0.03348,
+     -0.007516
+    ],
+    "bbox_min_m": [
+     -0.05405,
+     -0.06825,
+     -0.015
+    ],
+    "bbox_max_m": [
+     -0.03005,
+     0.006,
+     -0.00075
+    ],
+    "hu_mean": 41.2,
+    "hu_sd": 19.8,
+    "hu_p05": 7.0,
+    "hu_median": 43.0,
+    "hu_p95": 72.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2264,
+    "volume_mL": 7.641,
+    "volume_ratio_to_mask": 1.048
+   },
+   "mesh": {
+    "node": "anterior_scalene_right",
+    "triangles_raw": 13916,
+    "triangles_final": 1958,
+    "vertices_final": 981,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0931,
+     "p95": 0.2602,
+     "max": 0.4335
+    },
+    "volume_mL_raw_mesh": 7.2659,
+    "volume_mL_final_mesh": 7.2867,
+    "volume_change_pct_raw_to_final": 0.286,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.056,
+    "centroid_m": [
+     -0.042334,
+     -0.033478,
+     -0.007517
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   },
+   "paired_with": "anterior_scalene_left",
+   "volume_ratio_to_pair": 1.103,
+   "laterality_check": {
+    "centroid_x_mm": -42.33,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "middle_scalene_left",
+   "display_name": "Middle scalene muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 55,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 15,
+    "class": "middle_scalene_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Behind the anterior scalene; ends 3.1 mm above the first rib; borders rely on thin fat planes.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 18713,
+    "volume_mL": 7.8945,
+    "voxel_count_before_corrections": 18713,
+    "volume_mL_before_corrections": 7.8945,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.04629,
+     -0.009937,
+     -0.016887
+    ],
+    "bbox_min_m": [
+     0.02995,
+     -0.045,
+     -0.027
+    ],
+    "bbox_max_m": [
+     0.0697,
+     0.02325,
+     -0.009
+    ],
+    "hu_mean": 44.1,
+    "hu_sd": 16.4,
+    "hu_p05": 14.0,
+    "hu_median": 47.0,
+    "hu_p95": 67.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2435,
+    "volume_mL": 8.218,
+    "volume_ratio_to_mask": 1.041
+   },
+   "mesh": {
+    "node": "middle_scalene_left",
+    "triangles_raw": 17236,
+    "triangles_final": 2180,
+    "vertices_final": 1092,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0896,
+     "p95": 0.249,
+     "max": 0.4038
+    },
+    "volume_mL_raw_mesh": 7.8671,
+    "volume_mL_final_mesh": 7.8816,
+    "volume_change_pct_raw_to_final": 0.184,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.163,
+    "centroid_m": [
+     0.046283,
+     -0.009939,
+     -0.016885
+    ],
+    "centroid_error_vs_mask_mm": 0.007
+   },
+   "paired_with": "middle_scalene_right",
+   "volume_ratio_to_pair": 0.844,
+   "laterality_check": {
+    "centroid_x_mm": 46.28,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "middle_scalene_right",
+   "display_name": "Middle scalene muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 56,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 14,
+    "class": "middle_scalene_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Behind the anterior scalene; ends 2.6 mm above the first rib; borders rely on thin fat planes.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 22175,
+    "volume_mL": 9.3551,
+    "voxel_count_before_corrections": 22175,
+    "volume_mL_before_corrections": 9.3551,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.05037,
+     -0.014533,
+     -0.02259
+    ],
+    "bbox_min_m": [
+     -0.0638,
+     -0.05625,
+     -0.03225
+    ],
+    "bbox_max_m": [
+     -0.03755,
+     0.027,
+     -0.01275
+    ],
+    "hu_mean": 34.5,
+    "hu_sd": 17.9,
+    "hu_p05": 3.0,
+    "hu_median": 35.0,
+    "hu_p95": 61.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2876,
+    "volume_mL": 9.707,
+    "volume_ratio_to_mask": 1.038
+   },
+   "mesh": {
+    "node": "middle_scalene_right",
+    "triangles_raw": 17452,
+    "triangles_final": 2258,
+    "vertices_final": 1131,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0888,
+     "p95": 0.2548,
+     "max": 0.4137
+    },
+    "volume_mL_raw_mesh": 9.3273,
+    "volume_mL_final_mesh": 9.347,
+    "volume_change_pct_raw_to_final": 0.211,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.086,
+    "centroid_m": [
+     -0.050368,
+     -0.014531,
+     -0.02259
+    ],
+    "centroid_error_vs_mask_mm": 0.003
+   },
+   "paired_with": "middle_scalene_left",
+   "volume_ratio_to_pair": 1.185,
+   "laterality_check": {
+    "centroid_x_mm": -50.37,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "levator_scapulae_left",
+   "display_name": "Levator scapulae muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 57,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 11,
+    "class": "levator_scapulae_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Upper and middle part; the lower end is cut by the left image border (4.8 cm2 cut face). The scapular insertion is outside the scan on both sides.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 90006,
+    "volume_mL": 37.9713,
+    "voxel_count_before_corrections": 90006,
+    "volume_mL_before_corrections": 37.9713,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.051602,
+     0.006613,
+     -0.046525
+    ],
+    "bbox_min_m": [
+     0.03445,
+     -0.04275,
+     -0.08625
+    ],
+    "bbox_max_m": [
+     0.0727,
+     0.084,
+     -0.012
+    ],
+    "hu_mean": 54.8,
+    "hu_sd": 13.2,
+    "hu_p05": 32.0,
+    "hu_median": 57.0,
+    "hu_p95": 74.0,
+    "cut_by_field_of_view": {
+     "left image border": {
+      "voxels": 850,
+      "cut_face_cm2": 4.78
+     }
+    }
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 11546,
+    "volume_mL": 38.968,
+    "volume_ratio_to_mask": 1.026
+   },
+   "mesh": {
+    "node": "levator_scapulae_left",
+    "triangles_raw": 47656,
+    "triangles_final": 4772,
+    "vertices_final": 2388,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0853,
+     "p95": 0.2543,
+     "max": 0.4368
+    },
+    "volume_mL_raw_mesh": 37.9248,
+    "volume_mL_final_mesh": 37.9676,
+    "volume_change_pct_raw_to_final": 0.113,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.01,
+    "centroid_m": [
+     0.051604,
+     0.006607,
+     -0.046527
+    ],
+    "centroid_error_vs_mask_mm": 0.006
+   },
+   "paired_with": "levator_scapulae_right",
+   "volume_ratio_to_pair": 1.027,
+   "laterality_check": {
+    "centroid_x_mm": 51.6,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "levator_scapulae_right",
+   "display_name": "Levator scapulae muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 58,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 10,
+    "class": "levator_scapulae_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Upper and middle part; ends inside the scan without touching the border. The scapular insertion is outside the scan.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 87631,
+    "volume_mL": 36.9693,
+    "voxel_count_before_corrections": 87631,
+    "volume_mL_before_corrections": 36.9693,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.04878,
+     0.010306,
+     -0.045747
+    ],
+    "bbox_min_m": [
+     -0.0698,
+     -0.0375,
+     -0.08625
+    ],
+    "bbox_max_m": [
+     -0.03455,
+     0.08475,
+     -0.012
+    ],
+    "hu_mean": 58.7,
+    "hu_sd": 10.8,
+    "hu_p05": 41.0,
+    "hu_median": 59.0,
+    "hu_p95": 75.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 11269,
+    "volume_mL": 38.033,
+    "volume_ratio_to_mask": 1.029
+   },
+   "mesh": {
+    "node": "levator_scapulae_right",
+    "triangles_raw": 46948,
+    "triangles_final": 4702,
+    "vertices_final": 2353,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0899,
+     "p95": 0.2601,
+     "max": 0.4108
+    },
+    "volume_mL_raw_mesh": 36.9225,
+    "volume_mL_final_mesh": 36.9515,
+    "volume_change_pct_raw_to_final": 0.079,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.048,
+    "centroid_m": [
+     -0.04878,
+     0.010299,
+     -0.045749
+    ],
+    "centroid_error_vs_mask_mm": 0.007
+   },
+   "paired_with": "levator_scapulae_left",
+   "volume_ratio_to_pair": 0.974,
+   "laterality_check": {
+    "centroid_x_mm": -48.78,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "prevertebral_left",
+   "display_name": "Prevertebral muscles (longus colli and longus capitis), left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 59,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 23,
+    "class": "prevertebral_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Longus colli and capitis as one strap on the front of the vertebral column from the skull base to the T2-T3 level.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 26344,
+    "volume_mL": 11.1139,
+    "voxel_count_before_corrections": 26344,
+    "volume_mL_before_corrections": 11.1139,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.012939,
+     0.020891,
+     -0.005277
+    ],
+    "bbox_min_m": [
+     0.00295,
+     -0.05625,
+     -0.027
+    ],
+    "bbox_max_m": [
+     0.0232,
+     0.11025,
+     0.009
+    ],
+    "hu_mean": 61.7,
+    "hu_sd": 16.6,
+    "hu_p05": 30.0,
+    "hu_median": 64.0,
+    "hu_p95": 84.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3449,
+    "volume_mL": 11.64,
+    "volume_ratio_to_mask": 1.047
+   },
+   "mesh": {
+    "node": "prevertebral_left",
+    "triangles_raw": 27492,
+    "triangles_final": 3202,
+    "vertices_final": 1603,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0892,
+     "p95": 0.2549,
+     "max": 0.4111
+    },
+    "volume_mL_raw_mesh": 11.0605,
+    "volume_mL_final_mesh": 11.0939,
+    "volume_change_pct_raw_to_final": 0.302,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.18,
+    "centroid_m": [
+     0.012939,
+     0.020873,
+     -0.005279
+    ],
+    "centroid_error_vs_mask_mm": 0.018
+   },
+   "paired_with": "prevertebral_right",
+   "volume_ratio_to_pair": 0.835,
+   "laterality_check": {
+    "centroid_x_mm": 12.94,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "prevertebral_right",
+   "display_name": "Prevertebral muscles (longus colli and longus capitis), right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 60,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 22,
+    "class": "prevertebral_right"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Longus colli and capitis as one strap on the front of the vertebral column from the skull base to the T2-T3 level.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 31558,
+    "volume_mL": 13.3135,
+    "voxel_count_before_corrections": 31558,
+    "volume_mL_before_corrections": 13.3135,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.01613,
+     0.01976,
+     -0.006249
+    ],
+    "bbox_min_m": [
+     -0.02555,
+     -0.0615,
+     -0.03
+    ],
+    "bbox_max_m": [
+     -0.00455,
+     0.111,
+     0.00975
+    ],
+    "hu_mean": 59.0,
+    "hu_sd": 18.7,
+    "hu_p05": 21.0,
+    "hu_median": 63.0,
+    "hu_p95": 82.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4150,
+    "volume_mL": 14.006,
+    "volume_ratio_to_mask": 1.052
+   },
+   "mesh": {
+    "node": "prevertebral_right",
+    "triangles_raw": 31440,
+    "triangles_final": 3530,
+    "vertices_final": 1767,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0896,
+     "p95": 0.2549,
+     "max": 0.41
+    },
+    "volume_mL_raw_mesh": 13.2581,
+    "volume_mL_final_mesh": 13.2926,
+    "volume_change_pct_raw_to_final": 0.26,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.157,
+    "centroid_m": [
+     -0.016135,
+     0.01974,
+     -0.00625
+    ],
+    "centroid_error_vs_mask_mm": 0.021
+   },
+   "paired_with": "prevertebral_left",
+   "volume_ratio_to_pair": 1.198,
+   "laterality_check": {
+    "centroid_x_mm": -16.14,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "sterno_thyroid_left",
+   "display_name": "Infrahyoid strap muscle (sternothyroid), left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 61,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 19,
+    "class": "sterno_thyroid_left"
+   },
+   "review": {
+    "status": "accepted",
+    "note": "Strap 3-3.6 mm thick (2 published voxels) with almost no HU contrast to its neighbours; probably includes the sternohyoid. Position between sternum and thyroid cartilage is plausible. Lowest confidence of the exported set.",
+    "corrections": [],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 15553,
+    "volume_mL": 6.5614,
+    "voxel_count_before_corrections": 15553,
+    "volume_mL_before_corrections": 6.5614,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.014815,
+     -0.049544,
+     0.020012
+    ],
+    "bbox_min_m": [
+     0.0037,
+     -0.0885,
+     0.01125
+    ],
+    "bbox_max_m": [
+     0.03145,
+     0.00075,
+     0.03525
+    ],
+    "hu_mean": 36.8,
+    "hu_sd": 27.8,
+    "hu_p05": -7.0,
+    "hu_median": 35.0,
+    "hu_p95": 82.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2074,
+    "volume_mL": 7.0,
+    "volume_ratio_to_mask": 1.067
+   },
+   "mesh": {
+    "node": "sterno_thyroid_left",
+    "triangles_raw": 20944,
+    "triangles_final": 2598,
+    "vertices_final": 1301,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0904,
+     "p95": 0.2533,
+     "max": 0.3942
+    },
+    "volume_mL_raw_mesh": 6.5305,
+    "volume_mL_final_mesh": 6.5455,
+    "volume_change_pct_raw_to_final": 0.23,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.242,
+    "centroid_m": [
+     0.014815,
+     -0.049572,
+     0.020005
+    ],
+    "centroid_error_vs_mask_mm": 0.029
+   },
+   "paired_with": "sterno_thyroid_right",
+   "volume_ratio_to_pair": 1.115,
+   "laterality_check": {
+    "centroid_x_mm": 14.81,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "sterno_thyroid_right",
+   "display_name": "Infrahyoid strap muscle (sternothyroid), right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 62,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "headneck_muscles",
+    "label_value": 18,
+    "class": "sterno_thyroid_right"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Strap 3-3.6 mm thick (2 published voxels) with almost no HU contrast to its neighbours; probably includes the sternohyoid. Lowest confidence of the exported set. 446 voxels overlapping the thyroid gland removed.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `thyroid_gland`",
+      "reason": "446 voxels claimed by two different models; `thyroid_gland` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 14390,
+      "voxels_after": 13944
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 13944,
+    "volume_mL": 5.8826,
+    "voxel_count_before_corrections": 14390,
+    "volume_mL_before_corrections": 6.0708,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.013202,
+     -0.049328,
+     0.019627
+    ],
+    "bbox_min_m": [
+     -0.02555,
+     -0.09,
+     0.0075
+    ],
+    "bbox_max_m": [
+     -0.00155,
+     0.0,
+     0.03525
+    ],
+    "hu_mean": 40.0,
+    "hu_sd": 28.0,
+    "hu_p05": -9.0,
+    "hu_median": 42.0,
+    "hu_p95": 83.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 1841,
+    "volume_mL": 6.213,
+    "volume_ratio_to_mask": 1.056
+   },
+   "mesh": {
+    "node": "sterno_thyroid_right",
+    "triangles_raw": 21888,
+    "triangles_final": 2642,
+    "vertices_final": 1321,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 1,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0923,
+     "p95": 0.254,
+     "max": 1.1492
+    },
+    "volume_mL_raw_mesh": 5.8486,
+    "volume_mL_final_mesh": 5.859,
+    "volume_change_pct_raw_to_final": 0.177,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.402,
+    "centroid_m": [
+     -0.013198,
+     -0.049392,
+     0.019619
+    ],
+    "centroid_error_vs_mask_mm": 0.064
+   },
+   "paired_with": "sterno_thyroid_left",
+   "volume_ratio_to_pair": 0.897,
+   "laterality_check": {
+    "centroid_x_mm": -13.2,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "masseter_left",
+   "display_name": "Masseter muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 63,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 2,
+    "class": "masseter_left"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Zygomatic arch to mandibular angle; small overlaps with mandible (119 voxels) and skull (168) removed. Its superficial surface lies next to the publisher-blurred cheek zone, so that border is less certain.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `mandible`",
+      "reason": "119 voxels claimed by two different models; `mandible` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 94112,
+      "voxels_after": 93993
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "168 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 93993,
+      "voxels_after": 93825
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 93825,
+    "volume_mL": 39.5824,
+    "voxel_count_before_corrections": 94112,
+    "volume_mL_before_corrections": 39.7035,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.055113,
+     0.099715,
+     0.037148
+    ],
+    "bbox_min_m": [
+     0.0397,
+     0.063,
+     0.01125
+    ],
+    "bbox_max_m": [
+     0.06895,
+     0.1365,
+     0.0675
+    ],
+    "hu_mean": 65.8,
+    "hu_sd": 16.9,
+    "hu_p05": 37.0,
+    "hu_median": 67.0,
+    "hu_p95": 89.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 11794,
+    "volume_mL": 39.805,
+    "volume_ratio_to_mask": 1.006
+   },
+   "mesh": {
+    "node": "masseter_left",
+    "triangles_raw": 38244,
+    "triangles_final": 4074,
+    "vertices_final": 2039,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0921,
+     "p95": 0.2627,
+     "max": 0.409
+    },
+    "volume_mL_raw_mesh": 39.551,
+    "volume_mL_final_mesh": 39.5796,
+    "volume_change_pct_raw_to_final": 0.072,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.007,
+    "centroid_m": [
+     0.055113,
+     0.099715,
+     0.037148
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   },
+   "paired_with": "masseter_right",
+   "volume_ratio_to_pair": 1.108,
+   "laterality_check": {
+    "centroid_x_mm": 55.11,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "masseter_right",
+   "display_name": "Masseter muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 64,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 1,
+    "class": "masseter_right"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Zygomatic arch to mandibular angle; small overlaps with mandible (295 voxels) and skull (179) removed. Its superficial surface lies next to the publisher-blurred cheek zone, so that border is less certain.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `mandible`",
+      "reason": "295 voxels claimed by two different models; `mandible` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 85146,
+      "voxels_after": 84851
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "179 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 84851,
+      "voxels_after": 84672
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 84672,
+    "volume_mL": 35.721,
+    "voxel_count_before_corrections": 85146,
+    "volume_mL_before_corrections": 35.921,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.052662,
+     0.09744,
+     0.039807
+    ],
+    "bbox_min_m": [
+     -0.0638,
+     0.05925,
+     0.01275
+    ],
+    "bbox_max_m": [
+     -0.03905,
+     0.1335,
+     0.069
+    ],
+    "hu_mean": 69.3,
+    "hu_sd": 18.2,
+    "hu_p05": 38.0,
+    "hu_median": 70.0,
+    "hu_p95": 95.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 10644,
+    "volume_mL": 35.923,
+    "volume_ratio_to_mask": 1.006
+   },
+   "mesh": {
+    "node": "masseter_right",
+    "triangles_raw": 37136,
+    "triangles_final": 4050,
+    "vertices_final": 2027,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0932,
+     "p95": 0.2663,
+     "max": 0.3968
+    },
+    "volume_mL_raw_mesh": 35.6901,
+    "volume_mL_final_mesh": 35.7181,
+    "volume_change_pct_raw_to_final": 0.078,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.008,
+    "centroid_m": [
+     -0.052662,
+     0.097439,
+     0.039807
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   },
+   "paired_with": "masseter_left",
+   "volume_ratio_to_pair": 0.902,
+   "laterality_check": {
+    "centroid_x_mm": -52.66,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "medial_pterygoid_left",
+   "display_name": "Medial pterygoid muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 65,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 8,
+    "class": "medial_pterygoid_left"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Medial to the mandibular ramus; small overlaps with mandible (7 voxels) and skull (95) removed.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `mandible`",
+      "reason": "7 voxels claimed by two different models; `mandible` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 32730,
+      "voxels_after": 32723
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "95 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 32723,
+      "voxels_after": 32628
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 32628,
+    "volume_mL": 13.7649,
+    "voxel_count_before_corrections": 32730,
+    "volume_mL_before_corrections": 13.808,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.033083,
+     0.094647,
+     0.023704
+    ],
+    "bbox_min_m": [
+     0.01795,
+     0.06825,
+     0.0105
+    ],
+    "bbox_max_m": [
+     0.0472,
+     0.12225,
+     0.03975
+    ],
+    "hu_mean": 69.1,
+    "hu_sd": 19.4,
+    "hu_p05": 36.0,
+    "hu_median": 70.0,
+    "hu_p95": 98.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4144,
+    "volume_mL": 13.986,
+    "volume_ratio_to_mask": 1.016
+   },
+   "mesh": {
+    "node": "medial_pterygoid_left",
+    "triangles_raw": 18888,
+    "triangles_final": 2366,
+    "vertices_final": 1185,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0874,
+     "p95": 0.2488,
+     "max": 0.4086
+    },
+    "volume_mL_raw_mesh": 13.7423,
+    "volume_mL_final_mesh": 13.7627,
+    "volume_change_pct_raw_to_final": 0.149,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.016,
+    "centroid_m": [
+     0.033085,
+     0.094648,
+     0.023703
+    ],
+    "centroid_error_vs_mask_mm": 0.002
+   },
+   "paired_with": "medial_pterygoid_right",
+   "volume_ratio_to_pair": 0.904,
+   "laterality_check": {
+    "centroid_x_mm": 33.08,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "medial_pterygoid_right",
+   "display_name": "Medial pterygoid muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 66,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 7,
+    "class": "medial_pterygoid_right"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Medial to the mandibular ramus; small overlaps with mandible (33 voxels), skull (167) and submandibular gland (2) removed.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `mandible`",
+      "reason": "33 voxels claimed by two different models; `mandible` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 36299,
+      "voxels_after": 36266
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "167 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 36266,
+      "voxels_after": 36099
+     },
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `submandibular_gland_right`",
+      "reason": "2 voxels claimed by two different models; `submandibular_gland_right` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 36099,
+      "voxels_after": 36097
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 36097,
+    "volume_mL": 15.2284,
+    "voxel_count_before_corrections": 36299,
+    "volume_mL_before_corrections": 15.3136,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.029912,
+     0.094548,
+     0.025321
+    ],
+    "bbox_min_m": [
+     -0.04355,
+     0.063,
+     0.012
+    ],
+    "bbox_max_m": [
+     -0.0128,
+     0.126,
+     0.03975
+    ],
+    "hu_mean": 67.7,
+    "hu_sd": 18.6,
+    "hu_p05": 36.0,
+    "hu_median": 68.0,
+    "hu_p95": 94.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 4571,
+    "volume_mL": 15.427,
+    "volume_ratio_to_mask": 1.013
+   },
+   "mesh": {
+    "node": "medial_pterygoid_right",
+    "triangles_raw": 21492,
+    "triangles_final": 2592,
+    "vertices_final": 1298,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0873,
+     "p95": 0.2511,
+     "max": 0.4514
+    },
+    "volume_mL_raw_mesh": 15.204,
+    "volume_mL_final_mesh": 15.2237,
+    "volume_change_pct_raw_to_final": 0.129,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.031,
+    "centroid_m": [
+     -0.029914,
+     0.094552,
+     0.025319
+    ],
+    "centroid_error_vs_mask_mm": 0.005
+   },
+   "paired_with": "medial_pterygoid_left",
+   "volume_ratio_to_pair": 1.106,
+   "laterality_check": {
+    "centroid_x_mm": -29.91,
+    "expected_sign": "-",
+    "pass": true
+   }
+  },
+  {
+   "id": "lateral_pterygoid_left",
+   "display_name": "Lateral pterygoid muscle, left",
+   "side": "left",
+   "group": "muscle",
+   "label_id": 67,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 6,
+    "class": "lateral_pterygoid_left"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Skull base to mandibular condyle; 140 voxels overlapping the skull removed.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "140 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 22690,
+      "voxels_after": 22550
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 22550,
+    "volume_mL": 9.5133,
+    "voxel_count_before_corrections": 22690,
+    "volume_mL_before_corrections": 9.5723,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     0.036268,
+     0.12171,
+     0.025925
+    ],
+    "bbox_min_m": [
+     0.02095,
+     0.10275,
+     0.009
+    ],
+    "bbox_max_m": [
+     0.05395,
+     0.135,
+     0.04125
+    ],
+    "hu_mean": 59.8,
+    "hu_sd": 18.7,
+    "hu_p05": 27.0,
+    "hu_median": 60.0,
+    "hu_p95": 89.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 2826,
+    "volume_mL": 9.538,
+    "volume_ratio_to_mask": 1.003
+   },
+   "mesh": {
+    "node": "lateral_pterygoid_left",
+    "triangles_raw": 14240,
+    "triangles_final": 1884,
+    "vertices_final": 944,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0878,
+     "p95": 0.2495,
+     "max": 0.4002
+    },
+    "volume_mL_raw_mesh": 9.4941,
+    "volume_mL_final_mesh": 9.5087,
+    "volume_change_pct_raw_to_final": 0.154,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.048,
+    "centroid_m": [
+     0.036268,
+     0.121714,
+     0.025924
+    ],
+    "centroid_error_vs_mask_mm": 0.004
+   },
+   "paired_with": "lateral_pterygoid_right",
+   "volume_ratio_to_pair": 0.902,
+   "laterality_check": {
+    "centroid_x_mm": 36.27,
+    "expected_sign": "+",
+    "pass": true
+   }
+  },
+  {
+   "id": "lateral_pterygoid_right",
+   "display_name": "Lateral pterygoid muscle, right",
+   "side": "right",
+   "group": "muscle",
+   "label_id": 68,
+   "source": {
+    "tool": "TotalSegmentator 2.18.0",
+    "task": "head_muscles",
+    "label_value": 5,
+    "class": "lateral_pterygoid_right"
+   },
+   "review": {
+    "status": "corrected",
+    "note": "Skull base to mandibular condyle; 128 voxels overlapping the skull removed.",
+    "corrections": [
+     {
+      "step": "D",
+      "operation": "Logical operators SUBTRACT `skull`",
+      "reason": "128 voxels claimed by two different models; `skull` has priority (air lumen > cartilage/bone > arteries > veins > glands > esophagus/canal > muscle)",
+      "voxels_before": 25117,
+      "voxels_after": 24989
+     }
+    ],
+    "reviewed_in": "3D Slicer 5.13.0-2026-11-09 (AI-assisted visual and quantitative review; not a clinical validation)"
+   },
+   "mask": {
+    "grid": "0.75 mm working grid",
+    "voxel_count": 24989,
+    "volume_mL": 10.5422,
+    "voxel_count_before_corrections": 25117,
+    "volume_mL_before_corrections": 10.5962,
+    "components": 1,
+    "largest_component_fraction": 1.0,
+    "centroid_m": [
+     -0.032931,
+     0.120446,
+     0.027615
+    ],
+    "bbox_min_m": [
+     -0.05105,
+     0.1005,
+     0.0105
+    ],
+    "bbox_max_m": [
+     -0.0173,
+     0.13425,
+     0.042
+    ],
+    "hu_mean": 62.6,
+    "hu_sd": 21.3,
+    "hu_p05": 24.0,
+    "hu_median": 63.0,
+    "hu_p95": 95.0,
+    "cut_by_field_of_view": {}
+   },
+   "slice_labels": {
+    "voxel_count_1p5mm": 3143,
+    "volume_mL": 10.608,
+    "volume_ratio_to_mask": 1.006
+   },
+   "mesh": {
+    "node": "lateral_pterygoid_right",
+    "triangles_raw": 14812,
+    "triangles_final": 1940,
+    "vertices_final": 972,
+    "smoothing": "Taubin lambda=0.5 mu=-0.53, 24 iterations",
+    "shells_removed": 0,
+    "surface_distance_raw_to_final_mm": {
+     "mean": 0.0865,
+     "p95": 0.2486,
+     "max": 0.3824
+    },
+    "volume_mL_raw_mesh": 10.5233,
+    "volume_mL_final_mesh": 10.5417,
+    "volume_change_pct_raw_to_final": 0.174,
+    "volume_diff_pct_final_mesh_vs_voxels": -0.004,
+    "centroid_m": [
+     -0.03293,
+     0.120447,
+     0.027615
+    ],
+    "centroid_error_vs_mask_mm": 0.001
+   },
+   "paired_with": "lateral_pterygoid_left",
+   "volume_ratio_to_pair": 1.108,
+   "laterality_check": {
+    "centroid_x_mm": -32.93,
+    "expected_sign": "-",
+    "pass": true
+   }
+  }
+ ],
+ "excluded": [
+  {
+   "class": "auditory_canal_left",
+   "task": "head_glands_cavities",
+   "label_value": 17,
+   "volume_mL": 1.3563,
+   "components": 1,
+   "reason": "external ear canal: outside the airway/neck exhibit; left one also touches the lateral image border"
+  },
+  {
+   "class": "auditory_canal_right",
+   "task": "head_glands_cavities",
+   "label_value": 16,
+   "volume_mL": 1.7111,
+   "components": 1,
+   "reason": "external ear canal: outside the airway/neck exhibit"
+  },
+  {
+   "class": "lung_lower_lobe_left",
+   "task": "total",
+   "label_value": 11,
+   "volume_mL": 43.8286,
+   "components": 1,
+   "reason": "cut by the scan's field of view: only a 44 mL wedge above the lower scan boundary"
+  },
+  {
+   "class": "lung_lower_lobe_right",
+   "task": "total",
+   "label_value": 14,
+   "volume_mL": 43.0705,
+   "components": 1,
+   "reason": "cut by the scan's field of view: only a 43 mL wedge above the lower scan boundary"
+  },
+  {
+   "class": "lung_upper_lobe_left",
+   "task": "total",
+   "label_value": 10,
+   "volume_mL": 281.121,
+   "components": 1,
+   "reason": "cut by the scan's field of view: lateral image border (12,407 border voxels = 70 cm2 cut face) and lower scan boundary; a flat-cut apex would mislead"
+  },
+  {
+   "class": "lung_upper_lobe_right",
+   "task": "total",
+   "label_value": 12,
+   "volume_mL": 364.8206,
+   "components": 1,
+   "reason": "cut by the scan's field of view: lateral image border (9,480 border voxels = 53 cm2 cut face) and lower scan boundary; a flat-cut apex would mislead"
+  },
+  {
+   "class": "nasal_cavity_left",
+   "task": "head_glands_cavities",
+   "label_value": 15,
+   "volume_mL": 10.8194,
+   "components": 1,
+   "reason": "sheet-like mask 1-2 published voxels wide that includes turbinate mucosa (mean -451 HU); its anterior third lies in the publisher-blurred facial zone; not trustworthy at 1.5 mm"
+  },
+  {
+   "class": "nasal_cavity_right",
+   "task": "head_glands_cavities",
+   "label_value": 14,
+   "volume_mL": 10.7511,
+   "components": 2,
+   "reason": "as nasal_cavity_left (mean -428 HU, 2 components)"
+  },
+  {
+   "class": "sinus_frontal",
+   "task": "craniofacial_structures",
+   "label_value": 6,
+   "volume_mL": 5.646,
+   "components": 1,
+   "reason": "above the exhibit boundary (forehead); touches the top image border"
+  },
+  {
+   "class": "sinus_maxillary",
+   "task": "craniofacial_structures",
+   "label_value": 5,
+   "volume_mL": 51.1886,
+   "components": 2,
+   "reason": "mid-face air cavity outside the airway/neck scope; would be cut by the exhibit's upper boundary"
+  },
+  {
+   "class": "costal_cartilages",
+   "task": "total",
+   "label_value": 117,
+   "volume_mL": 13.0946,
+   "components": 4,
+   "reason": "cut by the scan's field of view: four disconnected fragments of the first and second costal cartilages"
+  },
+  {
+   "class": "rib_left_2",
+   "task": "total",
+   "label_value": 93,
+   "volume_mL": 5.3274,
+   "components": 2,
+   "reason": "cut by the scan's field of view: two fragments (largest 73 %), lateral image border"
+  },
+  {
+   "class": "rib_right_2",
+   "task": "total",
+   "label_value": 105,
+   "volume_mL": 6.9449,
+   "components": 2,
+   "reason": "cut by the scan's field of view: two fragments (largest 76 %), lateral image border"
+  },
+  {
+   "class": "rib_left_3",
+   "task": "total",
+   "label_value": 94,
+   "volume_mL": 3.2792,
+   "components": 1,
+   "reason": "cut by the scan's field of view: 3 mL posterior stub at the lateral image border"
+  },
+  {
+   "class": "rib_left_4",
+   "task": "total",
+   "label_value": 95,
+   "volume_mL": 2.8785,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior stub at the lateral image border"
+  },
+  {
+   "class": "rib_left_5",
+   "task": "total",
+   "label_value": 96,
+   "volume_mL": 2.5207,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior stub at the lateral image border"
+  },
+  {
+   "class": "rib_left_6",
+   "task": "total",
+   "label_value": 97,
+   "volume_mL": 2.244,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior stub at the lateral image border"
+  },
+  {
+   "class": "rib_right_3",
+   "task": "total",
+   "label_value": 106,
+   "volume_mL": 5.1161,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior stub at the lateral image border"
+  },
+  {
+   "class": "rib_right_4",
+   "task": "total",
+   "label_value": 107,
+   "volume_mL": 5.3405,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior stub at the lateral image border"
+  },
+  {
+   "class": "rib_right_5",
+   "task": "total",
+   "label_value": 108,
+   "volume_mL": 5.3447,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior stub at the lateral and posterior image borders"
+  },
+  {
+   "class": "rib_right_6",
+   "task": "total",
+   "label_value": 109,
+   "volume_mL": 2.4144,
+   "components": 1,
+   "reason": "cut by the scan's field of view: stub at the posterior border and lower scan boundary"
+  },
+  {
+   "class": "scapula_right",
+   "task": "total",
+   "label_value": 72,
+   "volume_mL": 2.4418,
+   "components": 1,
+   "reason": "cut by the scan's field of view: 2.4 mL sliver at the lateral image border (Dice 0.65 against the publisher label)"
+  },
+  {
+   "class": "skull",
+   "task": "total",
+   "label_value": 91,
+   "volume_mL": 423.8346,
+   "components": 2,
+   "reason": "task `total` skull includes the mandible and teeth (97 % of the mandible mask, 100 % of both teeth masks lie inside it); replaced by the craniofacial_structures skull, which is separate from the mandible"
+  },
+  {
+   "class": "styloid_process_left",
+   "task": "headneck_bones_vessels",
+   "label_value": 8,
+   "volume_mL": 0.1958,
+   "components": 1,
+   "reason": "0.20 mL, 2-3 published voxels across: too small to be trustworthy at 1.5 mm; lies inside the skull mask"
+  },
+  {
+   "class": "styloid_process_right",
+   "task": "headneck_bones_vessels",
+   "label_value": 7,
+   "volume_mL": 0.17,
+   "components": 1,
+   "reason": "0.17 mL, 2-3 published voxels across: too small to be trustworthy at 1.5 mm; lies inside the skull mask"
+  },
+  {
+   "class": "vertebrae_T6",
+   "task": "total",
+   "label_value": 38,
+   "volume_mL": 16.921,
+   "components": 1,
+   "reason": "cut by the scan's field of view: cut through the vertebral body by the lower scan boundary (1,837 border voxels)"
+  },
+  {
+   "class": "vertebrae_T7",
+   "task": "total",
+   "label_value": 37,
+   "volume_mL": 0.0186,
+   "components": 1,
+   "reason": "44-voxel fragment at the lower scan boundary"
+  },
+  {
+   "class": "zygomatic_arch_left",
+   "task": "headneck_bones_vessels",
+   "label_value": 6,
+   "volume_mL": 0.3012,
+   "components": 2,
+   "reason": "0.30 mL, two fragments; duplicates part of the skull mask; facial skeleton outside the exhibit; lies in the publisher-blurred cheek zone"
+  },
+  {
+   "class": "zygomatic_arch_right",
+   "task": "headneck_bones_vessels",
+   "label_value": 5,
+   "volume_mL": 0.2215,
+   "components": 3,
+   "reason": "0.22 mL, three fragments; duplicates part of the skull mask; facial skeleton outside the exhibit; lies in the publisher-blurred cheek zone"
+  },
+  {
+   "class": "parotid_gland_left",
+   "task": "head_glands_cavities",
+   "label_value": 7,
+   "volume_mL": 11.0274,
+   "components": 1,
+   "reason": "cut by the scan's field of view: lateral image border (991 border voxels = 5.6 cm2 cut face)"
+  },
+  {
+   "class": "parotid_gland_right",
+   "task": "head_glands_cavities",
+   "label_value": 8,
+   "volume_mL": 8.6214,
+   "components": 1,
+   "reason": "mask is complete, but the lateral-face gland is outside the airway/neck scope and its left counterpart is cut by the field of view, so the pair cannot be shown"
+  },
+  {
+   "class": "autochthon_left",
+   "task": "total",
+   "label_value": 86,
+   "volume_mL": 86.0832,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior image border (2,120 border voxels = 11.9 cm2 cut face) and lower scan boundary"
+  },
+  {
+   "class": "autochthon_right",
+   "task": "total",
+   "label_value": 87,
+   "volume_mL": 81.5468,
+   "components": 1,
+   "reason": "cut by the scan's field of view: posterior image border (2,142 border voxels = 12.0 cm2 cut face) and lower scan boundary"
+  },
+  {
+   "class": "digastric_left",
+   "task": "head_muscles",
+   "label_value": 11,
+   "volume_mL": 0.9648,
+   "components": 1,
+   "reason": "anterior belly only (1.0 mL) lying in the publisher-blurred submental zone; image content there is not original"
+  },
+  {
+   "class": "digastric_right",
+   "task": "head_muscles",
+   "label_value": 10,
+   "volume_mL": 1.1635,
+   "components": 1,
+   "reason": "anterior belly only (1.2 mL) lying in the publisher-blurred submental zone; image content there is not original"
+  },
+  {
+   "class": "inferior_pharyngeal_constrictor",
+   "task": "headneck_muscles",
+   "label_value": 5,
+   "volume_mL": 4.1023,
+   "components": 1,
+   "reason": "pharyngeal-wall sheet about 2.7 mm thick (< 2 published voxels) with no HU contrast against the prevertebral muscles (-6 HU); position is the model's prior, not image evidence"
+  },
+  {
+   "class": "middle_pharyngeal_constrictor",
+   "task": "headneck_muscles",
+   "label_value": 4,
+   "volume_mL": 2.0828,
+   "components": 1,
+   "reason": "pharyngeal-wall sheet about 2.4 mm thick (< 2 published voxels); not resolvable at 1.5 mm"
+  },
+  {
+   "class": "superior_pharyngeal_constrictor",
+   "task": "headneck_muscles",
+   "label_value": 3,
+   "volume_mL": 1.2496,
+   "components": 1,
+   "reason": "pharyngeal-wall sheet about 2.1 mm thick (< 2 published voxels); not resolvable at 1.5 mm"
+  },
+  {
+   "class": "platysma_left",
+   "task": "headneck_muscles",
+   "label_value": 9,
+   "volume_mL": 3.0244,
+   "components": 1,
+   "reason": "sheet about 1.9 mm thick (about 1 published voxel), ragged partial coverage, partly in the publisher-blurred zone"
+  },
+  {
+   "class": "platysma_right",
+   "task": "headneck_muscles",
+   "label_value": 8,
+   "volume_mL": 2.403,
+   "components": 1,
+   "reason": "sheet about 1.9 mm thick (about 1 published voxel), ragged partial coverage, partly in the publisher-blurred zone"
+  },
+  {
+   "class": "posterior_scalene_left",
+   "task": "headneck_muscles",
+   "label_value": 17,
+   "volume_mL": 2.1714,
+   "components": 2,
+   "reason": "small (2.2 mL) and asymmetric: left/right volume ratio 2.8; border with the middle scalene and levator scapulae not resolvable"
+  },
+  {
+   "class": "posterior_scalene_right",
+   "task": "headneck_muscles",
+   "label_value": 16,
+   "volume_mL": 0.7876,
+   "components": 1,
+   "reason": "small (0.8 mL) and asymmetric: left/right volume ratio 2.8; border with the middle scalene and levator scapulae not resolvable"
+  },
+  {
+   "class": "temporalis_left",
+   "task": "head_muscles",
+   "label_value": 4,
+   "volume_mL": 37.4764,
+   "components": 2,
+   "reason": "cut by the scan's field of view: lateral and top image borders; lies above the exhibit boundary"
+  },
+  {
+   "class": "temporalis_right",
+   "task": "head_muscles",
+   "label_value": 3,
+   "volume_mL": 42.9043,
+   "components": 1,
+   "reason": "cut by the scan's field of view: lateral and top image borders; lies above the exhibit boundary"
+  },
+  {
+   "class": "thyrohyoid_left",
+   "task": "headneck_muscles",
+   "label_value": 21,
+   "volume_mL": 1.4082,
+   "components": 1,
+   "reason": "strap about 2.2 mm thick (< 2 published voxels) with no HU contrast against its surroundings (-14 HU)"
+  },
+  {
+   "class": "thyrohyoid_right",
+   "task": "headneck_muscles",
+   "label_value": 20,
+   "volume_mL": 1.3681,
+   "components": 1,
+   "reason": "strap about 2.2 mm thick (< 2 published voxels) with no HU contrast against its surroundings (-12 HU)"
+  },
+  {
+   "class": "trapezius_left",
+   "task": "headneck_muscles",
+   "label_value": 7,
+   "volume_mL": 65.0249,
+   "components": 2,
+   "reason": "cut by the scan's field of view: lateral and posterior image borders (6,453 border voxels = 36 cm2 cut face)"
+  },
+  {
+   "class": "trapezius_right",
+   "task": "headneck_muscles",
+   "label_value": 6,
+   "volume_mL": 83.1288,
+   "components": 2,
+   "reason": "cut by the scan's field of view: lateral and posterior image borders (8,416 border voxels = 47 cm2 cut face)"
+  },
+  {
+   "class": "brain",
+   "task": "total",
+   "label_value": 90,
+   "volume_mL": 415.9384,
+   "components": 1,
+   "reason": "outside the exhibit (cut by the top image border)"
+  },
+  {
+   "class": "eye_left",
+   "task": "head_glands_cavities",
+   "label_value": 1,
+   "volume_mL": 7.8009,
+   "components": 1,
+   "reason": "orbit: outside the exhibit; lies in the publisher-blurred facial zone"
+  },
+  {
+   "class": "eye_right",
+   "task": "head_glands_cavities",
+   "label_value": 2,
+   "volume_mL": 7.603,
+   "components": 1,
+   "reason": "orbit: outside the exhibit; lies in the publisher-blurred facial zone"
+  },
+  {
+   "class": "eye_lens_right",
+   "task": "head_glands_cavities",
+   "label_value": 4,
+   "volume_mL": 0.0316,
+   "components": 1,
+   "reason": "orbit: outside the exhibit (0.03 mL; the left lens mask was empty)"
+  },
+  {
+   "class": "head",
+   "task": "craniofacial_structures",
+   "label_value": 4,
+   "volume_mL": 2488.8372,
+   "components": 13,
+   "reason": "outer surface of the whole head (skin). Never exported: privacy"
+  },
+  {
+   "class": "heart",
+   "task": "total",
+   "label_value": 51,
+   "volume_mL": 32.3764,
+   "components": 1,
+   "reason": "cut by the scan's field of view: only the top 26 mm above the lower scan boundary"
+  },
+  {
+   "class": "optic_nerve_left",
+   "task": "head_glands_cavities",
+   "label_value": 5,
+   "volume_mL": 0.3101,
+   "components": 1,
+   "reason": "orbit: outside the exhibit"
+  },
+  {
+   "class": "optic_nerve_right",
+   "task": "head_glands_cavities",
+   "label_value": 6,
+   "volume_mL": 0.2818,
+   "components": 1,
+   "reason": "orbit: outside the exhibit"
+  }
+ ],
+ "empty_classes": [
+  {
+   "class": "spleen",
+   "task": "total"
+  },
+  {
+   "class": "kidney_right",
+   "task": "total"
+  },
+  {
+   "class": "kidney_left",
+   "task": "total"
+  },
+  {
+   "class": "gallbladder",
+   "task": "total"
+  },
+  {
+   "class": "liver",
+   "task": "total"
+  },
+  {
+   "class": "stomach",
+   "task": "total"
+  },
+  {
+   "class": "pancreas",
+   "task": "total"
+  },
+  {
+   "class": "adrenal_gland_right",
+   "task": "total"
+  },
+  {
+   "class": "adrenal_gland_left",
+   "task": "total"
+  },
+  {
+   "class": "lung_middle_lobe_right",
+   "task": "total"
+  },
+  {
+   "class": "small_bowel",
+   "task": "total"
+  },
+  {
+   "class": "duodenum",
+   "task": "total"
+  },
+  {
+   "class": "colon",
+   "task": "total"
+  },
+  {
+   "class": "urinary_bladder",
+   "task": "total"
+  },
+  {
+   "class": "prostate",
+   "task": "total"
+  },
+  {
+   "class": "kidney_cyst_left",
+   "task": "total"
+  },
+  {
+   "class": "kidney_cyst_right",
+   "task": "total"
+  },
+  {
+   "class": "sacrum",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_S1",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_L5",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_L4",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_L3",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_L2",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_L1",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_T12",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_T11",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_T10",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_T9",
+   "task": "total"
+  },
+  {
+   "class": "vertebrae_T8",
+   "task": "total"
+  },
+  {
+   "class": "pulmonary_vein",
+   "task": "total"
+  },
+  {
+   "class": "atrial_appendage_left",
+   "task": "total"
+  },
+  {
+   "class": "inferior_vena_cava",
+   "task": "total"
+  },
+  {
+   "class": "portal_vein_and_splenic_vein",
+   "task": "total"
+  },
+  {
+   "class": "iliac_artery_left",
+   "task": "total"
+  },
+  {
+   "class": "iliac_artery_right",
+   "task": "total"
+  },
+  {
+   "class": "iliac_vena_left",
+   "task": "total"
+  },
+  {
+   "class": "iliac_vena_right",
+   "task": "total"
+  },
+  {
+   "class": "humerus_left",
+   "task": "total"
+  },
+  {
+   "class": "humerus_right",
+   "task": "total"
+  },
+  {
+   "class": "scapula_left",
+   "task": "total"
+  },
+  {
+   "class": "femur_left",
+   "task": "total"
+  },
+  {
+   "class": "femur_right",
+   "task": "total"
+  },
+  {
+   "class": "hip_left",
+   "task": "total"
+  },
+  {
+   "class": "hip_right",
+   "task": "total"
+  },
+  {
+   "class": "gluteus_maximus_left",
+   "task": "total"
+  },
+  {
+   "class": "gluteus_maximus_right",
+   "task": "total"
+  },
+  {
+   "class": "gluteus_medius_left",
+   "task": "total"
+  },
+  {
+   "class": "gluteus_medius_right",
+   "task": "total"
+  },
+  {
+   "class": "gluteus_minimus_left",
+   "task": "total"
+  },
+  {
+   "class": "gluteus_minimus_right",
+   "task": "total"
+  },
+  {
+   "class": "iliopsoas_left",
+   "task": "total"
+  },
+  {
+   "class": "iliopsoas_right",
+   "task": "total"
+  },
+  {
+   "class": "rib_left_7",
+   "task": "total"
+  },
+  {
+   "class": "rib_left_8",
+   "task": "total"
+  },
+  {
+   "class": "rib_left_9",
+   "task": "total"
+  },
+  {
+   "class": "rib_left_10",
+   "task": "total"
+  },
+  {
+   "class": "rib_left_11",
+   "task": "total"
+  },
+  {
+   "class": "rib_left_12",
+   "task": "total"
+  },
+  {
+   "class": "rib_right_7",
+   "task": "total"
+  },
+  {
+   "class": "rib_right_8",
+   "task": "total"
+  },
+  {
+   "class": "rib_right_9",
+   "task": "total"
+  },
+  {
+   "class": "rib_right_10",
+   "task": "total"
+  },
+  {
+   "class": "rib_right_11",
+   "task": "total"
+  },
+  {
+   "class": "rib_right_12",
+   "task": "total"
+  },
+  {
+   "class": "eye_lens_left",
+   "task": "head_glands_cavities"
+  }
+ ]
+}

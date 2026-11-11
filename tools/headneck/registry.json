@@ -1,0 +1,2070 @@
+{
+ "generated_by": "tools/headneck/02_dump_registry.py",
+ "source": "installed package: totalsegmentator.registry.task_registry(), totalsegmentator.map_to_binary.commercial_models, totalsegmentator.map_tasks_config.TASK_CONFIGS",
+ "totalsegmentator_version": "2.18.0",
+ "num_tasks": 53,
+ "num_unique_classes": 425,
+ "open_tasks": [
+  "total",
+  "total_v3",
+  "body",
+  "body_mr",
+  "vertebrae_mr",
+  "lung_vessels",
+  "lung_vessels_LEGACY",
+  "cerebral_bleed",
+  "hip_implant",
+  "pleural_pericard_effusion",
+  "test",
+  "vertebrae_body",
+  "vertebrae_pp",
+  "vertebrae_pp_refined",
+  "total_mr",
+  "head_glands_cavities",
+  "head_muscles",
+  "headneck_bones_vessels",
+  "headneck_muscles",
+  "liver_vessels",
+  "liver_lesions",
+  "liver_lesions_mr",
+  "oculomotor_muscles",
+  "lung_nodules",
+  "kidney_cysts",
+  "breasts",
+  "ventricle_parts",
+  "liver_segments",
+  "liver_segments_mr",
+  "total_highres_test",
+  "craniofacial_structures",
+  "abdominal_muscles",
+  "teeth",
+  "trunk_cavities",
+  "brain_aneurysm"
+ ],
+ "license_gated_tasks": {
+  "coronary_arteries": 509,
+  "coronary_arteries_LEGACY": 507,
+  "appendicular_bones": 304,
+  "appendicular_bones_mr": 855,
+  "tissue_types": 481,
+  "heartchambers_highres": 301,
+  "face": 303,
+  "tissue_types_mr": 925,
+  "tissue_4_types": 485,
+  "face_mr": 856,
+  "brain_structures": 409,
+  "thigh_shoulder_muscles": 857,
+  "thigh_shoulder_muscles_mr": 857,
+  "aortic_sinuses": 920,
+  "renal_arteries": 710,
+  "aorta_annulus": 713,
+  "aortic_dissection": 716,
+  "pulmonary_artery_landmarks": 514
+ },
+ "license_gated_note": "license_gated_tasks maps task -> weights id served only by the TotalSegmentator license server (free non-commercial key requires registration; not obtained, not used).",
+ "open_weights_source": "https://github.com/wasserth/TotalSegmentator/releases/download/<tag>/<file>.zip (see totalsegmentator/libs.py)",
+ "nerve_coverage": {
+  "search_terms": [
+   "nerve",
+   "nerv",
+   "plexus",
+   "brachial",
+   "vagus",
+   "vagal",
+   "phrenic",
+   "recurrent",
+   "laryngeal_n",
+   "ganglion",
+   "sympathetic",
+   "cord",
+   "root",
+   "trunk",
+   "hypoglossal",
+   "accessory",
+   "facial_n",
+   "trigeminal",
+   "glossopharyngeal",
+   "sciatic",
+   "femoral_n",
+   "median",
+   "ulnar",
+   "radial",
+   "canal"
+  ],
+  "nervous_system_classes_found": {
+   "spinal_cord": [
+    {
+     "task": "total",
+     "label": 79,
+     "license_required": false
+    },
+    {
+     "task": "total_v3",
+     "label": 79,
+     "license_required": false
+    },
+    {
+     "task": "total_mr",
+     "label": 21,
+     "license_required": false
+    }
+   ],
+   "optic_nerve_left": [
+    {
+     "task": "head_glands_cavities",
+     "label": 5,
+     "license_required": false
+    },
+    {
+     "task": "oculomotor_muscles",
+     "label": 10,
+     "license_required": false
+    }
+   ],
+   "optic_nerve_right": [
+    {
+     "task": "head_glands_cavities",
+     "label": 6,
+     "license_required": false
+    },
+    {
+     "task": "oculomotor_muscles",
+     "label": 19,
+     "license_required": false
+    }
+   ]
+  },
+  "matched_but_not_nerves": {
+   "brachiocephalic_trunk": [
+    {
+     "task": "total",
+     "label": 54,
+     "license_required": false
+    },
+    {
+     "task": "total_v3",
+     "label": 54,
+     "license_required": false
+    }
+   ],
+   "auditory_canal_right": [
+    {
+     "task": "head_glands_cavities",
+     "label": 16,
+     "license_required": false
+    }
+   ],
+   "auditory_canal_left": [
+    {
+     "task": "head_glands_cavities",
+     "label": 17,
+     "license_required": false
+    }
+   ],
+   "coracobrachial": [
+    {
+     "task": "thigh_shoulder_muscles",
+     "label": 13,
+     "license_required": true
+    },
+    {
+     "task": "thigh_shoulder_muscles_mr",
+     "label": 13,
+     "license_required": true
+    }
+   ],
+   "left_inferior_alveolar_canal": [
+    {
+     "task": "teeth",
+     "label": 3,
+     "license_required": false
+    }
+   ],
+   "right_inferior_alveolar_canal": [
+    {
+     "task": "teeth",
+     "label": 4,
+     "license_required": false
+    }
+   ],
+   "left_mandibular_incisive_canal_fdi103": [
+    {
+     "task": "teeth",
+     "label": 43,
+     "license_required": false
+    }
+   ],
+   "right_mandibular_incisive_canal_fdi104": [
+    {
+     "task": "teeth",
+     "label": 44,
+     "license_required": false
+    }
+   ],
+   "lingual_canal": [
+    {
+     "task": "teeth",
+     "label": 45,
+     "license_required": false
+    }
+   ],
+   "celiac_trunk": [
+    {
+     "task": "renal_arteries",
+     "label": 1,
+     "license_required": true
+    }
+   ]
+  },
+  "any_class_containing_plexus": [],
+  "brachial_plexus_present": false,
+  "peripheral_nerves_of_neck_or_arm_present": false,
+  "statement": "The installed registry contains no brachial plexus class and no peripheral nerve class of the neck or arm (no vagus, phrenic, recurrent laryngeal, accessory, hypoglossal, cervical/brachial plexus roots, trunks or cords). The only nervous-system classes are spinal_cord (task total; total_mr), optic_nerve_left/right (head_glands_cavities; oculomotor_muscles) and brain / brain sub-structures. Matches such as brachiocephalic_trunk, *_alveolar_canal, auditory_canal_* and *_incisive_canal_* are vessels or bony canals, not nerves."
+ },
+ "tasks": {
+  "total": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "spleen",
+    "2": "kidney_right",
+    "3": "kidney_left",
+    "4": "gallbladder",
+    "5": "liver",
+    "6": "stomach",
+    "7": "pancreas",
+    "8": "adrenal_gland_right",
+    "9": "adrenal_gland_left",
+    "10": "lung_upper_lobe_left",
+    "11": "lung_lower_lobe_left",
+    "12": "lung_upper_lobe_right",
+    "13": "lung_middle_lobe_right",
+    "14": "lung_lower_lobe_right",
+    "15": "esophagus",
+    "16": "trachea",
+    "17": "thyroid_gland",
+    "18": "small_bowel",
+    "19": "duodenum",
+    "20": "colon",
+    "21": "urinary_bladder",
+    "22": "prostate",
+    "23": "kidney_cyst_left",
+    "24": "kidney_cyst_right",
+    "25": "sacrum",
+    "26": "vertebrae_S1",
+    "27": "vertebrae_L5",
+    "28": "vertebrae_L4",
+    "29": "vertebrae_L3",
+    "30": "vertebrae_L2",
+    "31": "vertebrae_L1",
+    "32": "vertebrae_T12",
+    "33": "vertebrae_T11",
+    "34": "vertebrae_T10",
+    "35": "vertebrae_T9",
+    "36": "vertebrae_T8",
+    "37": "vertebrae_T7",
+    "38": "vertebrae_T6",
+    "39": "vertebrae_T5",
+    "40": "vertebrae_T4",
+    "41": "vertebrae_T3",
+    "42": "vertebrae_T2",
+    "43": "vertebrae_T1",
+    "44": "vertebrae_C7",
+    "45": "vertebrae_C6",
+    "46": "vertebrae_C5",
+    "47": "vertebrae_C4",
+    "48": "vertebrae_C3",
+    "49": "vertebrae_C2",
+    "50": "vertebrae_C1",
+    "51": "heart",
+    "52": "aorta",
+    "53": "pulmonary_vein",
+    "54": "brachiocephalic_trunk",
+    "55": "subclavian_artery_right",
+    "56": "subclavian_artery_left",
+    "57": "common_carotid_artery_right",
+    "58": "common_carotid_artery_left",
+    "59": "brachiocephalic_vein_left",
+    "60": "brachiocephalic_vein_right",
+    "61": "atrial_appendage_left",
+    "62": "superior_vena_cava",
+    "63": "inferior_vena_cava",
+    "64": "portal_vein_and_splenic_vein",
+    "65": "iliac_artery_left",
+    "66": "iliac_artery_right",
+    "67": "iliac_vena_left",
+    "68": "iliac_vena_right",
+    "69": "humerus_left",
+    "70": "humerus_right",
+    "71": "scapula_left",
+    "72": "scapula_right",
+    "73": "clavicula_left",
+    "74": "clavicula_right",
+    "75": "femur_left",
+    "76": "femur_right",
+    "77": "hip_left",
+    "78": "hip_right",
+    "79": "spinal_cord",
+    "80": "gluteus_maximus_left",
+    "81": "gluteus_maximus_right",
+    "82": "gluteus_medius_left",
+    "83": "gluteus_medius_right",
+    "84": "gluteus_minimus_left",
+    "85": "gluteus_minimus_right",
+    "86": "autochthon_left",
+    "87": "autochthon_right",
+    "88": "iliopsoas_left",
+    "89": "iliopsoas_right",
+    "90": "brain",
+    "91": "skull",
+    "92": "rib_left_1",
+    "93": "rib_left_2",
+    "94": "rib_left_3",
+    "95": "rib_left_4",
+    "96": "rib_left_5",
+    "97": "rib_left_6",
+    "98": "rib_left_7",
+    "99": "rib_left_8",
+    "100": "rib_left_9",
+    "101": "rib_left_10",
+    "102": "rib_left_11",
+    "103": "rib_left_12",
+    "104": "rib_right_1",
+    "105": "rib_right_2",
+    "106": "rib_right_3",
+    "107": "rib_right_4",
+    "108": "rib_right_5",
+    "109": "rib_right_6",
+    "110": "rib_right_7",
+    "111": "rib_right_8",
+    "112": "rib_right_9",
+    "113": "rib_right_10",
+    "114": "rib_right_11",
+    "115": "rib_right_12",
+    "116": "sternum",
+    "117": "costal_cartilages"
+   },
+   "num_classes": 117,
+   "weights_ids": {
+    "fast": 297,
+    "fastest": 298,
+    "default": [
+     291,
+     292,
+     293,
+     294,
+     295
+    ]
+   },
+   "config": {}
+  },
+  "total_v3": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "spleen",
+    "2": "kidney_right",
+    "3": "kidney_left",
+    "4": "gallbladder",
+    "5": "liver",
+    "6": "stomach",
+    "7": "pancreas",
+    "8": "adrenal_gland_right",
+    "9": "adrenal_gland_left",
+    "10": "lung_upper_lobe_left",
+    "11": "lung_lower_lobe_left",
+    "12": "lung_upper_lobe_right",
+    "13": "lung_middle_lobe_right",
+    "14": "lung_lower_lobe_right",
+    "15": "esophagus",
+    "16": "trachea",
+    "17": "thyroid_gland",
+    "18": "small_bowel",
+    "19": "duodenum",
+    "20": "colon",
+    "21": "urinary_bladder",
+    "22": "prostate",
+    "23": "kidney_cyst_left",
+    "24": "kidney_cyst_right",
+    "25": "sacrum",
+    "26": "vertebrae_L6",
+    "27": "vertebrae_L5",
+    "28": "vertebrae_L4",
+    "29": "vertebrae_L3",
+    "30": "vertebrae_L2",
+    "31": "vertebrae_L1",
+    "32": "vertebrae_T12",
+    "33": "vertebrae_T11",
+    "34": "vertebrae_T10",
+    "35": "vertebrae_T9",
+    "36": "vertebrae_T8",
+    "37": "vertebrae_T7",
+    "38": "vertebrae_T6",
+    "39": "vertebrae_T5",
+    "40": "vertebrae_T4",
+    "41": "vertebrae_T3",
+    "42": "vertebrae_T2",
+    "43": "vertebrae_T1",
+    "44": "vertebrae_C7",
+    "45": "vertebrae_C6",
+    "46": "vertebrae_C5",
+    "47": "vertebrae_C4",
+    "48": "vertebrae_C3",
+    "49": "vertebrae_C2",
+    "50": "vertebrae_C1",
+    "51": "heart",
+    "52": "aorta",
+    "53": "pulmonary_vein",
+    "54": "brachiocephalic_trunk",
+    "55": "subclavian_artery_right",
+    "56": "subclavian_artery_left",
+    "57": "common_carotid_artery_right",
+    "58": "common_carotid_artery_left",
+    "59": "brachiocephalic_vein_left",
+    "60": "brachiocephalic_vein_right",
+    "61": "atrial_appendage_left",
+    "62": "superior_vena_cava",
+    "63": "inferior_vena_cava",
+    "64": "portal_vein_and_splenic_vein",
+    "65": "iliac_artery_left",
+    "66": "iliac_artery_right",
+    "67": "iliac_vena_left",
+    "68": "iliac_vena_right",
+    "69": "humerus_left",
+    "70": "humerus_right",
+    "71": "scapula_left",
+    "72": "scapula_right",
+    "73": "clavicula_left",
+    "74": "clavicula_right",
+    "75": "femur_left",
+    "76": "femur_right",
+    "77": "hip_left",
+    "78": "hip_right",
+    "79": "spinal_cord",
+    "80": "gluteus_maximus_left",
+    "81": "gluteus_maximus_right",
+    "82": "gluteus_medius_left",
+    "83": "gluteus_medius_right",
+    "84": "gluteus_minimus_left",
+    "85": "gluteus_minimus_right",
+    "86": "autochthon_left",
+    "87": "autochthon_right",
+    "88": "iliopsoas_left",
+    "89": "iliopsoas_right",
+    "90": "brain",
+    "91": "skull",
+    "92": "rib_left_1",
+    "93": "rib_left_2",
+    "94": "rib_left_3",
+    "95": "rib_left_4",
+    "96": "rib_left_5",
+    "97": "rib_left_6",
+    "98": "rib_left_7",
+    "99": "rib_left_8",
+    "100": "rib_left_9",
+    "101": "rib_left_10",
+    "102": "rib_left_11",
+    "103": "rib_left_12",
+    "104": "rib_right_1",
+    "105": "rib_right_2",
+    "106": "rib_right_3",
+    "107": "rib_right_4",
+    "108": "rib_right_5",
+    "109": "rib_right_6",
+    "110": "rib_right_7",
+    "111": "rib_right_8",
+    "112": "rib_right_9",
+    "113": "rib_right_10",
+    "114": "rib_right_11",
+    "115": "rib_right_12",
+    "116": "sternum",
+    "117": "costal_cartilages"
+   },
+   "num_classes": 117,
+   "weights_ids": {
+    "fast": 836,
+    "fastest": 837,
+    "default": [
+     831,
+     832,
+     833,
+     834,
+     835
+    ]
+   },
+   "config": {}
+  },
+  "body": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "body_trunc",
+    "2": "body_extremities"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "fast": 300,
+    "default": 299
+   },
+   "config": {}
+  },
+  "body_mr": {
+   "modality": "MR",
+   "license_required": false,
+   "classes": {
+    "1": "body_trunc",
+    "2": "body_extremities"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "fast": 598,
+    "default": 597
+   },
+   "config": {}
+  },
+  "vertebrae_mr": {
+   "modality": "MR",
+   "license_required": false,
+   "classes": {
+    "1": "sacrum",
+    "2": "vertebrae_L5",
+    "3": "vertebrae_L4",
+    "4": "vertebrae_L3",
+    "5": "vertebrae_L2",
+    "6": "vertebrae_L1",
+    "7": "vertebrae_T12",
+    "8": "vertebrae_T11",
+    "9": "vertebrae_T10",
+    "10": "vertebrae_T9",
+    "11": "vertebrae_T8",
+    "12": "vertebrae_T7",
+    "13": "vertebrae_T6",
+    "14": "vertebrae_T5",
+    "15": "vertebrae_T4",
+    "16": "vertebrae_T3",
+    "17": "vertebrae_T2",
+    "18": "vertebrae_T1",
+    "19": "vertebrae_C7",
+    "20": "vertebrae_C6",
+    "21": "vertebrae_C5",
+    "22": "vertebrae_C4",
+    "23": "vertebrae_C3",
+    "24": "vertebrae_C2",
+    "25": "vertebrae_C1"
+   },
+   "num_classes": 25,
+   "weights_ids": {
+    "default": 756
+   },
+   "config": {
+    "resample": 1.5
+   }
+  },
+  "lung_vessels": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "lung_airways",
+    "2": "lung_airways_wall",
+    "3": "lung_arteries",
+    "4": "lung_veins"
+   },
+   "num_classes": 4,
+   "weights_ids": {
+    "default": 117
+   },
+   "config": {
+    "resample": [
+     0.703125,
+     0.703125,
+     1.0
+    ],
+    "crop": [
+     "lung_upper_lobe_left",
+     "lung_lower_lobe_left",
+     "lung_upper_lobe_right",
+     "lung_middle_lobe_right",
+     "lung_lower_lobe_right"
+    ]
+   }
+  },
+  "lung_vessels_LEGACY": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "lung_vessels",
+    "2": "lung_trachea_bronchia"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 258
+   },
+   "config": {
+    "crop": [
+     "lung_upper_lobe_left",
+     "lung_lower_lobe_left",
+     "lung_upper_lobe_right",
+     "lung_middle_lobe_right",
+     "lung_lower_lobe_right"
+    ],
+    "disallow_fast": true
+   }
+  },
+  "cerebral_bleed": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "intracerebral_hemorrhage"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 150
+   },
+   "config": {
+    "crop": [
+     "brain"
+    ],
+    "disallow_fast": true
+   }
+  },
+  "hip_implant": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "hip_implant"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 260
+   },
+   "config": {
+    "crop": [
+     "femur_left",
+     "femur_right",
+     "hip_left",
+     "hip_right"
+    ],
+    "disallow_fast": true
+   }
+  },
+  "coronary_arteries": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "coronary_arteries"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 509
+   },
+   "config": {
+    "resample": [
+     0.7,
+     0.7,
+     0.7
+    ],
+    "crop": [
+     "heart"
+    ],
+    "crop_addon": [
+     20,
+     20,
+     20
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "coronary_arteries_LEGACY": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "coronary_arteries"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 507
+   },
+   "config": {
+    "resample": [
+     0.7,
+     0.7,
+     0.7
+    ],
+    "crop": [
+     "heart"
+    ],
+    "crop_addon": [
+     20,
+     20,
+     20
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "pleural_pericard_effusion": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "lung_pleural",
+    "2": "pleural_effusion",
+    "3": "pericardial_effusion"
+   },
+   "num_classes": 3,
+   "weights_ids": {
+    "default": 315
+   },
+   "config": {
+    "crop": [
+     "lung_upper_lobe_left",
+     "lung_lower_lobe_left",
+     "lung_upper_lobe_right",
+     "lung_middle_lobe_right",
+     "lung_lower_lobe_right"
+    ],
+    "crop_addon": [
+     50,
+     50,
+     50
+    ],
+    "disallow_fast": true
+   }
+  },
+  "test": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "carpal"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": [
+     517
+    ]
+   },
+   "config": {
+    "crop": "body"
+   }
+  },
+  "appendicular_bones": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "patella",
+    "2": "tibia",
+    "3": "fibula",
+    "4": "tarsal",
+    "5": "metatarsal",
+    "6": "phalanges_feet",
+    "7": "ulna",
+    "8": "radius",
+    "9": "carpal",
+    "10": "metacarpal",
+    "11": "phalanges_hand"
+   },
+   "num_classes": 11,
+   "weights_ids": {
+    "default": 304
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "appendicular_bones_mr": {
+   "modality": "MR",
+   "license_required": true,
+   "classes": {
+    "1": "patella",
+    "2": "tibia",
+    "3": "fibula",
+    "4": "tarsal",
+    "5": "metatarsal",
+    "6": "phalanges_feet",
+    "7": "ulna",
+    "8": "radius"
+   },
+   "num_classes": 8,
+   "weights_ids": {
+    "default": 855
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "tissue_types": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "subcutaneous_fat",
+    "2": "torso_fat",
+    "3": "skeletal_muscle"
+   },
+   "num_classes": 3,
+   "weights_ids": {
+    "default": 481
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "heartchambers_highres": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "heart_myocardium",
+    "2": "heart_atrium_left",
+    "3": "heart_ventricle_left",
+    "4": "heart_atrium_right",
+    "5": "heart_ventricle_right",
+    "6": "aorta",
+    "7": "pulmonary_artery"
+   },
+   "num_classes": 7,
+   "weights_ids": {
+    "default": 301
+   },
+   "config": {
+    "crop": [
+     "heart"
+    ],
+    "crop_addon": [
+     5,
+     5,
+     5
+    ],
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "face": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "face"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 303
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "vertebrae_body": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "vertebrae_body",
+    "2": "intervertebral_discs"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 305
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true
+   }
+  },
+  "vertebrae_pp": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "vertebrae_C1",
+    "2": "vertebrae_C2",
+    "3": "vertebrae_C3",
+    "4": "vertebrae_C4",
+    "5": "vertebrae_C5",
+    "6": "vertebrae_C6",
+    "7": "vertebrae_C7",
+    "8": "vertebrae_T1",
+    "9": "vertebrae_T2",
+    "10": "vertebrae_T3",
+    "11": "vertebrae_T4",
+    "12": "vertebrae_T5",
+    "13": "vertebrae_T6",
+    "14": "vertebrae_T7",
+    "15": "vertebrae_T8",
+    "16": "vertebrae_T9",
+    "17": "vertebrae_T10",
+    "18": "vertebrae_T11",
+    "19": "vertebrae_T12",
+    "20": "vertebrae_L1",
+    "21": "vertebrae_L2",
+    "22": "vertebrae_L3",
+    "23": "vertebrae_L4",
+    "24": "vertebrae_L5"
+   },
+   "num_classes": 24,
+   "weights_ids": {
+    "default": 803
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true
+   }
+  },
+  "vertebrae_pp_refined": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "vertebrae_C1",
+    "2": "vertebrae_C2",
+    "3": "vertebrae_C3",
+    "4": "vertebrae_C4",
+    "5": "vertebrae_C5",
+    "6": "vertebrae_C6",
+    "7": "vertebrae_C7",
+    "8": "vertebrae_T1",
+    "9": "vertebrae_T2",
+    "10": "vertebrae_T3",
+    "11": "vertebrae_T4",
+    "12": "vertebrae_T5",
+    "13": "vertebrae_T6",
+    "14": "vertebrae_T7",
+    "15": "vertebrae_T8",
+    "16": "vertebrae_T9",
+    "17": "vertebrae_T10",
+    "18": "vertebrae_T11",
+    "19": "vertebrae_T12",
+    "20": "vertebrae_L1",
+    "21": "vertebrae_L2",
+    "22": "vertebrae_L3",
+    "23": "vertebrae_L4",
+    "24": "vertebrae_L5"
+   },
+   "num_classes": 24,
+   "weights_ids": {
+    "default": 803
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true
+   }
+  },
+  "total_mr": {
+   "modality": "MR",
+   "license_required": false,
+   "classes": {
+    "1": "spleen",
+    "2": "kidney_right",
+    "3": "kidney_left",
+    "4": "gallbladder",
+    "5": "liver",
+    "6": "stomach",
+    "7": "pancreas",
+    "8": "adrenal_gland_right",
+    "9": "adrenal_gland_left",
+    "10": "lung_left",
+    "11": "lung_right",
+    "12": "esophagus",
+    "13": "small_bowel",
+    "14": "duodenum",
+    "15": "colon",
+    "16": "urinary_bladder",
+    "17": "prostate",
+    "18": "sacrum",
+    "19": "vertebrae",
+    "20": "intervertebral_discs",
+    "21": "spinal_cord",
+    "22": "heart",
+    "23": "aorta",
+    "24": "inferior_vena_cava",
+    "25": "portal_vein_and_splenic_vein",
+    "26": "iliac_artery_left",
+    "27": "iliac_artery_right",
+    "28": "iliac_vena_left",
+    "29": "iliac_vena_right",
+    "30": "humerus_left",
+    "31": "humerus_right",
+    "32": "scapula_left",
+    "33": "scapula_right",
+    "34": "clavicula_left",
+    "35": "clavicula_right",
+    "36": "femur_left",
+    "37": "femur_right",
+    "38": "hip_left",
+    "39": "hip_right",
+    "40": "gluteus_maximus_left",
+    "41": "gluteus_maximus_right",
+    "42": "gluteus_medius_left",
+    "43": "gluteus_medius_right",
+    "44": "gluteus_minimus_left",
+    "45": "gluteus_minimus_right",
+    "46": "autochthon_left",
+    "47": "autochthon_right",
+    "48": "iliopsoas_left",
+    "49": "iliopsoas_right",
+    "50": "brain"
+   },
+   "num_classes": 50,
+   "weights_ids": {
+    "fast": 852,
+    "fastest": 853,
+    "default": [
+     850,
+     851
+    ]
+   },
+   "config": {}
+  },
+  "tissue_types_mr": {
+   "modality": "MR",
+   "license_required": true,
+   "classes": {
+    "1": "subcutaneous_fat",
+    "2": "torso_fat",
+    "3": "skeletal_muscle"
+   },
+   "num_classes": 3,
+   "weights_ids": {
+    "default": 925
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "tissue_4_types": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "subcutaneous_fat",
+    "2": "torso_fat",
+    "3": "skeletal_muscle",
+    "4": "intermuscular_fat"
+   },
+   "num_classes": 4,
+   "weights_ids": {
+    "default": 485
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "face_mr": {
+   "modality": "MR",
+   "license_required": true,
+   "classes": {
+    "1": "face"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 856
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "head_glands_cavities": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "eye_left",
+    "2": "eye_right",
+    "3": "eye_lens_left",
+    "4": "eye_lens_right",
+    "5": "optic_nerve_left",
+    "6": "optic_nerve_right",
+    "7": "parotid_gland_left",
+    "8": "parotid_gland_right",
+    "9": "submandibular_gland_right",
+    "10": "submandibular_gland_left",
+    "11": "nasopharynx",
+    "12": "oropharynx",
+    "13": "hypopharynx",
+    "14": "nasal_cavity_right",
+    "15": "nasal_cavity_left",
+    "16": "auditory_canal_right",
+    "17": "auditory_canal_left",
+    "18": "soft_palate",
+    "19": "hard_palate"
+   },
+   "num_classes": 19,
+   "weights_ids": {
+    "default": 775
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1.0
+    ],
+    "crop": [
+     "skull"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true
+   }
+  },
+  "head_muscles": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "masseter_right",
+    "2": "masseter_left",
+    "3": "temporalis_right",
+    "4": "temporalis_left",
+    "5": "lateral_pterygoid_right",
+    "6": "lateral_pterygoid_left",
+    "7": "medial_pterygoid_right",
+    "8": "medial_pterygoid_left",
+    "9": "tongue",
+    "10": "digastric_right",
+    "11": "digastric_left"
+   },
+   "num_classes": 11,
+   "weights_ids": {
+    "default": 777
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1.0
+    ],
+    "crop": [
+     "skull"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true
+   }
+  },
+  "headneck_bones_vessels": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "larynx_air",
+    "2": "thyroid_cartilage",
+    "3": "hyoid",
+    "4": "cricoid_cartilage",
+    "5": "zygomatic_arch_right",
+    "6": "zygomatic_arch_left",
+    "7": "styloid_process_right",
+    "8": "styloid_process_left",
+    "9": "internal_carotid_artery_right",
+    "10": "internal_carotid_artery_left",
+    "11": "internal_jugular_vein_right",
+    "12": "internal_jugular_vein_left"
+   },
+   "num_classes": 12,
+   "weights_ids": {
+    "default": 776
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1.0
+    ],
+    "crop": [
+     "clavicula_left",
+     "clavicula_right",
+     "vertebrae_C1",
+     "vertebrae_C5",
+     "vertebrae_T1",
+     "vertebrae_T4"
+    ],
+    "crop_addon": [
+     40,
+     40,
+     40
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true
+   }
+  },
+  "headneck_muscles": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "sternocleidomastoid_right",
+    "2": "sternocleidomastoid_left",
+    "3": "superior_pharyngeal_constrictor",
+    "4": "middle_pharyngeal_constrictor",
+    "5": "inferior_pharyngeal_constrictor",
+    "6": "trapezius_right",
+    "7": "trapezius_left",
+    "8": "platysma_right",
+    "9": "platysma_left",
+    "10": "levator_scapulae_right",
+    "11": "levator_scapulae_left",
+    "12": "anterior_scalene_right",
+    "13": "anterior_scalene_left",
+    "14": "middle_scalene_right",
+    "15": "middle_scalene_left",
+    "16": "posterior_scalene_right",
+    "17": "posterior_scalene_left",
+    "18": "sterno_thyroid_right",
+    "19": "sterno_thyroid_left",
+    "20": "thyrohyoid_right",
+    "21": "thyrohyoid_left",
+    "22": "prevertebral_right",
+    "23": "prevertebral_left"
+   },
+   "num_classes": 23,
+   "weights_ids": {
+    "default": [
+     778,
+     779
+    ]
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1.0
+    ],
+    "crop": [
+     "clavicula_left",
+     "clavicula_right",
+     "vertebrae_C1",
+     "vertebrae_C5",
+     "vertebrae_T1",
+     "vertebrae_T4"
+    ],
+    "crop_addon": [
+     40,
+     40,
+     40
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true
+   }
+  },
+  "brain_structures": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "brainstem",
+    "2": "subarachnoid_space",
+    "3": "venous_sinuses",
+    "4": "septum_pellucidum",
+    "5": "cerebellum",
+    "6": "caudate_nucleus",
+    "7": "lentiform_nucleus",
+    "8": "insular_cortex",
+    "9": "internal_capsule",
+    "10": "ventricle",
+    "11": "central_sulcus",
+    "12": "frontal_lobe",
+    "13": "parietal_lobe",
+    "14": "occipital_lobe",
+    "15": "temporal_lobe",
+    "16": "thalamus"
+   },
+   "num_classes": 16,
+   "weights_ids": {
+    "default": 409
+   },
+   "config": {
+    "resample": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "crop": [
+     "brain"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "liver_vessels": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "liver_vessels",
+    "2": "liver_tumor"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 8
+   },
+   "config": {
+    "crop": [
+     "liver"
+    ],
+    "crop_addon": [
+     20,
+     20,
+     20
+    ],
+    "disallow_fast": true
+   }
+  },
+  "liver_lesions": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "liver_lesions"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 591
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1.0
+    ],
+    "crop": [
+     "liver"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true
+   }
+  },
+  "liver_lesions_mr": {
+   "modality": "MR",
+   "license_required": false,
+   "classes": {
+    "1": "liver_lesions"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 589
+   },
+   "config": {
+    "resample": [
+     0.8603515625,
+     0.857421875,
+     1.0
+    ],
+    "crop": [
+     "liver"
+    ],
+    "disallow_fast": true
+   }
+  },
+  "oculomotor_muscles": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "skull",
+    "2": "eyeball_right",
+    "3": "lateral_rectus_muscle_right",
+    "4": "superior_oblique_muscle_right",
+    "5": "levator_palpebrae_superioris_right",
+    "6": "superior_rectus_muscle_right",
+    "7": "medial_rectus_muscle_left",
+    "8": "inferior_oblique_muscle_right",
+    "9": "inferior_rectus_muscle_right",
+    "10": "optic_nerve_left",
+    "11": "eyeball_left",
+    "12": "lateral_rectus_muscle_left",
+    "13": "superior_oblique_muscle_left",
+    "14": "levator_palpebrae_superioris_left",
+    "15": "superior_rectus_muscle_left",
+    "16": "medial_rectus_muscle_right",
+    "17": "inferior_oblique_muscle_left",
+    "18": "inferior_rectus_muscle_left",
+    "19": "optic_nerve_right"
+   },
+   "num_classes": 19,
+   "weights_ids": {
+    "default": 351
+   },
+   "config": {
+    "resample": [
+     0.47251562774181366,
+     0.47251562774181366,
+     0.8500002026557922
+    ],
+    "crop": [
+     "skull"
+    ],
+    "crop_addon": [
+     20,
+     20,
+     20
+    ],
+    "disallow_fast": true
+   }
+  },
+  "thigh_shoulder_muscles": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "quadriceps_femoris_left",
+    "2": "quadriceps_femoris_right",
+    "3": "thigh_medial_compartment_left",
+    "4": "thigh_medial_compartment_right",
+    "5": "thigh_posterior_compartment_left",
+    "6": "thigh_posterior_compartment_right",
+    "7": "sartorius_left",
+    "8": "sartorius_right",
+    "9": "deltoid",
+    "10": "supraspinatus",
+    "11": "infraspinatus",
+    "12": "subscapularis",
+    "13": "coracobrachial",
+    "14": "trapezius",
+    "15": "pectoralis_minor",
+    "16": "serratus_anterior",
+    "17": "teres_major",
+    "18": "triceps_brachii"
+   },
+   "num_classes": 18,
+   "weights_ids": {
+    "default": 857
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "thigh_shoulder_muscles_mr": {
+   "modality": "MR",
+   "license_required": true,
+   "classes": {
+    "1": "quadriceps_femoris_left",
+    "2": "quadriceps_femoris_right",
+    "3": "thigh_medial_compartment_left",
+    "4": "thigh_medial_compartment_right",
+    "5": "thigh_posterior_compartment_left",
+    "6": "thigh_posterior_compartment_right",
+    "7": "sartorius_left",
+    "8": "sartorius_right",
+    "9": "deltoid",
+    "10": "supraspinatus",
+    "11": "infraspinatus",
+    "12": "subscapularis",
+    "13": "coracobrachial",
+    "14": "trapezius",
+    "15": "pectoralis_minor",
+    "16": "serratus_anterior",
+    "17": "teres_major",
+    "18": "triceps_brachii"
+   },
+   "num_classes": 18,
+   "weights_ids": {
+    "default": 857
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "lung_nodules": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "lung",
+    "2": "lung_nodules"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 913
+   },
+   "config": {
+    "resample": [
+     1.5,
+     1.5,
+     1.5
+    ],
+    "crop": [
+     "lung_upper_lobe_left",
+     "lung_lower_lobe_left",
+     "lung_upper_lobe_right",
+     "lung_middle_lobe_right",
+     "lung_lower_lobe_right"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "disallow_fast": true
+   }
+  },
+  "kidney_cysts": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "kidney_cyst_left",
+    "2": "kidney_cyst_right"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 789
+   },
+   "config": {
+    "resample": [
+     1.5,
+     1.5,
+     1.5
+    ],
+    "crop": [
+     "kidney_left",
+     "kidney_right",
+     "liver",
+     "spleen",
+     "colon"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "disallow_fast": true
+   }
+  },
+  "breasts": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "breast"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 527
+   },
+   "config": {
+    "resample": [
+     1.5,
+     1.5,
+     1.5
+    ],
+    "disallow_fast": true
+   }
+  },
+  "ventricle_parts": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "ventricle_frontal_horn_left",
+    "2": "ventricle_occipital_horn_left",
+    "3": "ventricle_body_left",
+    "4": "ventricle_temporal_horn_left",
+    "5": "ventricle_trigone_left",
+    "6": "ventricle_frontal_horn_right",
+    "7": "ventricle_occipital_horn_right",
+    "8": "ventricle_body_right",
+    "9": "ventricle_temporal_horn_right",
+    "10": "ventricle_trigone_right",
+    "11": "third_ventricle",
+    "12": "fourth_ventricle"
+   },
+   "num_classes": 12,
+   "weights_ids": {
+    "default": 552
+   },
+   "config": {
+    "resample": [
+     0.4384765625,
+     0.4345703125,
+     1.0
+    ],
+    "crop": [
+     "brain"
+    ],
+    "crop_addon": [
+     0,
+     0,
+     0
+    ],
+    "disallow_fast": true
+   }
+  },
+  "aortic_sinuses": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "left_ventricular_outflow_tract",
+    "2": "right_coronary_cusp",
+    "3": "left_coronary_cusp",
+    "4": "non_coronary_cusp"
+   },
+   "num_classes": 4,
+   "weights_ids": {
+    "default": 920
+   },
+   "config": {
+    "resample": [
+     0.7,
+     0.7,
+     0.7
+    ],
+    "crop": [
+     "heart"
+    ],
+    "crop_addon": [
+     0,
+     0,
+     0
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "liver_segments": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "liver_segment_1",
+    "2": "liver_segment_2",
+    "3": "liver_segment_3",
+    "4": "liver_segment_4",
+    "5": "liver_segment_5",
+    "6": "liver_segment_6",
+    "7": "liver_segment_7",
+    "8": "liver_segment_8"
+   },
+   "num_classes": 8,
+   "weights_ids": {
+    "default": 570
+   },
+   "config": {
+    "resample": [
+     0.8046879768371582,
+     0.8046879768371582,
+     1.5
+    ],
+    "crop": [
+     "liver"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "disallow_fast": true
+   }
+  },
+  "liver_segments_mr": {
+   "modality": "MR",
+   "license_required": false,
+   "classes": {
+    "1": "liver_segment_1",
+    "2": "liver_segment_2",
+    "3": "liver_segment_3",
+    "4": "liver_segment_4",
+    "5": "liver_segment_5",
+    "6": "liver_segment_6",
+    "7": "liver_segment_7",
+    "8": "liver_segment_8"
+   },
+   "num_classes": 8,
+   "weights_ids": {
+    "default": 576
+   },
+   "config": {
+    "resample": [
+     1.1250001788139343,
+     1.1875,
+     3.0
+    ],
+    "crop": [
+     "liver"
+    ],
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "disallow_fast": true
+   }
+  },
+  "total_highres_test": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "spleen",
+    "2": "kidney_right",
+    "3": "kidney_left",
+    "4": "gallbladder",
+    "5": "liver",
+    "6": "stomach",
+    "7": "pancreas",
+    "8": "adrenal_gland_right",
+    "9": "adrenal_gland_left",
+    "10": "lung_upper_lobe_left",
+    "11": "lung_lower_lobe_left",
+    "12": "lung_upper_lobe_right",
+    "13": "lung_middle_lobe_right",
+    "14": "lung_lower_lobe_right",
+    "15": "esophagus",
+    "16": "trachea",
+    "17": "thyroid_gland",
+    "18": "small_bowel",
+    "19": "duodenum",
+    "20": "colon",
+    "21": "urinary_bladder",
+    "22": "prostate",
+    "23": "kidney_cyst_left",
+    "24": "kidney_cyst_right"
+   },
+   "num_classes": 24,
+   "weights_ids": {
+    "default": 957
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1.0
+    ],
+    "model": "3d_fullres_high"
+   }
+  },
+  "craniofacial_structures": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "mandible",
+    "2": "teeth_lower",
+    "3": "skull",
+    "4": "head",
+    "5": "sinus_maxillary",
+    "6": "sinus_frontal",
+    "7": "teeth_upper"
+   },
+   "num_classes": 7,
+   "weights_ids": {
+    "default": 115
+   },
+   "config": {
+    "resample": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "crop": [
+     "skull"
+    ],
+    "crop_addon": [
+     20,
+     20,
+     20
+    ],
+    "disallow_fast": true
+   }
+  },
+  "abdominal_muscles": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "pectoralis_major_right",
+    "2": "pectoralis_major_left",
+    "3": "rectus_abdominis_right",
+    "4": "rectus_abdominis_left",
+    "5": "serratus_anterior_right",
+    "6": "serratus_anterior_left",
+    "7": "latissimus_dorsi_right",
+    "8": "latissimus_dorsi_left",
+    "9": "trapezius_right",
+    "10": "trapezius_left",
+    "11": "external_oblique_right",
+    "12": "external_oblique_left",
+    "13": "internal_oblique_right",
+    "14": "internal_oblique_left",
+    "15": "erector_spinae_right",
+    "16": "erector_spinae_left",
+    "17": "transversospinalis_right",
+    "18": "transversospinalis_left",
+    "19": "psoas_major_right",
+    "20": "psoas_major_left",
+    "21": "quadratus_lumborum_right",
+    "22": "quadratus_lumborum_left"
+   },
+   "num_classes": 22,
+   "weights_ids": {
+    "default": 952
+   },
+   "config": {
+    "resample": [
+     0.75,
+     0.75,
+     1
+    ],
+    "crop": [
+     "body_trunc"
+    ],
+    "crop_addon": [
+     5,
+     5,
+     5
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true
+   }
+  },
+  "teeth": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "lower_jawbone",
+    "2": "upper_jawbone",
+    "3": "left_inferior_alveolar_canal",
+    "4": "right_inferior_alveolar_canal",
+    "5": "left_maxillary_sinus",
+    "6": "right_maxillary_sinus",
+    "7": "pharynx",
+    "8": "bridge",
+    "9": "crown",
+    "10": "implant",
+    "11": "upper_right_central_incisor_fdi11",
+    "12": "upper_right_lateral_incisor_fdi12",
+    "13": "upper_right_canine_fdi13",
+    "14": "upper_right_first_premolar_fdi14",
+    "15": "upper_right_second_premolar_fdi15",
+    "16": "upper_right_first_molar_fdi16",
+    "17": "upper_right_second_molar_fdi17",
+    "18": "upper_right_third_molar_fdi18",
+    "19": "upper_left_central_incisor_fdi21",
+    "20": "upper_left_lateral_incisor_fdi22",
+    "21": "upper_left_canine_fdi23",
+    "22": "upper_left_first_premolar_fdi24",
+    "23": "upper_left_second_premolar_fdi25",
+    "24": "upper_left_first_molar_fdi26",
+    "25": "upper_left_second_molar_fdi27",
+    "26": "upper_left_third_molar_fdi28",
+    "27": "lower_left_central_incisor_fdi31",
+    "28": "lower_left_lateral_incisor_fdi32",
+    "29": "lower_left_canine_fdi33",
+    "30": "lower_left_first_premolar_fdi34",
+    "31": "lower_left_second_premolar_fdi35",
+    "32": "lower_left_first_molar_fdi36",
+    "33": "lower_left_second_molar_fdi37",
+    "34": "lower_left_third_molar_fdi38",
+    "35": "lower_right_central_incisor_fdi41",
+    "36": "lower_right_lateral_incisor_fdi42",
+    "37": "lower_right_canine_fdi43",
+    "38": "lower_right_first_premolar_fdi44",
+    "39": "lower_right_second_premolar_fdi45",
+    "40": "lower_right_first_molar_fdi46",
+    "41": "lower_right_second_molar_fdi47",
+    "42": "lower_right_third_molar_fdi48",
+    "43": "left_mandibular_incisive_canal_fdi103",
+    "44": "right_mandibular_incisive_canal_fdi104",
+    "45": "lingual_canal",
+    "46": "upper_right_central_incisor_pulp_fdi111",
+    "47": "upper_right_lateral_incisor_pulp_fdi112",
+    "48": "upper_right_canine_pulp_fdi113",
+    "49": "upper_right_first_premolar_pulp_fdi114",
+    "50": "upper_right_second_premolar_pulp_fdi115",
+    "51": "upper_right_first_molar_pulp_fdi116",
+    "52": "upper_right_second_molar_pulp_fdi117",
+    "53": "upper_right_third_molar_pulp_fdi118",
+    "54": "upper_left_central_incisor_pulp_fdi121",
+    "55": "upper_left_lateral_incisor_pulp_fdi122",
+    "56": "upper_left_canine_pulp_fdi123",
+    "57": "upper_left_first_premolar_pulp_fdi124",
+    "58": "upper_left_second_premolar_pulp_fdi125",
+    "59": "upper_left_first_molar_pulp_fdi126",
+    "60": "upper_left_second_molar_pulp_fdi127",
+    "61": "upper_left_third_molar_pulp_fdi128",
+    "62": "lower_left_central_incisor_pulp_fdi131",
+    "63": "lower_left_lateral_incisor_pulp_fdi132",
+    "64": "lower_left_canine_pulp_fdi133",
+    "65": "lower_left_first_premolar_pulp_fdi134",
+    "66": "lower_left_second_premolar_pulp_fdi135",
+    "67": "lower_left_first_molar_pulp_fdi136",
+    "68": "lower_left_second_molar_pulp_fdi137",
+    "69": "lower_left_third_molar_pulp_fdi138",
+    "70": "lower_right_central_incisor_pulp_fdi141",
+    "71": "lower_right_lateral_incisor_pulp_fdi142",
+    "72": "lower_right_canine_pulp_fdi143",
+    "73": "lower_right_first_premolar_pulp_fdi144",
+    "74": "lower_right_second_premolar_pulp_fdi145",
+    "75": "lower_right_first_molar_pulp_fdi146",
+    "76": "lower_right_second_molar_pulp_fdi147",
+    "77": "lower_right_third_molar_pulp_fdi148"
+   },
+   "num_classes": 77,
+   "weights_ids": {
+    "default": 113
+   },
+   "config": {
+    "resample": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "crop": [
+     "teeth_lower",
+     "teeth_upper"
+    ],
+    "crop_model": "craniofacial_structures",
+    "crop_addon": [
+     10,
+     10,
+     10
+    ],
+    "model": "3d_lowres_high",
+    "disallow_fast": true
+   }
+  },
+  "trunk_cavities": {
+   "modality": "CT",
+   "license_required": false,
+   "classes": {
+    "1": "abdominal_cavity",
+    "2": "thoracic_cavity",
+    "3": "pericardium",
+    "4": "mediastinum"
+   },
+   "num_classes": 4,
+   "weights_ids": {
+    "default": 343
+   },
+   "config": {
+    "resample": [
+     1.5,
+     1.5,
+     1.5
+    ],
+    "disallow_fast": true
+   }
+  },
+  "brain_aneurysm": {
+   "modality": "MR",
+   "license_required": false,
+   "classes": {
+    "1": "brain_aneurysm"
+   },
+   "num_classes": 1,
+   "weights_ids": {
+    "default": 615
+   },
+   "config": {
+    "resample": [
+     0.390625,
+     0.390625,
+     0.5000016391277313
+    ],
+    "disallow_fast": true
+   }
+  },
+  "renal_arteries": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "celiac_trunk",
+    "2": "superior_mesenteric_artery",
+    "3": "renal_arteries"
+   },
+   "num_classes": 3,
+   "weights_ids": {
+    "default": 710
+   },
+   "config": {
+    "resample": 1.5,
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "aorta_annulus": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "annulus_proper",
+    "2": "sinotubular_junction"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 713
+   },
+   "config": {
+    "resample": [
+     0.8,
+     0.8,
+     0.8
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "aortic_dissection": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "aorta_true_lumen",
+    "2": "aorta_false_lumen"
+   },
+   "num_classes": 2,
+   "weights_ids": {
+    "default": 716
+   },
+   "config": {
+    "resample": [
+     0.8,
+     0.8,
+     0.8
+    ],
+    "model": "3d_fullres_high",
+    "disallow_fast": true,
+    "commercial": true
+   }
+  },
+  "pulmonary_artery_landmarks": {
+   "modality": "CT",
+   "license_required": true,
+   "classes": {
+    "1": "annulus",
+    "2": "sinotubular_junction",
+    "3": "pul_annulus",
+    "4": "pul_sinotubular_junction",
+    "5": "pul_bifurcation",
+    "6": "pul_left_start",
+    "7": "pul_right_start"
+   },
+   "num_classes": 7,
+   "weights_ids": {
+    "default": 514
+   },
+   "config": {
+    "resample": [
+     0.7802734375,
+     0.7802734375,
+     1.0
+    ],
+    "disallow_fast": true,
+    "commercial": true
+   }
+  }
+ }
+}
