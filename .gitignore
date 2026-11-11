@@ -9,6 +9,7 @@
 node_modules/
 assets/level/_tex/
 assets/level/institute-props.glb
-assets/level/institute.glb
-assets/level/lightmap.jpg
-assets/level/level.json
+assets/level/lightmap.npy
+# licensed or unverified local-only assets (never commit): the Asset Store OR pack, the Mirror experiment
+assets/local/
+world/local/
