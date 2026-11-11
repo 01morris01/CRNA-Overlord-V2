@@ -1,0 +1,277 @@
+{
+ "model": "plexus_right_source_raw.glb",
+ "passed": 19,
+ "total": 30,
+ "results": [
+  {
+   "group": "roots",
+   "check": "roots C5 to T1 are present",
+   "pass": false,
+   "measured": "not in this model",
+   "claim": "The plexus begins as five roots",
+   "source": "N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "superior trunk forms between the scalenes at their lateral border",
+   "pass": false,
+   "measured": "trunk begins 19.3 mm from the anterior scalene and 8.4 mm from the middle scalene; lying between them: no",
+   "claim": "The rami join to form trunks between the scalenes, as they pass the lateral border of the muscles",
+   "source": "H p.44; N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "middle trunk forms between the scalenes at their lateral border",
+   "pass": false,
+   "measured": "trunk begins 30.1 mm from the anterior scalene and 15.6 mm from the middle scalene; lying between them: no",
+   "claim": "The rami join to form trunks between the scalenes, as they pass the lateral border of the muscles",
+   "source": "H p.44; N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "inferior trunk forms between the scalenes at their lateral border",
+   "pass": false,
+   "measured": "trunk begins 19.4 mm from the anterior scalene and 5.8 mm from the middle scalene; lying between them: no",
+   "claim": "The rami join to form trunks between the scalenes, as they pass the lateral border of the muscles",
+   "source": "H p.44; N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "trunks lie superior, middle, inferior in that order",
+   "pass": true,
+   "measured": "heights where they form: 1452.8, 1443.0, 1436.2",
+   "claim": "Superior, middle and inferior trunks",
+   "source": "H p.44",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "superior trunk divides behind the clavicle at the lateral border of the first rib",
+   "pass": true,
+   "measured": "division point is 2.8 mm behind the nearest point of the clavicle and 16.6 mm from the lateral border of the first rib",
+   "claim": "At the lateral border of the first rib and posterior to the clavicle the trunks divide",
+   "source": "N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "middle trunk divides behind the clavicle at the lateral border of the first rib",
+   "pass": true,
+   "measured": "division point is 4.2 mm behind the nearest point of the clavicle and 13.0 mm from the lateral border of the first rib",
+   "claim": "At the lateral border of the first rib and posterior to the clavicle the trunks divide",
+   "source": "N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "inferior trunk divides behind the clavicle at the lateral border of the first rib",
+   "pass": true,
+   "measured": "division point is 4.8 mm behind the nearest point of the clavicle and 12.0 mm from the lateral border of the first rib",
+   "claim": "At the lateral border of the first rib and posterior to the clavicle the trunks divide",
+   "source": "N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "trunks lie above the clavicle and the cords below it",
+   "pass": true,
+   "measured": "trunks 13.3 mm above, posterior cord 21.0 mm below",
+   "claim": "Roots, trunks and divisions are supraclavicular; cords and terminal branches are infraclavicular",
+   "source": "N p.1149",
+   "involves": []
+  },
+  {
+   "group": "trunks",
+   "check": "at the first rib the trunks and divisions lie lateral to the subclavian artery and above the rib",
+   "pass": true,
+   "measured": "of the plexus within 25 mm of the artery, 100% is lateral to it; of the 314 points that are over the rib in plan view, 100% are above it",
+   "claim": "The trunks and divisions lie lateral to the subclavian artery and superior to the first rib",
+   "source": "N p.1153",
+   "involves": []
+  },
+  {
+   "group": "cords",
+   "check": "superior trunk splits into an anterior and a posterior division",
+   "pass": true,
+   "measured": "anterior division 0.2 mm, posterior division 0.5 mm from the trunk",
+   "claim": "All trunks branch into anterior and posterior divisions",
+   "source": "H p.44",
+   "involves": []
+  },
+  {
+   "group": "cords",
+   "check": "middle trunk splits into an anterior and a posterior division",
+   "pass": true,
+   "measured": "anterior division 0.0 mm, posterior division 0.2 mm from the trunk",
+   "claim": "All trunks branch into anterior and posterior divisions",
+   "source": "H p.44",
+   "involves": []
+  },
+  {
+   "group": "cords",
+   "check": "inferior trunk splits into an anterior and a posterior division",
+   "pass": true,
+   "measured": "anterior division 0.3 mm, posterior division 0.1 mm from the trunk",
+   "claim": "All trunks branch into anterior and posterior divisions",
+   "source": "H p.44",
+   "involves": []
+  },
+  {
+   "group": "cords",
+   "check": "all three posterior divisions join the posterior cord",
+   "pass": false,
+   "measured": "superior 0.0 mm, middle 0.2 mm, inferior 11.0 mm",
+   "claim": "All the posterior divisions join to form the posterior cord",
+   "source": "H p.44",
+   "involves": []
+  },
+  {
+   "group": "cords",
+   "check": "lateral and medial cords are present",
+   "pass": false,
+   "measured": "not in this model",
+   "claim": "Three cords: lateral, posterior and medial",
+   "source": "H p.44; N p.1149",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "axillary and radial nerves arise from the posterior cord",
+   "pass": false,
+   "measured": "axillary 7.3 mm, radial 0.0 mm",
+   "claim": "The axillary and radial nerves both arise from the posterior cord",
+   "source": "N p.1149; H p.48",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "posterior cord gives the thoracodorsal and both subscapular nerves",
+   "pass": true,
+   "measured": "thoracodorsal 0.1 mm; superior subscapular 0.2 mm; inferior subscapular 0.3 mm",
+   "claim": "The posterior cord forms the upper and lower subscapular nerves and the thoracodorsal nerve",
+   "source": "H p.48",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "musculocutaneous, ulnar and median nerves arise from the lateral and medial cords",
+   "pass": false,
+   "measured": "the model has no lateral or medial cord",
+   "claim": "Musculocutaneous from lateral, ulnar from medial, median from both",
+   "source": "N p.1149",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "suprascapular nerve arises from the superior trunk and reaches the scapula",
+   "pass": true,
+   "measured": "0.1 mm from the superior trunk, 0.1 mm from the scapula",
+   "claim": "The suprascapular nerve arises from the superior trunk",
+   "source": "H p.48",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "musculocutaneous nerve pierces coracobrachialis",
+   "pass": false,
+   "measured": "0 of 1243 points of the nerve are inside the muscle (muscle mesh closed: yes); closest approach 8.5 mm",
+   "claim": "It pierces the coracobrachialis muscle",
+   "source": "H p.50",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "musculocutaneous nerve descends between brachialis and biceps",
+   "pass": true,
+   "measured": "100% of the nerve below coracobrachialis lies within 12 mm of both muscles",
+   "claim": "It descends between the brachialis and biceps brachii muscles",
+   "source": "H p.50",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "musculocutaneous nerve continues as the lateral antebrachial cutaneous nerve",
+   "pass": true,
+   "measured": "0.1 mm",
+   "claim": "It supplies the lateral forearm as the lateral antebrachial cutaneous nerve",
+   "source": "N p.1150",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "axillary nerve passes posterior to the surgical neck of the humerus",
+   "pass": false,
+   "measured": "689 points of the nerve within 20 mm of the surgical neck; 59% lie behind the bone's axis at that height",
+   "claim": "The nerve continues posterior to the surgical neck of the humerus to the deltoid",
+   "source": "H p.49",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "radial nerve descends along the back of the humeral shaft",
+   "pass": true,
+   "measured": "683 points within 12 mm of the mid-shaft; 81% posterior to the bone",
+   "claim": "It descends along the shaft of the humerus in the spiral groove",
+   "source": "H p.49",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "ulnar nerve crosses the elbow posterior to the medial epicondyle",
+   "pass": true,
+   "measured": "184 points at the distal humerus; 100% medial, 100% posterior",
+   "claim": "It crosses the elbow posterior to the medial epicondyle",
+   "source": "H p.52",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "median nerve descends the arm with the brachial artery",
+   "pass": true,
+   "measured": "median separation 8.5 mm (largest 17.0 mm)",
+   "claim": "It descends the arm in association with the brachial artery",
+   "source": "H p.50",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "long thoracic nerve descends on the middle scalene, then on serratus anterior",
+   "pass": true,
+   "measured": "above the first rib 99% lies within 8 mm of the middle scalene; below it 92% lies within 12 mm of serratus anterior",
+   "claim": "It descends along the anterior surface of the middle scalene to the first rib and then onto serratus anterior",
+   "source": "H pp.46-48",
+   "involves": []
+  },
+  {
+   "group": "branches",
+   "check": "dorsal scapular nerve follows levator scapulae",
+   "pass": true,
+   "measured": "65% of the nerve lies within 12 mm of levator scapulae (closest 0.4 mm)",
+   "claim": "It follows the levator scapulae muscle to the scapula",
+   "source": "H p.46",
+   "involves": []
+  },
+  {
+   "group": "landmarks",
+   "check": "cricoid cartilage is level with C6",
+   "pass": true,
+   "measured": "cricoid centre 1464.0; C6 spans 1453.7 to 1478.3",
+   "claim": "The C6 level is found by a line drawn laterally from the cricoid cartilage",
+   "source": "N p.1152",
+   "involves": []
+  },
+  {
+   "group": "landmarks",
+   "check": "phrenic nerve is present",
+   "pass": false,
+   "measured": "not in this model",
+   "claim": "The phrenic nerve descends on the anterior scalene",
+   "source": "H p.43",
+   "involves": []
+  }
+ ]
+}

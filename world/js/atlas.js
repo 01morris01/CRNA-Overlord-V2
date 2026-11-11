@@ -14,7 +14,7 @@ const LOOK = {   // conventional atlas colours: this is the realistic direction,
 };
 const WARM = new THREE.Color(0xff5a3c), PICK = new THREE.Color(0xffffff);
 
-export async function createAtlas(host, { url = '../assets/models/plexus/plexus-right-zanatomy.glb', touch = false } = {}) {
+export async function createAtlas(host, { url = '../assets/models/plexus/plexus-right-overlord-v2.glb', touch = false } = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, touch ? 1.5 : 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;

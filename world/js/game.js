@@ -111,7 +111,7 @@ export async function createWorld({ host, state, touch, els, onEnterHall, onLink
 
   // the plexus model on its plinth: the real nerves from the atlas, three times life size, on your plot
   let plexusProto = null; const plinths = new Map();
-  async function loadPlexus() { if (plexusProto) return plexusProto; const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/'); const g = await new GLTFLoader().setDRACOLoader(draco).loadAsync('../assets/models/plexus/plexus-right-zanatomy.glb'), grp = new THREE.Group();
+  async function loadPlexus() { if (plexusProto) return plexusProto; const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/'); const g = await new GLTFLoader().setDRACOLoader(draco).loadAsync('../assets/models/plexus/plexus-right-overlord-v2.glb'), grp = new THREE.Group();
     const keep = /trunk_of|division|cord_of|suprascapular_nerve|clavicle_r/; /* the supraclavicular plexus, about ten times life size */ const mn = new THREE.MeshStandardMaterial({ color: '#f5d255', roughness: 0.35, emissive: '#8a6a12' }), mb = new THREE.MeshStandardMaterial({ color: '#efe8d8', roughness: 0.7 });
     g.scene.traverse((o) => { if (o.isMesh && keep.test(o.name)) { const c = new THREE.Mesh(o.geometry, o.userData.layer === 'nerve' ? mn : mb); c.castShadow = true; grp.add(c); } });
     const bb = new THREE.Box3().setFromObject(grp), ctr = bb.getCenter(new THREE.Vector3()); for (const c of grp.children) c.position.set(-ctr.x, -bb.min.y, -ctr.z); const sz = bb.getSize(new THREE.Vector3()), k = 2.0 / Math.max(sz.x, sz.y, sz.z); grp.scale.setScalar(k); plexusProto = grp; return grp; }

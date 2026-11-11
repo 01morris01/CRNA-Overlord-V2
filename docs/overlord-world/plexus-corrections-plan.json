@@ -1,0 +1,740 @@
+{
+ "modify": [
+  {
+   "name": "Superior trunk of brachial plexus.r",
+   "spline": 0,
+   "points": [
+    [
+     -43.0,
+     0.59,
+     1453.3
+    ],
+    [
+     -87.6,
+     27.4,
+     1418.4
+    ]
+   ],
+   "origin": "corrected",
+   "what": "medial end moved 16.7 mm into the interscalene interval (gap 5.1 mm wide here)"
+  },
+  {
+   "name": "Middle trunk of brachial plexus.r",
+   "spline": 0,
+   "points": [
+    [
+     -47.0,
+     -1.25,
+     1441.8
+    ],
+    [
+     -84.1,
+     23.3,
+     1419.3
+    ]
+   ],
+   "origin": "corrected",
+   "what": "medial end moved 27.5 mm into the interscalene interval (gap 6.2 mm wide here)"
+  },
+  {
+   "name": "Inferior trunk of brachial plexus.r",
+   "spline": 0,
+   "points": [
+    [
+     -48.0,
+     -1.04,
+     1435.8
+    ],
+    [
+     -64.1,
+     6.37,
+     1428.23
+    ],
+    [
+     -83.4,
+     16.3,
+     1416.7
+    ]
+   ],
+   "origin": "corrected",
+   "what": "medial end moved 16.0 mm into the interscalene interval (gap 5.7 mm wide here)"
+  },
+  {
+   "name": "Suprascapular nerve.r",
+   "spline": 0,
+   "points": [
+    [
+     -43.0,
+     0.59,
+     1453.3
+    ],
+    [
+     -63.3,
+     18.0,
+     1440.2
+    ],
+    [
+     -81.9,
+     33.7,
+     1420.3
+    ],
+    [
+     -112.3,
+     47.3,
+     1390.0
+    ],
+    [
+     -130.5,
+     51.7,
+     1387.4
+    ],
+    [
+     -142.8,
+     58.3,
+     1382.1
+    ],
+    [
+     -129.4,
+     65.3,
+     1370.7
+    ],
+    [
+     -114.0,
+     77.5,
+     1356.9
+    ]
+   ],
+   "origin": "corrected",
+   "what": "origin follows the re-seated superior trunk"
+  },
+  {
+   "name": "Posterior division of inferior trunk of brachial plexus.r",
+   "spline": 0,
+   "points": [
+    [
+     -83.4,
+     16.3,
+     1416.7
+    ],
+    [
+     -100.7,
+     26.3,
+     1399.5
+    ]
+   ],
+   "origin": "corrected",
+   "what": "end moved 15.7 mm from the lateral cord junction to the posterior cord junction"
+  },
+  {
+   "name": "Axillary nerve.r",
+   "spline": 0,
+   "points": [
+    [
+     -121.6,
+     25.7,
+     1379.1
+    ],
+    [
+     -132.65,
+     26.8,
+     1370.5
+    ],
+    [
+     -143.7,
+     23.9,
+     1361.9
+    ],
+    [
+     -151.0,
+     29.6,
+     1355.5
+    ],
+    [
+     -163.3,
+     37.2,
+     1350.7
+    ]
+   ],
+   "origin": "corrected",
+   "what": "origin moved 25.7 mm from the lateral cord junction to the end of the posterior cord"
+  },
+  {
+   "name": "Ulnar nerve.r",
+   "spline": 1,
+   "points": [
+    [
+     -123.52,
+     14.6,
+     1372.26
+    ],
+    [
+     -171.8,
+     15.1,
+     1307.9
+    ],
+    [
+     -180.9,
+     24.3,
+     1256.4
+    ],
+    [
+     -178.6,
+     36.8,
+     1182.8
+    ],
+    [
+     -184.5,
+     43.6,
+     1101.4
+    ],
+    [
+     -189.5,
+     35.0,
+     1048.0
+    ],
+    [
+     -197.9,
+     20.6,
+     996.1
+    ],
+    [
+     -214.6,
+     4.3,
+     944.4
+    ],
+    [
+     -223.5,
+     -8.5,
+     924.3
+    ],
+    [
+     -232.8,
+     -14.1,
+     900.0
+    ],
+    [
+     -236.9,
+     -18.9,
+     883.1
+    ]
+   ],
+   "origin": "corrected",
+   "what": "now begins at the end of the medial cord; its first 40 mm is the medial cord"
+  },
+  {
+   "name": "Median nerve.r",
+   "spline": 1,
+   "points": [
+    [
+     -159.88,
+     8.95,
+     1345.18
+    ],
+    [
+     -173.9,
+     12.6,
+     1308.8
+    ],
+    [
+     -182.9,
+     21.9,
+     1257.3
+    ],
+    [
+     -183.7,
+     24.8,
+     1241.2
+    ],
+    [
+     -183.7,
+     24.5,
+     1216.6
+    ],
+    [
+     -181.7,
+     20.4,
+     1176.3
+    ],
+    [
+     -192.5,
+     14.0,
+     1138.2
+    ],
+    [
+     -201.6,
+     13.7,
+     1118.9
+    ],
+    [
+     -214.7,
+     12.9,
+     1093.5
+    ],
+    [
+     -225.1,
+     13.2,
+     1065.7
+    ],
+    [
+     -224.2,
+     14.5,
+     1048.6
+    ],
+    [
+     -221.9,
+     12.3,
+     1033.9
+    ],
+    [
+     -220.5,
+     8.1,
+     1019.5
+    ],
+    [
+     -223.1,
+     1.5,
+     1002.4
+    ],
+    [
+     -226.6,
+     -4.5,
+     980.3
+    ],
+    [
+     -240.6,
+     -12.0,
+     938.5
+    ],
+    [
+     -256.7,
+     -27.7,
+     867.4
+    ],
+    [
+     -263.5,
+     -34.3,
+     836.0
+    ]
+   ],
+   "origin": "corrected",
+   "what": "no longer attached to the posterior cord; begins where its two roots meet"
+  },
+  {
+   "name": "Musculocutaneous nerve.r",
+   "spline": 0,
+   "points": [
+    [
+     -140.96,
+     11.03,
+     1370.91
+    ],
+    [
+     -150.53,
+     12.03,
+     1357.52
+    ],
+    [
+     -156.64,
+     15.78,
+     1339.12
+    ],
+    [
+     -163.71,
+     17.32,
+     1322.02
+    ],
+    [
+     -175.4,
+     8.5,
+     1310.4
+    ],
+    [
+     -198.3,
+     15.6,
+     1266.9
+    ],
+    [
+     -207.2,
+     21.7,
+     1233.8
+    ],
+    [
+     -213.5,
+     27.3,
+     1174.3
+    ],
+    [
+     -219.1,
+     18.8,
+     1124.1
+    ],
+    [
+     -223.2,
+     16.9,
+     1091.8
+    ]
+   ],
+   "origin": "corrected",
+   "what": "proximal 70 mm added: from the end of the lateral cord through the belly of coracobrachialis to where the source nerve begins"
+  }
+ ],
+ "create": [
+  {
+   "name": "C5 root of brachial plexus.r",
+   "points": [
+    [
+     -17.63,
+     18.92,
+     1487.02
+    ],
+    [
+     -25.24,
+     8.7,
+     1476.9
+    ],
+    [
+     -31.58,
+     5.32,
+     1468.47
+    ],
+    [
+     -37.93,
+     2.51,
+     1460.04
+    ],
+    [
+     -43.0,
+     0.59,
+     1453.3
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "anterior ramus of C5 from the C4-C5 foramen through the interscalene interval to the superior trunk"
+  },
+  {
+   "name": "C6 root of brachial plexus.r",
+   "points": [
+    [
+     -17.63,
+     20.35,
+     1468.97
+    ],
+    [
+     -25.24,
+     12.99,
+     1464.27
+    ],
+    [
+     -31.58,
+     6.37,
+     1460.35
+    ],
+    [
+     -37.93,
+     2.19,
+     1456.43
+    ],
+    [
+     -43.0,
+     0.59,
+     1453.3
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "anterior ramus of C6 from the C5-C6 foramen through the interscalene interval to the superior trunk"
+  },
+  {
+   "name": "C7 root of brachial plexus.r",
+   "points": [
+    [
+     -15.35,
+     23.03,
+     1452.51
+    ],
+    [
+     -24.85,
+     15.75,
+     1449.3
+    ],
+    [
+     -32.76,
+     5.32,
+     1446.62
+    ],
+    [
+     -40.67,
+     1.31,
+     1443.94
+    ],
+    [
+     -47.0,
+     -1.25,
+     1441.8
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "anterior ramus of C7 from the C6-C7 foramen through the interscalene interval to the middle trunk"
+  },
+  {
+   "name": "C8 root of brachial plexus.r",
+   "points": [
+    [
+     -13.71,
+     27.09,
+     1437.9
+    ],
+    [
+     -24.0,
+     18.65,
+     1437.27
+    ],
+    [
+     -32.57,
+     11.62,
+     1436.74
+    ],
+    [
+     -41.14,
+     0.33,
+     1436.22
+    ],
+    [
+     -48.0,
+     -1.04,
+     1435.8
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "anterior ramus of C8 from the C7-T1 foramen through the interscalene interval to the inferior trunk"
+  },
+  {
+   "name": "T1 root of brachial plexus.r",
+   "points": [
+    [
+     -13.71,
+     31.77,
+     1421.82
+    ],
+    [
+     -24.0,
+     21.93,
+     1426.01
+    ],
+    [
+     -32.57,
+     13.73,
+     1429.51
+    ],
+    [
+     -41.14,
+     -0.11,
+     1433.0
+    ],
+    [
+     -48.0,
+     -1.04,
+     1435.8
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "anterior ramus of T1 from the T1-T2 foramen through the interscalene interval to the inferior trunk"
+  },
+  {
+   "name": "Lateral cord of brachial plexus.r",
+   "points": [
+    [
+     -110.4,
+     14.4,
+     1399.5
+    ],
+    [
+     -125.06,
+     6.46,
+     1392.08
+    ],
+    [
+     -133.15,
+     8.52,
+     1382.1
+    ],
+    [
+     -140.96,
+     11.03,
+     1370.91
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "from the junction of the anterior divisions of the superior and middle trunks, along the lateral side of the axillary artery"
+  },
+  {
+   "name": "Medial cord of brachial plexus.r",
+   "points": [
+    [
+     -100.9,
+     10.1,
+     1399.1
+    ],
+    [
+     -105.84,
+     10.83,
+     1391.88
+    ],
+    [
+     -115.72,
+     12.09,
+     1383.46
+    ],
+    [
+     -123.52,
+     14.6,
+     1372.26
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "the continuation of the anterior division of the inferior trunk, along the medial side of the axillary artery"
+  },
+  {
+   "name": "Lateral root of median nerve.r",
+   "points": [
+    [
+     -140.96,
+     11.03,
+     1370.91
+    ],
+    [
+     -151.92,
+     8.99,
+     1358.05
+    ],
+    [
+     -159.88,
+     8.95,
+     1345.18
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "from the lateral cord to the median nerve"
+  },
+  {
+   "name": "Medial root of median nerve.r",
+   "points": [
+    [
+     -123.52,
+     14.6,
+     1372.26
+    ],
+    [
+     -140.2,
+     10.77,
+     1358.72
+    ],
+    [
+     -159.88,
+     8.95,
+     1345.18
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "from the medial cord to the median nerve"
+  },
+  {
+   "name": "Phrenic nerve.r",
+   "points": [
+    [
+     -25.14,
+     1.9,
+     1487.57
+    ],
+    [
+     -28.68,
+     -1.22,
+     1480.57
+    ],
+    [
+     -30.59,
+     -3.34,
+     1473.57
+    ],
+    [
+     -32.08,
+     -4.44,
+     1466.57
+    ],
+    [
+     -33.07,
+     -5.71,
+     1459.57
+    ],
+    [
+     -34.13,
+     -7.76,
+     1452.57
+    ],
+    [
+     -36.14,
+     -9.02,
+     1445.57
+    ],
+    [
+     -38.11,
+     -9.32,
+     1438.57
+    ],
+    [
+     -39.69,
+     -8.77,
+     1431.57
+    ],
+    [
+     -43.68,
+     -9.4,
+     1424.57
+    ],
+    [
+     -47.39,
+     -8.87,
+     1417.57
+    ]
+   ],
+   "layer": "nerve",
+   "origin": "built",
+   "what": "cervical course only: on the anterior surface of the anterior scalene. Its C3 to C5 origin and its course in the chest are not modelled"
+  }
+ ],
+ "remove_splines": [
+  {
+   "name": "Median nerve.r",
+   "spline": 0
+  },
+  {
+   "name": "Ulnar nerve.r",
+   "spline": 0
+  }
+ ],
+ "notes": [
+  "Superior trunk start [ -54.2 1453.3  -13. ] -> [-4.3000e+01  1.4533e+03 -6.0000e-01]; moved 16.7 mm; interval width 5.1 mm",
+  "Middle trunk start [ -52.2 1441.8  -25.8] -> [-4.7000e+01  1.4418e+03  1.2000e+00]; moved 27.5 mm; interval width 6.2 mm",
+  "Inferior trunk start [ -55.2 1435.8  -13.2] -> [-4.8000e+01  1.4358e+03  1.0000e+00]; moved 16.0 mm; interval width 5.7 mm",
+  "C5 root: foramen at height 1487.0 (between c4 body bottom 1486.4 and c5 body top 1487.6), x -17.6; 3 of 3 waypoints inside the interval",
+  "C6 root: foramen at height 1469.0 (between c5 body bottom 1469.1 and c6 body top 1468.9), x -17.6; 3 of 3 waypoints inside the interval",
+  "C7 root: foramen at height 1452.5 (between c6 body bottom 1453.7 and c7 body top 1451.3), x -15.4; 2 of 3 waypoints inside the interval",
+  "C8 root: foramen at height 1437.9 (between c7 body bottom 1438.5 and t1 body top 1437.3), x -13.7; 1 of 3 waypoints inside the interval",
+  "T1 root: foramen at height 1421.8 (between t1 body bottom 1423.5 and t2 body top 1420.1), x -13.7; 1 of 3 waypoints inside the interval",
+  "posterior division of inferior trunk: end moved 15.7 mm to the posterior cord junction",
+  "lateral cord [-110.4 1399.5  -14.4] -> [-141.  1370.9  -11. ]; medial cord [-100.9 1399.1  -10.1] -> [-123.5 1372.3  -14.6]",
+  "axillary nerve origin moved 25.7 mm to the posterior cord",
+  "median nerve now starts at [-159.9 1345.2   -8.9]; lateral root 32.0 mm, medial root 45.7 mm",
+  "musculocutaneous: 3 waypoints through coracobrachialis; added 70 mm",
+  "lateral pectoral nerve already begins at the lateral cord junction (unchanged)",
+  "phrenic nerve: 11 points on the front of the anterior scalene, heights 1488 to 1418"
+ ]
+}

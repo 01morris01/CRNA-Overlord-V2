@@ -2,8 +2,34 @@
 #   blender -b --disable-autoexec --factory-startup Startup.blend --python tools/zanatomy_export_plexus.py -- OUT.glb OUT.json
 # Set the Draco option to False for the raw file that tools/audit_plexus.py reads.
 import bpy, re, json, sys, bmesh
-from mathutils import Vector
-out_glb, out_json = sys.argv[sys.argv.index('--')+1:][:2]
+from mathutils import Vector, Matrix
+ARGS = sys.argv[sys.argv.index('--')+1:]; out_glb, out_json = ARGS[:2]
+PLAN = json.load(open(ARGS[2])) if len(ARGS) > 2 and ARGS[2] != '-' else None      # tools/plexus_corrections_plan.py
+DRACO = not (len(ARGS) > 3 and ARGS[3] == 'raw')
+
+def apply_plan(plan):
+    """Corrections and additions to the source curves. Points are Blender world coordinates in millimetres."""
+    W = lambda p: Vector((p[0] / 1000, p[1] / 1000, p[2] / 1000))
+    def fill(spline, pts, inv, radius):
+        spline.bezier_points.add(len(pts) - 1); P = [inv @ W(p) for p in pts]
+        for i, bp in enumerate(spline.bezier_points):
+            a, c = P[max(i - 1, 0)], P[min(i + 1, len(P) - 1)]; t = (c - a) / 6.0   # smooth through every point, no overshoot
+            bp.co = P[i]; bp.handle_left_type = bp.handle_right_type = 'FREE'; bp.handle_left = P[i] - t; bp.handle_right = P[i] + t; bp.radius = radius
+    by_obj = {}
+    for m in plan['modify']: by_obj.setdefault(m['name'], {'mod': [], 'rem': []})['mod'].append(m)
+    for r in plan['remove_splines']: by_obj.setdefault(r['name'], {'mod': [], 'rem': []})['rem'].append(r['spline'])
+    for name, job in by_obj.items():
+        o = bpy.data.objects[name]; cu = o.data; inv = o.matrix_world.inverted(); olds = list(cu.splines); dead = [olds[i] for i in job['rem']]
+        for m in job['mod']:
+            old = olds[m['spline']]; rad = old.bezier_points[0].radius if old.type == 'BEZIER' and len(old.bezier_points) else 1.0
+            fill(cu.splines.new('BEZIER'), m['points'], inv, rad); dead.append(old); o['ov_origin'] = 'corrected'; o['ov_what'] = (o.get('ov_what', '') + ' ' + m['what']).strip()
+        for sp in dead: cu.splines.remove(sp)
+    src = bpy.data.objects['Superior trunk of brachial plexus.r']; sc = src.matrix_world.to_scale().x; made = []
+    for c in plan['create']:
+        cu = bpy.data.curves.new(c['name'], 'CURVE'); cu.dimensions = '3D'; cu.bevel_depth = src.data.bevel_depth * sc; cu.bevel_resolution = src.data.bevel_resolution; cu.resolution_u = src.data.resolution_u; cu.fill_mode = src.data.fill_mode
+        fill(cu.splines.new('BEZIER'), c['points'], Matrix.Identity(4), src.data.splines[0].bezier_points[0].radius)
+        o = bpy.data.objects.new(c['name'], cu); bpy.context.scene.collection.objects.link(o); o['ov_origin'] = 'built'; o['ov_what'] = c['what']; made.append((c['layer'], o))
+    bpy.context.view_layer.update(); return made
 LABEL_SUFFIX = re.compile(r"\.(g|i|j|s|t|[eo]\d*[lr]?)$")
 def real(o): return o.type in ('MESH', 'CURVE') and not LABEL_SUFFIX.search(o.name)
 ALL = [o for o in bpy.data.objects if real(o)]
@@ -34,10 +60,13 @@ REGEX = {   # things whose exact names I did not know: found by pattern, reporte
  'nerve': [r"^Phrenic nerve\.r$", r"(root|branch).*median nerve.*\.r$", r"^Medial cutaneous nerve of (arm|forearm)\.r$", r"^(Anterior|Ventral) ram.*(C[5-8]|T1|cervical|thoracic).*", r"^(Fifth|Sixth|Seventh|Eighth) cervical nerve.*", r"^(C[5-8]|T1)\b.*nerve", r"spinal nerve.*(C[5-8]|T1)"],
  'bone': [r"^(Second|Third) rib\.r$", r"cervical vertebra", r"^(First|Second|Third) thoracic vertebra", r"^Vertebra (C[3-7]|T[1-3])", r"\((C[3-7]|T[1-3])\)$"],
 }
+MADE = apply_plan(PLAN) if PLAN else []
+ALL = [o for o in bpy.data.objects if real(o)]; BY = {o.name: o for o in ALL}
 picked, missing, found_by_regex = [], [], {}
 for layer, names in EXACT.items():
     for n in names:
         (picked.append((layer, BY[n])) if n in BY else missing.append(n))
+for layer, o in MADE: picked.append((layer, o))
 for layer, pats in REGEX.items():
     for p in pats:
         hits = [o for o in ALL if re.search(p, o.name, re.I) and not o.name.endswith('.l')]
@@ -64,7 +93,7 @@ def bake(o, layer, name=None, selectable=True):
     for p in me.polygons: p.use_smooth = True
     me.materials.clear(); me.materials.append(mats[layer])
     n = bpy.data.objects.new(slug(name or o.name), me); exp.objects.link(n)
-    n["layer"] = layer; n["za_name"] = name or o.name; n["selectable"] = bool(selectable); n["src_type"] = o.type
+    n["layer"] = layer; n["za_name"] = name or o.name; n["selectable"] = bool(selectable); n["src_type"] = o.type; n["origin"] = o.get("ov_origin", "source"); n["what"] = o.get("ov_what", "")
     return n
 def merge(objs, layer, name):
     bm = bmesh.new()
@@ -79,7 +108,7 @@ report = []
 for layer, o in picked:
     n = bake(o, layer)
     bb = [n.matrix_world @ Vector(c) for c in n.bound_box]
-    report.append({"id": n.name, "za_name": o.name, "layer": layer, "src": o.type, "verts": len(n.data.vertices),
+    report.append({"id": n.name, "za_name": o.name, "layer": layer, "src": o.type, "origin": o.get("ov_origin", "source"), "what": o.get("ov_what", ""), "verts": len(n.data.vertices),
                    "min": [round(min(v[i] for v in bb), 4) for i in range(3)], "max": [round(max(v[i] for v in bb), 4) for i in range(3)],
                    "collections": [c.name for c in o.users_collection][:8]})
 if hand: merge(hand, 'bone', 'Bones of hand (right)')
@@ -88,6 +117,6 @@ bpy.ops.object.select_all(action='DESELECT')
 for o in exp.objects: o.select_set(True)
 bpy.context.view_layer.objects.active = exp.objects[0]
 bpy.ops.export_scene.gltf(filepath=out_glb, export_format='GLB', use_selection=True, export_extras=True, export_apply=True, export_yup=True,
-                          export_materials='EXPORT', export_animations=False, export_draco_mesh_compression_enable=True, export_draco_mesh_compression_level=6, export_draco_position_quantization=14, export_draco_normal_quantization=10)
+                          export_materials='EXPORT', export_animations=False, export_draco_mesh_compression_enable=DRACO, export_draco_mesh_compression_level=6, export_draco_position_quantization=14, export_draco_normal_quantization=10)
 json.dump({"blender": bpy.app.version_string, "missing": missing, "regex": found_by_regex, "hand_parts": len(hand), "skull_parts": len(skull), "objects": report}, open(out_json, 'w'), indent=1)
 print("EXPORTED", len(exp.objects), "objects; missing", missing)
