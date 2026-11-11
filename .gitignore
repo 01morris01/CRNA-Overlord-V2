@@ -7,3 +7,8 @@
 
 # node
 node_modules/
+assets/level/_tex/
+assets/level/institute-props.glb
+assets/level/institute.glb
+assets/level/lightmap.jpg
+assets/level/level.json
