@@ -7,16 +7,22 @@ Short, and in order of what would change the experience most. Nothing here is bu
 2. **Carbon dioxide in the simulator.** The defect is reproduced and a correction is prepared behind a switch that is
    off (`CO2-FACULTY-REVIEW.md`). It needs a faculty decision before any affected case is scored or the operating room
    runs cases itself.
-3. **Run a case inside the operating room.** Today the room is a place to stand, and the simulator opens as its own
-   page. Joining them means driving the existing engine from the room's equipment: monitor, machine, drugs, a debrief.
+3. **Run a case inside the operating room.** The room is now equipped, but its equipment is set dressing and its
+   monitors show a labelled demonstration loop. The simulator still opens as its own page. Joining them means driving the
+   existing engine from the room's monitor, machine and drugs, with a debrief, and replacing the demonstration loop with
+   the engine's own traces.
 4. **Real devices.** Nothing has been run on a real phone or tablet. Start with an iPad in Safari; the lower-cost mode
    exists but is tuned only by reasoning.
 5. **The airway the scan software cannot outline.** Epiglottis, arytenoids and vocal folds are not in TotalSegmentator.
    The Human Reference Atlas 3D organs are the first lead; whatever is used gets the same review and ledger entry.
 6. **A second regional series** (lower limb), built the same way: page-verified statements, an audited model, a case, a
    later review. The patch gains a tick for it.
-7. **Equipment that can be shipped.** The operating room's models are a licensed pack that stays on your machine. Either
-   confirm its terms allow web delivery, or commission or source openly licensed equipment.
+7. **Better models for the script-built fittings.** The principal equipment is now professionally made and openly
+   licensed. The surgical lights, ceiling supply arm, stools and cabinets were built by script because no open model was
+   found. Newer CC BY models exist on Sketchfab that need your own sign-in to download ("Hospital operating room" by
+   Chenchanchong, "Operating Room Roof Monitors" by kareem.elgayyar, "Anesthesia workstation on wheels" by
+   Mr.Adeudo.59.94, "Patient Monitor" by Ram-je), and paid packs would go further. Any of them drops into
+   `tools/clinical_set.py` the same way. The equipment also carries no printed labels yet.
 8. **Accounts that follow you.** Everything is per browser (`ACCOUNTS-MIGRATION.md`). No sync is claimed anywhere.
 9. **An exported lesson film.** The film is frame-exact through `window.renderAt(t)`; a capture script and a narration
    track would turn it into a short video without authoring it twice.

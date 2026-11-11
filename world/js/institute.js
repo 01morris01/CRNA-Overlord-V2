@@ -20,6 +20,7 @@ const LM_RANGE = 6, EXPOSURE = 2.0, SUN_GAIN = 0.6, EXPO = {},      // exposure 
   A = (p) => new URL('../../assets/' + p, import.meta.url).href;
 const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/');
 export const loader = () => new GLTFLoader().setDRACOLoader(draco);
+const SHEEN = { or_floor: 0.4, clinical_floor: 0.7 };      // how much of its room a polished surface mirrors, by material: a sheet floor should carry a soft sheen, not a picture of the ceiling lights
 const C = THREE.ShaderChunk, SUN_MASK = `float ovSun = step( abs( vOvPos.x ), vOvPos.z > ${SUN.zSplit.toFixed(2)} ? ${SUN.x.toFixed(2)} : ${SUN.xCourt.toFixed(2)} ) * step( ${SUN.zMin.toFixed(2)}, vOvPos.z );\n`, SUN_USE = ['getDirectionalLightInfo( directionalLight, directLight );', 'getDirectionalLightInfo( directionalLight, directLight ); directLight.color *= ovSun;'];
 const need = (chunk, a, b) => { if (!chunk.includes(a)) console.warn('institute: shader text changed, patch skipped:', a); return chunk.replace(a, b); };
 // ---- the building's materials: lightmap is the only ambient term; no lamps but the sun; reflections fitted to the room
@@ -95,7 +96,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     const src = o.material; if (src.map) { src.map.anisotropy = Q().aniso; } if (src.roughnessMap && src.userData.rough_mul) src.roughness = src.userData.rough_mul; src.normalScale && src.normalMap && src.normalScale.multiplyScalar(1);
     for (const [k, ids] of Object.entries(bucket)) {
       const geo = new THREE.BufferGeometry(); for (const n of Object.keys(g.attributes)) geo.setAttribute(n, g.attributes[n]); geo.setIndex(ids); const bb = new THREE.Box3(); for (const i of ids) bb.expandByPoint(va.fromBufferAttribute(pos, i)); geo.boundingBox = bb; geo.boundingSphere = bb.getBoundingSphere(new THREE.Sphere());
-      const m = src.clone(); m.userData = { ...src.userData }; m.lightMap = lm; m.lightMapIntensity = LM_RANGE * Math.PI; m.envMapIntensity = 0; m.dithering = true; patchStatic(m, boxes[k]); (roomMats[k] ||= []).push(m);
+      const m = src.clone(); m.userData = { ...src.userData, env: SHEEN[src.name] ?? 1 }; m.lightMap = lm; m.lightMapIntensity = LM_RANGE * Math.PI; m.envMapIntensity = 0; m.dithering = true; patchStatic(m, boxes[k]); (roomMats[k] ||= []).push(m);
       const mesh = new THREE.Mesh(geo, m); mesh.castShadow = true; mesh.receiveShadow = true; mesh.userData.room = k; mesh.matrixAutoUpdate = false; scene.add(mesh); statics.push(mesh);
     }
   });
@@ -207,7 +208,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     const rt = new THREE.WebGLCubeRenderTarget(256, { type: THREE.HalfFloatType }), cc = new THREE.CubeCamera(0.05, 120, rt), hide = [walker.person?.root, blob, water.mesh].filter(Boolean); for (const h of hide) h.visible = false;
     for (const [name, b] of Object.entries(boxes)) { cc.position.copy(b.at); cc.update(renderer, scene); b.env && b.env.dispose(); b.env = pmrem.fromCubemap(rt.texture).texture; }
     for (const h of hide) h.visible = true; rt.dispose();
-    for (const [name, list] of Object.entries(roomMats)) for (const m of list) { const b = boxes[name]; m.envMap = b ? b.env : skyEnv; m.envMapIntensity = b ? 1 : L.sky; m.needsUpdate = true; }
+    for (const [name, list] of Object.entries(roomMats)) for (const m of list) { const b = boxes[name]; m.envMap = b ? b.env : skyEnv; m.envMapIntensity = b ? m.userData.env : L.sky; m.needsUpdate = true; }
     for (const k of Object.keys(glassMat)) { glassMat[k].envMap = k === 'roof' ? skyEnv : (boxes.court.env || skyEnv); glassMat[k].needsUpdate = true; } ringMat.envMap = boxes.court.env; ringMat.needsUpdate = true; applyEnv();
   }
 
@@ -263,7 +264,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   let fpsT = performance.now(), fpsN = 0, fps = 0; const fpsTick = () => { fpsN++; const n = performance.now(); if (n - fpsT > 1000) { fps = Math.round(fpsN * 1000 / (n - fpsT)); fpsN = 0; fpsT = n; } };
   const VIEWS = {    // fixed camera positions for review screenshots: [eye, look, fov]
     arrival: [[1.1, 1.62, 13.4], [-0.3, 2.3, 0], 60], atrium: [[-2.6, 1.62, -4.6], [0.2, 1.5, -9.9], 50], court: [[2.4, 1.62, -2.2], [-1.2, 2.6, -19], 66], gallery: [[0.9, 1.55, -26.3], [-0.2, 1.4, -28.6], 44],
-    regional: [[-5.7, 1.6, -17.5], [-9.2, 1.0, -14.4], 64], pool: [[-0.8, 1.62, 12.9], [-5.6, 0.0, 8.4], 62], or: [[5.75, 1.62, -13.75], [9.0, 1.05, -16.3], 66], orwork: [[8.55, 1.6, -18.25], [8.75, 0.95, -15.2], 62], studio: [[5.8, 1.6, -3.8], [8.6, 1.25, -8.3], 62], collection: [[7.6, 1.5, -6.6], [7.6, 1.3, -8.4], 50], portal: [[0.3, 1.62, -17.6], [0, 1.6, -26], 55] };
+    regional: [[-5.7, 1.6, -17.5], [-9.2, 1.0, -13.4], 60], bay: [[-7.6, 1.6, -15.6], [-9.3, 1.05, -13.0], 48], oranes: [[9.55, 1.55, -18.7], [7.6, 1.08, -17.3], 46], oreast: [[11.2, 1.62, -13.4], [7.6, 1.1, -16.9], 62], pool: [[-0.8, 1.62, 12.9], [-5.6, 0.0, 8.4], 62], or: [[5.75, 1.62, -13.75], [9.0, 1.05, -16.3], 66], orwork: [[8.55, 1.6, -18.25], [8.75, 0.95, -15.2], 62], studio: [[5.8, 1.6, -3.8], [8.6, 1.25, -8.3], 62], collection: [[7.6, 1.5, -6.6], [7.6, 1.3, -8.4], 50], portal: [[0.3, 1.62, -17.6], [0, 1.6, -26], 55] };
   const api = {
     renderer, scene, camera, level: L, prefs, place, loadModel, lightAt, newLight, patchDynamic, setScreen, signs, roomAt, stations, P, boxes, dynMats, captureRooms,
     get enabled() { return enabled; }, onRoom: null, onFrame: null,

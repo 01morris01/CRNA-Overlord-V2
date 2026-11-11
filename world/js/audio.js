@@ -1,6 +1,7 @@
 // audio.js: every sound in Overlord's world, made in the browser with no audio files. Each room has its own air and its own
 // echo; footsteps change with the floor; water is heard near the pool and the monitor near the operating room. Nothing plays
 // until the first tap or key, the choice to mute is remembered, and sounds that explain a place are also captioned.
+export const pulse = { n: 0 };      // counts the operating room's monitor tones, so the demonstration trace on the monitor can keep step with what is heard
 let ctx = null, master = null, wind = null, water = null, birdTimer = 0, birdsOn = 0, send = null, conv = null, vent = null, hum = null, beepT = 0, here = null, caption = null, heard = {};
 let muted = false; try { muted = localStorage.getItem('overlord_world_mute') === '1'; } catch (e) { /* private mode */ }
 const now = () => ctx.currentTime;
@@ -76,7 +77,7 @@ export function listen({ x, z, room: r, pool, dt = 0.016 }) {
   if (!ctx) return; const t = now(), a = AIR[r] || AIR.court;
   wind.g.gain.setTargetAtTime(0.03 + 0.1 * a.wind, t, 0.5); wind.f.frequency.setTargetAtTime(300 + 240 * a.wind + 50 * Math.sin(t * 0.3), t, 0.6); vent.g.gain.setTargetAtTime(a.vent, t, 0.4); hum.gain.setTargetAtTime(a.hum, t, 0.5);
   const dx = Math.max(pool[0] - x, 0, x - pool[2]), dz = Math.max(pool[1] - z, 0, z - pool[3]), d = Math.hypot(dx, dz), near = r === 'forecourt' || r === 'arrival' ? Math.max(0, 1 - d / 9) : 0; water.g.gain.setTargetAtTime(0.085 * near * near, t, 0.3); if (near > 0.55) say('water', 'Water moving in the pool.');
-  const od = Math.hypot(x - 9.9, z + 17.2), beep = r === 'or' ? 1 : r === 'court' ? Math.max(0, 1 - od / 9) * 0.25 : 0; beepT -= dt;
-  if (beep > 0.02 && beepT <= 0 && !muted) { beepT = 60 / 72; tone(880, t, 0.09, { gain: 0.045 * beep, type: 'sine' }); if (r === 'or') say('monitor', 'A monitor tone, steady, about 72 a minute. It is a recording of nothing: no patient is connected here.'); }
+  const od = Math.hypot(x - 7.4, z + 17.4), beep = r === 'or' ? 1 : r === 'court' ? Math.max(0, 1 - od / 9) * 0.25 : 0; beepT -= dt;
+  if (beep > 0.02 && beepT <= 0 && !muted) { beepT = 60 / 72; pulse.n++; tone(880, t, 0.09, { gain: 0.045 * beep, type: 'sine' }); if (r === 'or') say('monitor', 'A monitor tone, steady, about 72 a minute. It is a recording of nothing: no patient is connected here.'); }
   birdsOn = a.birds; birdTimer -= dt; if (birdsOn > 0.05 && birdTimer <= 0 && !muted) { birdTimer = 2.5 + Math.random() * 6 / birdsOn; const base = 2400 + Math.random() * 1600, n = 2 + Math.floor(Math.random() * 3); for (let i = 0; i < n; i++) tone(base * (1 + Math.random() * 0.15), t + i * 0.11, 0.09, { gain: 0.02 * birdsOn, to: base * (0.8 + Math.random() * 0.5) }); }
 }

@@ -1,25 +1,18 @@
 // exhibits.js: what stands in the level besides the building. The gallery's specimens, the atrium's sectioned figure, the
-// things on your studio shelf, what the level's screens show, and (only when present on this machine) operating-room
-// equipment from a licensed pack that is never committed. Everything here is lit by the level's baked probes.
+// things on your studio shelf, what the level's screens show, and the clinical rooms' equipment (js/clinical.js).
+// Everything here is lit by the level's baked probes.
 import * as THREE from 'three';
 import { has } from './save.js';
 import { drawTexture, plateTexture, patchSVG, svgImage, TOKENS } from './brand.js';
 import { HIDE } from '../data/plexus.js';
 import { CASES } from '../data/regional.js';
 import { SCAN_BASE, loadVolume, sliceImage } from './scan.js';
+import { mountClinical } from './clinical.js';
 
 const LOOK = { bone: [0xddd3bd, 0.62, 0], nerve: [0xe7b94a, 0.42, 0.05], artery: [0xb5493f, 0.4, 0], vein: [0x4c628f, 0.42, 0], airway: [0xbcd0db, 0.5, 0] };
 const steel = () => new THREE.MeshStandardMaterial({ color: 0xb9bcc0, metalness: 1, roughness: 0.32 }), brass = () => new THREE.MeshStandardMaterial({ color: 0xcf9f58, metalness: 1, roughness: 0.36 });
-const OR_LAYOUT = [   // [file, x, y (null = stand on the floor), z, turn, room]. Three.js axes; the table lies north-south, head to the north.
-  ['OpreatingTable.glb', 8.6, null, -15.6, Math.PI / 2, 'or', [8.25, -16.7, 8.95, -14.5, 0, 0.95]], ['Anesthesia.glb', 9.85, null, -17.1, -2.0, 'or', [9.3, -17.65, 10.4, -16.55, 0, 1.5]], ['VentiletorMachine.glb', 7.45, null, -17.25, 2.2, 'or', [7.1, -17.65, 7.8, -16.85, 0, 1.5]],
-  ['IVPole.glb', 7.7, null, -16.35, 0, 'or', [7.5, -16.55, 7.9, -16.15, 0, 1.6]], ['Trolley.glb', 6.85, null, -14.3, 0.5, 'or', [6.2, -14.8, 7.5, -13.8, 0, 1.0]], ['SurgeryTools.glb', 6.85, 1.03, -14.3, 0.5, 'or', null],
-  ['SideTrolley.glb', 10.5, null, -14.1, -0.6, 'or', [10.1, -14.5, 10.9, -13.7, 0, 0.9]], ['BowlTrolley.glb', 10.95, null, -15.6, 1.2, 'or', [10.6, -15.95, 11.3, -15.25, 0, 0.9]], ['Stool.glb', 9.0, null, -17.95, 0, 'or', [8.75, -18.2, 9.25, -17.7, 0, 0.6]],
-  ['OperationLight.glb', 8.7, 2.98, -15.4, 0.4, 'or', null], ['Cupboard.glb', 11.72, null, -12.45, -Math.PI / 2, 'or', null], ['Cupboard.glb', 11.72, null, -13.55, -Math.PI / 2, 'or', null], ['LEDTV.glb', 8.6, 1.25, -19.56, 0, 'or', null], ['SuctionCanister.glb', 11.1, 1.45, -19.5, 0, 'or', null],
-  ['Stool.glb', -7.55, null, -14.15, 0, 'regional', [-7.8, -14.4, -7.3, -13.9, 0, 0.6]], ['SideTrolley.glb', -9.95, null, -13.9, 0.3, 'regional', [-10.35, -14.3, -9.55, -13.5, 0, 0.9]], ['IVPole.glb', -9.55, null, -16.45, 0, 'regional', [-9.75, -16.65, -9.35, -16.25, 0, 1.6]],
-];
-
 export async function mountExhibits({ world, state }) {
-  const ST = Object.fromEntries(world.stations.map((s) => [s.key, s])), api = { figure: null, hasORPack: false, hasScan: false, shelf: [] }, V = (a) => new THREE.Vector3(a[0], a[1], a[2]);
+  const ST = Object.fromEntries(world.stations.map((s) => [s.key, s])), api = { figure: null, hasClinical: false, clinical: null, hasScan: false, shelf: [] }, V = (a) => new THREE.Vector3(a[0], a[1], a[2]);
   const stand = (group, at, room) => { world.place(group, { at, room, envI: 0.9 }); return group; };
   // ---------------------------------------------------------------- the plexus: life size on its mount, and one third size for a shelf
   let plexusSrc = null;
@@ -72,21 +65,14 @@ export async function mountExhibits({ world, state }) {
     c.font = '400 25px "Inter Tight", system-ui'; ['Interscalene', 'Supraclavicular', 'Infraclavicular', 'Axillary'].forEach((n, i) => { const y = 250 + i * 74; c.fillStyle = 'rgba(255,255,255,.16)'; c.fillRect(96, y + 16, 900, 1); c.fillStyle = '#f4f4f2'; c.fillText(n, 96, y); c.fillStyle = '#a4a8b0'; c.fillText(['roots, between the scalenes', 'trunks and divisions, over the first rib', 'cords, around the axillary artery', 'terminal nerves, in the axilla'][i], 420, y); });
     c.fillStyle = '#e6c98a'; c.font = '400 20px "Inter Tight", system-ui'; c.fillText('Levels shown on the anatomical model. No ultrasound image is simulated in this room.', 96, 580); }), { glow: 0.85 });
   world.setScreen('lightbox', drawTexture(512, 366, (c, w, h) => { const g = c.createRadialGradient(w / 2, h / 2, 20, w / 2, h / 2, w * 0.7); g.addColorStop(0, '#e9eef2'); g.addColorStop(1, '#aab6c0'); c.fillStyle = g; c.fillRect(0, 0, w, h); }), { glow: 0.55 });
-  // ---------------------------------------------------------------- operating-room equipment, only if the licensed pack is on this machine
-  async function orPack() {
-    try { const r = await fetch(new URL('../../assets/local/or-pack/OpreatingTable.glb', import.meta.url), { method: 'HEAD' }); if (!r.ok) return; } catch (e) { return; }
-    api.hasORPack = true; const cache = {};
-    for (const [file, x, y, z, turn, room, col] of OR_LAYOUT) { try { cache[file] ||= (await world.loadModel('local/or-pack/' + file)).scene; const g = cache[file].clone(true), holder = new THREE.Group(); holder.add(g); holder.rotation.y = turn; holder.position.set(x, 0, z); holder.updateMatrixWorld(true); const b = new THREE.Box3().setFromObject(holder);
-        holder.position.y = y === null ? -b.min.y : y; world.place(holder, { at: new THREE.Vector3(x, 1.0, z), room, envI: 0.7, shadow: false }); if (col) world.addCollider(col); } catch (e) { console.warn('or pack', file, e); } }
-    await patient(new THREE.Vector3(8.6, 0.93, -15.6), 'or'); world.captureRooms();
-  }
   // a figure under a sheet for the tables: set dressing made from an openly licensed avatar, not a simulated patient
   let patientSrc = null;
   async function patient(at, room) { try { patientSrc ||= (await world.loadModel('models/patient/patient-supine.glb')).scene; const g = patientSrc.clone(true);
-      g.traverse((o) => { if (!o.isMesh) return; o.material = o.material.clone(); const m = o.material; m.envMapIntensity = 0.4; if (/hair/.test(m.name)) { m.transparent = false; m.alphaTest = 0.5; m.side = THREE.DoubleSide; m.roughness = 0.9; } if (/drape/.test(m.name)) { m.side = THREE.DoubleSide; m.color.set(room === 'or' ? 0x5f8f9e : 0xe9edf0); } });
+      g.traverse((o) => { if (!o.isMesh) return; o.material = o.material.clone(); const m = o.material; m.envMapIntensity = 0.4; if (/hair/.test(m.name)) { m.transparent = false; m.alphaTest = 0.5; m.side = THREE.DoubleSide; m.roughness = 0.9; } if (/drape/.test(m.name)) { m.side = THREE.DoubleSide; m.color.set(room === 'or' ? 0x4f8496 : 0xe9edf0); } });
       g.position.copy(at); world.place(g, { at: at.clone().add(new THREE.Vector3(0, 0.2, 0)), room, envI: 0.4, shadow: false }); } catch (e) { console.warn('patient', e); } }
-  patient(new THREE.Vector3(-8.6, 0.9, -15.2), 'regional');
-  orPack();
+  patient(new THREE.Vector3(8.6, 0.9, -15.6), 'or');
+  // the clinical rooms' equipment arrives after the first frame; the rooms' reflections are taken again once it stands
+  mountClinical({ world }).then((c) => { api.clinical = c; api.hasClinical = c.has; if (c.has) world.captureRooms(); });
   // ---------------------------------------------------------------- the airway and neck, from the scan: on its mount, on the lightbox, and small for a shelf
   async function scanExhibit() {
     try { const r = await fetch(new URL('volume.json', SCAN_BASE), { method: 'HEAD' }); if (!r.ok) return; } catch (e) { return; }
@@ -111,7 +97,7 @@ export async function mountExhibits({ world, state }) {
   (async () => { try { const { loadPerson } = await import('./person.js'), who = ['longcoat', 'coat', 'tunic'].find((k) => k !== (state.character && state.character.person)), light = world.newLight(), at = new THREE.Vector3(-2.35, 0, -13.7), mats = [];
       const p = await loadPerson(who, { light: (m) => { world.patchDynamic(m, light); mats.push(...m); } }); world.lightAt(light, new THREE.Vector3(at.x, 1.1, at.z), 'court'); p.root.position.copy(at); p.root.rotation.y = Math.atan2(0 - at.x, -9.7 - at.z);
       world.scene.add(p.root); world.adopt(p.root, 'court', mats); world.addCollider([at.x - 0.3, at.z - 0.3, at.x + 0.3, at.z + 0.3, 0, 1.8]); api.people.push(p); } catch (e) { console.warn('staff figure', e); } })();
-  api.update = (dt) => { const f = api.figure; if (f && f.auto && world.prefs.motion) { f.t += dt; f.set(0.5 + 0.44 * Math.sin(f.t * 2 * Math.PI / 52)); } for (const q of api.people) q.update(dt, 0); };
+  api.update = (dt) => { const f = api.figure; if (f && f.auto && world.prefs.motion) { f.t += dt; f.set(0.5 + 0.44 * Math.sin(f.t * 2 * Math.PI / 52)); } for (const q of api.people) q.update(dt, 0); if (api.clinical) api.clinical.update(dt); };
   api.refresh = refreshShelf; api.plexusModel = plexus;
   return api;
 }

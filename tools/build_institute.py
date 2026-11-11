@@ -24,7 +24,7 @@ These are scene-design proportions, not hospital building standards. Materials a
 import bpy, bmesh, json, math, os, sys, time
 import numpy as np
 from mathutils import Vector, Matrix
-A = sys.argv[sys.argv.index('--') + 1:]; SRC, OUT = A[0], A[1]; FINAL = len(A) > 2 and A[2] == 'final'; PREVIEW = A[3] if len(A) > 3 else None
+A = sys.argv[sys.argv.index('--') + 1:]; SRC, OUT = A[0], A[1]; FINAL = len(A) > 2 and A[2] == 'final'; PREVIEW = A[3] if len(A) > 3 else None; ONLY = A[4].split(',') if len(A) > 4 else None; STOP = len(A) > 2 and A[2] == 'preview'      # 'preview': render the views and stop, no bake
 os.makedirs(OUT, exist_ok=True); TMP = os.path.join(OUT, '_tex'); os.makedirs(TMP, exist_ok=True)
 bpy.ops.wm.read_factory_settings(use_empty=True); scene = bpy.context.scene
 scene.render.engine = 'CYCLES'; scene.cycles.device = 'GPU'
@@ -91,6 +91,18 @@ mat('pool_basin', None, tint=(0.035, 0.045, 0.05), rough=0.6)
 mat('light_panel', None, tint=(1, 1, 1), rough=0.5, emit=(1.0, 0.97, 0.92), emit_strength=3.2)
 mat('light_warm', None, tint=(1, 1, 1), rough=0.5, emit=(1.0, 0.82, 0.6), emit_strength=7.0)
 mat('screen', None, tint=(0.02, 0.025, 0.03), rough=0.22)
+mat('panel', None, tint=(0.62, 0.665, 0.69), rough=0.16)
+mat('panel_light', None, tint=(0.84, 0.86, 0.86), rough=0.2)
+mat('panel_deep', None, tint=(0.085, 0.115, 0.145), rough=0.13)                                                                                        # back-painted glass wall panels, a cool white
+mat('panel_dark', None, tint=(0.05, 0.06, 0.07), rough=0.14)                                                                                      # dark glass: display surrounds, door headers
+mat('joint', None, tint=(0.02, 0.024, 0.028), rough=0.8)
+mat('or_floor', 'concrete_floor_02', uv_m=3.4, grade=(0.25, 0.1, 0.07, (0.8, 0.93, 1.0)), rough_mul=0.44, normal=False)                           # a dark sheet floor with a soft sheen
+mat('canopy', None, tint=(0.8, 0.82, 0.83), rough=0.85)
+mat('or_ceiling', None, tint=(0.8, 0.82, 0.83), rough=0.7)
+mat('glow_white', None, tint=(1, 1, 1), rough=0.5, emit=(0.93, 0.97, 1.0), emit_strength=6.0)
+mat('glow_teal', None, tint=(0.3, 0.8, 0.85), rough=0.5, emit=(0.1, 0.72, 0.8), emit_strength=9.0)
+mat('glow_green', None, tint=(0.2, 0.9, 0.4), rough=0.5, emit=(0.1, 0.9, 0.3), emit_strength=4.0)
+mat('glow_amber', None, tint=(1.0, 0.6, 0.2), rough=0.5, emit=(1.0, 0.55, 0.1), emit_strength=4.0)
 
 # ------------------------------------------------------------------ geometry helpers
 PARTS, COLLIDERS = [], []
@@ -233,35 +245,59 @@ box(2.3, 23.3, 0.4, 4.3, 23.85, 0.47, 'stone_dark', collide=False); COLLIDERS.ap
 for xb in (2.5, 3.3, 4.1): box(xb - 0.03, 23.38, 0.0, xb + 0.03, 23.77, 0.4, 'metal_dark', collide=False)
 for (lx, ly) in ((0.0, 27.1), (-1.0, 27.3), (1.0, 27.3), (-3.3, 24.9), (-2.9, 28.4), (3.9, 27.4)): box(lx - 0.05, ly - 0.05, 3.98, lx + 0.05, ly + 0.05, 4.2, 'metal_dark', collide=False)
 box(-4.0, 27.18, 4.14, 4.0, 27.22, 4.2, 'metal_dark', collide=False); box(-4.0, 24.88, 4.14, -2.0, 24.92, 4.2, 'metal_dark', collide=False)
-# --- REGIONAL PRACTICE ROOM: x -11.5..-4.9, y 12..18.5, 3 m
+# --- the two clinical rooms share a wall system: pale back-painted glass panels on a dark backing, so every joint reads as a fine shadow line
+def panels(axis, w, a, b, z0, z1, face, m='panel', module=1.2, t=0.016, gap=0.007, back=0.004):
+    """Line a wall with panels. axis 'x': the wall runs east-west at y = w; 'y': north-south at x = w. face: +1 or -1, the way the panels look."""
+    P = (lambda u0, v0, zz0, u1, v1, zz1, mm: box(u0, v0, zz0, u1, v1, zz1, mm, collide=False)) if axis == 'x' else (lambda u0, v0, zz0, u1, v1, zz1, mm: box(v0, u0, zz0, v1, u1, zz1, mm, collide=False))
+    P(a, w, z0, b, w + face * back, z1, 'joint'); n = max(1, round((b - a) / module)); step = (b - a) / n
+    for i in range(n): P(a + i * step + gap / 2, w + face * back, z0 + gap / 2, a + (i + 1) * step - gap / 2, w + face * (back + t), z1 - gap / 2, m)
+def lining(axis, w, a, b, face, h=3.0, split=2.26, skirt='or_floor', openings=(), m='panel'):
+    """A whole wall of panels in two tiers over a coved skirting, leaving out door and window openings [(a, b, sill, head)]."""
+    cuts = sorted(openings); edges = [a] + [v for c in cuts for v in c[:2]] + [b]
+    P = (lambda u0, v0, zz0, u1, v1, zz1, mm: box(u0, v0, zz0, u1, v1, zz1, mm, collide=False)) if axis == 'x' else (lambda u0, v0, zz0, u1, v1, zz1, mm: box(v0, u0, zz0, v1, u1, zz1, mm, collide=False))
+    for i in range(0, len(edges), 2):
+        if edges[i + 1] - edges[i] > 0.05: panels(axis, w, edges[i], edges[i + 1], 0.1, split, face, m); panels(axis, w, edges[i], edges[i + 1], split, h, face, m); P(edges[i], w, 0.0, edges[i + 1], w + face * 0.024, 0.1, skirt)
+    for (oa, ob, sill, head) in cuts:
+        if sill > 0.15: panels(axis, w, oa, ob, 0.1, sill, face, m); P(oa, w, 0.0, ob, w + face * 0.024, 0.1, skirt)
+        if h - head > 0.05: panels(axis, w, oa, ob, head, h, face, m)
+# --- REGIONAL PRACTICE ROOM: x -11.5..-4.9, y 12..18.5, 3 m. A curtained block bay against a timber head wall; daylight from the west.
 ROOMS['regional'] = [-11.5, 12.0, -4.9, 18.5, 3.0, 'vinyl', 0.66]
 box(-11.9, 11.6, -0.3, -4.9, 18.9, 0.0, 'clinical_floor', collide=False, omit='b'); box(-11.9, 11.6, 3.0, -4.9, 18.9, 3.4, 'ceiling', collide=False, omit='t')
 wall_x(11.6, -11.9, -4.9, 3.0, 'plaster'); wall_x(18.5, -11.9, -4.9, 3.0, 'plaster'); wall_y(-11.9, 11.6, 18.9, 3.0, 'plaster', openings=[(13.6, 16.9, 2.5, 0.9, 'window')])
-box(-4.92, 12.0, 0.0, -4.9, 14.4, 3.0, 'plaster', collide=False); box(-4.92, 16.0, 0.0, -4.9, 18.5, 3.0, 'plaster', collide=False); box(-4.92, 14.4, 2.4, -4.9, 16.0, 3.0, 'plaster', collide=False)
-box(-8.9, 14.4, 0.0, -8.3, 16.0, 0.12, 'metal_dark', collide=False); box(-8.75, 14.9, 0.12, -8.45, 15.5, 0.74, 'steel'); box(-9.0, 14.2, 0.74, -8.2, 16.2, 0.8, 'metal_dark', collide=False); box(-8.98, 14.22, 0.8, -8.22, 16.18, 0.9, 'pad', collide=False); COLLIDERS.append([-9.0, 14.2, -8.2, 16.2, 0, 0.9])
-box(-5.6, 12.1, 0.0, -5.0, 13.6, 0.9, 'plaster'); box(-5.62, 12.08, 0.9, -4.98, 13.62, 0.93, 'steel', collide=False)                              # supply counter
-for i in range(3): box(-5.61, 12.14 + i * 0.5, 0.1, -5.6, 12.6 + i * 0.5, 0.82, 'steel', collide=False); box(-5.63, 12.33 + i * 0.5, 0.72, -5.61, 12.41 + i * 0.5, 0.74, 'metal_dark', collide=False)
-box(-10.2, 18.42, 1.0, -7.6, 18.5, 2.3, 'screen', collide=False); box(-10.26, 18.44, 0.94, -7.54, 18.5, 2.36, 'metal_dark', collide=False)       # wall display
-SIGNS.append({'text': 'DISPLAY', 'at': [-8.9, 18.419, 1.65], 'face': 'S', 'w': 2.56, 'h': 1.26, 'style': 'display'})
-STATIONS['regional'] = {'at': [-7.0, 15.2], 'look': [-8.6, 15.2, 1.0], 'label': 'Regional practice room', 'table': [-8.6, 15.2]}
-for (cx, cy) in ((-8.6, 15.2), (-6.4, 13.2), (-10.4, 13.2), (-6.4, 17.2), (-10.4, 17.2)): box(cx - 0.6, cy - 0.3, 2.97, cx + 0.6, cy + 0.3, 3.0, 'light_panel', collide=False)
-for (a, b_) in ((12.0, 12.012), (18.488, 18.5)): box(-11.5, a, 0, -4.92, b_, 0.1, 'steel', collide=False); box(-11.5, a, 0.86, -4.92, b_, 0.98, 'rubber', collide=False)      # floor strip and a wall guard at trolley height
-for (a, b_) in ((12.0, 13.6), (16.9, 18.5)): box(-11.5, a, 0.86, -11.488, b_, 0.98, 'rubber', collide=False)
-for (a, b_) in ((12.0, 14.4), (16.0, 18.5)): box(-4.932, a, 0.86, -4.92, b_, 0.98, 'rubber', collide=False)
-box(-4.9, 14.4, 0.02, -4.85, 15.9, 2.36, 'oak', collide=False, rot=1.25, about=(-4.9, 14.4, 0))                                                    # the door stands open into the room
-# --- OPERATING ROOM: x 4.9..12, y 11.5..19.6, 3 m
-ROOMS['or'] = [4.9, 11.5, 12.0, 19.6, 3.0, 'vinyl', 0.5]
-box(4.9, 11.1, -0.3, 12.4, 20.0, 0.0, 'clinical_floor', collide=False, omit='b'); box(4.9, 11.1, 3.0, 12.4, 20.0, 3.4, 'ceiling', collide=False, omit='t')
+lining('x', 12.0, -11.5, -4.9, 1, skirt='clinical_floor', m='panel_light'); lining('x', 18.5, -11.5, -4.9, -1, skirt='clinical_floor', m='panel_light'); lining('y', -11.5, 12.0, 18.5, 1, skirt='clinical_floor', openings=[(13.6, 16.9, 0.9, 2.5)], m='panel_light'); lining('y', -4.9, 12.0, 18.5, -1, skirt='clinical_floor', openings=[(14.4, 16.0, 0.0, 2.4)], m='panel_light')
+box(-10.35, 12.02, 0.1, -7.45, 12.05, 2.32, 'oak', collide=False); box(-10.35, 12.05, 2.32, -7.45, 12.062, 2.335, 'steel', collide=False)                       # the head wall: oak veneer, a services rail, a reading light
+box(-10.2, 12.05, 1.3, -7.6, 12.085, 1.47, 'steel', collide=False); box(-10.2, 12.085, 1.375, -7.6, 12.09, 1.395, 'metal_dark', collide=False)
+for i, mm in enumerate(('glow_green', 'steel', 'steel', 'glow_amber', 'steel')): box(-9.3 + i * 0.3, 12.085, 1.415, -9.2 + i * 0.3, 12.098, 1.455, mm if not mm.startswith('glow') else 'steel', collide=False); box(-9.27 + i * 0.3, 12.098, 1.426, -9.23 + i * 0.3, 12.103, 1.444, mm if mm.startswith('glow') else 'metal_dark', collide=False)
+box(-9.5, 12.05, 2.02, -8.3, 12.13, 2.07, 'steel', collide=False); box(-9.46, 12.06, 2.012, -8.34, 12.12, 2.02, 'light_warm', collide=False)
+box(-5.66, 12.06, 0.0, -4.96, 13.7, 0.9, 'panel_light'); box(-5.68, 12.04, 0.9, -4.94, 13.72, 0.93, 'steel', collide=False); box(-5.6, 12.1, 0.0, -5.0, 13.66, 0.08, 'metal_dark', collide=False)                # supply counter with drawers
+for i in range(3):
+    for j in range(2): box(-5.668, 12.1 + i * 0.53, 0.13 + j * 0.38, -5.66, 12.6 + i * 0.53, 0.47 + j * 0.38, 'panel_light', collide=False); box(-5.684, 12.25 + i * 0.53, 0.4 + j * 0.38, -5.668, 12.45 + i * 0.53, 0.415 + j * 0.38, 'steel', collide=False)
+box(-5.5, 12.03, 1.45, -4.93, 13.7, 2.2, 'panel_light', collide=False); box(-5.508, 12.06, 1.47, -5.5, 13.67, 2.18, 'screen', collide=False)                              # wall cupboard over it, dark glass doors
+box(-10.2, 18.44, 1.0, -7.6, 18.476, 2.3, 'screen', collide=False); box(-10.28, 18.45, 0.92, -7.52, 18.48, 2.38, 'panel_dark', collide=False)       # wall display
+SIGNS.append({'text': 'DISPLAY', 'at': [-8.9, 18.439, 1.65], 'face': 'S', 'w': 2.56, 'h': 1.26, 'style': 'display'})
+STATIONS['regional'] = {'at': [-7.3, 15.3], 'look': [-8.9, 13.4, 1.0], 'label': 'Regional practice room', 'table': [-8.9, 13.42]}
+for (cx, cy) in ((-8.9, 13.5), (-6.4, 13.2), (-10.6, 16.6), (-6.4, 17.0), (-8.6, 16.6)): box(cx - 0.6, cy - 0.3, 2.97, cx + 0.6, cy + 0.3, 3.0, 'light_panel', collide=False)
+box(-4.94, 12.72, 0.04, -4.985, 14.36, 2.38, 'steel', collide=False); box(-4.99, 12.9, 1.0, -4.935, 14.18, 2.2, 'panel_dark', collide=False); box(-4.94, 12.6, 2.4, -5.04, 16.1, 2.56, 'panel_dark', collide=False)    # the door slides open along the wall on a top track
+box(-5.045, 14.25, 2.47, -5.04, 14.29, 2.49, 'glow_green', collide=False)
+# --- OPERATING ROOM: x 4.9..12, y 11.5..19.6, 3 m. Panelled walls, a laminar-flow ceiling over the table, a dark sheet floor, a cool light cove.
+ROOMS['or'] = [4.9, 11.5, 12.0, 19.6, 3.0, 'vinyl', 0.6]
+box(4.9, 11.1, -0.3, 12.4, 20.0, 0.0, 'or_floor', collide=False, omit='b'); box(4.9, 11.1, 3.0, 12.4, 20.0, 3.4, 'or_ceiling', collide=False, omit='t')
 wall_x(11.1, 4.9, 12.4, 3.0, 'plaster'); wall_x(19.6, 4.9, 12.4, 3.0, 'plaster'); wall_y(12.0, 11.1, 20.0, 3.0, 'plaster')
-box(4.9, 11.5, 0.0, 4.92, 13.2, 3.0, 'plaster', collide=False); box(4.9, 14.9, 0.0, 4.92, 15.8, 3.0, 'plaster', collide=False); box(4.9, 19.2, 0.0, 4.92, 19.6, 3.0, 'plaster', collide=False); box(4.9, 13.2, 2.4, 4.92, 14.9, 3.0, 'plaster', collide=False)
-box(4.9, 15.8, 0.0, 4.92, 19.2, 0.95, 'plaster', collide=False); box(4.9, 15.8, 2.3, 4.92, 19.2, 3.0, 'plaster', collide=False)
-box(7.3, 14.3, 2.94, 9.9, 16.9, 3.0, 'light_panel', collide=False); box(7.2, 14.2, 2.9, 10.0, 14.3, 3.0, 'steel', collide=False); box(7.2, 16.9, 2.9, 10.0, 17.0, 3.0, 'steel', collide=False); box(7.2, 14.3, 2.9, 7.3, 16.9, 3.0, 'steel', collide=False); box(9.9, 14.3, 2.9, 10.0, 16.9, 3.0, 'steel', collide=False)
-for (cx, cy) in ((6.2, 12.6), (11.0, 12.6), (6.2, 18.4), (11.0, 18.4)): box(cx - 0.6, cy - 0.3, 2.97, cx + 0.6, cy + 0.3, 3.0, 'light_panel', collide=False)
-for (d0, sgn, ang) in ((13.2, 1, -1.3), (14.9, -1, 1.3)): box(4.9, min(d0, d0 + sgn * 0.84), 0.02, 4.95, max(d0, d0 + sgn * 0.84), 2.36, 'steel', collide=False, rot=ang, about=(4.9, d0, 0))
-for (a, b_) in ((11.5, 11.512), (19.588, 19.6)): box(4.92, a, 0, 12.0, b_, 0.1, 'steel', collide=False); box(4.92, a, 0.86, 12.0, b_, 0.98, 'rubber', collide=False)
-box(11.988, 11.5, 0.86, 12.0, 19.6, 0.98, 'rubber', collide=False)
-for (a, b_) in ((11.5, 13.2), (14.9, 15.8), (19.2, 19.6)): box(4.92, a, 0.86, 4.932, b_, 0.98, 'rubber', collide=False)
-STATIONS['or'] = {'at': [6.3, 14.05], 'look': [8.6, 15.6, 1.0], 'label': 'Operating room', 'table': [8.6, 15.6], 'work': [8.6, 17.55]}
+lining('x', 11.5, 4.9, 12.0, 1); lining('x', 19.6, 4.9, 12.0, -1, m='panel_deep'); lining('y', 12.0, 11.5, 19.6, -1); lining('y', 4.9, 11.5, 19.6, 1, openings=[(13.2, 14.9, 0.0, 2.4), (15.8, 19.2, 0.95, 2.3)])
+OC = (8.6, 15.6)                                                                                     # the table's centre, and the canopy's
+box(OC[0] - 1.62, OC[1] - 1.62, 2.9, OC[0] + 1.62, OC[1] + 1.62, 3.0, 'steel', collide=False, omit='t'); box(OC[0] - 1.56, OC[1] - 1.56, 2.893, OC[0] + 1.56, OC[1] + 1.56, 2.9, 'glow_white', collide=False, omit='t')        # the canopy: a ring of light round a field of diffusers
+box(OC[0] - 1.42, OC[1] - 1.42, 2.885, OC[0] + 1.42, OC[1] + 1.42, 2.894, 'canopy', collide=False, omit='t')
+for i in range(1, 4):
+    u = -1.42 + i * 0.71; box(OC[0] + u - 0.012, OC[1] - 1.42, 2.88, OC[0] + u + 0.012, OC[1] + 1.42, 2.886, 'steel', collide=False, omit='t'); box(OC[0] - 1.42, OC[1] + u - 0.012, 2.88, OC[0] + 1.42, OC[1] + u + 0.012, 2.886, 'steel', collide=False, omit='t')
+for (cx, cy) in ((6.0, 12.5), (11.0, 12.5), (6.0, 18.7), (11.0, 18.7), (6.0, 15.6), (11.2, 15.6)): box(cx - 0.3, cy - 0.3, 2.985, cx + 0.3, cy + 0.3, 3.0, 'light_panel', collide=False, omit='t')
+box(5.2, 19.3, 2.975, 11.7, 19.36, 3.0, 'glow_teal', collide=False, omit='t'); box(11.7, 11.8, 2.975, 11.76, 19.36, 3.0, 'glow_teal', collide=False, omit='t'); box(5.2, 11.74, 2.975, 11.7, 11.8, 3.0, 'glow_teal', collide=False, omit='t')      # a cool cove of light at the head of three walls
+box(7.3, 19.545, 0.98, 9.9, 19.58, 2.36, 'panel_dark', collide=False); box(7.42, 19.53, 1.06, 9.78, 19.546, 2.28, 'screen', collide=False)                # the room display, set into the north wall
+SIGNS.append({'text': 'ORWALL', 'at': [8.6, 19.529, 1.67], 'face': 'S', 'w': 2.32, 'h': 1.18, 'style': 'orwall'})
+box(4.94, 11.62, 0.04, 4.985, 13.16, 2.38, 'steel', collide=False); box(4.935, 11.8, 1.0, 4.99, 12.98, 2.2, 'panel_dark', collide=False); box(4.94, 11.56, 2.4, 5.04, 14.96, 2.56, 'panel_dark', collide=False)      # the door slides open along the wall on a top track
+box(5.04, 14.0, 2.47, 5.045, 14.04, 2.49, 'glow_green', collide=False)
+for (a_, b_) in ((15.8, 15.86), (19.14, 19.2)): box(4.9, a_, 0.95, 4.945, b_, 2.3, 'steel', collide=False)
+box(4.9, 15.8, 0.91, 4.96, 19.2, 0.95, 'steel', collide=False); box(4.9, 15.8, 2.3, 4.945, 19.2, 2.34, 'steel', collide=False)
+STATIONS['or'] = {'at': [6.3, 14.05], 'look': [8.6, 15.6, 1.0], 'label': 'Operating room', 'table': [8.6, 15.6], 'work': [8.6, 17.62]}
 # --- STUDY STUDIO: x 4.9..10.4, y 2.8..8.6, 2.9 m, timber floor, a window east
 ROOMS['studio'] = [4.9, 2.8, 10.4, 8.6, 2.9, 'timber', 0.95]
 box(4.9, 2.4, -0.3, 10.8, 9.0, 0.0, 'oak_floor', collide=False, omit='b'); box(4.9, 2.4, 2.9, 10.8, 9.0, 3.3, 'plaster', collide=False, omit='t')
@@ -331,6 +367,12 @@ for (name, x, y, z, rz, sc) in PROPS:
         if o.parent is None: o.parent = root
     root.location = (x, y, z); root.rotation_euler = (0, 0, rz); root.scale = (sc, sc, sc); prop_objs += new + [root]
 
+# ------------------------------------------------------------------ clinical equipment (tools/clinical_set.py): shades the bake, collides, and is exported on its own
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import clinical_set
+CLIN = os.path.join(os.path.dirname(os.path.abspath(SRC.rstrip('/'))), 'objaverse'); eq_pieces, eq_lamps = clinical_set.build(CLIN); COLLIDERS += clinical_set.colliders(eq_pieces)
+print('CLINICAL pieces', len(eq_pieces), 'tris', sum(clinical_set.tris(eq_pieces).values()))
+
 # ------------------------------------------------------------------ sky and sun: find the sun in the sky image, and turn the image so both agree
 hdr = bpy.data.images.load(os.path.join(SRC, 'hdri', 'kloofendal_48d_partly_cloudy_puresky_1k.hdr')); W, H = hdr.size
 sky = np.array(hdr.pixels[:], dtype=np.float32).reshape(H, W, 4); lum = sky[:, :, :3] @ np.array([0.2126, 0.7152, 0.0722], np.float32)
@@ -360,9 +402,13 @@ sun = lamp('SUN', (0, 0, 30), SUN, (1.0, 0.955, 0.89)); sun.rotation_euler = (-S
 WARM, COOL = (1.0, 0.86, 0.7), (0.93, 0.97, 1.0)
 lamp('SPOT', (0.0, 27.1, 4.0), 1000, WARM, (0.0, 28.6, 1.4), 0.1, 44, dyn=True); lamp('SPOT', (-1.0, 27.3, 4.0), 260, COOL, (-0.3, 28.7, 1.5), 0.1, 46, dyn=True); lamp('SPOT', (1.0, 27.3, 4.0), 300, WARM, (0.0, 30.1, 1.9), 0.3, 70)
 lamp('SPOT', (-3.3, 24.9, 4.0), 620, WARM, (-3.3, 26.0, 1.45), 0.1, 40, dyn=True); lamp('SPOT', (-2.9, 28.4, 4.0), 300, WARM, (-2.9, 29.55, 0.92), 0.1, 46); lamp('SPOT', (3.9, 27.4, 4.0), 200, COOL, (4.9, 28.5, 1.5), 0.1, 50)
-for (cx, cy) in ((-8.6, 15.2), (-6.4, 13.2), (-10.4, 13.2), (-6.4, 17.2), (-10.4, 17.2)): lamp('AREA', (cx, cy, 2.95), 26, COOL, (cx, cy, 0), 0.6)
-lamp('AREA', (8.6, 15.6, 2.92), 120, COOL, (8.6, 15.6, 0), 2.4)
-for (cx, cy) in ((6.2, 12.6), (11.0, 12.6), (6.2, 18.4), (11.0, 18.4)): lamp('AREA', (cx, cy, 2.95), 22, COOL, (cx, cy, 0), 0.6)
+TEAL = (0.35, 0.86, 0.95)
+for (cx, cy) in ((-8.9, 13.5), (-6.4, 13.2), (-10.6, 16.6), (-6.4, 17.0), (-8.6, 16.6)): lamp('AREA', (cx, cy, 2.95), 24, COOL, (cx, cy, 0), 0.6)
+lamp('AREA', (-8.9, 12.2, 1.98), 9, WARM, (-8.9, 12.6, 0.9), 0.5)
+lamp('AREA', (OC[0], OC[1], 2.86), 30, COOL, (OC[0], OC[1], 0), 2.7)
+for (cx, cy) in ((6.0, 12.5), (11.0, 12.5), (6.0, 18.7), (11.0, 18.7), (6.0, 15.6), (11.2, 15.6)): lamp('AREA', (cx, cy, 2.96), 6, COOL, (cx, cy, 0), 0.5)
+for (cx, cy, tx, ty) in ((7.0, 19.3, 7.0, 19.6), (10.2, 19.3, 10.2, 19.6), (11.7, 13.6, 12.0, 13.6), (11.7, 17.6, 12.0, 17.6), (7.0, 11.8, 7.0, 11.5), (10.2, 11.8, 10.2, 11.5)): lamp('AREA', (cx, cy, 2.95), 10, TEAL, (tx, ty, 1.2), 1.0)
+for l in eq_lamps: lamp(l['kind'], l['at'], l['power'], l['color'], l['to'], l['size'], l['spot'], l['blend'], dyn=l['dyn'])
 lamp('AREA', (7.0, 5.7, 2.85), 110, WARM, (7.0, 5.7, 0), 0.6); lamp('SPOT', (7.6, 6.9, 2.8), 170, WARM, (7.6, 8.3, 1.4), 0.2, 75); lamp('SPOT', (6.6, 4.4, 2.8), 90, WARM, (6.6, 2.85, 1.6), 0.2, 70)
 lamp('AREA', (0, -2.5, 2.75), 50, WARM, (0, -2.5, 0), 1.0)
 
@@ -370,11 +416,13 @@ scene.cycles.samples = 512 if FINAL else 64; scene.cycles.use_denoising = True; 
 # ------------------------------------------------------------------ preview renders (the whole light, sun included), to judge composition before a long bake
 if PREVIEW:
     views = {'forecourt': ((1.2, -13.4, 1.62), (-0.4, 0, 2.3), 24), 'arrival': ((0, -3.6, 1.62), (0, 12, 2.0), 22), 'court': ((2.4, 2.2, 1.62), (-1.2, 19, 2.6), 20), 'focal': ((-2.7, 4.4, 1.62), (0.2, 9.9, 1.5), 28),
-             'gallery': ((0.5, 23.3, 1.62), (-0.4, 28.6, 1.3), 22), 'studio': ((5.6, 3.6, 1.6), (9.2, 8.2, 1.2), 20), 'regional': ((-5.6, 17.6, 1.6), (-9.4, 14.2, 1.0), 20), 'or': ((5.7, 12.0, 1.6), (9.6, 17.0, 1.1), 20)}
+             'gallery': ((0.5, 23.3, 1.62), (-0.4, 28.6, 1.3), 22), 'studio': ((5.6, 3.6, 1.6), (9.2, 8.2, 1.2), 20), 'regional': ((-5.7, 17.5, 1.6), (-9.2, 13.4, 1.0), 20), 'bay': ((-7.6, 15.6, 1.6), (-9.3, 13.0, 1.05), 26), 'or': ((5.75, 13.75, 1.62), (9.0, 16.3, 1.05), 19), 'orwork': ((8.55, 18.3, 1.6), (8.75, 15.2, 0.95), 20), 'oranes': ((9.6, 18.75, 1.55), (7.6, 17.3, 1.05), 26), 'oreast': ((11.2, 13.4, 1.62), (7.6, 16.9, 1.1), 19)}
     for k, (loc, tgt, lens) in views.items():
+        if ONLY and k not in ONLY: continue
         cam = bpy.data.cameras.new(k); cam.lens = lens; co = bpy.data.objects.new(k, cam); scene.collection.objects.link(co); co.location = loc; co.rotation_euler = (Vector(tgt) - Vector(loc)).to_track_quat('-Z', 'Y').to_euler(); scene.camera = co
         scene.render.resolution_x, scene.render.resolution_y = 960, 540; scene.cycles.samples = 96; scene.render.filepath = PREVIEW.replace('.png', f'_{k}.png'); bpy.ops.render.render(write_still=True); print('PREVIEW', k)
     scene.cycles.samples = 512 if FINAL else 64
+    if STOP: sys.exit(0)
 
 # ------------------------------------------------------------------ bake 1: the lightmap. Everything except the sun's direct light.
 sun.visible_camera = False                                           # no first-hit sunlight; its bounces still count
@@ -406,7 +454,7 @@ for k, (x0, y0, x1, y1, h, floor, expo) in ROOMS.items():
 for k, s in STATIONS.items():
     if 'mount' in s: PTS.append(('@' + k, s['mount'][0], s['mount'][1], s['mount'][2] + 0.38))
     for sh in s.get('shelf', []): PTS.append(('@' + k, sh[0], sh[1], sh[2] + 0.12))
-PTS += [('@or_table', 8.6, 15.6, 1.05), ('@regional_table', -8.6, 15.2, 1.05), ('@atrium_hi', 0.0, 9.7, 1.9), ('@desk', 8.6, 4.45, 0.95)]
+PTS += [('@or_table', 8.6, 15.6, 1.05), ('@regional_table', -8.9, 13.4, 1.05), ('@atrium_hi', 0.0, 9.7, 1.9), ('@desk', 8.6, 4.45, 0.95)]
 pb = bmesh.new()
 for (k, x, y, z) in PTS: bmesh.ops.create_icosphere(pb, subdivisions=3, radius=0.03, matrix=Matrix.Translation((x, y, z)))
 for f in pb.faces: f.smooth = True
@@ -438,6 +486,11 @@ bpy.ops.export_scene.gltf(filepath=os.path.join(OUT, 'institute.glb'), export_fo
 bpy.ops.object.select_all(action='DESELECT')
 for o in prop_objs: o.select_set(True)
 if prop_objs: bpy.ops.export_scene.gltf(filepath=os.path.join(OUT, 'institute-props.glb'), export_format='GLB', use_selection=True, export_apply=False, export_yup=True, export_materials='EXPORT', export_image_format='JPEG', export_jpeg_quality=85)
+bpy.ops.object.select_all(action='DESELECT')
+for r in eq_pieces:
+    r.select_set(True)
+    for c in r.children_recursive: c.select_set(True)
+bpy.ops.export_scene.gltf(filepath=os.path.join(OUT, 'institute-clinical.glb'), export_format='GLB', use_selection=True, export_apply=False, export_yup=True, export_materials='EXPORT', export_image_format='AUTO', export_extras=True)
 def T3(p): return [round(p[0], 3), round(p[2], 3) if len(p) > 2 else 0, round(-p[1], 3)]      # Blender (x, y, z) -> three.js (x, z, -y)
 def st(v):
     o = {**v, 'at': [v['at'][0], -v['at'][1]], 'look': T3(v['look'])}

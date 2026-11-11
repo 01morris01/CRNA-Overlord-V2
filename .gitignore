@@ -9,7 +9,11 @@
 node_modules/
 assets/level/_tex/
 assets/level/institute-props.glb
+assets/level/institute-clinical.glb
+assets/level/_props.log
 assets/level/lightmap.npy
 # licensed or unverified local-only assets (never commit): the Asset Store OR pack, the Mirror experiment
 assets/local/
 world/local/
+assets/level/_lightmap_preview.png
+__pycache__/
