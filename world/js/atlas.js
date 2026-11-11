@@ -61,7 +61,7 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
     // a point ON the structure near its middle, so labels and camera moves land on it and not in empty space
     const c = m.geometry.boundingBox.getCenter(new THREE.Vector3()); let anchor = samples[0], best = 1e9;
     for (const s of samples) { const d = s.distanceToSquared(c); if (d < best) { best = d; anchor = s; } }
-    parts.set(id, { id, mesh: m, layer, selectable: m.userData.selectable !== false && m.userData.selectable !== 0, anchor: anchor.clone(), centre: c, samples, shown: true, alpha: 1, glow: 0, base: m.material.color.clone() });
+    parts.set(id, { id, origin: m.userData.origin || 'source', what: m.userData.what || '', mesh: m, layer, selectable: m.userData.selectable !== false && m.userData.selectable !== 0, anchor: anchor.clone(), centre: c, samples, shown: true, alpha: 1, glow: 0, base: m.material.color.clone() });
   });
   const centroid = (ids) => { const v = new THREE.Vector3(); let k = 0; for (const id of ids) { const p = parts.get(id); if (p) { v.add(p.centre); k++; } } return v.multiplyScalar(1 / Math.max(1, k)); };
   const G = centroid(['superior_trunk_of_brachial_plexus_r', 'middle_trunk_of_brachial_plexus_r', 'inferior_trunk_of_brachial_plexus_r']);
@@ -69,12 +69,14 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
   const ARM = HUM.clone().lerp(G, 0.25);
   floor.position.set(ALL.x, new THREE.Box3().setFromObject(root).min.y - 0.02, ALL.z);
   key.position.set(G.x - 0.9, G.y + 1.5, G.z + 1.6); key.target.position.copy(ARM); rim.position.set(G.x + 1.2, G.y + 0.5, G.z - 1.6);
+  const CORDS = centroid(['lateral_cord_of_brachial_plexus_r', 'medial_cord_of_brachial_plexus_r', 'posterior_cord_of_brachial_plexus_r']), DIVS = centroid(['anterior_division_of_middle_trunk_of_brachial_plexus_r', 'posterior_division_of_middle_trunk_of_brachial_plexus_r']);
+  const AX = (() => { const p = parts.get('median_nerve_r'); let top = p.samples[0]; for (const s of p.samples) if (s.y > top.y) top = s; return top.clone(); })();
   const VIEWS = {   // [target, offset from target]. Patient's right arm is at -X, anterior is +Z.
     whole: [ALL, [-0.62, 0.1, 1.9]], anterolateral: [G, [-0.2, 0.07, 0.4]], groove: [G, [-0.13, 0.05, 0.2]], cords: [PC.clone().lerp(G, 0.3), [-0.17, 0.03, 0.24]],
-    arm: [ARM, [-0.62, 0.02, 1.02]], anterior: [G, [0, 0.02, 0.5]], lateral: [G, [-0.5, 0.04, 0.05]], posterior: [G, [-0.12, 0.1, -0.5]], superior: [G, [-0.05, 0.5, 0.12]],
+    arm: [ARM, [-0.62, 0.02, 1.02]], supraclav: [DIVS, [-0.2, 0.26, 0.2]], infraclav: [CORDS, [-0.08, -0.02, 0.36]], axilla: [AX, [-0.16, -0.12, 0.4]], anterior: [G, [0, 0.02, 0.5]], lateral: [G, [-0.5, 0.04, 0.05]], posterior: [G, [-0.12, 0.1, -0.5]], superior: [G, [-0.05, 0.5, 0.12]],
   };
   let fly = null;
-  function view(name, seconds = 1.1) { const [t, o] = VIEWS[name] || VIEWS.whole; flyTo(new THREE.Vector3(t.x + o[0], t.y + o[1], t.z + o[2]), t.clone(), seconds); }
+  function view(name, seconds = 1.1, jitter = 0) { const [t, o] = VIEWS[name] || VIEWS.whole; const off = new THREE.Vector3(o[0], o[1], o[2]); if (jitter) off.applyAxisAngle(new THREE.Vector3(0, 1, 0), (Math.random() * 2 - 1) * jitter).multiplyScalar(1 + (Math.random() * 2 - 1) * 0.12); flyTo(t.clone().add(off), t.clone(), seconds); }
   function flyTo(pos, target, seconds = 0.9) { if (seconds <= 0) { camera.position.copy(pos); controls.target.copy(target); controls.update(); return; } fly = { p0: camera.position.clone(), t0: controls.target.clone(), p1: pos, t1: target, t: 0, dur: seconds }; }
   function focus(id, seconds = 0.9) { const p = parts.get(id); if (!p) return; const dir = camera.position.clone().sub(controls.target).normalize(); const r = Math.max(0.16, p.mesh.geometry.boundingBox.getSize(new THREE.Vector3()).length() * 0.9); flyTo(p.anchor.clone().addScaledVector(dir, Math.min(r, 0.7)), p.anchor.clone(), seconds); }
 
@@ -87,8 +89,19 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
     if (layerGhost[p.layer] && !glowing.has(p.id) && selected !== p.id) return 0.1;
     return 1;
   }
+  const markers = new Map(), markerGroup = new THREE.Group(); scene.add(markerGroup);
+  function setMarkers(list) {   // [{ id, at: Vector3 }]
+    markerGroup.clear(); markers.clear();
+    for (const m of list || []) { const g = new THREE.Group(); g.position.copy(m.at);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.021, 0.0024, 12, 48), new THREE.MeshBasicMaterial({ color: 0xff5a3c, toneMapped: false, depthTest: false, transparent: true })); ring.renderOrder = 9;
+      const core = new THREE.Mesh(new THREE.SphereGeometry(0.0045, 16, 12), new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false, depthTest: false, transparent: true })); core.renderOrder = 10;
+      const hit = new THREE.Mesh(new THREE.SphereGeometry(0.026, 12, 8), new THREE.MeshBasicMaterial({ visible: false })); hit.userData.marker = m.id; g.add(ring, core, hit); markerGroup.add(g); markers.set(m.id, { g, ring, hit, chosen: false }); }
+  }
   const api = {
-    renderer, scene, camera, controls, parts, view, focus, setRoom,
+    renderer, scene, camera, controls, parts, view, focus, setRoom, setMarkers, markers,
+    centreOf: (ids) => centroid(ids), topOf: (ids) => { let top = null; for (const id of ids) for (const s of parts.get(id)?.samples || []) if (!top || s.y > top.y) top = s; return top.clone(); },
+    chooseMarker(id) { for (const [k, m] of markers) m.chosen = k === id; }, markerScreen(id) { const m = markers.get(id); if (!m) return null; const v = m.g.position.clone().project(camera), r = renderer.domElement.getBoundingClientRect(); return { x: r.left + (v.x + 1) / 2 * r.width, y: r.top + (1 - v.y) / 2 * r.height }; },
+    flyTo,
     setLayer(layer, on) { layerOn[layer] = on; }, layerIsOn: (l) => layerOn[l],
     ghost(layers) { for (const k of Object.keys(layerOn)) layerGhost[k] = layers.includes(k); },
     hide(id) { hidden.add(id); if (selected === id) selected = null; }, show(id) { hidden.delete(id); }, isHidden: (id) => hidden.has(id), hiddenList: () => [...hidden],
@@ -101,6 +114,7 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
     pick(ev) {
       const r = renderer.domElement.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top;
       const ray = new THREE.Raycaster(); ray.setFromCamera(new THREE.Vector2((x / r.width) * 2 - 1, -(y / r.height) * 2 + 1), camera);
+      if (markers.size) { const mh = ray.intersectObjects([...markers.values()].map((m) => m.hit), false)[0]; if (mh) return 'marker:' + mh.object.userData.marker; }
       const live = [...parts.values()].filter((p) => p.selectable && p.alpha > 0.5);
       const hit = ray.intersectObjects(live.map((p) => p.mesh), false)[0];
       let best = null, bestD = (touch ? 22 : 11) ** 2; const v = new THREE.Vector3(), hitDist = hit ? hit.distance : Infinity;
@@ -126,6 +140,7 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
       const g = glowing.has(p.id) ? 0.55 + 0.25 * Math.sin(pulse * 3.2) : 0; p.glow += (g - p.glow) * Math.min(1, dt * 8);
       if (selected === p.id) m.emissive.copy(PICK).multiplyScalar(0.3); else if (p.glow > 0.01) m.emissive.copy(WARM).multiplyScalar(p.glow * 0.7); else if (hovered === p.id) m.emissive.copy(PICK).multiplyScalar(0.12); else m.emissive.setScalar(0);
     }
+    for (const m of markers.values()) { m.g.quaternion.copy(camera.quaternion); const k = m.chosen ? 1.5 + 0.12 * Math.sin(pulse * 5) : 1 + 0.06 * Math.sin(pulse * 2.4); m.g.scale.setScalar(k * Math.max(0.35, camera.position.distanceTo(m.g.position) / 1.5)); /* about the same size on screen at any zoom */ m.ring.material.color.set(m.chosen ? 0xffffff : 0xff5a3c); }
     api.onFrame && api.onFrame(dt); renderer.render(scene, camera); requestAnimationFrame(loop);
   }
   setRoom('studio'); view('whole', 0);
