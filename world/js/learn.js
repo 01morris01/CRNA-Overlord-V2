@@ -1,11 +1,14 @@
-// learn.js: everything that happens inside Anatomy Hall.
-//   The brachial plexus:   lesson (6 steps)  ·  challenge (find and work-it-out items, no labels)  ·  explore
+// learn.js: everything that happens at the gallery's plexus exhibit.
+//   The brachial plexus:   film (76 s, captions, scrubbing, one prediction)  ·  hands-on (6 steps)  ·
+//                          challenge (name it or work it out: no labels, a new view each time)  ·  explore
 //   Four ways in:          narrated explanation  ·  explore the four levels  ·  identify  ·  case  ·  questions
 //   Review:                whatever is due, from both, first
+// Three modes are kept apart: free exploration (never recorded), guided learning (never scored), assessment (recorded).
+// An answer given after a hint, or on a second try after feedback, is recorded as assisted and never counted as recall.
 // Scoring is plain rules on the id of what was clicked or chosen. No AI decides anything here.
-import { STRUCTURES, SOURCES, LAYERS, LESSON, CHALLENGE, CHALLENGE_LENGTH, VIEWS_FOR_CHALLENGE, MODEL_NOTE, CHECK_STATUS, STIM, OUTLINE } from '../data/plexus.js';
+import { STRUCTURES, SOURCES, LAYERS, LESSON, FILM, CHALLENGE, CHALLENGE_LENGTH, VIEWS_FOR_CHALLENGE, MODEL_NOTE, CHECK_STATUS, STIM, OUTLINE } from '../data/plexus.js';
 import { LEVELS, LEVEL_ORDER, NARRATION, IDENTIFY, IDENTIFY_LENGTH, CASES, QUESTIONS, QUESTIONS_LENGTH, DISCLAIMER } from '../data/regional.js';
-import { recordAttempt, dueNow, save } from './save.js';
+import { recordAttempt, dueNow, save, grant, has } from './save.js';
 import { sfx } from './audio.js';
 
 const TOUCH = matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -18,26 +21,25 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
   const { panel, bar, tip, labels, head } = els, cv = atlas.renderer.domElement;
   const S = { mode: 'menu', names: true, peel: false, voice: true };
   const persist = () => save(state), nameOf = (id) => atlas.nameOf(id), lc = (id) => nameOf(id).replace(/^(C\d|T\d)/, (m) => m).replace(/^([A-Z])(?![0-9])/, (m) => m.toLowerCase());
-  const P = (state.game.progress ||= {}), rewards = state.game.rewards;
+  const P = (state.game.progress ||= {}), rewards = state.game.rewards, api = { where: 'gallery' }, mmss = (t) => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 
   // ---------- labels beside structures, nudged apart ----------
   function setLabels(ids = [], extra = {}) { labels.innerHTML = ids.map((id) => `<span data-id="${id}">${extra[id] || nameOf(id)}</span>`).join(''); }
-  atlas.onFrame = () => { const live = [];
+  atlas.onFrame = (dt) => { filmTick(dt); const live = [];
     for (const el of labels.children) { const id = el.dataset.id, p = id.startsWith('marker:') ? atlas.markerScreen(id.slice(7)) : atlas.screenOf(id); const on = p && !p.behind && (p.alpha ?? 1) > 0.5; el.style.opacity = on ? 1 : 0; if (on) live.push({ el, x: p.x, y: p.y }); }
     live.sort((a, b) => a.y - b.y); for (let i = 1; i < live.length; i++) if (live[i].y - live[i - 1].y < 27 && Math.abs(live[i].x - live[i - 1].x) < 170) live[i].y = live[i - 1].y + 27;
     for (const l of live) l.el.style.transform = `translate(${l.x}px, ${l.y}px) translate(16px, -50%)`; };
 
   // ---------- the bar ----------
-  let room = 'studio';
+  let room = 'dark';
   function drawBar() {
     bar.innerHTML = `<div class="grp">${LAYERS.map(([k, n]) => `<button class="chip ${atlas.layerIsOn(k) ? 'on' : ''}" data-layer="${k}"><i class="dot ${k}"></i>${n}</button>`).join('')}</div>
       <div class="grp">${[['whole', 'Whole'], ['anterolateral', 'Front'], ['lateral', 'Side'], ['posterior', 'Back'], ['superior', 'Above']].map(([k, n]) => `<button class="chip" data-view="${k}">${n}</button>`).join('')}</div>
-      <div class="grp"><button class="chip ${S.peel ? 'on warm' : ''}" data-act="peel" title="When on, selecting a structure removes it">Peel</button><button class="chip" data-act="restore">Restore all</button><button class="chip" data-act="room">${room === 'studio' ? 'Dark room' : 'Studio'}</button></div>`;
+      <div class="grp"><button class="chip ${S.peel ? 'on warm' : ''}" data-act="peel" title="When on, selecting a structure removes it">Peel</button><button class="chip" data-act="restore">Restore all</button></div>`;
     bar.querySelectorAll('[data-layer]').forEach((b) => b.onclick = () => { atlas.setLayer(b.dataset.layer, !atlas.layerIsOn(b.dataset.layer)); sfx('tap'); drawBar(); });
     bar.querySelectorAll('[data-view]').forEach((b) => b.onclick = () => atlas.view(b.dataset.view));
     bar.querySelector('[data-act=peel]').onclick = () => { S.peel = !S.peel; drawBar(); };
     bar.querySelector('[data-act=restore]').onclick = () => { atlas.showAll(); if (S.mode === 'lesson') applyStep(false); drawBar(); };
-    bar.querySelector('[data-act=room]').onclick = () => { room = room === 'studio' ? 'dark' : 'studio'; atlas.setRoom(room); document.body.dataset.room = room; drawBar(); };
   }
 
   // ---------- pointer ----------
@@ -54,6 +56,7 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     if (S.peel && id && !/^r-(case|questions|intro)|questions/.test(S.mode)) { atlas.hide(id); sfx('take'); if (S.mode === 'lesson') lessonClick(id, true); return; }
     if (S.mode === 'explore' || S.mode === 'menu') { if (S.mode === 'menu' && id) go('explore'); atlas.select(id); S.picked = id; S.revealed = S.names; S.stim = null; if (id) sfx('tap'); draw(); }
     else if (S.mode === 'lesson') lessonClick(id, false);
+    else if (S.mode === 'film') { film.playing = false; draw(); }
     else if (S.mode === 'items' && S.phase !== 'feedback' && id) { S.picked = id; S.phase = 'sure'; atlas.select(id); sfx('tap'); draw(); }
   }
 
@@ -79,15 +82,17 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     return [...out.slice(0, first.length), ...shuffle(out.slice(first.length))].slice(0, n);
   }
   function startItems(items, run) { S.mode = 'items'; S.run = run; S.items = items; S.i = 0; S.results = []; presentItem(); document.body.dataset.learn = 'items'; drawBar(); draw(); }
-  function presentItem() {   // a different angle and a different dressing each time, and never a label or a highlight
-    S.phase = 'ask'; S.picked = null; S.peel = false; atlas.setMarkers([]); atlas.showAll(); atlas.glow([]); atlas.select(null); setLabels([]); atlas.ghost([]); atlas.isolate(null);
-    const dress = Math.random(); if (dress > 0.7) atlas.setLayer('vein', false); else if (dress > 0.45) atlas.setLayer('airway', false);
-    atlas.view(VIEWS_FOR_CHALLENGE[Math.floor(Math.random() * VIEWS_FOR_CHALLENGE.length)], 1.0, 0.5); drawBar();
+  function presentItem(retry = false) {   // a different angle and a different dressing each time, and never a label or a highlight
+    S.phase = 'ask'; S.picked = null; S.peel = false; S.hint = false; S.retry = retry; S.t0 = performance.now(); atlas.setMarkers([]); atlas.showAll(); atlas.glow([]); atlas.select(null); setLabels([]); atlas.ghost([]); atlas.isolate(null);
+    const mine = new Set(S.items[S.i].answer.map((id) => atlas.parts.get(id)?.layer));      // never dress away the layer the answer is in
+    const dresses = ['plain', 'noVein', 'noAirway'].filter((d) => d !== S.lastDress && !(d === 'noVein' && mine.has('vein')) && !(d === 'noAirway' && mine.has('airway'))); S.lastDress = dresses[Math.floor(Math.random() * dresses.length)]; if (S.lastDress === 'noVein') atlas.setLayer('vein', false); else if (S.lastDress === 'noAirway') atlas.setLayer('airway', false);
+    const views = VIEWS_FOR_CHALLENGE.filter((v) => v !== S.lastView); S.lastView = views[Math.floor(Math.random() * views.length)]; atlas.view(S.lastView, 1.0, 0.5); drawBar();
   }
   function answer(conf) {
-    const it = S.items[S.i], correct = it.answer.includes(S.picked);
-    recordAttempt(state, { objective: OBJ(it), outline: it.outline, item: it.ask, evidence: it.kind === 'find' ? 'identified' : it.kind === 'relation' ? 'related' : 'applied', correct, confidence: conf, picked: S.picked });
-    S.results.push({ it, correct, conf, picked: S.picked }); persist(); S.phase = 'feedback'; sfx(correct ? 'correct' : 'wrong');
+    const it = S.items[S.i], correct = it.answer.includes(S.picked), ms = Math.round(performance.now() - S.t0), assist = S.retry ? 'retry' : S.hint ? 'hint' : null;
+    recordAttempt(state, { objective: OBJ(it), outline: it.outline, item: it.ask, evidence: it.kind === 'find' ? 'identified' : it.kind === 'relation' ? 'related' : 'applied', correct, confidence: conf, picked: S.picked, assist, ms, where: S.run === 'review' ? 'review' : api.where, view: S.lastView });
+    if (S.retry) S.results[S.results.length - 1].retry = { correct, picked: S.picked }; else S.results.push({ it, correct, conf, picked: S.picked, assist, ms });
+    persist(); S.phase = 'feedback'; sfx(correct ? 'correct' : 'wrong');
     atlas.showAll(); atlas.ghost(['muscle']); atlas.glow(it.answer); atlas.select(correct ? null : S.picked); setLabels(correct ? [S.picked] : [it.answer[0], S.picked]); atlas.focus(correct ? S.picked : it.answer[0]); drawBar(); draw();
   }
   const mistake = (it, picked) => { const p = STRUCTURES[picked], a = STRUCTURES[it.answer[0]]; return `<p>You selected the <b>${lc(picked)}</b>.${p?.tell ? ' ' + p.tell : ''}</p><p><b>What you were looking for:</b> ${a?.tell || ''} ${it.why}</p>`; };
@@ -106,12 +111,15 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
   function pickLevel(k) { S.level = k; (S.visited ||= new Set()).add(k); const L = LEVELS[k]; atlas.showAll(); atlas.ghost(['muscle']); atlas.glow(L.show); atlas.chooseMarker(k); atlas.view(L.view, 1.1); sfx('tap'); draw(); }
   // ---------- regional: case ----------
   function startCase() { const due = new Set(dueNow(state).map((d) => d.item)); const order = [...CASES].sort((a, b) => (due.has(b.id) - due.has(a.id)) || ((P.casesSeen?.[a.id] || 0) - (P.casesSeen?.[b.id] || 0))); S.case = order[0]; (P.casesSeen ||= {})[S.case.id] = (P.casesSeen[S.case.id] || 0) + 1;
-    S.mode = 'r-case'; S.cphase = 'approach'; S.chosen = null; S.rsel = new Set(); S.reasonOrder = shuffle(S.case.reasons.map((_, i) => i)); S.typed = ''; atlas.showAll(); atlas.ghost([]); atlas.glow([]); setLabels([]); atlas.select(null); atlas.setMarkers(allMarkers()); atlas.chooseMarker(null); atlas.view('whole', 1.1, 0.35); document.body.dataset.learn = 'r-case'; drawBar(); draw(); }
+    S.mode = 'r-case'; S.cphase = 'approach'; S.t0 = performance.now(); S.chosen = null; S.rsel = new Set(); S.reasonOrder = shuffle(S.case.reasons.map((_, i) => i)); S.typed = ''; atlas.showAll(); atlas.ghost([]); atlas.glow([]); setLabels([]); atlas.select(null); atlas.setMarkers(allMarkers()); atlas.chooseMarker(null); atlas.view('whole', 1.1, 0.35); document.body.dataset.learn = 'r-case'; drawBar(); draw(); }
   function gradeCase() {
     const c = S.case, [g] = c.grade[S.chosen], okApproach = g !== 'no', picks = S.reasonOrder.map((i) => ({ i, sel: S.rsel.has(i), truth: c.reasons[i][1] })), reasonsRight = picks.every((p) => p.sel === p.truth);
-    recordAttempt(state, { objective: 'regional.case.' + c.id + '.approach', outline: c.outline, item: c.id, evidence: 'applied', correct: okApproach, confidence: 2, picked: S.chosen });
-    recordAttempt(state, { objective: 'regional.case.' + c.id + '.reasons', outline: c.outline, item: c.id + ':reasons', evidence: 'applied', correct: reasonsRight, confidence: 2, picked: [...S.rsel].join(',') });
-    S.caseResult = { okApproach, reasonsRight, g, picks }; persist(); sfx(okApproach && reasonsRight ? 'correct' : 'wrong');
+    recordAttempt(state, { objective: 'regional.case.' + c.id + '.approach', outline: c.outline, item: c.id, evidence: 'applied', correct: okApproach, confidence: 2, picked: S.chosen, where: api.where, ms: Math.round(performance.now() - (S.t0 || performance.now())) });
+    recordAttempt(state, { objective: 'regional.case.' + c.id + '.reasons', outline: c.outline, item: c.id + ':reasons', evidence: 'applied', correct: reasonsRight, confidence: 2, picked: [...S.rsel].join(','), where: api.where });
+    S.caseResult = { okApproach, reasonsRight, g, picks };
+    const arch = (state.game.cases[c.id] ||= { attempts: [] }); arch.attempts.push({ t: Date.now(), chosen: S.chosen, grade: g, reasons: picks.filter((p) => p.sel).map((p) => p.i), reasonsRight, typed: (S.typed || '').slice(0, 400), self: null }); if (arch.attempts.length > 12) arch.attempts.shift();
+    if (S.typed && grant(state, 'case:' + c.id, 'completed and explained the case')) S.newCase = c.id;
+    persist(); sfx(okApproach && reasonsRight ? 'correct' : 'wrong');
     const best = Object.keys(c.grade).find((k) => c.grade[k][0] === 'best'); atlas.ghost(['muscle']); atlas.glow(LEVELS[best].show); atlas.chooseMarker(best); setLabels(LEVEL_ORDER.map((k) => 'marker:' + k), Object.fromEntries(LEVEL_ORDER.map((k) => ['marker:' + k, LEVELS[k].name]))); atlas.view(LEVELS[best].view, 1.2);
   }
   // ---------- questions ----------
@@ -121,22 +129,49 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     if (q.type === 'match') correct = q.left.every((_, i) => +S.qmatch[i] === q.correct[i]); else { const sel = [...S.qsel].sort(), c = [...q.correct].sort(); correct = sel.length === c.length && sel.every((v, i) => v === c[i]); }
     recordAttempt(state, { objective: 'regional.q.' + q.stem.slice(0, 40), outline: q.outline, item: q.stem, evidence: 'recognised', correct, confidence: 2, picked: q.type === 'match' ? JSON.stringify(S.qmatch) : [...S.qsel].join(',') }); S.qres.push(correct); S.qdone = true; persist(); sfx(correct ? 'correct' : 'wrong'); draw(); }
 
-  // ---------- results and rewards ----------
+  // ---------- the film: a timed lesson you can scrub ----------
+  const film = { t: 0, playing: false, cue: -1, pred: {}, ui: null };
+  const cueAt = (t) => { let i = 0; for (let k = 0; k < FILM.cues.length; k++) if (t >= FILM.cues[k].t) i = k; return i; };
+  /** Put the model and camera in the state the film has at time t. With snap, nothing eases: the picture depends on t alone. */
+  function filmApply(t, snap = false) {
+    const i = cueAt(t), c = FILM.cues[i], from = FILM.cues[Math.max(0, i - 1)];
+    if (i !== film.cue || snap) { const changed = i !== film.cue; film.cue = i; atlas.showAll(); for (const id of c.hide || []) atlas.hide(id); atlas.ghost(c.ghost || []); atlas.glow(c.glow || []); setLabels(c.label || []); atlas.select(null); atlas.setMarkers([]); if (snap) atlas.settle(); if (changed) { if (film.playing) speak(c.say); draw(); } }
+    const k = Math.min(1, (t - c.t) / 2.4), e = k * k * (3 - 2 * k), a = atlas.pose(i ? from.view : c.view), bb = atlas.pose(c.view); atlas.setPose(a.pos.lerp(bb.pos, e), a.target.lerp(bb.target, e));
+  }
+  function filmTick(dt) {
+    if (S.mode !== 'film' || !film.playing) return; const i = cueAt(film.t), c = FILM.cues[i], end = i < FILM.cues.length - 1 ? FILM.cues[i + 1].t : FILM.seconds;
+    film.t = Math.min(FILM.seconds, film.t + dt);
+    if (c.predict && film.pred[i] === undefined && film.t >= end - 0.05) { film.t = end - 0.06; film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } draw(); return; }      // wait for the prediction
+    if (film.t >= FILM.seconds) { film.playing = false; if (!state.game.filmDone) { state.game.filmDone = true; persist(); } draw(); }
+    filmApply(film.t); if (film.ui) { film.ui.range.value = film.t; film.ui.time.textContent = mmss(film.t) + ' / ' + mmss(FILM.seconds); }
+  }
+  /** One exact frame of the lesson, for capture: window.renderAt(seconds, { width, height }). Touches no learner record. */
+  window.renderAt = (t, opts = {}) => { if (S.mode !== 'film') go('film'); film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } film.t = Math.max(0, Math.min(FILM.seconds, +t || 0)); filmApply(film.t, true); atlas.renderOnce(opts); const c = FILM.cues[film.cue]; return { t: film.t, cue: film.cue, caption: c.say, sources: cite(c.src) }; };
+  window.renderAt.duration = FILM.seconds; window.renderAt.cues = FILM.cues.map((c) => c.t);
+
+  // ---------- results, and what they add to the collection ----------
   function finishRun() {
-    const R = S.results || [], right = R.filter((r) => r.correct).length, total = R.length, g = state.game, earned = { blocks: 0, items: [] }; let pass = false;
-    if (S.run === 'plexus' || S.run === 'review') { pass = total > 0 && right >= Math.ceil(total * 0.75); earned.blocks = right * 2; g.inventory.plank += right * 2;
-      if (S.run === 'plexus' && pass && !rewards.includes('nerve-stimulator')) { rewards.push('nerve-stimulator'); earned.items.push('A nerve stimulator. Clipped to your scrubs, on your workshop bench, and usable in Explore: select a cord and stimulate it'); }
-      if (S.run === 'plexus' && pass && !rewards.includes('plexus-model')) { rewards.push('plexus-model'); g.inventory.plexus = (g.inventory.plexus || 0) + 1; earned.items.push('A plexus sculpture for your plot'); } }
-    if (S.run === 'regional') { const c = S.caseResult || {}, q = S.qres.filter(Boolean).length; pass = right >= Math.ceil(total * 0.75) && c.okApproach; earned.blocks = right * 2 + q * 2 + (c.okApproach ? 4 : 0); g.inventory.coral = (g.inventory.coral || 0) + earned.blocks; P.regionalDone = (P.regionalDone || 0) + 1;
-      if (pass && !rewards.includes('block-cap')) { rewards.push('block-cap'); earned.items.push('A regional scrub cap. Find it under Wearing when you change your character'); } }
+    const R = S.results || [], own = R.filter((r) => !r.assist), right = own.filter((r) => r.correct).length, total = R.length, g = state.game, earned = { items: [] }; let pass = false;
+    const add = (id, from, line) => { if (grant(state, id, from)) earned.items.push(line); };
+    if (S.run === 'plexus' || S.run === 'review') {
+      pass = total > 0 && right >= Math.ceil(total * 0.75);          // answers given after a hint do not count toward it
+      if (S.run === 'plexus' && pass) { add('plexus-specimen', 'identified the plexus without labels, ' + right + ' of ' + total, 'The brachial plexus specimen is now in your studio. Open it there to inspect it, pin notes to it and run a personal-best round');
+        const ms = own.reduce((a, r) => a + (r.ms || 0), 0), best = g.best.plexus; if (!best || right > best.right || (right === best.right && ms < best.ms)) g.best.plexus = { right, total, ms, t: Date.now() }; }
+      const spec = g.collection.find((c) => c.id === 'plexus-specimen');
+      if (S.run === 'review' && pass && spec && Date.now() - spec.at > 20 * 3600000) { add('stimulator-layer', 'passed a review a day or more after earning the specimen', 'A stimulation layer for your specimen: select a nerve and see its stated motor response'); if (!rewards.includes('nerve-stimulator')) rewards.push('nerve-stimulator'); }
+    }
+    if (S.run === 'regional') { const c = S.caseResult || {}; pass = right >= Math.ceil(total * 0.75) && !!c.okApproach; P.regionalDone = (P.regionalDone || 0) + 1;
+      if (pass) add('regional-patch', 'completed the regional series', 'The regional series patch: on your studio wall and your character card'); }
+    if (S.newCase) { earned.items.push('The case you explained is in your archive, on the studio desk: replay it and compare a later attempt'); S.newCase = null; }
     S.earned = earned; S.pass = pass; persist(); if (earned.items.length) sfx('reward'); onReward && onReward(earned);
   }
 
   function go(mode) {
-    clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ }
+    clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ } film.playing = false; film.ui = null;
     S.mode = mode; S.picked = null; S.nudge = ''; S.stim = null; atlas.select(null); atlas.glow([]); setLabels([]); atlas.ghost([]); atlas.isolate(null); atlas.setMarkers([]);
     if (mode === 'menu' || mode === 'explore') { atlas.showAll(); if (mode === 'menu') atlas.view('whole'); }
     if (mode === 'lesson') { S.step = 0; S.prog = []; S.done = false; applyStep(); }
+    if (mode === 'film') { film.t = 0; film.cue = -1; film.pred = {}; film.playing = true; S.voice = S.voice !== false; filmApply(0, true); speak(FILM.cues[0].say); }
     if (mode === 'challenge') return startItems(pickItems(CHALLENGE, CHALLENGE_LENGTH, { relation: 4, find: 2 }), 'plexus');
     if (mode === 'review') { const due = new Set(dueNow(state).map((d) => d.item)), items = shuffle([...CHALLENGE, ...IDENTIFY].filter((c) => due.has(c.ask))).slice(0, 8); if (!items.length) { S.mode = 'menu'; S.flash = 'Nothing is due right now.'; } else return startItems(items, 'review'); }
     if (mode === 'r-intro') { S.playing = true; S.visited = new Set(); S.caseResult = null; S.results = []; S.qres = []; narrStep(0); }
@@ -152,38 +187,52 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
   function draw() {
     const due = dueNow(state).length, g = state.game; let h = '';
     if (S.mode === 'menu') {
-      head.innerHTML = `<small>Anatomy Hall · regional anesthesia</small><h1>The brachial plexus.</h1><p>Right side, neck to hand. Turn it, peel it, and select anything.</p>`;
+      const spec = has(state, 'plexus-specimen'), next = due ? 'review' : !g.filmDone ? 'film' : !g.lessonDone ? 'lesson' : !spec ? 'challenge' : !P.regionalDone ? 'r-intro' : '';
+      head.innerHTML = `<small>Anatomy gallery · regional anesthesia</small><h1>The brachial plexus.</h1><p>Right side, neck to hand. Turn it, peel it, and select anything.</p>`;
       h = `${S.flash ? `<p class="nudge">${S.flash}</p>` : ''}${due ? `<button class="row go" data-go="review"><b>Review what is due</b><span>${due} ${due === 1 ? 'item' : 'items'} you missed or guessed, first.</span></button>` : ''}
-        <h3>The plexus</h3>
-        <button class="row ${!due && !g.lessonDone ? 'go' : ''}" data-go="lesson"><b>Lesson</b><span>Six steps. Roots to nerves. You act at every step.</span></button>
-        <button class="row ${!due && g.lessonDone && !rewards.includes('nerve-stimulator') ? 'go' : ''}" data-go="challenge"><b>Challenge</b><span>${CHALLENGE_LENGTH} from ${CHALLENGE.length}: name it, or work it out. No labels, new angle each time.</span></button>
-        <button class="row" data-go="explore"><b>Explore</b><span>Layers, isolate, names on or off${rewards.includes('nerve-stimulator') ? ', nerve stimulator' : ''}.</span></button>
+        <h3>Learn</h3>
+        <button class="row ${next === 'film' ? 'go' : ''}" data-go="film"><b>Film: follow the lowest trunk</b><span>${Math.round(FILM.seconds)} seconds. One question, one prediction. Captions, replay, scrubbing.</span></button>
+        <button class="row ${next === 'lesson' ? 'go' : ''}" data-go="lesson"><b>Hands-on</b><span>Six steps, roots to nerves. You act at every step. Not scored.</span></button>
+        <h3>Show what you know</h3>
+        <button class="row ${next === 'challenge' ? 'go' : ''}" data-go="challenge"><b>Challenge</b><span>${CHALLENGE_LENGTH} from ${CHALLENGE.length}: name it, or work it out. No labels, a new view each time. Recorded.</span></button>
+        <h3>Free</h3>
+        <button class="row" data-go="explore"><b>Explore</b><span>Layers, isolate, names on or off${has(state, 'stimulator-layer') ? ', stimulation layer' : ''}${spec ? ', your notes' : ''}. Never recorded.</span></button>
         <h3>Four ways in: regional blocks</h3>
-        <button class="row ${!due && rewards.includes('nerve-stimulator') && !P.regionalDone ? 'go' : ''}" data-go="r-intro"><b>${P.regionalDone ? 'Run it again' : 'Start'}</b><span>A narrated explanation, the four levels, identification, a case, questions.</span></button>
+        <button class="row ${next === 'r-intro' ? 'go' : ''}" data-go="r-intro"><b>${P.regionalDone ? 'Run it again' : 'Start'}</b><span>A narrated explanation, the four levels, identification, a case, questions.</span></button>
         ${P.regionalDone ? `<div class="tools"><button class="chip" data-go="r-explore">Levels</button><button class="chip" data-go="r-case">Case</button><button class="chip" data-go="r-questions">Questions</button></div>` : ''}
-        <button class="row quiet" data-go="exit"><b>Back to the island</b></button><p class="fine">${MODEL_NOTE}</p><p class="fine">${SOURCES.ZA.cite}</p>`; S.flash = '';
+        <button class="row quiet" data-go="exit"><b>Step back from the exhibit</b></button><p class="fine">${MODEL_NOTE}</p><p class="fine">${SOURCES.ZA.cite}</p>`; S.flash = '';
+    } else if (S.mode === 'film') {
+      const c = FILM.cues[Math.max(0, film.cue)], pr = c.predict, picked = film.pred[film.cue], waiting = pr && picked === undefined && !film.playing && film.t < FILM.seconds - 0.2 && film.t >= (FILM.cues[film.cue + 1]?.t ?? FILM.seconds) - 0.2, over = film.t >= FILM.seconds - 0.05, voice = 'speechSynthesis' in window;
+      head.innerHTML = `<small>Film · ${FILM.title} · ${film.cue + 1} of ${FILM.cues.length}</small><h1 class="stem caption">${c.say}</h1>`;
+      h = `<div class="scrub"><button class="chip on" data-act="fplay">${film.playing ? 'Pause' : over ? 'Replay' : 'Play'}</button><input type="range" id="fRange" min="0" max="${FILM.seconds}" step="0.1" value="${film.t.toFixed(1)}" aria-label="Position in the film"><span id="fTime">${mmss(film.t)} / ${mmss(FILM.seconds)}</span></div>
+        <div class="tools">${FILM.cues.map((q, i) => `<button class="chip ${i === film.cue ? 'on' : ''}" data-cue="${i}" title="${q.say.slice(0, 60)}">${i + 1}</button>`).join('')}${voice ? `<button class="chip ${S.voice ? 'on' : ''}" data-act="nvoice">Voice ${S.voice ? 'on' : 'off'}</button>` : ''}</div>
+        ${waiting ? `<h2>Your prediction</h2><p class="fine">Not scored. It is here so that you commit before you are shown.</p><div class="opts">${pr.options.map((o, i) => `<button class="opt" data-pred="${i}">${o}</button>`).join('')}</div>` : ''}
+        ${pr && picked !== undefined ? `<p class="${picked === pr.answer ? 'stim' : 'nudge'}">${picked === pr.answer ? '<b>You predicted it.</b>' : `You predicted the ${pr.options[picked].toLowerCase()}.`} Watch where it goes.</p>` : ''}
+        ${over ? `<h2>Now do it with your hands.</h2><p>Lift the muscle, find the roots, name the trunks. Then try it without labels.</p><button class="btn" data-go="lesson">Hands-on, six steps</button><button class="btn alt" data-go="challenge">Straight to the challenge</button>` : ''}
+        ${srcHtml(c.src)}<button class="chip quiet" data-go="menu">Leave the film</button>`;
     } else if (S.mode === 'explore') {
-      head.innerHTML = `<small>Explore</small><h1>Turn it. Peel it.</h1><p>Select a structure. Switch names off to test yourself.</p>`;
+      head.innerHTML = `<small>Explore · free, never recorded</small><h1>Turn it. Peel it.</h1><p>Select a structure. Switch names off to test yourself.</p>`;
       const id = S.picked, st = STRUCTURES[id], part = id && atlas.parts.get(id), o = part && ORIGIN[part.origin];
       h = `<div class="tools"><button class="chip ${S.names ? 'on' : ''}" data-act="names">Names ${S.names ? 'on' : 'off'}</button><button class="chip" data-go="menu">Done</button></div>`;
       if (!id) h += `<h2>Nothing selected.</h2><p>Drag to turn, scroll or pinch to zoom, click a structure.</p>`;
       else if (!S.revealed) h += `<h2>What is this?</h2><p>Decide, then check.</p><button class="btn" data-act="reveal">Reveal</button>`;
       else h += `<h2>${nameOf(id)}</h2><p class="lay"><i class="dot ${part.layer}"></i>${part.layer}${o ? ` · <span class="badge" title="${o[1]}">${o[0]}</span>` : ''}</p>${st?.fact ? `<p>${st.fact}</p>` : '<p class="fine">Named from the source model. No statement about it has been checked yet, so none is shown.</p>'}${o ? `<p class="fine">${o[1]} ${part.what ? 'What was done: ' + part.what + '.' : ''}</p>` : ''}${srcHtml(['ZA', ...(st?.src || [])])}
-        ${S.stim ? `<p class="stim">${S.stim}</p>` : ''}<div class="tools"><button class="chip" data-act="isolate">${atlas.isIsolated() ? 'Show the rest' : 'Isolate'}</button><button class="chip" data-act="hide">Hide</button><button class="chip" data-act="focus">Centre</button>${rewards.includes('nerve-stimulator') && part.layer === 'nerve' ? '<button class="chip on warm" data-act="stim">Stimulate</button>' : ''}</div>`;
+        ${S.stim ? `<p class="stim">${S.stim}</p>` : ''}<div class="tools"><button class="chip" data-act="isolate">${atlas.isIsolated() ? 'Show the rest' : 'Isolate'}</button><button class="chip" data-act="hide">Hide</button><button class="chip" data-act="focus">Centre</button>${has(state, 'stimulator-layer') && part.layer === 'nerve' ? '<button class="chip on warm" data-act="stim">Stimulate</button>' : ''}</div>${has(state, 'plexus-specimen') ? `<h3>Your note</h3><textarea id="note" rows="2" placeholder="Pin a note to this structure. It stays with your specimen.">${(state.game.notes[id] || '').replace(/</g, '&lt;')}</textarea>` : ''}`;
     } else if (S.mode === 'lesson') {
       const st = LESSON[S.step], last = S.step === LESSON.length - 1;
-      head.innerHTML = `<small>Lesson · step ${S.step + 1} of ${LESSON.length}</small><h1>${st.title}</h1><p>${st.say}</p>`;
+      head.innerHTML = `<small>Hands-on · step ${S.step + 1} of ${LESSON.length} · guided, not scored</small><h1>${st.title}</h1><p>${st.say}</p>`;
       h = `<div class="dots">${LESSON.map((_, i) => `<i class="${i < S.step ? 'past' : i === S.step ? 'now' : ''}"></i>`).join('')}</div><h2>${S.done ? 'Yes.' : st.do}</h2>${S.nudge && !S.done ? `<p class="nudge">${S.nudge}</p>` : ''}
-        ${S.done ? `<button class="btn" data-act="next">${last ? 'Finish the lesson' : 'Next'}</button>` : ''}${srcHtml(st.src)}<button class="chip quiet" data-go="menu">Leave lesson</button>`;
+        ${S.done ? `<button class="btn" data-act="next">${last ? 'Finish the lesson' : 'Next'}</button>` : ''}${srcHtml(st.src)}<button class="chip quiet" data-go="menu">Leave</button>`;
     } else if (S.mode === 'items') {
       const it = S.items[S.i], kind = { find: 'name it', relation: 'work it out', apply: 'apply it' }[it.kind], runName = { plexus: 'Challenge', regional: 'Identify', review: 'Review' }[S.run];
       head.innerHTML = `<small>${runName} · ${S.i + 1} of ${S.items.length} · ${kind}</small><h1 class="${it.ask.length > 40 ? 'stem' : ''}">${it.ask}</h1><p>${S.phase === 'feedback' ? '' : 'No labels. Turn it and peel what is in your way.'}</p>`;
-      if (S.phase === 'ask') h = `<h2>Select the structure.</h2><p>You can change your mind before you commit.</p>`;
+      if (S.phase === 'ask') h = `<h2>${S.retry ? 'Again, from this side.' : 'Select the structure.'}</h2><p>${S.retry ? 'A different view and dressing. This second try is recorded as assisted.' : 'You can change your mind before you commit.'}</p>${S.hint ? `<p class="nudge">${STRUCTURES[it.answer[0]]?.tell || 'No hint is written for this one.'}</p>` : !S.retry ? '<button class="chip quiet" data-act="hint">Show a hint (the answer is then recorded as assisted)</button>' : ''}`;
       else if (S.phase === 'sure') h = `<h2>Selected. How sure are you?</h2><p>The name stays hidden until you commit.</p><div class="sure"><button class="btn alt" data-conf="1">Guess</button><button class="btn alt" data-conf="2">Think so</button><button class="btn" data-conf="3">Sure</button></div>`;
-      else { const r = S.results[S.results.length - 1], last = S.i === S.items.length - 1;
-        h = `<div class="verdict ${r.correct ? 'yes' : 'no'}">${r.correct ? 'Correct' : 'Not this time'}</div><h2>${nameOf(r.correct ? r.picked : it.answer[0])}</h2>${r.correct ? `<p>${it.why}</p>` : mistake(it, r.picked)}
-          ${r.correct && r.conf === 1 ? '<p class="fine">Right, but a guess, so it comes back in two days.</p>' : !r.correct ? `<p class="fine">${r.conf === 3 ? 'You were sure. That is the kind to distrust. ' : ''}It comes back tomorrow.</p>` : ''}${srcHtml(['ZA', ...it.src])}
-          <button class="btn" data-act="inext">${!last ? 'Next' : S.run === 'regional' ? 'On to the case' : 'See how you did'}</button>`; }
+      else { const r = S.results[S.results.length - 1], last = S.i === S.items.length - 1, nextLabel = !last ? 'Next' : S.run === 'regional' ? 'On to the case' : 'See how you did';
+        if (r.retry) h = `<div class="verdict ${r.retry.correct ? 'yes' : 'no'}">${r.retry.correct ? 'Found it this time' : 'Still not it'}</div><h2>${nameOf(it.answer[0])}</h2>${r.retry.correct ? `<p>${it.why}</p>` : mistake(it, r.retry.picked)}<p class="fine">Second try after seeing the answer: recorded as assisted. The first answer is the one that counts, and it comes back tomorrow.</p>${srcHtml(['ZA', ...it.src])}<button class="btn" data-act="inext">${nextLabel}</button>`;
+        else h = `<div class="verdict ${r.correct ? 'yes' : 'no'}">${r.correct ? (r.assist ? 'Correct, with a hint' : 'Correct') : 'Not this time'}</div><h2>${nameOf(r.correct ? r.picked : it.answer[0])}</h2>${r.correct ? `<p>${it.why}</p>` : mistake(it, r.picked)}
+          ${r.assist ? '<p class="fine">You used the hint, so this is recorded as assisted and does not count as recall.</p>' : r.correct && r.conf === 1 ? '<p class="fine">Right, but a guess, so it comes back in two days.</p>' : !r.correct ? `<p class="fine">${r.conf === 3 ? 'You were sure. That is the kind to distrust. ' : ''}It comes back tomorrow. Both are lit on the model now: what you chose in white, the answer in coral.</p>` : ''}${srcHtml(['ZA', ...it.src])}
+          ${!r.correct ? `<button class="btn" data-act="iretry">Find it again from another view</button><button class="chip quiet" data-act="inext">Skip the second try</button>` : `<button class="btn" data-act="inext">${nextLabel}</button>`}`; }
     } else if (S.mode === 'r-intro') {
       const st = NARRATION[S.n], voice = 'speechSynthesis' in window;
       head.innerHTML = `<small>Four ways in · ${S.n + 1} of ${NARRATION.length}</small><h1 class="stem caption">${st.say}</h1>`;
@@ -206,7 +255,7 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
         h = `<div class="verdict ${gr === 'no' ? 'no' : 'yes'}">${gr === 'best' ? 'The approach the source prefers' : gr === 'ok' ? 'Defensible' : 'Not this approach'}</div><h2>You chose ${LEVELS[S.chosen].name.toLowerCase()}.</h2><p>${why}</p>${gr !== 'best' ? `<p><b>${LEVELS[best].name}:</b> ${c.grade[best][1]}</p>` : ''}
           <h3>Your reasons</h3>${r.picks.map((p) => `<p class="reason ${p.sel === p.truth ? 'ok' : 'bad'}"><b>${p.sel === p.truth ? '✓' : '✗'}</b> ${c.reasons[p.i][0]} <span>${c.reasons[p.i][2]}${p.sel !== p.truth ? (p.truth ? ' You left it out.' : ' You selected it.') : ''}</span></p>`).join('')}
           ${S.typed ? `<h3>Your sentence</h3><p class="fine">"${S.typed.replace(/</g, '&lt;')}"</p><h3>A model answer</h3><p>${c.model}</p><div class="sure two-b"><button class="btn alt" data-self="0">I missed part of it</button><button class="btn" data-self="1">Mine said this</button></div>` : `<h3>A model answer</h3><p>${c.model}</p>`}${srcHtml(c.src)}
-          <button class="btn" data-go="r-questions">On to the questions</button>`; }
+          ${state.game.cases[c.id]?.attempts.length > 1 ? `<p class="fine">This is attempt ${state.game.cases[c.id].attempts.length}. Your earlier ones are in the archive on your studio desk, side by side with this one.</p>` : ''}<button class="btn" data-go="r-questions">On to the questions</button>`; }
     } else if (S.mode === 'questions') {
       const q = S.qs[S.q], kind = { single: 'multiple choice', multi: 'multiple correct response', match: 'matching' }[q.type];
       head.innerHTML = `<small>Practice question ${S.q + 1} of ${S.qs.length} · ${kind}</small><h1 class="stem">${q.stem}</h1>`;
@@ -216,14 +265,15 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
       h = `<p class="fine">Original practice question written for Overlord. Not an NBCRNA item, and not a predictor of any exam score.</p>${body}
         ${S.qdone ? `<div class="verdict ${S.qres[S.q] ? 'yes' : 'no'}">${S.qres[S.q] ? 'Correct' : 'Not this time'}</div><p>${q.why}</p>${srcHtml(q.src)}<button class="btn" data-act="qnext">${S.q === S.qs.length - 1 ? 'See how you did' : 'Next question'}</button>` : `<button class="btn" data-act="qsubmit" ${ready ? '' : 'disabled'}>Submit</button>`}`;
     } else if (S.mode === 'results') {
-      const R = S.results || [], by = (k) => R.filter((r) => r.it.kind === k), n = (xs) => `${xs.filter((r) => r.correct).length} of ${xs.length}`, missed = R.filter((r) => !r.correct), sureWrong = missed.filter((r) => r.conf === 3).length, regional = S.run === 'regional', c = S.caseResult;
+      const R = S.results || [], own = R.filter((r) => !r.assist), by = (k) => own.filter((r) => r.it.kind === k), n = (xs) => `${xs.filter((r) => r.correct).length} of ${xs.length}`, missed = R.filter((r) => !r.correct), sureWrong = missed.filter((r) => r.conf === 3).length, regional = S.run === 'regional', c = S.caseResult, helped = R.filter((r) => r.assist).length, retried = R.filter((r) => r.retry).length;
       head.innerHTML = `<small>Results</small><h1>${S.pass ? 'You know your way around.' : 'Closer than last time.'}</h1><p>${S.pass ? 'Done without labels.' : 'What you missed is scheduled to come back.'}</p>`;
       const cells = regional ? [[n(by('apply')), 'identified'], [c ? (c.okApproach ? 'Yes' : 'No') : '–', 'case approach'], [`${S.qres.filter(Boolean).length} of ${S.qres.length}`, 'questions']] : [[n(by('find')), 'named'], [n(by('relation')), 'worked out'], [n(by('apply')), 'applied']].filter((x) => !x[0].endsWith('of 0'));
-      h = `<div class="two">${cells.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('')}</div>
-        <h3>What you know</h3><p>${missed.length ? `Back tomorrow: ${[...new Set(missed.map((r) => lc(r.it.answer[0])))].join(', ')}.` : 'Nothing missed. These return in six days to check they stuck.'}${sureWrong ? ` You were sure and wrong ${sureWrong === 1 ? 'once' : sureWrong + ' times'}.` : ''}${regional && c && !c.reasonsRight ? ' The case comes back too: one of your reasons was off.' : ''}</p>
-        <h3>What you earned</h3><p>${S.earned.blocks} ${regional ? 'coral' : 'timber'} blocks for your plot.${S.earned.items.length ? ' ' + S.earned.items.join('. ') + '.' : S.pass ? '' : ' Three in four correct earns the item.'}</p>
-        <p class="fine">Blocks and items show what you earned. The lines above them show what you know. They are recorded separately.</p>
-        <button class="btn" data-go="exit">Back to the island</button><button class="btn alt" data-go="${regional ? 'r-intro' : S.run === 'review' ? 'menu' : 'challenge'}">${S.run === 'review' ? 'Hall menu' : 'Go again'}</button>`;
+      h = `<div class="two">${cells.map(([b, s]) => `<div><b>${b}</b><span>${s}, unaided</span></div>`).join('')}</div>
+        <h3>What you showed</h3><p>${missed.length ? `Back tomorrow: ${[...new Set(missed.map((r) => lc(r.it.answer[0])))].join(', ')}.` : 'Nothing missed. These return in six days to check they stuck.'}${sureWrong ? ` You were sure and wrong ${sureWrong === 1 ? 'once' : sureWrong + ' times'}.` : ''}${regional && c && !c.reasonsRight ? ' The case comes back too: one of your reasons was off.' : ''}</p>
+        ${helped || retried ? `<p class="fine">${helped ? `${helped} answered with a hint. ` : ''}${retried ? `${retried} tried a second time after feedback. ` : ''}Those are kept as assisted work and are not counted above.</p>` : ''}
+        <h3>What it added</h3><p>${S.earned.items.length ? S.earned.items.join('. ') + '.' : S.pass ? 'Nothing new this time: you already hold what this earns.' : 'Nothing yet. Three in four unaided adds the specimen to your studio.'}</p>
+        <p class="fine">What you hold shows what you earned. The lines above it show what you demonstrated, today, on this model. Neither is a clinical competence or an exam score.</p>
+        <button class="btn" data-go="exit">${S.earned.items.length ? 'Step back: your studio is across the court' : 'Step back from the exhibit'}</button><button class="btn alt" data-go="${regional ? 'r-intro' : S.run === 'review' ? 'menu' : 'challenge'}">${S.run === 'review' ? 'Exhibit menu' : 'Go again'}</button>`;
     }
     if (TOUCH) { h = h.replace(/\bClick\b/g, 'Tap').replace(/\bclick\b/g, 'tap').replace(/\bSelect\b(?! every)/g, 'Tap').replace('scroll or pinch', 'pinch'); head.innerHTML = head.innerHTML.replace(/\bClick\b/g, 'Tap'); }
     panel.innerHTML = h; panel.scrollTop = 0;
@@ -235,6 +285,12 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     on('[data-act=next]', () => { if (S.step === LESSON.length - 1) { state.game.lessonDone = true; persist(); go('menu'); } else { S.step++; S.prog = []; S.done = false; S.nudge = ''; applyStep(); draw(); } });
     panel.querySelectorAll('[data-conf]').forEach((b) => b.onclick = () => answer(+b.dataset.conf));
     on('[data-act=inext]', () => { if (S.i === S.items.length - 1) afterItems(); else { S.i++; presentItem(); draw(); } });
+    on('[data-act=iretry]', () => { presentItem(true); sfx('tap'); draw(); }); on('[data-act=hint]', () => { S.hint = true; draw(); });
+    on('[data-act=fplay]', () => { if (film.playing) { film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } } else { if (film.t >= FILM.seconds - 0.05) { film.t = 0; film.cue = -1; film.pred = {}; } film.playing = true; filmApply(film.t); speak(FILM.cues[cueAt(film.t)].say); } draw(); });
+    panel.querySelectorAll('[data-cue]').forEach((b) => b.onclick = () => { film.playing = false; film.t = FILM.cues[+b.dataset.cue].t; filmApply(film.t, true); draw(); });
+    panel.querySelectorAll('[data-pred]').forEach((b) => b.onclick = () => { film.pred[film.cue] = +b.dataset.pred; film.t = FILM.cues[film.cue + 1]?.t ?? FILM.seconds; film.playing = true; sfx('tap'); filmApply(film.t); });
+    const fr = panel.querySelector('#fRange'); film.ui = fr ? { range: fr, time: panel.querySelector('#fTime') } : null; if (fr) fr.oninput = () => { film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } film.t = +fr.value; filmApply(film.t, true); film.ui.time.textContent = mmss(film.t) + ' / ' + mmss(FILM.seconds); }; if (fr) fr.onchange = () => draw();
+    const note = panel.querySelector('#note'); if (note) note.onchange = () => { const v = note.value.trim().slice(0, 300); if (v) state.game.notes[S.picked] = v; else delete state.game.notes[S.picked]; persist(); };
     on('[data-act=nprev]', () => { S.playing = false; narrStep(S.n - 1); }); on('[data-act=nnext]', () => { S.playing = false; narrStep(S.n + 1); }); on('[data-act=nvoice]', () => { S.voice = !S.voice; if (!S.voice) try { speechSynthesis.cancel(); } catch (e) { /* none */ } draw(); });
     on('[data-act=nplay]', () => { if (S.playing) { S.playing = false; clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ } draw(); } else { S.playing = true; narrStep(S.n === NARRATION.length - 1 ? 0 : S.n); } });
     panel.querySelectorAll('[data-level]').forEach((b) => b.onclick = () => pickLevel(b.dataset.level));
@@ -243,12 +299,12 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     on('[data-act=creasons]', () => { S.cphase = 'explain'; draw(); });
     const fin = (typed) => { S.typed = typed; if (typed) (state.learning.recall ||= []).push({ t: Date.now(), item: S.case.id, text: typed.slice(0, 400) }); gradeCase(); S.cphase = 'feedback'; draw(); };
     on('[data-act=cexplain]', () => fin((panel.querySelector('#why').value || '').trim())); on('[data-act=cskip]', () => fin(''));
-    panel.querySelectorAll('[data-self]').forEach((b) => b.onclick = () => { recordAttempt(state, { objective: 'regional.case.' + S.case.id + '.explain', outline: S.case.outline, item: S.case.id + ':explain', evidence: 'recalled (self-rated)', correct: b.dataset.self === '1', confidence: 2, picked: 'self' }); persist(); b.parentElement.innerHTML = '<p class="fine">Recorded as your own judgement, not a grade.</p>'; });
+    panel.querySelectorAll('[data-self]').forEach((b) => b.onclick = () => { recordAttempt(state, { objective: 'regional.case.' + S.case.id + '.explain', outline: S.case.outline, item: S.case.id + ':explain', evidence: 'recalled (self-rated)', correct: b.dataset.self === '1', confidence: 2, picked: 'self', where: api.where }); const at = state.game.cases[S.case.id]?.attempts; if (at && at.length) at[at.length - 1].self = b.dataset.self === '1'; persist(); b.parentElement.innerHTML = '<p class="fine">Recorded as your own judgement, not a grade.</p>'; });
     panel.querySelectorAll('[data-opt]').forEach((b) => b.onclick = () => { const i = +b.dataset.opt, q = S.qs[S.q]; if (q.type === 'single') S.qsel = new Set([i]); else S.qsel.has(i) ? S.qsel.delete(i) : S.qsel.add(i); draw(); });
     panel.querySelectorAll('[data-match]').forEach((s) => s.onchange = () => { S.qmatch[+s.dataset.match] = s.value; draw(); });
     on('[data-act=qsubmit]', submitQ); on('[data-act=qnext]', () => { if (S.q === S.qs.length - 1) go('results'); else { S.q++; S.qsel = new Set(); S.qmatch = {}; S.qorder = null; S.qdone = false; draw(); } });
   }
   function leave() { clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ } onExit(); }
-  go('menu');
-  return { go, state: S, outlineSummary: () => Object.entries(OUTLINE) };
+  atlas.setRoom('dark'); document.body.dataset.room = 'dark'; go('menu');
+  return Object.assign(api, { go, state: S, film, outlineSummary: () => Object.entries(OUTLINE) });
 }

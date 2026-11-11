@@ -57,7 +57,7 @@ export const IDENTIFY_LENGTH = 5;
 // THE CASE. Choose the level on the model, then choose the statements that support the choice, then say why.
 // `grade`: best = the approach the source singles out; ok = also defensible from the source; no = contradicted by it.
 export const CASES = [
-  { id: 'copd-radius', outline: 'III.I.5',
+  { id: 'copd-radius', title: 'Distal radius fracture, severe COPD', outline: 'III.I.5',
     stem: 'A 67-year-old with severe COPD on home oxygen needs fixation of a distal radius fracture. A regional technique is planned as the main anesthetic.',
     grade: { interscalene: ['no', 'The surgery is below the elbow, where C8 and T1 are often spared, and this approach commonly weakens the diaphragm, which this patient cannot afford.'],
       supraclavicular: ['no', 'It would cover the forearm, but a weak hemidiaphragm can occur with this approach too, and this patient has no reserve. The pleura is also immediately below the first rib.'],
@@ -67,7 +67,7 @@ export const CASES = [
       ['An interscalene block reliably numbs the forearm and hand.', false, 'False. C8 and T1 are often spared at that level.'], ['Below the clavicle the phrenic nerve is unlikely to be blocked.', true, 'True, and it is the main reason for this choice.'],
       ['Pneumothorax cannot happen with a brachial plexus block.', false, 'False. The pleura lies immediately below the first rib.']],
     model: 'Infraclavicular: it covers below the elbow and stays away from the phrenic nerve, which matters most in a patient with no respiratory reserve.', src: ['N1152', 'N1153', 'N1155', 'N1156'] },
-  { id: 'cuff-repair', outline: 'III.I.5',
+  { id: 'cuff-repair', title: 'Arthroscopic rotator cuff repair', outline: 'III.I.5',
     stem: 'A healthy 34-year-old is having an arthroscopic rotator cuff repair and wants the best pain control afterwards.',
     grade: { interscalene: ['best', 'This is the approach for the shoulder and proximal upper arm. The shoulder is supplied mainly by C5 and C6, which are blocked here. A weak hemidiaphragm is expected but rarely matters with healthy lungs.'],
       supraclavicular: ['no', 'The suprascapular nerve, which arises from the proximal superior trunk, is often missed at this level, so the shoulder may not be covered.'],

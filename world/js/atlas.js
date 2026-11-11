@@ -1,5 +1,5 @@
-// atlas.js: the realistic direction. One region of real, sourced anatomy that you can turn, peel by layer, isolate,
-// and pick from without labels. It knows nothing about lessons or scoring; js/learn.js drives it.
+// atlas.js: the gallery's examination view. One region of real, sourced anatomy that you can turn, peel by layer, isolate,
+// and pick from without labels, against the dark backdrop it stands in front of. It knows nothing about lessons or scoring; js/learn.js drives it.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -102,6 +102,13 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
     centreOf: (ids) => centroid(ids), topOf: (ids) => { let top = null; for (const id of ids) for (const s of parts.get(id)?.samples || []) if (!top || s.y > top.y) top = s; return top.clone(); },
     chooseMarker(id) { for (const [k, m] of markers) m.chosen = k === id; }, markerScreen(id) { const m = markers.get(id); if (!m) return null; const v = m.g.position.clone().project(camera), r = renderer.domElement.getBoundingClientRect(); return { x: r.left + (v.x + 1) / 2 * r.width, y: r.top + (1 - v.y) / 2 * r.height }; },
     flyTo,
+    /** Where a named view puts the camera (for authored lessons). */
+    pose(name) { const [t, o] = VIEWS[name] || VIEWS.whole; return { pos: t.clone().add(new THREE.Vector3(o[0], o[1], o[2])), target: t.clone() }; },
+    setPose(pos, target) { fly = null; camera.position.copy(pos); controls.target.copy(target); controls.update(); },
+    /** Jump every structure to its final opacity and glow: used when scrubbing, so the picture depends only on the time. */
+    settle() { for (const p of parts.values()) { p.alpha = target(p); p.glow = glowing.has(p.id) ? 0.7 : 0; } pulse = 0; },
+    /** Draw exactly one frame now (deterministic capture). Optional width/height in pixels. */
+    renderOnce({ width = 0, height = 0 } = {}) { if (width && height) { renderer.setPixelRatio(1); renderer.setSize(width, height, false); camera.aspect = width / height; camera.clearViewOffset(); camera.updateProjectionMatrix(); } paint(0); renderer.render(scene, camera); },
     setLayer(layer, on) { layerOn[layer] = on; }, layerIsOn: (l) => layerOn[l],
     ghost(layers) { for (const k of Object.keys(layerOn)) layerGhost[k] = layers.includes(k); },
     hide(id) { hidden.add(id); if (selected === id) selected = null; }, show(id) { hidden.delete(id); }, isHidden: (id) => hidden.has(id), hiddenList: () => [...hidden],
@@ -134,15 +141,18 @@ export async function createAtlas(host, { url = '../assets/models/plexus/plexus-
     if (!api.running) return; const dt = Math.min(clock.getDelta(), 0.05); pulse += dt;
     if (fly) { fly.t = Math.min(1, fly.t + dt / fly.dur); const k = fly.t * fly.t * (3 - 2 * fly.t); camera.position.lerpVectors(fly.p0, fly.p1, k); controls.target.lerpVectors(fly.t0, fly.t1, k); if (fly.t >= 1) fly = null; }
     controls.update();
-    for (const p of parts.values()) {
-      const t = target(p); p.alpha += (t - p.alpha) * Math.min(1, dt * 9); const m = p.mesh.material;
-      m.opacity = p.alpha; p.mesh.visible = p.alpha > 0.012; m.depthWrite = p.alpha > 0.6; p.mesh.castShadow = p.alpha > 0.6; p.mesh.renderOrder = p.alpha > 0.6 ? 0 : 2;
-      const g = glowing.has(p.id) ? 0.55 + 0.25 * Math.sin(pulse * 3.2) : 0; p.glow += (g - p.glow) * Math.min(1, dt * 8);
-      if (selected === p.id) m.emissive.copy(PICK).multiplyScalar(0.3); else if (p.glow > 0.01) m.emissive.copy(WARM).multiplyScalar(p.glow * 0.7); else if (hovered === p.id) m.emissive.copy(PICK).multiplyScalar(0.12); else m.emissive.setScalar(0);
-    }
+    paint(dt);
     for (const m of markers.values()) { m.g.quaternion.copy(camera.quaternion); const k = m.chosen ? 1.5 + 0.12 * Math.sin(pulse * 5) : 1 + 0.06 * Math.sin(pulse * 2.4); m.g.scale.setScalar(k * Math.max(0.35, camera.position.distanceTo(m.g.position) / 1.5)); /* about the same size on screen at any zoom */ m.ring.material.color.set(m.chosen ? 0xffffff : 0xff5a3c); }
     api.onFrame && api.onFrame(dt); renderer.render(scene, camera); requestAnimationFrame(loop);
   }
-  setRoom('studio'); view('whole', 0);
+  function paint(dt) {
+    for (const p of parts.values()) {
+      const t = target(p); p.alpha += (t - p.alpha) * Math.min(1, dt * 9); const m = p.mesh.material;
+      m.opacity = p.alpha; p.mesh.visible = p.alpha > 0.012; m.depthWrite = p.alpha > 0.6; p.mesh.castShadow = p.alpha > 0.6; p.mesh.renderOrder = p.alpha > 0.6 ? 0 : 2;
+      const g = glowing.has(p.id) ? 0.55 + 0.25 * Math.sin(pulse * 3.2) : 0; if (dt > 0) p.glow += (g - p.glow) * Math.min(1, dt * 8);
+      if (selected === p.id) m.emissive.copy(PICK).multiplyScalar(0.3); else if (p.glow > 0.01) m.emissive.copy(WARM).multiplyScalar(p.glow * 0.7); else if (hovered === p.id) m.emissive.copy(PICK).multiplyScalar(0.12); else m.emissive.setScalar(0);
+    }
+  }
+  setRoom('dark'); view('whole', 0);
   return api;
 }

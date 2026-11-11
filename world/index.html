@@ -3,22 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>Overlord · the island</title>
-<!-- First playable slice of the Overlord world. Sign in with your existing Overlord account, make a character, walk the
-     island, enter Anatomy Hall, learn and identify the brachial plexus on real sourced anatomy, and come back to it.
-     Nothing in the existing app is modified: this page only reads core/auth.js and saves beside the existing save.
-     What is real, what is simplified and what is planned: docs/overlord-world/STATUS.md -->
+<title>Overlord · the institute</title>
+<!-- The Overlord institute: a realistic, walkable level for nurse anesthesia study. Sign in with your existing Overlord
+     account, choose a character, walk in, examine real sourced anatomy, identify it without labels, reason through a
+     regional case, and keep what you earn in a studio that is yours. This page reads core/auth.js for accounts and saves
+     beside the classic app's save; it changes nothing in the classic app.
+     What works, what is approximated and what is planned: docs/overlord-world/STATUS.md -->
+<link rel="icon" href="../assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="world.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 </head>
-<body data-screen="boot" data-room="studio">
-<a class="mark" id="mark"><i></i>Overlord</a>
+<body data-screen="boot" data-room="dark">
+<button class="mark" id="mark" aria-label="Overlord menu"></button>
 
 <section id="gate" class="screen" hidden>
   <div class="card">
-    <small>Overlord</small><h1>Sign in.</h1><p>The same account you use for review and the simulator. Your progress is saved under it.</p>
+    <div class="wm" id="gateMark"></div><h1>Sign in.</h1><p>The same account you use for review and the simulator. Your progress is saved under it.</p>
     <form id="gateForm"><input id="gUser" autocomplete="username" placeholder="Username" required minlength="2"><input id="gPass" type="password" autocomplete="current-password" placeholder="Password" required minlength="4">
       <div class="rowbtns"><button class="btn" type="submit" data-mode="login">Sign in</button><button class="btn alt" type="button" id="gReg">Create account</button></div><p class="err" id="gErr"></p></form>
     <p class="fine">Accounts are stored in this browser only. They do not follow you to another device yet.</p>
@@ -27,18 +29,19 @@
 
 <section id="character" class="screen" hidden>
   <div id="charStage"></div>
-  <div class="card side"><small>Your character</small><h1>Who is walking in?</h1><div id="charForm"></div><button class="btn" id="charGo">Step onto the island</button><p class="fine">You can change this any time. More is earned by what you show you know.</p></div>
+  <div class="card side"><small>Your character</small><h1>Who is walking in?</h1><div id="charForm"></div><button class="btn" id="charGo">Walk in</button><p class="fine" id="charFine"></p></div>
 </section>
 
 <section id="world" class="screen" hidden>
   <div id="worldStage" class="stage"></div>
-  <header class="hud head" id="wHead"></header>
+  <div class="hud goal" id="wGoal" hidden></div>
   <div class="hud prompt" id="wPrompt"></div>
   <div class="hud toast" id="wToast"></div>
-  <nav class="hud dock" id="wDock"></nav>
-  <div class="hud build" id="wBuild" hidden></div>
+  <div class="hud soundcap" id="wCaption" aria-live="polite"></div>
+  <div class="hud diag" id="wDiag" hidden></div>
+  <aside class="hud place" id="wPlace" hidden></aside>
   <div class="stick" id="stick"><i></i></div>
-  <div class="pad"><button id="padJump">Jump</button><button id="padAct">Use</button></div>
+  <div class="pad"><button id="padAct">Open</button></div>
 </section>
 
 <section id="hall" class="screen" hidden>
@@ -50,7 +53,18 @@
   <div class="tip" id="hTip"></div>
 </section>
 
-<div id="veil"><span id="veilText">Loading</span></div>
+<section id="scan" class="screen" hidden>
+  <div id="scanStage" class="stage"></div>
+  <header class="hud head" id="sHead"></header>
+  <div id="sLabels" class="labels"></div>
+  <div class="hud slices" id="sSlices"></div>
+  <aside class="hud panel" id="sPanel"></aside>
+  <nav class="hud bar" id="sBar"></nav>
+  <div class="tip" id="sTip"></div>
+</section>
+
+<div id="wipe"><i></i></div>
+<div id="veil"><div class="wm" id="veilMark"></div><span id="veilText">Loading</span><b id="veilBar"><i></i></b></div>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -94,7 +94,7 @@ export const STRUCTURES = {
 };
 export const HIDE = ['vertebra_t10', 'vertebra_t11', 'vertebra_t12'];
 export const LAYERS = [['bone', 'Bones'], ['muscle', 'Muscles'], ['artery', 'Arteries'], ['vein', 'Veins'], ['nerve', 'Nerves'], ['airway', 'Airway']];
-// What the nerve stimulator (earned in the challenge) reports. Only responses stated in the sources are listed.
+// What the stimulation layer (earned by a later, delayed review) reports. Only responses stated in the sources are listed.
 export const STIM = {
   [ID.mcn]: { says: 'Elbow flexion.', src: ['N1155'] }, [ID.LC]: { says: 'The little finger moves laterally.', src: ['N1155'] },
   [ID.MC]: { says: 'The little finger flexes.', src: ['N1155'] }, [ID.PC]: { says: 'The little finger extends.', src: ['N1155'] },
@@ -109,6 +109,22 @@ export const LESSON = [
   { title: 'Three cords around an artery.', say: 'The posterior divisions form the posterior cord. The anterior divisions of the superior and middle trunks form the lateral cord. The anterior division of the inferior trunk becomes the medial cord. Each is named for where it lies beside the axillary artery.', view: 'cords', glow: [ID.LC, ID.MC, ID.PC, ID.axillaryA], label: [ID.LC, ID.MC, ID.PC], ghost: ['muscle'], do: 'Click the cord that lies behind the artery.', until: { pick: [ID.PC] }, src: ['H44', 'N1155'] },
   { title: 'Five nerves leave for the arm.', say: 'The musculocutaneous nerve is the continuation of the lateral cord. The ulnar nerve continues from the medial cord. The median nerve takes a branch from each. The axillary and radial nerves come from the posterior cord.', view: 'arm', glow: [ID.mcn, ID.axillary, ID.radial, ID.median, ID.ulnar], label: [ID.mcn, ID.axillary, ID.radial, ID.median, ID.ulnar], ghost: ['muscle'], do: 'Click the two nerves that come from the posterior cord.', until: { all: [ID.axillary, ID.radial] }, src: ['N1149', 'H50'] },
 ];
+
+// THE FILM. A 76-second authored 3D lesson built around one question, with captions, replay and scrubbing. Every cue is a
+// statement already verified above (same page-level sources); the conclusion only chains them. The picture at time t is a
+// pure function of t, so the same scene serves the interactive lesson and a frame-exact capture (window.renderAt).
+// view = camera; hide / ghost / glow / label = what the model shows; predict = the film stops for an unscored prediction.
+const LIFT = [ID.scm, 'omohyoid_muscle_r'];
+export const FILM = { title: 'Follow the lowest trunk', seconds: 76, cues: [
+  { t: 0, view: 'whole', say: 'A block placed between the scalene muscles often spares the lowest part of the plexus. Which nerve does that leave working? Follow one trunk and you can answer it.', src: ['N1152'] },
+  { t: 9, view: 'groove', hide: LIFT, glow: [ID.antScalene, ID.midScalene], label: ID.roots, say: 'The right side of the neck, from the front. Five roots, C5 to T1, pass between the anterior and middle scalene muscles.', src: ['N1149'] },
+  { t: 18.5, view: 'groove', hide: LIFT, ghost: ['muscle'], glow: ID.trunks, label: ID.trunks, say: 'At the edge of the scalenes they become three trunks. C5 and C6 form the superior trunk. C7 continues alone as the middle. C8 and T1 form the inferior trunk, the lowest.', src: ['H44', 'N1149'] },
+  { t: 29.5, view: 'cords', hide: LIFT, ghost: ['muscle'], glow: [...ID.postDivs, ID.PC], label: [ID.PC], say: 'Behind the clavicle each trunk splits into an anterior and a posterior division. All three posterior divisions join to form one cord.', src: ['N1149', 'H44'] },
+  { t: 39, view: 'cords', hide: LIFT, ghost: ['muscle'], glow: [ID.antDivs[2]], label: [ID.antDivs[2]], say: 'The anterior division of the inferior trunk continues on its own. Before you see it: which cord does it become?', predict: { options: ['Lateral cord', 'Posterior cord', 'Medial cord'], answer: 2 }, src: ['H44'] },
+  { t: 46.5, view: 'infraclav', hide: LIFT, ghost: ['muscle'], glow: [ID.MC, ID.axillaryA], label: [ID.LC, ID.PC, ID.MC], say: 'The medial cord. It lies behind and to the inside of the axillary artery. All three cords are named for where they lie around that artery.', src: ['H44', 'N1155', 'N1149'] },
+  { t: 56.5, view: 'arm', hide: LIFT, ghost: ['muscle'], glow: [ID.MC, ID.ulnar], label: [ID.ulnar], say: 'The medial cord continues as the ulnar nerve, C8 and T1. It crosses the elbow behind the medial epicondyle.', src: ['N1149', 'H52'] },
+  { t: 65.5, view: 'arm', hide: LIFT, ghost: ['muscle'], glow: [ID.trunks[2], ID.antDivs[2], ID.MC, ID.ulnar], label: [ID.trunks[2], ID.ulnar], say: 'So a block that spares the inferior trunk spares C8 and T1, the fibres that reach the ulnar nerve. That is why it is not chosen for surgery below the elbow.', src: ['N1152', 'H52'] },
+] };
 
 // THE CHALLENGE. Nothing is labelled or highlighted. kind: find = name it; relation = work it out from a relationship.
 // Every item's statement is page-verified and its geometry passes the audit. outline = NBCRNA outline code.
@@ -139,7 +155,7 @@ export const CHALLENGE = [
 export const CHALLENGE_LENGTH = 8;
 export const VIEWS_FOR_CHALLENGE = ['whole', 'anterolateral', 'lateral', 'anterior', 'posterior', 'superior'];
 
-// Field notes found on the island. Each is one page-verified statement.
+// Short page-verified statements, kept for reuse (they were field notes on the first island).
 export const FIELD_NOTES = {
   dock: { text: 'C5 and C6 form the superior trunk. C7 continues alone as the middle trunk. C8 and T1 form the inferior trunk.', src: ['H44'] },
   east: { text: 'The cords are named for where they lie around the axillary artery: lateral, posterior and medial.', src: ['N1155'] },
