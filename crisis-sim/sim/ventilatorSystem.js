@@ -9,6 +9,11 @@ import { SimRandom } from './simRandom.js';
 
 export const VentMode = { Manual: 0, VCV: 1, PCV: 2, PSV: 3 };
 
+/* Storage capacity used by co2Kinetics 'stores', in mL of CO2 per mmHg of PaCO2.
+   Chosen so that apnoea at a VCO2 of 200 mL/min rises 3.6 mmHg/min, which is exactly what the legacy apnoea branch
+   already does (0.06 mmHg/s). It is the capacity that branch implies, applied to every level of ventilation. */
+export const CO2_STORE_ML_PER_MMHG = 200 / 3.6;
+
 export class VentilatorSystem {
   constructor() {
     this.patient = null;
@@ -24,6 +29,10 @@ export class VentilatorSystem {
     // 'legacy': the original port (Et = 0.7 x dial within seconds), kept only
     // so the frozen C# golden fixtures still replay bit for bit.
     this.agentKinetics = 'physiologic';
+    // How arterial CO2 changes when ventilation changes.
+    //   'legacy' (default, unchanged behaviour): see updateCO2. Under review: docs/co2-kinetics.md.
+    //   'stores': one-compartment mass balance on the body's CO2 stores. Prepared, not enabled anywhere.
+    this.co2Kinetics = 'legacy';
 
     this.measuredTidalVolume = 0; this.measuredRR = 0; this.measuredMinuteVent = 0;
     this.measuredPeakPressure = 0; this.measuredPlateauPressure = 0; this.measuredPeep = 0;
@@ -307,11 +316,23 @@ export class VentilatorSystem {
     const mechanicallySupported = ppvSupported || controlled;
     const rr = mechanicallySupported ? this.measuredRR
       : (this.patient.isBreathingSpontaneously ? this.patient.respiratoryRate : 0);
+    // Spontaneous tidal volume: the legacy rule assumes 400 mL whatever the patient is doing. 'stores' uses the tidal
+    // volume the engine already tracks for this patient (about 490 mL at rest for the default adult).
+    const spontaneousTv = this.co2Kinetics === 'stores' && this.patient.spontaneousTidalVolume > 0 ? this.patient.spontaneousTidalVolume : 400;
     const tv = mechanicallySupported ? this.measuredTidalVolume
-      : (this.patient.isBreathingSpontaneously ? 400 : 0);
+      : (this.patient.isBreathingSpontaneously ? spontaneousTv : 0);
     const vaLMin = f(Max(0, (tv - deadspace) * rr) / 1000 * this.patient.airwayPatency);
 
-    if (vaLMin > 0.3) {
+    if (this.co2Kinetics === 'stores') {
+      // dPaCO2/dt = (CO2 produced - CO2 breathed out) / storage capacity
+      //   produced    = VCO2 (mL/min)
+      //   breathed out = VA (L/min) x PaCO2 (mmHg) / 0.863   (the alveolar ventilation equation, rearranged)
+      //   capacity    = CO2_STORE_ML_PER_MMHG: how much CO2 the body takes up per mmHg rise
+      // With VA = 0 this is the apnoeic rise; at steady state it is PaCO2 = 0.863 x VCO2 / VA. One rule, no boundary.
+      const eliminated = f(vaLMin * this.patient.paCO2 / f(0.863));
+      const perMinute = f((this.patient.vco2MlMin - eliminated) / CO2_STORE_ML_PER_MMHG);
+      this.patient.paCO2 = Clamp(f(this.patient.paCO2 + perMinute * dt / 60), 10, 150);
+    } else if (vaLMin > 0.3) {
       const targetPaCO2 = Clamp(f(0.863) * this.patient.vco2MlMin / vaLMin, 10, 130);
       this.patient.paCO2 = Lerp(this.patient.paCO2, targetPaCO2, Clamp01(dt / 25));
     } else {
