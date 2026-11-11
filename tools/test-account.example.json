@@ -1,0 +1,5 @@
+{
+  "_note": "Local test account for playing the Theatre in development without touching a real player's saved progress. It exists only in the browser's localStorage on this machine. Register it at the stage door ('Join the company').",
+  "username": "understudy",
+  "password": "curtain-call-0419"
+}

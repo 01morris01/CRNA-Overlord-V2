@@ -1,0 +1,182 @@
+[
+ {
+  "pass": true,
+  "check": "sign in with the app's own account reaches character screen",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "character saved with chosen options",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "walked to the end of the pier (real keys)",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "field note collected by walking into it",
+  "detail": "Field note 1 of 4. C5 and C6 join as the superior trunk. C7 goes on alone as the middle trunk. C8 and T1 join as the inferior trunk. Plus four planks."
+ },
+ {
+  "pass": true,
+  "check": "Booth speaks when you are near",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "reached the Hall door",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "door prompt appears",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "lesson step 1 completed by acting on the model",
+  "detail": "It is hidden."
+ },
+ {
+  "pass": true,
+  "check": "lesson step 2 completed by acting on the model",
+  "detail": "Two muscles, one groove."
+ },
+ {
+  "pass": true,
+  "check": "lesson corrects a wrong order without ending the step",
+  "detail": "Click the three trunks from highest to lowest.  That is the inferior trunk. Start with the"
+ },
+ {
+  "pass": true,
+  "check": "lesson step 3 completed by acting on the model",
+  "detail": "Three trunks."
+ },
+ {
+  "pass": true,
+  "check": "lesson step 4 completed by acting on the model",
+  "detail": "Every trunk divides."
+ },
+ {
+  "pass": true,
+  "check": "lesson step 5 completed by acting on the model",
+  "detail": "Five nerves leave for the arm."
+ },
+ {
+  "pass": true,
+  "check": "lesson step 6 completed by acting on the model",
+  "detail": "Why the level matters."
+ },
+ {
+  "pass": true,
+  "check": "lesson completion saved",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "no names are shown during the challenge",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "challenge 1: right pick is marked right",
+  "detail": "scalenus anterior muscle"
+ },
+ {
+  "pass": true,
+  "check": "challenge 2: right pick is marked right",
+  "detail": "long thoracic nerve"
+ },
+ {
+  "pass": true,
+  "check": "challenge 3: wrong pick is marked wrong",
+  "detail": "posterior cord of brachial plexus"
+ },
+ {
+  "pass": true,
+  "check": "challenge 4: right pick is marked right",
+  "detail": "musculocutaneous nerve"
+ },
+ {
+  "pass": true,
+  "check": "challenge 5: right pick is marked right",
+  "detail": "right subclavian artery"
+ },
+ {
+  "pass": true,
+  "check": "challenge 6: wrong pick is marked wrong",
+  "detail": "superior trunk of brachial plexus"
+ },
+ {
+  "pass": true,
+  "check": "challenge 7: right pick is marked right",
+  "detail": "inferior trunk of brachial plexus"
+ },
+ {
+  "pass": true,
+  "check": "challenge 8: right pick is marked right",
+  "detail": "median nerve"
+ },
+ {
+  "pass": true,
+  "check": "structure names never appeared on hover during the challenge",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "6 of 8 unaided answers earns the reward; learning record kept separately",
+  "detail": "{\"due\": [[\"spaced\", 6], [\"spaced\", 6], [\"missed\", 1], [\"spaced\", 6], [\"spaced\", 6], [\"missed\", 1], [\"spaced\", 6], [\"spaced\", 6], [\"spaced\", 6], [\"spac"
+ },
+ {
+  "pass": true,
+  "check": "missed items are due tomorrow, a correct guess in two days, sure-and-right in six",
+  "detail": "[('missed', 1), ('spaced', 6)]"
+ },
+ {
+  "pass": true,
+  "check": "return toast names what was earned",
+  "detail": "Earned. Nerve stimulator, clipped to your scrubs. A brachial plexus model you can stand on your plot. Plus 12 "
+ },
+ {
+  "pass": true,
+  "check": "walked onto the plot",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "build mode opens on the plot",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "placed the earned plexus model and blocks on the plot (real clicks)",
+  "detail": "[[50, 7, 50, 19], [48, 7, 49, 13], [52, 7, 49, 13], [49, 7, 54, 8], [50, 7, 54, 8], [51, 7, 54, 8]]"
+ },
+ {
+  "pass": true,
+  "check": "on return: same place, same character, plot, notes and rewards",
+  "detail": "{\"pos\": [48.08, 7, 52.09, 2.6], \"P\": [48.08, 52.09], \"plot\": 6, \"notes\": [\"dock\"], \"rewards\": [\"nerve-stimulator\", \"plexus-model\"], \"name\": \"Shawn\", \""
+ },
+ {
+  "pass": true,
+  "check": "on return: greeted by name",
+  "detail": "Welcome back, Shawn. Nothing due today."
+ },
+ {
+  "pass": true,
+  "check": "the classic app's save is untouched",
+  "detail": ""
+ },
+ {
+  "pass": true,
+  "check": "two days later the missed structures are due and come first",
+  "detail": "Identification challenge"
+ },
+ {
+  "pass": true,
+  "check": "no script errors during the whole run",
+  "detail": "[]"
+ }
+]

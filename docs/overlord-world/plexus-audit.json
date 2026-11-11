@@ -1,0 +1,191 @@
+{
+ "model": "plexus_right_raw.glb",
+ "passed": 18,
+ "total": 23,
+ "results": [
+  {
+   "check": "trunks run superior > middle > inferior",
+   "pass": true,
+   "measured": "mean heights 1436.0, 1430.9, 1428.3 mm",
+   "claim": "Superior trunk highest, inferior trunk lowest",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "superior_trunk lies inside the interscalene groove",
+   "pass": false,
+   "measured": "19.1 mm from anterior scalene, 7.8 mm from middle scalene; nearest anterior-scalene point is 12.0 mm in front of nearest middle-scalene point",
+   "claim": "Plexus emerges between anterior and middle scalenes",
+   "source": "HADZIC3, NAG50",
+   "note": "MODEL DIFFERENCE. The trunk objects begin lateral to the scalene bellies; the roots, which are what run inside the groove, are not in this model. The lesson was changed to say the roots pass between the scalenes and the trunks form at the outer edge."
+  },
+  {
+   "check": "superior_trunk emerges at the outer edge of the groove, behind the anterior scalene",
+   "pass": true,
+   "measured": "19.1 mm from anterior scalene and 12.9 mm behind it; 7.8 mm from middle scalene",
+   "claim": "Roots pass between the scalenes and join into trunks near their lateral border",
+   "source": "HADZIC3, NAG50",
+   "note": ""
+  },
+  {
+   "check": "middle_trunk lies inside the interscalene groove",
+   "pass": false,
+   "measured": "28.6 mm from anterior scalene, 14.0 mm from middle scalene; nearest anterior-scalene point is 13.6 mm in front of nearest middle-scalene point",
+   "claim": "Plexus emerges between anterior and middle scalenes",
+   "source": "HADZIC3, NAG50",
+   "note": "MODEL DIFFERENCE. The trunk objects begin lateral to the scalene bellies; the roots, which are what run inside the groove, are not in this model. The lesson was changed to say the roots pass between the scalenes and the trunks form at the outer edge."
+  },
+  {
+   "check": "middle_trunk emerges at the outer edge of the groove, behind the anterior scalene",
+   "pass": true,
+   "measured": "28.6 mm from anterior scalene and 26.8 mm behind it; 14.0 mm from middle scalene",
+   "claim": "Roots pass between the scalenes and join into trunks near their lateral border",
+   "source": "HADZIC3, NAG50",
+   "note": ""
+  },
+  {
+   "check": "inferior_trunk lies inside the interscalene groove",
+   "pass": false,
+   "measured": "18.6 mm from anterior scalene, 4.9 mm from middle scalene; nearest anterior-scalene point is 15.6 mm in front of nearest middle-scalene point",
+   "claim": "Plexus emerges between anterior and middle scalenes",
+   "source": "HADZIC3, NAG50",
+   "note": "MODEL DIFFERENCE. The trunk objects begin lateral to the scalene bellies; the roots, which are what run inside the groove, are not in this model. The lesson was changed to say the roots pass between the scalenes and the trunks form at the outer edge."
+  },
+  {
+   "check": "inferior_trunk emerges at the outer edge of the groove, behind the anterior scalene",
+   "pass": true,
+   "measured": "18.6 mm from anterior scalene and 16.2 mm behind it; 4.9 mm from middle scalene",
+   "claim": "Roots pass between the scalenes and join into trunks near their lateral border",
+   "source": "HADZIC3, NAG50",
+   "note": ""
+  },
+  {
+   "check": "subclavian artery crosses the first rib",
+   "pass": true,
+   "measured": "closest approach 0.3 mm",
+   "claim": "Artery crosses the first rib",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "inferior trunk is beside the subclavian artery",
+   "pass": true,
+   "measured": "closest approach 10.6 mm; trunk point is -9.7 mm anterior(+)/posterior(-) and 4.3 mm above(+)/below(-) the artery",
+   "claim": "Inferior trunk lies behind/above the artery on the first rib",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "vein in front of anterior scalene, artery behind it",
+   "pass": true,
+   "measured": "vein is 0.3 mm anterior to the muscle at closest approach (0.5 mm away); artery is 1.9 mm posterior (1.9 mm away)",
+   "claim": "Subclavian vein passes anterior to the anterior scalene; artery and plexus posterior",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "musculocutaneous nerve meets coracobrachialis",
+   "pass": false,
+   "measured": "closest approach 8.5 mm",
+   "claim": "Musculocutaneous nerve pierces coracobrachialis",
+   "source": "NAG50, NETTER439",
+   "note": "MODEL DIFFERENCE. The nerve is drawn beside coracobrachialis, not through it, and only in the arm: its top end is 117.4 mm below the trunks with nothing joining it to the plexus. The app says so wherever this nerve is shown."
+  },
+  {
+   "check": "musculocutaneous nerve runs between biceps and brachialis in the arm",
+   "pass": true,
+   "measured": "88% of the nerve lies within 12 mm of both biceps and brachialis",
+   "claim": "Musculocutaneous nerve descends between biceps and brachialis",
+   "source": "NAG50, NETTER439",
+   "note": ""
+  },
+  {
+   "check": "axillary nerve at the surgical neck",
+   "pass": true,
+   "measured": "closest approach 5.5 mm at 83% of humeral height (100% = top)",
+   "claim": "Axillary nerve winds around the surgical neck of the humerus",
+   "source": "NAG50",
+   "note": ""
+  },
+  {
+   "check": "radial nerve runs against the back of the humeral shaft",
+   "pass": true,
+   "measured": "683 nerve points within 12 mm of the mid-shaft; 81% of them lie posterior to the bone surface",
+   "claim": "Radial nerve runs in the spiral groove on the posterior humerus",
+   "source": "NAG50",
+   "note": ""
+  },
+  {
+   "check": "ulnar nerve passes behind the medial epicondyle",
+   "pass": true,
+   "measured": "184 nerve points within 20 mm of the distal humerus; 100% medial to the shaft axis, 100% posterior to the bone",
+   "claim": "Ulnar nerve passes posterior to the medial epicondyle",
+   "source": "NAG50",
+   "note": ""
+  },
+  {
+   "check": "median nerve travels with the brachial artery",
+   "pass": true,
+   "measured": "median separation along the arm 8.7 mm (max 18.7 mm)",
+   "claim": "Median nerve accompanies the brachial artery",
+   "source": "NAG50",
+   "note": ""
+  },
+  {
+   "check": "suprascapular nerve: superior trunk to scapula",
+   "pass": true,
+   "measured": "0.1 mm from the superior trunk, 0.1 mm from the scapula",
+   "claim": "Suprascapular nerve arises from the superior trunk and runs to the scapula",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "long thoracic nerve descends on serratus anterior",
+   "pass": true,
+   "measured": "71% of the nerve lies within 12 mm of serratus anterior",
+   "claim": "Long thoracic nerve runs on and supplies serratus anterior",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "dorsal scapular nerve: through middle scalene toward levator scapulae",
+   "pass": true,
+   "measured": "0.4 mm from middle scalene, 0.4 mm from levator scapulae",
+   "claim": "Dorsal scapular nerve pierces the middle scalene and runs to levator scapulae and rhomboids",
+   "source": "HADZIC3",
+   "note": ""
+  },
+  {
+   "check": "posterior cord joins all three posterior divisions and gives axillary and radial",
+   "pass": false,
+   "measured": "posterior division of superior trunk 0.0 mm; posterior division of middle trunk 0.2 mm; posterior division of inferior trunk 11.0 mm; axillary nerve r 7.3 mm; radial nerve r 0.0 mm",
+   "claim": "Posterior divisions form the posterior cord, which gives the axillary and radial nerves",
+   "source": "HADZIC3, NETTER439",
+   "note": "MODEL DIFFERENCE. The junction of divisions and cords is drawn as a rough knot about 15 mm across. The object named posterior division of the inferior trunk does not reach the posterior cord, and the axillary nerve starts 7 mm from it. The model has no lateral or medial cord at all. The lesson teaches this wiring in words and never asks the learner to trace a division."
+  },
+  {
+   "check": "posterior cord gives radial, thoracodorsal and both subscapular nerves",
+   "pass": true,
+   "measured": "radial 0.0 mm; thoracodorsal 0.1 mm; superior subscapular 0.2 mm; inferior subscapular 0.3 mm",
+   "claim": "Posterior cord branches: subscapular nerves, thoracodorsal, axillary, radial",
+   "source": "HADZIC3, NETTER439",
+   "note": ""
+  },
+  {
+   "check": "cricoid cartilage sits at the level of C6",
+   "pass": true,
+   "measured": "cricoid centre at 1464.0 mm; C6 body spans 1453.7 to 1478.3 mm (level found: C6)",
+   "claim": "Cricoid cartilage marks C6",
+   "source": "NAG50",
+   "note": ""
+  },
+  {
+   "check": "trunks above the clavicle, posterior cord below it",
+   "pass": true,
+   "measured": "trunks 13.3 mm above nearest clavicle point; posterior cord 21.0 mm below",
+   "claim": "Supraclavicular part: roots, trunks, divisions. Infraclavicular part: cords and branches",
+   "source": "NAG50",
+   "note": ""
+  }
+ ]
+}
