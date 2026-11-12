@@ -233,8 +233,10 @@ const ACTION_RULES = [
     if (!(dial > 0 && dial <= 18)) return null;
     return { kind: 'volatile', agent, dial, label: `${agent} ${dial}%` };
   }],
-  [/\b(fluid|fluids|bolus of|lr\b|lactated|ringer|saline|ns\b|albumin|blood|prbc|packed (red )?cells|units? of blood)/, (t) => {
-    const type = /\b(blood|prbc|packed|units? of)/.test(t) ? 'PRBC' : /albumin/.test(t) ? 'Albumin5' : /saline|\bns\b/.test(t) ? 'NS' : 'LR';
+  // "blood" means a blood product only when it is not the first word of "blood pressure" / "blood sugar" / "blood gas": a learner who
+  // says "the blood pressure is 90 over 50" has not ordered 90 mL of red cells.
+  [/\b(fluid|fluids|bolus of|lr\b|lactated|ringer|saline|ns\b|albumin|blood(?!\s+(pressure|sugar|glucose|gas))|prbc|packed (red )?cells|units? of blood)/, (t) => {
+    const type = /\b(blood(?!\s+(pressure|sugar|glucose|gas))|prbc|packed|units? of)/.test(t) ? 'PRBC' : /albumin/.test(t) ? 'Albumin5' : /saline|\bns\b/.test(t) ? 'NS' : 'LR';
     if (/\b(stop|off|hold|turn off)\b/.test(t)) return { kind: 'fluid_stop', label: 'Stop fluids' };
     const rate = t.match(/(\d+)\s*(ml|cc)?\s*(an hour|per hour|\/h|hr|ml\/hr|mls an hour)/);
     if (rate) return { kind: 'fluid_rate', type, mlPerHr: Number(rate[1]), label: `${type} at ${rate[1]} mL/h` };
