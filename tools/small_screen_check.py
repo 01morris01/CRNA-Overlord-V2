@@ -1,6 +1,7 @@
 """small_screen_check.py: the institute at phone and tablet sizes, in Chrome's touch EMULATION on this computer.
      uv run --with playwright python3 tools/small_screen_check.py OUT_DIR tools/test-account.example.json [PORT]
-It checks that the layout fits, that the touch controls exist and move the walker, and that the exhibits open.
+It checks that the layout fits, that the touch controls exist and move the walker, that the exhibits open, and that a
+pre-op bay and a running case fit and respond.
 Emulation is not a real device: it says nothing about a phone's graphics speed, memory, heat or real touch handling."""
 import sys, json, os
 from playwright.sync_api import sync_playwright
@@ -12,7 +13,7 @@ WORLD = "window.__ov && __ov.world && __ov.places && document.getElementById('ve
 with sync_playwright() as p:
     b = p.chromium.launch(channel="chrome", args=["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist"])
     for tag, w, h, dpr in [("phone", 390, 844, 3), ("tablet", 820, 1180, 2)]:
-        ctx = b.new_context(viewport={"width": w, "height": h}, device_scale_factor=dpr, is_mobile=True, has_touch=True, user_agent=None); pg = ctx.new_page(); errs = []
+        ctx = b.new_context(viewport={"width": w, "height": h}, device_scale_factor=dpr, is_mobile=True, has_touch=True, user_agent=None, service_workers="block"); pg = ctx.new_page(); errs = []
         pg.on("pageerror", lambda e: errs.append(str(e)[:300])); pg.on("console", lambda m: errs.append(m.text[:200]) if m.type == "error" and "404" not in m.text else None)
         pg.goto(B + "blank.html"); pg.evaluate("""async ([u, p]) => { const a = await import('/core/auth.js'); let r = await a.loginUser(u, p); if (!r.success) { await a.registerUser(u, p); r = await a.loginUser(u, p); }
           const s = await import('/world/js/save.js'); localStorage.removeItem(s.key()); }""", [ACC["username"], ACC["password"]])   # test setup: signed in, no save
@@ -34,6 +35,16 @@ with sync_playwright() as p:
         pg.evaluate("__ov.hall.learn.go('menu')"); pg.wait_for_timeout(600); pg.tap('#hPanel [data-go="exit"]'); pg.wait_for_function(WORLD, timeout=60000); pg.wait_for_timeout(1500)
         pg.evaluate("__ov.places.direct('scan')"); pg.wait_for_function("window.__ov && __ov.scan && __ov.scan.running", timeout=120000); pg.wait_for_timeout(2500); pg.tap('#sPanel [data-go="explore"]'); pg.wait_for_timeout(1800); pg.screenshot(path=f"{OUT}/{tag}-5-scan.jpg", type="jpeg", quality=85)   # test setup: the direct route
         ok(f"{tag}: the scan exhibit shows the model, an active slice and its panel without overflow", pg.evaluate(FITS, "#sSlices figure.on canvas") and pg.evaluate(FITS, "#sPanel") and pg.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"))
+        # ---- pre-op holding and a case, at this size
+        pg.goto(B + "?go=bay1"); pg.wait_for_function(WORLD + " && __ov.periop", timeout=180000); pg.wait_for_function("!document.getElementById('wPlace').hidden", timeout=30000); pg.wait_for_timeout(2500); pg.screenshot(path=f"{OUT}/{tag}-6-bay.jpg", type="jpeg", quality=85)   # test setup: the direct route
+        ok(f"{tag}: a pre-op bay opens with its panel on screen and the patient in view above it", pg.evaluate(FITS, "#wPlace") and pg.evaluate("document.documentElement.scrollWidth <= innerWidth + 1") and pg.evaluate("document.querySelector('#wPlace [data-m=desk]') !== null"))
+        pg.tap('#wPlace [data-m="skip"]'); pg.wait_for_function("__ov.periop.case && !document.getElementById('wipe').className && !document.getElementById('caseHud').hidden", timeout=40000); pg.wait_for_timeout(1500)
+        ok(f"{tag}: the case brief fits, and the walking pad makes way for it", pg.evaluate(FITS, "#caseHud") and pg.evaluate("getComputedStyle(document.getElementById('stick')).display === 'none'"))
+        pg.tap('#caseHud [data-start="list"]'); pg.wait_for_timeout(1200); pg.tap('#caseHud [data-a="spo2"]'); pg.wait_for_timeout(500); pg.tap('#caseHud [data-view="monitor"]'); pg.wait_for_timeout(1500); pg.screenshot(path=f"{OUT}/{tag}-7-case-monitor.jpg", type="jpeg", quality=85)
+        box = pg.evaluate("(() => { const r = document.getElementById('caseHud').getBoundingClientRect(); return { top: r.top / innerHeight, w: r.width / innerWidth, tabs: [...document.querySelectorAll('#caseHud [data-tab], #caseHud [data-view]')].every(b => { const q = b.getBoundingClientRect(); return q.left >= 0 && q.right <= innerWidth + 1 && q.height >= 26; }), spo2: __ov.periop.case.mon.spo2 }; })()")
+        ok(f"{tag}: the running case's panel fits with every tab and view within reach, a tapped step registers, and part of the room stays in view", pg.evaluate(FITS, "#caseHud") and box["tabs"] and box["spo2"] and (box["top"] > 0.3 or box["w"] < 0.6) and pg.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"), json.dumps(box))
+        pg.tap('#caseHud [data-end]'); pg.wait_for_function("!document.getElementById('wPlace').hidden && document.getElementById('wPlace').innerText.toLowerCase().includes('debrief')", timeout=20000); pg.wait_for_timeout(800); pg.screenshot(path=f"{OUT}/{tag}-8-debrief.jpg", type="jpeg", quality=85)
+        ok(f"{tag}: the debrief fits and can be closed", pg.evaluate(FITS, "#wPlace") and pg.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")); pg.evaluate("document.querySelector('#wPlace [data-m=leave]').scrollIntoView()"); pg.tap('#wPlace [data-m="leave"]'); pg.wait_for_timeout(1500)
         ok(f"{tag}: no script errors", not errs, errs[:2]); ctx.close()
     b.close()
 print(f"\n{sum(1 for r in R if r['pass'])} of {len(R)} emulation checks pass"); json.dump(R, open(OUT + "/small-screen-results.json", "w"), indent=1)

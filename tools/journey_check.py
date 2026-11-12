@@ -164,7 +164,7 @@ async def main():
         await walk_to(0.3, -23.4); await walk_to(0.4, -20.5); await walk_to(1.9, -18.0); await walk_to(1.9, -7.4); await walk_to(3.8, -5.5); ok("functional", "walk across the court and through the studio door", await walk_to(6.6, -5.6) and (await P())["room"] == "studio", json.dumps(await P()))
         ok("functional", "walk to the collection wall", await walk_to(7.6, -6.9, tol=0.5)); await pg.wait_for_timeout(900); await shot("j14-studio")
         ok("functional", "the specimen stands on the shelf as a real object", await pg.evaluate("__ov.exhibits.shelf.length") >= 1)
-        await pg.keyboard.press("KeyE"); await pg.wait_for_timeout(1800); col = await pg.inner_text("#wPlace"); await shot("j15-collection")
+        await pg.keyboard.press("KeyE"); await pg.wait_for_function("!document.getElementById('wPlace').hidden", timeout=20000); await pg.wait_for_timeout(700); col = await pg.inner_text("#wPlace"); await shot("j15-collection")      # waits for the panel, not for a fixed time: a busy machine glides slowly
         ok("functional", "the collection lists it and offers to open it", "Brachial plexus specimen" in col and await pg.locator('[data-m="inspect"]').count() == 1)
         await pg.click("details.item >> nth=0"); await pg.wait_for_timeout(400); five = await pg.inner_text("details.item >> nth=0"); ok("functional", "each held thing answers: what, why, use, kept, return", all(k in five.lower() for k in ["what", "why", "use", "kept", "return"]), five.replace("\n", " ")[:120])
         await pg.click('[data-m="inspect"]'); await pg.wait_for_function(HALL, timeout=60000); await pg.wait_for_timeout(2200)
@@ -217,7 +217,7 @@ async def main():
         ok("functional", "the explained case is filed in the archive even though the approach was wrong; the series patch is not given", ("case:" + case["id"]) in r["col"] and "regional-patch" not in r["col"] and r["cases"][case["id"]] == [[case["no"], "no", False]] and "III.I.5" in r["outline"], json.dumps(r)[:190])
         await pg.click('[data-go="exit"]'); await to_world(); await pg.wait_for_timeout(1200)
         # ===== 9. the archive: run the case again and compare =====
-        await pg.evaluate("__ov.world.open('desk')"); await pg.wait_for_timeout(2200)   # test setup: stand at the desk instead of walking there again
+        await pg.evaluate("__ov.world.open('desk')"); await pg.wait_for_function("!document.getElementById('wPlace').hidden", timeout=25000); await pg.wait_for_timeout(700)   # test setup: stand at the desk instead of walking there again
         desk = await pg.inner_text("#wPlace"); ok("functional", "the desk shows the case with your decisions and your own sentence", "nearest approach" in desk and "Not this approach" in desk and await pg.locator(".atts.two").count() == 0, desk.replace("\n", " ")[:110]); await shot("j24-archive-one")
         await pg.click('[data-m="case"]'); await pg.wait_for_function(HALL, timeout=60000); await pg.wait_for_timeout(2200)
         for _ in range(3):
@@ -228,13 +228,13 @@ async def main():
             for i, t in enumerate(case["truths"]):
                 if t: await pg.click(f'[data-reason="{i}"]'); await pg.wait_for_timeout(160)
             await pg.click('[data-act="creasons"]'); await pg.wait_for_timeout(400); await pg.fill("#why", "It covers what the surgery needs and avoids what this patient cannot afford."); await pg.click('[data-act="cexplain"]'); await pg.wait_for_timeout(1200); await pg.click('[data-self="1"]'); await pg.wait_for_timeout(300)
-            await pg.evaluate("__ov.hall.learn.go('menu')"); await pg.wait_for_timeout(500); await pg.click('[data-go="exit"]'); await to_world(); await pg.evaluate("__ov.world.open('desk')"); await pg.wait_for_timeout(2200)   # test setup: back to the desk
+            await pg.evaluate("__ov.hall.learn.go('menu')"); await pg.wait_for_timeout(500); await pg.click('[data-go="exit"]'); await to_world(); await pg.evaluate("__ov.world.open('desk')"); await pg.wait_for_function("!document.getElementById('wPlace').hidden", timeout=25000); await pg.wait_for_timeout(700)   # test setup: back to the desk
             desk2 = await pg.inner_text("#wPlace"); ok("functional", "after a second attempt the desk sets the first and the latest side by side", await pg.locator(".atts.two .att").count() == 2 and "Not this approach" in desk2 and "preferred approach" in desk2.lower() and "First attempt on the left" in desk2, desk2.replace("\n", " ")[:120]); await shot("j25-archive-compare")
         else: ok("functional", "after a second attempt the desk sets the first and the latest side by side", False, "the same case did not come up again")
         await pg.keyboard.press("Escape"); await pg.wait_for_timeout(600)
         # ===== 10. honest states: every other place says what works and what does not =====
         for key, must in [("or", ["Works", "Not built", "Student Workstation"]), ("regional", ["Works", "Approximated", "Not built", "ultrasound"]), ("mirror", ["without a camera", "Not built", "never count against you"]), ("atrium", ["Move the plane", "view-only"])]:
-            await pg.evaluate(f"__ov.world.open('{key}')"); await pg.wait_for_timeout(2000); txt = await pg.inner_text("#wPlace")   # test setup: visit each place without walking
+            await pg.evaluate(f"__ov.world.open('{key}')"); await pg.wait_for_function("!document.getElementById('wPlace').hidden", timeout=25000); await pg.wait_for_timeout(700); txt = await pg.inner_text("#wPlace")   # test setup: visit each place without walking
             ok("functional", f"{key}: the place states what works, what is approximated and what is not built", all(m.lower() in txt.lower() for m in must), txt.replace("\n", " ")[:90])
             if key in ("or", "atrium"): await shot(f"j26-place-{key}")
             if key == "atrium":

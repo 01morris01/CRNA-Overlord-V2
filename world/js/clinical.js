@@ -6,8 +6,9 @@
 // The operating room's patient monitor and ventilator display are real in the sense that matters: when a case is running
 // they show the app's own physiology engine, number for number, and their traces are drawn by the app's own waveform
 // generator (ui/liveWaveformRenderer.js), the same one the classic live-sim display uses. A channel shows nothing until its
-// sensor has been put on the patient. With no patient in the room the screens say STANDBY. The ultrasound in the regional
-// bay has no probe model and shows what a probe held in air shows, marked as not a scan.
+// sensor has been put on the patient. With no patient in the room the screens say STANDBY. The stand monitors in pre-op holding
+// show the last vital signs recorded in the chart of the patient in their bay, and say so. The ultrasound in the regional bay
+// has no probe model and shows what a probe held in air shows, marked as not a scan.
 import * as THREE from 'three';
 import { TOKENS, wordmarkSVG, svgImage } from './brand.js';
 import { beat, alarm } from './audio.js';
@@ -53,6 +54,14 @@ function drawVent(S, L) {
   [['VT', num(s.ventMode ? s.tv : s.spontaneousTV), 'mL'], ['RR', num(s.ventMode ? s.ventSetRR : s.spontaneousRR), '/min'], ['PEEP', num(s.ventSetPeep), 'cmH₂O'], ['FiO₂', num(s.fio2, 2), '']].forEach(([k, v, u], i) => { const x = 10 + i * ((w - 20) / 4); label(g, k, x, 236, 12, '#8fa3ad'); label(g, v, x, 264, 24, '#e8edf0', { font: MONO, weight: 600 }); label(g, u, x, 279, 10, '#6f7f88'); });
   label(g, `O₂ ${num(s.o2Flow, 1)}  Air ${num(s.airFlow, 1)}  N₂O ${num(s.n2oFlow, 1)} L/min`, 10, 304, 12, '#9fd0ff', { font: MONO }); label(g, s.vaporizer > 0 ? `${String(s.vaporizerAgent).slice(0, 4)} ${num(s.vaporizer, 1)}%` : 'agent off', w - 10, 304, 12, '#d6a3ff', { font: MONO, align: 'right' });
 }
+/** A spot-check monitor on a stand (pre-op holding, the block bay). It shows the last vital signs recorded in the chart of whoever is in
+ *  that bay, with where they were taken. It is not live, and says "last recorded". With nobody in the bay it is on standby. */
+function drawSpot(S, d) { const { g, w, h } = S; g.fillStyle = '#06090c'; g.fillRect(0, 0, w, h);
+  if (!d) { label(g, 'STANDBY', w / 2, h / 2 + 8, 26, '#5f7480', { align: 'center', spacing: 4, weight: 300 }); return; }
+  label(g, 'NIBP  mmHg', 14, 30, 15, '#8fa3ad', { spacing: 1 }); label(g, `${num(d.sbp)}/${num(d.dbp)}`, 14, 86, 54, '#e8edf0', { font: MONO, weight: 600 });
+  label(g, 'PULSE', 14, 128, 14, '#3ee06a'); label(g, num(d.hr), 14, 170, 42, '#3ee06a', { font: MONO, weight: 600 }); label(g, 'SpO₂ %', w / 2 + 8, 128, 14, '#4cc9ff'); label(g, num(d.spo2), w / 2 + 8, 170, 42, '#4cc9ff', { font: MONO, weight: 600 });
+  label(g, 'TEMP °C', 14, 208, 14, '#e8edf0'); label(g, num(d.temp, 1), 14, 244, 30, '#e8edf0', { font: MONO, weight: 600 }); label(g, 'RESP', w / 2 + 8, 208, 14, '#f2d24b'); label(g, num(d.rr), w / 2 + 8, 244, 30, '#f2d24b', { font: MONO, weight: 600 });
+  g.fillStyle = '#0c1318'; g.fillRect(0, h - 46, w, 46); label(g, 'LAST RECORDED · NOT LIVE', 14, h - 28, 11, '#8fa3ad', { spacing: 1.2 }); label(g, String(d.when || 'in the chart').slice(0, 30), 14, h - 11, 12.5, '#c9d5da'); }
 function drawUltrasound(S, t, speckle) {
   const { g, w, h } = S; g.fillStyle = '#020304'; g.fillRect(0, 0, w, h); label(g, 'LINEAR  ·  NERVE', 16, 30, 16, '#cfd8dc', { weight: 600, spacing: 1.5 }); label(g, clock(), w - 16, 30, 15, '#90a0a8', { font: MONO, align: 'right' }); demoTag(g, w - 170, 12);
   const x0 = 120, y0 = 58, iw = w - 240, ih = h - 150; g.fillStyle = '#000'; g.fillRect(x0, y0, iw, ih);
@@ -95,20 +104,30 @@ export async function mountClinical({ world }) {
     k.traverse((o) => { if (o.isMesh && /^screen_/.test(o.name)) found[o.name.replace(/^screen_/, '').replace(/_\d+$/, '')] = o; }); }
   const S = {}, make = (name, w, h, glow) => { const s = canvasTex(w, h); S[name] = s; const o = found[name]; if (o) { o.material.dispose && o.material.dispose(); o.material = new THREE.MeshBasicMaterial({ map: s.t, toneMapped: true, color: new THREE.Color(glow, glow, glow) }); } return s; };
   make('monitor', 560, 500, 1.5); make('vent', 320, 320, 1.5); make('us', 640, 548, 1.4); make('us_touch', 480, 296, 1.1); make('panel', 560, 404, 1.2); make('device', 200, 140, 1.0); make('pump', 116, 80, 1.0);
+  // the workstation's own controls turn with the engine's settings: the three flow-control knobs by litres a minute, the vaporizer dials by percent.
+  // Each is re-centred first (the model keeps every part in the machine's frame) and turns about its own axis, found from its own shape.
+  const flatAxis = (pos) => { const n = pos.count, m = [0, 0, 0, 0, 0, 0], v = new THREE.Vector3(); for (let i = 0; i < n; i++) { v.fromBufferAttribute(pos, i); m[0] += v.x * v.x; m[1] += v.x * v.y; m[2] += v.x * v.z; m[3] += v.y * v.y; m[4] += v.y * v.z; m[5] += v.z * v.z; }
+    const mul = (a) => new THREE.Vector3(m[0] * a.x + m[1] * a.y + m[2] * a.z, m[1] * a.x + m[3] * a.y + m[4] * a.z, m[2] * a.x + m[4] * a.y + m[5] * a.z), top = (skip) => { let a = new THREE.Vector3(0.61, 0.52, 0.6); for (let k = 0; k < 60; k++) { a = mul(a); if (skip) a.addScaledVector(skip, -a.dot(skip)); a.normalize(); } return a; };
+    const e1 = top(null), e2 = top(e1), e3 = new THREE.Vector3().crossVectors(e1, e2).normalize(), l = [e1, e2, e3].map((e) => e.dot(mul(e))), ax = (l[0] - l[1] > l[1] - l[2] ? e1 : e3).clone(); return ax.z < 0 ? ax.negate() : ax; };      /* a round thing spreads equally in two directions; the odd one out is its axis, whether it is a long knob or a flat dial */
+  const turn = {}; { const m = api.pieces.eq_anesthesia_machine; if (m) for (const k of [...m.children]) { const n = k.isMesh && k.material ? k.material.name : ''; if (!/^(knob_|dial_)/.test(n)) continue; k.geometry.computeBoundingBox(); const c = k.geometry.boundingBox.getCenter(new THREE.Vector3()); k.geometry.translate(-c.x, -c.y, -c.z); k.position.add(c); k.userData.axis = flatAxis(k.geometry.attributes.position); turn[n] = k; } }
+  const dials = (s) => { const set = (n, a) => { if (turn[n]) turn[n].quaternion.setFromAxisAngle(turn[n].userData.axis, a); }; set('knob_oxygen', s ? -s.o2Flow * 0.45 : 0); set('knob_air', s ? -s.airFlow * 0.45 : 0); set('knob_nitrous', s ? -s.n2oFlow * 0.45 : 0); set('dial_sevoflurane', s && s.vaporizerAgent === 'Sevoflurane' ? -s.vaporizer * 0.5 : 0); set('dial_isoflurane', s && s.vaporizerAgent === 'Isoflurane' ? -s.vaporizer * 0.5 : 0); };
+  // the stand monitors' own screens: the model carries a picture of numbers that belong to nobody, so a real display is laid over it (its place measured on the model)
+  api.spots = {}; for (const [name, k] of Object.entries(api.pieces)) { if (!name.startsWith('eq_vitals_monitor')) continue; const s = canvasTex(240, 308, false), q = new THREE.Mesh(new THREE.PlaneGeometry(0.12, 0.154), new THREE.MeshBasicMaterial({ map: s.t, toneMapped: true, color: new THREE.Color(1.15, 1.15, 1.15) }));
+    q.position.set(-0.038, 1.237, 0.0335); q.rotation.x = -0.1639; q.name = 'screen_spot'; k.add(q); drawSpot(s, null); s.t.needsUpdate = true; const sp = api.spots[name] = { s, data: null, at: k.getWorldPosition(new THREE.Vector3()), set(d) { sp.data = d || null; drawSpot(s, sp.data); s.t.needsUpdate = true; } }; }
   const board = canvasTex(1536, 782, false); world.setScreen('orwall', board.t, { glow: 1.25 });
   const speckle = document.createElement('canvas'); speckle.width = 200; speckle.height = 160; const sg = speckle.getContext('2d'), noise = () => { const im = sg.createImageData(200, 160), d = im.data; for (let i = 0; i < d.length; i += 4) { const v = Math.pow(Math.random(), 2.2) * 150; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; } sg.putImageData(im, 0, 0); };
   let mark = null; svgImage(wordmarkSVG({ ink: '#f1f4f5', accent: TOKENS.coral, weight: 2.8 })).then((i) => { mark = i; drawBoard(board, mark, api.live); board.t.needsUpdate = true; }).catch(() => {});
   const still = () => { drawTouch(S.us_touch); S.us_touch.t.needsUpdate = true; drawPanel(S.panel); S.panel.t.needsUpdate = true; if (!api.live) { drawBoard(board, mark, null); board.t.needsUpdate = true; }
     for (const [n, text] of [['device', 'STANDBY'], ['pump', 'OFF']]) { const s = S[n]; s.g.fillStyle = '#06090c'; s.g.fillRect(0, 0, s.w, s.h); label(s.g, text, s.w / 2, s.h / 2 + 6, s.h * 0.2, '#6f828c', { align: 'center', spacing: 2 }); s.t.needsUpdate = true; } };
   let t = 0, fast = 0, slow = 0, minute = 99, wasLive = false, phase = 0, alarmT = 0, boardT = 0; noise(); standby(S.monitor, 'PATIENT MONITOR'); S.monitor.t.needsUpdate = true; standby(S.vent, 'VENTILATOR'); S.vent.t.needsUpdate = true; drawUltrasound(S.us, 0, speckle); S.us.t.needsUpdate = true; still();
-  api.has = true; api.screens = found; api.live = null;      // set each frame by the case that is running: { m (what the case's tick returned), label, sub, board }
+  api.has = true; api.screens = found; api.turn = turn; api.live = null;      // set each frame by the case that is running: { m (what the case's tick returned), label, sub, board }
   /** Screens are redrawn only for the room being looked into, and no faster than a real display refreshes its traces. */
   api.update = (dt) => { t += dt; fast += dt; slow += dt; minute += dt; boardT += dt; const p = world.camera.position, room = world.roomAt(p.x, p.y, p.z, 0.3), motion = world.prefs.motion, L = api.live;
     if (L) { const ph = L.m.wave.cardiacPhase, mon = L.m.mon; if (ph < phase && (mon.spo2 || mon.ecg)) beat(mon.spo2 ? L.m.s.spo2 : 99); phase = ph;      /* one tone per beat drawn, from the monitor itself */
       if (mon.spo2 && L.m.s.spo2 < 90) { alarmT -= dt; if (alarmT <= 0) { alarmT = 2.2; alarm(); } } }
-    if (L && (room === 'or' || room === 'court') && fast > (motion ? 1 / 20 : 0.5)) { fast = 0; drawMonitor(S.monitor, L, Math.floor(t * 2) % 2 === 0); S.monitor.t.needsUpdate = true; drawVent(S.vent, L); S.vent.t.needsUpdate = true; }
+    if (L && (room === 'or' || room === 'court') && fast > (motion ? 1 / 20 : 0.5)) { fast = 0; drawMonitor(S.monitor, L, Math.floor(t * 2) % 2 === 0); S.monitor.t.needsUpdate = true; drawVent(S.vent, L); S.vent.t.needsUpdate = true; dials(L.m.s); }
     if (L && boardT > 1) { boardT = 0; drawBoard(board, mark, L); board.t.needsUpdate = true; }
-    if (!L && wasLive) { standby(S.monitor, 'PATIENT MONITOR'); S.monitor.t.needsUpdate = true; standby(S.vent, 'VENTILATOR'); S.vent.t.needsUpdate = true; drawBoard(board, mark, null); board.t.needsUpdate = true; } wasLive = !!L;
+    if (!L && wasLive) { dials(null); standby(S.monitor, 'PATIENT MONITOR'); S.monitor.t.needsUpdate = true; standby(S.vent, 'VENTILATOR'); S.vent.t.needsUpdate = true; drawBoard(board, mark, null); board.t.needsUpdate = true; } wasLive = !!L;
     if (room === 'regional' && slow > (motion ? 0.16 : 2)) { slow = 0; if (motion) noise(); drawUltrasound(S.us, t, speckle); S.us.t.needsUpdate = true; }
     if (minute > 20) { minute = 0; still(); if (!L) { standby(S.monitor, 'PATIENT MONITOR'); S.monitor.t.needsUpdate = true; standby(S.vent, 'VENTILATOR'); S.vent.t.needsUpdate = true; } } };
   return api;

@@ -197,7 +197,9 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   let invited = null, hideWalker = false;
   function use(s) { if (!enabled) return; enabled = false; moveTo = null; keys.clear(); els.prompt && els.prompt.classList.remove('on'); sound.sfx('tap');
     const eye = new THREE.Vector3(s.pos.x, 1.52, s.pos.z), look = new THREE.Vector3(...s.look); P.yaw = Math.atan2(look.x - s.pos.x, look.z - s.pos.z);      // a station may name its own viewpoint (`eye`, `fov`): a bedside, not the ring you walked to
-    glideTo(s.eye ? new THREE.Vector3(...s.eye) : eye.clone().lerp(look, 0.12), look, s.fov || 46, prefs.motion ? 0.85 : 0, () => onStation && onStation(s.key, api)); }
+    let from = s.eye ? new THREE.Vector3(...s.eye) : eye.clone().lerp(look, 0.12), to = look;
+    if (matchMedia('(max-width: 820px)').matches) { const d = from.distanceTo(look) * 1.3; from = look.clone().add(from.sub(look).setLength(d)); to = look.clone(); to.y -= 0.5 * d * Math.tan(THREE.MathUtils.degToRad((s.fov || 46) / 2)); }      // on a narrow screen the panel covers the lower half: stand back a little and aim lower, so the subject sits in the half that is left
+    glideTo(from, to, s.fov || 46, prefs.motion ? 0.85 : 0, () => onStation && onStation(s.key, api)); }
   function glideTo(pos, look, fov, seconds, done) { if (seconds <= 0) { camera.position.copy(pos); camera.lookAt(look); camera.fov = fov; camera.updateProjectionMatrix(); cam.glide = { hold: true, look: look.clone() }; done && done(); return; }
     cam.glide = { p0: camera.position.clone(), q0: camera.quaternion.clone(), f0: camera.fov, p1: pos, q1: new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().lookAt(pos, look, camera.up)), f1: fov, t: 0, dur: seconds, done, look: look.clone() }; }
 

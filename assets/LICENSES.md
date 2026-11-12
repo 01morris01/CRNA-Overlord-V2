@@ -36,3 +36,13 @@ rectangles added over blank displays so the app can draw on them. Further change
 
 Licences were read from each model's Sketchfab listing on 11 November 2026. The models depict equipment in general; no
 manufacturer's name is shown by this project, and none of the models is offered as an accurate record of any product.
+
+## Recorded narration
+
+`assets/audio/narration/*.mp3` and `manifest.json`: the lessons' spoken lines (the plexus film and the regional
+explanation), 15 clips, about two and a half minutes. The words are this project's own (each one is sourced in
+`docs/overlord-world/CONTENT-VERIFICATION.md`). The audio was generated with ElevenLabs text to speech, voice "Matilda"
+(a stock voice from ElevenLabs' own library, voice id `XrExE9yKIg1WjnnlVkGX`, model `eleven_multilingual_v2`), from the
+project owner's ElevenLabs account, by `tools/render_narration.py`. No person was recorded and no voice was cloned; the
+owner's own voice clones were not used. ElevenLabs' terms give the account holder the rights to audio generated on a paid
+plan; the owner should confirm the plan in force covers the use they intend before distributing the app.

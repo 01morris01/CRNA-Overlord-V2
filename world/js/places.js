@@ -125,7 +125,7 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
 
   return {
     open(key) { (OPEN[key] || (() => panel(key, `<h2>${esc(key)}</h2>`)))(); },
-    sheet, next, goal, panel, act, close, state3, wide(on) { E.classList.toggle('wide', !!on); },
+    sheet, next, goal, panel, act, close, state3, wide(on) { E.classList.toggle('wide', !!on); }, isOpen: () => !!open,
     /** Pre-op holding and the operating room register what their stations open. */
     extend(p) { periop = p; Object.assign(OPEN, p.open); goal(); },
     /** Called every time the walker is given the level back. */

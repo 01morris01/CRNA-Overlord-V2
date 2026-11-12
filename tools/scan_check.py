@@ -111,7 +111,7 @@ async def main():
         ok("slice items changed plane and model items changed view between questions", len(set(views)) >= 4, json.dumps(views))
         await pg.click('#sPanel [data-go="exit"]'); await pg.wait_for_function("document.body.dataset.screen === 'world' && !document.getElementById('wipe').className", timeout=60000); await pg.wait_for_timeout(2500)
         toast = await pg.inner_text("#wToast"); ok("back in the gallery: told what was added", "collection" in toast.lower() and "section set" in toast.lower(), toast[:90])
-        await pg.evaluate("__ov.world.open('collection')"); await pg.wait_for_timeout(2400); col = await pg.inner_text("#wPlace")   # test setup: stand at the shelf without walking
+        await pg.evaluate("__ov.world.open('collection')"); await pg.wait_for_function("!document.getElementById('wPlace').hidden", timeout=25000); await pg.wait_for_timeout(700); col = await pg.inner_text("#wPlace")   # test setup: stand at the shelf without walking
         ok("the section set stands on the studio shelf and can be opened from there", "Airway and neck section set" in col and await pg.locator('[data-m="airway"]').count() == 1 and await pg.evaluate("__ov.exhibits.shelf.length") >= 1); await pg.keyboard.press("Escape"); await pg.wait_for_timeout(500)
         await pg.evaluate("__ov.world.bookmark('collection')"); await pg.wait_for_timeout(1500); await shot("s15-shelf")   # test setup: a fixed camera for the picture
         ok("no script errors during the whole run", not errs, errs[:3])

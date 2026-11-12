@@ -41,8 +41,17 @@ tidal volume. Same induction: 41, 41, 42, 44 at 0, 30, 60 and 90 seconds, and 56
    four are malignant hyperthermia timings tuned on the old rule. Do you accept losing exact parity for CO2, and how
    fast should EtCO2 climb in MH?
 
+## Where the correction is used (added 11 November 2026)
+
+One place: the institute's 3D operating room (`world/js/cases.js`). A case started there switches the correction on for
+that case only, because the room's monitor would otherwise show a breathing patient's carbon dioxide climbing past
+100 mmHg, and a learner would be taught something false by a monitor that looks real. The room's station offers the
+engine's original rule instead, the case panel names the rule in use while a case runs, and every debrief and saved
+result records it (`co2: "stores"` or `"legacy"`). This is a choice made by an AI assistant for honesty of display, not a
+faculty decision, and it should be reversed or confirmed by faculty. Nothing was changed in the engine's files to do it.
+
 ## What was not done
 
-- The correction is not enabled in the live simulator, the instructor console, or any scenario.
+- The correction is not enabled in the classic live simulator, the instructor console, or any scenario file.
 - No existing test or expected value was changed.
 - No clinician has reviewed the correction.

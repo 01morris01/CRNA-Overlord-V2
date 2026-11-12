@@ -295,7 +295,7 @@ def build(src):
     put(emergency_cart(), (11.25, 18.95, 0), 0.0, 'or'); cart = supply_cart(); put(cart, (11.55, 16.2, 0), math.pi / 2, 'or')
     put(suction(), (6.15, 19.578, 1.42), 0.0, 'or'); put(clock(), (10.9, 19.578, 2.42), 0.0, 'or')
     tools = instruments(); put(tools, (10.42, 12.62, 0.925), 0.25, 'or'); t2 = copy(tools); put(t2, (10.98, 12.55, 0.925), 3.3, 'or')
-    for small, at, rz in ((laryngoscope(), (0.36, -0.37, 0.862), 0.35), (syringes(), (0.2, -0.41, 0.862), 1.9)):                       # on the machine's front ledge, and moving with it (the worktop proper is higher: its height still has to be measured before these move onto it)
+    for small, at, rz in ((laryngoscope(), (0.42, -0.225, 0.789), -math.pi / 2), (syringes(), (0.56, -0.2, 0.903), math.pi / 2)):      # on the machine's worktop (measured: top at 0.903, front edge at 0.31) and moving with it; the laryngoscope's handle rests on the top with its blade hanging over the front edge
         PIECES.remove(small); small.parent = am; small.location = at; small.rotation_euler = (0, 0, rz)
     g, heads = kit.surgical_lights((8.6, 15.35, 2.886), [(8.6, 16.05, 0.98), (8.6, 15.05, 0.98)], reach=((-0.85, 0.35), (0.8, -0.3))); g['room'] = 'or'
     for hp, tg in heads: lamps.append({'kind': 'SPOT', 'at': tuple(hp + (tg - hp).normalized() * 0.06), 'to': tuple(tg), 'power': 300, 'color': (1.0, 0.985, 0.95), 'size': 0.28, 'spot': 34, 'blend': 0.55, 'dyn': True})
