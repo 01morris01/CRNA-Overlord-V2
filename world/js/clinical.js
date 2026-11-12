@@ -99,7 +99,7 @@ export async function mountClinical({ world }) {
   try { g = await world.loadModel('level/clinical.glb'); } catch (e) { console.warn('clinical equipment', e); return api; }
   const found = {};
   for (const k of [...g.scene.children]) { k.updateMatrixWorld(true); const c = new THREE.Box3().setFromObject(k).getCenter(new THREE.Vector3()), room = (k.userData && k.userData.room) || world.roomAt(c.x, c.y, c.z);
-    const lit = world.place(k, { at: c, room, envI: 0.75, shadow: false }); api.pieces[k.name] = k;
+    const lit = world.place(k, { at: c, room, envI: 0.75, shadow: false, solid: true }); api.pieces[k.name] = k;      /* solid: its own outline goes into the floor map of what stops you */
     for (const m of lit.mats) if (m.map && m.transparent && m.opacity === 1) { m.transparent = false; m.alphaTest = 0.4; m.depthWrite = true; }      /* cloth with a see-through band: cut out, not blended, so it sorts and takes light like the solid thing it is */
     k.traverse((o) => { if (o.isMesh && /^screen_/.test(o.name)) found[o.name.replace(/^screen_/, '').replace(/_\d+$/, '')] = o; }); }
   const S = {}, make = (name, w, h, glow) => { const s = canvasTex(w, h); S[name] = s; const o = found[name]; if (o) { o.material.dispose && o.material.dispose(); o.material = new THREE.MeshBasicMaterial({ map: s.t, toneMapped: true, color: new THREE.Color(glow, glow, glow) }); } return s; };

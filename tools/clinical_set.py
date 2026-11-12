@@ -289,10 +289,10 @@ def build(src):
     """Stand everything in the level (Blender axes: +X east, +Y north). Returns pieces, lamps for the bake, and screens."""
     global SRC; SRC = src; kit.materials(); k0 = len(kit.PIECES); lamps = []
     # ---- operating room: x 4.9..12, y 11.5..19.6. Table north-south, head to the north; anesthesia at the head.
-    put(operating_table(), (*OR_TABLE, 0), 0.0, 'or')
-    am = put(anesthesia_machine(), (7.42, 17.42, 0), 1.72, 'or')                                             # west of the head, facing the anesthetist; its circuit side toward the patient
-    poles = iv_poles(); put(poles[0], (9.95, 16.45, 0), 0.6, 'or')
-    put(emergency_cart(), (11.25, 18.95, 0), 0.0, 'or'); cart = supply_cart(); put(cart, (11.55, 16.2, 0), math.pi / 2, 'or')
+    put(operating_table(), (*OR_TABLE, 0), -0.1306, 'or')                                                    # the model's top is swivelled 7.5 degrees on its column: turned back so the pads lie along the room and under the patient
+    am = put(anesthesia_machine(), (6.95, 17.45, 0), 1.2217, 'or')                                             # west of the head, facing the anesthetist; its circuit side toward the patient
+    poles = iv_poles(); put(poles[0], (9.98, 16.72, 0), 0.6, 'or')
+    put(emergency_cart(), (11.25, 18.95, 0), 0.0, 'or'); cart = supply_cart(); put(cart, (9.9, 17.6, 0), math.pi / 2, 'or')      # the anesthesia cart, at the anesthetist's left hand
     put(suction(), (6.15, 19.578, 1.42), 0.0, 'or'); put(clock(), (10.9, 19.578, 2.42), 0.0, 'or')
     tools = instruments(); put(tools, (10.42, 12.62, 0.925), 0.25, 'or'); t2 = copy(tools); put(t2, (10.98, 12.55, 0.925), 3.3, 'or')
     for small, at, rz in ((laryngoscope(), (0.42, -0.225, 0.789), -math.pi / 2), (syringes(), (0.56, -0.2, 0.903), math.pi / 2)):      # on the machine's worktop (measured: top at 0.903, front edge at 0.31) and moving with it; the laryngoscope's handle rests on the top with its blade hanging over the front edge
@@ -300,8 +300,8 @@ def build(src):
     g, heads = kit.surgical_lights((8.6, 15.35, 2.886), [(8.6, 16.05, 0.98), (8.6, 15.05, 0.98)], reach=((-0.85, 0.35), (0.8, -0.3))); g['room'] = 'or'
     for hp, tg in heads: lamps.append({'kind': 'SPOT', 'at': tuple(hp + (tg - hp).normalized() * 0.06), 'to': tuple(tg), 'power': 300, 'color': (1.0, 0.985, 0.95), 'size': 0.28, 'spot': 34, 'blend': 0.55, 'dyn': True})
     kit.pendant((10.75, 15.1, 3.0), (-0.72, 0.18))['room'] = 'or'
-    kit.back_table((10.7, 12.6, 0), 0.0, w=1.5, d=0.7, h=0.9)['room'] = 'or'; kit.mayo_stand((9.42, 14.42, 0), 2.6)['room'] = 'or'
-    kit.stool((8.05, 18.3, 0))['room'] = 'or'; kit.stool((7.55, 15.1, 0), 0.4)['room'] = 'or'; kit.kick_bucket((9.75, 15.0, 0))['room'] = 'or'
+    kit.back_table((10.7, 12.6, 0), 0.0, w=1.5, d=0.7, h=0.9)['room'] = 'or'; kit.mayo_stand((9.75, 13.55, 0), 2.6)['room'] = 'or'
+    kit.stool((8.7, 18.55, 0))['room'] = 'or'; kit.stool((5.45, 16.6, 0), 0.4)['room'] = 'or'; kit.kick_bucket((9.6, 12.9, 0))['room'] = 'or'      # clear of the ways round the table
     kit.wall_cabinet((11.795, 13.0, 0), -math.pi / 2)['room'] = 'or'; kit.wall_cabinet((11.795, 13.95, 0), -math.pi / 2)['room'] = 'or'
     kit.control_panel((11.968, 17.6, 1.4), -math.pi / 2)['room'] = 'or'; kit.sharps_wall((11.968, 18.45, 1.25), -math.pi / 2)['room'] = 'or'
     # ---- regional bay: x -11.5..-4.9, y 12..18.5. A curtained bay against the south wall, head to the wall.

@@ -396,7 +396,7 @@ for (name, x, y, z, rz, sc) in PROPS:
 # ------------------------------------------------------------------ clinical equipment (tools/clinical_set.py): shades the bake, collides, and is exported on its own
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import clinical_set
-CLIN = os.path.join(os.path.dirname(os.path.abspath(SRC.rstrip('/'))), 'objaverse'); eq_pieces, eq_lamps = clinical_set.build(CLIN); COLLIDERS += clinical_set.colliders(eq_pieces)
+CLIN = os.path.join(os.path.dirname(os.path.abspath(SRC.rstrip('/'))), 'objaverse'); eq_pieces, eq_lamps = clinical_set.build(CLIN); EQUIP_FROM = len(COLLIDERS); COLLIDERS += clinical_set.colliders(eq_pieces)      # the equipment's boxes come last: the browser replaces them with each piece's real outline
 print('CLINICAL pieces', len(eq_pieces), 'tris', sum(clinical_set.tris(eq_pieces).values()))
 
 # ------------------------------------------------------------------ sky and sun: find the sun in the sky image, and turn the image so both agree
@@ -534,6 +534,7 @@ FACE = {'N': [0, -1], 'S': [0, 1], 'E': [1, 0], 'W': [-1, 0]}
 level = {'units': 'metres; three.js axes (x east, y up, z south)', 'sunDir': T3(list(SUN_DIR)), 'sun': SUN, 'sky': SKY, 'sunColor': [1.0, 0.955, 0.89], 'lightmapSize': RES,
   'spawn': {'x': 0.9, 'z': 12.9, 'yaw': 0.07}, 'bounds': [-18.0, -32.2, 16.2, 15.8],
   'colliders': [[c[0], -c[3], c[2], -c[1], c[4], c[5]] for c in COLLIDERS],
+  'equipFrom': EQUIP_FROM,
   'rooms': {k: {'x0': v[0], 'z0': -v[3], 'x1': v[2], 'z1': -v[1], 'h': v[4], 'floor': v[5], 'exposure': v[6]} for k, v in ROOMS.items()},
   'glass': [[g[0], g[2], -g[4], g[3], g[5], -g[1], g[6]] for g in GLASS], 'pool': [POOL[0], -POOL[3], POOL[2], -POOL[1], POOL[4]],
   'stations': {k: st(v) for k, v in STATIONS.items()},

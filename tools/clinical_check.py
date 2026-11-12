@@ -51,7 +51,7 @@ async def main():
         ok("the station opens with E and states what works, what is approximated and what is not built", "operating room" in prompt.lower() and all(k in low for k in ["works", "approximated", "not built", "student workstation"]), txt.replace("\n", " ")[:120])
         ok("the panel says the monitors are on standby until a patient is connected, and lists who is waiting", "standby until a patient is connected" in low and "waiting in pre-op holding" in low); await shot("c04-or-panel")
         await pg.click('[data-m="work"]'); await pg.wait_for_timeout(1400); w = await pg.evaluate("__ov.world.stations.find(s => s.key === 'or').table"); q = await P()
-        ok("'Take the anesthesia position' stands you at the head of the table", abs(q["x"] - w[0]) < 0.1 and abs(q["z"] - (w[1] - 1.6)) < 0.1 and q["room"] == "or", json.dumps(q)); await shot("c05-or-anesthesia-position")
+        ok("'Take the anesthesia position' stands you at the head of the table", abs(q["x"] - w[0]) < 0.1 and abs(q["z"] - (w[1] - 1.26)) < 0.1 and q["room"] == "or", json.dumps(q)); await shot("c05-or-anesthesia-position")
         await pg.keyboard.down("KeyS"); await pg.wait_for_timeout(500); await pg.keyboard.up("KeyS"); await pg.wait_for_timeout(300); q2 = await P()
         ok("and leaves you free to move from there", abs(q2["x"] - q["x"]) + abs(q2["z"] - q["z"]) > 0.15, json.dumps(q2))
         a = await pg.evaluate(f"({PIX})('monitor')"); await pg.wait_for_timeout(450); b2 = await pg.evaluate(f"({PIX})('monitor')"); v1 = await pg.evaluate(f"({PIX})('vent')"); await pg.wait_for_timeout(450); v2 = await pg.evaluate(f"({PIX})('vent')")

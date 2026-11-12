@@ -67,7 +67,8 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' }); renderer.setPixelRatio(Math.min(devicePixelRatio || 1, Q().dpr));
   renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = EXPOSURE; renderer.localClippingEnabled = true; renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; host.appendChild(renderer.domElement);
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(prefs.fov, 1, 0.08, 400);
-  const size = () => { const w = host.clientWidth || 1, h = host.clientHeight || 1; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }; const ro = new ResizeObserver(size); ro.observe(host); size();
+  const inset = { l: 0, t: 0, r: 0, b: 0 };      // what a panel covers, in CSS pixels: the camera's centre is kept in the middle of what is left
+  const size = () => { const w = host.clientWidth || 1, h = host.clientHeight || 1; renderer.setSize(w, h, false); camera.aspect = w / h; if (inset.l || inset.t || inset.r || inset.b) camera.setViewOffset(w, h, (inset.r - inset.l) / 2, (inset.b - inset.t) / 2, w, h); else camera.clearViewOffset(); camera.updateProjectionMatrix(); }; const ro = new ResizeObserver(size); ro.observe(host); size();
   const get = async (p) => { const r = await fetch(A(p)); const b = await r.arrayBuffer(); bytes.n += b.byteLength; return b; };
   const parse = (buf) => new Promise((res, rej) => loader().parse(buf, A('level/'), res, rej));
 
@@ -169,24 +170,58 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     if (old) { scene.remove(old.root); old.dispose(); } walker.person = p; scene.add(p.root); p.onStep = () => sound.footstep(rooms.find((r) => r.name === P.room)?.floor || 'stone'); applyEnv(); }
   const blob = new THREE.Mesh(new THREE.CircleGeometry(0.34, 32), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.22, depthWrite: false, map: drawTexture(64, 64, (g) => { const r = g.createRadialGradient(32, 32, 2, 32, 32, 31); r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); }) }));
   blob.material.alphaMap = blob.material.map; blob.material.map = null; blob.rotation.x = -Math.PI / 2; blob.position.y = 0.007; blob.renderOrder = 1; scene.add(blob);
-  const cols = L.colliders.filter((c) => c[4] < 1.7 && c[5] > 0.06).concat([[-2.3, 15.3, 2.3, 15.9, 0, 2]]);      // plus the forecourt's open side
-  function collide(x, z, r = 0.27) { for (let it = 0; it < 3; it++) for (const c of cols) { const nx = Math.max(c[0], Math.min(x, c[2])), nz = Math.max(c[1], Math.min(z, c[3])), dx = x - nx, dz = z - nz, d2 = dx * dx + dz * dz;
-      if (d2 < r * r) { if (d2 > 1e-8) { const d = Math.sqrt(d2); x = nx + dx / d * r; z = nz + dz / d * r; } else { const l = x - c[0], rr = c[2] - x, t = z - c[1], b = c[3] - z, m = Math.min(l, rr, t, b); if (m === l) x = c[0] - r; else if (m === rr) x = c[2] + r; else if (m === t) z = c[1] - r; else z = c[3] + r; } } }
-    return [x, z]; }
+  // ------------------------------------------------------------------ what you cannot walk through
+  // The building's walls are boxes from the level file. Everything that stands in a room (equipment, furniture) is drawn into a fine floor map from its own
+  // triangles between knee and shoulder height, so that what stops you is what you can see: no padded box around a turned or hollow thing, and nothing at all
+  // for hoses, cables and whatever hangs overhead. People and other moving things are circles.
+  const cols = L.colliders.slice(0, L.equipFrom ?? L.colliders.length).filter((c) => c[4] < 1.7 && c[5] > 0.06).concat([[-2.3, 15.3, 2.3, 15.9, 0, 2]]);      // plus the forecourt's open side
+  const CELL = 0.04, RADIUS = 0.24, gx0 = L.bounds[0], gz0 = L.bounds[1], gw = Math.ceil((L.bounds[2] - L.bounds[0]) / CELL), gh = Math.ceil((L.bounds[3] - L.bounds[1]) / CELL), occ = new Uint8Array(gw * gh), stamp = new Uint32Array(gw * gh), solids = new Map(), actors = []; let solidId = 0;
+  const SOFT = /tube|hose|bag|cable|wire|cord|strap|circuit/i;
+  function solid(root, { lo = 0.22, hi = 1.6, skip = SOFT } = {}) {      // the handle of a surgical light at 1.73 m is over your shoulder, not in your way
+    unsolid(root); const id = ++solidId, cells = [], a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
+    const mark = (x, z) => { const i = Math.floor((x - gx0) / CELL), k0 = Math.floor((z - gz0) / CELL); if (i < 0 || k0 < 0 || i >= gw || k0 >= gh) return; const k = k0 * gw + i; if (stamp[k] === id) return; stamp[k] = id; if (occ[k] < 255) occ[k]++; cells.push(k); };
+    root.updateMatrixWorld(true);
+    root.traverse((o) => { if (!o.isMesh || !o.visible || /^screen_/.test(o.name) || (skip && skip.test(o.name + ' ' + ((o.material && o.material.name) || '')))) return; const pos = o.geometry.attributes.position, idx = o.geometry.index ? o.geometry.index.array : null, n = idx ? idx.length : pos.count;
+      for (let t = 0; t < n; t += 3) { a.fromBufferAttribute(pos, idx ? idx[t] : t).applyMatrix4(o.matrixWorld); b.fromBufferAttribute(pos, idx ? idx[t + 1] : t + 1).applyMatrix4(o.matrixWorld); c.fromBufferAttribute(pos, idx ? idx[t + 2] : t + 2).applyMatrix4(o.matrixWorld);
+        if (Math.max(a.y, b.y, c.y) < lo || Math.min(a.y, b.y, c.y) > hi) continue; const m = Math.max(Math.hypot(b.x - a.x, b.z - a.z), Math.hypot(c.x - a.x, c.z - a.z), Math.hypot(c.x - b.x, c.z - b.z)), q = Math.max(1, Math.ceil(m / (CELL * 0.6)));
+        for (let u = 0; u <= q; u++) for (let v = 0; v <= q - u; v++) { const fu = u / q, fv = v / q, fw = 1 - fu - fv, y = a.y * fw + b.y * fu + c.y * fv; if (y >= lo && y <= hi) mark(a.x * fw + b.x * fu + c.x * fv, a.z * fw + b.z * fu + c.z * fv); } } });
+    solids.set(root, cells); return cells.length; }
+  function unsolid(root) { const cells = solids.get(root); if (!cells) return; for (const k of cells) if (occ[k]) occ[k]--; solids.delete(root); }
+  /** One step out of whatever a circle at (x, z) is inside, or null when it stands free. */
+  function push(x, z, r) { let px = 0, pz = 0, deep = 0;
+    for (const c of cols) { const nx = Math.max(c[0], Math.min(x, c[2])), nz = Math.max(c[1], Math.min(z, c[3])), dx = x - nx, dz = z - nz, d2 = dx * dx + dz * dz; if (d2 >= r * r) continue;
+      if (d2 > 1e-8) { const d = Math.sqrt(d2), pen = r - d; px += dx / d * pen; pz += dz / d * pen; if (pen > deep) deep = pen; } else { const l = x - c[0], rr = c[2] - x, t = z - c[1], bb = c[3] - z, m = Math.min(l, rr, t, bb); if (m === l) px -= l + r; else if (m === rr) px += rr + r; else if (m === t) pz -= t + r; else pz += bb + r; if (m + r > deep) deep = m + r; } }
+    const i0 = Math.max(0, Math.floor((x - r - gx0) / CELL)), i1 = Math.min(gw - 1, Math.floor((x + r - gx0) / CELL)), j0 = Math.max(0, Math.floor((z - r - gz0) / CELL)), j1 = Math.min(gh - 1, Math.floor((z + r - gz0) / CELL)), reach = r + CELL * 0.5;
+    for (let k = j0; k <= j1; k++) for (let i = i0; i <= i1; i++) { if (!occ[k * gw + i]) continue; const dx = x - (gx0 + (i + 0.5) * CELL), dz = z - (gz0 + (k + 0.5) * CELL), d = Math.hypot(dx, dz), pen = reach - d; if (pen <= 0) continue; if (d > 1e-6) { px += dx / d * pen; pz += dz / d * pen; } if (pen > deep) deep = pen; }
+    for (const q of actors) { const dx = x - q.x, dz = z - q.z, d = Math.hypot(dx, dz), pen = r + q.r - d; if (pen > 0 && d > 1e-6) { px += dx / d * pen; pz += dz / d * pen; if (pen > deep) deep = pen; } }
+    if (!deep) return null; const n = Math.hypot(px, pz), m = Math.min(deep, r); return n > 1e-6 ? [px / n * m, pz / n * m] : [0, 0]; }
+  /** Where a step toward (x, z) ends: slid along whatever is in the way, or back where it started if there is no room at all. */
+  function collide(x, z, r = RADIUS, fromX = x, fromZ = z) { for (let it = 0; it < 8; it++) { const q = push(x, z, r); if (!q) return [x, z]; if (!q[0] && !q[1]) break; x += q[0] * 1.02; z += q[1] * 1.02; } return push(x, z, r * 0.92) ? [fromX, fromZ] : [x, z]; }
+  const free = (x, z, r = RADIUS) => !push(x, z, r);
+  /** The free spot nearest to (x, z): the spot itself, or the first clear one on widening rings around it. */
+  function nearestFree(x, z, r = RADIUS, reach = 1.6) { if (free(x, z, r)) return [x, z]; for (let d = 0.08; d <= reach; d += 0.08) for (let k = 0; k < 16; k++) { const a = k / 16 * Math.PI * 2, qx = x + Math.cos(a) * d, qz = z + Math.sin(a) * d; if (free(qx, qz, r)) return [qx, qz]; } return [x, z]; }
   const blocked = (x, y, z, pad = 0.16) => { for (const c of L.colliders) if (x > c[0] - pad && x < c[2] + pad && z > c[1] - pad && z < c[3] + pad && y > c[4] - pad && y < c[5] + pad) return true; return false; };
 
   // ------------------------------------------------------------------ input
   const keys = new Set(), el = renderer.domElement; let drag = null, moveTo = null, stick = { x: 0, y: 0 }, enabled = true, near = null;
   const onKey = (e) => { const k = (e.key || '').toLowerCase(), down = e.type === 'keydown'; if (e.target.closest && e.target.closest('input, textarea, select')) { if (!down) keys.delete(k); return; }      /* typing is not walking; a key let go while typing is still let go */
-    if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'shift'].includes(k)) { down ? keys.add(k) : keys.delete(k); if (down) moveTo = null; e.preventDefault(); }
-    if (down && (k === 'e' || k === 'enter') && near && enabled) { e.preventDefault(); use(near); } if (down && k === 'v' && enabled) api.setPref('view', prefs.view === 'first' ? 'third' : 'first'); };
+    if (['w', 'a', 's', 'd', 'q', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'shift'].includes(k)) { down ? keys.add(k) : keys.delete(k); if (down) { moveTo = null; if (!enabled && k !== 'shift' && cam.glide && cam.glide.hold && api.onWalkAway) api.onWalkAway(); } e.preventDefault(); }      /* a movement key while a panel holds the camera means "let me go" */
+    if (down && (k === 'e' || k === 'enter') && near && enabled) { e.preventDefault(); use(near); }
+    if (down && k === 'v' && enabled) { if (clinical() && prefs.clinicalView !== 'same') { prefs.clinicalView = 'same'; api.setPref('view', 'third'); } else if (clinical() && prefs.view !== 'first') prefs.clinicalView = 'first'; else api.setPref('view', prefs.view === 'first' ? 'third' : 'first'); } };
   addEventListener('keydown', onKey); addEventListener('keyup', onKey); addEventListener('blur', () => keys.clear());
-  el.addEventListener('pointerdown', (e) => { if (!enabled) return; drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, t: performance.now(), id: e.pointerId }; el.setPointerCapture(e.pointerId); });
-  el.addEventListener('pointermove', (e) => { if (!drag || drag.id !== e.pointerId || !enabled) return; const k = 0.0042 * prefs.sens * (touch ? 1.5 : 1); cam.yaw -= (e.clientX - drag.x) * k; cam.pitch = THREE.MathUtils.clamp(cam.pitch - (e.clientY - drag.y) * k, -1.0, 0.75); drag.x = e.clientX; drag.y = e.clientY; });
-  el.addEventListener('pointerup', (e) => { if (!drag) return; const still = Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6 && performance.now() - drag.t < 450; drag = null; if (!still || !enabled) return;
+  const lookBy = (dx, dy, k) => { cam.yaw -= dx * k; cam.pitch = THREE.MathUtils.clamp(cam.pitch - dy * k, -1.25, 0.9); };
+  let locked = false; addEventListener('pointerlockchange', () => { locked = document.pointerLockElement === el; document.body.classList.toggle('mouselook', locked); if (!locked) keys.clear(); });
+  addEventListener('mousemove', (e) => { if (locked && enabled) lookBy(e.movementX, e.movementY, 0.0024 * prefs.sens); });
+  el.addEventListener('contextmenu', (e) => e.preventDefault());
+  el.addEventListener('pointerdown', (e) => { if (!enabled) return; if (prefs.mouseLook && !touch && !locked && e.button === 0 && el.requestPointerLock) { const q = el.requestPointerLock(); if (q && q.catch) q.catch(() => {}); return; } if (locked) { api.onPick && api.onPick(null, e); return; } drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, t: performance.now(), id: e.pointerId, button: e.button }; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', (e) => { if (!drag || drag.id !== e.pointerId || !enabled) return; lookBy(e.clientX - drag.x, e.clientY - drag.y, 0.0042 * prefs.sens * (touch ? 1.5 : 1)); drag.x = e.clientX; drag.y = e.clientY; });
+  el.addEventListener('pointerup', (e) => { if (!drag) return; const still = Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6 && performance.now() - drag.t < 450, button = drag.button; drag = null; if (!still || !enabled || button !== 0) return;
+    if (api.onPick && api.onPick(e, e)) return;      /* something in the room took the click (js/hands.js); otherwise a click on the floor walks there */
     const r = el.getBoundingClientRect(), ray = new THREE.Raycaster(); ray.setFromCamera(new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), camera);
     const t = -ray.ray.origin.y / ray.ray.direction.y; if (t > 0 && t < 40) { const p = ray.ray.origin.clone().addScaledVector(ray.ray.direction, t); const s = stations.find((q) => q.pos.distanceTo(p) < 0.9); moveTo = { x: s ? s.pos.x : p.x, z: s ? s.pos.z : p.z, then: s || null, t: 0 }; } });
-  el.addEventListener('wheel', (e) => { if (!enabled) return; e.preventDefault(); cam.dist = THREE.MathUtils.clamp(cam.dist + e.deltaY * 0.003, 0, 4.6); prefs.view = cam.dist < 0.5 ? 'first' : 'third'; }, { passive: false });
+  el.addEventListener('wheel', (e) => { if (!enabled) return; e.preventDefault(); if (clinical() && prefs.clinicalView !== 'same') { if (e.deltaY > 0) { prefs.clinicalView = 'same'; cam.dist = Math.max(cam.dist, 1.2); prefs.view = 'third'; } return; } cam.dist = THREE.MathUtils.clamp(cam.dist + e.deltaY * 0.003, 0, 4.6); prefs.view = cam.dist < 0.5 ? 'first' : 'third'; }, { passive: false });
+  /** In the rooms where you work with your hands (pre-op, the operating room, the block bay and the procedure rooms) you look through your own eyes unless you choose otherwise. */
+  const CLINICAL = new Set(['or', 'preop', 'regional', 'endo', 'procedure', 'labor']), clinical = () => CLINICAL.has(P.room), eyes = () => prefs.view === 'first' || (clinical() && prefs.clinicalView !== 'same');
   if (els.stick) { const k = els.stick.firstElementChild; let id = null; const set = (e) => { const r = els.stick.getBoundingClientRect(); let x = (e.clientX - r.left - r.width / 2) / (r.width / 2), y = (e.clientY - r.top - r.height / 2) / (r.height / 2); const m = Math.hypot(x, y); if (m > 1) { x /= m; y /= m; } stick = { x, y }; k.style.transform = `translate(${x * 34}px, ${y * 34}px)`; };
     els.stick.addEventListener('pointerdown', (e) => { id = e.pointerId; els.stick.setPointerCapture(id); moveTo = null; set(e); }); els.stick.addEventListener('pointermove', (e) => { if (e.pointerId === id) set(e); });
     const end = () => { id = null; stick = { x: 0, y: 0 }; k.style.transform = ''; }; els.stick.addEventListener('pointerup', end); els.stick.addEventListener('pointercancel', end); }
@@ -218,12 +253,12 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   /** Add a model (already loaded) at a spot, lit by the probes there. Returns { root, light, mats }. */
   const placed = [], SEES = { forecourt: ['forecourt', 'arrival', 'court', 'outside'], arrival: ['forecourt', 'arrival', 'court', 'gallery', 'outside'], court: ['arrival', 'court', 'gallery', 'or', 'regional', 'preop', 'studio', 'forecourt', 'outside'], gallery: ['gallery', 'court'], or: ['or', 'court'], regional: ['regional', 'court', 'outside'], preop: ['preop', 'court'], studio: ['studio', 'court', 'outside'], outside: ['forecourt', 'arrival', 'court', 'outside'] };
   let viewRoom = null; const showFor = (r) => { viewRoom = r; const ok = SEES[r] || SEES.court; for (const q of placed) q.root.visible = ok.includes(q.room); };      // things in rooms you cannot see from here are not drawn
-  function place(root, { at, room = null, envI = 0.8, shadow = true }) { const r = room || roomAt(at.x, at.y, at.z), lit = litCopy(root, at, r); for (const m of lit.mats) { m.userData.envI = envI; dynMats.push(m); } root.traverse((o) => { if (o.isMesh) { o.castShadow = shadow && prefs.quality !== 'low'; } }); scene.add(root); placed.push({ root, room: r, light: lit.light, mats: lit.mats });      /* lower cost: only the building and you cast sun shadows */ if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(r); applyEnv(); return { root, ...lit }; }
+  function place(root, { at, room = null, envI = 0.8, shadow = true, solid: hard = false }) { const r = room || roomAt(at.x, at.y, at.z), lit = litCopy(root, at, r); if (hard) solid(root); for (const m of lit.mats) { m.userData.envI = envI; dynMats.push(m); } root.traverse((o) => { if (o.isMesh) { o.castShadow = shadow && prefs.quality !== 'low'; } }); scene.add(root); placed.push({ root, room: r, light: lit.light, mats: lit.mats });      /* lower cost: only the building and you cast sun shadows */ if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(r); applyEnv(); return { root, ...lit }; }
   async function loadModel(path) { const g = await parse(await get(path)); return g; }
   /** Carry something already placed to another spot (a patient from a bay to the table): it takes the light and the reflections of where it now is. */
-  function move(root, { at, room = null }) { const q = placed.find((p) => p.root === root); if (!q) return false; q.room = room || roomAt(at.x, at.y, at.z); if (q.light) lightAt(q.light, at, q.room); for (const m of q.mats || []) m.userData.room = q.room; if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(q.room); applyEnv(); return true; }
+  function move(root, { at, room = null }) { const q = placed.find((p) => p.root === root); if (!q) return false; if (solids.has(root)) solid(root); q.room = room || roomAt(at.x, at.y, at.z); if (q.light) lightAt(q.light, at, q.room); for (const m of q.mats || []) m.userData.room = q.room; if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(q.room); applyEnv(); return true; }
   /** Take something out of the level for good and free what it held (never a room's shared reflection). */
-  function unplace(root) { const i = placed.findIndex((p) => p.root === root); if (i < 0) return; const q = placed.splice(i, 1)[0], mine = new Set(q.mats || []); scene.remove(root); for (let k = dynMats.length - 1; k >= 0; k--) if (mine.has(dynMats[k])) dynMats.splice(k, 1);
+  function unplace(root) { unsolid(root); const i = placed.findIndex((p) => p.root === root); if (i < 0) return; const q = placed.splice(i, 1)[0], mine = new Set(q.mats || []); scene.remove(root); for (let k = dynMats.length - 1; k >= 0; k--) if (mine.has(dynMats[k])) dynMats.splice(k, 1);
     root.traverse((o) => { if (!o.isMesh) return; o.geometry.dispose(); for (const m of [].concat(o.material)) { for (const [k, v] of Object.entries(m)) if (k !== 'envMap' && v && v.isTexture) v.dispose(); m.dispose(); } }); }
   (async () => {     // furniture arrives after the first frame
     try { const g = await loadModel('level/props.glb'); const kids = [...g.scene.children]; for (const k of kids) { k.updateMatrixWorld(true); const c = new THREE.Box3().setFromObject(k).getCenter(new THREE.Vector3()); place(k, { at: c, envI: 0.6, shadow: Math.abs(c.x) < (c.z > SUN.zSplit ? SUN.x : SUN.xCourt) && c.z > SUN.zMin }); } captureRooms(); } catch (e) { console.warn('props', e); }
@@ -234,14 +269,15 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   const head = new THREE.Vector3(), want = new THREE.Vector3(), dir = new THREE.Vector3(), tmpV = new THREE.Vector3();
   function step(dt) {
     // --- move
-    let ix = 0, iz = 0; if (enabled && !cam.glide) { if (keys.has('w') || keys.has('arrowup')) iz += 1; if (keys.has('s') || keys.has('arrowdown')) iz -= 1; if (keys.has('a') || keys.has('arrowleft')) ix -= 1; if (keys.has('d') || keys.has('arrowright')) ix += 1; ix += stick.x; iz -= stick.y; }
+    let ix = 0, iz = 0; if (enabled && !cam.glide) { if (keys.has('w') || keys.has('arrowup')) iz += 1; if (keys.has('s') || keys.has('arrowdown')) iz -= 1; if (keys.has('a')) ix -= 1; if (keys.has('d')) ix += 1; ix += stick.x; iz -= stick.y;
+      const turn = (keys.has('arrowleft') || keys.has('q') ? 1 : 0) - (keys.has('arrowright') ? 1 : 0); if (turn) cam.yaw += turn * 2.1 * dt; }      /* W S walk, A D step sideways, the left and right arrows (and Q) turn: where you look is never tied to where you walk */
     let wx = 0, wz = 0, top = keys.has('shift') ? 1.15 : 2.05;
     if (ix || iz) { const m = Math.min(1, Math.hypot(ix, iz)), a = Math.atan2(ix, iz), f = cam.yaw - a; wx = Math.sin(f) * m; wz = Math.cos(f) * m; }
     else if (moveTo && enabled) { const dx = moveTo.x - P.x, dz = moveTo.z - P.z, d = Math.hypot(dx, dz); moveTo.t += dt; if (d < 0.12 || moveTo.t > 14) { const s = moveTo.then; moveTo = null; if (s && d < 0.5) use(s); } else { const m = Math.min(1, d / 0.7 + 0.25); wx = dx / d * m; wz = dz / d * m; } }
     const acc = Math.min(1, dt * 7.5); P.vx += (wx * top - P.vx) * acc; P.vz += (wz * top - P.vz) * acc;
-    const ox = P.x, oz = P.z; let [nx, nz] = collide(P.x + P.vx * dt, P.z + P.vz * dt); nx = THREE.MathUtils.clamp(nx, L.bounds[0] + 1, L.bounds[2] - 1); nz = THREE.MathUtils.clamp(nz, L.bounds[1] + 1, L.bounds[3] - 1); P.x = nx; P.z = nz;
+    const ox = P.x, oz = P.z; let [nx, nz] = collide(P.x + P.vx * dt, P.z + P.vz * dt, RADIUS, P.x, P.z); nx = THREE.MathUtils.clamp(nx, L.bounds[0] + 1, L.bounds[2] - 1); nz = THREE.MathUtils.clamp(nz, L.bounds[1] + 1, L.bounds[3] - 1); P.x = nx; P.z = nz;
     P.speed = Math.hypot(P.x - ox, P.z - oz) / Math.max(dt, 1e-4); if (moveTo && P.speed < 0.15 && moveTo.t > 0.6) { moveTo.stuck = (moveTo.stuck || 0) + dt; if (moveTo.stuck > 0.5) moveTo = null; }
-    if (P.speed > 0.2) { let d = Math.atan2(P.x - ox, P.z - oz) - P.yaw; d = Math.atan2(Math.sin(d), Math.cos(d)); P.yaw += d * Math.min(1, dt * 10); }
+    const first = eyes(); if (first && !cam.glide) P.yaw = cam.yaw; else if (P.speed > 0.2) { let d = Math.atan2(P.x - ox, P.z - oz) - P.yaw; d = Math.atan2(Math.sin(d), Math.cos(d)); P.yaw += d * Math.min(1, dt * 10); }      /* through your own eyes the body faces where you look, so stepping back or sideways never turns you round */
     P.room = roomAt(P.x, 1, P.z, 0.25); if (P.room === 'outside') P.room = lastRoom || 'forecourt';
     if (P.room !== lastRoom) { lastRoom = P.room; applyEnv(); sound.room(P.room, rooms.find((r) => r.name === P.room)?.floor); api.onRoom && api.onRoom(P.room); }
     // --- the person
@@ -251,7 +287,8 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     if (cam.glide && !cam.glide.hold) { const g = cam.glide; g.t = Math.min(1, g.t + dt / g.dur); const k = g.t * g.t * (3 - 2 * g.t); camera.position.lerpVectors(g.p0, g.p1, k); camera.quaternion.slerpQuaternions(g.q0, g.q1, k); camera.fov = g.f0 + (g.f1 - g.f0) * k; camera.updateProjectionMatrix(); if (g.t >= 1) { const d = g.done; g.hold = true; g.done = null; d && d(); } }
     else if (!cam.glide) {
       const eye = (pr ? pr.height : 1.74) - 0.14; head.set(P.x, eye, P.z); dir.set(Math.sin(cam.yaw) * Math.cos(cam.pitch), Math.sin(cam.pitch), Math.cos(cam.yaw) * Math.cos(cam.pitch));
-      let d = cam.dist; if (d > 0.5) { const sh = Math.min(0.55, 0.2 * cam.cur); head.x += Math.cos(cam.yaw) * -sh; head.z += Math.sin(cam.yaw) * sh; head.y += 0.02;      /* the walker stands left of centre, so the way ahead stays in view */ const room = rooms.find((r) => r.name === P.room), ceil = (room && room.h ? room.h : 30) - 0.25;
+      let d = first ? 0 : Math.max(cam.dist, 1.2); if (first) { const lean = THREE.MathUtils.clamp((-cam.pitch - 0.35) / 0.7, 0, 1) * 0.3; head.x += Math.sin(cam.yaw) * lean; head.z += Math.cos(cam.yaw) * lean; head.y -= lean * 0.3; }      /* looking down at something close, you lean over it */
+      if (d > 0.5) { const sh = Math.min(0.55, 0.2 * cam.cur); head.x += Math.cos(cam.yaw) * -sh; head.z += Math.sin(cam.yaw) * sh; head.y += 0.02;      /* the walker stands left of centre, so the way ahead stays in view */ const room = rooms.find((r) => r.name === P.room), ceil = (room && room.h ? room.h : 30) - 0.25;
         for (let s = 0.3; s <= cam.dist; s += 0.12) { want.copy(head).addScaledVector(dir, -s); if (blocked(want.x, want.y, want.z) || want.y > ceil || want.y < 0.25 || roomAt(want.x, want.y, want.z, 0.1) === 'outside') { d = Math.max(0.3, s - 0.22); break; } } }
       cam.cur += (d - cam.cur) * Math.min(1, dt * (d < cam.cur ? 16 : 5)); camera.position.copy(head).addScaledVector(dir, -cam.cur); camera.lookAt(tmpV.copy(head).addScaledVector(dir, 4));
       if (Math.abs(camera.fov - prefs.fov) > 0.01) { camera.fov += (prefs.fov - camera.fov) * Math.min(1, dt * 6); camera.updateProjectionMatrix(); }
@@ -273,8 +310,21 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     arrival: [[1.1, 1.62, 13.4], [-0.3, 2.3, 0], 60], atrium: [[-2.6, 1.62, -4.6], [0.2, 1.5, -9.9], 50], court: [[2.4, 1.62, -2.2], [-1.2, 2.6, -19], 66], gallery: [[0.9, 1.55, -26.3], [-0.2, 1.4, -28.6], 44],
     regional: [[-5.7, 1.6, -17.5], [-9.2, 1.0, -13.4], 60], bay: [[-7.6, 1.6, -15.6], [-9.3, 1.05, -13.0], 48], oranes: [[9.55, 1.55, -18.7], [7.6, 1.08, -17.3], 46], oreast: [[11.2, 1.62, -13.4], [7.6, 1.1, -16.9], 62], preop: [[-5.6, 1.62, -6.1], [-9.6, 1.0, -7.4], 62], preop2: [[-9.9, 1.6, -5.0], [-6.6, 0.9, -8.6], 60], pool: [[-0.8, 1.62, 12.9], [-5.6, 0.0, 8.4], 62], or: [[5.75, 1.62, -13.75], [9.0, 1.05, -16.3], 66], orwork: [[8.55, 1.6, -18.25], [8.75, 0.95, -15.2], 62], studio: [[5.8, 1.6, -3.8], [8.6, 1.25, -8.3], 62], collection: [[7.6, 1.5, -6.6], [7.6, 1.3, -8.4], 50], portal: [[0.3, 1.62, -17.6], [0, 1.6, -26], 55] };
   const api = {
-    renderer, scene, camera, level: L, prefs, place, move, unplace, loadModel, lightAt, newLight, patchDynamic, setScreen, signs, roomAt, stations, P, boxes, dynMats, captureRooms,
-    get enabled() { return enabled; }, onRoom: null, onFrame: null,
+    renderer, scene, camera, level: L, prefs, place, move, unplace, solid, unsolid, free, nearestFree, actors, loadModel, lightAt, newLight, patchDynamic, setScreen, signs, roomAt, stations, P, boxes, dynMats, captureRooms,
+    get enabled() { return enabled; }, get locked() { return locked; }, get firstPerson() { return eyes(); }, onRoom: null, onFrame: null,
+    /** Called when a movement key is pressed while a panel holds the camera (js/places.js closes the panel). */
+    onWalkAway: null,
+    /** Called with a click on the picture (the pointer event, or null when the mouse is captured and the centre of the view is meant). Return true to keep the click. */
+    onPick: null,
+    /** Tell the camera what part of the screen a panel covers, so that what you look at sits in the middle of the rest. */
+    inset(l = 0, t = 0, r = 0, b = 0) { if (inset.l === l && inset.t === t && inset.r === r && inset.b === b) return; Object.assign(inset, { l, t, r, b }); size(); },
+    /** Stand at the free spot nearest (x, z) and look at a point, through your own eyes, keeping control: a place to work from, not a held camera. */
+    standLook(x, z, target, { reach = 1.6 } = {}) { const [fx, fz] = nearestFree(x, z, RADIUS, reach), eyeY = (walker.person ? walker.person.height : 1.74) - 0.14, dx = target[0] - fx, dz = target[2] - fz; P.x = fx; P.z = fz; P.vx = P.vz = 0; cam.glide = null; cam.yaw = P.yaw = Math.atan2(dx, dz); cam.pitch = THREE.MathUtils.clamp(Math.atan2(target[1] - eyeY, Math.max(0.05, Math.hypot(dx, dz) - 0.2)), -1.25, 0.9); lastRoom = null; enabled = true; hideWalker = false; moveTo = null; return [fx, fz]; },
+    /** The floor map of solid things and the building's boxes over a rectangle, as a picture (for checks and for looking at what stops you). */
+    solidMap(x0, z0, x1, z1, scale = 100) { const c = document.createElement('canvas'), w = c.width = Math.round((x1 - x0) * scale), h = c.height = Math.round((z1 - z0) * scale), g = c.getContext('2d'); g.fillStyle = '#f4f1ea'; g.fillRect(0, 0, w, h); g.fillStyle = '#b9b2a4'; for (const q of cols) g.fillRect((q[0] - x0) * scale, (q[1] - z0) * scale, (q[2] - q[0]) * scale, (q[3] - q[1]) * scale);
+      g.fillStyle = '#1d2a33'; for (let k = Math.max(0, Math.floor((z0 - gz0) / CELL)); k < Math.min(gh, Math.ceil((z1 - gz0) / CELL)); k++) for (let i = Math.max(0, Math.floor((x0 - gx0) / CELL)); i < Math.min(gw, Math.ceil((x1 - gx0) / CELL)); i++) if (occ[k * gw + i]) g.fillRect((gx0 + i * CELL - x0) * scale, (gz0 + k * CELL - z0) * scale, CELL * scale + 0.5, CELL * scale + 0.5);
+      g.fillStyle = 'rgba(255,90,60,.28)'; const st = 0.08; for (let z = z0 + st / 2; z < z1; z += st) for (let x = x0 + st / 2; x < x1; x += st) if (push(x, z, RADIUS)) g.fillRect((x - st / 2 - x0) * scale, (z - st / 2 - z0) * scale, st * scale, st * scale);      /* where your centre cannot be */
+      g.fillStyle = '#ff5a3c'; g.beginPath(); g.arc((P.x - x0) * scale, (P.z - z0) * scale, RADIUS * scale, 0, 7); g.fill(); return c; },
     async start() { await setPerson(state.character || { person: 'tunic', colour: 'ceil' }); captureRooms(); },
     setPerson, invite(key) { invited = key; },
     /** Register something that lights itself (a rigged person): it is shown and hidden with its room and takes that room's reflections. */
@@ -282,7 +332,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     resume() { if (running) return; running = true; clock.getDelta(); const tick = () => { if (!running) return; fpsTick(); requestAnimationFrame(tick); }; tick(); loop(); },
     pause() { running = false; cancelAnimationFrame(raf); sound.quiet(); }, keep() { state.game.pos = { x: +P.x.toFixed(2), z: +P.z.toFixed(2), yaw: +P.yaw.toFixed(2) }; },
     /** Give the walker back control after a station closes. */
-    release() { cam.glide = null; cam.yaw = P.yaw; cam.pitch = -0.1; enabled = true; hideWalker = false; },
+    release() { const held = !!cam.glide; cam.glide = null; if (held) { cam.yaw = P.yaw; cam.pitch = -0.1; } enabled = true; hideWalker = false; },      // after a held view the eyes go back to where the body faces; otherwise they stay where you were looking
     hold() { enabled = false; },
     /** Stand at a station without walking there (direct study, returning users). */
     teleport(key, facing = true) { const s = stations.find((q) => q.key === key); if (!s) return; P.x = s.pos.x; P.z = s.pos.z; if (facing) { P.yaw = Math.atan2(s.look[0] - s.pos.x, s.look[2] - s.pos.z); cam.yaw = P.yaw; } P.vx = P.vz = 0; lastRoom = null; },
