@@ -1,0 +1,156 @@
+{
+ "nibp_cuff.glb": {
+  "title": "Sphygmomanometer Low Poly",
+  "author": "TheGiwi",
+  "licence": "CC BY 4.0",
+  "uid": "58f303b71fd047b0960785141485f8f0",
+  "url": "https://sketchfab.com/3d-models/58f303b71fd047b0960785141485f8f0",
+  "via": "Objaverse 1.0 (allenai/objaverse on Hugging Face), glbs/000-126/58f303b71fd047b0960785141485f8f0.glb",
+  "licence_checked": "2026-11-11",
+  "changes": "Cuff taken out of the set (gauge, bulb and tubes left out); turned so the arm runs along Z; scaled to 14 cm wide and its flattened loop opened to a 10.4 x 9.2 cm oval (the height is stretched 1.5 times more than the other two directions); the faceted loop of 480 triangles rounded by one level of subdivision; texture sheet cropped to the cuff.",
+  "triangles": 1936,
+  "bytes": 107860,
+  "anchors": {
+   "centre": [
+    0,
+    0,
+    0
+   ],
+   "proximal": [
+    0.0,
+    0.0,
+    -0.06989
+   ],
+   "distal": [
+    0.0,
+    0.0,
+    0.06989
+   ],
+   "hose": [
+    0.0,
+    0.05638,
+    0.06989
+   ],
+   "top": [
+    0.0,
+    0.06876,
+    0.0
+   ],
+   "underside": [
+    0.0,
+    -0.06745,
+    0.0
+   ]
+  },
+  "axes": "Origin on the axis of the arm, at the middle of the cuff. Long axis Z: the arm passes through along Z (\"proximal\" toward the shoulder at -Z, \"distal\" toward the elbow at +Z). +Y is the side with the overlapping flap, away from the table. \"hose\" is where a monitor hose would leave, on the distal edge. \"opening\" is the width (X) and height (Y) of the hole for the arm.",
+  "size": [
+   0.1153,
+   0.1362,
+   0.1398
+  ],
+  "box": [
+   [
+    -0.0578,
+    -0.0675,
+    -0.0699
+   ],
+   [
+    0.0575,
+    0.0688,
+    0.0699
+   ]
+  ],
+  "materials": [
+   "nibp_cuff_fabric"
+  ],
+  "textures": [
+   [
+    512,
+    494
+   ],
+   [
+    512,
+    494
+   ],
+   [
+    512,
+    494
+   ]
+  ],
+  "opening": [
+   0.104,
+   0.0941
+  ]
+ },
+ "spo2_probe.glb": {
+  "title": "Pulse Oximeter | Free Model",
+  "author": "Nofil.Khan",
+  "licence": "CC BY 4.0",
+  "uid": "e3ad5ac95aed4546bb869fcd984a7a99",
+  "url": "https://sketchfab.com/3d-models/e3ad5ac95aed4546bb869fcd984a7a99",
+  "via": "Objaverse 1.0 (allenai/objaverse on Hugging Face), glbs/000-144/e3ad5ac95aed4546bb869fcd984a7a99.glb",
+  "licence_checked": "2026-11-11",
+  "changes": "Scaled to 58 mm long; turned so the finger channel runs along Z; origin moved into the channel; the display picture (fixed readings 98 % and 70 bpm) replaced by dark glass; materials renamed; meshes merged by material.",
+  "triangles": 7066,
+  "bytes": 36708,
+  "anchors": {
+   "finger": [
+    0,
+    0,
+    0
+   ],
+   "entry": [
+    0.0,
+    0.0,
+    -0.02898
+   ],
+   "fingertip": [
+    0.0,
+    0.0,
+    0.02898
+   ],
+   "screen": [
+    0.0,
+    0.01735,
+    -0.0
+   ],
+   "top": [
+    0.0,
+    0.01802,
+    0.0
+   ],
+   "underside": [
+    0.0,
+    -0.01978,
+    0.0
+   ]
+  },
+  "axes": "Origin in the middle of the finger channel, between the two pads. Long axis Z: the finger lies along Z and enters from -Z (anchor \"entry\"), its tip toward +Z. +Y is the display side (the back of the finger), -Y the pad of the finger.",
+  "size": [
+   0.0321,
+   0.0378,
+   0.058
+  ],
+  "box": [
+   [
+    -0.0161,
+    -0.0198,
+    -0.029
+   ],
+   [
+    0.016,
+    0.018,
+    0.029
+   ]
+  ],
+  "materials": [
+   "spo2_body_white",
+   "spo2_button_white",
+   "spo2_pad_blue",
+   "spo2_screen_off"
+  ],
+  "textures": []
+ },
+ "not_found": [],
+ "needs_sign_in": []
+}

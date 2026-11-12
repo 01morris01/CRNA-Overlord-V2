@@ -1,0 +1,7440 @@
+{
+ "p01": {
+  "file": "p01.glb",
+  "heightM": 1.02,
+  "sex": "M",
+  "ageYears": 4.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_african_female, hair afro01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26058,
+  "bytes": 818684,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1629,
+    -0.3792
+   ],
+   "nose": [
+    -0.0,
+    0.1735,
+    -0.4062
+   ],
+   "eyeL": [
+    0.0271,
+    0.1527,
+    -0.4321
+   ],
+   "eyeR": [
+    -0.0271,
+    0.1527,
+    -0.4321
+   ],
+   "chest": [
+    0.0,
+    0.1536,
+    -0.1903
+   ],
+   "handL": [
+    0.177,
+    0.0378,
+    0.0515
+   ],
+   "wristL": [
+    0.1664,
+    0.0295,
+    0.0121
+   ],
+   "handR": [
+    -0.177,
+    0.0378,
+    0.0515
+   ],
+   "wristR": [
+    -0.1664,
+    0.0295,
+    0.0121
+   ],
+   "chin": [
+    -0.0,
+    0.13,
+    -0.3495
+   ],
+   "forehead": [
+    -0.0,
+    0.1595,
+    -0.483
+   ],
+   "earL": [
+    0.0818,
+    0.0551,
+    -0.4294
+   ],
+   "earR": [
+    -0.0818,
+    0.0551,
+    -0.4294
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1089,
+    -0.3
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": -0.2,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.045,
+  "jawOpenM": 0.0264,
+  "breatheRiseM": 0.0087,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.235,
+   -0.0001,
+   -0.5441
+  ],
+  "bboxMax": [
+   0.2345,
+   0.1735,
+   0.5699
+  ],
+  "bmi": 16.34,
+  "note": ""
+ },
+ "p02": {
+  "file": "p02.glb",
+  "heightM": 1.63,
+  "sex": "F",
+  "ageYears": 30.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair rehmanpolanski_hair_bun_brown",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27461,
+  "bytes": 1029616,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.193,
+    -0.6842
+   ],
+   "nose": [
+    -0.0,
+    0.2072,
+    -0.7151
+   ],
+   "eyeL": [
+    0.029,
+    0.1719,
+    -0.7436
+   ],
+   "eyeR": [
+    -0.029,
+    0.1719,
+    -0.7436
+   ],
+   "chest": [
+    0.0,
+    0.3262,
+    -0.3638
+   ],
+   "handL": [
+    0.2374,
+    0.0691,
+    -0.0068
+   ],
+   "wristL": [
+    0.2314,
+    0.0803,
+    -0.0689
+   ],
+   "handR": [
+    -0.2374,
+    0.0692,
+    -0.0068
+   ],
+   "wristR": [
+    -0.2314,
+    0.0801,
+    -0.0689
+   ],
+   "chin": [
+    -0.0,
+    0.1648,
+    -0.6301
+   ],
+   "forehead": [
+    -0.0,
+    0.1658,
+    -0.8014
+   ],
+   "earL": [
+    0.0798,
+    0.07,
+    -0.7212
+   ],
+   "earR": [
+    -0.0798,
+    0.07,
+    -0.7212
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2187,
+    -0.5141
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.68,
+  "jawOpenM": 0.0379,
+  "breatheRiseM": 0.014,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3192,
+   -0.0,
+   -0.8545
+  ],
+  "bboxMax": [
+   0.322,
+   0.4814,
+   0.9158
+  ],
+  "bmi": 38.02,
+  "note": "chart: repeat cesarean at term"
+ },
+ "p03": {
+  "file": "p03.glb",
+  "heightM": 1.6,
+  "sex": "F",
+  "ageYears": 84.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_african_female, hair rehmanpolanski_hair_bun_brown",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26075,
+  "bytes": 1013364,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1933,
+    -0.6734
+   ],
+   "nose": [
+    0.0,
+    0.2027,
+    -0.7022
+   ],
+   "eyeL": [
+    0.0283,
+    0.1686,
+    -0.7323
+   ],
+   "eyeR": [
+    -0.0283,
+    0.1686,
+    -0.7323
+   ],
+   "chest": [
+    0.0,
+    0.2299,
+    -0.3582
+   ],
+   "handL": [
+    0.2374,
+    0.0604,
+    -0.0041
+   ],
+   "wristL": [
+    0.2354,
+    0.0554,
+    -0.0679
+   ],
+   "handR": [
+    -0.2374,
+    0.0604,
+    -0.0041
+   ],
+   "wristR": [
+    -0.2354,
+    0.0552,
+    -0.0679
+   ],
+   "chin": [
+    0.0,
+    0.1548,
+    -0.6265
+   ],
+   "forehead": [
+    0.0,
+    0.1636,
+    -0.7841
+   ],
+   "earL": [
+    0.0732,
+    0.0695,
+    -0.7105
+   ],
+   "earR": [
+    -0.0732,
+    0.0695,
+    -0.7105
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1572,
+    -0.5034
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.7,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.645,
+  "jawOpenM": 0.0372,
+  "breatheRiseM": 0.0137,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3184,
+   -0.0,
+   -0.8362
+  ],
+  "bboxMax": [
+   0.3193,
+   0.2629,
+   0.8968
+  ],
+  "bmi": 25.0,
+  "note": "chart: \"Full upper and lower dentures, remove before induction\""
+ },
+ "p04": {
+  "file": "p04.glb",
+  "heightM": 1.8,
+  "sex": "M",
+  "ageYears": 46.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair short02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26288,
+  "bytes": 1006624,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2858,
+    -0.7496
+   ],
+   "nose": [
+    -0.0,
+    0.3054,
+    -0.7749
+   ],
+   "eyeL": [
+    0.0326,
+    0.2688,
+    -0.8194
+   ],
+   "eyeR": [
+    -0.0326,
+    0.2688,
+    -0.8194
+   ],
+   "chest": [
+    0.0,
+    0.3978,
+    -0.4274
+   ],
+   "handL": [
+    0.2279,
+    0.0791,
+    -0.0437
+   ],
+   "wristL": [
+    0.2218,
+    0.0962,
+    -0.1167
+   ],
+   "handR": [
+    -0.2279,
+    0.08,
+    -0.0437
+   ],
+   "wristR": [
+    -0.2218,
+    0.0962,
+    -0.1167
+   ],
+   "chin": [
+    -0.0,
+    0.2647,
+    -0.6924
+   ],
+   "forehead": [
+    -0.0,
+    0.2653,
+    -0.8729
+   ],
+   "earL": [
+    0.0972,
+    0.1645,
+    -0.8012
+   ],
+   "earR": [
+    -0.0972,
+    0.1645,
+    -0.8012
+   ],
+   "sternalNotch": [
+    0.0,
+    0.3003,
+    -0.6041
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 10.2,
+  "headRestGapM": 0.0781,
+  "lyingLengthM": 1.847,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3543,
+   -0.0004,
+   -0.9429
+  ],
+  "bboxMax": [
+   0.3539,
+   0.5525,
+   1.0071
+  ],
+  "bmi": 51.24,
+  "note": "chart: \"full beard\""
+ },
+ "p05": {
+  "file": "p05.glb",
+  "heightM": 1.8,
+  "sex": "M",
+  "ageYears": 36.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23417,
+  "bytes": 1044164,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2074,
+    -0.7592
+   ],
+   "nose": [
+    0.0,
+    0.2254,
+    -0.7919
+   ],
+   "eyeL": [
+    0.0311,
+    0.1918,
+    -0.8309
+   ],
+   "eyeR": [
+    -0.0311,
+    0.1918,
+    -0.8309
+   ],
+   "chest": [
+    0.0,
+    0.2532,
+    -0.4247
+   ],
+   "handL": [
+    0.2328,
+    0.0681,
+    0.0091
+   ],
+   "wristL": [
+    0.2376,
+    0.0525,
+    -0.0612
+   ],
+   "handR": [
+    -0.2328,
+    0.069,
+    0.0091
+   ],
+   "wristR": [
+    -0.2376,
+    0.0525,
+    -0.0612
+   ],
+   "chin": [
+    0.0,
+    0.1771,
+    -0.7022
+   ],
+   "forehead": [
+    0.0,
+    0.1889,
+    -0.8843
+   ],
+   "earL": [
+    0.0877,
+    0.0798,
+    -0.8127
+   ],
+   "earR": [
+    -0.0877,
+    0.0798,
+    -0.8127
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1816,
+    -0.6031
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.7,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.854,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3213,
+   -0.0,
+   -0.9298
+  ],
+  "bboxMax": [
+   0.3221,
+   0.2587,
+   1.0106
+  ],
+  "bmi": 25.31,
+  "note": ""
+ },
+ "p06": {
+  "file": "p06.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 58.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_female, hair toigo_blunt_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26058,
+  "bytes": 1179404,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1903,
+    -0.6867
+   ],
+   "nose": [
+    0.0,
+    0.2072,
+    -0.7205
+   ],
+   "eyeL": [
+    0.0302,
+    0.1738,
+    -0.7483
+   ],
+   "eyeR": [
+    -0.0302,
+    0.1738,
+    -0.7483
+   ],
+   "chest": [
+    0.0,
+    0.234,
+    -0.3695
+   ],
+   "handL": [
+    0.2373,
+    0.0573,
+    -0.0003
+   ],
+   "wristL": [
+    0.2351,
+    0.0452,
+    -0.0623
+   ],
+   "handR": [
+    -0.2373,
+    0.0575,
+    -0.0003
+   ],
+   "wristR": [
+    -0.2351,
+    0.0451,
+    -0.0623
+   ],
+   "chin": [
+    0.0,
+    0.1624,
+    -0.6404
+   ],
+   "forehead": [
+    0.0,
+    0.1713,
+    -0.8067
+   ],
+   "earL": [
+    0.0841,
+    0.0714,
+    -0.7292
+   ],
+   "earR": [
+    -0.0841,
+    0.0714,
+    -0.7292
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1634,
+    -0.5206
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.7,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.696,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3192,
+   -0.0,
+   -0.849
+  ],
+  "bboxMax": [
+   0.3215,
+   0.2661,
+   0.9248
+  ],
+  "bmi": 24.24,
+  "note": "chart: \"Large goiter, extends below the sternal notch\"; shown only as a thicker neck"
+ },
+ "p07": {
+  "file": "p07.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 62.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_african_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25756,
+  "bytes": 997216,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2187,
+    -0.7523
+   ],
+   "nose": [
+    0.0,
+    0.2284,
+    -0.7801
+   ],
+   "eyeL": [
+    0.0305,
+    0.1968,
+    -0.8205
+   ],
+   "eyeR": [
+    -0.0305,
+    0.1968,
+    -0.8205
+   ],
+   "chest": [
+    0.0,
+    0.2929,
+    -0.4268
+   ],
+   "handL": [
+    0.2323,
+    0.0656,
+    -0.0089
+   ],
+   "wristL": [
+    0.2295,
+    0.0597,
+    -0.0777
+   ],
+   "handR": [
+    -0.2323,
+    0.0659,
+    -0.0089
+   ],
+   "wristR": [
+    -0.2295,
+    0.0602,
+    -0.0777
+   ],
+   "chin": [
+    0.0,
+    0.1914,
+    -0.7024
+   ],
+   "forehead": [
+    0.0,
+    0.1913,
+    -0.8702
+   ],
+   "earL": [
+    0.0838,
+    0.0838,
+    -0.8024
+   ],
+   "earR": [
+    -0.0838,
+    0.0838,
+    -0.8024
+   ],
+   "sternalNotch": [
+    0.0,
+    0.223,
+    -0.602
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 10.2,
+  "headRestGapM": 0.0069,
+  "lyingLengthM": 1.825,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3214,
+   -0.0,
+   -0.9252
+  ],
+  "bboxMax": [
+   0.324,
+   0.3381,
+   0.9951
+  ],
+  "bmi": 30.93,
+  "note": "chart: \"no beard\""
+ },
+ "p08": {
+  "file": "p08.glb",
+  "heightM": 1.66,
+  "sex": "F",
+  "ageYears": 23.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_asian_female, hair toigo_curled_under_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26056,
+  "bytes": 1057100,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1927,
+    -0.6902
+   ],
+   "nose": [
+    0.0,
+    0.2009,
+    -0.7187
+   ],
+   "eyeL": [
+    0.0299,
+    0.1747,
+    -0.7542
+   ],
+   "eyeR": [
+    -0.0299,
+    0.1747,
+    -0.7542
+   ],
+   "chest": [
+    0.0,
+    0.2315,
+    -0.3758
+   ],
+   "handL": [
+    0.2336,
+    0.0545,
+    0.0055
+   ],
+   "wristL": [
+    0.2237,
+    0.0407,
+    -0.0546
+   ],
+   "handR": [
+    -0.2336,
+    0.0545,
+    0.0055
+   ],
+   "wristR": [
+    -0.2237,
+    0.0407,
+    -0.0546
+   ],
+   "chin": [
+    0.0,
+    0.1514,
+    -0.6434
+   ],
+   "forehead": [
+    0.0,
+    0.1704,
+    -0.8079
+   ],
+   "earL": [
+    0.0836,
+    0.0718,
+    -0.7393
+   ],
+   "earR": [
+    -0.0836,
+    0.0718,
+    -0.7393
+   ],
+   "sternalNotch": [
+    0.0,
+    0.157,
+    -0.5307
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.704,
+  "jawOpenM": 0.0386,
+  "breatheRiseM": 0.0142,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3193,
+   -0.0,
+   -0.8646
+  ],
+  "bboxMax": [
+   0.321,
+   0.2409,
+   0.9292
+  ],
+  "bmi": 21.05,
+  "note": ""
+ },
+ "p09": {
+  "file": "p09.glb",
+  "heightM": 1.75,
+  "sex": "M",
+  "ageYears": 73.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_caucasian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23517,
+  "bytes": 1104848,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2022,
+    -0.7185
+   ],
+   "nose": [
+    0.0,
+    0.2256,
+    -0.7513
+   ],
+   "eyeL": [
+    0.032,
+    0.1914,
+    -0.7901
+   ],
+   "eyeR": [
+    -0.032,
+    0.1914,
+    -0.7901
+   ],
+   "chest": [
+    0.0,
+    0.2436,
+    -0.3986
+   ],
+   "handL": [
+    0.2327,
+    0.0606,
+    -0.0057
+   ],
+   "wristL": [
+    0.2281,
+    0.0453,
+    -0.0705
+   ],
+   "handR": [
+    -0.2327,
+    0.0608,
+    -0.0057
+   ],
+   "wristR": [
+    -0.2281,
+    0.0452,
+    -0.0705
+   ],
+   "chin": [
+    0.0,
+    0.1718,
+    -0.6684
+   ],
+   "forehead": [
+    0.0,
+    0.1893,
+    -0.844
+   ],
+   "earL": [
+    0.0855,
+    0.0757,
+    -0.7751
+   ],
+   "earR": [
+    -0.0855,
+    0.0757,
+    -0.7751
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1801,
+    -0.571
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.8,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.804,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3208,
+   -0.0001,
+   -0.902
+  ],
+  "bboxMax": [
+   0.3227,
+   0.255,
+   0.9832
+  ],
+  "bmi": 22.85,
+  "note": ""
+ },
+ "p10": {
+  "file": "p10.glb",
+  "heightM": 1.63,
+  "sex": "F",
+  "ageYears": 49.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_african_female",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23330,
+  "bytes": 488456,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1933,
+    -0.6814
+   ],
+   "nose": [
+    0.0,
+    0.1998,
+    -0.7098
+   ],
+   "eyeL": [
+    0.0286,
+    0.1683,
+    -0.7404
+   ],
+   "eyeR": [
+    -0.0286,
+    0.1683,
+    -0.7404
+   ],
+   "chest": [
+    0.0,
+    0.2355,
+    -0.3627
+   ],
+   "handL": [
+    0.2378,
+    0.0568,
+    0.0013
+   ],
+   "wristL": [
+    0.2335,
+    0.0483,
+    -0.0594
+   ],
+   "handR": [
+    -0.2378,
+    0.0568,
+    0.0013
+   ],
+   "wristR": [
+    -0.2335,
+    0.0482,
+    -0.0594
+   ],
+   "chin": [
+    -0.0,
+    0.1556,
+    -0.6333
+   ],
+   "forehead": [
+    0.0,
+    0.1629,
+    -0.7943
+   ],
+   "earL": [
+    0.0796,
+    0.0702,
+    -0.7193
+   ],
+   "earR": [
+    -0.0796,
+    0.0702,
+    -0.7193
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1621,
+    -0.512
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.674,
+  "jawOpenM": 0.0379,
+  "breatheRiseM": 0.014,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3189,
+   -0.0,
+   -0.8368
+  ],
+  "bboxMax": [
+   0.3182,
+   0.2649,
+   0.9124
+  ],
+  "bmi": 24.09,
+  "note": "chart: \"Wears wig\" after chemotherapy; shown without it, as in theatre"
+ },
+ "p11": {
+  "file": "p11.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 71.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_asian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25847,
+  "bytes": 1024640,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2125,
+    -0.7376
+   ],
+   "nose": [
+    -0.0,
+    0.2324,
+    -0.7625
+   ],
+   "eyeL": [
+    0.0322,
+    0.1978,
+    -0.8125
+   ],
+   "eyeR": [
+    -0.0322,
+    0.1978,
+    -0.8125
+   ],
+   "chest": [
+    0.0,
+    0.282,
+    -0.411
+   ],
+   "handL": [
+    0.2368,
+    0.0648,
+    -0.0165
+   ],
+   "wristL": [
+    0.2409,
+    0.0528,
+    -0.0827
+   ],
+   "handR": [
+    -0.2368,
+    0.0655,
+    -0.0165
+   ],
+   "wristR": [
+    -0.2409,
+    0.0525,
+    -0.0827
+   ],
+   "chin": [
+    -0.0,
+    0.185,
+    -0.6903
+   ],
+   "forehead": [
+    -0.0,
+    0.1912,
+    -0.8678
+   ],
+   "earL": [
+    0.0942,
+    0.0837,
+    -0.791
+   ],
+   "earR": [
+    -0.0942,
+    0.0837,
+    -0.791
+   ],
+   "sternalNotch": [
+    0.0,
+    0.216,
+    -0.5869
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 9.6,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.83,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3211,
+   -0.0,
+   -0.9282
+  ],
+  "bboxMax": [
+   0.3242,
+   0.3217,
+   0.9974
+  ],
+  "bmi": 29.04,
+  "note": ""
+ },
+ "p12": {
+  "file": "p12.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 58.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_female, hair toigo_blunt_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26021,
+  "bytes": 1061184,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1938,
+    -0.7
+   ],
+   "nose": [
+    -0.0,
+    0.2067,
+    -0.731
+   ],
+   "eyeL": [
+    0.0286,
+    0.1716,
+    -0.7603
+   ],
+   "eyeR": [
+    -0.0286,
+    0.1716,
+    -0.7603
+   ],
+   "chest": [
+    0.0,
+    0.2557,
+    -0.3741
+   ],
+   "handL": [
+    0.2405,
+    0.0617,
+    -0.0083
+   ],
+   "wristL": [
+    0.2417,
+    0.0608,
+    -0.0716
+   ],
+   "handR": [
+    -0.2405,
+    0.0618,
+    -0.0083
+   ],
+   "wristR": [
+    -0.2417,
+    0.0607,
+    -0.0716
+   ],
+   "chin": [
+    -0.0,
+    0.1598,
+    -0.6508
+   ],
+   "forehead": [
+    -0.0,
+    0.1664,
+    -0.8155
+   ],
+   "earL": [
+    0.0822,
+    0.0698,
+    -0.738
+   ],
+   "earR": [
+    -0.0822,
+    0.0698,
+    -0.738
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1774,
+    -0.5254
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 2.1,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.699,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3192,
+   -0.0001,
+   -0.8496
+  ],
+  "bboxMax": [
+   0.3214,
+   0.2974,
+   0.9259
+  ],
+  "bmi": 27.18,
+  "note": ""
+ },
+ "p13": {
+  "file": "p13.glb",
+  "heightM": 0.53,
+  "sex": "M",
+  "ageYears": 0.1,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23444,
+  "bytes": 508264,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.0965,
+    -0.1793
+   ],
+   "nose": [
+    0.0,
+    0.1053,
+    -0.1978
+   ],
+   "eyeL": [
+    0.0173,
+    0.0915,
+    -0.2112
+   ],
+   "eyeR": [
+    -0.0173,
+    0.0915,
+    -0.2112
+   ],
+   "chest": [
+    0.0,
+    0.1058,
+    -0.0839
+   ],
+   "handL": [
+    0.1132,
+    0.0213,
+    0.0381
+   ],
+   "wristL": [
+    0.1075,
+    0.0191,
+    0.0162
+   ],
+   "handR": [
+    -0.1132,
+    0.0214,
+    0.0381
+   ],
+   "wristR": [
+    -0.1075,
+    0.0191,
+    0.0162
+   ],
+   "chin": [
+    -0.0,
+    0.081,
+    -0.1586
+   ],
+   "forehead": [
+    0.0,
+    0.0985,
+    -0.2447
+   ],
+   "earL": [
+    0.0511,
+    0.0305,
+    -0.2123
+   ],
+   "earR": [
+    -0.0511,
+    0.0305,
+    -0.2123
+   ],
+   "sternalNotch": [
+    0.0,
+    0.074,
+    -0.1397
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 1.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 0.544,
+  "jawOpenM": 0.0224,
+  "breatheRiseM": 0.0067,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "tongue",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.1527,
+   -0.0001,
+   -0.272
+  ],
+  "bboxMax": [
+   0.1533,
+   0.1281,
+   0.2972
+  ],
+  "bmi": 13.88,
+  "note": "chart: \"Mild jaundice face/chest\", fading"
+ },
+ "p14": {
+  "file": "p14.glb",
+  "heightM": 1.6,
+  "sex": "F",
+  "ageYears": 34.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 28050,
+  "bytes": 977892,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.192,
+    -0.6757
+   ],
+   "nose": [
+    0.0,
+    0.2077,
+    -0.7132
+   ],
+   "eyeL": [
+    0.0274,
+    0.1713,
+    -0.7351
+   ],
+   "eyeR": [
+    -0.0274,
+    0.1713,
+    -0.7351
+   ],
+   "chest": [
+    0.0,
+    0.322,
+    -0.3587
+   ],
+   "handL": [
+    0.2371,
+    0.1667,
+    -0.0453
+   ],
+   "wristL": [
+    0.2311,
+    0.1785,
+    -0.1075
+   ],
+   "handR": [
+    -0.2371,
+    0.1668,
+    -0.0453
+   ],
+   "wristR": [
+    -0.2311,
+    0.1785,
+    -0.1075
+   ],
+   "chin": [
+    0.0,
+    0.1653,
+    -0.6257
+   ],
+   "forehead": [
+    0.0,
+    0.166,
+    -0.7929
+   ],
+   "earL": [
+    0.0803,
+    0.0718,
+    -0.7137
+   ],
+   "earR": [
+    -0.0803,
+    0.0718,
+    -0.7137
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2162,
+    -0.5065
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.2,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.651,
+  "jawOpenM": 0.0372,
+  "breatheRiseM": 0.0137,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3185,
+   -0.0,
+   -0.8314
+  ],
+  "bboxMax": [
+   0.3192,
+   0.4776,
+   0.9
+  ],
+  "bmi": 38.28,
+  "note": "chart: labor epidural at term"
+ },
+ "p15": {
+  "file": "p15.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 23.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_asian_female, hair toigo_curled_under_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26081,
+  "bytes": 1004532,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1916,
+    -0.6769
+   ],
+   "nose": [
+    -0.0,
+    0.1998,
+    -0.7069
+   ],
+   "eyeL": [
+    0.0296,
+    0.173,
+    -0.7401
+   ],
+   "eyeR": [
+    -0.0296,
+    0.173,
+    -0.7401
+   ],
+   "chest": [
+    0.0,
+    0.2334,
+    -0.3622
+   ],
+   "handL": [
+    0.2365,
+    0.0537,
+    0.0107
+   ],
+   "wristL": [
+    0.2296,
+    0.0399,
+    -0.0487
+   ],
+   "handR": [
+    -0.2365,
+    0.0536,
+    0.0107
+   ],
+   "wristR": [
+    -0.2296,
+    0.0399,
+    -0.0487
+   ],
+   "chin": [
+    -0.0,
+    0.1499,
+    -0.634
+   ],
+   "forehead": [
+    -0.0,
+    0.1679,
+    -0.7959
+   ],
+   "earL": [
+    0.0969,
+    0.0801,
+    -0.7242
+   ],
+   "earR": [
+    -0.0969,
+    0.0801,
+    -0.7242
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1591,
+    -0.5163
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.6,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.695,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3192,
+   -0.0001,
+   -0.8595
+  ],
+  "bboxMax": [
+   0.3214,
+   0.2525,
+   0.9239
+  ],
+  "bmi": 22.48,
+  "note": ""
+ },
+ "p16": {
+  "file": "p16.glb",
+  "heightM": 1.8,
+  "sex": "M",
+  "ageYears": 45.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25723,
+  "bytes": 944140,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2074,
+    -0.7494
+   ],
+   "nose": [
+    0.0,
+    0.223,
+    -0.7817
+   ],
+   "eyeL": [
+    0.0296,
+    0.1926,
+    -0.8211
+   ],
+   "eyeR": [
+    -0.0296,
+    0.1926,
+    -0.8211
+   ],
+   "chest": [
+    0.0,
+    0.2435,
+    -0.4171
+   ],
+   "handL": [
+    0.2298,
+    0.0647,
+    0.0174
+   ],
+   "wristL": [
+    0.2274,
+    0.0482,
+    -0.0522
+   ],
+   "handR": [
+    -0.2298,
+    0.065,
+    0.0174
+   ],
+   "wristR": [
+    -0.2274,
+    0.048,
+    -0.0522
+   ],
+   "chin": [
+    -0.0,
+    0.1794,
+    -0.6982
+   ],
+   "forehead": [
+    0.0,
+    0.1901,
+    -0.8747
+   ],
+   "earL": [
+    0.0773,
+    0.0793,
+    -0.8054
+   ],
+   "earR": [
+    -0.0773,
+    0.0793,
+    -0.8054
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1778,
+    -0.5952
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.853,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3214,
+   -0.0001,
+   -0.9376
+  ],
+  "bboxMax": [
+   0.3219,
+   0.253,
+   1.0101
+  ],
+  "bmi": 22.38,
+  "note": "chart: \"Athletic build\""
+ },
+ "p17": {
+  "file": "p17.glb",
+  "heightM": 1.6,
+  "sex": "F",
+  "ageYears": 62.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_female, hair toigo_blunt_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26187,
+  "bytes": 1212564,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1922,
+    -0.6708
+   ],
+   "nose": [
+    0.0,
+    0.2059,
+    -0.7036
+   ],
+   "eyeL": [
+    0.0303,
+    0.1712,
+    -0.7305
+   ],
+   "eyeR": [
+    -0.0303,
+    0.1712,
+    -0.7305
+   ],
+   "chest": [
+    0.0,
+    0.2781,
+    -0.3515
+   ],
+   "handL": [
+    0.2369,
+    0.0642,
+    0.0007
+   ],
+   "wristL": [
+    0.2307,
+    0.0715,
+    -0.0619
+   ],
+   "handR": [
+    -0.2369,
+    0.0644,
+    0.0007
+   ],
+   "wristR": [
+    -0.2307,
+    0.0715,
+    -0.0619
+   ],
+   "chin": [
+    0.0,
+    0.1633,
+    -0.6212
+   ],
+   "forehead": [
+    0.0,
+    0.1654,
+    -0.7875
+   ],
+   "earL": [
+    0.0831,
+    0.0695,
+    -0.7066
+   ],
+   "earR": [
+    -0.0831,
+    0.0695,
+    -0.7066
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1997,
+    -0.4982
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 4.1,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.649,
+  "jawOpenM": 0.0372,
+  "breatheRiseM": 0.0137,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3186,
+   -0.0001,
+   -0.8249
+  ],
+  "bboxMax": [
+   0.3191,
+   0.348,
+   0.8986
+  ],
+  "bmi": 32.07,
+  "note": ""
+ },
+ "p18": {
+  "file": "p18.glb",
+  "heightM": 1.75,
+  "sex": "M",
+  "ageYears": 77.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_asian_male, hair short02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 24813,
+  "bytes": 958700,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.214,
+    -0.7216
+   ],
+   "nose": [
+    -0.0,
+    0.2281,
+    -0.7473
+   ],
+   "eyeL": [
+    0.0309,
+    0.1987,
+    -0.7954
+   ],
+   "eyeR": [
+    -0.0309,
+    0.1987,
+    -0.7954
+   ],
+   "chest": [
+    0.0,
+    0.2723,
+    -0.3999
+   ],
+   "handL": [
+    0.2394,
+    0.063,
+    -0.0126
+   ],
+   "wristL": [
+    0.2448,
+    0.0505,
+    -0.0772
+   ],
+   "handR": [
+    -0.2394,
+    0.063,
+    -0.0126
+   ],
+   "wristR": [
+    -0.2448,
+    0.0503,
+    -0.0772
+   ],
+   "chin": [
+    -0.0,
+    0.1833,
+    -0.6711
+   ],
+   "forehead": [
+    -0.0,
+    0.1927,
+    -0.8474
+   ],
+   "earL": [
+    0.092,
+    0.0845,
+    -0.7796
+   ],
+   "earR": [
+    -0.092,
+    0.0845,
+    -0.7796
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2099,
+    -0.5731
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 8.5,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.8,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3206,
+   -0.0,
+   -0.9001
+  ],
+  "bboxMax": [
+   0.3229,
+   0.3027,
+   0.9813
+  ],
+  "bmi": 27.43,
+  "note": ""
+ },
+ "p19": {
+  "file": "p19.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 54.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_african_male, hair afro01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 24858,
+  "bytes": 929852,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2116,
+    -0.7516
+   ],
+   "nose": [
+    0.0,
+    0.2183,
+    -0.7791
+   ],
+   "eyeL": [
+    0.0289,
+    0.1882,
+    -0.8192
+   ],
+   "eyeR": [
+    -0.0289,
+    0.1882,
+    -0.8192
+   ],
+   "chest": [
+    0.0,
+    0.2799,
+    -0.4221
+   ],
+   "handL": [
+    0.2349,
+    0.0644,
+    0.0028
+   ],
+   "wristL": [
+    0.2368,
+    0.0535,
+    -0.0652
+   ],
+   "handR": [
+    -0.2349,
+    0.0646,
+    0.0028
+   ],
+   "wristR": [
+    -0.2368,
+    0.0531,
+    -0.0652
+   ],
+   "chin": [
+    0.0,
+    0.1827,
+    -0.7027
+   ],
+   "forehead": [
+    -0.0,
+    0.1826,
+    -0.8678
+   ],
+   "earL": [
+    0.0766,
+    0.0726,
+    -0.8031
+   ],
+   "earR": [
+    -0.0766,
+    0.0726,
+    -0.8031
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2106,
+    -0.5976
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 9.2,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.828,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3213,
+   -0.0,
+   -0.9454
+  ],
+  "bboxMax": [
+   0.3241,
+   0.3167,
+   0.9965
+  ],
+  "bmi": 28.85,
+  "note": ""
+ },
+ "p20": {
+  "file": "p20.glb",
+  "heightM": 1.63,
+  "sex": "F",
+  "ageYears": 38.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_african_female, hair afro01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25380,
+  "bytes": 894916,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1956,
+    -0.6876
+   ],
+   "nose": [
+    0.0,
+    0.2047,
+    -0.7201
+   ],
+   "eyeL": [
+    0.03,
+    0.1696,
+    -0.7465
+   ],
+   "eyeR": [
+    -0.03,
+    0.1696,
+    -0.7465
+   ],
+   "chest": [
+    0.0,
+    0.2743,
+    -0.3651
+   ],
+   "handL": [
+    0.2419,
+    0.176,
+    -0.0561
+   ],
+   "wristL": [
+    0.2435,
+    0.1853,
+    -0.1188
+   ],
+   "handR": [
+    -0.2419,
+    0.1762,
+    -0.0561
+   ],
+   "wristR": [
+    -0.2435,
+    0.1852,
+    -0.1188
+   ],
+   "chin": [
+    0.0,
+    0.1602,
+    -0.6419
+   ],
+   "forehead": [
+    0.0,
+    0.1629,
+    -0.7989
+   ],
+   "earL": [
+    0.0831,
+    0.0717,
+    -0.7231
+   ],
+   "earR": [
+    -0.0831,
+    0.0717,
+    -0.7231
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1892,
+    -0.5149
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 2.6,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.678,
+  "jawOpenM": 0.0379,
+  "breatheRiseM": 0.014,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3191,
+   -0.0001,
+   -0.8678
+  ],
+  "bboxMax": [
+   0.318,
+   0.3279,
+   0.9146
+  ],
+  "bmi": 29.36,
+  "note": ""
+ },
+ "p21": {
+  "file": "p21.glb",
+  "heightM": 1.76,
+  "sex": "M",
+  "ageYears": 68.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_caucasian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25939,
+  "bytes": 1126040,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2183,
+    -0.7361
+   ],
+   "nose": [
+    0.0,
+    0.2371,
+    -0.766
+   ],
+   "eyeL": [
+    0.0317,
+    0.2024,
+    -0.8069
+   ],
+   "eyeR": [
+    -0.0317,
+    0.2024,
+    -0.8069
+   ],
+   "chest": [
+    0.0,
+    0.2932,
+    -0.4168
+   ],
+   "handL": [
+    0.2321,
+    0.0658,
+    -0.0239
+   ],
+   "wristL": [
+    0.2279,
+    0.062,
+    -0.0916
+   ],
+   "handR": [
+    -0.2321,
+    0.0661,
+    -0.0239
+   ],
+   "wristR": [
+    -0.2279,
+    0.0623,
+    -0.0916
+   ],
+   "chin": [
+    0.0,
+    0.1933,
+    -0.6884
+   ],
+   "forehead": [
+    0.0,
+    0.198,
+    -0.8604
+   ],
+   "earL": [
+    0.0915,
+    0.0917,
+    -0.787
+   ],
+   "earR": [
+    -0.0915,
+    0.0917,
+    -0.787
+   ],
+   "sternalNotch": [
+    0.0,
+    0.223,
+    -0.5899
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 10.2,
+  "headRestGapM": 0.0136,
+  "lyingLengthM": 1.807,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.321,
+   -0.0001,
+   -0.9168
+  ],
+  "bboxMax": [
+   0.3216,
+   0.338,
+   0.9854
+  ],
+  "bmi": 31.09,
+  "note": ""
+ },
+ "p22": {
+  "file": "p22.glb",
+  "heightM": 1.83,
+  "sex": "M",
+  "ageYears": 29.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23290,
+  "bytes": 1036112,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2098,
+    -0.7749
+   ],
+   "nose": [
+    -0.0,
+    0.2267,
+    -0.8034
+   ],
+   "eyeL": [
+    0.0306,
+    0.1915,
+    -0.8455
+   ],
+   "eyeR": [
+    -0.0306,
+    0.1915,
+    -0.8455
+   ],
+   "chest": [
+    0.0,
+    0.2636,
+    -0.4351
+   ],
+   "handL": [
+    0.2226,
+    0.0706,
+    0.0102
+   ],
+   "wristL": [
+    0.2329,
+    0.0543,
+    -0.0608
+   ],
+   "handR": [
+    -0.2226,
+    0.0715,
+    0.0102
+   ],
+   "wristR": [
+    -0.2329,
+    0.0544,
+    -0.0608
+   ],
+   "chin": [
+    -0.0,
+    0.1829,
+    -0.7204
+   ],
+   "forehead": [
+    -0.0,
+    0.1878,
+    -0.8982
+   ],
+   "earL": [
+    0.091,
+    0.0879,
+    -0.8254
+   ],
+   "earR": [
+    -0.091,
+    0.0879,
+    -0.8254
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1872,
+    -0.6156
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 6.0,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.885,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3221,
+   -0.0001,
+   -0.9454
+  ],
+  "bboxMax": [
+   0.3226,
+   0.2828,
+   1.0274
+  ],
+  "bmi": 26.28,
+  "note": ""
+ },
+ "p23": {
+  "file": "p23.glb",
+  "heightM": 1.68,
+  "sex": "F",
+  "ageYears": 41.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_female, hair toigo_curled_under_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25935,
+  "bytes": 1199052,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1911,
+    -0.7025
+   ],
+   "nose": [
+    -0.0,
+    0.2066,
+    -0.7383
+   ],
+   "eyeL": [
+    0.0313,
+    0.1733,
+    -0.7647
+   ],
+   "eyeR": [
+    -0.0313,
+    0.1733,
+    -0.7647
+   ],
+   "chest": [
+    0.0,
+    0.2564,
+    -0.3826
+   ],
+   "handL": [
+    0.239,
+    0.0636,
+    -0.0068
+   ],
+   "wristL": [
+    0.2395,
+    0.0625,
+    -0.0711
+   ],
+   "handR": [
+    -0.239,
+    0.0637,
+    -0.0068
+   ],
+   "wristR": [
+    -0.2395,
+    0.0623,
+    -0.0711
+   ],
+   "chin": [
+    0.0,
+    0.1587,
+    -0.6442
+   ],
+   "forehead": [
+    0.0,
+    0.1698,
+    -0.825
+   ],
+   "earL": [
+    0.0962,
+    0.0742,
+    -0.7462
+   ],
+   "earR": [
+    -0.0962,
+    0.0742,
+    -0.7462
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1763,
+    -0.5369
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 2.1,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.729,
+  "jawOpenM": 0.0391,
+  "breatheRiseM": 0.0144,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3196,
+   -0.0002,
+   -0.8773
+  ],
+  "bboxMax": [
+   0.3198,
+   0.2956,
+   0.9425
+  ],
+  "bmi": 26.4,
+  "note": "chart: \"pale, fatigued\", \"Pale conjunctivae\""
+ },
+ "p24": {
+  "file": "p24.glb",
+  "heightM": 1.55,
+  "sex": "F",
+  "ageYears": 85.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_caucasian_female, hair toigo_curled_under_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26362,
+  "bytes": 1207480,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1869,
+    -0.6375
+   ],
+   "nose": [
+    -0.0,
+    0.2065,
+    -0.6583
+   ],
+   "eyeL": [
+    0.0288,
+    0.1688,
+    -0.6978
+   ],
+   "eyeR": [
+    -0.0288,
+    0.1688,
+    -0.6978
+   ],
+   "chest": [
+    0.0,
+    0.2227,
+    -0.331
+   ],
+   "handL": [
+    0.2386,
+    0.0556,
+    0.0076
+   ],
+   "wristL": [
+    0.2356,
+    0.0453,
+    -0.0531
+   ],
+   "handR": [
+    -0.2386,
+    0.0556,
+    0.0076
+   ],
+   "wristR": [
+    -0.2356,
+    0.0453,
+    -0.0531
+   ],
+   "chin": [
+    -0.0,
+    0.1548,
+    -0.5877
+   ],
+   "forehead": [
+    -0.0,
+    0.1642,
+    -0.7529
+   ],
+   "earL": [
+    0.0804,
+    0.0704,
+    -0.6761
+   ],
+   "earR": [
+    -0.0804,
+    0.0704,
+    -0.6761
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1539,
+    -0.4715
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.8,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.594,
+  "jawOpenM": 0.036,
+  "breatheRiseM": 0.0133,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3177,
+   -0.0,
+   -0.8097
+  ],
+  "bboxMax": [
+   0.32,
+   0.2542,
+   0.8691
+  ],
+  "bmi": 24.39,
+  "note": ""
+ },
+ "p25": {
+  "file": "p25.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 58.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_african_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26066,
+  "bytes": 955800,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2706,
+    -0.7472
+   ],
+   "nose": [
+    -0.0,
+    0.2828,
+    -0.7714
+   ],
+   "eyeL": [
+    0.0313,
+    0.2503,
+    -0.8158
+   ],
+   "eyeR": [
+    -0.0313,
+    0.2503,
+    -0.8158
+   ],
+   "chest": [
+    0.0,
+    0.3654,
+    -0.4261
+   ],
+   "handL": [
+    0.2294,
+    0.0706,
+    -0.0306
+   ],
+   "wristL": [
+    0.2229,
+    0.0781,
+    -0.1011
+   ],
+   "handR": [
+    -0.2294,
+    0.0707,
+    -0.0306
+   ],
+   "wristR": [
+    -0.2229,
+    0.078,
+    -0.1011
+   ],
+   "chin": [
+    -0.0,
+    0.2425,
+    -0.6981
+   ],
+   "forehead": [
+    -0.0,
+    0.2455,
+    -0.8676
+   ],
+   "earL": [
+    0.0899,
+    0.1376,
+    -0.8008
+   ],
+   "earR": [
+    -0.0899,
+    0.1376,
+    -0.8008
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2791,
+    -0.6007
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 10.2,
+  "headRestGapM": 0.0618,
+  "lyingLengthM": 1.828,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3301,
+   -0.0002,
+   -0.9251
+  ],
+  "bboxMax": [
+   0.3291,
+   0.485,
+   0.9964
+  ],
+  "bmi": 44.0,
+  "note": ""
+ },
+ "p26": {
+  "file": "p26.glb",
+  "heightM": 1.21,
+  "sex": "F",
+  "ageYears": 7.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27310,
+  "bytes": 966968,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1691,
+    -0.4589
+   ],
+   "nose": [
+    0.0,
+    0.1835,
+    -0.488
+   ],
+   "eyeL": [
+    0.028,
+    0.1589,
+    -0.5135
+   ],
+   "eyeR": [
+    -0.028,
+    0.1589,
+    -0.5135
+   ],
+   "chest": [
+    0.0,
+    0.1565,
+    -0.2369
+   ],
+   "handL": [
+    0.1506,
+    0.0434,
+    0.0488
+   ],
+   "wristL": [
+    0.143,
+    0.0321,
+    0.0022
+   ],
+   "handR": [
+    -0.1506,
+    0.0434,
+    0.0488
+   ],
+   "wristR": [
+    -0.143,
+    0.0321,
+    0.0022
+   ],
+   "chin": [
+    -0.0,
+    0.1316,
+    -0.4248
+   ],
+   "forehead": [
+    0.0,
+    0.1657,
+    -0.5693
+   ],
+   "earL": [
+    0.0818,
+    0.0613,
+    -0.508
+   ],
+   "earR": [
+    -0.0818,
+    0.0613,
+    -0.508
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1123,
+    -0.3572
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.2,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.238,
+  "jawOpenM": 0.0281,
+  "breatheRiseM": 0.0104,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.2158,
+   -0.0002,
+   -0.6242
+  ],
+  "bboxMax": [
+   0.2167,
+   0.1835,
+   0.6751
+  ],
+  "bmi": 15.3,
+  "note": ""
+ },
+ "p27": {
+  "file": "p27.glb",
+  "heightM": 1.6,
+  "sex": "F",
+  "ageYears": 66.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_asian_female, hair toigo_curled_under_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26298,
+  "bytes": 1229664,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1833,
+    -0.6589
+   ],
+   "nose": [
+    -0.0,
+    0.191,
+    -0.6872
+   ],
+   "eyeL": [
+    0.0296,
+    0.1693,
+    -0.7274
+   ],
+   "eyeR": [
+    -0.0296,
+    0.1693,
+    -0.7274
+   ],
+   "chest": [
+    0.0,
+    0.2561,
+    -0.3547
+   ],
+   "handL": [
+    0.2427,
+    0.0557,
+    -0.0187
+   ],
+   "wristL": [
+    0.2428,
+    0.0495,
+    -0.0778
+   ],
+   "handR": [
+    -0.2427,
+    0.0559,
+    -0.0187
+   ],
+   "wristR": [
+    -0.2428,
+    0.0499,
+    -0.0778
+   ],
+   "chin": [
+    -0.0,
+    0.1549,
+    -0.6136
+   ],
+   "forehead": [
+    -0.0,
+    0.1613,
+    -0.7772
+   ],
+   "earL": [
+    0.0834,
+    0.0691,
+    -0.7063
+   ],
+   "earR": [
+    -0.0834,
+    0.0691,
+    -0.7063
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1787,
+    -0.4969
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 3.2,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.648,
+  "jawOpenM": 0.0372,
+  "breatheRiseM": 0.0137,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3187,
+   -0.0,
+   -0.8366
+  ],
+  "bboxMax": [
+   0.319,
+   0.3067,
+   0.8981
+  ],
+  "bmi": 27.89,
+  "note": ""
+ },
+ "p28": {
+  "file": "p28.glb",
+  "heightM": 1.8,
+  "sex": "M",
+  "ageYears": 36.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_asian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23363,
+  "bytes": 931136,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2101,
+    -0.7348
+   ],
+   "nose": [
+    0.0,
+    0.2238,
+    -0.7669
+   ],
+   "eyeL": [
+    0.0304,
+    0.1945,
+    -0.8087
+   ],
+   "eyeR": [
+    -0.0304,
+    0.1945,
+    -0.8087
+   ],
+   "chest": [
+    0.0,
+    0.2645,
+    -0.3988
+   ],
+   "handL": [
+    0.2352,
+    0.068,
+    0.0234
+   ],
+   "wristL": [
+    0.2425,
+    0.0534,
+    -0.0462
+   ],
+   "handR": [
+    -0.2352,
+    0.0683,
+    0.0234
+   ],
+   "wristR": [
+    -0.2425,
+    0.0533,
+    -0.0462
+   ],
+   "chin": [
+    0.0,
+    0.1795,
+    -0.6867
+   ],
+   "forehead": [
+    0.0,
+    0.1885,
+    -0.8632
+   ],
+   "earL": [
+    0.0854,
+    0.0838,
+    -0.7884
+   ],
+   "earR": [
+    -0.0854,
+    0.0838,
+    -0.7884
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1928,
+    -0.5778
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 6.9,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.853,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3215,
+   0,
+   -0.9294
+  ],
+  "bboxMax": [
+   0.3219,
+   0.2831,
+   1.0103
+  ],
+  "bmi": 26.61,
+  "note": "chart: \"Beard trimmed short\""
+ },
+ "p29": {
+  "file": "p29.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 47.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_asian_female, hair rehmanpolanski_hair_bun_brown",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27621,
+  "bytes": 967772,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1835,
+    -0.6865
+   ],
+   "nose": [
+    -0.0,
+    0.195,
+    -0.7136
+   ],
+   "eyeL": [
+    0.0316,
+    0.1719,
+    -0.7549
+   ],
+   "eyeR": [
+    -0.0316,
+    0.1719,
+    -0.7549
+   ],
+   "chest": [
+    0.0,
+    0.2153,
+    -0.3792
+   ],
+   "handL": [
+    0.2327,
+    0.0546,
+    -0.0063
+   ],
+   "wristL": [
+    0.2209,
+    0.0409,
+    -0.0659
+   ],
+   "handR": [
+    -0.2327,
+    0.0547,
+    -0.0063
+   ],
+   "wristR": [
+    -0.2209,
+    0.0409,
+    -0.0659
+   ],
+   "chin": [
+    -0.0,
+    0.1471,
+    -0.6403
+   ],
+   "forehead": [
+    -0.0,
+    0.1672,
+    -0.8073
+   ],
+   "earL": [
+    0.0918,
+    0.0718,
+    -0.7396
+   ],
+   "earR": [
+    -0.0918,
+    0.0718,
+    -0.7396
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1498,
+    -0.5291
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.4,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.696,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.319,
+   -0.0001,
+   -0.8621
+  ],
+  "bboxMax": [
+   0.3216,
+   0.2294,
+   0.9245
+  ],
+  "bmi": 19.94,
+  "note": ""
+ },
+ "p30": {
+  "file": "p30.glb",
+  "heightM": 1.75,
+  "sex": "M",
+  "ageYears": 71.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_caucasian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23682,
+  "bytes": 1111464,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.202,
+    -0.723
+   ],
+   "nose": [
+    -0.0,
+    0.2225,
+    -0.7545
+   ],
+   "eyeL": [
+    0.0297,
+    0.1897,
+    -0.7934
+   ],
+   "eyeR": [
+    -0.0297,
+    0.1897,
+    -0.7934
+   ],
+   "chest": [
+    0.0,
+    0.2493,
+    -0.4026
+   ],
+   "handL": [
+    0.2328,
+    0.0614,
+    -0.008
+   ],
+   "wristL": [
+    0.2293,
+    0.046,
+    -0.073
+   ],
+   "handR": [
+    -0.2328,
+    0.0614,
+    -0.008
+   ],
+   "wristR": [
+    -0.2293,
+    0.0459,
+    -0.073
+   ],
+   "chin": [
+    -0.0,
+    0.1747,
+    -0.676
+   ],
+   "forehead": [
+    -0.0,
+    0.1877,
+    -0.8473
+   ],
+   "earL": [
+    0.0868,
+    0.0786,
+    -0.7785
+   ],
+   "earR": [
+    -0.0868,
+    0.0786,
+    -0.7785
+   ],
+   "sternalNotch": [
+    0.0,
+    0.183,
+    -0.5748
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.8,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.803,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3205,
+   -0.0001,
+   -0.9044
+  ],
+  "bboxMax": [
+   0.323,
+   0.2603,
+   0.9829
+  ],
+  "bmi": 23.53,
+  "note": "chart: proximal weakness, difficulty rising from chairs"
+ },
+ "p31": {
+  "file": "p31.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 74.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_caucasian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23347,
+  "bytes": 1150068,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2087,
+    -0.7406
+   ],
+   "nose": [
+    -0.0,
+    0.231,
+    -0.7691
+   ],
+   "eyeL": [
+    0.0292,
+    0.1929,
+    -0.8111
+   ],
+   "eyeR": [
+    -0.0292,
+    0.1929,
+    -0.8111
+   ],
+   "chest": [
+    0.0,
+    0.2849,
+    -0.4191
+   ],
+   "handL": [
+    0.2368,
+    0.0638,
+    -0.0244
+   ],
+   "wristL": [
+    0.2392,
+    0.0522,
+    -0.0895
+   ],
+   "handR": [
+    -0.2368,
+    0.0645,
+    -0.0244
+   ],
+   "wristR": [
+    -0.2392,
+    0.0519,
+    -0.0895
+   ],
+   "chin": [
+    -0.0,
+    0.1856,
+    -0.6864
+   ],
+   "forehead": [
+    -0.0,
+    0.1878,
+    -0.8672
+   ],
+   "earL": [
+    0.0863,
+    0.0814,
+    -0.7904
+   ],
+   "earR": [
+    -0.0863,
+    0.0814,
+    -0.7904
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2168,
+    -0.5933
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 9.5,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.829,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3212,
+   -0.0,
+   -0.9145
+  ],
+  "bboxMax": [
+   0.3242,
+   0.3244,
+   0.9971
+  ],
+  "bmi": 29.16,
+  "note": "chart: \"neck circ 46 cm, beard\""
+ },
+ "p32": {
+  "file": "p32.glb",
+  "heightM": 1.83,
+  "sex": "M",
+  "ageYears": 19.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_african_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25704,
+  "bytes": 839652,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2204,
+    -0.7639
+   ],
+   "nose": [
+    -0.0,
+    0.2289,
+    -0.7971
+   ],
+   "eyeL": [
+    0.0329,
+    0.1981,
+    -0.8342
+   ],
+   "eyeR": [
+    -0.0329,
+    0.1981,
+    -0.8342
+   ],
+   "chest": [
+    0.0,
+    0.2492,
+    -0.4171
+   ],
+   "handL": [
+    0.2312,
+    0.067,
+    0.0415
+   ],
+   "wristL": [
+    0.2325,
+    0.0502,
+    -0.0294
+   ],
+   "handR": [
+    -0.2312,
+    0.0671,
+    0.0415
+   ],
+   "wristR": [
+    -0.2325,
+    0.05,
+    -0.0294
+   ],
+   "chin": [
+    -0.0,
+    0.1825,
+    -0.7169
+   ],
+   "forehead": [
+    -0.0,
+    0.1953,
+    -0.8897
+   ],
+   "earL": [
+    0.0947,
+    0.0825,
+    -0.8188
+   ],
+   "earR": [
+    -0.0947,
+    0.0825,
+    -0.8188
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1773,
+    -0.603
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 4.4,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.884,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3312,
+   -0.0,
+   -0.9523
+  ],
+  "bboxMax": [
+   0.3323,
+   0.2575,
+   1.027
+  ],
+  "bmi": 23.56,
+  "note": ""
+ },
+ "p33": {
+  "file": "p33.glb",
+  "heightM": 1.63,
+  "sex": "F",
+  "ageYears": 31.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_asian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27829,
+  "bytes": 907772,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1865,
+    -0.6715
+   ],
+   "nose": [
+    -0.0,
+    0.1994,
+    -0.7028
+   ],
+   "eyeL": [
+    0.0295,
+    0.1719,
+    -0.7361
+   ],
+   "eyeR": [
+    -0.0295,
+    0.1719,
+    -0.7361
+   ],
+   "chest": [
+    0.0,
+    0.2503,
+    -0.3602
+   ],
+   "handL": [
+    0.2386,
+    0.0616,
+    0.0003
+   ],
+   "wristL": [
+    0.2354,
+    0.0617,
+    -0.0618
+   ],
+   "handR": [
+    -0.2386,
+    0.0618,
+    0.0003
+   ],
+   "wristR": [
+    -0.2354,
+    0.0616,
+    -0.0618
+   ],
+   "chin": [
+    -0.0,
+    0.1536,
+    -0.6175
+   ],
+   "forehead": [
+    0.0,
+    0.1672,
+    -0.7928
+   ],
+   "earL": [
+    0.0916,
+    0.0767,
+    -0.7196
+   ],
+   "earR": [
+    -0.0916,
+    0.0767,
+    -0.7196
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1712,
+    -0.5107
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 1.8,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.678,
+  "jawOpenM": 0.0379,
+  "breatheRiseM": 0.014,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3189,
+   -0.0001,
+   -0.8459
+  ],
+  "bboxMax": [
+   0.3182,
+   0.2825,
+   0.9147
+  ],
+  "bmi": 25.6,
+  "note": "chart: \"Pale, anxious, diaphoretic\""
+ },
+ "p34": {
+  "file": "p34.glb",
+  "heightM": 1.57,
+  "sex": "F",
+  "ageYears": 56.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 28015,
+  "bytes": 1019916,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1877,
+    -0.6466
+   ],
+   "nose": [
+    -0.0,
+    0.204,
+    -0.6799
+   ],
+   "eyeL": [
+    0.0289,
+    0.1689,
+    -0.7067
+   ],
+   "eyeR": [
+    -0.0289,
+    0.1689,
+    -0.7067
+   ],
+   "chest": [
+    0.0,
+    0.2732,
+    -0.3355
+   ],
+   "handL": [
+    0.2379,
+    0.1593,
+    -0.033
+   ],
+   "wristL": [
+    0.2325,
+    0.1716,
+    -0.0951
+   ],
+   "handR": [
+    -0.2379,
+    0.1594,
+    -0.033
+   ],
+   "wristR": [
+    -0.2325,
+    0.1716,
+    -0.0951
+   ],
+   "chin": [
+    -0.0,
+    0.158,
+    -0.5886
+   ],
+   "forehead": [
+    -0.0,
+    0.1636,
+    -0.763
+   ],
+   "earL": [
+    0.0853,
+    0.0681,
+    -0.6863
+   ],
+   "earR": [
+    -0.0853,
+    0.0681,
+    -0.6863
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1939,
+    -0.4794
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 3.9,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.617,
+  "jawOpenM": 0.0365,
+  "breatheRiseM": 0.0135,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3183,
+   -0.0001,
+   -0.8155
+  ],
+  "bboxMax": [
+   0.3196,
+   0.3395,
+   0.8815
+  ],
+  "bmi": 31.32,
+  "note": ""
+ },
+ "p35": {
+  "file": "p35.glb",
+  "heightM": 1.72,
+  "sex": "M",
+  "ageYears": 80.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_asian_male, hair short04",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 22333,
+  "bytes": 968880,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2126,
+    -0.7093
+   ],
+   "nose": [
+    -0.0,
+    0.2315,
+    -0.7391
+   ],
+   "eyeL": [
+    0.0286,
+    0.2012,
+    -0.7849
+   ],
+   "eyeR": [
+    -0.0286,
+    0.2012,
+    -0.7849
+   ],
+   "chest": [
+    0.0,
+    0.27,
+    -0.3922
+   ],
+   "handL": [
+    0.2381,
+    0.0618,
+    -0.0174
+   ],
+   "wristL": [
+    0.2406,
+    0.0497,
+    -0.081
+   ],
+   "handR": [
+    -0.2381,
+    0.0625,
+    -0.0174
+   ],
+   "wristR": [
+    -0.2406,
+    0.0495,
+    -0.081
+   ],
+   "chin": [
+    -0.0,
+    0.183,
+    -0.6655
+   ],
+   "forehead": [
+    -0.0,
+    0.1961,
+    -0.8398
+   ],
+   "earL": [
+    0.0848,
+    0.0862,
+    -0.7674
+   ],
+   "earR": [
+    -0.0848,
+    0.0862,
+    -0.7674
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2082,
+    -0.5624
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 8.5,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.771,
+  "jawOpenM": 0.04,
+  "breatheRiseM": 0.0147,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3201,
+   -0.0,
+   -0.8856
+  ],
+  "bboxMax": [
+   0.3212,
+   0.2964,
+   0.9654
+  ],
+  "bmi": 27.48,
+  "note": "chart: \"Edentulous upper, lower partial denture (remove)\""
+ },
+ "p36": {
+  "file": "p36.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 44.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair short02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25669,
+  "bytes": 843928,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.211,
+    -0.7499
+   ],
+   "nose": [
+    -0.0,
+    0.2298,
+    -0.7715
+   ],
+   "eyeL": [
+    0.0311,
+    0.19,
+    -0.8186
+   ],
+   "eyeR": [
+    -0.0311,
+    0.19,
+    -0.8186
+   ],
+   "chest": [
+    0.0,
+    0.2854,
+    -0.4185
+   ],
+   "handL": [
+    0.2312,
+    0.066,
+    0.0078
+   ],
+   "wristL": [
+    0.2302,
+    0.0545,
+    -0.0618
+   ],
+   "handR": [
+    -0.2312,
+    0.0665,
+    0.0078
+   ],
+   "wristR": [
+    -0.2302,
+    0.0544,
+    -0.0618
+   ],
+   "chin": [
+    -0.0,
+    0.1856,
+    -0.702
+   ],
+   "forehead": [
+    0.0,
+    0.1846,
+    -0.8701
+   ],
+   "earL": [
+    0.081,
+    0.0781,
+    -0.7981
+   ],
+   "earR": [
+    -0.081,
+    0.0781,
+    -0.7981
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2108,
+    -0.5949
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 9.1,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.83,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3213,
+   0,
+   -0.9335
+  ],
+  "bboxMax": [
+   0.3241,
+   0.3273,
+   0.9974
+  ],
+  "bmi": 29.98,
+  "note": ""
+ },
+ "p37": {
+  "file": "p37.glb",
+  "heightM": 0.81,
+  "sex": "M",
+  "ageYears": 1.5,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_african_female, hair afro01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26099,
+  "bytes": 842856,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1427,
+    -0.2732
+   ],
+   "nose": [
+    0.0,
+    0.1556,
+    -0.3002
+   ],
+   "eyeL": [
+    0.0257,
+    0.1355,
+    -0.3202
+   ],
+   "eyeR": [
+    -0.0257,
+    0.1355,
+    -0.3202
+   ],
+   "chest": [
+    0.0,
+    0.1414,
+    -0.1301
+   ],
+   "handL": [
+    0.1498,
+    0.0334,
+    0.0623
+   ],
+   "wristL": [
+    0.1446,
+    0.0277,
+    0.029
+   ],
+   "handR": [
+    -0.1498,
+    0.0335,
+    0.0623
+   ],
+   "wristR": [
+    -0.1446,
+    0.0277,
+    0.029
+   ],
+   "chin": [
+    0.0,
+    0.1168,
+    -0.2487
+   ],
+   "forehead": [
+    0.0,
+    0.1455,
+    -0.3684
+   ],
+   "earL": [
+    0.0755,
+    0.0483,
+    -0.3212
+   ],
+   "earR": [
+    -0.0755,
+    0.0483,
+    -0.3212
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1002,
+    -0.2152
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": -0.7,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 0.829,
+  "jawOpenM": 0.0269,
+  "breatheRiseM": 0.0069,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.1999,
+   -0.0,
+   -0.4342
+  ],
+  "bboxMax": [
+   0.2,
+   0.1609,
+   0.4519
+  ],
+  "bmi": 17.07,
+  "note": ""
+ },
+ "p38": {
+  "file": "p38.glb",
+  "heightM": 1.68,
+  "sex": "F",
+  "ageYears": 39.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair toigo_blunt_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25853,
+  "bytes": 1033136,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1913,
+    -0.6985
+   ],
+   "nose": [
+    -0.0,
+    0.2052,
+    -0.7259
+   ],
+   "eyeL": [
+    0.0302,
+    0.1712,
+    -0.7595
+   ],
+   "eyeR": [
+    -0.0302,
+    0.1712,
+    -0.7595
+   ],
+   "chest": [
+    0.0,
+    0.2367,
+    -0.3801
+   ],
+   "handL": [
+    0.2358,
+    0.0583,
+    0.002
+   ],
+   "wristL": [
+    0.2308,
+    0.0486,
+    -0.0606
+   ],
+   "handR": [
+    -0.2358,
+    0.0585,
+    0.002
+   ],
+   "wristR": [
+    -0.2308,
+    0.0486,
+    -0.0606
+   ],
+   "chin": [
+    -0.0,
+    0.1542,
+    -0.6542
+   ],
+   "forehead": [
+    -0.0,
+    0.1681,
+    -0.8146
+   ],
+   "earL": [
+    0.0844,
+    0.0678,
+    -0.743
+   ],
+   "earR": [
+    -0.0844,
+    0.0678,
+    -0.743
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1594,
+    -0.5344
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.5,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.726,
+  "jawOpenM": 0.0391,
+  "breatheRiseM": 0.0144,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3196,
+   -0.0001,
+   -0.8637
+  ],
+  "bboxMax": [
+   0.3197,
+   0.2576,
+   0.9408
+  ],
+  "bmi": 22.96,
+  "note": ""
+ },
+ "p39": {
+  "file": "p39.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 57.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25768,
+  "bytes": 1064268,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2075,
+    -0.7406
+   ],
+   "nose": [
+    0.0,
+    0.2268,
+    -0.7726
+   ],
+   "eyeL": [
+    0.0325,
+    0.1936,
+    -0.8124
+   ],
+   "eyeR": [
+    -0.0325,
+    0.1936,
+    -0.8124
+   ],
+   "chest": [
+    0.0,
+    0.2653,
+    -0.4131
+   ],
+   "handL": [
+    0.2353,
+    0.0645,
+    -0.0071
+   ],
+   "wristL": [
+    0.2386,
+    0.051,
+    -0.0739
+   ],
+   "handR": [
+    -0.2353,
+    0.0653,
+    -0.0071
+   ],
+   "wristR": [
+    -0.2386,
+    0.0509,
+    -0.0739
+   ],
+   "chin": [
+    0.0,
+    0.1795,
+    -0.693
+   ],
+   "forehead": [
+    0.0,
+    0.1901,
+    -0.8664
+   ],
+   "earL": [
+    0.0948,
+    0.081,
+    -0.7943
+   ],
+   "earR": [
+    -0.0948,
+    0.081,
+    -0.7943
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1926,
+    -0.5887
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 7.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.832,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3211,
+   -0.0,
+   -0.9281
+  ],
+  "bboxMax": [
+   0.3243,
+   0.3297,
+   0.9988
+  ],
+  "bmi": 26.57,
+  "note": "chart: \"Abdomen distended\", \"Mild jaundice\" (cirrhosis with ascites)"
+ },
+ "p40": {
+  "file": "p40.glb",
+  "heightM": 1.63,
+  "sex": "F",
+  "ageYears": 24.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27802,
+  "bytes": 986732,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.187,
+    -0.6698
+   ],
+   "nose": [
+    -0.0,
+    0.2057,
+    -0.6989
+   ],
+   "eyeL": [
+    0.03,
+    0.1714,
+    -0.7318
+   ],
+   "eyeR": [
+    -0.03,
+    0.1714,
+    -0.7318
+   ],
+   "chest": [
+    0.0,
+    0.2304,
+    -0.3592
+   ],
+   "handL": [
+    0.2369,
+    0.0527,
+    0.0072
+   ],
+   "wristL": [
+    0.2293,
+    0.0398,
+    -0.0508
+   ],
+   "handR": [
+    -0.2369,
+    0.0526,
+    0.0072
+   ],
+   "wristR": [
+    -0.2293,
+    0.0398,
+    -0.0508
+   ],
+   "chin": [
+    0.0,
+    0.1461,
+    -0.623
+   ],
+   "forehead": [
+    0.0,
+    0.1699,
+    -0.7931
+   ],
+   "earL": [
+    0.098,
+    0.0777,
+    -0.7174
+   ],
+   "earR": [
+    -0.098,
+    0.0777,
+    -0.7174
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1566,
+    -0.5106
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.5,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.674,
+  "jawOpenM": 0.0379,
+  "breatheRiseM": 0.014,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3188,
+   -0.0,
+   -0.8434
+  ],
+  "bboxMax": [
+   0.3183,
+   0.2442,
+   0.9128
+  ],
+  "bmi": 21.98,
+  "note": ""
+ },
+ "p41": {
+  "file": "p41.glb",
+  "heightM": 1.6,
+  "sex": "F",
+  "ageYears": 70.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_asian_female, hair rehmanpolanski_hair_bun_brown",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27729,
+  "bytes": 1067428,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.183,
+    -0.6647
+   ],
+   "nose": [
+    0.0,
+    0.1947,
+    -0.6913
+   ],
+   "eyeL": [
+    0.0306,
+    0.1704,
+    -0.7338
+   ],
+   "eyeR": [
+    -0.0306,
+    0.1704,
+    -0.7338
+   ],
+   "chest": [
+    0.0,
+    0.236,
+    -0.3638
+   ],
+   "handL": [
+    0.2399,
+    0.0599,
+    -0.0227
+   ],
+   "wristL": [
+    0.2392,
+    0.0566,
+    -0.085
+   ],
+   "handR": [
+    -0.2399,
+    0.0601,
+    -0.0227
+   ],
+   "wristR": [
+    -0.2392,
+    0.0567,
+    -0.085
+   ],
+   "chin": [
+    -0.0,
+    0.1578,
+    -0.6029
+   ],
+   "forehead": [
+    -0.0,
+    0.1626,
+    -0.7839
+   ],
+   "earL": [
+    0.0934,
+    0.0778,
+    -0.7127
+   ],
+   "earR": [
+    -0.0934,
+    0.0778,
+    -0.7127
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1609,
+    -0.5051
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 2.1,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.649,
+  "jawOpenM": 0.0372,
+  "breatheRiseM": 0.0137,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3184,
+   -0.0,
+   -0.8399
+  ],
+  "bboxMax": [
+   0.3193,
+   0.2798,
+   0.8989
+  ],
+  "bmi": 26.56,
+  "note": ""
+ },
+ "p42": {
+  "file": "p42.glb",
+  "heightM": 1.78,
+  "sex": "M",
+  "ageYears": 61.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25855,
+  "bytes": 1092000,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.2235,
+    -0.7535
+   ],
+   "nose": [
+    0.0,
+    0.2417,
+    -0.7838
+   ],
+   "eyeL": [
+    0.0308,
+    0.2062,
+    -0.824
+   ],
+   "eyeR": [
+    -0.0308,
+    0.2062,
+    -0.824
+   ],
+   "chest": [
+    0.0,
+    0.3039,
+    -0.4293
+   ],
+   "handL": [
+    0.2288,
+    0.0641,
+    -0.0266
+   ],
+   "wristL": [
+    0.2216,
+    0.0559,
+    -0.0944
+   ],
+   "handR": [
+    -0.2288,
+    0.0646,
+    -0.0266
+   ],
+   "wristR": [
+    -0.2216,
+    0.0558,
+    -0.0944
+   ],
+   "chin": [
+    0.0,
+    0.1997,
+    -0.7043
+   ],
+   "forehead": [
+    0.0,
+    0.2013,
+    -0.8773
+   ],
+   "earL": [
+    0.0964,
+    0.0966,
+    -0.8036
+   ],
+   "earR": [
+    -0.0964,
+    0.0966,
+    -0.8036
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2294,
+    -0.6045
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 10.2,
+  "headRestGapM": 0.0135,
+  "lyingLengthM": 1.828,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3211,
+   0,
+   -0.9279
+  ],
+  "bboxMax": [
+   0.3243,
+   0.3624,
+   0.9967
+  ],
+  "bmi": 32.82,
+  "note": ""
+ },
+ "p43": {
+  "file": "p43.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 33.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_african_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27916,
+  "bytes": 874956,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1928,
+    -0.6848
+   ],
+   "nose": [
+    0.0,
+    0.2005,
+    -0.7125
+   ],
+   "eyeL": [
+    0.0273,
+    0.1679,
+    -0.7439
+   ],
+   "eyeR": [
+    -0.0273,
+    0.1679,
+    -0.7439
+   ],
+   "chest": [
+    0.0,
+    0.2252,
+    -0.3679
+   ],
+   "handL": [
+    0.2343,
+    0.0535,
+    0.004
+   ],
+   "wristL": [
+    0.2244,
+    0.0402,
+    -0.0555
+   ],
+   "handR": [
+    -0.2343,
+    0.0535,
+    0.004
+   ],
+   "wristR": [
+    -0.2244,
+    0.0401,
+    -0.0555
+   ],
+   "chin": [
+    -0.0,
+    0.1504,
+    -0.6375
+   ],
+   "forehead": [
+    -0.0,
+    0.1634,
+    -0.7957
+   ],
+   "earL": [
+    0.0755,
+    0.0714,
+    -0.7239
+   ],
+   "earR": [
+    -0.0755,
+    0.0714,
+    -0.7239
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1548,
+    -0.5196
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": -0.4,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.693,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3192,
+   -0.0001,
+   -0.8522
+  ],
+  "bboxMax": [
+   0.3215,
+   0.2382,
+   0.923
+  ],
+  "bmi": 20.75,
+  "note": ""
+ },
+ "p44": {
+  "file": "p44.glb",
+  "heightM": 1.75,
+  "sex": "M",
+  "ageYears": 82.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_asian_male, hair short02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 23629,
+  "bytes": 944724,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2171,
+    -0.7197
+   ],
+   "nose": [
+    -0.0,
+    0.2328,
+    -0.7527
+   ],
+   "eyeL": [
+    0.03,
+    0.2091,
+    -0.7992
+   ],
+   "eyeR": [
+    -0.03,
+    0.2091,
+    -0.7992
+   ],
+   "chest": [
+    0.0,
+    0.2595,
+    -0.3965
+   ],
+   "handL": [
+    0.2359,
+    0.0613,
+    -0.0077
+   ],
+   "wristL": [
+    0.2353,
+    0.0477,
+    -0.0718
+   ],
+   "handR": [
+    -0.2359,
+    0.0615,
+    -0.0077
+   ],
+   "wristR": [
+    -0.2353,
+    0.0476,
+    -0.0718
+   ],
+   "chin": [
+    -0.0,
+    0.1838,
+    -0.6762
+   ],
+   "forehead": [
+    -0.0,
+    0.2037,
+    -0.8554
+   ],
+   "earL": [
+    0.0877,
+    0.0879,
+    -0.7845
+   ],
+   "earR": [
+    -0.0877,
+    0.0879,
+    -0.7845
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2001,
+    -0.5702
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 6.6,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.804,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3205,
+   0,
+   -0.9021
+  ],
+  "bboxMax": [
+   0.323,
+   0.2751,
+   0.9834
+  ],
+  "bmi": 25.47,
+  "note": "chart: \"Edentulous upper (denture given to wife), own lower teeth\""
+ },
+ "p45": {
+  "file": "p45.glb",
+  "heightM": 1.62,
+  "sex": "F",
+  "ageYears": 15.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_asian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27503,
+  "bytes": 880980,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1949,
+    -0.6438
+   ],
+   "nose": [
+    -0.0,
+    0.2063,
+    -0.671
+   ],
+   "eyeL": [
+    0.0319,
+    0.1841,
+    -0.7133
+   ],
+   "eyeR": [
+    -0.0319,
+    0.1841,
+    -0.7133
+   ],
+   "chest": [
+    0.0,
+    0.2131,
+    -0.337
+   ],
+   "handL": [
+    0.2189,
+    0.0536,
+    0.0326
+   ],
+   "wristL": [
+    0.2076,
+    0.0399,
+    -0.0263
+   ],
+   "handR": [
+    -0.2189,
+    0.0534,
+    0.0326
+   ],
+   "wristR": [
+    -0.2076,
+    0.0398,
+    -0.0263
+   ],
+   "chin": [
+    -0.0,
+    0.1521,
+    -0.6004
+   ],
+   "forehead": [
+    -0.0,
+    0.1809,
+    -0.7709
+   ],
+   "earL": [
+    0.0927,
+    0.0724,
+    -0.704
+   ],
+   "earR": [
+    -0.0927,
+    0.0724,
+    -0.704
+   ],
+   "sternalNotch": [
+    0.0,
+    0.153,
+    -0.4937
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 1.2,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.662,
+  "jawOpenM": 0.0377,
+  "breatheRiseM": 0.0139,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3035,
+   -0.0,
+   -0.8373
+  ],
+  "bboxMax": [
+   0.3047,
+   0.2239,
+   0.9061
+  ],
+  "bmi": 19.81,
+  "note": "chart: \"Pale conjunctivae\""
+ },
+ "p46": {
+  "file": "p46.glb",
+  "heightM": 1.8,
+  "sex": "M",
+  "ageYears": 52.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25746,
+  "bytes": 929228,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.212,
+    -0.759
+   ],
+   "nose": [
+    0.0,
+    0.2305,
+    -0.795
+   ],
+   "eyeL": [
+    0.0305,
+    0.1956,
+    -0.8308
+   ],
+   "eyeR": [
+    -0.0305,
+    0.1956,
+    -0.8308
+   ],
+   "chest": [
+    0.0,
+    0.2761,
+    -0.4274
+   ],
+   "handL": [
+    0.2366,
+    0.0667,
+    -0.0119
+   ],
+   "wristL": [
+    0.2434,
+    0.0534,
+    -0.08
+   ],
+   "handR": [
+    -0.2366,
+    0.0674,
+    -0.0119
+   ],
+   "wristR": [
+    -0.2434,
+    0.0531,
+    -0.08
+   ],
+   "chin": [
+    0.0,
+    0.1845,
+    -0.7089
+   ],
+   "forehead": [
+    -0.0,
+    0.1908,
+    -0.8847
+   ],
+   "earL": [
+    0.0869,
+    0.0847,
+    -0.811
+   ],
+   "earR": [
+    -0.0869,
+    0.0847,
+    -0.811
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2057,
+    -0.6049
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 8.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.851,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3213,
+   -0.0,
+   -0.9403
+  ],
+  "bboxMax": [
+   0.3221,
+   0.31,
+   1.0092
+  ],
+  "bmi": 28.39,
+  "note": ""
+ },
+ "p47": {
+  "file": "p47.glb",
+  "heightM": 1.67,
+  "sex": "F",
+  "ageYears": 34.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair toigo_curled_under_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25956,
+  "bytes": 1113796,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1928,
+    -0.7067
+   ],
+   "nose": [
+    -0.0,
+    0.2084,
+    -0.7384
+   ],
+   "eyeL": [
+    0.0284,
+    0.1732,
+    -0.7677
+   ],
+   "eyeR": [
+    -0.0284,
+    0.1732,
+    -0.7677
+   ],
+   "chest": [
+    0.0,
+    0.2752,
+    -0.3819
+   ],
+   "handL": [
+    0.2415,
+    0.0635,
+    -0.0105
+   ],
+   "wristL": [
+    0.2433,
+    0.0668,
+    -0.0734
+   ],
+   "handR": [
+    -0.2415,
+    0.0635,
+    -0.0105
+   ],
+   "wristR": [
+    -0.2433,
+    0.0667,
+    -0.0734
+   ],
+   "chin": [
+    -0.0,
+    0.1598,
+    -0.662
+   ],
+   "forehead": [
+    -0.0,
+    0.1699,
+    -0.8254
+   ],
+   "earL": [
+    0.0832,
+    0.0738,
+    -0.7485
+   ],
+   "earR": [
+    -0.0832,
+    0.0738,
+    -0.7485
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1874,
+    -0.5361
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 2.7,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.721,
+  "jawOpenM": 0.0388,
+  "breatheRiseM": 0.0143,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3195,
+   -0.0001,
+   -0.8715
+  ],
+  "bboxMax": [
+   0.3203,
+   0.3415,
+   0.9378
+  ],
+  "bmi": 28.5,
+  "note": "chart: 18 wk pregnant"
+ },
+ "p48": {
+  "file": "p48.glb",
+  "heightM": 1.76,
+  "sex": "M",
+  "ageYears": 65.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_caucasian_male, hair short02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25826,
+  "bytes": 1021972,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.207,
+    -0.7429
+   ],
+   "nose": [
+    -0.0,
+    0.226,
+    -0.7759
+   ],
+   "eyeL": [
+    0.0324,
+    0.1924,
+    -0.8136
+   ],
+   "eyeR": [
+    -0.0324,
+    0.1924,
+    -0.8136
+   ],
+   "chest": [
+    0.0,
+    0.2596,
+    -0.4188
+   ],
+   "handL": [
+    0.2366,
+    0.0638,
+    -0.0196
+   ],
+   "wristL": [
+    0.2403,
+    0.0505,
+    -0.0855
+   ],
+   "handR": [
+    -0.2366,
+    0.0646,
+    -0.0196
+   ],
+   "wristR": [
+    -0.2403,
+    0.0505,
+    -0.0855
+   ],
+   "chin": [
+    0.0,
+    0.1818,
+    -0.6864
+   ],
+   "forehead": [
+    0.0,
+    0.1895,
+    -0.8675
+   ],
+   "earL": [
+    0.0932,
+    0.0798,
+    -0.7969
+   ],
+   "earR": [
+    -0.0932,
+    0.0798,
+    -0.7969
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1942,
+    -0.5924
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 7.5,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.811,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3208,
+   -0.0,
+   -0.9259
+  ],
+  "bboxMax": [
+   0.3218,
+   0.2769,
+   0.9872
+  ],
+  "bmi": 26.15,
+  "note": ""
+ },
+ "p49": {
+  "file": "p49.glb",
+  "heightM": 1.57,
+  "sex": "F",
+  "ageYears": 72.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin old_african_female, hair rehmanpolanski_hair_bun_brown",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27593,
+  "bytes": 1006132,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1915,
+    -0.6547
+   ],
+   "nose": [
+    -0.0,
+    0.1976,
+    -0.6814
+   ],
+   "eyeL": [
+    0.0276,
+    0.1667,
+    -0.7126
+   ],
+   "eyeR": [
+    -0.0276,
+    0.1667,
+    -0.7126
+   ],
+   "chest": [
+    0.0,
+    0.2307,
+    -0.3405
+   ],
+   "handL": [
+    0.2385,
+    0.0601,
+    0.0072
+   ],
+   "wristL": [
+    0.2343,
+    0.0587,
+    -0.0544
+   ],
+   "handR": [
+    -0.2385,
+    0.0603,
+    0.0072
+   ],
+   "wristR": [
+    -0.2343,
+    0.0587,
+    -0.0544
+   ],
+   "chin": [
+    -0.0,
+    0.1552,
+    -0.6078
+   ],
+   "forehead": [
+    -0.0,
+    0.1608,
+    -0.7634
+   ],
+   "earL": [
+    0.0795,
+    0.0704,
+    -0.6922
+   ],
+   "earR": [
+    -0.0795,
+    0.0704,
+    -0.6922
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1574,
+    -0.4836
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 0.7,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.613,
+  "jawOpenM": 0.0365,
+  "breatheRiseM": 0.0135,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.318,
+   -0.0001,
+   -0.8208
+  ],
+  "bboxMax": [
+   0.3199,
+   0.2637,
+   0.8794
+  ],
+  "bmi": 24.75,
+  "note": "chart: \"72F frail\""
+ },
+ "p50": {
+  "file": "p50.glb",
+  "heightM": 1.23,
+  "sex": "M",
+  "ageYears": 9.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26338,
+  "bytes": 936616,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1688,
+    -0.4815
+   ],
+   "nose": [
+    -0.0,
+    0.1793,
+    -0.5078
+   ],
+   "eyeL": [
+    0.0262,
+    0.1557,
+    -0.5373
+   ],
+   "eyeR": [
+    -0.0262,
+    0.1557,
+    -0.5373
+   ],
+   "chest": [
+    0.0,
+    0.178,
+    -0.2404
+   ],
+   "handL": [
+    0.1865,
+    0.041,
+    0.0313
+   ],
+   "wristL": [
+    0.1776,
+    0.0325,
+    -0.0141
+   ],
+   "handR": [
+    -0.1865,
+    0.0413,
+    0.0313
+   ],
+   "wristR": [
+    -0.1776,
+    0.0326,
+    -0.0141
+   ],
+   "chin": [
+    -0.0,
+    0.1347,
+    -0.4468
+   ],
+   "forehead": [
+    -0.0,
+    0.1587,
+    -0.5863
+   ],
+   "earL": [
+    0.0762,
+    0.0642,
+    -0.5243
+   ],
+   "earR": [
+    -0.0762,
+    0.0642,
+    -0.5243
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1257,
+    -0.3737
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 3.6,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.266,
+  "jawOpenM": 0.0286,
+  "breatheRiseM": 0.0105,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.2516,
+   -0.0,
+   -0.6414
+  ],
+  "bboxMax": [
+   0.2513,
+   0.1833,
+   0.6903
+  ],
+  "bmi": 17.19,
+  "note": "chart: trisomy 21. No attempt is made to model its facial features; the figure is a generic 9-year-old"
+ },
+ "p51": {
+  "file": "p51.glb",
+  "heightM": 1.72,
+  "sex": "M",
+  "ageYears": 42.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair short02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25817,
+  "bytes": 997576,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.205,
+    -0.7191
+   ],
+   "nose": [
+    0.0,
+    0.2219,
+    -0.7509
+   ],
+   "eyeL": [
+    0.0311,
+    0.1907,
+    -0.7898
+   ],
+   "eyeR": [
+    -0.0311,
+    0.1907,
+    -0.7898
+   ],
+   "chest": [
+    0.0,
+    0.2371,
+    -0.3946
+   ],
+   "handL": [
+    0.232,
+    0.0645,
+    0.016
+   ],
+   "wristL": [
+    0.2317,
+    0.0491,
+    -0.052
+   ],
+   "handR": [
+    -0.232,
+    0.0648,
+    0.016
+   ],
+   "wristR": [
+    -0.2317,
+    0.0488,
+    -0.052
+   ],
+   "chin": [
+    0.0,
+    0.1757,
+    -0.672
+   ],
+   "forehead": [
+    0.0,
+    0.188,
+    -0.8434
+   ],
+   "earL": [
+    0.0859,
+    0.0787,
+    -0.7743
+   ],
+   "earR": [
+    -0.0859,
+    0.0787,
+    -0.7743
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1725,
+    -0.5663
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.1,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.774,
+  "jawOpenM": 0.04,
+  "breatheRiseM": 0.0147,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3201,
+   0,
+   -0.9055
+  ],
+  "bboxMax": [
+   0.3212,
+   0.2437,
+   0.9669
+  ],
+  "bmi": 23.66,
+  "note": "chart: \"Full beard for 10 years\""
+ },
+ "p52": {
+  "file": "p52.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 52.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_female, hair toigo_blunt_bob",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 26063,
+  "bytes": 1198620,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.1971,
+    -0.6959
+   ],
+   "nose": [
+    0.0,
+    0.2113,
+    -0.7323
+   ],
+   "eyeL": [
+    0.0279,
+    0.1739,
+    -0.7551
+   ],
+   "eyeR": [
+    -0.0279,
+    0.1739,
+    -0.7551
+   ],
+   "chest": [
+    0.0,
+    0.3364,
+    -0.3726
+   ],
+   "handL": [
+    0.2363,
+    0.0731,
+    -0.0154
+   ],
+   "wristL": [
+    0.2305,
+    0.0882,
+    -0.0791
+   ],
+   "handR": [
+    -0.2363,
+    0.0731,
+    -0.0154
+   ],
+   "wristR": [
+    -0.2305,
+    0.0881,
+    -0.0791
+   ],
+   "chin": [
+    0.0,
+    0.1687,
+    -0.6459
+   ],
+   "forehead": [
+    -0.0,
+    0.1654,
+    -0.8146
+   ],
+   "earL": [
+    0.0806,
+    0.0739,
+    -0.7271
+   ],
+   "earR": [
+    -0.0806,
+    0.0739,
+    -0.7271
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2426,
+    -0.5241
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 7.9,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.695,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3195,
+   -0.0001,
+   -0.8486
+  ],
+  "bboxMax": [
+   0.3212,
+   0.4382,
+   0.9241
+  ],
+  "bmi": 40.41,
+  "note": ""
+ },
+ "p53": {
+  "file": "p53.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 52.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_asian_female, hair ponytail01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 28057,
+  "bytes": 941308,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1959,
+    -0.6991
+   ],
+   "nose": [
+    0.0,
+    0.2038,
+    -0.7265
+   ],
+   "eyeL": [
+    0.0286,
+    0.1714,
+    -0.7614
+   ],
+   "eyeR": [
+    -0.0286,
+    0.1714,
+    -0.7614
+   ],
+   "chest": [
+    0.0,
+    0.3314,
+    -0.379
+   ],
+   "handL": [
+    0.2353,
+    0.0718,
+    -0.0246
+   ],
+   "wristL": [
+    0.2294,
+    0.086,
+    -0.0886
+   ],
+   "handR": [
+    -0.2353,
+    0.0719,
+    -0.0246
+   ],
+   "wristR": [
+    -0.2294,
+    0.0859,
+    -0.0886
+   ],
+   "chin": [
+    0.0,
+    0.1697,
+    -0.6454
+   ],
+   "forehead": [
+    0.0,
+    0.1605,
+    -0.8119
+   ],
+   "earL": [
+    0.0884,
+    0.0801,
+    -0.733
+   ],
+   "earR": [
+    -0.0884,
+    0.0801,
+    -0.733
+   ],
+   "sternalNotch": [
+    0.0,
+    0.2372,
+    -0.5289
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 8.0,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.696,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3191,
+   -0.0001,
+   -0.8541
+  ],
+  "bboxMax": [
+   0.3216,
+   0.4345,
+   0.9247
+  ],
+  "bmi": 40.41,
+  "note": ""
+ },
+ "p54": {
+  "file": "p54.glb",
+  "heightM": 1.75,
+  "sex": "M",
+  "ageYears": 48.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin middleage_caucasian_male, hair culturalibre_hair_02",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 25917,
+  "bytes": 1010860,
+  "landmarks": {
+   "mouth": [
+    -0.0,
+    0.2027,
+    -0.7274
+   ],
+   "nose": [
+    -0.0,
+    0.2214,
+    -0.7612
+   ],
+   "eyeL": [
+    0.0329,
+    0.1891,
+    -0.7975
+   ],
+   "eyeR": [
+    -0.0329,
+    0.1891,
+    -0.7975
+   ],
+   "chest": [
+    0.0,
+    0.2392,
+    -0.403
+   ],
+   "handL": [
+    0.2313,
+    0.0629,
+    0.0105
+   ],
+   "wristL": [
+    0.2279,
+    0.0481,
+    -0.0565
+   ],
+   "handR": [
+    -0.2313,
+    0.0631,
+    0.0105
+   ],
+   "wristR": [
+    -0.2279,
+    0.0479,
+    -0.0565
+   ],
+   "chin": [
+    -0.0,
+    0.1757,
+    -0.6835
+   ],
+   "forehead": [
+    -0.0,
+    0.1872,
+    -0.8512
+   ],
+   "earL": [
+    0.0979,
+    0.0798,
+    -0.7838
+   ],
+   "earR": [
+    -0.0979,
+    0.0798,
+    -0.7838
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1741,
+    -0.576
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 5.4,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.803,
+  "jawOpenM": 0.0407,
+  "breatheRiseM": 0.015,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3205,
+   0,
+   -0.9132
+  ],
+  "bboxMax": [
+   0.323,
+   0.2463,
+   0.9827
+  ],
+  "bmi": 22.86,
+  "note": ""
+ },
+ "p55": {
+  "file": "p55.glb",
+  "heightM": 1.65,
+  "sex": "F",
+  "ageYears": 32.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair rehmanpolanski_hair_bun_brown",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27495,
+  "bytes": 1058716,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1895,
+    -0.6815
+   ],
+   "nose": [
+    0.0,
+    0.2099,
+    -0.7053
+   ],
+   "eyeL": [
+    0.0297,
+    0.1726,
+    -0.7433
+   ],
+   "eyeR": [
+    -0.0297,
+    0.1726,
+    -0.7433
+   ],
+   "chest": [
+    0.0,
+    0.249,
+    -0.3658
+   ],
+   "handL": [
+    0.2384,
+    0.0617,
+    0.0026
+   ],
+   "wristL": [
+    0.2352,
+    0.0604,
+    -0.0597
+   ],
+   "handR": [
+    -0.2384,
+    0.0618,
+    0.0026
+   ],
+   "wristR": [
+    -0.2352,
+    0.0601,
+    -0.0597
+   ],
+   "chin": [
+    0.0,
+    0.1509,
+    -0.6378
+   ],
+   "forehead": [
+    0.0,
+    0.17,
+    -0.8008
+   ],
+   "earL": [
+    0.0884,
+    0.0732,
+    -0.7274
+   ],
+   "earR": [
+    -0.0884,
+    0.0732,
+    -0.7274
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1688,
+    -0.5179
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 1.4,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.698,
+  "jawOpenM": 0.0384,
+  "breatheRiseM": 0.0141,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3192,
+   -0.0002,
+   -0.8637
+  ],
+  "bboxMax": [
+   0.3214,
+   0.2785,
+   0.9255
+  ],
+  "bmi": 24.98,
+  "note": ""
+ },
+ "p56": {
+  "file": "p56.glb",
+  "heightM": 1.68,
+  "sex": "F",
+  "ageYears": 26.0,
+  "source": "MakeHuman base mesh and assets (CC0) via MPFB 2.0.18; skin young_caucasian_female, hair culturalibre_hair_01",
+  "morphs": [
+   "eyesClosed",
+   "jawOpen",
+   "breathe"
+  ],
+  "triangles": 27047,
+  "bytes": 1029080,
+  "landmarks": {
+   "mouth": [
+    0.0,
+    0.1916,
+    -0.7054
+   ],
+   "nose": [
+    0.0,
+    0.2074,
+    -0.7413
+   ],
+   "eyeL": [
+    0.0291,
+    0.173,
+    -0.7664
+   ],
+   "eyeR": [
+    -0.0291,
+    0.173,
+    -0.7664
+   ],
+   "chest": [
+    0.0,
+    0.2814,
+    -0.3827
+   ],
+   "handL": [
+    0.2407,
+    0.0638,
+    -0.0089
+   ],
+   "wristL": [
+    0.2418,
+    0.0673,
+    -0.0721
+   ],
+   "handR": [
+    -0.2407,
+    0.0638,
+    -0.0089
+   ],
+   "wristR": [
+    -0.2418,
+    0.0672,
+    -0.0721
+   ],
+   "chin": [
+    0.0,
+    0.1576,
+    -0.6578
+   ],
+   "forehead": [
+    0.0,
+    0.1698,
+    -0.8243
+   ],
+   "earL": [
+    0.0875,
+    0.0771,
+    -0.7479
+   ],
+   "earR": [
+    -0.0875,
+    0.0771,
+    -0.7479
+   ],
+   "sternalNotch": [
+    0.0,
+    0.1941,
+    -0.5378
+   ]
+  },
+  "headTiltDeg": 0.0,
+  "neckExtensionDeg": 3.3,
+  "headRestGapM": 0.0,
+  "lyingLengthM": 1.731,
+  "jawOpenM": 0.0391,
+  "breatheRiseM": 0.0144,
+  "meshes": [
+   "body",
+   "arms",
+   "eyes",
+   "teeth",
+   "tongue",
+   "hair",
+   "gown",
+   "sheet"
+  ],
+  "morphsByMesh": {
+   "body": [
+    "eyesClosed",
+    "jawOpen",
+    "breathe"
+   ],
+   "teeth": [
+    "jawOpen"
+   ],
+   "tongue": [
+    "jawOpen"
+   ],
+   "gown": [
+    "breathe"
+   ],
+   "sheet": [
+    "breathe"
+   ]
+  },
+  "bboxMin": [
+   -0.3196,
+   -0.0001,
+   -0.8747
+  ],
+  "bboxMax": [
+   0.3198,
+   0.3335,
+   0.9435
+  ],
+  "bmi": 29.05,
+  "note": ""
+ }
+}
