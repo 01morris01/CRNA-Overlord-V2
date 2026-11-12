@@ -211,9 +211,10 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   addEventListener('keydown', onKey); addEventListener('keyup', onKey); addEventListener('blur', () => keys.clear());
   const lookBy = (dx, dy, k) => { cam.yaw -= dx * k; cam.pitch = THREE.MathUtils.clamp(cam.pitch - dy * k, -1.25, 0.9); };
   let locked = false; addEventListener('pointerlockchange', () => { locked = document.pointerLockElement === el; document.body.classList.toggle('mouselook', locked); if (!locked) keys.clear(); });
-  addEventListener('mousemove', (e) => { if (locked && enabled) lookBy(e.movementX, e.movementY, 0.0024 * prefs.sens); });
+  addEventListener('mousemove', (e) => { if (locked && enabled && !(api.grabbing && api.grabbing())) lookBy(e.movementX, e.movementY, 0.0024 * prefs.sens); });      /* while your hand is on a knob or a plunger the mouse belongs to the hand */
   el.addEventListener('contextmenu', (e) => e.preventDefault());
-  el.addEventListener('pointerdown', (e) => { if (!enabled) return; if (prefs.mouseLook && !touch && !locked && e.button === 0 && el.requestPointerLock) { const q = el.requestPointerLock(); if (q && q.catch) q.catch(() => {}); return; } if (locked) { api.onPick && api.onPick(null, e); return; } drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, t: performance.now(), id: e.pointerId, button: e.button }; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointerdown', (e) => { if (!enabled) return; if (api.onGrab && api.onGrab(e)) { e.preventDefault(); return; }      /* a press on something you turn or hold (js/hands.js) is not the start of looking round */
+    if (prefs.mouseLook && !touch && !locked && e.button === 0 && el.requestPointerLock) { const q = el.requestPointerLock(); if (q && q.catch) q.catch(() => {}); return; } if (locked) { api.onPick && api.onPick(null, e); return; } drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, t: performance.now(), id: e.pointerId, button: e.button }; el.setPointerCapture(e.pointerId); });
   el.addEventListener('pointermove', (e) => { if (!drag || drag.id !== e.pointerId || !enabled) return; lookBy(e.clientX - drag.x, e.clientY - drag.y, 0.0042 * prefs.sens * (touch ? 1.5 : 1)); drag.x = e.clientX; drag.y = e.clientY; });
   el.addEventListener('pointerup', (e) => { if (!drag) return; const still = Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6 && performance.now() - drag.t < 450, button = drag.button; drag = null; if (!still || !enabled || button !== 0) return;
     if (api.onPick && api.onPick(e, e)) return;      /* something in the room took the click (js/hands.js); otherwise a click on the floor walks there */
@@ -316,6 +317,8 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     onWalkAway: null,
     /** Called with a click on the picture (the pointer event, or null when the mouse is captured and the centre of the view is meant). Return true to keep the click. */
     onPick: null,
+    /** Called when a button goes down on the picture; return true to take the press (a knob, a plunger). grabbing() says whether one is still held. */
+    onGrab: null, grabbing: null,
     /** Tell the camera what part of the screen a panel covers, so that what you look at sits in the middle of the rest. */
     inset(l = 0, t = 0, r = 0, b = 0) { if (inset.l === l && inset.t === t && inset.r === r && inset.b === b) return; Object.assign(inset, { l, t, r, b }); size(); },
     /** Stand at the free spot nearest (x, z) and look at a point, through your own eyes, keeping control: a place to work from, not a held camera. */
