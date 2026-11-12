@@ -1,0 +1,98 @@
+{
+ "voice": "matilda",
+ "voice_id": "XrExE9yKIg1WjnnlVkGX",
+ "model": "eleven_multilingual_v2",
+ "made_with": "ElevenLabs text to speech",
+ "clips": [
+  {
+   "text": "A block placed between the scalene muscles often spares the lowest part of the plexus. Which nerve does that leave working? Follow one trunk and you can answer it.",
+   "file": "f54c6f0ed98e.mp3",
+   "seconds": 9.52,
+   "for": "film"
+  },
+  {
+   "text": "The right side of the neck, from the front. Five roots, C5 to T1, pass between the anterior and middle scalene muscles.",
+   "file": "46a58de3e932.mp3",
+   "seconds": 8.41,
+   "for": "film"
+  },
+  {
+   "text": "At the edge of the scalenes they become three trunks. C5 and C6 form the superior trunk. C7 continues alone as the middle. C8 and T1 form the inferior trunk, the lowest.",
+   "file": "63f34214b1c2.mp3",
+   "seconds": 12.91,
+   "for": "film"
+  },
+  {
+   "text": "Behind the clavicle each trunk splits into an anterior and a posterior division. All three posterior divisions join to form one cord.",
+   "file": "84e21b2a2c72.mp3",
+   "seconds": 9.24,
+   "for": "film"
+  },
+  {
+   "text": "The anterior division of the inferior trunk continues on its own. Before you see it: which cord does it become?",
+   "file": "3e2f934e2f87.mp3",
+   "seconds": 6.64,
+   "for": "film"
+  },
+  {
+   "text": "The medial cord. It lies behind and to the inside of the axillary artery. All three cords are named for where they lie around that artery.",
+   "file": "3f145f6ffd40.mp3",
+   "seconds": 8.59,
+   "for": "film"
+  },
+  {
+   "text": "The medial cord continues as the ulnar nerve, C8 and T1. It crosses the elbow behind the medial epicondyle.",
+   "file": "6c5c4b9693db.mp3",
+   "seconds": 7.85,
+   "for": "film"
+  },
+  {
+   "text": "So a block that spares the inferior trunk spares C8 and T1, the fibres that reach the ulnar nerve. That is why it is not chosen for surgery below the elbow.",
+   "file": "b84bacc9bb06.mp3",
+   "seconds": 10.73,
+   "for": "film"
+  },
+  {
+   "text": "Local anesthetic can be placed at four levels of the brachial plexus. Each level reaches a different part of it, and has different neighbours.",
+   "file": "04bdecee0bbd.mp3",
+   "seconds": 8.41,
+   "for": "regional"
+  },
+  {
+   "text": "Highest is the interscalene groove. The roots pass between the anterior and middle scalenes here, level with the cricoid cartilage and C6. It is used for the shoulder and upper arm.",
+   "file": "07783129733c.mp3",
+   "seconds": 12.63,
+   "for": "regional"
+  },
+  {
+   "text": "Two things to remember. The lower trunk, C8 and T1, is often spared. And the phrenic nerve lies on the anterior scalene right beside it, so the diaphragm on that side is often weakened.",
+   "file": "42b589280525.mp3",
+   "seconds": 12.77,
+   "for": "regional"
+  },
+  {
+   "text": "Behind the clavicle, over the first rib, the trunks and divisions are packed closely together beside the subclavian artery. A block here is dense for the arm. The pleura is just below the rib.",
+   "file": "4460e03f3f77.mp3",
+   "seconds": 12.77,
+   "for": "regional"
+  },
+  {
+   "text": "Below the clavicle, the three cords surround the axillary artery. This level is used for the elbow, forearm and hand, and it is far from the phrenic nerve.",
+   "file": "a85b1c3f9549.mp3",
+   "seconds": 10.31,
+   "for": "regional"
+  },
+  {
+   "text": "In the axilla the terminal nerves travel with the artery. It covers the arm below the elbow. The musculocutaneous nerve has already left, inside coracobrachialis, and needs its own injection.",
+   "file": "6cf4aa1a6851.mp3",
+   "seconds": 12.31,
+   "for": "regional"
+  },
+  {
+   "text": "That is where each approach is aimed. How to perform one is not shown here.",
+   "file": "da3102998b80.mp3",
+   "seconds": 4.74,
+   "for": "regional"
+  }
+ ]
+}

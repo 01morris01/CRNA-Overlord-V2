@@ -223,6 +223,28 @@ def stretcher(length=2.1):
     for m in {o.data.materials[0] for o in objs}:
         if m.name.startswith('BlueRubber'): tint(m, (0.07, 0.17, 0.3), 0.6, 0.0)
     return group('stretcher', merge(objs), collide=True)
+def stretcher_flat(length=2.1, top=0.74):
+    """The lighter of meeww's two stretchers, with its back rest laid flat so that a patient can lie supine on it, and raised
+    so the mattress top stands at `top`. Head at +Y."""
+    objs = bring('aecf349e', keep=lambda n, m: n in ('Object_10', 'Object_11', 'Object_12', 'Object_13', 'Object_14')); lo, hi = bounds(objs); stand(objs, length / (hi.y - lo.y))
+    mat = [o for o in objs if o.data.materials[0].name.startswith('BlueRubber')]; c = co(mat); ys = np.linspace(c[:, 1].min(), c[:, 1].max(), 41); prof = np.array([c[(c[:, 1] >= a) & (c[:, 1] <= b_), 2].max() if ((c[:, 1] >= a) & (c[:, 1] <= b_)).any() else np.nan for a, b_ in zip(ys[:-1], ys[1:])]); mid = (ys[:-1] + ys[1:]) / 2
+    flat = float(np.nanmedian(prof[:len(prof) // 2])); rise = np.where(prof > flat + 0.035)[0]; rise = rise[rise > len(prof) // 3]
+    if len(rise) > 3:                                                                                # find the hinge and the angle of the raised back, then lay everything above the deck back down about that hinge
+        k = np.polyfit(mid[rise], prof[rise], 1); ang = math.atan(k[0]); yh = (flat - k[1]) / k[0]; deck = flat - 0.16
+        for o in objs:
+            for v in o.data.vertices:
+                if v.co.y > yh and v.co.z > deck:
+                    dy, dz = v.co.y - yh, v.co.z - flat; w = min(1.0, (v.co.y - yh) / 0.06); ca, sa = math.cos(-ang * w), math.sin(-ang * w); v.co.y = yh + dy * ca - dz * sa; v.co.z = flat + dy * sa + dz * ca
+        print('STRETCHER back rest laid flat: hinge y %.2f, angle %.1f deg' % (yh, math.degrees(ang)))
+    lo, hi = bounds(mat); lift = top - hi.z
+    if abs(lift) > 0.005:                                                                             # raise the deck on its lifts: everything above the base moves, the columns stretch
+        zb = hi.z * 0.42
+        for o in objs:
+            for v in o.data.vertices: v.co.z += lift * min(1.0, max(0.0, (v.co.z - zb * 0.75) / (zb * 0.25)))
+    for m in {o.data.materials[0] for o in objs}:
+        if m.name.startswith('BlueRubber'): tint(m, (0.1, 0.22, 0.36), 0.6, 0.0)
+    for o in objs: o.data.update()
+    return group('stretcher_flat', merge(objs), collide=True)
 def emergency_cart(scale=0.56):
     objs = bring('7b6c0aa0'); stand(objs, scale); thin_to(objs, 42000); return group('emergency_cart', merge(objs), collide=True)
 def supply_cart():
@@ -261,6 +283,8 @@ def syringes():
 
 # ------------------------------------------------------------------ the two rooms
 OR_TABLE, OR_HEAD = (8.6, 15.6), (8.6, 16.63)
+PREOP_BAYS = ((-9.3, True), (-6.4, True), (-9.3, False), (-6.4, False))      # (centre x, against the north wall?) for bays 1 to 4
+STRETCHER_TOP = 0.74
 def build(src):
     """Stand everything in the level (Blender axes: +X east, +Y north). Returns pieces, lamps for the bake, and screens."""
     global SRC; SRC = src; kit.materials(); k0 = len(kit.PIECES); lamps = []
@@ -271,7 +295,7 @@ def build(src):
     put(emergency_cart(), (11.25, 18.95, 0), 0.0, 'or'); cart = supply_cart(); put(cart, (11.55, 16.2, 0), math.pi / 2, 'or')
     put(suction(), (6.15, 19.578, 1.42), 0.0, 'or'); put(clock(), (10.9, 19.578, 2.42), 0.0, 'or')
     tools = instruments(); put(tools, (10.42, 12.62, 0.925), 0.25, 'or'); t2 = copy(tools); put(t2, (10.98, 12.55, 0.925), 3.3, 'or')
-    for small, at, rz in ((laryngoscope(), (0.36, -0.37, 0.862), 0.35), (syringes(), (0.2, -0.41, 0.862), 1.9)):                       # on the machine's side shelf, and moving with it
+    for small, at, rz in ((laryngoscope(), (0.36, -0.37, 0.862), 0.35), (syringes(), (0.2, -0.41, 0.862), 1.9)):                       # on the machine's front ledge, and moving with it (the worktop proper is higher: its height still has to be measured before these move onto it)
         PIECES.remove(small); small.parent = am; small.location = at; small.rotation_euler = (0, 0, rz)
     g, heads = kit.surgical_lights((8.6, 15.35, 2.886), [(8.6, 16.05, 0.98), (8.6, 15.05, 0.98)], reach=((-0.85, 0.35), (0.8, -0.3))); g['room'] = 'or'
     for hp, tg in heads: lamps.append({'kind': 'SPOT', 'at': tuple(hp + (tg - hp).normalized() * 0.06), 'to': tuple(tg), 'power': 300, 'color': (1.0, 0.985, 0.95), 'size': 0.28, 'spot': 34, 'blend': 0.55, 'dyn': True})
@@ -287,6 +311,13 @@ def build(src):
     if len(poles) > 1: put(poles[1], (-9.6, 12.38, 0), 0.3, 'regional')
     c2 = copy(cart); put(c2, (-6.85, 12.62, 0), 0.0, 'regional'); kit.stool((-7.85, 13.55, 0), 0.0, 0.52, 'eq_pad_blue')['room'] = 'regional'
     s2 = copy(PIECES[[p.name for p in PIECES].index('eq_suction')]); put(s2, (-10.05, 12.052, 1.62), math.pi, 'regional')
+    # ---- pre-op holding: x -10.7..-4.9, y 2.6..9.6. Four curtained bays, two against the north wall and two against the south, each with a flat stretcher.
+    bay0 = PIECES[[p.name for p in PIECES].index('eq_curtain_bay')]; mon0 = PIECES[[p.name for p in PIECES].index('eq_vitals_monitor')]; flat = stretcher_flat(); first = True
+    for i, (cx, north) in enumerate(PREOP_BAYS):
+        wall, sy = (9.58, -1) if north else (2.62, 1); put(copy(bay0), (cx, wall, 0), math.pi if north else 0.0, 'preop')
+        put(flat if first else copy(flat), (cx, wall + sy * 1.32, 0), 0.0 if north else math.pi, 'preop'); first = False
+        if i % 2 == 0: put(copy(mon0), (cx + 0.95, wall + sy * 0.45, 0), (0.4 if north else 3.5), 'preop')
+        kit.stool((cx - 0.95, wall + sy * 1.5, 0), 0.0, 0.5, 'eq_pad_blue')['room'] = 'preop'
     for p in kit.PIECES[k0:]:
         if 'collide' not in p.keys(): p['collide'] = p.name.split('.')[0] in ('eq_back_table', 'eq_mayo_stand', 'eq_stool', 'eq_kick_bucket', 'eq_cabinet')
     return PIECES + kit.PIECES[k0:], lamps

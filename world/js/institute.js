@@ -83,7 +83,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
 
   // ------------------------------------------------------------------ rooms
   const rooms = Object.entries(L.rooms).map(([name, r]) => ({ name, ...r, exposure: EXPO[name] ?? r.exposure, cx: (r.x0 + r.x1) / 2, cz: (r.z0 + r.z1) / 2, top: r.h || 30 }));
-  const order = ['gallery', 'regional', 'or', 'studio', 'arrival', 'court', 'forecourt'].map((n) => rooms.find((r) => r.name === n));
+  const order = ['gallery', 'regional', 'preop', 'or', 'studio', 'arrival', 'court', 'forecourt'].map((n) => rooms.find((r) => r.name === n));
   const roomAt = (x, y, z, pad = 0.05) => { for (const r of order) if (x >= r.x0 - pad && x <= r.x1 + pad && z >= r.z0 - pad && z <= r.z1 + pad && y <= r.top + 0.35) return r.name; return 'outside'; };
   const boxes = {}; for (const r of rooms) if (r.h) boxes[r.name] = { min: new THREE.Vector3(r.x0, 0, r.z0), max: new THREE.Vector3(r.x1, r.h, r.z1), at: new THREE.Vector3(r.cx, Math.min(r.h * 0.5, 1.7), r.cz), env: null };
   // ------------------------------------------------------------------ the building, split by room so each part reflects its own room
@@ -152,7 +152,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   }
   await Promise.all(L.signs.map(addSign));
   /** Put a drawing on one of the level's screens (the lightbox, the regional display, the case rail). */
-  function setScreen(name, texture, { glow = 1 } = {}) { const m = signs[name]; if (!m) return; m.material.dispose(); m.material = new THREE.MeshBasicMaterial({ map: texture, toneMapped: true, color: new THREE.Color(glow, glow, glow) }); }
+  function setScreen(name, texture, { glow = 1 } = {}) { const m = signs[name]; if (!m) return; if (m.material.map && m.material.map !== texture) m.material.map.dispose(); m.material.dispose(); m.material = new THREE.MeshBasicMaterial({ map: texture, toneMapped: true, color: new THREE.Color(glow, glow, glow), polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }); }
 
   // ------------------------------------------------------------------ stations: where something can be opened
   const stations = Object.entries(L.stations).map(([key, s]) => ({ key, ...s, pos: new THREE.Vector3(s.at[0], 0, s.at[1]), room: roomAt(s.at[0], 1, s.at[1]) }));
@@ -177,7 +177,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
 
   // ------------------------------------------------------------------ input
   const keys = new Set(), el = renderer.domElement; let drag = null, moveTo = null, stick = { x: 0, y: 0 }, enabled = true, near = null;
-  const onKey = (e) => { if (e.target.closest && e.target.closest('input, textarea, select')) return; const k = e.key.toLowerCase(), down = e.type === 'keydown';
+  const onKey = (e) => { const k = (e.key || '').toLowerCase(), down = e.type === 'keydown'; if (e.target.closest && e.target.closest('input, textarea, select')) { if (!down) keys.delete(k); return; }      /* typing is not walking; a key let go while typing is still let go */
     if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'shift'].includes(k)) { down ? keys.add(k) : keys.delete(k); if (down) moveTo = null; e.preventDefault(); }
     if (down && (k === 'e' || k === 'enter') && near && enabled) { e.preventDefault(); use(near); } if (down && k === 'v' && enabled) api.setPref('view', prefs.view === 'first' ? 'third' : 'first'); };
   addEventListener('keydown', onKey); addEventListener('keyup', onKey); addEventListener('blur', () => keys.clear());
@@ -196,8 +196,8 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   // ------------------------------------------------------------------ using a station: the camera settles on it, then main.js opens it
   let invited = null, hideWalker = false;
   function use(s) { if (!enabled) return; enabled = false; moveTo = null; keys.clear(); els.prompt && els.prompt.classList.remove('on'); sound.sfx('tap');
-    const eye = new THREE.Vector3(s.pos.x, 1.52, s.pos.z), look = new THREE.Vector3(...s.look); P.yaw = Math.atan2(look.x - s.pos.x, look.z - s.pos.z);
-    glideTo(eye.clone().lerp(look, 0.12), look, 46, prefs.motion ? 0.85 : 0, () => onStation && onStation(s.key, api)); }
+    const eye = new THREE.Vector3(s.pos.x, 1.52, s.pos.z), look = new THREE.Vector3(...s.look); P.yaw = Math.atan2(look.x - s.pos.x, look.z - s.pos.z);      // a station may name its own viewpoint (`eye`, `fov`): a bedside, not the ring you walked to
+    glideTo(s.eye ? new THREE.Vector3(...s.eye) : eye.clone().lerp(look, 0.12), look, s.fov || 46, prefs.motion ? 0.85 : 0, () => onStation && onStation(s.key, api)); }
   function glideTo(pos, look, fov, seconds, done) { if (seconds <= 0) { camera.position.copy(pos); camera.lookAt(look); camera.fov = fov; camera.updateProjectionMatrix(); cam.glide = { hold: true, look: look.clone() }; done && done(); return; }
     cam.glide = { p0: camera.position.clone(), q0: camera.quaternion.clone(), f0: camera.fov, p1: pos, q1: new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().lookAt(pos, look, camera.up)), f1: fov, t: 0, dur: seconds, done, look: look.clone() }; }
 
@@ -214,10 +214,15 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
 
   // ------------------------------------------------------------------ things placed in the level
   /** Add a model (already loaded) at a spot, lit by the probes there. Returns { root, light, mats }. */
-  const placed = [], SEES = { forecourt: ['forecourt', 'arrival', 'court', 'outside'], arrival: ['forecourt', 'arrival', 'court', 'gallery', 'outside'], court: ['arrival', 'court', 'gallery', 'or', 'regional', 'studio', 'forecourt', 'outside'], gallery: ['gallery', 'court'], or: ['or', 'court'], regional: ['regional', 'court', 'outside'], studio: ['studio', 'court', 'outside'], outside: ['forecourt', 'arrival', 'court', 'outside'] };
+  const placed = [], SEES = { forecourt: ['forecourt', 'arrival', 'court', 'outside'], arrival: ['forecourt', 'arrival', 'court', 'gallery', 'outside'], court: ['arrival', 'court', 'gallery', 'or', 'regional', 'preop', 'studio', 'forecourt', 'outside'], gallery: ['gallery', 'court'], or: ['or', 'court'], regional: ['regional', 'court', 'outside'], preop: ['preop', 'court'], studio: ['studio', 'court', 'outside'], outside: ['forecourt', 'arrival', 'court', 'outside'] };
   let viewRoom = null; const showFor = (r) => { viewRoom = r; const ok = SEES[r] || SEES.court; for (const q of placed) q.root.visible = ok.includes(q.room); };      // things in rooms you cannot see from here are not drawn
-  function place(root, { at, room = null, envI = 0.8, shadow = true }) { const r = room || roomAt(at.x, at.y, at.z), lit = litCopy(root, at, r); for (const m of lit.mats) { m.userData.envI = envI; dynMats.push(m); } root.traverse((o) => { if (o.isMesh) { o.castShadow = shadow && prefs.quality !== 'low'; } }); scene.add(root); placed.push({ root, room: r });      /* lower cost: only the building and you cast sun shadows */ if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(r); applyEnv(); return { root, ...lit }; }
+  function place(root, { at, room = null, envI = 0.8, shadow = true }) { const r = room || roomAt(at.x, at.y, at.z), lit = litCopy(root, at, r); for (const m of lit.mats) { m.userData.envI = envI; dynMats.push(m); } root.traverse((o) => { if (o.isMesh) { o.castShadow = shadow && prefs.quality !== 'low'; } }); scene.add(root); placed.push({ root, room: r, light: lit.light, mats: lit.mats });      /* lower cost: only the building and you cast sun shadows */ if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(r); applyEnv(); return { root, ...lit }; }
   async function loadModel(path) { const g = await parse(await get(path)); return g; }
+  /** Carry something already placed to another spot (a patient from a bay to the table): it takes the light and the reflections of where it now is. */
+  function move(root, { at, room = null }) { const q = placed.find((p) => p.root === root); if (!q) return false; q.room = room || roomAt(at.x, at.y, at.z); if (q.light) lightAt(q.light, at, q.room); for (const m of q.mats || []) m.userData.room = q.room; if (viewRoom) root.visible = (SEES[viewRoom] || SEES.court).includes(q.room); applyEnv(); return true; }
+  /** Take something out of the level for good and free what it held (never a room's shared reflection). */
+  function unplace(root) { const i = placed.findIndex((p) => p.root === root); if (i < 0) return; const q = placed.splice(i, 1)[0], mine = new Set(q.mats || []); scene.remove(root); for (let k = dynMats.length - 1; k >= 0; k--) if (mine.has(dynMats[k])) dynMats.splice(k, 1);
+    root.traverse((o) => { if (!o.isMesh) return; o.geometry.dispose(); for (const m of [].concat(o.material)) { for (const [k, v] of Object.entries(m)) if (k !== 'envMap' && v && v.isTexture) v.dispose(); m.dispose(); } }); }
   (async () => {     // furniture arrives after the first frame
     try { const g = await loadModel('level/props.glb'); const kids = [...g.scene.children]; for (const k of kids) { k.updateMatrixWorld(true); const c = new THREE.Box3().setFromObject(k).getCenter(new THREE.Vector3()); place(k, { at: c, envI: 0.6, shadow: Math.abs(c.x) < (c.z > SUN.zSplit ? SUN.x : SUN.xCourt) && c.z > SUN.zMin }); } captureRooms(); } catch (e) { console.warn('props', e); }
   })();
@@ -264,9 +269,9 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   let fpsT = performance.now(), fpsN = 0, fps = 0; const fpsTick = () => { fpsN++; const n = performance.now(); if (n - fpsT > 1000) { fps = Math.round(fpsN * 1000 / (n - fpsT)); fpsN = 0; fpsT = n; } };
   const VIEWS = {    // fixed camera positions for review screenshots: [eye, look, fov]
     arrival: [[1.1, 1.62, 13.4], [-0.3, 2.3, 0], 60], atrium: [[-2.6, 1.62, -4.6], [0.2, 1.5, -9.9], 50], court: [[2.4, 1.62, -2.2], [-1.2, 2.6, -19], 66], gallery: [[0.9, 1.55, -26.3], [-0.2, 1.4, -28.6], 44],
-    regional: [[-5.7, 1.6, -17.5], [-9.2, 1.0, -13.4], 60], bay: [[-7.6, 1.6, -15.6], [-9.3, 1.05, -13.0], 48], oranes: [[9.55, 1.55, -18.7], [7.6, 1.08, -17.3], 46], oreast: [[11.2, 1.62, -13.4], [7.6, 1.1, -16.9], 62], pool: [[-0.8, 1.62, 12.9], [-5.6, 0.0, 8.4], 62], or: [[5.75, 1.62, -13.75], [9.0, 1.05, -16.3], 66], orwork: [[8.55, 1.6, -18.25], [8.75, 0.95, -15.2], 62], studio: [[5.8, 1.6, -3.8], [8.6, 1.25, -8.3], 62], collection: [[7.6, 1.5, -6.6], [7.6, 1.3, -8.4], 50], portal: [[0.3, 1.62, -17.6], [0, 1.6, -26], 55] };
+    regional: [[-5.7, 1.6, -17.5], [-9.2, 1.0, -13.4], 60], bay: [[-7.6, 1.6, -15.6], [-9.3, 1.05, -13.0], 48], oranes: [[9.55, 1.55, -18.7], [7.6, 1.08, -17.3], 46], oreast: [[11.2, 1.62, -13.4], [7.6, 1.1, -16.9], 62], preop: [[-5.6, 1.62, -6.1], [-9.6, 1.0, -7.4], 62], preop2: [[-9.9, 1.6, -5.0], [-6.6, 0.9, -8.6], 60], pool: [[-0.8, 1.62, 12.9], [-5.6, 0.0, 8.4], 62], or: [[5.75, 1.62, -13.75], [9.0, 1.05, -16.3], 66], orwork: [[8.55, 1.6, -18.25], [8.75, 0.95, -15.2], 62], studio: [[5.8, 1.6, -3.8], [8.6, 1.25, -8.3], 62], collection: [[7.6, 1.5, -6.6], [7.6, 1.3, -8.4], 50], portal: [[0.3, 1.62, -17.6], [0, 1.6, -26], 55] };
   const api = {
-    renderer, scene, camera, level: L, prefs, place, loadModel, lightAt, newLight, patchDynamic, setScreen, signs, roomAt, stations, P, boxes, dynMats, captureRooms,
+    renderer, scene, camera, level: L, prefs, place, move, unplace, loadModel, lightAt, newLight, patchDynamic, setScreen, signs, roomAt, stations, P, boxes, dynMats, captureRooms,
     get enabled() { return enabled; }, onRoom: null, onFrame: null,
     async start() { await setPerson(state.character || { person: 'tunic', colour: 'ceil' }); captureRooms(); },
     setPerson, invite(key) { invited = key; },
@@ -281,7 +286,9 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     teleport(key, facing = true) { const s = stations.find((q) => q.key === key); if (!s) return; P.x = s.pos.x; P.z = s.pos.z; if (facing) { P.yaw = Math.atan2(s.look[0] - s.pos.x, s.look[2] - s.pos.z); cam.yaw = P.yaw; } P.vx = P.vz = 0; lastRoom = null; },
     open(key) { const s = stations.find((q) => q.key === key); if (s) { api.teleport(key); use(s); } },
     /** Put the walker somewhere and face a point (the operating room's working position). */
-    standAt(x, z, lookX, lookZ) { P.x = x; P.z = z; P.vx = P.vz = 0; P.yaw = Math.atan2(lookX - x, lookZ - z); cam.glide = null; cam.yaw = P.yaw; cam.pitch = -0.12; lastRoom = null; enabled = true; },
+    standAt(x, z, lookX, lookZ, pitch = -0.12) { P.x = x; P.z = z; P.vx = P.vz = 0; P.yaw = Math.atan2(lookX - x, lookZ - z); cam.glide = null; cam.yaw = P.yaw; cam.pitch = pitch; lastRoom = null; enabled = true; hideWalker = false; },
+    /** Hold the camera on one thing (the patient's face, the monitor) while you work; release() or standAt() gives the walker back. */
+    view(eye, look, fov = 50, seconds = 0.5) { enabled = false; hideWalker = true; moveTo = null; keys.clear(); glideTo(new THREE.Vector3(...eye), new THREE.Vector3(...look), fov, prefs.motion ? seconds : 0, null); },
     /** A fixed view for screenshots and deterministic capture; `person` places the walker in shot or hides it. */
     bookmark(name, { person = null } = {}) { const v = VIEWS[name]; if (!v) return false; enabled = false; hideWalker = !person; if (person) { P.x = person[0]; P.z = person[1]; P.yaw = person[2] || 0; }
       camera.position.set(...v[0]); camera.lookAt(new THREE.Vector3(...v[1])); camera.fov = v[2]; camera.updateProjectionMatrix(); cam.glide = { hold: true }; const r = rooms.find((q) => q.name === roomAt(v[0][0], v[0][1], v[0][2], 0.3)); exposure = EXPOSURE * (r ? r.exposure : 1); return true; },

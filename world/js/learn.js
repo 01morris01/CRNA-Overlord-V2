@@ -1,5 +1,5 @@
 // learn.js: everything that happens at the gallery's plexus exhibit.
-//   The brachial plexus:   film (76 s, captions, scrubbing, one prediction)  ·  hands-on (6 steps)  ·
+//   The brachial plexus:   film (about 80 s, spoken and captioned, scrubbing, one prediction)  ·  hands-on (6 steps)  ·
 //                          challenge (name it or work it out: no labels, a new view each time)  ·  explore
 //   Four ways in:          narrated explanation  ·  explore the four levels  ·  identify  ·  case  ·  questions
 //   Review:                whatever is due, from both, first
@@ -10,6 +10,9 @@ import { STRUCTURES, SOURCES, LAYERS, LESSON, FILM, CHALLENGE, CHALLENGE_LENGTH,
 import { LEVELS, LEVEL_ORDER, NARRATION, IDENTIFY, IDENTIFY_LENGTH, CASES, QUESTIONS, QUESTIONS_LENGTH, DISCLAIMER } from '../data/regional.js';
 import { recordAttempt, dueNow, save, grant, has } from './save.js';
 import { sfx } from './audio.js';
+import * as vo from './voice.js';
+
+await vo.loadVoice();      // recordings, and with them the film's and the explanation's timing
 
 const TOUCH = matchMedia('(hover: none) and (pointer: coarse)').matches;
 const cite = (keys = []) => [...new Set(keys)].map((k) => SOURCES[k]?.cite).filter(Boolean);
@@ -101,7 +104,8 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
   let narrT = 0, speaking = null;
   const levelAt = (k) => { const L = LEVELS[k]; return L.anchorAt === 'top' ? atlas.topOf(L.anchor) : atlas.centreOf(L.anchor); };
   const allMarkers = () => LEVEL_ORDER.map((k) => ({ id: k, at: levelAt(k) }));
-  function speak(text) { try { speechSynthesis.cancel(); if (!S.voice || !('speechSynthesis' in window)) return; speaking = new SpeechSynthesisUtterance(text); speaking.rate = 1.0; speechSynthesis.speak(speaking); } catch (e) { /* no voice available: captions carry it */ } }
+  /** Speak a line (recorded when there is a recording, else the browser's voice), from `at` seconds into it. Captions always carry the same words. */
+  function speak(text, at = 0) { if (!S.voice) { vo.stop(); return; } vo.say(text, { at }); }
   function narrStep(i) {
     S.n = i; const st = NARRATION[i], L = st.level ? LEVELS[st.level] : null; clearTimeout(narrT);
     atlas.showAll(); atlas.ghost(L ? ['muscle'] : []); atlas.setMarkers(L ? [{ id: st.level, at: levelAt(st.level) }] : allMarkers()); atlas.glow(st.glow || (L ? L.show : [])); setLabels(L ? ['marker:' + st.level] : [], L ? { ['marker:' + st.level]: L.name } : {});
@@ -135,18 +139,18 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
   /** Put the model and camera in the state the film has at time t. With snap, nothing eases: the picture depends on t alone. */
   function filmApply(t, snap = false) {
     const i = cueAt(t), c = FILM.cues[i], from = FILM.cues[Math.max(0, i - 1)];
-    if (i !== film.cue || snap) { const changed = i !== film.cue; film.cue = i; atlas.showAll(); for (const id of c.hide || []) atlas.hide(id); atlas.ghost(c.ghost || []); atlas.glow(c.glow || []); setLabels(c.label || []); atlas.select(null); atlas.setMarkers([]); if (snap) atlas.settle(); if (changed) { if (film.playing) speak(c.say); draw(); } }
+    if (i !== film.cue || snap) { const changed = i !== film.cue; film.cue = i; atlas.showAll(); for (const id of c.hide || []) atlas.hide(id); atlas.ghost(c.ghost || []); atlas.glow(c.glow || []); setLabels(c.label || []); atlas.select(null); atlas.setMarkers([]); if (snap) atlas.settle(); if (changed) { if (film.playing) speak(c.say, Math.max(0, t - c.t)); const nx = FILM.cues[i + 1]; if (nx) vo.warm(nx.say); draw(); } }
     const k = Math.min(1, (t - c.t) / 2.4), e = k * k * (3 - 2 * k), a = atlas.pose(i ? from.view : c.view), bb = atlas.pose(c.view); atlas.setPose(a.pos.lerp(bb.pos, e), a.target.lerp(bb.target, e));
   }
   function filmTick(dt) {
     if (S.mode !== 'film' || !film.playing) return; const i = cueAt(film.t), c = FILM.cues[i], end = i < FILM.cues.length - 1 ? FILM.cues[i + 1].t : FILM.seconds;
     film.t = Math.min(FILM.seconds, film.t + dt);
-    if (c.predict && film.pred[i] === undefined && film.t >= end - 0.05) { film.t = end - 0.06; film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } draw(); return; }      // wait for the prediction
+    if (c.predict && film.pred[i] === undefined && film.t >= end - 0.05) { film.t = end - 0.06; film.playing = false; vo.stop(); draw(); return; }      // wait for the prediction
     if (film.t >= FILM.seconds) { film.playing = false; if (!state.game.filmDone) { state.game.filmDone = true; persist(); } draw(); }
     filmApply(film.t); if (film.ui) { film.ui.range.value = film.t; film.ui.time.textContent = mmss(film.t) + ' / ' + mmss(FILM.seconds); }
   }
   /** One exact frame of the lesson, for capture: window.renderAt(seconds, { width, height }). Touches no learner record. */
-  window.renderAt = (t, opts = {}) => { if (S.mode !== 'film') go('film'); film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } film.t = Math.max(0, Math.min(FILM.seconds, +t || 0)); filmApply(film.t, true); atlas.renderOnce(opts); const c = FILM.cues[film.cue]; return { t: film.t, cue: film.cue, caption: c.say, sources: cite(c.src) }; };
+  window.renderAt = (t, opts = {}) => { if (S.mode !== 'film') go('film'); film.playing = false; vo.stop(); film.t = Math.max(0, Math.min(FILM.seconds, +t || 0)); filmApply(film.t, true); atlas.renderOnce(opts); const c = FILM.cues[film.cue]; return { t: film.t, cue: film.cue, caption: c.say, sources: cite(c.src) }; };
   window.renderAt.duration = FILM.seconds; window.renderAt.cues = FILM.cues.map((c) => c.t);
 
   // ---------- results, and what they add to the collection ----------
@@ -167,7 +171,7 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
   }
 
   function go(mode) {
-    clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ } film.playing = false; film.ui = null;
+    clearTimeout(narrT); vo.stop(); film.playing = false; film.ui = null;
     S.mode = mode; S.picked = null; S.nudge = ''; S.stim = null; atlas.select(null); atlas.glow([]); setLabels([]); atlas.ghost([]); atlas.isolate(null); atlas.setMarkers([]);
     if (mode === 'menu' || mode === 'explore') { atlas.showAll(); if (mode === 'menu') atlas.view('whole'); }
     if (mode === 'lesson') { S.step = 0; S.prog = []; S.done = false; applyStep(); }
@@ -202,7 +206,7 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
         ${P.regionalDone ? `<div class="tools"><button class="chip" data-go="r-explore">Levels</button><button class="chip" data-go="r-case">Case</button><button class="chip" data-go="r-questions">Questions</button></div>` : ''}
         <button class="row quiet" data-go="exit"><b>Step back from the exhibit</b></button><p class="fine">${MODEL_NOTE}</p><p class="fine">${SOURCES.ZA.cite}</p>`; S.flash = '';
     } else if (S.mode === 'film') {
-      const c = FILM.cues[Math.max(0, film.cue)], pr = c.predict, picked = film.pred[film.cue], waiting = pr && picked === undefined && !film.playing && film.t < FILM.seconds - 0.2 && film.t >= (FILM.cues[film.cue + 1]?.t ?? FILM.seconds) - 0.2, over = film.t >= FILM.seconds - 0.05, voice = 'speechSynthesis' in window;
+      const c = FILM.cues[Math.max(0, film.cue)], pr = c.predict, picked = film.pred[film.cue], waiting = pr && picked === undefined && !film.playing && film.t < FILM.seconds - 0.2 && film.t >= (FILM.cues[film.cue + 1]?.t ?? FILM.seconds) - 0.2, over = film.t >= FILM.seconds - 0.05, voice = vo.recorded(c.say) || 'speechSynthesis' in window;
       head.innerHTML = `<small>Film · ${FILM.title} · ${film.cue + 1} of ${FILM.cues.length}</small><h1 class="stem caption">${c.say}</h1>`;
       h = `<div class="scrub"><button class="chip on" data-act="fplay">${film.playing ? 'Pause' : over ? 'Replay' : 'Play'}</button><input type="range" id="fRange" min="0" max="${FILM.seconds}" step="0.1" value="${film.t.toFixed(1)}" aria-label="Position in the film"><span id="fTime">${mmss(film.t)} / ${mmss(FILM.seconds)}</span></div>
         <div class="tools">${FILM.cues.map((q, i) => `<button class="chip ${i === film.cue ? 'on' : ''}" data-cue="${i}" title="${q.say.slice(0, 60)}">${i + 1}</button>`).join('')}${voice ? `<button class="chip ${S.voice ? 'on' : ''}" data-act="nvoice">Voice ${S.voice ? 'on' : 'off'}</button>` : ''}</div>
@@ -234,7 +238,7 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
           ${r.assist ? '<p class="fine">You used the hint, so this is recorded as assisted and does not count as recall.</p>' : r.correct && r.conf === 1 ? '<p class="fine">Right, but a guess, so it comes back in two days.</p>' : !r.correct ? `<p class="fine">${r.conf === 3 ? 'You were sure. That is the kind to distrust. ' : ''}It comes back tomorrow. Both are lit on the model now: what you chose in white, the answer in coral.</p>` : ''}${srcHtml(['ZA', ...it.src])}
           ${!r.correct ? `<button class="btn" data-act="iretry">Find it again from another view</button><button class="chip quiet" data-act="inext">Skip the second try</button>` : `<button class="btn" data-act="inext">${nextLabel}</button>`}`; }
     } else if (S.mode === 'r-intro') {
-      const st = NARRATION[S.n], voice = 'speechSynthesis' in window;
+      const st = NARRATION[S.n], voice = vo.recorded(st.say) || 'speechSynthesis' in window;
       head.innerHTML = `<small>Four ways in · ${S.n + 1} of ${NARRATION.length}</small><h1 class="stem caption">${st.say}</h1>`;
       h = `<div class="dots">${NARRATION.map((_, i) => `<i class="${i < S.n ? 'past' : i === S.n ? 'now' : ''}"></i>`).join('')}</div>
         <div class="tools"><button class="chip" data-act="nprev" ${S.n ? '' : 'disabled'}>Back</button><button class="chip on" data-act="nplay">${S.playing ? 'Pause' : S.n === NARRATION.length - 1 ? 'Replay' : 'Play'}</button><button class="chip" data-act="nnext" ${S.n < NARRATION.length - 1 ? '' : 'disabled'}>Next</button>${voice ? `<button class="chip ${S.voice ? 'on' : ''}" data-act="nvoice">Voice ${S.voice ? 'on' : 'off'}</button>` : ''}</div>
@@ -286,13 +290,13 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     panel.querySelectorAll('[data-conf]').forEach((b) => b.onclick = () => answer(+b.dataset.conf));
     on('[data-act=inext]', () => { if (S.i === S.items.length - 1) afterItems(); else { S.i++; presentItem(); draw(); } });
     on('[data-act=iretry]', () => { presentItem(true); sfx('tap'); draw(); }); on('[data-act=hint]', () => { S.hint = true; draw(); });
-    on('[data-act=fplay]', () => { if (film.playing) { film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } } else { if (film.t >= FILM.seconds - 0.05) { film.t = 0; film.cue = -1; film.pred = {}; } film.playing = true; filmApply(film.t); speak(FILM.cues[cueAt(film.t)].say); } draw(); });
+    on('[data-act=fplay]', () => { if (film.playing) { film.playing = false; vo.stop(); } else { if (film.t >= FILM.seconds - 0.05) { film.t = 0; film.cue = -1; film.pred = {}; } film.playing = true; filmApply(film.t); { const c = FILM.cues[cueAt(film.t)]; speak(c.say, Math.max(0, film.t - c.t)); } } draw(); });
     panel.querySelectorAll('[data-cue]').forEach((b) => b.onclick = () => { film.playing = false; film.t = FILM.cues[+b.dataset.cue].t; filmApply(film.t, true); draw(); });
     panel.querySelectorAll('[data-pred]').forEach((b) => b.onclick = () => { film.pred[film.cue] = +b.dataset.pred; film.t = FILM.cues[film.cue + 1]?.t ?? FILM.seconds; film.playing = true; sfx('tap'); filmApply(film.t); });
-    const fr = panel.querySelector('#fRange'); film.ui = fr ? { range: fr, time: panel.querySelector('#fTime') } : null; if (fr) fr.oninput = () => { film.playing = false; try { speechSynthesis.cancel(); } catch (e) { /* none */ } film.t = +fr.value; filmApply(film.t, true); film.ui.time.textContent = mmss(film.t) + ' / ' + mmss(FILM.seconds); }; if (fr) fr.onchange = () => draw();
+    const fr = panel.querySelector('#fRange'); film.ui = fr ? { range: fr, time: panel.querySelector('#fTime') } : null; if (fr) fr.oninput = () => { film.playing = false; vo.stop(); film.t = +fr.value; filmApply(film.t, true); film.ui.time.textContent = mmss(film.t) + ' / ' + mmss(FILM.seconds); }; if (fr) fr.onchange = () => draw();
     const note = panel.querySelector('#note'); if (note) note.onchange = () => { const v = note.value.trim().slice(0, 300); if (v) state.game.notes[S.picked] = v; else delete state.game.notes[S.picked]; persist(); };
-    on('[data-act=nprev]', () => { S.playing = false; narrStep(S.n - 1); }); on('[data-act=nnext]', () => { S.playing = false; narrStep(S.n + 1); }); on('[data-act=nvoice]', () => { S.voice = !S.voice; if (!S.voice) try { speechSynthesis.cancel(); } catch (e) { /* none */ } draw(); });
-    on('[data-act=nplay]', () => { if (S.playing) { S.playing = false; clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ } draw(); } else { S.playing = true; narrStep(S.n === NARRATION.length - 1 ? 0 : S.n); } });
+    on('[data-act=nprev]', () => { S.playing = false; narrStep(S.n - 1); }); on('[data-act=nnext]', () => { S.playing = false; narrStep(S.n + 1); }); on('[data-act=nvoice]', () => { S.voice = !S.voice; if (!S.voice) vo.stop(); draw(); });
+    on('[data-act=nplay]', () => { if (S.playing) { S.playing = false; clearTimeout(narrT); vo.stop(); draw(); } else { S.playing = true; narrStep(S.n === NARRATION.length - 1 ? 0 : S.n); } });
     panel.querySelectorAll('[data-level]').forEach((b) => b.onclick = () => pickLevel(b.dataset.level));
     on('[data-act=ccommit]', () => { S.cphase = 'reasons'; sfx('tap'); draw(); });
     panel.querySelectorAll('[data-reason]').forEach((b) => b.onclick = () => { const i = +b.dataset.reason; S.rsel.has(i) ? S.rsel.delete(i) : S.rsel.add(i); draw(); });
@@ -304,7 +308,7 @@ export function mountLearn({ atlas, state, els, onExit, onReward }) {
     panel.querySelectorAll('[data-match]').forEach((s) => s.onchange = () => { S.qmatch[+s.dataset.match] = s.value; draw(); });
     on('[data-act=qsubmit]', submitQ); on('[data-act=qnext]', () => { if (S.q === S.qs.length - 1) go('results'); else { S.q++; S.qsel = new Set(); S.qmatch = {}; S.qorder = null; S.qdone = false; draw(); } });
   }
-  function leave() { clearTimeout(narrT); try { speechSynthesis.cancel(); } catch (e) { /* none */ } onExit(); }
+  function leave() { clearTimeout(narrT); vo.stop(); onExit(); }
   atlas.setRoom('dark'); document.body.dataset.room = 'dark'; go('menu');
-  return Object.assign(api, { go, state: S, film, outlineSummary: () => Object.entries(OUTLINE) });
+  return Object.assign(api, { voice: vo, go, state: S, film, outlineSummary: () => Object.entries(OUTLINE) });
 }

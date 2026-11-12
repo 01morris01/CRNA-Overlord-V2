@@ -65,12 +65,6 @@ export async function mountExhibits({ world, state }) {
     c.font = '400 25px "Inter Tight", system-ui'; ['Interscalene', 'Supraclavicular', 'Infraclavicular', 'Axillary'].forEach((n, i) => { const y = 250 + i * 74; c.fillStyle = 'rgba(255,255,255,.16)'; c.fillRect(96, y + 16, 900, 1); c.fillStyle = '#f4f4f2'; c.fillText(n, 96, y); c.fillStyle = '#a4a8b0'; c.fillText(['roots, between the scalenes', 'trunks and divisions, over the first rib', 'cords, around the axillary artery', 'terminal nerves, in the axilla'][i], 420, y); });
     c.fillStyle = '#e6c98a'; c.font = '400 20px "Inter Tight", system-ui'; c.fillText('Levels shown on the anatomical model. No ultrasound image is simulated in this room.', 96, 580); }), { glow: 0.85 });
   world.setScreen('lightbox', drawTexture(512, 366, (c, w, h) => { const g = c.createRadialGradient(w / 2, h / 2, 20, w / 2, h / 2, w * 0.7); g.addColorStop(0, '#e9eef2'); g.addColorStop(1, '#aab6c0'); c.fillStyle = g; c.fillRect(0, 0, w, h); }), { glow: 0.55 });
-  // a figure under a sheet for the tables: set dressing made from an openly licensed avatar, not a simulated patient
-  let patientSrc = null;
-  async function patient(at, room) { try { patientSrc ||= (await world.loadModel('models/patient/patient-supine.glb')).scene; const g = patientSrc.clone(true);
-      g.traverse((o) => { if (!o.isMesh) return; o.material = o.material.clone(); const m = o.material; m.envMapIntensity = 0.4; if (/hair/.test(m.name)) { m.transparent = false; m.alphaTest = 0.5; m.side = THREE.DoubleSide; m.roughness = 0.9; } if (/drape/.test(m.name)) { m.side = THREE.DoubleSide; m.color.set(room === 'or' ? 0x4f8496 : 0xe9edf0); } });
-      g.position.copy(at); world.place(g, { at: at.clone().add(new THREE.Vector3(0, 0.2, 0)), room, envI: 0.4, shadow: false }); } catch (e) { console.warn('patient', e); } }
-  patient(new THREE.Vector3(8.6, 0.9, -15.6), 'or');
   // the clinical rooms' equipment arrives after the first frame; the rooms' reflections are taken again once it stands
   mountClinical({ world }).then((c) => { api.clinical = c; api.hasClinical = c.has; if (c.has) world.captureRooms(); });
   // ---------------------------------------------------------------- the airway and neck, from the scan: on its mount, on the lightbox, and small for a shelf

@@ -40,6 +40,7 @@
   <div class="hud soundcap" id="wCaption" aria-live="polite"></div>
   <div class="hud diag" id="wDiag" hidden></div>
   <aside class="hud place" id="wPlace" hidden></aside>
+  <aside class="hud case" id="caseHud" aria-label="The case" hidden></aside>
   <div class="stick" id="stick"><i></i></div>
   <div class="pad"><button id="padAct">Open</button></div>
 </section>
@@ -63,6 +64,7 @@
   <div class="tip" id="sTip"></div>
 </section>
 
+<div id="desk" hidden><header><b id="deskTitle"></b><span id="deskState"></span><button class="btn" id="deskGo" hidden>Take to the operating room</button><button class="btn alt" id="deskBack">Back to the bay</button></header><iframe id="deskFrame" title="Student Workstation"></iframe></div>
 <div id="wipe"><i></i></div>
 <div id="veil"><div class="wm" id="veilMark"></div><span id="veilText">Loading</span><b id="veilBar"><i></i></b></div>
 <script type="module" src="js/main.js"></script>

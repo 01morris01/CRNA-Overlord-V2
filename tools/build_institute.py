@@ -181,7 +181,7 @@ for sx in (-1, 1):                                                              
     GLASS.append([x - 0.006, 0.07, 0.06, x + 0.006, 1.2, 2.56, 'clear']); COLLIDERS.append([xa, 0.02, xb, 1.25, 0, 2.62])
     box(x - sx * 0.07, 1.04, 0.85, x - sx * 0.045, 1.07, 1.45, 'steel', collide=False)
 wall_x(22.0, -4.9, 4.9, 7.0, 'concrete', openings=[(-1.7, 1.7, 3.4, 0, 'portal')])                 # north: the portal to the gallery
-wall_y(-4.9, 0, 22, 7.0, 'concrete', openings=[(14.4, 16.0, 2.4, 0, 'door')])                       # west: regional room
+wall_y(-4.9, 0, 22, 7.0, 'concrete', openings=[(5.3, 6.9, 2.4, 0, 'door'), (14.4, 16.0, 2.4, 0, 'door')])                       # west: regional room
 wall_y(4.5, 0, 22, 7.0, 'concrete', openings=[(4.9, 6.1, 2.4, 0, 'door'), (13.2, 14.9, 2.4, 0, 'door'), (15.8, 19.2, 2.3, 0.95, 'smoked')])   # east: studio, OR doors, OR observation window
 # roof: a slab with one long opening, crossed by deep pale fins
 box(-4.9, -0.4, 7.0, -2.9, 22.4, 7.5, 'concrete_fine', collide=False, omit='t'); box(2.9, -0.4, 7.0, 4.9, 22.4, 7.5, 'concrete_fine', collide=False, omit='t')
@@ -190,22 +190,22 @@ for i in range(1, 8): yb = 2.6 + i * 2.1; box(-2.9, yb - 0.1, 6.3, 2.9, yb + 0.1
 box(-3.02, 2.6, 7.5, -2.9, 19.4, 7.62, 'metal_dark', collide=False); box(2.9, 2.6, 7.5, 3.02, 19.4, 7.62, 'metal_dark', collide=False); GLASS.append([-2.9, 2.6, 7.55, 2.9, 19.4, 7.58, 'roof'])
 # the axis: two brass inlays in the floor from the door to the portal; a datum line round the walls at 1.1 m (the section-plane motif)
 for x in (-1.25, 1.25): box(x - 0.012, 0.1, 0.0, x + 0.012, 21.9, 0.003, 'brass', collide=False)
-box(-4.5, 0.0, 1.1, -4.49, 14.3, 1.122, 'brass', collide=False); box(-4.5, 16.1, 1.1, -4.49, 22.0, 1.122, 'brass', collide=False)
+box(-4.5, 0.0, 1.1, -4.49, 5.2, 1.122, 'brass', collide=False); box(-4.5, 7.0, 1.1, -4.49, 14.3, 1.122, 'brass', collide=False); box(-4.5, 16.1, 1.1, -4.49, 22.0, 1.122, 'brass', collide=False)
 box(4.49, 0.0, 1.1, 4.5, 4.8, 1.122, 'brass', collide=False); box(4.49, 6.2, 1.1, 4.5, 13.1, 1.122, 'brass', collide=False)
 # the focal object stands on a low stone plinth under the skylight
 box(-0.95, 8.75, 0.0, 0.95, 10.65, 0.42, 'marble', collide=True); box(-0.99, 8.71, 0.42, 0.99, 10.69, 0.44, 'brass', collide=False); box(-0.95, 8.75, 0.44, 0.95, 10.65, 0.5, 'marble', collide=False)
 STATIONS['atrium'] = {'at': [0.0, 6.9], 'look': [0.0, 9.7, 1.45], 'label': 'The sectioned figure', 'mount': [0.0, 9.7, 0.5]}
 plate('THE SECTIONED FIGURE', 0.0, 8.75, 0.3, 'S', w=0.62, h=0.07)
 # a long stone bench on dark steel, west side; a stone orientation table near the entrance
-box(-4.2, 3.2, 0.40, -3.55, 11.2, 0.48, 'marble', collide=False); COLLIDERS.append([-4.2, 3.2, -3.55, 11.2, 0, 0.5])
-for yb in (3.6, 6.1, 8.6, 10.8): box(-4.12, yb - 0.03, 0.0, -3.63, yb + 0.03, 0.40, 'metal_dark', collide=False)
+for (ya, yb_) in ((2.0, 4.7), (7.6, 11.2)): box(-4.2, ya, 0.40, -3.55, yb_, 0.48, 'marble', collide=False); COLLIDERS.append([-4.2, ya, -3.55, yb_, 0, 0.5])      # two benches, leaving the way to pre-op clear
+for yb in (2.3, 4.4, 7.9, 9.4, 10.9): box(-4.12, yb - 0.03, 0.0, -3.63, yb + 0.03, 0.40, 'metal_dark', collide=False)
 box(2.25, 2.05, 0.0, 3.35, 2.65, 0.9, 'marble'); box(2.21, 2.01, 0.9, 3.39, 2.69, 0.92, 'brass', collide=False); box(2.2, 2.0, 0.92, 3.4, 2.7, 0.97, 'marble', collide=False)
 STATIONS['orientation'] = {'at': [2.8, 1.45], 'look': [2.8, 2.35, 0.95], 'label': 'Choose a session', 'top': [2.8, 2.35, 0.97]}
-for (px, py, plant) in ((-3.9, 12.6, 'potted_plant_02'), (-3.9, 20.6, 'potted_plant_01'), (3.9, 9.4, 'potted_plant_04'), (3.9, 20.6, 'potted_plant_02'), (-3.9, 1.2, 'potted_plant_01')):
+for (px, py, plant) in ((-3.9, 12.6, 'potted_plant_02'), (-3.9, 20.6, 'potted_plant_01'), (3.9, 9.4, 'potted_plant_04'), (3.9, 20.6, 'potted_plant_02'), (-3.9, 1.0, 'potted_plant_01')):
     box(px - 0.42, py - 0.42, 0.0, px + 0.42, py + 0.42, 0.5, 'concrete_fine'); PROPS.append((plant, px, py, 0.5, py * 1.3, 1.5 if plant != 'potted_plant_04' else 1.25))
 PROPS += [('modern_arm_chair_01', 3.55, 11.0, 0.0, -1.15, 1.0), ('modern_arm_chair_01', 3.55, 13.0, 0.0, -2.0, 1.0), ('side_table_01', 3.85, 12.0, 0.0, 0.0, 1.0), ('ceramic_vase_03', 3.85, 12.0, 0.55, 0.6, 1.0)]
 COLLIDERS += [[3.1, 10.55, 4.0, 11.45, 0, 0.8], [3.1, 12.55, 4.0, 13.45, 0, 0.8], [3.6, 11.75, 4.1, 12.25, 0, 0.55]]
-plate('ANATOMY GALLERY', 2.25, 22.0, 1.5, 'S'); plate('REGIONAL PRACTICE', -4.5, 16.45, 1.5, 'E'); plate('OPERATING ROOM', 4.5, 12.75, 1.5, 'W'); plate('STUDY STUDIO', 4.5, 6.55, 1.5, 'W')
+plate('PRE-OP HOLDING', -4.5, 7.3, 1.5, 'E'); plate('ANATOMY GALLERY', 2.25, 22.0, 1.5, 'S'); plate('REGIONAL PRACTICE', -4.5, 16.45, 1.5, 'E'); plate('OPERATING ROOM', 4.5, 12.75, 1.5, 'W'); plate('STUDY STUDIO', 4.5, 6.55, 1.5, 'W')
 # --- ARRIVAL: a low vestibule, then the forecourt and its pool
 ROOMS['arrival'] = [-2.6, -4.6, 2.6, -0.4, 2.8, 'stone', 0.66]
 box(-3.0, -4.6, -0.3, 3.0, -0.4, 0.0, 'stone_floor', collide=False, omit='b'); wall_y(-3.0, -4.6, -0.4, 2.8, 'concrete'); wall_y(2.6, -4.6, -0.4, 2.8, 'concrete'); box(-3.4, -5.4, 2.8, 3.4, -0.4, 3.2, 'concrete_fine', collide=False)
@@ -260,6 +260,32 @@ def lining(axis, w, a, b, face, h=3.0, split=2.26, skirt='or_floor', openings=()
     for (oa, ob, sill, head) in cuts:
         if sill > 0.15: panels(axis, w, oa, ob, 0.1, sill, face, m); P(oa, w, 0.0, ob, w + face * 0.024, 0.1, skirt)
         if h - head > 0.05: panels(axis, w, oa, ob, head, h, face, m)
+# --- PRE-OP HOLDING: x -10.7..-4.9, y 2.6..9.6, 3 m. Four curtained bays, two a side; the aisle between them leads from the court to the day's schedule.
+ROOMS['preop'] = [-10.7, 2.6, -4.9, 9.6, 3.0, 'vinyl', 0.66]
+box(-11.1, 2.2, -0.3, -4.9, 10.0, 0.0, 'clinical_floor', collide=False, omit='b'); box(-11.1, 2.2, 3.0, -4.9, 10.0, 3.4, 'ceiling', collide=False, omit='t')
+wall_x(2.2, -11.1, -4.9, 3.0, 'plaster'); wall_x(9.6, -11.1, -4.9, 3.0, 'plaster'); wall_y(-11.1, 2.2, 10.0, 3.0, 'plaster')
+lining('x', 2.6, -10.7, -4.9, 1, skirt='clinical_floor', m='panel_light'); lining('x', 9.6, -10.7, -4.9, -1, skirt='clinical_floor', m='panel_light'); lining('y', -10.7, 2.6, 9.6, 1, skirt='clinical_floor', m='panel_light'); lining('y', -4.9, 2.6, 9.6, -1, skirt='clinical_floor', openings=[(5.3, 6.9, 0.0, 2.4)], m='panel_light')
+def headwall(cx, y, f, n):
+    """A bay's head wall on a wall at y that looks along f (+1 north, -1 south): oak, a services rail, a reading light, and a small bay display the browser writes on."""
+    q = lambda a_, b_: (min(y + f * a_, y + f * b_), max(y + f * a_, y + f * b_))
+    (y0, y1) = q(0.02, 0.05); box(cx - 1.25, y0, 0.1, cx + 1.25, y1, 2.32, 'oak', collide=False); (y0, y1) = q(0.05, 0.085); box(cx - 1.15, y0, 1.3, cx + 1.15, y1, 1.47, 'steel', collide=False)
+    (y0, y1) = q(0.085, 0.09); box(cx - 1.15, y0, 1.375, cx + 1.15, y1, 1.395, 'metal_dark', collide=False)
+    for i, mm in enumerate(('glow_green', 'steel', 'steel', 'glow_amber')):
+        (y0, y1) = q(0.085, 0.098); box(cx - 0.75 + i * 0.3, y0, 1.415, cx - 0.65 + i * 0.3, y1, 1.455, 'steel', collide=False); (y0, y1) = q(0.098, 0.103); box(cx - 0.72 + i * 0.3, y0, 1.426, cx - 0.68 + i * 0.3, y1, 1.444, mm if mm.startswith('glow') else 'metal_dark', collide=False)
+    (y0, y1) = q(0.05, 0.13); box(cx - 0.55, y0, 2.02, cx + 0.55, y1, 2.07, 'steel', collide=False); (y0, y1) = q(0.06, 0.12); box(cx - 0.51, y0, 2.012, cx + 0.51, y1, 2.02, 'light_warm', collide=False)
+    (y0, y1) = q(0.05, 0.075); box(cx + 0.62, y0, 1.56, cx + 1.14, y1, 1.9, 'panel_dark', collide=False); (y0, y1) = q(0.075, 0.079); box(cx + 0.64, y0, 1.58, cx + 1.12, y1, 1.88, 'screen', collide=False)
+    SIGNS.append({'text': 'BAY%d' % n, 'at': [cx + 0.88, y + f * 0.0795, 1.73], 'face': 'S' if f < 0 else 'N', 'w': 0.48, 'h': 0.3, 'style': 'bay%d' % n})
+PREOP_TOP = 0.74
+for n, (cx, north) in enumerate(((-9.3, True), (-6.4, True), (-9.3, False), (-6.4, False)), 1):
+    wall, f = (9.6, -1) if north else (2.6, 1); headwall(cx, wall, f, n); yb = wall + f * 1.32
+    STATIONS['bay%d' % n] = {'at': [cx + 0.2, wall + f * 2.95], 'look': [cx, yb, 0.95], 'label': 'Bay %d' % n, 'bed': [cx, yb, PREOP_TOP], 'turn': 0.0 if north else math.pi}
+    box(cx - 0.6, yb - 0.3, 2.97, cx + 0.6, yb + 0.3, 3.0, 'light_panel', collide=False)
+box(-10.676, 4.85, 0.98, -10.64, 7.35, 2.36, 'panel_dark', collide=False); box(-10.641, 4.95, 1.06, -10.625, 7.25, 2.28, 'screen', collide=False)          # the day's schedule, on the west wall at the end of the aisle
+SIGNS.append({'text': 'SCHEDULE', 'at': [-10.624, 6.1, 1.67], 'face': 'E', 'w': 2.3, 'h': 1.22, 'style': 'schedule'})
+STATIONS['schedule'] = {'at': [-8.0, 6.6], 'look': [-10.62, 6.6, 1.6], 'label': 'Today\'s schedule'}      # far enough back for the whole board, and half a metre to its right so the board sits clear of the panel
+box(-7.9, 5.8, 2.97, -6.7, 6.4, 3.0, 'light_panel', collide=False)
+box(-4.94, 3.62, 0.04, -4.985, 5.26, 2.38, 'steel', collide=False); box(-4.99, 3.8, 1.0, -4.935, 5.08, 2.2, 'panel_dark', collide=False); box(-4.94, 3.5, 2.4, -5.04, 7.0, 2.56, 'panel_dark', collide=False)         # sliding door, open along the wall
+box(-5.045, 6.0, 2.47, -5.04, 6.04, 2.49, 'glow_green', collide=False)
 # --- REGIONAL PRACTICE ROOM: x -11.5..-4.9, y 12..18.5, 3 m. A curtained block bay against a timber head wall; daylight from the west.
 ROOMS['regional'] = [-11.5, 12.0, -4.9, 18.5, 3.0, 'vinyl', 0.66]
 box(-11.9, 11.6, -0.3, -4.9, 18.9, 0.0, 'clinical_floor', collide=False, omit='b'); box(-11.9, 11.6, 3.0, -4.9, 18.9, 3.4, 'ceiling', collide=False, omit='t')
@@ -405,6 +431,9 @@ lamp('SPOT', (-3.3, 24.9, 4.0), 620, WARM, (-3.3, 26.0, 1.45), 0.1, 40, dyn=True
 TEAL = (0.35, 0.86, 0.95)
 for (cx, cy) in ((-8.9, 13.5), (-6.4, 13.2), (-10.6, 16.6), (-6.4, 17.0), (-8.6, 16.6)): lamp('AREA', (cx, cy, 2.95), 24, COOL, (cx, cy, 0), 0.6)
 lamp('AREA', (-8.9, 12.2, 1.98), 9, WARM, (-8.9, 12.6, 0.9), 0.5)
+for (cx, north) in ((-9.3, True), (-6.4, True), (-9.3, False), (-6.4, False)):
+    yb = (9.6 - 1.32) if north else (2.6 + 1.32); lamp('AREA', (cx, yb, 2.95), 22, COOL, (cx, yb, 0), 0.6); lamp('AREA', (cx, (9.6 - 0.2) if north else (2.6 + 0.2), 1.98), 7, WARM, (cx, (9.6 - 0.6) if north else (2.6 + 0.6), 0.9), 0.5)
+lamp('AREA', (-7.3, 6.1, 2.95), 22, COOL, (-7.3, 6.1, 0), 0.6)
 lamp('AREA', (OC[0], OC[1], 2.86), 30, COOL, (OC[0], OC[1], 0), 2.7)
 for (cx, cy) in ((6.0, 12.5), (11.0, 12.5), (6.0, 18.7), (11.0, 18.7), (6.0, 15.6), (11.2, 15.6)): lamp('AREA', (cx, cy, 2.96), 6, COOL, (cx, cy, 0), 0.5)
 for (cx, cy, tx, ty) in ((7.0, 19.3, 7.0, 19.6), (10.2, 19.3, 10.2, 19.6), (11.7, 13.6, 12.0, 13.6), (11.7, 17.6, 12.0, 17.6), (7.0, 11.8, 7.0, 11.5), (10.2, 11.8, 10.2, 11.5)): lamp('AREA', (cx, cy, 2.95), 10, TEAL, (tx, ty, 1.2), 1.0)
@@ -416,7 +445,7 @@ scene.cycles.samples = 512 if FINAL else 64; scene.cycles.use_denoising = True; 
 # ------------------------------------------------------------------ preview renders (the whole light, sun included), to judge composition before a long bake
 if PREVIEW:
     views = {'forecourt': ((1.2, -13.4, 1.62), (-0.4, 0, 2.3), 24), 'arrival': ((0, -3.6, 1.62), (0, 12, 2.0), 22), 'court': ((2.4, 2.2, 1.62), (-1.2, 19, 2.6), 20), 'focal': ((-2.7, 4.4, 1.62), (0.2, 9.9, 1.5), 28),
-             'gallery': ((0.5, 23.3, 1.62), (-0.4, 28.6, 1.3), 22), 'studio': ((5.6, 3.6, 1.6), (9.2, 8.2, 1.2), 20), 'regional': ((-5.7, 17.5, 1.6), (-9.2, 13.4, 1.0), 20), 'bay': ((-7.6, 15.6, 1.6), (-9.3, 13.0, 1.05), 26), 'or': ((5.75, 13.75, 1.62), (9.0, 16.3, 1.05), 19), 'orwork': ((8.55, 18.3, 1.6), (8.75, 15.2, 0.95), 20), 'oranes': ((9.6, 18.75, 1.55), (7.6, 17.3, 1.05), 26), 'oreast': ((11.2, 13.4, 1.62), (7.6, 16.9, 1.1), 19)}
+             'gallery': ((0.5, 23.3, 1.62), (-0.4, 28.6, 1.3), 22), 'studio': ((5.6, 3.6, 1.6), (9.2, 8.2, 1.2), 20), 'regional': ((-5.7, 17.5, 1.6), (-9.2, 13.4, 1.0), 20), 'preop': ((-5.6, 6.1, 1.62), (-9.6, 7.4, 1.0), 18), 'preop2': ((-9.9, 5.0, 1.6), (-6.6, 8.6, 0.9), 20), 'bay': ((-7.6, 15.6, 1.6), (-9.3, 13.0, 1.05), 26), 'or': ((5.75, 13.75, 1.62), (9.0, 16.3, 1.05), 19), 'orwork': ((8.55, 18.3, 1.6), (8.75, 15.2, 0.95), 20), 'oranes': ((9.6, 18.75, 1.55), (7.6, 17.3, 1.05), 26), 'oreast': ((11.2, 13.4, 1.62), (7.6, 16.9, 1.1), 19)}
     for k, (loc, tgt, lens) in views.items():
         if ONLY and k not in ONLY: continue
         cam = bpy.data.cameras.new(k); cam.lens = lens; co = bpy.data.objects.new(k, cam); scene.collection.objects.link(co); co.location = loc; co.rotation_euler = (Vector(tgt) - Vector(loc)).to_track_quat('-Z', 'Y').to_euler(); scene.camera = co
@@ -454,6 +483,7 @@ for k, (x0, y0, x1, y1, h, floor, expo) in ROOMS.items():
 for k, s in STATIONS.items():
     if 'mount' in s: PTS.append(('@' + k, s['mount'][0], s['mount'][1], s['mount'][2] + 0.38))
     for sh in s.get('shelf', []): PTS.append(('@' + k, sh[0], sh[1], sh[2] + 0.12))
+PTS += [('@bay%d' % n, cx, (9.6 - 1.32) if north else (2.6 + 1.32), 1.0) for n, (cx, north) in enumerate(((-9.3, True), (-6.4, True), (-9.3, False), (-6.4, False)), 1)]
 PTS += [('@or_table', 8.6, 15.6, 1.05), ('@regional_table', -8.9, 13.4, 1.05), ('@atrium_hi', 0.0, 9.7, 1.9), ('@desk', 8.6, 4.45, 0.95)]
 pb = bmesh.new()
 for (k, x, y, z) in PTS: bmesh.ops.create_icosphere(pb, subdivisions=3, radius=0.03, matrix=Matrix.Translation((x, y, z)))
@@ -494,7 +524,7 @@ bpy.ops.export_scene.gltf(filepath=os.path.join(OUT, 'institute-clinical.glb'), 
 def T3(p): return [round(p[0], 3), round(p[2], 3) if len(p) > 2 else 0, round(-p[1], 3)]      # Blender (x, y, z) -> three.js (x, z, -y)
 def st(v):
     o = {**v, 'at': [v['at'][0], -v['at'][1]], 'look': T3(v['look'])}
-    for key in ('mount', 'top'):
+    for key in ('mount', 'top', 'bed'):
         if key in v: o[key] = T3(v[key])
     if 'shelf' in v: o['shelf'] = [T3(s) for s in v['shelf']]
     for key in ('table', 'work'):

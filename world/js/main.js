@@ -8,10 +8,11 @@ import { load, save, summary, dueNow } from './save.js';
 import { loadPerson, PEOPLE, COLOURS, DEFAULT_LOOK, peopleMeta } from './person.js';
 import { markSVG, wordmarkSVG } from './brand.js';
 import { isMuted, setMuted, sfx, onCaption } from './audio.js';
+import { loadVoice } from './voice.js';
 
 const Q = new URLSearchParams(location.search), $ = (id) => document.getElementById(id);
 const touch = matchMedia('(hover: none) and (pointer: coarse)').matches, calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches || (state && state.game.prefs && state.game.prefs.motion === false);
-let state = null, world = null, hall = null, scan = null, charScene = null, places = null, exhibits = null;
+let state = null, world = null, hall = null, scan = null, charScene = null, places = null, exhibits = null, periop = null;
 $('mark').innerHTML = markSVG() + `<span class="wmk">${wordmarkSVG({ weight: 3.4 })}</span>`; $('gateMark').innerHTML = wordmarkSVG(); $('veilMark').innerHTML = wordmarkSVG();
 const veil = (on, text = 'Loading', k = null) => { $('veilText').textContent = text; $('veil').classList.toggle('off', !on); if (k !== null) $('veilBar').firstElementChild.style.width = Math.round(k * 100) + '%'; };
 function screen(name) { for (const s of ['gate', 'character', 'world', 'hall', 'scan']) $(s).hidden = s !== name; document.body.dataset.screen = name; }
@@ -63,15 +64,17 @@ async function enterWorld(o) { return openWorld(o).catch(failed('The building'))
 async function openWorld({ fresh = false, from = null } = {}) {
   screen('world');
   if (!world) {
-    veil(true, 'Loading the building', 0.03); const { createWorld } = await import('./institute.js');
+    veil(true, 'Loading the building', 0.03); const { createWorld } = await import('./institute.js'); await loadVoice();
     if (Q.get('q')) (state.game.prefs ||= {}).quality = Q.get('q');
     world = await createWorld({ host: $('worldStage'), state, touch, els: { prompt: $('wPrompt'), toast: $('wToast'), stick: $('stick'), act: $('padAct'), diag: $('wDiag') }, onStation: (key) => places.open(key), onProgress: (t, k) => veil(true, t, k) });
     await world.start(); veil(true, 'Setting out the exhibits', 0.9); const [{ mountPlaces }, { mountExhibits }] = await Promise.all([import('./places.js'), import('./exhibits.js')]);
     exhibits = await mountExhibits({ world, state }); world.onFrame = (dt) => exhibits.update(dt);
     places = mountPlaces({ world, exhibits, state, persist, els: { place: $('wPlace'), goal: $('wGoal') }, enterHall, enterScan, showCharacter: () => { world.pause(); showCharacter(true); }, wipe });
+    try { const { mountPeriop } = await import('./periop.js'); periop = await mountPeriop({ world, state, persist, clinical: () => exhibits.clinical, ui: places, wipe, els: { hud: $('caseHud'), desk: $('desk'), deskTitle: $('deskTitle'), deskState: $('deskState'), deskGo: $('deskGo'), deskBack: $('deskBack'), frame: $('deskFrame') } });
+      places.extend(periop); world.onFrame = (dt) => { exhibits.update(dt); periop.update(dt); }; } catch (e) { console.warn('pre-op holding and the operating room could not be set up', e); }
     if (Q.get('shot')) { world.resume(); world.bookmark(Q.get('shot')); }
   }
-  world.resume(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, save, summary };
+  world.resume(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, periop, save, summary };
   if (!Q.get('shot')) { places.arrive({ fresh, from }); if (Q.get('go')) places.direct(Q.get('go'), Q.get('mode')); }
 }
 
@@ -82,14 +85,14 @@ async function openHall(mode, where = 'gallery') {
   if (!hall) { veil(true, 'Opening the exhibit', 0.5); const [{ createAtlas }, { mountLearn }] = await Promise.all([import('./atlas.js'), import('./learn.js')]); const atlas = await createAtlas($('hallStage'), { touch }); let earned = null;
     const learn = mountLearn({ atlas, state, els: { panel: $('hPanel'), bar: $('hBar'), tip: $('hTip'), labels: $('hLabels'), head: $('hHead') }, onReward: (e) => { earned = e; }, onExit: () => { atlas.stop(); const e = earned; earned = null; wipe(() => enterWorld({ from: { hall: true, earned: e } })); } }); hall = { atlas, learn }; }
   hall.learn.where = where; hall.learn.go(mode && mode !== 'menu' ? mode : 'menu');
-  hall.atlas.start(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, save, summary };
+  hall.atlas.start(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, periop, save, summary };
 }
 // ---------- the airway and neck exhibit (scan and structure) ----------
 async function enterScan(mode) { return openScan(mode).catch(failed('The exhibit')); }
 async function openScan(mode) {
   world && world.pause(); screen('scan');
   if (!scan) { veil(true, 'Opening the exhibit', 0.5); const { mountScan } = await import('./scan.js'); scan = await mountScan({ state, touch, persist, els: { stage: $('scanStage'), head: $('sHead'), panel: $('sPanel'), bar: $('sBar'), slices: $('sSlices'), labels: $('sLabels'), tip: $('sTip') }, onExit: (earned) => { scan.stop(); wipe(() => enterWorld({ from: { scan: true, earned } })); } }); }
-  scan.go(mode || 'menu'); scan.start(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, save, summary };
+  scan.go(mode || 'menu'); scan.start(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, periop, save, summary };
 }
 
 // ---------- the mark is the menu: direct study without walking, settings, identity ----------

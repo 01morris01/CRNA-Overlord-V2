@@ -4,16 +4,17 @@
 import { summary, dueNow, has, save } from './save.js';
 import { ITEMS, ORDER, info } from './collection.js';
 import { CASES, LEVELS } from '../data/regional.js';
-import { OUTLINE } from '../data/plexus.js';
+import { OUTLINE, FILM } from '../data/plexus.js';
 import { sfx, isMuted, setMuted } from './audio.js';
 
 export function mountPlaces({ world, exhibits, state, persist, els, enterHall, enterScan, showCharacter, wipe }) {
   const P = (state.game.progress ||= {}), E = els.place, touch = matchMedia('(hover: none) and (pointer: coarse)').matches;
-  let open = null, onClose = null;
+  let open = null, onClose = null, periop = null;      // periop: pre-op holding and the operating room, mounted after this (js/periop.js)
   const esc = (s) => String(s).replace(/</g, '&lt;');
   // ---------------------------------------------------------------- the next thing, in one line
   function next() {
     const g = state.game, due = dueNow(state).length, spec = has(state, 'plexus-specimen');
+    if (periop && periop.case) return periop.away ? { key: 'or', text: '<b>Your patient is on the table.</b> The case is paused while you are out of the room.' } : { key: null, quiet: true, text: '' };
     if (due && spec) return { key: 'plexus', mode: 'review', text: `<b>${due} due.</b> A review is waiting at the plexus plinth.` };
     if (!g.filmDone) return { key: 'plexus', mode: 'film', text: 'Through the dark doorway ahead: <b>the lit plinth.</b> Start there.' };
     if (!g.lessonDone) return { key: 'plexus', mode: 'lesson', text: 'Back at the plinth: <b>handle the model</b>, six steps.' };
@@ -21,9 +22,11 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
     if (!P.sawStudio) return { key: 'collection', text: 'Your specimen is in <b>your studio</b>: the door on the east side of the court.' };
     if (!P.regionalDone) return { key: 'regional_case', mode: 'r-intro', text: 'In the gallery, the stone table: <b>a regional case</b> on the same anatomy.' };
     if (exhibits.hasScan && !has(state, 'airway-sections')) return { key: 'airway', text: 'West side of the gallery: <b>the airway and neck</b>, scan and structure.' };
+    if (periop && !P.sawPreop) return { key: 'schedule', text: 'West side of the court: <b>pre-op holding.</b> Today\'s patients are waiting.' };
+    if (periop && !Object.keys((g.or && g.or.cases) || {}).length) return { key: periop.bays.findIndex((q) => q) >= 0 ? 'bay' + (periop.bays.findIndex((q) => q) + 1) : 'schedule', text: 'Pre-op holding: <b>see a patient</b>, plan the anesthetic, then take them to the operating room.' };
     const waiting = state.learning.due.length; return { key: null, text: waiting ? `Nothing is due today. <b>${waiting}</b> ${waiting === 1 ? 'item returns' : 'items return'} on later days.` : 'Nothing is due. The building is yours to walk.' };
   }
-  function goal() { const n = next(); world.invite(n.key); els.goal.hidden = false; els.goal.innerHTML = `<span>${n.text}</span>${n.key ? '<button data-go>Go there</button>' : ''}`; const b = els.goal.querySelector('[data-go]'); if (b) b.onclick = () => { sfx('tap'); world.open(n.key); }; return n; }
+  function goal() { const n = next(); world.invite(n.key); if (n.quiet || open) { els.goal.hidden = true; return n; } els.goal.hidden = false; els.goal.innerHTML = `<span>${n.text}</span>${n.key ? '<button data-go>Go there</button>' : ''}`; const b = els.goal.querySelector('[data-go]'); if (b) b.onclick = () => { sfx('tap'); world.open(n.key); }; return n; }
   // ---------------------------------------------------------------- the panel beside a station
   function panel(key, html, closing = null) { open = key; onClose = closing; E.hidden = false; E.innerHTML = html + '<button class="btn alt" data-x>Step back</button>'; E.scrollTop = 0; E.querySelector('[data-x]').onclick = close; els.goal.hidden = true; return E; }
   function close() { if (!open) return; const c = onClose; open = null; onClose = null; E.hidden = true; c && c(); world.release(); persist(); goal(); }
@@ -63,14 +66,7 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
         <p class="fine">Equipment models, each CC BY 4.0 and changed for this room: ultrasound unit by Liuuzaki; stretcher by meeww; curtains and vital signs monitor by Ethan Cragun; supply cart by NicolasVB; IV pole by Mouch; suction set by Dwayne.Barnett. <a href="../assets/LICENSES.md" target="_blank" rel="noopener">Full credits</a>.</p>`);
       act('[data-m=seq]', () => leaveTo(() => enterHall(P.regionalDone ? 'r-case' : 'r-intro', 'regional'))); act('[data-m=us]', () => window.open('../ultrasound/index.html', '_blank', 'noopener'));
     },
-    or() {
-      const w = world.stations.find((s) => s.key === 'or').work;
-      panel('or', `<small>Operating room</small><h2>The operating room.</h2><p>${exhibits.hasClinical ? 'Operating table, anesthesia workstation, lights, carts and monitors are in place under a laminar-flow ceiling.' : 'The room is built. Its equipment is still loading, or could not be loaded.'}</p>
-        ${state3([['works', 'Walking the room and taking the anesthesia position at the head of the table. Opening the existing simulator and its 50 synthetic preoperative charts under the same account.'], ['approx', 'Equipment is placed for the room\'s layout; its controls are not live here. The monitor and ventilator run a labelled demonstration loop, as real monitors do in demo mode. The figure on the table is set dressing, and the monitor tone is a recording of nothing: no simulated patient is connected in this room.'], ['not', 'Running a case inside this room. The patient simulation still runs in the classic app. Cases that depend on carbon dioxide kinetics are not scored anywhere yet: a defect there is documented and its correction is waiting for faculty review.']])}
-        <button class="row go" data-m="work"><b>Take the anesthesia position</b><span>Head of the table, beside the workstation.</span></button><button class="row" data-m="sim"><b>Open the Student Workstation</b><span>The existing simulator: pick a patient, read the chart, plan, run it.</span></button>
-        <p class="fine">Equipment models, each CC BY 4.0 and changed for this room: anesthesia workstation by DGLENN43; operating table by shashkinv1ad; emergency cart by tutminchai; supply cart by NicolasVB; IV pole by Mouch; suction set by Dwayne.Barnett; instruments by ferofluid; laryngoscope by marcomiceli29; syringes by Ethan Cragun; clock by Mohamed Ahmed. Cylinders, flow controls and vaporizer dials were recoloured to the United States convention. The lights, ceiling arm, draped tables, stools and cabinets were built for this project. <a href="../assets/LICENSES.md" target="_blank" rel="noopener">Full credits</a>.</p>`);
-      act('[data-m=work]', () => { open = null; E.hidden = true; world.standAt(w[0], w[1], w[0], w[1] + 2); goal(); }); act('[data-m=sim]', () => { persist(); location.href = '../student.html'; });
-    },
+    or() { panel('or', `<small>Operating room</small><h2>The operating room.</h2><p>The room is built. Its patients and simulator are still loading, or could not be loaded.</p><button class="row" data-m="sim"><b>Open the classic Student Workstation</b><span>The same patients and simulator as their own page.</span></button>`); act('[data-m=sim]', () => { persist(); location.href = '../student.html'; }); },
     collection() { P.sawStudio = true; persist(); exhibits.refresh();
       const held = state.game.collection, has_ = (id) => held.some((c) => c.id === id), cases = held.filter((c) => c.id.startsWith('case:')), best = state.game.best.plexus;
       const card = (id, locked) => { const it = info(id), c = held.find((q) => q.id === id); return `<details class="item ${locked ? 'locked' : ''}"><summary><b>${it.name}</b><span>${locked ? 'Not yet. ' + (it.how || '') : it.where + ' · ' + new Date(c.at).toLocaleDateString()}</span></summary>
@@ -101,10 +97,11 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
       panel('study', `<small>${atStation ? 'The court' : 'Direct study'}</small><h2>Choose a session.</h2><p>Each of these opens where it lives. No walking is required.</p>
         ${n.key ? `<button class="row go" data-d="${n.key}" data-mode="${n.mode || ''}"><b>Continue</b><span>${n.text.replace(/<[^>]+>/g, '')}</span></button>` : ''}
         ${due ? row('plexus', 'review', `Review what is due (${due})`, 'What you missed or guessed, first.') : ''}
-        <h3>The brachial plexus</h3>${row('plexus', 'film', 'Film', '76 seconds, one question, one prediction.')}${row('plexus', 'lesson', 'Hands-on', 'Six guided steps. Not scored.')}${row('plexus', 'challenge', 'Challenge', 'Unlabeled, a new view each time. Recorded.')}${row('plexus', 'explore', 'Explore', 'Free. Never recorded.')}
+        <h3>The brachial plexus</h3>${row('plexus', 'film', 'Film', Math.round(FILM.seconds) + ' seconds, spoken and captioned. One question, one prediction.')}${row('plexus', 'lesson', 'Hands-on', 'Six guided steps. Not scored.')}${row('plexus', 'challenge', 'Challenge', 'Unlabeled, a new view each time. Recorded.')}${row('plexus', 'explore', 'Explore', 'Free. Never recorded.')}
         <h3>Regional anesthesia</h3>${row('regional_case', 'r-intro', 'Four ways in', 'Explanation, levels, identification, a case, questions.')}${g.progress.regionalDone ? row('regional_case', 'r-case', 'A case', 'Choose a level and say why.') : ''}
         ${exhibits.hasScan ? `<h3>Airway and neck</h3>${row('airway', '', 'Scan and structure', 'A CT-derived model with its slices.')}` : ''}
-        <h3>Places</h3>${row('collection', '', 'Your studio', 'The collection and the case archive.')}${row('or', '', 'Operating room', 'The room, and the existing simulator.')}${row('regional', '', 'Regional practice room', 'What works there and what does not.')}`);
+        <h3>Patients</h3>${row('schedule', '', 'Pre-op holding', 'Today\'s patients: chart, interview, care plan.')}${row('or', '', 'Operating room', 'A whole case on the simulator, with your patient on the table.')}
+        <h3>Places</h3>${row('collection', '', 'Your studio', 'The collection and the case archive.')}${row('regional', '', 'Regional practice room', 'What works there and what does not.')}`);
       E.querySelectorAll('[data-d]').forEach((b) => b.onclick = () => { sfx('tap'); const k = b.dataset.d, mode = b.dataset.mode; if (k === 'plexus' || k === 'regional_case') { world.teleport(k); return leaveTo(() => enterHall(mode || 'menu', 'direct')); } if (k === 'airway') { world.teleport(k); return leaveTo(() => enterScan('menu')); } open = null; E.hidden = true; world.open(k); });
     } else if (kind === 'record') {
       const pc = (v) => v === null ? '–' : v + '%', rows = Object.entries(sm.byOutline).map(([k, v]) => `<dt>${k}</dt><dd>${OUTLINE[k] || k}: ${v.correct} of ${v.seen} unaided</dd>`).join('');
@@ -128,7 +125,9 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
 
   return {
     open(key) { (OPEN[key] || (() => panel(key, `<h2>${esc(key)}</h2>`)))(); },
-    sheet, next, goal,
+    sheet, next, goal, panel, act, close, state3, wide(on) { E.classList.toggle('wide', !!on); },
+    /** Pre-op holding and the operating room register what their stations open. */
+    extend(p) { periop = p; Object.assign(OPEN, p.open); goal(); },
     /** Called every time the walker is given the level back. */
     arrive({ fresh = false, from = null } = {}) {
       world.release(); exhibits.refresh(); const n = goal(), name = esc(state.character?.name || '');
@@ -137,7 +136,7 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
       else if (!from) world.toast(`Welcome back, ${name}.`, 4);
     },
     /** A direct route from a link: ?go=plexus&mode=challenge, ?go=studio, ?go=record ... */
-    direct(go, mode) { const map = { hall: 'plexus', plexus: 'plexus', regional: 'regional_case', scan: 'airway', airway: 'airway', studio: 'collection', archive: 'desk', or: 'or' }; if (go === 'record' || go === 'settings' || go === 'study') return sheet(go);
+    direct(go, mode) { const map = { hall: 'plexus', plexus: 'plexus', regional: 'regional_case', scan: 'airway', airway: 'airway', studio: 'collection', archive: 'desk', or: 'or', preop: 'schedule', schedule: 'schedule', bay1: 'bay1', bay2: 'bay2', bay3: 'bay3', bay4: 'bay4' }; if (go === 'record' || go === 'settings' || go === 'study') return sheet(go);
       const k = map[go]; if (!k) return; world.teleport(k); if (k === 'plexus' || k === 'regional_case') return wipe(() => enterHall(mode || (k === 'regional_case' ? 'r-intro' : 'menu'), 'direct')); if (k === 'airway' && exhibits.hasScan) return wipe(() => enterScan(mode || 'menu')); world.open(k); },
   };
 }
