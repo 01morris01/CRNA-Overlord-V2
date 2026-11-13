@@ -1,83 +1,59 @@
-# Overlord world: status of the first playable slice
+# Overlord world: status
 
-Branch `overlord/world-slice`, cut from the deployed commit `bcba0c3`. Working copy: `~/Desktop/overlord-next`.
-Nothing here is committed, pushed or deployed. Date: 2026-11-10.
+Branch `overlord/world-slice` (pushed to GitHub, not merged to `main`, not deployed). Working copy: `~/Developer/overlord-next`.
+Updated 2026-11-12. The voxel island described in earlier versions of this file was retired on 2026-11-10; it is in git history.
 
 ## How to run it
 
 ```bash
-python3 ~/Desktop/overlord-next/tools/dev_server.py 8090
+python3 ~/Developer/overlord-next/tools/dev_server.py 8091
 ```
 
-Then open http://localhost:8090/world/ and sign in with your Overlord account for that browser (or create one).
+Then open http://localhost:8091/world/ and sign in with an Overlord account for that browser.
 
-## What the slice is
+## What exists
 
-Sign in, make a character, walk a small island, enter Anatomy Hall, take a six-step 3D lesson on the right brachial
-plexus, identify structures with no labels, answer three practice questions, earn something, build with it on your
-plot, and find all of it still there when you come back.
-
-## Working now (tested)
-
-| Part | What works | How it was checked |
-|---|---|---|
-| Sign-in | Uses the app's existing accounts (`core/auth.js`), unchanged | Playthrough; classic save compared byte for byte before and after |
-| Character | Name, 6 skin tones, 6 hair styles, 6 hair colours, 8 scrub colours, cap, glasses, stethoscope; one earned item | Playthrough; saved options read back |
-| Island | Third-person walking, jumping, camera, 5 places, 2 characters who talk, 4 field notes to find, a plot you build on | Real keyboard and mouse |
-| Anatomy atlas | 102 named structures in 6 layers; rotate, zoom, show/hide layers, peel, isolate, names on/off, daylight or dark room | Real mouse |
-| Lesson | Six steps; each ends with an action on the model; wrong actions are corrected, not skipped | Each step completed by clicking the model |
-| Challenge | 8 of 14 items, no labels, confidence before the answer, feedback with the reason and source | Right picks marked right, wrong picks marked wrong, names never shown |
-| Practice questions | 3 original items (2 multiple choice, 1 multiple correct response) with rationale and source | Playthrough |
-| Later review | Missed: back in 1 day. Right but a guess: 2 days. Right and sure: 6 days. Due items come first | Clock moved forward 2 days in the test |
-| Reward | 6 of 8 earns the nerve stimulator and a plexus sculpture; every correct answer earns blocks; wrong answers earn nothing | Playthrough |
-| Building | Place and take back blocks and the sculpture on your plot | Real clicks |
-| Return | Position, character, plot, field notes, rewards, learning record, greeting by name | Fresh page load |
-
-Automated playthrough: **36 of 36 checks pass** with real keyboard and mouse (`playthrough-results.json`).
-Geometric audit of the anatomy: **18 of 23 pass; the 5 that fail are documented differences in the source model**
-(`plexus-audit.json`, and the section below).
-
-## Devices tested
-
-| Device | Result |
+| Part | State |
 |---|---|
-| This Mac (M4 Pro), Chrome, 1280 x 760 and 1440 x 860, real keyboard and mouse | Full playthrough passes; 16 to 17 ms a frame in both the island and the atlas |
-| Chrome's phone emulation (390 x 664, touch events) | Layout fits, on-screen stick moves the player, lesson opens. Emulation only |
-| Chrome's tablet emulation (1080 x 810, touch events) | Same. Emulation only |
-| Real iPad or iPhone, Safari, Android, Windows | **Not tested** |
-| iOS Simulator | **Not available**: this Mac has Xcode command-line tools but not full Xcode |
+| Building | One connected realistic level: forecourt, arrival, light court, anatomy gallery, regional block bay, operating room, pre-op holding, study studio, and (new) endoscopy suite, labor room and procedure room |
+| Plexus journey | Film with a prediction, six hands-on steps, unlabeled challenge, specimen earned, regional case, later review |
+| Airway and neck exhibit | 68 structures from one CC BY CT (TotalSegmentator s0527); model and slices share a frame. See HEADNECK-CT.md |
+| Pre-op holding | Schedule of the 56 mock-OR-day patients, four bays, chart and care plan in the Student Workstation, plan gate |
+| Operating room | Whole general anesthetics with a tube on the app's engine (`crisis-sim`): monitors from the engine, drugs drawn and labelled, machine controls, held views, debrief against the program's rubrics. Pulse oximeter probe and BP cuff are placed by hand |
+| Endoscopy suite | An endoscopy patient booked for sedation can be converted to a rapid sequence and a tube, run in the suite on the engine; or postponed. Sedation itself is refused (see below) |
+| X-Ray Mirror | The owner's own page (`world/mirror/`), BodyParts3D anatomy (CC BY-SA 2.1 JP), camera stays on the computer |
 
-## Simplified, and labelled as such
+## Checks (2026-11-12, commit 01ce6c5)
 
-- **The anatomy is the source model's.** It has no separate lateral cord, medial cord, C5 to T1 roots or phrenic nerve.
-  The junction of divisions and cords is a rough knot. The musculocutaneous nerve is drawn only in the arm. The app
-  says this on the Hall menu and wherever it matters, and never asks for those structures by clicking.
-- **Verification status is "AI-checked".** I compared the lesson against the cited pages and ran a geometric audit.
-  No anatomist or faculty member has reviewed it. Every source panel in the app says so.
-- **Citations.** Six statements were read in context on the cited page (trunk formation, phrenic course and block,
-  interscalene groove, musculocutaneous roots, nerve to subclavius, suprascapular origin). The rest cite the chapter
-  page range where the topic is covered and still need a person to confirm the exact page.
-- **The island is built in code**: blocks, props and the characters. It is the weakest art in the slice next to the
-  anatomy, which is real sourced modelling. No purchased or downloaded environment art is used.
-- **The two island characters are scripted.** Booth's lines are chosen by simple rules from your saved progress. No AI.
-- **Scoring is rules only.** The clicked object's id is compared with the answer. No AI decides anything.
-
-## Planned, not built
-
-| Area | Planned |
+| Check | Result |
 |---|---|
-| World | More places, classmates, co-op, a second plot tier, sound, a regional pavilion with needle path and ultrasound |
-| Atlas | More regions, cross-sections, search, structures missing from this model (cords, roots, phrenic) from a reviewed source |
-| Simulator | 3D operating room joined to Mock OR Day. Today the island's OR door only links to the existing page |
-| Textbooks | Searchable index, topic pages, page-linked explanations. Today: three books indexed privately to find and check pages |
-| SEE system | Outline-mapped question bank, cumulative and exam-style sessions. Today: three questions and one outline mapping |
-| Accounts | Server accounts and sync. Today everything is per browser. See ACCOUNTS-MIGRATION.md |
-| Idol | Not run. Needs your Hugging Face login and two gated model licences. See ASSET-LEDGER.md |
+| `node tools/cases_check.mjs` (engine level) | 61 of 61 |
+| `tools/periop_check.py` (whole cases, real input, recorded) | 52 of 52 |
+| `tools/movement_check.py` (walking, collisions, ways in and out) | 55 of 55 |
+| Endoscopy case | Smoke run only (p25 converted to rapid sequence: suite loads, no page errors). No recorded check yet |
 
-## Not done from your brief, and why
+Checks show that things work. They are not a score for visual quality, and they are not content review.
 
-- **The voxel-diorama prompt.** It is not in this conversation. I wrote the scene specs to that level of detail
-  (PLAN.md and the top of `world/js/game.js`) but could not match a prompt I have not seen.
-- **Idol test in the browser.** Blocked on account access that only you can grant.
-- **3D OR inside Mock OR Day.** Investigated and planned (PLAN.md), not built.
-- **Real device testing.** No simulator available; no physical device driven.
+## Not built, and why
+
+- **Sedation** (endoscopy MAC): the engine's propofol never stops breathing or obstructs the airway, and oxygen without a sealed circuit is 100% or nothing, so a sedation case would be uneventful whatever the learner did. Needs spontaneous ventilation built from published models.
+- **Crises** in the 3D OR: not built. Only crises the engine can model faithfully should be.
+- **Spinal, epidural, nerve blocks, children under 20 kg**: not run in the 3D OR; those patients keep chart and plan in the Student Workstation.
+- **Ultrasound picture**: the bay's screen shows a probe in air, labelled "not a scan".
+- **Labor and procedure rooms**: rooms only; nothing clinical runs in them.
+- **Hands-on equipment**: only the pulse oximeter probe and BP cuff; every other step is a button on the step list.
+- **Known look problems**: the endoscopy case text still says surgeon and incision; the endoscopy stretcher rails read as wireframe glass up close; the patient figures' gowns are blocky.
+
+## Verification status
+
+All clinical content and the CO2 correction are AI-checked, not faculty-reviewed. Faculty review is still needed (CO2-FACULTY-REVIEW.md, CONTENT-VERIFICATION.md).
+
+## Devices
+
+Tested on this Mac in Chrome. Phone and tablet only in Chrome's emulation. No real phone or tablet has been tested; the iOS Simulator needs full Xcode, which this Mac does not have.
+
+## Needs the owner
+
+- Faculty review of content and the CO2 correction.
+- A Hugging Face sign-in on this Mac (`uvx --from huggingface_hub hf auth login`) and acceptance of the gated model licences, for the Idol test.
+- A real device test.
