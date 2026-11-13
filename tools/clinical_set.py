@@ -8,7 +8,7 @@ no open model covered (the ceiling lights and supply arm, draped tables, stools,
 tools/clinical_kit.py and are named as such in the ledger.
 
 Nothing here is a working device and nothing is taught from it. Where a source model carried something that would mislead a
-nurse anesthesia student (cylinders and flow controls in no recognised colour code) it is set to the United States convention:
+nurse anesthesia student (cylinders and flow controls in no recognized color code) it is set to the United States convention:
 oxygen green, nitrous oxide blue, air yellow; sevoflurane yellow, isoflurane purple.
 
 Used by tools/build_institute.py. On its own it renders the two rooms' equipment for a look:
@@ -66,7 +66,7 @@ def xf(objs, M):
         o.data.transform(M)
         if M.determinant() < 0: o.data.flip_normals()
 def stand(objs, scale=1.0, rz=0.0, centre=True, floor=True, sz=None):
-    """Scale, turn about the vertical, centre over the origin and put the lowest point on the floor."""
+    """Scale, turn about the vertical, center over the origin and put the lowest point on the floor."""
     S = Matrix.Diagonal((scale, scale, sz if sz is not None else scale, 1)); xf(objs, Matrix.Rotation(rz, 4, 'Z') @ S); lo, hi = bounds(objs)
     xf(objs, Matrix.Translation((-(lo.x + hi.x) / 2 if centre else 0, -(lo.y + hi.y) / 2 if centre else 0, -lo.z if floor else 0)))
 def thin(o, ratio):
@@ -160,7 +160,7 @@ def fill_holes(rgb, mask):
 
 # ------------------------------------------------------------------ the pieces
 def operating_table(top=0.9, length=2.06):
-    """The table from shashkinv1ad's operating station (the lights, robot arm and column are not used). Its colour map carried
+    """The table from shashkinv1ad's operating station (the lights, robot arm and column are not used). Its color map carried
     red stains: they are painted out, and the rust-brown wear is drawn back toward clean steel. The column is drawn up so the
     pads stand at working height."""
     objs = bring('e3a45122', keep=lambda n, m: m.startswith('Table')); c = co(objs)[:, :2]; c = c - c.mean(axis=0); w, v = np.linalg.eigh(np.cov(c.T)); ax = v[:, int(np.argmax(w))]
@@ -173,7 +173,7 @@ def operating_table(top=0.9, length=2.06):
         if 'base' not in roles: continue
         wd, ht = im.size; a = np.empty(wd * ht * 4, np.float32); im.pixels.foreach_get(a); a = a.reshape(ht, wd, 4); rgb = a[:, :, :3].copy(); r, g, b = rgb[:, :, 0], rgb[:, :, 1], rgb[:, :, 2]
         mx, mn = rgb.max(axis=2), rgb.min(axis=2); d = np.maximum(mx - mn, 1e-6); hue = np.where(mx == r, ((g - b) / d) % 6, np.where(mx == g, (b - r) / d + 2, (r - g) / d + 4)) * 60
-        red = ((hue > 252) | (hue < 17)) & ((mx - mn) / np.maximum(mx, 1e-6) > 0.1) & (mx - mn > 0.025)                  # purple through red: nothing on a clean table is that colour
+        red = ((hue > 252) | (hue < 17)) & ((mx - mn) / np.maximum(mx, 1e-6) > 0.1) & (mx - mn > 0.025)                  # purple through red: nothing on a clean table is that color
         for _ in range(5): red = red | np.roll(red, 1, 0) | np.roll(red, -1, 0) | np.roll(red, 1, 1) | np.roll(red, -1, 1)
         rgb = fill_holes(rgb, red)
         for _ in range(36): sm = (rgb + np.roll(rgb, 1, 0) + np.roll(rgb, -1, 0) + np.roll(rgb, 1, 1) + np.roll(rgb, -1, 1)) / 5; rgb[red] = sm[red]            # soften what was painted in
@@ -188,7 +188,7 @@ def anesthesia_machine(scale=0.0085):
     body = [o for o in objs if o.data.materials[0].name == 'anesthesia_machine_body']; lo, hi = bounds(body); M = Matrix.Diagonal((scale, scale, scale, 1)) @ Matrix.Translation((-(lo.x + hi.x) / 2, -(lo.y + hi.y) / 2, -bounds(objs)[0].z))
     rects = {'monitor': ([-80.7354, -3.131, 194.1157], [-49.3932, -3.3084, 194.1157], [-49.3932, -3.3085, 166.2254], [-80.7354, -3.131, 166.2254]), 'vent': ([14.8097, -8.0003, 190.2497], [32.6209, -8.0002, 190.2497], [32.6209, -8.0003, 172.5766], [14.8097, -8.0003, 172.5766])}
     xf(objs, M); named = {o.name: o for o in objs}
-    for o in objs:                                                                                   # colour codes a student would read
+    for o in objs:                                                                                   # color codes a student would read
         n, m = o.name, o.data.materials[0]
         if n.startswith('Knob_Oxygen'): recolour(o, 'knob_oxygen', (0.03, 0.36, 0.12), 0.42)
         elif n.startswith('Knob_Nitrous'): recolour(o, 'knob_nitrous', (0.04, 0.16, 0.55), 0.42)
@@ -283,7 +283,7 @@ def syringes():
 
 # ------------------------------------------------------------------ the two rooms
 OR_TABLE, OR_HEAD = (8.6, 15.6), (8.6, 16.63)
-PREOP_BAYS = ((-9.3, True), (-6.4, True), (-9.3, False), (-6.4, False))      # (centre x, against the north wall?) for bays 1 to 4
+PREOP_BAYS = ((-9.3, True), (-6.4, True), (-9.3, False), (-6.4, False))      # (center x, against the north wall?) for bays 1 to 4
 STRETCHER_TOP = 0.74
 def build(src):
     """Stand everything in the level (Blender axes: +X east, +Y north). Returns pieces, lamps for the bake, and screens."""
@@ -316,12 +316,13 @@ def build(src):
     us0 = PIECES[[p.name for p in PIECES].index('eq_ultrasound')]; mon0 = PIECES[[p.name for p in PIECES].index('eq_vitals_monitor')]; suc0 = PIECES[[p.name for p in PIECES].index('eq_suction')]; flat = stretcher_flat()
     put(flat, (8.6, 23.2, 0), 0.0, 'endo'); put(am2, (6.95, 25.05, 0), 1.2217, 'endo'); put(copy(cart), (9.9, 25.2, 0), math.pi / 2, 'endo'); put(copy(mon0), (10.35, 24.2, 0), 2.2, 'endo'); put(copy(suc0), (8.0, 26.378, 1.42), 0.0, 'endo')
     kit.stool((9.75, 22.2, 0), 0.0, 0.52, 'eq_pad_blue')['room'] = 'endo'; kit.iv_pole((7.45, 22.2, 0), 0.4)['room'] = 'endo'; kit.sharps_wall((11.868, 25.6, 1.25), -math.pi / 2)['room'] = 'endo'; kit.control_panel((11.868, 24.6, 1.4), -math.pi / 2)['room'] = 'endo'
-    # ---- labour room: x -11.9..-5.4, y 20..26.4. The bed against the oak head wall on the north side, head to the wall.
+    # ---- labor room: x -11.9..-5.4, y 20..26.4. The bed against the oak head wall on the north side, head to the wall.
     put(copy(PIECES[[p.name for p in PIECES].index('eq_stretcher')]), (-8.9, 25.2, 0), 0.0, 'labor'); put(copy(mon0), (-7.5, 25.9, 0), 3.6, 'labor'); put(copy(cart), (-10.4, 22.6, 0), 0.0, 'labor')
     kit.stool((-8.9, 22.9, 0), 0.0, 0.5, 'eq_pad_blue')['room'] = 'labor'; kit.iv_pole((-10.2, 25.7, 0), 0.4)['room'] = 'labor'; kit.sharps_wall((-5.432, 23.2, 1.25), math.pi / 2)['room'] = 'labor'
     # ---- procedure room: x 4.9..9, y -3.6..2.4. A flat stretcher with the head to the north and room to stand behind it; ultrasound at the patient's right hip, in the operator's line of sight.
-    put(copy(flat), (6.95, -0.9, 0), 0.0, 'procedure'); put(copy(us0), (5.75, -1.75, 0), -0.6, 'procedure'); put(copy(mon0), (8.25, 0.55, 0), 2.6, 'procedure'); put(copy(cart), (8.0, 1.55, 0), math.pi, 'procedure')
-    kit.stool((6.95, 1.0, 0), 0.0, 0.52, 'eq_pad_blue')['room'] = 'procedure'; kit.iv_pole((8.2, -0.3, 0), 0.4)['room'] = 'procedure'; kit.sharps_wall((8.968, -0.6, 1.25), -math.pi / 2)['room'] = 'procedure'
+    #      The stool at the head and the ultrasound stand back far enough to leave a way of at least 0.7 m round both ends of the stretcher (tools/rooms_check.py).
+    put(copy(flat), (6.95, -0.9, 0), 0.0, 'procedure'); put(copy(us0), (5.5, -1.85, 0), -0.6, 'procedure'); put(copy(mon0), (8.5, 0.55, 0), 2.6, 'procedure'); put(copy(cart), (8.0, 1.55, 0), math.pi, 'procedure')
+    kit.stool((6.95, 1.5, 0), 0.0, 0.52, 'eq_pad_blue')['room'] = 'procedure'; kit.iv_pole((8.6, -0.3, 0), 0.4)['room'] = 'procedure'; kit.sharps_wall((8.968, -0.6, 1.25), -math.pi / 2)['room'] = 'procedure'
     # ---- pre-op holding: x -10.7..-4.9, y 2.6..9.6. Four curtained bays, two against the north wall and two against the south, each with a flat stretcher.
     bay0 = PIECES[[p.name for p in PIECES].index('eq_curtain_bay')]; flat = copy(flat); first = True
     for i, (cx, north) in enumerate(PREOP_BAYS):

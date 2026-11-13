@@ -31,18 +31,18 @@ export function planStatus(id, storage = globalThis.localStorage) {
 /** Point the Student Workstation at a patient, keeping any progress already made with that patient. */
 export function pointWorkstationAt(id, storage = globalThis.localStorage) { const s = readStudentSession(storage); if (!s || s.patientId !== id) writeStudentSession(storage, { patientId: id, step: 'chart', reviewed: {}, questions: 0, autoInterview: false, updatedAt: Date.now() }); }
 
-// ---- drugs that can be drawn up: the engine's own list, with the syringe-label colour of each class (the standard user-applied
+// ---- drugs that can be drawn up: the engine's own list, with the syringe-label color of each class (the standard user-applied
 // label colours: induction agents yellow, benzodiazepines orange, opioids blue, relaxants red, their reversal agents the same
-// colour with white stripes, vasopressors violet, anticholinergics green). Set from the standard by an AI; not faculty-reviewed.
+// color with white stripes, vasopressors violet, anticholinergics green). Set from the standard by an AI; not faculty-reviewed.
 export const DRUG_CLASS = { induction: ['Induction agent', '#f2d021', 0], benzo: ['Benzodiazepine', '#f08a24', 0], opioid: ['Opioid', '#3f8fd6', 0], relaxant: ['Neuromuscular blocker', '#f0483c', 0], reversal: ['Relaxant reversal', '#f0483c', 1], antagonist: ['Opioid antagonist', '#3f8fd6', 1], pressor: ['Vasopressor', '#8a5fbf', 0], anticholinergic: ['Anticholinergic', '#58a856', 0], other: ['Other', '#e8e8e8', 0] };
 const CLASS_OF = { Propofol: 'induction', Etomidate: 'induction', Ketamine: 'induction', Midazolam: 'benzo', Fentanyl: 'opioid', Rocuronium: 'relaxant', Vecuronium: 'relaxant', Pancuronium: 'relaxant', Succinylcholine: 'relaxant', Neostigmine: 'reversal', Sugammadex: 'reversal', Naloxone: 'antagonist', Phenylephrine: 'pressor', Ephedrine: 'pressor', Epinephrine: 'pressor', Atropine: 'anticholinergic', Glycopyrrolate: 'anticholinergic', Dantrolene: 'other', Albuterol: 'other' };
 export const DRUGS = Object.keys(ORDER_DRUGS).map((name) => ({ name, unit: ORDER_DRUGS[name].unit, cls: CLASS_OF[name] || 'other' }));
 const RELAXANTS = ['Rocuronium', 'Vecuronium', 'Pancuronium', 'Succinylcholine'], INDUCTION = ['Propofol', 'Etomidate', 'Ketamine'], REVERSAL = ['Sugammadex', 'Neostigmine'];
 // ---- the shelf: every drug that can be on the cart for a case, in one of three standings (data/world/formulary.json):
-//   modelled  the engine changes the patient when it is given (the engine's own nineteen, and lidocaine through its own call)
+//   modeled  the engine changes the patient when it is given (the engine's own nineteen, and lidocaine through its own call)
 //   recorded  it can be drawn up, given and timed, and the record shows it, but nothing in the simulation changes; the label says so
 //   refused   it is on the plan, but a learner would expect to see an effect the engine does not have, so it cannot be given here
-// The file can add a concentration, a syringe and a reason. It can never promote a drug: "modelled" is decided here, by whether
+// The file can add a concentration, a syringe and a reason. It can never promote a drug: "modeled" is decided here, by whether
 // the engine really has a handler for that exact name.
 const UNIT_MG = { mg: 1, mcg: 0.001, g: 1000 }, SYRINGES = [1, 3, 5, 10, 20, 30, 60], r3 = (v) => Math.round(v * 1000) / 1000;
 export const fmtDose = (mg, unit = 'mg') => (unit === 'mcg' ? `${r3(mg * 1000)} mcg` : unit === 'g' && mg >= 1000 ? `${r3(mg / 1000)} g` : `${r3(mg)} mg`);
@@ -73,7 +73,7 @@ const SAYS = [
   ['ppe', /glove|\bppe\b|eye protection|goggles/], ['timeout', /time-? ?out/], ['baseline', /baseline/], ['machine', /machine (check|is checked)|check(ed)? (the )?machine/],
   ['suctionop', /suction (the |his |her |their )?(oro|mouth|pharynx|airway)|suction (him|her|them|the patient)/], ['suction', /suction/], ['airwaykit', /airway (equipment|kit|set-?up)|blade light|check(ed)? (the |my )?(tube|blade|laryngoscope|stylet)/], ['iv', /\biv\b.*(patent|running|confirmed|in place|works|access)|iv access|check(ed)? (the )?iv|intravenous access|line (is )?(patent|running)/],
   ['sniff', /sniff/], ['eto2', /end-? ?tidal (o2|oxygen)|\beto2\b|expired oxygen/], ['etco2', /end-? ?tidal (co2|carbon)|\betco2\b|capno|co2 (waveform|trace)/], ['agentcheck', /end-? ?tidal (agent|sevo|des|iso|gas)|\bmac\b/],
-  ['lash', /lash/], ['apnea', /apn(e|o)ea|apneic|unconscious|unresponsive|loss of consciousness/], ['callready', /ready to intubate/], ['closing', /clos(ing|ure)/], ['ready', /surgeon|incision|you may (start|begin|cut)/],
+  ['lash', /lash/], ['apnea', /apn(e|o)ea|apneic|unconscious|unresponsive|loss of consciousness/], ['callready', /ready to intubate/], ['closing', /clos(ing|ure)/], ['ready', /surgeon|endoscopist|incision|scope (in|can go)|you may (start|begin|cut)/],
   ['bladeout', /(remove|withdraw|take out) (the )?(blade|laryngoscope)|blade (is )?out/], ['blade', /blade|laryngoscop/], ['open', /open (the |his |her |their )?mouth|scissor/], ['commands', /open (your|their|his|her) eyes|squeeze|follow(s|ing)? commands?|wake up/],
   ['view', /\bi see\b|what (i|you) see|view of|grade (1|2|3|4|i+)\b|cords (are )?(in view|visuali[sz]ed|visible)|epiglottis|glottis/], ['stylet', /stylet/], ['tube', /(pass|advance|place|insert) (the )?(tube|ett)|tube (is )?(through|in\b)/], ['circuit', /circuit/],
   ['chest', /chest (rise|rising|is rising|movement)|watch (the )?chest/], ['breath', /breath sounds|listen to (both |the )?lungs?|auscultat|bilateral/], ['epigastric', /stomach|epigastr/], ['mist', /mist|condensation|fog/],
@@ -91,7 +91,7 @@ const MAP = {
     'rsi-17': ['open'], 'rsi-18': ['blade'], 'rsi-19': ['view'], 'rsi-20': ['tube'], 'rsi-21': ['tube'], 'rsi-22': ['bladeout'], 'rsi-23': ['stylet'], 'rsi-24': ['cuff'], 'rsi-25': ['circuit'], 'rsi-27': ['chest', 'breath', 'epigastric'], 'rsi-27a': ['chest'], 'rsi-27b': ['breath'], 'rsi-27c': ['epigastric'], 'rsi-27d': ['mist'], 'rsi-31': ['secure'], 'rsi-38': ['reassess2'], 'rsi-39': ['agentcheck'], 'rsi-40': ['ready', '+sat:ready'] },
   'carson-newman-anesthesia-emergence': { 'emergence-1': ['closing'], 'emergence-2': ['+agentoff'], 'emergence-3': ['+tofchecked', '+tof90'], 'emergence-4': ['spont', '+spontok'], 'emergence-5': ['untape'], 'emergence-6': ['suctionop', 'loosen', 'reassess3', '+sat:reassess3'], 'emergence-7': ['commands', '+awake', '+tof90', 'extubate'], 'emergence-8': ['o2device', 'obstruction', '+spo2on'], 'emergence-9': ['stable', 'handover', '+sat:stable'] },
 };
-// Items whose wording asks for a judgement this room cannot make (was it the right drug, the right dose, the right setting?). When the
+// Items whose wording asks for a judgment this room cannot make (was it the right drug, the right dose, the right setting?). When the
 // hands did the thing the item is marked done so the engine can close its rubric, and the sheet says in these words what was not judged.
 // One guard only: saying a patient is ready or stable is not credited unless the oximeter is on and reading 90% or more at that moment,
 // the same limit at which this room's monitor alarms.
@@ -104,7 +104,13 @@ const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart
 
 /** Start a case for one scheduled patient. sequence: 'standard' or 'rsi' (the learner's plan); a patient who carries one of
  *  the program's own scored scenarios always runs that scenario unchanged. */
-export async function createCase(entry, { sequence = 'standard', co2 = 'stores', fetchImpl } = {}) {
+/** Who leads the procedure and what "starting" and "finishing" mean in each room. The rubric items are the program's own and stay
+ *  worded as the program wrote them for the operating room; the room's words are used where the case speaks or lists a step. */
+export const TEAMS = {
+  surgery: { lead: 'surgeon', Lead: 'Surgeon', start: 'Incision.', staged: 'The team can position and prepare.', closing: 'Closure confirmed with the surgical team: dressings in a few minutes.', readyLabel: 'Tell the surgeon you are ready', closingLabel: 'The surgeon is closing: confirm with the team' },
+  endoscopy: { lead: 'endoscopist', Lead: 'Endoscopist', start: 'The endoscopist passes the scope.', staged: 'The endoscopy team can position the patient and prepare the scope.', closing: 'The endoscopist is withdrawing the scope: the procedure is nearly over.', readyLabel: 'Tell the endoscopist you are ready', closingLabel: 'The endoscopist is withdrawing the scope: confirm with the team' } };
+export async function createCase(entry, { sequence = 'standard', co2 = 'stores', fetchImpl, team = 'surgery' } = {}) {
+  const TEAM = TEAMS[team] || TEAMS.surgery;
   if (!entry.engineSupported) throw new Error(entry.engineNote || 'outside the engine range');
   const own = entry.cnRubric && entry.cnRubric.kind === 'rubric' ? entry.cnRubric.scenarioId : null, kind = own ? OWN[own] : sequence;
   const [scenarioBase, rubric, emergenceRubric, formulary] = await Promise.all([J(own ? `crisis-sim/sim/scenarios/${own}.json` : SCENARIO[kind][0], fetchImpl), J(SCENARIO[kind][1], fetchImpl), J(SCENARIO.emergence[1], fetchImpl), loadFormulary(fetchImpl)]);
@@ -112,7 +118,7 @@ export async function createCase(entry, { sequence = 'standard', co2 = 'stores',
   const runner = new SimRunner(), loaded = runner.loadRubricScenario({ scenario, rubric }); if (!loaded || loaded.ok === false) throw new Error('the engine refused this scenario: ' + (loaded && loaded.reason));
   runner.v.co2Kinetics = co2 === 'legacy' ? 'legacy' : 'stores';
   const weightKg = scenario.patientProfile.weightKg || runner.config.weightKg, wave = createWaveformRenderer({ sampleRate: 100, seconds: 6 });
-  const C = { entry, kind, own, runner, rubric, emergenceRubric, weightKg, co2: runner.v.co2Kinetics, shelf: buildShelf(formulary), done: {}, said: [], syringes: [], given: [], apl: 30, hand: { squeezes: [], episode: null, last: null }, consent: { needed: false, signed: true }, staged: false, tubeDepthCm: null, mon: { spo2: false, nibp: false, ecg: false }, nibp: null, nibpAt: -1e9, startedEmergence: kind === 'emergence', induction: null, ended: false, speed: 1, preoxAt: null, eto2Called: null, tofChecks: [], lastSay: '' };
+  const C = { team: TEAM, label: (id) => (id === 'ready' ? TEAM.readyLabel : id === 'closing' ? TEAM.closingLabel : ACTIONS[id] ? ACTIONS[id][0] : id), entry, kind, own, runner, rubric, emergenceRubric, weightKg, co2: runner.v.co2Kinetics, shelf: buildShelf(formulary), done: {}, said: [], syringes: [], given: [], apl: 30, hand: { squeezes: [], episode: null, last: null }, consent: { needed: false, signed: true }, staged: false, tubeDepthCm: null, mon: { spo2: false, nibp: false, ecg: false }, nibp: null, nibpAt: -1e9, startedEmergence: kind === 'emergence', induction: null, ended: false, speed: 1, preoxAt: null, eto2Called: null, tofChecks: [], lastSay: '' };
   const snap = () => runner.snapshot(), T = () => runner.simTime, sat = () => (C.mon.spo2 ? Math.round(snap().spo2) : null), mark = (id, note = '', value = null) => { if (!C.done[id]) C.done[id] = { t: T(), note, value, spo2: sat() }; else if (note) Object.assign(C.done[id], { note, value, again: T(), spo2: sat() }); return C.done[id]; };
   const say = (text, ok = true) => { C.lastSay = text; C.said.push({ t: T(), text, ok }); if (C.said.length > 200) C.said.shift(); return { ok, say: text }; };
   if (kind === 'emergence') { Object.assign(C.mon, { spo2: true, nibp: true, ecg: true }); for (const id of ['ppe', 'timeout', 'spo2', 'nibp', 'ecg', 'baseline', 'tube', 'cuff', 'circuit', 'secure', 'eyes']) mark(id, 'in place when the case was handed to you'); }
@@ -139,9 +145,9 @@ export async function createCase(entry, { sequence = 'standard', co2 = 'stores',
     etco2: () => { runner.confirmEtco2(); const s = snap(); return say(s.capnogramPresent && s.etco2 > 5 ? `Continuous end-tidal CO2, ${Math.round(s.etco2)} mmHg.` : 'No end-tidal CO2 waveform yet: ventilate and look again.', s.capnogramPresent && s.etco2 > 5); },
     chest: () => say(intubated() ? 'Chest rises on both sides.' : 'No tube in place.', intubated()), breath: () => say(intubated() ? 'Breath sounds on both sides.' : 'No tube in place.', intubated()), epigastric: () => say(intubated() ? 'Nothing heard over the stomach.' : 'No tube in place.', intubated()), mist: () => say(intubated() ? 'Misting in the tube with each breath.' : 'No tube in place.', intubated()),
     secure: () => say('Tube secured at the lip.'), agentcheck: () => { const s = snap(); return say(`End-tidal ${s.vaporizerAgent || 'agent'} ${s.etAgent.toFixed(1)}%, ${s.mac.toFixed(1)} MAC.`); },
-    ready: () => { C.readyAt = T(); mark('ready', 'Surgeon told: ready.'); if (kind !== 'emergence') C.finalize(); if (C.staged) return say('Surgeon told: ready. The team can position and prepare.');      /* with the operation staged (js/theatre.js) the incision comes later, after the surgical time-out */
-      try { runner.setSurgicalStimulus(0.5); } catch (e) { /* stimulus is optional */ } return say('Surgeon told: ready. Incision.'); },
-    closing: () => { C.startedEmergence = true; C.closingAt = T(); if (!C.staged) { try { runner.setSurgicalStimulus(0.1); } catch (e) { /* optional */ } } return say('Closure confirmed with the surgical team: dressings in a few minutes.'); },
+    ready: () => { C.readyAt = T(); mark('ready', `${TEAM.Lead} told: ready.`); if (kind !== 'emergence') C.finalize(); if (C.staged) return say(`${TEAM.Lead} told: ready. ${TEAM.staged}`);      /* with the operation staged (js/theatre.js) the incision comes later, after the surgical time-out */
+      try { runner.setSurgicalStimulus(0.5); } catch (e) { /* stimulus is optional */ } return say(`${TEAM.Lead} told: ready. ${TEAM.start}`); },
+    closing: () => { C.startedEmergence = true; C.closingAt = T(); if (!C.staged) { try { runner.setSurgicalStimulus(0.1); } catch (e) { /* optional */ } } return say(TEAM.closing); },
     spont: () => { runner.assessSpontaneousVentilation(); const s = snap(); return say(`Spontaneous rate ${Math.round(s.spontaneousRR)}, tidal volume ${Math.round(s.spontaneousTV)} mL (${(s.spontaneousTV / weightKg).toFixed(1)} mL/kg).`); },
     untape: () => say('Eye tape off.'), suctionop: () => say('Oropharynx suctioned.'), loosen: () => say('Tube tape loosened.'),
     commands: () => { const s = snap(), awake = s.status === 0; C.awakeAt = awake ? T() : C.awakeAt; return say(awake ? 'Opens eyes and squeezes your hand.' : 'No response to command.', awake); }, cuffdown: () => say('Cuff deflated.'),
@@ -157,7 +163,7 @@ export async function createCase(entry, { sequence = 'standard', co2 = 'stores',
   C.act = (id, how = {}) => { if (C.ended && id !== 'handover') return { ok: false, say: 'The case has been handed over.' }; if (id === 'reassess') id = C.startedEmergence ? 'reassess3' : intubated() ? 'reassess2' : 'reassess1'; const fn = DO[id]; if (!fn) return { ok: false, say: 'Not something that can be done here.' };
     let pre = null; if (C.hooks[id]) { try { pre = C.hooks[id](how) || null; } catch (e) { pre = null; } } if (pre && pre.ok === false) return say(pre.say || 'That cannot be done yet.', false);
     const r = fn(); if (r.ok && pre && pre.say) { r.say = pre.say; C.lastSay = pre.say; if (C.said.length) C.said[C.said.length - 1].text = pre.say; } if (r.ok) mark(id, r.say); return r; };
-  /** Draw a dose into a labelled syringe. A modelled drug goes through the engine's own plausibility range (a dose far outside it
+  /** Draw a dose into a labeled syringe. A modeled drug goes through the engine's own plausibility range (a dose far outside it
    *  is refused); a recorded-only drug is taken at the amount asked; a drug the engine cannot show the effect of is refused, with the reason. */
   C.draw = (drug, amount, unit, label = null) => { const f = C.shelf.get(drug); if (!f) return say(`${drug} is not on this cart.`, false);
     if (f.tier === 'refused') return say(`${drug} cannot be given in this room: ${f.reason || 'the simulation has no model of its effect, so giving it would show you nothing true'}.`, false);
@@ -165,7 +171,7 @@ export async function createCase(entry, { sequence = 'standard', co2 = 'stores',
     else { const a = +amount, u = UNIT_MG[String(unit).replace('/kg', '')]; if (!Number.isFinite(a) || a <= 0 || !u) return say('Say how much, in mg, mcg or g.', false); totalMg = a * u * (/\/kg$/.test(unit) ? weightKg : 1); if (f.engineName === 'Lidocaine' && totalMg / weightKg > 3) return say('That is more lidocaine than this cart will draw up for an intravenous dose.', false); text = `${drug} ${fmtDose(totalMg, f.unit)}`; }
     const volMl = f.mgPerMl ? totalMg / f.mgPerMl : null, size = volMl == null ? null : SYRINGES.find((q) => q >= volMl - 1e-9) ?? null; if (volMl != null && size == null) return say(`${fmtDose(totalMg, f.unit)} of ${drug} at ${f.mgPerMl} mg/mL is ${r3(volMl)} mL: more than one syringe holds.`, false);
     const s = { id: 's' + (C.syringes.length + 1), drug, engineName: f.engineName, tier: f.tier, totalMg, givenMg: 0, label: label || text, cls: f.cls, unit: f.unit, given: false, drawnAt: T(), mgPerMl: f.mgPerMl, volMl, syringeMl: size, route: f.route || 'IV', pushes: [] }; C.syringes.push(s);
-    say(`Drawn up and labelled: ${s.label}${volMl != null ? ` (${r3(volMl)} mL at ${f.mgPerMl} mg/mL)` : ''}.${f.tier === 'recorded' ? ' It will be recorded when given; this simulation does not model its effect.' : ''}`); return { ok: true, say: C.lastSay, syringe: s }; };
+    say(`Drawn up and labeled: ${s.label}${volMl != null ? ` (${r3(volMl)} mL at ${f.mgPerMl} mg/mL)` : ''}.${f.tier === 'recorded' ? ' It will be recorded when given; this simulation does not model its effect.' : ''}`); return { ok: true, say: C.lastSay, syringe: s }; };
   /** Push part of a syringe: `mg` more of what is in it. For seventeen of the engine's nineteen drugs the engine is given exactly
    *  that amount at once: their kinetics add, so a syringe pushed in parts is the same drug as one push, a little later. The two
    *  reversal drugs are different: the engine sizes sugammadex and neostigmine by the dose of ONE call and does not add calls
@@ -182,12 +188,12 @@ export async function createCase(entry, { sequence = 'standard', co2 = 'stores',
     if (s.tier === 'modelled' && WHOLE.has(s.engineName)) { s.heldMg = (s.heldMg || 0) + mg; s.heldAt = T(); }
     else if (s.tier === 'modelled' && ORDER_DRUGS[s.engineName]) { const r = runner.giveBolus(s.engineName, mg, `${s.label} · ${fmtDose(mg, s.unit)} ${s.route}`); doseId = (r && r.doseId) || null; }
     else if (s.tier === 'modelled' && s.engineName === 'Lidocaine') runner.giveLidocaineBolus({ doseMgPerKg: mg / weightKg });
-    else if (s.tier === 'recorded') runner.logEvent('Drug, recorded only', `${s.label} · ${fmtDose(mg, s.unit)} ${s.route} · no modelled effect`, { room: 'drug_recorded', drug: s.drug, doseMg: mg });
+    else if (s.tier === 'recorded') runner.logEvent('Drug, recorded only', `${s.label} · ${fmtDose(mg, s.unit)} ${s.route} · no modeled effect`, { room: 'drug_recorded', drug: s.drug, doseMg: mg });
     else return { ok: false, say: `${s.drug} cannot be given in this room.` };
     s.givenMg += mg; s.pushes.push({ t: T(), mg }); if (s.totalMg - s.givenMg <= s.totalMg * 1e-9) { s.given = true; s.givenAt = T(); s.givenMg = s.totalMg; }
     let g = C.given.find((q) => q.sid === sid); if (!g) { g = { sid, drug: s.drug, totalMg: 0, t: T(), label: s.label, unit: s.unit, route: s.route, mgPerMl: s.mgPerMl, tier: s.tier, pushes: [], doseIds: [] }; C.given.push(g); }
     g.totalMg += mg; g.tLast = T(); g.pushes.push({ t: T(), mg }); if (doseId) { g.doseIds.push(doseId); g.doseId = doseId; } if (s.heldMg && s.given) flush(s); return { ok: true, say: '', mg, left: s.totalMg - s.givenMg, done: s.given, held: s.heldMg || 0 }; };
-  C.give = (sid) => { const s = C.syringes.find((q) => q.id === sid && !q.given); if (!s) return say('That syringe is not on the cart.', false); const r = C.push(sid, s.totalMg - s.givenMg); return r.ok ? say(`${s.label} given.${s.tier === 'recorded' ? ' Recorded; not modelled.' : ''}`) : say(r.say || 'Nothing was given.', false); };
+  C.give = (sid) => { const s = C.syringes.find((q) => q.id === sid && !q.given); if (!s) return say('That syringe is not on the cart.', false); const r = C.push(sid, s.totalMg - s.givenMg); return r.ok ? say(`${s.label} given.${s.tier === 'recorded' ? ' Recorded; not modeled.' : ''}`) : say(r.say || 'Nothing was given.', false); };
   /** The ventilator and the gas, as the machine's own controls. */
   const VENT = { setTidalVolume: [50, 1500], setRespiratoryRate: [4, 40], setPeep: [0, 20], setPressureAbovePeep: [5, 40], o2FlowLPerMin: [0, 15], airFlowLPerMin: [0, 15], n2oFlowLPerMin: [0, 10] };
   /** The machine's own controls. Only the settings this machine really has, each held to the range its control can reach: the engine
@@ -204,7 +210,7 @@ export async function createCase(entry, { sequence = 'standard', co2 = 'stores',
   // that lets gas out of the circuit above the pressure it is set to. A squeeze can therefore put into the patient no more than the
   // valve's pressure will hold; the rest goes to the scavenger. What reaches the patient is then handed to the engine as an
   // episode at the rate and volume your hand is actually giving, renewed when either changes and stopped when you stop.
-  // Not modelled: mask leak, the bag emptying when fresh gas is low, and hand ventilation through a tube (the engine refuses it).
+  // Not modeled: mask leak, the bag emptying when fresh gas is low, and hand ventilation through a tube (the engine refuses it).
   const COMPLIANCE = 50, clampApl = (v) => Math.min(70, Math.max(1, +v || 0)), MIN_MV = (scenario.rubricCriteria && +scenario.rubricCriteria.minimumPpvMinuteVentilation) || 4;      // the least minute ventilation the scenario itself counts as ventilating
   C.setApl = (cmH2O) => { C.apl = clampApl(cmH2O); return { ok: true, say: `Valve set to ${Math.round(C.apl)} cmH2O.`, apl: C.apl }; };
   const endEpisode = (why = 'stopped') => { if (C.hand.episode) { try { runner.stopMaskVentilation(why); } catch (e) { /* already over */ } C.hand.episode = null; } };

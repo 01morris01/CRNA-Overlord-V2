@@ -15,7 +15,7 @@ Light is split on purpose. The sun's direct light is drawn live in the browser w
 through a sun patch is lit and shadowed by the same light as the floor. Everything else (sky, lamps, every bounce, including
 the sun's) is baked: into the lightmap for the building, and into a set of small probes for things that move.
 
-Plan, in metres, +X east, +Y north, +Z up, origin at the court's entrance threshold:
+Plan, in meters, +X east, +Y north, +Z up, origin at the court's entrance threshold:
 
    forecourt + pool  ->  arrival (low, 2.8 m)  ->  LIGHT COURT 9 x 22 x 7 m under a finned skylight  ->  ANATOMY GALLERY 10 x 9
    west of the court: REGIONAL ROOM          east of the court: OPERATING ROOM (north) and STUDY STUDIO (south)
@@ -37,7 +37,7 @@ except Exception as e: print('GPU setup:', e)
 MATS = {}
 def tex(asset, kind, size, grade=None):
     """A Poly Haven map, downscaled once to `size` and saved as JPEG. `grade` = (target mean, saturation, contrast, tint)
-    regrades a colour map. Byte images hold display-encoded values, so the grade is applied to them directly."""
+    regrades a color map. Byte images hold display-encoded values, so the grade is applied to them directly."""
     src = os.path.join(SRC, 'textures', asset, f'{asset}_{kind}.jpg'); tag = ('_g' + '-'.join(str(g) for g in grade[:3]) + ''.join('%02x' % int(c * 255) for c in grade[3])) if grade else ''
     dst = os.path.join(TMP, f'{asset}_{kind}_{size}{tag}.jpg')
     if not os.path.exists(src): return None
@@ -108,7 +108,7 @@ mat('glow_amber', None, tint=(1.0, 0.6, 0.2), rough=0.5, emit=(1.0, 0.55, 0.1), 
 PARTS, COLLIDERS = [], []
 GLASS, STATIONS, LIGHTS, ROOMS, PROPS, SIGNS, LAMP_OBJS = [], {}, [], {}, [], [], []
 def box(x0, y0, z0, x1, y1, z1, m, collide=None, rot=0.0, about=None, omit=''):
-    """A box in metres, optionally turned about a vertical axis. `omit` drops faces nobody can see ('t' top, 'b' bottom)
+    """A box in meters, optionally turned about a vertical axis. `omit` drops faces nobody can see ('t' top, 'b' bottom)
     so that they take no room in the lightmap. Tall solid things collide by default."""
     me = bpy.data.meshes.new('b'); bm = bmesh.new(); bmesh.ops.create_cube(bm, size=1.0); bm.normal_update()
     if omit: bmesh.ops.delete(bm, geom=[f for f in bm.faces if ('t' in omit and f.normal.z > 0.9) or ('b' in omit and f.normal.z < -0.9)], context='FACES')
@@ -181,7 +181,7 @@ for sx in (-1, 1):                                                              
     GLASS.append([x - 0.006, 0.07, 0.06, x + 0.006, 1.2, 2.56, 'clear']); COLLIDERS.append([xa, 0.02, xb, 1.25, 0, 2.62])
     box(x - sx * 0.07, 1.04, 0.85, x - sx * 0.045, 1.07, 1.45, 'steel', collide=False)
 wall_x(22.0, -4.9, 4.9, 7.0, 'concrete', openings=[(-1.7, 1.7, 3.4, 0, 'portal')])                 # north: the portal to the gallery
-wall_y(-4.9, 0, 22, 7.0, 'concrete', openings=[(5.3, 6.9, 2.4, 0, 'door'), (14.4, 16.0, 2.4, 0, 'door'), (20.5, 21.9, 2.4, 0, 'door')])                       # west: pre-op, regional room, labour room
+wall_y(-4.9, 0, 22, 7.0, 'concrete', openings=[(5.3, 6.9, 2.4, 0, 'door'), (14.4, 16.0, 2.4, 0, 'door'), (20.5, 21.9, 2.4, 0, 'door')])                       # west: pre-op, regional room, labor room
 wall_y(4.5, 0, 22, 7.0, 'concrete', openings=[(0.6, 2.0, 2.4, 0, 'door'), (4.9, 6.1, 2.4, 0, 'door'), (13.2, 14.9, 2.4, 0, 'door'), (15.8, 19.2, 2.3, 0.95, 'smoked'), (20.5, 21.9, 2.4, 0, 'door')])   # east: procedure room, studio, OR door, OR observation window, endoscopy
 # roof: a slab with one long opening, crossed by deep pale fins
 box(-4.9, -0.4, 7.0, -2.9, 22.4, 7.5, 'concrete_fine', collide=False, omit='t'); box(2.9, -0.4, 7.0, 4.9, 22.4, 7.5, 'concrete_fine', collide=False, omit='t')
@@ -282,7 +282,7 @@ for n, (cx, north) in enumerate(((-9.3, True), (-6.4, True), (-9.3, False), (-6.
     box(cx - 0.6, yb - 0.3, 2.97, cx + 0.6, yb + 0.3, 3.0, 'light_panel', collide=False)
 box(-10.676, 4.85, 0.98, -10.64, 7.35, 2.36, 'panel_dark', collide=False); box(-10.641, 4.95, 1.06, -10.625, 7.25, 2.28, 'screen', collide=False)          # the day's schedule, on the west wall at the end of the aisle
 SIGNS.append({'text': 'SCHEDULE', 'at': [-10.624, 6.1, 1.67], 'face': 'E', 'w': 2.3, 'h': 1.22, 'style': 'schedule'})
-STATIONS['schedule'] = {'at': [-8.0, 6.6], 'look': [-10.62, 6.6, 1.6], 'label': 'Today\'s schedule'}      # far enough back for the whole board, and half a metre to its right so the board sits clear of the panel
+STATIONS['schedule'] = {'at': [-8.0, 6.6], 'look': [-10.62, 6.6, 1.6], 'label': 'Today\'s schedule'}      # far enough back for the whole board, and half a meter to its right so the board sits clear of the panel
 box(-7.9, 5.8, 2.97, -6.7, 6.4, 3.0, 'light_panel', collide=False)
 box(-4.94, 3.62, 0.04, -4.985, 5.26, 2.38, 'steel', collide=False); box(-4.99, 3.8, 1.0, -4.935, 5.08, 2.2, 'panel_dark', collide=False); box(-4.94, 3.5, 2.4, -5.04, 7.0, 2.56, 'panel_dark', collide=False)         # sliding door, open along the wall
 box(-5.045, 6.0, 2.47, -5.04, 6.04, 2.49, 'glow_green', collide=False)
@@ -310,7 +310,7 @@ ROOMS['or'] = [4.9, 11.5, 12.0, 19.6, 3.0, 'vinyl', 0.6]
 box(4.9, 11.1, -0.3, 12.4, 20.0, 0.0, 'or_floor', collide=False, omit='b'); box(4.9, 11.1, 3.0, 12.4, 20.0, 3.4, 'or_ceiling', collide=False, omit='t')
 wall_x(11.1, 4.9, 12.4, 3.0, 'plaster'); wall_x(19.6, 4.9, 12.4, 3.0, 'plaster'); wall_y(12.0, 11.1, 20.0, 3.0, 'plaster')
 lining('x', 11.5, 4.9, 12.0, 1); lining('x', 19.6, 4.9, 12.0, -1, m='panel_deep'); lining('y', 12.0, 11.5, 19.6, -1); lining('y', 4.9, 11.5, 19.6, 1, openings=[(13.2, 14.9, 0.0, 2.4), (15.8, 19.2, 0.95, 2.3)])
-OC = (8.6, 15.6)                                                                                     # the table's centre, and the canopy's
+OC = (8.6, 15.6)                                                                                     # the table's center, and the canopy's
 box(OC[0] - 1.62, OC[1] - 1.62, 2.9, OC[0] + 1.62, OC[1] + 1.62, 3.0, 'steel', collide=False, omit='t'); box(OC[0] - 1.56, OC[1] - 1.56, 2.893, OC[0] + 1.56, OC[1] + 1.56, 2.9, 'glow_white', collide=False, omit='t')        # the canopy: a ring of light round a field of diffusers
 box(OC[0] - 1.42, OC[1] - 1.42, 2.885, OC[0] + 1.42, OC[1] + 1.42, 2.894, 'canopy', collide=False, omit='t')
 for i in range(1, 4):
@@ -365,7 +365,7 @@ slider(5.4, 21.95, 23.45, 1, 21.2); counter(11.22, 20.25, 11.88, 22.45, -1)
 ENDO_LIGHTS = ((7.0, 21.5), (10.2, 21.5), (7.0, 24.9), (10.2, 24.9), (8.6, 23.2))
 for (cx, cy) in ENDO_LIGHTS: box(cx - 0.6, cy - 0.3, 2.97, cx + 0.6, cy + 0.3, 3.0, 'light_panel', collide=False)
 STATIONS['endo'] = {'at': [6.5, 21.2], 'look': [8.6, 23.2, 0.9], 'label': 'Endoscopy suite', 'table': [8.6, 23.2]}
-# --- LABOUR ROOM: x -11.9..-5.4, y 20..26.4, 3 m. A warmer room: timber floor, an oak head wall on the north side, a window to a walled garden on the west.
+# --- LABOR ROOM: x -11.9..-5.4, y 20..26.4, 3 m. A warmer room: timber floor, an oak head wall on the north side, a window to a walled garden on the west.
 ROOMS['labor'] = [-11.9, 20.0, -5.4, 26.4, 3.0, 'timber', 0.8]
 box(-12.3, 19.6, -0.3, -4.9, 26.8, 0.0, 'oak_floor', collide=False, omit='b'); box(-12.3, 19.6, 3.0, -4.9, 26.8, 3.4, 'ceiling', collide=False, omit='t')
 wall_x(19.6, -12.3, -4.9, 3.0, 'plaster_warm'); wall_x(26.4, -12.3, -5.0, 3.0, 'plaster_warm'); wall_y(-12.3, 19.6, 26.8, 3.0, 'plaster_warm', openings=[(21.4, 24.4, 2.5, 0.9, 'window')]); wall_y(-5.4, 20.0, 22.4, 3.0, 'plaster_warm', t=0.5, openings=[(20.5, 21.9, 2.4, 0, 'door')])
@@ -377,8 +377,9 @@ box(-9.5, 26.27, 2.02, -8.3, 26.35, 2.07, 'steel', collide=False); box(-9.46, 26
 slider(-5.4, 21.95, 23.45, -1, 21.2); counter(-6.1, 23.7, -5.44, 25.9, -1)
 LABOR_LIGHTS = ((-8.9, 24.6), (-6.9, 21.6), (-10.4, 21.6), (-8.9, 22.6))
 for (cx, cy) in LABOR_LIGHTS: box(cx - 0.6, cy - 0.3, 2.97, cx + 0.6, cy + 0.3, 3.0, 'light_panel', collide=False)
-STATIONS['labor'] = {'at': [-6.6, 21.2], 'look': [-8.9, 24.6, 0.9], 'label': 'Labour room', 'table': [-8.9, 24.95]}
-PROPS += [('modern_arm_chair_01', -11.2, 25.3, 0.0, 0.9, 1.0), ('side_table_01', -11.3, 24.4, 0.0, 0.0, 1.0)]; COLLIDERS += [[-11.65, 24.85, -10.75, 25.75, 0, 0.8], [-11.55, 24.15, -11.05, 24.65, 0, 0.55]]
+STATIONS['labor'] = {'at': [-6.6, 21.2], 'look': [-8.9, 24.6, 0.9], 'label': 'Labor room', 'table': [-8.9, 24.95]}
+PROPS += [('modern_arm_chair_01', -11.2, 25.3, 0.0, math.pi / 2, 1.0),      # square to the west wall, facing the bed: its box collider then fits it (a turned chair left floor closed round its corners)
+           ('side_table_01', -11.3, 24.4, 0.0, 0.0, 1.0)]; COLLIDERS += [[-11.65, 24.85, -10.75, 25.75, 0, 0.8], [-11.55, 24.15, -11.05, 24.65, 0, 0.55]]
 # --- PROCEDURE ROOM: x 4.9..9.0, y -3.6..2.4, 3 m. South of the studio, behind the forecourt wall; entered from the foot of the court.
 ROOMS['procedure'] = [4.9, -3.6, 9.0, 2.4, 3.0, 'vinyl', 0.66]
 box(4.5, -4.0, -0.3, 9.4, 2.4, 0.0, 'clinical_floor', collide=False, omit='b'); box(4.5, -4.0, 3.0, 9.4, 2.4, 3.4, 'ceiling', collide=False, omit='t')
@@ -521,7 +522,7 @@ print('lightmap mean %.3f p50 %.3f p99 %.2f p99.9 %.2f max %.1f' % (float(px.mea
 for m in me.materials: m.node_tree.nodes.remove(m.node_tree.nodes['BAKE'])
 
 # ------------------------------------------------------------------ bake 2: light probes for things that move (people, specimens, furniture)
-# A probe is a 3 cm white sphere; its baked shading, as a function of the surface normal, is fitted with nine terms per colour.
+# A probe is a 3 cm white sphere; its baked shading, as a function of the surface normal, is fitted with nine terms per color.
 def inside(x, y, z, pad=0.25): return any(c[0] - pad < x < c[2] + pad and c[1] - pad < y < c[3] + pad and c[4] - 0.05 < z < c[5] + pad for c in COLLIDERS)
 PTS = []
 for k, (x0, y0, x1, y1, h, floor, expo) in ROOMS.items():
