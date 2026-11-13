@@ -4,7 +4,7 @@
    What it is: a functional check that the equipment loads and stands where it should, that the rooms can be entered and
    used, that solid things are solid, that with no patient in the room the monitors say STANDBY and show no trace, and that
    the ultrasound says on its own face that it is not a scan. Running a case is tools/periop_check.py.
-   What it is not: a judgement of how the rooms look (the visual review), of frame rate (tools/perf_check.py, in a visible
+   What it is not: a judgment of how the rooms look (the visual review), of frame rate (tools/perf_check.py, in a visible
    browser), of real devices, or of clinical content: nothing is taught or scored from this equipment.
    Page internals are read to confirm results, never to perform an action, except where a line says "test setup"."""
 import sys, asyncio, json, glob, os, shutil

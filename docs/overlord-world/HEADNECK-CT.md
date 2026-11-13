@@ -26,9 +26,9 @@ Attribution that must be displayed wherever the assets are shown or redistribute
 
 Using it in the browser:
 
-- Frame: metres, right-handed, **X = patient LEFT, Y = SUPERIOR, Z = ANTERIOR**. `X = 0` is the patient's mid-sagittal
-  plane; the slice volume is centred on the origin in Y and Z.
-- Voxel centre `(i, j, k)` → frame: `x = -0.0015·i + 0.071951`, `y = 0.0015·k - 0.138000`, `z = 0.0015·j - 0.113254`
+- Frame: meters, right-handed, **X = patient LEFT, Y = SUPERIOR, Z = ANTERIOR**. `X = 0` is the patient's mid-sagittal
+  plane; the slice volume is centered on the origin in Y and Z.
+- Voxel center `(i, j, k)` → frame: `x = -0.0015·i + 0.071951`, `y = 0.0015·k - 0.138000`, `z = 0.0015·j - 0.113254`
   (the same numbers are `grid.voxel_to_frame` in `volume.json`). `i` runs towards patient right, `j` anterior, `k` superior.
 - Atlas pixel of voxel `(i, j, k)`: `px = (k mod 16)·98 + i`, `py = floor(k / 16)·152 + j`, counted from the image's top-left.
   Slice `k = 0` is the lowest. Sample with nearest filtering for labels.
@@ -153,7 +153,7 @@ Inspected and rejected (header data for all, images for those marked *):
 | Zenodo s1071, s0870 * | CC BY 4.0 | dental streak artefact through the oropharynx (heavy in s0870); s0870 ends at the thoracic inlet |
 | Zenodo s0642 * | CC BY 4.0 | no contrast; starts at C2 |
 | Zenodo s0263, s0453, s0504 * | CC BY 4.0 | bone-kernel noise; s0504 only 122 mm wide |
-| Zenodo s0259, s0744 and eight "chest-neck" scans (s0847, s0890, s0897, s0898, s0914, s0941, s0999, s1067) * | CC BY 4.0 | partial neck (s0259), head only (s0744), chest-centred series |
+| Zenodo s0259, s0744 and eight "chest-neck" scans (s0847, s0890, s0897, s0898, s0914, s0941, s0999, s1067) * | CC BY 4.0 | partial neck (s0259), head only (s0744), chest-centered series |
 
 No candidate combined a redistributable licence, sub-millimetre resolution, full coverage and a normal neck. s0527 has the
 licence, a publisher-blurred face, coverage from above the orbits to the carina, contrast (arterial-late), an open airway,
@@ -352,8 +352,8 @@ Same text as `review.note` in `structures.json`. "Published voxel" means the sca
 - `levator_scapulae_right` (accepted): Upper and middle part; ends inside the scan without touching the border. The scapular insertion is outside the scan.
 - `prevertebral_left` (accepted): Longus colli and capitis as one strap on the front of the vertebral column from the skull base to the T2-T3 level.
 - `prevertebral_right` (accepted): Longus colli and capitis as one strap on the front of the vertebral column from the skull base to the T2-T3 level.
-- `sterno_thyroid_left` (accepted): Strap 3-3.6 mm thick (2 published voxels) with almost no HU contrast to its neighbours; probably includes the sternohyoid. Position between sternum and thyroid cartilage is plausible. Lowest confidence of the exported set.
-- `sterno_thyroid_right` (corrected): Strap 3-3.6 mm thick (2 published voxels) with almost no HU contrast to its neighbours; probably includes the sternohyoid. Lowest confidence of the exported set. 446 voxels overlapping the thyroid gland removed.
+- `sterno_thyroid_left` (accepted): Strap 3-3.6 mm thick (2 published voxels) with almost no HU contrast to its neighbors; probably includes the sternohyoid. Position between sternum and thyroid cartilage is plausible. Lowest confidence of the exported set.
+- `sterno_thyroid_right` (corrected): Strap 3-3.6 mm thick (2 published voxels) with almost no HU contrast to its neighbors; probably includes the sternohyoid. Lowest confidence of the exported set. 446 voxels overlapping the thyroid gland removed.
 - `masseter_left` (corrected): Zygomatic arch to mandibular angle; small overlaps with mandible (119 voxels) and skull (168) removed. Its superficial surface lies next to the publisher-blurred cheek zone, so that border is less certain.
 - `masseter_right` (corrected): Zygomatic arch to mandibular angle; small overlaps with mandible (295 voxels) and skull (179) removed. Its superficial surface lies next to the publisher-blurred cheek zone, so that border is less certain.
 - `medial_pterygoid_left` (corrected): Medial to the mandibular ramus; small overlaps with mandible (7 voxels) and skull (95) removed.
@@ -397,7 +397,7 @@ most 1.13 % (lower teeth).
   Round-trip error inside the soft-tissue range is at most 1.0 HU.
 - **Labels:** the corrected 0.75 mm label map reduced 2 × 2 × 2: a voxel takes the most frequent structure id among its
   eight sub-voxels if at least four carry it. This makes label volumes up to 8 % larger than the masks (hard palate 19 %).
-- **Files:** two 1568 × 1824 px PNGs, 8-bit greyscale, no alpha, no colour profile, only IHDR, IDAT and IEND chunks.
+- **Files:** two 1568 × 1824 px PNGs, 8-bit greyscale, no alpha, no color profile, only IHDR, IDAT and IEND chunks.
   Decoding them reproduces the source arrays exactly.
 - **Defacing.** The publisher had already blurred the face. In addition, from the chin upward (slices 117 to 184),
   61,312 voxels (207 mL) were set to air: (1) all soft tissue more than 3 mm in front of the facial skeleton (lips, nose,
@@ -412,12 +412,12 @@ most 1.13 % (lower teeth).
 
 The published NIfTI has an oblique sform: voxel axes are rotated 1.51° against its world axes. The working patient
 frame **G** was therefore defined along the image's own axes (i → right, j → anterior, k → superior, 1.5 mm steps). G is
-the published world frame rotated rigidly by 1.51° about the volume centre; the rotation matrix and pivot are in
+the published world frame rotated rigidly by 1.51° about the volume center; the rotation matrix and pivot are in
 `volume.json` (`frame.G_to_published_world`), residual of the rigid model 0.03 mm at the volume corners. No voxel was
 resampled for this. The benefit is that slices are exactly axis-aligned in the browser frame.
 
 Browser frame: `x = −(R − 5.12)/1000`, `y = (S − 164.59)/1000`, `z = (A − 170.84)/1000` with R, A, S in mm in frame G.
-R0 = 5.12 mm is the mean R of the spinal-canal and trachea centroids; A0 and S0 are the centre of the exported volume.
+R0 = 5.12 mm is the mean R of the spinal-canal and trachea centroids; A0 and S0 are the center of the exported volume.
 
 Checks on the final files, re-read from disk:
 
@@ -429,7 +429,7 @@ Checks on the final files, re-read from disk:
 | Left and right | sign of X for the 34 sided structures | **34 of 34 correct** (table below) |
 | Orientation without using side labels | unpaired asymmetric anatomy | aortic arch +16.9 mm (left), superior vena cava −19.0 mm (right) |
 | NIfTI orientation codes | published file | R, A, S; rotation is proper (determinant +1, no flip) |
-| Slices against meshes, shipped files only | each mesh vertex mapped through the inverse of `voxel_to_frame`; does its voxel or a neighbour carry that structure's label? | mean 99.8 %, lowest 96.9 % (skull). With X mirrored, sided structures drop to 0.8 % on average |
+| Slices against meshes, shipped files only | each mesh vertex mapped through the inverse of `voxel_to_frame`; does its voxel or a neighbor carry that structure's label? | mean 99.8 %, lowest 96.9 % (skull). With X mirrored, sided structures drop to 0.8 % on average |
 | Label centroid against mesh centroid | label volume through `voxel_to_frame` | max 0.90 mm (right common carotid), mean 0.19 mm; limit 1.5 mm |
 | glTF validity | Khronos glTF-Validator 2.0.0-dev.3.10 | 0 errors, 0 warnings |
 | Loads in the browser stack | three.js r170 GLTFLoader + DRACOLoader, through the dev server already running on 127.0.0.1:8091 | 68 meshes, 379,976 triangles, all world matrices identity, node `userData` present on all 68, 45 to 89 ms; atlas pixels read back with the expected label ids |

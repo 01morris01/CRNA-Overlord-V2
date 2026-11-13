@@ -10,7 +10,7 @@ import { getSession, getUserSaveKey } from '../../core/auth.js';
 const VERSION = 3;   // 3: the institute. The island's plot and blocks are retired; what was earned there is kept.
 const fresh = () => ({
   v: VERSION, createdAt: Date.now(), lastSeen: null, visits: 0,
-  character: null,                                   // { name, person, colour }
+  character: null,                                   // { name, person, colour }  (saved key: kept as written so existing saves load)
   game: { pos: null, prefs: null, rewards: [], collection: [], cases: {}, notes: {}, best: {}, progress: {}, lessonDone: false, filmDone: false },
   learning: { objectives: {}, attempts: [], due: [] },
 });

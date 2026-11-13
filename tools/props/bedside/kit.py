@@ -1,6 +1,6 @@
-"""kit.py: the small modelling library the bedside props are built with (Blender 5.1, run headless).
+"""kit.py: the small modeling library the bedside props are built with (Blender 5.1, run headless).
 
-Everything here is authored directly in the coordinates the browser uses: metres, +Y up, and exported with Blender's
+Everything here is authored directly in the coordinates the browser uses: meters, +Y up, and exported with Blender's
 axis conversion switched off, so a number written in a build script is the number three.js sees.
 
 What it gives the build scripts:
@@ -24,7 +24,7 @@ def reset():
         for x in list(b): b.remove(x)
 
 # ---------------------------------------------------------------------------------------------- materials
-# name: (base colour, roughness, metallic, alpha)
+# name: (base color, roughness, metallic, alpha)
 PALETTE = {
     'plastic_white':   ((0.84, 0.85, 0.85), 0.42, 0.0, 1.0),
     'plastic_ivory':   ((0.80, 0.78, 0.72), 0.45, 0.0, 1.0),
@@ -197,7 +197,7 @@ def slab(w, d, h, r=0.002, corner_segs=5, bevel=0.0006, bevel_segs=2):
         for j in range(n): bm.faces.new((rings[i][j], rings[i][(j + 1) % n], rings[i + 1][(j + 1) % n], rings[i + 1][j]))
     bm.faces.new(rings[-1]); bm.faces.new(rings[0][::-1]); bm.normal_update(); return bm
 def rrect(w, d, r, n=5):
-    """Counter-clockwise outline of a rounded rectangle centred on the origin."""
+    """Counter-clockwise outline of a rounded rectangle centered on the origin."""
     r = min(r, w / 2 - 1e-6, d / 2 - 1e-6); out = []
     for cx, cy, a in ((w / 2 - r, d / 2 - r, 0), (-w / 2 + r, d / 2 - r, 90), (-w / 2 + r, -d / 2 + r, 180), (w / 2 - r, -d / 2 + r, 270)):
         for k in range(n + 1): t = math.radians(a + 90 * k / n); out.append((cx + r * math.cos(t), cy + r * math.sin(t)))

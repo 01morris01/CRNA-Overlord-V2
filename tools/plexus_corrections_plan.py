@@ -95,7 +95,7 @@ def along(P, n=60):
 AC, AS = along(ART, 200)
 def cord(node, tgt, length=40.0):
     """From its junction, a cord settles into its named position beside the axillary artery within the first third
-    of its length and keeps it. tgt = offset from the artery's centre line (x: -lateral/+medial, y: up, z: +anterior)."""
+    of its length and keeps it. tgt = offset from the artery's center line (x: -lateral/+medial, y: up, z: +anterior)."""
     i0 = int(np.argmin(np.linalg.norm(AC - node, axis=1))); o0 = node - AC[i0]; out = [node]
     for d in (0.33, 0.66, 1.0):
         i = int(np.argmin(abs(AS - (AS[i0] + length * d)))); w = min(1.0, d / 0.33); out.append(AC[i] + o0 * (1 - w) + np.array(tgt) * w)

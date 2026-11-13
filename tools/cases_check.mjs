@@ -2,7 +2,7 @@
 //     node tools/cases_check.mjs
 // It takes scheduled patients through whole anesthetics by calling exactly what the room's buttons call, and checks that the
 // engine responds, that the record against the program's rubrics is what the actions deserve, and that a clinically wrong
-// action is not rewarded. It checks behaviour of the wiring. It does not check that the engine's physiology is right.
+// action is not rewarded. It checks behavior of the wiring. It does not check that the engine's physiology is right.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 const ROOT = new URL('../', import.meta.url); let pass = 0, n = 0;
@@ -82,10 +82,10 @@ const all = (C, ids) => ids.map((id) => C.act(id));
 // ---- hands: syringes pushed in parts, drugs that are only recorded, drugs that are refused, guarded machine values, the bag and its valve
 { const { buildShelf } = await import(new URL('world/js/cases.js', ROOT)), e = P('p51');
   const SHELF = { drugs: [{ name: 'Propofol', tier: 'modelled', cls: 'induction', unit: 'mg', syringe: { ml: 20, mgPerMl: 10 } }, { name: 'Ondansetron', tier: 'recorded', cls: 'other', unit: 'mg', syringe: { ml: 3, mgPerMl: 2 }, reason: 'it has no effect a monitor would show during the case' },
-    { name: 'Hydromorphone', tier: 'refused', reason: 'its effect on breathing is not modelled' }, { name: 'Remifentanil', tier: 'modelled', syringe: { ml: 20, mgPerMl: 0.05 } }] };
+    { name: 'Hydromorphone', tier: 'refused', reason: 'its effect on breathing is not modeled' }, { name: 'Remifentanil', tier: 'modelled', syringe: { ml: 20, mgPerMl: 0.05 } }] };
   const setup = async () => { const C = await createCase(e, { fetchImpl }); C.shelf = buildShelf(SHELF); all(C, ['ppe', 'timeout', 'spo2', 'nibp', 'ecg', 'baseline', 'preox']); wait(C, 60); return C; };
   const C = await setup(), twin = await setup();
-  ok('a drug whose effect the engine cannot show is refused at the draw-up, with the reason', C.draw('Hydromorphone', 1, 'mg').ok === false && /breathing is not modelled/.test(C.lastSay), C.lastSay);
+  ok('a drug whose effect the engine cannot show is refused at the draw-up, with the reason', C.draw('Hydromorphone', 1, 'mg').ok === false && /breathing is not modeled/.test(C.lastSay), C.lastSay);
   ok('the formulary file cannot promote a drug: one the engine has no handler for stays refused', C.shelf.get('Remifentanil').tier === 'refused' && C.draw('Remifentanil', 50, 'mcg').ok === false && C.shelf.get('Propofol').tier === 'modelled' && C.shelf.get('Rocuronium').tier === 'modelled');
   const d = C.draw('Propofol', 140, 'mg'), dt = twin.draw('Propofol', 140, 'mg'); ok('the syringe carries its concentration and volume, in the smallest syringe that holds it', d.ok && d.syringe.mgPerMl === 10 && Math.abs(d.syringe.volMl - 14) < 1e-9 && d.syringe.syringeMl === 20, d.say);
   for (let i = 0; i < 4; i++) { const r = C.push(d.syringe.id, 35); if (!r.ok) ok('a part push is accepted', false, JSON.stringify(r)); wait(C, 5); } twin.give(dt.syringe.id); wait(twin, 20); wait(C, 280); wait(twin, 280);
@@ -94,7 +94,7 @@ const all = (C, ids) => ids.map((id) => C.act(id));
   const d2 = C.draw('Propofol', 50, 'mg'), part = C.push(d2.syringe.id, 20), ce1 = C.runner.snapshot().propofolCe; const junk = [C.push(d2.syringe.id, NaN), C.push(d2.syringe.id, -10), C.push(d2.syringe.id, 'lots'), C.push('nope', 5)]; const over = C.push(d2.syringe.id, 500), none = C.push(d2.syringe.id, 5); wait(C, 1);
   ok('a syringe stopped part-way is recorded as part given; nonsense amounts give nothing; more than is left gives what is left; an empty one gives nothing', part.ok && Math.abs(part.left - 30) < 1e-9 && junk.every((q) => !q.ok) && over.ok && Math.abs(over.mg - 30) < 1e-9 && over.done && !none.ok && Number.isFinite(C.runner.snapshot().propofolCe) && Number.isFinite(ce1), JSON.stringify([part.left, over.mg, none.ok]));
   const logN = C.runner.log.filter((q) => q.kind === 'Drug').length, undoN = C.runner.undoableDoses().length, o = C.draw('Ondansetron', 4, 'mg'), go = C.give(o.syringe.id), rec = C.given.at(-1);
-  ok('a recorded-only drug is drawn up, given, timed and written down, and the engine is not told it happened', o.ok && go.ok && /not modelled/.test(go.say) && rec.drug === 'Ondansetron' && rec.tier === 'recorded' && Math.abs(rec.totalMg - 4) < 1e-9 && C.runner.log.filter((q) => q.kind === 'Drug').length === logN && C.runner.undoableDoses().length === undoN && C.runner.log.some((q) => q.kind === 'Drug, recorded only' && /Ondansetron/.test(q.detail)) && /recorded only/.test(C.debrief().drugs.at(-1).label), go.say);
+  ok('a recorded-only drug is drawn up, given, timed and written down, and the engine is not told it happened', o.ok && go.ok && /not modeled/.test(go.say) && rec.drug === 'Ondansetron' && rec.tier === 'recorded' && Math.abs(rec.totalMg - 4) < 1e-9 && C.runner.log.filter((q) => q.kind === 'Drug').length === logN && C.runner.undoableDoses().length === undoN && C.runner.log.some((q) => q.kind === 'Drug, recorded only' && /Ondansetron/.test(q.detail)) && /recorded only/.test(C.debrief().drugs.at(-1).label), go.say);
   // the machine
   const v0 = C.runner.snapshot(), ps = C.vent({ mode: 3 }); ok('pressure support is refused: the engine\'s version ignores the patient\'s own breathing', ps.ok === false && C.runner.snapshot().ventMode === v0.ventMode, ps.say);
   C.vent({ mode: 1, setRespiratoryRate: -5, setTidalVolume: 'abc', banana: 3, setPeep: 99, o2FlowLPerMin: 400 }); const v1 = C.runner.snapshot();

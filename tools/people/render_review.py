@@ -7,9 +7,9 @@ Options:
    --size 640                 height of one picture in pixels
    --samples 96               Cycles samples
    --label                    write the file name under each row
-   --flat                     light from everywhere and no lamps, as in the browser's room (shows what is baked into the colours)
+   --flat                     light from everywhere and no lamps, as in the browser's room (shows what is baked into the colors)
 What is rendered is the file the browser will load (it is imported, not rebuilt), so this shows the delivered result.
-The light is a large soft key above and to one side, a weaker fill from the other side, and a neutral grey room."""
+The light is a large soft key above and to one side, a weaker fill from the other side, and a neutral gray room."""
 import bpy, os, sys, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
@@ -97,9 +97,9 @@ def render_one(path, tmp):
             tgt = eye + Vector((0, -0.035 * f, 0)); loc = tgt + Vector((0.05, 0.03, 0.40)) * max(f, 0.6); cam.lens = 58; up = Y
         elif v == 'three':
             tgt = eye + Vector((0, -0.035 * f, -0.02)); loc = tgt + Vector((0.30, -0.02, 0.27)) * max(f, 0.6); cam.lens = 58; up = Y
-        elif v == 'crown':                                 # where the anaesthetist stands: behind the head, looking down the body
+        elif v == 'crown':                                 # where the anesthetist stands: behind the head, looking down the body
             tgt = eye + Vector((0, -0.06 * f, -0.02)); loc = tgt + Vector((0.0, 0.42, 0.26)) * max(f, 0.6); cam.lens = 50; up = Z
-        elif v == 'room':                                  # the room's held camera: above the chest, under a metre from the face, looking toward the head
+        elif v == 'room':                                  # the room's held camera: above the chest, under a meter from the face, looking toward the head
             tgt = eye + Vector((0, -0.05 * f, 0.0)); loc = tgt + Vector((0.0, -0.42, 0.62)) * max(f, 0.6); cam.lens = 45; up = Y
         elif v == 'bedside':                               # standing beside the bed at about 1.5 m
             tgt = eye + Vector((0, -0.25 * f, -0.05)); loc = tgt + Vector((1.05, -0.35, 1.0)); cam.lens = 55; up = Z

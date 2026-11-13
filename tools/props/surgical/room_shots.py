@@ -6,7 +6,7 @@
    layout file given) and for each file listed calls world.loadModel + world.place in the page, exactly as room code would. Nothing
    in the repository is changed: the props live only in that browser page.
 
-   Frame used for every placement: the operating table's own. Origin on the floor under the table centre (__ov.periop.table),
+   Frame used for every placement: the operating table's own. Origin on the floor under the table center (__ov.periop.table),
    +x the patient's left, -z the patient's head, y up. A layout row is { file, at: [x, y, z], ry: degrees about y }.
 
    This takes pictures. It checks only that every file loaded, how many triangles the page counted, and that the named nodes exist."""

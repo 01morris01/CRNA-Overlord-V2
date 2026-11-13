@@ -27,7 +27,7 @@ export function mountHands({ world, sound = null, layer }) {
 
   // ------------------------------------------------------------------ registering
   /** Add a thing. Returns it. `obj` is what you see (and, unless `hit` is given, what the pointer must be over); a small or thin
-   *  thing should give `pad` (metres) so that it can be caught without a surgeon's aim. */
+   *  thing should give `pad` (meters) so that it can be caught without a surgeon's aim. */
   function add(t) {
     if (things.has(t.id)) remove(t.id);
     const th = { kind: 'press', group: 'room', reach: 1.5, pad: 0, when: () => true, ...t };

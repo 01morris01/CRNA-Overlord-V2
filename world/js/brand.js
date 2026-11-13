@@ -30,14 +30,14 @@ export function patchSVG({ field = TOKENS.charcoal, ink = TOKENS.paper, accent =
 }
 const img = (svg) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
 function tex(canvas, srgb = true) { const t = new THREE.CanvasTexture(canvas); t.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace; t.anisotropy = 8; t.generateMipmaps = true; t.minFilter = THREE.LinearMipmapLinearFilter; return t; }
-/** Words engraved on a brass plate: dark, slightly soft, over nothing (the plate itself is modelled). */
+/** Words engraved on a brass plate: dark, slightly soft, over nothing (the plate itself is modeled). */
 export async function plateTexture(text, w, h, { px = 1024, color = 'rgba(20,14,6,.9)' } = {}) {
   await document.fonts.load('500 40px "Inter Tight"').catch(() => {}); const c = document.createElement('canvas'); c.width = px; c.height = Math.max(32, Math.round(px * h / w)); const g = c.getContext('2d'), H = c.height;
   const fs = Math.min(H * 0.5, px / (text.length * 0.78)); g.font = `500 ${fs}px "Inter Tight", system-ui, sans-serif`; g.fillStyle = color; g.textBaseline = 'middle'; if ('letterSpacing' in g) g.letterSpacing = (fs * 0.2) + 'px';
   const tw = g.measureText(text).width; g.fillText(text, (px - tw) / 2 + fs * 0.1, H * 0.5); g.fillRect(H * 0.3, H * 0.86, px - H * 0.6, Math.max(1, H * 0.018));
   return tex(c);
 }
-/** The wordmark as raised brass letters for the façade: colour map with alpha. */
+/** The wordmark as raised brass letters for the façade: color map with alpha. */
 export async function wordmarkTexture(px = 2048) { const svg = wordmarkSVG({ ink: '#ffffff', accent: '#ffffff', weight: 3.1 }), i = await img(svg), c = document.createElement('canvas'); c.width = px; c.height = Math.round(px * 64 / 342); c.getContext('2d').drawImage(i, 0, 0, c.width, c.height); return tex(c); }
 /** Any drawing made by a function, as a texture (signs, the lightbox, the case rail). */
 export function drawTexture(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); return tex(c); }

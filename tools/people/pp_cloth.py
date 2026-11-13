@@ -1,5 +1,5 @@
 """pp_cloth.py: the gown and the sheet for a person who is already lying down. Used by make_person.py.
-Frame: X = the patient's left, Y = toward the head, Z = up from the table, metres.
+Frame: X = the patient's left, Y = toward the head, Z = up from the table, meters.
 The sheet is made the way tools/build_patient.py made the first patient's, only finer: look straight down at the body
 to get the height of its top surface everywhere (rays against the mesh), then let a cloth settle on that height map. A
 cloth cannot sink into what is under it and otherwise evens itself out, so it bridges small hollows and sags between
@@ -71,7 +71,7 @@ def settle(floor, mask, outside, reach_y, reach_x):
 
 
 def signed_distance(grid, mask, smooth_px=1.5):
-    """Distance to the outline of a region, negative inside, in metres, smoothed so the outline has no pixel steps."""
+    """Distance to the outline of a region, negative inside, in meters, smoothed so the outline has no pixel steps."""
     d = ndi.distance_transform_edt(~mask) - ndi.distance_transform_edt(mask)
     d = np.where(d > 0, d - 0.5, d + 0.5) * grid.cell
     return ndi.gaussian_filter(d, smooth_px)
@@ -157,7 +157,7 @@ def add_hem(V, faces, grid, sdf, depth, above, body=None):
 
 
 def wrinkles(grid, seed, amount, along=1.0):
-    """Small unevenness for a cloth: long soft folds along the body plus finer crumple. Returns metres, zero mean."""
+    """Small unevenness for a cloth: long soft folds along the body plus finer crumple. Returns meters, zero mean."""
     rng = np.random.default_rng(seed)
     out = np.zeros((grid.ny, grid.nx))
     for sx, sy, w in ((0.012, 0.07 * along, 1.0), (0.03, 0.03, 0.7), (0.008, 0.012, 0.35)):

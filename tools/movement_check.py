@@ -5,7 +5,7 @@
 Three kinds of evidence, kept apart in the report:
 
   1. WHAT STOPS YOU IS WHAT YOU SEE.  The page is asked two independent questions about each clinical room and the answers are compared.
-     One is the walking code's own: "may my centre be here?" on a 2 cm grid. The other never touches the walking code: the renderer draws the
+     One is the walking code's own: "may my center be here?" on a 2 cm grid. The other never touches the walking code: the renderer draws the
      room from straight above, cut to a slab at body height, with every material replaced by flat white, so a white pixel is something you
      can see there. A place you cannot stand that is further than your own width from anything visible is an invisible or oversized
      collider; a place you can stand inside something visible at body height is a thing you walk through.
@@ -62,7 +62,7 @@ def ang(a): return math.atan2(math.sin(a), math.cos(a))
 def to_grid(d): return np.frombuffer(d["s"].encode(), dtype=np.uint8).reshape(d["nz"], d["nx"]) == 49
 
 def plan(free, clear, st, a, b, x0, z0):
-    """The way from a to b over the free cells, keeping to the middle where there is a middle. Returns points in metres, or None."""
+    """The way from a to b over the free cells, keeping to the middle where there is a middle. Returns points in meters, or None."""
     nz, nx = free.shape; cell = lambda p: (min(nz - 1, max(0, int((p[1] - z0) / st))), min(nx - 1, max(0, int((p[0] - x0) / st))))
     def snap(c):
         if free[c]: return c
@@ -206,7 +206,7 @@ with sync_playwright() as p:
     PLACES = {"head of the bed": (T[0], T[2] - 1.26), "front of the anesthesia machine": (M["front"][0], M["front"][2]), "patient's right side": (T[0] - 0.82, T[2] - 0.05), "foot of the table": (T[0], T[2] + 1.45), "patient's left side": (T[0] + 0.82, T[2] - 0.05), "the door": (door[0] - 0.5, door[1])}
     def ways(free, px, rect, tag):
         """How wide is the narrowest gap between things on the widest way from the door to each working position?
-        The last half metre at either end is left out: you stand close to the table on purpose."""
+        The last half meter at either end is left out: you stand close to the table on purpose."""
         x0, z0 = rect[0], rect[1]; clear = ndi.distance_transform_edt(free) * px; out = {}
         def patch(q):
             ck, ci = int((q[1] - z0) / px), int((q[0] - x0) / px); rad = int(0.5 / px); kk, ii = np.ogrid[:free.shape[0], :free.shape[1]]; disc = free & ((kk - ck) ** 2 + (ii - ci) ** 2 <= rad * rad)

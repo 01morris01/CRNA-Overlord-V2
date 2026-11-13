@@ -1,6 +1,6 @@
 """pp_body.py: make one MakeHuman person from a patient's numbers, lay it on its back, and hand back plain arrays.
 Used by make_person.py. Everything here is in the add-on's own standing frame until lay_supine():
-   up +Z, the face looks along -Y, the person's left is +X, and one unit is one metre of the add-on's default-size person.
+   up +Z, the face looks along -Y, the person's left is +X, and one unit is one meter of the add-on's default-size person.
 The person is scaled to the chart height only when it is laid down."""
 import bpy, os, math
 import numpy as np
@@ -8,7 +8,7 @@ from mathutils import Matrix, Vector, Quaternion
 from pp_common import (mpfb, USERDATA, mixed_coords, deformed_coords, set_keys, group_weights, rotate_bone, aim_bone, bisect)
 from scipy import ndimage as ndi
 
-BODY_DENSITY = 1010.0       # kg per cubic metre; whole-body average, used to turn mesh volume into weight
+BODY_DENSITY = 1010.0       # kg per cubic meter; whole-body average, used to turn mesh volume into weight
 FACE_UNITS = ('eyeBlinkLeft', 'eyeBlinkRight', 'jawOpen')
 
 ARM_BONES = ['upperarm01', 'upperarm02', 'lowerarm01', 'lowerarm02', 'wrist'] + [f'finger{i}-{j}' for i in range(1, 6) for j in range(1, 4)] + [f'metacarpal{i}' for i in range(1, 5)]

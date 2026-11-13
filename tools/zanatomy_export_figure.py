@@ -2,7 +2,7 @@
    blender -b --disable-autoexec --factory-startup Startup.blend --python tools/zanatomy_export_figure.py -- OBJECTS.json OUT.glb
 Three meshes: `skeleton` (every bone and cartilage of the skeletal system), `nerves` (every nerve curve, as thin tubes) and
 `skin` (the body-surface regions, welded; hair regions left out). OBJECTS.json is the object listing made earlier from the
-same file (name, type, collections). Nothing is edited anatomically; this is a view-only piece and is labelled so."""
+same file (name, type, collections). Nothing is edited anatomically; this is a view-only piece and is labeled so."""
 import bpy, bmesh, json, sys, os
 A = sys.argv[sys.argv.index('--') + 1:]; LIST, OUT = json.load(open(A[0])), A[1]
 suf = lambda n: n.rsplit('.', 1)[-1] if '.' in n else ''

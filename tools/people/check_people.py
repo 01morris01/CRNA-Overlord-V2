@@ -1,7 +1,7 @@
 """check_people.py: open every finished patient file the way a viewer would, and measure it against the contract.
    blender -b --factory-startup --python tools/people/check_people.py -- [REPORT.json]
 Reads assets/people/patients.json and assets/people/patients/<id>.glb (decoding the Draco geometry), and for each file checks:
-  * frame: nothing below the resting surface (y = 0), the head toward -Z, the face up, centred on x = 0, and the top of
+  * frame: nothing below the resting surface (y = 0), the head toward -Z, the face up, centered on x = 0, and the top of
     the head half a body-length from the origin (the origin is under the midpoint of the body's length);
   * names: a mesh `sheet` with a two-sided material `drape`; hair, lash and beard materials named hair...; cut-out alpha
     only on those;
@@ -62,7 +62,7 @@ for pid in ids:
     if not (eyes_c[2] < -0.2 * rec['heightM'] and V['sheet'][:, 2].max() > 0.3 * rec['heightM']): P.append('head is not toward -Z')
     if not (L['nose'][1] > L['earL'][1] + 0.03): P.append('face is not up')
     body_x = 0.5 * (V['body'][:, 0].min() + V['body'][:, 0].max())
-    if abs(body_x) > 0.004 or abs(L['eyeL'][0] + L['eyeR'][0]) > 0.004: P.append(f'not centred on x (head centre {body_x * 1000:.1f} mm)')
+    if abs(body_x) > 0.004 or abs(L['eyeL'][0] + L['eyeR'][0]) > 0.004: P.append(f'not centered on x (head center {body_x * 1000:.1f} mm)')
     head_top = min(V['body'][:, 2].min(), V['hair'][:, 2].min() if 'hair' in V else 9)
     half = rec['lyingLengthM'] / 2
     if abs(-V['body'][:, 2].min() - half) > 0.012: P.append(f'origin not under the midpoint: top of head at z {V["body"][:, 2].min():.3f}, half length {half:.3f}')
@@ -92,7 +92,7 @@ for pid in ids:
         far = np.minimum(np.linalg.norm(V['body'][mv] - L['eyeL'], axis=1), np.linalg.norm(V['body'][mv] - L['eyeR'], axis=1)).max() if mv.any() else 9
         stats['eyesClosed'] = (round(float(d.max()), 4), round(float(far), 3))
         if d.max() < 0.003 or far > 0.10 * max(rec['heightM'] / 1.7, 0.75): P.append(f'eyesClosed moves {d.max() * 1000:.1f} mm, up to {far * 100:.1f} cm from an eye')
-        # closed means closed: the lid surface now passes in front of each eye's centre line, close to the recorded lid landmark
+        # closed means closed: the lid surface now passes in front of each eye's center line, close to the recorded lid landmark
         closed = V['body'] + M['eyesClosed']['body']
         lid_tree = BVHTree.FromPolygons([tuple(v) for v in closed], [tuple(p.vertices) for p in obs['body'].data.polygons])
         for e in ('eyeL', 'eyeR'):

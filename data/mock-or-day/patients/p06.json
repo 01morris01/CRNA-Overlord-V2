@@ -1564,7 +1564,7 @@
    "Pharmacy Note",
    "Outpatient Pharmacy",
    "C-N Outpatient Pharmacy (auto-message)",
-   "E-prescription for potassium iodide (SSKI) 1 g/mL 30 mL received 10/17: product not stocked, prescriber/patient notified by automated call. Prescription not filled; cancelled 10/24 (no response)."
+   "E-prescription for potassium iodide (SSKI) 1 g/mL 30 mL received 10/17: product not stocked, prescriber/patient notified by automated call. Prescription not filled; canceled 10/24 (no response)."
   ],
   [
    "10/22/2026 1930",
@@ -1708,7 +1708,7 @@
   [
    "Potassium iodide (SSKI) 2 drops PO TID",
    "10/17/2026",
-   "Cancelled by pharmacy 10/24 (not filled)"
+   "Canceled by pharmacy 10/24 (not filled)"
   ],
   [
    "NIM endotracheal tube",

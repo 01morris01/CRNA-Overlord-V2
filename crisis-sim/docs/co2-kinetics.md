@@ -1,6 +1,6 @@
 # CO2 kinetics in the simulator engine: investigation and prepared correction
 
-Status: **default behaviour unchanged. A correction is prepared behind a switch and is not enabled anywhere.**
+Status: **default behavior unchanged. A correction is prepared behind a switch and is not enabled anywhere.**
 Engine commit investigated: `bcba0c3` (deployed). Date: 2026-11-10.
 
 Two different claims are made in this document and they must not be confused:
@@ -9,7 +9,7 @@ Two different claims are made in this document and they must not be confused:
 - **Physiological validation**: the rule and its numbers describe a patient well enough to teach from. This document
   does **not** establish that. It states the assumptions so faculty can.
 
-## 1. The reported behaviour, reproduced
+## 1. The reported behavior, reproduced
 
 Whole engine, default 70 kg adult, fentanyl 100 mcg + propofol 140 mg + rocuronium 42 mg at time zero, nobody
 ventilating. PaCO2 every 30 seconds (`test/co2-kinetics.test.js`, "end to end"):
@@ -19,7 +19,7 @@ ventilating. PaCO2 every 30 seconds (`test/co2-kinetics.test.js`, "end to end"):
 | Legacy rule (default) | 41 | 54 | 73 | 98 | 120 | 127 | 129 | 133 | 136 |
 | Prepared correction | 41 | 41 | 42 | 44 | 46 | 48 | 49 | 53 | 56 |
 
-Reference for comparison, from the learner's own textbook: during apnoea PaCO2 rises about 10 mmHg in the first
+Reference for comparison, from the learner's own textbook: during apnea PaCO2 rises about 10 mmHg in the first
 minute and 3.5 mmHg per minute afterwards (Barash, Cullen, and Stoelting's Clinical Anesthesia, 9th ed., section
 "CO2 Exchange under Anesthesia"; page 1131 of the PDF, which has no printed page numbers).
 
@@ -45,7 +45,7 @@ first minute:
 
 | Spontaneous rate | VA (L/min) | Legacy (mmHg/min) | Correction (mmHg/min) |
 |---|---|---|---|
-| 0 (apnoea) | 0.000 | 3.6 | 3.6 |
+| 0 (apnea) | 0.000 | 3.6 | 3.6 |
 | 1.2 | 0.295 | 3.6 | 3.3 |
 | 1.25 | 0.307 | **81.8** | 3.3 |
 | 2 | 0.492 | 81.8 | 3.2 |
@@ -55,9 +55,9 @@ first minute:
 | 12 | 2.952 | 16.8 | 1.1 |
 
 Crossing 0.3 L/min multiplies the rate of rise by about 23 in the first minute (3.6 to 81.8). A patient taking one
-breath in fifty seconds is modelled as accumulating CO2 twenty times faster than a patient taking none.
+breath in fifty seconds is modeled as accumulating CO2 twenty times faster than a patient taking none.
 
-**Units.** Consistent. `0.863 x VCO2 (mL/min) / VA (L/min)` gives mmHg; the apnoea branch is mmHg per second times
+**Units.** Consistent. `0.863 x VCO2 (mL/min) / VA (L/min)` gives mmHg; the apnea branch is mmHg per second times
 seconds. No unit error was found.
 
 **Timestep.** Not the cause. The legacy rule changes by less than 1 mmHg between a 0.02 s and a 0.5 s step over a
@@ -87,10 +87,10 @@ no CO2; in a body that stores CO2, PaCO2 cannot rise faster with some ventilatio
 ### Assumptions, stated so they can be challenged
 
 1. **One well-mixed store.** Real CO2 stores have fast and slow parts. One compartment cannot reproduce the larger
-   rise in the first minute of apnoea (about 10 mmHg per the reference above); it gives 3.6. Neither does the legacy
+   rise in the first minute of apnea (about 10 mmHg per the reference above); it gives 3.6. Neither does the legacy
    rule.
-2. **C is the capacity the legacy apnoea branch already implies.** It was not taken from a physiology reference. It
-   was chosen so apnoea behaves exactly as it does today (3.6 mmHg/min at VCO2 200, against the reference's 3.5).
+2. **C is the capacity the legacy apnea branch already implies.** It was not taken from a physiology reference. It
+   was chosen so apnea behaves exactly as it does today (3.6 mmHg/min at VCO2 200, against the reference's 3.5).
    Whether C should scale with body weight is open.
 3. **Steady state is unchanged**: `0.863 x VCO2 / VA`.
 4. **Consequence, not assumption**: the time to a new steady state is `C x 0.863 / VA` minutes, so it is naturally
@@ -99,12 +99,12 @@ no CO2; in a body that stores CO2, PaCO2 cannot rise faster with some ventilatio
 
 ### What the correction guarantees (tests, all passing)
 
-- Any ventilation raises PaCO2 no faster than apnoea.
-- Apnoea rises at the legacy apnoea rate.
+- Any ventilation raises PaCO2 no faster than apnea.
+- Apnea rises at the legacy apnea rate.
 - No jump across 0.3 L/min.
 - Same steady state as the ventilation equation.
 - Independent of timestep.
-- After induction with no ventilation, PaCO2 stays within what apnoea alone could produce.
+- After induction with no ventilation, PaCO2 stays within what apnea alone could produce.
 
 ### What it does not fix
 
@@ -115,7 +115,7 @@ no CO2; in a body that stores CO2, PaCO2 cannot rise faster with some ventilatio
   3.2 mL/kg/min); that is a calibration decision for faculty and is recorded as an expected-failure test.
 - **Spontaneous tidal volume does not fall with drug depression** in either rule; only the rate does.
 - **Hyperventilation becomes slower** (5 minutes at a rate of 24: legacy 29 mmHg, correction 35 mmHg). Faculty should
-  say whether that is the behaviour they want to teach.
+  say whether that is the behavior they want to teach.
 
 ## 4. Effect on the existing test suite
 
@@ -137,7 +137,7 @@ parity for CO2, re-time malignant hyperthermia, and choose the resting calibrati
 
 ## 5. Tests added
 
-`test/co2-kinetics.test.js` (16 tests). Four use `it.fails`: they state the correct behaviour and are expected to
+`test/co2-kinetics.test.js` (16 tests). Four use `it.fails`: they state the correct behavior and are expected to
 fail under the default rule, so the defect is pinned in the suite and cannot be changed unnoticed.
 
 | Group | What it shows |
@@ -145,5 +145,5 @@ fail under the default rule, so the defect is pinned in the suite and cannot be 
 | Reproduced in isolation (legacy) | The measurement; and two expected failures stating the invariant and the continuity |
 | Prepared correction | Six properties listed above |
 | Timestep | Legacy depends only slightly on the step |
-| Resting balance | Legacy drift measured; correct behaviour stated (expected failure); correction settles where the equation says; open calibration question (expected failure) |
-| End to end | Legacy reproduces the report; correction stays within the apnoeic bound |
+| Resting balance | Legacy drift measured; correct behavior stated (expected failure); correction settles where the equation says; open calibration question (expected failure) |
+| End to end | Legacy reproduces the report; correction stays within the apneic bound |

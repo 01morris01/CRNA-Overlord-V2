@@ -3,7 +3,7 @@
    blender -b --factory-startup --python tools/props/surgical/review.py -- IN.glb OUT_PREFIX [--views three,front,side,top] [--only a,b]
         [--res 1400x1000] [--samples 48] [--close x,y,z,r] [--list] [--az 35] [--el 22] [--dark]
 
-   The file is imported as it will be loaded by the browser (glTF, +Y up, metres), so what is measured here is what ships.
+   The file is imported as it will be loaded by the browser (glTF, +Y up, meters), so what is measured here is what ships.
    Floor: a matt plane at the model's lowest point with fine lines every 10 cm and heavier lines every 50 cm; the heavy lines
    cross at the model's own origin. Light: one soft key, a fill, a rim, and a neutral interior panorama for reflections
    (Blender's bundled "interior" studio light). No bloom, no depth of field.
@@ -50,7 +50,7 @@ def main():
         for q in sorted(bpy.data.objects, key=lambda q: q.name):
             if q.type == 'MESH':
                 p = [q.matrix_world @ Vector(c) for c in q.bound_box]; d = [max(v[i] for v in p) - min(v[i] for v in p) for i in range(3)]; c = [(max(v[i] for v in p) + min(v[i] for v in p)) / 2 for i in range(3)]
-                print('  %-42s parent %-28s %7d tris  size %.4f %.4f %.4f  centre %.4f %.4f %.4f  mats %s' % (q.name, q.parent.name if q.parent else '-', sum(len(f.vertices) - 2 for f in q.data.polygons), d[0], d[2], d[1], c[0], c[2], -c[1], [m.name for m in q.data.materials if m]))
+                print('  %-42s parent %-28s %7d tris  size %.4f %.4f %.4f  center %.4f %.4f %.4f  mats %s' % (q.name, q.parent.name if q.parent else '-', sum(len(f.vertices) - 2 for f in q.data.polygons), d[0], d[2], d[1], c[0], c[2], -c[1], [m.name for m in q.data.materials if m]))
             elif q.type == 'EMPTY': print('  %-42s parent %-28s (empty) at %.4f %.4f %.4f' % (q.name, q.parent.name if q.parent else '-', q.matrix_world.translation.x, q.matrix_world.translation.z, -q.matrix_world.translation.y))
         return
     sc.render.engine = 'CYCLES'; sc.cycles.samples = o['samples']; sc.cycles.use_denoising = True; sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Base Contrast'; sc.render.film_transparent = False

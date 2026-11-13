@@ -24,9 +24,9 @@ rectangles added over blank displays so the app can draw on them. Further change
 | Model | Author | Source | Further changes |
 |---|---|---|---|
 | "Anesthesia_SF Gamicon21" (anesthesia workstation) | DGLENN43 | https://sketchfab.com/3d-models/7ae35c7d5b9b4872af390969292f7914 | Trailing pipeline hoses removed. Recoloured to the United States convention: cylinders and flow-control knobs oxygen green, nitrous oxide blue, air yellow; vaporizer dials sevoflurane yellow, isoflurane purple. Display and gauge faces darkened |
-| "Operating Table" | shashkinv1ad | https://sketchfab.com/3d-models/e3a4512227d34b098e2ef0d11c8a80fd | Only the table is used (its lights, column and instrument arms are not). Red stains painted out of the colour map and rust-brown wear drawn back toward clean steel. Column lengthened so the pads stand at 0.90 m |
+| "Operating Table" | shashkinv1ad | https://sketchfab.com/3d-models/e3a4512227d34b098e2ef0d11c8a80fd | Only the table is used (its lights, column and instrument arms are not). Red stains painted out of the color map and rust-brown wear drawn back toward clean steel. Column lengthened so the pads stand at 0.90 m |
 | "Ultrasound Machine" | Liuuzaki | https://sketchfab.com/3d-models/0d4593f431f94de9a94815ec2c7715e9 | None beyond the common ones |
-| "Gourney - Hospital Bed" (stretcher) | meeww | https://sketchfab.com/3d-models/aecf349e49864d8492cf320e5b8d063c | One of the two stretchers in the file is used; mattress colour darkened |
+| "Gourney - Hospital Bed" (stretcher) | meeww | https://sketchfab.com/3d-models/aecf349e49864d8492cf320e5b8d063c | One of the two stretchers in the file is used; mattress color darkened |
 | "Emergency Cart" | tutminchai | https://sketchfab.com/3d-models/7b6c0aa0f213416bbd65efbaa2d26391 | None beyond the common ones |
 | "Medical Cart" | NicolasVB | https://sketchfab.com/3d-models/2a0a574f9e374702af8c415fce296f45 | None beyond the common ones |
 | "IV Pole" | Mouch (Mountrise) | https://sketchfab.com/3d-models/76521e2f71704b1986cf5ac54368b14f | The file's two poles are separated and placed one in each room |

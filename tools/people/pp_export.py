@@ -49,7 +49,7 @@ def make_material(name, color=None, image=None, normal=None, rough=0.6, cutout=F
 
 
 def set_vertex_alpha(ob, alpha):
-    """Give a mesh a per-vertex opacity (stored as a white vertex colour with alpha). With a cut-out material this makes
+    """Give a mesh a per-vertex opacity (stored as a white vertex color with alpha). With a cut-out material this makes
     the mesh thin out toward chosen vertices instead of ending at a hard polygon edge."""
     attr = ob.data.color_attributes.new('Col', 'FLOAT_COLOR', 'POINT')
     data = np.ones((len(ob.data.vertices), 4), np.float32)

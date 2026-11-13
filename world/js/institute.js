@@ -3,7 +3,7 @@
 //
 // How it is lit (see tools/build_institute.py for the other half):
 //   the building     baked light (sky, lamps, every bounce) from one lightmap  +  the sun, live, with one shadow map
-//   things that move baked light probes (nine terms per colour, blended by position)  +  the same live sun  +  gallery spots
+//   things that move baked light probes (nine terms per color, blended by position)  +  the same live sun  +  gallery spots
 //   reflections      one captured cube per room, box-projected so floors reflect the room they are in
 // Nothing in here knows about lessons. js/main.js decides what a station opens.
 import * as THREE from 'three';
@@ -67,7 +67,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' }); renderer.setPixelRatio(Math.min(devicePixelRatio || 1, Q().dpr));
   renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = EXPOSURE; renderer.localClippingEnabled = true; renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; host.appendChild(renderer.domElement);
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(prefs.fov, 1, 0.08, 400);
-  const inset = { l: 0, t: 0, r: 0, b: 0 };      // what a panel covers, in CSS pixels: the camera's centre is kept in the middle of what is left
+  const inset = { l: 0, t: 0, r: 0, b: 0 };      // what a panel covers, in CSS pixels: the camera's center is kept in the middle of what is left
   const size = () => { const w = host.clientWidth || 1, h = host.clientHeight || 1; renderer.setSize(w, h, false); camera.aspect = w / h; if (inset.l || inset.t || inset.r || inset.b) camera.setViewOffset(w, h, (inset.r - inset.l) / 2, (inset.b - inset.t) / 2, w, h); else camera.clearViewOffset(); camera.updateProjectionMatrix(); }; const ro = new ResizeObserver(size); ro.observe(host); size();
   const get = async (p) => { const r = await fetch(A(p)); const b = await r.arrayBuffer(); bytes.n += b.byteLength; return b; };
   const parse = (buf) => new Promise((res, rej) => loader().parse(buf, A('level/'), res, rej));
@@ -289,7 +289,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     else if (!cam.glide) {
       const eye = (pr ? pr.height : 1.74) - 0.14; head.set(P.x, eye, P.z); dir.set(Math.sin(cam.yaw) * Math.cos(cam.pitch), Math.sin(cam.pitch), Math.cos(cam.yaw) * Math.cos(cam.pitch));
       let d = first ? 0 : Math.max(cam.dist, 1.2); if (first) { const lean = THREE.MathUtils.clamp((-cam.pitch - 0.35) / 0.7, 0, 1) * 0.3; head.x += Math.sin(cam.yaw) * lean; head.z += Math.cos(cam.yaw) * lean; head.y -= lean * 0.3; }      /* looking down at something close, you lean over it */
-      if (d > 0.5) { const sh = Math.min(0.55, 0.2 * cam.cur); head.x += Math.cos(cam.yaw) * -sh; head.z += Math.sin(cam.yaw) * sh; head.y += 0.02;      /* the walker stands left of centre, so the way ahead stays in view */ const room = rooms.find((r) => r.name === P.room), ceil = (room && room.h ? room.h : 30) - 0.25;
+      if (d > 0.5) { const sh = Math.min(0.55, 0.2 * cam.cur); head.x += Math.cos(cam.yaw) * -sh; head.z += Math.sin(cam.yaw) * sh; head.y += 0.02;      /* the walker stands left of center, so the way ahead stays in view */ const room = rooms.find((r) => r.name === P.room), ceil = (room && room.h ? room.h : 30) - 0.25;
         for (let s = 0.3; s <= cam.dist; s += 0.12) { want.copy(head).addScaledVector(dir, -s); if (blocked(want.x, want.y, want.z) || want.y > ceil || want.y < 0.25 || roomAt(want.x, want.y, want.z, 0.1) === 'outside') { d = Math.max(0.3, s - 0.22); break; } } }
       cam.cur += (d - cam.cur) * Math.min(1, dt * (d < cam.cur ? 16 : 5)); camera.position.copy(head).addScaledVector(dir, -cam.cur); camera.lookAt(tmpV.copy(head).addScaledVector(dir, 4));
       if (Math.abs(camera.fov - prefs.fov) > 0.01) { camera.fov += (prefs.fov - camera.fov) * Math.min(1, dt * 6); camera.updateProjectionMatrix(); }
@@ -315,7 +315,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     get enabled() { return enabled; }, get locked() { return locked; }, get firstPerson() { return eyes(); }, onRoom: null, onFrame: null,
     /** Called when a movement key is pressed while a panel holds the camera (js/places.js closes the panel). */
     onWalkAway: null,
-    /** Called with a click on the picture (the pointer event, or null when the mouse is captured and the centre of the view is meant). Return true to keep the click. */
+    /** Called with a click on the picture (the pointer event, or null when the mouse is captured and the center of the view is meant). Return true to keep the click. */
     onPick: null,
     /** Called when a button goes down on the picture; return true to take the press (a knob, a plunger). grabbing() says whether one is still held. */
     onGrab: null, grabbing: null,
@@ -326,7 +326,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     /** The floor map of solid things and the building's boxes over a rectangle, as a picture (for checks and for looking at what stops you). */
     solidMap(x0, z0, x1, z1, scale = 100) { const c = document.createElement('canvas'), w = c.width = Math.round((x1 - x0) * scale), h = c.height = Math.round((z1 - z0) * scale), g = c.getContext('2d'); g.fillStyle = '#f4f1ea'; g.fillRect(0, 0, w, h); g.fillStyle = '#b9b2a4'; for (const q of cols) g.fillRect((q[0] - x0) * scale, (q[1] - z0) * scale, (q[2] - q[0]) * scale, (q[3] - q[1]) * scale);
       g.fillStyle = '#1d2a33'; for (let k = Math.max(0, Math.floor((z0 - gz0) / CELL)); k < Math.min(gh, Math.ceil((z1 - gz0) / CELL)); k++) for (let i = Math.max(0, Math.floor((x0 - gx0) / CELL)); i < Math.min(gw, Math.ceil((x1 - gx0) / CELL)); i++) if (occ[k * gw + i]) g.fillRect((gx0 + i * CELL - x0) * scale, (gz0 + k * CELL - z0) * scale, CELL * scale + 0.5, CELL * scale + 0.5);
-      g.fillStyle = 'rgba(255,90,60,.28)'; const st = 0.08; for (let z = z0 + st / 2; z < z1; z += st) for (let x = x0 + st / 2; x < x1; x += st) if (push(x, z, RADIUS)) g.fillRect((x - st / 2 - x0) * scale, (z - st / 2 - z0) * scale, st * scale, st * scale);      /* where your centre cannot be */
+      g.fillStyle = 'rgba(255,90,60,.28)'; const st = 0.08; for (let z = z0 + st / 2; z < z1; z += st) for (let x = x0 + st / 2; x < x1; x += st) if (push(x, z, RADIUS)) g.fillRect((x - st / 2 - x0) * scale, (z - st / 2 - z0) * scale, st * scale, st * scale);      /* where your center cannot be */
       g.fillStyle = '#ff5a3c'; g.beginPath(); g.arc((P.x - x0) * scale, (P.z - z0) * scale, RADIUS * scale, 0, 7); g.fill(); return c; },
     async start() { await setPerson(state.character || { person: 'tunic', colour: 'ceil' }); captureRooms(); },
     setPerson, invite(key) { invited = key; },

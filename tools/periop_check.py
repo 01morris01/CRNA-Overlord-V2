@@ -4,7 +4,7 @@
    What it is: a functional check that the day's patients are in the building as people, that the Student Workstation opens
    beside them, that a patient can be taken to the operating room, and that a whole case can be run there on the app's own
    engine from the first monitor to handover, with the room's monitor showing the engine and the record saying who scored what.
-   What it is not: a judgement of clinical content (the engine, the rubrics and the patients are the app's own and are not
+   What it is not: a judgment of clinical content (the engine, the rubrics and the patients are the app's own and are not
    reviewed here), of how the rooms look, of frame rate, or of any real device. The engine itself is checked without a
    browser by tools/cases_check.mjs.
    Every action is a click, a key or typing. Page internals are read to confirm results, never to perform an action, except
@@ -18,7 +18,7 @@ def ok(name, cond, detail=""):
     R.append({"group": "functional", "pass": bool(cond), "check": name, "detail": str(detail)[:240]}); print(("PASS " if cond else "FAIL ") + name + (" :: " + str(detail)[:200] if detail else ""), flush=True)
 WORLD = "window.__ov && __ov.world && __ov.places && __ov.periop && document.getElementById('veil').classList.contains('off') && document.body.dataset.screen === 'world' && !document.getElementById('wipe').className"
 SNAP = "(() => { const C = __ov.periop.case; if (!C) return null; const s = C.runner.snapshot(); return { t: Math.round(s.t), hr: Math.round(s.hr), spo2: Math.round(s.spo2), eto2: Math.round(s.eto2), etco2: Math.round(s.etco2), dev: s.airwayDevice, status: s.status, busy: !!s.intubationInProgress, tofRatio: +s.tofRatio.toFixed(2), rr: Math.round(s.spontaneousRR), tv: Math.round(s.spontaneousTV), mode: s.ventMode, agent: +(+s.vaporizer || 0).toFixed(1), running: !!s.running, say: C.lastSay }; })()"
-# what a display's canvas holds: a fingerprint of its pixels and how many pixels are close to a colour
+# what a display's canvas holds: a fingerprint of its pixels and how many pixels are close to a color
 PIX = """([name, rgb]) => { const o = name.startsWith('sign:') ? __ov.world.signs[name.slice(5)] : __ov.exhibits.clinical.screens[name]; if (!o || !o.material.map) return null; const c = o.material.map.image, g = c.getContext('2d'), d = g.getImageData(0, 0, c.width, c.height).data; let h = 0, near = 0, lit = 0;
   for (let i = 0; i < d.length; i += 4) { if (i % 388 === 0) h = (h * 31 + d[i] + d[i + 1] * 3 + d[i + 2] * 7) >>> 0; if (d[i] + d[i + 1] + d[i + 2] > 300) lit++; if (rgb && Math.abs(d[i] - rgb[0]) < 46 && Math.abs(d[i + 1] - rgb[1]) < 46 && Math.abs(d[i + 2] - rgb[2]) < 46) near++; } return { hash: h, lit, near, w: c.width, h: c.height }; }"""
 async def main():
@@ -131,10 +131,10 @@ async def main():
         cam = await pg.evaluate("__ov.world.camera.position.toArray().map(v => +v.toFixed(2))"); q0 = await P(); await pg.keyboard.down("KeyS"); await pg.wait_for_timeout(450); await pg.keyboard.up("KeyS"); await pg.wait_for_timeout(300); q1 = await P(); await pg.click(f'{HUD} [data-view="patient"]'); await pg.wait_for_timeout(1000); cam2 = await pg.evaluate("__ov.world.camera.position.toArray().map(v => +v.toFixed(2))")
         ok("the places to stand put you in front of the monitor and back at the head of the table, and never take your feet away", abs(cam[0] - 7.6) < 1.2 and abs(q1["z"] - q0["z"]) + abs(q1["x"] - q0["x"]) > 0.1 and abs(cam2[0] - 8.6) < 0.4 and cam2[1] > 1.35, json.dumps([cam, q0, q1, cam2]))
         await act("baseline", "machine", "suction", "airwaykit", "iv")
-        # ---- drugs: drawn up and labelled by hand, refused when absurd
+        # ---- drugs: drawn up and labeled by hand, refused when absurd
         await draw("Propofol", 5000, "mg"); bad = await S(); n_bad = await pg.evaluate("__ov.periop.case.syringes.length")
         await draw("Propofol", 2, "mg/kg"); await draw("Fentanyl", 100, "mcg"); await draw("Rocuronium", 0.6, "mg/kg"); syr = await pg.evaluate("({ list: __ov.periop.case.syringes.map(q => [q.drug, q.cls, Math.round(q.totalMg * 100) / 100]), on: __ov.periop.props.syr.children.length })")
-        ok("a dose far outside the engine's range is refused; three real ones are drawn up, labelled by class, and lie on the worktop", n_bad == 0 and len(syr["list"]) == 3 and syr["on"] == 3 and syr["list"][0][1] == "induction" and syr["list"][1][1] == "opioid" and syr["list"][2][1] == "relaxant", f"{bad['say'][:70]} | {json.dumps(syr)}")
+        ok("a dose far outside the engine's range is refused; three real ones are drawn up, labeled by class, and lie on the worktop", n_bad == 0 and len(syr["list"]) == 3 and syr["on"] == 3 and syr["list"][0][1] == "induction" and syr["list"][1][1] == "opioid" and syr["list"][2][1] == "relaxant", f"{bad['say'][:70]} | {json.dumps(syr)}")
         await pg.click(f'{HUD} [data-view="worktop"]'); await pg.wait_for_timeout(1100); await shot("o04-worktop-syringes"); await pg.click(f'{HUD} [data-view="patient"]'); await pg.wait_for_timeout(800)
         # ---- pre-oxygenation, at the panel's own 8x clock
         await pg.click(f'{HUD} [data-speed="8"]'); await act("sniff", "preox"); await pg.wait_for_timeout(900); vis = await pg.evaluate("({ mask: __ov.periop.props.maskG.visible, gas: __ov.exhibits.clinical.live.m.mon.gas })")
@@ -159,7 +159,7 @@ async def main():
         await pg.click(f'{HUD} [data-view="monitor"]'); await pg.wait_for_timeout(1100); await shot("o08-monitor-asleep"); await pg.click(f'{HUD} [data-view="patient"]'); await pg.wait_for_timeout(900); await shot("o09-intubated")
         await act("ready"); await pg.wait_for_timeout(500); ind = await pg.evaluate("(() => { const C = __ov.periop.case, sh = C.sheet('induction'); return { final: sh.final, percent: sh.percent, pass: sh.pass, engine: !!C.final, outcome: C.final && C.final.outcome, by: sh.items.reduce((a, q) => (a[q.by] = (a[q.by] || 0) + 1, a), {}), caveats: sh.items.filter(q => q.caveat).length, missed: sh.criticalsMissed }; })()")
         ok("telling the surgeon you are ready closes the induction rubric by the engine's own rules and pass rule", ind["final"] and ind["engine"] and ind["outcome"] in ("PASS", "FAIL") and ind["percent"] >= 85 and ind["pass"] == (ind["outcome"] == "PASS"), json.dumps(ind))
-        ok("the sheet says who scored each item, and says in words where a judgement was not made", ind["by"].get("engine", 0) >= 1 and ind["by"].get("room", 0) >= 8 and ind["caveats"] >= 3, json.dumps(ind["by"]) + f" · {ind['caveats']} items carry a 'not judged here' line")
+        ok("the sheet says who scored each item, and says in words where a judgment was not made", ind["by"].get("engine", 0) >= 1 and ind["by"].get("room", 0) >= 8 and ind["caveats"] >= 3, json.dumps(ind["by"]) + f" · {ind['caveats']} items carry a 'not judged here' line")
         # ---- leaving the room stops the patient's clock
         await pg.evaluate("__ov.world.standAt(6.6, -14.05, 3, -14.05)"); await pg.wait_for_timeout(500)      # test setup: stand inside the door, facing the court
         q = await forward(lambda q: q["x"] <= 4.2); await pg.wait_for_timeout(700); a = await pg.evaluate("({ away: __ov.periop.away, running: __ov.periop.case.runner.snapshot().running, hud: document.getElementById('caseHud').hidden, goal: document.getElementById('wGoal').innerText })"); ta = await S(); await pg.wait_for_timeout(1200); tb2 = await S()

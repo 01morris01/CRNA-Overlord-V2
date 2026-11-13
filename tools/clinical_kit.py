@@ -1,4 +1,4 @@
-"""clinical_kit.py: clinical equipment modelled for Overlord, in Blender, from measurements typical of the real things.
+"""clinical_kit.py: clinical equipment modeled for Overlord, in Blender, from measurements typical of the real things.
 Nothing here is a manufacturer's product and nothing is traced from one. Every piece is built from bevelled solids, lathed
 profiles and swept tubes with physically based materials, so that steel, painted metal, vinyl, rubber, cloth and clear
 plastic each answer light differently. It is set dressing for the operating room and the regional bay: no control on it is
@@ -237,7 +237,7 @@ def hamper(at, rz=0.0, bag='eq_cream', lid='eq_white'):
     tube(g, 'rim', 'eq_steel', [(-0.2, -0.2, 0.88), (0.2, -0.2, 0.88), (0.2, 0.2, 0.88), (-0.2, 0.2, 0.88), (-0.2, -0.2, 0.88)], 0.011, 8); tube(g, 'brace', 'eq_steel', [(-0.2, -0.2, 0.16), (0.2, -0.2, 0.16), (0.2, 0.2, 0.16), (-0.2, 0.2, 0.16), (-0.2, -0.2, 0.16)], 0.008, 8)
     lathe(g, 'bag', bag, [(0, 0.2), (0.16, 0.2), (0.21, 0.4), (0.2, 0.7), (0.21, 0.87), (0.2, 0.875)], (0, 0, 0), seg=4 * 6); rbox(g, 'lid', lid, (0.46, 0.46, 0.02), (0, 0.02, 0.905), 0.01, rot=(0.06, 0, 0)); return g
 def drawer_cart(at, rz=0.0, colour='eq_blue', w=0.66, d=0.5, h=0.9, rows=5):
-    """A procedure cart: coloured drawer fronts, a railed top, a few boxes and a sharps container."""
+    """A procedure cart: colored drawer fronts, a railed top, a few boxes and a sharps container."""
     g = group('drawer_cart', at, rz)
     for (x, y) in ((-w / 2 + 0.06, -d / 2 + 0.06), (w / 2 - 0.06, -d / 2 + 0.06), (-w / 2 + 0.06, d / 2 - 0.06), (w / 2 - 0.06, d / 2 - 0.06)): castor(g, x, y, 0.05, 0.028)
     rbox(g, 'body', 'eq_paint', (w, d, h - 0.14), (0, 0, 0.14 + (h - 0.14) / 2), 0.016, 3); dh = (h - 0.2) / rows
@@ -336,7 +336,7 @@ def monitor_arm(at, rz=0.0, kind='bay'):
     g = group('wall_monitor', at, rz); rbox(g, 'channel', 'eq_steel', (0.07, 0.02, 0.5), (0, 0, 0), 0.004); cyl(g, 'pivot', 'eq_steel_dark', 0.022, 0.06, (0, -0.03, 0.05), seg=14); tube(g, 'arm', 'eq_paint', [(0, -0.03, 0.05), (0.16, -0.16, 0.07), (0.06, -0.3, 0.08)], 0.016, 10)
     screen(g, kind, 0.34, 0.22, (0.06, -0.34, 0.1), (-0.08, 0, 0.25), 0.014, 0.05); return g
 
-# ------------------------------------------------------------------ a studio picture of everything, to judge the modelling on its own
+# ------------------------------------------------------------------ a studio picture of everything, to judge the modeling on its own
 if __name__ == '__main__' or (len(sys.argv) > 1 and os.path.basename(sys.argv[sys.argv.index('--python') + 1] if '--python' in sys.argv else '') == 'clinical_kit.py'):
     out = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else '/tmp/kit.png'
     bpy.ops.wm.read_factory_settings(use_empty=True); scene = bpy.context.scene; materials()

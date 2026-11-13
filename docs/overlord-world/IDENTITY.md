@@ -15,8 +15,8 @@ It comes from the thing the product is about (looking inside by cutting), not fr
 | Transition | A coral hairline crosses the screen and what is behind it has changed | Walking to examining and back |
 | Patch | The mark in a rounded field; one short coral tick per completed series (`patch.svg`) | The character card; a small frame on the studio shelf |
 
-**Colour.** Stone `#EAE6DF`, concrete `#C9C5BD`, charcoal `#16181B`, ink `#0B0C0E`, paper `#F4F4F2`, brass `#C89B55`,
-bone `#DDD3BD`, and one signal colour, coral `#FF5A3C`, which always means alive, active or yours.
+**Color.** Stone `#EAE6DF`, concrete `#C9C5BD`, charcoal `#16181B`, ink `#0B0C0E`, paper `#F4F4F2`, brass `#C89B55`,
+bone `#DDD3BD`, and one signal color, coral `#FF5A3C`, which always means alive, active or yours.
 
 **Type.** Inter Tight, light for headings, regular for text, medium for labels.
 

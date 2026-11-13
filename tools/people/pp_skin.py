@@ -4,7 +4,7 @@ budget is 1024 pixels, and only the head, neck and a little of the chest show ab
 out again: the face keeps (in fact slightly gains) its resolution in the middle of a new 1024 picture, the scalp and the
 back of the head are squeezed around it, and the few other visible pieces go in a strip along the bottom. The base
 mesh's own texture coordinates are the same for every MakeHuman person, so the numbers below hold for all 56.
-On top of the re-laid picture this module adds what a 400-pixel face lacks: fine unevenness of colour, pores as a normal
+On top of the re-laid picture this module adds what a 400-pixel face lacks: fine unevenness of color, pores as a normal
 map, eyebrows taken from the eyebrow asset and painted into the skin, and the patient's own skin tone."""
 import math
 import numpy as np
@@ -14,7 +14,7 @@ from mathutils import Vector
 
 SIZE = 1024
 HEAD_ROWS = 880                       # the head takes the top 880 rows; a 144-row strip under it holds chest, mouth lining and eye sockets
-# the head piece of the MakeHuman layout: its centre line, the middle of the face, and how the squeeze works
+# the head piece of the MakeHuman layout: its center line, the middle of the face, and how the squeeze works
 UC, VC = 0.865, 0.483168              # middle of the face (about the nose) in the original layout
 R1, M1 = 0.16, 0.42                   # inside this radius the layout is kept; beyond it distances shrink to 42 %
 U_LEFT = R1 + M1 * (0.224 - R1) + 0.004      # extent after the squeeze, toward the crown ...
@@ -44,7 +44,7 @@ def head_to_atlas(u, v):
 
 
 def atlas_to_head(px, py):
-    """Pixel centre in the head part of the new picture -> original coordinates (the inverse of head_to_atlas)."""
+    """Pixel center in the head part of the new picture -> original coordinates (the inverse of head_to_atlas)."""
     dv = (px + 0.5) / SIZE * 2 * V_HALF - V_HALF
     du = (py + 0.5) / HEAD_ROWS * (U_LEFT + U_RIGHT) - U_LEFT
     g = np.maximum(np.hypot(du, dv), 1e-12)
@@ -151,7 +151,7 @@ class SkinLayout:
                 continue
             target, pic = (strip[nm], 0) if nm in strip else (detail_slots[nm], 1)
             u0, u1, v0, v1 = uv[m][:, :, 0].min(), uv[m][:, :, 0].max(), uv[m][:, :, 1].min(), uv[m][:, :, 1].max()
-            pad = 3.0                                        # pixels kept free around a piece, so neighbours do not bleed in
+            pad = 3.0                                        # pixels kept free around a piece, so neighbors do not bleed in
             tx, ty, tw, th = target
             sx, sy = (tw - 2 * pad) / max(u1 - u0, 1e-9), (th - 2 * pad) / max(v1 - v0, 1e-9)
             px = tx + pad + (uv[m][:, :, 0] - u0) * sx
@@ -162,7 +162,7 @@ class SkinLayout:
         self.quads = q
 
     def source_coords(self, picture):
-        """For every pixel of one of the two pictures: the original coordinates to take colour from, and where that applies."""
+        """For every pixel of one of the two pictures: the original coordinates to take color from, and where that applies."""
         yy, xx = np.mgrid[0:SIZE, 0:SIZE].astype(np.float64)
         U = np.zeros((SIZE, SIZE)); V = np.zeros((SIZE, SIZE)); ok = np.zeros((SIZE, SIZE), bool)
         if picture == 0:
@@ -180,7 +180,7 @@ class SkinLayout:
 
 
 def sample_image(img, U, V, order=1):
-    """Colour of a picture at original coordinates (u right, v up)."""
+    """Color of a picture at original coordinates (u right, v up)."""
     h, w = img.shape[:2]
     rows, cols = (1.0 - V) * h - 0.5, U * w - 0.5
     return np.stack([ndi.map_coordinates(img[:, :, c], [rows, cols], order=order, mode='nearest') for c in range(img.shape[2])], -1)
@@ -219,8 +219,8 @@ def height_to_normal(h, strength):
 
 
 def tone_match(lin, mask, target_lin, keep=0.25):
-    """Bring the average skin colour inside `mask` to the target, channel by channel (linear light). `keep` leaves a
-    little of the original colour balance, which keeps lips and shadows from going flat."""
+    """Bring the average skin color inside `mask` to the target, channel by channel (linear light). `keep` leaves a
+    little of the original color balance, which keeps lips and shadows from going flat."""
     cur = np.array([np.median(lin[..., c][mask]) for c in range(3)])
     gain = np.asarray(target_lin) / np.maximum(cur, 1e-4)
     gain = gain ** (1 - keep) * (gain.mean()) ** keep
@@ -228,7 +228,7 @@ def tone_match(lin, mask, target_lin, keep=0.25):
 
 
 def paint_from_card(albedo, pos_map, nrm_map, valid, card_tris, card_uv, card_img, tint, strength, reach):
-    """Paint a hair card's picture (an eyebrow) onto the skin under it. Each skin pixel takes the colour and opacity of
+    """Paint a hair card's picture (an eyebrow) onto the skin under it. Each skin pixel takes the color and opacity of
     the nearest point of the card, provided that point lies over the pixel (along the skin's own normal), not beside it."""
     verts = card_tris.reshape(-1, 3)
     tree = BVHTree.FromPolygons([tuple(v) for v in verts], [(3 * i, 3 * i + 1, 3 * i + 2) for i in range(len(card_tris))])
@@ -307,7 +307,7 @@ def hair_cover(pos_map, nrm_map, where, tris, tri_uv, alpha_img, reach):
 def vertex_occlusion(P, N, verts_used, tris, reach, rng, rays=40):
     """How open to the surroundings each vertex is (1 = fully open, lower in the eye sockets, beside the nose, under
     the lip, inside the ear): rays are sent out over the hemisphere around the normal and the blocked share is counted.
-    This soft shading is later painted into the skin colour, because the browser does not compute it."""
+    This soft shading is later painted into the skin color, because the browser does not compute it."""
     tree = BVHTree.FromPolygons([tuple(v) for v in P], [tuple(int(i) for i in t) for t in tris])
     out = np.ones(len(P))
     # one fixed set of directions on the unit hemisphere (z up), cosine-weighted
@@ -352,7 +352,7 @@ def lash_line(pos_map, valid, root_points, reach):
 
 
 def fill_outside(img, covered):
-    """Carry the colours at the edge of the covered area outward, so that nothing foreign shows when the picture is filtered."""
+    """Carry the colors at the edge of the covered area outward, so that nothing foreign shows when the picture is filtered."""
     idx = ndi.distance_transform_edt(~covered, return_distances=False, return_indices=True)
     return img[idx[0], idx[1]]
 
@@ -370,7 +370,7 @@ def squeeze_map():
 
 
 def eye_picture(size, iris_rgb, seed, pupil=0.30, theta_iris=27.5, theta_lim=100.0, power=0.6, glint=0.0):
-    """One eye, drawn from nothing: iris fibres, a dark rim, the pupil, a sclera that darkens and reddens toward its
+    """One eye, drawn from nothing: iris fibers, a dark rim, the pupil, a sclera that darkens and reddens toward its
     edge, and the shade of the upper lid. The eye mesh is mapped so that the distance from the middle of this picture is
     (angle from straight ahead / theta_lim) ** power, which gives the iris about half of the picture's width."""
     rng = np.random.default_rng(seed)

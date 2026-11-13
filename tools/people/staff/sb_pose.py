@@ -149,7 +149,7 @@ def sample(path, fps=30):
 
 
 def retarget(rig, clip, in_place=False, first=0, last=None, step=1):
-    """The clip on this rig: (list of Pose, metres per second of travel that was taken out)."""
+    """The clip on this rig: (list of Pose, meters per second of travel that was taken out)."""
     S = clip['frames'][first:(last + 1 if last is not None else None):step]; k = rig.leg / clip['leg']; root = rig.root
     p0, p1 = S[0][root].translation.copy(), S[-1][root].translation.copy(); travel = Vector((p1.x - p0.x, p1.y - p0.y, 0)); out = []
     for i, fr in enumerate(S):

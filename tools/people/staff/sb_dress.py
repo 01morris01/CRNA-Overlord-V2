@@ -6,7 +6,7 @@ This module makes those two, on whichever body it is given:
   gown    A blank is grown around the body (convex shells around the trunk-and-legs and around each arm, joined and re-meshed
           to an even surface), opened at the neck, the wrists and below the hem, then DRAPED with Blender's cloth solver
           against the body, with the neckline and the ends of the sleeves held. The folds are the solver's, not a pattern.
-          It is then cut level at mid-calf, given turned edges, shaded (occlusion in the vertex colours), and skinned from
+          It is then cut level at mid-calf, given turned edges, shaded (occlusion in the vertex colors), and skinned from
           the body underneath with the skirt shared between the two legs.
   gloves  The body's own hands, lifted a fraction of a millimetre and carried up the forearm over the end of the sleeve,
           with a rolled edge. Same skinning as the hands, so the fingers work.
@@ -31,7 +31,7 @@ def dominant(w):
 
 
 def landmarks(arm):
-    """Joint positions and a few derived heights, all in world metres (rest pose)."""
+    """Joint positions and a few derived heights, all in world meters (rest pose)."""
     b = lambda n: bone_head(arm, n)
     lm = {'neck': b('Bip01 Neck'), 'head': b('Bip01 Head'), 'pelvis': b('Bip01 Pelvis')}
     for s in (L, R):
@@ -111,7 +111,7 @@ def gown_blank(arm, body, lm, ease_body=0.034, ease_arm=0.026, voxel=0.013, extr
 
 
 def classify(gown, lm):
-    """For every gown vertex: ('arm', side, s) with s metres from the wrist end going up the arm, or ('trunk', None, 0)."""
+    """For every gown vertex: ('arm', side, s) with s meters from the wrist end going up the arm, or ('trunk', None, 0)."""
     out = []
     for v in gown.data.vertices:
         p = v.co; best = ('trunk', None, 0.0)
@@ -143,7 +143,7 @@ def pre_shape(gown, body, lm, cuff_len=0.07, cuff_clear=0.0035, neck_clear=0.006
             target = hit[0] + (v.co - hit[0]).normalized() * cuff_clear
             v.co = v.co.lerp(target, t); pin[v.index] = 1.0 if along < cuff_len else 0.0
         elif kind == 'trunk':
-            d = -(v.co - n_at).dot(n_no)            # metres below the neckline plane
+            d = -(v.co - n_at).dot(n_no)            # meters below the neckline plane
             if d < 0.05 and v.co.z > lm['neck'].z - 0.14 and abs(v.co.x) < 0.17:
                 hit = bvh.find_nearest(v.co)
                 if hit[0] is None: continue

@@ -34,7 +34,7 @@ export function bodySites(P, { heightM = 1.72 } = {}) {
   function drop(local, dir = DOWN, back = 0.45) { const from = toRoom(local.clone().addScaledVector(dir, -back)), d = dirRoom(dir); ray.set(from, d); ray.far = back + 0.5; ray.near = 0;
     const h = ray.intersectObjects(skin, false)[0]; if (!h) return null; const n = h.face ? h.face.normal.clone().transformDirection(h.object.matrixWorld) : d.clone().negate(); if (n.dot(d) > 0) n.negate(); return { pos: h.point.clone(), normal: n, on: h.object.name }; }
   const shoulder = (s) => V(s * 0.19 * k, SN.y - 0.03, SN.z + 0.035 * k), hand = (s) => (s > 0 ? L.handL : L.handR), wrist = (s) => (s > 0 ? L.wristL : L.wristR);
-  const EST = {      // [x, z] on the chest from the sternal notch (metres at 1.72 m, scaled by height), dropped from above unless a direction is given
+  const EST = {      // [x, z] on the chest from the sternal notch (meters at 1.72 m, scaled by height), dropped from above unless a direction is given
     ecgRA: [-0.105, 0.045], ecgLA: [0.105, 0.045], ecgV: [0.150, 0.185, V(-0.55, -0.83, 0).normalize()], ecgRL: [-0.150, 0.275, V(0.55, -0.83, 0).normalize()], ecgLL: [0.150, 0.275, V(-0.55, -0.83, 0).normalize()],
     lungRU: [-0.085, 0.065], lungLU: [0.085, 0.065], lungRL: [-0.30, 0.215, V(1, -0.12, 0).normalize()], lungLL: [0.30, 0.215, V(-1, -0.12, 0).normalize()],
     aortic: [-0.030, 0.070], pulmonic: [0.030, 0.070], tricuspid: [0.025, 0.155], mitral: [0.085, 0.185], epigastrium: [0, 0.255], trachea: [0, -0.030],

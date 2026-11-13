@@ -54,7 +54,7 @@ async def main():
             n = await pg.evaluate(f"{LS}.items.length"); cams = []; seen_tip = False; fb = ""; retry_view = None
             for i in range(n):
                 await pg.wait_for_timeout(1300); cams.append(await pg.evaluate("__ov.hall.atlas.camera.position.toArray().map(v => +v.toFixed(2)).join(',')"))
-                if i == 0: ok("functional", f"{tag}: nothing is labelled or highlighted while you identify", await pg.evaluate("document.getElementById('hLabels').children.length === 0 && [...__ov.hall.atlas.parts.values()].every(p => p.glow < 0.02)"))
+                if i == 0: ok("functional", f"{tag}: nothing is labeled or highlighted while you identify", await pg.evaluate("document.getElementById('hLabels').children.length === 0 && [...__ov.hall.atlas.parts.values()].every(p => p.glow < 0.02)"))
                 ans = await pg.evaluate(f"{LS}.items[{LS}.i].answer"); how = plan.get(i, ""); wrong = how.startswith("wrong")
                 if how == "hint": await pg.click('[data-act="hint"]'); await pg.wait_for_timeout(400); ok("functional", f"{tag} {i+1}: a hint is shown on request and flagged", "nudge" in await pg.inner_html("#hPanel"))
                 target = next(x for x in ["median_nerve_r", "ulnar_nerve_r", "radial_nerve_r"] if x not in ans) if wrong else ans[0]
@@ -105,7 +105,7 @@ async def main():
         await pg.click('[data-person="scrubs"]'); await pg.wait_for_timeout(1800); await pg.click('[data-colour="navy"]'); await pg.wait_for_timeout(700)
         await pg.fill("#cName", "Shawn"); await pg.wait_for_timeout(500); await shot("j01-character")
         await pg.click("#charGo"); await to_world(); await pg.wait_for_timeout(2500)
-        ok("functional", "the chosen person, colour and name are saved, and that person is the one in the level", await pg.evaluate("__ov.state.character.person === 'scrubs' && __ov.state.character.colour === 'navy' && __ov.state.character.name === 'Shawn'"))
+        ok("functional", "the chosen person, color and name are saved, and that person is the one in the level", await pg.evaluate("__ov.state.character.person === 'scrubs' && __ov.state.character.colour === 'navy' && __ov.state.character.name === 'Shawn'"))
         await shot("j02-arrival")
         goal0 = await pg.inner_text("#wGoal"); ok("functional", "on arrival one line says where to start", "plinth" in goal0.lower(), goal0[:90])
         # ===== 2. walking in =====

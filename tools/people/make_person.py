@@ -34,12 +34,12 @@ S = float(SPEC['heightM']) / stand_h                      # one scale for everyt
 arm, parts = B.add_rig_and_parts(bm, SPEC, log)
 lab, pose = B.pose_supine(bm, arm, inbody, SPEC, S, log)
 
-# ---------------------------------------------------------------- 2. positions of every part, lying down, in metres
+# ---------------------------------------------------------------- 2. positions of every part, lying down, in meters
 # Lying frame (Blender): X = the patient's left, Y = toward the head, Z = up from the table. The exporter turns this into
 # the browser's frame (Y up, head toward -Z).
 MORPH_KEYS = {'eyesClosed': ('eyeBlinkLeft', 'eyeBlinkRight'), 'jawOpen': ('jawOpen',)}
 y_table = pose['y_table']
-SINK = 0.008                                               # how far a body settles into a pad, metres
+SINK = 0.008                                               # how far a body settles into a pad, meters
 
 
 def collect(obj):
@@ -72,7 +72,7 @@ def lay(co):
 
 pos = {k: {m: lay(c) for m, c in d.items()} for k, d in raw.items()}
 bb = pos['body']['basis'][inbody]
-log(f'LAID length {bb[:, 1].max() - bb[:, 1].min():.3f} m (chart {SPEC["heightM"]:.3f}), width {bb[:, 0].max() - bb[:, 0].min():.3f}, highest {bb[:, 2].max():.3f}, x centre {0.5 * (bb[:, 0].max() + bb[:, 0].min()):+.4f}')
+log(f'LAID length {bb[:, 1].max() - bb[:, 1].min():.3f} m (chart {SPEC["heightM"]:.3f}), width {bb[:, 0].max() - bb[:, 0].min():.3f}, highest {bb[:, 2].max():.3f}, x center {0.5 * (bb[:, 0].max() + bb[:, 0].min()):+.4f}')
 
 J = {b.name: lay(np.array([list(b.head)]))[0] for b in arm.pose.bones}          # joint positions, lying frame
 
@@ -86,7 +86,7 @@ import pp_skin as SK
 import pp_export as X
 from PIL import Image
 k = cloth['k']
-FACE_PX = 2500.0 / S                    # pixels of the skin picture per metre of face (about 25 to the centimetre for an adult)
+FACE_PX = 2500.0 / S                    # pixels of the skin picture per meter of face (about 25 to the centimetre for an adult)
 # slots in the shared detail picture (x, y from the top-left, width, height)
 SLOTS = {'hair': (0, 0, 1024, 608), 'lashes': (0, 608, 368, 192), 'eye': (368, 608, 192, 192), 'teeth': (560, 608, 176, 192), 'tongue': (736, 608, 96, 128),
          'beard': (832, 608, 192, 192), 'handL': (0, 800, 224, 224), 'handR': (224, 800, 224, 224), 'forearmL': (448, 800, 288, 112), 'forearmR': (448, 912, 288, 112)}
@@ -217,7 +217,7 @@ tone = SPEC.get('tone', {})
 detail = np.zeros((1024, 1024, 4))
 detail[..., 3] = 1.0
 
-# -- skin picture: colour
+# -- skin picture: color
 U, V, ok = layout.source_coords(0)
 alb = SK.sample_image(src, U, V, order=3).clip(0, 1)
 body_N = K.vertex_normals(pos['body']['basis'], quads)
@@ -225,7 +225,7 @@ lips_w = C.group_weights(bm, {'lips'}); lid_w = C.group_weights(bm, {'orbiculari
 scalp_w = C.group_weights(bm, {'scalp'})
 tri_idx = np.concatenate([head_q[:, [0, 1, 2]], head_q[:, [0, 2, 3]]])
 occ = SK.vertex_occlusion(pos['body']['basis'], body_N, np.unique(head_q), tri_idx, 0.055 * k, rng)
-for _ in range(2):                                         # evened out over neighbouring vertices
+for _ in range(2):                                         # evened out over neighboring vertices
     acc = np.zeros(len(occ)); cnt_ = np.zeros(len(occ))
     for i_ in range(4):
         np.add.at(acc, head_q[:, i_], occ[head_q[:, (i_ + 1) % 4]]); np.add.at(cnt_, head_q[:, i_], 1)
@@ -257,7 +257,7 @@ lin = lin * np.stack([sh ** 0.6, sh ** 0.92, sh ** 1.0], -1)
 # more life in the colour: the picture's own reds (lips, cheeks, nose, ears) are brought out a little
 mean_l = lin.mean(-1, keepdims=True)
 lin = np.clip(mean_l + (lin - mean_l) * SPEC.get('saturation', 1.18), 0, None)
-# fine unevenness of colour that a 400-pixel face does not have: mottling, and slightly darker pores
+# fine unevenness of color that a 400-pixel face does not have: mottling, and slightly darker pores
 squeeze = SK.squeeze_map()
 relief, pores = SK.skin_relief((1024, 1024), rng, SK.lin_to_srgb(lin).mean(-1), smooth_mask, squeeze)
 mott = SK.fractal((1024, 1024), rng, (3.0, 9.0, 24.0), (0.5, 0.8, 1.0)) / 2.3
@@ -300,14 +300,14 @@ front_zone = (stand[:, 1] < stand[12038, 1] - 0.012) & (stand[:, 2] > eye_z + 0.
 if not hair_spec.get('cutSides', True):                    # long styles keep the hair at the temples; only the middle of the forehead is cleared
     front_zone &= np.abs(stand[:, 0]) < 1.75 * eye_x
 
-# 1. the picture's own painted stubble is taken off the scalp (it has the wrong colour for most people's hair) ...
+# 1. the picture's own painted stubble is taken off the scalp (it has the wrong color for most people's hair) ...
 skin_ref = np.median(alb[face_zone], axis=0)
 clean = np.clip(ndi.gaussian_filter(amap[..., 8], 5.0) * 1.4, 0, 1)[..., None] * hair_spec.get('scalpClean', 0.85)
 clean[SK.HEAD_ROWS:] = 0
 alb = alb * (1 - clean) + skin_ref * (1 + 0.03 * mott[..., None]) * clean
-# 2. ... and the hair's own colour is painted where hair grows: under the hair mesh, and out to the natural hairline,
+# 2. ... and the hair's own color is painted where hair grows: under the hair mesh, and out to the natural hairline,
 #    fading into single strands. The hair mesh itself is cut back behind that line (below), so its hard edge lies on
-#    hair-coloured scalp and the visible hairline is the soft painted one.
+#    hair-colored scalp and the visible hairline is the soft painted one.
 root_rgb = np.array(hair_spec.get('root', np.array(hair_spec.get('tint', (0.16, 0.10, 0.07))) * 0.82))
 shade = hair_spec.get('scalpShade', 0.9)
 if shade > 0:
@@ -324,7 +324,7 @@ if shade > 0:
     a_ = SK.feathered(grow > 0.5, rng, hair_spec.get('hairlineFeather', 0.02) * k * FACE_PX, grain=(0.8, 2.6)) * shade       # thinning out over a centimetre or two
     a_[SK.HEAD_ROWS:] = 0
     alb = alb * (1 - a_[..., None]) + root_rgb * (1 + 0.14 * strands[..., None]) * a_[..., None]
-    log(f'SCALP hair colour painted over {int((a_ > 0.3).sum())} pixels')
+    log(f'SCALP hair color painted over {int((a_ > 0.3).sum())} pixels')
 # a beard: its outline comes from a beard asset, and the hair itself is painted on the skin inside that outline, thinning
 # out to stubble at the edge. (The asset's own shell is not exported: in the browser its outline was a hard polygon edge.)
 beard_spec = SPEC.get('beard', {})
@@ -388,7 +388,7 @@ pdata = {k_: part_data(o) for k_, o in parts.items()}
 
 
 def recolour(rgba, hc):
-    """Hair in the patient's colour: the strands' light and dark are kept, the colour is replaced, and the opacity can be thinned."""
+    """Hair in the patient's colour: the strands' light and dark are kept, the color is replaced, and the opacity can be thinned."""
     rgb = rgba[..., :3]
     solid = rgba[..., 3] > 0.3
     l = rgb.mean(-1, keepdims=True)
@@ -488,7 +488,7 @@ for side in (1.0, -1.0):
     m = np.zeros(len(erest), bool); m[used] = True; m &= (erest[:, 0] * side > 0)
     p = erest[m]
     cen = p.mean(0)
-    for _ in range(2):                                   # centre of the ball, from the part behind the cornea's bulge
+    for _ in range(2):                                   # center of the ball, from the part behind the cornea's bulge
         d_ = p - cen; ang = np.degrees(np.arccos(np.clip(-d_[:, 1] / np.linalg.norm(d_, axis=1), -1, 1)))
         q = p[ang > 38]
         Aq = np.c_[2 * q, np.ones(len(q))]; sol = np.linalg.lstsq(Aq, (q ** 2).sum(1), rcond=None)[0]; cen = sol[:3]
@@ -549,7 +549,7 @@ lash_len = SPEC.get('lash', {}).get('length', 1.0)
 
 
 def shorten(P_):
-    """Lashes at a fraction of the asset's length: each point keeps its direction from the eye's centre and moves in toward the lid."""
+    """Lashes at a fraction of the asset's length: each point keeps its direction from the eye's center and moves in toward the lid."""
     out = P_.copy()
     for e in EYE.values():
         d_ = P_ - e['centre']; r_ = np.linalg.norm(d_, axis=1)

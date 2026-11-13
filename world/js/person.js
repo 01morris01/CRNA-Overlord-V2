@@ -1,5 +1,5 @@
 // person.js: the learner's character. Four rigged people (Microsoft Rocketbox, MIT), each with idle, walk and brisk-walk
-// clips re-baked onto their own skeleton by tools/convert_rocketbox.py. Garment colour is a choice where the clothing
+// clips re-baked onto their own skeleton by tools/convert_rocketbox.py. Garment color is a choice where the clothing
 // allows it; nothing here pretends a costume changes what you know.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -8,7 +8,7 @@ export const PEOPLE = {   // what you choose from. `tint`: how the garment can b
   tunic: { label: 'Tunic and trousers', tint: 'white' }, scrubs: { label: 'Scrubs, cap and mask', tint: 'green' },
   coat: { label: 'White coat', tint: null }, longcoat: { label: 'Long coat and tie', tint: null },
 };
-export const COLOURS = [   // garment colours, linear-ish display values; the first is "as made"
+export const COLOURS = [   // garment colors, linear-ish display values; the first is "as made"
   { id: 'asmade', label: 'As made', rgb: null }, { id: 'ceil', label: 'Ceil blue', rgb: [0.42, 0.62, 0.86] }, { id: 'teal', label: 'Teal', rgb: [0.16, 0.5, 0.5] },
   { id: 'navy', label: 'Navy', rgb: [0.1, 0.16, 0.34] }, { id: 'wine', label: 'Wine', rgb: [0.42, 0.1, 0.18] }, { id: 'graphite', label: 'Graphite', rgb: [0.2, 0.21, 0.24] },
 ];
@@ -21,7 +21,7 @@ uniform vec3 ovTint; uniform float ovTintMode;
 vec3 ovGarment(vec3 c) {
   if (ovTintMode < 0.5) return c;
   float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b)), sat = mx > 0.0 ? (mx - mn) / mx : 0.0, m;
-  if (ovTintMode < 1.5) m = smoothstep(0.24, 0.1, sat) * smoothstep(0.14, 0.36, mx);                      /* white cloth: bright and colourless */
+  if (ovTintMode < 1.5) m = smoothstep(0.24, 0.1, sat) * smoothstep(0.14, 0.36, mx);                      /* white cloth: bright and colorless */
   else m = smoothstep(0.1, 0.28, sat) * step(c.r, c.g) * step(c.b, c.g * 1.04) * smoothstep(0.02, 0.08, mx);   /* green cloth: green leads */
   float shade = ovTintMode < 1.5 ? mx / 0.82 : dot(c, vec3(0.2126, 0.7152, 0.0722)) / 0.2;
   return mix(c, ovTint * shade, m);

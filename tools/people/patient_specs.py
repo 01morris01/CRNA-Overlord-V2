@@ -8,7 +8,7 @@ Where the looks come from:
   * The charts were read for anything said about appearance. They state no race or ethnicity for anyone, so skin tone and
     facial type are NOT taken from names or diagnoses: the 56 ids are dealt, in a fixed shuffled order, into four broad
     groups in fixed numbers (see GROUPS). That gives a varied, plausible spread that does not depend on who is who.
-  * What the charts do say is honoured in OVERRIDES, with the chart's own words quoted beside each entry: beards,
+  * What the charts do say is honored in OVERRIDES, with the chart's own words quoted beside each entry: beards,
     pregnancy, dentures out, a wig, an athletic or frail build, ascites, a goitre, jaundice, pallor.
 Everything is a mock patient; no real person's likeness is used anywhere."""
 import json, os, sys, hashlib, random
@@ -198,14 +198,14 @@ def build():
             eye = pick(r, [('dark', 45), ('brown', 43), ('hazel', 12)])
         else:
             eye = pick(r, [('dark', 80), ('brown', 20)])
-        # hair colour, then greying with age
+        # hair color, then graying with age
         if gname == 'A':
             hc = pick(r, [('darkbrown', 32), ('brown', 30), ('lightbrown', 14), ('blond', 12 + (10 if child else 0)), ('black', 6), ('red', 6)])
         elif gname == 'D':
             hc = pick(r, [('black', 55), ('darkbrown', 45)])
         else:
             hc = 'black'
-        grey = min(1.0, max(0.0, (years - 38 + r.uniform(-10, 10)) / 45.0)) * (1.0 if male else 0.8)      # many women colour their hair
+        grey = min(1.0, max(0.0, (years - 38 + r.uniform(-10, 10)) / 45.0)) * (1.0 if male else 0.8)      # many women color their hair
         base = HAIR[hc]
         tint = [round(b + (g - b) * grey, 3) for b, g in zip(base, GREY)]
         light = sum(tint) / 3                                            # how light the hair ends up, 0 black .. 0.66 white
@@ -267,5 +267,5 @@ if __name__ == '__main__':
     from collections import Counter
     print('wrote', OUT, len(specs), 'patients;', dict(Counter(s['group'] for s in specs.values())))
     for s in specs.values():
-        print(s['id'], s['sex'], f"{s['ageYears']:5.1f}y", f"{s['heightM']:.2f}m {s['weightKg']:6.1f}kg", s['group'], f"tone {s['toneScale']:.1f}", s['eye']['name'].ljust(6), s['hairColor']['name'].ljust(10), f"grey {s['hairColor']['grey']:.2f}",
+        print(s['id'], s['sex'], f"{s['ageYears']:5.1f}y", f"{s['heightM']:.2f}m {s['weightKg']:6.1f}kg", s['group'], f"tone {s['toneScale']:.1f}", s['eye']['name'].ljust(6), s['hairColor']['name'].ljust(10), f"gray {s['hairColor']['grey']:.2f}",
               str(s['hairStyle']).ljust(30), 'thin' if 'density' in s['hair'] else '    ', 'bald-top' if 'cutTop' in s['hair'] else '        ', s['parts']['brows'][:10], s['note'][:40])

@@ -10,7 +10,7 @@ Short, and in order of what would change the experience most. Nothing here is bu
 3. **Have faculty look at how the room scores.** A case in the operating room is scored by the engine where the engine
    can observe and by the room's record elsewhere, and says "not judged here" where a rubric asks whether a drug, dose or
    setting was right. Faculty should decide whether that record is useful practice evidence as it stands, which of those
-   judgements they want the engine to make, and whether the one guard (ready or stable is not credited below 90%
+   judgments they want the engine to make, and whether the one guard (ready or stable is not credited below 90%
    saturation) is the right one.
 4. **Real devices.** Nothing has been run on a real phone or tablet. Start with an iPad in Safari; the lower-cost mode
    exists but is tuned only by reasoning.

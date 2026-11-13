@@ -59,7 +59,7 @@ if have(*ROOTS):
     lev = {'c5': ('vertebra_c4', 'vertebra_c5'), 'c6': ('vertebra_c5', 'vertebra_c6'), 'c7': ('vertebra_c6', 'vertebra_c7'), 'c8': ('vertebra_c7', 'vertebra_t1'), 't1': ('vertebra_t1', 'vertebra_t2')}
     for k in ROOTS:
         r = k[:2]; m = medial_end(k); up, lo = lev[r]; bodyc = lambda v: S[v][S[v][:, 2] > S[v][:, 2].max() - 15][:, 1].mean(); yu, yl = bodyc(up), bodyc(lo)   # body centres: the foramen lies between adjacent bodies
-        check('roots', f'{r.upper()} leaves the spine between {up[-2:].upper()} and {lo[-2:].upper()}', yl < m[1] < yu, f'root begins at height {r1(m[1])}; {up[-2:].upper()} body centre {r1(yu)}, {lo[-2:].upper()} body centre {r1(yl)}', 'Each root exits through its own intervertebral foramen', 'N p.1149 (numbering convention is standard anatomy, not read in these chapters)', [k])
+        check('roots', f'{r.upper()} leaves the spine between {up[-2:].upper()} and {lo[-2:].upper()}', yl < m[1] < yu, f'root begins at height {r1(m[1])}; {up[-2:].upper()} body center {r1(yu)}, {lo[-2:].upper()} body center {r1(yl)}', 'Each root exits through its own intervertebral foramen', 'N p.1149 (numbering convention is standard anatomy, not read in these chapters)', [k])
         P = S[k]; res = [between_scalenes(p) for p in P[::7]]; inside = [x for x in res if x[2] and x[0] < 6 and x[1] < 6]
         check('roots', f'{r.upper()} passes between the anterior and middle scalenes', len(inside) >= max(3, 0.12 * len(res)), f'{len(inside)} of {len(res)} sampled points lie in the interval, within 6 mm of both muscles (closest: {r1(min(x[0] for x in res))} mm anterior scalene, {r1(min(x[1] for x in res))} mm middle scalene)', 'The roots pass between the anterior and middle scalene muscles', 'N p.1149; H p.44', [k])
     for trunk, rs in zip(TR, (['c5', 'c6'], ['c7'], ['c8', 't1'])):
@@ -142,7 +142,7 @@ check('branches', 'dorsal scapular nerve follows levator scapulae', float(np.mea
 
 # ---------------------------------------------------------------- landmarks
 cy = S['cricoid_cartilage'][:, 1].mean(); c6 = S['vertebra_c6'][:, 1]
-check('landmarks', 'cricoid cartilage is level with C6', c6.min() <= cy <= c6.max(), f'cricoid centre {r1(cy)}; C6 spans {r1(c6.min())} to {r1(c6.max())}', 'The C6 level is found by a line drawn laterally from the cricoid cartilage', 'N p.1152')
+check('landmarks', 'cricoid cartilage is level with C6', c6.min() <= cy <= c6.max(), f'cricoid center {r1(cy)}; C6 spans {r1(c6.min())} to {r1(c6.max())}', 'The C6 level is found by a line drawn laterally from the cricoid cartilage', 'N p.1152')
 if have('phrenic_nerve_r'):
     P = S['phrenic_nerve_r']; d_, i_ = T[ANT].query(P); front = float(np.mean(P[:, 2] > S[ANT][i_][:, 2] - 0.3)); close = float(np.mean(d_ < 4))
     check('landmarks', 'phrenic nerve descends on the anterior surface of the anterior scalene', front > 0.9 and close > 0.9, f'{round(close * 100)}% within 4 mm of the muscle; {round(front * 100)}% in front of its surface', 'The phrenic nerve descends through the neck on the anterior surface of the anterior scalene muscle', 'H p.43', ['phrenic_nerve_r'])

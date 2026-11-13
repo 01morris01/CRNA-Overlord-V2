@@ -66,7 +66,7 @@ const AIR = {   // echo length (s), how much of each sound goes to the echo, and
   preop: { len: 0.45, wet: 0.1, wind: 0, vent: 0.06, hum: 0, birds: 0, says: 'Pre-op holding. Curtains, soft floor, ventilation.' },
   studio: { len: 0.35, wet: 0.06, wind: 0.03, vent: 0, hum: 0, birds: 0.08, says: 'Your studio. Timber floor, a small quiet room.' },
   endo: { len: 0.45, wet: 0.1, wind: 0, vent: 0.09, hum: 0.02, birds: 0, says: 'The endoscopy suite. Ventilation, a hard floor.' },
-  labor: { len: 0.4, wet: 0.08, wind: 0, vent: 0.04, hum: 0, birds: 0.04, says: 'A labour room. Timber floor, a quiet room with a window.' },
+  labor: { len: 0.4, wet: 0.08, wind: 0, vent: 0.04, hum: 0, birds: 0.04, says: 'A labor room. Timber floor, a quiet room with a window.' },
   procedure: { len: 0.4, wet: 0.09, wind: 0, vent: 0.07, hum: 0, birds: 0, says: 'A small procedure room. Ventilation.' },
 };
 export function onCaption(fn) { caption = fn; }

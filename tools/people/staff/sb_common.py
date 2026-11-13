@@ -2,7 +2,7 @@
 
 Microsoft Rocketbox avatars (MIT) arrive as an FBX whose armature is scaled 0.01 and turned a quarter turn, with the mesh
 parented under it. `load_avatar` brings one in and bakes those transforms away, so that afterwards the world is plain:
-metres, Z up, the person facing -Y (which becomes +Z in glTF and in the building), feet near z = 0."""
+meters, Z up, the person facing -Y (which becomes +Z in glTF and in the building), feet near z = 0."""
 import bpy, bmesh, os, math
 from mathutils import Vector, Matrix, Quaternion
 
@@ -115,7 +115,7 @@ def cycles(scene, samples=48, res=(720, 960), transparent=False):
 
 
 def studio(scene, target, fwd, grey=0.55):
-    """Three soft lights around `target` and a grey world: a neutral review set, not the building's light."""
+    """Three soft lights around `target` and a gray world: a neutral review set, not the building's light."""
     side = Vector((-fwd.y, fwd.x, 0)); made = []
     for (off, e, col, sz) in ((fwd * 2.4 + side * 2.0 + Vector((0, 0, 1.4)), 520, (1, 0.96, 0.92), 2.2), (fwd * 2.0 - side * 2.6 + Vector((0, 0, 0.4)), 180, (0.88, 0.93, 1), 2.6), (-fwd * 2.4 + side * 0.8 + Vector((0, 0, 1.8)), 420, (1, 1, 1), 1.2)):
         d = bpy.data.lights.new('rv_light', 'AREA'); d.energy = e; d.color = col; d.size = sz; lo = bpy.data.objects.new('rv_light', d); scene.collection.objects.link(lo)

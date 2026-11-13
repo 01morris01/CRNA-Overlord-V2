@@ -11,7 +11,7 @@ CHECKED = '2026-11-12'
 SOURCES = {
     'harvard_syringes': {
         'what': 'Inside diameter of plastic syringe barrels by size ("BD Plastic": 1 mL 4.78, 3 mL 8.66, 5 mL 12.06, 10 mL 14.5, 20 mL 19.13, 50/60 mL 26.7 mm)',
-        'title': 'Syringe Selection Guide: Common Syringe Data, Diameter and Plunger Surface Area', 'publisher': 'Harvard Apparatus (catalogue page, 2005)',
+        'title': 'Syringe Selection Guide: Common Syringe Data, Diameter and Plunger Surface Area', 'publisher': 'Harvard Apparatus (catalog page, 2005)',
         'url': 'https://karpova-lab.github.io/syringe-pump/v4.0/homepage/syringe_diameters.pdf', 'checked': CHECKED},
     'bd_catalog': {
         'what': 'Graduation interval of each syringe size (1 mL: 1/100 mL; 3 mL: 1/10 mL; 5 and 10 mL: 1/5 mL; 20, 30 and 50 mL: 1 mL) and that every size from 1 to 50 mL is made with a locking luer tip',
@@ -25,11 +25,11 @@ SOURCES = {
         'title': 'Core Vials in StandardLine quality, datasheet 40141 ENGLISH 02/2026, p. 2', 'publisher': 'SCHOTT Pharma AG & Co. KGaA (reproducing ISO 8362-1)',
         'url': 'https://media.schott.com/api/public/content/0815cb6af9774080a9ff85e150f8a724', 'checked': CHECKED},
     'ecg_colours_wikipedia': {
-        'what': 'Electrode colours under the AHA (United States) scheme: RA white, LA black, RL green, LL red, chest electrodes brown (V1 to V6 brown with a second colour); IEC: R red, L yellow, N black, F green, C white',
-        'title': 'Electrocardiography, section "Electrodes and leads", table of electrode names, placement and colours', 'publisher': 'Wikipedia',
+        'what': 'Electrode colors under the AHA (United States) scheme: RA white, LA black, RL green, LL red, chest electrodes brown (V1 to V6 brown with a second color); IEC: R red, L yellow, N black, F green, C white',
+        'title': 'Electrocardiography, section "Electrodes and leads", table of electrode names, placement and colors', 'publisher': 'Wikipedia',
         'url': 'https://en.wikipedia.org/wiki/Electrocardiography', 'checked': CHECKED},
     'ecg_colours_ge': {
-        'what': 'AHA labels with colours as printed: LA (black), RA (white), LL (red), RL (green); in the five-electrode two-channel layout the chest electrode is brown and the ground is green',
+        'what': 'AHA labels with colors as printed: LA (black), RA (white), LL (red), RL (green); in the five-electrode two-channel layout the chest electrode is brown and the ground is green',
         'title': 'Diagnostic ECG Lead Placement (poster), part number DC-0176-11.06-EN-US', 'publisher': 'GE Healthcare, 2006',
         'url': 'https://clinicalview.gehealthcare.com/sites/default/files/ECG%20Lead%20Placement%20Poster.pdf', 'checked': CHECKED},
     'electrode_fiab': {
@@ -48,7 +48,7 @@ SOURCES = {
         'title': 'Lee HJ, Kim KS, Shim JC, Yoon SW. A comparison of the accuracy of ulnar versus median nerve stimulation for neuromuscular monitoring. Korean J Anesthesiol 2011;60(5):334-8',
         'publisher': 'PubMed Central PMC3110291', 'url': 'https://doi.org/10.4097/kjae.2011.60.5.334', 'checked': CHECKED},
     'cannula_colours': {
-        'what': 'Peripheral cannula hub colours and outside diameters by gauge: 14G orange 2.0 mm, 16G grey 1.8, 18G green 1.3, 20G pink 1.1, 22G blue 0.9, 24G yellow 0.6 (the article credits a paediatric anaesthesia text and names no standard)',
+        'what': 'Peripheral cannula hub colors and outside diameters by gauge: 14G orange 2.0 mm, 16G gray 1.8, 18G green 1.3, 20G pink 1.1, 22G blue 0.9, 24G yellow 0.6 (the article credits a pediatric anesthesia text and names no standard)',
         'title': 'Peripheral venous catheter, table of sizes', 'publisher': 'Wikipedia', 'url': 'https://en.wikipedia.org/wiki/Peripheral_venous_catheter', 'checked': CHECKED},
     'french': {
         'what': '1 French = 1/3 mm of outside diameter (16 Fr = 5.33 mm, 18 Fr = 6.0 mm)', 'title': 'French catheter scale', 'publisher': 'Wikipedia', 'url': 'https://en.wikipedia.org/wiki/French_catheter_scale', 'checked': CHECKED},
@@ -61,7 +61,7 @@ SOURCES = {
 }
 
 # ------------------------------------------------------------------------------------------------------------ syringes
-# idmm: barrel inside diameter (harvard_syringes). tick/mid/major: graduation steps in mL; tick is the catalogue interval (bd_catalog).
+# idmm: barrel inside diameter (harvard_syringes). tick/mid/major: graduation steps in mL; tick is the catalog interval (bd_catalog).
 # Everything else (wall, flange, lengths of the tip, plunger and stopper) is unsourced proportion.
 def _labels(step, top, fmt='%g'): return [(round(step * k, 4), fmt % (step * k)) for k in range(1, int(round(top / step)) + 1)]
 SYRINGES = {
@@ -93,8 +93,8 @@ VIALS = {
     '100ml': dict(fmt='100R', ml=100, d1=47, d2=20, d3=17.5, d4=12.6, h1=100, h2=75, h3=10.0, r1=6.5, r2=4.0, s1=1.7, s2=0.9, brim=123.0),
 }
 
-# ------------------------------------------------------------------------------------------------------------ ECG lead colours (ecg_colours_wikipedia, ecg_colours_ge)
-ECG_LEADS = [   # label, where the label means, colour name, sRGB
+# ------------------------------------------------------------------------------------------------------------ ECG lead colors (ecg_colors_wikipedia, ecg_colors_ge)
+ECG_LEADS = [   # label, where the label means, color name, sRGB
     ('RA', 'right arm', 'white', (0.90, 0.90, 0.88)),
     ('LA', 'left arm', 'black', (0.03, 0.03, 0.035)),
     ('RL', 'right leg', 'green', (0.05, 0.42, 0.16)),

@@ -33,7 +33,7 @@
    "id": "anemia",
    "severity": "critical",
    "finding": "Unoptimized anemia",
-   "evidence": "Hgb 8.0, MCV 74, TSAT 14%; second ferric carboxymaltose dose cancelled to 11/03; DOE with one flight.",
+   "evidence": "Hgb 8.0, MCV 74, TSAT 14%; second ferric carboxymaltose dose canceled to 11/03; DOE with one flight.",
    "implication": "No reserve for blood loss, especially if transfusion is refused.",
    "action": "Delay for IV iron completion, consider ESA, minimize phlebotomy.",
    "keywords": [
