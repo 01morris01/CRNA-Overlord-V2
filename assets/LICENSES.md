@@ -49,3 +49,9 @@ explanation), 15 clips, about two and a half minutes. The words are this project
 project owner's ElevenLabs account, by `tools/render_narration.py`. No person was recorded and no voice was cloned; the
 owner's own voice clones were not used. ElevenLabs' terms give the account holder the rights to audio generated on a paid
 plan; the owner should confirm the plan in force covers the use they intend before distributing the app.
+
+## The X-Ray Mirror page (`world/mirror/`)
+
+| Files | From | Licence |
+|---|---|---|
+| `world/mirror/x-ray-mirror.html` | The owner's own X-Ray Mirror page (built with Claude Fable 5). Its anatomy meshes are from BodyParts3D, © The Database Center for Life Science, simplified and re-aligned; it loads MediaPipe tracking and three.js from public CDNs at run time | Page: the owner's. Embedded anatomy: CC BY-SA 2.1 Japan (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en), credited inside the page; changed from the originals |

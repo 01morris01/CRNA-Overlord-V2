@@ -7,6 +7,8 @@ which puts the patient's own right hand on -X), so the same eight views can be t
    head, side_right, side_left            the whole person from the head of the bed and from each side
    face_above, face_three_quarter, face_profile     the face, placed from the nose landmark
    hand_right, hand_left                  each hand, placed from the hand landmarks
+Where a sheet or blanket covers a hand, the two hand views are taken a second time with that cloth hidden for the picture
+(hand_right_uncovered, hand_left_uncovered), so that the hand itself can be compared; the first pair shows what a learner sees.
 The room's own lights are used as they are. The interface is hidden for the pictures; nothing else is changed.
 This takes pictures. It checks nothing and judges nothing."""
 import sys, json, os
@@ -16,7 +18,7 @@ B = f"http://127.0.0.1:{PORT}/world/"; os.makedirs(OUT, exist_ok=True)
 CAMS = """(() => { const p = __ov.periop.patient, r = p.root, L = p.lm, T = __ov.world.camera.position.constructor, w = (v) => r.localToWorld(new T(v[0], v[1], v[2])).toArray(), at = (k, d) => { const q = L[k] || L.nose; return [q.x + d[0], q.y + d[1], q.z + d[2]]; };
   const has = (k) => !!L[k]; return { has: { handR: has('handR'), handL: has('handL'), nose: has('nose') }, cams: {
     head: [w([0, 0.72, -1.55]), w([0, 0.10, -0.60]), 50], side_right: [w([-2.3, 0.65, 0]), w([0, 0.10, 0]), 50], side_left: [w([2.3, 0.65, 0]), w([0, 0.10, 0]), 50],
-    face_above: [w(at('nose', [0, 0.62, -0.26])), w(at('nose', [0, 0, 0])), 30], face_three_quarter: [w(at('nose', [-0.42, 0.34, 0.34])), w(at('nose', [0, 0, 0])), 30], face_profile: [w(at('nose', [-0.75, 0, 0])), w(at('nose', [0, 0, 0])), 26],
+    face_above: [w(at('nose', [0, 0.62, -0.26])), w(at('nose', [0, 0, 0])), 30], face_three_quarter: [w(at('nose', [-0.50, 0.42, 0.44])), w(at('nose', [0, -0.045, -0.07])), 32], face_profile: [w(at('nose', [-0.75, 0, 0])), w(at('nose', [0, 0, 0])), 26],
     hand_right: [w(at('handR', [-0.30, 0.28, 0.22])), w(at('handR', [0, 0, 0])), 30], hand_left: [w(at('handL', [0.30, 0.28, 0.22])), w(at('handL', [0, 0, 0])), 30] } }; })()"""
 with sync_playwright() as p:
     b = p.chromium.launch(channel="chrome", args=["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist"]); ctx = b.new_context(viewport={"width": W, "height": H}, device_scale_factor=1, service_workers="block"); pg = ctx.new_page(); errs = []
@@ -30,5 +32,11 @@ with sync_playwright() as p:
     info = pg.evaluate(CAMS); own = pg.evaluate("__ov.periop.patient.own")
     for name, (eye, look, fov) in info["cams"].items():
         pg.evaluate("([e, l, f]) => __ov.world.view(e, l, f, 0)", [eye, look, fov]); pg.wait_for_timeout(900); pg.screenshot(path=f"{OUT}/{name}.jpg", type="jpeg", quality=92)
-    json.dump({"patient": PID, "own_figure": own, "landmarks_present": info["has"], "cameras_in_room": info["cams"], "window": [W, H], "errors": errs[:5]}, open(f"{OUT}/views.json", "w"), indent=1)
+    covers = pg.evaluate("(() => { const n = []; __ov.periop.patient.root.traverse((o) => { if (o.isMesh && /sheet|blanket/i.test(o.name + ' ' + ((o.material && o.material.name) || ''))) n.push(o.name); }); return n; })()")
+    if covers:
+        pg.evaluate("__ov.periop.patient.root.traverse((o) => { if (o.isMesh && /sheet|blanket/i.test(o.name + ' ' + ((o.material && o.material.name) || ''))) { o.userData._was = o.visible; o.visible = false; } })")
+        for name in ("hand_right", "hand_left"):
+            eye, look, fov = info["cams"][name]; pg.evaluate("([e, l, f]) => __ov.world.view(e, l, f, 0)", [eye, look, fov]); pg.wait_for_timeout(900); pg.screenshot(path=f"{OUT}/{name}_uncovered.jpg", type="jpeg", quality=92)
+        pg.evaluate("__ov.periop.patient.root.traverse((o) => { if (o.userData && '_was' in o.userData) { o.visible = o.userData._was; delete o.userData._was; } })")
+    json.dump({"patient": PID, "own_figure": own, "landmarks_present": info["has"], "cameras_in_room": info["cams"], "cloth_hidden_for_uncovered_hand_views": covers, "window": [W, H], "errors": errs[:5]}, open(f"{OUT}/views.json", "w"), indent=1)
     print("saved", len(info["cams"]), "views of", PID, "to", OUT, "| own figure:", own, "| errors:", errs[:3]); b.close()
