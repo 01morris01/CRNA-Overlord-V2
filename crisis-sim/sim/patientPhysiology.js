@@ -55,6 +55,8 @@ export class PatientPhysiology {
     this.vo2MlMin = 250; this.paO2 = 95;
     this.vco2MlMin = 200; this.paCO2 = 40;
     this.airwayPatency = 1; this.airwayResistanceFactor = 1; this.shuntFraction = 0;
+    /** EXPERIMENTAL sedation layer (sim/sedationExperimental.js); null = the engine exactly as before. */
+    this.sedation = null;
     this.svrFactor = 1; this.heatLoadC = 0; this.hrComplicationOffset = 0;
     this.regionalSensoryBlock = 0; this.regionalMotorBlock = 0;
     this.epiduralSympathectomyContribution = 0;
@@ -217,6 +219,7 @@ export class PatientPhysiology {
   get spontaneousRespiratoryRate() { return f(this.baselineRR * this.centralDrive); }
 
   get spontaneousTidalVolume() {
+    if (this.sedation && this.sedation.active) return this.sedation.tidalVolumeMl;
     return f(f(7 * this.weightKg) * this.respiratoryMuscleCapability);
   }
 
@@ -225,6 +228,9 @@ export class PatientPhysiology {
   }
 
   get spontaneousEffort() { return this.effectiveSpontaneousVentilationFraction; }
+
+  /** EXPERIMENTAL sedation state for the room, or null. */
+  get sedationView() { return this.sedation && this.sedation.active ? this.sedation.view() : null; }
 
   get capnogramPresent() { return this.minuteVentilation > f(0.3); }
 
@@ -306,7 +312,9 @@ export class PatientPhysiology {
       const e = Clamp01(this.propofolCe / 4);
       this._hrModifier = f(this._hrModifier - e * 10);
       this._bpModifier = f(this._bpModifier - e * f(0.28));
-      this._rrModifier = f(this._rrModifier - e * f(0.6));
+      // Experimental sedation: propofol alone can stop breathing; depression grows with the square of Ce/4 (none at 0,
+      // a quarter at Ce 2, all of it at Ce 4). The default engine caps propofol at 60 % and never reaches apnea.
+      this._rrModifier = this.sedation && this.sedation.active ? f(this._rrModifier - e * e) : f(this._rrModifier - e * f(0.6));
     }
     if (this.fentanylCe > 0) {
       const e = Clamp01(this.fentanylCe / 4);
@@ -354,7 +362,8 @@ export class PatientPhysiology {
       this._hrModifier = f(this._hrModifier + Clamp01(this.pancuroniumCe / f(0.15)) * 12);
     }
     this._bpModifier = Max(this._bpModifier, 0.3);
-    this._rrModifier = Max(this._rrModifier, 0.1);
+    // The engine never lets drugs stop breathing (floor 0.1). The experimental sedation layer lifts that floor.
+    this._rrModifier = Max(this._rrModifier, this.sedation && this.sedation.active ? 0 : 0.1);
   }
 
   updateHemodynamics(dt) {
@@ -406,6 +415,8 @@ export class PatientPhysiology {
   }
 
   updateRespiration(dt) {
+    const sed = this.sedation && this.sedation.active ? this.sedation : null;
+    const sedDrive = sed ? sed.update(dt) : 1;
     if (this.isMechanicallyVentilated) {
       this.isBreathingSpontaneously = this.spontaneousEffort > f(0.01);
       return;
@@ -413,13 +424,15 @@ export class PatientPhysiology {
     const procedureOrForcedApnea = this.#forcedApnea || this.#proceduralApnea;
     const targetRR = procedureOrForcedApnea
       ? 0
-      : Clamp(this.baselineRR * this._rrModifier * this.respiratoryDriveFactor, 0, 40);
+      : sed ? Clamp(this.baselineRR * sedDrive, 0, 40)
+        : Clamp(this.baselineRR * this._rrModifier * this.respiratoryDriveFactor, 0, 40);
     this.respiratoryRate = Lerp(this.respiratoryRate, targetRR, dt * 0.5);
     this.isBreathingSpontaneously = !procedureOrForcedApnea
       && this.respiratoryRate >= 2 && this.respiratoryMuscleCapability > f(0.01);
   }
 
   updateOxygenReservoir(dt) {
+    if (this.sedation && this.sedation.active) { this.updateOxygenMassBalance(dt); return; }
     const capacityMl = Max(50, this.frcLiters * 1000);
     const va = this.alveolarVentilationLMin();
     const vaRequired = Max(0.5, f(0.045) * this.weightKg);
@@ -433,6 +446,18 @@ export class PatientPhysiology {
     this.alveolarO2Fraction = f(this.alveolarO2StoresMl / capacityMl);
   }
 
+  /** EXPERIMENTAL sedation layer only: the lung's O2 store by mass balance, d(stores)/dt = VA x (FiO2 - FAO2) - VO2.
+   *  Its steady state is the alveolar gas equation (FAO2 = FiO2 - VO2/VA), so partial hypoventilation gives partial
+   *  desaturation. In apnea (VA = 0) the store drains at VO2, exactly as the default rule does, so the apnea times are kept. */
+  updateOxygenMassBalance(dt) {
+    const capacityMl = Max(50, this.frcLiters * 1000);
+    const vaMlMin = f(this.alveolarVentilationLMin() * 1000);
+    const fa = Clamp01(this.alveolarO2StoresMl / capacityMl);
+    const net = f(vaMlMin * (this.fiO2 - fa) - f(863 / 713) * this.vo2MlMin);      // VO2 (STPD) as alveolar gas at body conditions
+    this.alveolarO2StoresMl = Clamp(f(this.alveolarO2StoresMl + net * (dt / 60)), 0, capacityMl);
+    this.alveolarO2Fraction = f(this.alveolarO2StoresMl / capacityMl);
+  }
+
   alveolarVentilationLMin() {
     const noSpontaneousFlow = this.#forcedApnea || this.#proceduralApnea;
     // A paralyzed or apneic patient who is not being ventilated moves no gas.
@@ -440,6 +465,16 @@ export class PatientPhysiology {
     // below, so drug induced apnea on a mask never desaturated.
     if (!this.isMechanicallyVentilated && !this.isBreathingSpontaneously && this.tidalVolume === 0) return 0;
     const rr = (!this.isMechanicallyVentilated && noSpontaneousFlow) ? 0 : this.respiratoryRate;
+    const sed = this.sedation && this.sedation.active ? this.sedation : null;
+    if (sed) {
+      // Experimental: tidal volume and dead space from ideal body weight; the upper airway counts unless a tube bypasses it.
+      const tvS = this.isMechanicallyVentilated ? (this.tidalVolume > 0 ? this.tidalVolume : 0) : (this.isBreathingSpontaneously ? sed.tidalVolumeMl : 0);
+      const upper = this.#airwayDeviceState === AirwayDevice.Intubated ? 1 : sed.patency;
+      const vaS = f(f(Max(0, (tvS - sed.deadSpaceMl) * rr) / 1000) * this.airwayPatency * upper);
+      sed.alveolarVentilationLMin = vaS;
+      sed.flowRR = (!this.isMechanicallyVentilated && this.isBreathingSpontaneously && tvS * upper > sed.deadSpaceMl * 0.5) ? this.respiratoryRate : (this.isMechanicallyVentilated ? rr : 0);
+      return vaS;
+    }
     const tv = this.tidalVolume > 0 ? this.tidalVolume : 450;
     const deadspace = Max(60, f(2.2) * this.weightKg);
     const va = f(Max(0, (tv - deadspace) * rr) / 1000);
@@ -447,6 +482,9 @@ export class PatientPhysiology {
   }
 
   alveolarPO2() {
+    // Experimental sedation: the mass-balanced store already holds the O2 the body has taken out (FAO2 = FiO2 - k VO2/VA),
+    // so the CO2 term of the alveolar gas equation is not subtracted a second time.
+    if (this.sedation && this.sedation.active) return Max(0, this.alveolarO2Fraction * (760 - 47));
     return Max(0, this.alveolarO2Fraction * (760 - 47) - this.paCO2 / f(0.8));
   }
 

@@ -291,6 +291,8 @@ export class VentilatorSystem {
       && this.airwayProcedure?.ppvActive === true;
     const controlled = !procedureBlocked && connected && this.mode !== VentMode.Manual;
     this.patient.fiO2 = this.measuredFiO2;
+    // Experimental sedation: on a natural airway the patient breathes what the supplemental device gives, not the circuit.
+    if (this.patient.sedation && this.patient.sedation.active && this.patient.airwayDeviceState !== 'intubated') this.patient.fiO2 = this.patient.sedation.inspiredO2For(this.measuredFiO2);
     this.patient.tidalVolume = this.measuredTidalVolume;
     let effectiveMinuteVent = this.measuredMinuteVent;
     if (ppvSupported
@@ -306,7 +308,8 @@ export class VentilatorSystem {
   }
 
   updateCO2(dt) {
-    const deadspace = Max(60, f(2.2) * this.patient.weightKg);
+    const sed = this.patient.sedation && this.patient.sedation.active ? this.patient.sedation : null;
+    const deadspace = sed ? sed.deadSpaceMl : Max(60, f(2.2) * this.patient.weightKg);
     const procedureBlocked = this.airwayProcedure?.intubationInProgress === true;
     const ppvSupported = !procedureBlocked
       && this.patient.airwayDeviceState === 'mask'
@@ -321,7 +324,8 @@ export class VentilatorSystem {
     const spontaneousTv = this.co2Kinetics === 'stores' && this.patient.spontaneousTidalVolume > 0 ? this.patient.spontaneousTidalVolume : 400;
     const tv = mechanicallySupported ? this.measuredTidalVolume
       : (this.patient.isBreathingSpontaneously ? spontaneousTv : 0);
-    const vaLMin = f(Max(0, (tv - deadspace) * rr) / 1000 * this.patient.airwayPatency);
+    const upperAirway = sed && this.patient.airwayDeviceState !== 'intubated' ? sed.patency : 1;      // experimental sedation only
+    const vaLMin = f(Max(0, (tv - deadspace) * rr) / 1000 * this.patient.airwayPatency * upperAirway);
 
     if (this.co2Kinetics === 'stores') {
       // dPaCO2/dt = (CO2 produced - CO2 breathed out) / storage capacity

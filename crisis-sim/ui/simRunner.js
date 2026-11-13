@@ -14,6 +14,7 @@ import {
   buildLidocaineAttribution,
 } from '../sim/scenario/scenarioDebrief.js';
 import { CaseSession } from '../sim/scenario/caseSession.js';
+import { SedationModel, SEDATION_PARAMS, SEDATION_MODEL_VERSION } from '../sim/sedationExperimental.js';
 import { applyCasePhysiologyInput } from '../sim/scenario/casePhysiologyInputs.js';
 
 const SEED = 12345;
@@ -1260,6 +1261,7 @@ export class SimRunner {
       centralDrive: p.centralDrive, effectiveNmbBlockade: p.effectiveNmbBlockade,
       respiratoryMuscleCapability: p.respiratoryMuscleCapability,
       spontaneousRR: p.spontaneousRespiratoryRate, spontaneousTV: p.spontaneousTidalVolume,
+      sedation: p.sedationView,      // EXPERIMENTAL sedation layer state, null unless switched on
       spontaneousMV: p.spontaneousMinuteVentilation, spontaneousEffort: p.spontaneousEffort,
       capnogramPresent: p.capnogramPresent,
       cricoidPressureActive: this.a.cricoidPressureActive,
@@ -1832,6 +1834,24 @@ export class SimRunner {
 
   /* Volatile uptake: 'physiologic' (circuit, alveolar, tissue kinetics) or
      'legacy' (Et follows the dial within seconds, to show the concept). */
+  // ---- EXPERIMENTAL sedation (sim/sedationExperimental.js). Off by default; nothing below changes the engine until it is on.
+  /** 'experimental' switches the sedation layer on for this patient; 'off' removes it. Logged, so a debrief shows which model ran. */
+  setSedationModel(mode, { osa, bmi, mallampati } = {}) {
+    const p = this.p;
+    if (mode === 'experimental') { if (!p.sedation) p.sedation = new SedationModel(p); p.sedation.active = true; p.sedation.setRisk({ osa, bmi, mallampati }); p.sedation.applyMetabolicScaling(); this.logEvent('Model', `Sedation model: ${SEDATION_MODEL_VERSION} (experimental, not reviewed)`, { instructorAction: 'sedation_model', mode }); }
+    else { if (p.sedation) { p.sedation.restore(); p.sedation.active = false; } p.sedation = null; this.logEvent('Model', 'Sedation model: off (engine as before)', { instructorAction: 'sedation_model', mode: 'off' }); }
+    this.emit?.(); return { ok: true, mode: p.sedation ? 'experimental' : 'off' };
+  }
+  sedationParams() { return { version: SEDATION_MODEL_VERSION, params: SEDATION_PARAMS }; }
+  /** Supplemental oxygen on a natural airway: 'none', 'cannula' with a flow in L/min, or 'circuit' (the anesthesia mask on the face). */
+  setSupplementalO2(device, flowLPerMin = 0) { const s = this.p.sedation; if (!s) return { ok: false, reason: 'the sedation model is off' }; const r = s.setDevice(device, flowLPerMin); this.logEvent('Airway', device === 'cannula' ? `Nasal cannula ${r.flowLPerMin} L/min` : device === 'circuit' ? 'Face mask on the circuit' : 'No supplemental oxygen', { room: 'airway', device: r.device, flow: r.flowLPerMin }); this.emit?.(); return r; }
+  /** chinLift, jawThrust, nasalAirway, oralAirway: on or off. */
+  setAirwayManeuver(name, on) { const s = this.p.sedation; if (!s) return { ok: false, reason: 'the sedation model is off' }; const r = s.setManeuver(name, on); if (r.ok) this.logEvent('Airway', `${name} ${on ? 'on' : 'off'}`, { room: 'airway', maneuver: name, on: !!on }); this.emit?.(); return r; }
+  /** 'supine', 'ramped' or 'lateral': the patient's position as the sedation layer sees it. */
+  setPatientPosition(pos) { const s = this.p.sedation; if (!s) return { ok: false, reason: 'the sedation model is off' }; const r = s.setPosition(pos); this.logEvent('Position', `Patient ${r.position}`, { room: 'position', position: r.position }); this.emit?.(); return r; }
+  startInfusion(drugName, ratePerHour) { this.d.startInfusion(drugName, ratePerHour); this.logEvent('Drug', `${drugName} infusion ${ratePerHour}/h`, { room: 'drug', drug: drugName, ratePerHour }); this.emit?.(); return { ok: true }; }
+  stopInfusion(drugName) { this.d.stopInfusion(drugName); this.logEvent('Drug', `${drugName} infusion stopped`, { room: 'drug', drug: drugName }); this.emit?.(); return { ok: true }; }
+
   setAgentKinetics(mode) {
     const next = mode === 'legacy' ? 'legacy' : 'physiologic';
     const v = this.v;
