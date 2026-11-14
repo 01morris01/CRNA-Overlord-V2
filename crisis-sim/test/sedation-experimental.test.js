@@ -18,6 +18,9 @@ import {
   idealBodyWeightKg,
 } from '../sim/sedationExperimental.js';
 
+const EXPECTED_PROPOFOL_DROP_AT_CE1 = 12.6;
+const EXPECTED_PROPOFOL_DROP_TOLERANCE = 3.3;
+
 const ENDO = { w: 139.4, h: 178, a: 58, risk: { osa: true, bmi: 44, mallampati: 3 } };
 /** An awake adult on a natural airway, CO2 by mass balance, with the experimental layer on (or off). */
 function patient(seed, { w = 70, h = 170, a = 45, risk = { osa: false, bmi: 24, mallampati: 1 }, position = 'lateral', cannula = 2, experimental = true } = {}) {
@@ -48,7 +51,7 @@ describe('experimental sedation: switched off, the engine is unchanged', () => {
   });
   it('every new parameter states where it comes from', () => {
     for (const [k, v] of Object.entries(SEDATION_PARAMS)) {
-      expect(['source', 'source-range', 'signoff', 'engineering', 'unsourced'], k).toContain(v.kind);
+      expect(['standard', 'source', 'source-range', 'signoff', 'engineering', 'unsourced'], k).toContain(v.kind);
       expect(v.note.length, k).toBeGreaterThan(20);
       if (v.kind === 'source' || v.kind === 'source-range') expect(v.note, k).toMatch(/(DOI\s+\S+|PMID\s+\d+)/i);
     }
@@ -128,13 +131,47 @@ describe('experimental sedation: calibration anchors', () => {
     r.p.sedation.setRisk({ osa: false, bmi: 23, mallampati: 1 });
     r.p.sedation.setPosition('supine');
     r.p.sedation.setDevice('none', 0);
-    r.p.propofolCe = 1.0;
+    const originalUpdatePropofolPk = r.d.updatePropofolPK.bind(r.d);
+    r.d.updatePropofolPK = function updatePropofolPkFixedCe() {
+      this._ppfCe = 1.0;
+      this.patient.propofolCe = 1.0;
+    };
     r.core.stepFor(600);
+    r.d.updatePropofolPK = originalUpdatePropofolPk;
     const baselineMinuteVent = r.p.baselineRR * (7 * idealBodyWeightKg(175, 'Male')) / 1000;
     const observed = r.p.minuteVentilation;
     const percentFall = (baselineMinuteVent - observed) / baselineMinuteVent * 100;
-    expect(percentFall).toBeGreaterThanOrEqual(6.0);
-    expect(percentFall).toBeLessThanOrEqual(19.2);
+    expect(percentFall).toBeGreaterThanOrEqual(EXPECTED_PROPOFOL_DROP_AT_CE1 - EXPECTED_PROPOFOL_DROP_TOLERANCE);
+    expect(percentFall).toBeLessThanOrEqual(EXPECTED_PROPOFOL_DROP_AT_CE1 + EXPECTED_PROPOFOL_DROP_TOLERANCE);
+  });
+
+  it('keeps propofol drive loss below total loss for every Ce below 4.0', () => {
+    const model = new SedationModel({ heightCm: 175, sex: 'Male', baselineRR: 14 });
+    for (let ce = 0; ce < 4; ce = +(ce + 0.1).toFixed(1)) {
+      expect(model.propofolDriveLoss(ce), `Ce ${ce.toFixed(1)}`).toBeLessThan(1);
+    }
+    expect(model.propofolDriveLoss(4)).toBeLessThan(1);
+  });
+
+  it('keeps propofol drive loss monotonic from Ce 0 to 6', () => {
+    const model = new SedationModel({ heightCm: 175, sex: 'Male', baselineRR: 14 });
+    let previous = -1;
+    for (let ce = 0; ce <= 6; ce = +(ce + 0.1).toFixed(1)) {
+      const current = model.propofolDriveLoss(ce);
+      expect(current, `Ce ${ce.toFixed(1)}`).toBeGreaterThanOrEqual(previous);
+      previous = current;
+    }
+  });
+
+  it('converts the published CO2 slope against resting minute ventilation, not alveolar ventilation', () => {
+    const r = patient(5111, { w: 70, h: 175, a: 45, risk: { osa: false, bmi: 23, mallampati: 1 }, position: 'supine', cannula: 0 });
+    const baselineMinuteVent = r.p.baselineRR * (7 * idealBodyWeightKg(175, 'Male')) / 1000;
+    const setPoint = SEDATION_PARAMS.co2SetPointMmHg.value;
+    r.p.paCO2 = setPoint + 5;
+    const targetMinuteVent = baselineMinuteVent * r.p.sedation.co2Term(1);
+    const slope = (targetMinuteVent - baselineMinuteVent) / 5;
+    expect(slope).toBeGreaterThanOrEqual(1.8);
+    expect(slope).toBeLessThanOrEqual(2.2);
   });
 });
 

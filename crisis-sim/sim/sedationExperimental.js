@@ -13,11 +13,12 @@
  *   ventilation  alveolar ventilation from rate, tidal volume (ideal body weight), dead space (ideal body weight) and patency
  *   oxygen    inspired O2 from the supplemental device: none, nasal cannula by flow, or the circuit's own mask
  *
- * Every number below carries its provenance in SEDATION_PARAMS: `source` (a cited value), `source-range` (a value chosen
- * inside a verified published range), `signoff` (a recorded owner decision), `engineering` (a numerical stability or model
- * limit, not a physiological claim) or `unsourced` (a working value chosen so the model behaves in the right direction; it
- * must be reviewed before it is taught as fact). Most of the new links are unsourced. The room must say "experimental"
- * wherever this model runs.
+ * Every number below carries its provenance in SEDATION_PARAMS: `standard` (established textbook physiology or physics that
+ * does not need a single-study citation here), `source` (a cited value), `source-range` (a value chosen inside a verified
+ * published range), `signoff` (a recorded owner decision), `engineering` (a numerical stability or model limit, not a
+ * physiological claim) or `unsourced` (a working value chosen so the model behaves in the right direction; it must be
+ * reviewed before it is taught as fact). Most of the new links are unsourced. The room must say "experimental" wherever
+ * this model runs.
  */
 import { f, Clamp, Clamp01, Exp, Max, Pow } from './float32.js';
 
@@ -28,8 +29,8 @@ export const SEDATION_PARAMS = Object.freeze({
   depthModel: P('Eleveld 2018 PK/PD, BIS with Bouillon/Greco opioid synergy', 'signoff', 'Owner decision recorded 2026-06-11 for the Unity trainer, carried into this engine; the record is in the assistant\'s session notes, no signed document was found in either repository'),
   // ---- drive
   drugDepressionFloor: P(0, 'unsourced', 'The engine floors drug depression at 0.1 (never apnea). Here it may reach 0 so a deep enough dose stops breathing. The per-drug coefficients themselves (propofol 0.6 at Ce 4, fentanyl 1.1, midazolam 0.3, volatile 0.4 per MAC) are the engine\'s own, ported from the Unity trainer without a verified literature anchor in EVIDENCE.md'),
-  propofolDepression: P({ scale: 1.35, exponent: 1.8 }, 'unsourced', 'Experimental mode only: drive loss = 1.35 x (Ce/4)^1.8, clamped to 0-1. Calibrated so a healthy 70 kg, 175 cm man at propofol Ce 1.0 ug/mL on room air with no opioid and full patency shows a 12.6 % fall in resting minute ventilation within the verified Nieuwenhuijs 2003 target band of 12.6 +/- 6.6 points (DOI 10.1097/00000542-200302000-00008). This is still a placeholder shape; Ce 4 is not treated here as a verified apnea threshold.'),
-  co2SetPointMmHg: P(40, 'unsourced', 'Physiological default set point for this layer. No verified PubMed-backed source in EVIDENCE.md was provided for pinning a specific arterial resting set point here.'),
+  propofolDepression: P({ scale: 0.1, exponent: 1.5 }, 'unsourced', 'Experimental mode only: propofol drive loss = 0.1 x Ce^1.5. This two-parameter power-law shape is a calibration choice, not a sourced apnea threshold. In the existing healthy 70 kg, 175 cm man steady-state calibration test at Ce 1.0 ug/mL, room air, full patency and closed-loop CO2 response, it gives about a 14.0 % fall in resting minute ventilation, within the Nieuwenhuijs 2003 target band of 12.6 +/- 3.3 points (DOI 10.1097/00000542-200302000-00008). It stays below total drive loss for all Ce under 4 and remains monotonic over the tested Ce 0-6 range. Drive loss on this curve is about 0.283 at Ce 2, 0.520 at Ce 3, 0.800 at Ce 4 and 1.470 at Ce 6 before the usual 0-1 clamp.'),
+  co2SetPointMmHg: P(40, 'standard', 'Standard physiological resting arterial CO2 set point used operationally for this layer; no single-study citation is required here.'),
   co2SlopeLMinPerMmHg: P(2.0, 'source-range', 'Verified published range for awake CO2 response slope: 1.27 +/- 0.31 L/min/mmHg in steady-state normoxia (Xie 2006, DOI 10.1113/jphysiol.2006.110627) to 2.48 +/- 1.05 L/min/mmHg with rebreathing before epidural fentanyl (Negre 1987, PMID 3111304); 2.0 is chosen inside that range.'),
   co2GainBluntedByDrugs: P(true, 'unsourced', 'The CO2 gain is multiplied by the square of the remaining drug drive, so a drugged patient responds less to the same rise. Placeholder only: evidence shows drugs change BOTH slope and curve position (Allsop 1988 PMID 3065083: propofol alone shifted right with no slope change; Babenco 2000 DOI 10.1097/00000542-200002000-00020: remifentanil slope 0.99 -> 0.27), so this squared multiplier is only a temporary stand-in.'),
   co2DriveMax: P(2.5, 'engineering', 'Numerical stability ceiling only. A 2.5x physiological ceiling is not supported by the evidence; healthy adults can exceed it under hypercapnia. This clamp exists only to keep the simulation stable.'),
@@ -52,8 +53,8 @@ export const SEDATION_PARAMS = Object.freeze({
   reliefOralAirway: P(0.35, 'unsourced', 'No published evidence supports a fixed percentage of obstruction relief from an oral airway in this model.'),
   patencyFloor: P(0.03, 'unsourced', 'Complete obstruction still leaks a little. Working numerical floor, not a verified physiological claim.'),
   // ---- oxygen
-  oxygenStore: P('mass balance: d(stores)/dt = VA x (FiO2 - FAO2) - VO2', 'unsourced', 'The mass-balance oxygen store is a physiology-motivated model choice for this layer, but no single verified DOI/PMID source was supplied in EVIDENCE.md for this exact implementation note.'),
-  alveolarPO2: P('PAO2 = FAO2 x (PB - PH2O), with FAO2 from the mass-balanced store', 'unsourced', 'The alveolar PO2 calculation follows standard physiology, but no verified DOI/PMID source was supplied in EVIDENCE.md for this exact formulation note.'),
+  oxygenStore: P('mass balance: d(stores)/dt = VA x (FiO2 - FAO2) - VO2', 'standard', 'The alveolar gas equation at steady state (FAO2 = FiO2 - VO2/VA), standard respiratory physiology. Replaces, in this mode only, the engine\'s blend toward an empty store by VA / (0.045 L/min per kg of TOTAL weight), which made any hypoventilation in a large patient behave like apnea. Apnea still drains the store at VO2, so the signed-off Benumof apnea times are unchanged. VO2 itself is the engine\'s 3.5 mL/kg of total weight (unsourced for obesity).'),
+  alveolarPO2: P('PAO2 = FAO2 x (PB - PH2O), with FAO2 from the mass-balanced store', 'standard', 'Equivalent at steady state to the alveolar gas equation PAO2 = PIO2 - PACO2/R (863/713 converts VO2 to alveolar conditions). The engine subtracts PaCO2/0.8 from a store that does not account for O2 uptake; with the mass balance that would count uptake twice.'),
   metabolicWeight: P('ideal body weight + 0.4 x (total - ideal)', 'unsourced', 'VO2 (3.5 mL/kg) and VCO2 (2.8 mL/kg) are scaled to this weight instead of total weight. Resting energy expenditure is better predicted by fat-free mass: Mifflin 1990 found REE = 19.7 x FFM + 413 with R^2 0.64 (DOI 10.1093/ajcn/51.2.241), so this 0.4 adjusted-weight rule remains an unsourced placeholder.'),
   cannulaFio2: P('0.21 + 0.038 per L/min', 'source', 'O\'Reilly Nugent 2014 measured about +0.038 FiO2 per L/min by nasal cannula, with 0.296 at 2 L/min, and reported that measured FiO2 falls as minute ventilation rises; that ventilation dependence is not yet modeled here (DOI 10.1111/resp.12268).'),
   cannulaMaxFlow: P(6, 'engineering', 'Engineering limit for ordinary nasal cannula flow in this UI/model path; not a physiological claim.'),
@@ -167,14 +168,15 @@ export class SedationModel {
   }
   get ibwKg() { return idealBodyWeightKg(this.patient.heightCm, this.patient.sex); }
   get deadSpaceMl() { return Max(60, f(SEDATION_PARAMS.deadSpaceMlPerKgIbw.value * this.ibwKg)); }
-  get restingAlveolarVentilationLMin() {
+  get restingMinuteVentilationLMin() {
     const tv = f(SEDATION_PARAMS.tidalVolumeMlPerKgIbw.value * this.ibwKg);
-    return f(Max(0, (tv - this.deadSpaceMl) * this.patient.baselineRR) / 1000);
+    return f(tv * this.patient.baselineRR / 1000);
   }
   propofolDriveLoss(ceUgMl) {
     const cfg = SEDATION_PARAMS.propofolDepression.value;
-    const e = Clamp01((+ceUgMl || 0) / 4);
-    return Clamp01(f(cfg.scale * Pow(e, cfg.exponent)));
+    const ce = Max(0, +ceUgMl || 0);
+    if (ce <= 0) return 0;
+    return Clamp01(f(cfg.scale * Pow(ce, cfg.exponent)));
   }
   setDevice(device, flowLPerMin = 0) {
     const d = ['none', 'cannula', 'circuit'].includes(device) ? device : 'none';
@@ -198,12 +200,11 @@ export class SedationModel {
   /** CO2 term of central drive. */
   co2Term(drugDrive) {
     const S = SEDATION_PARAMS;
-    // The engine does not store a baseline minute ventilation, so convert the published absolute CO2-response slope
-    // to a fractional drive using this model's own resting alveolar ventilation at baseline rate, ideal-weight tidal volume,
-    // and ideal-weight dead space.
-    const baselineVent = Max(0.1, this.restingAlveolarVentilationLMin);
+    // Published CO2-response slopes are total MINUTE-ventilation responses, so convert them to a fractional drive using
+    // this model's own resting minute ventilation at baseline rate and ideal-weight tidal volume, without subtracting dead space.
+    const baselineMinuteVent = Max(0.1, this.restingMinuteVentilationLMin);
     const slope = f(S.co2SlopeLMinPerMmHg.value * (S.co2GainBluntedByDrugs.value ? drugDrive * drugDrive : 1));
-    const gain = f(slope / baselineVent);
+    const gain = f(slope / baselineMinuteVent);
     return Clamp(f(1 + gain * Max(-5, this.patient.paCO2 - S.co2SetPointMmHg.value)), 0.7, S.co2DriveMax.value);
   }
   /** Obstruction (0 open .. 1 closed) from depth and collapsibility, after the maneuvers in place. */

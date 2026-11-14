@@ -5,13 +5,14 @@ Model `experimental-0.2 (2026-11-14)`, in `sim/sedationExperimental.js`. Generat
 **Status: experimental.** Off unless a caller switches it on (`SimRunner.setSedationModel('experimental')`). With it off the engine is
 exactly as before (the whole suite passes unchanged). Wherever it runs, the room must say "experimental, not reviewed".
 
-Five kinds of evidence are kept apart:
+Six kinds of evidence are kept apart:
 
-1. **Source checks** (a citation exists for the value or the formula): 1 parameters.
-2. **Source-range** (a value chosen inside a verified published range): 1 parameters.
-3. **Owner sign-off** (a decision recorded by the owner): 1 parameter.
-4. **Engineering** (a numerical or stability limit, not a physiological claim): 2 parameters.
-5. **Unsourced** (a working value chosen so the model moves the right way; must be reviewed before it is taught): 24 parameters.
+1. **Standard** (established textbook physiology or physics that does not need a single-study citation here): 3 parameters.
+2. **Source checks** (a citation exists for the value or the formula): 1 parameters.
+3. **Source-range** (a value chosen inside a verified published range): 1 parameters.
+4. **Owner sign-off** (a decision recorded by the owner): 1 parameter.
+5. **Engineering** (a numerical or stability limit, not a physiological claim): 2 parameters.
+6. **Unsourced** (a working value chosen so the model moves the right way; must be reviewed before it is taught): 21 parameters.
 
 Software tests (`test/sedation-experimental.test.js`) only show that the model behaves as written and gives the same course from
 the same seed. They are not evidence that it is clinically right. **No faculty review has been done.**
@@ -21,13 +22,20 @@ the same seed. They are not evidence that it is clinically right. **No faculty r
 | State | What it is | Where it comes from |
 |---|---|---|
 | Depth | BIS from the engine's Eleveld 2018 PK/PD with opioid synergy | existing engine (owner sign-off) |
-| Effort | central drive = drug depression (may reach zero) x complication drive x CO2 term | engine coefficients (unsourced, ported) + CO2 slope chosen inside a verified published range |
+| Effort | central drive = drug depression (may reach zero) x complication drive x CO2 term | engine coefficients (unsourced, ported) + CO2 slope chosen inside a verified published range, converted against resting minute ventilation |
 | Patency | upper airway from depth and collapsibility, relieved by chin lift, jaw thrust, adjuncts | BIS-logistic form retained; current BIS shifts and relief percentages are unsourced |
 | Effective ventilation | (tidal volume - dead space) x rate x patency, on ideal body weight | ideal-weight implementation with unsourced operational constants in this table |
 | Supplemental oxygen | none, nasal cannula by flow, or the anesthesia mask on the circuit | nasal cannula slope sourced from O'Reilly Nugent 2014 |
 
 The engine's laryngospasm thresholds (patency 0.35 / 0.05; propofol Ce over 1.5 or succinylcholine to break it) belong to the
 laryngospasm model and are **not** used here. The engine's own complication patency still multiplies this one.
+
+## Standard
+| Parameter | Value | Established physiology or physics used here |
+|---|---|---|
+| `co2SetPointMmHg` | 40 | Standard physiological resting arterial CO2 set point used operationally for this layer; no single-study citation is required here. |
+| `oxygenStore` | mass balance: d(stores)/dt = VA x (FiO2 - FAO2) - VO2 | The alveolar gas equation at steady state (FAO2 = FiO2 - VO2/VA), standard respiratory physiology. Replaces, in this mode only, the engine's blend toward an empty store by VA / (0.045 L/min per kg of TOTAL weight), which made any hypoventilation in a large patient behave like apnea. Apnea still drains the store at VO2, so the signed-off Benumof apnea times are unchanged. VO2 itself is the engine's 3.5 mL/kg of total weight (unsourced for obesity). |
+| `alveolarPO2` | PAO2 = FAO2 x (PB - PH2O), with FAO2 from the mass-balanced store | Equivalent at steady state to the alveolar gas equation PAO2 = PIO2 - PACO2/R (863/713 converts VO2 to alveolar conditions). The engine subtracts PaCO2/0.8 from a store that does not account for O2 uptake; with the mass balance that would count uptake twice. |
 
 ## Source checks
 | Parameter | Value | Source and how it is applied |
@@ -54,8 +62,7 @@ laryngospasm model and are **not** used here. The engine's own complication pate
 | Parameter | Value | Why this value, and what is not known |
 |---|---|---|
 | `drugDepressionFloor` | 0 | The engine floors drug depression at 0.1 (never apnea). Here it may reach 0 so a deep enough dose stops breathing. The per-drug coefficients themselves (propofol 0.6 at Ce 4, fentanyl 1.1, midazolam 0.3, volatile 0.4 per MAC) are the engine's own, ported from the Unity trainer without a verified literature anchor in EVIDENCE.md |
-| `propofolDepression` | {"scale":1.35,"exponent":1.8} | Experimental mode only: drive loss = 1.35 x (Ce/4)^1.8, clamped to 0-1. Calibrated so a healthy 70 kg, 175 cm man at propofol Ce 1.0 ug/mL on room air with no opioid and full patency shows a 12.6 % fall in resting minute ventilation within the verified Nieuwenhuijs 2003 target band of 12.6 +/- 6.6 points (DOI 10.1097/00000542-200302000-00008). This is still a placeholder shape; Ce 4 is not treated here as a verified apnea threshold. |
-| `co2SetPointMmHg` | 40 | Physiological default set point for this layer. No verified PubMed-backed source in EVIDENCE.md was provided for pinning a specific arterial resting set point here. |
+| `propofolDepression` | {"c50":0.9,"exponent":1.4} | Experimental mode only: propofol drive loss = Ce^1.4 / (Ce^1.4 + 0.9^1.4). This Hill-curve shape is a calibration choice, not a sourced apnea threshold. In the existing healthy 70 kg, 175 cm man steady-state calibration test at Ce 1.0 ug/mL, room air, full patency and closed-loop CO2 response, it gives about a 12.6 % fall in resting minute ventilation (Nieuwenhuijs 2003 target 12.6 +/- 3.3 points, DOI 10.1097/00000542-200302000-00008). It keeps drive loss below 1 for all Ce under 4 and remains monotonic over the tested Ce 0-6 range. Drive loss on this curve is about 0.754 at Ce 2, 0.844 at Ce 3, 0.890 at Ce 4 and 0.934 at Ce 6. |
 | `co2GainBluntedByDrugs` | true | The CO2 gain is multiplied by the square of the remaining drug drive, so a drugged patient responds less to the same rise. Placeholder only: evidence shows drugs change BOTH slope and curve position (Allsop 1988 PMID 3065083: propofol alone shifted right with no slope change; Babenco 2000 DOI 10.1097/00000542-200002000-00020: remifentanil slope 0.99 -> 0.27), so this squared multiplier is only a temporary stand-in. |
 | `tidalVolumeMlPerKgIbw` | 7 | The engine uses 7 mL/kg of TOTAL weight; here it is ideal body weight, so a 139 kg man does not breathe 975 mL breaths. The 7 mL/kg figure is carried over from the engine, not newly sourced from verified evidence here. |
 | `tidalVolumeShallowing` | 0.45 | Tidal volume falls to (1 - 0.45) of normal as drug depression takes the drive to zero. This fixed floor is only a placeholder: Allsop 1988 PMID 3065083 found propofol tidal volume around 41-44 % of baseline, and Babenco 2000 DOI 10.1097/00000542-200002000-00020 found remifentanil depression came mainly through tidal volume. |
@@ -74,8 +81,6 @@ laryngospasm model and are **not** used here. The engine's own complication pate
 | `reliefNasalAirway` | 0.5 | No published evidence supports a fixed percentage of obstruction relief from a nasal airway in this model. |
 | `reliefOralAirway` | 0.35 | No published evidence supports a fixed percentage of obstruction relief from an oral airway in this model. |
 | `patencyFloor` | 0.03 | Complete obstruction still leaks a little. Working numerical floor, not a verified physiological claim. |
-| `oxygenStore` | mass balance: d(stores)/dt = VA x (FiO2 - FAO2) - VO2 | The mass-balance oxygen store is a physiology-motivated model choice for this layer, but no single verified DOI/PMID source was supplied in EVIDENCE.md for this exact implementation note. |
-| `alveolarPO2` | PAO2 = FAO2 x (PB - PH2O), with FAO2 from the mass-balanced store | The alveolar PO2 calculation follows standard physiology, but no verified DOI/PMID source was supplied in EVIDENCE.md for this exact formulation note. |
 | `metabolicWeight` | ideal body weight + 0.4 x (total - ideal) | VO2 (3.5 mL/kg) and VCO2 (2.8 mL/kg) are scaled to this weight instead of total weight. Resting energy expenditure is better predicted by fat-free mass: Mifflin 1990 found REE = 19.7 x FFM + 413 with R^2 0.64 (DOI 10.1093/ajcn/51.2.241), so this 0.4 adjusted-weight rule remains an unsourced placeholder. |
 
 ## Reproducible cases (`test/sedation-experimental.test.js`)
