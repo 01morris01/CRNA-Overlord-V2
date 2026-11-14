@@ -13,7 +13,8 @@
    so the change cannot go unnoticed. No existing test or expected value was edited. */
 import { describe, expect, it } from 'vitest';
 import { VentilatorSystem, CO2_STORE_ML_PER_MMHG } from '../sim/ventilatorSystem.js';
-import { buildPhysRig } from '../sim/index.js';
+import { AirwayDevice, buildPhysRig, VentMode } from '../sim/index.js';
+import { idealBodyWeightKg } from '../sim/sedationExperimental.js';
 
 /** The update rule alone: a 70 kg patient on a mask, breathing spontaneously at `rr` (0 = apnoea), VCO2 200 mL/min. */
 function bench(kinetics, { rr, seconds, dt = 0.02, start = 40, vco2 = 200 }) {
@@ -40,6 +41,46 @@ describe('CO2 kinetics: the reported behaviour, reproduced in isolation (legacy 
     const below = risePerMin('legacy', 1.2), above = risePerMin('legacy', 1.25);   // VA 0.295 and 0.3075 L/min
     expect(VA(1.2)).toBeLessThan(0.3); expect(VA(1.25)).toBeGreaterThan(0.3);
     expect(above / below).toBeLessThan(1.5);
+  });
+});
+
+describe('dead space basis', () => {
+  it('defaults to total body weight for 70 kg and 139 kg patients', () => {
+    for (const weightKg of [70, 139]) {
+      const r = buildPhysRig(6000 + weightKg, weightKg, 170, 45);
+      expect(r.v.deadSpaceBasis).toBe('total');
+      expect(r.v.getDeadSpaceMl()).toBeCloseTo(Math.max(60, 2.2 * weightKg), 4);
+    }
+  });
+
+  it('uses Devine ideal body weight when deadSpaceBasis is ideal', () => {
+    const r = buildPhysRig(6139, 139, 175, 45);
+    r.p.sex = 'Male';
+    r.v.deadSpaceBasis = 'ideal';
+    expect(r.v.getDeadSpaceMl()).toBeCloseTo(2.2 * idealBodyWeightKg(175, 'Male'), 5);
+  });
+
+  it('lowers EtCO2 on the same ventilator settings in a large patient', () => {
+    const run = (deadSpaceBasis) => {
+      const r = buildPhysRig(6140, 139, 175, 45);
+      r.p.sex = 'Male';
+      r.v.co2Kinetics = 'stores';
+      r.v.deadSpaceBasis = deadSpaceBasis;
+      r.p.transitionAirwayDevice(AirwayDevice.Intubated);
+      r.v.setMode(VentMode.VCV);
+      r.v.setTidalVolume = 560;
+      r.v.setRespiratoryRate = 12;
+      r.v.setFiO2 = 0.21;
+      r.v.o2FlowLPerMin = 2;
+      r.v.airFlowLPerMin = 0;
+      r.v.n2oFlowLPerMin = 0;
+      r.core.stepFor(5 * 60);
+      return r.p.etCO2;
+    };
+
+    const total = run('total');
+    const ideal = run('ideal');
+    expect(ideal).toBeLessThan(total - 5);
   });
 });
 
