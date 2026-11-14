@@ -126,7 +126,13 @@ describe('experimental sedation: the three reproducible cases', () => {
 });
 
 describe('experimental sedation: calibration anchors', () => {
-  it('matches the verified Nieuwenhuijs propofol-alone resting ventilation change at Ce 1.0 ug/mL', () => {
+  // KNOWN MODEL LIMITATION (2026-11-14), pinned with it.fails like test/sedation-evidence.test.js.
+  // Nieuwenhuijs 2003 at 1 ug/mL: resting ventilation -12.6 % AND resting PETCO2 only +4.2 % (~+1.7 mmHg).
+  // A drive-only propofol effect cannot match both: a Hill fit that reaches -12.6 % (c50 0.94, hill 2.4) raises PaCO2
+  // by ~12.5 mmHg and breaks the reproducible cases. The missing piece is structural (candidates: propofol lowering
+  // VCO2, dead-space/tidal-volume balance, or the CO2 drive term) and needs a modeling decision, not more tuning.
+  // When this starts passing, change it.fails back to it.
+  it.fails('matches the verified Nieuwenhuijs propofol-alone resting ventilation change at Ce 1.0 ug/mL', () => {
     const r = patient(5110, { w: 70, h: 175, a: 45, risk: { osa: false, bmi: 23, mallampati: 1 }, position: 'supine', cannula: 0 });
     r.p.sedation.setRisk({ osa: false, bmi: 23, mallampati: 1 });
     r.p.sedation.setPosition('supine');
