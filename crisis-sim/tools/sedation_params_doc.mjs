@@ -12,11 +12,13 @@ Model \`${SEDATION_MODEL_VERSION}\`, in \`sim/sedationExperimental.js\`. Generat
 **Status: experimental.** Off unless a caller switches it on (\`SimRunner.setSedationModel('experimental')\`). With it off the engine is
 exactly as before (the whole suite passes unchanged). Wherever it runs, the room must say "experimental, not reviewed".
 
-Three kinds of evidence are kept apart:
+Five kinds of evidence are kept apart:
 
 1. **Source checks** (a citation exists for the value or the formula): ${count('source')} parameters.
-2. **Owner sign-off** (a decision recorded by the owner): ${count('signoff')} parameter.
-3. **Unsourced** (a working value chosen so the model moves the right way; must be reviewed before it is taught): ${count('unsourced')} parameters.
+2. **Source-range** (a value chosen inside a verified published range): ${count('source-range')} parameters.
+3. **Owner sign-off** (a decision recorded by the owner): ${count('signoff')} parameter.
+4. **Engineering** (a numerical or stability limit, not a physiological claim): ${count('engineering')} parameters.
+5. **Unsourced** (a working value chosen so the model moves the right way; must be reviewed before it is taught): ${count('unsourced')} parameters.
 
 Software tests (\`test/sedation-experimental.test.js\`) only show that the model behaves as written and gives the same course from
 the same seed. They are not evidence that it is clinically right. **No faculty review has been done.**
@@ -26,10 +28,10 @@ the same seed. They are not evidence that it is clinically right. **No faculty r
 | State | What it is | Where it comes from |
 |---|---|---|
 | Depth | BIS from the engine's Eleveld 2018 PK/PD with opioid synergy | existing engine (owner sign-off) |
-| Effort | central drive = drug depression (may reach zero) x complication drive x CO2 term | engine coefficients (unsourced, ported) + new CO2 term (unsourced) |
-| Patency | upper airway from depth and collapsibility, relieved by chin lift, jaw thrust, adjuncts | new (unsourced sizes; lateral direction cited) |
-| Effective ventilation | (tidal volume - dead space) x rate x patency, on ideal body weight | Radford and Devine rules (sourced) on engine 7 mL/kg (unsourced) |
-| Supplemental oxygen | none, nasal cannula by flow, or the anesthesia mask on the circuit | cannula rule of thumb (unsourced) |
+| Effort | central drive = drug depression (may reach zero) x complication drive x CO2 term | engine coefficients (unsourced, ported) + CO2 slope chosen inside a verified published range |
+| Patency | upper airway from depth and collapsibility, relieved by chin lift, jaw thrust, adjuncts | BIS-logistic form retained; current BIS shifts and relief percentages are unsourced |
+| Effective ventilation | (tidal volume - dead space) x rate x patency, on ideal body weight | ideal-weight implementation with unsourced operational constants in this table |
+| Supplemental oxygen | none, nasal cannula by flow, or the anesthesia mask on the circuit | nasal cannula slope sourced from O'Reilly Nugent 2014 |
 
 The engine's laryngospasm thresholds (patency 0.35 / 0.05; propofol Ce over 1.5 or succinylcholine to break it) belong to the
 laryngospasm model and are **not** used here. The engine's own complication patency still multiplies this one.
@@ -39,10 +41,20 @@ laryngospasm model and are **not** used here. The engine's own complication pate
 |---|---|---|
 ${table('source')}
 
+## Source-range
+| Parameter | Value | Verified range and chosen value |
+|---|---|---|
+${table('source-range')}
+
 ## Owner sign-off
 | Parameter | Value | Record |
 |---|---|---|
 ${table('signoff')}
+
+## Engineering
+| Parameter | Value | Why this is a numerical/model limit |
+|---|---|---|
+${table('engineering')}
 
 ## Unsourced (needs review)
 | Parameter | Value | Why this value, and what is not known |
@@ -60,4 +72,4 @@ ${table('unsourced')}
 - **Apnea times are kept close to the default engine** (time from apnea to SpO2 90 %, seed 4200): 70 kg preoxygenated 485 s default vs 472 s here; room air 36 s vs 49 s; 139 kg preoxygenated 164 s vs 205 s; room air 16 s vs 19 s. The 139 kg difference comes from the metabolic weight.
 - Not modeled: gagging or coughing with an oral airway in a lighter patient, mouth breathing on a cannula, the endoscope's own stimulation of the airway, capnography sampling dilution under a cannula.
 `;
-writeFileSync(new URL('../docs/sedation-experimental.md', import.meta.url), md); console.log('wrote docs/sedation-experimental.md', rows.length, 'parameters:', count('source'), 'sourced,', count('signoff'), 'signed off,', count('unsourced'), 'unsourced');
+writeFileSync(new URL('../docs/sedation-experimental.md', import.meta.url), md); console.log('wrote docs/sedation-experimental.md', rows.length, 'parameters:', count('source'), 'sourced,', count('source-range'), 'source-range,', count('signoff'), 'signed off,', count('engineering'), 'engineering,', count('unsourced'), 'unsourced');

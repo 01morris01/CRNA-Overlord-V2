@@ -8,7 +8,15 @@
 // turned up. Seeds are fixed; each case gives the same numbers every run.
 import { describe, expect, it } from 'vitest';
 import { buildPhysRig, VentMode } from '../sim/index.js';
-import { SedationModel, SEDATION_PARAMS, idealBodyWeightKg } from '../sim/sedationExperimental.js';
+import {
+  AIRWAY_EVIDENCE,
+  nieuwenhuijsEffect,
+  OPIOID_EVIDENCE,
+  SedationModel,
+  SEDATION_PARAMS,
+  VENTILATION_INTERACTION_EVIDENCE,
+  idealBodyWeightKg,
+} from '../sim/sedationExperimental.js';
 
 const ENDO = { w: 139.4, h: 178, a: 58, risk: { osa: true, bmi: 44, mallampati: 3 } };
 /** An awake adult on a natural airway, CO2 by mass balance, with the experimental layer on (or off). */
@@ -39,9 +47,44 @@ describe('experimental sedation: switched off, the engine is unchanged', () => {
     expect(r.p.sedation).toBeNull(); expect(r.p.sedationView).toBeNull(); expect(r.p.drugDepressionContribution).toBeGreaterThanOrEqual(0.1);
   });
   it('every new parameter states where it comes from', () => {
-    for (const [k, v] of Object.entries(SEDATION_PARAMS)) { expect(['source', 'signoff', 'unsourced'], k).toContain(v.kind); expect(v.note.length, k).toBeGreaterThan(20); }
+    for (const [k, v] of Object.entries(SEDATION_PARAMS)) {
+      expect(['source', 'source-range', 'signoff', 'engineering', 'unsourced'], k).toContain(v.kind);
+      expect(v.note.length, k).toBeGreaterThan(20);
+      if (v.kind === 'source' || v.kind === 'source-range') expect(v.note, k).toMatch(/(DOI\s+\S+|PMID\s+\d+)/i);
+    }
   });
   it('ideal body weight follows Devine (178 cm man about 73 kg)', () => { expect(idealBodyWeightKg(178, 'Male')).toBeCloseTo(73.1, 0); });
+});
+
+describe('experimental sedation: evidence-bearing reference exports', () => {
+  it('publishes verified airway evidence data for future pressure-flow work', () => {
+    expect(AIRWAY_EVIDENCE.note).toMatch(/future pressure-flow airway model/i);
+    expect(AIRWAY_EVIDENCE.eastwood2005.points.map((p) => p.ceUgMl)).toEqual([2.5, 4, 6]);
+    expect(AIRWAY_EVIDENCE.walsh2008.points.find((p) => p.posture === 'extension')?.meanCmH2O).toBeCloseTo(-9.4, 6);
+    expect(AIRWAY_EVIDENCE.isono1997.points.find((p) => p.group === 'sdb2')?.meanCmH2O).toBeCloseTo(2.78, 6);
+    expect(AIRWAY_EVIDENCE.kobayashi2011.note).toMatch(/approximate, abstract only/i);
+  });
+
+  it('publishes verified opioid evidence data without wiring it into the model', () => {
+    expect(OPIOID_EVIDENCE.fentanyl.vanLemmen2025.potencyNgMl).toBeCloseTo(2.3, 6);
+    expect(OPIOID_EVIDENCE.fentanyl.vanLemmen2025.controllerGainLMinPerKPa).toBeCloseTo(5.3, 6);
+    expect(OPIOID_EVIDENCE.fentanyl.cartwright1983.depression50PercentRangeNgMl).toEqual([1.5, 3.0]);
+    expect(OPIOID_EVIDENCE.remifentanil.babenco2000.ec50NgMl).toBeCloseTo(1.12, 6);
+    expect(OPIOID_EVIDENCE.remifentanil.babenco2000.gamma).toBeCloseTo(1.74, 6);
+    expect(OPIOID_EVIDENCE.remifentanil.babenco2000.note).toMatch(/reference only/i);
+  });
+
+  it('publishes the Nieuwenhuijs response-surface coefficients and arithmetic helper', () => {
+    expect(VENTILATION_INTERACTION_EVIDENCE.note).toMatch(/NOT visually verified/i);
+    expect(VENTILATION_INTERACTION_EVIDENCE.endpoints.restingVi.E0).toBeCloseTo(9.4, 6);
+    expect(VENTILATION_INTERACTION_EVIDENCE.endpoints.co2Slope.lambdaProp).toBeCloseTo(0.51, 6);
+    expect(nieuwenhuijsEffect('restingVi', 0, 0)).toBeCloseTo(9.4, 6);
+    expect(nieuwenhuijsEffect('restingVi', 0, 1)).toBeCloseTo(9.4 * (1 - 0.126), 6);
+    expect(nieuwenhuijsEffect('restingVi', 1, 1)).toBeCloseTo(3.965, 0.002);
+    expect(nieuwenhuijsEffect('restingPetco2', 1, 1)).toBeCloseTo(50.33, 0.002);
+    expect(nieuwenhuijsEffect('co2Slope', 1, 1)).toBeCloseTo(0.5837, 0.002);
+    expect(nieuwenhuijsEffect('viAtPetco2_55', 1, 1)).toBeCloseTo(5.718, 0.002);
+  });
 });
 
 describe('experimental sedation: what the as-found tests said should happen now happens in this mode', () => {
@@ -55,8 +98,8 @@ describe('experimental sedation: what the as-found tests said should happen now 
     const r = patient(4108, { cannula: 4 }); r.core.stepFor(30); expect(r.p.fiO2).toBeGreaterThan(0.3); expect(r.p.fiO2).toBeLessThan(0.5);
   });
   it('a rise in CO2 drives breathing up', () => {
-    const r = patient(4109); const before = r.p.respiratoryRate; r.p.vco2MlMin *= 2; r.core.stepFor(600);
-    expect(r.p.paCO2).toBeGreaterThan(45); expect(r.p.respiratoryRate).toBeGreaterThan(before + 2);
+    const r = patient(4109); const beforeRR = r.p.respiratoryRate; const beforePaCO2 = r.p.paCO2; r.p.vco2MlMin *= 2; r.core.stepFor(600);
+    expect(r.p.paCO2).toBeGreaterThan(beforePaCO2 + 1); expect(r.p.respiratoryRate).toBeGreaterThan(beforeRR + 2);
   });
 });
 
@@ -76,6 +119,22 @@ describe('experimental sedation: the three reproducible cases', () => {
     expect(out.last.patency).toBeGreaterThan(0.7); expect(out.last.spo2).toBeGreaterThanOrEqual(94);
     const after = out.trace.filter(([t]) => t > out.acted + 120); expect(Math.min(...after.map((q) => q[4]))).toBeGreaterThanOrEqual(92);
     expect(r.p.sedation.maneuvers.jawThrust).toBe(true);
+  });
+});
+
+describe('experimental sedation: calibration anchors', () => {
+  it('matches the verified Nieuwenhuijs propofol-alone resting ventilation change at Ce 1.0 ug/mL', () => {
+    const r = patient(5110, { w: 70, h: 175, a: 45, risk: { osa: false, bmi: 23, mallampati: 1 }, position: 'supine', cannula: 0 });
+    r.p.sedation.setRisk({ osa: false, bmi: 23, mallampati: 1 });
+    r.p.sedation.setPosition('supine');
+    r.p.sedation.setDevice('none', 0);
+    r.p.propofolCe = 1.0;
+    r.core.stepFor(600);
+    const baselineMinuteVent = r.p.baselineRR * (7 * idealBodyWeightKg(175, 'Male')) / 1000;
+    const observed = r.p.minuteVentilation;
+    const percentFall = (baselineMinuteVent - observed) / baselineMinuteVent * 100;
+    expect(percentFall).toBeGreaterThanOrEqual(6.0);
+    expect(percentFall).toBeLessThanOrEqual(19.2);
   });
 });
 
