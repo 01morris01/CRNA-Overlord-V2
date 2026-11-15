@@ -37,8 +37,10 @@ export class PatientPhysiology {
 
     this.bisIndex = 97; this.macMultiple = 0; this.endTidalAgent = 0; this.currentAgent = 'None';
 
-    this.propofolCe = 0; this.fentanylCe = 0; this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
+    this.propofolCe = 0; this.fentanylCe = 0; this.remifentanilCp = 0; this.remifentanilCe = 0;
+    this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
     this.etomidateCe = 0; this.ketamineCe = 0; this.pancuroniumCe = 0; this.vecuroniumCe = 0;
+    this.remifentanilOutsideFittedRange = false;
     this.sugammadexRocRelief = 0; this.neostigmineRocRelief = 0;
     this.neostigmineCe = 0;
     this.epinephrineCe = 0; this.phenylephrineCe = 0; this.ephedrineCe = 0;
@@ -104,8 +106,10 @@ export class PatientPhysiology {
 
     this._hrModifier = 0; this._bpModifier = 1; this._rrModifier = 1;
 
-    this.propofolCe = 0; this.fentanylCe = 0; this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
+    this.propofolCe = 0; this.fentanylCe = 0; this.remifentanilCp = 0; this.remifentanilCe = 0;
+    this.rocuroniumCe = 0; this.midazolamCe = 0; this.succinylcholineCe = 0;
     this.etomidateCe = 0; this.ketamineCe = 0; this.pancuroniumCe = 0; this.vecuroniumCe = 0;
+    this.remifentanilOutsideFittedRange = false;
     this.sugammadexRocRelief = 0; this.neostigmineRocRelief = 0;
     this.neostigmineCe = 0;
     this.effectiveNmbBlockade = 0;
