@@ -6,6 +6,7 @@
    ═══════════════════════════════════════════════════════════════════ */
 import { f, Clamp, Clamp01, Max, Min, Lerp } from './float32.js';
 import { SimRandom } from './simRandom.js';
+import { idealBodyWeightKg } from './sedationExperimental.js';
 
 export const VentMode = { Manual: 0, VCV: 1, PCV: 2, PSV: 3 };
 
@@ -33,6 +34,10 @@ export class VentilatorSystem {
     //   'legacy' (default, unchanged behaviour): see updateCO2. Under review: docs/co2-kinetics.md.
     //   'stores': one-compartment mass balance on the body's CO2 stores. Prepared, not enabled anywhere.
     this.co2Kinetics = 'legacy';
+    // What body-weight basis the non-sedation dead-space rule uses.
+    //   'total' (default, unchanged behaviour): 2.2 mL/kg of total weight.
+    //   'ideal': 2.2 mL/kg of Devine ideal body weight.
+    this.deadSpaceBasis = 'total';
 
     this.measuredTidalVolume = 0; this.measuredRR = 0; this.measuredMinuteVent = 0;
     this.measuredPeakPressure = 0; this.measuredPlateauPressure = 0; this.measuredPeep = 0;
@@ -307,9 +312,14 @@ export class VentilatorSystem {
     if (controlled || ppvSupported) this.patient.respiratoryRate = this.measuredRR;
   }
 
+  getDeadSpaceMl() {
+    if (this.deadSpaceBasis === 'ideal') return Max(60, f(2.2) * idealBodyWeightKg(this.patient.heightCm, this.patient.sex));
+    return Max(60, f(2.2) * this.patient.weightKg);
+  }
+
   updateCO2(dt) {
     const sed = this.patient.sedation && this.patient.sedation.active ? this.patient.sedation : null;
-    const deadspace = sed ? sed.deadSpaceMl : Max(60, f(2.2) * this.patient.weightKg);
+    const deadspace = sed ? sed.deadSpaceMl : this.getDeadSpaceMl();
     const procedureBlocked = this.airwayProcedure?.intubationInProgress === true;
     const ppvSupported = !procedureBlocked
       && this.patient.airwayDeviceState === 'mask'
