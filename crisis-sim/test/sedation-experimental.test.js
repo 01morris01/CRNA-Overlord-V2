@@ -151,6 +151,7 @@ describe('experimental sedation: calibration anchors', () => {
     expect(percentFall).toBeLessThanOrEqual(EXPECTED_PROPOFOL_DROP_AT_CE1 + EXPECTED_PROPOFOL_DROP_TOLERANCE);
   });
 
+  // ENGINEERING ASSUMPTION, not physiology: no source establishes an apnea-free Ce range (Nieuwenhuijs studied arterial 0-2.6 ug/mL).
   it('keeps propofol drive loss below total loss for every Ce below 4.0', () => {
     const model = new SedationModel({ heightCm: 175, sex: 'Male', baselineRR: 14 });
     for (let ce = 0; ce < 4; ce = +(ce + 0.1).toFixed(1)) {
