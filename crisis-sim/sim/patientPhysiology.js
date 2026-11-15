@@ -316,9 +316,11 @@ export class PatientPhysiology {
       const e = Clamp01(this.propofolCe / 4);
       this._hrModifier = f(this._hrModifier - e * 10);
       this._bpModifier = f(this._bpModifier - e * f(0.28));
-      // Experimental sedation: propofol alone can stop breathing; depression grows with the square of Ce/4 (none at 0,
-      // a quarter at Ce 2, all of it at Ce 4). The default engine caps propofol at 60 % and never reaches apnea.
-      this._rrModifier = this.sedation && this.sedation.active ? f(this._rrModifier - e * e) : f(this._rrModifier - e * f(0.6));
+      // Experimental sedation: propofol-alone depression is calibrated in sim/sedationExperimental.js; the default engine
+      // still uses the legacy capped linear rule and never reaches apnea.
+      this._rrModifier = this.sedation && this.sedation.active
+        ? f(this._rrModifier - this.sedation.propofolDriveLoss(this.propofolCe))
+        : f(this._rrModifier - e * f(0.6));
     }
     if (this.fentanylCe > 0) {
       const e = Clamp01(this.fentanylCe / 4);
