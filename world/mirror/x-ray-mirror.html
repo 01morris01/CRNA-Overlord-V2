@@ -6,7 +6,7 @@
 <title>X-Ray Mirror</title>
 <style>
   :root { --bg:#090c13; --panel:#141926; --line:#262d42; --fg:#eef1f8; --dim:#8b95b2;
-          --accent:#7fd1ff; --ok:#57d98a; --bad:#ff5d73; }
+          --accent:#7fd1ff; --ok:#57d98a; --bad:#ff5d73; --hi:#8dffa8; }
   * { box-sizing:border-box; }
   html,body { margin:0; min-height:100%; background:var(--bg); color:var(--fg);
               font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
@@ -55,6 +55,34 @@
   details[open] summary { margin-bottom:10px; }
   .small { font-size:12px; color:var(--dim); margin:0; }
   .linkbtn { font:inherit; font-size:12px; color:var(--accent); background:none; border:0; padding:0; cursor:pointer; margin-top:10px; }
+  /* study guide picker */
+  #hnPanel input[type=search] { width:100%; font:inherit; font-size:14px; color:var(--fg); background:#0b0f18; border:1px solid var(--line);
+                                border-radius:9px; padding:8px 10px; }
+  #hnPanel input[type=search]:focus, #hnPanel select:focus { outline:none; border-color:var(--accent); }
+  .hnrow { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:9px; }
+  .hnrow select { max-width:none; flex:1; }
+  .hnlist { position:relative; margin-top:9px; max-height:300px; overflow:auto; border:1px solid var(--line); border-radius:9px; background:#0b0f18; }
+  .hnlist .hg { position:sticky; top:0; background:#101523; color:var(--dim); font-size:11px; font-weight:600; letter-spacing:.07em;
+                text-transform:uppercase; padding:6px 10px; border-bottom:1px solid var(--line); }
+  .hnlist button { display:block; width:100%; text-align:left; font:inherit; font-size:13.5px; color:var(--fg); background:none;
+                   border:0; border-bottom:1px solid #161c2b; padding:7px 10px; cursor:pointer; }
+  .hnlist button:hover { background:#141b2c; }
+  .hnlist button.on { background:var(--hi); color:#04140a; font-weight:700; }
+  .hnlist .empty { padding:12px 10px; color:var(--dim); font-size:13px; }
+  .hnnav { display:flex; gap:6px; margin-top:9px; }
+  .hnnav button { flex:1; font:inherit; font-size:13px; color:var(--fg); background:#0b0f18; border:1px solid var(--line);
+                  border-radius:9px; padding:7px 4px; cursor:pointer; }
+  .hnnav button:hover { border-color:var(--accent); }
+  .hncard { margin-top:10px; padding:11px 12px; border-radius:10px; background:#0b0f18; border:1px solid var(--hi); }
+  .hncard b { font-size:16px; display:block; }
+  .hncard .where { font-size:12px; color:var(--dim); margin-top:2px; }
+  .hncard .tag { display:inline-block; margin-top:7px; font-size:11.5px; color:#ffd36b; border:1px solid #6b5a2a; border-radius:6px; padding:2px 6px; }
+  .hncard ul { margin:8px 0 0; padding-left:18px; font-size:13.5px; }
+  .hncard li { margin:3px 0; }
+  .hncard .legend { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; font-size:12px; color:var(--dim); }
+  .hncard .legend i { display:inline-block; width:14px; height:3px; border-radius:2px; vertical-align:middle; margin-right:5px; }
+  .hncard button { margin-top:9px; font:inherit; font-weight:700; font-size:13px; color:#04140a; background:var(--hi); border:0;
+                   border-radius:8px; padding:7px 12px; cursor:pointer; }
   [hidden] { display:none !important; }
   @media (max-width:900px) { .wrap { flex-direction:column; align-items:stretch; } aside { flex:none; } .stage { width:100%; } }
 </style>
@@ -78,6 +106,24 @@
   <aside>
     <h1>X-Ray Mirror</h1>
     <div class="panel"><div id="status">Click Start camera, then allow the camera.</div></div>
+
+    <div class="panel" id="hnPanel">
+      <h3>Study guide: head and neck</h3>
+      <input id="hnSearch" type="search" placeholder="Search structures" autocomplete="off" spellcheck="false" aria-label="Search structures">
+      <div class="hnrow">
+        <select id="hnSec" aria-label="Section"><option value="">All sections</option></select>
+        <label class="ck"><input type="checkbox" id="hnQuiz">Quiz me</label>
+      </div>
+      <div id="hnList" class="hnlist" aria-label="Structures"><div class="empty">Loading the study guide…</div></div>
+      <div class="hnnav">
+        <button id="hnPrev" type="button">Prev</button>
+        <button id="hnRand" type="button">Random</button>
+        <button id="hnNext" type="button">Next</button>
+        <button id="hnClear" type="button">Clear</button>
+      </div>
+      <div id="hnCard" class="hncard" hidden></div>
+      <p class="small" id="hnStatus" style="margin-top:8px">Pick a structure to light it up on your head.</p>
+    </div>
 
     <div class="panel">
       <h3>Layers</h3>
@@ -146,7 +192,7 @@
     </div>
 
     <p class="small">The anatomy is a real 3D dataset of one adult, scaled and pinned to your head. It shows where structures typically sit, not a scan of you, and it is not a medical tool. Video is processed on this computer and never uploaded.</p>
-    <p class="small">Anatomy models: BodyParts3D, © The Database Center for Life Science, licensed under CC Attribution-Share Alike 2.1 Japan. Models were simplified and re-aligned.</p>
+    <p class="small">Anatomy models: BodyParts3D (releases 3.0 and 4.0), © The Database Center for Life Science, licensed under CC Attribution-Share Alike 2.1 Japan. Models were simplified and re-aligned. Structure list and notes: BIOL 520 Study Guide, The Head and Neck.</p>
   </aside>
 </div>
 
@@ -168,7 +214,7 @@ const META = JSON.parse($("meshmeta").textContent);
 // ------------------------------ settings ------------------------------
 const DEFAULTS = { skull: true, brain: false, muscles: false, eyes: true, outline: true, hands: true,
                    style: "xray", bright: 1, real: 0.12, feather: 0.2, reveal: "whole", cut: 0.5, showdata: false,
-                   fs: 1, fw: 1, fh: 1, fd: 1, fx: 0, fy: 0, fz: 0, labels: false };
+                   fs: 1, fw: 1, fh: 1, fd: 1, fx: 0, fy: 0, fz: 0, labels: false, hn: "", quiz: false };
 let S = Object.assign({}, DEFAULTS);
 try { Object.assign(S, JSON.parse(localStorage.getItem("xr_settings") || "{}")); } catch (e) {}
 function save() { try { localStorage.setItem("xr_settings", JSON.stringify(S)); } catch (e) {} }
@@ -183,6 +229,7 @@ function syncUI() {
   for (const k of ["fx", "fy", "fz"]) $(k + "v").textContent = (S[k] > 0 ? "+" : "") + S[k].toFixed(1) + " cm";
   $("featherv").textContent = Math.round(S.feather * 100) + "%";
   $("labels").checked = S.labels;
+  $("hnQuiz").checked = S.quiz;
   $("reveal").value = S.reveal; $("showdata").checked = S.showdata; $("data").hidden = !S.showdata;
   $("cutrow").hidden = S.reveal === "whole";
   $("cutlabel").textContent = S.reveal === "lens" ? "Lens size" : "Cut position";
@@ -414,6 +461,7 @@ function applyLayers() {
     mesh.visible = layer === "veil" ? true : !!S[layer];
     // x-ray light adds up, so layers with many overlapping surfaces get a lower share
     u.uGain.value = (S.style === "solid" && k !== "outline") ? Math.min(1.25, 0.6 + 0.4 * S.bright) : S.bright * (XRAY_GAIN[k] || 1) * (layer === "outline" ? 1 : share);
+    if (hnActive() && layer !== "veil") u.uGain.value *= S.style === "solid" ? 0.85 : 0.42;
     u.uOpacity.value = layer === "veil" ? 1 - S.real : 1;
     u.uClipOn.value = clipOn; u.uClip.value.set(cx, cy, cz, cw);
     u.uFeather.value = S.feather * 0.75; u.uCutSoft.value = S.feather * 5;   // outline softness, and up to 5 cm of fade at a cut
@@ -581,6 +629,283 @@ function drawLabels(g, lens) {
   });
 }
 
+// ------------------------------ study guide: head and neck ------------------------------
+// Every structure in the BIOL 520 head and neck study guide, selectable. hn-structures.json lists them (with the guide's
+// notes); hn-structures.bin holds their meshes, already in this page's head coordinates (cm), fetched on first use.
+// A structure shows as its own mesh where the dataset has one, and as pins or traced paths (marked approximate) where it does not.
+const HN = { data: null, bin: null, binReq: null, geos: {}, sel: null, list: [], revealed: true,
+             scene: null, group: null, jaw: null, main: [], ctx: [], anchors: [], paths: [], pins: [], style: "" };
+const HN_JSON = new URL("hn-structures.json", location.href), HN_BIN = new URL("hn-structures.bin", location.href);
+const HN_PATH = { artery: "#ff5b6b", vein: "#5b9bff", nerve: "#ffe45c", cord: "#ffe45c", duct: "#f2f2f2", region: "#8dffa8",
+                  ctxartery: "rgba(255,91,107,.42)" };
+const HN_PATH_NAME = { artery: "artery", vein: "vein", nerve: "nerve", cord: "spinal cord", duct: "duct or canal", region: "region outline" };
+const HN_HI = 0x8dffa8, HN_HI_SOLID = 0x46d36f;
+
+function hnFetchList() {
+  fetch(HN_JSON).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(d => {
+    HN.data = d;
+    d.items.forEach((it, i) => { it.i = i; it.key = (it.n + " " + (it.aka || []).join(" ") + " " + it.g + " " + it.s).toLowerCase(); });
+    const secs = [...new Set(d.items.map(it => it.s))];
+    for (const s of secs) { const o = document.createElement("option"); o.value = s; o.textContent = s; $("hnSec").appendChild(o); }
+    $("hnSearch").placeholder = "Search " + d.items.length + " structures";
+    hnRenderList();
+    const asked = new URLSearchParams(location.search).get("hn"), name = asked || S.hn;   // ?hn=Masseter links straight to one
+    const low = name && name.toLowerCase();
+    const prev = name && (d.items.find(it => it.n === name) || d.items.find(it => it.n.toLowerCase() === low)
+                          || d.items.find(it => (it.aka || []).some(a => a.toLowerCase() === low)));
+    if (prev) hnSelect(prev.i);
+  }).catch(e => { $("hnList").innerHTML = '<div class="empty">Could not load the study guide (' + e.message + ').</div>'; });
+}
+
+function hnFiltered() {
+  const q = $("hnSearch").value.trim().toLowerCase().split(/\s+/).filter(Boolean), sec = $("hnSec").value;
+  return HN.data.items.filter(it => (!sec || it.s === sec) && q.every(w => it.key.includes(w)));
+}
+
+function hnRenderList() {
+  if (!HN.data) return;
+  HN.list = hnFiltered();
+  const box = $("hnList"); box.textContent = "";
+  if (!HN.list.length) { box.innerHTML = '<div class="empty">No structure matches that search.</div>'; return; }
+  let group = "";
+  for (const it of HN.list) {
+    const g = it.s === it.g ? it.s : it.s + " · " + it.g;
+    if (g !== group) { group = g; const h = document.createElement("div"); h.className = "hg"; h.textContent = g; box.appendChild(h); }
+    const b = document.createElement("button"); b.type = "button"; b.textContent = it.n; b.dataset.i = it.i;
+    if (HN.sel === it) b.classList.add("on");
+    b.onclick = () => hnSelect(it.i, { noScroll: true });
+    box.appendChild(b);
+  }
+}
+
+function hnStep(d) {
+  if (!HN.data) return;
+  const list = HN.list.length ? HN.list : HN.data.items;
+  let k = HN.sel ? list.indexOf(HN.sel) : -1;
+  k = k < 0 ? (d > 0 ? 0 : list.length - 1) : (k + d + list.length) % list.length;
+  hnSelect(list[k].i);
+}
+
+function hnSelect(i, opt = {}) {
+  const it = HN.data.items[i];
+  HN.sel = it; S.hn = it.n; save();
+  HN.revealed = !S.quiz;
+  for (const b of $("hnList").querySelectorAll("button")) {
+    const on = +b.dataset.i === i; b.classList.toggle("on", on);
+    if (on && !opt.noScroll) { const box = $("hnList"); box.scrollTop = b.offsetTop - box.clientHeight / 2 + b.offsetHeight / 2; }
+  }
+  hnCard();
+  hnBuild();
+}
+
+function hnClear() {
+  HN.sel = null; S.hn = ""; save();
+  for (const b of $("hnList").querySelectorAll("button.on")) b.classList.remove("on");
+  $("hnCard").hidden = true; $("hnStatus").textContent = "Pick a structure to light it up on your head.";
+  hnBuild();
+}
+
+function hnCard() {
+  const it = HN.sel, card = $("hnCard");
+  if (!it) { card.hidden = true; return; }
+  card.hidden = false; card.textContent = "";
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; card.appendChild(e); return e; };
+  if (!HN.revealed) {
+    el("b", "", "Which structure is lit up?");
+    el("div", "where", it.s + (it.s === it.g ? "" : " · " + it.g));
+    const r = el("button", "", "Reveal"); r.type = "button"; r.onclick = () => { HN.revealed = true; hnCard(); };
+    $("hnStatus").textContent = "Quiz: name it, then reveal. Next and Random keep the quiz going.";
+    return;
+  }
+  el("b", "", it.n);
+  el("div", "where", it.s + (it.s === it.g ? "" : " · " + it.g) + (it.aka && it.aka.length ? " · also: " + it.aka.join(", ") : ""));
+  if (it.notes && it.notes.length) { const ul = el("ul"); for (const n of it.notes) { const li = document.createElement("li"); li.textContent = n; ul.appendChild(li); } }
+  if (it.approx) el("span", "tag", "Approximate location: drawn from typical anatomy, not from a model of this exact part");
+  const kinds = [...new Set((it.paths || []).map(p => p.k).filter(k => HN_PATH_NAME[k]))];
+  if (kinds.length) {
+    const lg = el("div", "legend");
+    for (const k of kinds) { const s = document.createElement("span"); s.innerHTML = '<i style="background:' + HN_PATH[k] + '"></i>'; s.append(HN_PATH_NAME[k]); lg.appendChild(s); }
+  }
+  const pinsOnly = !(it.parts && it.parts.length) && !(it.paths && it.paths.length);
+  $("hnStatus").textContent = pinsOnly ? "Shown as pins." : (it.parts && it.parts.length ? "Lit up in green." : "Traced as a path.");
+}
+
+function hnLoadBin() {
+  if (HN.bin) return Promise.resolve(HN.bin);
+  if (!HN.binReq) HN.binReq = fetch(HN_BIN).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.arrayBuffer(); })
+    .then(b => (HN.bin = b)).catch(e => { HN.binReq = null; $("hnStatus").textContent = "Could not load the 3D structures (" + e.message + ")."; throw e; });
+  return HN.binReq;
+}
+
+function hnGeo(id) {
+  if (HN.geos[id]) return HN.geos[id];
+  if (typeof id === "string") {                       // one of this page's own meshes, such as the cerebrum
+    const m = meshes[id.slice(5)];
+    return HN.geos[id] = { geo: m.mesh.geometry, jaw: 0, sides: hnSides(m.mesh.geometry.attributes.position.array) };
+  }
+  const c = HN.data.chunks[id];
+  const q = new Uint16Array(HN.bin, c.offV, c.nv * 3), pos = new Float32Array(c.nv * 3);
+  for (let i = 0; i < q.length; i++) pos[i] = c.min[i % 3] + q[i] / 65535 * c.size[i % 3];
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(HN.bin, c.offI, c.ni).slice(), 1));
+  geo.computeVertexNormals();
+  return HN.geos[id] = { geo, jaw: c.jaw, sides: hnSides(pos) };
+}
+function hnSides(pos) {                               // centroid of the part on each side of the midline, for the label
+  const s = [[0, 0, 0, 0], [0, 0, 0, 0]];
+  for (let i = 0; i < pos.length; i += 3) { const k = pos[i] < 0 ? 0 : 1; s[k][0] += pos[i]; s[k][1] += pos[i + 1]; s[k][2] += pos[i + 2]; s[k][3]++; }
+  return s;
+}
+
+function hnActive() { return !!(HN.sel && (HN.main.length || HN.ctx.length || HN.pins.length || HN.paths.length)); }
+
+function hnMat(main) {
+  const m = makeMat(main ? HN_HI : 0xdbe6ff, main ? HN_HI_SOLID : 0xc9d3e8);
+  m.userData.main = main;
+  return m;
+}
+
+function hnBuild() {
+  if (!renderer || !HN.data) return;
+  if (!HN.scene) {
+    HN.scene = new THREE.Scene();
+    HN.group = new THREE.Group(); HN.group.matrixAutoUpdate = false; HN.scene.add(HN.group);
+    HN.jaw = new THREE.Group(); HN.jaw.position.fromArray(META.jawPivot); HN.group.add(HN.jaw);
+  }
+  for (const m of [...HN.main, ...HN.ctx]) { m.parent.remove(m); m.material.dispose(); }
+  HN.main = []; HN.ctx = []; HN.anchors = []; HN.paths = []; HN.pins = []; HN.style = "";
+  const it = HN.sel;
+  if (!it) return;
+  const want = [...(it.ctx || []), ...(it.parts || [])].some(id => typeof id === "number");
+  const go = () => {
+    if (HN.sel !== it) return;                        // another pick arrived while the meshes were loading
+    const add = (id, main) => {
+      const g = hnGeo(id), mesh = new THREE.Mesh(g.geo, hnMat(main));
+      mesh.frustumCulled = false; mesh.renderOrder = main ? 20 : 10;
+      if (g.jaw) { mesh.position.fromArray(META.jawPivot).multiplyScalar(-1); HN.jaw.add(mesh); } else HN.group.add(mesh);
+      (main ? HN.main : HN.ctx).push(mesh);
+      return g;
+    };
+    (it.ctx || []).forEach(id => add(id, false));
+    const side = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+    for (const id of it.parts || []) {
+      const g = add(id, true);
+      g.sides.forEach((s, k) => { for (let j = 0; j < 4; j++) side[k][j] += s[j]; if (s[3]) side[k][4] = g.jaw; });
+    }
+    // label anchors: the pins when there are any, else the middle of the part on each side, else the middle of each path
+    for (const p of it.pins || []) { HN.pins.push({ v: new THREE.Vector3(p[0], p[1], p[2]), jaw: p[3] || 0 }); }
+    for (const p of it.paths || []) {
+      const pts = p.p.map(q => new THREE.Vector3(q[0], q[1], q[2]));
+      HN.paths.push({ k: p.k, pts: pts.length > 2 ? new THREE.CatmullRomCurve3(pts).getPoints(pts.length * 10) : pts });
+    }
+    if (HN.pins.length) HN.anchors = HN.pins.map(p => ({ v: p.v, jaw: p.jaw }));
+    else if (it.parts && it.parts.length) {
+      const total = side[0][3] + side[1][3];
+      for (const s of side) if (s[3] > total * 0.15) HN.anchors.push({ v: new THREE.Vector3(s[0] / s[3], s[1] / s[3], s[2] / s[3]), jaw: s[4] });
+    } else for (const p of HN.paths) if (p.k !== "ctxartery") HN.anchors.push({ v: p.pts[p.pts.length >> 1], jaw: 0 });
+    hnStyle();
+  };
+  if (want) hnLoadBin().then(go, () => {}); else go();
+}
+
+function hnStyle() {                                   // follow the page's X-ray / Solid look
+  const solid = S.style === "solid";
+  HN.style = S.style;
+  for (const m of HN.main) {
+    const u = m.material.uniforms;
+    u.uMode.value = solid ? 1 : 0;
+    m.material.blending = solid ? THREE.NormalBlending : THREE.AdditiveBlending;
+    m.material.depthTest = solid; m.material.depthWrite = solid; m.material.needsUpdate = true;
+  }
+}
+
+function hnRender(now) {
+  if (!HN.scene || !HN.sel || !headGroup.visible || !(HN.main.length || HN.ctx.length)) return;
+  if (HN.style !== S.style) hnStyle();
+  HN.group.matrix.copy(headGroup.matrix); HN.group.matrixWorldNeedsUpdate = true;
+  HN.jaw.rotation.x = jawPivot.rotation.x;
+  const pulse = 0.82 + 0.18 * Math.sin(now / 260);
+  for (const m of HN.main) m.material.uniforms.uGain.value = (S.style === "solid" ? 1.05 : 1.7 * Math.max(0.6, S.bright)) * pulse;
+  for (const m of HN.ctx) m.material.uniforms.uGain.value = 0.22 * Math.max(0.6, S.bright);
+  renderer.clearDepth();                                // the picked structure always shows, even inside solid layers
+  renderer.render(HN.scene, cam);
+}
+
+function hnPoint(v, jaw) {
+  lp.copy(v); if (jaw) lp.applyMatrix4(jawM);
+  lp.applyMatrix4(headGroup.matrix);
+  return toScreen(lp);
+}
+
+function hnDraw(g, now) {
+  if (!HN.sel || !head.found || !headGroup.visible) return;
+  g.save(); g.lineJoin = g.lineCap = "round";
+  for (const p of HN.paths) {                           // traced paths: dark casing, then the colour
+    const pts = p.pts.map(v => hnPoint(v, 0));
+    for (const pass of [0, 1]) {
+      g.beginPath(); pts.forEach((s, k) => k ? g.lineTo(s.x, s.y) : g.moveTo(s.x, s.y));
+      if (pass === 0) { g.strokeStyle = "rgba(4,7,13,.75)"; g.lineWidth = p.k === "ctxartery" ? 3.5 : 6; g.setLineDash([]); }
+      else { g.strokeStyle = HN_PATH[p.k] || "#fff"; g.lineWidth = p.k === "ctxartery" ? 1.6 : 3; g.setLineDash(p.k === "region" ? [7, 5] : []); }
+      g.stroke();
+    }
+  }
+  g.setLineDash([]);
+  const r = 5 + 2.2 * Math.sin(now / 220);
+  for (const p of HN.pins) {
+    const s = hnPoint(p.v, p.jaw);
+    g.fillStyle = "rgba(4,7,13,.7)"; g.beginPath(); g.arc(s.x, s.y, 6.5, 0, 6.3); g.fill();
+    g.fillStyle = "#8dffa8"; g.beginPath(); g.arc(s.x, s.y, 3.6, 0, 6.3); g.fill();
+    g.strokeStyle = "rgba(141,255,168,.85)"; g.lineWidth = 2; g.beginPath(); g.arc(s.x, s.y, 9 + r, 0, 6.3); g.stroke();
+  }
+  // one name tag, on the anchor that faces the camera most, set out to the side of the head
+  let best = null;
+  for (const a of HN.anchors) {
+    lp.copy(a.v); if (a.jaw) lp.applyMatrix4(jawM);
+    ln.set(lp.x - HEAD_C[0], lp.y - HEAD_C[1], lp.z - HEAD_C[2]).transformDirection(headGroup.matrix);
+    lp.applyMatrix4(headGroup.matrix);
+    const facing = -(ln.x * lp.x + ln.y * lp.y + ln.z * lp.z) / (lp.length() || 1);
+    if (!best || facing > best.f) best = { f: facing, s: toScreen(lp) };
+  }
+  if (best) {
+    lc.fromArray(HEAD_C).applyMatrix4(headGroup.matrix); const c = toScreen(lc);
+    lc.fromArray(HEAD_C); lc.x += 10.5 * S.fs * S.fw; lc.applyMatrix4(headGroup.matrix); const e = toScreen(lc);
+    const halfW = Math.abs(e.x - c.x), left = best.s.x < c.x;
+    const text = HN.revealed ? HN.sel.n : "?";
+    g.font = "700 15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif"; g.textBaseline = "middle";
+    const tw = g.measureText(text).width + 18;
+    let tx = left ? Math.min(best.s.x - 30, c.x - halfW - 14) - tw : Math.max(best.s.x + 30, c.x + halfW + 14);
+    tx = Math.max(6, Math.min(W - tw - 6, tx));
+    const ty = Math.max(16, Math.min(H - 16, best.s.y - 26));
+    g.strokeStyle = "rgba(141,255,168,.9)"; g.lineWidth = 1.5;
+    g.beginPath(); g.moveTo(best.s.x, best.s.y); g.lineTo(left ? tx + tw : tx, ty); g.stroke();
+    g.fillStyle = "rgba(6,20,12,.88)"; g.strokeStyle = "#8dffa8"; g.lineWidth = 1.5;
+    g.beginPath(); g.roundRect ? g.roundRect(tx, ty - 13, tw, 26, 8) : g.rect(tx, ty - 13, tw, 26); g.fill(); g.stroke();
+    g.fillStyle = "#eafff0"; g.textAlign = "left"; g.fillText(text, tx + 9, ty + 0.5);
+  }
+  g.restore();
+}
+
+$("hnSearch").oninput = () => hnRenderList();
+$("hnSec").onchange = () => hnRenderList();
+$("hnPrev").onclick = () => hnStep(-1);
+$("hnNext").onclick = () => hnStep(1);
+$("hnRand").onclick = () => {
+  if (!HN.data) return;
+  const list = HN.list.length ? HN.list : HN.data.items;
+  let k = Math.floor(Math.random() * list.length);
+  if (list.length > 1 && list[k] === HN.sel) k = (k + 1) % list.length;
+  hnSelect(list[k].i);
+};
+$("hnClear").onclick = () => hnClear();
+$("hnQuiz").onchange = e => { S.quiz = e.target.checked; save(); HN.revealed = !S.quiz; hnCard(); };
+$("hnList").addEventListener("keydown", e => {
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); hnStep(e.key === "ArrowDown" ? 1 : -1);
+    const b = $("hnList").querySelector("button.on"); if (b) b.focus(); }
+});
+hnFetchList();
+if (DEMO) window.__hn = { HN, hnSelect };             // lets the #demo test scene step through every structure
+
 // ------------------------------ per-frame update ------------------------------
 let pointer = null, frames = 0, fps = 0, fpsAt = 0, dataAt = 0;
 stage.addEventListener("pointermove", e => { const r = stage.getBoundingClientRect(); pointer = { x: e.clientX - r.left, y: e.clientY - r.top }; });
@@ -617,6 +942,7 @@ function renderFrame(now, faceLms, hands, sides) {
 
   renderer.clear();
   renderer.render(headScene, cam);
+  hnRender(now);
   renderer.clearDepth();
   renderer.render(handScene, ortho);
 
@@ -624,6 +950,7 @@ function renderFrame(now, faceLms, hands, sides) {
   const g = $("hud").getContext("2d"); g.clearRect(0, 0, W, H);
   if (lens) { g.strokeStyle = "rgba(127,209,255,.8)"; g.lineWidth = 2; g.beginPath(); g.arc(lens.x, lens.y, lens.r, 0, 6.3); g.stroke(); }
   if (S.labels) drawLabels(g, lens);
+  hnDraw(g, now);
   if (S.showdata) {
     if (faceLms) { g.fillStyle = "rgba(127,255,170,.85)"; for (const p of faceLms) g.fillRect((1 - p.x) * W - 1, p.y * H - 1, 2, 2); }
     g.strokeStyle = "rgba(255,183,3,.9)"; g.fillStyle = "#ffb703"; g.lineWidth = 1.5;
@@ -738,6 +1065,7 @@ function demoLoop() {
 async function boot() {
   THREE = await import(DEMO && new URLSearchParams(location.search).get("three") || THREE_URL);
   initMath(); initHandMath(); buildScene();
+  hnBuild();                                         // a structure picked before the 3D engine was ready
 }
 
 $("start").onclick = async () => {
