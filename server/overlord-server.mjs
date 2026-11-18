@@ -11,14 +11,16 @@
 //   OVERLORD_DATA        where accounts and saves live    (default: <root>/../overlord-data)
 //   OVERLORD_PORT        HTTP port                        (default: 8800)
 //   OVERLORD_HTTPS_PORT  HTTPS port, when a cert is given (default: 8801)
-//   OVERLORD_TLS_CERT    PEM certificate chain            (optional)
-//   OVERLORD_TLS_KEY     PEM private key                  (optional)
+//   OVERLORD_TLS_CERT    PEM certificate chain, the DEFAULT one  (optional)
+//   OVERLORD_TLS_KEY     its private key                          (optional)
+//   OVERLORD_TLS_TAILNET_CERT / _TAILNET_KEY   served instead when the client asks for a *.ts.net name
 //
 // A password crossing a LAN in clear text is a password anyone on that LAN can read, so point
 // OVERLORD_TLS_* at a real certificate wherever one exists. Over Tailscale the tunnel is already
 // encrypted; over the bare LAN it is not.
 import http from 'node:http';
 import https from 'node:https';
+import tls from 'node:tls';
 import { createReadStream, statSync, existsSync, realpathSync, readFileSync } from 'node:fs';
 import { join, extname, normalize, sep, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -42,6 +44,29 @@ const TYPES = {
   '.ogg': 'audio/ogg', '.wav': 'audio/wav', '.npy': 'application/octet-stream',
   '.md': 'text/markdown; charset=utf-8', '.txt': 'text/plain; charset=utf-8',
 };
+
+/**
+ * Which certificate answers which name.
+ *
+ * SNICallback runs only when the client sends a server name. A client opening https://<ip>:<port> sends
+ * none, because SNI cannot carry an IP literal, and gets the default context instead. So the default has
+ * to be the certificate for the LAN address, with the tailnet certificate as the named case. Getting this
+ * the wrong way round presents a .ts.net certificate to every browser on the LAN, which warns every time
+ * — and it looks correct until someone actually opens the LAN address in a browser.
+ */
+export const isTailnetName = (servername) => !!servername && servername.endsWith('.ts.net');
+
+export function tlsPlan({ cert, key, tailnetCert, tailnetKey }) {
+  if (!cert || !key) return null;
+  const haveTailnet = !!(tailnetCert && tailnetKey);
+  return {
+    default: { cert, key },                                   // every no-SNI connection, i.e. every bare IP
+    tailnet: haveTailnet ? { cert: tailnetCert, key: tailnetKey } : null,
+    for: (servername) => (haveTailnet && isTailnetName(servername)
+      ? { cert: tailnetCert, key: tailnetKey }
+      : { cert, key }),
+  };
+}
 
 export function createHandler(store, { root = ROOT } = {}) {
   const send = (res, code, obj) => {
@@ -196,11 +221,53 @@ export function start({ port = PORT, httpsPort = HTTPS_PORT, data = DATA, root =
     console.log(`[overlord]   accounts and saves in ${store.dir}`);
   });
 
+  let certWatch = null;
   if (cert && key && existsSync(cert) && existsSync(key)) {
     try {
-      const sec = https.createServer({ cert: readFileSync(cert), key: readFileSync(key) }, handle);
+      // Two certificates, picked by the name the client asked for. A public CA will certify the tailnet
+      // name and will never certify a bare LAN address, so one certificate cannot serve both paths —
+      // the same reason JARVIS on this box does it this way.
+      //
+      // Which one is the DEFAULT matters more than it looks. SNICallback only runs when the client sends
+      // a server name, and a client opening https://192.168.1.78:8801 sends none, because SNI cannot
+      // carry an IP literal. Those connections get the default context. So the default has to be the
+      // certificate for the LAN address; putting the tailnet one there presents a .ts.net certificate to
+      // every browser on the LAN, which warns on every visit.
+      let tsCert = process.env.OVERLORD_TLS_TAILNET_CERT, tsKey = process.env.OVERLORD_TLS_TAILNET_KEY;
+      if (!(tsCert && tsKey && existsSync(tsCert) && existsSync(tsKey))) { tsCert = tsKey = null; }
+      const plan = tlsPlan({ cert, key, tailnetCert: tsCert, tailnetKey: tsKey });
+      const read = (pair) => ({ cert: readFileSync(pair.cert), key: readFileSync(pair.key) });
+      const load = () => {
+        const opts = read(plan.default);
+        if (plan.tailnet) {
+          const tailnet = tls.createSecureContext(read(plan.tailnet));
+          const lan = tls.createSecureContext(read(plan.default));
+          opts.SNICallback = (servername, cb) => cb(null, isTailnetName(servername) ? tailnet : lan);
+        }
+        return opts;
+      };
+
+      const sec = https.createServer(load(), handle);
       servers.push(sec);
       sec.listen(httpsPort, '0.0.0.0', () => console.log(`[overlord] also on https://0.0.0.0:${httpsPort}`));
+
+      // These certificates last 90 days and are replaced by a scheduled renewal. A server that read the
+      // files once at boot would go on presenting the expired one until somebody noticed — months later,
+      // with no warning. Re-read them when they change instead, which needs no coordination with whatever
+      // does the renewing.
+      let seen = statSync(cert).mtimeMs;
+      certWatch = setInterval(() => {
+        try {
+          const now = statSync(cert).mtimeMs;
+          if (now === seen) return;
+          seen = now;
+          sec.setSecureContext(load());
+          console.log('[overlord] TLS certificate reloaded');
+        } catch (e) {
+          console.error('[overlord] certificate reload failed, keeping the one in use:', e.message);
+        }
+      }, 3600000);
+      certWatch.unref?.();
     } catch (e) {
       // A bad certificate must not take the world offline — it degrades to HTTP and says so loudly.
       console.error('[overlord] TLS certificate unusable, continuing on HTTP only:', e.message);
@@ -209,7 +276,10 @@ export function start({ port = PORT, httpsPort = HTTPS_PORT, data = DATA, root =
     console.error('[overlord] OVERLORD_TLS_CERT/KEY set but not both readable — HTTP only.');
   }
 
-  return { store, servers, close: () => Promise.all(servers.map((s) => new Promise((r) => s.close(r)))) };
+  return {
+    store, servers,
+    close: () => { if (certWatch) clearInterval(certWatch); return Promise.all(servers.map((s) => new Promise((r) => s.close(r)))); },
+  };
 }
 
 // pathToFileURL, not `file://${argv[1]}` — the second is never equal on Windows, which is exactly the bug

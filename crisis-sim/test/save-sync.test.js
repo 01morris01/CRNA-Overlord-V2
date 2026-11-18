@@ -12,7 +12,7 @@ import { mkdtempSync, rmSync, readdirSync, readFileSync, existsSync } from 'node
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { openStore } from '../../server/store.mjs';
-import { start } from '../../server/overlord-server.mjs';
+import { start, tlsPlan, isTailnetName } from '../../server/overlord-server.mjs';
 
 let dir;
 beforeEach(() => { dir = mkdtempSync(join(tmpdir(), 'overlord-sync-')); });
@@ -652,5 +652,43 @@ describe('the world save refuses to write without a session', () => {
     map.set('hemodynamic_overlord_session', JSON.stringify({ userId: 'shawn', displayName: 'Shawn' }));
     expect(mod.save({ v: 3, game: {}, learning: {} })).toBe(true);
     expect(map.has('hemodynamic_overlord_save_shawn::world')).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------- which certificate answers which name
+
+describe('TLS certificate selection', () => {
+  const pair = { cert: '/tls/lan.pem', key: '/tls/lan.key', tailnetCert: '/tls/ts.pem', tailnetKey: '/tls/ts.key' };
+
+  it('makes the LAN certificate the default, because a bare IP sends no SNI', () => {
+    // The regression this guards: with the tailnet certificate as the default, every browser opening
+    // https://192.168.1.78:8801 is shown a certificate for a .ts.net name and warns. SNICallback never
+    // runs for those connections, so no amount of correct callback logic can save it.
+    const plan = tlsPlan(pair);
+    expect(plan.default).toEqual({ cert: '/tls/lan.pem', key: '/tls/lan.key' });
+    expect(plan.for(undefined)).toEqual({ cert: '/tls/lan.pem', key: '/tls/lan.key' });
+    expect(plan.for('192.168.1.78')).toEqual({ cert: '/tls/lan.pem', key: '/tls/lan.key' });
+  });
+
+  it('serves the tailnet certificate for a tailnet name', () => {
+    expect(tlsPlan(pair).for('3080-hub.tail9eadeb.ts.net')).toEqual({ cert: '/tls/ts.pem', key: '/tls/ts.key' });
+  });
+
+  it('falls back to the one certificate it has when there is no tailnet pair', () => {
+    const plan = tlsPlan({ cert: '/tls/lan.pem', key: '/tls/lan.key' });
+    expect(plan.tailnet).toBe(null);
+    expect(plan.for('3080-hub.tail9eadeb.ts.net')).toEqual({ cert: '/tls/lan.pem', key: '/tls/lan.key' });
+  });
+
+  it('has no TLS at all without a default pair', () => {
+    expect(tlsPlan({ tailnetCert: '/tls/ts.pem', tailnetKey: '/tls/ts.key' })).toBe(null);
+  });
+
+  it('recognises a tailnet name and nothing that merely looks like one', () => {
+    expect(isTailnetName('box.tail9eadeb.ts.net')).toBe(true);
+    expect(isTailnetName('192.168.1.78')).toBe(false);
+    expect(isTailnetName('ts.net.example.com')).toBe(false);
+    expect(isTailnetName(undefined)).toBe(false);
+    expect(isTailnetName('')).toBe(false);
   });
 });
