@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- review_machine.html: the level's anesthesia workstation (assets/level/clinical.glb) with the replaced parts cut out as
+     bellows.json / controls.json describe, and bellows.glb + controls.glb placed by those files, in three.js r170.
+     Driven by review_three.py --machine; views and control states come from the query (?state=...). -->
+<html><head><meta charset="utf-8"><title>machine review</title>
+<style>html,body{margin:0;background:#3c3f42;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+const q = new URLSearchParams(location.search); const W = 1200, H = 800;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }); renderer.setSize(W, H); renderer.toneMapping = THREE.AgXToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x6a6d70);
+const pmrem = new THREE.PMREMGenerator(renderer); scene.environment = pmrem.fromEquirectangular(await new RGBELoader().loadAsync(q.get('hdri'))).texture; scene.environmentIntensity = 0.9;
+const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/');
+const loader = new GLTFLoader().setDRACOLoader(draco);
+const base = q.get('base');
+const [level, bel, ctl, belJ, ctlJ] = await Promise.all([loader.loadAsync(base + '/assets/level/clinical.glb'), loader.loadAsync(base + '/assets/models/machine/bellows.glb'),
+  loader.loadAsync(base + '/assets/models/machine/controls.glb'), fetch(base + '/assets/models/machine/bellows.json').then((r) => r.json()), fetch(base + '/assets/models/machine/controls.json').then((r) => r.json())]);
+const src = level.scene.getObjectByName('eq_anesthesia_machine');
+const machine = new THREE.Group(); scene.add(machine);
+for (const c of [...src.children]) machine.add(c);          // machine-local frame = this group's frame (identity)
+// ---- cut out what the new parts replace
+function cut(meshName, box) {
+  const mesh = machine.getObjectByName(meshName); if (!mesh) { console.warn('no mesh', meshName); return 0; }
+  const objs = []; mesh.traverse((o) => { if (o.isMesh) objs.push(o); });
+  const lo = new THREE.Vector3(...box[0]), hi = new THREE.Vector3(...box[1]); let n = 0;
+  for (const o of objs) {
+    const g = o.geometry, p = g.attributes.position, idx = g.index.array, keep = []; const v = new THREE.Vector3();
+    const inside = (i) => { v.fromBufferAttribute(p, i); return v.x >= lo.x && v.y >= lo.y && v.z >= lo.z && v.x <= hi.x && v.y <= hi.y && v.z <= hi.z; };
+    for (let t = 0; t < idx.length; t += 3) { if (inside(idx[t]) && inside(idx[t + 1]) && inside(idx[t + 2])) { n++; continue; } keep.push(idx[t], idx[t + 1], idx[t + 2]); }
+    g.setIndex(keep);
+  }
+  return n;
+}
+const log = [];
+for (const [k, box] of Object.entries(belJ.hide_boxes_machine_local)) { const name = k.match(/node (anesthesia_machine_\d+)/)[1]; log.push(k + ': ' + cut(name, box)); }
+for (const [k, r] of Object.entries(ctlJ.replaces)) {
+  if (r.box) for (const m of r.meshes) { const name = m.match(/(anesthesia_machine_\d+)/)[1]; log.push(k + ' ' + name + ': ' + cut(name, r.box)); }
+  else { const name = r.mesh.match(/(anesthesia_machine_\d+)/)[1]; const o = machine.getObjectByName(name); if (o) o.visible = false; log.push(k + ': hidden ' + name); }
+}
+window.CUTLOG = log;
+// ---- place the new parts
+const t = belJ.machine_local_transform; bel.scene.position.set(...t.translation); machine.add(bel.scene); machine.add(ctl.scene);
+const st = JSON.parse(q.get('state') || '{}'); const N = (n) => ctl.scene.getObjectByName(n);
+bel.scene.traverse((o) => { if (o.isMesh && o.morphTargetDictionary && 'excursion' in o.morphTargetDictionary) o.morphTargetInfluences[o.morphTargetDictionary.excursion] = st.excursion ?? 1; });
+const flowY = (kind, f) => { const c = ctlJ.controls['bobbin_o2_' + kind]; const m = c.flow_to_y.match(/y = ([\d.]+) \+ ([\d.]+) \* min\(1, flow \/ ([\d.]+)\) \*\* ([\d.]+)/); return +m[1] + +m[2] * Math.min(1, f / +m[3]) ** +m[4]; };
+for (const gas of ['o2', 'air', 'n2o']) { const f = st[gas] || 0; for (const kind of ['fine', 'coarse']) { const b = N(`bobbin_${gas}_${kind}`); if (b) b.position.y = flowY(kind, f); } }
+const deg = Math.PI / 180;
+if (st.o2) N('knob_o2').rotation.z = 1260 * (st.o2 / 10) ** (1 / 1.6) * deg;
+if (st.air) N('knob_air').rotation.z = 1260 * (st.air / 10) ** (1 / 1.6) * deg;
+if (st.sevo !== undefined) N('sevo_dial').rotation.z = ctlJ.controls.sevo_dial.angle_deg_for_percent[String(st.sevo)] * deg;
+if (st.apl !== undefined) N('apl_knob').rotation.y = ctlJ.controls.apl_knob.angle_deg_for_cmH2O[String(st.apl)] * deg;
+if (st.mode) N('bag_vent_switch').rotation.x = ctlJ.controls.bag_vent_switch.positions_deg[st.mode] * deg;
+if (st.flush) N('o2_flush').position.z -= 0.006;
+const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(1, 2, 2); scene.add(sun);
+const camera = new THREE.PerspectiveCamera(35, W / H, 0.01, 20);
+window.VIEWS = JSON.parse(q.get('views'));
+window.setView = (i) => { const v = window.VIEWS[i]; camera.fov = v.fov || 35; camera.updateProjectionMatrix(); camera.position.set(...v.eye); camera.lookAt(new THREE.Vector3(...v.at)); renderer.render(scene, camera); };
+window.READY = true;
+</script></body></html>

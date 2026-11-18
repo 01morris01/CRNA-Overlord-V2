@@ -320,6 +320,7 @@ export async function createWorld({ host, state, touch = false, els, onStation, 
     /** Called when a button goes down on the picture; return true to take the press (a knob, a plunger). grabbing() says whether one is still held. */
     onGrab: null, grabbing: null,
     /** Tell the camera what part of the screen a panel covers, so that what you look at sits in the middle of the rest. */
+    get insets() { return { ...inset }; },
     inset(l = 0, t = 0, r = 0, b = 0) { if (inset.l === l && inset.t === t && inset.r === r && inset.b === b) return; Object.assign(inset, { l, t, r, b }); size(); },
     /** Stand at the free spot nearest (x, z) and look at a point, through your own eyes, keeping control: a place to work from, not a held camera. */
     standLook(x, z, target, { reach = 1.6 } = {}) { const [fx, fz] = nearestFree(x, z, RADIUS, reach), eyeY = (walker.person ? walker.person.height : 1.74) - 0.14, dx = target[0] - fx, dz = target[2] - fz; P.x = fx; P.z = fz; P.vx = P.vz = 0; cam.glide = null; cam.yaw = P.yaw = Math.atan2(dx, dz); cam.pitch = THREE.MathUtils.clamp(Math.atan2(target[1] - eyeY, Math.max(0.05, Math.hypot(dx, dz) - 0.2)), -1.25, 0.9); lastRoom = null; enabled = true; hideWalker = false; moveTo = null; return [fx, fz]; },

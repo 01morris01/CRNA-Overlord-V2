@@ -1,0 +1,138 @@
+{
+ "frame": "meters, glTF; barrel axis +Z toward the tip (push direction); origin = the zero line (front sealing edge of the stopper when empty); printed scale faces +Y; finger flange wings along X",
+ "plunger": "node `plunger` moves along -Z: plunger.position.z = -volume_mL * travel_m_per_mL (0 = empty)",
+ "label": "node `label`: a curved quad on the -Y side of the barrel; UV u runs from the flange end (0) to the tip end (1), v across; it reads correctly with the syringe tip-right and the label facing the viewer. Assign a CanvasTexture with flipY = false.",
+ "anchors": {
+  "tip": "Luer tip end, +Z = push direction",
+  "flange": "finger flange center on the axis (hands: grip_syringe)",
+  "thumb": "back of the thumb press (child of plunger)"
+ },
+ "sizes": {
+  "3ml": {
+   "file": "syringe_3ml.glb",
+   "capacity_mL": 3,
+   "inside_diameter_m": 0.00866,
+   "outside_diameter_m": 0.0106,
+   "travel_m_per_mL": 0.0169775,
+   "full_stroke_offset_m": 0.050933,
+   "max_stroke_offset_m": 0.052433,
+   "plunger_axis": [
+    0,
+    0,
+    -1
+   ],
+   "label_size_m": [
+    0.034,
+    0.013
+   ],
+   "label_center_m": [
+    0,
+    -0.00542,
+    -0.02547
+   ],
+   "tip_m": [
+    0,
+    0,
+    0.01057
+   ],
+   "length_empty_m": 0.0838,
+   "graduations": {
+    "minor_mL": 0.1,
+    "major_mL": 0.5,
+    "numbers": [
+     0.5,
+     1,
+     1.5,
+     2,
+     2.5,
+     3
+    ]
+   }
+  },
+  "5ml": {
+   "file": "syringe_5ml.glb",
+   "capacity_mL": 5,
+   "inside_diameter_m": 0.01206,
+   "outside_diameter_m": 0.014,
+   "travel_m_per_mL": 0.0087542,
+   "full_stroke_offset_m": 0.043771,
+   "max_stroke_offset_m": 0.045271,
+   "plunger_axis": [
+    0,
+    0,
+    -1
+   ],
+   "label_size_m": [
+    0.038,
+    0.013
+   ],
+   "label_center_m": [
+    0,
+    -0.00712,
+    -0.02189
+   ],
+   "tip_m": [
+    0,
+    0,
+    0.01122
+   ],
+   "length_empty_m": 0.07829,
+   "graduations": {
+    "minor_mL": 0.2,
+    "major_mL": 1.0,
+    "numbers": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  },
+  "10ml": {
+   "file": "syringe_10ml.glb",
+   "capacity_mL": 10,
+   "inside_diameter_m": 0.0145,
+   "outside_diameter_m": 0.0166,
+   "travel_m_per_mL": 0.0060558,
+   "full_stroke_offset_m": 0.060558,
+   "max_stroke_offset_m": 0.063058,
+   "plunger_axis": [
+    0,
+    0,
+    -1
+   ],
+   "label_size_m": [
+    0.038,
+    0.013
+   ],
+   "label_center_m": [
+    0,
+    -0.00842,
+    -0.03028
+   ],
+   "tip_m": [
+    0,
+    0,
+    0.01172
+   ],
+   "length_empty_m": 0.09758,
+   "graduations": {
+    "minor_mL": 0.2,
+    "major_mL": 1.0,
+    "numbers": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  }
+ }
+}

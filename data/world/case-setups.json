@@ -1,0 +1,21 @@
+{
+ "about": "How each case is set up at the bedside: which position the patient is in for each part of the case, who turns them and when. Keyed by patient id; 'default' is used for a patient with no entry. Positions are defined in positions.json. Written 2026-11-13; AI-checked, not faculty-reviewed.",
+ "default": {
+  "general": [{ "from": "setup", "position": "supine_flat" }],
+  "sedation": [{ "from": "setup", "position": "supine_flat" }]
+ },
+ "p25": {
+  "procedure": "EGD with possible biopsy, then colonoscopy with possible polypectomy (Gastroenterology, K. Varnadoe, MD)",
+  "bookedPosition": "Left lateral decubitus (chart)",
+  "choice": "The chart books left lateral decubitus. For the general anesthetic the chart does not say how induction is done, so the supported choice is: induce, intubate and extubate ramped (class III obesity, OSA; Collins 2004, Dixon 2005, ASA OSA guideline 2014), and turn to left lateral for the procedure once the tube is secured, as booked. For sedation as booked he is in left lateral from the start.",
+  "general": [
+   { "from": "setup", "position": "ramped", "by": "you and the endoscopy nurse, before monitoring" },
+   { "from": "ready", "position": "lateral_left", "by": "the team, on your word, with you holding the tube", "say": "The team turns him onto his left side on your count. You hold the tube at the mouth; bite block in, tube secured at the corner of the mouth, pillow under the head and between the knees." },
+   { "from": "closing", "position": "semi_upright_emergence", "by": "the team, on your word, with you holding the tube", "say": "The scope is out. The team turns him back onto the ramp, head up, on your count; you hold the tube." }
+  ],
+  "sedation": [
+   { "from": "setup", "position": "lateral_left", "by": "the endoscopy nurse, before sedation" }
+  ],
+  "team": { "lead": "endoscopist", "leadSide": "patient's left (facing him) for the EGD, behind him for the colonoscopy", "anesthesia": "at the head, machine on the patient's right" }
+ }
+}

@@ -15,6 +15,7 @@ import { loadSchedule, loadChart, loadKey, planStatus, pointWorkstationAt, creat
 import { recordAttempt } from './save.js';
 import { sfx, isMuted } from './audio.js';
 import { drawTexture } from './brand.js';
+import { loadPositions, planFor, setupFor, makePoser } from './positions.js';
 
 const FONT = '"Inter Tight", system-ui, sans-serif', MONO = 'ui-monospace, "SF Mono", Menlo, monospace';
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'), short = (s, n) => (String(s).length > n ? String(s).slice(0, n - 1).trimEnd() + '…' : String(s));
@@ -40,20 +41,22 @@ export async function mountPeriop({ world, state, persist, clinical, ui, els, wi
   if (!Array.isArray(G.bays) || G.bays.length !== 4 || G.bays.some((id) => id && !byId[id])) { const general = order.find((p) => canRun(p) && !p.cnRubric); G.bays = ['p51', 'p52', general && general.id, 'p54'].map((id) => (id && byId[id] ? id : null)); }
   if (G.inOR && byId[G.inOR.id] && !G.bays.includes(G.inOR.id)) { const k = G.inOR.from >= 0 && !G.bays[G.inOR.from] ? G.inOR.from : G.bays.findIndex((q) => !q); if (k >= 0) G.bays[k] = G.inOR.id; } G.inOR = null;      // the page was closed in the middle of a case: nothing was recorded, and the patient is back in a bay
   let PEOPLE = {}; try { const r = await fetch(A('people/patients.json')); if (r.ok) { const j = await r.json(), list = j.patients || j; PEOPLE = Array.isArray(list) ? Object.fromEntries(list.map((q) => [q.id, q])) : list; } } catch (e) { /* the stand-in figure is used */ }
+  const POS = await loadPositions(); let HERO = []; try { const r = await fetch(A('people/hero/index.json')); if (r.ok) HERO = (await r.json()).ids || []; } catch (e) { /* no hero figures yet */ }      // positions with the case; figures that can be posed
   const api = { bays: G.bays, case: null, away: false, open: {}, people: PEOPLE, byId, ready: null };
   const last = (id) => (G.cases[id] && G.cases[id].attempts.length ? G.cases[id].attempts.at(-1) : null);
 
   // ---------------------------------------------------------------- people: each patient as a figure, supine, under a sheet
   async function person(id) {
     const rec = PEOPLE[id]; let gltf = null;
-    if (rec && rec.file) try { gltf = await world.loadModel('people/' + (rec.file.includes('/') ? rec.file : 'patients/' + rec.file)); } catch (e) { gltf = null; }
+    let meta = null; if (HERO.includes(id)) try { [gltf, meta] = await Promise.all([world.loadModel(`people/hero/${id}.glb`), fetch(A(`people/hero/${id}.json`)).then((r) => (r.ok ? r.json() : null)).catch(() => null)]); } catch (e) { console.warn('hero figure', id, e); gltf = null; }
+    if (!gltf && rec && rec.file) try { gltf = await world.loadModel('people/' + (rec.file.includes('/') ? rec.file : 'patients/' + rec.file)); } catch (e) { gltf = null; }
     const own = !!gltf; if (!gltf) gltf = await world.loadModel('models/patient/patient-supine.glb');
     const g = gltf.scene, morphs = [];
     g.traverse((o) => { if (!o.isMesh) return; o.material = o.material.clone(); const m = o.material, n = m.name + ' ' + o.name; if (/hair|lash|brow/i.test(n) && m.map) { m.transparent = false; m.alphaTest = Math.max(m.alphaTest, 0.4); m.side = THREE.DoubleSide; m.depthWrite = true; m.roughness = Math.max(m.roughness, 0.8); } if (/drape|sheet/i.test(n)) { m.side = THREE.DoubleSide; o.userData.drape = true; } if (o.morphTargetDictionary) morphs.push(o); });
     const lm = {}; if (own && rec.landmarks) for (const [k, v] of Object.entries(rec.landmarks)) lm[k] = new THREE.Vector3(...v);
     for (const [k, v] of Object.entries({ mouth: [0, 0.262, -0.705], nose: [0, 0.296, -0.74], eyeL: [0.031, 0.28, -0.775], eyeR: [-0.031, 0.28, -0.775], chest: [0, 0.3, -0.3] })) lm[k] ||= new THREE.Vector3(...v);
-    const root = new THREE.Group(); root.add(g);
-    return { id, root, own, lm, placed: false, morphs: morphs.length ? Object.keys(morphs[0].morphTargetDictionary) : [],
+    const root = new THREE.Group(); root.add(g); const poser = meta ? makePoser(gltf, meta) : null; if (poser && poser.canPose && poser.poses.includes('flat')) poser.set('flat', 0);
+    return { id, root, own, lm, placed: false, poser, meta, hero: !!meta, morphs: morphs.length ? Object.keys(morphs[0].morphTargetDictionary) : [],
       morph(name, w) { for (const o of morphs) { const i = o.morphTargetDictionary[name]; if (i !== undefined) o.morphTargetInfluences[i] = w; } },
       sheet(hex) { root.traverse((o) => { if (o.isMesh && o.userData.drape) o.material.color.set(hex); }); } };
   }
@@ -184,6 +187,22 @@ export async function mountPeriop({ world, state, persist, clinical, ui, els, wi
   function syringes() { const m = machine(); for (const o of [...syr.children]) syr.remove(o); if (!C || !m) return; m.updateMatrixWorld(true); const gb = syringes.g ||= [new THREE.CylinderGeometry(0.0075, 0.0075, 0.085, 12), new THREE.CylinderGeometry(0.004, 0.004, 0.05, 8), new THREE.CylinderGeometry(0.0079, 0.0079, 0.03, 12)];
     C.syringes.filter((q) => !q.given).slice(0, 8).forEach((q, i) => { const g = new THREE.Group(), body = new THREE.Mesh(gb[0], M.barrel), plunger = new THREE.Mesh(gb[1], M.plunger), band = new THREE.Mesh(gb[2], M.band[q.cls] || M.band.other);
       for (const x of [body, plunger, band]) x.rotation.x = Math.PI / 2; plunger.position.z = 0.062; band.position.z = -0.005; g.add(body, plunger, band); g.position.copy(m.localToWorld(new THREE.Vector3(0.56 + (i % 2) * 0.006, 0.911, 0.115 + i * 0.0225))); g.quaternion.copy(m.quaternion).multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2 + (i % 2 ? 0.05 : -0.04))); syr.add(g); }); }      // in a row on the right of the worktop (its top measured at 0.903)
+  // ---- positions: the case's own position plan (data/world/case-setups.json), applied to the figure when it can be posed
+  let refitT = 0, refitAcc = 0;
+  function positionNow(entry, seconds) { const def = entry.def, pose = def && def.pose, can = !!(P && P.poser && P.poser.canPose && P.poser.poses.includes(pose));
+    (C.positions ||= []).push({ t: C.runner.simTime, position: entry.position, label: def ? def.label : entry.position, by: entry.by || '', shown: can });
+    if (can) { P.poser.set(pose, seconds, () => { refitT = 0.4; fitProps(); kits('repose'); }); refitT = seconds + 0.4; } else kits('repose');
+    try { if (C.runner.p.sedation && def && def.engine) C.runner.setPatientPosition(def.engine); } catch (e) { /* the sedation model is off */ }
+    return can; }
+  function startPositions() { if (!C || !entry) return; const kind = C.kind === 'sedation' ? 'sedation' : 'general'; C.positionPlan = planFor(POS, entry.id, kind); C.setup = setupFor(POS, entry.id); C.positions = [];
+    const first = C.positionPlan.find((q) => q.from === 'setup') || C.positionPlan[0]; if (first) positionNow(first, 0); C.inductionPosition = first && first.def;
+    const act0 = C.act, label0 = C.label, ind = C.inductionPosition;
+    if (ind && ind.pose !== 'flat') C.label = (id) => (id === 'sniff' ? `Position for induction: ${ind.label.toLowerCase()}` : label0(id));
+    C.act = (id, how) => { const r = act0(id, how); if (!r || !r.ok) return r; let extra = '';
+      if (id === 'sniff' && ind && ind.pose !== 'flat') { r.say = `${ind.label}: ${ind.what}`; }
+      for (const q of C.positionPlan) if (q.from === id) { const shown = positionNow(q, 4); extra += ' ' + (q.say || `${q.def ? q.def.label : q.position}.`) + (shown ? '' : ' (This figure cannot be shown turning; the position is recorded.)'); }
+      if (extra || id === 'sniff') { r.say = (r.say + extra).trim(); C.lastSay = r.say; if (C.said.length) C.said[C.said.length - 1].text = r.say; }
+      return r; }; }
   // ---- places to stand while you work. Each one puts you on your feet at a real spot, looking at the thing, and leaves you in control:
   // you can turn, step away or walk out at any moment. Nothing here holds the camera.
   const VIEWS = [['patient', 'Head of bed'], ['monitor', 'Monitor'], ['worktop', 'Machine'], ['side', 'Bedside'], ['door', 'Door']], V3 = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -254,6 +273,7 @@ export async function mountPeriop({ world, state, persist, clinical, ui, els, wi
   // hands always agree), and does things only through the case's own actions. A kit that draws a thing itself says so with
   // own(name), and the stand-in this file used to draw for it stays hidden.
   const KITS = [], OWNED = new Set();
+  api.kits = KITS;      // for checks: each kit's own state()
   const kitCtx = () => ({ C, P, entry, run, chart: run ? run.chart : null, TABLE, room: ROOM, world, hands, ui, mmss, get machine() { return machine(); }, get clinical() { return clinical(); }, get m() { return lastM; },
     act: (id) => { const r = C.act(id); sfx(r.ok ? 'tap' : 'wrong'); dirty(); return r; }, say: (text, ok = true) => { C.lastSay = text; C.said.push({ t: C.runner.simTime, text, ok }); dirty(false); return { ok, say: text }; }, dirty, syringes, own: (name) => OWNED.add(name) });
   const kits = (fn, ...a) => { for (const k of KITS) { try { k[fn] && k[fn](...a); } catch (e) { console.warn('kit', k.name || '', fn, e); } } };
@@ -268,14 +288,15 @@ export async function mountPeriop({ world, state, persist, clinical, ui, els, wi
     const n = G.bays.indexOf(e.id), p = n >= 0 && bays[n].p ? bays[n].p : await person(e.id).catch(() => null);
     await wipe(() => { if (n >= 0) { bays[n].p = null; bays[n].id = null; bays[n].chart = null; G.bays[n] = null; bayScreen(bays[n]); }
       ROOM = room; TABLE.copy(roomTable(room)); api.room = room; G.inOR = { id: e.id, from: n, room }; C = made; P = p; entry = e; lastM = null; run = { unplanned, converted, room, mode: null, started: false, rubricSeen: false, held: false, away: false, from: n, chart, allergies: allergyList(chart), startedAt: Date.now() }; api.case = C; api.away = false;
-      if (P) { lay(P, TABLE.clone(), 0, ROOM); P.sheet(0x4f8496); P.morph('eyesClosed', C.kind === 'emergence' ? 1 : 0); fitProps(); }
+      if (P) { lay(P, TABLE.clone(), 0, ROOM); P.sheet(0x4f8496); P.morph('eyesClosed', C.kind === 'emergence' ? 1 : 0); }
+      startPositions(); if (P) fitProps();
       if (!propsIn) { world.patchDynamic(propMats, propLight); world.scene.add(props); world.adopt(props, ROOM, propMats); propsIn = true; } world.lightAt(propLight, TABLE.clone().add(new THREE.Vector3(0, 0.5, -0.8)), ROOM); world.move(props, { at: TABLE.clone(), room: ROOM });
       if (dressing) dressing.visible = false; syringes(); C.onAttempt = () => dirty(false); H.hidden = false; document.body.dataset.case = '1'; frame(); toHead(); boardScreen(); persist(); ui.goal(); kits('begin', kitCtx()); });
     starting = false; return true; }
   /** Before the clock has started: the patient goes back to a bay and nothing is recorded. */
   function cancel() { const id = entry.id, back = run.from >= 0 && !G.bays[run.from] ? run.from : G.bays.findIndex((q) => !q); const was = ROOM; return wipe(async () => { clear(false); if (back >= 0) await setBay(back + 1, id); persist(); refresh(); api.open[was](); }); }
   function finish(early = false) { if (!C || run.sheet) return; if (!run.started) return cancel(); run.sheet = true; C.pause(); const d = C.debrief(), e = entry, ind = d.induction, em = d.emergence, emOn = !!(em && (C.atExtubation || C.kind === 'emergence')), assist = run.rubricSeen ? 'hint' : run.mode === 'list' ? 'labels' : null;
-    const out = { t: Date.now(), kind: C.kind, co2: C.co2, minutes: d.minutes, induction: ind && ind.final ? ind.percent : null, inductionPass: ind && ind.final ? ind.pass : null, emergence: emOn ? em.percent : null, emergencePass: emOn ? em.pass : null, unplanned: run.unplanned, steps: run.listAt != null ? 'list shown part-way' : run.mode === 'list' ? 'list' : 'memory', rubricOpened: run.rubricSeen, ended: C.ended ? 'handover' : 'stopped early', lowestSpo2: d.lowestSpo2, attempts: d.attempts, room: run.room, decision: run.converted ? lastDecision(e.id) : null };
+    const out = { t: Date.now(), kind: C.kind, co2: C.co2, minutes: d.minutes, induction: ind && ind.final ? ind.percent : null, inductionPass: ind && ind.final ? ind.pass : null, emergence: emOn ? em.percent : null, emergencePass: emOn ? em.pass : null, unplanned: run.unplanned, steps: run.listAt != null ? 'list shown part-way' : run.mode === 'list' ? 'list' : 'memory', rubricOpened: run.rubricSeen, ended: C.ended ? 'handover' : 'stopped early', lowestSpo2: d.lowestSpo2, attempts: d.attempts, room: run.room, decision: run.converted ? lastDecision(e.id) : null, positions: (C.positions || []).map((q) => ({ t: Math.round(q.t), position: q.position, by: q.by, shown: q.shown })) };
     (G.cases[e.id] ||= { attempts: [] }).attempts.push(out); if (G.cases[e.id].attempts.length > 12) G.cases[e.id].attempts.shift();
     for (const [sh, on] of [[ind, out.induction != null], [em, out.emergence != null]]) if (sh && on) recordAttempt(state, { objective: 'or.' + sh.id, item: e.id + ':' + sh.id, evidence: 'applied', correct: !!sh.pass, picked: sh.percent + '%', assist, ms: Date.now() - run.startedAt, where: 'or' });
     state.learning.due = state.learning.due.filter((q) => !String(q.objective).startsWith('or.'));      /* a case is not a review card: it never queues itself at the plexus plinth */
@@ -326,6 +347,7 @@ export async function mountPeriop({ world, state, persist, clinical, ui, els, wi
     const tubeIn = s.airwayDevice === 'intubated', masked = (s.airwayDevice === 'mask' && !!d.preox && !s.intubationInProgress) || (s.airwayDevice === 'extubated' && !!d.o2device);
     maskG.visible = masked && !OWNED.has('mask'); if (tube) tube.visible = tubeIn && !OWNED.has('tube'); for (const h of hoseTube) h.visible = tubeIn && (!!d.circuit || C.kind === 'emergence') && !OWNED.has('circuit'); for (const h of hoseMask) h.visible = masked && !OWNED.has('circuit'); if (scope) scope.visible = !!s.intubationInProgress && !OWNED.has('scope'); if (scopeHome) scopeHome.visible = !s.intubationInProgress || OWNED.has('scope'); for (const t of tapes) t.visible = !!d.eyes && !d.untape && !OWNED.has('tapes'); syr.visible = !OWNED.has('syringes');
     kits('update', dt, m, live);
+    if (P && P.poser) { P.poser.update(dt); if (P.poser.landmarks(P.root, P.lm) && (P.poser.moving || refitT > 0)) { refitT -= dt; if ((refitAcc += dt) > 0.2) { refitAcc = 0; fitProps(); } } }
     if (P) { const ph = s.ventMode ? m.wave.ventPhase : m.wave.respiratoryPhase, breathing = s.ventMode ? s.tv > 50 : s.spont && s.spontaneousTV > 60, vol = breathing && Number.isFinite(ph) ? (ph < 1 / 3 ? ph * 3 : Math.exp(-(ph - 1 / 3) * 5)) : 0; let shut = s.status >= 2 || (!!d.eyes && !d.untape) ? 1 : 0;
       if (!shut && live) { blinkT -= dt; if (blinkT < 0.13) shut = 1; if (blinkT < 0) blinkT = 2.5 + Math.random() * 4; } P.morph('breathe', vol); P.morph('eyesClosed', shut); P.morph('jawOpen', s.intubationInProgress ? 1 : tubeIn ? 0.4 : 0); }
     if (C.ended && !run.sheet) return finish();

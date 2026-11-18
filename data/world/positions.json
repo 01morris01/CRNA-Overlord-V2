@@ -1,0 +1,50 @@
+{
+ "about": "Patient positions the rooms can use, each with what it is, why, the references read for it, and what to check. A case says which position it uses in each phase (data/world/case-setups.json). A patient figure made with pose clips (assets/people/hero/<id>.glb) is posed to match; an older figure without clips is not moved, and the room says so. Written 2026-11-13; AI-checked against the references listed, not faculty-reviewed.",
+ "positions": {
+  "supine_flat": {
+   "label": "Supine, flat",
+   "pose": "flat",
+   "what": "On the back, head on a pillow, arms at the sides.",
+   "engine": "supine",
+   "checks": ["head on the pillow", "arms on the mattress, not over the edge"],
+   "references": []
+  },
+  "ramped": {
+   "label": "Ramped (head-elevated laryngoscopy position)",
+   "pose": "ramped",
+   "what": "Upper back, shoulders and head built up on a foam ramp until the external auditory meatus is level with the sternal notch; the torso about 25 degrees head-up; face plane horizontal; arms at the sides.",
+   "engine": "ramped",
+   "why": "Class III obesity: the ramped position gave a better laryngeal view than a standard sniffing position in morbidly obese patients, and preoxygenation 25 degrees head-up gave higher oxygen tensions and a longer safe apnea time than supine.",
+   "checks": ["ear canal level with the sternal notch", "face plane horizontal", "no gap under the neck", "arms supported, right antecubital IV visible and running", "cuff on the left arm, oximeter on a right finger"],
+   "references": [
+    {"cite": "Collins JS, Lemmens HJM, Brodsky JB, Brock-Utne JG, Levitan RM. Laryngoscopy and morbid obesity: a comparison of the 'sniff' and 'ramped' positions. Obes Surg 2004;14:1171-5", "doi": "10.1381/0960892042386869", "read": "PubMed abstract, 2026-11-13: ramped = blankets under upper body and head until horizontal alignment of external auditory meatus and sternal notch; better laryngeal view than a 7 cm head cushion (P = 0.037), 60 bariatric patients"},
+    {"cite": "Dixon BJ, Dixon JB, Carden JR, et al. Preoxygenation is more effective in the 25 degrees head-up position than in the supine position in severely obese patients. Anesthesiology 2005;102:1110-5", "doi": "10.1097/00000542-200506000-00009", "read": "PubMed abstract, 2026-11-13: BMI over 40; 25 degrees head-up gave PaO2 442 vs 360 mmHg and 201 vs 155 s to SpO2 92 %"}
+   ]
+  },
+  "lateral_left": {
+   "label": "Left lateral decubitus",
+   "pose": "lateral_left",
+   "what": "On the left side facing the patient's left, head on a pillow in line with the spine, the left (lower) arm brought forward so he does not lie on it, right arm forward on a pillow with the right antecubital IV reachable, hips and knees flexed, pillow between the knees.",
+   "engine": "lateral",
+   "why": "The position the procedure is booked in (chart: EGD then colonoscopy, 'Left lateral decubitus'); the standard starting position for colonoscopy; the procedure manual gives lateral decubitus for upper and lower endoscopy. For a patient breathing on his own, lateral position also makes the passive pharynx less collapsible in OSA.",
+   "checks": ["head in line with the spine, lower ear not folded", "lower eye free of pressure", "lower shoulder brought forward, arm not under the body", "pillow between the knees", "tube held during the turn and secured at the corner of the mouth, bite block in", "nothing of the body over the edge of the stretcher; rails up"],
+   "references": [
+    {"cite": "Chart p25: case.position 'Left lateral decubitus'; procedure 'Esophagogastroduodenoscopy with possible biopsy; colonoscopy with possible polypectomy'", "read": "data/mock-or-day/patients/p25.json"},
+    {"cite": "Greene A, Borgaonkar M, Hodgkinson K, et al. A randomized controlled trial comparing right and left lateral decubitus starting position on outcomes in colonoscopy. Surg Endosc 2020;34:3656-62", "doi": "10.1007/s00464-020-07661-x", "read": "PubMed abstract, 2026-11-13: left lateral is the standard starting position"},
+    {"cite": "Jaffe RA, ed. Anesthesiologist's Manual of Surgical Procedures, 6th ed (2019), chapter Upper/Lower GI Endoscopy (Yeh, Berquist, Claure, Golianu)", "read": "Owner's copy, 2026-11-13: positioning 'Lateral decubitus for upper and lower endoscopy', check and pad pressure points, check eyes; ETT well secured to the side of the mouth; inadvertent extubation listed as a complication. Pediatric chapter; used for the position only"},
+    {"cite": "Isono S, Tanaka A, Nishino T. Lateral position decreases collapsibility of the passive pharynx in patients with obstructive sleep apnea. Anesthesiology 2002;97:780-5", "doi": "10.1097/00000542-200210000-00006", "read": "PubMed abstract, 2026-11-13"}
+   ]
+  },
+  "semi_upright_emergence": {
+   "label": "Supine, head up (emergence and extubation)",
+   "pose": "ramped",
+   "what": "Turned back onto the back on the ramp, head up, for emergence, extubation and transfer.",
+   "engine": "ramped",
+   "why": "For a patient with OSA the ASA practice guideline advises extubation and recovery in a non-supine position (semi-upright or lateral) when possible.",
+   "checks": ["tube held during the turn back", "head up before extubation", "suction within reach"],
+   "references": [
+    {"cite": "American Society of Anesthesiologists Task Force on Perioperative Management of Patients with Obstructive Sleep Apnea. Practice guidelines ... an updated report. Anesthesiology 2014;120:268-86", "doi": "10.1097/ALN.0000000000000053", "read": "PubMed record 2026-11-13 (abstract not available); the recommendation on non-supine extubation and recovery is from the guideline text as commonly taught, not re-read in this session"}
+   ]
+  }
+ }
+}

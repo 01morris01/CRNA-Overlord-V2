@@ -102,6 +102,7 @@ export function mountHands({ world, sound = null, layer }) {
 
   // ------------------------------------------------------------------ each frame
   function update(dt) {
+    { const ins = world.insets || { r: 0, b: 0 }, w = innerWidth || 1, h = innerHeight || 1; hand.position.x = 0.19 - (ins.r / w) * 0.5; hand.position.y = -0.17 + (ins.b / h) * 0.35; }      // keep what you hold out from under a panel that covers part of the screen
     for (let i = tweens.length - 1; i >= 0; i--) { const w = tweens[i]; w.t = Math.min(1, w.t + dt / w.dur); const k = w.t * w.t * (3 - 2 * w.t); w.obj.position.lerpVectors(w.from.pos, w.to.pos, k); w.obj.quaternion.slerpQuaternions(w.from.quat, w.to.quat, k); w.obj.scale.lerpVectors(w.from.scale, w.to.scale, k); if (w.t >= 1) { tweens.splice(i, 1); w.done && w.done(); } }
     if (grab && !grab.turn) { grab.t += dt; grab.th.hold && grab.th.hold(dt, grab.t); }
     hover = grab ? grab.th : find(); if (picked && (!usable(picked) || (centre(picked, tmp2) && tmp2.distanceTo(camera.position) > picked.reach + 0.6))) picked = null;

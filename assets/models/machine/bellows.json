@@ -1,0 +1,90 @@
+{
+ "file": "bellows.glb",
+ "parent_node": "eq_anesthesia_machine (in assets/level/clinical.glb)",
+ "machine_local_transform": {
+  "translation": [
+   -0.1762,
+   0.8854,
+   -0.0566
+  ],
+  "rotation_xyzw": [
+   0,
+   0,
+   0,
+   1
+  ],
+  "scale": [
+   1,
+   1,
+   1
+  ]
+ },
+ "replaces": "the opaque canister and the green 3-lobe shape inside it; discard the triangles of these meshes that lie wholly inside these machine-local boxes",
+ "hide_boxes_machine_local": {
+  "anesthesia_machine_body (clinical.glb node anesthesia_machine_3)": [
+   [
+    -0.2705,
+    0.885,
+    -0.1505
+   ],
+   [
+    -0.082,
+    1.142,
+    0.037
+   ]
+  ],
+  "anesthesia_machine_bag_and_tube_pump (node anesthesia_machine_0)": [
+   [
+    -0.262,
+    0.894,
+    -0.1425
+   ],
+   [
+    -0.09,
+    1.1315,
+    0.029
+   ]
+  ]
+ },
+ "nodes": {
+  "bellows_assembly": "root (bellows base center)",
+  "housing": "base ring, clear housing, printed scale (static)",
+  "bellows": "pleats + top plate, morph `excursion`",
+  "bellows_top": "empty on the top plate (moves with the morph in three.js only if read from the morph; see top_y_local)"
+ },
+ "morph": "excursion",
+ "excursion_meaning": "0 = collapsed at the bottom (inspiration ended with 1500 mL delivered); 1 = fully up against the housing top (end of expiration)",
+ "volume": {
+  "max_mL": 1500,
+  "effective_area_m2": 0.010936,
+  "travel_m": 0.13716,
+  "contained_mL": "1500 * excursion",
+  "delivered_mL_from_full": "1500 * (1 - excursion)",
+  "top_y_local": "0.06600 + 0.13716 * excursion"
+ },
+ "scale_marks_y_local_m": {
+  "meaning": "height (local y) of each printed mark; the top plate reaches it when that many mL have been delivered from full",
+  "300": 0.17573,
+  "400": 0.16659,
+  "500": 0.15744,
+  "600": 0.1483,
+  "700": 0.13915,
+  "800": 0.13001,
+  "900": 0.12087,
+  "1000": 0.11172,
+  "1100": 0.10258,
+  "1200": 0.09343,
+  "1300": 0.08429,
+  "1400": 0.07514,
+  "1500": 0.066
+ },
+ "scale_reads": "down from the top: 300 at the top of the scale, 1500 at the bottom",
+ "housing_m": {
+  "outside_diameter": 0.16,
+  "top_y_local": 0.2087
+ },
+ "tris": {
+  "housing": 5746,
+  "bellows": 10112
+ }
+}

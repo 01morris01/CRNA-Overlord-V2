@@ -1,0 +1,245 @@
+{
+ "about": "Syringe strengths for the drugs the engine models, each from a US FDA label on DailyMed (labels downloaded 2026-11-11 to overlord-asset-sources/work/formulary/dailymed; strengths re-read from the label XML on 2026-11-13 unless 'verified' is false). Used by world/js/cases.js buildShelf: a drawn dose becomes a volume at this strength. Not reviewed by faculty or a pharmacist. Dantrolene and albuterol are left without a syringe strength (not drawn into a syringe here).",
+ "drugs": [
+  {
+   "name": "Propofol",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 10
+   },
+   "source": {
+    "product": "Diprivan 10 mg/mL",
+    "labeler": "Fresenius Kabi",
+    "dailymedSetId": "e3105799-a4b6-f3f4-e6e2-b2b29bbdb538",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=e3105799-a4b6-f3f4-e6e2-b2b29bbdb538",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Etomidate",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 2
+   },
+   "source": {
+    "product": "Amidate 2 mg/mL",
+    "labeler": "Hospira",
+    "dailymedSetId": "b7ed5bf8-ba75-44dc-8f81-96b4ad5766be",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=b7ed5bf8-ba75-44dc-8f81-96b4ad5766be",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Ketamine",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 10
+   },
+   "source": {
+    "product": "Ketalar 200 mg/20 mL (10 mg/mL)",
+    "labeler": "Par",
+    "dailymedSetId": "14e8f864-8b8a-4e7e-8439-e510d3107063",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=14e8f864-8b8a-4e7e-8439-e510d3107063",
+    "verifiedFromLabelXml": true,
+    "note": "The label also lists 50 and 100 mg/mL; the 10 mg/mL vial is used undiluted here"
+   }
+  },
+  {
+   "name": "Midazolam",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 1
+   },
+   "source": {
+    "product": "Midazolam 1 mg/mL",
+    "labeler": "Hospira",
+    "dailymedSetId": "1abda8b8-48a8-4995-af86-39220d1aa240",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1abda8b8-48a8-4995-af86-39220d1aa240",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Fentanyl",
+   "unit": "mcg",
+   "syringe": {
+    "mgPerMl": 0.05
+   },
+   "source": {
+    "product": "Fentanyl citrate 50 mcg/mL",
+    "labeler": "Hospira",
+    "dailymedSetId": "bfa8018a-4cbc-434b-e09e-782872b0340a",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=bfa8018a-4cbc-434b-e09e-782872b0340a",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Rocuronium",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 10
+   },
+   "source": {
+    "product": "Rocuronium bromide 10 mg/mL",
+    "labeler": "Hospira",
+    "dailymedSetId": "309aeb1b-8022-4df7-8194-ae6529e3395c",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=309aeb1b-8022-4df7-8194-ae6529e3395c",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Vecuronium",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 1
+   },
+   "source": {
+    "product": "Vecuronium 10 mg vial reconstituted to 10 mL (1 mg/mL)",
+    "labeler": "Sun",
+    "dailymedSetId": "a14da3ee-a731-4282-be9d-407473517470",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a14da3ee-a731-4282-be9d-407473517470",
+    "verifiedFromLabelXml": true,
+    "note": "Lyophilized; strength after reconstitution as the carton states"
+   }
+  },
+  {
+   "name": "Succinylcholine",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 20
+   },
+   "source": {
+    "product": "Anectine 200 mg/10 mL (20 mg/mL)",
+    "labeler": "Sandoz",
+    "dailymedSetId": "a1e5d29f-111e-4a44-addf-beeb6ea81711",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a1e5d29f-111e-4a44-addf-beeb6ea81711",
+    "verifiedFromLabelXml": true,
+    "note": "Quelicin (Hospira) is the same strength"
+   }
+  },
+  {
+   "name": "Phenylephrine",
+   "unit": "mcg",
+   "syringe": {
+    "mgPerMl": 0.1
+   },
+   "source": {
+    "product": "Biorphen 100 mcg/mL ready to use",
+    "labeler": "Dr. Reddy's",
+    "dailymedSetId": "2f715e4e-b269-b935-d2c9-003cb29770be",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=2f715e4e-b269-b935-d2c9-003cb29770be",
+    "verifiedFromLabelXml": true,
+    "note": "Ready-to-use strength; the 10 mg/mL form must be diluted"
+   }
+  },
+  {
+   "name": "Ephedrine",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 5
+   },
+   "source": {
+    "product": "Emerphed 50 mg/10 mL (5 mg/mL) ready to use",
+    "labeler": "Nexus",
+    "dailymedSetId": "e1323592-dc57-4c9d-b84d-442648a7b114",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=e1323592-dc57-4c9d-b84d-442648a7b114",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Epinephrine",
+   "unit": "mcg",
+   "syringe": {
+    "mgPerMl": 0.1
+   },
+   "source": {
+    "product": "Epinephrine 0.1 mg/mL prefilled syringe",
+    "labeler": "International Medication Systems",
+    "dailymedSetId": "f2b5f15b-8541-466a-a27a-ee57bc4aac67",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=f2b5f15b-8541-466a-a27a-ee57bc4aac67",
+    "verifiedFromLabelXml": false,
+    "note": "Strength from the earlier label notes; this run re-read the Adrenalin 1 mg/mL label, not this one"
+   }
+  },
+  {
+   "name": "Atropine",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 0.4
+   },
+   "source": {
+    "product": "Atropine sulfate 0.4 mg/mL",
+    "labeler": "Fresenius Kabi",
+    "dailymedSetId": "310c8a74-ea24-4357-8099-81e394b1634e",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=310c8a74-ea24-4357-8099-81e394b1634e",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Glycopyrrolate",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 0.2
+   },
+   "source": {
+    "product": "Glycopyrrolate 0.2 mg/mL",
+    "labeler": "American Regent",
+    "dailymedSetId": "62267afe-1a73-4623-984e-646db590ec5b",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=62267afe-1a73-4623-984e-646db590ec5b",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Neostigmine",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 1
+   },
+   "source": {
+    "product": "Bloxiverz 1 mg/mL",
+    "labeler": "Exela",
+    "dailymedSetId": "d2f55643-2b0d-4ef9-a9d8-b7138b314372",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=d2f55643-2b0d-4ef9-a9d8-b7138b314372",
+    "verifiedFromLabelXml": true,
+    "note": "The label also lists 0.5 mg/mL"
+   }
+  },
+  {
+   "name": "Sugammadex",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 100
+   },
+   "source": {
+    "product": "Bridion 100 mg/mL",
+    "labeler": "Merck",
+    "dailymedSetId": "5171d883-fe8f-482c-97ab-40b00975b64a",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5171d883-fe8f-482c-97ab-40b00975b64a",
+    "verifiedFromLabelXml": true,
+    "note": ""
+   }
+  },
+  {
+   "name": "Naloxone",
+   "unit": "mg",
+   "syringe": {
+    "mgPerMl": 0.4
+   },
+   "source": {
+    "product": "Naloxone HCl 0.4 mg/mL",
+    "labeler": "Hospira",
+    "dailymedSetId": "8535cc84-ad4a-4d67-8480-fb5a2e3406f8",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=8535cc84-ad4a-4d67-8480-fb5a2e3406f8",
+    "verifiedFromLabelXml": false,
+    "note": "Strength from the earlier label notes; this run re-read the IMS 1 mg/mL syringe label, not this one"
+   }
+  }
+ ]
+}

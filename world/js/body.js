@@ -16,7 +16,7 @@ import * as THREE from 'three';
 
 const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z), DOWN = V(0, -1, 0);
 export const SITE_LABEL = {
-  fingerL: 'left index finger', fingerR: 'right index finger', armL: 'left upper arm', armR: 'right upper arm', handL: 'back of the left hand', handR: 'back of the right hand',
+  fingerL: 'left index finger', fingerR: 'right index finger', antecubitalL: 'left antecubital fossa', antecubitalR: 'right antecubital fossa', armL: 'left upper arm', armR: 'right upper arm', handL: 'back of the left hand', handR: 'back of the right hand',
   ecgRA: 'under the right clavicle', ecgLA: 'under the left clavicle', ecgRL: 'right lower chest wall', ecgLL: 'left lower chest wall', ecgV: 'left chest, V5',
   lungRU: 'right upper chest', lungLU: 'left upper chest', lungRL: 'right lower chest, at the side', lungLL: 'left lower chest, at the side', epigastrium: 'over the stomach', trachea: 'over the windpipe',
   aortic: 'second space, right of the sternum', pulmonic: 'second space, left of the sternum', tricuspid: 'lower left edge of the sternum', mitral: 'the apex of the heart',
@@ -44,8 +44,9 @@ export function bodySites(P, { heightM = 1.72 } = {}) {
     let local = null, hit = null, axis = null;
     if (EST[id]) { const [x, z, dir] = EST[id]; local = V(SN.x + x * k, 0.5, SN.z + z * k); if (dir) local.y = Math.max(0.06, SN.y - 0.06); hit = drop(local, dir || DOWN, dir ? 0.3 : 0.45); }
     else if (/^(eye[LR]|mouth|chin|forehead|nose)$/.test(id) && L[id]) { local = L[id].clone(); hit = { pos: toRoom(local), normal: dirRoom(V(0, 1, 0)) }; }
-    else if (/^(finger|hand|wrist|arm)[LR]$/.test(id)) { const s = id.endsWith('L') ? 1 : -1, h = hand(s), w = wrist(s); if (!h || !w) return null; const along = h.clone().sub(w); along.y = 0; if (along.lengthSq() < 1e-6) along.set(0, 0, 1); along.normalize();
+    else if (/^(finger|hand|wrist|arm|antecubital)[LR]$/.test(id)) { const s = id.endsWith('L') ? 1 : -1, h = hand(s), w = wrist(s); if (!h || !w) return null; const along = h.clone().sub(w); along.y = 0; if (along.lengthSq() < 1e-6) along.set(0, 0, 1); along.normalize();
       if (id.startsWith('finger')) { local = h.clone().addScaledVector(along, 0.085 * k); axis = along; } else if (id.startsWith('hand')) { local = h.clone(); axis = along; } else if (id.startsWith('wrist')) { local = w.clone(); axis = along; }
+      else if (id.startsWith('antecubital')) { const sh = shoulder(s), el = sh.clone().lerp(w, 0.53); local = el.clone(); axis = w.clone().sub(el).normalize(); }      // the front of the elbow, axis toward the hand
       else { const sh = shoulder(s), el = sh.clone().lerp(w, 0.53); local = sh.clone().lerp(el, 0.55); axis = el.clone().sub(sh).normalize(); }
       hit = drop(V(local.x, 0.5, local.z)) || { pos: toRoom(local), normal: dirRoom(V(0, 1, 0)) }; if (id.startsWith('arm')) { const c = toRoom(local); c.y = hit.pos.y - 0.045 * k; hit = { pos: c, normal: hit.normal }; } }
     if (!hit) return null; return { id, label: SITE_LABEL[id] || id, local: root.worldToLocal(hit.pos.clone()), pos: hit.pos, normal: hit.normal, axis: axis ? dirRoom(axis) : null, exact: false, on: hit.on || null };

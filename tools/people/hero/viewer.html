@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hero patient check</title>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<style>html,body{margin:0;background:#5a6066;overflow:hidden}canvas{display:block}</style></head>
+<body>
+<script type="module">
+// A plain three.js r170 page that answers "what does this patient file look like in this renderer": it loads the GLB
+// (and the measured stretcher for context), puts the figure in one clip or a 50/50 crossfade of two, sets morphs by
+// name on every mesh that has them, shows only the supports of the clip shown, and frames a camera from the file's own
+// landmarks (p25.json). Nothing here is the app's code.
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const q = new URLSearchParams(location.search);
+const file = q.get('file') || 'p25.glb', meta = q.get('meta') || 'p25.json';
+const pose = q.get('pose') || 'flat', pose2 = q.get('pose2'), mixw = +(q.get('mix') || 0.5);
+const morphs = (q.get('morphs') || '').split(',').filter(Boolean).map(s => s.split(':'));
+const W = +(q.get('w') || 1280), H = +(q.get('h') || 720);
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); document.body.appendChild(renderer.domElement);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = +(q.get('exp') || 1.0); renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x5a6066);
+const pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.45;
+scene.add(new THREE.HemisphereLight(0xeef3f8, 0x8a8f94, 0.6));
+const key = new THREE.DirectionalLight(0xfff5ea, 2.2); key.position.set(0.6, 2.2, -0.9); key.castShadow = true;
+key.shadow.mapSize.set(4096, 4096); Object.assign(key.shadow.camera, { left: -1.3, right: 1.3, top: 1.3, bottom: -1.3, near: 0.1, far: 5 }); key.shadow.bias = -0.0004; key.shadow.normalBias = 0.003; key.shadow.radius = 3;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xe8f0ff, 0.6); fill.position.set(-1.5, 1.2, 1.2); scene.add(fill);
+const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/');
+const loader = new GLTFLoader().setDRACOLoader(draco);
+const [gltf, info] = await Promise.all([loader.loadAsync(file), fetch(meta).then(r => r.json()).catch(() => null)]);
+if (q.get('stretcher') !== '0') { try { const st = await loader.loadAsync('stretcher_ref.glb'); st.scene.traverse(o => { if (o.isMesh) { o.receiveShadow = true; o.castShadow = true; } }); scene.add(st.scene); } catch (e) {} }
+const root = gltf.scene; scene.add(root);
+let tris = 0;
+const shown = [pose, pose2].filter(Boolean);
+root.traverse(o => {
+  if (!o.isMesh) return;
+  o.castShadow = true; o.receiveShadow = true; o.frustumCulled = false;
+  const m = o.name.match(/__(.+)$/); if (m) o.visible = shown.includes(m[1]) && (!pose2 || m[1] === (mixw >= 0.5 ? pose2 : pose));
+  if (!o.visible) return;
+  tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3;
+  const mat = o.material;
+  if (mat.alphaTest > 0) { mat.alphaToCoverage = true; mat.transparent = false; }
+  if (o.morphTargetDictionary) {
+    for (const [name, w] of morphs) if (name in o.morphTargetDictionary) o.morphTargetInfluences[o.morphTargetDictionary[name]] = +w;
+    const pressA = 'press_' + pose, pressB = pose2 ? 'press_' + pose2 : null;
+    if (pressA in o.morphTargetDictionary) o.morphTargetInfluences[o.morphTargetDictionary[pressA]] = pose2 ? 1 - mixw : 1;
+    if (pressB && pressB in o.morphTargetDictionary) o.morphTargetInfluences[o.morphTargetDictionary[pressB]] = mixw;
+  }
+});
+const mixer = new THREE.AnimationMixer(root);
+const clip = (n) => gltf.animations.find(a => a.name === n);
+const a1 = mixer.clipAction(clip(pose)); a1.play(); a1.setEffectiveWeight(pose2 ? 1 - mixw : 1);
+if (pose2) { const a2 = mixer.clipAction(clip(pose2)); a2.play(); a2.setEffectiveWeight(mixw); }
+mixer.update(0); root.updateMatrixWorld(true);
+// landmarks of the clip shown (or of the first clip of a crossfade)
+const L = (name) => { const r = info && info.landmarks && info.landmarks[name]; const p = r && r.poses && (r.poses[pose2 && mixw >= 0.5 ? pose2 : pose] || r.poses.flat); return p ? new THREE.Vector3(...p.position) : new THREE.Vector3(); };
+const cam = new THREE.PerspectiveCamera(+(q.get('fov') || 35), W / H, 0.01, 30);
+const v = (s) => new THREE.Vector3(...s.split(',').map(Number));
+const preset = q.get('cam') || 'head_of_bed';
+const mouth = L('mouth'), nose = L('noseTip'), chin = L('chin'), fh = L('forehead'), eyeL = L('eyeL'), eyeR = L('eyeR'), notch = L('sternalNotch'), umb = L('umbilicus');
+const face = nose.clone().add(fh).multiplyScalar(0.5);
+const headUp = fh.clone().sub(chin).normalize();                    // toward the top of the head
+const faceN = new THREE.Vector3().subVectors(eyeR, eyeL).cross(headUp).normalize().negate();
+if (faceN.dot(nose.clone().sub(face)) < 0) faceN.negate();
+const leftDir = new THREE.Vector3().subVectors(eyeL, eyeR).normalize();
+let eye, look, up = new THREE.Vector3(0, 1, 0);
+switch (preset) {
+  case 'ref_front': eye = face.clone().addScaledVector(faceN, 0.75); look = face.clone().addScaledVector(headUp, -0.02); up = headUp.clone(); break;
+  case 'ref_three': eye = face.clone().addScaledVector(faceN, 0.55).addScaledVector(leftDir, 0.50); look = face.clone(); up = headUp.clone(); break;
+  case 'ref_profile': eye = face.clone().addScaledVector(leftDir, 0.75).addScaledVector(faceN, 0.04); look = face.clone().addScaledVector(faceN, -0.03); up = headUp.clone(); break;
+  case 'ref_profile_r': eye = face.clone().addScaledVector(leftDir, -0.75).addScaledVector(faceN, 0.04); look = face.clone().addScaledVector(faceN, -0.03); up = headUp.clone(); break;
+  case 'head_of_bed': eye = new THREE.Vector3(0, 0.95, -1.75); look = new THREE.Vector3(0, 0.12, -0.25); break;
+  case 'side_plusx': eye = new THREE.Vector3(2.2, 0.85, -0.05); look = new THREE.Vector3(0, 0.15, -0.05); break;
+  case 'side_minusx': eye = new THREE.Vector3(-2.2, 0.85, -0.05); look = new THREE.Vector3(0, 0.15, -0.05); break;
+  case 'above': eye = new THREE.Vector3(0.001, 3.0, 0.0); look = new THREE.Vector3(0, 0, 0); up = new THREE.Vector3(0, 0, -1); break;
+  case 'face_close': eye = face.clone().addScaledVector(faceN, 0.45).addScaledVector(headUp, -0.12).add(new THREE.Vector3(0, 0, 0)); look = face.clone(); up = headUp.clone(); break;
+  case 'face_three_close': eye = face.clone().addScaledVector(faceN, 0.36).addScaledVector(leftDir, 0.28).addScaledVector(headUp, -0.06); look = face.clone(); up = headUp.clone(); break;
+  case 'laryngoscopist': { // standing at the head end, eyes about 50 cm from the mouth, looking down past the forehead into the open mouth
+    const into = mouth.clone().addScaledVector(faceN, -0.05).addScaledVector(headUp, 0.01);
+    eye = mouth.clone().addScaledVector(faceN, 0.42).addScaledVector(headUp, 0.25); look = into; up = headUp.clone().negate(); break; }
+  case 'into_mouth': { // straight into the open mouth along its axis (the Mallampati examiner's line, here 40 cm away)
+    const into = mouth.clone().addScaledVector(faceN, -0.06).addScaledVector(headUp, 0.012);
+    eye = mouth.clone().addScaledVector(faceN, 0.40).addScaledVector(headUp, -0.03); look = into; up = headUp.clone(); break; }
+  default: eye = v(q.get('eye') || '0,1,-1.5'); look = v(q.get('look') || '0,0,0');
+}
+if (q.get('eye')) eye = v(q.get('eye')); if (q.get('look')) look = v(q.get('look'));
+cam.position.copy(eye); cam.up.copy(up); cam.lookAt(look);
+renderer.render(scene, cam); renderer.render(scene, cam);
+window.__info = { triangles: Math.round(tris), calls: renderer.info.render.calls, morphs, pose, pose2, preset };
+window.__done = true;
+</script></body></html>

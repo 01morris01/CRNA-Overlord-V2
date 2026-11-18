@@ -11,9 +11,23 @@ The full ledger, with what was changed in each, is `docs/overlord-world/ASSET-LE
 | `level/institute.glb` (its textures), `level/props.glb`, `level/sky.hdr` | Poly Haven, https://polyhaven.com | CC0 |
 | `level/clinical.glb`: the professionally made pieces listed below | Thirteen models by their authors on Sketchfab, taken from the Objaverse 1.0 release of each upload (Allen Institute for AI, https://huggingface.co/datasets/allenai/objaverse) | Each CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). **Changed**: see below |
 | `people/patients/*.glb`, `people/patients.json` | Generated for this project from the MakeHuman base mesh, skins, hair and clothes (the MakeHuman community, http://www.makehumancommunity.org) with the MPFB 2.0.18 add-on in Blender (`tools/people/`) | CC0 for the MakeHuman assets used; the generated figures are yours. Each figure is built from a patient's charted age, sex, height and weight. None is a portrait of a real person, and appearance is never inferred from a name |
+| `people/hero/p25.glb`, `people/hero/p25_lod1.glb`, `people/hero/p25.json` | Built for this project (`tools/people/hero/`) from: the MakeHuman base mesh and asset packs via MPFB 2.0.18 (MakeHuman community); MHR Momentum Human Rig 1.0.1 (Meta Platforms); Blender Studio Human Base Meshes 1.4.1 (Dan Ulrich); ICT-FaceKit (USC Institute for Creative Technologies); and skin pore detail from "Infinite, 3D Head Scan" by Lee Perry-Smith | CC0 (MakeHuman, Blender Studio), Apache-2.0 (MHR), MIT (ICT-FaceKit), **CC BY 3.0** (Perry-Smith head scan — see the required credit below). Per-part detail in `people/hero/SOURCES.md`. Dale Swinford is fictional; no likeness of a named real person was used |
 | `models/airway/nibp_cuff.glb` | "Sphygmomanometer Low Poly" by TheGiwi on Sketchfab (https://sketchfab.com/3d-models/58f303b71fd047b0960785141485f8f0), from the Objaverse 1.0 release | CC BY 4.0. **Changed**: the cuff taken out of the set, re-proportioned and smoothed (`models/airway/airway.json` lists every change) |
 | `models/airway/spo2_probe.glb` | "Pulse Oximeter | Free Model" by Nofil.Khan on Sketchfab (https://sketchfab.com/3d-models/e3ad5ac95aed4546bb869fcd984a7a99), from the Objaverse 1.0 release | CC BY 4.0. **Changed**: see `models/airway/airway.json` |
 | `level/clinical.glb`: surgical lights, ceiling supply arm, draped back table and Mayo stand, stools, kick bucket, glass-door cabinets, wall control panel, sharps bin | Built for this project (`tools/clinical_kit.py`) | Yours |
+
+## Credit that must be displayed (CC BY 3.0)
+
+CC BY 3.0 requires attribution be shown to people using the work, not only recorded in
+this repository. The hero patient figure carries one such requirement, so this line has to
+appear somewhere a user of the app can read it:
+
+> Skin pore detail from "Infinite, 3D Head Scan" by Lee Perry-Smith (www.ir-ltd.net),
+> CC BY 3.0, as distributed by Morgan McGuire's Computer Graphics Archive.
+
+As of this commit that line is **not** rendered anywhere in the app - it exists only here
+and in `people/hero/SOURCES.md`. It needs a visible home (an in-world credits panel or an
+about screen) before the world is shown to anyone outside this machine.
 
 ## Equipment in the operating room and the regional bay (`level/clinical.glb`)
 

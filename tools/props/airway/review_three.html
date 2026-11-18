@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- review_three.html: shows one finished prop in three.js r170 (the version the world uses) next to a 30 cm rule, with the
+     same spec file as review_cycles.py. Driven by review_three.py (Playwright); can also be opened by hand with ?spec=URL. -->
+<html><head><meta charset="utf-8"><title>prop review</title>
+<style>html,body{margin:0;background:#4a4d50;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+
+const q = new URLSearchParams(location.search);
+const spec = await (await fetch(q.get('spec'))).json();
+const W = spec.size?.[0] || 1200, H = spec.size?.[1] || 800;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H); renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = spec.exposure || 1.0;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x8a8d90);
+const pmrem = new THREE.PMREMGenerator(renderer);
+const hdr = await new RGBELoader().loadAsync(spec.hdri_web); scene.environment = pmrem.fromEquirectangular(hdr).texture; scene.environmentIntensity = spec.env || 0.8; scene.environmentRotation = new THREE.Euler(0, 0.5, 0);
+const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/');
+const loader = new GLTFLoader().setDRACOLoader(draco);
+
+// Blender (Z up) <-> three (Y up): (x, y, z)_b = (x, -z, y)_t
+const b2t = (v) => new THREE.Vector3(v[0], v[2], -v[1]);
+const pivot = new THREE.Group(); scene.add(pivot);
+const gltf = await loader.loadAsync(spec.file_web); const root = gltf.scene; pivot.add(root);
+const byName = {}; root.traverse((o) => { if (o.name) byName[o.name] = o; if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+for (const [name, tr] of Object.entries(spec.nodes || {})) {
+  const o = byName[name]; if (!o) { console.warn('no node', name); continue; }
+  if (tr.t) o.position.add(new THREE.Vector3(...tr.t));
+  if (tr.r) o.quaternion.multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(...tr.r.map((a) => a * Math.PI / 180), 'XYZ')));
+}
+for (const [name, keys] of Object.entries(spec.morphs || {})) {
+  root.traverse((o) => { if (o.isMesh && (o.name === name || o.parent?.name === name) && o.morphTargetDictionary) for (const [k, w] of Object.entries(keys)) if (k in o.morphTargetDictionary) o.morphTargetInfluences[o.morphTargetDictionary[k]] = w; });
+}
+if (spec.anim) {
+  const clip = gltf.animations.find((a) => a.name === spec.anim); if (!clip) console.warn('no clip', spec.anim);
+  else { const mixer = new THREE.AnimationMixer(root); const act = mixer.clipAction(clip); act.play(); mixer.update(spec.anim_t || 0); root.updateMatrixWorld(true); }
+}
+for (const ex of spec.extra || []) {
+  const g = await loader.loadAsync(ex.file_web); const r = g.scene; r.traverse((o) => { if (o.isMesh) o.castShadow = o.receiveShadow = true; });
+  r.position.copy(new THREE.Vector3(...(ex.at || [0, 0, 0]))); if (ex.rot) r.rotation.set(...ex.rot.map((a) => a * Math.PI / 180)); pivot.add(r);
+}
+if (window.LABEL_TEST && byName.label) {     // a test picture on the label quad to check its orientation
+  const c = document.createElement('canvas'); c.width = 512; c.height = 176; const g = c.getContext('2d'); g.fillStyle = '#ffd400'; g.fillRect(0, 0, 512, 176); g.fillStyle = '#111'; g.font = 'bold 64px Arial'; g.fillText('PROPOFOL', 30, 90); g.font = '36px Arial'; g.fillText('10 mg/mL  → tip', 30, 150);
+  const t = new THREE.CanvasTexture(c); t.flipY = false; t.colorSpace = THREE.SRGBColorSpace; byName.label.material = byName.label.material.clone(); byName.label.material.map = t; byName.label.material.color.set(0xffffff);
+}
+// placement: rotate as the Cycles spec does (degrees, Blender XYZ about Z-up axes), then stand on the floor
+const rb = spec.place?.rot || [0, 0, 0];
+const eb = new THREE.Euler(...rb.map((a) => a * Math.PI / 180), 'XYZ'); const Mb = new THREE.Matrix4().makeRotationFromEuler(eb);
+const C = new THREE.Matrix4().set(1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1);      // Blender -> three
+const Mt = C.clone().multiply(Mb).multiply(C.clone().invert()); pivot.quaternion.setFromRotationMatrix(Mt);
+pivot.updateMatrixWorld(true);
+let box = new THREE.Box3().setFromObject(pivot, true); const c0 = box.getCenter(new THREE.Vector3());
+pivot.position.set(-c0.x, -box.min.y + (spec.lift || 0), -c0.z); pivot.updateMatrixWorld(true); box = new THREE.Box3().setFromObject(pivot, true);
+const size = box.getSize(new THREE.Vector3()); const S = Math.max(size.x, size.y, size.z);
+// floor + rule
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.MeshStandardMaterial({ color: 0x8a8d90, roughness: 0.7 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const rtex = await new THREE.TextureLoader().loadAsync(spec.ruler_web); rtex.colorSpace = THREE.SRGBColorSpace; rtex.anisotropy = 8;
+const rule = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.0012, 0.03), [0, 0, new THREE.MeshStandardMaterial({ map: rtex, metalness: 0.85, roughness: 0.35 }), 0, 0, 0].map((m) => m || new THREE.MeshStandardMaterial({ color: 0x9a9da0, metalness: 0.85, roughness: 0.35 })));
+const rx0 = box.min.x, rz = box.max.z + 0.03; rule.position.set(rx0 + 0.15, 0.0006, rz); rule.receiveShadow = true; if (spec.ruler !== false) scene.add(rule);
+// lights: one shadowing key; the environment does the rest
+const key = new THREE.DirectionalLight(0xfff8f0, spec.key || 1.6); key.position.set(S * 1.6, S * 2.2, S * 2.0); key.target.position.set(0, 0, 0); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); const sc = Math.max(S, 0.35); Object.assign(key.shadow.camera, { left: -sc, right: sc, top: sc, bottom: -sc, near: 0.01, far: 10 }); key.shadow.bias = -0.0002; key.shadow.radius = 4;
+scene.add(key, key.target);
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.002, 20);
+window.views = spec.views;
+window.setView = (i) => {
+  const v = spec.views[i]; let lo, hi;
+  if (!v.fit || v.fit === 'all') { lo = box.min.clone(); hi = box.max.clone(); if (v.ruler) { lo.x = Math.min(lo.x, rx0 - 0.01); hi.x = Math.max(hi.x, rx0 + 0.31); hi.z = Math.max(hi.z, rz + 0.016); } }
+  else { const pts = v.fit.map((p) => new THREE.Vector3(...p).applyMatrix4(root.matrixWorld)); lo = pts[0].clone().min(pts[1]); hi = pts[0].clone().max(pts[1]); }
+  const ctr = lo.clone().add(hi).multiplyScalar(0.5); const d = b2t(v.dir).normalize(); const lens = v.lens || 60;
+  camera.fov = 2 * Math.atan(18 / lens * H / W) * 180 / Math.PI; camera.updateProjectionMatrix();
+  // tight fit: put the camera along d far enough that all 8 box corners are in view
+  const corners = []; for (let k = 0; k < 8; k++) corners.push(new THREE.Vector3(k & 1 ? hi.x : lo.x, k & 2 ? hi.y : lo.y, k & 4 ? hi.z : lo.z));
+  const up = new THREE.Vector3(0, 1, 0); const z = d.clone(); const x = up.clone().cross(z).normalize(); const y = z.clone().cross(x);
+  const tv = Math.tan(camera.fov * Math.PI / 360), th = tv * W / H; let dist = 0;
+  for (const p of corners) { const r = p.clone().sub(ctr); const px = r.dot(x), py = r.dot(y), pz = r.dot(z); dist = Math.max(dist, pz + Math.abs(px) / th, pz + Math.abs(py) / tv); }
+  dist *= (v.margin || 1.08); camera.position.copy(ctr).addScaledVector(d, dist); camera.up.set(0, 1, 0); camera.lookAt(ctr);
+  renderer.render(scene, camera); return true;
+};
+window.READY = true;
+</script></body></html>

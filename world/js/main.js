@@ -73,7 +73,7 @@ async function openWorld({ fresh = false, from = null } = {}) {
     places = mountPlaces({ world, exhibits, state, persist, els: { place: $('wPlace'), goal: $('wGoal') }, enterHall, enterScan, showCharacter: () => { world.pause(); showCharacter(true); }, wipe });
     try { const { mountPeriop } = await import('./periop.js'); periop = await mountPeriop({ world, state, persist, clinical: () => exhibits.clinical, ui: places, wipe, hands, els: { hud: $('caseHud'), desk: $('desk'), deskTitle: $('deskTitle'), deskState: $('deskState'), deskGo: $('deskGo'), deskBack: $('deskBack'), frame: $('deskFrame') } });
       places.extend(periop); world.onFrame = (dt) => { exhibits.update(dt); periop.update(dt); hands.enable(!places.isOpen()); hands.update(dt); };
-      for (const [file, fn] of [['./bedside.js', 'mountBedside']]) { try { const mod = await import(file); periop.kit(await mod[fn]({ world, hands, periop })); } catch (e) { console.warn('kit', file, e); } } } catch (e) { console.warn('pre-op holding and the operating room could not be set up', e); }
+      for (const [file, fn] of [['./bedside.js', 'mountBedside'], ['./kit_drugs.js', 'mountDrugs']]) { try { const mod = await import(file); periop.kit(await mod[fn]({ world, hands, periop })); } catch (e) { console.warn('kit', file, e); } } } catch (e) { console.warn('pre-op holding and the operating room could not be set up', e); }
     if (Q.get('shot')) { world.resume(); world.bookmark(Q.get('shot')); }
   }
   world.resume(); veil(false); window.__ov = { state, world, hall, scan, places, exhibits, periop, hands, save, summary };

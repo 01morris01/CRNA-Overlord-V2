@@ -1,0 +1,350 @@
+{
+ "file": "hands_gloved.glb",
+ "frame": "hand frame: wrist joint at the origin, -Z toward the fingertips, +Y back of the hand, thumb +X (left) / -X (right)",
+ "hands": {
+  "L": {
+   "armature_node": "hand_L",
+   "mesh": "glove_L",
+   "thumb_side": "+X"
+  },
+  "R": {
+   "armature_node": "hand_R",
+   "mesh": "glove_R",
+   "thumb_side": "-X"
+  }
+ },
+ "note_layout": "in the file the two hand roots sit 0.12 m either side of the root for viewing; the runtime places each hand root itself",
+ "bones": [
+  "lowerarm02 (static root, distal forearm)",
+  "wrist",
+  "metacarpal1..4 (index..little)",
+  "finger1-1..1-3 (thumb)",
+  "finger2..5-1..3 (index..little)"
+ ],
+ "poses": [
+  "open",
+  "relaxed",
+  "point",
+  "pinch",
+  "syringe_hold",
+  "syringe_push",
+  "mask_ce",
+  "bag_squeeze_open",
+  "bag_squeeze_closed",
+  "laryngoscope_grip",
+  "cuff_hold",
+  "probe_hold"
+ ],
+ "animations": {
+  "naming": "each pose exists three times: <pose> (both hands), <pose>.L and <pose>.R (one hand only), so the hands can be crossfaded independently",
+  "keys": "one key at t=0 (bone rotations only), except syringe_hold: t=0 hold, t=1 s thumb pressed about 2 cm (syringe_push is the pressed pose alone)"
+ },
+ "grips": {
+  "grip_pinch.L": {
+   "pose": "pinch",
+   "matrix_hand_frame": [
+    [
+     0.95439,
+     0.02006,
+     -0.29788,
+     0.04742
+    ],
+    [
+     0.0,
+     0.99774,
+     0.0672,
+     -0.05694
+    ],
+    [
+     0.29855,
+     -0.06413,
+     0.95224,
+     -0.08492
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_pinch.R": {
+   "pose": "pinch",
+   "matrix_hand_frame": [
+    [
+     0.95439,
+     -0.02006,
+     0.29788,
+     -0.04742
+    ],
+    [
+     0.0,
+     0.99774,
+     0.0672,
+     -0.05694
+    ],
+    [
+     -0.29855,
+     -0.06413,
+     0.95224,
+     -0.08492
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_syringe.L": {
+   "pose": "syringe_hold",
+   "matrix_hand_frame": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.0205
+    ],
+    [
+     0.0,
+     0.99288,
+     -0.11915,
+     -0.034
+    ],
+    [
+     -0.0,
+     -0.11915,
+     -0.99288,
+     -0.092
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_syringe.R": {
+   "pose": "syringe_hold",
+   "matrix_hand_frame": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -0.0205
+    ],
+    [
+     0.0,
+     0.99288,
+     -0.11915,
+     -0.034
+    ],
+    [
+     0.0,
+     -0.11915,
+     -0.99288,
+     -0.092
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_mask.L": {
+   "pose": "mask_ce",
+   "matrix_hand_frame": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     0.04
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.092
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -0.08
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_mask.R": {
+   "pose": "mask_ce",
+   "matrix_hand_frame": [
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -0.04
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.092
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -0.08
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_bag.L": {
+   "pose": "bag_squeeze_open",
+   "matrix_hand_frame": [
+    [
+     0.0,
+     -1.0,
+     0.0,
+     0.004
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.103
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -0.06
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_bag.R": {
+   "pose": "bag_squeeze_open",
+   "matrix_hand_frame": [
+    [
+     0.0,
+     1.0,
+     0.0,
+     -0.004
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     -0.103
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.06
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_laryngoscope.L": {
+   "pose": "laryngoscope_grip",
+   "matrix_hand_frame": [
+    [
+     0.0,
+     0.92198,
+     -0.38723,
+     0.004
+    ],
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.036
+    ],
+    [
+     0.0,
+     -0.38723,
+     -0.92198,
+     -0.08
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  },
+  "grip_laryngoscope.R": {
+   "pose": "laryngoscope_grip",
+   "matrix_hand_frame": [
+    [
+     0.0,
+     -0.92198,
+     0.38723,
+     -0.004
+    ],
+    [
+     -1.0,
+     0.0,
+     0.0,
+     -0.036
+    ],
+    [
+     0.0,
+     -0.38723,
+     -0.92198,
+     -0.08
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ]
+  }
+ },
+ "grip_rule": "place the held item so that its anchor empty coincides with the hand grip empty: item_root_world = grip_world * inverse(anchor_in_item)",
+ "grip_anchor_in_item": {
+  "grip_syringe": "syringe_*: the `flange` empty (origin on the barrel axis at the finger flange, +Z toward the tip)",
+  "grip_mask": "face_mask_adult: the root / `seat` empty (+Z away from the face, +Y toward the nasal bridge)",
+  "grip_bag": "reservoir_bag_3l: the `squeeze_center` empty (+Z toward the thumb side, +Y along the bag toward the neck)",
+  "grip_laryngoscope": "laryngoscope_mac: the `grip` empty (+Y up the handle toward the end cap, +Z toward the open blade)",
+  "grip_pinch": "a flow-control knob: its front face center, +Z out of the knob toward the hand (controls.json gives knob axes)"
+ },
+ "grip_parent": "grip empties are children of the hand armature node (hand frame); no pose moves the wrist bone",
+ "triangles_per_hand": 10294,
+ "materials": {
+  "nitrile_blue_L / _R": "blue nitrile: roughness 0.34, sheen, wrinkle normal map glove_normal_L / _R",
+  "skin_forearm": "bare forearm between the glove cuff and the cut"
+ },
+ "glove_cuff_m": 0.062,
+ "forearm_cut_m": 0.125
+}

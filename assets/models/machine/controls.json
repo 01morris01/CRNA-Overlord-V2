@@ -1,0 +1,434 @@
+{
+ "controls": {
+  "bobbin_air_fine": {
+   "type": "bobbin",
+   "gas": "air",
+   "tube": "fine",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rest_y_machine_local": 1.205,
+   "flow_to_y": "fine: y = 1.2050 + 0.2100 * min(1, flow / 1) ** 0.85  (flow in L/min; reading at the top of the bobbin)",
+   "marks_y": {
+    "0.1": 1.23466,
+    "0.2": 1.25847,
+    "0.3": 1.28047,
+    "0.4": 1.30138,
+    "0.5": 1.3215,
+    "0.6": 1.34103,
+    "0.7": 1.36008,
+    "0.8": 1.37872,
+    "0.9": 1.39701,
+    "1": 1.415
+   },
+   "series": "fine and coarse tubes of one gas carry the same flow: the fine bobbin rises 0..1 L/min then stays at its top; the coarse bobbin reads 1..10 L/min"
+  },
+  "bobbin_air_coarse": {
+   "type": "bobbin",
+   "gas": "air",
+   "tube": "coarse",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rest_y_machine_local": 1.205,
+   "flow_to_y": "coarse: y = 1.2050 + 0.2100 * min(1, flow / 10) ** 0.80  (flow in L/min; reading at the top of the bobbin)",
+   "marks_y": {
+    "1": 1.23828,
+    "2": 1.26295,
+    "3": 1.28515,
+    "4": 1.30589,
+    "5": 1.32561,
+    "6": 1.34455,
+    "7": 1.36287,
+    "8": 1.38067,
+    "9": 1.39802,
+    "10": 1.415
+   },
+   "series": "fine and coarse tubes of one gas carry the same flow: the fine bobbin rises 0..1 L/min then stays at its top; the coarse bobbin reads 1..10 L/min"
+  },
+  "bobbin_n2o_fine": {
+   "type": "bobbin",
+   "gas": "n2o",
+   "tube": "fine",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rest_y_machine_local": 1.205,
+   "flow_to_y": "fine: y = 1.2050 + 0.2100 * min(1, flow / 1) ** 0.85  (flow in L/min; reading at the top of the bobbin)",
+   "marks_y": {
+    "0.1": 1.23466,
+    "0.2": 1.25847,
+    "0.3": 1.28047,
+    "0.4": 1.30138,
+    "0.5": 1.3215,
+    "0.6": 1.34103,
+    "0.7": 1.36008,
+    "0.8": 1.37872,
+    "0.9": 1.39701,
+    "1": 1.415
+   },
+   "series": "fine and coarse tubes of one gas carry the same flow: the fine bobbin rises 0..1 L/min then stays at its top; the coarse bobbin reads 1..10 L/min"
+  },
+  "bobbin_n2o_coarse": {
+   "type": "bobbin",
+   "gas": "n2o",
+   "tube": "coarse",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rest_y_machine_local": 1.205,
+   "flow_to_y": "coarse: y = 1.2050 + 0.2100 * min(1, flow / 10) ** 0.80  (flow in L/min; reading at the top of the bobbin)",
+   "marks_y": {
+    "1": 1.23828,
+    "2": 1.26295,
+    "3": 1.28515,
+    "4": 1.30589,
+    "5": 1.32561,
+    "6": 1.34455,
+    "7": 1.36287,
+    "8": 1.38067,
+    "9": 1.39802,
+    "10": 1.415
+   },
+   "series": "fine and coarse tubes of one gas carry the same flow: the fine bobbin rises 0..1 L/min then stays at its top; the coarse bobbin reads 1..10 L/min"
+  },
+  "bobbin_o2_fine": {
+   "type": "bobbin",
+   "gas": "o2",
+   "tube": "fine",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rest_y_machine_local": 1.205,
+   "flow_to_y": "fine: y = 1.2050 + 0.2100 * min(1, flow / 1) ** 0.85  (flow in L/min; reading at the top of the bobbin)",
+   "marks_y": {
+    "0.1": 1.23466,
+    "0.2": 1.25847,
+    "0.3": 1.28047,
+    "0.4": 1.30138,
+    "0.5": 1.3215,
+    "0.6": 1.34103,
+    "0.7": 1.36008,
+    "0.8": 1.37872,
+    "0.9": 1.39701,
+    "1": 1.415
+   },
+   "series": "fine and coarse tubes of one gas carry the same flow: the fine bobbin rises 0..1 L/min then stays at its top; the coarse bobbin reads 1..10 L/min"
+  },
+  "bobbin_o2_coarse": {
+   "type": "bobbin",
+   "gas": "o2",
+   "tube": "coarse",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rest_y_machine_local": 1.205,
+   "flow_to_y": "coarse: y = 1.2050 + 0.2100 * min(1, flow / 10) ** 0.80  (flow in L/min; reading at the top of the bobbin)",
+   "marks_y": {
+    "1": 1.23828,
+    "2": 1.26295,
+    "3": 1.28515,
+    "4": 1.30589,
+    "5": 1.32561,
+    "6": 1.34455,
+    "7": 1.36287,
+    "8": 1.38067,
+    "9": 1.39802,
+    "10": 1.415
+   },
+   "series": "fine and coarse tubes of one gas carry the same flow: the fine bobbin rises 0..1 L/min then stays at its top; the coarse bobbin reads 1..10 L/min"
+  },
+  "knob_o2": {
+   "type": "rotary",
+   "pivot_machine_local": [
+    0.0778,
+    1.1473,
+    -0.012
+   ],
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "rule": "counter-clockwise (as the operator sees it, positive about +Z) opens; needle valve, about 3.5 turns closed to 10 L/min",
+   "angle_deg_for_flow": "angle = 1260 * (flow / 10) ** (1 / 1.6)",
+   "min_deg": 0,
+   "max_deg": 1260,
+   "flow_for_angle": "flow_L_min = 10 * (angle / 1260) ** 1.6",
+   "average_deg_per_L_min": 126,
+   "face_center_machine_local": [
+    0.0778,
+    1.1473,
+    0.014
+   ],
+   "diameter_m": 0.036
+  },
+  "knob_air": {
+   "type": "rotary",
+   "pivot_machine_local": [
+    -0.0467,
+    1.1473,
+    -0.012
+   ],
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "rule": "counter-clockwise (as the operator sees it, positive about +Z) opens; needle valve, about 3.5 turns closed to 10 L/min",
+   "angle_deg_for_flow": "angle = 1260 * (flow / 10) ** (1 / 1.6)",
+   "min_deg": 0,
+   "max_deg": 1260,
+   "flow_for_angle": "flow_L_min = 10 * (angle / 1260) ** 1.6",
+   "average_deg_per_L_min": 126,
+   "face_center_machine_local": [
+    -0.0467,
+    1.1473,
+    0.014
+   ],
+   "diameter_m": 0.03
+  },
+  "sevo_dial": {
+   "type": "rotary",
+   "pivot_machine_local": [
+    0.3483,
+    1.3347,
+    -0.0615
+   ],
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "agent": "sevoflurane",
+   "rule": "counter-clockwise (positive about +Z, as the operator sees it) raises the concentration; the index mark is fixed at 12 o'clock on sevo_bezel",
+   "angle_deg_for_percent": {
+    "0": 0,
+    "0.2": 18,
+    "0.4": 33,
+    "0.6": 46,
+    "0.8": 58,
+    "1": 70,
+    "1.5": 95,
+    "2": 118,
+    "2.5": 139,
+    "3": 158,
+    "3.5": 176,
+    "4": 193,
+    "5": 222,
+    "6": 250,
+    "7": 276,
+    "8": 300
+   },
+   "T_deg": -28,
+   "min_deg": -28,
+   "max_deg": 300,
+   "face_center_machine_local": [
+    0.3483,
+    1.3347,
+    -0.0455
+   ],
+   "diameter_m": 0.06,
+   "lock": "sevo_lock (child of the dial) must be pressed (translate 0.002 m along -Z) to turn the dial off 0 toward the scale, or from 0 to T"
+  },
+  "sevo_lock": {
+   "type": "button",
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "travel_m": 0.002,
+   "parent": "sevo_dial"
+  },
+  "apl_knob": {
+   "type": "rotary",
+   "pivot_machine_local": [
+    -0.2238,
+    0.8899,
+    0.1985
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rule": "clockwise seen from above (negative about +Y) closes the valve: SP (fully open, <1 cmH2O) to 70 cmH2O; the knob's white pointer reads against apl_scale",
+   "angle_deg_for_cmH2O": {
+    "SP": 0,
+    "5": -28,
+    "10": -52,
+    "20": -98,
+    "30": -138,
+    "40": -176,
+    "50": -212,
+    "60": -246,
+    "70": -280
+   },
+   "top_center_machine_local": [
+    -0.2238,
+    0.9159,
+    0.1985
+   ],
+   "diameter_m": 0.043,
+   "min_deg": -300,
+   "max_deg": 0,
+   "above_70": "between -280 and -300 deg the valve is fully closed (75+)"
+  },
+  "bag_vent_switch": {
+   "type": "toggle",
+   "pivot_machine_local": [
+    -0.1715,
+    0.8979,
+    0.1695
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "positions_deg": {
+    "BAG": -25,
+    "VENT": 25
+   },
+   "labels": "BAG at the back, VENT at the front on bag_vent_base"
+  },
+  "o2_flush": {
+   "type": "button",
+   "pivot_machine_local": [
+    -0.0259,
+    1.0747,
+    -0.0048
+   ],
+   "axis": [
+    0,
+    0,
+    -1
+   ],
+   "travel_m": 0.006,
+   "rule": "press and hold: 35-75 L/min O2 to the common gas outlet (bypasses the vaporizers); springs back"
+  }
+ },
+ "file": "controls.glb",
+ "parent_node": "eq_anesthesia_machine (assets/level/clinical.glb)",
+ "root_transform": "identity: the root `controls` is the machine-local origin",
+ "grip_pinch_note": "hands_gloved.glb grip_pinch.L/.R: put the knob face center there, the knob axis along the grip +Z",
+ "replaces": {
+  "flowmeter tubes and bobbins": {
+   "meshes": [
+    "anesthesia_machine_3 (body)",
+    "anesthesia_machine_4 (metal)"
+   ],
+   "box": [
+    [
+     -0.068,
+     1.172,
+     -0.065
+    ],
+    [
+     0.099,
+     1.456,
+     -0.046
+    ]
+   ]
+  },
+  "O2 knob": {
+   "mesh": "anesthesia_machine_9 (material knob_oxygen): hide the whole mesh"
+  },
+  "air knob": {
+   "mesh": "anesthesia_machine_7 (material knob_air): hide the whole mesh"
+  },
+  "sevoflurane dial": {
+   "mesh": "anesthesia_machine_11 (material dial_sevoflurane): hide the whole mesh"
+  },
+  "APL cap": {
+   "meshes": [
+    "anesthesia_machine_3 (body)"
+   ],
+   "box": [
+    [
+     -0.249,
+     0.889,
+     0.173
+    ],
+    [
+     -0.1985,
+     0.913,
+     0.224
+    ]
+   ]
+  },
+  "bag/vent knob": {
+   "meshes": [
+    "anesthesia_machine_3 (body)"
+   ],
+   "box": [
+    [
+     -0.185,
+     0.879,
+     0.156
+    ],
+    [
+     -0.158,
+     0.92,
+     0.183
+    ]
+   ]
+  },
+  "O2 flush disc": {
+   "meshes": [
+    "anesthesia_machine_1 (buttons_knobs)"
+   ],
+   "box": [
+    [
+     -0.038,
+     1.062,
+     -0.017
+    ],
+    [
+     -0.014,
+     1.087,
+     -0.004
+    ]
+   ]
+  }
+ },
+ "colors": "US: O2 green (fluted, larger, as required), air yellow, sevoflurane yellow; N2O tubes are included (static) so the flowmeter bank is complete; its blue knob stays the machine's own",
+ "tris": {
+  "tube_air_fine": 1586,
+  "bobbin_air_fine": 624,
+  "tube_air_coarse": 1586,
+  "bobbin_air_coarse": 624,
+  "tube_n2o_fine": 1586,
+  "bobbin_n2o_fine": 624,
+  "tube_n2o_coarse": 1586,
+  "bobbin_n2o_coarse": 624,
+  "tube_o2_fine": 1586,
+  "bobbin_o2_fine": 624,
+  "tube_o2_coarse": 1586,
+  "bobbin_o2_coarse": 624,
+  "knob_o2": 2450,
+  "knob_air": 4200,
+  "sevo_dial": 2544,
+  "sevo_lock": 352,
+  "sevo_bezel": 1158,
+  "apl_scale": 840,
+  "apl_knob": 1910,
+  "bag_vent_base": 864,
+  "bag_vent_switch": 800,
+  "o2_flush_guard": 1248,
+  "o2_flush": 480
+ }
+}

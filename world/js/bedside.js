@@ -6,6 +6,9 @@
  *  for no other reason; taking it off again blanks the channel. If a step is pressed on the list instead, the thing is shown
  *  where the record says it is. Where each sensor went is written into the case's record.
  *
+ *  When a step is pressed on the list, the cuff goes on the LEFT arm and the probe on the RIGHT index finger: the chart's IV is in the
+ *  right antecubital fossa, and a cuff is not put on the IV arm or on the arm with the oximeter (it would stop both each time it cycles).
+ *
  *  What is not modeled: a reading does not depend on which finger or arm you chose (the simulation has no sensors, only the
  *  values; see docs/overlord-world/ENGINE-COVERAGE.md).
  */
@@ -49,7 +52,7 @@ export async function mountBedside({ world, hands }) {
     end() { ctx = null; sites = null; st = null; kit.things = null; if (inRoom) { home(probe, 'probe', true); home(cuff, 'cuff', true); const T = world.level.stations.or.table; toRoom('or', V(T[0], 0.9, T[1])); } },
     /** Show each thing where the case's record says it is: on the patient once the record has the sensor on, at home otherwise. */
     update() { if (!ctx || !st) return; const C = ctx.C, held = hands && hands.held;
-      if (sites) { const want = { spo2: C.mon.spo2 ? (st.sites.spo2 ||= (st.sites.nibp === 'armL' ? 'fingerR' : 'fingerL')) : null, nibp: C.mon.nibp ? (st.sites.nibp ||= (st.sites.spo2 === 'fingerR' ? 'armL' : 'armR')) : null };
+      if (sites) { const want = { spo2: C.mon.spo2 ? (st.sites.spo2 ||= (st.sites.nibp === 'armR' ? 'fingerL' : 'fingerR')) : null, nibp: C.mon.nibp ? (st.sites.nibp ||= (st.sites.spo2 === 'fingerL' ? 'armR' : 'armL')) : null };
         for (const [key, obj, th] of [['spo2', probe, kit.things && kit.things.probe], ['nibp', cuff, kit.things && kit.things.cuff]]) { if (held && held === th) continue; if (st.shown[key] !== want[key]) { st.shown[key] = want[key]; if (want[key]) { onto(obj, want[key]); if (C.done[key]) C.done[key].site ||= sites.get(want[key]).label; } else home(obj, key === 'spo2' ? 'probe' : 'cuff'); } } }
       const m = ctx.machine; if (m) { m.updateMatrixWorld(true); const a = m.localToWorld(V(-0.62, 1.37, 0.03)), b = m.localToWorld(V(-0.62, 1.33, 0.03)); hang(probeWire, a, probe.getWorldPosition(V()).add(V(0, 0.004, 0)), 0.22); hang(cuffHose, b, cuff.localToWorld(V(0, 0.056, 0.07)), 0.3); } },
   };
