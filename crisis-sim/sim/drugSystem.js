@@ -3,6 +3,12 @@
    under the Mono float model (double intermediates; `f()` at float stores /
    returns / Mathf & float-arg boundaries; non-dyadic float literals
    frounded). No RNG. Propofol = full Eleveld 2018.
+
+   Remifentanil pharmacokinetics: Minto CF, Schnider TW, Egan TD, et al.
+   Influence of age and gender on the pharmacokinetics and
+   pharmacodynamics of remifentanil. I. Model development.
+   Anesthesiology. 1997;86(1):10-23.
+   Population typical values only; between-subject variability (OMEGA) not modeled.
    ═══════════════════════════════════════════════════════════════════ */
 import { f, Clamp01, Max, Min, MoveTowards, Pow, Exp } from './float32.js';
 import {
@@ -28,6 +34,10 @@ export class DrugSystem {
     this._elAge = 0; this._elWt = 0; this._elHt = 0; this._elMale = false; this._elOpiate = false;
 
     this._fentanylC1 = 0; this._fentanylC2 = 0; this._fentanylC3 = 0; this._fentanylCe = 0;
+    this._remiA1 = 0; this._remiA2 = 0; this._remiA3 = 0; this._remiCe = 0;
+    this._remiV1 = 0; this._remiV2 = 0; this._remiV3 = 0;
+    this._remiCL1 = 0; this._remiCL2 = 0; this._remiCL3 = 0; this._remiKe0Eeg = 0;
+    this._remiOutsideFittedRange = false;
     this._rocuroniumC1 = 0; this._rocuroniumCe = 0;
     this._midazolamC1 = 0; this._midazolamCe = 0;
     this._suxC1 = 0; this._suxCe = 0;
@@ -56,6 +66,7 @@ export class DrugSystem {
     switch (drugName) {
       case 'Propofol': this._ppfA1 = f(this._ppfA1 + totalDoseMg); break;
       case 'Fentanyl': this._fentanylC1 = f(this._fentanylC1 + (totalDoseMg * 1000) / (volumeL * f(12.7))); break;
+      case 'Remifentanil': this._remiA1 = f(this._remiA1 + totalDoseMg * 1000); break;
       case 'Rocuronium': this._rocuroniumC1 = f(this._rocuroniumC1 + totalDoseMg / (volumeL * f(6.7))); break;
       case 'Midazolam': this._midazolamC1 = f(this._midazolamC1 + totalDoseMg / (volumeL * f(1.1))); break;
       case 'Succinylcholine': this._suxC1 = f(this._suxC1 + totalDoseMg / (volumeL * 6)); break;
@@ -102,6 +113,7 @@ export class DrugSystem {
     this.processInfusions(dt);
     this.updatePropofolPK(dt);
     this.updateFentanylPK(dt);
+    this.updateRemifentanilPK(dt);
     this.updateRocuroniumPK(dt);
     this.updateMidazolamPK(dt);
     this.updateSuccinylcholinePK(dt);
@@ -111,6 +123,9 @@ export class DrugSystem {
 
     this.patient.propofolCe = this._ppfCe;
     this.patient.fentanylCe = this._fentanylCe;
+    this.patient.remifentanilCp = this.remifentanilPlasma;
+    this.patient.remifentanilCe = this._remiCe;
+    this.patient.remifentanilOutsideFittedRange = this._remiOutsideFittedRange;
     this.patient.rocuroniumCe = this._rocuroniumCe;
     this.patient.midazolamCe = this._midazolamCe;
     this.patient.succinylcholineCe = this._suxCe;
@@ -242,6 +257,7 @@ export class DrugSystem {
       switch (inf.drugName) {
         case 'Propofol': this._ppfA1 = f(this._ppfA1 + doseThisFrame); break;
         case 'Fentanyl': this._fentanylC1 = f(this._fentanylC1 + (doseThisFrame * 1000) / (volumeL * f(12.7))); break;
+        case 'Remifentanil': this._remiA1 = f(this._remiA1 + doseThisFrame * 1000); break;
         case 'Rocuronium': this._rocuroniumC1 = f(this._rocuroniumC1 + doseThisFrame / (volumeL * f(6.7))); break;
         default: break;
       }
@@ -347,6 +363,76 @@ export class DrugSystem {
     this._fentanylC3 = Max(0, this._fentanylC3 + dC3 * dt);
     this._fentanylCe = Max(0, this._fentanylCe + dCe * dt);
   }
+
+  static remifentanilJamesLbmKg(weightKg, heightCm, sex) {
+    const W = Max(1, weightKg);
+    const H = Max(1, heightCm);
+    const male = /^m/i.test(String(sex));
+    return male
+      ? f(f(1.1) * W - 128 * Pow(W / H, 2))
+      : f(f(1.07) * W - 148 * Pow(W / H, 2));
+  }
+
+  static remifentanilOutsideFittedRange(patient, lbmKg) {
+    const bmi = f(patient.weightKg / Pow(patient.heightCm / 100, 2));
+    return patient.ageYears < 20 || patient.ageYears > 85 ||
+      patient.weightKg < 45 || patient.weightKg > 106 ||
+      bmi < f(16.1) || bmi > f(32.7) ||
+      lbmKg < f(36.5) || lbmKg > f(75.6);
+  }
+
+  computeRemifentanilModel() {
+    const smallPositive = f(0.001);
+    const age = f(this.patient.ageYears);
+    const lbmKg = DrugSystem.remifentanilJamesLbmKg(
+      this.patient.weightKg,
+      this.patient.heightCm,
+      this.patient.sex,
+    );
+    // James lean body mass can fail in severe obesity; keep computing but flag it.
+    let outsideFittedRange = DrugSystem.remifentanilOutsideFittedRange(this.patient, lbmKg);
+    const ageOffset = f(age - 40);
+    const lbmOffset = f(lbmKg - 55);
+    const floorWithFlag = (value) => {
+      if (value <= 0) {
+        outsideFittedRange = true;
+        return smallPositive;
+      }
+      return f(value);
+    };
+
+    this._remiV1 = floorWithFlag(f(f(5.1) - f(f(0.0201) * ageOffset) + f(f(0.072) * lbmOffset)));
+    this._remiV2 = floorWithFlag(f(f(9.82) - f(f(0.0811) * ageOffset) + f(f(0.108) * lbmOffset)));
+    this._remiV3 = floorWithFlag(f(5.42));
+    this._remiCL1 = floorWithFlag(f(f(2.6) - f(f(0.0162) * ageOffset) + f(f(0.0191) * lbmOffset)));
+    this._remiCL2 = floorWithFlag(f(f(2.05) - f(f(0.0301) * ageOffset)));
+    this._remiCL3 = floorWithFlag(f(f(0.076) - f(f(0.00113) * ageOffset)));
+    // EEG endpoint ke0 from Minto 1997.
+    this._remiKe0Eeg = floorWithFlag(f(f(0.595) - f(f(0.007) * ageOffset)));
+    this._remiOutsideFittedRange = outsideFittedRange;
+  }
+
+  updateRemifentanilPK(dt) {
+    this.computeRemifentanilModel();
+    const k10 = f(this._remiCL1 / this._remiV1 / 60);
+    const k12 = f(this._remiCL2 / this._remiV1 / 60);
+    const k21 = f(this._remiCL2 / this._remiV2 / 60);
+    const k13 = f(this._remiCL3 / this._remiV1 / 60);
+    const k31 = f(this._remiCL3 / this._remiV3 / 60);
+    const ke0 = f(this._remiKe0Eeg / 60);
+
+    const dA1 = f(-(k10 + k12 + k13) * this._remiA1 + k21 * this._remiA2 + k31 * this._remiA3);
+    const dA2 = f(k12 * this._remiA1 - k21 * this._remiA2);
+    const dA3 = f(k13 * this._remiA1 - k31 * this._remiA3);
+    this._remiA1 = Max(0, this._remiA1 + dA1 * dt);
+    this._remiA2 = Max(0, this._remiA2 + dA2 * dt);
+    this._remiA3 = Max(0, this._remiA3 + dA3 * dt);
+
+    const Cp = this.remifentanilPlasma;
+    this._remiCe = Max(0, this._remiCe + ke0 * (Cp - this._remiCe) * dt);
+  }
+
+  get remifentanilPlasma() { return this._remiV1 > 0 ? f(this._remiA1 / this._remiV1) : 0; }
 
   updateRocuroniumPK(dt) {
     const k10 = f(f(0.065) / 60), ke0 = f(f(0.168) / 60);
