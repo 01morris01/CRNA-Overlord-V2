@@ -1,4 +1,4 @@
-import { getUserSaveKey } from './auth.js';
+import { getUserSaveKey, noteSaved } from './auth.js';
 
 const LEGACY_SAVE_KEY = 'hemodynamic_overlord_save';
 
@@ -95,6 +95,9 @@ export function saveState(state) {
       lastSeen: {...DEFAULT_STATE.lastSeen, ...(state.lastSeen||{})},
     };
     localStorage.setItem(key, JSON.stringify(safe));
+    // Written locally first, then queued for the server. Debounced, so the many small saves this app
+    // makes during one session become one upload; a no-op when there is no sync server.
+    noteSaved('app');
   } catch (e) {
     console.warn('Failed to save state', e);
   }

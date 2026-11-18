@@ -4,8 +4,9 @@
 //   game      what is yours: character, position, preferences, the collection, the case archive, your notes
 //   learning  what you showed you know: every answer with its objective, correctness, confidence, help used and time,
 //             and what is due again
-// Accounts are browser-local (core/auth.js); nothing here syncs between devices.
-import { getSession, getUserSaveKey } from '../../core/auth.js';
+// Accounts come from core/auth.js. With a sync server behind the page the save is pulled down at sign-in
+// and pushed back as you work, so it follows you to another device; without one it stays in this browser.
+import { getSession, getUserSaveKey, noteSaved } from '../../core/auth.js';
 
 const VERSION = 3;   // 3: the institute. The island's plot and blocks are retired; what was earned there is kept.
 const fresh = () => ({
@@ -32,7 +33,11 @@ export function migrate2to3(raw) {
   return { ...raw, v: 3, migratedFrom: raw.migratedFrom || 2, character: raw.character ? { name: raw.character.name, person: 'tunic', colour: 'ceil' } : null,
     game: { pos: null, prefs: null, rewards: had, collection: col, cases: {}, notes: {}, best: {}, progress: g.progress || {}, lessonDone: !!g.lessonDone, filmDone: false } };
 }
-export function save(state) { state.lastSeen = Date.now(); try { localStorage.setItem(key(), JSON.stringify(state)); return true; } catch (e) { return false; } }
+/** Signed out, there is no key to write to: getUserSaveKey() falls back to the legacy key, which is shared
+ *  by everyone who has ever used this browser. A save that lands there is one person's work under a name
+ *  the next person also gets. load() has always refused without a session; so does this now. */
+export function save(state) { if (!getSession()) return false;
+  state.lastSeen = Date.now(); try { localStorage.setItem(key(), JSON.stringify(state)); noteSaved('world'); return true; } catch (e) { return false; } }
 
 const DAY = 86400000;
 /** Record one answer.

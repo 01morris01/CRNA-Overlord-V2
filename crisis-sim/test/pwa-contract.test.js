@@ -81,7 +81,8 @@ function appShellEntries() {
 
 describe('live simulation PWA contract', () => {
   it('bumps the service worker version for installed clients', () => {
-    expect(sw).toContain("const CACHE_VERSION = 'v70-complete-model-care-plans-2026-10-20';");
+    expect(sw).toContain("const CACHE_VERSION = 'v71-save-sync-2026-11-17';");
+    expect(sw).not.toContain("const CACHE_VERSION = 'v70-complete-model-care-plans-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v65-voices-timing-2026-10-19';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v64-interview-proxy-2026-10-19';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v63-vent-form-sync-2026-10-18';");
@@ -91,7 +92,7 @@ describe('live simulation PWA contract', () => {
     expect(sw).not.toContain("const CACHE_VERSION = 'v58-sim-operator-booth-2026-10-14';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v57-voice-patient-interview-2026-07-26';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v61-instructor-student-sim-2026-10-18';");
-    expect(sw).toContain('complete-model-care-plans');
+    expect(sw).toContain('save-sync');
     expect(sw).not.toContain("const CACHE_VERSION = 'v69-drugs-fluids-booth-orders-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v68-remote-link-2026-10-20';");
     expect(sw).not.toContain("const CACHE_VERSION = 'v67-cn-rubric-patients-2026-10-20';");
@@ -123,12 +124,46 @@ describe('live simulation PWA contract', () => {
     expect(new Set(normalized).size).toBe(normalized.length);
   });
 
+  // The save-sync API. The fetch strategy below is cache-first, so a cached GET of a save slot would be
+  // served for the life of the cache and a second device's progress would never arrive. The worker has to
+  // decline these requests outright, which is a behaviour worth a test rather than a comment.
+  it('leaves the sync API entirely to the network', () => {
+    const listeners = new Map();
+    runInNewContext(sw, {
+      caches: { open: async () => { throw new Error('the cache must not be consulted for /api/'); } },
+      fetch: async () => { throw new Error('the worker must not fetch /api/ itself'); },
+      self: {
+        addEventListener: (type, listener) => listeners.set(type, listener),
+        skipWaiting: () => {},
+        clients: { claim: async () => {} },
+        location: { origin: 'https://overlord.test' },
+      },
+      URL,
+    });
+    const fetchListener = listeners.get('fetch');
+    for (const path of ['/api/sync/health', '/api/sync/save?slot=world', '/api/sync/me']) {
+      let responded = false;
+      fetchListener({
+        request: { method: 'GET', url: 'https://overlord.test' + path },
+        respondWith: () => { responded = true; },
+      });
+      expect(responded, `${path} was answered by the service worker`).toBe(false);
+    }
+  });
+
+  it('precaches the sync client alongside the auth module that imports it', () => {
+    // core/auth.js is in the app shell and now imports core/sync.js. If the import is not precached too,
+    // an offline first load resolves auth.js from the cache and then fails on a module it cannot fetch.
+    expect(sw).toContain("'/core/sync.js'");
+  });
+
   it('evicts only prior Overlord caches while preserving unrelated Cache Storage entries', async () => {
     const listeners = new Map();
     const deleted = [];
     runInNewContext(sw, {
       caches: {
         keys: async () => [
+          'overlord-v71-save-sync-2026-11-17',
           'overlord-v70-complete-model-care-plans-2026-10-20',
           'overlord-v65-voices-timing-2026-10-19',
           'overlord-v64-interview-proxy-2026-10-19',
@@ -159,6 +194,7 @@ describe('live simulation PWA contract', () => {
     listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
     await activation;
     expect(deleted).toEqual([
+      'overlord-v70-complete-model-care-plans-2026-10-20',
       'overlord-v65-voices-timing-2026-10-19',
       'overlord-v64-interview-proxy-2026-10-19',
       'overlord-v63-vent-form-sync-2026-10-18',

@@ -111,7 +111,7 @@ export function mountPlaces({ world, exhibits, state, persist, els, enterHall, e
         <dt>Unaided</dt><dd>${sm.attempts} answers. Identified ${pc(sm.identified)} · worked out ${pc(sm.related)} · applied ${pc(sm.applied)} · practice questions ${pc(sm.recognised)}.</dd><dt>Delayed</dt><dd>${sm.delayed ? `${sm.delayed} answered a day or more after first seeing them: ${pc(sm.delayedPct)} right.` : 'None yet. An item counts here only when it comes back after a day or more.'}</dd></dl>
         ${rows ? `<h3>By NBCRNA outline area (2025/2026)</h3><dl class="state">${rows}</dl>` : ''}
         <h3>Due</h3><p>${due ? `${due} now.` : 'Nothing now.'} ${sm.missedWaiting ? `${sm.missedWaiting} waiting because they were missed or guessed.` : ''}</p>
-        <p class="fine">These are your answers on Overlord's own items and models. They are not an NBCRNA score, and nothing here predicts one. Stored in this browser under your account; they do not follow you to another device.</p>`);
+        <p class="fine">These are your answers on Overlord's own items and models. They are not an NBCRNA score, and nothing here predicts one. Kept under your account. Where this copy has a server behind it they follow you to another device; where it does not, they stay in this browser.</p>`);
     } else {
       const p = world.prefs, sel = (id, v, opts) => `<select id="${id}">${opts.map(([k, n]) => `<option value="${k}" ${v === k ? 'selected' : ''}>${n}</option>`).join('')}</select>`, tog = (id, on) => `<button class="chip ${on ? 'on' : ''}" id="${id}">${on ? 'On' : 'Off'}</button>`;
       panel('settings', `<small>Settings</small><h2>How it feels.</h2>

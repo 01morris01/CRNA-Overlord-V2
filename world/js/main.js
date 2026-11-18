@@ -3,7 +3,7 @@
 // direct route to study without walking.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { getSession, loginUser, registerUser, logout } from '../../core/auth.js';
+import { getSession, loginUser, registerUser, logout, syncSession, flushSaves, syncAvailable, isSynced } from '../../core/auth.js';
 import { load, save, summary, dueNow } from './save.js';
 import { loadPerson, PEOPLE, COLOURS, DEFAULT_LOOK, peopleMeta } from './person.js';
 import { markSVG, wordmarkSVG } from './brand.js';
@@ -20,9 +20,14 @@ function screen(name) { for (const s of ['gate', 'character', 'world', 'hall', '
 function wipe(change) { const w = $('wipe'); if (calm()) { change(); return Promise.resolve(); }
   return new Promise((done) => { w.className = 'in'; setTimeout(async () => { await change(); w.className = 'out'; setTimeout(() => { w.className = ''; done(); }, 360); }, 350); }); }
 const persist = () => { world && world.keep(); save(state); };
-addEventListener('pagehide', () => state && persist());
+addEventListener('pagehide', () => { if (state) persist(); flushSaves(); });
 
-// ---------- sign in (the app's own accounts, untouched) ----------
+// ---------- sign in ----------
+// Say which it is before anyone types a password: an account kept on the server follows them to a phone,
+// an account kept in this browser does not. The line under the form is the only place that is visible.
+syncAvailable().then((on) => { const f = $('gateFine'); if (f) f.textContent = on
+  ? 'Your account and your progress are kept on this institute\u2019s server, so they follow you to another device.'
+  : 'No server behind this copy: this account and its progress stay in this browser only.'; });
 async function auth(fn) { const r = await fn($('gUser').value, $('gPass').value); if (!r.success) { $('gErr').textContent = r.error; return; } $('gErr').textContent = ''; afterAuth(); }
 $('gateForm').addEventListener('submit', (e) => { e.preventDefault(); auth(loginUser); }); $('gReg').addEventListener('click', () => auth(registerUser));
 function afterAuth() {
@@ -110,4 +115,7 @@ $('mark').addEventListener('click', () => {
     if (k === 'character') { world && world.pause(); hall && hall.atlas.stop(); scan && scan.stop(); showCharacter(true); } else if (k === 'classic') { persist(); location.href = '../index.html'; } else { persist(); logout(); location.reload(); } });
 });
 
-if (getSession()) afterAuth(); else { screen('gate'); veil(false); }
+// A resumed session may be behind another device, so settle the save before anything loads it.
+if (getSession()) {
+  if (isSynced()) { veil(true, 'Catching up'); syncSession().finally(afterAuth); } else afterAuth();
+} else { screen('gate'); veil(false); }

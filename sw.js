@@ -1,10 +1,10 @@
-const CACHE_VERSION = 'v70-complete-model-care-plans-2026-10-20';
+const CACHE_VERSION = 'v71-save-sync-2026-11-17';
 const CACHE_NAME = `overlord-${CACHE_VERSION}`;
 
 const APP_SHELL = [
   '/', '/index.html', '/app.js', '/legacyShim.js', '/legacy/legacy.js',
   '/world-map.js', '/hospital-map.js?v=48', '/course-map-3d.js', '/vendor/GLTFLoader.r128.js',
-  '/core/state.js', '/core/auth.js', '/core/gameEngine.js',
+  '/core/state.js', '/core/auth.js', '/core/sync.js', '/core/gameEngine.js',
   '/core/questionEngine.js', '/core/answerGrading.js', '/core/nodeConfig.js',
   '/core/voss.js', '/core/dailyMission.js', '/core/recallGrader.js',
   '/ui/gameUI.js', '/ui/menus.js',
@@ -74,6 +74,12 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
+
+  // The sync API must never be cached, and must never be answered from a cache. The strategy below is
+  // cache-first, so a cached GET of a save slot would be served for the life of the cache: the save on
+  // another device would change and this one would keep reading the first answer it ever got. Leaving
+  // these requests to the network entirely is the only safe thing to do with them.
+  if (url.pathname.startsWith('/api/')) return;
 
   if (url.pathname.startsWith('/data/questions/')) {
     event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));

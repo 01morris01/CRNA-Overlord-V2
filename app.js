@@ -2,7 +2,7 @@ import { loadState, saveState } from './core/state.js';
 import { showMap , createSimpleCourseMap } from './ui/menus.js';
 import { updateHUD, renderCurrentQuestion } from './ui/gameUI.js';
 import { getOpioidsQuestions, getQuestionsForNode } from './core/questionEngine.js';
-import { getSession, loginUser, registerUser, logout } from './core/auth.js';
+import { getSession, loginUser, registerUser, logout, syncSession, flushSaves, isSynced } from './core/auth.js';
 import { renderMissionCard } from './core/dailyMission.js';
 import { initLiveSimView } from './ui/liveSimView.js';
 import { initUltrasoundTrainerView } from './ui/ultrasoundTrainerView.js';
@@ -315,12 +315,15 @@ function _initGameUI() {
 }
 
 export function initApp() {
-  function initUI() {
+  async function initUI() {
     _setupAuthKeyboard();
 
     // Check for existing session
     const session = getSession();
     if (session) {
+      // A synced account may have been played on another device since this page was last open. Settle
+      // the save before anything reads it, or the first local save would overwrite the newer one.
+      if (isSynced()) { try { await syncSession(); } catch (e) { console.warn('[INIT] sync skipped:', e); } }
       _showLoggedIn(session.displayName);
       try {
         _initGameUI();
@@ -342,6 +345,9 @@ export function initApp() {
   // On unload, save the CURRENT localStorage state (not a stale closure).
   // All mutations (buyItem, usePwr, submitAnswer) already call saveState()
   // immediately, so this is only a safety net for the name field.
+  // Anything the sync layer still has queued must leave before the page does.
+  window.addEventListener('pagehide', () => flushSaves());
+
   window.addEventListener('beforeunload', () => {
     const session = getSession();
     if (!session) return; // not logged in, nothing to save
